@@ -23,7 +23,7 @@ significantly more variety and depth to it. Still, it is easy to get started
 through playable tutorials.]]
    ) .. p(_
 [[In this game, you start out on a small piece of land with just a few
-resources. Using these, you'll create an empire with many thousands of
+resources. Using these, you’ll create an empire with many thousands of
 inhabitants. On your way towards this goal, you will have to establish an
 economic infrastructure, explore the land around you and face rivaling
 tribes.]]
@@ -33,21 +33,21 @@ tribes.]]
 [[http://wl.widelands.org]]
    ) .. p(_
 [[Widelands is licensed under the GNU General Public License (GPL). For more
-information, see the file 'COPYING'.]]
+information, see the file ‘COPYING’.]]
    ) .. h3(_
 [[Status]]
    ) .. p(_
 [[Widelands is nearly feature complete and is much fun to play alone and even
-more in multiplayer with others. Still there is always more work to be done in
-all areas. If you are interested in contributing - be it by making graphics,
+more in multiplayer with others. Still, there is always more work to be done in
+all areas. If you are interested in contributing – be it by making graphics,
 fixing bugs or adding new features, translating the game into your language or
-creating new maps - get in touch on our homepage.]])
+creating new maps – get in touch on our homepage.]])
    .. h2(_
 [[General game control]]
    ) .. p(_
-[[To close an open window, right click it. To minimize/maximize a window, click
-on the titlebar of that window either with the middle mousebutton or with left
-mousebutton while holding down CTRL.]]
+[[To close an open window, right-click on it. To minimize/maximize a window, click
+on the title bar of that window either with the middle mouse button or with the left
+mouse button while holding down CTRL.]]
    ) .. p(_
 [[If you hold CTRL while building a road, flags will be placed automatically.
 If you hold CTRL while removing a road, all flags up to the first junction are
@@ -58,28 +58,28 @@ while clicking on the action button.]]
    ) .. h2(_
 [[Keyboard shortcuts (in-game)]]
    ) .. p(
-_"PAGEUP: increases gamespeed" .. "<br>"
-.. _"PAGEDOWN: decreases gamespeed" .. "<br>"
+_"PAGEUP: increases game speed" .. "<br>"
+.. _"PAGEDOWN: decreases game speed" .. "<br>"
 .. _"PAUSE: pauses the game" .. "<br>"
-.. _"SPACE: toggles build-help" .. "<br>"
+.. _"SPACE: toggles if building spaces are shown" .. "<br>"
 .. _"M: toggles minimap" .. "<br>"
-.. _"N: toggles messages ('news')" .. "<br>"
+.. _"N: toggles messages (‘news’)" .. "<br>"
 .. _"C: toggles census" .. "<br>"
 .. _"S: toggles statistics" .. "<br>"
 .. _"I: toggles stock inventory" .. "<br>"
 .. _"O: toggles objectives" .. "<br>"
-.. _"F: toggles fullscreen (if supported by OS)" .. "<br>"
+.. _"F: toggles fullscreen (if supported by the OS)" .. "<br>"
 .. _"Home: centers main mapview on starting location" .. "<br>"
 .. _"(CTRL+) 0-9: Remember and go to previously remembered locations" .. "<br>"
-.. _",: goes to previous location" .. "<br>"
-.. _".: goes to next location" .. "<br>"
+.. _",: goes to the previous location" .. "<br>"
+.. _".: goes to the next location" .. "<br>"
 .. _"F6: shows the debug console (only in debug-builds)" .. "<br>"
 .. _"CTRL+F10: quits the game immediately" .. "<br>"
 .. _"F11: takes a screenshot"
    ) .. p(_
 [[In the message window, the following additional shortcuts are available:]]
    ) .. p(
-_ "G: jumps to location corresponding to current message" .. "<br>"
+_ "G: jumps to the location corresponding to the current message" .. "<br>"
 .. _"DELETE: archives the current message"
    ) .. h2(_
 [[Online Help]]
@@ -101,7 +101,7 @@ and a detailed description of the tribe economies in our online encyclopedia.]]
 [[- What you expected to happen when performing the steps and what actually happened.]]
    ) .. p(_
 [[- Which version of Widelands you are running (i.e. either the build number or
-the revision number if you are running a development version or a nightly build.)]]
+the revision number if you are running a development version or a daily build.)]]
    ) .. p(_
 [[- Please also include which operating system you are running Widelands on as
 some bugs can be platform specific.]]
@@ -126,14 +126,14 @@ you the time you started the game.]]
 [[Using the Watch Replay option in the main menu, a previously played game will
 be precisely reconstructed for you to watch. Note, however, that even small
 changes in the game data files or the Widelands executable can cause a replay
-to become incompatible and to 'go out of sync'. This is similar to how network
+to become incompatible and to ‘go out of sync’. This is similar to how network
 games will suffer from desynchronization problems if one of the players has a
 different version of the game.]]
    ) .. p(_
 [[Replays are a very useful tool to find bugs in the game logic, so they
 can be useful as attachments to bug reports. The replay files are saved in the
 ~/.widelands/replays directory on Linux and Mac OS X. On Windows,
-they are in the 'replays' subdirectory of your Widelands installation.]]
+they are in the ‘replays’ subdirectory of your Widelands installation.]]
    )
 )
 }

@@ -31,7 +31,7 @@
 
 LayeredFileSystem * g_fs;
 
-LayeredFileSystem::LayeredFileSystem(): m_home(0) {}
+LayeredFileSystem::LayeredFileSystem(): m_home(nullptr) {}
 
 /**
  * Free all sub-filesystems
@@ -78,7 +78,7 @@ void LayeredFileSystem::AddFileSystem(FileSystem & fs)
 void LayeredFileSystem::SetHomeFileSystem(FileSystem & fs)
 {
 	delete m_home;
-	m_home = 0;
+	m_home = nullptr;
 
 	if (!FindConflictingVersionFile(fs)) {
 		m_home = &fs;
@@ -406,7 +406,6 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
 		if ((*it)->IsWritable() and (*it)->FileExists(dirname))
 			return (*it)->MakeSubFileSystem(dirname);
 
-	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: unable to create sub filesystem");
 }
 
@@ -425,7 +424,6 @@ FileSystem * LayeredFileSystem::CreateSubFileSystem(const std::string & dirname,
 		if ((*it)->IsWritable() and not (*it)->FileExists(dirname))
 			return (*it)->CreateSubFileSystem(dirname, type);
 
-	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: unable to create sub filesystem");
 }
 

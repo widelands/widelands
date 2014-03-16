@@ -38,11 +38,11 @@ struct Critter_Bob_Descr : public Bob::Descr {
 		 Tribe_Descr const *);
 	virtual ~Critter_Bob_Descr();
 
-	Bob & create_object() const;
+	Bob & create_object() const override;
 
-	bool is_swimming() const throw () {return m_swimming;}
-	uint32_t movecaps() const throw ();
-	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
+	bool is_swimming() const {return m_swimming;}
+	uint32_t movecaps() const override;
+	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 
 	Critter_BobProgram const * get_program(const std::string &) const;
 
@@ -62,13 +62,13 @@ class Critter_Bob : public Bob {
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
 
-	char const * type_name() const throw () {return "critter";}
-	virtual Bob::Type get_bob_type() const throw () {return Bob::CRITTER;}
+	char const * type_name() const override {return "critter";}
+	virtual Bob::Type get_bob_type() const override {return Bob::CRITTER;}
 
-	virtual void init_auto_task(Game &);
+	virtual void init_auto_task(Game &) override;
 
 	void start_task_program(Game &, const std::string & name);
-	const std::string & descname() const throw () {return descr().descname();}
+	const std::string & descname() const {return descr().descname();}
 
 private:
 	void roam_update   (Game &, State &);
@@ -84,12 +84,12 @@ protected:
 	struct Loader : Bob::Loader {
 		Loader();
 
-		virtual const Task * get_task(const std::string & name);
-		virtual const BobProgramBase * get_program(const std::string & name);
+		virtual const Task * get_task(const std::string & name) override;
+		virtual const BobProgramBase * get_program(const std::string & name) override;
 	};
 
 public:
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);

@@ -45,7 +45,7 @@ void StreamWrite::Printf(char const * const fmt, ...)
 		Data(buffer, i);
 	} else {
 		uint32_t size = sizeof(buffer);
-		char * heapbuf = 0;
+		char * heapbuf = nullptr;
 
 		do {
 			if (i < 0)

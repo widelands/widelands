@@ -51,15 +51,15 @@ struct Map_Map_Object_Saver {
 #ifndef NDEBUG
 	void     detect_unsaved_objects() const;
 #endif
-	uint32_t get_nr_roads          () const throw () {return m_nr_roads;}
-	uint32_t get_nr_flags          () const throw () {return m_nr_flags;}
-	uint32_t get_nr_buildings      () const throw () {return m_nr_buildings;}
-	uint32_t get_nr_wares          () const throw () {return m_nr_wares;}
-	uint32_t get_nr_bobs           () const throw () {return m_nr_bobs;}
-	uint32_t get_nr_immovables     () const throw () {return m_nr_immovables;}
-	uint32_t get_nr_battles        () const throw () {return m_nr_battles;}
+	uint32_t get_nr_roads          () const {return m_nr_roads;}
+	uint32_t get_nr_flags          () const {return m_nr_flags;}
+	uint32_t get_nr_buildings      () const {return m_nr_buildings;}
+	uint32_t get_nr_wares          () const {return m_nr_wares;}
+	uint32_t get_nr_bobs           () const {return m_nr_bobs;}
+	uint32_t get_nr_immovables     () const {return m_nr_immovables;}
+	uint32_t get_nr_battles        () const {return m_nr_battles;}
 
-	bool is_object_saved(const Map_Object &) throw ();
+	bool is_object_saved(const Map_Object &);
 
 	/// \note Indexed by player number - 1.
 	Map_Message_Saver message_savers[MAX_PLAYERS];

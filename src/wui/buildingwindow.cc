@@ -64,10 +64,10 @@ Building_Window::Building_Window
 	m_registry = this;
 
 	m_capscache_player_number = 0;
-	m_capsbuttons = 0;
+	m_capsbuttons = nullptr;
 	m_capscache = 0;
 	m_caps_setup = false;
-	m_toggle_workarea = 0;
+	m_toggle_workarea = nullptr;
 
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
@@ -101,7 +101,7 @@ Building_Window::~Building_Window()
 			(m_workarea_job_id);
 	if (m_helpwindow_registry.window)
 		delete m_helpwindow_registry.window;
-	m_registry = 0;
+	m_registry = nullptr;
 }
 
 namespace Widelands {struct Building_Descr;}
@@ -310,7 +310,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 0, 0, 34, 34,
 				 g_gr->images().get("pics/but4.png"),
 				 g_gr->images().get("pics/workarea123.png"),
-				 _("Hide workarea"));
+				 _("Hide work area"));
 			m_toggle_workarea->sigclicked.connect
 				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
 
@@ -513,10 +513,10 @@ void Building_Window::configure_workarea_button()
 {
 	if (m_toggle_workarea) {
 		if (m_workarea_job_id) {
-			m_toggle_workarea->set_tooltip(_("Hide workarea"));
+			m_toggle_workarea->set_tooltip(_("Hide work area"));
 			m_toggle_workarea->set_perm_pressed(true);
 		} else {
-			m_toggle_workarea->set_tooltip(_("Show workarea"));
+			m_toggle_workarea->set_tooltip(_("Show work area"));
 			m_toggle_workarea->set_perm_pressed(false);
 		}
 	}

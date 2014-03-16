@@ -4,6 +4,12 @@ heal_per_second=170
 conquers=11
 enhancement=castle
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Fortress
+aggressor_string=_Your Fortress discovered an aggressor.
+attack_string=_Your Fortress is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the Fortress
+defeated_you_string=_Your soldiers defeated the enemy at the Fortress
+
 
 [buildcost]
 wood=5

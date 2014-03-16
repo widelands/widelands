@@ -33,7 +33,7 @@ namespace Widelands {
  * clockwise when advance is called repeatedly).
  */
 template <typename Area_type = Area<> > struct MapFringeRegion {
-	MapFringeRegion(const Map & map, Area_type area) throw () :
+	MapFringeRegion(const Map & map, Area_type area) :
 		m_area              (area),
 		m_remaining_in_phase(area.radius),
 		m_phase             (area.radius ? 6 : 0)
@@ -56,14 +56,14 @@ template <typename Area_type = Area<> > struct MapFringeRegion {
 	 * again, which will return true until it reaches the first location the next
 	 * time around, and so on.
 	 */
-	bool advance(const Map &) throw ();
+	bool advance(const Map &);
 
 	/**
 	 * When advance has returned false, iterating over the same fringe again is
 	 * not the only possibility. It is also possible to call extend. This makes
 	 * the region ready to iterate over the next layer of nodes.
 	 */
-	void extend(const Map & map) throw () {
+	void extend(const Map & map) {
 		map.get_tln(m_area, &m_area);
 		++m_area.radius;
 		m_remaining_in_phase = m_area.radius;

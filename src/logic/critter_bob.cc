@@ -35,7 +35,7 @@ namespace Widelands {
 
 const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
 	{"remove",            &Critter_BobProgram::parse_remove},
-	{0,                   0}
+	{nullptr,                   nullptr}
 };
 
 
@@ -48,7 +48,7 @@ void Critter_BobProgram::parse(Parser * const parser, char const * const name)
 			char buffer[32];
 
 			snprintf(buffer, sizeof(buffer), "%i", idx);
-			char const * const string = program_s.get_string(buffer, 0);
+			char const * const string = program_s.get_string(buffer, nullptr);
 			if (!string)
 				break;
 
@@ -141,7 +141,7 @@ Critter_Bob_Descr::Critter_Bob_Descr
 		std::transform
 			(program_name.begin(), program_name.end(), program_name.begin(),
 			 tolower);
-		Critter_BobProgram * prog = 0;
+		Critter_BobProgram * prog = nullptr;
 		try {
 			if (m_programs.count(program_name))
 				throw wexception("this program has already been declared");
@@ -185,7 +185,7 @@ Critter_BobProgram const * Critter_Bob_Descr::get_program
 }
 
 
-uint32_t Critter_Bob_Descr::movecaps() const throw () {
+uint32_t Critter_Bob_Descr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
 }
 
@@ -227,8 +227,8 @@ coords is used to store target coordinates found by findspace
 Bob::Task const Critter_Bob::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Critter_Bob::program_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -279,8 +279,8 @@ Simply roam the map
 Bob::Task const Critter_Bob::taskRoam = {
 	"roam",
 	static_cast<Bob::Ptr>(&Critter_Bob::roam_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -361,7 +361,7 @@ Map_Object::Loader * Critter_Bob::load
 		if (1 <= version && version <= CRITTER_SAVEGAME_VERSION) {
 			std::string owner = fr.CString();
 			std::string name = fr.CString();
-			const Critter_Bob_Descr * descr = 0;
+			const Critter_Bob_Descr * descr = nullptr;
 
 			if (owner == "world") {
 				descr = dynamic_cast<const Critter_Bob_Descr *>
@@ -381,9 +381,9 @@ Map_Object::Loader * Critter_Bob::load
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("loading critter: %s"), e.what());
+		throw wexception("loading critter: %s", e.what());
 	}
 
 	return loader.release();

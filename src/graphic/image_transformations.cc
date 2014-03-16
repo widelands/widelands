@@ -87,7 +87,7 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 	Rect srcrect = Rect(Point(0, 0), src->width(), src->height());
 
 	// Second step: get source material
-	SDL_Surface * srcsdl = 0;
+	SDL_Surface * srcsdl = nullptr;
 	bool free_source = true;
 	if (upcast(const SDLSurface, sdlsrcsurf, src)) {
 		srcsdl = sdlsrcsurf->get_sdl_surface();
@@ -288,10 +288,10 @@ public:
 	virtual ~TransformedImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const {return original_.width();}
-	virtual uint16_t height() const {return original_.height();}
-	virtual const string& hash() const {return hash_;}
-	virtual Surface* surface() const {
+	virtual uint16_t width() const override {return original_.width();}
+	virtual uint16_t height() const override {return original_.height();}
+	virtual const string& hash() const override {return hash_;}
+	virtual Surface* surface() const override {
 		Surface* surf = surface_cache_->get(hash_);
 		if (surf)
 			return surf;
@@ -321,11 +321,11 @@ public:
 	virtual ~ResizedImage() {}
 
 	// Overwrites TransformedImage.
-	virtual uint16_t width() const {return w_;}
-	virtual uint16_t height() const {return h_;}
+	virtual uint16_t width() const override {return w_;}
+	virtual uint16_t height() const override {return h_;}
 
 	// Implements TransformedImage.
-	virtual Surface* recalculate_surface() const {
+	virtual Surface* recalculate_surface() const override {
 		Surface* rv = resize_surface(original_.surface(), w_, h_);
 		return rv;
 	}
@@ -343,7 +343,7 @@ public:
 	virtual ~GrayedOutImage() {}
 
 	// Implements TransformedImage.
-	virtual Surface* recalculate_surface() const {
+	virtual Surface* recalculate_surface() const override {
 		return gray_out_surface(original_.surface());
 	}
 };
@@ -361,7 +361,7 @@ public:
 	virtual ~ChangeLuminosityImage() {}
 
 	// Implements TransformedImage.
-	virtual Surface* recalculate_surface() const {
+	virtual Surface* recalculate_surface() const override {
 		return change_luminosity_of_surface(original_.surface(), factor_, halve_alpha_);
 	}
 
@@ -382,7 +382,7 @@ public:
 	virtual ~PlayerColoredImage() {}
 
 	// Implements TransformedImage.
-	virtual Surface* recalculate_surface() const {
+	virtual Surface* recalculate_surface() const override {
 		return make_playerclr_surface(*original_.surface(), *mask_.surface(), color_);
 	}
 

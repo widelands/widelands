@@ -35,17 +35,22 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr & tribe);
 
-	virtual Building & create_object() const;
+	virtual Building & create_object() const override;
 
-	virtual uint32_t get_conquers() const {return m_conquer_radius;}
-	uint32_t get_max_number_of_soldiers () const throw () {
+	virtual uint32_t get_conquers() const override {return m_conquer_radius;}
+	uint32_t get_max_number_of_soldiers () const {
 		return m_num_soldiers;
 	}
-	uint32_t get_heal_per_second        () const throw () {
+	uint32_t get_heal_per_second        () const {
 		return m_heal_per_second;
 	}
 
 	bool     m_prefers_heroes_at_start;
+	std::string m_occupied_str;
+	std::string m_aggressor_str;
+	std::string m_attack_str;
+	std::string m_defeated_enemy_str;
+	std::string m_defeated_you_str;
 private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
@@ -69,33 +74,33 @@ public:
 	MilitarySite(const MilitarySite_Descr &);
 	virtual ~MilitarySite();
 
-	char const * type_name() const throw () {return "militarysite";}
-	virtual std::string get_statistics_string();
+	char const * type_name() const override {return "militarysite";}
+	virtual std::string get_statistics_string() override;
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
-	virtual void act(Game &, uint32_t data);
-	virtual void remove_worker(Worker &);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
+	virtual void act(Game &, uint32_t data) override;
+	virtual void remove_worker(Worker &) override;
 
-	virtual void set_economy(Economy *);
-	virtual bool get_building_work(Game &, Worker &, bool success);
+	virtual void set_economy(Economy *) override;
+	virtual bool get_building_work(Game &, Worker &, bool success) override;
 
 	// Begin implementation of SoldierControl
-	virtual std::vector<Soldier *> presentSoldiers() const;
-	virtual std::vector<Soldier *> stationedSoldiers() const;
-	virtual uint32_t minSoldierCapacity() const throw ();
-	virtual uint32_t maxSoldierCapacity() const throw ();
-	virtual uint32_t soldierCapacity() const;
-	virtual void setSoldierCapacity(uint32_t capacity);
-	virtual void dropSoldier(Soldier &);
-	virtual int incorporateSoldier(Editor_Game_Base & game, Soldier & s);
+	virtual std::vector<Soldier *> presentSoldiers() const override;
+	virtual std::vector<Soldier *> stationedSoldiers() const override;
+	virtual uint32_t minSoldierCapacity() const override;
+	virtual uint32_t maxSoldierCapacity() const override;
+	virtual uint32_t soldierCapacity() const override;
+	virtual void setSoldierCapacity(uint32_t capacity) override;
+	virtual void dropSoldier(Soldier &) override;
+	virtual int incorporateSoldier(Editor_Game_Base & game, Soldier & s) override;
 	// End implementation of SoldierControl
 
 	// Begin implementation of Attackable
-	virtual Player & owner() const {return Building::owner();}
-	virtual bool canAttack();
-	virtual void aggressor(Soldier &);
-	virtual bool attack   (Soldier &);
+	virtual Player & owner() const override {return Building::owner();}
+	virtual bool canAttack() override;
+	virtual void aggressor(Soldier &) override;
+	virtual bool attack   (Soldier &) override;
 	// End implementation of Attackable
 
 	/**
@@ -124,7 +129,7 @@ protected:
 	void conquer_area(Editor_Game_Base &);
 
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry);
+		(Interactive_GameBase &, UI::Window * & registry) override;
 
 private:
 	bool isPresent(Soldier &) const;
@@ -132,7 +137,7 @@ private:
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	Map_Object * popSoldierJob
-		(Soldier *, bool * stayhome = 0, uint8_t * retreat = 0);
+		(Soldier *, bool * stayhome = nullptr, uint8_t * retreat = nullptr);
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);
 	void informPlayer(Game &, bool discovered = false);

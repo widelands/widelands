@@ -28,7 +28,7 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
-struct PortDock;
+class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
 
@@ -69,11 +69,11 @@ struct Fleet : Map_Object {
 
 	bool active() const;
 
-	virtual int32_t get_type() const throw ();
-	virtual char const * type_name() const throw ();
+	virtual int32_t get_type() const override;
+	virtual char const * type_name() const override;
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
 	void update(Editor_Game_Base &);
 
 	void add_ship(Ship * ship);
@@ -81,13 +81,13 @@ struct Fleet : Map_Object {
 	void add_port(Editor_Game_Base & egbase, PortDock * port);
 	void remove_port(Editor_Game_Base & egbase, PortDock * port);
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	bool get_path(PortDock & start, PortDock & end, Path & path);
 	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
 
 protected:
-	virtual void act(Game &, uint32_t data);
+	virtual void act(Game &, uint32_t data) override;
 
 private:
 	void find_other_fleet(Editor_Game_Base & egbase);
@@ -120,8 +120,8 @@ protected:
 		Loader();
 
 		void load(FileRead &, uint8_t version);
-		virtual void load_pointers();
-		virtual void load_finish();
+		virtual void load_pointers() override;
+		virtual void load_finish() override;
 
 	private:
 		std::vector<uint32_t> m_ships;
@@ -129,8 +129,8 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual bool has_new_save_support() override {return true;}
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);

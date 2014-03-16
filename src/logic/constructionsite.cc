@@ -87,7 +87,9 @@ std::string ConstructionSite::get_statistics_string()
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
 	std::string perc_s =
-		(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
+		(boost::format("<font color=%s>%s</font>")
+		 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
+		 .str();
 	return perc_s;
 }
 
@@ -205,7 +207,7 @@ bool ConstructionSite::burn_on_destroy()
 
 /*
 ===============
-Remember the item on the flag. The worker will be sent from get_building_work().
+Remember the ware on the flag. The worker will be sent from get_building_work().
 ===============
 */
 bool ConstructionSite::fetch_from_flag(Game & game)
@@ -257,7 +259,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		}
 	}
 
-	// Fetch items from flag
+	// Fetch wares from flag
 	if (m_fetchfromflag) {
 		--m_fetchfromflag;
 		m_builder_idle = false;
@@ -270,10 +272,10 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		WaresQueue * queue = *iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const Item_Ware_Descr & wd = *tribe().get_ware_descr(queue->get_ware());
-			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
-			item.init(game);
-			worker.start_task_dropoff(game, item);
+			const WareDescr & wd = *tribe().get_ware_descr(queue->get_ware());
+			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
+			ware.init(game);
+			worker.start_task_dropoff(game, ware);
 			return true;
 		}
 	}
@@ -314,7 +316,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 
 /*
 ===============
-Called by WaresQueue code when an item has arrived
+Called by WaresQueue code when an ware has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback

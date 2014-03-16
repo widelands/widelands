@@ -46,11 +46,11 @@ struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage>,
 	/// Log messages
 	std::vector<LogMessage> log_messages_;
 
-	Impl() : transparent_(false), chat_(0), havemessages_(false), oldest_(0) {}
+	Impl() : transparent_(false), chat_(nullptr), havemessages_(false), oldest_(0) {}
 
 	void recompute();
-	virtual void receive(const ChatMessage & note);
-	virtual void receive(const LogMessage & note);
+	virtual void receive(const ChatMessage & note) override;
+	virtual void receive(const LogMessage & note) override;
 };
 
 ChatOverlay::ChatOverlay
@@ -91,7 +91,7 @@ void ChatOverlay::setLogProvider(Widelands::NoteSender<LogMessage>& log_sender)
 void ChatOverlay::think()
 {
 	if (m->havemessages_) {
-		if (time(0) - m->oldest_ > CHAT_DISPLAY_TIME)
+		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME)
 			m->recompute();
 	}
 }
@@ -116,7 +116,7 @@ void ChatOverlay::Impl::receive(const LogMessage& note)
  */
 void ChatOverlay::Impl::recompute()
 {
-	int32_t const now = time(0);
+	int32_t const now = time(nullptr);
 
 	havemessages_ = false;
 

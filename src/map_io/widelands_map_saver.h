@@ -26,7 +26,7 @@ class FileSystem;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Saver;
 
 /*
@@ -34,7 +34,6 @@ struct Map_Map_Object_Saver;
 
 This class saves a widelands map into a file system
 
-throws wexecption on failure
 
 NOTE: The widelands map format is mostly binary, but some stuff is
 ascii. The binary is done for speeds sake, and the ASCII for easier
@@ -46,7 +45,7 @@ struct Map_Saver {
 	Map_Saver(FileSystem &, Editor_Game_Base &);
 	~Map_Saver();
 
-	void save() throw (_wexception);
+	void save();
 	Map_Map_Object_Saver * get_map_object_saver() {return m_mos;}
 
 private:

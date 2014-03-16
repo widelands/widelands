@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;
 
@@ -66,7 +66,7 @@ struct Map_Map_Object_Loader;
 // The price we pay is that when saving, we also have to traverse till we no
 // longer find any new command to write. This could theoretically take forever
 // but in my tests it was not noticeable.
-struct Game;
+class Game;
 
 /**
  * A command that is supposed to be executed at a certain gametime.
@@ -145,15 +145,14 @@ public:
 	Cmd_Queue(Game &);
 	~Cmd_Queue();
 
-	/// Add a command to the queue.
-	///
-	/// The pointer passed to this object must point to a memory block allocated
-	/// with operator <b>new</b>, containing only the command. The command queue
-	/// will take ownership of the memory block and deallocate it with operator
-	/// <b>delete</b> when the command has been executed.
+	/// Add a command to the queue. Takes ownership.
 	void enqueue (Command *);
 
-	int32_t run_queue (int32_t interval, int32_t & game_time_var);
+	// Run all commands scheduled for the next interval milliseconds, and update
+	// the internal time as well. the game_time_var represents the current game
+	// time, which we update and with which we must mess around (to run all
+	// queued cmd.s) and which we update (add the interval)
+	int32_t run_queue(int32_t interval, int32_t & game_time_var);
 
 	void flush(); // delete all commands in the queue now
 

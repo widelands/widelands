@@ -30,7 +30,6 @@
 #undef wexception
 _wexception::_wexception
 	(char const * const file, uint32_t const line, char const * const fmt, ...)
-throw ()
 {
 	char buffer[512];
 	{
@@ -46,8 +45,7 @@ throw ()
 
 _wexception::~_wexception() throw () {}
 
-char const * _wexception::what() const throw ()
-{
+char const * _wexception::what() const throw () {
 	return m_what.c_str();
 }
 
@@ -55,7 +53,7 @@ char const * _wexception::what() const throw ()
 /*
  * class warning implementation
  */
-warning::warning(char const * const et, char const * const em, ...) throw () :
+warning::warning(char const * const et, char const * const em, ...) :
 	m_title(et)
 {
 	char buffer[512];
@@ -70,12 +68,11 @@ warning::warning(char const * const et, char const * const em, ...) throw () :
 
 warning::~warning() throw () {}
 
-char const * warning::title() const throw ()
+char const * warning::title() const
 {
 	return m_title.c_str();
 }
 
-char const * warning::what() const throw ()
-{
+char const * warning::what() const throw () {
 	return m_what.c_str();
 }

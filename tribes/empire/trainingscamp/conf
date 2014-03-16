@@ -44,35 +44,20 @@ max_level=3
 
 [programs]
 sleep=_Sleep
-upgrade_soldier_attack_0=_Upgrade soldier attack 0
-upgrade_attack_0=_Upgrade soldier attack 0 (only for compatibility with old savegames (build13))
-upgrade_soldier_attack_1=_Upgrade soldier attack 1
-upgrade_attack_1=_Upgrade soldier attack 1 (only for compatibility with old savegames (build13))
-upgrade_soldier_attack_2=_Upgrade soldier attack 2
-upgrade_attack_2=_Upgrade soldier attack 2 (only for compatibility with old savegames (build13))
-upgrade_soldier_attack_3=_Upgrade soldier attack 3
-upgrade_attack_3=_Upgrade soldier attack 3 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_0=_Upgrade soldier hitpoints 0
-upgrade_hp_0=_Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_1=_Upgrade soldier hitpoints 1
-upgrade_hp_1=_Upgrade soldier hitpoints 1 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_2=_Upgrade soldier hitpoints 2
-upgrade_hp_2=_Upgrade soldier hitpoints 2 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_3=_Upgrade soldier hitpoints 3
-upgrade_hp_3=_Upgrade soldier hitpoints 3 (only for compatibility with old savegames (build13))
+upgrade_soldier_attack_0=_Upgrade soldier attack from level 0 to level 1
+upgrade_soldier_attack_1=_Upgrade soldier attack from level 1 to level 2
+upgrade_soldier_attack_2=_Upgrade soldier attack from level 2 to level 3
+upgrade_soldier_attack_3=_Upgrade soldier attack from level 3 to level 4
+upgrade_soldier_hp_0=_Upgrade soldier health from level 0 to level 1
+upgrade_soldier_hp_1=_Upgrade soldier health from level 1 to level 2
+upgrade_soldier_hp_2=_Upgrade soldier health from level 2 to level 3
+upgrade_soldier_hp_3=_Upgrade soldier health from level 3 to level 4
 
 [sleep]
 sleep=5000
 check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
 
 [upgrade_soldier_attack_0]
-check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
-sleep=30000
-check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
-consume=lance bread fish,meat
-train=soldier attack 0 1
-
-[upgrade_attack_0]
 check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
 sleep=30000
 check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
@@ -86,21 +71,7 @@ check_soldier=soldier attack 1
 consume=advanced_lance bread fish,meat
 train=soldier attack 1 2
 
-[upgrade_attack_1]
-check_soldier=soldier attack 1
-sleep=30000
-check_soldier=soldier attack 1
-consume=advanced_lance bread fish,meat
-train=soldier attack 1 2
-
 [upgrade_soldier_attack_2]
-check_soldier=soldier attack 2
-sleep=30000
-check_soldier=soldier attack 2
-consume=heavy_lance bread fish,meat:2
-train=soldier attack 2 3
-
-[upgrade_attack_2]
 check_soldier=soldier attack 2
 sleep=30000
 check_soldier=soldier attack 2
@@ -114,21 +85,7 @@ check_soldier=soldier attack 3
 consume=war_lance bread:2 fish,meat
 train=soldier attack 3 4
 
-[upgrade_attack_3]
-check_soldier=soldier attack 3
-sleep=30000
-check_soldier=soldier attack 3
-consume=war_lance bread:2 fish,meat
-train=soldier attack 3 4
-
 [upgrade_soldier_hp_0]
-check_soldier=soldier hp 0
-sleep=30000
-check_soldier=soldier hp 0
-consume=helm bread,fish,meat
-train=soldier hp 0 1
-
-[upgrade_hp_0]
 check_soldier=soldier hp 0
 sleep=30000
 check_soldier=soldier hp 0
@@ -142,13 +99,6 @@ check_soldier=soldier hp 1
 consume=armour bread fish,meat
 train=soldier hp 1 2
 
-[upgrade_hp_1]
-check_soldier=soldier hp 1
-sleep=30000
-check_soldier=soldier hp 1
-consume=armour bread fish,meat
-train=soldier hp 1 2
-
 [upgrade_soldier_hp_2]
 check_soldier=soldier hp 2
 sleep=30000
@@ -156,21 +106,7 @@ check_soldier=soldier hp 2
 consume=chain_armour bread:2 fish,meat:2
 train=soldier hp 2 3
 
-[upgrade_hp_2]
-check_soldier=soldier hp 2
-sleep=30000
-check_soldier=soldier hp 2
-consume=chain_armour bread:2 fish,meat:2
-train=soldier hp 2 3
-
 [upgrade_soldier_hp_3]
-check_soldier=soldier hp 3
-sleep=30000
-check_soldier=soldier hp 3
-consume=plate_armour bread:2 fish,meat:2
-train=soldier hp 3 4
-
-[upgrade_hp_3]
 check_soldier=soldier hp 3
 sleep=30000
 check_soldier=soldier hp 3

@@ -102,7 +102,7 @@ namespace Widelands {
 //              bl------br
 
 struct Map_Object_Data {
-	Map_Object_Data() : map_object_descr(0) {}
+	Map_Object_Data() : map_object_descr(nullptr) {}
 	const Map_Object_Descr                     * map_object_descr;
 	Player::Constructionsite_Information         csi;
 };
@@ -188,7 +188,7 @@ inline static Map_Object_Data read_unseen_immovable
 	try {
 		switch (immovable_kind) {
 		case 0:  //  The player sees no immovable.
-			m.map_object_descr = 0;                                       break;
+			m.map_object_descr = nullptr;                                       break;
 		case 1: //  The player sees a tribe or world immovable.
 			m.map_object_descr = &immovables_file.Immovable_Type(egbase); break;
 		case 2:  //  The player sees a flag.
@@ -213,7 +213,7 @@ inline static Map_Object_Data read_unseen_immovable
 			break;
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("unseen immovable: %s"), e.what());
+		throw game_data_error("unseen immovable: %s", e.what());
 	}
 	return m;
 }
@@ -225,7 +225,7 @@ void Map_Players_View_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &)
-	throw (_wexception)
+
 {
 	if (skip)
 		return;
@@ -290,14 +290,14 @@ void Map_Players_View_Data_Packet::Read
 						if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 							map_object_descr = &base_immovable->descr();
 							if (Road::IsRoadDescr(map_object_descr))
-								map_object_descr = 0;
+								map_object_descr = nullptr;
 							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
 									//  TODO This is not the building's main position
 									//  TODO so we can not see it. But it should be
 									//  TODO possible to see it from a distance somehow.
-									map_object_descr = 0;
-						} else map_object_descr = 0;
+									map_object_descr = nullptr;
+						} else map_object_descr = nullptr;
 						f_player_field.map_object_descr[TCoords<>::None] = map_object_descr;
 					}
 
@@ -570,14 +570,14 @@ void Map_Players_View_Data_Packet::Read
 					if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
 						if (Road::IsRoadDescr(map_object_descr))
-							map_object_descr = 0;
+							map_object_descr = nullptr;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
 								//  TODO This is not the building's main position so
 								//  TODO we can not see it. But it should be possible
 								//  TODO to see it from a distance somehow.
-								map_object_descr = 0;
-					} else map_object_descr = 0;
+								map_object_descr = nullptr;
+					} else map_object_descr = nullptr;
 					f_player_field.map_object_descr[TCoords<>::None] = map_object_descr;
 					break;
 				}
@@ -588,7 +588,7 @@ void Map_Players_View_Data_Packet::Read
 					//  information about the triangle has not been saved. Fill in
 					//  the information from the game state.
 					f_player_field.terrains.d = f.field->terrain_d();
-					f_player_field.map_object_descr[TCoords<>::D] = 0;
+					f_player_field.map_object_descr[TCoords<>::D] = nullptr;
 				} else if (f_everseen | bl_everseen | br_everseen) {
 					//  The player has seen the D triangle but does not see it now.
 					//  Load his information about the triangle from file.
@@ -621,7 +621,7 @@ void Map_Players_View_Data_Packet::Read
 					//  information about the triangle has not been saved. Fill in
 					//  the information from the game state.
 					f_player_field.terrains.r = f.field->terrain_r();
-					f_player_field.map_object_descr[TCoords<>::R] = 0;
+					f_player_field.map_object_descr[TCoords<>::R] = nullptr;
 				} else if (f_everseen | br_everseen | r_everseen) {
 					//  The player has seen the R triangle but does not see it now.
 					//  Load his information about the triangle from file.
@@ -880,7 +880,6 @@ inline static void write_unseen_immovable
 
 void Map_Players_View_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
 	const Map & map = egbase.map();
@@ -1086,4 +1085,3 @@ throw (_wexception)
 
 
 }
-

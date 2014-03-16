@@ -25,7 +25,7 @@
 #include "wui/waresdisplay.h"
 
 namespace Widelands {
-struct PortDock;
+class PortDock;
 }
 
 AbstractWaresDisplay * create_portdock_wares_display

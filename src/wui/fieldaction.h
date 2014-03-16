@@ -24,7 +24,7 @@
 
 namespace Widelands {
 class Building;
-struct Player;
+class Player;
 struct PlayerImmovable;
 }
 struct Interactive_Base;

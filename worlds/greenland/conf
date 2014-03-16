@@ -1,7 +1,7 @@
 [world]
 author=_The Widelands Development Team
 name=_Greenland
-descr=_"These are the beauty and bountiful countries of the barbarians"
+descr=_"These are the beautiful and bountiful countries of the barbarians"
 
 [immovable types]
 bush1=_Bush
@@ -43,42 +43,46 @@ stones3=_Stones
 stones4=_Stones
 stones5=_Stones
 stones6=_Stones
-tree1=_Aspen
-tree1_m=_Aspen medium
-tree1_s=_Aspen small
-tree1_t=_Aspen tiny
-tree2=_Oak
-tree2_m=_Oak medium
-tree2_s=_Oak small
-tree2_t=_Oak tiny
-tree3=_Spruce
-tree3_m=_Spruce medium
-tree3_s=_Spruce small
-tree3_t=_Spruce tiny
-tree4=_Alder
-tree4_m=_Alder medium
-tree4_s=_Alder small
-tree4_t=_Alder tiny
-tree5=_Birch
-tree5_m=_Birch medium
-tree5_s=_Birch small
-tree5_t=_Birch tiny
-tree6=_Beech
-tree6_m=_Beech medium
-tree6_s=_Beech small
-tree6_t=_Beech tiny
-tree7=_Larch
-tree7_m=_Larch medium
-tree7_s=_Larch small
-tree7_t=_Larch tiny
-tree8=_Rowan
-tree8_m=_Rowan medium
-tree8_s=_Rowan small
-tree8_t=_Rowan tiny
+# TRANSLATORS: Old tree: dominate old growth forest; height growth slows greatly, with majority of productivity in seed production
+tree1=_Aspen (Old)
+# TRANSLATORS: Mature tree: over 30 cm diameter, reproductive years begin
+tree1_m=_Aspen (Mature)
+# TRANSLATORS: Pole: young trees from 7-30 cm diameter
+tree1_s=_Aspen (Pole)
+# TRANSLATORS: Sapling: After the seedling reaches 1 m tall, and until it reaches 7 cm in stem diameter
+tree1_t=_Aspen (Sapling)
+tree2=_Oak (Old)
+tree2_m=_Oak (Mature)
+tree2_s=_Oak (Pole)
+tree2_t=_Oak (Sapling)
+tree3=_Spruce (Old)
+tree3_m=_Spruce (Mature)
+tree3_s=_Spruce (Pole)
+tree3_t=_Spruce (Sapling)
+tree4=_Alder (Old)
+tree4_m=_Alder (Mature)
+tree4_s=_Alder (Pole)
+tree4_t=_Alder (Sapling)
+tree5=_Birch (Old)
+tree5_m=_Birch (Mature)
+tree5_s=_Birch (Pole)
+tree5_t=_Birch (Sapling)
+tree6=_Beech (Old)
+tree6_m=_Beech (Mature)
+tree6_s=_Beech (Pole)
+tree6_t=_Beech (Sapling)
+tree7=_Larch (Old)
+tree7_m=_Larch (Mature)
+tree7_s=_Larch (Pole)
+tree7_t=_Larch (Sapling)
+tree8=_Rowan (Old)
+tree8_m=_Rowan (Mature)
+tree8_s=_Rowan (Pole)
+tree8_t=_Rowan (Sapling)
 
 [critter bob types]
 badger=_Badger
-brownbear=_Brownbear
+brownbear=_Brown Bear
 bunny=_Bunny
 chamois=_Chamois
 deer=_Deer

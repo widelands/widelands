@@ -30,6 +30,7 @@
 #include <stdexcept>
 #include <string>
 
+#include <boost/format.hpp>
 #include <config.h>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -47,7 +48,6 @@
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "journal.h"
 #include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -207,7 +207,7 @@ void WLApplication::setup_homedir() {
 	}
 }
 
-WLApplication * WLApplication::the_singleton = 0;
+WLApplication * WLApplication::the_singleton = nullptr;
 
 /**
  * The main entry point for the WLApplication singleton.
@@ -226,7 +226,7 @@ WLApplication * WLApplication::the_singleton = 0;
  * \todo Return a reference - the return value is always valid anyway
  */
 WLApplication * WLApplication::get(int const argc, char const * * argv) {
-	if (the_singleton == 0)
+	if (the_singleton == nullptr)
 		the_singleton = new WLApplication(argc, argv);
 	return the_singleton;
 }
@@ -247,7 +247,6 @@ WLApplication * WLApplication::get(int const argc, char const * * argv) {
 WLApplication::WLApplication(int const argc, char const * const * const argv) :
 m_commandline          (std::map<std::string, std::string>()),
 m_game_type            (NONE),
-journal                (0),
 m_mouse_swapped        (false),
 m_faking_middle_mouse_button(false),
 m_mouse_position       (0, 0),
@@ -295,7 +294,7 @@ m_redirected_stdio(false)
 		UI::g_fh = new UI::Font_Handler();
 		UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
 	} else
-		g_gr = 0;
+		g_gr = nullptr;
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
@@ -317,11 +316,11 @@ WLApplication::~WLApplication()
 
 	assert(UI::g_fh);
 	delete UI::g_fh;
-	UI::g_fh = 0;
+	UI::g_fh = nullptr;
 
 	assert(UI::g_fh1);
 	delete UI::g_fh1;
-	UI::g_fh1 = 0;
+	UI::g_fh1 = nullptr;
 
 	SDLNet_Quit();
 
@@ -329,7 +328,7 @@ WLApplication::~WLApplication()
 
 	assert(g_fs);
 	delete g_fs;
-	g_fs = 0;
+	g_fs = nullptr;
 
 	if (m_redirected_stdio)
 	{
@@ -353,13 +352,13 @@ void WLApplication::run()
 {
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
-		Editor_Interactive::run_editor(m_filename);
+		Editor_Interactive::run_editor(m_filename, m_script_to_run);
 	} else if (m_game_type == REPLAY)   {
 		replay();
 	} else if (m_game_type == LOADGAME) {
 		Widelands::Game game;
 		try {
-			game.run_load_game(m_filename.c_str());
+			game.run_load_game(m_filename.c_str(), m_script_to_run);
 		} catch (const Widelands::game_data_error & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
@@ -370,7 +369,7 @@ void WLApplication::run()
 	} else if (m_game_type == SCENARIO) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(m_filename.c_str());
+			game.run_splayer_scenario_direct(m_filename.c_str(), m_script_to_run);
 		} catch (const Widelands::game_data_error & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
@@ -469,7 +468,7 @@ void WLApplication::run()
 		mainmenu();
 
 		delete g_gr;
-		g_gr = 0;
+		g_gr = nullptr;
 	}
 
 	g_sound_handler.stop_music(500);
@@ -479,158 +478,53 @@ void WLApplication::run()
 
 /**
  * Get an event from the SDL queue, just like SDL_PollEvent.
- * Perform the meat of playback/record stuff when needed.
- *
- * Throttle is a hack to stop record files from getting extremely huge.
- * If it is set to true, we will idle loop if we can't get an SDL_Event
- * returned immediately if we're recording. If there is no user input,
- * the actual mainloop will be throttled to 100fps.
  *
  * \param ev the retrieved event will be put here
- * \param throttle Limit recording to 100fps max (not the event loop itself!)
  *
  * \return true if an event was returned inside ev, false otherwise
- *
- * \todo Catch Journalfile_error
  */
-bool WLApplication::poll_event(SDL_Event & ev, bool const throttle) {
-	bool haveevent = false;
-
-restart:
-	//inject synthesized events into the event queue when playing back
-	if (journal->is_playingback()) {
-		try {
-			haveevent = journal->read_event(ev);
-		} catch (const Journalfile_error & e) {
-			// An error might occur here when playing back a file that
-			// was not finalized due to a crash etc.
-			// Since playbacks are intended precisely for debugging such
-			// crashes, we must ignore the error and continue.
-			log("JOURNAL: read error, continue without playback: %s\n", e.what());
-			journal->stop_playback();
-		}
-	} else {
-		haveevent = SDL_PollEvent(&ev);
-
-		if (haveevent) {
-			// We edit mouse motion events in here, so that
-			// differences caused by GrabInput or mouse speed
-			// settings are invisible to the rest of the code
-			switch (ev.type) {
-			case SDL_MOUSEMOTION:
-				ev.motion.xrel += m_mouse_compensate_warp.x;
-				ev.motion.yrel += m_mouse_compensate_warp.y;
-				m_mouse_compensate_warp = Point(0, 0);
-
-				if (m_mouse_locked) {
-					warp_mouse(m_mouse_position);
-
-					ev.motion.x = m_mouse_position.x;
-					ev.motion.y = m_mouse_position.y;
-				}
-
-				break;
-			case SDL_USEREVENT:
-				if (ev.user.code == CHANGE_MUSIC)
-					g_sound_handler.change_music();
-
-				break;
-			case SDL_VIDEOEXPOSE:
-				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
-				g_gr->update_fullscreen();
-				break;
-			default:;
-			}
-		}
+bool WLApplication::poll_event(SDL_Event& ev) {
+	if (!SDL_PollEvent(&ev)) {
+		return false;
 	}
 
-	// log all events into the journal file
-	if (journal->is_recording()) {
-		if (haveevent)
-			journal->record_event(ev);
-		else if (throttle && journal->is_playingback()) {
-			// Implement the throttle to avoid very quick inner mainloops when
-			// recoding a session
-			static int32_t lastthrottle = 0;
-			int32_t const time = SDL_GetTicks();
+	// We edit mouse motion events in here, so that
+	// differences caused by GrabInput or mouse speed
+	// settings are invisible to the rest of the code
+	switch (ev.type) {
+	case SDL_MOUSEMOTION:
+		ev.motion.xrel += m_mouse_compensate_warp.x;
+		ev.motion.yrel += m_mouse_compensate_warp.y;
+		m_mouse_compensate_warp = Point(0, 0);
 
-			if (time - lastthrottle < 10)
-				goto restart;
+		if (m_mouse_locked) {
+			warp_mouse(m_mouse_position);
 
-			lastthrottle = time;
+			ev.motion.x = m_mouse_position.x;
+			ev.motion.y = m_mouse_position.y;
 		}
+		break;
 
-		journal->set_idle_mark();
-	} else if (haveevent) {
-		//  Eliminate any unhandled events to make sure that record and playback
-		//  are _really_ the same. Yes I know, it's overly paranoid but hey...
-		switch (ev.type) {
-		case SDL_KEYDOWN:
-		case SDL_KEYUP:
-		case SDL_MOUSEBUTTONDOWN:
-		case SDL_MOUSEBUTTONUP:
-		case SDL_MOUSEMOTION:
-		case SDL_QUIT:
-			break;
-		default:
-			goto restart;
-		}
+	case SDL_USEREVENT:
+		if (ev.user.code == CHANGE_MUSIC)
+			g_sound_handler.change_music();
+		break;
+
+	case SDL_VIDEOEXPOSE:
+		// log ("SDL Video Window expose event: %i\n", ev.expose.type);
+		g_gr->update_fullscreen();
+		break;
 	}
-
-	return haveevent;
+	return true;
 }
-
 
 /**
  * Pump the event queue, get packets from the network, etc...
  */
 void WLApplication::handle_input(InputCallback const * cb)
 {
-	bool gotevents = false;
-	SDL_Event ev; //  Valgrind says:
-	// Conditional jump or move depends on uninitialised value(s)
-	// at 0x407EEDA: (within /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x407F78F: (within /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x404FB12: SDL_PumpEvents (in /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x404FFC3: SDL_PollEvent (in /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x8252545: WLApplication::poll_event(SDL_Event*, bool)
-	//     (wlapplication.cc:309)
-	// by 0x8252EB6: WLApplication::handle_input(InputCallback const*)
-	// (wlapplication.cc:459) by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
-	// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
-	// by 0x81427A6: main (main.cc:39)
-
-	// We need to empty the SDL message queue always, even in playback mode
-	// In playback mode, only F10 for premature exiting works
-	if (journal->is_playingback()) {
-		while (SDL_PollEvent(&ev)) {
-			switch (ev.type) {
-			case SDL_KEYDOWN:
-				// get out of here quickly, overriding playback;
-				// since this is the only key event that works, we don't guard
-				// it by requiring Ctrl to be pressed.
-				if (ev.key.keysym.sym == SDLK_F10)
-					m_should_die = true;
-				break;
-			case SDL_QUIT:
-				m_should_die = true;
-				break;
-			default:;
-			}
-		}
-	}
-
-	// Usual event queue
-	while (poll_event(ev, !gotevents)) {
-
-		gotevents = true;
-
-		// CAREFUL: Record files do not save the entire SDL_Event structure.
-		// Therefore, playbacks are incomplete. When you change the following
-		// code so that it uses previously unused fields in SDL_Event,
-		// please also take a look at Journal::read_event and
-		// Journal::record_event
-
+	SDL_Event ev;
+	while (poll_event(ev)) {
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
@@ -746,9 +640,6 @@ void WLApplication::_handle_mousebutton
 int32_t WLApplication::get_time() {
 	uint32_t time = SDL_GetTicks();
 
-	//  might change the time when playing back!
-	journal->timestamp_handler(time);
-
 	return time;
 }
 
@@ -757,20 +648,17 @@ int32_t WLApplication::get_time() {
 /// SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As
 /// a workaround, we store the delta in m_mouse_compensate_warp and use that to
 /// eliminate the motion event in poll_event()
-/// \todo Should this method have to care about playback at all???
 ///
 /// \param position The new mouse position
 void WLApplication::warp_mouse(const Point position)
 {
 	m_mouse_position = position;
 
-	if (not journal->is_playingback()) { //  don't warp anything during playback
-		Point cur_position;
-		SDL_GetMouseState(&cur_position.x, &cur_position.y);
-		if (cur_position != position) {
-			m_mouse_compensate_warp += cur_position - position;
-			SDL_WarpMouse(position.x, position.y);
-		}
+	Point cur_position;
+	SDL_GetMouseState(&cur_position.x, &cur_position.y);
+	if (cur_position != position) {
+		m_mouse_compensate_warp += cur_position - position;
+		SDL_WarpMouse(position.x, position.y);
 	}
 }
 
@@ -785,9 +673,6 @@ void WLApplication::warp_mouse(const Point position)
  */
 void WLApplication::set_input_grab(bool grab)
 {
-	if (journal->is_playingback())
-		return; // ignore in playback mode
-
 	if (grab) {
 		SDL_WM_GrabInput(SDL_GRAB_ON);
 	} else {
@@ -801,26 +686,24 @@ void WLApplication::set_input_grab(bool grab)
  * with the given resolution.
  * Throws an exception on failure.
  */
-void WLApplication::init_graphics
-	(const int32_t w, const int32_t h, const int32_t bpp,
-	 const bool fullscreen, const bool opengl)
+void WLApplication::init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl)
 {
 	if (!w && !h) { // shutdown.
 		delete g_gr;
-		g_gr = 0;
+		g_gr = nullptr;
 		return;
 	}
 	assert(w > 0 && h > 0);
 
 	if (!g_gr) {
 		g_gr = new Graphic();
-		g_gr->initialize(w, h, bpp, fullscreen, opengl);
+		g_gr->initialize(w, h, fullscreen, opengl);
 	} else {
 		if
-			(g_gr->get_xres() != w || g_gr->get_yres() != h || g_gr->get_bpp() != bpp
+			(g_gr->get_xres() != w || g_gr->get_yres() != h
 				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
 		{
-			g_gr->initialize(w, h, bpp, fullscreen, opengl);
+			g_gr->initialize(w, h, fullscreen, opengl);
 		}
 	}
 }
@@ -833,7 +716,6 @@ void WLApplication::refresh_graphics()
 	init_graphics
 		(s.get_int("xres", XRES),
 		 s.get_int("yres", YRES),
-		 s.get_int("depth", 32),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("opengl", true));
 }
@@ -843,10 +725,6 @@ void WLApplication::refresh_graphics()
  * parameters sensible default values
  */
 bool WLApplication::init_settings() {
-
-	//create a journal so that handle_commandline_parameters can open the
-	//journal files
-	journal = new Journal();
 
 	//read in the configuration file
 	g_options.read("config", "global");
@@ -869,7 +747,6 @@ bool WLApplication::init_settings() {
 	s.get_int("border_snap_distance");
 	s.get_int("maxfps");
 	s.get_int("panel_snap_distance");
-	s.get_int("speed_of_new_game");
 	s.get_int("autosave");
 	s.get_int("remove_replays");
 	s.get_bool("single_watchwin");
@@ -891,6 +768,8 @@ bool WLApplication::init_settings() {
 	s.get_string("servername");
 	s.get_string("realname");
 	s.get_string("ui_font");
+	s.get_string("metaserver");
+	s.get_natural("metaserverport");
 	// KLUDGE!
 
 	return true;
@@ -928,10 +807,6 @@ void WLApplication::shutdown_settings()
 	} catch (...)                      {
 		log("WARNING: could not save configuration");
 	}
-
-	assert(journal);
-	delete journal;
-	journal = 0;
 }
 
 /**
@@ -1075,7 +950,7 @@ bool WLApplication::init_hardware() {
 
 void terminate (int) {
 	 log
-		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
+		  (_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
 			  " Update your sound driver and/or SDL to fix this problem\n"));
 #ifndef _WIN32
 	raise(SIGKILL);
@@ -1091,7 +966,7 @@ void WLApplication::shutdown_hardware()
 			"alive!"
 			<< endl;
 
-	init_graphics(0, 0, 0, false, false);
+	init_graphics(0, 0, false, false);
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
@@ -1156,7 +1031,7 @@ void WLApplication::parse_commandline
  * was given,
  * true otherwise.
 */
-void WLApplication::handle_commandline_parameters() throw (Parameter_error)
+void WLApplication::handle_commandline_parameters()
 {
 	if (m_commandline.count("help") || m_commandline.count("version")) {
 		throw Parameter_error(); //no message on purpose
@@ -1272,33 +1147,13 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = INTERNET;
 		m_commandline.erase("dedicated");
 	}
-	//Note: it should be possible to record and playback at the same time,
-	//but why would you?
-	if (m_commandline.count("record")) {
-		if (m_commandline["record"].empty())
-			throw Parameter_error("ERROR: --record needs a filename!");
-
-		try {
-			journal->start_recording(m_commandline["record"]);
-		} catch (Journalfile_error & e) {
-			wout << "Journal file error: " << e.what() << endl;
-		}
-
-		m_commandline.erase("record");
-	}
-
-	if (m_commandline.count("playback")) {
-		if (m_commandline["playback"].empty())
-			throw Parameter_error("ERROR: --playback needs a filename!");
-
-		try {
-			journal->start_playback(m_commandline["playback"]);
-		}
-		catch (Journalfile_error & e) {
-			wout << "Journal file error: " << e.what() << endl;
-		}
-
-		m_commandline.erase("playback");
+	if (m_commandline.count("script")) {
+		m_script_to_run = m_commandline["script"];
+		if (m_script_to_run.empty())
+			throw wexception("empty value of command line parameter --script");
+		if (*m_script_to_run.rbegin() == '/')
+			m_script_to_run.erase(m_script_to_run.size() - 1);
+		m_commandline.erase("script");
 	}
 
 	//If it hasn't been handled yet it's probably an attempt to
@@ -1331,112 +1186,88 @@ void WLApplication::show_usage()
 
 	wout << _("This is Widelands-") << build_id() << '(' << build_type();
 	wout << ")\n\n";
-	wout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
-	wout << _("Options:\n\n");
+	wout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << "\n\n";
+	wout << _("Options:") << "\n\n";
 	wout
-		<<
-		_
-			(" --<config-entry-name>=value overwrites any config file setting\n\n"
-			 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
-			 "                      terminal output\n"
-			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
-			 "                      data files\n"
-			 " --homedir=DIRNAME    Use specified directory for widelands config\n"
-			 "                      files, savegames and replays\n")
+		<< _(" --<config-entry-name>=value overwrites any config file setting") << "\n\n"
+		<< _(" --logfile=FILENAME   Log output to file FILENAME instead of \n"
+			  "                      terminal output") << "\n"
+		<< _(" --datadir=DIRNAME    Use specified directory for the widelands\n"
+			  "                      data files") << "\n"
+		<< _(" --homedir=DIRNAME    Use specified directory for widelands config\n"
+			  "                      files, savegames and replays") << "\n"
 #ifdef __linux__
-		<< _("                      Default is ~/.widelands\n")
+		<< _("                      Default is ~/.widelands") << "\n"
 #endif
-		<< _
-			(" --record=FILENAME    Record all events to the given filename for\n"
-			 "                      later playback\n"
-			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
-			 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-			 "                      of using the SDL\n"
-			 " --language=[de_DE|sv_SE|...]\n"
-			 "                      The locale to use.\n"
-			 " --localedir=DIRNAME  Use DIRNAME as location for the locale\n"
-			 " --remove_syncstreams=[true|false]\n"
-			 "                      Remove syncstream files on startup\n"
-			 " --remove_replays=[...]\n"
-			 "                      Remove replays after this amount of days.\n"
-			 "                      If this is 0 replays are not deleted.\n")
-		<<
-		_
-			("Sound options:\n"
-			 " --nosound            Starts the game with sound disabled.\n"
-			 " --disable_fx         Disable sound effects.\n"
-			 " --disable_music      Disable music.\n"
-			 "\n"
-			 " --nozip              Do not save files as binary zip archives.\n"
-			 "\n"
-			 " --editor             Directly starts the Widelands editor.\n"
-			 "                      You can add a =FILENAME to directly load\n"
-			 "                      the map FILENAME in editor.\n"
-			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-			 "                      map.\n"
-			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
-		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n")
-		<<
-		_
-			(" --speed_of_new_game  The speed that the new game will run at\n"
-			 "                      when started, with factor 1000 (0 is pause,\n"
-			 "                      1000 is normal speed).\n"
-			 " --auto_roadbuild_mode=[yes|no]\n"
-			 "                      Whether to enter roadbuilding mode\n"
-			 "                      automatically after placing a flag that is\n"
-			 "                      not connected to a road.\n"
-			 " --write_HTML=[yes|no]\n"
-			 "                      Write HTML-helpfiles for parsed game data.\n"
-			 "\n"
-			 "Graphic options:\n"
-			 " --fullscreen=[yes|no]\n"
-			 "                      Whether to use the whole display for the\n"
-			 "                      game screen.\n"
-			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
-			 " --xres=[...]         Width of the window in pixel.\n"
-			 " --yres=[...]         Height of the window in pixel.\n")
-		<<
-		_
-			 (" --opengl=[0|1]\n"
-			 "                      Enables OpenGL rendering\n")
-		<<
-		_
-			("\n"
-			 "Options for the internal window manager:\n"
-			 " --border_snap_distance=[0 ...]\n"
-			 "                      Move a window to the edge of the screen\n"
-			 "                      when the edge of the window comes within\n"
-			 "                      this distance from the edge of the screen.\n"
-			 " --dock_windows_to_edges=[yes|no]\n"
-			 "                      Eliminate a window's border towards the\n"
-			 "                      edge of the screen when the edge of the\n"
-			 "                      window is next to the edge of the screen.\n"
-			 " --panel_snap_distance=[0 ...]\n"
-			 "                      Move a window to the edge of the panel when\n"
-			 "                      the edge of the window comes within this\n"
-			 "                      distance from the edge of the panel.\n"
-			 " --snap_windows_only_when_overlapping=[yes|no]\n"
-			 "                      Only move a window to the edge of a panel\n"
-			 "                      if the window is overlapping with the\n"
-			 "                      panel.\n"
-			 "\n");
+		<< "\n"
+		<< _(" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
+			  "                      of using the SDL") << "\n"
+		<< _(" --language=[de_DE|sv_SE|...]\n"
+			  "                      The locale to use.") << "\n"
+		<< _(" --localedir=DIRNAME  Use DIRNAME as location for the locale") << "\n"
+		<< _(" --remove_syncstreams=[true|false]\n"
+			  "                      Remove syncstream files on startup") << "\n"
+		<< _(" --remove_replays=[...]\n"
+		     "                      Remove replays after this number of days.\n"
+		     "                      If this is 0, replays are not deleted.") << "\n\n"
+
+		<< _("Sound options:") << "\n"
+		<< _(" --nosound            Starts the game with sound disabled.") << "\n"
+		<< _(" --disable_fx         Disable sound effects.") << "\n"
+		<< _(" --disable_music      Disable music.") << "\n\n"
+		<< _(" --nozip              Do not save files as binary zip archives.") << "\n\n"
+		<< _(" --editor             Directly starts the Widelands editor.\n"
+		     "                      You can add a =FILENAME to directly load\n"
+		     "                      the map FILENAME in editor.") << "\n"
+		<< _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
+			  "                      map.") << "\n"
+		<< _(" --loadgame=FILENAME  Directly loads the savegame FILENAME.") << "\n"
+		<< _(" --script=FILENAME    Run the given Lua script after initialization.\n"
+		     "                      Only valid with --scenario, --loadgame, or --editor.") << "\n"
+		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map") << "\n"
+		<< _(" --auto_roadbuild_mode=[yes|no]\n"
+		     "                      Whether to enter roadbuilding mode\n"
+		     "                      automatically after placing a flag that is\n"
+		     "                      not connected to a road.") << "\n\n"
+		<< _("Graphic options:") << "\n"
+		<< _(" --fullscreen=[yes|no]\n"
+		     "                      Whether to use the whole display for the\n"
+		     "                      game screen.") << "\n"
+		<< _(" --xres=[...]         Width of the window in pixel.") << "\n"
+		<< _(" --yres=[...]         Height of the window in pixel.") << "\n"
+		<< _(" --opengl=[0|1]       Enables OpenGL rendering") << "\n\n"
+		<< _("Options for the internal window manager:") << "\n"
+		<< _(" --border_snap_distance=[0 ...]\n"
+		     "                      Move a window to the edge of the screen\n"
+		     "                      when the edge of the window comes within\n"
+		     "                      this distance from the edge of the screen.") << "\n"
+		<< _(" --dock_windows_to_edges=[yes|no]\n"
+		     "                      Eliminate a window's border towards the\n"
+		     "                      edge of the screen when the edge of the\n"
+		     "                      window is next to the edge of the screen.") << "\n"
+		<< _(" --panel_snap_distance=[0 ...]\n"
+		     "                      Move a window to the edge of the panel when\n"
+		     "                      the edge of the window comes within this\n"
+		     "                      distance from the edge of the panel.") << "\n"
+		<< _(" --snap_windows_only_when_overlapping=[yes|no]\n"
+		     "                      Only move a window to the edge of a panel\n"
+		     "                      if the window is overlapping with the\n"
+		     "                      panel.") << "\n\n";
 #ifndef NDEBUG
 #ifndef _WIN32
 	wout
-		<<
-		_
-			(" --double             Start the game twice (for localhost network\n"
-			 "                      testing)\n\n");
+		<< _(" --double             Start the game twice (for localhost network\n"
+		     "                      testing)") << "\n\n";
 #endif
 #endif
-	wout << _(" --verbose            Enable verbose debug messages\n") << endl;
-	wout << _(" --help               Show this help\n") << endl;
 	wout
-		<<
-		_
-			("Bug reports? Suggestions? Check out the project website:\n"
-			 "        https://launchpad.net/widelands\n\n"
-			 "Hope you enjoy this game!\n\n");
+		<< _(" --verbose            Enable verbose debug messages") << "\n" << endl;
+	wout
+		<< _(" --help               Show this help") << "\n" << endl;
+	wout
+		<< _("Bug reports? Suggestions? Check out the project website:\n"
+		    "        https://launchpad.net/widelands\n\n"
+		    "Hope you enjoy this game!") << "\n\n";
 }
 
 #ifndef NDEBUG
@@ -1555,7 +1386,7 @@ void WLApplication::mainmenu()
 				{
 					Widelands::Game game;
 					try {
-						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
+						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf", "");
 					} catch (const std::exception & e) {
 						log("Fata exception: %s\n", e.what());
 						emergency_save(game);
@@ -1595,8 +1426,7 @@ void WLApplication::mainmenu()
 				return;
 			}
 		} catch (const warning & e) {
-			messagetitle = _("Warning: ");
-			messagetitle += e.title();
+			messagetitle = (boost::format(_("Warning: %s")) % e.title()).str();
 			message = e.what();
 		} catch (const Widelands::game_data_error & e) {
 			messagetitle = _("Game data error");
@@ -1607,16 +1437,18 @@ void WLApplication::mainmenu()
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
-				_
+
+		(boost::format(_
 					("\n\nPlease report this problem to help us improve Widelands. "
 					 "You will find related messages in the standard output "
-					 "(stdout.txt on Windows). You are using build ");
-			message += build_id() + "(" + build_type() + ")";
+					 "(stdout.txt on Windows). You are using build %1$s (%2$s). ")
+				) % build_id().c_str() % build_type().c_str()).str();
+
 			message +=
 				_
-					(". Please add this information to your report.\n\n"
+					("Please add this information to your report.\n\n"
 					 "Widelands attempts to create a savegame when errors occur "
-					 "during the game. It is often - though not always - possible "
+					 "during the game. It is often – though not always – possible "
 					 "to load it and continue playing.\n");
 		}
 #endif
@@ -1759,7 +1591,7 @@ void WLApplication::mainmenu_editor()
 		case Fullscreen_Menu_Editor::Back:
 			return;
 		case Fullscreen_Menu_Editor::New_Map:
-			Editor_Interactive::run_editor(m_filename);
+			Editor_Interactive::run_editor(m_filename, m_script_to_run);
 			return;
 		case Fullscreen_Menu_Editor::Load_Map: {
 			std::string filename;
@@ -1770,7 +1602,7 @@ void WLApplication::mainmenu_editor()
 
 				filename = emsm.get_map();
 			}
-			Editor_Interactive::run_editor(filename.c_str());
+			Editor_Interactive::run_editor(filename.c_str(), "");
 			return;
 		}
 		default:
@@ -1790,19 +1622,19 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.playernum = 0;
 	}
 
-	virtual void setScenario(bool const set) {s.scenario = set;}
+	virtual void setScenario(bool const set) override {s.scenario = set;}
 
-	virtual const GameSettings & settings() {return s;}
+	virtual const GameSettings & settings() override {return s;}
 
-	virtual bool canChangeMap() {return true;}
-	virtual bool canChangePlayerState(uint8_t number) {
+	virtual bool canChangeMap() override {return true;}
+	virtual bool canChangePlayerState(uint8_t number) override {
 		return (!s.scenario & (number != s.playernum));
 	}
-	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
-	virtual bool canChangePlayerInit (uint8_t) {return !s.scenario;}
-	virtual bool canChangePlayerTeam(uint8_t) {return !s.scenario;}
+	virtual bool canChangePlayerTribe(uint8_t) override {return !s.scenario;}
+	virtual bool canChangePlayerInit (uint8_t) override {return !s.scenario;}
+	virtual bool canChangePlayerTeam(uint8_t) override {return !s.scenario;}
 
-	virtual bool canLaunch() {
+	virtual bool canLaunch() override {
 		return s.mapname.size() != 0 && s.players.size() >= 1;
 	}
 
@@ -1814,7 +1646,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		(const std::string &       mapname,
 		 const std::string &       mapfilename,
 		 uint32_t            const maxplayers,
-		 bool                const savegame)
+		 bool                const savegame) override
 	{
 		s.mapname = mapname;
 		s.mapfilename = mapfilename;
@@ -1848,7 +1680,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setPlayerState
-		(uint8_t const number, PlayerSettings::State state)
+		(uint8_t const number, PlayerSettings::State state) override
 	{
 		if (number == s.playernum || number >= s.players.size())
 			return;
@@ -1859,14 +1691,14 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = state;
 	}
 
-	virtual void setPlayerAI(uint8_t const number, const std::string & ai, bool const random_ai) {
+	virtual void setPlayerAI(uint8_t const number, const std::string & ai, bool const random_ai) override {
 		if (number < s.players.size()) {
 			s.players[number].ai = ai;
 			s.players[number].random_ai = random_ai;
 		}
 	}
 
-	virtual void nextPlayerState(uint8_t const number) {
+	virtual void nextPlayerState(uint8_t const number) override {
 		if (number == s.playernum || number >= s.players.size())
 			return;
 
@@ -1896,7 +1728,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe)
+	virtual void setPlayerTribe
+		(uint8_t const number, const std::string & tribe, bool const random_tribe) override
 	{
 		if (number >= s.players.size())
 			return;
@@ -1922,7 +1755,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			}
 	}
 
-	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
+	virtual void setPlayerInit(uint8_t const number, uint8_t const index) override {
 		if (number >= s.players.size())
 			return;
 
@@ -1935,30 +1768,30 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		assert(false);
 	}
 
-	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) {
+	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) override {
 		if (number < s.players.size())
 			s.players[number].team = team;
 	}
 
-	virtual void setPlayerCloseable(uint8_t, bool) {
+	virtual void setPlayerCloseable(uint8_t, bool) override {
 		// nothing to do
 	}
 
-	virtual void setPlayerShared(uint8_t, uint8_t) {
+	virtual void setPlayerShared(uint8_t, uint8_t) override {
 		// nothing to do
 	}
 
-	virtual void setPlayerName(uint8_t const number, const std::string & name) {
+	virtual void setPlayerName(uint8_t const number, const std::string & name) override {
 		if (number < s.players.size())
 			s.players[number].name = name;
 	}
 
-	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) {
+	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) override {
 		if (number < s.players.size())
 			s.players[number] = ps;
 	}
 
-	virtual void setPlayerNumber(uint8_t const number) {
+	virtual void setPlayerNumber(uint8_t const number) override {
 		if (number >= s.players.size())
 			return;
 		PlayerSettings const position = settings().players.at(number);
@@ -1974,9 +1807,12 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		}
 	}
 
-	virtual std::string getWinCondition() {return s.win_condition;}
-	virtual void setWinCondition(std::string wc) {s.win_condition = wc;}
-	virtual void nextWinCondition() {assert(false);} // not implemented - feel free to do so, if you need it.
+	virtual std::string getWinCondition() override {return s.win_condition;}
+	virtual void setWinCondition(std::string wc) override {s.win_condition = wc;}
+	virtual void nextWinCondition() override // not implemented - feel free to do so, if you need it
+	{
+		assert(false);
+	}
 
 private:
 	GameSettings s;
@@ -2000,9 +1836,9 @@ bool WLApplication::new_game()
 		return false;
 	if (code == 2) { // scenario
 		try {
-			game.run_splayer_scenario_direct(sp.getMap().c_str());
+			game.run_splayer_scenario_direct(sp.getMap().c_str(), "");
 		} catch (const std::exception & e) {
-			log("Fata exception: %s\n", e.what());
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -2030,7 +1866,7 @@ bool WLApplication::new_game()
 
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(&loaderUI, sp.settings());
-			game.run(&loaderUI, Widelands::Game::NewNonScenario);
+			game.run(&loaderUI, Widelands::Game::NewNonScenario, "", false);
 		} catch (const std::exception & e) {
 			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
@@ -2060,7 +1896,7 @@ bool WLApplication::load_game()
 		return false;
 
 	try {
-		if (game.run_load_game(filename))
+		if (game.run_load_game(filename, ""))
 			return true;
 	} catch (const std::exception & e) {
 		log("Fata exception: %s\n", e.what());
@@ -2104,7 +1940,7 @@ bool WLApplication::campaign_game()
 	try {
 		// Load selected campaign-map-file
 		if (filename.size())
-			return game.run_splayer_scenario_direct(filename.c_str());
+			return game.run_splayer_scenario_direct(filename.c_str(), "");
 	} catch (const std::exception & e) {
 		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
@@ -2130,7 +1966,7 @@ struct ReplayGameController : public GameController {
 
 	struct Cmd_ReplayEnd : public Widelands::Command {
 		Cmd_ReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
-		virtual void execute (Widelands::Game & game) {
+		virtual void execute (Widelands::Game & game) override {
 			game.gameController()->setDesiredSpeed(0);
 			UI::WLMessageBox mmb
 				(game.get_ibase(),
@@ -2142,10 +1978,10 @@ struct ReplayGameController : public GameController {
 				 UI::WLMessageBox::OK);
 			mmb.run();
 		}
-		virtual uint8_t id() const {return QUEUE_CMD_REPLAYEND;}
+		virtual uint8_t id() const override {return QUEUE_CMD_REPLAYEND;}
 	};
 
-	void think() {
+	void think() override {
 		int32_t curtime = WLApplication::get()->get_time();
 		int32_t frametime = curtime - m_lastframe;
 		m_lastframe = curtime;
@@ -2174,21 +2010,21 @@ struct ReplayGameController : public GameController {
 		}
 	}
 
-	void sendPlayerCommand(Widelands::PlayerCommand &)
+	void sendPlayerCommand(Widelands::PlayerCommand &) override
 	{
 		throw wexception("Trying to send a player command during replay");
 	}
-	int32_t getFrametime() {
+	int32_t getFrametime() override {
 		return m_time - m_game.get_gametime();
 	}
-	std::string getGameDescription() {
+	std::string getGameDescription() override {
 		return "replay";
 	}
-	uint32_t realSpeed() {return m_paused ? 0 : m_speed;}
-	uint32_t desiredSpeed() {return m_speed;}
-	void setDesiredSpeed(uint32_t const speed) {m_speed = speed;}
-	bool isPaused() {return m_paused;}
-	void setPaused(bool const paused) {m_paused = paused;}
+	uint32_t realSpeed() override {return m_paused ? 0 : m_speed;}
+	uint32_t desiredSpeed() override {return m_speed;}
+	void setDesiredSpeed(uint32_t const speed) override {m_speed = speed;}
+	bool isPaused() override {return m_paused;}
+	void setPaused(bool const paused) override {m_paused = paused;}
 
 private:
 	Widelands::Game & m_game;
@@ -2228,7 +2064,7 @@ void WLApplication::replay()
 
 		game.save_handler().set_allow_saving(false);
 
-		game.run(&loaderUI, Widelands::Game::Loaded, true);
+		game.run(&loaderUI, Widelands::Game::Loaded, "", true);
 	} catch (const std::exception & e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
@@ -2287,7 +2123,7 @@ void WLApplication::cleanup_replays()
 		}
 	}
 
-	time_t tnow = time(0);
+	time_t tnow = time(nullptr);
 
 	if (s.get_int("remove_replays", 0)) {
 		g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX, &files, 1);

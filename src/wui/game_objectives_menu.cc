@@ -39,9 +39,9 @@ GameObjectivesMenu::GameObjectivesMenu
 :
 	UI::UniqueWindow
 		(&plr, "objectives", &registry,
-		 340,
+		 580,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
-		 _("Objectives Menu")),
+		 _("Objectives")),
 	list
 		(this,
 		 5, 5,

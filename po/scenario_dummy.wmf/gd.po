@@ -1,0 +1,39 @@
+# Gaelic; Scottish translation for widelands
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"PO-Revision-Date: 2013-10-09 20:43+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
+"(n > 2 && n < 20) ? 2 : 3;\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:39+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
+"Language: gd\n"
+
+#: ../../campaigns/dummy.wmf/scripting/init.lua:10
+msgid "Not yet implemented"
+msgstr "Cha deach seo a phrògramachadh fhathast"
+
+#: ../../campaigns/dummy.wmf/scripting/init.lua:11
+msgid "Sorry, this map is not yet implemented."
+msgstr "Duilich, ach cha deach am mapa seo a phrògramachadh fhathast."
+
+#: ../../scripting/format_scenario.lua:36
+msgid "“%s”"
+msgstr ""
+
+#: ../../scripting/format_scenario.lua:80
+msgid "New Objective"
+msgid_plural "New Objectives"
+msgstr[0] ""
+msgstr[1] ""

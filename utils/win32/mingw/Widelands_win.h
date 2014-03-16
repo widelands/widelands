@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,11 +23,11 @@
 #include "wlversion.h"
 
 /* VERSION DEFINITIONS */
-#define VER_STRING	"0.0.0.17"
+#define VER_STRING	"0.0.0.18"
 #define VER_MAJOR	0
 #define VER_MINOR	0
 #define VER_RELEASE	0
-#define VER_BUILD	17
+#define VER_BUILD	18
 #define COMPANY_NAME	"The Widelands Development Team"
 #define FILE_VERSION	BUILD_ID
 #define FILE_DESCRIPTION	"Widelands - realtime strategy game"

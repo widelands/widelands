@@ -20,11 +20,13 @@
 #ifndef WUI_ITEMWARESDISPLAY_H
 #define WUI_ITEMWARESDISPLAY_H
 
+#include <vector>
+
 #include "logic/widelands.h"
 #include "ui_basic/panel.h"
 
 namespace Widelands {
-struct Player;
+class Player;
 }
 
 /**
@@ -45,7 +47,7 @@ struct ItemWaresDisplay : UI::Panel {
 	void clear();
 	void add(bool worker, Widelands::Ware_Index index);
 
-	virtual void draw(RenderTarget &);
+	virtual void draw(RenderTarget &) override;
 
 private:
 	struct Item {

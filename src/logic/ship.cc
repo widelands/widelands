@@ -19,6 +19,8 @@
 
 #include "logic/ship.h"
 
+#include <boost/foreach.hpp>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
@@ -38,6 +40,7 @@
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
+#include "ref_cast.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -58,7 +61,7 @@ Ship_Descr::Ship_Descr
 	m_vision_range = global_s.get_natural("vision_range", 7);
 }
 
-uint32_t Ship_Descr::movecaps() const throw () {
+uint32_t Ship_Descr::movecaps() const {
 	return MOVECAPS_SWIM;
 }
 
@@ -69,9 +72,9 @@ Bob & Ship_Descr::create_object() const {
 
 Ship::Ship(const Ship_Descr & gdescr) :
 	Bob(gdescr),
-	m_window(0),
-	m_fleet(0),
-	m_economy(0),
+	m_window(nullptr),
+	m_fleet(nullptr),
+	m_economy(nullptr),
 	m_ship_state(TRANSPORT)
 {
 }
@@ -80,12 +83,20 @@ Ship::~Ship() {
 	close_window();
 }
 
-Bob::Type Ship::get_bob_type() const throw () {
+Bob::Type Ship::get_bob_type() const {
 	return SHIP;
 }
 
-PortDock * Ship::get_destination(Editor_Game_Base & egbase) {
+PortDock* Ship::get_destination(Editor_Game_Base& egbase) const {
 	return m_destination.get(egbase);
+}
+
+PortDock* Ship::get_lastdock(Editor_Game_Base& egbase) const {
+	return m_lastdock.get(egbase);
+}
+
+Fleet* Ship::get_fleet() const {
+	return m_fleet;
 }
 
 void Ship::init_auto_task(Game & game) {
@@ -103,7 +114,7 @@ void Ship::init(Editor_Game_Base & egbase) {
  * fleet, if one is reachable.
  */
 void Ship::init_fleet(Editor_Game_Base & egbase) {
-	assert(get_owner() != 0);
+	assert(get_owner() != nullptr);
 	Fleet * fleet = new Fleet(*get_owner());
 	fleet->add_ship(this);
 	fleet->init(egbase);
@@ -111,8 +122,9 @@ void Ship::init_fleet(Editor_Game_Base & egbase) {
 }
 
 void Ship::cleanup(Editor_Game_Base & egbase) {
-	if (m_fleet)
+	if (m_fleet) {
 		m_fleet->remove_ship(egbase, this);
+	}
 
 	while (!m_items.empty()) {
 		m_items.back().remove(egbase);
@@ -155,8 +167,8 @@ void Ship::wakeup_neighbours(Game & game) {
 const Bob::Task Ship::taskShip = {
 	"ship",
 	static_cast<Bob::Ptr>(&Ship::ship_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true // unique task
 };
 
@@ -176,6 +188,16 @@ void Ship::ship_update(Game & game, Bob::State & state) {
 	if (!signal.empty()) {
 		if (signal == "wakeup") {
 			signal_handled();
+		} else if (signal == "cancel_expedition") {
+			pop_task(game);
+			PortDock* dst = m_fleet->get_arbitrary_dock();
+			// TODO(sirver): What happens if there is no port anymore?
+			if (dst) {
+				start_task_movetodock(game, *dst);
+			}
+
+			signal_handled();
+			return;
 		} else {
 			send_signal(game, "fail");
 			pop_task(game);
@@ -221,74 +243,88 @@ void Ship::ship_update(Game & game, Bob::State & state) {
 bool Ship::ship_update_transport(Game & game, Bob::State &) {
 	Map & map = game.map();
 
-	if (PortDock * dst = get_destination(game)) {
-		FCoords position = map.get_fcoords(get_position());
-		if (position.field->get_immovable() == dst) {
-			molog("ship_update: Arrived at dock %u\n", dst->serial());
-			m_lastdock = dst;
-			m_destination = 0;
-			dst->ship_arrived(game, *this);
-			start_task_idle(game, descr().main_animation(), 250);
-			return true;
+	PortDock * dst = get_destination(game);
+	if (!dst) {
+		molog("ship_update: No destination anymore.\n");
+		if (m_items.empty())
+			return false;
+		molog("but it has wares....\n");
+		pop_task(game);
+		PortDock* other_dock = m_fleet->get_arbitrary_dock();
+		// TODO(sirver): What happens if there is no port anymore?
+		if (other_dock) {
+			set_destination(game, *other_dock);
+		} else {
+			start_task_idle(game, descr().main_animation(), 2000);
 		}
-
-		molog("ship_update: Go to dock %u\n", dst->serial());
-
-		PortDock * lastdock = m_lastdock.get(game);
-		if (lastdock && lastdock != dst) {
-			molog("ship_update: Have lastdock %u\n", lastdock->serial());
-
-			Path path;
-			if (m_fleet->get_path(*lastdock, *dst, path)) {
-				uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
-				uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
-				Coords closest_target(Coords::Null());
-
-				Coords cur(path.get_start());
-				for (uint32_t idx = 0; idx <= path.get_nsteps(); ++idx) {
-					uint32_t dist = map.calc_distance(get_position(), cur);
-
-					if (dist == 0) {
-						molog("Follow pre-computed path from (%i,%i)  [idx = %u]\n", cur.x, cur.y, idx);
-
-						Path subpath(cur);
-						while (idx < path.get_nsteps()) {
-							subpath.append(map, path[idx]);
-							idx++;
-						}
-
-						start_task_movepath(game, subpath, descr().get_sail_anims());
-						return true;
-					}
-
-					if (dist < closest_dist) {
-						closest_dist = dist;
-						closest_idx = idx;
-					}
-
-					if (idx == closest_idx + closest_dist)
-						closest_target = cur;
-
-					if (idx < path.get_nsteps())
-						map.get_neighbour(cur, path[idx], &cur);
-				}
-
-				if (closest_target) {
-					molog("Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
-					if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims()))
-						return true;
-
-					molog("  Failed to find path!!! Retry full search\n");
-				}
-			}
-
-			m_lastdock = 0;
-		}
-
-		start_task_movetodock(game, *dst);
 		return true;
 	}
-	return false;
+
+	FCoords position = map.get_fcoords(get_position());
+	if (position.field->get_immovable() == dst) {
+		molog("ship_update: Arrived at dock %u\n", dst->serial());
+		m_lastdock = dst;
+		m_destination = nullptr;
+		dst->ship_arrived(game, *this);
+		start_task_idle(game, descr().main_animation(), 250);
+		return true;
+	}
+
+	molog("ship_update: Go to dock %u\n", dst->serial());
+
+	PortDock * lastdock = m_lastdock.get(game);
+	if (lastdock && lastdock != dst) {
+		molog("ship_update: Have lastdock %u\n", lastdock->serial());
+
+		Path path;
+		if (m_fleet->get_path(*lastdock, *dst, path)) {
+			uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
+			uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
+			Coords closest_target(Coords::Null());
+
+			Coords cur(path.get_start());
+			for (uint32_t idx = 0; idx <= path.get_nsteps(); ++idx) {
+				uint32_t dist = map.calc_distance(get_position(), cur);
+
+				if (dist == 0) {
+					molog("Follow pre-computed path from (%i,%i)  [idx = %u]\n", cur.x, cur.y, idx);
+
+					Path subpath(cur);
+					while (idx < path.get_nsteps()) {
+						subpath.append(map, path[idx]);
+						idx++;
+					}
+
+					start_task_movepath(game, subpath, descr().get_sail_anims());
+					return true;
+				}
+
+				if (dist < closest_dist) {
+					closest_dist = dist;
+					closest_idx = idx;
+				}
+
+				if (idx == closest_idx + closest_dist)
+					closest_target = cur;
+
+				if (idx < path.get_nsteps())
+					map.get_neighbour(cur, path[idx], &cur);
+			}
+
+			if (closest_target) {
+				molog("Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
+				if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims()))
+					return true;
+
+				molog("  Failed to find path!!! Retry full search\n");
+			}
+		}
+
+		m_lastdock = nullptr;
+	}
+
+	start_task_movetodock(game, *dst);
+	return true;
 }
 
 
@@ -329,7 +365,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// NOTE territory, as "clearing" is not yet implemented.
 				// NOTE further it checks, whether there is a Player_immovable on one of the fields.
 				// FIXME handle this more gracefully concering opposing players
-				Player_Number pn = m_economy->owner().player_number();
+				Player_Number pn = get_owner()->player_number();
 				FCoords coord = fc;
 				bool invalid = false;
 				for (uint8_t step = 0; !invalid && step < 5; ++step) {
@@ -416,7 +452,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 		if (new_port_space) {
 			m_ship_state = EXP_FOUNDPORTSPACE;
 			// Send a message to the player, that a new port space was found
-			std::string msg_head = _("Port space found");
+			std::string msg_head = _("Port Space Found");
 			std::string msg_body = _("An expedition ship found a new port build space.");
 			send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
 		}
@@ -524,9 +560,11 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					} else {
 						// Check whether the island was completely surrounded
 						if (get_position() == m_expedition->exploration_start) {
-							std::string msg_head = _("Island surrounded");
-							std::string msg_body = _("An expedition ship surrounded its island without any events.");
-							send_message(game, "exp_island", msg_head, msg_body, "ship_explore_island_cw.png");
+							std::string msg_head = _("Island Circumnavigated");
+							std::string msg_body = _("An expedition ship sailed around its"
+										 " island without any events.");
+							send_message(game, "exp_island", msg_head, msg_body,
+								"ship_explore_island_cw.png");
 							m_ship_state = EXP_WAITING;
 							return start_task_idle(game, descr().main_animation(), 1500);
 						}
@@ -577,7 +615,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					m_ship_state = EXP_WAITING;
 					start_task_idle(game, descr().main_animation(), 1500);
 					// Send a message to the player, that a new coast was reached
-					std::string msg_head = _("Coast reached");
+					std::string msg_head = _("Coast Reached");
 					std::string msg_body =
 						_("An expedition ship reached a coast and is waiting for further commands.");
 					send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
@@ -595,7 +633,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 			for (int i = m_items.size() - 1; i >= 0; --i) {
 				WareInstance * ware;
 				Worker * worker;
-				m_items.at(i).get(game, ware, worker);
+				m_items.at(i).get(game, &ware, &worker);
 				if (ware) {
 					// no, we don't transfer the wares, we create new ones out of air and remove the old ones ;)
 					WaresQueue & wq = cs->waresqueue(ware->descr_index());
@@ -617,10 +655,15 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					m_items.resize(i);
 				}
 			}
-			if (m_items.empty())
+			if (m_items.empty()) {
 				m_ship_state = TRANSPORT; // That's it, expedition finished
+
+				init_fleet(game);
+				m_expedition.reset(nullptr);
+
 				if (upcast(Interactive_GameBase, igb, game.get_ibase()))
 					refresh_window(*igb);
+			}
 			return start_task_idle(game, descr().main_animation(), 1500); // unload the next item
 		}
 
@@ -636,6 +679,9 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 }
 
 void Ship::set_economy(Game & game, Economy * e) {
+	// Do not check here that the economy actually changed, because on loading
+	// we rely that wares really get reassigned our economy.
+
 	m_economy = e;
 	container_iterate(std::vector<ShippingItem>, m_items, it) {
 		it->set_economy(game, e);
@@ -713,9 +759,29 @@ void Ship::start_task_expedition(Game & game) {
 	m_expedition->direction = 0;
 	m_expedition->exploration_start = Coords(0, 0);
 	m_expedition->clockwise = false;
+	m_expedition->economy.reset(new Economy(*get_owner()));
+
+	// We are no longer in any other economy, but instead are an economy of our
+	// own.
+	m_fleet->remove_ship(game, this);
+	assert(m_fleet == nullptr);
+
+	set_economy(game, m_expedition->economy.get());
+
+	for (int i = m_items.size() - 1; i >= 0; --i) {
+		WareInstance * ware;
+		Worker * worker;
+		m_items.at(i).get(game, &ware, &worker);
+		if (worker) {
+			worker->reset_tasks(game);
+			worker->start_task_idle(game, 0, -1);
+		} else {
+			assert(ware);
+		}
+	}
 
 	// Send a message to the player, that an expedition is ready to go
-	const std::string msg_head = _("Expedition ready");
+	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
 	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
 }
@@ -733,8 +799,8 @@ void Ship::exp_scout_direction(Game &, uint8_t direction) {
 /// @note only called via player command
 void Ship::exp_construct_port (Game &, const Coords& c) {
 	assert(m_expedition);
-	Building_Index port_idx = m_economy->owner().tribe().safe_building_index("port");
-	m_economy->owner().force_csite(c, port_idx);
+	Building_Index port_idx = get_owner()->tribe().safe_building_index("port");
+	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
 
@@ -755,21 +821,33 @@ void Ship::exp_cancel (Game & game) {
 	// + cancelation only works if an expedition is actually running
 	if ((m_ship_state == EXP_COLONIZING) || !state_is_expedition())
 		return;
-	// We declare the ship to be in TRANSPORT mode and give control to the fleet
-	m_ship_state = TRANSPORT;
-	start_task_movetodock(game, *m_fleet->get_arbitrary_dock());
-	// Some cleanups need to be done, as the workers do not have a destination
-	for (int i = m_items.size() - 1; i >= 0; --i) {
-		WareInstance * ware;
-		Worker * worker;
-		m_items.at(i).get(game, ware, worker);
+	send_signal(game, "cancel_expedition");
+
+	// The workers were hold in an idle state so that they did not try
+	// to become fugitive or run to the next warehouse. But now, we
+	// have a proper destination, so we can just inform them that they
+	// are now getting shipped there.
+	// Theres nothing to be done for wares - they already changed
+	// economy with us and the warehouse will make sure that they are
+	// getting used.
+	Worker * worker;
+	BOOST_FOREACH(ShippingItem& item, m_items) {
+		item.get(game, nullptr, &worker);
 		if (worker) {
-			worker->set_economy(nullptr);
 			worker->reset_tasks(game);
-		} else {
-			assert(ware);
+			worker->start_task_shipping(game, nullptr);
 		}
 	}
+	m_ship_state = TRANSPORT;
+
+	// Bring us back into a fleet and a economy.
+	set_economy(game, nullptr);
+	init_fleet(game);
+	assert(get_economy() && get_economy() != m_expedition->economy.get());
+
+	// Delete the expedition and the economy it created.
+	m_expedition.reset(nullptr);
+
 	// And finally update our ship window
 	if (upcast(Interactive_GameBase, igb, game.get_ibase()))
 		refresh_window(*igb);
@@ -835,7 +913,7 @@ void Ship::send_message
 		(msgsender, game.get_gametime(), 60 * 60 * 1000,
 		 title, rt_description, get_position(), m_serial);
 
-	m_economy->owner().add_message(game, *msg);
+	get_owner()->add_message(game, *msg);
 }
 
 
@@ -938,15 +1016,19 @@ void Ship::Loader::load_finish()
 	ship.m_ship_state = m_ship_state;
 
 	// if the ship is on an expedition, restore the expedition specific data
-	if (m_expedition)
+	if (m_expedition) {
 		ship.m_expedition.swap(m_expedition);
-	else
-		assert(m_ship_state == TRANSPORT);
+		ship.m_expedition->economy.reset(new Economy(*ship.get_owner()));
+		ship.m_economy = ship.m_expedition->economy.get();
+	} else assert(m_ship_state == TRANSPORT);
 
-	// For robustness, in case our fleet did not get restored from the savegame
-	// for whatever reason
-	if (!ship.m_fleet)
-		ship.init_fleet(egbase());
+	// Workers load code set their economy to the economy of their location
+	// (which is a PlayerImmovable), that means that workers on ships do not get
+	// a correct economy assigned. We, as ship therefore have to reset the
+	// economy of all workers we're transporting so that they are in the correct
+	// economy. Also, we might are on an expedition which means that we just now
+	// created the economy of this ship and must inform all wares.
+	ship.set_economy(ref_cast<Game>(egbase()), ship.m_economy);
 }
 
 
@@ -962,7 +1044,7 @@ Map_Object::Loader * Ship::load
 		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
 			std::string owner = fr.CString();
 			std::string name = fr.CString();
-			const Ship_Descr * descr = 0;
+			const Ship_Descr * descr = nullptr;
 
 			egbase.manually_load_tribe(owner);
 
@@ -977,9 +1059,9 @@ Map_Object::Loader * Ship::load
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr, version);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("loading ship: %s"), e.what());
+		throw wexception("loading ship: %s", e.what());
 	}
 
 	return loader.release();

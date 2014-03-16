@@ -47,7 +47,7 @@ struct MapObjectDebugPanel
 		 Widelands::Map_Object       &);
 	~MapObjectDebugPanel();
 
-	virtual void log(std::string str);
+	virtual void log(std::string str) override;
 
 private:
 	const Widelands::Editor_Game_Base & m_egbase;
@@ -76,7 +76,7 @@ MapObjectDebugPanel::~MapObjectDebugPanel()
 {
 	if (Widelands::Map_Object * const obj = m_object.get(m_egbase))
 		if (obj->get_logsink() == this)
-			obj->set_logsink(0);
+			obj->set_logsink(nullptr);
 }
 
 
@@ -131,7 +131,7 @@ struct MapObjectDebugWindow : public UI::Window {
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think();
+	virtual void think() override;
 
 private:
 	bool                  m_log_general_info;
@@ -216,7 +216,7 @@ struct FieldDebugWindow : public UI::Window {
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think();
+	virtual void think() override;
 
 	void open_immovable();
 	void open_bob(uint32_t);
@@ -371,13 +371,13 @@ void FieldDebugWindow::think()
 		int ramount = m_coords.field->get_resources_amount();
 		int startingAmount = m_coords.field->get_starting_res_amount();
 		snprintf
-		(buffer, sizeof(buffer), _("Resource: %s\n"),
+		(buffer, sizeof(buffer), "Resource: %s\n",
 			m_map.get_world()->get_resource(ridx)->name().c_str());
 
 		str += buffer;
 
 		snprintf
-		(buffer, sizeof(buffer), _("  Amount: %i/%i\n"), ramount, startingAmount);
+		(buffer, sizeof(buffer), "  Amount: %i/%i\n", ramount, startingAmount);
 		str += buffer;
 	}
 

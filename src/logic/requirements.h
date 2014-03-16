@@ -33,7 +33,7 @@
 namespace Widelands {
 
 class Map_Object;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 
@@ -61,18 +61,18 @@ private:
 	struct Capsule : public BaseCapsule {
 		Capsule(const T & _m) : m(_m) {}
 
-		bool check(const Map_Object & obj) const {return m.check(obj);}
+		bool check(const Map_Object & obj) const override {return m.check(obj);}
 
 		void write
 			(FileWrite            & fw,
 			 Editor_Game_Base     & egbase,
 			 Map_Map_Object_Saver & mos)
-			const
+			const override
 		{
 			m.write(fw, egbase, mos);
 		}
 
-		const RequirementsStorage & storage() const {return T::storage;}
+		const RequirementsStorage & storage() const override {return T::storage;}
 
 		T m;
 	};

@@ -42,13 +42,12 @@ void Map_Extradata_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	if (skip)
 		return;
 
 	Profile prof;
-	try {prof.read("extra_data", 0, fs);} catch (...) {return;}
+	try {prof.read("extra_data", nullptr, fs);} catch (...) {return;}
 
 	try {
 		int32_t const packet_version =
@@ -96,16 +95,15 @@ throw (_wexception)
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("extradata: %s"), e.what());
+		throw game_data_error("extradata: %s", e.what());
 	}
 }
 
 
 void Map_Extradata_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	Profile prof;
 	prof.create_section("global").set_int

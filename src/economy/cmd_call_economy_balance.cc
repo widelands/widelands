@@ -32,7 +32,7 @@ Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
 	(int32_t const starttime, Economy * const economy, uint32_t const timerid)
 	: GameLogicCommand(starttime)
 {
-	m_flag = &economy->get_arbitrary_flag();
+	m_flag = economy->get_arbitrary_flag();
 	m_timerid = timerid;
 }
 
@@ -71,7 +71,7 @@ void Cmd_Call_Economy_Balance::Read
 				uint16_t const economy_number = fr.Unsigned16();
 				if (economy_number < player->get_nr_economies())
 					m_flag =
-						&player->get_economy_by_number(economy_number)
+						player->get_economy_by_number(economy_number)
 						->get_arbitrary_flag();
 				else
 					throw wexception("invalid economy number %u", economy_number);
@@ -83,9 +83,9 @@ void Cmd_Call_Economy_Balance::Read
 				m_timerid = 0;
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw wexception(_("call economy balance: %s"), e.what());
+		throw wexception("call economy balance: %s", e.what());
 	}
 }
 void Cmd_Call_Economy_Balance::Write

@@ -63,7 +63,7 @@ void FXset::add_fx(Mix_Chunk * const fx, uint8_t const prio)
 Mix_Chunk * FXset::get_fx()
 {
 	if (g_sound_handler.get_disable_fx() || m_fxs.empty())
-		return 0;
+		return nullptr;
 
 	m_last_used = SDL_GetTicks();
 

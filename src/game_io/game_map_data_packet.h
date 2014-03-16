@@ -31,16 +31,16 @@ struct WL_Map_Loader;
  * This is just a wrapper around Map_Saver and Map_Loader
  */
 struct Game_Map_Data_Packet : public Game_Data_Packet {
-	Game_Map_Data_Packet() : m_mos(0), m_mol(0), m_wms(0), m_wml(0) {}
+	Game_Map_Data_Packet() : m_mos(nullptr), m_mol(nullptr), m_wms(nullptr), m_wml(nullptr) {}
 	virtual ~Game_Map_Data_Packet();
 
 
 	/// Ensures that the world gets loaded but does not much more.
-	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = 0);
+	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = nullptr) override;
 
 	void Read_Complete(Game &); ///  Loads the rest of the map.
 
-	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = 0);
+	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = nullptr) override;
 
 	Map_Map_Object_Saver  * get_map_object_saver () {return m_mos;}
 	Map_Map_Object_Loader * get_map_object_loader() {return m_mol;}

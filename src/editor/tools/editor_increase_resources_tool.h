@@ -37,22 +37,22 @@ struct Editor_Increase_Resources_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
 	int32_t handle_undo_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
-	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
+	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
 
-	char const * get_sel_impl() const {
+	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_increase_resources.png";
 	}
 
-	int32_t get_change_by() const       throw ()  {return m_change_by;}
-	void set_change_by(const int32_t n) throw ()  {m_change_by = n;}
+	int32_t get_change_by() const        {return m_change_by;}
+	void set_change_by(const int32_t n)  {m_change_by = n;}
 	Widelands::Resource_Index get_cur_res() const {return m_cur_res;}
-	void set_cur_res(Widelands::Resource_Index const res) throw () {
+	void set_cur_res(Widelands::Resource_Index const res) {
 		m_cur_res = res;
 	}
 
@@ -69,6 +69,6 @@ private:
 };
 
 int32_t Editor_Change_Resource_Tool_Callback
-	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(const Widelands::TCoords<Widelands::FCoords>&, Widelands::Map&, int32_t);
 
 #endif

@@ -43,26 +43,26 @@ public:
 	virtual ~SDLSurface();
 
 	// Implements Image
-	virtual uint16_t width() const {return m_w;}
-	virtual uint16_t height() const {return m_h;}
+	virtual uint16_t width() const override {return m_w;}
+	virtual uint16_t height() const override {return m_h;}
 
 	// Implements Surface
-	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm);
-	virtual void fill_rect(const Rect&, RGBAColor);
+	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
+	virtual void fill_rect(const Rect&, RGBAColor) override;
 
 	// Implements Surface
-	virtual void draw_rect(const Rect&, RGBColor);
+	virtual void draw_rect(const Rect&, RGBColor) override;
 	virtual void draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);
-	virtual void brighten_rect(const Rect&, int32_t factor);
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
+	virtual void brighten_rect(const Rect&, int32_t factor) override;
 
-	virtual const SDL_PixelFormat & format() const;
-	virtual void lock(LockMode);
-	virtual void unlock(UnlockMode);
-	virtual uint32_t get_pixel(uint16_t x, uint16_t y);
-	virtual void set_pixel(uint16_t x, uint16_t y, Uint32 clr);
-	virtual uint16_t get_pitch() const {return m_surface->pitch;}
-	virtual uint8_t * get_pixels() const;
+	virtual const SDL_PixelFormat & format() const override;
+	virtual void lock(LockMode) override;
+	virtual void unlock(UnlockMode) override;
+	virtual uint32_t get_pixel(uint16_t x, uint16_t y) override;
+	virtual void set_pixel(uint16_t x, uint16_t y, Uint32 clr) override;
+	virtual uint16_t get_pitch() const override {return m_surface->pitch;}
+	virtual uint8_t * get_pixels() const override;
 
 	SDL_Surface * get_sdl_surface() const {return m_surface;}
 

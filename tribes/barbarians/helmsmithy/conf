@@ -30,7 +30,7 @@ coal=8
 [programs]
 produce_helm=_Produce helm
 produce_mask=_Produce mask
-produce_warhelmet=_Produce warhelmet
+produce_warhelmet=_Produce warhelm
 work=_Work
 
 [produce_helm]

@@ -33,7 +33,7 @@ struct Ship;
 void show_bulldoze_confirm
 	(Interactive_Player & player,
 	 Widelands::Building & building,
-	 Widelands::PlayerImmovable * const todestroy = 0);
+	 Widelands::PlayerImmovable * const todestroy = nullptr);
 
 void show_dismantle_confirm
 	(Interactive_Player & player,

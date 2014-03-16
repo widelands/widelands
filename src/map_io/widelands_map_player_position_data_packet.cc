@@ -31,10 +31,9 @@ namespace Widelands {
 
 void Map_Player_Position_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	Profile prof;
-	prof.read("player_position", 0, fs);
+	prof.read("player_position", nullptr, fs);
 	Section & s = prof.get_safe_section("global");
 
 	try {
@@ -52,20 +51,19 @@ throw (_wexception)
 					snprintf(buffer, sizeof(buffer), "player_%u", p);
 					map.set_starting_pos(p, s.get_safe_Coords(buffer, extent));
 				} catch (const _wexception & e) {
-					throw game_data_error(_("player %u: %s"), p, e.what());
+					throw game_data_error("player %u: %s", p, e.what());
 				}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("player positions: %s"), e.what());
+		throw game_data_error("player positions: %s", e.what());
 	}
 }
 
 
 void Map_Player_Position_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	Profile prof;
 	Section & s = prof.create_section("global");

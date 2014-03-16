@@ -55,7 +55,7 @@ struct ShipWindow : UI::Window {
 	ShipWindow(Interactive_GameBase & igb, Ship & ship);
 	virtual ~ShipWindow();
 
-	virtual void think();
+	virtual void think() override;
 
 	UI::Button * make_button
 		(UI::Panel * parent,
@@ -119,7 +119,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 
 		m_btn_explore_island_cw =
 			make_button
-				(exp_top, "expcw", _("Explore the island's coast clockwise"), pic_explore_cw,
+				(exp_top, "expcw", _("Explore the island’s coast clockwise"), pic_explore_cw,
 				 boost::bind(&ShipWindow::act_explore_island, this, true));
 		exp_top->add(m_btn_explore_island_cw, 0, false);
 
@@ -155,7 +155,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 
 		m_btn_explore_island_ccw =
 			make_button
-				(exp_bot, "expccw", _("Explore the island's coast counter clockwise"), pic_explore_ccw,
+				(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"), pic_explore_ccw,
 				 boost::bind(&ShipWindow::act_explore_island, this, false));
 		exp_bot->add(m_btn_explore_island_ccw, 0, false);
 
@@ -205,7 +205,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 ShipWindow::~ShipWindow()
 {
 	assert(m_ship.m_window == this);
-	m_ship.m_window = 0;
+	m_ship.m_window = nullptr;
 }
 
 void ShipWindow::think()
@@ -224,7 +224,7 @@ void ShipWindow::think()
 		Widelands::ShippingItem item = m_ship.get_item(idx);
 		Widelands::WareInstance * ware;
 		Widelands::Worker * worker;
-		item.get(m_igbase.egbase(), ware, worker);
+		item.get(m_igbase.egbase(), &ware, &worker);
 
 		if (ware) {
 			m_display->add(false, ware->descr_index());

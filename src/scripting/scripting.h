@@ -23,103 +23,170 @@
 #include <map>
 #include <string>
 
-#include <lua.hpp>
 #include <stdint.h>
 
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "scripting/eris/lua.hpp"
 #include "wexception.h"
 
 namespace Widelands {
-	struct Editor_Game_Base;
-	struct Game;
+	class Editor_Game_Base;
+	class Game;
 	struct Map_Map_Object_Loader;
 	struct Map_Map_Object_Saver;
-	struct Player;
+	class Player;
 }
 
-struct LuaError : public _wexception {
+class EditorFactory;
+class GameFactory;
+
+class LuaError : public _wexception {
+public:
 	LuaError(const std::string & reason) : wexception("%s", reason.c_str()) {}
 };
-struct LuaValueError : public LuaError {
+class LuaValueError : public LuaError {
+public:
 	LuaValueError(const std::string & wanted) :
 		LuaError("Variable not of expected type: " + wanted)
 	{}
 };
-struct LuaTableKeyError : public LuaError {
+class LuaTableKeyError : public LuaError {
+public:
 	LuaTableKeyError(const std::string & wanted) :
 		LuaError(wanted + " is not a field in this table.")
 	{}
 };
-struct LuaScriptNotExistingError : public LuaError {
+class LuaScriptNotExistingError : public LuaError {
+public:
 	LuaScriptNotExistingError(std::string ns, std::string name) :
 		LuaError("The script '" + ns + ":" + name + "' was not found!") {}
 };
 
-/**
- * Easy handling of LuaCoroutines
- */
-struct LuaCoroutine {
-	virtual ~LuaCoroutine() {}
-
-	enum {
-		DONE = 0,
-		YIELDED = LUA_YIELD,
-	};
-
-	virtual int get_status() = 0;
-	virtual int resume(uint32_t * = 0) = 0;
-
-	virtual void push_arg(const Widelands::Player *) = 0;
-	virtual void push_arg(const Widelands::Coords &) = 0;
-};
+class LuaCoroutine;
 
 /*
  * Easy handling of return values from Wideland's Lua configurations
  * scripts: they return a Lua table with (string,value) pairs.
  */
-struct LuaTable {
-	virtual ~LuaTable() {}
+class LuaTable {
+public:
+	LuaTable(lua_State* L);
+	~LuaTable();
 
-	virtual std::string get_string(std::string) = 0;
-	virtual LuaCoroutine * get_coroutine(std::string) = 0;
+	std::string get_string(std::string);
+	LuaCoroutine* get_coroutine(std::string);
+
+private:
+	lua_State * m_L;
 };
 
-/*
- * This is the thin class that is used to execute code
- */
+// Provides an interface to call and execute Lua Code.
 typedef std::map<std::string, std::string> ScriptContainer;
-struct LuaInterface {
-	virtual ~LuaInterface() {}
+class LuaInterface {
+public:
+	LuaInterface();
+	virtual ~LuaInterface();
 
-	virtual void interpret_string(std::string) = 0;
-	virtual const std::string & get_last_error() const = 0;
+	// Register all Lua files in the directory "subdir" in "fs" under the
+	// namespace "ns".
+	void register_scripts
+		(FileSystem & fs, const std::string& ns, const std::string& subdir);
 
-	virtual void register_scripts
-		(FileSystem &, std::string, std::string = "scripting") = 0;
-	virtual ScriptContainer & get_scripts_for(std::string) = 0;
+	// Register the Lua file "filename" in "fs" under the namespace "ns". Returns
+	// the name the script was registered, usually $(basename filename).
+	std::string register_script
+		(FileSystem & fs, const std::string& ns, const std::string& filename);
 
-	virtual std::unique_ptr<LuaTable> run_script(std::string, std::string) = 0;
-	virtual std::unique_ptr<LuaTable> run_script
-			(FileSystem &, std::string, std::string) = 0;
+	// Returns the scripts that have been registered for this namespace.
+	const ScriptContainer& get_scripts_for(const std::string&);
 
-	virtual std::unique_ptr<LuaTable> get_hook(std::string name) = 0;
+	// Interpret the given string, will throw 'LuaError' on any error.
+	void interpret_string(const std::string&);
+
+	std::unique_ptr<LuaTable> run_script(std::string, std::string);
+	std::unique_ptr<LuaTable> run_script
+			(FileSystem &, std::string, std::string);
+
+	std::unique_ptr<LuaTable> get_hook(std::string name);
+
+protected:
+	lua_State * m_L;
+
+private:
+	std::map<std::string, ScriptContainer> m_scripts;
 };
 
-struct LuaGameInterface : public virtual LuaInterface {
-	virtual LuaCoroutine * read_coroutine
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
-	virtual uint32_t write_coroutine
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &, LuaCoroutine *) = 0;
+class LuaEditorInterface : public LuaInterface {
+public:
+	LuaEditorInterface(Widelands::Editor_Game_Base * g);
+	virtual ~LuaEditorInterface();
 
-	virtual void read_global_env
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
-	virtual uint32_t write_global_env
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &) = 0;
+private:
+	std::unique_ptr<EditorFactory> m_factory;
 };
 
-LuaGameInterface * create_LuaGameInterface(Widelands::Game *);
-LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base *);
-LuaInterface * create_LuaInterface();
+class LuaGameInterface : public LuaInterface {
+public:
+	LuaGameInterface(Widelands::Game * g);
+	virtual ~LuaGameInterface();
+
+	// Input/output for coroutines.
+	LuaCoroutine * read_coroutine
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+	uint32_t write_coroutine
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &, LuaCoroutine *);
+
+	// Input output for the global game state.
+	void read_global_env
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+	uint32_t write_global_env
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+
+private:
+	std::unique_ptr<GameFactory> m_factory;
+};
+
+// Easy handling of function objects and coroutines.
+class LuaCoroutine {
+public:
+	// The state of the coroutine, which can either be yielded, i.e. it expects
+	// to be resumed again or done which means that it will not do any more work
+	// and can be deleted.
+	enum {
+		DONE = 0,
+		YIELDED = LUA_YIELD,
+	};
+
+	LuaCoroutine(lua_State * L);
+	virtual ~LuaCoroutine();
+
+	// Returns either 'DONE' or 'YIELDED'.
+	int get_status();
+
+	// Resumes the coroutine and returns it's state after it did its execution.
+	// If 'sleeptime' is not null, it will contain the time in milliseconds the
+	// lua code requested for this coroutine to sleep before it should be
+	// resumed again.
+	int resume(uint32_t* sleeptime = nullptr);
+
+	// Push the given arguments onto the Lua stack, so that a Coroutine can
+	// receive them. This is for example used in the initialization scripts or
+	// in hooks.
+	void push_arg(const Widelands::Player *);
+	void push_arg(const Widelands::Coords &);
+
+private:
+	friend class LuaGameInterface;
+
+	// Input/Output for coroutines. Do not call directly, instead use
+	// LuaGameInterface methods for this.
+	uint32_t write(lua_State *, Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+	void read(lua_State *, Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+
+	lua_State* m_L;
+	uint32_t m_idx;
+	uint32_t m_nargs;
+};
 
 #endif

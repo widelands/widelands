@@ -35,11 +35,11 @@ AttackBox::AttackBox
 	m_pl(player),
 	m_map(&m_pl->egbase().map()),
 	m_node(target),
-	m_slider_retreat(0),
-	m_slider_soldiers(0),
-	m_text_soldiers(0),
-	m_text_retreat(0),
-	m_add_soldiers(0)
+	m_slider_retreat(nullptr),
+	m_slider_soldiers(nullptr),
+	m_text_soldiers(nullptr),
+	m_text_retreat(nullptr),
+	m_add_soldiers(nullptr)
 {
 	init();
 }

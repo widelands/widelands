@@ -198,10 +198,10 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			//update statistics
 			owner().ware_produced(wq.get_ware());
 
-			const Item_Ware_Descr & wd = *tribe().get_ware_descr(wq.get_ware());
-			WareInstance & item = *new WareInstance(wq.get_ware(), &wd);
-			item.init(game);
-			worker.start_task_dropoff(game, item);
+			const WareDescr & wd = *tribe().get_ware_descr(wq.get_ware());
+			WareInstance & ware = *new WareInstance(wq.get_ware(), &wd);
+			ware.init(game);
+			worker.start_task_dropoff(game, ware);
 
 			m_working = false;
 			return true;

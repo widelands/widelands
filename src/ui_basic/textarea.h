@@ -74,7 +74,7 @@ struct Textarea : public Panel {
 	const std::string& get_text();
 
 	// Drawing and event handlers
-	void draw(RenderTarget &);
+	void draw(RenderTarget &) override;
 
 	void set_textstyle(const TextStyle & style);
 	const TextStyle & get_textstyle() const {return m_textstyle;}
@@ -82,7 +82,7 @@ struct Textarea : public Panel {
 	void set_font(const std::string & name, int size, RGBColor clr);
 
 protected:
-	virtual void update_desired_size();
+	virtual void update_desired_size() override;
 
 private:
 	enum LayoutMode {

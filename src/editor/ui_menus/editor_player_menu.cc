@@ -19,6 +19,8 @@
 
 #include "editor/ui_menus/editor_player_menu.h"
 
+#include <boost/format.hpp>
+
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
@@ -80,10 +82,10 @@ Editor_Player_Menu::Editor_Player_Menu
 	m_posy = posy;
 
 	for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i) {
-		m_plr_names          [i] = 0;
-		m_plr_set_pos_buts   [i] = 0;
-		m_plr_set_tribes_buts[i] = 0;
-		m_plr_make_infrastructure_buts[i] = 0;
+		m_plr_names          [i] = nullptr;
+		m_plr_set_pos_buts   [i] = nullptr;
+		m_plr_set_tribes_buts[i] = nullptr;
+		m_plr_make_infrastructure_buts[i] = nullptr;
 	}
 	update();
 
@@ -126,9 +128,9 @@ void Editor_Player_Menu::update() {
 
 	//  Now remove all the unneeded stuff.
 	for (Widelands::Player_Number i = nr_players; i < MAX_PLAYERS; ++i) {
-		delete m_plr_names          [i]; m_plr_names          [i] = 0;
-		delete m_plr_set_pos_buts   [i]; m_plr_set_pos_buts   [i] = 0;
-		delete m_plr_set_tribes_buts[i]; m_plr_set_tribes_buts[i] = 0;
+		delete m_plr_names          [i]; m_plr_names          [i] = nullptr;
+		delete m_plr_set_pos_buts   [i]; m_plr_set_pos_buts   [i] = nullptr;
+		delete m_plr_set_tribes_buts[i]; m_plr_set_tribes_buts[i] = nullptr;
 	}
 	int32_t       posy    = m_posy;
 	int32_t const spacing =  5;
@@ -200,10 +202,12 @@ void Editor_Player_Menu::clicked_add_player() {
 	map.set_nrplayers(nr_players);
 	{ //  register new default name for this players
 		assert(nr_players <= 99); //  2 decimal digits
-		std::string name = _("Player ");
+		std::string number = "";
 		if (char const nr_players_10 = nr_players / 10)
-			name += '0' + nr_players_10;
-		name += '0' + nr_players % 10;
+			number += '0' + nr_players_10;
+		number += '0' + nr_players % 10;
+		/** TRANSLATORS: Default player name, e.g. Player 1 */
+		std::string name = (boost::format(_("Player %s")) % number).str();
 		map.set_scenario_player_name(nr_players, name);
 	}
 	map.set_scenario_player_tribe(nr_players, m_tribes[0]);
@@ -236,7 +240,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	m_remove_last_player.set_enabled(1 < nr_players);
 
 	update();
-	// SirVer TODO: Take steps when the player is referenced in some place. Not
+	// SirVer TODO: Take steps when the player is referenced someplace. Not
 	// SirVer TODO: currently possible in the editor though.
 }
 
@@ -290,7 +294,7 @@ called when a button is clicked
 //                 //         (&menu,
 //                 //          _("Error!"),
 //                 //          _
-//                 //                 ("Can not remove player. It is referenced in some place. Remove all"
+//                 //                 ("Cannot remove player. It is referenced in some place. Remove all"
 //                 //                  " buildings and bobs that depend on this player and try again."),
 //                 //          UI::WLMessageBox::OK);
 //                 // mmb.run();
@@ -321,7 +325,7 @@ void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 			(&menu,
 			 _("Error!"),
 			 _
-			 	("Can not remove player. It is referenced in some place. Remove all"
+			 	("Cannot remove player. It is referenced someplace. Remove all"
 			 	 " buildings and bobs that depend on this player and try again."),
 			 UI::WLMessageBox::OK);
 		mmb.run();
@@ -351,7 +355,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(uint8_t n) {
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
 	map.overlay_manager().register_overlay_callback_function
-		(&Editor_Tool_Set_Starting_Pos_Callback, &map);
+		(boost::bind(&Editor_Tool_Set_Starting_Pos_Callback, _1, boost::ref(map)));
 	map.recalc_whole_map();
 	update();
 }
@@ -435,10 +439,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 
 	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);
 	parent.tools.make_infrastructure.set_player(n);
-	overlay_manager.register_overlay_callback_function
-		(&Editor_Make_Infrastructure_Tool_Callback,
-		 static_cast<void *>(&egbase),
-		 n);
+	overlay_manager.register_overlay_callback_function(
+	   boost::bind(&Editor_Make_Infrastructure_Tool_Callback, _1, boost::ref(egbase), n));
 	map.recalc_whole_map();
 }
-

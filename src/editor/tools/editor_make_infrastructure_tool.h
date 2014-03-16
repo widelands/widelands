@@ -30,16 +30,16 @@
 struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false), m_player(0) {}
 
-	void set_player(Widelands::Player_Number const n) throw ()
+	void set_player(Widelands::Player_Number const n)
 		{m_player = n;}
-	Widelands::Player_Number get_player() const throw ()
+	Widelands::Player_Number get_player() const
 		{return m_player;}
 
 	int32_t handle_click_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
-	const char * get_sel_impl() const throw ()
+	const char * get_sel_impl() const override
 		{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
 
 private:
@@ -48,6 +48,7 @@ private:
 };
 
 int32_t Editor_Make_Infrastructure_Tool_Callback
-	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(const Widelands::TCoords<Widelands::FCoords>& c,
+	 Widelands::Editor_Game_Base& egbase, int32_t const player);
 
 #endif

@@ -26,7 +26,7 @@
 namespace Widelands {
 
 struct PlayerImmovable;
-struct Game;
+class Game;
 struct Request;
 class Warehouse;
 struct Ware_Index;
@@ -54,7 +54,7 @@ struct Supply : public Trackable {
 	 * Indicates whether this supply is active as explained above (out
 	 * on the road network).
 	 */
-	virtual bool is_active() const throw () = 0;
+	virtual bool is_active() const = 0;
 
 	/**
 	 * Indicates whether this supply is in storage or on its way to
@@ -62,7 +62,7 @@ struct Supply : public Trackable {
 	 *
 	 * If this is \c false, somebody needs to find this supply a warehouse.
 	 */
-	virtual bool has_storage() const throw () = 0;
+	virtual bool has_storage() const = 0;
 
 	/**
 	 * Gets the ware type of this supply.
@@ -80,23 +80,23 @@ struct Supply : public Trackable {
 	virtual void send_to_storage(Game &, Warehouse * wh) = 0;
 
 	/**
-	 * \return the number of items or workers that can be launched right
+	 * \return the number of wares or workers that can be launched right
 	 * now for the thing requested by the given request
 	 */
 	virtual uint32_t nr_supplies(const Game &, const Request &) const = 0;
 
 	/**
-	 * Prepare an item to satisfy the given request. Note that the caller
-	 * must assign a transfer to the launched item.
+	 * Prepare an ware to satisfy the given request. Note that the caller
+	 * must assign a transfer to the launched ware.
 	 *
-	 * \throw wexception if the request is not an item request or no such
-	 * item is available in the supply.
+	 * \throw wexception if the request is not an ware request or no such
+	 * ware is available in the supply.
 	 */
-	virtual WareInstance & launch_item(Game &, const Request &) = 0;
+	virtual WareInstance & launch_ware(Game &, const Request &) = 0;
 
 	/**
 	 * Prepare a worker to satisfy the given request. Note that the caller
-	 * must assign a transfer to the launched item.
+	 * must assign a transfer to the launched ware.
 	 *
 	 * \throw wexception if the request is not a worker request or no such
 	 * worker is available in the supply.
@@ -107,5 +107,3 @@ struct Supply : public Trackable {
 }
 
 #endif
-
-

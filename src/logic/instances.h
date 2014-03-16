@@ -43,7 +43,7 @@ namespace UI {struct Tab_Panel;}
 namespace Widelands {
 
 struct Path;
-struct Player;
+class Player;
 struct Map_Map_Object_Loader;
 
 /**
@@ -57,8 +57,8 @@ struct Map_Object_Descr : boost::noncopyable {
 	{}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-	const std::string &     name() const throw () {return m_name;}
-	const std::string & descname() const throw () {return m_descname;}
+	const std::string &     name() const {return m_name;}
+	const std::string & descname() const {return m_descname;}
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
@@ -70,12 +70,12 @@ struct Map_Object_Descr : boost::noncopyable {
 		return get_animation(animname.c_str());
 	}
 
-	uint32_t main_animation() const throw () {
+	uint32_t main_animation() const {
 		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
 	}
 
 	std::string get_animation_name(uint32_t) const; ///< needed for save, debug
-	bool has_attribute(uint32_t) const throw ();
+	bool has_attribute(uint32_t) const;
 	static uint32_t get_attribute_id(const std::string & name);
 	static std::string get_attribute_name(uint32_t id);
 
@@ -128,7 +128,7 @@ extern Map_Object_Descr g_portdock_descr;
  * \warning DO NOT allocate/free Map_Objects directly. Use the appropriate
  * type-dependent create() function for creation, and call die() for removal.
  *
- * \note Convenient creation functions are defined in struct Game.
+ * \note Convenient creation functions are defined in class Game.
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
@@ -192,8 +192,8 @@ protected:
 	virtual ~Map_Object() {}
 
 public:
-	virtual int32_t get_type() const throw () = 0;
-	virtual char const * type_name() const throw () {return "map object";}
+	virtual int32_t get_type() const = 0;
+	virtual char const * type_name() const {return "map object";}
 
 	Serial serial() const {return m_serial;}
 
@@ -276,7 +276,7 @@ public:
 		Map_Object            * m_object;
 
 	protected:
-		Loader() : m_egbase(0), m_mol(0), m_object(0) {}
+		Loader() : m_egbase(nullptr), m_mol(nullptr), m_object(nullptr) {}
 
 	public:
 		typedef boost::function<void ()> FinishFn;
@@ -361,6 +361,8 @@ struct Object_Manager : boost::noncopyable {
 	void remove(Map_Object &);
 
 	bool object_still_available(const Map_Object * const t) const {
+		if (!t)
+			return false;
 		objmap_t::const_iterator it = m_objects.begin();
 		while (it != m_objects.end()) {
 			if (it->second == t)
@@ -374,7 +376,7 @@ struct Object_Manager : boost::noncopyable {
 	 * When saving the map object, ordere matters. Return a vector of all ids
 	 * that are currently available;
 	 */
-	std::vector<Serial> all_object_serials_ordered () const throw ();
+	std::vector<Serial> all_object_serials_ordered () const;
 
 private:
 	Serial   m_lastserial;
@@ -402,13 +404,13 @@ struct Object_Ptr {
 	Map_Object * get(const Editor_Game_Base &);
 	Map_Object * get(const Editor_Game_Base & egbase) const;
 
-	bool operator<  (const Object_Ptr & other) const throw () {
+	bool operator<  (const Object_Ptr & other) const {
 		return m_serial < other.m_serial;
 	}
-	bool operator== (const Object_Ptr & other) const throw () {
+	bool operator== (const Object_Ptr & other) const {
 		return m_serial == other.m_serial;
 	}
-	bool operator!= (const Object_Ptr & other) const throw () {
+	bool operator!= (const Object_Ptr & other) const {
 		return m_serial != other.m_serial;
 	}
 
@@ -449,12 +451,12 @@ private:
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object &);
-	virtual void execute (Game &);
+	virtual void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const {return QUEUE_CMD_DESTROY_MAPOBJECT;}
+	virtual uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
 private:
 	Serial obj_serial;
@@ -464,12 +466,12 @@ struct Cmd_Act : public GameLogicCommand {
 	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
 	Cmd_Act (int32_t t, Map_Object &, int32_t a);
 
-	virtual void execute (Game &);
+	virtual void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const {return QUEUE_CMD_ACT;}
+	virtual uint8_t id() const override {return QUEUE_CMD_ACT;}
 
 private:
 	Serial obj_serial;

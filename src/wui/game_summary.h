@@ -30,7 +30,7 @@
 class Interactive_GameBase;
 namespace Widelands
 {
-struct Game;
+class Game;
 }
 
 /// Shows an ingame summary window on game end
@@ -39,7 +39,7 @@ public:
 	GameSummaryScreen
 		(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r);
 
-	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my) override;
 private:
 	void fill_data();
 	void stop_clicked();

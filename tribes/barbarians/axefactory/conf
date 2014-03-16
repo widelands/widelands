@@ -29,9 +29,9 @@ iron=8
 coal=8
 
 [programs]
-produce_axe=_Produce axe
-produce_sharpaxe=_Produce sharpaxe
-produce_broadaxe=_Produce broadaxe
+produce_axe=_Produce ax
+produce_sharpaxe=_Produce sharp ax
+produce_broadaxe=_Produce broad ax
 work=_Work
 
 [produce_axe]

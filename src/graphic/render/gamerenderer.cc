@@ -59,7 +59,7 @@ void GameRenderer::rendermap
 	m_dst = &dst;
 	m_dst_offset = -viewofs;
 	m_egbase = &egbase;
-	m_player = 0;
+	m_player = nullptr;
 
 	draw_wrapper();
 }
@@ -157,7 +157,7 @@ void GameRenderer::draw_objects()
 					bob->draw(*m_egbase, *m_dst, pos[F]);
 			} else if (vision[F] == 1) {
 				const Player::Field & f_pl = m_player->fields()[map.get_index(coords[F], map.get_width())];
-				const Player * owner = owner_number[F] ? m_egbase->get_player(owner_number[F]) : 0;
+				const Player * owner = owner_number[F] ? m_egbase->get_player(owner_number[F]) : nullptr;
 				if
 					(const Map_Object_Descr * const map_object_descr =
 						f_pl.map_object_descr[TCoords<>::None])

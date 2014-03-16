@@ -56,6 +56,11 @@ function show_story_box(t, m, pos, gposx, gposy)
    sleep(500)
 end
 
+-- Add an objective
+function add_obj(objective, player)
+   return player:add_objective(objective.name, objective.title, objective.body)
+end
+
 use("aux", "coroutine")
 use("aux", "ui")
 use("aux", "table")
@@ -64,4 +69,3 @@ use("map", "texts")
 
 use("map", "initial_messages")
 use("map", "story_messages")
-

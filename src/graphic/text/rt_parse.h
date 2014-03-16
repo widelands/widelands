@@ -48,7 +48,7 @@ class IAttrMap {
 public:
 	virtual ~IAttrMap() {};
 
-	virtual const IAttr & operator[] (const std::string&) const throw (AttributeNotFound) = 0;
+	virtual const IAttr & operator[] (const std::string&) const = 0;
 	virtual bool has(const std::string &) const = 0;
 };
 
@@ -63,9 +63,9 @@ public:
 };
 
 struct Child {
-	Child() : tag(0), text() {}
+	Child() : tag(nullptr), text() {}
 	Child(ITag * t) : tag(t) {}
-	Child(std::string t) : tag(0), text(t) {}
+	Child(std::string t) : tag(nullptr), text(t) {}
 	~Child() {
 		if (tag) delete tag;
 	}
@@ -89,4 +89,3 @@ IParser * setup_parser();
 }
 
 #endif /* end of include guard: RT_PARSER_H */
-

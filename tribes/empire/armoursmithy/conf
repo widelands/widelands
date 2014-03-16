@@ -29,9 +29,9 @@ cloth=8
 
 [programs]
 produce_helm=_Produce helm
-produce_armour=_Produce armour
-produce_chain_armour=_Produce chain armour
-produce_plate_armour=_Produce plate armour
+produce_armour=_Produce armor
+produce_chain_armour=_Produce chain armor
+produce_plate_armour=_Produce plate armor
 work=_Work
 
 [produce_helm]

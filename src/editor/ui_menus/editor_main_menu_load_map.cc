@@ -67,35 +67,35 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Name: "), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author: "), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Size: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Size:"), UI::Align_CenterLeft);
 	m_size =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("World: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("World:"), UI::Align_CenterLeft);
 	m_world =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Players: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Players:"), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
@@ -103,7 +103,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Descr: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Descr:"), UI::Align_CenterLeft);
 	m_descr =
 		new UI::Multiline_Textarea
 			(this,
@@ -155,7 +155,7 @@ void Main_Menu_Load_Map::clicked_ok() {
 }
 
 /**
- * Called when a item is selected
+ * Called when a entry is selected
  */
 void Main_Menu_Load_Map::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
@@ -173,7 +173,7 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 		// get translated worldsname
 		std::string world(map.get_world_name());
 		std::string worldpath("worlds/" + world);
-		Profile prof((worldpath + "/conf").c_str(), 0, "world_" + world);
+		Profile prof((worldpath + "/conf").c_str(), nullptr, "world_" + world);
 		Section & global = prof.get_safe_section("world");
 		world = global.get_safe_string("name");
 
@@ -202,7 +202,7 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 }
 
 /**
- * An Item has been doubleclicked
+ * An entry has been doubleclicked
  */
 void Main_Menu_Load_Map::double_clicked(uint32_t) {clicked_ok();}
 
@@ -221,6 +221,7 @@ void Main_Menu_Load_Map::fill_list() {
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
 		std::string parent_string =
+				/** TRANSLATORS: Parent directory */
 				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_ls->add
 			(parent_string.c_str(),

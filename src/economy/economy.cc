@@ -30,6 +30,7 @@
 #include "economy/warehousesupply.h"
 #include "logic/game.h"
 #include "logic/player.h"
+#include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "upcast.h"
@@ -89,12 +90,14 @@ Economy::~Economy()
 
 
 /**
- * \return an arbitrary flag in this economy, or 0 if no flag exists
+ * \return an arbitrary flag in this economy.
  */
-Flag & Economy::get_arbitrary_flag()
+Flag* Economy::get_arbitrary_flag()
 {
-	assert(m_flags.size());
-	return *m_flags[0];
+	if (m_flags.empty())
+		return nullptr;
+
+	return m_flags[0];
 }
 
 /**
@@ -230,7 +233,7 @@ Warehouse * Economy::find_closest_warehouse
 	 const Economy::WarehouseAcceptFn & acceptfn)
 {
 	if (!warehouses().size())
-		return 0;
+		return nullptr;
 
 	// A-star with zero estimator = Dijkstra
 	RouteAStar<ZeroEstimator> astar(*m_router, type);
@@ -240,7 +243,7 @@ Warehouse * Economy::find_closest_warehouse
 		if
 			(cost_cutoff && current->mpf_realcost >
 			 static_cast<int32_t>(cost_cutoff))
-			return 0;
+			return nullptr;
 
 		Flag & flag = current->base_flag();
 		if (upcast(Warehouse, warehouse, flag.get_building())) {
@@ -252,7 +255,7 @@ Warehouse * Economy::find_closest_warehouse
 		}
 	}
 
-	return 0;
+	return nullptr;
 }
 
 
@@ -262,7 +265,7 @@ Warehouse * Economy::find_closest_warehouse
 */
 void Economy::add_flag(Flag & flag)
 {
-	assert(flag.get_economy() == 0);
+	assert(flag.get_economy() == nullptr);
 
 	m_flags.push_back(&flag);
 	flag.set_economy(this);
@@ -291,7 +294,7 @@ void Economy::remove_flag(Flag & flag)
 */
 void Economy::_remove_flag(Flag & flag)
 {
-	flag.set_economy(0);
+	flag.set_economy(nullptr);
 
 	// fast remove
 	container_iterate(Flags, m_flags, i)
@@ -621,8 +624,8 @@ Supply * Economy::_find_best_supply
 	assert(req.is_open());
 
 	Route buf_route0, buf_route1;
-	Supply * best_supply = 0;
-	Route  * best_route  = 0;
+	Supply * best_supply = nullptr;
+	Route  * best_route  = nullptr;
 	int32_t  best_cost   = -1;
 	Flag & target_flag = req.target_flag();
 
@@ -658,7 +661,7 @@ Supply * Economy::_find_best_supply
 	}
 
 	if (!best_route)
-		return 0;
+		return nullptr;
 
 	cost = best_cost;
 	return best_supply;
@@ -740,7 +743,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 			}
 		}
 
-		int32_t const priority = req.get_priority (cost);
+		int32_t const priority = req.get_priority(cost);
 		if (priority < 0)
 			continue;
 
@@ -794,6 +797,9 @@ void Economy::_balance_requestsupply(Game & game)
 		_start_request_timer(rsps.nexttimer);
 }
 
+
+std::unique_ptr<Soldier> Economy::m_soldier_prototype = nullptr; // minimal invasive fix of bug 1236538
+
 /**
  * Check whether there is a supply for the given request. If the request is a
  * worker request without supply, attempt to create a new worker in a warehouse.
@@ -801,6 +807,24 @@ void Economy::_balance_requestsupply(Game & game)
 void Economy::_create_requested_worker(Game & game, Ware_Index index)
 {
 	unsigned demand = 0;
+
+	bool soldier_level_check;
+	const Tribe_Descr & tribe = owner().tribe();
+	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
+
+	// Make a dummy soldier, which should never be assigned to any economy
+	// Minimal invasive fix of bug 1236538: never create a rookie for a request
+	// that required a hero.
+	if (upcast(const Soldier_Descr, s_desc, &w_desc)) {
+		if (!m_soldier_prototype) {
+			Soldier* test_rookie = static_cast<Soldier*> (&(s_desc->create_object()));
+			m_soldier_prototype.reset(test_rookie);
+		}
+		soldier_level_check = true;
+	} else {
+		soldier_level_check = false;
+	}
+
 
 	container_iterate_const(RequestList, m_requests, j) {
 		const Request & req = **j.current;
@@ -813,6 +837,13 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		if (m_supplies.have_supplies(game, req))
 			continue;
 
+		// Requests for heroes should not trigger the creation of more rookies
+		if (soldier_level_check)
+		{
+			if (not (req.get_requirements().check(*m_soldier_prototype)))
+				continue;
+		}
+
 		demand += req.get_open_count();
 	}
 
@@ -822,8 +853,6 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	// We have worker demand that is not fulfilled by supplies
 	// Find warehouses where we can create the required workers,
 	// and collect stats about existing build prerequisites
-	const Tribe_Descr & tribe = owner().tribe();
-	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
 	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 	std::vector<uint32_t> total_available;
 	uint32_t total_planned = 0;
@@ -964,7 +993,7 @@ void Economy::_handle_active_supplies(Game & game)
 			continue;
 
 		Warehouse * wh = find_closest_warehouse
-			(supply.get_position(game)->base_flag(), type, 0, 0,
+			(supply.get_position(game)->base_flag(), type, nullptr, 0,
 			 (!haveprefer && !havenormal)
 			 ?
 			 WarehouseAcceptFn()

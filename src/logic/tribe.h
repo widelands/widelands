@@ -23,16 +23,15 @@
 #include <map>
 #include <vector>
 
-#include "HTMLReferences.h"
 #include "TribeBasicInfo.h"
-#include "logic/bob.h"
-#include "logic/building.h"
 #include "descr_maintainer.h"
 #include "graphic/animation.h"
-#include "logic/immovable.h"
 #include "io/filewrite.h"
-#include "logic/item_ware_descr.h"
+#include "logic/bob.h"
+#include "logic/building.h"
+#include "logic/immovable.h"
 #include "logic/military_data.h"
+#include "logic/ware_descr.h"
 #include "logic/worker.h"
 
 namespace Widelands {
@@ -40,9 +39,9 @@ namespace Widelands {
 class Warehouse;
 class Worker_Descr;
 struct Building_Descr;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Event;
-struct Item_Ware_Descr;
+struct WareDescr;
 struct Resource_Descr;
 struct World;
 
@@ -64,13 +63,13 @@ struct Tribe_Descr : boost::noncopyable {
 
 	//  Static function to check for tribes.
 	static bool exists_tribe
-		(const std::string & name, TribeBasicInfo * info = 0);
+		(const std::string & name, TribeBasicInfo * info = nullptr);
 	static void get_all_tribenames(std::vector<std::string> &);
 	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
 
 
-	const std::string & name() const throw () {return m_name;}
-	const World & world() const throw () {return m_world;}
+	const std::string & name() const {return m_name;}
+	const World & world() const {return m_world;}
 
 	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
 	Worker_Descr const * get_worker_descr(const Ware_Index& index) const {
@@ -92,7 +91,7 @@ struct Tribe_Descr : boost::noncopyable {
 	Ware_Index safe_ware_index(const char * const warename) const;
 	Ware_Index ware_index(const std::string & warename) const;
 	Ware_Index ware_index(char const * const warename) const;
-	Item_Ware_Descr const * get_ware_descr(const Ware_Index& index) const {
+	WareDescr const * get_ware_descr(const Ware_Index& index) const {
 		return m_wares.get(index);
 	}
 	void set_ware_type_has_demand_check(const Ware_Index& index) const {
@@ -237,21 +236,6 @@ struct Tribe_Descr : boost::noncopyable {
 
 	const std::vector<std::string> & compatibility_immovable(const std::string & name) const;
 
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void referenceBuilding
-		(::FileWrite &, const std::string &, HTMLReferences::Role,
-		 Building_Index)
-		const;
-	void referenceWorker
-		(::FileWrite &, const std::string &, HTMLReferences::Role,
-		 Ware_Index,     uint8_t multiplicity = 1)
-		const;
-	void referenceWare
-		(::FileWrite &, const std::string &, HTMLReferences::Role,
-		 Ware_Index,     uint8_t multiplicity = 1)
-		const;
-#endif
-
 private:
 	const std::string m_name;
 	const World & m_world;
@@ -261,7 +245,7 @@ private:
 
 	Indexed_Descr_Maintainer<Worker_Descr, Ware_Index>    m_workers;
 	Indexed_Descr_Maintainer<Building_Descr, Building_Index>  m_buildings;
-	Indexed_Descr_Maintainer<Item_Ware_Descr, Ware_Index> m_wares;
+	Indexed_Descr_Maintainer<WareDescr, Ware_Index> m_wares;
 	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
 	Descr_Maintainer<Bob::Descr>      m_bobs;
 	std::string                       m_carrier2;
@@ -285,15 +269,6 @@ private:
 	Compatibility m_compatibility_immovable;
 	std::map<std::string, std::string> m_compatibility_wares;
 
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTMLBuildings(const std::string & directory);
-	void writeHTMLWorkers  (const std::string & directory);
-	void writeHTMLWares    (const std::string & directory);
-	void writeHTMLBobs     (const std::string & directory);
-	HTMLReferences * m_ware_references;
-	HTMLReferences * m_worker_references;
-	HTMLReferences * m_building_references;
-#endif
 };
 
 }

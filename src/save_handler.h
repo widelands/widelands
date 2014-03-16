@@ -25,7 +25,7 @@
 
 #include <stdint.h>
 
-namespace Widelands {struct Game;}
+namespace Widelands {class Game;}
 
 // default autosave interval in minutes
 #define DEFAULT_AUTOSAVE_INTERVAL 15
@@ -39,7 +39,7 @@ public:
 	bool save_game
 		(Widelands::Game   &,
 		 const std::string & filename,
-		 std::string       * error = 0);
+		 std::string       * error = nullptr);
 
 	static std::string get_base_dir() {return "save";}
 	const std::string get_cur_filename() {return m_current_filename;}

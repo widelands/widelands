@@ -53,11 +53,12 @@ struct AttackController;
  * \ref GameController and friends, so that replays and network games function
  * properly.
  */
-struct Player :
+class Player :
 	boost::noncopyable,
 	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
 	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
+public:
 	// hard-coded playercolors
 	static const RGBColor Colors[MAX_PLAYERS];
 
@@ -68,7 +69,7 @@ struct Player :
 	typedef std::vector<Building_Stats> Building_Stats_vector;
 	typedef std::vector<Building_Stats_vector> BuildingStats;
 
-	friend struct Editor_Game_Base;
+	friend class Editor_Game_Base;
 	friend struct Game_Player_Info_Data_Packet;
 	friend struct Game_Player_Economies_Data_Packet;
 	friend struct Map_Buildingdata_Data_Packet;
@@ -108,14 +109,14 @@ struct Player :
 		messages().set_message_status(id, status);
 	}
 
-	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
-	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
-	Player_Number     player_number() const throw () {return m_plnum;}
+	const Editor_Game_Base & egbase() const {return m_egbase;}
+	Editor_Game_Base       & egbase()       {return m_egbase;}
+	Player_Number     player_number() const {return m_plnum;}
 	TeamNumber team_number() const {return m_team_number;}
 	const RGBColor & get_playercolor() const {return Colors[m_plnum - 1];}
-	const Tribe_Descr & tribe() const throw () {return m_tribe;}
+	const Tribe_Descr & tribe() const {return m_tribe;}
 
-	const std::string & get_name() const throw () {return m_name;}
+	const std::string & get_name() const {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
 	void set_frontier_style(uint8_t a) {m_frontier_style_index = a;}
 	void set_flag_style(uint8_t a) {m_flag_style_index = a;}
@@ -129,11 +130,11 @@ struct Player :
 
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
-	bool see_all() const throw () {return m_see_all;}
+	bool see_all() const {return m_see_all;}
 
 	/// Per-player and per-field constructionsite information
 	struct Constructionsite_Information {
-		Constructionsite_Information() : becomes(0), was(0), totaltime(0), completedtime(0) {}
+		Constructionsite_Information() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
 		const Building_Descr * becomes; // Also works as a marker telling whether there is a construction site.
 		const Building_Descr * was; // only valid if "becomes" is an enhanced building.
 		uint32_t               totaltime;
@@ -166,7 +167,7 @@ struct Player :
 			time_triangle_last_surveyed[1] = Never();
 
 			//  Initialized for debug purposes only.
-			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = 0;
+			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = nullptr;
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -253,13 +254,13 @@ struct Player :
 		/// east, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
-		uint8_t road_e() const throw () {return roads & Road_Mask;}
+		uint8_t road_e() const {return roads & Road_Mask;}
 
 		/// Whether there is a road between this node and the node to the
 		/// southeast, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
-		uint8_t road_se() const throw () {
+		uint8_t road_se() const {
 			return roads >> Road_SouthEast & Road_Mask;
 		}
 
@@ -267,7 +268,7 @@ struct Player :
 		/// southwest, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
-		uint8_t road_sw() const throw () {
+		uint8_t road_sw() const {
 			return roads >> Road_SouthWest & Road_Mask;
 		}
 
@@ -359,10 +360,10 @@ struct Player :
 		//  <end>                           0x100         0x160
 	};
 
-	const Field * fields() const throw () {return m_fields;}
+	const Field * fields() const {return m_fields;}
 
 	// See area
-	Vision vision(Map_Index const i) const throw () {
+	Vision vision(Map_Index const i) const {
 		// Node visible if > 1
 		return (m_see_all ? 2 : 0) + m_fields[i].vision;
 	}
@@ -372,7 +373,7 @@ struct Player :
 	 * node.
 	 */
 	void rediscover_node(const Map &, const Widelands::Field &, FCoords)
-		throw ();
+	;
 
 	bool has_view_changed() {
 		bool t = m_view_changed;
@@ -390,17 +391,17 @@ struct Player :
 		 const FCoords,
 		 const Time,
 		 const bool forward = false)
-		throw ();
+	;
 
 	/// Decrement this player's vision for a node.
 	void unsee_node
 		(const Map_Index,
 		 const Time,
 		 const bool forward = false)
-		throw ();
+	;
 
 	/// Call see_node for each node in the area.
-	void see_area(const Area<FCoords>& area) throw () {
+	void see_area(const Area<FCoords>& area) {
 		const Time gametime = egbase().get_gametime();
 		const Map & map = egbase().map();
 		const Widelands::Field & first_map_field = map[0];
@@ -412,7 +413,7 @@ struct Player :
 	}
 
 	/// Decrement this player's vision for each node in an area.
-	void unsee_area(const Area<FCoords>& area) throw () {
+	void unsee_area(const Area<FCoords>& area) {
 		const Time gametime = egbase().get_gametime();
 		const Map &                  map      = egbase().map         ();
 		const Widelands::Field & first_map_field = map[0];
@@ -430,24 +431,24 @@ struct Player :
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(const Ware_Index& i) const throw () {
+	bool is_worker_type_allowed(const Ware_Index& i) const {
 		return m_allowed_worker_types.at(i);
 	}
 	void allow_worker_type(Ware_Index, bool allow);
 
 	// Allowed buildings
-	bool is_building_type_allowed(const Building_Index& i) const throw () {
+	bool is_building_type_allowed(const Building_Index& i) const {
 		return m_allowed_building_types[i];
 	}
 	void allow_building_type(Building_Index, bool allow);
 
 	// Battle options
 	void set_retreat_percentage(uint8_t value);
-	uint8_t get_retreat_percentage() const throw () {
+	uint8_t get_retreat_percentage() const {
 		return m_retreat_percentage;
 	}
 	void allow_retreat_change(bool allow);
-	bool is_retreat_change_allowed() const throw () {
+	bool is_retreat_change_allowed() const {
 		return m_allow_retreat_change;
 	}
 
@@ -477,9 +478,9 @@ struct Player :
 	// Economy stuff
 	void    add_economy(Economy &);
 	void remove_economy(Economy &);
-	bool    has_economy(Economy &) const throw ();
+	bool    has_economy(Economy &) const;
 	typedef std::vector<Economy *> Economies;
-	Economies::size_type get_economy_number(Economy const *) const throw ();
+	Economies::size_type get_economy_number(Economy const *) const;
 	Economy * get_economy_by_number(Economies::size_type const i) const {
 		return m_economies[i];
 	}
@@ -491,7 +492,7 @@ struct Player :
 
 	uint32_t findAttackSoldiers
 		(Flag                   &,
-		 std::vector<Soldier *> * soldiers = 0,
+		 std::vector<Soldier *> * soldiers = nullptr,
 		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
 	void enemyflagaction
 		(Flag &, Player_Number attacker, uint32_t count, uint8_t retreat);
@@ -527,7 +528,7 @@ struct Player :
 	}
 
 	typedef std::set<OPtr<AreaWatcher> > AreaWatchers;
-	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
+	const AreaWatchers & areawatchers() const {return m_areawatchers;}
 
 	uint32_t frontier_anim() const {
 		return tribe().frontier_animation(m_frontier_style_index);
@@ -560,8 +561,8 @@ struct Player :
 	void ware_consumed(Ware_Index, uint8_t);
 	void next_ware_production_period();
 
-	void receive(const NoteImmovable &);
-	void receive(const NoteFieldPossession     &);
+	void receive(const NoteImmovable &) override;
+	void receive(const NoteFieldPossession     &) override;
 	void receive(const NoteFieldTransformed     &);
 
 	void setAI(const std::string &);

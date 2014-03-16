@@ -45,7 +45,6 @@ void Map_Roaddata_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &       mol)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -126,17 +125,17 @@ throw (_wexception)
 
 					uint32_t const count = fr.Unsigned32();
 					if (not count)
-						throw game_data_error(_("no carrier slot"));
+						throw game_data_error("no carrier slot");
 					if (packet_version <= 2 and 1 < count)
 						throw game_data_error
-							(_
-							 	("expected 1 but found %u carrier slots in road saved "
-							 	 "with packet version 2 (old)"),
+							(
+						 	 "expected 1 but found %u carrier slots in road saved "
+						 	 "with packet version 2 (old)",
 							 count);
 
 					for (uint32_t i = 0; i < count; ++i) {
-						Carrier * carrier = 0;
-						Request * carrier_request = 0;
+						Carrier * carrier = nullptr;
+						Request * carrier_request = nullptr;
 
 
 						if (uint32_t const carrier_serial = fr.Unsigned32())
@@ -148,7 +147,7 @@ throw (_wexception)
 									("carrier (%u): %s", carrier_serial, e.what());
 							}
 						else {
-							carrier = 0;
+							carrier = nullptr;
 							//log("No carrier in this slot");
 						}
 
@@ -165,7 +164,7 @@ throw (_wexception)
 							 		 wwWORKER))
 							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 						} else {
-							carrier_request = 0;
+							carrier_request = nullptr;
 							//log("No request in this slot");
 						}
 						uint8_t const carrier_type =
@@ -199,21 +198,20 @@ throw (_wexception)
 
 					mol.mark_object_as_loaded(road);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("road %u: %s"), serial, e.what());
+					throw game_data_error("road %u: %s", serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("roaddata: %s"), e.what());
+		throw game_data_error("roaddata: %s", e.what());
 	}
 }
 
 
 void Map_Roaddata_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-throw (_wexception)
 {
 	FileWrite fw;
 

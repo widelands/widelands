@@ -103,7 +103,7 @@ void ProgressWindow::set_background(const std::string & file_name) {
 				int32_t intbuf = g_fs->FindFiles
 						(("worlds/" + file_name + "/pics/"),
 						 ("loading_??.jpg"), &files);
-				intbuf = (intbuf == 0) ? -1 : time(0) % intbuf; // some randomness
+				intbuf = (intbuf == 0) ? -1 : time(nullptr) % intbuf; // some randomness
 				if ((intbuf < 0) | (intbuf > 99))
 					m_background = "pics/progress.png";
 				else {

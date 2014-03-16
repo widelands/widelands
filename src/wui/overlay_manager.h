@@ -58,41 +58,36 @@ class Image;
  */
 #define MAX_OVERLAYS_PER_NODE 6
 #define MAX_OVERLAYS_PER_TRIANGLE 3
-typedef int32_t (*Overlay_Callback_Function)
-	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 struct Overlay_Manager {
 	struct Job_Id { //  Boxing
 
 		/// Constant value for no job.
 		static Job_Id Null() {Job_Id result; result.id = 0; return result;}
 
-		operator bool() const throw () {return id;}
-		bool operator<(const Job_Id other) const throw () {return id < other.id;}
+		operator bool() const {return id;}
+		bool operator<(const Job_Id other) const {return id < other.id;}
 	private:
 		friend struct Overlay_Manager;
-		Job_Id operator++() throw () {++id; return *this;}
-		bool operator== (Job_Id const other) const throw () {
+		Job_Id operator++() {++id; return *this;}
+		bool operator== (Job_Id const other) const {
 			return id == other.id;
 		}
 		uint32_t id;
 	};
+
 	struct Overlay_Info {
 		const Image* pic;
 		Point hotspot;
 	};
 
+	typedef boost::function<int32_t(const Widelands::TCoords<Widelands::FCoords>& coordinates)>
+	CallbackFunction;
+
 	Overlay_Manager();
 
-	void reset();
-
 	//  register callback function (see data below for description)
-	void register_overlay_callback_function
-		(Overlay_Callback_Function const func,
-		 void                    * const data,
-		 int32_t                   const iparam1 = 0)
-	{
-		m_callback = func; m_callback_data = data; m_callback_data_i = iparam1;
-	}
+	void register_overlay_callback_function(CallbackFunction function);
+	void remove_overlay_callback_function();
 
 	/// Get a job id that is hopefully unused. This function is guaranteed to
 	/// never return Job_Id::Null(). All other values are valid and may be
@@ -214,10 +209,7 @@ private:
 	bool m_showbuildhelp;
 
 	// this callback is used to define we're overlays are set and were not
-	Overlay_Callback_Function m_callback;
-	// since we only care for map stuff, not for player stuff or editor issues
-	void * m_callback_data;
-	int32_t m_callback_data_i;
+	CallbackFunction m_callback;
 
 	//  No need to initialize m_current_job_id (see comment for get_a_job_id).
 	Job_Id m_current_job_id;

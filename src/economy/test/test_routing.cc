@@ -56,12 +56,12 @@ public:
 		return _neighbours[idx];
 	}
 
-	virtual Flag & base_flag() {return _flag;}
+	virtual Flag & base_flag() override {return _flag;}
 	void set_waitcost(int32_t const wc) {_waitcost = wc;}
 	int32_t get_waitcost() const {return _waitcost;}
-	const Coords & get_position() const {return _position;}
+	const Coords & get_position() const override {return _position;}
 
-	void get_neighbours(WareWorker type, RoutingNodeNeighbours &);
+	void get_neighbours(WareWorker type, RoutingNodeNeighbours &) override;
 
 	// test functionality
 	bool all_members_zeroed();
@@ -83,13 +83,13 @@ void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours &
 bool TestingRoutingNode::all_members_zeroed() {
 	bool integers_zero =
 		!mpf_cycle &&  !mpf_realcost && !mpf_estimate;
-	bool pointers_zero = (mpf_backlink == 0);
+	bool pointers_zero = (mpf_backlink == nullptr);
 
 	return pointers_zero && integers_zero;
 }
 
 class TestingTransportCostCalculator : public ITransportCostCalculator {
-	int32_t calc_cost_estimate(Coords c1, Coords c2) const {
+	int32_t calc_cost_estimate(Coords c1, Coords c2) const override {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
 		double xd = (c1.x - c2.x);
@@ -101,10 +101,10 @@ class TestingRoute : public IRoute {
 public:
 	typedef std::vector<RoutingNode *> Nodes;
 
-	void init(int32_t) {
+	void init(int32_t) override {
 		nodes.clear();
 	}
-	void insert_as_first(RoutingNode * node) {
+	void insert_as_first(RoutingNode * node) override {
 		nodes.insert(nodes.begin(), node);
 	}
 

@@ -37,7 +37,7 @@ struct RGBColor : public SDL_Color {
 		SDL_GetRGB(clr, fmt, &r, &g, &b);
 	}
 
-	bool operator== (const RGBColor & other) const throw () {
+	bool operator== (const RGBColor & other) const {
 		return r == other.r and g == other.g and b == other.b;
 	}
 };

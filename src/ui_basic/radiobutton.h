@@ -41,7 +41,7 @@ struct Radiobutton : public Statebox {
 	Radiobutton * next_button() {return m_nextbtn;}
 
 private:
-	void clicked();
+	void clicked() override;
 
 	Radiobutton * m_nextbtn;
 	Radiogroup  & m_group;
@@ -65,7 +65,7 @@ struct Radiogroup {
 	int32_t add_button
 		(Panel * parent, Point, const Image* pic, const std::string& tooltip = "", Radiobutton ** = nullptr);
 
-	int32_t get_state() const throw () {return m_state;}
+	int32_t get_state() const {return m_state;}
 	void set_state(int32_t state);
 	void set_enabled(bool);
 	Radiobutton * get_first_button() {return m_buttons;}

@@ -49,7 +49,7 @@ template <typename Area_type = Area<> > struct MapRegion {
 	/// the same location may be reached several times during an iteration,
 	/// while advance keeps returning true. When finally advance returns false,
 	/// it means that the iteration is done.
-	bool advance(const Map & map) throw () {
+	bool advance(const Map & map) {
 		if (--m_remaining_in_row)
 			map.get_rn(m_area, &m_area);
 		else if (m_area.radius < --m_remaining_rows) {

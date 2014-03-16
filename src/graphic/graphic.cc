@@ -80,17 +80,17 @@ Graphic::Graphic()
 	fr.fastOpen(*g_fs, "pics/wl-ico-32.png");
 #endif
 	SDL_Surface * s = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-	SDL_WM_SetIcon(s, 0);
+	SDL_WM_SetIcon(s, nullptr);
 	SDL_FreeSurface(s);
 }
 
-void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, bool opengl) {
+void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	cleanup();
 
 	// Set video mode using SDL. First collect the flags
 	int32_t flags = 0;
 	g_opengl = false;
-	SDL_Surface * sdlsurface = 0;
+	SDL_Surface * sdlsurface = nullptr;
 
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
@@ -103,16 +103,16 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 		log("Graphics: Trying FULLSCREEN\n");
 	}
 
-	log("Graphics: Try to set Videomode %ux%u %uBit\n", w, h, bpp);
+	log("Graphics: Try to set Videomode %ux%u 32 Bit\n", w, h);
 	// Here we actually set the video mode
-	sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+	sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
 
 	// If we tried opengl and it was not successful try without opengl
 	if (!sdlsurface and opengl)
 	{
 		log("Graphics: Could not set videomode: %s, trying without opengl\n", SDL_GetError());
 		flags &= ~SDL_OPENGL;
-		sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+		sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
 	}
 
 	if (!sdlsurface)
@@ -153,9 +153,9 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 
 		extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 
-		if (strstr(extensions, "GL_ARB_framebuffer_object") != 0) {
+		if (strstr(extensions, "GL_ARB_framebuffer_object") != nullptr) {
 			use_arb = true;
-		} else if (strstr(extensions, "GL_EXT_framebuffer_object") != 0) {
+		} else if (strstr(extensions, "GL_EXT_framebuffer_object") != nullptr) {
 			use_arb = false;
 		} else {
 			log
@@ -214,15 +214,15 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 		// extensions will be valid if we ever succeeded in runnning glewInit.
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
-			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);
+			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == nullptr);
 		log("Graphics: OpenGL: Textures ");
 		log
 			(m_caps.gl.tex_power_of_two?"must have a size power of two\n":
 			 "may have any size\n");
 
 		m_caps.gl.multitexture =
-			 ((strstr(extensions, "GL_ARB_multitexture") != 0) and
-			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0));
+			 ((strstr(extensions, "GL_ARB_multitexture") != nullptr) and
+			  (strstr(extensions, "GL_ARB_texture_env_combine") != nullptr));
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
@@ -355,11 +355,6 @@ int32_t Graphic::get_yres()
 	return screen_->height();
 }
 
-int32_t Graphic::get_bpp()
-{
-	return m_sdl_screen->format->BitsPerPixel;
-}
-
 bool Graphic::is_fullscreen()
 {
 	return m_sdl_screen->flags & SDL_FULLSCREEN;
@@ -464,14 +459,14 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 	// Save a png
 	png_structp png_ptr =
 		png_create_write_struct
-			(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(0), 0, 0);
+			(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
 
 	if (!png_ptr)
 		throw wexception("Graphic::save_png: could not create png struct");
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 	if (!info_ptr) {
-		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(0));
+		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(nullptr));
 		throw wexception("Graphic::save_png: could not create png info struct");
 	}
 
@@ -628,7 +623,7 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 	if (id < m_maptextures.size())
 		return m_maptextures[id];
 	else
-		return 0;
+		return nullptr;
 }
 
 
@@ -654,4 +649,3 @@ Surface& Graphic::get_road_texture(int32_t roadtex)
 	return
 		roadtex == Widelands::Road_Normal ? *pic_road_normal_.get() : *pic_road_busy_.get();
 }
-

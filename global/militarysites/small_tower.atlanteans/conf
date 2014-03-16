@@ -5,6 +5,12 @@ vision_range=13
 max_soldiers=3
 buildable=no
 prefer_heroes=false
+occupied_string=
+aggressor_string=_Your Small Tower discovered an aggressor.
+attack_string=_Your Small Tower is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the Small Tower
+defeated_you_string=_Your soldiers defeated the enemy at the Small Tower
+
 
 [idle]
 pics=../../../tribes/atlanteans/small_tower/small_tower_i_??.png

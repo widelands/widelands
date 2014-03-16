@@ -119,11 +119,11 @@ public:
 		set_size(w, h);
 	}
 protected:
-	std::string info_for_ware(Widelands::Ware_Index const /* ware */) {
+	std::string info_for_ware(Widelands::Ware_Index const /* ware */) override {
 		return "";
 	}
 
-	RGBColor info_color_for_ware(Widelands::Ware_Index const ware)
+	RGBColor info_color_for_ware(Widelands::Ware_Index const ware) override
 	{
 		size_t index = static_cast<size_t>(ware);
 

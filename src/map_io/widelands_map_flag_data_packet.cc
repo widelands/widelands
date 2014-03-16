@@ -21,6 +21,8 @@
 
 #include <map>
 
+#include <boost/format.hpp>
+
 #include "economy/flag.h"
 #include "logic/game.h"
 #include "logic/map.h"
@@ -41,7 +43,6 @@ void Map_Flag_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &       mol)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -63,7 +64,7 @@ throw (_wexception)
 					try {
 						if (fc.field->get_owned_by() != owner)
 							throw game_data_error
-								(_("the node is owned by player %u"),
+								("the node is owned by player %u",
 								 fc.field->get_owned_by());
 
 						for (Direction dir = 6; dir; --dir) {
@@ -77,7 +78,7 @@ throw (_wexception)
 							//  yet.
 							if (n.field->get_owned_by() != owner)
 								throw game_data_error
-									(_("is owned by player %u"),
+									("is owned by player %u",
 									 n.field->get_owned_by());
 
 							//  Check that there is not already a flag on a neighbour
@@ -86,10 +87,10 @@ throw (_wexception)
 							if (n.field < fc.field)
 								if (upcast(Flag const, nf, n.field->get_immovable()))
 									throw game_data_error
-										(_("has a flag (%u)"), nf->serial());
+										("has a flag (%u)", nf->serial());
 							} catch (const _wexception & e) {
 								throw game_data_error
-									(_("neighbour node (%i, %i): %s"),
+									("neighbour node (%i, %i): %s",
 									 n.x, n.y, e.what());
 							}
 						}
@@ -115,16 +116,15 @@ throw (_wexception)
 				}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("flags: %s"), e.what());
+		throw game_data_error("flags: %s", e.what());
 	}
 }
 
 
 void Map_Flag_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-throw (_wexception)
 {
 	FileWrite fw;
 

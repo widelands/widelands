@@ -63,7 +63,7 @@ private:
 	void player_tribe_clicked       (uint8_t);
 	void set_starting_pos_clicked   (uint8_t);
 	void update();
-	void think();
+	void think() override;
 	void make_infrastructure_clicked(uint8_t);
 };
 

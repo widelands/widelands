@@ -40,12 +40,12 @@ public:
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	// Implements Map_Object.
-	virtual int32_t get_type() const throw () {return BATTLE;}
-	virtual char const * type_name() const throw () {return "battle";}
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
-	virtual bool has_new_save_support() {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual int32_t get_type() const override {return BATTLE;}
+	virtual char const * type_name() const override {return "battle";}
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
+	virtual bool has_new_save_support() override {return true;}
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 
@@ -60,8 +60,8 @@ public:
 	Soldier * second() {return m_second;}
 
 	// Returns the other soldier involved in this battle. CHECKs that the given
-	// soldier is participating in this battle and that the opponent is not
-	// nullptr.
+	// soldier is participating in this battle. Can return nullptr, but I have
+	// no idea what that means.
 	Soldier * opponent(Soldier &);
 
 	// Called by the battling soldiers once they've met on a common node and are
@@ -71,7 +71,7 @@ public:
 private:
 	struct Loader : public Map_Object::Loader {
 		virtual void load(FileRead &, uint8_t version);
-		virtual void load_pointers();
+		virtual void load_pointers() override;
 
 		Serial m_first;
 		Serial m_second;

@@ -28,10 +28,61 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "libintl.h"
 #include "profile/profile.h"
 #include "save_handler.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+
+namespace  {
+
+struct LanguageEntry {
+	LanguageEntry(const std::string& init_abbreviation, const std::string& init_descname) :
+		abbreviation(init_abbreviation),
+		descname(init_descname) {}
+
+	bool operator<(const LanguageEntry& other) const {
+		return descname < other.descname;
+	}
+
+	std::string abbreviation;
+	std::string descname;
+};
+
+void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
+
+	filenameset_t files;
+	Section* s = &g_options.pull_section("global");
+	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
+	Profile ln("txts/languages");
+	s = &ln.pull_section("languages");
+	bool own_selected = "" == language || "en" == language;
+
+	// Add translation directories to the list
+	std::vector<LanguageEntry> entries;
+	for (const std::string& filename : files) {
+		char const* const path = filename.c_str();
+		if (!strcmp(FileSystem::FS_Filename(path), ".") ||
+		    !strcmp(FileSystem::FS_Filename(path), "..") || !g_fs->IsDirectory(path)) {
+			continue;
+		}
+
+		char const* const abbreviation = FileSystem::FS_Filename(path);
+		entries.emplace_back(abbreviation, s->get_string(abbreviation, abbreviation));
+		own_selected |= abbreviation == language;
+	}
+	// Add currently used language manually
+	if (!own_selected) {
+		entries.emplace_back(language, s->get_string(language.c_str(), language.c_str()));
+	}
+	std::sort(entries.begin(), entries.end());
+
+	for (const LanguageEntry& entry : entries) {
+		list->add(entry.descname.c_str(), entry.abbreviation, nullptr, entry.abbreviation == language);
+	}
+}
+
+}  // namespace
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(Options_Ctrl::Options_Struct opt)
@@ -75,7 +126,9 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_sb_remove_replays
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
-		 opt.remove_replays, 0, 365, _("days"),
+		 /** TRANSLATORS: Options: Remove Replays older than: */
+		 /** TRANSLATORS: This will have a number added in front of it */
+		 opt.remove_replays, 0, 365, ngettext("day", "days", m_vbutw),
 		 g_gr->images().get("pics/but1.png"), true),
 
 // Title
@@ -151,7 +204,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_auto_roadbuild_mode
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
-		 _("Start roadbuilding after placing flag"), UI::Align_VCenter),
+		 _("Start building road after placing a flag"), UI::Align_VCenter),
 
 	m_show_workarea_preview
 		(this, Point(get_w() * 19 / 200, get_h() * 6767 / 10000)),
@@ -195,8 +248,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_apply.set_font(font_small());
 	m_cancel.set_font(font_small());
 
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_autosave     .add_replacement(0, _("Off"));
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(0, _("Never"));
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(1, _("1 day"));
 
 	m_sb_maxfps       .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
@@ -237,7 +293,6 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	// take a copy to not change real video info structure
 	SDL_PixelFormat fmt = *SDL_GetVideoInfo()->vfmt;
-
 	fmt.BitsPerPixel = 32;
 	for
 		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
@@ -247,7 +302,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		const SDL_Rect & mode = **modes;
 		if (800 <= mode.w and 600 <= mode.h)
 		{
-			const Resolution this_res = {mode.w, mode.h, fmt.BitsPerPixel};
+			const ScreenResolution this_res = {mode.w, mode.h};
 			if
 				(m_resolutions.empty()
 				 || this_res.xres != m_resolutions.rbegin()->xres
@@ -261,25 +316,23 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
-		sprintf
-			(buf, _("%ix%i %i bit"), m_resolutions[i].xres,
-			 m_resolutions[i].yres, m_resolutions[i].depth);
+		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		sprintf(buf, _("%1$i x %2$i"), m_resolutions[i].xres, m_resolutions[i].yres);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
-			m_resolutions[i].yres  == opt.yres and
-			m_resolutions[i].depth == opt.depth;
+			m_resolutions[i].yres  == opt.yres;
 		did_select_a_res |= selected;
-		m_reslist.add(buf, 0, nullptr, selected);
+		m_reslist.add(buf, nullptr, nullptr, selected);
 	}
 	if (not did_select_a_res) {
 		char buf[32];
-		sprintf(buf, "%ix%i %i bit", opt.xres, opt.yres, opt.depth);
-		m_reslist.add(buf, 0, nullptr, true);
+		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		sprintf(buf, "%1$i x %2$i", opt.xres, opt.yres);
+		m_reslist.add(buf, nullptr, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
 		m_resolutions[entry].xres  = opt.xres;
 		m_resolutions[entry].yres  = opt.yres;
-		m_resolutions[entry].depth = opt.depth;
 	}
 
 	// Fill language list
@@ -291,38 +344,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		("English", "en",
 		 nullptr, "en" == opt.language);
 
-	filenameset_t files;
-	Section * s = &g_options.pull_section("global");
-	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
-	Profile ln("txts/languages");
-	s = &ln.pull_section("languages");
-	bool own_selected = "" == opt.language || "en" == opt.language;
-
-	// Add translation directories to the list
-	for
-		(filenameset_t::iterator pname = files.begin();
-		 pname != files.end();
-		 ++pname)
-	{
-		char const * const path = pname->c_str();
-
-		if
-			(!strcmp(FileSystem::FS_Filename(path), ".") ||
-			 !strcmp(FileSystem::FS_Filename(path), "..") ||
-			 !g_fs->IsDirectory(path))
-			continue;
-
-		char const * const abbrev = FileSystem::FS_Filename(path);
-		m_language_list.add
-			(s->get_string(abbrev, abbrev), abbrev,
-			 nullptr, abbrev == opt.language);
-		own_selected |= abbrev == opt.language;
-	}
-	// Add currently used language manually
-	if (!own_selected)
-		m_language_list.add
-			(s->get_string(opt.language.c_str(), opt.language.c_str()),
-			 opt.language, nullptr, true);
+	add_languages_to_list(&m_language_list, opt.language);
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
@@ -358,7 +380,6 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	// Write all data from UI elements
 	os.xres                  = m_resolutions[res_index].xres;
 	os.yres                  = m_resolutions[res_index].yres;
-	os.depth                 = m_resolutions[res_index].depth;
 	os.inputgrab             = m_inputgrab.get_state();
 	os.fullscreen            = m_fullscreen.get_state();
 	os.single_watchwin       = m_single_watchwin.get_state();
@@ -405,19 +426,14 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
-	m_sb_speed
-		(this,
-		 get_w() * 18 / 25, get_h() * 63 / 100, get_w() / 4, m_vbutw,
-		 opt.speed_of_new_game / 1000, 0, 100, _("x"),
-		 g_gr->images().get("pics/but1.png")),
 	m_sb_dis_panel
 		(this,
-		 get_w() * 18 / 25, get_h() * 6768 / 10000, get_w() / 4, m_vbutw,
+		 get_w() * 18 / 25, get_h() * 63 / 100, get_w() / 4, m_vbutw,
 		 opt.panel_snap_distance, 0, 100, _("px."),
 		 g_gr->images().get("pics/but1.png")),
 	m_sb_dis_border
 		(this,
-		 get_w() * 18 / 25, get_h() * 7235 / 10000, get_w() / 4, m_vbutw,
+		 get_w() * 18 / 25, get_h() * 6768 / 10000, get_w() / 4, m_vbutw,
 		 opt.border_snap_distance, 0, 100, _("px."),
 		 g_gr->images().get("pics/but1.png")),
 
@@ -453,36 +469,31 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		 get_w() * 1313 / 10000, get_h() * 3 / 5,
 		 _("Do not zip widelands data files (maps, replays and savegames)."),
 		 UI::Align_VCenter),
-	m_label_speed
-		(this,
-		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
-		 _("Speed of a new game:"), UI::Align_VCenter),
 	m_label_snap_dis_panel
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 6933 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
 		 _("Distance for windows to snap to other panels:"), UI::Align_VCenter),
 	m_label_snap_dis_border
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 37 / 50,
+		 get_w() * 1313 / 10000, get_h() * 6933 / 10000,
 		 _("Distance for windows to snap to borders:"), UI::Align_VCenter),
 
-	m_remove_syncstreams (this, Point(get_w() * 19 / 200, get_h() * 7715 / 10000)),
+	m_remove_syncstreams (this, Point(get_w() * 19 / 200, get_h() * 7220 / 10000)),
 	m_label_remove_syncstreams
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 7865 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 37 / 50,
 		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
 
-	m_opengl (this, Point(get_w() * 19 / 200, get_h() * 8180 / 10000)),
+	m_opengl (this, Point(get_w() * 19 / 200, get_h() * 7715 / 10000)),
 	m_label_opengl
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 7865 / 10000,
 		 _("OpenGL rendering"), UI::Align_VCenter),
-	m_transparent_chat (this, Point(get_w() * 19 / 200, get_h() * 8645 / 10000)),
+	m_transparent_chat (this, Point(get_w() * 19 / 200, get_h() * 8180 / 10000)),
 	m_label_transparent_chat
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 8795 / 10000,
-		 _("Show in game chat with transparent background"), UI::Align_VCenter),
-
+		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,
+		 _("Show in-game chat with transparent background"), UI::Align_VCenter),
 	os(opt)
 {
 	m_cancel.sigclicked.connect
@@ -504,7 +515,6 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_message_sound        .set_state(opt.message_sound);
 	m_label_nozip          .set_textstyle(ts_small());
 	m_nozip                .set_state(opt.nozip);
-	m_label_speed          .set_textstyle(ts_small());
 	m_label_snap_dis_border.set_textstyle(ts_small());
 	m_label_snap_dis_panel .set_textstyle(ts_small());
 	m_label_remove_syncstreams.set_textstyle(ts_small());
@@ -513,20 +523,16 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_opengl               .set_state(opt.opengl);
 	m_label_transparent_chat.set_textstyle(ts_small());
 	m_transparent_chat     .set_state(opt.transparent_chat);
-	m_sb_speed             .set_textstyle(ts_small());
 	m_sb_dis_border        .set_textstyle(ts_small());
 	m_sb_dis_panel         .set_textstyle(ts_small());
-
-	m_sb_speed.add_replacement(0, _("Pause"));
 
 	m_label_ui_font.set_textstyle(ts_small());
 	m_ui_font_list .set_font(ui_fn(), fs_small());
 
 	// Fill the font list.
 	{ // For use of string ui_font take a look at fullscreen_menu_base.cc
-		bool did_select_a_font = false;
 		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
-		did_select_a_font = cmpbool;
+		bool did_select_a_font = cmpbool;
 		m_ui_font_list.add
 			(_("DejaVuSerif (Default)"), "serif", nullptr, cmpbool);
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());
@@ -591,7 +597,6 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
 	os.ui_font              = m_ui_font_list.get_selected();
-	os.speed_of_new_game    = m_sb_speed.getValue() * 1000;
 	os.panel_snap_distance  = m_sb_dis_panel.getValue();
 	os.border_snap_distance = m_sb_dis_border.getValue();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
@@ -632,8 +637,6 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("xres",                XRES);
 	opt.yres                = m_opt_section.get_int
 		("yres",                YRES);
-	opt.depth               = m_opt_section.get_int
-		("depth",                 32);
 	opt.inputgrab           = m_opt_section.get_bool
 		("inputgrab",          false);
 	opt.fullscreen          = m_opt_section.get_bool
@@ -668,8 +671,6 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("nozip",            false);
 	opt.ui_font               =  m_opt_section.get_string
 		("ui_font",     "serif");
-	opt.speed_of_new_game     =  m_opt_section.get_int
-		("speed_of_new_game", 1000);
 	opt.border_snap_distance  =  m_opt_section.get_int
 		("border_snap_distance", 0);
 	opt.panel_snap_distance   =  m_opt_section.get_int
@@ -698,7 +699,6 @@ void Options_Ctrl::save_options() {
 		("snap_windows_only_when_overlapping",
 		 opt.snap_windows_only_when_overlapping);
 	m_opt_section.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
-	m_opt_section.set_int ("depth",                 opt.depth);
 	m_opt_section.set_bool("disable_music",        !opt.music);
 	m_opt_section.set_bool("disable_fx",           !opt.fx);
 	m_opt_section.set_string("language",            opt.language);
@@ -708,7 +708,6 @@ void Options_Ctrl::save_options() {
 	m_opt_section.set_bool("sound_at_message",      opt.message_sound);
 	m_opt_section.set_bool("nozip",                 opt.nozip);
 	m_opt_section.set_string("ui_font",             opt.ui_font);
-	m_opt_section.set_int("speed_of_new_game",      opt.speed_of_new_game);
 	m_opt_section.set_int("border_snap_distance",   opt.border_snap_distance);
 	m_opt_section.set_int("panel_snap_distance",    opt.panel_snap_distance);
 

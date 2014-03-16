@@ -134,7 +134,7 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 
 std::string Fullscreen_Menu_Editor_MapSelect::get_map()
 {
-	return m_list.has_selection() ? m_list.get_selected() : 0;
+	return m_list.has_selection() ? m_list.get_selected() : nullptr;
 }
 
 void Fullscreen_Menu_Editor_MapSelect::ok()
@@ -178,7 +178,7 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 		// get translated worldsname
 		std::string world(map.get_world_name());
 		std::string worldpath("worlds/" + world);
-		Profile prof((worldpath + "/conf").c_str(), 0, "world_" + world);
+		Profile prof((worldpath + "/conf").c_str(), nullptr, "world_" + world);
 		Section & global = prof.get_safe_section("world");
 		world = global.get_safe_string("name");
 
@@ -227,6 +227,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
 		std::string parent_string =
+				/** TRANSLATORS: Parent directory */
 				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_list.add
 			(parent_string.c_str(),

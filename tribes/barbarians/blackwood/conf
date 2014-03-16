@@ -1,11 +1,11 @@
-help=_This fire-hardened wood is as hard as iron and it is used for several buildings. It is produced out of trunks in the wood hardener.
+help=_This fire-hardened wood is as hard as iron and it is used for several buildings. It is produced out of logs in the wood hardener.
 
 
 default_target_quantity=40
 preciousness=10
 
 # This wood is black and shiny, like volcanic glass. These are planks,
-# not trunks any longer
+# not logs any longer
 
 [idle]
 pics=idle.png

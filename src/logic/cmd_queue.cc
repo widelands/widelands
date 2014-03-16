@@ -98,13 +98,6 @@ void Cmd_Queue::enqueue (Command * const cmd)
 	++ m_ncmds;
 }
 
-/**
- * Run all commands scheduled for the next interval milliseconds, and update the
- * internal time as well.
- * the game_time_var represents the current game time, which we update and with
- * which we must mess around (to run all queued cmd.s) and which we update (add
- * the interval)
- */
 int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
 	int32_t const final = game_time_var + interval;
 	int32_t cnt = 0;
@@ -185,12 +178,12 @@ void GameLogicCommand::Read
 			int32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
 				throw game_data_error
-					(_("duetime (%i) < gametime (%i)"), duetime(), gametime);
+					("duetime (%i) < gametime (%i)", duetime(), gametime);
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("game logic: %s"), e.what());
+		throw game_data_error("game logic: %s", e.what());
 	}
 }
 

@@ -67,9 +67,9 @@ public:
 	void set_column_title(uint8_t col, const std::string & title);
 
 	void clear();
-	void set_sort_column(uint8_t col) throw ();
-	uint8_t get_sort_colum() const throw ();
-	bool get_sort_descending() const throw ();
+	void set_sort_column(uint8_t col);
+	uint8_t get_sort_colum() const;
+	bool get_sort_descending() const;
 
 	void sort
 		(uint32_t Begin = 0,
@@ -78,19 +78,19 @@ public:
 
 	Entry_Record & add(void * const entry, const bool select_this = false);
 
-	uint32_t size() const throw ();
-	Entry operator[](uint32_t) const throw ();
-	static uint32_t no_selection_index() throw ();
-	bool has_selection() const throw ();
-	uint32_t selection_index() const throw ();
-	Entry_Record & get_record(uint32_t) const throw ();
+	uint32_t size() const;
+	Entry operator[](uint32_t) const;
+	static uint32_t no_selection_index();
+	bool has_selection() const;
+	uint32_t selection_index() const;
+	Entry_Record & get_record(uint32_t) const;
 	static Entry get(const Entry_Record &);
-	Entry_Record * find(Entry) const throw ();
+	Entry_Record * find(Entry) const;
 
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () {
+		char const * what() const throw () override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
@@ -98,9 +98,9 @@ public:
 	Entry get_selected() const;
 
 	///  Return the total height (text + spacing) occupied by a single line.
-	uint32_t get_lineheight() const throw ();
+	uint32_t get_lineheight() const;
 
-	uint32_t get_eff_w     () const throw ();
+	uint32_t get_eff_w     () const;
 
 	// Drawing and event handling
 	void draw(RenderTarget &);
@@ -119,14 +119,14 @@ public:
 		void set_string(uint8_t col, const std::string &);
 		const Image* get_picture(uint8_t col) const;
 		const std::string & get_string(uint8_t col) const;
-		void * entry() const throw () {return m_entry;}
+		void * entry() const {return m_entry;}
 		void set_color(const  RGBColor c) {
 			use_clr = true;
 			clr = c;
 		}
 
-		bool     use_color() const throw () {return use_clr;}
-		RGBColor get_color() const throw () {return clr;}
+		bool     use_color() const {return use_clr;}
+		RGBColor get_color() const {return clr;}
 
 		void set_checked(uint8_t col, bool checked);
 		void toggle     (uint8_t col);
@@ -177,8 +177,8 @@ public:
 		assert(col < m_columns.size());
 		m_sort_column = col;
 	}
-	uint8_t get_sort_colum() const throw () {return m_sort_column;}
-	bool  get_sort_descending() const throw () {return m_sort_descending;}
+	uint8_t get_sort_colum() const {return m_sort_column;}
+	bool  get_sort_descending() const {return m_sort_descending;}
 	void set_sort_descending(bool const descending) {
 		m_sort_descending = descending;
 	}
@@ -193,9 +193,9 @@ public:
 		 uint32_t End   = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
-	Entry_Record & add(void * entry = 0, bool select = false);
+	Entry_Record & add(void * entry = nullptr, bool select = false);
 
-	uint32_t size() const throw () {return m_entry_records.size();}
+	uint32_t size() const {return m_entry_records.size();}
 	void * operator[](uint32_t const i) const {
 		assert(i < m_entry_records.size());
 		return m_entry_records[i]->entry();
@@ -206,18 +206,18 @@ public:
 	bool has_selection() const {
 		return m_selection != no_selection_index();
 	}
-	uint32_t selection_index() const throw () {return m_selection;}
+	uint32_t selection_index() const {return m_selection;}
 	Entry_Record & get_record(uint32_t const n) const {
 		assert(n < m_entry_records.size());
 		return *m_entry_records[n];
 	}
 	static void * get(const Entry_Record & er) {return er.entry();}
-	Entry_Record * find(const void * entry) const throw ();
+	Entry_Record * find(const void * entry) const;
 
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () {
+		char const * what() const throw () override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
@@ -227,21 +227,21 @@ public:
 		assert(m_selection < m_entry_records.size());
 		return *m_entry_records.at(m_selection);
 	}
-	void remove_selected() throw (No_Selection) {
+	void remove_selected() {
 		if (m_selection == no_selection_index())
 			throw No_Selection();
 		remove(m_selection);
 	}
 	void * get_selected() const {return get_selected_record().entry();};
 
-	uint32_t get_lineheight() const throw () {return m_lineheight + 2;}
-	uint32_t get_eff_w     () const throw () {return get_w();}
+	uint32_t get_lineheight() const {return m_lineheight + 2;}
+	uint32_t get_eff_w     () const {return get_w();}
 
 	// Drawing and event handling
-	void draw(RenderTarget &);
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	virtual bool handle_key(bool down, SDL_keysym code);
+	void draw(RenderTarget &) override;
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	virtual bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
@@ -299,7 +299,7 @@ public:
 		return Base::add(const_cast<Entry *>(entry), select_this);
 	}
 
-	Entry const * operator[](uint32_t const i) const throw () {
+	Entry const * operator[](uint32_t const i) const {
 		return static_cast<Entry const *>(Base::operator[](i));
 	}
 
@@ -415,7 +415,7 @@ public:
 		return Base::add(reinterpret_cast<void *>(entry), select_this);
 	}
 
-	uintptr_t operator[](uint32_t const i) const throw () {
+	uintptr_t operator[](uint32_t const i) const {
 		return reinterpret_cast<uintptr_t>(Base::operator[](i));
 	}
 	static uintptr_t get(const Entry_Record & er) {

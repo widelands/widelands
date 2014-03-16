@@ -798,6 +798,3 @@ const Animation& AnimationManager::get_animation(uint32_t id) const
 
 	return *m_animations[id - 1];
 }
-
-
-

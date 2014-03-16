@@ -32,7 +32,7 @@ namespace Widelands {
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"mine",              &WorkerProgram::parse_mine},
 	{"breed",             &WorkerProgram::parse_breed},
-	{"createitem",        &WorkerProgram::parse_createitem},
+	{"createware",        &WorkerProgram::parse_createware},
 	{"setdescription",    &WorkerProgram::parse_plant},
 	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
 	{"findobject",        &WorkerProgram::parse_findobject},
@@ -50,7 +50,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"playFX",            &WorkerProgram::parse_playFX},
 	{"construct",         &WorkerProgram::parse_construct},
 
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 
@@ -68,7 +68,7 @@ void WorkerProgram::parse
 			char buf[32];
 
 			snprintf(buf, sizeof(buf), "%i", idx);
-			char const * const string = program_s.get_string(buf, 0);
+			char const * const string = program_s.get_string(buf, nullptr);
 			if (!string)
 				break;
 
@@ -102,22 +102,22 @@ void WorkerProgram::parse
 
 
 /**
- * createitem \<waretype\>
+ * createware \<waretype\>
  *
- * The worker will create and carry an item of the given type.
+ * The worker will create and carry a ware of the given type.
  *
  * iparam1 = ware index
  */
-void WorkerProgram::parse_createitem
+void WorkerProgram::parse_createware
 	(Worker_Descr                   * descr,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() != 2)
-		throw wexception("Usage: createitem <ware type>");
+		throw wexception("Usage: createware <ware type>");
 
-	act->function = &Worker::run_createitem;
+	act->function = &Worker::run_createware;
 	act->iparam1 = descr->tribe().safe_ware_index(cmd[1]).value();
 }
 
@@ -357,7 +357,7 @@ void WorkerProgram::parse_findspace
 				{"big",    FindNodeSize::sizeBig},
 				{"mine",   FindNodeSize::sizeMine},
 				{"port",   FindNodeSize::sizePort},
-				{0, 0}
+				{nullptr, 0}
 			};
 
 			int32_t index;
@@ -463,9 +463,9 @@ void WorkerProgram::parse_animation
 
 
 /**
- * Return home, drop any item we're carrying onto our building's flag.
+ * Return home, drop an ware we're carrying onto our building's flag.
  *
- * iparam1 = 0: don't drop item on flag, 1: do drop item on flag
+ * iparam1 = 0: don't drop ware on flag, 1: do drop ware on flag
  */
 void WorkerProgram::parse_return
 	(Worker_Descr                   *,
@@ -474,7 +474,7 @@ void WorkerProgram::parse_return
 	 const std::vector<std::string> &)
 {
 	act->function = &Worker::run_return;
-	act->iparam1 = 1; // drop any item on our owner's flag
+	act->iparam1 = 1; // drop a ware on our owner's flag
 }
 
 
@@ -659,7 +659,7 @@ void WorkerProgram::parse_playFX
 /**
  * construct
  *
- * Give the currently held item of the worker to the \ref objvar1 immovable
+ * Give the currently held ware of the worker to the \ref objvar1 immovable
  * for construction. This is used in ship building.
  */
 void WorkerProgram::parse_construct

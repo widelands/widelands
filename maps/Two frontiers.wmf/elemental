@@ -6,5 +6,5 @@ nr_players=3
 world=winterland
 name=_"Two Frontiers"
 author="ISCH"
-descr=_"A multiplayer-battle-map on a small circle-shaped island."
+descr=_"A multiplayer battle map on a small circle-shaped island."
 tags="official,ffa"

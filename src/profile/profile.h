@@ -36,7 +36,7 @@
 
 namespace Widelands {
 struct Building_Descr;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Immovable_Descr;
 };
 
@@ -104,7 +104,7 @@ struct Section {
 	bool has_val(char const * name) const;
 
 	Value * get_val     (char const * name);
-	Value * get_next_val(char const * name = 0);
+	Value * get_next_val(char const * name = nullptr);
 	uint32_t get_num_values() const {return m_values.size();}
 
 	char const * get_name() const;
@@ -129,7 +129,7 @@ struct Section {
 		 bool                     def = false);
 	const char *             get_string
 		(char             const * name,
-		 char             const * def = 0);
+		 char             const * def = nullptr);
 	Point                    get_Point
 		(char             const * name,
 		 Point                    def = Point (0, 0));
@@ -238,7 +238,7 @@ struct Profile : boost::noncopyable {
 	Profile(int32_t error_level = err_throw);
 	Profile
 		(char const * filename,
-		 char const * global_section = 0,
+		 char const * global_section = nullptr,
 		 int32_t      error_level    = err_throw);
 	Profile
 		(char const * filename,
@@ -251,7 +251,7 @@ struct Profile : boost::noncopyable {
 
 	void read
 		(const char * const filename,
-		 const char * const global_section = 0,
+		 const char * const global_section = nullptr,
 		 FileSystem & = *g_fs);
 	void write
 		(const char * const filename,
@@ -261,7 +261,7 @@ struct Profile : boost::noncopyable {
 	Section * get_section     (const std::string & name);
 	Section & get_safe_section(const std::string & name);
 	Section & pull_section    (char const * name);
-	Section * get_next_section(char const * name = 0);
+	Section * get_next_section(char const * name = nullptr);
 
 	/// If a section with the given name already exists, return a reference to
 	/// it. Otherwise create a new section with the given name and return a

@@ -43,7 +43,7 @@ void Cmd_Incorporate::Read
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
 		throw wexception("incorporate: %s", e.what());
 	}

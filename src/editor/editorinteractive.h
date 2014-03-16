@@ -46,7 +46,9 @@ class Editor_Tool;
 struct Editor_Interactive : public Interactive_Base {
 	friend struct Editor_Tool_Menu;
 
-	static void run_editor(const std::string & filename);
+	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
+	// map and run 'script_to_run' directly after all initialization is done.
+	static void run_editor(const std::string & filename, const std::string& script_to_run);
 
 private:
 	Editor_Interactive(Widelands::Editor_Game_Base &);
@@ -56,17 +58,17 @@ public:
 	void load(const std::string & filename);
 
 	// leaf functions from base class
-	void start();
-	void think();
+	void start() override;
+	void think() override;
 
 	void map_clicked(bool draw = false);
-	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
+	virtual void set_sel_pos(Widelands::Node_and_Triangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 
 	//  Handle UI elements.
-	bool handle_key(bool down, SDL_keysym);
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
 
 	struct Tools {
 		Tools()
@@ -81,7 +83,7 @@ public:
 			set_port_space(unset_port_space)
 
 		{}
-		Editor_Tool & current() const throw () {return *current_pointer;}
+		Editor_Tool & current() const {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
 		typedef Tool_Vector::size_type Index;
 		//Tool_Vector                     tools;
@@ -109,13 +111,13 @@ public:
 
 	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
 
-	Widelands::Player * get_player() const throw () {return 0;}
+	Widelands::Player * get_player() const override {return nullptr;}
 
 	// action functions
 	void exit();
 
 	//  reference functions
-	void   reference_player_tribe(Widelands::Player_Number, void const * const);
+	void   reference_player_tribe(Widelands::Player_Number, void const * const) override;
 	void unreference_player_tribe(Widelands::Player_Number, void const * const);
 	bool is_player_tribe_referenced(Widelands::Player_Number);
 	void set_need_save(bool const t) {m_need_save = t;}

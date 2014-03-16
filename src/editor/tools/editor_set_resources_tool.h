@@ -31,22 +31,22 @@ struct Editor_Set_Resources_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
 	int32_t handle_undo_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
-	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
+	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
 
-	char const * get_sel_impl() const {
+	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_set_resources.png";
 	}
 
-	uint8_t get_set_to() const       throw () {return m_set_to;}
-	void set_set_to(uint8_t const n) throw () {m_set_to = n;}
-	Widelands::Resource_Index get_cur_res() const throw () {return m_cur_res;}
-	void set_cur_res(Widelands::Resource_Index const res) throw ()
+	uint8_t get_set_to() const       {return m_set_to;}
+	void set_set_to(uint8_t const n) {m_set_to = n;}
+	Widelands::Resource_Index get_cur_res() const {return m_cur_res;}
+	void set_cur_res(Widelands::Resource_Index const res)
 	{m_cur_res = res;}
 
 private:

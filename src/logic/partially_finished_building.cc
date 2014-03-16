@@ -33,8 +33,8 @@ namespace Widelands {
 Partially_Finished_Building::Partially_Finished_Building
 	(const Building_Descr & gdescr) :
 Building         (gdescr),
-m_building       (0),
-m_builder_request(0),
+m_building       (nullptr),
+m_builder_request(nullptr),
 m_working        (false),
 m_work_steptime  (0),
 m_work_completed (0),
@@ -55,7 +55,7 @@ void Partially_Finished_Building::set_building(const Building_Descr & building_d
 void Partially_Finished_Building::cleanup(Editor_Game_Base & egbase) {
 	if (m_builder_request) {
 		delete m_builder_request;
-		m_builder_request = 0;
+		m_builder_request = nullptr;
 	}
 
 	container_iterate_const(Wares, m_wares, i) {
@@ -120,7 +120,7 @@ void Partially_Finished_Building::request_builder(Game &) {
 Override: construction size is always the same size as the building
 ===============
 */
-int32_t Partially_Finished_Building::get_size() const throw () {
+int32_t Partially_Finished_Building::get_size() const {
 	return m_building->get_size();
 }
 
@@ -130,7 +130,7 @@ Override: Even though construction sites cannot be built themselves, you can
 bulldoze them.
 ===============
 */
-uint32_t Partially_Finished_Building::get_playercaps() const throw () {
+uint32_t Partially_Finished_Building::get_playercaps() const {
 	uint32_t caps = Building::get_playercaps();
 
 	caps |= PCap_Bulldoze;
@@ -206,7 +206,7 @@ void Partially_Finished_Building::request_builder_callback
 	b.m_builder = w;
 
 	delete &rq;
-	b.m_builder_request = 0;
+	b.m_builder_request = nullptr;
 
 	w->start_task_buildingwork(game);
 	b.set_seeing(true);

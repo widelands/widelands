@@ -130,7 +130,7 @@ void Editor_Tool_Menu::changed_to() {
 		break;
 	case 6:
 		current_tool_pointer     = &parent.tools.set_port_space;
-		current_registry_pointer = 0; // no need for a window
+		current_registry_pointer = nullptr; // no need for a window
 		break;
 	default:
 		assert(false);
@@ -141,7 +141,8 @@ void Editor_Tool_Menu::changed_to() {
 	if (current_tool_pointer == &parent.tools.set_port_space) {
 		// Set correct overlay
 		Widelands::Map & map = parent.egbase().map();
-		map.overlay_manager().register_overlay_callback_function(&Editor_Tool_Set_Port_Space_Callback, &map);
+		map.overlay_manager().register_overlay_callback_function(
+				boost::bind(&Editor_Tool_Set_Port_Space_Callback, _1, boost::ref(map)));
 		map.recalc_whole_map();
 		update();
 	}

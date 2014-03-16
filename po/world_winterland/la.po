@@ -7,75 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: 2010-06-06 21:18+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:48+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:38+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr "Populus"
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Concilium Widelands ludum fingens"
 
-#: ../../worlds/winterland/conf:46
-msgid "Aspen medium"
-msgstr "Populus mediocris"
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr "Mundus niveus"
 
-#: ../../worlds/winterland/conf:47
-msgid "Aspen small"
-msgstr "Populus parva"
-
-#: ../../worlds/winterland/conf:48
-msgid "Aspen tiny"
-msgstr "Populus parvula"
-
-#: ../../worlds/winterland/conf:79
-msgid "Badger"
-msgstr "Meles"
-
-#: ../../worlds/winterland/terrainconf:80
-msgid "Beach"
-msgstr ""
-
-#: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr "Fagus"
-
-#: ../../worlds/winterland/conf:66
-msgid "Beech medium"
-msgstr "Fagus mediocris"
-
-#: ../../worlds/winterland/conf:67
-msgid "Beech small"
-msgstr "Fagus parva"
-
-#: ../../worlds/winterland/conf:68
-msgid "Beech tiny"
-msgstr "Fagus parvula"
-
-#: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "Betula"
-
-#: ../../worlds/winterland/conf:62
-msgid "Birch medium"
-msgstr "Betula mediocris"
-
-#: ../../worlds/winterland/conf:63
-msgid "Birch small"
-msgstr "Betula parva"
-
-#: ../../worlds/winterland/conf:64
-msgid "Birch tiny"
-msgstr "Betula parvula"
-
-#: ../../worlds/winterland/conf:80
-msgid "Bunny"
-msgstr "Cuniculus"
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr "Haec est lata gelidaque terra nivea septentrionalium incolarum."
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -85,10 +39,6 @@ msgstr "Cuniculus"
 msgid "Bush"
 msgstr "Frutex"
 
-#: ../../worlds/winterland/resconf:4
-msgid "Coal"
-msgstr "Carbo"
-
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
@@ -96,136 +46,16 @@ msgstr "Carbo"
 msgid "Dead Tree"
 msgstr "Arbor mortua"
 
-#: ../../worlds/winterland/conf:81
-msgid "Deer"
-msgstr "Cervus"
-
-#: ../../worlds/winterland/conf:82
-msgid "Duck"
-msgstr "Anas"
-
-#: ../../worlds/winterland/conf:83
-msgid "Elk"
-msgstr "Alces"
-
-#: ../../worlds/winterland/resconf:41
-msgid "Fish"
-msgstr "Piscis"
-
-#: ../../worlds/winterland/conf:84
-msgid "Fox"
-msgstr "Vulpes"
-
-#: ../../worlds/winterland/resconf:12
-msgid "Gold"
-msgstr "Aurum"
-
-#: ../../worlds/winterland/resconf:28
-msgid "Granite"
-msgstr "Granitum"
-
 #: ../../worlds/winterland/conf:16
 #: ../../worlds/winterland/conf:17
 #: ../../worlds/winterland/conf:18
 msgid "Grass"
 msgstr "Gramen"
 
-#: ../../worlds/winterland/terrainconf:31
-msgid "Ice"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:19
-msgid "Ice flows"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:25
-msgid "Ice flows2"
-msgstr ""
-
-#: ../../worlds/winterland/resconf:20
-msgid "Iron"
-msgstr "Ferrum"
-
-#: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr "Larix"
-
-#: ../../worlds/winterland/conf:70
-msgid "Larch medium"
-msgstr "Larix mediocris"
-
-#: ../../worlds/winterland/conf:71
-msgid "Larch small"
-msgstr "Larix parva"
-
-#: ../../worlds/winterland/conf:72
-msgid "Larch tiny"
-msgstr "Larix parvula"
-
-#: ../../worlds/winterland/terrainconf:91
-msgid "Lava"
-msgstr ""
-
-#: ../../worlds/winterland/conf:85
-msgid "Lynx"
-msgstr "Lynx"
-
-#: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "Acer"
-
-#: ../../worlds/winterland/conf:58
-msgid "Maple medium"
-msgstr "Acer mediocre"
-
-#: ../../worlds/winterland/conf:59
-msgid "Maple small"
-msgstr "Acer parvum"
-
-#: ../../worlds/winterland/conf:60
-msgid "Maple tiny"
-msgstr "Acer parvulum"
-
-#: ../../worlds/winterland/conf:86
-msgid "Marten"
-msgstr "Martes"
-
-#: ../../worlds/winterland/terrainconf:13
-msgid "Mountain1"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:62
-msgid "Mountain2"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:68
-msgid "Mountain3"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:74
-msgid "Mountain4"
-msgstr ""
-
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid "Mushroom"
 msgstr "Fungus"
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "Quercus"
-
-#: ../../worlds/winterland/conf:50
-msgid "Oak medium"
-msgstr "Quercus mediocris"
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak small"
-msgstr "Quercus parva"
-
-#: ../../worlds/winterland/conf:52
-msgid "Oak tiny"
-msgstr "Quercus parvula"
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -236,59 +66,15 @@ msgstr "Quercus parvula"
 msgid "Pebble"
 msgstr "Silex"
 
-#: ../../worlds/winterland/conf:87
-msgid "Reindeer"
-msgstr "Rangifer"
-
-#: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr "Sorbus"
-
-#: ../../worlds/winterland/conf:74
-msgid "Rowan medium"
-msgstr "Sorbus mediocris"
-
-#: ../../worlds/winterland/conf:75
-msgid "Rowan small"
-msgstr "Sorbus parva"
-
-#: ../../worlds/winterland/conf:76
-msgid "Rowan tiny"
-msgstr "Sorbus parvula"
-
-#: ../../worlds/winterland/conf:88
-msgid "Sheep"
-msgstr "Ovis"
-
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
 msgid "Skeleton"
 msgstr "Ossa"
 
-#: ../../worlds/winterland/terrainconf:96
-msgid "Snow"
-msgstr ""
-
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "Vir niveus"
-
-#: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr "Picea"
-
-#: ../../worlds/winterland/conf:54
-msgid "Spruce medium"
-msgstr "Picea mediocris"
-
-#: ../../worlds/winterland/conf:55
-msgid "Spruce small"
-msgstr "Picea parva"
-
-#: ../../worlds/winterland/conf:56
-msgid "Spruce tiny"
-msgstr "Picea parvula"
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
@@ -309,48 +95,177 @@ msgstr "Obeliscus"
 msgid "Stones"
 msgstr "Lapis"
 
-#: ../../worlds/winterland/terrainconf:85
-msgid "Taiga"
-msgstr ""
-
-#: ../../worlds/winterland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Concilium Widelands ludum fingens"
-
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen "
-"dwell."
-msgstr "Haec est lata gelidaque terra nivea septentrionalium incolarum."
-
 #: ../../worlds/winterland/conf:44
 msgid "Track"
 msgstr "Vestigia"
 
-#: ../../worlds/winterland/terrainconf:7
-msgid "Tundra"
+#: ../../worlds/winterland/conf:45
+msgid "Aspen"
+msgstr "Populus"
+
+#: ../../worlds/winterland/conf:46
+msgid "Aspen (medium)"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:44
-msgid "Tundra taiga"
+#: ../../worlds/winterland/conf:47
+msgid "Aspen (small)"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:50
-msgid "Tundra2"
+#: ../../worlds/winterland/conf:48
+msgid "Aspen (tiny)"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:56
-msgid "Tundra3"
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "Quercus"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak (medium)"
 msgstr ""
 
-#: ../../worlds/winterland/resconf:36
-#: ../../worlds/winterland/terrainconf:37
-msgid "Water"
-msgstr "Aqua"
+#: ../../worlds/winterland/conf:51
+msgid "Oak (small)"
+msgstr ""
 
-#: ../../worlds/winterland/conf:3
-msgid "Winterland"
-msgstr "Mundus niveus"
+#: ../../worlds/winterland/conf:52
+msgid "Oak (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr "Picea"
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "Acer"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "Betula"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:65
+msgid "Beech"
+msgstr "Fagus"
+
+#: ../../worlds/winterland/conf:66
+msgid "Beech (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:67
+msgid "Beech (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:68
+msgid "Beech (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:69
+msgid "Larch"
+msgstr "Larix"
+
+#: ../../worlds/winterland/conf:70
+msgid "Larch (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:71
+msgid "Larch (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:72
+msgid "Larch (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:73
+msgid "Rowan"
+msgstr "Sorbus"
+
+#: ../../worlds/winterland/conf:74
+msgid "Rowan (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:75
+msgid "Rowan (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:76
+msgid "Rowan (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Meles"
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Cuniculus"
+
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Cervus"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "Anas"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Alces"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Vulpes"
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Lynx"
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Martes"
+
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Rangifer"
+
+#: ../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "Ovis"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
@@ -359,3 +274,88 @@ msgstr "Bos indomitus"
 #: ../../worlds/winterland/conf:90
 msgid "Wolf"
 msgstr "Lupus"
+
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "Carbo"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "Aurum"
+
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "Ferrum"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granite"
+msgstr "Granitum"
+
+#: ../../worlds/winterland/resconf:36
+#: ../../worlds/winterland/terrainconf:37
+msgid "Water"
+msgstr "Aqua"
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "Piscis"
+
+#: ../../worlds/winterland/terrainconf:7
+msgid "Tundra"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:13
+msgid "Mountain 1"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:19
+msgid "Ice Floes"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:25
+msgid "Ice Floes 2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:31
+msgid "Ice"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:44
+msgid "Tundra Taiga"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:50
+msgid "Tundra 2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:56
+msgid "Tundra 3"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:62
+msgid "Mountain 2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:68
+msgid "Mountain 3"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:74
+msgid "Mountain 4"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:80
+msgid "Beach"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:85
+msgid "Taiga"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:91
+msgid "Lava"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:96
+msgid "Snow"
+msgstr ""

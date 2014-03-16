@@ -20,6 +20,11 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
+//Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
+#ifdef __MINGW32__
+#define _USE_32BIT_TIME_T 1
+#endif
+
 #include <cstring>
 #include <map>
 #include <stdexcept>
@@ -32,13 +37,12 @@
 #include "point.h"
 
 
-namespace Widelands {struct Game;}
-struct Journal;
+namespace Widelands {class Game;}
 
 ///Thrown if a commandline parameter is faulty
 struct Parameter_error : public std::runtime_error {
-	explicit Parameter_error() throw () : std::runtime_error("") {}
-	explicit Parameter_error(std::string text) throw ()
+	explicit Parameter_error() : std::runtime_error("") {}
+	explicit Parameter_error(std::string text)
 		: std::runtime_error(text)
 	{}
 	virtual ~Parameter_error() throw () {}
@@ -146,7 +150,7 @@ struct InputCallback {
 /// \todo Sensible use of exceptions (goes for whole game)
 /// \todo Default filenames for recording and playback
 struct WLApplication {
-	static WLApplication * get(int const argc = 0, char const * * argv = 0);
+	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();
 
 	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, INTERNET};
@@ -160,14 +164,14 @@ struct WLApplication {
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	bool get_key_state(SDLKey const key) const {return SDL_GetKeyState(0)[key];}
+	bool get_key_state(SDLKey const key) const {return SDL_GetKeyState(nullptr)[key];}
 
 	//@{
 	void warp_mouse(Point);
 	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
-	Point get_mouse_position() const throw () {return m_mouse_position;}
+	Point get_mouse_position() const {return m_mouse_position;}
 	//
 	/// Find out whether the mouse is currently pressed
 	bool is_mouse_pressed() const {return SDL_GetMouseState(nullptr, nullptr); }
@@ -179,9 +183,7 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
-	void init_graphics
-		(const int32_t w, const int32_t h, const int32_t bpp,
-		 const bool fullscreen, const bool opengl);
+	void init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl);
 
 	/**
 	 * Refresh the graphics from the latest options.
@@ -230,7 +232,7 @@ struct WLApplication {
 protected:
 	WLApplication(int argc, char const * const * argv);
 
-	bool poll_event(SDL_Event &, bool throttle);
+	bool poll_event(SDL_Event &);
 
 	bool init_settings();
 	void init_language();
@@ -242,7 +244,7 @@ protected:
 	void shutdown_hardware();
 
 	void parse_commandline(int argc, char const * const * argv);
-	void handle_commandline_parameters() throw (Parameter_error);
+	void handle_commandline_parameters();
 
 	void setup_searchpaths(std::string argv0);
 	void setup_homedir();
@@ -260,12 +262,14 @@ protected:
 
 	std::string m_filename;
 
+	/// Script to be run after the game was started with --editor,
+	/// --scenario or --loadgame.
+	std::string m_script_to_run;
+
 	//Log all output to this file if set, otherwise use cout
 	std::string m_logfile;
 
 	GameType m_game_type;
-	///the event recorder object
-	Journal * journal;
 
 	///True if left and right mouse button should be swapped
 	bool  m_mouse_swapped;

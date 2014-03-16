@@ -40,9 +40,9 @@ public:
 	virtual ~SurfaceCacheImpl();
 
 	// Implements SurfaceCache.
-	virtual void flush();
-	virtual Surface* get(const string& hash);
-	virtual Surface* insert(const string& hash, Surface*, bool);
+	virtual void flush() override;
+	virtual Surface* get(const string& hash) override;
+	virtual Surface* insert(const string& hash, Surface*, bool) override;
 
 private:
 	void drop();

@@ -23,14 +23,12 @@
 #include <map>
 #include <vector>
 
-#include "HTMLReferences.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "descr_maintainer.h"
 #include "graphic/animation.h"
 #include "logic/immovable.h"
 #include "io/filewrite.h"
-#include "logic/item_ware_descr.h"
 #include "profile/profile.h"
 #include "logic/worker.h"
 

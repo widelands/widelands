@@ -47,7 +47,6 @@ void Map_Building_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &       mol)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -102,15 +101,15 @@ throw (_wexception)
 							if (g_gr) // but not on dedicated servers ;)
 								ibase.reference_player_tribe(p, &tribe);
 						} else
-							throw game_data_error(_("player %u does not exist"), p);
+							throw game_data_error("player %u does not exist", p);
 					}
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("buildings: %s"), e.what());
+		throw game_data_error("buildings: %s", e.what());
 	}
 }
 
@@ -120,7 +119,6 @@ throw (_wexception)
  */
 void Map_Building_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-throw (_wexception)
 {
 	FileWrite fw;
 
@@ -169,7 +167,8 @@ throw (_wexception)
 void Map_Building_Data_Packet::write_priorities
 	(const Building & building, FileWrite & fw)
 {
-	fw.Unsigned32(building.get_base_priority());
+	// Used to be base_priority which is no longer used. Remove after b20.
+	fw.Unsigned32(0);
 
 	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
@@ -212,7 +211,7 @@ void Map_Building_Data_Packet::write_priorities
 void Map_Building_Data_Packet::read_priorities
 	(Building & building, FileRead & fr)
 {
-	building.set_priority(fr.Unsigned32());
+	fr.Unsigned32(); // unused, was base_priority which is unused. Remove after b20.
 
 	const Tribe_Descr & tribe = building.tribe();
 	int32_t ware_type = -1;

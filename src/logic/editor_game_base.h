@@ -36,31 +36,32 @@
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
 struct Interactive_Base;
-struct LuaInterface;
+class LuaInterface;
 
 namespace Widelands {
 
 class Players_Manager;
 
 struct AreaWatcher;
-struct Battle;
+class Battle;
 struct Bob;
 struct Building_Descr;
 class Immovable;
-struct Map;
+class Map;
 struct Object_Manager;
-struct Player;
+class Player;
 struct PlayerImmovable;
 struct Tribe_Descr;
 struct Flag;
 struct AttackController;
 
-struct Editor_Game_Base :
+class Editor_Game_Base :
 	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
 {
+public:
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
 	friend struct Game_Game_Class_Data_Packet;
@@ -69,7 +70,7 @@ struct Editor_Game_Base :
 	virtual ~Editor_Game_Base();
 
 	void set_map(Map *);
-	Map & map() const throw () {return *m_map;}
+	Map & map() const {return *m_map;}
 	Map * get_map() {return m_map;}
 	Map & get_map() const {return *m_map;}
 	const Object_Manager & objects() const {return m_objects;}
@@ -108,11 +109,11 @@ struct Editor_Game_Base :
 	Building & warp_dismantlesite
 		(Coords, Player_Number, bool loading = false,
 		Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Bob & create_bob(Coords, const Bob::Descr &, Player * owner = 0);
+	Bob & create_bob(Coords, const Bob::Descr &, Player * owner = nullptr);
 	Bob & create_bob
-		(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0, Player * owner = 0);
+		(Coords, Bob::Descr::Index, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
 	Bob & create_bob
-		(Coords, const std::string & name, Tribe_Descr const * const = 0, Player * owner = 0);
+		(Coords, const std::string & name, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
 	Immovable & create_immovable(Coords, uint32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
 		(Coords, const std::string & name, Tribe_Descr const *);
@@ -147,11 +148,11 @@ struct Editor_Game_Base :
 	void   conquer_area            (Player_Area<Area<FCoords> >);
 	void   conquer_area_no_building(Player_Area<Area<FCoords> > const);
 
-	void receive(const NoteImmovable &);
-	void receive(const NoteFieldPossession     &);
-	void receive(const NoteFieldTransformed    &);
+	void receive(const NoteImmovable &) override;
+	void receive(const NoteFieldPossession     &) override;
+	void receive(const NoteFieldTransformed    &) override;
 
-	void cleanup_objects() throw () {
+	void cleanup_objects() {
 		objects().cleanup(*this);
 	}
 

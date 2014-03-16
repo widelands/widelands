@@ -30,7 +30,7 @@ struct Section;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 
 #define WORLD_NAME_LEN 128
 #define WORLD_AUTHOR_LEN 128
@@ -49,11 +49,11 @@ struct Resource_Descr : boost::noncopyable {
 
 	void parse(Section &, const std::string &);
 
-	const std::string & name     () const throw () {return m_name;}
-	const std::string & descname() const throw () {return m_descname;}
+	const std::string & name     () const {return m_name;}
+	const std::string & descname() const {return m_descname;}
 
-	bool is_detectable() const throw () {return m_is_detectable;}
-	int32_t get_max_amount() const throw () {return m_max_amount;}
+	bool is_detectable() const {return m_is_detectable;}
+	int32_t get_max_amount() const {return m_max_amount;}
 
 	const std::string & get_editor_pic(uint32_t amount) const;
 
@@ -84,11 +84,11 @@ struct Terrain_Descr : boost::noncopyable {
 
 	void load_graphics();
 
-	uint32_t         get_texture() const throw () {return m_texture;}
-	uint8_t        get_is     () const throw () {return m_is;}
-	const std::string & name() const throw () {return m_name;}
-	const std::string & descname() const throw () {return m_descname;}
-	int32_t resource_value(const Resource_Index resource) const throw () {
+	uint32_t         get_texture() const {return m_texture;}
+	uint8_t        get_is     () const {return m_is;}
+	const std::string & name() const {return m_name;}
+	const std::string & descname() const {return m_descname;}
+	int32_t resource_value(const Resource_Index resource) const {
 		return
 			resource == get_default_resources() or is_resource_valid(resource) ?
 			(get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
@@ -102,14 +102,14 @@ struct Terrain_Descr : boost::noncopyable {
 		return m_valid_resources[index];
 	}
 
-	bool is_resource_valid(const int32_t res) const throw () {
+	bool is_resource_valid(const int32_t res) const {
 		for (int32_t i = 0; i < m_nr_valid_resources; ++i)
 			if (m_valid_resources[i] == res)
 				return true;
 		return false;
 	}
 	int8_t get_default_resources() const {return m_default_resources;}
-	int32_t get_default_resources_amount() const throw () {
+	int32_t get_default_resources_amount() const {
 		return m_default_amount;
 	}
 	int32_t dither_layer() const {return m_dither_layer;}
@@ -292,7 +292,7 @@ private:
   * it can read a world file.
   */
 struct World : boost::noncopyable {
-	friend struct Game;
+	friend class Game;
 
 	enum {
 		OK = 0,
@@ -306,9 +306,9 @@ struct World : boost::noncopyable {
 
 	void load_graphics();
 
-	const char * get_name  () const throw () {return hd.name;}
-	const char * get_author() const throw () {return hd.author;}
-	const char * get_descr () const throw () {return hd.descr;}
+	const char * get_name  () const {return hd.name;}
+	const char * get_author() const {return hd.author;}
+	const char * get_descr () const {return hd.descr;}
 
 	Terrain_Index index_of_terrain(char const * const name) const {
 		return ters.get_index(name);
@@ -322,7 +322,7 @@ struct World : boost::noncopyable {
 	}
 	Terrain_Descr const * get_ter(char const * const name) const {
 		int32_t const i = ters.get_index(name);
-		return i != -1 ? ters.get(i) : 0;
+		return i != -1 ? ters.get(i) : nullptr;
 	}
 	int32_t get_nr_terrains() const {return ters.get_nitems();}
 	int32_t get_bob(char const * const l) const {return bobs.get_index(l);}

@@ -33,19 +33,19 @@ public:
 	virtual ~GLSurface() {}
 
 	/// Interface implementations
-	virtual uint16_t width() const;
-	virtual uint16_t height() const;
-	virtual uint8_t * get_pixels() const;
-	virtual void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
-	virtual uint32_t get_pixel(uint16_t x, uint16_t y);
+	virtual uint16_t width() const override;
+	virtual uint16_t height() const override;
+	virtual uint8_t * get_pixels() const override;
+	virtual void set_pixel(uint16_t x, uint16_t y, uint32_t clr) override;
+	virtual uint32_t get_pixel(uint16_t x, uint16_t y) override;
 
-	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm);
-	virtual void fill_rect(const Rect&, RGBAColor);
-	virtual void draw_rect(const Rect&, RGBColor);
-	virtual void brighten_rect(const Rect&, int32_t factor);
+	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
+	virtual void fill_rect(const Rect&, RGBAColor) override;
+	virtual void draw_rect(const Rect&, RGBColor) override;
+	virtual void brighten_rect(const Rect&, int32_t factor) override;
 
 	virtual void draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
 
 protected:
 

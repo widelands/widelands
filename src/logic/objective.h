@@ -47,15 +47,15 @@ struct Objective : public Named {
 
 	std::string identifier() const {return "Objective: " + name();}
 
-	const std::string & descname() const throw ()  {return m_descname;}
-	const std::string & descr() const throw ()    {return m_descr;}
-	bool visible() const throw () {return m_visible;}
-	bool done() const throw () {return m_done;}
+	const std::string & descname() const  {return m_descname;}
+	const std::string & descr() const    {return m_descr;}
+	bool visible() const {return m_visible;}
+	bool done() const {return m_done;}
 	void set_descname(const std::string & new_name) {
 		m_descname = new_name;
 	}
 	void set_descr  (const std::string & new_descr) {m_descr   = new_descr;}
-	void set_visible(const bool t) throw ()    {m_visible = t;}
+	void set_visible(const bool t)    {m_visible = t;}
 	void set_done(bool t) {m_done = t;}
 
 private:

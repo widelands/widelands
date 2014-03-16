@@ -35,7 +35,6 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    skip,
 	 Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -45,7 +44,7 @@ throw (_wexception)
 	// our file is not there, there is nothing to be done.
 	Profile prof;
 	try {
-		prof.read("allowed_worker_types", 0, fs);
+		prof.read("allowed_worker_types", nullptr, fs);
 	} catch (...) {
 		return;
 	}
@@ -76,16 +75,15 @@ throw (_wexception)
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %i"), packet_version);
+				("unknown/unhandled version %i", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("allowed worker types: %s"), e.what());
+		throw game_data_error("allowed worker types: %s", e.what());
 	}
 }
 
 
 void Map_Allowed_Worker_Types_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	Profile prof;
 	prof.create_section("global").set_int

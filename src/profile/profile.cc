@@ -269,7 +269,7 @@ Section::Value * Section::get_val(char const * const name)
 			i.current->mark_used();
 			return &*i.current;
 		}
-	return 0;
+	return nullptr;
 }
 
 /**
@@ -288,7 +288,7 @@ Section::Value * Section::get_next_val(char const * const name)
 				return &*i.current;
 			}
 
-	return 0;
+	return nullptr;
 }
 
 Section::Value & Section::create_val
@@ -396,7 +396,7 @@ const Widelands::Immovable_Descr & Section::get_safe_Immovable_Type
 	 Widelands::Editor_Game_Base & egbase)
 {
 	char const * const immname = get_safe_string(name);
-	if (char const * const tribename = get_string(tribe, 0)) {
+	if (char const * const tribename = get_string(tribe, nullptr)) {
 		const Widelands::Tribe_Descr & tridescr =
 			egbase.manually_load_tribe(tribename);
 		if
@@ -600,7 +600,7 @@ char const * Section::get_next_bool
 {
 	Value * const v = get_next_val(name);
 	if (!v)
-		return 0;
+		return nullptr;
 
 	if (value)
 		*value = v->get_bool();
@@ -760,7 +760,7 @@ Section * Profile::get_section(const std::string & name)
 			return &*i.current;
 		}
 
-	return 0;
+	return nullptr;
 }
 
 /**
@@ -804,7 +804,7 @@ Section * Profile::get_next_section(char const * const name)
 				return &*i.current;
 			}
 
-	return 0;
+	return nullptr;
 }
 
 
@@ -868,8 +868,8 @@ void Profile::read
 		FileRead fr;
 		fr.Open(fs, filename);
 
-		char    * p = 0;
-		Section * s = 0;
+		char    * p = nullptr;
+		Section * s = nullptr;
 
 		bool reading_multiline = 0;
 		std::string data;
@@ -893,7 +893,7 @@ void Profile::read
 					throw wexception("missing ']' after \"%s\"", p);
 				s = &create_section_duplicate(p);
 			} else {
-				char * tail = 0;
+				char * tail = nullptr;
 				translate_line = false;
 				if (reading_multiline) {
 					// Note: comments are killed by walking backwards into the string

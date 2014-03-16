@@ -9,17 +9,11 @@ error_msg="No space or newline allowed after opening parenthesis."
 
 strip_comments_and_strings = True
 strip_macros = True
-regexp=r"""\(( |$|\n)"""
+regexp=r"""\( """
 
 forbidden = [
     '( h',
     '( ',
-    '(',
-    '/(',
-    '/ /(',
-    '/ / (',
-    '/ / /(',
-    '/ / /(\nadjh',
 
     # Eriks tests
     ## illegal_character_after_opening_parenthesis.cc
@@ -27,6 +21,12 @@ forbidden = [
 ]
 
 allowed = [
+    '/(',
+    '(',
+    '/ /(',
+    '/ / (',
+    '/ / /(',
+    '/ / /(\nadjh',
     '(h',
     '//(',
     '// (',
