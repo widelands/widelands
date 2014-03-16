@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-14 07:26+0000\n"
-"Last-Translator: wl-zocker <Unknown>\n"
+"PO-Revision-Date: 2014-03-15 13:55+0000\n"
+"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-16 05:36+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
@@ -627,15 +627,15 @@ msgstr "F: schaltet den Vollbildmodus an/aus"
 
 #: ../../txts/editor_readme:29
 msgid "H: toggles main menu"
-msgstr ""
+msgstr "H: Zeigt/versteckt das Hauptmenü"
 
 #: ../../txts/editor_readme:33
 msgid "P: toggles player menu"
-msgstr ""
+msgstr "P: Zeigt/versteckt das Spielermenü"
 
 #: ../../txts/editor_readme:35
 msgid "T: toggles tools menu"
-msgstr ""
+msgstr "T: Zeigt/versteckt das Werkzeugmenü"
 
 #: ../../txts/editor_readme:37
 msgid "I: activates information tool"

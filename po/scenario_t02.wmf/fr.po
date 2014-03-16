@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-15 02:59+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-15 14:57+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-16 05:36+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: fr\n"
 "X-Poedit-Language: French\n"
@@ -262,7 +262,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:128
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Construisez une roseraie"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid ""
@@ -270,11 +270,14 @@ msgid ""
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
 msgstr ""
+"Le troisième matériau nécessaire pour améliorer les constructions sont les "
+"chaumes de roseaux, utilisé pour couvrir les toits. Les chaumes de roseaux "
+"sont planté par un jardinier autour de sa construction, la roseraie."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:138
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:140
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Construisez une ferme à bétail"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
@@ -550,7 +553,7 @@ msgstr "L'ancien bondit..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:278
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Commandez sagement pour chercher la variété."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:279
 msgid ""
@@ -558,6 +561,10 @@ msgid ""
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change..."
 msgstr ""
+"Au Nord de la grande montagne siège une large plaine - Pourquoi "
+"n'utiliserions nous pas l'espace donné par mère nature pour construire une "
+"ferme ? Je suis sur que vous apprécieriez une miche de pain fraîchement "
+"préparée pour changer..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
 msgid "Boldreth cheers up..."
@@ -878,26 +885,10 @@ msgstr "Ils ont décidé de se joindre à nous !"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nouvel objectif"
 msgstr[1] "Nouveaux objectifs"
-
-#~ msgid "Build a cattlefarm"
-#~ msgstr "Construisez une ferme de bétail"
-
-#~ msgid ""
-#~ "Wisdom commands to seek variety.\n"
-#~ "\n"
-#~ "North of the great mountain is a large plain – why don’t we use the space "
-#~ "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
-#~ "pitta bread for a change..."
-#~ msgstr ""
-#~ "La sagesse recommande de rechercher la variété.\n"
-#~ "\n"
-#~ "Au nord de la grande montagne se trouve une large plaine - pourquoi "
-#~ "n'utilise-t-on pas l'espace que Mère Nature nous a donné pour construire une "
-#~ "ferme? J'adorerais un pain pita sortant du four, pour changer..."

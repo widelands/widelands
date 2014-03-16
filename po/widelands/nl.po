@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2014-03-13 09:16+0000\n"
+"PO-Revision-Date: 2014-03-15 12:49+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-03-16 05:37+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -94,17 +94,17 @@ msgstr "Stam laden: %s"
 
 #: ../../src/editor/editorinteractive.cc:196
 msgid "Creating players"
-msgstr "Spelers aan het creëren"
+msgstr "Spelers worden aangemaakt"
 
 #: ../../src/editor/editorinteractive.cc:203
 #: ../../src/logic/editor_game_base.cc:276
 msgid "Loading world data"
-msgstr "Wereldgegevens laden"
+msgstr "Wereldgegevens worden geladen"
 
 #: ../../src/editor/editorinteractive.cc:206
 #: ../../src/editor/editorinteractive.cc:610
 msgid "Loading graphics..."
-msgstr "Afbeeldingen laden..."
+msgstr "Afbeeldingen worden geladen..."
 
 #: ../../src/editor/editorinteractive.cc:252
 msgid "Unsaved Map"
@@ -196,11 +196,11 @@ msgstr "Eigendom van %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:90
 msgid "Has base immovable"
-msgstr "Heeft basis immobiele"
+msgstr "Heeft stationair object"
 
 #: ../../src/editor/tools/editor_info_tool.cc:90
 msgid "No base immovable"
-msgstr "Geen basis immobiele"
+msgstr "Geen stationair object"
 
 #: ../../src/editor/tools/editor_info_tool.cc:93
 msgid "Has bobs"
@@ -224,12 +224,12 @@ msgstr "Naam: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:105
 #, c-format
 msgid "Texture Number: %i"
-msgstr "Textuur Nummer: %i"
+msgstr "Textuur nummer: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
 msgid "Resources:"
-msgstr "Hulpbronnen"
+msgstr "Hulpbronnen:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:115
 #, c-format

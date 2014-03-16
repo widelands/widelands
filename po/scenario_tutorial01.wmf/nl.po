@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-11 09:57+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-15 10:46+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-03-16 05:38+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: nl\n"
 
@@ -30,6 +30,10 @@ msgid ""
 "and just find everything out for yourself. Otherwise, please bear with me, I "
 "am not the youngest and quickest anymore."
 msgstr ""
+"Het spijt me, maar ik maak dit weer ongedaan. We hebben de ruimte wellicht "
+"later weer nodig. Als ik te langzaam ga, probeer dan een echt spel te spelen "
+"en leer alles zelf. Anders volg mijn opdrachten, maar ik ben niet meer de "
+"jongste en snelste."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
@@ -100,6 +104,10 @@ msgid ""
 "screen, which is the fourth one from the left. Or you can use the SPACE key "
 "to toggle it."
 msgstr ""
+"We moeten een geschikte plek vinden voor de houthakkershut. Om dit "
+"makkelijker te maken zetten we de bouwhulp aan. Er zijn twee manieren om dit "
+"te doen, klik de bouwhulpknop aan de onderkant van het scherm, het is de "
+"vierde van links, of gebruik de spatiebalk om de hulp aan of uit te zetten."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:60
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -107,17 +115,19 @@ msgstr "Klik op de OK-knop om dit venster te sluiten en probeer het."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Enable the showing of building spaces"
-msgstr ""
+msgstr "Zet de bouwhulp aan"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:65
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Zet de bouwhulp aan"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:67
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
 msgstr ""
+"Het is gemakkelijker om te begrijpen wat er mag worden gebouwd op welk veld "
+"wanneer de bouwhulpsymbolen zijn ingeschakeld."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
 msgid ""
@@ -411,6 +421,9 @@ msgid ""
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
 msgstr ""
+"Er zijn vier dingen te bouwen in Widelands: vlaggen, kleine -, gemiddelde - "
+"en grote huizen. Maar niet iedere plek is is geschikt voor alles. De "
+"bouwhulp helpt het herkennen:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Everything can be built on the green house symbol."
@@ -722,7 +735,7 @@ msgstr "Archiveer alle berichten in je inbox"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:382
 msgid "Archive Your Inbox Messages"
-msgstr ""
+msgstr "Archiveer qberichten in je inbox"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:383
 msgid ""
@@ -1017,6 +1030,9 @@ msgid ""
 "build a coal mine here. Building a mine is like building a house. The "
 "building space symbol for where a mine can be built is"
 msgstr ""
+"Onze geologen hebben dus veel kolen gevonden in deze berg. Je zou daarom op "
+"deze plek een kolenmijn moeten bouwen. Het bouwen van een mijn lijkt op het "
+"bouwen van een huis. Het bouwhulpsymbool voor een te bouwen mijn is"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:528
 msgid "this one."
@@ -1120,6 +1136,12 @@ msgid ""
 "symbols, which symbolize the individual soldier’s current levels in the four "
 "different categories health, attack, defense and evade."
 msgstr ""
+"Daar gaan we. Kijk eens naar de soldaten die op weg zijn naar ons "
+"trainingskamp. Ze zien er anders uit dan normale werkers: ze hebben een "
+"levensbalk boven hun hoofd die hun resterende levenspunten weergeeft en ze "
+"hebben vier symbolen die de niveaus van de individuele soldaten symboliseren "
+"in de vier verschillende categorieën levenspunten, aanval, verdediging en "
+"ontwijken."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:579
 msgid ""
@@ -1144,16 +1166,25 @@ msgid ""
 "defense and level 2 evade. This is one fearsome warrior then! The individual "
 "statistics have the following meaning:"
 msgstr ""
+"Trainen gebeurt in trainingsgebouwen zoals het trainingskamp of de arena: de "
+"soldaten gaan daar (zoals onze kleine kameraden momenteel doen), verbruiken "
+"sommige waren en gaan één niveau in één categorie vooruit. Als een barbaarse "
+"militair volledig is opgeleid, heeft hij niveau 3 levenspunten, niveau 5 "
+"aanval, niveau 0 verdediging en niveau 2 ontwijken. Dit is dan een "
+"afschrikwekkende strijder! De individuele statistieken hebben de volgende "
+"betekenis:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:589
 msgid "Health:"
-msgstr ""
+msgstr "Levenspunten:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:590
 msgid ""
 "The total life of a soldier. A barbarian soldier starts with ~130 health "
 "points, and with each health level he gains 28 health points."
 msgstr ""
+"Het totale leven van een soldaat. Een Barbaarse soldaat begint met ~130 "
+"levenspunten, bij ieder levenspuntenniveau stijgt dit met 28 levenspunten."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:592
 msgid "Attack:"
@@ -1166,6 +1197,10 @@ msgid ""
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains 7 damage points."
 msgstr ""
+"De hoeveelheid schade die een soldaat aanricht bij een succesvolle aanval op "
+"de vijand. Een barbaarse soldaat met aanvalsniveau 0 berokkent ~14 "
+"levenspunten schade als het hem lukt een vijand te raken. Per aanvalsniveau "
+"komen hier 7 punten schade bij."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:596
 msgid "Defense:"
@@ -1180,6 +1215,12 @@ msgid ""
 "barbarian soldier, the barbarian will lose 15 - 3 = 12 health. The 3 points "
 "are subtracted because of the defense ability."
 msgstr ""
+"Verdediging is de waarde die wordt afgetrokken van de aanvalswaarde. De "
+"Barbaren kunnen deze vaardigheid niet trainen en hebben altijd "
+"verdedigingsniveau 0 wat betekend dat ze altijd 3 punten minder schade "
+"oplopen. Als een aanvaller met een aanvalswaarde van 15 punten een Barbaarse "
+"soldaat raakt zal de Barbaar 15 - 3 = 12 levenspunten verliezen. De 3 "
+"levenspunten worden afgetrokken vanwege de verdedigingsvaardigheden."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
 msgid "Evade:"
@@ -1374,10 +1415,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nieuwe opdracht"
+msgstr[1] "Nieuwe opdrachten"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2013-09-01 09:20+0000\n"
+"PO-Revision-Date: 2014-03-15 10:16+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <NL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-03-16 05:38+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: ../../worlds/winterland/conf:2
@@ -102,131 +102,131 @@ msgstr "Pad"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Esp (oud)"
 
 #: ../../worlds/winterland/conf:48
 msgid "Aspen (Mature)"
-msgstr ""
+msgstr "Esp (volgroeid)"
 
 #: ../../worlds/winterland/conf:50
 msgid "Aspen (Pole)"
-msgstr ""
+msgstr "Esp (opgroeiend)"
 
 #: ../../worlds/winterland/conf:52
 msgid "Aspen (Sapling)"
-msgstr ""
+msgstr "Esp (zaailing)"
 
 #: ../../worlds/winterland/conf:53
 msgid "Oak (Old)"
-msgstr ""
+msgstr "Eik (oud)"
 
 #: ../../worlds/winterland/conf:54
 msgid "Oak (Mature)"
-msgstr ""
+msgstr "Eik (volgroeid)"
 
 #: ../../worlds/winterland/conf:55
 msgid "Oak (Pole)"
-msgstr ""
+msgstr "Eik (opgroeiend)"
 
 #: ../../worlds/winterland/conf:56
 msgid "Oak (Sapling)"
-msgstr ""
+msgstr "Eik (zaailing)"
 
 #: ../../worlds/winterland/conf:57
 msgid "Spruce (Old)"
-msgstr ""
+msgstr "Spar (oud)"
 
 #: ../../worlds/winterland/conf:58
 msgid "Spruce (Mature)"
-msgstr ""
+msgstr "Spar (volgroeid)"
 
 #: ../../worlds/winterland/conf:59
 msgid "Spruce (Pole)"
-msgstr ""
+msgstr "Spar (opgroeiend)"
 
 #: ../../worlds/winterland/conf:60
 msgid "Spruce (Sapling)"
-msgstr ""
+msgstr "Spar (zaailing)"
 
 #: ../../worlds/winterland/conf:61
 msgid "Maple (Old)"
-msgstr ""
+msgstr "Ahorn (oud)"
 
 #: ../../worlds/winterland/conf:62
 msgid "Maple (Mature)"
-msgstr ""
+msgstr "Ahorn (volgroeid)"
 
 #: ../../worlds/winterland/conf:63
 msgid "Maple (Pole)"
-msgstr ""
+msgstr "Ahorn (opgroeiend)"
 
 #: ../../worlds/winterland/conf:64
 msgid "Maple (Sapling)"
-msgstr ""
+msgstr "Ahorn (zaailing)"
 
 #: ../../worlds/winterland/conf:65
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Berk (oud)"
 
 #: ../../worlds/winterland/conf:66
 msgid "Birch (Mature)"
-msgstr ""
+msgstr "Berk (volgroeid)"
 
 #: ../../worlds/winterland/conf:67
 msgid "Birch (Pole)"
-msgstr ""
+msgstr "Berk (opgroeiend)"
 
 #: ../../worlds/winterland/conf:68
 msgid "Birch (Sapling)"
-msgstr ""
+msgstr "Berk (zaailing)"
 
 #: ../../worlds/winterland/conf:69
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Beuk (oud)"
 
 #: ../../worlds/winterland/conf:70
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Beuk (volgroeid)"
 
 #: ../../worlds/winterland/conf:71
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Beuk (opgroeiend)"
 
 #: ../../worlds/winterland/conf:72
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Beuk (zaailing)"
 
 #: ../../worlds/winterland/conf:73
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Lariks (oud)"
 
 #: ../../worlds/winterland/conf:74
 msgid "Larch (Mature)"
-msgstr ""
+msgstr "Lariks (volgroeid)"
 
 #: ../../worlds/winterland/conf:75
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Lariks (opgroeiend)"
 
 #: ../../worlds/winterland/conf:76
 msgid "Larch (Sapling)"
-msgstr ""
+msgstr "Lariks (zaailing)"
 
 #: ../../worlds/winterland/conf:77
 msgid "Rowan (Old)"
-msgstr ""
+msgstr "Lijsterbes (oud)"
 
 #: ../../worlds/winterland/conf:78
 msgid "Rowan (Mature)"
-msgstr ""
+msgstr "Lijsterbes (volgroeid)"
 
 #: ../../worlds/winterland/conf:79
 msgid "Rowan (Pole)"
-msgstr ""
+msgstr "Lijsterbes (opgroeiend)"
 
 #: ../../worlds/winterland/conf:80
 msgid "Rowan (Sapling)"
-msgstr ""
+msgstr "Lijsterbes (zaailing)"
 
 #: ../../worlds/winterland/conf:83
 msgid "Badger"
@@ -307,15 +307,15 @@ msgstr "Toendra"
 
 #: ../../worlds/winterland/terrainconf:13
 msgid "Mountain 1"
-msgstr ""
+msgstr "Berg 1"
 
 #: ../../worlds/winterland/terrainconf:19
 msgid "Ice Floes"
-msgstr ""
+msgstr "IJsschotsen"
 
 #: ../../worlds/winterland/terrainconf:25
 msgid "Ice Floes 2"
-msgstr ""
+msgstr "IJsschotsen 2"
 
 #: ../../worlds/winterland/terrainconf:31
 msgid "Ice"
@@ -323,27 +323,27 @@ msgstr "IJs"
 
 #: ../../worlds/winterland/terrainconf:44
 msgid "Tundra Taiga"
-msgstr ""
+msgstr "Taiga toendra"
 
 #: ../../worlds/winterland/terrainconf:50
 msgid "Tundra 2"
-msgstr ""
+msgstr "Toendra 2"
 
 #: ../../worlds/winterland/terrainconf:56
 msgid "Tundra 3"
-msgstr ""
+msgstr "Toendra 3"
 
 #: ../../worlds/winterland/terrainconf:62
 msgid "Mountain 2"
-msgstr ""
+msgstr "Berg 2"
 
 #: ../../worlds/winterland/terrainconf:68
 msgid "Mountain 3"
-msgstr ""
+msgstr "Berg 3"
 
 #: ../../worlds/winterland/terrainconf:74
 msgid "Mountain 4"
-msgstr ""
+msgstr "Berg 4"
 
 #: ../../worlds/winterland/terrainconf:80
 msgid "Beach"
