@@ -74,16 +74,16 @@ public:
 		return terrains_.get_nitems();
 	}
 	int32_t get_bob(char const* const l) const {
-		return bobs.get_index(l);
+		return bobs_.get_index(l);
 	}
 	Bob::Descr const* get_bob_descr(uint16_t const index) const {
-		return bobs.get(index);
+		return bobs_.get(index);
 	}
 	Bob::Descr const* get_bob_descr(const std::string& name) const {
-		return bobs.exists(name.c_str());
+		return bobs_.exists(name.c_str());
 	}
 	int32_t get_nr_bobs() const {
-		return bobs.get_nitems();
+		return bobs_.get_nitems();
 	}
 	int32_t get_immovable_index(char const* const l) const {
 		return immovables.get_index(l);
@@ -102,6 +102,9 @@ public:
 	// Add this new terrain to the world description. Transfers ownership.
 	void add_new_terrain_type(TerrainDescription* terrain_description);
 
+	// Add a new critter to the world description. Transfers ownership.
+	void add_new_critter_type(Critter_Bob_Descr* resource_description);
+
 	int32_t get_resource(const char* const name) const {
 		return resources_.get_index(name);
 	}
@@ -117,7 +120,7 @@ public:
 	const MapGenInfo& getMapGenInfo() const;
 
 private:
-	Descr_Maintainer<Bob::Descr> bobs;
+	Descr_Maintainer<Bob::Descr> bobs_;
 	Descr_Maintainer<Immovable_Descr> immovables;
 	Descr_Maintainer<TerrainDescription> terrains_;
 	Descr_Maintainer<ResourceDescription> resources_;

@@ -5,7 +5,6 @@
 -- NOCOM(#sirver): this is suboptimal
 -- Order does matter here, since this file should stay compatible
 -- with S2
-
 world:new_terrain_type{
    name = "steppe",
    descname = _ "Steppe",
@@ -13,7 +12,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 5,
-   textures = "world/greenland_pics/steppe_??.png",
+   textures = { "world/greenland_pics/steppe_00.png" },
    dither_layer = 20,
    fps = 0,
 }
@@ -25,7 +24,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = "world/greenland_pics/berg1_??.png",
+   textures = { "world/greenland_pics/berg1_00.png" },
    dither_layer = 60,
    fps = 0,
 }
@@ -37,7 +36,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = "world/greenland_pics/schnee_??.png",
+   textures = { "world/greenland_pics/schnee_00.png" },
    dither_layer = 70,
    fps = 0,
 }
@@ -49,7 +48,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 20,
-   textures = "world/greenland_pics/sumpf_??.png",
+   textures = path.glob("world/greenland_pics", "sumpf_*.png"),
    dither_layer = 30,
    fps = 14,
 }
@@ -61,7 +60,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = "world/greenland_pics/strand_??.png",
+   textures = { "world/greenland_pics/strand_00.png" },
    dither_layer = 10,
    fps = 0,
 }
@@ -73,7 +72,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = "world/greenland_pics/wasser_??.png",
+   textures = path.glob("world/greenland_pics", "wasser_*.png"),
    dither_layer = 0,
    fps = 14,
 }
@@ -85,7 +84,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = "world/greenland_pics/wiese1_??.png",
+   textures = { "world/greenland_pics/wiese1_00.png" },
    dither_layer = 40,
    fps = 0,
 }
@@ -97,7 +96,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = "world/greenland_pics/wiese2_??.png",
+   textures = { "world/greenland_pics/wiese2_00.png" },
    dither_layer = 40,
    fps = 0,
 }
@@ -109,7 +108,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = "world/greenland_pics/wiese3_??.png",
+   textures = { "world/greenland_pics/wiese3_00.png" },
    dither_layer = 40,
    fps = 0,
 }
@@ -121,7 +120,7 @@ world:new_terrain_type{
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = "world/greenland_pics/berg2_??.png",
+   textures = { "world/greenland_pics/berg2_00.png" },
    dither_layer = 60,
    fps = 0,
 }
@@ -133,7 +132,7 @@ world:new_terrain_type{
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = "world/greenland_pics/berg3_??.png",
+   textures = { "world/greenland_pics/berg3_00.png" },
    dither_layer = 40,
    fps = 0,
 }
@@ -145,7 +144,7 @@ world:new_terrain_type{
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = "world/greenland_pics/berg4_??.png",
+   textures = { "world/greenland_pics/berg4_00.png" },
    dither_layer = 60,
    fps = 0,
 }
@@ -157,7 +156,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 4,
-   textures = "world/greenland_pics/steppe_kahl_??.png",
+   textures = { "world/greenland_pics/steppe_kahl_00.png" },
    dither_layer = 20,
    fps = 0,
 }
@@ -169,7 +168,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = "world/greenland_pics/wiese4_??.png",
+   textures = { "world/greenland_pics/wiese4_00.png" },
    dither_layer = 40,
    fps = 0,
 }
@@ -181,7 +180,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = "world/greenland_pics/lava_??.png",
+   textures = path.glob("world/greenland_pics", "lava_*.png"),
    dither_layer = 80,
    fps = 4,
 }
@@ -193,7 +192,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = "world/greenland_pics/bergwiese_??.png",
+   textures = { "world/greenland_pics/bergwiese_00.png" },
    dither_layer = 50,
    fps = 0,
 }

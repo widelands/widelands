@@ -326,6 +326,7 @@ World
 
 const char L_World::className[] = "World";
 const MethodType<L_World> L_World::Methods[] = {
+	METHOD(L_World, new_critter_type),
 	METHOD(L_World, new_resource_type),
 	METHOD(L_World, new_terrain_type),
 	{0, 0},
@@ -448,7 +449,7 @@ int L_World::new_terrain_type(lua_State * L) {
 		   table.get_string<std::string>("name"),
 		   table.get_string<std::string>("descname"),
 		   TerrainTypeFromString(table.get_string<std::string>("is")),
-		   table.get_string<std::string>("textures"),
+			table.get_table<std::string>("textures")->array_entries<std::string>(),
 		   table.get_int<std::string>("fps"),
 		   table.get_int<std::string>("dither_layer"),
 		   valid_resources,
@@ -462,6 +463,23 @@ int L_World::new_terrain_type(lua_State * L) {
 	return 0;
 }
 
+// NOCOM(#sirver): document
+int L_World::new_critter_type(lua_State * L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	Editor_Game_Base& egbase = get_egbase(L);
+	const World& world = egbase.world();
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+
+	}
+	catch (LuaError& e) {
+		return report_error(L, "%s", e.what());
+	}
+	return 0;
+}
 
 /*
  ==========================================================

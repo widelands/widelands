@@ -293,7 +293,6 @@ void GameRendererGL::draw_terrain_base()
 		if (!m_terrain_freq[ter])
 			continue;
 
-	log("#sirver ter: %u\n", ter);
 		const Texture & texture =
 				*g_gr->get_maptexture_data
 					(world.terrain_descr(ter).get_texture());

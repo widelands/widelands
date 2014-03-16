@@ -41,7 +41,7 @@ struct TerrainDescription : boost::noncopyable {
 			const std::string& name,
 			const std::string &descname,
 			TerrainType type,
-			const std::string& picnametempl,
+			const std::vector<std::string>& texture_files,
 			int fps,
 			int32_t dither_layer,
 			std::vector<uint8_t> valid_resources,
@@ -94,8 +94,7 @@ private:
 	const std::vector<uint8_t> valid_resources_;
 	int8_t default_resource_index_;
 	int32_t default_resource_amount_;
-	std::string picnametempl_;
-	uint32_t frametime_;
+	const std::vector<std::string> texture_paths_;
 	int32_t dither_layer_;
 	uint32_t texture_;  //  renderer's texture
 };

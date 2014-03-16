@@ -544,24 +544,13 @@ void Graphic::flush_maptextures()
 	m_maptextures.clear();
 }
 
-/**
- * Creates a terrain texture.
- *
- * fnametempl is a filename with possible wildcard characters '?'. The function
- * fills the wildcards with decimal numbers to get the different frames of a
- * texture animation. For example, if fnametempl is "foo_??.bmp", it tries
- * "foo_00.bmp", "foo_01.bmp" etc...
- * frametime is in milliseconds.
- * \return 0 if the texture couldn't be loaded.
- * \note Terrain textures are not reused, even if fnametempl matches.
-*/
-uint32_t Graphic::get_maptexture(const string& fnametempl, uint32_t frametime)
+uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
 	try {
 		m_maptextures.push_back
-			(new Texture(fnametempl, frametime, *m_sdl_screen->format));
+			(new Texture(texture_files, frametime, *m_sdl_screen->format));
 	} catch (exception& e) {
-		log("Failed to load maptexture %s: %s\n", fnametempl.c_str(), e.what());
+		log("Failed to load maptexture %s: %s\n", texture_files[0].c_str(), e.what());
 		return 0;
 	}
 

@@ -39,8 +39,9 @@
 * changed to load 8 bit bitmaps directly.
 */
 struct Texture {
-	Texture
-		(const std::string& fnametempl, uint32_t frametime, const SDL_PixelFormat&);
+	Texture(const std::vector<std::string>& texture_files,
+	        uint32_t frametime,
+	        const SDL_PixelFormat&);
 	~Texture();
 
 	const std::string & get_texture_image() const {return m_texture_image;}

@@ -25,6 +25,7 @@ include "egbase"
 
 include "math_random"
 include "string_bformat"
+include "path"
 include "map"
 include "cplayer"
 include "cfield"

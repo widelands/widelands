@@ -55,11 +55,15 @@ void Map_Resources_Data_Packet::Read
 		std::map<uint8_t, uint8_t> smap;
 		for (uint8_t i = 0; i < nr_res; ++i) {
 			uint8_t const id = fr.Unsigned16();
-			char const * const buffer = fr.CString();
-			int32_t const res = world.get_resource(buffer);
+			std::string resource_name = fr.CString();
+			// NOCOM(#sirver): clutch
+			if (resource_name == "granit") {
+				resource_name = "granite";
+			}
+			int32_t const res = world.get_resource(resource_name.c_str());
 			if (res == -1)
 				throw game_data_error
-					("resource '%s' exists in map but not in world", buffer);
+					("resource '%s' exists in map but not in world", resource_name.c_str());
 			smap[id] = res;
 		}
 

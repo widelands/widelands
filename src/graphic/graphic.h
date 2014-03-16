@@ -114,8 +114,10 @@ public:
 
 	void save_png(const Image*, StreamWrite*) const;
 
+	// Creates a new Texture() with the given 'frametime' and using the given
+	// 'texture_files' as the images for it and returns it id.
+	uint32_t new_maptexture(const std::vector<std::string>& texture_files, uint32_t frametime);
 	void flush_maptextures();
-	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 

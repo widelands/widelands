@@ -35,7 +35,7 @@ namespace Widelands {
 TerrainDescription::TerrainDescription(const std::string& name,
                                        const std::string& descname,
                                        TerrainType type,
-                                       const std::string& picnametempl,
+													const std::vector<std::string>& texture_files,
                                        int fps,
                                        int32_t dither_layer,
                                        std::vector<uint8_t> valid_resources,
@@ -47,11 +47,8 @@ TerrainDescription::TerrainDescription(const std::string& name,
      valid_resources_(valid_resources),
      default_resource_index_(default_resource),
      default_resource_amount_(default_resource_amount),
-     picnametempl_(picnametempl),
-     frametime_(fps > 0 ? 1000 / fps : FRAME_LENGTH),
      dither_layer_(dither_layer),
-     texture_(0) {
-	texture_ = g_gr->get_maptexture(picnametempl_, frametime_);
+     texture_(g_gr->new_maptexture(texture_files, fps > 0 ? 1000 / fps : FRAME_LENGTH)) {
 
 	if (default_resource_amount > 0 && !is_resource_valid(default_resource)) {
 		throw game_data_error("Default resource is not in valid resources.\n");

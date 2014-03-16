@@ -37,6 +37,7 @@
 #include "scripting/lua_game.h"
 #include "scripting/lua_globals.h"
 #include "scripting/lua_map.h"
+#include "scripting/lua_path.h"
 #include "scripting/lua_root.h"
 #include "scripting/lua_table.h"
 #include "scripting/lua_ui.h"
@@ -105,6 +106,19 @@ void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
 
 // Runs the 'content' as a lua script identified by 'identifier' in 'L'.
 std::unique_ptr<LuaTable > run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
+	// NOCOM(#sirver): document __file__
+	// Get the current value of __file__
+	std::string last_file;
+	lua_getglobal(L, "__file__");
+	if (!lua_isnil(L, -1)) {
+		last_file = luaL_checkstring(L, -1);
+	}
+	lua_pop(L, 1);
+
+	// Set __file__.
+	lua_pushstring(L, identifier);
+	lua_setglobal(L, "__file__");
+
 	check_return_value_for_errors(
 	   L,
 	   luaL_loadbuffer(L, content.c_str(), content.size(), identifier.c_str()) ||
@@ -116,6 +130,15 @@ std::unique_ptr<LuaTable > run_string_as_script(lua_State* L, const std::string&
 	}
 	if (not lua_istable(L, -1))
 		throw LuaError("Script did not return a table!");
+
+	// Restore old value of __file__.
+	if (last_file.empty()) {
+		lua_pushnil(L);
+	} else {
+		lua_pushstring(L, last_file);
+	}
+	lua_setglobal(L, "__file__");
+
 	return std::unique_ptr<LuaTable>(new LuaTable(L));
 }
 
@@ -153,6 +176,9 @@ LuaInterface::LuaInterface() {
 
 	// Now our own
 	LuaGlobals::luaopen_globals(m_L);
+
+	// And helper methods.
+	LuaPath::luaopen_path(m_L);
 
 	// Also push the "wl" table.
 	lua_newtable(m_L);

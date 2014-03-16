@@ -114,33 +114,11 @@ void World::add_new_terrain_type(TerrainDescription* terrain_description) {
 	terrains_.add(terrain_description);
 }
 
+void World::add_new_critter_type(Critter_Bob_Descr* critter_bob_description) {
+	bobs_.add(critter_bob_description);
+}
+
 // NOCOM(#sirver): remove these
-// void World::parse_terrains()
-// {
-	// char fname[256];
-
-	// snprintf(fname, sizeof(fname), "%s/terrainconf", basedir_.c_str());
-
-	// try {
-		// Profile prof(fname);
-
-		// for (Terrain_Index i = 0;; ++i) {
-			// Section * const s = prof.get_next_section(nullptr);
-			// if (not s)
-				// break;
-			// if (i == 0x10)
-				// throw game_data_error
-					// (_("%s: too many terrain types, can not be more than 16"),
-					 // fname);
-			// terrains_.add(new TerrainDescription(basedir_.c_str(), s, &resources_));
-		// }
-
-		// prof.check_used();
-	// } catch (const game_data_error & e) {
-		// throw game_data_error("%s: %s", fname, e.what());
-	// }
-// }
-
 // void World::parse_bobs(const std::string& given_path, Profile & root_conf) {
 	// std::string path(given_path);
 	// std::string::size_type const base_path_size = path.size();

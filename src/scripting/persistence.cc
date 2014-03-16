@@ -160,13 +160,14 @@ static void m_add_iterator_function_to_not_unpersist
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
 // break safe game compatibility.
 static const char * m_persistent_globals[] = {
-	"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
-	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
-	"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
-	"os", "package", "pairs", "pcall", "print", "rawequal",
-	"rawget", "rawset", "rawlen", "require", "select", "setfenv", "setmetatable",
-	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", "_", "set_textdomain", "get_build_id", "coroutine.yield", "ngettext", nullptr
+	"_VERSION", "assert", "collectgarbage", "coroutine", "debug", "dofile",
+	"error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs", "load",
+	"loadfile", "loadstring", "math", "module", "newproxy", "next", "os",
+	"package", "pairs", "pcall", "print", "rawequal", "rawget", "rawset",
+	"rawlen", "require", "select", "setfenv", "setmetatable", "table",
+	"tonumber", "tostring", "type", "unpack", "wl", "xpcall", "string", "use",
+	"_", "set_textdomain", "get_build_id", "coroutine.yield", "ngettext",
+	"path", nullptr
 };
 
 /**
