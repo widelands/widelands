@@ -58,7 +58,7 @@ struct Texture {
 		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
 
 private:
-	Colormap  * m_colormap;
+	std::unique_ptr<Colormap> m_colormap;
 	uint8_t   * m_pixels;
 	uint32_t    m_mmap_color[256];
 	uint8_t   * m_curframe;
@@ -66,9 +66,8 @@ private:
 	std::string m_texture_image;
 	uint32_t    m_nrframes;
 	uint32_t    m_frametime;
-	bool        is_32bit;
 	bool        m_was_animated;
-	std::vector<GLSurfaceTexture*> m_glFrames;
+	std::vector<std::unique_ptr<GLSurfaceTexture>> m_glFrames;
 };
 
 #endif
