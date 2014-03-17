@@ -4,11 +4,11 @@ heal_per_second=150
 conquers=9
 vision_range=19
 prefer_heroes=true
-occupied_string=_Your soldiers have occupied your Tower
-aggressor_string=_Your Tower discovered an aggressor.
-attack_string=_Your Tower is under attack.
-defeated_enemy_string=_The enemy defeated your soldiers at the Tower
-defeated_you_string=_Your soldiers defeated the enemy at the Tower
+occupied_string=_Your soldiers have occupied your tower.
+aggressor_string=_Your tower discovered an aggressor.
+attack_string=_Your tower is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the tower.
+defeated_you_string=_Your soldiers defeated the enemy at the tower.
 
 
 [buildcost]

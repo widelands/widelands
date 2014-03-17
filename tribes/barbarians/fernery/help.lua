@@ -23,6 +23,8 @@ return {
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/fernery/menu.png","tribes/barbarians/thatchreed/menu.png"},p(_"Thatch Reed")) ..
 		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
+		-- TRANSLATORS: This is a detail for the reed -> construction site flow
+		-- TRANSLATORS: The weaving mill is mentioned separately
 		rt(p(_"The Reed Yard’s output will only go to construction sites that need it.")) ..
 		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/weaving-mill/menu.png"},p(_"Weaving-Mill")) ..
 	--Building Section
