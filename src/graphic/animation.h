@@ -31,6 +31,7 @@
 #include "rect.h"
 
 class Image;
+class LuaTable;
 class Section;
 class Surface;
 struct RGBColor;
@@ -97,6 +98,7 @@ public:
 	 * \param s             conffile section to search for data on this animation
 	*/
 	uint32_t load(const std::string & directory, Section& s);
+	uint32_t load(const LuaTable& table);
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.

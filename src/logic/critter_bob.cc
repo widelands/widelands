@@ -165,6 +165,7 @@ Critter_Bob_Descr::Critter_Bob_Descr
 }
 
 
+// NOCOM(#sirver): to anon namespace and add docu
 void assign_diranimation(DirAnimations* anims, Map_Object_Descr& mo, const std::string& prefix) {
 	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 	for (int32_t dir = 0; dir < 6; ++dir) {
@@ -177,17 +178,15 @@ Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table, const Tribe_Descr* t
         table.get_string<std::string>("name"), table.get_string<std::string>("descname"), tribe),
      m_swimming(table.get_bool<std::string>("swimming")) {
 
+	{
+		std::unique_ptr<LuaTable> anims(table.get_table<std::string>("animations"));
+		for (const std::string& animation : anims->keys<std::string>()) {
+			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+		}
+		assign_diranimation(&m_walk_anims, *this, "walk");
+	}
 
-	// NOCOM(#sirver): do animations. idle and walk animations
-	// { //  global options
-		// Section & idle_s = prof.get_safe_section("idle");
-		// add_animation("idle", g_gr->animations().load(directory, idle_s));
-	// }
-	// char defaultpics[256];
-	// snprintf(defaultpics, sizeof(defaultpics), "%s_walk_!!_??.png", _name);
-	// m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
-
-		  // NOCOM(#sirver): pull out into method
+	// NOCOM(#sirver): pull out into method
 	for (const std::string& attribute :
 	     table.get_table<std::string>("attributes")->array_entries<std::string>()) {
 		uint32_t const attrib = get_attribute_id(attribute);
