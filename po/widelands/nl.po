@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2014-03-15 12:49+0000\n"
+"PO-Revision-Date: 2014-03-16 11:40+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-16 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-03-17 04:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -601,7 +601,7 @@ msgstr "Toestaan"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:39
 msgid "Height Tools Options"
-msgstr "Hoogtegereedschap opties"
+msgstr "Hoogtegereedschapsopties"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:49
@@ -715,7 +715,7 @@ msgstr "groot"
 
 #: ../../src/logic/building.cc:541
 msgid "medium"
-msgstr "middel groot"
+msgstr "middelgroot"
 
 #: ../../src/logic/building.cc:544
 msgid "Mine"
@@ -784,11 +784,11 @@ msgstr "Bezig met laden…"
 
 #: ../../src/logic/game.cc:478
 msgid "Creating player infrastructure"
-msgstr "Creëren speler's infrastructuur"
+msgstr "Speler's infrastructuur wordt gecreëerd"
 
 #: ../../src/logic/game.cc:491 ../../src/logic/player.cc:221
 msgid "Missing starting position"
-msgstr "Ontbrekend startpunt"
+msgstr "Ontbrekende startpositie"
 
 #: ../../src/logic/game.cc:493
 #, c-format
@@ -851,8 +851,9 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
-"Widelands kon het spel niet starten omdat speler %u geen startpunt heeft.\n"
-"Je kunt handmatig een startpunt toevoegen met Widelands Editor om dit "
+"Widelands kon het spel niet starten omdat speler %u geen startpositie "
+"heeft.\n"
+"Je kunt handmatig een startpositie toevoegen met Widelands Editor om dit "
 "probleem te verhelpen."
 
 #. * TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s'
@@ -960,8 +961,8 @@ msgstr "%s en"
 #: ../../src/logic/production_program.cc:869
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] " mist"
-msgstr[1] " missen"
+msgstr[0] " ontbreekt"
+msgstr[1] " ontbreken"
 
 #. * TRANSLATORS: Number used in list of wares
 #. * TRANSLATORS: Number used in list of workers
@@ -1050,7 +1051,7 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:567
 msgid "Island Circumnavigated"
-msgstr "Eiland Rondgevaren"
+msgstr "Eiland rondgevaren"
 
 #: ../../src/logic/ship.cc:568
 msgid "An expedition ship sailed around its island without any events."
@@ -1059,7 +1060,7 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:622
 msgid "Coast Reached"
-msgstr "Kust Bereikt"
+msgstr "Kust bereikt"
 
 #: ../../src/logic/ship.cc:624
 msgid ""
@@ -1069,7 +1070,7 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:788
 msgid "Expedition Ready"
-msgstr "Expeditie Gereed"
+msgstr "Expeditie gereed"
 
 #: ../../src/logic/ship.cc:789
 msgid "An expedition ship is waiting for your commands."
@@ -1127,7 +1128,7 @@ msgstr "Werker is verdwaald!"
 
 #: ../../src/map_io/widelands_map_loader.cc:86
 msgid "Invalid World"
-msgstr "Ongeldige Wereld"
+msgstr "Ongeldige wereld"
 
 #: ../../src/map_io/widelands_map_loader.cc:88
 #, c-format

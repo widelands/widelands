@@ -1,19 +1,19 @@
 # Widelands po/fr_FR/maps.po
 # Copyright (C) 2008 Widelands Development Team
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Bouchard Renaud <renaud.bouchard@gmail.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-15 14:43+0000\n"
+"PO-Revision-Date: 2014-03-16 17:16+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-16 05:36+0000\n"
+"X-Launchpad-Export-Date: 2014-03-17 04:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: fr\n"
 
@@ -296,9 +296,9 @@ msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the "
 "crater. Two tribes are now fighting for the rich resources."
 msgstr ""
-"Longtemps après la chute d'un météore sur ces montagnes, la vie bourgeonna "
-"dans le cratère. Deux tribus s'affrontent maintenant pour ses riches "
-"ressources."
+"Longtemps après la chute d'un météore sur un couple de montagnes, la vie "
+"bourgeonna dans le cratère. Deux tribus s'affrontent maintenant pour ses "
+"riches ressources."
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
@@ -306,7 +306,7 @@ msgstr "Franchir l'horizon"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr "Equipez votre navire et naviguez vers l'horizon."
+msgstr "Équipez votre navire et naviguez vers l'horizon."
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 #: ../../maps/Rendez-Vous.wmf/elemental:10
@@ -335,7 +335,7 @@ msgstr "Équipes Suggérées: (Bleu, rouge) contre (jaune, vert)"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
-msgstr "Rivière asséchée"
+msgstr "Lit de Rivière Asséchée"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
@@ -542,7 +542,7 @@ msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
-msgstr "Lac de la Tranquilité"
+msgstr "Lac de la Tranquilitée"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
@@ -677,9 +677,9 @@ msgid ""
 "geologists."
 msgstr ""
 "Seule une petite colline au centre de la carte relie ces quatre tribus en "
-"compétition.  Menez votre armée droit sur cette colline et bâtissez une "
-"énorme place forte comme signe de votre supériorité ! Indice : au centre, il "
-"n'y a de la place que pour une seule place forte.  Il y a de l'eau partout, "
+"compétition. Menez votre armée droit sur cette colline et bâtissez une "
+"énorme place forte comme signe de votre supériorité! Indice: au centre, il "
+"n'y a de la place que pour une seule place forte. Il y a de l'eau partout, "
 "donc il n'y a pas besoin d'envoyer de géologues."
 
 #: ../../maps/River Explorers.wmf/elemental:9
@@ -703,7 +703,7 @@ msgstr ""
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
-msgstr "Contrées Fluviales"
+msgstr "Contrées fluviales"
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""

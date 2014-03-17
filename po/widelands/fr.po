@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-16 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-03-17 04:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -3985,78 +3985,3 @@ msgstr "Suivre"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Centrer la vue principale sur ceci"
-
-#~ msgid "The Map has not been saved, do you really want to quit?"
-#~ msgstr "La carte n'a pas été sauvée, voulez vous vraiment quitter ?"
-
-#~ msgid "A File with the name ‘%s’ already exists. Overwrite?"
-#~ msgstr "Un fichier nommé '%s' existe déjà. Ré-écrire ?"
-
-#~ msgid "Error Saving Map!!"
-#~ msgstr "Erreur en Sauvant la Carte!!"
-
-#~ msgid "%1$i%% built"
-#~ msgstr "%1$i%% construit"
-
-#~ msgid "Recruited %s?"
-#~ msgstr "Recruté %s?"
-
-#~ msgid "no"
-#~ msgstr "non"
-
-#~ msgid "Out of Resources"
-#~ msgstr "Pénurie de ressources"
-
-#~ msgid "Out of Fish"
-#~ msgstr "Pénurie de poisson"
-
-#~ msgid "Out of Stone"
-#~ msgstr "Pénurie de pierre"
-
-#~ msgid ""
-#~ "The worker of this building cannot find any more resources of the following "
-#~ "type: %s"
-#~ msgstr ""
-#~ "Le travailleur de cette construction ne peut plus trouver de ressources de "
-#~ "ce type: %s"
-
-#~ msgid "Are you sure you want to kick %s?<br>"
-#~ msgstr "Êtes vous sûr de vouloir expulser %s?<br>"
-
-#~ msgid "The stated reason was: %s<br>"
-#~ msgstr "La raison indiquée était: %s<br>"
-
-#~ msgid "Single Player Menu"
-#~ msgstr "Menu Solo"
-
-#~ msgid ""
-#~ " --record=FILENAME    Record all events to the given filename for\n"
-#~ "                      later playback"
-#~ msgstr ""
-#~ " --record=FILENAME    Enregistrer tous les évènements vers le fichiers donné "
-#~ "pour\n"
-#~ "                      jouer plus tard"
-
-#~ msgid " --playback=FILENAME  Playback given filename (see --record)"
-#~ msgstr " --playback=FILENAME  Joue le nom de fichier donné (voir --record)"
-
-#~ msgid "Chat Menu"
-#~ msgstr "Menu de dialogue"
-
-#~ msgid "players"
-#~ msgstr "joueurs"
-
-#~ msgid "Save Game Error!!"
-#~ msgstr "Erreur de sauvegarde du jeu!!"
-
-#~ msgid "Message Menu: Inbox"
-#~ msgstr "Menu des messages: Boîte de réception"
-
-#~ msgid "Message Menu: Archive"
-#~ msgstr "Menu des messages: Archive"
-
-#~ msgid "Objectives Menu"
-#~ msgstr "Menu Objectifs"
-
-#~ msgid "%1$u.%2$ux"
-#~ msgstr "%1$u.%2$ux"
