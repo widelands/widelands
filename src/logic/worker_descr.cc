@@ -23,6 +23,7 @@
 #include "helper.h"
 #include "i18n.h"
 #include "logic/carrier.h"
+#include "logic/game_data_error.h"
 #include "logic/nodecaps.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
@@ -40,7 +41,7 @@ Worker_Descr::Worker_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Bob::Descr(_name, _descname, directory, prof, global_s, &_tribe),
+	Bob::Descr(_name, _descname, &_tribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_ware_hotspot(global_s.get_Point("ware_hotspot", Point(0, 15))),
 	m_icon_fname(directory + "/menu.png"),
@@ -49,6 +50,23 @@ Worker_Descr::Worker_Descr
 	m_level_experience(-1),
 	m_becomes (Ware_Index::Null())
 {
+	{ //  global options
+		Section & idle_s = prof.get_safe_section("idle");
+		add_animation("idle", g_gr->animations().load(directory, idle_s));
+	}
+
+	// Parse attributes
+	// // NOCOM(#sirver): I guess this can be removed again.
+	while (global_s.get_next_val("attrib")) {
+		throw game_data_error("Worker with attribute: %s", _name);
+		// uint32_t const attrib = get_attribute_id(val->get_string());
+
+		// if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
+			// throw game_data_error("bad attribute \"%s\"", val->get_string());
+
+		// add_attribute(attrib);
+	}
+
 	add_attribute(Map_Object::WORKER);
 
 	m_default_target_quantity =

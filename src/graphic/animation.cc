@@ -829,9 +829,7 @@ uint32_t AnimationManager::load(const string& directory, Section & section) {
 	} else {
 		m_animations.push_back(new NonPackedAnimation(directory, section));
 	}
-	const uint32_t id = m_animations.size();
-
-	return id;
+	return m_animations.size();
 }
 
 const Animation& AnimationManager::get_animation(uint32_t id) const

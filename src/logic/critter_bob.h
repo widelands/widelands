@@ -23,6 +23,8 @@
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 
+class LuaTable;
+
 namespace Widelands {
 
 struct Critter_BobAction;
@@ -35,7 +37,9 @@ struct Critter_Bob_Descr : public Bob::Descr {
 	Critter_Bob_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 Tribe_Descr const *);
+		 const Tribe_Descr *);
+	Critter_Bob_Descr
+		 (const LuaTable&, const Tribe_Descr*);
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const override;

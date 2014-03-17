@@ -24,6 +24,7 @@
 #include "gamecontroller.h"
 #include "log.h"
 #include "logic/cmd_luacoroutine.h"
+#include "logic/critter_bob.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/immovable.h"
@@ -469,11 +470,9 @@ int L_World::new_critter_type(lua_State * L) {
 		report_error(L, "Takes only one argument.");
 	}
 	Editor_Game_Base& egbase = get_egbase(L);
-	const World& world = egbase.world();
-
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-
+		egbase.mutable_world()->add_new_critter_type(new Critter_Bob_Descr(table, nullptr));
 	}
 	catch (LuaError& e) {
 		return report_error(L, "%s", e.what());

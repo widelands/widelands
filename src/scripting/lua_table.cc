@@ -19,7 +19,7 @@
 
 #include "scripting/lua_table.h"
 
-template <> std::string LuaTable::get_value() {
+template <> std::string LuaTable::get_value() const {
 	if (!lua_isstring(m_L, -1)) {
 		lua_pop(m_L, 1);
 		throw LuaError("No string on top of stack.");
@@ -27,7 +27,7 @@ template <> std::string LuaTable::get_value() {
 	return lua_tostring(m_L, -1);
 }
 
-template <> int LuaTable::get_value() {
+template <> int LuaTable::get_value() const {
 	if (!lua_isnumber(m_L, -1)) {
 		lua_pop(m_L, 1);
 		throw LuaError("No integer on top of stack.");

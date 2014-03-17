@@ -39,6 +39,7 @@ public:
  * scripts: they return a Lua table with (string,value) pairs.
  // NOCOM(#sirver): these should xmove their value to their own lua_state,
  // so that the stack stays clean.
+ // NOCOM(#sirver): remove templating on the keytype and always use string.
  */
 class LuaTable {
 public:
@@ -51,7 +52,7 @@ public:
 
 	// Returns all keys in sorted order (got by iterating using pair).
 	// All keys must be of the given type.
-	template <typename KeyType> std::vector<KeyType> keys() {
+	template <typename KeyType> std::vector<KeyType> keys() const {
 		std::vector<KeyType> keys;
 		lua_pushnil(m_L);                      // S: table nil
 		while (lua_next(m_L, m_index) != 0) {  // S: table key value
@@ -64,10 +65,10 @@ public:
 
 	// Returns all integer entries starting at 1 till nil is found. All entries
 	// must be of the given type.
-	template <typename ValueType> std::vector<ValueType> array_entries() {
+	template <typename ValueType> std::vector<ValueType> array_entries() const {
 		std::vector<ValueType> values;
 		int index = 1;
-		while (true) {
+		for (;;) {
 			lua_rawgeti(m_L, m_index, index);
 			if (lua_isnil(m_L, -1)) {
 				lua_pop(m_L, 1);
@@ -81,7 +82,7 @@ public:
 	}
 
 	// Returns the corresponding value with the given key.
-	template <typename KeyType> std::string get_string(const KeyType& s) {
+	template <typename KeyType> std::string get_string(const KeyType& s) const {
 		get_existing_table_value<KeyType>(s);
 		if (!lua_isstring(m_L, -1)) {
 			lua_pop(m_L, 1);
@@ -92,7 +93,7 @@ public:
 		return rv;
 	}
 
-	template <typename KeyType> std::unique_ptr<LuaTable> get_table(const KeyType& s) {
+	template <typename KeyType> std::unique_ptr<LuaTable> get_table(const KeyType& s) const {
 		get_existing_table_value<KeyType>(s);
 		if (!lua_istable(m_L, -1)) {
 			lua_pop(m_L, 1);
@@ -102,7 +103,7 @@ public:
 		return rv;
 	}
 
-	template <typename KeyType> double get_double(const KeyType& s) {
+	template <typename KeyType> double get_double(const KeyType& s) const {
 		get_existing_table_value<KeyType>(s);
 		if (!lua_isnumber(m_L, -1)) {
 			lua_pop(m_L, 1);
@@ -113,7 +114,7 @@ public:
 		return rv;
 	}
 
-	template <typename KeyType> int get_int(const KeyType& s) {
+	template <typename KeyType> int get_int(const KeyType& s) const {
 		const double value = get_double(s);
 		const int integer = static_cast<int>(value);
 
@@ -123,7 +124,7 @@ public:
 		return integer;
 	}
 
-	template <typename KeyType> uint32_t get_uint(const KeyType& s) {
+	template <typename KeyType> uint32_t get_uint(const KeyType& s) const {
 		int value = get_int(s);
 		if (value < 0) {
 			throw LuaError(boost::lexical_cast<std::string>(s) + "is not a positive value.");
@@ -131,7 +132,7 @@ public:
 		return static_cast<uint32_t>(value);
 	}
 
-	template <typename KeyType> bool get_bool(const KeyType& s) {
+	template <typename KeyType> bool get_bool(const KeyType& s) const {
 		get_existing_table_value<KeyType>(s);
 		if (!lua_isboolean(m_L, -1)) {
 			lua_pop(m_L, 1);
@@ -142,7 +143,7 @@ public:
 		return rv;
 	}
 
-	template <typename KeyType> LuaCoroutine* get_coroutine(const KeyType& s) {
+	template <typename KeyType> LuaCoroutine* get_coroutine(const KeyType& s) const {
 		get_existing_table_value<KeyType>(s);
 
 		if (lua_isfunction(m_L, -1)) {
@@ -165,7 +166,7 @@ public:
 	}
 
 private:
-	template <typename KeyType> void get_existing_table_value(const KeyType& key) {
+	template <typename KeyType> void get_existing_table_value(const KeyType& key) const {
 		lua_push<KeyType>(m_L, key);
 		lua_rawget(m_L, m_index);
 		if (lua_isnil(m_L, -1)) {
@@ -175,7 +176,7 @@ private:
 	}
 
 	// Get a lua value of the specific type. See template specializations.
-	template <typename T> T get_value() {
+	template <typename T> T get_value() const {
 		assert(false);
 	}
 
@@ -183,7 +184,7 @@ private:
 	const int m_index;
 };
 
-template <> std::string LuaTable::get_value<std::string>();
-template <> int LuaTable::get_value<int>();
+template <> std::string LuaTable::get_value<std::string>() const;
+template <> int LuaTable::get_value<int>() const;
 
 #endif /* end of include guard: LUA_TABLE_H */

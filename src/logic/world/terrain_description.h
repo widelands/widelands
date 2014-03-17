@@ -36,17 +36,16 @@ namespace Widelands {
 struct TerrainDescription : boost::noncopyable {
 	typedef Terrain_Index Index;
 
-	// TODO(sirver): this should not take a picnametempl, but a list of paths.
-	TerrainDescription(
-			const std::string& name,
-			const std::string &descname,
-			TerrainType type,
-			const std::vector<std::string>& texture_files,
-			int fps,
-			int32_t dither_layer,
-			std::vector<uint8_t> valid_resources,
-			uint8_t default_resource,
-			int32_t default_amount);
+	// NOCOM(#sirver): change to just take a LuaTable
+	TerrainDescription(const std::string& name,
+	                   const std::string& descname,
+	                   TerrainType type,
+	                   const std::vector<std::string>& texture_files,
+	                   int fps,
+	                   int32_t dither_layer,
+	                   std::vector<uint8_t> valid_resources,
+	                   uint8_t default_resource,
+	                   int32_t default_amount);
 
 	~TerrainDescription();
 
@@ -68,13 +67,13 @@ struct TerrainDescription : boost::noncopyable {
 
 	// Returns the value of the resource in this field.
 	// NOCOM(#sirver): find out what this does.
-	int32_t resource_value(const Resource_Index resource) const;
+	int32_t resource_value(Resource_Index resource) const;
 
 	// Returns the valid resource with the given index.
 	Resource_Index get_valid_resource(uint8_t index) const;
 
 	// Returns true if this resource can be found in this terrain type.
-	bool is_resource_valid(const int32_t res) const;
+	bool is_resource_valid(int32_t res) const;
 
 	// Returns the resource index that can by default always be found in this
 	// terrain.

@@ -193,10 +193,9 @@ struct Bob : public Map_Object {
 	struct Descr: public Map_Object_Descr {
 		friend struct Map_Bobdata_Data_Packet;
 
-		Descr
-			(char const * name, char const * descname,
-			 const std::string & directory, Profile &, Section & global_s,
-			 Tribe_Descr const *);
+		Descr(const std::string& init_name,
+		      const std::string& init_descname,
+		      Tribe_Descr const* tribe);
 
 		virtual ~Descr() {};
 		Bob & create(Editor_Game_Base &, Player * owner, const Coords &) const;

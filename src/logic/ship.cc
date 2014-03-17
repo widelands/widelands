@@ -49,8 +49,12 @@ Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
-: Descr(given_name, gdescname, directory, prof, global_s, &gtribe)
+: Descr(given_name, gdescname, &gtribe)
 {
+	{ //  global options
+		Section & idle_s = prof.get_safe_section("idle");
+		add_animation("idle", g_gr->animations().load(directory, idle_s));
+	}
 	m_sail_anims.parse(*this, directory, prof, "sail");
 
 	Section * sinking_s = prof.get_section("sinking");

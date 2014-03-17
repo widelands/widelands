@@ -52,9 +52,9 @@ class Map_Map_Object_Loader;
  */
 struct Map_Object_Descr : boost::noncopyable {
 	typedef uint8_t Index;
-	Map_Object_Descr(char const * const _name, char const * const _descname)
-		: m_name(_name), m_descname(_descname)
-	{}
+	Map_Object_Descr(const std::string& init_name, const std::string& init_descname)
+	   : m_name(init_name), m_descname(init_descname) {
+	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
 	const std::string &     name() const {return m_name;}

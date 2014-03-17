@@ -37,6 +37,7 @@ public:
 	};
 
 	typedef Resource_Index Index;
+	// NOCOM(#sirver): change to just take a luatable
 	ResourceDescription(const std::string& name,
 	                    const std::string& descname,
 	                    bool detectable,
