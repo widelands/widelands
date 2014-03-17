@@ -3,13 +3,15 @@ project (widelands)
 cmake_minimum_required (VERSION 2.6)
 
 # Used as versioning, if WL_VERSION_STANDARD is definded.
+# TODO(sirver): This is redundant and should not be used anywhere. We have a
+# script that determines the version.
 if (WL_VERSION_STANDARD)
 	# Set the values below for standard versioning.
 	# As long as WL_VERSION_MAJOR is 0, the naming will be in form of
 	# "Build${WL_VERSION_MINOR}" + ".${WL_VERSION_PATCH}" if WL_VERSION_PATCH is
 	# defined.
 	set (WL_VERSION_MAJOR 0)
-	set (WL_VERSION_MINOR 17)
+	set (WL_VERSION_MINOR 19)
 
 	# Just define in case that we release patches for official builds
 	#set (WL_VERSION_PATCH 90)
