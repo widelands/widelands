@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=build_06.png
 
 [buildcost]
 blackwood=10
@@ -14,4 +13,3 @@ transform=bob tribe:ship
 [idle]
 pics=build_??.png
 hotspot=115 82
-playercolor=true

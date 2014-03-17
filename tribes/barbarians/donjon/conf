@@ -27,7 +27,6 @@ hotspot=48 84
 [idle]
 pics=donjon_i_??.png
 hotspot=48 84
-playercolor=true
 fps=10
 
 [unoccupied]

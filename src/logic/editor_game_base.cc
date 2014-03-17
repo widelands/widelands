@@ -274,7 +274,6 @@ void Editor_Game_Base::postload()
 void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 {
 	loader_ui.step(_("Loading world data"));
-	g_gr->flush_animations();
 
 	g_gr->set_world(m_map->get_world_name());
 	m_map->load_graphics(); // especially loads world data
@@ -285,8 +284,6 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 	}
 
 	// TODO: load player graphics? (maybe)
-
-	g_gr->load_animations();
 }
 
 /**
@@ -497,21 +494,9 @@ void Editor_Game_Base::remove_trackpointer(uint32_t serial)
  *
  * make this object ready to load new data
  */
-void Editor_Game_Base::cleanup_for_load
-	(bool const flush_graphics, bool const flush_animations)
+void Editor_Game_Base::cleanup_for_load()
 {
 	cleanup_objects(); /// Clean all the stuff up, so we can load.
-
-	//  We do not flush the animations in the editor since all tribes are loaded
-	//  and animations can not change a lot, or?
-	//  And we especially do not flush anything, if nothing is loaded == dedicated server
-	if (g_gr) {
-		if (flush_animations)
-			g_anim.flush();
-		if (flush_graphics)
-			g_gr->flush_animations(); // flush all world animations
-	}
-
 	m_player_manager->cleanup();
 
 	if (m_map)

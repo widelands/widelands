@@ -32,9 +32,7 @@ produce=coal
 [idle]
 pics=burner_i_??.png
 hotspot=47 57
-playercolor=true
 
 [working]
 pics=burner_b_??.png
 hotspot=47 60
-playercolor=true

@@ -121,5 +121,4 @@ hotspot=110 75
 [idle]
 pics=trainingcamp_i_??.png  # ???
 hotspot=110 75
-playercolor=true
 fps=10

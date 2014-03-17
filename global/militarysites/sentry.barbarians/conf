@@ -14,5 +14,4 @@ defeated_you_string=_Your soldiers defeated the enemy at the sentry.
 [idle]
 pics=../../../tribes/barbarians/sentry/sentry_i_??.png
 hotspot=39 40
-playercolor=true
 fps=10

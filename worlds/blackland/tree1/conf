@@ -13,7 +13,6 @@ size=small
 attrib=tree
 program=program
 program=fall
-picture=tree1_00.png
 
 [terrain affinity]
 strand=       10

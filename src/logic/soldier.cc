@@ -194,8 +194,7 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 				anim_s = prof.get_safe_section((*i.current).c_str());
 
 			add_animation
-				((*i.current).c_str(),
-				 g_anim.get (directory, anim_s, "idle_00.png"));
+				((*i.current).c_str(), g_gr->animations().load(directory, anim_s));
 		}
 	} catch (const _wexception & e) {
 		throw game_data_error("%s : %s", anim_name, e.what());
@@ -556,17 +555,9 @@ void Soldier::draw
 	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
-
 		const Point drawpos = calc_drawpos(game, pos);
-
-		uint32_t w, h;
-		g_gr->get_animation_size
-			(anim,
-			 game.get_gametime() - get_animstart(),
-			 w,
-			 h);
-
-		draw_info_icon(dst, Point(drawpos.x, drawpos.y - h - 7), true);
+		draw_info_icon
+			(dst, Point(drawpos.x, drawpos.y - g_gr->animations().get_animation(anim).height() - 7), true);
 
 		draw_inner(game, dst, drawpos);
 	}

@@ -41,19 +41,15 @@ produce=ironore:2
 [idle]
 pics=deeper_oremine_i_??.png
 hotspot=60 37
-playercolor=true
 
 [working]
 pics=deeper_oremine_w_??.png
 hotspot=60 37
-playercolor=true
 
 [build]
 pics=deeper_oremine_b_??.png
 hotspot=60 37
-playercolor=true
 
 [empty]
 pics=deeper_oremine_e_??.png
 hotspot=60 37
-playercolor=true

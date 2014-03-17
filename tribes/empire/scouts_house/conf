@@ -27,7 +27,6 @@ worker=scout
 [idle]
 pics=scouts_house_i_??.png
 hotspot=50 53
-playercolor=true
 fps=10
 
 [build]

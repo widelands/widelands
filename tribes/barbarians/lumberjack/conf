@@ -20,21 +20,17 @@ felling_ax=1
 pics=hacking_??.png
 hotspot=19 17
 fps=10
-playercolor=true
 
 [idle]
 pics=idle_??.png
 hotspot=5 23
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=10 22
 fps=10
-playercolor=true
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=10 21
 fps=10
-playercolor=true

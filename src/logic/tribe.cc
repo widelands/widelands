@@ -23,6 +23,7 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -47,6 +48,7 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
+
 
 using namespace std;
 
@@ -252,8 +254,7 @@ Tribe_Descr::Tribe_Descr
 					} catch (Nonexistent) {
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
-							 	(style_name,
-							 	 g_anim.get(path, *s, nullptr)));
+							 	(style_name, g_gr->animations().load(path, *s)));
 					}
 				}
 				if (m_anim_frontier.empty())
@@ -274,7 +275,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, nullptr)));
+							 	 g_gr->animations().load(path, *s)));
 					}
 				}
 				if (m_anim_flag.empty())

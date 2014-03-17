@@ -96,7 +96,6 @@ struct Immovable_Descr : public Map_Object_Descr {
 	~Immovable_Descr();
 
 	int32_t get_size() const {return m_size;}
-	char const * get_picture() const {return m_picture.c_str();}
 	ImmovableProgram const * get_program(const std::string &) const;
 
 	Immovable & create(Editor_Game_Base &, Coords) const;
@@ -109,9 +108,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 	const Buildcost & buildcost() const {return m_buildcost;}
 
 protected:
-	std::string m_picture;
 	int32_t     m_size;
-
 	Programs    m_programs;
 
 	/// The tribe to which this Immovable_Descr belongs or 0 if it is a

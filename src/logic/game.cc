@@ -586,9 +586,6 @@ bool Game::run
 		delete get_ibase();
 		set_ibase(nullptr);
 
-		g_anim.flush();
-		g_gr->flush_animations();
-
 		m_state = gs_notrunning;
 	} else {
 		// dedicated server
@@ -649,12 +646,11 @@ void Game::end_dedicated_game() {
  * \todo Get rid of this. Prefer to delete and recreate Game-style objects
  * Note that this needs fixes in the editor.
  */
-void Game::cleanup_for_load
-	(bool const flush_graphics, bool const flush_animations)
+void Game::cleanup_for_load()
 {
 	m_state = gs_notrunning;
 
-	Editor_Game_Base::cleanup_for_load(flush_graphics, flush_animations);
+	Editor_Game_Base::cleanup_for_load();
 	container_iterate_const(std::vector<Tribe_Descr *>, m_tribes, i)
 		delete *i.current;
 	m_tribes.clear();

@@ -15,4 +15,3 @@ defeated_you_string=_Your soldiers defeated the enemy at the small tower.
 [idle]
 pics=../../../tribes/atlanteans/small_tower/small_tower_i_??.png
 hotspot=41 63
-playercolor=true

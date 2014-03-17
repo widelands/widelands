@@ -14,4 +14,3 @@ defeated_you_string=_Your soldiers defeated the enemy at the guardhall.
 [idle]
 pics=../../../tribes/atlanteans/guardhall/guardhall_i_??.png
 hotspot=58 65
-playercolor=true

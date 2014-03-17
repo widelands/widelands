@@ -39,19 +39,15 @@ produce=coal:2
 [idle]
 pics=deep_coalmine_i_??.png
 hotspot=21 37
-playercolor=true
 
 [build]
 pics=deep_coalmine_b_??.png
 hotspot=21 37
-playercolor=true
 
 [working]
 pics=deep_coalmine_w_??.png
 hotspot=21 37
-playercolor=true
 
 [empty]
 pics=deep_coalmine_e_??.png
 hotspot=21 37
-playercolor=true

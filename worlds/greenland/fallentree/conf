@@ -1,5 +1,4 @@
 program=program
-picture=fallentree_00.png
 
 [program]
 animate=dead 30000

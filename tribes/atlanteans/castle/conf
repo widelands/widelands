@@ -25,4 +25,3 @@ log=2
 [idle]
 pics=castle_i_??.png
 hotspot=91 91
-playercolor=true

@@ -6,11 +6,9 @@ vision_range=4
 [idle]
 pics=ship_i_??.png
 hotspot=115 76
-playercolor=true
 fps=10
 
 [sail]
 dirpics=sail_!!_??.png
 hotspot=115 76
 fps=10
-playercolor=true

@@ -51,9 +51,7 @@ return=skipped
 [idle]
 pics=armorsmith_i_??.png
 hotspot=53 60
-playercolor=true
 
 [working]
 pics=armorsmith_i_??.png
 hotspot=53 60
-playercolor=true

@@ -39,4 +39,3 @@ return=skipped
 [idle]
 pics=blackroot_farm_i_??.png  # ???
 hotspot=74 60
-playercolor=true

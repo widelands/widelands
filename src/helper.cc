@@ -23,6 +23,9 @@
 #include <memory>
 #include <string>
 
+#include <boost/algorithm/string/replace.hpp>
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/random.hpp>
 
 using namespace std;
@@ -31,13 +34,13 @@ using namespace std;
 /// \note This ignores empty elements, so do not use this for example to split
 /// a string with newline characters into lines, because it would ignore empty
 /// lines.
-std::vector<std::string> split_string
-	(const std::string & s, char const * const separators)
+vector<string> split_string
+	(const string & s, char const * const separators)
 {
-	std::vector<std::string> result;
+	vector<string> result;
 	for
-		(std::string::size_type pos = 0, endpos;
-		 (pos = s.find_first_not_of(separators, pos)) != std::string::npos;
+		(string::size_type pos = 0, endpos;
+		 (pos = s.find_first_not_of(separators, pos)) != string::npos;
 		 pos = endpos)
 	{
 		endpos = s.find_first_of(separators, pos);
@@ -49,7 +52,7 @@ std::vector<std::string> split_string
 /**
  * remove spaces at the beginning or the end of a string
  */
-void remove_spaces(std::string & s) {
+void remove_spaces(string & s) {
 	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n') s.erase(0, 1);
 
 	while (*s.rbegin() == ' '  or *s.rbegin() == '\t' or *s.rbegin() == '\n')
@@ -76,6 +79,34 @@ bool is_printable(SDL_keysym k)
 		((k.sym >= SDLK_SPACE)   && (k.sym <= SDLK_z))        ||
 		((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
 		((k.sym >= SDLK_KP0)     && (k.sym <= SDLK_KP_EQUALS));
+}
+
+/**
+ * Implemantation for NumberGlob.
+ */
+NumberGlob::NumberGlob(const string& pictmp) : templ_(pictmp), cur_(0) {
+	int nchars = count(pictmp.begin(), pictmp.end(), '?');
+	fmtstr_ = "%0" + boost::lexical_cast<string>(nchars) + "i";
+
+	max_ = 1;
+	for (int i = 0; i < nchars; ++i) {
+		max_ *= 10;
+		replstr_ += "?";
+	}
+	max_ -= 1;
+}
+
+bool NumberGlob::next(string* s) {
+	if (cur_ > max_)
+		return false;
+
+	if (max_) {
+		*s = boost::replace_last_copy(templ_, replstr_, (boost::format(fmtstr_) % cur_).str());
+	} else {
+		*s = templ_;
+	}
+	++cur_;
+	return true;
 }
 
 static boost::mt19937 random_generator;

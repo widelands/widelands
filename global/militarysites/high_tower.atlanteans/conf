@@ -15,4 +15,3 @@ defeated_you_string=_Your soldiers defeated the enemy at the high tower.
 [idle]
 pics=../../../tribes/atlanteans/high_tower/high_tower_i_??.png
 hotspot=55 90
-playercolor=true

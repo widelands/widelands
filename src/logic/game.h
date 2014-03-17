@@ -129,8 +129,7 @@ public:
 	bool is_loaded() {return m_state == gs_running;}
 	void end_dedicated_game();
 
-	void cleanup_for_load
-		(const bool flush_graphics = true, const bool flush_animations = true) override;
+	void cleanup_for_load();
 
 	// in-game logic
 	const Cmd_Queue & cmdqueue() const {return m_cmdqueue;}

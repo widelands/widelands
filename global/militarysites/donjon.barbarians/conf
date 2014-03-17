@@ -15,5 +15,4 @@ defeated_you_string=_Your soldiers defeated the enemy at the donjon.
 [idle]
 pics=../../../tribes/barbarians/donjon/donjon_i_??.png
 hotspot=55 84
-playercolor=true
 fps=10

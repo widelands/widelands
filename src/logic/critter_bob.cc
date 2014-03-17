@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -132,12 +132,9 @@ Critter_Bob_Descr::Critter_Bob_Descr
 	Bob::Descr(_name, _descname, directory, prof, global_s, _tribe),
 	m_swimming(global_s.get_bool("swimming", false))
 {
-	m_walk_anims.parse
-		(*this,
-		 directory,
-		 prof,
-		 (name() + "_walk_??").c_str(),
-		 prof.get_section("walk"));
+	char defaultpics[256];
+	snprintf(defaultpics, sizeof(defaultpics), "%s_walk_!!_??.png", _name);
+	m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
 		std::string program_name = v->get_string();

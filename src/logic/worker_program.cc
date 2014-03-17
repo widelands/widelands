@@ -19,6 +19,7 @@
 
 #include "logic/worker_program.h"
 
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "logic/findnode.h"
 #include "logic/game_data_error.h"
@@ -447,10 +448,8 @@ void WorkerProgram::parse_animation
 		// dynamically allocate animations here
 		descr->add_animation
 			(cmd[1].c_str(),
-			 (g_anim.get
-			  	(parser->directory.c_str(),
-			  	 parser->prof->get_safe_section(cmd[1].c_str()),
-			  	 nullptr)));
+			 (g_gr->animations().load(parser->directory,
+			  	 parser->prof->get_safe_section(cmd[1].c_str()))));
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 

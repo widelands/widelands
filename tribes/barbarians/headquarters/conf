@@ -12,5 +12,4 @@ conquers=9
 pics=headquarters_i_??.png
 # sfx=0 ../../../sound/spoken/warehouse-bringitin
 hotspot=90 96
-playercolor=true
 fps=10

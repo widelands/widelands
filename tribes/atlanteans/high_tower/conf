@@ -23,4 +23,3 @@ stone=1
 [idle]
 pics=high_tower_i_??.png
 hotspot=50 73
-playercolor=true

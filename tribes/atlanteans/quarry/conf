@@ -25,4 +25,3 @@ worker=cut_stone
 [idle]
 pics=quarry_i_??.png  # ???
 hotspot=40 45
-playercolor=true

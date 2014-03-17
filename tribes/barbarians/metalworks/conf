@@ -143,20 +143,16 @@ return=skipped
 [build]
 pics=metalworks_b_??.png
 hotspot=57 76
-playercolor=true
 
 [unoccupied]
 pics=metalworks_u_??.png
 hotspot=57 76
-playercolor=true
 
 [idle]
 pics=metalworks_i_??.png
 hotspot=57 76
-playercolor=true
 
 [working]
 pics=metalworks_w_??.png
 hotspot=57 76
-playercolor=true
 fps=10
