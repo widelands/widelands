@@ -1,14 +1,14 @@
 size=mine
 buildable=no
 enhanced_building=yes
-output=goldstone
+output=goldore
 
 [enhancement_cost]
-trunk=4
+log=4
 raw_stone=2
 
 [return_on_dismantle_on_enhanced]
-trunk=2
+log=2
 raw_stone=1
 
 [working positions]
@@ -30,10 +30,10 @@ sleep=40000
 consume=meal
 animate=working 16000
 mine=gold 2 100 10
-produce=goldstone:2
+produce=goldore:2
 animate=working 18000
 mine=gold 2 100 10
-produce=goldstone:2
+produce=goldore:2
 
 [idle]
 pics=deeper_goldmine_i_??.png

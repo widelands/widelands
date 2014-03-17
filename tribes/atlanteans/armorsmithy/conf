@@ -6,7 +6,7 @@ output=steel_shield
 build_material=false
 
 [buildcost]
-trunk=2
+log=2
 stone=2
 planks=2
 quartz=1
@@ -17,7 +17,7 @@ planks=1
 quartz=1
 
 [working positions]
-armoursmith=1
+armorsmith=1
 
 [inputs]
 iron=8
@@ -49,11 +49,11 @@ call=produce_advanced_shield
 return=skipped
 
 [idle]
-pics=armoursmith_i_??.png
+pics=armorsmith_i_??.png
 hotspot=53 60
 playercolor=true
 
 [working]
-pics=armoursmith_i_??.png
+pics=armorsmith_i_??.png
 hotspot=53 60
 playercolor=true

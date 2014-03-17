@@ -40,43 +40,43 @@ function warehouse_tests:test_set_ware_nil_as_argument()
    end)
 end
 function warehouse_tests:test_set_get_wares_string_arg()
-   assert_equal(0, self.w:get_wares("trunk"))
-   self.w:set_wares("trunk", 190)
-   assert_equal(190, self.w:get_wares("trunk"))
+   assert_equal(0, self.w:get_wares("log"))
+   self.w:set_wares("log", 190)
+   assert_equal(190, self.w:get_wares("log"))
    assert_equal(0, self.w:get_wares("raw_stone"))
 end
 function warehouse_tests:test_set_get_wares_all()
-   self.w:set_wares{trunk=190, raw_stone=170}
+   self.w:set_wares{log=190, raw_stone=170}
    local rv = self.w:get_wares("all")
-   assert_equal(190, rv.trunk)
+   assert_equal(190, rv.log)
    assert_equal(170, rv.raw_stone)
    assert_equal(0, rv.coal)
 end
 function warehouse_tests:test_set_get_wares_table_arg()
-   k = self.w:get_wares{"trunk", "raw_stone"}
-   assert_equal(0, k.trunk)
+   k = self.w:get_wares{"log", "raw_stone"}
+   assert_equal(0, k.log)
    assert_equal(0, k.raw_stone)
    assert_equal(nil, k.coal)
-   self.w:set_wares{trunk=190, raw_stone=170}
-   k = self.w:get_wares{"trunk", "raw_stone"}
-   assert_equal(190, k.trunk)
+   self.w:set_wares{log=190, raw_stone=170}
+   k = self.w:get_wares{"log", "raw_stone"}
+   assert_equal(190, k.log)
    assert_equal(170, k.raw_stone)
    assert_equal(nil, k.coal)
 end
 function warehouse_tests:test_set_get_wares_set_is_not_increase()
-   k = self.w:get_wares{"trunk", "raw_stone"}
-   k.trunk = 20
+   k = self.w:get_wares{"log", "raw_stone"}
+   k.log = 20
    k.raw_stone = 40
    self.w:set_wares(k)
-   k = self.w:get_wares{"trunk", "raw_stone"}
-   assert_equal(20, k.trunk)
+   k = self.w:get_wares{"log", "raw_stone"}
+   assert_equal(20, k.log)
    assert_equal(40, k.raw_stone)
 
-   k.trunk = 10
+   k.log = 10
    k.raw_stone = 20
    self.w:set_wares(k)
-   k = self.w:get_wares{"trunk", "raw_stone"}
-   assert_equal(10, k.trunk)
+   k = self.w:get_wares{"log", "raw_stone"}
+   assert_equal(10, k.log)
    assert_equal(20, k.raw_stone)
 end
 function warehouse_tests:test_get_wares_non_existant_name()

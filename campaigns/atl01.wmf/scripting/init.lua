@@ -169,7 +169,7 @@ function build_heavy_industrys_and_mining()
    local o = add_obj(obj_make_heavy_industry_and_mining)
    while not check_for_buildings(p1, {
       coalmine = 1, ironmine = 1, goldmine = 1, crystalmine = 1,
-      smelting_works = 1, weaponsmithy = 1, armoursmithy = 1,
+      smelting_works = 1, weaponsmithy = 1, armorsmithy = 1,
       toolsmithy = 1,
    }) do sleep(3478) end
    o.done = true

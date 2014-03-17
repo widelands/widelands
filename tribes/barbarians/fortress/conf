@@ -12,13 +12,13 @@ defeated_you_string=_Your soldiers defeated the enemy at the fortress.
 
 [buildcost]
 blackwood=9
-trunk=5
+log=5
 raw_stone=4
 grout=2
 
 [return_on_dismantle]
 blackwood=4
-trunk=2
+log=2
 raw_stone=2
 grout=1
 

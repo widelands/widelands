@@ -5,7 +5,7 @@ output=bread
 build_material=false
 
 [buildcost]
-trunk=2
+log=2
 planks=2
 stone=3
 

@@ -5,7 +5,7 @@ output=beer
 build_material=false
 
 [buildcost]
-trunk=1
+log=1
 wood=2
 stone=2
 

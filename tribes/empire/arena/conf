@@ -4,14 +4,14 @@ soldier_capacity=8
 trainer_patience=8
 
 [buildcost]
-trunk=2
+log=2
 stone=4
 marble=5
 wood=5
 marblecolumn=2
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=3
 marble=3
 wood=2

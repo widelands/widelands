@@ -1,7 +1,7 @@
 size=small
 
 [buildcost]
-trunk=1
+log=1
 planks=1
 stone=1
 

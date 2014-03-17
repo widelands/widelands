@@ -3,11 +3,11 @@ output=stone
 output=marble
 
 [buildcost]
-trunk=2
+log=2
 wood=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 
 [working positions]
 stonemason=1

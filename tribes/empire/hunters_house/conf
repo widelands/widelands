@@ -2,7 +2,7 @@ size=small
 output=meat
 
 [buildcost]
-trunk=1
+log=1
 wood=1
 stone=1
 

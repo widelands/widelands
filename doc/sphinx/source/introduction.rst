@@ -29,9 +29,9 @@ argument, a :class:`~wl.game.Player` for which to create the initial
 infrastructure. 
 
 A small example. Let's assume we want to add an initialization to the
-barbarians that gives the player 80 trunks, but not at once but one by one
+barbarians that gives the player 80 logs, but not at once but one by one
 over a certain time. The corresponding lua script could be named
-``barbarians/scripting/sc99_init_trunks.lua``. The naming decides over the
+``barbarians/scripting/sc99_init_logs.lua``. The naming decides over the
 order in which the starting conditions are listed. Let's write the script:
 
 .. code-block:: lua
@@ -52,9 +52,9 @@ order in which the starting conditions are listed. Let's write the script:
          -- Place the hq
          local hq = player:place_building("headquarters", player.starting_field)
 
-         -- Now add one trunk to the hq every 250 ms
+         -- Now add one log to the hq every 250 ms
          for i=1,80 do 
-            hq:set_wares("trunk", hq:get_wares("trunk") + 1)
+            hq:set_wares("log", hq:get_wares("log") + 1)
             sleep(250)
          end
    end
@@ -70,8 +70,8 @@ a game. The definitions of win conditions is very similar to defining
 initializations: We have to create a Lua script in
 ``/scripting/win_conditions`` which returns an array with ``name``,
 ``description`` and ``func``. Let's also make up a quick example: The first
-player to have 200 trunks in his HQ wins the game. All others loose. Save the
-following file as ``/scripting/win_conditions/havest_trunks.lua``.
+player to have 200 logs in his HQ wins the game. All others loose. Save the
+following file as ``/scripting/win_conditions/havest_logs.lua``.
 
 .. code-block:: lua
 
@@ -81,8 +81,8 @@ following file as ``/scripting/win_conditions/havest_trunks.lua``.
    set_textdomain("win_conditions")
 
    return {
-      name = _ "Harvest trunks",
-      description = _ "The first player with 200 trunks wins!",
+      name = _ "Harvest logs",
+      description = _ "The first player with 200 logs wins!",
       func = function() 
          -- Find all valid players.
          local plrs = wl.Game().players
@@ -94,7 +94,7 @@ following file as ``/scripting/win_conditions/havest_trunks.lua``.
             sleep(5000) -- we do this every 5 seconds
             for idx,p in ipairs(plrs) do -- iterate the players array
                local hq = p.starting_field.immovable
-               if hq:get_wares("trunk") >= 200 then
+               if hq:get_wares("log") >= 200 then
                   -- We found the winner
                   winner = p
                   losers = plrs

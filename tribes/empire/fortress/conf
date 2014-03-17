@@ -13,14 +13,14 @@ defeated_you_string=_Your soldiers defeated the enemy at the fortress.
 
 [buildcost]
 wood=5
-trunk=2
+log=2
 stone=8
 marble=2
 marblecolumn=2
 
 [return_on_dismantle]
 wood=2
-trunk=1
+log=1
 stone=5
 marble=1
 marblecolumn=1

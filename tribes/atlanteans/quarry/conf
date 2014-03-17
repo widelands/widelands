@@ -2,11 +2,11 @@ size=small
 output=stone
 
 [buildcost]
-trunk=2
+log=2
 planks=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 
 [working positions]
 stonecutter=1

@@ -4,7 +4,7 @@ picture=idle_00.png
 
 [buildcost]
 wood=10
-trunk=2
+log=2
 cloth=4
 
 [program]

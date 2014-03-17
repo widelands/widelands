@@ -2,7 +2,7 @@ size=big
 output=spideryarn
 
 [buildcost]
-trunk=2
+log=2
 stone=2
 planks=2
 

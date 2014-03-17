@@ -236,7 +236,7 @@ function build_eastern_trainings_area(citadel_field)
             builder = 1
          },
          wares = {
-            trunk = 40,
+            log = 40,
             blackwood = 40,
             cloth = 10,
             gold = 10,
@@ -245,7 +245,7 @@ function build_eastern_trainings_area(citadel_field)
             thatchreed = 40,
          }
       },
-      {"trainingscamp", 31, 56, soldiers = {} },
+      {"trainingcamp", 31, 56, soldiers = {} },
       {"sentry", 28, 57, soldiers = {[{3,5,0,2}] = 2 }},
       {"sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
    }

@@ -3,13 +3,13 @@ output=ration
 enhancement=inn
 
 [buildcost]
-trunk=3
+log=3
 blackwood=2
 raw_stone=1
 thatchreed=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 blackwood=1
 raw_stone=1
 

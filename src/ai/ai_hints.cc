@@ -35,7 +35,7 @@ BuildingHints::BuildingHints (Section * const section) :
 	mines              (nullptr),
 	basic              (section ? section->get_bool("is_basic")         : false),
 	build_material     (section ? section->get_bool("build_material")   : true),
-	trunkproducer      (section ? section->get_bool("trunkproducer")    : false),
+	logproducer      (section ? section->get_bool("logproducer")    : false),
 	stoneproducer      (section ? section->get_bool("stoneproducer")    : false),
 	needs_water        (section ? section->get_bool("needs_water")      : false),
 	recruitment        (section ? section->get_bool("recruitment")      : false),

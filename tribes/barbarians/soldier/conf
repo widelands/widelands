@@ -46,7 +46,7 @@ die_e=die_e
 # SOLDIER SPECIFIC STUFF ENDS HERE
 
 [buildcost]
-axe=1
+ax=1
 carrier=1
 
 [idle]

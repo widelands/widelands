@@ -3,7 +3,7 @@ program=chop
 
 [buildcost]
 carrier=1
-felling_axe=1
+felling_ax=1
 
 [chop]
 0=findobject attrib:tree radius:10
@@ -13,7 +13,7 @@ felling_axe=1
 4=playFX ../../../sound/spoken/timber 192
 5=object fall
 6=animation idle 2000
-7=createware trunk
+7=createware log
 8=return
 
 [hacking]

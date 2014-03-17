@@ -8,8 +8,8 @@ hq = p1:place_building("headquarters_shipwreck",
 hq:set_wares{
    helm = 4,
    wood_lance = 5,
-   axe = 6,
-   bakingtray = 2,
+   ax = 6,
+   bread_paddle = 2,
    basket = 1,
    bread = 8,
    cloth = 5,
@@ -35,7 +35,7 @@ hq:set_wares{
    scythe = 5,
    shovel = 6,
    stone = 40,
-   trunk = 30,
+   log = 30,
    water = 12,
    wheat = 4,
    wine = 8,
@@ -43,7 +43,7 @@ hq:set_wares{
    wool = 2,
 }
 hq:set_workers{
-   armoursmith = 1,
+   armorsmith = 1,
    brewer = 1,
    builder = 10,
    burner = 1,

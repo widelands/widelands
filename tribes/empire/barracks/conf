@@ -12,7 +12,7 @@ defeated_you_string=_Your soldiers defeated the enemy at the barracks.
 
 
 [buildcost]
-trunk=1
+log=1
 wood=2
 
 [return_on_dismantle]

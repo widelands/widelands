@@ -5,15 +5,15 @@ output=thatchreed
 space_consumer=true
 
 [buildcost]
-trunk=5
+log=5
 raw_stone=2
 
 [return_on_dismantle]
-trunk=2
+log=2
 raw_stone=1
 
 [working positions]
-ferner=1
+gardener=1
 
 [programs]
 plant_reed=_Plant reed
@@ -21,7 +21,7 @@ harvest_reed=_Harvest reed
 work=_Work
 
 [plant_reed]
-sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
+sleep=18000  #orig sleep=20000 but gardener animation was increased by 2sec
 worker=plantreed
 
 [harvest_reed]
@@ -34,5 +34,5 @@ call=harvest_reed
 return=skipped
 
 [idle]
-pics=fernery_i_??.png  # ???
+pics=reed_yard_i_??.png  # ???
 hotspot=46 44

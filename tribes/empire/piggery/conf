@@ -2,12 +2,12 @@ size=big
 output=meat
 
 [buildcost]
-trunk=2
+log=2
 stone=2
 marblecolumn=2
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=1
 marble=1
 

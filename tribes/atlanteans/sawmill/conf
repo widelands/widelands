@@ -5,25 +5,25 @@ output=planks
 is_basic=true
 
 [buildcost]
-trunk=2
+log=2
 stone=3
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=2
 
 [working positions]
 sawyer=1
 
 [inputs]
-trunk=8
+log=8
 
 [programs]
 work=_Work
 
 [work]
 return=skipped unless economy needs planks
-consume=trunk:2
+consume=log:2
 sleep=16500 # much faster than barbarians hardener
 playFX=../../../sound/sawmill/sawmill 192
 animate=working 20000 # much more faster than barbarians hardener

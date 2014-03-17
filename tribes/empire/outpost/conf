@@ -12,7 +12,7 @@ defeated_you_string=_Your soldiers defeated the enemy at the outpost.
 
 
 [buildcost]
-trunk=1
+log=1
 wood=1
 stone=1
 marble=1
