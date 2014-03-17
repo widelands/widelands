@@ -108,10 +108,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 {
 	//  building list
 	m_table.add_column(310, _("Name"));
-	m_table.add_column (70, _("Size"),     UI::Align_HCenter);
-	m_table.add_column (70, _("Prod"),     UI::Align_Right);
-	m_table.add_column (70, _("Owned"),    UI::Align_Right);
-	m_table.add_column (70, _("Build"),    UI::Align_Right);
+	m_table.add_column (70, _("Size"), "",     UI::Align_HCenter);
+	m_table.add_column (70, _("Prod"), "",     UI::Align_Right);
+	m_table.add_column (70, _("Owned"), "",    UI::Align_Right);
+	m_table.add_column (70, _("Build"), "",    UI::Align_Right);
 	m_table.selected.connect(boost::bind(&Building_Statistics_Menu::table_changed, this, _1));
 	m_table.set_column_compare
 		(Columns::Size,

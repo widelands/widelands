@@ -41,8 +41,9 @@ struct DirAnimations {
 		(Widelands::Map_Object_Descr &,
 		 const std::string           & directory,
 		 Profile                     &,
-		 char                  const * sectnametempl,
-		 Section                     * defaults    = nullptr);
+		 const std::string & name,
+		 bool optional = false,
+		 const std::string & default_dirpics = std::string());
 
 	uint32_t get_animation(Widelands::Direction const dir) const {
 		return m_animations[dir - 1];

@@ -18,7 +18,7 @@ p:allow_buildings{"lumberjacks_hut"}
 hq = p:place_building("headquarters_interim", wl.Game().map:get_field(12,10),
    false, true)
 hq:set_wares{
-   trunk = 80
+   log = 80
 }
 hq:set_workers{
    builder=10,

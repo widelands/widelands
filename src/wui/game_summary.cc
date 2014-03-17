@@ -88,8 +88,8 @@ m_game(parent->game())
 
 	// Prepare table
 	m_players_table->add_column(150, _("Player"));
-	m_players_table->add_column(50, _("Team"), UI::Align_HCenter);
-	m_players_table->add_column(100, _("Status"), UI::Align_HCenter);
+	m_players_table->add_column(50, _("Team"), "", UI::Align_HCenter);
+	m_players_table->add_column(100, _("Status"), "", UI::Align_HCenter);
 	m_players_table->add_column(100, _("Time"));
 
 	// Prepare Elements

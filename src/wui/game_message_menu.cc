@@ -53,8 +53,8 @@ GameMessageMenu::GameMessageMenu
 	list = new UI::Table<uintptr_t>(this, 5, 35, 570, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
-	list->add_column (60, _("Select"), UI::Align_HCenter, true);
-	list->add_column (60, _("Status"), UI::Align_HCenter);
+	list->add_column (60, _("Select"), "", UI::Align_HCenter, true);
+	list->add_column (60, _("Status"), "", UI::Align_HCenter);
 	list->add_column(330, _("Title"));
 	list->add_column(120, _("Time sent"));
 

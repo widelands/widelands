@@ -24,6 +24,7 @@
 #include "backtrace.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/checkstep.h"
 #include "logic/critter_bob.h"
@@ -41,6 +42,7 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "wui/mapviewpixelconstants.h"
+
 
 namespace Widelands {
 
@@ -70,14 +72,12 @@ Bob::Descr::Descr
 	 Tribe_Descr const * const tribe)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_owner_tribe(tribe)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 
-		add_animation
-			("idle", g_anim.get (directory, idle_s, "idle.png"));
+		add_animation("idle", g_gr->animations().load(directory, idle_s));
 	}
 
 	// Parse attributes

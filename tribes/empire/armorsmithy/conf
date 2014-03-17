@@ -1,0 +1,88 @@
+size=medium
+output=helm
+output=armor
+output=chain_armor
+output=plate_armor
+
+[aihints]
+build_material=false
+
+[buildcost]
+log=2
+stone=2
+marble=2
+marblecolumn=3
+
+[return_on_dismantle]
+stone=1
+marble=1
+marblecolumn=2
+
+[working positions]
+armorsmith=1
+
+[inputs]
+iron=8
+gold=8
+coal=8
+cloth=8
+
+[programs]
+produce_helm=_Produce helm
+produce_armor=_Produce armor
+produce_chain_armor=_Produce chain armor
+produce_plate_armor=_Produce plate armor
+work=_Work
+
+[produce_helm]
+return=skipped unless economy needs helm
+consume=iron coal
+sleep=32000
+animate=working 35000
+produce=helm
+
+[produce_armor]
+return=skipped unless economy needs armor
+consume=iron coal cloth
+sleep=32000
+animate=working 45000
+produce=armor
+
+[produce_chain_armor]
+return=skipped unless economy needs chain_armor
+consume=iron:2 coal cloth
+sleep=32000
+animate=working 45000
+produce=chain_armor
+
+[produce_plate_armor]
+return=skipped unless economy needs plate_armor
+consume=iron:2 coal:2 cloth gold
+sleep=32000
+animate=working 45000
+produce=plate_armor
+
+[work]
+call=produce_helm
+call=produce_armor
+call=produce_chain_armor
+call=produce_plate_armor
+sleep=20000
+return=skipped
+
+[unoccupied]
+pics=armory_u_??.png  # ???
+hotspot=50 62
+
+[idle]
+pics=armory_i_??.png  # ???
+hotspot=50 62
+
+[build]
+pics=armory_b_??.png  # ???
+hotspot=50 62
+
+[working]
+pics=armory_w_??.png  # ???
+hotspot=50 62
+fps=5

@@ -213,10 +213,10 @@ function build_materials_thread()
    end
    o.done = true
 
-   send_msg(order_msg_18_fernery)
-   plr:allow_buildings{"fernery"}
+   send_msg(order_msg_18_reed_yard)
+   plr:allow_buildings{"reed_yard"}
    o = add_obj(obj_better_material_3)
-   while #plr:get_buildings("fernery") < 1 do sleep(5421) end
+   while #plr:get_buildings("reed_yard") < 1 do sleep(5421) end
 
    send_msg(order_msg_19_all_material)
    o.done = true
@@ -376,7 +376,7 @@ function reveal_village()
       {"lumberjacks_hut", 54, 24},
       {"rangers_hut", 57, 24},
       {"rangers_hut", 55, 25},
-      {"hardener", 54, 26, wares = {trunk = 8}},
+      {"hardener", 54, 26, wares = {log = 8}},
       {"warehouse", 53, 28},
       {"inn", 55, 28, wares = {pittabread = 4, meat = 4}},
       {"tavern", 57, 28, wares = {pittabread=4, meat = 4}},

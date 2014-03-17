@@ -126,7 +126,7 @@ function mining_infrastructure()
       "deep_oremine",
       "stonemasons_house",
       "toolsmithy",
-      "armoursmithy",
+      "armorsmithy",
       "weaponsmithy",
       "smelting_works",
       "burners_house",
@@ -142,14 +142,14 @@ function mining_infrastructure()
          "deep_oremine",
          "stonemasons_house",
          "toolsmithy",
-         "armoursmithy",
+         "armorsmithy",
          "weaponsmithy",
          "smelting_works",
          "burners_house",
       }
       if #rv.stonemasons_house > 0 and
          #rv.toolsmithy > 0 and
-         #rv.armoursmithy > 0 and
+         #rv.armorsmithy > 0 and
          #rv.smelting_works > 0 and
          (#rv.oremine + #rv.deep_oremine > 0) and
          (#rv.coalmine + #rv.deep_coalmine + #rv.burners_house > 0) and

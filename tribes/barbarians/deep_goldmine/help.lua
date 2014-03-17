@@ -15,7 +15,7 @@ return {
 		rt(h2(_"General")) ..
 		rt(p(_"A %1$s exploits only %2$s of the resource. From there on out, it will only have a 5%% chance of finding %3$s.":bformat(_"Deep Gold Mine","2/3",_"Gold Ore"))) ..
 		rt(h3(_"Purpose:")) ..
-		image_line("tribes/barbarians/goldstone/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Gold Ore"))) ..
+		image_line("tribes/barbarians/goldore/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Gold Ore"))) ..
 		text_line(_"Working radius:", "2") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
@@ -25,8 +25,8 @@ return {
 		dependencies({"tribes/barbarians/inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_goldmine/menu.png"}, p(_"%s from an Inn":format(_"Snack"))) ..
 		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_goldmine/menu.png"}, p(_"%s from a Big Inn":format(_"Snack"))) ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/resi_gold2/resi_00.png","tribes/barbarians/deep_goldmine/menu.png","tribes/barbarians/goldstone/menu.png"}, p(_"Gold Ore")) ..
-		dependencies({"tribes/barbarians/goldstone/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
+		dependencies({"tribes/barbarians/resi_gold2/resi_00.png","tribes/barbarians/deep_goldmine/menu.png","tribes/barbarians/goldore/menu.png"}, p(_"Gold Ore")) ..
+		dependencies({"tribes/barbarians/goldore/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
 		rt(p(_"%s always goes to the %s. It has no other use.":format(_"Gold Ore",_"Smelting Works"))) ..
 	--Building Section
 		rt(h2(_"Building")) ..
@@ -34,13 +34,13 @@ return {
 		text_line(_"Upgraded from:",_"Gold Mine","tribes/barbarians/goldmine/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 4), 4) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Cost cumulative:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 4), 4) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 8), 8) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 8), 8) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 4), 4) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 		text_line(_"Upgradeable to:",_"Deeper Gold Mine","tribes/barbarians/deeper_goldmine/menu.png") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

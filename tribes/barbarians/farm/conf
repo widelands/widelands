@@ -5,12 +5,12 @@ output=wheat
 space_consumer=true
 
 [buildcost]
-trunk=4
+log=4
 blackwood=1
 raw_stone=3
 
 [return_on_dismantle]
-trunk=1
+log=1
 blackwood=1
 raw_stone=2
 

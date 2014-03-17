@@ -35,8 +35,9 @@ class LuaInterface;
 
 namespace Widelands {
 
-struct MapGenInfo;
 class Editor_Game_Base;
+struct Critter_Bob_Descr;
+struct MapGenInfo;
 
 // This is the in memory descriptions of the world and provides access to
 // terrains, immovables and resources.

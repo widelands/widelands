@@ -146,8 +146,7 @@ void Main_Menu_New_Map::clicked_create_map() {
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 
-	// Clean all the stuff up, so we can load
-	egbase.cleanup_for_load(true, false);
+	egbase.cleanup_for_load();
 
 	map.create_empty_map(egbase.world(),
 	                     Widelands::MAP_DIMENSIONS[m_w],

@@ -3,7 +3,7 @@ program=chop
 
 [buildcost]
 carrier=1
-felling_axe=1
+felling_ax=1
 
 [chop]
 0=findobject attrib:tree radius:10
@@ -13,28 +13,24 @@ felling_axe=1
 4=playFX ../../../sound/spoken/timber 192
 5=object fall
 6=animation idle 2000
-7=createware trunk
+7=createware log
 8=return
 
 [hacking]
 pics=hacking_??.png
 hotspot=19 17
 fps=10
-playercolor=true
 
 [idle]
 pics=idle_??.png
 hotspot=5 23
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=10 22
 fps=10
-playercolor=true
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=10 21
 fps=10
-playercolor=true

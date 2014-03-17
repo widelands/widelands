@@ -6,14 +6,14 @@ function init_human_player(player, f_hq, tribename)
 			prefilled_buildings(player, 
 			{"headquarters_interim", f_hq.x, f_hq.y, 
 				wares = {
-					 trunk = 3,
+					 log = 3,
 				},
 				workers = {
 					 blacksmith = 1,
 					 smelter = 1,
 					 builder = 2,
 					 carrier = 10,
-					 ferner = 1,
+					 gardener = 1,
 					 geologist = 1,
 					 ["lime-burner"] = 1,
 					 lumberjack = 3,
@@ -36,7 +36,7 @@ function init_human_player(player, f_hq, tribename)
 	if tribename == "empire" then
 		prefilled_buildings(player, { "headquarters_shipwreck", f_hq.x, f_hq.y,
 		wares = {
-			trunk = 2,
+			log = 2,
 			wood = 3,
 		},
 		workers = {
@@ -69,7 +69,7 @@ function init_human_player(player, f_hq, tribename)
 	if tribename == "atlanteans" then
 	    prefilled_buildings(player, { "headquarters", f_hq.x, f_hq.y,
 		    wares = {
-				trunk = 2,
+				log = 2,
 				planks = 2,
 				spidercloth = 1
 			},
@@ -110,9 +110,8 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 		prefilled_buildings(player, 
 			{ "port", f_hq.x, f_hq.y, 
 			   wares = {
-				  axe = 6,
-				  bakingtray = 2,
-				  blackwood = 60,
+				  ax = 6,
+				  bread_paddle = 2,
 				  coal = 12,
 				  fire_tongs = 2,
 				  fish = 6,
@@ -132,14 +131,14 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				  shovel = 4,
 				  snack = 3,
 				  thatchreed = 24,
-				  trunk = 150,
+				  log = 150,
 			   },
 			   workers = {
 				  carrier = 40,
 				  blacksmith = 2,
 				  brewer = 1,
 				  builder = 10,
-				  ferner = 1,
+				  gardener = 1,
 				  fisher = 2,
 				  geologist = 4,
 				  ["lime-burner"] = 1,
@@ -155,7 +154,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			{ "shipyard", f_shipyard.x, f_shipyard.y, wares = {
 				  blackwood = 10,
 				  cloth = 4,
-				  trunk = 2,
+				  log = 2,
 			   },
 		 }
 		)
@@ -169,8 +168,8 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			   wares = {
 				 helm = 4,
 				 wood_lance = 5,
-				 axe = 6,
-				 bakingtray = 2,
+				 ax = 6,
+				 bread_paddle = 2,
 				 basket = 2,
 				 bread = 8,
 				 cloth = 5,
@@ -196,7 +195,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				 scythe = 5,
 				 shovel = 6,
 				 stone = 50,
-				 trunk = 40,
+				 log = 40,
 				 water = 12,
 				 wheat = 4,
 				 wine = 8,
@@ -204,7 +203,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				 wool = 2,
 			   },
 			   workers = {
-				 armoursmith = 1,
+				 armorsmith = 1,
 				 brewer = 1,
 				 builder = 10,
 				 burner = 1,
@@ -224,7 +223,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			{ "shipyard", f_shipyard.x, f_shipyard.y, 
 			   wares = {
 				 cloth = 4,
-				 trunk = 2,
+				 log = 2,
 				 wood = 10,
 			   }
 		   },
@@ -241,7 +240,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			 quartz = 9,
 			 stone = 50,
 			 spideryarn = 9,
-			 trunk = 100,
+			 log = 100,
 			 coal = 12,
 			 gold = 4,
 			 goldyarn = 6,
@@ -258,7 +257,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			 smoked_fish = 6,
 			 smoked_meat = 6,
 			 water = 12,
-			 bakingtray = 2,
+			 bread_paddle = 2,
 			 bucket = 2,
 			 fire_tongs = 2,
 			 fishing_net = 4,
@@ -274,7 +273,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			 light_trident = 5,
 		   },
 		   workers = {
-			 armoursmith = 1,
+			 armorsmith = 1,
 			 blackroot_farmer = 1,
 			 builder = 10,
 			 burner = 1,
@@ -295,7 +294,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 		   { "shipyard", f_shipyard.x, f_shipyard.y, wares = {
 			  planks = 10,
 			  spidercloth = 4,
-			  trunk = 2,
+			  log = 2,
 		   }}
 		)
 	end	

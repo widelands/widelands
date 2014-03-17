@@ -10,16 +10,15 @@ carrier2=donkey
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, trunk, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldstone, gold;    pick, axe, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bakingtray, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armour, chain_armour, plate_armour
+wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldore, gold;    pick, ax, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armor, chain_armor, plate_armor
 
-workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
+workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
 name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
-playercolor=true
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
@@ -27,7 +26,6 @@ name=flag
 pics=pics/flag_??.png
 hotspot=14 38
 fps=10
-playercolor=true
 
 [immovable types]
 ashes=_Ashes
@@ -55,13 +53,13 @@ shipconstruction=_Ship Construction Site
 
 [ware types]
 advanced_lance=_Advanced Lance
-armour=_Armor
-axe=_Ax
-bakingtray=_Bread Paddle
+armor=_Armor
+ax=_Ax
+bread_paddle=_Bread Paddle
 basket=_Basket
 beer=_Beer
 bread=_Bread
-chain_armour=_Chain Armor
+chain_armor=_Chain Armor
 cloth=_Cloth
 coal=_Coal
 fire_tongs=_Fire Tongs
@@ -69,7 +67,7 @@ fish=_Fish
 fishing_rod=_Fishing Rod
 flour=_Flour
 gold=_Gold
-goldstone=_Gold Ore
+goldore=_Gold Ore
 grape=_Grape
 hammer=_Hammer
 heavy_lance=_Heavy Lance
@@ -84,13 +82,13 @@ marble=_Marble
 meal=_Meal
 meat=_Meat
 pick=_Pick
-plate_armour=_Plate Armor
+plate_armor=_Plate Armor
 ration=_Ration
 saw=_Saw
 scythe=_Scythe
 shovel=_Shovel
 stone=_Stones
-trunk=_Log
+log=_Log
 war_lance=_War-Lance
 water=_Water
 wheat=_Wheat
@@ -107,7 +105,7 @@ donkey=_Donkey
 soldier=_Soldier
 
 [worker types]
-armoursmith=_Armorsmith
+armorsmith=_Armorsmith
 baker=_Baker
 brewer=_Brewer
 builder=_Builder
@@ -185,7 +183,7 @@ burners_house=_Charcoal Burner
 smelting_works=_Smelting Works
 shipyard=_Shipyard
 toolsmithy=_Toolsmithy
-armoursmithy=_Armor Smithy
+armorsmithy=_Armor Smithy
 donkeyfarm=_Donkey Farm
 sheepfarm=_Sheep Farm
 weaving-mill=_Weaving Mill
@@ -215,7 +213,7 @@ fortress=_Fortress
 [trainingsite types]
 colosseum=_Colosseum
 arena=_Arena
-trainingscamp=_Training Camp
+trainingcamp=_Training Camp
 
 [initializations]
 headquarters_medium=_Headquarters Medium

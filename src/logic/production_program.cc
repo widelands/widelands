@@ -26,6 +26,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/wares_queue.h"
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
@@ -737,10 +738,7 @@ ProductionProgram::ActAnimate::ActAnimate
 		if (descr.is_animation_known(animation_name))
 			m_id = descr.get_animation(animation_name);
 		else {
-			m_id = g_anim.get
-				(directory.c_str(),
-				 prof.get_safe_section(animation_name),
-				 nullptr);
+			m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
 			descr.add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.

@@ -26,6 +26,7 @@
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
+#include "graphic/graphic.h"
 #include "logic/constructionsite.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
@@ -50,16 +51,11 @@ Ship_Descr::Ship_Descr
 	 const Tribe_Descr & gtribe)
 : Descr(given_name, gdescname, directory, prof, global_s, &gtribe)
 {
-	m_sail_anims.parse
-		(*this,
-		 directory,
-		 prof,
-		 (name() + "_sail_??").c_str(),
-		 prof.get_section("sail"));
+	m_sail_anims.parse(*this, directory, prof, "sail");
 
-		Section * sinking_s = prof.get_section("sinking");
-		if (sinking_s)
-			add_animation("sinking", g_anim.get (directory, *sinking_s, "sinking.png"));
+	Section * sinking_s = prof.get_section("sinking");
+	if (sinking_s)
+		add_animation("sinking", g_gr->animations().load(directory, *sinking_s));
 
 	m_capacity     = global_s.get_natural("capacity", 20);
 	m_vision_range = global_s.get_natural("vision_range", 7);

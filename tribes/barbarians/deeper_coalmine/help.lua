@@ -27,7 +27,7 @@ return {
 		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/meal/menu.png","tribes/barbarians/deeper_coalmine/menu.png"}, p(_"%s from a Big Inn":format(_"Meal"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/resi_coal2/resi_00.png","tribes/barbarians/deeper_coalmine/menu.png","tribes/barbarians/coal/menu.png"}, p(_"Coal")) ..
-		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}, p(_"Axfactory")) ..
+		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/axfactory/menu.png"}, p(_"Axfactory")) ..
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png"}, p(_"War Mill")) ..
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/helmsmithy/menu.png"}, p(_"Helm Smithy")) ..
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
@@ -38,13 +38,13 @@ return {
 		text_line(_"Upgraded from:",_"Deep Coal Mine","tribes/barbarians/deep_coalmine/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 4), 4) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Cost cumulative:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 6), 6) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 12), 12) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 12), 12) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 3), 3) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 6), 6) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 6), 6) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include <cstring>
 #include <vector>
 
 #include <boost/noncopyable.hpp>
@@ -96,7 +97,6 @@ public:
 
 	Section(Profile *, char const * name);
 	Section(const Section &);
-	~Section();
 
 	Section & operator= (const Section &);
 
@@ -109,6 +109,7 @@ public:
 	uint32_t get_num_values() const {return m_values.size();}
 
 	char const * get_name() const;
+	void set_name(const std::string&);
 
 	bool is_used() const;
 	void mark_used();
@@ -151,6 +152,7 @@ public:
 		(const char * name);
 	const char *              get_safe_string
 		(const char * name);
+	const char * get_safe_string(const std::string & name);
 	Widelands::Coords         get_safe_Coords
 		(const char * name, Widelands::Extent);
 	Widelands::Player_Number  get_safe_Player_Number
@@ -209,7 +211,7 @@ public:
 private:
 	Profile  * m_profile;
 	bool       m_used;
-	char     * m_section_name;
+	std::string m_section_name;
 	Value_list m_values;
 };
 
@@ -258,7 +260,7 @@ public:
 		 bool used_only = true,
 		 FileSystem & = *g_fs);
 
-	Section * get_section     (char const * name);
+	Section * get_section     (const std::string & name);
 	Section & get_safe_section(const std::string & name);
 	Section & pull_section    (char const * name);
 	Section * get_next_section(char const * name = nullptr);

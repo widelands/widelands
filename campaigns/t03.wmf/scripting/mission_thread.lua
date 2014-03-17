@@ -149,11 +149,11 @@ function mining_and_trainingsites()
 
    send_msg(order_msg_6_build_enhanced_economy_and_training)
    p1:allow_buildings{
-      "axefactory",
+      "axfactory",
       "warmill",
       "helmsmithy",
       "battlearena",
-      "trainingscamp",
+      "trainingcamp",
       "inn",
       "big_inn",
       "deep_coalmine",
@@ -173,15 +173,15 @@ function mining_and_trainingsites()
 end
 
 function check_trainingssite_obj(o)
-   while not check_for_buildings(p1, {trainingscamp = 1, battlearena = 1}) do
+   while not check_for_buildings(p1, {trainingcamp = 1, battlearena = 1}) do
       sleep(6523)
    end
    o.done = true
 end
 function check_weapon_productions_obj(o)
    while true do
-      local rv = p1:get_buildings{"metalworks", "axefactory", "warmill"}
-      if #rv.metalworks > 0 and (#rv.axefactory + #rv.warmill > 0) then
+      local rv = p1:get_buildings{"metalworks", "axfactory", "warmill"}
+      if #rv.metalworks > 0 and (#rv.axfactory + #rv.warmill > 0) then
          break
       end
       sleep(6523)

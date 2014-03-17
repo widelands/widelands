@@ -589,7 +589,7 @@ void Worker::informPlayer
 	(Game & game, Building & building, std::string res_type) const
 {
 	// NOTE this is just an ugly hack for now, to avoid getting messages
-	// NOTE for farms, ferneries, vineyards, etc.
+	// NOTE for farms, reed yards, vineyards, etc.
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
 	// NOTE  AND fish_breeders

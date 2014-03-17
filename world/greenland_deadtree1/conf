@@ -1,5 +1,4 @@
 program=program
-picture=idle.png
 
 [idle]
 hotspot=25 56

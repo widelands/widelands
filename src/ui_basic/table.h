@@ -61,6 +61,7 @@ public:
 	void add_column
 		(uint32_t width,
 		 const std::string & title = std::string(),
+		 const std::string & tooltip = std::string(),
 		 Align                                  = Align_Left,
 		 bool                is_checkbox_column = false);
 
@@ -166,6 +167,7 @@ public:
 	void add_column
 		(uint32_t width,
 		 const std::string & title = std::string(),
+		 const std::string & tooltip = std::string(),
 		 Align                                  = Align_Left,
 		 bool                is_checkbox_column = false);
 

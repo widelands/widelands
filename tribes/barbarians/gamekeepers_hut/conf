@@ -1,11 +1,11 @@
 size=small
 
 [buildcost]
-trunk=4
+log=4
 raw_stone=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 raw_stone=1
 
 [working positions]

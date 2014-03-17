@@ -32,15 +32,11 @@
 
 #define MAX_RECTS 20
 
-namespace UI {struct ProgressWindow;}
-
-struct AnimationGfx;
+class AnimationManager;
 class ImageLoaderImpl;
 class RenderTarget;
-class Screen;
 class Surface;
 class SurfaceCache;
-struct Road_Textures;
 struct SDL_Surface;
 class StreamWrite;
 struct Texture;
@@ -81,8 +77,8 @@ struct GraphicCaps
 /**
  * This class is a kind of Swiss Army knife for your graphics need. It
  * initializes the graphic system and provides access to resolutions. It has an
- * Image and a Surface cache and holds the data of all animations and the road
- * textures. It also offers functionality to save a screenshot.
+ * Animation, Image and Surface cache and owns the road textures. It also
+ * offers functionality to save a screenshot.
  */
 class Graphic {
 public:
@@ -107,10 +103,9 @@ public:
 	bool need_update() const;
 	void refresh(bool force = true);
 
-	ImageCache& images() const {return *image_cache_.get();}
 	SurfaceCache& surfaces() const {return *surface_cache_.get();}
-
-	void flush_animations();
+	ImageCache& images() const {return *image_cache_.get();}
+	AnimationManager& animations() const {return *animation_manager_.get();}
 
 	void save_png(const Image*, StreamWrite*) const;
 
@@ -121,15 +116,8 @@ public:
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
-	void load_animations();
-	void ensure_animation_loaded(uint32_t anim);
-	size_t nr_frames(uint32_t anim = 0);
-	uint32_t get_animation_frametime(uint32_t anim) const;
-	void get_animation_size (uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h);
-
 	void screenshot(const std::string& fname) const;
 	Texture * get_maptexture_data(uint32_t id);
-	AnimationGfx * get_animation(uint32_t);
 
 	Surface& get_road_texture(int32_t roadtex);
 
@@ -177,13 +165,14 @@ protected:
 	/// Non-volatile cache of hardware independent images. The use the
 	/// surface_cache_ to cache their pixel data.
 	std::unique_ptr<ImageCache> image_cache_;
+	/// This holds all animations.
+	std::unique_ptr<AnimationManager> animation_manager_;
 
 	// The texture needed to draw roads.
 	std::unique_ptr<Surface> pic_road_normal_;
 	std::unique_ptr<Surface> pic_road_busy_;
 
 	std::vector<Texture *> m_maptextures;
-	std::vector<AnimationGfx *> m_animations;
 };
 
 extern Graphic * g_gr;

@@ -255,18 +255,19 @@ void DismantleSite::draw
 	if (m_working)
 		completed_time += DISMANTLESITE_STEP_TIME + gametime - m_work_steptime;
 
-	uint32_t anim;
+	uint32_t anim_idx;
 	try {
-		anim = m_building->get_animation("unoccupied");
+		anim_idx = m_building->get_animation("unoccupied");
 	} catch (Map_Object_Descr::Animation_Nonexistent &) {
-		anim = m_building->get_animation("idle");
+		anim_idx = m_building->get_animation("idle");
 	}
-	uint32_t w, h;
-	g_gr->get_animation_size(anim, tanim, w, h);
+	const Animation& anim = g_gr->animations().get_animation(anim_idx);
+	const uint16_t w = anim.width();
+	const uint16_t h = anim.height();
 
 	uint32_t lines = h * completed_time / total_time;
 
-	dst.drawanimrect(pos, anim, tanim, get_owner(), Rect(Point(0, lines), w, h - lines));
+	dst.drawanimrect(pos, anim_idx, tanim, get_owner(), Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);

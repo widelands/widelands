@@ -25,7 +25,6 @@
 #include <config.h>
 
 #include "container_iterate.h"
-#include "graphic/animation_gfx.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -159,7 +158,7 @@ Immovable_Descr IMPLEMENTATION
  * Parse an immovable from its conf file.
  *
  * Section [global]:
- * picture (default = $NAME_00.bmp): name of picture used in editor
+ * picture (default = $NAME_00.png): name of picture used in editor
  * size = none|small|medium|big (default = none): influences build options
  *
  * Section [program] (optional)
@@ -175,7 +174,6 @@ Immovable_Descr::Immovable_Descr
 	 const World & world, Tribe_Descr const * const owner_tribe)
 :
 	Map_Object_Descr(_name, _descname),
-	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
@@ -508,23 +506,24 @@ void Immovable::draw_construction
 			(&(*m_program)[m_program_ptr]);
 
 	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
-	uint32_t total = m_anim_construction_total * steptime;
-	uint32_t done = 0;
 
+	uint32_t done = 0;
 	if (m_anim_construction_done > 0) {
 		done = steptime * (m_anim_construction_done - 1);
 		done += std::min(steptime, game.get_gametime() - m_animstart);
 	}
 
+	uint32_t total = m_anim_construction_total * steptime;
 	if (done > total)
 		done = total;
 
-	const size_t nr_frames = g_gr->nr_frames(m_anim);
-	uint32_t frametime = g_anim.get_animation(m_anim).frametime;
+	const Animation& anim = g_gr->animations().get_animation(m_anim);
+	const size_t nr_frames = anim.nr_frames();
+	uint32_t frametime = g_gr->animations().get_animation(m_anim).frametime();
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
-	uint32_t curw, curh;
-	g_gr->get_animation_size(m_anim, current_frame * frametime, curw, curh);
+	const uint16_t curw = anim.width();
+	const uint16_t curh = anim.height();
 
 	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
 
@@ -796,10 +795,7 @@ ImmovableProgram::ActAnimate::ActAnimate
 			m_id = descr.get_animation(animation_name);
 		else {
 			m_id =
-				g_anim.get
-					(directory.c_str(),
-					 prof.get_safe_section(animation_name),
-					 nullptr);
+				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
 
 			descr.add_animation(animation_name, m_id);
 		}
@@ -1137,10 +1133,7 @@ ImmovableProgram::ActConstruction::ActConstruction
 			m_animid = descr.get_animation(animation_name);
 		else {
 			m_animid =
-				g_anim.get
-					(directory.c_str(),
-					 prof.get_safe_section(animation_name),
-					 nullptr);
+				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
 
 			descr.add_animation(animation_name, m_animid);
 		}

@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=field0s_00.png
 
 [program]
 animate=small 45000

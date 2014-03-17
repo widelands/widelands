@@ -63,12 +63,12 @@ function place_headquarters()
 
       prefilled_buildings(player, { "headquarters", sf.x, sf.y,
          wares = {
-            axe = 5,
-            bakingtray = 2,
+            ax = 5,
+            bread_paddle = 2,
             blackwood = 32,
             cloth = 5,
             coal = 12,
-            felling_axe = 4,
+            felling_ax = 4,
             fire_tongs = 2,
             fish = 6,
             fishing_rod = 2,
@@ -89,7 +89,7 @@ function place_headquarters()
             shovel = 4,
             snack = 3,
             thatchreed = 24,
-            trunk = 80,
+            log = 80,
          },
          workers = {
             blacksmith = 2,
@@ -97,7 +97,7 @@ function place_headquarters()
             builder = 10,
             burner = 1,
             carrier = 40,
-            ferner = 1,
+            gardener = 1,
             geologist = 4,
             ["lime-burner"] = 1,
             lumberjack = 3,

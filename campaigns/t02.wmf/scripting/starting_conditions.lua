@@ -16,8 +16,8 @@ plr:allow_buildings{
 hq_pos = wl.Game().map:get_field(12,10)
 hq = plr:place_building("headquarters_interim", hq_pos, false, true)
 hq:set_wares{
-   axe=6,
-   bakingtray=2,
+   ax=6,
+   bread_paddle=2,
    blackwood=32,
    coal=12,
    fire_tongs=2,
@@ -38,7 +38,7 @@ hq:set_wares{
    shovel=4,
    snack=3,
    thatchreed=24,
-   trunk=80,
+   log=80,
 }
 hq:set_workers{
    blacksmith=2,
@@ -46,7 +46,7 @@ hq:set_workers{
    builder=10,
    burner=1,
    carrier=40,
-   ferner=1,
+   gardener=1,
    fisher=1,
    geologist=4,
    ["lime-burner"]=1,

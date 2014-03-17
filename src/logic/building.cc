@@ -142,7 +142,7 @@ Building_Descr::Building_Descr
 			if (build_s->get_int("fps", -1) != -1)
 				throw wexception("fps defined for build animation!");
 			if (!is_animation_known("build"))
-				add_animation("build", g_anim.get(directory.c_str(), *build_s, nullptr));
+				add_animation("build", g_gr->animations().load(directory, *build_s));
 		}
 
 		// Get costs
@@ -168,13 +168,13 @@ Building_Descr::Building_Descr
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
-			add_animation("idle", g_anim.get(directory.c_str(), idle_s, nullptr));
+			add_animation("idle", g_gr->animations().load(directory, idle_s));
 		if (Section * unoccupied = prof.get_section("unoccupied"))
 			if (!is_animation_known("unoccupied"))
-				add_animation("unoccupied", g_anim.get(directory.c_str(), *unoccupied, nullptr));
+				add_animation("unoccupied", g_gr->animations().load(directory, *unoccupied));
 		if (Section * empty = prof.get_section("empty"))
 			if (!is_animation_known("empty"))
-				add_animation("empty", g_anim.get(directory.c_str(), *empty, nullptr));
+				add_animation("empty", g_gr->animations().load(directory, *empty));
 	}
 
 	m_vision_range = global_s.get_int("vision_range");
@@ -919,23 +919,22 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const std::string & picnametempl =
-		g_anim.get_animation(descr().get_ui_anim()).picnametempl;
+	const std::string& img = g_gr->animations().get_animation
+		(descr().get_ui_anim()).representative_image(owner().get_playercolor()).hash();
 	std::string rt_description;
 	rt_description.reserve
-		(strlen("<rt image=") + picnametempl.size() + 1 +
+		(strlen("<rt image=") + img.size() + 1 +
 		 strlen("<p font-size=14 font-face=DejaVuSerif></p>") +
 		 description.size() +
 		 strlen("</rt>"));
 	rt_description  = "<rt image=";
-	rt_description += picnametempl;
+	rt_description += img;
 	{
 		std::string::iterator it = rt_description.end() - 1;
 		for (; it != rt_description.begin() and *it != '?'; --it) {}
 		for (;                                  *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description += ".png";
 	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
 	rt_description += description;
 	rt_description += "</p></rt>";

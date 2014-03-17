@@ -47,11 +47,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
      m_frame_num(0),
      m_nrframes(0),
      m_frametime(frametime),
-     is_32bit(format.BytesPerPixel == 4),
      m_was_animated(false) {
-	// TODO(sirver): There is no 16bit mode anymore. Kill is_32bit and replace through true.
-	assert(is_32bit);
-
 	for (const std::string& fname : texture_files) {
 		if (!g_fs->FileExists(fname)) {
 			throw wexception("Could not find %s.", fname.c_str());
@@ -77,7 +73,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
 			GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
-			m_glFrames.push_back(surface);
+			m_glFrames.emplace_back(surface);
 
 			// calculate shades on the first frame
 			if (!m_nrframes) {
@@ -112,9 +108,9 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
-			if (surf->format->BitsPerPixel == 8)
-				m_colormap = new Colormap(*surf->format->palette->colors, format);
-			else {
+			if (surf->format->BitsPerPixel == 8) {
+				m_colormap.reset(new Colormap(*surf->format->palette->colors, format));
+			} else {
 				SDL_Color pal[256];
 
 				log("WARNING: %s: using 332 default palette\n", fname.c_str());
@@ -127,7 +123,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 							pal[(r << 5) | (g << 2) | b].b = b << 6;
 						}
 
-				m_colormap = new Colormap(*pal, format);
+				m_colormap.reset(new Colormap(*pal, format));
 			}
 		}
 
@@ -177,12 +173,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 
 Texture::~Texture ()
 {
-	delete m_colormap;
 	free(m_pixels);
-
-	BOOST_FOREACH(GLSurfaceTexture* surf, m_glFrames)
-		delete surf;
-	m_glFrames.clear();
 }
 
 /**
@@ -195,13 +186,7 @@ Uint32 Texture::get_minimap_color(char shade) {
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
 
 	uint32_t table = static_cast<uint8_t>(shade);
-	return
-		is_32bit ?
-		static_cast<const Uint32 *>(m_colormap->get_colormap())
-		[clr | (table << 8)]
-		:
-		static_cast<const Uint16 *>(m_colormap->get_colormap())
-		[clr | (table << 8)];
+	return static_cast<const Uint32*>(m_colormap->get_colormap())[clr | (table << 8)];
 }
 
 /**

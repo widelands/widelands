@@ -2,10 +2,10 @@ size=small
 output=fish
 
 [buildcost]
-trunk=4
+log=4
 
 [return_on_dismantle]
-trunk=2
+log=2
 
 [working positions]
 fisher=1

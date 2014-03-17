@@ -46,77 +46,65 @@ die_e=die_e
 # SOLDIER SPECIFIC STUFF ENDS HERE
 
 [buildcost]
-axe=1
+ax=1
 carrier=1
 
 [idle]
 pics=idle_??.png
 hotspot=16 31
-playercolor=true
 fps=5
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=16 31
 fps=10
-playercolor=true
 
 [atk_ok_e]
 pics=atk_ok_e_??.png
 hotspot=30 36
-playercolor=true
 fps=10
 
 [atk_fail_e]
 pics=atk_fail_e_??.png
 hotspot=30 36
-playercolor=true
 fps=10
 
 [eva_ok_e]
 pics=eva_ok_e_??.png
 hotspot=18 34
-playercolor=true
 fps=20
 
 [eva_fail_e]
 pics=eva_fail_e_??.png
 hotspot=30 36
-playercolor=true
 fps=10
 
 [atk_ok_w]
 pics=atk_ok_w_??.png
 hotspot=30 36
-playercolor=true
 fps=10
 
 [atk_fail_w]
 pics=atk_fail_w_??.png
 hotspot=30 36
-playercolor=true
 fps=10
 
 [eva_ok_w]
 pics=eva_ok_w_??.png
 hotspot=18 34
-playercolor=true
 fps=20
 
 [eva_fail_w]
 pics=eva_fail_w_??.png
 hotspot=30 36
-playercolor=true
 fps=10
 
 [die_w]
 pics=die_??.png
 hotspot=16 31
-playercolor=true
 fps=20
 
 [die_e]
 pics=die_??.png
 hotspot=16 31
-playercolor=true
 fps=20

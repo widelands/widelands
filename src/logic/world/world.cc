@@ -26,6 +26,7 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/critter_bob.h"
 #include "logic/game_data_error.h"
 #include "logic/world/map_gen.h"
 #include "wexception.h"

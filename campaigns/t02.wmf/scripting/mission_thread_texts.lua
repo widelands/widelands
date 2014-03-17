@@ -41,7 +41,7 @@ _[[Black – coal]] .. "<br>" ..
 _[[Red – iron ore]] .. "<br>" ..
 _[[Yellow – gold]] .. "<br>" ..
 _[[Grey – granite]] .. "<br><br>" ..
-_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as a mining symbol.]]
+_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]
    )
 }
 
@@ -124,7 +124,7 @@ _([[You can obtain water by building a well upon a water source, ]] ..
 }
 
 obj_better_material_3 = {
-   name="mission fernery",
+   name="mission reed_yard",
    title=_"Build a reed yard",
    number = 1,
    body= objective_text(_"Build a reed yard", _(
@@ -195,7 +195,7 @@ order_msg_1 = {
 _([[So you want to prepare us for a longer stay in these forests, Thron? ]] .. 
 [[Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al’thunran. ]] .. 
 [[Too long have we waited while our brethren have fought on the battlefield, ]] .. 
-[[and our axes and swords have turned rusty over time.]])
+[[and our axs and swords have turned rusty over time.]])
    )
 }
 
@@ -346,7 +346,7 @@ _([[Still, it would not hurt to accumulate some grout for our further campaign; 
    ) .. new_objectives(obj_better_material_2)
 }
 
-order_msg_18_fernery = {
+order_msg_18_reed_yard = {
    title=_"The Advisor", 
    body= khantrukh(_"Khantrukh steps in...", 
 _([[Chieftain, this is a disgrace! ]] .. 

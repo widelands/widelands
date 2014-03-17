@@ -5,13 +5,13 @@ output=pittabread
 build_material=false
 
 [buildcost]
-trunk=2
+log=2
 blackwood=2
 raw_stone=2
 thatchreed=2
 
 [return_on_dismantle]
-trunk=1
+log=1
 blackwood=1
 raw_stone=2
 

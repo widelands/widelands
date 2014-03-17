@@ -2,12 +2,12 @@ size=mine
 output=ironore
 
 [buildcost]
-trunk=7
+log=7
 planks=4
 spidercloth=1
 
 [return_on_dismantle]
-trunk=2
+log=2
 planks=2
 
 [working positions]
@@ -43,14 +43,11 @@ produce=ironore:2
 [idle]
 pics=ironmine_i_??.png
 hotspot=50 56
-playercolor=true
 
 [working]
 pics=ironmine_i_??.png
 hotspot=50 56
-playercolor=true
 
 [empty]
 pics=ironmine_e_??.png
 hotspot=50 56
-playercolor=true

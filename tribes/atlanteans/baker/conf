@@ -1,22 +1,19 @@
 help=_Bakes bread for workers.
 
 [buildcost]
-bakingtray=1
+bread_paddle=1
 carrier=1
 
 [idle]
 pics=idle_??.png
 hotspot=5 23
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=7 24
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=9 25
-playercolor=true
 fps=10
