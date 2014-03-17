@@ -1029,6 +1029,8 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 };
 
 void L_BuildingDescription::__persist(lua_State * /* L */) {
+	// TODO(GunChleoc): we probably need to persist something here, so that a
+	// description can be held in a local variable on save.
 }
 void L_BuildingDescription::__unpersist(lua_State * /* L */) {
 }
@@ -1041,6 +1043,10 @@ void L_BuildingDescription::__unpersist(lua_State * /* L */) {
 /* RST
 	.. attribute:: name
 
+	// TODO(GunChleoc): access to the 'name' of this object for internal
+	// reference is probably sometimes useful too. I suggest sticking to name
+	// and descname or name and descriptive_name or so and expose both (as it is
+	// currently done for MapObject).
 			(RO) returns name of the building as a string.
 */
 int L_BuildingDescription::get_name(lua_State * L) {
@@ -1230,6 +1236,7 @@ const MethodType<L_WorkerDescription> L_WorkerDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
+	PROP_RO(L_WorkerDescription, becomes),
 	PROP_RO(L_WorkerDescription, name),
 	{nullptr, nullptr, nullptr},
 };
@@ -1254,6 +1261,24 @@ int L_WorkerDescription::get_name(lua_State * L) {
 	lua_pushstring(L, workerdescr_->descname());
 	return 1;
 }
+
+/* RST
+	.. attribute:: becomes
+
+		(RO) The :class:`WorkerDescription` of the worker this one will level up
+		to or :const:`nil` if it never levels up.
+*/
+int L_WorkerDescription::get_becomes(lua_State * L) {
+	assert(workerdescr_ != nullptr);
+	const Ware_Index becomes_index = workerdescr_->becomes();
+	if (!becomes_index) {
+		lua_pushnil(L);
+		return 1;
+	}
+	return to_lua<L_WorkerDescription>(
+	   L, new L_WorkerDescription(workerdescr_->tribe().get_worker_descr(becomes_index)));
+}
+
 
 
 /*
@@ -3387,7 +3412,7 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_Map>(L, "map");
 	register_class<L_BuildingDescription>(L, "map");
-//	register_class<L_WareDescription>(L, "map");
+	register_class<L_WareDescription>(L, "map");
 	register_class<L_WorkerDescription>(L, "map");
 	register_class<L_Field>(L, "map");
 	register_class<L_PlayerSlot>(L, "map");

@@ -63,7 +63,6 @@ uint32_t Bob::Descr::vision_range() const
 	return 0;
 }
 
-
 Bob::Descr::Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,

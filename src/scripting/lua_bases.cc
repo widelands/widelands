@@ -23,6 +23,7 @@
 #include "logic/checkstep.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/ware_descr.h"
 #include "scripting/lua_map.h"
 
 
@@ -71,9 +72,9 @@ EditorGameBase
 
 const char L_EditorGameBase::className[] = "EditorGameBase";
 const MethodType<L_EditorGameBase> L_EditorGameBase::Methods[] = {
-	METHOD(L_EditorGameBase,get_building_description),
-	METHOD(L_EditorGameBase,get_ware_description),
-	METHOD(L_EditorGameBase,get_worker_description),
+	METHOD(L_EditorGameBase, get_building_description),
+	METHOD(L_EditorGameBase, get_ware_description),
+	METHOD(L_EditorGameBase, get_worker_description),
 	{nullptr, nullptr},
 };
 const PropertyType<L_EditorGameBase> L_EditorGameBase::Properties[] = {
@@ -186,7 +187,7 @@ int L_EditorGameBase::get_ware_description(lua_State* L) {
 	if (!ware_index) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
-	const Ware_Descr* ware_descr = tribe_description->get_ware_descr(ware_index);
+	const WareDescr* ware_descr = tribe_description->get_ware_descr(ware_index);
 	return to_lua<LuaMap::L_WareDescription>(L, new LuaMap::L_WareDescription(ware_descr));
 }
 

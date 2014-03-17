@@ -41,7 +41,7 @@
 namespace Widelands {
 	struct Soldier_Descr;
 	struct Building_Descr;
-	struct Ware_Descr;
+	struct WareDescr;
 	struct Worker_Descr;
 	struct Bob;
 
@@ -112,7 +112,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);	
+	int get_name(lua_State *);
 	int get_buildable(lua_State *);
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
@@ -146,7 +146,7 @@ public:
 	virtual ~L_WareDescription() {}
 
 	L_WareDescription() : waredescr_(nullptr) {}
-	L_WareDescription(const Widelands::Ware_Descr* const waredescr)
+	L_WareDescription(const Widelands::WareDescr* const waredescr)
 		: waredescr_(waredescr) {}
 	L_WareDescription(lua_State* L) : waredescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'WareDescription' directly!");
@@ -158,7 +158,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
+	int get_name(lua_State*);
 
 	/*
 	 * Lua methods
@@ -169,7 +169,7 @@ public:
 	 */
 
 private:
-	const Widelands::Ware_Descr * const waredescr_;
+	const Widelands::WareDescr * const waredescr_;
 };
 
 
@@ -193,6 +193,7 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State *);
+	int get_becomes(lua_State*);
 
 	/*
 	 * Lua methods
