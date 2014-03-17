@@ -525,22 +525,28 @@ public:
 	NonPackedAnimation(const string& directory, Section & s);
 
 	// Implements Animation.
-	virtual uint16_t width() const {return frames_[0]->width();}
-	virtual uint16_t height() const {return frames_[0]->height();}
-	virtual uint16_t nr_frames() const {return frames_.size();}
-	virtual uint32_t frametime() const {return frametime_;}
-	virtual const Point& hotspot() const {return hotspot_;};
-	virtual const Image& representative_image(const RGBColor& clr) const {return get_frame(0, &clr);}
-	void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const;
-	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
+	virtual uint16_t width() const override;
+	virtual uint16_t height() const override;
+	virtual uint16_t nr_frames() const override;
+	virtual uint32_t frametime() const override;
+	virtual const Point& hotspot() const override;
+	virtual const Image& representative_image(const RGBColor& clr) const override;
+	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
+	   const override;
+	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
+
 
 private:
+	// Load the needed graphics from disk.
+	void load_graphics();
+
 	// Returns the given frame image with the given clr (if not NULL).
 	const Image& get_frame(uint32_t time, const RGBColor* playercolor = NULL) const;
 
 	uint32_t frametime_;
 	Point hotspot_;
 	bool hasplrclrs_;
+	std::string picnametempl_;
 
 	vector<const Image*> frames_;
 	vector<const Image*> pcmasks_;
@@ -592,16 +598,17 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 	//  replaced with "idle_00". Then the code looks if there is a PNG with that
 	//  name, increments the number and continues . on until it can not find any
 	//  file. Then it is assumed that there are no more frames in the animation.
-	string picnametempl;
 	if (char const * const pics = s.get_string("pics")) {
-		picnametempl = directory + pics;
+		picnametempl_ = directory + pics;
 	} else {
-		picnametempl = directory + s.get_name();
+		picnametempl_ = directory + s.get_name();
 	}
 	// Strip the .png extension if it has one.
-	boost::replace_all(picnametempl, ".png", "");
+	boost::replace_all(picnametempl_, ".png", "");
+}
 
-	NumberGlob glob(picnametempl);
+void NonPackedAnimation::load_graphics() {
+	NumberGlob glob(picnametempl_);
 	string filename_wo_ext;
 	while (glob.next(&filename_wo_ext)) {
 		const string filename = filename_wo_ext + ".png";
@@ -633,13 +640,47 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 	}
 
 	if (frames_.empty())
-		throw wexception("animation %s has no frames", picnametempl.c_str());
+		throw wexception("animation %s has no frames", picnametempl_.c_str());
 
 	if (pcmasks_.size() and pcmasks_.size() != frames_.size())
 		throw wexception
 			("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
 			 frames_.size(), pcmasks_.size());
 }
+
+uint16_t NonPackedAnimation::width() const {
+	if (frames_.empty()) {
+		const_cast<NonPackedAnimation*>(this)->load_graphics();
+	}
+	return frames_[0]->width();
+}
+
+uint16_t NonPackedAnimation::height() const {
+	if (frames_.empty()) {
+		const_cast<NonPackedAnimation*>(this)->load_graphics();
+	}
+	return frames_[0]->height();
+}
+
+uint16_t NonPackedAnimation::nr_frames() const {
+	if (frames_.empty()) {
+		const_cast<NonPackedAnimation*>(this)->load_graphics();
+	}
+	return frames_.size();
+}
+
+uint32_t NonPackedAnimation::frametime() const {
+	return frametime_;
+}
+
+const Point& NonPackedAnimation::hotspot() const {
+	return hotspot_;
+}
+
+const Image& NonPackedAnimation::representative_image(const RGBColor& clr) const {
+	return get_frame(0, &clr);
+}
+
 
 void NonPackedAnimation::trigger_soundfx
 	(uint32_t time, uint32_t stereo_position) const {
@@ -659,6 +700,9 @@ void NonPackedAnimation::blit
 }
 
 const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {
+	if (frames_.empty()) {
+		const_cast<NonPackedAnimation*>(this)->load_graphics();
+	}
 	const uint32_t framenumber = time / frametime_ % nr_frames();
 	assert(framenumber < nr_frames());
 	const Image* original = frames_[framenumber];
