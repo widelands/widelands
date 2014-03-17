@@ -107,7 +107,8 @@ void BuildGrid::add(Widelands::Building_Index::value_t id)
 {
 	const Widelands::Building_Descr & descr =
 		*m_tribe.get_building_descr(Widelands::Building_Index(id));
-	const Image& anim_frame = g_gr->animations().get_animation(descr.main_animation()).representative_image(RGBColor(0, 0, 0));
+	const Image& anim_frame = g_gr->animations().get_animation(descr.main_animation())
+		.representative_image(RGBColor(0, 0, 0));
 	double image_w = anim_frame.width();
 	double image_h = anim_frame.height();
 	double ratio = 32. / std::max(image_w, image_h);
