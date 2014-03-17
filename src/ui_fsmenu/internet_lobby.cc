@@ -154,16 +154,16 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	// prepare the lists
 	clientsonline .set_font(m_fn, m_fs);
 	std::string t_tip = (boost::format("%s%s%s%s%s%s%s%s%s%s")
-	% "<rt><p><font underline=yes>"
-	% _("User Status")
-	% "</font><br>"
-	% "<img src=pics/roadb_yellow.png> "
-	% _("Registered")
-	% "<br><img src=pics/roadb_green.png> "
-	% _("Administrator")
-	% "<br><img src=pics/roadb_red.png> "
-	% _("Unregistered")
-	%  "</p></rt>").str();
+		% "<rt><p><font underline=yes>"
+		% _("User Status")
+		% "</font><br>"
+		% "<img src=pics/roadb_yellow.png> "
+		% _("Registered")
+		% "<br><img src=pics/roadb_green.png> "
+		% _("Administrator")
+		% "<br><img src=pics/roadb_red.png> "
+		% _("Unregistered")
+		%  "</p></rt>").str();
 	clientsonline .add_column(22, "°", t_tip);
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
 	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
