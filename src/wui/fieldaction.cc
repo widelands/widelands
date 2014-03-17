@@ -23,6 +23,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
 #include "i18n.h"
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
@@ -106,12 +107,16 @@ void BuildGrid::add(Widelands::Building_Index::value_t id)
 {
 	const Widelands::Building_Descr & descr =
 		*m_tribe.get_building_descr(Widelands::Building_Index(id));
+	const Image& anim_frame = g_gr->animations().get_animation(descr.main_animation()).representative_image(RGBColor(0, 0, 0));
+	double image_w = anim_frame.width();
+	double image_h = anim_frame.height();
+	double ratio = 32. / std::max(image_w, image_h);
+	const Image* menu_image = ImageTransformations::resize(&anim_frame, image_w * ratio, image_h * ratio);
 	UI::Icon_Grid::add
-		(descr.name(), descr.get_buildicon(),
+		(descr.name(), menu_image,
 		 reinterpret_cast<void *>(id),
 		 descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 			waremap_to_richtext(m_tribe, descr.buildcost()));
-;
 }
 
 
