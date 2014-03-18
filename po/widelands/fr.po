@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2014-03-16 03:48+0000\n"
+"PO-Revision-Date: 2014-03-17 07:20+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-17 04:41+0000\n"
+"X-Launchpad-Export-Date: 2014-03-18 05:31+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -108,7 +108,7 @@ msgstr "Chargement des graphismes..."
 
 #: ../../src/editor/editorinteractive.cc:252
 msgid "Unsaved Map"
-msgstr "Carte non enregistré"
+msgstr "Carte non enregistrée"
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The map has not been saved, do you really want to quit?"
@@ -137,7 +137,7 @@ msgstr "Informations sur le champ"
 
 #: ../../src/editor/tools/editor_info_tool.cc:53
 msgid "Node:"
-msgstr "Noeud:"
+msgstr "Nœud:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:55
 #, c-format
@@ -239,7 +239,7 @@ msgstr "Nom de la ressource: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:117
 #, c-format
 msgid "Resource amount: %i"
-msgstr "Montant de la ressource: %i"
+msgstr "Nombre de ressource: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:121
 msgid "No resources"
@@ -263,7 +263,7 @@ msgstr "Joueurs: %i"
 #: ../../src/editor/tools/editor_info_tool.cc:140
 #, c-format
 msgid "Author: %s"
-msgstr "Autheur: %s"
+msgstr "Auteur: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:135
 #: ../../src/editor/tools/editor_info_tool.cc:141
@@ -565,7 +565,7 @@ msgstr "Nombre de Joueurs"
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr "Players: %s"
+msgstr "Joueur %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
@@ -575,7 +575,9 @@ msgstr "Erreur!"
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "bobs that depend on this player and try again."
-msgstr "Ne peut supprimer un jouer. Il est référencé quelque part."
+msgstr ""
+"Ne peut supprimer un joueur. Il est référencé quelque part. Enlevez les "
+"bâtiments et bobs qui dépendent de ce joueur et essayez à nouveau."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
@@ -796,10 +798,10 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix "
 "this problem."
 msgstr ""
-"Widelands n'a pas pu démarrer le jeu, car le %u n'a pas de position de "
-"départ.\n"
+"Widelands n'a pas pu démarrer la partie, car le joueur %u n'a pas de "
+"position de départ.\n"
 "Vous pouvez manuellement ajouter une position de départ avec l'éditeur de "
-"Widelands pour corriger ce probleme."
+"Widelands pour corriger ce problème."
 
 #: ../../src/logic/map.cc:361
 msgid "Player 1"
@@ -1130,7 +1132,7 @@ msgstr "Monde Invalide"
 #, c-format
 msgid "The world \"%s\" set by the map does not exist on your filesystem."
 msgstr ""
-"Le monde \"%s\" choisit par la carte n'existe pas sur votre système de "
+"Le monde \"%s\" définit par la carte n'existe pas sur votre système de "
 "fichier."
 
 #: ../../src/network/internet_gaming.cc:117
@@ -1235,7 +1237,7 @@ msgstr "ERREUR: %s"
 #: ../../src/network/internet_gaming.cc:573
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
-msgstr "Reçu une commande inconnue depuis le metaserveur: %s"
+msgstr "Reçu une commande inconnue depuis le méta-serveur: %s"
 
 #: ../../src/network/internet_gaming.cc:706
 msgid "Message could not be sent: You are not connected to the metaserver!"
@@ -1320,10 +1322,10 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
 "internet connection for hosting a game online."
 msgstr ""
-"Le metaserveur a été incapable de se connecter à votre jeux. Plus "
-"probablement il ne peut pas être connecté depuis internet! S'il vous plait "
+"Le méta-serveur a été incapable de se connecter à votre jeux. Plus "
+"probablement il ne peut pas être connecté depuis internet! S'il vous plaît "
 "regardez à http://wl.widelands.org/wiki/InternetGaming pour apprendre à "
-"configurer votre connexion inetrnet pour héberger un jeux en ligne."
+"configurer votre connexion internet pour héberger un jeux en ligne."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
@@ -1371,7 +1373,7 @@ msgstr "Déconnecté de l'hôte"
 #: ../../src/network/nethost.cc:370 ../../src/network/nethost.cc:1211
 #: ../../src/network/nethost.cc:1222
 msgid "Available host commands are:"
-msgstr "Les commandes hébergeur disponibles sont:"
+msgstr "Les commandes hôte disponibles sont:"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:372 ../../src/network/nethost.cc:1213
@@ -1491,7 +1493,7 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1215 ../../src/network/nethost.cc:1226
 msgid "host $ - Tries to run the host command $"
-msgstr "host $ - Essaie d'exécuter les commandes hébergeur $"
+msgstr "host $ - Essaie d'exécuter les commandes hôte $"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1217
@@ -1500,7 +1502,7 @@ msgstr "save $ - Sauve l'état actuel du jeux en tant que $.wgf"
 
 #: ../../src/network/nethost.cc:1230
 msgid "pwd $  - Sends the password $ to the host"
-msgstr "pwd $  - Envoie le mot de passe $  à l'hébergeur"
+msgstr "pwd $  - Envoie le mot de passe $  à l'hôte"
 
 #: ../../src/network/nethost.cc:1237
 msgid ""
@@ -1548,7 +1550,7 @@ msgstr "Commande du serveur dédié inconnue \"%s\"!"
 #: ../../src/network/nethost.cc:2004
 #, c-format
 msgid "Computer %u"
-msgstr "Ordinateurr %u"
+msgstr "Ordinateur %u"
 
 #: ../../src/network/nethost.cc:2070 ../../src/wlapplication.cc:1666
 #: ../../src/wui/game_summary.cc:90
@@ -1597,7 +1599,7 @@ msgstr "Le serveur a planté et fait une sauvegarde d'urgence."
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr "Connection au client expirée: pas de réponse pendant 10 minutes!"
+msgstr "Connexion au client expirée: pas de réponse pendant 10 minutes!"
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
@@ -1719,7 +1721,7 @@ msgstr "L'hôte a envoyé le joueur %s dans le couloir!"
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr ""
-"ATTENTION: %1$s utilise la version: %2$s, alors que l'Hébergeur utilise la "
+"ATTENTION: %1$s utilise la version: %2$s, alors que l' Hôte utilise la "
 "version: %3$s"
 
 #: ../../src/network/network_gaming_messages.cc:158
@@ -1949,13 +1951,13 @@ msgid ""
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
-"Widelands was unable to get the IP address of the server in time.\n"
+"Widelands n'a pas été capable d'avoir l'adresse IP du serveur à temps.\n"
 "Il semble qu'il y ait un problème réseau, soit de votre coté soit du coté\n"
 "du serveur.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:420
 msgid "Widelands was unable to connect to the host."
-msgstr "Widelands ne peut se connecter à l'hébergeur."
+msgstr "Widelands ne peut se connecter à l'hôte."
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -2084,7 +2086,7 @@ msgstr "Spectateur"
 #: ../../src/ui_fsmenu/launchMPG.cc:488
 #, c-format
 msgid "At the moment you are %s"
-msgstr "En ce moment vous êtes %s"
+msgstr "Actuellement vous êtes %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:489
 msgid "Click on the ‘?’ in the top right corner to get help."
@@ -2118,7 +2120,7 @@ msgstr "Détails de la carte:"
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 #, c-format
 msgid "Size: %1$u x %2$u"
-msgstr "Taille:%1$u x %2$u"
+msgstr "Taille: %1$u x %2$u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:654
 #, c-format
@@ -2134,7 +2136,7 @@ msgstr "Monde: %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:658
 msgid "Scenario mode selected"
-msgstr "Mode scénario sélectioné"
+msgstr "Mode scénario sélectionné"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid "You are in the multiplayer launch game menu."
@@ -2161,7 +2163,7 @@ msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any player"
 msgstr ""
 "Mode spectateur, signifie que vous pouvez tout voir, mais que vous ne pouvez "
-"controler de joueur"
+"contrôler de joueur"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:687
 msgid "Player settings"
@@ -2313,7 +2315,7 @@ msgstr "Solo"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
-msgstr "Multijoueur"
+msgstr "Multi-joueur"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"

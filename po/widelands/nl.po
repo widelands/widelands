@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2014-03-16 11:40+0000\n"
+"PO-Revision-Date: 2014-03-17 11:24+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-17 04:41+0000\n"
+"X-Launchpad-Export-Date: 2014-03-18 05:31+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -1211,8 +1211,8 @@ msgstr[1] "InternetSpel: Server tijdverschil is %u seconden."
 #, c-format
 msgid "Server time offset is %u second."
 msgid_plural "Server time offset is %u seconds."
-msgstr[0] "Server tijdverschil is %u seconde."
-msgstr[1] "Server tijdverschil is %u seconden."
+msgstr[0] "Tijdsverschil met server is %u seconde."
+msgstr[1] "Tijdsverschil met server is %u seconden."
 
 #: ../../src/network/internet_gaming.cc:464
 #, c-format
@@ -1249,7 +1249,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:792
 msgid "Conversion error"
-msgstr "Conversie fout"
+msgstr "Conversiefout"
 
 #: ../../src/network/internet_gaming.cc:793
 #, c-format
@@ -1264,30 +1264,30 @@ msgstr "Er is geen gebruiker met de naam %s aangemeld!"
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1280
 msgid "The sent password was incorrect!"
-msgstr "Het verstuurde wachtwoord is incorrrect"
+msgstr "Het verstuurde wachtwoord was incorrrect!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr "De gebruikte versie van het protocol word niet ondersteund!"
+msgstr "De gebruikte versie van het protocol wordt niet ondersteund!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr "U bent reeds ingelogged!"
+msgstr "Je bent reeds aangemeld!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
-"Je verbinding werd verbroken, omdat je superuser opdrachten verstuurde "
+"Je verbinding werd verbroken, omdat je een superuser-opdracht verstuurde "
 "zonder toestemming als superuser. Dit incident wordt genoteerd en "
 "gerapporteerd aan de beheerder."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
 msgstr ""
-"U bent de verbinding verloren, aangezien de metaserver momenteel opnieuw "
-"opstart"
+"De verbinding is verbroken, aangezien de metaserver momenteel opnieuw "
+"opstart."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
@@ -1299,7 +1299,7 @@ msgstr "De verbinding met de metaserver is verbroken."
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr "Metaserver geeft geen responce"
+msgstr "Metaserver geeft geen respons"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game can’t be connected to from the internet"
@@ -1310,8 +1310,8 @@ msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
-"De verbinding met de metaservers is afgebroeken, omdat de PING aanvraag niet "
-"optijd terrug gestuurd is."
+"De verbinding met de metaservers is verbroken, omdat je een PING-verzoek "
+"niet op tijd hebt beantwoord."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
