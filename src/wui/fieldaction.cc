@@ -111,8 +111,7 @@ void BuildGrid::add(Widelands::Building_Index::value_t id)
 		.representative_image(RGBColor(0, 0, 0));
 	const uint16_t image_w = anim_frame.width();
 	const uint16_t image_h = anim_frame.height();
-	// NOCOM(#qcs): pull out the number into the same place where the size of the textures is defined
-	double ratio = 32. / std::max(image_w, image_h);
+	double ratio = BUILDMENU_IMAGE_SIZE / std::max(image_w, image_h);
 	const Image* menu_image = ImageTransformations::resize(&anim_frame, image_w * ratio, image_h * ratio);
 	UI::Icon_Grid::add
 		(descr.name(), menu_image,
