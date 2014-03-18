@@ -60,15 +60,16 @@ using Widelands::Game;
 
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::Icon_Grid {
-	BuildGrid
-		(UI::Panel                    * parent,
-		 const Widelands::Tribe_Descr & tribe,
-		 int32_t x, int32_t y,
-		 int32_t cols);
+	BuildGrid(UI::Panel* parent,
+	          const RGBColor& player_color,
+	          const Widelands::Tribe_Descr& tribe,
+	          int32_t x,
+	          int32_t y,
+	          int32_t cols);
 
-	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildclicked;
-	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildmouseout;
-	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildmousein;
+	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildclicked;
+	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildmouseout;
+	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildmousein;
 
 	void add(Widelands::Building_Index::value_t);
 
@@ -78,25 +79,21 @@ private:
 	void mouseinslot(int32_t idx);
 
 private:
-	const Widelands::Tribe_Descr & m_tribe;
+	const RGBColor player_color_;
+	const Widelands::Tribe_Descr& tribe_;
 };
 
-
-BuildGrid::BuildGrid
-	(UI::Panel                    * parent,
-	 const Widelands::Tribe_Descr & tribe,
-	 int32_t x, int32_t y,
-	 int32_t                        cols)
-:
-	UI::Icon_Grid
-		(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
-	m_tribe(tribe)
+BuildGrid::BuildGrid(
+		UI::Panel* parent, const RGBColor& player_color, const Widelands::Tribe_Descr& tribe,
+		int32_t x, int32_t y, int32_t cols) :
+	UI::Icon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
+	player_color_(player_color),
+	tribe_(tribe)
 {
 	clicked.connect(boost::bind(&BuildGrid::clickslot, this, _1));
 	mouseout.connect(boost::bind(&BuildGrid::mouseoutslot, this, _1));
 	mousein.connect(boost::bind(&BuildGrid::mouseinslot, this, _1));
 }
-
 
 /*
 ===============
@@ -106,9 +103,9 @@ Add a new building to the list of buildable buildings
 void BuildGrid::add(Widelands::Building_Index::value_t id)
 {
 	const Widelands::Building_Descr & descr =
-		*m_tribe.get_building_descr(Widelands::Building_Index(id));
+		*tribe_.get_building_descr(Widelands::Building_Index(id));
 	const Image& anim_frame = g_gr->animations().get_animation(descr.get_animation("idle"))
-		.representative_image(RGBColor(0, 0, 0));
+		.representative_image(player_color_);
 	const uint16_t image_w = anim_frame.width();
 	const uint16_t image_h = anim_frame.height();
 	double ratio = BUILDMENU_IMAGE_SIZE / std::max(image_w, image_h);
@@ -117,7 +114,7 @@ void BuildGrid::add(Widelands::Building_Index::value_t id)
 		(descr.name(), menu_image,
 		 reinterpret_cast<void *>(id),
 		 descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-			waremap_to_richtext(m_tribe, descr.buildcost()));
+			waremap_to_richtext(tribe_, descr.buildcost()));
 }
 
 
@@ -187,7 +184,7 @@ public:
 
 	void init();
 	void add_buttons_auto();
-	void add_buttons_build(int32_t buildcaps);
+	void add_buttons_build(int32_t buildcaps, const RGBColor& player_color);
 	void add_buttons_road(bool flag);
 	void add_buttons_attack();
 
@@ -402,11 +399,11 @@ void FieldActionWindow::add_buttons_auto()
 			const int32_t buildcaps = m_plr ? m_plr->get_buildcaps(m_node) : 0;
 
 			// Add house building
-			if
-				((buildcaps & Widelands::BUILDCAPS_SIZEMASK)
-				 ||
-				 (buildcaps & Widelands::BUILDCAPS_MINE))
-				add_buttons_build(buildcaps);
+			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			    (buildcaps & Widelands::BUILDCAPS_MINE)) {
+				assert(igbase->get_player());
+				add_buttons_build(buildcaps, igbase->get_player()->get_playercolor());
+			}
 
 			// Add build actions
 			if ((m_fastclick = buildcaps & Widelands::BUILDCAPS_FLAG))
@@ -514,7 +511,7 @@ void FieldActionWindow::add_buttons_attack ()
 Add buttons for house building.
 ===============
 */
-void FieldActionWindow::add_buttons_build(int32_t buildcaps)
+void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& player_color)
 {
 	if (not m_plr)
 		return;
@@ -564,7 +561,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
-			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
+			*ppgrid = new BuildGrid(&m_tabpanel, player_color, tribe, 0, 0, 5);
 			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
 			(*ppgrid)->buildmouseout.connect
 				(boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));
