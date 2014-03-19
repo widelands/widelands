@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2014-03-17 11:24+0000\n"
+"PO-Revision-Date: 2014-03-18 11:47+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-18 05:31+0000\n"
+"X-Launchpad-Export-Date: 2014-03-19 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -1659,7 +1659,7 @@ msgstr "Opdracht nummer %s ontvangen, die niet is toegestaan in deze status."
 
 #: ../../src/network/network_gaming_messages.cc:143
 msgid "Client reports time to host that is running backwards."
-msgstr "Client rapport teruglopende tijd aan de host."
+msgstr "Cliënt rapporteert teruglopende tijd aan de host."
 
 #: ../../src/network/network_gaming_messages.cc:144
 msgid "Client simulates beyond the game time allowed by the host."
@@ -1679,7 +1679,7 @@ msgstr "Cliënt heeft geen toegang tot de instellingen van andere spelers."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
-msgstr "Client heeft geen toegang tot de server instellingen."
+msgstr "Cliënt heeft geen toegang tot de instellingen van de server."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
@@ -1687,7 +1687,7 @@ msgstr "Cliënt stuurde startopdracht, terwijl server nog niet gereed is."
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
-msgstr "Client zond \"TIME\" commando hoewel het spel niet draait."
+msgstr "Cliënt zond \"TIME\" commando hoewel het spel niet draait."
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client sent a PLAYERCOMMAND for another player."
@@ -1695,7 +1695,7 @@ msgstr "Cliënt verstuurde een PLAYERCOMMAND voor een andere speler."
 
 #: ../../src/network/network_gaming_messages.cc:152
 msgid "Client sent unexpected synchronization report."
-msgstr "Client zond een onverwacht synchronisatierapport."
+msgstr "Cliënt zond een onverwacht synchronisatierapport."
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "Client requests file although none is available to send."
@@ -1725,7 +1725,7 @@ msgstr "%s heeft zich bij het spel gevoegd."
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Game was saved as %s."
-msgstr "Spel opgeslagen als %s"
+msgstr "Spel opgeslagen als %s."
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
@@ -1908,11 +1908,11 @@ msgstr "Cliënten online:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:61
 msgid "List of games:"
-msgstr "Lijst met spellen"
+msgstr "Lijst met spellen:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:65
 msgid "Name of your server:"
-msgstr "Naam van je server"
+msgstr "Naam van je server:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:69
 msgid "Maximum of players:"
@@ -2027,7 +2027,7 @@ msgstr "Winconditie wordt tijdens het scenario gesteld"
 #: ../../src/ui_fsmenu/launchMPG.cc:293
 #: ../../src/wui/multiplayersetupgroup.cc:357
 msgid "Savegame"
-msgstr "Opslagspel"
+msgstr "Opgeslagen spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:295
 msgid "The game is a saved game – the win condition was set before."
@@ -2047,8 +2047,8 @@ msgid ""
 "please select another saved game or zip the directories’ content."
 msgstr ""
 "WAARSCHUWING:\n"
-"Het bewaarde spel dat je hebt geselecteerd is een directory. Dit gebeurt als "
-"je de optie 'nozip' op waar instelt of het bewaarde spel handmatig unzipped. "
+"Het opgeslagen spel dat je hebt geselecteerd is een directory. Dit gebeurt "
+"als je de optie 'nozip' aanvinkt of het bewaarde spel handmatig unzipped. "
 "Widelands kan geen directory-structuur versturen naar de cliënten, selecteer "
 "a.u.b. een ander bewaard spel of zip de inhoud van de directory."
 

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-14 12:00+0000\n"
-"Last-Translator: LAZA <Unknown>\n"
+"PO-Revision-Date: 2014-03-18 21:06+0000\n"
+"Last-Translator: Clemens Dinkel <cle.dinkel@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-19 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: de\n"
 
@@ -24,7 +24,7 @@ msgstr "Stoße nach Nordosten vor und baue einen Steinbruch."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:25
 msgid "Expand north-east to the stones"
-msgstr "Expandiere nordöstlich zu den Steinen."
+msgstr "Stoße nach Nordosten zu den Steinen vor."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:26
 msgid ""
@@ -554,7 +554,7 @@ msgstr "Der Alte hüpft vor Freude..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:278
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Die Weisheit fordert nach Vielfalt zu streben."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:279
 msgid ""
