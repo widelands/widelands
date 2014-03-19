@@ -1,15 +1,3 @@
-
-function add_walking_animations(table, dirname, basename, hotspot)
-   for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-      table["walk_" .. dir] = {
-         pictures = path.glob(dirname, basename .. "_" .. dir .. "_*.png"),
-         player_color_masks = {},
-         hotspot = hotspot,
-         fps = 5,
-      }
-   end
-end
-
 dirname = path.dirname(__file__)
 
 animations = {
