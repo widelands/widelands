@@ -1,22 +1,6 @@
 program=program
 attrib=seed
 
-[terrain affinity]
-ice_flows=      2
-ice_flows2=     2
-ice=           10
-strand=        20
-snow=          70
-taiga=         90
-tundra_taiga= 150
-tundra=       200
-tundra2=      250
-tundra3=      250
-mountain1=      7
-mountain2=      7
-mountain3=      7
-mountain4=      7
-
 [program]
 animate=tiny 72500
 remove=80

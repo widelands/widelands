@@ -14,20 +14,6 @@ attrib=tree
 program=program
 program=fall
 
-[terrain affinity]
-strand=       10
-hardground1= 150
-hardground2= 255
-hardground3= 255
-hardground4= 255
-ashes=       196
-ashes2=       80
-hardlava=     50
-mountain1=     7
-mountain2=     7
-mountain3=     7
-mountain4=     7
-
 [idle]
 pics=tree1_??.png
 sfx=0 ../../../sound/animals/bird1

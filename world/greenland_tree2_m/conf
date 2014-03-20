@@ -1,20 +1,6 @@
 size=small
 program=program
 
-[terrain affinity]
-steppe=    120
-berg1=       7
-strand=      3
-wiese1=    120
-wiese2=    200
-wiese3=    255
-berg2=       7
-berg3=       7
-berg4=       7
-wiese4=    200
-bergwiese=  50
-
-[program]
 animate=medium 75000
 remove=40
 grow=tree2

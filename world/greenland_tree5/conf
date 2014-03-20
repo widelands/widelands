@@ -12,20 +12,6 @@ attrib=tree
 program=program
 program=fall
 
-[terrain affinity]
-steppe=     3
-berg1=     14
-strand=    14
-wiese1=   198
-wiese2=   255
-wiese3=   255
-berg2=     14
-berg3=     14
-berg4=     14
-wiese4=   255
-bergwiese=177
-
-[idle]
 pics=idle_?.png
 sfx=0 ../../../sound/animals/bird5
 fps=10

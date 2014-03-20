@@ -502,8 +502,8 @@ void WorkerProgram::parse_object
 /**
  * plant \<immmovable type\> \<immovable type\> ... [unless object]
  *
- * Plant one of the given immovables on the current position.
- * Decision is made with inclusion of the terrain affinity.
+ * Plant one of the given immovables on the current position taking into
+ * account the fertility of the area.
  *
  * sparamv  list of object names
  * iparam1  one of plantXXX

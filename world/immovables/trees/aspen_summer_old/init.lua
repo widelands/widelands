@@ -16,20 +16,6 @@ world:new_immovable_type{
          "transform=fallentree",
       },
    },
-   terrain_affinity = {
-      -- NOCOM(#sirver): this should probably be expressed in attributes, not in terrain names.
-      steppe = 100,
-      berg1 = 7,
-      strand = 3,
-      wiese1 = 100,
-      wiese2 = 200,
-      wiese3 = 200,
-      berg2 = 7,
-      berg3 = 7,
-      berg4 = 7,
-      wiese4 = 255,
-      bergwiese = 50,
-   },
    animations = {
       idle = {
          pictures = path.glob(dirname, "idle_*.png"),

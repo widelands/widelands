@@ -11,20 +11,6 @@ attrib=tree
 program=program
 program=fall
 
-[terrain affinity]
-strand=       32
-hardground1= 255
-hardground2= 228
-hardground3= 192
-hardground4= 150
-ashes=       196
-ashes2=       96
-hardlava=     64
-mountain1=     8
-mountain2=     4
-mountain3=     2
-mountain4=     2
-
 [idle]
 pics=tree8_??.png
 hotspot=24 60

@@ -231,52 +231,6 @@ Immovable_Descr::Immovable_Descr
 				 	(parameters, *this, directory, prof));
 	}
 
-	uint8_t * it = m_terrain_affinity;
-	memset(it, 0, sizeof(m_terrain_affinity));
-	if
-		(Section * const terrain_affinity_s =
-		 	prof.get_section("terrain affinity"))
-	{
-		memset(it, 0, sizeof(m_terrain_affinity));
-		for
-			(wl_index_range<Terrain_Index> i(0, world.get_nr_terrains());
-			 i;
-			 ++i, ++it)
-		{
-			char const * const terrain_type_name =
-				world.get_ter(i.current).name().c_str();
-			try {
-				uint32_t const value =
-					terrain_affinity_s->get_natural(terrain_type_name, 0);
-				if ((*it = value) != value)
-					throw game_data_error
-						("expected %s but found %u", "0 .. 255", value);
-				if (terrain_affinity_s->get_next_val(terrain_type_name))
-					throw game_data_error("duplicated");
-			} catch (const _wexception & e) {
-				throw game_data_error
-					("[terrain affinity] %s: %s", terrain_type_name, e.what());
-			}
-		}
-		if (owner_tribe) {
-			//  Tribe immovables may have entries for other worlds.
-			while (Section::Value * const v = terrain_affinity_s->get_next_val())
-				try {
-					uint32_t const value = v->get_natural();
-					if ((*it = value) != value)
-						throw game_data_error
-						("expected %s but found %u", "0 .. 255", value);
-					if (terrain_affinity_s->get_next_val(v->get_name()))
-						throw game_data_error("duplicated");
-				} catch (const _wexception & e) {
-					throw game_data_error
-						("[terrain affinity] \"%s\" (not in current world): %s",
-						 v->get_name(), e.what());
-				}
-		}
-	} else
-		memset(it, 255, sizeof(m_terrain_affinity));
-
 	if (owner_tribe) {
 		if (Section * buildcost_s = prof.get_section("buildcost"))
 			m_buildcost.parse(*owner_tribe, *buildcost_s);
@@ -462,14 +416,12 @@ uint32_t Immovable_Descr::terrain_suitability
 	FCoords const tl = map.tl_n(f);
 	FCoords const  l = map. l_n(f);
 
-	result += m_terrain_affinity[tr.field->terrain_d()];
-	result += m_terrain_affinity[tl.field->terrain_r()];
-	result += m_terrain_affinity[tl.field->terrain_d()];
-	result += m_terrain_affinity [l.field->terrain_r()];
-	result += m_terrain_affinity [f.field->terrain_d()];
-	result += m_terrain_affinity [f.field->terrain_r()];
-
-	return result;
+	// NOCOM(#sirver): terrain affinity is a too generic concept - it does not
+	// scale well with the number of terrains. Also I never noticed that the
+	// trees have different terrain affinities. Instead we need a 'fertility'
+	// entry for terrains. This method should then be rewritten (and moved out
+	// of this class) using fertility.
+	return 6* 255;
 }
 
 

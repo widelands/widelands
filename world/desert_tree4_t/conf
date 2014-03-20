@@ -1,20 +1,6 @@
 program=program
 attrib=seed
 
-[terrain affinity]
-desert1=              2
-desert2=              2
-desert3=              2
-desert4=             20
-drysoil=             50
-beach=              100
-steppe=             100
-meadow=             255
-mountainmeadow=     150
-highmountainmeadow=  25
-mountain1=            2
-mountain2=            2
-mountain3=            2
 mountain4=            2
 
 [program]

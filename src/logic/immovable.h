@@ -118,9 +118,6 @@ protected:
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruction
 	Buildcost m_buildcost;
-
-private:
-	uint8_t m_terrain_affinity[16];
 };
 
 class Immovable : public BaseImmovable {

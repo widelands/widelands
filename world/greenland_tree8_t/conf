@@ -1,20 +1,6 @@
 program=program
 attrib=seed
 
-[terrain affinity]
-steppe=     196
-berg1=        7
-strand=      10
-wiese1=     150
-wiese2=     255
-wiese3=     255
-berg2=        7
-berg3=        7
-berg4=        7
-steppe_kahl=  7
-wiese4=     255
-bergwiese=  100
-
 [program]
 animate=tiny 60000
 remove=40

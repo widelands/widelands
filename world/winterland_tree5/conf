@@ -11,22 +11,6 @@ attrib=tree
 program=program
 program=fall
 
-[terrain affinity]
-ice_flows=      2
-ice_flows2=     2
-ice=           10
-strand=        20
-snow=          80
-taiga=         30
-tundra_taiga=  96
-tundra=       196
-tundra2=      196
-tundra3=      228
-mountain1=      2
-mountain2=      2
-mountain3=      2
-mountain4=      2
-
 [idle]
 pics=idle_?.png
 hotspot=23 58
