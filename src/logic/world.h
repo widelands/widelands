@@ -21,7 +21,7 @@
 #define WORLD_H
 
 #include "logic/bob.h"
-#include "descr_maintainer.h"
+#include "description_maintainer.h"
 #include "logic/immovable.h"
 #include "logic/widelands.h"
 #include "logic/worlddata.h"
@@ -79,7 +79,7 @@ struct Terrain_Descr : boost::noncopyable {
 
 	typedef Terrain_Index Index;
 	Terrain_Descr
-		(char const * directory, Section *, Descr_Maintainer<Resource_Descr> *);
+		(char const * directory, Section *, DescriptionMaintainer<Resource_Descr> *);
 	~Terrain_Descr();
 
 	void load_graphics();
@@ -358,10 +358,10 @@ private:
 	std::string m_basedir; //  base directory, where the main conf file resides
 	World_Descr_Header                hd;
 
-	Descr_Maintainer<Bob::Descr>      bobs;
-	Descr_Maintainer<Immovable_Descr> immovables;
-	Descr_Maintainer<Terrain_Descr>   ters;
-	Descr_Maintainer<Resource_Descr>  m_resources;
+	DescriptionMaintainer<Bob::Descr>      bobs;
+	DescriptionMaintainer<Immovable_Descr> immovables;
+	DescriptionMaintainer<Terrain_Descr>   ters;
+	DescriptionMaintainer<Resource_Descr>  m_resources;
 
 	//  TODO: Should this be a description-maintainer?
 	MapGenInfo m_mapGenInfo;

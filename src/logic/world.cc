@@ -820,7 +820,7 @@ Terrain_Descr
 Terrain_Descr::Terrain_Descr
 	(char                       const * const directory,
 	 Section                          * const s,
-	 Descr_Maintainer<Resource_Descr> * const resources)
+	 DescriptionMaintainer<Resource_Descr> * const resources)
 :
 m_name              (s->get_name()),
 m_descname          (s->get_string("name", s->get_name())),

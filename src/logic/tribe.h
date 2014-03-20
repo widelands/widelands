@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "TribeBasicInfo.h"
-#include "descr_maintainer.h"
+#include "description_maintainer.h"
 #include "graphic/animation.h"
 #include "io/filewrite.h"
 #include "logic/bob.h"
@@ -241,11 +241,11 @@ private:
 	AnimationStyles   m_anim_flag;
 	uint32_t m_bob_vision_range;
 
-	Indexed_Descr_Maintainer<Worker_Descr, Ware_Index>    m_workers;
-	Indexed_Descr_Maintainer<Building_Descr, Building_Index>  m_buildings;
-	Indexed_Descr_Maintainer<WareDescr, Ware_Index> m_wares;
-	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
-	Descr_Maintainer<Bob::Descr>      m_bobs;
+	IndexedDescriptionMaintainer<Worker_Descr, Ware_Index>    m_workers;
+	IndexedDescriptionMaintainer<Building_Descr, Building_Index>  m_buildings;
+	IndexedDescriptionMaintainer<WareDescr, Ware_Index> m_wares;
+	DescriptionMaintainer<Immovable_Descr> m_immovables;  // The player immovables
+	DescriptionMaintainer<Bob::Descr>      m_bobs;
 	std::string                       m_carrier2;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;

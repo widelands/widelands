@@ -215,58 +215,48 @@ void Map::recalc_default_resources() {
 			//  top left neigbour
 			get_neighbour(f, WALK_NW, &f1);
 			{
-				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
-				const int8_t resr =
-					terr.get_default_resources();
-				if
-					((terr.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const Terrain_Descr& terr = w.terrain_descr(f1.field->terrain_r());
+				const int8_t resr = terr.get_default_resources();
+				const int default_amount = terr.get_default_resources_amount();
+				if ((terr.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resr] += 3;
-				else ++m[resr];
-				amount += terr.get_default_resources_amount();
+				else
+					++m[resr];
+				amount += default_amount;
 			}
 			{
 				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
-				const int8_t resd =
-					terd.get_default_resources();
-				if
-					((terd.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const int8_t resd = terd.get_default_resources();
+				const int default_amount = terd.get_default_resources_amount();
+				if ((terd.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resd] += 3;
-				else ++m[resd];
-				amount += terd.get_default_resources_amount();
+				else
+					++m[resd];
+				amount += default_amount;
 			}
 
 			//  top right neigbour
 			get_neighbour(f, WALK_NE, &f1);
 			{
-				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
-				const int8_t resd =
-					terd.get_default_resources();
-				if
-					((terd.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const Terrain_Descr& terd = w.terrain_descr(f1.field->terrain_d());
+				const int8_t resd = terd.get_default_resources();
+				const int default_amount = terd.get_default_resources_amount();
+				if ((terd.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resd] += 3;
 				else ++m[resd];
-				amount += terd.get_default_resources_amount();
+				amount += default_amount;
 			}
 
 			//  left neighbour
 			get_neighbour(f, WALK_W, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
-				const int8_t resr =
-					terr.get_default_resources();
-				if
-					((terr.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const int8_t resr = terr.get_default_resources();
+				const int default_amount = terr.get_default_resources_amount();
+				if ((terr.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resr] += 3;
 				else ++m[resr];
-				amount += terr.get_default_resources_amount();
+				amount += default_amount;
 			}
 
 			int32_t lv  = 0;
