@@ -408,8 +408,8 @@ struct TribeBasicComparator {
 /**
  * Fills the given string vector with the names of all tribes that exist.
  */
-void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
-	assert(target.empty());
+std::vector<std::string> Tribe_Descr::get_all_tribenames() {
+	std::vector<std::string> tribenames;
 
 	//  get all tribes
 	std::vector<TribeBasicInfo> tribes;
@@ -427,12 +427,13 @@ void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
 
 	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
 	container_iterate_const(std::vector<TribeBasicInfo>, tribes, i)
-		target.push_back(i.current->name);
+		tribenames.push_back(i.current->name);
+	return tribenames;
 }
 
 
-void Tribe_Descr::get_all_tribe_infos(std::vector<TribeBasicInfo> & tribes) {
-	assert(tribes.empty());
+std::vector<TribeBasicInfo> Tribe_Descr::get_all_tribe_infos() {
+	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
 	filenameset_t m_tribes;
@@ -448,6 +449,7 @@ void Tribe_Descr::get_all_tribe_infos(std::vector<TribeBasicInfo> & tribes) {
 	}
 
 	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
+	return tribes;
 }
 
 

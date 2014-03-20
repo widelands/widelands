@@ -64,8 +64,8 @@ struct Tribe_Descr : boost::noncopyable {
 	//  Static function to check for tribes.
 	static bool exists_tribe
 		(const std::string & name, TribeBasicInfo * info = nullptr);
-	static void get_all_tribenames(std::vector<std::string> &);
-	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
+	static std::vector<std::string> get_all_tribenames();
+	static std::vector<TribeBasicInfo> get_all_tribe_infos();
 
 
 	const std::string & name() const {return m_name;}

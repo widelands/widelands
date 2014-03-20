@@ -650,7 +650,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	Widelands::Tribe_Descr::get_all_tribe_infos(d->settings.tribes);
+	d->settings.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
 	setMultiplayerGameSettings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
