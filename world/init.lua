@@ -5,6 +5,9 @@ include "world/resources.lua"
 include "world/terrains.lua"
 
 
+-- NOCOM(#sirver): add this back in
+-- include "world/immovables/trees/aspen_summer_old/init.lua"
+
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
 -- 'basename'_(e|ne|se|sw|w|nw)_\d+.png. 'hotspot' is the hotspot for blitting.
@@ -18,6 +21,5 @@ function add_walking_animations(table, dirname, basename, hotspot)
       }
    end
 end
-
 
 include "world/critters/bunny/init.lua"

@@ -1,0 +1,18 @@
+# NOCOM(#sirver): remove this file again.
+
+This file is to document the renames done in the process of the one_world effort.
+These are important for backwards compatibility of maps (s2 and widelands) as
+they will be hardcoded into the engine.
+
+
+Terrains:
+
+
+Resources:
+granit -> granite
+
+Critters:
+<all_worlds>/bunny -> "bunny"
+
+Immovables:
+greenland/tree1 -> "aspen_summer_old"
