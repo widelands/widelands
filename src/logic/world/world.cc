@@ -117,6 +117,10 @@ void World::add_new_critter_type(Critter_Bob_Descr* critter_bob_description) {
 	bobs_.add(critter_bob_description);
 }
 
+void World::add_new_immovable_type(Immovable_Descr* description) {
+	immovables_.add(description);
+}
+
 // NOCOM(#sirver): remove these
 // void World::parse_bobs(const std::string& given_path, Profile & root_conf) {
 	// std::string path(given_path);
@@ -124,7 +128,7 @@ void World::add_new_critter_type(Critter_Bob_Descr* critter_bob_description) {
 	// std::set<std::string> names; //  To enforce name uniqueness.
 
 	// PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
-		// immovables.add
+		// immovables_.add
 			// (new Immovable_Descr
 				 // (_name, _descname, path, prof, global_s, *this, nullptr));
 	// PARSE_MAP_OBJECT_TYPES_END;

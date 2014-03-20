@@ -328,6 +328,7 @@ World
 const char L_World::className[] = "World";
 const MethodType<L_World> L_World::Methods[] = {
 	METHOD(L_World, new_critter_type),
+	METHOD(L_World, new_immovable_type),
 	METHOD(L_World, new_resource_type),
 	METHOD(L_World, new_terrain_type),
 	{0, 0},
@@ -488,9 +489,7 @@ int L_World::new_immovable_type(lua_State* L) {
 	Editor_Game_Base& egbase = get_egbase(L);
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		egbase.mutable_world()->add_new_immovable_type(new Critter_Bob_Descr(table, nullptr));
-			// (new Immovable_Descr
-				 // (_name, _descname, path, prof, global_s, *this, nullptr));
+		egbase.mutable_world()->add_new_immovable_type(new Immovable_Descr(table, nullptr));
 	}
 	catch (LuaError& e) {
 		return report_error(L, "%s", e.what());

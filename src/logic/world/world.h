@@ -87,13 +87,13 @@ public:
 		return bobs_.get_nitems();
 	}
 	int32_t get_immovable_index(char const* const l) const {
-		return immovables.get_index(l);
+		return immovables_.get_index(l);
 	}
 	int32_t get_nr_immovables() const {
-		return immovables.get_nitems();
+		return immovables_.get_nitems();
 	}
 	Immovable_Descr const* get_immovable_descr(int32_t const index) const {
-		return immovables.get(index);
+		return immovables_.get(index);
 	}
 
 	// NOCOM(#sirver): all methods defined in .cc
@@ -105,6 +105,9 @@ public:
 
 	// Add a new critter to the world description. Transfers ownership.
 	void add_new_critter_type(Critter_Bob_Descr* resource_description);
+
+	// Add a new immovable to the world description. Transfers ownership.
+	void add_new_immovable_type(Immovable_Descr* resource_description);
 
 	int32_t get_resource(const char* const name) const {
 		return resources_.get_index(name);
@@ -122,7 +125,7 @@ public:
 
 private:
 	Descr_Maintainer<Bob::Descr> bobs_;
-	Descr_Maintainer<Immovable_Descr> immovables;
+	Descr_Maintainer<Immovable_Descr> immovables_;
 	Descr_Maintainer<TerrainDescription> terrains_;
 	Descr_Maintainer<ResourceDescription> resources_;
 

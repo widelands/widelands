@@ -113,6 +113,7 @@ public:
 	int new_resource_type(lua_State* L);
 	int new_terrain_type(lua_State* L);
 	int new_critter_type(lua_State* L);
+	int new_immovable_type(lua_State* L);
 
 	/*
 	 * C methods
