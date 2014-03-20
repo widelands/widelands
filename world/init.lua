@@ -4,9 +4,7 @@ world = wl.World()
 include "world/resources.lua"
 include "world/terrains.lua"
 
-
--- NOCOM(#sirver): add this back in
--- include "world/immovables/trees/aspen_summer_old/init.lua"
+include "world/immovables/trees/aspen_summer_old/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this

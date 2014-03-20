@@ -131,11 +131,12 @@ Critter_Bob_Descr::Critter_Bob_Descr
 	}
 
 	// Parse attributes
-	while (Section::Value const * val = global_s.get_next_val("attrib")) {
-		uint32_t const attrib = get_attribute_id(val->get_string());
-		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			throw game_data_error("bad attribute \"%s\"", val->get_string());
-		add_attribute(attrib);
+	{
+		std::vector<std::string> attributes;
+		while (Section::Value const* val = global_s.get_next_val("attrib")) {
+			attributes.emplace_back(val->get_string());
+		}
+		add_attributes(attributes, std::set<uint32_t>());
 	}
 
 	char defaultpics[256];
@@ -186,14 +187,8 @@ Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table, const Tribe_Descr* t
 		assign_diranimation(&m_walk_anims, *this, "walk");
 	}
 
-	// NOCOM(#sirver): pull out into method
-	for (const std::string& attribute :
-	     table.get_table("attributes")->array_entries<std::string>()) {
-		uint32_t const attrib = get_attribute_id(attribute);
-		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			throw game_data_error("bad attribute \"%s\"", attribute.c_str());
-		add_attribute(attrib);
-	}
+	add_attributes(
+	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {

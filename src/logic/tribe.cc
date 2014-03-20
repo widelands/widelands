@@ -99,7 +99,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
 				m_immovables.add
 					(new Immovable_Descr
-					 	(_name, _descname, path, prof, global_s, m_world, this));
+					 	(_name, _descname, path, prof, global_s, this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 #define PARSE_WORKER_TYPES(name, descr_type)                                  \

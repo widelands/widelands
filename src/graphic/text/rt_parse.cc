@@ -80,6 +80,7 @@ RGBColor Attr::get_color() const {
 
 // This is basically a map<string, Attr>, but because there is no
 // .at() in the STL, we need to define our own read only map
+// NOCOM(#sirver): this hould no longer be needed.
 class AttrMap : public IAttrMap {
 public:
 	virtual ~AttrMap() {

@@ -92,7 +92,6 @@ public:
 	 */
 };
 
-// NOCOM(#sirver): use this class
 class L_World : public L_RootModuleClass {
 public:
 	LUNA_CLASS_HEAD(L_World);

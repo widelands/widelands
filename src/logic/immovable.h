@@ -26,6 +26,7 @@
 #include "logic/widelands_geometry.h"
 
 class Profile;
+class LuaTable;
 
 namespace Widelands {
 
@@ -92,7 +93,10 @@ struct Immovable_Descr : public Map_Object_Descr {
 	Immovable_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const World & world, Tribe_Descr const * const);
+		 Tribe_Descr const * const);
+	Immovable_Descr
+		 (const LuaTable&, const Tribe_Descr*);
+
 	~Immovable_Descr();
 
 	int32_t get_size() const {return m_size;}

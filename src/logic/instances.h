@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -83,8 +84,10 @@ struct Map_Object_Descr : boost::noncopyable {
 	void add_animation(const std::string & name, uint32_t anim);
 
 protected:
+	// Add all the special attributes to the attribute list. Only the 'allowed_special'
+	// attributes are allowed to appear - i.e. resi are fine for immovables.
+	void add_attributes(const std::vector<std::string>& attributes, const std::set<uint32_t>& allowed_special);
 	void add_attribute(uint32_t attr);
-
 
 private:
 	typedef std::map<std::string, uint32_t> Anims;

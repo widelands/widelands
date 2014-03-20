@@ -480,6 +480,24 @@ int L_World::new_critter_type(lua_State * L) {
 	return 0;
 }
 
+// NOCOM(#sirver): document
+int L_World::new_immovable_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	Editor_Game_Base& egbase = get_egbase(L);
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		egbase.mutable_world()->add_new_immovable_type(new Critter_Bob_Descr(table, nullptr));
+			// (new Immovable_Descr
+				 // (_name, _descname, path, prof, global_s, *this, nullptr));
+	}
+	catch (LuaError& e) {
+		return report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS

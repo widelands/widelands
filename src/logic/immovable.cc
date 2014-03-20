@@ -43,6 +43,7 @@
 #include "logic/worker.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "text_layout.h"
 #include "upcast.h"
@@ -156,22 +157,11 @@ Immovable_Descr IMPLEMENTATION
 
 /**
  * Parse an immovable from its conf file.
- *
- * Section [global]:
- * picture (default = $NAME_00.png): name of picture used in editor
- * size = none|small|medium|big (default = none): influences build options
- *
- * Section [program] (optional)
- * step = animation [animation name] [duration]
- *        transform [immovable name]
- *
- * Default:
- * 0=animation idle -1
-*/
+ */
 Immovable_Descr::Immovable_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const World & world, Tribe_Descr const * const owner_tribe)
+	 Tribe_Descr const * const owner_tribe)
 :
 	Map_Object_Descr(_name, _descname),
 	m_size          (BaseImmovable::NONE),
@@ -195,15 +185,14 @@ Immovable_Descr::Immovable_Descr
 		}
 
 
-	//  parse attributes
-	while (Section::Value const * const v = global_s.get_next_val("attrib")) {
-		uint32_t attrib = get_attribute_id(v->get_string());
-		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			if (attrib != Map_Object::RESI)
-				throw game_data_error("bad attribute \"%s\"", v->get_string());
-		add_attribute(attrib);
+	// parse attributes
+	{
+		std::vector<std::string> attributes;
+		while (Section::Value const * const v = global_s.get_next_val("attrib")) {
+			attributes.emplace_back(v->get_string());
+		}
+		add_attributes(attributes, { Map_Object::RESI });
 	}
-
 
 	//  parse the programs
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
@@ -237,6 +226,63 @@ Immovable_Descr::Immovable_Descr
 	}
 }
 
+Immovable_Descr::Immovable_Descr(const LuaTable& table, const Tribe_Descr* const owner_tribe)
+   : Map_Object_Descr(table.get_string("name"), table.get_string("descname")),
+     m_size(BaseImmovable::NONE),
+     m_owner_tribe(owner_tribe) {
+
+		  // NOCOM(#sirver): implement
+	// if (char const * const string = global_s.get_string("size"))
+		// try {
+			// if      (!strcasecmp(string, "small"))
+				// m_size = BaseImmovable::SMALL;
+			// else if (!strcasecmp(string, "medium"))
+				// m_size = BaseImmovable::MEDIUM;
+			// else if (!strcasecmp(string, "big"))
+				// m_size = BaseImmovable::BIG;
+			// else
+				// throw game_data_error
+					// ("expected %s but found \"%s\"",
+					 // "{\"small\"|\"medium\"|\"big\"}", string);
+		// } catch (const _wexception & e) {
+			// throw game_data_error("size: %s", e.what());
+		// }
+
+
+	// //  parse attributes
+	// add_attributes(table.get_table("attributes")->array_entries<std::string>(), { Map_Object::RESI });
+
+	// //  parse the programs
+	// while (Section::Value const * const v = global_s.get_next_val("program")) {
+		// std::string program_name = v->get_string();
+		// std::transform
+			// (program_name.begin(), program_name.end(), program_name.begin(),
+			 // tolower);
+		// try {
+			// if (m_programs.count(program_name))
+				// throw game_data_error("this program has already been declared");
+			// m_programs[program_name.c_str()] =
+				// new ImmovableProgram(directory, prof, program_name, *this);
+		// } catch (const std::exception & e) {
+			// throw game_data_error
+				// ("program %s: %s", program_name.c_str(), e.what());
+		// }
+	// }
+
+	// if (m_programs.find("program") == m_programs.end()) { //  default program
+		// char parameters[] = "idle";
+		// m_programs["program"] =
+			// new ImmovableProgram
+				// ("program",
+				 // new ImmovableProgram::ActAnimate
+					 // (parameters, *this, directory, prof));
+	// }
+
+	// if (owner_tribe) {
+		// if (Section * buildcost_s = prof.get_section("buildcost"))
+			// m_buildcost.parse(*owner_tribe, *buildcost_s);
+	// }
+}
 
 /**
  * Cleanup
@@ -407,23 +453,14 @@ void Immovable::switch_program(Game & game, const std::string & programname)
 	schedule_act(game, 1);
 }
 
-uint32_t Immovable_Descr::terrain_suitability
-	(FCoords const f, const Map & map) const
-{
-	uint32_t result = 0;
-	//  Neighbours
-	FCoords const tr = map.tr_n(f);
-	FCoords const tl = map.tl_n(f);
-	FCoords const  l = map. l_n(f);
-
+uint32_t Immovable_Descr::terrain_suitability(FCoords const, const Map&) const {
 	// NOCOM(#sirver): terrain affinity is a too generic concept - it does not
 	// scale well with the number of terrains. Also I never noticed that the
 	// trees have different terrain affinities. Instead we need a 'fertility'
 	// entry for terrains. This method should then be rewritten (and moved out
 	// of this class) using fertility.
-	return 6* 255;
+	return 6 * 255;
 }
-
 
 /**
  * Run program timer.

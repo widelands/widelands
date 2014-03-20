@@ -56,7 +56,7 @@ Worker_Descr::Worker_Descr
 	}
 
 	// Parse attributes
-	// // NOCOM(#sirver): I guess this can be removed again.
+	// // NOCOM(#sirver): I guess this can be removed again, there is no worker using this.
 	while (global_s.get_next_val("attrib")) {
 		throw game_data_error("Worker with attribute: %s", _name);
 		// uint32_t const attrib = get_attribute_id(val->get_string());
@@ -83,7 +83,7 @@ Worker_Descr::Worker_Descr
 						 "defined");
 				if (not (tribe().ware_index(input) or tribe().worker_index(input)))
 					throw wexception
-						("\"%s\" has not beed defined as a ware/worker type (wrong "
+						("\"%s\" has not been defined as a ware/worker type (wrong "
 						 "declaration order?)",
 						 input.c_str());
 				int32_t const value = val->get_int();

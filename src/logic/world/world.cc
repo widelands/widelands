@@ -49,8 +49,6 @@ World::World() :
 		// {
 			// Profile root_conf((basedir_ + "conf").c_str());
 			// parse_root_conf(name, root_conf);
-			// parse_resources();
-			// parse_terrains();
 			// log("Parsing world bobs...\n");
 			// parse_bobs(basedir_, root_conf);
 			// root_conf.check_used();
