@@ -348,9 +348,7 @@ void Map::create_empty_map
 	// Set first tribe found as the "basic" tribe
 	// <undefined> (as set before) is useless and will lead to a
 	// crash -> Widelands will search for tribe "<undefined>"
-	std::vector<std::string> tribes;
-	Tribe_Descr::get_all_tribenames(tribes);
-	set_scenario_player_tribe(1, tribes[0]);
+	set_scenario_player_tribe(1, Tribe_Descr::get_all_tribenames()[0]);
 	set_scenario_player_name(1, _("Player 1"));
 	set_scenario_player_ai(1, "");
 	set_scenario_player_closeable(1, false);

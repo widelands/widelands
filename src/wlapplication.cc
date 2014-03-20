@@ -1616,7 +1616,7 @@ void WLApplication::mainmenu_editor()
 // The user can change everything, except that they are themselves human.
 struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	SinglePlayerGameSettingsProvider() {
-		Widelands::Tribe_Descr::get_all_tribe_infos(s.tribes);
+		s.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
 		s.scenario = false;
 		s.multiplayer = false;
 		s.playernum = 0;
