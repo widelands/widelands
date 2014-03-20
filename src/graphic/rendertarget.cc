@@ -187,9 +187,14 @@ void RenderTarget::blitrect
 	assert(0 <= gsrcrc.x);
 	assert(0 <= gsrcrc.y);
 
-	Rect srcrc(gsrcrc);
-	Point dstpt(dst);
+	// We want to use the given srcrc, but we must make sure that we are not
+	// blitting outside of the boundaries of 'image'.
+	Rect srcrc(gsrcrc.x,
+	           gsrcrc.y,
+	           std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
+	           std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
 
+	Point dstpt(dst);
 	if (to_surface_geometry(&dstpt, &srcrc))
 		m_surface->blit(dstpt, image->surface(), srcrc, cm);
 }
