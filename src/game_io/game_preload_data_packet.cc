@@ -130,12 +130,14 @@ void Game_Preload_Data_Packet::Write
 		s.set_int("player_nr", ipl->player_number());
 	} else {
 		// Pretend that the first player saved the game
-		iterate_players_existing_const(p, map.get_nrplayers(), game, player_tmp) {
-			s.set_int("player_nr", p);
-			break;
+		for (Widelands::Player_Number p = 1; p <= map.get_nrplayers(); ++p) {
+			if (game.get_player(p)) {
+				s.set_int("player_nr", p);
+				break;
+			}
 		}
 	}
-	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.player_manager()->get_number_of_players());
+   s.set_int(PLAYERS_AMOUNT_KEY_V4, game.player_manager()->get_number_of_players());
 
 	std::string bg(map.get_background());
 	if (bg.empty())
