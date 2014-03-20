@@ -22,7 +22,7 @@
 
 #include <memory>
 
-#include "descr_maintainer.h"
+#include "description_maintainer.h"
 #include "logic/bob.h"
 #include "logic/immovable.h"
 #include "logic/widelands.h"
@@ -115,10 +115,10 @@ public:
 	const MapGenInfo& getMapGenInfo() const;
 
 private:
-	Descr_Maintainer<Bob::Descr> bobs_;
-	Descr_Maintainer<Immovable_Descr> immovables_;
-	Descr_Maintainer<TerrainDescription> terrains_;
-	Descr_Maintainer<ResourceDescription> resources_;
+	DescriptionMaintainer<Bob::Descr> bobs_;
+	DescriptionMaintainer<Immovable_Descr> immovables_;
+	DescriptionMaintainer<TerrainDescription> terrains_;
+	DescriptionMaintainer<ResourceDescription> resources_;
 
 	std::unique_ptr<MapGenInfo> mapGenInfo_;
 };

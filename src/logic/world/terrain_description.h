@@ -24,7 +24,6 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "descr_maintainer.h"
 #include "logic/widelands.h"
 #include "logic/world/resource_description.h"
 
