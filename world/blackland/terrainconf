@@ -3,12 +3,6 @@
 ##### Name strings are not translatable by purpose: this way mapmakers can share
 ##### suggestions without having to worry about the localized name of terrain
 
-[ashes]
-name=_"Ashes"
-def_resources=water 5
-is=green
-dither_layer=20
-
 [mountain1]
 name=_"Mountain 1"
 resources=coal, iron, gold, granit

@@ -6,7 +6,8 @@ they will be hardcoded into the engine.
 
 
 Terrains:
-
+greenland terrains stayed without renames
+blackland/ashes -> ashes
 
 Resources:
 granit -> granite

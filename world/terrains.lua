@@ -196,3 +196,28 @@ world:new_terrain_type{
    dither_layer = 50,
    fps = 0,
 }
+
+------------------------
+--  Former blackland  --
+------------------------
+
+world:new_terrain_type{
+   name = "ashes",
+   descname = _"Ashes",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 5,
+   textures = { "world/blackland_pics/ashes_00.png" },
+   dither_layer = 20,
+   fps = 0,
+}
+
+-------------------------
+--  Former Winterland  --
+-------------------------
+
+
+---------------------
+--  Former Desert  --
+---------------------
