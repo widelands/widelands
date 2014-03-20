@@ -239,8 +239,8 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 
 		try {
 
-			std::string name = t->get_string<std::string>("name");
-			std::string descr = t->get_string<std::string>("description");
+			std::string name = t->get_string("name");
+			std::string descr = t->get_string("description");
 
 			m_wincondition.set_title(name);
 			m_wincondition.set_tooltip(descr.c_str());

@@ -47,12 +47,6 @@ int report_error(lua_State *, const char *, ...) PRINTF_FORMAT(2, 3);
 #define lua_pushint32(L, n) (lua_pushinteger(L, static_cast<int32_t>(n)))
 #define lua_pushuint32(L, n) (lua_pushinteger(L, static_cast<uint32_t>(n)))
 
-// For template methods - push template method specialized by datatype.
-template <typename T> void lua_push(lua_State* L, const T& value);
-template <> void lua_push(lua_State* L, const std::string& value);
-template <> void lua_push(lua_State* L, const int& value);
-
-
 inline void lua_pushstring (lua_State * L, const std::string & s) {
 	lua_pushstring(L, s.c_str());
 }

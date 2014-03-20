@@ -39,7 +39,6 @@ public:
  * scripts: they return a Lua table with (string,value) pairs.
  // NOCOM(#sirver): these should xmove their value to their own lua_state,
  // so that the stack stays clean.
- // NOCOM(#sirver): remove templating on the keytype and always use string.
  */
 class LuaTable {
 public:
@@ -82,69 +81,69 @@ public:
 	}
 
 	// Returns the corresponding value with the given key.
-	template <typename KeyType> std::string get_string(const KeyType& s) const {
-		get_existing_table_value<KeyType>(s);
+	template <typename KeyType> std::string get_string(const KeyType& key) const {
+		get_existing_table_value(key);
 		if (!lua_isstring(m_L, -1)) {
 			lua_pop(m_L, 1);
-			throw LuaError(boost::lexical_cast<std::string>(s) + " is not a string value.");
+			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a string value.");
 		}
 		const std::string rv = lua_tostring(m_L, -1);
 		lua_pop(m_L, 1);
 		return rv;
 	}
 
-	template <typename KeyType> std::unique_ptr<LuaTable> get_table(const KeyType& s) const {
-		get_existing_table_value<KeyType>(s);
+	template <typename KeyType> std::unique_ptr<LuaTable> get_table(const KeyType& key) const {
+		get_existing_table_value(key);
 		if (!lua_istable(m_L, -1)) {
 			lua_pop(m_L, 1);
-			throw LuaError(boost::lexical_cast<std::string>(s) + " is not a table value.");
+			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a table value.");
 		}
 		std::unique_ptr<LuaTable> rv(new LuaTable(m_L));
 		return rv;
 	}
 
-	template <typename KeyType> double get_double(const KeyType& s) const {
-		get_existing_table_value<KeyType>(s);
+	template <typename KeyType> double get_double(const KeyType& key) const {
+		get_existing_table_value(key);
 		if (!lua_isnumber(m_L, -1)) {
 			lua_pop(m_L, 1);
-			throw LuaError(boost::lexical_cast<std::string>(s) + " is not a number value.");
+			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a number value.");
 		}
 		const double rv = lua_tonumber(m_L, -1);
 		lua_pop(m_L, 1);
 		return rv;
 	}
 
-	template <typename KeyType> int get_int(const KeyType& s) const {
-		const double value = get_double(s);
+	template <typename KeyType> int get_int(const KeyType& key) const {
+		const double value = get_double(key);
 		const int integer = static_cast<int>(value);
 
 		if (value != integer) {
-			throw LuaError(boost::lexical_cast<std::string>(s) + " is not a integer value.");
+			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a integer value.");
 		}
 		return integer;
 	}
 
-	template <typename KeyType> uint32_t get_uint(const KeyType& s) const {
-		int value = get_int(s);
+	template <typename KeyType> uint32_t get_uint(const KeyType& key) const {
+		int value = get_int(key);
 		if (value < 0) {
-			throw LuaError(boost::lexical_cast<std::string>(s) + "is not a positive value.");
+			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a positive value.");
 		}
 		return static_cast<uint32_t>(value);
 	}
 
-	template <typename KeyType> bool get_bool(const KeyType& s) const {
-		get_existing_table_value<KeyType>(s);
+	template <typename KeyType> bool get_bool(const KeyType& key) const {
+		get_existing_table_value(key);
 		if (!lua_isboolean(m_L, -1)) {
 			lua_pop(m_L, 1);
-			throw LuaError(boost::lexical_cast<std::string>(s) + " is not a boolean value.");
+			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a boolean value.");
 		}
 		const bool rv = lua_tonumber(m_L, -1);
 		lua_pop(m_L, 1);
 		return rv;
 	}
 
-	template <typename KeyType> LuaCoroutine* get_coroutine(const KeyType& s) const {
-		get_existing_table_value<KeyType>(s);
+	template <typename KeyType> LuaCoroutine* get_coroutine(const KeyType& key) const {
+		get_existing_table_value(key);
 
 		if (lua_isfunction(m_L, -1)) {
 			// Oh well, a function, not a coroutine. Let's turn it into one
@@ -158,7 +157,7 @@ public:
 
 		if (not lua_isthread(m_L, -1)) {
 			lua_pop(m_L, 1);
-			throw LuaError(boost::lexical_cast<std::string>(s) + " is not a function value.");
+			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a function value.");
 		}
 		LuaCoroutine* cr = new LuaCoroutine(luaL_checkthread(m_L, -1));
 		lua_pop(m_L, 1);  // Remove coroutine from stack
@@ -166,14 +165,9 @@ public:
 	}
 
 private:
-	template <typename KeyType> void get_existing_table_value(const KeyType& key) const {
-		lua_push<KeyType>(m_L, key);
-		lua_rawget(m_L, m_index);
-		if (lua_isnil(m_L, -1)) {
-			lua_pop(m_L, 1);
-			throw LuaTableKeyError(boost::lexical_cast<std::string>(key));
-		}
-	}
+	void get_existing_table_value(const std::string& key) const;
+	void get_existing_table_value(int key) const;
+	void check_if_key_was_in_table(const std::string& key) const;
 
 	// Get a lua value of the specific type. See template specializations.
 	template <typename T> T get_value() const {

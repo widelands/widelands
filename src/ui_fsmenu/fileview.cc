@@ -36,8 +36,8 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 		try {
 			LuaInterface lua;
 			std::unique_ptr<LuaTable> t(lua.run_script(*g_fs, filename));
-			*content = t->get_string<std::string>("text");
-			*title = t->get_string<std::string>("title");
+			*content = t->get_string("text");
+			*title = t->get_string("title");
 		} catch (LuaError & err) {
 			*content = err.what();
 			*title = "Lua error";

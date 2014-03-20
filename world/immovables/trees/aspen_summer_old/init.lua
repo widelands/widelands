@@ -36,7 +36,7 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 23, 58 },
          fps = 10,
-         sfx= {
+         sfx = {
             [0] = "sound/animals/bird1.ogg",
          },
       },

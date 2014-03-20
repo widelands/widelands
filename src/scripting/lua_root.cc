@@ -390,7 +390,7 @@ int L_World::new_resource_type(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		std::vector<ResourceDescription::EditorPicture> editor_pictures;
 		{
-			std::unique_ptr<LuaTable> st = table.get_table<std::string>("editor_pictures");
+			std::unique_ptr<LuaTable> st = table.get_table("editor_pictures");
 			const std::vector<int> keys = st->keys<int>();
 			for (int max_amount : keys) {
 				ResourceDescription::EditorPicture editor_picture = {
@@ -401,10 +401,10 @@ int L_World::new_resource_type(lua_State* L) {
 
 		// Now add this resource type to the world description.
 		get_egbase(L).mutable_world()->add_new_resource_type(
-		   new ResourceDescription(table.get_string<std::string>("name"),
-		                           table.get_string<std::string>("descname"),
-		                           table.get_bool<std::string>("detectable"),
-		                           table.get_int<std::string>("max_amount"),
+		   new ResourceDescription(table.get_string("name"),
+		                           table.get_string("descname"),
+		                           table.get_bool("detectable"),
+		                           table.get_int("max_amount"),
 		                           editor_pictures));
 	} catch (LuaError& e) {
 		return report_error(L, "%s", e.what());
@@ -441,21 +441,21 @@ int L_World::new_terrain_type(lua_State * L) {
 
 		std::vector<uint8_t> valid_resources;
 		for (const std::string& resource :
-		     table.get_table<std::string>("valid_resources")->array_entries<std::string>()) {
+		     table.get_table("valid_resources")->array_entries<std::string>()) {
 			valid_resources.push_back(world.safe_resource_index(resource.c_str()));
 		}
 
 		// Now add this resource type to the world description.
 		get_egbase(L).mutable_world()->add_new_terrain_type(new TerrainDescription(
-		   table.get_string<std::string>("name"),
-		   table.get_string<std::string>("descname"),
-		   TerrainTypeFromString(table.get_string<std::string>("is")),
-			table.get_table<std::string>("textures")->array_entries<std::string>(),
-		   table.get_int<std::string>("fps"),
-		   table.get_int<std::string>("dither_layer"),
+		   table.get_string("name"),
+		   table.get_string("descname"),
+		   TerrainTypeFromString(table.get_string("is")),
+			table.get_table("textures")->array_entries<std::string>(),
+		   table.get_int("fps"),
+		   table.get_int("dither_layer"),
 		   valid_resources,
-		   world.get_resource(table.get_string<std::string>("default_resource").c_str()),
-		   table.get_int<std::string>("default_resource_amount")));
+		   world.get_resource(table.get_string("default_resource").c_str()),
+		   table.get_int("default_resource_amount")));
 	}
 	catch (LuaError& e) {
 		return report_error(L, "%s", e.what());

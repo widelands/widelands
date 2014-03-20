@@ -301,7 +301,7 @@ Tribe_Descr::Tribe_Descr
 				m_initializations.resize(m_initializations.size() + 1);
 				Initialization & init = m_initializations.back();
 				init.    name = s->first;
-				init.descname = t->get_string<std::string>("name");
+				init.descname = t->get_string("name");
 
 				try {
 					for
@@ -388,7 +388,7 @@ bool Tribe_Descr::exists_tribe
 
 					info->initializations.push_back
 						(TribeBasicInfo::Initialization
-						 	(s->first, t->get_string<std::string>("name")));
+						 	(s->first, t->get_string("name")));
 				}
 			} catch (const _wexception & e) {
 				throw game_data_error

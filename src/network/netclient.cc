@@ -918,7 +918,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 				std::unique_ptr<LuaTable> t = lua.run_script
 					("tribe_" + info.name, name);
 				info.initializations.push_back
-					(TribeBasicInfo::Initialization(name, t->get_string<std::string>("name")));
+					(TribeBasicInfo::Initialization(name, t->get_string("name")));
 			}
 
 			d->settings.tribes.push_back(info);

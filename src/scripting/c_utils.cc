@@ -126,11 +126,3 @@ int report_error(lua_State * L, const char * const fmt, ...) {
 
 	return 0;
 }
-
-template <> void lua_push(lua_State* L, const std::string& value) {
-	lua_pushstring(L, value.c_str());
-}
-
-template <> void lua_push(lua_State* L, const int& value) {
-	lua_pushinteger(L, value);
-}

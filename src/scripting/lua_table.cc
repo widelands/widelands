@@ -19,6 +19,24 @@
 
 #include "scripting/lua_table.h"
 
+void LuaTable::get_existing_table_value(const std::string& key) const {
+	lua_pushstring(m_L, key);
+	check_if_key_was_in_table(key);
+}
+
+void LuaTable::get_existing_table_value(const int key) const {
+	lua_pushint32(m_L, key);
+	check_if_key_was_in_table(boost::lexical_cast<std::string>(key));
+}
+
+void LuaTable::check_if_key_was_in_table(const std::string& key) const {
+	lua_rawget(m_L, m_index);
+	if (lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 1);
+		throw LuaTableKeyError(key);
+	}
+}
+
 template <> std::string LuaTable::get_value() const {
 	if (!lua_isstring(m_L, -1)) {
 		lua_pop(m_L, 1);

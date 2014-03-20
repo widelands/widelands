@@ -175,11 +175,11 @@ void assign_diranimation(DirAnimations* anims, Map_Object_Descr& mo, const std::
 
 Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table, const Tribe_Descr* tribe)
    : Bob::Descr(
-        table.get_string<std::string>("name"), table.get_string<std::string>("descname"), tribe),
-     m_swimming(table.get_bool<std::string>("swimming")) {
+        table.get_string("name"), table.get_string("descname"), tribe),
+     m_swimming(table.get_bool("swimming")) {
 
 	{
-		std::unique_ptr<LuaTable> anims(table.get_table<std::string>("animations"));
+		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {
 			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 		}
@@ -188,18 +188,18 @@ Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table, const Tribe_Descr* t
 
 	// NOCOM(#sirver): pull out into method
 	for (const std::string& attribute :
-	     table.get_table<std::string>("attributes")->array_entries<std::string>()) {
+	     table.get_table("attributes")->array_entries<std::string>()) {
 		uint32_t const attrib = get_attribute_id(attribute);
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
 			throw game_data_error("bad attribute \"%s\"", attribute.c_str());
 		add_attribute(attrib);
 	}
 
-	std::unique_ptr<LuaTable> programs = table.get_table<std::string>("programs");
+	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
 			std::unique_ptr<Critter_BobProgram> prog(new Critter_BobProgram(program_name));
-			prog->parse(programs->get_table<std::string>(program_name)->array_entries<std::string>());
+			prog->parse(programs->get_table(program_name)->array_entries<std::string>());
 			m_programs[program_name] = prog.release();
 		} catch (const std::exception& e) {
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
