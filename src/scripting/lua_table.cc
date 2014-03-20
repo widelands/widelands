@@ -19,36 +19,43 @@
 
 #include "scripting/lua_table.h"
 
+LuaTable::LuaTable(lua_State* L) : L_(L), index_(lua_gettop(L)) {
+}
+
+LuaTable::~LuaTable() {
+	lua_remove(L_, index_);
+}
+
 void LuaTable::get_existing_table_value(const std::string& key) const {
-	lua_pushstring(m_L, key);
+	lua_pushstring(L_, key);
 	check_if_key_was_in_table(key);
 }
 
 void LuaTable::get_existing_table_value(const int key) const {
-	lua_pushint32(m_L, key);
+	lua_pushint32(L_, key);
 	check_if_key_was_in_table(boost::lexical_cast<std::string>(key));
 }
 
 void LuaTable::check_if_key_was_in_table(const std::string& key) const {
-	lua_rawget(m_L, m_index);
-	if (lua_isnil(m_L, -1)) {
-		lua_pop(m_L, 1);
+	lua_rawget(L_, index_);
+	if (lua_isnil(L_, -1)) {
+		lua_pop(L_, 1);
 		throw LuaTableKeyError(key);
 	}
 }
 
 template <> std::string LuaTable::get_value() const {
-	if (!lua_isstring(m_L, -1)) {
-		lua_pop(m_L, 1);
+	if (!lua_isstring(L_, -1)) {
+		lua_pop(L_, 1);
 		throw LuaError("No string on top of stack.");
 	}
-	return lua_tostring(m_L, -1);
+	return lua_tostring(L_, -1);
 }
 
 template <> int LuaTable::get_value() const {
-	if (!lua_isnumber(m_L, -1)) {
-		lua_pop(m_L, 1);
+	if (!lua_isnumber(L_, -1)) {
+		lua_pop(L_, 1);
 		throw LuaError("No integer on top of stack.");
 	}
-	return lua_tointeger(m_L, -1);
+	return lua_tointeger(L_, -1);
 }
