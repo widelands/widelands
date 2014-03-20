@@ -29,7 +29,6 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
-#include "logic/world/data.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
@@ -45,27 +44,27 @@ namespace LuaRoot {
 namespace  {
 
 // Parse a terrain type from the giving string.
-TerrainType TerrainTypeFromString(const std::string& type) {
+TerrainDescription::Type TerrainTypeFromString(const std::string& type) {
 	if (type == "green") {
-		return TERRAIN_GREEN;
+		return TerrainDescription::GREEN;
 	}
 	if (type == "dry") {
-		return TERRAIN_DRY;
+		return TerrainDescription::DRY;
 	}
 	if (type == "water") {
-		return static_cast<TerrainType>(TERRAIN_WATER | TERRAIN_DRY | TERRAIN_UNPASSABLE);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::WATER | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
 	}
 	if (type == "acid") {
-		return static_cast<TerrainType>(TERRAIN_ACID | TERRAIN_DRY | TERRAIN_UNPASSABLE);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::ACID | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
 	}
 	if (type == "mountain") {
-		return static_cast<TerrainType>(TERRAIN_DRY | TERRAIN_MOUNTAIN);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::MOUNTAIN);
 	}
 	if (type == "dead") {
-		return static_cast<TerrainType>(TERRAIN_DRY | TERRAIN_UNPASSABLE | TERRAIN_ACID);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::UNPASSABLE | TerrainDescription::ACID);
 	}
 	if (type == "unpassable") {
-		return static_cast<TerrainType>(TERRAIN_DRY | TERRAIN_UNPASSABLE);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
 	}
 	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
 }

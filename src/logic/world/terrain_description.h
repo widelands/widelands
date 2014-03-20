@@ -26,20 +26,29 @@
 
 #include "descr_maintainer.h"
 #include "logic/widelands.h"
-#include "logic/world/data.h"
 #include "logic/world/resource_description.h"
 
 class Section;
 
 namespace Widelands {
 // NOCOM(#sirver): rename to World::Terrain ?
-struct TerrainDescription : boost::noncopyable {
+class TerrainDescription : boost::noncopyable {
+public:
 	typedef Terrain_Index Index;
+	enum Type {
+		GREEN = 0,
+		DRY = 1,
+		WATER =  2,
+		ACID = 4,
+		MOUNTAIN = 8,
+		UNPASSABLE = 16,
+	};
+
 
 	// NOCOM(#sirver): change to just take a LuaTable
 	TerrainDescription(const std::string& name,
 	                   const std::string& descname,
-	                   TerrainType type,
+	                   Type type,
 	                   const std::vector<std::string>& texture_files,
 	                   int fps,
 	                   int32_t dither_layer,
@@ -48,9 +57,6 @@ struct TerrainDescription : boost::noncopyable {
 	                   int32_t default_amount);
 
 	~TerrainDescription();
-
-	// Loads all graphics related to this Terrain from disk.
-	void load_graphics();
 
 	// The name used internally for this terrain.
 	const std::string& name() const;
@@ -62,8 +68,7 @@ struct TerrainDescription : boost::noncopyable {
 	uint32_t get_texture() const;
 
 	// Returns the type of terrain this is (water, walkable, and so on).
-	// // NOCOM(#sirver): inline TerrainType here
-	TerrainType get_is() const;
+	Type get_is() const;
 
 	// Returns the value of the resource in this field.
 	// NOCOM(#sirver): find out what this does.
@@ -89,7 +94,7 @@ struct TerrainDescription : boost::noncopyable {
 private:
 	const std::string name_;
 	const std::string descname_;
-	TerrainType is_;
+	Type is_;
 	const std::vector<uint8_t> valid_resources_;
 	int8_t default_resource_index_;
 	int32_t default_resource_amount_;

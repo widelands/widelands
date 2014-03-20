@@ -26,7 +26,6 @@
 #include "logic/bob.h"
 #include "logic/immovable.h"
 #include "logic/widelands.h"
-#include "logic/world/data.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
 

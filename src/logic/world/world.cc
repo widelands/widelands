@@ -74,17 +74,8 @@ World::World() :
 World::~World() {
 }
 
-void World::load_graphics()
-{
-	int32_t i;
-
+void World::load_graphics() {
 	g_gr->flush_maptextures();
-
-	// Load terrain graphics
-	for (i = 0; i < terrains_.get_nitems(); ++i)
-		terrains_.get(i)->load_graphics();
-
-	// TODO: load more graphics
 }
 
 const std::string& World::get_name() const {

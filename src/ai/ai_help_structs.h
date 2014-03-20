@@ -82,8 +82,8 @@ struct FindNodeWater {
 	}
 
 	bool accept(const Map&, const FCoords& coord) const {
-		return (world_.terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
-		       (world_.terrain_descr(coord.field->terrain_r()).get_is() & TERRAIN_WATER);
+		return (world_.terrain_descr(coord.field->terrain_d()).get_is() & TerrainDescription::WATER) ||
+		       (world_.terrain_descr(coord.field->terrain_r()).get_is() & TerrainDescription::WATER);
 	}
 
 private:

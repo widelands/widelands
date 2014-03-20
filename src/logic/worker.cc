@@ -2703,11 +2703,11 @@ void Worker::geologist_update(Game & game, State & state)
 			bool is_center_mountain =
 				(world.terrain_descr(owner_area.field->terrain_d()).get_is()
 				 &
-				 TERRAIN_MOUNTAIN)
+				 TerrainDescription::MOUNTAIN)
 				|
 				(world.terrain_descr(owner_area.field->terrain_r()).get_is()
 				 &
-				 TERRAIN_MOUNTAIN);
+				 TerrainDescription::MOUNTAIN);
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2720,11 +2720,11 @@ void Worker::geologist_update(Game & game, State & state)
 				is_target_mountain =
 					(world.terrain_descr(target.field->terrain_d()).get_is()
 					 &
-					 TERRAIN_MOUNTAIN)
+					 TerrainDescription::MOUNTAIN)
 					|
 					(world.terrain_descr(target.field->terrain_r()).get_is()
 					 &
-					 TERRAIN_MOUNTAIN);
+					 TerrainDescription::MOUNTAIN);
 				if (i == 0)
 					i = list.size();
 				--i;

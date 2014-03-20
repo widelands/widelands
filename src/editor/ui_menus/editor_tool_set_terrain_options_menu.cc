@@ -31,7 +31,7 @@
 #include "graphic/texture.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "logic/world/data.h"
+#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -55,11 +55,11 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 	static const int32_t check[] = {
 		0,                                            //  "green"
-		TERRAIN_DRY,                                  //  "dry"
-		TERRAIN_DRY|TERRAIN_MOUNTAIN,                 //  "mountain"
-		TERRAIN_DRY|TERRAIN_UNPASSABLE,               //  "unpassable"
-		TERRAIN_ACID|TERRAIN_DRY|TERRAIN_UNPASSABLE,  //  "dead" or "acid"
-		TERRAIN_UNPASSABLE|TERRAIN_DRY|TERRAIN_WATER,
+		Widelands::TerrainDescription::DRY,                                  //  "dry"
+		Widelands::TerrainDescription::DRY|Widelands::TerrainDescription::MOUNTAIN,                 //  "mountain"
+		Widelands::TerrainDescription::DRY|Widelands::TerrainDescription::UNPASSABLE,               //  "unpassable"
+		Widelands::TerrainDescription::ACID|Widelands::TerrainDescription::DRY|Widelands::TerrainDescription::UNPASSABLE,  //  "dead" or "acid"
+		Widelands::TerrainDescription::UNPASSABLE|Widelands::TerrainDescription::DRY|Widelands::TerrainDescription::WATER,
 	};
 
 	m_checkboxes.resize(nr_terrains);
@@ -84,7 +84,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	Point pos(hmargin(), vmargin());
 	for (size_t checkfor = 0; checkfor < 6; ++checkfor) {
 		for (Widelands::Terrain_Index i  = 0; i < nr_terrains; ++i) {
-			const TerrainType ter_is = world.get_ter(i).get_is();
+			const Widelands::TerrainDescription::Type ter_is = world.get_ter(i).get_is();
 			if (ter_is != check[checkfor])
 				continue;
 
@@ -106,23 +106,23 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				surf->blit(pt, green->surface(), Rect(0, 0, green->width(), green->height()));
 				pt.x += small_picw + 1;
 			} else {
-				if (ter_is & TERRAIN_WATER) {
+				if (ter_is & Widelands::TerrainDescription::WATER) {
 					surf->blit(pt, water->surface(), Rect(0, 0, water->width(), water->height()));
 					pt.x += small_picw + 1;
 				}
-				if (ter_is & TERRAIN_MOUNTAIN) {
+				if (ter_is & Widelands::TerrainDescription::MOUNTAIN) {
 					surf->blit(pt, mountain->surface(), Rect(0, 0, mountain->width(), mountain->height()));
 					pt.x += small_picw + 1;
 				}
-				if (ter_is & TERRAIN_ACID) {
+				if (ter_is & Widelands::TerrainDescription::ACID) {
 					surf->blit(pt, dead->surface(), Rect(0, 0, dead->width(), dead->height()));
 					pt.x += small_picw + 1;
 				}
-				if (ter_is & TERRAIN_UNPASSABLE) {
+				if (ter_is & Widelands::TerrainDescription::UNPASSABLE) {
 					surf->blit(pt, unpassable->surface(), Rect(0, 0, unpassable->width(), unpassable->height()));
 					pt.x += small_picw + 1;
 				}
-				if (ter_is & TERRAIN_DRY)
+				if (ter_is & Widelands::TerrainDescription::DRY)
 					surf->blit(pt, dry->surface(), Rect(0, 0, dry->width(), dry->height()));
 			}
 			// Make sure we delete this later on.

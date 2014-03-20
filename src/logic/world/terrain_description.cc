@@ -27,14 +27,13 @@
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
-#include "logic/world/data.h"
 #include "profile/profile.h"
 
 namespace Widelands {
 
 TerrainDescription::TerrainDescription(const std::string& name,
                                        const std::string& descname,
-                                       TerrainType type,
+                                       TerrainDescription::Type type,
 													const std::vector<std::string>& texture_files,
                                        int fps,
                                        int32_t dither_layer,
@@ -58,15 +57,11 @@ TerrainDescription::TerrainDescription(const std::string& name,
 TerrainDescription::~TerrainDescription() {
 }
 
-void TerrainDescription::load_graphics() {
-	// NOCOM(#sirver): kill method
-}
-
 uint32_t TerrainDescription::get_texture() const {
 	return texture_;
 }
 
-TerrainType TerrainDescription::get_is() const {
+TerrainDescription::Type TerrainDescription::get_is() const {
 	return is_;
 }
 
@@ -79,7 +74,7 @@ const std::string& TerrainDescription::descname() const {
 }
 
 int32_t TerrainDescription::resource_value(const Resource_Index resource) const {
-	return is_resource_valid(resource) ? (get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
+	return is_resource_valid(resource) ? (get_is() & TerrainDescription::UNPASSABLE ? 8 : 1) : -1;
 }
 
 Resource_Index TerrainDescription::get_valid_resource(uint8_t index) const {

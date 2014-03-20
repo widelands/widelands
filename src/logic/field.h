@@ -47,9 +47,9 @@ namespace Widelands {
 // Making it a struct doesn't add anything. struct is used interchangeably with
 // class all around the code
 
-struct TerrainDescription;
-struct Bob;
+class TerrainDescription;
 struct BaseImmovable;
+struct Bob;
 
 // Field is used so often, make sure it is as small as possible.
 #pragma pack(push, 1)
