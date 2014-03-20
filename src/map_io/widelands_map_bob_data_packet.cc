@@ -55,9 +55,7 @@ void Map_Bob_Data_Packet::ReadBob
 			const World & world = egbase.world();
 			int32_t const idx = world.get_bob(name);
 			if (idx == -1)
-				throw game_data_error
-					("world %s does not define bob type \"%s\"",
-					 world.get_name().c_str(), name);
+				throw game_data_error("world does not define bob type \"%s\"", name);
 			const Bob::Descr & descr = *world.get_bob_descr(idx);
 			if (not (map[coords].nodecaps() & descr.movecaps()))
 				log

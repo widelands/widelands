@@ -131,15 +131,11 @@ public:
 		std::string name;
 	};
 	struct world_immovable_nonexistent : public _data_error {
-		world_immovable_nonexistent
-			(char const * const Worldname, char const * const Name)
-			:
-			_data_error
-				("world %s does not define immovable type \"%s\"",
-				 Worldname, Name),
-			worldname(Worldname), name(Name)
-		{}
-		char const * const worldname, * const name;
+		world_immovable_nonexistent(char const* const Name)
+		   : _data_error("world does not define immovable type \"%s\"", Name),
+		     name(Name) {
+		}
+		char const* const name;
 	};
 	struct building_nonexistent : public _data_error {
 		building_nonexistent

@@ -45,16 +45,8 @@ public:
 	World();
 	~World();  // Defined in .cc because all forward declarations are known then.
 
-	// NOCOM(#sirver): kill
-	static bool exists_world(std::string);  ///  check if a world really exists
-
 	// Load the graphics data for this world.
 	void load_graphics();
-
-	// Returns various metadata.
-	const std::string& get_name() const;
-	const std::string& get_author() const;
-	const std::string& get_description() const;
 
 	Terrain_Index index_of_terrain(char const* const name) const {
 		return terrains_.get_index(name);

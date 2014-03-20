@@ -416,9 +416,7 @@ const Widelands::Immovable_Descr & Section::get_safe_Immovable_Type
 			 world   .get_immovable_descr(world   .get_immovable_index(immname)))
 			return *result;
 		else
-			throw wexception
-				("world %s does not define immovable type \"%s\"",
-				 world.get_name().c_str(), immname);
+			throw wexception("world does not define immovable type \"%s\"", immname);
 	}
 }
 

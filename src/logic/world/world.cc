@@ -78,24 +78,6 @@ void World::load_graphics() {
 	g_gr->flush_maptextures();
 }
 
-const std::string& World::get_name() const {
-	static const std::string s("alllands");
-	return s;
-	// NOCOM(#sirver): remove method
-}
-
-const std::string& World::get_author() const {
-	// NOCOM(#sirver): remove method
-	static const std::string s("Widelands tea");
-	return s;
-}
-
-const std::string& World::get_description() const {
-	// NOCOM(#sirver): remove method
-	static const std::string s("no description");
-	return s;
-}
-
 void World::add_new_resource_type(ResourceDescription* resource_description) {
 	resources_.add(resource_description);
 }
@@ -240,21 +222,11 @@ void World::add_new_immovable_type(Immovable_Descr* description) {
 	// }
 // }
 
-/**
- * Check if the world data can actually be read
- */
-bool World::exists_world(std::string) {
-	// NOCOM(#sirver): kill method
-	return true;
-}
-
 int32_t World::safe_resource_index(const char * const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
 	if (result == -1)
-		throw game_data_error
-			("world %s does not define resource type \"%s\"",
-			 get_name().c_str(), resourcename);
+		throw game_data_error("world does not define resource type \"%s\"", resourcename);
 	return result;
 }
 

@@ -38,47 +38,6 @@ ResourceDescription::ResourceDescription(const std::string& name,
      editor_pictures_(editor_pictures) {
 }
 
-// NOCOM(#sirver): remove
-// void ResourceDescription::parse(Section & s, const std::string & basedir)
-// {
-	// name_ = s.get_name();
-	// descname_ = s.get_string("name", s.get_name());
-	// detectable_ = s.get_bool("detectable", true);
-
-	// max_amount_ = s.get_safe_int("max_amount");
-	// while (Section::Value const * const v = s.get_next_val("editor_pic")) {
-		// Editor_Pic i;
-
-		// std::vector<std::string> const args(split_string(v->get_string(), " \t"));
-		// if (args.size() != 1 and args.size() != 2) {
-			// log
-				// ("Resource '%s' has bad editor_pic=%s\n",
-				 // name_.c_str(), v->get_string());
-			// continue;
-		// }
-
-		// i.picname = basedir + "/pics/";
-		// i.picname += args[0];
-		// i.upper_limit = -1;
-
-		// if (args.size() >= 2) {
-			// char * endp;
-			// i.upper_limit = strtol(args[1].c_str(), &endp, 0);
-
-			// if (*endp) {
-				// log
-					// ("Resource '%s' has bad editor_pic=%s\n",
-					 // name_.c_str(), v->get_string());
-				// continue;
-			// }
-		// }
-
-		// editor_pictures_.push_back(i);
-	// }
-	// if (editor_pictures_.empty())
-		// throw game_data_error("resource '%s' has no editor_pic", name_.c_str());
-// }
-
 const std::string & ResourceDescription::get_editor_pic
 	(uint32_t const amount) const
 {

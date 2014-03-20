@@ -108,10 +108,9 @@ void MapGenAreaInfo::readTerrains
 {
 	std::string str = s.get_string(value_name, "");
 	if (str.empty())
-		throw game_data_error
-			("terrain info \"%s\" missing in section \"%s\" mapgenconf for world "
-			 "\"%s\"",
-			 value_name, s.get_name(), m_world->get_name().c_str());
+		throw game_data_error("terrain info \"%s\" missing in section \"%s\" mapgenconf for world.",
+		                      value_name,
+		                      s.get_name());
 	std::vector<std::string> strs;
 
 	split_string(strs, str);
@@ -119,10 +118,9 @@ void MapGenAreaInfo::readTerrains
 	for (uint32_t ix = 0; ix < strs.size(); ++ix) {
 		Terrain_Index const tix = m_world->index_of_terrain(strs[ix].c_str());
 		if (tix > 128)
-			throw game_data_error
-				("unknown terrain \"%s\" in section \"%s\" in mapgenconf for "
-				 "world \"%s\"",
-				 value_name, s.get_name(), m_world->get_name().c_str());
+			throw game_data_error("unknown terrain \"%s\" in section \"%s\" in mapgenconf for world.",
+			                      value_name,
+			                      s.get_name());
 		list.push_back(tix);
 	}
 }

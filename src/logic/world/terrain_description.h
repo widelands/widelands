@@ -31,7 +31,7 @@
 class Section;
 
 namespace Widelands {
-// NOCOM(#sirver): rename to World::Terrain ?
+
 class TerrainDescription : boost::noncopyable {
 public:
 	typedef Terrain_Index Index;
