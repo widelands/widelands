@@ -68,9 +68,6 @@ int32_t S2_Map_Loader::preload_map(bool const scenario) {
 
 	load_s2mf_header();
 
-	if (not Widelands::World::exists_world(m_map.get_world_name()))
-		throw wexception("world %s does not exist", m_map.get_world_name());
-
 	if (scenario) {
 		//  Load this as scenario. There is no such a thing as S2 scenario,
 		//  therefore set the tribes and some default names.
@@ -102,10 +99,8 @@ int32_t S2_Map_Loader::preload_map(bool const scenario) {
 }
 
 /**
- * Completely loads the map, loads the
- * corresponding world, loads the graphics
- * and places all the objects. From now on
- * the Map* can't be set to another one.
+ * Completely loads the map, loads the graphics and places all the objects.
+ * From now on the Map* can't be set to another one.
  */
 int32_t S2_Map_Loader::load_map_complete
 	(Widelands::Editor_Game_Base & egbase, bool)
@@ -218,16 +213,17 @@ void S2_Map_Loader::load_s2mf_header()
 	m_map.set_nrplayers(header.nplayers);
 	m_map.set_description(_("Bluebyte Settlers II Map. No comment defined!"));
 
+	// NOCOM(#sirver): this needs to decide which lookup table to use.
 	//  This is not the name, this is the directory of the world, so please
 	//  do not translate it.
-	switch (header.uses_world) {
-	case 0: m_map.set_world_name("greenland");  break;
-	case 1: m_map.set_world_name("blackland");  break;
-	case 2: m_map.set_world_name("winterland"); break;
-	default:
-		assert(false);
-		break;
-	}
+	// switch (header.uses_world) {
+	// case 0: m_map.set_world_name("greenland");  break;
+	// case 1: m_map.set_world_name("blackland");  break;
+	// case 2: m_map.set_world_name("winterland"); break;
+	// default:
+		// assert(false);
+		// break;
+	// }
 }
 
 
@@ -713,14 +709,16 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				case BOB_SKELETON3:        bobname = "skeleton3"; break;
 
 				case BOB_CACTUS1:
-					bobname =
-						strcmp(m_map.get_world_name(), "winterland") ?
-						"cactus1" : "snowman";
+					// NOCOM(#sirver): and here
+					// bobname =
+					// strcmp(m_map.get_world_name(), "winterland") ?
+					// "cactus1" : "snowman";
 					break;
 				case BOB_CACTUS2:
-					bobname =
-						strcmp(m_map.get_world_name(), "winterland") ?
-						"cactus2" : "track";
+					// NOCOM(#sirver): and here
+					// bobname =
+					// strcmp(m_map.get_world_name(), "winterland") ?
+					// "cactus2" : "track";
 					break;
 
 				case BOB_BUSH1:            bobname = "bush1";     break;

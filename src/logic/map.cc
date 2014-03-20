@@ -594,11 +594,6 @@ void Map::set_hint(std::string string)
 	m_hint = string;
 }
 
-void Map::set_world_name(char const * const )
-{
-	// NOCOM(#sirver): kill method
-}
-
 void Map::set_background(char const * const string)
 {
 	if (string)

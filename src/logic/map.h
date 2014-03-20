@@ -188,7 +188,6 @@ public:
 
 	void set_filename   (char const *);
 	void set_author     (char const *);
-	void set_world_name (char const *); // NOCOM(#sirver): kill too
 	void set_name       (char const *);
 	void set_description(char const *);
 	void set_hint       (std::string);
@@ -202,8 +201,6 @@ public:
 	const char * get_name()        const {return m_name;}
 	const char * get_description() const {return m_description;}
 	std::string  get_hint()        const {return m_hint;}
-	// NOCOM(#sirver): remove get_world_name
-	const char * get_world_name()  const {return "greenland";}
 	const std::string & get_background() const {return m_background;}
 	typedef std::set<std::string> Tags;
 	const Tags & get_tags() const {return m_tags;}

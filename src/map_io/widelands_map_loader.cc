@@ -24,7 +24,6 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/world/world.h"
 #include "map_io/widelands_map_allowed_building_types_data_packet.h"
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
 #include "map_io/widelands_map_bob_data_packet.h"
@@ -80,14 +79,6 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 	m_map.cleanup();
 
 	{Map_Elemental_Data_Packet mp; mp.Pre_Read(m_fs, &m_map);}
-
-	if (not World::exists_world(m_map.get_world_name()))
-		throw warning
-			(_("Invalid World"),
-			 _
-			 	("The world \"%s\" set by the map does not exist on your "
-			 	 "filesystem."),
-			 m_map.get_world_name());
 
 	{
 		Map_Player_Names_And_Tribes_Data_Packet p;

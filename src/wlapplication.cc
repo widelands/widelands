@@ -434,7 +434,6 @@ void WLApplication::run()
 				mapdata.name = map.get_name();
 				mapdata.author = map.get_author();
 				mapdata.description = map.get_description();
-				mapdata.world = map.get_world_name();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
 				mapdata.height = map.get_height();

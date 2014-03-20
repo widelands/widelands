@@ -56,6 +56,16 @@ std::vector<std::string> section_to_strings(Section* section) {
 		throw wexception("Line numbers appear to be wrong");
 	return return_value;
 }
+
+// Sets the dir animations in 'anims' with the animations
+// '<prefix>_(ne|e|se|sw|w|nw)' which must be defined in 'mo'.
+void assign_diranimation(DirAnimations* anims, Map_Object_Descr& mo, const std::string& prefix) {
+	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+	for (int32_t dir = 0; dir < 6; ++dir) {
+		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir]));
+	}
+}
+
 }  // namespace
 
 void Critter_BobProgram::parse(const std::vector<std::string>& lines) {
@@ -162,15 +172,6 @@ Critter_Bob_Descr::Critter_Bob_Descr
 			throw wexception
 				("Parse error in program %s: %s", v->get_string(), e.what());
 		}
-	}
-}
-
-
-// NOCOM(#sirver): to anon namespace and add docu
-void assign_diranimation(DirAnimations* anims, Map_Object_Descr& mo, const std::string& prefix) {
-	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
-	for (int32_t dir = 0; dir < 6; ++dir) {
-		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir]));
 	}
 }
 

@@ -92,10 +92,7 @@ inline uint32_t calc_minimap_color
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
 			if ((flags & MiniMap::Roads) and dynamic_cast<Road const *>(immovable)) {
-				if (!(flags & MiniMap::Owner) && !strcmp(egbase.map().get_world_name(), "winterland"))
-						pixelcolor = blend_color(format, pixelcolor, 255, 127, 0);
-				else //ownership layer displayed or greenland
-						pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
+				pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
 			}
 
 			if
@@ -105,14 +102,7 @@ inline uint32_t calc_minimap_color
 				  and
 				  dynamic_cast<Widelands::Building const *>(immovable)))
 			{
-				if (!(flags & MiniMap::Owner) && !strcmp(egbase.map().get_world_name(), "winterland"))
-					pixelcolor =
-						SDL_MapRGB
-							(&const_cast<SDL_PixelFormat &>(format), 255, 127, 0);
-				else //ownership layer displayed or greenland
-					pixelcolor =
-						SDL_MapRGB
-							(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
+				pixelcolor = SDL_MapRGB(&const_cast<SDL_PixelFormat&>(format), 255, 255, 255);
 			}
 		}
 	}

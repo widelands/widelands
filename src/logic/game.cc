@@ -230,8 +230,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	std::string const background = map().get_background();
 	if (background.size() > 0)
 		loaderUI.set_background(background);
-	else
-		loaderUI.set_background(map().get_world_name());
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
@@ -292,8 +290,6 @@ void Game::init_newgame
 	if (loaderUI) {
 		if (background.size() > 0)
 			loaderUI->set_background(background);
-		else
-			loaderUI->set_background(map().get_world_name());
 		loaderUI->step(_("Configuring players"));
 	}
 	std::vector<PlayerSettings> shared;

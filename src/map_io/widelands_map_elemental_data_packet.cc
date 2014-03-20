@@ -25,7 +25,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world/world.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -44,7 +43,6 @@ void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 			map->m_width       = s.get_int   ("map_w");
 			map->m_height      = s.get_int   ("map_h");
 			map->set_nrplayers  (s.get_int   ("nr_players"));
-			map->set_world_name (s.get_string("world"));
 			map->set_name       (s.get_string("name"));
 			map->set_author     (s.get_string("author"));
 			map->set_description(s.get_string("descr"));
@@ -90,7 +88,6 @@ void Map_Elemental_Data_Packet::Write
 	s.set_int   ("map_w",          map.get_width      ());
 	s.set_int   ("map_h",          map.get_height     ());
 	s.set_int   ("nr_players",     map.get_nrplayers  ());
-	s.set_string("world",          map.get_world_name ());
 	s.set_string("name",           map.get_name       ());
 	s.set_string("author",         map.get_author     ());
 	s.set_string("descr",          map.get_description());

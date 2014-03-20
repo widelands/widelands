@@ -99,13 +99,6 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("World:"), UI::Align_CenterLeft);
-	m_world =
-		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
-
-	new UI::Textarea
 		(this, posx, posy, 70, 20, _("Players:"), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
@@ -236,7 +229,6 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 		m_name  ->set_text(map.get_name       ());
 		m_author->set_text(map.get_author     ());
 		m_descr ->set_text(map.get_description());
-		m_world ->set_text(map.get_world_name ());
 
 		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());
@@ -247,7 +239,6 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	} else {
 		m_name     ->set_text(FileSystem::FS_Filename(name));
 		m_author   ->set_text("");
-		m_world    ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
 		if (g_fs->IsDirectory(name)) {

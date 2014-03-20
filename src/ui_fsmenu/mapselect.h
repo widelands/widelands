@@ -51,7 +51,6 @@ struct MapData {
 	std::string author;
 	std::string description;
 	std::string hint;
-	std::string world;
 	Tags tags;
 
 	uint32_t width;
