@@ -61,9 +61,7 @@ struct ImmovableProgram {
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
 	struct ActAnimate : public Action {
-		ActAnimate
-			(char * parameters, Immovable_Descr &,
-			 const std::string & directory, Profile &);
+		ActAnimate(char * parameters, Immovable_Descr &);
 		virtual void execute(Game &, Immovable &) const override;
 		uint32_t animation() const {return m_id;}
 	private:
@@ -180,12 +178,18 @@ struct ImmovableProgram {
 		m_actions.push_back(action);
 	}
 
+	// Create an immovable program from a number of lines.
+	ImmovableProgram(const std::string& init_name,
+	                 const std::vector<std::string>& lines,
+	                 Immovable_Descr* immovable);
+
 	/// Create a program by parsing a conf-file section.
 	ImmovableProgram
 		(const std::string    & directory,
 		 Profile              &,
 		 const std::string    & name,
 		 Immovable_Descr      &);
+
 	~ImmovableProgram() {
 		container_iterate_const(Actions, m_actions, i)
 			delete *i.current;

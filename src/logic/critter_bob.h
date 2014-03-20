@@ -38,8 +38,7 @@ struct Critter_Bob_Descr : public Bob::Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr *);
-	Critter_Bob_Descr
-		 (const LuaTable&, const Tribe_Descr*);
+	Critter_Bob_Descr(const LuaTable&);
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const override;

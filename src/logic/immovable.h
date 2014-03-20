@@ -48,7 +48,7 @@ class Worker;
  * For more information, see the Map::recalc_* functions.
  */
 struct BaseImmovable : public Map_Object {
-	enum {
+	enum Size {
 		NONE = 0, ///< not robust (i.e. removable by building something over it)
 		SMALL,    ///< small building or robust map element, including trees
 		MEDIUM,   ///< medium size building
@@ -94,8 +94,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 Tribe_Descr const * const);
-	Immovable_Descr
-		 (const LuaTable&, const Tribe_Descr*);
+	Immovable_Descr(const LuaTable&);
 
 	~Immovable_Descr();
 
@@ -122,6 +121,10 @@ protected:
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruction
 	Buildcost m_buildcost;
+
+private:
+	// Adds a default program if none was defined.
+	void make_sure_default_program_is_there();
 };
 
 class Immovable : public BaseImmovable {

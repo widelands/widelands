@@ -21,6 +21,7 @@
 
 #include <cstdio>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <config.h>
 
@@ -51,6 +52,23 @@
 #include "wui/interactive_base.h"
 
 namespace Widelands {
+
+namespace  {
+
+BaseImmovable::Size string_to_size(const std::string& size) {
+	if (size == "none")
+		return BaseImmovable::NONE;
+	if (size == "small")
+		return BaseImmovable::SMALL;
+	if (size == "medium")
+		return BaseImmovable::MEDIUM;
+	if (size == "big")
+		return BaseImmovable::BIG;
+	throw game_data_error("Unknown size %s.", size.c_str());
+}
+
+}  // namespace
+
 
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
 Map_Object(&mo_descr)
@@ -112,40 +130,78 @@ ImmovableProgram IMPLEMENTATION
 ==============================================================================
 */
 
-
-ImmovableProgram::ImmovableProgram
-	(const std::string    & directory,
-	 Profile              & prof,
-	 const std::string    & _name,
-	 Immovable_Descr      & immovable)
-	: m_name(_name)
-{
-	Section & program_s = prof.get_safe_section(_name.c_str());
-	while (Section::Value * const v = program_s.get_next_val()) {
-		Action * action;
-		if      (not strcmp(v->get_name(), "animate"))
-			action = new ActAnimate  (v->get_string(), immovable, directory, prof);
-		else if (not strcmp(v->get_name(), "transform"))
+ImmovableProgram::ImmovableProgram(const std::string& directory,
+                                   Profile& prof,
+                                   const std::string& _name,
+                                   Immovable_Descr& immovable)
+   : m_name(_name) {
+	Section& program_s = prof.get_safe_section(_name.c_str());
+	while (Section::Value* const v = program_s.get_next_val()) {
+		Action* action;
+		if (not strcmp(v->get_name(), "animate")) {
+			bool reached_end;
+			char * full_line = v->get_string();
+			char * const animation_name = match(full_line, reached_end);
+			if (!immovable.is_animation_known(animation_name)) {
+				immovable.add_animation(
+				   animation_name,
+				   g_gr->animations().load(directory, prof.get_safe_section(animation_name)));
+			}
+			action = new ActAnimate(v->get_string(), immovable);
+		} else if (not strcmp(v->get_name(), "transform")) {
 			action = new ActTransform(v->get_string(), immovable);
-		else if (not strcmp(v->get_name(), "grow"))
+		} else if (not strcmp(v->get_name(), "grow")) {
 			action = new ActGrow(v->get_string(), immovable);
-		else if (not strcmp(v->get_name(), "remove"))
-			action = new ActRemove   (v->get_string(), immovable);
-		else if (not strcmp(v->get_name(), "seed"))
-			action = new ActSeed     (v->get_string(), immovable);
-		else if (not strcmp(v->get_name(), "playFX"))
-			action = new ActPlayFX   (directory, v->get_string(), immovable);
-		else if (not strcmp(v->get_name(), "construction"))
+		} else if (not strcmp(v->get_name(), "remove")) {
+			action = new ActRemove(v->get_string(), immovable);
+		} else if (not strcmp(v->get_name(), "seed")) {
+			action = new ActSeed(v->get_string(), immovable);
+		} else if (not strcmp(v->get_name(), "playFX")) {
+			action = new ActPlayFX(directory, v->get_string(), immovable);
+		} else if (not strcmp(v->get_name(), "construction")) {
 			action = new ActConstruction(v->get_string(), immovable, directory, prof);
-		else
-			throw game_data_error
-				("unknown command type \"%s\"", v->get_name());
+		} else {
+			throw game_data_error("unknown command type \"%s\"", v->get_name());
+		}
 		m_actions.push_back(action);
 	}
 	if (m_actions.empty())
 		throw game_data_error("no actions");
 }
 
+ImmovableProgram::ImmovableProgram(const std::string& init_name,
+                                   const std::vector<std::string>& lines,
+											  Immovable_Descr* immovable)
+   : m_name(init_name) {
+	for (const std::string& line : lines) {
+		std::vector<std::string> parts;
+		boost::split(parts, line, boost::is_any_of("="));
+		if (parts.size() != 2) {
+			throw game_data_error("invalid line: %s.", line.c_str());
+		}
+		std::unique_ptr<char []> arguments(new char[parts[1].size() + 1]);
+		strncpy(arguments.get(), parts[1].c_str(), parts[1].size() + 1);
+
+		Action* action;
+		if (parts[0] == "animate") {
+			action = new ActAnimate(arguments.get(), *immovable);
+		} else if (parts[0] == "transform") {
+			action = new ActTransform(arguments.get(), *immovable);
+		} else if (parts[0] == "grow") {
+			action = new ActGrow(arguments.get(), *immovable);
+		} else if (parts[0] == "remove") {
+			action = new ActRemove(arguments.get(), *immovable);
+		} else if (parts[0] == "seed") {
+			action = new ActSeed(arguments.get(), *immovable);
+		} else {
+			throw game_data_error(
+			   "unknown or (here)not support command type \"%s\"", parts[0].c_str());
+		}
+		m_actions.push_back(action);
+	}
+	if (m_actions.empty())
+		throw game_data_error("no actions");
+}
 
 /*
 ==============================================================================
@@ -168,6 +224,7 @@ Immovable_Descr::Immovable_Descr
 	m_owner_tribe   (owner_tribe)
 {
 
+	// NOCOM(#sirver): could be that I accidentally nuked loading of "idle" animation.
 	if (char const * const string = global_s.get_string("size"))
 		try {
 			if      (!strcasecmp(string, "small"))
@@ -183,7 +240,6 @@ Immovable_Descr::Immovable_Descr
 		} catch (const _wexception & e) {
 			throw game_data_error("size: %s", e.what());
 		}
-
 
 	// parse attributes
 	{
@@ -203,7 +259,7 @@ Immovable_Descr::Immovable_Descr
 		try {
 			if (m_programs.count(program_name))
 				throw game_data_error("this program has already been declared");
-			m_programs[program_name.c_str()] =
+			m_programs[program_name] =
 				new ImmovableProgram(directory, prof, program_name, *this);
 		} catch (const std::exception & e) {
 			throw game_data_error
@@ -211,77 +267,49 @@ Immovable_Descr::Immovable_Descr
 		}
 	}
 
-	if (m_programs.find("program") == m_programs.end()) { //  default program
-		char parameters[] = "idle";
-		m_programs["program"] =
-			new ImmovableProgram
-				("program",
-				 new ImmovableProgram::ActAnimate
-				 	(parameters, *this, directory, prof));
-	}
+	make_sure_default_program_is_there();
 
 	if (owner_tribe) {
-		if (Section * buildcost_s = prof.get_section("buildcost"))
+		// shipconstruction has a cost associated.
+		if (Section * buildcost_s = prof.get_section("buildcost")) {
 			m_buildcost.parse(*owner_tribe, *buildcost_s);
+		}
 	}
 }
 
-Immovable_Descr::Immovable_Descr(const LuaTable& table, const Tribe_Descr* const owner_tribe)
+Immovable_Descr::Immovable_Descr(const LuaTable& table)
    : Map_Object_Descr(table.get_string("name"), table.get_string("descname")),
      m_size(BaseImmovable::NONE),
-     m_owner_tribe(owner_tribe) {
+     m_owner_tribe(nullptr)  // Can only parse world immovables for now.
+{
+	m_size = string_to_size(table.get_string("size"));
+	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {Map_Object::RESI});
 
-		  // NOCOM(#sirver): implement
-	// if (char const * const string = global_s.get_string("size"))
-		// try {
-			// if      (!strcasecmp(string, "small"))
-				// m_size = BaseImmovable::SMALL;
-			// else if (!strcasecmp(string, "medium"))
-				// m_size = BaseImmovable::MEDIUM;
-			// else if (!strcasecmp(string, "big"))
-				// m_size = BaseImmovable::BIG;
-			// else
-				// throw game_data_error
-					// ("expected %s but found \"%s\"",
-					 // "{\"small\"|\"medium\"|\"big\"}", string);
-		// } catch (const _wexception & e) {
-			// throw game_data_error("size: %s", e.what());
-		// }
+	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+	for (const std::string& animation : anims->keys<std::string>()) {
+		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+	}
 
+	std::unique_ptr<LuaTable> programs = table.get_table("programs");
+	for (const std::string& program_name : programs->keys<std::string>()) {
+		try {
+			m_programs[program_name] = new ImmovableProgram(
+			   program_name, programs->get_table(program_name)->array_entries<std::string>(), this);
+		} catch (const std::exception& e) {
+			throw wexception("Error in program %s: %s", program_name.c_str(), e.what());
+		}
+	}
 
-	// //  parse attributes
-	// add_attributes(table.get_table("attributes")->array_entries<std::string>(), { Map_Object::RESI });
+	make_sure_default_program_is_there();
+}
 
-	// //  parse the programs
-	// while (Section::Value const * const v = global_s.get_next_val("program")) {
-		// std::string program_name = v->get_string();
-		// std::transform
-			// (program_name.begin(), program_name.end(), program_name.begin(),
-			 // tolower);
-		// try {
-			// if (m_programs.count(program_name))
-				// throw game_data_error("this program has already been declared");
-			// m_programs[program_name.c_str()] =
-				// new ImmovableProgram(directory, prof, program_name, *this);
-		// } catch (const std::exception & e) {
-			// throw game_data_error
-				// ("program %s: %s", program_name.c_str(), e.what());
-		// }
-	// }
-
-	// if (m_programs.find("program") == m_programs.end()) { //  default program
-		// char parameters[] = "idle";
-		// m_programs["program"] =
-			// new ImmovableProgram
-				// ("program",
-				 // new ImmovableProgram::ActAnimate
-					 // (parameters, *this, directory, prof));
-	// }
-
-	// if (owner_tribe) {
-		// if (Section * buildcost_s = prof.get_section("buildcost"))
-			// m_buildcost.parse(*owner_tribe, *buildcost_s);
-	// }
+void Immovable_Descr::make_sure_default_program_is_there() {
+	if (m_programs.find("program") == m_programs.end()) {  //  default program
+		assert(is_animation_known("idle"));
+		char parameters[] = "idle";
+		m_programs["program"] = new ImmovableProgram(
+		   "program", new ImmovableProgram::ActAnimate(parameters, *this));
+	}
 }
 
 /**
@@ -772,22 +800,15 @@ Map_Object::Loader * Immovable::load
 
 ImmovableProgram::Action::~Action() {}
 
-
-ImmovableProgram::ActAnimate::ActAnimate
-	(char * parameters, Immovable_Descr & descr,
-	 const std::string & directory, Profile & prof)
-{
+ImmovableProgram::ActAnimate::ActAnimate(char* parameters, Immovable_Descr& descr) {
 	try {
 		bool reached_end;
 		char * const animation_name = match(parameters, reached_end);
-		if (descr.is_animation_known(animation_name))
-			m_id = descr.get_animation(animation_name);
-		else {
-			m_id =
-				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
-
-			descr.add_animation(animation_name, m_id);
+		if (!descr.is_animation_known(animation_name)) {
+			throw game_data_error("Unknown animation: %s.", animation_name);
 		}
+		m_id = descr.get_animation(animation_name);
+
 		if (not reached_end) { //  The next parameter is the duration.
 			char * endp;
 			long int const value = strtol(parameters, &endp, 0);

@@ -473,7 +473,7 @@ int L_World::new_critter_type(lua_State * L) {
 	Editor_Game_Base& egbase = get_egbase(L);
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		egbase.mutable_world()->add_new_critter_type(new Critter_Bob_Descr(table, nullptr));
+		egbase.mutable_world()->add_new_critter_type(new Critter_Bob_Descr(table));
 	}
 	catch (LuaError& e) {
 		return report_error(L, "%s", e.what());
@@ -489,7 +489,7 @@ int L_World::new_immovable_type(lua_State* L) {
 	Editor_Game_Base& egbase = get_egbase(L);
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		egbase.mutable_world()->add_new_immovable_type(new Immovable_Descr(table, nullptr));
+		egbase.mutable_world()->add_new_immovable_type(new Immovable_Descr(table));
 	}
 	catch (LuaError& e) {
 		return report_error(L, "%s", e.what());

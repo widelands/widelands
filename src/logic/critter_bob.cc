@@ -174,11 +174,11 @@ void assign_diranimation(DirAnimations* anims, Map_Object_Descr& mo, const std::
 	}
 }
 
-Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table, const Tribe_Descr* tribe)
-   : Bob::Descr(
-        table.get_string("name"), table.get_string("descname"), tribe),
+Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
+   : Bob::Descr(table.get_string("name"),
+                table.get_string("descname"),
+                nullptr),  // Can only handle world critters.
      m_swimming(table.get_bool("swimming")) {
-
 	{
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {
