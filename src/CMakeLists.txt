@@ -36,10 +36,10 @@ foreach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
     list (REMOVE_ITEM WL_SRCS_CC ${sourcefile})
     list (REMOVE_ITEM WL_SRCS_H ${sourcefile})
   endif (${sourcefile} MATCHES ".*/test/.*")
-  # exclude test sources from Codecheck, as well as the scripting/eris sources from lua
-  if (NOT ${sourcefile} MATCHES ".*/scripting/eris/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*")
+  # exclude test sources from Codecheck, as well as the scripting/eris sources from lua and minizip
+  if (NOT ${sourcefile} MATCHES ".*/scripting/eris/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*" AND NOT ${sourcefile} MATCHES ".*/minizip/.*")
     list (APPEND WL_CODECHECK_SRCS ${sourcefile})
-  endif (NOT ${sourcefile} MATCHES ".*/scripting/eris/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*")
+  endif (NOT ${sourcefile} MATCHES ".*/scripting/eris/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*" AND NOT ${sourcefile} MATCHES ".*/minizip/.*")
 endforeach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
 foreach (sourcefile ${WL_SRCS_CPP})
   list (APPEND WL_CODECHECK_SRCS ${sourcefile})
