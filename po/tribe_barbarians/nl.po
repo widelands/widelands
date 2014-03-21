@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-18 11:30+0000\n"
+"PO-Revision-Date: 2014-03-20 19:31+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-19 05:39+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-21 05:32+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
@@ -1397,7 +1397,7 @@ msgstr "Pitabrood"
 #: ../../tribes/barbarians/fishers_hut/help.lua:29
 #: ../../tribes/barbarians/hunters_hut/help.lua:29
 msgid "Tavern"
-msgstr "Kroeg"
+msgstr "Taveerne"
 
 #: ../../tribes/barbarians/bakery/help.lua:28
 #: ../../tribes/barbarians/conf:196
@@ -1808,7 +1808,7 @@ msgstr "Graaf %s op uit de bodem in bergterrein."
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr "%s van een Kroeg"
+msgstr "%s van een taveerne"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/coalmine/help.lua:28
@@ -2590,20 +2590,20 @@ msgstr "Kolenmijn"
 #: ../../tribes/barbarians/deep_oremine/help.lua:44
 #: ../../tribes/barbarians/deeper_oremine/help.lua:16
 msgid "Deeper Iron Ore Mine"
-msgstr "Diepere ijzerertsmijn"
+msgstr "Diepere ijzermijn"
 
 #: ../../tribes/barbarians/conf:213
 #: ../../tribes/barbarians/deep_oremine/help.lua:16
 #: ../../tribes/barbarians/deeper_oremine/help.lua:33
 #: ../../tribes/barbarians/oremine/help.lua:42
 msgid "Deep Iron Ore Mine"
-msgstr "Diepe ijzerertsmijn"
+msgstr "Diepe ijzermijn"
 
 #: ../../tribes/barbarians/conf:214
 #: ../../tribes/barbarians/deep_oremine/help.lua:34
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid "Iron Ore Mine"
-msgstr "IJzerertsmijn"
+msgstr "IJzermijn"
 
 #: ../../tribes/barbarians/conf:215
 #: ../../tribes/barbarians/deep_goldmine/help.lua:44
@@ -2820,8 +2820,8 @@ msgid ""
 "(training camp and battle arena)."
 msgstr ""
 "Naast pitabrood en vlees, is vis ook voedsel voor de barbaren. Het wordt "
-"gebruikt in kroegen, herbergen en grote herbergen en in de trainingsgebouwen "
-"(trainingskamp en arena)."
+"gebruikt in taveernes, herbergen en grote herbergen en in de "
+"trainingsgebouwen (trainingskamp en arena)."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -3058,8 +3058,8 @@ msgid ""
 "Iron ore is mined in iron mines. It delivers iron when smelted in a smelting "
 "works."
 msgstr ""
-"IJzererts wordt gedolven in de ijzerertsmijnen. Gesmolten in een hoogoven "
-"wordt het ijzer."
+"IJzererts wordt gedolven in de ijzermijnen. Gesmolten in een hoogoven wordt "
+"het ijzer."
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -3172,9 +3172,9 @@ msgid ""
 "arena)."
 msgstr ""
 "Vlees bevat veel energie. Het wordt gemaakt door de jagers en gebruikt in de "
-"kroegen, hergbergen en grote herbergen om porties, hapjes en maaltijden voor "
-"de mijnwerkers te maken. Het wordt ook genuttigd in de trainingsgebouwen "
-"(trainingskamp en arena)."
+"taveernes, herbergen en grote herbergen om porties, hapjes en maaltijden "
+"voor de mijnwerkers te maken. Het wordt ook genuttigd in de "
+"trainingsgebouwen (trainingskamp en arena)."
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce felling ax"
@@ -3316,9 +3316,9 @@ msgid ""
 msgstr ""
 "De Barbaarse bakkers zijn het beste in het bereiden van dit platte en "
 "smaakvolle pitabrood. Het wordt volgens geheim recept gemaakt uit meel en "
-"water. Pitabrood wordt gebruikt in de kroegen, herbergen en grote herbergen "
-"om porties, hapjes en maaltijden mee te maken. Het wordt ook gegeten in "
-"trainingsgebouwen (trainingskamp en arena)."
+"water. Pitabrood wordt gebruikt in de taveernes, herbergen en grote "
+"herbergen om porties, hapjes en maaltijden te maken. Het wordt ook gegeten "
+"in trainingsgebouwen (trainingskamp en arena)."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carve %s out of stones lying near the hut."
@@ -3375,8 +3375,8 @@ msgid ""
 "big inn out of fish or meat or pitta bread."
 msgstr ""
 "Een kleine hap om de mijnwerkers sterk en aan het werk te houden. Ook de "
-"verkenner verbruikt porties op zijn verkenningen. Porties worden in een "
-"kroeg, een herberg of een grote herberg gemaakt van vis of vlees of "
+"verkenner verbruikt porties tijdens zijn verkenningen. Porties worden in een "
+"taveerne, een herberg of een grote herberg gemaakt van vis of vlees of "
 "pitabrood."
 
 #: ../../tribes/barbarians/raw_stone/conf:1
