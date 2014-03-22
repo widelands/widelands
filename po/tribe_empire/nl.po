@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-20 21:49+0000\n"
+"PO-Revision-Date: 2014-03-21 20:40+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-21 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-22 05:37+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 "Language: nl\n"
 
@@ -1471,7 +1471,7 @@ msgid ""
 "The shovel is needed for the proper handling of plants. Therefore the "
 "forester and the vinefarmer use it. It is produced by the toolsmith."
 msgstr ""
-"De schep is nodig om goed met planten te kunnen werken. Daarom maken de "
+"De schop is nodig om goed met planten te kunnen werken. Daarom maken de "
 "boswachter en de wijnboer er gebruik van. Hij wordt gemaakt door de "
 "werktuigsmid."
 
@@ -1537,7 +1537,7 @@ msgstr "Maak zeis"
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "Produce shovel"
-msgstr "Maak schep"
+msgstr "Maak schop"
 
 #: ../../tribes/empire/toolsmithy/conf:45
 msgid "Produce hunting spear"
