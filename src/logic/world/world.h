@@ -54,10 +54,6 @@ public:
 	TerrainDescription& terrain_descr(Terrain_Index const i) const {
 		return *terrains_.get(i);
 	}
-	const TerrainDescription& get_ter(Terrain_Index const i) const {
-		assert(i < terrains_.get_nitems());
-		return *terrains_.get(i);
-	}
 	TerrainDescription const* get_ter(char const* const name) const {
 		int32_t const i = terrains_.get_index(name);
 		return i != -1 ? terrains_.get(i) : nullptr;

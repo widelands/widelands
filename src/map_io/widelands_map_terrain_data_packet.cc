@@ -98,7 +98,7 @@ void Map_Terrain_Data_Packet::Write
 
 	std::map<const char * const, Terrain_Index> smap;
 	for (Terrain_Index i = 0; i < nr_terrains; ++i) {
-		const char * const name = world.get_ter(i).name().c_str();
+		const char * const name = world.terrain_descr(i).name().c_str();
 		smap[name] = i;
 		fw.Unsigned16(i);
 		fw.CString(name);

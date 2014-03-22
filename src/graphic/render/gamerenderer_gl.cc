@@ -354,12 +354,12 @@ void GameRendererGL::collect_terrain_dither(bool onlyscan)
 			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
 			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
 			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
-			int32_t lyr_d = world.get_ter(ter_d).dither_layer();
-			int32_t lyr_r = world.get_ter(ter_r).dither_layer();
-			int32_t lyr_u = world.get_ter(ter_u).dither_layer();
-			int32_t lyr_rr = world.get_ter(ter_rr).dither_layer();
-			int32_t lyr_l = world.get_ter(ter_l).dither_layer();
-			int32_t lyr_dd = world.get_ter(ter_dd).dither_layer();
+			int32_t lyr_d = world.terrain_descr(ter_d).dither_layer();
+			int32_t lyr_r = world.terrain_descr(ter_r).dither_layer();
+			int32_t lyr_u = world.terrain_descr(ter_u).dither_layer();
+			int32_t lyr_rr = world.terrain_descr(ter_rr).dither_layer();
+			int32_t lyr_l = world.terrain_descr(ter_l).dither_layer();
+			int32_t lyr_dd = world.terrain_descr(ter_dd).dither_layer();
 
 			Coords f(fx, fy);
 			Coords rn(fx + 1, fy);
