@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-#include "gamecontroller.h"
+#include "sp_gamecontroller.h"
 
 #include "computer_player.h"
 #include "logic/game.h"
@@ -27,34 +27,6 @@
 #include "profile/profile.h"
 #include "wlapplication.h"
 
-struct SinglePlayerGameController : public GameController {
-	SinglePlayerGameController
-		(Widelands::Game &, bool useai, Widelands::Player_Number local);
-	~SinglePlayerGameController();
-
-	void think() override;
-	void sendPlayerCommand(Widelands::PlayerCommand &) override;
-	int32_t getFrametime() override;
-	std::string getGameDescription() override;
-
-	uint32_t realSpeed() override;
-	uint32_t desiredSpeed() override;
-	void setDesiredSpeed(uint32_t speed) override;
-	bool isPaused() override;
-	void setPaused(bool paused) override;
-	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
-
-private:
-	Widelands::Game & m_game;
-	bool m_useai;
-	int32_t m_lastframe;
-	int32_t m_time;
-	uint32_t m_speed; ///< current game speed, in milliseconds per second
-	bool m_paused;
-	uint32_t m_player_cmdserial;
-	Widelands::Player_Number m_local;
-	std::vector<Computer_Player *> m_computerplayers;
-};
 
 SinglePlayerGameController::SinglePlayerGameController
 	(Widelands::Game        &       game,
@@ -64,7 +36,9 @@ SinglePlayerGameController::SinglePlayerGameController
 	m_useai           (useai),
 	m_lastframe       (WLApplication::get()->get_time()),
 	m_time            (m_game.get_gametime()),
-	m_speed(1000),
+	m_speed
+		(g_options.pull_section("global").get_natural
+		 	("speed_of_new_game", 1000)),
 	m_paused(false),
 	m_player_cmdserial(0),
 	m_local           (local)
@@ -166,13 +140,4 @@ void SinglePlayerGameController::report_result
 	pes.result = result;
 	pes.info = info;
 	m_game.player_manager()->add_player_end_status(pes);
-}
-
-GameController * GameController::createSinglePlayer
-	(Widelands::Game        &       game,
-	 bool                     const cpls,
-	 Widelands::Player_Number const local)
-{
-	SinglePlayerGameController* spgc =  new SinglePlayerGameController(game, cpls, local);
-	return spgc;
 }
