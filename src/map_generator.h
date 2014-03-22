@@ -20,6 +20,7 @@
 #ifndef MAP_GENERATOR_H
 #define MAP_GENERATOR_H
 
+#include <memory>
 #include "logic/widelands_geometry.h"
 #include "logic/world/map_gen.h"
 
