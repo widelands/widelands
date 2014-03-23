@@ -4,6 +4,7 @@ world = wl.World()
 include "world/resources.lua"
 include "world/terrains.lua"
 
+include "world/immovables/manmade/snowman/init.lua"
 include "world/immovables/trees/aspen_summer_old/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are

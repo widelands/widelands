@@ -19,3 +19,4 @@ greenland/brownbear -> "brownbear"
 
 Immovables:
 greenland/tree1 -> "aspen_summer_old"
+winterland/snowman -> "snowman"
