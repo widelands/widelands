@@ -94,8 +94,7 @@ m_click_recursion_protect(false)
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box, pos,
 			 &g_gr->animations().get_animation(world.get_immovable_descr(i)->main_animation())
-				.representative_image(RGBColor(0, 0, 0)));
-
+				.representative_image(RGBColor(0, 0, 0)), world.get_immovable_descr(i)->descname());
 		cb.set_desired_size(width, height);
 		cb.set_state(m_pit.is_enabled(i));
 		cb.changedto.connect
