@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-15 02:59+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-22 10:10+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-16 05:37+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-23 05:42+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -396,7 +396,7 @@ msgstr "Transporte des objets sur vos routes."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your Castle"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Château"
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -404,6 +404,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of logs by a "
 "charcoal burner."
 msgstr ""
+"Les feux Atlantes des fonderies, forges d'armures et d'armes sont nourris au "
+"charbon.Ce charbon est extrait des mines de charbon ou produit à partir de "
+"troncs par un charbonnier."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
@@ -683,7 +686,7 @@ msgstr "Tabard"
 
 #: ../../tribes/atlanteans/conf:100
 msgid "Log"
-msgstr ""
+msgstr "Tronc"
 
 #: ../../tribes/atlanteans/conf:101
 msgid "Water"
@@ -1061,19 +1064,19 @@ msgstr "Dormir"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Améliore l'attaque des soldats du niveau 0 au niveau 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Améliore l'attaque des soldats du niveau 1 au niveau 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Améliore l'attaque des soldats du niveau 2 au niveau 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Améliore l'attaque des soldats du niveau 3 au niveau 4"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
@@ -1143,6 +1146,10 @@ msgid ""
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
+"Un tabard doré est produit dans l'atelier de tissage Atlante à partir de "
+"fils dorés. Il est utilisé dans les camps d'entraînement - avec de la "
+"nourriture - pour former les soldats en points de vie du niveau 0 au niveau "
+"1."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -1164,11 +1171,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your Guardhall"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Salle de gardes"
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
 msgid "Your soldiers have occupied your Guardhouse"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Poste de garde"
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -1194,7 +1201,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your High Tower"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Tour haute"
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1245,23 +1252,23 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "Améliore la défense des soldats du niveau 0 au niveau 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
 msgid "Upgrade soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "Améliore la défense des soldats du niveau 1 au niveau 2"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Améliore les points de vie des soldats du niveau 0 au niveau 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Améliore l'esquive  des soldats du niveau 0 au niveau 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Améliore l'esquive  des soldats du niveau 1 au niveau 2"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1336,6 +1343,10 @@ msgid ""
 "produced out of logs by the sawmill. The weapon smithy and the shipyard also "
 "use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Les planches sont un matériau de construction important pour les Atlantes. "
+"Elles sont découpées à partir de troncs dans une scierie. La fabrique "
+"d'armes et le chantier naval utilisent aussi des planches pour fabriquer "
+"différents tridents et puissants vaisseaux."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1415,7 +1426,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your Small Tower"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Petite tour"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1580,7 +1591,7 @@ msgstr "Produit des pelles"
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your Tower"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Tour"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1592,6 +1603,9 @@ msgid ""
 "Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
 "smokery also need logs for their work."
 msgstr ""
+"Les troncs sont la base pour les planches, qui sont utilisées dans presque "
+"toutes les constructions Atlantes. Hormis la scierie, le charbonnier, la "
+"fabrique d'outils et le fumoir ont aussi besoin de troncs pour leur besognes."
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""

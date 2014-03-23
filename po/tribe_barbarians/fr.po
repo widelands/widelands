@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-15 02:59+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-22 10:16+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-16 05:37+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-23 05:42+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -1486,7 +1486,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your Barrier"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Barricade"
 
 #: ../../tribes/barbarians/barrier/help.lua:8
 #: ../../tribes/barbarians/big_inn/help.lua:8
@@ -1744,7 +1744,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your Citadel"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Citadelle"
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
@@ -2729,7 +2729,7 @@ msgstr "%s ou mieux et"
 
 #: ../../tribes/barbarians/donjon/conf:7
 msgid "Your soldiers have occupied your Donjon"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Donjon"
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
@@ -2862,7 +2862,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your Fortress"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Forteresse"
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -3426,7 +3426,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your Sentry"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Sentinelle"
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
@@ -3603,7 +3603,7 @@ msgstr "Attaquer"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 msgid "Health"
-msgstr ""
+msgstr "Points de vie"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 msgid ""
@@ -3619,6 +3619,12 @@ msgid ""
 "burner’s house in the production of coal. The wood hardener refines logs by "
 "hardening them in the fire which gives blackwood."
 msgstr ""
+"Les troncs sont le matériau de construction principal des barbares. Les "
+"arbres sont abattus par les bûcherons; les gardes forestiers s'occupent de "
+"l'approvisionnement en arbres. Les troncs sont aussi utilisés dans la forge "
+"pour construire des outils de base, et dans la maison du charbonnier pour la "
+"production du charbon. Le durcisseur de bois transforme les troncs en les "
+"durcissant au feu ce qui donne du bois dur."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-13 01:23+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-22 10:20+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-23 05:42+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -379,11 +379,11 @@ msgstr ""
 
 #: ../../tribes/empire/barracks/conf:7
 msgid "Your soldiers have occupied your Barracks"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Caserne"
 
 #: ../../tribes/empire/barrier/conf:7
 msgid "Your soldiers have occupied your Barrier"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Barricade"
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
@@ -435,7 +435,7 @@ msgstr "Transporte des objets sur vos routes."
 
 #: ../../tribes/empire/castle/conf:8
 msgid "Your soldiers have occupied your Castle"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Château"
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -1170,7 +1170,7 @@ msgstr "Plante des arbres."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your Fortress"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Forteresse"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1357,7 +1357,7 @@ msgstr "Moud du blé pour produire de la farine."
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your Outpost"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Poste avancé"
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1429,7 +1429,7 @@ msgstr ""
 
 #: ../../tribes/empire/sentry/conf:7
 msgid "Your soldiers have occupied your Sentry"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Sentinelle"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
@@ -1538,7 +1538,7 @@ msgstr "Produit des haches"
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your Tower"
-msgstr ""
+msgstr "Vos soldats ont occupé votre Tour"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
