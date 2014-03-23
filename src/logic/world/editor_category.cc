@@ -38,10 +38,10 @@ const std::string& EditorCategory::descname() const {
 	return descname_;
 }
 
-const Image& EditorCategory::picture() const {
+const Image* EditorCategory::picture() const {
 	const Image* image = g_gr->images().get(image_file_);
 	assert(image);
-	return *image;
+	return image;
 }
 
 }  // namespace Widelands

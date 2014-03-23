@@ -43,12 +43,12 @@ public:
 	const std::string& descname() const;
 
 	// The menu image for the category.
-	const Image& picture() const;
+	const Image* picture() const;
 
 private:
-	const std::string image_file_;
 	const std::string name_;
 	const std::string descname_;
+	const std::string image_file_;
 };
 
 }  // namespace Widelands

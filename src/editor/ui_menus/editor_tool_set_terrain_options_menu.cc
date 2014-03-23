@@ -31,12 +31,14 @@
 #include "graphic/texture.h"
 #include "i18n.h"
 #include "logic/map.h"
+#include "logic/world/editor_category.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/tabpanel.h"
 #include "wlapplication.h"
 
 namespace {
@@ -64,12 +66,28 @@ Editor_Tool_Set_Terrain_Options_Menu::Editor_Tool_Set_Terrain_Options_Menu(
      m_cur_selection(this, 0, 0, 0, 20, UI::Align_Center),
      m_tool(tool),
      m_select_recursion_protect(false) {
-	std::vector<Terrain_Index> terrain_indices;
-	for (Terrain_Index i = 0; i < world_.get_nr_terrains(); ++i) {
-		terrain_indices.push_back(i);
-	}
-	UI::Box* vertical = add_checkboxes(this, terrain_indices);
 
+	UI::Box* vertical = new UI::Box(this, 0, 0, UI::Box::Vertical);
+
+	UI::Tab_Panel* tab_panel = new UI::Tab_Panel(vertical, 0, 0, nullptr);
+	vertical->add(tab_panel, UI::Align_Center);
+
+	for (uint32_t i = 0; i < world_.editor_categories().get_nitems(); ++i) {
+		const EditorCategory& editor_category = *world_.editor_categories().get(i);
+
+		std::vector<Terrain_Index> terrain_indices;
+		for (Terrain_Index j = 0; j < world_.get_nr_terrains(); ++j) {
+			if (world_.terrain_descr(j).editor_category().name() != editor_category.name()) {
+				continue;
+			}
+			terrain_indices.push_back(j);
+		}
+
+		tab_panel->add(editor_category.name(),
+				editor_category.picture(),
+				add_checkboxes(tab_panel, terrain_indices),
+				editor_category.descname());
+	}
 	vertical->add(&m_cur_selection, UI::Align_Center, true);
 
 	update_label();
