@@ -30,6 +30,7 @@
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"

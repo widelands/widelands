@@ -37,6 +37,7 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"

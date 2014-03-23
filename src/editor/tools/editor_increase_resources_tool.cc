@@ -23,6 +23,8 @@
 #include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "wui/overlay_manager.h"
 

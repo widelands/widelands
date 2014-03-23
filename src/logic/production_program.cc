@@ -42,6 +42,7 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/worker_program.h"
+#include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"

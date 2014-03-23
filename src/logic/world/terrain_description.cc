@@ -19,39 +19,79 @@
 
 #include <sstream>
 
-#include <stdint.h>
 #include <boost/foreach.hpp>
+#include <boost/format.hpp>
+#include <stdint.h>
 
 #include "logic/world/terrain_description.h"
 
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
+#include "logic/world/editor_category.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
-TerrainDescription::TerrainDescription(const std::string& name,
-                                       const std::string& descname,
-                                       TerrainDescription::Type type,
-													const std::vector<std::string>& texture_files,
-                                       int fps,
-                                       int32_t dither_layer,
-                                       std::vector<uint8_t> valid_resources,
-                                       uint8_t default_resource,
-                                       int32_t default_resource_amount)
-   : name_(name),
-     descname_(descname),
-     is_(type),
-     valid_resources_(valid_resources),
-     default_resource_index_(default_resource),
-     default_resource_amount_(default_resource_amount),
-     dither_layer_(dither_layer),
-     texture_(g_gr->new_maptexture(texture_files, fps > 0 ? 1000 / fps : FRAME_LENGTH)) {
+namespace  {
 
-	if (default_resource_amount > 0 && !is_resource_valid(default_resource)) {
+// Parse a terrain type from the giving string.
+TerrainDescription::Type TerrainTypeFromString(const std::string& type) {
+	if (type == "green") {
+		return TerrainDescription::GREEN;
+	}
+	if (type == "dry") {
+		return TerrainDescription::DRY;
+	}
+	if (type == "water") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::WATER | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
+	}
+	if (type == "acid") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::ACID | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
+	}
+	if (type == "mountain") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::MOUNTAIN);
+	}
+	if (type == "dead") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::UNPASSABLE | TerrainDescription::ACID);
+	}
+	if (type == "unpassable") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
+	}
+	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
+}
+
+}  // namespace
+
+TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::World& world)
+   : name_(table.get_string("name")),
+     descname_(table.get_string("descname")),
+     is_(TerrainTypeFromString(table.get_string("is"))),
+     default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
+     default_resource_amount_(table.get_int("default_resource_amount")),
+     dither_layer_(table.get_int("dither_layer")) {
+	int fps = table.get_int("fps");
+	texture_ = g_gr->new_maptexture(table.get_table("textures")->array_entries<std::string>(),
+	                                fps > 0 ? 1000 / fps : FRAME_LENGTH);
+
+	for (const std::string& resource :
+	     table.get_table("valid_resources")->array_entries<std::string>()) {
+		valid_resources_.push_back(world.safe_resource_index(resource.c_str()));
+	}
+
+	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
 		throw game_data_error("Default resource is not in valid resources.\n");
 	}
+
+	int editor_category =
+	   world.editor_categories().get_index(table.get_string("editor_category"));
+	if (editor_category < 0) {
+		throw game_data_error(
+		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
+	}
+	editor_category_ = world.editor_categories().get(editor_category);
 }
 
 TerrainDescription::~TerrainDescription() {
@@ -71,6 +111,10 @@ const std::string& TerrainDescription::name() const {
 
 const std::string& TerrainDescription::descname() const {
 	return descname_;
+}
+
+const EditorCategory& TerrainDescription::editor_category() const {
+	return *editor_category_;
 }
 
 int32_t TerrainDescription::resource_value(const Resource_Index resource) const {

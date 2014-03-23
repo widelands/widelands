@@ -8,6 +8,7 @@
 world:new_terrain_type{
    name = "steppe",
    descname = _ "Steppe",
+   editor_category = "green",
    is = "green",
    valid_resources = { "water" },
    default_resource = "water",
@@ -20,6 +21,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "berg1",
    descname = _ "Mountain 1",
+   editor_category = "green",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
@@ -32,6 +34,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "schnee",
    descname = _ "Snow",
+   editor_category = "green",
    is = "dead",
    valid_resources = {},
    default_resource = "",
@@ -44,6 +47,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "sumpf",
    descname = _ "Swamp",
+   editor_category = "green",
    is = "unpassable",
    valid_resources = {"water"},
    default_resource = "water",
@@ -56,6 +60,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "strand",
    descname = _ "Beach",
+   editor_category = "green",
    is = "dry",
    valid_resources = {},
    default_resource = "",
@@ -68,6 +73,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "wasser",
    descname = _ "Water",
+   editor_category = "green",
    is = "water",
    valid_resources = {"fish"},
    default_resource = "fish",
@@ -80,6 +86,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "wiese1",
    descname = _ "Meadow 1",
+   editor_category = "green",
    is = "green",
    valid_resources = {"water"},
    default_resource = "water",
@@ -92,6 +99,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "wiese2",
    descname = _ "Meadow 2",
+   editor_category = "green",
    is = "green",
    valid_resources = {"water"},
    default_resource = "water",
@@ -104,6 +112,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "wiese3",
    descname = _ "Meadow 3",
+   editor_category = "green",
    is = "green",
    valid_resources = {"water"},
    default_resource = "water",
@@ -116,6 +125,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "berg2",
    descname = _ "Mountain 2",
+   editor_category = "green",
    is = "mountain",
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
@@ -128,6 +138,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "berg3",
    descname = _ "Mountain 3",
+   editor_category = "green",
    is = "mountain",
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
@@ -140,6 +151,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "berg4",
    descname = _ "Mountain 4",
+   editor_category = "green",
    is = "mountain",
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
@@ -152,6 +164,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "steppe_kahl",
    descname = _ "Barren Steppe",
+   editor_category = "green",
    is = "green",
    valid_resources = {"water"},
    default_resource = "water",
@@ -164,6 +177,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "wiese4",
    descname = _ "Meadow 4",
+   editor_category = "green",
    is = "green",
    valid_resources = {"water"},
    default_resource = "water",
@@ -176,6 +190,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "lava",
    descname = _ "Lava",
+   editor_category = "green",
    is = "acid",
    valid_resources = {},
    default_resource = "",
@@ -188,6 +203,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "bergwiese",
    descname = _ "Mountain Meadow",
+   editor_category = "green",
    is = "green",
    valid_resources = {},
    default_resource = "",
@@ -204,6 +220,7 @@ world:new_terrain_type{
 world:new_terrain_type{
    name = "ashes",
    descname = _"Ashes",
+   editor_category = "wasteland",
    is = "green",
    valid_resources = { "water" },
    default_resource = "water",

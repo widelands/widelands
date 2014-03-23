@@ -31,6 +31,7 @@
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "upcast.h"
 #include "wui/mapviewpixelconstants.h"

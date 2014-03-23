@@ -29,6 +29,7 @@
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 
 namespace Widelands {

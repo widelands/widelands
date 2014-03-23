@@ -25,6 +25,7 @@
 #include "logic/map.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 
 namespace Widelands {

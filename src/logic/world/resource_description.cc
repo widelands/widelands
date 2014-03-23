@@ -23,19 +23,22 @@
 #include "log.h"
 #include "logic/game_data_error.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
-ResourceDescription::ResourceDescription(const std::string& name,
-                                         const std::string& descname,
-                                         bool detectable,
-                                         int max_amount,
-                                         const std::vector<EditorPicture>& editor_pictures)
-   : name_(name),
-     descname_(descname),
-     detectable_(detectable),
-     max_amount_(max_amount),
-     editor_pictures_(editor_pictures) {
+ResourceDescription::ResourceDescription(const LuaTable& table)
+   : name_(table.get_string("name")),
+     descname_(table.get_string("descname")),
+     detectable_(table.get_bool("detectable")),
+     max_amount_(table.get_int("max_amount")) {
+	std::vector<ResourceDescription::EditorPicture> editor_pictures;
+	std::unique_ptr<LuaTable> st = table.get_table("editor_pictures");
+	const std::vector<int> keys = st->keys<int>();
+	for (int upper_limit : keys) {
+		ResourceDescription::EditorPicture editor_picture = {st->get_string(upper_limit), upper_limit};
+		editor_pictures.push_back(editor_picture);
+	}
 }
 
 const std::string & ResourceDescription::get_editor_pic

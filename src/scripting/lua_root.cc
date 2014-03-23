@@ -29,8 +29,6 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
-#include "logic/world/resource_description.h"
-#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
@@ -40,36 +38,6 @@
 using namespace Widelands;
 
 namespace LuaRoot {
-
-namespace  {
-
-// Parse a terrain type from the giving string.
-TerrainDescription::Type TerrainTypeFromString(const std::string& type) {
-	if (type == "green") {
-		return TerrainDescription::GREEN;
-	}
-	if (type == "dry") {
-		return TerrainDescription::DRY;
-	}
-	if (type == "water") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::WATER | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
-	}
-	if (type == "acid") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::ACID | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
-	}
-	if (type == "mountain") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::MOUNTAIN);
-	}
-	if (type == "dead") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::UNPASSABLE | TerrainDescription::ACID);
-	}
-	if (type == "unpassable") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
-	}
-	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
-}
-
-}  // namespace
 
 /* RST
 :mod:`wl`
@@ -327,6 +295,7 @@ World
 const char L_World::className[] = "World";
 const MethodType<L_World> L_World::Methods[] = {
 	METHOD(L_World, new_critter_type),
+	METHOD(L_World, new_editor_category),
 	METHOD(L_World, new_immovable_type),
 	METHOD(L_World, new_resource_type),
 	METHOD(L_World, new_terrain_type),
@@ -366,6 +335,7 @@ void L_World::__unpersist(lua_State*) {
 		single argument, a table with the descriptions for the resource type. It might contain
 		the following entries:
 
+		// NOCOM(#sirver): already outdated.
 		:type name: class:`string`
 		:arg name: The internal identifier.
 		:type descname: class:`string`
@@ -388,24 +358,7 @@ int L_World::new_resource_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		std::vector<ResourceDescription::EditorPicture> editor_pictures;
-		{
-			std::unique_ptr<LuaTable> st = table.get_table("editor_pictures");
-			const std::vector<int> keys = st->keys<int>();
-			for (int max_amount : keys) {
-				ResourceDescription::EditorPicture editor_picture = {
-				   st->get_string(max_amount), max_amount};
-				editor_pictures.push_back(editor_picture);
-			}
-		}
-
-		// Now add this resource type to the world description.
-		get_egbase(L).mutable_world()->add_new_resource_type(
-		   new ResourceDescription(table.get_string("name"),
-		                           table.get_string("descname"),
-		                           table.get_bool("detectable"),
-		                           table.get_int("max_amount"),
-		                           editor_pictures));
+		get_egbase(L).mutable_world()->add_resource_type(table);
 	} catch (LuaError& e) {
 		return report_error(L, "%s", e.what());
 	}
@@ -433,29 +386,9 @@ int L_World::new_terrain_type(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	Editor_Game_Base& egbase = get_egbase(L);
-	const World& world = egbase.world();
-
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-
-		std::vector<uint8_t> valid_resources;
-		for (const std::string& resource :
-		     table.get_table("valid_resources")->array_entries<std::string>()) {
-			valid_resources.push_back(world.safe_resource_index(resource.c_str()));
-		}
-
-		// Now add this resource type to the world description.
-		get_egbase(L).mutable_world()->add_new_terrain_type(new TerrainDescription(
-		   table.get_string("name"),
-		   table.get_string("descname"),
-		   TerrainTypeFromString(table.get_string("is")),
-			table.get_table("textures")->array_entries<std::string>(),
-		   table.get_int("fps"),
-		   table.get_int("dither_layer"),
-		   valid_resources,
-		   world.get_resource(table.get_string("default_resource").c_str()),
-		   table.get_int("default_resource_amount")));
+		get_egbase(L).mutable_world()->add_terrain_type(table);
 	}
 	catch (LuaError& e) {
 		return report_error(L, "%s", e.what());
@@ -469,10 +402,9 @@ int L_World::new_critter_type(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	Editor_Game_Base& egbase = get_egbase(L);
 	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		egbase.mutable_world()->add_new_critter_type(new Critter_Bob_Descr(table));
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_critter_type(table);
 	}
 	catch (LuaError& e) {
 		return report_error(L, "%s", e.what());
@@ -485,10 +417,23 @@ int L_World::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	Editor_Game_Base& egbase = get_egbase(L);
 	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		egbase.mutable_world()->add_new_immovable_type(new Immovable_Descr(table));
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_immovable_type(table);
+	}
+	catch (LuaError& e) {
+		return report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+int L_World::new_editor_category(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	try {
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_editor_category(table);
 	}
 	catch (LuaError& e) {
 		return report_error(L, "%s", e.what());

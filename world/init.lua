@@ -1,5 +1,15 @@
-
 world = wl.World()
+
+world:new_editor_category{
+   name = "green",
+   descname = _ "Summer",
+   picture = "world/pics/editor_category_green.png",
+}
+world:new_editor_category{
+   name = "wasteland",
+   descname = _ "Wasteland",
+   picture = "world/pics/editor_category_wasteland.png",
+}
 
 include "world/resources.lua"
 include "world/terrains.lua"

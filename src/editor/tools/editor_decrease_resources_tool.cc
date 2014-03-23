@@ -26,6 +26,7 @@
 #include "logic/field.h"
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
+#include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "wui/overlay_manager.h"
 

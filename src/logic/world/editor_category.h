@@ -17,54 +17,40 @@
  *
  */
 
-#ifndef RESOURCE_DESCRIPTION_H
-#define RESOURCE_DESCRIPTION_H
+#ifndef EDITOR_CATEGORIES_H
+#define EDITOR_CATEGORIES_H
 
 #include <string>
-#include <vector>
 
 #include <boost/noncopyable.hpp>
 
-#include "logic/widelands.h"
-
+class Image;
 class LuaTable;
 
 namespace Widelands {
 
-class ResourceDescription : boost::noncopyable {
+// Represents a category for grouping items in the Editor, so purely a UI
+// distinction and not a logical one.
+class EditorCategory : boost::noncopyable {
 public:
-	struct EditorPicture {
-		std::string picname;
-		int upper_limit;
-	};
+	typedef uint32_t Index;
+	EditorCategory(const LuaTable& table);
 
-	typedef Resource_Index Index;
-	ResourceDescription(const LuaTable& table);
-
-	// Returns the in engine name of this resource.
+	// Internal name.
 	const std::string& name() const;
 
-	// Returns the name of this resource for users. Usually translated.
+	// User facing (translated) name.
 	const std::string& descname() const;
 
-	// Returns if this resource is detectable by a geologist.
-	bool detectable() const;
-
-	// Returns the maximum amount that can be in a field for this resource.
-	int32_t max_amount() const;
-
-	// Returns the path to the image that should be used in the editor to
-	// represent an 'amount' of this resource.
-	const std::string& get_editor_pic(uint32_t amount) const;
+	// The menu image for the category.
+	const Image& picture() const;
 
 private:
+	const std::string image_file_;
 	const std::string name_;
 	const std::string descname_;
-	const bool detectable_;
-	const int32_t max_amount_;
-	const std::vector<EditorPicture> editor_pictures_;
 };
 
 }  // namespace Widelands
 
-#endif /* end of include guard: RESOURCE_DESCRIPTION_H */
+#endif /* end of include guard: EDITOR_CATEGORIES_H */

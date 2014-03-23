@@ -28,6 +28,7 @@
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
+#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"

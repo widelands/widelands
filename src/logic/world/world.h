@@ -24,18 +24,18 @@
 
 #include "description_maintainer.h"
 #include "logic/bob.h"
-#include "logic/immovable.h"
-#include "logic/widelands.h"
-#include "logic/world/resource_description.h"
-#include "logic/world/terrain_description.h"
 
 class Section;
 class LuaInterface;
 
 namespace Widelands {
 
+class EditorCategory;
 class Editor_Game_Base;
+class ResourceDescription;
+class TerrainDescription;
 struct Critter_Bob_Descr;
+struct Immovable_Descr;
 struct MapGenInfo;
 
 // This is the in memory descriptions of the world and provides access to
@@ -48,74 +48,49 @@ public:
 	// Load the graphics data for this world.
 	void load_graphics();
 
-	Terrain_Index index_of_terrain(char const* const name) const {
-		return terrains_.get_index(name);
-	}
-	TerrainDescription& terrain_descr(Terrain_Index const i) const {
-		return *terrains_.get(i);
-	}
-	TerrainDescription const* get_ter(char const* const name) const {
-		int32_t const i = terrains_.get_index(name);
-		return i != -1 ? terrains_.get(i) : nullptr;
-	}
-	int32_t get_nr_terrains() const {
-		return terrains_.get_nitems();
-	}
-	int32_t get_bob(char const* const l) const {
-		return bobs_.get_index(l);
-	}
-	Bob::Descr const* get_bob_descr(uint16_t const index) const {
-		return bobs_.get(index);
-	}
-	Bob::Descr const* get_bob_descr(const std::string& name) const {
-		return bobs_.exists(name.c_str());
-	}
-	int32_t get_nr_bobs() const {
-		return bobs_.get_nitems();
-	}
-	int32_t get_immovable_index(char const* const l) const {
-		return immovables_.get_index(l);
-	}
-	int32_t get_nr_immovables() const {
-		return immovables_.get_nitems();
-	}
-	Immovable_Descr const* get_immovable_descr(int32_t const index) const {
-		return immovables_.get(index);
-	}
+	Terrain_Index index_of_terrain(char const* const name) const;
+	TerrainDescription& terrain_descr(Terrain_Index const i) const;
+	TerrainDescription const* get_ter(char const* const name) const;
+	int32_t get_nr_terrains() const;
+	int32_t get_bob(char const* const l) const;
+	Bob::Descr const* get_bob_descr(uint16_t const index) const;
+	Bob::Descr const* get_bob_descr(const std::string& name) const;
+	int32_t get_nr_bobs() const;
+	int32_t get_immovable_index(char const* const l) const;
+	int32_t get_nr_immovables() const;
+	Immovable_Descr const* get_immovable_descr(int32_t const index) const;
 
-	// NOCOM(#sirver): all methods defined in .cc
-	// Add this new resource to the world description. Transfers ownership.
-	void add_new_resource_type(ResourceDescription* resource_description);
+	// Add this new resource to the world description.
+	void add_resource_type(const LuaTable& table);
 
-	// Add this new terrain to the world description. Transfers ownership.
-	void add_new_terrain_type(TerrainDescription* terrain_description);
+	// Add this new terrain to the world description.
+	void add_terrain_type(const LuaTable& table);
 
-	// Add a new critter to the world description. Transfers ownership.
-	void add_new_critter_type(Critter_Bob_Descr* resource_description);
+	// Add a new critter to the world description.
+	void add_critter_type(const LuaTable& table);
 
-	// Add a new immovable to the world description. Transfers ownership.
-	void add_new_immovable_type(Immovable_Descr* resource_description);
+	// Add a new immovable to the world description.
+	void add_immovable_type(const LuaTable& table);
 
-	int32_t get_resource(const char* const name) const {
-		return resources_.get_index(name);
-	}
-	ResourceDescription const* get_resource(Resource_Index const res) const {
-		assert(res < resources_.get_nitems());
-		return resources_.get(res);
-	}
-	int32_t get_nr_resources() const {
-		return resources_.get_nitems();
-	}
+	// Add an editor category for grouping items in the editor.
+	void add_editor_category(const LuaTable& table);
+
+	// Access to the editor categories.
+	const DescriptionMaintainer<EditorCategory>& editor_categories() const;
+
+	int32_t get_resource(const char* const name) const;
+	ResourceDescription const* get_resource(Resource_Index const res) const;
+	int32_t get_nr_resources() const;
 	int32_t safe_resource_index(const char* const warename) const;
 
 	const MapGenInfo& getMapGenInfo() const;
 
 private:
-	DescriptionMaintainer<Bob::Descr> bobs_;
-	DescriptionMaintainer<Immovable_Descr> immovables_;
-	DescriptionMaintainer<TerrainDescription> terrains_;
-	DescriptionMaintainer<ResourceDescription> resources_;
-
+	std::unique_ptr<DescriptionMaintainer<Bob::Descr>> bobs_;
+	std::unique_ptr<DescriptionMaintainer<Immovable_Descr>> immovables_;
+	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
+	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
+	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_categories_;
 	std::unique_ptr<MapGenInfo> mapGenInfo_;
 };
 }  // namespace Widelands

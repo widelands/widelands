@@ -27,9 +27,12 @@
 #include "logic/widelands.h"
 #include "logic/world/resource_description.h"
 
-class Section;
+class LuaTable;
 
 namespace Widelands {
+
+class EditorCategory;
+class World;
 
 class TerrainDescription : boost::noncopyable {
 public:
@@ -43,18 +46,7 @@ public:
 		UNPASSABLE = 16,
 	};
 
-
-	// NOCOM(#sirver): change to just take a LuaTable
-	TerrainDescription(const std::string& name,
-	                   const std::string& descname,
-	                   Type type,
-	                   const std::vector<std::string>& texture_files,
-	                   int fps,
-	                   int32_t dither_layer,
-	                   std::vector<uint8_t> valid_resources,
-	                   uint8_t default_resource,
-	                   int32_t default_amount);
-
+	TerrainDescription(const LuaTable& table, const World&);
 	~TerrainDescription();
 
 	// The name used internally for this terrain.
@@ -90,11 +82,15 @@ public:
 	// texture should be drawn.
 	int32_t dither_layer() const;
 
+	// Returns the editor category.
+	const EditorCategory& editor_category() const;
+
 private:
 	const std::string name_;
 	const std::string descname_;
+	const EditorCategory* editor_category_;  // not owned.
 	Type is_;
-	const std::vector<uint8_t> valid_resources_;
+	std::vector<uint8_t> valid_resources_;
 	int8_t default_resource_index_;
 	int32_t default_resource_amount_;
 	const std::vector<std::string> texture_paths_;
