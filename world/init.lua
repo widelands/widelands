@@ -21,3 +21,4 @@ function add_walking_animations(table, dirname, basename, hotspot)
 end
 
 include "world/critters/bunny/init.lua"
+include "world/critters/brownbear/init.lua"
