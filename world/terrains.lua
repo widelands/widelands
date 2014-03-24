@@ -617,3 +617,198 @@ world:new_terrain_type{
 ---------------------
 --  Former Desert  --
 ---------------------
+
+world:new_terrain_type{
+   name = "desert4",
+   descname = _ "Desert 4",
+   editor_category = "desert",
+   is = "green",
+   valid_resources = {"water"},
+   default_resource = "water",
+   default_resource_amount = 2,
+   textures = { "world/desert_pics/desert4_00.png" },
+   dither_layer = 20,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "drysoil",
+   descname = _ "Dry Soil",
+   editor_category = "desert",
+   is = "green",
+   valid_resources = {"water"},
+   default_resource = "water",
+   default_resource_amount = 4,
+   textures = { "world/desert_pics/drysoil_00.png" },
+   dither_layer = 30,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "desert_steppe",
+   descname = _ "Steppe (Desert)",
+   editor_category = "desert",
+   is = "green",
+   valid_resources = {"water"},
+   default_resource = "water",
+   default_resource_amount = 5,
+   textures = { "world/desert_pics/steppe_00.png" },
+   dither_layer = 30,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "meadow",
+   descname = _ "Meadow (Desert)",
+   editor_category = "desert",
+   is = "green",
+   valid_resources = {"water"},
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/desert_pics/meadow_00.png" },
+   dither_layer = 40,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "mountainmeadow",
+   descname = _ "Mountain Meadow (Desert)",
+   editor_category = "desert",
+   is = "green",
+   valid_resources = {"water"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/mountainmeadow_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "highmountainmeadow",
+   descname = _ "High Mountain Meadow (Desert)",
+   editor_category = "desert",
+   is = "green",
+   valid_resources = {"water"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/highmountainmeadow_00.png" },
+   dither_layer = 60,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "mountain1",
+   descname = _ "Mountain 1 (Desert)",
+   editor_category = "desert",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/mountain1_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "mountain2",
+   descname = _ "Mountain 2 (Desert)",
+   editor_category = "desert",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/mountain2_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "mountain3",
+   descname = _ "Mountain 3 (Desert)",
+   editor_category = "desert",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/mountain3_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "mountain4",
+   descname = _ "Mountain 4 (Desert)",
+   editor_category = "desert",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/mountain4_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "desert1",
+   descname = _ "Desert 1",
+   editor_category = "desert",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/desert1_00.png" },
+   dither_layer = 20,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "desert2",
+   descname = _ "Desert 2",
+   editor_category = "desert",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/desert2_00.png" },
+   dither_layer = 20,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "desert3",
+   descname = _ "Desert 3",
+   editor_category = "desert",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/desert3_00.png" },
+   dither_layer = 20,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "desert_beach",
+   descname = _ "Beach (Desert)",
+   editor_category = "desert",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/desert_pics/beach_00.png" },
+   dither_layer = 10,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "desert_water",
+   descname = _ "Water (Desert)",
+   editor_category = "desert",
+   is = "water",
+   valid_resources = {"fish"},
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.glob("world/desert_pics", "wasser_*.png"),
+   dither_layer = 0,
+   fps = 5,
+}

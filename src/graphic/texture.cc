@@ -48,6 +48,10 @@ Texture::Texture(const std::vector<std::string>& texture_files,
      m_nrframes(0),
      m_frametime(frametime),
      m_was_animated(false) {
+	if (texture_files.empty()) {
+		throw wexception("No images for texture.");
+	}
+
 	for (const std::string& fname : texture_files) {
 		if (!g_fs->FileExists(fname)) {
 			throw wexception("Could not find %s.", fname.c_str());

@@ -14,13 +14,18 @@ blackland/lava -> removed, same as greenland/lava
 blackland/mountain* -> wasteland_montain*
 rest of blackland without renames.
 
-desert/lava -> removed, same as greenland/lava
-
 winterland/lava -> removed, same as greenland/lava
 winterland/mountains* -> winter_mountains
 winterland/beach -> winter_beach
 winterland/ice_flows -> ice_floes
 winterland/water -> winter_water
+
+desert/lava -> removed, same as greenland/lava
+desert/steppe -> desert_steppe
+desert/beach -> desert_beach
+desert/wasser -> desert_water
+
+
 
 Resources:
 granit -> granite

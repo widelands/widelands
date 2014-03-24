@@ -119,6 +119,12 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 
 void GameRendererGL::draw()
 {
+	const World & world = m_egbase->world();
+	if (m_terrain_freq.size() < world.get_nr_terrains()) {
+		m_terrain_freq.resize(world.get_nr_terrains());
+		m_terrain_edge_freq.resize(world.get_nr_terrains());
+	}
+
 	m_surface = dynamic_cast<GLSurface *>(m_dst->get_surface());
 	if (!m_surface)
 		return;
@@ -244,8 +250,6 @@ void GameRendererGL::prepare_terrain_base()
 		m_patch_vertices_size = reqsize;
 	}
 
-	if (m_terrain_freq.size() < 16)
-		m_terrain_freq.resize(16);
 	m_terrain_freq.assign(m_terrain_freq.size(), 0);
 
 	collect_terrain_base(true);
@@ -314,8 +318,7 @@ void GameRendererGL::add_terrain_dither_triangle
 	(bool onlyscan, Terrain_Index ter, const Coords & edge1, const Coords & edge2, const Coords & opposite)
 {
 	if (onlyscan) {
-		if (ter >= m_terrain_edge_freq.size())
-			m_terrain_edge_freq.resize(ter + 1);
+		assert(ter < m_terrain_edge_freq.size());
 		m_terrain_edge_freq[ter] += 1;
 	} else {
 		static const float TyZero = 1.0 / TEXTURE_HEIGHT;
@@ -409,8 +412,6 @@ void GameRendererGL::prepare_terrain_dither()
 {
 	static_assert(sizeof(dithervertex) == 32, "assert(sizeof(dithervertex) == 32) failed.");
 
-	if (m_terrain_edge_freq.size() < 16)
-		m_terrain_edge_freq.resize(16);
 	m_terrain_edge_freq.assign(m_terrain_edge_freq.size(), 0);
 
 	collect_terrain_dither(true);

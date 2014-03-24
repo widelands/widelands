@@ -541,13 +541,7 @@ void Graphic::flush_maptextures()
 
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
-	try {
-		m_maptextures.push_back
-			(new Texture(texture_files, frametime, *m_sdl_screen->format));
-	} catch (exception& e) {
-		log("Failed to load maptexture %s: %s\n", texture_files[0].c_str(), e.what());
-		return 0;
-	}
+	m_maptextures.push_back(new Texture(texture_files, frametime, *m_sdl_screen->format));
 
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
