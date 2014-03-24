@@ -87,11 +87,6 @@ def_resources=water 10
 is=green
 dither_layer=50
 
-[lava]
-name=_"Lava"
-is=acid
-dither_layer=80
-
 [snow]
 name=_"Snow"
 def_resources=water 30

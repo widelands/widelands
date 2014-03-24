@@ -11,6 +11,11 @@ blackland/ashes -> ashes
 blackland/strand -> wasteland_beach
 blackland/water -> wasteland_water
 blackland/hardground* -> hardground*
+blackland/lava -> removed, same as greenland/lava
+
+desert/lava -> removed, same as greenland/lava
+
+winterland/lava -> removed, same as greenland/lava
 
 Resources:
 granit -> granite
