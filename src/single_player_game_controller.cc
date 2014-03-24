@@ -17,7 +17,7 @@
  *
  */
 
-#include "sp_gamecontroller.h"
+#include "single_player_game_controller.h"
 
 #include "computer_player.h"
 #include "logic/game.h"

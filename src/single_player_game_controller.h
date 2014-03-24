@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef SP_GAMECONTROLLER_H
-#define SP_GAMECONTROLLER_H
-
-#include "gamecontroller.h"
+#ifndef SINGLE_PLAYER_GAME_CONTROLLER_H
+#define SINGLE_PLAYER_GAME_CONTROLLER_H
 
 #include "computer_player.h"
+#include "gamecontroller.h"
+
 
 class SinglePlayerGameController : public GameController {
 public:
