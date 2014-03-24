@@ -17,6 +17,10 @@ rest of blackland without renames.
 desert/lava -> removed, same as greenland/lava
 
 winterland/lava -> removed, same as greenland/lava
+winterland/mountains* -> winter_mountains
+winterland/beach -> winter_beach
+winterland/ice_flows -> ice_floes
+winterland/water -> winter_water
 
 Resources:
 granit -> granite

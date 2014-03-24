@@ -419,6 +419,200 @@ world:new_terrain_type{
 --  Former Winterland  --
 -------------------------
 
+world:new_terrain_type{
+   name = "tundra",
+   descname = _ "Tundra",
+   editor_category = "winter",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/winterland_pics/tundra_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "tundra2",
+   descname = _ "Tundra 2",
+   editor_category = "winter",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/winterland_pics/tundra2_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "tundra3",
+   descname = _ "Tundra 3",
+   editor_category = "winter",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/winterland_pics/tundra3_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "tundra_taiga",
+   descname = _ "Tundra Taiga",
+   editor_category = "winter",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/winterland_pics/tundra_taiga_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "taiga",
+   descname = _ "Taiga",
+   editor_category = "winter",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/winterland_pics/taiga_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "snow",
+   descname = _ "Snow",
+   editor_category = "winter",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/winterland_pics/snow_00.png" },
+   dither_layer = 60,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "winter_mountain1",
+   descname = _ "Mountain 1 (Winter)",
+   editor_category = "winter",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/winterland_pics/mountain1_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "winter_mountain2",
+   descname = _ "Mountain 2 (Winter)",
+   editor_category = "winter",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/winterland_pics/mountain2_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "winter_mountain3",
+   descname = _ "Mountain 3 (Winter)",
+   editor_category = "winter",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/winterland_pics/mountain3_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "winter_mountain4",
+   descname = _ "Mountain 4 (Winter)",
+   editor_category = "winter",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/winterland_pics/mountain4_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "ice",
+   descname = _ "Ice",
+   editor_category = "winter",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/winterland_pics/ice_00.png" },
+   dither_layer = 30,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "winter_beach",
+   descname = _ "Beach (Winter)",
+   editor_category = "winter",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/winterland_pics/strand_00.png" },
+   dither_layer = 40,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "ice_floes",
+   descname = _ "Ice Floes",
+   editor_category = "winter",
+   is = "water",
+   valid_resources = {"fish"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = path.glob("world/winterland_pics", "ice_flows_*.png"),
+   dither_layer = 10,
+   fps = 5,
+}
+
+world:new_terrain_type{
+   name = "ice_floes2",
+   descname = _ "Ice Floes 2",
+   editor_category = "winter",
+   is = "water",
+   valid_resources = {"fish"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = path.glob("world/winterland_pics", "ice_flows2_*.png"),
+   dither_layer = 20,
+   fps = 5,
+}
+
+world:new_terrain_type{
+   name = "winter_water",
+   descname = _ "Water (Winter)",
+   editor_category = "winter",
+   is = "water",
+   valid_resources = {"fish"},
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.glob("world/winterland_pics", "water*.png"),
+   dither_layer = 0,
+   fps = 8,
+}
 
 ---------------------
 --  Former Desert  --
