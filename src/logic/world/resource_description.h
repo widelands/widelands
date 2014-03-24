@@ -62,7 +62,7 @@ private:
 	const std::string descname_;
 	const bool detectable_;
 	const int32_t max_amount_;
-	const std::vector<EditorPicture> editor_pictures_;
+	std::vector<EditorPicture> editor_pictures_;
 };
 
 }  // namespace Widelands

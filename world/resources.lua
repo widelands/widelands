@@ -43,7 +43,7 @@ world:new_resource_type{
    max_amount = 20,
    detectable = true,
    editor_pictures = {
-      [5] = " world/pics/granite1.png",
+      [5] = "world/pics/granite1.png",
       [10] = "world/pics/granite2.png",
       [15] = "world/pics/granite3.png",
       [1000] = "world/pics/granite4.png",

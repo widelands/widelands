@@ -433,7 +433,6 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 
 	egbase.cleanup_for_load();
 
-	// NOCOM(#sirver): kill change_world()
 	UniqueRandomMapInfo mapInfo;
 	set_map_info(mapInfo);
 

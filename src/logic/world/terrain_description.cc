@@ -46,19 +46,24 @@ TerrainDescription::Type TerrainTypeFromString(const std::string& type) {
 		return TerrainDescription::DRY;
 	}
 	if (type == "water") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::WATER | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
+		return static_cast<TerrainDescription::Type>(
+		   TerrainDescription::WATER | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
 	}
 	if (type == "acid") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::ACID | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
+		return static_cast<TerrainDescription::Type>(
+		   TerrainDescription::ACID | TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
 	}
 	if (type == "mountain") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::MOUNTAIN);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY |
+		                                             TerrainDescription::MOUNTAIN);
 	}
 	if (type == "dead") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::UNPASSABLE | TerrainDescription::ACID);
+		return static_cast<TerrainDescription::Type>(
+		   TerrainDescription::DRY | TerrainDescription::UNPASSABLE | TerrainDescription::ACID);
 	}
 	if (type == "unpassable") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY | TerrainDescription::UNPASSABLE);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::DRY |
+		                                             TerrainDescription::UNPASSABLE);
 	}
 	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
 }
