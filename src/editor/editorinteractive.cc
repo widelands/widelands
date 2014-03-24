@@ -40,6 +40,7 @@
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "scoped_timer.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -623,7 +624,7 @@ void Editor_Interactive::run_editor(const std::string & filename, const std::str
 		eia.start();
 
 		if (!script_to_run.empty()) {
-			eia.egbase().lua().run_script(*g_fs, script_to_run, "commandline");
+			eia.egbase().lua().run_script(*g_fs, script_to_run);
 		}
 	}
 	eia.run();

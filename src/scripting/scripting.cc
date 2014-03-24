@@ -25,17 +25,20 @@
 #ifdef _MSC_VER
 #include <ctype.h> // for tolower
 #endif
+#include <stdint.h>
 
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "scripting/c_utils.h"
 #include "scripting/factory.h"
 #include "scripting/lua_bases.h"
+#include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_root.h"
+#include "scripting/lua_table.h"
 #include "scripting/lua_ui.h"
 #include "scripting/persistence.h"
 
@@ -100,74 +103,46 @@ void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
 	lua_setfield(L, LUA_REGISTRYINDEX, "egbase");
 }
 
-// Push a reference to this coroutine into the registry so that it will not get
-// garbage collected. Returns the index of the reference in the registry.
-uint32_t reference_coroutine(lua_State* L) {
-	assert(L != nullptr);
-	lua_pushthread(L);
-	return luaL_ref(L, LUA_REGISTRYINDEX);
-}
+// Runs the 'content' as a lua script identified by 'identifier' in 'L'.
+std::unique_ptr<LuaTable > run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
+	// NOCOM(#sirver): document __file__
+	// Get the current value of __file__
+	std::string last_file;
+	lua_getglobal(L, "__file__");
+	if (!lua_isnil(L, -1)) {
+		last_file = luaL_checkstring(L, -1);
+	}
+	lua_pop(L, 1);
 
-// Unreference the coroutine with the given index in the registry again. I might then get garbage
-// collected.
-void unreference_coroutine(lua_State* L, uint32_t idx) {
-	luaL_unref(L, LUA_REGISTRYINDEX, idx);
+	// Set __file__.
+	lua_pushstring(L, identifier);
+	lua_setglobal(L, "__file__");
+
+	check_return_value_for_errors(
+	   L,
+	   luaL_loadbuffer(L, content.c_str(), content.size(), identifier.c_str()) ||
+	      lua_pcall(L, 0, 1, 0));
+
+	if (lua_isnil(L, -1)) {
+		lua_pop(L, 1);    // No return value from script
+		lua_newtable(L);  // Push an empty table
+	}
+	if (not lua_istable(L, -1))
+		throw LuaError("Script did not return a table!");
+
+	// Restore old value of __file__.
+	if (last_file.empty()) {
+		lua_pushnil(L);
+	} else {
+		lua_pushstring(L, last_file);
+	}
+	lua_setglobal(L, "__file__");
+
+	return std::unique_ptr<LuaTable>(new LuaTable(L));
 }
 
 }  // namespace
 
-/*
-============================================
-       Lua Table
-============================================
-*/
-LuaTable::LuaTable(lua_State * L) : m_L(L) {}
-
-LuaTable::~LuaTable() {
-	lua_pop(m_L, 1);
-}
-
-std::string LuaTable::get_string(std::string s) {
-	lua_getfield(m_L, -1, s.c_str());
-	if (lua_isnil(m_L, -1)) {
-		lua_pop(m_L, 1);
-		throw LuaTableKeyError(s);
-	}
-	if (not lua_isstring(m_L, -1)) {
-		lua_pop(m_L, 1);
-		throw LuaError(s + "is not a string value.");
-	}
-	std::string rv = lua_tostring(m_L, -1);
-	lua_pop(m_L, 1);
-
-	return rv;
-}
-
-LuaCoroutine * LuaTable::get_coroutine(std::string s) {
-	lua_getfield(m_L, -1, s.c_str());
-
-	if (lua_isnil(m_L, -1)) {
-			lua_pop(m_L, 1);
-			throw LuaTableKeyError(s);
-	}
-	if (lua_isfunction(m_L, -1)) {
-		// Oh well, a function, not a coroutine. Let's turn it into one
-		lua_State * t = lua_newthread(m_L);
-		lua_pop(m_L, 1); // Immediately remove this thread again
-
-		lua_xmove(m_L, t, 1); // Move function to coroutine
-		lua_pushthread(t); // Now, move thread object back
-		lua_xmove(t, m_L, 1);
-	}
-
-	if (not lua_isthread(m_L, -1)) {
-		lua_pop(m_L, 1);
-		throw LuaError(s + "is not a function value.");
-	}
-	LuaCoroutine * cr = new LuaCoroutine(luaL_checkthread(m_L, -1));
-	lua_pop(m_L, 1); // Remove coroutine from stack
-	return cr;
-}
 
 /*
 ============================================
@@ -221,17 +196,18 @@ std::string LuaInterface::register_script
 {
 		size_t length;
 		void * input_data = fs.Load(path, length);
-
-		std::string data(static_cast<char *>(input_data));
+		const std::string data(static_cast<char *>(input_data));
 		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
 
 		// make sure the input_data is freed
 		free(input_data);
 
-		size_t pos = name.find_last_of("/\\");
-		if (pos != std::string::npos)  name = name.substr(pos + 1);
+	   const size_t pos = name.find_last_of("/\\");
+	   if (pos != std::string::npos) {
+		   name = name.substr(pos + 1);
+	   }
 
-		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
+	   log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
 		m_scripts[ns][name] = data;
 
 		return name;
@@ -263,47 +239,27 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 	check_return_value_for_errors(m_L, rv);
 }
 
-std::unique_ptr<LuaTable> LuaInterface::run_script
-	(FileSystem & fs, std::string path, std::string ns)
-{
-	bool delete_ns = false;
-	if (not m_scripts.count(ns))
-		delete_ns = true;
+std::unique_ptr<LuaTable> LuaInterface::run_script(FileSystem& fs, const std::string& path) {
+	try {
+		size_t length;
+		void* input_data = fs.Load(path, length);
+		const std::string data(static_cast<char*>(input_data));
+		// make sure the input_data is freed
+		free(input_data);
 
-	const std::string name = register_script(fs, ns, path);
-
-	std::unique_ptr<LuaTable> rv = run_script(ns, name);
-
-	if (delete_ns)
-		m_scripts.erase(ns);
-	else
-		m_scripts[ns].erase(name);
-
-	return rv;
+		return run_string_as_script(m_L, path, data);
+	}
+	catch (File_error& e) {
+		throw LuaError(e.what());
+	}
 }
 
-	std::unique_ptr<LuaTable> LuaInterface::run_script
-	(std::string ns, std::string name)
-{
-	if
-		((m_scripts.find(ns) == m_scripts.end()) ||
-		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
+std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& ns, const std::string& name) {
+	if (!m_scripts.count(ns) || !m_scripts[ns].count(name)) {
 		throw LuaScriptNotExistingError(ns, name);
-
-	const std::string & s = m_scripts[ns][name];
-
-	check_return_value_for_errors
-		(m_L, luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
-		 lua_pcall(m_L, 0, 1, 0)
-	);
-
-	if (lua_isnil(m_L, -1)) {
-		lua_pop(m_L, 1); // No return value from script
-		lua_newtable(m_L); // Push an empty table
 	}
-	if (not lua_istable(m_L, -1))
-		throw LuaError("Script did not return a table!");
-	return std::unique_ptr<LuaTable>(new LuaTable(m_L));
+
+	return run_string_as_script(m_L, ns + ":" + name, m_scripts[ns][name]);
 }
 
 /*
@@ -496,110 +452,4 @@ uint32_t LuaGameInterface::write_global_env
 	lua_gc(m_L, LUA_GCCOLLECT, 0);
 
 	return nwritten;
-}
-
-/*
- * ===========================
- * LuaCoroutine
- * ===========================
- */
-LuaCoroutine::LuaCoroutine(lua_State * ms)
-	: m_L(ms), m_idx(LUA_REFNIL), m_nargs(0)
-{
-	if (m_L) {
-		m_idx = reference_coroutine(m_L);
-	}
-}
-
-LuaCoroutine::~LuaCoroutine() {
-	unreference_coroutine(m_L, m_idx);
-}
-
-int LuaCoroutine::get_status() {
-	return lua_status(m_L);
-}
-
-int LuaCoroutine::resume(uint32_t * sleeptime)
-{
-	int rv = lua_resume(m_L, nullptr, m_nargs);
-	m_nargs = 0;
-	int n = lua_gettop(m_L);
-
-	uint32_t sleep_for = 0;
-	if (n == 1) {
-		sleep_for = luaL_checkint32(m_L, -1);
-		lua_pop(m_L, 1);
-	}
-
-	if (sleeptime)
-		*sleeptime = sleep_for;
-
-	if (rv != 0 && rv != YIELDED) {
-		throw LuaError(lua_tostring(m_L, -1));
-	}
-
-	return rv;
-}
-
-void LuaCoroutine::push_arg(const Widelands::Player * plr) {
-	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
-	m_nargs++;
-}
-
-void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
-	to_lua<LuaMap::L_Field>(m_L, new LuaMap::L_Field(coords));
-	++m_nargs;
-}
-
-#define COROUTINE_DATA_PACKET_VERSION 1
-uint32_t LuaCoroutine::write
-	(lua_State * parent, Widelands::FileWrite & fw,
-	 Widelands::Map_Map_Object_Saver & mos)
-{
-	// Clean out the garbage before we write this.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
-
-	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
-
-	// The current numbers of arguments on the stack
-	fw.Unsigned32(m_nargs);
-
-	// Empty table + object to persist on the stack Stack
-	lua_newtable(parent);
-	lua_pushthread(m_L);
-	lua_xmove (m_L, parent, 1);
-
-	const uint32_t nwritten = persist_object(parent, fw, mos);
-
-	// Clean out the garbage again.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
-
-	return nwritten;
-}
-
-void LuaCoroutine::read
-	(lua_State * parent, Widelands::FileRead & fr,
-	 Widelands::Map_Map_Object_Loader & mol, uint32_t size)
-{
-	uint8_t version = fr.Unsigned8();
-
-	if (version != COROUTINE_DATA_PACKET_VERSION)
-		throw wexception("Unknown data packet version: %i\n", version);
-
-	// The current numbers of arguments on the stack
-	m_nargs = fr.Unsigned32();
-
-	// Empty table + object to persist on the stack Stack
-	unpersist_object(parent, fr, mol, size);
-
-	m_L = luaL_checkthread(parent, -1);
-	lua_pop(parent, 1);
-
-	// Cache a lua reference to this object so that it does not
-	// get garbage collected
-	lua_pushthread(m_L);
-	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
-
-	// Clean out the garbage again.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
 }

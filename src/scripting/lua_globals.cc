@@ -19,15 +19,17 @@
 
 #include "scripting/lua_globals.h"
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <libintl.h>
 
 #include "build_info.h"
 #include "i18n.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "scripting/c_utils.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-
 
 namespace LuaGlobals {
 
@@ -190,6 +192,7 @@ static int L_ngettext(lua_State * L) {
 /* RST
 	.. function:: use(ns, script)
 
+	// NOCOM(#sirver): deprecate and remove eventually.
 		Includes the script referenced at the caller location. Use this
 		to factor your scripts into smaller parts.
 
@@ -226,6 +229,39 @@ static int L_use(lua_State * L) {
 }
 
 /* RST
+	.. function:: include(script)
+
+		// NOCOM(#sirver): add namespace functionality into this.
+		Includes the script at the given location at the current position in the
+		file.
+
+		:type script: :class:`string`
+		:arg script: The filename relative to the root of the data directory.
+		:returns: :const:`nil`
+*/
+static int L_include(lua_State * L) {
+	const std::string script = luaL_checkstring(L, -1);
+
+	// remove our arguments so that the executed script gets a clear stack
+	lua_pop(L, 1);
+
+	try {
+		lua_getfield(L, LUA_REGISTRYINDEX, "lua_interface");
+		LuaInterface * lua = static_cast<LuaInterface *>(lua_touserdata(L, -1));
+		lua_pop(L, 1); // pop this userdata
+
+		if (boost::starts_with("map:", script)) {
+			lua->run_script(get_egbase(L).map().filesystem(), script.substr(4));
+		} else {
+			lua->run_script(*g_fs, script);
+		}
+	} catch (LuaError & e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
 .. function:: get_build_id()
 
 	returns the version string of this widelands executable.  Something like
@@ -237,6 +273,9 @@ static int L_get_build_id(lua_State * L) {
 }
 
 const static struct luaL_Reg globals [] = {
+	{"_", &L__},
+	{"get_build_id", &L_get_build_id},
+	{"include", &L_include},
 	{"set_textdomain", &L_set_textdomain},
 	{"use", &L_use},
 	{"get_build_id", &L_get_build_id},
@@ -260,4 +299,4 @@ void luaopen_globals(lua_State * L) {
 }
 
 
-};
+}  // namespace LuaGlobals

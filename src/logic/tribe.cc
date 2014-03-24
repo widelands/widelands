@@ -46,6 +46,7 @@
 #include "logic/world.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
 
