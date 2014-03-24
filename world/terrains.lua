@@ -9,6 +9,19 @@
 
 -- NOCOM(#sirver): no need to keep the german names now - translate to english.
 world:new_terrain_type{
+   name = "wasser",
+   descname = _ "Water",
+   editor_category = "green",
+   is = "water",
+   valid_resources = {"fish"},
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.glob("world/greenland_pics", "wasser_*.png"),
+   dither_layer = 0,
+   fps = 14,
+}
+
+world:new_terrain_type{
    name = "steppe",
    descname = _ "Steppe",
    editor_category = "green",
@@ -18,19 +31,6 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { "world/greenland_pics/steppe_00.png" },
    dither_layer = 20,
-   fps = 0,
-}
-
-world:new_terrain_type{
-   name = "berg1",
-   descname = _ "Mountain 1",
-   editor_category = "green",
-   is = "mountain",
-   valid_resources = { "coal", "iron", "gold", "granite" },
-   default_resource = "",
-   default_resource_amount = 0,
-   textures = { "world/greenland_pics/berg1_00.png" },
-   dither_layer = 60,
    fps = 0,
 }
 
@@ -74,19 +74,6 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "wasser",
-   descname = _ "Water",
-   editor_category = "green",
-   is = "water",
-   valid_resources = {"fish"},
-   default_resource = "fish",
-   default_resource_amount = 4,
-   textures = path.glob("world/greenland_pics", "wasser_*.png"),
-   dither_layer = 0,
-   fps = 14,
-}
-
-world:new_terrain_type{
    name = "wiese1",
    descname = _ "Meadow 1",
    editor_category = "green",
@@ -122,6 +109,33 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/greenland_pics/wiese3_00.png" },
    dither_layer = 40,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wiese4",
+   descname = _ "Meadow 4",
+   editor_category = "green",
+   is = "green",
+   valid_resources = {"water"},
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/greenland_pics/wiese4_00.png" },
+   dither_layer = 40,
+   fps = 0,
+}
+
+
+world:new_terrain_type{
+   name = "berg1",
+   descname = _ "Mountain 1",
+   editor_category = "green",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/greenland_pics/berg1_00.png" },
+   dither_layer = 60,
    fps = 0,
 }
 
@@ -178,19 +192,6 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "wiese4",
-   descname = _ "Meadow 4",
-   editor_category = "green",
-   is = "green",
-   valid_resources = {"water"},
-   default_resource = "water",
-   default_resource_amount = 10,
-   textures = { "world/greenland_pics/wiese4_00.png" },
-   dither_layer = 40,
-   fps = 0,
-}
-
-world:new_terrain_type{
    name = "lava",
    descname = _ "Lava",
    editor_category = "green",
@@ -234,29 +235,16 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "wasteland_beach",
-   descname = _ "Beach (Wasteland)",
+   name = "ashes2",
+   descname = _"Ashes 2",
    editor_category = "wasteland",
-   is = "dry",
-   valid_resources = {},
-   default_resource = "",
-   default_resource_amount = 0,
-   textures = { "world/blackland_pics/strand_00.png" },
-   dither_layer = 0,
-   fps = 0,
-}
-
-world:new_terrain_type{
-   name = "wasteland_water",
-   descname = _ "Water (Wasteland)",
-   editor_category = "wasteland",
-   is = "water",
-   valid_resources = { "fish" },
-   default_resource = "fish",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
    default_resource_amount = 4,
-   textures = path.glob("world/blackland_pics", "water_*.png"),
-   dither_layer = 0,
-   fps = 14,
+   textures = { "world/blackland_pics/ashes2_00.png" },
+   dither_layer = 20,
+   fps = 0,
 }
 
 world:new_terrain_type{
@@ -309,6 +297,123 @@ world:new_terrain_type{
    textures = { "world/blackland_pics/hardground4_00.png" },
    dither_layer = 30,
    fps = 0,
+}
+
+world:new_terrain_type{
+   name = "hardlava",
+   descname = _ "Igneous Rocks",
+   editor_category = "wasteland",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/hardlava_00.png" },
+   dither_layer = 40,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wasteland_mountain1",
+   descname = _ "Mountain 1",
+   editor_category = "wasteland",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/mountain1_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wasteland_mountain2",
+   descname = _ "Mountain 2",
+   editor_category = "wasteland",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/mountain2_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wasteland_mountain3",
+   descname = _ "Mountain 3",
+   editor_category = "wasteland",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/mountain3_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wasteland_mountain4",
+   descname = _ "Mountain 4",
+   editor_category = "wasteland",
+   is = "mountain",
+   valid_resources = { "coal", "iron", "gold", "granite" },
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/mountain4_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wasteland_beach",
+   descname = _ "Beach (Wasteland)",
+   editor_category = "wasteland",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/strand_00.png" },
+   dither_layer = 0,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "lava-stone1",
+   descname = _ "Lava Rocks 1",
+   editor_category = "wasteland",
+   is = "acid",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/lava-stone1_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "lava-stone2",
+   descname = _ "Lava Rocks 2",
+   editor_category = "wasteland",
+   is = "acid",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/lava-stone2_00.png" },
+   dither_layer = 70,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wasteland_water",
+   descname = _ "Water (Wasteland)",
+   editor_category = "wasteland",
+   is = "water",
+   valid_resources = { "fish" },
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.glob("world/blackland_pics", "water_*.png"),
+   dither_layer = 0,
+   fps = 14,
 }
 
 -------------------------

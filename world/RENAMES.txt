@@ -7,11 +7,12 @@ they will be hardcoded into the engine.
 
 Terrains:
 greenland terrains stayed without renames
-blackland/ashes -> ashes
+blackland/ashes1,2 -> ashes1,2
 blackland/strand -> wasteland_beach
 blackland/water -> wasteland_water
-blackland/hardground* -> hardground*
 blackland/lava -> removed, same as greenland/lava
+blackland/mountain* -> wasteland_montain*
+rest of blackland without renames.
 
 desert/lava -> removed, same as greenland/lava
 
