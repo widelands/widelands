@@ -8,152 +8,152 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-10 08:50+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-23 17:56+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:31+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-24 05:47+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: nb\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr ""
+msgstr "Kasernen din oppdaget en motstander."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your Barracks is under attack."
-msgstr ""
+msgstr "Kasernen din blir angrepet."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barracks"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved kasernen"
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved kasernen"
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your Barrier discovered an aggressor."
-msgstr ""
+msgstr "Barrieren din oppdaget en motstander."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your Barrier is under attack."
-msgstr ""
+msgstr "Barrieren din blir angrepet."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved barrieren"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved barrieren"
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 msgid "Your Castle discovered an aggressor."
-msgstr ""
+msgstr "Slottet ditt oppdaget en motstander."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your Castle is under attack."
-msgstr ""
+msgstr "Slottet ditt blir angrepet."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved slottet"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved slottet"
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 #: ../../tribes/barbarians/citadel/conf:9
 msgid "Your Citadel discovered an aggressor."
-msgstr ""
+msgstr "Festningen din oppdaget en motstander."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your Citadel is under attack."
-msgstr ""
+msgstr "Festningen din blir angrepet."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
 msgid "The enemy defeated your soldiers at the Citadel"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved festningen"
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 #: ../../tribes/barbarians/citadel/conf:12
 msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved festningen"
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your Donjon discovered an aggressor."
-msgstr ""
+msgstr "Borgtårnet ditt oppdaget en motstander."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your Donjon is under attack."
-msgstr ""
+msgstr "Borgtårnet ditt blir angrepet."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the Donjon"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved borgtårnet"
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved borgtårnet"
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 #: ../../tribes/barbarians/fortress/conf:8
 msgid "Your Fortress discovered an aggressor."
-msgstr ""
+msgstr "Fortet ditt oppdaget en motstander."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/barbarians/fortress/conf:9
 msgid "Your Fortress is under attack."
-msgstr ""
+msgstr "Fortet ditt blir angrepet."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 #: ../../tribes/barbarians/fortress/conf:10
 msgid "The enemy defeated your soldiers at the Fortress"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved fortet"
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 #: ../../tribes/barbarians/fortress/conf:11
 msgid "Your soldiers defeated the enemy at the Fortress"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved borgtårnet"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your Guardhall discovered an aggressor."
-msgstr ""
+msgstr "Borgen din oppdaget en motstander."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your Guardhall is under attack."
-msgstr ""
+msgstr "Borgen din blir angrepet."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the Guardhall"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved borgen"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the Guardhall"
@@ -161,111 +161,111 @@ msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your Guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Vaktstuen din oppdaget en motstander."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your Guardhouse is under attack."
-msgstr ""
+msgstr "Vaktstuen din blir angrepet."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved vaktstuen"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved vaktstuen"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your High Tower discovered an aggressor."
-msgstr ""
+msgstr "Det høye tårnet ditt oppdaget en motstander."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your High Tower is under attack."
-msgstr ""
+msgstr "Det høye tårnet ditt blir angrepet."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the High Tower"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved det høye tårnet"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved det høye tårnet"
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your Outpost discovered an aggressor."
-msgstr ""
+msgstr "Utposten din oppdaget en motstander."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your Outpost is under attack."
-msgstr ""
+msgstr "Utposten din blir angrepet."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the Outpost"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved utposten"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved utposten"
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your Sentry discovered an aggressor."
-msgstr ""
+msgstr "Vaktposten din oppdaget en motstander."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your Sentry is under attack."
-msgstr ""
+msgstr "Vaktposten din blir angrepet."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved vaktposten"
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved vaktposten"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your Small Tower discovered an aggressor."
-msgstr ""
+msgstr "Det lille tårnet ditt oppdaget en motstander."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your Small Tower is under attack."
-msgstr ""
+msgstr "Det lille tårnet ditt blir angrepet."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the Small Tower"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved det lille tårnet ditt"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the Small Tower"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved det lille tårnet"
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 msgid "Your Tower discovered an aggressor."
-msgstr ""
+msgstr "Tårnet ditt oppdaget en motstander."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 msgid "Your Tower is under attack."
-msgstr ""
+msgstr "Tårnet ditt blir angrepet."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 msgid "The enemy defeated your soldiers at the Tower"
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved tårnet ditt"
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 msgid "Your soldiers defeated the enemy at the Tower"
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved tårnet"
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -919,8 +919,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/warmill/help.lua:52
 msgid "%i Raw Stone"
 msgid_plural "%i Raw Stones"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i Grov stein"
+msgstr[1] "%i Grove steiner"
 
 #: ../../tribes/barbarians/axefactory/help.lua:39
 #: ../../tribes/barbarians/axefactory/help.lua:45
@@ -987,8 +987,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/well/help.lua:38
 msgid "%i Log"
 msgid_plural "%i Logs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i Tømmerstokk"
+msgstr[1] "%i Tømmerstokker"
 
 #: ../../tribes/barbarians/axefactory/help.lua:40
 #: ../../tribes/barbarians/deep_coalmine/help.lua:43
@@ -1370,14 +1370,14 @@ msgstr ""
 #: ../../tribes/barbarians/cattlefarm/help.lua:23
 #: ../../tribes/barbarians/micro-brewery/help.lua:24
 msgid "Wheat from the Farm"
-msgstr ""
+msgstr "Hvete fra gården"
 
 #: ../../tribes/barbarians/bakery/help.lua:24
 #: ../../tribes/barbarians/cattlefarm/help.lua:24
 #: ../../tribes/barbarians/lime_kiln/help.lua:27
 #: ../../tribes/barbarians/micro-brewery/help.lua:23
 msgid "Water from the Well"
-msgstr ""
+msgstr "Vann fra brønnen"
 
 #: ../../tribes/barbarians/bakery/help.lua:26
 #: ../../tribes/barbarians/battlearena/help.lua:27
@@ -1471,7 +1471,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your Barrier"
-msgstr ""
+msgstr "Soldatene har bemannet barrieren din"
 
 #: ../../tribes/barbarians/barrier/help.lua:8
 #: ../../tribes/barbarians/big_inn/help.lua:8
@@ -1580,8 +1580,8 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:49
 msgid "%i Gold"
 msgid_plural "%i Gold"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i Gull"
+msgstr[1] "%i Gull"
 
 #: ../../tribes/barbarians/battlearena/help.lua:50
 #: ../../tribes/barbarians/conf:145
@@ -1669,7 +1669,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Bygger nye bygninger på byggeplasser."
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
@@ -1699,7 +1699,7 @@ msgstr "Kvegoppdretter"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:47
 msgid "an Ox"
-msgstr ""
+msgstr "en okse"
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -1709,7 +1709,7 @@ msgstr "Arbeider dypt i gruvene for å hente ut kull, jern eller gull."
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your Citadel"
-msgstr ""
+msgstr "Soldatene har bemannet festningen din"
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
@@ -2076,7 +2076,7 @@ msgstr "Villsvin"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Ax"
-msgstr ""
+msgstr "Øks"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Battle Ax"
@@ -2235,7 +2235,7 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:26
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "Log"
-msgstr ""
+msgstr "Tømmerstokk"
 
 #: ../../tribes/barbarians/conf:108
 msgid "Warhelm"
@@ -2388,7 +2388,7 @@ msgstr "Slott"
 
 #: ../../tribes/barbarians/conf:161
 msgid "Guardhall"
-msgstr ""
+msgstr "Borg"
 
 #: ../../tribes/barbarians/conf:162
 msgid "Guardhouse"
@@ -2674,7 +2674,7 @@ msgstr "%s eller bedre og"
 
 #: ../../tribes/barbarians/donjon/conf:7
 msgid "Your soldiers have occupied your Donjon"
-msgstr ""
+msgstr "Soldatene har bemannet borgtårnet ditt"
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
@@ -2686,7 +2686,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/farm/help.lua:16
 msgid "Sow and harvest wheat."
-msgstr ""
+msgstr "Sår og høster hvete."
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
@@ -2793,7 +2793,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your Fortress"
-msgstr ""
+msgstr "Soldatene har bemannet fortet ditt"
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -3255,7 +3255,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your Sentry"
-msgstr ""
+msgstr "Soldatene har bemannet vaktposten din"
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
