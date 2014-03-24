@@ -8,70 +8,6 @@
 --
 
 -- NOCOM(#sirver): no need to keep the german names now - translate to english.
-world:new_terrain_type{
-   name = "wasser",
-   descname = _ "Water",
-   editor_category = "green",
-   is = "water",
-   valid_resources = {"fish"},
-   default_resource = "fish",
-   default_resource_amount = 4,
-   textures = path.glob("world/greenland_pics", "wasser_*.png"),
-   dither_layer = 0,
-   fps = 14,
-}
-
-world:new_terrain_type{
-   name = "steppe",
-   descname = _ "Steppe",
-   editor_category = "green",
-   is = "green",
-   valid_resources = { "water" },
-   default_resource = "water",
-   default_resource_amount = 5,
-   textures = { "world/greenland_pics/steppe_00.png" },
-   dither_layer = 20,
-   fps = 0,
-}
-
-world:new_terrain_type{
-   name = "schnee",
-   descname = _ "Snow",
-   editor_category = "green",
-   is = "dead",
-   valid_resources = {},
-   default_resource = "",
-   default_resource_amount = 0,
-   textures = { "world/greenland_pics/schnee_00.png" },
-   dither_layer = 70,
-   fps = 0,
-}
-
-world:new_terrain_type{
-   name = "sumpf",
-   descname = _ "Swamp",
-   editor_category = "green",
-   is = "unpassable",
-   valid_resources = {"water"},
-   default_resource = "water",
-   default_resource_amount = 20,
-   textures = path.glob("world/greenland_pics", "sumpf_*.png"),
-   dither_layer = 30,
-   fps = 14,
-}
-
-world:new_terrain_type{
-   name = "strand",
-   descname = _ "Beach",
-   editor_category = "green",
-   is = "dry",
-   valid_resources = {},
-   default_resource = "",
-   default_resource_amount = 0,
-   textures = { "world/greenland_pics/strand_00.png" },
-   dither_layer = 10,
-   fps = 0,
-}
 
 world:new_terrain_type{
    name = "wiese1",
@@ -125,6 +61,44 @@ world:new_terrain_type{
    fps = 0,
 }
 
+world:new_terrain_type{
+   name = "steppe",
+   descname = _ "Steppe",
+   editor_category = "green",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 5,
+   textures = { "world/greenland_pics/steppe_00.png" },
+   dither_layer = 20,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "steppe_kahl",
+   descname = _ "Barren Steppe",
+   editor_category = "green",
+   is = "green",
+   valid_resources = {"water"},
+   default_resource = "water",
+   default_resource_amount = 4,
+   textures = { "world/greenland_pics/steppe_kahl_00.png" },
+   dither_layer = 20,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "bergwiese",
+   descname = _ "Mountain Meadow",
+   editor_category = "green",
+   is = "green",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/greenland_pics/bergwiese_00.png" },
+   dither_layer = 50,
+   fps = 0,
+}
 
 world:new_terrain_type{
    name = "berg1",
@@ -179,15 +153,41 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "steppe_kahl",
-   descname = _ "Barren Steppe",
+   name = "sumpf",
+   descname = _ "Swamp",
    editor_category = "green",
-   is = "green",
+   is = "unpassable",
    valid_resources = {"water"},
    default_resource = "water",
-   default_resource_amount = 4,
-   textures = { "world/greenland_pics/steppe_kahl_00.png" },
-   dither_layer = 20,
+   default_resource_amount = 20,
+   textures = path.glob("world/greenland_pics", "sumpf_*.png"),
+   dither_layer = 30,
+   fps = 14,
+}
+
+world:new_terrain_type{
+   name = "strand",
+   descname = _ "Beach",
+   editor_category = "green",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/greenland_pics/strand_00.png" },
+   dither_layer = 10,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "schnee",
+   descname = _ "Snow",
+   editor_category = "green",
+   is = "dead",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/greenland_pics/schnee_00.png" },
+   dither_layer = 70,
    fps = 0,
 }
 
@@ -205,18 +205,17 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "bergwiese",
-   descname = _ "Mountain Meadow",
+   name = "wasser",
+   descname = _ "Water",
    editor_category = "green",
-   is = "green",
-   valid_resources = {},
-   default_resource = "",
-   default_resource_amount = 0,
-   textures = { "world/greenland_pics/bergwiese_00.png" },
-   dither_layer = 50,
-   fps = 0,
+   is = "water",
+   valid_resources = {"fish"},
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.glob("world/greenland_pics", "wasser_*.png"),
+   dither_layer = 0,
+   fps = 14,
 }
-
 ------------------------
 --  Former blackland  --
 ------------------------
