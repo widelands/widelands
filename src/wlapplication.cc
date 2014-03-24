@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,6 +59,9 @@
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "profile/profile.h"
+#include "replay_game_controller.h"
+#include "single_player_game_controller.h"
+#include "single_player_game_settings_provider.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
 #include "ui_basic/messagebox.h"
@@ -513,6 +516,8 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	case SDL_VIDEOEXPOSE:
 		// log ("SDL Video Window expose event: %i\n", ev.expose.type);
 		g_gr->update_fullscreen();
+		break;
+	default:
 		break;
 	}
 	return true;
@@ -1612,212 +1617,6 @@ void WLApplication::mainmenu_editor()
 	}
 }
 
-// The settings provider for normal singleplayer games:
-// The user can change everything, except that they are themselves human.
-struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
-	SinglePlayerGameSettingsProvider() {
-		s.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
-		s.scenario = false;
-		s.multiplayer = false;
-		s.playernum = 0;
-	}
-
-	virtual void setScenario(bool const set) override {s.scenario = set;}
-
-	virtual const GameSettings & settings() override {return s;}
-
-	virtual bool canChangeMap() override {return true;}
-	virtual bool canChangePlayerState(uint8_t number) override {
-		return (!s.scenario & (number != s.playernum));
-	}
-	virtual bool canChangePlayerTribe(uint8_t) override {return !s.scenario;}
-	virtual bool canChangePlayerInit (uint8_t) override {return !s.scenario;}
-	virtual bool canChangePlayerTeam(uint8_t) override {return !s.scenario;}
-
-	virtual bool canLaunch() override {
-		return s.mapname.size() != 0 && s.players.size() >= 1;
-	}
-
-	virtual std::string getMap() {
-		return s.mapfilename;
-	}
-
-	virtual void setMap
-		(const std::string &       mapname,
-		 const std::string &       mapfilename,
-		 uint32_t            const maxplayers,
-		 bool                const savegame) override
-	{
-		s.mapname = mapname;
-		s.mapfilename = mapfilename;
-		s.savegame = savegame;
-
-		uint32_t oldplayers = s.players.size();
-		s.players.resize(maxplayers);
-
-		while (oldplayers < maxplayers) {
-			PlayerSettings & player = s.players[oldplayers];
-			player.state = (oldplayers == 0) ? PlayerSettings::stateHuman :
-				PlayerSettings::stateComputer;
-			player.tribe                = s.tribes.at(0).name;
-			player.random_tribe         = false;
-			player.initialization_index = 0;
-			char buf[200];
-			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
-			player.name = buf;
-			player.team = 0;
-			// Set default computerplayer ai type
-			if (player.state == PlayerSettings::stateComputer) {
-				const Computer_Player::ImplementationVector & impls =
-					Computer_Player::getImplementations();
-				if (impls.size() > 1) {
-					player.ai = impls.at(0)->name;
-					player.random_ai = false;
-				}
-			}
-			++oldplayers;
-		}
-	}
-
-	virtual void setPlayerState
-		(uint8_t const number, PlayerSettings::State state) override
-	{
-		if (number == s.playernum || number >= s.players.size())
-			return;
-
-		if (state == PlayerSettings::stateOpen)
-			state = PlayerSettings::stateComputer;
-
-		s.players[number].state = state;
-	}
-
-	virtual void setPlayerAI(uint8_t const number, const std::string & ai, bool const random_ai) override {
-		if (number < s.players.size()) {
-			s.players[number].ai = ai;
-			s.players[number].random_ai = random_ai;
-		}
-	}
-
-	virtual void nextPlayerState(uint8_t const number) override {
-		if (number == s.playernum || number >= s.players.size())
-			return;
-
-		const Computer_Player::ImplementationVector & impls =
-			Computer_Player::getImplementations();
-		if (impls.size() > 1) {
-			Computer_Player::ImplementationVector::const_iterator it =
-				impls.begin();
-			do {
-				++it;
-				if ((*(it - 1))->name == s.players[number].ai)
-					break;
-			} while (it != impls.end());
-			if (s.players[number].random_ai) {
-				s.players[number].random_ai = false;
-				it = impls.begin();
-			} else if (it == impls.end()) {
-				s.players[number].random_ai = true;
-				do {
-					uint8_t random = (std::rand() % impls.size()); // Choose a random AI
-					it = impls.begin() + random;
-				} while ((*it)->name == "None");
-			}
-			s.players[number].ai = (*it)->name;
-		}
-
-		s.players[number].state = PlayerSettings::stateComputer;
-	}
-
-	virtual void setPlayerTribe
-		(uint8_t const number, const std::string & tribe, bool const random_tribe) override
-	{
-		if (number >= s.players.size())
-			return;
-
-		std::string actual_tribe = tribe;
-		PlayerSettings & player = s.players[number];
-		player.random_tribe = random_tribe;
-
-		if (random_tribe) {
-			uint8_t num_tribes = s.tribes.size();
-			uint8_t random = (std::rand() % num_tribes);
-			actual_tribe = s.tribes.at(random).name;
-		}
-
-		container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)
-			if (i.current->name == player.tribe) {
-				s.players[number].tribe = actual_tribe;
-				if
-					(i.current->initializations.size()
-					 <=
-					 player.initialization_index)
-					player.initialization_index = 0;
-			}
-	}
-
-	virtual void setPlayerInit(uint8_t const number, uint8_t const index) override {
-		if (number >= s.players.size())
-			return;
-
-		container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)
-			if (i.current->name == s.players[number].tribe) {
-				if (index < i.current->initializations.size())
-					s.players[number].initialization_index = index;
-				return;
-			}
-		assert(false);
-	}
-
-	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) override {
-		if (number < s.players.size())
-			s.players[number].team = team;
-	}
-
-	virtual void setPlayerCloseable(uint8_t, bool) override {
-		// nothing to do
-	}
-
-	virtual void setPlayerShared(uint8_t, uint8_t) override {
-		// nothing to do
-	}
-
-	virtual void setPlayerName(uint8_t const number, const std::string & name) override {
-		if (number < s.players.size())
-			s.players[number].name = name;
-	}
-
-	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) override {
-		if (number < s.players.size())
-			s.players[number] = ps;
-	}
-
-	virtual void setPlayerNumber(uint8_t const number) override {
-		if (number >= s.players.size())
-			return;
-		PlayerSettings const position = settings().players.at(number);
-		PlayerSettings const player = settings().players.at(settings().playernum);
-		if
-			(number < settings().players.size() and
-			 (position.state == PlayerSettings::stateOpen or
-			  position.state == PlayerSettings::stateComputer))
-		{
-			setPlayer(number, player);
-			setPlayer(settings().playernum, position);
-			s.playernum = number;
-		}
-	}
-
-	virtual std::string getWinCondition() override {return s.win_condition;}
-	virtual void setWinCondition(std::string wc) override {s.win_condition = wc;}
-	virtual void nextWinCondition() override // not implemented - feel free to do so, if you need it
-	{
-		assert(false);
-	}
-
-private:
-	GameSettings s;
-};
-
 /**
  * Handle the "New game" menu option: Configure a single player game and
  * run it.
@@ -1851,7 +1650,7 @@ bool WLApplication::new_game()
 				(new Interactive_Player
 					(game, g_options.pull_section("global"), pn, false, false));
 			std::unique_ptr<GameController> ctrl
-				(GameController::createSinglePlayer(game, true, pn));
+				(new SinglePlayerGameController(game, true, pn));
 			UI::ProgressWindow loaderUI;
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
@@ -1948,92 +1747,6 @@ bool WLApplication::campaign_game()
 	}
 	return false;
 }
-
-struct ReplayGameController : public GameController {
-	ReplayGameController(Widelands::Game & game, const std::string & filename) :
-		m_game     (game),
-		m_lastframe(WLApplication::get()->get_time()),
-		m_time     (m_game.get_gametime()),
-		m_speed    (1000),
-		m_paused   (false)
-	{
-		m_game.set_game_controller(this);
-
-		// We have to create an empty map, otherwise nothing will load properly
-		game.set_map(new Widelands::Map);
-		m_replayreader.reset(new Widelands::ReplayReader(m_game, filename));
-	}
-
-	struct Cmd_ReplayEnd : public Widelands::Command {
-		Cmd_ReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
-		virtual void execute (Widelands::Game & game) override {
-			game.gameController()->setDesiredSpeed(0);
-			UI::WLMessageBox mmb
-				(game.get_ibase(),
-				 _("End of replay"),
-				 _
-				 	("The end of the replay has been reached and the game has "
-				 	 "been paused. You may unpause the game and continue watching "
-				 	 "if you want to."),
-				 UI::WLMessageBox::OK);
-			mmb.run();
-		}
-		virtual uint8_t id() const override {return QUEUE_CMD_REPLAYEND;}
-	};
-
-	void think() override {
-		int32_t curtime = WLApplication::get()->get_time();
-		int32_t frametime = curtime - m_lastframe;
-		m_lastframe = curtime;
-
-		// prevent crazy frametimes
-		if (frametime < 0)
-			frametime = 0;
-		else if (frametime > 1000)
-			frametime = 1000;
-
-		frametime = frametime * realSpeed() / 1000;
-
-		m_time = m_game.get_gametime() + frametime;
-
-		if (m_replayreader) {
-			while
-				(Widelands::Command * const cmd =
-				 	m_replayreader->GetNextCommand(m_time))
-				m_game.enqueue_command(cmd);
-
-			if (m_replayreader->EndOfReplay()) {
-				m_replayreader.reset(nullptr);
-				m_game.enqueue_command
-					(new Cmd_ReplayEnd(m_time = m_game.get_gametime()));
-			}
-		}
-	}
-
-	void sendPlayerCommand(Widelands::PlayerCommand &) override
-	{
-		throw wexception("Trying to send a player command during replay");
-	}
-	int32_t getFrametime() override {
-		return m_time - m_game.get_gametime();
-	}
-	std::string getGameDescription() override {
-		return "replay";
-	}
-	uint32_t realSpeed() override {return m_paused ? 0 : m_speed;}
-	uint32_t desiredSpeed() override {return m_speed;}
-	void setDesiredSpeed(uint32_t const speed) override {m_speed = speed;}
-	bool isPaused() override {return m_paused;}
-	void setPaused(bool const paused) override {m_paused = paused;}
-
-private:
-	Widelands::Game & m_game;
-	std::unique_ptr<Widelands::ReplayReader> m_replayreader;
-	int32_t m_lastframe;
-	int32_t m_time;
-	uint32_t m_speed;
-	bool m_paused;
-};
 
 /**
  * Show the replay menu and play a replay.
