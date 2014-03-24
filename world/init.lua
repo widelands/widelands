@@ -10,6 +10,16 @@ world:new_editor_category{
    descname = _ "Wasteland",
    picture = "world/pics/editor_category_wasteland.png",
 }
+world:new_editor_category{
+   name = "winter",
+   descname = _ "Winter",
+   picture = "world/pics/editor_category_winter.png",
+}
+world:new_editor_category{
+   name = "desert",
+   descname = _ "Desert",
+   picture = "world/pics/editor_category_desert.png",
+}
 
 include "world/resources.lua"
 include "world/terrains.lua"
