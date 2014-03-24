@@ -8,6 +8,9 @@ they will be hardcoded into the engine.
 Terrains:
 greenland terrains stayed without renames
 blackland/ashes -> ashes
+blackland/strand -> wasteland_beach
+blackland/water -> wasteland_water
+blackland/hardground* -> hardground*
 
 Resources:
 granit -> granite

@@ -5,6 +5,9 @@
 -- NOCOM(#sirver): this is suboptimal
 -- Order does matter here, since this file should stay compatible
 -- with S2
+--
+
+-- NOCOM(#sirver): no need to keep the german names now - translate to english.
 world:new_terrain_type{
    name = "steppe",
    descname = _ "Steppe",
@@ -227,6 +230,84 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { "world/blackland_pics/ashes_00.png" },
    dither_layer = 20,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wasteland_beach",
+   descname = _ "Beach (Wasteland)",
+   editor_category = "wasteland",
+   is = "dry",
+   valid_resources = {},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { "world/blackland_pics/strand_00.png" },
+   dither_layer = 0,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "wasteland_water",
+   descname = _ "Water (Wasteland)",
+   editor_category = "wasteland",
+   is = "water",
+   valid_resources = { "fish" },
+   default_resource = "fish",
+   default_resource_amount = 4,
+   textures = path.glob("world/blackland_pics", "water_*.png"),
+   dither_layer = 0,
+   fps = 14,
+}
+
+world:new_terrain_type{
+   name = "hardground1",
+   descname = _ "Hard Ground 1",
+   editor_category = "wasteland",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/blackland_pics/hardground1_00.png" },
+   dither_layer = 30,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "hardground2",
+   descname = _ "Hard Ground 2",
+   editor_category = "wasteland",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/blackland_pics/hardground2_00.png" },
+   dither_layer = 30,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "hardground3",
+   descname = _ "Hard Ground 3",
+   editor_category = "wasteland",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/blackland_pics/hardground3_00.png" },
+   dither_layer = 30,
+   fps = 0,
+}
+
+world:new_terrain_type{
+   name = "hardground4",
+   descname = _ "Hard Ground 4",
+   editor_category = "wasteland",
+   is = "green",
+   valid_resources = { "water" },
+   default_resource = "water",
+   default_resource_amount = 10,
+   textures = { "world/blackland_pics/hardground4_00.png" },
+   dither_layer = 30,
    fps = 0,
 }
 

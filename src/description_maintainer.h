@@ -26,6 +26,8 @@
 #include <string>
 #include <vector>
 
+#include "wexception.h"
+
 // Used to have a typesafe maintainer for description classes.
 template <typename T> struct DescriptionMaintainer {
 	// Adds the 'entry', will assert() if it is already registered. Returns the
@@ -62,7 +64,9 @@ private:
 
 template <typename T>
 int32_t DescriptionMaintainer<T>::add(T * const item) {
-	assert(exists(item->name()) == nullptr);
+	if (exists(item->name()) != nullptr) {
+		throw wexception("Tried to add %s twice.", item->name().c_str());
+	}
 	int32_t index = items_.size();
 	items_.emplace_back(item);
 	name_to_index_[item->name()] = index;
