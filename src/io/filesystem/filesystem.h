@@ -52,12 +52,7 @@ public:
 
 	virtual ~FileSystem() {}
 
-	virtual int32_t FindFiles
-		(const std::string & path,
-		 const std::string & pattern,
-		 filenameset_t     * results,
-		 uint32_t            depth = 0)
-		= 0;
+	virtual std::set<std::string> ListDirectory(const std::string& path) = 0;
 
 	virtual bool IsWritable() const = 0;
 	virtual bool IsDirectory(const std::string & path) = 0;

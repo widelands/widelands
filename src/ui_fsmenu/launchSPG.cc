@@ -121,8 +121,8 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 
 
 	m_lua = new LuaInterface();
-	std::set<std::string> win_conditions;
-	g_fs->FindFiles("scripting/win_conditions", "*.lua", &win_conditions);
+	std::set<std::string> win_conditions = g_fs->ListDirectory("scripting/win_conditions");
+	// NOCOM(#sirver): filter .lua
 	m_win_condition_scripts.insert(
 	   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
 

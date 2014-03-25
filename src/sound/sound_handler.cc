@@ -259,9 +259,12 @@ void Sound_Handler::load_fx_if_needed
 		std::string current_dir = dirs_left.front();
 		dirs_left.pop_front();
 
-		g_fs->FindFiles(current_dir, filename + "_??.ogg." + i18n::get_locale(), &files);
-		if (files.empty())
-			g_fs->FindFiles(current_dir, filename + "_??.ogg", &files);
+		files = g_fs->ListDirectory(current_dir);
+		// NOCOM(#sirver): filter filename + "_??.ogg." + i18n::get_locale(), &files);
+		if (files.empty()) {
+			files = g_fs->ListDirectory(current_dir);
+			// NOCOM(#sirver): filter , filename + "_??.ogg", &files);
+		}
 
 		for (i = files.begin(); i != files.end(); ++i) {
 			assert(!g_fs->IsDirectory(*i));
@@ -269,9 +272,12 @@ void Sound_Handler::load_fx_if_needed
 		}
 
 		if (recursive) {
-			g_fs->FindFiles(current_dir, "*_??." + i18n::get_locale(), &dirs);
-			if (dirs.empty())
-				g_fs->FindFiles(current_dir, "*_??", &dirs);
+			dirs = g_fs->ListDirectory(current_dir);
+			// NOCOM(#sirver): filter , "*_??." + i18n::get_locale(), &dirs);
+			if (dirs.empty()) {
+				dirs = g_fs->ListDirectory(current_dir);
+				// NOCOM(#sirver): filter , "*_??", &dirs);
+			}
 
 			for (i = dirs.begin(); i != dirs.end(); ++i) {
 				assert(g_fs->IsDirectory(*i));
@@ -537,10 +543,12 @@ void Sound_Handler::register_song
 
 	assert(g_fs);
 
-	if (recursive)
-		g_fs->FindFiles(dir, "*", &files);
-	else
-		g_fs->FindFiles(dir, basename + "_??*", &files);
+	if (recursive) {
+		files = g_fs->ListDirectory(dir);
+	} else {
+		files = g_fs->ListDirectory(dir);
+		// NOCOM(#sirver): filter , basename + "_??*", &files);
+	}
 
 	for (i = files.begin(); i != files.end(); ++i) {
 		if (g_fs->IsDirectory(*i)) {

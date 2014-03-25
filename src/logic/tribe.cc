@@ -286,11 +286,9 @@ Tribe_Descr::Tribe_Descr
 			}
 
 			{
-				std::set<std::string> scripts;
-				g_fs->FindFiles(path + "scripting", "*.lua", &scripts);
-
 				// Read initializations -- all scripts are initializations currently
-				for (const std::string& script : scripts) {
+				for (const std::string& script : g_fs->ListDirectory(path + "scripting")) {
+					// NOCOM(#sirver): filter .lua files
 					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
 
 					m_initializations.resize(m_initializations.size() + 1);
@@ -359,9 +357,8 @@ bool Tribe_Descr::exists_tribe
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
 
 				std::string path = "tribes/" + name + "/scripting";
-				std::set<std::string> scripts;
-				g_fs->FindFiles(path, "*.lua", &scripts);
-				for (const std::string& script : scripts) {
+				for (const std::string& script : g_fs->ListDirectory(path)) {
+					// NOCOM(#sirver): filter lua files
 					std::unique_ptr<LuaTable> t = lua.run_script(script);
 					info->initializations.push_back(
 					   TribeBasicInfo::Initialization(script, t->get_string("name")));
@@ -390,8 +387,7 @@ std::vector<std::string> Tribe_Descr::get_all_tribenames() {
 
 	//  get all tribes
 	std::vector<TribeBasicInfo> tribes;
-	filenameset_t m_tribes;
-	g_fs->FindFiles("tribes", "*", &m_tribes);
+	filenameset_t m_tribes = g_fs->ListDirectory("tribes");
 	for
 		(filenameset_t::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
@@ -413,8 +409,7 @@ std::vector<TribeBasicInfo> Tribe_Descr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
-	filenameset_t m_tribes;
-	g_fs->FindFiles("tribes", "*", &m_tribes);
+	filenameset_t m_tribes = g_fs->ListDirectory("tribes");
 	for
 		(filenameset_t::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();

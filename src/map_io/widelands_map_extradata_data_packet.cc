@@ -56,8 +56,7 @@ void Map_Extradata_Data_Packet::Read
 			Map & map = egbase.map();
 			//  Nothing more. But read all pics.
 			if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
-				filenameset_t pictures;
-				fs.FindFiles("pics", "*", &pictures);
+				filenameset_t pictures = fs.ListDirectory("pics");
 				for
 					(filenameset_t::iterator pname = pictures.begin();
 					 pname != pictures.end();

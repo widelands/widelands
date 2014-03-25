@@ -295,8 +295,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (m_win_condition_scripts.size() < 1) {
 			if (!m_lua)
 				m_lua = new LuaInterface();
-			std::set<std::string> win_conditions;
-			g_fs->FindFiles("scripting/win_conditions", "*.lua", &win_conditions);
+			std::set<std::string> win_conditions= g_fs->ListDirectory("scripting/win_conditions");
+			// NOCOM(#sirver): filter .lua
 			m_win_condition_scripts.insert(
 			   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
 			m_cur_wincondition = -1;
@@ -1307,8 +1307,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		std::vector<std::string> directories;
 		directories.push_back("maps");
 		while (!directories.empty()) {
-			filenameset_t files;
-			g_fs->FindFiles(directories.at(directories.size() - 1).c_str(), "*", &files, 0);
+			filenameset_t files = g_fs->ListDirectory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
 			const filenameset_t & gamefiles = files;
@@ -1341,8 +1340,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 
 	if (d->settings.saved_games.empty()) {
 		// Read in saved games
-		filenameset_t files;
-		g_fs->FindFiles("save", "*", &files, 0);
+		filenameset_t files = g_fs->ListDirectory("save");
 		Widelands::Game game;
 		Widelands::Game_Preload_Data_Packet gpdp;
 		const filenameset_t & gamefiles = files;

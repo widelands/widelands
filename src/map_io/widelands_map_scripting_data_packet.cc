@@ -66,12 +66,10 @@ void Map_Scripting_Data_Packet::Read
 void Map_Scripting_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
-	// NOCOM(#sirver): FindFiles is broken for Zip
 	fs.EnsureDirectoryExists("scripting");
 
-	std::set<std::string> scripts;
-	egbase.map().filesystem().FindFiles("scripting", "*.lua", &scripts);
-	for (const std::string& script : scripts) {
+	for (const std::string& script : egbase.map().filesystem().ListDirectory("scripting")) {
+		// NOCOM(#sirver): filter .lua
 		size_t length;
 		void* input_data = egbase.map().filesystem().Load(script, length);
 		fs.Write(script, input_data, length);

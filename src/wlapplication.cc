@@ -1824,7 +1824,8 @@ void WLApplication::cleanup_replays()
 	Section & s = g_options.pull_section("global");
 
 	if (s.get_bool("remove_syncstreams", true)) {
-		g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX ".wss", &files, 1);
+		files = g_fs->ListDirectory(REPLAY_DIR);
+		// NOCOM(#sirver): filter , "*" REPLAY_SUFFIX ".wss", &files, 1);
 
 		for
 			(filenameset_t::iterator filename = files.begin();
@@ -1839,7 +1840,8 @@ void WLApplication::cleanup_replays()
 	time_t tnow = time(nullptr);
 
 	if (s.get_int("remove_replays", 0)) {
-		g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX, &files, 1);
+		files = g_fs->ListDirectory(REPLAY_DIR);
+		// NOCOM(#sirver): filter, "*" REPLAY_SUFFIX, &files, 1);
 
 		for
 			(filenameset_t::iterator filename = files.begin();

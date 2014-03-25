@@ -215,7 +215,8 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 {
 	filenameset_t files;
 
-	g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX, &files, 1);
+	files = g_fs->ListDirectory(REPLAY_DIR);
+	// NOCOM(#sirver): filter , "*" REPLAY_SUFFIX, &files, 1);
 
 	Widelands::Game_Preload_Data_Packet gpdp;
 	for

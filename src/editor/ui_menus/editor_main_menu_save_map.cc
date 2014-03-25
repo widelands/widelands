@@ -284,7 +284,7 @@ void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
  */
 void Main_Menu_Save_Map::fill_list() {
 	// Fill it with all files we find.
-	g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
+	m_mapfiles = g_fs->ListDirectory(m_curdir);
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {

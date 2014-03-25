@@ -120,8 +120,8 @@ NetClient::NetClient
 	file = nullptr;
 
 	// Temporarily register win condition scripts to get the default
-	std::set<std::string> win_condition_scripts;
-	g_fs->FindFiles("scripting/win_conditions", "*.lua", &win_condition_scripts);
+	std::set<std::string> win_condition_scripts = g_fs->ListDirectory("scripting/win_conditions");
+	// NOCOM(#sirver): filter .lua
 	assert(win_condition_scripts.size());
 	d->settings.win_condition_script = *win_condition_scripts.begin();
 }

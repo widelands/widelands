@@ -50,9 +50,8 @@ struct LanguageEntry {
 
 void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
 
-	filenameset_t files;
 	Section* s = &g_options.pull_section("global");
-	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
+	filenameset_t files = g_fs->ListDirectory(s->get_string("localedir", INSTALL_LOCALEDIR));
 	Profile ln("txts/languages");
 	s = &ln.pull_section("languages");
 	bool own_selected = "" == language || "en" == language;
@@ -544,8 +543,8 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
-		filenameset_t files;
-		g_fs->FindFiles("fonts/", "*.ttf", &files);
+		filenameset_t files = g_fs->ListDirectory("fonts");
+		// NOCOM(#sirver): filter "*.ttf", &files);
 
 		for
 			(filenameset_t::iterator pname = files.begin();
