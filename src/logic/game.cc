@@ -32,7 +32,6 @@
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -57,6 +56,7 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
+#include "single_player_game_controller.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
 #include "ui_basic/progresswindow.h"
@@ -256,7 +256,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	maploader->load_map_complete(*this, true);
 	maploader.reset();
 
-	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
+	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
 		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false);
 		delete m_ctrl;
@@ -413,7 +413,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
-	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
+	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
 		bool const result = run(&loaderUI, Loaded, script_to_run, false);
 		delete m_ctrl;

@@ -446,7 +446,7 @@ void Building_Statistics_Menu::update() {
 				pic = "pics/menu_tab_buildmine.png";
 			} else if (building.get_isport()) {
 				pic = "pics/menu_tab_buildport.png";
-				}
+			}
 			else switch (building.get_size()) {
 			case Widelands::BaseImmovable::SMALL:
 				pic = "pics/menu_tab_buildsmall.png";

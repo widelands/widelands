@@ -240,6 +240,7 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 }
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(FileSystem& fs, const std::string& path) {
+	log("#sirver path: %s\n", path.c_str());
 	try {
 		size_t length;
 		void* input_data = fs.Load(path, length);

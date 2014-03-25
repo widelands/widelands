@@ -1,24 +1,24 @@
 -- ===============================
--- Send a bunch of story messages 
+-- Send a bunch of story messages
 -- ===============================
 
---use("aux", "formatting")
-use("aux", "format_scenario")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)
 end
 
 
-function briefing_messages() 
+function briefing_messages()
 -- Briefing message
 title = _"The Story Begins"
 msg = thron(_"Thron sighs...",
 _[[It’s been months, and we are still hiding where the forests are old and dark.]] .. "<br><br>" ..
-_[[My warriors hunt at day and lie awake at night – listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]]) 
+_[[My warriors hunt at day and lie awake at night – listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]])
 show_story_box(title, msg)
 
-msg = 
+msg =
 thron(
 _[[We can see the raging flames that swallow Al’thunran from here, miles away.]] .. "<br><br>" ..
 _[[The red lights flash in the darkness and dance to the rhythm of the war drums that haunt me even in my nightmares.]])
@@ -34,9 +34,8 @@ _[[As father told me, there are times to fight and times to lie and wait, trying
 show_story_box(title, msg)
 sleep(2000)
 
-use("map", "khantrukhs_talking")
+include "map:scripting/khantrukhs_talking.lua"
 end
 
 
 run(briefing_messages)
-

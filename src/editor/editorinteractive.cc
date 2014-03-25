@@ -19,8 +19,8 @@
 
 #include "editor/editorinteractive.h"
 
-#include <vector>
 #include <string>
+#include <vector>
 
 #include <SDL_keysym.h>
 #include <boost/format.hpp>

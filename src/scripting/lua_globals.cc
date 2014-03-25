@@ -19,6 +19,8 @@
 
 #include "scripting/lua_globals.h"
 
+#include <exception>
+
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <libintl.h>
@@ -190,45 +192,6 @@ static int L_ngettext(lua_State * L) {
 }
 
 /* RST
-	.. function:: use(ns, script)
-
-	// NOCOM(#sirver): deprecate and remove eventually.
-		Includes the script referenced at the caller location. Use this
-		to factor your scripts into smaller parts.
-
-		:arg ns:
-			The namespace were the imported script resides. Can be any of
-				:const:`map`
-					The script is in the ``scripting/`` directory of the current map.
-				:const:`aux`
-					The script is one of the auxiliary scripts that come bundled in
-					the ``scripting/`` directory of Widelands itself.
-
-		:type ns: :class:`string`
-		:arg script: The filename of the string without the extension ``.lua``.
-		:type script: :class:`string`
-		:returns: :const:`nil`
-*/
-static int L_use(lua_State * L) {
-	const char * ns = luaL_checkstring(L, -2);
-	const char * script = luaL_checkstring(L, -1);
-
-	// remove our argument so that the executed script gets a clear stack
-	lua_pop(L, 2);
-
-	try {
-		lua_getfield(L, LUA_REGISTRYINDEX, "lua_interface");
-		LuaInterface * lua = static_cast<LuaInterface *>(lua_touserdata(L, -1));
-		lua_pop(L, 1); // pop this userdata
-
-		lua->run_script(ns, script);
-	} catch (LuaError & e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-/* RST
 	.. function:: include(script)
 
 		// NOCOM(#sirver): add namespace functionality into this.
@@ -250,12 +213,14 @@ static int L_include(lua_State * L) {
 		LuaInterface * lua = static_cast<LuaInterface *>(lua_touserdata(L, -1));
 		lua_pop(L, 1); // pop this userdata
 
-		if (boost::starts_with("map:", script)) {
+		if (boost::starts_with(script, "map:")) {
+			log("#sirver map script: script.substr(4): %s\n", script.substr(4).c_str());
 			lua->run_script(get_egbase(L).map().filesystem(), script.substr(4));
 		} else {
+			log("#sirver global script script: %s\n", script.c_str());
 			lua->run_script(*g_fs, script);
 		}
-	} catch (LuaError & e) {
+	} catch (std::exception & e) {
 		report_error(L, "%s", e.what());
 	}
 	return 0;
@@ -276,11 +241,8 @@ const static struct luaL_Reg globals [] = {
 	{"_", &L__},
 	{"get_build_id", &L_get_build_id},
 	{"include", &L_include},
-	{"set_textdomain", &L_set_textdomain},
-	{"use", &L_use},
-	{"get_build_id", &L_get_build_id},
-	{"_", &L__},
 	{"ngettext", &L_ngettext},
+	{"set_textdomain", &L_set_textdomain},
 	{nullptr, nullptr}
 };
 

@@ -2,12 +2,12 @@
 --                         Defeat all Win condition
 -- =======================================================================
 
-use("aux", "coroutine") -- for sleep
-use("aux", "win_condition_functions")
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-use("aux", "win_condition_texts")
+include "scripting/win_condition_texts.lua"
 
 local wc_name = _ "Autocrat"
 local wc_version = 2

@@ -2,7 +2,7 @@
 --                    Start conditions for Citadel Village
 -- =======================================================================
 
-use("aux", "infrastructure")
+include "scripting/infrastructure.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -91,7 +91,7 @@ return {
          wares = { raw_stone = 6, coal = 3 },
       })
    end) then
-      plr:send_message(_"Not enough space", _( 
+      plr:send_message(_"Not enough space", _(
 [[Some of your starting buildings didn’t have enough room and ]] ..
 [[weren’t built. You are at a disadvantage with this; consider restarting ]] ..
 [[this map with a fair starting condition.]]), {popup=true}
@@ -99,4 +99,3 @@ return {
    end
 end,
 }
-

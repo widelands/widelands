@@ -1,5 +1,5 @@
-use("aux", "lunit")
-use("aux", "coroutine")
+include "scripting/lunit.lua"
+include "scripting/coroutine.lua"
 
 game = wl.Game()
 map = game.map

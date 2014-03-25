@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_scenario")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)
@@ -20,7 +20,7 @@ obj_build_small_food_economy = {
    name = "build_small_food_economy",
    title=_"Build up a small food economy",
    number = 5,
-   body = objective_text(_"Build up a small food economy", 
+   body = objective_text(_"Build up a small food economy",
 [[• ]] .. _([[Build up a basic food economy to provide your people with food]] ..
 [[ – a fisher’s hut, a hunter’s hut, a well, a farm and a bakery.]])),
 }
@@ -29,7 +29,7 @@ obj_build_cattlefarm = {
    name = "obj_build_cattlefarm",
    title = _ "Build a cattle farm",
    number = 1,
-   body = objective_text(_"Remember to build a cattle farm", 
+   body = objective_text(_"Remember to build a cattle farm",
 _([[As your roads grow longer and your economy bigger, you should make good use of your oxen ]] ..
 [[to help transport wares more quickly. Remember to build a cattle farm!]])),
 }
@@ -376,7 +376,7 @@ _([[Nothing is left of that beauty I remember, only ruins remain of the old capi
 [[ – it was only a few months ago that I wondered whether I would ever be able to set my feet in Al’thunran again. ]] ..
 [[Now the old town is back in my hands, and I will not hesitate to rebuild it with all the strength my people have. ]] ..
 [[I can’t wait to see it again in its old beauty.]]))
-..  objective_text(_"Victory", 
+..  objective_text(_"Victory",
    _([[You have completed the last mission of the barbarian tutorial campaign. ]] ..
 [[You may continue playing if you wish, otherwise move on to the next campaign.]]))
 }
@@ -403,4 +403,3 @@ _([[Chieftain, remember the poor carriers: Our roads get longer and longer ]] ..
 [[We should breed more oxen to make their work lighter and our transportation more efficient.]]))
 .. new_objectives(obj_build_cattlefarm),
 }
-
