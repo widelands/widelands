@@ -93,8 +93,8 @@ struct GameSettings {
 	std::string mapname;
 	std::string mapfilename;
 
-	/// Win condition to use
-	std::string win_condition;
+	/// Lua file defining the win condition to use.
+	std::string win_condition_script;
 
 	/// Is map a scenario
 	bool scenario;
@@ -160,9 +160,9 @@ struct GameSettingsProvider {
 	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) = 0;
 	virtual void setPlayerCloseable(uint8_t number, bool closeable) = 0;
 	virtual void setPlayerShared   (uint8_t number, uint8_t shared) = 0;
-	virtual void setWinCondition   (std::string wc) = 0;
+	virtual void setWinConditionScript   (std::string wc) = 0;
 	virtual void nextWinCondition      () = 0;
-	virtual std::string getWinCondition() = 0;
+	virtual std::string getWinConditionScript() = 0;
 
 	struct No_Tribe {};
 	const std::string & getPlayersTribe() {

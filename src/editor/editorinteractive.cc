@@ -226,7 +226,7 @@ void Editor_Interactive::load(const std::string & filename) {
 void Editor_Interactive::start() {
 	// Run the editor initialization script, if any
 	try {
-		egbase().lua().run_script("map", "editor_init");
+		egbase().lua().run_script("map:scripting/editor_init.lua");
 	} catch (LuaScriptNotExistingError &) {
 		// do nothing.
 	}
@@ -624,7 +624,7 @@ void Editor_Interactive::run_editor(const std::string & filename, const std::str
 		eia.start();
 
 		if (!script_to_run.empty()) {
-			eia.egbase().lua().run_script(*g_fs, script_to_run);
+			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
 	eia.run();

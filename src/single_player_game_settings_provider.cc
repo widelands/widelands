@@ -223,12 +223,12 @@ void SinglePlayerGameSettingsProvider::setPlayerNumber(uint8_t const number) {
 	}
 }
 
-std::string SinglePlayerGameSettingsProvider::getWinCondition() {
-	return s.win_condition;
+std::string SinglePlayerGameSettingsProvider::getWinConditionScript() {
+	return s.win_condition_script;
 }
 
-void SinglePlayerGameSettingsProvider::setWinCondition(std::string wc) {
-	s.win_condition = wc;
+void SinglePlayerGameSettingsProvider::setWinConditionScript(std::string wc) {
+	s.win_condition_script = wc;
 }
 
 void SinglePlayerGameSettingsProvider::nextWinCondition() {

@@ -21,7 +21,6 @@
 
 #include <exception>
 
-#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <libintl.h>
 
@@ -43,6 +42,8 @@ The following functions are imported into the global namespace
 of all scripts that are running inside widelands. They provide convenient
 access to other scripts in other locations, localisation features and more.
 
+There is also a global variable called __file__ defined that is the current
+files name.
 */
 
 /*
@@ -194,9 +195,8 @@ static int L_ngettext(lua_State * L) {
 /* RST
 	.. function:: include(script)
 
-		// NOCOM(#sirver): add namespace functionality into this.
 		Includes the script at the given location at the current position in the
-		file.
+		file. The script can begin with 'map:' to include files from the map.
 
 		:type script: :class:`string`
 		:arg script: The filename relative to the root of the data directory.
@@ -204,7 +204,6 @@ static int L_ngettext(lua_State * L) {
 */
 static int L_include(lua_State * L) {
 	const std::string script = luaL_checkstring(L, -1);
-
 	// remove our arguments so that the executed script gets a clear stack
 	lua_pop(L, 1);
 
@@ -212,14 +211,7 @@ static int L_include(lua_State * L) {
 		lua_getfield(L, LUA_REGISTRYINDEX, "lua_interface");
 		LuaInterface * lua = static_cast<LuaInterface *>(lua_touserdata(L, -1));
 		lua_pop(L, 1); // pop this userdata
-
-		if (boost::starts_with(script, "map:")) {
-			log("#sirver map script: script.substr(4): %s\n", script.substr(4).c_str());
-			lua->run_script(get_egbase(L).map().filesystem(), script.substr(4));
-		} else {
-			log("#sirver global script script: %s\n", script.c_str());
-			lua->run_script(*g_fs, script);
-		}
+		lua->run_script(script);
 	} catch (std::exception & e) {
 		report_error(L, "%s", e.what());
 	}

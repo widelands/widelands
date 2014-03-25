@@ -56,8 +56,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) override;
 	virtual void setPlayerNumber(uint8_t const number) override;
 
-	virtual std::string getWinCondition() override;
-	virtual void setWinCondition(std::string wc) override;
+	virtual std::string getWinConditionScript() override;
+	virtual void setWinConditionScript(std::string wc) override;
 	virtual void nextWinCondition() override;
 
 private:

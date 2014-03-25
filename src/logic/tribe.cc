@@ -285,35 +285,18 @@ Tribe_Descr::Tribe_Descr
 				throw game_data_error("flag styles: %s", e.what());
 			}
 
-			// Register Lua scripts
-			if (g_fs->IsDirectory(path + "scripting")) {
-				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename, "scripting");
-			}
+			{
+				std::set<std::string> scripts;
+				g_fs->FindFiles(path + "scripting", "*.lua", &scripts);
 
-			// Read initializations -- all scripts are initializations currently
-			const ScriptContainer& scripts =
-				egbase.lua().get_scripts_for("tribe_" + tribename);
-			container_iterate_const(ScriptContainer, scripts, s) {
-				std::unique_ptr<LuaTable> t =
-					egbase.lua().run_script("tribe_" + tribename, s->first);
+				// Read initializations -- all scripts are initializations currently
+				for (const std::string& script : scripts) {
+					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
 
-				m_initializations.resize(m_initializations.size() + 1);
-				Initialization & init = m_initializations.back();
-				init.    name = s->first;
-				init.descname = t->get_string("name");
-
-				try {
-					for
-						(Initialization const * i = &m_initializations.front();
-						 i < &init;
-						 ++i)
-							if (i->name == init.name)
-								throw game_data_error("duplicated");
-				} catch (const _wexception & e) {
-					throw game_data_error
-						("Initializations: \"%s\": %s",
-						 init.name.c_str(), e.what());
+					m_initializations.resize(m_initializations.size() + 1);
+					Initialization& init = m_initializations.back();
+					init.script = script;
+					init.descname = t->get_string("name");
 				}
 			}
 		} catch (const std::exception & e) {
@@ -376,19 +359,12 @@ bool Tribe_Descr::exists_tribe
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
 
 				std::string path = "tribes/" + name + "/scripting";
-				if (g_fs->IsDirectory(path)) {
-					std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-					lua.register_scripts(*sub_fs, "tribe_" + name, "");
-				}
-
-				const ScriptContainer& scripts = lua.get_scripts_for("tribe_" + name);
-				container_iterate_const(ScriptContainer, scripts, s) {
-					std::unique_ptr<LuaTable> t =
-						lua.run_script("tribe_" + name, s->first);
-
-					info->initializations.push_back
-						(TribeBasicInfo::Initialization
-						 	(s->first, t->get_string("name")));
+				std::set<std::string> scripts;
+				g_fs->FindFiles(path, "*.lua", &scripts);
+				for (const std::string& script : scripts) {
+					std::unique_ptr<LuaTable> t = lua.run_script(script);
+					info->initializations.push_back(
+					   TribeBasicInfo::Initialization(script, t->get_string("name")));
 				}
 			} catch (const _wexception & e) {
 				throw game_data_error

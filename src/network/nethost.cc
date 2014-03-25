@@ -283,31 +283,29 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerNumber(number);
 	}
 
-	virtual std::string getWinCondition() override {
-		return h->settings().win_condition;
+	virtual std::string getWinConditionScript() override {
+		return h->settings().win_condition_script;
 	}
 
-	virtual void setWinCondition(std::string wc) override {
-		h->setWinCondition(wc);
+	virtual void setWinConditionScript(std::string wc) override {
+		h->setWinConditionScript(wc);
 	}
 
 	virtual void nextWinCondition() override {
-		if (m_win_conditions.size() < 1) {
-			// Register win condition scripts
+		if (m_win_condition_scripts.size() < 1) {
 			if (!m_lua)
 				m_lua = new LuaInterface();
-			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-
-			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
-			container_iterate_const(ScriptContainer, sc, wc)
-			m_win_conditions.push_back(wc->first);
+			std::set<std::string> win_conditions;
+			g_fs->FindFiles("scripting/win_conditions", "*.lua", &win_conditions);
+			m_win_condition_scripts.insert(
+			   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
 			m_cur_wincondition = -1;
 		}
 
 		if (canChangeMap()) {
 			m_cur_wincondition++;
-			m_cur_wincondition %= m_win_conditions.size();
-			setWinCondition(m_win_conditions[m_cur_wincondition]);
+			m_cur_wincondition %= m_win_condition_scripts.size();
+			setWinConditionScript(m_win_condition_scripts[m_cur_wincondition]);
 		}
 	}
 
@@ -315,7 +313,7 @@ private:
 	NetHost                * h;
 	LuaInterface           * m_lua;
 	int16_t                  m_cur_wincondition;
-	std::vector<std::string> m_win_conditions;
+	std::vector<std::string> m_win_condition_scripts;
 };
 
 struct HostChatProvider : public ChatProvider {
@@ -832,7 +830,7 @@ void NetHost::run(bool const autorun)
 				Widelands::Game_Preload_Data_Packet gpdp;
 				gl.preload_game(gpdp);
 
-				setWinCondition(gpdp.get_win_condition());
+				setWinConditionScript(gpdp.get_win_condition());
 			}
 		} else {
 			loaderUI.reset(new UI::ProgressWindow ("pics/progress.png"));
@@ -857,7 +855,7 @@ void NetHost::run(bool const autorun)
 				Widelands::Game_Preload_Data_Packet gpdp;
 				gl.preload_game(gpdp);
 
-				setWinCondition(gpdp.get_win_condition());
+				setWinConditionScript(gpdp.get_win_condition());
 			}
 
 			if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
@@ -1799,9 +1797,9 @@ void NetHost::setPlayerNumber(uint8_t const number)
 	switchToPlayer(0, number);
 }
 
-void NetHost::setWinCondition(std::string wc)
+void NetHost::setWinConditionScript(std::string wc)
 {
-	d->settings.win_condition = wc;
+	d->settings.win_condition_script = wc;
 
 	// Broadcast changes
 	SendPacket s;
@@ -2133,7 +2131,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 
 	s.reset();
 	s.Unsigned8(NETCMD_WIN_CONDITION);
-	s.String(d->settings.win_condition);
+	s.String(d->settings.win_condition_script);
 	s.send(client.sock);
 
 	// Broadcast new information about the player to everybody
