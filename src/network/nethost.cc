@@ -295,7 +295,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (m_win_condition_scripts.size() < 1) {
 			if (!m_lua)
 				m_lua = new LuaInterface();
-			std::set<std::string> win_conditions= g_fs->ListDirectory("scripting/win_conditions");
+			std::set<std::string> win_conditions = g_fs->ListDirectory("scripting/win_conditions");
 			// NOCOM(#sirver): filter .lua
 			m_win_condition_scripts.insert(
 			   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());

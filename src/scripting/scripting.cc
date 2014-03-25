@@ -105,7 +105,8 @@ void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
 }
 
 // Runs the 'content' as a lua script identified by 'identifier' in 'L'.
-std::unique_ptr<LuaTable > run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
+std::unique_ptr<LuaTable>
+run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
 	// Get the current value of __file__
 	std::string last_file;
 	lua_getglobal(L, "__file__");
