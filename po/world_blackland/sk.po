@@ -5,19 +5,20 @@
 # Miroslav Remák <Unknown>, 2014.
 # Miroslav Remák <Unknown>, 2014.
 # Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-08 07:25+0000\n"
+"PO-Revision-Date: 2014-03-24 13:05+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:37+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-25 05:47+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: sk\n"
 
 #: ../../worlds/blackland/conf:2
@@ -99,131 +100,131 @@ msgstr "Kamene"
 
 #: ../../worlds/blackland/conf:46
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Osika (stará)"
 
 #: ../../worlds/blackland/conf:48
 msgid "Aspen (Mature)"
-msgstr ""
+msgstr "Osika (dospelá)"
 
 #: ../../worlds/blackland/conf:50
 msgid "Aspen (Pole)"
-msgstr ""
+msgstr "Osika (žrďovina)"
 
 #: ../../worlds/blackland/conf:52
 msgid "Aspen (Sapling)"
-msgstr ""
+msgstr "Osika (mladá)"
 
 #: ../../worlds/blackland/conf:53
 msgid "Oak (Old)"
-msgstr ""
+msgstr "Dub (starý)"
 
 #: ../../worlds/blackland/conf:54
 msgid "Oak (Mature)"
-msgstr ""
+msgstr "Dub (dospelý)"
 
 #: ../../worlds/blackland/conf:55
 msgid "Oak (Pole)"
-msgstr ""
+msgstr "Dub (žrďovina)"
 
 #: ../../worlds/blackland/conf:56
 msgid "Oak (Sapling)"
-msgstr ""
+msgstr "Dub (mladý)"
 
 #: ../../worlds/blackland/conf:57
 msgid "Spruce (Old)"
-msgstr ""
+msgstr "Smrek (starý)"
 
 #: ../../worlds/blackland/conf:58
 msgid "Spruce (Mature)"
-msgstr ""
+msgstr "Smrek (dospelý)"
 
 #: ../../worlds/blackland/conf:59
 msgid "Spruce (Pole)"
-msgstr ""
+msgstr "Smrek (žrďovina)"
 
 #: ../../worlds/blackland/conf:60
 msgid "Spruce (Sapling)"
-msgstr ""
+msgstr "Smrek (mladý)"
 
 #: ../../worlds/blackland/conf:61
 msgid "Maple (Old)"
-msgstr ""
+msgstr "Javor (starý)"
 
 #: ../../worlds/blackland/conf:62
 msgid "Maple (Mature)"
-msgstr ""
+msgstr "Javor (dospelý)"
 
 #: ../../worlds/blackland/conf:63
 msgid "Maple (Pole)"
-msgstr ""
+msgstr "Javor (žrďovina)"
 
 #: ../../worlds/blackland/conf:64
 msgid "Maple (Sapling)"
-msgstr ""
+msgstr "Javor (mladý)"
 
 #: ../../worlds/blackland/conf:65
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Breza (stará)"
 
 #: ../../worlds/blackland/conf:66
 msgid "Birch (Mature)"
-msgstr ""
+msgstr "Breza (dospelá)"
 
 #: ../../worlds/blackland/conf:67
 msgid "Birch (Pole)"
-msgstr ""
+msgstr "Breza (žrďovina)"
 
 #: ../../worlds/blackland/conf:68
 msgid "Birch (Sapling)"
-msgstr ""
+msgstr "Breza (mladá)"
 
 #: ../../worlds/blackland/conf:69
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Buk (starý)"
 
 #: ../../worlds/blackland/conf:70
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Buk (dospelý)"
 
 #: ../../worlds/blackland/conf:71
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Buk (žrďovina)"
 
 #: ../../worlds/blackland/conf:72
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Buk (mladý)"
 
 #: ../../worlds/blackland/conf:73
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Smrekovec (starý)"
 
 #: ../../worlds/blackland/conf:74
 msgid "Larch (Mature)"
-msgstr ""
+msgstr "Smrekovec (dospelý)"
 
 #: ../../worlds/blackland/conf:75
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Smrekovec (žrďovina)"
 
 #: ../../worlds/blackland/conf:76
 msgid "Larch (Sapling)"
-msgstr ""
+msgstr "Smrekovec (mladý)"
 
 #: ../../worlds/blackland/conf:77
 msgid "Rowan (Old)"
-msgstr ""
+msgstr "Jarabina (stará)"
 
 #: ../../worlds/blackland/conf:78
 msgid "Rowan (Mature)"
-msgstr ""
+msgstr "Jarabina (dospelá)"
 
 #: ../../worlds/blackland/conf:79
 msgid "Rowan (Pole)"
-msgstr ""
+msgstr "Jarabina (žrďovina)"
 
 #: ../../worlds/blackland/conf:80
 msgid "Rowan (Sapling)"
-msgstr ""
+msgstr "Jarabina (mladá)"
 
 #: ../../worlds/blackland/conf:83
 msgid "Bunny"

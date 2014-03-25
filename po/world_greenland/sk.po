@@ -3,19 +3,20 @@
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 # Miroslav Remák <Unknown>, 2014.
 # Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-08 07:26+0000\n"
+"PO-Revision-Date: 2014-03-24 13:06+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:37+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-25 05:47+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: sk\n"
 
 #: ../../worlds/greenland/conf:2
@@ -101,131 +102,131 @@ msgstr "Kamene"
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Osika (stará)"
 
 #: ../../worlds/greenland/conf:49
 msgid "Aspen (Mature)"
-msgstr ""
+msgstr "Osika (dospelá)"
 
 #: ../../worlds/greenland/conf:51
 msgid "Aspen (Pole)"
-msgstr ""
+msgstr "Osika (žrďovina)"
 
 #: ../../worlds/greenland/conf:53
 msgid "Aspen (Sapling)"
-msgstr ""
+msgstr "Osika (mladá)"
 
 #: ../../worlds/greenland/conf:54
 msgid "Oak (Old)"
-msgstr ""
+msgstr "Dub (starý)"
 
 #: ../../worlds/greenland/conf:55
 msgid "Oak (Mature)"
-msgstr ""
+msgstr "Dub (dospelý)"
 
 #: ../../worlds/greenland/conf:56
 msgid "Oak (Pole)"
-msgstr ""
+msgstr "Dub (žrďovina)"
 
 #: ../../worlds/greenland/conf:57
 msgid "Oak (Sapling)"
-msgstr ""
+msgstr "Dub (mladý)"
 
 #: ../../worlds/greenland/conf:58
 msgid "Spruce (Old)"
-msgstr ""
+msgstr "Smrek (starý)"
 
 #: ../../worlds/greenland/conf:59
 msgid "Spruce (Mature)"
-msgstr ""
+msgstr "Smrek (dospelý)"
 
 #: ../../worlds/greenland/conf:60
 msgid "Spruce (Pole)"
-msgstr ""
+msgstr "Smrek (žrďovina)"
 
 #: ../../worlds/greenland/conf:61
 msgid "Spruce (Sapling)"
-msgstr ""
+msgstr "Smrek (mladý)"
 
 #: ../../worlds/greenland/conf:62
 msgid "Alder (Old)"
-msgstr ""
+msgstr "Jelša (stará)"
 
 #: ../../worlds/greenland/conf:63
 msgid "Alder (Mature)"
-msgstr ""
+msgstr "Jelša (dospelá)"
 
 #: ../../worlds/greenland/conf:64
 msgid "Alder (Pole)"
-msgstr ""
+msgstr "Jelša (žrďovina)"
 
 #: ../../worlds/greenland/conf:65
 msgid "Alder (Sapling)"
-msgstr ""
+msgstr "Jelša (mladá)"
 
 #: ../../worlds/greenland/conf:66
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Breza (stará)"
 
 #: ../../worlds/greenland/conf:67
 msgid "Birch (Mature)"
-msgstr ""
+msgstr "Breza (dospelá)"
 
 #: ../../worlds/greenland/conf:68
 msgid "Birch (Pole)"
-msgstr ""
+msgstr "Breza (žrďovina)"
 
 #: ../../worlds/greenland/conf:69
 msgid "Birch (Sapling)"
-msgstr ""
+msgstr "Breza (mladá)"
 
 #: ../../worlds/greenland/conf:70
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Buk (starý)"
 
 #: ../../worlds/greenland/conf:71
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Buk (dospelý)"
 
 #: ../../worlds/greenland/conf:72
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Buk (žrďovina)"
 
 #: ../../worlds/greenland/conf:73
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Buk (mladý)"
 
 #: ../../worlds/greenland/conf:74
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Smrekovec (starý)"
 
 #: ../../worlds/greenland/conf:75
 msgid "Larch (Mature)"
-msgstr ""
+msgstr "Smrekovec (dospelý)"
 
 #: ../../worlds/greenland/conf:76
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Smrekovec (žrďovina)"
 
 #: ../../worlds/greenland/conf:77
 msgid "Larch (Sapling)"
-msgstr ""
+msgstr "Smrekovec (mladý)"
 
 #: ../../worlds/greenland/conf:78
 msgid "Rowan (Old)"
-msgstr ""
+msgstr "Jarabina (stará)"
 
 #: ../../worlds/greenland/conf:79
 msgid "Rowan (Mature)"
-msgstr ""
+msgstr "Jarabina (dospelá)"
 
 #: ../../worlds/greenland/conf:80
 msgid "Rowan (Pole)"
-msgstr ""
+msgstr "Jarabina (žrďovina)"
 
 #: ../../worlds/greenland/conf:81
 msgid "Rowan (Sapling)"
-msgstr ""
+msgstr "Jarabina (mladá)"
 
 #: ../../worlds/greenland/conf:84
 msgid "Badger"

@@ -2,19 +2,20 @@
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 # Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-08 07:25+0000\n"
+"PO-Revision-Date: 2014-03-24 13:06+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:37+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-25 05:47+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: cs\n"
 
 #: ../../worlds/desert/conf:2
@@ -112,7 +113,7 @@ msgstr "Kamene"
 #: ../../worlds/desert/conf:68
 #: ../../worlds/desert/conf:72
 msgid "Palm (Old)"
-msgstr ""
+msgstr "Palma (stará)"
 
 #: ../../worlds/desert/conf:55
 #: ../../worlds/desert/conf:61
@@ -120,7 +121,7 @@ msgstr ""
 #: ../../worlds/desert/conf:69
 #: ../../worlds/desert/conf:73
 msgid "Palm (Mature)"
-msgstr ""
+msgstr "Palma (dospelá)"
 
 #: ../../worlds/desert/conf:57
 #: ../../worlds/desert/conf:62
@@ -128,7 +129,7 @@ msgstr ""
 #: ../../worlds/desert/conf:70
 #: ../../worlds/desert/conf:74
 msgid "Palm (Pole)"
-msgstr ""
+msgstr "Palma (žrďovina)"
 
 #: ../../worlds/desert/conf:59
 #: ../../worlds/desert/conf:63
@@ -136,55 +137,55 @@ msgstr ""
 #: ../../worlds/desert/conf:71
 #: ../../worlds/desert/conf:75
 msgid "Palm (Sapling)"
-msgstr ""
+msgstr "Palma (mladá)"
 
 #: ../../worlds/desert/conf:76
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Buk (starý)"
 
 #: ../../worlds/desert/conf:77
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Buk (dospelý)"
 
 #: ../../worlds/desert/conf:78
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Buk (žrďovina)"
 
 #: ../../worlds/desert/conf:79
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Buk (mladý)"
 
 #: ../../worlds/desert/conf:80
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Smrekovec (starý)"
 
 #: ../../worlds/desert/conf:81
 msgid "Larch (Mature)"
-msgstr ""
+msgstr "Smrekovec (dospelý)"
 
 #: ../../worlds/desert/conf:82
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Smrekovec (žrďovina)"
 
 #: ../../worlds/desert/conf:83
 msgid "Larch (Sapling)"
-msgstr ""
+msgstr "Smrekovec (mladý)"
 
 #: ../../worlds/desert/conf:84
 msgid "Rowan (Old)"
-msgstr ""
+msgstr "Jarabina (stará)"
 
 #: ../../worlds/desert/conf:85
 msgid "Rowan (Mature)"
-msgstr ""
+msgstr "Jarabina (dospelá)"
 
 #: ../../worlds/desert/conf:86
 msgid "Rowan (Pole)"
-msgstr ""
+msgstr "Jarabina (žrďovina)"
 
 #: ../../worlds/desert/conf:87
 msgid "Rowan (Sapling)"
-msgstr ""
+msgstr "Jarabina (mladá)"
 
 #: ../../worlds/desert/conf:90
 msgid "Bunny"
