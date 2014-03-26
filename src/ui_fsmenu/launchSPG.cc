@@ -19,9 +19,12 @@
 
 #include "ui_fsmenu/launchSPG.h"
 
+#include <boost/algorithm/string/predicate.hpp>
+
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -30,6 +33,7 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
@@ -119,13 +123,14 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 			 (&Fullscreen_Menu_LaunchSPG::start_clicked, boost::ref(*this)));
 
 
-	// Register win condition scripts
 	m_lua = new LuaInterface();
-	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+	std::set<std::string> win_conditions =
+	   filter(g_fs->ListDirectory("scripting/win_conditions"),
+	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
 
-	ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
-	container_iterate_const(ScriptContainer, sc, wc)
-		m_win_conditions.push_back(wc->first);
+	m_win_condition_scripts.insert(
+	   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
+
 	m_cur_wincondition = -1;
 	win_condition_clicked();
 
@@ -217,8 +222,8 @@ void Fullscreen_Menu_LaunchSPG::win_condition_clicked()
 {
 	if (m_settings->canChangeMap()) {
 		m_cur_wincondition++;
-		m_cur_wincondition %= m_win_conditions.size();
-		m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
+		m_cur_wincondition %= m_win_condition_scripts.size();
+		m_settings->setWinConditionScript(m_win_condition_scripts[m_cur_wincondition]);
 	}
 
 	win_condition_update();
@@ -233,14 +238,11 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("Win condition is set through the scenario"));
 	} else {
-		std::unique_ptr<LuaTable> t = m_lua->run_script
-			("win_conditions", m_settings->getWinCondition());
-
 		try {
-
-			std::string name = t->get_string("name");
-			std::string descr = t->get_string("description");
-
+			std::unique_ptr<LuaTable> t =
+			   m_lua->run_script(m_settings->getWinConditionScript());
+			const std::string name = t->get_string("name");
+			const std::string descr = t->get_string("description");
 			m_wincondition.set_title(name);
 			m_wincondition.set_tooltip(descr.c_str());
 		} catch (LuaTableKeyError &) {

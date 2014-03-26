@@ -27,6 +27,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

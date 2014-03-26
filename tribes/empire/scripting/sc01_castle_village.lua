@@ -2,7 +2,7 @@
 --                 Empire Castle Village Starting Conditions
 -- =======================================================================
 
-use("aux", "infrastructure")
+include "scripting/infrastructure.lua"
 
 set_textdomain("tribe_empire")
 
@@ -116,7 +116,7 @@ return {
 
       place_building_in_region(plr, "stonemasons_house", sf:region(11))
    end) then
-      plr:send_message(_"Not enough space", _( 
+      plr:send_message(_"Not enough space", _(
 [[Some of your starting buildings didn’t have enough room and ]] ..
 [[weren’t built. You are at a disadvantage with this; consider restarting ]] ..
 [[this map with a fair starting condition.]]), {popup=true}

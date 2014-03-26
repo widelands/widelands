@@ -54,6 +54,7 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "single_player_game_controller.h"
 #include "sound/sound_handler.h"
@@ -138,8 +139,6 @@ Game::Game() :
 	m_replaywriter        (nullptr),
 	m_win_condition_displayname(_("Not set"))
 {
-	// Preload win_conditions as they are displayed in UI
-	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 }
 
 Game::~Game()
@@ -334,12 +333,10 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		std::unique_ptr<LuaTable> table
-			(lua().run_script
-			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
+		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		m_win_condition_displayname = table->get_string("name");
-		LuaCoroutine * cr = table->get_coroutine("func");
-		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
+		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr.release()));
 	} else {
 		m_win_condition_displayname = _("Scenario");
 	}
@@ -521,19 +518,17 @@ bool Game::run
 
 		// Run the init script, if the map provides one.
 		if (start_game_type == NewSPScenario)
-			enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
+			enqueue_command(new Cmd_LuaScript(get_gametime(), "map:scripting/init.lua"));
 		else if (start_game_type == NewMPScenario)
 			enqueue_command
-				(new Cmd_LuaScript(get_gametime(), "map", "multiplayer_init"));
+				(new Cmd_LuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 
 		// Queue first statistics calculation
 		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
-		const std::string registered_script =
-			lua().register_script(*g_fs, "commandline", script_to_run);
-		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, "commandline", registered_script));
+		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, script_to_run));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -1038,10 +1033,9 @@ void Game::sample_statistics()
 	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
 		iterate_players_existing(p, nr_plrs, *this, plr) {
-			LuaCoroutine * cr = hook->get_coroutine("calculator");
+			std::unique_ptr<LuaCoroutine> cr = hook->get_coroutine("calculator");
 			cr->push_arg(plr);
 			cr->resume(&custom_statistic[p - 1]);
-			delete cr;
 		}
 	}
 

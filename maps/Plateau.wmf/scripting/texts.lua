@@ -2,7 +2,7 @@
 --                     TEXTS - No logic inside this file
 -- =======================================================================
 
-use("aux", "formatting")
+include "scripting/formatting.lua"
 
 -- Removes whitespace at the beginning or the end and translates
 -- newlines into spaces.
@@ -47,9 +47,9 @@ obj_defeat_jomo = {
 -- Messages to the User
 -- =====================
 function _msg(title, text, ...)
-   local s = 
+   local s =
 "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=3333FF>"
-   .. title ..  "</p></rt><rt>" .. 
+   .. title ..  "</p></rt><rt>" ..
    "<rt><p line-spacing=3 font-size=12>" .. reflow(text)
    objs = {...}
    if #objs > 0 then
@@ -59,7 +59,7 @@ function _msg(title, text, ...)
          s = s .. reflow(objs[i].body) .. "<br>"
          i = i+1
       end
-      s = s .. reflow(objs[#objs].body) 
+      s = s .. reflow(objs[#objs].body)
    end
    return s .. "</p></rt>"
 end
@@ -69,8 +69,8 @@ end
 
 briefing_1_the_forbidden_island = {
    title =_ "First Briefing",
-   width = 400, 
-   height = 300, 
+   width = 400,
+   height = 300,
    posy = 1,
    body = _msg( _"The Forbidden Island", _(
 [[Finally! We have just taken our first step towards victory! ]] ..
@@ -80,9 +80,9 @@ briefing_1_the_forbidden_island = {
 [[so we should keep quiet and build up our infrastructure. Soon we will be strong enough to raid their positions.]])),
 }
 
-briefing_2_found_ancient_castle = { 
-   title =_ "Second Briefing", 
-   width = 400, 
+briefing_2_found_ancient_castle = {
+   title =_ "Second Briefing",
+   width = 400,
    height = 300,
    posy = 1,
    body = _msg(_"An Ancient Castle", _(
@@ -113,21 +113,21 @@ _([[It is amazing how far one can see from the highest tower of the castle. We c
 }
 
 briefing_erwyn_defeated = {
-   title=_ "Another Briefing", 
+   title=_ "Another Briefing",
    width = 400,
    height = 300,
    posy = 1,
    body = _msg( _"Erwyn Defeated", _
-[[Great! Erwyn gave up when he saw his last buildings burning down. That’s one less strong warlord on this island!]]), 
+[[Great! Erwyn gave up when he saw his last buildings burning down. That’s one less strong warlord on this island!]]),
 }
 
 briefing_jomo_defeated = {
-   title=_ "Another Briefing", 
-   width = 400, 
-   height = 300, 
-   posy = 1, 
+   title=_ "Another Briefing",
+   width = 400,
+   height = 300,
+   posy = 1,
    body= _msg( _"Jomo Defeated", _
-[[Great! Jomo gave up when he saw his last buildings burning down. That’s one less warlord on this island!]]), 
+[[Great! Jomo gave up when he saw his last buildings burning down. That’s one less warlord on this island!]]),
 }
 
 last_briefing_victory = {
@@ -140,4 +140,3 @@ last_briefing_victory = {
 _"Congratulations! You have mastered this scenario. You may play on if you like!"
 ),
 }
-

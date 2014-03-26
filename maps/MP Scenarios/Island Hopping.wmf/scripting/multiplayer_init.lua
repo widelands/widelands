@@ -1,10 +1,10 @@
 -- =================================
 -- Island Hopping Fun Map Scripting
 -- =================================
-use("aux", "coroutine")
-use("aux", "infrastructure")
-use("aux", "formatting")
-use("aux", "objective_utils")
+include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
+include "scripting/formatting.lua"
+include "scripting/objective_utils.lua"
 
 -- ==========
 -- Constants
@@ -135,9 +135,9 @@ function getplural(count, resource)
 end
 
 
-use("map", "texts")
-use("map", "hop_island")
-use("map", "first_island")
+include "map:scripting/texts.lua"
+include "map:scripting/hop_island.lua"
+include "map:scripting/first_island.lua"
 
 -- ===============
 -- Initialization

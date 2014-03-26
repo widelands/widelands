@@ -2,8 +2,8 @@
 -- Some formating functions
 -- =========================
 
-use("aux", "formatting")
-use("aux", "format_scenario")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)
@@ -27,7 +27,7 @@ obj_build_barracks = {
    name = "build_barracks",
    title=_"Build a barracks",
    number = 1,
-   body = objective_text(_"Barracks", 
+   body = objective_text(_"Barracks",
 [[• ]] .. _[[Build a barracks at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]]),
 }
 
@@ -35,7 +35,7 @@ obj_build_lumberjack = {
    name = "build_lumberjack",
    title=_"Build a lumberjack’s house",
    number = 1,
-   body = objective_text(_"Lumberjack’s House", 
+   body = objective_text(_"Lumberjack’s House",
 [[• ]] .. _[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]] .. "<br><br>" ..
 [[→ ]] .. _([[Cutting down enough trees for more buildings will take a while. ]] ..
 [[You can speed the game up by using PAGE UP and slow it down again with PAGE DOWN.]])),
@@ -45,7 +45,7 @@ obj_build_sawmill_and_lumberjacks = {
    name = "build_sawmill_and_lumberjacks",
    title=_"Build 2 lumberjack’s houses and a sawmill",
    number = 3,
-   body = objective_text(_"Two Lumberjack’s Houses and a Sawmill", 
+   body = objective_text(_"Two Lumberjack’s Houses and a Sawmill",
 [[• ]] .. _[[Build two more lumberjack’s houses and a sawmill as soon as there is enough space for them.]]),
 }
 
@@ -53,7 +53,7 @@ obj_build_forester = {
    name = "build_forester",
    title=_"Build a forester’s house",
    number = 1,
-   body = objective_text(_"Forester’s House", 
+   body = objective_text(_"Forester’s House",
 [[• ]] .. _[[Build a forester’s house to preserve the wood resources of this island.]]),
 }
 
@@ -61,7 +61,7 @@ obj_build_quarry = {
    name = "build_quarry",
    title=_"Build a quarry",
    number = 5,
-   body = objective_text(_"Quarry", 
+   body = objective_text(_"Quarry",
 [[• ]] .. _[[Build a quarry in the south to cut some stones and marble out of the rocks.]] .. "<br><br>" ..
 [[→ ]] .. _[[These might be used for future buildings.]]),
 }
@@ -229,4 +229,3 @@ safe_peninsula = {
    body= saledus(_"Saledus speaks:",
    _[[You have made this peninsula a very secure place. It is time to move on!]])
 }
-

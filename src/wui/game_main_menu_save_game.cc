@@ -199,16 +199,16 @@ void Game_Main_Menu_Save_Game::double_clicked(uint32_t) {
  */
 void Game_Main_Menu_Save_Game::fill_list() {
 	m_ls.clear();
-	filenameset_t m_gamefiles;
+	filenameset_t gamefiles;
 
 	//  Fill it with all files we find.
-	g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 0);
+	gamefiles = g_fs->ListDirectory(m_curdir);
 
 	Widelands::Game_Preload_Data_Packet gpdp;
 
 	for
-		(filenameset_t::iterator pname = m_gamefiles.begin();
-		 pname != m_gamefiles.end();
+		(filenameset_t::iterator pname = gamefiles.begin();
+		 pname != gamefiles.end();
 		 ++pname)
 	{
 		char const * const name = pname->c_str();

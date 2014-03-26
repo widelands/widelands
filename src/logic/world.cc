@@ -779,8 +779,7 @@ void World::get_all_worlds(std::vector<std::string> & result) {
 	result.clear();
 
 	//  get all worlds
-	filenameset_t m_worlds;
-	g_fs->FindFiles("worlds", "*", &m_worlds);
+	filenameset_t m_worlds = g_fs->ListDirectory("worlds");
 	for
 		(filenameset_t::iterator pname = m_worlds.begin();
 		 pname != m_worlds.end();

@@ -1,7 +1,7 @@
 -- =======================================================================
---                                Set test                               
+--                                Set test
 -- =======================================================================
-use("aux", "set")
+include "scripting/set.lua"
 
 set_basic_tests = lunit.TestCase("Set Basics")
 function set_basic_tests:test_creation()
@@ -93,7 +93,7 @@ function set_tests:test_intersection()
    assert_equal(Set:new{self.f3, self.f4}, self.s1 * self.s2)
    assert_equal(Set:new{self.f3, self.f4}, self.s2 * self.s1)
    assert_equal(self.s1, self.s1 * self.s3)
-   assert_equal(self.empty, self.s1 * self.empty) 
+   assert_equal(self.empty, self.s1 * self.empty)
 end
 
 function set_tests:test_iteration()
@@ -111,4 +111,3 @@ function set_tests:test_pop_at()
    self.s1:pop_at(1)
    assert_equal(0, self.s1.size)
 end
-

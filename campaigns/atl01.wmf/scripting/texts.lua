@@ -2,8 +2,8 @@
 --                 Texts for the Atlantean tutorial mission
 -- =======================================================================
 
-use("aux", "formatting")
-use("aux", "format_scenario")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
@@ -577,5 +577,3 @@ scenario_won = {
       )),
    },
 }
-
-

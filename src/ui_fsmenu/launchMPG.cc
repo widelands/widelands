@@ -33,6 +33,7 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
@@ -203,7 +204,6 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_wincondition_type.set_textstyle(ts_small());
 
 	m_lua = new LuaInterface();
-	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 	win_condition_clicked();
 
 	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -294,11 +294,9 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
-		std::unique_ptr<LuaTable> t = m_lua->run_script
-			("win_conditions", m_settings->getWinCondition());
+		std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->getWinConditionScript());
 
 		try {
-
 			std::string name = t->get_string("name");
 			std::string descr = t->get_string("description");
 

@@ -329,6 +329,11 @@ const char * FileSystem::FS_Filename(const char * p) {
 	return result;
 }
 
+std::string FileSystem::FS_Dirname(const std::string& full_path) {
+	const std::string filename = FS_Filename(full_path.c_str());
+	return full_path.substr(0, full_path.size() - filename.size());
+}
+
 std::string FileSystem::FS_FilenameExt(const std::string & f)
 {
 	// Find last '.' - denotes start of extension

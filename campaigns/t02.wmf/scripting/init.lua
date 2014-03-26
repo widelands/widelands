@@ -1,26 +1,25 @@
 -- =======================================================================
---                       Barbarians Campaign Mission 2                      
+--                       Barbarians Campaign Mission 2
 -- =======================================================================
 
 set_textdomain("scenario_t02.wmf")
 
-use("aux", "coroutine")
-use("aux", "objective_utils")
-use("aux", "infrastructure")
+include "scripting/coroutine.lua"
+include "scripting/objective_utils.lua"
+include "scripting/infrastructure.lua"
 
 -- ==========
--- Constants 
+-- Constants
 -- ==========
 plr = wl.Game().players[1]
 
 -- ===============
--- Initialization 
+-- Initialization
 -- ===============
-use("map", "starting_conditions")
+include "map:scripting/starting_conditions.lua"
 
 
 -- ==============
--- Mission Logic 
+-- Mission Logic
 -- ==============
-use("map", "mission_thread")
-
+include "map:scripting/mission_thread.lua"

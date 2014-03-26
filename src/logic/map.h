@@ -37,9 +37,10 @@
 #include "logic/widelands_geometry.h"
 #include "logic/world.h"
 
+class FileSystem;
+class Image;
 struct Overlay_Manager;
 struct S2_Map_Loader;
-class Image;
 
 namespace Widelands {
 
@@ -192,6 +193,9 @@ public:
 	void set_background (char const *);
 	void add_tag        (std::string);
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
+
+	// Allows access to the filesystem of the map to access auxiliary files.
+	FileSystem& filesystem() const;
 
 	// informational functions
 	const char * get_filename()    const {return m_filename;}
@@ -403,6 +407,9 @@ private:
 	std::vector<std::string> m_scenario_names;
 	std::vector<std::string> m_scenario_ais;
 	std::vector<bool>        m_scenario_closeables;
+
+	// The map file as a filesystem.
+	std::unique_ptr<FileSystem> filesystem_;
 
 	PortSpacesSet m_port_spaces;
 

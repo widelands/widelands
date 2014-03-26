@@ -1,4 +1,4 @@
-use("aux", "table")
+include "scripting/table.lua"
 
 test_table = lunit.TestCase("Auxilary table tests")
 function test_table:test_combine()
@@ -15,4 +15,3 @@ function test_table:test_combine()
    assert_equal("b", rv[4])
    assert_equal("c", rv[5])
 end
-

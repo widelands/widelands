@@ -488,6 +488,11 @@ bool Map::get_scenario_player_closeable(const Player_Number p) const
 	return m_scenario_closeables[p - 1];
 }
 
+FileSystem& Map::filesystem() const {
+	assert(filesystem_.get() != nullptr);
+	return *filesystem_;
+}
+
 void Map::set_scenario_player_tribe(Player_Number const p, const std::string & tribename)
 {
 	assert(p);
@@ -1678,7 +1683,7 @@ Map_Loader * Map::get_correct_loader(const std::string& filename) {
 
 	if (boost::algorithm::ends_with(filename, WLMF_SUFFIX)) {
 		try {
-			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
+			result = new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
 			//  If this fails, it is an illegal file (maybe old plain binary map
 			//  format)
