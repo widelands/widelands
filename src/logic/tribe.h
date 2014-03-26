@@ -206,7 +206,7 @@ struct Tribe_Descr : boost::noncopyable {
 	Military_Data get_military_data() const {return m_military_data;}
 
 	struct Initialization {
-		std::string          name;
+		std::string          script;
 		std::string          descname;
 	};
 	typedef std::vector<Initialization> Initializations;

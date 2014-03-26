@@ -30,7 +30,7 @@ hq:set_workers{
 }
 
 -- ==========
--- Constants 
+-- Constants
 -- ==========
 home = wl.Game().map:get_field(12,10)
 al_thunran = wl.Game().map:get_field(53, 43)
@@ -61,11 +61,11 @@ function add_obj(objective, player)
    return player:add_objective(objective.name, objective.title, objective.body)
 end
 
-use("aux", "coroutine")
-use("aux", "ui")
-use("aux", "table")
+include "scripting/coroutine.lua"
+include "scripting/ui.lua"
+include "scripting/table.lua"
 
-use("map", "texts")
+include "map:scripting/texts.lua"
 
-use("map", "initial_messages")
-use("map", "story_messages")
+include "map:scripting/initial_messages.lua"
+include "map:scripting/story_messages.lua"

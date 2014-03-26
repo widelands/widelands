@@ -18,7 +18,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = path.glob(dirname, "idle_*.png"),
+         pictures = path.glob(dirname, "idle_\\d+.png"),
          player_color_masks = {},
          hotspot = { 23, 58 },
          fps = 10,
@@ -27,7 +27,7 @@ world:new_immovable_type{
          },
       },
       falling = {
-         pictures = path.glob(dirname, "f_tree1_*.png"),
+         pictures = path.glob(dirname, "f_tree1_\\d+.png"),
          player_color_masks = {},
          hotspot = { 20, 59 },
          fps = 10,

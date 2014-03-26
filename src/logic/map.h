@@ -37,8 +37,8 @@
 #include "manager.h"
 #include "random.h"
 
+class FileSystem;
 class Image;
-class LuaInterface;
 struct Overlay_Manager;
 struct S2_Map_Loader;
 
@@ -194,6 +194,10 @@ public:
 	void set_background (char const *);
 	void add_tag        (std::string);
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
+
+	// Allows access to the filesystem of the map to access auxiliary files.
+	// This can be nullptr if this file is new.
+	FileSystem* filesystem() const;
 
 	// informational functions
 	const char * get_filename()    const {return m_filename;}
@@ -400,22 +404,12 @@ private:
 	std::vector<std::string> m_scenario_ais;
 	std::vector<bool>        m_scenario_closeables;
 
+	// The map file as a filesystem.
+	std::unique_ptr<FileSystem> filesystem_;
+
 	PortSpacesSet m_port_spaces;
 
 	Manager<Objective>  m_mom;
-
-	struct Extradata_Info {
-		enum Type {
-			PIC,
-		};
-		const Image* data;
-		std::string filename;
-		Type        type;
-	};
-	typedef std::vector<Extradata_Info> Extradata_Infos;
-
-	/// Extradata cache only for reading/writing
-	Extradata_Infos m_extradatainfos;
 
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(const World& world, FCoords);

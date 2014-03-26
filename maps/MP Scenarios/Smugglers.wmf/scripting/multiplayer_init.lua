@@ -1,11 +1,11 @@
 -- =================================
 -- Smugglers Fun Map
 -- =================================
-use("aux", "coroutine")
-use("aux", "infrastructure")
-use("aux", "formatting")
-use("aux", "objective_utils")
-use("aux", "set")
+include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
+include "scripting/formatting.lua"
+include "scripting/objective_utils.lua"
+include "scripting/set.lua"
 
 -- ==========
 -- Constants
@@ -44,8 +44,8 @@ function send_to_all(text)
    end
 end
 
-use("map", "texts")
-use("map", "smuggling")
+include "map:scripting/texts.lua"
+include "map:scripting/smuggling.lua"
 
 -- ================
 -- Initializations

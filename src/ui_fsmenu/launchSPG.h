@@ -86,7 +86,7 @@ private:
 	std::string               m_player_save_tribe[MAX_PLAYERS];
 	int8_t                    m_nr_players;
 	bool                      m_is_scenario;
-	std::vector<std::string>  m_win_conditions;
+	std::vector<std::string>  m_win_condition_scripts;
 	uint8_t                   m_cur_wincondition;
 };
 

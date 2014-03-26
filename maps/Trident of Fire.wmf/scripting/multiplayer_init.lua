@@ -2,12 +2,12 @@
 --                      Scenario Trident of Fire
 -- =======================================================================
 
-use("aux", "coroutine")
-use("aux", "table")
-use("aux", "infrastructure")
-use("aux", "objective_utils")
-use("aux", "ui")
-use("aux", "set")
+include "scripting/coroutine.lua"
+include "scripting/table.lua"
+include "scripting/infrastructure.lua"
+include "scripting/objective_utils.lua"
+include "scripting/ui.lua"
+include "scripting/set.lua"
 
 game = wl.Game()
 map = game.map
@@ -15,8 +15,8 @@ map = game.map
 -- p1 = game.players[1]
 -- p1.see_all = true
 
-use("map", "map_editing")
-use("map", "initial_conditions")
+include "map:scripting/map_editing.lua"
+include "map:scripting/initial_conditions.lua"
 
 hp1 = 0
 hp2 = 0
@@ -46,17 +46,17 @@ end
 
 if hp1 == 0 then
 	AIp1 = math.max(hp2,hp3) + 1
-else 
+else
 	AIp1 = 0
 end
 if hp2 == 0 then
 	AIp2 = math.max(hp1,hp3,AIp1) + 1
-else 
+else
 	AIp2 = 0
 end
 if hp3 == 0 then
 	AIp3 = 3
-else 
+else
 	AIp3 = 0
 end
 AIp4 = 4
@@ -125,5 +125,3 @@ end
 run(flooding)
 run(automatic_forester)
 run(volcano_eruptions)
-
-

@@ -35,7 +35,8 @@ class Map_Map_Object_Loader;
 
 /// Takes ownership of the filesystem that is passed to it.
 struct WL_Map_Loader : public Map_Loader {
-	WL_Map_Loader(FileSystem &, Map *);
+	// Takes ownership of 'fs'.
+	WL_Map_Loader(FileSystem* fs, Map *);
 	virtual ~WL_Map_Loader();
 
 	virtual int32_t preload_map(bool) override;
@@ -48,7 +49,7 @@ struct WL_Map_Loader : public Map_Loader {
 	}
 
 private:
-	FileSystem & m_fs;
+	FileSystem* m_fs;  // not owned (owned by Map).
 	std::string m_filename;
 	Map_Map_Object_Loader * m_mol;
 };

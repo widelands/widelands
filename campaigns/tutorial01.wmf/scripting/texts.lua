@@ -6,7 +6,7 @@
 -- Some formating functions
 -- =========================
 
-use("aux", "formatting")
+include "scripting/formatting.lua"
 
 -- =============
 -- Texts below
@@ -66,7 +66,7 @@ initial_message_02 = {
       p(_(
 [[It is easier to understand what type of buildings can be built on which field ]] ..
 [[when the symbols for the building spaces are enabled.]]) )..
-      p([[• ]] .. 
+      p([[• ]] ..
 _([[Do so now either by pressing SPACE or by clicking the fourth button from the left at the very bottom of the screen. ]] ..
 [[Right-click on this window and then give it a try.]])
       )
@@ -96,7 +96,7 @@ lumberjack_message_02 = {
 [[ – I am presented with all the medium buildings that I can build. ]] ..
 [[The lumberjack’s hut is a small building, so I will go on to select the small buildings tab. ]] ..
 [[Then I’ll choose the lumberjack’s hut.]])) ..
-      p([[• ]] .. 
+      p([[• ]] ..
 _([[Click the ‘OK’ button to watch me. ]] ..
 [[I’ll go really slowly: I will click – then select the tab – and finally I’ll choose the building.]])
     )
@@ -130,7 +130,7 @@ lumberjack_message_05 = {
    body = rt(p(_(
 [[Nice how they are working, isn’t it? But the poor carrier has a very long way to go. ]] ..
 [[We can make it easier for him (and more efficient for us) when we place another blue flag on the road.]])
-   ) .. p([[• ]] .. 
+   ) .. p([[• ]] ..
 _([[You try it this time: click on the yellow flag symbol in between the two blue flags we just placed and then click on the]])
       )) .. rt("image=pics/menu_build_flag.png", p(_ "build flag symbol.")
    ),
@@ -139,7 +139,7 @@ _([[You try it this time: click on the yellow flag symbol in between the two blu
    obj_body = rt(h1(_"Build a Flag on the Road") .. p(_(
 [[The shorter your road segments are, the faster your wares will be transported. ]] ..
 [[You should therefore make sure that your roads have as many flags as possible.]])) ..
-      p([[• ]] .. 
+      p([[• ]] ..
 _[[Build a blue flag now in the middle of the road that connects your headquarters to your lumberjack’s hut.]])
    )
 }
@@ -174,10 +174,10 @@ inform_about_stones = {
 [[Stones can be mined in granite mines, but the easier way is to build a quarry next to some stones lying around. ]] ..
 [[As it happens, there is a pile of them just to the west (left) of your headquarters. ]] ..
 [[I will teach you now how to move your view over there.]])
-      ) .. p([[→ ]] .. 
+      ) .. p([[→ ]] ..
 _([[There are two ways to move your view. The first one is using the cursor keys on your keyboard. ]] ..
 [[Go ahead and try this out.]])) ..
-      p([[• ]] .. 
+      p([[• ]] ..
 _[[Click the ‘OK’ button and then move the view using the cursor keys]]
       )
    ),
@@ -198,7 +198,7 @@ tell_about_right_drag_move = {
    title = _ "Other Ways to Move the View",
    body = rt(p(_
 [[Excellent. Now there is a faster way to move, using the mouse instead:]]
-   ) .. p([[• ]] .. 
+   ) .. p([[• ]] ..
 _([[Simply right-click-and-hold anywhere on the map, ]] ..
 [[then drag the mouse and instead of the cursor, the view will be moved. Try it.]])
       )
@@ -240,7 +240,7 @@ order_quarry_recap_how_to_build = {
    )) .. rt(p(_(
 [[If you place something on a field, the surrounding fields might have less space for holding buildings, ]] ..
 [[so choose your fields wisely.]])
-   )) .. rt(p([[• ]] .. 
+   )) .. rt(p([[• ]] ..
 _([[Now go ahead, try it. ]] ..
 [[The quarry is a small building, so if you click on a medium or big building symbol, ]] ..
 [[you will have to select the small buildings tab first to find it. Go on, check it out!]])
@@ -248,13 +248,13 @@ _([[Now go ahead, try it. ]] ..
    ),
    obj_name = "build_a_quarry",
    obj_title = _ "Build a quarry next to the stones",
-   obj_body = rt(h1(_ "Build a Quarry") .. p([[• ]] .. 
-_[[There are some stones to the west of your headquarters. Build a quarry right next to them.]]) .. p( 
+   obj_body = rt(h1(_ "Build a Quarry") .. p([[• ]] ..
+_[[There are some stones to the west of your headquarters. Build a quarry right next to them.]]) .. p(
 [[→ ]] .. _([[The quarry is a small building like the lumberjack’s hut. ]] ..
 [[You can therefore build it on any field that shows a red, ]] ..
 [[yellow or green house when the building spaces symbols are enabled (Press SPACE for that).]]
-   )) .. p([[→ ]] .. 
-_([[Just click on any house symbol next to the stones, select the small buildings tab in the window ]] .. 
+   )) .. p([[→ ]] ..
+_([[Just click on any house symbol next to the stones, select the small buildings tab in the window ]] ..
 [[that opens up, then click on the quarry symbol.]])
       )
    )
@@ -309,7 +309,7 @@ talk_about_roadbuilding_02 = {
 [[Keep the slopes in mind while placing roads and use them to your advantage. ]] ..
 [[Also, try to keep roads as short as possible and always remember to place ]] ..
 [[as many flags as you can on road segments to share the load better.]])
-   )) .. rt(p([[• ]] .. 
+   )) .. rt(p([[• ]] ..
 _([[Now please rebuild the road between your quarry and your headquarters. ]] ..
 [[We’ll wait until the quarry is completed.]])
    )),
@@ -318,7 +318,7 @@ _([[Now please rebuild the road between your quarry and your headquarters. ]] ..
    obj_body = rt(h1(_"Connect Your Construction Site") .. p(_(
 [[Connect your quarry construction site to your headquarters with a road. ]] ..
 [[You would have been put directly into road building mode after ordering a new site. But now, you aren’t.]])) ..
-      p([[→ ]] .. 
+      p([[→ ]] ..
 _([[To build a completely new road, just click on the flag in front of your construction site, ]] ..
 [[click on the build road icon and then click on the flag in front of your headquarters. ]] ..
 [[Wait for the completion of the quarry.]])
@@ -373,7 +373,7 @@ teaching_about_messages = {
 [[Then, you can click the]]
       ))) .. rt("image=pics/message_archive.png", p(_
 [[archive message button to move them into your archive.]]
-      )) .. rt(p([[• ]] .. 
+      )) .. rt(p([[• ]] ..
 _[[Archive all messages that you currently have in your inbox, including this one.]]
       )
    ),
@@ -383,9 +383,9 @@ _[[Archive all messages that you currently have in your inbox, including this on
 [[The message window is central to fully controlling your tribe’s fortune. ]] ..
 [[However, you will get a lot of messages in a real game. ]] ..
 [[To keep your head straight, you should try to keep the inbox empty. ]])
-      ) .. p([[• ]] .. 
+      ) .. p([[• ]] ..
 _[[Archive all your messages in your inbox now.]]
-      ) .. p([[→ ]] .. 
+      ) .. p([[→ ]] ..
 _([[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. ]] ..
 [[Then mark all messages by checking the check box in front of them. Then, click the ‘Archive All’ button.]])
       )
@@ -399,7 +399,7 @@ closing_msg_window_00 = {
    body = rt(p(_(
 [[Excellent. By the way: closing windows in Widelands is as easy as right-clicking on them. ]] ..
 [[This will work with all windows except for story message windows like this one. Go ahead and try it.]])
-      ) .. p([[• ]] .. 
+      ) .. p([[• ]] ..
 _[[First, close this window by pressing the button below, then right-click into the messages window to close it.]]
       )
    ),
@@ -408,7 +408,7 @@ _[[First, close this window by pressing the button below, then right-click into 
    obj_body = rt(h1(_"Close the Messages Window") .. p(_(
 [[All windows in Widelands can be closed by right-clicking into them. ]] ..
 [[Some windows can also be toggled with the buttons at the very bottom of the screen.]])
-      ) .. p([[• ]] .. 
+      ) .. p([[• ]] ..
 _[[Close the messages window now by right-clicking into it.]]
       )
    )
@@ -432,7 +432,7 @@ conclude_messages = {
    body = rt(p(_(
 [[A message has been sent to you. See how the button at the bottom of the screen has changed appearance? ]] ..
 [[You can burn this quarry down now as it is no longer of any use and just blocking space.]])
-      ) .. p([[• ]] .. 
+      ) .. p([[• ]] ..
 _[[To do that, click on the quarry and select the destroy button.]]
    ))
 }
@@ -455,9 +455,9 @@ introduce_expansion = {
 [[You can then burn it down again if you need the space. ]] ..
 [[But note that your land is then vulnerable: any military site from another player could conquer the land. ]] ..
 [[You therefore need military sites to keep military influence over your land.]])
-      ) .. p([[• ]] .. 
+      ) .. p([[• ]] ..
 _[[Let’s try it out now: build a few military buildings on your south-western border.]]
-      ) .. p([[→ ]] .. 
+      ) .. p([[→ ]] ..
 _([[We want to capture some of this mountain so we can search for resources there. ]] ..
 [[Bigger buildings will conquer more land, which can be beneficial close to mountains, ]] ..
 [[because you can’t build houses on mountains.]])
@@ -469,7 +469,7 @@ _([[We want to capture some of this mountain so we can search for resources ther
 [[For a full-fledged economy, we need coal, iron and gold. These can be found in mountains. ]] ..
 [[Conquer some area on the mountains to the south-west of your headquarters ]] ..
 [[by building some military buildings close to your border.]])
-      ) .. p([[→ ]] .. 
+      ) .. p([[→ ]] ..
 _([[You can choose from the following military buildings: sentry, donjon, barrier and fortress. ]] ..
 [[The bigger the building, the more expensive it is to build it, but it will also conquer a bigger region. ]] ..
 [[Sometimes, it is useful to build a big military building next to a mountain ]] ..
@@ -620,9 +620,9 @@ enhance_fortress = {
 [[Your soldiers will leave the fortress while the construction is going on. ]] ..
 [[This means that your fortress will lose its military influence. If an enemy occupies a military building nearby, ]] ..
 [[your construction site will burn down. No sweat, that won’t happen here.]])
-      ) .. p([[• ]] .. 
+      ) .. p([[• ]] ..
 _[[Enhance your fortress to a citadel now.]]
-      ) .. p([[→ ]] .. 
+      ) .. p([[→ ]] ..
 _([[Remember that you can speed time up by using PAGE_UP. ]] ..
 [[Building a citadel takes a while.]])
       )
@@ -631,7 +631,7 @@ _([[Remember that you can speed time up by using PAGE_UP. ]] ..
    obj_title = _"Enhance your fortress to a citadel",
    obj_body = rt(h1(_ "Enhance Your Fortress") .. p([[• ]] ..
 _[[Enhance your fortress to a mighty citadel.]]
-      ) .. p([[→ ]] .. 
+      ) .. p([[→ ]] ..
 _([[The citadel can house 12 soldiers and is the biggest military building the barbarians can build. ]] ..
 [[It also costs a lot of resources and takes a long time to build. ]] ..
 [[It is most suited to guard strategically important points like constricted points or mountains.]])
@@ -648,15 +648,15 @@ attack_enemey = {
 [[choose the number of soldiers that you wish to send and click on the attack button. ]] ..
 [[Your soldiers will come from all nearby military buildings. ]] ..
 [[Likewise, the defenders will come from all nearby military buildings of the enemy and intercept your forces.]])
-      ) .. p([[• ]] .. 
+      ) .. p([[• ]] ..
 _[[Attack and conquer all military buildings of the enemy and destroy their headquarters.]]
       )
    ),
    obj_name = "defeated_the_empire",
    obj_title = _ "Defeat the enemy tribe",
-   obj_body = rt(h1(_"Defeat Your Enemy") .. p([[• ]] .. 
+   obj_body = rt(h1(_"Defeat Your Enemy") .. p([[• ]] ..
 _[[Defeat the nearby enemy.]]
-      ) .. p([[→ ]] .. 
+      ) .. p([[→ ]] ..
 _([[To attack a building, click on its doors, choose the number of attacking soldiers, ]] ..
 [[then send them via the ‘Attack’ button.]])
       )
@@ -688,4 +688,3 @@ conclude_tutorial = {
    "<p font-size=24 font-decoration=underline>http://www.widelands.org</p>"
    )
 }
-

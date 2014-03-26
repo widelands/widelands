@@ -41,7 +41,7 @@ void Game_Map_Data_Packet::Read
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;
 
-	m_wml = new WL_Map_Loader(*fs.MakeSubFileSystem("map"), &game.map());
+	m_wml = new WL_Map_Loader(fs.MakeSubFileSystem("map"), &game.map());
 
 	m_wml->preload_map(true);
 

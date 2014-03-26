@@ -35,7 +35,7 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 	if (boost::algorithm::ends_with(filename, ".lua")) {
 		try {
 			LuaInterface lua;
-			std::unique_ptr<LuaTable> t(lua.run_script(*g_fs, filename));
+			std::unique_ptr<LuaTable> t(lua.run_script(filename));
 			*content = t->get_string("text");
 			*title = t->get_string("title");
 		} catch (LuaError & err) {

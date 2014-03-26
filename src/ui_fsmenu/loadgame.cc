@@ -299,7 +299,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		}
 	} else { // Normal case
 		// Fill it with all files we find.
-		g_fs->FindFiles("save", "*", &m_gamefiles, 0);
+		m_gamefiles = g_fs->ListDirectory("save");
 
 		Widelands::Game_Preload_Data_Packet gpdp;
 

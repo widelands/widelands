@@ -22,6 +22,7 @@
 #include <stdexcept>
 #include <string>
 
+#include <boost/algorithm/string/predicate.hpp>
 #ifdef _MSC_VER
 #include <ctype.h> // for tolower
 #endif
@@ -73,25 +74,6 @@ int check_return_value_for_errors(lua_State* L, int rv) {
 	return rv;
 }
 
-// Returns true if 's' is too short for having an extension.
-bool too_short_for_extension(const std::string & s) {
-	return s.size() < 4;
-}
-
-// Returns true if 's' ends with .lua.
-bool is_lua_file(const std::string& s) {
-	std::string ext = s.substr(s.size() - 4, s.size());
-	// std::transform fails on older system, therefore we use an explicit loop
-	for (uint32_t i = 0; i < ext.size(); i++) {
-#ifndef _MSC_VER
-		ext[i] = std::tolower(ext[i]);
-#else
-		ext[i] = tolower(ext[i]);
-#endif
-	}
-	return (ext == ".lua");
-}
-
 // Setup the basic Widelands functions and pushes egbase into the Lua registry
 // so that it is available for all the other Lua functions.
 void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
@@ -105,8 +87,8 @@ void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
 }
 
 // Runs the 'content' as a lua script identified by 'identifier' in 'L'.
-std::unique_ptr<LuaTable > run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
-	// NOCOM(#sirver): document __file__
+std::unique_ptr<LuaTable>
+run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
 	// Get the current value of __file__
 	std::string last_file;
 	lua_getglobal(L, "__file__");
@@ -140,6 +122,19 @@ std::unique_ptr<LuaTable > run_string_as_script(lua_State* L, const std::string&
 	lua_setglobal(L, "__file__");
 
 	return std::unique_ptr<LuaTable>(new LuaTable(L));
+}
+
+// Reads the 'filename' from the 'fs' and returns its content.
+std::string get_file_content(FileSystem* fs, const std::string& filename) {
+	if (!fs || !fs->FileExists(filename)) {
+		throw LuaScriptNotExistingError(filename);
+	}
+	size_t length;
+	void* input_data = fs->Load(filename, length);
+	const std::string data(static_cast<char*>(input_data));
+	// make sure the input_data is freed
+	free(input_data);
+	return data;
 }
 
 }  // namespace
@@ -183,59 +178,10 @@ LuaInterface::LuaInterface() {
 	// Also push the "wl" table.
 	lua_newtable(m_L);
 	lua_setglobal(m_L, "wl");
-
-	register_scripts(*g_fs, "aux", "scripting");
 }
 
 LuaInterface::~LuaInterface() {
 	lua_close(m_L);
-}
-
-const ScriptContainer& LuaInterface::get_scripts_for(const std::string& ns) {
-	return m_scripts[ns];
-}
-
-std::string LuaInterface::register_script
-	(FileSystem & fs, const std::string& ns, const std::string& path)
-{
-		size_t length;
-		void * input_data = fs.Load(path, length);
-		const std::string data(static_cast<char *>(input_data));
-		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
-
-		// make sure the input_data is freed
-		free(input_data);
-
-	   const size_t pos = name.find_last_of("/\\");
-	   if (pos != std::string::npos) {
-		   name = name.substr(pos + 1);
-	   }
-
-	   log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
-		m_scripts[ns][name] = data;
-
-		return name;
-}
-
-void LuaInterface::register_scripts
-	(FileSystem & fs, const std::string& ns, const std::string& subdir)
-{
-	filenameset_t scripting_files;
-
-	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
-	// but since FindFiles doesn't support globbing in Zips and most
-	// saved maps/games are zip, we have to work around this issue.
-	fs.FindFiles(subdir, "*", &scripting_files);
-
-	for
-		(filenameset_t::iterator i = scripting_files.begin();
-		 i != scripting_files.end(); ++i)
-	{
-		if (too_short_for_extension(*i) or not is_lua_file(*i))
-			continue;
-
-		register_script(fs, ns, *i);
-	}
 }
 
 void LuaInterface::interpret_string(const std::string& cmd) {
@@ -243,33 +189,22 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 	check_return_value_for_errors(m_L, rv);
 }
 
-std::unique_ptr<LuaTable> LuaInterface::run_script(FileSystem& fs, const std::string& path) {
-	try {
-		size_t length;
-		void* input_data = fs.Load(path, length);
-		const std::string data(static_cast<char*>(input_data));
-		// make sure the input_data is freed
-		free(input_data);
+std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
+	std::string content;
 
-		return run_string_as_script(m_L, path, data);
-	}
-	catch (File_error& e) {
-		throw LuaError(e.what());
-	}
-}
-
-std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& ns, const std::string& name) {
-	if (!m_scripts.count(ns) || !m_scripts[ns].count(name)) {
-		throw LuaScriptNotExistingError(ns, name);
+	if (boost::starts_with(path, "map:")) {
+		content = get_file_content(get_egbase(m_L).map().filesystem(), path.substr(4));
+	} else {
+		content = get_file_content(g_fs, path);
 	}
 
-	return run_string_as_script(m_L, ns + ":" + name, m_scripts[ns][name]);
+	return run_string_as_script(m_L, path, content);
 }
 
 /*
  * Returns a given hook if one is defined, otherwise returns 0
  */
-std::unique_ptr<LuaTable> LuaInterface::get_hook(std::string name) {
+std::unique_ptr<LuaTable> LuaInterface::get_hook(const std::string& name) {
 	lua_getglobal(m_L, "hooks");
 	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 1);

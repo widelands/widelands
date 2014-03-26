@@ -44,38 +44,19 @@ class LuaCoroutine;
 class LuaTable;
 
 // Provides an interface to call and execute Lua Code.
-typedef std::map<std::string, std::string> ScriptContainer;
 class LuaInterface {
 public:
 	LuaInterface();
 	virtual ~LuaInterface();
 
-	// Register all Lua files in the directory "subdir" in "fs" under the
-	// namespace "ns".
-	void register_scripts
-		(FileSystem & fs, const std::string& ns, const std::string& subdir);
-
-	// Register the Lua file "filename" in "fs" under the namespace "ns". Returns
-	// the name the script was registered, usually $(basename filename).
-	std::string register_script
-		(FileSystem & fs, const std::string& ns, const std::string& filename);
-
-	// Returns the scripts that have been registered for this namespace.
-	const ScriptContainer& get_scripts_for(const std::string&);
-
 	// Interpret the given string, will throw 'LuaError' on any error.
 	void interpret_string(const std::string&);
 
-	std::unique_ptr<LuaTable> run_script(const std::string& ns, const std::string& script);
-	std::unique_ptr<LuaTable> run_script(FileSystem&, const std::string& script);
-
-	std::unique_ptr<LuaTable> get_hook(std::string name);
+	std::unique_ptr<LuaTable> run_script(const std::string& script);
+	std::unique_ptr<LuaTable> get_hook(const std::string& name);
 
 protected:
 	lua_State * m_L;
-
-private:
-	std::map<std::string, ScriptContainer> m_scripts;
 };
 
 class LuaEditorInterface : public LuaInterface {

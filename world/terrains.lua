@@ -160,7 +160,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 20,
-   textures = path.glob("world/greenland_pics", "sumpf_*.png"),
+   textures = path.glob("world/greenland_pics", "sumpf_\\d+.png"),
    dither_layer = 30,
    fps = 14,
 }
@@ -199,7 +199,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob("world/greenland_pics", "lava_*.png"),
+   textures = path.glob("world/greenland_pics", "lava_\\d+.png"),
    dither_layer = 80,
    fps = 4,
 }
@@ -212,7 +212,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob("world/greenland_pics", "wasser_*.png"),
+   textures = path.glob("world/greenland_pics", "wasser_\\d+.png"),
    dither_layer = 0,
    fps = 14,
 }
@@ -410,7 +410,7 @@ world:new_terrain_type{
    valid_resources = { "fish" },
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob("world/blackland_pics", "water_*.png"),
+   textures = path.glob("world/blackland_pics", "water_\\d+.png"),
    dither_layer = 0,
    fps = 14,
 }
@@ -583,7 +583,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob("world/winterland_pics", "ice_flows_*.png"),
+   textures = path.glob("world/winterland_pics", "ice_flows_\\d+.png"),
    dither_layer = 10,
    fps = 5,
 }
@@ -596,7 +596,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob("world/winterland_pics", "ice_flows2_*.png"),
+   textures = path.glob("world/winterland_pics", "ice_flows2_\\d+.png"),
    dither_layer = 20,
    fps = 5,
 }
@@ -609,7 +609,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob("world/winterland_pics", "water*.png"),
+   textures = path.glob("world/winterland_pics", "water_\\d+.png"),
    dither_layer = 0,
    fps = 8,
 }
@@ -808,7 +808,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob("world/desert_pics", "wasser_*.png"),
+   textures = path.glob("world/desert_pics", "wasser_\\d+.png"),
    dither_layer = 0,
    fps = 5,
 }

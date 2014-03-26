@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_scenario")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)
@@ -9,7 +9,7 @@ function khantrukh(title, text)
 end
 
 -- =======================================================================
---                            Mission objectives                            
+--                            Mission objectives
 -- =======================================================================
 
 start_lumberjack_01 = {
@@ -40,7 +40,7 @@ start_lumberjack_01_02 = {
    name = "start_lumberjack_01_02",
    title = _ "Build a road to the lumberjack’s hut",
    number = 1,
-   body = objective_text(_"Road to the lumberjack’ hut", 
+   body = objective_text(_"Road to the lumberjack’ hut",
 [[• ]] .. _"Build a road between your headquarters and the construction site of the lumberjack’s hut." .. "<br><br>" ..
 [[→ ]] .. _"When you place the lumberjack’s hut, a flag is created for it. You need to connect it to another flag by building a road between them. If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it." .. "<br><br>" ..
 [[→ ]] .. _"The colors of these symbols indicate how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly)." .. "<br><br>" ..
@@ -97,7 +97,7 @@ start_quarries = {
 }
 
 -- =======================================================================
---                              Kankruth's texts                             
+--                              Kankruth's texts
 -- =======================================================================
 
 khantrukh_1= khantrukh(_"An old man says...",
@@ -134,18 +134,18 @@ _[[I would advise that we obtain stones for the future – who knows what fortif
 .. new_objectives(start_quarries)
 
 khantrukh_8 = khantrukh(_[[Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.]])
-..  objective_text(_"Victory", 
+..  objective_text(_"Victory",
    _[[You may continue to play this map if you wish. Otherwise, move on to the next mission.]]
 )
 
 -- =======================================================================
---                  General story texts by the chieftain                  
+--                  General story texts by the chieftain
 -- =======================================================================
 story_msg1 = {
    title = _"In the Night",
    msg = thron(_"Thron says...",
 _[[During another sleepless night, I went up to the hill and gazed towards the north. The fires are still burning, satisfying their hunger upon my father’s legacy.]] .. "<br><br>" ..
-_[[They are a constant reminder of why we have to hide here... and why we must return in the end!]]), 
+_[[They are a constant reminder of why we have to hide here... and why we must return in the end!]]),
 field = al_thunran,
 }
 
@@ -153,7 +153,7 @@ story_msg2= {
    title = _"At the Tomb",
    msg = thron(_"Thron says...",
 _[[Once again, I went up to my father’s tomb, in a sacred grove at the foot of the great spire of Kal’mavrath. I just stood there and felt neither the hours pass nor the cold rain pouring down from the darkened sky...]] .. "<br><br>" ..
-_[[Somehow, it felt like a farewell. For the first time, I wondered what the future might hold for me...]]), 
+_[[Somehow, it felt like a farewell. For the first time, I wondered what the future might hold for me...]]),
 field = grave,
 }
 
@@ -170,4 +170,3 @@ msg = thron(_"Thron looks furious...",
 _[[Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror as he told us of the atrocities taking place in Al’thunran.]] .. "<br><br>" ..
 _[[I hereby renew my oath – I will stop this madness at any cost!]])
 }
-

@@ -306,8 +306,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		// This is the normal case
 
 		//  Fill it with all files we find in all directories.
-		filenameset_t files;
-		g_fs->FindFiles(m_curdir, "*", &files);
+		filenameset_t files = g_fs->ListDirectory(m_curdir);
 
 		int32_t ndirs = 0;
 

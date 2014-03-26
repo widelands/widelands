@@ -34,12 +34,8 @@ public:
 	}
 };
 
-/*
- * Easy handling of return values from Wideland's Lua configurations
- * scripts: they return a Lua table with (string,value) pairs.
- // NOCOM(#sirver): these should xmove their value to their own lua_state,
- // so that the stack stays clean.
- */
+// Easy handling of return values from Wideland's Lua configurations scripts:
+// they return a Lua table with (string,value) pairs.
 class LuaTable {
 public:
 	explicit LuaTable(lua_State* L);

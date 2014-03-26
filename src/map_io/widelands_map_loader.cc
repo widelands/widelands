@@ -59,14 +59,15 @@
 
 namespace Widelands {
 
-WL_Map_Loader::WL_Map_Loader(FileSystem & fs, Map * const m)
+WL_Map_Loader::WL_Map_Loader(FileSystem* fs, Map * const m)
 	: Map_Loader("", *m), m_fs(fs), m_mol(nullptr)
-{}
+{
+	m->filesystem_.reset(fs);
+}
 
 
 WL_Map_Loader::~WL_Map_Loader() {
 	delete m_mol;
-	delete &m_fs;
 }
 
 /**
@@ -78,17 +79,17 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 
 	m_map.cleanup();
 
-	{Map_Elemental_Data_Packet mp; mp.Pre_Read(m_fs, &m_map);}
+	{Map_Elemental_Data_Packet mp; mp.Pre_Read(*m_fs, &m_map);}
 
 	{
 		Map_Player_Names_And_Tribes_Data_Packet p;
-		p.Pre_Read(m_fs, &m_map, !scenario);
+		p.Pre_Read(*m_fs, &m_map, !scenario);
 	}
 	// No scripting/init.lua file -> not playable as scenario
 	Map::ScenarioTypes m = Map::NO_SCENARIO;
-	if (m_fs.FileExists("scripting/init.lua"))
+	if (m_fs->FileExists("scripting/init.lua"))
 		m |= Map::SP_SCENARIO;
-	if (m_fs.FileExists("scripting/multiplayer_init.lua"))
+	if (m_fs->FileExists("scripting/multiplayer_init.lua"))
 		m |= Map::MP_SCENARIO;
 	m_map.set_scenario_types(m);
 
@@ -113,7 +114,7 @@ int32_t WL_Map_Loader::load_map_complete
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
 	log("Reading Elemental Data ... ");
-	{Map_Elemental_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Elemental_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps(); //  Can do this now that map size is known.
@@ -122,92 +123,92 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Reading Player Names And Tribe Data ... ");
 	{
 		Map_Player_Names_And_Tribes_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, *m_mol);
+		p.Read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 	// PRELOAD DATA END
 
-	if (m_fs.FileExists("port_spaces")) {
+	if (m_fs->FileExists("port_spaces")) {
 		log("Reading Port Spaces Data ... ");
 
 		Map_Port_Spaces_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, *m_mol);
+		p.Read(*m_fs, egbase, !scenario, *m_mol);
 
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 
 	log("Reading Heights Data ... ");
-	{Map_Heights_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Heights_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Terrain Data ... ");
-	{Map_Terrain_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Terrain_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	Map_Object_Packet mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.Read(m_fs, egbase, *m_mol);
+	mapobjects.Read(*m_fs, egbase, *m_mol);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
 	{
 		Map_Player_Position_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, *m_mol);
+		p.Read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	bool have_oldbobs = m_fs.FileExists("binary/bob");
+	bool have_oldbobs = m_fs->FileExists("binary/bob");
 	if (have_oldbobs) {
 		log("Reading Bob Data ... ");
 		{
 			Map_Bob_Data_Packet p;
-			p.Read(m_fs, egbase, !scenario, *m_mol);
+			p.Read(*m_fs, egbase, !scenario, *m_mol);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Reading Resources Data ... ");
-	{Map_Resources_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Resources_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Reading Map Extra Data ... ");
-	{Map_Extradata_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Extradata_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Map Version Data ... ");
-	{Map_Version_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Version_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 
 	log("Reading Allowed Worker Types Data ... ");
 	{
 		Map_Allowed_Worker_Types_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, *m_mol);
+		p.Read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Allowed Building Types Data ... ");
 	{
 		Map_Allowed_Building_Types_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, *m_mol);
+		p.Read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Node Ownership Data ... ");
-	{Map_Node_Ownership_Data_Packet p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Node_Ownership_Data_Packet p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Exploration Data ... ");
-	{Map_Exploration_Data_Packet    p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Exploration_Data_Packet    p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading AreaWatchers Data ... ");
 	{
 		Map_Players_AreaWatchers_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, *m_mol);
+		p.Read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
@@ -219,47 +220,47 @@ int32_t WL_Map_Loader::load_map_complete
 	//  this order without knowing what you do
 	//  EXISTENT PACKETS
 	log("Reading Flag Data ... ");
-	{Map_Flag_Data_Packet           p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Flag_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Road Data ... ");
-	{Map_Road_Data_Packet           p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Road_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Building Data ... ");
-	{Map_Building_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Building_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	bool have_oldwares = m_fs.FileExists("binary/ware");
+	bool have_oldwares = m_fs->FileExists("binary/ware");
 	if (have_oldwares) {
 		log("Reading Map Ware Data ... ");
-		{Map_Ware_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		{Map_Ware_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	//  DATA PACKETS
 	log("Reading Flagdata Data ... ");
-	{Map_Flagdata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Flagdata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Roaddata Data ... ");
-	{Map_Roaddata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Roaddata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 
 	log("Reading Buildingdata Data ... ");
-	{Map_Buildingdata_Data_Packet   p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Buildingdata_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (have_oldwares) {
 		log("Reading Waredata Data ... ");
-		{Map_Waredata_Data_Packet    p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		{Map_Waredata_Data_Packet    p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	if (have_oldbobs) {
 		log("Reading Bobdata Data ... ");
-		{Map_Bobdata_Data_Packet p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+		{Map_Bobdata_Data_Packet p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 	}
 
@@ -281,7 +282,7 @@ int32_t WL_Map_Loader::load_map_complete
 	//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
 	//  Must be loaded after every kind of object that can see.
 	log("Reading Players View Data ... ");
-	{Map_Players_View_Data_Packet   p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Players_View_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  This must come before anything that references messages, such as:
@@ -290,17 +291,17 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Reading Player Message Data ... ");
 	{
 		Map_Players_Messages_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, *m_mol);
+		p.Read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  Objectives
 	log("Reading Objective Data ... ");
-	{Map_Objective_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Objective_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Scripting Data ... ");
-	{Map_Scripting_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	{Map_Scripting_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (m_mol->get_nr_unloaded_objects())

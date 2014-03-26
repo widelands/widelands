@@ -32,8 +32,8 @@ public:
 
 class LuaScriptNotExistingError : public LuaError {
 public:
-	LuaScriptNotExistingError(std::string ns, std::string name)
-	   : LuaError("The script '" + ns + ":" + name + "' was not found!") {
+	LuaScriptNotExistingError(const std::string& name)
+	   : LuaError("The script '" + name + "' was not found!") {
 	}
 };
 

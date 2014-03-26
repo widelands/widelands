@@ -19,6 +19,9 @@
 
 #include "scripting/lua_path.h"
 
+#include <regex>
+
+#include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace LuaPath {
@@ -54,6 +57,7 @@ Module Functions
    :returns: The basename.
 */
 static int L_basename(lua_State * L) {
+	// NOCOM(#sirver): use FS_Filename
 	std::string filename = luaL_checkstring(L, -1);
 	const size_t found = filename.rfind("/");
 	if (found != std::string::npos) {
@@ -74,6 +78,7 @@ static int L_basename(lua_State * L) {
 */
 static int L_dirname(lua_State * L) {
 	// NOCOM(#sirver): trim / from return value
+	// // NOCOM(#sirver): use FS_Dirname
 	std::string filename = luaL_checkstring(L, -1);
 	const size_t found = filename.rfind("/");
 	if (found != std::string::npos) {
@@ -83,12 +88,16 @@ static int L_dirname(lua_State * L) {
 }
 
 // NOCOM(#sirver): document
+// NOCOM(#sirver): test?
+// // NOCOM(#sirver): rename - not glob, but find files?
 static int L_glob(lua_State * L) {
 	const std::string dir = luaL_checkstring(L, -2);
-	const std::string glob = luaL_checkstring(L, -1);
+	const std::string re_as_string = luaL_checkstring(L, -1);
 
-	filenameset_t files;
-	g_fs->FindFiles(dir, glob, &files);
+	std::regex re(re_as_string);
+	std::set<std::string> files = filter(g_fs->ListDirectory(dir), [&re](const std::string& filename) {
+		return regex_match(FileSystem::FS_Filename(filename.c_str()), re);
+	});
 	lua_newtable(L);
 	int idx = 1;
 

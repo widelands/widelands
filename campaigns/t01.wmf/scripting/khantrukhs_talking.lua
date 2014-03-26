@@ -1,18 +1,18 @@
 -- ======================
--- Messages by Khantrukh 
+-- Messages by Khantrukh
 -- ======================
 
-use("map", "texts")
-use("aux", "coroutine")
-use("aux", "objective_utils")
+include "map:scripting/texts.lua"
+include "scripting/coroutine.lua"
+include "scripting/objective_utils.lua"
 
-function check_quarries() 
+function check_quarries()
    while not check_for_buildings(p, {quarry = 2},
       wl.Game().map:get_field(8,13):region(3)) do sleep(5000) end
    objq.done = true
 end
 
-function check_ranger() 
+function check_ranger()
    while not check_for_buildings(p, {rangers_hut = 1},
       wl.Game().map:get_field(17,11):region(3)) do sleep(5000) end
    objr.done = true
@@ -61,4 +61,3 @@ function tutorial_thread()
 end
 
 run(tutorial_thread)
-

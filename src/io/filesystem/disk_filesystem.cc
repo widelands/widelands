@@ -96,17 +96,7 @@ bool RealFSImpl::FileIsWriteable(const std::string & path) {
 }
 
 
-/**
- * Returns the number of files found, and stores the filenames (without the
- * pathname) in the results. There doesn't seem to be an even remotely
- * cross-platform way of doing this
- */
-// note: the Win32 version may be broken, feel free to fix it
-int32_t RealFSImpl::FindFiles
-	(const std::string & path,
-	 const std::string & pattern,
-	 filenameset_t     * results,
-	 uint32_t)
+std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 {
 #ifdef _WIN32
 	std::string buf;
@@ -114,9 +104,9 @@ int32_t RealFSImpl::FindFiles
 	long hFile;
 
 	if (path.size())
-		buf = m_directory + '\\' + path + '\\' + pattern;
+		buf = m_directory + '\\' + path + "\\*";
 	else
-		buf = m_directory + '\\' + pattern;
+		buf = m_directory + "\\*";
 
 	hFile = _findfirst(buf.c_str(), &c_file);
 	if (hFile == -1)
@@ -124,55 +114,46 @@ int32_t RealFSImpl::FindFiles
 
 	std::string realpath = path;
 
-	// Check if path is relative - both \ and / are possibly used depending on the file we work on,
-	// so we have to check for both.
-	if ((not pattern.compare(0, 3, "../")) || (not pattern.compare(0, 3, "..\\"))) {
-		// Workaround: If pattern is a relative we need to fix the path
-		std::string m_root_save(m_root); // save orginal m_root
-		m_root = FS_CanonicalizeName(path);
-		realpath = FS_CanonicalizeName(pattern);
-		realpath = realpath.substr(0, realpath.rfind('\\'));
-		m_root = m_root_save; // reset m_root
-	}
-
+	std::set<std::string> results;
 	if (!realpath.empty()) realpath.append("\\");
 	do {
-		results->insert(realpath + c_file.name);
+		const std::string filename = FS_CanonicalizeName(realpath + c_file.name);
+		results.insert(filename.substr(m_root.size() + 1));
 	} while (_findnext(hFile, &c_file) == 0);
 
 	_findclose(hFile);
 
-	return results->size();
+	return results;
 #else
 	std::string buf;
 	glob_t gl;
-	int32_t i, count;
 	int32_t ofs;
 
 	if (path.size()) {
 		if (pathIsAbsolute(path)) {
-			buf = path + '/' + pattern;
+			buf = path + "/*";
 			ofs = 0;
 		} else {
-			buf = m_directory + '/' + path + '/' + pattern;
+			buf = m_directory + '/' + path + "/*";
 			ofs = m_directory.length() + 1;
 		}
 	} else {
-		buf = m_directory + '/' + pattern;
+		buf = m_directory + "/*";
 		ofs = m_directory.length() + 1;
 	}
+	std::set<std::string> results;
+
 	if (glob(buf.c_str(), 0, nullptr, &gl))
-		return 0;
+		return results;
 
-	count = gl.gl_pathc;
-
-	for (i = 0; i < count; ++i) {
-		results->insert(&gl.gl_pathv[i][ofs]);
+	for (size_t i = 0; i < gl.gl_pathc; ++i) {
+		const std::string filename(FS_CanonicalizeName(&gl.gl_pathv[i][ofs]));
+		results.insert(filename.substr(m_root.size() + 1));
 	}
 
 	globfree(&gl);
 
-	return count;
+	return results;
 #endif
 }
 
@@ -263,10 +244,7 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 	assert(fspath.m_exists);  //TODO: throw an exception instead
 	assert(fspath.m_isDirectory);  //TODO: throw an exception instead
 
-	filenameset_t files;
-
-	FindFiles(file, "*", &files);
-
+	filenameset_t files = ListDirectory(file);
 	for
 		(filenameset_t::iterator pname = files.begin();
 		 pname != files.end();

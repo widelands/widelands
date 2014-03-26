@@ -308,14 +308,6 @@ void Map::cleanup() {
 	m_overlay_manager.reset();
 	mom().remove_all();
 
-	//  Remove all extra data. Pay attention here, maybe some freeing would be
-	//  needed.
-#ifndef NDEBUG
-	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
-		assert(m_extradatainfos[i].type == Extradata_Info::PIC);
-	}
-#endif
-	m_extradatainfos.clear();
 	m_port_spaces.clear();
 }
 
@@ -480,6 +472,10 @@ bool Map::get_scenario_player_closeable(const Player_Number p) const
 	assert(p);
 	assert(p <= get_nrplayers());
 	return m_scenario_closeables[p - 1];
+}
+
+FileSystem* Map::filesystem() const {
+	return filesystem_.get();
 }
 
 void Map::set_scenario_player_tribe(Player_Number const p, const std::string & tribename)
@@ -1644,7 +1640,7 @@ Map_Loader * Map::get_correct_loader(const std::string& filename) {
 
 	if (boost::algorithm::ends_with(filename, WLMF_SUFFIX)) {
 		try {
-			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
+			result = new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
 			//  If this fails, it is an illegal file (maybe old plain binary map
 			//  format)

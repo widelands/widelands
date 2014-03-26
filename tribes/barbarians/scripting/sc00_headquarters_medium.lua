@@ -2,7 +2,7 @@
 --                 Start conditions for Headquarters Medium
 -- =======================================================================
 
-use("aux", "infrastructure")
+include "scripting/infrastructure.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -70,4 +70,3 @@ end
 }
 
 return init
-

@@ -43,9 +43,9 @@ namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
 
-struct Path;
-class Player;
 class Map_Map_Object_Loader;
+class Player;
+struct Path;
 
 /**
  * Base class for descriptions of worker, files and so on. This must just

@@ -68,21 +68,9 @@ bool ZipFilesystem::IsWritable() const {
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-int32_t ZipFilesystem::FindFiles
-	(const std::string & path_in,
-#ifndef NDEBUG
-	 const std::string & pattern,
-#else
-	 const std::string &,
-#endif
-	 filenameset_t     * const results,
-	 uint32_t)
-{
+std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
 	m_OpenUnzip();
 
-	// If you need something else, implement a proper glob() here. I do not want
-	// to! -- Holger
-	assert(pattern == "*");
 	assert(path_in.size()); //  prevent invalid read below
 
 	std::string path = m_basename;
@@ -99,6 +87,7 @@ int32_t ZipFilesystem::FindFiles
 
 	unz_file_info file_info;
 	char filename_inzip[256];
+	std::set<std::string> results;
 	for (;;) {
 		unzGetCurrentFileInfo
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
@@ -116,12 +105,12 @@ int32_t ZipFilesystem::FindFiles
 		if
 			(('/' + path == filepath || path == filepath || path.length() == 1)
 			 && filename.size())
-		results->insert(complete_filename.substr(m_basename.size()));
+		results.insert(complete_filename.substr(m_basename.size()));
 
 		if (unzGoToNextFile(m_unzipfile) == UNZ_END_OF_LIST_OF_FILE)
 			break;
 	}
-	return results->size();
+	return results;
 }
 
 /**
@@ -597,4 +586,3 @@ std::string ZipFilesystem::strip_basename(std::string filename)
 		return filename.substr(1);
 	return filename;
 }
-
