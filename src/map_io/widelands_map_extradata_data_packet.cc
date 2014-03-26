@@ -53,8 +53,7 @@ void Map_Extradata_Data_Packet::Read
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Map & map = egbase.map();
-			//  Nothing more. But read all pics.
+			// Read all pics.
 			if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
 				filenameset_t pictures = fs.ListDirectory("pics");
 				for
@@ -80,16 +79,6 @@ void Map_Extradata_Data_Packet::Read
 						image = g_gr->images().get(hash);
 					}
 					assert(image);
-
-					//  OK, the pic is now known to the game. But when the game is
-					//  saved, this data has to be regenerated.
-					Map::Extradata_Info info;
-					info.type     = Map::Extradata_Info::PIC;
-					info.filename = *pname;
-					info.data     = image;
-					// replace \ with / in path or pics won't be saved on Windows
-					std::replace(info.filename.begin(), info.filename.end(), '\\', '/');
-					map.m_extradatainfos.push_back(info);
 				}
 			}
 		} else
@@ -108,21 +97,17 @@ void Map_Extradata_Data_Packet::Write
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	//  Nothing more. All pics in the dir pic are loaded as pictures.
-	const Map::Extradata_Infos & extradatainfos =
-		egbase.map().m_extradatainfos;
-	for (uint32_t i = 0; i < extradatainfos.size(); ++i) {
-		const Map::Extradata_Info & edi = extradatainfos[i];
-		assert(edi.type == Map::Extradata_Info::PIC);
-
+	// Copy all files from pics/ from the old map to the new.
+	FileSystem& map_fs = egbase.map().filesystem();
+	if (map_fs.FileExists("pics") and map_fs.IsDirectory("pics")) {
 		fs.EnsureDirectoryExists("pics");
-		FileWrite fw;
-
-		g_gr->save_png(edi.data, &fw);
-
-		fw.Write(fs, edi.filename.c_str());
+		for (const std::string& picture : map_fs.ListDirectory("pics")) {
+		size_t length;
+		void* input_data = map_fs.Load(picture, length);
+		fs.Write(picture, input_data, length);
+		free(input_data);
+		}
 	}
-
 	prof.write("extra_data", false, fs);
 }
 

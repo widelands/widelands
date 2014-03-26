@@ -415,19 +415,6 @@ private:
 
 	Manager<Objective>  m_mom;
 
-	struct Extradata_Info {
-		enum Type {
-			PIC,
-		};
-		const Image* data;
-		std::string filename;
-		Type        type;
-	};
-	typedef std::vector<Extradata_Info> Extradata_Infos;
-
-	/// Extradata cache only for reading/writing
-	Extradata_Infos m_extradatainfos;
-
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(FCoords);
 	void recalc_nodecaps_pass2(const FCoords & f);

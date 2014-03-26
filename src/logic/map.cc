@@ -311,14 +311,6 @@ void Map::cleanup() {
 	m_overlay_manager.reset();
 	mom().remove_all();
 
-	//  Remove all extra data. Pay attention here, maybe some freeing would be
-	//  needed.
-#ifndef NDEBUG
-	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
-		assert(m_extradatainfos[i].type == Extradata_Info::PIC);
-	}
-#endif
-	m_extradatainfos.clear();
 	m_port_spaces.clear();
 }
 
