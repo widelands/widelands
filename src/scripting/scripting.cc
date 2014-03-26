@@ -73,25 +73,6 @@ int check_return_value_for_errors(lua_State* L, int rv) {
 	return rv;
 }
 
-// Returns true if 's' is too short for having an extension.
-bool too_short_for_extension(const std::string & s) {
-	return s.size() < 4;
-}
-
-// Returns true if 's' ends with .lua.
-bool is_lua_file(const std::string& s) {
-	std::string ext = s.substr(s.size() - 4, s.size());
-	// std::transform fails on older system, therefore we use an explicit loop
-	for (uint32_t i = 0; i < ext.size(); i++) {
-#ifndef _MSC_VER
-		ext[i] = std::tolower(ext[i]);
-#else
-		ext[i] = tolower(ext[i]);
-#endif
-	}
-	return (ext == ".lua");
-}
-
 // Setup the basic Widelands functions and pushes egbase into the Lua registry
 // so that it is available for all the other Lua functions.
 void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
@@ -143,9 +124,12 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 }
 
 // Reads the 'filename' from the 'fs' and returns its content.
-std::string get_file_content(FileSystem& fs, const std::string& filename) {
+std::string get_file_content(FileSystem* fs, const std::string& filename) {
+	if (!fs || !fs->FileExists(filename)) {
+		throw LuaScriptNotExistingError(filename);
+	}
 	size_t length;
-	void* input_data = fs.Load(filename, length);
+	void* input_data = fs->Load(filename, length);
 	const std::string data(static_cast<char*>(input_data));
 	// make sure the input_data is freed
 	free(input_data);
@@ -203,15 +187,11 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
 	std::string content;
-	try {
-		if (boost::starts_with(path, "map:")) {
-			content = get_file_content(get_egbase(m_L).map().filesystem(), path.substr(4));
-		} else {
-			content = get_file_content(*g_fs, path);
-		}
-	}
-	catch (File_error& e) {
-		throw LuaError(e.what());
+
+	if (boost::starts_with(path, "map:")) {
+		content = get_file_content(get_egbase(m_L).map().filesystem(), path.substr(4));
+	} else {
+		content = get_file_content(g_fs, path);
 	}
 
 	return run_string_as_script(m_L, path, content);

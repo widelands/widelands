@@ -28,7 +28,6 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
@@ -73,13 +72,16 @@ void Map_Scripting_Data_Packet::Write
 {
 	fs.EnsureDirectoryExists("scripting");
 
-	for (const std::string& script :
-	     filter(egbase.map().filesystem().ListDirectory("scripting"),
-	            [](const std::string& fn) {return boost::ends_with(fn, ".lua");})) {
-		size_t length;
-		void* input_data = egbase.map().filesystem().Load(script, length);
-		fs.Write(script, input_data, length);
-		free(input_data);
+	FileSystem* map_fs = egbase.map().filesystem();
+	if (map_fs) {
+		for (const std::string& script :
+		     filter(map_fs->ListDirectory("scripting"),
+		            [](const std::string& fn) { return boost::ends_with(fn, ".lua"); })) {
+			size_t length;
+			void* input_data = map_fs->Load(script, length);
+			fs.Write(script, input_data, length);
+			free(input_data);
+		}
 	}
 
 	// Dump the global environment if this is a game and not in the editor

@@ -480,9 +480,8 @@ bool Map::get_scenario_player_closeable(const Player_Number p) const
 	return m_scenario_closeables[p - 1];
 }
 
-FileSystem& Map::filesystem() const {
-	assert(filesystem_.get() != nullptr);
-	return *filesystem_;
+FileSystem* Map::filesystem() const {
+	return filesystem_.get();
 }
 
 void Map::set_scenario_player_tribe(Player_Number const p, const std::string & tribename)

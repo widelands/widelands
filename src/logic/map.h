@@ -195,7 +195,8 @@ public:
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
 
 	// Allows access to the filesystem of the map to access auxiliary files.
-	FileSystem& filesystem() const;
+	// This can be nullptr if this file is new.
+	FileSystem* filesystem() const;
 
 	// informational functions
 	const char * get_filename()    const {return m_filename;}

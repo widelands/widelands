@@ -98,12 +98,12 @@ void Map_Extradata_Data_Packet::Write
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	// Copy all files from pics/ from the old map to the new.
-	FileSystem& map_fs = egbase.map().filesystem();
-	if (map_fs.FileExists("pics") and map_fs.IsDirectory("pics")) {
+	FileSystem* map_fs = egbase.map().filesystem();
+	if (map_fs && map_fs->FileExists("pics") && map_fs->IsDirectory("pics")) {
 		fs.EnsureDirectoryExists("pics");
-		for (const std::string& picture : map_fs.ListDirectory("pics")) {
+		for (const std::string& picture : map_fs->ListDirectory("pics")) {
 		size_t length;
-		void* input_data = map_fs.Load(picture, length);
+		void* input_data = map_fs->Load(picture, length);
 		fs.Write(picture, input_data, length);
 		free(input_data);
 		}
