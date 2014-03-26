@@ -19,11 +19,13 @@
 
 #include "network/netclient.h"
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
 #include <config.h>
 
 #include "build_info.h"
 #include "game_io/game_loader.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -120,8 +122,9 @@ NetClient::NetClient
 	file = nullptr;
 
 	// Temporarily register win condition scripts to get the default
-	std::set<std::string> win_condition_scripts = g_fs->ListDirectory("scripting/win_conditions");
-	// NOCOM(#sirver): filter .lua
+	std::set<std::string> win_condition_scripts =
+	   filter(g_fs->ListDirectory("scripting/win_conditions"),
+	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
 	assert(win_condition_scripts.size());
 	d->settings.win_condition_script = *win_condition_scripts.begin();
 }

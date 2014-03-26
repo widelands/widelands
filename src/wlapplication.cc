@@ -30,6 +30,7 @@
 #include <stdexcept>
 #include <string>
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <config.h>
 #ifdef __APPLE__
@@ -44,6 +45,7 @@
 #include "gamesettings.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -1824,8 +1826,9 @@ void WLApplication::cleanup_replays()
 	Section & s = g_options.pull_section("global");
 
 	if (s.get_bool("remove_syncstreams", true)) {
-		files = g_fs->ListDirectory(REPLAY_DIR);
-		// NOCOM(#sirver): filter , "*" REPLAY_SUFFIX ".wss", &files, 1);
+		files =
+		   filter(g_fs->ListDirectory(REPLAY_DIR),
+		          [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX ".wss");});
 
 		for
 			(filenameset_t::iterator filename = files.begin();
@@ -1840,8 +1843,9 @@ void WLApplication::cleanup_replays()
 	time_t tnow = time(nullptr);
 
 	if (s.get_int("remove_replays", 0)) {
-		files = g_fs->ListDirectory(REPLAY_DIR);
-		// NOCOM(#sirver): filter, "*" REPLAY_SUFFIX, &files, 1);
+		files =
+		   filter(g_fs->ListDirectory(REPLAY_DIR),
+		          [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
 		for
 			(filenameset_t::iterator filename = files.begin();

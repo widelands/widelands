@@ -20,6 +20,7 @@
 #include "sound/sound_handler.h"
 
 #include <cerrno>
+#include <regex>
 
 #include <SDL.h>
 #ifdef _WIN32
@@ -27,6 +28,7 @@
 #endif
 
 #include "graphic/graphic.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -218,28 +220,20 @@ void Sound_Handler::load_system_sounds()
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
- * named EFFECT_XX.ogg, where XX is between 00 and 99. If
- * BASENAME_XX (without extension) is a directory, effects will be loaded
- * recursively. If it is already loaded, the function does nothing.
+ * named EFFECT_XX.ogg, where XX is between 00 and 99.
  *
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
- *
- * If you want "internationalized" sound effects (e.g. the lumberjack calling
- * "Timber") then append the locale to any file/directory name like this:
- * lumberjack_timber_00.ogg.de_DE
  *
  * \param dir        The directory where the audio files reside
  * \param basename   Name from which filenames will be formed
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
  * \internal
- * \param recursive  Whether to recurse into subdirectories
 */
 void Sound_Handler::load_fx_if_needed
 	(const std::string & dir,
 	 const std::string & filename,
-	 const std::string & fx_name,
-	 bool                recursive)
+	 const std::string & fx_name)
 {
 	filenameset_t dirs, files;
 	filenameset_t::const_iterator i;
@@ -251,39 +245,17 @@ void Sound_Handler::load_fx_if_needed
 
 	m_fxs[fx_name] = new FXset();
 
-	// List for recursion.
-	std::list<std::string> dirs_left;
-	dirs_left.push_back(dir);
+	// filename can be relative to dir.
+	const std::string full_path = dir + "/" + filename;
+	const std::string basename = FileSystem::FS_Filename(full_path.c_str());
+	const std::string dirname = FileSystem::FS_Dirname(full_path);
+	files = filter(g_fs->ListDirectory(dirname), [&basename](const std::string& fn) {
+		return std::regex_match(fn, std::regex(".*" + basename + "_..\\.ogg$"));
+	});
 
-	while (!dirs_left.empty()) {
-		std::string current_dir = dirs_left.front();
-		dirs_left.pop_front();
-
-		files = g_fs->ListDirectory(current_dir);
-		// NOCOM(#sirver): filter filename + "_??.ogg." + i18n::get_locale(), &files);
-		if (files.empty()) {
-			files = g_fs->ListDirectory(current_dir);
-			// NOCOM(#sirver): filter , filename + "_??.ogg", &files);
-		}
-
-		for (i = files.begin(); i != files.end(); ++i) {
-			assert(!g_fs->IsDirectory(*i));
-			load_one_fx(i->c_str(), fx_name);
-		}
-
-		if (recursive) {
-			dirs = g_fs->ListDirectory(current_dir);
-			// NOCOM(#sirver): filter , "*_??." + i18n::get_locale(), &dirs);
-			if (dirs.empty()) {
-				dirs = g_fs->ListDirectory(current_dir);
-				// NOCOM(#sirver): filter , "*_??", &dirs);
-			}
-
-			for (i = dirs.begin(); i != dirs.end(); ++i) {
-				assert(g_fs->IsDirectory(*i));
-				dirs_left.push_back(*i);
-			}
-		}
+	for (i = files.begin(); i != files.end(); ++i) {
+		assert(!g_fs->IsDirectory(*i));
+		load_one_fx(i->c_str(), fx_name);
 	}
 }
 
@@ -522,43 +494,31 @@ void Sound_Handler::play_fx
  * \param dir        The directory where the audio files reside.
  * \param basename   Name from which filenames will be formed
  *                   (BASENAME_XX.ogg); also the name used with \ref play_fx .
- * \param recursive  \internal Used for traversing subdirectories
  * This just registers the song, actual loading takes place when
  * \ref Songset::get_song() is called, i.e. when the song is about to be
  * played. The song will automatically be removed from memory when it has
  * finished playing.\n
- * Supported file formats are ogg. If BASENAME_XX
- * (with any extension) is a directory, effects will be registered recursively.
- * Subdirectories of and files under BASENAME_XX can be named anything you want.
 */
 void Sound_Handler::register_song
-	(const std::string & dir, const std::string & basename,
-	 bool const recursive)
+	(const std::string & dir, const std::string & basename)
 {
+	if (m_nosound)
+		return;
+	assert(g_fs);
+
 	filenameset_t files;
 	filenameset_t::const_iterator i;
 
-	if (m_nosound)
-		return;
+	files = filter(g_fs->ListDirectory(dir), [&basename](const std::string& fn) {
+		return std::regex_match(fn, std::regex(".*" + basename + "_\\d\\d.*"));
+	});
 
-	assert(g_fs);
-
-	if (recursive) {
-		files = g_fs->ListDirectory(dir);
-	} else {
-		files = g_fs->ListDirectory(dir);
-		// NOCOM(#sirver): filter , basename + "_??*", &files);
-	}
-
-	for (i = files.begin(); i != files.end(); ++i) {
-		if (g_fs->IsDirectory(*i)) {
-			register_song(*i, basename, true);
-		} else {
-			if (m_songs.count(basename) == 0)
-				m_songs[basename] = new Songset();
-
-			m_songs[basename]->add_song(*i);
+	for (const std::string& filename : files) {
+		assert(!g_fs->IsDirectory(filename));
+		if (m_songs.count(basename) == 0) {
+			m_songs[basename] = new Songset();
 		}
+		m_songs[basename]->add_song(filename);
 	}
 }
 

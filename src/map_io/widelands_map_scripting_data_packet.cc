@@ -19,6 +19,11 @@
 
 #include "map_io/widelands_map_scripting_data_packet.h"
 
+#include <string>
+
+#include <boost/algorithm/string/predicate.hpp>
+
+#include "helper.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -68,8 +73,9 @@ void Map_Scripting_Data_Packet::Write
 {
 	fs.EnsureDirectoryExists("scripting");
 
-	for (const std::string& script : egbase.map().filesystem().ListDirectory("scripting")) {
-		// NOCOM(#sirver): filter .lua
+	for (const std::string& script :
+	     filter(egbase.map().filesystem().ListDirectory("scripting"),
+	            [](const std::string& fn) {return boost::ends_with(fn, ".lua");})) {
 		size_t length;
 		void* input_data = egbase.map().filesystem().Load(script, length);
 		fs.Write(script, input_data, length);

@@ -19,11 +19,13 @@
 
 #include "ui_fsmenu/loadreplay.h"
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "graphic/graphic.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
@@ -215,8 +217,8 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 {
 	filenameset_t files;
 
-	files = g_fs->ListDirectory(REPLAY_DIR);
-	// NOCOM(#sirver): filter , "*" REPLAY_SUFFIX, &files, 1);
+	files = filter(g_fs->ListDirectory(REPLAY_DIR),
+	               [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
 	Widelands::Game_Preload_Data_Packet gpdp;
 	for

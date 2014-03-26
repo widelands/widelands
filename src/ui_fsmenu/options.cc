@@ -22,10 +22,12 @@
 #include <cstdio>
 #include <iostream>
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <libintl.h>
 
 #include "constants.h"
 #include "graphic/graphic.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
@@ -543,8 +545,9 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
-		filenameset_t files = g_fs->ListDirectory("fonts");
-		// NOCOM(#sirver): filter "*.ttf", &files);
+		filenameset_t files =
+		   filter(g_fs->ListDirectory("fonts"),
+		          [](const std::string& fn) {return boost::ends_with(fn, ".ttf");});
 
 		for
 			(filenameset_t::iterator pname = files.begin();

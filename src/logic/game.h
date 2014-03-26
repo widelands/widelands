@@ -32,7 +32,7 @@ struct Interactive_Player;
 struct Game_Main_Menu_Load_Game;
 struct WLApplication;
 struct GameSettings;
-struct GameController;
+class GameController;
 
 namespace Widelands {
 

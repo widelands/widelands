@@ -96,12 +96,6 @@ bool RealFSImpl::FileIsWriteable(const std::string & path) {
 }
 
 
-/**
- * Returns the number of files found, and stores the filenames (without the
- * pathname) in the results. There doesn't seem to be an even remotely
- * cross-platform way of doing this
- * // NOCOM(#sirver): fix comment
- */
 std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 {
 #ifdef _WIN32
@@ -123,7 +117,8 @@ std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 	std::set<std::string> results;
 	if (!realpath.empty()) realpath.append("\\");
 	do {
-		results->insert(realpath + c_file.name);
+		const std::string filename = FS_CanonicalizeName(realpath + c_file.name);
+		results.insert(filename.substr(m_root.size() + 1));
 	} while (_findnext(hFile, &c_file) == 0);
 
 	_findclose(hFile);
@@ -132,7 +127,6 @@ std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 #else
 	std::string buf;
 	glob_t gl;
-	int32_t i, count;
 	int32_t ofs;
 
 	if (path.size()) {
@@ -152,10 +146,9 @@ std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 	if (glob(buf.c_str(), 0, nullptr, &gl))
 		return results;
 
-	count = gl.gl_pathc;
-
-	for (i = 0; i < count; ++i) {
-		results.insert(&gl.gl_pathv[i][ofs]);
+	for (size_t i = 0; i < gl.gl_pathc; ++i) {
+		const std::string filename(FS_CanonicalizeName(&gl.gl_pathv[i][ofs]));
+		results.insert(filename.substr(m_root.size() + 1));
 	}
 
 	globfree(&gl);

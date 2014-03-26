@@ -287,8 +287,9 @@ Tribe_Descr::Tribe_Descr
 
 			{
 				// Read initializations -- all scripts are initializations currently
-				for (const std::string& script : g_fs->ListDirectory(path + "scripting")) {
-					// NOCOM(#sirver): filter .lua files
+				for (const std::string& script :
+				     filter(g_fs->ListDirectory(path + "scripting"),
+				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
 
 					m_initializations.resize(m_initializations.size() + 1);
@@ -357,8 +358,9 @@ bool Tribe_Descr::exists_tribe
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
 
 				std::string path = "tribes/" + name + "/scripting";
-				for (const std::string& script : g_fs->ListDirectory(path)) {
-					// NOCOM(#sirver): filter lua files
+				for (const std::string& script :
+				     filter(g_fs->ListDirectory(path),
+				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = lua.run_script(script);
 					info->initializations.push_back(
 					   TribeBasicInfo::Initialization(script, t->get_string("name")));

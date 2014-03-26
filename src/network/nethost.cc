@@ -21,6 +21,7 @@
 
 #include <sstream>
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <libintl.h>
@@ -33,6 +34,7 @@
 #include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
@@ -295,8 +297,9 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (m_win_condition_scripts.size() < 1) {
 			if (!m_lua)
 				m_lua = new LuaInterface();
-			std::set<std::string> win_conditions = g_fs->ListDirectory("scripting/win_conditions");
-			// NOCOM(#sirver): filter .lua
+			std::set<std::string> win_conditions =
+			   filter(g_fs->ListDirectory("scripting/win_conditions"),
+			          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
 			m_win_condition_scripts.insert(
 			   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
 			m_cur_wincondition = -1;

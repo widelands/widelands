@@ -19,9 +19,12 @@
 
 #include "ui_fsmenu/launchSPG.h"
 
+#include <boost/algorithm/string/predicate.hpp>
+
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -121,8 +124,10 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 
 
 	m_lua = new LuaInterface();
-	std::set<std::string> win_conditions = g_fs->ListDirectory("scripting/win_conditions");
-	// NOCOM(#sirver): filter .lua
+	std::set<std::string> win_conditions =
+	   filter(g_fs->ListDirectory("scripting/win_conditions"),
+	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
+
 	m_win_condition_scripts.insert(
 	   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
 
