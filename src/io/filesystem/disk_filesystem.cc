@@ -111,15 +111,21 @@ std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 	std::set<std::string> results;
 
 	hFile = _findfirst(buf.c_str(), &c_file);
-	if (hFile)
+	if (hFile == -1)
 		return results;
 
 	std::string realpath = path;
 
-	if (!realpath.empty()) realpath.append("\\");
+	if (!realpath.empty()) {
+		realpath.append("\\");
+	}
 	do {
+		log("#sirver realpath: %s,c_file: %s\n", realpath.c_str(), c_file.c_str());
 		const std::string filename = FS_CanonicalizeName(realpath + c_file.name);
-		results.insert(filename.substr(m_root.size() + 1));
+		log("#sirver filename: %s\n", filename.c_str());
+		const std::string result = filename.substr(m_root.size() + 1);
+		log("#sirver result: %s\n", result.c_str());
+		results.insert(result);
 	} while (_findnext(hFile, &c_file) == 0);
 
 	_findclose(hFile);
