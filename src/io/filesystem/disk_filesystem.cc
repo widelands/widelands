@@ -108,13 +108,14 @@ std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 	else
 		buf = m_directory + "\\*";
 
+	std::set<std::string> results;
+
 	hFile = _findfirst(buf.c_str(), &c_file);
-	if (hFile == -1)
-		return 0;
+	if (hFile)
+		return results;
 
 	std::string realpath = path;
 
-	std::set<std::string> results;
 	if (!realpath.empty()) realpath.append("\\");
 	do {
 		const std::string filename = FS_CanonicalizeName(realpath + c_file.name);
