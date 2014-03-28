@@ -120,7 +120,7 @@ std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 		realpath.append("\\");
 	}
 	do {
-		log("#sirver realpath: %s,c_file: %s\n", realpath.c_str(), c_file.c_str());
+		log("#sirver realpath: %s,c_file: %s\n", realpath.c_str(), c_file.name);
 		const std::string filename = FS_CanonicalizeName(realpath + c_file.name);
 		log("#sirver filename: %s\n", filename.c_str());
 		const std::string result = filename.substr(m_root.size() + 1);
