@@ -45,3 +45,4 @@ end
 include "world/critters/badger/init.lua"
 include "world/critters/brownbear/init.lua"
 include "world/critters/bunny/init.lua"
+include "world/critters/chamois/init.lua"
