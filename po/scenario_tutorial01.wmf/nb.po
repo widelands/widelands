@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-10 08:50+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-28 21:44+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:38+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-29 05:26+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: nb\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:15
@@ -30,10 +30,14 @@ msgid ""
 "and just find everything out for yourself. Otherwise, please bear with me, I "
 "am not the youngest and quickest anymore."
 msgstr ""
+"Jeg beklager, men jeg må nok fjerne dette igjen. Det kan hende vi trenger "
+"plassen her senere. Hvis det virker for sakte for deg, kan du heller starte "
+"et vanlig spill hvor du kan finne ting mer på egenhånd. Ellers får du ha meg "
+"unnskyldt, jeg er ikke den yngste og raskeste lenger."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "Velkommen til en innføring i Widelands!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
@@ -48,15 +52,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:32
 msgid "Dismiss this box by left-clicking on the button below."
-msgstr ""
+msgstr "Du kan lukke denne boksen ved å klikke på knappen under."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:37
 msgid "Diving In"
-msgstr ""
+msgstr "Hoppe i det"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "La oss hoppe i det!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
 msgid ""
@@ -93,7 +97,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:60
 msgid "Left-click the ‘OK’ button to close this box and then try it."
-msgstr ""
+msgstr "Klikk på «OK» for å lukke denne dialogen og prøv."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Enable the showing of building spaces"
