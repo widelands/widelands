@@ -877,7 +877,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			} else {
 				// Map check - does Widelands recognize the file as map?
 				Widelands::Map map;
-				Widelands::Map_Loader * const ml = map.get_correct_loader(file->filename.c_str());
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(file->filename);
 				if (!ml)
 					invalid = true;
 			}

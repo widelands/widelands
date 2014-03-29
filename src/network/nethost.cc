@@ -1316,7 +1316,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 			const filenameset_t & gamefiles = files;
 			container_iterate_const(filenameset_t, gamefiles, i) {
 				char const * const name = i.current->c_str();
-				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 				if (ml) {
 					map.set_filename(name);
 					ml->preload_map(true);
@@ -1325,7 +1325,6 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 					info.players  = map.get_nrplayers();
 					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
 					d->settings.maps.push_back(info);
-					delete ml;
 				} else {
 					if
 						(g_fs->IsDirectory(name)
@@ -2658,14 +2657,13 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					// Check if file is a map and if yes read out the needed data
 					Widelands::Map   map;
 					i18n::Textdomain td("maps");
-					Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
-					if (ml) {
+					std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(path);
+					if (ml.get() != nullptr) {
 						// Yes it is a map file :)
 						map.set_filename(path.c_str());
 						ml->preload_map(true);
 						d->settings.scenario = scenario;
 						d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
-						delete ml;
 					}
 				}
 			}

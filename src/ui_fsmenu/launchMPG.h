@@ -32,7 +32,7 @@
 
 struct ChatProvider;
 struct GameChatPanel;
-struct GameController;
+class GameController;
 struct GameSettingsProvider;
 struct MultiPlayerSetupGroup;
 class LuaInterface;

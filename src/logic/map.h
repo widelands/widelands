@@ -159,7 +159,7 @@ public:
 	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
 
 	/// Returns the correct initialized loader for the given mapfile
-	Map_Loader* get_correct_loader(const std::string& filename);
+	std::unique_ptr<Map_Loader> get_correct_loader(const std::string& filename);
 
 	void cleanup();
 

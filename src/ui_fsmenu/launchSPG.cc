@@ -363,10 +363,10 @@ void Fullscreen_Menu_LaunchSPG::set_scenario_values()
 		throw wexception
 				("settings()->scenario was set to true, but no map is available");
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-	Widelands::Map_Loader * const ml =
-		map.get_correct_loader(m_settings->settings().mapfilename.c_str());
+	std::unique_ptr<Widelands::Map_Loader> map_loader(
+	   map.get_correct_loader(m_settings->settings().mapfilename));
 	map.set_filename(m_settings->settings().mapfilename.c_str());
-	ml->preload_map(true);
+	map_loader->preload_map(true);
 	Widelands::Player_Number const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));

@@ -41,7 +41,7 @@ class Map_Loader;
 };
 class Image;
 class RenderTarget;
-struct GameController;
+class GameController;
 struct GameSettingsProvider;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.

@@ -286,7 +286,7 @@ void Game::init_newgame
 	set_map(new Map);
 
 	std::unique_ptr<Map_Loader> maploader
-		(map().get_correct_loader(settings.mapfilename.c_str()));
+		(map().get_correct_loader(settings.mapfilename));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
 	if (loaderUI) {

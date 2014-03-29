@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <cstdio>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "build_info.h"
@@ -1669,25 +1670,24 @@ void Map::get_neighbour
 	}
 }
 
-Map_Loader * Map::get_correct_loader(const std::string& filename) {
-	Map_Loader * result = nullptr;
+std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename) {
+	std::unique_ptr<Map_Loader> result;
 
-	if (boost::algorithm::ends_with(filename, WLMF_SUFFIX)) {
+	std::string lower_filename = filename;
+	boost::algorithm::to_lower(lower_filename);
+
+	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
 		try {
-			result = new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this);
+			result.reset(new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file (maybe old plain binary map
 			//  format)
 			//  TODO: catchall hides real errors! Replace with more specific code
 		}
-	} else if
-		(boost::algorithm::ends_with(filename, S2MF_SUFFIX) ||
-		 boost::algorithm::ends_with(filename, S2MF_SUFFIX2))
-	{
-		//  It is a S2 Map file. Load it as such.
-		result = new S2_Map_Loader(filename.c_str(), *this);
+	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
+	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
+		result.reset(new S2_Map_Loader(filename.c_str(), *this));
 	}
-
 	return result;
 }
 
