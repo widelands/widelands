@@ -7,7 +7,7 @@ program=remove
 
 [idle]
 hotspot=8 14
-pics=lynx_idle_sw_??.png
+pics=lynx_idle_??.png
 fps=20
 
 [walk]

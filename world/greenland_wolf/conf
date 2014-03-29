@@ -7,7 +7,7 @@ program=remove
 
 [idle]
 hotspot=8 15
-pics=wolf_idle_se_??.png
+pics=wolf_idle_??.png
 fps=10
 
 [walk]

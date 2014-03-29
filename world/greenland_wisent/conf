@@ -7,7 +7,7 @@ program=remove
 
 [idle]
 hotspot=14 27
-pics=wisent_idle_se_??.png
+pics=wisent_idle_??.png
 fps=20
 
 [walk]
