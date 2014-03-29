@@ -641,13 +641,22 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		  hasplrclrs_(false) {
 	// TODO(sirver): add support for sfx
 
-	uint32_t fps = table.get_uint("fps");
-	if (fps > 0)
-		frametime_ = 1000 / fps;
-
 	get_point(*table.get_table("hotspot"), &hotspot_);
 
 	image_files_ = table.get_table("pictures")->array_entries<std::string>();
+	if (image_files_.empty()) {
+		throw wexception("Animation without pictures.");
+	} else if (image_files_.size() == 1) {
+		if (table.has_key("fps")) {
+			throw wexception("Animation with one picture must not have 'fps'.");
+		}
+	} else {
+		uint32_t fps = table.get_uint("fps");
+		if (fps == 0) {
+			throw wexception("fps must be > 0.");
+		}
+		frametime_ = 1000 / fps;
+	}
 	pc_mask_image_files_ = table.get_table("player_color_masks")->array_entries<std::string>();
 }
 

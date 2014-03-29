@@ -31,13 +31,12 @@ include "world/immovables/trees/aspen_summer_old/init.lua"
 -- searched for in 'dirname'. All files should look like this
 -- 'basename'_(e|ne|se|sw|w|nw)_\d+.png. 'hotspot' is the hotspot for blitting.
 function add_walking_animations(table, dirname, basename, hotspot, gfps)
-   fps = gfps or 5
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
       table["walk_" .. dir] = {
          pictures = path.glob(dirname, basename .. "_" .. dir .. "_\\d+.png"),
          player_color_masks = {},
          hotspot = hotspot,
-         fps = fps,
+         fps = gfps,
       }
    end
 end

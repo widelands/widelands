@@ -11,7 +11,6 @@ world:new_immovable_type{
          pictures = { dirname .. "/idle.png" },
          player_color_masks = {},
          hotspot = { 9, 24 },
-         fps = 0,
       },
    }
 }

@@ -72,6 +72,17 @@ public:
 		return values;
 	}
 
+	// Returns true if the key is in the table.
+	template <typename KeyType> bool has_key(const KeyType& key) const {
+		try {
+			get_existing_table_value(key);
+			return true;
+		}
+		catch (LuaTableKeyError&) {
+			return false;
+		}
+	}
+
 	// Returns the corresponding value with the given key.
 	template <typename KeyType> std::string get_string(const KeyType& key) const {
 		get_existing_table_value(key);
