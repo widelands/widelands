@@ -129,7 +129,7 @@ public:
 			lua_pop(L_, 1);
 			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a boolean value.");
 		}
-		const bool rv = lua_tonumber(L_, -1);
+		const bool rv = lua_toboolean(L_, -1);
 		lua_pop(L_, 1);
 		return rv;
 	}

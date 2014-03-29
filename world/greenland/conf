@@ -81,9 +81,7 @@ tree8_s=_Rowan (Pole)
 tree8_t=_Rowan (Sapling)
 
 [critter bob types]
-brownbear=_Brown Bear
 deer=_Deer
-duck=_Duck
 elk=_Elk
 fox=_Fox
 lynx=_Lynx
