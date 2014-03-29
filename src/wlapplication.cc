@@ -424,7 +424,7 @@ void WLApplication::run()
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
 				map.set_filename(m_filename.c_str());
-				Widelands::Map_Loader * const ml = map.get_correct_loader(m_filename.c_str());
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
 					throw warning
 						(_("Unsupported format"),
@@ -449,9 +449,6 @@ void WLApplication::run()
 				// run the network game
 				// -> autostarts when a player sends "/start" as pm to the server.
 				netgame.run(true);
-
-				// Cleanup
-				delete ml;
 
 				InternetGaming::ref().logout();
 			}

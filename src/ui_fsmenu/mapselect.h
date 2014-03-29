@@ -33,7 +33,7 @@
 
 
 using Widelands::Map;
-struct GameController;
+class GameController;
 struct GameSettingsProvider;
 
 namespace UI {

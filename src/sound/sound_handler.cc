@@ -20,9 +20,9 @@
 #include "sound/sound_handler.h"
 
 #include <cerrno>
-#include <regex>
 
 #include <SDL.h>
+#include <boost/algorithm/string/predicate.hpp>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -250,7 +250,8 @@ void Sound_Handler::load_fx_if_needed
 	const std::string basename = FileSystem::FS_Filename(full_path.c_str());
 	const std::string dirname = FileSystem::FS_Dirname(full_path);
 	files = filter(g_fs->ListDirectory(dirname), [&basename](const std::string& fn) {
-		return std::regex_match(fn, std::regex(".*" + basename + "_..\\.ogg$"));
+		const std::string only_filename = FileSystem::FS_Filename(fn.c_str());
+		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
 	});
 
 	for (i = files.begin(); i != files.end(); ++i) {
@@ -510,7 +511,8 @@ void Sound_Handler::register_song
 	filenameset_t::const_iterator i;
 
 	files = filter(g_fs->ListDirectory(dir), [&basename](const std::string& fn) {
-		return std::regex_match(fn, std::regex(".*" + basename + "_\\d\\d.*"));
+		const std::string only_filename = FileSystem::FS_Filename(fn.c_str());
+		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
 	});
 
 	for (const std::string& filename : files) {

@@ -157,9 +157,8 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			Widelands::Map_Loader * const m_ml = map.get_correct_loader(name);
-			m_ml->preload_map(true); //  This has worked before, no problem.
-			delete m_ml;
+			std::unique_ptr<Widelands::Map_Loader> map_loader = map.get_correct_loader(name);
+			map_loader->preload_map(true); //  This has worked before, no problem.
 		}
 
 		// Translate the map data
@@ -239,17 +238,16 @@ void Main_Menu_Load_Map::fill_list() {
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
-
-		if (Widelands::Map_Loader * const m_ml = map.get_correct_loader(name)) {
+		std::unique_ptr<Widelands::Map_Loader> map_loader = map.get_correct_loader(name);
+		if (map_loader.get() != nullptr) {
 			try {
-				m_ml->preload_map(true);
+				map_loader->preload_map(true);
 				m_ls->add
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader const *>(m_ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+						 (dynamic_cast<WL_Map_Loader*>(map_loader.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const _wexception &) {} //  we simply skip illegal entries
-			delete m_ml;
 		}
 	}
 

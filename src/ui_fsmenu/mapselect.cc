@@ -375,7 +375,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			{
 				char const * const name = pname->c_str();
 
-				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 				if (!ml)
 					continue;
 
@@ -414,7 +414,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					i18n::Textdomain td("maps");
 					te.set_picture
 						(1,  g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader const *>(ml) ?
+						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ?
 							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
 						_(mapdata.name));
@@ -425,8 +425,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				} catch (...) {
 					log("Mapselect: Skip %s due to unknown exception\n", name);
 				}
-
-				delete ml;
 			}
 		}
 	} else {
@@ -438,7 +436,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
 			char const * const name = dmap.path.c_str();
-			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+			std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
 			try {
 				if (!ml)
 					throw wexception("Not useable!");
@@ -499,8 +497,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					(1, g_gr->images().get
 					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
 			}
-
-			delete ml;
 		}
 	}
 

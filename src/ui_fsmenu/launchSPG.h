@@ -29,7 +29,7 @@
 #include "ui_basic/textarea.h"
 
 struct ChatProvider;
-struct GameController;
+class GameController;
 struct GameSettingsProvider;
 struct PlayerDescriptionGroup;
 class LuaInterface;
