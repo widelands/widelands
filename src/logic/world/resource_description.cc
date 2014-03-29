@@ -38,6 +38,9 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
 		ResourceDescription::EditorPicture editor_picture = {st->get_string(upper_limit), upper_limit};
 		editor_pictures_.push_back(editor_picture);
 	}
+	if (editor_pictures_.empty()) {
+		throw game_data_error("Resource %s has no editor_pictures.", name_.c_str());
+	}
 }
 
 const std::string & ResourceDescription::get_editor_pic

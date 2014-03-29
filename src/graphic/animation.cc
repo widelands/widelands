@@ -651,11 +651,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			throw wexception("Animation with one picture must not have 'fps'.");
 		}
 	} else {
-		uint32_t fps = table.get_uint("fps");
-		if (fps == 0) {
-			throw wexception("fps must be > 0.");
-		}
-		frametime_ = 1000 / fps;
+		frametime_ = 1000 / get_positive_int(table, "fps");
 	}
 	pc_mask_image_files_ = table.get_table("player_color_masks")->array_entries<std::string>();
 }

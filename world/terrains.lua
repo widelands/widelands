@@ -19,7 +19,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/greenland_pics/wiese1_00.png" },
    dither_layer = 40,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -32,7 +31,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/greenland_pics/wiese2_00.png" },
    dither_layer = 40,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -45,7 +43,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/greenland_pics/wiese3_00.png" },
    dither_layer = 40,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -58,7 +55,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/greenland_pics/wiese4_00.png" },
    dither_layer = 40,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -71,7 +67,6 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { "world/greenland_pics/steppe_00.png" },
    dither_layer = 20,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -84,7 +79,6 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { "world/greenland_pics/steppe_kahl_00.png" },
    dither_layer = 20,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -97,7 +91,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/greenland_pics/bergwiese_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -110,7 +103,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/greenland_pics/berg1_00.png" },
    dither_layer = 60,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -123,7 +115,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/greenland_pics/berg2_00.png" },
    dither_layer = 60,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -136,7 +127,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/greenland_pics/berg3_00.png" },
    dither_layer = 40,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -149,7 +139,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/greenland_pics/berg4_00.png" },
    dither_layer = 60,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -175,7 +164,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/greenland_pics/strand_00.png" },
    dither_layer = 10,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -188,7 +176,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/greenland_pics/schnee_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -230,7 +217,6 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { "world/blackland_pics/ashes_00.png" },
    dither_layer = 20,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -243,7 +229,6 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { "world/blackland_pics/ashes2_00.png" },
    dither_layer = 20,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -256,7 +241,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/blackland_pics/hardground1_00.png" },
    dither_layer = 30,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -269,7 +253,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/blackland_pics/hardground2_00.png" },
    dither_layer = 30,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -282,7 +265,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/blackland_pics/hardground3_00.png" },
    dither_layer = 30,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -295,7 +277,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/blackland_pics/hardground4_00.png" },
    dither_layer = 30,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -308,7 +289,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/blackland_pics/hardlava_00.png" },
    dither_layer = 40,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -321,7 +301,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/blackland_pics/mountain1_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -334,7 +313,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/blackland_pics/mountain2_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -347,7 +325,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/blackland_pics/mountain3_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -360,7 +337,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/blackland_pics/mountain4_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -373,7 +349,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/blackland_pics/strand_00.png" },
    dither_layer = 0,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -386,7 +361,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/blackland_pics/lava-stone1_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -399,7 +373,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/blackland_pics/lava-stone2_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -429,7 +402,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/winterland_pics/tundra_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -442,7 +414,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/winterland_pics/tundra2_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -455,7 +426,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/winterland_pics/tundra3_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -468,7 +438,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/winterland_pics/tundra_taiga_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -481,7 +450,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/winterland_pics/taiga_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -494,7 +462,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/winterland_pics/snow_00.png" },
    dither_layer = 60,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -507,7 +474,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/winterland_pics/mountain1_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -520,7 +486,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/winterland_pics/mountain2_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -533,7 +498,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/winterland_pics/mountain3_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -546,7 +510,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/winterland_pics/mountain4_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -559,7 +522,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/winterland_pics/ice_00.png" },
    dither_layer = 30,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -572,7 +534,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/winterland_pics/strand_00.png" },
    dither_layer = 40,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -628,7 +589,6 @@ world:new_terrain_type{
    default_resource_amount = 2,
    textures = { "world/desert_pics/desert4_00.png" },
    dither_layer = 20,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -641,7 +601,6 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { "world/desert_pics/drysoil_00.png" },
    dither_layer = 30,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -654,7 +613,6 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { "world/desert_pics/steppe_00.png" },
    dither_layer = 30,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -667,7 +625,6 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { "world/desert_pics/meadow_00.png" },
    dither_layer = 40,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -680,7 +637,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/mountainmeadow_00.png" },
    dither_layer = 50,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -693,7 +649,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/highmountainmeadow_00.png" },
    dither_layer = 60,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -706,7 +661,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/mountain1_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -719,7 +673,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/mountain2_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -732,7 +685,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/mountain3_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -745,7 +697,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/mountain4_00.png" },
    dither_layer = 70,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -758,7 +709,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/desert1_00.png" },
    dither_layer = 20,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -771,7 +721,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/desert2_00.png" },
    dither_layer = 20,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -784,7 +733,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/desert3_00.png" },
    dither_layer = 20,
-   fps = 0,
 }
 
 world:new_terrain_type{
@@ -797,7 +745,6 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { "world/desert_pics/beach_00.png" },
    dither_layer = 10,
-   fps = 0,
 }
 
 world:new_terrain_type{

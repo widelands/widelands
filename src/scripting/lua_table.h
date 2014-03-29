@@ -126,14 +126,6 @@ public:
 		return integer;
 	}
 
-	template <typename KeyType> uint32_t get_uint(const KeyType& key) const {
-		int value = get_int(key);
-		if (value < 0) {
-			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a positive value.");
-		}
-		return static_cast<uint32_t>(value);
-	}
-
 	template <typename KeyType> bool get_bool(const KeyType& key) const {
 		get_existing_table_value(key);
 		if (!lua_isboolean(L_, -1)) {
@@ -183,5 +175,24 @@ private:
 
 template <> std::string LuaTable::get_value<std::string>() const;
 template <> int LuaTable::get_value<int>() const;
+
+
+// Return a positive integer from the 'table'.
+template <typename KeyType> uint32_t get_uint(const LuaTable& table, const KeyType& key) {
+	int value = table.get_int(key);
+	if (value < 0) {
+		throw LuaError(boost::lexical_cast<std::string>(key) + " is not a positive value.");
+	}
+	return static_cast<uint32_t>(value);
+}
+
+// Return an integer > 0 from the 'table'.
+template <typename KeyType> uint32_t get_positive_int(const LuaTable& table, const KeyType& key) {
+	int value = get_uint(table, key);
+	if (value == 0) {
+		throw LuaError(boost::lexical_cast<std::string>(key) + " must be > 0.");
+	}
+	return static_cast<uint32_t>(value);
+}
 
 #endif /* end of include guard: LUA_TABLE_H */

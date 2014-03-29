@@ -77,14 +77,21 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")) {
-	int fps = table.get_int("fps");
+
 
 	const std::vector<std::string> textures =
 	   table.get_table("textures")->array_entries<std::string>();
+	int frame_length = FRAME_LENGTH;
 	if (textures.empty()) {
 		throw game_data_error("Terrain %s has no images.", name_.c_str());
+	} else if (textures.size() == 1) {
+		if (table.has_key("fps")) {
+			throw game_data_error("Terrain %s with one images must not have fps.", name_.c_str());
+		}
+	} else {
+		frame_length = 1000 / get_positive_int(table, "fps");
 	}
-	texture_ = g_gr->new_maptexture(textures, fps > 0 ? 1000 / fps : FRAME_LENGTH);
+	texture_ = g_gr->new_maptexture(textures, frame_length);
 
 	for (const std::string& resource :
 	     table.get_table("valid_resources")->array_entries<std::string>()) {
