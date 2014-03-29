@@ -9,6 +9,7 @@
 
 -- NOCOM(#sirver): no need to keep the german names now - translate to english.
 
+pics_dir = path.dirname(__file__) .. "pics/"
 world:new_terrain_type{
    name = "wiese1",
    descname = _ "Meadow 1",
@@ -17,7 +18,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/greenland_pics/wiese1_00.png" },
+   textures = { pics_dir .. "green/wiese1_00.png" },
    dither_layer = 40,
 }
 
@@ -29,7 +30,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/greenland_pics/wiese2_00.png" },
+   textures = { pics_dir .. "green/wiese2_00.png" },
    dither_layer = 40,
 }
 
@@ -41,7 +42,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/greenland_pics/wiese3_00.png" },
+   textures = { pics_dir .. "green/wiese3_00.png" },
    dither_layer = 40,
 }
 
@@ -53,7 +54,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/greenland_pics/wiese4_00.png" },
+   textures = { pics_dir .. "green/wiese4_00.png" },
    dither_layer = 40,
 }
 
@@ -65,7 +66,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 5,
-   textures = { "world/greenland_pics/steppe_00.png" },
+   textures = { pics_dir .. "green/steppe_00.png" },
    dither_layer = 20,
 }
 
@@ -77,7 +78,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 4,
-   textures = { "world/greenland_pics/steppe_kahl_00.png" },
+   textures = { pics_dir .. "green/steppe_kahl_00.png" },
    dither_layer = 20,
 }
 
@@ -89,7 +90,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/greenland_pics/bergwiese_00.png" },
+   textures = { pics_dir .. "green/bergwiese_00.png" },
    dither_layer = 50,
 }
 
@@ -101,7 +102,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/greenland_pics/berg1_00.png" },
+   textures = { pics_dir .. "green/berg1_00.png" },
    dither_layer = 60,
 }
 
@@ -113,7 +114,7 @@ world:new_terrain_type{
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/greenland_pics/berg2_00.png" },
+   textures = { pics_dir .. "green/berg2_00.png" },
    dither_layer = 60,
 }
 
@@ -125,7 +126,7 @@ world:new_terrain_type{
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/greenland_pics/berg3_00.png" },
+   textures = { pics_dir .. "green/berg3_00.png" },
    dither_layer = 40,
 }
 
@@ -137,7 +138,7 @@ world:new_terrain_type{
    valid_resources = {"coal", "iron", "gold", "granite"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/greenland_pics/berg4_00.png" },
+   textures = { pics_dir .. "green/berg4_00.png" },
    dither_layer = 60,
 }
 
@@ -149,7 +150,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 20,
-   textures = path.glob("world/greenland_pics", "sumpf_\\d+.png"),
+   textures = path.glob(pics_dir .. "green", "sumpf_\\d+.png"),
    dither_layer = 30,
    fps = 14,
 }
@@ -162,7 +163,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/greenland_pics/strand_00.png" },
+   textures = { pics_dir .. "green/strand_00.png" },
    dither_layer = 10,
 }
 
@@ -174,7 +175,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/greenland_pics/schnee_00.png" },
+   textures = { pics_dir .. "green/schnee_00.png" },
    dither_layer = 70,
 }
 
@@ -186,7 +187,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob("world/greenland_pics", "lava_\\d+.png"),
+   textures = path.glob(pics_dir .. "green", "lava_\\d+.png"),
    dither_layer = 80,
    fps = 4,
 }
@@ -199,7 +200,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob("world/greenland_pics", "wasser_\\d+.png"),
+   textures = path.glob(pics_dir .. "green", "wasser_\\d+.png"),
    dither_layer = 0,
    fps = 14,
 }
@@ -215,7 +216,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 5,
-   textures = { "world/blackland_pics/ashes_00.png" },
+   textures = { pics_dir .. "wasteland/ashes_00.png" },
    dither_layer = 20,
 }
 
@@ -227,7 +228,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 4,
-   textures = { "world/blackland_pics/ashes2_00.png" },
+   textures = { pics_dir .. "wasteland/ashes2_00.png" },
    dither_layer = 20,
 }
 
@@ -239,7 +240,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/blackland_pics/hardground1_00.png" },
+   textures = { pics_dir .. "wasteland/hardground1_00.png" },
    dither_layer = 30,
 }
 
@@ -251,7 +252,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/blackland_pics/hardground2_00.png" },
+   textures = { pics_dir .. "wasteland/hardground2_00.png" },
    dither_layer = 30,
 }
 
@@ -263,7 +264,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/blackland_pics/hardground3_00.png" },
+   textures = { pics_dir .. "wasteland/hardground3_00.png" },
    dither_layer = 30,
 }
 
@@ -275,7 +276,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/blackland_pics/hardground4_00.png" },
+   textures = { pics_dir .. "wasteland/hardground4_00.png" },
    dither_layer = 30,
 }
 
@@ -287,7 +288,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/blackland_pics/hardlava_00.png" },
+   textures = { pics_dir .. "wasteland/hardlava_00.png" },
    dither_layer = 40,
 }
 
@@ -299,7 +300,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/blackland_pics/mountain1_00.png" },
+   textures = { pics_dir .. "wasteland/mountain1_00.png" },
    dither_layer = 50,
 }
 
@@ -311,7 +312,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/blackland_pics/mountain2_00.png" },
+   textures = { pics_dir .. "wasteland/mountain2_00.png" },
    dither_layer = 50,
 }
 
@@ -323,7 +324,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/blackland_pics/mountain3_00.png" },
+   textures = { pics_dir .. "wasteland/mountain3_00.png" },
    dither_layer = 50,
 }
 
@@ -335,7 +336,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/blackland_pics/mountain4_00.png" },
+   textures = { pics_dir .. "wasteland/mountain4_00.png" },
    dither_layer = 50,
 }
 
@@ -347,7 +348,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/blackland_pics/strand_00.png" },
+   textures = { pics_dir .. "wasteland/strand_00.png" },
    dither_layer = 0,
 }
 
@@ -359,7 +360,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/blackland_pics/lava-stone1_00.png" },
+   textures = { pics_dir .. "wasteland/lava-stone1_00.png" },
    dither_layer = 70,
 }
 
@@ -371,7 +372,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/blackland_pics/lava-stone2_00.png" },
+   textures = { pics_dir .. "wasteland/lava-stone2_00.png" },
    dither_layer = 70,
 }
 
@@ -383,7 +384,7 @@ world:new_terrain_type{
    valid_resources = { "fish" },
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob("world/blackland_pics", "water_\\d+.png"),
+   textures = path.glob(pics_dir .. "wasteland", "water_\\d+.png"),
    dither_layer = 0,
    fps = 14,
 }
@@ -400,7 +401,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/winterland_pics/tundra_00.png" },
+   textures = { pics_dir .. "winter/tundra_00.png" },
    dither_layer = 50,
 }
 
@@ -412,7 +413,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/winterland_pics/tundra2_00.png" },
+   textures = { pics_dir .. "winter/tundra2_00.png" },
    dither_layer = 50,
 }
 
@@ -424,7 +425,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/winterland_pics/tundra3_00.png" },
+   textures = { pics_dir .. "winter/tundra3_00.png" },
    dither_layer = 50,
 }
 
@@ -436,7 +437,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/winterland_pics/tundra_taiga_00.png" },
+   textures = { pics_dir .. "winter/tundra_taiga_00.png" },
    dither_layer = 50,
 }
 
@@ -448,7 +449,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/winterland_pics/taiga_00.png" },
+   textures = { pics_dir .. "winter/taiga_00.png" },
    dither_layer = 50,
 }
 
@@ -460,7 +461,7 @@ world:new_terrain_type{
    valid_resources = { "water" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/winterland_pics/snow_00.png" },
+   textures = { pics_dir .. "winter/snow_00.png" },
    dither_layer = 60,
 }
 
@@ -472,7 +473,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/winterland_pics/mountain1_00.png" },
+   textures = { pics_dir .. "winter/mountain1_00.png" },
    dither_layer = 70,
 }
 
@@ -484,7 +485,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/winterland_pics/mountain2_00.png" },
+   textures = { pics_dir .. "winter/mountain2_00.png" },
    dither_layer = 70,
 }
 
@@ -496,7 +497,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/winterland_pics/mountain3_00.png" },
+   textures = { pics_dir .. "winter/mountain3_00.png" },
    dither_layer = 70,
 }
 
@@ -508,7 +509,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/winterland_pics/mountain4_00.png" },
+   textures = { pics_dir .. "winter/mountain4_00.png" },
    dither_layer = 70,
 }
 
@@ -520,7 +521,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/winterland_pics/ice_00.png" },
+   textures = { pics_dir .. "winter/ice_00.png" },
    dither_layer = 30,
 }
 
@@ -532,7 +533,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/winterland_pics/strand_00.png" },
+   textures = { pics_dir .. "winter/strand_00.png" },
    dither_layer = 40,
 }
 
@@ -544,7 +545,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob("world/winterland_pics", "ice_flows_\\d+.png"),
+   textures = path.glob(pics_dir .. "winter", "ice_flows_\\d+.png"),
    dither_layer = 10,
    fps = 5,
 }
@@ -557,7 +558,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob("world/winterland_pics", "ice_flows2_\\d+.png"),
+   textures = path.glob(pics_dir .. "winter", "ice_flows2_\\d+.png"),
    dither_layer = 20,
    fps = 5,
 }
@@ -570,7 +571,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob("world/winterland_pics", "water_\\d+.png"),
+   textures = path.glob(pics_dir .. "winter", "water_\\d+.png"),
    dither_layer = 0,
    fps = 8,
 }
@@ -587,7 +588,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 2,
-   textures = { "world/desert_pics/desert4_00.png" },
+   textures = { pics_dir .. "desert/desert4_00.png" },
    dither_layer = 20,
 }
 
@@ -599,7 +600,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 4,
-   textures = { "world/desert_pics/drysoil_00.png" },
+   textures = { pics_dir .. "desert/drysoil_00.png" },
    dither_layer = 30,
 }
 
@@ -611,7 +612,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 5,
-   textures = { "world/desert_pics/steppe_00.png" },
+   textures = { pics_dir .. "desert/steppe_00.png" },
    dither_layer = 30,
 }
 
@@ -623,7 +624,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
-   textures = { "world/desert_pics/meadow_00.png" },
+   textures = { pics_dir .. "desert/meadow_00.png" },
    dither_layer = 40,
 }
 
@@ -635,7 +636,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/mountainmeadow_00.png" },
+   textures = { pics_dir .. "desert/mountainmeadow_00.png" },
    dither_layer = 50,
 }
 
@@ -647,7 +648,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/highmountainmeadow_00.png" },
+   textures = { pics_dir .. "desert/highmountainmeadow_00.png" },
    dither_layer = 60,
 }
 
@@ -659,7 +660,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/mountain1_00.png" },
+   textures = { pics_dir .. "desert/mountain1_00.png" },
    dither_layer = 70,
 }
 
@@ -671,7 +672,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/mountain2_00.png" },
+   textures = { pics_dir .. "desert/mountain2_00.png" },
    dither_layer = 70,
 }
 
@@ -683,7 +684,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/mountain3_00.png" },
+   textures = { pics_dir .. "desert/mountain3_00.png" },
    dither_layer = 70,
 }
 
@@ -695,7 +696,7 @@ world:new_terrain_type{
    valid_resources = { "coal", "iron", "gold", "granite" },
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/mountain4_00.png" },
+   textures = { pics_dir .. "desert/mountain4_00.png" },
    dither_layer = 70,
 }
 
@@ -707,7 +708,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/desert1_00.png" },
+   textures = { pics_dir .. "desert/desert1_00.png" },
    dither_layer = 20,
 }
 
@@ -719,7 +720,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/desert2_00.png" },
+   textures = { pics_dir .. "desert/desert2_00.png" },
    dither_layer = 20,
 }
 
@@ -731,7 +732,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/desert3_00.png" },
+   textures = { pics_dir .. "desert/desert3_00.png" },
    dither_layer = 20,
 }
 
@@ -743,7 +744,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = { "world/desert_pics/beach_00.png" },
+   textures = { pics_dir .. "desert/beach_00.png" },
    dither_layer = 10,
 }
 
@@ -755,7 +756,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob("world/desert_pics", "wasser_\\d+.png"),
+   textures = path.glob(pics_dir .. "desert", "wasser_\\d+.png"),
    dither_layer = 0,
    fps = 5,
 }
