@@ -33,6 +33,8 @@ granit -> granite
 Critters:
 <all_worlds>/bunny -> "bunny"
 greenland/brownbear -> "brownbear"
+greeland/winterland deer -> "stag" (male deer)
+blackland/desert deer -> "deer" (female deer)
 
 
 Immovables:
