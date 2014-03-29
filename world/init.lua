@@ -21,7 +21,7 @@ world:new_editor_category{
    picture = "world/pics/editor_category_desert.png",
 }
 
-include "world/resources.lua"
+include "world/resources/init.lua"
 include "world/terrains/init.lua"
 
 include "world/immovables/manmade/snowman/init.lua"

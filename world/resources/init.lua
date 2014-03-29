@@ -1,13 +1,15 @@
+pics_dir = path.dirname(__file__) .. "pics/"
+
 world:new_resource_type{
    name = "coal",
    descname = _ "Coal",
    max_amount = 20,
    detectable = true,
    editor_pictures = {
-      [5] = "world/pics/coal1.png",
-      [10] = "world/pics/coal2.png",
-      [15] = "world/pics/coal3.png",
-      [1000] = "world/pics/coal4.png",
+      [5] = pics_dir .. "coal1.png",
+      [10] = pics_dir .. "coal2.png",
+      [15] = pics_dir .. "coal3.png",
+      [1000] = pics_dir .. "coal4.png",
    }
 }
 
@@ -17,10 +19,10 @@ world:new_resource_type{
    max_amount = 20,
    detectable = true,
    editor_pictures = {
-      [5] = "world/pics/gold1.png",
-      [10] = "world/pics/gold2.png",
-      [15] = "world/pics/gold3.png",
-      [1000] = "world/pics/gold4.png",
+      [5] = pics_dir .. "gold1.png",
+      [10] = pics_dir .. "gold2.png",
+      [15] = pics_dir .. "gold3.png",
+      [1000] = pics_dir .. "gold4.png",
    }
 }
 
@@ -30,10 +32,10 @@ world:new_resource_type{
    max_amount = 20,
    detectable = true,
    editor_pictures = {
-      [5] = "world/pics/iron1.png",
-      [10] = "world/pics/iron2.png",
-      [15] = "world/pics/iron3.png",
-      [1000] = "world/pics/iron4.png",
+      [5] = pics_dir .. "iron1.png",
+      [10] = pics_dir .. "iron2.png",
+      [15] = pics_dir .. "iron3.png",
+      [1000] = pics_dir .. "iron4.png",
    }
 }
 
@@ -43,10 +45,10 @@ world:new_resource_type{
    max_amount = 20,
    detectable = true,
    editor_pictures = {
-      [5] = "world/pics/granite1.png",
-      [10] = "world/pics/granite2.png",
-      [15] = "world/pics/granite3.png",
-      [1000] = "world/pics/granite4.png",
+      [5] = pics_dir .. "granite1.png",
+      [10] = pics_dir .. "granite2.png",
+      [15] = pics_dir .. "granite3.png",
+      [1000] = pics_dir .. "granite4.png",
    }
 }
 
@@ -56,7 +58,7 @@ world:new_resource_type{
    max_amount = 50,
    detectable = true,
    editor_pictures = {
-      [1000] = "world/pics/water_resource.png",
+      [1000] = pics_dir .. "water.png",
    }
 }
 
@@ -66,6 +68,6 @@ world:new_resource_type{
    max_amount = 20,
    detectable = false,
    editor_pictures = {
-      [1000] = "world/pics/fish_resource.png",
+      [1000] = pics_dir .. "fish.png",
    }
 }
