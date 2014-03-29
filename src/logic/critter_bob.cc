@@ -127,14 +127,13 @@ bool Critter_Bob::run_remove
 ===========================================================================
 */
 
-Critter_Bob_Descr::Critter_Bob_Descr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const _tribe)
-	:
-	Bob::Descr(_name, _descname, _tribe),
-	m_swimming(global_s.get_bool("swimming", false))
-{
+Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
+                                     char const* const _descname,
+                                     const std::string& directory,
+                                     Profile& prof,
+                                     Section& global_s,
+                                     Tribe_Descr const* const _tribe)
+   : Bob::Descr(_name, _descname, _tribe) {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 		add_animation("idle", g_gr->animations().load(directory, idle_s));
@@ -178,8 +177,8 @@ Critter_Bob_Descr::Critter_Bob_Descr
 Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
    : Bob::Descr(table.get_string("name"),
                 table.get_string("descname"),
-                nullptr),  // Can only handle world critters.
-     m_swimming(table.get_bool("swimming")) {
+                nullptr)  // Can only handle world critters.
+{
 	{
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {
@@ -203,10 +202,14 @@ Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
 	}
 }
 
-
 Critter_Bob_Descr::~Critter_Bob_Descr() {
 	container_iterate_const(Programs, m_programs, i)
 		delete i.current->second;
+}
+
+bool Critter_Bob_Descr::is_swimming() const {
+	const static uint32_t swimming_attribute = get_attribute_id("swimming");
+	return has_attribute(swimming_attribute);
 }
 
 

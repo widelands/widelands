@@ -13,7 +13,6 @@ add_walking_animations(animations, dirname, "wisent_walk", {24, 32}, 20)
 world:new_critter_type{
    name = "wisent",
    descname = _ "Wisent",
-   swimming = false,
    attributes = { "eatable" },
    programs = {
       remove = { "remove" },

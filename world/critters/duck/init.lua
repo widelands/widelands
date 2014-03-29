@@ -17,8 +17,7 @@ add_walking_animations(animations, dirname, "duck_walk", {5, 10})
 world:new_critter_type{
    name = "duck",
    descname = _ "Duck",
-   swimming = true,
-   attributes = {},
+   attributes = { "swimming" },
    programs = {
       remove = { "remove" },
    },

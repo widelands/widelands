@@ -43,7 +43,7 @@ struct Critter_Bob_Descr : public Bob::Descr {
 
 	Bob & create_object() const override;
 
-	bool is_swimming() const {return m_swimming;}
+	bool is_swimming() const;
 	uint32_t movecaps() const override;
 	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 
@@ -51,7 +51,6 @@ struct Critter_Bob_Descr : public Bob::Descr {
 
 private:
 	DirAnimations m_walk_anims;
-	bool          m_swimming;
 	typedef std::map<std::string, Critter_BobProgram *> Programs;
 	Programs      m_programs;
 };

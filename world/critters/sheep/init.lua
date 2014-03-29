@@ -16,7 +16,6 @@ add_walking_animations(animations, dirname, "sheep_walk", {15, 25}, 20)
 world:new_critter_type{
    name = "sheep",
    descname = _ "Sheep",
-   swimming = false,
    attributes = { "eatable" },
    programs = {
       remove = { "remove" },
