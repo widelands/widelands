@@ -21,45 +21,49 @@
 
 #include "log.h"
 
-OneWorldLegacyLookupTable::OneWorldLegacyLookupTable()
-   :
+OneWorldLegacyLookupTable::OneWorldLegacyLookupTable() :
 // TERRAINS
-terrains_{
-std::make_pair(
-	"greenland", std::map<std::string, std::string>{
+terrains_
+{std::make_pair(
+	"greenland", std::map<std::string, std::string>
+	{
 		// No changes in terrain names for greenland.
-}),
+	}),
 std::make_pair(
-	"blackland", std::map<std::string, std::string>{
-		{ "strand", "wasteland_beach" },
-		{ "water", "wasteland_water" },
-		{ "mountain1", "wasteland_mountain1" },
-		{ "mountain2", "wasteland_mountain2" },
-		{ "mountain3", "wasteland_mountain3" },
-		{ "mountain4", "wasteland_mountain4" },
-}),
+	"blackland", std::map<std::string, std::string>
+	{
+		{"strand", "wasteland_beach"},
+		{"water", "wasteland_water"},
+		{"mountain1", "wasteland_mountain1"},
+		{"mountain2", "wasteland_mountain2"},
+		{"mountain3", "wasteland_mountain3"},
+		{"mountain4", "wasteland_mountain4"},
+	}),
 std::make_pair(
-	"winterland", std::map<std::string, std::string>{
-		{ "strand", "winter_beach" },
-		{ "ice_flows1", "ice_floes1" },
-		{ "ice_flows2", "ice_floes2" },
-		{ "mountain1", "winter_mountain1" },
-		{ "mountain2", "winter_mountain2" },
-		{ "mountain3", "winter_mountain3" },
-		{ "mountain4", "winter_mountain4" },
-		{ "water", "winter_water" },
-}),
+	"winterland", std::map<std::string, std::string>
+	{
+		{"strand", "winter_beach"},
+		{"ice_flows1", "ice_floes1"},
+		{"ice_flows2", "ice_floes2"},
+		{"mountain1", "winter_mountain1"},
+		{"mountain2", "winter_mountain2"},
+		{"mountain3", "winter_mountain3"},
+		{"mountain4", "winter_mountain4"},
+		{"water", "winter_water"},
+	}),
 std::make_pair(
-  "desert", std::map<std::string, std::string>{
-		{ "beach", "desert_beach" },
-		{ "steppe", "desert_steppe" },
-		{ "wasser", "desert_water" },
-}),
+	"desert", std::map<std::string, std::string>
+	{
+		{"beach", "desert_beach"},
+		{"steppe", "desert_steppe"},
+		{"wasser", "desert_water"},
+	}),
 }
 
 {}
 
-const std::string& OneWorldLegacyLookupTable::lookup_terrain(const std::string& world, const std::string& terrain) const {
+const std::string& OneWorldLegacyLookupTable::lookup_terrain(const std::string& world,
+                                                             const std::string& terrain) const {
 	const std::map<std::string, std::string>& world_terrains = terrains_.at(world);
 	if (world_terrains.count(terrain)) {
 		return world_terrains.at(terrain);

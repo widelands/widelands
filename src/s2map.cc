@@ -236,25 +236,30 @@ protected:
 	const std::map<S2_Map_Loader::WorldType, std::vector<std::string>> table_;
 };
 
-TerrainConverter::TerrainConverter(const Widelands::World& world)
-   : world_(world),
-     table_{
-			  std::make_pair(S2_Map_Loader::GREENLAND,
-									std::vector<std::string>{
-										"steppe", "berg1", "schnee", "sumpf", "strand", "wasser",
-										"wiese1", "wiese2", "wiese3", "berg2", "berg3", "berg4",
-										"steppe_kahl", "wiese4", "lava", "bergwiese"}),
-            std::make_pair(S2_Map_Loader::BLACKLAND,
-                           std::vector<std::string>{
-                              "ashes", "mountain1", "lava-stone1", "lava-stone2", "strand", "water",
-                              "hardground1", "hardground2", "hardground3", "mountain2", "mountain3",
-                              "mountain4", "ashes2", "hardground4", "lava", "hardlava"}),
-            std::make_pair(S2_Map_Loader::WINTERLAND,
-                           std::vector<std::string>{
-                              "tundra", "mountain1", "ice_flows", "ice_flows2", "ice", "water",
-                              "tundra_taiga", "tundra2", "tundra3", "mountain2", "mountain3",
-                              "mountain4", "strand", "taiga", "lava", "snow"})} {
-}
+TerrainConverter::TerrainConverter(const Widelands::World& world) :
+	world_(world),
+	table_
+	{
+	std::make_pair(S2_Map_Loader::GREENLAND, std::vector<std::string>
+		{
+			"steppe", "berg1", "schnee", "sumpf", "strand", "wasser", "wiese1",
+			"wiese2", "wiese3", "berg2", "berg3", "berg4", "steppe_kahl",
+			"wiese4", "lava", "bergwiese"
+		}),
+	std::make_pair(S2_Map_Loader::BLACKLAND, std::vector<std::string>
+		{
+			"ashes", "mountain1", "lava-stone1", "lava-stone2", "strand", "water",
+			"hardground1", "hardground2", "hardground3", "mountain2", "mountain3",
+			"mountain4", "ashes2", "hardground4", "lava", "hardlava"
+		}),
+	std::make_pair(S2_Map_Loader::WINTERLAND, std::vector<std::string>
+		{
+			"tundra", "mountain1", "ice_flows", "ice_flows2", "ice", "water",
+			"tundra_taiga", "tundra2", "tundra3", "mountain2", "mountain3",
+			"mountain4", "strand", "taiga", "lava", "snow"
+		})
+	}
+{}
 
 Widelands::Terrain_Index TerrainConverter::lookup(S2_Map_Loader::WorldType world, int8_t c) const {
 	switch (c) {

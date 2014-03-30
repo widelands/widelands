@@ -59,7 +59,7 @@ Module Functions
 static int L_basename(lua_State * L) {
 	// NOCOM(#sirver): use FS_Filename
 	std::string filename = luaL_checkstring(L, -1);
-	const size_t found = filename.rfind("/");
+	const size_t found = filename.rfind('/');
 	if (found != std::string::npos) {
 		lua_pushstring(L, filename.substr(found + 1));
 	}
@@ -80,7 +80,7 @@ static int L_dirname(lua_State * L) {
 	// NOCOM(#sirver): trim / from return value
 	// // NOCOM(#sirver): use FS_Dirname
 	std::string filename = luaL_checkstring(L, -1);
-	const size_t found = filename.rfind("/");
+	const size_t found = filename.rfind('/');
 	if (found != std::string::npos) {
 		lua_pushstring(L, filename.substr(0, found + 1));
 	}

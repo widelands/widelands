@@ -111,8 +111,10 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	m_toggle_minimap.sigclicked.connect(boost::bind(&Editor_Interactive::toggle_minimap, this));
 	m_toggle_buildhelp.sigclicked.connect(boost::bind(&Editor_Interactive::toggle_buildhelp, this));
 	m_toggle_player_menu.sigclicked.connect(boost::bind(&Editor_Interactive::toggle_playermenu, this));
-	m_undo.sigclicked.connect(boost::bind(&Editor_History::undo_action, &m_history, boost::cref(egbase().world())));
-	m_redo.sigclicked.connect(boost::bind(&Editor_History::redo_action, &m_history, boost::cref(egbase().world())));
+	m_undo.sigclicked.connect(
+	   boost::bind(&Editor_History::undo_action, &m_history, boost::cref(egbase().world())));
+	m_redo.sigclicked.connect(
+	   boost::bind(&Editor_History::redo_action, &m_history, boost::cref(egbase().world())));
 
 	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
