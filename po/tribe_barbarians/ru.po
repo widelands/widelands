@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-13 13:23+0000\n"
+"PO-Revision-Date: 2014-03-29 13:38+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-30 05:30+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: ru_RU\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -1618,6 +1618,8 @@ msgid ""
 "If all needed wares are delivered in time, a Battle Arena can train %1$s for "
 "one soldier from 0 to the highest level in %2$s on average."
 msgstr ""
+"При наличии всех нужных товаров в арене поединков %1$s новых солдат "
+"тренируется до максимального уровня в среднем за %2$s."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1762,6 +1764,10 @@ msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
 msgstr ""
+"Очень давно варвары научились добывать в горах это чёрное вещество, которое "
+"отапливает их домны<br>. \n"
+"Дерево может и сгодится для домашнего очага и для того, чтобы согреться, но "
+"при работе с железом и золотом нет ничего лучше угля."
 
 #: ../../tribes/barbarians/coalmine/help.lua:18
 #: ../../tribes/barbarians/deep_coalmine/help.lua:18
@@ -3428,6 +3434,8 @@ msgid ""
 "ceases to be produced by the building if it is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"Лопата нужна для правильного окучивания растений. Именно поэтому ими "
+"пользуются садовники и лесники. Производятся в мастерской."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
@@ -3528,6 +3536,8 @@ msgid ""
 "Trains soldiers in Attack up to level 5, and in Health up to level "
 "3.<br>Equips the soldiers with all necessary weapons and armor parts."
 msgstr ""
+"Тренирует солдат, улучшая их навык атаки до 5 и увеличивая их здоровье до "
+"3.<br>Снаряжает солдат всем нужным оружием и доспехами."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:17
 msgid "Note:"
@@ -3578,6 +3588,8 @@ msgid ""
 "If all needed wares are delivered in time, a Training Camp can train one new "
 "soldier in %1$s and %2$s to the final level in %3$s on average."
 msgstr ""
+"При наличии всех нужных товаров в тренировочном лагере %1$s и %2$s новых "
+"солдат тренируются до максимального уровня в среднем за %3$s."
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid ""

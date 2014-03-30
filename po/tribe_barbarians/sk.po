@@ -73,14 +73,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-24 13:04+0000\n"
+"PO-Revision-Date: 2014-03-29 19:11+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-03-25 05:47+0000\n"
+"X-Launchpad-Export-Date: 2014-03-30 05:30+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: Czech Republic\n"
 "Language: sk\n"
@@ -88,7 +88,7 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr "Vaša kasárne odhalili útočníka."
+msgstr "Vaše kasárne odhalili útočníka."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your Barracks is under attack."
@@ -2587,7 +2587,7 @@ msgstr "Sušiareň dreva"
 
 #: ../../tribes/barbarians/conf:191
 msgid "Reed Yard"
-msgstr "Trstinové pole"
+msgstr "Trstinová záhrada"
 
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/farm/help.lua:25
@@ -2844,7 +2844,7 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ships’ sails."
 msgstr ""
-"Na trstinovom poli sa pestuje trstina, ktorá má pre barbarov dva odlišné "
+"V trstinovej záhrade sa pestuje trstina, ktorá má pre barbarov dva odlišné "
 "účely.<br>Je tradičným materiálom na zastrešovanie a tká sa z nej mimoriadne "
 "trvanlivá látka, z ktorej barbari vyrábajú lodné plachty."
 
@@ -2852,12 +2852,14 @@ msgstr ""
 msgid ""
 "The Reed Yard’s output will only go to construction sites that need it."
 msgstr ""
-"Výstup z trstinového poľa sa dostane len ku staveniskám, ktoré ho potrebujú."
+"Výstup z trstinovej záhrady sa dostane len ku staveniskám, ktoré ho "
+"potrebujú."
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid ""
 "A Reed Yard can produce a sheaf of Thatch Reed in about %s on average."
-msgstr "Trstinové pole dokáže vyprodukovať zväzok trstiny v priemere za %s."
+msgstr ""
+"Trstinová záhrada dokáže vyprodukovať zväzok trstiny v priemere za %s."
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -3554,8 +3556,8 @@ msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
 msgstr ""
-"Trstina sa pestuje na trstinovom poli a slúži na ochranu striech budov pred "
-"vodou."
+"Trstina sa pestuje v trstinovej záhrade a slúži na ochranu striech budov "
+"pred vodou."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
