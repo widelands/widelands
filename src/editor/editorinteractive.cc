@@ -206,7 +206,6 @@ void Editor_Interactive::load(const std::string & filename) {
 		 map.get_scenario_player_name(p));
 	}
 
-	loader_ui.step(_("Loading world data"));
 	ml->load_map_complete(egbase(), true);
 	loader_ui.step(_("Loading graphics..."));
 	egbase().load_graphics(loader_ui);

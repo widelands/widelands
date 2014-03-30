@@ -2,13 +2,6 @@
 --  Former greenland  --
 ------------------------
 
--- NOCOM(#sirver): this is suboptimal
--- Order does matter here, since this file should stay compatible
--- with S2
---
-
--- NOCOM(#sirver): no need to keep the german names now - translate to english.
-
 pics_dir = path.dirname(__file__) .. "pics/"
 world:new_terrain_type{
    name = "wiese1",

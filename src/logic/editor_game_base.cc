@@ -43,6 +43,7 @@
 #include "logic/worker.h"
 #include "logic/world/world.h"
 #include "rgbcolor.h"
+#include "scoped_timer.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
@@ -107,6 +108,7 @@ World* Editor_Game_Base::mutable_world() {
 		// Lazy initialization of World. We need to create the pointer to the
 		// world immediately though, because the lua scripts need to have access
 		// to world through this method already.
+		ScopedTimer timer("Loading the world took %ums");
 		world_.reset(new World());
 
 		try {
