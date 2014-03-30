@@ -38,5 +38,6 @@ blackland/desert deer -> "deer" (female deer)
 
 
 Immovables:
+<all_worlds>_skeleton1 => "skeleton1"
 greenland/tree1 -> "aspen_summer_old"
 winterland/snowman -> "snowman"

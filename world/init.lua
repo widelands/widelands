@@ -24,6 +24,7 @@ world:new_editor_category{
 include "world/resources/init.lua"
 include "world/terrains/init.lua"
 
+include "world/immovables/skeleton1/init.lua"
 include "world/immovables/manmade/snowman/init.lua"
 include "world/immovables/trees/aspen_summer_old/init.lua"
 
