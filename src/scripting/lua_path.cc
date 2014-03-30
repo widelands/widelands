@@ -19,7 +19,7 @@
 
 #include "scripting/lua_path.h"
 
-#include <regex>
+#include <boost/regex.hpp>
 
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -94,9 +94,9 @@ static int L_glob(lua_State * L) {
 	const std::string dir = luaL_checkstring(L, -2);
 	const std::string re_as_string = luaL_checkstring(L, -1);
 
-	std::regex re(re_as_string);
+	boost::regex re(re_as_string);
 	std::set<std::string> files = filter(g_fs->ListDirectory(dir), [&re](const std::string& filename) {
-		return regex_match(FileSystem::FS_Filename(filename.c_str()), re);
+		return boost::regex_match(FileSystem::FS_Filename(filename.c_str()), re);
 	});
 	lua_newtable(L);
 	int idx = 1;

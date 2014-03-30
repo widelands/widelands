@@ -114,7 +114,7 @@ target_link_libraries(widelands_all ${PNG_LIBRARY})
 target_link_libraries(widelands_all ${ZLIB_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
 target_link_libraries(widelands_all ${GLEW_LIBRARY})
-target_link_libraries(widelands_all ${Boost_SIGNALS_LIBRARY})
+target_link_libraries(widelands_all ${Boost_LIBRARIES})
 
 if (MINIZIP_FOUND)
   target_link_libraries(widelands_all ${MINIZIP_LIBRARY})
