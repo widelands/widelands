@@ -32,7 +32,7 @@
 
 
 namespace Widelands {
-struct Bob;
+class Bob;
 class Map_Object;
 class Editor_Game_Base;
 

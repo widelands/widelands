@@ -49,7 +49,7 @@ Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
-: Descr(given_name, gdescname, directory, prof, global_s, &gtribe)
+: BobDescr(given_name, gdescname, directory, prof, global_s, &gtribe)
 {
 	m_sail_anims.parse(*this, directory, prof, "sail");
 

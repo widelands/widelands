@@ -40,7 +40,7 @@
 
 namespace Widelands {
 	struct Soldier_Descr;
-	struct Bob;
+	class Bob;
 }
 
 namespace LuaMap {

@@ -57,7 +57,7 @@ void Map_Bob_Data_Packet::ReadBob
 				throw game_data_error
 					("world %s does not define bob type \"%s\"",
 					 world.get_name(), name);
-			const Bob::Descr & descr = *world.get_bob_descr(idx);
+			const BobDescr & descr = *world.get_bob_descr(idx);
 			if (not (map[coords].nodecaps() & descr.movecaps()))
 				log
 					("WARNING: Found a %s at (%i, %i), but it can not move "

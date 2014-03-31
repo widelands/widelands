@@ -87,7 +87,7 @@ m_click_recursion_protect(false)
 			m_tabpanel.add("icons", tab_icon, box);
 		}
 
-		const Widelands::Bob::Descr & descr = *world.get_bob_descr(i);
+		const Widelands::BobDescr & descr = *world.get_bob_descr(i);
 		upcast(Widelands::Critter_Bob_Descr const, critter_descr, &descr);
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,

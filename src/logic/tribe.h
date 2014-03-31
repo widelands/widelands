@@ -130,10 +130,10 @@ struct Tribe_Descr : boost::noncopyable {
 		return m_immovables.get(get_immovable_index(imm_name.c_str()));
 	}
 	int32_t get_bob(char const * const l) const {return m_bobs.get_index(l);}
-	Bob::Descr const * get_bob_descr(uint16_t const index) const {
+	BobDescr const * get_bob_descr(uint16_t const index) const {
 		return m_bobs.get(index);
 	}
-	Bob::Descr const * get_bob_descr(const std::string & bob_name) const {
+	BobDescr const * get_bob_descr(const std::string & bob_name) const {
 		return m_bobs.exists(bob_name.c_str());
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
@@ -245,7 +245,7 @@ private:
 	IndexedDescriptionMaintainer<Building_Descr, Building_Index>  m_buildings;
 	IndexedDescriptionMaintainer<WareDescr, Ware_Index> m_wares;
 	DescriptionMaintainer<Immovable_Descr> m_immovables;  // The player immovables
-	DescriptionMaintainer<Bob::Descr>      m_bobs;
+	DescriptionMaintainer<BobDescr>      m_bobs;
 	std::string                       m_carrier2;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;

@@ -129,7 +129,7 @@ Critter_Bob_Descr::Critter_Bob_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const * const _tribe)
 	:
-	Bob::Descr(_name, _descname, directory, prof, global_s, _tribe),
+	BobDescr(_name, _descname, directory, prof, global_s, _tribe),
 	m_swimming(global_s.get_bool("swimming", false))
 {
 	char defaultpics[256];

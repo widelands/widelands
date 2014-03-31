@@ -326,10 +326,10 @@ struct World : boost::noncopyable {
 	}
 	int32_t get_nr_terrains() const {return ters.get_nitems();}
 	int32_t get_bob(char const * const l) const {return bobs.get_index(l);}
-	Bob::Descr const * get_bob_descr(uint16_t const index) const {
+	BobDescr const * get_bob_descr(uint16_t const index) const {
 		return bobs.get(index);
 	}
-	Bob::Descr const * get_bob_descr(const std::string & name) const {
+	BobDescr const * get_bob_descr(const std::string & name) const {
 		return bobs.exists(name.c_str());
 	}
 	int32_t get_nr_bobs() const {return bobs.get_nitems();}
@@ -358,7 +358,7 @@ private:
 	std::string m_basedir; //  base directory, where the main conf file resides
 	World_Descr_Header                hd;
 
-	DescriptionMaintainer<Bob::Descr>      bobs;
+	DescriptionMaintainer<BobDescr>      bobs;
 	DescriptionMaintainer<Immovable_Descr> immovables;
 	DescriptionMaintainer<Terrain_Descr>   ters;
 	DescriptionMaintainer<Resource_Descr>  m_resources;

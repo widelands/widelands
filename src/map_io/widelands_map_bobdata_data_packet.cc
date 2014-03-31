@@ -86,7 +86,7 @@ void Map_Bobdata_Data_Packet::Read
 				}
 				try {
 					Bob & bob = mol.get<Bob>(serial);
-					const Bob::Descr & bob_descr = bob.descr();
+					const BobDescr & bob_descr = bob.descr();
 
 					if (Player_Number const read_owner = fr.Player_Number8()) {
 						if (nr_players < read_owner)
