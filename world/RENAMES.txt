@@ -19,7 +19,9 @@ Immovables:
 # NOCOM: Skeleton2 and skeleton3 lived in multiple worlds, but were in different order in different worlds.
 # NOCOM: By vote of majority, skeleton2 is the ammonite, while skeleton3 is the mammoth skull
 # NOCOM: I don't know how this will affect compatibility for older games...
-greenland_skeleton2 => "skeleton2"
-greenland_skeleton3 => "skeleton3"
+# NOCOM: Fwiw, I moved 2 and 3 from grassland, but since they lived in multiple worlds all can be considered replaced
+<all_worlds>_skeleton2 => "skeleton2"
+<all_worlds>_skeleton3 => "skeleton3"
+desert_skeleton4 => "skeleton4"
 greenland/tree1 -> "aspen_summer_old"
 winterland/snowman -> "snowman"
