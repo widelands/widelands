@@ -6,268 +6,268 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-12 21:37+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
 "PO-Revision-Date: 2014-03-14 18:50+0000\n"
 "Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-15 05:40+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:32+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: hu\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
-msgid "Your Barracks discovered an aggressor."
-msgstr "Laktanyád katonái támadót észleltek."
+msgid "Your barracks discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:9
-msgid "Your Barracks is under attack."
-msgstr "Megtámadták a laktanyádat."
+msgid "Your barracks is under attack."
+msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:10
-msgid "The enemy defeated your soldiers at the Barracks"
-msgstr "Az ellenség elfoglalta a laktanyádat"
+msgid "The enemy defeated your soldiers at the barracks."
+msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr "Katonáid elfoglalták az ellenség laktanyáját"
+msgid "Your soldiers defeated the enemy at the barracks."
+msgstr ""
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
-msgid "Your Barrier discovered an aggressor."
-msgstr "Határőrházad katonái támadót észleltek."
+msgid "Your barrier discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
-msgid "Your Barrier is under attack."
-msgstr "Megtámadták a határőrházadat."
+msgid "Your barrier is under attack."
+msgstr ""
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
-msgid "The enemy defeated your soldiers at the Barrier"
-msgstr "Az ellenség elfoglalta a határőrházadat"
+msgid "The enemy defeated your soldiers at the barrier."
+msgstr ""
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr "Katonáid elfoglalták az ellenség határőrházát"
+msgid "Your soldiers defeated the enemy at the barrier."
+msgstr ""
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/atlanteans/castle/conf:7
-msgid "Your Castle discovered an aggressor."
-msgstr "Várad katonái támadót észleltek."
+msgid "Your castle discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/atlanteans/castle/conf:8
-msgid "Your Castle is under attack."
-msgstr "Megtámadták a váradat."
+msgid "Your castle is under attack."
+msgstr ""
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/atlanteans/castle/conf:9
-msgid "The enemy defeated your soldiers at the Castle"
-msgstr "Az ellenség bevette a váradat"
+msgid "The enemy defeated your soldiers at the castle."
+msgstr ""
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/atlanteans/castle/conf:10
-msgid "Your soldiers defeated the enemy at the Castle"
-msgstr "Katonáid bevették az ellenség várát"
+msgid "Your soldiers defeated the enemy at the castle."
+msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
-msgid "Your Citadel discovered an aggressor."
-msgstr "Fellegvárad katonái támadót észleltek."
+msgid "Your citadel discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
-msgid "Your Citadel is under attack."
-msgstr "Megtámadták a fellegváradat."
+msgid "Your citadel is under attack."
+msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Citadel"
-msgstr "Az ellenség bevette a fellegváradat"
+msgid "The enemy defeated your soldiers at the citadel."
+msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr "Katonáid bevették az ellenség fellegvárát"
+msgid "Your soldiers defeated the enemy at the citadel."
+msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
-msgid "Your Donjon discovered an aggressor."
-msgstr "Tornyod katonái támadót észleltek."
+msgid "Your donjon discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
-msgid "Your Donjon is under attack."
-msgstr "Megtámadták a tornyodat."
+msgid "Your donjon is under attack."
+msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
-msgid "The enemy defeated your soldiers at the Donjon"
-msgstr "Az ellenség elfoglalta a tornyodat"
+msgid "The enemy defeated your soldiers at the donjon."
+msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
-msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr "Katonáid elfoglalták az ellenség tornyát"
+msgid "Your soldiers defeated the enemy at the donjon."
+msgstr ""
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
-msgid "Your Fortress discovered an aggressor."
-msgstr "Erődöd katonái támadót észleltek."
+msgid "Your fortress discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
-msgid "Your Fortress is under attack."
-msgstr "Megtámadták az erődödet."
+msgid "Your fortress is under attack."
+msgstr ""
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
-msgid "The enemy defeated your soldiers at the Fortress"
-msgstr "Az ellenség bevette az erődödet"
+msgid "The enemy defeated your soldiers at the fortress."
+msgstr ""
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Fortress"
-msgstr "Katonáid bevették az ellenség erődjét"
+msgid "Your soldiers defeated the enemy at the fortress."
+msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhall/conf:7
-msgid "Your Guardhall discovered an aggressor."
-msgstr "Őrtermed katonái támadót észleltek."
+msgid "Your guardhall discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhall/conf:8
-msgid "Your Guardhall is under attack."
-msgstr "Megtámadták az őrtermedet."
+msgid "Your guardhall is under attack."
+msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhall/conf:9
-msgid "The enemy defeated your soldiers at the Guardhall"
-msgstr "Az ellenség elfoglalta az őrtermedet"
+msgid "The enemy defeated your soldiers at the guardhall."
+msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhall/conf:10
-msgid "Your soldiers defeated the enemy at the Guardhall"
-msgstr "Katonáid elfoglalták az ellenség őrtermét"
+msgid "Your soldiers defeated the enemy at the guardhall."
+msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhouse/conf:7
-msgid "Your Guardhouse discovered an aggressor."
-msgstr "Őrházad katonái támadót észleltek."
+msgid "Your guardhouse discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhouse/conf:8
-msgid "Your Guardhouse is under attack."
-msgstr "Megtámadták az őrházadat."
+msgid "Your guardhouse is under attack."
+msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhouse/conf:9
-msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr "Az ellenség elfoglalta az őrházadat"
+msgid "The enemy defeated your soldiers at the guardhouse."
+msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhouse/conf:10
-msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr "Katonáid elfoglalták az ellenség őrházát"
+msgid "Your soldiers defeated the enemy at the guardhouse."
+msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
-msgid "Your High Tower discovered an aggressor."
-msgstr "Magas tornyod katonái támadót észleltek."
+msgid "Your high tower discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/high_tower/conf:11
-msgid "Your High Tower is under attack."
-msgstr "Megtámadták a magas tornyodat."
+msgid "Your high tower is under attack."
+msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/high_tower/conf:12
-msgid "The enemy defeated your soldiers at the High Tower"
-msgstr "Az ellenség elfoglalta a magas tornyodat"
+msgid "The enemy defeated your soldiers at the high tower."
+msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/high_tower/conf:13
-msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr "Katonáid elfoglalták az ellenség magas tornyát"
+msgid "Your soldiers defeated the enemy at the high tower."
+msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:8
-msgid "Your Outpost discovered an aggressor."
-msgstr "Előőrsöd katonái támadót észleltek."
+msgid "Your outpost discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:9
-msgid "Your Outpost is under attack."
-msgstr "Megtámadták az előőrsödet."
+msgid "Your outpost is under attack."
+msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:10
-msgid "The enemy defeated your soldiers at the Outpost"
-msgstr "Az ellenség elfoglalta az előőrsödet"
+msgid "The enemy defeated your soldiers at the outpost."
+msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr "Katonáid elfoglalták az ellenség előőrsét."
+msgid "Your soldiers defeated the enemy at the outpost."
+msgstr ""
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
-msgid "Your Sentry discovered an aggressor."
-msgstr "Őrházad katonái támadót észleltek."
+msgid "Your sentry discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
-msgid "Your Sentry is under attack."
-msgstr "Megtámadták az őrházadat."
+msgid "Your sentry is under attack."
+msgstr ""
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
-msgid "The enemy defeated your soldiers at the Sentry"
-msgstr "Az ellenség elfoglalta az őrházadat"
+msgid "The enemy defeated your soldiers at the sentry."
+msgstr ""
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr "Katonáid elfoglalták az ellenség őrházát"
+msgid "Your soldiers defeated the enemy at the sentry."
+msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
-msgid "Your Small Tower discovered an aggressor."
-msgstr "Kis tornyod katonái támadót észleltek."
+msgid "Your small tower discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/small_tower/conf:9
-msgid "Your Small Tower is under attack."
-msgstr "Megtámadták a kis tornyodat."
+msgid "Your small tower is under attack."
+msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/small_tower/conf:10
-msgid "The enemy defeated your soldiers at the Small Tower"
-msgstr "Az ellenség elfoglalta a kis tornyodat"
+msgid "The enemy defeated your soldiers at the small tower."
+msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
-msgid "Your soldiers defeated the enemy at the Small Tower"
-msgstr "Katonáid elfoglalták az ellenség kis tornyát"
+msgid "Your soldiers defeated the enemy at the small tower."
+msgstr ""
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
-msgid "Your Tower discovered an aggressor."
-msgstr "Tornyod katonái támadót észleltek."
+msgid "Your tower discovered an aggressor."
+msgstr ""
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/atlanteans/tower/conf:10
-msgid "Your Tower is under attack."
-msgstr "Megtámadták a tornyodat."
+msgid "Your tower is under attack."
+msgstr ""
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
-msgid "The enemy defeated your soldiers at the Tower"
-msgstr "Az ellenség elfoglalta a tornyodat"
+msgid "The enemy defeated your soldiers at the tower."
+msgstr ""
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
-msgid "Your soldiers defeated the enemy at the Tower"
-msgstr "Katonáid elfoglalták az ellenség tornyát"
+msgid "Your soldiers defeated the enemy at the tower."
+msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -279,19 +279,19 @@ msgstr ""
 "páncélkovácsműhelyben készülnek, és a labirintusban – élelemmel együtt – a "
 "katonák védekezését fejlesztik velük 1.-ről 2. szintre."
 
-#: ../../tribes/atlanteans/armoursmith/conf:1
+#: ../../tribes/atlanteans/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
 msgstr "Páncélt készít a katonák számára."
 
-#: ../../tribes/atlanteans/armoursmithy/conf:28
+#: ../../tribes/atlanteans/armorsmithy/conf:28
 msgid "Produce steel shield"
 msgstr "az acélpajzskészítés"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:29
+#: ../../tribes/atlanteans/armorsmithy/conf:29
 msgid "Produce advanced shield"
 msgstr "a fejlesztettpajzs-készítés"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:30
+#: ../../tribes/atlanteans/armorsmithy/conf:30
 #: ../../tribes/atlanteans/bakery/conf:25
 #: ../../tribes/atlanteans/blackroot_farm/conf:24
 #: ../../tribes/atlanteans/burners_house/conf:23
@@ -325,14 +325,6 @@ msgstr "a munka"
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
 msgstr "Kenyeret süt a munkásoknak."
-
-#: ../../tribes/atlanteans/bakingtray/conf:1
-msgid ""
-"The bread paddle is the tool of the baker, each baker needs one. It is "
-"produced by the toolsmith."
-msgstr ""
-"A sütőlapát a pék eszköze, minden péknek sajátja van. A szerszámkovács "
-"készíti."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -374,6 +366,14 @@ msgstr ""
 "sütik a pékségekben. Alapvető élelmiszere a bányászoknak, felderítőknek, "
 "illetve a kiképzőhelyeken (labirintus és kazamata) a katonáknak."
 
+#: ../../tribes/atlanteans/bread_paddle/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs one. It is "
+"produced by the toolsmith."
+msgstr ""
+"A sütőlapát a pék eszköze, minden péknek sajátja van. A szerszámkovács "
+"készíti."
+
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
 msgstr ""
@@ -392,8 +392,8 @@ msgid "Carries items along your roads."
 msgstr "Árut szállít a csomópontok között."
 
 #: ../../tribes/atlanteans/castle/conf:6
-msgid "Your soldiers have occupied your Castle"
-msgstr "Katonáid elfoglalták őrhelyeiket a várban"
+msgid "Your soldiers have occupied your castle."
+msgstr ""
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -421,588 +421,588 @@ msgstr ""
 "Ez a törzs még a legrégebbi mondákban is szerepel. Ők Atlantisz fiai és "
 "lányai."
 
-#: ../../tribes/atlanteans/conf:33
+#: ../../tribes/atlanteans/conf:31
 msgid "Ashes"
 msgstr "Hamu"
 
-#: ../../tribes/atlanteans/conf:34
+#: ../../tribes/atlanteans/conf:32
 msgid "Blackroot Field"
 msgstr "Feketegyökér-ültetvény"
 
-#: ../../tribes/atlanteans/conf:35
+#: ../../tribes/atlanteans/conf:33
 msgid "Blackroot Field (harvested)"
 msgstr "Learatott feketegyökér-ültetvény"
 
-#: ../../tribes/atlanteans/conf:36
+#: ../../tribes/atlanteans/conf:34
 msgid "Blackroot Field (medium)"
 msgstr "Közepes feketegyökér"
 
-#: ../../tribes/atlanteans/conf:37
+#: ../../tribes/atlanteans/conf:35
 msgid "Blackroot Field (small)"
 msgstr "Kis feketegyökér"
 
-#: ../../tribes/atlanteans/conf:38
+#: ../../tribes/atlanteans/conf:36
 msgid "Blackroot Field (tiny)"
 msgstr "Apró feketegyökér"
 
-#: ../../tribes/atlanteans/conf:39
+#: ../../tribes/atlanteans/conf:37
 msgid "Cornfield"
 msgstr "Kukoricamező"
 
-#: ../../tribes/atlanteans/conf:40
+#: ../../tribes/atlanteans/conf:38
 msgid "Cornfield (harvested)"
 msgstr "Learatott kukoricamező"
 
-#: ../../tribes/atlanteans/conf:41
+#: ../../tribes/atlanteans/conf:39
 msgid "Cornfield (medium)"
 msgstr "Éretlen kukoricamező"
 
-#: ../../tribes/atlanteans/conf:42
+#: ../../tribes/atlanteans/conf:40
 msgid "Cornfield (small)"
 msgstr "Fiatal kukoricamező"
 
-#: ../../tribes/atlanteans/conf:43
+#: ../../tribes/atlanteans/conf:41
 msgid "Cornfield (tiny)"
 msgstr "Kukorica palánták"
 
-#: ../../tribes/atlanteans/conf:44
+#: ../../tribes/atlanteans/conf:42
 msgid "Destroyed Building"
 msgstr "Lerombolt épület"
 
-#: ../../tribes/atlanteans/conf:45
+#: ../../tribes/atlanteans/conf:43
 msgid "Resource indicator: Coal (little)"
 msgstr "Kevés szén forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:46
+#: ../../tribes/atlanteans/conf:44
 msgid "Resource indicator: Coal (much)"
 msgstr "Sok szén forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:47
+#: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator: Gold (little)"
 msgstr "Kevés arany forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:48
+#: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator: Gold (much)"
 msgstr "Sok arany forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:49
+#: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator: Granite (little)"
 msgstr "Kevés gránit forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:50
+#: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Granite (much)"
 msgstr "Sok gránit forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:51
+#: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Iron (little)"
 msgstr "Kevés vas forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:52
+#: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Iron (much)"
 msgstr "Sok vas forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:53
+#: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: No resource"
 msgstr "Semmi nyersanyag forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:54
+#: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Water"
 msgstr "Víz forrásjelzője"
 
-#: ../../tribes/atlanteans/conf:55
+#: ../../tribes/atlanteans/conf:53
 msgid "Ship Construction Site"
 msgstr "Hajóépítési terület"
 
-#: ../../tribes/atlanteans/conf:58
+#: ../../tribes/atlanteans/conf:56
 msgid "Advanced Shield"
 msgstr "Fejlesztett pajzs"
 
-#: ../../tribes/atlanteans/conf:59
+#: ../../tribes/atlanteans/conf:57
 msgid "Bread Paddle"
 msgstr "Sütőlapát"
 
-#: ../../tribes/atlanteans/conf:60
+#: ../../tribes/atlanteans/conf:58
 msgid "Blackroot Flour"
 msgstr "Feketegyökérliszt"
 
-#: ../../tribes/atlanteans/conf:61
+#: ../../tribes/atlanteans/conf:59
 msgid "Blackroot"
 msgstr "Feketegyökér"
 
-#: ../../tribes/atlanteans/conf:62
+#: ../../tribes/atlanteans/conf:60
 msgid "Bread"
 msgstr "Kenyér"
 
-#: ../../tribes/atlanteans/conf:63
+#: ../../tribes/atlanteans/conf:61
 msgid "Buckets"
 msgstr "Vödrök"
 
-#: ../../tribes/atlanteans/conf:64
+#: ../../tribes/atlanteans/conf:62
 msgid "Coal"
 msgstr "Szén"
 
-#: ../../tribes/atlanteans/conf:65
+#: ../../tribes/atlanteans/conf:63
 msgid "Cornflour"
 msgstr "Kukoricaliszt"
 
-#: ../../tribes/atlanteans/conf:66
+#: ../../tribes/atlanteans/conf:64
 msgid "Corn"
 msgstr "Kukorica"
 
-#: ../../tribes/atlanteans/conf:67
+#: ../../tribes/atlanteans/conf:65
 msgid "Diamond"
 msgstr "Gyémánt"
 
-#: ../../tribes/atlanteans/conf:68
+#: ../../tribes/atlanteans/conf:66
 msgid "Double Trident"
 msgstr "Kétvégű szigony"
 
-#: ../../tribes/atlanteans/conf:69
+#: ../../tribes/atlanteans/conf:67
 msgid "Fire Tongs"
 msgstr "Tűzifogó"
 
-#: ../../tribes/atlanteans/conf:70
+#: ../../tribes/atlanteans/conf:68
 msgid "Fishing Net"
 msgstr "Halászháló"
 
-#: ../../tribes/atlanteans/conf:71
+#: ../../tribes/atlanteans/conf:69
 msgid "Fish"
 msgstr "Hal"
 
-#: ../../tribes/atlanteans/conf:72
+#: ../../tribes/atlanteans/conf:70
 msgid "Golden Tabard"
 msgstr "Aranyköntös"
 
-#: ../../tribes/atlanteans/conf:73
+#: ../../tribes/atlanteans/conf:71
 msgid "Gold Ore"
 msgstr "Aranyérc"
 
-#: ../../tribes/atlanteans/conf:74
+#: ../../tribes/atlanteans/conf:72
 msgid "Gold"
 msgstr "Arany"
 
-#: ../../tribes/atlanteans/conf:75
+#: ../../tribes/atlanteans/conf:73
 msgid "Gold Yarn"
 msgstr "Aranyfonal"
 
-#: ../../tribes/atlanteans/conf:76
+#: ../../tribes/atlanteans/conf:74
 msgid "Hammer"
 msgstr "Kalapács"
 
-#: ../../tribes/atlanteans/conf:77
+#: ../../tribes/atlanteans/conf:75
 msgid "Heavy Double Trident"
 msgstr "Nehéz kétvégű szigony"
 
-#: ../../tribes/atlanteans/conf:78
+#: ../../tribes/atlanteans/conf:76
 msgid "Hook pole"
 msgstr "Kampós rúd"
 
-#: ../../tribes/atlanteans/conf:79
+#: ../../tribes/atlanteans/conf:77
 msgid "Hunting Bow"
 msgstr "Vadászíj"
 
-#: ../../tribes/atlanteans/conf:80
+#: ../../tribes/atlanteans/conf:78
 msgid "Iron Ore"
 msgstr "Vasérc"
 
-#: ../../tribes/atlanteans/conf:81
+#: ../../tribes/atlanteans/conf:79
 msgid "Iron"
 msgstr "Vas"
 
-#: ../../tribes/atlanteans/conf:82
+#: ../../tribes/atlanteans/conf:80
 msgid "Light Trident"
 msgstr "Könnyű szigony"
 
-#: ../../tribes/atlanteans/conf:83
+#: ../../tribes/atlanteans/conf:81
 msgid "Long Trident"
 msgstr "Hosszú szigony"
 
-#: ../../tribes/atlanteans/conf:84
+#: ../../tribes/atlanteans/conf:82
 msgid "Meat"
 msgstr "Hús"
 
-#: ../../tribes/atlanteans/conf:85
+#: ../../tribes/atlanteans/conf:83
 msgid "Milking Tongs"
 msgstr "Fejőfogó"
 
-#: ../../tribes/atlanteans/conf:86
+#: ../../tribes/atlanteans/conf:84
 msgid "Quartz"
 msgstr "Kvarc"
 
-#: ../../tribes/atlanteans/conf:87
+#: ../../tribes/atlanteans/conf:85
 msgid "Pick"
 msgstr "Csákány"
 
-#: ../../tribes/atlanteans/conf:88
+#: ../../tribes/atlanteans/conf:86
 msgid "Planks"
 msgstr "Deszka"
 
-#: ../../tribes/atlanteans/conf:89
+#: ../../tribes/atlanteans/conf:87
 msgid "Saw"
 msgstr "Fűrész"
 
-#: ../../tribes/atlanteans/conf:90
+#: ../../tribes/atlanteans/conf:88
 msgid "Scythe"
 msgstr "Kasza"
 
-#: ../../tribes/atlanteans/conf:91
+#: ../../tribes/atlanteans/conf:89
 msgid "Shovel"
 msgstr "Lapát"
 
-#: ../../tribes/atlanteans/conf:92
+#: ../../tribes/atlanteans/conf:90
 msgid "Smoked Fish"
 msgstr "Füstölt hal"
 
-#: ../../tribes/atlanteans/conf:93
+#: ../../tribes/atlanteans/conf:91
 msgid "Smoked Meat"
 msgstr "Füstölt hús"
 
-#: ../../tribes/atlanteans/conf:94
+#: ../../tribes/atlanteans/conf:92
 msgid "Spidercloth"
 msgstr "Pókszövet"
 
-#: ../../tribes/atlanteans/conf:95
+#: ../../tribes/atlanteans/conf:93
 msgid "Spideryarn"
 msgstr "Pókfonal"
 
-#: ../../tribes/atlanteans/conf:96
+#: ../../tribes/atlanteans/conf:94
 msgid "Steel Shield"
 msgstr "Acélpajzs"
 
-#: ../../tribes/atlanteans/conf:97
+#: ../../tribes/atlanteans/conf:95
 msgid "Steel Trident"
 msgstr "Acélszigony"
 
-#: ../../tribes/atlanteans/conf:98
+#: ../../tribes/atlanteans/conf:96
 msgid "Stone"
 msgstr "Kő"
 
-#: ../../tribes/atlanteans/conf:99
+#: ../../tribes/atlanteans/conf:97
 msgid "Tabard"
 msgstr "Köntös"
 
-#: ../../tribes/atlanteans/conf:100
+#: ../../tribes/atlanteans/conf:98
 msgid "Log"
 msgstr "Farönk"
 
-#: ../../tribes/atlanteans/conf:101
+#: ../../tribes/atlanteans/conf:99
 msgid "Water"
 msgstr "Víz"
 
-#: ../../tribes/atlanteans/conf:104
+#: ../../tribes/atlanteans/conf:102
 msgid "Carrier"
 msgstr "Hordár"
 
-#: ../../tribes/atlanteans/conf:105
+#: ../../tribes/atlanteans/conf:103
 msgid "Horse"
 msgstr "Ló"
 
-#: ../../tribes/atlanteans/conf:108
+#: ../../tribes/atlanteans/conf:106
 msgid "Soldier"
 msgstr "Katona"
 
-#: ../../tribes/atlanteans/conf:111
+#: ../../tribes/atlanteans/conf:109
 msgid "Armorsmith"
 msgstr "Páncélkovács"
 
-#: ../../tribes/atlanteans/conf:112
+#: ../../tribes/atlanteans/conf:110
 msgid "Baker"
 msgstr "Pék"
 
-#: ../../tribes/atlanteans/conf:113
+#: ../../tribes/atlanteans/conf:111
 msgid "Blackroot Farmer"
 msgstr "Feketegyökér-termelő"
 
-#: ../../tribes/atlanteans/conf:114
+#: ../../tribes/atlanteans/conf:112
 msgid "Builder"
 msgstr "Építész"
 
-#: ../../tribes/atlanteans/conf:115
+#: ../../tribes/atlanteans/conf:113
 msgid "Burner"
 msgstr "Faszénégető"
 
-#: ../../tribes/atlanteans/conf:116
+#: ../../tribes/atlanteans/conf:114
 msgid "Shipwright"
 msgstr "Hajóács"
 
-#: ../../tribes/atlanteans/conf:117
+#: ../../tribes/atlanteans/conf:115
 msgid "Farmer"
 msgstr "Földműves"
 
-#: ../../tribes/atlanteans/conf:118
+#: ../../tribes/atlanteans/conf:116
 msgid "Fish Breeder"
 msgstr "Haltenyésztő"
 
-#: ../../tribes/atlanteans/conf:119
+#: ../../tribes/atlanteans/conf:117
 msgid "Fisher"
 msgstr "Halász"
 
-#: ../../tribes/atlanteans/conf:120
+#: ../../tribes/atlanteans/conf:118
 msgid "Forester"
 msgstr "Erdész"
 
-#: ../../tribes/atlanteans/conf:121
+#: ../../tribes/atlanteans/conf:119
 msgid "Geologist"
 msgstr "Geológus"
 
-#: ../../tribes/atlanteans/conf:122
+#: ../../tribes/atlanteans/conf:120
 msgid "Hunter"
 msgstr "Vadász"
 
-#: ../../tribes/atlanteans/conf:123
+#: ../../tribes/atlanteans/conf:121
 msgid "Miller"
 msgstr "Molnár"
 
-#: ../../tribes/atlanteans/conf:124
+#: ../../tribes/atlanteans/conf:122
 msgid "Miner"
 msgstr "Bányász"
 
-#: ../../tribes/atlanteans/conf:125
+#: ../../tribes/atlanteans/conf:123
 msgid "Sawyer"
 msgstr "Fűrészelő"
 
-#: ../../tribes/atlanteans/conf:126
+#: ../../tribes/atlanteans/conf:124
 msgid "Smelter"
 msgstr "Kohász"
 
-#: ../../tribes/atlanteans/conf:127
+#: ../../tribes/atlanteans/conf:125
 msgid "Smoker"
 msgstr "Füstölő"
 
-#: ../../tribes/atlanteans/conf:128
+#: ../../tribes/atlanteans/conf:126
 msgid "Spider Breeder"
 msgstr "Póktenyésztő"
 
-#: ../../tribes/atlanteans/conf:129
+#: ../../tribes/atlanteans/conf:127
 msgid "Stonecutter"
 msgstr "Kőfaragó"
 
-#: ../../tribes/atlanteans/conf:130
+#: ../../tribes/atlanteans/conf:128
 msgid "Toolsmith"
 msgstr "Szerszámkovács"
 
-#: ../../tribes/atlanteans/conf:131
+#: ../../tribes/atlanteans/conf:129
 msgid "Trainer"
 msgstr "Kiképző"
 
-#: ../../tribes/atlanteans/conf:132
+#: ../../tribes/atlanteans/conf:130
 msgid "Weaponsmith"
 msgstr "Fegyverkovács"
 
-#: ../../tribes/atlanteans/conf:133
+#: ../../tribes/atlanteans/conf:131
 msgid "Weaver"
 msgstr "Takács"
 
-#: ../../tribes/atlanteans/conf:134
+#: ../../tribes/atlanteans/conf:132
 msgid "Woodcutter"
 msgstr "Favágó"
 
-#: ../../tribes/atlanteans/conf:135
+#: ../../tribes/atlanteans/conf:133
 msgid "Scout"
 msgstr "Felderítő"
 
-#: ../../tribes/atlanteans/conf:136
+#: ../../tribes/atlanteans/conf:134
 msgid "Horse Breeder"
 msgstr "Lovász"
 
-#: ../../tribes/atlanteans/conf:139
+#: ../../tribes/atlanteans/conf:137
 msgid "Ship"
 msgstr "Hajó"
 
-#: ../../tribes/atlanteans/conf:142
+#: ../../tribes/atlanteans/conf:140
 msgid "Construction Site"
 msgstr "Építési terület"
 
-#: ../../tribes/atlanteans/conf:145
+#: ../../tribes/atlanteans/conf:143
 msgid "Dismantle Site"
 msgstr "Bontási terület"
 
-#: ../../tribes/atlanteans/conf:148
-#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:146
+#: ../../tribes/atlanteans/conf:153
 msgid "Barrier"
 msgstr "Határőrház"
 
-#: ../../tribes/atlanteans/conf:149
+#: ../../tribes/atlanteans/conf:147
 msgid "Citadel"
 msgstr "Fellegvár"
 
-#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:148
 msgid "Donjon"
 msgstr "Torony"
 
-#: ../../tribes/atlanteans/conf:151
-#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:149
+#: ../../tribes/atlanteans/conf:155
 msgid "Fortress"
 msgstr "Erőd"
 
-#: ../../tribes/atlanteans/conf:152
-#: ../../tribes/atlanteans/conf:153
+#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:151
 msgid "Sentry"
 msgstr "Őrház"
 
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:152
 msgid "Barracks"
 msgstr "Laktanya"
 
-#: ../../tribes/atlanteans/conf:156
-#: ../../tribes/atlanteans/conf:203
+#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:201
 msgid "Castle"
 msgstr "Vár"
 
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:156
 msgid "Outpost"
 msgstr "Előőrs"
 
-#: ../../tribes/atlanteans/conf:159
-#: ../../tribes/atlanteans/conf:202
+#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:200
 msgid "Tower"
 msgstr "Torony"
 
-#: ../../tribes/atlanteans/conf:162
+#: ../../tribes/atlanteans/conf:160
 msgid "Headquarters"
 msgstr "Főhadiszállás"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:161
 msgid "Warehouse"
 msgstr "Raktár"
 
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:162
 msgid "Port"
 msgstr "Kapu"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:165
 msgid "Quarry"
 msgstr "Kőfejtő"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:166
 msgid "Woodcutter’s House"
 msgstr "Favágóház"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:167
 msgid "Forester’s House"
 msgstr "Erdészház"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:168
 msgid "Goldweaver"
 msgstr "Aranyfonó"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:169
 msgid "Fisher’s House"
 msgstr "Halászház"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:170
 msgid "Fish Breeder’s House"
 msgstr "Haltenyésztőház"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:171
 msgid "Hunter’s House"
 msgstr "Vadászház"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:172
 msgid "Well"
 msgstr "Kút"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:173
 msgid "Scout’s House"
 msgstr "Felderítőház"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:174
 msgid "Sawmill"
 msgstr "Fűrészmalom"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:175
 msgid "Smokery"
 msgstr "Füstölő"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:176
 msgid "Mill"
 msgstr "Malom"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:177
 msgid "Shipyard"
 msgstr "Hajógyár"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
 msgstr "Pékség"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:179
 msgid "Charcoal Burner’s House"
 msgstr "Faszénégetőház"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:180
 msgid "Smelting Works"
 msgstr "Kohó"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:181
 msgid "Toolsmithy"
 msgstr "Szerszámkovácsműhely"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"
 msgstr "Fegyverkovácsműhely"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:183
 msgid "Armor Smithy"
 msgstr "Páncélkovácsműhely"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
 msgstr "Lovarda"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:185
 msgid "Spider Farm"
 msgstr "Póktenyészet"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:186
 msgid "Weaving-Mill"
 msgstr "Szövöde"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:187
 msgid "Farm"
 msgstr "Tanya"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:188
 msgid "Blackroot Farm"
 msgstr "Feketegyökér-termesztő"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
 msgstr "Kristálybánya"
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:190
 msgid "Coal Mine"
 msgstr "Szénbánya"
 
-#: ../../tribes/atlanteans/conf:193
+#: ../../tribes/atlanteans/conf:191
 msgid "Iron Mine"
 msgstr "Vasércbánya"
 
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:192
 msgid "Gold Mine"
 msgstr "Aranybánya"
 
-#: ../../tribes/atlanteans/conf:198
+#: ../../tribes/atlanteans/conf:196
 msgid "Guardhouse"
 msgstr "Őrház"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:197
 msgid "Guardhall"
 msgstr "Őrterem"
 
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:198
 msgid "High Tower"
 msgstr "Magas torony"
 
-#: ../../tribes/atlanteans/conf:201
+#: ../../tribes/atlanteans/conf:199
 msgid "Small Tower"
 msgstr "Kis torony"
 
-#: ../../tribes/atlanteans/conf:207
+#: ../../tribes/atlanteans/conf:205
 msgid "Dungeon"
 msgstr "Kazamata"
 
-#: ../../tribes/atlanteans/conf:208
+#: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
 msgstr "Labirintus"
 
@@ -1165,12 +1165,12 @@ msgstr ""
 "különleges aranyköntösöket a szövödében."
 
 #: ../../tribes/atlanteans/guardhall/conf:6
-msgid "Your soldiers have occupied your Guardhall"
-msgstr "Katonáid elfoglalták őrhelyeiket az őrteremben"
+msgid "Your soldiers have occupied your guardhall."
+msgstr ""
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
-msgid "Your soldiers have occupied your Guardhouse"
-msgstr "Katonáid elfoglalták őrhelyeiket az őrházban"
+msgid "Your soldiers have occupied your guardhouse."
+msgstr ""
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -1194,8 +1194,8 @@ msgstr ""
 "élelemmel együtt – a katonák támadását fejlesztik vele 3.-ról 4. szintre."
 
 #: ../../tribes/atlanteans/high_tower/conf:9
-msgid "Your soldiers have occupied your High Tower"
-msgstr "Katonáid elfoglalták őrhelyeiket a magas toronyban"
+msgid "Your soldiers have occupied your high tower."
+msgstr ""
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1207,10 +1207,8 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
-"Horses help to carry items at heavily used roads. They are reared in a horse "
-"farm."
+"Horses help to carry items along busy roads. They are reared in a horse farm."
 msgstr ""
-"A lovak segítik a zsúfolt utakon a szállítást. A lovardában tenyésztik őket."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1270,6 +1268,16 @@ msgstr ""
 "Ez az atlantiszi katonák alapfegyvere. Egy köntössel együtt ez az újonc "
 "katonák felszerelése. A könnyű szigonyt a fegyverkovácsműhelyben készítik, "
 "csakúgy, mint minden szigonyt."
+
+#: ../../tribes/atlanteans/log/conf:1
+msgid ""
+"Logs are the base for planks, which are used in nearly every building of the "
+"Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
+"smokery also need logs for their work."
+msgstr ""
+"A farönk a deszka alapanyaga, amit pedig szinte minden atlantiszi épülethez "
+"felhasználnak. A farönkre a fűrészmalom mellett a faszénégetőben, a "
+"szerszámkovácsműhelyben és a füstőlőben is szükség van."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1411,8 +1419,8 @@ msgstr ""
 "készít lapátot."
 
 #: ../../tribes/atlanteans/small_tower/conf:7
-msgid "Your soldiers have occupied your Small Tower"
-msgstr "Katonáid elfoglalták őrhelyeiket a kis toronyban"
+msgid "Your soldiers have occupied your small tower."
+msgstr ""
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1573,22 +1581,12 @@ msgid "Produce shovel"
 msgstr "a lapátkészítés"
 
 #: ../../tribes/atlanteans/tower/conf:8
-msgid "Your soldiers have occupied your Tower"
-msgstr "Katonáid elfoglalták őrhelyeiket a toronyban"
+msgid "Your soldiers have occupied your tower."
+msgstr ""
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
 msgstr "Katonákat képez."
-
-#: ../../tribes/atlanteans/trunk/conf:1
-msgid ""
-"Logs are the base for planks, which are used in nearly every building of the "
-"Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
-"smokery also need logs for their work."
-msgstr ""
-"A farönk a deszka alapanyaga, amit pedig szinte minden atlantiszi épülethez "
-"felhasználnak. A farönkre a fűrészmalom mellett a faszénégetőben, a "
-"szerszámkovácsműhelyben és a füstőlőben is szükség van."
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""

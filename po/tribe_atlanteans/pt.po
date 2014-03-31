@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-12 21:37+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
 "PO-Revision-Date: 2014-03-15 03:02+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-16 05:37+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:32+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: pt\n"
 
 #: ../../tribes/atlanteans/dungeon/conf:39
@@ -20,255 +20,255 @@ msgid "Sleep"
 msgstr "Hibernar"
 
 #: ../../global/militarysites/barracks.empire/conf:8
-msgid "Your Barracks discovered an aggressor."
+msgid "Your barracks discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:9
-msgid "Your Barracks is under attack."
+msgid "Your barracks is under attack."
 msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:10
-msgid "The enemy defeated your soldiers at the Barracks"
+msgid "The enemy defeated your soldiers at the barracks."
 msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Barracks"
+msgid "Your soldiers defeated the enemy at the barracks."
 msgstr ""
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
-msgid "Your Barrier discovered an aggressor."
+msgid "Your barrier discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
-msgid "Your Barrier is under attack."
+msgid "Your barrier is under attack."
 msgstr ""
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
-msgid "The enemy defeated your soldiers at the Barrier"
+msgid "The enemy defeated your soldiers at the barrier."
 msgstr ""
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Barrier"
+msgid "Your soldiers defeated the enemy at the barrier."
 msgstr ""
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/atlanteans/castle/conf:7
-msgid "Your Castle discovered an aggressor."
+msgid "Your castle discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/atlanteans/castle/conf:8
-msgid "Your Castle is under attack."
+msgid "Your castle is under attack."
 msgstr ""
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/atlanteans/castle/conf:9
-msgid "The enemy defeated your soldiers at the Castle"
+msgid "The enemy defeated your soldiers at the castle."
 msgstr ""
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/atlanteans/castle/conf:10
-msgid "Your soldiers defeated the enemy at the Castle"
+msgid "Your soldiers defeated the enemy at the castle."
 msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
-msgid "Your Citadel discovered an aggressor."
+msgid "Your citadel discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
-msgid "Your Citadel is under attack."
+msgid "Your citadel is under attack."
 msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Citadel"
+msgid "The enemy defeated your soldiers at the citadel."
 msgstr ""
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Citadel"
+msgid "Your soldiers defeated the enemy at the citadel."
 msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
-msgid "Your Donjon discovered an aggressor."
+msgid "Your donjon discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
-msgid "Your Donjon is under attack."
+msgid "Your donjon is under attack."
 msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
-msgid "The enemy defeated your soldiers at the Donjon"
+msgid "The enemy defeated your soldiers at the donjon."
 msgstr ""
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
-msgid "Your soldiers defeated the enemy at the Donjon"
+msgid "Your soldiers defeated the enemy at the donjon."
 msgstr ""
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
-msgid "Your Fortress discovered an aggressor."
+msgid "Your fortress discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
-msgid "Your Fortress is under attack."
+msgid "Your fortress is under attack."
 msgstr ""
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
-msgid "The enemy defeated your soldiers at the Fortress"
+msgid "The enemy defeated your soldiers at the fortress."
 msgstr ""
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Fortress"
+msgid "Your soldiers defeated the enemy at the fortress."
 msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhall/conf:7
-msgid "Your Guardhall discovered an aggressor."
+msgid "Your guardhall discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhall/conf:8
-msgid "Your Guardhall is under attack."
+msgid "Your guardhall is under attack."
 msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhall/conf:9
-msgid "The enemy defeated your soldiers at the Guardhall"
+msgid "The enemy defeated your soldiers at the guardhall."
 msgstr ""
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhall/conf:10
-msgid "Your soldiers defeated the enemy at the Guardhall"
+msgid "Your soldiers defeated the enemy at the guardhall."
 msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhouse/conf:7
-msgid "Your Guardhouse discovered an aggressor."
+msgid "Your guardhouse discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhouse/conf:8
-msgid "Your Guardhouse is under attack."
+msgid "Your guardhouse is under attack."
 msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhouse/conf:9
-msgid "The enemy defeated your soldiers at the Guardhouse"
+msgid "The enemy defeated your soldiers at the guardhouse."
 msgstr ""
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhouse/conf:10
-msgid "Your soldiers defeated the enemy at the Guardhouse"
+msgid "Your soldiers defeated the enemy at the guardhouse."
 msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
-msgid "Your High Tower discovered an aggressor."
+msgid "Your high tower discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/high_tower/conf:11
-msgid "Your High Tower is under attack."
+msgid "Your high tower is under attack."
 msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/high_tower/conf:12
-msgid "The enemy defeated your soldiers at the High Tower"
+msgid "The enemy defeated your soldiers at the high tower."
 msgstr ""
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/high_tower/conf:13
-msgid "Your soldiers defeated the enemy at the High Tower"
+msgid "Your soldiers defeated the enemy at the high tower."
 msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:8
-msgid "Your Outpost discovered an aggressor."
+msgid "Your outpost discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:9
-msgid "Your Outpost is under attack."
+msgid "Your outpost is under attack."
 msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:10
-msgid "The enemy defeated your soldiers at the Outpost"
+msgid "The enemy defeated your soldiers at the outpost."
 msgstr ""
 
 #: ../../global/militarysites/outpost.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Outpost"
+msgid "Your soldiers defeated the enemy at the outpost."
 msgstr ""
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
-msgid "Your Sentry discovered an aggressor."
+msgid "Your sentry discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
-msgid "Your Sentry is under attack."
+msgid "Your sentry is under attack."
 msgstr ""
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
-msgid "The enemy defeated your soldiers at the Sentry"
+msgid "The enemy defeated your soldiers at the sentry."
 msgstr ""
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
-msgid "Your soldiers defeated the enemy at the Sentry"
+msgid "Your soldiers defeated the enemy at the sentry."
 msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
-msgid "Your Small Tower discovered an aggressor."
+msgid "Your small tower discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/small_tower/conf:9
-msgid "Your Small Tower is under attack."
+msgid "Your small tower is under attack."
 msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/small_tower/conf:10
-msgid "The enemy defeated your soldiers at the Small Tower"
+msgid "The enemy defeated your soldiers at the small tower."
 msgstr ""
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
-msgid "Your soldiers defeated the enemy at the Small Tower"
+msgid "Your soldiers defeated the enemy at the small tower."
 msgstr ""
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
-msgid "Your Tower discovered an aggressor."
+msgid "Your tower discovered an aggressor."
 msgstr ""
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/atlanteans/tower/conf:10
-msgid "Your Tower is under attack."
+msgid "Your tower is under attack."
 msgstr ""
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
-msgid "The enemy defeated your soldiers at the Tower"
+msgid "The enemy defeated your soldiers at the tower."
 msgstr ""
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
-msgid "Your soldiers defeated the enemy at the Tower"
+msgid "Your soldiers defeated the enemy at the tower."
 msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -282,19 +282,19 @@ msgstr ""
 "alimentos - para treinar soldados para aumentar a defesa do nível 1 para "
 "nível 2."
 
-#: ../../tribes/atlanteans/armoursmith/conf:1
+#: ../../tribes/atlanteans/armorsmith/conf:1
 msgid "Produces armor for the soldiers."
 msgstr "Produz armaduras para os soldados."
 
-#: ../../tribes/atlanteans/armoursmithy/conf:28
+#: ../../tribes/atlanteans/armorsmithy/conf:28
 msgid "Produce steel shield"
 msgstr "Produz Escudo de ferro"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:29
+#: ../../tribes/atlanteans/armorsmithy/conf:29
 msgid "Produce advanced shield"
 msgstr "Produz Escudo de guerra"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:30
+#: ../../tribes/atlanteans/armorsmithy/conf:30
 #: ../../tribes/atlanteans/bakery/conf:25
 #: ../../tribes/atlanteans/blackroot_farm/conf:24
 #: ../../tribes/atlanteans/burners_house/conf:23
@@ -328,14 +328,6 @@ msgstr "Trabalho"
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
 msgstr "Produz pão para os trabalhadores"
-
-#: ../../tribes/atlanteans/bakingtray/conf:1
-msgid ""
-"The bread paddle is the tool of the baker, each baker needs one. It is "
-"produced by the toolsmith."
-msgstr ""
-"A pá do pão é a ferramenta do padeiro, cada padeiro precisa da sua própria. "
-"É produzido pelo ferreiro de ferramentas."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -383,6 +375,14 @@ msgstr ""
 "de raiz escura e água. É apreciada como alimentação básica para mineiros, "
 "escuteiros e soldados nos campos de treinamento (labirintos e calabouços)."
 
+#: ../../tribes/atlanteans/bread_paddle/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs one. It is "
+"produced by the toolsmith."
+msgstr ""
+"A pá do pão é a ferramenta do padeiro, cada padeiro precisa da sua própria. "
+"É produzido pelo ferreiro de ferramentas."
+
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
 msgstr "Grandes baldes para o piscicultor - produzido no Ferramenteiro"
@@ -404,7 +404,7 @@ msgid "Carries items along your roads."
 msgstr "Carrega as mercadorias pelas tuas estradas."
 
 #: ../../tribes/atlanteans/castle/conf:6
-msgid "Your soldiers have occupied your Castle"
+msgid "Your soldiers have occupied your castle."
 msgstr ""
 
 #: ../../tribes/atlanteans/coal/conf:1
@@ -436,597 +436,597 @@ msgstr ""
 "Esta tribo é conhecida das mais antigas lendas. Apresento-te os filhos e "
 "filhas da Atlântida."
 
-#: ../../tribes/atlanteans/conf:33
+#: ../../tribes/atlanteans/conf:31
 msgid "Ashes"
 msgstr "Cinzas"
 
-#: ../../tribes/atlanteans/conf:34
+#: ../../tribes/atlanteans/conf:32
 msgid "Blackroot Field"
 msgstr "Campo de Raiz negra"
 
-#: ../../tribes/atlanteans/conf:35
+#: ../../tribes/atlanteans/conf:33
 msgid "Blackroot Field (harvested)"
 msgstr "Campo de Raíz negra ceifado"
 
-#: ../../tribes/atlanteans/conf:36
+#: ../../tribes/atlanteans/conf:34
 msgid "Blackroot Field (medium)"
 msgstr "Campo de Raiz negra médio"
 
-#: ../../tribes/atlanteans/conf:37
+#: ../../tribes/atlanteans/conf:35
 msgid "Blackroot Field (small)"
 msgstr "Campo de Raiz negra pequeno"
 
-#: ../../tribes/atlanteans/conf:38
+#: ../../tribes/atlanteans/conf:36
 msgid "Blackroot Field (tiny)"
 msgstr "Campo de Raiz negra minúsculo"
 
-#: ../../tribes/atlanteans/conf:39
+#: ../../tribes/atlanteans/conf:37
 msgid "Cornfield"
 msgstr "Milheiral"
 
-#: ../../tribes/atlanteans/conf:40
+#: ../../tribes/atlanteans/conf:38
 msgid "Cornfield (harvested)"
 msgstr "Milheiral colhido"
 
-#: ../../tribes/atlanteans/conf:41
+#: ../../tribes/atlanteans/conf:39
 msgid "Cornfield (medium)"
 msgstr "Milheiral médio"
 
-#: ../../tribes/atlanteans/conf:42
+#: ../../tribes/atlanteans/conf:40
 msgid "Cornfield (small)"
 msgstr "Milheiral pequeno"
 
-#: ../../tribes/atlanteans/conf:43
+#: ../../tribes/atlanteans/conf:41
 msgid "Cornfield (tiny)"
 msgstr "Milheiral minúsculo"
 
-#: ../../tribes/atlanteans/conf:44
+#: ../../tribes/atlanteans/conf:42
 msgid "Destroyed Building"
 msgstr "Edifício destruído"
 
-#: ../../tribes/atlanteans/conf:45
+#: ../../tribes/atlanteans/conf:43
 msgid "Resource indicator: Coal (little)"
 msgstr "Indicador de recursos pouco carvão"
 
-#: ../../tribes/atlanteans/conf:46
+#: ../../tribes/atlanteans/conf:44
 msgid "Resource indicator: Coal (much)"
 msgstr "Indicador de recursos muito carvão"
 
-#: ../../tribes/atlanteans/conf:47
+#: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator: Gold (little)"
 msgstr "Indicador de recursos pouco ouro"
 
-#: ../../tribes/atlanteans/conf:48
+#: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator: Gold (much)"
 msgstr "Indicador de recursos muito ouro"
 
-#: ../../tribes/atlanteans/conf:49
+#: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator: Granite (little)"
 msgstr "Indicador de recursos pouco granito"
 
-#: ../../tribes/atlanteans/conf:50
+#: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Granite (much)"
 msgstr "Indicador de recursos muito granito"
 
-#: ../../tribes/atlanteans/conf:51
+#: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Iron (little)"
 msgstr "Indicador de recursos pouco ferro"
 
-#: ../../tribes/atlanteans/conf:52
+#: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Iron (much)"
 msgstr "Indicador de recursos muito ferro"
 
-#: ../../tribes/atlanteans/conf:53
+#: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: No resource"
 msgstr "Indicador de recursos sem recursos"
 
-#: ../../tribes/atlanteans/conf:54
+#: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Water"
 msgstr "Indicador de recursos água"
 
-#: ../../tribes/atlanteans/conf:55
+#: ../../tribes/atlanteans/conf:53
 msgid "Ship Construction Site"
 msgstr "Construção do Navio"
 
-#: ../../tribes/atlanteans/conf:58
+#: ../../tribes/atlanteans/conf:56
 msgid "Advanced Shield"
 msgstr "Escudo de Guerra"
 
 #
 # File: ../../tribes/atlanteans/conf, line: 59
 # File: ../../tribes/atlanteans/conf, line: 59
-#: ../../tribes/atlanteans/conf:59
+#: ../../tribes/atlanteans/conf:57
 msgid "Bread Paddle"
 msgstr "Asse pão"
 
-#: ../../tribes/atlanteans/conf:60
+#: ../../tribes/atlanteans/conf:58
 msgid "Blackroot Flour"
 msgstr "Farinha de raiz negra"
 
-#: ../../tribes/atlanteans/conf:61
+#: ../../tribes/atlanteans/conf:59
 msgid "Blackroot"
 msgstr "Raiz negra"
 
-#: ../../tribes/atlanteans/conf:62
+#: ../../tribes/atlanteans/conf:60
 msgid "Bread"
 msgstr "Pão"
 
-#: ../../tribes/atlanteans/conf:63
+#: ../../tribes/atlanteans/conf:61
 msgid "Buckets"
 msgstr "Baldes"
 
-#: ../../tribes/atlanteans/conf:64
+#: ../../tribes/atlanteans/conf:62
 msgid "Coal"
 msgstr "Carvão"
 
-#: ../../tribes/atlanteans/conf:65
+#: ../../tribes/atlanteans/conf:63
 msgid "Cornflour"
 msgstr "Farinha de milho"
 
-#: ../../tribes/atlanteans/conf:66
+#: ../../tribes/atlanteans/conf:64
 msgid "Corn"
 msgstr "Milho"
 
-#: ../../tribes/atlanteans/conf:67
+#: ../../tribes/atlanteans/conf:65
 msgid "Diamond"
 msgstr "Diamante"
 
-#: ../../tribes/atlanteans/conf:68
+#: ../../tribes/atlanteans/conf:66
 msgid "Double Trident"
 msgstr "Tridente duplo"
 
-#: ../../tribes/atlanteans/conf:69
+#: ../../tribes/atlanteans/conf:67
 msgid "Fire Tongs"
 msgstr "Tenazes"
 
-#: ../../tribes/atlanteans/conf:70
+#: ../../tribes/atlanteans/conf:68
 msgid "Fishing Net"
 msgstr "Rede de pesca"
 
-#: ../../tribes/atlanteans/conf:71
+#: ../../tribes/atlanteans/conf:69
 msgid "Fish"
 msgstr "Peixe"
 
-#: ../../tribes/atlanteans/conf:72
+#: ../../tribes/atlanteans/conf:70
 msgid "Golden Tabard"
 msgstr "Túnica Dourada"
 
-#: ../../tribes/atlanteans/conf:73
+#: ../../tribes/atlanteans/conf:71
 msgid "Gold Ore"
 msgstr "Minério de Ouro"
 
-#: ../../tribes/atlanteans/conf:74
+#: ../../tribes/atlanteans/conf:72
 msgid "Gold"
 msgstr "Ouro"
 
-#: ../../tribes/atlanteans/conf:75
+#: ../../tribes/atlanteans/conf:73
 msgid "Gold Yarn"
 msgstr "Fios de Ouro"
 
-#: ../../tribes/atlanteans/conf:76
+#: ../../tribes/atlanteans/conf:74
 msgid "Hammer"
 msgstr "Martelo"
 
-#: ../../tribes/atlanteans/conf:77
+#: ../../tribes/atlanteans/conf:75
 msgid "Heavy Double Trident"
 msgstr "Tridente de Guerra"
 
-#: ../../tribes/atlanteans/conf:78
+#: ../../tribes/atlanteans/conf:76
 msgid "Hook pole"
 msgstr "Gancho"
 
-#: ../../tribes/atlanteans/conf:79
+#: ../../tribes/atlanteans/conf:77
 msgid "Hunting Bow"
 msgstr "Arco de caça"
 
-#: ../../tribes/atlanteans/conf:80
+#: ../../tribes/atlanteans/conf:78
 msgid "Iron Ore"
 msgstr "Minério de ferro"
 
-#: ../../tribes/atlanteans/conf:81
+#: ../../tribes/atlanteans/conf:79
 msgid "Iron"
 msgstr "Ferro"
 
-#: ../../tribes/atlanteans/conf:82
+#: ../../tribes/atlanteans/conf:80
 msgid "Light Trident"
 msgstr "Tridente leve"
 
-#: ../../tribes/atlanteans/conf:83
+#: ../../tribes/atlanteans/conf:81
 msgid "Long Trident"
 msgstr "Tridente longo"
 
-#: ../../tribes/atlanteans/conf:84
+#: ../../tribes/atlanteans/conf:82
 msgid "Meat"
 msgstr "Carne"
 
-#: ../../tribes/atlanteans/conf:85
+#: ../../tribes/atlanteans/conf:83
 msgid "Milking Tongs"
 msgstr "Pinças de ordenha"
 
-#: ../../tribes/atlanteans/conf:86
+#: ../../tribes/atlanteans/conf:84
 msgid "Quartz"
 msgstr "Quartzo"
 
-#: ../../tribes/atlanteans/conf:87
+#: ../../tribes/atlanteans/conf:85
 msgid "Pick"
 msgstr "Picareta"
 
-#: ../../tribes/atlanteans/conf:88
+#: ../../tribes/atlanteans/conf:86
 msgid "Planks"
 msgstr "Tábuas"
 
-#: ../../tribes/atlanteans/conf:89
+#: ../../tribes/atlanteans/conf:87
 msgid "Saw"
 msgstr "Serra"
 
-#: ../../tribes/atlanteans/conf:90
+#: ../../tribes/atlanteans/conf:88
 msgid "Scythe"
 msgstr "Foice"
 
-#: ../../tribes/atlanteans/conf:91
+#: ../../tribes/atlanteans/conf:89
 msgid "Shovel"
 msgstr "Pá"
 
-#: ../../tribes/atlanteans/conf:92
+#: ../../tribes/atlanteans/conf:90
 msgid "Smoked Fish"
 msgstr "Peixe fumado"
 
-#: ../../tribes/atlanteans/conf:93
+#: ../../tribes/atlanteans/conf:91
 msgid "Smoked Meat"
 msgstr "Carne fumada"
 
-#: ../../tribes/atlanteans/conf:94
+#: ../../tribes/atlanteans/conf:92
 msgid "Spidercloth"
 msgstr "Seda de aranha"
 
-#: ../../tribes/atlanteans/conf:95
+#: ../../tribes/atlanteans/conf:93
 msgid "Spideryarn"
 msgstr "Seda de aranha"
 
-#: ../../tribes/atlanteans/conf:96
+#: ../../tribes/atlanteans/conf:94
 msgid "Steel Shield"
 msgstr "Escudo de Ferro"
 
-#: ../../tribes/atlanteans/conf:97
+#: ../../tribes/atlanteans/conf:95
 msgid "Steel Trident"
 msgstr "Tridente de Ferro"
 
-#: ../../tribes/atlanteans/conf:98
+#: ../../tribes/atlanteans/conf:96
 msgid "Stone"
 msgstr "Pedra"
 
-#: ../../tribes/atlanteans/conf:99
+#: ../../tribes/atlanteans/conf:97
 msgid "Tabard"
 msgstr "Túnica"
 
-#: ../../tribes/atlanteans/conf:100
+#: ../../tribes/atlanteans/conf:98
 msgid "Log"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:101
+#: ../../tribes/atlanteans/conf:99
 msgid "Water"
 msgstr "Água"
 
-#: ../../tribes/atlanteans/conf:104
+#: ../../tribes/atlanteans/conf:102
 msgid "Carrier"
 msgstr "Carregador"
 
-#: ../../tribes/atlanteans/conf:105
+#: ../../tribes/atlanteans/conf:103
 msgid "Horse"
 msgstr "Cavalo"
 
-#: ../../tribes/atlanteans/conf:108
+#: ../../tribes/atlanteans/conf:106
 msgid "Soldier"
 msgstr "Soldado"
 
-#: ../../tribes/atlanteans/conf:111
+#: ../../tribes/atlanteans/conf:109
 msgid "Armorsmith"
 msgstr "Armador"
 
-#: ../../tribes/atlanteans/conf:112
+#: ../../tribes/atlanteans/conf:110
 msgid "Baker"
 msgstr "Padeiro"
 
-#: ../../tribes/atlanteans/conf:113
+#: ../../tribes/atlanteans/conf:111
 msgid "Blackroot Farmer"
 msgstr "Agricultor"
 
-#: ../../tribes/atlanteans/conf:114
+#: ../../tribes/atlanteans/conf:112
 msgid "Builder"
 msgstr "Construtor"
 
-#: ../../tribes/atlanteans/conf:115
+#: ../../tribes/atlanteans/conf:113
 msgid "Burner"
 msgstr "Carvoeiro"
 
-#: ../../tribes/atlanteans/conf:116
+#: ../../tribes/atlanteans/conf:114
 msgid "Shipwright"
 msgstr "Construtor Naval"
 
-#: ../../tribes/atlanteans/conf:117
+#: ../../tribes/atlanteans/conf:115
 msgid "Farmer"
 msgstr "Agricultor"
 
-#: ../../tribes/atlanteans/conf:118
+#: ../../tribes/atlanteans/conf:116
 msgid "Fish Breeder"
 msgstr "Piscicultor"
 
-#: ../../tribes/atlanteans/conf:119
+#: ../../tribes/atlanteans/conf:117
 msgid "Fisher"
 msgstr "Pescador"
 
-#: ../../tribes/atlanteans/conf:120
+#: ../../tribes/atlanteans/conf:118
 msgid "Forester"
 msgstr "Silvicultor"
 
-#: ../../tribes/atlanteans/conf:121
+#: ../../tribes/atlanteans/conf:119
 msgid "Geologist"
 msgstr "Geólogo"
 
-#: ../../tribes/atlanteans/conf:122
+#: ../../tribes/atlanteans/conf:120
 msgid "Hunter"
 msgstr "Caçador"
 
-#: ../../tribes/atlanteans/conf:123
+#: ../../tribes/atlanteans/conf:121
 msgid "Miller"
 msgstr "Moleiro"
 
-#: ../../tribes/atlanteans/conf:124
+#: ../../tribes/atlanteans/conf:122
 msgid "Miner"
 msgstr "Mineiro"
 
-#: ../../tribes/atlanteans/conf:125
+#: ../../tribes/atlanteans/conf:123
 msgid "Sawyer"
 msgstr "Serrador"
 
-#: ../../tribes/atlanteans/conf:126
+#: ../../tribes/atlanteans/conf:124
 msgid "Smelter"
 msgstr "Fundidor"
 
-#: ../../tribes/atlanteans/conf:127
+#: ../../tribes/atlanteans/conf:125
 msgid "Smoker"
 msgstr "Defumador"
 
-#: ../../tribes/atlanteans/conf:128
+#: ../../tribes/atlanteans/conf:126
 msgid "Spider Breeder"
 msgstr "Criador de aranhas"
 
-#: ../../tribes/atlanteans/conf:129
+#: ../../tribes/atlanteans/conf:127
 msgid "Stonecutter"
 msgstr "Canteiro"
 
-#: ../../tribes/atlanteans/conf:130
+#: ../../tribes/atlanteans/conf:128
 msgid "Toolsmith"
 msgstr "Ferramenteiro"
 
-#: ../../tribes/atlanteans/conf:131
+#: ../../tribes/atlanteans/conf:129
 msgid "Trainer"
 msgstr "Instrutor"
 
-#: ../../tribes/atlanteans/conf:132
+#: ../../tribes/atlanteans/conf:130
 msgid "Weaponsmith"
 msgstr "Armeiro"
 
-#: ../../tribes/atlanteans/conf:133
+#: ../../tribes/atlanteans/conf:131
 msgid "Weaver"
 msgstr "Tecelão"
 
-#: ../../tribes/atlanteans/conf:134
+#: ../../tribes/atlanteans/conf:132
 msgid "Woodcutter"
 msgstr "Madeireiro"
 
-#: ../../tribes/atlanteans/conf:135
+#: ../../tribes/atlanteans/conf:133
 msgid "Scout"
 msgstr "Explorador"
 
-#: ../../tribes/atlanteans/conf:136
+#: ../../tribes/atlanteans/conf:134
 msgid "Horse Breeder"
 msgstr "Criador de cavalos"
 
-#: ../../tribes/atlanteans/conf:139
+#: ../../tribes/atlanteans/conf:137
 msgid "Ship"
 msgstr "Navio"
 
-#: ../../tribes/atlanteans/conf:142
+#: ../../tribes/atlanteans/conf:140
 msgid "Construction Site"
 msgstr "Construção"
 
 #
 # File: ../../tribes/atlanteans/conf, line: 145
 # File: ../../tribes/atlanteans/conf, line: 145
-#: ../../tribes/atlanteans/conf:145
+#: ../../tribes/atlanteans/conf:143
 msgid "Dismantle Site"
 msgstr "Desmontar local"
 
-#: ../../tribes/atlanteans/conf:148
-#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:146
+#: ../../tribes/atlanteans/conf:153
 msgid "Barrier"
 msgstr "Barreira"
 
-#: ../../tribes/atlanteans/conf:149
+#: ../../tribes/atlanteans/conf:147
 msgid "Citadel"
 msgstr "Cidadela"
 
-#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:148
 msgid "Donjon"
 msgstr "Torre de Menagem"
 
-#: ../../tribes/atlanteans/conf:151
-#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:149
+#: ../../tribes/atlanteans/conf:155
 msgid "Fortress"
 msgstr "Fortaleza"
 
-#: ../../tribes/atlanteans/conf:152
-#: ../../tribes/atlanteans/conf:153
+#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:151
 msgid "Sentry"
 msgstr "Sentinela"
 
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:152
 msgid "Barracks"
 msgstr "Quartel"
 
-#: ../../tribes/atlanteans/conf:156
-#: ../../tribes/atlanteans/conf:203
+#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:201
 msgid "Castle"
 msgstr "Castelo"
 
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:156
 msgid "Outpost"
 msgstr "Posto Avançado"
 
-#: ../../tribes/atlanteans/conf:159
-#: ../../tribes/atlanteans/conf:202
+#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:200
 msgid "Tower"
 msgstr "Torre"
 
-#: ../../tribes/atlanteans/conf:162
+#: ../../tribes/atlanteans/conf:160
 msgid "Headquarters"
 msgstr "Quartel-general"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:161
 msgid "Warehouse"
 msgstr "Armazém"
 
 #
 # File: ../../tribes/atlanteans/conf, line: 165
 # File: ../../tribes/atlanteans/conf, line: 165
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:162
 msgid "Port"
 msgstr "Porto"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:165
 msgid "Quarry"
 msgstr "Pedreira"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:166
 msgid "Woodcutter’s House"
 msgstr "Casa do Madeireiro"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:167
 msgid "Forester’s House"
 msgstr "Casa do Silvicultor"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:168
 msgid "Goldweaver"
 msgstr "Tecelão de ouro"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:169
 msgid "Fisher’s House"
 msgstr "Casa de Pescador"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:170
 msgid "Fish Breeder’s House"
 msgstr "Casa do piscicultor"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:171
 msgid "Hunter’s House"
 msgstr "Cabana do caçador"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:172
 msgid "Well"
 msgstr "Poço"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:173
 msgid "Scout’s House"
 msgstr "Cabana do Explorador"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:174
 msgid "Sawmill"
 msgstr "Serração"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:175
 msgid "Smokery"
 msgstr "Fumeiro"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:176
 msgid "Mill"
 msgstr "Moinho"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:177
 msgid "Shipyard"
 msgstr "Estaleiro Naval"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
 msgstr "Padaria"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:179
 msgid "Charcoal Burner’s House"
 msgstr "Casa do Carvoeiro"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:180
 msgid "Smelting Works"
 msgstr "Fundição"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:181
 msgid "Toolsmithy"
 msgstr "Loja do Ferramenteiro"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"
 msgstr "Loja do Armeiro"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:183
 msgid "Armor Smithy"
 msgstr "Loja do Armador"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
 msgstr "Criação de cavalos"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:185
 msgid "Spider Farm"
 msgstr "Criação de aranhas"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:186
 msgid "Weaving-Mill"
 msgstr "Tecelagem"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:187
 msgid "Farm"
 msgstr "Quinta"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:188
 msgid "Blackroot Farm"
 msgstr "Quinta das raizes negras"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
 msgstr "Mina de cristal"
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:190
 msgid "Coal Mine"
 msgstr "Mina de carvão"
 
-#: ../../tribes/atlanteans/conf:193
+#: ../../tribes/atlanteans/conf:191
 msgid "Iron Mine"
 msgstr "Mina de ferro"
 
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:192
 msgid "Gold Mine"
 msgstr "Mina de ouro"
 
-#: ../../tribes/atlanteans/conf:198
+#: ../../tribes/atlanteans/conf:196
 msgid "Guardhouse"
 msgstr "Casa da Guarda"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:197
 msgid "Guardhall"
 msgstr "Posto da Guarda"
 
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:198
 msgid "High Tower"
 msgstr "Torre Alta"
 
-#: ../../tribes/atlanteans/conf:201
+#: ../../tribes/atlanteans/conf:199
 msgid "Small Tower"
 msgstr "Torreão"
 
-#: ../../tribes/atlanteans/conf:207
+#: ../../tribes/atlanteans/conf:205
 msgid "Dungeon"
 msgstr "Masmorra"
 
-#: ../../tribes/atlanteans/conf:208
+#: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
 msgstr "Labirinto"
 
@@ -1190,11 +1190,11 @@ msgstr ""
 "túnica dourada na tecelagem."
 
 #: ../../tribes/atlanteans/guardhall/conf:6
-msgid "Your soldiers have occupied your Guardhall"
+msgid "Your soldiers have occupied your guardhall."
 msgstr ""
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
-msgid "Your soldiers have occupied your Guardhouse"
+msgid "Your soldiers have occupied your guardhouse."
 msgstr ""
 
 #: ../../tribes/atlanteans/hammer/conf:1
@@ -1217,7 +1217,7 @@ msgstr ""
 "soldados do nível 3 para o nível 4."
 
 #: ../../tribes/atlanteans/high_tower/conf:9
-msgid "Your soldiers have occupied your High Tower"
+msgid "Your soldiers have occupied your high tower."
 msgstr ""
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
@@ -1230,11 +1230,8 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
-"Horses help to carry items at heavily used roads. They are reared in a horse "
-"farm."
+"Horses help to carry items along busy roads. They are reared in a horse farm."
 msgstr ""
-"Os cavalos ajudam a carregar itens nas estradas com muito tráfego. São "
-"criados em quintas."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1298,6 +1295,16 @@ msgstr ""
 "Esta é a arma básica dos soldados Atlantas. Junto com a túnica é o "
 "equipamento dos novos soldados. Tridentes leves são produzidos pelo ferreiro "
 "de armas, assim como todos os demais tridentes."
+
+#: ../../tribes/atlanteans/log/conf:1
+msgid ""
+"Logs are the base for planks, which are used in nearly every building of the "
+"Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
+"smokery also need logs for their work."
+msgstr ""
+"Troncos de madeira são a base para as tábuas, que são utilizadas em "
+"praticamente todas as construções dos Atlantas. Além do marceneiro, a "
+"carvoaria, o ferreiro e a defumaria também necessitam destes troncos."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1443,7 +1450,7 @@ msgstr ""
 "Ferramenteiro"
 
 #: ../../tribes/atlanteans/small_tower/conf:7
-msgid "Your soldiers have occupied your Small Tower"
+msgid "Your soldiers have occupied your small tower."
 msgstr ""
 
 #: ../../tribes/atlanteans/smelter/conf:1
@@ -1622,22 +1629,12 @@ msgid "Produce shovel"
 msgstr "Produz pá"
 
 #: ../../tribes/atlanteans/tower/conf:8
-msgid "Your soldiers have occupied your Tower"
+msgid "Your soldiers have occupied your tower."
 msgstr ""
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
 msgstr "Dá a recruta ao soldados e prepara-os para a guerra."
-
-#: ../../tribes/atlanteans/trunk/conf:1
-msgid ""
-"Logs are the base for planks, which are used in nearly every building of the "
-"Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
-"smokery also need logs for their work."
-msgstr ""
-"Troncos de madeira são a base para as tábuas, que são utilizadas em "
-"praticamente todas as construções dos Atlantas. Além do marceneiro, a "
-"carvoaria, o ferreiro e a defumaria também necessitam destes troncos."
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""
