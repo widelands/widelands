@@ -367,7 +367,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 			if (ftell_pos < 0)
 				throw wexception
 					("RealFSImpl::Load: error when loading \"%s\" (\"%s\"): file "
-					 "size calculation yieded negative value %i",
+					 "size calculation yielded negative value %i",
 					 fname.c_str(), fullname.c_str(), ftell_pos);
 			size = ftell_pos;
 		}
