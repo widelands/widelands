@@ -16,5 +16,9 @@ blackland/desert deer -> "deer" (female deer)
 
 Immovables:
 <all_worlds>_skeleton1 => "skeleton1"
+# NOCOM: The skeletons were in different order in different worlds.
+# NOCOM: By vote of majority, skeleton2 is the ammonite, while skeleton3 is the mammoth skull
+# NOCOM: I don't know how this will affect compatibility for older games...
+greenland_skeleton2 => "skeleton2"
 greenland/tree1 -> "aspen_summer_old"
 winterland/snowman -> "snowman"
