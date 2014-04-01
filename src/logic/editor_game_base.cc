@@ -27,7 +27,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "logic/areawatcher.h"
 #include "logic/battle.h"
 #include "logic/building.h"
 #include "logic/dismantlesite.h"

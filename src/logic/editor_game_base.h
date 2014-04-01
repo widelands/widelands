@@ -42,7 +42,6 @@ namespace Widelands {
 
 class Players_Manager;
 
-struct AreaWatcher;
 class Battle;
 class Bob;
 struct Building_Descr;
