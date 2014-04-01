@@ -27,6 +27,7 @@
 #include "logic/widelands_filewrite.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -37,11 +38,12 @@ void Map_Resources_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
 {
 	FileRead fr;
-
 	fr.Open(fs, "binary/resource");
 
 	Map   & map   = egbase.map();
 	const World & world = egbase.world();
+
+	OneWorldLegacyLookupTable lookup_table;
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
@@ -56,11 +58,7 @@ void Map_Resources_Data_Packet::Read
 		std::map<uint8_t, uint8_t> smap;
 		for (uint8_t i = 0; i < nr_res; ++i) {
 			uint8_t const id = fr.Unsigned16();
-			std::string resource_name = fr.CString();
-			// NOCOM(#sirver): clutch
-			if (resource_name == "granit") {
-				resource_name = "granite";
-			}
+			const std::string resource_name = lookup_table.lookup_resource(fr.CString());
 			int32_t const res = world.get_resource(resource_name.c_str());
 			if (res == -1)
 				throw game_data_error

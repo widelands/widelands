@@ -22,6 +22,12 @@
 #include "log.h"
 
 OneWorldLegacyLookupTable::OneWorldLegacyLookupTable() :
+// RESOURCES - They were all the same for all worlds.
+resources_
+{
+	{ "granit", "granite" },
+},
+
 // TERRAINS
 terrains_
 {std::make_pair(
@@ -62,11 +68,20 @@ std::make_pair(
 
 {}
 
-const std::string& OneWorldLegacyLookupTable::lookup_terrain(const std::string& world,
-                                                             const std::string& terrain) const {
-	const std::map<std::string, std::string>& world_terrains = terrains_.at(world);
-	if (world_terrains.count(terrain)) {
-		return world_terrains.at(terrain);
+std::string OneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
+	const auto& i = resources_.find(resource);
+	if (i == resources_.end()) {
+		return resource;
 	}
-	return terrain;
+	return i->second;
+};
+
+std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& world,
+                                                      const std::string& terrain) const {
+	const std::map<std::string, std::string>& world_terrains = terrains_.at(world);
+	const auto& i = world_terrains.find(terrain);
+	if (i == world_terrains.end()) {
+		return terrain;
+	}
+	return i->second;
 };

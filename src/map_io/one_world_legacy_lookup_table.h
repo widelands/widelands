@@ -29,10 +29,15 @@ class OneWorldLegacyLookupTable : boost::noncopyable {
 public:
 	OneWorldLegacyLookupTable();
 
+	// Looks up the new name for the 'resource'. They were all the same for all
+	// former worlds.
+	std::string lookup_resource(const std::string& resource) const;
+
 	// Looks up the new name for the 'terrain' from the former 'world'.
-	const std::string& lookup_terrain(const std::string& world, const std::string& terrain) const;
+	std::string lookup_terrain(const std::string& world, const std::string& terrain) const;
 
 private:
+	const std::map<std::string, std::string> resources_;
 	const std::map<std::string, std::map<std::string, std::string>> terrains_;
 };
 
