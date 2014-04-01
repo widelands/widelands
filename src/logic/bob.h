@@ -47,6 +47,37 @@ struct BobProgramBase {
 	virtual std::string get_name() const = 0;
 };
 
+class Bob;
+
+// Description for the Bob class.
+class BobDescr : public Map_Object_Descr {
+public:
+	friend struct Map_Bobdata_Data_Packet;
+
+	BobDescr(const std::string& init_name,
+	         const std::string& init_descname,
+	         Tribe_Descr const* tribe);
+
+	virtual ~BobDescr() {};
+	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
+	bool is_world_bob() const {
+		return not m_owner_tribe;
+	}
+
+	Tribe_Descr const* get_owner_tribe() const {
+		return m_owner_tribe;
+	}
+
+	virtual uint32_t movecaps() const {
+		return 0;
+	}
+	uint32_t vision_range() const;
+
+protected:
+	virtual Bob& create_object() const = 0;
+
+	const Tribe_Descr* const m_owner_tribe;  //  0 if world bob
+};
 
 /**
  * Bobs are moving map objects: Animals, humans, ships...
@@ -118,7 +149,8 @@ struct BobProgramBase {
  * To this end, a task may have a \ref Task::pop method. If this method
  * exists, it is always called just before the task is popped from the stack.
  */
-struct Bob : public Map_Object {
+class Bob : public Map_Object {
+public:
 	friend class Map;
 	friend struct Map_Bobdata_Data_Packet;
 	friend struct Map_Bob_Data_Packet;
@@ -162,7 +194,7 @@ struct Bob : public Map_Object {
 	 * of a function, while \ref State represents the stackframe of an
 	 * actual execution of the function.
 	 *
-	 * \see struct Bob for in-depth explanation
+	 * \see class Bob for in-depth explanation
 	 */
 	struct State {
 		State(const Task * const the_task = nullptr) :
@@ -190,31 +222,7 @@ struct Bob : public Map_Object {
 		const BobProgramBase * program; ///< pointer to current program
 	};
 
-	struct Descr: public Map_Object_Descr {
-		friend struct Map_Bobdata_Data_Packet;
-
-		Descr(const std::string& init_name,
-		      const std::string& init_descname,
-		      Tribe_Descr const* tribe);
-
-		virtual ~Descr() {};
-		Bob & create(Editor_Game_Base &, Player * owner, const Coords &) const;
-		bool is_world_bob() const {return not m_owner_tribe;}
-
-		Tribe_Descr const * get_owner_tribe() const {
-			return m_owner_tribe;
-		}
-
-		virtual uint32_t movecaps() const {return 0;}
-		uint32_t vision_range() const;
-
-	protected:
-		virtual Bob & create_object() const = 0;
-
-		const Tribe_Descr * const m_owner_tribe; //  0 if world bob
-	};
-
-	MO_DESCR(Descr);
+	MO_DESCR(BobDescr);
 
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
@@ -322,7 +330,7 @@ struct Bob : public Map_Object {
 	Bob * get_next_on_field() const {return m_linknext;}
 
 protected:
-	Bob(const Descr & descr);
+	Bob(const BobDescr & descr);
 	virtual ~Bob();
 
 private:

@@ -110,7 +110,7 @@ struct InternetGaming : public ChatProvider {
 	std::string & get_local_clientrights() {return m_clientrights;}
 
 
-	// ChatProvider: sends a message via the metaserver.
+	/// ChatProvider: sends a message via the metaserver.
 	void send(const std::string &) override;
 
 	/// ChatProvider: adds the message to the message list and calls parent.
@@ -118,6 +118,9 @@ struct InternetGaming : public ChatProvider {
 
 	/// ChatProvider: returns the list of chatmessages.
 	const std::vector<ChatMessage> & getMessages() const override {return messages;}
+
+	/// Silence the internet lobby chat if we are in game as we do not see the messages anyways
+	bool sound_off() override {return m_state == IN_GAME;}
 
 	/// writes the ingame_system_chat messages to \arg msg and resets it afterwards
 	void getIngameSystemMessages(std::vector<ChatMessage> & msg) {

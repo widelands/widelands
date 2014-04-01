@@ -24,9 +24,11 @@
 #include <string>
 
 #include "interval.h"
-#include "logic/bob.h"
 #include "logic/field.h"
 
+namespace Widelands {
+class BobDescr;
+}  // namespace Widelands
 
 struct Editor_Interactive;
 struct Editor_Tool_Action;
@@ -40,7 +42,7 @@ struct Editor_Action_Args {
 	std::list<Widelands::Field::Height> origHights;                 // change hight tool
 	uint8_t cur_res, set_to;                                        // resources change tools
 	std::list<uint8_t> orgRes, orgResT;                             // resources set tool
-	std::list<const Widelands::Bob::Descr *> obob_type, nbob_type;  // bob change tools
+	std::list<const Widelands::BobDescr *> obob_type, nbob_type;  // bob change tools
 	std::list<std::string> oimmov_types;                            // immovable change tools
 	std::list<int32_t> nimmov_types;                                // immovable change tools
 	interval<Widelands::Field::Height> m_interval;                  // noise hight tool

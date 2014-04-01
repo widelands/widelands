@@ -53,8 +53,8 @@ public:
 	TerrainDescription const* get_ter(char const* const name) const;
 	int32_t get_nr_terrains() const;
 	int32_t get_bob(char const* const l) const;
-	Bob::Descr const* get_bob_descr(uint16_t const index) const;
-	Bob::Descr const* get_bob_descr(const std::string& name) const;
+	BobDescr const* get_bob_descr(uint16_t const index) const;
+	BobDescr const* get_bob_descr(const std::string& name) const;
 	int32_t get_nr_bobs() const;
 	int32_t get_immovable_index(char const* const l) const;
 	int32_t get_nr_immovables() const;
@@ -86,7 +86,7 @@ public:
 	const MapGenInfo& getMapGenInfo() const;
 
 private:
-	std::unique_ptr<DescriptionMaintainer<Bob::Descr>> bobs_;
+	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;
 	std::unique_ptr<DescriptionMaintainer<Immovable_Descr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;

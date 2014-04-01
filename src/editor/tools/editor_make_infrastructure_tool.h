@@ -23,6 +23,10 @@
 #include "editor/tools/editor_tool.h"
 #include "ui_basic/unique_window.h"
 
+namespace Widelands {
+class Editor_Game_Base;
+}  // namespace Widelands
+
 /**
  * This places immovables on the map
  * \TODO Implement undo for this tool

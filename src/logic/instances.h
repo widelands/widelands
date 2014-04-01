@@ -156,7 +156,7 @@ class Map_Object : boost::noncopyable {
 public:
 	enum {
 		AREAWATCHER,
-		BOB,  //  struct Bob
+		BOB,  //  class Bob
 
 		WARE, //  class WareInstance
 		BATTLE,

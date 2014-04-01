@@ -133,7 +133,7 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
                                      Profile& prof,
                                      Section& global_s,
                                      Tribe_Descr const* const _tribe)
-   : Bob::Descr(_name, _descname, _tribe) {
+   : BobDescr(_name, _descname, _tribe) {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 		add_animation("idle", g_gr->animations().load(directory, idle_s));
@@ -175,7 +175,7 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
 }
 
 Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
-   : Bob::Descr(table.get_string("name"),
+   : BobDescr(table.get_string("name"),
                 table.get_string("descname"),
                 nullptr)  // Can only handle world critters.
 {

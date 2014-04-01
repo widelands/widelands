@@ -47,9 +47,9 @@ namespace Widelands {
 // Making it a struct doesn't add anything. struct is used interchangeably with
 // class all around the code
 
+class Bob;
 class TerrainDescription;
 struct BaseImmovable;
-struct Bob;
 
 // Field is used so often, make sure it is as small as possible.
 #pragma pack(push, 1)
@@ -57,7 +57,7 @@ struct Bob;
 /// \todo This is all one evil hack :(
 struct Field {
 	friend class Map;
-	friend struct Bob;
+	friend class Bob;
 	friend struct BaseImmovable;
 
 	enum Buildhelp_Index {

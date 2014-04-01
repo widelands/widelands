@@ -114,6 +114,9 @@ struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	 */
 	virtual const std::vector<ChatMessage> & getMessages() const = 0;
 
+	// reimplemented e.g. in internet_gaming to silence the chat if in game.
+	virtual bool sound_off() {return false;}
+
 protected:
 	void send(const ChatMessage & c) {
 		Widelands::NoteSender<ChatMessage>::send(c);

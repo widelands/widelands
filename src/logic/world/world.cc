@@ -40,7 +40,7 @@
 namespace Widelands {
 
 World::World()
-   : bobs_(new DescriptionMaintainer<Bob::Descr>()),
+   : bobs_(new DescriptionMaintainer<BobDescr>()),
      immovables_(new DescriptionMaintainer<Immovable_Descr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
@@ -273,11 +273,11 @@ int32_t World::get_bob(char const* const l) const {
 	return bobs_->get_index(l);
 }
 
-Bob::Descr const* World::get_bob_descr(uint16_t const index) const {
+BobDescr const* World::get_bob_descr(uint16_t const index) const {
 	return bobs_->get(index);
 }
 
-Bob::Descr const* World::get_bob_descr(const std::string& name) const {
+BobDescr const* World::get_bob_descr(const std::string& name) const {
 	return bobs_->exists(name.c_str());
 }
 

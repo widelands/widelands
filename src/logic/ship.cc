@@ -49,7 +49,7 @@ Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
-: Descr(given_name, gdescname, &gtribe)
+: BobDescr(given_name, gdescname, &gtribe)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");

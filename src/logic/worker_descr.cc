@@ -41,7 +41,7 @@ Worker_Descr::Worker_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Bob::Descr(_name, _descname, &_tribe),
+	BobDescr(_name, _descname, &_tribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_ware_hotspot(global_s.get_Point("ware_hotspot", Point(0, 15))),
 	m_icon_fname(directory + "/menu.png"),

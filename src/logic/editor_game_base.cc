@@ -366,7 +366,7 @@ Building & Editor_Game_Base::warp_dismantlesite
  *
  * idx is the bob type.
  */
-Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr, Player * owner)
+Bob & Editor_Game_Base::create_bob(Coords c, const BobDescr & descr, Player * owner)
 {
 	return descr.create(*this, owner, c);
 }
@@ -374,9 +374,9 @@ Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr, Player * 
 
 Bob & Editor_Game_Base::create_bob
 	(Coords const c,
-	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe, Player * owner)
+	 BobDescr::Index const idx, Tribe_Descr const * const tribe, Player * owner)
 {
-	const Bob::Descr & descr =
+	const BobDescr & descr =
 		*
 		(tribe ?
 		 tribe->get_bob_descr(idx)
@@ -390,7 +390,7 @@ Bob & Editor_Game_Base::create_bob
 	(Coords c, const std::string & name, const Widelands::Tribe_Descr * const tribe,
 	 Player * owner)
 {
-	const Bob::Descr * descr =
+	const BobDescr * descr =
 		tribe ?
 		tribe->get_bob_descr(name) :
 		world().get_bob_descr(name);

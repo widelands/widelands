@@ -19,6 +19,7 @@
 
 #include "io/filesystem/zip_filesystem.h"
 
+#include <algorithm>
 #include <cassert>
 #include <cerrno>
 #include <cstdio>
@@ -227,7 +228,7 @@ FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type c
 }
 /**
  * Remove a number of files
- * \throw ZipOperation_error
+ * kthrow ZipOperation_error
  */
 void ZipFilesystem::Unlink(const std::string & filename) {
 	throw ZipOperation_error
@@ -366,6 +367,9 @@ void * ZipFilesystem::fastLoad
 void ZipFilesystem::Write
 	(const std::string & fname, void const * const data, int32_t const length)
 {
+	std::string filename = fname;
+	std::replace(filename.begin(), filename.end(), '\\', '/');
+
 	m_OpenZip();
 
 	zip_fileinfo zi;
@@ -376,7 +380,7 @@ void ZipFilesystem::Write
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
 
-	std::string complete_filename = m_basename + "/" + fname;
+	std::string complete_filename = m_basename + "/" + filename;
 
 	//  create file
 	switch
@@ -435,8 +439,7 @@ bool ZipFilesystem::ZipStreamRead::EndOfFile() const
 	return unzReadCurrentFile(m_unzipfile, nullptr, 1) == 0;
 }
 
-
-StreamRead  * ZipFilesystem::OpenStreamRead (const std::string & fname) {
+StreamRead* ZipFilesystem::OpenStreamRead(const std::string& fname) {
 	if (!FileExists(fname.c_str()) || IsDirectory(fname.c_str()))
 		throw ZipOperation_error
 			("ZipFilesystem::Load",
