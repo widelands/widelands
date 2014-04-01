@@ -40,7 +40,7 @@ struct RoutingNode;
  */
 struct Route : public IRoute {
 	friend struct Router;
-	friend struct Request;
+	friend class Request;
 
 	Route();
 

@@ -25,7 +25,7 @@
 namespace Widelands {
 class Game;
 struct PlayerImmovable;
-struct Request;
+class Request;
 class WareInstance;
 class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
@@ -44,7 +44,7 @@ class Worker;
  * or ware was destroyed).
  */
 struct Transfer {
-	friend struct Request;
+	friend class Request;
 
 	Transfer(Game &, Request &, WareInstance &);
 	Transfer(Game &, Request &, Worker       &);

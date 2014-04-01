@@ -41,7 +41,6 @@
 #include "map_io/widelands_map_objective_data_packet.h"
 #include "map_io/widelands_map_player_names_and_tribes_data_packet.h"
 #include "map_io/widelands_map_player_position_data_packet.h"
-#include "map_io/widelands_map_players_areawatchers_data_packet.h"
 #include "map_io/widelands_map_players_messages_data_packet.h"
 #include "map_io/widelands_map_players_view_data_packet.h"
 #include "map_io/widelands_map_port_spaces_data_packet.h"
@@ -215,16 +214,6 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Reading Exploration Data ... ");
 	{Map_Exploration_Data_Packet    p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
-
-	log("Reading AreaWatchers Data ... ");
-	{
-		Map_Players_AreaWatchers_Data_Packet p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
-	}
-	log("took %ums\n ", timer.ms_since_last_query());
-
-	//  We always write the next few packets since it takes too much time
-	//  looking if it really is needed.
 
 	//  !!!!!!!!!! NOTE
 	//  This packet must be before any building or road packet. So do not change

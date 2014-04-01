@@ -27,7 +27,7 @@ namespace Widelands {
 
 struct PlayerImmovable;
 class Game;
-struct Request;
+class Request;
 class Warehouse;
 struct Ware_Index;
 class WareInstance;
