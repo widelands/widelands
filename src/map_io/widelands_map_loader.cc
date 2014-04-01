@@ -27,8 +27,6 @@
 #include "logic/world.h"
 #include "map_io/widelands_map_allowed_building_types_data_packet.h"
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
-#include "map_io/widelands_map_bob_data_packet.h"
-#include "map_io/widelands_map_bobdata_data_packet.h"
 #include "map_io/widelands_map_building_data_packet.h"
 #include "map_io/widelands_map_buildingdata_data_packet.h"
 #include "map_io/widelands_map_elemental_data_packet.h"
@@ -53,8 +51,6 @@
 #include "map_io/widelands_map_scripting_data_packet.h"
 #include "map_io/widelands_map_terrain_data_packet.h"
 #include "map_io/widelands_map_version_data_packet.h"
-#include "map_io/widelands_map_ware_data_packet.h"
-#include "map_io/widelands_map_waredata_data_packet.h"
 #include "scoped_timer.h"
 #include "warning.h"
 
@@ -184,16 +180,6 @@ int32_t WL_Map_Loader::load_map_complete
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	bool have_oldbobs = m_fs->FileExists("binary/bob");
-	if (have_oldbobs) {
-		log("Reading Bob Data ... ");
-		{
-			Map_Bob_Data_Packet p;
-			p.Read(*m_fs, egbase, !scenario, *m_mol);
-		}
-		log("took %ums\n ", timer.ms_since_last_query());
-	}
-
 	log("Reading Resources Data ... ");
 	{Map_Resources_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
@@ -256,13 +242,6 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Building_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	bool have_oldwares = m_fs->FileExists("binary/ware");
-	if (have_oldwares) {
-		log("Reading Map Ware Data ... ");
-		{Map_Ware_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-		log("took %ums\n ", timer.ms_since_last_query());
-	}
-
 	//  DATA PACKETS
 	log("Reading Flagdata Data ... ");
 	{Map_Flagdata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
@@ -276,18 +255,6 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Reading Buildingdata Data ... ");
 	{Map_Buildingdata_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
-
-	if (have_oldwares) {
-		log("Reading Waredata Data ... ");
-		{Map_Waredata_Data_Packet    p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
-	}
-
-	if (have_oldbobs) {
-		log("Reading Bobdata Data ... ");
-		{Map_Bobdata_Data_Packet p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
-	}
 
 	log("Second and third phase loading Map Objects ... ");
 	mapobjects.LoadFinish();
