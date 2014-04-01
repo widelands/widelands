@@ -1,6 +1,0 @@
-help=_The bronze axe is considered a hard to handle weapon. Only skilled warriors can use this. It is produced in the war mill and used in the trainingscamp (trains -together with food - from attack level 2 to level 3).
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=7 7

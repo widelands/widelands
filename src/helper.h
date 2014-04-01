@@ -27,6 +27,7 @@
 #include <vector>
 
 #include <SDL_keyboard.h>
+#include <boost/utility.hpp>
 
 #include "wexception.h"
 
@@ -135,22 +136,6 @@ template<typename T> T stringTo(const std::string & s) {
 	return x;
 }
 
-/* Convert any sstream-compatible type to std::string
- *
- * \note In a just world, this would be implemented with gnu::autosprintf. But
- * many distributions don't carry that lib despite the fact that it is part of
- * glibc.
- *
- * \see http://www.experts-exchange.com/Programming/
- * Programming_Languages/Cplusplus/Q_20670737.html
- * \author AssafLavie on http://www.experts-exchange.com
- */
-template<typename T> std::string toString(const T & x) {
-	std::ostringstream oss;
-	oss << x;
-	return oss.str();
-}
-
 std::vector<std::string> split_string
 	(const std::string &, char const * separators);
 void remove_spaces(std::string &);
@@ -158,7 +143,37 @@ void log(char * const fmt, ...);
 
 bool is_printable(SDL_keysym k);
 
+/// A class that makes iteration over filename_?.png templates easy.
+class NumberGlob : boost::noncopyable {
+public:
+	typedef uint32_t type;
+	NumberGlob(const std::string& pictmp);
+
+	/// If there is a next filename, puts it in 's' and returns true.
+	bool next(std::string* s);
+
+private:
+	std::string templ_;
+	std::string fmtstr_;
+	std::string replstr_;
+	uint32_t cur_;
+	uint32_t max_;
+};
+
 /// Generate a random string of given size out of the given alphabet.
 std::string random_string(const std::string& chars, int nlen);
 
+/// A functional container filtering (by copying the values). Returns a new
+//ContainerType that / contains all values where 'test' returned true.
+template <typename ContainerType, class UnaryPredicate>
+ContainerType filter(const ContainerType& container, UnaryPredicate test) {
+	ContainerType filtered;
+	for (const auto& entry : container) {
+		if (!test(entry)) {
+			continue;
+		}
+		filtered.insert(entry);
+	}
+	return filtered;
+}
 #endif

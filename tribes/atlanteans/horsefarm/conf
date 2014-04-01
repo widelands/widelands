@@ -6,12 +6,12 @@ build_material=false
 recruitment=true
 
 [buildcost]
-trunk=2
+log=2
 stone=2
 planks=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=2
 
 [working positions]

@@ -1,4 +1,4 @@
-help=_Saws the wood to produce planks.
+help=_Saws wood to produce planks.
 
 [buildcost]
 carrier=1
@@ -7,16 +7,13 @@ saw=1
 [idle]
 pics=idle_??.png
 hotspot=5 31
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=16 31
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
 hotspot=16 31
-playercolor=true
 fps=10

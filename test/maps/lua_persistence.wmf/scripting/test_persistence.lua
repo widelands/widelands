@@ -4,9 +4,9 @@
 -- This tests saving and loading of various Lua objects in the global
 -- environment.
 
-use("aux", "lunit")
+include "scripting/lunit.lua"
 
-use("aux", "set")
+include "scripting/set.lua"
 
 function save_coroutine()
    my_name = "SirVer"

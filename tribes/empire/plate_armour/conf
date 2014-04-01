@@ -1,8 +1,0 @@
-help=_The plate armour is the strongest armour existing for the Empire soldiers. It is produced in the armour smithy and used in the trainingscamp  - together with food - to train soldiers from healthpoints level 3 to level 4.
-
-
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=4 11

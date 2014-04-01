@@ -19,6 +19,8 @@
 
 #include "logic/worker.h"
 
+#include <boost/format.hpp>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -586,12 +588,15 @@ void Worker::informPlayer
 	(Game & game, Building & building, std::string res_type) const
 {
 	// NOTE this is just an ugly hack for now, to avoid getting messages
-	// NOTE for farms, ferneries, vineyards, etc.
+	// NOTE for farms, reed yards, vineyards, etc.
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
 	// NOTE  AND fish_breeders
 	if (building.name() == "fish_breeders_house")
 		return;
+
+	// TODO "stone" is defined as "granit" in the worlds
+	if (res_type == "stone") res_type = "granit";
 
 	// Translate the Resource name (if it is defined by the world)
 	const World & world = game.map().world();
@@ -602,13 +607,8 @@ void Worker::informPlayer
 	building.send_message
 		(game,
 		 "mine",
-		 _("Out of ") + res_type,
-		 std::string
-		 	(_
-		 	 ("The worker of this building cannot find any more resources "
-		 	 "of the following type: "))
-		 +
-		 res_type,
+		 (boost::format(_("Out of %s")) % res_type).str(),
+		 (boost::format(_("The worker of this building cannot find any more %s.")) % res_type).str(),
 		 true,
 		 1800000, 0);
 }
@@ -1336,19 +1336,6 @@ Ware_Index Worker::level(Game & game) {
 }
 
 /**
- * Change this worker into a different type.
- *
- * \warning Using this function is very dangerous. The only reason it exists
- * is to fix certain savegame compatibility issues.
- */
-void Worker::flash(const std::string & newname)
-{
-	log("WARNING: Flashing worker of type %s to %s\n", name().c_str(), newname.c_str());
-
-	m_descr = tribe().get_worker_descr(tribe().safe_worker_index(newname));
-}
-
-/**
  * Set a fallback task.
  */
 void Worker::init_auto_task(Game & game) {
@@ -1869,7 +1856,7 @@ void Worker::return_update(Game & game, State & state)
 		char buffer[2048];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _ ("Your %s can't find a way home and will likely die."),
+			 _ ("Your %s can’t find a way home and will likely die."),
 			 descname().c_str());
 		owner().add_message
 			(game,
@@ -3046,14 +3033,6 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
 	Worker & worker = get<Worker>();
-	const std::string & compatibility = worker.descr().compatibility_program(name);
-
-	if (compatibility == "fail") {
-		if (upcast(Game, game, &egbase()))
-			add_finish(boost::bind(&Worker::send_signal, &worker, boost::ref(*game), "fail"));
-		return nullptr;
-	}
-
 	return worker.descr().get_program(name);
 }
 
@@ -3091,7 +3070,7 @@ Map_Object::Loader * Worker::load
 		loader->load(fr);
 		return loader.release();
 	} catch (const std::exception & e) {
-		throw wexception(_("loading worker: %s"), e.what());
+		throw wexception("loading worker: %s", e.what());
 	}
 
 	return nullptr; // Should not be reached

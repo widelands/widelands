@@ -1,0 +1,8 @@
+help=_The broad ax is produced by the axfactory and the war mill. It is used in the training camp – together with food – to train warriors with a fundamental fighting knowledge (from attack level 1 to attack level 2).
+
+
+preciousness=1
+
+[idle]
+pics=idle.png
+hotspot=7 6

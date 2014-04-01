@@ -28,6 +28,7 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -44,7 +45,7 @@ HelpWindow::HelpWindow
 	 uint32_t fontsize,
 	 uint32_t width, uint32_t height)
 	:
-	Window(parent, "help_window", 0, 0, 20, 20, (_("Help: ") + caption).c_str()),
+	Window(parent, "help_window", 0, 0, 20, 20, (boost::format(_("Help: %s")) % caption).str().c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
 	m_h1((format("%u") % (fontsize < 12 ? 18 : fontsize * 3 / 2)).str()),
 	m_h2((format("%u") % (fontsize < 12 ? 12 : fontsize)).str()),
@@ -188,13 +189,15 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	 std::string path_to_script,
 	 uint32_t width, uint32_t height)
 	:
-	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + caption).c_str()),
+	UI::UniqueWindow(parent, "help_window", &reg, width, height,
+		(boost::format(_("Help: %s")) % caption).str().c_str()
+	),
 	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
 	LuaInterface lua;
 
 	try {
-		std::unique_ptr<LuaTable> t = lua.run_script(*g_fs, path_to_script, "help");
+		std::unique_ptr<LuaTable> t = lua.run_script(path_to_script);
 		textarea->set_text(t->get_string("text"));
 	} catch (LuaError & err) {
 		textarea->set_text(err.what());

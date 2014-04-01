@@ -2,20 +2,22 @@
 --                         Collectors Win condition
 -- =======================================================================
 
-use("aux", "coroutine") -- for sleep
-use("aux", "table")
-use("aux", "win_condition_functions")
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/table.lua"
+include "scripting/formatting.lua"
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-use("aux", "win_condition_texts")
+include "scripting/win_condition_texts.lua"
 
 local wc_name = _ "Collectors"
 local wc_version = 2
 local wc_desc = _ (
-	"You get points for precious wares in your warehouses, the player with " ..
+	"You get points for precious wares in your warehouses. The player with " ..
 	"the highest number of wares at the end of 4 hours wins the game."
 )
+local wc_points = _"Points"
 return {
 	name = wc_name,
 	description = wc_desc,
@@ -32,19 +34,19 @@ end
 local point_table = {
 	barbarians = {
 		gold = 3,
-		axe = 2,
-		sharpaxe = 3,
-		broadaxe = 4,
-		bronzeaxe = 4,
-		battleaxe = 6,
-		warriorsaxe = 10,
+		ax = 2,
+		sharpax = 3,
+		broadax = 4,
+		bronzeax = 4,
+		battleax = 6,
+		warriorsax = 10,
 		helm = 2,
 		mask = 3,
-		warhelmet = 6,
+		warhelm = 6,
 	},
 	barbarians_order = {
-		"gold", "axe", "sharpaxe", "broadaxe", "bronzeaxe", "battleaxe",
-		"warriorsaxe", "helm", "mask", "warhelmet",
+		"gold", "ax", "sharpax", "broadax", "bronzeax", "battleax",
+		"warriorsax", "helm", "mask", "warhelm",
 	},
 
 	empire = {
@@ -55,13 +57,13 @@ local point_table = {
 		heavy_lance = 7,
 		war_lance = 8,
 		helm = 2,
-		armour = 3,
-		chain_armour = 4,
-		plate_armour = 8,
+		armor = 3,
+		chain_armor = 4,
+		plate_armor = 8,
 	},
 	empire_order = {
 		"gold", "wood_lance", "lance", "advanced_lance", "heavy_lance",
-		"war_lance", "helm", "armour", "chain_armour", "plate_armour"
+		"war_lance", "helm", "armor", "chain_armor", "plate_armor"
 	},
 
 	atlanteans = {
@@ -85,12 +87,13 @@ local point_table = {
 
 -- Calculate the momentary points for one player
 local function _calc_points(plr)
+	set_textdomain("win_conditions")
 	local bs = array_combine(
 		plr:get_buildings("headquarters"), plr:get_buildings("warehouse")
 	)
 
 	local points = 0
-	local descr = { game_status_collectors.title:format(plr.name) }
+	local descr = { "</p>" .. h2((_"Status for %s"):format(plr.name)) .. "<p line-spacing=3 font-size=12>"}
 	for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
 		local value = point_table[plr.tribe_name][ware]
 		local count = 0
@@ -99,26 +102,29 @@ local function _calc_points(plr)
 		end
 		local lpoints = count * value
 		points = points + lpoints
-		descr[#descr+1] = ("  %s (%i P) x %i = %i P<br>"):format(
+		-- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
+		descr[#descr+1] = [[• ]] .. (_"  %1$s (%2$i P) x %3$i = %4$i P"):bformat(
 			ware, value, count, lpoints
-		)
+		) .. "<br>"
 	end
-	descr[#descr+1] = game_status_collectors.total:format(points)
-
+	descr[#descr+1] =  "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
+			  .. "<p line-spacing=3 font-size=12>"
 	return points, p(table.concat(descr, "\n"))
 end
 
 -- Send all players the momentary game state
 local function _send_state(remaining_time, plrs)
+	set_textdomain("win_conditions")
 	local h = math.floor(remaining_time / 60)
 	local m = remaining_time % 60
 	local time = ""
 	if h > 0 then
-		time = ("%ih%02im"):format(h,m)
+		-- TRANSLATORS: Context: 'The game will end in %s.'
+		time = (_"%1$ih%2$02im"):bformat(h,m)
 	else
-		time = ("%i minutes"):format(m)
+		time = (ngettext("%i minute", "%i minutes", m)):format(m)
 	end
-	local msg = p(game_status_collectors.end_in):format(time)
+	local msg = p(_"The game will end in %s."):format(time)
 	msg = msg .. "\n\n"
 
 	for idx, plr in ipairs(plrs) do
@@ -149,7 +155,7 @@ end
 -- Instantiate the hook to calculate points
 if hooks == nil then hooks = {} end
 hooks.custom_statistic = {
-	name = game_status_collectors.points,
+	name = wc_points,
 	pic = "pics/genstats_points.png",
 	calculator = function(p)
 		local pts = _calc_points(p)

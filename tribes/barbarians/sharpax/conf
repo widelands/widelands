@@ -1,0 +1,9 @@
+help=_Young warriors are proud to learn to fight with this powerful weapon. It is heavier and sharper than the ordinary ax. It is produced in axfactories and war mills. In training camps, it is used – together with food – to train soldiers from attack level 0 to level 1.
+
+
+
+preciousness=1
+
+[idle]
+pics=idle.png
+hotspot=7 7

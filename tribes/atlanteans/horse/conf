@@ -1,4 +1,4 @@
-help=_Horses help to carry items at heavily used roads. They are raised in a horse farm.
+help=_Horses help to carry items along busy roads. They are reared in a horse farm.
 default_target_quantity=5
 ware_hotspot=-2 12
 

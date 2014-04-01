@@ -1,10 +1,10 @@
-help=_Wood is a basic building material of the Empire. It is also consumed in the weapon smithy.
+help=_Wood is a basic building material of the Empire. It is also used by the weapon smithy.
 
 default_target_quantity=40
 preciousness=7
 
-# These are planks created out of trunks.
-# The roman sawmiller know exactly, howto cut the trunks.
+# These are planks created out of logs.
+# The roman sawmiller know exactly, howto cut the logs.
 
 [idle]
 pics=idle.png

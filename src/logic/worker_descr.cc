@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ Worker_Descr::Worker_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Bob::Descr(_name, _descname, directory, prof, global_s, &_tribe),
+	BobDescr(_name, _descname, directory, prof, global_s, &_tribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_ware_hotspot(global_s.get_Point("ware_hotspot", Point(0, 15))),
 	m_icon_fname(directory + "/menu.png"),
@@ -83,20 +83,11 @@ Worker_Descr::Worker_Descr
 	// If worker has a work animation load and add it.
 	Section * work_s = prof.get_section("work");
 	if (work_s)
-		add_animation("work", g_anim.get(directory, *work_s, "work.png"));
+		add_animation("work", g_gr->animations().load(directory, *work_s));
 
 	// Read the walking animations
-	m_walk_anims.parse
-		(*this, directory, prof, "walk_??", prof.get_section("walk"));
-
-	//  Soldiers have no walkload.
-	if (not global_s.has_val("max_hp_level"))
-		m_walkload_anims.parse
-			(*this,
-			 directory,
-			 prof,
-			 "walkload_??",
-			 prof.get_section("walkload"));
+	m_walk_anims.parse(*this, directory, prof, "walk");
+	m_walkload_anims.parse(*this, directory, prof, "walkload", true);
 
 	// Read the becomes and experience
 	if (char const * const becomes_name = global_s.get_string("becomes")) {
@@ -130,12 +121,6 @@ Worker_Descr::Worker_Descr
 			delete program;
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
-	}
-
-	// Read compatibility information
-	if (Section * compat_s = prof.get_section("compatibility_program")) {
-		while (const Section::Value * v = compat_s->get_next_val())
-			m_compatibility_programs[v->get_name()] = v->get_string();
 	}
 }
 
@@ -171,20 +156,6 @@ WorkerProgram const * Worker_Descr::get_program
 			("%s has no program '%s'", name().c_str(), programname.c_str());
 
 	return it->second;
-}
-
-/**
- * Get the compatibility information for the given program name.
- *
- * Returns an empty string if no compatibility information for this program is found.
- */
-const std::string & Worker_Descr::compatibility_program(const std::string & programname) const
-{
-	static const std::string empty;
-	std::map<std::string, std::string>::const_iterator it = m_compatibility_programs.find(programname);
-	if (it != m_compatibility_programs.end())
-		return it->second;
-	return empty;
 }
 
 /**

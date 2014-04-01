@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_help")
+include "scripting/formatting.lua"
+include "scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -9,7 +9,7 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/gamekeepers_hut/gamekeeper_i_00.png", p(
-			_[["He loves the animals and to breed them<br>as we love to cook and eat them."]])) ..
+			_[[‘He loves the animals and to breed them<br>as we love to cook and eat them.’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Barbarian nursery rhyme]])) ..
 	--General Section
 		rt(h2(_"General")) ..
@@ -25,12 +25,12 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Small plot","pics/small.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
+		rt(h3(_"Build cost:")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 2, p("2 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
@@ -40,5 +40,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The %s pauses %s before going to work again.":format(_"Gamekeeper","52.5s"))
+		text_line(_"Performance:", _"The gamekeeper pauses 52.5s before going to work again.")
 }

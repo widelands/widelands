@@ -1,4 +1,4 @@
-help=_Helps to carry items at heavily used roads.
+help=_Oxen help to carry items along busy roads. They are reared in a cattle farm.
 default_target_quantity=5
 ware_hotspot=-2 13
 

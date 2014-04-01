@@ -56,7 +56,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 		args.orgResT.push_back(res);
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
-		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res)) {
+		if (Editor_Change_Resource_Tool_Callback(mr.location(), map, args.cur_res)) {
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic = g_gr->images().get
 				(world.get_resource(res)->get_editor_pic (mr.location().field->get_resources_amount()));
@@ -133,5 +133,3 @@ Editor_Action_Args Editor_Set_Resources_Tool::format_args_impl(Editor_Interactiv
 	a.set_to = m_set_to;
 	return a;
 }
-
-

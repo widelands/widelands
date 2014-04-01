@@ -19,6 +19,7 @@
 
 #include "io/filesystem/zip_filesystem.h"
 
+#include <algorithm>
 #include <cassert>
 #include <cerrno>
 #include <cstdio>
@@ -68,21 +69,9 @@ bool ZipFilesystem::IsWritable() const {
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-int32_t ZipFilesystem::FindFiles
-	(const std::string & path_in,
-#ifndef NDEBUG
-	 const std::string & pattern,
-#else
-	 const std::string &,
-#endif
-	 filenameset_t     * const results,
-	 uint32_t)
-{
+std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
 	m_OpenUnzip();
 
-	// If you need something else, implement a proper glob() here. I do not want
-	// to! -- Holger
-	assert(pattern == "*");
 	assert(path_in.size()); //  prevent invalid read below
 
 	std::string path = m_basename;
@@ -99,6 +88,7 @@ int32_t ZipFilesystem::FindFiles
 
 	unz_file_info file_info;
 	char filename_inzip[256];
+	std::set<std::string> results;
 	for (;;) {
 		unzGetCurrentFileInfo
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
@@ -116,12 +106,12 @@ int32_t ZipFilesystem::FindFiles
 		if
 			(('/' + path == filepath || path == filepath || path.length() == 1)
 			 && filename.size())
-		results->insert(complete_filename.substr(m_basename.size()));
+		results.insert(complete_filename.substr(m_basename.size()));
 
 		if (unzGoToNextFile(m_unzipfile) == UNZ_END_OF_LIST_OF_FILE)
 			break;
 	}
-	return results->size();
+	return results;
 }
 
 /**
@@ -238,7 +228,7 @@ FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type c
 }
 /**
  * Remove a number of files
- * \throw ZipOperation_error
+ * kthrow ZipOperation_error
  */
 void ZipFilesystem::Unlink(const std::string & filename) {
 	throw ZipOperation_error
@@ -377,6 +367,9 @@ void * ZipFilesystem::fastLoad
 void ZipFilesystem::Write
 	(const std::string & fname, void const * const data, int32_t const length)
 {
+	std::string filename = fname;
+	std::replace(filename.begin(), filename.end(), '\\', '/');
+
 	m_OpenZip();
 
 	zip_fileinfo zi;
@@ -387,7 +380,7 @@ void ZipFilesystem::Write
 	zi.internal_fa = 0;
 	zi.external_fa = 0;
 
-	std::string complete_filename = m_basename + "/" + fname;
+	std::string complete_filename = m_basename + "/" + filename;
 
 	//  create file
 	switch
@@ -446,8 +439,7 @@ bool ZipFilesystem::ZipStreamRead::EndOfFile() const
 	return unzReadCurrentFile(m_unzipfile, nullptr, 1) == 0;
 }
 
-
-StreamRead  * ZipFilesystem::OpenStreamRead (const std::string & fname) {
+StreamRead* ZipFilesystem::OpenStreamRead(const std::string& fname) {
 	if (!FileExists(fname.c_str()) || IsDirectory(fname.c_str()))
 		throw ZipOperation_error
 			("ZipFilesystem::Load",
@@ -597,4 +589,3 @@ std::string ZipFilesystem::strip_basename(std::string filename)
 		return filename.substr(1);
 	return filename;
 }
-

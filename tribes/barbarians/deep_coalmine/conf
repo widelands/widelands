@@ -5,11 +5,11 @@ output=coal
 enhancement=deeper_coalmine
 
 [enhancement_cost]
-trunk=4
+log=4
 raw_stone=2
 
 [return_on_dismantle_on_enhanced]
-trunk=2
+log=2
 raw_stone=1
 
 [working positions]
@@ -39,19 +39,15 @@ produce=coal:2
 [idle]
 pics=deep_coalmine_i_??.png
 hotspot=21 37
-playercolor=true
 
 [build]
 pics=deep_coalmine_b_??.png
 hotspot=21 37
-playercolor=true
 
 [working]
 pics=deep_coalmine_w_??.png
 hotspot=21 37
-playercolor=true
 
 [empty]
 pics=deep_coalmine_e_??.png
 hotspot=21 37
-playercolor=true

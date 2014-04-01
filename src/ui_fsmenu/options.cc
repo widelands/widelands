@@ -22,16 +22,67 @@
 #include <cstdio>
 #include <iostream>
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <libintl.h>
 
 #include "constants.h"
 #include "graphic/graphic.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 #include "save_handler.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+
+namespace  {
+
+struct LanguageEntry {
+	LanguageEntry(const std::string& init_abbreviation, const std::string& init_descname) :
+		abbreviation(init_abbreviation),
+		descname(init_descname) {}
+
+	bool operator<(const LanguageEntry& other) const {
+		return descname < other.descname;
+	}
+
+	std::string abbreviation;
+	std::string descname;
+};
+
+void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
+
+	Section* s = &g_options.pull_section("global");
+	filenameset_t files = g_fs->ListDirectory(s->get_string("localedir", INSTALL_LOCALEDIR));
+	Profile ln("txts/languages");
+	s = &ln.pull_section("languages");
+	bool own_selected = "" == language || "en" == language;
+
+	// Add translation directories to the list
+	std::vector<LanguageEntry> entries;
+	for (const std::string& filename : files) {
+		char const* const path = filename.c_str();
+		if (!strcmp(FileSystem::FS_Filename(path), ".") ||
+		    !strcmp(FileSystem::FS_Filename(path), "..") || !g_fs->IsDirectory(path)) {
+			continue;
+		}
+
+		char const* const abbreviation = FileSystem::FS_Filename(path);
+		entries.emplace_back(abbreviation, s->get_string(abbreviation, abbreviation));
+		own_selected |= abbreviation == language;
+	}
+	// Add currently used language manually
+	if (!own_selected) {
+		entries.emplace_back(language, s->get_string(language.c_str(), language.c_str()));
+	}
+	std::sort(entries.begin(), entries.end());
+
+	for (const LanguageEntry& entry : entries) {
+		list->add(entry.descname.c_str(), entry.abbreviation, nullptr, entry.abbreviation == language);
+	}
+}
+
+}  // namespace
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(Options_Ctrl::Options_Struct opt)
@@ -75,7 +126,9 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_sb_remove_replays
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
-		 opt.remove_replays, 0, 365, _("days"),
+		 /** TRANSLATORS: Options: Remove Replays older than: */
+		 /** TRANSLATORS: This will have a number added in front of it */
+		 opt.remove_replays, 0, 365, ngettext("day", "days", m_vbutw),
 		 g_gr->images().get("pics/but1.png"), true),
 
 // Title
@@ -151,7 +204,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_auto_roadbuild_mode
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
-		 _("Start roadbuilding after placing flag"), UI::Align_VCenter),
+		 _("Start building road after placing a flag"), UI::Align_VCenter),
 
 	m_show_workarea_preview
 		(this, Point(get_w() * 19 / 200, get_h() * 6767 / 10000)),
@@ -195,8 +248,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_apply.set_font(font_small());
 	m_cancel.set_font(font_small());
 
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_autosave     .add_replacement(0, _("Off"));
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(0, _("Never"));
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(1, _("1 day"));
 
 	m_sb_maxfps       .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
@@ -260,7 +316,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
-		sprintf(buf, "%ix%i", m_resolutions[i].xres, m_resolutions[i].yres);
+		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		sprintf(buf, _("%1$i x %2$i"), m_resolutions[i].xres, m_resolutions[i].yres);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
 			m_resolutions[i].yres  == opt.yres;
@@ -269,7 +326,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	}
 	if (not did_select_a_res) {
 		char buf[32];
-		sprintf(buf, "%ix%i", opt.xres, opt.yres);
+		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		sprintf(buf, "%1$i x %2$i", opt.xres, opt.yres);
 		m_reslist.add(buf, nullptr, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
@@ -286,38 +344,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		("English", "en",
 		 nullptr, "en" == opt.language);
 
-	filenameset_t files;
-	Section * s = &g_options.pull_section("global");
-	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
-	Profile ln("txts/languages");
-	s = &ln.pull_section("languages");
-	bool own_selected = "" == opt.language || "en" == opt.language;
-
-	// Add translation directories to the list
-	for
-		(filenameset_t::iterator pname = files.begin();
-		 pname != files.end();
-		 ++pname)
-	{
-		char const * const path = pname->c_str();
-
-		if
-			(!strcmp(FileSystem::FS_Filename(path), ".") ||
-			 !strcmp(FileSystem::FS_Filename(path), "..") ||
-			 !g_fs->IsDirectory(path))
-			continue;
-
-		char const * const abbrev = FileSystem::FS_Filename(path);
-		m_language_list.add
-			(s->get_string(abbrev, abbrev), abbrev,
-			 nullptr, abbrev == opt.language);
-		own_selected |= abbrev == opt.language;
-	}
-	// Add currently used language manually
-	if (!own_selected)
-		m_language_list.add
-			(s->get_string(opt.language.c_str(), opt.language.c_str()),
-			 opt.language, nullptr, true);
+	add_languages_to_list(&m_language_list, opt.language);
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
@@ -466,8 +493,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_label_transparent_chat
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,
-		 _("Show in game chat with transparent background"), UI::Align_VCenter),
-
+		 _("Show in-game chat with transparent background"), UI::Align_VCenter),
 	os(opt)
 {
 	m_cancel.sigclicked.connect
@@ -519,8 +545,9 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
-		filenameset_t files;
-		g_fs->FindFiles("fonts/", "*.ttf", &files);
+		filenameset_t files =
+		   filter(g_fs->ListDirectory("fonts"),
+		          [](const std::string& fn) {return boost::ends_with(fn, ".ttf");});
 
 		for
 			(filenameset_t::iterator pname = files.begin();

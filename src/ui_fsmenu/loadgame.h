@@ -41,12 +41,13 @@ class Map_Loader;
 };
 class Image;
 class RenderTarget;
-struct GameController;
+class GameController;
 struct GameSettingsProvider;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadGame(Widelands::Game &, GameSettingsProvider * gsp = nullptr, GameController * gc = nullptr);
+	Fullscreen_Menu_LoadGame
+		(Widelands::Game &, GameSettingsProvider * gsp = nullptr, GameController * gc = nullptr);
 
 	const std::string & filename() {return m_filename;}
 

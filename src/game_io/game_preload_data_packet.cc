@@ -30,6 +30,7 @@
 #include "logic/map.h"
 #include "logic/playersmanager.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -77,11 +78,7 @@ void Game_Preload_Data_Packet::Read
 					m_win_condition = _("Scenario");
 				} else {
 					try {
-						std::unique_ptr<LuaTable> table
-							(game.lua().run_script
-								(*g_fs,
-								"scripting/win_conditions/" + m_win_condition
-								+ ".lua", "win_conditions"));
+						std::unique_ptr<LuaTable> table(game.lua().run_script(m_win_condition));
 						m_win_condition = table->get_string("name");
 					} catch (...) {
 						// Catch silently, the win_condition value will be used
@@ -101,10 +98,10 @@ void Game_Preload_Data_Packet::Read
 			}
 		} else {
 			throw game_data_error
-				(_("unknown/unhandled version %i"), packet_version);
+				("unknown/unhandled version %i", packet_version);
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("preload: %s"), e.what());
+		throw game_data_error("preload: %s", e.what());
 	}
 }
 
@@ -130,9 +127,11 @@ void Game_Preload_Data_Packet::Write
 		s.set_int("player_nr", ipl->player_number());
 	} else {
 		// Pretend that the first player saved the game
-		iterate_players_existing_const(p, map.get_nrplayers(), game, player_tmp) {
-			s.set_int("player_nr", p);
-			break;
+		for (Widelands::Player_Number p = 1; p <= map.get_nrplayers(); ++p) {
+			if (game.get_player(p)) {
+				s.set_int("player_nr", p);
+				break;
+			}
 		}
 	}
 	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.player_manager()->get_number_of_players());

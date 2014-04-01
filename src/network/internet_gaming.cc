@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+#include <libintl.h>
 
 #include "compile_diagnostics.h"
 #include "i18n.h"
@@ -395,7 +396,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		} else if (cmd == IGPCMD_ERROR) {
 			std::string errortype = packet.String();
 			if (errortype != "LOGIN" && errortype != "RELOGIN") {
-				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", packet.String().c_str());
+				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", errortype.c_str());
 				throw warning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
 			}
 			// Clients login request got rejected
@@ -430,8 +431,17 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_TIME) {
 			// Client received the server time
 			time_offset = boost::lexical_cast<int>(packet.String()) - time(nullptr);
-			dedicatedlog("InternetGaming: Server time offset is %i seconds.\n", time_offset);
-			std::string temp = (boost::format(_("Server time offset is %i seconds.")) % time_offset).str();
+			dedicatedlog
+				(ngettext
+					("InternetGaming: Server time offset is %u second.",
+				 	 "InternetGaming: Server time offset is %u seconds.", time_offset),
+				 time_offset);
+			std::string temp =
+				(boost::format
+					(ngettext("Server time offset is %u second.",
+			        	 "Server time offset is %u seconds.", time_offset))
+				 % time_offset)
+				 .str();
 			formatAndAddChat("", "", true, temp);
 		}
 
@@ -468,6 +478,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_GAMES) {
 			// Client received the new list of games
 			uint8_t number = boost::lexical_cast<int>(packet.String()) & 0xff;
+			std::vector<INet_Game> old = gamelist;
 			gamelist.clear();
 			dedicatedlog("InternetGaming: Received a game list update with %u items.\n", number);
 			for (uint8_t i = 0; i < number; ++i) {
@@ -476,9 +487,27 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				ing->build_id    = packet.String();
 				ing->connectable = str2bool(packet.String());
 				gamelist.push_back(*ing);
+
+				bool found = false;
+				for (std::vector<INet_Game>::size_type j = 0; j < old.size(); ++j)
+					if (old[j].name == ing->name) {
+						found = true;
+						old[j].name = "";
+						break;
+					}
+				if (!found)
+					formatAndAddChat
+						("", "", true, (boost::format(_("The game %s is now available")) % ing->name).str());
+
 				delete ing;
 				ing = nullptr;
 			}
+
+			for (std::vector<INet_Game>::size_type i = 0; i < old.size(); ++i)
+				if (old[i].name.size())
+					formatAndAddChat
+						("", "", true, (boost::format(_("The game %s has been closed")) % old[i].name).str());
+
 			gameupdate = true;
 		}
 
@@ -491,6 +520,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_CLIENTS) {
 			// Client received the new list of clients
 			uint8_t number = boost::lexical_cast<int>(packet.String()) & 0xff;
+			std::vector<INet_Client> old = clientlist;
 			clientlist.clear();
 			dedicatedlog("InternetGaming: Received a client list update with %u items.\n", number);
 			for (uint8_t i = 0; i < number; ++i) {
@@ -501,9 +531,27 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				inc->type        = packet.String();
 				inc->points      = packet.String();
 				clientlist.push_back(*inc);
+
+				bool found = old.empty(); // do not show all clients, if this instance is the actual change
+				for (std::vector<INet_Client>::size_type j = 0; j < old.size(); ++j)
+					if (old[j].name == inc->name) {
+						found = true;
+						old[j].name = "";
+						break;
+					}
+				if (!found)
+					formatAndAddChat
+						("", "", true, (boost::format(_("%s joined the lobby")) % inc->name).str());
+
 				delete inc;
 				inc = nullptr;
 			}
+
+			for (std::vector<INet_Client>::size_type i = 0; i < old.size(); ++i)
+				if (old[i].name.size())
+					formatAndAddChat
+						("", "", true, (boost::format(_("%s left the lobby")) % old[i].name).str());
+
 			clientupdate = true;
 		}
 
@@ -532,7 +580,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			// Client received an ERROR message - seems something went wrong
 			std::string subcmd    (packet.String());
 			std::string reason (packet.String());
-			std::string message(_("ERROR: "));
+			std::string message = "";
 
 			if (subcmd == IGPCMD_CHAT) {
 				// Something went wrong with the chat message the user sent.
@@ -546,10 +594,11 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 			else if (subcmd == IGPCMD_GAME_OPEN) {
 				// Something went wrong with the newly opened game
-				message += InternetGamingMessages::get_message(reason);
+				message = InternetGamingMessages::get_message(reason);
 				// we got our answer, so no need to wait anymore
 				waitcmd = "";
 			}
+			message = (boost::format(_("ERROR: %s")) % message).str();
 
 			// Finally send the error message as system chat to the client.
 			formatAndAddChat("", "", true, message);
@@ -557,7 +606,10 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 		else
 			// Inform the client about the unknown command
-			formatAndAddChat("", "", true, _("Received an unknown command from the metaserver: ") + cmd);
+			formatAndAddChat(
+				"", "", true,
+				(boost::format(_("Received an unknown command from the metaserver: %s")) % cmd).str()
+			);
 
 	} catch (warning & e) {
 		formatAndAddChat("", "", true, e.what());
@@ -809,4 +861,3 @@ void InternetGaming::formatAndAddChat(std::string from, std::string to, bool sys
 		ingame_system_chat.push_back(c);
 	}
 }
-

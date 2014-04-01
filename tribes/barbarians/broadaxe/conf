@@ -1,8 +1,0 @@
-help=_The broad axe is produced in the axefactory and the war mill. It is used in the trainingscamp - together with food- to train warriors with a fundamental fighting knowledge (from attack level 1 to attack level 2).
-
-
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=7 6

@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_help")
+include "scripting/formatting.lua"
+include "scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -9,11 +9,11 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/granitemine/granitemine_i_00.png", p(
-			_[["I can handle tons of granite, man, but no more of your vain prattle."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[This phrase was the reply Rimbert the miner – later known as Rimbert the loner – gave, when he was asked to remain seated on an emergency meeting at Stonford in the year of the great flood. <br> The same man had all the 244 granite blocks ready only a week later, that still fortify the city's levee.]])) ..
+			_[[‘I can handle tons of granite, man, but no more of your vain prattle.’]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[This phrase was the reply Rimbert the miner – later known as Rimbert the loner – gave, when he was asked to remain seated on an emergency meeting at Stonford in the year of the great flood. <br> The same man had all the 244 granite blocks ready only a week later, and they still fortify the city’s levee.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"A %s exploits all of the resource down to the deepest level.<br>But even after having done so, it will still have a %s chance of finding some more %s.":format(_"Granite Mine","5%",_"Raw Stone") .. _"It can not be upgraded.")) ..
+		rt(p(_"A %1$s exploits all of the resource down to the deepest level. But even after having done so, it will still have a %2$s chance of finding some more %3$s.":bformat(_"Granite Mine","5%",_"Raw Stone") .. _" It cannot be upgraded.")) ..
 		rt(h3(_"Purpose:")) ..
 		image_line("tribes/barbarians/raw_stone/menu.png", 1, p(_"Carve %s out of the rock in mountain terrain.":format(_"Raw Stone"))) ..
 		text_line(_"Working radius:", "2") ..
@@ -33,12 +33,12 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
+		rt(h3(_"Build cost:")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 2, p("2 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

@@ -78,35 +78,35 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Name: "), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author: "), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Size: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Size:"), UI::Align_CenterLeft);
 	m_size =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("World: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("World:"), UI::Align_CenterLeft);
 	m_world =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Players: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Players:"), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
@@ -284,7 +284,7 @@ void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
  */
 void Main_Menu_Save_Map::fill_list() {
 	// Fill it with all files we find.
-	g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
+	m_mapfiles = g_fs->ListDirectory(m_curdir);
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {
@@ -294,6 +294,7 @@ void Main_Menu_Save_Map::fill_list() {
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
 		std::string parent_string =
+				/** TRANSLATORS: Parent directory */
 				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_ls->add
 			(parent_string.c_str(),
@@ -382,11 +383,11 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->FileExists(complete_filename)) {
-		std::string s = _("A File with the name ");
-		s += FileSystem::FS_Filename(filename.c_str());
-		s += _(" exists already. Overwrite?");
+		std::string s =
+			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
+				% FileSystem::FS_Filename(filename.c_str())).str();
 		UI::WLMessageBox mbox
-			(&eia(), _("Save Map Error!!"), s, UI::WLMessageBox::YESNO);
+			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::YESNO);
 		if (not mbox.run())
 			return false;
 
@@ -402,11 +403,11 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	} catch (const std::exception & e) {
 		std::string s =
 			_
-			("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason "
+			("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
 			 "given:\n");
 		s += e.what();
 		UI::WLMessageBox  mbox
-			(&eia(), _("Save Map Error!!"), s, UI::WLMessageBox::OK);
+			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
 	die();

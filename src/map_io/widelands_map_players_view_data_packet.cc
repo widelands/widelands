@@ -213,7 +213,7 @@ inline static Map_Object_Data read_unseen_immovable
 			break;
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("unseen immovable: %s"), e.what());
+		throw game_data_error("unseen immovable: %s", e.what());
 	}
 	return m;
 }
@@ -308,7 +308,7 @@ void Map_Players_View_Data_Packet::Read
 						//  from the player). This is important for worlds where the
 						//  number of terrain types is not maximal (16), so that an
 						//  uninitialized terrain index could cause a not found error
-						//  in Descr_Maintainer<Terrain_Descr>::get(Terrain_Index).
+						//  in DescriptionMaintainer<Terrain_Descr>::get(Terrain_Index).
 						Field::Terrains terrains; terrains.d = terrains.r = 0;
 
 						if (f_vision | bl_vision | br_vision)

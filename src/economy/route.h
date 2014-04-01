@@ -31,7 +31,7 @@ namespace Widelands {
 struct Flag;
 class Editor_Game_Base;
 struct Map_Map_Object_Saver;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 struct RoutingNode;
 
 /**

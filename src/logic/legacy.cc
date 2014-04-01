@@ -31,13 +31,13 @@ namespace Legacy {
 //  These tables are needed for compatibility with requests written in version
 //  <= 3.
 static char const * const barbarian_ware_types[] = {
-	"axe",
-	"bakingtray",
-	"battleaxe",
+	"ax",
+	"bread_paddle",
+	"battleax",
 	"beer",
 	"blackwood",
-	"broadaxe",
-	"bronzeaxe",
+	"broadax",
+	"bronzeax",
 	"cloth",
 	"coal",
 	"fire_tongs",
@@ -45,7 +45,7 @@ static char const * const barbarian_ware_types[] = {
 	"fishing_rod",
 	"flax",
 	"gold",
-	"goldstone",
+	"goldore",
 	"grout",
 	"hammer",
 	"helm",
@@ -61,14 +61,14 @@ static char const * const barbarian_ware_types[] = {
 	"ration",
 	"raw_stone",
 	"scythe",
-	"sharpaxe",
+	"sharpax",
 	"shovel",
 	"snack",
 	"strongbeer",
 	"thatchreed",
-	"trunk",
-	"warhelmet",
-	"warriorsaxe",
+	"log",
+	"warhelm",
+	"warriorsax",
 	"water",
 	"wheat"
 };
@@ -81,7 +81,7 @@ static char const * const barbarian_worker_types[] = {
 	"carrier",
 	"chief-miner",
 	"farmer",
-	"ferner",
+	"gardener",
 	"fisher",
 	"gamekeeper",
 	"geologist",
@@ -103,13 +103,13 @@ static char const * const barbarian_worker_types[] = {
 };
 static char const * const empire_ware_types[] = {
 	"advanced_lance",
-	"armour",
-	"axe",
-	"bakingtray",
+	"armor",
+	"ax",
+	"bread_paddle",
 	"basket",
 	"beer",
 	"bread",
-	"chain_armour",
+	"chain_armor",
 	"cloth",
 	"coal",
 	"fire_tongs",
@@ -117,7 +117,7 @@ static char const * const empire_ware_types[] = {
 	"fishing_rod",
 	"flour",
 	"gold",
-	"goldstone",
+	"goldore",
 	"grape",
 	"hammer",
 	"heavy_lance",
@@ -132,13 +132,13 @@ static char const * const empire_ware_types[] = {
 	"meal",
 	"meat",
 	"pick",
-	"plate_armour",
+	"plate_armor",
 	"ration",
 	"saw",
 	"scythe",
 	"shovel",
 	"stone",
-	"trunk",
+	"log",
 	"war_lance",
 	"water",
 	"wheat",
@@ -148,7 +148,7 @@ static char const * const empire_ware_types[] = {
 	"wool",
 };
 static char const * const empire_worker_types[] = {
-	"armoursmith",
+	"armorsmith",
 	"baker",
 	"brewer",
 	"builder",
@@ -177,7 +177,7 @@ static char const * const empire_worker_types[] = {
 };
 static char const * const atlantean_ware_types[] = {
 	"advanced_shield",
-	"bakingtray",
+	"bread_paddle",
 	"blackroot",
 	"blackrootflour",
 	"bread",
@@ -218,11 +218,11 @@ static char const * const atlantean_ware_types[] = {
 	"steel_trident",
 	"stone",
 	"tabard",
-	"trunk",
+	"log",
 	"water"
 };
 static char const * const atlantean_worker_types[] = {
-	"armoursmith",
+	"armorsmith",
 	"baker",
 	"blackroot_farmer",
 	"builder",
@@ -425,7 +425,7 @@ Map_Object::Loader * loadAttackController
 	try {
 		uint8_t const version = fr.Unsigned8();
 		if (version != 1)
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 
 		loader->init(egbase, mol, *new FakeAttackController);
 		loader->load(fr, version);
@@ -483,7 +483,7 @@ Map_Object::Loader * loadBattle
 			loader->init(egbase, mol, *new FakeBattle);
 			loader->load(fr, version);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("Loading legacy Battle: %s", e.what());
 	}

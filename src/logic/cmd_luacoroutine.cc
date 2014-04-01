@@ -24,6 +24,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "scripting/lua_coroutine.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
 
@@ -72,9 +73,9 @@ void Cmd_LuaCoroutine::Read
 			m_cr = lgi->read_coroutine(fr, mol, fr.Unsigned32());
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("lua function: %s"), e.what());
+		throw game_data_error("lua function: %s", e.what());
 	}
 }
 void Cmd_LuaCoroutine::Write

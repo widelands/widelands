@@ -1,7 +1,0 @@
-*.pyc
-*.sw?
-src/scripting/doc/build
-src/scripting/doc/source/wl_*.rst
-src/scripting/doc/source/globals.rst
-build/native-*
-build/sconf_temp/

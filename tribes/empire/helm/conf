@@ -1,4 +1,4 @@
-help=_The helmet is the basic defense of a warrior. It is produced in an armour smithy. Together with a wood lance it is the equipment to fit out young soldiers. Helmets are also used in trainingscamps - together with food - to train soldiers from healthpoints level 0 to healthpoints level 1.
+help=_The helmet is the basic defense of a warrior. It is produced in an armor smithy. In combination with a wood lance, it is the equipment to fit out young soldiers. Helmets are also used in training camps – together with food – to train soldiers from health level 0 to level 1.
 
 
 
@@ -7,5 +7,4 @@ preciousness=2
 
 [idle]
 pics=idle_??.png
-playercolor=true
 hotspot=5 10

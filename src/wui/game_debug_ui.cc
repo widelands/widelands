@@ -343,10 +343,9 @@ void FieldDebugWindow::think()
 		switch (vision) {
 		case 0: str += "  never seen\n"; break;
 		case 1: {
-			std::string animation_name = "(none)";
+			std::string animation_name = "(no animation)";
 			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
-				animation_name = g_anim.get_animation
-					(player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation()).picnametempl;
+				animation_name = "(seen an animation)";
 			}
 
 			snprintf
@@ -372,13 +371,13 @@ void FieldDebugWindow::think()
 		int ramount = m_coords.field->get_resources_amount();
 		int startingAmount = m_coords.field->get_starting_res_amount();
 		snprintf
-		(buffer, sizeof(buffer), _("Resource: %s\n"),
+		(buffer, sizeof(buffer), "Resource: %s\n",
 			m_map.get_world()->get_resource(ridx)->name().c_str());
 
 		str += buffer;
 
 		snprintf
-		(buffer, sizeof(buffer), _("  Amount: %i/%i\n"), ramount, startingAmount);
+		(buffer, sizeof(buffer), "  Amount: %i/%i\n", ramount, startingAmount);
 		str += buffer;
 	}
 

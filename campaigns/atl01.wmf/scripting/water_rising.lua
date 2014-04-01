@@ -2,7 +2,7 @@
 --                        Water rising Functionality
 -- =======================================================================
 
-use("aux", "set")
+include "scripting/set.lua"
 
 -- ================
 -- Helper function
@@ -223,6 +223,3 @@ function WaterRiser:_rise_water()
       sleep(300)
    end
 end
-
-
-

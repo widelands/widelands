@@ -1,0 +1,8 @@
+help=_The felling ax is the tool of the lumberjack to take down trees. It is produced in the metal workshop (but it ceases to be produced by the building if it is enhanced to an axfactory and war mill).
+
+default_target_quantity=5
+preciousness=3
+
+[idle]
+pics=idle.png
+hotspot=6 7

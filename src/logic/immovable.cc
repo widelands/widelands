@@ -25,7 +25,6 @@
 #include <config.h>
 
 #include "container_iterate.h"
-#include "graphic/animation_gfx.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -138,11 +137,11 @@ ImmovableProgram::ImmovableProgram
 			action = new ActConstruction(v->get_string(), immovable, directory, prof);
 		else
 			throw game_data_error
-				(_("unknown command type \"%s\""), v->get_name());
+				("unknown command type \"%s\"", v->get_name());
 		m_actions.push_back(action);
 	}
 	if (m_actions.empty())
-		throw game_data_error(_("no actions"));
+		throw game_data_error("no actions");
 }
 
 
@@ -158,7 +157,7 @@ Immovable_Descr IMPLEMENTATION
  * Parse an immovable from its conf file.
  *
  * Section [global]:
- * picture (default = $NAME_00.bmp): name of picture used in editor
+ * picture (default = $NAME_00.png): name of picture used in editor
  * size = none|small|medium|big (default = none): influences build options
  *
  * Section [program] (optional)
@@ -174,7 +173,6 @@ Immovable_Descr::Immovable_Descr
 	 const World & world, Tribe_Descr const * const owner_tribe)
 :
 	Map_Object_Descr(_name, _descname),
-	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
@@ -189,7 +187,7 @@ Immovable_Descr::Immovable_Descr
 				m_size = BaseImmovable::BIG;
 			else
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
+					("expected %s but found \"%s\"",
 					 "{\"small\"|\"medium\"|\"big\"}", string);
 		} catch (const _wexception & e) {
 			throw game_data_error("size: %s", e.what());
@@ -201,7 +199,7 @@ Immovable_Descr::Immovable_Descr
 		uint32_t attrib = get_attribute_id(v->get_string());
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
 			if (attrib != Map_Object::RESI)
-				throw game_data_error(_("bad attribute \"%s\""), v->get_string());
+				throw game_data_error("bad attribute \"%s\"", v->get_string());
 		add_attribute(attrib);
 	}
 
@@ -214,12 +212,12 @@ Immovable_Descr::Immovable_Descr
 			 tolower);
 		try {
 			if (m_programs.count(program_name))
-				throw game_data_error(_("this program has already been declared"));
+				throw game_data_error("this program has already been declared");
 			m_programs[program_name.c_str()] =
 				new ImmovableProgram(directory, prof, program_name, *this);
 		} catch (const std::exception & e) {
 			throw game_data_error
-				(_("program %s: %s"), program_name.c_str(), e.what());
+				("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
 
@@ -251,9 +249,9 @@ Immovable_Descr::Immovable_Descr
 					terrain_affinity_s->get_natural(terrain_type_name, 0);
 				if ((*it = value) != value)
 					throw game_data_error
-						(_("expected 0 .. 255 but found %u"), value);
+						("expected %s but found %u", "0 .. 255", value);
 				if (terrain_affinity_s->get_next_val(terrain_type_name))
-					throw game_data_error(_("duplicated"));
+					throw game_data_error("duplicated");
 			} catch (const _wexception & e) {
 				throw game_data_error
 					("[terrain affinity] %s: %s", terrain_type_name, e.what());
@@ -266,12 +264,12 @@ Immovable_Descr::Immovable_Descr
 					uint32_t const value = v->get_natural();
 					if ((*it = value) != value)
 						throw game_data_error
-							(_("expected 0 .. 255 but found %u"), value);
+						("expected %s but found %u", "0 .. 255", value);
 					if (terrain_affinity_s->get_next_val(v->get_name()))
-						throw game_data_error(_("duplicated"));
+						throw game_data_error("duplicated");
 				} catch (const _wexception & e) {
 					throw game_data_error
-						(_("[terrain affinity] \"%s\" (not in current world): %s"),
+						("[terrain affinity] \"%s\" (not in current world): %s",
 						 v->get_name(), e.what());
 				}
 		}
@@ -307,7 +305,7 @@ ImmovableProgram const * Immovable_Descr::get_program
 
 	if (it == m_programs.end())
 		throw game_data_error
-			(_("immovable %s has no program \"%s\""),
+			("immovable %s has no program \"%s\"",
 			 name().c_str(), programname.c_str());
 
 	return it->second;
@@ -507,23 +505,24 @@ void Immovable::draw_construction
 			(&(*m_program)[m_program_ptr]);
 
 	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
-	uint32_t total = m_anim_construction_total * steptime;
-	uint32_t done = 0;
 
+	uint32_t done = 0;
 	if (m_anim_construction_done > 0) {
 		done = steptime * (m_anim_construction_done - 1);
 		done += std::min(steptime, game.get_gametime() - m_animstart);
 	}
 
+	uint32_t total = m_anim_construction_total * steptime;
 	if (done > total)
 		done = total;
 
-	const size_t nr_frames = g_gr->nr_frames(m_anim);
-	uint32_t frametime = g_anim.get_animation(m_anim).frametime;
+	const Animation& anim = g_gr->animations().get_animation(m_anim);
+	const size_t nr_frames = anim.nr_frames();
+	uint32_t frametime = g_gr->animations().get_animation(m_anim).frametime();
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
-	uint32_t curw, curh;
-	g_gr->get_animation_size(m_anim, current_frame * frametime, curw, curh);
+	const uint16_t curw = anim.width();
+	const uint16_t curh = anim.height();
 
 	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
 
@@ -540,7 +539,9 @@ void Immovable::draw_construction
 	if (game.get_ibase()->get_display_flags() & Interactive_Base::dfShowStatistics) {
 		unsigned int percent = (100 * done / total);
 		m_construct_string =
-			(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
+			(boost::format("<font color=%s>%s</font>")
+			 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
+			 .str();
 		m_construct_string = as_uifont(m_construct_string);
 		dst.blit(pos - Point(0, 48), UI::g_fh1->render(m_construct_string), CM_Normal, UI::Align_Center);
 	}
@@ -740,47 +741,29 @@ Map_Object::Loader * Immovable::load
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version and version <= IMMOVABLE_SAVEGAME_VERSION) {
 
-			char const * const owner = fr.CString ();
-			char const * const name  = fr.CString ();
+			const std::string owner_name = fr.CString();
+			const std::string name = fr.CString();
 			Immovable * imm = nullptr;
 
-			if (strcmp(owner, "world")) { //  It is a tribe immovable.
-				egbase.manually_load_tribe(owner);
+			if (owner_name != "world") { //  It is a tribe immovable.
+				egbase.manually_load_tribe(owner_name);
 
-				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
-					std::string effective_name = name;
-					const std::vector<std::string> & compat =
-						tribe->compatibility_immovable(name);
-
-					if (compat.size() >= 1) {
-						if (compat[0] == "replace") {
-							if (compat.size() != 2)
-								throw game_data_error
-									("incomplete compatibility_immovable replace for %s",
-									 name);
-
-							effective_name = compat[1];
-						} else
-							throw game_data_error
-								("bad compatibility_immovable code %s for %s",
-								 compat[0].c_str(), name);
-					}
-
-					int32_t const idx = tribe->get_immovable_index(effective_name);
+				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner_name)) {
+					int32_t const idx = tribe->get_immovable_index(name);
 					if (idx != -1)
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
 					else
 						throw game_data_error
-							(_("tribe %s does not define immovable type \"%s\""),
-							 owner, effective_name.c_str());
+							("tribe %s does not define immovable type \"%s\"",
+							 owner_name.c_str(), name.c_str());
 				} else
-					throw wexception(_("unknown tribe %s"), owner);
+					throw wexception("unknown tribe %s", owner_name.c_str());
 			} else { //  world immovable
 				const World & world = egbase.map().world();
-				int32_t const idx = world.get_immovable_index(name);
+				int32_t const idx = world.get_immovable_index(name.c_str());
 				if (idx == -1)
 					throw wexception
-						(_("world does not define immovable type \"%s\""), name);
+						("world does not define immovable type \"%s\"", name.c_str());
 
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}
@@ -788,9 +771,9 @@ Map_Object::Loader * Immovable::load
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, version);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("immovable type %s"), e.what());
+		throw wexception("immovable type %s", e.what());
 	}
 
 	return loader.release();
@@ -811,10 +794,7 @@ ImmovableProgram::ActAnimate::ActAnimate
 			m_id = descr.get_animation(animation_name);
 		else {
 			m_id =
-				g_anim.get
-					(directory.c_str(),
-					 prof.get_safe_section(animation_name),
-					 nullptr);
+				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
 
 			descr.add_animation(animation_name, m_id);
 		}
@@ -823,8 +803,8 @@ ImmovableProgram::ActAnimate::ActAnimate
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value <= 0)
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
-					 _("duration in ms"), parameters);
+					("expected %s but found \"%s\"",
+					 "duration in ms", parameters);
 			m_duration = value;
 		} else
 			m_duration = 0; //  forever
@@ -863,7 +843,7 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 			priority = value;
 			if (*endp or priority != value)
 				throw game_data_error
-					(_("expected %s but found \"%s\""), _("priority"), parameters);
+					("expected %s but found \"%s\"", "priority", parameters);
 		} else
 			priority = 127;
 
@@ -902,9 +882,7 @@ ImmovableProgram::ActTransform::ActTransform
 				long int const value = atoi(params[i].c_str());
 				if (value < 1 or 254 < value)
 					throw game_data_error
-						(_
-							("expected probability in range [1, 254] but found "
-							"\"%s\""),
+						("expected %s but found \"%s\"", "probability in range [1, 254]",
 						 params[i].c_str());
 				probability = value;
 			} else {
@@ -921,9 +899,9 @@ ImmovableProgram::ActTransform::ActTransform
 						tribe = true;
 					} else
 						throw game_data_error
-							(_
-								("unknown scope \"%s\" given for target type (must be "
-								 "\"world\" or \"tribe\")"),
+							(
+							 "unknown scope \"%s\" given for target type (must be "
+							 "\"world\" or \"tribe\")",
 							 parameters);
 
 					type_name = segments[1];
@@ -933,7 +911,7 @@ ImmovableProgram::ActTransform::ActTransform
 			}
 		}
 		if (type_name == descr.name())
-			throw game_data_error(_("illegal transformation to the same type"));
+			throw game_data_error("illegal transformation to the same type");
 	} catch (const _wexception & e) {
 		throw game_data_error("transform: %s", e.what());
 	}
@@ -974,15 +952,15 @@ ImmovableProgram::ActGrow::ActGrow
 				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
 				if (not owner_tribe)
 					throw game_data_error
-						(_
-						 	("immovable type not in tribe but target type has scope "
-						 	 "(\"%s\")"),
+						(
+						 "immovable type not in tribe but target type has scope "
+						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
 					throw game_data_error
-						(_
-						 	("scope \"%s\" given for target type (must be "
-						 	 "\"world\")"),
+						(
+						 "scope \"%s\" given for target type (must be "
+						 "\"world\")",
 						 parameters);
 				tribe = false;
 				parameters = p;
@@ -1028,8 +1006,8 @@ ImmovableProgram::ActRemove::ActRemove(char * parameters, Immovable_Descr &)
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value < 1 or 254 < value)
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
-					 _("probability in range [1, 254]"), parameters);
+					("expected %s but found \"%s\"",
+					 "probability in range [1, 254]", parameters);
 			probability = value;
 		} else
 			probability = 0;
@@ -1061,15 +1039,15 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
 				if (not owner_tribe)
 					throw game_data_error
-						(_
-						 	("immovable type not in tribe but target type has scope "
-						 	 "(\"%s\")"),
+						(
+						 "immovable type not in tribe but target type has scope "
+						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
 					throw game_data_error
-						(_
-						 	("scope \"%s\" given for target type (must be "
-						 	 "\"world\")"),
+						(
+						 "scope \"%s\" given for target type (must be "
+						 "\"world\")",
 						 parameters);
 				tribe = false;
 				parameters = p;
@@ -1082,9 +1060,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				long int const value = strtol(p, &endp, 0);
 				if (*endp or value < 1 or 254 < value)
 					throw game_data_error
-						(_
-						 	("expected probability in range [1, 254] but found "
-						 	 "\"%s\""),
+						("expected %s but found \"%s\"", "probability in range [1, 254]",
 						 p);
 				probability = value;
 			//  fallthrough
@@ -1156,10 +1132,7 @@ ImmovableProgram::ActConstruction::ActConstruction
 			m_animid = descr.get_animation(animation_name);
 		else {
 			m_animid =
-				g_anim.get
-					(directory.c_str(),
-					 prof.get_safe_section(animation_name),
-					 nullptr);
+				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
 
 			descr.add_animation(animation_name, m_animid);
 		}
@@ -1484,9 +1457,9 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 
 			imm.m_owner = owner;
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("loading player immovable: %s"), e.what());
+		throw wexception("loading player immovable: %s", e.what());
 	}
 }
 

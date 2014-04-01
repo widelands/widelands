@@ -21,24 +21,14 @@
 
 #include <algorithm>
 
+#include <stdint.h>
+
 #include "graphic/graphic.h"
 #include "logic/field.h"
 
-
 Overlay_Manager::Overlay_Manager() :
-m_are_graphics_loaded(false),
-m_showbuildhelp(false),
-m_callback(nullptr),
-m_callback_data(nullptr),
-m_callback_data_i(0)
-#ifndef NDEBUG
-//  No need to initialize (see comment for get_a_job_id) other than to shut up
-//  Valgrind.
-/**/,
-m_current_job_id(Job_Id::Null())
-#endif
-{}
-
+	m_are_graphics_loaded(false), m_showbuildhelp(false), m_current_job_id(Job_Id::Null()) {
+}
 
 /**
  * \returns the currently registered overlays and the buildhelp for a node.
@@ -108,32 +98,12 @@ uint8_t Overlay_Manager::get_overlays
 	return num_ret;
 }
 
-
-/**
- * remove all registered overlays. The Overlay_Manager
- * can than be reused without needing to be delete()ed
- */
-void Overlay_Manager::reset() {
-	m_are_graphics_loaded = false;
-	m_callback = nullptr;
-
-	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
-	for (Registered_Overlays_Map * it = m_overlays; it != overlays_end; ++it)
-		it->clear();
-	m_road_overlays.clear();
-}
-
-
 /**
  * Recalculates all calculatable overlays for fields
  */
 void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 	Widelands::NodeCaps const caps =
-		m_callback ?
-		static_cast<Widelands::NodeCaps>
-			(m_callback(fc, m_callback_data, m_callback_data_i))
-		:
-		fc.field->nodecaps();
+	   m_callback ? static_cast<Widelands::NodeCaps>(m_callback(fc)) : fc.field->nodecaps();
 
 	fc.field->set_buildhelp_overlay_index
 		(caps & Widelands::BUILDCAPS_MINE                                      ?
@@ -323,4 +293,12 @@ void Overlay_Manager::load_graphics() {
 	}
 
 	m_are_graphics_loaded = true;
+}
+
+void Overlay_Manager::register_overlay_callback_function(CallbackFunction function) {
+	m_callback = function;
+}
+
+void Overlay_Manager::remove_overlay_callback_function() {
+	m_callback.clear();
 }

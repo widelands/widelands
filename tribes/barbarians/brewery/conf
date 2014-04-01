@@ -4,12 +4,12 @@ enhanced_building=yes
 output=strongbeer
 
 [enhancement_cost]
-trunk=3
+log=3
 raw_stone=1
 thatchreed=1
 
 [return_on_dismantle_on_enhanced]
-trunk=1
+log=1
 raw_stone=1
 
 [working positions]

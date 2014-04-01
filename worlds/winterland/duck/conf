@@ -1,5 +1,4 @@
 swimming=1
-picture=duck_00.png
 
 [idle]
 pics=duck_??.png

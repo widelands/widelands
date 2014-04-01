@@ -10,16 +10,15 @@ carrier2=horse
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, trunk, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, cornflour, blackroot, blackrootflour, bread; quartz, diamond, coal, ironore, iron, goldore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bakingtray, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, goldyarn, golden_tabard
+wares_order=stone, log, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, cornflour, blackroot, blackrootflour, bread; quartz, diamond, coal, ironore, iron, goldore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bread_paddle, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, goldyarn, golden_tabard
 
-workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
+workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
 # Some blue fires would be fine, but just an idea
 [frontier]
 name=frontier
 pics=pics/frontier_??.png
 hotspot=3 12
-playercolor=true
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
@@ -27,36 +26,35 @@ name=flag
 pics=pics/flag_??.png
 hotspot=15 35
 fps=10
-playercolor=true
 
 [immovable types]
 ashes=_Ashes
-blackrootfield_b=_Blackrootfield
-blackrootfield_harvested=_Blackrootfield harvested
-blackrootfield_m=_Blackrootfield medium
-blackrootfield_s=_Blackrootfield small
-blackrootfield_t=_Blackrootfield tiny
+blackrootfield_b=_Blackroot Field
+blackrootfield_harvested=_Blackroot Field (harvested)
+blackrootfield_m=_Blackroot Field (medium)
+blackrootfield_s=_Blackroot Field (small)
+blackrootfield_t=_Blackroot Field (tiny)
 cornfield_b=_Cornfield
-cornfield_harvested=_Cornfield harvested
-cornfield_m=_Cornfield medium
-cornfield_s=_Cornfield small
-cornfield_t=_Cornfield tiny
-destroyed_building=_Destroyed building
-resi_coal1=_Resource indicator coal little
-resi_coal2=_Resource indicator coal much
-resi_gold1=_Resource indicator gold little
-resi_gold2=_Resource indicator gold much
-resi_granit1=_Resource indicator granite little
-resi_granit2=_Resource indicator granite much
-resi_iron1=_Resource indicator iron little
-resi_iron2=_Resource indicator iron much
-resi_none=_Resource indicator no resource
-resi_water1=_Resource indicator water
-shipconstruction=_Ship construction site
+cornfield_harvested=_Cornfield (harvested)
+cornfield_m=_Cornfield (medium)
+cornfield_s=_Cornfield (small)
+cornfield_t=_Cornfield (tiny)
+destroyed_building=_Destroyed Building
+resi_coal1=_Resource indicator: Coal (little)
+resi_coal2=_Resource indicator: Coal (much)
+resi_gold1=_Resource indicator: Gold (little)
+resi_gold2=_Resource indicator: Gold (much)
+resi_granit1=_Resource indicator: Granite (little)
+resi_granit2=_Resource indicator: Granite (much)
+resi_iron1=_Resource indicator: Iron (little)
+resi_iron2=_Resource indicator: Iron (much)
+resi_none=_Resource indicator: No resource
+resi_water1=_Resource indicator: Water
+shipconstruction=_Ship Construction Site
 
 [ware types]
 advanced_shield=_Advanced Shield
-bakingtray=_Bread Paddle
+bread_paddle=_Bread Paddle
 blackrootflour=_Blackroot Flour
 blackroot=_Blackroot
 bread=_Bread
@@ -79,7 +77,7 @@ hook_pole=_Hook pole
 hunting_bow=_Hunting Bow
 ironore=_Iron Ore
 iron=_Iron
-light_trident=_Light trident
+light_trident=_Light Trident
 long_trident=_Long Trident
 meat=_Meat
 milking_tongs=_Milking Tongs
@@ -89,15 +87,15 @@ planks=_Planks
 saw=_Saw
 scythe=_Scythe
 shovel=_Shovel
-smoked_fish=_Smoked fish
-smoked_meat=_Smoked meat
+smoked_fish=_Smoked Fish
+smoked_meat=_Smoked Meat
 spidercloth=_Spidercloth
 spideryarn=_Spideryarn
 steel_shield=_Steel Shield
 steel_trident=_Steel Trident
 stone=_Stone
 tabard=_Tabard
-trunk=_Trunk
+log=_Log
 water=_Water
 
 [carrier types]
@@ -108,9 +106,9 @@ horse=_Horse
 soldier=_Soldier
 
 [worker types]
-armoursmith=_Armoursmith
+armorsmith=_Armorsmith
 baker=_Baker
-blackroot_farmer=_Blackroot farmer
+blackroot_farmer=_Blackroot Farmer
 builder=_Builder
 burner=_Burner
 shipwright=_Shipwright
@@ -125,7 +123,7 @@ miner=_Miner
 sawyer=_Sawyer
 smelter=_Smelter
 smoker=_Smoker
-spiderbreeder=_Spiderbreeder
+spiderbreeder=_Spider Breeder
 stonecutter=_Stonecutter
 toolsmith=_Toolsmith
 trainer=_Trainer
@@ -150,7 +148,6 @@ citadel.barbarians=_Citadel
 donjon.barbarians=_Donjon
 fortress.barbarians=_Fortress
 sentry.barbarians=_Sentry
-stronghold.barbarians=_Stronghold
 sentry.empire=_Sentry
 barracks.empire=_Barracks
 barrier.empire=_Barrier
@@ -166,26 +163,26 @@ port=_Port
 
 [productionsite types]
 quarry=_Quarry
-woodcutters_house=_Woodcutter's House
-foresters_house=_Forester's House
+woodcutters_house=_Woodcutter’s House
+foresters_house=_Forester’s House
 goldweaver=_Goldweaver
-fishers_house=_Fisher's House
-fish_breeders_house=_Fish Breeder's House
-hunters_house=_Hunter's House
+fishers_house=_Fisher’s House
+fish_breeders_house=_Fish Breeder’s House
+hunters_house=_Hunter’s House
 well=_Well
-scouts_house=_"Scout's House"
+scouts_house=_Scout’s House
 sawmill=_Sawmill
 smokery=_Smokery
 mill=_Mill
 shipyard=_Shipyard
 bakery=_Bakery
-burners_house=_Charcoal Burner's House
+burners_house=_Charcoal Burner’s House
 smelting_works=_Smelting Works
 toolsmithy=_Toolsmithy
 weaponsmithy=_Weapon Smithy
-armoursmithy=_Armoursmithy
+armorsmithy=_Armor Smithy
 horsefarm=_Horse Farm
-spiderfarm=_Spiderfarm
+spiderfarm=_Spider Farm
 weaving-mill=_Weaving-Mill
 farm=_Farm
 blackroot_farm=_Blackroot Farm

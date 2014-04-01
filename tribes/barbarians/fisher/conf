@@ -1,4 +1,4 @@
-help=_Gets fish out of the sea.
+help=_Catches fish in the sea.
 program=fish
 
 [buildcost]
@@ -18,17 +18,14 @@ fishing_rod=1
 [idle]
 pics=fishing_??.png
 hotspot=9 39
-playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=10 38
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
 hotspot=10 38
-playercolor=true
 fps=10

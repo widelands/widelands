@@ -26,6 +26,7 @@
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
+#include "graphic/graphic.h"
 #include "logic/constructionsite.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
@@ -48,18 +49,13 @@ Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
-: Descr(given_name, gdescname, directory, prof, global_s, &gtribe)
+: BobDescr(given_name, gdescname, directory, prof, global_s, &gtribe)
 {
-	m_sail_anims.parse
-		(*this,
-		 directory,
-		 prof,
-		 (name() + "_sail_??").c_str(),
-		 prof.get_section("sail"));
+	m_sail_anims.parse(*this, directory, prof, "sail");
 
-		Section * sinking_s = prof.get_section("sinking");
-		if (sinking_s)
-			add_animation("sinking", g_anim.get (directory, *sinking_s, "sinking.png"));
+	Section * sinking_s = prof.get_section("sinking");
+	if (sinking_s)
+		add_animation("sinking", g_gr->animations().load(directory, *sinking_s));
 
 	m_capacity     = global_s.get_natural("capacity", 20);
 	m_vision_range = global_s.get_natural("vision_range", 7);
@@ -456,7 +452,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 		if (new_port_space) {
 			m_ship_state = EXP_FOUNDPORTSPACE;
 			// Send a message to the player, that a new port space was found
-			std::string msg_head = _("Port space found");
+			std::string msg_head = _("Port Space Found");
 			std::string msg_body = _("An expedition ship found a new port build space.");
 			send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
 		}
@@ -564,9 +560,11 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					} else {
 						// Check whether the island was completely surrounded
 						if (get_position() == m_expedition->exploration_start) {
-							std::string msg_head = _("Island surrounded");
-							std::string msg_body = _("An expedition ship surrounded its island without any events.");
-							send_message(game, "exp_island", msg_head, msg_body, "ship_explore_island_cw.png");
+							std::string msg_head = _("Island Circumnavigated");
+							std::string msg_body = _("An expedition ship sailed around its"
+										 " island without any events.");
+							send_message(game, "exp_island", msg_head, msg_body,
+								"ship_explore_island_cw.png");
 							m_ship_state = EXP_WAITING;
 							return start_task_idle(game, descr().main_animation(), 1500);
 						}
@@ -617,7 +615,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					m_ship_state = EXP_WAITING;
 					start_task_idle(game, descr().main_animation(), 1500);
 					// Send a message to the player, that a new coast was reached
-					std::string msg_head = _("Coast reached");
+					std::string msg_head = _("Coast Reached");
 					std::string msg_body =
 						_("An expedition ship reached a coast and is waiting for further commands.");
 					send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
@@ -783,7 +781,7 @@ void Ship::start_task_expedition(Game & game) {
 	}
 
 	// Send a message to the player, that an expedition is ready to go
-	const std::string msg_head = _("Expedition ready");
+	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
 	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
 }
@@ -1061,9 +1059,9 @@ Map_Object::Loader * Ship::load
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr, version);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("loading ship: %s"), e.what());
+		throw wexception("loading ship: %s", e.what());
 	}
 
 	return loader.release();

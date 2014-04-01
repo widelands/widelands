@@ -1,0 +1,6 @@
+help=_The bronze ax is considered a weapon that is hard to handle. Only skilled warriors can use it. It is produced at the war mill and used in the training camp (it trains – together with food – from attack level 2 to level 3).
+preciousness=1
+
+[idle]
+pics=idle.png
+hotspot=7 7

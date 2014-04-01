@@ -1,0 +1,10 @@
+help=_Logs are the base for planks, which are used in nearly every building of the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the smokery also need logs for their work.
+
+ 
+preciousness=14
+default_target_quantity=40
+
+[idle]
+pics=idle.png
+hotspot=5 13
+

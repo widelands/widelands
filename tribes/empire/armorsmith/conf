@@ -1,0 +1,19 @@
+help=_Produces armor for the soldiers.
+
+[buildcost]
+carrier=1
+hammer=1
+
+[idle]
+pics=idle_??.png
+hotspot=8 24
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=8 24
+fps=10
+
+[walkload]
+dirpics=walkload_!!_??.png
+hotspot=8 24
+fps=10

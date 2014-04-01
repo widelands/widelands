@@ -30,11 +30,7 @@ class RealFSImpl : public FileSystem {
 public:
 	RealFSImpl(const std::string & Directory);
 
-	virtual int32_t FindFiles
-		(const std::string & path,
-		 const std::string & pattern,
-		 filenameset_t     * results,
-		 uint32_t            depth = 0) override;
+	virtual std::set<std::string> ListDirectory(const std::string& path) override;
 
 	virtual bool IsWritable() const override;
 	bool FileIsWriteable(const std::string & path);

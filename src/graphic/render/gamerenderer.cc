@@ -133,16 +133,16 @@ void GameRenderer::draw_objects()
 
 			if (isborder[F]) {
 				const Player & owner = m_egbase->player(owner_number[F]);
-				uint32_t const anim = owner.frontier_anim();
+				uint32_t const anim_idx = owner.frontier_anim();
 				if (vision[F])
-					m_dst->drawanim(pos[F], anim, 0, &owner);
+					m_dst->drawanim(pos[F], anim_idx, 0, &owner);
 				for (uint32_t d = 1; d < 4; ++d) {
 					if
 						((vision[F] || vision[d]) &&
 						 isborder[d] &&
 						 (owner_number[d] == owner_number[F] || !owner_number[d]))
 					{
-						m_dst->drawanim(middle(pos[F], pos[d]), anim, 0, &owner);
+						m_dst->drawanim(middle(pos[F], pos[d]), anim_idx, 0, &owner);
 					}
 				}
 			}
@@ -167,32 +167,34 @@ void GameRenderer::draw_objects()
 					{
 						const Player::Constructionsite_Information & csinf = f_pl.constructionsite;
 						// draw the partly finished constructionsite
-						uint32_t anim;
+						uint32_t anim_idx;
 						try {
-							anim = csinf.becomes->get_animation("build");
+							anim_idx = csinf.becomes->get_animation("build");
 						} catch (Map_Object_Descr::Animation_Nonexistent &) {
 							try {
-								anim = csinf.becomes->get_animation("unoccupied");
+								anim_idx = csinf.becomes->get_animation("unoccupied");
 							} catch (Map_Object_Descr::Animation_Nonexistent) {
-								anim = csinf.becomes->get_animation("idle");
+								anim_idx = csinf.becomes->get_animation("idle");
 							}
 						}
-						const size_t nr_frames = g_gr->nr_frames(anim);
+						const Animation& anim = g_gr->animations().get_animation(anim_idx);
+						const size_t nr_frames = anim.nr_frames();
 						uint32_t cur_frame =
 							csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
 						uint32_t tanim = cur_frame * FRAME_LENGTH;
-						uint32_t w, h;
-						g_gr->get_animation_size(anim, tanim, w, h);
+
+						const uint16_t w = anim.width();
+						const uint16_t h = anim.height();
 						uint32_t lines = h * csinf.completedtime * nr_frames;
 						if (csinf.totaltime)
 							lines /= csinf.totaltime;
 						assert(h * cur_frame <= lines);
-						lines -= h * cur_frame; //  This won't work if pictures have various sizes.
+						lines -= h * cur_frame;
 
 						if (cur_frame) // not the first frame
 							// draw the prev frame from top to where next image will be drawing
 							m_dst->drawanimrect
-								(pos[F], anim, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
+								(pos[F], anim_idx, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
 						else if (csinf.was) {
 							// Is the first frame, but there was another building here before,
 							// get its last build picture and draw it instead.
@@ -206,7 +208,7 @@ void GameRenderer::draw_objects()
 								(pos[F], a, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
 						}
 						assert(lines <= h);
-						m_dst->drawanimrect(pos[F], anim, tanim, owner, Rect(Point(0, h - lines), w, lines));
+						m_dst->drawanimrect(pos[F], anim_idx, tanim, owner, Rect(Point(0, h - lines), w, lines));
 					} else if (upcast(const Building_Descr, building, map_object_descr)) {
 						// this is a building therefore we either draw unoccupied or idle animation
 						uint32_t pic;

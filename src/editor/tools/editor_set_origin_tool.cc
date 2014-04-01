@@ -31,7 +31,6 @@ int32_t Editor_Set_Origin_Tool::handle_click_impl
 	Editor_Action_Args        &          /* args */)
 {
 	map.set_origin(center.node);
-	map.overlay_manager().reset();
 	eia.register_overlays();
 	eia.set_rel_viewpoint
 	(Point
@@ -49,7 +48,6 @@ int32_t Editor_Set_Origin_Tool::handle_undo_impl
 		(map.get_width()  - center.node.x,
 		 map.get_height() - center.node.y);
 	map.set_origin(nc);
-	map.overlay_manager().reset();
 	parent.register_overlays();
 	parent.set_rel_viewpoint
 	(Point
@@ -63,6 +61,3 @@ Editor_Action_Args Editor_Set_Origin_Tool::format_args_impl(Editor_Interactive &
 {
 	return Editor_Tool::format_args_impl(parent);
 }
-
-
-

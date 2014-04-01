@@ -2,18 +2,18 @@
 --                   Territorial Lord Win condition
 -- =======================================================================
 
-use("aux", "coroutine") -- for sleep
-use("aux", "table")
-use("aux", "win_condition_functions")
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/table.lua"
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-use("aux", "win_condition_texts")
+include "scripting/win_condition_texts.lua"
 
 local wc_name = _ "Territorial Lord"
 local wc_version = 2
 local wc_desc = _ (
-	"Each player or team tries to obtain more than half of the maps' " ..
+	"Each player or team tries to obtain more than half of the map’s " ..
 	"area. The winner will be the player or the team that is able to keep " ..
 	"that area for at least 20 minutes."
 )
@@ -147,17 +147,24 @@ return {
 		end
 
 		function _send_state()
-			local msg1 = game_status_territoral_lord.other1:format(currentcandidate)
+			set_textdomain("win_conditions")
+			local candidate = currentcandidate
 			if candidateisteam then
-				local teamstr = game_status_territoral_lord.team:format(currentcandidate)
-				msg1 = game_status_territoral_lord.other1:format(teamstr)
+				candidate = (_"Team %i"):format(currentcandidate)
 			end
+			local msg1 = (_"%s owns more than half of the map’s area."):format(candidate)
 			msg1 = msg1 .. "\n"
-			msg1 = msg1 .. game_status_territoral_lord.other2:format(remaining_time / 60)
+			msg1 = msg1 .. (ngettext("You’ve still got %i minute to prevent a victory.",
+						 "You’ve still got %i minutes to prevent a victory.",
+						 remaining_time / 60))
+					:format(remaining_time / 60)
 
-			local msg2 = game_status_territoral_lord.player1
+			local msg2 = _"You own more than half of the map’s area."
 			msg2 = msg2 .. "\n"
-			msg2 = msg2 .. game_status_territoral_lord.player2:format(remaining_time / 60)
+			msg2 = msg2 .. (ngettext("Keep it for %i more minute to win the game.",
+						 "Keep it for %i more minutes to win the game.",
+						 remaining_time / 60))
+					:format(remaining_time / 60)
 
 			for idx, p in ipairs(plrs) do
 				if candidateisteam and currentcandidate == p.team

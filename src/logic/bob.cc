@@ -24,6 +24,7 @@
 #include "backtrace.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/checkstep.h"
 #include "logic/critter_bob.h"
@@ -42,6 +43,7 @@
 #include "wexception.h"
 #include "wui/mapviewpixelconstants.h"
 
+
 namespace Widelands {
 
 /**
@@ -52,7 +54,7 @@ namespace Widelands {
  *
  * \returns radius (in fields) of area that the bob can see
  */
-uint32_t Bob::Descr::vision_range() const
+uint32_t BobDescr::vision_range() const
 {
 	if (m_owner_tribe) {
 		if (upcast(const Ship_Descr, ship, this))
@@ -64,20 +66,18 @@ uint32_t Bob::Descr::vision_range() const
 }
 
 
-Bob::Descr::Descr
+BobDescr::BobDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const * const tribe)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_owner_tribe(tribe)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 
-		add_animation
-			("idle", g_anim.get (directory, idle_s, "idle.png"));
+		add_animation("idle", g_gr->animations().load(directory, idle_s));
 	}
 
 	// Parse attributes
@@ -85,7 +85,7 @@ Bob::Descr::Descr
 		uint32_t const attrib = get_attribute_id(val->get_string());
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			throw game_data_error(_("bad attribute \"%s\""), val->get_string());
+			throw game_data_error("bad attribute \"%s\"", val->get_string());
 
 		add_attribute(attrib);
 	}
@@ -95,7 +95,7 @@ Bob::Descr::Descr
 /**
  * Create a bob of this type
  */
-Bob & Bob::Descr::create
+Bob & BobDescr::create
 	(Editor_Game_Base & egbase,
 	 Player * const owner,
 	 const Coords & coords)
@@ -110,7 +110,7 @@ Bob & Bob::Descr::create
 }
 
 
-Bob::Bob(const Bob::Descr & _descr) :
+Bob::Bob(const BobDescr & _descr) :
 Map_Object       (&_descr),
 m_owner          (nullptr),
 m_position       (FCoords(Coords(0, 0), nullptr)), // not linked anywhere

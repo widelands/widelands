@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "TribeBasicInfo.h"
-#include "descr_maintainer.h"
+#include "description_maintainer.h"
 #include "graphic/animation.h"
 #include "io/filewrite.h"
 #include "logic/bob.h"
@@ -64,8 +64,8 @@ struct Tribe_Descr : boost::noncopyable {
 	//  Static function to check for tribes.
 	static bool exists_tribe
 		(const std::string & name, TribeBasicInfo * info = nullptr);
-	static void get_all_tribenames(std::vector<std::string> &);
-	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
+	static std::vector<std::string> get_all_tribenames();
+	static std::vector<TribeBasicInfo> get_all_tribe_infos();
 
 
 	const std::string & name() const {return m_name;}
@@ -130,10 +130,10 @@ struct Tribe_Descr : boost::noncopyable {
 		return m_immovables.get(get_immovable_index(imm_name.c_str()));
 	}
 	int32_t get_bob(char const * const l) const {return m_bobs.get_index(l);}
-	Bob::Descr const * get_bob_descr(uint16_t const index) const {
+	BobDescr const * get_bob_descr(uint16_t const index) const {
 		return m_bobs.get(index);
 	}
-	Bob::Descr const * get_bob_descr(const std::string & bob_name) const {
+	BobDescr const * get_bob_descr(const std::string & bob_name) const {
 		return m_bobs.exists(bob_name.c_str());
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
@@ -210,7 +210,7 @@ struct Tribe_Descr : boost::noncopyable {
 	Military_Data get_military_data() const {return m_military_data;}
 
 	struct Initialization {
-		std::string          name;
+		std::string          script;
 		std::string          descname;
 	};
 	typedef std::vector<Initialization> Initializations;
@@ -234,8 +234,6 @@ struct Tribe_Descr : boost::noncopyable {
 
 	void resize_ware_orders(size_t maxLength);
 
-	const std::vector<std::string> & compatibility_immovable(const std::string & name) const;
-
 private:
 	const std::string m_name;
 	const World & m_world;
@@ -243,11 +241,11 @@ private:
 	AnimationStyles   m_anim_flag;
 	uint32_t m_bob_vision_range;
 
-	Indexed_Descr_Maintainer<Worker_Descr, Ware_Index>    m_workers;
-	Indexed_Descr_Maintainer<Building_Descr, Building_Index>  m_buildings;
-	Indexed_Descr_Maintainer<WareDescr, Ware_Index> m_wares;
-	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
-	Descr_Maintainer<Bob::Descr>      m_bobs;
+	IndexedDescriptionMaintainer<Worker_Descr, Ware_Index>    m_workers;
+	IndexedDescriptionMaintainer<Building_Descr, Building_Index>  m_buildings;
+	IndexedDescriptionMaintainer<WareDescr, Ware_Index> m_wares;
+	DescriptionMaintainer<Immovable_Descr> m_immovables;  // The player immovables
+	DescriptionMaintainer<BobDescr>      m_bobs;
 	std::string                       m_carrier2;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;
@@ -260,15 +258,6 @@ private:
 	Initializations m_initializations;
 
 	Military_Data   m_military_data;
-
-	typedef std::map<std::string, std::vector<std::string> > Compatibility;
-	/**
-	 * For savegame compatibility, this maps immovable names to strings
-	 * describing the appropriate compatibility preserving action.
-	 */
-	Compatibility m_compatibility_immovable;
-	std::map<std::string, std::string> m_compatibility_wares;
-
 };
 
 }

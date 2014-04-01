@@ -20,7 +20,6 @@
 #include "graphic/rendertarget.h"
 
 #include "graphic/animation.h"
-#include "graphic/animation_gfx.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/surface.h"
@@ -28,7 +27,6 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "upcast.h"
-#include "vertex.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/overlay_manager.h"
 
@@ -52,7 +50,7 @@ RenderTarget::RenderTarget(Surface* surf)
 /**
  * Sets an arbitrary drawing window.
  */
-void RenderTarget::set_window(const Rect & rc, const Point & ofs)
+void RenderTarget::set_window(const Rect& rc, const Point& ofs)
 {
 	m_rect = rc;
 	m_offset = ofs;
@@ -90,7 +88,7 @@ void RenderTarget::set_window(const Rect & rc, const Point & ofs)
  * is not changed at all. Otherwise, the function returns true.
  */
 bool RenderTarget::enter_window
-	(const Rect & rc, Rect* previous, Point* prevofs)
+	(const Rect& rc, Rect* previous, Point* prevofs)
 {
 	Rect newrect = rc;
 
@@ -128,7 +126,7 @@ int32_t RenderTarget::height() const
  * This functions draws a line in the target
  */
 void RenderTarget::draw_line
-	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
+	(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 	 const RGBColor& color, uint8_t gwidth)
 {
 	m_surface->draw_line
@@ -140,20 +138,23 @@ void RenderTarget::draw_line
 /**
  * Clip against window and pass those primitives along to the bitmap.
  */
-void RenderTarget::draw_rect(Rect r, const RGBColor& clr)
+void RenderTarget::draw_rect(const Rect& rect, const RGBColor& clr)
 {
+	Rect r(rect);
 	if (clip(r))
 		m_surface->draw_rect(r, clr);
 }
 
-void RenderTarget::fill_rect(Rect r, const RGBAColor& clr)
+void RenderTarget::fill_rect(const Rect& rect, const RGBAColor& clr)
 {
+	Rect r(rect);
 	if (clip(r))
 		m_surface->fill_rect(r, clr);
 }
 
-void RenderTarget::brighten_rect(Rect r, const int32_t factor)
+void RenderTarget::brighten_rect(const Rect& rect, int32_t factor)
 {
+	Rect r(rect);
 	if (clip(r))
 		m_surface->brighten_rect(r, factor);
 }
@@ -170,19 +171,32 @@ void RenderTarget::blit(const Point& dst, const Image* image, Composite cm, UI::
 	Point dstpoint(dst);
 
 	UI::correct_for_align(align, image->width(), image->height(), &dstpoint);
-	doblit(dstpoint, image, Rect(Point(0, 0), image->width(), image->height()), cm);
+
+	Rect srcrc(Point(0, 0), image->width(), image->height());
+
+	if (to_surface_geometry(&dstpoint, &srcrc))
+		m_surface->blit(dstpoint, image->surface(), srcrc, cm);
 }
 
 /**
  * Like \ref blit, but use only a sub-rectangle of the source image.
  */
 void RenderTarget::blitrect
-	(Point const dst, const Image* image, Rect const srcrc, Composite cm)
+	(const Point& dst, const Image* image, const Rect& gsrcrc, Composite cm)
 {
-	assert(0 <= srcrc.x);
-	assert(0 <= srcrc.y);
+	assert(0 <= gsrcrc.x);
+	assert(0 <= gsrcrc.y);
 
-	doblit(dst, image, srcrc, cm);
+	// We want to use the given srcrc, but we must make sure that we are not
+	// blitting outside of the boundaries of 'image'.
+	Rect srcrc(gsrcrc.x,
+	           gsrcrc.y,
+	           std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
+	           std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
+
+	Point dstpt(dst);
+	if (to_surface_geometry(&dstpt, &srcrc))
+		m_surface->blit(dstpt, image->surface(), srcrc, cm);
 }
 
 /**
@@ -191,11 +205,13 @@ void RenderTarget::blitrect
  * The pixel from ofs inside image is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, const Image* image, Point ofs, Composite cm)
+void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs, Composite cm)
 {
 	int32_t srcw = image->width();
 	int32_t srch = image->height();
 
+	Rect r(rect);
+	Point ofs(gofs);
 	if (clip(r)) {
 		if (m_offset.x < 0)
 			ofs.x -= m_offset.x;
@@ -264,86 +280,37 @@ void RenderTarget::tile(Rect r, const Image* image, Point ofs, Composite cm)
  * What if the game runs very slowly or very quickly?
  */
 void RenderTarget::drawanim
-	(Point                dst,
-	 uint32_t       const animation,
-	 uint32_t       const time,
-	 Player const * const player)
+	(const Point& dst, uint32_t animation, uint32_t time, const Player* player)
 {
-	const AnimationData& data = g_anim.get_animation(animation);
-	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!gfx) {
-		log("WARNING: Animation %u does not exist\n", animation);
-		return;
-	}
+	const Animation& anim = g_gr->animations().get_animation(animation);
 
-	// Get the frame and its data
-	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
-	const Image& frame =
-		player ? gfx->get_frame(framenumber, player->get_playercolor()) : gfx->get_frame(framenumber);
+	Point dstpt = dst - anim.hotspot();
 
-	dst -= gfx->hotspot();
+	Rect srcrc(Point(0, 0), anim.width(), anim.height());
 
-	Rect srcrc(Point(0, 0), frame.width(), frame.height());
-
-	doblit(dst, &frame, srcrc);
+	if (to_surface_geometry(&dstpt, &srcrc))
+		anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
-	data.trigger_soundfx(framenumber, 128);
-}
-
-void RenderTarget::drawstatic
-	(Point                dst,
-	 uint32_t       const animation,
-	 Player const * const player)
-{
-	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!gfx) {
-		log("WARNING: Animation %u does not exist\n", animation);
-		return;
-	}
-
-	// Get the frame and its data
-	const Image& frame = player ? gfx->get_frame(0, player->get_playercolor()) : gfx->get_frame(0);
-	const Image* dark_frame = ImageTransformations::change_luminosity(&frame, 1.22, true);
-
-	dst -= Point(frame.width() / 2, frame.height() / 2);
-	Rect srcrc(Point(0, 0), frame.width(), frame.height());
-	doblit(Rect(dst, 0, 0), dark_frame, srcrc);
+	anim.trigger_soundfx(time, 128);
 }
 
 /**
  * Draws a part of a frame of an animation at the given location
  */
 void RenderTarget::drawanimrect
-	(Point                dst,
-	 uint32_t       const animation,
-	 uint32_t       const time,
-	 Player const * const player,
-	 Rect                 srcrc)
+	(const Point& dst, uint32_t animation, uint32_t time, const Player* player, const Rect& gsrcrc)
 {
-	const AnimationData& data = g_anim.get_animation(animation);
-	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!gfx) {
-		log("WARNING: Animation %u does not exist\n", animation);
-		return;
-	}
+	const Animation& anim = g_gr->animations().get_animation(animation);
 
-	// Get the frame and its data
-	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
-	const Image& frame =
-		player ?
-		gfx->get_frame
-			(framenumber, player->get_playercolor())
-		:
-		gfx->get_frame
-			(framenumber);
+	Point dstpt = dst - anim.hotspot();
+	dstpt += gsrcrc;
 
-	dst -= g_gr->get_animation(animation)->hotspot();
+	Rect srcrc(gsrcrc);
 
-	dst += srcrc;
-
-	doblit(dst, &frame, srcrc);
+	if (to_surface_geometry(&dstpt, &srcrc))
+		anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 }
 
 /**
@@ -403,54 +370,44 @@ bool RenderTarget::clip(Rect & r) const
 }
 
 /**
- * Clip against window and source bitmap, then call the Bitmap blit routine.
+ * Clip against window and source bitmap, returns false if blitting is
+ * unnecessary because image is not inside the target surface.
  */
-void RenderTarget::doblit
-	(Point dst, const Image* src, Rect srcrc, Composite cm)
+bool RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 {
-	assert(0 <= srcrc.x);
-	assert(0 <= srcrc.y);
-	dst += m_offset;
+	assert(0 <= srcrc->x);
+	assert(0 <= srcrc->y);
+	*dst += m_offset;
 
 	// Clipping
-	if (dst.x < 0) {
-		if (srcrc.w <= static_cast<uint32_t>(-dst.x))
-			return;
-		srcrc.x -= dst.x;
-		srcrc.w += dst.x;
-		dst.x = 0;
+	if (dst->x < 0) {
+		if (srcrc->w <= static_cast<uint32_t>(-dst->x))
+			return false;
+		srcrc->x -= dst->x;
+		srcrc->w += dst->x;
+		dst->x = 0;
 	}
 
-	if (dst.x + srcrc.w > m_rect.w) {
-		if (static_cast<int32_t>(m_rect.w) <= dst.x)
-			return;
-		srcrc.w = m_rect.w - dst.x;
+	if (dst->x + srcrc->w > m_rect.w) {
+		if (static_cast<int32_t>(m_rect.w) <= dst->x)
+			return false;
+		srcrc->w = m_rect.w - dst->x;
 	}
 
-	if (dst.y < 0) {
-		if (srcrc.h <= static_cast<uint32_t>(-dst.y))
-			return;
-		srcrc.y -= dst.y;
-		srcrc.h += dst.y;
-		dst.y = 0;
+	if (dst->y < 0) {
+		if (srcrc->h <= static_cast<uint32_t>(-dst->y))
+			return false;
+		srcrc->y -= dst->y;
+		srcrc->h += dst->y;
+		dst->y = 0;
 	}
 
-	if (dst.y + srcrc.h > m_rect.h) {
-		if (static_cast<int32_t>(m_rect.h) <= dst.y)
-			return;
-		srcrc.h = m_rect.h - dst.y;
+	if (dst->y + srcrc->h > m_rect.h) {
+		if (static_cast<int32_t>(m_rect.h) <= dst->y)
+			return false;
+		srcrc->h = m_rect.h - dst->y;
 	}
 
-	// Also ensure srcrc is not bigger than src
-	// so opengl blits correctly
-	if (src->width() < srcrc.x + srcrc.w) {
-		srcrc.w = src->width() - srcrc.x;
-	}
-	if (src->height() < srcrc.y + srcrc.h) {
-		srcrc.h = src->height() - srcrc.y;
-	}
-
-	dst += m_rect;
-
-	m_surface->blit(dst, src->surface(), srcrc, cm);
+	*dst += m_rect;
+	return true;
 }

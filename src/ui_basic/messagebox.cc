@@ -87,21 +87,21 @@ WLMessageBox::WLMessageBox
 	if (type == OK) {
 		UI::Button * okbtn = new Button
 			(this, "ok",
-			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
+			 (get_inner_w() - 120) / 2, get_inner_h() - 30, 120, 20,
 			 g_gr->images().get("pics/but0.png"),
 			 _("OK"));
 		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedOk, boost::ref(*this)));
 	} else if (type == YESNO) {
 		UI::Button * yesbtn = new Button
 			(this, "yes",
-			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
+			 (get_inner_w() / 2 - 120) / 2, get_inner_h() - 30, 120, 20,
 			 g_gr->images().get("pics/but0.png"),
 			 _("Yes"));
 		yesbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedYes, boost::ref(*this)));
 		UI::Button * nobtn = new Button
 			(this, "no",
-			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
-			 60, 20,
+			 (get_inner_w() / 2 - 120) / 2 + get_inner_w() / 2, get_inner_h() - 30,
+			 120, 20,
 			 g_gr->images().get("pics/but1.png"),
 			 _("No"));
 		nobtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedNo, boost::ref(*this)));

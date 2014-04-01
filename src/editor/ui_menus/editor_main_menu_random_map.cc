@@ -461,8 +461,7 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 
-	// Clean all the stuff up, so we can load
-	egbase.cleanup_for_load(true, false);
+	egbase.cleanup_for_load();
 
 	if (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
 		eia.change_world();

@@ -2,13 +2,13 @@ size=big
 output=corn
 
 [buildcost]
-trunk=3
+log=3
 stone=2
 planks=2
 spidercloth=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=1
 planks=1
 
@@ -22,24 +22,14 @@ is_basic=true # farm needs spidercloth to be build and spidercloth needs
 
 [programs]
 plant_corn=_Plant corn
-plant=Plant corn (only for compatibility with old savegames (build13))
 harvest_corn=_Harvest corn
-harvest=Harvest corn (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_corn]
 sleep=14000  #orig 20000
 worker=plant
 
-[plant]
-sleep=14000  #orig 20000
-worker=plant
-
 [harvest_corn]
-sleep=4000  #orig 5000
-worker=harvest
-
-[harvest]
 sleep=4000  #orig 5000
 worker=harvest
 
@@ -51,4 +41,3 @@ playFX=../../../sound/farm/farm_animal 192
 [idle]
 pics=farm_i_??.png  # ???
 hotspot=74 60
-playercolor=true

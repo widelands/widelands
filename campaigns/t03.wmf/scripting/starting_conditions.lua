@@ -8,17 +8,17 @@ p1:allow_buildings{
    "rangers_hut",
    "hardener",
    "lime_kiln",
-   "fernery",
+   "reed_yard",
    "sentry",
 }
 
 hq = p1:place_building("headquarters", wl.Game().map:get_field(52, 33), false, true)
 hq:set_wares{
-   axe=1,
-   bakingtray=2,
+   ax=1,
+   bread_paddle=2,
    blackwood=32,
    coal=12,
-   felling_axe=5,
+   felling_ax=5,
    fire_tongs=2,
    fish=6,
    grout=12,
@@ -37,7 +37,7 @@ hq:set_wares{
    shovel=4,
    snack=3,
    thatchreed=24,
-   trunk=80,
+   log=80,
 }
 hq:set_workers{
    carrier=40,
@@ -45,7 +45,7 @@ hq:set_workers{
    brewer=1,
    builder=10,
    burner=1,
-   ferner=1,
+   gardener=1,
    fisher=2,
    geologist=4,
    ["lime-burner"]=1,
@@ -64,7 +64,7 @@ p2:forbid_buildings("all")
 p2:allow_buildings{"lumberjacks_hut"}
 
 wh = p2:place_building("warehouse", wl.Game().map:get_field(100,25), false, true)
-wh:set_wares{trunk=200}
+wh:set_wares{log=200}
 wh:set_workers{ carrier=40, builder=1, lumberjack=4 }
 
 prefilled_buildings(p2,
@@ -111,7 +111,7 @@ prefilled_buildings(p3,
 -- =======================================================================
 p4:forbid_buildings("all")
 wh = p4:place_building("warehouse", wl.Game().map:get_field(132,110), false, true)
-wh:set_wares{trunk=10}
+wh:set_wares{log=10}
 wh:set_workers{carrier=40, builder=1, blacksmith=1, ["master-blacksmith"]=1}
 
 prefilled_buildings(p4,

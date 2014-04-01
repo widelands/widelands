@@ -1,21 +1,21 @@
 -- =======================================================================
---                             The Green Plateau                            
+--                             The Green Plateau
 -- =======================================================================
 
 set_textdomain("map_plateau.wmf")
 
-use("aux", "coroutine")
-use("aux", "infrastructure")
-use("aux", "table")
-use("aux", "ui")
+include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
+include "scripting/table.lua"
+include "scripting/ui.lua"
 
 p1 = wl.Game().players[1]
 p2 = wl.Game().players[2]
 p3 = wl.Game().players[3]
 p4 = wl.Game().players[4]
 
-use("map", "texts")
-use("map", "initial_conditions")
+include "map:scripting/texts.lua"
+include "map:scripting/initial_conditions.lua"
 
 -- Main mission thread
 function mission_thread()
@@ -32,11 +32,11 @@ function mission_thread()
 
    -- Show the way to the castle very briefly
    local way = array_combine(
-      map:get_field( 5,  8):region(2), 
-      map:get_field( 9, 10):region(2), 
-      map:get_field(12, 12):region(2), 
-      map:get_field(15, 14):region(2), 
-      map:get_field(18, 16):region(2), 
+      map:get_field( 5,  8):region(2),
+      map:get_field( 9, 10):region(2),
+      map:get_field(12, 12):region(2),
+      map:get_field(15, 14):region(2),
+      map:get_field(18, 16):region(2),
       map:get_field(20, 17):region(2)
    )
    p1:reveal_fields(way)
@@ -54,11 +54,11 @@ function mission_thread()
    o.done = true
 
    scroll_smoothly_to(castle)
-   
+
    p1:reveal_fields(castle:region(18))
    send_msg(briefing_3_captured_ancient_castle)
    local o_erwyn = add_obj(obj_defeat_erwyn)
-   local o_jomo = add_obj(obj_defeat_jomo) 
+   local o_jomo = add_obj(obj_defeat_jomo)
 
    sleep(100)
    p1:hide_fields(castle:region(18))

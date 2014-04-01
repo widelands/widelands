@@ -170,11 +170,11 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	}
 
 	if (soldier.get_current_hitpoints() < 1) {
-		molog(_("[battle] soldier %u lose battle\n"), soldier.serial());
+		molog("[battle] soldier %u lost the battle\n", soldier.serial());
 		soldier          . owner().count_casualty();
 		opponent(soldier)->owner().count_kill    ();
 		soldier.start_task_die(game);
-		molog(_("[battle] waking up winner %d\n"), opponent(soldier)->serial());
+		molog("[battle] waking up winner %d\n", opponent(soldier)->serial());
 		opponent(soldier)->send_signal(game, "wakeup");
 		return schedule_destroy(game);
 	}
@@ -404,7 +404,7 @@ Map_Object::Loader * Battle::load
 			loader->init(egbase, mol, *new Battle);
 			loader->load(fr, version);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("Loading Battle: %s", e.what());
 	}

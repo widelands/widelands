@@ -301,12 +301,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					title = _("Computer");
 					pic += "novalue.png";
 				} else {
-					title = _("AI: ");
 					if (player_setting.random_ai) {
-						title += _("Random");
+						title = (boost::format(_("AI: %s")) % _("Random")).str();
 						pic += "ai_Random.png";
 					} else {
-						title += _(player_setting.ai);
+						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
 						pic += "ai_" + player_setting.ai + ".png";
 					}
 				}
@@ -437,7 +436,7 @@ m_fname(fname)
 	labels.push_back
 		(new UI::Textarea
 			(this,
-			 w * 6 / 15 + buth, buth / 3,
+			 w * 6 / 15 + buth, buth / 3 - 10,
 			 buth, buth));
 	labels.back()->set_text(_("Type"));
 	labels.back()->set_textstyle(tsmaller);
@@ -458,7 +457,7 @@ m_fname(fname)
 	labels.back()->set_text(_("Initialization"));
 	labels.back()->set_textstyle(tsmaller);
 
-	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth));
+	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align_Right));
 	labels.back()->set_text(_("Team"));
 	labels.back()->set_textstyle(tsmaller);
 

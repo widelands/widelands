@@ -4,16 +4,21 @@ heal_per_second=170
 conquers=11
 enhancement=citadel
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your fortress.
+aggressor_string=_Your fortress discovered an aggressor.
+attack_string=_Your fortress is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the fortress.
+defeated_you_string=_Your soldiers defeated the enemy at the fortress.
 
 [buildcost]
 blackwood=9
-trunk=5
+log=5
 raw_stone=4
 grout=2
 
 [return_on_dismantle]
 blackwood=4
-trunk=2
+log=2
 raw_stone=2
 grout=1
 
@@ -28,5 +33,4 @@ hotspot=103 80
 [idle]
 pics=fortress_i_??.png
 hotspot=103 80
-playercolor=true
 fps=10

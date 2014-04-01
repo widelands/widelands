@@ -23,6 +23,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
 #include "i18n.h"
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
@@ -59,15 +60,16 @@ using Widelands::Game;
 
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::Icon_Grid {
-	BuildGrid
-		(UI::Panel                    * parent,
-		 const Widelands::Tribe_Descr & tribe,
-		 int32_t x, int32_t y,
-		 int32_t cols);
+	BuildGrid(UI::Panel* parent,
+	          const RGBColor& player_color,
+	          const Widelands::Tribe_Descr& tribe,
+	          int32_t x,
+	          int32_t y,
+	          int32_t cols);
 
-	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildclicked;
-	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildmouseout;
-	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildmousein;
+	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildclicked;
+	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildmouseout;
+	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildmousein;
 
 	void add(Widelands::Building_Index::value_t);
 
@@ -77,25 +79,21 @@ private:
 	void mouseinslot(int32_t idx);
 
 private:
-	const Widelands::Tribe_Descr & m_tribe;
+	const RGBColor player_color_;
+	const Widelands::Tribe_Descr& tribe_;
 };
 
-
-BuildGrid::BuildGrid
-	(UI::Panel                    * parent,
-	 const Widelands::Tribe_Descr & tribe,
-	 int32_t x, int32_t y,
-	 int32_t                        cols)
-:
-	UI::Icon_Grid
-		(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
-	m_tribe(tribe)
+BuildGrid::BuildGrid(
+		UI::Panel* parent, const RGBColor& player_color, const Widelands::Tribe_Descr& tribe,
+		int32_t x, int32_t y, int32_t cols) :
+	UI::Icon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
+	player_color_(player_color),
+	tribe_(tribe)
 {
 	clicked.connect(boost::bind(&BuildGrid::clickslot, this, _1));
 	mouseout.connect(boost::bind(&BuildGrid::mouseoutslot, this, _1));
 	mousein.connect(boost::bind(&BuildGrid::mouseinslot, this, _1));
 }
-
 
 /*
 ===============
@@ -105,13 +103,18 @@ Add a new building to the list of buildable buildings
 void BuildGrid::add(Widelands::Building_Index::value_t id)
 {
 	const Widelands::Building_Descr & descr =
-		*m_tribe.get_building_descr(Widelands::Building_Index(id));
+		*tribe_.get_building_descr(Widelands::Building_Index(id));
+	const Image& anim_frame = g_gr->animations().get_animation(descr.get_animation("idle"))
+		.representative_image(player_color_);
+	const uint16_t image_w = anim_frame.width();
+	const uint16_t image_h = anim_frame.height();
+	double ratio = BUILDMENU_IMAGE_SIZE / std::max(image_w, image_h);
+	const Image* menu_image = ImageTransformations::resize(&anim_frame, image_w * ratio, image_h * ratio);
 	UI::Icon_Grid::add
-		(descr.name(), descr.get_buildicon(),
+		(descr.name(), menu_image,
 		 reinterpret_cast<void *>(id),
 		 descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-			waremap_to_richtext(m_tribe, descr.buildcost()));
-;
+			waremap_to_richtext(tribe_, descr.buildcost()));
 }
 
 
@@ -181,7 +184,7 @@ public:
 
 	void init();
 	void add_buttons_auto();
-	void add_buttons_build(int32_t buildcaps);
+	void add_buttons_build(int32_t buildcaps, const RGBColor& player_color);
 	void add_buttons_road(bool flag);
 	void add_buttons_attack();
 
@@ -244,10 +247,10 @@ static const char * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildport.png"
 };
 static const std::string tooltip_tab_build[] = {
-	_("Build small buildings"),
-	_("Build medium buildings"),
-	_("Build large buildings"),
-	_("Build port buildings")
+	_("Build small building"),
+	_("Build medium building"),
+	_("Build large building"),
+	_("Build port building")
 };
 static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
@@ -396,11 +399,11 @@ void FieldActionWindow::add_buttons_auto()
 			const int32_t buildcaps = m_plr ? m_plr->get_buildcaps(m_node) : 0;
 
 			// Add house building
-			if
-				((buildcaps & Widelands::BUILDCAPS_SIZEMASK)
-				 ||
-				 (buildcaps & Widelands::BUILDCAPS_MINE))
-				add_buttons_build(buildcaps);
+			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			    (buildcaps & Widelands::BUILDCAPS_MINE)) {
+				assert(igbase->get_player());
+				add_buttons_build(buildcaps, igbase->get_player()->get_playercolor());
+			}
 
 			// Add build actions
 			if ((m_fastclick = buildcaps & Widelands::BUILDCAPS_FLAG))
@@ -408,7 +411,7 @@ void FieldActionWindow::add_buttons_auto()
 					(buildbox, "build_flag",
 					 pic_buildflag,
 					 &FieldActionWindow::act_buildflag,
-					 _("Put a flag"));
+					 _("Place a flag"));
 
 			if (can_act && dynamic_cast<const Widelands::Road *>(imm))
 				add_button
@@ -458,7 +461,7 @@ void FieldActionWindow::add_buttons_auto()
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())
-		add_tab("roads", pic_tab_buildroad, buildbox, _("Build roads"));
+		add_tab("roads", pic_tab_buildroad, buildbox, _("Build road"));
 
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
@@ -508,7 +511,7 @@ void FieldActionWindow::add_buttons_attack ()
 Add buttons for house building.
 ===============
 */
-void FieldActionWindow::add_buttons_build(int32_t buildcaps)
+void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& player_color)
 {
 	if (not m_plr)
 		return;
@@ -558,7 +561,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
-			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
+			*ppgrid = new BuildGrid(&m_tabpanel, player_color, tribe, 0, 0, 5);
 			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
 			(*ppgrid)->buildmouseout.connect
 				(boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));
@@ -750,7 +753,7 @@ void FieldActionWindow::act_ripflag()
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
 				if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
 					ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
-						(*flag);
+						(*flag, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
 				}
 				else {
 					show_bulldoze_confirm

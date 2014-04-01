@@ -50,13 +50,13 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 // Text labels
 	m_title
 		(this,
-		 get_w() / 2, get_h() * 7 / 50,
+		 get_w() / 2, get_h() / 10,
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 	m_label_load_map_as_scenario
 		(this,
 		 get_w() * 23 / 25, get_h() * 11 / 40,
-		 _("Load Map as scenario: "),
+		 _("Load Map as scenario"),
 		 UI::Align_Right),
 	m_label_name
 		(this,
@@ -146,9 +146,10 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_ok.set_font(font_small());
 
 #define NR_PLAYERS_WIDTH 35
-	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), UI::Align_HCenter);
+	/** TRANSLATORS: Column title for number of players in map list */
+	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), "", UI::Align_HCenter);
 	m_table.add_column
-		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), UI::Align_Left);
+		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), "", UI::Align_Left);
 	m_table.set_column_compare
 		(1,
 		 boost::bind
@@ -324,8 +325,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		// This is the normal case
 
 		//  Fill it with all files we find in all directories.
-		filenameset_t files;
-		g_fs->FindFiles(m_curdir, "*", &files);
+		filenameset_t files = g_fs->ListDirectory(m_curdir);
 
 		int32_t ndirs = 0;
 
@@ -394,7 +394,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			{
 				char const * const name = pname->c_str();
 
-				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 				if (!ml)
 					continue;
 
@@ -434,7 +434,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					i18n::Textdomain td("maps");
 					te.set_picture
 						(1,  g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader const *>(ml) ?
+						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ?
 							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
 						_(mapdata.name));
@@ -445,8 +445,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				} catch (...) {
 					log("Mapselect: Skip %s due to unknown exception\n", name);
 				}
-
-				delete ml;
 			}
 		}
 	} else {
@@ -458,7 +456,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
 			char const * const name = dmap.path.c_str();
-			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+			std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
 			try {
 				if (!ml)
 					throw wexception("Not useable!");
@@ -501,8 +499,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.filename    = name;
 				mapdata.name        = dmap.path.substr(5, dmap.path.size() - 1);
 				mapdata.author      = _("unknown");
-				mapdata.description =
-					_("This map file is not present on your filesystem. Data shown here was sent by the server.");
+				mapdata.description = _("This map file is not present in your filesystem."
+							" The data shown here was sent by the server.");
 				mapdata.hint        = "";
 				mapdata.world       = _("unknown");
 				mapdata.nrplayers   = dmap.players;
@@ -521,8 +519,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					(1, g_gr->images().get
 					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
 			}
-
-			delete ml;
 		}
 	}
 
@@ -577,4 +573,3 @@ void Fullscreen_Menu_MapSelect::_tagbox_changed(int32_t id, bool to) {
 
 	fill_list();
 }
-

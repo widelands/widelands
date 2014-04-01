@@ -2,21 +2,21 @@
 --                       Wood Gnome win condition
 -- =======================================================================
 
-use("aux", "coroutine") -- for sleep
-use("aux", "table")
-use("aux", "win_condition_functions")
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/table.lua"
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-use("aux", "win_condition_texts")
+include "scripting/win_condition_texts.lua"
 
 local wc_name = _ "Wood Gnome"
 local wc_version = 2
-local wc_desc = _
-[[As wood gnome you like big forests, so your task is, to have more trees on
-your territory than any other player. The game will end after 4 hours of
-playing. The one with the most trees at that point will win the game.]]
-
+local wc_desc = _(
+[[As wood gnome you like big forests, so your task is to have more trees on ]] ..
+[[your territory than any other player. The game will end after 4 hours of ]] ..
+[[playing. The one with the most trees at that point will win the game.]])
+local wc_trees_owned = _"Trees owned"
 return {
 	name = wc_name,
 	description = wc_desc,
@@ -78,13 +78,17 @@ return {
 	end
 
 	local function _send_state()
+		set_textdomain("win_conditions")
 		local playerpoints = _calc_points()
-		local msg = game_status_woodgnome.end_in:format(remaining_time)
+		local msg = (ngettext("The game will end in %i minute.", "The game will end in %i minutes.", remaining_time))
+				:format(remaining_time)
 		msg = msg .. "\n\n"
 		msg = msg .. game_status.body
 		for idx,plr in ipairs(plrs) do
 			msg = msg .. "\n"
-			msg = msg .. game_status_woodgnome.trees:format(plr.name, playerpoints[plr.number])
+			local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number]))
+					:format(playerpoints[plr.number])
+			msg = msg ..  (_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
 		end
 
 		broadcast(plrs, game_status.title, msg)
@@ -99,7 +103,7 @@ return {
 	-- Install statistics hook
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
-		name = game_status_woodgnome.owned,
+		name = wc_trees_owned,
 		pic = "pics/genstats_trees.png",
 		calculator = function(p)
 			local pts = _calc_points(p)
@@ -134,12 +138,14 @@ return {
 	msg = msg .. game_status.body
 	for idx,plr in ipairs(plrs) do
 		msg = msg .. "\n"
-		msg = msg .. game_status_woodgnome.had1:format(plr.name)
-		msg = msg .. game_status_woodgnome.had2:format(playerpoints[plr.number])
+		local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number])):format(playerpoints[plr.number])
+		msg = msg ..  (_"%1$s had %2$s."):bformat(plr.name,trees)
 	end
 	msg = msg .. "\n\n"
-	msg = msg .. game_status_woodgnome.winner1:format(points[#points][1].name)
-	msg = msg .. game_status_woodgnome.winner2:format(playerpoints[points[#points][1].number])
+	local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
+			:format(playerpoints[points[#points][1].number])
+	msg = msg ..  (_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
+
 	local privmsg = ""
 	for i=1,#points-1 do
 		privmsg = lost_game_over.title

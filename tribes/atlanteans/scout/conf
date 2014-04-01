@@ -1,4 +1,4 @@
-help=_"Scouts like Scotty the scout scout unscouted area in a scouty fashion." # (c) WiHack Team 02.01.2010
+help=_"Scouts like Scotty the scout scouting unscouted areas in a scouty fashion." # (c) WiHack Team 02.01.2010
 program=scout
 
 [buildcost]
@@ -11,17 +11,14 @@ carrier=1
 [idle]
 pics=idle_??.png
 hotspot=4 22
-playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=9 25
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
 hotspot=9 25
-playercolor=true
 fps=10

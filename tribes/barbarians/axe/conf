@@ -1,7 +1,0 @@
-help=_The Axe is a basic weapon for the barbarians. All young soldiers are equipped with it.
-default_target_quantity=15
-preciousness=3
-
-[idle]
-pics=idle.png
-hotspot=7 7

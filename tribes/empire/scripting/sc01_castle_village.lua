@@ -2,7 +2,7 @@
 --                 Empire Castle Village Starting Conditions
 -- =======================================================================
 
-use("aux", "infrastructure")
+include "scripting/infrastructure.lua"
 
 set_textdomain("tribe_empire")
 
@@ -26,8 +26,8 @@ return {
          wares = {
             helm = 2,
             wood_lance = 5,
-            axe = 6,
-            bakingtray = 2,
+            ax = 6,
+            bread_paddle = 2,
             basket = 2,
             fire_tongs = 2,
             fishing_rod = 2,
@@ -47,7 +47,7 @@ return {
             scythe = 5,
             shovel = 6,
             stone = 40,
-            trunk = 29,
+            log = 29,
             water = 12,
             wheat = 4,
             wine = 8,
@@ -79,7 +79,7 @@ return {
          },
       })
 
-      place_building_in_region(plr, "trainingscamp", sf:region(11), {
+      place_building_in_region(plr, "trainingcamp", sf:region(11), {
          wares = {
             fish = 2,
             meat = 2,
@@ -87,7 +87,7 @@ return {
          },
       })
 
-      place_building_in_region(plr, "armoursmithy", sf:region(11), {
+      place_building_in_region(plr, "armorsmithy", sf:region(11), {
          wares = {
                gold = 4,
                coal = 8,
@@ -110,16 +110,16 @@ return {
 
       place_building_in_region(plr, "sawmill", sf:region(11), {
          wares = {
-            trunk = 1,
+            log = 1,
          }
       })
 
       place_building_in_region(plr, "stonemasons_house", sf:region(11))
    end) then
-      plr:send_message(_"Not enough space", _ 
-[[Some of your starting buildings didn't have enough room and 
-weren't build. You are at an disadvantage with this; consider restarting 
-this map with a fair starting condition.]], {popup=true}
+      plr:send_message(_"Not enough space", _(
+[[Some of your starting buildings didn’t have enough room and ]] ..
+[[weren’t built. You are at a disadvantage with this; consider restarting ]] ..
+[[this map with a fair starting condition.]]), {popup=true}
       )
    end
 end

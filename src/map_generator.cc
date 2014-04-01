@@ -110,20 +110,18 @@ void MapGenerator::generate_bobs
 			 nullptr);
 }
 
-#define set_resource_helper(rnd1, res)                                        \
-   {                                                                          \
-      Resource_Index const res_idx = terr.get_valid_resource(res);            \
-      uint32_t const max_amount    =                                          \
-         m_map.world().get_resource(res_idx)->get_max_amount();                \
-      uint8_t res_val =                                                       \
-         static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));           \
-      res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;        \
-      res_val /= 3;                                                           \
-      if (Editor_Change_Resource_Tool_Callback(fc, &m_map, res_idx)) {        \
-         fc.field->set_resources(res_idx, res_val);                           \
-         fc.field->set_starting_res_amount(res_val);                          \
-      }                                                                       \
-   }                                                                          \
+#define set_resource_helper(rnd1, res)                                                             \
+	{                                                                                               \
+		Resource_Index const res_idx = terr.get_valid_resource(res);                                 \
+		uint32_t const max_amount = m_map.world().get_resource(res_idx)->get_max_amount();           \
+		uint8_t res_val = static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));                 \
+		res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;                              \
+		res_val /= 3;                                                                                \
+		if (Editor_Change_Resource_Tool_Callback(fc, m_map, res_idx)) {                              \
+			fc.field->set_resources(res_idx, res_val);                                                \
+			fc.field->set_starting_res_amount(res_val);                                               \
+		}                                                                                            \
+	}
 
 void MapGenerator::generate_resources
 	(uint32_t            const * const random1,

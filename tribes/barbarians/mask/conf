@@ -1,8 +1,7 @@
-help=_This is the most enhanced Barbarian armour. It is produced in the helmsmithy and used in the trainingscamp - together with food - to train soldiers from healthpoints level 2 to healthpoints level 3.
+help=_This is the most enhanced Barbarian armor. It is produced in the helm smithy and used in the training camp – together with food – to train soldiers from health level 2 to level 3.
 
 preciousness=1
 
 [idle]
 pics=idle.png
 hotspot=7 10
-playercolor=true

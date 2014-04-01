@@ -68,11 +68,11 @@ ProductionSite_Descr::ProductionSite_Descr
 		try {
 			if (Ware_Index idx = tribe().ware_index(op->get_string())) {
 				if (m_output_ware_types.count(idx))
-					throw wexception(_("this ware type has already been declared as an output"));
+					throw wexception("this ware type has already been declared as an output");
 				m_output_ware_types.insert(idx);
 			} else if ((idx = tribe().worker_index(op->get_string()))) {
 				if (m_output_worker_types.count(idx))
-					throw wexception(_("this worker type has already been declared as an output"));
+					throw wexception("this worker type has already been declared as an output");
 				m_output_worker_types.insert(idx);
 			} else
 				throw wexception("tribe does not define a ware or worker type with this name");
@@ -133,16 +133,6 @@ ProductionSite_Descr::ProductionSite_Descr
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
-
-	if (Section * compat_s = prof.get_section("compatibility_programs")) {
-		while (const Section::Value * v = compat_s->get_next_val())
-			m_compatibility_programs[v->get_name()] = split_string(v->get_string(), " ");
-	}
-
-	if (Section * compat_s = prof.get_section("compatibility working positions")) {
-		while (const Section::Value * v = compat_s->get_next_val())
-			m_compatibility_working_positions[v->get_name()] = split_string(v->get_string(), " ");
-	}
 }
 
 ProductionSite_Descr::~ProductionSite_Descr()
@@ -166,32 +156,6 @@ const ProductionProgram * ProductionSite_Descr::get_program
 			("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second;
 }
-
-/**
- * If there is a compatibility action for the given program, return it.
- *
- * Otherwise, return an empty vector.
- */
-const std::vector<std::string> & ProductionSite_Descr::compatibility_program
-	(const std::string & progname) const
-{
-	static const std::vector<std::string> empty;
-	Compatibility::const_iterator it = m_compatibility_programs.find(progname);
-	if (it != m_compatibility_programs.end())
-		return it->second;
-	return empty;
-}
-
-const std::vector<std::string> & ProductionSite_Descr::compatibility_working_positions
-	(const std::string & workername) const
-{
-	static const std::vector<std::string> empty;
-	Compatibility::const_iterator it = m_compatibility_working_positions.find(workername);
-	if (it != m_compatibility_working_positions.end())
-		return it->second;
-	return empty;
-}
-
 
 /**
  * Create a new building of this type
@@ -246,7 +210,7 @@ std::string ProductionSite::get_statistics_string()
 	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
 		return
 			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
-				ngettext(_("Worker missing"), _("Workers missing"), nr_requests))
+				ngettext("Worker missing", "Workers missing", nr_requests))
 			.str();
 	}
 

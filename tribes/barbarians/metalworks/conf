@@ -1,6 +1,6 @@
 size=medium
-output=felling_axe
-output=bakingtray
+output=felling_ax
+output=bread_paddle
 output=fire_tongs
 output=fishing_rod
 output=hammer
@@ -9,10 +9,10 @@ output=pick
 output=scythe
 output=shovel
 output=hunting_spear
-enhancement=axefactory
+enhancement=axfactory
 
 [buildcost]
-trunk=1
+log=1
 blackwood=1
 raw_stone=2
 grout=1
@@ -28,15 +28,15 @@ blacksmith=1
 
 [inputs]
 iron=8
-trunk=8
+log=8
 
 [aihints]
 build_material=false
 is_basic=true
 
 [programs]
-produce_felling_axe=_Produce felling axe
-produce_bakingtray=_Produce bakingtray
+produce_felling_ax=_Produce felling ax
+produce_bread_paddle=_Produce bread paddle
 produce_fire_tongs=_Produce fire tongs
 produce_fishing_rod=_Produce fishing rod
 produce_hammer=_Produce hammer
@@ -47,28 +47,25 @@ produce_shovel=_Produce shovel
 produce_hunting_spear=_Produce hunting spear
 work=_Work
 
-[compatibility_programs]
-produce_axe=replace produce_felling_axe
-
-[produce_felling_axe]
-return=skipped unless economy needs felling_axe
-consume=iron trunk
+[produce_felling_ax]
+return=skipped unless economy needs felling_ax
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
-produce=felling_axe
+produce=felling_ax
 
-[produce_bakingtray]
-return=skipped unless economy needs bakingtray
-consume=iron trunk
+[produce_bread_paddle]
+return=skipped unless economy needs bread_paddle
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
-produce=bakingtray
+produce=bread_paddle
 
 [produce_fire_tongs]
 return=skipped unless economy needs fire_tongs
-consume=iron trunk
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
@@ -76,7 +73,7 @@ produce=fire_tongs
 
 [produce_fishing_rod]
 return=skipped unless economy needs fishing_rod
-consume=iron trunk
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
@@ -84,7 +81,7 @@ produce=fishing_rod
 
 [produce_hammer]
 return=skipped unless economy needs hammer
-consume=iron trunk
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
@@ -92,7 +89,7 @@ produce=hammer
 
 [produce_kitchen_tools]
 return=skipped unless economy needs kitchen_tools
-consume=iron trunk
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
@@ -100,7 +97,7 @@ produce=kitchen_tools
 
 [produce_pick]
 return=skipped unless economy needs pick
-consume=iron trunk
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
@@ -108,7 +105,7 @@ produce=pick
 
 [produce_scythe]
 return=skipped unless economy needs scythe
-consume=iron trunk
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
@@ -116,7 +113,7 @@ produce=scythe
 
 [produce_shovel]
 return=skipped unless economy needs shovel
-consume=iron trunk
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
@@ -124,14 +121,14 @@ produce=shovel
 
 [produce_hunting_spear]
 return=skipped unless economy needs hunting_spear
-consume=iron trunk
+consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=hunting_spear
 
 [work]
-call=produce_bakingtray
+call=produce_bread_paddle
 call=produce_fire_tongs
 call=produce_fishing_rod
 call=produce_hammer
@@ -140,26 +137,22 @@ call=produce_pick
 call=produce_scythe
 call=produce_shovel
 call=produce_hunting_spear
-call=produce_felling_axe
+call=produce_felling_ax
 return=skipped
 
 [build]
 pics=metalworks_b_??.png
 hotspot=57 76
-playercolor=true
 
 [unoccupied]
 pics=metalworks_u_??.png
 hotspot=57 76
-playercolor=true
 
 [idle]
 pics=metalworks_i_??.png
 hotspot=57 76
-playercolor=true
 
 [working]
 pics=metalworks_w_??.png
 hotspot=57 76
-playercolor=true
 fps=10

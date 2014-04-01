@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <cstdio>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "build_info.h"
@@ -72,7 +73,6 @@ m_height         (0),
 m_world          (nullptr),
 m_starting_pos   (nullptr),
 m_fields         (nullptr),
-m_overlay_manager(nullptr),
 m_pathfieldmgr   (new PathfieldManager)
 {
 	m_worldname[0] = '\0';
@@ -82,7 +82,6 @@ m_pathfieldmgr   (new PathfieldManager)
 Map::~Map()
 {
 	cleanup();
-	delete m_overlay_manager;
 }
 
 void Map::recalc_border(const FCoords fc) {
@@ -217,58 +216,48 @@ void Map::recalc_default_resources() {
 			//  top left neigbour
 			get_neighbour(f, WALK_NW, &f1);
 			{
-				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
-				const int8_t resr =
-					terr.get_default_resources();
-				if
-					((terr.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const Terrain_Descr& terr = w.terrain_descr(f1.field->terrain_r());
+				const int8_t resr = terr.get_default_resources();
+				const int default_amount = terr.get_default_resources_amount();
+				if ((terr.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resr] += 3;
-				else ++m[resr];
-				amount += terr.get_default_resources_amount();
+				else
+					++m[resr];
+				amount += default_amount;
 			}
 			{
 				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
-				const int8_t resd =
-					terd.get_default_resources();
-				if
-					((terd.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const int8_t resd = terd.get_default_resources();
+				const int default_amount = terd.get_default_resources_amount();
+				if ((terd.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resd] += 3;
-				else ++m[resd];
-				amount += terd.get_default_resources_amount();
+				else
+					++m[resd];
+				amount += default_amount;
 			}
 
 			//  top right neigbour
 			get_neighbour(f, WALK_NE, &f1);
 			{
-				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
-				const int8_t resd =
-					terd.get_default_resources();
-				if
-					((terd.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const Terrain_Descr& terd = w.terrain_descr(f1.field->terrain_d());
+				const int8_t resd = terd.get_default_resources();
+				const int default_amount = terd.get_default_resources_amount();
+				if ((terd.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resd] += 3;
 				else ++m[resd];
-				amount += terd.get_default_resources_amount();
+				amount += default_amount;
 			}
 
 			//  left neighbour
 			get_neighbour(f, WALK_W, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
-				const int8_t resr =
-					terr.get_default_resources();
-				if
-					((terr.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const int8_t resr = terr.get_default_resources();
+				const int default_amount = terr.get_default_resources_amount();
+				if ((terr.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resr] += 3;
 				else ++m[resr];
-				amount += terr.get_default_resources_amount();
+				amount += default_amount;
 			}
 
 			int32_t lv  = 0;
@@ -320,19 +309,9 @@ void Map::cleanup() {
 	m_hint = std::string();
 	m_background = std::string();
 
-	if (m_overlay_manager)
-		m_overlay_manager->reset();
-
+	m_overlay_manager.reset();
 	mom().remove_all();
 
-	//  Remove all extra data. Pay attention here, maybe some freeing would be
-	//  needed.
-#ifndef NDEBUG
-	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
-		assert(m_extradatainfos[i].type == Extradata_Info::PIC);
-	}
-#endif
-	m_extradatainfos.clear();
 	m_port_spaces.clear();
 }
 
@@ -359,9 +338,7 @@ void Map::create_empty_map
 	// Set first tribe found as the "basic" tribe
 	// <undefined> (as set before) is useless and will lead to a
 	// crash -> Widelands will search for tribe "<undefined>"
-	std::vector<std::string> tribes;
-	Tribe_Descr::get_all_tribenames(tribes);
-	set_scenario_player_tribe(1, tribes[0]);
+	set_scenario_player_tribe(1, Tribe_Descr::get_all_tribenames()[0]);
 	set_scenario_player_name(1, _("Player 1"));
 	set_scenario_player_ai(1, "");
 	set_scenario_player_closeable(1, false);
@@ -442,6 +419,8 @@ void Map::set_origin(Coords const new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	m_port_spaces = new_port_spaces;
+
+	m_overlay_manager.reset(new Overlay_Manager());
 }
 
 
@@ -464,8 +443,7 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 
 	m_pathfieldmgr->setSize(w * h);
 
-	if (not m_overlay_manager)
-		m_overlay_manager = new Overlay_Manager();
+	m_overlay_manager.reset(new Overlay_Manager());
 }
 
 /*
@@ -501,6 +479,10 @@ bool Map::get_scenario_player_closeable(const Player_Number p) const
 	assert(p);
 	assert(p <= get_nrplayers());
 	return m_scenario_closeables[p - 1];
+}
+
+FileSystem* Map::filesystem() const {
+	return filesystem_.get();
 }
 
 void Map::set_scenario_player_tribe(Player_Number const p, const std::string & tribename)
@@ -1688,25 +1670,24 @@ void Map::get_neighbour
 	}
 }
 
-Map_Loader * Map::get_correct_loader(const std::string& filename) {
-	Map_Loader * result = nullptr;
+std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename) {
+	std::unique_ptr<Map_Loader> result;
 
-	if (boost::algorithm::ends_with(filename, WLMF_SUFFIX)) {
+	std::string lower_filename = filename;
+	boost::algorithm::to_lower(lower_filename);
+
+	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
 		try {
-			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
+			result.reset(new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file (maybe old plain binary map
 			//  format)
 			//  TODO: catchall hides real errors! Replace with more specific code
 		}
-	} else if
-		(boost::algorithm::ends_with(filename, S2MF_SUFFIX) ||
-		 boost::algorithm::ends_with(filename, S2MF_SUFFIX2))
-	{
-		//  It is a S2 Map file. Load it as such.
-		result = new S2_Map_Loader(filename.c_str(), *this);
+	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
+	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
+		result.reset(new S2_Map_Loader(filename.c_str(), *this));
 	}
-
 	return result;
 }
 

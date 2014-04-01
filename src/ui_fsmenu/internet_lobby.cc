@@ -20,6 +20,7 @@
 #include "ui_fsmenu/internet_lobby.h"
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 
 #include "compile_diagnostics.h"
 #include "constants.h"
@@ -152,7 +153,18 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 
 	// prepare the lists
 	clientsonline .set_font(m_fn, m_fs);
-	clientsonline .add_column(22, "°");
+	std::string t_tip = (boost::format("%s%s%s%s%s%s%s%s%s%s")
+		% "<rt><p><font underline=yes>"
+		% _("User Status")
+		% "</font><br>"
+		% "<img src=pics/roadb_yellow.png> "
+		% _("Registered")
+		% "<br><img src=pics/roadb_green.png> "
+		% _("Administrator")
+		% "<br><img src=pics/roadb_red.png> "
+		% _("Unregistered")
+		%  "</p></rt>").str();
+	clientsonline .add_column(22, "°", t_tip);
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
 	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Game"));
@@ -300,7 +312,7 @@ void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<INet_Clien
 	// If a new player joins the lobby, play a sound.
 	if (clients.size() != m_prev_clientlist_len)
 	{
-		if (clients.size() > m_prev_clientlist_len)
+		if (clients.size() > m_prev_clientlist_len && !InternetGaming::ref().sound_off())
 			play_new_chat_member();
 		m_prev_clientlist_len = clients.size();
 	}
@@ -389,7 +401,7 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 				std::string warningheader(_("Connection timed out"));
 				std::string warning
 					(_
-						("Widelands has not been able to get the IP address of the server in time.\n"
+						("Widelands was unable to get the IP address of the server in time.\n"
 						 "There seems to be a network problem, either on your side or on the side\n"
 						 "of the server.\n"));
 				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
@@ -417,7 +429,7 @@ GCC_DIAG_ON("-Wold-style-cast")
 			InternetGaming::ref().set_game_done();
 			// Show a popup warning message
 			std::string warningheader(_("Connection problem"));
-			std::string warning(_("Widelands has not been able to connect to the host."));
+			std::string warning(_("Widelands was unable to connect to the host."));
 			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
 			mmb.run();
 		}

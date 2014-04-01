@@ -1,4 +1,4 @@
-help=_Cuts raw pieces of granite and marble out of laying stones.
+help=_Cuts raw pieces of granite and marble out of rocks.
 program=cut_stone
 program=cut_marble
 
@@ -27,23 +27,19 @@ carrier=1
 [idle]
 pics=idle_??.png
 hotspot=9 23
-playercolor=true
 fps=10
 
 [hacking]
 pics=hacking_??.png
 hotspot=8 23
-playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=9 22
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=8 25
-playercolor=true
 fps=10

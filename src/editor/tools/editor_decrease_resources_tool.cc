@@ -58,7 +58,7 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 		if
 		(res == args.cur_res
 		        and
-		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
+		        Editor_Change_Resource_Tool_Callback(mr.location(), map, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
 			std::string str =
@@ -100,6 +100,3 @@ Editor_Action_Args Editor_Decrease_Resources_Tool::format_args_impl(Editor_Inter
 	a.cur_res = m_cur_res;
 	return a;
 }
-
-
-

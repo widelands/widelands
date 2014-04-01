@@ -1,3 +1,3 @@
-use("map", "common_init")
+include "map:scripting/common_init.lua"
 
-include "init" -- Run the ordinary testsuite
+include "map:scripting/init.lua" -- Run the ordinary testsuite

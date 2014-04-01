@@ -15,22 +15,18 @@ bucket=1
 [idle]
 pics=idle_??.png
 hotspot=8 22
-playercolor=true
 
 [freeing]
 pics=freeing_??.png
 hotspot=10 19
-playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=11 23
-playercolor=true
 fps=20
 
 [walkload]
 dirpics=walk_!!_??.png
 hotspot=11 23
-playercolor=true
 fps=20

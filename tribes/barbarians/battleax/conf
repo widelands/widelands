@@ -1,0 +1,7 @@
+help=_This is a dangerous weapon the barbarians are able to produce. It is produced in the ax factory. Only trained warriors are able to wield such a weapon. It is used – together with food – in the training camp to train soldiers from attack level 3 to 4. 
+
+preciousness=1
+
+[idle]
+pics=idle.png
+hotspot=7 7

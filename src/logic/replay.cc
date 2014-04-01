@@ -111,7 +111,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 			throw wexception
 				("Replay of version %u is known to have desync problems", version);
 		if (version != REPLAY_VERSION)
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 
 		game.rng().ReadState(*m_cmdlog);
 	}
@@ -239,7 +239,7 @@ ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
-	game.cleanup_for_load(true, true);
+	game.cleanup_for_load();
 	{
 		Game_Loader gl(m_filename + WLGF_SUFFIX, game);
 		gl.load_game();

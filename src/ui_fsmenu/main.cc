@@ -47,7 +47,7 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 		(this, "multi_player",
 		 m_butx, get_h() * 37 / 100, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Multi Player"), std::string(), true, false),
+		 _("Multiplayer"), std::string(), true, false),
 	replay
 		(this, "replay",
 		 m_butx, get_h() * 87 / 200, m_butw, m_buth,

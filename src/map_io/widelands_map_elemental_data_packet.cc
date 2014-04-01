@@ -64,9 +64,9 @@ void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %i"), packet_version);
+				("unknown/unhandled version %i", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("elemental data: %s"), e.what());
+		throw game_data_error("elemental data: %s", e.what());
 	}
 }
 

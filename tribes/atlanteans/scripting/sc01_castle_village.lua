@@ -2,7 +2,7 @@
 --                    Castle Village Starting Conditions
 -- =======================================================================
 
-use("aux", "infrastructure")
+include "scripting/infrastructure.lua"
 
 set_textdomain("tribe_atlanteans")
 
@@ -28,7 +28,7 @@ return {
             quartz = 9,
             stone = 50,
             spideryarn = 9,
-            trunk = 13,
+            log = 13,
             goldyarn = 6,
             planks = 45,
             spidercloth = 5,
@@ -39,7 +39,7 @@ return {
             fish = 3,
             meat = 3,
             water = 12,
-            bakingtray = 2,
+            bread_paddle = 2,
             bucket = 2,
             fire_tongs = 2,
             fishing_net = 4,
@@ -84,24 +84,24 @@ return {
          wares = {bread = 4, smoked_fish = 3, smoked_meat = 3}
       })
 
-      place_building_in_region(plr, "armoursmithy", sf:region(11), {
+      place_building_in_region(plr, "armorsmithy", sf:region(11), {
          wares = { coal=4, gold =4 }
       })
       place_building_in_region(plr, "toolsmithy", sf:region(11), {
-         wares = { trunk = 6 }
+         wares = { log = 6 }
       })
       place_building_in_region(plr, "weaponsmithy", sf:region(11), {
          wares = { coal = 8, iron = 8 }
       })
 
       place_building_in_region(plr, "sawmill", sf:region(11), {
-         wares = { trunk = 1 }
+         wares = { log = 1 }
       })
    end) then
-      plr:send_message(_"Not enough space", _
-[[Some of your starting buildings didn't have enough room and
-weren't build. You are at an disadvantage with this; consider restarting
-this map with a fair starting condition.]], {popup=true}
+      plr:send_message(_"Not enough space", _(
+[[Some of your starting buildings didn’t have enough room and ]] ..
+[[weren’t built. You are at a disadvantage with this; consider restarting ]] ..
+[[this map with a fair starting condition.]]), {popup=true}
       )
    end
 

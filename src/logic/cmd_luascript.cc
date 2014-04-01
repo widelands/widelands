@@ -22,14 +22,15 @@
 #include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 
 namespace Widelands {
 
 void Cmd_LuaScript::execute (Game & game) {
-	log("Trying to run: %s, %s: ", m_ns.c_str(), m_script.c_str());
+	log("Trying to run: %s: ", script_.c_str());
 	try {
-		game.lua().run_script(m_ns, m_script);
+		game.lua().run_script(script_);
 	} catch (LuaScriptNotExistingError &) {
 		// The script has not been found.
 		log("not found.\n");
@@ -49,13 +50,12 @@ void Cmd_LuaScript::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_LUASCRIPT_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
-			m_ns = fr.String();
-			m_script = fr.String();
+			script_ = fr.String();
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("lua: %s"), e.what());
+		throw game_data_error("lua: %s", e.what());
 	}
 }
 void Cmd_LuaScript::Write
@@ -64,8 +64,7 @@ void Cmd_LuaScript::Write
 	fw.Unsigned16(CMD_LUASCRIPT_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);
 
-	fw.String(m_ns);
-	fw.String(m_script);
+	fw.String(script_);
 }
 
 }

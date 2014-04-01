@@ -1,5 +1,5 @@
 [Tip 1]
-text=_"You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
+text=_"You can find general help for the editor as well as a short tutorial on our wiki at www.widelands.org"
 sec=6
 
 [Tip 2]
@@ -7,15 +7,15 @@ text=_"You can select multiple nature object (bob) types if you hold down CTRL d
 sec=7
 
 [Tip 3]
-text=_"Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
+text=_"Just like with natural objects (bobs), you can also select multiple animals or ground textures with CTRL + mouse click."
 sec=6
 
 [Tip 4]
-text=_"Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete opposite of the normal tool (for example deletion of an object instead of placing one)."
+text=_"Holding down SHIFT switches the first alternative tool on. This tool is in most cases the complete opposite of the normal tool (for example deletion of an object instead of placing one)."
 sec=7
 
 [Tip 5]
-text=_"Holding down ALT switches second alternative tool on (if it exists)."
+text=_"Holding down ALT switches the second alternative tool on (if it exists)."
 sec=6
 
 [Tip 6]
@@ -23,6 +23,6 @@ text=_"The number keys (1 - 0) allow you to directly set the size of the selecte
 sec=6
 
 [Tip 7]
-text=_"SPACE key behaves like in normal game. It switches buildhelp on or off."
+text=_"SPACE key behaves like in normal game. It switches if building spaces are shown on or off."
 sec=6
 

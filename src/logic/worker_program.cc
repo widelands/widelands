@@ -19,6 +19,7 @@
 
 #include "logic/worker_program.h"
 
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "logic/findnode.h"
 #include "logic/game_data_error.h"
@@ -447,10 +448,8 @@ void WorkerProgram::parse_animation
 		// dynamically allocate animations here
 		descr->add_animation
 			(cmd[1].c_str(),
-			 (g_anim.get
-			  	(parser->directory.c_str(),
-			  	 parser->prof->get_safe_section(cmd[1].c_str()),
-			  	 nullptr)));
+			 (g_gr->animations().load(parser->directory,
+			  	 parser->prof->get_safe_section(cmd[1].c_str()))));
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 
@@ -466,7 +465,7 @@ void WorkerProgram::parse_animation
 /**
  * Return home, drop an ware we're carrying onto our building's flag.
  *
- * iparam1 = 0: don't dro ware on flag, 1: do dro ware on flag
+ * iparam1 = 0: don't drop ware on flag, 1: do drop ware on flag
  */
 void WorkerProgram::parse_return
 	(Worker_Descr                   *,
@@ -475,7 +474,7 @@ void WorkerProgram::parse_return
 	 const std::vector<std::string> &)
 {
 	act->function = &Worker::run_return;
-	act->iparam1 = 1; // drop an ware on our owner's flag
+	act->iparam1 = 1; // drop a ware on our owner's flag
 }
 
 

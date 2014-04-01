@@ -42,9 +42,9 @@ namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
 
-struct Path;
+class Map_Map_Object_Loader;
 class Player;
-struct Map_Map_Object_Loader;
+struct Path;
 
 /**
  * Base class for descriptions of worker, files and so on. This must just
@@ -153,7 +153,7 @@ class Map_Object : boost::noncopyable {
 public:
 	enum {
 		AREAWATCHER,
-		BOB,  //  struct Bob
+		BOB,  //  class Bob
 
 		WARE, //  class WareInstance
 		BATTLE,
@@ -279,8 +279,6 @@ public:
 		Loader() : m_egbase(nullptr), m_mol(nullptr), m_object(nullptr) {}
 
 	public:
-		typedef boost::function<void ()> FinishFn;
-
 		virtual ~Loader() {}
 
 		void init
@@ -298,17 +296,12 @@ public:
 			return ref_cast<T, Map_Object>(*m_object);
 		}
 
-		void add_finish(const FinishFn & fini);
-
 	protected:
 		void load(FileRead &);
 
 	public:
 		virtual void load_pointers();
 		virtual void load_finish();
-
-	private:
-		std::vector<FinishFn> m_finish;
 	};
 
 	/// This is just a fail-safe guard for the time until we fully transition

@@ -2,7 +2,7 @@ size=medium
 heal_per_second=170
 
 [buildcost]
-trunk=2
+log=2
 wood=2
 stone=2
 marble=3

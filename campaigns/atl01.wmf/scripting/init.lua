@@ -2,13 +2,13 @@
 --                      Atlanteans Tutorial Mission 01
 -- =======================================================================
 
-use("aux", "coroutine")
-use("aux", "table")
-use("aux", "infrastructure")
-use("aux", "objective_utils")
-use("aux", "ui")
+include "scripting/coroutine.lua"
+include "scripting/table.lua"
+include "scripting/infrastructure.lua"
+include "scripting/objective_utils.lua"
+include "scripting/ui.lua"
 
-use("map", "water_rising")
+include "map:scripting/water_rising.lua"
 
 -- ===================
 -- Constants & Config
@@ -27,7 +27,7 @@ second_tower_field = map:get_field(79, 150)
 expand_objective = nil
 let_the_water_rise = false -- If set to true, the water will begin to rise
 
-use("map", "texts")
+include "map:scripting/texts.lua"
 
 -- =================
 -- Helper functions
@@ -87,7 +87,7 @@ function initialize()
    p1:forbid_buildings{"shipyard"}
 
    -- A default headquarters
-   use("tribe_atlanteans", "sc00_headquarters_medium")
+   include "tribes/atlanteans/scripting/sc00_headquarters_medium.lua"
    init.func(p1) -- defined in sc00_headquarters_medium
    set_textdomain("scenario_atl01.wmf")
    local hq = wl.Game().map.player_slots[1].starting_field.immovable
@@ -169,7 +169,7 @@ function build_heavy_industrys_and_mining()
    local o = add_obj(obj_make_heavy_industry_and_mining)
    while not check_for_buildings(p1, {
       coalmine = 1, ironmine = 1, goldmine = 1, crystalmine = 1,
-      smelting_works = 1, weaponsmithy = 1, armoursmithy = 1,
+      smelting_works = 1, weaponsmithy = 1, armorsmithy = 1,
       toolsmithy = 1,
    }) do sleep(3478) end
    o.done = true

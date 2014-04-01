@@ -1,4 +1,4 @@
-help=_Cuts raw pieces of granite out of laying stones.
+help=_Cuts raw pieces of granite out of rocks.
 program=cut
 
 [buildcost]
@@ -18,22 +18,18 @@ carrier=1
 pics=idle_??.png
 hotspot=8 21
 fps=10
-playercolor=true
 
 [hacking]
 pics=hacking_??.png
 hotspot=8 25
 fps=10
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=9 24
 fps=10
-playercolor=true
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=7 22
 fps=10
-playercolor=true

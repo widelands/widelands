@@ -3,23 +3,22 @@
 [tribe]
 author=_The Widelands Development Team
 name=_Empire
-descr=_This is the culture of the roman Empire.
+descr=_This is the culture of the Roman Empire.
 bob_vision_range=2
 uiposition=20
 carrier2=donkey
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, trunk, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldstone, gold;    pick, axe, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bakingtray, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armour, chain_armour, plate_armour
+wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldore, gold;    pick, ax, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armor, chain_armor, plate_armor
 
-workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
+workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
 name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
-playercolor=true
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
@@ -27,41 +26,40 @@ name=flag
 pics=pics/flag_??.png
 hotspot=14 38
 fps=10
-playercolor=true
 
 [immovable types]
 ashes=_Ashes
-field0=_Field medium
-field0s=_Field small
-field0t=_Field tiny
-field1=_Field ripe
-field2=_Field harvested
-destroyed_building=_Destroyed building
-resi_coal1=_Resource indicator coal little
-resi_coal2=_Resource indicator coal much
-resi_gold1=_Resource indicator gold little
-resi_gold2=_Resource indicator gold much
-resi_granit1=_Resource indicator granite little
-resi_granit2=_Resource indicator granite much
-resi_iron1=_Resource indicator iron little
-resi_iron2=_Resource indicator iron much
-resi_none=_Resource indicator no resource
-resi_water1=_Resource indicator water
-wine0=_Vine medium
-wine0s=_Vine small
-wine0t=_Vine tiny
-wine1=_Vine ripe
-shipconstruction=_Ship construction site
+field0=_Field (medium)
+field0s=_Field (small)
+field0t=_Field (tiny)
+field1=_Field (ripe)
+field2=_Field (harvested)
+destroyed_building=_Destroyed Building
+resi_coal1=_Resource indicator: Coal (little)
+resi_coal2=_Resource indicator: Coal (much)
+resi_gold1=_Resource indicator: Gold (little)
+resi_gold2=_Resource indicator: Gold (much)
+resi_granit1=_Resource indicator: Granite (little)
+resi_granit2=_Resource indicator: Granite (much)
+resi_iron1=_Resource indicator: Iron (little)
+resi_iron2=_Resource indicator: Iron (much)
+resi_none=_Resource indicator: No resource
+resi_water1=_Resource indicator: Water
+wine0=_Vine (medium)
+wine0s=_Vine (small)
+wine0t=_Vine (tiny)
+wine1=_Vine (ripe)
+shipconstruction=_Ship Construction Site
 
 [ware types]
 advanced_lance=_Advanced Lance
-armour=_Armour
-axe=_Axe
-bakingtray=_Bread Paddle
+armor=_Armor
+ax=_Ax
+bread_paddle=_Bread Paddle
 basket=_Basket
 beer=_Beer
 bread=_Bread
-chain_armour=_Chain-Armour
+chain_armor=_Chain Armor
 cloth=_Cloth
 coal=_Coal
 fire_tongs=_Fire Tongs
@@ -69,7 +67,7 @@ fish=_Fish
 fishing_rod=_Fishing Rod
 flour=_Flour
 gold=_Gold
-goldstone=_Goldstone
+goldore=_Gold Ore
 grape=_Grape
 hammer=_Hammer
 heavy_lance=_Heavy Lance
@@ -84,13 +82,13 @@ marble=_Marble
 meal=_Meal
 meat=_Meat
 pick=_Pick
-plate_armour=_Plate-Armour
+plate_armor=_Plate Armor
 ration=_Ration
 saw=_Saw
 scythe=_Scythe
 shovel=_Shovel
 stone=_Stones
-trunk=_Trunk
+log=_Log
 war_lance=_War-Lance
 water=_Water
 wheat=_Wheat
@@ -107,7 +105,7 @@ donkey=_Donkey
 soldier=_Soldier
 
 [worker types]
-armoursmith=_Armoursmith
+armorsmith=_Armorsmith
 baker=_Baker
 brewer=_Brewer
 builder=_Builder
@@ -157,23 +155,22 @@ citadel.barbarians=_Citadel
 donjon.barbarians=_Donjon
 fortress.barbarians=_Fortress
 sentry.barbarians=_Sentry
-stronghold.barbarians=_Stronghold
 
 [warehouse types]
 headquarters=_Headquarters
-headquarters_shipwreck=_Headquarters shipwreck
+headquarters_shipwreck=_Headquarters Shipwreck
 warehouse=_Warehouse
 port=_Port
 
 [productionsite types]
 quarry=_Quarry
-lumberjacks_house=_Lumberjack's House
-foresters_house=_Forester's House
-fishers_house=_Fisher's House
-hunters_house=_Hunter's House
+lumberjacks_house=_Lumberjack’s House
+foresters_house=_Forester’s House
+fishers_house=_Fisher’s House
+hunters_house=_Hunter’s House
 well=_Well
-scouts_house=_"Scout's House"
-stonemasons_house=_Stonemason's House
+scouts_house=_Scout’s House
+stonemasons_house=_Stonemason’s House
 sawmill=_Sawmill
 mill=_Mill
 bakery=_Bakery
@@ -186,9 +183,9 @@ burners_house=_Charcoal Burner
 smelting_works=_Smelting Works
 shipyard=_Shipyard
 toolsmithy=_Toolsmithy
-armoursmithy=_Armour Smithy
-donkeyfarm=_Donkeyfarm
-sheepfarm=_Sheepfarm
+armorsmithy=_Armor Smithy
+donkeyfarm=_Donkey Farm
+sheepfarm=_Sheep Farm
 weaving-mill=_Weaving Mill
 piggery=_Piggery
 farm=_Farm
@@ -216,11 +213,11 @@ fortress=_Fortress
 [trainingsite types]
 colosseum=_Colosseum
 arena=_Arena
-trainingscamp=_Trainingscamp
+trainingcamp=_Training Camp
 
 [initializations]
-headquarters_medium=_Headquarters medium
-castle_village=_Castle village
+headquarters_medium=_Headquarters Medium
+castle_village=_Castle Village
 
 [military_data]
 retreat_interval=10-90

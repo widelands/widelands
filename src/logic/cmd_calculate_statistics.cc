@@ -41,9 +41,9 @@ void Cmd_CalculateStatistics::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("calculate statistics function: %s"), e.what());
+		throw game_data_error("calculate statistics function: %s", e.what());
 	}
 }
 void Cmd_CalculateStatistics::Write

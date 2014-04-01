@@ -274,7 +274,6 @@ void Editor_Game_Base::postload()
 void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 {
 	loader_ui.step(_("Loading world data"));
-	g_gr->flush_animations();
 
 	g_gr->set_world(m_map->get_world_name());
 	m_map->load_graphics(); // especially loads world data
@@ -285,8 +284,6 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 	}
 
 	// TODO: load player graphics? (maybe)
-
-	g_gr->load_animations();
 }
 
 /**
@@ -355,7 +352,7 @@ Building & Editor_Game_Base::warp_dismantlesite
  *
  * idx is the bob type.
  */
-Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr, Player * owner)
+Bob & Editor_Game_Base::create_bob(Coords c, const BobDescr & descr, Player * owner)
 {
 	return descr.create(*this, owner, c);
 }
@@ -363,9 +360,9 @@ Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr, Player * 
 
 Bob & Editor_Game_Base::create_bob
 	(Coords const c,
-	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe, Player * owner)
+	 BobDescr::Index const idx, Tribe_Descr const * const tribe, Player * owner)
 {
-	const Bob::Descr & descr =
+	const BobDescr & descr =
 		*
 		(tribe ?
 		 tribe->get_bob_descr(idx)
@@ -379,7 +376,7 @@ Bob & Editor_Game_Base::create_bob
 	(Coords c, const std::string & name, const Widelands::Tribe_Descr * const tribe,
 	 Player * owner)
 {
-	const Bob::Descr * descr =
+	const BobDescr * descr =
 		tribe ?
 		tribe->get_bob_descr(name) :
 		m_map->get_world()->get_bob_descr(name);
@@ -497,21 +494,9 @@ void Editor_Game_Base::remove_trackpointer(uint32_t serial)
  *
  * make this object ready to load new data
  */
-void Editor_Game_Base::cleanup_for_load
-	(bool const flush_graphics, bool const flush_animations)
+void Editor_Game_Base::cleanup_for_load()
 {
 	cleanup_objects(); /// Clean all the stuff up, so we can load.
-
-	//  We do not flush the animations in the editor since all tribes are loaded
-	//  and animations can not change a lot, or?
-	//  And we especially do not flush anything, if nothing is loaded == dedicated server
-	if (g_gr) {
-		if (flush_animations)
-			g_anim.flush();
-		if (flush_graphics)
-			g_gr->flush_animations(); // flush all world animations
-	}
-
 	m_player_manager->cleanup();
 
 	if (m_map)

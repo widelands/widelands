@@ -2,7 +2,7 @@
 --                    Start conditions for Citadel Village
 -- =======================================================================
 
-use("aux", "infrastructure")
+include "scripting/infrastructure.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -24,12 +24,12 @@ return {
    if not pcall(function()
        place_building_in_region(plr, "warehouse", sf:region(7), {
          wares = {
-            axe = 5,
-            bakingtray = 2,
+            ax = 5,
+            bread_paddle = 2,
             blackwood = 32,
             cloth = 5,
             coal = 1,
-            felling_axe = 4,
+            felling_ax = 4,
             fire_tongs = 2,
             fishing_rod = 2,
             grout = 12,
@@ -45,14 +45,14 @@ return {
             shovel = 4,
             snack = 3,
             thatchreed = 24,
-            trunk = 79,
+            log = 79,
          },
          workers = {
             brewer = 1,
             builder = 10,
             burner = 1,
             carrier = 38,
-            ferner = 1,
+            gardener = 1,
             geologist = 4,
             lumberjack = 2,
             miner = 4,
@@ -73,7 +73,7 @@ return {
          }
       })
 
-      place_building_in_region(plr, "trainingscamp", sf:region(12))
+      place_building_in_region(plr, "trainingcamp", sf:region(12))
 
       place_building_in_region(plr, "helmsmithy", sf:region(12), {
          wares = { iron = 4, gold = 4 }
@@ -81,22 +81,21 @@ return {
       place_building_in_region(plr, "metalworks", sf:region(12), {
          wares = { iron = 8 },
       })
-      place_building_in_region(plr, "axefactory", sf:region(12), {
+      place_building_in_region(plr, "axfactory", sf:region(12), {
          wares = { coal = 8 },
       })
       place_building_in_region(plr, "hardener", sf:region(12), {
-         wares = { trunk = 1 },
+         wares = { log = 1 },
       })
       place_building_in_region(plr, "lime_kiln", sf:region(12), {
          wares = { raw_stone = 6, coal = 3 },
       })
    end) then
-      plr:send_message(_"Not enough space", _ 
-[[Some of your starting buildings didn't have enough room and 
-weren't build. You are at an disadvantage with this; consider restarting 
-this map with a fair starting condition.]], {popup=true}
+      plr:send_message(_"Not enough space", _(
+[[Some of your starting buildings didn’t have enough room and ]] ..
+[[weren’t built. You are at a disadvantage with this; consider restarting ]] ..
+[[this map with a fair starting condition.]]), {popup=true}
       )
    end
 end,
 }
-

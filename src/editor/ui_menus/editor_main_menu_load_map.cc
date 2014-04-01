@@ -67,35 +67,35 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Name: "), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author: "), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Size: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Size:"), UI::Align_CenterLeft);
 	m_size =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("World: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("World:"), UI::Align_CenterLeft);
 	m_world =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Players: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Players:"), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
@@ -103,7 +103,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Descr: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Descr:"), UI::Align_CenterLeft);
 	m_descr =
 		new UI::Multiline_Textarea
 			(this,
@@ -165,9 +165,8 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			Widelands::Map_Loader * const m_ml = map.get_correct_loader(name);
-			m_ml->preload_map(true); //  This has worked before, no problem.
-			delete m_ml;
+			std::unique_ptr<Widelands::Map_Loader> map_loader = map.get_correct_loader(name);
+			map_loader->preload_map(true); //  This has worked before, no problem.
 		}
 
 		// get translated worldsname
@@ -211,7 +210,7 @@ void Main_Menu_Load_Map::double_clicked(uint32_t) {clicked_ok();}
  */
 void Main_Menu_Load_Map::fill_list() {
 	//  Fill it with all files we find.
-	g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
+	m_mapfiles = g_fs->ListDirectory(m_curdir);
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
@@ -221,6 +220,7 @@ void Main_Menu_Load_Map::fill_list() {
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
 		std::string parent_string =
+				/** TRANSLATORS: Parent directory */
 				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_ls->add
 			(parent_string.c_str(),
@@ -255,17 +255,16 @@ void Main_Menu_Load_Map::fill_list() {
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
-
-		if (Widelands::Map_Loader * const m_ml = map.get_correct_loader(name)) {
+		std::unique_ptr<Widelands::Map_Loader> map_loader = map.get_correct_loader(name);
+		if (map_loader.get() != nullptr) {
 			try {
-				m_ml->preload_map(true);
+				map_loader->preload_map(true);
 				m_ls->add
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader const *>(m_ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+						 (dynamic_cast<WL_Map_Loader*>(map_loader.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const _wexception &) {} //  we simply skip illegal entries
-			delete m_ml;
 		}
 	}
 

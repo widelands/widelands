@@ -69,6 +69,6 @@ private:
 };
 
 int32_t Editor_Change_Resource_Tool_Callback
-	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(const Widelands::TCoords<Widelands::FCoords>&, Widelands::Map&, int32_t);
 
 #endif

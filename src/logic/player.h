@@ -160,7 +160,7 @@ public:
 			//  important for worlds where the number of terrain types is not
 			//  maximal (16), so that an uninitialized terrain index could cause a
 			//  not found error in
-			//  Descr_Maintainer<Terrain_Descr>::get(Terrain_Index).
+			//  DescriptionMaintainer<Terrain_Descr>::get(Terrain_Index).
 			terrains.d = terrains.r = 0;
 
 			time_triangle_last_surveyed[0] = Never();

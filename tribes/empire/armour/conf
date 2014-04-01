@@ -1,6 +1,0 @@
-help=_Basic armour for Empire soldiers. It is produced in the armour smithy and used in the trainingscamp - together with food- to train soldiers from healthpoints level 1 to healthpoints level 2.
-preciousness=0
-
-[idle]
-pics=idle.png
-hotspot=3 11

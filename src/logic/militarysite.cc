@@ -58,10 +58,15 @@ m_heal_per_second    (0)
 	m_conquer_radius      = global_s.get_safe_int("conquers");
 	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
 	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
-	if (m_conquer_radius > 0)
-		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
-	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
 
+	if (m_conquer_radius > 0)
+		m_workarea_info[m_conquer_radius].insert(descname() + " conquer");
+	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
+	m_occupied_str = global_s.get_safe_string("occupied_string");
+	m_aggressor_str = global_s.get_safe_string("aggressor_string");
+	m_attack_str = global_s.get_safe_string("attack_string");
+	m_defeated_enemy_str = global_s.get_safe_string("defeated_enemy_string");
+	m_defeated_you_str = global_s.get_safe_string("defeated_you_string");
 }
 
 /**
@@ -122,7 +127,9 @@ std::string MilitarySite::get_statistics_string()
 	} else {
 		snprintf
 			(buffer, sizeof(buffer),
-			 ngettext("%u(+%u) soldier", "%u(+%u) soldiers", total),
+			/** TRANSLATORS: %1$u is the number of soldiers the plural refers to */
+			/** TRANSLATORS: %2$u are open soldier slots in the building */
+			 ngettext("%1$u(+%2$u) soldier", "%1$u(+%2$u) soldiers", total),
 			 present, total - present);
 	}
 	str = buffer;
@@ -234,16 +241,11 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 		start_animation(egbase, descr().get_animation("idle"));
 
 		if (upcast(Game, game, &egbase)) {
-			char message[256];
-			snprintf
-				(message, sizeof(message),
-				 _("Your soldiers occupied your %s."),
-				 descname().c_str());
 			send_message
 				(*game,
 				 "site_occupied",
 				 descname(),
-				 message,
+				 descr().m_occupied_str,
 				 true);
 		}
 	}
@@ -835,16 +837,11 @@ bool MilitarySite::attack(Soldier & enemy)
 		// The enemy has defeated our forces, we should inform the player
 		const Coords coords = get_position();
 		{
-			char message[2048];
-			snprintf
-				(message, sizeof(message),
-				 _("The enemy defeated your soldiers at the %s."),
-				 descname().c_str());
 			send_message
 				(game,
 				 "site_lost",
 				 _("Militarysite lost!"),
-				 message,
+				 descr().m_defeated_enemy_str,
 				 false);
 		}
 
@@ -894,16 +891,11 @@ bool MilitarySite::attack(Soldier & enemy)
 		newsite->reinit_after_conqueration(game);
 
 		// Of course we should inform the victorious player as well
-		char message[2048];
-		snprintf
-			(message, sizeof(message),
-			 _("Your soldiers defeated the enemy at the %s."),
-			 newsite->descname().c_str());
 		newsite->send_message
 			(game,
 			 "site_defeated",
 			 _("Enemy at site defeated!"),
-			 message,
+			 newsite->descr().m_defeated_you_str,
 			 true);
 
 		return false;
@@ -943,21 +935,14 @@ bool MilitarySite::military_presence_kept(Game & game)
 /// Informs the player about an attack of his opponent.
 void MilitarySite::informPlayer(Game & game, bool const discovered)
 {
-	char message[2048];
-	snprintf
-		(message, sizeof(message),
-		 discovered ?
-		 _("Your %s discovered an aggressor.</p>") :
-		 _("Your %s is under attack.</p>"),
-		 descname().c_str());
-
 	// Add a message as long as no previous message was send from a point with
 	// radius <= 5 near the current location in the last 60 seconds
 	send_message
 		(game,
 		 "under_attack",
 		 _("You are under attack"),
-		 message, false,
+		 discovered ? descr().m_aggressor_str : descr().m_attack_str,
+		 false,
 		 60 * 1000, 5);
 }
 

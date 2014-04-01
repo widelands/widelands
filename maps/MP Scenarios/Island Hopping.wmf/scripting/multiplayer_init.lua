@@ -1,10 +1,10 @@
 -- =================================
 -- Island Hopping Fun Map Scripting
 -- =================================
-use("aux", "coroutine")
-use("aux", "infrastructure")
-use("aux", "formatting")
-use("aux", "objective_utils")
+include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
+include "scripting/formatting.lua"
+include "scripting/objective_utils.lua"
 
 -- ==========
 -- Constants
@@ -50,22 +50,24 @@ _finish_areas = {
       map:get_field( 26,161):region(3)  -- player 4
    }
 }
+
+-- if you add a new resource type here, make sure it is also listed in getplural(count, resource) below
 _finish_rewards = {
    { -- Island 1
       { -- 1st to finish
-         trunk = 25, planks = 15, stone = 10,
+         log = 25, planks = 15, stone = 10,
          spidercloth = 5, corn = 20,
       },
       { -- 2st to finish
-         trunk = 45, planks = 30, stone = 20,
+         log = 45, planks = 30, stone = 20,
          spidercloth = 7, corn = 25,
       },
       { -- 3rd to finish
-         trunk = 65, planks = 45, stone = 30,
+         log = 65, planks = 45, stone = 30,
          spidercloth = 9, corn = 30,
       },
       { -- 4th to finish
-         trunk = 85, planks = 50, stone = 40,
+         log = 85, planks = 50, stone = 40,
          spidercloth = 11, corn = 35,
       }
    },
@@ -89,24 +91,53 @@ hill = map:get_field(0,0):region(3)
 -- ==================
 -- Utility functions
 -- ==================
+
+-- Sends a game status message to all players
 function send_to_all(text)
    for idx,plr in ipairs(game.players) do
       plr:send_message(_ "Game Status", text, {popup=true})
    end
 end
 
+-- Returns a list of rewards from _finish_rewards, formatted with getplural(count, resource)
 function format_rewards(r)
    rv = {}
    for name,count in pairs(r) do
-      rv[#rv + 1] = (_"%i %s<br>\n"):format(count, name)
+      rv[#rv + 1] = getplural(count, name) .. "<br>\n"
    end
    return table.concat(rv)
 end
 
 
-use("map", "texts")
-use("map", "hop_island")
-use("map", "first_island")
+-- This function gets the translated text according to each language's plural rules
+-- for the resources in _finish_rewards
+function getplural(count, resource)
+   if  resource == "log" then
+      return ngettext("%s Log","%s Logs",count):bformat(count)
+   elseif  resource == "planks" then
+      return ngettext("%s Plank","%s Planks",count):bformat(count)
+   elseif  resource == "stone" then
+      return ngettext("%s Stone","%s Stones",count):bformat(count)
+   elseif  resource == "spidercloth" then
+      return ngettext("%s Spidercloth","%s Spidercloths",count):bformat(count)
+   elseif  resource == "corn" then
+      return ngettext("%s Corn","%s Corn",count):bformat(count)
+   elseif  resource == "coal" then
+      return ngettext("%s Coal","%s Coal",count):bformat(count)
+   elseif  resource == "ironore" then
+      return ngettext("%s Iron Ore","%s Iron Ore",count):bformat(count)
+   elseif  resource == "goldore" then
+      return ngettext("%s Gold Ore","%s Gold Ore",count):bformat(count)
+   else
+      -- TRANSLATORS: number + resource name, e.g. '1 stone'
+      return (_"%1$i %2$s"):bformat(count, resource)
+   end
+end
+
+
+include "map:scripting/texts.lua"
+include "map:scripting/hop_island.lua"
+include "map:scripting/first_island.lua"
 
 -- ===============
 -- Initialization
@@ -139,7 +170,7 @@ function place_headquarters()
             quartz = 9,
             stone = 50,
             spideryarn = 9,
-            trunk = 20,
+            log = 20,
             coal = 12,
             gold = 4,
             goldyarn = 6,
@@ -156,7 +187,7 @@ function place_headquarters()
             smoked_fish = 6,
             smoked_meat = 6,
             water = 12,
-            bakingtray = 2,
+            bread_paddle = 2,
             bucket = 2,
             fire_tongs = 2,
             fishing_net = 4,
@@ -172,7 +203,7 @@ function place_headquarters()
             light_trident = 5,
          },
          workers = {
-            armoursmith = 1,
+            armorsmith = 1,
             blackroot_farmer = 1,
             builder = 10,
             burner = 1,

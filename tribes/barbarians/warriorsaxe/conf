@@ -1,7 +1,0 @@
-help=_The warriors axe is the most dangerous of all Barbarian weapons. Only a few warriors ever were able to handle those huge and powerful axes. It is produced in a war mill and used -together with food - in a trainingscamp to train soldiers from attack level 4 to level 5.
-
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=7 7

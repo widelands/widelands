@@ -19,6 +19,8 @@
 
 #include "scripting/lua_game.h"
 
+#include <boost/format.hpp>
+
 #include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -1081,10 +1083,13 @@ int L_Objective::set_done(lua_State * L) {
 	}
 
 	if (o.done()) {
-		std::string filename = get_egbase(L).get_map()->get_name();
-		char buffer[128];
-		snprintf(buffer, sizeof(buffer), _(" (achieved %s)"), o.descname().c_str());
-		filename.append(buffer);
+		/** TRANSLATORS: File name for saving objective achieved */
+		/** TRANSLATORS: %1$s = map name. %2$s = achievement name */
+		std::string filename = (boost::format
+			(_("%1$s (achieved %2$s)"))
+			% get_egbase(L).get_map()->get_name()
+			% o.descname().c_str()
+		).str();
 		get_game(L).save_handler().request_save(filename);
 	}
 	return 0;

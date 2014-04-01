@@ -1,4 +1,4 @@
-help=_Works at construction sites to raise a new building.
+help=_Works at construction sites to raise new buildings.
 
 [buildcost]
 hammer=1
@@ -7,24 +7,20 @@ carrier=1
 [idle]
 pics=waiting_???.png
 hotspot=11 21
-playercolor=true
 fps=10
 
 [work]
 pics=work_??.png
 sfx=0 ../../../sound/hammering/hammering
 hotspot=10 21
-playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=7 22
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walk_!!_??.png
 hotspot=7 22
-playercolor=true
 fps=10

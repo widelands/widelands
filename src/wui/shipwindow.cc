@@ -119,7 +119,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 
 		m_btn_explore_island_cw =
 			make_button
-				(exp_top, "expcw", _("Explore the island's coast clockwise"), pic_explore_cw,
+				(exp_top, "expcw", _("Explore the island’s coast clockwise"), pic_explore_cw,
 				 boost::bind(&ShipWindow::act_explore_island, this, true));
 		exp_top->add(m_btn_explore_island_cw, 0, false);
 
@@ -155,7 +155,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 
 		m_btn_explore_island_ccw =
 			make_button
-				(exp_bot, "expccw", _("Explore the island's coast counter clockwise"), pic_explore_ccw,
+				(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"), pic_explore_ccw,
 				 boost::bind(&ShipWindow::act_explore_island, this, false));
 		exp_bot->add(m_btn_explore_island_ccw, 0, false);
 

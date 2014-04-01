@@ -179,8 +179,7 @@ public:
 	void load_fx_if_needed
 		(const std::string & dir,
 		 const std::string & filename,
-		 const std::string & fx_name,
-		 bool                recursive = false);
+		 const std::string & fx_name);
 	void play_fx
 		(const std::string & fx_name,
 		 Widelands::Coords   map_position,
@@ -192,8 +191,7 @@ public:
 
 	void register_song
 		(const std::string & dir,
-		 const std::string & basename,
-		 bool                recursive = false);
+		 const std::string & basename);
 	void start_music(const std::string & songset_name, int32_t fadein_ms = 0);
 	void stop_music(int32_t fadeout_ms = 0);
 	void change_music

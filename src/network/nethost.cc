@@ -21,8 +21,10 @@
 
 #include <sstream>
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+#include <libintl.h>
 #ifndef _WIN32
 #include <unistd.h> // for usleep
 #endif
@@ -32,6 +34,7 @@
 #include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
@@ -211,7 +214,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerState(number, newstate, true);
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe) override
+	virtual void setPlayerTribe
+		(uint8_t const number, const std::string & tribe, bool const random_tribe) override
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -281,31 +285,30 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerNumber(number);
 	}
 
-	virtual std::string getWinCondition() override {
-		return h->settings().win_condition;
+	virtual std::string getWinConditionScript() override {
+		return h->settings().win_condition_script;
 	}
 
-	virtual void setWinCondition(std::string wc) override {
-		h->setWinCondition(wc);
+	virtual void setWinConditionScript(std::string wc) override {
+		h->setWinConditionScript(wc);
 	}
 
 	virtual void nextWinCondition() override {
-		if (m_win_conditions.size() < 1) {
-			// Register win condition scripts
+		if (m_win_condition_scripts.size() < 1) {
 			if (!m_lua)
 				m_lua = new LuaInterface();
-			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-
-			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
-			container_iterate_const(ScriptContainer, sc, wc)
-			m_win_conditions.push_back(wc->first);
+			std::set<std::string> win_conditions =
+			   filter(g_fs->ListDirectory("scripting/win_conditions"),
+			          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
+			m_win_condition_scripts.insert(
+			   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
 			m_cur_wincondition = -1;
 		}
 
 		if (canChangeMap()) {
 			m_cur_wincondition++;
-			m_cur_wincondition %= m_win_conditions.size();
-			setWinCondition(m_win_conditions[m_cur_wincondition]);
+			m_cur_wincondition %= m_win_condition_scripts.size();
+			setWinConditionScript(m_win_condition_scripts[m_cur_wincondition]);
 		}
 	}
 
@@ -313,7 +316,7 @@ private:
 	NetHost                * h;
 	LuaInterface           * m_lua;
 	int16_t                  m_cur_wincondition;
-	std::vector<std::string> m_win_conditions;
+	std::vector<std::string> m_win_condition_scripts;
 };
 
 struct HostChatProvider : public ChatProvider {
@@ -364,14 +367,21 @@ struct HostChatProvider : public ChatProvider {
 			// Help
 			if (cmd == "help") {
 				c.msg =
-					_
-					 ("<br>Available host commands are:<br>"
-					  "/help  -  Shows this help<br>"
-					  "/announce <msg>  -  Send a chatmessage as announcement (system chat)<br>"
-					  "/warn <name> <reason>  -  Warn the user <name> because of <reason><br>"
-					  "/kick <name> <reason>  -  Kick the user <name> because of <reason><br>"
-					  "/forcePause            -  Force the game to pause.<br>"
-					  "/endForcedPause        -  Puts game back to normal speed.");
+					(boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s")
+						% _("Available host commands are:")
+						/** TRANSLATORS: Available host command */
+						% _("/help  -  Shows this help")
+						/** TRANSLATORS: Available host command */
+						% _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
+						/** TRANSLATORS: Available host command */
+						% _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
+						/** TRANSLATORS: Available host command */
+						% _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
+						/** TRANSLATORS: Available host command */
+						% _("/forcePause            -  Force the game to pause.")
+						/** TRANSLATORS: Available host command */
+						% _("/endForcedPause        -  Return game to normal speed.")
+					).str();
 				if (!h->isDedicated())
 					c.recipient = h->getLocalPlayername();
 			}
@@ -435,8 +445,8 @@ struct HostChatProvider : public ChatProvider {
 						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
 					else {
 						kickClient = num;
-						c.msg  = (format(_("Are you sure you want to kick %s?<br>")) % arg1).str();
-						c.msg += (format(_("The stated reason was: %s<br>")) % kickReason).str();
+						c.msg  = (format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
+						c.msg += (format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
 						c.msg += (format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
@@ -641,7 +651,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	Widelands::Tribe_Descr::get_all_tribe_infos(d->settings.tribes);
+	d->settings.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
 	setMultiplayerGameSettings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -823,7 +833,7 @@ void NetHost::run(bool const autorun)
 				Widelands::Game_Preload_Data_Packet gpdp;
 				gl.preload_game(gpdp);
 
-				setWinCondition(gpdp.get_win_condition());
+				setWinConditionScript(gpdp.get_win_condition());
 			}
 		} else {
 			loaderUI.reset(new UI::ProgressWindow ("pics/progress.png"));
@@ -848,7 +858,7 @@ void NetHost::run(bool const autorun)
 				Widelands::Game_Preload_Data_Packet gpdp;
 				gl.preload_game(gpdp);
 
-				setWinCondition(gpdp.get_win_condition());
+				setWinConditionScript(gpdp.get_win_condition());
 			}
 
 			if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
@@ -1198,20 +1208,27 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	if (cmd == "help") {
 		if (d->game)
 			c.msg =
-				_
-				("<br>Available host commands are:<br>"
-				 "help   - Shows this help<br>"
-				 "host $ - Tries to run the host command $<br>"
-				 "save $ - Saves the current game state as $.wgf");
+				(boost::format("<br>%s<br>%s<br>%s<br>%s")
+					% _("Available host commands are:")
+					/** TRANSLATORS: Available host command */
+					% _("/help  -  Shows this help")
+					/** TRANSLATORS: Available host command */
+					% _("host $ - Tries to run the host command $")
+					/** TRANSLATORS: Available host command */
+					% _("save $ - Saves the current game state as $.wgf")
+				).str();
 		else
 			c.msg =
-				_
-				("<br>Available host commands are:<br>"
-				 "help           - Shows this help<br>"
-				 "host         $ - Tries to run the host command $");
+				(boost::format("<br>%s<br>%s<br>%s")
+					% _("Available host commands are:")
+					/** TRANSLATORS: Available host command */
+					% _("/help  -  Shows this help")
+					/** TRANSLATORS: Available host command */
+					% _("host $ - Tries to run the host command $")
+				).str();
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
-			c.msg += _("pwd          $ - Sends the password $ to the host");
+			c.msg += _("pwd $  - Sends the password $ to the host");
 		}
 		send(c);
 
@@ -1223,7 +1240,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			return;
 		}
 		std::string temp = arg1 + " " + arg2;
-		c.msg = (format(_("%s told me to run the command: \"%s\"")) % sender % temp).str();
+		c.msg = (format(_("%1$s told me to run the command: \"%2$s\"")) % sender % temp).str();
 		c.recipient = "";
 		send(c);
 		d->chat.send(temp);
@@ -1235,7 +1252,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = _("Sorry! Saving was deactivated on this dedicated server!");
 			send(c);
 		} else if (!d->game) {
-			c.msg = _("Can not save, as long as no game is running!");
+			c.msg = _("Cannot save while there is no game running!");
 			send(c);
 		} else {
 			//try to save the game
@@ -1248,7 +1265,10 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			if (sh.save_game(*d->game, savename, error))
 				c.msg = _("Game successfully saved!");
 			else
-				c.msg = (format(_("Could not save the game to the file \"%s\"! (%s)")) % savename % error).str();
+				c.msg =
+					(format(_("Could not save the game to the file \"%1$s\"! (%2$s)"))
+					 % savename % error)
+					 .str();
 			send(c);
 			delete error;
 		}
@@ -1290,14 +1310,13 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		std::vector<std::string> directories;
 		directories.push_back("maps");
 		while (!directories.empty()) {
-			filenameset_t files;
-			g_fs->FindFiles(directories.at(directories.size() - 1).c_str(), "*", &files, 0);
+			filenameset_t files = g_fs->ListDirectory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
 			const filenameset_t & gamefiles = files;
 			container_iterate_const(filenameset_t, gamefiles, i) {
 				char const * const name = i.current->c_str();
-				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 				if (ml) {
 					map.set_filename(name);
 					ml->preload_map(true);
@@ -1306,7 +1325,6 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 					info.players  = map.get_nrplayers();
 					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
 					d->settings.maps.push_back(info);
-					delete ml;
 				} else {
 					if
 						(g_fs->IsDirectory(name)
@@ -1324,8 +1342,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 
 	if (d->settings.saved_games.empty()) {
 		// Read in saved games
-		filenameset_t files;
-		g_fs->FindFiles("save", "*", &files, 0);
+		filenameset_t files = g_fs->ListDirectory("save");
 		Widelands::Game game;
 		Widelands::Game_Preload_Data_Packet gpdp;
 		const filenameset_t & gamefiles = files;
@@ -1780,9 +1797,9 @@ void NetHost::setPlayerNumber(uint8_t const number)
 	switchToPlayer(0, number);
 }
 
-void NetHost::setWinCondition(std::string wc)
+void NetHost::setWinConditionScript(std::string wc)
 {
-	d->settings.win_condition = wc;
+	d->settings.win_condition_script = wc;
 
 	// Broadcast changes
 	SendPacket s;
@@ -1982,7 +1999,7 @@ std::string NetHost::getComputerPlayerName(uint8_t const playernum)
 	uint32_t suffix = playernum;
 	do {
 		char buf[200];
-		snprintf(buf, sizeof(buf), _("Computer%u"), ++suffix);
+		snprintf(buf, sizeof(buf), _("Computer %u"), ++suffix);
 		name = buf;
 	} while (haveUserName(name, playernum));
 	return name;
@@ -2056,7 +2073,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 		do {
 			char buf[32];
 			snprintf(buf, sizeof(buf), "%u", i++);
-			effective_name = playername + buf;
+			effective_name = (boost::format(_("Player %s")) % buf).str();
 		} while (haveUserName(effective_name, client.usernum));
 	}
 
@@ -2114,7 +2131,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 
 	s.reset();
 	s.Unsigned8(NETCMD_WIN_CONDITION);
-	s.String(d->settings.win_condition);
+	s.String(d->settings.win_condition_script);
 	s.send(client.sock);
 
 	// Broadcast new information about the player to everybody
@@ -2244,7 +2261,8 @@ void NetHost::checkHungClients()
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
 						char buf[5];
-						snprintf(buf, sizeof(buf), "%li", deltanow);
+						//snprintf(buf, sizeof(buf), "%li", deltanow);
+						snprintf(buf, sizeof(buf), ngettext("%li second", "%li seconds", deltanow), deltanow);
 						sendSystemMessageCode
 							("CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, buf);
 						d->clients.at(i).lastdelta = deltanow;
@@ -2639,14 +2657,13 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					// Check if file is a map and if yes read out the needed data
 					Widelands::Map   map;
 					i18n::Textdomain td("maps");
-					Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
-					if (ml) {
+					std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(path);
+					if (ml.get() != nullptr) {
 						// Yes it is a map file :)
 						map.set_filename(path.c_str());
 						ml->preload_map(true);
 						d->settings.scenario = scenario;
 						d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
-						delete ml;
 					}
 				}
 			}

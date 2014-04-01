@@ -1,8 +1,8 @@
-use("aux", "lunit")
-use("aux", "coroutine")
-use("aux", "ui")
+include "scripting/lunit.lua"
+include "scripting/coroutine.lua"
+include "scripting/ui.lua"
 
--- This is a test case for bug 1234058: there is constant demand for trunks,
+-- This is a test case for bug 1234058: there is constant demand for logs,
 -- so the expedition initially never got any.
 -- We also exercise the expedition feature and send the ship around, build a
 -- port and construct a building in the colony.
@@ -22,7 +22,7 @@ prefilled_buildings(p1,
       iron = 2,
       raw_stone = 5,
       thatchreed = 4,
-      trunk = 3,
+      log = 3,
    },
    workers = {
       builder = 1,
@@ -87,7 +87,7 @@ function check_wares_in_port_are_all_there(args)
    assert_equal(2, wares.iron)
    assert_equal(5, wares.raw_stone)
    assert_equal(4, wares.thatchreed)
-   -- We do not check for trunks here as they might be carried out of the
+   -- We do not check for logs here as they might be carried out of the
    -- warehouse already when we check (because they might get requested by the
    -- hardener).
    assert_equal(1, port:get_workers("builder"))
@@ -175,7 +175,7 @@ function test_cancel_started_expedition_on_ship()
 
    -- Start a new expedition.
    start_expedition()
-   wait_for_message("Expedition ready")
+   wait_for_message("Expedition Ready")
    game.desired_speed = 10 * 1000
    sleep(10000)
 
@@ -206,7 +206,7 @@ function test_cancel_started_expedition_underway()
 
    -- Start a new expedition.
    start_expedition()
-   wait_for_message("Expedition ready")
+   wait_for_message("Expedition Ready")
    game.desired_speed = 10 * 1000
    sleep(10000)
 
@@ -236,13 +236,13 @@ function test_cancel_when_port_space_was_reached()
 
    -- Send expedition to port space.
    start_expedition()
-   wait_for_message("Expedition ready")
+   wait_for_message("Expedition Ready")
    assert_equal(1, p1:get_workers("builder"))
    sleep(500)
 
    click_on_ship(first_ship)
    assert_true(click_button("expccw"))
-   wait_for_message("Port space found")
+   wait_for_message("Port Space Found")
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
 
@@ -266,17 +266,17 @@ function test_transporting_works()
    sleep(100)
    game.desired_speed = 10 * 1000
 
-   -- Some optimization. No need to feed the hardener and to wait for trunks.
+   -- Some optimization. No need to feed the hardener and to wait for logs.
    p1:get_buildings("hardener")[1]:remove()
-   hq:set_wares("trunk", 100)
+   hq:set_wares("log", 100)
    port:set_wares("blackwood", 100)
 
 
    start_expedition()
-   wait_for_message("Expedition ready")
+   wait_for_message("Expedition Ready")
    click_on_ship(first_ship)
    assert_true(click_button("expccw"))
-   wait_for_message("Port space found")
+   wait_for_message("Port Space Found")
    assert_true(click_button("buildport"))
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))

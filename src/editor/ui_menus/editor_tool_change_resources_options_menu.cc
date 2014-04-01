@@ -46,7 +46,7 @@ Editor_Tool_Change_Resources_Options_Menu
 	m_change_by_label
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
-		 _("In-/Decrease Value"), UI::Align_BottomCenter),
+		 _("Increase/Decrease Value"), UI::Align_BottomCenter),
 	m_change_by_increase
 		(this, "incr_change_by",
 		 get_inner_w() - hmargin() - BUTTON_WIDTH,
@@ -213,8 +213,8 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 
 	Widelands::Map & map = ref_cast<Editor_Interactive, UI::Panel>(*get_parent())
 		.egbase().map();
-	map.overlay_manager().register_overlay_callback_function
-		(&Editor_Change_Resource_Tool_Callback, static_cast<void *>(&map), n);
+	map.overlay_manager().register_overlay_callback_function(
+	   boost::bind(&Editor_Change_Resource_Tool_Callback, _1, boost::ref(map), n));
 	map.recalc_whole_map();
 	select_correct_tool();
 

@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=blackrootfield_m_00.png
 
 [program]
 animate=midd 50000

@@ -23,6 +23,7 @@
 
 #include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
@@ -115,10 +116,11 @@ void Building_Window::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
-	dst.drawstatic
-			(Point(get_inner_w() / 2, get_inner_h() / 2),
-			 building().get_ui_anim(),
-			 &building().owner());
+	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
+
+	const Image* dark_frame = ImageTransformations::change_luminosity
+		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
+	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, CM_Normal, UI::Align_Center);
 }
 
 /*
@@ -308,7 +310,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 0, 0, 34, 34,
 				 g_gr->images().get("pics/but4.png"),
 				 g_gr->images().get("pics/workarea123.png"),
-				 _("Hide workarea"));
+				 _("Hide work area"));
 			m_toggle_workarea->sigclicked.connect
 				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
 
@@ -511,10 +513,10 @@ void Building_Window::configure_workarea_button()
 {
 	if (m_toggle_workarea) {
 		if (m_workarea_job_id) {
-			m_toggle_workarea->set_tooltip(_("Hide workarea"));
+			m_toggle_workarea->set_tooltip(_("Hide work area"));
 			m_toggle_workarea->set_perm_pressed(true);
 		} else {
-			m_toggle_workarea->set_tooltip(_("Show workarea"));
+			m_toggle_workarea->set_tooltip(_("Show work area"));
 			m_toggle_workarea->set_perm_pressed(false);
 		}
 	}

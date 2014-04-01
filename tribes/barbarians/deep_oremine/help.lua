@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_help")
+include "scripting/formatting.lua"
+include "scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -9,11 +9,11 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/deeper_oremine/deeper_oremine_i_00.png", p(--text identical to oremine
-			_[["I look at my own pick wearing away day by day and I realize why my work is important."]])) ..
+			_[[‘I look at my own pick wearing away day by day and I realize why my work is important.’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic",_[[Quote from an anonymous miner.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"A %s exploits only %s of the resource.<br>From there on, it will only have a 5%% chance of finding %s.":format(_"Deep Iron Ore Mine","2/3",_"Iron Ore"))) ..
+		rt(p(_"A %1$s exploits only %2$s of the resource. From there on out, it will only have a 5%% chance of finding %3$s.":bformat(_"Deep Iron Ore Mine","2/3",_"Iron Ore"))) ..
 		rt(h3(_"Purpose:")) ..
 		image_line("tribes/barbarians/ironore/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Iron Ore"))) ..
 		text_line(_"Working radius:", "2") ..
@@ -33,14 +33,14 @@ return {
 		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..
 		text_line(_"Upgraded from:",_"Iron Ore Mine","tribes/barbarians/oremine/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Cost cumulative:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 4, p("4 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 8, p("8 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 4), 4) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 8), 8) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 		text_line(_"Upgradeable to:",_"Deeper Iron Ore Mine","tribes/barbarians/deeper_oremine/menu.png") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
