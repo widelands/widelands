@@ -68,19 +68,26 @@
 # Miroslav Remák <Unknown>, 2014.
 # Miroslav Remák <Unknown>, 2014.
 # Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-29 19:11+0000\n"
+"PO-Revision-Date: 2014-04-01 13:55+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-04-02 05:31+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: Czech Republic\n"
 "Language: sk\n"
@@ -88,251 +95,251 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr ""
+msgstr "Vaše kasárne odhalili útočníka."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vaše kasárne."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v kasárňach."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v kasárňach."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Vaša hradba odhalila útočníka."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu hradbu."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v hradbe."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v hradbe."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "Váš hrad odhalil útočníka."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na váš hrad."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko na hrade."
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov na hrade."
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 #: ../../tribes/barbarians/citadel/conf:9
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "Vaša citadela odhalila útočníka."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu citadelu."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v citadele."
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 #: ../../tribes/barbarians/citadel/conf:12
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v citadele."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your donjon discovered an aggressor."
-msgstr ""
+msgstr "Váš donžon odhalil útočníka."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na váš donžon."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v donžone."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v donžone."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 #: ../../tribes/barbarians/fortress/conf:8
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Vaša pevnosť odhalila útočníka."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/barbarians/fortress/conf:9
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pevnosť."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 #: ../../tribes/barbarians/fortress/conf:10
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v pevnosti."
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 #: ../../tribes/barbarians/fortress/conf:11
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v pevnosti."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Vaša strážna hala odhalila útočníka."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu strážnu halu."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v strážnej hale."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v strážnej hale."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Vaša strážnica odhalila útočníka."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu strážnicu."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v strážnici."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v strážnici."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "Vaša vysoká veža odhalila útočníka."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vysokú vežu."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko vo vysokej veži."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov vo vysokej veži."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "Vaša pozorovateľňa odhalila útočníka."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pozorovateľňu."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v pozorovateľni."
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v pozorovateľni."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Vaša strážnica odhalila útočníka."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu strážnicu."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v strážnici."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v strážnici."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "Vaša malá veža odhalila útočníka."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu malú vežu."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko v malej veži."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov v malej veži."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Vaša veža odhalila útočníka."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vežu."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko vo veži."
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov vo veži."
 
 #: ../../tribes/barbarians/ax/conf:1
 msgid ""
@@ -519,7 +526,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/axfactory/help.lua:17
 msgid "It can make axes, Sharp axes and Broad axes."
-msgstr ""
+msgstr "Dokáže vyrobiť sekery, ostré sekery a široké sekery."
 
 #: ../../tribes/barbarians/axfactory/help.lua:18
 #: ../../tribes/barbarians/bakery/help.lua:17
@@ -1540,7 +1547,7 @@ msgstr "chlieb pita"
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu hradbu."
 
 #: ../../tribes/barbarians/barrier/help.lua:8
 #: ../../tribes/barbarians/big_inn/help.lua:8
@@ -1804,7 +1811,7 @@ msgstr "Pracuje hlboko v bani a získava uhlie, železnú rudu alebo zlato."
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your citadel."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu citadelu."
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
@@ -2786,7 +2793,7 @@ msgstr "%s alebo lepší a"
 
 #: ../../tribes/barbarians/donjon/conf:7
 msgid "Your soldiers have occupied your donjon."
-msgstr ""
+msgstr "Vaši vojaci obsadili váš donžon."
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
@@ -2880,7 +2887,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu pevnosť."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -3265,6 +3272,8 @@ msgid ""
 "It can make Bread Paddles, Felling axs, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
+"Dokáže vyrobiť pekárske lopaty, drevorubačské sekery, kliešte na uhlie, "
+"udice, kladivá, lovecké oštepy, kuchynské nástroje, krompáče, kosy a lopaty."
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack’s hut"
@@ -3317,6 +3326,7 @@ msgstr ""
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
 msgstr ""
+"Voly pomáhajú nosiť predmety po rušných cestách. Chovajú sa v kravíne."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -3486,7 +3496,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu strážnicu."
 
 #: ../../tribes/barbarians/sharpax/conf:1
 msgid ""
