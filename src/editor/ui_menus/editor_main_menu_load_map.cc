@@ -263,7 +263,8 @@ void Main_Menu_Load_Map::fill_list() {
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader*>(map_loader.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+						 (dynamic_cast<WL_Map_Loader*>(map_loader.get())
+								? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const _wexception &) {} //  we simply skip illegal entries
 		}
 	}

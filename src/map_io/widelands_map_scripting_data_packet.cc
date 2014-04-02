@@ -76,7 +76,9 @@ void Map_Scripting_Data_Packet::Write
 	if (map_fs) {
 		for (const std::string& script :
 		     filter(map_fs->ListDirectory("scripting"),
-		            [](const std::string& fn) { return boost::ends_with(fn, ".lua"); })) {
+		            [](const std::string& fn) {
+							return boost::ends_with(fn, ".lua");
+						})) {
 			size_t length;
 			void* input_data = map_fs->Load(script, length);
 			fs.Write(script, input_data, length);
