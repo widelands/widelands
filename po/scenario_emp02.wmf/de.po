@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-31 09:34+0000\n"
+"PO-Revision-Date: 2014-04-02 12:49+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-01 05:23+0000\n"
+"X-Launchpad-Export-Date: 2014-04-03 05:27+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
@@ -22,15 +22,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build up a wood economy"
-msgstr "Baue eine Holzproduktionskette"
+msgstr "Baue eine Holzwirtschaft"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:30
 msgid "Wood Economy"
-msgstr "Holz-Wirtschaft"
+msgstr "Holzwirtschaft"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:31
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr "Baue drei Holzfällerhütten, ein Forsthaus und ein Sägewerk."
+msgstr "Baue drei Holzfällerhäuser, ein Forsthaus und ein Sägewerk."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -42,7 +42,7 @@ msgstr "Steinbruch"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Build a quarry to the south of your headquarters."
-msgstr "Baue einen Steinbruch im Süden deines Hauptquartiers."
+msgstr "Baue einen Steinbruch südlich deines Hauptquartiers."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:44
 msgid "Protect your colony"
@@ -54,7 +54,7 @@ msgstr "Beschütze deine Kolonie."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:47
 msgid "Build some barracks and sentries around the colony."
-msgstr "Baue ein paar Baracken und Wachstuben um die Kolonie."
+msgstr "Baue ein paar Baracken und Wachposten um die Kolonie."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
@@ -82,13 +82,9 @@ msgid ""
 "(coal mine and / or charcoal burner, iron ore mine, toolsmithy, weapon "
 "smithy, armor smithy and smelting works)."
 msgstr ""
-"Build a stonemason and then a complete mining and production infrastructure "
-"(coal mine and / or charcoal burner, iron ore mine, toolsmithy, weapon "
-"smithy, armor smithy and smelting works).\r\n"
-"\r\n"
-"Baue einen Steinmetz und anschliessend eine komplette Minen- und "
-"Produktionswirtschaft (Kohlenmine und / oder Köhlerei, Eisenerzmine, "
-"Werkzeugschmiede, Waffenschmiede, Rüstungsschmiede und Hochofen)."
+"Baue einen Steinmetz und anschließend eine komplette Minen- und "
+"Produktionswirtschaft (Kohlenmine und/oder Köhlerei, Eisenerzmine, "
+"Werkzeugmacher, Waffenschmiede, Rüstungsschmiede und Hochofen)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:68
 msgid "Provide your miners with food"
@@ -104,9 +100,9 @@ msgid ""
 "To supply them with some good and strong drinks, we could build up a brewery "
 "and a winery."
 msgstr ""
-"Um Essen für unsere Bergleute herzustellen können wir eine Taverne bauen. Um "
-"sie auch mit einigen guten und starken Getränken zu versorgen, könnten wir "
-"eine Brauerei und eine Kelterei errichten."
+"Um Essen für unsere Bergleute herzustellen, können wir eine Taverne bauen. "
+"Um sie auch mit einigen guten und starken Getränken zu versorgen, könnten "
+"wir eine Brauerei und eine Weinkellerei errichten."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid ""
@@ -114,17 +110,16 @@ msgid ""
 "like fish, meat or bread. To provide these foodstuffs, you would have to "
 "build a fisher’s house, a farm, a mill and a bakery."
 msgstr ""
-"Natürlich heisst das, dass wir mehr Dinge brauchen, um weiteres Essen "
-"herzustellen – wie Fisch, Fleisch oder Brot. Um das zu bekommen solltest du "
-"eine Fischerhütte, eine Jagdhütte, einen Bauernhof, eine Mühle und eine "
-"Bäckerei errichten."
+"Natürlich heißt das, dass wir mehr Dinge brauchen, um dieses Essen "
+"herzustellen – wie Fisch, Fleisch oder Brot. Um das zu bekommen, solltest du "
+"ein Fischerhaus, einen Bauernhof, eine Mühle und eine Bäckerei errichten."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:74
 msgid ""
 "Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
 "wells."
 msgstr ""
-"Vielleicht wirst du auch eine Jägerhütte, eine Schweinezucht, einen Weinhof "
+"Vielleicht wirst du auch ein Jagdhaus, eine Schweinezucht, einen Weinberg "
 "und einige Brunnen benötigen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:75
@@ -133,7 +128,7 @@ msgid ""
 "mines need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
 msgstr ""
-"Es liegt bei dir, was du baust. Aber bedenke – Kohlen-  und Eisenminen "
+"Es liegt bei dir, was du baust. Aber bedenke – Kohlen-  und Eisenerzminen "
 "benötigen Bier, Marmor- und Goldminen benötigen Wein und alle Minen "
 "benötigen mindestens Rationen, welche aus Brot ODER Fleisch ODER Fisch "
 "bestehen."
@@ -157,7 +152,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "To watch deep inside the enemy territory, build a tower."
 msgstr ""
-"Um tief in das feindliche Gebiet blicken zu können solltest zu einen Turm "
+"Um tief in das feindliche Gebiet blicken zu können, solltest zu einen Turm "
 "errichten."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:91
@@ -182,8 +177,8 @@ msgid ""
 "headquarters stood before), to avoid new settlements of other tribes in that "
 "region."
 msgstr ""
-"Wenn du das erreicht hast, errichte eine Festung auf der Inselzunge (nahe "
-"der Stelle, wo die Barbaren ihr Hauptquartier hatten), um neue "
+"Wenn du das erreicht hast, errichte eine Festung auf der Halbinsel (nahe der "
+"Stelle, wo die Barbaren ihr Hauptquartier hatten), um neue "
 "Besiedlungsversuche von anderen Stämmen zu verhindern."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:103
@@ -245,7 +240,7 @@ msgid ""
 "basic building materials."
 msgstr ""
 "Aber bis zu diesem Tag können viele Jahre vergehen! Für jetzt müssen mir uns "
-"auf die Gegenwart konzentrieren und einige Holzfällerhütten und ein Sägewerk "
+"auf die Gegenwart konzentrieren und einige Holzfällerhäuser und ein Sägewerk "
 "errichten, um die grundlegenden Baumaterialien herzustellen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:121
@@ -267,8 +262,8 @@ msgid ""
 "we could build a quarry to get some hard stone for our larger buildings."
 msgstr ""
 "Später wanderte ich zu den Felsen im Süden und schaute mich nach einem "
-"geeigneten Platz für den Bau eines Steinbruchs um einigen guten Stein für "
-"unsere größeren Gebäude zu bekommen."
+"geeigneten Platz für den Bau eines Steinbruchs um, um einigen guten Stein "
+"für unsere größeren Gebäude zu bekommen."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:132
 msgid ""
@@ -326,7 +321,7 @@ msgstr ""
 "etwas, das mir ein sehr ungutes Gefühl im Bauch gibt und Wellen der Angst in "
 "meinem Herzen hervorbrechen lässt. Als ich zur Südküste spazierte fand ich "
 "die Reste eines anderen Schiffs. Ich weiß nicht, ob diese Teile alles sind, "
-"das übrig geblieben ist; auf jedem Fall, diese Reste scheinen mir nicht alt "
+"das übrig geblieben ist; auf jeden Fall scheinen mir diese Reste nicht alt "
 "zu sein."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161
@@ -343,7 +338,7 @@ msgid ""
 "I beg you to be cautious and to build some barracks or sentries around our "
 "colony."
 msgstr ""
-"Ich bitte dich vorsichtig zu sein und einige Baracken und Wachstuben rund um "
+"Ich bitte dich vorsichtig zu sein und einige Baracken und Wachposten rund um "
 "unsere Kolonie zu errichten."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
@@ -421,7 +416,7 @@ msgstr "Essen für die Bergleute"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:193
 msgid "Amalea comes in..."
-msgstr "Amalea kommt herein..."
+msgstr "Amalea kommt herein ..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:194
 msgid ""
@@ -527,7 +522,7 @@ msgid ""
 "boat with the other peaceful ones, and sent back to their country."
 msgstr ""
 "Immer noch verstecken sich einige Barbaren auf der Insel, aber ich bin "
-"sicher, dass wir sie bald finden werden. Alle, die sich nicht widersetzten, "
+"sicher, dass wir sie bald finden werden. Alle, die sich nicht widersetzen, "
 "schicken wir in einem Boot in ihr Land zurück."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:234
@@ -544,7 +539,7 @@ msgstr "Die Zeit vergeht"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:242
 msgid "7 days later..."
-msgstr "7 Tage später..."
+msgstr "7 Tage später ..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:246
 msgid "A Message"
