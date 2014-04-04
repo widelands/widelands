@@ -100,14 +100,16 @@ int32_t WL_Map_Loader::load_map_complete
 {
 	ScopedTimer timer("WL_Map_Loader::load_map_complete() took %ums");
 
+	preload_map(scenario);
 	m_map.set_size(m_map.m_width, m_map.m_height);
-
 	m_mol.reset(new Map_Map_Object_Loader());
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
 	log("Reading Elemental Data ... ");
-	{Map_Elemental_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	Map_Elemental_Data_Packet elemental_data_packet;
+	elemental_data_packet.Read(*m_fs, egbase, !scenario, *m_mol);
+	const std::string old_world_name = elemental_data_packet.old_world_name();
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps(); //  Can do this now that map size is known.
@@ -135,10 +137,7 @@ int32_t WL_Map_Loader::load_map_complete
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Terrain Data ... ");
-	{
-		Map_Terrain_Data_Packet        p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
-	}
+	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, old_world_name);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// NOCOM(#sirver): bring back
@@ -195,31 +194,32 @@ int32_t WL_Map_Loader::load_map_complete
 	//  This packet must be before any building or road packet. So do not change
 	//  this order without knowing what you do
 	//  EXISTENT PACKETS
-	log("Reading Flag Data ... ");
-	{Map_Flag_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+	// NOCOM(#sirver): bring back
+	// log("Reading Flag Data ... ");
+	// {Map_Flag_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	// log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Road Data ... ");
-	{Map_Road_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+	// log("Reading Road Data ... ");
+	// {Map_Road_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	// log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Building Data ... ");
-	{Map_Building_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+	// log("Reading Building Data ... ");
+	// {Map_Building_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	// log("took %ums\n ", timer.ms_since_last_query());
 
-	//  DATA PACKETS
-	log("Reading Flagdata Data ... ");
-	{Map_Flagdata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+	// //  DATA PACKETS
+	// log("Reading Flagdata Data ... ");
+	// {Map_Flagdata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	// log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Roaddata Data ... ");
-	{Map_Roaddata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+	// log("Reading Roaddata Data ... ");
+	// {Map_Roaddata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	// log("took %ums\n ", timer.ms_since_last_query());
 
 
-	log("Reading Buildingdata Data ... ");
-	{Map_Buildingdata_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+	// log("Reading Buildingdata Data ... ");
+	// {Map_Buildingdata_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	// log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Second and third phase loading Map Objects ... ");
 	// NOCOM(#sirver): bring back

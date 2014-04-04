@@ -48,6 +48,7 @@ void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 			map->set_description(s.get_string("descr"));
 			map->set_hint       (s.get_string("hint", ""));
 			map->set_background (s.get_string("background"));
+			old_world_name_ = s.get_string("world", "");
 
 			std::string t = s.get_string("tags", "");
 			if (t != "") {

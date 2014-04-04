@@ -25,7 +25,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable() :
 // RESOURCES - They were all the same for all worlds.
 resources_
 {
-	{ "granit", "granite" },
+	{"granit", "granite"},
 },
 
 // TERRAINS
@@ -49,7 +49,7 @@ std::make_pair(
 	"winterland", std::map<std::string, std::string>
 	{
 		{"strand", "winter_beach"},
-		{"ice_flows1", "ice_floes1"},
+		{"ice_flows", "ice_floes"},
 		{"ice_flows2", "ice_floes2"},
 		{"mountain1", "winter_mountain1"},
 		{"mountain2", "winter_mountain2"},
@@ -78,10 +78,12 @@ std::string OneWorldLegacyLookupTable::lookup_resource(const std::string& resour
 
 std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& world,
                                                       const std::string& terrain) const {
-	const std::map<std::string, std::string>& world_terrains = terrains_.at(world);
-	const auto& i = world_terrains.find(terrain);
-	if (i == world_terrains.end()) {
-		return terrain;
+	if (!world.empty()) {
+		const std::map<std::string, std::string>& world_terrains = terrains_.at(world);
+		const auto& i = world_terrains.find(terrain);
+		if (i != world_terrains.end()) {
+			return i->second;
+		}
 	}
-	return i->second;
-};
+	return terrain;
+}

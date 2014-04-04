@@ -35,10 +35,9 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-
-void Map_Terrain_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
-{
+void Map_Terrain_Data_Packet::Read(FileSystem& fs,
+                                   Editor_Game_Base& egbase,
+                                   const std::string& old_world_name) {
 	FileRead fr;
 	fr.Open(fs, "binary/terrain");
 
@@ -46,7 +45,6 @@ void Map_Terrain_Data_Packet::Read
 	const World & world = egbase.world();
 
 	OneWorldLegacyLookupTable lookup_table;
-
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
@@ -56,21 +54,18 @@ void Map_Terrain_Data_Packet::Read
 			terrain_id_map smap;
 			for (uint16_t i = 0; i < nr_terrains; ++i) {
 				const uint16_t id = fr.Unsigned16();
-				char const* const name = fr.CString();
+				char const* const old_terrain_name = fr.CString();
 				terrain_id_map::const_iterator const it = smap.find(id);
 				if (it != smap.end()) {
-					log("Map_Terrain_Data_Packet::Read: WARNING: Found duplicate "
-					    "terrain id %i: Previously defined as \"%s\", now as "
-					    "\"%s\".",
-					    id,
-					    world.terrain_descr(it->second).name().c_str(),
-					    name);
+					throw game_data_error(
+					   "Map_Terrain_Data_Packet::Read: WARNING: Found duplicate terrain id %i.", id);
 				}
-				if (!world.get_ter(lookup_table.lookup_terrain("winterland", name).c_str())) {
-					// NOCOM(#sirver): hard coded
-					throw game_data_error("Terrain '%s' exists in map, not in world!", name);
+				const std::string new_terrain_name =
+				   lookup_table.lookup_terrain(old_world_name, old_terrain_name);
+				if (!world.get_ter(new_terrain_name.c_str())) {
+					throw game_data_error("Terrain '%s' exists in map, not in world!", new_terrain_name.c_str());
 				}
-				smap[id] = world.index_of_terrain(name);
+				smap[id] = world.index_of_terrain(new_terrain_name.c_str());
 			}
 
 			Map_Index const max_index = map.max_index();
@@ -89,7 +84,7 @@ void Map_Terrain_Data_Packet::Read
 
 
 void Map_Terrain_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase)
 {
 
 	FileWrite fw;

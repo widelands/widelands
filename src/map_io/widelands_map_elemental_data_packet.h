@@ -30,12 +30,9 @@ class Map;
  * The elemental data packet contains all basic and elemental data
  * like number of players, map size, world name, magic bytes and so on
  */
-struct Map_Elemental_Data_Packet : public Map_Data_Packet {
-	void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &) override
-	;
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &) override
-	;
+struct Map_Elemental_Data_Packet {
+	void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&);
+	void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);
 
 	//  The following function prereads a given map without the need of a
 	//  properly configured Editor_Game_Base object.
@@ -43,7 +40,12 @@ struct Map_Elemental_Data_Packet : public Map_Data_Packet {
 
 	uint32_t get_version() {return m_version;}
 
+	// If this map was created before the one_world merge was done, this returns
+	// the old world name, otherwise "".
+	const std::string& old_world_name() const { return old_world_name_; }
+
 private:
+	std::string old_world_name_;
 	uint32_t m_version;
 };
 
