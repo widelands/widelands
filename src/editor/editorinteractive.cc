@@ -203,9 +203,7 @@ void Editor_Interactive::load(const std::string & filename) {
 	// Create the players. TODO SirVer this must be managed better
 	loader_ui.step(_("Creating players"));
 	iterate_player_numbers(p, map.get_nrplayers()) {
-		egbase().add_player
-		(p, 0, map.get_scenario_player_tribe(p),
-		 map.get_scenario_player_name(p));
+		egbase().add_player(p, 0, map.get_scenario_player_tribe(p), map.get_scenario_player_name(p));
 	}
 
 	ml->load_map_complete(egbase(), true);

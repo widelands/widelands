@@ -29,6 +29,7 @@
 #include "logic/widelands_filewrite.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -44,6 +45,8 @@ void Map_Terrain_Data_Packet::Read
 	Map & map = egbase.map();
 	const World & world = egbase.world();
 
+	OneWorldLegacyLookupTable lookup_table;
+
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
@@ -52,18 +55,21 @@ void Map_Terrain_Data_Packet::Read
 			typedef std::map<const uint16_t, Terrain_Index> terrain_id_map;
 			terrain_id_map smap;
 			for (uint16_t i = 0; i < nr_terrains; ++i) {
-				uint16_t                       const id   = fr.Unsigned16();
-				char                   const * const name = fr.CString   ();
-				terrain_id_map::const_iterator const it   = smap.find(id);
-				if (it != smap.end())
-					log
-						("Map_Terrain_Data_Packet::Read: WARNING: Found duplicate "
-						 "terrain id %i: Previously defined as \"%s\", now as "
-						 "\"%s\".",
-						 id, world.terrain_descr(it->second).name().c_str(), name);
-				if (not world.get_ter(name))
-					throw game_data_error
-						("Terrain '%s' exists in map, not in world!", name);
+				const uint16_t id = fr.Unsigned16();
+				char const* const name = fr.CString();
+				terrain_id_map::const_iterator const it = smap.find(id);
+				if (it != smap.end()) {
+					log("Map_Terrain_Data_Packet::Read: WARNING: Found duplicate "
+					    "terrain id %i: Previously defined as \"%s\", now as "
+					    "\"%s\".",
+					    id,
+					    world.terrain_descr(it->second).name().c_str(),
+					    name);
+				}
+				if (!world.get_ter(lookup_table.lookup_terrain("winterland", name).c_str())) {
+					// NOCOM(#sirver): hard coded
+					throw game_data_error("Terrain '%s' exists in map, not in world!", name);
+				}
 				smap[id] = world.index_of_terrain(name);
 			}
 
@@ -73,9 +79,9 @@ void Map_Terrain_Data_Packet::Read
 				f.set_terrain_r(smap[fr.Unsigned8()]);
 				f.set_terrain_d(smap[fr.Unsigned8()]);
 			}
-		} else
-			throw game_data_error
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw game_data_error("unknown/unhandled version %u", packet_version);
+		}
 	} catch (const _wexception & e) {
 		throw game_data_error("terrain: %s", e.what());
 	}

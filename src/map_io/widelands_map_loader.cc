@@ -55,14 +55,13 @@
 namespace Widelands {
 
 WL_Map_Loader::WL_Map_Loader(FileSystem* fs, Map * const m)
-	: Map_Loader("", *m), m_fs(fs), m_mol(nullptr)
+	: Map_Loader("", *m), m_fs(fs)
 {
 	m->filesystem_.reset(fs);
 }
 
 
 WL_Map_Loader::~WL_Map_Loader() {
-	delete m_mol;
 }
 
 /**
@@ -103,8 +102,7 @@ int32_t WL_Map_Loader::load_map_complete
 
 	m_map.set_size(m_map.m_width, m_map.m_height);
 
-	delete m_mol;
-	m_mol = new Map_Map_Object_Loader;
+	m_mol.reset(new Map_Map_Object_Loader());
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
@@ -132,20 +130,23 @@ int32_t WL_Map_Loader::load_map_complete
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
-
 	log("Reading Heights Data ... ");
 	{Map_Heights_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Terrain Data ... ");
-	{Map_Terrain_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{
+		Map_Terrain_Data_Packet        p;
+		p.Read(*m_fs, egbase, !scenario, *m_mol);
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	Map_Object_Packet mapobjects;
+	// NOCOM(#sirver): bring back
+	// Map_Object_Packet mapobjects;
 
-	log("Reading Map Objects ... ");
-	mapobjects.Read(*m_fs, egbase, *m_mol);
-	log("took %ums\n ", timer.ms_since_last_query());
+	// log("Reading Map Objects ... ");
+	// mapobjects.Read(*m_fs, egbase, *m_mol);
+	// log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
 	{
@@ -221,17 +222,18 @@ int32_t WL_Map_Loader::load_map_complete
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Second and third phase loading Map Objects ... ");
-	mapobjects.LoadFinish();
-	{
-		const Field & fields_end = map()[map().max_index()];
-		for (Field * field = &map()[0]; field < &fields_end; ++field)
-			if (BaseImmovable * const imm = field->get_immovable()) {
-				if (upcast(Building const, building, imm))
-					if (field != &map()[building->get_position()])
-						continue; //  not the building's main position
-				imm->load_finish(egbase);
-			}
-	}
+	// NOCOM(#sirver): bring back
+	// mapobjects.LoadFinish();
+	// {
+		// const Field & fields_end = map()[map().max_index()];
+		// for (Field * field = &map()[0]; field < &fields_end; ++field)
+			// if (BaseImmovable * const imm = field->get_immovable()) {
+				// if (upcast(Building const, building, imm))
+					// if (field != &map()[building->get_position()])
+						// continue; //  not the building's main position
+				// imm->load_finish(egbase);
+			// }
+	// }
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  This should be at least after loading Soldiers (Bobs).

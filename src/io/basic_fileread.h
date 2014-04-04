@@ -28,6 +28,7 @@
 #endif
 
 #include "io/filesystem/filesystem.h"
+#include "log.h"
 #include "machdep.h"
 
 /// Can be used to read a file. It works quite naively by reading the entire

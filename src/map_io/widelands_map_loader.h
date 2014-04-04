@@ -21,6 +21,7 @@
 #define WIDELANDS_MAP_LOADER_H
 
 #include <cstring>
+#include <memory>
 #include <string>
 
 #include "map_io/map_loader.h"
@@ -42,7 +43,7 @@ struct WL_Map_Loader : public Map_Loader {
 	virtual int32_t preload_map(bool) override;
 	virtual int32_t load_map_complete(Editor_Game_Base &, bool) override;
 
-	Map_Map_Object_Loader * get_map_object_loader() {return m_mol;}
+	Map_Map_Object_Loader * get_map_object_loader() {return m_mol.get();}
 
 	static bool is_widelands_map(const std::string & filename) {
 		return !strcasecmp(&filename.c_str()[filename.size() - 4], WLMF_SUFFIX);
@@ -51,7 +52,7 @@ struct WL_Map_Loader : public Map_Loader {
 private:
 	FileSystem* m_fs;  // not owned (owned by Map).
 	std::string m_filename;
-	Map_Map_Object_Loader * m_mol;
+	std::unique_ptr<Map_Map_Object_Loader> m_mol;
 };
 
 }
