@@ -419,7 +419,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	m_map.set_size(m_map.m_width, m_map.m_height);
 
 	//  The header must already have been processed.
-	assert(m_map.m_fields);
+	assert(m_map.m_fields.get());
 	Widelands::X_Coordinate const mapwidth  = m_map.get_width ();
 	Widelands::Y_Coordinate const mapheight = m_map.get_height();
 	assert(mapwidth > 0 && mapheight > 0);
@@ -430,7 +430,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	if (!section)
 		throw wexception("Section 1 (Heights) not found");
 
-	Widelands::Field * f = m_map.m_fields;
+	Widelands::Field * f = m_map.m_fields.get();
 	pc = section.get();
 	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc)
@@ -444,7 +444,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	const Widelands::World& world = egbase.world();
 	TerrainConverter terrain_converter(world);
 
-	f = m_map.m_fields;
+	f = m_map.m_fields.get();
 	pc = section.get();
 	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
@@ -460,7 +460,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	if (!section)
 		throw wexception("Section 3 (Terrain 2) not found");
 
-	f = m_map.m_fields;
+	f = m_map.m_fields.get();
 	pc = section.get();
 	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
@@ -614,7 +614,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	if (!section)
 		throw wexception("Section 12 (Resources) not found");
 
-	f = m_map.m_fields;
+	f = m_map.m_fields.get();
 	pc = section.get();
 	char const * res;
 	int32_t amount = 0;
