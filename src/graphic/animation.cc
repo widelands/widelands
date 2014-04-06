@@ -106,6 +106,7 @@ public:
 	virtual uint32_t frametime() const override;
 	virtual const Point& hotspot() const override;
 	virtual const Image& representative_image(const RGBColor& clr) const override;
+	virtual const Image& representative_image_from_disk() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
@@ -256,6 +257,9 @@ const Image& NonPackedAnimation::representative_image(const RGBColor& clr) const
 	return get_frame(0, &clr);
 }
 
+const Image& NonPackedAnimation::representative_image_from_disk() const {
+	return get_frame(0, nullptr);
+}
 
 void NonPackedAnimation::trigger_soundfx
 	(uint32_t time, uint32_t stereo_position) const {
