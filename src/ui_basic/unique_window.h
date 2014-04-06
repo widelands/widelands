@@ -35,7 +35,6 @@ struct Panel;
 */
 struct UniqueWindow : public Window {
 	struct Registry {
-		// NOCOM(#sirver): unique_ptr?
 		UniqueWindow * window;
 
 		// Whenever Registry::toggle() is called, a window will be created using
