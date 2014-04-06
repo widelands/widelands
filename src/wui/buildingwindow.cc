@@ -549,4 +549,3 @@ void Building_Window::clicked_goto()
 {
 	igbase().move_view_to(building().get_position());
 }
-

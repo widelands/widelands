@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2002-2004, 2008-2011 by the Widelands Development Team
  *
+ * nnn
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -40,8 +41,6 @@ private:
 	UI::Button m_button_map_options;
 	UI::Button m_button_view_readme;
 	UI::Button m_button_exit_editor;
-
-	UI::UniqueWindow::Registry m_window_readme;
 
 	void exit_btn       ();
 	void load_btn       ();

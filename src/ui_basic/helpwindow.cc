@@ -91,7 +91,6 @@ HelpWindow::HelpWindow
 
 HelpWindow::~HelpWindow()
 {
-	delete textarea;
 }
 
 /// Adds a new heading.
@@ -206,7 +205,6 @@ LuaTextHelpWindow::LuaTextHelpWindow
 
 LuaTextHelpWindow::~LuaTextHelpWindow()
 {
-	delete textarea;
 }
 
 }

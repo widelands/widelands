@@ -27,6 +27,7 @@
 #include "editor/ui_menus/editor_main_menu_save_map.h"
 #include "i18n.h"
 #include "ui_fsmenu/fileview.h"
+#include "unique_window_handler.h"
 
 //TODO: these should be defined globally for the whole UI
 #define width 150
@@ -126,5 +127,8 @@ void Editor_Main_Menu::map_options_btn() {
 }
 void Editor_Main_Menu::exit_btn() {eia().exit();}
 void Editor_Main_Menu::readme_btn() {
-	fileview_window(eia(), m_window_readme, "txts/editor_readme");
+	eia().unique_windows().toggle_open(
+	   "editor_main_menu_readme", [this](UI::UniqueWindow::Registry* registry) {
+		   fileview_window(eia(), *registry, "txts/editor_readme");
+		});
 }

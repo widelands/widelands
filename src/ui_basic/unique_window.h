@@ -36,7 +36,9 @@ struct Panel;
 struct UniqueWindow : public Window {
 
 	struct Registry {
+		// NOCOM(#sirver): unique_ptr?
 		UniqueWindow * window;
+		// NOCOM(#sirver): who uses these?
 		boost::function<void()> onCreate;
 		boost::function<void()> onDelete;
 		boost::function<void()> constr;
