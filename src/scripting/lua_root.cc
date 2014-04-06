@@ -347,7 +347,7 @@ int L_World::new_resource_type(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		get_egbase(L).mutable_world()->add_resource_type(table);
 	} catch (std::exception& e) {
-		return report_error(L, "%s", e.what());
+		report_error(L, "%s", e.what());
 	}
 
 	return 0;
@@ -371,7 +371,7 @@ int L_World::new_terrain_type(lua_State * L) {
 		get_egbase(L).mutable_world()->add_terrain_type(table);
 	}
 	catch (std::exception& e) {
-		return report_error(L, "%s", e.what());
+		report_error(L, "%s", e.what());
 	}
 
 	return 0;
@@ -395,7 +395,7 @@ int L_World::new_critter_type(lua_State * L) {
 		get_egbase(L).mutable_world()->add_critter_type(table);
 	}
 	catch (std::exception& e) {
-		return report_error(L, "%s", e.what());
+		report_error(L, "%s", e.what());
 	}
 	return 0;
 }
@@ -418,7 +418,7 @@ int L_World::new_immovable_type(lua_State* L) {
 		get_egbase(L).mutable_world()->add_immovable_type(table);
 	}
 	catch (std::exception& e) {
-		return report_error(L, "%s", e.what());
+		report_error(L, "%s", e.what());
 	}
 	return 0;
 }
@@ -441,7 +441,7 @@ int L_World::new_editor_category(lua_State* L) {
 		get_egbase(L).mutable_world()->add_editor_category(table);
 	}
 	catch (std::exception& e) {
-		return report_error(L, "%s", e.what());
+		report_error(L, "%s", e.what());
 	}
 	return 0;
 }
