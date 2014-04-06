@@ -949,8 +949,8 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 #ifndef NDEBUG //  only in debug builds
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
-				new GameChatMenu
-					(this, m_debugconsole, *DebugConsole::getChatProvider());
+				GameChatMenu::create_script_console(
+					this, m_debugconsole, *DebugConsole::getChatProvider());
 			}
 			return true;
 #endif
