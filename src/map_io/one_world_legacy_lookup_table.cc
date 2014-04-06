@@ -95,7 +95,7 @@ immovables_
 {std::make_pair(
 	"greenland", std::map<std::string, std::string>
 	{
-		// No changes.
+		{"tree1", "aspen_summer_old"},
 	}),
 std::make_pair(
 	"blackland", std::map<std::string, std::string>
