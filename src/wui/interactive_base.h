@@ -37,6 +37,7 @@
 namespace Widelands {struct CoordPath;}
 
 struct InteractiveBaseInternals;
+class UniqueWindowHandler;
 
 /**
  * This is used to represent the code that Interactive_Player and
@@ -52,6 +53,9 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 		dfDebug          = 4, ///< general debugging info
 		dfSpeed          = 8, ///< show game speed and speed controls
 	};
+
+	// Manages all UniqueWindows.
+	UniqueWindowHandler& unique_windows();
 
 	Interactive_Base(Widelands::Editor_Game_Base &, Section & global_s);
 	virtual ~Interactive_Base();
@@ -193,6 +197,7 @@ private:
 
 	UI::UniqueWindow::Registry m_debugconsole;
 	Widelands::NoteSender<LogMessage> m_log_sender;
+	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 };
 
 #define PIC2 g_gr->images().get("pics/but2.png")

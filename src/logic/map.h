@@ -181,7 +181,7 @@ public:
 
 	void set_starting_pos(Player_Number, Coords);
 	Coords get_starting_pos(Player_Number const p) const {
-		assert(1 <= p <= get_nrplayers());
+		assert(1 <= p && p <= get_nrplayers());
 		return m_starting_pos[p - 1];
 	}
 
