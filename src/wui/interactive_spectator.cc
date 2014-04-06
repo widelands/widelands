@@ -162,7 +162,7 @@ void Interactive_Spectator::toggle_chat()
 	if (m_chat.window)
 		delete m_chat.window;
 	else if (m_chatProvider)
-		new GameChatMenu(this, m_chat, *m_chatProvider, _("Chat"));
+		GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 }
 
 
@@ -273,7 +273,7 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 				break;
 
 			if (!m_chat.window)
-				new GameChatMenu(this, m_chat, *m_chatProvider, _("Chat"));
+				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 
 			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
 				.enter_chat_message();

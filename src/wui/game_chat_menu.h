@@ -37,6 +37,8 @@ struct GameChatMenu : public UI::UniqueWindow {
 	 * when return is pressed, etc.
 	 */
 	void enter_chat_message(bool close_on_send = true);
+	static GameChatMenu* create_chat_console(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &);
+	static GameChatMenu* create_script_console(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &);
 
 private:
 	void acknowledge();
