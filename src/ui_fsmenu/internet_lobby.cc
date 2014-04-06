@@ -164,7 +164,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 		% "<br><img src=pics/roadb_red.png> "
 		% _("Unregistered")
 		%  "</p></rt>").str();
-	clientsonline .add_column(22, "°", t_tip);
+	clientsonline .add_column(22, "*", t_tip);
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
 	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Game"));
