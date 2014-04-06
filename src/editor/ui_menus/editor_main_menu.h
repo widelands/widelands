@@ -42,13 +42,14 @@ private:
 	UI::Button m_button_view_readme;
 	UI::Button m_button_exit_editor;
 
+	UI::UniqueWindow::Registry m_window_readme;
+
 	void exit_btn       ();
 	void load_btn       ();
 	void save_btn       ();
 	void new_map_btn    ();
 	void new_random_map_btn    ();
 	void map_options_btn();
-	void readme_btn     ();
 };
 
 

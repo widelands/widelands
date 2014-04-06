@@ -27,7 +27,6 @@
 #include "editor/ui_menus/editor_main_menu_save_map.h"
 #include "i18n.h"
 #include "ui_fsmenu/fileview.h"
-#include "unique_window_handler.h"
 
 //TODO: these should be defined globally for the whole UI
 #define width 150
@@ -91,7 +90,13 @@ Editor_Main_Menu::Editor_Main_Menu
 	m_button_load_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::load_btn, this));
 	m_button_save_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::save_btn, this));
 	m_button_map_options.sigclicked.connect(boost::bind(&Editor_Main_Menu::map_options_btn, this));
-	m_button_view_readme.sigclicked.connect(boost::bind(&Editor_Main_Menu::readme_btn, this));
+
+	m_window_readme.open_window = [this] {
+		fileview_window(eia(), m_window_readme, "txts/editor_readme");
+	};
+	m_button_view_readme.sigclicked.connect(
+	   boost::bind(&UI::UniqueWindow::Registry::toggle, m_window_readme));
+
 	m_button_exit_editor.sigclicked.connect(boost::bind(&Editor_Main_Menu::exit_btn, this));
 
 	// Put in the default position, if necessary
@@ -126,9 +131,3 @@ void Editor_Main_Menu::map_options_btn() {
 	die();
 }
 void Editor_Main_Menu::exit_btn() {eia().exit();}
-void Editor_Main_Menu::readme_btn() {
-	eia().unique_windows().toggle_open(
-	   "editor_main_menu_readme", [this](UI::UniqueWindow::Registry* registry) {
-		   fileview_window(eia(), *registry, "txts/editor_readme");
-		});
-}

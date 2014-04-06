@@ -170,8 +170,9 @@ public:
 	}
 
 	void show_options_window();
-	UI::UniqueWindow::Registry m_optionswindow_registry;
-
+	UI::UniqueWindow::Registry& optionswindow_registry() {
+		return m_optionswindow_registry;
+	}
 
 	const WareList & get_wares  () const {return m_wares;}
 	const WareList & get_workers() const {return m_workers;}
@@ -233,7 +234,7 @@ private:
 	uint32_t m_request_timerid;
 
 	static std::unique_ptr<Soldier> m_soldier_prototype;
-
+	UI::UniqueWindow::Registry m_optionswindow_registry;
 };
 
 }

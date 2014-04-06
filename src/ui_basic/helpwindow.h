@@ -83,8 +83,8 @@ private:
 struct LuaTextHelpWindow : public UI::UniqueWindow {
 	LuaTextHelpWindow
 		(Panel * parent, UI::UniqueWindow::Registry &,
-		 const std::string & caption,
-		 std::string path_to_script,
+		 const std::string& caption,
+		 const std::string& path_to_script,
 		 uint32_t width = 300, uint32_t height = 400);
 	~LuaTextHelpWindow();
 

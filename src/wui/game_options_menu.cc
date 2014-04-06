@@ -103,22 +103,22 @@ GameOptionsMenu::GameOptionsMenu
 	exit_game.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
 
-	m_windows.readme.constr = boost::bind
+	m_windows.readme.open_window = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.readme),
 		 "txts/README.lua");
-	m_windows.license.constr = boost::bind
+	m_windows.license.open_window = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.license),
 		 "txts/license");
-	m_windows.authors.constr = boost::bind
+	m_windows.authors.open_window = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.authors),
 		 "txts/developers");
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
+ registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
+ registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_windows.readme, readme)
