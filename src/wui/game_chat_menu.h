@@ -29,7 +29,6 @@
  * enter and send chat messages.
  */
 struct GameChatMenu : public UI::UniqueWindow {
-	GameChatMenu(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &, const std::string & title);
 
 	/**
 	 * Configure the menu so that it is useful for writing chat messages.
@@ -41,8 +40,8 @@ struct GameChatMenu : public UI::UniqueWindow {
 	static GameChatMenu* create_script_console(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &);
 
 private:
+	GameChatMenu(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &, const std::string & title);
 	void acknowledge();
-
 	GameChatPanel m_chat;
 	bool m_close_on_send;
 };
