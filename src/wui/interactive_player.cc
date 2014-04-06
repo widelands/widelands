@@ -320,7 +320,7 @@ void Interactive_Player::toggle_chat() {
 	if (m_chat.window)
 		delete m_chat.window;
 	else if (m_chatProvider)
-		new GameChatMenu(this, m_chat, *m_chatProvider);
+		new GameChatMenu(this, m_chat, *m_chatProvider, _("Chat"));
 }
 
 bool Interactive_Player::can_see(Widelands::Player_Number const p) const
@@ -425,7 +425,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 				break;
 
 			if (!m_chat.window)
-				new GameChatMenu(this, m_chat, *m_chatProvider);
+				new GameChatMenu(this, m_chat, *m_chatProvider, _("Chat"));
 
 			return true;
 		default:
