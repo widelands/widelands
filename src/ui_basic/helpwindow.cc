@@ -91,7 +91,6 @@ HelpWindow::HelpWindow
 
 HelpWindow::~HelpWindow()
 {
-	delete textarea;
 }
 
 /// Adds a new heading.
@@ -183,16 +182,13 @@ LuaTextHelpWindow
 */
 
 LuaTextHelpWindow::LuaTextHelpWindow
-	(Panel * const parent,
-	 UI::UniqueWindow::Registry & reg,
-	 const std::string & caption,
-	 std::string path_to_script,
-	 uint32_t width, uint32_t height)
-	:
-	UI::UniqueWindow(parent, "help_window", &reg, width, height,
-		(boost::format(_("Help: %s")) % caption).str().c_str()
-	),
-	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
+	(Panel* const parent, UI::UniqueWindow::Registry& reg, const std::string&
+	 caption, const std::string& path_to_script, uint32_t width,
+	 uint32_t height)
+	: UI::UniqueWindow(parent, "help_window", &reg, width, height,
+			(boost::format(_("Help: %s")) % caption).str().c_str()),
+	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height - 10,
+				std::string(), Align_Left))
 {
 	LuaInterface lua;
 
@@ -206,7 +202,6 @@ LuaTextHelpWindow::LuaTextHelpWindow
 
 LuaTextHelpWindow::~LuaTextHelpWindow()
 {
-	delete textarea;
 }
 
 }

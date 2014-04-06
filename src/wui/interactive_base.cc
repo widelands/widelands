@@ -39,6 +39,7 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "text_layout.h"
+#include "unique_window_handler.h"
 #include "upcast.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
@@ -99,7 +100,8 @@ Interactive_Base::Interactive_Base
 	m_label_speed_shadow
 		(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
 	m_label_speed
-		(this, get_w(), 1, std::string(), UI::Align_TopRight)
+		(this, get_w(), 1, std::string(), UI::Align_TopRight),
+	unique_window_handler_(new UniqueWindowHandler())
 {
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
@@ -152,6 +154,10 @@ Interactive_Base::~Interactive_Base()
 {
 	if (m_buildroad)
 		abort_build_road();
+}
+
+UniqueWindowHandler& Interactive_Base::unique_windows() {
+	return *unique_window_handler_;
 }
 
 

@@ -20,7 +20,7 @@
 #ifndef UI_UNIQUE_WINDOW_H
 #define UI_UNIQUE_WINDOW_H
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -34,12 +34,19 @@ struct Panel;
  * open a second one, it will implicitly kill the old one
 */
 struct UniqueWindow : public Window {
-
 	struct Registry {
 		UniqueWindow * window;
-		boost::function<void()> onCreate;
-		boost::function<void()> onDelete;
-		boost::function<void()> constr;
+
+		// Whenever Registry::toggle() is called, a window will be created using
+		// 'open_window' or if one is open already, the existing one will be
+		// closed.
+		std::function<void()> open_window;
+
+		// Called when the window opens.
+		std::function<void()> on_create;
+
+		// Called when the window is deleted (i.e. closed).
+		std::function<void()> on_delete;
 
 		void create();
 		void destroy();

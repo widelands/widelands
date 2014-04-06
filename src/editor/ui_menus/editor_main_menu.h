@@ -49,7 +49,6 @@ private:
 	void new_map_btn    ();
 	void new_random_map_btn    ();
 	void map_options_btn();
-	void readme_btn     ();
 };
 
 
