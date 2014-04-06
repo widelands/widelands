@@ -288,7 +288,7 @@ class CodeChecker(object):
         preprocessor = Preprocessor()
 
         # Check line by line (currently)
-        data = open(fn).read()
+        data = open(fn,"rb").read()
         for c in self._checkers:
             if self._benchmark:
                 start = time()
