@@ -113,7 +113,7 @@ static int L_string_bformat(lua_State * L) {
 		lua_pushstring(L, fmt.str());
 		return 1;
 	} catch (const boost::io::format_error& err) {
-		return report_error(L, "Error in bformat: %s", err.what());
+		report_error(L, "Error in bformat: %s", err.what());
 	}
 }
 /* RST

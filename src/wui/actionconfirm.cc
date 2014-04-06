@@ -449,24 +449,15 @@ ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(Interactive_Player & pa
 /**
  * Make sure the ship still exists and that it is still in expedition mode and not colonizing.
  */
-void ShipCancelExpeditionConfirm::think()
-{
-	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
+void ShipCancelExpeditionConfirm::think() {
+	const Widelands::Editor_Game_Base& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, m_object.get(egbase));
 
-	if
-		(!ship
-		 &&
-		 !iaplayer().can_act(ship->get_owner()->player_number())
-		 &&
-		 ship->get_ship_state() == Widelands::Ship::TRANSPORT
-		 &&
-		 ship->get_ship_state() == Widelands::Ship::EXP_COLONIZING)
-	{
+	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()) ||
+	    !ship->state_is_expedition()) {
 		die();
 	}
 }
-
 
 /**
  * The "Ok" button was clicked, so issue the command for this building.
