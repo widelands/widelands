@@ -318,7 +318,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 		} else if (d > 0) {
 			for (; d; --d)
 				if (T::create_new_worker(*pi, egbase, wdes))
-					return report_error(L, "No space left for this worker");
+					report_error(L, "No space left for this worker");
 		}
 	}
 	return 0;
@@ -389,12 +389,12 @@ SoldiersMap m_parse_set_soldiers_arguments(lua_State* L, const Soldier_Descr& so
 // Does most of the work of get_soldiers for buildings.
 int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tribe_Descr& tribe) {
 	if (lua_gettop(L) != 2)
-		return report_error(L, "Invalid arguments!");
+		report_error(L, "Invalid arguments!");
 
 	const SoldiersList soldiers = sc.stationedSoldiers();
 	if (lua_isstring(L, -1)) {
 		if (std::string(luaL_checkstring(L, -1)) != "all")
-			return report_error(L, "Invalid arguments!");
+			report_error(L, "Invalid arguments!");
 
 		// Return All Soldiers
 		SoldiersMap hist;
@@ -507,7 +507,7 @@ int do_set_soldiers
 					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
 				if (sc->incorporateSoldier(egbase, soldier)) {
 					soldier.remove(egbase);
-					return report_error(L, "No space left for soldier!");
+					report_error(L, "No space left for soldier!");
 				}
 			}
 		}
@@ -893,7 +893,7 @@ int L_Map::place_immovable(lua_State * const L) {
 	if
 	 (BaseImmovable const * const imm = c->fcoords(L).field->get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
-			return report_error(L, "Node is no longer free!");
+			report_error(L, "Node is no longer free!");
 
 	Editor_Game_Base & egbase = get_egbase(L);
 
@@ -904,23 +904,18 @@ int L_Map::place_immovable(lua_State * const L) {
 				egbase.manually_load_tribe(from_where);
 
 			int32_t const imm_idx = tribe.get_immovable_index(objname);
-			if (imm_idx < 0)
-				return
-					report_error
-					(L, "Unknown immovable <%s> for tribe <%s>",
-					 objname, from_where.c_str());
+			if (imm_idx < 0) {
+				report_error(L, "Unknown immovable <%s> for tribe <%s>", objname, from_where.c_str());
+			}
 
 			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
 		} catch (game_data_error &) {
-			return
-				report_error
-					(L, "Problem loading tribe <%s>. Maybe not existent?",
-					 from_where.c_str());
+			report_error(L, "Problem loading tribe <%s>. Maybe not existent?", from_where.c_str());
 		}
 	} else {
 		int32_t const imm_idx = egbase.world().get_immovable_index(objname);
 		if (imm_idx < 0)
-			return report_error(L, "Unknown immovable <%s>", objname);
+			report_error(L, "Unknown immovable <%s>", objname);
 
 		m = &egbase.create_immovable(c->coords(), imm_idx, nullptr);
 	}
@@ -1200,11 +1195,8 @@ int L_BaseImmovable::get_size(lua_State * L) {
 		case BaseImmovable::MEDIUM: lua_pushstring(L, "medium"); break;
 		case BaseImmovable::BIG: lua_pushstring(L, "big"); break;
 		default:
-			return
-				report_error
-					(L, "Unknown size in L_BaseImmovable::get_size: %i",
-					 o->get_size());
-			break;
+		   report_error(L, "Unknown size in L_BaseImmovable::get_size: %i", o->get_size());
+		   break;
 	}
 	return 1;
 }
@@ -1362,7 +1354,7 @@ int L_Flag::set_wares(lua_State * L)
 		nwares += d;
 
 		if (f->total_capacity() < nwares)
-			return report_error(L, "Flag has no capacity left!");
+			report_error(L, "Flag has no capacity left!");
 
 		if (d < 0) {
 			while (d) {
@@ -1509,8 +1501,7 @@ int L_Road::get_road_type(lua_State * L) {
 		case Road_Busy:
 			lua_pushstring(L, "busy"); break;
 		default:
-			return
-				report_error(L, "Unknown Roadtype! This is a bug in widelands!");
+		   report_error(L, "Unknown Roadtype! This is a bug in widelands!");
 	}
 	return 1;
 }
@@ -1911,17 +1902,13 @@ int L_ProductionSite::set_wares(lua_State * L) {
 
 	container_iterate_const(WaresMap, setpoints, i) {
 		if (!valid_wares.count(i->first))
-			return
-				report_error
-				 (L, "<%s> can't be stored here!",
-				  tribe.get_ware_descr(i->first)->name().c_str());
+			report_error(
+			   L, "<%s> can't be stored here!", tribe.get_ware_descr(i->first)->name().c_str());
 
 		WaresQueue & wq = ps->waresqueue(i->first);
 		if (i->second > wq.get_max_size())
-			return
-				report_error
-					(L, "Not enough space for %u items, only for %i",
-					 i->second, wq.get_max_size());
+			report_error(
+			   L, "Not enough space for %u items, only for %i", i->second, wq.get_max_size());
 
 		wq.set_filled(i->second);
 	}
@@ -2152,7 +2139,7 @@ int L_Bob::has_caps(lua_State * L) {
 	else if (query == "walks")
 		lua_pushboolean(L,  movecaps & MOVECAPS_WALK);
 	else
-		return report_error(L, "Unknown caps queried: %s!", query.c_str());
+		report_error(L, "Unknown caps queried: %s!", query.c_str());
 
 	return 1;
 }
@@ -2625,7 +2612,7 @@ int L_Field::set_resource(lua_State * L) {
 		(luaL_checkstring(L, -1));
 
 	if (res == -1)
-		return report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
+		report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
 
 	field->set_resources(res, field->get_resources_amount());
 
@@ -2650,9 +2637,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
 
 	if (amount < 0 or amount > max_amount)
-		return
-			report_error
-			(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
 
@@ -2931,7 +2916,7 @@ int L_Field::has_caps(lua_State * L) {
 	else if (query == "flag")
 		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_FLAG);
 	else
-		return report_error(L, "Unknown caps queried: %s!", query.c_str());
+		report_error(L, "Unknown caps queried: %s!", query.c_str());
 
 	return 1;
 }

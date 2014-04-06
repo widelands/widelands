@@ -56,6 +56,7 @@ using namespace std;
 
 namespace  {
 
+<<<<<<< TREE
 // Parses a point from a string like 'p=x y' into p. Throws on error.
 void parse_point(const string& def, Point* p) {
 	vector<string> split_vector;
@@ -90,6 +91,8 @@ void parse_rect(const string& def, Rect* r) {
 	r->h = boost::lexical_cast<uint32_t>(split_vector[3]);
 }
 
+=======
+>>>>>>> MERGE-SOURCE
 /**
  * An Image Implementation that draws a static animation into a surface.
  */
@@ -125,6 +128,7 @@ private:
 	const RGBColor clr_;
 };
 
+<<<<<<< TREE
 struct SfxCues {
 	void read(const string & directory, Section & section);
 	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
@@ -526,6 +530,8 @@ void PackedAnimation::blit
 	}
 }
 
+=======
+>>>>>>> MERGE-SOURCE
 /**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.
@@ -543,6 +549,7 @@ public:
 	virtual uint32_t frametime() const override;
 	virtual const Point& hotspot() const override;
 	virtual const Image& representative_image(const RGBColor& clr) const override;
+	virtual const Image& representative_image_from_disk() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
@@ -727,6 +734,9 @@ const Image& NonPackedAnimation::representative_image(const RGBColor& clr) const
 	return get_frame(0, &clr);
 }
 
+const Image& NonPackedAnimation::representative_image_from_disk() const {
+	return get_frame(0, nullptr);
+}
 
 void NonPackedAnimation::trigger_soundfx
 	(uint32_t time, uint32_t stereo_position) const {
@@ -866,15 +876,8 @@ AnimationManager IMPLEMENTATION
 ==============================================================================
 */
 
-uint32_t AnimationManager::load(const string& directory, Section & section) {
-	string format = section.get_string("format", "");
-	if (format == "blits") {
-		m_animations.push_back(new BlitsAnimation(directory, section));
-	} else if (section.get_bool("packed", false)) {
-		m_animations.push_back(new PackedAnimation(directory, section));
-	} else {
-		m_animations.push_back(new NonPackedAnimation(directory, section));
-	}
+uint32_t AnimationManager::load(const string& directory, Section & s) {
+	m_animations.push_back(new NonPackedAnimation(directory, s));
 	return m_animations.size();
 }
 
