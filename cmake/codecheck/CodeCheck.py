@@ -298,7 +298,7 @@ class CodeChecker(object):
             else:
                 e =  c.check_text( preprocessor, fn, data )
                 errors.extend( e )
-
+        data.close()
         errors.sort(key=lambda a: a[1])
 
         if len(errors) and print_errors:
