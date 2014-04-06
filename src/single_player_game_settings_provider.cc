@@ -136,6 +136,7 @@ void SinglePlayerGameSettingsProvider::nextPlayerState(uint8_t const number) {
 			it = impls.begin();
 		} else if (it == impls.end()) {
 			s.players[number].random_ai = true;
+			std::srand(time(nullptr));
 			do {
 				uint8_t random = (std::rand() % impls.size()); // Choose a random AI
 				it = impls.begin() + random;
@@ -158,6 +159,7 @@ void SinglePlayerGameSettingsProvider::setPlayerTribe(uint8_t const number, cons
 
 	if (random_tribe) {
 		uint8_t num_tribes = s.tribes.size();
+		std::srand(time(nullptr));
 		uint8_t random = (std::rand() % num_tribes);
 		actual_tribe = s.tribes.at(random).name;
 	}

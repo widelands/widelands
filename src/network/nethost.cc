@@ -186,6 +186,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 							newstate = PlayerSettings::stateClosed;
 					}
 				} else if (it == impls.end()) {
+					std::srand(time(nullptr));
 					do {
 						uint8_t random = (std::rand() % impls.size()); // Choose a random AI
 						it = impls.begin() + random;
@@ -1642,6 +1643,7 @@ void NetHost::setPlayerTribe(uint8_t const number, const std::string & tribe, bo
 
 	if (random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
+		std::srand(time(nullptr));
 		uint8_t random = (std::rand() % num_tribes);
 		actual_tribe = d->settings.tribes.at(random).name;
 	}
