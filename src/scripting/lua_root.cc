@@ -333,22 +333,8 @@ void L_World::__unpersist(lua_State*) {
 	.. method:: new_resource_type(table)
 
 		Adds a new resource type that can be in the different maps. Takes a
-		single argument, a table with the descriptions for the resource type. It might contain
-		the following entries:
-
-		// NOCOM(#sirver): already outdated.
-		:type name: class:`string`
-		:arg name: The internal identifier.
-		:type descname: class:`string`
-		:arg descname: The string used when displaying this to the user. Usually
-			translated.
-		:type max_amount: class:`int`
-		:arg max_amount: The maximum amount that can be in one field.
-		:type detectable: class:`bool`
-		:arg detectable: If true, than this resource can be found by a geologist.
-		:type editor_pictures: class:`table`
-		:arg editor_pictures: Contains (int,string) pairs that define which
-			images should be used in the editor as overlays for the resource.
+		single argument, a table with the descriptions for the resource type. See the
+		files in world/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -371,15 +357,8 @@ int L_World::new_resource_type(lua_State* L) {
 	.. method:: new_terrain_type(table)
 
 		Adds a new terrain type that can be used in maps. Takes a single
-		argument, a table with the descriptions for the terrain type. It might
-		contain the following entries:
-
-		:type name: class:`string`
-		:arg name: The internal identifier.
-		:type descname: class:`string`
-		:arg descname: The string used when displaying this to the user. Usually
-			translated.
-		// NOCOM(#sirver): document all of them
+		argument, a table with the descriptions for the terrain type. See the files in world/
+		for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -398,7 +377,15 @@ int L_World::new_terrain_type(lua_State * L) {
 	return 0;
 }
 
-// NOCOM(#sirver): document
+/* RST
+	.. method:: new_critter_type(table)
+
+		Adds a new critter type that can be used in maps. Takes a single
+		argument, a table with the description. See the files in world/ for usage
+		examples.
+
+		:returns: :const:`nil`
+*/
 int L_World::new_critter_type(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -413,7 +400,15 @@ int L_World::new_critter_type(lua_State * L) {
 	return 0;
 }
 
-// NOCOM(#sirver): document
+/* RST
+	.. method:: new_immovable_type(table)
+
+		Adds a new immovable type that can be used in maps. Takes a single
+		argument, a table with the description. See the files in world/ for usage
+		examples.
+
+		:returns: :const:`nil`
+*/
 int L_World::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -428,6 +423,15 @@ int L_World::new_immovable_type(lua_State* L) {
 	return 0;
 }
 
+/* RST
+	.. method:: new_editor_category(table)
+
+		Adds a new editor category that can be used to classify objects in the
+		world. This will be used to sort them into sub menus in the editor. See
+		usage examples in world/.
+
+		:returns: :const:`nil`
+*/
 int L_World::new_editor_category(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
