@@ -31,13 +31,21 @@
 struct GameChatMenu : public UI::UniqueWindow {
 
 	/**
+	 * Creates a default chat window for multiplayer games
+	*/
+	static GameChatMenu* create_chat_console(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &);
+
+	/**
+	 * Creates a chat window only for scripting in debug mode
+	*/
+	static GameChatMenu* create_script_console(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &);
+
+	/**
 	 * Configure the menu so that it is useful for writing chat messages.
 	 * Put the focus on the message entry field, close the menu automatically
 	 * when return is pressed, etc.
 	 */
 	void enter_chat_message(bool close_on_send = true);
-	static GameChatMenu* create_chat_console(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &);
-	static GameChatMenu* create_script_console(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &);
 
 private:
 	GameChatMenu(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &, const std::string & title);
