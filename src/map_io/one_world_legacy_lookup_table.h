@@ -36,9 +36,14 @@ public:
 	// Looks up the new name for the 'terrain' from the former 'world'.
 	std::string lookup_terrain(const std::string& world, const std::string& terrain) const;
 
+
+	// Looks up the new name for the 'critter' from the former 'world'.
+	std::string lookup_critter(const std::string& world, const std::string& critter) const;
+
 private:
 	const std::map<std::string, std::string> resources_;
 	const std::map<std::string, std::map<std::string, std::string>> terrains_;
+	const std::map<std::string, std::map<std::string, std::string>> critters_;
 };
 
 #endif /* end of include guard: ONE_WORLD_LEGACY_CONVERSION_H */

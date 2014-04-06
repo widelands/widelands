@@ -162,10 +162,6 @@ const int BOB_GRASS1 = 0x0e;
 const int BOB_GRASS2 = 0x14;
 const int BOB_GRASS3 = 0x0f;
 
-// this is a detail of S2 maps
-const int CRITTER_PER_DEFINITION = 1;
-
-
 /// Some of the original S2 maps have rather odd sizes. In that case, however,
 /// width (and height?) are rounded up to some alignment. The in-file size of a
 /// section is stored in the section header (I think ;)).
@@ -530,7 +526,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y) {
 		uint32_t i = y * mapwidth;
 		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
-			char const * bobname = nullptr;
+			std::string bobname;
 
 			switch (section[i]) {
 			case 0: break;
@@ -550,14 +546,13 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				break;
 			}
 
-			// NOCOM(#sirver): bring back
-			// if (bobname) {
-				// int32_t const idx = world.get_bob(bobname);
-				// if (idx < 0)
-					// throw wexception("Missing bob type %s", bobname);
-				// for (uint32_t z = 0; z < CRITTER_PER_DEFINITION; ++z)
-					// egbase.create_bob(Widelands::Coords(x, y), idx);
-			// }
+			if (!bobname.empty()) {
+				int32_t const idx = world.get_bob(bobname.c_str());
+				if (idx < 0) {
+					throw wexception("Missing bob type %s", bobname.c_str());
+				}
+				egbase.create_bob(Widelands::Coords(x, y), idx);
+			}
 		}
 	}
 
@@ -639,11 +634,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 						 "play settler maps here",
 						 res);
 			}
-			// NOCOM(#sirver): bring back
-			// const int32_t real_amount = static_cast<int32_t>
-				// (2.86 * static_cast<float>(amount));
-			// f->set_resources(nres, real_amount);
-			// f->set_starting_res_amount(real_amount);
+			const int32_t real_amount = static_cast<int32_t>
+				(2.86 * static_cast<float>(amount));
+			f->set_resources(nres, real_amount);
+			f->set_starting_res_amount(real_amount);
 		}
 
 
@@ -674,8 +668,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	fr.Close();
 
 	//  Map is completely read into memory.
-	//  Now try to convert the remaining stuff to Widelands-format
-	// NOCOM(#sirver): bring back
+	//  Now try to convert the remaining stuff to Widelands-format. This will
+	//  read and construct the name of the old immovables before the one world
+	//  conversion. We will then convert them using the
+	//  OneWorldLegacyLookupTable.
 	// uint8_t c;
 	// for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 		// for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x) {

@@ -140,12 +140,11 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, old_world_name);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	// NOCOM(#sirver): bring back
-	// Map_Object_Packet mapobjects;
+	Map_Object_Packet mapobjects;
 
-	// log("Reading Map Objects ... ");
-	// mapobjects.Read(*m_fs, egbase, *m_mol);
-	// log("took %ums\n ", timer.ms_since_last_query());
+	log("Reading Map Objects ... ");
+	mapobjects.Read(*m_fs, egbase, *m_mol, old_world_name);
+	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
 	{

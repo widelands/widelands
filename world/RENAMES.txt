@@ -4,16 +4,6 @@ This file is to document the renames done in the process of the one_world effort
 These are important for backwards compatibility of maps (s2 and widelands) as
 they will be hardcoded into the engine.
 
-Resources:
-granit -> granite
-
-Critters:
-<all_worlds>/bunny -> "bunny"
-greenland/brownbear -> "brownbear"
-greeland/winterland deer -> "stag" (male deer)
-blackland/desert deer -> "deer" (female deer)
-
-
 Immovables:
 <all_worlds>_skeleton1 => "skeleton1"
 # NOCOM: Skeleton2 and skeleton3 lived in multiple worlds, but were in different order in different worlds.

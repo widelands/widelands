@@ -31,11 +31,6 @@ resources_
 // TERRAINS
 terrains_
 {std::make_pair(
-	"greenland", std::map<std::string, std::string>
-	{
-		// No changes in terrain names for greenland.
-	}),
-std::make_pair(
 	"blackland", std::map<std::string, std::string>
 	{
 		{"strand", "wasteland_beach"},
@@ -64,6 +59,20 @@ std::make_pair(
 		{"steppe", "desert_steppe"},
 		{"wasser", "desert_water"},
 	}),
+},
+
+// CRITTERS
+critters_
+{std::make_pair(
+	"greenland", std::map<std::string, std::string>
+	{
+		{"deer", "stag"},
+	}),
+std::make_pair(
+	"winterland", std::map<std::string, std::string>
+	{
+		{"deer", "stag"},
+	}),
 }
 
 {}
@@ -86,4 +95,16 @@ std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& world,
 		}
 	}
 	return terrain;
+}
+
+std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& world,
+                                                      const std::string& critter) const {
+	if (!world.empty()) {
+		const std::map<std::string, std::string>& world_critters = critters_.at(world);
+		const auto& i = world_critters.find(critter);
+		if (i != world_critters.end()) {
+			return i->second;
+		}
+	}
+	return critter;
 }

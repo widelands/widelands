@@ -49,7 +49,7 @@ Map_Object_Packet::~Map_Object_Packet() {
 
 
 void Map_Object_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, const std::string& old_world_name)
 {
 	try {
 		FileRead fr;
@@ -69,6 +69,7 @@ void Map_Object_Packet::Read
 				loaders.insert(Immovable::load(egbase, mol, fr));
 				break;
 
+				// NOCOM(#sirver): why are these called legacy?
 			case Map_Object::header_Legacy_AttackController:
 				loaders.insert(Legacy::loadAttackController(egbase, mol, fr));
 				break;
@@ -82,7 +83,7 @@ void Map_Object_Packet::Read
 				break;
 
 			case Map_Object::header_Critter:
-				loaders.insert(Critter_Bob::load(egbase, mol, fr));
+				loaders.insert(Critter_Bob::load(egbase, mol, fr, old_world_name));
 				break;
 
 			case Map_Object::header_Worker:

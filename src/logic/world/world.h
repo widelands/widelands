@@ -25,9 +25,6 @@
 #include "description_maintainer.h"
 #include "logic/bob.h"
 
-class Section;
-class LuaInterface;
-
 namespace Widelands {
 
 class EditorCategory;
@@ -48,17 +45,18 @@ public:
 	// Load the graphics data for this world.
 	void load_graphics();
 
+	// NOCOM(#sirver): refactor to return containers instead.
 	Terrain_Index index_of_terrain(char const* const name) const;
-	TerrainDescription& terrain_descr(Terrain_Index const i) const;
+	TerrainDescription& terrain_descr(Terrain_Index i) const;
 	TerrainDescription const* get_ter(char const* const name) const;
 	int32_t get_nr_terrains() const;
 	int32_t get_bob(char const* const l) const;
-	BobDescr const* get_bob_descr(uint16_t const index) const;
+	BobDescr const* get_bob_descr(uint16_t index) const;
 	BobDescr const* get_bob_descr(const std::string& name) const;
 	int32_t get_nr_bobs() const;
 	int32_t get_immovable_index(char const* const l) const;
 	int32_t get_nr_immovables() const;
-	Immovable_Descr const* get_immovable_descr(int32_t const index) const;
+	Immovable_Descr const* get_immovable_descr(int32_t index) const;
 
 	// Add this new resource to the world description.
 	void add_resource_type(const LuaTable& table);
@@ -79,7 +77,7 @@ public:
 	const DescriptionMaintainer<EditorCategory>& editor_categories() const;
 
 	int32_t get_resource(const char* const name) const;
-	ResourceDescription const* get_resource(Resource_Index const res) const;
+	ResourceDescription const* get_resource(Resource_Index res) const;
 	int32_t get_nr_resources() const;
 	int32_t safe_resource_index(const char* const warename) const;
 

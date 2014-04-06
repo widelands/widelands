@@ -31,6 +31,7 @@
 #include "logic/game_data_error.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "wexception.h"
@@ -392,35 +393,37 @@ const BobProgramBase * Critter_Bob::Loader::get_program
 	return critter.descr().get_program(name);
 }
 
-
-Map_Object::Loader * Critter_Bob::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
-{
+Map_Object::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
+                                      Map_Map_Object_Loader& mol,
+                                      FileRead& fr,
+                                      const std::string& old_world_name) {
 	std::unique_ptr<Loader> loader(new Loader);
 
+	OneWorldLegacyLookupTable lookup_table;
 	try {
 		// The header has been peeled away by the caller
 
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version && version <= CRITTER_SAVEGAME_VERSION) {
-			std::string owner = fr.CString();
-			std::string name = fr.CString();
+			const std::string owner = fr.CString();
+			std::string critter_name = fr.CString();
 			const Critter_Bob_Descr * descr = nullptr;
 
 			if (owner == "world") {
-				descr = dynamic_cast<const Critter_Bob_Descr *>
-					(egbase.world().get_bob_descr(name));
+				critter_name = lookup_table.lookup_critter(old_world_name, critter_name);
+				descr =
+				   dynamic_cast<const Critter_Bob_Descr*>(egbase.world().get_bob_descr(critter_name));
 			} else {
 				egbase.manually_load_tribe(owner);
 
 				if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
 					descr = dynamic_cast<const Critter_Bob_Descr *>
-						(tribe->get_bob_descr(name));
+						(tribe->get_bob_descr(critter_name));
 			}
 
 			if (!descr)
 				throw game_data_error
-					("undefined critter %s/%s", owner.c_str(), name.c_str());
+					("undefined critter %s/%s", owner.c_str(), critter_name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);

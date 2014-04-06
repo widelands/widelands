@@ -85,6 +85,7 @@ World::~World() {
 }
 
 void World::load_graphics() {
+	// NOCOM(#sirver): this is not really needed anymore I thinks.
 	g_gr->flush_maptextures();
 }
 
