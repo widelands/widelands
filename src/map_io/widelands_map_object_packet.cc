@@ -25,7 +25,6 @@
 #include "logic/critter_bob.h"
 #include "logic/editor_game_base.h"
 #include "logic/immovable.h"
-#include "logic/legacy.h"
 #include "logic/map.h"
 #include "logic/ship.h"
 #include "logic/widelands_fileread.h"
@@ -67,15 +66,6 @@ void Map_Object_Packet::Read
 				return;
 			case Map_Object::header_Immovable:
 				loaders.insert(Immovable::load(egbase, mol, fr));
-				break;
-
-				// NOCOM(#sirver): why are these called legacy?
-			case Map_Object::header_Legacy_AttackController:
-				loaders.insert(Legacy::loadAttackController(egbase, mol, fr));
-				break;
-
-			case Map_Object::header_Legacy_Battle:
-				loaders.insert(Legacy::loadBattle(egbase, mol, fr));
 				break;
 
 			case Map_Object::header_Battle:
