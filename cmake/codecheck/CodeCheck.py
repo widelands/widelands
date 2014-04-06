@@ -288,17 +288,17 @@ class CodeChecker(object):
         preprocessor = Preprocessor()
 
         # Check line by line (currently)
-        data = open(fn,"rb").read()
-        for c in self._checkers:
-            if self._benchmark:
-                start = time()
-                e =  c.check_text( preprocessor, fn, data )
-                errors.extend( e )
-                bm[c.name] += time()-start
-            else:
-                e =  c.check_text( preprocessor, fn, data )
-                errors.extend( e )
-        data.close()
+        with open(fn,"rb") as file:
+            data = file.read()
+            for c in self._checkers:
+                if self._benchmark:
+                    start = time()
+                    e =  c.check_text( preprocessor, fn, data )
+                    errors.extend( e )
+                    bm[c.name] += time()-start
+                else:
+                    e =  c.check_text( preprocessor, fn, data )
+                    errors.extend( e )
         errors.sort(key=lambda a: a[1])
 
         if len(errors) and print_errors:
