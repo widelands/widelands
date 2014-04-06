@@ -193,46 +193,43 @@ int32_t WL_Map_Loader::load_map_complete
 	//  This packet must be before any building or road packet. So do not change
 	//  this order without knowing what you do
 	//  EXISTENT PACKETS
-	// NOCOM(#sirver): bring back
-	// log("Reading Flag Data ... ");
-	// {Map_Flag_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	// log("took %ums\n ", timer.ms_since_last_query());
+	log("Reading Flag Data ... ");
+	{Map_Flag_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
 
-	// log("Reading Road Data ... ");
-	// {Map_Road_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	// log("took %ums\n ", timer.ms_since_last_query());
+	log("Reading Road Data ... ");
+	{Map_Road_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
 
-	// log("Reading Building Data ... ");
-	// {Map_Building_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	// log("took %ums\n ", timer.ms_since_last_query());
+	log("Reading Building Data ... ");
+	{Map_Building_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
 
-	// //  DATA PACKETS
-	// log("Reading Flagdata Data ... ");
-	// {Map_Flagdata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	// log("took %ums\n ", timer.ms_since_last_query());
+	//  DATA PACKETS
+	log("Reading Flagdata Data ... ");
+	{Map_Flagdata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
 
-	// log("Reading Roaddata Data ... ");
-	// {Map_Roaddata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	// log("took %ums\n ", timer.ms_since_last_query());
+	log("Reading Roaddata Data ... ");
+	{Map_Roaddata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
 
-
-	// log("Reading Buildingdata Data ... ");
-	// {Map_Buildingdata_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
-	// log("took %ums\n ", timer.ms_since_last_query());
+	log("Reading Buildingdata Data ... ");
+	{Map_Buildingdata_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Second and third phase loading Map Objects ... ");
-	// NOCOM(#sirver): bring back
-	// mapobjects.LoadFinish();
-	// {
-		// const Field & fields_end = map()[map().max_index()];
-		// for (Field * field = &map()[0]; field < &fields_end; ++field)
-			// if (BaseImmovable * const imm = field->get_immovable()) {
-				// if (upcast(Building const, building, imm))
-					// if (field != &map()[building->get_position()])
-						// continue; //  not the building's main position
-				// imm->load_finish(egbase);
-			// }
-	// }
+	mapobjects.LoadFinish();
+	{
+		const Field & fields_end = map()[map().max_index()];
+		for (Field * field = &map()[0]; field < &fields_end; ++field)
+			if (BaseImmovable * const imm = field->get_immovable()) {
+				if (upcast(Building const, building, imm))
+					if (field != &map()[building->get_position()])
+						continue; //  not the building's main position
+				imm->load_finish(egbase);
+			}
+	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  This should be at least after loading Soldiers (Bobs).

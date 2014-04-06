@@ -218,6 +218,16 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	return section;
 }
 
+std::string get_world_name(S2_Map_Loader::WorldType world) {
+	switch (world) {
+		case S2_Map_Loader::GREENLAND: return "greenland";
+		case S2_Map_Loader::BLACKLAND: return "blackland";
+		case S2_Map_Loader::WINTERLAND: return "winterland";
+		default:
+			throw wexception("Unknown World in map file.");
+	}
+}
+
 // Returns S2 terrain index into (pre one-world) terrain names. Those are then
 // looked up in the legacy conversion code and this gives the Widelands
 // terrain.
@@ -288,14 +298,7 @@ Widelands::Terrain_Index TerrainConverter::lookup(S2_Map_Loader::WorldType world
 		break;
 	}
 
-	std::string worldname;
-	switch (world) {
-		case S2_Map_Loader::GREENLAND: worldname = "greenland"; break;
-		case S2_Map_Loader::BLACKLAND: worldname = "blackland"; break;
-		case S2_Map_Loader::WINTERLAND: worldname = "winterland"; break;
-		default:
-			throw wexception("Unknown World in map file.");
-	}
+	const std::string worldname = get_world_name(world);
 	const std::string& old_terrain_name = table_.at(world)[c];
 	return world_.index_of_terrain(
 	   one_world_legacy_lookup_table_.lookup_terrain(worldname, old_terrain_name).c_str());
@@ -672,142 +675,142 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	//  read and construct the name of the old immovables before the one world
 	//  conversion. We will then convert them using the
 	//  OneWorldLegacyLookupTable.
-	// uint8_t c;
-	// for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
-		// for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x) {
-			// char const * bobname = nullptr;
+	const OneWorldLegacyLookupTable lookup_table;
+	const std::string world_name = get_world_name(m_worldtype);
 
-			// Widelands::Coords const location(x, y);
-			// Widelands::Map_Index const index =
-				// Widelands::Map::get_index(location, mapwidth);
-			// c = bobs[index];
-			// if (buildings[index] == 0x78) {
-				// switch (c) {
-				// case BOB_STONE1:        bobname = "stones1"; break;
-				// case BOB_STONE2:        bobname = "stones2"; break;
-				// case BOB_STONE3:        bobname = "stones3"; break;
-				// case BOB_STONE4:        bobname = "stones4"; break;
-				// case BOB_STONE5:        bobname = "stones5"; break;
-				// case BOB_STONE6:        bobname = "stones6"; break;
-				// default:
-					// break;
-				// }
-				// if (bobname) {
-					// int32_t const idx =
-						// world.get_immovable_index(bobname);
-					// if (idx < 0)
-						// throw wexception("Missing immovable type %s", bobname);
-					// egbase.create_immovable(Widelands::Coords(x, y), idx, nullptr);
-					// continue;
-				// }
-			// }
+	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
+	auto place_immovable = [&egbase, &lookup_table, &world, &world_name](
+	   const Widelands::Coords& location, const std::string& old_immovable_name) {
+		const std::string new_immovable_name = lookup_table.lookup_immovable(world_name, old_immovable_name);
+		int32_t const idx = world.get_immovable_index(new_immovable_name.c_str());
+		if (idx < 0) {
+			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
+		}
+		egbase.create_immovable(location, idx, nullptr);
+	};
 
-			// switch (c) {
-			// case BOB_NONE : break; // DO nothing
+	uint8_t c;
+	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
+		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x) {
+			const Widelands::Coords location(x, y);
+			Widelands::Map_Index const index =
+				Widelands::Map::get_index(location, mapwidth);
+			c = bobs[index];
+			std::string bobname;
+			if (buildings[index] == 0x78) {
+				switch (c) {
+				case BOB_STONE1:        bobname = "stones1"; break;
+				case BOB_STONE2:        bobname = "stones2"; break;
+				case BOB_STONE3:        bobname = "stones3"; break;
+				case BOB_STONE4:        bobname = "stones4"; break;
+				case BOB_STONE5:        bobname = "stones5"; break;
+				case BOB_STONE6:        bobname = "stones6"; break;
+				default:
+					break;
+				}
+				if (!bobname.empty()) {
+					place_immovable(location, bobname);
+					continue;
+				}
+			}
 
-			// case BOB_PEBBLE1:          bobname = "pebble1";   break;
-			// case BOB_PEBBLE2:          bobname = "pebble2";   break;
-			// case BOB_PEBBLE3:          bobname = "pebble3";   break;
-			// case BOB_PEBBLE4:          bobname = "pebble4";   break;
-			// case BOB_PEBBLE5:          bobname = "pebble5";   break;
-			// case BOB_PEBBLE6:          bobname = "pebble6";   break;
+			switch (c) {
+			case BOB_NONE : break; // DO nothing
 
-			// case BOB_MUSHROOM1:        bobname = "mushroom1"; break;
-			// case BOB_MUSHROOM2:        bobname = "mushroom2"; break;
+			case BOB_PEBBLE1:          bobname = "pebble1";   break;
+			case BOB_PEBBLE2:          bobname = "pebble2";   break;
+			case BOB_PEBBLE3:          bobname = "pebble3";   break;
+			case BOB_PEBBLE4:          bobname = "pebble4";   break;
+			case BOB_PEBBLE5:          bobname = "pebble5";   break;
+			case BOB_PEBBLE6:          bobname = "pebble6";   break;
 
-			// case BOB_DEADTREE1:        bobname = "deadtree1"; break;
-			// case BOB_DEADTREE2:        bobname = "deadtree2"; break;
-			// case BOB_DEADTREE3:        bobname = "deadtree3"; break;
-			// case BOB_DEADTREE4:        bobname = "deadtree4"; break;
+			case BOB_MUSHROOM1:        bobname = "mushroom1"; break;
+			case BOB_MUSHROOM2:        bobname = "mushroom2"; break;
 
-			// case BOB_TREE1_T:          bobname = "tree1_t";   break;
-			// case BOB_TREE1_S:          bobname = "tree1_s";   break;
-			// case BOB_TREE1_M:          bobname = "tree1_m";   break;
-			// case BOB_TREE1:            bobname = "tree1";     break;
+			case BOB_DEADTREE1:        bobname = "deadtree1"; break;
+			case BOB_DEADTREE2:        bobname = "deadtree2"; break;
+			case BOB_DEADTREE3:        bobname = "deadtree3"; break;
+			case BOB_DEADTREE4:        bobname = "deadtree4"; break;
 
-			// case BOB_TREE2_T:          bobname = "tree2_t";   break;
-			// case BOB_TREE2_S:          bobname = "tree2_s";   break;
-			// case BOB_TREE2_M:          bobname = "tree2_m";   break;
-			// case BOB_TREE2:            bobname = "tree2";     break;
+			case BOB_TREE1_T:          bobname = "tree1_t";   break;
+			case BOB_TREE1_S:          bobname = "tree1_s";   break;
+			case BOB_TREE1_M:          bobname = "tree1_m";   break;
+			case BOB_TREE1:            bobname = "tree1";     break;
 
-			// case BOB_TREE3_T:          bobname = "tree3_t";   break;
-			// case BOB_TREE3_S:          bobname = "tree3_s";   break;
-			// case BOB_TREE3_M:          bobname = "tree3_m";   break;
-			// case BOB_TREE3:            bobname = "tree3";     break;
+			case BOB_TREE2_T:          bobname = "tree2_t";   break;
+			case BOB_TREE2_S:          bobname = "tree2_s";   break;
+			case BOB_TREE2_M:          bobname = "tree2_m";   break;
+			case BOB_TREE2:            bobname = "tree2";     break;
 
-			// case BOB_TREE4_T:          bobname = "tree4_t";   break;
-			// case BOB_TREE4_S:          bobname = "tree4_s";   break;
-			// case BOB_TREE4_M:          bobname = "tree4_m";   break;
-			// case BOB_TREE4:            bobname = "tree4";     break;
+			case BOB_TREE3_T:          bobname = "tree3_t";   break;
+			case BOB_TREE3_S:          bobname = "tree3_s";   break;
+			case BOB_TREE3_M:          bobname = "tree3_m";   break;
+			case BOB_TREE3:            bobname = "tree3";     break;
 
-			// case BOB_TREE5_T:          bobname = "tree5_t";   break;
-			// case BOB_TREE5_S:          bobname = "tree5_s";   break;
-			// case BOB_TREE5_M:          bobname = "tree5_m";   break;
-			// case BOB_TREE5:            bobname = "tree5";     break;
+			case BOB_TREE4_T:          bobname = "tree4_t";   break;
+			case BOB_TREE4_S:          bobname = "tree4_s";   break;
+			case BOB_TREE4_M:          bobname = "tree4_m";   break;
+			case BOB_TREE4:            bobname = "tree4";     break;
 
-			// case BOB_TREE6_T:          bobname = "tree6_t";   break;
-			// case BOB_TREE6_S:          bobname = "tree6_s";   break;
-			// case BOB_TREE6_M:          bobname = "tree6_m";   break;
-			// case BOB_TREE6:            bobname = "tree6";     break;
+			case BOB_TREE5_T:          bobname = "tree5_t";   break;
+			case BOB_TREE5_S:          bobname = "tree5_s";   break;
+			case BOB_TREE5_M:          bobname = "tree5_m";   break;
+			case BOB_TREE5:            bobname = "tree5";     break;
 
-			// case BOB_TREE7_T:          bobname = "tree7_t";   break;
-			// case BOB_TREE7_S:          bobname = "tree7_s";   break;
-			// case BOB_TREE7_M:          bobname = "tree7_m";   break;
-			// case BOB_TREE7:            bobname = "tree7";     break;
+			case BOB_TREE6_T:          bobname = "tree6_t";   break;
+			case BOB_TREE6_S:          bobname = "tree6_s";   break;
+			case BOB_TREE6_M:          bobname = "tree6_m";   break;
+			case BOB_TREE6:            bobname = "tree6";     break;
 
-			// case BOB_TREE8_T:          bobname = "tree8_t";   break;
-			// case BOB_TREE8_S:          bobname = "tree8_s";   break;
-			// case BOB_TREE8_M:          bobname = "tree8_m";   break;
-			// case BOB_TREE8:            bobname = "tree8";     break;
+			case BOB_TREE7_T:          bobname = "tree7_t";   break;
+			case BOB_TREE7_S:          bobname = "tree7_s";   break;
+			case BOB_TREE7_M:          bobname = "tree7_m";   break;
+			case BOB_TREE7:            bobname = "tree7";     break;
+
+			case BOB_TREE8_T:          bobname = "tree8_t";   break;
+			case BOB_TREE8_S:          bobname = "tree8_s";   break;
+			case BOB_TREE8_M:          bobname = "tree8_m";   break;
+			case BOB_TREE8:            bobname = "tree8";     break;
 
 
-			// case BOB_GRASS1:           bobname = "grass1";    break;
-			// case BOB_GRASS2:           bobname = "grass2";    break;
-			// case BOB_GRASS3:           bobname = "grass3";    break;
+			case BOB_GRASS1:           bobname = "grass1";    break;
+			case BOB_GRASS2:           bobname = "grass2";    break;
+			case BOB_GRASS3:           bobname = "grass3";    break;
 
-			// case BOB_STANDING_STONES1: bobname = "sstones1";  break;
-			// case BOB_STANDING_STONES2: bobname = "sstones2";  break;
-			// case BOB_STANDING_STONES3: bobname = "sstones3";  break;
-			// case BOB_STANDING_STONES4: bobname = "sstones4";  break;
-			// case BOB_STANDING_STONES5: bobname = "sstones5";  break;
-			// case BOB_STANDING_STONES6: bobname = "sstones6";  break;
-			// case BOB_STANDING_STONES7: bobname = "sstones7";  break;
+			case BOB_STANDING_STONES1: bobname = "sstones1";  break;
+			case BOB_STANDING_STONES2: bobname = "sstones2";  break;
+			case BOB_STANDING_STONES3: bobname = "sstones3";  break;
+			case BOB_STANDING_STONES4: bobname = "sstones4";  break;
+			case BOB_STANDING_STONES5: bobname = "sstones5";  break;
+			case BOB_STANDING_STONES6: bobname = "sstones6";  break;
+			case BOB_STANDING_STONES7: bobname = "sstones7";  break;
 
-			// case BOB_SKELETON1:        bobname = "skeleton1"; break;
-			// case BOB_SKELETON2:        bobname = "skeleton2"; break;
-			// case BOB_SKELETON3:        bobname = "skeleton3"; break;
+			case BOB_SKELETON1:        bobname = "skeleton1"; break;
+			case BOB_SKELETON2:        bobname = "skeleton2"; break;
+			case BOB_SKELETON3:        bobname = "skeleton3"; break;
 
-			// case BOB_CACTUS1:
-				// // NOCOM(#sirver): and here
-				// // bobname =
-				// // strcmp(m_map.get_world_name(), "winterland") ?
-				// // "cactus1" : "snowman";
-				// break;
-			// case BOB_CACTUS2:
-				// // NOCOM(#sirver): and here
-				// // bobname =
-				// // strcmp(m_map.get_world_name(), "winterland") ?
-				// // "cactus2" : "track";
-				// break;
+			case BOB_CACTUS1:
+				bobname = m_worldtype != S2_Map_Loader::WINTERLAND ? "cactus1" : "snowman";
+				break;
+			case BOB_CACTUS2:
+				bobname = m_worldtype != S2_Map_Loader::WINTERLAND ? "cactus2" : "track";
+				break;
 
-			// case BOB_BUSH1:            bobname = "bush1";     break;
-			// case BOB_BUSH2:            bobname = "bush2";     break;
-			// case BOB_BUSH3:            bobname = "bush3";     break;
-			// case BOB_BUSH4:            bobname = "bush4";     break;
-			// case BOB_BUSH5:            bobname = "bush5";     break;
+			case BOB_BUSH1:            bobname = "bush1";     break;
+			case BOB_BUSH2:            bobname = "bush2";     break;
+			case BOB_BUSH3:            bobname = "bush3";     break;
+			case BOB_BUSH4:            bobname = "bush4";     break;
+			case BOB_BUSH5:            bobname = "bush5";     break;
 
-			// default:
-				// cerr << "Unknown bob " << static_cast<uint32_t>(c) << endl;
-				// break;
-			// }
+			default:
+				cerr << "Unknown bob " << static_cast<uint32_t>(c) << endl;
+				break;
+			}
 
-			// if (bobname) {
-				// int32_t idx = world.get_immovable_index(bobname);
-				// if (idx < 0)
-					// throw wexception("Missing immovable type %s", bobname);
-				// egbase.create_immovable(Widelands::Coords(x, y), idx, nullptr);
-			// }
-		// }
+			if (!bobname.empty()) {
+				place_immovable(location, bobname);
+			}
+		}
 
 	//  WORKAROUND:
 	//  Unfortunately the Widelands engine is not completely compatible with

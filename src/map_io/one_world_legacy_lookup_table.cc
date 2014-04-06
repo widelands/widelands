@@ -31,6 +31,11 @@ resources_
 // TERRAINS
 terrains_
 {std::make_pair(
+	"greenland", std::map<std::string, std::string>
+	{
+		// No changes for greenland.
+	}),
+std::make_pair(
 	"blackland", std::map<std::string, std::string>
 	{
 		{"strand", "wasteland_beach"},
@@ -69,9 +74,43 @@ critters_
 		{"deer", "stag"},
 	}),
 std::make_pair(
+	"blackland", std::map<std::string, std::string>
+	{
+		// No changes.
+	}),
+std::make_pair(
 	"winterland", std::map<std::string, std::string>
 	{
 		{"deer", "stag"},
+	}),
+std::make_pair(
+	"winterland", std::map<std::string, std::string>
+	{
+		// No changes.
+	}),
+},
+
+// IMMOVABLES
+immovables_
+{std::make_pair(
+	"greenland", std::map<std::string, std::string>
+	{
+		// No changes.
+	}),
+std::make_pair(
+	"blackland", std::map<std::string, std::string>
+	{
+		// No changes.
+	}),
+std::make_pair(
+	"winterland", std::map<std::string, std::string>
+	{
+		// No changes.
+	}),
+std::make_pair(
+	"winterland", std::map<std::string, std::string>
+	{
+		// No changes.
 	}),
 }
 
@@ -107,4 +146,16 @@ std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& world,
 		}
 	}
 	return critter;
+}
+
+std::string OneWorldLegacyLookupTable::lookup_immovable(const std::string& world,
+                                                      const std::string& immovable) const {
+	if (!world.empty()) {
+		const std::map<std::string, std::string>& world_immovables = immovables_.at(world);
+		const auto& i = world_immovables.find(immovable);
+		if (i != world_immovables.end()) {
+			return i->second;
+		}
+	}
+	return immovable;
 }
