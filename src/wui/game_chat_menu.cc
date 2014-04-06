@@ -62,8 +62,7 @@ GameChatMenu* GameChatMenu::create_script_console(
 	UI::UniqueWindow::Registry & registry,
 	ChatProvider               & chat)
 {
-	return new GameChatMenu(parent, registry, chat, _("Script console"));
-}
+	return new GameChatMenu(parent, registry, chat, _("Script console"));	}
 
 void GameChatMenu::enter_chat_message(bool close_on_send)
 {
