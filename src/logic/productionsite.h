@@ -36,8 +36,8 @@ namespace Widelands {
 struct WareDescr;
 struct ProductionProgram;
 class Soldier;
-struct Request;
-struct WaresQueue;
+class Request;
+class WaresQueue;
 class Worker_Descr;
 
 

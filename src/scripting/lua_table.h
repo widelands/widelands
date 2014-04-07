@@ -44,14 +44,14 @@ public:
 	// Returns all keys in sorted order (got by iterating using pair).
 	// All keys must be of the given type.
 	template <typename KeyType> std::vector<KeyType> keys() const {
-		std::vector<KeyType> keys;
+		std::vector<KeyType> table_keys;
 		lua_pushnil(L_);                      // S: table nil
 		while (lua_next(L_, index_) != 0) {  // S: table key value
 			lua_pop(L_, 1);                    // S: table key
-			keys.emplace_back(get_value<KeyType>());
+			table_keys.emplace_back(get_value<KeyType>());
 		}
-		std::sort(keys.begin(), keys.end());
-		return keys;
+		std::sort(table_keys.begin(), table_keys.end());
+		return table_keys;
 	}
 
 	// Returns all integer entries starting at 1 till nil is found. All entries

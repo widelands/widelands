@@ -57,7 +57,8 @@ class ConstructionSite;
  * left, a transfer may be initiated.
  * The required time has no meaning for idle requests.
  */
-struct Request : public Trackable {
+class Request : public Trackable {
+public:
 	friend class Economy;
 	friend class RequestList;
 

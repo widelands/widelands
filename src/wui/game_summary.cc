@@ -183,6 +183,7 @@ void GameSummaryScreen::fill_data()
 		}
 	} else {
 		if (team_won <= 0) {
+			assert(single_won);
 			m_title_area->set_text
 				((boost::format(_("%s won!")) % single_won->get_name()).str());
 		} else {
@@ -255,4 +256,3 @@ std::string GameSummaryScreen::parse_player_info(std::string& info)
 	}
 	return info_str;
 }
-

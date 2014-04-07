@@ -28,7 +28,7 @@
 
 namespace Widelands {
 struct Carrier;
-struct Request;
+class Request;
 
 /**
  * Road is a special object which connects two flags.

@@ -3,6 +3,7 @@
 -- =======================================================================
 
 include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 -- Removes whitespace at the beginning or the end and translates
 -- newlines into spaces.
@@ -88,7 +89,7 @@ briefing_2_found_ancient_castle = {
    body = _msg(_"An Ancient Castle", _(
 [[By the Gods! One of our scouts has discovered a mighty castle at the center of the old plateau. ]] ..
 [[The castle must be quite old and seems to have been built in a foreign style. ]] ..
-[[It’s quite obvious that this is not barbarian craft.]]) .. "<br><br>" ..
+[[It’s quite obvious that this is not barbarian craft.]]) .. paragraphdivider() ..
 _([[Let’s hope that Lanissa – the warlord holding sway over that castle – has not discovered our movements yet. ]] ..
 [[Perhaps we have a chance of conquering that mighty building without a bigger fight! ]] ..
 [[However, it is essential that we capture it. It will be the key to our reign over this island!]]),
@@ -101,7 +102,7 @@ briefing_3_captured_ancient_castle = {
    height = 300,
    posy = 1,
    body = _msg(_"Ancient Castle Captured", _(
-[[Wonderful! Our troops have finally defeated Lanissa and her soldiers. The ancient castle is ours!]]) .. "<br><br>" ..
+[[Wonderful! Our troops have finally defeated Lanissa and her soldiers. The ancient castle is ours!]]) .. paragraphdivider() ..
 _([[It is amazing how far one can see from the highest tower of the castle. We can watch the whole island. ]] ..
 [[So now I wonder why Lanissa did not see us and thus did not prepare. ]] ..
 [[Be that as it may, some things will never come to the light of day. ]] ..
@@ -136,7 +137,7 @@ last_briefing_victory = {
    height=300,
    posy=1,
    body = _msg( _"Victory!", _
-[[Finally! The island is completely ours. Now we just have to defend it better than the warlords did.]] .. "<br><br>" ..
+[[Finally! The island is completely ours. Now we just have to defend it better than the warlords did.]] .. paragraphdivider() ..
 _"Congratulations! You have mastered this scenario. You may play on if you like!"
 ),
 }

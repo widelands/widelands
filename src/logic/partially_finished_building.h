@@ -24,8 +24,8 @@
 
 namespace Widelands {
 
-struct Request;
-struct WaresQueue;
+class Request;
+class WaresQueue;
 
 /*
 Partially_Finished_Building

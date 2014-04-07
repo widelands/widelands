@@ -208,7 +208,7 @@ int L_Player::get_retreat_percentage(lua_State * L) {
 int L_Player::set_retreat_percentage(lua_State * L) {
 	uint32_t value = luaL_checkuint32(L, -1);
 	if (value > 100)
-		return report_error(L, "%i is not a valid percentage!", value);
+		report_error(L, "%i is not a valid percentage!", value);
 
 	get(L, get_egbase(L)).set_retreat_percentage(value);
 	return 0;
@@ -585,11 +585,7 @@ int L_Player::add_objective(lua_State * L) {
 
 	std::string name = luaL_checkstring(L, 2);
 	if (mom[name] != nullptr)
-		return
-			report_error
-				(L, "An objective with the name '%s' already exists!", name.c_str()
-			);
-
+		report_error(L, "An objective with the name '%s' already exists!", name.c_str());
 
 	Objective & o = *new Objective;
 
@@ -674,7 +670,7 @@ int L_Player::hide_fields(lua_State * L) {
 // UNTESTED
 int L_Player::reveal_scenario(lua_State * L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
-		return report_error(L, "Can only be called for interactive player!");
+		report_error(L, "Can only be called for interactive player!");
 
 	Campaign_visibility_save cvs;
 	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
@@ -694,7 +690,7 @@ int L_Player::reveal_scenario(lua_State * L) {
 // UNTESTED
 int L_Player::reveal_campaign(lua_State * L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
-		return report_error(L, "Can only be called for interactive player!");
+		report_error(L, "Can only be called for interactive player!");
 
 	Campaign_visibility_save cvs;
 	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);
@@ -782,7 +778,7 @@ int L_Player::set_flag_style(lua_State * L) {
 	try {
 		p.set_flag_style(p.tribe().flag_style_index(name));
 	} catch (Tribe_Descr::Nonexistent &) {
-		return report_error(L, "Flag style <%s> does not exist!\n", name);
+		report_error(L, "Flag style <%s> does not exist!\n", name);
 	}
 	return 0;
 }
@@ -804,7 +800,7 @@ int L_Player::set_frontier_style(lua_State * L) {
 	try {
 		p.set_frontier_style(p.tribe().frontier_style_index(name));
 	} catch (Tribe_Descr::Nonexistent &) {
-		return report_error(L, "Frontier style <%s> does not exist!\n", name);
+		report_error(L, "Frontier style <%s> does not exist!\n", name);
 	}
 	return 0;
 }
@@ -853,7 +849,7 @@ int L_Player::get_suitability(lua_State * L) {
 int L_Player::allow_workers(lua_State * L) {
 
 	if (luaL_checkstring(L, 2) != std::string("all"))
-		return report_error(L, "Argument must be <all>!");
+		report_error(L, "Argument must be <all>!");
 
 	Game & game = get_game(L);
 	const Tribe_Descr & tribe = get(L, game).tribe();
@@ -1255,7 +1251,7 @@ int L_Message::get_status(lua_State * L) {
 		case Message::New: lua_pushstring(L, "new"); break;
 		case Message::Read: lua_pushstring(L, "read"); break;
 		case Message::Archived: lua_pushstring(L, "archived"); break;
-		default: return report_error(L, "Unknown Message status encountered!");
+		default: report_error(L, "Unknown Message status encountered!");
 	}
 	return 1;
 }
@@ -1265,7 +1261,7 @@ int L_Message::set_status(lua_State * L) {
 	if (s == "new") status = Message::New;
 	else if (s == "read") status = Message::Read;
 	else if (s == "archived") status = Message::Archived;
-	else return report_error(L, "Invalid message status <%s>!", s.c_str());
+	else report_error(L, "Invalid message status <%s>!", s.c_str());
 
 	get_plr(L, get_game(L)).messages().set_message_status(m_mid, status);
 

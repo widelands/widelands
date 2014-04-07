@@ -69,7 +69,7 @@ int m_dispatch_property_in_metatable(lua_State * const L, bool setter) {
 		if (!lua_iscfunction(L, -1))
 		{
 			lua_pop(L, 2); //  table name <value>
-			return report_error(L, "invalid property without dispatcher function");
+			report_error(L, "invalid property without dispatcher function");
 		}
 		lua_CFunction dispatcher = lua_tocfunction(L, -1);
 		lua_pop(L, 1); // table name <value> mt_val
@@ -135,7 +135,7 @@ int m_property_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
 	if (!n)
-		return report_error(L, "Property needs at least the object as argument!");
+		report_error(L, "Property needs at least the object as argument!");
 
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);
@@ -149,7 +149,7 @@ int m_property_dispatch(lua_State * const L) {
 
 	if (!*pfunc)
 	{
-		return report_error(L, "The property is read-only!\n");
+		report_error(L, "The property is read-only!\n");
 	}
 	// Call it on our instance
 	return ((*obj)->*(*pfunc))(L);
@@ -166,7 +166,7 @@ int m_method_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
 	if (!n)
-		return report_error(L, "Method needs at least the object as argument!");
+		report_error(L, "Method needs at least the object as argument!");
 
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);

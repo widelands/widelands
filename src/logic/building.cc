@@ -919,8 +919,11 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
+	// TODO(sirver): add support into the font renderer to get to representative
+	// animations of buildings so that the messages can still be displayed, even
+	// after reload.
 	const std::string& img = g_gr->animations().get_animation
-		(descr().get_ui_anim()).representative_image(owner().get_playercolor()).hash();
+		(descr().get_ui_anim()).representative_image_from_disk().hash();
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +

@@ -97,9 +97,9 @@ Widelands::Map_Map_Object_Saver * get_mos(lua_State * const L) {
 }
 
 /*
- * Returns an error to lua. Returns 0
+ * Returns an error to lua. This method never returns as lua_error long jumps.
  */
-int report_error(lua_State * L, const char * const fmt, ...) {
+void report_error(lua_State * L, const char * const fmt, ...) {
 	char buffer[2048];
 	va_list va;
 
@@ -109,20 +109,12 @@ int report_error(lua_State * L, const char * const fmt, ...) {
 
 	// Also create a traceback
 	lua_getglobal(L, "debug");
-	if (!lua_istable(L, -1)) {
-		lua_pop(L, 1);
-		return 1;
-	}
+	assert(lua_istable(L, -1));
 	lua_getfield(L, -1, "traceback");
-	if (!lua_isfunction(L, -1)) {
-		lua_pop(L, 2);
-		return 1;
-	}
+	assert(lua_isfunction(L, -1));
 	lua_pushstring(L, buffer); // error message
 	lua_pushinteger(L, 2);  /* skip this function and traceback */
 	lua_call(L, 2, 1);  /* call debug.traceback */
 
 	lua_error(L);
-
-	return 0;
 }

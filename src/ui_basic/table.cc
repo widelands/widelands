@@ -79,7 +79,7 @@ Table<void *>::~Table()
 void Table<void *>::add_column
 	(uint32_t            const width,
 	 const std::string &       title,
-	 const std::string &       tooltip,
+	 const std::string &       tooltip_string,
 	 Align               const alignment,
 	 bool                const is_checkbox_column)
 {
@@ -102,7 +102,7 @@ void Table<void *>::add_column
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
 					 g_gr->images().get("pics/but3.png"),
-					 title, tooltip, true, false);
+					 title, tooltip_string, true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
 			c.btn->set_font(Font::get(m_fontname, m_fontsize));
