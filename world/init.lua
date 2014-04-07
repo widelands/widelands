@@ -24,11 +24,12 @@ world:new_editor_category{
 include "world/resources/init.lua"
 include "world/terrains/init.lua"
 
+include "world/immovables/grass1/init.lua"
+include "world/immovables/manmade/snowman/init.lua"
 include "world/immovables/skeleton1/init.lua"
 include "world/immovables/skeleton2/init.lua"
 include "world/immovables/skeleton3/init.lua"
 include "world/immovables/skeleton4/init.lua"
-include "world/immovables/manmade/snowman/init.lua"
 include "world/immovables/trees/aspen_summer_old/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
