@@ -75,10 +75,12 @@ void GameChatPanel::recalculate()
 		{
 			// The latest message is not a system message
 			if (std::string::npos == msgs.back().sender.find("(IRC)"))
+			{
 				// The latest message was not relayed from IRC.
 				// The above built-in string constant should match
 				// that of the IRC bridge.
 				play_new_chat_message();
+			}
 		}
 		chat_message_counter = msgs . size();
 
