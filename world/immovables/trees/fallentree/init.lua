@@ -13,6 +13,11 @@ world:new_immovable_type{
    descname = _"Fallen Tree",
    size = "none",
    attributes = {},
-   programs = {},
+   programs = {
+      program = {
+	     "animate=idle 30000",
+		 "remove="
+      }
+   },
    animations = animations,
 }

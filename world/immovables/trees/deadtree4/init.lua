@@ -1,13 +1,15 @@
 dirname = path.dirname(__file__)
 
 world:new_immovable_type{
-   name = "deadtree6",
-   descname = _ "Dead Tree",
+   name = "deadtree4",
+   descname = _"Dead Tree",
    size = "none",
    attributes = {},
    programs = {
-      animate=idle 20000
-      remove=16
+      program = {
+	     "animate=idle 20000",
+		 "remove=18"
+      }
    },
    animations = {
       idle = {
