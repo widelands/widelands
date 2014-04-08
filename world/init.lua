@@ -47,7 +47,6 @@ include "world/immovables/cactus1/init.lua"
 include "world/immovables/cactus2/init.lua"
 include "world/immovables/cactus3/init.lua"
 include "world/immovables/cactus4/init.lua"
-include "world/immovables/cactus5/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
