@@ -84,7 +84,18 @@ include "world/immovables/sstones19/init.lua"
 include "world/immovables/sstones20/init.lua"
 include "world/immovables/sstones21/init.lua"
 include "world/immovables/sstones22/init.lua"
-
+include "world/immovables/stones/blackland_stones1/init.lua"
+include "world/immovables/stones/blackland_stones2/init.lua"
+include "world/immovables/stones/blackland_stones3/init.lua"
+include "world/immovables/stones/blackland_stones4/init.lua"
+include "world/immovables/stones/blackland_stones5/init.lua"
+include "world/immovables/stones/blackland_stones6/init.lua"
+include "world/immovables/stones/desert_stones1/init.lua"
+include "world/immovables/stones/desert_stones2/init.lua"
+include "world/immovables/stones/desert_stones3/init.lua"
+include "world/immovables/stones/desert_stones4/init.lua"
+include "world/immovables/stones/desert_stones5/init.lua"
+include "world/immovables/stones/desert_stones6/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
