@@ -10,9 +10,7 @@ world:new_immovable_type{
       idle = {
          pictures = { dirname .. "/idle.png" },
          player_color_masks = {},
-         hotspot = { 8, 13 },
+         hotspot = { 8, 13 }
       },
    }
 }
-[idle]
-hotspot=8 13
