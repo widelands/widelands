@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-30 16:10+0200\n"
-"PO-Revision-Date: 2014-03-02 09:51+0000\n"
+"PO-Revision-Date: 2014-04-07 10:22+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:37+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-08 05:54+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -51,7 +51,7 @@ msgstr "Narzędzia"
 #: ../../src/editor/editorinteractive.cc:89
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Tool Size"
-msgstr ""
+msgstr "Wielkość narzędzia"
 
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/wui/interactive_player.cc:116
@@ -62,7 +62,7 @@ msgstr "Minimapa"
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:119
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Pokazuj miejsca do zabudowania (wł/wył)"
 
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/ui_fsmenu/launchMPG.cc:164
@@ -106,11 +106,11 @@ msgstr "Ładowanie grafiki..."
 
 #: ../../src/editor/editorinteractive.cc:262
 msgid "Unsaved Map"
-msgstr ""
+msgstr "Niezapisana mapa"
 
 #: ../../src/editor/editorinteractive.cc:263
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 
 #: ../../src/editor/editorinteractive.cc:607
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:178
@@ -135,27 +135,27 @@ msgstr "Informacje o polu"
 
 #: ../../src/editor/tools/editor_info_tool.cc:53
 msgid "Node:"
-msgstr ""
+msgstr "Węzeł:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:55
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "Współrzędne: (%1$i, %2$i)"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " small"
-msgstr ""
+msgstr " mały"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " medium"
-msgstr ""
+msgstr " średni"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " big"
-msgstr ""
+msgstr " duży"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:74
@@ -185,7 +185,7 @@ msgstr " płyń"
 #: ../../src/editor/tools/editor_info_tool.cc:84
 #, c-format
 msgid "Caps:%s"
-msgstr ""
+msgstr "Cechy:%s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:87
 #, c-format
