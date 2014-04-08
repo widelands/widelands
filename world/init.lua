@@ -38,6 +38,11 @@ include "world/immovables/trees/deadtree3/init.lua"
 include "world/immovables/trees/deadtree4/init.lua"
 include "world/immovables/trees/deadtree5/init.lua"
 include "world/immovables/trees/deadtree6/init.lua"
+include "world/immovables/bush1/init.lua"
+include "world/immovables/bush2/init.lua"
+include "world/immovables/bush3/init.lua"
+include "world/immovables/bush4/init.lua"
+include "world/immovables/bush5/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
