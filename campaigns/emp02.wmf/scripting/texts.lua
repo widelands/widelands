@@ -251,10 +251,7 @@ diary_page_11 = {
    body= lutius(_"Diary of Lutius",
 _([[Today a pigeon landed on our island. ]] ..
 [[It brought a message which fills me with dark thoughts and brings back my fears.]]) .. paragraphdivider() ..
-_([[The message was addressed to me, begging me to come back to Fremil.]] ..
-[[It says that the Empire is at war with the Barbarians. ]] ..
-[[They were attacked from the north by the tribe that I was forbidden to attack. ]] ..
-[[It is clear to me what I must do...]]) .. paragraphdivider() ..
+_([[The message was addressed to me, begging me to come back to Fremil. It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe that I was forbidden to attack. It is clear to me what I must do...]]) .. paragraphdivider() ..
 _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
 }
 
