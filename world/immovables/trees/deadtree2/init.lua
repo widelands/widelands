@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 world:new_immovable_type{
    name = "deadtree2",
-   descname = _"Dead Tree",
+   descname = _ "Dead Tree",
    size = "none",
    attributes = {},
    programs = {

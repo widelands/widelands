@@ -203,7 +203,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "ashes",
-   descname = _"Ashes",
+   descname = _ "Ashes",
    editor_category = "wasteland",
    is = "green",
    valid_resources = { "water" },
@@ -215,7 +215,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "ashes2",
-   descname = _"Ashes 2",
+   descname = _ "Ashes 2",
    editor_category = "wasteland",
    is = "green",
    valid_resources = { "water" },

@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 world:new_immovable_type{
    name = "sstones14",
-   descname = _"Standing Stones",
+   descname = _ "Standing Stones",
    size = "big",
    attributes = {},
    programs = {},

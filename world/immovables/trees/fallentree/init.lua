@@ -10,7 +10,7 @@ animations = {
 
 world:new_immovable_type{
    name = "fallentree",
-   descname = _"Fallen Tree",
+   descname = _ "Fallen Tree",
    size = "none",
    attributes = {},
    programs = {
