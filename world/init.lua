@@ -31,6 +31,7 @@ include "world/immovables/skeleton2/init.lua"
 include "world/immovables/skeleton3/init.lua"
 include "world/immovables/skeleton4/init.lua"
 include "world/immovables/trees/aspen_summer_old/init.lua"
+include "world/immovables/trees/fallentree/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
