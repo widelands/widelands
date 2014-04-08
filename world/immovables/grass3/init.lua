@@ -1,7 +1,7 @@
 dirname = path.dirname(__file__)
 
 world:new_immovable_type{
-   name = "grass1",
+   name = "grass3",
    descname = _ "Grass",
    size = "none",
    attributes = {},
@@ -10,7 +10,7 @@ world:new_immovable_type{
       idle = {
          pictures = { dirname .. "/idle.png" },
          player_color_masks = {},
-         hotspot = { 10, 20 },
+         hotspot = { 10, 11 },
       },
    }
 }
