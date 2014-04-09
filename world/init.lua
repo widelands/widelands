@@ -180,6 +180,11 @@ include "world/immovables/trees/oak_wasteland_old/init.lua"
 include "world/immovables/trees/oak_wasteland_pole/init.lua"
 include "world/immovables/trees/oak_wasteland_sapling/init.lua"
 
+include "world/immovables/trees/rowan_wasteland_mature/init.lua"
+include "world/immovables/trees/rowan_wasteland_old/init.lua"
+include "world/immovables/trees/rowan_wasteland_pole/init.lua"
+include "world/immovables/trees/rowan_wasteland_sapling/init.lua"
+
 include "world/immovables/trees/rowan_summer_mature/init.lua"
 include "world/immovables/trees/rowan_summer_old/init.lua"
 include "world/immovables/trees/rowan_summer_pole/init.lua"
