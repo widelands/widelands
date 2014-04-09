@@ -114,6 +114,10 @@ std::make_pair(
 		{"tree3_s", "spruce_wasteland_pole"},
 		{"tree3_m", "spruce_wasteland_mature"},
 		{"tree3", "spruce_wasteland_old"},
+		{"tree4_t", "maple_wasteland_sapling"},
+		{"tree4_s", "maple_wasteland_pole"},
+		{"tree4_m", "maple_wasteland_mature"},
+		{"tree4", "maple_wasteland_old"},
 
 	}),
 std::make_pair(

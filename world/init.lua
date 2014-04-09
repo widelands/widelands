@@ -145,6 +145,11 @@ include "world/immovables/trees/larch_summer_old/init.lua"
 include "world/immovables/trees/larch_summer_pole/init.lua"
 include "world/immovables/trees/larch_summer_sapling/init.lua"
 
+include "world/immovables/trees/maple_wasteland_mature/init.lua"
+include "world/immovables/trees/maple_wasteland_old/init.lua"
+include "world/immovables/trees/maple_wasteland_pole/init.lua"
+include "world/immovables/trees/maple_wasteland_sapling/init.lua"
+
 include "world/immovables/trees/maple_winter_mature/init.lua"
 include "world/immovables/trees/maple_winter_old/init.lua"
 include "world/immovables/trees/maple_winter_pole/init.lua"
