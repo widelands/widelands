@@ -150,6 +150,11 @@ include "world/immovables/trees/deadtree6/init.lua"
 
 include "world/immovables/trees/fallentree/init.lua"
 
+include "world/immovables/trees/larch_wasteland_mature/init.lua"
+include "world/immovables/trees/larch_wasteland_old/init.lua"
+include "world/immovables/trees/larch_wasteland_pole/init.lua"
+include "world/immovables/trees/larch_wasteland_sapling/init.lua"
+
 include "world/immovables/trees/larch_summer_mature/init.lua"
 include "world/immovables/trees/larch_summer_old/init.lua"
 include "world/immovables/trees/larch_summer_pole/init.lua"
