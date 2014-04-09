@@ -154,6 +154,10 @@ std::make_pair(
 		{"tree5_s", "birch_summer_pole"},
 		{"tree5_m", "birch_summer_mature"},
 		{"tree5", "birch_summer_old"},
+		{"tree6_t", "beech_summer_sapling"},
+		{"tree6_s", "beech_summer_pole"},
+		{"tree6_m", "beech_summer_mature"},
+		{"tree6", "beech_summer_old"},
 	}),
 std::make_pair(
 	"winterland", std::map<std::string, std::string>
