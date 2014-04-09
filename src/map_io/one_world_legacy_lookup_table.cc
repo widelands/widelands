@@ -21,6 +21,10 @@
 
 #include "log.h"
 
+
+// NOCOM(#sirver): try to avoid recreating this thing all the time - whenever you pass old world name,
+// pass a class of these instead.
+
 OneWorldLegacyLookupTable::OneWorldLegacyLookupTable() :
 // RESOURCES - They were all the same for all worlds.
 resources_
