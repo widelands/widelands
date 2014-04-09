@@ -170,6 +170,11 @@ include "world/immovables/trees/spruce_summer_old/init.lua"
 include "world/immovables/trees/spruce_summer_pole/init.lua"
 include "world/immovables/trees/spruce_summer_sapling/init.lua"
 
+include "world/immovables/trees/spruce_wasteland_mature/init.lua"
+include "world/immovables/trees/spruce_wasteland_old/init.lua"
+include "world/immovables/trees/spruce_wasteland_pole/init.lua"
+include "world/immovables/trees/spruce_wasteland_sapling/init.lua"
+
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
