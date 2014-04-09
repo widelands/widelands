@@ -93,23 +93,63 @@ std::make_pair(
 // IMMOVABLES
 immovables_
 {std::make_pair(
-	"greenland", std::map<std::string, std::string>
-	{
-		{"tree1", "aspen_summer_old"},
-	}),
 std::make_pair(
 	"blackland", std::map<std::string, std::string>
 	{
-		// No changes.
+		{"stones1", "blackland_stones1"},
+		{"stones2", "blackland_stones2"},
+		{"stones3", "blackland_stones3"},
+		{"stones4", "blackland_stones4"},
+		{"stones5", "blackland_stones5"},
+		{"stones6", "blackland_stones6"},
+	}),
+std::make_pair(
+	"desert", std::map<std::string, std::string>
+	{
+		{"cactus2", "cactus5"},
+		{"deadtree2", "deadtree5"},
+		{"deadtree3", "deadtree6"},
+		{"sstones1", "sstones8"},
+		{"sstones2", "sstones9"},
+		{"sstones3", "sstones10"},
+		{"sstones4", "sstones11"},
+		{"sstones5", "sstones12"},
+		{"stones1", "desert_stones1"},
+		{"stones2", "desert_stones2"},
+		{"stones3", "desert_stones3"},
+		{"stones4", "desert_stones4"},
+		{"stones5", "desert_stones5"},
+		{"stones6", "desert_stones6"},
+	}),
+	"greenland", std::map<std::string, std::string>
+	{
+		{"tree1", "aspen_summer_old"},
+		{"sstones1", "sstones13"},
+		{"sstones2", "sstones14"},
+		{"sstones3", "sstones15"},
+		{"sstones4", "sstones16"},
+		{"sstones5", "sstones16"},
+		{"stones1", "greenland_stones1"},
+		{"stones2", "greenland_stones2"},
+		{"stones3", "greenland_stones3"},
+		{"stones4", "greenland_stones4"},
+		{"stones5", "greenland_stones5"},
+		{"stones6", "greenland_stones6"},
 	}),
 std::make_pair(
 	"winterland", std::map<std::string, std::string>
 	{
-		// No changes.
-	}),
-std::make_pair(
-	"winterland", std::map<std::string, std::string>
-	{
+		{"sstones1", "sstones18"},
+		{"sstones2", "sstones19"},
+		{"sstones3", "sstones20"},
+		{"sstones4", "sstones21"},
+		{"sstones5", "sstones22"},
+		{"stones1", "winterland_stones1"},
+		{"stones2", "winterland_stones2"},
+		{"stones3", "winterland_stones3"},
+		{"stones4", "winterland_stones4"},
+		{"stones5", "winterland_stones5"},
+		{"stones6", "winterland_stones6"},
 		// No changes.
 	}),
 }
