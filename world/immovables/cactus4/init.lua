@@ -1,7 +1,7 @@
 dirname = path.dirname(__file__)
 
 world:new_immovable_type{
-   name = "cactus5",
+   name = "cactus4",
    descname = _ "Cactus",
    size = "none",
    attributes = {},
@@ -14,4 +14,3 @@ world:new_immovable_type{
       },
    }
 }
-

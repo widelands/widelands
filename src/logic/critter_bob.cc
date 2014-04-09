@@ -62,8 +62,8 @@ std::vector<std::string> section_to_strings(Section* section) {
 // '<prefix>_(ne|e|se|sw|w|nw)' which must be defined in 'mo'.
 void assign_diranimation(DirAnimations* anims, Map_Object_Descr& mo, const std::string& prefix) {
 	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
-	for (int32_t dir = 0; dir < 6; ++dir) {
-		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir]));
+	for (int32_t dir = 1; dir <= 6; ++dir) {
+		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir - 1]));
 	}
 }
 
@@ -177,8 +177,8 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
 
 Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
    : BobDescr(table.get_string("name"),
-                table.get_string("descname"),
-                nullptr)  // Can only handle world critters.
+              table.get_string("descname"),
+              nullptr)  // Can only handle world critters.
 {
 	{
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
@@ -441,6 +441,8 @@ void Critter_Bob::save
 {
 	fw.Unsigned8(header_Critter);
 	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);
+
+	const BobDescr * critter = egbase.world().get_bob_descr(name());
 
 	std::string owner =
 		descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";

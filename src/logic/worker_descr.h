@@ -67,8 +67,10 @@ public:
 		return m_buildcost;
 	}
 
-	const Tribe_Descr * get_tribe() const {return m_owner_tribe;}
-	const Tribe_Descr & tribe() const {return *m_owner_tribe;}
+	// NOCOM(#sirver): Kill one of these.
+	const Tribe_Descr * get_tribe() const {return get_owner_tribe();}
+	const Tribe_Descr & tribe() const {return *get_owner_tribe();}
+
 	std::string helptext() const {return m_helptext;}
 	Point get_ware_hotspot() const {return m_ware_hotspot;}
 

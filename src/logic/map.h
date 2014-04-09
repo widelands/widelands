@@ -128,7 +128,6 @@ public:
 	friend struct ::S2_Map_Loader;
 	friend struct WL_Map_Loader;
 	friend struct Map_Elemental_Data_Packet;
-	friend struct Map_Extradata_Data_Packet;
 	friend struct Map_Version_Data_Packet;
 	friend class Editor;
 	friend struct Main_Menu_New_Map;

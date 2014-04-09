@@ -43,6 +43,7 @@
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -631,8 +632,8 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	} catch (const Map_Object_Descr::Animation_Nonexistent &) {
 		imm.m_anim = imm.descr().main_animation();
 		log
-			("Warning: Animation \"%s\" not found, using animation %s).\n",
-			 animname, imm.descr().get_animation_name(imm.m_anim).c_str());
+			("Warning: (%s) Animation \"%s\" not found, using animation %s).\n",
+			 imm.name().c_str(), animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.Signed32();
 	if (version >= 4) {
@@ -749,10 +750,11 @@ void Immovable::save
 }
 
 Map_Object::Loader * Immovable::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr, const std::string& old_world_name)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
+	OneWorldLegacyLookupTable lookup_table;
 	try {
 		// The header has been peeled away by the caller
 
@@ -760,28 +762,29 @@ Map_Object::Loader * Immovable::load
 		if (1 <= version and version <= IMMOVABLE_SAVEGAME_VERSION) {
 
 			const std::string owner_name = fr.CString();
-			const std::string name = fr.CString();
+			const std::string old_name = fr.CString();
 			Immovable * imm = nullptr;
 
 			if (owner_name != "world") { //  It is a tribe immovable.
 				egbase.manually_load_tribe(owner_name);
 
 				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner_name)) {
-					int32_t const idx = tribe->get_immovable_index(name);
+					int32_t const idx = tribe->get_immovable_index(old_name);
 					if (idx != -1)
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
 					else
 						throw game_data_error
 							("tribe %s does not define immovable type \"%s\"",
-							 owner_name.c_str(), name.c_str());
+							 owner_name.c_str(), old_name.c_str());
 				} else
 					throw wexception("unknown tribe %s", owner_name.c_str());
 			} else { //  world immovable
 				const World & world = egbase.world();
-				int32_t const idx = world.get_immovable_index(name.c_str());
+				const std::string new_name = lookup_table.lookup_immovable(old_world_name, old_name);
+				int32_t const idx = world.get_immovable_index(new_name.c_str());
 				if (idx == -1)
 					throw wexception
-						("world does not define immovable type \"%s\"", name.c_str());
+						("world does not define immovable type \"%s\"", new_name.c_str());
 
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}

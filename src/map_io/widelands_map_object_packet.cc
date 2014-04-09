@@ -65,7 +65,7 @@ void Map_Object_Packet::Read
 			case 0:
 				return;
 			case Map_Object::header_Immovable:
-				loaders.insert(Immovable::load(egbase, mol, fr));
+				loaders.insert(Immovable::load(egbase, mol, fr, old_world_name));
 				break;
 
 			case Map_Object::header_Battle:

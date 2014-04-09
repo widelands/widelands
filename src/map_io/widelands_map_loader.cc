@@ -159,7 +159,7 @@ int32_t WL_Map_Loader::load_map_complete
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Reading Map Extra Data ... ");
-	{Map_Extradata_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{Map_Extradata_Data_Packet      p; p.Read(*m_fs, !scenario);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Map Version Data ... ");

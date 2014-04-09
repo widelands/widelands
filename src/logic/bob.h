@@ -60,12 +60,9 @@ public:
 
 	virtual ~BobDescr() {};
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
-	bool is_world_bob() const {
-		return not m_owner_tribe;
-	}
 
 	Tribe_Descr const* get_owner_tribe() const {
-		return m_owner_tribe;
+		return owner_tribe_;
 	}
 
 	virtual uint32_t movecaps() const {
@@ -76,7 +73,8 @@ public:
 protected:
 	virtual Bob& create_object() const = 0;
 
-	const Tribe_Descr* const m_owner_tribe;  //  0 if world bob
+private:
+	const Tribe_Descr* const owner_tribe_;  //  nullptr if world bob
 };
 
 /**
@@ -244,7 +242,6 @@ public:
 	void set_position(Editor_Game_Base &, const Coords &);
 	const FCoords & get_position() const {return m_position;}
 	Bob * get_next_bob() const {return m_linknext;}
-	bool is_world_bob() const {return descr().is_world_bob();}
 
 	uint32_t vision_range() const {return descr().vision_range();}
 

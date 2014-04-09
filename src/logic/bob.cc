@@ -50,7 +50,7 @@ namespace Widelands {
 BobDescr::BobDescr(const std::string& init_name,
                   const std::string& init_descname,
                   Tribe_Descr const* tribe)
-   : Map_Object_Descr(init_name, init_descname), m_owner_tribe(tribe) {
+   : Map_Object_Descr(init_name, init_descname), owner_tribe_(tribe) {
 }
 
 /**
@@ -63,10 +63,10 @@ BobDescr::BobDescr(const std::string& init_name,
  */
 uint32_t BobDescr::vision_range() const
 {
-	if (m_owner_tribe) {
+	if (owner_tribe_) {
 		if (upcast(const Ship_Descr, ship, this))
 			return ship->vision_range();
-		return m_owner_tribe->get_bob_vision_range();
+		return owner_tribe_->get_bob_vision_range();
 	}
 
 	return 0;

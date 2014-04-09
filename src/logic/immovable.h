@@ -243,7 +243,7 @@ public:
 
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &, const std::string& old_world_name);
 
 private:
 	void increment_program_pointer();

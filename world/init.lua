@@ -81,6 +81,7 @@ include "world/immovables/sstones8/init.lua"
 include "world/immovables/sstones9/init.lua"
 
 -- Stones
+-- NOCOM(#sirver): stones should get a number back for easier recognizing in the editor.
 include "world/immovables/stones/blackland_stones1/init.lua"
 include "world/immovables/stones/blackland_stones2/init.lua"
 include "world/immovables/stones/blackland_stones3/init.lua"

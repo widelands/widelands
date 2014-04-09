@@ -22,5 +22,3 @@ world:new_immovable_type{
       },
    },
 }
-
---mountain4=            2
