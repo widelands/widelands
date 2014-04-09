@@ -30,10 +30,10 @@ sleep=20000
 consume=ration wine
 animate=working 20000
 mine=granit 2 50 5
-produce=stone:2
+produce=stone marble
 animate=working 20000
-mine=granit 2 50 5
-produce=marble:2
+produce=marble
+
 
 [idle]
 pics=marblemine_i_??.png
