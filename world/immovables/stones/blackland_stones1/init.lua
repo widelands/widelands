@@ -14,8 +14,7 @@ world:new_immovable_type{
    size = "big",
    attributes = { "stone" },
    programs = {
-      program = {
-         "animate=idle",
+      shrink = {
          "remove="
       }
    },
