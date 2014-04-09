@@ -215,7 +215,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
-	// TODO(sirver): add support for sfx
+	// NOCOM(#sirver): add support for sfx
 
 	get_point(*table.get_table("hotspot"), &hotspot_);
 

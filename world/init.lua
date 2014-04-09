@@ -1,5 +1,6 @@
 world = wl.World()
 
+-- NOCOM(#sirver): review the remaining directories in world/
 world:new_editor_category{
    name = "green",
    descname = _ "Summer",
