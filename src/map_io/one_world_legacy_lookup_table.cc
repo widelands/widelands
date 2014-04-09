@@ -93,7 +93,6 @@ std::make_pair(
 // IMMOVABLES
 immovables_
 {std::make_pair(
-std::make_pair(
 	"blackland", std::map<std::string, std::string>
 	{
 		{"stones1", "blackland_stones1"},
@@ -185,6 +184,7 @@ std::make_pair(
 		{"tree8_m", "rowan_summer_mature"},
 		{"tree8", "rowan_summer_old"},
 	}),
+std::make_pair(
 	"greenland", std::map<std::string, std::string>
 	{
 		{"sstones1", "sstones13"},
