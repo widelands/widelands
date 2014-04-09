@@ -123,10 +123,6 @@ std::make_pair(
 	}),
 	"greenland", std::map<std::string, std::string>
 	{
-		{"tree1_t", "aspen_summer_sapling"},
-		{"tree1_s", "aspen_summer_pole"},
-		{"tree1_m", "aspen_summer_mature"},
-		{"tree1", "aspen_summer_old"},
 		{"sstones1", "sstones13"},
 		{"sstones2", "sstones14"},
 		{"sstones3", "sstones15"},
@@ -138,6 +134,14 @@ std::make_pair(
 		{"stones4", "greenland_stones4"},
 		{"stones5", "greenland_stones5"},
 		{"stones6", "greenland_stones6"},
+		{"tree1_t", "aspen_summer_sapling"},
+		{"tree1_s", "aspen_summer_pole"},
+		{"tree1_m", "aspen_summer_mature"},
+		{"tree1", "aspen_summer_old"},
+		{"tree2_t", "oak_summer_sapling"},
+		{"tree2_s", "oak_summer_pole"},
+		{"tree2_m", "oak_summer_mature"},
+		{"tree2", "oak_summer_old"},
 	}),
 std::make_pair(
 	"winterland", std::map<std::string, std::string>
