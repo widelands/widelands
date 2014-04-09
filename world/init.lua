@@ -126,6 +126,11 @@ include "world/immovables/trees/beech_summer_old/init.lua"
 include "world/immovables/trees/beech_summer_pole/init.lua"
 include "world/immovables/trees/beech_summer_sapling/init.lua"
 
+include "world/immovables/trees/beech_wasteland_mature/init.lua"
+include "world/immovables/trees/beech_wasteland_old/init.lua"
+include "world/immovables/trees/beech_wasteland_pole/init.lua"
+include "world/immovables/trees/beech_wasteland_sapling/init.lua"
+
 include "world/immovables/trees/birch_summer_mature/init.lua"
 include "world/immovables/trees/birch_summer_old/init.lua"
 include "world/immovables/trees/birch_summer_pole/init.lua"
