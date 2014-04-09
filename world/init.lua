@@ -180,6 +180,31 @@ include "world/immovables/trees/oak_wasteland_old/init.lua"
 include "world/immovables/trees/oak_wasteland_pole/init.lua"
 include "world/immovables/trees/oak_wasteland_sapling/init.lua"
 
+include "world/immovables/trees/palm_borassus_desert_mature/init.lua"
+include "world/immovables/trees/palm_borassus_desert_old/init.lua"
+include "world/immovables/trees/palm_borassus_desert_pole/init.lua"
+include "world/immovables/trees/palm_borassus_desert_sapling/init.lua"
+
+include "world/immovables/trees/palm_coconut_desert_mature/init.lua"
+include "world/immovables/trees/palm_coconut_desert_old/init.lua"
+include "world/immovables/trees/palm_coconut_desert_pole/init.lua"
+include "world/immovables/trees/palm_coconut_desert_sapling/init.lua"
+
+include "world/immovables/trees/palm_date_desert_mature/init.lua"
+include "world/immovables/trees/palm_date_desert_old/init.lua"
+include "world/immovables/trees/palm_date_desert_pole/init.lua"
+include "world/immovables/trees/palm_date_desert_sapling/init.lua"
+
+include "world/immovables/trees/palm_oil_desert_mature/init.lua"
+include "world/immovables/trees/palm_oil_desert_old/init.lua"
+include "world/immovables/trees/palm_oil_desert_pole/init.lua"
+include "world/immovables/trees/palm_oil_desert_sapling/init.lua"
+
+include "world/immovables/trees/palm_roystonea_desert_mature/init.lua"
+include "world/immovables/trees/palm_roystonea_desert_old/init.lua"
+include "world/immovables/trees/palm_roystonea_desert_pole/init.lua"
+include "world/immovables/trees/palm_roystonea_desert_sapling/init.lua"
+
 include "world/immovables/trees/rowan_wasteland_mature/init.lua"
 include "world/immovables/trees/rowan_wasteland_old/init.lua"
 include "world/immovables/trees/rowan_wasteland_pole/init.lua"
