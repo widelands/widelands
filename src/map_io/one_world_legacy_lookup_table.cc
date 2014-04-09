@@ -245,6 +245,7 @@ std::make_pair(
 		{"stones4", "winterland_stones4"},
 		{"stones5", "winterland_stones5"},
 		{"stones6", "winterland_stones6"},
+		{"track", "track_winter"},
 		{"tree1_t", "aspen_summer_sapling"},
 		{"tree1_s", "aspen_summer_pole"},
 		{"tree1_m", "aspen_summer_mature"},

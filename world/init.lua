@@ -54,6 +54,7 @@ include "world/immovables/skeleton1/init.lua"
 include "world/immovables/skeleton2/init.lua"
 include "world/immovables/skeleton3/init.lua"
 include "world/immovables/skeleton4/init.lua"
+include "world/immovables/track_winter/init.lua"
 
 -- Standing Stones
 include "world/immovables/sstones1/init.lua"
