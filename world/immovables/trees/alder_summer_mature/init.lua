@@ -1,22 +1,23 @@
 dirname = path.dirname(__file__)
 
 world:new_immovable_type{
-   name = "spruce_summer_sapling",
-   descname = _ "Spruce (Sapling)",
+   name = "alder_summer_mature",
+   descname = _ "Alder (Mature)",
    size = "small",
-   attributes = { "seed" },
+   attributes = {},
    programs = {
       program = {
-         "animate=idle 55000",
-         "remove=42",
-         "grow=spruce_summer_pole",
+         "animate=idle 50000",
+         "remove=18",
+         "seed=alder_summer_sapling",
+         "grow=alder_summer_old",
       },
    },
    animations = {
       idle = {
          pictures = path.glob(dirname, "idle_\\d+.png"),
          player_color_masks = {},
-         hotspot = { 4, 12 },
+         hotspot = { 18, 48 },
          fps = 8,
          sfx = {},
       },
