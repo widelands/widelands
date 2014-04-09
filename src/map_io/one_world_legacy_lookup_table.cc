@@ -102,6 +102,11 @@ std::make_pair(
 		{"stones4", "blackland_stones4"},
 		{"stones5", "blackland_stones5"},
 		{"stones6", "blackland_stones6"},
+		{"tree1_t", "aspen_wasteland_sapling"},
+		{"tree1_s", "aspen_wasteland_pole"},
+		{"tree1_m", "aspen_wasteland_mature"},
+		{"tree1", "aspen_wasteland_old"},
+
 	}),
 std::make_pair(
 	"desert", std::map<std::string, std::string>
