@@ -131,6 +131,11 @@ include "world/immovables/trees/birch_summer_old/init.lua"
 include "world/immovables/trees/birch_summer_pole/init.lua"
 include "world/immovables/trees/birch_summer_sapling/init.lua"
 
+include "world/immovables/trees/birch_wasteland_mature/init.lua"
+include "world/immovables/trees/birch_wasteland_old/init.lua"
+include "world/immovables/trees/birch_wasteland_pole/init.lua"
+include "world/immovables/trees/birch_wasteland_sapling/init.lua"
+
 include "world/immovables/trees/deadtree1/init.lua"
 include "world/immovables/trees/deadtree2/init.lua"
 include "world/immovables/trees/deadtree3/init.lua"
