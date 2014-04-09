@@ -96,6 +96,12 @@ include "world/immovables/stones/desert_stones3/init.lua"
 include "world/immovables/stones/desert_stones4/init.lua"
 include "world/immovables/stones/desert_stones5/init.lua"
 include "world/immovables/stones/desert_stones6/init.lua"
+include "world/immovables/stones/greenland_stones1/init.lua"
+include "world/immovables/stones/greenland_stones2/init.lua"
+include "world/immovables/stones/greenland_stones3/init.lua"
+include "world/immovables/stones/greenland_stones4/init.lua"
+include "world/immovables/stones/greenland_stones5/init.lua"
+include "world/immovables/stones/greenland_stones6/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this
