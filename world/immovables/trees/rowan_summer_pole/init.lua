@@ -1,0 +1,24 @@
+dirname = path.dirname(__file__)
+
+world:new_immovable_type{
+   name = "rowan_summer_pole",
+   descname = _ "Rowan (Pole)",
+   size = "small",
+   attributes = {},
+   programs = {
+      program = {
+         "animate=idle 55000",
+         "remove=30",
+         "grow=rowan_summer_mature",
+      },
+   },
+   animations = {
+      idle = {
+         pictures = path.glob(dirname, "idle_\\d+.png"),
+         player_color_masks = {},
+         hotspot = { 12, 28 },
+         fps = 8,
+         sfx = {},
+      },
+   },
+}
