@@ -9,7 +9,6 @@ world:new_immovable_type{
       program = {
          "animate=idle 72000",
          "remove=19",
-         "seed=beech_summer_sapling",
          "grow=beech_summer_old",
       },
    },

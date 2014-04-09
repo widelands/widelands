@@ -10,6 +10,8 @@ world:new_immovable_type{
          "animate=idle 25000",
          "remove=10",
          "seed=birch_summer_sapling",
+         "animate=idle 30000",
+         "remove=10",
          "grow=birch_summer_old",
       },
    },

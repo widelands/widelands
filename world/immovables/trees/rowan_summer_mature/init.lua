@@ -10,6 +10,8 @@ world:new_immovable_type{
          "animate=idle 55000",
          "remove=7",
          "seed=rowan_summer_sapling",
+         "animate=idle 30000",
+         "remove=10",
          "grow=rowan_summer_old",
       },
    },

@@ -10,6 +10,8 @@ world:new_immovable_type{
          "animate=idle 20000",
          "remove=30",
          "seed=aspen_summer_sapling",
+         "animate=idle 20000",
+         "remove=20",
          "grow=aspen_summer_old",
       },
    },
