@@ -4,7 +4,7 @@ world:new_immovable_type{
    name = "oak_summer_mature",
    descname = _ "Oak (Mature)",
    size = "small",
-   attributes = { "tree" },
+   attributes = {},
    programs = {
       program = {
          "animate=idle 75000",

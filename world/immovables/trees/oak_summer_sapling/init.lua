@@ -4,7 +4,7 @@ world:new_immovable_type{
    name = "oak_summer_sapling",
    descname = _ "Oak (Sapling)",
    size = "small",
-   attributes = { "tree", "seed" },
+   attributes = { "seed" },
    programs = {
       program = {
          "animate=idle 72500",

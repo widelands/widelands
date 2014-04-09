@@ -4,7 +4,7 @@ world:new_immovable_type{
    name = "aspen_summer_mature",
    descname = _ "Aspen (Mature)",
    size = "small",
-   attributes = { "tree" },
+   attributes = {},
    programs = {
       program = {
          "animate=idle 20000",

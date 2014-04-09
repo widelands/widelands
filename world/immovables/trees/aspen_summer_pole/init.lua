@@ -4,7 +4,7 @@ world:new_immovable_type{
    name = "aspen_summer_pole",
    descname = _ "Aspen (Pole)",
    size = "small",
-   attributes = { "tree" },
+   attributes = {},
    programs = {
       program = {
          "animate=idle 38000",

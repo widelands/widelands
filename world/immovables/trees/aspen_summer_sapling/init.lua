@@ -4,7 +4,7 @@ world:new_immovable_type{
    name = "aspen_summer_sapling",
    descname = _ "Aspen (Sapling)",
    size = "small",
-   attributes = { "tree", "seed" },
+   attributes = { "seed" },
    programs = {
       program = {
          "animate=idle 38000",

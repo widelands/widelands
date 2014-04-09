@@ -4,7 +4,7 @@ world:new_immovable_type{
    name = "oak_summer_pole",
    descname = _ "Oak (Pole)",
    size = "small",
-   attributes = { "tree" },
+   attributes = {},
    programs = {
       program = {
          "animate=idle 72500",
