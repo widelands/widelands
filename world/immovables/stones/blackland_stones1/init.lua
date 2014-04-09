@@ -9,7 +9,7 @@ animations = {
 }
 
 world:new_immovable_type{
-   name = "stones1",
+   name = "blackland_stones1",
    descname = _ "Stones",
    size = "big",
    attributes = { "stone" },

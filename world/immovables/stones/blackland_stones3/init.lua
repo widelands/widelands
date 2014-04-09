@@ -9,14 +9,13 @@ animations = {
 }
 
 world:new_immovable_type{
-   name = "stones3",
+   name = "blackland_stones3",
    descname = _ "Stones",
    size = "big",
    attributes = { "stone" },
    programs = {
-      program = {
-         "animate=idle",
-         "transform=stones2"
+      shrink = {
+         "transform=blackland_stones2"
       }
    },
    animations = animations
