@@ -11,10 +11,6 @@ world:new_immovable_type{
          "remove=47",
          "grow=aspen_summer_mature",
       },
-      fall = {
-         "animate=falling 1200",
-         "transform=fallentree",
-      },
    },
    animations = {
       idle = {
@@ -22,9 +18,7 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 12, 28 },
          fps = 8,
-         sfx = {
-            [0] = "sound/animals/bird1.ogg",
-         },
+         sfx = {},
       },
    },
 }

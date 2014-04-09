@@ -9,14 +9,8 @@ world:new_immovable_type{
       program = {
          "animate=idle 20000",
          "remove=30",
-         "animate=idle 20000",
-         "remove=20",
          "seed=aspen_summer_sapling",
          "grow=aspen_summer_old",
-      },
-      fall = {
-         "animate=falling 1200",
-         "transform=fallentree",
       },
    },
    animations = {
@@ -25,9 +19,7 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 18, 47 },
          fps = 8,
-         sfx = {
-            [0] = "sound/animals/bird1.ogg",
-         },
+         sfx = {},
       },
    },
 }

@@ -27,7 +27,7 @@ world:new_immovable_type{
          },
       },
       falling = {
-         pictures = path.glob(dirname, "f_tree1_\\d+.png"),
+         pictures = path.glob(dirname, "f_tree_\\d+.png"),
          player_color_masks = {},
          hotspot = { 20, 59 },
          fps = 10,
