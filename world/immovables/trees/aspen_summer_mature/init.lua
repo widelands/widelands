@@ -1,15 +1,18 @@
 dirname = path.dirname(__file__)
 
 world:new_immovable_type{
-   name = "aspen_summer_old",
-   descname = _ "Aspen (Old)",
+   name = "aspen_summer_mature",
+   descname = _ "Aspen (Mature)",
    size = "small",
    attributes = { "tree" },
    programs = {
       program = {
-         "animate=idle 1050000",
-         "transform=deadtree2 15",
+         "animate=idle 20000",
+         "remove=30",
+         "animate=idle 20000",
+         "remove=20",
          "seed=aspen_summer_sapling",
+         "grow=aspen_summer_old",
       },
       fall = {
          "animate=falling 1200",
@@ -20,17 +23,11 @@ world:new_immovable_type{
       idle = {
          pictures = path.glob(dirname, "idle_\\d+.png"),
          player_color_masks = {},
-         hotspot = { 23, 58 },
-         fps = 10,
+         hotspot = { 18, 47 },
+         fps = 8,
          sfx = {
             [0] = "sound/animals/bird1.ogg",
          },
-      },
-      falling = {
-         pictures = path.glob(dirname, "f_tree1_\\d+.png"),
-         player_color_masks = {},
-         hotspot = { 20, 59 },
-         fps = 10,
       },
    },
 }

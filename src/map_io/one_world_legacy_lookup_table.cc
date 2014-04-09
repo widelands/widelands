@@ -123,6 +123,9 @@ std::make_pair(
 	}),
 	"greenland", std::map<std::string, std::string>
 	{
+		{"tree1_t", "aspen_summer_sapling"},
+		{"tree1_s", "aspen_summer_pole"},
+		{"tree1_m", "aspen_summer_mature"},
 		{"tree1", "aspen_summer_old"},
 		{"sstones1", "sstones13"},
 		{"sstones2", "sstones14"},
