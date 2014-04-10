@@ -756,7 +756,6 @@ Map_Object::Loader * Immovable::load
 
 	try {
 		// The header has been peeled away by the caller
-
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version and version <= IMMOVABLE_SAVEGAME_VERSION) {
 
