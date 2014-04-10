@@ -31,7 +31,7 @@ include "map:scripting/cfield.lua"
 include "map:scripting/cplr_access.lua"
 
 include "map:scripting/immovables.lua"
-include "map:scripting/immovables_descriptions"
+include "map:scripting/immovables_descriptions.lua"
 
 if not wl.editor then
    include "map:scripting/game.lua"

@@ -51,9 +51,6 @@ public:
 	int get_status();
 
 	// Resumes the coroutine and returns it's state after it did its execution.
-	// If 'sleeptime' is not null, it will contain the time in milliseconds the
-	// lua code requested for this coroutine to sleep before it should be
-	// resumed again.
 	int resume();
 
 	// Push the given arguments onto the Lua stack, so that a Coroutine can
@@ -61,9 +58,11 @@ public:
 	// in hooks.
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
-        void push_arg(const Widelands::Building_Descr*);
-        uint32_t pop_uint32();
-        std::string pop_string();
+	void push_arg(const Widelands::Building_Descr*);
+
+	// NOCOM(#sirver): document
+	uint32_t pop_uint32();
+	std::string pop_string();
 
 private:
 	friend class LuaGameInterface;

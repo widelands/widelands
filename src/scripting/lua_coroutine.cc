@@ -62,9 +62,9 @@ int LuaCoroutine::get_status() {
 
 int LuaCoroutine::resume()
 {
-        int rv = lua_resume(m_L, m_ninput_args);
-        m_ninput_args = 0;
-        m_nreturn_values = lua_gettop(m_L);
+	int rv = lua_resume(m_L, nullptr, m_ninput_args);
+	m_ninput_args = 0;
+	m_nreturn_values = lua_gettop(m_L);
 
 	if (rv != 0 && rv != YIELDED) {
 		throw LuaError(lua_tostring(m_L, -1));
@@ -83,13 +83,13 @@ void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
 	++m_nargs;
         ++m_ninput_args;
 }
- 
+
 void LuaCoroutine::push_arg(const Widelands::Building_Descr* building_descr) {
         assert(building_descr != nullptr);
         to_lua<LuaMap::L_BuildingDescription>(m_L, new LuaMap::L_BuildingDescription(building_descr));
         ++m_ninput_args;
 }
- 
+
 std::string LuaCoroutine::pop_string() {
         if (!m_nreturn_values) {
                 return "";
@@ -102,21 +102,21 @@ std::string LuaCoroutine::pop_string() {
         --m_nreturn_values;
         return return_value;
 }
- 
+
 uint32_t LuaCoroutine::pop_uint32() {
         if (!m_nreturn_values) {
                 return 0;
         }
         if (!lua_isnumber(m_L, -1)) {
-                throw LuaError("pop_string(), but no integer on the stack.");
+                throw LuaError("pop_uint32(), but no integer on the stack.");
         }
         const uint32_t return_value = luaL_checkuint32(m_L, -1);
         lua_pop(m_L, 1);
         --m_nreturn_values;
         return return_value;
 }
- 
- 
+
+
 #define COROUTINE_DATA_PACKET_VERSION 2
 uint32_t LuaCoroutine::write
 	(lua_State * parent, Widelands::FileWrite & fw,
