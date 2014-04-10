@@ -1,8 +1,47 @@
 NOCOM(#sirver)
 
-Plants: bush (5), cactus (4), grass (3) = 12 objects
-Misc: snowman (1), mushroom (2), track (1), skeleton (4), ruin (5), pebble (6) = 19 objects
-Standing Stones: (22) = 22 objects
-Stones: (4x6) = 24 objects
+Created categories, look like this in the files:
+
+dirname = path.dirname(__file__)
+
+world:new_immovable_type{
+   name = "cactus4",
+   descname = _ "Cactus",
+   category = "plants",
+   size = "none",
+   attributes = {},
+   programs = {},
+   animations = {
+      idle = {
+         pictures = { dirname .. "/idle.png" },
+         player_color_masks = {},
+         hotspot = { 10, 71 },
+      },
+   }
+}
+
+and in init.lua:
+
+world:new_immovable_category{
+   name = "miscellaneous",
+   descname = _ "Miscellaneous",
+   picture = "world/immovables/ruin5/idle.png",
+}
+
+Watch out we will have to change the picture for the blackland tress when we come up with decent names for them. YOu can of course change any picture you like if it doesn't look good in the editor.
+
+Happy C++-ing!
+
+Category members:
+
+plants: bush (5), cactus (4), grass (3) = 12 objects
+miscellaneous: snowman (1), mushroom (2), track (1), skeleton (4), ruin (5), pebble (6) = 19 objects
+standing_stones: (22) = 22 objects
+stones: (4x6) = 24 objects
 Trees: normal trees (22x4) + deadtree (6) + fallentree (1) = 95 objects
 - Split the trees: palm/coniferous/deciduous/wasteland/dead
+trees_palm
+trees_coniferous
+trees_deciduous
+trees_wasteland
+trees_dead

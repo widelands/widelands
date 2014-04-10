@@ -11,6 +11,7 @@ animations = {
 world:new_immovable_type{
    name = "fallentree",
    descname = _ "Fallen Tree",
+   category = "trees_dead",
    size = "none",
    attributes = {},
    programs = {

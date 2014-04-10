@@ -11,6 +11,7 @@ animations = {
 world:new_immovable_type{
    name = "winterland_stones6",
    descname = _ "Stones 6",
+   category = "stones",
    size = "big",
    attributes = { "stone" },
    programs = {

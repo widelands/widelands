@@ -3,6 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "palm_borassus_desert_old",
    descname = _ "Borassus Palm (Old)",
+   category = "trees_palm",
    size = "small",
    attributes = { "tree" },
    programs = {
