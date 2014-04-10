@@ -10,7 +10,7 @@ animations = {
 
 world:new_immovable_type{
    name = "desert_stones5",
-   descname = _ "Stones",
+   descname = _ "Stones 5",
    size = "big",
    attributes = { "stone" },
    programs = {
