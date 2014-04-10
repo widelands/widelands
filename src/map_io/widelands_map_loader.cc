@@ -24,6 +24,7 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 #include "map_io/widelands_map_allowed_building_types_data_packet.h"
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
 #include "map_io/widelands_map_building_data_packet.h"
@@ -136,14 +137,15 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Heights_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
+	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table(create_one_world_legacy_lookup_table(old_world_name));
 	log("Reading Terrain Data ... ");
-	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, old_world_name);}
+	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	Map_Object_Packet mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.Read(*m_fs, egbase, *m_mol, old_world_name);
+	mapobjects.Read(*m_fs, egbase, *m_mol, *lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
@@ -154,7 +156,7 @@ int32_t WL_Map_Loader::load_map_complete
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Resources Data ... ");
-	{Map_Resources_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{Map_Resources_Data_Packet      p; p.Read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT

@@ -24,13 +24,15 @@
 
 #include "logic/widelands_filewrite.h"
 
+class OneWorldLegacyLookupTable;
+
 namespace Widelands {
 
 class Editor_Game_Base;
 
 class Map_Terrain_Data_Packet {
 public:
-	void Read(FileSystem&, Editor_Game_Base&, const std::string& old_world_name);
+	void Read(FileSystem&, Editor_Game_Base&, const OneWorldLegacyLookupTable& lookup_table);
 	void Write(FileSystem&, Editor_Game_Base&);
 };
 

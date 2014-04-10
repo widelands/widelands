@@ -750,11 +750,10 @@ void Immovable::save
 }
 
 Map_Object::Loader * Immovable::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr, const std::string& old_world_name)
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
-	OneWorldLegacyLookupTable lookup_table;
 	try {
 		// The header has been peeled away by the caller
 
@@ -780,7 +779,7 @@ Map_Object::Loader * Immovable::load
 					throw wexception("unknown tribe %s", owner_name.c_str());
 			} else { //  world immovable
 				const World & world = egbase.world();
-				const std::string new_name = lookup_table.lookup_immovable(old_world_name, old_name);
+				const std::string new_name = lookup_table.lookup_immovable(old_name);
 				int32_t const idx = world.get_immovable_index(new_name.c_str());
 				if (idx == -1)
 					throw wexception

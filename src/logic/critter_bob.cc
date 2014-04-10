@@ -396,10 +396,9 @@ const BobProgramBase * Critter_Bob::Loader::get_program
 Map_Object::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
                                       Map_Map_Object_Loader& mol,
                                       FileRead& fr,
-                                      const std::string& old_world_name) {
+                                      const OneWorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
 
-	OneWorldLegacyLookupTable lookup_table;
 	try {
 		// The header has been peeled away by the caller
 
@@ -410,7 +409,7 @@ Map_Object::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
 			const Critter_Bob_Descr * descr = nullptr;
 
 			if (owner == "world") {
-				critter_name = lookup_table.lookup_critter(old_world_name, critter_name);
+				critter_name = lookup_table.lookup_critter(critter_name);
 				descr =
 				   dynamic_cast<const Critter_Bob_Descr*>(egbase.world().get_bob_descr(critter_name));
 			} else {

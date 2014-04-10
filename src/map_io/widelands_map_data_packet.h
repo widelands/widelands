@@ -32,9 +32,8 @@ struct Map_Map_Object_Saver;
 
 #define MAP_DATA_PACKET(name)                                                                      \
 	namespace Widelands {                                                                           \
-	struct name {                                                                                   \
-		virtual ~name() {                                                                            \
-		}                                                                                            \
+	class name {                                                                                    \
+	public:                                                                                         \
 		void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&);                     \
 		void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);                           \
 	};                                                                                              \

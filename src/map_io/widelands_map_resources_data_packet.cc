@@ -35,15 +35,13 @@ namespace Widelands {
 
 
 void Map_Resources_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
+	(FileSystem & fs, Editor_Game_Base & egbase, const OneWorldLegacyLookupTable& lookup_table)
 {
 	FileRead fr;
 	fr.Open(fs, "binary/resource");
 
 	Map   & map   = egbase.map();
 	const World & world = egbase.world();
-
-	OneWorldLegacyLookupTable lookup_table;
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
@@ -105,7 +103,7 @@ void Map_Resources_Data_Packet::Read
  * in nearly all cases.
  */
 void Map_Resources_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase)
 {
 	FileWrite fw;
 

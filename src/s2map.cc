@@ -233,16 +233,17 @@ std::string get_world_name(S2_Map_Loader::WorldType world) {
 // terrain.
 class TerrainConverter : boost::noncopyable {
 public:
-	TerrainConverter(const Widelands::World& world);
+	TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table);
 	Widelands::Terrain_Index lookup(S2_Map_Loader::WorldType world, int8_t c) const;
 
 protected:
-	const OneWorldLegacyLookupTable one_world_legacy_lookup_table_;
+	const OneWorldLegacyLookupTable& one_world_legacy_lookup_table_;
 	const Widelands::World& world_;
 	const std::map<S2_Map_Loader::WorldType, std::vector<std::string>> table_;
 };
 
-TerrainConverter::TerrainConverter(const Widelands::World& world) :
+TerrainConverter::TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table) :
+	one_world_legacy_lookup_table_(lookup_table),
 	world_(world),
 	table_
 	{
@@ -298,10 +299,9 @@ Widelands::Terrain_Index TerrainConverter::lookup(S2_Map_Loader::WorldType world
 		break;
 	}
 
-	const std::string worldname = get_world_name(world);
 	const std::string& old_terrain_name = table_.at(world)[c];
 	return world_.index_of_terrain(
-	   one_world_legacy_lookup_table_.lookup_terrain(worldname, old_terrain_name).c_str());
+	   one_world_legacy_lookup_table_.lookup_terrain(old_terrain_name).c_str());
 }
 
 }  // namespace
@@ -440,8 +440,11 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	if (!section)
 		throw wexception("Section 2 (Terrain 1) not found");
 
+	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table(
+	   create_one_world_legacy_lookup_table(get_world_name(m_worldtype)));
+
 	const Widelands::World& world = egbase.world();
-	TerrainConverter terrain_converter(world);
+	TerrainConverter terrain_converter(world, *lookup_table);
 
 	f = m_map.m_fields.get();
 	pc = section.get();
@@ -675,13 +678,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	//  read and construct the name of the old immovables before the one world
 	//  conversion. We will then convert them using the
 	//  OneWorldLegacyLookupTable.
-	const OneWorldLegacyLookupTable lookup_table;
-	const std::string world_name = get_world_name(m_worldtype);
-
 	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
-	auto place_immovable = [&egbase, &lookup_table, &world, &world_name](
+	auto place_immovable = [&egbase, &lookup_table, &world](
 	   const Widelands::Coords& location, const std::string& old_immovable_name) {
-		const std::string new_immovable_name = lookup_table.lookup_immovable(world_name, old_immovable_name);
+		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
 		int32_t const idx = world.get_immovable_index(new_immovable_name.c_str());
 		if (idx < 0) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());

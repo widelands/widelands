@@ -37,14 +37,13 @@ namespace Widelands {
 
 void Map_Terrain_Data_Packet::Read(FileSystem& fs,
                                    Editor_Game_Base& egbase,
-                                   const std::string& old_world_name) {
+                                   const OneWorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.Open(fs, "binary/terrain");
 
 	Map & map = egbase.map();
 	const World & world = egbase.world();
 
-	OneWorldLegacyLookupTable lookup_table;
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
@@ -61,7 +60,7 @@ void Map_Terrain_Data_Packet::Read(FileSystem& fs,
 					   "Map_Terrain_Data_Packet::Read: WARNING: Found duplicate terrain id %i.", id);
 				}
 				const std::string new_terrain_name =
-				   lookup_table.lookup_terrain(old_world_name, old_terrain_name);
+				   lookup_table.lookup_terrain(old_terrain_name);
 				if (!world.get_ter(new_terrain_name.c_str())) {
 					throw game_data_error("Terrain '%s' exists in map, not in world!", new_terrain_name.c_str());
 				}

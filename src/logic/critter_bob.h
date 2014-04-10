@@ -24,6 +24,7 @@
 #include "graphic/diranimations.h"
 
 class LuaTable;
+class OneWorldLegacyLookupTable;
 
 namespace Widelands {
 
@@ -75,7 +76,7 @@ public:
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader*
-	load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&, const std::string& old_world_name);
+	load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
 
 protected:
 	struct Loader : Bob::Loader {

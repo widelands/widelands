@@ -123,16 +123,16 @@ class Map :
 	public NoteSender<NoteFieldTransformed>
 {
 public:
+	friend class Editor;
 	friend class Editor_Game_Base;
 	friend class Map_Loader;
+	friend class Map_Version_Data_Packet;
 	friend struct ::S2_Map_Loader;
-	friend struct WL_Map_Loader;
-	friend struct Map_Elemental_Data_Packet;
-	friend struct Map_Version_Data_Packet;
-	friend class Editor;
 	friend struct Main_Menu_New_Map;
-	friend struct MapGenerator;
 	friend struct MapAStarBase;
+	friend struct MapGenerator;
+	friend struct Map_Elemental_Data_Packet;
+	friend struct WL_Map_Loader;
 
 	typedef std::set<Coords, Coords::ordering_functor> PortSpacesSet;
 

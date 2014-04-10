@@ -59,7 +59,7 @@ struct ConstructionSite_Descr : public Building_Descr {
 };
 
 class ConstructionSite : public Partially_Finished_Building {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 
 	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
 

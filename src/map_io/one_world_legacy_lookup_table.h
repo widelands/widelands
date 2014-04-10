@@ -27,26 +27,22 @@
 
 class OneWorldLegacyLookupTable : boost::noncopyable {
 public:
-	OneWorldLegacyLookupTable();
+	virtual ~OneWorldLegacyLookupTable();
 
-	// Looks up the new name for the 'resource'. They were all the same for all
-	// former worlds.
-	std::string lookup_resource(const std::string& resource) const;
+	// Looks up the new name for the 'resource'.
+	virtual std::string lookup_resource(const std::string& resource) const = 0;
 
-	// Looks up the new name for the 'terrain' from the former 'world'.
-	std::string lookup_terrain(const std::string& world, const std::string& terrain) const;
+	// Looks up the new name for the 'terrain'.
+	virtual std::string lookup_terrain(const std::string& terrain) const = 0;
 
-	// Looks up the new name for the 'critter' from the former 'world'.
-	std::string lookup_critter(const std::string& world, const std::string& critter) const;
+	// Looks up the new name for the 'critter'.
+	virtual std::string lookup_critter(const std::string& critter) const = 0;
 
-	// Looks up the new name for the 'immovable' from the former 'world'.
-	std::string lookup_immovable(const std::string& world, const std::string& immovable) const;
-
-private:
-	const std::map<std::string, std::string> resources_;
-	const std::map<std::string, std::map<std::string, std::string>> terrains_;
-	const std::map<std::string, std::map<std::string, std::string>> critters_;
-	const std::map<std::string, std::map<std::string, std::string>> immovables_;
+	// Looks up the new name for the 'immovable'.
+	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
 };
+
+std::unique_ptr<OneWorldLegacyLookupTable>
+create_one_world_legacy_lookup_table(const std::string& old_world);
 
 #endif /* end of include guard: ONE_WORLD_LEGACY_CONVERSION_H */

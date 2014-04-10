@@ -48,7 +48,7 @@ Map_Object_Packet::~Map_Object_Packet() {
 
 
 void Map_Object_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, const std::string& old_world_name)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, const OneWorldLegacyLookupTable& lookup_table)
 {
 	try {
 		FileRead fr;
@@ -65,7 +65,7 @@ void Map_Object_Packet::Read
 			case 0:
 				return;
 			case Map_Object::header_Immovable:
-				loaders.insert(Immovable::load(egbase, mol, fr, old_world_name));
+				loaders.insert(Immovable::load(egbase, mol, fr, lookup_table));
 				break;
 
 			case Map_Object::header_Battle:
@@ -73,7 +73,7 @@ void Map_Object_Packet::Read
 				break;
 
 			case Map_Object::header_Critter:
-				loaders.insert(Critter_Bob::load(egbase, mol, fr, old_world_name));
+				loaders.insert(Critter_Bob::load(egbase, mol, fr, lookup_table));
 				break;
 
 			case Map_Object::header_Worker:

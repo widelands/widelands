@@ -96,7 +96,7 @@ private:
  *        contains soldiers!
  */
 class TrainingSite : public ProductionSite, public SoldierControl {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 	MO_DESCR(TrainingSite_Descr);
 	friend struct ::TrainingSite_Window;
 
