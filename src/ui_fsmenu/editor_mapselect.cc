@@ -170,9 +170,8 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			Widelands::Map_Loader * const m_ml = map.get_correct_loader(name.c_str());
-			m_ml->preload_map(true); //  This has worked before, no problem.
-			delete m_ml;
+			std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+			ml->preload_map(true); //  This has worked before, no problem.
 		}
 
 		// get translated worldsname
@@ -217,7 +216,7 @@ void Fullscreen_Menu_Editor_MapSelect::double_clicked(uint32_t) {ok();}
 void Fullscreen_Menu_Editor_MapSelect::fill_list()
 {
 	//  Fill it with all files we find.
-	g_fs->FindFiles(m_curdir, "*", &m_mapfiles, 1);
+	m_mapfiles = g_fs->ListDirectory(m_curdir);
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
@@ -263,17 +262,16 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
-
-		if (Widelands::Map_Loader * const m_ml = map.get_correct_loader(name)) {
+		std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+		if (ml.get() != nullptr) {
 			try {
-				m_ml->preload_map(true);
+				ml->preload_map(true);
 				m_list.add
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader const *>(m_ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const _wexception &) {} //  we simply skip illegal entries
-			delete m_ml;
 		}
 	}
 

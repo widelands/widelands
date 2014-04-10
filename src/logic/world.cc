@@ -779,8 +779,7 @@ void World::get_all_worlds(std::vector<std::string> & result) {
 	result.clear();
 
 	//  get all worlds
-	filenameset_t m_worlds;
-	g_fs->FindFiles("worlds", "*", &m_worlds);
+	filenameset_t m_worlds = g_fs->ListDirectory("worlds");
 	for
 		(filenameset_t::iterator pname = m_worlds.begin();
 		 pname != m_worlds.end();
@@ -820,7 +819,7 @@ Terrain_Descr
 Terrain_Descr::Terrain_Descr
 	(char                       const * const directory,
 	 Section                          * const s,
-	 Descr_Maintainer<Resource_Descr> * const resources)
+	 DescriptionMaintainer<Resource_Descr> * const resources)
 :
 m_name              (s->get_name()),
 m_descname          (s->get_string("name", s->get_name())),

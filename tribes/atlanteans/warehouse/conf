@@ -2,14 +2,14 @@ size=medium
 heal_per_second=170
 
 [buildcost]
-trunk=2
+log=2
 planks=2
 stone=2
 quartz=1
 spidercloth=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 planks=1
 stone=1
 quartz=1
@@ -17,4 +17,3 @@ quartz=1
 [idle]
 pics=warehouse_i_??.png  # ???
 hotspot=58 62
-playercolor=true

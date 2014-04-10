@@ -98,10 +98,11 @@ Interactive_Spectator::Interactive_Spectator
 
 	set_display_flag(dfSpeed, true);
 
-#define INIT_BTN_HOOKS(registry, btn)                                        \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
- if (registry.window) btn.set_perm_pressed(true);                            \
+#define INIT_BTN_HOOKS(registry, btn)                                                              \
+	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
+	registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false);                     \
+	if (registry.window)                                                                            \
+		btn.set_perm_pressed(true);
 
 	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
 	INIT_BTN_HOOKS(m_options, m_toggle_options_menu)
@@ -117,11 +118,9 @@ Interactive_Spectator::~Interactive_Spectator() {
         // buttons. The assertions are safeguards in case somewhere else in the
         // code someone would overwrite our hooks.
 
-#define DEINIT_BTN_HOOKS(registry, btn)                                                \
- assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed, &btn, true));  \
- assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed, &btn, false)); \
- registry.onCreate = 0;                                                                \
- registry.onDelete = 0;                                                                \
+#define DEINIT_BTN_HOOKS(registry, btn)                                                            \
+	registry.on_create = 0;                                                                         \
+	registry.on_delete = 0;
 
 	DEINIT_BTN_HOOKS(m_chat, m_toggle_chat)
 	DEINIT_BTN_HOOKS(m_options, m_toggle_options_menu)
@@ -163,7 +162,7 @@ void Interactive_Spectator::toggle_chat()
 	if (m_chat.window)
 		delete m_chat.window;
 	else if (m_chatProvider)
-		new GameChatMenu(this, m_chat, *m_chatProvider);
+		GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 }
 
 
@@ -274,7 +273,7 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 				break;
 
 			if (!m_chat.window)
-				new GameChatMenu(this, m_chat, *m_chatProvider);
+				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 
 			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
 				.enter_chat_message();

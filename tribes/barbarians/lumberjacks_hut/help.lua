@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_help")
+include "scripting/formatting.lua"
+include "scripting/format_help.lua"
 
 
 return {
@@ -25,7 +25,7 @@ return {
 	rt(h3(_"Incoming:")) ..
 	-- TODO remove these, just for testing
 	building_help_depencencies_ware("barbarians",{"inn","snack","deep_coalmine"}, "snack") ..
-	building_help_depencencies_building("barbarians",{"coal","axefactory"}, "axefactory") ..
+	building_help_depencencies_building("barbarians",{"coal","axfactory"}, "axfactory") ..
 
 	rt(h3(_"Collects:")) ..
 	building_help_depencencies_ware("barbarians", {"lumberjacks_hut", "trunk"}, "trunk") ..
@@ -46,7 +46,7 @@ return {
 	rt(h3(_"Crew required:")) ..
 	building_help_crew_string("barbarians", "lumberjack") ..
 
-	building_help_tool_string("barbarians", "felling_axe") ..
+	building_help_tool_string("barbarians", "felling_ax") ..
 
 	text_line(_"Experience levels:","n/a") ..
 

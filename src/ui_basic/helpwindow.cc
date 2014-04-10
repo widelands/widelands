@@ -29,6 +29,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/building.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -91,7 +92,6 @@ HelpWindow::HelpWindow
 
 HelpWindow::~HelpWindow()
 {
-	delete textarea;
 }
 
 /// Adds a new heading.
@@ -181,7 +181,6 @@ void HelpWindow::pressedOk()
 LuaTextHelpWindow
 ===================
 */
-
 LuaTextHelpWindow::LuaTextHelpWindow
 	(Panel * const parent,
 	 UI::UniqueWindow::Registry & reg,
@@ -189,12 +188,13 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	 LuaInterface * const lua,
 	 uint32_t width, uint32_t height)
 	:
-	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + building_description.descname()).c_str()),
+	UI::UniqueWindow(parent, "help_window", &reg, width, height,
+			(boost::format(_("Help: %s")) % building_description.descname()).str().c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
 	try {
 		std::unique_ptr<LuaTable> t(
-		   lua->run_script(*g_fs, building_description.helptext_script(), "help"));
+		   lua->run_script(building_description.helptext_script()));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(&building_description);
 		cr->resume();
@@ -204,10 +204,8 @@ LuaTextHelpWindow::LuaTextHelpWindow
 		textarea->set_text(err.what());
 	}
 }
-
 LuaTextHelpWindow::~LuaTextHelpWindow()
 {
-	delete textarea;
 }
 
 }

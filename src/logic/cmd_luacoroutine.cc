@@ -24,6 +24,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "scripting/lua_coroutine.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
 

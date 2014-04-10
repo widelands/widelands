@@ -309,7 +309,7 @@ int L_Panel::get_descendant_position(lua_State * L) {
 	}
 
 	if (!cur)
-		return report_error(L, "Widget is not a descendant!");
+		report_error(L, "Widget is not a descendant!");
 
 	lua_pushint32(L, cp.x);
 	lua_pushint32(L, cp.y);
@@ -668,7 +668,7 @@ int L_MapView::click(lua_State * L) {
 int L_MapView::start_road_building(lua_State * L) {
 	Interactive_Base * me = get();
 	if (me->is_building_road())
-		return report_error(L, "Already building road!");
+		report_error(L, "Already building road!");
 
 	Widelands::Coords starting_field =
 		(*get_user_class<LuaMap::L_Flag>(L, 2))->get

@@ -20,8 +20,8 @@
 #include "logic/map.h"
 
 #include <algorithm>
-#include <cstdio>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "build_info.h"
@@ -70,8 +70,6 @@ m_scenario_types (NO_SCENARIO),
 m_width          (0),
 m_height         (0),
 m_world          (nullptr),
-m_starting_pos   (nullptr),
-m_fields         (nullptr),
 m_pathfieldmgr   (new PathfieldManager)
 {
 	m_worldname[0] = '\0';
@@ -114,8 +112,8 @@ void Map::recalc_for_field_area(const Area<FCoords> area) {
 	assert(area.x < m_width);
 	assert(0 <= area.y);
 	assert(area.y < m_height);
-	assert(m_fields <= area.field);
-	assert            (area.field < m_fields + max_index());
+	assert(m_fields.get() <= area.field);
+	assert            (area.field < m_fields.get() + max_index());
 	assert(m_overlay_manager);
 
 	{ //  First pass.
@@ -215,58 +213,48 @@ void Map::recalc_default_resources() {
 			//  top left neigbour
 			get_neighbour(f, WALK_NW, &f1);
 			{
-				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
-				const int8_t resr =
-					terr.get_default_resources();
-				if
-					((terr.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const Terrain_Descr& terr = w.terrain_descr(f1.field->terrain_r());
+				const int8_t resr = terr.get_default_resources();
+				const int default_amount = terr.get_default_resources_amount();
+				if ((terr.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resr] += 3;
-				else ++m[resr];
-				amount += terr.get_default_resources_amount();
+				else
+					++m[resr];
+				amount += default_amount;
 			}
 			{
 				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
-				const int8_t resd =
-					terd.get_default_resources();
-				if
-					((terd.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const int8_t resd = terd.get_default_resources();
+				const int default_amount = terd.get_default_resources_amount();
+				if ((terd.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resd] += 3;
-				else ++m[resd];
-				amount += terd.get_default_resources_amount();
+				else
+					++m[resd];
+				amount += default_amount;
 			}
 
 			//  top right neigbour
 			get_neighbour(f, WALK_NE, &f1);
 			{
-				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
-				const int8_t resd =
-					terd.get_default_resources();
-				if
-					((terd.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const Terrain_Descr& terd = w.terrain_descr(f1.field->terrain_d());
+				const int8_t resd = terd.get_default_resources();
+				const int default_amount = terd.get_default_resources_amount();
+				if ((terd.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resd] += 3;
 				else ++m[resd];
-				amount += terd.get_default_resources_amount();
+				amount += default_amount;
 			}
 
 			//  left neighbour
 			get_neighbour(f, WALK_W, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
-				const int8_t resr =
-					terr.get_default_resources();
-				if
-					((terr.get_is() & TERRAIN_UNPASSABLE)
-					 and
-					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+				const int8_t resr = terr.get_default_resources();
+				const int default_amount = terr.get_default_resources_amount();
+				if ((terr.get_is() & TERRAIN_UNPASSABLE) && default_amount > 0)
 					m[resr] += 3;
 				else ++m[resr];
-				amount += terr.get_default_resources_amount();
+				amount += default_amount;
 			}
 
 			int32_t lv  = 0;
@@ -302,13 +290,11 @@ void Map::cleanup() {
 	m_nrplayers = 0;
 	m_width = m_height = 0;
 
-	free(m_fields);
-	m_fields = nullptr;
-	free(m_starting_pos);
-	m_starting_pos = nullptr;
+	m_fields.reset();
 	delete m_world;
 	m_world = nullptr;
 
+	m_starting_pos.clear();
 	m_scenario_tribes.clear();
 	m_scenario_names.clear();
 	m_scenario_ais.clear();
@@ -321,14 +307,6 @@ void Map::cleanup() {
 	m_overlay_manager.reset();
 	mom().remove_all();
 
-	//  Remove all extra data. Pay attention here, maybe some freeing would be
-	//  needed.
-#ifndef NDEBUG
-	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
-		assert(m_extradatainfos[i].type == Extradata_Info::PIC);
-	}
-#endif
-	m_extradatainfos.clear();
 	m_port_spaces.clear();
 }
 
@@ -355,9 +333,7 @@ void Map::create_empty_map
 	// Set first tribe found as the "basic" tribe
 	// <undefined> (as set before) is useless and will lead to a
 	// crash -> Widelands will search for tribe "<undefined>"
-	std::vector<std::string> tribes;
-	Tribe_Descr::get_all_tribenames(tribes);
-	set_scenario_player_tribe(1, tribes[0]);
+	set_scenario_player_tribe(1, Tribe_Descr::get_all_tribenames()[0]);
 	set_scenario_player_name(1, _("Player 1"));
 	set_scenario_player_ai(1, "");
 	set_scenario_player_closeable(1, false);
@@ -366,7 +342,7 @@ void Map::create_empty_map
 		Field::Terrains default_terrains;
 		default_terrains.d = 0;
 		default_terrains.r = 0;
-		Field * field = m_fields;
+		Field * field = m_fields.get();
 		const Field * const fields_end = field + max_index();
 		for (; field < fields_end; ++field) {
 			field->set_height(10);
@@ -383,11 +359,12 @@ void Map::set_origin(Coords const new_origin) {
 	assert(0 <= new_origin.y);
 	assert     (new_origin.y < m_height);
 
-	for (uint8_t i = get_nrplayers();              i;)
+	for (uint8_t i = get_nrplayers(); i;) {
 		m_starting_pos[--i].reorigin(new_origin, extent());
+	}
 
-	Field * new_field_order = static_cast<Field *>(malloc(sizeof(Field)* m_width * m_height));
-	memset(new_field_order, 0, sizeof(Field) * m_width * m_height);
+	std::unique_ptr<Field[]> new_field_order(new Field[m_width * m_height]);
+	memset(new_field_order.get(), 0, sizeof(Field) * m_width * m_height);
 
 	// Rearrange The fields
 	// NOTE because of the triangle design, we have to take special care about cases
@@ -406,10 +383,10 @@ void Map::set_origin(Coords const new_origin) {
 		}
 	}
 	// Now that we restructured the fields, we just overwrite the old order
-	m_fields = new_field_order;
+	m_fields.reset(new_field_order.release());
 
 	//  Inform immovables and bobs about their new coordinates.
-	for (FCoords c(Coords(0, 0), m_fields); c.y < m_height; ++c.y)
+	for (FCoords c(Coords(0, 0), m_fields.get()); c.y < m_height; ++c.y)
 		for (c.x = 0; c.x < m_width; ++c.x, ++c.field) {
 			assert(c.field == &operator[] (c));
 			if (upcast(Immovable, immovable, c.field->get_immovable()))
@@ -457,8 +434,8 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 	m_width  = w;
 	m_height = h;
 
-	m_fields = static_cast<Field *>(malloc(sizeof(Field) * w * h));
-	memset(m_fields, 0, sizeof(Field) * w * h);
+	m_fields.reset(new Field[w * h]);
+	memset(m_fields.get(), 0, sizeof(Field) * w * h);
 
 	m_pathfieldmgr->setSize(w * h);
 
@@ -498,6 +475,10 @@ bool Map::get_scenario_player_closeable(const Player_Number p) const
 	assert(p);
 	assert(p <= get_nrplayers());
 	return m_scenario_closeables[p - 1];
+}
+
+FileSystem* Map::filesystem() const {
+	return filesystem_.get();
 }
 
 void Map::set_scenario_player_tribe(Player_Number const p, const std::string & tribename)
@@ -540,21 +521,11 @@ Could happen multiple times in the map editor.
 */
 void Map::set_nrplayers(Player_Number const nrplayers) {
 	if (!nrplayers) {
-		free(m_starting_pos);
-		m_starting_pos = nullptr;
 		m_nrplayers = 0;
 		return;
 	}
 
-	Coords* new_starting_pos = static_cast<Coords *>
-		(realloc(m_starting_pos, sizeof(Coords) * nrplayers));
-	if (!new_starting_pos)
-		throw wexception("Out of memory.");
-	m_starting_pos = new_starting_pos;
-
-	while (m_nrplayers < nrplayers)
-		m_starting_pos[m_nrplayers++] = Coords(-1, -1);
-
+	m_starting_pos.resize(nrplayers, Coords(-1, -1));
 	m_scenario_tribes.resize(nrplayers);
 	m_scenario_ais.resize(nrplayers);
 	m_scenario_closeables.resize(nrplayers);
@@ -571,9 +542,7 @@ Set the starting coordinates of a player
 */
 void Map::set_starting_pos(Player_Number const plnum, Coords const c)
 {
-	assert(1 <= plnum);
-	assert     (plnum <= get_nrplayers());
-
+	assert(1 <= plnum <= get_nrplayers());
 	m_starting_pos[plnum - 1] = c;
 }
 
@@ -674,7 +643,7 @@ void Map::find_reachable
 		// Pop the last ware from the queue
 		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
-		Pathfield & curpf = pathfields->fields[cur.field - m_fields];
+		Pathfield & curpf = pathfields->fields[cur.field - m_fields.get()];
 
 		//  handle this node
 		functor(*this, cur);
@@ -687,7 +656,7 @@ void Map::find_reachable
 			get_neighbour(cur, dir, &neighb);
 
 			if  //  node not already handled?
-				(pathfields->fields[neighb.field - m_fields].cycle
+				(pathfields->fields[neighb.field - m_fields.get()].cycle
 				 !=
 				 pathfields->cycle
 				 and
@@ -1685,25 +1654,24 @@ void Map::get_neighbour
 	}
 }
 
-Map_Loader * Map::get_correct_loader(const std::string& filename) {
-	Map_Loader * result = nullptr;
+std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename) {
+	std::unique_ptr<Map_Loader> result;
 
-	if (boost::algorithm::ends_with(filename, WLMF_SUFFIX)) {
+	std::string lower_filename = filename;
+	boost::algorithm::to_lower(lower_filename);
+
+	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
 		try {
-			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
+			result.reset(new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file (maybe old plain binary map
 			//  format)
 			//  TODO: catchall hides real errors! Replace with more specific code
 		}
-	} else if
-		(boost::algorithm::ends_with(filename, S2MF_SUFFIX) ||
-		 boost::algorithm::ends_with(filename, S2MF_SUFFIX2))
-	{
-		//  It is a S2 Map file. Load it as such.
-		result = new S2_Map_Loader(filename.c_str(), *this);
+	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
+	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
+		result.reset(new S2_Map_Loader(filename.c_str(), *this));
 	}
-
 	return result;
 }
 
@@ -1773,7 +1741,7 @@ int32_t Map::findpath
 	// Actual pathfinding
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
 	Pathfield::Queue Open;
-	Pathfield * curpf = &pathfields->fields[start.field - m_fields];
+	Pathfield * curpf = &pathfields->fields[start.field - m_fields.get()];
 	curpf->cycle      = pathfields->cycle;
 	curpf->real_cost  = 0;
 	curpf->estim_cost = calc_cost_lowerbound(start, end);
@@ -1787,7 +1755,7 @@ int32_t Map::findpath
 		curpf = Open.top();
 		Open.pop(curpf);
 
-		cur.field = m_fields + (curpf - pathfields->fields.get());
+		cur.field = m_fields.get() + (curpf - pathfields->fields.get());
 		get_coords(*cur.field, cur);
 
 		if (upper_cost_limit && curpf->real_cost > upper_cost_limit)
@@ -1808,7 +1776,7 @@ int32_t Map::findpath
 			int32_t cost;
 
 			get_neighbour(cur, *direction, &neighb);
-			Pathfield & neighbpf = pathfields->fields[neighb.field - m_fields];
+			Pathfield & neighbpf = pathfields->fields[neighb.field - m_fields.get()];
 
 			// Is the field Closed already?
 			if
@@ -1866,7 +1834,7 @@ int32_t Map::findpath
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
 		get_neighbour(cur, get_reverse_dir(curpf->backlink), &cur);
-		curpf = &pathfields->fields[cur.field - m_fields];
+		curpf = &pathfields->fields[cur.field - m_fields.get()];
 	}
 
 	return result;
@@ -1918,8 +1886,8 @@ int32_t Map::change_terrain
 
 uint32_t Map::set_height(const FCoords fc, uint8_t const new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);
-	assert(m_fields <= fc.field);
-	assert            (fc.field < m_fields + max_index());
+	assert(m_fields.get() <= fc.field);
+	assert            (fc.field < m_fields.get() + max_index());
 	fc.field->height = new_value;
 	uint32_t radius = 2;
 	check_neighbour_heights(fc, radius);
@@ -2013,8 +1981,8 @@ The radius of modified fields is stored in area.
 */
 void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 {
-	assert(m_fields <= coords.field);
-	assert            (coords.field < m_fields + max_index());
+	assert(m_fields.get() <= coords.field);
+	assert            (coords.field < m_fields.get() + max_index());
 
 	int32_t height = coords.field->get_height();
 	bool check[] = {false, false, false, false, false, false};

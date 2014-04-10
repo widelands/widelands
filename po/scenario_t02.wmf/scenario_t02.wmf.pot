@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-12 21:37+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:44
 msgid ""
-"Mines can only be built on mountain terrain. Suitable places for mines are displayed as a mining symbol."
+"Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols."
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:50
@@ -270,7 +270,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 msgid ""
-"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al’thunran. Too long have we waited while our brethren have fought on the battlefield, and our axes and swords have turned rusty over time."
+"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al’thunran. Too long have we waited while our brethren have fought on the battlefield, and our axs and swords have turned rusty over time."
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:204

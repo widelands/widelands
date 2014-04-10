@@ -20,7 +20,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "logic/areawatcher.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
@@ -160,7 +159,7 @@ public:
 			//  important for worlds where the number of terrain types is not
 			//  maximal (16), so that an uninitialized terrain index could cause a
 			//  not found error in
-			//  Descr_Maintainer<Terrain_Descr>::get(Terrain_Index).
+			//  DescriptionMaintainer<Terrain_Descr>::get(Terrain_Index).
 			terrains.d = terrains.r = 0;
 
 			time_triangle_last_surveyed[0] = Never();
@@ -510,26 +509,6 @@ public:
 	void count_civil_bld_lost    () {++m_civil_blds_lost;}
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
-	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {
-		assert(player_area.player_number == player_number());
-		see_area
-			(Area<FCoords>
-			 	(egbase().map().get_fcoords(player_area), player_area.radius));
-		AreaWatcher & result = AreaWatcher::create(egbase(), player_area);
-		m_areawatchers.insert(&result);
-		return result;
-	}
-
-	void remove_areawatcher(AreaWatcher & areawatcher) {
-		unsee_area
-			(Area<FCoords>
-			 	(egbase().map().get_fcoords(areawatcher), areawatcher.radius));
-		m_areawatchers.erase(&areawatcher);
-	}
-
-	typedef std::set<OPtr<AreaWatcher> > AreaWatchers;
-	const AreaWatchers & areawatchers() const {return m_areawatchers;}
-
 	uint32_t frontier_anim() const {
 		return tribe().frontier_animation(m_frontier_style_index);
 	}
@@ -583,7 +562,6 @@ private:
 
 private:
 	MessageQueue           m_messages;
-	AreaWatchers           m_areawatchers;
 
 	Editor_Game_Base     & m_egbase;
 	uint8_t                m_initialization_index;

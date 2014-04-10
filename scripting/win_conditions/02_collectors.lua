@@ -2,14 +2,14 @@
 --                         Collectors Win condition
 -- =======================================================================
 
-use("aux", "coroutine") -- for sleep
-use("aux", "table")
-use("aux", "formatting")
-use("aux", "win_condition_functions")
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/table.lua"
+include "scripting/formatting.lua"
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-use("aux", "win_condition_texts")
+include "scripting/win_condition_texts.lua"
 
 local wc_name = _ "Collectors"
 local wc_version = 2
@@ -34,19 +34,19 @@ end
 local point_table = {
 	barbarians = {
 		gold = 3,
-		axe = 2,
-		sharpaxe = 3,
-		broadaxe = 4,
-		bronzeaxe = 4,
-		battleaxe = 6,
-		warriorsaxe = 10,
+		ax = 2,
+		sharpax = 3,
+		broadax = 4,
+		bronzeax = 4,
+		battleax = 6,
+		warriorsax = 10,
 		helm = 2,
 		mask = 3,
-		warhelmet = 6,
+		warhelm = 6,
 	},
 	barbarians_order = {
-		"gold", "axe", "sharpaxe", "broadaxe", "bronzeaxe", "battleaxe",
-		"warriorsaxe", "helm", "mask", "warhelmet",
+		"gold", "ax", "sharpax", "broadax", "bronzeax", "battleax",
+		"warriorsax", "helm", "mask", "warhelm",
 	},
 
 	empire = {
@@ -57,13 +57,13 @@ local point_table = {
 		heavy_lance = 7,
 		war_lance = 8,
 		helm = 2,
-		armour = 3,
-		chain_armour = 4,
-		plate_armour = 8,
+		armor = 3,
+		chain_armor = 4,
+		plate_armor = 8,
 	},
 	empire_order = {
 		"gold", "wood_lance", "lance", "advanced_lance", "heavy_lance",
-		"war_lance", "helm", "armour", "chain_armour", "plate_armour"
+		"war_lance", "helm", "armor", "chain_armor", "plate_armor"
 	},
 
 	atlanteans = {

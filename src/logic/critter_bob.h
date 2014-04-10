@@ -31,7 +31,7 @@ struct Critter_BobProgram;
 //
 // Description
 //
-struct Critter_Bob_Descr : public Bob::Descr {
+struct Critter_Bob_Descr : public BobDescr {
 	Critter_Bob_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,

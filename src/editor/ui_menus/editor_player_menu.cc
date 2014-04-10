@@ -65,7 +65,7 @@ Editor_Player_Menu::Editor_Player_Menu
 	int32_t const width   = 20;
 	int32_t       posy    = 0;
 
-	Widelands::Tribe_Descr::get_all_tribenames(m_tribes);
+	m_tribes = Widelands::Tribe_Descr::get_all_tribenames();
 
 	set_inner_size(375, 135);
 

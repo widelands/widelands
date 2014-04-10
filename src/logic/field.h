@@ -49,7 +49,7 @@ namespace Widelands {
 // class all around the code
 
 struct Terrain_Descr;
-struct Bob;
+class Bob;
 struct BaseImmovable;
 
 // Field is used so often, make sure it is as small as possible.
@@ -58,7 +58,7 @@ struct BaseImmovable;
 /// \todo This is all one evil hack :(
 struct Field {
 	friend class Map;
-	friend struct Bob;
+	friend class Bob;
 	friend struct BaseImmovable;
 
 	enum Buildhelp_Index {

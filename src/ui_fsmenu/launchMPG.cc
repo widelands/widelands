@@ -33,6 +33,7 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
@@ -203,7 +204,6 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_wincondition_type.set_textstyle(ts_small());
 
 	m_lua = new LuaInterface();
-	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 	win_condition_clicked();
 
 	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -294,11 +294,9 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
-		std::unique_ptr<LuaTable> t = m_lua->run_script
-			("win_conditions", m_settings->getWinCondition());
+		std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->getWinConditionScript());
 
 		try {
-
 			std::string name = t->get_string("name");
 			std::string descr = t->get_string("description");
 
@@ -517,7 +515,7 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 		throw wexception
 			("settings()->scenario was set to true, but no map is available");
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-	Widelands::Map_Loader * const ml = map.get_correct_loader(settings.mapfilename.c_str());
+	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(settings.mapfilename));
 	map.set_filename(settings.mapfilename.c_str());
 	ml->preload_map(true);
 	Widelands::Player_Number const nrplayers = map.get_nrplayers();
@@ -629,7 +627,7 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
 
 	char const * const name = m_settings->settings().mapfilename.c_str();
-	Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+	std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 	if (!ml) {
 		throw warning(_("There was an error!"), _("The map file seems to be invalid!"));
 	}
@@ -639,7 +637,6 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 		i18n::Textdomain td("maps");
 		ml->preload_map(true);
 	}
-	delete ml;
 
 	// get translated worldsname
 	std::string worldpath((format("worlds/%s") % map.get_world_name()).str());

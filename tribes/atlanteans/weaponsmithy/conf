@@ -9,14 +9,14 @@ output=heavy_double_trident
 build_material=false
 
 [buildcost]
-trunk=2
+log=2
 stone=2
 planks=2
 spidercloth=1
 quartz=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=1
 planks=1
 
@@ -93,9 +93,7 @@ return=skipped
 [idle]
 pics=weaponsmith_i_??.png  # ???
 hotspot=50 58
-playercolor=true
 
 [working]
 pics=weaponsmith_i_??.png  # ???
 hotspot=50 58
-playercolor=true

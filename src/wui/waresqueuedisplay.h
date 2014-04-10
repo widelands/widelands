@@ -39,7 +39,7 @@ struct Radiogroup;
 
 namespace Widelands {
 class Building;
-struct WaresQueue;
+class WaresQueue;
 }
 
 /**
@@ -47,7 +47,8 @@ struct WaresQueue;
  * and shows priority buttons that can be manipulated.
  * It updates itself automatically through think().
  */
-struct WaresQueueDisplay : public UI::Panel {
+class WaresQueueDisplay : public UI::Panel {
+public:
 	enum {
 		CellWidth = WARE_MENU_PIC_WIDTH,
 		CellSpacing = 2,
@@ -55,7 +56,6 @@ struct WaresQueueDisplay : public UI::Panel {
 		PriorityButtonSize = 10
 	};
 
-public:
 	WaresQueueDisplay
 		(UI::Panel             * parent,
 		 int32_t x, int32_t y,

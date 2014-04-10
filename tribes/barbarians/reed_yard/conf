@@ -1,0 +1,38 @@
+size=medium
+output=thatchreed
+
+[aihints]
+space_consumer=true
+
+[buildcost]
+log=5
+raw_stone=2
+
+[return_on_dismantle]
+log=2
+raw_stone=1
+
+[working positions]
+gardener=1
+
+[programs]
+plant_reed=_Plant reed
+harvest_reed=_Harvest reed
+work=_Work
+
+[plant_reed]
+sleep=18000  #orig sleep=20000 but gardener animation was increased by 2sec
+worker=plantreed
+
+[harvest_reed]
+sleep=5000
+worker=harvestreed
+
+[work]
+call=plant_reed
+call=harvest_reed
+return=skipped
+
+[idle]
+pics=reed_yard_i_??.png  # ???
+hotspot=46 44

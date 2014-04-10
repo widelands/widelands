@@ -26,6 +26,7 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
+#include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"

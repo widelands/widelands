@@ -23,6 +23,7 @@
 
 #include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
@@ -34,6 +35,7 @@
 #include "logic/warehouse.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
+#include "unique_window_handler.h"
 #include "upcast.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
@@ -98,8 +100,6 @@ Building_Window::~Building_Window()
 	if (m_workarea_job_id)
 		igbase().egbase().map().overlay_manager().remove_overlay
 			(m_workarea_job_id);
-	if (m_helpwindow_registry.window)
-		delete m_helpwindow_registry.window;
 	m_registry = nullptr;
 }
 
@@ -115,10 +115,11 @@ void Building_Window::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
-	dst.drawstatic
-			(Point(get_inner_w() / 2, get_inner_h() / 2),
-			 building().get_ui_anim(),
-			 &building().owner());
+	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
+
+	const Image* dark_frame = ImageTransformations::change_luminosity
+		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
+	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, CM_Normal, UI::Align_Center);
 }
 
 /*
@@ -353,28 +354,18 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					 g_gr->images().get("pics/but4.png"),
 					 g_gr->images().get("pics/menu_help.png"),
 					 _("Help"));
-			helpbtn->sigclicked.connect
-				(boost::bind(&Building_Window::help_clicked, boost::ref(*this)));
-			capsbuttons->add
-				(helpbtn,
-				 UI::Box::AlignCenter);
 
+			UI::UniqueWindow::Registry& registry =
+			   igbase().unique_windows().get_registry(m_building.name() + "_help");
+			registry.open_window = [this, &registry] {
+				new UI::LuaTextHelpWindow(
+				   &igbase(), registry, m_building.descr(), &igbase().egbase().lua());
+			};
+
+			helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
+			capsbuttons->add(helpbtn, UI::Box::AlignCenter);
 		}
 	}
-}
-
-/**
-===============
-The help button has been pressed
-===============
-*/
-void Building_Window::help_clicked()
-{
-	if (m_helpwindow_registry.window)
-		delete m_helpwindow_registry.window;
-	else
-		new UI::LuaTextHelpWindow
-			(&igbase(), m_helpwindow_registry, m_building.descr(), &igbase().egbase().lua());
 }
 
 /**

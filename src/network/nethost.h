@@ -77,7 +77,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerCloseable(uint8_t number, bool closeable);
 	void setPlayerShared   (uint8_t number, uint8_t shared);
 	void switchToPlayer    (uint32_t user,  uint8_t number);
-	void setWinCondition   (std::string);
+	void setWinConditionScript   (std::string);
 
 	// just visible stuff for the select mapmenu
 	void setMultiplayerGameSettings();

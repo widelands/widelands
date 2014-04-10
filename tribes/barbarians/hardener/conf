@@ -5,25 +5,25 @@ output=blackwood
 is_basic=true
 
 [buildcost]
-trunk=3
+log=3
 raw_stone=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 raw_stone=1
 
 [working positions] #  like lumberjack
 lumberjack=1
 
 [inputs]
-trunk=8
+log=8
 
 [programs]
 work=_Work
 
 [work]
 return=skipped unless economy needs blackwood
-consume=trunk:2
+consume=log:2
 sleep=43000
 animate=working 24000
 produce=blackwood

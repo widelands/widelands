@@ -88,8 +88,8 @@ m_game(parent->game())
 
 	// Prepare table
 	m_players_table->add_column(150, _("Player"));
-	m_players_table->add_column(50, _("Team"), UI::Align_HCenter);
-	m_players_table->add_column(100, _("Status"), UI::Align_HCenter);
+	m_players_table->add_column(50, _("Team"), "", UI::Align_HCenter);
+	m_players_table->add_column(100, _("Status"), "", UI::Align_HCenter);
 	m_players_table->add_column(100, _("Time"));
 
 	// Prepare Elements
@@ -183,6 +183,7 @@ void GameSummaryScreen::fill_data()
 		}
 	} else {
 		if (team_won <= 0) {
+			assert(single_won);
 			m_title_area->set_text
 				((boost::format(_("%s won!")) % single_won->get_name()).str());
 		} else {
@@ -255,4 +256,3 @@ std::string GameSummaryScreen::parse_player_info(std::string& info)
 	}
 	return info_str;
 }
-

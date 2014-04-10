@@ -396,7 +396,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		} else if (cmd == IGPCMD_ERROR) {
 			std::string errortype = packet.String();
 			if (errortype != "LOGIN" && errortype != "RELOGIN") {
-				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", packet.String().c_str());
+				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", errortype.c_str());
 				throw warning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
 			}
 			// Clients login request got rejected
@@ -478,6 +478,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_GAMES) {
 			// Client received the new list of games
 			uint8_t number = boost::lexical_cast<int>(packet.String()) & 0xff;
+			std::vector<INet_Game> old = gamelist;
 			gamelist.clear();
 			dedicatedlog("InternetGaming: Received a game list update with %u items.\n", number);
 			for (uint8_t i = 0; i < number; ++i) {
@@ -486,9 +487,27 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				ing->build_id    = packet.String();
 				ing->connectable = str2bool(packet.String());
 				gamelist.push_back(*ing);
+
+				bool found = false;
+				for (std::vector<INet_Game>::size_type j = 0; j < old.size(); ++j)
+					if (old[j].name == ing->name) {
+						found = true;
+						old[j].name = "";
+						break;
+					}
+				if (!found)
+					formatAndAddChat
+						("", "", true, (boost::format(_("The game %s is now available")) % ing->name).str());
+
 				delete ing;
 				ing = nullptr;
 			}
+
+			for (std::vector<INet_Game>::size_type i = 0; i < old.size(); ++i)
+				if (old[i].name.size())
+					formatAndAddChat
+						("", "", true, (boost::format(_("The game %s has been closed")) % old[i].name).str());
+
 			gameupdate = true;
 		}
 
@@ -501,6 +520,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_CLIENTS) {
 			// Client received the new list of clients
 			uint8_t number = boost::lexical_cast<int>(packet.String()) & 0xff;
+			std::vector<INet_Client> old = clientlist;
 			clientlist.clear();
 			dedicatedlog("InternetGaming: Received a client list update with %u items.\n", number);
 			for (uint8_t i = 0; i < number; ++i) {
@@ -511,9 +531,27 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				inc->type        = packet.String();
 				inc->points      = packet.String();
 				clientlist.push_back(*inc);
+
+				bool found = old.empty(); // do not show all clients, if this instance is the actual change
+				for (std::vector<INet_Client>::size_type j = 0; j < old.size(); ++j)
+					if (old[j].name == inc->name) {
+						found = true;
+						old[j].name = "";
+						break;
+					}
+				if (!found)
+					formatAndAddChat
+						("", "", true, (boost::format(_("%s joined the lobby")) % inc->name).str());
+
 				delete inc;
 				inc = nullptr;
 			}
+
+			for (std::vector<INet_Client>::size_type i = 0; i < old.size(); ++i)
+				if (old[i].name.size())
+					formatAndAddChat
+						("", "", true, (boost::format(_("%s left the lobby")) % old[i].name).str());
+
 			clientupdate = true;
 		}
 

@@ -1,7 +1,7 @@
 size=small
 
 [buildcost]
-trunk=1
+log=1
 planks=1
 stone=1
 
@@ -26,4 +26,3 @@ worker=breed
 [idle]
 pics=fish_breeder_i_??.png  # ???
 hotspot=34 42
-playercolor=true

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ Worker_Descr::Worker_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Bob::Descr(_name, _descname, directory, prof, global_s, &_tribe),
+	BobDescr(_name, _descname, directory, prof, global_s, &_tribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_ware_hotspot(global_s.get_Point("ware_hotspot", Point(0, 15))),
 	m_icon_fname(directory + "/menu.png"),
@@ -83,20 +83,11 @@ Worker_Descr::Worker_Descr
 	// If worker has a work animation load and add it.
 	Section * work_s = prof.get_section("work");
 	if (work_s)
-		add_animation("work", g_anim.get(directory, *work_s, "work.png"));
+		add_animation("work", g_gr->animations().load(directory, *work_s));
 
 	// Read the walking animations
-	m_walk_anims.parse
-		(*this, directory, prof, "walk_??", prof.get_section("walk"));
-
-	//  Soldiers have no walkload.
-	if (not global_s.has_val("max_hp_level"))
-		m_walkload_anims.parse
-			(*this,
-			 directory,
-			 prof,
-			 "walkload_??",
-			 prof.get_section("walkload"));
+	m_walk_anims.parse(*this, directory, prof, "walk");
+	m_walkload_anims.parse(*this, directory, prof, "walkload", true);
 
 	// Read the becomes and experience
 	if (char const * const becomes_name = global_s.get_string("becomes")) {

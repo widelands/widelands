@@ -40,7 +40,6 @@
 #include "map_io/widelands_map_objective_data_packet.h"
 #include "map_io/widelands_map_player_names_and_tribes_data_packet.h"
 #include "map_io/widelands_map_player_position_data_packet.h"
-#include "map_io/widelands_map_players_areawatchers_data_packet.h"
 #include "map_io/widelands_map_players_messages_data_packet.h"
 #include "map_io/widelands_map_players_view_data_packet.h"
 #include "map_io/widelands_map_port_spaces_data_packet.h"
@@ -160,11 +159,6 @@ void Map_Saver::save() {
 
 	log("Writing Building Data ... ");
 	{Map_Building_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
-	log("took %ums\n ", timer.ms_since_last_query());
-
-
-	log("Writing Area Watchers Data ... ");
-	{Map_Players_AreaWatchers_Data_Packet   p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Objects ... ");

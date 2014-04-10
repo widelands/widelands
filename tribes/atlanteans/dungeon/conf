@@ -9,7 +9,7 @@ diamond=2
 quartz=2
 spidercloth=2
 gold=2
-trunk=4
+log=4
 
 [return_on_dismantle]
 planks=1
@@ -17,7 +17,7 @@ stone=3
 diamond=1
 quartz=1
 gold=1
-trunk=1
+log=1
 
 [working positions]
 trainer=1
@@ -77,4 +77,3 @@ train=soldier attack 3 4
 [idle]
 pics=dungeon_i_??.png  # ???
 hotspot=47 48
-playercolor=true

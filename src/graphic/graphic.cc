@@ -31,7 +31,6 @@
 #include "constants.h"
 #include "container_iterate.h"
 #include "graphic/animation.h"
-#include "graphic/animation_gfx.h"
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
@@ -53,7 +52,6 @@
 #include "upcast.h"
 #include "wexception.h"
 
-
 using namespace std;
 
 Graphic * g_gr;
@@ -69,7 +67,8 @@ Graphic::Graphic()
 	m_update_fullscreen(true),
 	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
-	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
+	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get())),
+	animation_manager_(new AnimationManager())
 {
 	ImageTransformations::initialize();
 
@@ -326,7 +325,6 @@ bool Graphic::check_fallback_settings_in_effect()
 
 void Graphic::cleanup() {
 	flush_maptextures();
-	flush_animations();
 	surface_cache_->flush();
 	// TODO: this should really not be needed, but currently is :(
 	if (UI::g_fh)
@@ -447,13 +445,6 @@ void Graphic::refresh(bool force)
 }
 
 
-/// flushes the animations in m_animations
-void Graphic::flush_animations() {
-	container_iterate_const(vector<AnimationGfx *>, m_animations, i)
-		delete *i.current;
-	m_animations.clear();
-}
-
 /**
  * Saves a pixel region to a png. This can be a file or part of a stream.
  *
@@ -549,8 +540,8 @@ void Graphic::flush_maptextures()
  *
  * fnametempl is a filename with possible wildcard characters '?'. The function
  * fills the wildcards with decimal numbers to get the different frames of a
- * texture animation. For example, if fnametempl is "foo_??.bmp", it tries
- * "foo_00.bmp", "foo_01.bmp" etc...
+ * texture animation. For example, if fnametempl is "foo_??.png", it tries
+ * "foo_00.png", "foo_01.png" etc...
  * frametime is in milliseconds.
  * \return 0 if the texture couldn't be loaded.
  * \note Terrain textures are not reused, even if fnametempl matches.
@@ -589,54 +580,6 @@ void Graphic::reset_texture_animation_reminder()
 }
 
 /**
- * Load all animations that are registered with the AnimationManager
-*/
-void Graphic::load_animations() {
-	assert(m_animations.empty());
-
-	m_animations.reserve(g_anim.get_nranimations());
-}
-
-void Graphic::ensure_animation_loaded(uint32_t anim) {
-	if (anim >= m_animations.size()) {
-		m_animations.resize(anim + 1);
-	}
-	if (!m_animations.at(anim - 1))
-	{
-	  m_animations.at(anim - 1) =
-		  new AnimationGfx(g_anim.get_animation(anim), image_cache_.get());
-	}
-}
-
-/**
- * Return the number of frames in this animation
- */
-size_t Graphic::nr_frames(uint32_t anim)
-{
-	return get_animation(anim)->nr_frames();
-}
-
-/**
- * writes the size of an animation frame to w and h
-*/
-void Graphic::get_animation_size
-	(uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h)
-{
-	const AnimationData& data = g_anim.get_animation(anim);
-	const AnimationGfx* gfx  =        get_animation(anim);
-
-	if (!gfx) {
-		log("WARNING: Animation %u does not exist\n", anim);
-		w = h = 0;
-	} else {
-		const Image& frame =
-			gfx->get_frame((time / data.frametime) % gfx->nr_frames());
-		w = frame.width();
-		h = frame.height();
-	}
-}
-
-/**
  * Save a screenshot to the given file.
 */
 void Graphic::screenshot(const string& fname) const
@@ -668,21 +611,6 @@ void Graphic::m_png_flush_function
 	(png_structp png_ptr)
 {
 	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Flush();
-}
-
-/**
- * Retrieve the animation with the given number.
- *
- * @param anim the number of the animation
- * @return the AnimationGfs object of the given number
- */
-AnimationGfx * Graphic::get_animation(uint32_t anim)
-{
-	if (!anim)
-		return nullptr;
-
-	ensure_animation_loaded(anim);
-	return m_animations[anim - 1];
 }
 
 /**

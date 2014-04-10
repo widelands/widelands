@@ -52,12 +52,8 @@ public:
 
 	virtual ~FileSystem() {}
 
-	virtual int32_t FindFiles
-		(const std::string & path,
-		 const std::string & pattern,
-		 filenameset_t     * results,
-		 uint32_t            depth = 0)
-		= 0;
+	// Returns all files and directories (full path) in the given directory 'directory'.
+	virtual std::set<std::string> ListDirectory(const std::string& directory) = 0;
 
 	virtual bool IsWritable() const = 0;
 	virtual bool IsDirectory(const std::string & path) = 0;
@@ -124,6 +120,7 @@ public:
 
 	///Given a filename, return the name with any path stripped off.
 	static const char * FS_Filename(const char * n);
+	static std::string FS_Dirname(const std::string& full_path);
 
 	///Given a filename (without any path), return the extension, if any.
 	static std::string FS_FilenameExt(const std::string & f);

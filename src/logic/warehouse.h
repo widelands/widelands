@@ -33,7 +33,7 @@ namespace Widelands {
 
 class Editor_Game_Base;
 class PortDock;
-struct Request;
+class Request;
 struct Requirements;
 class Soldier;
 struct Tribe_Descr;

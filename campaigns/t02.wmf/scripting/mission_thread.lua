@@ -2,9 +2,9 @@
 --                            Main mission thread
 -- =======================================================================
 
-use("map", "mission_thread_texts")
-use("aux", "ui")
-use("aux", "table")
+include "map:scripting/mission_thread_texts.lua"
+include "scripting/ui.lua"
+include "scripting/table.lua"
 
 quarry_done = false
 enhance_buildings_done = false
@@ -52,7 +52,7 @@ function introduction_thread()
 
    -- Now, wait till the quarry comes up
    local f = wl.Game().map:get_field(27,48):region(6)
-   while not check_for_buildings(plr, { quarry = 1 }, f) do 
+   while not check_for_buildings(plr, { quarry = 1 }, f) do
       sleep(5000)
    end
    obj.done = true
@@ -96,7 +96,7 @@ function mines_and_food_thread()
 
    local obj_bf = add_obj(obj_basic_food)
    -- The function to check for completeness
-   run(function() 
+   run(function()
       local tavern_msg_done = nil
       local hunter_msg_done = nil
       while true do
@@ -123,7 +123,7 @@ function mines_and_food_thread()
    -- Start the cattlefarm thread
    run(cattle_farm)
 
-   run(function() 
+   run(function()
       while 1 do
          local rv = plr:get_buildings{"well", "bakery", "farm"}
          if #rv.well >= 1 and #rv.bakery >= 1 and #rv.farm >= 1 then
@@ -213,10 +213,10 @@ function build_materials_thread()
    end
    o.done = true
 
-   send_msg(order_msg_18_fernery)
-   plr:allow_buildings{"fernery"}
+   send_msg(order_msg_18_reed_yard)
+   plr:allow_buildings{"reed_yard"}
    o = add_obj(obj_better_material_3)
-   while #plr:get_buildings("fernery") < 1 do sleep(5421) end
+   while #plr:get_buildings("reed_yard") < 1 do sleep(5421) end
 
    send_msg(order_msg_19_all_material)
    o.done = true
@@ -225,7 +225,7 @@ function build_materials_thread()
 end
 
 -- ==================
--- Cattlefarm thread 
+-- Cattlefarm thread
 -- ==================
 function cattle_farm()
    while not check_for_buildings(plr, { farm = 1, well = 1 }) do
@@ -258,7 +258,7 @@ function story_messages_thread()
 end
 
 -- =================
--- Mission complete 
+-- Mission complete
 -- =================
 function mission_complete_thread()
    while not (build_materials_done and quarry_done
@@ -376,7 +376,7 @@ function reveal_village()
       {"lumberjacks_hut", 54, 24},
       {"rangers_hut", 57, 24},
       {"rangers_hut", 55, 25},
-      {"hardener", 54, 26, wares = {trunk = 8}},
+      {"hardener", 54, 26, wares = {log = 8}},
       {"warehouse", 53, 28},
       {"inn", 55, 28, wares = {pittabread = 4, meat = 4}},
       {"tavern", 57, 28, wares = {pittabread=4, meat = 4}},
@@ -424,5 +424,3 @@ run(story_messages_thread)
 run(village_thread)
 
 run(mission_complete_thread)
-
-

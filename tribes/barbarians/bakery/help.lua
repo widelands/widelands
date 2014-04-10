@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_help")
+include "scripting/formatting.lua"
+include "scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -28,7 +28,7 @@ return {
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/inn/menu.png"},p(_"Inn")) ..
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/big_inn/menu.png"},p(_"Big Inn")) ..
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/battlearena/menu.png"},p(_"Battle Arena")) ..
-		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Training Camp")) ..
+		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/trainingcamp/menu.png"},p(_"Training Camp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
@@ -37,18 +37,18 @@ return {
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 2), 2) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 2), 2) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 2), 2) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 1), 1) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 1), 1) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
 		image_line("tribes/barbarians/baker/menu.png", 1, p(_"Baker")) ..
-		text_line(_"Worker uses:", _"Bread Paddle","tribes/barbarians/bakingtray/menu.png") ..
+		text_line(_"Worker uses:", _"Bread Paddle","tribes/barbarians/bread_paddle/menu.png") ..
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..

@@ -11,5 +11,5 @@ remove=
 transform=field2
 
 [idle]
-pics=field1_??.bmp
+pics=field1_??
 hotspot=15 18

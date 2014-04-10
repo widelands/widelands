@@ -42,9 +42,8 @@ namespace Widelands {
 
 class Players_Manager;
 
-struct AreaWatcher;
 class Battle;
-struct Bob;
+class Bob;
 struct Building_Descr;
 class Immovable;
 class Map;
@@ -95,8 +94,7 @@ public:
 	void allocate_player_maps();
 	virtual void postload();
 	void load_graphics(UI::ProgressWindow & loader_ui);
-	virtual void cleanup_for_load
-		(bool flush_graphics = true, bool flush_animations = true);
+	virtual void cleanup_for_load();
 
 	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 
@@ -110,9 +108,9 @@ public:
 	Building & warp_dismantlesite
 		(Coords, Player_Number, bool loading = false,
 		Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Bob & create_bob(Coords, const Bob::Descr &, Player * owner = nullptr);
+	Bob & create_bob(Coords, const BobDescr &, Player * owner = nullptr);
 	Bob & create_bob
-		(Coords, Bob::Descr::Index, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
+		(Coords, BobDescr::Index, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
 	Bob & create_bob
 		(Coords, const std::string & name, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
 	Immovable & create_immovable(Coords, uint32_t idx, Tribe_Descr const *);

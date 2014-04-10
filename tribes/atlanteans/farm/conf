@@ -2,13 +2,13 @@ size=big
 output=corn
 
 [buildcost]
-trunk=3
+log=3
 stone=2
 planks=2
 spidercloth=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=1
 planks=1
 
@@ -41,4 +41,3 @@ playFX=../../../sound/farm/farm_animal 192
 [idle]
 pics=farm_i_??.png  # ???
 hotspot=74 60
-playercolor=true

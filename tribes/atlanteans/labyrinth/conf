@@ -3,7 +3,7 @@ soldier_capacity=8
 trainer_patience=20
 
 [buildcost]
-trunk=3
+log=3
 stone=4
 planks=5
 spidercloth=5
@@ -11,7 +11,7 @@ diamond=2
 quartz=2
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=3
 planks=2
 spidercloth=2
@@ -91,4 +91,3 @@ train=soldier evade 1 2
 [idle]
 pics=labyrinth_i_??.png  # ???
 hotspot=80 88
-playercolor=true

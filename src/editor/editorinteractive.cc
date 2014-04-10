@@ -19,7 +19,11 @@
 
 #include "editor/editorinteractive.h"
 
+#include <string>
+#include <vector>
+
 #include <SDL_keysym.h>
+#include <boost/format.hpp>
 
 #include "editor/tools/editor_delete_immovable_tool.h"
 #include "editor/ui_menus/editor_main_menu.h"
@@ -35,6 +39,8 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
+#include "scoped_timer.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -44,8 +50,20 @@
 #include "wui/interactive_base.h"
 #include "wui/overlay_manager.h"
 
+namespace {
 
 using Widelands::Building;
+
+// Load all tribes from disk.
+void load_all_tribes(Widelands::Editor_Game_Base* egbase, UI::ProgressWindow* loader_ui) {
+	for (const std::string& tribename : Widelands::Tribe_Descr::get_all_tribenames()) {
+		ScopedTimer timer((boost::format("Loading %s took %%ums.") % tribename).str());
+		loader_ui->stepf(_("Loading tribe: %s"), tribename.c_str());
+		egbase->manually_load_tribe(tribename);
+	}
+}
+
+}  // namespace
 
 Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	Interactive_Base(e, g_options.pull_section("global")),
@@ -117,7 +135,6 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	fieldclicked.connect(boost::bind(&Editor_Interactive::map_clicked, this, false));
 }
 
-
 void Editor_Interactive::register_overlays() {
 	Widelands::Map & map = egbase().map();
 
@@ -162,10 +179,10 @@ void Editor_Interactive::load(const std::string & filename) {
 
 	// TODO: get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
-	egbase().cleanup_for_load(true, false);
+	egbase().cleanup_for_load();
 	m_history.reset();
 
-	std::unique_ptr<Widelands::Map_Loader> const ml(map.get_correct_loader(filename.c_str()));
+	std::unique_ptr<Widelands::Map_Loader> const ml(map.get_correct_loader(filename));
 	if (not ml.get())
 		throw warning
 			(_("Unsupported format"),
@@ -176,21 +193,14 @@ void Editor_Interactive::load(const std::string & filename) {
 	std::vector<std::string> tipstext;
 	tipstext.push_back("editor");
 	GameTips editortips(loader_ui, tipstext);
+
 	{
 		std::string const old_world_name = map.get_world_name();
 		ml->preload_map(true);
 		if (strcmp(map.get_world_name(), old_world_name.c_str()))
 			change_world();
 	}
-	{
-		//  Load all tribes into memory
-		std::vector<std::string> tribenames;
-		Widelands::Tribe_Descr::get_all_tribenames(tribenames);
-		container_iterate_const(std::vector<std::string>, tribenames, i) {
-			loader_ui.stepf(_("Loading tribe: %s"), i.current->c_str());
-			egbase().manually_load_tribe(*i.current);
-		}
-	}
+	load_all_tribes(&egbase(), &loader_ui);
 
 	// Create the players. TODO SirVer this must be managed better
 	loader_ui.step(_("Creating players"));
@@ -216,7 +226,7 @@ void Editor_Interactive::load(const std::string & filename) {
 void Editor_Interactive::start() {
 	// Run the editor initialization script, if any
 	try {
-		egbase().lua().run_script("map", "editor_init");
+		egbase().lua().run_script("map:scripting/editor_init.lua");
 	} catch (LuaScriptNotExistingError &) {
 		// do nothing.
 	}
@@ -598,15 +608,8 @@ void Editor_Interactive::run_editor(const std::string & filename, const std::str
 				 g_options.pull_section("global").get_string
 				 ("realname", _("Unknown")));
 
-				{
-					//  Load all tribes into memory
-					std::vector<std::string> tribenames;
-					Widelands::Tribe_Descr::get_all_tribenames(tribenames);
-					container_iterate_const(std::vector<std::string>, tribenames, i) {
-						loader_ui.stepf(_("Loading tribe: %s"), i.current->c_str());
-						editor.manually_load_tribe(*i.current);
-					}
-				}
+				load_all_tribes(&editor, &loader_ui);
+
 				loader_ui.step(_("Loading graphics..."));
 				editor.load_graphics(loader_ui);
 				loader_ui.step(std::string());
@@ -621,13 +624,10 @@ void Editor_Interactive::run_editor(const std::string & filename, const std::str
 		eia.start();
 
 		if (!script_to_run.empty()) {
-			eia.egbase().lua().run_script(*g_fs, script_to_run, "commandline");
+			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
 	eia.run();
 
 	editor.cleanup_objects();
-
-	g_gr->flush_animations();
-	g_anim.flush();
 }

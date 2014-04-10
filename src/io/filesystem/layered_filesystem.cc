@@ -188,45 +188,34 @@ void LayeredFileSystem::PutRightVersionOnTop() {
  *
  * Returns the number of files found.
  */
-//TODO: return type is wrong
-int32_t LayeredFileSystem::FindFiles
-	(const std::string &       path,
-	 const std::string &       pattern,
-	 filenameset_t     * const results,
-	 uint32_t                  depth)
-{
-	uint32_t i = 0;
-	if (depth == 0)
-		depth = 10000; //  Wow, if you have so many filesystem you're my hero
-
+std::set<std::string> LayeredFileSystem::ListDirectory(const std::string& path) {
+	std::set<std::string> results;
 	filenameset_t files;
 	//check home system first
 	if (m_home) {
-		m_home->FindFiles(path, pattern, &files);
+		files = m_home->ListDirectory(path);
 		for
 			(filenameset_t::iterator fnit = files.begin();
 			 fnit != files.end();
 			 ++fnit)
-				results->insert(*fnit);
+				results.insert(*fnit);
 	}
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend() && i < depth;
-		 ++it, ++i)
+		 it != m_filesystems.rend();
+		 ++it)
 	{
-		(*it)->FindFiles(path, pattern, &files);
+		files = (*it)->ListDirectory(path);
 
 		// need to workaround MSVC++6 issues
-		//results->insert(files.begin(), files.end());
 		for
 			(filenameset_t::iterator fnit = files.begin();
 			 fnit != files.end();
 			 ++fnit)
-				results->insert(*fnit);
+				results.insert(*fnit);
 	}
-
-	return results->size();
+	return results;
 }
 
 /**

@@ -1,0 +1,85 @@
+size=medium
+buildable=no
+output=ax
+output=sharpax
+output=broadax
+enhanced_building=yes
+enhancement=warmill
+
+[aihints]
+build_material=false
+
+[enhancement_cost]
+log=1
+blackwood=1
+raw_stone=2
+grout=1
+thatchreed=1
+
+[return_on_dismantle_on_enhanced]
+blackwood=1
+raw_stone=1
+grout=1
+
+[working positions]
+blacksmith=1
+
+[inputs]
+iron=8
+coal=8
+
+[programs]
+produce_ax=_Produce ax
+produce_sharpax=_Produce sharp ax
+produce_broadax=_Produce broad ax
+work=_Work
+
+[produce_ax]
+return=skipped unless economy needs ax
+consume=coal iron
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../sound/smiths/sharpening 192
+produce=ax
+
+[produce_sharpax]
+return=skipped unless economy needs sharpax
+consume=coal iron:2
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../sound/smiths/sharpening 192
+produce=sharpax
+
+[produce_broadax]
+return=skipped unless economy needs broadax
+consume=coal:2 iron:2
+sleep=32000
+playFX=../../../sound/smiths/smith 192
+animate=working 25000
+playFX=../../../sound/smiths/sharpening 192
+produce=broadax
+
+[work]
+call=produce_ax
+call=produce_sharpax
+call=produce_broadax
+return=skipped
+
+[build]
+pics=axfactory_b_??.png  # ???
+hotspot=57 76
+
+[unoccupied]
+pics=axfactory_u_??.png  # ???
+hotspot=57 76
+
+[idle]
+pics=axfactory_i_??.png  # ???
+hotspot=57 76
+
+[working]
+pics=axfactory_w_??.png  # ???
+hotspot=57 76
+fps=10

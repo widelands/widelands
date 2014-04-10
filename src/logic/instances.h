@@ -42,9 +42,9 @@ namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
 
-struct Path;
+class Map_Map_Object_Loader;
 class Player;
-struct Map_Map_Object_Loader;
+struct Path;
 
 /**
  * Base class for descriptions of worker, files and so on. This must just
@@ -153,7 +153,7 @@ class Map_Object : boost::noncopyable {
 public:
 	enum {
 		AREAWATCHER,
-		BOB,  //  struct Bob
+		BOB,  //  class Bob
 
 		WARE, //  class WareInstance
 		BATTLE,
@@ -240,18 +240,14 @@ public:
 	/// Called when a new logsink is set. Used to give general information.
 	virtual void log_general_info(const Editor_Game_Base &);
 
-	// saving and loading
-	/**
-	 * Header bytes to distinguish between data packages for the different
-	 * Map_Object classes.
-	 *
-	 * Be careful in changing those, since they are written to files.
-	 */
+	// Header bytes to distinguish between data packages for the different
+	// Map_Object classes. Be careful in changing those, since they are written
+	// to files.
 	enum {
 		header_Map_Object = 1,
 		header_Immovable = 2,
-		header_Legacy_Battle = 3,
-		header_Legacy_AttackController = 4,
+		// 3 was battle object.
+		// 4 was attack controller.
 		header_Battle = 5,
 		header_Critter = 6,
 		header_Worker = 7,

@@ -1,16 +1,16 @@
 size=small
 
 [buildcost]
-trunk=4
+log=4
 
 [return_on_dismantle]
-trunk=3
+log=3
 
 [working positions]
 ranger=1
 
 [aihints]
-renews_map_resource=trunk
+renews_map_resource=log
 space_consumer=true
 
 [programs]

@@ -255,10 +255,9 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 	if (!minimap_path.empty()) {
 		try {
 			// Load the image
-			FileSystem* save_fs = g_fs->MakeSubFileSystem(name);
-			std::unique_ptr<Surface> surface(m_image_loader->load(minimap_path, save_fs));
+			std::unique_ptr<Surface> surface(m_image_loader->load(
+			   minimap_path, std::unique_ptr<FileSystem>(g_fs->MakeSubFileSystem(name)).get()));
 			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
-			delete save_fs;
 			// Scale it
 			double scale = double(m_minimap_max_size) / m_minimap_image->width();
 			double scaleY = double(m_minimap_max_size) / m_minimap_image->height();
@@ -299,7 +298,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		}
 	} else { // Normal case
 		// Fill it with all files we find.
-		g_fs->FindFiles("save", "*", &m_gamefiles, 0);
+		m_gamefiles = g_fs->ListDirectory("save");
 
 		Widelands::Game_Preload_Data_Packet gpdp;
 

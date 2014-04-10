@@ -23,6 +23,7 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -45,8 +46,10 @@
 #include "logic/world.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
+
 
 using namespace std;
 
@@ -252,8 +255,7 @@ Tribe_Descr::Tribe_Descr
 					} catch (Nonexistent) {
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
-							 	(style_name,
-							 	 g_anim.get(path, *s, nullptr)));
+							 	(style_name, g_gr->animations().load(path, *s)));
 					}
 				}
 				if (m_anim_frontier.empty())
@@ -274,7 +276,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, nullptr)));
+							 	 g_gr->animations().load(path, *s)));
 					}
 				}
 				if (m_anim_flag.empty())
@@ -283,35 +285,17 @@ Tribe_Descr::Tribe_Descr
 				throw game_data_error("flag styles: %s", e.what());
 			}
 
-			// Register Lua scripts
-			if (g_fs->IsDirectory(path + "scripting")) {
-				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename, "scripting");
-			}
+			{
+				// Read initializations -- all scripts are initializations currently
+				for (const std::string& script :
+				     filter(g_fs->ListDirectory(path + "scripting"),
+				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
+					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
 
-			// Read initializations -- all scripts are initializations currently
-			const ScriptContainer& scripts =
-				egbase.lua().get_scripts_for("tribe_" + tribename);
-			container_iterate_const(ScriptContainer, scripts, s) {
-				std::unique_ptr<LuaTable> t =
-					egbase.lua().run_script("tribe_" + tribename, s->first);
-
-				m_initializations.resize(m_initializations.size() + 1);
-				Initialization & init = m_initializations.back();
-				init.    name = s->first;
-				init.descname = t->get_string("name");
-
-				try {
-					for
-						(Initialization const * i = &m_initializations.front();
-						 i < &init;
-						 ++i)
-							if (i->name == init.name)
-								throw game_data_error("duplicated");
-				} catch (const _wexception & e) {
-					throw game_data_error
-						("Initializations: \"%s\": %s",
-						 init.name.c_str(), e.what());
+					m_initializations.resize(m_initializations.size() + 1);
+					Initialization& init = m_initializations.back();
+					init.script = script;
+					init.descname = t->get_string("name");
 				}
 			}
 		} catch (const std::exception & e) {
@@ -374,19 +358,12 @@ bool Tribe_Descr::exists_tribe
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
 
 				std::string path = "tribes/" + name + "/scripting";
-				if (g_fs->IsDirectory(path)) {
-					std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-					lua.register_scripts(*sub_fs, "tribe_" + name, "");
-				}
-
-				const ScriptContainer& scripts = lua.get_scripts_for("tribe_" + name);
-				container_iterate_const(ScriptContainer, scripts, s) {
-					std::unique_ptr<LuaTable> t =
-						lua.run_script("tribe_" + name, s->first);
-
-					info->initializations.push_back
-						(TribeBasicInfo::Initialization
-						 	(s->first, t->get_string("name")));
+				for (const std::string& script :
+				     filter(g_fs->ListDirectory(path),
+				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
+					std::unique_ptr<LuaTable> t = lua.run_script(script);
+					info->initializations.push_back(
+					   TribeBasicInfo::Initialization(script, t->get_string("name")));
 				}
 			} catch (const _wexception & e) {
 				throw game_data_error
@@ -407,13 +384,12 @@ struct TribeBasicComparator {
 /**
  * Fills the given string vector with the names of all tribes that exist.
  */
-void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
-	assert(target.empty());
+std::vector<std::string> Tribe_Descr::get_all_tribenames() {
+	std::vector<std::string> tribenames;
 
 	//  get all tribes
 	std::vector<TribeBasicInfo> tribes;
-	filenameset_t m_tribes;
-	g_fs->FindFiles("tribes", "*", &m_tribes);
+	filenameset_t m_tribes = g_fs->ListDirectory("tribes");
 	for
 		(filenameset_t::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
@@ -426,16 +402,16 @@ void Tribe_Descr::get_all_tribenames(std::vector<std::string> & target) {
 
 	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
 	container_iterate_const(std::vector<TribeBasicInfo>, tribes, i)
-		target.push_back(i.current->name);
+		tribenames.push_back(i.current->name);
+	return tribenames;
 }
 
 
-void Tribe_Descr::get_all_tribe_infos(std::vector<TribeBasicInfo> & tribes) {
-	assert(tribes.empty());
+std::vector<TribeBasicInfo> Tribe_Descr::get_all_tribe_infos() {
+	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
-	filenameset_t m_tribes;
-	g_fs->FindFiles("tribes", "*", &m_tribes);
+	filenameset_t m_tribes = g_fs->ListDirectory("tribes");
 	for
 		(filenameset_t::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
@@ -447,6 +423,7 @@ void Tribe_Descr::get_all_tribe_infos(std::vector<TribeBasicInfo> & tribes) {
 	}
 
 	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
+	return tribes;
 }
 
 

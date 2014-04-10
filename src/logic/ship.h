@@ -36,7 +36,7 @@ class Economy;
 struct Fleet;
 class PortDock;
 
-struct Ship_Descr : Bob::Descr {
+struct Ship_Descr : BobDescr {
 	Ship_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,

@@ -38,6 +38,9 @@
 #define TEXTURE_HEIGHT TEXTURE_WIDTH
 //@}
 
+//sizes for the images in the build menu (containing building icons)
+#define BUILDMENU_IMAGE_SIZE 30. // used for width and height
+
 #define XRES 800 ///< Fullscreen Menu Width
 #define YRES 600 ///< Fullscreen Menu Height
 

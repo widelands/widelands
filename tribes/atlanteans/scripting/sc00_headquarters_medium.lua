@@ -2,7 +2,7 @@
 --              Headquarters Starting Conditions for Atlanteans
 -- =======================================================================
 
-use("aux", "infrastructure")
+include "scripting/infrastructure.lua"
 
 set_textdomain("tribe_atlanteans")
 
@@ -24,7 +24,7 @@ init = {
          quartz = 9,
          stone = 50,
          spideryarn = 9,
-         trunk = 20,
+         log = 20,
          coal = 12,
          gold = 4,
          goldyarn = 6,
@@ -41,7 +41,7 @@ init = {
          smoked_fish = 6,
          smoked_meat = 6,
          water = 12,
-         bakingtray = 2,
+         bread_paddle = 2,
          bucket = 2,
          fire_tongs = 2,
          fishing_net = 4,
@@ -57,7 +57,7 @@ init = {
          light_trident = 5,
       },
       workers = {
-         armoursmith = 1,
+         armorsmith = 1,
          blackroot_farmer = 1,
          builder = 10,
          burner = 1,
@@ -80,4 +80,3 @@ end
 }
 
 return init
-

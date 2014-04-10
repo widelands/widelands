@@ -2,8 +2,8 @@
 --                 Texts for the Atlantean tutorial mission
 -- =======================================================================
 
-use("aux", "formatting")
-use("aux", "format_scenario")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
@@ -59,7 +59,7 @@ obj_make_food_infrastructure = {
 [[Food is very important for mines and military training areas. ]] ..
 [[Establish a well working food environment by building at least one farm, one blackroot farm and a mill. ]] ..
 [[The two kinds of flour together with water from a well will be baked into bread in a bakery, ]] ..
-[[so build a bakery and a well, too.]]) .. [[<br><br>]] ..
+[[so build a bakery and a well, too.]]) .. paragraphdivider() ..
 _([[The other two important food wares are smoked fish and smoked meat. ]] ..
 [[Raw meat is delivered from a hunter. ]] ..
 [[A fisher gets the fish out of the sea while a fish breeder makes sure that a school of fish does not go extinct ]] ..
@@ -227,13 +227,13 @@ first_briefing_messages = {
 [[and without Lutas having smashed our ship. Now, we are out of his reach. ]] ..
 [[One day later, we sighted an island which seems to have one of these fire spitting mountains on it. ]] ..
 [[I deemed this a sign from the fire god and we landed on its shore.]])
-   .. "<br><br>" .. _(
+.. paragraphdivider() .. _(
 [[We spent the last week building two watchtowers on the mountains close to our landing area; ]] ..
 [[and, of course, a hall for us all. We have very talented constructors in our group – still, ]] ..
 [[the buildings do not match the art we had on Atlantis. I hope they will withstand the next rain. ]] ..
 [[At least, the towers will warn us if a ship from Atlantis follows us and if the island is inhabited, ]] ..
 [[we will see attackers a long time before they arrive.]])
-   .. "<br><br>" .. _(
+.. paragraphdivider() .. _(
 [[We have established ourselves on this island. The next step is now to make it a home. ]] ..
 [[I reckon we need to establish a sustainable economy and to explore our surroundings. ]] ..
 [[I called for specialists and will follow their advice.]])
@@ -298,21 +298,13 @@ food_story_message = {
 },
 {
    title = _ "Colionder is in Thought",
-   body = colionder(p(_(
-[[Ahh, but I think this is impossible to change. ]] ..
-[[The preparing and eating of food is something deeply ingrained in us Atlanteans]] ..
-[[ – it is a ceremony that we just need for our well-being. ]] ..
-[[So I guess we cannot take this away from the individuals completely.]])) .. p(_(
-[[But we might find a compromise in between: for me, making bread is a troublesome task. ]] ..
-[[Grinding the blackroot and corn to flour and then baking the bread is tedious and boring; ]] ..
-[[I feel a more industrial approach would be helpful here. ]] ..
-[[I for one would love to just have fresh bread delivered to my house every day.]])) .. p(_(
-[[Oooh and even more important: the smoking of fish and meat to cleanse them and improve their taste is terrible. ]] ..
-[[My house is full of smoke and stinks for weeks afterwards. ]] ..
-[[Don’t you think that this could be done in a special building were the side effects do not matter? ]] ..
-[[I think those two things would be accepted by the people ]] ..
-[[and would reduce the cooking time without taking away the ritual.]]
- )))
+   body = colionder(_(
+[[Ahh, but I think this is impossible to change. The preparing and eating of food is something deeply ingrained in us Atlanteans – it is a ceremony that we just need for our well-being. So I guess we cannot take this away from the individuals completely.]])
+.. paragraphdivider() .. _(
+[[But we might find a compromise in between: for me, making bread is a troublesome task. Grinding the blackroot and corn to flour and then baking the bread is tedious and boring; I feel a more industrial approach would be helpful here. I for one would love to just have fresh bread delivered to my house every day.]])
+.. paragraphdivider() .. _(
+[[Oooh and even more important: the smoking of fish and meat to cleanse them and improve their taste is terrible. My house is full of smoke and stinks for weeks afterwards. Don’t you think that this could be done in a special building were the side effects do not matter? I think those two things would be accepted by the people and would reduce the cooking time without taking away the ritual.]]
+ ))
 },
 {
    title = _ "Jundlina Agrees",
@@ -335,14 +327,10 @@ food_story_ended_messages = {
 spidercloth_messages = {
    {
       title = _"A Man Comes to Jundlina",
-      body = opol(p(_(
-[[May Satul warm you, Jundlina. ]] ..
-[[My name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. ]] ..
-[[I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. ]] ..
-[[Could you not help the weavers’ guild by arranging the building of a weaving-mill and a spider farm? ]] ..
-[[The spiders deliver the finest silk and we will produce the finest spidercloth from it.]])) .. p(_(
-[[We offer to also produce the tabards for young soldiers and the golden tabards for officers for you in exchange. ]] ..
-[[You will need them for sure as soon as you want to recruit new soldiers.]])))
+      body = opol(_(
+[[May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. Could you not help the weavers’ guild by arranging the building of a weaving-mill and a spider farm? The spiders deliver the finest silk and we will produce the finest spidercloth from it.]])
+.. paragraphdivider() .. _(
+[[We offer to also produce the tabards for young soldiers and the golden tabards for officers for you in exchange. You will need them for sure as soon as you want to recruit new soldiers.]]))
  },
  {
     title = _ "Jundlina Replies",
@@ -439,14 +427,11 @@ training_story_end = {
 horsefarm_and_warehouse_story = {
    {
       title = _ "Jundlina Considers the Economy",
-      body = jundlina(_"Jundlina", p(_(
-[[People are complaining about crowded streets and slow transportation. ]] ..
-[[We need to help out our carriers on the roads. ]] ..
-[[I have decided to build a horse farm so that the horses can help with the heavy wares.]])) .. p(_(
-[[Another way to take load from our roads is to build warehouses. ]] ..
-[[We have claimed the mountain now, it seems a good idea to have a warehouse on the plateau ]] ..
-[[to avoid having to transport everything up and down the slopes.]]
-      ))) .. new_objectives(obj_horsefarm_and_warehouse)
+      body = jundlina(_"Jundlina", _(
+[[People are complaining about crowded streets and slow transportation. We need to help out our carriers on the roads. I have decided to build a horse farm so that the horses can help with the heavy wares.]])
+.. paragraphdivider() .. _(
+[[Another way to take load from our roads is to build warehouses. We have claimed the mountain now, it seems a good idea to have a warehouse on the plateau to avoid having to transport everything up and down the slopes.]]
+      )) .. new_objectives(obj_horsefarm_and_warehouse)
    }
 }
 
@@ -458,18 +443,12 @@ first_leftover_building_found = {
    posx = 100000,
    posy = 0,
    title = _ "A Dangerous Discovery",
-   body = jundlina(_ "Jundlina is in Thought", p(_(
-[[We found an old building, destroyed and burned by flames. I am very worried about this discovery. ]] ..
-[[The building is not of any kind I’ve ever seen. ]] ..
-[[It is certainly not designed by any Atlantean architect I’ve ever heard about. ]] ..
-[[The building is crude, the assemblage is sloppy. But the materials are very enduring: ]] ..
-[[the wood used for it seemed to have been burned in a strange way before it was used as building material]] ..
-[[ – it is hard as stone.]])) .. p(_(
-[[The implications frighten me. Are there others on this island? Where are they then? ]] ..
-[[They work with fire, are they praying to Satul too? Are they friends or foe? ]] ..
-[[And why is the building burned down? Has this island seen war? Is a war being waged on it right now?]])) .. p(_(
-[[We must improve our military capabilities. If there are foes on the island, we have to be prepared when we meet them. ]] ..
-[[We should also enforce the fortification of our borders.]]))
+   body = jundlina(_ "Jundlina is in Thought", _(
+[[We found an old building, destroyed and burned by flames. I am very worried about this discovery. The building is not of any kind I’ve ever seen. It is certainly not designed by any Atlantean architect I’ve ever heard about. The building is crude, the assemblage is sloppy. But the materials are very enduring: the wood used for it seemed to have been burned in a strange way before it was used as building material – it is hard as stone.]])
+.. paragraphdivider() .. _(
+[[The implications frighten me. Are there others on this island? Where are they then? They work with fire, are they praying to Satul too? Are they friends or foe? And why is the building burned down? Has this island seen war? Is a war being waged on it right now?]])
+.. paragraphdivider() .. _(
+[[We must improve our military capabilities. If there are foes on the island, we have to be prepared when we meet them. We should also enforce the fortification of our borders.]])
    )
 }
 }
@@ -552,13 +531,11 @@ field_flooded_msg = {
 },
 {
    title = _ "Jundlina Replies",
-   body = jundlina(p(_(
-[[Your red hair is a signal from the fire god. I will trust you and support your plan. ]] ..
-[[Our survival lies in your hands now, Ostur.]])) .. p(_(
-[[Swift now, we need a house for Ostur next to the lake, and we need planks, logs and spidercloth ]] ..
-[[for the construction there. Forget about everything else, ]] ..
-[[we need those wares on top of the mountain before our warehouses are all swallowed by the sea.]]
-   ))) .. new_objectives(obj_build_ships)
+   body = jundlina(_(
+[[Your red hair is a signal from the fire god. I will trust you and support your plan. Our survival lies in your hands now, Ostur.]])
+.. paragraphdivider() .. _(
+[[Swift now, we need a house for Ostur next to the lake, and we need planks, logs and spidercloth for the construction there. Forget about everything else, we need those wares on top of the mountain before our warehouses are all swallowed by the sea.]]
+   )) .. new_objectives(obj_build_ships)
 }
 }
 
@@ -577,5 +554,3 @@ scenario_won = {
       )),
    },
 }
-
-

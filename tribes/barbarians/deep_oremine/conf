@@ -5,11 +5,11 @@ output=ironore
 enhancement=deeper_oremine
 
 [enhancement_cost]
-trunk=4
+log=4
 raw_stone=2
 
 [return_on_dismantle_on_enhanced]
-trunk=2
+log=2
 raw_stone=1
 
 [working positions]
@@ -39,19 +39,15 @@ produce=ironore:1
 [build]
 pics=deep_oremine_b_??.png
 hotspot=21 37
-playercolor=true
 
 [idle]
 pics=deep_oremine_i_??.png
 hotspot=21 37
-playercolor=true
 
 [working]
 pics=deep_oremine_w_??.png
 hotspot=21 37
-playercolor=true
 
 [empty]
 pics=deep_oremine_e_??.png
 hotspot=21 37
-playercolor=true

@@ -10,16 +10,15 @@ carrier2=horse
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, trunk, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, cornflour, blackroot, blackrootflour, bread; quartz, diamond, coal, ironore, iron, goldore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bakingtray, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, goldyarn, golden_tabard
+wares_order=stone, log, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, cornflour, blackroot, blackrootflour, bread; quartz, diamond, coal, ironore, iron, goldore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bread_paddle, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, goldyarn, golden_tabard
 
-workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
+workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
 # Some blue fires would be fine, but just an idea
 [frontier]
 name=frontier
 pics=pics/frontier_??.png
 hotspot=3 12
-playercolor=true
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
@@ -27,7 +26,6 @@ name=flag
 pics=pics/flag_??.png
 hotspot=15 35
 fps=10
-playercolor=true
 
 [immovable types]
 ashes=_Ashes
@@ -56,7 +54,7 @@ shipconstruction=_Ship Construction Site
 
 [ware types]
 advanced_shield=_Advanced Shield
-bakingtray=_Bread Paddle
+bread_paddle=_Bread Paddle
 blackrootflour=_Blackroot Flour
 blackroot=_Blackroot
 bread=_Bread
@@ -97,7 +95,7 @@ steel_shield=_Steel Shield
 steel_trident=_Steel Trident
 stone=_Stone
 tabard=_Tabard
-trunk=_Log
+log=_Log
 water=_Water
 
 [carrier types]
@@ -108,7 +106,7 @@ horse=_Horse
 soldier=_Soldier
 
 [worker types]
-armoursmith=_Armorsmith
+armorsmith=_Armorsmith
 baker=_Baker
 blackroot_farmer=_Blackroot Farmer
 builder=_Builder
@@ -182,7 +180,7 @@ burners_house=_Charcoal Burner’s House
 smelting_works=_Smelting Works
 toolsmithy=_Toolsmithy
 weaponsmithy=_Weapon Smithy
-armoursmithy=_Armor Smithy
+armorsmithy=_Armor Smithy
 horsefarm=_Horse Farm
 spiderfarm=_Spider Farm
 weaving-mill=_Weaving-Mill

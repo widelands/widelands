@@ -1,6 +1,5 @@
 attrib=eatable
 program=remove
-picture=sheep_00.png
 
 [remove]
 0=remove

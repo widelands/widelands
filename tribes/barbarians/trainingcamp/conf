@@ -1,0 +1,124 @@
+size=big
+soldier_capacity=12
+trainer_patience=5
+
+[buildcost]
+log=6
+raw_stone=4
+grout=6
+gold=4
+thatchreed=3
+
+[return_on_dismantle]
+log=3
+raw_stone=2
+grout=2
+gold=2
+
+[working positions]
+trainer=1
+
+[inputs]
+pittabread=10
+fish=6
+meat=6
+sharpax=2
+broadax=2
+bronzeax=2
+battleax=2
+warriorsax=2
+helm=2
+mask=2
+warhelm=2
+
+[soldier attack]
+min_level=0
+max_level=4
+
+[soldier hp]
+min_level=0
+max_level=2
+
+[programs]
+sleep=_Sleep
+upgrade_soldier_attack_0=_Upgrade soldier attack from level 0 to level 1
+upgrade_soldier_attack_1=_Upgrade soldier attack from level 1 to level 2
+upgrade_soldier_attack_2=_Upgrade soldier attack from level 2 to level 3
+upgrade_soldier_attack_3=_Upgrade soldier attack from level 3 to level 4
+upgrade_soldier_attack_4=_Upgrade soldier attack from level 4 to level 5
+upgrade_soldier_hp_0=_Upgrade soldier health from level 0 to level 1
+upgrade_soldier_hp_1=_Upgrade soldier health from level 1 to level 2
+upgrade_soldier_hp_2=_Upgrade soldier health from level 2 to level 3
+
+[sleep]
+sleep=5000
+check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
+
+[upgrade_soldier_attack_0]
+check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
+sleep=30000
+check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
+consume=sharpax fish,meat pittabread
+train=soldier attack 0 1
+
+[upgrade_soldier_attack_1]
+check_soldier=soldier attack 1
+sleep=30000
+check_soldier=soldier attack 1
+consume=broadax fish,meat pittabread
+train=soldier attack 1 2
+
+[upgrade_soldier_attack_2]
+check_soldier=soldier attack 2
+sleep=30000
+check_soldier=soldier attack 2
+consume=bronzeax fish,meat pittabread
+train=soldier attack 2 3
+
+[upgrade_soldier_attack_3]
+check_soldier=soldier attack 3
+sleep=30000
+check_soldier=soldier attack 3
+consume=battleax fish,meat:2 pittabread
+train=soldier attack 3 4
+
+[upgrade_soldier_attack_4]
+check_soldier=soldier attack 4
+sleep=30000
+check_soldier=soldier attack 4
+consume=warriorsax fish,meat pittabread:2
+train=soldier attack 4 5
+
+[upgrade_soldier_hp_0]
+check_soldier=soldier hp 0
+sleep=30000
+check_soldier=soldier hp 0
+consume=helm fish,meat,pittabread
+train=soldier hp 0 1
+
+[upgrade_soldier_hp_1]
+check_soldier=soldier hp 1
+sleep=30000
+check_soldier=soldier hp 1
+consume=mask fish,meat pittabread
+train=soldier hp 1 2
+
+[upgrade_soldier_hp_2]
+check_soldier=soldier hp 2
+sleep=30000
+check_soldier=soldier hp 2
+consume=warhelm fish,meat:2 pittabread
+train=soldier hp 2 3
+
+[build]
+pics=trainingcamp_b_??.png  # ???
+hotspot=110 77
+
+[unoccupied]
+pics=trainingcamp_u_??.png  # ???
+hotspot=110 75
+
+[idle]
+pics=trainingcamp_i_??.png  # ???
+hotspot=110 75
+fps=10

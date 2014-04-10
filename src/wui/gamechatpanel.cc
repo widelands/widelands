@@ -65,15 +65,23 @@ void GameChatPanel::recalculate()
 	chatbox.set_text(str);
 
 	// If there are new messages, play a sound
-	if (msgs.size() > chat_message_counter)
+	if (msgs.size() != chat_message_counter)
 	{
 		// computer generated ones are ignored
 		// Note: if many messages arrive simultaneously,
 		// the latest is a system message and some others
 		// are not, then this act wrong!
-		if (!msgs.back().sender.empty())
+		if (!msgs.back().sender.empty() && !m_chat.sound_off())
+		{
 			// The latest message is not a system message
-			play_new_chat_message();
+			if (std::string::npos == msgs.back().sender.find("(IRC)"))
+			{
+				// The latest message was not relayed from IRC.
+				// The above built-in string constant should match
+				// that of the IRC bridge.
+				play_new_chat_message();
+			}
+		}
 		chat_message_counter = msgs . size();
 
 	}

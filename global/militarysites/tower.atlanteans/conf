@@ -6,13 +6,12 @@ vision_range=17
 buildable=no
 prefer_heroes=true
 occupied_string=
-aggressor_string=_Your Tower discovered an aggressor.
-attack_string=_Your Tower is under attack.
-defeated_enemy_string=_The enemy defeated your soldiers at the Tower
-defeated_you_string=_Your soldiers defeated the enemy at the Tower
+aggressor_string=_Your tower discovered an aggressor.
+attack_string=_Your tower is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the tower.
+defeated_you_string=_Your soldiers defeated the enemy at the tower.
 
 
 [idle]
 pics=../../../tribes/atlanteans/tower/tower_i_??.png
 hotspot=55 70
-playercolor=true

@@ -35,7 +35,7 @@ class Worker;
 struct WorkerProgram;
 
 
-class Worker_Descr : public Bob::Descr
+class Worker_Descr : public BobDescr
 {
 	friend struct Tribe_Descr;
 	friend class Warehouse;

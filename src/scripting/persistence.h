@@ -27,7 +27,7 @@
 #include "scripting/eris/lua.hpp"
 
 namespace Widelands {
-	struct Map_Map_Object_Loader;
+	class Map_Map_Object_Loader;
 	struct Map_Map_Object_Saver;
 	class Editor_Game_Base;
 	class Game;

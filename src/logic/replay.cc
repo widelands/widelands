@@ -239,7 +239,7 @@ ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
-	game.cleanup_for_load(true, true);
+	game.cleanup_for_load();
 	{
 		Game_Loader gl(m_filename + WLGF_SUFFIX, game);
 		gl.load_game();

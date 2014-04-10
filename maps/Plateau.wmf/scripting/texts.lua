@@ -2,7 +2,8 @@
 --                     TEXTS - No logic inside this file
 -- =======================================================================
 
-use("aux", "formatting")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 -- Removes whitespace at the beginning or the end and translates
 -- newlines into spaces.
@@ -47,9 +48,9 @@ obj_defeat_jomo = {
 -- Messages to the User
 -- =====================
 function _msg(title, text, ...)
-   local s = 
+   local s =
 "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=3333FF>"
-   .. title ..  "</p></rt><rt>" .. 
+   .. title ..  "</p></rt><rt>" ..
    "<rt><p line-spacing=3 font-size=12>" .. reflow(text)
    objs = {...}
    if #objs > 0 then
@@ -59,7 +60,7 @@ function _msg(title, text, ...)
          s = s .. reflow(objs[i].body) .. "<br>"
          i = i+1
       end
-      s = s .. reflow(objs[#objs].body) 
+      s = s .. reflow(objs[#objs].body)
    end
    return s .. "</p></rt>"
 end
@@ -69,8 +70,8 @@ end
 
 briefing_1_the_forbidden_island = {
    title =_ "First Briefing",
-   width = 400, 
-   height = 300, 
+   width = 400,
+   height = 300,
    posy = 1,
    body = _msg( _"The Forbidden Island", _(
 [[Finally! We have just taken our first step towards victory! ]] ..
@@ -80,15 +81,15 @@ briefing_1_the_forbidden_island = {
 [[so we should keep quiet and build up our infrastructure. Soon we will be strong enough to raid their positions.]])),
 }
 
-briefing_2_found_ancient_castle = { 
-   title =_ "Second Briefing", 
-   width = 400, 
+briefing_2_found_ancient_castle = {
+   title =_ "Second Briefing",
+   width = 400,
    height = 300,
    posy = 1,
    body = _msg(_"An Ancient Castle", _(
 [[By the Gods! One of our scouts has discovered a mighty castle at the center of the old plateau. ]] ..
 [[The castle must be quite old and seems to have been built in a foreign style. ]] ..
-[[It’s quite obvious that this is not barbarian craft.]]) .. "<br><br>" ..
+[[It’s quite obvious that this is not barbarian craft.]]) .. paragraphdivider() ..
 _([[Let’s hope that Lanissa – the warlord holding sway over that castle – has not discovered our movements yet. ]] ..
 [[Perhaps we have a chance of conquering that mighty building without a bigger fight! ]] ..
 [[However, it is essential that we capture it. It will be the key to our reign over this island!]]),
@@ -101,7 +102,7 @@ briefing_3_captured_ancient_castle = {
    height = 300,
    posy = 1,
    body = _msg(_"Ancient Castle Captured", _(
-[[Wonderful! Our troops have finally defeated Lanissa and her soldiers. The ancient castle is ours!]]) .. "<br><br>" ..
+[[Wonderful! Our troops have finally defeated Lanissa and her soldiers. The ancient castle is ours!]]) .. paragraphdivider() ..
 _([[It is amazing how far one can see from the highest tower of the castle. We can watch the whole island. ]] ..
 [[So now I wonder why Lanissa did not see us and thus did not prepare. ]] ..
 [[Be that as it may, some things will never come to the light of day. ]] ..
@@ -113,21 +114,21 @@ _([[It is amazing how far one can see from the highest tower of the castle. We c
 }
 
 briefing_erwyn_defeated = {
-   title=_ "Another Briefing", 
+   title=_ "Another Briefing",
    width = 400,
    height = 300,
    posy = 1,
    body = _msg( _"Erwyn Defeated", _
-[[Great! Erwyn gave up when he saw his last buildings burning down. That’s one less strong warlord on this island!]]), 
+[[Great! Erwyn gave up when he saw his last buildings burning down. That’s one less strong warlord on this island!]]),
 }
 
 briefing_jomo_defeated = {
-   title=_ "Another Briefing", 
-   width = 400, 
-   height = 300, 
-   posy = 1, 
+   title=_ "Another Briefing",
+   width = 400,
+   height = 300,
+   posy = 1,
    body= _msg( _"Jomo Defeated", _
-[[Great! Jomo gave up when he saw his last buildings burning down. That’s one less warlord on this island!]]), 
+[[Great! Jomo gave up when he saw his last buildings burning down. That’s one less warlord on this island!]]),
 }
 
 last_briefing_victory = {
@@ -136,8 +137,7 @@ last_briefing_victory = {
    height=300,
    posy=1,
    body = _msg( _"Victory!", _
-[[Finally! The island is completely ours. Now we just have to defend it better than the warlords did.]] .. "<br><br>" ..
+[[Finally! The island is completely ours. Now we just have to defend it better than the warlords did.]] .. paragraphdivider() ..
 _"Congratulations! You have mastered this scenario. You may play on if you like!"
 ),
 }
-

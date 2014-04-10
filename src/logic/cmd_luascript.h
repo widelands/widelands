@@ -29,8 +29,8 @@ namespace Widelands {
 struct Cmd_LuaScript : public GameLogicCommand {
 	Cmd_LuaScript() : GameLogicCommand(0) {} // For savegame loading
 	Cmd_LuaScript
-		(int32_t const _duetime, std::string ns, std::string script) :
-		GameLogicCommand(_duetime), m_ns(ns), m_script(script) {}
+		(int32_t const _duetime, const std::string& script) :
+		GameLogicCommand(_duetime), script_(script) {}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
@@ -41,8 +41,7 @@ struct Cmd_LuaScript : public GameLogicCommand {
 	virtual void execute(Game &) override;
 
 private:
-	std::string m_ns;
-	std::string m_script;
+	std::string script_;
 };
 
 }

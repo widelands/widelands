@@ -20,6 +20,8 @@
 #ifndef UI_HELPWINDOW_H
 #define UI_HELPWINDOW_H
 
+#include <memory>
+
 #include "align.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
@@ -73,7 +75,7 @@ private:
 		HEADING = 1
 	} lastentry;
 
-	Multiline_Textarea * textarea;
+	std::unique_ptr<Multiline_Textarea> textarea;
 	std::string const m_h1, m_h2, m_p; // font sizes
 	std::string const m_fn; // font name
 	std::string m_text;
@@ -86,14 +88,14 @@ private:
  */
 struct LuaTextHelpWindow : public UI::UniqueWindow {
 	LuaTextHelpWindow
-		(Panel * parent, UI::UniqueWindow::Registry &,
+		(Panel * parent, UI::UniqueWindow::Registry& reg,
 		 const Widelands::Building_Descr& building_description,
 		 LuaInterface * const lua,
 		 uint32_t width = 300, uint32_t height = 400);
 	~LuaTextHelpWindow();
 
 private:
-	Multiline_Textarea * textarea;
+	std::unique_ptr<Multiline_Textarea> textarea;
 };
 
 }

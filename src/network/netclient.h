@@ -91,9 +91,9 @@ struct NetClient :
 	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) override;
 	virtual void setPlayerCloseable(uint8_t number, bool closeable) override;
 	virtual void setPlayerShared   (uint8_t number, uint8_t shared) override;
-	virtual void setWinCondition   (std::string) override;
+	virtual void setWinConditionScript   (std::string) override;
 	virtual void nextWinCondition  () override;
-	virtual std::string getWinCondition() override;
+	virtual std::string getWinConditionScript() override;
 
 	// ChatProvider interface
 	void send(const std::string & msg) override;
