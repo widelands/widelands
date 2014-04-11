@@ -15,8 +15,8 @@ return {
 
 	building_help_lore_string("barbarians", "lumberjacks_hut",_[["Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack."]],_[[Krumta, carpenter of Chat'Karuth]]) ..
 	--General Section
-	building_help_general_string("barbarians", building_description, "trunk", "",
-		_"Fell trees in the surrounding area and process them into trunks.", "10", "--") ..
+	building_help_general_string("barbarians", building_description, "log", "",
+		_"Fell trees in the surrounding area and process them into logs.", "10", "--") ..
 
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
@@ -24,18 +24,18 @@ return {
 
 	rt(h3(_"Incoming:")) ..
 	-- TODO remove these, just for testing
-	building_help_depencencies_ware("barbarians",{"inn","snack","deep_coalmine"}, "snack") ..
-	building_help_depencencies_building("barbarians",{"coal","axfactory"}, "axfactory") ..
+	--building_help_depencencies_ware("barbarians",{"inn","snack","deep_coalmine"}, "snack") ..
+	--building_help_depencencies_building("barbarians",{"coal","axfactory"}, "axfactory") ..
 
 	rt(h3(_"Collects:")) ..
-	building_help_depencencies_ware("barbarians", {"lumberjacks_hut", "trunk"}, "trunk") ..
+	--building_help_depencencies_ware("barbarians", {"lumberjacks_hut", "log"}, "log") ..
 
 
 	rt(h3(_"Outgoing:")) ..
-	building_help_depencencies_ware("barbarians", {"constructionsite", "trunk"}, "trunk") ..
-	building_help_depencencies_ware("barbarians", {"burners_house", "trunk"}, "trunk") ..
-	building_help_depencencies_ware("barbarians", {"metalworks", "trunk"}, "trunk") ..
-	building_help_depencencies_ware("barbarians", {"hardener", "trunk"}, "trunk") ..
+	building_help_depencencies_ware("barbarians", {"constructionsite", "log"}, "log") ..
+	--building_help_depencencies_ware("barbarians", {"burners_house", "log"}, "log") ..
+	--building_help_depencencies_ware("barbarians", {"metalworks", "log"}, "log") ..
+	--building_help_depencencies_ware("barbarians", {"hardener", "log"}, "log") ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..
