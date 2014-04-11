@@ -20,7 +20,7 @@ function dependencies_old(images, text)
 	end
 
 	string = "image=" .. images[1]
-	for k,v in ipairs({unpack(images,2)}) do
+	for k,v in ipairs({table.unpack(images,2)}) do
 		string = string .. ";pics/arrow-right.png;" .. v
 	end
 
@@ -46,10 +46,9 @@ function dependencies(tribename, items, text)
 	end
 
 	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/menu.png"
-	for k,v in ipairs({unpack(items,2)}) do
+	for k,v in ipairs({table.unpack(items,2)}) do
 		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
 	end
-
 	return rt(string, p(text))
 end
 
