@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-06 11:07+0000\n"
+"PO-Revision-Date: 2014-04-11 03:14+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:28+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-11 05:29+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: gd\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
@@ -28,6 +28,9 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
+"Às dèidh dol air tìr air eilean sonn faisg air Atlantais, tha na h-"
+"Atlantaich a tha air am fàgail a' strì gus dachaigh ùr a stèidheachadh "
+"dhaibh fhèin."
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians – The Second Empire"
@@ -158,6 +161,9 @@ msgid ""
 "In this scenario, the higher production buildings including mining and "
 "military expansions will be introduced."
 msgstr ""
+"Ionnsaichidh tu mu na togalaichean saothrachaidh as àirde sa chnàmh-sgeul "
+"seo, a' gabhail a-steach mèinnearachd agus meudachadh do ranntair leis an "
+"arm."
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
@@ -200,6 +206,11 @@ msgid ""
 "the ways to encompass these large territories are long and meandering, so it "
 "is easy to err into the land of the foreign clans."
 msgstr ""
+"'S e ar toileachas a th' ann a bhith a' tuineachadh air an dùthaich "
+"bheàrnach bhrèagha seo. Co-dhiù, chan eil e furasta na slighean fhada agus "
+"caochlaideach aig an ranntair seo a thuigsinn, mar sin feumaidh sinn a bhith "
+"faiceallach ach nach bris sinn a-steach air tìr nan cinnidhean eile le "
+"mearachd."
 
 #: ../../maps/Calvisson.wmf/elemental:12
 msgid ""
@@ -220,6 +231,9 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
+"Ge b' e feart annasach an nàdair no cruthachadh aig dia craicte (agus "
+"dèidheil air geamannan) a th' ann, tha am blàr seo a' feitheamh ri dithis "
+"nàmhaid ach an tèid iad an aghaidh càch a chèile."
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -248,6 +262,8 @@ msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the "
 "crater. Two tribes are now fighting for the rich resources."
 msgstr ""
+"Tha beartas de bheatha san t-sloc aimsir às dèidh dreag a' tuiteam air na "
+"beanntan. Tha dà threubh a' dèanamh sabaid an tòir air na stòrasan."
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
@@ -292,6 +308,10 @@ msgid ""
 "wonder that there is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last of the remaining water."
 msgstr ""
+"'S fhada on a bha an t-uisge ann air an ùir seo. 'S beag an t-iongnadh nach "
+"eil mòran uisge air fhàgail ann an grian na h-aibhne seo. Tha fios aig a h-"
+"uile duine gu bheil cogadh gu bhith tighinn. Seo cogadh mu na tha air "
+"fhàgail de dh'uisge."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -302,6 +322,8 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
 msgstr ""
+"Tha fìor bhòidhchead na tìre uaine seo a' tàladh iomadh treubh ach an "
+"gabhadh iad air an son fhèin i."
 
 #: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
@@ -331,6 +353,9 @@ msgid ""
 "somewhat above the normal value. The AI performed badly at the time of "
 "writing (2013)."
 msgstr ""
+"Mholamaid am mapa seo airson dà no trì cluicheadairean daonna le luaths a' "
+"gheama beagan nas àirde na an àbhaist. Cha do rinn an IF gu math idir nuair "
+"a chaidh seo a sgrìobhadh (2013)."
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -341,6 +366,9 @@ msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
 msgstr ""
+"Seo tìrean àlainn nam Fionnlannach le pailteas lochan, aibhnichean, "
+"choilltean àrsaidh agus bheanntan. Feumaidh tu fhèin an rathad tron dùthaich "
+"seo a lorg."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -353,6 +381,10 @@ msgid ""
 "if you are alone, but no-one knows what might happen if you met an opposing "
 "tribe?"
 msgstr ""
+"An e deuchainn nan diathan no plana olc aig cuideigin eile a th' ann gun do "
+"dhùisg thu fhèin 's do threubh san eilean seo am measg teine 's làbha? Tha "
+"sibh nur n-aonar gu ruige seo a-rèir coltais, ach cò aige a tha fios na "
+"thachradh nan robh treubh nàmhaid ann?"
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -363,6 +395,9 @@ msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Fhad 's a tha iad dìonta gu math sna dùin mòra aca, tha na tighearnan-"
+"cogaidh a' toirt nam planaichean aca gu buil an tòir air cumhachd 's "
+"ùghdarras air an tìr..."
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
@@ -413,6 +448,8 @@ msgstr "Rubha an òir"
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr ""
+"Tha a' chabhag air dà impireachdan ach an tog iad an ulaidh o rubha seann-"
+"sgeulach..."
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"

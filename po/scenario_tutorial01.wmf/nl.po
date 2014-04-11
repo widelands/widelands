@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-15 10:46+0000\n"
+"PO-Revision-Date: 2014-04-10 21:19+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:40+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-11 05:30+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: nl\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:15
@@ -295,7 +295,7 @@ msgid ""
 "the raw stone."
 msgstr ""
 "Perfect. De houthakkershut is gebouwd. Een houthakker zal er nu intrekken en "
-"beginnen met bomen omhakken, dus onze boomstammen invoer is voorlopig "
+"beginnen met bomen omhakken, dus onze aanvoer van boomstammen is voorlopig "
 "veilig. Nu naar de ruwe stenen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:171
@@ -400,7 +400,7 @@ msgstr "Hoe bouw je een steengroeve"
 msgid ""
 "Build a quarry next to those stones here. Remember how I did it earlier?"
 msgstr ""
-"Bouw een steengroeve naast die stenen. Herinnerd u zich hoe ik het eerder "
+"Bouw een steengroeve naast die stenen. Herinnert u zich hoe ik het eerder "
 "deed?"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:226
@@ -410,8 +410,8 @@ msgid ""
 "appears and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
 msgstr ""
-"Zorg ervoor dat de bouwhulp ingeschakeld is, moet u klikken op de plaats "
-"waar u wilt het gebouw moet komen, kies het gebouw uit het venster dat "
+"Zorg ervoor dat de bouwhulp ingeschakeld is, klik dan eenvoudigweg op de "
+"plaats waar u het gebouw wilt hebben, kies het gebouw uit het venster dat "
 "verschijnt en het wordt geplaatst. Misschien is het een goede tijd om al die "
 "symbolen van de bouwhulp te verklaren die wij eerder hebben geactiveerd."
 
@@ -438,7 +438,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:237
 msgid "Red building symbols can only hold small buildings and flags."
 msgstr ""
-"Rode gebouw symbolen kunnen alleen kleine gebouwen en vlaggen bevatten."
+"Rode gebouwsymbolen kunnen alleen kleine gebouwen en vlaggen bevatten."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:239
 msgid "And finally the yellow flag symbol only allows for flags."
@@ -449,8 +449,8 @@ msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
 msgstr ""
-"Als u iets op een plek plaatst de omgeving kan minder plek krijgen voor "
-"bebouwing, dus kies verstandig."
+"Als u iets op een plek plaatst dan houdt de omgeving mogelijk minder ruimte "
+"over voor bebouwing, dus kies verstandig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:244
 msgid ""
@@ -515,7 +515,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:272
 msgid "the road building symbol."
-msgstr "het wegenbouw symbool."
+msgstr "het wegenbouwsymbool."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:274
 msgid ""
@@ -527,7 +527,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid "the abort symbol."
-msgstr "het afbreek symbool."
+msgstr "het afbreeksymbool."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:279
 msgid ""
@@ -536,10 +536,10 @@ msgid ""
 "time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes like so:"
 msgstr ""
-"Nu over deze weg. We zijn al in de wegbouwmodus vanaf het momentdat we de "
-"steengroeve aanmaakten. U kunt het stap voor stap langer maken door meerdere "
-"keren te klikken op een naburig veld voor perfecte controle over de route "
-"van de weg, zo dus:"
+"Nu over deze weg. We zijn al in de wegbouwmodus vanaf het moment dat u de "
+"steengroeve selecteerde. U kunt het stap voor stap langer maken door "
+"meerdere keren te klikken op een naburig veld voor perfecte controle over de "
+"route van de weg, zo dus:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:290
 msgid ""
@@ -553,7 +553,7 @@ msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
 msgstr ""
-"Nog één ding: rond het veld waar de weg zou eindigen zit u verschillende "
+"Nog één ding: rond het veld waar de weg zou eindigen ziet u verschillende "
 "markeringen. Deze hebben de volgende betekenis:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
@@ -604,7 +604,7 @@ msgstr "Verbindt de steengroeve met het hoofdkwartier"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid "Connect Your Construction Site"
-msgstr "Verbindt je bouwplaats"
+msgstr "Verbindt uw bouwplaats"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:319
 msgid ""
@@ -612,9 +612,9 @@ msgid ""
 "would have been put directly into road building mode after ordering a new "
 "site. But now, you aren’t."
 msgstr ""
-"Verbind de steengroevebouwplaats met het hoofdkwartier met een weg. Bij het "
-"aanmaken van een bouwplaats zit u direct in de wegenbouwmodus. Maar nu zit u "
-"dat niet."
+"Verbindt uw steengroevebouwplaats met het hoofdkwartier met behulp van een "
+"weg. Bij het aanmaken van een bouwplaats bent u direct in de wegenbouwmodus. "
+"Maar nu bent u dat niet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:322
 msgid ""
@@ -624,12 +624,12 @@ msgid ""
 msgstr ""
 "Om een volledig nieuwe weg te bouwen klik op de vlag voor de bouwplaats en "
 "klik om de weg te bouwen op de wegbouwknop en op de vlag voor het "
-"hoofdkwartier. Wacht totdat de stengroeve af is."
+"hoofdkwartier. Wacht totdat de steengroeve af is."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:330
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:349
 msgid "Census and Statistics"
-msgstr "Volkstelling en statistiek"
+msgstr "Namen en statistiek"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:332
 msgid ""
@@ -688,7 +688,7 @@ msgid ""
 msgstr ""
 "Hallo, ik ben het weer! Deze keer stuur ik een bericht. Berichten worden "
 "door Widelands verstuurt om u te informeren over belangrijke gebeurtenissen: "
-"lege mijne, aanvallen op uw stam, veroverde of verloren militaire gebouwen, "
+"lege mijnen, aanvallen op uw stam, veroverde of verloren militaire gebouwen, "
 "gevonden grondstoffen..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:365
@@ -735,7 +735,7 @@ msgstr "Archiveer alle berichten in je inbox"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:382
 msgid "Archive Your Inbox Messages"
-msgstr "Archiveer qberichten in je inbox"
+msgstr "Archiveer berichten in je inbox"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:383
 msgid ""
@@ -759,7 +759,7 @@ msgid ""
 msgstr ""
 "Om dit te doen, open je het berichtenvenster door op 'n' te drukken of op de "
 "meest rechtse knop onderaan het scherm te klikken. Markeer dan alle "
-"berichten door op de aanvink knop ervoor te klikken. Klik vervolgens op de "
+"berichten door de  knop ervoor aan te vinken. Klik vervolgens op de "
 "archiveer-alles-knop."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:398
@@ -787,11 +787,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
 msgid "Close the messages window"
-msgstr "sluit het berichten venster"
+msgstr "Sluit het berichtenvenster"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:408
 msgid "Close the Messages Window"
-msgstr "sluit het berichten venster"
+msgstr "Sluit het berichtenvenster"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:409
 msgid ""
@@ -836,7 +836,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 msgid "To do that, click on the quarry and select the destroy button."
-msgstr "Om dat te doen klik op de steengroeve en selecteer de vernietigknop."
+msgstr ""
+"Om dat te doen klik op de steengroeve en selecteer de vernietigingsknop."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:441
 msgid "Expanding Your Territory!"
@@ -851,9 +852,9 @@ msgid ""
 msgstr ""
 "Er is nog een ding dat ik nu wil onderwijzen: het uitbreiden van terrein. De "
 "ruimte waarmee we starten rond het hoofdkwartier is nauwelijks genoeg om een "
-"basis bouwinfrastructuur op te bouwen en we hebben geen toegang tot bergen, "
-"die we nodig hebben voor mineralen en kolen. Dus moeten we ons grondgebied "
-"uitbreiden."
+"elementaire bouwinfrastructuur op te bouwen en we hebben geen toegang tot "
+"bergen, die we nodig hebben voor mineralen en kolen. Dus moeten we ons "
+"grondgebied uitbreiden."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:447
 msgid ""
@@ -891,7 +892,7 @@ msgid ""
 "Let’s try it out now: build a few military buildings on your south-western "
 "border."
 msgstr ""
-"Probeer het nu maar: Bouw een paar militaire gebouwe bij je zuidwestelijke "
+"Probeer het nu maar: bouw een paar militaire gebouwen bij je zuidwestelijke "
 "grens."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:461
@@ -1047,8 +1048,8 @@ msgid ""
 "introduction campaigns for the three tribes."
 msgstr ""
 "Merk op dat de mijnwerkers porties nodig hebben om te werken. Porties worden "
-"geproduceerd in kroegen en kroegen hebben vlees, pitabrood en vis nodig om "
-"ze te maken. Het vergt veel infrastructuur om de mijnen goed te laten "
+"geproduceerd in taveernes en taveernes hebben vlees, pitabrood en vis nodig "
+"om ze te maken. Het vergt veel infrastructuur om de mijnen goed te laten "
 "werken. Deze infrastructuur varieert van stam tot stam. Ze worden bij iedere "
 "oefencampagne verklaard voor de drie stammen."
 
@@ -1100,7 +1101,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:555
 msgid "minimap button at the bottom of the screen."
-msgstr "minikaart knop onderin het scherm."
+msgstr "knop voor minikaart onderin het scherm."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:557
 msgid "Alternatively, you could also press ‘m’ on your keyboard."
@@ -1113,8 +1114,8 @@ msgid ""
 "flags and player indicators on and off inside the minimap."
 msgstr ""
 "De minikaart laat je de hele kaart in het klein zien. Je kan meteen naar elk "
-"veld overspringen door er op te klikken. Je kan ook gebouwen, wegen, vlaggen "
-"en speler aanwijzers aan- en uitschakelen op de minikaart."
+"gebied springen door erop te klikken. Je kan ook gebouwen, wegen, vlaggen en "
+"speleraanwijzers aan- en uitschakelen op de minikaart."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:562
 msgid ""
@@ -1152,10 +1153,10 @@ msgid ""
 "is needed."
 msgstr ""
 "Een militair wordt gecreëerd als een normale arbeider: een drager grijpt een "
-"hulpmiddel in a pakhuis zodra een verzoek om een bepaald beroep niet wordt "
-"vervuld. Het hulpmiddel om een barbaarse militair te  creëren is een bijl. "
-"De pas gecreëerde militair is van niveau 0. Om de militair in een van de "
-"vier categorieën beter te maken, is een opleiding nodig."
+"hulpmiddel in een magazijn zodra een verzoek om een bepaald beroep niet "
+"wordt vervuld. Het hulpmiddel om een barbaarse militair te  creëren is een "
+"bijl. De pas gecreëerde militair is van niveau 0. Om de militair in een van "
+"de vier categorieën beter te maken, is een opleiding nodig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:584
 msgid ""
@@ -1167,12 +1168,12 @@ msgid ""
 "statistics have the following meaning:"
 msgstr ""
 "Trainen gebeurt in trainingsgebouwen zoals het trainingskamp of de arena: de "
-"soldaten gaan daar (zoals onze kleine kameraden momenteel doen), verbruiken "
-"sommige waren en gaan één niveau in één categorie vooruit. Als een barbaarse "
-"militair volledig is opgeleid, heeft hij niveau 3 levenspunten, niveau 5 "
-"aanval, niveau 0 verdediging en niveau 2 ontwijken. Dit is dan een "
-"afschrikwekkende strijder! De individuele statistieken hebben de volgende "
-"betekenis:"
+"soldaten gaan daarheen (zoals onze kleine kameraden momenteel doen), "
+"verbruiken sommige waren en gaan één niveau in één categorie vooruit. Als "
+"een barbaarse militair volledig is opgeleid, heeft hij niveau 3 "
+"levenspunten, niveau 5 aanval, niveau 0 verdediging en niveau 2 ontwijken. "
+"Dit is dan een afschrikwekkende strijder! De individuele statistieken hebben "
+"de volgende betekenis:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:589
 msgid "Health:"
