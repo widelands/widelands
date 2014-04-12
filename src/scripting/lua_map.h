@@ -111,7 +111,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
+	int get_descname(lua_State *);
 	int get_buildable(lua_State *);
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
@@ -157,7 +157,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State*);
+	int get_descname(lua_State*);
 
 	/*
 	 * Lua methods
@@ -191,7 +191,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
+	int get_descname(lua_State *);
 	int get_becomes(lua_State*);
 
 	/*

@@ -996,7 +996,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	// It could be beneficial to add a "base directory" (e.g.
 	// tribes/barbarians/lumberjacks_hut) or something in there too, but only do
 	// this if you need it for the help files.
-	PROP_RO(L_BuildingDescription, name),
+	PROP_RO(L_BuildingDescription, descname),
 	PROP_RO(L_BuildingDescription, buildable),
 	PROP_RO(L_BuildingDescription, destructible),
 	PROP_RO(L_BuildingDescription, enhanced),
@@ -1044,7 +1044,7 @@ void L_BuildingDescription::__unpersist(lua_State * /* L */) {
 	// currently done for MapObject).
 			(RO) returns name of the building as a string.
 */
-int L_BuildingDescription::get_name(lua_State * L) {
+int L_BuildingDescription::get_descname(lua_State * L) {
 	assert(buildingdescr_ != nullptr);
 	lua_pushstring(L, buildingdescr_->descname());
 	return 1;
@@ -1189,7 +1189,7 @@ const MethodType<L_WareDescription> L_WareDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
-	PROP_RO(L_WareDescription, name),
+	PROP_RO(L_WareDescription, descname),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1210,7 +1210,7 @@ TODO we need an ngettext version of the name
 			(RO) a string with the ware's localized name
 */
 
-int L_WareDescription::get_name(lua_State * L) {
+int L_WareDescription::get_descname(lua_State * L) {
 	assert(waredescr_ != nullptr);
 	lua_pushstring(L, waredescr_->descname());
 	return 1;
@@ -1232,7 +1232,7 @@ const MethodType<L_WorkerDescription> L_WorkerDescription::Methods[] = {
 };
 const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 	PROP_RO(L_WorkerDescription, becomes),
-	PROP_RO(L_WorkerDescription, name),
+	PROP_RO(L_WorkerDescription, descname),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1251,7 +1251,7 @@ void L_WorkerDescription::__unpersist(lua_State * /* L */) {
 
 			(RO) a string with the worker's localized name
 */
-int L_WorkerDescription::get_name(lua_State * L) {
+int L_WorkerDescription::get_descname(lua_State * L) {
 	assert(workerdescr_ != nullptr);
 	lua_pushstring(L, workerdescr_->descname());
 	return 1;

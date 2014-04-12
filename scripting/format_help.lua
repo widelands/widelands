@@ -194,7 +194,7 @@ end
 --
 function building_help_dependencies_ware(tribename, items, ware)
 	local ware_descr = wl.Game():get_ware_description(tribename, ware)
-	return dependencies(tribename, items, ware_descr.name)		
+	return dependencies(tribename, items, ware_descr.descname)		
 end
 
 
@@ -211,7 +211,7 @@ end
 --
 function building_help_dependencies_building(tribename, items, buildingname)
 	local building_descr = wl.Game():get_building_description(tribename,buildingname)
-	return dependencies(tribename, items, building_descr.name)		
+	return dependencies(tribename, items, building_descr.descname)		
 end
 
 
@@ -230,7 +230,7 @@ end
 function building_help_dependencies_ware_building(tribename, items, warename, buildingname)
 	local building_descr = wl.Game():get_building_description(tribename,buildingname)
 	local ware_descr = wl.Game():get_ware_description(tribename, warename)
-	return dependencies(tribename, items, _"%1$s from: %2$s":bformat(ware_descr.name, building_descr.name))		
+	return dependencies(tribename, items, _"%1$s from: %2$s":bformat(ware_descr.descname, building_descr.descname))		
 end
 
 
@@ -247,7 +247,7 @@ end
 --
 function building_help_dependencies_resi(tribename, items, ware)
 	local ware_descr = wl.Game():get_ware_description(tribename, ware)
-	return dependencies_resi(tribename, items, ware_descr.name)		
+	return dependencies_resi(tribename, items, ware_descr.descname)		
 end
 
 
@@ -326,7 +326,7 @@ function building_help_building_section(tribename, building_description)
 		local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(count .. " ".. ware_descr.name))
+					count, p(count .. " ".. ware_descr.descname))
 		end
 -- TODO this does not work - needs the build cost of the building this was enhanced from
 		result = result .. rt(h3(_"Cost Cumulative:"))
@@ -336,7 +336,7 @@ function building_help_building_section(tribename, building_description)
 			local amount = building_description.build_cost[ware] + building_description.enhancement_cost[ware]
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					amount, p(amount .. " ".. ware_descr.name))
+					amount, p(amount .. " ".. ware_descr.descname))
 		end
 
 		result = result .. rt(h3(_"Dismantle yields:"))
@@ -345,7 +345,7 @@ function building_help_building_section(tribename, building_description)
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(count .. " ".. ware_descr.name))
+					count, p(count .. " ".. ware_descr.descname))
 		end
 
 
@@ -356,7 +356,7 @@ function building_help_building_section(tribename, building_description)
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(count .. " ".. ware_descr.name))
+					count, p(count .. " ".. ware_descr.descname))
 		end
 
 		result = result .. rt(h3(_"Dismantle yields:"))
@@ -365,7 +365,7 @@ function building_help_building_section(tribename, building_description)
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(count .. " ".. ware_descr.name))
+					count, p(count .. " ".. ware_descr.descname))
 		end
 	end
 
@@ -388,20 +388,20 @@ end
 --
 function building_help_crew_string(tribename, workername, toolname)
 	local worker_descr = wl.Game():get_worker_description(tribename,workername)
-	local result = image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, p(worker_descr.name))
+	local result = image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, p(worker_descr.descname))
 	result = result .. building_help_tool_string(tribename, toolname) 
 	if(worker_descr.becomes) then
 		result = result .. rt(h3(_"Experience levels:"))
 -- TODO need the name here rather than the descr_name from C++, so I can get the object
 --		local worker_becomes = wl.Game():get_worker_description(tribename, worker_descr.becomes)
 -- TODO get experience level from C++
---		result = result .. building_help_becomes_string(tribename, worker_descr.name, worker_becomes.name, "19")
+--		result = result .. building_help_becomes_string(tribename, worker_descr.descname, worker_becomes.descname, "19")
 		if(worker_becomes.becomes) then
 			worker_descr = worker_becomes
 -- TODO need the name here rather than the descr_name from C++
 --			local worker_becomes = wl.Game():get_worker_description(tribename, worker_descr.becomes)
 -- TODO get experience level from C++
---			result = result .. building_help_becomes_string(tribename, worker_descr.name, worker_becomes.name, "28")
+--			result = result .. building_help_becomes_string(tribename, worker_descr.descname, worker_becomes.descname, "28")
 		end
 	end
 	return result
@@ -437,7 +437,7 @@ end
 function building_help_tool_string(tribename, toolname, no_of_workers)
 	local ware_descr = wl.Game():get_ware_description(tribename,toolname)
 	return text_line("Worker uses:", -- todo ngettext("Worker uses:","Workers use:",no_of_workers)
-		ware_descr.name, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
+		ware_descr.descname, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
 	-- todo get localised name from tribe's main conf, and add ngettext!
 end
 
