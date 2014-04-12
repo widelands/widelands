@@ -92,7 +92,42 @@ private:
 };
 
 
-class L_BuildingDescription : public L_MapModuleClass {
+class L_MapObjectDescription : public L_MapModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_MapObjectDescription);
+
+	virtual ~L_MapObjectDescription() {}
+
+	L_MapObjectDescription() : mapobjectdescr_(nullptr) {}
+	L_MapObjectDescription(const Widelands::Map_Object_Descr* const mapobjectdescr)
+		: mapobjectdescr_(mapobjectdescr) {}
+	L_MapObjectDescription(lua_State* L) : mapobjectdescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'MapObjectDescription' directly!");
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	const Widelands::Map_Object_Descr * const mapobjectdescr_;
+};
+
+
+class L_BuildingDescription : public L_MapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(L_BuildingDescription);
 
@@ -111,7 +146,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_descname(lua_State *);
+
 	int get_buildable(lua_State *);
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
@@ -138,7 +173,7 @@ private:
 
 
 
-class L_WareDescription : public L_MapModuleClass {
+class L_WareDescription : public L_MapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(L_WareDescription);
 
@@ -157,7 +192,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_descname(lua_State*);
 
 	/*
 	 * Lua methods
@@ -172,7 +206,7 @@ private:
 };
 
 
-class L_WorkerDescription : public L_MapModuleClass {
+class L_WorkerDescription : public L_MapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(L_WorkerDescription);
 
@@ -191,7 +225,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_descname(lua_State *);
 	int get_becomes(lua_State*);
 
 	/*

@@ -978,6 +978,68 @@ int L_Map::recalculate(lua_State * L) {
 
 
 /* RST
+WareDescription
+---
+
+Properties of wares read from the conf files available for Lua
+
+TODO
+*/
+
+const char L_MapObjectDescription::className[] = "MapObjectDescription";
+const MethodType<L_MapObjectDescription> L_MapObjectDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] = {
+	// TODO(GunChleoc): For example stuff like name()
+	// descname() and attributes() (like is_tree or is_stone) are tracked there.
+	// It could be beneficial to add a "base directory" (e.g.
+	// tribes/barbarians/lumberjacks_hut) or something in there too, but only do
+	// this if you need it for the help files.
+	PROP_RO(L_MapObjectDescription, name),
+	PROP_RO(L_MapObjectDescription, descname),
+	{nullptr, nullptr, nullptr},
+};
+
+void L_MapObjectDescription::__persist(lua_State * /* L */) {
+}
+void L_MapObjectDescription::__unpersist(lua_State * /* L */) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
+	.. attribute:: name
+
+			(RO) a string with the map object's internal name
+*/
+
+int L_MapObjectDescription::get_name(lua_State * L) {
+	assert(mapobjectdescr_ != nullptr);
+	lua_pushstring(L, mapobjectdescr_->name());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: name
+
+			(RO) a string with the map object's localized name
+*/
+
+int L_MapObjectDescription::get_descname(lua_State * L) {
+	assert(mapobjectdescr_ != nullptr);
+	lua_pushstring(L, mapobjectdescr_->descname());
+	return 1;
+}
+
+
+
+/* RST
 BuildingDescription
 ---
 
@@ -988,15 +1050,6 @@ const MethodType<L_BuildingDescription> L_BuildingDescription::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = {
-	// TODO(GunChleoc): I think it would be beneficial to add classes
-	// Map_Object_Descr and inherit from this in L_BuildingDescription. See at
-	// the bottom of this file how inheritance is defined for Lua (the
-	// L_ProductionSite class is one example). For example stuff like name()
-	// descname() and attributes() (like is_tree or is_stone) are tracked there.
-	// It could be beneficial to add a "base directory" (e.g.
-	// tribes/barbarians/lumberjacks_hut) or something in there too, but only do
-	// this if you need it for the help files.
-	PROP_RO(L_BuildingDescription, descname),
 	PROP_RO(L_BuildingDescription, buildable),
 	PROP_RO(L_BuildingDescription, destructible),
 	PROP_RO(L_BuildingDescription, enhanced),
@@ -1035,21 +1088,6 @@ void L_BuildingDescription::__unpersist(lua_State * /* L */) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: name
-
-	// TODO(GunChleoc): access to the 'name' of this object for internal
-	// reference is probably sometimes useful too. I suggest sticking to name
-	// and descname or name and descriptive_name or so and expose both (as it is
-	// currently done for MapObject).
-			(RO) returns name of the building as a string.
-*/
-int L_BuildingDescription::get_descname(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	lua_pushstring(L, buildingdescr_->descname());
-	return 1;
-}
-
 
 /* RST
 	.. attribute:: buildable
@@ -1189,7 +1227,6 @@ const MethodType<L_WareDescription> L_WareDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
-	PROP_RO(L_WareDescription, descname),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1203,19 +1240,6 @@ void L_WareDescription::__unpersist(lua_State * /* L */) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-TODO we need an ngettext version of the name
-	.. attribute:: name
-
-			(RO) a string with the ware's localized name
-*/
-
-int L_WareDescription::get_descname(lua_State * L) {
-	assert(waredescr_ != nullptr);
-	lua_pushstring(L, waredescr_->descname());
-	return 1;
-}
-
 
 
 /* RST
@@ -1232,7 +1256,6 @@ const MethodType<L_WorkerDescription> L_WorkerDescription::Methods[] = {
 };
 const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 	PROP_RO(L_WorkerDescription, becomes),
-	PROP_RO(L_WorkerDescription, descname),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1246,16 +1269,7 @@ void L_WorkerDescription::__unpersist(lua_State * /* L */) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: name
 
-			(RO) a string with the worker's localized name
-*/
-int L_WorkerDescription::get_descname(lua_State * L) {
-	assert(workerdescr_ != nullptr);
-	lua_pushstring(L, workerdescr_->descname());
-	return 1;
-}
 
 /* RST
 	.. attribute:: becomes
@@ -3396,13 +3410,23 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // S:
 
 	register_class<L_Map>(L, "map");
+	register_class<L_MapObjectDescription>(L, "map");
+
 	register_class<L_BuildingDescription>(L, "map");
+	add_parent<L_BuildingDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
 	register_class<L_WareDescription>(L, "map");
+	add_parent<L_WareDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
 	register_class<L_WorkerDescription>(L, "map");
+	add_parent<L_WorkerDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
 	register_class<L_Field>(L, "map");
 	register_class<L_PlayerSlot>(L, "map");
 	register_class<L_MapObject>(L, "map");
-
 
 	register_class<L_Bob>(L, "map", true);
 	add_parent<L_Bob, L_MapObject>(L);
