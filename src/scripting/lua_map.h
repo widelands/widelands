@@ -226,6 +226,7 @@ public:
 	 * Properties
 	 */
 	int get_becomes(lua_State*);
+	int get_level_experience(lua_State*);
 
 	/*
 	 * Lua methods

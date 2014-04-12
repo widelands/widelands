@@ -387,41 +387,43 @@ end
 --    :returns: image_line for the worker
 --
 function building_help_crew_string(tribename, workername, toolname)
-	local worker_descr = wl.Game():get_worker_description(tribename,workername)
-	local result = image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, p(worker_descr.descname))
-	result = result .. building_help_tool_string(tribename, toolname) 
-	if(worker_descr.becomes) then
+	local worker_descr = wl.Game():get_worker_description(tribename, workername)
+	local becomes_descr = worker_descr.becomes
+	local result = ""
+
+	if(becomes_descr) then
+	-- TODO some buildings need more than 1 worker
+		result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, 
+			p(_"%s or better":bformat(worker_descr.descname)))
+		result = result .. building_help_tool_string(tribename, toolname, 1) 
+
 		result = result .. rt(h3(_"Experience levels:"))
--- TODO need the name here rather than the descr_name from C++, so I can get the object
---		local worker_becomes = wl.Game():get_worker_description(tribename, worker_descr.becomes)
--- TODO get experience level from C++
---		result = result .. building_help_becomes_string(tribename, worker_descr.descname, worker_becomes.descname, "19")
-		if(worker_becomes.becomes) then
-			worker_descr = worker_becomes
--- TODO need the name here rather than the descr_name from C++
---			local worker_becomes = wl.Game():get_worker_description(tribename, worker_descr.becomes)
--- TODO get experience level from C++
---			result = result .. building_help_becomes_string(tribename, worker_descr.descname, worker_becomes.descname, "28")
+		local exp_string = _"%s to %s (%s EP)":format(
+				worker_descr.descname,
+				becomes_descr.descname,
+				worker_descr.level_experience
+			)
+
+
+		-- TODO worker experience from C++ is nil. Why?
+
+		worker_descr = becomes_descr
+		becomes_descr = worker_descr.becomes
+		if(becomes_descr) then
+			exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
+					worker_descr.descname,
+					becomes_descr.descname,
+					worker_descr.level_experience
+				)
 		end
+		result = result ..  rt("text-align=right", p(exp_string))
+	else
+	-- TODO some buildings need more than 1 worker
+		result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1,
+			p(worker_descr.descname))
+		result = result .. building_help_tool_string(tribename, toolname, 1) 
 	end
 	return result
-	-- todo get localised name from tribe's main conf, and add ngettext!
-end
-
-
--- RST
--- .. function building_help_becomes_string(tribename, workername, becomesname, experience)
---
---    Displays what a worker becomes with experience
---
---    :arg tribename: e.g. "barbarians".
---    :arg workername: e.g. "miner".
---    :arg workername: e.g. "chief_miner".
---    :arg experioence: e.g. "19".
---    :returns: a right-aligned text with what a worker becomes with experience
---
-function building_help_becomes_string(tribename, workername, becomesname, experience)
-	return rt("text-align=right", p(_"%s to %s (%s EP)":format(workername, becomesname, experience)))
 end
 
 
@@ -432,13 +434,13 @@ end
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg toolname: e.g. "felling_axe".
+--    :arg no_of_workers: the number of workers using the tool; for plural formatting.
 --    :returns: text_line for the tool
 --
 function building_help_tool_string(tribename, toolname, no_of_workers)
 	local ware_descr = wl.Game():get_ware_description(tribename,toolname)
-	return text_line("Worker uses:", -- todo ngettext("Worker uses:","Workers use:",no_of_workers)
+	return text_line((ngettext("Worker uses:","Workers use:", no_of_workers)),
 		ware_descr.descname, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
-	-- todo get localised name from tribe's main conf, and add ngettext!
 end
 
 

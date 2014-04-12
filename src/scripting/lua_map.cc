@@ -1256,6 +1256,7 @@ const MethodType<L_WorkerDescription> L_WorkerDescription::Methods[] = {
 };
 const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 	PROP_RO(L_WorkerDescription, becomes),
+	PROP_RO(L_WorkerDescription, level_experience),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1289,6 +1290,17 @@ int L_WorkerDescription::get_becomes(lua_State * L) {
 }
 
 
+/* RST
+TODO(SirVer) returns nil. Why?
+	.. attribute:: level_experience
+
+			(RO) the experience the worker needs to reach this level.
+*/
+int L_WorkerDescription::get_level_experience(lua_State * L) {
+	assert(workerdescr_ != nullptr);
+	lua_pushinteger(L, workerdescr_->get_level_experience());
+	return 1;
+}
 
 /*
  ==========================================================
