@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-30 16:10+0200\n"
-"PO-Revision-Date: 2014-03-22 09:34+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"PO-Revision-Date: 2014-04-11 07:57+0000\n"
+"Last-Translator: Yves MATHIEU <MisterY_vonvon@hotmail.com>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:36+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-12 05:39+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -520,7 +520,7 @@ msgstr "N'est pas un fichier carte"
 #: ../../src/wui/game_main_menu_save_game.cc:268
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "Ce fichier '%s' existe déjà. L'écraser ?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:390
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:410
@@ -731,7 +731,7 @@ msgstr "Grand"
 #: ../../src/logic/constructionsite.cc:91 ../../src/logic/immovable.cc:543
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% construit"
 
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
@@ -1227,22 +1227,22 @@ msgstr "Type de message invalide"
 #: ../../src/network/internet_gaming.cc:500
 #, c-format
 msgid "The game %s is now available"
-msgstr ""
+msgstr "La partie %s est maintenant disponible"
 
 #: ../../src/network/internet_gaming.cc:509
 #, c-format
 msgid "The game %s has been closed"
-msgstr ""
+msgstr "La partie %s a été fermée"
 
 #: ../../src/network/internet_gaming.cc:544
 #, c-format
 msgid "%s joined the lobby"
-msgstr ""
+msgstr "%s rejoint le groupe"
 
 #: ../../src/network/internet_gaming.cc:553
 #, c-format
 msgid "%s left the lobby"
-msgstr ""
+msgstr "%s quitte le groupe"
 
 #: ../../src/network/internet_gaming.cc:587
 msgid "Chat message could not be sent. "
@@ -1962,19 +1962,19 @@ msgstr "Ouvrir une nouvelle partie"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "User Status"
-msgstr ""
+msgstr "Statut de l'utilisateur"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:161
 msgid "Registered"
-msgstr ""
+msgstr "Enregistré"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:163
 msgid "Administrator"
-msgstr ""
+msgstr "Administrateur"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:165
 msgid "Unregistered"
-msgstr ""
+msgstr "Non enregistré"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:168
 #: ../../src/wui/building_statistics_menu.cc:110

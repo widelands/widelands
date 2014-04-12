@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-30 16:10+0200\n"
-"PO-Revision-Date: 2014-03-14 22:44+0000\n"
+"PO-Revision-Date: 2014-04-11 20:14+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:37+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-12 05:39+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -1000,7 +1000,7 @@ msgstr "Kan ikke finne flere ressurser!"
 
 #: ../../src/logic/production_program.cc:1263
 msgid "Main Vein Exhausted"
-msgstr ""
+msgstr "Hovedåren har gått tom"
 
 #: ../../src/logic/production_program.cc:1265
 msgid ""
@@ -1100,7 +1100,7 @@ msgstr "Tom for %s"
 #: ../../src/logic/worker.cc:611
 #, c-format
 msgid "The worker of this building cannot find any more %s."
-msgstr ""
+msgstr "Arbeideren i denne bygning kan ikke finne mer %s."
 
 #: ../../src/logic/worker.cc:956
 msgid "A geologist found resources."
@@ -1201,7 +1201,7 @@ msgstr[1] ""
 #: ../../src/network/internet_gaming.cc:464
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Ugyldig pratemelding type «%s»."
 
 #: ../../src/network/internet_gaming.cc:464
 msgid "Invalid message type"
@@ -1210,26 +1210,26 @@ msgstr "Ugyldig meldingstype"
 #: ../../src/network/internet_gaming.cc:500
 #, c-format
 msgid "The game %s is now available"
-msgstr ""
+msgstr "Spillet %s er nå tilgjenglig"
 
 #: ../../src/network/internet_gaming.cc:509
 #, c-format
 msgid "The game %s has been closed"
-msgstr ""
+msgstr "Spillet %s har blitt lukket"
 
 #: ../../src/network/internet_gaming.cc:544
 #, c-format
 msgid "%s joined the lobby"
-msgstr ""
+msgstr "%s ble med i lobbyen"
 
 #: ../../src/network/internet_gaming.cc:553
 #, c-format
 msgid "%s left the lobby"
-msgstr ""
+msgstr "%s forlot lobbyen"
 
 #: ../../src/network/internet_gaming.cc:587
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "Pratemeldingen kunne ikke sendes. "
 
 #: ../../src/network/internet_gaming.cc:601
 #, c-format
@@ -1261,7 +1261,7 @@ msgstr "Konvertering fra std::string til bool feilet. Strengen var «%s»"
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "There is no user with the name %s logged in!"
-msgstr ""
+msgstr "Det er ingen innloggede brukere som heter «%s»!"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1281
@@ -1300,7 +1300,7 @@ msgstr "Metatjeneren svarte ikke"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game can’t be connected to from the internet"
-msgstr ""
+msgstr "Det er ikke mulig å koble seg til spillet ditt fra nettet"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -1321,6 +1321,8 @@ msgid ""
 "You tried to log back in, but the server has no knowledge of your previous "
 "state anymore."
 msgstr ""
+"Du forsøkte å logge inn igjen, men tjeneren kjenner ikke til din tidligere "
+"tilstand lengre."
 
 #: ../../src/network/netclient.cc:107
 msgid ""
@@ -1376,22 +1378,23 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:377
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr ""
+msgstr "/warn <navn> <grunn>  -  Advar brukeren <navn> på grunn av <grunn>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:379
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr ""
+"/kick <navn> <grunn>  - Sparker ut brukeren <navn> på grunn av <grunn>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:381
 msgid "/forcePause            -  Force the game to pause."
-msgstr ""
+msgstr "/forcePause            -  Tving spillet til å ta pause."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:383
 msgid "/endForcedPause        -  Return game to normal speed."
-msgstr ""
+msgstr "/endForcedPause        -  Returnerer spillet til normal hastighet."
 
 #: ../../src/network/nethost.cc:392
 msgid "Wrong use, should be: /announce <message>"
@@ -1429,12 +1432,12 @@ msgstr "Du kan ikke kaste ut den dedikerte tjeneren"
 #: ../../src/network/nethost.cc:448
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr ""
+msgstr "Er du sikker på at du vil sparke ut %s?"
 
 #: ../../src/network/nethost.cc:449
 #, c-format
 msgid "The stated reason was: %s"
-msgstr ""
+msgstr "Den oppgitte grunnen var: %s"
 
 #: ../../src/network/nethost.cc:450
 #, c-format
@@ -1477,7 +1480,7 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1216 ../../src/network/nethost.cc:1227
 msgid "host $ - Tries to run the host command $"
-msgstr ""
+msgstr "host $ - Forsøker å kjøre vertskommandoen $"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1218
@@ -1486,7 +1489,7 @@ msgstr "save $ - Lagrer gjeldende spill til $.wgf"
 
 #: ../../src/network/nethost.cc:1231
 msgid "pwd $  - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd $  - Sender passordet $ til verten"
 
 #: ../../src/network/nethost.cc:1238
 msgid ""
@@ -1507,7 +1510,7 @@ msgstr "Beklager! Lagring har blitt slått av på denne dedikerte tjeneren!"
 
 #: ../../src/network/nethost.cc:1255
 msgid "Cannot save while there is no game running!"
-msgstr ""
+msgstr "Kan ikke lagre når det ikke er et spill som kjører!"
 
 #: ../../src/network/nethost.cc:1266
 msgid "Game successfully saved!"
@@ -1586,6 +1589,7 @@ msgstr "Tjener krasjet og foretok en nødlagring."
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
 msgstr ""
+"Tilkobling til klient passerte tidsgrense: ingen respons på 10 minutter!"
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
@@ -1594,12 +1598,12 @@ msgstr "Klient og vert har blitt usynkronisert."
 #: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Sparket ut av verten: %s"
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "Klient sendte ugyldig kommandoer: %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
@@ -1738,7 +1742,7 @@ msgstr "Spilleren «%s» ble beseiret og ble en tilskuer."
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
-msgstr ""
+msgstr "Klient «%1$s» svarte ikke på mer enn %2$s."
 
 #: ../../src/network/network_gaming_messages.cc:166
 #, c-format
@@ -1746,6 +1750,8 @@ msgid ""
 "Client %1$s will automatically be kicked, if no answer is received within "
 "%2$s."
 msgstr ""
+"Klient %1$s vil bli sparket ut automatisk, med mindre et svar mottas innen "
+"%2$s."
 
 #: ../../src/replay_game_controller.cc:107
 msgid "End of replay"
@@ -1892,11 +1898,11 @@ msgstr "Lukk"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:54
 msgid "Metaserver Lobby"
-msgstr ""
+msgstr "Lobby"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:58
 msgid "Clients online:"
-msgstr ""
+msgstr "Klienter:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:62
 msgid "List of games:"
@@ -1921,19 +1927,19 @@ msgstr "Åpne et nytt spill"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "User Status"
-msgstr ""
+msgstr "Brukerstatus"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:161
 msgid "Registered"
-msgstr ""
+msgstr "Registrert"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:163
 msgid "Administrator"
-msgstr ""
+msgstr "Administrator"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:165
 msgid "Unregistered"
-msgstr ""
+msgstr "Ikke registrert"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:168
 #: ../../src/wui/building_statistics_menu.cc:110
@@ -1950,7 +1956,7 @@ msgstr "Spill"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:401
 msgid "Connection timed out"
-msgstr ""
+msgstr "Forbindelsen ble tidsavbrutt"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:404
 msgid ""
@@ -2010,7 +2016,7 @@ msgstr "Vis hjelp-vinduet"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:151 ../../src/ui_fsmenu/launchMPG.cc:669
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Oppsett for flerspiller"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:160
 msgid "Clients"

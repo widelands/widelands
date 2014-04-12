@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-04-10 21:19+0000\n"
+"PO-Revision-Date: 2014-04-11 10:12+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-11 05:30+0000\n"
+"X-Launchpad-Export-Date: 2014-04-12 05:40+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 "Language: nl\n"
 
@@ -1232,8 +1232,8 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. It is 25% "
 "for a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
-"Vermijd is de kans dat de militair een aanval kan ontwijken. Het is 25% voor "
-"een niveau 0 Barbaart en stijgt in stappen van 15% per niveau."
+"Ontwijken is de kans dat de militair een aanval kan ontwijken. Het is 25% "
+"voor een niveau 0 Barbaar en stijgt in stappen van 15% per niveau."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:611
 msgid "Enhance This Fortress"
@@ -1266,14 +1266,14 @@ msgstr ""
 "De citadellen kunnen niet direct worden gebouwd. In plaats daarvan, moet u "
 "eerst een vesting construeren en het dan verbeteren naar een citadel. Om dit "
 "te doen, moet u op de vesting klikken, dan kiezen voor de verbeter naar "
-"citadelknoop. Uw militairen zullen de citadel verlaten zolang de bouw bezig "
-"is. Dit betekent dat uw vesting geen militaire invloed meer heeft. Als een "
+"citadelknop. Uw militairen zullen de citadel verlaten tijdens het bouwen. "
+"Dit betekent dat uw vesting geen militaire invloed meer heeft. Als een "
 "vijand een militair gebouw dichtbij bouwt, kan hij uw bouwwerf platbranden. "
-"U hoeft niet te zweten, dat al hier niet gebeuren."
+"Geen angst, dat zal hier niet gebeuren."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:624
 msgid "Enhance your fortress to a citadel now."
-msgstr "Verbeter uw vesting nu aan een citadel."
+msgstr "Breidt uw vesting nu uit tot een citadel."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:626
 msgid ""
@@ -1285,7 +1285,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:631
 msgid "Enhance your fortress to a citadel"
-msgstr "Verbeter uw vesting aan een citadel"
+msgstr "Breidt uw vesting uit tot een citadel"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:632
 msgid "Enhance Your Fortress"
@@ -1302,10 +1302,10 @@ msgid ""
 "to build. It is most suited to guard strategically important points like "
 "constricted points or mountains."
 msgstr ""
-"De citadel can 12 soldaten herbergen en is het grootste militaire gebouw dat "
-"de Barbaren kunnen bouwen. Het neemt wel veel tijd en grondstoffen om te "
-"bouwen. Het is het meest geschikt om strategisch belangrijke punten te "
-"bewaken, zoals vernauwingen of bergen."
+"De citadel kan 12 soldaten herbergen en is het grootste militaire gebouw dat "
+"de Barbaren kunnen bouwen. Het vergt ook veel tijd en grondstoffen om te "
+"bouwen. Het is ideaal geschikt om strategisch belangrijke punten te bewaken, "
+"zoals vernauwingen of bergen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Defeat your enemy"
@@ -1329,7 +1329,7 @@ msgstr ""
 "aantal soldaten om mee aan te vallen en klik op de aanvalsknop. De soldaten "
 "komen uit alle dichtbij gelegen militaire gebouwen. Hetzelfde geldt voor de "
 "verdediging, ook hij zal hulp krijgen van dichtbij gelegen militaire "
-"gebouwen om de soldaten op te vangen."
+"gebouwen om de soldaten te onderscheppen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:652
 msgid ""
@@ -1356,8 +1356,9 @@ msgid ""
 "To attack a building, click on its doors, choose the number of attacking "
 "soldiers, then send them via the ‘Attack’ button."
 msgstr ""
-"Om een gebouw aan te vallen, klik op zijn deuren, kies het aantal van de "
-"aanvallende militairen, verzend de militairen via de aanvalsknoop."
+"Om een gebouw aan te vallen, klik op zijn deuren, kies het aantal "
+"aanvallende militairen, en stuur hen daarnaartoe door op de aanvalsknop te "
+"klikken."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:667
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:668
@@ -1371,9 +1372,10 @@ msgid ""
 "wares is the most important thing in Widelands – but you’ve learned the "
 "ropes."
 msgstr ""
-"Dit beëindigd deze oefencampagne. Er zijn nog zaken die niet besproken zijn, "
-"we hebben zelfs niet een producerend gebouw gebouwd terwijl waren produceren "
-"het belangrijkste is in Widelands, maar we hebben de basis geleerd."
+"Dit beëindigt deze oefencampagne. Er zijn nog zaken die niet besproken zijn, "
+"we hebben zelfs niet één producerend gebouw gebouwd terwijl het produceren "
+"van goederen het belangrijkste is in Widelands, maar we hebben de basis "
+"geleerd."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 msgid ""
@@ -1400,19 +1402,18 @@ msgid ""
 "‘Options’ menu button on the very left at the bottom of the screen. Then "
 "click the"
 msgstr ""
-"opties menuknop aan de uiterst linker kant onderaan het scherm.\n"
-"Klik daarna de"
+"'Opties' menuknop helemaal links, onderaan in het scherm. Klik daarna de"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:684
 msgid "‘Exit Game’ button."
-msgstr "verlaat spel knop."
+msgstr "'Verlaat spel' knop."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:686
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at"
 msgstr ""
-"Bedankt voor het spelen van de oefencampagne. Geniet van Widelands\n"
-"en vergeet ons niet te bezoeken op"
+"Bedankt voor het spelen van de oefencampagne. Geniet van Widelands en "
+"vergeet niet ons te bezoeken op"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

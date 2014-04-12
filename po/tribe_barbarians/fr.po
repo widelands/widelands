@@ -7,56 +7,56 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-24 22:53+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"PO-Revision-Date: 2014-04-11 08:14+0000\n"
+"Last-Translator: Yves MATHIEU <MisterY_vonvon@hotmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:33+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-12 05:39+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr ""
+msgstr "Votre caserne a découvert un agresseur."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "Votre caserne est attaquée."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "L'enemi a battu vos soldats dans la caserne."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "Vos soldats ont battu l'enemi dans la caserne."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Votre barrière a découvert un agresseur."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Votre barrière est attaquée."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "L'enemi a battu vos soldats sur la barrière."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Vos soldats ont battu l'enemi sur la barrière."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
