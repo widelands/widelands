@@ -386,11 +386,44 @@ end
 --    :arg workername: e.g. "lumberjack".
 --    :returns: image_line for the worker
 --
-function building_help_crew_string(tribename, workername)
+function building_help_crew_string(tribename, workername, toolname)
 	local worker_descr = wl.Game():get_worker_description(tribename,workername)
-	return image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, p(worker_descr.name))
+	local result = image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, p(worker_descr.name))
+	result = result .. building_help_tool_string(tribename, toolname) 
+	if(worker_descr.becomes) then
+		result = result .. rt(h3(_"Experience levels:"))
+-- TODO need the name here rather than the descr_name from C++, so I can get the object
+--		local worker_becomes = wl.Game():get_worker_description(tribename, worker_descr.becomes)
+-- TODO get experience level from C++
+--		result = result .. building_help_becomes_string(tribename, worker_descr.name, worker_becomes.name, "19")
+		if(worker_becomes.becomes) then
+			worker_descr = worker_becomes
+-- TODO need the name here rather than the descr_name from C++
+--			local worker_becomes = wl.Game():get_worker_description(tribename, worker_descr.becomes)
+-- TODO get experience level from C++
+--			result = result .. building_help_becomes_string(tribename, worker_descr.name, worker_becomes.name, "28")
+		end
+	end
+	return result
 	-- todo get localised name from tribe's main conf, and add ngettext!
 end
+
+
+-- RST
+-- .. function building_help_becomes_string(tribename, workername, becomesname, experience)
+--
+--    Displays what a worker becomes with experience
+--
+--    :arg tribename: e.g. "barbarians".
+--    :arg workername: e.g. "miner".
+--    :arg workername: e.g. "chief_miner".
+--    :arg experioence: e.g. "19".
+--    :returns: a right-aligned text with what a worker becomes with experience
+--
+function building_help_becomes_string(tribename, workername, becomesname, experience)
+	return rt("text-align=right", p(_"%s to %s (%s EP)":format(workername, becomesname, experience)))
+end
+
 
 -- RST
 -- .. function building_help_tool_string(tribename, toolname)

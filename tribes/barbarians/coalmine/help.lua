@@ -44,10 +44,10 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
-		building_help_crew_string("barbarians", "miner") ..
+		building_help_crew_string("barbarians", "miner", "pick") ..
 		-- TODO: parse "or better" from C++
 		--image_line("tribes/barbarians/miner/menu.png", 1, p(_"%s or better":format(_"Miner"))) ..
-		building_help_tool_string("barbarians", "pick") ..
+		--building_help_tool_string("barbarians", "pick") ..
 		rt(h3(_"Experience levels:")) ..
 		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Miner",_"Chief Miner","19") .. "<br>" .. _"%s to %s (%s EP)":format(_"Chief Miner",_"Master Miner","28"))) ..
 	--Production Section

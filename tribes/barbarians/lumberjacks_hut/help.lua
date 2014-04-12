@@ -41,11 +41,9 @@ return {
 	rt(h2(_"Workers")) ..
 
 	rt(h3(_"Crew required:")) ..
-	building_help_crew_string("barbarians", "lumberjack") ..
+	building_help_crew_string("barbarians", "lumberjack", "felling_ax") ..
 
-	building_help_tool_string("barbarians", "felling_ax") ..
-
-	text_line(_"Experience levels:","n/a") ..
+	--text_line(_"Experience levels:","n/a") ..
 
 	--Production Section
 	rt(h2(_"Production")) ..
