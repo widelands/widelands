@@ -386,10 +386,16 @@ end
 --    :arg workername: e.g. "lumberjack".
 --    :returns: image_line for the worker
 --
-function building_help_crew_string(tribename, workername, toolname)
-	local worker_descr = wl.Game():get_worker_description(tribename, workername)
+function building_help_crew_string(tribename, buildingname, workername, toolname)
+	local worker_descr = wl.Game():get_worker_description(tribename, workername)	
 	local becomes_descr = worker_descr.becomes
+-- TODO(SirVer) Lua can't find get_productionsite_description, why?
+-- you can test with lumberjacks_hut or coalmine
+--	local productionsite_descr = wl.Game():get_productionsite_description(buildingname)
+	local building_descr = wl.Game():get_building_description(tribename, buildingname)
 	local result = ""
+-- TODO(Sirver): I get nil here - I probably need a different method to find out if a building is a productionsite.
+	result = result .. rt(p(("Test: is this a productionsite? %s"):format(building_descr.isproductionsite)))
 
 	if(becomes_descr) then
 	-- TODO some buildings need more than 1 worker

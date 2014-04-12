@@ -73,6 +73,7 @@ EditorGameBase
 const char L_EditorGameBase::className[] = "EditorGameBase";
 const MethodType<L_EditorGameBase> L_EditorGameBase::Methods[] = {
 	METHOD(L_EditorGameBase, get_building_description),
+	METHOD(L_EditorGameBase, get_productionsite_description),
 	METHOD(L_EditorGameBase, get_ware_description),
 	METHOD(L_EditorGameBase, get_worker_description),
 	{nullptr, nullptr},
@@ -165,6 +166,40 @@ int L_EditorGameBase::get_building_description(lua_State* L) {
 	const Building_Descr* building_descr = tribe_description->get_building_descr(building_index);
 	return to_lua<LuaMap::L_BuildingDescription>(L, new LuaMap::L_BuildingDescription(building_descr));
 }
+
+
+/* RST
+	// TODO(GunChleoc): documentation
+	// TODO(SirVer): Lua can't find this function. Why?
+	Registers productionsite description so Lua can reference it from the game. Call this with
+	wl.Game():get_productionsite_description(tribe_name,building_name)
+*/
+int L_EditorGameBase::get_productionsite_description(lua_State* L) {
+	// TODO(GunChleoc): style comment - askew abbreviations. I know we wrote that code together :)
+	if (lua_gettop(L) != 3) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string tribe_name = luaL_checkstring(L, 2);
+	const std::string productionsite_name = luaL_checkstring(L, 3);
+	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
+	if (!tribe_description) {
+		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
+	}
+	Building_Index building_index = tribe_description->building_index(productionsite_name);
+	if (!building_index) {
+		report_error(L, "ProductionSite %s does not exist", productionsite_name.c_str());
+	}
+
+	const Building_Descr* building_descr = tribe_description->get_building_descr(building_index);
+	// TODO(SirVer) in the long run, will it be better to have an is_productionsite() attribute in Building_Descr?
+	// no idea if the check works anyway.
+	if (!(is_a(ProductionSite_Descr, building_descr))) {
+		report_error(L, "%s is not a ProductionSite", productionsite_name.c_str());
+	}
+	const ProductionSite_Descr* productionsite_descr = dynamic_cast<const ProductionSite_Descr*>(tribe_description->get_building_descr(building_index));
+	return to_lua<LuaMap::L_ProductionSiteDescription>(L, new LuaMap::L_ProductionSiteDescription(productionsite_descr));
+}
+
 
 
 /* RST

@@ -44,7 +44,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
-		building_help_crew_string("barbarians", "miner", "pick") ..
+		building_help_crew_string("barbarians", "coalmine", "miner", "pick") ..
 
 		rt(h3(_"Experience levels:")) ..
 		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Miner",_"Chief Miner","19") .. "<br>" .. _"%s to %s (%s EP)":format(_"Chief Miner",_"Master Miner","28"))) ..

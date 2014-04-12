@@ -1060,6 +1060,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	// also https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.Building
 	PROP_RO(L_BuildingDescription, ismine),
 	PROP_RO(L_BuildingDescription, isport),
+	PROP_RO(L_BuildingDescription, isproductionsite),
 
 	// size should be similar to
 	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
@@ -1144,6 +1145,20 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 	return 1;
 }
 
+
+/* RST
+	.. attribute:: isproductionsite
+
+			(RO) true if the building is a productionsite.
+*/
+int L_BuildingDescription::get_isproductionsite(lua_State * L) {
+	assert(buildingdescr_ != nullptr);
+// TODO(Sirver): I get nil here for pruductionsites - I probably need a different method to find out if a building is a productionsite.
+	lua_pushboolean(L, is_a(ProductionSite_Descr, buildingdescr_));
+	return 1;
+}
+
+
 /* RST
 	.. attribute:: size
 
@@ -1210,6 +1225,46 @@ int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
 int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
 	assert(buildingdescr_ != nullptr);
 	return wares_map_to_lua(L, buildingdescr_->returned_wares_enhanced(), buildingdescr_->tribe());
+}
+
+/* RST
+ProductionSiteDescription
+---
+
+Properties of workers read from the conf files available for Lua
+
+TODO
+*/
+const char L_ProductionSiteDescription::className[] = "ProductionSiteDescription";
+const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Properties[] = {
+	PROP_RO(L_ProductionSiteDescription, nr_working_positions),
+	{nullptr, nullptr, nullptr},
+};
+
+void L_ProductionSiteDescription::__persist(lua_State * /* L */) {
+}
+void L_ProductionSiteDescription::__unpersist(lua_State * /* L */) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+
+/* RST
+	.. attribute:: nr_working_positions
+
+		(RO) The :int:`number` of worker positions in the production site
+*/
+int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
+	assert(productionsitedescr_ != nullptr);
+	lua_pushinteger(L, productionsitedescr_->nr_working_positions());
+	return 1;
 }
 
 
@@ -3426,6 +3481,10 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_BuildingDescription>(L, "map");
 	add_parent<L_BuildingDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_ProductionSiteDescription>(L, "map");
+	add_parent<L_ProductionSiteDescription, L_BuildingDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_WareDescription>(L, "map");

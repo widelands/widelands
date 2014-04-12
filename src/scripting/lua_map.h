@@ -152,6 +152,7 @@ public:
 	int get_enhanced(lua_State *);
 	int get_ismine(lua_State *);
 	int get_isport(lua_State *);
+	int get_isproductionsite(lua_State *);
 	int get_size(lua_State *);
 	int get_vision_range(lua_State *);
 	int get_build_cost(lua_State *);
@@ -170,6 +171,42 @@ public:
 private:
 	const Widelands::Building_Descr * const buildingdescr_;
 };
+
+
+class L_ProductionSiteDescription : public L_BuildingDescription {
+public:
+	LUNA_CLASS_HEAD(L_ProductionSiteDescription);
+
+	virtual ~L_ProductionSiteDescription() {}
+
+	L_ProductionSiteDescription() : productionsitedescr_(nullptr) {}
+	L_ProductionSiteDescription(const Widelands::ProductionSite_Descr* const productionsitedescr)
+		: productionsitedescr_(productionsitedescr) {}
+	L_ProductionSiteDescription(lua_State* L) : productionsitedescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'ProductionSiteDescription' directly!");
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+
+	int get_nr_working_positions(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	const Widelands::ProductionSite_Descr * const productionsitedescr_;
+};
+
 
 
 
