@@ -23,17 +23,56 @@ ration=6
 wine=6
 
 [programs]
+mine_marble=_Mine marble
+prog_marble=_Mine marble (only for compatibility with old savegames (build13))
+mine_stone=_Mine stone
+prog_stone=_Mine stone (only for compatibility with old savegames (build13))
 work=_Work
 
-[work]
+[mine_marble]
+sleep=20000
+consume=wine ration
+animate=working 20000
+mine=granit 2 50 5
+produce=marble:2
+animate=working 20000
+mine=granit 2 50 5
+produce=marble stone
+
+[prog_marble]
+sleep=20000
+consume=wine ration
+animate=working 20000
+mine=granit 2 50 5
+produce=marble:2
+animate=working 20000
+mine=granit 2 50 5
+produce=marble stone
+
+[mine_stone]
 sleep=20000
 consume=ration wine
 animate=working 20000
 mine=granit 2 50 5
 produce=stone marble
 animate=working 20000
-produce=marble
+mine=granit 2 50 5
+produce=stone:2
 
+[prog_stone]
+sleep=20000
+consume=ration wine
+animate=working 20000
+mine=granit 2 50 5
+produce=stone marble
+animate=working 20000
+mine=granit 2 50 5
+produce=stone:2
+
+[work]
+call=mine_marble
+call=mine_stone
+return=skipped
 
 [idle]
 pics=marblemine_i_??.png
