@@ -29,10 +29,10 @@ work=_Work
 sleep=40000
 consume=meal
 animate=working 16000
-mine=gold 2 100 10
+mine=gold 2 100 10 2
 produce=goldore:2
 animate=working 18000
-mine=gold 2 100 10
+mine=gold 2 100 10 2
 produce=goldore:2
 
 [idle]

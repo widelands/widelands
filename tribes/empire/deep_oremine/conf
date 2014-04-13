@@ -31,10 +31,10 @@ return=skipped unless economy needs ironore or not economy needs beer
 sleep=43000
 consume=meal beer
 animate=working 18000
-mine=iron 2 100 5
+mine=iron 2 100 5 2
 produce=ironore:2
 animate=working 18000
-mine=iron 2 100 5
+mine=iron 2 100 5 2
 produce=ironore:2
 
 [idle]
