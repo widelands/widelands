@@ -1019,8 +1019,7 @@ void L_MapObjectDescription::__unpersist(lua_State * /* L */) {
 */
 
 int L_MapObjectDescription::get_name(lua_State * L) {
-	assert(mapobjectdescr_ != nullptr);
-	lua_pushstring(L, mapobjectdescr_->name());
+	lua_pushstring(L, get()->name());
 	return 1;
 }
 
@@ -1032,8 +1031,7 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 */
 
 int L_MapObjectDescription::get_descname(lua_State * L) {
-	assert(mapobjectdescr_ != nullptr);
-	lua_pushstring(L, mapobjectdescr_->descname());
+	lua_pushstring(L, get()->descname());
 	return 1;
 }
 
@@ -1096,8 +1094,7 @@ void L_BuildingDescription::__unpersist(lua_State * /* L */) {
 			(RO) true if the building can be built.
 */
 int L_BuildingDescription::get_buildable(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	lua_pushboolean(L, buildingdescr_->is_buildable());
+	lua_pushboolean(L, get()->is_buildable());
 	return 1;
 }
 
@@ -1107,8 +1104,7 @@ int L_BuildingDescription::get_buildable(lua_State * L) {
 			(RO) true if the building is destructible.
 */
 int L_BuildingDescription::get_destructible(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	lua_pushboolean(L, buildingdescr_->is_destructible());
+	lua_pushboolean(L, get()->is_destructible());
 	return 1;
 }
 
@@ -1118,8 +1114,7 @@ int L_BuildingDescription::get_destructible(lua_State * L) {
 			(RO) true if the building is an enhanced from another building.
 */
 int L_BuildingDescription::get_enhanced(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	lua_pushboolean(L, buildingdescr_->is_enhanced());
+	lua_pushboolean(L, get()->is_enhanced());
 	return 1;
 }
 
@@ -1129,8 +1124,7 @@ int L_BuildingDescription::get_enhanced(lua_State * L) {
 			(RO) true if the building is a mine.
 */
 int L_BuildingDescription::get_ismine(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	lua_pushboolean(L, buildingdescr_->get_ismine());
+	lua_pushboolean(L, get()->get_ismine());
 	return 1;
 }
 
@@ -1140,8 +1134,7 @@ int L_BuildingDescription::get_ismine(lua_State * L) {
 			(RO) true if the building is a port.
 */
 int L_BuildingDescription::get_isport(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	lua_pushboolean(L, buildingdescr_->get_isport());
+	lua_pushboolean(L, get()->get_isport());
 	return 1;
 }
 
@@ -1152,9 +1145,8 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 			(RO) true if the building is a productionsite.
 */
 int L_BuildingDescription::get_isproductionsite(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
 // TODO(Sirver): I get nil here for pruductionsites - I probably need a different method to find out if a building is a productionsite.
-	lua_pushboolean(L, is_a(ProductionSite_Descr, buildingdescr_));
+	lua_pushboolean(L, is_a(ProductionSite_Descr, get()));
 	return 1;
 }
 
@@ -1170,8 +1162,7 @@ int L_BuildingDescription::get_isproductionsite(lua_State * L) {
 			(RO) the size of the building as an int.
 */
 int L_BuildingDescription::get_size(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	lua_pushinteger(L, buildingdescr_->get_size());
+	lua_pushinteger(L, get()->get_size());
 	return 1;
 }
 
@@ -1182,8 +1173,7 @@ int L_BuildingDescription::get_size(lua_State * L) {
 			(RO) the vision range of the building as an int.
 */
 int L_BuildingDescription::get_vision_range(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	lua_pushinteger(L, buildingdescr_->vision_range());
+	lua_pushinteger(L, get()->vision_range());
 	return 1;
 }
 
@@ -1193,8 +1183,7 @@ int L_BuildingDescription::get_vision_range(lua_State * L) {
 			(RO) a list of ware build cost for the building.
 */
 int L_BuildingDescription::get_build_cost(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	return wares_map_to_lua(L, buildingdescr_->buildcost(), buildingdescr_->tribe());
+	return wares_map_to_lua(L, get()->buildcost(), get()->tribe());
 }
 
 /* RST
@@ -1203,8 +1192,7 @@ int L_BuildingDescription::get_build_cost(lua_State * L) {
 			(RO) a list of wares returned upon dismantling.
 */
 int L_BuildingDescription::get_returned_wares(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	return wares_map_to_lua(L, buildingdescr_->returned_wares(), buildingdescr_->tribe());
+	return wares_map_to_lua(L, get()->returned_wares(), get()->tribe());
 }
 
 /* RST
@@ -1213,8 +1201,7 @@ int L_BuildingDescription::get_returned_wares(lua_State * L) {
 			(RO) a list of ware cost for enhancing to this building type.
 */
 int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	return wares_map_to_lua(L, buildingdescr_->enhancement_cost(), buildingdescr_->tribe());
+	return wares_map_to_lua(L, get()->enhancement_cost(), get()->tribe());
 }
 
 /* RST
@@ -1223,8 +1210,7 @@ int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
 			(RO) a list of wares returned upon dismantling an enhanced building.
 */
 int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
-	assert(buildingdescr_ != nullptr);
-	return wares_map_to_lua(L, buildingdescr_->returned_wares_enhanced(), buildingdescr_->tribe());
+	return wares_map_to_lua(L, get()->returned_wares_enhanced(), get()->tribe());
 }
 
 /* RST
@@ -1262,8 +1248,7 @@ void L_ProductionSiteDescription::__unpersist(lua_State * /* L */) {
 		(RO) The :int:`number` of worker positions in the production site
 */
 int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
-	assert(productionsitedescr_ != nullptr);
-	lua_pushinteger(L, productionsitedescr_->nr_working_positions());
+	lua_pushinteger(L, get()->nr_working_positions());
 	return 1;
 }
 
@@ -1334,14 +1319,13 @@ void L_WorkerDescription::__unpersist(lua_State * /* L */) {
 		to or :const:`nil` if it never levels up.
 */
 int L_WorkerDescription::get_becomes(lua_State * L) {
-	assert(workerdescr_ != nullptr);
-	const Ware_Index becomes_index = workerdescr_->becomes();
+	const Ware_Index becomes_index = get()->becomes();
 	if (!becomes_index) {
 		lua_pushnil(L);
 		return 1;
 	}
 	return to_lua<L_WorkerDescription>(
-	   L, new L_WorkerDescription(workerdescr_->tribe().get_worker_descr(becomes_index)));
+	   L, new L_WorkerDescription(get()->tribe().get_worker_descr(becomes_index)));
 }
 
 
@@ -1352,8 +1336,7 @@ TODO(SirVer) returns nil. Why?
 			(RO) the experience the worker needs to reach this level.
 */
 int L_WorkerDescription::get_level_experience(lua_State * L) {
-	assert(workerdescr_ != nullptr);
-	lua_pushinteger(L, workerdescr_->get_level_experience());
+	lua_pushinteger(L, get()->get_level_experience());
 	return 1;
 }
 

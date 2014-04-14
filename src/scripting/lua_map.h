@@ -42,7 +42,7 @@ namespace Widelands {
 	struct Soldier_Descr;
 	struct Building_Descr;
 	struct WareDescr;
-	struct Worker_Descr;
+	class Worker_Descr;
 	class Bob;
 }
 
@@ -121,11 +121,20 @@ public:
 	/*
 	 * C methods
 	 */
+protected:
+	const Widelands::Map_Object_Descr* get(void) const {
+		assert(mapobjectdescr_ != nullptr);
+		return mapobjectdescr_;
+	}
 
 private:
 	const Widelands::Map_Object_Descr * const mapobjectdescr_;
 };
 
+#define CASTED_GET_DESCRIPTION(klass)                                                              \
+	const Widelands::klass* get() const {                                                           \
+		return static_cast<const Widelands::klass*>(L_MapObjectDescription::get());                  \
+	}
 
 class L_BuildingDescription : public L_MapObjectDescription {
 public:
@@ -133,13 +142,11 @@ public:
 
 	virtual ~L_BuildingDescription() {}
 
-	L_BuildingDescription() : buildingdescr_(nullptr) {}
+	L_BuildingDescription() {}
 	L_BuildingDescription(const Widelands::Building_Descr* const buildingdescr)
-	   : L_MapObjectDescription(buildingdescr), buildingdescr_(buildingdescr) {
+	   : L_MapObjectDescription(buildingdescr) {
 	}
-	L_BuildingDescription(lua_State* L)
-	   : L_MapObjectDescription(L), buildingdescr_(nullptr) {
-		report_error(L, "Cannot instantiate a 'BuildingDescription' directly!");
+	L_BuildingDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
 
 	virtual void __persist(lua_State * L) override;
@@ -170,7 +177,7 @@ public:
 	 */
 
 private:
-	const Widelands::Building_Descr * const buildingdescr_;
+	CASTED_GET_DESCRIPTION(Building_Descr);
 };
 
 
@@ -180,11 +187,11 @@ public:
 
 	virtual ~L_ProductionSiteDescription() {}
 
-	L_ProductionSiteDescription() : productionsitedescr_(nullptr) {}
+	L_ProductionSiteDescription() {}
 	L_ProductionSiteDescription(const Widelands::ProductionSite_Descr* const productionsitedescr)
-		: productionsitedescr_(productionsitedescr) {}
-	L_ProductionSiteDescription(lua_State* L) : productionsitedescr_(nullptr) {
-		report_error(L, "Cannot instantiate a 'ProductionSiteDescription' directly!");
+	   : L_BuildingDescription(productionsitedescr) {
+	}
+	L_ProductionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
 	}
 
 	virtual void __persist(lua_State * L) override;
@@ -193,7 +200,6 @@ public:
 	/*
 	 * Properties
 	 */
-
 	int get_nr_working_positions(lua_State *);
 
 	/*
@@ -205,7 +211,7 @@ public:
 	 */
 
 private:
-	const Widelands::ProductionSite_Descr * const productionsitedescr_;
+	CASTED_GET_DESCRIPTION(ProductionSite_Descr);
 };
 
 
@@ -217,11 +223,10 @@ public:
 
 	virtual ~L_WareDescription() {}
 
-	L_WareDescription() : waredescr_(nullptr) {}
+	L_WareDescription()  {}
 	L_WareDescription(const Widelands::WareDescr* const waredescr)
-		: waredescr_(waredescr) {}
-	L_WareDescription(lua_State* L) : waredescr_(nullptr) {
-		report_error(L, "Cannot instantiate a 'WareDescription' directly!");
+		: L_MapObjectDescription(waredescr) {}
+	L_WareDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
 
 	virtual void __persist(lua_State * L) override;
@@ -240,7 +245,7 @@ public:
 	 */
 
 private:
-	const Widelands::WareDescr * const waredescr_;
+	CASTED_GET_DESCRIPTION(WareDescr);
 };
 
 
@@ -250,11 +255,11 @@ public:
 
 	virtual ~L_WorkerDescription() {}
 
-	L_WorkerDescription() : workerdescr_(nullptr) {}
+	L_WorkerDescription() {}
 	L_WorkerDescription(const Widelands::Worker_Descr* const workerdescr)
-		: workerdescr_(workerdescr) {}
-	L_WorkerDescription(lua_State* L) : workerdescr_(nullptr) {
-		report_error(L, "Cannot instantiate a 'WorkerDescription' directly!");
+	   : L_MapObjectDescription(workerdescr) {
+	}
+	L_WorkerDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
 
 	virtual void __persist(lua_State * L) override;
@@ -275,9 +280,10 @@ public:
 	 */
 
 private:
-	const Widelands::Worker_Descr * const workerdescr_;
+	CASTED_GET_DESCRIPTION(Worker_Descr);
 };
 
+#undef CASTED_GET_DESCRIPTION
 
 #define CASTED_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
