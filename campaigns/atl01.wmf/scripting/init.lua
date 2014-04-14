@@ -72,6 +72,7 @@ function count_in_warehouses(ware)
 end
 
 function send_building_lost_message(f)
+-- TODO: replace menu.png with representative_image as soon as this has been wrapped
    p1:send_message(_"Building lost!",
       rt("image=tribes/atlanteans/".. f.immovable.name .."/menu.png",
          p(_"We lost a building to the ocean!")
