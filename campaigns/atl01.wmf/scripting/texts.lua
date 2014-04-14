@@ -419,7 +419,7 @@ training_story_end = {
 [[I received an invitation from Sidolus. The first day of training in the newly finished labyrinth will be tomorrow. ]] ..
 [[The dungeon is done as well and will start its work soon. I am looking forward to tomorrow; ]] ..
 [[I am very interested in how our soldiers are trained, and I wonder if the additional workload ]] ..
-[[will keep them from bullying the civil population.]]
+[[will keep them from bullying the civilian population.]]
       ))
    }
 }
