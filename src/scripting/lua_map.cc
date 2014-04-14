@@ -3479,19 +3479,20 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_Map>(L, "map");
 	register_class<L_MapObjectDescription>(L, "map");
 
-	register_class<L_BuildingDescription>(L, "map");
+	register_class<L_BuildingDescription>(L, "map", true);
 	add_parent<L_BuildingDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
-	register_class<L_ProductionSiteDescription>(L, "map");
+	register_class<L_ProductionSiteDescription>(L, "map", true);
 	add_parent<L_ProductionSiteDescription, L_BuildingDescription>(L);
+	add_parent<L_ProductionSiteDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
-	register_class<L_WareDescription>(L, "map");
+	register_class<L_WareDescription>(L, "map", true);
 	add_parent<L_WareDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
-	register_class<L_WorkerDescription>(L, "map");
+	register_class<L_WorkerDescription>(L, "map", true);
 	add_parent<L_WorkerDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 

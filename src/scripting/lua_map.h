@@ -135,8 +135,10 @@ public:
 
 	L_BuildingDescription() : buildingdescr_(nullptr) {}
 	L_BuildingDescription(const Widelands::Building_Descr* const buildingdescr)
-		: buildingdescr_(buildingdescr) {}
-	L_BuildingDescription(lua_State* L) : buildingdescr_(nullptr) {
+	   : L_MapObjectDescription(buildingdescr), buildingdescr_(buildingdescr) {
+	}
+	L_BuildingDescription(lua_State* L)
+	   : L_MapObjectDescription(L), buildingdescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'BuildingDescription' directly!");
 	}
 
@@ -146,7 +148,6 @@ public:
 	/*
 	 * Properties
 	 */
-
 	int get_buildable(lua_State *);
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
