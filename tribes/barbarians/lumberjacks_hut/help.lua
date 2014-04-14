@@ -38,9 +38,6 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Workers Section
-	rt(h2(_"Workers")) ..
-
-	rt(h3(_"Crew required:")) ..
 	building_help_crew_string("barbarians", "lumberjacks_hut", "lumberjack", "felling_ax") ..
 
 	--text_line(_"Experience levels:","n/a") ..

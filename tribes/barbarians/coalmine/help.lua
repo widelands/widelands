@@ -38,16 +38,10 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_building_section("barbarians", building_description) ..
 		rt(h2(_"Building")) ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
-		rt(h3(_"Dismantle yields:")) ..
 		text_line(_"Upgradeable to:",_"Deep Coal Mine","tribes/barbarians/deep_coalmine/menu.png") ..
 	--Workers Section
-		rt(h2(_"Workers")) ..
-		rt(h3(_"Crew required:")) ..
 		building_help_crew_string("barbarians", "coalmine", "miner", "pick") ..
 
-		rt(h3(_"Experience levels:")) ..
-		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Miner",_"Chief Miner","19") .. "<br>" .. _"%s to %s (%s EP)":format(_"Chief Miner",_"Master Miner","28"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
 		text_line(_"Performance:", _"If the food supply is steady, this mine can produce %s in %s on average.":format(_"Coal","32.5s"))

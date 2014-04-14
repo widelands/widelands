@@ -1145,7 +1145,6 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 			(RO) true if the building is a productionsite.
 */
 int L_BuildingDescription::get_isproductionsite(lua_State * L) {
-// TODO(Sirver): I get nil here for pruductionsites - I probably need a different method to find out if a building is a productionsite.
 	lua_pushboolean(L, is_a(ProductionSite_Descr, get()));
 	return 1;
 }
@@ -1330,7 +1329,6 @@ int L_WorkerDescription::get_becomes(lua_State * L) {
 
 
 /* RST
-TODO(SirVer) returns nil. Why?
 	.. attribute:: level_experience
 
 			(RO) the experience the worker needs to reach this level.
