@@ -291,6 +291,7 @@ void m_register_properties_in_metatable
 	for (int i = 0; PT::Properties[i].name; ++i) {
 		// metatable[prop_name] = Pointer to getter setter
 		lua_pushstring(L, PT::Properties[i].name);
+
 		lua_newtable(L);
 		lua_pushstring(L, "getter");
 		lua_pushlightuserdata

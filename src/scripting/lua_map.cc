@@ -589,6 +589,19 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
+
+#undef CAST_TO_LUA
+#define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
+   (L, new lua_klass(static_cast<const klass *>(desc)))
+
+int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const desc) {
+	assert(desc != nullptr);
+
+	if (is_a(const ProductionSite_Descr, desc)) {
+		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
+	}
+	return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
+}
 #undef CAST_TO_LUA
 
 
@@ -1147,7 +1160,11 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 			(RO) true if the building is a productionsite.
 */
 int L_BuildingDescription::get_isproductionsite(lua_State * L) {
-	lua_pushboolean(L, is_a(ProductionSite_Descr, get()));
+// TODO(Sirver): I get nil here for pruductionsites - I probably need a different method to find out if a building is a productionsite.
+	// TODO(GunChleoc): instead add a 'type' method that returns "productionsite". The user can then do
+	// get_type() == "productionsite" which might be more useful
+	lua_pushboolean(L, false);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return 1;
 }
 
@@ -1240,6 +1257,7 @@ const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Metho
 };
 const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Properties[] = {
 	PROP_RO(L_ProductionSiteDescription, nr_working_positions),
+	PROP_RO(L_ProductionSiteDescription, isproductionsite),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1265,6 +1283,18 @@ int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: isproductionsite
+
+		TODO(GunChleoc) description
+		(RO) description
+*/
+int L_ProductionSiteDescription::get_isproductionsite(lua_State * L) {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	lua_pushboolean(L, true);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	return 1;
+}
 
 /* RST
 WareDescription

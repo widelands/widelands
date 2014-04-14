@@ -202,6 +202,7 @@ public:
 	 * Properties
 	 */
 	int get_nr_working_positions(lua_State *);
+	int get_isproductionsite(lua_State *);
 
 	/*
 	 * Lua methods
@@ -851,6 +852,7 @@ public:
 	 */
 };
 
+int upcasted_building_descr_to_lua(lua_State* L, const Widelands::Building_Descr* descr);
 int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
 int upcasted_bob_to_lua(lua_State * L, Widelands::Bob * mo);
 

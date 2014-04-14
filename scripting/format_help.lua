@@ -202,7 +202,7 @@ end
 --
 function building_help_dependencies_ware(tribename, items, ware)
 	local ware_descr = wl.Game():get_ware_description(tribename, ware)
-	return dependencies(tribename, items, ware_descr.descname)		
+	return dependencies(tribename, items, ware_descr.descname)
 end
 
 
@@ -219,7 +219,7 @@ end
 --
 function building_help_dependencies_building(tribename, items, buildingname)
 	local building_descr = wl.Game():get_building_description(tribename,buildingname)
-	return dependencies(tribename, items, building_descr.descname)		
+	return dependencies(tribename, items, building_descr.descname)
 end
 
 
@@ -238,7 +238,7 @@ end
 function building_help_dependencies_ware_building(tribename, items, warename, buildingname)
 	local building_descr = wl.Game():get_building_description(tribename,buildingname)
 	local ware_descr = wl.Game():get_ware_description(tribename, warename)
-	return dependencies(tribename, items, _"%1$s from: %2$s":bformat(ware_descr.descname, building_descr.descname))		
+	return dependencies(tribename, items, _"%1$s from: %2$s":bformat(ware_descr.descname, building_descr.descname))
 end
 
 
@@ -255,7 +255,7 @@ end
 --
 function building_help_dependencies_resi(tribename, items, ware)
 	local ware_descr = wl.Game():get_ware_description(tribename, ware)
-	return dependencies_resi(tribename, items, ware_descr.descname)		
+	return dependencies_resi(tribename, items, ware_descr.descname)
 end
 
 
@@ -332,7 +332,7 @@ function building_help_building_section(tribename, building_description)
 
 		for ware, count in pairs(building_description.enhancement_cost) do
 		local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			result = result .. 
+			result = result ..
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
 					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
@@ -342,7 +342,7 @@ function building_help_building_section(tribename, building_description)
 		for ware, count in pairs(building_description.build_cost) do
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			local amount = building_description.build_cost[ware] + building_description.enhancement_cost[ware]
-			result = result .. 
+			result = result ..
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
 					amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
 		end
@@ -351,7 +351,7 @@ function building_help_building_section(tribename, building_description)
 		-- TODO this needs to be cumulative
 		for ware, count in pairs(building_description.returned_wares_enhanced) do
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			result = result .. 
+			result = result ..
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
 					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
@@ -362,7 +362,7 @@ function building_help_building_section(tribename, building_description)
 
 		for ware, count in pairs(building_description.build_cost) do
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			result = result .. 
+			result = result ..
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
 					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
@@ -371,7 +371,7 @@ function building_help_building_section(tribename, building_description)
 
 		for ware, count in pairs(building_description.returned_wares) do
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			result = result .. 
+			result = result ..
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
 					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
@@ -404,19 +404,19 @@ function building_help_crew_string(tribename, buildingname, workername, toolname
 		-- TODO why is nr_working_positions always = 1?
 		result = result .. rt(p("TODO: need to parse " .. building_descr.nr_working_positions .. " working positions"))
 
-		local worker_descr = wl.Game():get_worker_description(tribename, workername)	
+		local worker_descr = wl.Game():get_worker_description(tribename, workername)
 		local becomes_descr = worker_descr.becomes
 
 		if(becomes_descr) then
 		-- TODO some buildings need more than 1 worker
-			result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, 
+			result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1,
 				p(_"%s or better":bformat(worker_descr.descname)))
 		else
 			result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1,
 				p(worker_descr.descname))
 		end
 
-		result = result .. building_help_tool_string(tribename, toolname, 1) 
+		result = result .. building_help_tool_string(tribename, toolname, 1)
 
 		if(becomes_descr) then
 
@@ -459,5 +459,3 @@ function building_help_tool_string(tribename, toolname, no_of_workers)
 	return text_line((ngettext("Worker uses:","Workers use:", no_of_workers)),
 		ware_descr.descname, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
 end
-
-
