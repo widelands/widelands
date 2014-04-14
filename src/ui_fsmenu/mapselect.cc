@@ -123,6 +123,61 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
+
+	// TODO(GunChleoc) set LTR/RTL as a global property, but how?
+	i18n::Textdomain td("widelands");
+	std::string ltr = _("LTR");
+//test
+//m_title.set_text((boost::format("%d %d") % (get_w() * 711 / 1250) % m_table.get_w()).str());
+
+	if (ltr.compare("LTR") != 0)
+	{
+		m_title.set_pos(Point(get_w() - m_title.get_x() - m_title.get_w(), m_title.get_y()));
+		m_label_load_map_as_scenario.set_pos(
+			Point(m_table.get_x(), m_label_load_map_as_scenario.get_y()
+			)
+		);
+		m_load_map_as_scenario.set_pos(
+			Point(m_label_load_map_as_scenario.get_x() + m_label_load_map_as_scenario.get_w(),
+				m_load_map_as_scenario.get_y()
+			)
+		);
+
+		m_label_name.set_pos(
+			Point(get_w() - m_label_name.get_x() - m_label_name.get_w(), m_label_name.get_y())
+		);
+		m_name.set_pos(Point(m_table.get_x(), m_name.get_y()));
+		m_label_author.set_pos(
+			Point(get_w() - m_label_author.get_x() - m_label_author.get_w(), m_label_author.get_y())
+		);
+		m_author.set_pos(Point(m_table.get_x(), m_author.get_y()));
+		m_label_size.set_pos(
+			Point(get_w() - m_label_size.get_x() - m_label_size.get_w(), m_label_size.get_y())
+		);
+		m_size.set_pos(Point(m_table.get_x(), m_size.get_y()));
+		m_label_world.set_pos(
+			Point(get_w() - m_label_world.get_x() - m_label_world.get_w(), m_label_world.get_y())
+		);
+		m_world.set_pos(Point(m_table.get_x(), m_world.get_y()));
+		m_label_nr_players.set_pos(
+			Point(get_w() - m_label_nr_players.get_x() - m_label_nr_players.get_w(),
+				m_label_nr_players.get_y()
+			)
+		);
+		m_label_descr.set_pos(
+			Point(get_w() - m_label_descr.get_x() - m_label_descr.get_w(), m_label_descr.get_y())
+		);
+		m_descr.set_pos(Point(m_table.get_x(), m_descr.get_y()));
+		m_back.set_pos(Point(m_table.get_x(), m_back.get_y()));
+		m_ok.set_pos(Point(m_table.get_x(), m_ok.get_y()));
+		m_table.set_pos(Point(get_w() - m_table.get_x() - m_table.get_w(), m_table.get_y()));
+	}
+	else
+	{
+		
+	}
+
+
 	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::ok, boost::ref(*this)));
 
@@ -147,6 +202,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 
 #define NR_PLAYERS_WIDTH 35
 	/** TRANSLATORS: Column title for number of players in map list */
+	// TODO(GunChleoc) set LTR/RTL as a global property, but how?
 	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), "", UI::Align_HCenter);
 	m_table.add_column
 		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), "", UI::Align_Left);
@@ -155,28 +211,29 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		 boost::bind
 		 (&Fullscreen_Menu_MapSelect::compare_maprows, this, _1, _2));
 	m_table.set_sort_column(0);
-
 	m_load_map_as_scenario.set_state(false);
 	m_load_map_as_scenario.set_enabled(false);
 
 	m_table.selected.connect(boost::bind(&Fullscreen_Menu_MapSelect::map_selected, this, _1));
 	m_table.double_clicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::double_clicked, this, _1));
 
-	UI::Box * vbox = new UI::Box
-		(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
+	UI::Box * vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
 	m_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
 	m_show_all_maps->set_state(true);
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 90, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
 	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
 	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
@@ -541,9 +598,20 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 	cb->changedto.connect
 		(boost::bind(&Fullscreen_Menu_MapSelect::_tagbox_changed, this, id, _1));
 
-	box->add(cb, UI::Box::AlignLeft, true);
-	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
-	box->add(ta, UI::Box::AlignLeft);
+	// TODO(GunChleoc) set LTR/RTL as a global property, but how?
+	i18n::Textdomain td("widelands");
+	std::string ltr = _("LTR");
+	if (ltr.compare("LTR") != 0)
+	{
+		UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterRight);
+		box->add(ta, UI::Box::AlignRight);
+	}
+	else
+	{
+		box->add(cb, UI::Box::AlignLeft, true);
+		UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
+		box->add(ta, UI::Box::AlignLeft);
+	}
 	box->add_space(25);
 
 	m_tags_checkboxes.push_back(cb);
