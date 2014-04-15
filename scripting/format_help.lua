@@ -337,9 +337,9 @@ function building_help_building_section(tribename, building_description)
 		local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(count .. " ".. ware_descr.descname))
+					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
--- TODO this does not work - needs the build cost of the building this was enhanced from
+		-- TODO this does not work - needs the build cost of the building this was enhanced from
 		result = result .. rt(h3(_"Cost Cumulative:"))
 
 		for ware, count in pairs(building_description.build_cost) do
@@ -347,16 +347,16 @@ function building_help_building_section(tribename, building_description)
 			local amount = building_description.build_cost[ware] + building_description.enhancement_cost[ware]
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					amount, p(amount .. " ".. ware_descr.descname))
+					amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
 		end
 
 		result = result .. rt(h3(_"Dismantle yields:"))
-
+		-- TODO this needs to be cumulative
 		for ware, count in pairs(building_description.returned_wares_enhanced) do
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(count .. " ".. ware_descr.descname))
+					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
 
 
@@ -367,7 +367,7 @@ function building_help_building_section(tribename, building_description)
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(count .. " ".. ware_descr.descname))
+					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
 
 		result = result .. rt(h3(_"Dismantle yields:"))
@@ -376,7 +376,7 @@ function building_help_building_section(tribename, building_description)
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
 			result = result .. 
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(count .. " ".. ware_descr.descname))
+					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
 	end
 
