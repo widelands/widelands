@@ -12,10 +12,9 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
 	--General Section
 	building_help_general_string("barbarians", building_description, "soldier", "",
-		_"Expands your territory.", "--") ..
+		_"Garrisons soldiers to expand your territory.", "--") ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description)
--- TODO Capacity
    end
 }

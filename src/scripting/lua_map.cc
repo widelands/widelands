@@ -597,7 +597,10 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const desc) {
 	assert(desc != nullptr);
 
-	if (is_a(ProductionSite_Descr, desc)) {
+	if (is_a(MilitarySite_Descr, desc)) {
+		return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
+	}
+	else if (is_a(ProductionSite_Descr, desc)) {
 		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
 	}
 	return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
@@ -1212,8 +1215,8 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 			(RO) the type of the building, e.g. productionsite.
 */
 int L_BuildingDescription::get_type(lua_State * L) {
-
-	lua_pushstring(L, get()->get_type());
+	const Building_Descr * descr = static_cast<const Building_Descr *>(get());
+	lua_pushstring(L, descr->get_type());
 	return 1;
 }
 
@@ -1356,7 +1359,8 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 			(RO) the type of the building, e.g. productionsite.
 */
 int L_ProductionSiteDescription::get_type(lua_State * L) {
-	lua_pushstring(L, get()->get_type());
+	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+	lua_pushstring(L, descr->get_type());
 	return 1;
 }
 
@@ -1378,6 +1382,71 @@ int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	}
 	return 1;
 }
+
+
+/* RST
+ProductionSiteDescription
+---
+
+Properties of workers read from the conf files available for Lua
+
+TODO
+*/
+const char L_MilitarySiteDescription::className[] = "MilitarySiteDescription";
+const MethodType<L_MilitarySiteDescription> L_MilitarySiteDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_MilitarySiteDescription> L_MilitarySiteDescription::Properties[] = {
+	PROP_RO(L_MilitarySiteDescription, heal_per_second),
+	PROP_RO(L_MilitarySiteDescription, max_number_of_soldiers),
+	PROP_RO(L_MilitarySiteDescription, type),
+	{nullptr, nullptr, nullptr},
+};
+
+void L_MilitarySiteDescription::__persist(lua_State * /* L */) {
+}
+void L_MilitarySiteDescription::__unpersist(lua_State * /* L */) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+
+/* RST
+	.. attribute:: heal_per_second
+		(RO) The :int:`number` of health healed ber second by the militarysite
+*/
+int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
+	const MilitarySite_Descr * descr = static_cast<const MilitarySite_Descr *>(get());
+	lua_pushinteger(L, descr->get_heal_per_second());
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_number_of_soldiers
+		(RO) The :int:`number` of soldiers that can be garrisoned at the militarysite
+*/
+int L_MilitarySiteDescription::get_max_number_of_soldiers(lua_State * L) {
+	const MilitarySite_Descr * descr = static_cast<const MilitarySite_Descr *>(get());
+	lua_pushinteger(L, descr->get_max_number_of_soldiers());
+	return 1;
+}
+
+/* RST
+	.. attribute:: type
+
+			(RO) the type of the building, e.g. militarysite.
+*/
+int L_MilitarySiteDescription::get_type(lua_State * L) {
+	const MilitarySite_Descr * descr = static_cast<const MilitarySite_Descr *>(get());
+	lua_pushstring(L, descr->get_type());
+	return 1;
+}
+
+
 
 
 /* RST
@@ -3595,6 +3664,12 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_ProductionSiteDescription>(L, "map", true);
 	add_parent<L_ProductionSiteDescription, L_BuildingDescription>(L);
 	add_parent<L_ProductionSiteDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_MilitarySiteDescription>(L, "map", true);
+	add_parent<L_MilitarySiteDescription, L_ProductionSiteDescription>(L);
+	add_parent<L_MilitarySiteDescription, L_BuildingDescription>(L);
+	add_parent<L_MilitarySiteDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_WareDescription>(L, "map", true);

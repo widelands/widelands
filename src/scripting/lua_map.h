@@ -168,6 +168,7 @@ public:
 	int get_returned_wares(lua_State *);
 	int get_returned_wares_enhanced(lua_State *);
 	int get_size(lua_State *);
+	// Subclasses all need to overwrite get_type, otherwise the type of the parent class would be fetched
 	int get_type(lua_State *);
 	int get_vision_range(lua_State *);
 
@@ -219,6 +220,42 @@ public:
 
 private:
 	CASTED_GET_DESCRIPTION(ProductionSite_Descr);
+};
+
+
+class L_MilitarySiteDescription : public L_ProductionSiteDescription {
+public:
+	LUNA_CLASS_HEAD(L_MilitarySiteDescription);
+
+	virtual ~L_MilitarySiteDescription() {}
+
+	L_MilitarySiteDescription() {}
+	L_MilitarySiteDescription(const Widelands::ProductionSite_Descr* const militarysitedescr)
+	   : L_ProductionSiteDescription(militarysitedescr) {
+	}
+	L_MilitarySiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_heal_per_second(lua_State *);
+	int get_max_number_of_soldiers(lua_State *);
+	int get_type(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(MilitarySite_Descr);
 };
 
 

@@ -1,3 +1,5 @@
+-- TODO Textdomain?
+
 -- RST
 -- format_help.lua
 -- ---------------
@@ -143,11 +145,11 @@ end
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg resourcename: The resource this building produces
---    :arg working_radius: The owrking radious of the building
+--    :arg working_radius: The working radious of the building
 --    :returns: rt of the formatted text
 --
 function building_help_general_string(tribename, building_description, resourcename, info, purpose, working_radius)
-	-- Need to get the building description again to make sure we have the description type, e.g. "productionsite"
+	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = rt(h2(_"General"))
 
@@ -155,13 +157,15 @@ function building_help_general_string(tribename, building_description, resourcen
 	result = result .. rt(h3(_"Purpose:")) ..
 		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
 
+	result = result .. text_line(_"Vision range:", building_description.vision_range)
+
 	if(building_description.type == "productionsite") then
 		result = result .. text_line(_"Working radius:", working_radius)
 	elseif(building_description.type == "militarysite") then
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
+		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
+		result = result .. rt(h3(_"Healing:") .. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.max_number_of_soldiers)))
 	end
-	result = result .. text_line(_"Vision range:", building_description.vision_range)
-
 	return result
 end
 
