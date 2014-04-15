@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-04-05 13:04+0000\n"
+"PO-Revision-Date: 2014-04-14 15:08+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-06 05:45+0000\n"
+"X-Launchpad-Export-Date: 2014-04-15 05:35+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 "Language: nb\n"
 
@@ -290,7 +290,7 @@ msgstr "Hvile"
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Oppgrader soldats unnvik fra nivå 0 til nivå 1"
 
 #: ../../tribes/empire/armor/conf:1
 msgid ""
@@ -451,7 +451,7 @@ msgstr ""
 
 #: ../../tribes/empire/colosseum/conf:37
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Oppgrader soldats unnvik fra nivå 1 til nivå 2"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -1502,35 +1502,35 @@ msgstr "Trener soldatene."
 
 #: ../../tribes/empire/trainingcamp/conf:47
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Oppgrader soldats angrep fra nivå 0 til nivå 1"
 
 #: ../../tribes/empire/trainingcamp/conf:48
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Oppgrader soldats angrep fra nivå 1 til nivå 2"
 
 #: ../../tribes/empire/trainingcamp/conf:49
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Oppgrader soldats angrep fra nivå 2 til nivå 3"
 
 #: ../../tribes/empire/trainingcamp/conf:50
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Oppgrader soldats angrep fra nivå 3 til nivå 4"
 
 #: ../../tribes/empire/trainingcamp/conf:51
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Oppgrader soldats liv fra nivå 0 til nivå 1"
 
 #: ../../tribes/empire/trainingcamp/conf:52
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Oppgrader soldats liv fra nivå 1 til nivå 2"
 
 #: ../../tribes/empire/trainingcamp/conf:53
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Oppgrader soldats liv fra nivå 2 til nivå 3"
 
 #: ../../tribes/empire/trainingcamp/conf:54
 msgid "Upgrade soldier health from level 3 to level 4"
-msgstr ""
+msgstr "Oppgrader soldats liv fra nivå 3 til nivå 4"
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."

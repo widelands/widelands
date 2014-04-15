@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-30 16:10+0200\n"
-"PO-Revision-Date: 2014-04-11 20:14+0000\n"
+"PO-Revision-Date: 2014-04-14 14:56+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-12 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-04-15 05:35+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -880,7 +880,7 @@ msgstr "%1$s %2$s"
 #: ../../src/logic/production_program.cc:846
 #, c-format
 msgid "%s,"
-msgstr ""
+msgstr "%s,"
 
 #. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
 #: ../../src/logic/production_program.cc:242
@@ -2036,7 +2036,7 @@ msgstr "Verten har ikke valgt et kart eller lagret spill enda."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:291 ../../src/ui_fsmenu/launchSPG.cc:239
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "Seiersvilkår er satt av scenariet"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:293
 #: ../../src/wui/multiplayersetupgroup.cc:357
@@ -2045,7 +2045,7 @@ msgstr "Lagret spill"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:295
 msgid "The game is a saved game – the win condition was set before."
-msgstr ""
+msgstr "Dette er et lagret spill – seiersvilkårene har blitt satt tidligere."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:394
 msgid "Saved game is directory"
@@ -2074,6 +2074,12 @@ msgid ""
 "Normally, such a file should be sent from the host to you, but perhaps the "
 "transfer was not yet finished!?!"
 msgstr ""
+"Widelands forsøkte å starte et spill med en fil som ikke kunne finnes på den "
+"oppgitte plasseringen.\n"
+"Filen var: %s\n"
+"Hvis dette skjer, kan det være at verten har valgt en fil du ikke har. "
+"Normalt vil slike filer oversendes fra verten til deg, men kanskje "
+"overføringen ikke er ferdig enda!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:451
 msgid ""
@@ -2149,11 +2155,12 @@ msgstr "Verden: %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:655
 msgid "Scenario mode selected"
-msgstr ""
+msgstr "Scenario-modus valgt"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:670
 msgid "You are in the multiplayer launch game menu."
 msgstr ""
+"Du befinner deg i menyen for å starte et nytt spill med flere spillere."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:671
 msgid "Client settings"
@@ -2170,11 +2177,13 @@ msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr ""
+"Spilleren med fargen på flagget. Hvis mer enn en klient velger samme farge, "
+"får de delt kontroll over spilleren («delt kongedømme-modus»)."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:682
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any player"
-msgstr ""
+msgstr "Tilskuermodus, der du kan se alt, men ikke kontrollere noen spillere"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:684
 msgid "Player settings"
@@ -2231,6 +2240,10 @@ msgid ""
 "map. Furthermore, the host is able to set a specific win condition, and "
 "finally can start the game as soon as all players are set up."
 msgstr ""
+"Du kan se informasjon om det valgte kartet eller lagrede spillet på "
+"høyresiden. En knapp ved siden av navnet på kartet gir verten mulighet til å "
+"bytte til et annet kart. Videre kan verten stille på seiersvilkårene og til "
+"slutt starte spillet når alle spillerne er klare."
 
 #: ../../src/ui_fsmenu/launchSPG.cc:58
 msgid "Select map"
@@ -2263,7 +2276,7 @@ msgstr "Starter med"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:165
 msgid "Switch to position"
-msgstr ""
+msgstr "Bytt til posisjon"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:264
 #, c-format
@@ -2354,11 +2367,11 @@ msgstr "Widelands utviklerteamet"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Lisensiert under GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario"
-msgstr ""
+msgstr "Last kart som scenario"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:150
@@ -2543,7 +2556,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "Start veibygging automatisk når at flagg blir plassert"
 
 #: ../../src/ui_fsmenu/options.cc:214
 msgid "Show buildings area preview"
@@ -2621,7 +2634,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:491
 msgid "OpenGL rendering"
-msgstr ""
+msgstr "Opptegning med OpenGL"
 
 #: ../../src/ui_fsmenu/options.cc:496
 msgid "Show in-game chat with transparent background"
@@ -2711,6 +2724,8 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=MAPPENAVN    Bruk angitt mappe for Widelands konfigurasjons-\n"
+"                      filer, lagrede spill og repriser"
 
 #: ../../src/wlapplication.cc:1204
 msgid "                      Default is ~/.widelands"
@@ -2746,6 +2761,9 @@ msgid ""
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
 msgstr ""
+" --remove_replays=[...]\n"
+"                      Fjern repriser etter angitt antall dager.\n"
+"                      Hvis tallet er 0, blir de ikke fjernet."
 
 #: ../../src/wlapplication.cc:1218
 msgid "Sound options:"
@@ -2779,6 +2797,8 @@ msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr ""
+" --scenario=FILNAVN  Starter kartet FILNAVN direkte som et\n"
+"                      scenario."
 
 #: ../../src/wlapplication.cc:1228
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
@@ -2789,6 +2809,9 @@ msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
 msgstr ""
+" --script=FILNAVN    Kjør følgende Lua-skript etter oppstart.\n"
+"                      Kun gyldig sammen med --scenario, --loadgame, eller --"
+"editor."
 
 #: ../../src/wlapplication.cc:1231
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
@@ -2804,7 +2827,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1236
 msgid "Graphic options:"
-msgstr ""
+msgstr "Innstillinger for grafikk:"
 
 #: ../../src/wlapplication.cc:1237
 msgid ""
@@ -2812,18 +2835,20 @@ msgid ""
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr ""
+" --fullscreen=[yes|no]\n"
+"                      Om spillet skal vises i fullskjerm eller ikke"
 
 #: ../../src/wlapplication.cc:1240
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...]         Vinduets bredde i piksler."
 
 #: ../../src/wlapplication.cc:1241
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...]         Vinduets høyde i piksler."
 
 #: ../../src/wlapplication.cc:1242
 msgid " --opengl=[0|1]       Enables OpenGL rendering"
-msgstr ""
+msgstr " --opengl=[0|1]       Slår på opptegning med OpenGL"
 
 #: ../../src/wlapplication.cc:1243
 msgid "Options for the internal window manager:"
@@ -3044,7 +3069,7 @@ msgstr "Eid"
 
 #: ../../src/wui/building_statistics_menu.cc:114
 msgid "Build"
-msgstr ""
+msgstr "Bygg"
 
 #: ../../src/wui/building_statistics_menu.cc:130
 #: ../../src/wui/building_statistics_menu.cc:152
@@ -3077,7 +3102,7 @@ msgstr "Stopp"
 #: ../../src/wui/buildingwindow.cc:236
 #, c-format
 msgid "Enhance to %s"
-msgstr ""
+msgstr "Oppgrader til %s"
 
 #: ../../src/wui/buildingwindow.cc:242 ../../src/wui/fieldaction.cc:112
 msgid "Construction costs:"
@@ -3212,7 +3237,7 @@ msgstr "Start angrep"
 
 #: ../../src/wui/fieldaction.cc:502
 msgid "Attack"
-msgstr "Angrip"
+msgstr "Angrep"
 
 #: ../../src/wui/fieldaction.cc:586
 msgid "Build mines"
@@ -3266,7 +3291,7 @@ msgstr "Spilltid:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition:"
-msgstr ""
+msgstr "Seiersvilkår:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:142
 #, c-format
@@ -3331,19 +3356,19 @@ msgstr "Sendt"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear"
-msgstr ""
+msgstr "Tøm"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear selection"
-msgstr ""
+msgstr "Tøm utvalg"
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert"
-msgstr ""
+msgstr "Inverter"
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert selection"
-msgstr ""
+msgstr "Inverter utvalg"
 
 #: ../../src/wui/game_message_menu.cc:85
 #: ../../src/wui/game_message_menu.cc:375
@@ -3378,7 +3403,7 @@ msgstr "Mål"
 
 #: ../../src/wui/game_objectives_menu.cc:66
 msgid "Claim Victory"
-msgstr ""
+msgstr "Krev seier"
 
 #: ../../src/wui/game_objectives_menu.cc:74
 msgid "Restart Mission"
@@ -3419,7 +3444,7 @@ msgstr "Spillet er slutt"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
-msgstr ""
+msgstr "Tilbakelagt tid:"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
@@ -3472,7 +3497,7 @@ msgstr "Poeng"
 
 #: ../../src/wui/game_summary.cc:254
 msgid "Player info"
-msgstr ""
+msgstr "Spillerinfo"
 
 #: ../../src/wui/general_statistics_menu.cc:173
 msgid "Land"
@@ -3503,7 +3528,7 @@ msgstr "Tap"
 
 #: ../../src/wui/general_statistics_menu.cc:221
 msgid "Kills"
-msgstr ""
+msgstr "Drap"
 
 #: ../../src/wui/general_statistics_menu.cc:229
 msgid "Military buildings lost"
@@ -3750,7 +3775,7 @@ msgstr "Speid mot vest"
 
 #: ../../src/wui/shipwindow.cc:140
 msgid "Construct a port at the current location"
-msgstr ""
+msgstr "Bygg en havn her"
 
 #: ../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-04-04 21:32+0000\n"
+"PO-Revision-Date: 2014-04-14 15:06+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-05 04:33+0000\n"
+"X-Launchpad-Export-Date: 2014-04-15 05:35+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -336,7 +336,7 @@ msgstr "Plant svartrot"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:23
 msgid "Harvest blackroot"
-msgstr ""
+msgstr "Høst inn svartrot"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
@@ -411,23 +411,23 @@ msgstr "Aske"
 
 #: ../../tribes/atlanteans/conf:32
 msgid "Blackroot Field"
-msgstr ""
+msgstr "Svartrotåker"
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Blackroot Field (harvested)"
-msgstr ""
+msgstr "Høstet svartrotåker"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Blackroot Field (medium)"
-msgstr ""
+msgstr "Mellomstor svartrotåker"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackroot Field (small)"
-msgstr ""
+msgstr "Liten svartrotåker"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackroot Field (tiny)"
-msgstr ""
+msgstr "Veldig liten svartrotåker"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Cornfield"
@@ -435,19 +435,19 @@ msgstr "Maisåker"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Cornfield (harvested)"
-msgstr ""
+msgstr "Høstet maisåker"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Cornfield (medium)"
-msgstr ""
+msgstr "Mellomstor maisåker"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield (small)"
-msgstr ""
+msgstr "Liten maisåker"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield (tiny)"
-msgstr ""
+msgstr "Veldig liten maisåker"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Destroyed Building"
@@ -495,7 +495,7 @@ msgstr "Ressursindikator: vann"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Byggeområde for skip"
 
 #: ../../tribes/atlanteans/conf:56
 msgid "Advanced Shield"
@@ -755,7 +755,7 @@ msgstr "Røyker"
 
 #: ../../tribes/atlanteans/conf:126
 msgid "Spider Breeder"
-msgstr ""
+msgstr "Edderkoppoppdretter"
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Stonecutter"
@@ -860,11 +860,11 @@ msgstr "Steinbrudd"
 
 #: ../../tribes/atlanteans/conf:166
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Trefellers hus"
 
 #: ../../tribes/atlanteans/conf:167
 msgid "Forester’s House"
-msgstr ""
+msgstr "Skogforvalters hus"
 
 #: ../../tribes/atlanteans/conf:168
 msgid "Goldweaver"
@@ -876,7 +876,7 @@ msgstr "Fiskers hus"
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Fish Breeder’s House"
-msgstr ""
+msgstr "Fiskeoppdretters hus"
 
 #: ../../tribes/atlanteans/conf:171
 msgid "Hunter’s House"
@@ -928,7 +928,7 @@ msgstr "Våpensmie"
 
 #: ../../tribes/atlanteans/conf:183
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Rustningssmie"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
@@ -936,7 +936,7 @@ msgstr "Hestegård"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Spider Farm"
-msgstr ""
+msgstr "Edderkoppgård"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Weaving-Mill"
@@ -996,6 +996,8 @@ msgid ""
 "baker needs for a good bread. Also horse and spider farms need to be "
 "provided with corn."
 msgstr ""
+"Mais blir malt i møllen til fint maismel som hver atlantisk baker trenger "
+"for å bake gode brød. Også heste- og edderkoppgårder blir forsynt med mais."
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
@@ -1007,15 +1009,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:27
 msgid "Mine stone"
-msgstr ""
+msgstr "Grav stein"
 
 #: ../../tribes/atlanteans/crystalmine/conf:28
 msgid "Mine quartz"
-msgstr ""
+msgstr "Grav kvarts"
 
 #: ../../tribes/atlanteans/crystalmine/conf:29
 msgid "Mine diamond"
-msgstr ""
+msgstr "Grav diamant"
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -1039,19 +1041,19 @@ msgstr "Hvile"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Oppgrader soldats angrep fra nivå 0 til nivå 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Oppgrader soldats angrep fra nivå 1 til nivå 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Oppgrader soldats angrep fra nivå 2 til nivå 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Oppgrader soldats angrep fra nivå 3 til nivå 4"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
@@ -1059,7 +1061,7 @@ msgstr "Plant mais"
 
 #: ../../tribes/atlanteans/farm/conf:25
 msgid "Harvest corn"
-msgstr ""
+msgstr "Høst inn mais"
 
 #: ../../tribes/atlanteans/farmer/conf:1
 msgid "Plants fields."
@@ -1194,23 +1196,23 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "Oppgrader soldats forsvar fra nivå 0 til nivå 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
 msgid "Upgrade soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "Oppgrader soldats forsvar fra nivå 1 til nivå 2"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Oppgrader soldats liv fra nivå 0 til nivå 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Oppgrader soldats unnvik fra nivå 0 til nivå 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Oppgrader soldats unnvik fra nivå 1 til nivå 2"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1294,12 +1296,13 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws wood to produce planks."
-msgstr ""
+msgstr "Sager opp tømmeret til planker."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Speidere som speideren Scotty speider uspeide områder som en speider."
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
