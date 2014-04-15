@@ -14,7 +14,7 @@ return {
 Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]]) ..
 
 	--General Section
-	-- TODO the last 2 parameters should be reqad from C++. "coal" as well?
+	-- TODO the last parameter (Working radius) should be read from C++. "coal" as well?
 	building_help_general_string("barbarians", building_description, "coal",
 		_"A %1$s exploits only %2$s of the resource. From there on out, it will only have a 5%% chance of finding %3$s.":bformat(_"deep coal mine","2/3",_"coal"),
 		_"Dig %s out of the ground in mountain terrain.":format(_"coal"),
@@ -52,7 +52,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	--help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
 	--help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 	-- TODO - already in format_help, but value is missing
-	--text_line(_"Upgraded from:",_"Coal mine","tribes/barbarians/coalmine/menu.png") ..
+	--text_line(_"Upgradeable to:",_"Deeper Coal Mine","tribes/barbarians/deeper_coalmine/menu.png") ..
 
 	--Workers Section
 	-- TODO this duplicates the tool etc. - get worker list from C++ and handle in format_help

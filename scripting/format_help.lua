@@ -395,39 +395,51 @@ end
 --    :returns: image_line for the worker
 --
 function building_help_crew_string(tribename, buildingname, workername, toolname)
-	local worker_descr = wl.Game():get_worker_description(tribename, workername)	
-	local becomes_descr = worker_descr.becomes
-	local result = rt(h2(_"Workers")) .. rt(h3(_"Crew required:"))
+	local building_descr = wl.Game():get_building_description(tribename, buildingname)
+	local result = ""
+	if(building_descr.isproductionsite) then
+		building_descr = wl.Game():get_productionsite_description(tribename, buildingname)
 
-	if(becomes_descr) then
-	-- TODO some buildings need more than 1 worker
-		result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, 
-			p(_"%s or better":bformat(worker_descr.descname)))
+		result = result .. rt(h2(_"Workers")) .. rt(h3(_"Crew required:"))
+		-- TODO why is nr_working_positions always = 1?
+		result = result .. rt(p("TODO: need to parse " .. building_descr.nr_working_positions .. " working positions"))
+
+		local worker_descr = wl.Game():get_worker_description(tribename, workername)	
+		local becomes_descr = worker_descr.becomes
+
+		if(becomes_descr) then
+		-- TODO some buildings need more than 1 worker
+			result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, 
+				p(_"%s or better":bformat(worker_descr.descname)))
+		else
+			result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1,
+				p(worker_descr.descname))
+		end
+
 		result = result .. building_help_tool_string(tribename, toolname, 1) 
 
-		result = result .. rt(h3(_"Experience levels:"))
-		local exp_string = _"%s to %s (%s EP)":format(
-				worker_descr.descname,
-				becomes_descr.descname,
-				worker_descr.level_experience
-			)
-
-		worker_descr = becomes_descr
-		becomes_descr = worker_descr.becomes
 		if(becomes_descr) then
-			exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
+
+			result = result .. rt(h3(_"Experience levels:"))
+			local exp_string = _"%s to %s (%s EP)":format(
 					worker_descr.descname,
 					becomes_descr.descname,
 					worker_descr.level_experience
 				)
+
+			worker_descr = becomes_descr
+			becomes_descr = worker_descr.becomes
+			if(becomes_descr) then
+				exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
+						worker_descr.descname,
+						becomes_descr.descname,
+						worker_descr.level_experience
+					)
+			end
+			result = result ..  rt("text-align=right", p(exp_string))
 		end
-		result = result ..  rt("text-align=right", p(exp_string))
-	else
-	-- TODO some buildings need more than 1 worker
-		result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1,
-			p(worker_descr.descname))
-		result = result .. building_help_tool_string(tribename, toolname, 1) 
 	end
+
 	return result
 end
 
