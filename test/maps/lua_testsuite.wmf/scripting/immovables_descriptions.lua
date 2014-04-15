@@ -43,6 +43,11 @@ function test_descr:test_isport()
    assert_equal(true, egbase:get_building_description("barbarians","port").isport)
 end
 
+function test_descr:test_isproductionsite()
+   assert_equal(false, egbase:get_building_description("barbarians","headquarters").isproductionsite)
+   assert_equal(true, egbase:get_building_description("barbarians","lumberjacks_hut").isproductionsite)
+end
+
 
 function test_descr:test_size()
    assert_equal(1, egbase:get_building_description("barbarians","lumberjacks_hut").size)
