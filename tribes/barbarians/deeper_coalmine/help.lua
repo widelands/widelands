@@ -38,6 +38,6 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_crew_string("barbarians", building_description, {"master-miner", "chief-miner", "miner"}, "pick") ..
 	--Production Section
 	rt(h2(_"Production")) ..
-	text_line(_"Performance:", _"If the food supply is steady, this mine can produce %1$s in %2$s on average.":bformat(_"Coal","14.4s"))
+	text_line(_"Performance:", _"If the food supply is steady, this mine can produce %1$s in %2$s on average.":bformat(_"coal","14.4s"))
   end
 }

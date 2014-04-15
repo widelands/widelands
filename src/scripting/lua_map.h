@@ -259,6 +259,47 @@ private:
 };
 
 
+class L_TrainingSiteDescription : public L_ProductionSiteDescription {
+public:
+	LUNA_CLASS_HEAD(L_TrainingSiteDescription);
+
+	virtual ~L_TrainingSiteDescription() {}
+
+	L_TrainingSiteDescription() {}
+	L_TrainingSiteDescription(const Widelands::ProductionSite_Descr* const trainingsitedescr)
+	   : L_ProductionSiteDescription(trainingsitedescr) {
+	}
+	L_TrainingSiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_max_attack(lua_State *);
+	int get_max_defense(lua_State *);
+	int get_max_evade(lua_State *);
+	int get_max_hp(lua_State *);
+	int get_max_number_of_soldiers(lua_State *);
+	int get_min_attack(lua_State *);
+	int get_min_defense(lua_State *);
+	int get_min_evade(lua_State *);
+	int get_min_hp(lua_State *);
+	int get_type(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(TrainingSite_Descr);
+};
 
 
 class L_WareDescription : public L_MapObjectDescription {

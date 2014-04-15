@@ -32,6 +32,6 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 
 	--Production Section
 	rt(h2(_"Production")) ..
-	text_line(_"Performance:", _"If the food supply is steady, this mine can produce %s in %s on average.":format(_"Coal","32.5s"))
+	text_line(_"Performance:", _"If the food supply is steady, this mine can produce %s in %s on average.":format(_"coal","32.5s"))
    end
 }

@@ -153,18 +153,40 @@ function building_help_general_string(tribename, building_description, resourcen
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = rt(h2(_"General"))
 
-	if (info) then local result = result .. rt(p(info)) end
+	if (info) then result = result .. rt(p(info)) end
 	result = result .. rt(h3(_"Purpose:")) ..
 		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
 
 	result = result .. text_line(_"Vision range:", building_description.vision_range)
+
+	--result = result .. text_line(_"TEST TODO remove this when done:", building_description.type)
 
 	if(building_description.type == "productionsite") then
 		result = result .. text_line(_"Working radius:", working_radius)
 	elseif(building_description.type == "militarysite") then
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
-		result = result .. rt(h3(_"Healing:") .. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.max_number_of_soldiers)))
+		result = result .. rt(h3(_"Healing:")
+			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.max_number_of_soldiers)))
+	elseif(building_description.type == "trainingsite") then
+		result = result .. rt(h2(_"Training"))
+		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
+		if(building_description.max_hp > 0) then
+			result = result .. text_line(_"Health:", _"Trains health from %1$s up to %2$s":
+				bformat(building_description.min_hp, building_description.max_hp))
+		end
+		if(building_description.max_evade > 0) then
+			result = result .. text_line(_"Evade:", _"Trains evade from %1$s up to %2$s":
+				bformat(building_description.min_evade, building_description.max_evade))
+		end
+		if(building_description.max_attack > 0) then
+			result = result .. text_line(_"Attack:", _"Trains attack from %1$s up to %2$s":
+				bformat(building_description.min_attack, building_description.max_attack))
+		end
+		if(building_description.max_defense > 0) then
+			result = result .. text_line(_"Defense:", _"Trains defense from %1$s up to %2$s":
+				bformat(building_description.min_defense, building_description.max_defense))
+		end
 	end
 	return result
 end
@@ -497,7 +519,7 @@ function building_help_crew_string(tribename, building_description, workernames,
 			end
 		end
 
-		result = result .. building_help_tool_string(tribename, toolname, number_of_workers)
+		if(toolname) then result = result .. building_help_tool_string(tribename, toolname, number_of_workers) end
 
 		if(becomes_descr) then
 

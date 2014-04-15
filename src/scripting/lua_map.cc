@@ -600,6 +600,9 @@ int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const des
 	if (is_a(MilitarySite_Descr, desc)) {
 		return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
 	}
+	else if (is_a(TrainingSite_Descr, desc)) {
+		return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
+	}
 	else if (is_a(ProductionSite_Descr, desc)) {
 		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
 	}
@@ -1385,10 +1388,10 @@ int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 
 
 /* RST
-ProductionSiteDescription
+MilitarySiteDescription
 ---
 
-Properties of workers read from the conf files available for Lua
+Properties of military sites read from the conf files available for Lua
 
 TODO
 */
@@ -1446,6 +1449,167 @@ int L_MilitarySiteDescription::get_type(lua_State * L) {
 	return 1;
 }
 
+
+/* RST
+TrainingSiteDescription
+---
+
+Properties of training sites read from the conf files available for Lua
+
+TODO
+*/
+const char L_TrainingSiteDescription::className[] = "TrainingSiteDescription";
+const MethodType<L_TrainingSiteDescription> L_TrainingSiteDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_TrainingSiteDescription> L_TrainingSiteDescription::Properties[] = {
+	PROP_RO(L_TrainingSiteDescription, max_attack),
+	PROP_RO(L_TrainingSiteDescription, max_defense),
+	PROP_RO(L_TrainingSiteDescription, max_evade),
+	PROP_RO(L_TrainingSiteDescription, max_hp),
+	PROP_RO(L_TrainingSiteDescription, max_number_of_soldiers),
+	PROP_RO(L_TrainingSiteDescription, min_attack),
+	PROP_RO(L_TrainingSiteDescription, min_defense),
+	PROP_RO(L_TrainingSiteDescription, min_evade),
+	PROP_RO(L_TrainingSiteDescription, min_hp),
+	PROP_RO(L_TrainingSiteDescription, type),
+	{nullptr, nullptr, nullptr},
+};
+
+void L_TrainingSiteDescription::__persist(lua_State * /* L */) {
+}
+void L_TrainingSiteDescription::__unpersist(lua_State * /* L */) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
+	.. attribute:: max_attack
+		(RO) The :int:`number` of attack points that a soldier can train
+*/
+int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	if(descr->get_train_attack())
+		lua_pushinteger(L, descr->get_max_level(atrAttack));
+	else lua_pushinteger(L, 0);
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_defense
+		(RO) The :int:`number` of defense points that a soldier can train
+*/
+int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	if(descr->get_train_defense())
+		lua_pushinteger(L, descr->get_max_level(atrDefense));
+	else lua_pushinteger(L, 0);
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: max_evade
+		(RO) The :int:`number` of evade points that a soldier can train
+*/
+int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	if(descr->get_train_evade())
+		lua_pushinteger(L, descr->get_max_level(atrEvade));
+	else lua_pushinteger(L, 0);
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: max_hp
+		(RO) The :int:`number` of health points that a soldier can train
+*/
+int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	if(descr->get_train_hp())
+		lua_pushinteger(L, descr->get_max_level(atrHP));
+	else lua_pushinteger(L, 0);
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: max_number_of_soldiers
+		(RO) The :int:`number` of soldiers that can be garrisoned at the trainingsite
+*/
+int L_TrainingSiteDescription::get_max_number_of_soldiers(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	lua_pushinteger(L, descr->get_max_number_of_soldiers());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: min_attack
+		(RO) The :int:`number` of attack points that a soldier starts training with
+*/
+int L_TrainingSiteDescription::get_min_attack(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	if(descr->get_train_attack())
+		lua_pushinteger(L, descr->get_min_level(atrAttack));
+	else lua_pushinteger(L, 0);
+	return 1;
+}
+
+/* RST
+	.. attribute:: min_defense
+		(RO) The :int:`number` of defense points that a soldier starts training with
+*/
+int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	if(descr->get_train_defense())
+		lua_pushinteger(L, descr->get_min_level(atrDefense));
+	else lua_pushinteger(L, 0);
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: min_evade
+		(RO) The :int:`number` of evade points that a soldier starts training with
+*/
+int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	if(descr->get_train_evade())
+		lua_pushinteger(L, descr->get_min_level(atrEvade));
+	else lua_pushinteger(L, 0);
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: min_hp
+		(RO) The :int:`number` of health points that a soldier starts training with
+*/
+int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	if(descr->get_train_hp())
+		lua_pushinteger(L, descr->get_min_level(atrHP));
+	else lua_pushinteger(L, 0);
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: type
+
+			(RO) the type of the building, e.g. trainingsite.
+*/
+int L_TrainingSiteDescription::get_type(lua_State * L) {
+	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	lua_pushstring(L, descr->get_type());
+	return 1;
+}
 
 
 
@@ -3670,6 +3834,12 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_MilitarySiteDescription, L_ProductionSiteDescription>(L);
 	add_parent<L_MilitarySiteDescription, L_BuildingDescription>(L);
 	add_parent<L_MilitarySiteDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_TrainingSiteDescription>(L, "map", true);
+	add_parent<L_TrainingSiteDescription, L_ProductionSiteDescription>(L);
+	add_parent<L_TrainingSiteDescription, L_BuildingDescription>(L);
+	add_parent<L_TrainingSiteDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_WareDescription>(L, "map", true);
