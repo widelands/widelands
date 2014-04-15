@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-08-30 21:27+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-14 22:21+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:38+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:39+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -27,7 +27,7 @@ msgstr "Grønland"
 
 #: ../../worlds/greenland/conf:4
 msgid "These are the beautiful and bountiful countries of the barbarians"
-msgstr ""
+msgstr "Dette er barbarenes vakre og generøse land"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -98,187 +98,187 @@ msgstr "Stående steiner"
 msgid "Stones"
 msgstr "Steiner"
 
-#: ../../worlds/greenland/conf:46
-msgid "Aspen"
-msgstr "Osp"
-
 #: ../../worlds/greenland/conf:47
-msgid "Aspen (medium)"
-msgstr ""
-
-#: ../../worlds/greenland/conf:48
-msgid "Aspen (small)"
-msgstr ""
+msgid "Aspen (Old)"
+msgstr "Osp (gammel)"
 
 #: ../../worlds/greenland/conf:49
-msgid "Aspen (tiny)"
-msgstr ""
-
-#: ../../worlds/greenland/conf:50
-msgid "Oak"
-msgstr "Eik"
+msgid "Aspen (Mature)"
+msgstr "Osp (fullvoksen)"
 
 #: ../../worlds/greenland/conf:51
-msgid "Oak (medium)"
-msgstr ""
-
-#: ../../worlds/greenland/conf:52
-msgid "Oak (small)"
-msgstr ""
+msgid "Aspen (Pole)"
+msgstr "Osp (ung)"
 
 #: ../../worlds/greenland/conf:53
-msgid "Oak (tiny)"
-msgstr ""
+msgid "Aspen (Sapling)"
+msgstr "Aspen (spire)"
 
 #: ../../worlds/greenland/conf:54
-msgid "Spruce"
-msgstr "Gran"
+msgid "Oak (Old)"
+msgstr "Eik (gammel)"
 
 #: ../../worlds/greenland/conf:55
-msgid "Spruce (medium)"
-msgstr ""
+msgid "Oak (Mature)"
+msgstr "Eik (fullvoksen)"
 
 #: ../../worlds/greenland/conf:56
-msgid "Spruce (small)"
-msgstr ""
+msgid "Oak (Pole)"
+msgstr "Eik (ung)"
 
 #: ../../worlds/greenland/conf:57
-msgid "Spruce (tiny)"
-msgstr ""
+msgid "Oak (Sapling)"
+msgstr "Eik (spire)"
 
 #: ../../worlds/greenland/conf:58
-msgid "Alder"
-msgstr "Or"
+msgid "Spruce (Old)"
+msgstr "Gran (gammel)"
 
 #: ../../worlds/greenland/conf:59
-msgid "Alder (medium)"
-msgstr ""
+msgid "Spruce (Mature)"
+msgstr "Gran (fullvoksen)"
 
 #: ../../worlds/greenland/conf:60
-msgid "Alder (small)"
-msgstr ""
+msgid "Spruce (Pole)"
+msgstr "Gran (ung)"
 
 #: ../../worlds/greenland/conf:61
-msgid "Alder (tiny)"
-msgstr ""
+msgid "Spruce (Sapling)"
+msgstr "Gran (spire)"
 
 #: ../../worlds/greenland/conf:62
-msgid "Birch"
-msgstr "Bjørk"
+msgid "Alder (Old)"
+msgstr "Or (gammel)"
 
 #: ../../worlds/greenland/conf:63
-msgid "Birch (medium)"
-msgstr ""
+msgid "Alder (Mature)"
+msgstr "Or (fullvoksen)"
 
 #: ../../worlds/greenland/conf:64
-msgid "Birch (small)"
-msgstr ""
+msgid "Alder (Pole)"
+msgstr "Or (ung)"
 
 #: ../../worlds/greenland/conf:65
-msgid "Birch (tiny)"
-msgstr ""
+msgid "Alder (Sapling)"
+msgstr "Or (spire)"
 
 #: ../../worlds/greenland/conf:66
-msgid "Beech"
-msgstr "Bøk"
+msgid "Birch (Old)"
+msgstr "Bjørk (gammel)"
 
 #: ../../worlds/greenland/conf:67
-msgid "Beech (medium)"
-msgstr ""
+msgid "Birch (Mature)"
+msgstr "Bjørk (fullvoksen)"
 
 #: ../../worlds/greenland/conf:68
-msgid "Beech (small)"
-msgstr ""
+msgid "Birch (Pole)"
+msgstr "Bjørk (ung)"
 
 #: ../../worlds/greenland/conf:69
-msgid "Beech (tiny)"
-msgstr ""
+msgid "Birch (Sapling)"
+msgstr "Bjørk (spire)"
 
 #: ../../worlds/greenland/conf:70
-msgid "Larch"
-msgstr "Lerk"
+msgid "Beech (Old)"
+msgstr "Bøk (gammel)"
 
 #: ../../worlds/greenland/conf:71
-msgid "Larch (medium)"
-msgstr ""
+msgid "Beech (Mature)"
+msgstr "Bøk (fullvoksen)"
 
 #: ../../worlds/greenland/conf:72
-msgid "Larch (small)"
-msgstr ""
+msgid "Beech (Pole)"
+msgstr "Bøk (ung)"
 
 #: ../../worlds/greenland/conf:73
-msgid "Larch (tiny)"
-msgstr ""
+msgid "Beech (Sapling)"
+msgstr "Bøk (spire)"
 
 #: ../../worlds/greenland/conf:74
-msgid "Rowan"
-msgstr "Rogn"
+msgid "Larch (Old)"
+msgstr "Lerk (gammel)"
 
 #: ../../worlds/greenland/conf:75
-msgid "Rowan (medium)"
-msgstr ""
+msgid "Larch (Mature)"
+msgstr "Lerk (fullvoksen)"
 
 #: ../../worlds/greenland/conf:76
-msgid "Rowan (small)"
-msgstr ""
+msgid "Larch (Pole)"
+msgstr "Lerk (ung)"
 
 #: ../../worlds/greenland/conf:77
-msgid "Rowan (tiny)"
-msgstr ""
+msgid "Larch (Sapling)"
+msgstr "Lerk (spire)"
+
+#: ../../worlds/greenland/conf:78
+msgid "Rowan (Old)"
+msgstr "Rogn (gammel)"
+
+#: ../../worlds/greenland/conf:79
+msgid "Rowan (Mature)"
+msgstr "Rogn (fullvoksen)"
 
 #: ../../worlds/greenland/conf:80
+msgid "Rowan (Pole)"
+msgstr "Rogn (ung)"
+
+#: ../../worlds/greenland/conf:81
+msgid "Rowan (Sapling)"
+msgstr "Rogn (spire)"
+
+#: ../../worlds/greenland/conf:84
 msgid "Badger"
 msgstr "Grevling"
 
-#: ../../worlds/greenland/conf:81
+#: ../../worlds/greenland/conf:85
 msgid "Brown Bear"
-msgstr ""
+msgstr "Brunbjørn"
 
-#: ../../worlds/greenland/conf:82
+#: ../../worlds/greenland/conf:86
 msgid "Bunny"
 msgstr "Kanin"
 
-#: ../../worlds/greenland/conf:83
+#: ../../worlds/greenland/conf:87
 msgid "Chamois"
 msgstr "Gemse"
 
-#: ../../worlds/greenland/conf:84
+#: ../../worlds/greenland/conf:88
 msgid "Deer"
 msgstr "Hjort"
 
-#: ../../worlds/greenland/conf:85
+#: ../../worlds/greenland/conf:89
 msgid "Duck"
 msgstr "And"
 
-#: ../../worlds/greenland/conf:86
+#: ../../worlds/greenland/conf:90
 msgid "Elk"
 msgstr "Elg"
 
-#: ../../worlds/greenland/conf:87
+#: ../../worlds/greenland/conf:91
 msgid "Fox"
 msgstr "Rev"
 
-#: ../../worlds/greenland/conf:88
+#: ../../worlds/greenland/conf:92
 msgid "Lynx"
 msgstr "Gaupe"
 
-#: ../../worlds/greenland/conf:89
+#: ../../worlds/greenland/conf:93
 msgid "Marten"
 msgstr "Mår"
 
-#: ../../worlds/greenland/conf:90
+#: ../../worlds/greenland/conf:94
 msgid "Reindeer"
 msgstr "Rein"
 
-#: ../../worlds/greenland/conf:91
+#: ../../worlds/greenland/conf:95
 msgid "Sheep"
 msgstr "Sau"
 
-#: ../../worlds/greenland/conf:92
+#: ../../worlds/greenland/conf:96
 msgid "Wisent"
 msgstr "Visent"
 
-#: ../../worlds/greenland/conf:93
+#: ../../worlds/greenland/conf:97
 msgid "Wolf"
 msgstr "Ulv"
 
@@ -313,7 +313,7 @@ msgstr "Steppe"
 
 #: ../../worlds/greenland/terrainconf:13
 msgid "Mountain 1"
-msgstr ""
+msgstr "Fjell 1"
 
 #: ../../worlds/greenland/terrainconf:19
 msgid "Snow"
@@ -329,35 +329,35 @@ msgstr "Strand"
 
 #: ../../worlds/greenland/terrainconf:43
 msgid "Meadow 1"
-msgstr ""
+msgstr "Eng 1"
 
 #: ../../worlds/greenland/terrainconf:49
 msgid "Meadow 2"
-msgstr ""
+msgstr "Eng 2"
 
 #: ../../worlds/greenland/terrainconf:55
 msgid "Meadow 3"
-msgstr ""
+msgstr "Eng 3"
 
 #: ../../worlds/greenland/terrainconf:61
 msgid "Mountain 2"
-msgstr ""
+msgstr "Fjell 2"
 
 #: ../../worlds/greenland/terrainconf:67
 msgid "Mountain 3"
-msgstr ""
+msgstr "Fjell 3"
 
 #: ../../worlds/greenland/terrainconf:73
 msgid "Mountain 4"
-msgstr ""
+msgstr "Fjell 4"
 
 #: ../../worlds/greenland/terrainconf:79
 msgid "Barren Steppe"
-msgstr ""
+msgstr "Øde steppe"
 
 #: ../../worlds/greenland/terrainconf:85
 msgid "Meadow 4"
-msgstr ""
+msgstr "Eng 4"
 
 #: ../../worlds/greenland/terrainconf:91
 msgid "Lava"

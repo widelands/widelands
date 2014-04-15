@@ -2,20 +2,21 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2010-08-30 22:43+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-08 19:59+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:28+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:28+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
+"Language: uk\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 #: ../../campaigns/cconfig:98
@@ -74,6 +75,15 @@ msgid ""
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
 msgstr ""
+"Шість місяців тому, Люциус - молодий полководець Імперії - вирушив з 150 "
+"солдатами до північного лісу. де Варвари переходили на землі, якими володіла "
+"Імперія. Його завданням було захистити Імперські землі. Спочатку все було "
+"спокійно. Він навіть розмовляв з декількома дітьми варварів, та подумував "
+"про мирне життя, пліч о пліч з цим народом. Він став спокійніше, і його "
+"армія почала приділяти менше уваги потенційному супернику. Це було їх "
+"помилкою. В одну з березневих ночей, його непідготовлена армія була "
+"атакована варварами, в кількості 100 чоловік, та повністю розбита. Тільки "
+"завдяки його мирному життю, йому та частині його солдат вдалося вижити."
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans – The Run for the Fire"
@@ -121,7 +131,7 @@ msgstr ""
 #: ../../campaigns/cconfig:103
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Ще не впроваджено"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Sorry, this map is not yet implemented."
@@ -210,6 +220,8 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
+"Чи є це одним з сюрпризів природи чи породженням божевільного (і бажаючого "
+"ігр) бога, але це дивне поле битви чекає двох суперників для нового бою."
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -223,6 +235,11 @@ msgid ""
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
 msgstr ""
+"На відстані декількох миль від узбережжя Геріона, знаходиться маленький "
+"острів без імені. До цього часу в тебе не було причини відвідувати його, але "
+"вчора велика вогняна куля вдарила з неба в саме серце острову. Це знак "
+"Богів? Ти впевнений, що це так і є, та маєш надію, що твоє плем'я оволодіє "
+"скарбом раніше, ніж інші племена дістануться туди."
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
@@ -276,6 +293,8 @@ msgid ""
 "wonder that there is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last of the remaining water."
 msgstr ""
+"Давно вже на цю землю не падали краплі дощу, тому не дивно, що русло річки "
+"пересохло. І всі вже знають: скоро війна. Війна за останнє джерело води."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -320,6 +339,8 @@ msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
 msgstr ""
+"Красиві фінські землі, заповнені озерами, річками, стародавніми лісами та "
+"горами. Найдіть шлях крізь ці землі."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -332,6 +353,9 @@ msgid ""
 "if you are alone, but no-one knows what might happen if you met an opposing "
 "tribe?"
 msgstr ""
+"Було це випробовуванням, посланням Богів, чи просто чийсь підступний план, "
+"та одного разу ти і твоє плем'я прокинулись на цьому острові, серед вогню та "
+"лави. Схоже на те, що ти тут один, але, що буде, коли зустрінеш інші племена?"
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -372,6 +396,10 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure that there is only enough space for one tribe."
 msgstr ""
+"Довгий час твоє плем'я живе на цих прекрасних берегах льодовикового озера. "
+"Ніхто вас не тривожив, а ресурсів вистачало на всіх. Та декілька місяців "
+"назад, з гір прийшли чужаки, з метою влаштуватись тут на довго. Але ти  то "
+"знаєш, що місця тут вистачить лише на одне плем'я!"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
@@ -409,7 +437,7 @@ msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at War"
-msgstr ""
+msgstr "Острови у війні"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -417,6 +445,8 @@ msgid ""
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
 msgstr ""
+"Століттями ми мірно жили поряд з племенем на іншому острові. Та тепер миру, "
+"здається, кінець - сусіди вирішили розширити свої володіння."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
@@ -439,6 +469,9 @@ msgid ""
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores..."
 msgstr ""
+"Це озеро, розташоване далеко в в стародавніх лісах, здавна славилось своє "
+"красою і спокоєм. Та його спокій тепер порушено, оскільки ворогуючі племена "
+"розташувались на його берегах..."
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
@@ -457,6 +490,15 @@ msgid ""
 "space is also a hard and small place to live. Don’t forget to take care of "
 "your timber supplies, you’ll need them."
 msgstr ""
+"Жорстокі Боги, не дослухались до наших молитв. Навіть гірше, Сонце стало "
+"світити ще жаркіше в тисячу раз, і розтопило льодовики, влаштувавши потоп. "
+"Зараз на самих вершинах гір, на останніх крихтах суши, знайшли прихисток "
+"вцілілі племена. Хоча Боги зжалились і клімат знову став прохолоднішим, вода "
+"продовжує прибувати. До останнього надійного місця, найвищого гірського "
+"хребта, де місця та запасів золота, ледь вистачить на одне плем'я, ведуть "
+"лише дві стежинки, з протилежних напрямів. Та пам'ятай, будь обережним... це "
+"останнє придатне для життя місце, дуже мале і умови там жорстокі. Не забувай "
+"поповняти запаси будівельного лісу, вони тобі дуже згодяться."
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
@@ -503,6 +545,8 @@ msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
 msgstr ""
+"Два основних питання: хто створив цей великий лабіринт і що знаходиться в "
+"його середині?"
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
@@ -515,6 +559,9 @@ msgid ""
 "hard to conquer but easy to lose. So, if you want it, be aware of the other "
 "clans."
 msgstr ""
+"Ви знаходитесь на острові, оточеному могутніми горами, що зберігають красиві "
+"та багаті скарби в середині - Зелене плато, яке складно отримати, та легко "
+"втратити, тому якщо ви націлились на нього, оберігайтесь інших кланів."
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested Teams: blue vs. yellow"
@@ -560,7 +607,7 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
-msgstr ""
+msgstr "Свтло стародавнього вогню"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -580,6 +627,9 @@ msgid ""
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
 msgstr ""
+"Воно тхне болотом, має вигляд як болото, та це ж і є болото. Але ти "
+"народився тут і прожив тут все життя. Якщо не хочеш втратити свою "
+"батьківщину, захисти її!"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
@@ -649,6 +699,8 @@ msgid ""
 "which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
 msgstr ""
+"Наче якийсь загадковий сірий туман, покриває ці три оазиси, які ніхто ще не "
+"зумів знайти. Можливо тобі повезе, але май на увазі, що є й інші бажаючі."
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
@@ -662,10 +714,14 @@ msgid ""
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
 msgstr ""
+"Потепління. Притулок від суворої зими, три племені знайшли в величних горах. "
+"Під час вимушеної ізоляції, вони по волі своїх оракулів готувались до війни. "
+"Єдиний переможець принесе в жертву, на древньому вівтарі, скарби своїх "
+"ворогів, побудує розкішний замок та отримає добру волю та повагу від Богів."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
-msgstr ""
+msgstr "Велике озеро"
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -676,26 +732,35 @@ msgid ""
 "Nowadays only this ring is left from that mighty fire mountain. Do you think "
 "that it is big enough for more than one tribe?"
 msgstr ""
+"Колись цей острів виник з морської глибини. В ті дні виник вогонь, який "
+"виніс з солоної води на світ божий попіл, каміння та ґрунт. Вогонь танувся "
+"вище, та вище, росла створена їм гора, поки одного разувся вогнена гора не "
+"вибухнула. В наш час лише кільце острівців нагадує про минулу могутність "
+"тієї гори. Гадаєте, цих островів вистачить на більш ніж одне плем'я?"
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The Long Way"
-msgstr ""
+msgstr "Довгий шлях"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way but to occupy the land of your enemies."
 msgstr ""
+"Ще одне дивне випробування надіслали боги. Щоб пройти на іншу сторону, нема "
+"іншого шляху як зайняти землі своїх ворогів."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
-msgstr ""
+msgstr "Прохід крізь гори"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
 msgstr ""
+"В цих гористих краях мирно жили два князі. Тепер вони вирішили розширити "
+"свої території, не звертаючи уваги на один одного."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -779,6 +844,7 @@ msgstr "Два кордони"
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer battle map on a small circle-shaped island."
 msgstr ""
+"Карта для многокористувацької гри на невеликомі кільцеподібному острові."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
@@ -802,6 +868,9 @@ msgid ""
 "of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
 "geologists anywhere else."
 msgstr ""
+"Сказано, що даже Місяць та Сонце мають віднайти свій шлях між піками цих "
+"гір. ПІДКАЗКА: Моноліти показують місця залягання руди. Не відправляйте "
+"геологів кудись ще."
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
@@ -814,3 +883,6 @@ msgid ""
 "offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
 msgstr ""
+"здається, зубри жили в цій чарівній долині з початку часів. прийшовши в цю "
+"землю, ти зрозумів, що місця для мирного життя там достатньо. Та як же можна "
+"жити в мирі з такими сусідами?"

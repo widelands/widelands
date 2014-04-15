@@ -7,30 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2014-01-16 20:43+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-16 09:26+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:28+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:28+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 #: ../../campaigns/cconfig:98
 msgid "01 – From Nemesis to Genesis"
-msgstr ""
+msgstr "01 – Fra fiende til en ny start"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
+"Etter å ha gått i land på en mystisk øy nær Atlantis, forsøker de "
+"gjenlevende atlanterne å finne et sted de kan bo."
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians – The Second Empire"
-msgstr ""
+msgstr "Barbarer – Det andre imperiet"
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -55,7 +57,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:34
 msgid "Empire – The Months of Exile"
-msgstr ""
+msgstr "Imperiet  – Månedene i eksil"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
@@ -77,7 +79,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans – The Run for the Fire"
-msgstr ""
+msgstr "Atlanterne – Flammesprinten"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
@@ -95,27 +97,27 @@ msgstr ""
 #: ../../campaigns/cconfig:64
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "01 – Eyes in the Dark"
-msgstr ""
+msgstr "01 – Øyne i mørket"
 
 #: ../../campaigns/cconfig:69
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 – A Place to Call Home"
-msgstr ""
+msgstr "02 – Et hjemsted"
 
 #: ../../campaigns/cconfig:74
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 – This Land is Our Land"
-msgstr ""
+msgstr "03 – Dette landet er vårt land"
 
 #: ../../campaigns/cconfig:81
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "01 – The Strands of Malac’ Mor"
-msgstr ""
+msgstr "01 – Strendene i Malac' Mor"
 
 #: ../../campaigns/cconfig:86
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "02 – An Outpost for Exile"
-msgstr ""
+msgstr "02 – En eksil-utpost"
 
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
@@ -125,7 +127,7 @@ msgstr "Ikke lagt til ennå"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Beklager, dette kartet har ikke blitt lagt til ennå."
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -164,7 +166,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial 1"
-msgstr ""
+msgstr "Innføring 1"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid ""
@@ -177,11 +179,11 @@ msgstr "Atoll"
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "Hvem vil bli den virkelige herskeren over det store atollet?"
 
 #: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs. (red, green)"
-msgstr ""
+msgstr "Anbefalte lag: (blå, gul) mot (rød, grønn)"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
@@ -199,6 +201,8 @@ msgid ""
 "Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
 "green) | (blue, green) vs. (red, yellow)"
 msgstr ""
+"Anbefalte lag: blå mot rød | gul mot grønn | (blå, gul) mot (rød, grønn) | "
+"(blå, grønn) mot (rød, gul)"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -223,6 +227,11 @@ msgid ""
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
 msgstr ""
+"Et par mil utenfor Gerion-kysten ligger en liten, navnløs øy. Inntil nå har "
+"du ikke sett noen grunn til å seile dit, men i går falt en stor ildkule ned "
+"fra himmelen og slo ned i midten av øya. Er det et tegn fra gudene? Du tror "
+"det er, og håper at stammen din vil finne skatten på denne øya, før de andre "
+"stammene følger etter."
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
@@ -238,7 +247,7 @@ msgstr ""
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
-msgstr ""
+msgstr "Horisonten krysses"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
@@ -259,12 +268,15 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Fire stammer konkurrerer med sine nærmeste naboer om å bli den første til å "
+"nå fjellet av gull som lover rikdom som overgår de villeste drømmer. Men kan "
+"de to gjenværende dele ressursene sine på en god måte?"
 
 #: ../../maps/Desert Tournament.wmf/elemental:10
 #: ../../maps/Four Castles.wmf/elemental:10
 #: ../../maps/Swamp Monks.wmf/elemental:10
 msgid "Suggested Teams: (blue, red) vs. (yellow, green)"
-msgstr ""
+msgstr "Anbefalte lag: (blå, rød) mot (gul, grønn)"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -276,6 +288,9 @@ msgid ""
 "wonder that there is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last of the remaining water."
 msgstr ""
+"Det har vært lenge siden regnet har falt. Ikke rart at det ikke er mye vann "
+"igjen i dette inntørkede elveleiet. Alle vet at en krig vil bryte ut om kort "
+"tid. En krig om det lille vannet som er igjen."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -292,6 +307,7 @@ msgid ""
 "Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, "
 "green)"
 msgstr ""
+"Anbefalte lag: (blå, rød) mot (gul, grønn) | (blå, gul) mot (rød, grønn)"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -303,6 +319,9 @@ msgid ""
 "similar, so the map should be fair. There is plenty of gold near the "
 "starting point – Do you see it?"
 msgstr ""
+"Kull er vanskelig å finne – lær å produsere det effektivt. Utgangspunktene "
+"er like, så kartet skal være rettferdig. Det er nok av gull nær "
+"utgangspunktet. Ser du det?"
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
@@ -320,6 +339,8 @@ msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
 msgstr ""
+"Dette er de vakre finske landene med innsjøer, elver, eldgamle skoger og "
+"fjell. Det er opp til deg å finne en vei gjennom disse landene."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -332,6 +353,10 @@ msgid ""
 "if you are alone, but no-one knows what might happen if you met an opposing "
 "tribe?"
 msgstr ""
+"Er det en test fra gudene, eller en ond plan lagt av noen andre, som har "
+"ført til at du og stammen din har våknet opp på denne øyen omgitt av ild og "
+"lava? Hittil virker det som du er alene, men hvem vet hva som kan skje om du "
+"møter en annen stamme?"
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -364,6 +389,7 @@ msgid ""
 "Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, "
 "yellow)"
 msgstr ""
+"Anbefalte lag: (blå, rød) mot (gul, grønn) | (blå, grønn) mot (rød, gul)"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -414,7 +440,7 @@ msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at War"
-msgstr ""
+msgstr "Øyer i krig"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -422,6 +448,9 @@ msgid ""
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
 msgstr ""
+"I århundrer har du levd fredfullt sammen med den andre stammen på naboøyen.  "
+"Men nå ser freden å til å gå mot slutten – naboen din har begynt å  "
+"ekspandere."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
@@ -433,6 +462,9 @@ msgid ""
 "in prosperity, will someday collapse into a devastating war. Has your latest "
 "betrayal been one too many, and will the prophecy come true?"
 msgstr ""
+"En gammel legende forteller at disse sju kongedømmene som har nytt fremgang "
+"i flere mannsaldre en dag vil kollapse i en forferdelig krig. Har det siste "
+"forræderiet dit vært et for mye og vil profetien vise seg å være sann?"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -479,6 +511,9 @@ msgid ""
 "green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, "
 "black, purple) vs. (red, green, orange, white)"
 msgstr ""
+"Anbefalte lag: blå mot rød | gul mot grønn | (blå, gul) mot (rød, grønn) | "
+"(blå, gul, svart) mot (rød, grønn, oransje) | (blå, gul, svar, lilla) mot "
+"(rød, grønn, oransje, hvit)"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -490,6 +525,10 @@ msgid ""
 "where two or more groups try to reach the center island as fast as possible, "
 "to be the first erecting a castle on the top of the central mountain."
 msgstr ""
+"«Øyhopping» er navnet på en spesiell turnering i den atlantiske kulturen. I "
+"denne turneringen forsøker to eller flere grupper å nå den midterste øya så "
+"fort som mulig, for å være den første til å bygge et slott på toppen av "
+"fjellet midt på øya."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
@@ -508,6 +547,8 @@ msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
 msgstr ""
+"De to viktigste spørsmålene er: Hvem har laget denne utrolig store "
+"labyrinten og hva kan man finne i den?"
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
@@ -520,10 +561,13 @@ msgid ""
 "hard to conquer but easy to lose. So, if you want it, be aware of the other "
 "clans."
 msgstr ""
+"Du står på en øy, omkranset av mektige fjell, som skjuler en vidunderlig og "
+"mektig skatt mellom dem – det grønne platået. Det er vanskelig å erobre, men "
+"lett å tape, så hvis du vil ha det bør du passe deg for de andre klanene."
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested Teams: blue vs. yellow"
-msgstr ""
+msgstr "Anbefalte lag: blå mot gul"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -570,7 +614,7 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
-msgstr ""
+msgstr "En urgammel sol av ild"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -590,6 +634,9 @@ msgid ""
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
 msgstr ""
+"Det lukter som sump, det ser ut som sump og det er sump. Men det er her du "
+"ble født og har bodd hele livet ditt. Hvis du ikke vil miste det, må du "
+"forsvare det!"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
@@ -600,6 +647,8 @@ msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
 msgstr ""
+"Det blir sagt at de gamle krigermunkene, som bor i de enda eldre sumpene, er "
+"nøkkelen til å kontrollere hele øya."
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -629,6 +678,8 @@ msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
 msgstr ""
+"Elven har alltid vært grunnlag for mat og kommunikasjon. Denne gangen "
+"kjemper åtte imperier om herredømmet i dette området."
 
 #: ../../maps/The Nile.wmf/elemental:12
 msgid ""
@@ -637,6 +688,9 @@ msgid ""
 "green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
 "yellow, black, purple)"
 msgstr ""
+"Anbefalte lag: blå mot rød | gul mot grønn | (blå, gul) mot (rød, grønn) | "
+"(grønn, oransje, hvit) mot (gul, svart, lilla) | (blå, oransje, grønn) mot "
+"(rød, gul, svart) | (blå, grønn, oransje, hvit) mot (rød, gul, svart, lilla)"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
@@ -648,10 +702,13 @@ msgid ""
 "which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
 msgstr ""
+"Det ligger noe mystisk, som en grå atmosfære, rundt disse tre oasene, som "
+"ingen har klart å finne ut av ennå. Kanskje blir det deg, men vokt deg for "
+"de andre som også leter."
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
-msgstr ""
+msgstr "Det tiner"
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
@@ -664,7 +721,7 @@ msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
-msgstr ""
+msgstr "Den store innsjøen"
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -675,26 +732,36 @@ msgid ""
 "Nowadays only this ring is left from that mighty fire mountain. Do you think "
 "that it is big enough for more than one tribe?"
 msgstr ""
+"Denne øya steg en gang opp fra et av de største dypene i havet. I de dager "
+"steg ild opp fra det salte sjøvannet og brakte aske, steiner og jord opp i "
+"dagslyset. Ilden kom nærmere og nærmere solen, mens fjellet vokste og "
+"vokste. Til en dag, da hele ildfjellet eksploderte. Nå er det kun en ring "
+"igjen av det mektige ildfjellet. Tror du at det kan være stort nok for mer "
+"enn en stamme?"
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The Long Way"
-msgstr ""
+msgstr "Den lange veien"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way but to occupy the land of your enemies."
 msgstr ""
+"Nok en underlig test fra gudene. Den eneste måten å komme til den andre "
+"siden ser ut til å være å ta over landområdene til fiendene dine."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
-msgstr ""
+msgstr "Passet gjennom fjellene"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
 msgstr ""
+"I dette fjellrike området har to prinser slått seg ned. Nå utvider de begge "
+"territoriene sine uten å vite at de ikke er alene!"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -712,7 +779,7 @@ msgstr ""
 
 #: ../../maps/Together we're strong.wmf/elemental:9
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "Sammen er vi sterke"
 
 #: ../../maps/Together we're strong.wmf/elemental:11
 msgid ""
@@ -738,12 +805,18 @@ msgid ""
 "be discovered. But only by becoming a naval power will your tribe be able to "
 "explore enough resources to compete with its opponents."
 msgstr ""
+"Rundtomkring tre større vulkaner ligger seks øyer som lokker nybyggere til å "
+"starte et nytt liv. Ørkener og en raskt voksende skog venter på å bli "
+"oppdaget. Men det er kun ved å bli en marin stormakt stammen din vil kunne "
+"finne nok ressurser til å hevde seg i teten."
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
 "Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue, "
 "black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
 msgstr ""
+"Anbefalte lag: rød mot grønn | (blå, gul) mot (grønn, oransje) | (blå, "
+"svart) mot (grønn, rød) | (blå, svart, gul) mot (grønn, rød, oransje)"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
@@ -777,7 +850,7 @@ msgstr "To fronter"
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr ""
+msgstr "Et kart for krig mellom flere spillere på en liten sirkelformet øy."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
@@ -790,6 +863,11 @@ msgid ""
 "were those that enforced this dramatic change. Continents, oceans and seas "
 "are frozen now, only the volcanic islands seem to be left as habitable land."
 msgstr ""
+"Midt på sommeren ledet en rekke vulkanske utbrudd til at vinteren satte inn. "
+"Plutselig ser solen ut til å være borte og de eneste kildene til lys og "
+"varme er de som forårsaket denne omveltningen. Kontinenter, hav og sjøer har "
+"fryst til is, kun de vulkanske øyene ser ut til å være siste rest av "
+"beboelige landområder."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
@@ -801,6 +879,9 @@ msgid ""
 "of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
 "geologists anywhere else."
 msgstr ""
+"Det blir at sagt at selv solen og månen må finne veien gjennom toppene til "
+"disse fjellene. Hint: Monolitter marker malm-forekomster. Ikke bry med å "
+"sende geologer andre steder."
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
@@ -813,3 +894,7 @@ msgid ""
 "offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
 msgstr ""
+"Det virker som om visenter har bodd i denne magiske dalen siden tidenes "
+"morgen. Når stammen din kom til dette stedet, var du sikker på at det var "
+"nok plass til å leve et fredelig liv her. Men kan stammen din leve i fred "
+"med naboene dine?"
