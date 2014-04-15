@@ -17,12 +17,12 @@ start_lumberjack_01 = {
    title = _ "Build a lumberjack’s hut",
    number = 2,
    body = objective_text(_"Build a lumberjack’s hut",
-[[• ]] .. _"Press SPACE to see where you can build. The red house symbols show you where a small building – like a lumberjack’s hut – may be built." .. paragraphdivider() ..
-[[• ]] .. _"Build a lumberjack’s hut at the red house symbol just right of your headquarters by clicking on it and selecting a lumberjack’s hut." .. paragraphdivider() ..
-[[• ]] .. _"Build a road between your headquarters and the construction site of the lumberjack’s hut." .. paragraphdivider() ..
-[[→ ]] .. _"When you place the lumberjack’s hut, a flag is created for it. You need to connect it to another flag by building a road between them. If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it." .. paragraphdivider() ..
-[[→ ]] .. _"The colors of these symbols indicate how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly)." .. paragraphdivider() ..
-[[→ ]] .. "You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farther away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road."
+      listitem_bullet(_"Press SPACE to see where you can build. The red house symbols show you where a small building – like a lumberjack’s hut – may be built.") ..
+      listitem_bullet(_"Build a lumberjack’s hut at the red house symbol just right of your headquarters by clicking on it and selecting a lumberjack’s hut.") ..
+      listitem_bullet(_"Build a road between your headquarters and the construction site of the lumberjack’s hut.") ..
+      listitem_arrow(_"When you place the lumberjack’s hut, a flag is created for it. You need to connect it to another flag by building a road between them. If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it.") ..
+      listitem_arrow(_"The colors of these symbols indicate how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly).") ..
+      listitem_arrow(_"You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farther away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road.")
    ),
 }
 
@@ -31,8 +31,8 @@ start_lumberjack_01_01 = {
    title = _ "Build a lumberjack’s hut",
    number = 1,
    body = objective_text(_"Build a lumberjack’s hut",
-[[• ]] .. _"Press SPACE to see where you can build. The red house symbols show you where a small building – like a lumberjack’s hut – may be built." .. paragraphdivider() ..
-[[• ]] .. _"Build a lumberjack’s hut at the red house symbol just right of your headquarters by clicking on it and selecting a lumberjack’s hut."
+      listitem_bullet(_"Press SPACE to see where you can build. The red house symbols show you where a small building – like a lumberjack’s hut – may be built.") ..
+      listitem_bullet(_"Build a lumberjack’s hut at the red house symbol just right of your headquarters by clicking on it and selecting a lumberjack’s hut.")
    ),
 }
 
@@ -41,10 +41,10 @@ start_lumberjack_01_02 = {
    title = _ "Build a road to the lumberjack’s hut",
    number = 1,
    body = objective_text(_"Road to the lumberjack’ hut",
-[[• ]] .. _"Build a road between your headquarters and the construction site of the lumberjack’s hut." .. paragraphdivider() ..
-[[→ ]] .. _"When you place the lumberjack’s hut, a flag is created for it. You need to connect it to another flag by building a road between them. If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it." .. paragraphdivider() ..
-[[→ ]] .. _"The colors of these symbols indicate how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly)." .. paragraphdivider() ..
-[[→ ]] .. _"You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farther away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road."
+      listitem_bullet(_"Build a road between your headquarters and the construction site of the lumberjack’s hut.") ..
+      listitem_arrow(_"When you place the lumberjack’s hut, a flag is created for it. You need to connect it to another flag by building a road between them. If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it.") ..
+      listitem_arrow(_"The colors of these symbols indicate how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly).") ..
+      listitem_arrow(_"You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farther away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road.")
    ),
 }
 
@@ -53,9 +53,9 @@ start_lumberjack_02 = {
    title = _ "Build a second lumberjack’s hut",
    number = 2,
    body = objective_text(_"Build a second lumberjack’s hut",
-[[• ]] .. _"Place a flag in the middle of the road. There is a flag symbol in the middle of the road you just built. You create a flag there by clicking on the symbol and then choosing the flag button in the menu that opens up. This will divide the road the wood is transported into two parts with one carrier each." .. paragraphdivider() ..
-[[• ]] .. _"Place a lumberjack’s hut just south of the flag you just placed on the road. Connect the flag you just raised with the flag of the new lumberjack’s hut construction site afterwards. Note that instead of building a road step by step, you may also click directly at its destination to build the entire road at once." .. paragraphdivider() ..
-[[→ ]] .. _"When many wares are being transported between two points, additional flags in between make them arrive at their destination faster, thus improving your infrastructure."
+      listitem_bullet(_"Place a flag in the middle of the road. There is a flag symbol in the middle of the road you just built. You create a flag there by clicking on the symbol and then choosing the flag button in the menu that opens up. This will divide the road the wood is transported into two parts with one carrier each.") ..
+      listitem_bullet(_"Place a lumberjack’s hut just south of the flag you just placed on the road. Connect the flag you just raised with the flag of the new lumberjack’s hut construction site afterwards. Note that instead of building a road step by step, you may also click directly at its destination to build the entire road at once.") ..
+      listitem_arrow(_"When many wares are being transported between two points, additional flags in between make them arrive at their destination faster, thus improving your infrastructure.")
    ),
 }
 
@@ -64,8 +64,8 @@ start_lumberjack_02_01 = {
    title = _ "Build a second lumberjack’s hut",
    number = 1,
    body = objective_text(_"Build a second lumberjack’s hut",
-[[• ]] .. _"Place a flag in the middle of the road. There is a flag symbol in the middle of the road you just built. You create a flag there by clicking on the symbol and then choosing the flag button in the menu that opens up. This will divide the road the wood is transported into two parts with one carrier each." .. paragraphdivider() ..
-[[→ ]] .. _"When many wares are being transported between two points, additional flags in between make them arrive at their destination faster, thus improving your infrastructure."
+      listitem_bullet(_"Place a flag in the middle of the road. There is a flag symbol in the middle of the road you just built. You create a flag there by clicking on the symbol and then choosing the flag button in the menu that opens up. This will divide the road the wood is transported into two parts with one carrier each.") ..
+      listitem_arrow(_"When many wares are being transported between two points, additional flags in between make them arrive at their destination faster, thus improving your infrastructure.")
    ),
 }
 
@@ -74,7 +74,7 @@ start_lumberjack_02_02 = {
    title = _ "Build a second lumberjack’s hut",
    number = 1,
    body = objective_text(_"Build a second lumberjack’s hut",
-[[• ]] .. _"Place a lumberjack’s hut just south of the flag you just placed on the road. Connect the flag you just raised with the flag of the new lumberjack’s hut construction site afterwards. Note that instead of building a road step by step, you may also click directly at its destination to build the entire road at once."
+      listitem_bullet(_"Place a lumberjack’s hut just south of the flag you just placed on the road. Connect the flag you just raised with the flag of the new lumberjack’s hut construction site afterwards. Note that instead of building a road step by step, you may also click directly at its destination to build the entire road at once.")
    ),
 }
 
@@ -83,7 +83,7 @@ start_ranger = {
    title = _ "Build a ranger’s hut",
    number = 1,
    body = objective_text(_"Build a ranger’s hut",
-[[• ]] .. _"Build a ranger’s hut to the east of the first lumberjack’s hut."
+      listitem_bullet(_"Build a ranger’s hut to the east of the first lumberjack’s hut.")
    ),
 }
 
@@ -92,7 +92,7 @@ start_quarries = {
    title = _ "Build two quarries",
    number = 1,
    body = objective_text(_"Build two quarries",
-[[• ]] .. _"Build two quarries south-west of your headquarters."
+      listitem_bullet(_"Build two quarries south-west of your headquarters.")
    ),
 }
 
