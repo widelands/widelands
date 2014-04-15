@@ -36,9 +36,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..
-	rt(h2(_"Building")) ..
-	text_line(_"Upgraded from:", "n/a") ..
-	text_line(_"Upgradeable to:",_"Deep Coal Mine","tribes/barbarians/deep_coalmine/menu.png") ..
+
 	--Workers Section
 	building_help_crew_string("barbarians", "coalmine", "miner", "pick") ..
 

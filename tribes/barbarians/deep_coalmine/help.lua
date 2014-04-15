@@ -36,12 +36,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_dependencies_building("barbarians",{"coal","lime_kiln"}, "lime_kiln") ..
 
 	--Building Section
-	building_help_building_section("barbarians", building_description) ..
-
-	-- TODO read from C++
-	--text_line(_"Upgraded from:",_"Coal mine","tribes/barbarians/coalmine/menu.png") ..
-	-- add this line at end of building section
-	text_line(_"Upgradeable to:",_"Deeper Coal Mine","tribes/barbarians/deeper_coalmine/menu.png") ..
+	building_help_building_section("barbarians", building_description, "coalmine") ..
 
 	-- TODO this is empty
 	--rt(h3(_"Cost cumulative:")) ..

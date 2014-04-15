@@ -285,15 +285,16 @@ end
 --
 -- TODO: Causes panic in image_line if resource does not exist
 --
--- .. function:: building_help_building_section(tribename, building_description)
+-- .. function:: building_help_building_section(tribename, building_description[, upgraded_from])
 --
 --    Formats the "Building" section in the building help: Upgrading info, costs and spaqce required
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
+--    :arg upgraded_from: The building name that this building is usually upgraded from. Leave blank if this is a basic building.
 --    :returns: an rt string describing the building section
 --
-function building_help_building_section(tribename, building_description)
+function building_help_building_section(tribename, building_description, upgraded_from)
 
 	local result = rt(h2(_"Building"))
 
@@ -314,10 +315,14 @@ function building_help_building_section(tribename, building_description)
 	end
 
 	if (building_description.enhanced) then
-		-- todo get the building this was upgraded from
-		result = result .. text_line(_"Upgraded from:", "TODO!!!")
-
-		result = result .. rt(h3(_"Upgrade Cost:"))
+		local former_building = nil
+		if(upgraded_from) then
+		former_building = wl.Game():get_building_description(tribename, upgraded_from)
+			-- todo get the building this was upgraded from
+			result = result .. text_line(_"Upgraded from:", former_building.descname)
+		else
+			result = result .. text_line(_"Upgraded from:", _"Unknown")
+		end
 
 		for ware, count in pairs(building_description.enhancement_cost) do
 		local ware_descr = wl.Game():get_ware_description(tribename,ware)
@@ -325,27 +330,34 @@ function building_help_building_section(tribename, building_description)
 				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
 					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 		end
-		-- TODO this does not work - needs the build cost of the building this was enhanced from
+		-- TODO What if an enhanced ware is not one of the original wares?
 		result = result .. rt(h3(_"Cost Cumulative:"))
-
-		for ware, count in pairs(building_description.build_cost) do
-			local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			local amount = building_description.build_cost[ware] + building_description.enhancement_cost[ware]
-			result = result ..
-				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+		if(former_building) then
+			for ware, count in pairs(former_building.build_cost) do
+				local ware_descr = wl.Game():get_ware_description(tribename,ware)
+				local amount = former_building.build_cost[ware] + building_description.enhancement_cost[ware]
+				result = result ..
+					image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+						amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+			end
+		else
+			result = result .. rt(p(_"Unknown"))
 		end
 
 		result = result .. rt(h3(_"Dismantle yields:"))
-		-- TODO this needs to be cumulative
-		for ware, count in pairs(building_description.returned_wares_enhanced) do
-			local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			result = result ..
-				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
+		-- TODO What if an enhanced ware is not one of the original wares?
+		if(former_building) then
+			for ware, count in pairs(former_building.returned_wares) do
+				local ware_descr = wl.Game():get_ware_description(tribename,ware)
+				local amount = former_building.returned_wares[ware]
+					+ building_description.returned_wares_enhanced[ware]
+				result = result ..
+					image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+						amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+			end
+		else
+			result = result .. rt(p(_"Unknown"))
 		end
-
-
 	else
 		result = result .. rt(h3(_"Build Cost:"))
 
@@ -366,8 +378,18 @@ function building_help_building_section(tribename, building_description)
 		end
 	end
 
-	-- TODO get this from C++
-	text_line(_"Upgradeable to:","TODO")
+	if(building_description.enhancements[1]) then
+		for i, building in ipairs(building_description.enhancements) do
+			result = result .. text_line(_"Upgradeable to:", building_description.enhancements[i].descname)
+
+			for ware, count in pairs(building_description.enhancements[i].enhancement_cost) do
+			local ware_descr = wl.Game():get_ware_description(tribename,ware)
+				result = result ..
+					image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+						count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
+			end
+		end
+	end
 
 	return result
 end
