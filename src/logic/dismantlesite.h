@@ -48,6 +48,8 @@ struct DismantleSite_Descr : public Building_Descr {
 		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const override;
+	// class type needed for Lua stuff
+	std::string get_type() const {return "dismantlesite";}
 };
 
 class DismantleSite : public Partially_Finished_Building {

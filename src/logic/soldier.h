@@ -80,9 +80,10 @@ struct Soldier_Descr : public Worker_Descr {
 		assert(level <= m_max_evade_level);   return m_evade_pics  [level];
 	}
 
-
-
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
+
+	// class type needed for Lua stuff
+	std::string get_type() const {return "soldier";}
 
 protected:
 	virtual Bob & create_object() const override;

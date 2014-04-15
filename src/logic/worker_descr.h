@@ -114,6 +114,9 @@ public:
 	typedef std::map<std::string, WorkerProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
+	// class type needed for Lua stuff
+	std::string get_type() const {return "worker";}
+
 protected:
 
 	std::string       m_helptext;   ///< Short (tooltip-like) help text

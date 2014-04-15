@@ -46,6 +46,9 @@ struct Critter_Bob_Descr : public BobDescr {
 
 	Critter_BobProgram const * get_program(const std::string &) const;
 
+	// class type needed for Lua stuff
+	std::string get_type() const {return "critterbob";}
+
 private:
 	DirAnimations m_walk_anims;
 	bool          m_swimming;

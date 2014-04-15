@@ -107,6 +107,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
+	// class type needed for Lua stuff
+	std::string get_type() const {return "immovable";}
+
 protected:
 	int32_t     m_size;
 	Programs    m_programs;

@@ -47,6 +47,10 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_min_level(tAttribute) const;
 	int32_t get_max_level(tAttribute) const;
 	int32_t get_max_stall() const;
+
+	// class type needed for Lua stuff
+	std::string get_type() const {return "trainingsite";}
+
 private:
 	//  FIXME These variables should be per soldier type. They should be in a
 	//  FIXME struct and there should be a vector, indexed by Soldier_Index,

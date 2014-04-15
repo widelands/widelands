@@ -1,14 +1,3 @@
--- TODO(GunChleoc) Code bunker - when finished, hopefully everything will be generated in this file,
--- depending on isproductionsite/ismilitarysite etc.
---	local building_descr = wl.Game():get_building_description(tribename, buildingname)
---   if(building_descr.isproductionsite)
--- then
--- do stuff
--- end
-
-
-
-
 -- RST
 -- format_help.lua
 -- ---------------
@@ -397,8 +386,9 @@ end
 function building_help_crew_string(tribename, buildingname, workername, toolname)
 	local building_descr = wl.Game():get_building_description(tribename, buildingname)
 	local result = ""
-	if(building_descr.isproductionsite) then
-		building_descr = wl.Game():get_productionsite_description(tribename, buildingname)
+
+	if(building_descr.type == "productionsite") then
+		--building_descr = wl.Game():get_productionsite_description(tribename, buildingname)
 
 		result = result .. rt(h2(_"Workers")) .. rt(h3(_"Crew required:"))
 		-- TODO why is nr_working_positions always = 1?

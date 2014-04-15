@@ -50,6 +50,9 @@ struct Ship_Descr : BobDescr {
 
 	virtual Bob & create_object() const override;
 
+	// class type needed for Lua stuff
+	std::string get_type() const {return "ship";}
+
 private:
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;

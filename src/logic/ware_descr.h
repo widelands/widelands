@@ -84,6 +84,9 @@ struct WareDescr : public Map_Object_Descr {
 	/// returns the preciousness of the ware. It is used by the computer player
 	uint8_t preciousness() const {return m_preciousness;}
 
+	// class type needed for Lua stuff
+	std::string get_type() const {return "ware";}
+
 private:
 	const Tribe_Descr & m_tribe;
 	std::string m_helptext;   ///< Long descriptive text

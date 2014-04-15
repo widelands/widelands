@@ -168,6 +168,7 @@ public:
 	int get_returned_wares(lua_State *);
 	int get_returned_wares_enhanced(lua_State *);
 	int get_size(lua_State *);
+	int get_type(lua_State *);
 	int get_vision_range(lua_State *);
 
 	/*
@@ -203,7 +204,7 @@ public:
 	 * Properties
 	 */
 	int get_nr_working_positions(lua_State *);
-	int get_isproductionsite(lua_State *);
+	int get_type(lua_State *);
 
 	/*
 	 * Lua methods

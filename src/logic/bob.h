@@ -76,6 +76,9 @@ public:
 	}
 	uint32_t vision_range() const;
 
+	// class type needed for Lua stuff
+	std::string get_type() const {return "bob";}
+
 protected:
 	virtual Bob& create_object() const = 0;
 

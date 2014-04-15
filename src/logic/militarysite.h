@@ -51,6 +51,10 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	std::string m_attack_str;
 	std::string m_defeated_enemy_str;
 	std::string m_defeated_you_str;
+
+	// class type needed for Lua stuff
+	std::string get_type() const {return "militarysite";}
+
 private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;

@@ -131,6 +131,11 @@ struct Building_Descr : public Map_Object_Descr {
 	virtual int32_t suitability(const Map &, FCoords) const;
 	const BuildingHints & hints() const {return m_hints;}
 
+	// class type needed for Lua stuff
+	std::string get_type() const {
+		return "building";
+	}
+
 protected:
 	virtual Building & create_object() const = 0;
 	Building & create_constructionsite() const;

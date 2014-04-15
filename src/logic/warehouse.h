@@ -59,6 +59,9 @@ struct Warehouse_Descr : public Building_Descr {
 	uint32_t get_heal_per_second        () const {
 		return m_heal_per_second;
 	}
+
+	// class type needed for Lua stuff
+	std::string get_type() const {return "warehouse";}
 private:
 	int32_t m_conquers;
 	uint32_t m_heal_per_second;

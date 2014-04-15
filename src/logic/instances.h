@@ -82,6 +82,9 @@ struct Map_Object_Descr : boost::noncopyable {
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
 
+	// class type needed for Lua stuff
+	std::string get_type() const {return "mapobject";}
+
 protected:
 	void add_attribute(uint32_t attr);
 

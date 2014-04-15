@@ -85,6 +85,10 @@ struct ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
+	// class type needed for Lua stuff
+	std::string get_type() const {return "productionsite";}
+
+
 private:
 	BillOfMaterials m_working_positions;
 	BillOfMaterials m_inputs;

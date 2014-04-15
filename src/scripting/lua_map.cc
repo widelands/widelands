@@ -1076,7 +1076,6 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	// also https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.Building
 	PROP_RO(L_BuildingDescription, ismine),
 	PROP_RO(L_BuildingDescription, isport),
-	PROP_RO(L_BuildingDescription, isproductionsite),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
 
@@ -1085,6 +1084,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
 	PROP_RO(L_BuildingDescription, size),
+	PROP_RO(L_BuildingDescription, type),
 	PROP_RO(L_BuildingDescription, vision_range),
 	{0, 0, 0},
 };
@@ -1207,16 +1207,13 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 
 
 /* RST
-	.. attribute:: isproductionsite
+	.. attribute:: type
 
-			(RO) true if the building is a productionsite.
+			(RO) the type of the building, e.g. productionsite.
 */
-int L_BuildingDescription::get_isproductionsite(lua_State * L) {
-// TODO(Sirver): I get nil here for pruductionsites - I probably need a different method to find out if a building is a productionsite.
-	// TODO(GunChleoc): instead add a 'type' method that returns "productionsite". The user can then do
-	// get_type() == "productionsite" which might be more useful
-	lua_pushboolean(L, false);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+int L_BuildingDescription::get_type(lua_State * L) {
+
+	lua_pushstring(L, get()->get_type());
 	return 1;
 }
 
@@ -1281,7 +1278,7 @@ const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Metho
 };
 const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Properties[] = {
 	PROP_RO(L_ProductionSiteDescription, nr_working_positions),
-	PROP_RO(L_ProductionSiteDescription, isproductionsite),
+	PROP_RO(L_ProductionSiteDescription, type),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1308,17 +1305,17 @@ int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: isproductionsite
+	.. attribute:: type
 
-		TODO(GunChleoc) description
-		(RO) description
+			(RO) the type of the building, e.g. productionsite.
 */
-int L_ProductionSiteDescription::get_isproductionsite(lua_State * L) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	lua_pushboolean(L, true);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+int L_ProductionSiteDescription::get_type(lua_State * L) {
+
+	lua_pushstring(L, get()->get_type());
 	return 1;
 }
+
+
 
 /* RST
 WareDescription
