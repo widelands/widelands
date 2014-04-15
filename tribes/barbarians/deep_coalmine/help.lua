@@ -39,9 +39,9 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_building_section("barbarians", building_description, "coalmine") ..
 
 	--Workers Section
-	-- TODO this duplicates the tool etc. - get worker list from C++ and handle in format_help
-	building_help_crew_string("barbarians", "coalmine", "chief-miner", "pick") ..
-	building_help_crew_string("barbarians", "coalmine", "miner", "pick") ..
+	-- TODO get worker list from C++ and handle in format_help
+	-- TODO get tool from C++
+	building_help_crew_string("barbarians", building_description, {"chief-miner", "miner"}, "pick") ..
 
 	--Production Section
 	rt(h2(_"Production")) ..

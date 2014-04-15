@@ -397,43 +397,49 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribename, workername, amount)
+-- .. function building_help_crew_string(tribename, building_description, workernames, toolname)
 --
 --    Displays a worker with an image
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg workername: e.g. "lumberjack".
---    :returns: image_line for the worker
+--    :arg building_description: the building_description for this help file.
+--    :arg workernames: an array with the most basic worker in the last position, e.g. {"chief-miner", "miner"}.
+--    :arg toolname: the name of the tool the workers use, e.g. "pick"
+--    :returns: Workers/Crew section of the help file
 --
-function building_help_crew_string(tribename, buildingname, workername, toolname)
-	local building_descr = wl.Game():get_building_description(tribename, buildingname)
+function building_help_crew_string(tribename, building_description, workernames, toolname)
+	-- Need to get the building description again to make sure we have type "productionsite"
+	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
 
-	if(building_descr.type == "productionsite") then
-
+	if(building_description.type == "productionsite") then
 
 		result = result .. rt(h2(_"Workers")) .. rt(h3(_"Crew required:"))
-		-- TODO why is nr_working_positions always = 1?
-		result = result .. rt(p("TODO: need to parse " .. building_descr.nr_working_positions .. " working positions"))
 
-		for i, building in ipairs(building_descr.working_positions) do
-			result = result .. text_line(_"Found worker!", building_descr.working_positions[i].descname)
+		-- TODO this is empty
+		--for i, building in ipairs(building_description.working_positions) do
+		--	result = result .. text_line(_"Found worker!", building_description.working_positions[i].descname)
+		--end
+
+		local worker_descr = nil
+		local becomes_descr = nil
+		local number_of_workers = 0
+
+		for i, worker in ipairs(workernames) do
+			worker_descr = wl.Game():get_worker_description(tribename, worker)
+			becomes_descr = worker_descr.becomes
+			number_of_workers = number_of_workers + 1
+
+			if(becomes_descr) then
+				result = result .. image_line("tribes/" .. tribename .. "/" .. worker  .. "/menu.png", 1,
+					p(_"%s or better":bformat(worker_descr.descname)))
+			else
+				result = result .. image_line("tribes/" .. tribename .. "/" .. worker  .. "/menu.png", 1,
+					p(worker_descr.descname))
+			end
 		end
 
-
-		local worker_descr = wl.Game():get_worker_description(tribename, workername)
-		local becomes_descr = worker_descr.becomes
-
-		if(becomes_descr) then
-		-- TODO some buildings need more than 1 worker
-			result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1,
-				p(_"%s or better":bformat(worker_descr.descname)))
-		else
-			result = result .. image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1,
-				p(worker_descr.descname))
-		end
-
-		result = result .. building_help_tool_string(tribename, toolname, 1)
+		result = result .. building_help_tool_string(tribename, toolname, number_of_workers)
 
 		if(becomes_descr) then
 
