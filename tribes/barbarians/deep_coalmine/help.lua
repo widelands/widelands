@@ -10,7 +10,7 @@ return {
 		--rt(h1(_"The Barbarian Deep Coal Mine")) ..
 	--Lore Section
 	--text identical to coalmine
-	building_help_lore_string("barbarians", "deep_coalmine",_[[Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>
+	building_help_lore_string("barbarians", building_description, _[[Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>
 Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]]) ..
 
 	--General Section

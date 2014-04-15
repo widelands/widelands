@@ -147,31 +147,39 @@ end
 --    :returns: rt of the formatted text
 --
 function building_help_general_string(tribename, building_description, resourcename, info, purpose, working_radius)
-	if (info) then local info = rt(p(info)) else local info ="" end
-	return rt(h2(_"General")) ..
-		info ..
-		rt(h3(_"Purpose:")) ..
-		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose)) ..
-		text_line(_"Working radius:", working_radius) ..
-		text_line(_"Conquer range:", building_description.conquers) ..
-		text_line(_"Vision range:", building_description.vision_range)
+	-- Need to get the building description again to make sure we have the description type, e.g. "productionsite"
+	local building_description = wl.Game():get_building_description(tribename, building_description.name)
+	local result = rt(h2(_"General"))
+
+	if (info) then local result = result .. rt(p(info)) end
+	result = result .. rt(h3(_"Purpose:")) ..
+		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
+
+	if(building_description.type == "productionsite") then
+		result = result .. text_line(_"Working radius:", working_radius)
+	elseif(building_description.type == "militarysite") then
+		result = result .. text_line(_"Conquer range:", building_description.conquers)
+	end
+	result = result .. text_line(_"Vision range:", building_description.vision_range)
+
+	return result
 end
 
 
 -- RST
--- .. function building_help_lore_string(tribename, buildingname, flavourtext[, author])
+-- .. function building_help_lore_string(tribename, building_description, flavourtext[, author])
 --
 --    Displays the building's main image with a flavour text.
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg buildingname: e.g. "lumberjacks_hut".
+--    :arg building_description: The building description we get from C++
 --    :arg flavourtext: e.g. "Catches fish in the sea".
 --    :arg author: e.g. "Krumta, carpenter of Chat'Karuth". This paramater is optional.
 --    :returns: rt of the image with the text
 --
-function building_help_lore_string(tribename, buildingname, flavourtext, author)
+function building_help_lore_string(tribename, building_description, flavourtext, author)
 	local result = rt(h2(_"Lore")) ..
-		rt("image=tribes/" .. tribename .. "/" .. buildingname  .. "/" .. buildingname .. "_i_00.png", p(flavourtext))
+		rt("image=tribes/" .. tribename .. "/" .. building_description.name  .. "/" .. building_description.name .. "_i_00.png", p(flavourtext))
 		if author then
 			result = result .. rt("text-align=right",p("font-size=10 font-style=italic", author))
 		end
@@ -324,39 +332,6 @@ end
 function building_help_dependencies_resi(tribename, items, ware)
 	local ware_descr = wl.Game():get_ware_description(tribename, ware)
 	return dependencies_resi(tribename, items, ware_descr.descname)
-end
-
-
-
--- RST
--- TODO this function is obsolete
--- .. function building_help_size_string(tribename, buildingname)
---
---    Creates a text_line that describes the building's size in a help text.
---
---    :arg tribename: e.g. "barbarians".
---    :arg buildingname: e.g. "lumberjacks_hut".
---    :returns: "Space required" header followed by size description text and image.
---
-function building_help_size_string(tribename, buildingname)
-
-  local building_descr = wl.Game():get_building_description(tribename,buildingname)
-
-  if(building_descr.ismine) then
-	return text_line(_"Space required:",_"Mine plot","pics/mine.png")
-  elseif(building_descr.isport) then
-	return text_line(_"Space required:",_"Port plot","pics/port.png")
-  else
-	if (building_descr.size == 1) then
- 		return text_line(_"Space required:",_"Small plot","pics/small.png")
-	elseif (building_descr.size == 2) then
-  		return text_line(_"Space required:",_"Medium plot","pics/medium.png")
-	elseif (building_descr.size == 3) then
-		return text_line(_"Space required:",_"Big plot","pics/big.png")
-	else
-		return p(_"Space required:" .. _"Unknown")
-	end
-  end
 end
 
 

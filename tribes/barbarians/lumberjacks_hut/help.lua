@@ -13,7 +13,7 @@ return {
 	--Lore Section
 		return
 
-	building_help_lore_string("barbarians", "lumberjacks_hut",_[["Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack."]],_[[Krumta, carpenter of Chat'Karuth]]) ..
+	building_help_lore_string("barbarians", building_description, _[["Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack."]],_[[Krumta, carpenter of Chat'Karuth]]) ..
 	--General Section
 	building_help_general_string("barbarians", building_description, "log", "",
 		_"Fell trees in the surrounding area and process them into logs.", "10") ..
