@@ -1062,9 +1062,13 @@ const MethodType<L_BuildingDescription> L_BuildingDescription::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = {
+	PROP_RO(L_BuildingDescription, build_cost),
 	PROP_RO(L_BuildingDescription, buildable),
+	PROP_RO(L_BuildingDescription, conquers),
 	PROP_RO(L_BuildingDescription, destructible),
 	PROP_RO(L_BuildingDescription, enhanced),
+	PROP_RO(L_BuildingDescription, enhancement_cost),
+	PROP_RO(L_BuildingDescription, enhancements),
 	// TODO(GunChleoc): I rather have a type similar to Building.building_type.
 	// In fact, Building.building_type can be killed after thatn and be replaced
 	// through building.description.building_type. I am not sure if I like
@@ -1073,20 +1077,15 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, ismine),
 	PROP_RO(L_BuildingDescription, isport),
 	PROP_RO(L_BuildingDescription, isproductionsite),
+	PROP_RO(L_BuildingDescription, returned_wares),
+	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
 
 	// size should be similar to
 	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
 	PROP_RO(L_BuildingDescription, size),
-	PROP_RO(L_BuildingDescription, conquers),
 	PROP_RO(L_BuildingDescription, vision_range),
-
-	PROP_RO(L_BuildingDescription, build_cost),
-	PROP_RO(L_BuildingDescription, returned_wares),
-	PROP_RO(L_BuildingDescription, enhancement_cost),
-	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
-	PROP_RO(L_BuildingDescription, enhancements),
 	{0, 0, 0},
 };
 
@@ -1103,6 +1102,17 @@ void L_BuildingDescription::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 
+
+/* RST
+	.. attribute:: build_cost
+
+			(RO) a list of ware build cost for the building.
+*/
+int L_BuildingDescription::get_build_cost(lua_State * L) {
+	return wares_map_to_lua(L, get()->buildcost(), get()->tribe());
+}
+
+
 /* RST
 	.. attribute:: buildable
 
@@ -1112,6 +1122,19 @@ int L_BuildingDescription::get_buildable(lua_State * L) {
 	lua_pushboolean(L, get()->is_buildable());
 	return 1;
 }
+
+
+/* RST
+	.. attribute:: conquers
+
+			(RO) the vision range of the building as an int.
+*/
+int L_BuildingDescription::get_conquers(lua_State * L) {
+	lua_pushinteger(L, get()->get_conquers());
+	return 1;
+}
+
+
 
 /* RST
 	.. attribute:: destructible
@@ -1132,6 +1155,35 @@ int L_BuildingDescription::get_enhanced(lua_State * L) {
 	lua_pushboolean(L, get()->is_enhanced());
 	return 1;
 }
+
+
+/* RST
+	.. attribute:: enhancement_cost
+
+			(RO) a list of ware cost for enhancing to this building type.
+*/
+int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
+	return wares_map_to_lua(L, get()->enhancement_cost(), get()->tribe());
+}
+
+/* RST
+	.. attribute:: enhancements
+
+		(RO) a list of building descriptions that this building can enhance to.
+*/
+int L_BuildingDescription::get_enhancements(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+
+	lua_newtable(L);
+	int index = 1;
+	for (auto building_index : get()->enhancements()) {
+		lua_pushint32(L, index++);
+		upcasted_building_descr_to_lua(L, tribe.get_building_descr(building_index));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
 
 /* RST
 	.. attribute:: ismine
@@ -1168,6 +1220,25 @@ int L_BuildingDescription::get_isproductionsite(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: returned_wares
+
+			(RO) a list of wares returned upon dismantling.
+*/
+int L_BuildingDescription::get_returned_wares(lua_State * L) {
+	return wares_map_to_lua(L, get()->returned_wares(), get()->tribe());
+}
+
+
+/* RST
+	.. attribute:: returned_wares_enhanced
+
+			(RO) a list of wares returned upon dismantling an enhanced building.
+*/
+int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
+	return wares_map_to_lua(L, get()->returned_wares_enhanced(), get()->tribe());
+}
+
 
 /* RST
 	.. attribute:: size
@@ -1184,16 +1255,6 @@ int L_BuildingDescription::get_size(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: conquers
-
-			(RO) the vision range of the building as an int.
-*/
-int L_BuildingDescription::get_conquers(lua_State * L) {
-	lua_pushinteger(L, get()->get_conquers());
-	return 1;
-}
-
 
 /* RST
 	.. attribute:: vision range
@@ -1202,60 +1263,6 @@ int L_BuildingDescription::get_conquers(lua_State * L) {
 */
 int L_BuildingDescription::get_vision_range(lua_State * L) {
 	lua_pushinteger(L, get()->vision_range());
-	return 1;
-}
-
-/* RST
-	.. attribute:: build_cost
-
-			(RO) a list of ware build cost for the building.
-*/
-int L_BuildingDescription::get_build_cost(lua_State * L) {
-	return wares_map_to_lua(L, get()->buildcost(), get()->tribe());
-}
-
-/* RST
-	.. attribute:: returned_wares
-
-			(RO) a list of wares returned upon dismantling.
-*/
-int L_BuildingDescription::get_returned_wares(lua_State * L) {
-	return wares_map_to_lua(L, get()->returned_wares(), get()->tribe());
-}
-
-/* RST
-	.. attribute:: enhancement_cost
-
-			(RO) a list of ware cost for enhancing to this building type.
-*/
-int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
-	return wares_map_to_lua(L, get()->enhancement_cost(), get()->tribe());
-}
-
-/* RST
-	.. attribute:: returned_wares_enhanced
-
-			(RO) a list of wares returned upon dismantling an enhanced building.
-*/
-int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
-	return wares_map_to_lua(L, get()->returned_wares_enhanced(), get()->tribe());
-}
-
-/* RST
-	.. attribute:: enhancements
-
-		(RO) a list of building descriptions that this building can enhance to.
-*/
-int L_BuildingDescription::get_enhancements(lua_State * L) {
-	const Tribe_Descr& tribe = get()->tribe();
-
-	lua_newtable(L);
-	int index = 1;
-	for (auto building_index : get()->enhancements()) {
-		lua_pushint32(L, index++);
-		upcasted_building_descr_to_lua(L, tribe.get_building_descr(building_index));
-		lua_rawset(L, -3);
-	}
 	return 1;
 }
 
