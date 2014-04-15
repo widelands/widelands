@@ -19,6 +19,7 @@
 
 #include "wui/gamechatpanel.h"
 
+#include <cstdint>
 
 /**
  * Create a game chat panel
@@ -32,7 +33,7 @@ GameChatPanel::GameChatPanel
 	m_chat   (chat),
 	chatbox  (this, 0, 0, w, h - 25, "", UI::Align_Left, 1),
 	editbox  (this, 0, h - 20, w,  20),
-	chat_message_counter(-1) // uint, setting to maximum value
+	chat_message_counter(UINT32_MAX)
 {
 	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 	editbox.ok.connect(boost::bind(&GameChatPanel::keyEnter, this));
