@@ -38,17 +38,6 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	--Building Section
 	building_help_building_section("barbarians", building_description, "coalmine") ..
 
-	-- TODO this is empty
-	--rt(h3(_"Cost cumulative:")) ..
-	--help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 4), 4) ..
-	--help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 8), 8) ..
-	--rt(h3(_"Dismantle yields:")) ..
-	-- TODO: this needs to be cumulative
-	--help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-	--help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
-	-- TODO - already in format_help, but value is missing
-	--text_line(_"Upgradeable to:",_"Deeper Coal Mine","tribes/barbarians/deeper_coalmine/menu.png") ..
-
 	--Workers Section
 	-- TODO this duplicates the tool etc. - get worker list from C++ and handle in format_help
 	building_help_crew_string("barbarians", "coalmine", "chief-miner", "pick") ..

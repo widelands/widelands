@@ -1279,6 +1279,7 @@ const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Metho
 const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Properties[] = {
 	PROP_RO(L_ProductionSiteDescription, nr_working_positions),
 	PROP_RO(L_ProductionSiteDescription, type),
+	PROP_RO(L_ProductionSiteDescription, working_positions),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1296,13 +1297,15 @@ void L_ProductionSiteDescription::__unpersist(lua_State * /* L */) {
 
 /* RST
 	.. attribute:: nr_working_positions
-
+TODO always returns 1
 		(RO) The :int:`number` of worker positions in the production site
 */
 int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
-	lua_pushinteger(L, get()->nr_working_positions());
+	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+	lua_pushinteger(L, descr->nr_working_positions());
 	return 1;
 }
+
 
 /* RST
 	.. attribute:: type
@@ -1310,11 +1313,28 @@ int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
 			(RO) the type of the building, e.g. productionsite.
 */
 int L_ProductionSiteDescription::get_type(lua_State * L) {
-
 	lua_pushstring(L, get()->get_type());
 	return 1;
 }
 
+
+/* RST
+	.. attribute:: working_positions
+TODO is always empty
+		(RO) TODO The :int:`number` of worker positions in the production site
+*/
+int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+
+	lua_newtable(L);
+	BOOST_FOREACH(const auto & positions_pair, descr->working_positions()) {
+		lua_pushstring(L, tribe.get_worker_descr(positions_pair.first)->name());
+		lua_pushuint32(L, positions_pair.second);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
 
 
 /* RST

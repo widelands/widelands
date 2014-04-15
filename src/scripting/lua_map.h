@@ -205,6 +205,7 @@ public:
 	 */
 	int get_nr_working_positions(lua_State *);
 	int get_type(lua_State *);
+	int get_working_positions(lua_State *);
 
 	/*
 	 * Lua methods

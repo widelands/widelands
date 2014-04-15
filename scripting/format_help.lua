@@ -410,11 +410,16 @@ function building_help_crew_string(tribename, buildingname, workername, toolname
 	local result = ""
 
 	if(building_descr.type == "productionsite") then
-		--building_descr = wl.Game():get_productionsite_description(tribename, buildingname)
+
 
 		result = result .. rt(h2(_"Workers")) .. rt(h3(_"Crew required:"))
 		-- TODO why is nr_working_positions always = 1?
 		result = result .. rt(p("TODO: need to parse " .. building_descr.nr_working_positions .. " working positions"))
+
+		for i, building in ipairs(building_descr.working_positions) do
+			result = result .. text_line(_"Found worker!", building_descr.working_positions[i].descname)
+		end
+
 
 		local worker_descr = wl.Game():get_worker_description(tribename, workername)
 		local becomes_descr = worker_descr.becomes
