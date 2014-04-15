@@ -40,7 +40,7 @@ obj_defeat_jomo = {
    name = "defeat_jomo",
    title =_ "Defeat Jomo",
    body = [[• ]] .. _
-[[Defeat Jomo. He will take care of the soldiers’ food supply.]]
+[[Defeat Jomo. He is taking care of the soldiers’ food supply.]]
    ,
 }
 
@@ -110,7 +110,7 @@ _([[It is amazing how far one can see from the highest tower of the castle. We c
 [[We have discovered enemy positions held by Erwyn to the north and east of the castle. ]] ..
 [[He is known to be a strong warlord and surely commands the strongest warriors. ]] ..
 [[In the south, we caught sight of some food infrastructures guarded by Jomo – a younger warlord – ]] ..
-[[and we should take care of those infrastructures so we can take our cut of the food supply.]]), obj_defeat_erwyn, obj_defeat_jomo),
+[[and we should take care of those infrastructures so we can cut off our enemies’ food supply.]]), obj_defeat_erwyn, obj_defeat_jomo),
 }
 
 briefing_erwyn_defeated = {
