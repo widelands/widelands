@@ -155,19 +155,20 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_build_cost(lua_State *);
 	int get_buildable(lua_State *);
+	int get_conquers(lua_State *);
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
+	int get_enhancement_cost(lua_State *);
+	int get_enhancements(lua_State *);
 	int get_ismine(lua_State *);
 	int get_isport(lua_State *);
 	int get_isproductionsite(lua_State *);
-	int get_size(lua_State *);
-	int get_conquers(lua_State *);
-	int get_vision_range(lua_State *);
-	int get_build_cost(lua_State *);
 	int get_returned_wares(lua_State *);
-	int get_enhancement_cost(lua_State *);
 	int get_returned_wares_enhanced(lua_State *);
+	int get_size(lua_State *);
+	int get_vision_range(lua_State *);
 
 	/*
 	 * Lua methods

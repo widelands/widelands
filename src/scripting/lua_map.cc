@@ -597,7 +597,7 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const desc) {
 	assert(desc != nullptr);
 
-	if (is_a(const ProductionSite_Descr, desc)) {
+	if (is_a(ProductionSite_Descr, desc)) {
 		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
 	}
 	return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
@@ -1086,7 +1086,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, enhancement_cost),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
-	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
+	PROP_RO(L_BuildingDescription, enhancements),
 	{0, 0, 0},
 };
 
@@ -1241,6 +1241,23 @@ int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
 	return wares_map_to_lua(L, get()->returned_wares_enhanced(), get()->tribe());
 }
 
+/* RST
+	.. attribute:: enhancements
+
+		(RO) a list of building descriptions that this building can enhance to.
+*/
+int L_BuildingDescription::get_enhancements(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+
+	lua_newtable(L);
+	int index = 1;
+	for (auto building_index : get()->enhancements()) {
+		lua_pushint32(L, index++);
+		upcasted_building_descr_to_lua(L, tribe.get_building_descr(building_index));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
 
 
 /* RST
