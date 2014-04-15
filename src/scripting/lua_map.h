@@ -203,7 +203,9 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_inputs(lua_State *);
 	int get_nr_working_positions(lua_State *);
+	int get_output_ware_types(lua_State *);
 	int get_type(lua_State *);
 	int get_working_positions(lua_State *);
 

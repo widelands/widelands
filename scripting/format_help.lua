@@ -44,7 +44,7 @@ function dependencies(tribename, items, text)
 	if not text then
 		text = ""
 	end
-
+	-- TODO: menu.png will need to be replaced by representative_image eventually
 	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/menu.png"
 	for k,v in ipairs({table.unpack(items,2)}) do
 		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
@@ -69,7 +69,8 @@ function dependencies_resi(tribename, items, text)
 	if not text then
 		text = ""
 	end
-
+	-- TODO: resi_00.png and menu.png will need to be replaced by representative_image eventually
+	-- Then we won't need a special case for resi anymore
 	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/resi_00.png"
 	for k,v in ipairs({table.unpack(items,2)}) do
 		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
@@ -136,7 +137,7 @@ function make_tabs_array(t1, t2)
 end
 
 -- RST
--- .. function building_help_general_string(tribename, resourcename, amount, purpose, working_radius)
+-- .. function building_help_general_string(tribename, building_description, resourcename, info, purpose, working_radius)
 --
 --    Creates the string for the general section in building help
 --
@@ -176,6 +177,63 @@ function building_help_lore_string(tribename, buildingname, flavourtext, author)
 		end
 	return result
 end
+
+
+-- RST
+-- .. function:: building_help_inputs(tribename, building_description)
+--
+--    The input wares of a building
+--
+--    :arg tribename: e.g. "barbarians".
+--    :arg building_description: The building description we get from C++
+--    :returns: an rt string with images describing a chain of ware/building dependencies TODO not implemented
+--
+function building_help_inputs(tribename, building_description)
+	local building_description = wl.Game():get_building_description(tribename, building_description.name)
+	local result = ""
+
+	result = result .. rt(h2("Inputs test"))
+
+	for i, ware in ipairs(building_description.inputs) do
+		result = result .. rt(p(ware))
+	end
+
+	result = result .. rt(h2("End Inputs test"))
+	return result
+end
+
+
+-- RST
+-- .. function:: building_help_outputs(tribename, building_description)
+--
+--    The output wares of a building
+--
+--    :arg tribename: e.g. "barbarians".
+--    :arg building_description: The building description we get from C++
+--    :returns: an rt string with images describing a chain of ware/building dependencies TODO not implemented
+--
+function building_help_outputs(tribename, building_description)
+	local building_description = wl.Game():get_building_description(tribename, building_description.name)
+	local result = ""
+	result = result .. rt(h2("Outputs test"))
+	-- TODO get is_basic from [aihints] in conf, so we can define "Collects" from the output?
+	if(building_description.ismine) then
+		result = result .. rt(h3(_"Mines:"))
+
+		for i, ware in ipairs(building_description.output_ware_types) do
+			result = result ..
+				building_help_dependencies_resi(tribename, {"resi_"..ware.."2", "coalmine", ware}, ware)
+		end
+	else
+
+		for i, ware in ipairs(building_description.output_ware_types) do
+			result = result .. rt(p(ware))
+		end
+	end
+	result = result .. rt(h2("End Outputs test"))
+	return result
+end
+
 
 
 -- RST

@@ -1277,7 +1277,9 @@ const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Metho
 	{nullptr, nullptr},
 };
 const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Properties[] = {
+	PROP_RO(L_ProductionSiteDescription, inputs),
 	PROP_RO(L_ProductionSiteDescription, nr_working_positions),
+	PROP_RO(L_ProductionSiteDescription, output_ware_types),
 	PROP_RO(L_ProductionSiteDescription, type),
 	PROP_RO(L_ProductionSiteDescription, working_positions),
 	{nullptr, nullptr, nullptr},
@@ -1296,6 +1298,26 @@ void L_ProductionSiteDescription::__unpersist(lua_State * /* L */) {
 
 
 /* RST
+	.. attribute:: inputs
+TODO always returns empty
+		(RO) An array with pairs of int, ware_descr.name describing the input of the productionsite
+*/
+int L_ProductionSiteDescription::get_inputs(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+
+	lua_newtable(L);
+	BOOST_FOREACH(const auto & positions_pair, descr->inputs()) {
+		lua_pushstring(L, tribe.get_ware_descr(positions_pair.first)->name());
+		lua_pushuint32(L, positions_pair.second);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+
+
+/* RST
 	.. attribute:: nr_working_positions
 TODO always returns 1
 		(RO) The :int:`number` of worker positions in the production site
@@ -1304,6 +1326,27 @@ int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
 	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
 	lua_pushinteger(L, descr->nr_working_positions());
 	return 1;
+}
+
+
+/* RST
+	.. attribute:: output_ware_types
+		(RO) An array with pairs of int, ware_descr.name describing the output of the productionsite
+*/
+int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+
+	lua_newtable(L);
+	int index = 1;
+	for (auto ware_index : descr->output_ware_types()) {
+		lua_pushint32(L, index++);
+		lua_pushstring(L, tribe.get_ware_descr(ware_index)->name());
+		lua_rawset(L, -3);
+	}
+	return 1;
+
+
 }
 
 
@@ -1321,7 +1364,7 @@ int L_ProductionSiteDescription::get_type(lua_State * L) {
 /* RST
 	.. attribute:: working_positions
 TODO is always empty
-		(RO) TODO The :int:`number` of worker positions in the production site
+		(RO) An array with pairs of int, worker_descr.name describing the worker positions of the productionsite
 */
 int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();

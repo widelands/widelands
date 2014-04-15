@@ -24,15 +24,19 @@ return {
 
 	rt(h3(_"Incoming:")) ..
 
+	building_help_inputs("barbarians", building_description) ..
+
+
 	rt(h3(_"Collects:")) ..
 	building_help_dependencies_ware("barbarians", {"lumberjacks_hut", "log"}, "log") ..
 
 
 	rt(h3(_"Outgoing:")) ..
-	building_help_dependencies_ware("barbarians", {"constructionsite", "log"}, "log") ..
-	building_help_dependencies_ware("barbarians", {"burners_house", "log"}, "log") ..
-	building_help_dependencies_ware("barbarians", {"metalworks", "log"}, "log") ..
-	building_help_dependencies_ware("barbarians", {"hardener", "log"}, "log") ..
+	building_help_outputs("barbarians", building_description) ..
+	building_help_dependencies_ware("barbarians", {"log", "constructionsite"}, "log") ..
+	building_help_dependencies_ware("barbarians", {"log", "burners_house"}, "log") ..
+	building_help_dependencies_ware("barbarians", {"log", "metalworks"}, "log") ..
+	building_help_dependencies_ware("barbarians", {"log", "hardener"}, "log") ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

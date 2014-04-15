@@ -23,12 +23,15 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
 	rt(h3(_"Incoming:")) ..
+
+	building_help_inputs("barbarians", building_description) ..
+
 	-- TODO read dependencies from C++ and automate
 	building_help_dependencies_ware_building("barbarians", {"inn", "snack", "deep_coalmine"}, "snack", "inn") ..
 	building_help_dependencies_ware_building("barbarians", {"big_inn", "snack", "deep_coalmine"}, "snack", "big_inn") ..
 
 	rt(h3(_"Outgoing:")) ..
-	building_help_dependencies_resi("barbarians", {"resi_coal2", "deep_coalmine", "coal"}, "coal") ..
+	building_help_outputs("barbarians", building_description) ..
 	building_help_dependencies_building("barbarians",{"coal","axfactory"}, "axfactory") ..
 	building_help_dependencies_building("barbarians",{"coal","warmill"}, "warmill") ..
 	building_help_dependencies_building("barbarians",{"coal","helmsmithy"}, "helmsmithy") ..
