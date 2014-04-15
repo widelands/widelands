@@ -162,6 +162,7 @@ public:
 	int get_isport(lua_State *);
 	int get_isproductionsite(lua_State *);
 	int get_size(lua_State *);
+	int get_conquers(lua_State *);
 	int get_vision_range(lua_State *);
 	int get_build_cost(lua_State *);
 	int get_returned_wares(lua_State *);

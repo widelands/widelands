@@ -147,26 +147,23 @@ function make_tabs_array(t1, t2)
 end
 
 -- RST
--- .. function building_help_general_string(tribename, resourcename, amount, purpose, working_radius, conquer_range, vision_range)
+-- .. function building_help_general_string(tribename, resourcename, amount, purpose, working_radius)
 --
 --    Creates the string for the general section in building help
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg resourcename: The resource this building produces
 --    :arg working_radius: The owrking radious of the building
---    :arg conquer_range: The conquer range of the building
---    :arg vision_range: The vision range of the building
 --    :returns: rt of the formatted text
 --
-function building_help_general_string(tribename, building_description, resourcename, info, purpose, working_radius, conquer_range)
+function building_help_general_string(tribename, building_description, resourcename, info, purpose, working_radius)
 	if (info) then local info = rt(p(info)) else local info ="" end
 	return rt(h2(_"General")) ..
 		info ..
 		rt(h3(_"Purpose:")) ..
 		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose)) ..
 		text_line(_"Working radius:", working_radius) ..
-		text_line(_"Conquer range:", conquer_range) ..
-		-- TODO vision range is buggy - returns 0 instead of 4 for lumberjacks_hut, for example
+		text_line(_"Conquer range:", building_description.conquers) ..
 		text_line(_"Vision range:", building_description.vision_range)
 end
 

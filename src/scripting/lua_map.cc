@@ -57,6 +57,7 @@ int wares_map_to_lua(lua_State* L, const Buildcost& wares_map, const Tribe_Descr
 	return 1;
 }
 
+
 }  // namespace
 
 /* RST
@@ -1065,12 +1066,13 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
 	PROP_RO(L_BuildingDescription, size),
-	// TODO this should return 4 for lumberjacks_hut, but I get 0
+	PROP_RO(L_BuildingDescription, conquers),
 	PROP_RO(L_BuildingDescription, vision_range),
 
 	PROP_RO(L_BuildingDescription, build_cost),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, enhancement_cost),
+	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
 	{0, 0, 0},
 };
@@ -1165,6 +1167,16 @@ int L_BuildingDescription::get_size(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: conquers
+
+			(RO) the vision range of the building as an int.
+*/
+int L_BuildingDescription::get_conquers(lua_State * L) {
+	lua_pushinteger(L, get()->get_conquers());
+	return 1;
+}
+
 
 /* RST
 	.. attribute:: vision range
@@ -1211,6 +1223,8 @@ int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
 int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
 	return wares_map_to_lua(L, get()->returned_wares_enhanced(), get()->tribe());
 }
+
+
 
 /* RST
 ProductionSiteDescription

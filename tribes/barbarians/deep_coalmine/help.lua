@@ -18,7 +18,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_general_string("barbarians", building_description, "coal",
 		_"A %1$s exploits only %2$s of the resource. From there on out, it will only have a 5%% chance of finding %3$s.":bformat(_"deep coal mine","2/3",_"coal"),
 		_"Dig %s out of the ground in mountain terrain.":format(_"coal"),
-		"2", "--") ..
+		"2") ..
 
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
