@@ -188,9 +188,17 @@ end
 --    :arg building_description: The building description we get from C++
 --    :returns: an rt string with images describing a chain of ware/building dependencies TODO not implemented
 --
-function building_help_inputs(tribename, building_description)
+function building_help_inputs(tribename, building_description, buildinglist, ware)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
+	result = result .. rt(h3(_"Incoming:"))
+
+	-- TODO get the buildinglist with the help of the resource
+	for j, building in ipairs(buildinglist) do
+		result = result .. building_help_dependencies_ware_building(
+			tribename, {building, ware, building_description.name}, ware, building
+		)
+	end
 
 	result = result .. rt(h2("Inputs test"))
 
@@ -212,25 +220,38 @@ end
 --    :arg building_description: The building description we get from C++
 --    :returns: an rt string with images describing a chain of ware/building dependencies TODO not implemented
 --
-function building_help_outputs(tribename, building_description)
+function building_help_outputs(tribename, building_description, buildinglist, is_basic)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
-	result = result .. rt(h2("Outputs test"))
+
 	-- TODO get is_basic from [aihints] in conf, so we can define "Collects" from the output?
+	if(is_basic) then
+		result = result .. rt(h3(_"Collects:"))
+
+		for i, ware in ipairs(building_description.output_ware_types) do
+			result = result ..
+				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
+		end
+	end
 	if(building_description.ismine) then
+		-- TRANSLATORS: This is a verb (The miner mines)
 		result = result .. rt(h3(_"Mines:"))
 
 		for i, ware in ipairs(building_description.output_ware_types) do
 			result = result ..
-				building_help_dependencies_resi(tribename, {"resi_"..ware.."2", "coalmine", ware}, ware)
-		end
-	else
-
-		for i, ware in ipairs(building_description.output_ware_types) do
-			result = result .. rt(p(ware))
+				building_help_dependencies_resi(tribename, {"resi_"..ware.."2", building_description.name, ware}, ware)
 		end
 	end
-	result = result .. rt(h2("End Outputs test"))
+
+	result = result .. rt(h3(_"Outgoing:"))
+	for i, ware in ipairs(building_description.output_ware_types) do
+
+		-- TODO get the buildinglist with the help of the resource
+		for j, building in ipairs(buildinglist) do
+			result = result ..
+				building_help_dependencies_building(tribename, {ware, building}, building)
+		end
+	end
 	return result
 end
 

@@ -22,29 +22,13 @@ return {
 	rt(h2(_"Dependencies")) ..
 	rt(p(_"The Lumberjack's Hut needs trees in the immediate vicinity to fell.")) ..
 
-	rt(h3(_"Incoming:")) ..
-
-	building_help_inputs("barbarians", building_description) ..
-
-
-	rt(h3(_"Collects:")) ..
-	building_help_dependencies_ware("barbarians", {"lumberjacks_hut", "log"}, "log") ..
-
-
-	rt(h3(_"Outgoing:")) ..
-	building_help_outputs("barbarians", building_description) ..
-	building_help_dependencies_ware("barbarians", {"log", "constructionsite"}, "log") ..
-	building_help_dependencies_ware("barbarians", {"log", "burners_house"}, "log") ..
-	building_help_dependencies_ware("barbarians", {"log", "metalworks"}, "log") ..
-	building_help_dependencies_ware("barbarians", {"log", "hardener"}, "log") ..
+	building_help_outputs("barbarians", building_description, {"constructionsite", "burners_house", "metalworks", "hardener"}, true) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"lumberjack"}, "felling_ax") ..
-
-	--text_line(_"Experience levels:","n/a") ..
 
 	--Production Section
 	rt(h2(_"Production")) ..
