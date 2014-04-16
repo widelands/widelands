@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2012-01-21 22:55+0000\n"
-"Last-Translator: Xosé <Unknown>\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-04-16 03:33+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:32+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 05:34+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: gl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -937,8 +937,8 @@ msgid "Spider Farm"
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:186
-msgid "Weaving-Mill"
-msgstr "Tear"
+msgid "Weaving Mill"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Farm"
@@ -1101,7 +1101,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
-"Golden tabards are produced in Atlantean weaving-mills out of gold yarn. "
+"Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
@@ -1116,7 +1116,7 @@ msgstr ""
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
-"golden tabard in the weaving-mill."
+"golden tabard in the weaving mill."
 msgstr ""
 
 #: ../../tribes/atlanteans/guardhall/conf:6
@@ -1381,7 +1381,7 @@ msgstr "Muxe fío da araña."
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
-"Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
+"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
@@ -1389,7 +1389,7 @@ msgstr ""
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving-mill."
+"processed into spidercloth in a weaving mill."
 msgstr ""
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
@@ -1418,7 +1418,7 @@ msgstr ""
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
-"Tabards are produced in the weaving-mill."
+"Tabards are produced in the weaving mill."
 msgstr ""
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
@@ -1530,3 +1530,6 @@ msgstr "Producir un tabardo dourado"
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
 msgstr "Tira árbores."
+
+#~ msgid "Weaving-Mill"
+#~ msgstr "Tear"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-29 13:38+0000\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-04-16 02:47+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:34+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 05:35+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: ru_RU\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -2558,8 +2558,8 @@ msgstr "Скотный двор"
 
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/reed_yard/help.lua:27
-msgid "Weaving-Mill"
-msgstr "Ткацкая фабрика"
+msgid "Weaving Mill"
+msgstr ""
 
 #: ../../tribes/barbarians/conf:193
 msgid "Farm"
@@ -3193,7 +3193,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
-"It can make Bread Paddles, Felling axs, Fire Tongs, Fishing Rods, Hammers, "
+"It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
 
@@ -3701,3 +3701,6 @@ msgstr ""
 "Пшеница важна для выживания. Она выращивается на ферме и используется в "
 "пекарнях, малых пивоварнях и пивоварнях. Для скотного двора также нужна "
 "пшеница."
+
+#~ msgid "Weaving-Mill"
+#~ msgstr "Ткацкая фабрика"

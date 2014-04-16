@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
 "PO-Revision-Date: 2014-03-11 23:11+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:30+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 05:33+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
 "X-Poedit-Language: Italian\n"
@@ -648,7 +648,7 @@ msgstr ""
 "da questo doloroso campo di battaglia ed abbiano cominciato una vita "
 "migliore altrove."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:374
+#: ../../campaigns/t03.wmf/scripting/texts.lua:375
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to ever see "
@@ -664,11 +664,11 @@ msgstr ""
 "nelle mie mani e non esiterò a ricostruirla con tutta la forza del mio "
 "popolo. Non vedo l'ora di rivederla nella sua antica bellezza."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:379
+#: ../../campaigns/t03.wmf/scripting/texts.lua:380
 msgid "Victory"
 msgstr "Vittoria"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:380
+#: ../../campaigns/t03.wmf/scripting/texts.lua:381
 msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
@@ -677,11 +677,11 @@ msgstr ""
 "continuare a giocare, se lo desideri; altrimenti passa alla prossima "
 "campagna."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:386
+#: ../../campaigns/t03.wmf/scripting/texts.lua:387
 msgid "Military Assault"
 msgstr "Assalto militare"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:388
+#: ../../campaigns/t03.wmf/scripting/texts.lua:389
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -691,7 +691,7 @@ msgstr ""
 "guiderà il primo assalto. Cavalcherò al suo fianco, per liberare Al'thunran "
 "da questa guerra e riportare la pace nella nostra capitale."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:390
+#: ../../campaigns/t03.wmf/scripting/texts.lua:391
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -703,15 +703,15 @@ msgstr ""
 "legno del condottiero e sacrificherò un agnello appena nato in onore di mio "
 "padre, i cui occhi sono fissi su di me, oggi."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:394
+#: ../../campaigns/t03.wmf/scripting/texts.lua:395
 msgid "So be it!"
 msgstr "Così sia!"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:399
+#: ../../campaigns/t03.wmf/scripting/texts.lua:400
 msgid "Khantrukh says:"
 msgstr "Khantrukh parla:"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:401
+#: ../../campaigns/t03.wmf/scripting/texts.lua:402
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
@@ -726,7 +726,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo Obiettivo"

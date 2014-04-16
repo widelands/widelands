@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-04-10 20:32+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-04-16 03:34+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-11 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-04-16 05:31+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
@@ -495,9 +495,8 @@ msgid "Ice wars"
 msgstr "IJsoorlogen"
 
 #: ../../maps/Ice wars.wmf/elemental:11
-msgid "Autumn follows winter. Some things are frozen, but not the war."
+msgid "Autumn became winter. Some things are frozen, but not the war."
 msgstr ""
-"Op winter volgt herfst. Sommige dingen zijn bevroren, maar niet de oorlog."
 
 #: ../../maps/Ice wars.wmf/elemental:12
 #: ../../maps/Sun of fire.wmf/elemental:12
@@ -1045,3 +1044,7 @@ msgstr ""
 "werd door wisenten. Toen je stam naar deze plek kwam, was je er zeker van "
 "dat ze genoeg ruimte bood voor een vredig leven, Maar kan je stam in vrede "
 "leven met je buren?"
+
+#~ msgid "Autumn follows winter. Some things are frozen, but not the war."
+#~ msgstr ""
+#~ "Op winter volgt herfst. Sommige dingen zijn bevroren, maar niet de oorlog."
