@@ -606,6 +606,9 @@ int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const des
 	else if (is_a(ProductionSite_Descr, desc)) {
 		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
 	}
+	else if (is_a(Warehouse_Descr, desc)) {
+		return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
+	}
 	return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
 }
 #undef CAST_TO_LUA
@@ -1607,6 +1610,60 @@ int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
 */
 int L_TrainingSiteDescription::get_type(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	lua_pushstring(L, descr->get_type());
+	return 1;
+}
+
+
+/* RST
+ProductionSiteDescription
+---
+
+Properties of workers read from the conf files available for Lua
+
+TODO
+*/
+const char L_WarehouseDescription::className[] = "WarehouseDescription";
+const MethodType<L_WarehouseDescription> L_WarehouseDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] = {
+	PROP_RO(L_WarehouseDescription, type),
+	{nullptr, nullptr, nullptr},
+};
+
+void L_WarehouseDescription::__persist(lua_State * /* L */) {
+}
+void L_WarehouseDescription::__unpersist(lua_State * /* L */) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+
+/* RST
+TODO this returns nil. Why?
+
+	.. attribute:: heal_per_second
+		(RO) The :int:`number` of health healed ber second by the warehouse
+*/
+int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
+	const Warehouse_Descr * descr = static_cast<const Warehouse_Descr *>(get());
+	lua_pushinteger(L, descr->get_heal_per_second());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: type
+
+			(RO) the type of the building, e.g. warehouse.
+*/
+int L_WarehouseDescription::get_type(lua_State * L) {
+	const Warehouse_Descr * descr = static_cast<const Warehouse_Descr *>(get());
 	lua_pushstring(L, descr->get_type());
 	return 1;
 }
@@ -3840,6 +3897,11 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_TrainingSiteDescription, L_ProductionSiteDescription>(L);
 	add_parent<L_TrainingSiteDescription, L_BuildingDescription>(L);
 	add_parent<L_TrainingSiteDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_WarehouseDescription>(L, "map", true);
+	add_parent<L_WarehouseDescription, L_BuildingDescription>(L);
+	add_parent<L_WarehouseDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_WareDescription>(L, "map", true);

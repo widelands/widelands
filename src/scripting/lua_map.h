@@ -302,6 +302,43 @@ private:
 };
 
 
+
+class L_WarehouseDescription : public L_BuildingDescription {
+public:
+	LUNA_CLASS_HEAD(L_WarehouseDescription);
+
+	virtual ~L_WarehouseDescription() {}
+
+	L_WarehouseDescription() {}
+	L_WarehouseDescription(const Widelands::Warehouse_Descr* const warehousedescr)
+	   : L_BuildingDescription(warehousedescr) {
+	}
+	L_WarehouseDescription(lua_State* L) : L_BuildingDescription(L) {
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_heal_per_second(lua_State *);
+	int get_type(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(Warehouse_Descr);
+};
+
+
+
 class L_WareDescription : public L_MapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(L_WareDescription);

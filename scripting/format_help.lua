@@ -250,9 +250,14 @@ function building_help_general_string(tribename, building_description, resourcen
 
 	if(building_description.type == "productionsite") then
 		if (working_radius) then result = result .. text_line(_"Working radius:", working_radius) end
+	elseif(building_description.type == "warehouse") then
+		result = result .. rt(h3(_"Healing:")
+	-- TODO heal_per_second = nil, why?
+			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.heal_per_second)))
+		result = result .. text_line(_"Conquer range:", building_description.conquers)
 	elseif(building_description.type == "militarysite") then
 		result = result .. rt(h3(_"Healing:")
-			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.max_number_of_soldiers)))
+			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.heal_per_second)))
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
 	elseif(building_description.type == "trainingsite") then
@@ -467,9 +472,9 @@ function building_help_building_section(tribename, building_description, upgrade
 
 	local result = rt(h2(_"Building"))
 
-	if(building_description.ismine) then
+	if (building_description.ismine) then
 		result = result .. text_line(_"Space required:",_"Mine plot","pics/mine.png")
-	elseif(building_description.isport) then
+	elseif (building_description.isport) then
 		result = result .. text_line(_"Space required:",_"Port plot","pics/port.png")
 	else
 		if (building_description.size == 1) then
@@ -482,84 +487,84 @@ function building_help_building_section(tribename, building_description, upgrade
 			result = result .. p(_"Space required:" .. _"Unknown")
 		end
 	end
-
-	if (building_description.enhanced) then
-		local former_building = nil
-		if(upgraded_from) then
-		former_building = wl.Game():get_building_description(tribename, upgraded_from)
-			-- todo get the building this was upgraded from
-			result = result .. text_line(_"Upgraded from:", former_building.descname)
-		else
-			result = result .. text_line(_"Upgraded from:", _"Unknown")
-		end
-
-		for ware, count in pairs(building_description.enhancement_cost) do
-		local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			result = result ..
-				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
-		end
-		-- TODO What if an enhanced ware is not one of the original wares?
-		result = result .. rt(h3(_"Cost Cumulative:"))
-		if(former_building) then
-			for ware, count in pairs(former_building.build_cost) do
-				local ware_descr = wl.Game():get_ware_description(tribename,ware)
-				local amount = former_building.build_cost[ware] + building_description.enhancement_cost[ware]
-				result = result ..
-					image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-						amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+	if (building_description.buildable) then
+		if (building_description.enhanced) then
+			local former_building = nil
+			if (upgraded_from) then
+			former_building = wl.Game():get_building_description(tribename, upgraded_from)
+				-- todo get the building this was upgraded from
+				result = result .. text_line(_"Upgraded from:", former_building.descname)
+			else
+				result = result .. text_line(_"Upgraded from:", _"Unknown")
 			end
-		else
-			result = result .. rt(p(_"Unknown"))
-		end
 
-		result = result .. rt(h3(_"Dismantle yields:"))
-		-- TODO What if an enhanced ware is not one of the original wares?
-		if(former_building) then
-			for ware, count in pairs(former_building.returned_wares) do
-				local ware_descr = wl.Game():get_ware_description(tribename,ware)
-				local amount = former_building.returned_wares[ware]
-					+ building_description.returned_wares_enhanced[ware]
-				result = result ..
-					image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-						amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
-			end
-		else
-			result = result .. rt(p(_"Unknown"))
-		end
-	else
-		result = result .. rt(h3(_"Build Cost:"))
-
-		for ware, count in pairs(building_description.build_cost) do
-			local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			result = result ..
-				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
-		end
-
-		result = result .. rt(h3(_"Dismantle yields:"))
-
-		for ware, count in pairs(building_description.returned_wares) do
-			local ware_descr = wl.Game():get_ware_description(tribename,ware)
-			result = result ..
-				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-					count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
-		end
-	end
-
-	if(building_description.enhancements[1]) then
-		for i, building in ipairs(building_description.enhancements) do
-			result = result .. text_line(_"Upgradeable to:", building_description.enhancements[i].descname)
-
-			for ware, count in pairs(building_description.enhancements[i].enhancement_cost) do
+			for ware, count in pairs(building_description.enhancement_cost) do
 			local ware_descr = wl.Game():get_ware_description(tribename,ware)
 				result = result ..
 					image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
 						count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
 			end
+			-- TODO What if an enhanced ware is not one of the original wares?
+			result = result .. rt(h3(_"Cost Cumulative:"))
+			if(former_building) then
+				for ware, count in pairs(former_building.build_cost) do
+					local ware_descr = wl.Game():get_ware_description(tribename,ware)
+					local amount = former_building.build_cost[ware] + building_description.enhancement_cost[ware]
+					result = result ..
+						image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+							amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+				end
+			else
+				result = result .. rt(p(_"Unknown"))
+			end
+
+			result = result .. rt(h3(_"Dismantle yields:"))
+			-- TODO What if an enhanced ware is not one of the original wares?
+			if(former_building) then
+				for ware, count in pairs(former_building.returned_wares) do
+					local ware_descr = wl.Game():get_ware_description(tribename,ware)
+					local amount = former_building.returned_wares[ware]
+						+ building_description.returned_wares_enhanced[ware]
+					result = result ..
+						image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+							amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+				end
+			else
+				result = result .. rt(p(_"Unknown"))
+			end
+		else
+			result = result .. rt(h3(_"Build Cost:"))
+
+			for ware, count in pairs(building_description.build_cost) do
+				local ware_descr = wl.Game():get_ware_description(tribename,ware)
+				result = result ..
+					image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+						count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
+			end
+
+			result = result .. rt(h3(_"Dismantle yields:"))
+
+			for ware, count in pairs(building_description.returned_wares) do
+				local ware_descr = wl.Game():get_ware_description(tribename,ware)
+				result = result ..
+					image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+						count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
+			end
+		end
+
+		if (building_description.enhancements[1]) then
+			for i, building in ipairs(building_description.enhancements) do
+				result = result .. text_line(_"Upgradeable to:", building_description.enhancements[i].descname)
+
+				for ware, count in pairs(building_description.enhancements[i].enhancement_cost) do
+				local ware_descr = wl.Game():get_ware_description(tribename,ware)
+					result = result ..
+						image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+							count, p(_"%1$dx %2$s":bformat(count, ware_descr.descname)))
+				end
+			end
 		end
 	end
-
 	return result
 end
 

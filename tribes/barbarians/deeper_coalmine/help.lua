@@ -31,6 +31,8 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 
 		--rt(h2(_"Building")) ..
 
+-- Upgraded from: OK
+
 		--rt(h3(_"Cost cumulative:")) .. TODO missing
 		--help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 6), 6) ..
 		--help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 12), 12) ..
