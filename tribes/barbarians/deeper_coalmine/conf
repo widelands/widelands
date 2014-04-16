@@ -29,10 +29,10 @@ work=_Work
 sleep=40000
 consume=meal
 animate=working 16000
-mine=coal 2 100 10
+mine=coal 2 100 10 2
 produce=coal:2
 animate=working 16000
-mine=coal 2 100 10
+mine=coal 2 100 10 2
 produce=coal:3
 
 [idle]

@@ -856,10 +856,8 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(result == Completed);
 		if (result == Completed) {
-			for (uint32_t i = descr().nr_working_positions(); i;)
-				m_working_positions[--i].worker->gain_experience(game);
+			train_workers(game);
 			m_result_buffer[0] = '\0';
-			Building::workers_changed();
 		}
 		calc_statistics();
 		break;
@@ -875,6 +873,14 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	m_program_timer = true;
 	m_program_time = schedule_act(game, m_post_timer);
 }
+
+void ProductionSite::train_workers(Game & game)
+{
+	for (uint32_t i = descr().nr_working_positions(); i;)
+		m_working_positions[--i].worker->gain_experience(game);
+	Building::workers_changed();
+}
+
 
 /// Changes the default anim string to \li anim
 void ProductionSite::set_default_anim(std::string anim)

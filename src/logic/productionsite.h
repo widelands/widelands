@@ -211,6 +211,7 @@ protected:
 
 	void program_start(Game &, const std::string & program_name);
 	virtual void program_end(Game &, Program_Result);
+	virtual void train_workers(Game &);
 
 	void calc_statistics();
 	void try_start_working(Game &);
