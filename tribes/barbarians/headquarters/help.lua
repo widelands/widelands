@@ -13,7 +13,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description, "carrier",
 		_"Accomodation for your people. Also stores your wares and tools.",
-		_"The headquarters is your main building.") ..
+		_"The headquarters is your main building." .. "<br>" .. _[[Text needed]]) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description)

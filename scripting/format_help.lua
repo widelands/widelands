@@ -1,175 +1,9 @@
 -- TODO Textdomain?
+-- TODO: menu.png, resi_00.png etc. will need to be replaced by representative_image eventually
 
--- RST
--- format_help.lua
--- ---------------
-
--- Functions used in the ingame help windows for formatting the text and pictures.
-
--- RST
--- .. function:: dependencies(images[, text = nil])
---
---    Creates a dependencies line of any length.
---
---    :arg images: images in the correct order from left to right as table (set in {}).
---    :arg text: comment of the image.
---    :returns: a row of pictures connected by arrows.
---
-function dependencies_basic(images, text)
-	if not text then
-		text = ""
-	end
-
-	string = "image=" .. images[1]
-	for k,v in ipairs({table.unpack(images,2)}) do
-		string = string .. ";pics/arrow-right.png;" .. v
-	end
-
-	return rt(string, text)
-end
-
---
--- Functions used in the ingame help windows for formatting the text and pictures.
-
--- RST
--- .. function:: dependencies(tribename, items[, text = nil])
---
---    Creates a dependencies line of any length.
---
---    :arg tribename: name of the tribe.
---    :arg items: wares and/or buildings in the correct order from left to right as table (set in {}).
---    :arg text: comment of the image.
---    :returns: a row of pictures connected by arrows.
---
-function dependencies(tribename, items, text)
-	if not text then
-		text = ""
-	end
-	-- TODO: menu.png will need to be replaced by representative_image eventually
-	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/menu.png"
-	for k,v in ipairs({table.unpack(items,2)}) do
-		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
-	end
-	return rt(string, p(text))
-end
-
---
--- Functions used in the ingame help windows for formatting the text and pictures.
-
--- RST
--- .. function:: dependencies_resi(tribename, items[, text = nil])
---
---    Creates a dependencies line of any length.
---
---    :arg tribename: name of the tribe.
---    :arg items: wares and/or buildings in the correct order from left to right as table (set in {}).
---    :arg text: comment of the image.
---    :returns: a row of pictures connected by arrows.
---
-function dependencies_resi(tribename, items, text)
-	if not text then
-		text = ""
-	end
-	-- TODO: resi_00.png and menu.png will need to be replaced by representative_image eventually
-	-- Then we won't need a special case for resi anymore
-	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/resi_00.png"
-	for k,v in ipairs({table.unpack(items,2)}) do
-		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
-	end
-	return rt(string, p(text))
-end
-
-
---
--- Functions used in the ingame help windows for formatting the text and pictures.
-
--- RST
--- .. function:: dependencies_resi(tribename, items[, text = nil])
---
---    Creates a dependencies line of any length.
---
---    :arg tribename: name of the tribe.
---    :arg items: wares and/or buildings in the correct order from left to right as table (set in {}).
---    :arg text: comment of the image.
---    :returns: a row of pictures connected by arrows.
---
-function dependencies_training(tribename, building_description, interim1, interim2)
-	return
-		rt(h2(_"Dependencies")) ..
-		dependencies_basic({
-			"tribes/" .. tribename .. "/soldier/untrained.png",
-			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
-			"tribes/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
-		dependencies_basic({
-			"tribes/" .. tribename .. "/soldier/" .. interim2 .. ".png",
-			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
-			"tribes/" .. tribename .. "/soldier/fulltrained.png"})
-end
-
-
--- RST
--- .. function:: dependencies_training_food
---
---    Creates a dependencies line of any length.
---
---    :arg tribename: name of the tribe.
---    :arg foods: an array of arrays with food items. Outer array has "and" logic and will appear from back to front, inner arrays have "or" logic
---    :returns: a list of foods
---
-function dependencies_training_food(tribename, foods)
-	local result = ""
-	for countlist, foodlist in pairs(foods) do
-		local images = ""
-		local text = ""
-		for countfood, food in pairs(foodlist) do
-			local ware_descr = wl.Game():get_ware_description(tribename, food)
-			if(countfood > 1) then
-				images = images .. ";"
-				text = _"%1$s or %2$s":bformat(text, ware_descr.descname)
-			else
-				text = ware_descr.descname
-			end
-			images = images .. "tribes/" .. tribename .. "/" .. ware_descr.name .. "/menu.png"
-		end
-		if(countlist > 1) then
-			text = _"%s and":bformat(text)
-		end
-		result = image_line(images, 1, p(text)) .. result
-	end
-	return result
-end
-
-
--- RST
--- .. function:: dependencies_training_weapons
---
---    Creates a dependencies line of any length.
---
---    :arg tribename: name of the tribe.
---    :arg foods: an array of arrays with food items. Outer array has "and" logic and will appear from back to front, inner arrays have "or" logic
---    :returns: a list of foods
---
-function dependencies_training_weapons(tribename, building_description, weapons, manufacturer)
-	local manufacturer_descr = wl.Game():get_building_description(tribename, manufacturer)
---		dependencies_training_weapons("barbarians", building_description, {"helm", "mask", "warhelm"}, "helmsmithy") ..
-
---		dependencies_basic({"tribes/barbarians/helmsmithy/menu.png","tribes/barbarians/helm/menu.png;tribes/barbarians/mask/menu.png;tribes/barbarians/warhelm/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
---		rt(p(_"Provided by the Helm Smithy")) ..
-
-	local weaponsstring = ""
-	for count, weapon in pairs(weapons) do
-		if(count > 1) then
-			weaponsstring = weaponsstring .. ";"
-		end
-		weaponsstring = weaponsstring .. "tribes/" .. tribename .. "/" .. weapon .. "/menu.png"
-	end
-	return dependencies_basic({
-			"tribes/" .. tribename .. "/" .. manufacturer_descr.name  .. "/menu.png",
-			weaponsstring,
-			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
-		}) .. rt(p(_"Provided by: %s":bformat(manufacturer_descr.descname)))
-end
-
+--  =======================================================
+--  *************** Basic helper functions ****************
+--  =======================================================
 
 -- RST
 -- .. function:: image_line(image, count[, text = nil])
@@ -228,14 +62,259 @@ function make_tabs_array(t1, t2)
   }
 end
 
+--  =======================================================
+--  ********** Helper functions for dependencies **********
+--  =======================================================
+
 -- RST
--- .. function building_help_general_string(tribename, building_description, resourcename, info, purpose, working_radius)
+-- format_help.lua
+-- ---------------
+
+-- Functions used in the ingame help windows for formatting the text and pictures.
+
+-- RST
+-- .. function:: dependencies_basic(images[, text = nil])
+--
+--    Creates a dependencies line of any length.
+--
+--    :arg images: images in the correct order from left to right as table (set in {}).
+--    :arg text: comment of the image.
+--    :returns: a row of pictures connected by arrows.
+--
+function dependencies_basic(images, text)
+	if not text then
+		text = ""
+	end
+
+	string = "image=" .. images[1]
+	for k,v in ipairs({table.unpack(images,2)}) do
+		string = string .. ";pics/arrow-right.png;" .. v
+	end
+
+	return rt(string, text)
+end
+
+
+-- RST
+-- .. function:: dependencies(tribename, items[, text = nil])
+--
+--    Creates a dependencies line of any length.
+--
+--    :arg tribename: name of the tribe.
+--    :arg items: ware and/or building names in the correct order from left to right as table (set in {}).
+--    :arg text: comment of the image.
+--    :returns: a row of pictures connected by arrows.
+--
+function dependencies(tribename, items, text)
+	if not text then
+		text = ""
+	end
+	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/menu.png"
+	for k,v in ipairs({table.unpack(items,2)}) do
+		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
+	end
+	return rt(string, p(text))
+end
+
+
+-- RST
+-- .. function:: dependencies_resi(tribename, items[, text = nil])
+--
+--    Creates a dependencies line of any length for resources (that don't have menu.png files).
+--
+--    :arg tribename: name of the tribe.
+--    :arg items: resource names in the correct order from left to right as table (set in {}).
+--    :arg text: comment of the image.
+--    :returns: a row of pictures connected by arrows.
+--
+function dependencies_resi(tribename, items, text)
+	if not text then
+		text = ""
+	end
+	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/resi_00.png"
+	for k,v in ipairs({table.unpack(items,2)}) do
+		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
+	end
+	return rt(string, p(text))
+end
+
+
+--  =======================================================
+--  *************** Dependencies functions ****************
+--  =======================================================
+
+-- RST
+-- .. function:: building_help_depencencies_ware(tribename, items, ware)
+--
+--    Formats a chain of ware dependencies for the help window
+--
+--    :arg tribename: e.g. "barbarians".
+--    :arg items: an array with ware and building names,
+--                            e.g. {"constructionsite", "trunk"}
+--    :arg warename: the internal name of the ware to use as a title.
+--    :returns: an rt string with images describing a chain of ware/building dependencies
+--
+function building_help_dependencies_ware(tribename, items, warename)
+	local ware_descr = wl.Game():get_ware_description(tribename, warename)
+	return dependencies(tribename, items, ware_descr.descname)
+end
+
+
+-- RST
+-- .. function:: building_help_depencencies_building(tribename, items, building)
+--
+--    Formats a chain of ware dependencies for the help window
+--
+--    :arg tribename: e.g. "barbarians".
+--    :arg items: an array with ware and building names,
+--                            e.g. {"constructionsite", "trunk"}
+--    :arg buildingname: the internal name of the building to use as a title.
+--    :returns: an rt string with images describing a chain of ware/building dependencies
+--
+function building_help_dependencies_building(tribename, items, buildingname)
+	local building_descr = wl.Game():get_building_description(tribename,buildingname)
+	return dependencies(tribename, items, building_descr.descname)
+end
+
+
+
+-- RST
+-- .. function:: building_help_depencencies_building(tribename, items, building)
+--
+--    Formats a chain of ware dependencies for the help window
+--
+--    :arg tribename: e.g. "barbarians".
+--    :arg items: an array with ware and building names,
+--                            e.g. {"constructionsite", "trunk"}
+--    :arg warename: the internal name of the ware to use in the title.
+--    :arg building: the internal name of the building to use in the title.
+--    :returns: an rt string with images describing a chain of ware/building dependencies
+--
+function building_help_dependencies_ware_building(tribename, items, warename, buildingname)
+	local building_descr = wl.Game():get_building_description(tribename,buildingname)
+	local ware_descr = wl.Game():get_ware_description(tribename, warename)
+	return dependencies(tribename, items, _"%1$s from: %2$s":bformat(ware_descr.descname, building_descr.descname))
+end
+
+
+-- RST
+-- .. function:: building_help_depencencies_ware(tribename, items, ware)
+--
+--    Formats a chain of ware dependencies for the help window. First item is a mining resource.
+--
+--    :arg tribename: e.g. "barbarians".
+--    :arg items: an array with ware and building names,
+--                            e.g. {"constructionsite", "trunk"}
+--    :arg warename: the internal name of the ware to use in the title.
+--    :returns: an rt string with images describing a chain of ware/building dependencies
+--
+function building_help_dependencies_resi(tribename, items, warename)
+	local ware_descr = wl.Game():get_ware_description(tribename, warename)
+	return dependencies_resi(tribename, items, ware_descr.descname)
+end
+
+-- RST
+-- .. function:: dependencies_training(tribename, building_description, interim1, interim2)
+--
+--    Creates a dependencies line for soldiers in a training site.
+--
+--    :arg tribename: name of the tribe.
+--    :arg building_description: the trainingsite's building description from C++
+--    :arg interim1: the soldier level trained to in the first line, e.g. "untrained+evade".
+--    :arg interim1: the soldier level trained from in the second line, e.g. "fulltrained-evade".
+--    :returns: a row of pictures connected by arrows.
+--
+function dependencies_training(tribename, building_description, interim1, interim2)
+	return
+		rt(h2(_"Dependencies")) ..
+		dependencies_basic({
+			"tribes/" .. tribename .. "/soldier/untrained.png",
+			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
+			"tribes/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
+		dependencies_basic({
+			"tribes/" .. tribename .. "/soldier/" .. interim2 .. ".png",
+			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
+			"tribes/" .. tribename .. "/soldier/fulltrained.png"})
+end
+
+
+-- RST
+-- .. function:: dependencies_training_food
+--
+--    Creates dependencies lines for food in training sites.
+--
+--    :arg tribename: name of the tribe.
+--    :arg foods: an array of arrays with food items. Outer array has "and" logic and
+--	          will appear from back to front, inner arrays have "or" logic
+--    :returns: a list of food descriptions with images
+--
+function dependencies_training_food(tribename, foods)
+	local result = ""
+	for countlist, foodlist in pairs(foods) do
+		local images = ""
+		local text = ""
+		for countfood, food in pairs(foodlist) do
+			local ware_descr = wl.Game():get_ware_description(tribename, food)
+			if(countfood > 1) then
+				images = images .. ";"
+				text = _"%1$s or %2$s":bformat(text, ware_descr.descname)
+			else
+				text = ware_descr.descname
+			end
+			images = images .. "tribes/" .. tribename .. "/" .. ware_descr.name .. "/menu.png"
+		end
+		if(countlist > 1) then
+			text = _"%s and":bformat(text)
+		end
+		result = image_line(images, 1, p(text)) .. result
+	end
+	return result
+end
+
+
+-- RST
+-- .. function:: dependencies_training_weapons(tribename, building_description, weapons, manufacturer)
+--
+--    Creates a dependencies line for any number of weapons.
+--
+--    :arg tribename: name of the tribe.
+--    :arg building_description: the trainingsite's building description from C++
+--    :arg weapons: an array of weapon names
+--    :arg manufacturer: the name of the building manufacturing the weapons
+--    :returns: a list weapons images with the producing and receiving building
+--
+function dependencies_training_weapons(tribename, building_description, weapons, manufacturer)
+	local manufacturer_descr = wl.Game():get_building_description(tribename, manufacturer)
+	local weaponsstring = ""
+	for count, weapon in pairs(weapons) do
+		if(count > 1) then
+			weaponsstring = weaponsstring .. ";"
+		end
+		weaponsstring = weaponsstring .. "tribes/" .. tribename .. "/" .. weapon .. "/menu.png"
+	end
+	return dependencies_basic({
+			"tribes/" .. tribename .. "/" .. manufacturer_descr.name  .. "/menu.png",
+			weaponsstring,
+			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
+		}) .. rt(p(_"Provided by: %s":bformat(manufacturer_descr.descname)))
+end
+
+
+--  =======================================================
+--  ************* Main buildinghelp functions *************
+--  =======================================================
+
+-- RST
+-- .. function building_help_general_string(tribename, building_description, resourcename, purpose, note[, working_radius])
 --
 --    Creates the string for the general section in building help
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg resourcename: The resource this building produces
---    :arg working_radius: The working radious of the building
+--    :arg building_description: The building's building description from C++
+--    :arg resourcename: The name of a representative resource that this building produces
+--    :arg purpose: A string explaining the purpose of the building
+--    :arg purpose: A string with a note about the building. Use an empty string if you don't want to add a note.
+--    :arg working_radius: The int working radius of the building. This paramater is optional.
 --    :returns: rt of the formatted text
 --
 function building_help_general_string(tribename, building_description, resourcename, purpose, note, working_radius)
@@ -308,15 +387,17 @@ end
 
 
 -- RST
--- .. function:: building_help_inputs(tribename, building_description)
+-- .. function:: building_help_inputs(tribename, building_description, buildinglist, ware)
 --
---    The input wares of a building
+--    The input buildings of a ware
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
---    :returns: an rt string with images describing a chain of ware/building dependencies TODO not implemented
+--    :arg buildinglist: A table of building names that produce the ware
+--    :arg warename: The name of the ware for which the buildings are displayed
+--    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_inputs(tribename, building_description, buildinglist, ware)
+function building_help_inputs(tribename, building_description, buildinglist, warename)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
 	result = result .. rt(h3(_"Incoming:"))
@@ -324,7 +405,7 @@ function building_help_inputs(tribename, building_description, buildinglist, war
 	-- TODO get the buildinglist with the help of the resource
 	for j, building in ipairs(buildinglist) do
 		result = result .. building_help_dependencies_ware_building(
-			tribename, {building, ware, building_description.name}, ware, building
+			tribename, {building, ware, building_description.name}, warename, building
 		)
 	end
 
@@ -346,13 +427,16 @@ end
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
---    :returns: an rt string with images describing a chain of ware/building dependencies TODO not implemented
+--    :arg buildinglist: A table of building names that produce the ware
+--    :arg is_basic: True if this is a basic productionsite like a quarry that has no input wares.
+--    :returns: an rt string with images describing a chain of ware/building dependencies
 --
 function building_help_outputs(tribename, building_description, buildinglist, is_basic)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
 
 	-- TODO get is_basic from [aihints] in conf, so we can define "Collects" from the output?
+	-- or check if the list of input wares is empty
 	if(is_basic) then
 		result = result .. rt(h3(_"Collects:"))
 
@@ -383,81 +467,7 @@ function building_help_outputs(tribename, building_description, buildinglist, is
 	return result
 end
 
-
-
 -- RST
--- .. function:: building_help_depencencies_ware(tribename, items, ware)
---
---    Formats a chain of ware dependencies for the help window
---
---    :arg tribename: e.g. "barbarians".
---    :arg items: an array with ware and building names,
---                            e.g. {"constructionsite", "trunk"}
---    :arg ware: the ware to use as a title.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_dependencies_ware(tribename, items, ware)
-	local ware_descr = wl.Game():get_ware_description(tribename, ware)
-	return dependencies(tribename, items, ware_descr.descname)
-end
-
-
--- RST
--- .. function:: building_help_depencencies_building(tribename, items, building)
---
---    Formats a chain of ware dependencies for the help window
---
---    :arg tribename: e.g. "barbarians".
---    :arg items: an array with ware and building names,
---                            e.g. {"constructionsite", "trunk"}
---    :arg building: the building to use as a title.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_dependencies_building(tribename, items, buildingname)
-	local building_descr = wl.Game():get_building_description(tribename,buildingname)
-	return dependencies(tribename, items, building_descr.descname)
-end
-
-
-
--- RST
--- .. function:: building_help_depencencies_building(tribename, items, building)
---
---    Formats a chain of ware dependencies for the help window
---
---    :arg tribename: e.g. "barbarians".
---    :arg items: an array with ware and building names,
---                            e.g. {"constructionsite", "trunk"}
---    :arg building: the building to use as a title.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_dependencies_ware_building(tribename, items, warename, buildingname)
-	local building_descr = wl.Game():get_building_description(tribename,buildingname)
-	local ware_descr = wl.Game():get_ware_description(tribename, warename)
-	return dependencies(tribename, items, _"%1$s from: %2$s":bformat(ware_descr.descname, building_descr.descname))
-end
-
-
--- RST
--- .. function:: building_help_depencencies_ware(tribename, items, ware)
---
---    Formats a chain of ware dependencies for the help window. First item is a mining resource.
---
---    :arg tribename: e.g. "barbarians".
---    :arg items: an array with ware and building names,
---                            e.g. {"constructionsite", "trunk"}
---    :arg ware: the ware to use as a title.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_dependencies_resi(tribename, items, ware)
-	local ware_descr = wl.Game():get_ware_description(tribename, ware)
-	return dependencies_resi(tribename, items, ware_descr.descname)
-end
-
-
--- RST
---
--- TODO: Causes panic in image_line if resource does not exist
 --
 -- .. function:: building_help_building_section(tribename, building_description[, upgraded_from])
 --
@@ -465,7 +475,8 @@ end
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
---    :arg upgraded_from: The building name that this building is usually upgraded from. Leave blank if this is a basic building.
+--    :arg upgraded_from: The building name that this building is usually upgraded from.
+--                        Leave blank if this is a basic building.
 --    :returns: an rt string describing the building section
 --
 function building_help_building_section(tribename, building_description, upgraded_from)
@@ -491,8 +502,7 @@ function building_help_building_section(tribename, building_description, upgrade
 		if (building_description.enhanced) then
 			local former_building = nil
 			if (upgraded_from) then
-			former_building = wl.Game():get_building_description(tribename, upgraded_from)
-				-- todo get the building this was upgraded from
+				former_building = wl.Game():get_building_description(tribename, upgraded_from)
 				result = result .. text_line(_"Upgraded from:", former_building.descname)
 			else
 				result = result .. text_line(_"Upgraded from:", _"Unknown")
@@ -576,13 +586,13 @@ end
 --    Displays a worker with an image
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg building_description: the building_description for this help file.
+--    :arg building_description: the building_description from C++.
 --    :arg workernames: an array with the most basic worker in the last position, e.g. {"chief-miner", "miner"}.
 --    :arg toolname: the name of the tool the workers use, e.g. "pick"
 --    :returns: Workers/Crew section of the help file
 --
 function building_help_crew_string(tribename, building_description, workernames, toolname)
-	-- Need to get the building description again to make sure we have type "productionsite"
+	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
 

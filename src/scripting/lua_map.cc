@@ -590,6 +590,7 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
 
+// use the dynamic type of BuildingDescription
 #undef CAST_TO_LUA
 #define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
    (L, new lua_klass(static_cast<const klass *>(desc)))
@@ -1001,24 +1002,24 @@ int L_Map::recalculate(lua_State * L) {
 
 
 /* RST
-WareDescription
----
+MapObjectDescription
+----------
 
-Properties of wares read from the conf files available for Lua
+.. class:: MapObjectDescription
 
-TODO
+	A static description of a tribe's map object, so it can be used in help files
+	without having to access an actual object on the map.
+	This class contains the properties that are common to all map objects such as buildings or wares.
+
+	The dynamic MapObject class corresponding to this class is the base class for all Objects in widelands,
+	including immovables and Bobs. This class can't be instantiated directly, but provides the base
+	for all others.
 */
-
 const char L_MapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<L_MapObjectDescription> L_MapObjectDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] = {
-	// TODO(GunChleoc): For example stuff like name()
-	// descname() and attributes() (like is_tree or is_stone) are tracked there.
-	// It could be beneficial to add a "base directory" (e.g.
-	// tribes/barbarians/lumberjacks_hut) or something in there too, but only do
-	// this if you need it for the help files.
 	PROP_RO(L_MapObjectDescription, name),
 	PROP_RO(L_MapObjectDescription, descname),
 	{nullptr, nullptr, nullptr},
@@ -1038,7 +1039,7 @@ void L_MapObjectDescription::__unpersist(lua_State * /* L */) {
 /* RST
 	.. attribute:: name
 
-			(RO) a string with the map object's internal name
+			(RO) a :string:`name` with the map object's internal name
 */
 
 int L_MapObjectDescription::get_name(lua_State * L) {
@@ -1050,7 +1051,7 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 /* RST
 	.. attribute:: name
 
-			(RO) a string with the map object's localized name
+			(RO) a :string:`descname` with the map object's localized name
 */
 
 int L_MapObjectDescription::get_descname(lua_State * L) {
@@ -1062,9 +1063,15 @@ int L_MapObjectDescription::get_descname(lua_State * L) {
 
 /* RST
 BuildingDescription
----
+----------
 
-TODO
+.. class:: BuildingDescription
+
+	A static description of a tribe's building, so it can be used in help files
+	without having to access an actual building on the map.
+	This class contains the properties that are common to all buildings.
+	Further properties are implemented in the subclasses.
+	See also class MapObjectDescription for more properties.
 */
 const char L_BuildingDescription::className[] = "BuildingDescription";
 const MethodType<L_BuildingDescription> L_BuildingDescription::Methods[] = {
@@ -1136,7 +1143,7 @@ int L_BuildingDescription::get_buildable(lua_State * L) {
 /* RST
 	.. attribute:: conquers
 
-			(RO) the vision range of the building as an int.
+			(RO) the conquer range of the building as an int.
 */
 int L_BuildingDescription::get_conquers(lua_State * L) {
 	lua_pushinteger(L, get()->get_conquers());
@@ -1158,7 +1165,7 @@ int L_BuildingDescription::get_destructible(lua_State * L) {
 /* RST
 	.. attribute:: enhanced
 
-			(RO) true if the building is an enhanced from another building.
+			(RO) true if the building is enhanced from another building.
 */
 int L_BuildingDescription::get_enhanced(lua_State * L) {
 	lua_pushboolean(L, get()->is_enhanced());
@@ -1218,7 +1225,7 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 /* RST
 	.. attribute:: type
 
-			(RO) the type of the building, e.g. productionsite.
+			(RO) the :int:`type` of the building, e.g. building.
 */
 int L_BuildingDescription::get_type(lua_State * L) {
 	const Building_Descr * descr = static_cast<const Building_Descr *>(get());
@@ -1249,12 +1256,7 @@ int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
 /* RST
 	.. attribute:: size
 
-	Returns the size of a building:
-	1 = small
-	2 = medium
-	3 = big
-
-			(RO) the size of the building as an int.
+			(RO) the :int:`size` of the building: 1 = small, 2 = medium, 3 = big.
 */
 int L_BuildingDescription::get_size(lua_State * L) {
 	lua_pushinteger(L, get()->get_size());
@@ -1265,7 +1267,7 @@ int L_BuildingDescription::get_size(lua_State * L) {
 /* RST
 	.. attribute:: vision range
 
-			(RO) the vision range of the building as an int.
+			(RO) the :int:`vision_range` of the building as an int.
 */
 int L_BuildingDescription::get_vision_range(lua_State * L) {
 	lua_pushinteger(L, get()->vision_range());
@@ -1275,11 +1277,15 @@ int L_BuildingDescription::get_vision_range(lua_State * L) {
 
 /* RST
 ProductionSiteDescription
----
+----------
 
-Properties of workers read from the conf files available for Lua
+.. class:: ProductionSiteDescription
 
-TODO
+	A static description of a tribe's productionsite, so it can be used in help files
+	without having to access an actual building on the map.
+	This class contains the properties for productionsites that have workers.
+	For militarysites and trainingsites, please use the subclasses.
+	See also class BuildingDescription and class MapObjectDescription for more properties.
 */
 const char L_ProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Methods[] = {
@@ -1329,7 +1335,7 @@ int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 /* RST
 	.. attribute:: nr_working_positions
 TODO always returns 1
-		(RO) The :int:`number` of worker positions in the production site
+		(RO) The :int:`number` of worker positions at the production site
 */
 int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
 	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
@@ -1340,6 +1346,7 @@ int L_ProductionSiteDescription::get_nr_working_positions(lua_State * L) {
 
 /* RST
 	.. attribute:: output_ware_types
+
 		(RO) An array with pairs of int, ware_descr.name describing the output of the productionsite
 */
 int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
@@ -1362,7 +1369,7 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 /* RST
 	.. attribute:: type
 
-			(RO) the type of the building, e.g. productionsite.
+			(RO) the :string:`type` of the building, e.g. productionsite.
 */
 int L_ProductionSiteDescription::get_type(lua_State * L) {
 	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
@@ -1392,11 +1399,14 @@ int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 
 /* RST
 MilitarySiteDescription
----
+----------
 
-Properties of military sites read from the conf files available for Lua
+.. class:: MilitarySiteDescription
 
-TODO
+	A static description of a tribe's militarysite, so it can be used in help files
+	without having to access an actual building on the map.
+	A militarysite can garrison and heal soldiers, and it will expand your territory.
+	See also class BuildingDescription and class MapObjectDescription for more properties.
 */
 const char L_MilitarySiteDescription::className[] = "MilitarySiteDescription";
 const MethodType<L_MilitarySiteDescription> L_MilitarySiteDescription::Methods[] = {
@@ -1423,6 +1433,7 @@ void L_MilitarySiteDescription::__unpersist(lua_State * /* L */) {
 
 /* RST
 	.. attribute:: heal_per_second
+
 		(RO) The :int:`number` of health healed ber second by the militarysite
 */
 int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
@@ -1433,6 +1444,7 @@ int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
 
 /* RST
 	.. attribute:: max_number_of_soldiers
+
 		(RO) The :int:`number` of soldiers that can be garrisoned at the militarysite
 */
 int L_MilitarySiteDescription::get_max_number_of_soldiers(lua_State * L) {
@@ -1444,7 +1456,7 @@ int L_MilitarySiteDescription::get_max_number_of_soldiers(lua_State * L) {
 /* RST
 	.. attribute:: type
 
-			(RO) the type of the building, e.g. militarysite.
+			(RO) the :string:`type` of the building, e.g. militarysite.
 */
 int L_MilitarySiteDescription::get_type(lua_State * L) {
 	const MilitarySite_Descr * descr = static_cast<const MilitarySite_Descr *>(get());
@@ -1455,11 +1467,14 @@ int L_MilitarySiteDescription::get_type(lua_State * L) {
 
 /* RST
 TrainingSiteDescription
----
+----------
 
-Properties of training sites read from the conf files available for Lua
+.. class:: TrainingSiteDescription
 
-TODO
+	A static description of a tribe's trainingsite, so it can be used in help files
+	without having to access an actual building on the map.
+	A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
+	See also class BuildingDescription and class MapObjectDescription for more properties.
 */
 const char L_TrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<L_TrainingSiteDescription> L_TrainingSiteDescription::Methods[] = {
@@ -1492,6 +1507,7 @@ void L_TrainingSiteDescription::__unpersist(lua_State * /* L */) {
 
 /* RST
 	.. attribute:: max_attack
+
 		(RO) The :int:`number` of attack points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
@@ -1504,6 +1520,7 @@ int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
 
 /* RST
 	.. attribute:: max_defense
+
 		(RO) The :int:`number` of defense points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
@@ -1517,6 +1534,7 @@ int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
 
 /* RST
 	.. attribute:: max_evade
+
 		(RO) The :int:`number` of evade points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
@@ -1530,6 +1548,7 @@ int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
 
 /* RST
 	.. attribute:: max_hp
+
 		(RO) The :int:`number` of health points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
@@ -1543,6 +1562,7 @@ int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
 
 /* RST
 	.. attribute:: max_number_of_soldiers
+
 		(RO) The :int:`number` of soldiers that can be garrisoned at the trainingsite
 */
 int L_TrainingSiteDescription::get_max_number_of_soldiers(lua_State * L) {
@@ -1554,6 +1574,7 @@ int L_TrainingSiteDescription::get_max_number_of_soldiers(lua_State * L) {
 
 /* RST
 	.. attribute:: min_attack
+
 		(RO) The :int:`number` of attack points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_attack(lua_State * L) {
@@ -1566,6 +1587,7 @@ int L_TrainingSiteDescription::get_min_attack(lua_State * L) {
 
 /* RST
 	.. attribute:: min_defense
+
 		(RO) The :int:`number` of defense points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
@@ -1579,6 +1601,7 @@ int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
 
 /* RST
 	.. attribute:: min_evade
+
 		(RO) The :int:`number` of evade points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
@@ -1592,6 +1615,7 @@ int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
 
 /* RST
 	.. attribute:: min_hp
+
 		(RO) The :int:`number` of health points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
@@ -1606,7 +1630,7 @@ int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
 /* RST
 	.. attribute:: type
 
-			(RO) the type of the building, e.g. trainingsite.
+			(RO) the :string:`type` of the building, e.g. trainingsite.
 */
 int L_TrainingSiteDescription::get_type(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
@@ -1616,12 +1640,16 @@ int L_TrainingSiteDescription::get_type(lua_State * L) {
 
 
 /* RST
-ProductionSiteDescription
----
+WarehouseDescription
+----------
 
-Properties of workers read from the conf files available for Lua
+.. class:: WarehouseDescription
 
-TODO
+	A static description of a tribe's warehouse, so it can be used in help files
+	without having to access an actual building on the map.
+	Note that headquarters are also warehouses.
+	A warehouse keeps people, animals and wares.
+	See also class BuildingDescription and class MapObjectDescription for more properties.
 */
 const char L_WarehouseDescription::className[] = "WarehouseDescription";
 const MethodType<L_WarehouseDescription> L_WarehouseDescription::Methods[] = {
@@ -1648,7 +1676,8 @@ void L_WarehouseDescription::__unpersist(lua_State * /* L */) {
 TODO this returns nil. Why?
 
 	.. attribute:: heal_per_second
-		(RO) The :int:`number` of health healed ber second by the warehouse
+
+		(RO) The :int:`number` of health healed per second by the warehouse
 */
 int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
 	const Warehouse_Descr * descr = static_cast<const Warehouse_Descr *>(get());
@@ -1660,7 +1689,7 @@ int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
 /* RST
 	.. attribute:: type
 
-			(RO) the type of the building, e.g. warehouse.
+			(RO) the :string:`type` of the building, e.g. warehouse.
 */
 int L_WarehouseDescription::get_type(lua_State * L) {
 	const Warehouse_Descr * descr = static_cast<const Warehouse_Descr *>(get());
@@ -1672,13 +1701,14 @@ int L_WarehouseDescription::get_type(lua_State * L) {
 
 /* RST
 WareDescription
----
+----------
 
-Properties of wares read from the conf files available for Lua
+.. class:: WareDescription
 
-TODO
+	A static description of a tribe's ware, so it can be used in help files
+	without having to access an actual instance of the ware on the map.
+	See also class MapObjectDescription for more properties.
 */
-
 const char L_WareDescription::className[] = "WareDescription";
 const MethodType<L_WareDescription> L_WareDescription::Methods[] = {
 	{nullptr, nullptr},
@@ -1701,11 +1731,13 @@ void L_WareDescription::__unpersist(lua_State * /* L */) {
 
 /* RST
 WorkerDescription
----
+----------
 
-Properties of workers read from the conf files available for Lua
+.. class:: WorkerDescription
 
-TODO
+	A static description of a tribe's worker, so it can be used in help files
+	without having to access an actual instance of the worker on the map.
+	See also class MapObjectDescription for more properties.
 */
 const char L_WorkerDescription::className[] = "WorkerDescription";
 const MethodType<L_WorkerDescription> L_WorkerDescription::Methods[] = {
@@ -1749,7 +1781,7 @@ int L_WorkerDescription::get_becomes(lua_State * L) {
 /* RST
 	.. attribute:: level_experience
 
-			(RO) the experience the worker needs to reach this level.
+			(RO) the :int:`experience` the worker needs to reach this level.
 */
 int L_WorkerDescription::get_level_experience(lua_State * L) {
 	lua_pushinteger(L, get()->get_level_experience());
