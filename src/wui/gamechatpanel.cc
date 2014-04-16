@@ -19,6 +19,7 @@
 
 #include "wui/gamechatpanel.h"
 
+#include <cstdint>
 
 /**
  * Create a game chat panel
@@ -32,7 +33,7 @@ GameChatPanel::GameChatPanel
 	m_chat   (chat),
 	chatbox  (this, 0, 0, w, h - 25, "", UI::Align_Left, 1),
 	editbox  (this, 0, h - 20, w,  20),
-	chat_message_counter(0)
+	chat_message_counter(UINT32_MAX)
 {
 	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 	editbox.ok.connect(boost::bind(&GameChatPanel::keyEnter, this));
@@ -65,7 +66,7 @@ void GameChatPanel::recalculate()
 	chatbox.set_text(str);
 
 	// If there are new messages, play a sound
-	if (msgs.size() != chat_message_counter)
+	if (0 < msgs.size() && msgs.size() != chat_message_counter)
 	{
 		// computer generated ones are ignored
 		// Note: if many messages arrive simultaneously,
@@ -74,7 +75,7 @@ void GameChatPanel::recalculate()
 		if (!msgs.back().sender.empty() && !m_chat.sound_off())
 		{
 			// The latest message is not a system message
-			if (std::string::npos == msgs.back().sender.find("(IRC)"))
+			if (std::string::npos == msgs.back().sender.find("(IRC)") && chat_message_counter < msgs.size())
 			{
 				// The latest message was not relayed from IRC.
 				// The above built-in string constant should match
