@@ -1,22 +1,23 @@
 # Widelands po/fi_FI/campaigns/t01.wmf.po
 # Copyright (C) 2008 Widelands Development Team
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2010-02-10 23:12+0000\n"
-"Last-Translator: Sini Ruohomaa <Unknown>\n"
-"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-12 12:39+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:29+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: FINLAND\n"
+"Language: fi\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -32,23 +33,30 @@ msgstr "Thron huokaa..."
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and dark."
 msgstr ""
+"Kuukausia on kulunut, ja piilottelemme yhä siellä missä metsät ovat vanhoja "
+"ja synkkiä."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:18
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
+"Soturini metsästävät päivisin ja makaavat valveilla öisin, kuunnellen kaukaa "
+"ikivanhojen puiden seasta kantautuvia julman verilöylyn ääniä."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:23
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
 msgstr ""
+"Näemme Al'thunranin nielevät hirveät liekit tänne asti, kilometrien päähän."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:24
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr ""
+"Punaiset valot välähtelevät pimeydessä ja tanssivat minua painajaisissanikin "
+"riivaavien sotarumpujen tahtiin."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:28
 msgid ""
@@ -197,6 +205,7 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/texts.lua:86
 msgid "Build a ranger’s hut to the east of the first lumberjack’s hut."
 msgstr ""
+"Rakenna metsänvartijan maja ensimmäisen puunhakkaajan majasi itäpuolelle."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:92
 #: ../../campaigns/t01.wmf/scripting/texts.lua:94
@@ -205,7 +214,7 @@ msgstr "Rakenna kaksi kivilouhosta"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:95
 msgid "Build two quarries south-west of your headquarters."
-msgstr ""
+msgstr "Rakenna kaksi kivilouhosta päämajasi lounaispuolelle."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:103
 msgid "An old man says..."
@@ -216,6 +225,8 @@ msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr ""
+"Terve, päällikkö. Olen Khantrukh, monta talvea nähnyt. Jos sallit, autan "
+"neuvoineni sinua johtamaan heimoamme läpi näiden synkkien päivien."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:106
 msgid "Khantrukh continues..."
@@ -328,7 +339,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:137
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:138
 msgid ""
@@ -338,12 +349,12 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:145
 msgid "In the Night"
-msgstr ""
+msgstr "Yöllä"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:146
 #: ../../campaigns/t01.wmf/scripting/texts.lua:154
 msgid "Thron says..."
-msgstr ""
+msgstr "Thron puhuu..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:147
 msgid ""
@@ -368,16 +379,21 @@ msgid ""
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky..."
 msgstr ""
+"Jälleen kerran vierailin isäni haudalla, pyhässä lehdossa suuren "
+"Kal'mavrathin tornin juurella. Seisoessani siellä en tuntenut tuntien kulkua "
+"enkä liioin synkältä taivaalta putoavaa kylmää kaatosadetta..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:156
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me..."
 msgstr ""
+"Jotenkin se tuntui jäähyväisiltä. Ensimmäistä kertaa mietin, mitä "
+"tulevaisuus toisi minulle tullessaan..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:161
 msgid "The Other Day"
-msgstr ""
+msgstr "Toisena päivänä"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:162
 msgid "Thron says thoughtfully..."
@@ -399,7 +415,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:168
 msgid "The Oath"
-msgstr ""
+msgstr "Vala"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:169
 msgid "Thron looks furious..."
@@ -411,10 +427,14 @@ msgid ""
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
 msgstr ""
+"Tänään soturini noukkivat synkästä metsästä vanhan miehen, joka harhaili "
+"sairaana ja haavoittuneena. Kuuntelimme kauhuissamme, kun hän kertoi meille "
+"hirveyksistä, joita Al'thunranissa tapahtuu."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:171
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr ""
+"Uusin täten valani - pistän tälle hulluudelle lopun hinnalla millä hyvänsä!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

@@ -24,7 +24,7 @@ return {
 		dependencies({"tribes/barbarians/reed_yard/menu.png","tribes/barbarians/thatchreed/menu.png"},p(_"Thatch Reed")) ..
 		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
 		rt(p(_"The Reed Yard’s output will only go to construction sites that need it.")) ..
-		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/weaving-mill/menu.png"},p(_"Weaving-Mill")) ..
+		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/weaving-mill/menu.png"},p(_"Weaving Mill")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..

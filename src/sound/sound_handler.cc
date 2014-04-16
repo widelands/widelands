@@ -23,6 +23,7 @@
 
 #include <SDL.h>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/regex.hpp>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -215,8 +216,8 @@ void Sound_Handler::load_system_sounds()
 	load_fx_if_needed("sound", "message", "sound/message");
 	load_fx_if_needed("sound/military", "under_attack", "sound/military/under_attack");
 	load_fx_if_needed("sound/military", "site_occupied", "sound/military/site_occupied");
-	load_fx_if_needed("sound", "message_chat", "sound/message_chat");
-	load_fx_if_needed("sound", "message_freshmen", "sound/message_freshmen");
+	load_fx_if_needed("sound", "lobby_chat", "sound/lobby_chat");
+	load_fx_if_needed("sound", "lobby_freshmen", "sound/lobby_freshmen");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
@@ -249,9 +250,9 @@ void Sound_Handler::load_fx_if_needed
 	const std::string full_path = dir + "/" + filename;
 	const std::string basename = FileSystem::FS_Filename(full_path.c_str());
 	const std::string dirname = FileSystem::FS_Dirname(full_path);
-	files = filter(g_fs->ListDirectory(dirname), [&basename](const std::string& fn) {
-		const std::string only_filename = FileSystem::FS_Filename(fn.c_str());
-		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
+	boost::regex re(basename + "_\\d+\\.ogg");
+	files = filter(g_fs->ListDirectory(dirname), [&re](const std::string& fn) {
+		return boost::regex_match(FileSystem::FS_Filename(fn.c_str()), re);
 	});
 
 	for (i = files.begin(); i != files.end(); ++i) {

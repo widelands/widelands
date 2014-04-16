@@ -2,20 +2,21 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-11-24 13:56+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-16 09:47+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:31+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
+"Language: nb\n"
 
 #: ../../txts/README.lua:7
 msgid "README"
@@ -48,6 +49,10 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"I dette spillet starter du med et lite landområde og bare noen få ressurser. "
+"Ved hjelp av disse vil du skape et imperium med flere tusen innbyggere. På "
+"veien mot dette målet, vil du etablere en stabil økonomi, utforske landet "
+"rundt deg og møte rivaliserende stammer."
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
@@ -107,30 +112,33 @@ msgid "Keyboard shortcuts (in-game)"
 msgstr "Tastatursnarveier (i spillet)"
 
 #: ../../txts/README.lua:61
-msgid "PAGEUP: increases games peed"
-msgstr ""
+msgid "PAGEUP: increases game speed"
+msgstr "PAGEUP: øker hastigheten i spillet"
 
 #: ../../txts/README.lua:62
-msgid "PAGEDOWN: decreases games peed"
-msgstr ""
+msgid "PAGEDOWN: decreases game speed"
+msgstr "PAGEDOWN: senker hastigheten i spillet"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
 msgstr "PAUSE: pauser spillet"
 
 #: ../../txts/README.lua:64
+#: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "MELLOMROM: Viser/skjuler byggehjelp"
 
 #: ../../txts/README.lua:65
+#: ../../txts/editor_readme:31
 msgid "M: toggles minimap"
 msgstr "M: viser/skjuler minikart"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: viser/skjuler meldinger (nyheter)"
 
 #: ../../txts/README.lua:67
+#: ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr "C: viser/skjuler folketelling"
 
@@ -148,7 +156,7 @@ msgstr "O: viser/skjuler mål"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "F: bytter til/fra fullskjerm (hvis støttet av OS)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -234,6 +242,8 @@ msgid ""
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
+"- Hvilken versjon av Widelands du kjører (dvs. enten byggnummeret eller\n"
+"revisjonsnummeret hvis du kjører en utviklingsversjon eller et daglig bygg.)"
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -515,68 +525,57 @@ msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"De sidene kan være mer komplette og mer oppdaterte enn denne filen. I "
+"tillegg kan du finne en kort innføring i hvordan du kan lage ditt eget kart."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
 msgstr "Tastatursnarveier"
 
-#: ../../txts/editor_readme:21
-msgid "SPACE    Toggles if building spaces are shown"
-msgstr ""
-
-#: ../../txts/editor_readme:23
-msgid "C        Toggles census on/off"
-msgstr "C Viser/skjuler folketelling"
-
 #: ../../txts/editor_readme:25
-msgid "E        Toggles event menu"
+msgid "E: toggles event menu"
 msgstr ""
 
 #: ../../txts/editor_readme:27
-msgid "F        Toggles fullscreen"
-msgstr "F        Bytter til/fra fullskjerm"
+msgid "F: toggles fullscreen"
+msgstr "F: Bytter til/fra fullskjerm"
 
 #: ../../txts/editor_readme:29
-msgid "H        Toggles main menu"
-msgstr "H Viser/skjuler hovedmenyen"
-
-#: ../../txts/editor_readme:31
-msgid "M        Toggles minimap"
-msgstr "M Viser/skjuler minikart"
+msgid "H: toggles main menu"
+msgstr "H: Viser/skjuler hovedmenyen"
 
 #: ../../txts/editor_readme:33
-msgid "P        Toggles player menu"
-msgstr "P Viser/skjuler spillermenyen"
+msgid "P: toggles player menu"
+msgstr "P: Viser/skjuler spillermenyen"
 
 #: ../../txts/editor_readme:35
-msgid "T        Toggles tools menu"
-msgstr "T Viser/skjuler verktøymenyen"
+msgid "T: toggles tools menu"
+msgstr "T: Viser/skjuler verktøymenyen"
 
 #: ../../txts/editor_readme:37
-msgid "I        Activates information tool"
+msgid "I: activates information tool"
 msgstr ""
 
 #: ../../txts/editor_readme:39
-msgid "CTRL+L   Load Map"
-msgstr "Ctrl+L Last kart"
+msgid "CTRL+L: load Map"
+msgstr ""
 
 #: ../../txts/editor_readme:41
-msgid "CTRL+S   Save Map"
-msgstr "Ctrl+S   Lagre kart"
+msgid "CTRL+S: save Map"
+msgstr ""
 
 #: ../../txts/editor_readme:43
-msgid "1-0      Changes tool size"
-msgstr ""
+msgid "1-0: changes tool size"
+msgstr "1-0: Endrer verktøystørrelse"
 
 #: ../../txts/editor_readme:45
-msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr ""
-"SHIFT    (hold nede) velger alternativ form av verktøy når holdt nede"
+msgid "SHIFT (Hold): selects first alternative tool while pressed"
+msgstr "SHIFT (hold nede): velger alternativ form av verktøy når holdt nede"
 
 #: ../../txts/editor_readme:47
-msgid "ALT      (Hold) Selects second alternative tool while pressed"
+msgid "ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
-"Alt      (hold nede) Velger andre alternative form av verktøy når holdt nede"
+"ALT (hold nede): Velger andre alternative form av verktøy når holdt nede"
 
 #: ../../txts/license:1
 msgid "License"
@@ -693,6 +692,8 @@ msgid ""
 "Just like with natural objects (bobs), you can also select multiple animals "
 "or ground textures with CTRL + mouse click."
 msgstr ""
+"Som med naturlige objekter, kan du også velge flere dyr eller bakketeksturer "
+"med CTRL + klikk."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -700,11 +701,16 @@ msgid ""
 "most cases the complete opposite of the normal tool (for example deletion of "
 "an object instead of placing one)."
 msgstr ""
+"Ved å holde nede SHIFT bytter du til en alternativ form av verktøyet. Den "
+"alternative formen er vanligvis for motsatt bruk av verktøyet (for eksempel "
+"slette et objekt istedenfor å legge til et)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down ALT switches the second alternative tool on (if it exists)."
 msgstr ""
+"Ved å holde ned ALT bytter du til en alternativ form av verktøyet (hvis det "
+"finnes)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -717,6 +723,8 @@ msgid ""
 "SPACE key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr ""
+"Mellomrom-tasten oppfører seg som i et vanlig spill. Den slår byggehjelpen "
+"på eller av."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -744,7 +752,7 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Gruvearbeidere vil kun jobbe hvis de blir forsynt med mat."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -794,7 +802,7 @@ msgstr ""
 msgid ""
 "Pressing and holding the ALT GR key lets you drag the window below the mouse "
 "pointer."
-msgstr ""
+msgstr "Hvis du holder nede Alt Gr kan du dra vinduet under musepekeren."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""

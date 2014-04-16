@@ -72,10 +72,11 @@ function count_in_warehouses(ware)
 end
 
 function send_building_lost_message(f)
+-- TODO: replace menu.png with representative_image as soon as this has been wrapped
    p1:send_message(_"Building lost!",
-      rt(p(
-         (_"We lost a %s to the ocean!"):format(f.immovable.descname)
-      )), { field = f, popup = true }
+      rt("image=tribes/atlanteans/".. f.immovable.name .."/menu.png",
+         p(_"We lost a building to the ocean!")
+      ), { field = f, popup = true }
    )
 end
 
@@ -92,7 +93,6 @@ function initialize()
    set_textdomain("scenario_atl01.wmf")
    local hq = wl.Game().map.player_slots[1].starting_field.immovable
    hq:set_workers{shipwright=1}
-
 
    -- Place some buildings
    prefilled_buildings(p1,
