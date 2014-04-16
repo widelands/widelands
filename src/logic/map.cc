@@ -542,7 +542,7 @@ Set the starting coordinates of a player
 */
 void Map::set_starting_pos(Player_Number const plnum, Coords const c)
 {
-	assert(1 <= plnum <= get_nrplayers());
+	assert(1 <= plnum && plnum <= get_nrplayers());
 	m_starting_pos[plnum - 1] = c;
 }
 
