@@ -16,8 +16,8 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	--General Section
 	-- TODO the last parameter (Working radius) should be read from C++. "coal" as well?
 	building_help_general_string("barbarians", building_description, "coal",
-		_"A %1$s exploits only %2$s of the resource. From there on out, it will only have a 5%% chance of finding %3$s.":bformat(_"deep coal mine","2/3",_"coal"),
-		_"Dig %s out of the ground in mountain terrain.":format(_"coal"),
+		_"Digs coal out of the ground in mountain terrain.",
+		_"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal.":bformat("2/3"),
 		"2") ..
 
 	--Dependencies
@@ -27,16 +27,16 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_inputs("barbarians", building_description, {"inn", "big_inn"}, "snack") ..
 	building_help_outputs("barbarians", building_description, {"axfactory", "warmill", "helmsmithy", "smelting_works", "lime_kiln"}) ..
 
-	--Building Section
-	building_help_building_section("barbarians", building_description, "coalmine") ..
-
 	--Workers Section
 	-- TODO get worker list from C++ and handle in format_help
 	-- TODO get tool from C++
 	building_help_crew_string("barbarians", building_description, {"chief-miner", "miner"}, "pick") ..
 
+	--Building Section
+	building_help_building_section("barbarians", building_description, "coalmine") ..
+
 	--Production Section
 	rt(h2(_"Production")) ..
-	text_line(_"Performance:", _"If the food supply is steady, this mine can produce %1$s in %2$s on average.":bformat(_"coal","19.5s"))
+	text_line(_"Performance:", _"If the food supply is steady, this mine can produce coal in %s on average.":bformat("19.5s"))
    end
 }

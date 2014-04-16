@@ -7,7 +7,6 @@
 -- Functions used in the ingame help windows for formatting the text and pictures.
 
 -- RST
--- TODO remove this once everything works
 -- .. function:: dependencies(images[, text = nil])
 --
 --    Creates a dependencies line of any length.
@@ -16,7 +15,7 @@
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies_old(images, text)
+function dependencies_basic(images, text)
 	if not text then
 		text = ""
 	end
@@ -78,6 +77,97 @@ function dependencies_resi(tribename, items, text)
 		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
 	end
 	return rt(string, p(text))
+end
+
+
+--
+-- Functions used in the ingame help windows for formatting the text and pictures.
+
+-- RST
+-- .. function:: dependencies_resi(tribename, items[, text = nil])
+--
+--    Creates a dependencies line of any length.
+--
+--    :arg tribename: name of the tribe.
+--    :arg items: wares and/or buildings in the correct order from left to right as table (set in {}).
+--    :arg text: comment of the image.
+--    :returns: a row of pictures connected by arrows.
+--
+function dependencies_training(tribename, building_description, interim1, interim2)
+	return
+		rt(h2(_"Dependencies")) ..
+		dependencies_basic({
+			"tribes/" .. tribename .. "/soldier/untrained.png",
+			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
+			"tribes/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
+		dependencies_basic({
+			"tribes/" .. tribename .. "/soldier/" .. interim2 .. ".png",
+			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
+			"tribes/" .. tribename .. "/soldier/fulltrained.png"})
+end
+
+
+-- RST
+-- .. function:: dependencies_training_food
+--
+--    Creates a dependencies line of any length.
+--
+--    :arg tribename: name of the tribe.
+--    :arg foods: an array of arrays with food items. Outer array has "and" logic and will appear from back to front, inner arrays have "or" logic
+--    :returns: a list of foods
+--
+function dependencies_training_food(tribename, foods)
+	local result = ""
+	for countlist, foodlist in pairs(foods) do
+		local images = ""
+		local text = ""
+		for countfood, food in pairs(foodlist) do
+			local ware_descr = wl.Game():get_ware_description(tribename, food)
+			if(countfood > 1) then
+				images = images .. ";"
+				text = _"%1$s or %2$s":bformat(text, ware_descr.descname)
+			else
+				text = ware_descr.descname
+			end
+			images = images .. "tribes/" .. tribename .. "/" .. ware_descr.name .. "/menu.png"
+		end
+		if(countlist > 1) then
+			text = _"%s and":bformat(text)
+		end
+		result = image_line(images, 1, p(text)) .. result
+	end
+	return result
+end
+
+
+-- RST
+-- .. function:: dependencies_training_weapons
+--
+--    Creates a dependencies line of any length.
+--
+--    :arg tribename: name of the tribe.
+--    :arg foods: an array of arrays with food items. Outer array has "and" logic and will appear from back to front, inner arrays have "or" logic
+--    :returns: a list of foods
+--
+function dependencies_training_weapons(tribename, building_description, weapons, manufacturer)
+	local manufacturer_descr = wl.Game():get_building_description(tribename, manufacturer)
+--		dependencies_training_weapons("barbarians", building_description, {"helm", "mask", "warhelm"}, "helmsmithy") ..
+
+--		dependencies_basic({"tribes/barbarians/helmsmithy/menu.png","tribes/barbarians/helm/menu.png;tribes/barbarians/mask/menu.png;tribes/barbarians/warhelm/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
+--		rt(p(_"Provided by the Helm Smithy")) ..
+
+	local weaponsstring = ""
+	for count, weapon in pairs(weapons) do
+		if(count > 1) then
+			weaponsstring = weaponsstring .. ";"
+		end
+		weaponsstring = weaponsstring .. "tribes/" .. tribename .. "/" .. weapon .. "/menu.png"
+	end
+	return dependencies_basic({
+			"tribes/" .. tribename .. "/" .. manufacturer_descr.name  .. "/menu.png",
+			weaponsstring,
+			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
+		}) .. rt(p(_"Provided by: %s":bformat(manufacturer_descr.descname)))
 end
 
 
@@ -148,46 +238,45 @@ end
 --    :arg working_radius: The working radious of the building
 --    :returns: rt of the formatted text
 --
-function building_help_general_string(tribename, building_description, resourcename, info, purpose, working_radius)
+function building_help_general_string(tribename, building_description, resourcename, purpose, note, working_radius)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = rt(h2(_"General"))
-
-	if (info) then result = result .. rt(p(info)) end
 	result = result .. rt(h3(_"Purpose:")) ..
 		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
-
-	result = result .. text_line(_"Vision range:", building_description.vision_range)
+	if (note ~= "") then	result = result .. rt(h3(_"Note:")) .. rt(p(note)) end
 
 	--result = result .. text_line(_"TEST TODO remove this when done:", building_description.type)
 
 	if(building_description.type == "productionsite") then
-		result = result .. text_line(_"Working radius:", working_radius)
+		if (working_radius) then result = result .. text_line(_"Working radius:", working_radius) end
 	elseif(building_description.type == "militarysite") then
-		result = result .. text_line(_"Conquer range:", building_description.conquers)
-		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
 		result = result .. rt(h3(_"Healing:")
 			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.max_number_of_soldiers)))
+		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
+		result = result .. text_line(_"Conquer range:", building_description.conquers)
 	elseif(building_description.type == "trainingsite") then
 		result = result .. rt(h2(_"Training"))
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
-		if(building_description.max_hp > 0) then
-			result = result .. text_line(_"Health:", _"Trains health from %1$s up to %2$s":
-				bformat(building_description.min_hp, building_description.max_hp))
-		end
-		if(building_description.max_evade > 0) then
-			result = result .. text_line(_"Evade:", _"Trains evade from %1$s up to %2$s":
-				bformat(building_description.min_evade, building_description.max_evade))
-		end
 		if(building_description.max_attack > 0) then
-			result = result .. text_line(_"Attack:", _"Trains attack from %1$s up to %2$s":
-				bformat(building_description.min_attack, building_description.max_attack))
+			result = result .. text_line(_"Attack:", _"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Attack", building_description.min_attack, building_description.max_attack))
 		end
 		if(building_description.max_defense > 0) then
-			result = result .. text_line(_"Defense:", _"Trains defense from %1$s up to %2$s":
-				bformat(building_description.min_defense, building_description.max_defense))
+			result = result .. text_line(_"Defense:", _"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Defense", building_description.min_defense, building_description.max_defense))
+		end
+		if(building_description.max_evade > 0) then
+			result = result .. text_line(_"Evade:", _"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Evade", building_description.min_evade, building_description.max_evade))
+		end
+		if(building_description.max_hp > 0) then
+			-- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
+			result = result .. text_line(_"Health:", _"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Health", building_description.min_hp, building_description.max_hp))
 		end
 	end
+	result = result .. text_line(_"Vision range:", building_description.vision_range)
 	return result
 end
 
@@ -492,7 +581,7 @@ function building_help_crew_string(tribename, building_description, workernames,
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
 
-	if(building_description.type == "productionsite") then
+	if(building_description.type == "productionsite" or building_description.type == "trainingsite") then
 
 		result = result .. rt(h2(_"Workers")) .. rt(h3(_"Crew required:"))
 
