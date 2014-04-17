@@ -236,7 +236,7 @@ void Sound_Handler::load_fx_if_needed
 	 const std::string & filename,
 	 const std::string & fx_name)
 {
-	filenameset_t dirs, files;
+	filenameset_t files;
 	filenameset_t::const_iterator i;
 
 	assert(g_fs);
@@ -509,7 +509,6 @@ void Sound_Handler::register_song
 	assert(g_fs);
 
 	filenameset_t files;
-	filenameset_t::const_iterator i;
 
 	files = filter(g_fs->ListDirectory(dir), [&basename](const std::string& fn) {
 		const std::string only_filename = FileSystem::FS_Filename(fn.c_str());

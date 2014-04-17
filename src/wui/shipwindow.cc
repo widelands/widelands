@@ -247,13 +247,11 @@ void ShipWindow::think()
 		 */
 		m_btn_construct_port->set_enabled(can_act && (state == Ship::EXP_FOUNDPORTSPACE));
 		bool coast_nearby = false;
-		bool moveable = false;
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
 			m_btn_scout[dir - 1]->set_enabled
 				(can_act && m_ship.exp_dir_swimable(dir) && (state != Ship::EXP_COLONIZING));
 			coast_nearby |= !m_ship.exp_dir_swimable(dir);
-			moveable |= m_ship.exp_dir_swimable(dir);
 		}
 		m_btn_explore_island_cw ->set_enabled(can_act && coast_nearby && (state != Ship::EXP_COLONIZING));
 		m_btn_explore_island_ccw->set_enabled(can_act && coast_nearby && (state != Ship::EXP_COLONIZING));
