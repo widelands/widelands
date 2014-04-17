@@ -27,18 +27,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_crew_string("barbarians", building_description, {"master-miner", "chief-miner", "miner"}, "pick") ..
 
 	--Building Section
-	building_help_building_section("barbarians", building_description, "deep_coalmine") ..
-
-		--rt(h2(_"Building")) ..
-
--- Upgraded from: OK
-
-		--rt(h3(_"Cost cumulative:")) .. TODO missing
-		--help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 6), 6) ..
-		--help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 12), 12) ..
-		--rt(h3(_"Dismantle yields:")) .. TODO missing
-		--help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 3), 3) ..
-		--help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 6), 6) ..
+	building_help_building_section("barbarians", building_description, "deep_coalmine", {"coalmine", "deep_coalmine"}) ..
 
 	--Production Section
 	rt(h2(_"Production")) ..

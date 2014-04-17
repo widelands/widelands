@@ -33,7 +33,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_crew_string("barbarians", building_description, {"chief-miner", "miner"}, "pick") ..
 
 	--Building Section
-	building_help_building_section("barbarians", building_description, "coalmine") ..
+	building_help_building_section("barbarians", building_description, "coalmine", {"coalmine"}) ..
 
 	--Production Section
 	rt(h2(_"Production")) ..

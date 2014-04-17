@@ -472,27 +472,42 @@ end
 function building_help_building_line(tribename, ware, amount)
 	local ware_descr = wl.Game():get_ware_description(tribename, ware)
 	amount = tonumber(amount)
-	return
-		image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
-			amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+	local image = "tribes/" .. tribename .. "/" .. ware  .. "/menu.png"
+
+	if amount <=6 then
+		return image_line(image, amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+	else
+		if amount <=12 then
+			return image_line(image, 6, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname))) ..
+				image_line(image, amount - 6)
+		else
+			return image_line(image,6 , p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
+				.. image_line(image, 6) .. image_line(image, amount - 12)
+		end
+	end
 end
 
 -- RST
 --
--- .. function:: building_help_building_section(tribename, building_description[, upgraded_from])
+-- .. function:: building_help_building_section(tribename, building_description[, upgraded_from, former_buildings])
 --
---    Formats the "Building" section in the building help: Upgrading info, costs and spaqce required
+--    Formats the "Building" section in the building help: Upgrading info, costs and space required
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
 --    :arg upgraded_from: The building name that this building is usually upgraded from.
 --                        Leave blank if this is a basic building.
+--    :former_buildings:  A table of building names representing the chain of buildings that this
+--                        building was upgraded from. This is used to calculate cumulative building 
+--                        and dismantle costs.
 --    :returns: an rt string describing the building section
 --
-function building_help_building_section(tribename, building_description, upgraded_from)
+-- TODO sort all wares lists in identical order - have a look at how the tooltips do things
+function building_help_building_section(tribename, building_description, upgraded_from, former_buildings)
 
 	local result = rt(h2(_"Building"))
 
+	-- Space required
 	if (building_description.ismine) then
 		result = result .. text_line(_"Space required:",_"Mine plot","pics/mine.png")
 	elseif (building_description.isport) then
@@ -508,83 +523,121 @@ function building_help_building_section(tribename, building_description, upgrade
 			result = result .. p(_"Space required:" .. _"Unknown")
 		end
 	end
+
+	-- Upgraded from
 	if (building_description.buildable or building_description.enhanced) then
 		if (building_description.enhanced) then
+			local former_building = nil
 			if (upgraded_from) then
-				local former_building = wl.Game():get_building_description(tribename, upgraded_from)
+				former_building = wl.Game():get_building_description(tribename, upgraded_from)
 				result = result .. text_line(_"Upgraded from:", former_building.descname)
-
-				for ware, count in pairs(building_description.enhancement_cost) do
-					result = result .. building_help_building_line(tribename, ware, count)
-				end
-
-				-- TODO iterate this over multiple former buildings
-				--result = result .. rt(p("TODO 1: ware"..ware..tonumber(count)))
-				result = result .. rt(h3(_"Cost Cumulative:"))
-				local warescost = {}
-				if (former_building and former_building.buildable) then
-					for ware, count in pairs(former_building.build_cost) do
-						warescost[ware] = former_building.build_cost[ware]
-					end
-					for ware, count in pairs(building_description.enhancement_cost) do
-						if (warescost[ware]) then
-							warescost[ware] = warescost[ware] + building_description.enhancement_cost[ware]
-						else
-							warescost[ware] = building_description.enhancement_cost[ware]
-						end
-					end
-					for ware, count in pairs(warescost) do
-						result = result .. building_help_building_line(tribename, ware, count)
-					end
-				else
-					result = result .. rt(p(_"Unknown"))
-				end
-
-				-- TODO iterate this over multiple former buildings
-				--result = result .. rt(p("TODO 2: ware"..ware..tonumber(count)))
-				result = result .. rt(h3(_"Dismantle yields:"))
-				local warescost = {}
-				if(former_building) then
-					for ware, count in pairs(former_building.returned_wares) do
-						warescost[ware] = former_building.returned_wares[ware]
-					end
-					for ware, count in pairs(building_description.returned_wares) do
-						if (warescost[ware]) then
-							warescost[ware] = warescost[ware] + former_building.returned_wares[ware]
-						else
-							warescost[ware] = former_building.returned_wares[ware]
-						end
-					end
-					for ware, count in pairs(warescost) do
-						result = result .. building_help_building_line(tribename, ware, count)
-					end
-				else
-					result = result .. rt(p(_"Unknown"))
-				end
-			end
-		else
-			result = result .. rt(h3(_"Build Cost:"))
-
-			for ware, count in pairs(building_description.build_cost) do
-				local ware_descr = wl.Game():get_ware_description(tribename,ware)
-				result = result .. building_help_building_line(tribename, ware, count)
+			else
+				result = result .. text_line(_"Upgraded from:", _"Unknown")
 			end
 
+			for ware, amount in pairs(building_description.enhancement_cost) do
+				result = result .. building_help_building_line(tribename, ware, amount)
+			end
+
+			-- Cost Cumulative
+			result = result .. rt(h3(_"Cost Cumulative:"))
+			local warescost = {}
+			for ware, amount in pairs(building_description.enhancement_cost) do
+				if (warescost[ware]) then
+					warescost[ware] = warescost[ware] + amount
+				else
+					warescost[ware] = amount
+				end
+			end
+
+			for index, former in pairs(former_buildings) do
+				former_building = wl.Game():get_building_description(tribename, former)
+				if (former_building.buildable) then
+					for ware, amount in pairs(former_building.build_cost) do
+						if (warescost[ware]) then
+							warescost[ware] = warescost[ware] + amount
+						else
+							warescost[ware] = amount
+						end
+					end
+				elseif (former_building.enhanced) then
+					for ware, amount in pairs(former_building.enhancement_cost) do
+						if (warescost[ware]) then
+							warescost[ware] = warescost[ware] + amount
+						else
+							warescost[ware] = amount
+						end
+					end
+				end
+			end
+			if (warescost ~= {}) then
+				for ware, amount in pairs(warescost) do
+					result = result .. building_help_building_line(tribename, ware, amount)
+				end
+			else
+				result = result .. rt(p(_"Unknown"))
+			end
+
+			-- Dismantle yields
 			result = result .. rt(h3(_"Dismantle yields:"))
+			local warescost = {}
+			for ware, amount in pairs(building_description.returned_wares_enhanced) do
+				if (warescost[ware]) then
+					warescost[ware] = warescost[ware] + amount
+				else
+					warescost[ware] = amount
+				end
+			end
+			for index, former in pairs(former_buildings) do
+				former_building = wl.Game():get_building_description(tribename, former)
+				if (former_building.buildable) then
+					for ware, amount in pairs(former_building.returned_wares) do
+						if (warescost[ware]) then
+							warescost[ware] = warescost[ware] + amount
+						else
+							warescost[ware] = amount
+						end
+					end
+				elseif (former_building.enhanced) then
+					for ware, amount in pairs(former_building.returned_wares_enhanced) do
+						if (warescost[ware]) then
+							warescost[ware] = warescost[ware] + amount
+						else
+							warescost[ware] = amount
+						end
+					end
+				end
+			end
+			if (warescost ~= {}) then
+				for ware, amount in pairs(warescost) do
+					result = result .. building_help_building_line(tribename, ware, amount)
+				end
+			else
+				result = result .. rt(p(_"Unknown"))
+			end
 
-			for ware, count in pairs(building_description.returned_wares) do
-				local ware_descr = wl.Game():get_ware_description(tribename,ware)
-				result = result .. building_help_building_line(tribename, ware, count)
+		-- Buildable
+		else
+
+			-- Build Cost
+			result = result .. rt(h3(_"Build Cost:"))
+			for ware, amount in pairs(building_description.build_cost) do
+				result = result .. building_help_building_line(tribename, ware, amount)
+			end
+
+			-- Dismantle yields
+			result = result .. rt(h3(_"Dismantle yields:"))
+			for ware, amount in pairs(building_description.returned_wares) do
+				result = result .. building_help_building_line(tribename, ware, amount)
 			end
 		end
 
+		-- Upgradeable to
 		if (building_description.enhancements[1]) then
 			for i, building in ipairs(building_description.enhancements) do
 				result = result .. text_line(_"Upgradeable to:", building_description.enhancements[i].descname)
-
-				for ware, count in pairs(building_description.enhancements[i].enhancement_cost) do
-				local ware_descr = wl.Game():get_ware_description(tribename,ware)
-					result = result .. building_help_building_line(tribename, ware, count)
+				for ware, amount in pairs(building_description.enhancements[i].enhancement_cost) do
+					result = result .. building_help_building_line(tribename, ware, amount)
 				end
 			end
 		end
