@@ -473,18 +473,17 @@ function building_help_building_line(tribename, ware, amount)
 	local ware_descr = wl.Game():get_ware_description(tribename, ware)
 	amount = tonumber(amount)
 	local image = "tribes/" .. tribename .. "/" .. ware  .. "/menu.png"
+	local result = ""
+	local imgperline = 6
+	local temp_amount = amount
 
-	if amount <=6 then
-		return image_line(image, amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
-	else
-		if amount <=12 then
-			return image_line(image, 6, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname))) ..
-				image_line(image, amount - 6)
-		else
-			return image_line(image,6 , p(_"%1$dx %2$s":bformat(amount, ware_descr.descname)))
-				.. image_line(image, 6) .. image_line(image, amount - 12)
-		end
+	while (temp_amount > imgperline) do
+		result = result .. image_line(image, imgperline)
+		temp_amount = temp_amount - imgperline
 	end
+	result = image_line(image, temp_amount, p(_"%1$dx %2$s":bformat(amount, ware_descr.descname))) .. result
+	return result
+
 end
 
 -- RST
@@ -502,7 +501,6 @@ end
 --                        and dismantle costs.
 --    :returns: an rt string describing the building section
 --
--- TODO sort all wares lists in identical order - have a look at how the tooltips do things
 function building_help_building_section(tribename, building_description, upgraded_from, former_buildings)
 
 	local result = rt(h2(_"Building"))

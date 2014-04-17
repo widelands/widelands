@@ -45,7 +45,7 @@ void unreference_coroutine(lua_State* L, uint32_t idx) {
 }  // namespace
 
 LuaCoroutine::LuaCoroutine(lua_State * ms)
-        : m_L(ms), m_idx(LUA_REFNIL), m_ninput_args(0), m_nreturn_values(0)
+	: m_L(ms), m_idx(LUA_REFNIL), m_ninput_args(0), m_nreturn_values(0)
 {
 	if (m_L) {
 		m_idx = reference_coroutine(m_L);
@@ -75,45 +75,45 @@ int LuaCoroutine::resume()
 
 void LuaCoroutine::push_arg(const Widelands::Player * plr) {
 	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
-        m_ninput_args++;
+	m_ninput_args++;
 }
 
 void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
 	to_lua<LuaMap::L_Field>(m_L, new LuaMap::L_Field(coords));
 	++m_nargs;
-        ++m_ninput_args;
+	++m_ninput_args;
 }
 
 void LuaCoroutine::push_arg(const Widelands::Building_Descr* building_descr) {
-        assert(building_descr != nullptr);
-        to_lua<LuaMap::L_BuildingDescription>(m_L, new LuaMap::L_BuildingDescription(building_descr));
-        ++m_ninput_args;
+	assert(building_descr != nullptr);
+	to_lua<LuaMap::L_BuildingDescription>(m_L, new LuaMap::L_BuildingDescription(building_descr));
+	++m_ninput_args;
 }
 
 std::string LuaCoroutine::pop_string() {
-        if (!m_nreturn_values) {
-                return "";
-        }
-        if (!lua_isstring(m_L, -1)) {
-                throw LuaError("pop_string(), but no string on the stack.");
-        }
-        const std::string return_value = lua_tostring(m_L, -1);
-        lua_pop(m_L, 1);
-        --m_nreturn_values;
-        return return_value;
+	if (!m_nreturn_values) {
+		return "";
+	}
+	if (!lua_isstring(m_L, -1)) {
+		throw LuaError("pop_string(), but no string on the stack.");
+	}
+	const std::string return_value = lua_tostring(m_L, -1);
+	lua_pop(m_L, 1);
+	--m_nreturn_values;
+	return return_value;
 }
 
 uint32_t LuaCoroutine::pop_uint32() {
-        if (!m_nreturn_values) {
-                return 0;
-        }
-        if (!lua_isnumber(m_L, -1)) {
-                throw LuaError("pop_uint32(), but no integer on the stack.");
-        }
-        const uint32_t return_value = luaL_checkuint32(m_L, -1);
-        lua_pop(m_L, 1);
-        --m_nreturn_values;
-        return return_value;
+	if (!m_nreturn_values) {
+		return 0;
+	}
+	if (!lua_isnumber(m_L, -1)) {
+		throw LuaError("pop_uint32(), but no integer on the stack.");
+	}
+	const uint32_t return_value = luaL_checkuint32(m_L, -1);
+	lua_pop(m_L, 1);
+	--m_nreturn_values;
+	return return_value;
 }
 
 
@@ -129,8 +129,8 @@ uint32_t LuaCoroutine::write
 
 	// The current numbers of arguments on the stack
 	fw.Unsigned32(m_nargs);
-        fw.Unsigned32(m_ninput_args);
-        fw.Unsigned32(m_nreturn_values);
+	fw.Unsigned32(m_ninput_args);
+	fw.Unsigned32(m_nreturn_values);
 
 	// Empty table + object to persist on the stack Stack
 	lua_newtable(parent);
@@ -156,10 +156,10 @@ void LuaCoroutine::read
 
 	// The current numbers of arguments on the stack
 	m_nargs = fr.Unsigned32();
-        m_ninput_args = fr.Unsigned32();
-        if (version > 1) {
-                m_nreturn_values = fr.Unsigned32();
-        }
+		m_ninput_args = fr.Unsigned32();
+		if (version > 1) {
+			m_nreturn_values = fr.Unsigned32();
+		}
 
 	// Empty table + object to persist on the stack Stack
 	unpersist_object(parent, fr, mol, size);

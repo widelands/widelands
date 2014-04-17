@@ -75,8 +75,8 @@ private:
 	lua_State* m_L;
 	uint32_t m_idx;
 	uint32_t m_nargs;
-        uint32_t m_ninput_args;
-        uint32_t m_nreturn_values;
+	uint32_t m_ninput_args;
+	uint32_t m_nreturn_values;
 };
 
 #endif /* end of include guard: LUA_COROUTINE_H */
