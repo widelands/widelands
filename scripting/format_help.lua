@@ -444,8 +444,7 @@ function building_help_outputs(tribename, building_description, buildinglist, is
 			result = result ..
 				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
 		end
-	end
-	if(building_description.ismine) then
+	elseif(building_description.ismine) then
 		-- TRANSLATORS: This is a verb (The miner mines)
 		result = result .. rt(h3(_"Mines:"))
 
@@ -453,11 +452,16 @@ function building_help_outputs(tribename, building_description, buildinglist, is
 			result = result ..
 				building_help_dependencies_resi(tribename, {"resi_"..ware.."2", building_description.name, ware}, ware)
 		end
+	else
+		result = result .. rt(h3(_"Produces:"))
+		for i, ware in ipairs(building_description.output_ware_types) do
+			result = result ..
+				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
+		end
 	end
 
 	result = result .. rt(h3(_"Outgoing:"))
 	for i, ware in ipairs(building_description.output_ware_types) do
-
 		-- TODO get the buildinglist with the help of the resource
 		for j, building in ipairs(buildinglist) do
 			result = result ..
@@ -646,7 +650,7 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribename, building_description, workernames, toolname)
+-- .. function building_help_crew_string(tribename, building_description, workernames[, toolname])
 --
 --    Displays a worker with an image
 --
