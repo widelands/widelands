@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:31+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:32+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: nb\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -838,6 +838,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid "We lost a %s to the ocean!"
-#~ msgstr "Vi mistet en %s til havet."

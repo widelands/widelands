@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:31+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:31+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: gd\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -842,6 +842,3 @@ msgstr[0] "Amas ùr"
 msgstr[1] "Amasan ùra"
 msgstr[2] "Amasan ùra"
 msgstr[3] "Amas ùr"
-
-#~ msgid "We lost a %s to the ocean!"
-#~ msgstr "Chaill sinn %s leis a' chuan!"

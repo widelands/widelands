@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:36+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:34+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -3530,6 +3530,3 @@ msgstr ""
 "Wheat is essential for survival. It is produced on farms and consumed by "
 "bakeries, micro breweries and breweries. Also, Cattle farms need a supply of "
 "wheat."
-
-#~ msgid "Weaving-Mill"
-#~ msgstr "Weaving-Mill"

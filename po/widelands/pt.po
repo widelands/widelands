@@ -10,8 +10,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:39+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:35+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: pt\n"
 
 #: ../../src/wui/building_statistics_menu.cc:114
@@ -4185,6 +4185,3 @@ msgstr "Segue"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Endless Game"
-#~ msgstr "Jogo Infinito"

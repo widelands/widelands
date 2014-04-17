@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:34+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:33+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: pt\n"
 
 #: ../../tribes/atlanteans/dungeon/conf:39
@@ -1669,45 +1669,3 @@ msgstr "Produz túnicas douradas"
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
 msgstr "Corta árvores"
-
-#~ msgid "Weaving-Mill"
-#~ msgstr "Tecelagem"
-
-#
-# File: ../../tribes/atlanteans/goldyarn/conf, line: 1
-# File: ../../tribes/atlanteans/goldyarn/conf, line: 1
-#~ msgid ""
-#~ "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
-#~ "golden tabard in the weaving-mill."
-#~ msgstr ""
-#~ "Este fio, feito de ouro pelo ourives, é usado para produzir a exclusiva "
-#~ "túnica dourada na tecelagem."
-
-#
-# File: ../../tribes/atlanteans/spidercloth/conf, line: 1
-# File: ../../tribes/atlanteans/spidercloth/conf, line: 1
-#~ msgid ""
-#~ "Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
-#~ "toolsmithy and the shipyard. Also some higher developed buildings need "
-#~ "spidercloth for their construction."
-#~ msgstr ""
-#~ "O pano de teia de aranha é feita com fios de teias de aranha pelo tecelão. É "
-#~ "utilizada pelo ferreiro e no estaleiro. Algumas construções de alto nível "
-#~ "também necessitam destes panos para a sua construção."
-
-#~ msgid ""
-#~ "This yarn is produced by spiders, which are bred by spider farms. It is "
-#~ "processed into spidercloth in a weaving-mill."
-#~ msgstr ""
-#~ "Este fio é produzido por aranhas, que são criadas nas criações de aranha. É "
-#~ "processada em pano na tecelagem."
-
-#
-# File: ../../tribes/atlanteans/tabard/conf, line: 1
-# File: ../../tribes/atlanteans/tabard/conf, line: 1
-#~ msgid ""
-#~ "A tabard and a light trident are the basic equipment for young soldiers. "
-#~ "Tabards are produced in the weaving-mill."
-#~ msgstr ""
-#~ "A túnica e o tridente leve são o equipamento básico para os novos soldados. "
-#~ "Túnicas são produzidos pelo tecelão."

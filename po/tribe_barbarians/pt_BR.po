@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:36+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:34+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -3527,6 +3527,3 @@ msgstr ""
 "Trigo é essencial para sobrevivência. É produzido em fazendas e consumido "
 "nas padarias, micro cervejarias e cervejarias. As fazendas de gado também "
 "necessitam de trigo."
-
-#~ msgid "Weaving-Mill"
-#~ msgstr "Tecelagem"

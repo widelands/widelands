@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:34+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:32+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -1529,8 +1529,3 @@ msgstr "黄金のタバードの生産"
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
 msgstr "木を伐採します。"
-
-#~ msgid ""
-#~ "A tabard and a light trident are the basic equipment for young soldiers. "
-#~ "Tabards are produced in the weaving-mill."
-#~ msgstr "タバードとトライデント（軽）は若い兵士の標準的な装備です。タバードは織物工場で作られます。"

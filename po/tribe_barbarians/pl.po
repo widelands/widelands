@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:35+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:33+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: pl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -3536,6 +3536,3 @@ msgstr ""
 "Pszenica to podstawa przetrwania. Kultywowana jest na farmach i "
 "wykorzystywana w piekarniach, browarach i małych browarach. Także farmy "
 "bydła muszą być zaopatrywane w pszenicę."
-
-#~ msgid "Weaving-Mill"
-#~ msgstr "Warsztat tkacki"

@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:39+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:35+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: uk\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -3922,6 +3922,3 @@ msgstr "Сліувати"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Центрувати екран тут"
-
-#~ msgid "Endless Game"
-#~ msgstr "Безкінечна гра"

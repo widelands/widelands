@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:35+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:33+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: it\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -3545,6 +3545,3 @@ msgstr ""
 "Il grano è essenziale per sopravvivere. È prodotto nelle fattorie e "
 "consumato dai forni, microbirrerie e birrerie. Anche gli allevamenti di "
 "bovini hanno bisogno di essere riforniti di grano."
-
-#~ msgid "Weaving-Mill"
-#~ msgstr "Mulino di tessitura"
