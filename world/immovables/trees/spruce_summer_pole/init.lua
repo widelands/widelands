@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "spruce_summer_pole",
    descname = _ "Spruce (Pole)",
-   category = "trees_coniferous",
+   -- category = "trees_coniferous",
    size = "small",
    attributes = {},
    programs = {
@@ -19,7 +19,6 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 9, 28 },
          fps = 8,
-         sfx = {},
       },
    },
 }

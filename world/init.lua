@@ -3,7 +3,7 @@ world = wl.World()
 set_textdomain("world")
 
 -- NOCOM(#sirver): review the remaining directories in world/
--- NOCOM(#sirver): rename to editor_terrain_category
+-- -- NOCOM(#sirver): rename to editor_terrain_category
 world:new_editor_category{
    name = "green",
    descname = _ "Summer",
@@ -36,7 +36,7 @@ include "world/terrains/init.lua"
    -- picture = "world/immovables/ruin5/idle.png",
 -- }
 
--- world:new_immovable_category{
+-- -- world:new_immovable_category{
    -- name = "plants",
    -- descname = _ "Plants",
    -- picture = "world/immovables/cactus3/idle.png",
@@ -48,7 +48,7 @@ include "world/terrains/init.lua"
    -- picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
 -- }
 
--- world:new_immovable_category{
+-- -- world:new_immovable_category{
    -- name = "stones",
    -- descname = _ "Stones",
    -- picture = "world/immovables/stones/greenland_stones6/idle.png",
@@ -60,7 +60,7 @@ include "world/terrains/init.lua"
    -- picture = "world/immovables/trees/spruce_summer_old/idle_0.png",
 -- }
 
--- world:new_immovable_category{
+-- -- world:new_immovable_category{
    -- name = "trees_dead",
    -- descname = _ "Dead Trees",
    -- picture = "world/immovables/trees/deadtree2/idle.png",
@@ -72,7 +72,7 @@ include "world/terrains/init.lua"
    -- picture = "world/immovables/trees/alder_summer_old/idle_0.png",
 -- }
 
--- world:new_immovable_category{
+-- -- world:new_immovable_category{
    -- name = "trees_palm",
    -- descname = _ "Palm Trees",
    -- picture = "world/immovables/trees/palm_borassus_desert_old/idle_0.png",

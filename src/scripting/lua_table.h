@@ -20,6 +20,9 @@
 #ifndef LUA_TABLE_H
 #define LUA_TABLE_H
 
+#include <set>
+#include <string>
+
 #include <boost/lexical_cast.hpp>
 
 #include "scripting/c_utils.h"
@@ -41,16 +44,20 @@ public:
 	explicit LuaTable(lua_State* L);
 
 	~LuaTable();
-	// Returns all keys in sorted order (got by iterating using pair).
-	// All keys must be of the given type.
-	template <typename KeyType> std::vector<KeyType> keys() const {
-		std::vector<KeyType> table_keys;
+
+	// Disables warning about unused keys on destruction of this table. If this
+	// is not called before destruction, stderr will get a text with a warning
+	// if any key was unused in the dictionary.
+	void do_not_warn_about_unaccessed_keys();
+
+	// Returns all keys. All keys must be of the given type.
+	template <typename KeyType> std::set<KeyType> keys() const {
+		std::set<KeyType> table_keys;
 		lua_pushnil(L_);                      // S: table nil
-		while (lua_next(L_, index_) != 0) {  // S: table key value
+		while (lua_next(L_, index_) != 0) {   // S: table key value
 			lua_pop(L_, 1);                    // S: table key
-			table_keys.emplace_back(get_value<KeyType>());
+			table_keys.insert(get_value<KeyType>());
 		}
-		std::sort(table_keys.begin(), table_keys.end());
 		return table_keys;
 	}
 
@@ -66,6 +73,7 @@ public:
 				break;
 			}
 			values.emplace_back(get_value<ValueType>());
+			accessed_keys_.insert(boost::lexical_cast<std::string>(index));
 			lua_pop(L_, 1);
 			++index;
 		}
@@ -165,12 +173,12 @@ private:
 	void check_if_key_was_in_table(const std::string& key) const;
 
 	// Get a lua value of the specific type. See template specializations.
-	template <typename T> T get_value() const {
-		assert(false);
-	}
+	template <typename T> T get_value() const;
 
 	lua_State* L_;
 	const int index_;
+	mutable std::set<std::string> accessed_keys_;
+	bool warn_about_unaccessed_keys_;
 };
 
 template <> std::string LuaTable::get_value<std::string>() const;

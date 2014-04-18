@@ -197,7 +197,6 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
-
 	get_point(*table.get_table("hotspot"), &hotspot_);
 
 	if (table.has_key("sound_effect")) {

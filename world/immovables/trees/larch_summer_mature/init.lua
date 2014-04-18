@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "larch_summer_mature",
    descname = _ "Larch (Mature)",
-   category = "trees_coniferous",
+   -- category = "trees_coniferous",
    size = "small",
    attributes = {},
    programs = {
@@ -19,7 +19,6 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 12, 48 },
          fps = 8,
-         sfx = {},
       },
    },
 }

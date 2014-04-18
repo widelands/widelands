@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "umbrella_green_wasteland_mature",
    descname = _ "Green Umbrella Tree (Mature)",
-   category = "trees_wasteland",
+   -- category = "trees_wasteland",
    size = "small",
    attributes = {},
    programs = {
@@ -19,7 +19,6 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 18, 48 },
          fps = 8,
-         sfx = {},
       },
    },
 }

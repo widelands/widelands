@@ -295,6 +295,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
 		std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->getWinConditionScript());
+		t->do_not_warn_about_unaccessed_keys();
 
 		try {
 			std::string name = t->get_string("name");

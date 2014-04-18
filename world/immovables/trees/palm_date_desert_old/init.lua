@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "palm_date_desert_old",
    descname = _ "Date Palm (Old)",
-   category = "trees_palm",
+   -- category = "trees_palm",
    size = "small",
    attributes = { "tree" },
    programs = {
@@ -22,8 +22,9 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 24, 60 },
          fps = 10,
-         sfx = {
-            [0] = "sound/animals/bird1.ogg",
+         sound_effect = {
+            directory = "sound/animals",
+            name = "bird1",
          },
       },
    },

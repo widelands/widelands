@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "aspen_summer_old",
    descname = _ "Aspen (Old)",
-   category = "trees_deciduous",
+   -- category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
    programs = {
@@ -23,8 +23,9 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 23, 58 },
          fps = 10,
-         sfx = {
-            [0] = "sound/animals/bird1.ogg",
+         sound_effect = {
+            directory = "sound/animals",
+            name = "bird1",
          },
       },
       falling = {

@@ -328,6 +328,7 @@ void Game::init_newgame
 	// Check for win_conditions
 	if (!settings.scenario) {
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
+		table->do_not_warn_about_unaccessed_keys();
 		m_win_condition_displayname = table->get_string("name");
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr.release()));
@@ -1026,6 +1027,7 @@ void Game::sample_statistics()
 	// game, call the corresponding Lua function
 	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
+		hook->do_not_warn_about_unaccessed_keys();
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
 			cr->push_arg(plr);

@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "liana_wasteland_old",
    descname = _ "Liana Tree (Old)",
-   category = "trees_wasteland",
+   -- category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },
    programs = {
@@ -22,7 +22,6 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 24, 60 },
          fps = 10,
-         sfx = {},
       },
    },
 }

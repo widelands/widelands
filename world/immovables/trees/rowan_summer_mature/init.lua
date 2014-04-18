@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "rowan_summer_mature",
    descname = _ "Rowan (Mature)",
-   category = "trees_deciduous",
+   -- category = "trees_deciduous",
    size = "small",
    attributes = {},
    programs = {
@@ -22,7 +22,6 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 18, 48 },
          fps = 8,
-         sfx = {},
       },
    },
 }

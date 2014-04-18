@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "beech_summer_old",
    descname = _ "Beech (Old)",
-   category = "trees_deciduous",
+   -- category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
    programs = {
@@ -22,8 +22,9 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 24, 60 },
          fps = 10,
-         sfx = {
-            [0] = "sound/animals/bird6.ogg",
+         sound_effect = {
+            directory = "sound/animals",
+            name = "bird6",
          },
       },
    },

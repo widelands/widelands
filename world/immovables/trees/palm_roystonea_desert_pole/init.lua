@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "palm_roystonea_desert_pole",
    descname = _ "Roystonea regia Palm (Pole)",
-   category = "trees_palm",
+   -- category = "trees_palm",
    size = "small",
    attributes = {},
    programs = {
@@ -19,7 +19,6 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 12, 28 },
          fps = 8,
-         sfx = {},
       },
    },
 }

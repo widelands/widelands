@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "beech_summer_sapling",
    descname = _ "Beech (Sapling)",
-   category = "trees_deciduous",
+   -- category = "trees_deciduous",
    size = "small",
    attributes = { "seed" },
    programs = {
@@ -19,7 +19,6 @@ world:new_immovable_type{
          player_color_masks = {},
          hotspot = { 5, 12 },
          fps = 8,
-         sfx = {},
       },
    },
 }

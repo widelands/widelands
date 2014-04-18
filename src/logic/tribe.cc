@@ -292,6 +292,7 @@ Tribe_Descr::Tribe_Descr
 				     filter(g_fs->ListDirectory(path + "scripting"),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
+					t->do_not_warn_about_unaccessed_keys();
 
 					m_initializations.resize(m_initializations.size() + 1);
 					Initialization& init = m_initializations.back();
@@ -363,6 +364,7 @@ bool Tribe_Descr::exists_tribe
 				     filter(g_fs->ListDirectory(path),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = lua.run_script(script);
+					t->do_not_warn_about_unaccessed_keys();
 					info->initializations.push_back(
 					   TribeBasicInfo::Initialization(script, t->get_string("name")));
 				}
