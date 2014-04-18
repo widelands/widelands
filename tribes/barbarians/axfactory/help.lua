@@ -1,3 +1,5 @@
+-- The Barbarian Axfactory
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -6,7 +8,7 @@ set_textdomain("tribe_barbarians")
 return {
    func = function(building_description)
 	return
-		--rt(h1(_"The Barbarian Axfactory")) ..
+
 	--Lore Section
 	building_help_lore_string("barbarians", building_description, _[[‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’]], _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]]) ..
 

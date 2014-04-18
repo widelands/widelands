@@ -1,3 +1,5 @@
+-- The Barbarian Coal Mine
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -6,9 +8,8 @@ set_textdomain("tribe_barbarians")
 return {
    func = function(building_description)
 	return
-		--rt(h1(_"The Barbarian Coal Mine")) ..
-	--Lore Section
 
+	--Lore Section
 	building_help_lore_string("barbarians", building_description, _[[Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>
 Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]]) ..
 

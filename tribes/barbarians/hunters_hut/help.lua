@@ -1,3 +1,5 @@
+-- The Barbarian Hunter's Hut
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -6,7 +8,7 @@ set_textdomain("tribe_barbarians")
 return {
    func = function(building_description)
 	return
-		--rt(h1(_"The Barbarian Hunter's Hut")) ..
+
 	--Lore Section
 -- TODO crashes
 --	building_help_lore_string("barbarians", building_description, _[[‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,<br> as deadly as a viper.’]], _[[‘The Art of Hunting’]]) ..

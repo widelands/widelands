@@ -1,3 +1,5 @@
+-- The Barbarian Granite Mine
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -6,7 +8,7 @@ set_textdomain("tribe_barbarians")
 return {
    func = function(building_description)
 	return
-		--rt(h1(_"The Barbarian Granite Mine")) ..
+
 	--Lore Section
 	building_help_lore_string("barbarians", building_description, _[[‘I can handle tons of granite, man, but no more of your vain prattle.’]], _[[This phrase was the reply Rimbert the miner – later known as Rimbert the loner – gave, when he was asked to remain seated on an emergency meeting at Stonford in the year of the great flood. <br> The same man had all the 244 granite blocks ready only a week later, and they still fortify the city’s levee.]]) ..
 

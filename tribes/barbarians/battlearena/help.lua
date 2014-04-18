@@ -1,3 +1,5 @@
+-- The Barbarian Battle Arena"
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -6,7 +8,7 @@ set_textdomain("tribe_barbarians")
 return {
    func = function(building_description)
 	return
-		--rt(h1(_"The Barbarian Battle Arena")) ..
+
 	--Lore Section
 	building_help_lore_string("barbarians", building_description, _[[‘No better friend you have in battle than the enemy’s blow that misses.’]], _[[Said to originate from Neidhardt, the famous trainer.]]) ..
 

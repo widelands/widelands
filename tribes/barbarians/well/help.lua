@@ -1,3 +1,5 @@
+-- The Barbarian Well
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -7,7 +9,6 @@ return {
    func = function(building_description)
 	return
 
-		--rt(h1(_"The Barbarian Well")) ..
 	--Lore Section
 	building_help_lore_string("barbarians", building_description, _[[‘Oh how sweet is the source of life,<br> that comes down from the sky <br> and lets the earth drink.’]], _[[Song written by Sigurd the Bard<br>when the first rain fell after the Great Drought in the 21st year of Chat’Karuth’s reign.]]) ..
 

@@ -1,3 +1,5 @@
+-- The Barbarian Deeper Gold Mine
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -7,7 +9,6 @@ return {
    func = function(building_description)
 	return
 
-		--rt(h1(_"The Barbarian Deeper Gold Mine")) ..
 	--Lore Section
 		--text identical to goldmine
 	building_help_lore_string("barbarians", building_description, _[[‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ...’]], _[[Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.]]) ..

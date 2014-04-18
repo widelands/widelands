@@ -1,3 +1,5 @@
+-- The Barbarian Training Camp
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -6,7 +8,7 @@ set_textdomain("tribe_barbarians")
 return {
    func = function(building_description)
 	return
-		--rt(h1(_"The Barbarian Training Camp")) ..
+
 	--Lore Section
 	building_help_lore_string("barbarians", building_description, _[[‘He who is strong shall neither forgive nor forget, but revenge injustice suffered – in the past and for all future.’]], _[[Chief Chat’Karuth in a speech to his army.]]) ..
 

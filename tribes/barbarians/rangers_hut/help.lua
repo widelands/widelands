@@ -1,3 +1,5 @@
+-- The Barbarian Ranger's Hut
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -7,7 +9,6 @@ return {
    func = function(building_description)
 	return
 
-		--rt(h1(_"The Barbarian Ranger's Hut")) ..
 	--Lore Section
 	--"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
 	-- TODO crashes

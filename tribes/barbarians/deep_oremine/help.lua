@@ -1,3 +1,5 @@
+-- The Barbarian Deep Iron Ore Mine
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -7,7 +9,6 @@ return {
    func = function(building_description)
 	return
 
-		--rt(h1(_"The Barbarian Deep Iron Ore Mine")) ..
 	--Lore Section
 	--text identical to oremine
 	building_help_lore_string("barbarians", building_description, _[[‘I look at my own pick wearing away day by day and I realize why my work is important.’]], _[[Quote from an anonymous miner.]]) ..

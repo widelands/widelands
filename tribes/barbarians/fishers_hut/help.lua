@@ -1,3 +1,5 @@
+-- The Barbarian Fisher's Hut
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -7,7 +9,6 @@ return {
    func = function(building_description)
 	return
 
-		--rt(h1(_"The Barbarian Fisher's Hut")) ..
 	--Lore Section
 	-- TODO crashes
 	--building_help_lore_string("barbarians", building_description, _[[‘What do you mean, my fish ain’t fresh?!’]], _[[Source needed]]) ..

@@ -1,3 +1,5 @@
+-- The Barbarian Lime Kiln
+
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
 
@@ -6,7 +8,7 @@ set_textdomain("tribe_barbarians")
 return {
    func = function(building_description)
 	return
-		--rt(h1(_"The Barbarian Lime Kiln")) ..
+
 	--Lore Section
 -- TODO crashes
 --	building_help_lore_string("barbarians", building_description, _[[‘Forming new stone from old with fire and water.’]], _[[Ragnald the Child’s answer to the question, what he’s doing in the dirt. His ‘new stone’ now is an important building material.]]) ..
