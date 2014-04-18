@@ -132,11 +132,8 @@ public:
 	const Tribe_Descr & manually_load_tribe(Player_Number const p) {
 		return manually_load_tribe(map().get_scenario_player_tribe(p));
 	}
-	// Get a tribe from the loaded list, when available
-	Tribe_Descr const * get_tribe(const char * tribe) const;
-	Tribe_Descr const * get_tribe(const std::string & name) const {
-		return get_tribe(name.c_str());
-	}
+	// Get a tribe from the loaded list, when known or nullptr.
+	Tribe_Descr const * get_tribe(const std::string & name) const;
 
 	void inform_players_about_ownership(Map_Index, Player_Number);
 	void inform_players_about_immovable(Map_Index, Map_Object_Descr const *);
@@ -171,7 +168,7 @@ public:
 	const World& world() const;
 
 	// Returns the world that can be modified. Prefer world() whenever possible.
-	World* mutable_world() ;
+	World* mutable_world();
 
 private:
 	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.

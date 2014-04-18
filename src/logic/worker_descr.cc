@@ -139,6 +139,11 @@ Worker_Descr::~Worker_Descr()
 	}
 }
 
+const Tribe_Descr& Worker_Descr::tribe() const {
+	const Tribe_Descr* owner_tribe = get_owner_tribe();
+	assert(owner_tribe != nullptr);
+	return *owner_tribe;
+}
 
 /**
  * Load graphics (other than animations).

@@ -67,9 +67,8 @@ public:
 		return m_buildcost;
 	}
 
-	// NOCOM(#sirver): Kill one of these.
-	const Tribe_Descr * get_tribe() const {return get_owner_tribe();}
-	const Tribe_Descr & tribe() const {return *get_owner_tribe();}
+	// The tribe in which this worker is defined.
+	const Tribe_Descr & tribe() const;
 
 	std::string helptext() const {return m_helptext;}
 	Point get_ware_hotspot() const {return m_ware_hotspot;}

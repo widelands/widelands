@@ -17,9 +17,9 @@
  *
  */
 
-#include <boost/format.hpp>
-
 #include "scripting/lua_table.h"
+
+#include <boost/format.hpp>
 
 LuaTable::LuaTable(lua_State* L) : L_(L), index_(lua_gettop(L)), warn_about_unaccessed_keys_(true) {
 }
@@ -72,7 +72,6 @@ template <> std::string LuaTable::get_value() const {
 	const char* str = lua_tostring(L_, -1);
 	lua_pop(L_, 1);
 	if (str == nullptr) {
-		log("#sirver No string");
 		throw LuaError("Could not convert value at top of the stack to string.");
 	}
 	return str;
@@ -84,7 +83,6 @@ template <> int LuaTable::get_value() const {
 	int return_value = lua_tointegerx(L_, -1, &is_num);
 	lua_pop(L_, 1);
 	if (!is_num) {
-		log("#sirver No int");
 		throw LuaError("Could not convert value at top of the stack to integer.");
 	}
 	return return_value;

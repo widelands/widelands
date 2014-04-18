@@ -193,11 +193,13 @@ Player& Editor_Game_Base::player(const int32_t n) const
 
 
 /// Returns a tribe description from the internally loaded list
-const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
+const Tribe_Descr * Editor_Game_Base::get_tribe(const std::string& tribename) const
 {
-	container_iterate_const(Tribe_Vector, tribes_, i)
-		if (not strcmp((*i.current)->name().c_str(), tribe))
-			return *i.current;
+	for (const Tribe_Descr* tribe : tribes_) {
+		if (tribe->name() == tribename) {
+			return tribe;
+		}
+	}
 	return nullptr;
 }
 
