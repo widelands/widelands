@@ -67,9 +67,9 @@ _([[The other two important food wares are smoked fish and smoked meat. ]] ..
 [[otherwise the fish breeder won’t be able to breed new ones. ]] ..
 [[The smoking happens in a smokery, you will need at least two of those.]]) .. [[<br>]] ..
 [[• ]] .. _[[Build a farm and a blackroot farm]] .. "<br>" ..
-[[• ]] .. _[[Build a mill to make flour and blackroot flour]] .. "<br>" ..
+[[• ]] .. _[[Build a mill to make cornflour and blackroot flour]] .. "<br>" ..
 [[• ]] .. _[[Build a well]] .. "<br>" ..
-[[• ]] .. _[[Build a bakery to bake bread from flour, blackroot flour and water]] .. "<br>" ..
+[[• ]] .. _[[Build a bakery to bake bread from cornflour, blackroot flour and water]] .. "<br>" ..
 [[• ]] .. _[[Build a hunter’s house to get raw meat]] .. "<br>" ..
 [[• ]] .. _[[Build a fisher’s house close to water to get raw fish]] .. "<br>" ..
 [[• ]] .. _[[Build a fish breeder’s house close to the fisher to make sure the fish do not die out]] .. "<br>" ..
