@@ -58,9 +58,8 @@ namespace Widelands {
 
 Tribe_Descr::Tribe_Descr
 	(const std::string & tribename, Editor_Game_Base & egbase)
-	: m_name(tribename), m_world(egbase.world())
+	: m_name(tribename)
 {
-	assert(&m_world);
 	std::string path = "tribes/";
 	try {
 		path            += tribename;
@@ -96,6 +95,8 @@ Tribe_Descr::Tribe_Descr
 					(new WareDescr
 					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
+
+			const World& world = egbase.map().world();
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
 				m_immovables.add
@@ -144,15 +145,14 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
-				m_buildings.add
-					(new ProductionSite_Descr
-					 	(_name, _descname, path, prof, global_s, *this));
+				m_buildings.add(new ProductionSite_Descr(
+					_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
 				m_buildings.add
 					(new MilitarySite_Descr
-					 	(_name, _descname, path, prof, global_s, *this));
+					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 
@@ -165,7 +165,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
 				m_buildings.add
 					(new MilitarySite_Descr
-					 	(_name, _descname, path, prof, global_s, *this));
+					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			// Reset path and base_path_size
@@ -176,7 +176,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("trainingsite")
 				m_buildings.add
 					(new TrainingSite_Descr
-					 	(_name, _descname, path, prof, global_s, *this));
+					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 		}

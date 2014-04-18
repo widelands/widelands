@@ -46,8 +46,6 @@ namespace Widelands {
 
 static const size_t STATISTICS_VECTOR_LENGTH = 20;
 
-
-
 /*
 ==============================================================================
 
@@ -59,7 +57,7 @@ ProductionSite BUILDING
 ProductionSite_Descr::ProductionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const Tribe_Descr & _tribe, const World& world)
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
@@ -128,7 +126,7 @@ ProductionSite_Descr::ProductionSite_Descr
 				throw wexception("this program has already been declared");
 			m_programs[program_name] =
 				new ProductionProgram
-					(directory, prof, program_name, v->get_string(), this);
+					(directory, prof, program_name, v->get_string(), world, this);
 		} catch (const std::exception & e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}

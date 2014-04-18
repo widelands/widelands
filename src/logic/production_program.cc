@@ -162,16 +162,6 @@ std::string ProductionProgram::ActReturn::Negation::description
 bool ProductionProgram::ActReturn::Economy_Needs_Ware::evaluate
 	(const ProductionSite & ps) const
 {
-#if 0
-	log
-		("ActReturn::Economy_Needs_Ware::evaluate(%s): (called from %s:%u) "
-		 "economy_needs(%s) = %u\n",
-		 ps.descname().c_str(),
-		 const_cast<ProductionSite &>(ps).top_state().program->get_name().c_str(),
-		 const_cast<ProductionSite &>(ps).top_state().ip,
-		 ps.descr().tribe().get_ware_descr(ware_type)->descname().c_str(),
-		 ps.get_economy()->needs_ware(ware_type));
-#endif
 	return ps.get_economy()->needs_ware(ware_type);
 }
 std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
@@ -184,16 +174,6 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
 	(const ProductionSite & ps) const
 {
-#if 0
-	log
-		("ActReturn::Economy_Needs_Worker::evaluate(%s): (called from %s:%u) "
-		 "economy_needs(%s) = %u\n",
-		 ps.descname().c_str(),
-		 const_cast<ProductionSite &>(ps).top_state().program->get_name().c_str(),
-		 const_cast<ProductionSite &>(ps).top_state().ip,
-		 ps.descr().tribe().get_worker_descr(worker_type)->descname().c_str(),
-		 ps.get_economy()->needs_worker(worker_type));
-#endif
 	return ps.get_economy()->needs_worker(worker_type);
 }
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
@@ -516,12 +496,6 @@ ProductionProgram::ActCall::ActCall
 		}
 
 		//  Override with specified handling methods.
-#if 0
-		log
-			("ActCall::ActCall: parsed m_program = \"%s\", remaining parameters "
-			 "= \"%s\"\n",
-			 m_program.c_str(), parameters);
-#endif
 		while (not reached_end) {
 			skip(parameters);
 			match_force_skip(parameters, "on");
@@ -603,10 +577,8 @@ void ProductionProgram::ActCall::execute
 	}
 }
 
-
-ProductionProgram::ActWorker::ActWorker
-	(char * parameters, ProductionSite_Descr & descr,
-	 const std::string & production_program_name)
+ProductionProgram::ActWorker::ActWorker(
+		char* parameters, const std::string& production_program_name, ProductionSite_Descr* descr)
 {
 	try {
 		m_program = parameters;
@@ -614,19 +586,19 @@ ProductionProgram::ActWorker::ActWorker
 		//  Quote form "void ProductionSite::program_act(Game &)":
 		//  "Always main worker is doing stuff"
 		const Worker_Descr & main_worker_descr =
-			*descr.tribe().get_worker_descr(descr.working_positions()[0].first);
+			*descr->tribe().get_worker_descr(descr->working_positions()[0].first);
 
 		//  This will fail unless the main worker has a program with the given
 		//  name, so it also validates the parameter.
 		const Workarea_Info & worker_workarea_info =
 			main_worker_descr.get_program(m_program)->get_workarea_info();
-		Workarea_Info & building_workarea_info = descr.m_workarea_info;
+		Workarea_Info & building_workarea_info = descr->m_workarea_info;
 		container_iterate_const(Workarea_Info, worker_workarea_info, i) {
 			std::set<std::string> & building_radius_infos =
 				building_workarea_info[i.current->first];
 			const std::set<std::string> & descriptions = i.current->second;
 			container_iterate_const(std::set<std::string>, descriptions, de) {
-				std::string description = descr.descname();
+				std::string description = descr->descname();
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
@@ -667,9 +639,7 @@ void ProductionProgram::ActWorker::building_work_failed
 	psite.program_end(game, Failed);
 }
 
-
-ProductionProgram::ActSleep::ActSleep(char * parameters, const ProductionSite_Descr &)
-{
+ProductionProgram::ActSleep::ActSleep(char* parameters) {
 	try {
 		if (*parameters) {
 			char * endp;
@@ -693,7 +663,7 @@ void ProductionProgram::ActSleep::execute(Game & game, ProductionSite & ps) cons
 }
 
 
-ProductionProgram::ActCheck_Map::ActCheck_Map(char * parameters, const ProductionSite_Descr &)
+ProductionProgram::ActCheck_Map::ActCheck_Map(char * parameters)
 {
 	try {
 		if (*parameters) {
@@ -725,22 +695,19 @@ void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) 
 	}
 }
 
-
-ProductionProgram::ActAnimate::ActAnimate
-	(char * parameters, ProductionSite_Descr & descr,
-	 const std::string & directory, Profile & prof)
-{
+ProductionProgram::ActAnimate::ActAnimate(
+	char* parameters, const std::string& directory, Profile& prof, ProductionSite_Descr* descr) {
 	try {
 		bool reached_end;
 		char * const animation_name = match(parameters, reached_end);
 		if (not strcmp(animation_name, "idle"))
 			throw game_data_error
 				("idle animation is default; calling is not allowed");
-		if (descr.is_animation_known(animation_name))
-			m_id = descr.get_animation(animation_name);
+		if (descr->is_animation_known(animation_name))
+			m_id = descr->get_animation(animation_name);
 		else {
 			m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
-			descr.add_animation(animation_name, m_id);
+			descr->add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.
 			char * endp;
@@ -1085,14 +1052,11 @@ bool ProductionProgram::ActRecruit::get_building_work
 	return false;
 }
 
-
-ProductionProgram::ActMine::ActMine
-	(char * parameters, ProductionSite_Descr & descr,
-	 const std::string & production_program_name)
+ProductionProgram::ActMine::ActMine(
+		char* parameters, const World& world, const std::string& production_program_name,
+		ProductionSite_Descr* descr)
 {
 	try {
-		const World & world = descr.tribe().world();
-		assert(&world);
 		bool reached_end;
 		m_resource = world.safe_resource_index(match(parameters, reached_end));
 
@@ -1138,11 +1102,11 @@ ProductionProgram::ActMine::ActMine
 		}
 		std::string description =
 			/** TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource */
-			(boost::format(_("%1$s %2$s mine %3$s")) % descr.descname() % production_program_name
+			(boost::format(_("%1$s %2$s mine %3$s")) % descr->descname() % production_program_name
 				% world.get_resource(m_resource)->descname())
 				.str();
 
-		descr.m_workarea_info[m_distance].insert(description);
+		descr->m_workarea_info[m_distance].insert(description);
 	} catch (const _wexception & e) {
 		throw game_data_error("mine: %s", e.what());
 	}
@@ -1283,10 +1247,7 @@ void ProductionProgram::ActMine::informPlayer
 		 0);
 }
 
-
-ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
-	(char * parameters, const ProductionSite_Descr &)
-{
+ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
 	//  FIXME This is currently hardcoded for "soldier", but should allow any
 	//  FIXME soldier type name.
 	if (not match_force_skip(parameters, "soldier"))
@@ -1362,10 +1323,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 	return ps.program_step(game);
 }
 
-
-ProductionProgram::ActTrain::ActTrain
-	(char * parameters, const ProductionSite_Descr &)
-{
+ProductionProgram::ActTrain::ActTrain(char* parameters) {
 	//  FIXME This is currently hardcoded for "soldier", but should allow any
 	//  FIXME soldier type name.
 	if (not match_force_skip(parameters, "soldier"))
@@ -1468,7 +1426,7 @@ void ProductionProgram::ActTrain::execute
 }
 
 ProductionProgram::ActPlayFX::ActPlayFX
-	(const std::string & directory, char * parameters, const ProductionSite_Descr &)
+	(const std::string & directory, char * parameters)
 {
 	try {
 		bool reached_end;
@@ -1498,10 +1456,8 @@ void ProductionProgram::ActPlayFX::execute
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActConstruct::ActConstruct
-	(char * parameters, ProductionSite_Descr & descr,
-	 const std::string & production_program_name)
-{
+ProductionProgram::ActConstruct::ActConstruct(
+		char* parameters, const std::string& production_program_name, ProductionSite_Descr* descr) {
 	try {
 		std::vector<std::string> params = split_string(parameters, " ");
 
@@ -1512,8 +1468,8 @@ ProductionProgram::ActConstruct::ActConstruct
 		workerprogram = params[1];
 		radius = stringTo<uint32_t>(params[2]);
 
-		std::set<std::string> & building_radius_infos = descr.m_workarea_info[radius];
-		std::string description = descr.name() + ' ' + production_program_name;
+		std::set<std::string> & building_radius_infos = descr->m_workarea_info[radius];
+		std::string description = descr->name() + ' ' + production_program_name;
 		description += " construct ";
 		description += objectname;
 		building_radius_infos.insert(description);
@@ -1646,28 +1602,22 @@ void ProductionProgram::ActConstruct::building_work_failed
 	psite.program_end(game, Failed);
 }
 
-
-
-ProductionProgram::ProductionProgram
-	(const std::string    & directory,
-	 Profile              & prof,
-	 const std::string    &       _name,
-	 char           const * const _descname,
-	 ProductionSite_Descr * const building)
-	: m_name(_name), m_descname(_descname)
-{
-	Section & program_s = prof.get_safe_section(_name.c_str());
-	while (Section::Value * const v = program_s.get_next_val()) {
-		ProductionProgram::Action * action;
-		if      (not strcmp(v->get_name(), "return"))
-			action = new ActReturn(v->get_string(),  *building);
+ProductionProgram::ProductionProgram(
+		const std::string& directory, Profile& prof, const std::string& _name,
+		const std::string& _descname, const World& world,
+		ProductionSite_Descr* building)
+	: m_name(_name), m_descname(_descname) {
+	Section& program_s = prof.get_safe_section(_name.c_str());
+	while (Section::Value* const v = program_s.get_next_val()) {
+		ProductionProgram::Action* action;
+		if (not strcmp(v->get_name(), "return"))
+			action = new ActReturn(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "call"))
-			action = new ActCall  (v->get_string(),  *building);
+			action = new ActCall(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "sleep"))
-			action = new ActSleep (v->get_string(),  *building);
+			action = new ActSleep(v->get_string());
 		else if (not strcmp(v->get_name(), "animate"))
-			action = new
-				ActAnimate(v->get_string(), *building, directory, prof);
+			action = new ActAnimate(v->get_string(), directory, prof, building);
 		else if (not strcmp(v->get_name(), "consume"))
 			action = new ActConsume(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "produce"))
@@ -1675,26 +1625,24 @@ ProductionProgram::ProductionProgram
 		else if (not strcmp(v->get_name(), "recruit"))
 			action = new ActRecruit(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "worker"))
-			action = new ActWorker (v->get_string(), *building, _name);
+			action = new ActWorker(v->get_string(), _name, building);
 		else if (not strcmp(v->get_name(), "mine"))
-			action = new ActMine   (v->get_string(), *building, _name);
+			action = new ActMine(v->get_string(), world, _name, building);
 		else if (not strcmp(v->get_name(), "check_soldier"))
-			action = new ActCheck_Soldier(v->get_string(), *building);
+			action = new ActCheck_Soldier(v->get_string());
 		else if (not strcmp(v->get_name(), "train"))
-			action = new ActTrain  (v->get_string(), *building);
+			action = new ActTrain(v->get_string());
 		else if (not strcmp(v->get_name(), "playFX"))
-			action = new ActPlayFX (directory, v->get_string(), *building);
+			action = new ActPlayFX(directory, v->get_string());
 		else if (not strcmp(v->get_name(), "construct"))
-			action = new ActConstruct (v->get_string(), *building, _name);
+			action = new ActConstruct(v->get_string(), _name, building);
 		else if (not strcmp(v->get_name(), "check_map"))
-			action = new ActCheck_Map(v->get_string(), *building);
+			action = new ActCheck_Map(v->get_string());
 		else
-			throw game_data_error
-				("unknown command type \"%s\"", v->get_name());
+			throw game_data_error("unknown command type \"%s\"", v->get_name());
 		m_actions.push_back(action);
 	}
 	if (m_actions.empty())
 		throw game_data_error("no actions");
 }
-
 }

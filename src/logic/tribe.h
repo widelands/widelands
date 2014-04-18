@@ -64,8 +64,6 @@ struct Tribe_Descr : boost::noncopyable {
 
 
 	const std::string & name() const {return m_name;}
-	// NOCOM(#sirver): this class is not using this. Why is it here?
-	const World & world() const {return m_world;}
 
 	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
 	Worker_Descr const * get_worker_descr(const Ware_Index& index) const {
@@ -232,7 +230,6 @@ struct Tribe_Descr : boost::noncopyable {
 
 private:
 	const std::string m_name;
-	const World & m_world;
 	AnimationStyles   m_anim_frontier;
 	AnimationStyles   m_anim_flag;
 	uint32_t m_bob_vision_range;
