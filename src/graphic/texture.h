@@ -53,8 +53,6 @@ struct Texture {
 	uint32_t get_minimap_color(char shade);
 
 	void animate(uint32_t time);
-	void reset_was_animated() {m_was_animated = false;}
-	bool was_animated() const {return m_was_animated;}
 	uint32_t getTexture() const
 		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
 
@@ -67,7 +65,6 @@ private:
 	std::string m_texture_image;
 	uint32_t    m_nrframes;
 	uint32_t    m_frametime;
-	bool        m_was_animated;
 	std::vector<std::unique_ptr<GLSurfaceTexture>> m_glFrames;
 };
 

@@ -328,7 +328,7 @@ bool Graphic::check_fallback_settings_in_effect()
 }
 
 void Graphic::cleanup() {
-	flush_maptextures();
+	m_maptextures.clear();
 	surface_cache_->flush();
 	// TODO: this should really not be needed, but currently is :(
 	if (UI::g_fh)
@@ -532,16 +532,9 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
-void Graphic::flush_maptextures()
-{
-	BOOST_FOREACH(Texture* texture, m_maptextures)
-		delete texture;
-	m_maptextures.clear();
-}
-
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
-	m_maptextures.push_back(new Texture(texture_files, frametime, *m_sdl_screen->format));
+	m_maptextures.emplace_back(new Texture(texture_files, frametime, *m_sdl_screen->format));
 
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
@@ -553,16 +546,6 @@ void Graphic::animate_maptextures(uint32_t time)
 {
 	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->animate(time);
-	}
-}
-
-/**
- * reset that the map texture have been animated
- */
-void Graphic::reset_texture_animation_reminder()
-{
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
-		m_maptextures[i]->reset_was_animated();
 	}
 }
 
@@ -609,7 +592,7 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 	--id; // ID 1 is at m_maptextures[0]
 
 	assert(id < m_maptextures.size());
-	return m_maptextures[id];
+	return m_maptextures[id].get();
 }
 
 /**

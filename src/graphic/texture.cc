@@ -46,8 +46,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
      m_curframe(nullptr),
      m_frame_num(0),
      m_nrframes(0),
-     m_frametime(frametime),
-     m_was_animated(false) {
+     m_frametime(frametime) {
 	if (texture_files.empty()) {
 		throw wexception("No images for texture.");
 	}
@@ -199,13 +198,7 @@ Uint32 Texture::get_minimap_color(char shade) {
 void Texture::animate(uint32_t time)
 {
 	m_frame_num = (time / m_frametime) % m_nrframes;
-
 	if (g_opengl)
 		return;
-
-	uint8_t * const lastframe = m_curframe;
-
 	m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_frame_num];
-	if (lastframe != m_curframe)
-		m_was_animated = true;
 }

@@ -42,9 +42,6 @@ public:
 	World();
 	~World();  // Defined in .cc because all forward declarations are known then.
 
-	// Load the graphics data for this world.
-	void load_graphics();
-
 	// NOCOM(#sirver): refactor to return containers instead.
 	Terrain_Index index_of_terrain(char const* const name) const;
 	TerrainDescription& terrain_descr(Terrain_Index i) const;

@@ -84,11 +84,6 @@ World::World()
 World::~World() {
 }
 
-void World::load_graphics() {
-	// NOCOM(#sirver): this is not really needed anymore I thinks.
-	g_gr->flush_maptextures();
-}
-
 void World::add_resource_type(const LuaTable& table) {
 	resources_->add(new ResourceDescription(table));
 }
