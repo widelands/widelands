@@ -1121,6 +1121,16 @@ ProductionProgram::ActMine::ActMine
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_chance = value;
+			if (*endp != ' ' or value < 1 or 100 < value)
+				throw game_data_error
+					("expected %s but found \"%s\"",
+					 "percentage", parameters);
+			parameters = endp;
+		}
+		{
+			char * endp;
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			m_training = value;
 			if (*endp or value < 1 or 100 < value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
@@ -1240,6 +1250,10 @@ void ProductionProgram::ActMine::execute
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 				 _("Can’t find any more resources!"));
+			// Gain experience
+			if (m_training >= game.logic_rand() % 100) {
+			  ps.train_workers(game);
+			}
 			return ps.program_end(game, Failed);
 		}
 	}

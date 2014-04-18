@@ -31,20 +31,20 @@ work=_Work
 sleep=20000
 consume=wine ration
 animate=working 20000
-mine=granite 2 50 5
+mine=granite 2 50 5 17
 produce=marble:2
 animate=working 20000
-mine=granite 2 50 5
+mine=granite 2 50 5 17
 produce=marble stone
 
 [mine_stone]
 sleep=20000
 consume=ration wine
 animate=working 20000
-mine=granite 2 50 5
+mine=granite 2 50 5 17
 produce=stone marble
 animate=working 20000
-mine=granite 2 50 5
+mine=granite 2 50 5 17
 produce=stone:2
 
 [work]

@@ -2,13 +2,13 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-12-13 05:07+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-06 11:10+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:28+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:29+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: gd\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:28
@@ -26,7 +26,7 @@ msgstr "Tog taighean-feachd"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Taighean-feachd"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
@@ -36,11 +36,11 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "Tog taigh coillteir"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Taigh coillteir"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid ""
@@ -56,11 +56,11 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "Tog dà thaigh coillteir is muileann sàbhaidh"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "Dà thaigh coillteir is muileann sàbhaidh"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
@@ -70,11 +70,11 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "Tog taigh planntair-choille"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:56
 msgid "Forester’s House"
-msgstr ""
+msgstr "Taigh planntair-choille"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid ""
@@ -87,7 +87,7 @@ msgstr "Tog coireall"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Quarry"
-msgstr ""
+msgstr "Coireall"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:65
 msgid ""
@@ -100,7 +100,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
-msgstr ""
+msgstr "Oidhche dhorcha"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:76
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:101
@@ -152,7 +152,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:100
 msgid "The Rough Sea"
-msgstr ""
+msgstr "An cuan garbh"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
@@ -192,7 +192,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:126
 msgid "A Foreboding"
-msgstr ""
+msgstr "Ro-eòlas"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:127
 msgid "Saledus looks around nervously..."
@@ -221,7 +221,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Safe For Now"
-msgstr ""
+msgstr "Sàbhailte an-dràsa"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Saledus speaks with a sigh of relief..."
@@ -321,7 +321,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:193
 msgid "Thinking About the Future"
-msgstr ""
+msgstr "A' cnuasadh air an àm ri teachd"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:194
 msgid "Saledus notes..."
@@ -342,7 +342,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:204
 msgid "A Step Forward"
-msgstr ""
+msgstr "Ceum air adhart"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:205
 msgid "Saledus looks promising..."
@@ -382,13 +382,15 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Victory"
-msgstr ""
+msgstr "Buaidh"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:222
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhart a' "
+"cluiche ma thogras tu no gluasad air adhart dhan ath-mhisean."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:228
 msgid "Safe Peninsula"
@@ -405,10 +407,12 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Amas ùr"
+msgstr[1] "Amasan ùra"
+msgstr[2] "Amasan ùra"
+msgstr[3] "Amas ùr"

@@ -427,9 +427,10 @@ struct ProductionProgram {
 		virtual void informPlayer(Game &, ProductionSite &) const;
 	private:
 		Resource_Index m_resource;
-		uint8_t        m_distance;
-		uint8_t        m_max;
-		uint8_t        m_chance;
+		uint8_t        m_distance; // width/radius of mine
+		uint8_t        m_max;  // Can work up to this percent (of total mountain resources)
+		uint8_t        m_chance; // odds of finding resources from empty mine
+		uint8_t        m_training; // probability of training in _empty_ mines
 	};
 
 	struct ActCheck_Soldier : public Action {

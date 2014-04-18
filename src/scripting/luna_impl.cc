@@ -79,6 +79,14 @@ static LunaClass** m_get_new_empty_user_data(lua_State * L) {
  * =======================================
  */
 
+bool luna_table_has_key(lua_State* L, const std::string& key) {
+	lua_pushstring(L, key);
+	lua_rawget(L, -2);
+	const bool return_value = lua_isnil(L, -1);
+	lua_pop(L, 1);
+	return !return_value;
+}
+
 /*
  * This is the closure that is used to persist our own classes. It will be called
  * by eris while unpersisting. It will call the instantiator for this object

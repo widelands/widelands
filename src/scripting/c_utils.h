@@ -35,7 +35,7 @@ Widelands::Map_Map_Object_Saver * get_mos(lua_State *);
 
 #ifdef __GNUC__
 void report_error(lua_State*, const char*, ...)
-   __attribute__((__format__(__printf__, 2, 3), noreturn));
+	__attribute__((__format__(__printf__, 2, 3), noreturn));
 #else
 void report_error [[noreturn]] (lua_State*, const char*, ...)
 #endif

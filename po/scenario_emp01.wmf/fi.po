@@ -1,22 +1,23 @@
 # Widelands po/fi_FI/campaigns/emp01.wmf.po
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2010-02-10 23:19+0000\n"
-"Last-Translator: Sini Ruohomaa <Unknown>\n"
-"Language-Team: Finnish <widelands-public@lists.sourcefore.net>\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-12 12:38+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:28+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:29+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: FINLAND\n"
+"Language: fi\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -36,7 +37,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "Rakenna puunhakkaajan mökki"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid "Lumberjack’s House"
@@ -56,7 +57,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "Rakenna kaksi puunhakkaajan mökkiä ja saha"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
@@ -67,10 +68,12 @@ msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
 msgstr ""
+"Rakenna kaksi puunhakkaajan mökkiä lisää ja saha, sitä mukaa kun niille on "
+"riittävästi tilaa."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "Rakenna puunistuttajan mökki"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:56
 msgid "Forester’s House"
@@ -79,7 +82,7 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr ""
+msgstr "Rakenna puunistuttajan mökki ylläpitääksesi saaren puuvarantoja."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:62
 msgid "Build a quarry"
@@ -93,14 +96,15 @@ msgstr ""
 msgid ""
 "Build a quarry in the south to cut some stones and marble out of the rocks."
 msgstr ""
+"Rakenna kivilouhos etelään hakataksesi kiveä ja marmoria lohkareista."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "These might be used for future buildings."
-msgstr ""
+msgstr "Niitä voidaan käyttää myöhempiin rakennuksiin."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
-msgstr ""
+msgstr "Pimeä yö"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:76
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:101
@@ -114,6 +118,10 @@ msgid ""
 "forbid me from fighting against that monstrous barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
 msgstr ""
+"Mitä onkaan käynyt Keisarikunnalle? Kysyn tämän kysymyksen tosissani - miksi "
+"kuninkaani kielsi minua taistelemasta tuota hirviömäistä barbaariheimoa "
+"vastaan? He tekeytyivät ensin ystävällisiksi, sitten hyökkäsivät armeijani "
+"kimppuun yön pimeydessä."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80
 msgid ""
@@ -123,6 +131,12 @@ msgid ""
 "of my men even traded with them and their kids came to us, to admire our "
 "clean and tidy uniforms and weapons."
 msgstr ""
+"Minut ja 150 hengen armeijani oli määrätty partioimaan pohjoisella "
+"rajavyöhykkeellä, joka koostuu kauniista ja ikivanhoista metsästä lähellä "
+"Galdin-vuoria. Pian kohtasimme barbaariheimon, joka ensi alkuun vaikutti "
+"ystävälliseltä. Muutamat miehistäni kävivät kauppaa heidän kanssaan, ja "
+"heidän lapsensa tulivat luoksemme ihailemaan siistejä ja puhtaita "
+"asepukujamme ja aseitamme."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
@@ -133,6 +147,13 @@ msgid ""
 "forest was their land – and it would stay theirs until the ghosts took the "
 "last man of his folk!"
 msgstr ""
+"Mutta viidentenä yönämme tällä alueella he hyökkäsivät kimppuumme ilman "
+"syytä. Menetin liudan hyviä miehiä ja jouduin itse vangiksi. He veivät minut "
+"päällikkönsä luokse - hän sylki päälleni, pilkkasi minua ja käski meidän "
+"jättää nämä maat ikuisesti taaksemme. Hän ei ollut kiinnostunut uusista "
+"maista eikä halunnut meidän maitamme, vaan kertoi minulle että TÄMÄ metsä "
+"oli heidän maataan ja että se pysyisi heillä kunnes aaveet veisivät "
+"viimeisenkin hänen väestään!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:89
 msgid ""
@@ -141,6 +162,10 @@ msgid ""
 "believed that our army was too weak to survive in a war against the "
 "barbarians."
 msgstr ""
+"Kolme viikkoa myöhemmin palasin Fremiliin puhuakseni kuninkaalleni. Hän oli "
+"raivoissaan barbaarien teosta, mutta kielsi yhä meitä hyökkäämästä heimojen "
+"kimppuun. Hän uskoi armeijamme olevan liian heikon selvitäksemme sodasta "
+"barbaareja vastaan."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:92
 msgid ""
@@ -149,10 +174,14 @@ msgid ""
 "life for myself, somewhere in the south. Now I am sailing on the perl-gulf "
 "with my family, some of my friends and a few of my best warriors."
 msgstr ""
+"En vieläkään nähnyt keinoa pyyhkiä pois häpeääni taistelematta barbaareja "
+"vastaan. Siksi lähdin Fremilistä laivalla löytääkseni itselleni uuden "
+"maailman ja uuden elämän jossakin etelässä. Nyt purjehdin helmilahdella "
+"mukanani perheeni, joitakin ystäviäni ja muutama parhaista sotilaistani."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:100
 msgid "The Rough Sea"
-msgstr ""
+msgstr "Myrskyinen meri"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
@@ -161,12 +190,18 @@ msgid ""
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
 msgstr ""
+"Näyttää siltä, että helmilahteen purjehtiminen oli yksi suurimmista "
+"virheistämme. Luonto oli meitä vastaan ja ajoi meidät pimeään, villiin "
+"myrskyyn. En todellakaan tiedä, montako tuntia sitten aallot alkoivat nousta "
+"korkeammalle kuin laivamme kansi - olisi itsemurha nousta kannelle."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:106
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank "
 "the Gods if we survive this black night with our lives."
 msgstr ""
+"Laivamme on pahoin vaurioitunut ja vettä virtaa sisään koko ajan enemmän. "
+"Voimme kiittää jumalia, jos selviämme tästä mustasta yöstä hengissä."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "Survivor"
@@ -221,7 +256,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Safe For Now"
-msgstr ""
+msgstr "Hetkellisesti turvassa"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Saledus speaks with a sigh of relief..."
@@ -232,12 +267,16 @@ msgid ""
 "Sire, I saw that the construction of the barracks was completed, so I have "
 "assigned one of my best soldiers to it to keep watch on the desert."
 msgstr ""
+"Herrani, näin parakin valmistuneen, joten lähetin yhden parhaista "
+"sotilaistani pitämään silmällä aavikkoa."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
 msgstr ""
+"Tämä on aimo askel eteenpäin. Nyt voimme tuntea olomme hiukan "
+"turvallisemmaksi ja keskittyä laivamme korjaamiseen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:150
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:163
@@ -321,7 +360,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:193
 msgid "Thinking About the Future"
-msgstr ""
+msgstr "Tulevaisuutta ajatellessa"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:194
 msgid "Saledus notes..."
@@ -342,7 +381,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:204
 msgid "A Step Forward"
-msgstr ""
+msgstr "Askel eteenpäin"
 
 # TODO: I know Romans are men's men but this still might not be intended to sound like that.
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:205
@@ -355,10 +394,14 @@ msgid ""
 "south began its work today and will soon provide us with stones and "
 "beautiful marble."
 msgstr ""
+"Hei, Lutius, tänään olemme askeleen lähempänä ensimmäisen linnamme "
+"rakentamista. Työt eteläisellä kivilouhoksella alkoivat tänään, ja pian "
+"meillä on kiveä ja komeaa marmoria niin paljon kuin laivaan uskaltaa lastata."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:208
 msgid "Now we truly can look forward to settling down on another island."
 msgstr ""
+"Nyt voimme tosiaan uskoa asettuvamme taloksi jollekin sopivalle saarelle."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "Mission Complete"
@@ -370,26 +413,33 @@ msgid ""
 "my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
 msgstr ""
+"Tänään sain kuulla, että laivamme korjaukset ovat valmiit. Kirjoittaessani "
+"tätä väkeni lastaavat tavaroitamme entistä ehompaan alukseemme, joka "
+"toivottavasti palvelee meitä viime kertaa paremmin."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:218
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
 msgstr ""
+"Tänä iltana vietämme viimeistä iltaamme tällä saarella. Huomenaamulla "
+"nostamme purjeet ja lähdemme etsimään uutta kohdetta maanpaollemme."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:220
 msgid "I still wonder if we will ever see Fremil again."
-msgstr ""
+msgstr "Mietin yhä, näemmekö Fremiliä enää koskaan."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:222
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Olet selviytynyt tästä komennuksesta. Voit halutessasi jatkaa pelaamista, "
+"tai siirtyä seuraavaan komennukseen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:228
 msgid "Safe Peninsula"
@@ -403,6 +453,8 @@ msgstr "Saledus puhuu:"
 msgid ""
 "You have made this peninsula a very secure place. It is time to move on!"
 msgstr ""
+"Olet tehnyt tästä niemimaasta hyvin turvallisen paikan. On aika jatkaa "
+"matkaa!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

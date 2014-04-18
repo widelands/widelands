@@ -94,9 +94,6 @@ stock
 	m_windows.building_stats.open_window = [this] {
 		new Building_Statistics_Menu(m_player, m_windows.building_stats);
 	};
-	m_windows.stock.open_window = [this]{
-		new Stock_Menu(m_player, m_windows.stock);
-	};
 
 	if (get_usedefaultpos())
 		center_to_parent();

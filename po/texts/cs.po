@@ -1,21 +1,22 @@
 # Widelands po/cs_CZ/texts.po
 # Copyright (C) 2010 Widelands Development Team
 # Markus7cz <markus7cz@gmail.com>, 2008.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2014-02-01 20:00+0000\n"
-"Last-Translator: Jiří Locker <jiri.locker@gmail.com>\n"
-"Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-13 01:31+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:31+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
+"Language: cs\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -109,11 +110,11 @@ msgid "Keyboard shortcuts (in-game)"
 msgstr "Klávesové zkratky (během hry)"
 
 #: ../../txts/README.lua:61
-msgid "PAGEUP: increases games peed"
+msgid "PAGEUP: increases game speed"
 msgstr ""
 
 #: ../../txts/README.lua:62
-msgid "PAGEDOWN: decreases games peed"
+msgid "PAGEDOWN: decreases game speed"
 msgstr ""
 
 #: ../../txts/README.lua:63
@@ -121,18 +122,21 @@ msgid "PAUSE: pauses the game"
 msgstr "PAUSE: pozastaví hru"
 
 #: ../../txts/README.lua:64
+#: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
 msgstr ""
 
 #: ../../txts/README.lua:65
+#: ../../txts/editor_readme:31
 msgid "M: toggles minimap"
 msgstr "M: přepíná náhledovou mapku"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: přepíná seznam zpráv"
 
 #: ../../txts/README.lua:67
+#: ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr "C: přepíná zobrazení popisků"
 
@@ -150,7 +154,7 @@ msgstr "O: přepíná seznam úkolů"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "F: přepíná celoobrazovkový režim (pokud umožňuje OS)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -162,11 +166,11 @@ msgstr "(CTRL+) 0-9: Zapamatovat a jít na předchozí zapamatované lokace"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: jít na předchozí lokaci"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ",: jít na následující lokaci"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -187,7 +191,7 @@ msgstr "V okně zpráv jsou k dispozici následující zkratky:"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to the location corresponding to the current message"
-msgstr ""
+msgstr "G: přesune tě na místo souvisící s poslední zprávou"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
@@ -497,76 +501,70 @@ msgid ""
 "progress and as the Editor becomes better and better, this text will also "
 "get longer and more complete."
 msgstr ""
+"Tento Editor je určen pro hráče, kteří si chtějí navrhnout svoje vlastní "
+"mapy pro Widelands.<br>Jak můžeš vidět, na Editoru se stále usilovně "
+"pracuje. Jak bude docházet k jeho vylepšování, bude se rozrůstat i tento "
+"text."
 
 #: ../../txts/editor_readme:12
 msgid "Please have a look at our enduser manuals on our wiki pages at:"
-msgstr ""
+msgstr "Prosím podívej se do uživatelského manuálu v naší wiki na:"
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"Stránky mohou být podrobnější a aktuálnější než tento soubor. A také tam lze "
+"najít krátký návod jak vytvořit mapu."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
 msgstr "Klávesové zkratky"
 
-#: ../../txts/editor_readme:21
-msgid "SPACE    Toggles if building spaces are shown"
+#: ../../txts/editor_readme:25
+msgid "E: toggles event menu"
 msgstr ""
 
-#: ../../txts/editor_readme:23
-msgid "C        Toggles census on/off"
-msgstr "C        Přepíná zobrazení popisků"
-
-#: ../../txts/editor_readme:25
-msgid "E        Toggles event menu"
-msgstr "E        Přepíná nabídku událostí"
-
 #: ../../txts/editor_readme:27
-msgid "F        Toggles fullscreen"
-msgstr "F        Přepíná celoobrazovkový režim"
+msgid "F: toggles fullscreen"
+msgstr ""
 
 #: ../../txts/editor_readme:29
-msgid "H        Toggles main menu"
-msgstr "H        Přepíná hlavní nabídku"
-
-#: ../../txts/editor_readme:31
-msgid "M        Toggles minimap"
-msgstr "M        Přepíná náhledovou mapku"
+msgid "H: toggles main menu"
+msgstr ""
 
 #: ../../txts/editor_readme:33
-msgid "P        Toggles player menu"
-msgstr "P        Přepíná nabídku hráče"
+msgid "P: toggles player menu"
+msgstr ""
 
 #: ../../txts/editor_readme:35
-msgid "T        Toggles tools menu"
-msgstr "T        Přepíná nabídku nástrojů"
+msgid "T: toggles tools menu"
+msgstr ""
 
 #: ../../txts/editor_readme:37
-msgid "I        Activates information tool"
-msgstr "I        Aktivuje informační nástroj"
+msgid "I: activates information tool"
+msgstr ""
 
 #: ../../txts/editor_readme:39
-msgid "CTRL+L   Load Map"
-msgstr "CTRL+L   Otevřít mapu"
+msgid "CTRL+L: load Map"
+msgstr ""
 
 #: ../../txts/editor_readme:41
-msgid "CTRL+S   Save Map"
-msgstr "CTRL+S   Uložit mapu"
+msgid "CTRL+S: save Map"
+msgstr ""
 
 #: ../../txts/editor_readme:43
-msgid "1-0      Changes tool size"
+msgid "1-0: changes tool size"
 msgstr ""
 
 #: ../../txts/editor_readme:45
-msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr "Shift    Při podržení vybere první alternativní nástroj"
+msgid "SHIFT (Hold): selects first alternative tool while pressed"
+msgstr ""
 
 #: ../../txts/editor_readme:47
-msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr "Alt      Při podržení vybere druhý alternativní nástroj"
+msgid "ALT (Hold): Selects second alternative tool while pressed"
+msgstr ""
 
 #: ../../txts/license:1
 msgid "License"
@@ -670,6 +668,8 @@ msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
 msgstr ""
+"Obecnou nápovědu k editoru, stejně jako krátké návody můžeš najít v naší "
+"wiki na www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -686,6 +686,8 @@ msgid ""
 "Just like with natural objects (bobs), you can also select multiple animals "
 "or ground textures with CTRL + mouse click."
 msgstr ""
+"Stejně jako přírodní objekty (boby), můžeš pomocí CTRL+ kliku myši označit "
+"více zvířat nebo pozemních textur."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -693,11 +695,14 @@ msgid ""
 "most cases the complete opposite of the normal tool (for example deletion of "
 "an object instead of placing one)."
 msgstr ""
+"Držení klávesy Shift přepíná na alternativní nástroj. Ten je většinou opakem "
+"normálního nástroje (např. mazání místo umisťování objektu)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down ALT switches the second alternative tool on (if it exists)."
 msgstr ""
+"Držení klávesy ALT aktivuje druhý alternativní nástroj (pokud existuje)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -733,10 +738,12 @@ msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Své území můžeš rozšiřovat stavěním různých vojenských budov - hlásek, "
+"pevností, kasáren, atd."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Horníci pracují pouze pokud jsou zásobováni jídlem."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -750,12 +757,16 @@ msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"Máš další otázky? Naše FAQ, wiki a samozřejmě komunitní forum najdeš na "
+"www.widelands.org"
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
 msgstr ""
+"Pro nastavení přepravy specifického zboží lze použít tlačítka priority v "
+"okně výstavby."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
@@ -769,12 +780,17 @@ msgid ""
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
 msgstr ""
+"Spravování tvých zpráv může být efektivnější: stisknuti 'N' pro přístup ke "
+"zprávám a poté stisknuti 'G' k přemístění k objektu a klávesa 'Delete' "
+"archivuje zprávy."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
 msgstr ""
+"Použijte ',' (čárku) a '.' (tečku) k přesunu mezi naposledy navštívenými "
+"místy ve světě."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
@@ -788,12 +804,16 @@ msgid ""
 "Pressing and holding the ALT GR key lets you drag the window below the mouse "
 "pointer."
 msgstr ""
+"Pokud stiskneš a držíš ALT GR, můžeš pohybovat oknem, které se nachází pod "
+"kurzorem myši."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first "
 "junction."
 msgstr ""
+"Odebráním cesty se stisknutým Ctrl můžeš odebrat všechny vlajky až k první "
+"křižovatce."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
@@ -822,17 +842,23 @@ msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
 msgstr ""
+"Můžete použít klávesy 'Page Up' a 'Page Down' k nastaveni rychlosti - ta je "
+"pak nastavena všem stejně."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr ""
+"Na začátku řádku zprávy chatu můžeš použít '/me', které se přeloží na "
+"přezdívku hráče: '/me je unavený' se přeloží na -> 'Přezdívka_hráče je "
+"unavený'."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one player."
 msgstr ""
+"Pro odeslání zprávy pouze jednomu hráči napište na začátek zprávy '@jméno' ."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""

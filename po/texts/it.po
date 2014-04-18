@@ -1,32 +1,33 @@
 # Widelands po/it_IT/texts.po
 # Copyright (C) 2005-2009 Widelands Development Team
-#
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009.
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009.
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2014-02-27 11:28+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-13 13:01+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
-"Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:31+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: ITALY\n"
+"Language: it\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../txts/README.lua:7
 msgid "README"
-msgstr "Leggimi"
+msgstr "LEGGIMI"
 
 #: ../../txts/README.lua:14
 msgid "an open source strategy game"
-msgstr "Un gioco di strategia open source"
+msgstr "un gioco di strategia open source"
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -58,6 +59,12 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"In questa partita, cominci con un piccolo appezzamento di terra con solo "
+"poche\n"
+"risorse. Utilizzandole, creerai un impero con diverse migliaia di abitanti.\n"
+"Lungo la strada verso questo obbiettivo, dovrai creare un'infrastruttura "
+"economica,\n"
+"esplorare il terreno intorno a te e fronteggiare tribù rivali."
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
@@ -68,6 +75,9 @@ msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
 msgstr ""
+"Widelands è rilasciato sotto la licenza GNU General Public License (GPL). "
+"Per maggiori\n"
+"informazioni, dai un'occhiata al file 'COPYING'"
 
 #: ../../txts/README.lua:38
 msgid "Status"
@@ -84,6 +94,13 @@ msgid ""
 "or\n"
 "creating new maps – get in touch on our homepage."
 msgstr ""
+"Widelands è quasi compleato ed molto divertente giocare da solo, ed ancora\n"
+"di più in multiplayer con gli altri. Rimane sempre comunque del lavoro da "
+"fare in\n"
+"tutti i settori. Se sei interessato a contribuire - ideando grafica,\n"
+"risolvendo bug o aggiungendo nuove funzionalità, traducendo il gioco nella "
+"tua lingua o\n"
+"creando nuove mappe - mettiti in contatto consultando la nostra homepage."
 
 #: ../../txts/README.lua:46
 msgid "General game control"
@@ -97,6 +114,11 @@ msgid ""
 "the left\n"
 "mouse button while holding down CTRL."
 msgstr ""
+"Per chiudere una finestra aperta, cliccaci sopra con il tasto destro. Per "
+"minimizzare/massimizzare una finestra,clicca\n"
+"sulla barra del titolo della finestra o con il tasto centrale del mouse o "
+"con il tasto\n"
+"sinistro del mouse + CTRL."
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -125,30 +147,33 @@ msgid "Keyboard shortcuts (in-game)"
 msgstr "Scorciatoie da tastiera (durante il gioco)"
 
 #: ../../txts/README.lua:61
-msgid "PAGEUP: increases games peed"
-msgstr ""
+msgid "PAGEUP: increases game speed"
+msgstr "PAGEUP: aumenta la velocità di gioco"
 
 #: ../../txts/README.lua:62
-msgid "PAGEDOWN: decreases games peed"
-msgstr ""
+msgid "PAGEDOWN: decreases game speed"
+msgstr "PAGEDOWN: diminuisce la velocità di gioco"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
 msgstr "PAUSA: metti il gioco in pausa"
 
 #: ../../txts/README.lua:64
+#: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "SPACE: mostra o toglie gli spazi per la costruzione"
 
 #: ../../txts/README.lua:65
+#: ../../txts/editor_readme:31
 msgid "M: toggles minimap"
 msgstr "M: attiva/disattiva minimappa"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: attiva/disattiva messaggi ('notizie')"
 
 #: ../../txts/README.lua:67
+#: ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr "C: attiva/disattiva censo"
 
@@ -167,6 +192,7 @@ msgstr "O: attiva/disattiva obbiettivi"
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr ""
+"F: attiva/disattiva schermo intero (se supportato dal sistema operativo)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -179,11 +205,11 @@ msgstr ""
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: vai alla posizione precedente"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ".: vai alla posizione seguente"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -206,7 +232,7 @@ msgstr ""
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to the location corresponding to the current message"
-msgstr ""
+msgstr "G: vai alla posizione collegata al messaggio corrente"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
@@ -331,6 +357,17 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
+"Usando l'opzione Guarda Replay del menu principale, verrà ricostruita in "
+"maniera precisa\n"
+"e mostrata una partita giocata precedentemente. Nota, comunque, che ogni "
+"piccola\n"
+"modifica ai file del gioco o all'eseguibile di Widelands potrebbe rendere il "
+"replay\n"
+"incompatibile, mandandolo 'fuori sincronia'. Ciò è simile a quanto accade "
+"alle partite in rete\n"
+"quando soffrono di problemi di desincronizzazione se uno dei giocatori "
+"possiede\n"
+"una versione di gioco differente."
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -340,6 +377,13 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
 msgstr ""
+"I replay sono molto utili per individuare bug nella logica del gioco, "
+"quindi\n"
+"possono essere utili come allegato ai bug report. I file di replay sono "
+"salvati\n"
+"nella directory ~/.widelands/replays (su Linux e Mac OS X). Su Windows,\n"
+"sono nella sottodirectory 'replay' nel percorso di installazione di "
+"Widelands."
 
 #: ../../txts/developers:1
 msgid "Development"
@@ -539,79 +583,72 @@ msgid ""
 "progress and as the Editor becomes better and better, this text will also "
 "get longer and more complete."
 msgstr ""
+"Questo Editor è inteso per i giocatori che vorrebbero disegnare le proprie "
+"mappe da usare con Widelands.<br>Come puoi vedere, questo Editor è "
+"fortemente sotto sviluppo e può essere migliorato e migliorerà se questo "
+"testo diventerà più lungo e più completo."
 
 #: ../../txts/editor_readme:12
 msgid "Please have a look at our enduser manuals on our wiki pages at:"
 msgstr ""
+"Guarda nel nostro manuale per l'utente finale e nelle nostre pagine wiki a:"
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"Queste pagine possono essere più complete ed aggiornate di questo file. E "
+"là, in futuro, si potrà trovare un breve tutorial su come costruire una "
+"mappa."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
 msgstr "Scorciatoie da tastiera"
 
-#: ../../txts/editor_readme:21
-msgid "SPACE    Toggles if building spaces are shown"
-msgstr ""
-
-#: ../../txts/editor_readme:23
-msgid "C        Toggles census on/off"
-msgstr "C Mostra/Nascondi censimento"
-
 #: ../../txts/editor_readme:25
-msgid "E        Toggles event menu"
-msgstr "E        Mostra/Nascondi menu eventi"
+msgid "E: toggles event menu"
+msgstr "E: mostra o toglie il menù degli eventi"
 
 #: ../../txts/editor_readme:27
-msgid "F        Toggles fullscreen"
-msgstr "F        Cambia tra schermo intero e finestra"
+msgid "F: toggles fullscreen"
+msgstr "F: mostra o no a schermo intero"
 
 #: ../../txts/editor_readme:29
-msgid "H        Toggles main menu"
-msgstr "H        Mostra/Nascondi il menu principale"
-
-#: ../../txts/editor_readme:31
-msgid "M        Toggles minimap"
-msgstr "M        Mostra/Nascondi mini mappa"
+msgid "H: toggles main menu"
+msgstr "H: mostra o toglie il menù principale"
 
 #: ../../txts/editor_readme:33
-msgid "P        Toggles player menu"
-msgstr "P        Mostra/Nascondi menu giocatore"
+msgid "P: toggles player menu"
+msgstr "P: mostra o toglie il menù del giocatore"
 
 #: ../../txts/editor_readme:35
-msgid "T        Toggles tools menu"
-msgstr "T        Mostra/Nascondi menu strumenti"
+msgid "T: toggles tools menu"
+msgstr "T: mostra o toglie il menù degli strumenti"
 
 #: ../../txts/editor_readme:37
-msgid "I        Activates information tool"
-msgstr "I        Attiva lo strumento d'informazione"
+msgid "I: activates information tool"
+msgstr "I: attiva lo strumento per le informazioni"
 
 #: ../../txts/editor_readme:39
-msgid "CTRL+L   Load Map"
-msgstr "CTRL+L   Carica Mappa"
+msgid "CTRL+L: load Map"
+msgstr "CTRL+L: carica la mappa"
 
 #: ../../txts/editor_readme:41
-msgid "CTRL+S   Save Map"
-msgstr "CTRL+S   Salva la mappa"
+msgid "CTRL+S: save Map"
+msgstr "CTRL+S: salva la mappa"
 
 #: ../../txts/editor_readme:43
-msgid "1-0      Changes tool size"
-msgstr ""
+msgid "1-0: changes tool size"
+msgstr "1-0: cambia la dimensione dello strumento"
 
 #: ../../txts/editor_readme:45
-msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
+msgid "SHIFT (Hold): selects first alternative tool while pressed"
 msgstr ""
-"SHIFT    (Tenere) Seleziona il primo strumento alternativo mentre premuto"
 
 #: ../../txts/editor_readme:47
-msgid "ALT      (Hold) Selects second alternative tool while pressed"
+msgid "ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
-"ALT (Tenere premuto) Seleziona il secondo strumento alternativo (fintanto "
-"che mantieni premuto)"
 
 #: ../../txts/license:1
 msgid "License"
@@ -796,7 +833,7 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "I minatori lavoreranno solo se gli verrà fornito del cibo."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""

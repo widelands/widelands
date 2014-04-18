@@ -22,7 +22,7 @@ work=_Work
 [work]
 sleep=20000
 animate=working 20000
-mine=water 1 100 65
+mine=water 1 100 65 2
 produce=water
 
 [idle]

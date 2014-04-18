@@ -304,6 +304,9 @@ m_redirected_stdio(false)
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
 
+	// seed random number generator used for random tribe selection
+	std::srand(time(nullptr));
+
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
 }

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
 "PO-Revision-Date: 2013-04-06 11:23+0000\n"
 "Last-Translator: Rafael Medina <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:31+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -110,11 +110,11 @@ msgid "Keyboard shortcuts (in-game)"
 msgstr "Atajos de teclado (durante el juego)"
 
 #: ../../txts/README.lua:61
-msgid "PAGEUP: increases games peed"
+msgid "PAGEUP: increases game speed"
 msgstr ""
 
 #: ../../txts/README.lua:62
-msgid "PAGEDOWN: decreases games peed"
+msgid "PAGEDOWN: decreases game speed"
 msgstr ""
 
 #: ../../txts/README.lua:63
@@ -122,10 +122,12 @@ msgid "PAUSE: pauses the game"
 msgstr ""
 
 #: ../../txts/README.lua:64
+#: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
 msgstr ""
 
 #: ../../txts/README.lua:65
+#: ../../txts/editor_readme:31
 msgid "M: toggles minimap"
 msgstr ""
 
@@ -134,6 +136,7 @@ msgid "N: toggles messages (‘news’)"
 msgstr ""
 
 #: ../../txts/README.lua:67
+#: ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr ""
 
@@ -515,61 +518,49 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr "Atajos de teclado"
 
-#: ../../txts/editor_readme:21
-msgid "SPACE    Toggles if building spaces are shown"
+#: ../../txts/editor_readme:25
+msgid "E: toggles event menu"
 msgstr ""
 
-#: ../../txts/editor_readme:23
-msgid "C        Toggles census on/off"
-msgstr "C          (Des)activa el censo"
-
-#: ../../txts/editor_readme:25
-msgid "E        Toggles event menu"
-msgstr "E          (Des)activa el menú de eventos"
-
 #: ../../txts/editor_readme:27
-msgid "F        Toggles fullscreen"
-msgstr "F          (Des)activa la pantalla completa"
+msgid "F: toggles fullscreen"
+msgstr ""
 
 #: ../../txts/editor_readme:29
-msgid "H        Toggles main menu"
-msgstr "H          (Des)activa el menú principal"
-
-#: ../../txts/editor_readme:31
-msgid "M        Toggles minimap"
-msgstr "M          (Des)activa el minimapa"
+msgid "H: toggles main menu"
+msgstr ""
 
 #: ../../txts/editor_readme:33
-msgid "P        Toggles player menu"
-msgstr "P          (Des)activa el menú de jugadores"
+msgid "P: toggles player menu"
+msgstr ""
 
 #: ../../txts/editor_readme:35
-msgid "T        Toggles tools menu"
-msgstr "T          (Des)activa el menú de herramientas"
+msgid "T: toggles tools menu"
+msgstr ""
 
 #: ../../txts/editor_readme:37
-msgid "I        Activates information tool"
-msgstr "I        Activa la herramienta de información"
+msgid "I: activates information tool"
+msgstr ""
 
 #: ../../txts/editor_readme:39
-msgid "CTRL+L   Load Map"
-msgstr "CTRL+L     Cargar mapa"
+msgid "CTRL+L: load Map"
+msgstr ""
 
 #: ../../txts/editor_readme:41
-msgid "CTRL+S   Save Map"
-msgstr "CTRL+S     Salvar mapa"
+msgid "CTRL+S: save Map"
+msgstr ""
 
 #: ../../txts/editor_readme:43
-msgid "1-0      Changes tool size"
+msgid "1-0: changes tool size"
 msgstr ""
 
 #: ../../txts/editor_readme:45
-msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr "SHIFT      (pulsado) Selecciona la primera herramienta alternativa"
+msgid "SHIFT (Hold): selects first alternative tool while pressed"
+msgstr ""
 
 #: ../../txts/editor_readme:47
-msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr "ALT        (pulsado) Selecciona la segunda herramienta alternativa"
+msgid "ALT (Hold): Selects second alternative tool while pressed"
+msgstr ""
 
 #: ../../txts/license:1
 msgid "License"

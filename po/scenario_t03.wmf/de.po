@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2014-02-12 16:52+0000\n"
-"Last-Translator: Provetin <hamburgskaddi@web.de>\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-22 16:58+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:30+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
 #: ../../campaigns/t03.wmf/scripting/texts.lua:23
@@ -27,10 +27,13 @@ msgid ""
 "Build up a basic food economy to provide your people with food – a fisher’s "
 "hut, a hunter’s hut, a well, a farm and a bakery."
 msgstr ""
+"Baue eine grundlegende Nahrungswirtschaft auf, um dein Volk mit Nahrung zu "
+"versorgen: eine Fischerhütte, eine Jagdhütte, einen Brunnen, einen Bauernhof "
+"und eine Bäckerei."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:30
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Baue eine Rinderzucht"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:32
 msgid "Remember to build a cattle farm"
@@ -42,6 +45,9 @@ msgid ""
 "of your oxen to help transport wares more quickly. Remember to build a "
 "cattle farm!"
 msgstr ""
+"Wenn deine Straßen länger und deine Wirtschaft größer werden, solltest du "
+"die Ochsen, die dir helfen, die Waren schneller zu transportieren, zu deinem "
+"Vorteil nutzen. Vergiss nicht, eine Rinderzucht zu bauen!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:39
 #: ../../campaigns/t03.wmf/scripting/texts.lua:41
@@ -53,6 +59,9 @@ msgid ""
 "Build a donjon at the north-east of your territory to get greater visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"Baue einen Wachturm im Nordosten deines Territoriums, um einen größeren "
+"Sichtradius zu haben und um dein Volk vor plötzlichen Angriffen deiner "
+"Feinde zu beschützen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 #: ../../campaigns/t03.wmf/scripting/texts.lua:50
@@ -64,11 +73,13 @@ msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"Baue mehr Militärgebäude, um das Gelände um dein Hauptquartier herum zu "
+"erkunden und so die Sicherheit deiner Bevölkerung zu gewährleisten."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Baue einen Mineninfrastruktur"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:60
 msgid ""
@@ -76,6 +87,9 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"Erweitere dein Territorium zu den Bergen, sende Geologen aus, um nach "
+"Eisenerz und Kohle zu suchen, und baue eine Minenwirtschaft mit Minen, "
+"Tavernen, Hochöfen und Schmieden."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:66
 #: ../../campaigns/t03.wmf/scripting/texts.lua:68
@@ -84,18 +98,18 @@ msgstr "Baue eine Festung"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:69
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Baue eine Festung östlich der Berge."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
 #: ../../campaigns/t03.wmf/scripting/texts.lua:76
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Baue eine Trainingsinfrastruktur"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:77
 #: ../../campaigns/t03.wmf/scripting/texts.lua:106
 msgid ""
 "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Baue eine Arena und ein Ausbildungslager westlich der Berge."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:79
 #: ../../campaigns/t03.wmf/scripting/texts.lua:119
@@ -105,6 +119,11 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "the axfactory to a war mill, which will produce additional weapons."
 msgstr ""
+"Erweitere deine Schmiede zu einer Axtmanufaktur, um Waffen produzieren zu "
+"können, und errichte eine zweite Schmiede, um die Werkzeugproduktion "
+"sicherzustellen. Wenn der Schmied seine nächste Stufe (Meisterschmied) "
+"erreicht, kannst du die Axtmanufaktur sogar zu einer Waffenschmiede "
+"ausbauen, die zusätzliche Waffen produziert."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:84
 #: ../../campaigns/t03.wmf/scripting/texts.lua:130
@@ -112,6 +131,8 @@ msgid ""
 "Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"Baue eine Helmschmiede westlich der Berge, um deine Soldaten mit einer "
+"besseren Rüstung zu versorgen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:90
 #: ../../campaigns/t03.wmf/scripting/texts.lua:92
@@ -120,7 +141,7 @@ msgstr "Baue ein Warenlager"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Baue ein Warenlager westlich der Berge."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:95
 msgid ""
@@ -129,11 +150,15 @@ msgid ""
 "your territory is growing and the paths to your headquarters get longer and "
 "longer."
 msgstr ""
+"Warenlager sind deinem Hauptquartier ähnlich; der einzige Unterschied "
+"besteht darin, dass sie nicht von Soldaten verteidigt werden. Es ist oftmals "
+"sinnvoll, ein Warenlager zu bauen, wenn dein Territorium wächst und die Wege "
+"zu deinem Hauptquartier immer länger werden."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 #: ../../campaigns/t03.wmf/scripting/texts.lua:105
 msgid "Build training sites"
-msgstr ""
+msgstr "Baue Trainingsgebäude"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:108
 msgid ""
@@ -141,15 +166,20 @@ msgid ""
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
 msgstr ""
+"Trainingsgebäude (Ausbildungslager und Arena) werden verwendet, um die "
+"verschiedenen Eigenschaften der Soldaten zu trainieren. Diese Eigenschaften "
+"sind in Kämpfen wichtig: Je besser ein Soldat ist, umso höher ist die "
+"Chance, einen Kampf zu gewinnen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid "The attributes are: health points, attack, defense and evade."
 msgstr ""
+"Die Eigenschaften sind Lebenspunkte, Angriff, Verteidigung und Ausweichen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:116
 #: ../../campaigns/t03.wmf/scripting/texts.lua:118
 msgid "Build weapons production"
-msgstr ""
+msgstr "Baue eine Waffenproduktion"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 #: ../../campaigns/t03.wmf/scripting/texts.lua:129
@@ -159,11 +189,11 @@ msgstr "Baue eine Helmschmiede"
 #: ../../campaigns/t03.wmf/scripting/texts.lua:135
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "Vernichte Kalitaths Armee"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Vernichte Kalitaths Armee und erweitere dein Territorium ostwärts."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:140
 msgid ""
@@ -172,6 +202,10 @@ msgid ""
 "that should attack. When you are ready with setting the number, click on the "
 "cross (‘Start Attack’)."
 msgstr ""
+"Um einen Feind anzugreifen, musst du auf die Türe eines Militärgebäudes "
+"deines Kontrahenten klicken. Dann öffnet sich ein neues Fenster, in dem du "
+"die Anzahl der Soldaten, die angreifen sollen, einstellen kannst. Wen du die "
+"Zahl eingestellt hast, klicke auf das Kreuz (\"Starte Angriff\")."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:147
 #: ../../campaigns/t03.wmf/scripting/texts.lua:149
@@ -185,7 +219,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:158
 msgid "Close to Home"
-msgstr ""
+msgstr "Nahe der Heimat"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:170
@@ -199,18 +233,24 @@ msgid ""
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
 msgstr ""
+"In den letzten Tagen kamen wir unserer Hauptstadt näher. Viele Menschen habe "
+"sich uns auf unserem Marsch angeschlossen und setzen ihre Hoffnungen in "
+"mich. Ich fürchte jedoch, dass wir nicht stark genug sind, um den Kampf "
+"gegen meine Brüder aufzunehmen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:164
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
 msgstr ""
+"Jetzt rasten wir an den Grenzen des alten Waldes und bereiten uns auf die "
+"kommenden Tage vor."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 #: ../../campaigns/t03.wmf/scripting/texts.lua:201
 #: ../../campaigns/t03.wmf/scripting/texts.lua:369
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Ein weiterer kalter Tag"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -221,6 +261,14 @@ msgid ""
 "vulnerable. As my scouts report, he has set foot on the lower grounds around "
 "the capital, securing the outer fortification rings."
 msgstr ""
+"Die Neuigkeiten, die die Patrouille brachte, sind beunruhigend. Unsere "
+"Spione berichten, dass die Kriegsstämme immer noch in der Schlacht wüten, "
+"aber einige der älteren Soldaten und Stammesführer scheinen dieses sinnlosen "
+"Krieges überdrüssig zu werden. Kalitath, Sohn des Kun, ist der erste "
+"Kriegsführer, der Al'thunran verlässt, damit ist seine Seite schwach und "
+"verwundbar. Meine Kundschafter berichten, dass er sein Lager in der unteren "
+"Ebene um die Hauptstadt herum aufgeschlagen hat, wo er die äußeren Festungen "
+"verstärkt."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:180
 msgid "Doubts"
@@ -228,7 +276,7 @@ msgstr "Zweifel"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:182
 msgid "Boldreth is shaking his head..."
-msgstr ""
+msgstr "Boldreth schüttelt den Kopf ..."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:183
 msgid ""
@@ -243,7 +291,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:192
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
 msgid "The Story Continues"
-msgstr ""
+msgstr "Die Geschichte geht weiter"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:194
 msgid ""
@@ -251,10 +299,14 @@ msgid ""
 "fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
 msgstr ""
+"Thron will jedoch nicht auf meine Zweifel hören. Er strebt es an, unsere "
+"Befestigungen bis zu den Grenzen von Kalitaths Territorium zu erweitern und "
+"mit uns mit seinen Truppen zu vereinen. Ich werde ein Auge auf alles, was "
+"hier geschieht, haben müssen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "Thron spricht zuversichtlich."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:203
 msgid ""
@@ -265,6 +317,14 @@ msgid ""
 "a good and defensible infrastructure. Still, I hope I will not walk alone on "
 "this mission, I hope Kalitath son of Kun will follow my call."
 msgstr ""
+"Die Grenzlinie meiner Truppen ist bis zum Waldrand vorgestoßen. Wir haben "
+"einen langen und kalten Winter und so viele Meilen hinter uns. Die "
+"Befestigung, die wir um Ondun herum errichtet haben, sichern uns eine "
+"schnelle Versorgung mit Männern und Verpflegung; und sobald Al'thunran in "
+"meinen Händen ist, werden die beiden Städte von einer guten und einfach zu "
+"verteidigenden Infrastruktur verbunden sein. Ich hoffe immer noch, dass ich "
+"diese Mission nicht alleine zu Ende bringen muss, sondern dass Kalitath, "
+"Sohn des Kun, meinem Ruf folgen wird."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:214
 msgid ""
@@ -275,10 +335,17 @@ msgid ""
 "time I spend waiting won’t be lost. I will further upgrade my soldiers and "
 "prepare for battle."
 msgstr ""
+"Ich habe Männer entsandt, um sich mit Kalitath in seiner Festung zu treffen. "
+"Er hat das frühere Haupttor zur Hauptstadt verbarrikadiert und versucht, "
+"einen Belagerungsring um Al'thunran zu errichten. Er wird niemanden in die "
+"Stadt hinein oder aus ihr heraus lassen, solange der Ring intakt ist. Bisher "
+"hat er keine meiner Nachrichten beantwortet. Aber die Zeit, die ich mit "
+"Warten verbringe, ist nicht verloren. Ich werde meine Soldaten weiter "
+"verbessern und auf den Krieg vorbereiten."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:222
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Dein treuer Begleiter"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:223
 msgid "Boldreth shouts out!"
@@ -291,14 +358,19 @@ msgid ""
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
 msgstr ""
+"Dieser MISTKERL! Nur ein Mann unseres Grenzspähtrupps kam lebend zurück. Er "
+"überbrachte uns eine Nachricht von Kalitath: Er würde jede unserer "
+"Truppenbewegungen mit ihrem eigenen Blut bestrafen! Wir können dieses "
+"Verhalten nicht akzeptieren. Von jetzt an gibt es Krieg zwischen Kalitath "
+"und uns!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:234
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "Befestigung verstärken"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:235
 msgid "Thron says:"
-msgstr ""
+msgstr "Thron sagt:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:236
 msgid ""
@@ -308,6 +380,11 @@ msgid ""
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
 msgstr ""
+"Der Verräter ließ seine Armeen sterbend liegen, wo sie waren, als er sah, "
+"dass er meine Streitkräfte nicht aufhalten konnte. Kalitath verschwand in "
+"den Wirren des Krieges, aber das kümmert mich nicht. Soll er doch flüchten "
+"und für alle Zeiten als Stammesführer vergessen werden, wenn er sich nicht "
+"vor dem hölzernen Thron, der jetzt mein ist, verbeugen will."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:240
 msgid ""
@@ -317,6 +394,12 @@ msgid ""
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
 msgstr ""
+"Mehr noch, seine Flucht brachte uns einen großen Vorteil: Das ganze Jahr "
+"über war Kalitath so beschäftigt mit Kämpfen gewesen, dass er sich nicht "
+"einmal darum gekümmert hat, genug Nahrung für seine Männer zu lagern. Nun, "
+"da er geflohen ist, hat ihr Hunger einige seiner jüngeren Gefolgsleute dazu "
+"veranlasst zu desertieren. Diese Gruppe hält eine starke Befestigung im "
+"Hauptring."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
 msgid ""
@@ -328,11 +411,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:253
 msgid "Winter Ahead"
-msgstr ""
+msgstr "Der Winter kommt"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid "Boldreth says:"
-msgstr ""
+msgstr "Boldrath sagt:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:255
 msgid ""
@@ -342,14 +425,19 @@ msgid ""
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
 msgstr ""
+"Heute morgen war ich Thron beunruhigt. Er kam letzte Nacht spät von seiner "
+"Patrouille zurück und setzte sich an einen Baum, von wo aus er das Lager "
+"beobachtete. Die Anzahl von Streiten und Konflikten nimmt immer mehr zu, und "
+"der Winter hat uns fest im Griff. Wir sollten unsere Lager mit Nahrung "
+"füllen, um diesen langen, kalten Winter zu überleben!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:263
 msgid "The Advisor"
-msgstr ""
+msgstr "Der Berater"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:264
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "Khantrukh nickt."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:265
 msgid ""
@@ -359,16 +447,25 @@ msgid ""
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
 msgstr ""
+"Boldreth hat Recht! Wir haben nicht genug Nahrung, um einen langen, kalten "
+"Winter zu überstehen. Wir sollten damit beginnen, einen Brunnen, eine "
+"Fischer- und eine Jagdhütte zu bauen. Und wenn wir genug Platz finden, "
+"sollten wir auch einen Bauernhof und eine Bäckerei bauen. Einer unserer "
+"Bauern scheint sehr schlau zu sein - er hat Getreide gefunden, das in dieser "
+"kalten Erde wächst."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "Nahrungswirtschaft vervollständigt"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:276
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
 msgstr ""
+"Khantrukh hat mich soeben informiert, dass unsere grundlegende "
+"Nahrungswirtschaft erfolgreich aufgebaut wurde. Jetzt muss sich keiner mehr "
+"vor dem Hungertod fürchten."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:282
 msgid "Tracks"
@@ -381,10 +478,14 @@ msgid ""
 "range over the area around our hall to protect our people from sudden "
 "attacks."
 msgstr ""
+"Thron hat mir erzählt, dass er Spuren im Schnee nordöstlich unseren Siedlung "
+"entdeckt hat. Er hat uns beauftragt, einen Wachturm zu bauen, um einen "
+"größeren Sichtbereich im Gebiet um uns herum zu haben, damit wir unsere "
+"Leute vor Überraschenden Angriffen schützen können."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:292
 msgid "Further Exploration"
-msgstr ""
+msgstr "Weitere Erkundungen"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:294
 msgid ""
@@ -396,6 +497,13 @@ msgid ""
 "is near. I am sure that there are a thousand greater dangers out there than "
 "the unknown tracks."
 msgstr ""
+"Die erste Befestigung, die Thron verlangt hat, ist soeben fertig geworden. "
+"Im Moment versucht er denen Glauben und Vertrauen zu bringen, die innerhalb "
+"der Mauern unseres neuen Standorts wohnen, den wir \"Ondun\" genannt haben, "
+"was in der alten Sprache \"die, die warten\" bedeutet. Aber Thron ist noch "
+"nicht zufrieden - und ich verstehe seine Befürchtungen vollkommen: Die "
+"Wälder sind tief und die Grenze zu AlÄthunran ist nah. Ich bin sicher, es "
+"gibt tausend größere Gefahren dort draußen als die unbekannte Fährte."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:301
 msgid ""
@@ -407,7 +515,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "Mountains Found"
-msgstr ""
+msgstr "Berge gefunden"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:312
 msgid ""
@@ -417,10 +525,15 @@ msgid ""
 "I remember, most of the mountains west to Al’thunran hold coal and some "
 "metal ores."
 msgstr ""
+"Ich habe soeben mit dem Führer unserer Patrouille gesprochen. Er erzählte "
+"mir, dass sie einige Berge nordöstlich und östlich unseres Territoriums "
+"gefunden haben. Mit ein wenig Glück wird uns dies eine neue Gelegenheit "
+"bieten, um unsere Männer wieder zu bewaffnen. Soweit ich mich erinnere, "
+"enthalten die Berge westlich von Al'thunran Kohle und einige Metallerze."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:321
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Minenwirtschaft vervollständigt"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:323
 msgid ""
@@ -428,6 +541,10 @@ msgid ""
 "brought a smile to my face – even if the hardest part is still waiting to be "
 "done, now that our smiths will give their best to further ease our lives."
 msgstr ""
+"Ich wurde gerade informiert, dass unsere Minenwirtschaft ihre Arbeit "
+"aufgenommen hat. Diese Nachricht zauberte ein Lächeln auf mein Gesicht - "
+"auch wenn der schwierigste Teil immer noch auf uns wartet, geben unsere "
+"Schmiede jetzt ihr bestes, um unser Leben noch weiter zu vereinfachen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:330
 msgid "Fortress Needed"
@@ -442,10 +559,16 @@ msgid ""
 "chance to secure the mountains from enemy hands: We must build a fortress to "
 "the east of the mountains!"
 msgstr ""
+"Boldreth und ich haben soeben das Gebiet um die drei Berge herum erkundet. "
+"Das entscheidende strategische Problem des Gebiets scheint zu sein, dass es "
+"zwei größere Pässe gibt - einen nördlich und einen südlich des zentralen "
+"Bergs. Diese Durchgänge sind recht schwierig zu kontrollieren, daher scheint "
+"mir, wir haben nur eine Möglichkeit, unsere Berge vor feindlichen "
+"Übergriffen zu schützen: Wir müssen eine Festung östlich der Berge bauen!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:342
 msgid "Fortress Completed"
-msgstr ""
+msgstr "Festung fertiggestellt"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:344
 msgid ""
@@ -454,10 +577,14 @@ msgid ""
 "building some more fortifications like barriers and donjons at the passages, "
 "but for now we can take a deep breath."
 msgstr ""
+"Endlich! Die Festung ist gerade fertiggestellt worden, der Eingang zu "
+"unserer Siedlung sollte also für jetzt sicher sein. In Zukunft können wir "
+"daran denken, noch einige andere Befestigungen wir Barrieren und Wachtürme "
+"an den Durchgängen zu bauen, für jetzt können wir jedoch aufatmen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:351
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Erweiterte Wirtschaft und Training"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:353
 msgid ""
@@ -465,6 +592,10 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
+"Unsere Minenwirtschaft scheint gut zu laufen, das sind gute Neuigkeiten! "
+"Jedoch gibt es noch viele Männer und Frauen, die in unserem Hauptgebäude auf "
+"eine Aufgabe warten. Sie können also unseren Soldaten dabei helfen, sich auf "
+"die zukünftigen Kämpfe vorzubereiten."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:357
 msgid ""
@@ -476,6 +607,15 @@ msgid ""
 "neither have a good weapon nor are they well trained. We should build up "
 "training sites to prepare them for their future tasks."
 msgstr ""
+"Unsere Geologen haben noch viele weitere Vorkommen von Eisenerz, Kohle und "
+"sogar Gold gefunden. Wir sollten unsere derzeitigen Minen ausbauen, sobald "
+"unsere Bergmänner erfahrener sind. Wir sollten einige weitere Minen, eine "
+"größere Nahrungsversorgung, um unsere Männer immer mit genügend Nahrung zu "
+"versorgen, und eine größere weiterverarbeitende Industrie bauen. Aber das "
+"ist noch nicht alles - die meisten unserer Soldaten sind recht jung und "
+"haben weder eine gute Waffe noch sind sie gut trainiert. Wir sollten "
+"Trainingseinrichtungen bauen, um sie auf ihrer zukünftigen Aufgaben "
+"vorzubereiten."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:371
 msgid ""
@@ -484,6 +624,10 @@ msgid ""
 "folk, and so I just may hope that they fled from this cruel battleground and "
 "started a better life somewhere else."
 msgstr ""
+"Meine Brüder und ihre Soldaten sind tot und hinterließen Feuer und "
+"Zerstörung. In keiner Ruine konnte ich einen Mann oder eine Frau des "
+"einfachen Volkes finden, daher hoffe ich, dass sie von diesem grausamen "
+"Schlachtfeld geflohen sind und woanders ein besseres Leben angefangen haben."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:374
 msgid ""
@@ -494,10 +638,18 @@ msgid ""
 "town is back in my hands, and I will not hesitate to rebuild it with all the "
 "strength my people have. I can’t wait to see it again in its old beauty."
 msgstr ""
+"Nichts von der Schönheit, an die ich mich erinnere, ist geblieben; nur "
+"Ruinen bleiben von der alten Hauptstadt. Ich bin kummervoll, aber auch "
+"erleichtert. Ich habe niemals gehofft, Al'thunrans alte Schönheit wieder zu "
+"sehen - vor nur einigen Monaten fragte ich mich, ob ich jemals wieder einen "
+"Fuß nach Al'thunran setzen könne. Jetzt ist die alte Stadt zurück in meinen "
+"Händen, und ich werde nicht zögern, sie mit der ganzen Kraft meiner Leute "
+"wieder aufzubauen. Ich kann es nicht erwarten, sie in ihrer alten Schönheit "
+"wieder zu sehen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:379
 msgid "Victory"
-msgstr ""
+msgstr "Sieg"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:380
 msgid ""
@@ -526,14 +678,18 @@ msgid ""
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
 msgstr ""
+"Wenn die junge Sonne morgen früh über den Bäumen aufgeht, werde ich den "
+"Angriff befehlen. In der Abenddämmerung werde ich meinen Sieg in den "
+"hölzernen Hallen der Kriegsherren feiern und in neugeborenes Lamm opfern, zu "
+"Ehren meines Vaters, dessen Augen heute auf mich gerichtet sind."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:394
 msgid "So be it!"
-msgstr ""
+msgstr "So sei es!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:399
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Khantrukh sagt:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:401
 msgid ""
@@ -541,13 +697,17 @@ msgid ""
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
 msgstr ""
+"Häuptling, erinnere dich an die armen Träger: Unsere Straßen werden immer "
+"länger und die Last auf ihren Schultern wird niemals leichter. Wir sollten "
+"mehr Ochsen züchten, um ihnen die Arbeit leichter und den Transport "
+"effizienter zu machen."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Neues Ziel"
+msgstr[1] "Neue Ziele"

@@ -82,12 +82,12 @@ obj_spidercloth_production = {
    title = _ "Build a spider farm and a weaving mill",
    number = 3,
    body = objective_text(_"Spidercloth Production", _(
-[[The weavers produce spidercloth and tabards in the weaving-mill. ]] ..
+[[The weavers produce spidercloth and tabards in the weaving mill. ]] ..
 [[Spidercloth is needed for the construction of some buildings and clothing, ]] ..
 [[while tabards are the uniforms of soldiers. ]] ..
-[[The weaving-mill needs gold yarn and spideryarn as raw material. ]] ..
+[[The weaving mill needs gold yarn and spideryarn as raw material. ]] ..
 [[Spideryarn is produced by the spider farm, while gold yarn is produced by the gold weaver out of gold.]]) .. "<br>" ..
-[[• ]] .. _[[Build a weaving-mill]] .. "<br>" ..
+[[• ]] .. _[[Build a weaving mill]] .. "<br>" ..
 [[• ]] .. _[[Build a spider farm]] .. "<br>" ..
 [[• ]] .. _[[Build a goldweaver]]
  )
@@ -303,7 +303,7 @@ food_story_message = {
 .. paragraphdivider() .. _(
 [[But we might find a compromise in between: for me, making bread is a troublesome task. Grinding the blackroot and corn to flour and then baking the bread is tedious and boring; I feel a more industrial approach would be helpful here. I for one would love to just have fresh bread delivered to my house every day.]])
 .. paragraphdivider() .. _(
-[[Oooh and even more important: the smoking of fish and meat to cleanse them and improve their taste is terrible. My house is full of smoke and stinks for weeks afterwards. Don’t you think that this could be done in a special building were the side effects do not matter? I think those two things would be accepted by the people and would reduce the cooking time without taking away the ritual.]]
+[[Oooh and even more important: the smoking of fish and meat to cleanse them and improve their taste is terrible. My house is full of smoke and stinks for weeks afterwards. Don’t you think that this could be done in a special building where the side effects do not matter? I think those two things would be accepted by the people and would reduce the cooking time without taking away the ritual.]]
  ))
 },
 {
@@ -328,7 +328,7 @@ spidercloth_messages = {
    {
       title = _"A Man Comes to Jundlina",
       body = opol(_(
-[[May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. Could you not help the weavers’ guild by arranging the building of a weaving-mill and a spider farm? The spiders deliver the finest silk and we will produce the finest spidercloth from it.]])
+[[May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. Could you not help the weavers’ guild by arranging the building of a weaving mill and a spider farm? The spiders deliver the finest silk and we will produce the finest spidercloth from it.]])
 .. paragraphdivider() .. _(
 [[We offer to also produce the tabards for young soldiers and the golden tabards for officers for you in exchange. You will need them for sure as soon as you want to recruit new soldiers.]]))
  },
@@ -336,7 +336,7 @@ spidercloth_messages = {
     title = _ "Jundlina Replies",
     body = jundlina(_ "Jundlina Replies", _(
 [[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand your urgency. ]] ..
-[[Your suggestion sounds fair to me, I will build your weaving-mill and spider farm. ]] ..
+[[Your suggestion sounds fair to me, I will build your weaving mill and spider farm. ]] ..
 [[I will also build a goldweaver so that the golden tabards you make will not be golden by name alone.]]
     )) ..  new_objectives(obj_spidercloth_production)
  }
@@ -347,7 +347,7 @@ spidercloth_story_ended_messages = {
       title = _ "Opol Seeks Out Jundlina",
       body = opol(_(
 [[May Satul warm you, Jundlina! ]] ..
-[[The weaving-mill, goldweaver and spider farm buildings are complete ]] ..
+[[The weaving mill, goldweaver and spider farm buildings are complete ]] ..
 [[and are starting their work at this very moment. The weavers’ guild is very grateful for your support ]] ..
 [[and we will stand by our word and deliver the first tabard very soon.]]
       ))
@@ -376,8 +376,7 @@ heavy_industry_story = {
    {
       title = _ "Jundlina Replies",
       body = jundlina(_"Jundlina Nods", _(
-[[I have considered this, Sidolus. I think, it is about time. We will make this a priority for now. ]] ..
-[[You shall get your industry and soon!]]
+[[I have considered this, Sidolus. I think  it is about time. We will make this a priority for now. You shall get your industry soon!]]
       )) .. new_objectives(obj_make_heavy_industry_and_mining)
    },
 }
@@ -419,7 +418,7 @@ training_story_end = {
 [[I received an invitation from Sidolus. The first day of training in the newly finished labyrinth will be tomorrow. ]] ..
 [[The dungeon is done as well and will start its work soon. I am looking forward to tomorrow; ]] ..
 [[I am very interested in how our soldiers are trained, and I wonder if the additional workload ]] ..
-[[will keep them from bullying the civil population.]]
+[[will keep them from bullying the civilian population.]]
       ))
    }
 }

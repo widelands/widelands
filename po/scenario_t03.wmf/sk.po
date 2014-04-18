@@ -1,21 +1,22 @@
 # Widelands po/sk_SK/campaigns/t03.wmf.po
 # Copyright (C) 2005-2009 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2014-02-08 17:59+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
-"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-11 10:15+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:31+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
+"Language: sk\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
 #: ../../campaigns/t03.wmf/scripting/texts.lua:23
@@ -27,10 +28,12 @@ msgid ""
 "Build up a basic food economy to provide your people with food – a fisher’s "
 "hut, a hunter’s hut, a well, a farm and a bakery."
 msgstr ""
+"Vybudujte základnú potravinársku ekonomiku - rybársku chatrč, loveckú "
+"chatrč, studňu, farmu a pekáreň, aby ste svojim ľudom mohli poskytnúť jedlo."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:30
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Postavte kravín"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:32
 msgid "Remember to build a cattle farm"
@@ -42,6 +45,8 @@ msgid ""
 "of your oxen to help transport wares more quickly. Remember to build a "
 "cattle farm!"
 msgstr ""
+"Keďže sa predlžujú vaše cesty a vaša ekonomika narastá, mali by ste využiť "
+"svojich volov na rýchlejšiu prepravu tovaru. Nezabudnite postaviť kravín!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:39
 #: ../../campaigns/t03.wmf/scripting/texts.lua:41
@@ -53,6 +58,8 @@ msgid ""
 "Build a donjon at the north-east of your territory to get greater visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"Postavte donžon severovýchodne od svojho územia, aby ste získali väčší "
+"dohľad a ochránili svojich ľudí pred náhlymi útokmi nepriateľov."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 #: ../../campaigns/t03.wmf/scripting/texts.lua:50
@@ -64,6 +71,8 @@ msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"Postavte viac vojenských budov, aby ste preskúmali oblasť okolo základne a "
+"zaistili bezpečnosť svojich ľudí."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
@@ -76,6 +85,8 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"Rozšírte svoje územie k horám, pošlite tam geológov, aby hľadali rudu a "
+"uhlie, a vybudujte banskú ekonomiku - bane, krčmy, taviarne a kovodielne."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:66
 #: ../../campaigns/t03.wmf/scripting/texts.lua:68
@@ -84,7 +95,7 @@ msgstr "Postavte pevnosť"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:69
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Postavte pevnosť východne od hôr."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
 #: ../../campaigns/t03.wmf/scripting/texts.lua:76
@@ -95,7 +106,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:106
 msgid ""
 "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Postavte zápasnícku arénu a výcvikový tábor na západ od hôr."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:79
 #: ../../campaigns/t03.wmf/scripting/texts.lua:119
@@ -105,6 +116,10 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "the axfactory to a war mill, which will produce additional weapons."
 msgstr ""
+"Vylepšite kovodielňu na továreň na sekery, aby sa začali vyrábať zbrane, a "
+"postavte druhú kovodielňu na zaistenie produkcie nástrojov. Keď kováč "
+"dosiahne ďalšiu úroveň (majster kováč), továreň na sekery budete môcť "
+"vylepšiť až na vojenský závod, v ktorom sa vyrábajú dodatočné zbrane."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:84
 #: ../../campaigns/t03.wmf/scripting/texts.lua:130
@@ -112,6 +127,8 @@ msgid ""
 "Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"Postavte vyhňu na helmy západne od hôr, aby ste svojim vojakom poskytli "
+"lepšiu zbroj."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:90
 #: ../../campaigns/t03.wmf/scripting/texts.lua:92
@@ -120,7 +137,7 @@ msgstr "Postavte sklad"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Postavte sklad západne od hôr."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:95
 msgid ""
@@ -129,11 +146,14 @@ msgid ""
 "your territory is growing and the paths to your headquarters get longer and "
 "longer."
 msgstr ""
+"Sklady sú podobné základni. Jediným rozdielom je, že ich nebránia vojaci. Je "
+"často rozumné postaviť sklad, keď sa vaše územie rozrastá a cesty k základni "
+"neustále predlžujú."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 #: ../../campaigns/t03.wmf/scripting/texts.lua:105
 msgid "Build training sites"
-msgstr ""
+msgstr "Postavte výcvikové stavby"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:108
 msgid ""
@@ -141,6 +161,9 @@ msgid ""
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
 msgstr ""
+"Výcvikové stavby ako výcvikový tábor alebo aréna sa používajú na trénovanie "
+"vojakov v rozličných vlastnostiach. Tieto vlastnosti sú dôležité pri bojoch "
+"a čím je vojak lepší, tým väčšiu šancu má vyhrať súboj."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid "The attributes are: health points, attack, defense and evade."
@@ -149,7 +172,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:116
 #: ../../campaigns/t03.wmf/scripting/texts.lua:118
 msgid "Build weapons production"
-msgstr ""
+msgstr "Zostavte výrobu zbraní"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 #: ../../campaigns/t03.wmf/scripting/texts.lua:129
@@ -159,11 +182,11 @@ msgstr "Postavte vyhňu na helmy"
 #: ../../campaigns/t03.wmf/scripting/texts.lua:135
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "Porazte Kalitathovu armádu"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Porazte Kalitathovu armádu a rozšírte svoje územie na východ."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:140
 msgid ""
@@ -172,6 +195,10 @@ msgid ""
 "that should attack. When you are ready with setting the number, click on the "
 "cross (‘Start Attack’)."
 msgstr ""
+"Aby ste zaútočili na nepriateľa, musíte kliknúť na dvere nepriateľskej "
+"vojenskej budovy. Zjaví sa menu, ktoré vám umožní vybrať počet vojakov, "
+"ktorí majú zaútočiť. Keď už máte vybratý počet, kliknite na symbol kríža "
+"('Začať útok')."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:147
 #: ../../campaigns/t03.wmf/scripting/texts.lua:149
@@ -182,10 +209,11 @@ msgstr "Ozbrojený útok na Al’thunran"
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
 msgstr ""
+"Zničte všetky vojská Thronových dvoch bratov a osloboďte kruh s trónom."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:158
 msgid "Close to Home"
-msgstr ""
+msgstr "Blízko pri domove"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:170
@@ -199,18 +227,23 @@ msgid ""
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
 msgstr ""
+"Počas posledných dní sme sa priblížili k nášmu hlavnému mestu. Mnoho ľudí sa "
+"k nám na pochode pripojilo a upriamilo vo mne nádej. Bojím sa však, že nie "
+"sme dosť silní na vojnu s mojimi bratmi."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:164
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
 msgstr ""
+"Zatiaľ odpočívame na hraniciach starého lesa a pripravujeme sa na "
+"nasledujúce dni."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 #: ../../campaigns/t03.wmf/scripting/texts.lua:201
 #: ../../campaigns/t03.wmf/scripting/texts.lua:369
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Ďalší studený deň"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -221,6 +254,12 @@ msgid ""
 "vulnerable. As my scouts report, he has set foot on the lower grounds around "
 "the capital, securing the outer fortification rings."
 msgstr ""
+"Novinky, ktoré priniesla hliadka, neznejú dobre. Naši špióni hlásia, že v "
+"bitke stále zúria bojovné kmene, ale niektorí zo starších vojakov a vodcov "
+"kmeňov sa zdajú byť unavení z tejto nezmyselnej vojny. Kalitath, Kunov syn, "
+"je prvým vojenským vodcom, ktorý opustil Al’thunran a nechal tak svoju "
+"stranu napospas osudu. Ako hlásia moji prieskumníci, vkročil do nížin okolo "
+"hlavného mesta, chrániac prstence vonkajšieho opevnenia."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:180
 msgid "Doubts"
@@ -228,7 +267,7 @@ msgstr "Pochybnosti"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:182
 msgid "Boldreth is shaking his head..."
-msgstr ""
+msgstr "Boldreth krúti hlavou..."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:183
 msgid ""
@@ -239,11 +278,17 @@ msgid ""
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
 msgstr ""
+"Thron verí, že Kalitath je unavený z bojov a bude ochotný pripojiť sa k nám "
+"pri pochode za nastolenie práv a poriadku v Al'thunran. Ale ja si to "
+"nemyslím. Kalitath je synom jedného z najmocnejších generálov našej armády a "
+"jeho rodine sa nikdy nepáčila myšlienka klaňať sa pred Chat'Karuthovou "
+"zástavou. Prečo by mal pochodovať s jeho synom, aby získal späť jeho "
+"dedičstvo a trón?"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:192
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
 msgid "The Story Continues"
-msgstr ""
+msgstr "Príbeh pokračuje"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:194
 msgid ""
@@ -251,10 +296,13 @@ msgid ""
 "fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
 msgstr ""
+"Avšak Thron nechce počuť moje pochybnosti. Snaží sa rozšíriť naše opevnenie "
+"k hraniciam Kalitatovho územia a opäť sa pripojiť k svojmu vojsku. Musím "
+"sledovať všetko, čo sa tu deje."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "Thron smelo hovorí."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:203
 msgid ""
@@ -265,6 +313,12 @@ msgid ""
 "a good and defensible infrastructure. Still, I hope I will not walk alone on "
 "this mission, I hope Kalitath son of Kun will follow my call."
 msgstr ""
+"Pohraničná línia mojich jednotiek sa rozšírila na okraj lesov. Ďaleko pred "
+"nami nás čaká dlhá a studená zima. Opevnenie, ktoré sme postavili okolo "
+"Ondunu, nám zabezpečí rýchly prísun vojska a tovaru. Keď získam Al'thunran, "
+"obe mestá prepojím dobrou infraštruktúrou s možnosťou obrany. Stále dúfam, "
+"že na túto misiu nie som sám, dúfam, že Kalitath, syn Kuna, odpovie na moje "
+"volanie."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:214
 msgid ""
@@ -275,10 +329,15 @@ msgid ""
 "time I spend waiting won’t be lost. I will further upgrade my soldiers and "
 "prepare for battle."
 msgstr ""
+"Vyslal som svojich mužov, aby sa stretli s Kalitatom v jeho pevnosti. "
+"Zatarasil bývalý hlavný vchod do hlavného mesta a snaží sa dokola obliehať "
+"Al’thunran. Nepustí nikoho dnu ani von, kým je kruh celý. Zatiaľ mi "
+"neodpovedal na žiadne správy. Ale čas, ktorý strávim čakaním, nebude "
+"stratený. Vylepším si vojakov a pripravím sa na boj."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:222
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Váš verný spoločník"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:223
 msgid "Boldreth shouts out!"
@@ -291,14 +350,18 @@ msgid ""
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
 msgstr ""
+"Ten LOTOR! Len jeden muž z našej pohraničnej hliadky sa vrátil živý. Niesol "
+"správu od Kalitatha, v ktorej hovorí, že potrestá každý pohyb našich vojsk "
+"ich vlastnou krvou! Takéto správanie nemôžeme pripustiť. Odteraz zúri medzi "
+"Kalitathom a nami vojna!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:234
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "Zradcovské opevnenie"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:235
 msgid "Thron says:"
-msgstr ""
+msgstr "Thron hovorí:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:236
 msgid ""
@@ -308,6 +371,10 @@ msgid ""
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
 msgstr ""
+"Ten zradca nechal svoje vojsko umrieť tam, kde ležali, keď pochopil, že "
+"nedokáže čeliť môjmu. Kalitath zmizol v zmätku vojny, ale už je mi to jedno. "
+"Nech utečie a nech na večné časy zabudne sa naň ako na vodcu kmeňa, ktorý sa "
+"odmietol poddať drevenému trónu, ktorý teraz prevezmem ja."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:240
 msgid ""
@@ -317,6 +384,10 @@ msgid ""
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
 msgstr ""
+"Dokonca nám jeho útek priniesol úžitok: celý rok bol Kalitath taký "
+"zaneprázdnený vojnou, že sa nestaral zaobstarať pre svojich ľudí dosť jedla "
+"do zásoby. Teraz, keď odišiel, hlad prinútil niektorých jeho mladších "
+"stúpencov vzdať sa. Táto skupina drží silnú pevnosť v hlavnom prstenci."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
 msgid ""
@@ -325,14 +396,18 @@ msgid ""
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
 msgstr ""
+"Ale mám ďalšiu správu: moji prieskumníci ohlásili, že medzi dvomi zúrivými "
+"kmeňmi mojich bratov nastal chaos a ani si nevšimli nebezpečenstvo, ktoré sa "
+"na nich chystá. Avšak myslím si, že by tomu nevenovali pozornosť, aj keby si "
+"všimli; zaslepení hnevom a nenávisťou, nezostal v nich ani kúsok rozumu."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:253
 msgid "Winter Ahead"
-msgstr ""
+msgstr "Zima sa blíži"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid "Boldreth says:"
-msgstr ""
+msgstr "Boldreah hovorí:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:255
 msgid ""
@@ -342,14 +417,18 @@ msgid ""
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
 msgstr ""
+"Dnes ráno som našiel Throna pri nepokojných myšlienkach. Včera v noci sa "
+"vrátil neskoro z hliadky a oprel sa o strom, dozerajúc na tábor. Hádky a "
+"konflikty neustále vzrastajú a zima nás má pevne v hrsti. Ak chceme prežiť "
+"túto dlhú, studenú zimu, mali by sme nahromadiť jedlo do zásoby!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:263
 msgid "The Advisor"
-msgstr ""
+msgstr "Radca"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:264
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "Khantrukh kývne."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:265
 msgid ""
@@ -359,16 +438,23 @@ msgid ""
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
 msgstr ""
+"Boldreth má pravdu! Nemáme dostatok jedla na to, aby sme prežili dlhú, "
+"studenú zimu. Mali by sme postaviť studňu, rybársku a loveckú chatrč. A ak "
+"sa nájde dosť miesta, mali by sme tiež postaviť farmu a pekáreň! Zdá sa, že "
+"jeden z našich farmárov je veľmi šikovný: už sa mu podarilo nájsť plodiny, "
+"ktoré sa ujali v tejto studenej pôde."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "Potravinárska ekonomika dokončená"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:276
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
 msgstr ""
+"Khantrukh ma práve informoval, že naša základná potravinárska ekonomika bola "
+"vytvorená úspešne. Konečne sa už nikto z nás nemusí báť hladu."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:282
 msgid "Tracks"
@@ -381,10 +467,13 @@ msgid ""
 "range over the area around our hall to protect our people from sudden "
 "attacks."
 msgstr ""
+"Thron mi oznámil, že severovýchodne od našej osady objavil stopy v snehu. "
+"Nariadil nám postaviť donžon, aby sme mali väčší rozhľad okolo hlavnej "
+"budovy a zároveň ochránili ľudí od náhlych útokov."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:292
 msgid "Further Exploration"
-msgstr ""
+msgstr "Ďalší prieskum"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:294
 msgid ""
@@ -396,6 +485,12 @@ msgid ""
 "is near. I am sure that there are a thousand greater dangers out there than "
 "the unknown tracks."
 msgstr ""
+"Prvé opevnenie, ktoré nariadil Thron postaviť, práve dokončili. V tejto "
+"chvíli sa snaží vzbudiť dôveru v tých, čo žijú medzi múrmi nášho nového "
+"domova, ktorý sme nazvali 'Ondun', čo znamená 'tí, ktorí čakajú' v starom "
+"jazyku. Ale Thron ešte stále nie je spokojný - a dokonale chápem jeho obavy; "
+"lesy sú hlboké a hranica Al'thunranu je blízko. Som si istý, že vonku číha "
+"množstvo ďaleko väčších nebezpečenstiev, než sú neznáme stopy."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:301
 msgid ""
@@ -404,10 +499,14 @@ msgid ""
 "raging wars on our doorstep. THEN we will be prepared once trouble seeks to "
 "capture our woods."
 msgstr ""
+"Mali by sme ďalej preskúmať oblasť okolo nás, zostaviť viac strážcov a "
+"prieskumníkov na sledovanie hranice a dať si pozor na vojny zúriace vo "
+"svojom okolí. Len tak budeme pripravení, keď v našich lesoch zavládne "
+"nepokoj."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "Mountains Found"
-msgstr ""
+msgstr "Nález hôr"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:312
 msgid ""
@@ -417,10 +516,14 @@ msgid ""
 "I remember, most of the mountains west to Al’thunran hold coal and some "
 "metal ores."
 msgstr ""
+"Práve som hovoril s vedúcim hliadky. Povedal mi, že severovýchodne a "
+"východne od nášho územia našli nejaké hory. S trochou šťastia to znamená "
+"šancu vyzbrojiť našich mužov, pretože, ak si dobre spomínam, väčšina hôr na "
+"západe od Al'thunranu v sebe ukrýva uhlie a niektoré rudy kovov."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:321
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Banícka ekonomika dokončená"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:323
 msgid ""
@@ -428,10 +531,13 @@ msgid ""
 "brought a smile to my face – even if the hardest part is still waiting to be "
 "done, now that our smiths will give their best to further ease our lives."
 msgstr ""
+"Práve som sa dozvedel, že sa rozbehla naša banícka ekonomika. Táto správa ma "
+"potešila. Aj keď najťažšia časť ešte stále nie je hotová, teraz urobia "
+"kováči všetko pre to, aby nám uľahčili život."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:330
 msgid "Fortress Needed"
-msgstr ""
+msgstr "Je potrebná pevnosť"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
 msgid ""
@@ -442,10 +548,16 @@ msgid ""
 "chance to secure the mountains from enemy hands: We must build a fortress to "
 "the east of the mountains!"
 msgstr ""
+"Boldreth a ja sme práve preskúmali územie okolo troch hôr. Hlavným "
+"strategickým problémom tohto územia je, zdá sa, to, že existujú dva väčšie "
+"priechody - jeden severne a druhý južne od prostrednej hory. Mať kontrolu "
+"nad týmito priechodmi je dosť ťažké, a preto si myslím, že máme len jednu "
+"šancu na to, aby sme tieto hory ubránili od rúk nepriateľa. Na východ od hôr "
+"musíme postaviť pevnosť!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:342
 msgid "Fortress Completed"
-msgstr ""
+msgstr "Pevnosť dokončená"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:344
 msgid ""
@@ -454,10 +566,14 @@ msgid ""
 "building some more fortifications like barriers and donjons at the passages, "
 "but for now we can take a deep breath."
 msgstr ""
+"Konečne! Práve dokončili pevnosť, takže vstup do našej osady by mal byť "
+"nateraz chránený. Pre budúcnosť by sme mohli uvažovať o postavení iných "
+"opevnení ako hradieb a donžonov na priechodoch, ale zatiaľ sa môžeme zhlboka "
+"nadýchnuť."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:351
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Vylepšená ekonomika a výcvik"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:353
 msgid ""
@@ -465,6 +581,9 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
+"Zdá sa, že naša banícka ekonomika funguje dokonale: to už je dobrá správa! "
+"Každopádne v našej hale čaká na prácu stále veľa mužov a žien, aby mohli "
+"pomôcť našim vojakom pripraviť sa na budúce bitky."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:357
 msgid ""
@@ -476,6 +595,13 @@ msgid ""
 "neither have a good weapon nor are they well trained. We should build up "
 "training sites to prepare them for their future tasks."
 msgstr ""
+"Naši geológovia našli oveľa viac ložísk železnej rudy, uhlia a dokonca aj "
+"zlata. Akonáhle naberú baníci viac skúsenosti, mali by sme doterajšie bane "
+"vylepšiť. Mali by sme postaviť viac baní, vybudovať väčšiu potravinovú "
+"infraštruktúru, ktorá by zásobovala našich ľudí jedlom, a ďalšiu výrobnú "
+"ekonomiku. To však stále nie je všetko - väčšina našich vojakov je dosť "
+"mladá a nemá ani vhodnú zbraň, ani dobrý výcvik. Mali by sme postaviť "
+"výcvikové stavby a pripraviť ich tak na budúce úlohy."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:371
 msgid ""
@@ -484,6 +610,9 @@ msgid ""
 "folk, and so I just may hope that they fled from this cruel battleground and "
 "started a better life somewhere else."
 msgstr ""
+"Moji bratia a ich vojaci sú mŕtvi a zanechali za sebou oheň a skazu. Ani v "
+"jednej zrúcanine som nenašiel muža alebo ženu z obyčajného ľudu, tak len "
+"dúfam, že unikli z tohto krutého bojiska a začali lepší život niekde inde."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:374
 msgid ""
@@ -494,10 +623,16 @@ msgid ""
 "town is back in my hands, and I will not hesitate to rebuild it with all the "
 "strength my people have. I can’t wait to see it again in its old beauty."
 msgstr ""
+"Nič nezostalo z tej nádhery, na ktorú si spomínam - z hlavného mesta zostali "
+"len trosky. Som nešťastný, ale zároveň odľahčený. Nikdy som nedúfal opäť "
+"vidieť Al'thunran v jeho starej kráse - len pred pár mesiacmi som bol "
+"zvedavý, či doň budem môcť ešte niekedy vkročiť. Teraz je staré mesto opäť v "
+"mojich rukách a nebudem váhať prestavať ho s pomocou svojich ľudí. Nemôžem "
+"sa dočkať, kedy ho znovu uvidím v jeho starej kráse."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:379
 msgid "Victory"
-msgstr ""
+msgstr "Víťazstvo"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:380
 msgid ""
@@ -509,7 +644,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:386
 msgid "Military Assault"
-msgstr ""
+msgstr "Ozbrojený útok"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:388
 msgid ""
@@ -517,6 +652,9 @@ msgid ""
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
 msgstr ""
+"Nech je tak, generáli zostavujú moje jednotky a sám Boldreth povedie prvý "
+"útok. Budem jazdiť po jeho boku a oslobodíme Al'thunran od vojny a do "
+"hlavného mesta opäť prinesieme mier."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:390
 msgid ""
@@ -525,14 +663,17 @@ msgid ""
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
 msgstr ""
+"Keď mladé slnko vyjde ponad stromy v zajtrajšie ráno, nariadim útok. Do "
+"súmraku oslávim svoje víťazstvo v drevených halách vojvodcu a obetujem "
+"novorodené jahňa na počesť svojho otca, ktorého oči na mňa dnes hľadia."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:394
 msgid "So be it!"
-msgstr ""
+msgstr "Nech je tak!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:399
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Khantrukh hovorí:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:401
 msgid ""
@@ -540,6 +681,9 @@ msgid ""
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
 msgstr ""
+"Náčelník, pamätajte na úbohých nosičov: naše cesty sa stále predĺžujú a "
+"bremeno na ich ramenách sa nikdy nezľahčuje. Mali by sme chovať viac volov, "
+"aby sme im prácu uľahčili a svoj transport zefektívnili."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
