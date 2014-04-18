@@ -672,7 +672,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	m_help->add_paragraph
 		(_
 		 ("On the left side is a list of all clients including you. You can set your role "
-		  "With the button following your nickname. Available roles are:"));
+		  "with the button following your nickname. Available roles are:"));
 	m_help->add_picture_li
 		(_
 		 ("The player with the color of the flag. If more than one client selected the same color, these "
