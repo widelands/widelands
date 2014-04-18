@@ -3,8 +3,9 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = path.glob(dirname, "sheep_\\d+.png"),
-      sound_effects = {
-         [0] = path.glob("sound/farm", "sheep_\\d+.ogg"),
+      sound_effect = {
+         directory = "sound/farm",
+         name = "sheep",
       },
       player_color_masks = {},
       hotspot = { 8, 16 },

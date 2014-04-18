@@ -224,8 +224,6 @@ Immovable_Descr::Immovable_Descr
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
-
-	// NOCOM(#sirver): could be that I accidentally nuked loading of "idle" animation.
 	if (char const * const string = global_s.get_string("size"))
 		try {
 			if      (!strcasecmp(string, "small"))

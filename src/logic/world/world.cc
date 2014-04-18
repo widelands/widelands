@@ -114,23 +114,6 @@ const DescriptionMaintainer<EditorCategory>& World::editor_categories() const {
 }
 
 // NOCOM(#sirver): remove these
-// void World::parse_bobs(const std::string& given_path, Profile & root_conf) {
-// std::string path(given_path);
-// std::string::size_type const base_path_size = path.size();
-// std::set<std::string> names; //  To enforce name uniqueness.
-
-// PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
-// immovables_.add
-// (new Immovable_Descr
-// (_name, _descname, path, prof, global_s, *this, nullptr));
-// PARSE_MAP_OBJECT_TYPES_END;
-
-// PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
-// bobs      .add
-// (new Critter_Bob_Descr
-// (_name, _descname, path, prof, global_s, nullptr));
-// PARSE_MAP_OBJECT_TYPES_END;
-// }
 
 // void World::parse_mapgen   ()
 // {

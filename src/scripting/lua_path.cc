@@ -50,40 +50,29 @@ Module Functions
 
    Returns everything behind the last /.
 
-
 	:type filename: class:`string`
 	:arg filename: filename to return basename for.
 
    :returns: The basename.
 */
 static int L_basename(lua_State * L) {
-	// NOCOM(#sirver): use FS_Filename
-	std::string filename = luaL_checkstring(L, -1);
-	const size_t found = filename.rfind('/');
-	if (found != std::string::npos) {
-		lua_pushstring(L, filename.substr(found + 1));
-	}
+	lua_pushstring(L, FileSystem::FS_Filename(luaL_checkstring(L, -1)));
 	return 1;
 }
 
 /* RST
 .. function:: dirname(filename)
 
-	Everything before the final / in filename.
+	Everything before the final / in filename. The returned value is either the empty string or
+	ends with a '/'.
 
 	:type filename: class:`string`
-	:arg filename: filename to return direname for.
+	:arg filename: filename to return dirname for.
 
    :returns: The dirname.
 */
 static int L_dirname(lua_State * L) {
-	// NOCOM(#sirver): trim / from return value
-	// // NOCOM(#sirver): use FS_Dirname
-	std::string filename = luaL_checkstring(L, -1);
-	const size_t found = filename.rfind('/');
-	if (found != std::string::npos) {
-		lua_pushstring(L, filename.substr(0, found + 1));
-	}
+	lua_pushstring(L, FileSystem::FS_Dirname(luaL_checkstring(L, -1)));
 	return 1;
 }
 

@@ -441,8 +441,6 @@ void Critter_Bob::save
 	fw.Unsigned8(header_Critter);
 	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);
 
-	const BobDescr * critter = egbase.world().get_bob_descr(name());
-
 	std::string owner =
 		descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";
 	fw.CString(owner);

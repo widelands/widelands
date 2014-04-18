@@ -3,9 +3,9 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = path.glob(dirname, "duck_\\d+.png"),
-      -- NOCOM(#sirver): add support for this into the engine.
-      sound_effects = {
-         [0] = path.glob(dirname, "duck_\\d+.ogg")
+      sound_effect = {
+         directory = dirname,
+         name = "duck",
       },
       player_color_masks = {},
       hotspot = { 5, 7 },

@@ -55,18 +55,6 @@ Worker_Descr::Worker_Descr
 		add_animation("idle", g_gr->animations().load(directory, idle_s));
 	}
 
-	// Parse attributes
-	// // NOCOM(#sirver): I guess this can be removed again, there is no worker using this.
-	while (global_s.get_next_val("attrib")) {
-		throw game_data_error("Worker with attribute: %s", _name);
-		// uint32_t const attrib = get_attribute_id(val->get_string());
-
-		// if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			// throw game_data_error("bad attribute \"%s\"", val->get_string());
-
-		// add_attribute(attrib);
-	}
-
 	add_attribute(Map_Object::WORKER);
 
 	m_default_target_quantity =

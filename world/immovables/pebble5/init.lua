@@ -9,7 +9,7 @@ world:new_immovable_type{
    programs = {},
    animations = {
       idle = {
-         pictures = { dirname .. "/idle.png" },
+         pictures = { dirname .. "idle.png" },
          player_color_masks = {},
          hotspot = { 9, 6 },
       },

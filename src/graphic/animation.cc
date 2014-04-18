@@ -140,38 +140,20 @@ private:
 	vector<const Image*> frames_;
 	vector<const Image*> pcmasks_;
 
-	/// mapping of soundeffect name to frame number, indexed by frame number .
-	map<uint32_t, string> sfx_cues;
+	// name of sound effect that will be played at frame 0.
+	// TODO(sirver): this should be done using playFX in a program instead of
+	// binding it to the animation.
+	string sound_effect_;
 };
 
 NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
-	// Read mapping from frame numbers to sound effect names and load effects
-	while (Section::Value * const v = section.get_next_val("sfx")) {
-		char * parameters = v->get_string(), * endp;
-		string fx_name;
-		unsigned long long int const value = strtoull(parameters, &endp, 0);
-		const uint32_t frame_number = value;
-		try {
-			if (endp == parameters or frame_number != value)
-				throw wexception("expected %s but found \"%s\"", "frame number", parameters);
-			parameters = endp;
-			force_skip(parameters);
-
-			fx_name = string(directory) + "/" + string(parameters);
-			g_sound_handler.load_fx_if_needed(directory, parameters, fx_name);
-			map<uint32_t, string>::const_iterator const it =
-				sfx_cues.find(frame_number);
-			if (it != sfx_cues.end())
-				throw wexception
-					("redefinition for frame %u to \"%s\" (previously defined to "
-					 "\"%s\")",
-					 frame_number, parameters, it->second.c_str());
-		} catch (const _wexception & e) {
-			throw wexception("sfx: %s", e.what());
-		}
-		sfx_cues[frame_number] = fx_name;
+	// If this animation has a sound effect associated, try to load it now.
+	const std::string sfx = section.get_string("sfx", "");
+	if (!sfx.empty()) {
+			sound_effect_ = string(directory) + "/" + sfx;
+			g_sound_handler.load_fx_if_needed(directory, sfx, sound_effect_);
 	}
 
 	int32_t const fps = section.get_int("fps");
@@ -215,9 +197,17 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
-	// NOCOM(#sirver): add support for sfx
 
 	get_point(*table.get_table("hotspot"), &hotspot_);
+
+	if (table.has_key("sound_effect")) {
+		std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
+
+		const std::string name = sound_effects->get_string("name");
+		const std::string directory = sound_effects->get_string("directory");
+		sound_effect_ = directory + "/" + name;
+		g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
+	}
 
 	image_files_ = table.get_table("pictures")->array_entries<std::string>();
 	if (image_files_.empty()) {
@@ -307,12 +297,14 @@ const Image& NonPackedAnimation::representative_image_from_disk() const {
 	return get_frame(0, nullptr);
 }
 
-void NonPackedAnimation::trigger_soundfx
-	(uint32_t time, uint32_t stereo_position) const {
+void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
+	if (sound_effect_.empty()) {
+		return;
+	}
 	const uint32_t framenumber = time / frametime_ % nr_frames();
-	const map<uint32_t, string>::const_iterator sfx_cue = sfx_cues.find(framenumber);
-	if (sfx_cue != sfx_cues.end())
-		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
+	if (framenumber == 0) {
+		g_sound_handler.play_fx(sound_effect_, stereo_position, 1);
+	}
 }
 
 void NonPackedAnimation::blit

@@ -14,7 +14,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = { dirname .. "/idle.png" },
+         pictures = { dirname .. "idle.png" },
          player_color_masks = {},
          hotspot = { 23, 61 },
       },

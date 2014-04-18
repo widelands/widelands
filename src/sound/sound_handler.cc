@@ -228,7 +228,6 @@ void Sound_Handler::load_system_sounds()
  * \param basename   Name from which filenames will be formed
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
- * \internal
 */
 void Sound_Handler::load_fx_if_needed
 	(const std::string & dir,
