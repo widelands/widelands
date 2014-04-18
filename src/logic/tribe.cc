@@ -96,7 +96,7 @@ Tribe_Descr::Tribe_Descr
 					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 
-			const World& world = egbase.map().world();
+			const World& world = egbase.world();
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
 				m_immovables.add

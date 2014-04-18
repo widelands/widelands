@@ -28,7 +28,7 @@ struct TrainingSite_Window;
 
 namespace Widelands {
 
-struct World;
+class World;
 
 struct TrainingSite_Descr : public ProductionSite_Descr {
 	TrainingSite_Descr

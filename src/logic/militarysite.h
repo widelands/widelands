@@ -28,7 +28,7 @@
 namespace Widelands {
 
 class Soldier;
-struct World;
+class World;
 
 struct MilitarySite_Descr : public ProductionSite_Descr {
 	MilitarySite_Descr
