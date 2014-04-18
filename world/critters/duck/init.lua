@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.glob(dirname, "duck_\\d+.png"),
+      pictures = path.list_directory(dirname, "duck_\\d+.png"),
       sound_effect = {
          directory = dirname,
          name = "duck",

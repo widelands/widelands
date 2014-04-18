@@ -98,7 +98,6 @@ void ProgressWindow::set_background(const std::string & file_name) {
 			m_background = file_name;
 		else {
 			m_background = "pics/progress.png";
-			// NOCOM(#sirver): remove worlds loading screen?
 		}
 	} else
 		m_background = "pics/progress.png";

@@ -76,17 +76,32 @@ static int L_dirname(lua_State * L) {
 	return 1;
 }
 
-// NOCOM(#sirver): document
-// NOCOM(#sirver): test?
-// // NOCOM(#sirver): rename - not glob, but find files?
-static int L_glob(lua_State * L) {
-	const std::string dir = luaL_checkstring(L, -2);
-	const std::string re_as_string = luaL_checkstring(L, -1);
 
-	boost::regex re(re_as_string);
-	std::set<std::string> files = filter(g_fs->ListDirectory(dir), [&re](const std::string& filename) {
-		return boost::regex_match(FileSystem::FS_Filename(filename.c_str()), re);
-	});
+/* RST
+.. function:: list_directory(directory[, regexp])
+
+	Lists all files and directories in the given directory. If regexp is not
+	:const:`nil` only the files whose basename matches the regular expression
+	will be returned. The method never returns "." or ".." in its results.
+
+	:type directory: class:`string`
+	:arg directory: The directory to list files for.
+	:type regexp: class:`string`
+	:arg regexp: The regular expression each files must match.
+
+   :returns: An :class:`array` of filenames in lexicographical order.
+*/
+static int L_list_directory(lua_State * L) {
+	const std::string dir = luaL_checkstring(L, 1);
+	std::set<std::string> files = g_fs->ListDirectory(dir);
+
+	if (lua_gettop(L) > 1) {
+		boost::regex re(luaL_checkstring(L, 2));
+		files = filter(files, [&re](const std::string& filename) {
+			return boost::regex_match(FileSystem::FS_Filename(filename.c_str()), re);
+		});
+	}
+
 	lua_newtable(L);
 	int idx = 1;
 
@@ -101,7 +116,7 @@ static int L_glob(lua_State * L) {
 const static struct luaL_Reg path [] = {
 	{"basename", &L_basename},
 	{"dirname", &L_dirname},
-	{"glob", &L_glob},
+	{"list_directory", &L_list_directory},
 	{nullptr, nullptr}
 };
 

@@ -143,7 +143,7 @@ world:new_terrain_type{
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 20,
-   textures = path.glob(pics_dir .. "green", "sumpf_\\d+.png"),
+   textures = path.list_directory(pics_dir .. "green", "sumpf_\\d+.png"),
    dither_layer = 30,
    fps = 14,
 }
@@ -180,7 +180,7 @@ world:new_terrain_type{
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob(pics_dir .. "green", "lava_\\d+.png"),
+   textures = path.list_directory(pics_dir .. "green", "lava_\\d+.png"),
    dither_layer = 80,
    fps = 4,
 }
@@ -193,7 +193,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob(pics_dir .. "green", "wasser_\\d+.png"),
+   textures = path.list_directory(pics_dir .. "green", "wasser_\\d+.png"),
    dither_layer = 0,
    fps = 14,
 }
@@ -377,7 +377,7 @@ world:new_terrain_type{
    valid_resources = { "fish" },
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob(pics_dir .. "wasteland", "water_\\d+.png"),
+   textures = path.list_directory(pics_dir .. "wasteland", "water_\\d+.png"),
    dither_layer = 0,
    fps = 14,
 }
@@ -538,7 +538,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob(pics_dir .. "winter", "ice_flows_\\d+.png"),
+   textures = path.list_directory(pics_dir .. "winter", "ice_flows_\\d+.png"),
    dither_layer = 10,
    fps = 5,
 }
@@ -551,7 +551,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "",
    default_resource_amount = 0,
-   textures = path.glob(pics_dir .. "winter", "ice_flows2_\\d+.png"),
+   textures = path.list_directory(pics_dir .. "winter", "ice_flows2_\\d+.png"),
    dither_layer = 20,
    fps = 5,
 }
@@ -564,7 +564,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob(pics_dir .. "winter", "water_\\d+.png"),
+   textures = path.list_directory(pics_dir .. "winter", "water_\\d+.png"),
    dither_layer = 0,
    fps = 8,
 }
@@ -749,7 +749,7 @@ world:new_terrain_type{
    valid_resources = {"fish"},
    default_resource = "fish",
    default_resource_amount = 4,
-   textures = path.glob(pics_dir .. "desert", "wasser_\\d+.png"),
+   textures = path.list_directory(pics_dir .. "desert", "wasser_\\d+.png"),
    dither_layer = 0,
    fps = 5,
 }

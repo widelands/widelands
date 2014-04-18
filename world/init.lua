@@ -294,7 +294,7 @@ include "world/immovables/trees/umbrella_green_wasteland_sapling/init.lua"
 function add_walking_animations(table, dirname, basename, hotspot, fps)
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
       table["walk_" .. dir] = {
-         pictures = path.glob(dirname, basename .. "_" .. dir .. "_\\d+.png"),
+         pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
          player_color_masks = {},
          hotspot = hotspot,
          fps = fps,
