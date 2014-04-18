@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-03-14 23:00+0000\n"
+"PO-Revision-Date: 2014-04-17 16:05+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:33+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-18 05:31+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:23
 msgid "Expand north-east and build a quarry"
@@ -129,7 +129,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Oppgrader bygninger og bygg et mikrobryggeri"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:86
 msgid ""
@@ -167,7 +167,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:104
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:106
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Bygg en treherder"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid ""
@@ -184,7 +184,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:117
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
-msgstr ""
+msgstr "Bygg en kalkovn, en brønn og en kullbrenner eller en kullgruve"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:118
 msgid ""
@@ -215,7 +215,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:138
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:140
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Bygg en kvegfarm"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
@@ -298,7 +298,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:341
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Din trofaste kompanjong"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:194
 msgid "Brave Boldreth steps to your side..."
@@ -442,7 +442,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:287
 msgid "Our hunters are out in the forests, Thron."
-msgstr ""
+msgstr "Våre jegere er ute i skogene, Thron."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:288
 msgid ""
@@ -497,7 +497,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:323
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:386
 msgid "Khantrukh speaks..."
-msgstr ""
+msgstr "Khantrukh sier..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:324
 msgid ""
@@ -525,7 +525,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:336
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "Vi trenger en treherder, og vi trenger en nå!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:342
 msgid "Boldreth smiles..."
@@ -602,10 +602,12 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Du har fullført dette oppdraget. Du kan fortsette å spille hvis du vil, "
+"eller gå videre til neste oppdrag."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:385
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "Vi trenger okser!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:387
 msgid ""
@@ -629,7 +631,7 @@ msgstr "En fullmånenatt"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:397
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:419
 msgid "Thron speaks..."
-msgstr ""
+msgstr "Thron sier..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""

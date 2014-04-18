@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-03-06 11:10+0000\n"
+"PO-Revision-Date: 2014-04-17 06:45+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:32+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-18 05:31+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: gd\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
@@ -26,29 +26,37 @@ msgstr "Tha an sgeulachd air tòiseachadh"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:16
 msgid "Thron sighs..."
-msgstr "Tha Thron ag osnachadh..."
+msgstr "Tha Tron ag osnachadh..."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and dark."
 msgstr ""
+"Tha sinn 'nar falach sna seann choilltean dubh dorcha fhathast às dèidh "
+"mhìosan."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:18
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
+"Tha na gaisgich agam ris an t-sealg air an latha 's gun chadal air an "
+"oidhche – ag èisteachd ri faram a' mhillidh chruaidh o fhad air falbh a "
+"chluinnear fhathast am measg nan craobhan."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:23
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
 msgstr ""
+"Chì sinn na teintein a tha a' slugadh Al’tùnran on a sheo, mìltean air falbh."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:24
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr ""
+"Tha na solasan dearga a' boillsgeadh san dorchadas 's a' dannsa ri ruitheam "
+"nan drumaichean-cogaidh a thadhlas orm fiù 's nan trom-laighean agam."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:28
 msgid ""
@@ -56,6 +64,9 @@ msgid ""
 "senseless spilling of blood that had arisen amongst us. It pains me that his "
 "peace only endured for one generation."
 msgstr ""
+"Tha cnàmhan m' athar 'nan tàmh gu sìtheil san talamh air an do chuir e "
+"crìoch uair air leagadh na fala gun chiall a dh'èirich eadarainn. 'S duilich "
+"leam nach ro mhair an t-sìth aige ach ginealach."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:29
 msgid ""
@@ -64,6 +75,9 @@ msgid ""
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
 msgstr ""
+"Tha mo charaid dìleas Boldrad 'na adhbhar sìthe 's sòlais dhomh rè nan droch-"
+"amannan seo. Togaidh e mo chridhe 's cridheachan nan gaisgeach agam ach nach "
+"milleadh sannt no an dubh-ghèill an dàimh eadarainn."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:33
 msgid ""
@@ -105,6 +119,9 @@ msgid ""
 "Press SPACE to see where you can build. The red house symbols show you where "
 "a small building – like a lumberjack’s hut – may be built."
 msgstr ""
+"Brùth air SPACE ach am faic thu far an urrainn dhut rud a thogail. Seallaidh "
+"samhlaidhean taighe dheirg dhut far an gabh togalach beag – can, bothan "
+"coillteir – a thogail."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:21
 #: ../../campaigns/t01.wmf/scripting/texts.lua:35
@@ -112,6 +129,8 @@ msgid ""
 "Build a lumberjack’s hut at the red house symbol just right of your "
 "headquarters by clicking on it and selecting a lumberjack’s hut."
 msgstr ""
+"Tog bothan coillteir aig an t-samhla togail dhearg dìreach gu deas air a' "
+"phrìomh-àras agad 's tu a' briogadh air 's a' taghadh bothan coillteir."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:22
 #: ../../campaigns/t01.wmf/scripting/texts.lua:44
@@ -119,6 +138,8 @@ msgid ""
 "Build a road between your headquarters and the construction site of the "
 "lumberjack’s hut."
 msgstr ""
+"Tog rathad eadar am prìomh-àras agad agus an làrach togail aig a' bhothan "
+"choillteir."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:23
 #: ../../campaigns/t01.wmf/scripting/texts.lua:45
@@ -128,6 +149,11 @@ msgid ""
 "a flag and select to build a road, little symbols will appear around it to "
 "show you in which directions you can build it."
 msgstr ""
+"Nuair a chuireas tu am bothan coillteir ann, thèid bratach a chruthachadh "
+"air a shon. Feumaidh tu a ceangal ri bratach eile 's tu a' togail rathad "
+"eatorra. Nuair a nì thu briogadh air bratach agus nuair a thaghas tu gun tog "
+"thu rathad, nochdaidh samhlaidhean beaga timcheall oirre a sheallas dhut "
+"càite am b' urrainn an rathad a dhol."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:24
 #: ../../campaigns/t01.wmf/scripting/texts.lua:46
@@ -137,6 +163,11 @@ msgid ""
 "steeper the road is, the harder it will be for your people to walk on it "
 "(and your wares will be transported more slowly)."
 msgstr ""
+"Mìnichidh dathan nan samhlaidhean seo dè cho cas 's a bhios a' phàirt seo "
+"dhen rathad. Is ciall air uaine gum bi e rèidh, air buidhe gum bi e caran "
+"cas agus air dearg gum bi e glè chas. Mar as caise an rathad, 's ann as "
+"duilghe a bhios e dha do mhuinntir coiseachd air (agus thèid am bathar agad "
+"a ghiùlain nas slaodaiche)."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:41
 msgid "Build a road to the lumberjack’s hut"
@@ -154,6 +185,12 @@ msgid ""
 "build several steps at once. Click on the flag at the headquarters to finish "
 "the road."
 msgstr ""
+"'S urrainn dhut briogadh air gin dhe na samhlaidhean gus a' chiad phàirt "
+"dhen rathad agad a thogail an-siud. Nochdaidh samhlaidhean ùra an uairsin a "
+"sheallas dhut far am b' urrainn dhut pàirt eile dhen rathad a thogail 's mar "
+"sin air adhart. Faodaidh tu cuideachd briogadh nas fhaide air falbh on "
+"bhratach co-dhiù ach an tog thu iomadh ceum aig an aon àm. Briog air a' "
+"bhratach aig a' phrìomh-àras agad gus an rathad a choileanadh."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
 #: ../../campaigns/t01.wmf/scripting/texts.lua:55
@@ -173,6 +210,11 @@ msgid ""
 "will divide the road the wood is transported into two parts with one carrier "
 "each."
 msgstr ""
+"Cuir bratach ann am meadhan an rathaid. Tha samhla brataich ann am meadhan "
+"an rathaid a tha thu air a thogail. Cruthaichidh tu bratach ann 's tu a' "
+"briogadh air an t-samhla 's a taghadh putan na brataich sa chlàr-taice a "
+"nochdas. Roinnidh seo an rathad agus thèid am fiodh a ghiùlan ann an dà "
+"cheum le dithis ghiùlanair, fear airson gach ceuma."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:57
 #: ../../campaigns/t01.wmf/scripting/texts.lua:77
@@ -183,6 +225,11 @@ msgid ""
 "step, you may also click directly at its destination to build the entire "
 "road at once."
 msgstr ""
+"Cuir bothan coillteir dìreach gu deas air a' bhratach a tha thu air a "
+"thogail air an rathad. Ceangail a' bhratach ùr seo ris a' bhratach aig "
+"làrach togail a' bhothain coillteir ùir an uairsin. Thoir an aire gum faod "
+"thu briogadh air ceann-uidhe rathaid sa bhad gus rathad slàn a thogail 's "
+"nach leig thu leas an rathad a thogail ceum air ceum."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:58
 #: ../../campaigns/t01.wmf/scripting/texts.lua:68
@@ -191,6 +238,9 @@ msgid ""
 "in between make them arrive at their destination faster, thus improving your "
 "infrastructure."
 msgstr ""
+"Nuair a tha grunn bhathair 'ga ghiùlan eadar dà àite, tog barrachd bhratach "
+"eatorra ach an ruig am bathar an ceann-uidhe aige nas luaithe na bheir "
+"piseach air a' bhun-structar agad."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:83
 #: ../../campaigns/t01.wmf/scripting/texts.lua:85
@@ -199,7 +249,7 @@ msgstr "Tog bothan maoir-choille"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:86
 msgid "Build a ranger’s hut to the east of the first lumberjack’s hut."
-msgstr ""
+msgstr "Tog bothan maoir-choille gu ear air a' chiad bhothan coillteir."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:92
 #: ../../campaigns/t01.wmf/scripting/texts.lua:94
@@ -208,7 +258,7 @@ msgstr "Tog dà choireall"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:95
 msgid "Build two quarries south-west of your headquarters."
-msgstr ""
+msgstr "Tog dà choireall gu iar-dheas air a' phrìomh-àras agad."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:103
 msgid "An old man says..."
@@ -219,13 +269,13 @@ msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr ""
-"Fàilte, a cheannaird. 'S mise Khantrukh is chunnaic mi iomadh geamhradh a' "
+"Fàilte, a cheannaird. 'S mise Kantrach is chunnaic mi iomadh geamhradh a' "
 "dol seachad. Gum faodainn ur cuideachadh le comhairle rè nan làithean dorcha "
 "seo."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:106
 msgid "Khantrukh continues..."
-msgstr "Tha Khantrukh a' leantainn air adhart..."
+msgstr "Tha Kantrach a' leantainn air adhart..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:107
 msgid ""
@@ -233,6 +283,11 @@ msgid ""
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are already getting shorter and colder..."
 msgstr ""
+"Chan eil fios ag aig na diathan dè cho fada 's a dh'fheumas sinn fuireach "
+"'nar falach ann a sheo. Tha na gaisgich an dòchas nach bi e fada gun tèid "
+"leinn tilleadh 's gun dèan sinn a' chùis air an nàmhaid, ach tha mi fhìn fo "
+"amharas nach tachair seo a dh'aithghearr. Agus tha na làithean air am fàs "
+"nas giorra 's nas fuaire oirnn mu thràth..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
 msgid ""
@@ -240,6 +295,9 @@ msgid ""
 "I believe to the east of our campsite are a few places where we could raise "
 "a lumberjack’s hut."
 msgstr ""
+"Bu chòir dhuinn ullachadh air eagal 's gun tig an geamhradh oirnn air an "
+"fhàsach chùrs seo. Cha chreid mi nach eil àite no dhà gu ear air an làrach "
+"campachaidh againn far am b' urrainn dhuinn bothan coillteir a thogail."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:111
 msgid "The elder remarks..."
@@ -253,6 +311,11 @@ msgid ""
 "men would appreciate a way as short and plain as possible – the wood will "
 "surely be heavy enough, nevertheless."
 msgstr ""
+"Gu follaiseach, chlaoidheadh e ar muinntir a bhith a' coiseachd air an t-"
+"slighe fhada tron fhàsach gus am bothan coillteir a ruigsinn. Feumaidh sinn "
+"rathad a thogail eadar an talla againn agus am bothan coillteir. Bhiodh na "
+"daoine taingeil gun teagamh nan robh an rathad cho ghoirid 's a ghabhadh – "
+"bidh am fiodh trom gu leòr mar a tha e."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid "Khantrukh remembers..."
@@ -260,17 +323,19 @@ msgstr "Tha cuimhne air Khantrukh..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:116
 msgid "There is an old saying:"
-msgstr ""
+msgstr "Seo seanchas dhut:"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:117
 msgid "‘A burden divided is easier to endure.’"
-msgstr ""
+msgstr "‘Tha eallach co-roinnte as fhasa giùlan.’"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:118
 msgid ""
 "A crossroads on the road between our headquarters and the lumberjack’s hut "
 "would ease the work of our carriers."
 msgstr ""
+"Bhiodh crois-rathaid eadar am prìomh-àras againn agus am bothan coillteir "
+"'na faochadh dha ar giùlanairean."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:121
 msgid "The old man looks to the sky..."
@@ -283,16 +348,23 @@ msgid ""
 "people. More trees await our axes just south of our new crossroads – let us "
 "raise a second lumberjack’s hut there!"
 msgstr ""
+"Tha a' ghaoth thuath ag innse dhuinn gur ann fada cruaidh a bhios an "
+"geamhradh a tha a' tighinn oirnn. Cha fhreagair bothan coillteir a-mhàin ri "
+"feum ar muinntir. Tha barrachd chraobhan a' feitheamh ris na tuaghan againn "
+"gu deas air a' chrois-rathaid ùr againn – togamaid bothan coillteir eile ann "
+"a shiud!"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:125
 msgid "Khantrukh nods..."
-msgstr "Tha Khantrukh ag aontachadh..."
+msgstr "Tha Kantrach ag aontachadh..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:126
 msgid ""
 "Of course, if we intended to build a bigger settlement, many more "
 "lumberjack’s huts would be advisable, but this should suffice for now."
 msgstr ""
+"Gu follaiseach, nan robh tuineachadh nas motha fainear dhuinn, mholainn "
+"grunn bhothan coillteir a bharrachd, ach nì seo a' chùis an-dràsta."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:127
 msgid ""
@@ -300,12 +372,18 @@ msgid ""
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
 msgstr ""
+"Ach cuimhnich ort – is ar dìleab a tha sna coilltean seo a chaidh a dh'earb "
+"ar sinnsearan rinn. Feumaidh sinn urram 's cùram a thoirt dhaibh an-"
+"còmhnaidh. Feumaidh sinn tilleadh na thog sinn."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:128
 msgid ""
 "So, in order to replace the trees we chop down, we should build a ranger’s "
 "hut, preferably close to the lumberjack’s hut."
 msgstr ""
+"Mar sin, bu chòir dhuinn bothan maoir-choille a thogail ach an cuireamaid "
+"craobhan ùra an àite na feadhna a leag sinn 's togamaid e cho faisg air a' "
+"bhothan coillteir 's a ghabhas."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:131
 msgid "The elder speaks..."
@@ -351,7 +429,7 @@ msgstr "Air an oidhche"
 #: ../../campaigns/t01.wmf/scripting/texts.lua:147
 #: ../../campaigns/t01.wmf/scripting/texts.lua:155
 msgid "Thron says..."
-msgstr "Tha Thron a' bruidhinn..."
+msgstr "Tha Tron a' bruidhinn..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:148
 msgid ""
@@ -389,7 +467,7 @@ msgstr "An latha eile"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:163
 msgid "Thron says thoughtfully..."
-msgstr "Tha Thron a' cnuasadh..."
+msgstr "Tha Tron a' cnuasadh..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:164
 msgid ""
@@ -411,7 +489,7 @@ msgstr "A' bhòid"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:170
 msgid "Thron looks furious..."
-msgstr "Tha an ainmein air Thron..."
+msgstr "Tha an ainmein air Tron..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:171
 msgid ""
