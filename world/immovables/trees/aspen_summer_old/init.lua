@@ -20,7 +20,6 @@ world:new_immovable_type{
    animations = {
       idle = {
          pictures = path.list_directory(dirname, "idle_\\d+.png"),
-         player_color_masks = {},
          hotspot = { 23, 58 },
          fps = 10,
          sound_effect = {
@@ -30,7 +29,6 @@ world:new_immovable_type{
       },
       falling = {
          pictures = path.list_directory(dirname, "f_tree_\\d+.png"),
-         player_color_masks = {},
          hotspot = { 20, 59 },
          fps = 10,
       },

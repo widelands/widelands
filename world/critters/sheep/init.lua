@@ -7,7 +7,6 @@ animations = {
          directory = "sound/farm",
          name = "sheep",
       },
-      player_color_masks = {},
       hotspot = { 8, 16 },
       fps = 20,
    },

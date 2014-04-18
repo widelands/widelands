@@ -16,7 +16,6 @@ world:new_immovable_type{
    animations = {
       idle = {
          pictures = path.list_directory(dirname, "idle_\\d+.png"),
-         player_color_masks = {},
          hotspot = { 5, 12 },
          fps = 8,
       },

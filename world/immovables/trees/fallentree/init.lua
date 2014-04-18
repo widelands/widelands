@@ -3,7 +3,6 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = { dirname .. "fallentree_idle.png" },
-      player_color_masks = {},
       hotspot = { 2, 31 },
    },
 }

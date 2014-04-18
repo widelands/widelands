@@ -197,6 +197,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
+	// TODO(sirver): the LuaTable constructor has no support for player_colors right now.
 	get_point(*table.get_table("hotspot"), &hotspot_);
 
 	if (table.has_key("sound_effect")) {
@@ -218,7 +219,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	} else {
 		frametime_ = 1000 / get_positive_int(table, "fps");
 	}
-	pc_mask_image_files_ = table.get_table("player_color_masks")->array_entries<std::string>();
 }
 
 void NonPackedAnimation::load_graphics() {

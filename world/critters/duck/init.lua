@@ -7,7 +7,6 @@ animations = {
          directory = dirname,
          name = "duck",
       },
-      player_color_masks = {},
       hotspot = { 5, 7 },
       fps = 1,
    },
