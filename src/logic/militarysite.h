@@ -28,12 +28,13 @@
 namespace Widelands {
 
 class Soldier;
+struct World;
 
 struct MilitarySite_Descr : public ProductionSite_Descr {
 	MilitarySite_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
-		 const Tribe_Descr & tribe);
+		 const Tribe_Descr & tribe, const World& world);
 
 	virtual Building & create_object() const override;
 

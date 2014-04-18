@@ -57,7 +57,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	ProductionSite_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &);
+		 const Tribe_Descr &, const World&);
 	virtual ~ProductionSite_Descr();
 
 	virtual Building & create_object() const override;

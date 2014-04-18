@@ -47,10 +47,11 @@ MilitarySite_Descr::MilitarySite_Descr
 	(char        const * const _name,
 	 char        const * const _descname,
 	 const std::string & directory, Profile & prof,  Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const Tribe_Descr & _tribe,
+	 const World& world)
 :
 	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe),
+		(_name, _descname, directory, prof, global_s, _tribe, world),
 m_conquer_radius     (0),
 m_num_soldiers       (0),
 m_heal_per_second    (0)
