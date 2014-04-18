@@ -7,6 +7,8 @@ set_textdomain("tribe_barbarians")
 
 return {
    func = function(building_description)
+	-- need to get this again, so the building description will be of type "trainingsite"
+	local building_description = wl.Game():get_building_description("barbarians", building_description.name)
 	return
 
 	--Lore Section
@@ -14,7 +16,7 @@ return {
 
 	--General Section TODO string design
 	building_help_general_string("barbarians", building_description, "soldier",
-		_"Trains soldiers in ‘Evade’ up to level 2." .. "<br>" .. _"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.",
+		_"Trains soldiers in ‘Evade’ up to level %d.":bformat(building_description.max_evade+1) .. "<br>" .. _"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.",
 		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.") ..
 
 	--Dependencies

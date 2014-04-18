@@ -344,20 +344,20 @@ function building_help_general_string(tribename, building_description, resourcen
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
 		if(building_description.max_attack > 0) then
 			result = result .. text_line(_"Attack:", _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Attack", building_description.min_attack, building_description.max_attack))
+				bformat(_"Attack", building_description.min_attack, building_description.max_attack+1))
 		end
 		if(building_description.max_defense > 0) then
 			result = result .. text_line(_"Defense:", _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Defense", building_description.min_defense, building_description.max_defense))
+				bformat(_"Defense", building_description.min_defense, building_description.max_defense+1))
 		end
 		if(building_description.max_evade > 0) then
 			result = result .. text_line(_"Evade:", _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Evade", building_description.min_evade, building_description.max_evade))
+				bformat(_"Evade", building_description.min_evade, building_description.max_evade+1))
 		end
 		if(building_description.max_hp > 0) then
 			-- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
 			result = result .. text_line(_"Health:", _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Health", building_description.min_hp, building_description.max_hp))
+				bformat(_"Health", building_description.min_hp, building_description.max_hp+1))
 		end
 	end
 	result = result .. text_line(_"Vision range:", building_description.vision_range)
