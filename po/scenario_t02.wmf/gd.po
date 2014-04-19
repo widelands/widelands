@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-03-06 11:10+0000\n"
+"PO-Revision-Date: 2014-04-18 11:40+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:33+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-19 05:21+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: gd\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:23
@@ -33,6 +33,9 @@ msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory. Get to the rocks north-east from you and build a quarry there."
 msgstr ""
+"Tog togalaichean an airm (can freiceadanan no taighean-faire) gus an "
+"ranntair air a bheil smachd agad a mheudachadh. Ruig na clachan gu ear-"
+"thuath ort ach an tog thu coireall ann."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:33
 msgid "Start building mines on the mountain"
@@ -51,28 +54,37 @@ msgid ""
 "otherwise, they would search for water. Then build a mine for both kinds of "
 "resources that he will find, choosing the mine to be built appropriately:"
 msgstr ""
+"Tog mèinn guail 's mèinn cloiche-iarainn. Gus seo a dhèanamh, tog bratach "
+"air sliabh na beinne gu ear (air cruth-tìre beinne seach air a' chluain). "
+"Nuair a nì thu briogadh air a' bhratach ùr, 's urrainn dhut clach-eòlaichean "
+"a ghairm thuice. Bidh na clach-eòlaichean a' sireadh clachan-mèinneir on a "
+"tha iad air a' bheinn; mura robh, bhiodh iad a' sireadh uisge. An uairsin, "
+"tog mèinn airson an dà sheòrsa stòrais a lorg iad, a' taghadh na mèinne mar "
+"bu chòir:"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:40
 msgid "Black – coal"
-msgstr ""
+msgstr "Dubh – gual"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:41
 msgid "Red – iron ore"
-msgstr ""
+msgstr "Ruadh – clach-iarainn"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:42
 msgid "Yellow – gold"
-msgstr ""
+msgstr "Buidhe – òr"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:43
 msgid "Grey – granite"
-msgstr ""
+msgstr "Glas – gràineal"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:44
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
 msgstr ""
+"Cha ghabh mèinnean togail ach air cruth-tìre beinne. Nochdaidh samhlaidhean "
+"mèinne orains dhut na h-àiteachan a bhios freagarrach gus mèinn a thogail."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:50
 msgid "Provide your miners with food"
@@ -84,7 +96,7 @@ msgstr "Tog bothan-sealgair, bothan-geamair is taigh-tàirn"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:53
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Bidh na mèinnearan agad feumach air biadh ach an dèan iad obair."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:54
 msgid ""
@@ -92,12 +104,18 @@ msgid ""
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
 msgstr ""
+"Sealgaidh an t-sealgair beathaichean fhad 's a nì an geamair cinnteach nach "
+"tèid iad à bith. Nì taigh-tàirn greim-bidhe airson na mèinnearan agad dhen "
+"fheòil an uairsin."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:56
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
 msgstr ""
+"Chan e seo ach a' chiad ball-eisimpleir de bhathar a bhios feumach air "
+"giullachd mur cleachd togalach dàrnach e – bidh feadhainn eile ann an "
+"uairsin."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:63
 msgid "Bake bread"
@@ -114,10 +132,15 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well at a spot "
 "where your geologists have found a water source."
 msgstr ""
+"'S e dòighean eile gus biadh a dhèanamh – seòrsaichean bìdh eadar-"
+"dhealaichte – a th' anns na h-iasgairean agus sealgairean. Feumaidh tu a' "
+"chruithneachd aig na tuathanasan a ghiullachd le uisge ann an taigh-fuine "
+"mus gabh i ithe. Gheibh thu uisge o thobar a bu chòir dhut togail air àite "
+"far an do lorg clach-eòlaiche uisge."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:74
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Dèan giullachd air na stòrasan mèinneir agad"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:76
 msgid "Build a smelting works"
@@ -128,6 +151,8 @@ msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into "
 "iron first."
 msgstr ""
+"Cha ghabh an clach-iarainn a thochail na mèinnearan agad cleachdadh fhathast "
+"– feumaidh tu a leaghadh gus iarainn a dhèanamh dhi an toiseach."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Enhance buildings and build a micro brewery"
@@ -138,6 +163,8 @@ msgid ""
 "Enhance the coal mine and the tavern to the better versions of their\n"
 "buildings respectively. Also build a micro brewery."
 msgstr ""
+"Leasaich a' mhèinn guail 's an taigh-tàirn gu tionndadh as fheàrr dhiubh. "
+"Tog taigh-grùide beag cuideachd."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:88
 msgid ""
@@ -146,6 +173,10 @@ msgid ""
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
 msgstr ""
+"Chan urrainn do mhèinn àbhaisteach ach an treas pàirt dhen stòras a tha "
+"foidhpe a ghearradh às an talamh; feumaidh tu a leasachadh an uairsin gu "
+"mèinn domhainn ach an obraich i mar bu chòir fhathast. Gus togalach a "
+"leasachadh, tagh e agus briog air a' phutan iomchaidh san uinneag a nochdas."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:91
 msgid ""
@@ -154,6 +185,10 @@ msgid ""
 "buildings. Do not enhance a building before you have enough advanced workers "
 "to operate the advanced building!"
 msgstr ""
+"Gheibh obraichean eòlas le obair soirbheachail. Thèid iad 'nan obraichean as "
+"àrda nuair a bhios eòlas gu leòr aca agus bi feum agad air an seòrsa seo de "
+"dh'obraiche gus togalach leasaichte a ruith. Na leasaich togalach mus eil "
+"obraichean àrda gu leòr agad gus an togalach leasaichte a ruith!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -165,6 +200,15 @@ msgid ""
 "– bigger mines work a bit faster, smaller mines need cheaper food. It’s up "
 "to you which strategy you prefer."
 msgstr ""
+"Mar as trice, tha barrachd feumalachdan air togalach dhen leithid na tha aig "
+"togalach bunasach – mar eisimpleir, bidh mèinnean domhainn feumach air lòin "
+"seach greimeagan. Feumaidh tu an taigh-tàirn agad a leasachadh gu taigh-òil "
+"ach an dèan thu lòn dhe an trì cuid aran tur agus seòrsa eile de bhiadh (seo "
+"feòil no iasg) agus leann. Faodaidh tu gach mèinn agad a leasachadh gu mèinn "
+"dhomhainn sa bhad ma thogras tu 's ma tha na h-obraichean iomchaidh agad – "
+"nì mèinnean mòra obair beagan nas luaithe ach air an làimh eile tha am biadh "
+"airson nam mèinnean as lugha nas saoire. 'S ann le do thoil-sa a thaghas tu "
+"an ro-innleachd as fhearr leat."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:104
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:106
@@ -205,7 +249,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:128
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Tog feur-lios"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid ""
@@ -217,7 +261,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:138
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:140
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Tog tuathanas crodh"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
@@ -239,13 +283,16 @@ msgstr "Tha an sgeul a' leantainn air adhart"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:154
 msgid "Thron is shaking his head..."
-msgstr "Tha Thron a' crathadh a chinn..."
+msgstr "Tha Tron a' crathadh a chinn..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:155
 msgid ""
 "The war goes on. More and more of our brothers and sisters flee the brutal "
 "war raging in the capital beneath the trees."
 msgstr ""
+"Tha an cogadh gun chrìch. Tha tuilleadh 's a bharrachd dhe ar bràithrean 's "
+"peathraichean a' teicheadh on chogadh chruaidh a tha a' milleadh a' chathair-"
+"bhaile fo na craobhan."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:157
 msgid ""
@@ -328,7 +375,7 @@ msgstr "An comhairleach"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:205
 msgid "Khantrukh joins in ..."
-msgstr "Tha Khantrukh a' gabhail pàirt sa chòmhradh..."
+msgstr "Tha Kantrach a' gabhail pàirt sa chòmhradh..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:206
 msgid ""
@@ -339,7 +386,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:215
 msgid "Boldreth jumps up..."
-msgstr "Tha Boldreth a' seasamh..."
+msgstr "Tha Boldrad a' seasamh..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:216
 msgid ""
@@ -351,7 +398,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:226
 msgid "Khantrukh grumbles..."
-msgstr "Tha Khantrukh mì-thoilichte..."
+msgstr "Tha Kantrach mì-thoilichte..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:227
 msgid "Old man? Disrespectful youth!"
@@ -359,7 +406,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 msgid "Khantrukh nods satisfied..."
-msgstr "Tha Khantrukh toilichte..."
+msgstr "Tha Kantrach toilichte..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:234
 msgid "At last! These rocks should last for a while."
@@ -367,7 +414,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:240
 msgid "Boldreth exclaims..."
-msgstr "Tha Boldreth ag èigheachd..."
+msgstr "Tha Boldrad ag èigheachd..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:241
 msgid ""
@@ -384,7 +431,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:250
 msgid "Boldreth laughs..."
-msgstr "Tha gàire air Boldreth..."
+msgstr "Tha gàire air Boldrad..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:251
 msgid ""
@@ -398,7 +445,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:258
 msgid "Khantrukh interrupts..."
-msgstr "Tha Khantrukh a' cur stad air..."
+msgstr "Tha Kantrach a' cur stad air..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:259
 msgid ""
@@ -410,7 +457,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Boldreth nods..."
-msgstr "Tha Boldreth ag aontachadh..."
+msgstr "Tha Boldrad ag aontachadh..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:269
 msgid "I have to hand it to you: you are right here, old man."
@@ -440,7 +487,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
 msgid "Boldreth cheers up..."
-msgstr "Tha Boldreth a' gabhail misneach..."
+msgstr "Tha Boldrad a' gabhail misneach..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:287
 msgid "Our hunters are out in the forests, Thron."
@@ -454,7 +501,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:294
 msgid "Khantrukh gazes over the plains..."
-msgstr "Tha Khantrukh a' coimhead thar a' mhachair..."
+msgstr "Tha Kantrach a' coimhead thar a' mhachair..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:295
 msgid ""
@@ -469,7 +516,7 @@ msgstr "Madainn bhrèagha"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:302
 msgid "Thron recognizes..."
-msgstr "Tha Thron aige..."
+msgstr "Tha Tron aige..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:303
 msgid ""
@@ -486,7 +533,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:313
 msgid "Boldreth remarks..."
-msgstr "Tha Boldreth a' beachdachadh..."
+msgstr "Tha Boldrad a' beachdachadh..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:314
 msgid ""
@@ -499,7 +546,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:323
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:386
 msgid "Khantrukh speaks..."
-msgstr "Tha Khantrukh a' bruidhinn..."
+msgstr "Tha Kantrach a' bruidhinn..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:324
 msgid ""
@@ -516,7 +563,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid "Boldreth seems concerned..."
-msgstr "Tha dragh air Boldreth..."
+msgstr "Tha dragh air Boldrad..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:334
 msgid ""
@@ -531,7 +578,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:342
 msgid "Boldreth smiles..."
-msgstr "Tha fiamh a' ghàire air Boldreth..."
+msgstr "Tha fiamh a' ghàire air Boldrad..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:343
 msgid ""
@@ -548,7 +595,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:352
 msgid "Khantrukh steps in..."
-msgstr "Tha Khantrukh a' beachdachadh..."
+msgstr "Tha Kantrach a' beachdachadh..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:353
 msgid ""
@@ -565,7 +612,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:364
 msgid "Khantrukh seems relieved..."
-msgstr "Fhuair Khantrukh faochadh..."
+msgstr "Fhuair Kantrach faochadh..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:365
 msgid ""
@@ -582,6 +629,8 @@ msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr ""
+"An latha a bha seo, iarr Boldrad orm an tigeadh mi còmhla ris dhan taigh-òil "
+"ùr. Thuirt e gun togadh e mo chridhe."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:375
 msgid ""
@@ -590,10 +639,15 @@ msgid ""
 "encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
 msgstr ""
+"Nuair a sheall mi timcheall orm, chunnaic mi aodannan dìleas, làn earbsa gun "
+"stiùirichinn tro na làithean dorcha seo iad. Ach mura b' urrainn dhomh facal "
+"a ràdh gus taing no brosnachadh a thoirt dhaibh, ruith fear dhe na gaisgich "
+"agam a-steach dhan taigh-òil. Bha e air a bhith a-muigh sa choille na "
+"làithean sa chaidh agus mhothaich mi air dè cho sgìth 's a bha e."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:378
 msgid "The news he brought changed everything..."
-msgstr ""
+msgstr "Dh'atharraich an naidheachd a thug e duinn a h-uile rud..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:379
 msgid "Victory"
@@ -618,6 +672,10 @@ msgid ""
 "fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
 msgstr ""
+"On a tha ar rìoghachd air sìor-mheudachadh, tha na rathaidean air am fàs "
+"cianail fhèin trang. Cha tèid leis na giùlanairean bochda againn am bathar a "
+"ghiùlan cho luath 's air a tha feum. Mholamaid gun cuir sinn taic dhaibh "
+"agus gun tog sinn daimh."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid ""
@@ -625,6 +683,10 @@ msgid ""
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
 msgstr ""
+"'S e beathaichean iongantach a th' annta: Tha an damh cho luath 's a tha "
+"duine ach tha e mòran nas treasa gun fheumalachdan mòra air: chan eil a "
+"dhìth oirnn ach cruithneachd is uisge ach an togamaid iad agus nì iad an "
+"obair air na rathaidean gu dìleas 's gu earbsach."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
 msgid "One Full Moon Night"
@@ -633,13 +695,15 @@ msgstr "Oidhche làn-ghealaich"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:397
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:419
 msgid "Thron speaks..."
-msgstr "Tha Thron a' bruidhinn..."
+msgstr "Tha Tron a' bruidhinn..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr ""
+"An oidhche a bha seo, nuair a bha a' ghealach a' dearrsadh, dhìrich mi gu "
+"sgurr Chal’mabhraid."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:399
 msgid ""
@@ -648,6 +712,11 @@ msgid ""
 "I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr ""
+"Fhad 's a bha mi a' sealltainn air an fhàire, chunnaic mi fhathast na "
+"solasan ruadha a' dannsa aig astar. Cha chreid mi dè cho fiadhaich a tha mo "
+"bhràithrean a' sabaid sa chogadh seo. Tha eagal orm ron latha a chì mi "
+"Al’tùnran a-rithist – am bi dad air fhàgail dhe ar cathair-bhaile brèagha "
+"ach luaithre agus làraichean nuair a ruigeas sinn e?"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:407
 msgid "Another Cold Day"
@@ -655,7 +724,7 @@ msgstr "Latha fuar eile"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:408
 msgid "Thron looks worried..."
-msgstr "Tha dragh air Thron..."
+msgstr "Tha dragh air Tron..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:409
 msgid ""
@@ -663,16 +732,22 @@ msgid ""
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
 msgstr ""
+"Tha an geamhradh air tighinn oirnn. Tha mòran dhuinn a' fulang leis an "
+"fhuachd, ach feumaidh sinn mairsinn. Creididh mi nach fhada an latha as "
+"urrainn dhuinn tilleadh – chan fhaod e bhith."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:411
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr ""
+"Rinn mi ùrnaigh gum fàsadh e na bu bhlàithe a-rithist mar a rinn mi ùrnaigh "
+"gun tigeadh a' chrìoch air a' chogadh mu dheireadh thall."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr ""
+"Cha deach aon seach aon dhe na h-ùrnaighean a fhreagairt gu ruige seo."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:418
 msgid "A friendly village has joined us!"
@@ -683,10 +758,12 @@ msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr ""
+"Lorg sinn baile le muinntir càirdeil tarbhach ann agus dhrùidh an t-sealbh, "
+"teicneolas 's neart againn orra."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:421
 msgid "They have decided to join us!"
-msgstr ""
+msgstr "Thug iad romhpa ceangal rinn!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
