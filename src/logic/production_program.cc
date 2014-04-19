@@ -1239,7 +1239,7 @@ void ProductionProgram::ActMine::informPlayer
 		 _("Main Vein Exhausted"),
 		 _
 		 ("This mine’s main vein is exhausted. Expect strongly diminished returns on investment. "
-		  "You should consider expanding, dismantling or destroying it."),
+		  "You should consider enhancing, dismantling or destroying it."),
 		 true,
 		 60 * 60 * 1000,
 		 0);

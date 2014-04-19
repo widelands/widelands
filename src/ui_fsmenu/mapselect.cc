@@ -56,7 +56,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_label_load_map_as_scenario
 		(this,
 		 get_w() * 23 / 25, get_h() * 11 / 40,
-		 _("Load Map as scenario"),
+		 _("Load map as scenario"),
 		 UI::Align_Right),
 	m_label_name
 		(this,
