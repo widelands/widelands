@@ -165,7 +165,7 @@ int L_Player::get_objectives(lua_State * L) {
 	const Manager<Objective> & mom = get_egbase(L).map().mom();
 
 	lua_newtable(L);
-	for (Manager<Objective>::Index i = 0; i < mom.size(); i++) {
+	for (int i = 0; i < mom.size(); i++) {
 		lua_pushstring(L, mom[i].name().c_str());
 		to_lua<L_Objective>(L, new L_Objective(mom[i]));
 		lua_settable(L, -3);

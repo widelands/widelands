@@ -225,7 +225,7 @@ std::string ProductionSite::get_statistics_string()
 
 /**
  * Detect if the workers are experienced enough for an upgrade
- * @param idx Index of the enhanchement
+ * @param idx Index of the enhancement
  */
 bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {

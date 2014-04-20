@@ -86,8 +86,8 @@ void GameObjectivesMenu::think() {
 
 	//  Adjust the list according to the game state.
 	Manager<Widelands::Objective> & mom = iplayer().game().map().mom();
-	Manager<Widelands::Objective>::Index const nr_objectives = mom.size();
-	for (Manager<Widelands::Objective>::Index i = 0; i < nr_objectives; ++i) {
+	const int nr_objectives = mom.size();
+	for (int i = 0; i < nr_objectives; ++i) {
 		bool should_show =
 			mom[i].visible() and not mom[i].done();
 		uint32_t const list_size = list.size();

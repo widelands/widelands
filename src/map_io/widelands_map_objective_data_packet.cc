@@ -82,8 +82,8 @@ void Map_Objective_Data_Packet::Write
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	const Manager<Objective> & mom = egbase.map().mom();
-	Manager<Objective>::Index const nr_objectives = mom.size();
-	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i) {
+	int const nr_objectives = mom.size();
+	for (int i = 0; i < nr_objectives; ++i) {
 		const Objective & objective = mom[i];
 		Section & s = prof.create_section(objective.name().c_str());
 		s.set_string("name",     objective.descname());

@@ -359,7 +359,7 @@ Bob & Editor_Game_Base::create_bob(Coords c, const BobDescr & descr, Player * ow
 
 Bob & Editor_Game_Base::create_bob
 	(Coords const c,
-	 BobDescr::Index const idx, Tribe_Descr const * const tribe, Player * owner)
+	 int const idx, Tribe_Descr const * const tribe, Player * owner)
 {
 	const BobDescr & descr =
 		*

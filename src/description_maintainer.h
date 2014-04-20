@@ -32,7 +32,7 @@ template <typename T> struct DescriptionMaintainer {
 	int32_t add(T* entry);
 
 	// Returns the number of entries in the container.
-	typename T::Index get_nitems() const {return items_.size();}
+	size_t get_nitems() const {return items_.size();}
 
 	// Returns the entry with the given 'name' if it exists or nullptr.
 	T* exists(const std::string& name) const;
