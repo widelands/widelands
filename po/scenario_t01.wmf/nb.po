@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-03-14 22:41+0000\n"
+"PO-Revision-Date: 2014-04-19 12:06+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:32+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-20 05:31+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
 msgid "The Story Begins"
@@ -70,6 +70,9 @@ msgid ""
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
 msgstr ""
+"Boldreth, min trofaste kompanjong og venn er en god støtte å ha i disse "
+"mørke tider. Han holder motet mitt oppe og soldatene mine årvåkne slik at "
+"ikke grådighet eller desperasjon ødelegger båndene mellom oss også."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:33
 msgid ""
@@ -77,6 +80,9 @@ msgid ""
 "trying not to fall asleep or die before the right time comes. And so I do... "
 "wait."
 msgstr ""
+"Min far sa til meg, det er stunder hvor du sloss og stunder hvor du ligger "
+"og venter, mens du prøver å holde deg våken og i livet mens du venter på at "
+"det rette øyeblikket skal komme. Og så gjør jeg, jeg... venter."
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
 msgid "Somebody Comes up to You"
@@ -144,6 +150,10 @@ msgid ""
 "steeper the road is, the harder it will be for your people to walk on it "
 "(and your wares will be transported more slowly)."
 msgstr ""
+"De ulike fargene på symbolene indikerer hvor bratt denne delen av veien "
+"blir. Grønn betyr flatt, gul betyr bratt og rød betyr veldig bratt. Jo "
+"brattere veien er, desto vanskeligere vil det være for folk å gå langs den "
+"(og det vil ta lenger tid å transportere varene dine)."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:41
 msgid "Build a road to the lumberjack’s hut"
@@ -161,6 +171,10 @@ msgid ""
 "build several steps at once. Click on the flag at the headquarters to finish "
 "the road."
 msgstr ""
+"Du kan klikke på et av symbolene for å bygge den første delen av veien der. "
+"Nye symboler vil dukke opp for å vise hvor neste del av veien kan gå, og så "
+"videre. Det er også mulig å klikke lenger unna flagget for å dekke flere "
+"steg av gangen. Klikk på flagget ved hovedkvarteret for å fullføre veien."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
 #: ../../campaigns/t01.wmf/scripting/texts.lua:55
@@ -180,6 +194,10 @@ msgid ""
 "will divide the road the wood is transported into two parts with one carrier "
 "each."
 msgstr ""
+"Plasser et flagg i midten av vein. Det er et flaggsymbol i midten av veien "
+"du nettopp lagde. Du lager et flagg ved å klikke på symbolet og velge "
+"knappen med et flagg i dialogen som dukker opp. Dette deler veien tømmeret "
+"transporteres langs i to, med en bærer hver."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:57
 #: ../../campaigns/t01.wmf/scripting/texts.lua:77
@@ -206,7 +224,7 @@ msgstr "Bygg en skogvokterhytte"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:86
 msgid "Build a ranger’s hut to the east of the first lumberjack’s hut."
-msgstr ""
+msgstr "Bygg en skogvokters hytte øst for den første tømmerhuggerens hytte."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:92
 #: ../../campaigns/t01.wmf/scripting/texts.lua:94
@@ -306,6 +324,9 @@ msgid ""
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
 msgstr ""
+"Men vi må aldri glemme, at disse skogene er vår arv, som vi har blitt "
+"tiltrodd av våre forfedre. Vi må alltid respektere og ta vare på dem. Det vi "
+"tar, må vi også gi tilbake."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:128
 msgid ""
@@ -315,7 +336,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:131
 msgid "The elder speaks..."
-msgstr ""
+msgstr "Den eldre taler..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:132
 msgid ""
@@ -324,6 +345,9 @@ msgid ""
 "reconquer our home might take a long time and it would seem wise to make "
 "preparations."
 msgstr ""
+"Jeg er fullt klar over, høvding, at hverken du eller krigerne dine ønsker å "
+"forbli på denne forlatte plassene lenge. Men likevel, vi bør forberede oss "
+"på at krigen vår for å vinne tilbake hjemme våre kan ta lang tid."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
@@ -347,6 +371,8 @@ msgid ""
 "You may continue to play this map if you wish. Otherwise, move on to the "
 "next mission."
 msgstr ""
+"Du kan fortsette å spille dette kartet hvis du ønsker. Hvis ikke, gå videre "
+"til neste oppdrag."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:146
 msgid "In the Night"
@@ -415,7 +441,7 @@ msgstr "Eden"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:170
 msgid "Thron looks furious..."
-msgstr ""
+msgstr "Thron ser rasende ut..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:171
 msgid ""
