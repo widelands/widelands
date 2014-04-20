@@ -84,6 +84,10 @@ World::World()
 World::~World() {
 }
 
+const DescriptionMaintainer<TerrainDescription>& World::terrains() const {
+	return *terrains_;
+}
+
 void World::add_resource_type(const LuaTable& table) {
 	resources_->add(new ResourceDescription(table));
 }
@@ -231,10 +235,6 @@ const MapGenInfo& World::getMapGenInfo() const {
 	return *mapGenInfo_;
 }
 
-Terrain_Index World::index_of_terrain(char const* const name) const {
-	return terrains_->get_index(name);
-}
-
 TerrainDescription& World::terrain_descr(Terrain_Index const i) const {
 	return *terrains_->get(i);
 }
@@ -242,10 +242,6 @@ TerrainDescription& World::terrain_descr(Terrain_Index const i) const {
 TerrainDescription const* World::get_ter(char const* const name) const {
 	int32_t const i = terrains_->get_index(name);
 	return i != -1 ? terrains_->get(i) : nullptr;
-}
-
-int32_t World::get_nr_terrains() const {
-	return terrains_->get_nitems();
 }
 
 int32_t World::get_bob(char const* const l) const {

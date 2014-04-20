@@ -116,7 +116,7 @@ void MapGenAreaInfo::readTerrains
 	split_string(strs, str);
 
 	for (uint32_t ix = 0; ix < strs.size(); ++ix) {
-		Terrain_Index const tix = m_world->index_of_terrain(strs[ix].c_str());
+		Terrain_Index const tix = m_world->terrains().get_index(strs[ix]);
 		if (tix > 128)
 			throw game_data_error("unknown terrain \"%s\" in section \"%s\" in mapgenconf for world.",
 			                      value_name,

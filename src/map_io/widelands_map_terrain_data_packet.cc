@@ -64,7 +64,7 @@ void Map_Terrain_Data_Packet::Read(FileSystem& fs,
 				if (!world.get_ter(new_terrain_name.c_str())) {
 					throw game_data_error("Terrain '%s' exists in map, not in world!", new_terrain_name.c_str());
 				}
-				smap[id] = world.index_of_terrain(new_terrain_name.c_str());
+				smap[id] = world.terrains().get_index(new_terrain_name.c_str());
 			}
 
 			Map_Index const max_index = map.max_index();
@@ -94,7 +94,7 @@ void Map_Terrain_Data_Packet::Write
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase.map();
 	const World & world = egbase.world();
-	Terrain_Index const nr_terrains = world.get_nr_terrains();
+	Terrain_Index const nr_terrains = world.terrains().get_nitems();
 	fw.Unsigned16(nr_terrains);
 
 	std::map<const char * const, Terrain_Index> smap;

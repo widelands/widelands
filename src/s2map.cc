@@ -300,8 +300,8 @@ Widelands::Terrain_Index TerrainConverter::lookup(S2_Map_Loader::WorldType world
 	}
 
 	const std::string& old_terrain_name = table_.at(world)[c];
-	return world_.index_of_terrain(
-	   one_world_legacy_lookup_table_.lookup_terrain(old_terrain_name).c_str());
+	return world_.terrains().get_index(
+	   one_world_legacy_lookup_table_.lookup_terrain(old_terrain_name));
 }
 
 }  // namespace

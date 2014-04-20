@@ -2700,7 +2700,7 @@ int L_Field::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	Editor_Game_Base& egbase = get_egbase(L);
 	const World& world = egbase.world();
-	Terrain_Index td = world.index_of_terrain(name);
+	const Terrain_Index td = world.terrains().get_index(name);
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
@@ -2721,8 +2721,8 @@ int L_Field::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
 	Editor_Game_Base& egbase = get_egbase(L);
 	const World& world = egbase.world();
-	Terrain_Index td =
-		world.index_of_terrain(name);
+	const Terrain_Index td =
+		world.terrains().get_index(name);
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 

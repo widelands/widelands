@@ -76,7 +76,7 @@ Editor_Tool_Set_Terrain_Options_Menu::Editor_Tool_Set_Terrain_Options_Menu(
 		const EditorCategory& editor_category = *world_.editor_categories().get(i);
 
 		std::vector<Terrain_Index> terrain_indices;
-		for (Terrain_Index j = 0; j < world_.get_nr_terrains(); ++j) {
+		for (Terrain_Index j = 0; j < world_.terrains().get_nitems(); ++j) {
 			if (world_.terrain_descr(j).editor_category().name() != editor_category.name()) {
 				continue;
 			}

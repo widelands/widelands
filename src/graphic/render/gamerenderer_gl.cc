@@ -120,9 +120,9 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 void GameRendererGL::draw()
 {
 	const World & world = m_egbase->world();
-	if (m_terrain_freq.size() < world.get_nr_terrains()) {
-		m_terrain_freq.resize(world.get_nr_terrains());
-		m_terrain_edge_freq.resize(world.get_nr_terrains());
+	if (m_terrain_freq.size() < world.terrains().get_nitems()) {
+		m_terrain_freq.resize(world.terrains().get_nitems());
+		m_terrain_edge_freq.resize(world.terrains().get_nitems());
 	}
 
 	m_surface = dynamic_cast<GLSurface *>(m_dst->get_surface());

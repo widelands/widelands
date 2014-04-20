@@ -20,7 +20,6 @@
 #ifndef DESCR_MAINTAINER_H
 #define DESCR_MAINTAINER_H
 
-#include <cassert>
 #include <map>
 #include <memory>
 #include <string>
@@ -70,7 +69,7 @@ int32_t DescriptionMaintainer<T>::add(T * const item) {
 	int32_t index = items_.size();
 	items_.emplace_back(item);
 	name_to_index_[item->name()] = index;
-	return index;;
+	return index;
 }
 
 template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& name) const {
@@ -84,7 +83,7 @@ template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& nam
 /// Usage: IndexedDescriptionMaintainer<Worker_Descr, Ware_Index> workers;
 template <typename T, typename T_Index>
 struct IndexedDescriptionMaintainer : private DescriptionMaintainer<T> {
-	T* exists(char const* const name) {
+	T* exists(const std::string& name) {
 		return DescriptionMaintainer<T>::exists(name);
 	}
 	T_Index add(T* const t) {
@@ -94,10 +93,6 @@ struct IndexedDescriptionMaintainer : private DescriptionMaintainer<T> {
 		return T_Index(DescriptionMaintainer<T>::get_nitems());
 	}
 	T_Index get_index(const std::string& name) const {
-		int32_t idx = DescriptionMaintainer<T>::get_index(name);
-		return idx == -1 ? T_Index::Null() : T_Index(static_cast<typename T_Index::value_t>(idx));
-	}
-	T_Index get_index(const char* const name) const {
 		int32_t idx = DescriptionMaintainer<T>::get_index(name);
 		return idx == -1 ? T_Index::Null() : T_Index(static_cast<typename T_Index::value_t>(idx));
 	}
