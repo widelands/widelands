@@ -20,7 +20,7 @@
 #ifndef _ACTIONCONFIRM_H_
 #define _ACTIONCONFIRM_H_
 
-struct Interactive_Player;
+class Interactive_Player;
 
 namespace Widelands {
 class Building;
