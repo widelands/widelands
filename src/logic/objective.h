@@ -25,40 +25,57 @@
 #include <string>
 
 #include "i18n.h"
-#include "named.h"
 
 namespace Widelands {
 
-/// The Map Objective manager keeps all objectives in order.
-///
-/// A Map (or scenario) objective is an objective that has to be fulfilled to
-/// end a scenario successfully.
-/// But note, the objectives itself doesn't check it's conditions, the map
-/// designer is responsible for checking it and setting its done property up.
-struct Objective : public Named {
-	Objective()
-		:
-		m_descname   (name()),
-		m_descr     (_("no descr")),
-		m_visible(true),
-		m_done   (false)
-	{}
-	virtual ~Objective() {}
+// A Map (or scenario) objective is an objective that has to be fulfilled to
+// end a scenario successfully.
+class Objective  {
+public:
+	Objective(const std::string& name)
+	   : m_name(name), m_descname(name), m_descr(_("no descr")), m_visible(true), m_done(false) {
+	}
 
-	std::string identifier() const {return "Objective: " + name();}
+	// Unique internal name of the objective.
+	const std::string& name() const {
+		return m_name;
+	}
 
-	const std::string & descname() const  {return m_descname;}
-	const std::string & descr() const    {return m_descr;}
-	bool visible() const {return m_visible;}
-	bool done() const {return m_done;}
-	void set_descname(const std::string & new_name) {
+	// User facing (translated) descriptive name.
+	const std::string& descname() const {
+		return m_descname;
+	}
+	void set_descname(const std::string& new_name) {
 		m_descname = new_name;
 	}
-	void set_descr  (const std::string & new_descr) {m_descr   = new_descr;}
-	void set_visible(const bool t)    {m_visible = t;}
-	void set_done(bool t) {m_done = t;}
+
+	// Description text of this name.
+	const std::string& descr() const {
+		return m_descr;
+	}
+	void set_descr(const std::string& new_descr) {
+		m_descr = new_descr;
+	}
+
+	// True, if this objective is fulfilled.
+	bool done() const {
+		return m_done;
+	}
+
+	void set_done(bool t) {
+		m_done = t;
+	}
+
+	// True, if this objective is visible to the user.
+	bool visible() const {
+		return m_visible;
+	}
+	void set_visible(const bool t) {
+		m_visible = t;
+	}
 
 private:
+	const std::string m_name;
 	std::string m_descname;
 	std::string m_descr;
 	bool        m_visible;

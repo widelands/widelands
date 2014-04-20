@@ -19,6 +19,7 @@
 
 #include "wui/game_objectives_menu.h"
 
+#include "logic/objective.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"
 
@@ -80,29 +81,26 @@ GameObjectivesMenu::GameObjectivesMenu
 		center_to_parent();
 }
 
-
 void GameObjectivesMenu::think() {
 	victorious(iplayer().get_playertype() == VICTORIOUS);
 
 	//  Adjust the list according to the game state.
-	Manager<Widelands::Objective> & mom = iplayer().game().map().mom();
-	const int nr_objectives = mom.size();
-	for (int i = 0; i < nr_objectives; ++i) {
-		bool should_show =
-			mom[i].visible() and not mom[i].done();
+	for (const auto& pair : iplayer().game().map().objectives()) {
+		const Objective& obj = *(pair.second);
+		bool should_show = obj.visible() and not obj.done();
 		uint32_t const list_size = list.size();
 		for (uint32_t j = 0;; ++j)
-			if (j == list_size) { //  the objective is not in our list
-				if     (should_show)
-					list.add(mom[i].descname().c_str(), mom[i]);
+			if (j == list_size) {  //  the objective is not in our list
+				if (should_show)
+					list.add(obj.descname().c_str(), obj);
 				break;
-			} else if (&list[j] == &mom[i]) { //  the objective is in our list
+			} else if (&list[j] == &obj) {  //  the objective is in our list
 				if (not should_show)
 					list.remove(j);
-				else if (list[j].descname() != mom[i].descname() || list[j].descr() != mom[i].descr()) {
+				else if (list[j].descname() != obj.descname() || list[j].descr() != obj.descr()) {
 					// Update
 					list.remove(j);
-					list.add(mom[i].descname().c_str(), mom[i]);
+					list.add(obj.descname().c_str(), obj);
 				}
 				break;
 			}

@@ -28,7 +28,7 @@
 
 namespace Widelands {
 class Game;
-struct Objective;
+class Objective;
 }
 struct Interactive_Player;
 
@@ -41,7 +41,7 @@ private:
 	Interactive_Player & iplayer() const;
 	void                 selected(uint32_t);
 
-	typedef UI::Listselect<Widelands::Objective &> list_type;
+	typedef UI::Listselect<const Widelands::Objective&> list_type;
 	list_type              list;
 	UI::Multiline_Textarea objectivetext;
 public:

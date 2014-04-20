@@ -162,12 +162,10 @@ int L_Player::get_allowed_buildings(lua_State * L) {
 		a new item, use :meth:`add_objective`.
 */
 int L_Player::get_objectives(lua_State * L) {
-	const Manager<Objective> & mom = get_egbase(L).map().mom();
-
 	lua_newtable(L);
-	for (int i = 0; i < mom.size(); i++) {
-		lua_pushstring(L, mom[i].name().c_str());
-		to_lua<L_Objective>(L, new L_Objective(mom[i]));
+	for (const auto& pair : get_egbase(L).map().objectives()) {
+		lua_pushstring(L, pair.second->name());
+		to_lua<L_Objective>(L, new L_Objective(*pair.second));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -581,23 +579,20 @@ int L_Player::add_objective(lua_State * L) {
 	Game & game = get_game(L);
 
 	Map * map = game.get_map();
-	Manager<Objective> & mom = map->mom();
+	Map::Objectives* objectives = map->mutable_objectives();
 
-	std::string name = luaL_checkstring(L, 2);
-	if (mom[name] != nullptr)
+	const std::string name = luaL_checkstring(L, 2);
+	if (objectives->count(name))
 		report_error(L, "An objective with the name '%s' already exists!", name.c_str());
 
-	Objective & o = *new Objective;
+	Objective* o = new Objective(name);
+	o->set_done(false);
+	o->set_descname(luaL_checkstring(L, 3));
+	o->set_descr(luaL_checkstring(L, 4));
+	o->set_visible(true);
 
-	o.set_done(false);
-	o.set_name(name);
-	o.set_descname(luaL_checkstring(L, 3));
-	o.set_descr(luaL_checkstring(L, 4));
-	o.set_visible(true);
-
-	game.get_map()->mom().register_new(o);
-
-	return to_lua<L_Objective>(L, new L_Objective(o));
+	objectives->insert(std::make_pair(name, std::unique_ptr<Objective>(o)));
+	return to_lua<L_Objective>(L, new L_Objective(*o));
 }
 
 /* RST
@@ -982,7 +977,7 @@ const PropertyType<L_Objective> L_Objective::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
-L_Objective::L_Objective(Widelands::Objective o) {
+L_Objective::L_Objective(const Widelands::Objective& o) {
 	m_name = o.name();
 }
 
@@ -1100,17 +1095,20 @@ int L_Objective::remove(lua_State * L) {
 	Game & g = get_game(L);
 	// The next call checks if the Objective still exists
 	get(L, g);
-	g.map().mom().remove(m_name);
+	g.map().mutable_objectives()->erase(m_name);
 	return 0;
 }
 
 int L_Objective::__eq(lua_State * L) {
-	const Manager<Objective> & mom = get_game(L).map().mom();
+	const Map::Objectives& objectives = get_game(L).map().objectives();
 
-	const Objective * me = mom[m_name];
-	const Objective * you = mom[(*get_user_class<L_Objective>(L, 2))->m_name];
+	const Map::Objectives::const_iterator me = objectives.find(m_name);
+	const Map::Objectives::const_iterator other =
+	   objectives.find((*get_user_class<L_Objective>(L, 2))->m_name);
 
-	lua_pushboolean(L, (me && you) and (me == you));
+	lua_pushboolean(L,
+	                (me != objectives.end() && other != objectives.end()) &&
+	                   (me->second->name() == other->second->name()));
 	return 1;
 }
 
@@ -1120,12 +1118,13 @@ int L_Objective::__eq(lua_State * L) {
  ==========================================================
  */
 Objective & L_Objective::get(lua_State * L, Widelands::Game & g) {
-	Objective * o = g.map().mom()[m_name];
-	if (!o)
+	Map::Objectives* objectives = g.map().mutable_objectives();
+	Map::Objectives::iterator i = objectives->find(m_name);
+	if (i == objectives->end()) {
 		report_error
 			(L, "Objective with name '%s' doesn't exist!", m_name.c_str());
-	assert(o != nullptr);  // report_error never returns.
-	return *o;
+	}
+	return *i->second;
 }
 
 /* RST

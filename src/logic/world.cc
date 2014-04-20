@@ -561,12 +561,10 @@ Load graphics data here
 */
 void World::load_graphics()
 {
-	int32_t i;
-
 	g_gr->flush_maptextures();
 
 	// Load terrain graphics
-	for (i = 0; i < ters.get_nitems(); ++i)
+	for (size_t i = 0; i < ters.get_nitems(); ++i)
 		ters.get(i)->load_graphics();
 
 	// TODO: load more graphics
