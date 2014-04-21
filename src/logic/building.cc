@@ -286,39 +286,43 @@ Building::~Building()
 }
 
 void Building::load_finish(Editor_Game_Base & egbase) {
-	Leave_Queue & queue = m_leave_queue;
-	for (wl_range<Leave_Queue> i(queue); i;)
-	{
-		Worker & worker = *i->get(egbase);
-		{
-			OPtr<PlayerImmovable> const worker_location = worker.get_location();
-			if
-				(worker_location.serial() !=             serial() and
-				 worker_location.serial() != base_flag().serial())
-				log
-					("WARNING: worker %u is in the leave queue of building %u with "
-					 "base flag %u but is neither inside the building nor at the "
-					 "flag!\n",
-					 worker.serial(), serial(), base_flag().serial());
+	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& optr) {
+		Worker & worker = *optr.get(egbase);
+		OPtr<PlayerImmovable> const worker_location = worker.get_location();
+		if (worker_location.serial() != serial() &&
+		    worker_location.serial() != base_flag().serial()) {
+			log("WARNING: worker %u is in the leave queue of building %u with "
+			    "base flag %u but is neither inside the building nor at the "
+			    "flag!\n",
+			    worker.serial(),
+			    serial(),
+			    base_flag().serial());
+			return true;
 		}
-		Bob::State const * const state =
-			worker.get_state(Worker::taskLeavebuilding);
-		if (not state)
+
+		Bob::State const* const state = worker.get_state(Worker::taskLeavebuilding);
+		if (not state) {
 			log
 				("WARNING: worker %u is in the leave queue of building %u but "
 				 "does not have a leavebuilding task! Removing from queue.\n",
 				 worker.serial(), serial());
-		else if (state->objvar1 != this)
-			log
-				("WARNING: worker %u is in the leave queue of building %u but its "
-				 "leavebuilding task is for map object %u! Removing from queue.\n",
-				 worker.serial(), serial(), state->objvar1.serial());
-		else {
-			++i;
-			continue;
+			return true;
 		}
-		i = wl_erase(queue, i.current);
-	}
+
+		if (state->objvar1 != this) {
+			log("WARNING: worker %u is in the leave queue of building %u but its "
+			    "leavebuilding task is for map object %u! Removing from queue.\n",
+			    worker.serial(),
+			    serial(),
+			    state->objvar1.serial());
+			return true;
+		}
+		return false;
+	};
+
+	m_leave_queue.erase(
+	   std::remove_if(m_leave_queue.begin(), m_leave_queue.end(), should_be_deleted),
+	   m_leave_queue.end());
 }
 
 int32_t Building::get_type() const {return BUILDING;}

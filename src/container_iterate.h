@@ -98,19 +98,6 @@ private:
 	typename C::const_iterator end;
 };
 
-// helper for erasing element in range so that range stays valid.
-// temporary variable ensures that end() is evaluated after erase().
-// Returns new range with updated end points.
-// This function could also reside within wl_range class, but
-// that would still require passing container in.
-template <class C>
-wl_range<C>
-wl_erase(C & c, typename C::iterator & w)
-{
-	typename C::iterator it = c.erase(w);
-	return wl_range< C >(it, c.end());
-}
-
 #define container_iterate_const(type, container, i)                           \
 	for                                                                       \
 	   (wl_const_range< type > i(container);                                  \
