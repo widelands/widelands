@@ -23,7 +23,6 @@
 #include <iostream>
 
 #include <SDL_image.h>
-#include <boost/foreach.hpp>
 #include <config.h>
 
 #include "build_info.h"
@@ -530,7 +529,7 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 
 void Graphic::flush_maptextures()
 {
-	BOOST_FOREACH(Texture* texture, m_maptextures)
+	for (Texture* texture : m_maptextures)
 		delete texture;
 	m_maptextures.clear();
 }

@@ -21,8 +21,6 @@
 
 #include <cstdio>
 
-#include <boost/foreach.hpp>
-
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
@@ -74,7 +72,7 @@ Partially_Finished_Building(gdescr)
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
-	BOOST_FOREACH(Building_Index former_idx, former_buildings) {
+	for (Building_Index former_idx : former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
 	const Building_Descr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
@@ -134,7 +132,7 @@ void DismantleSite::count_returned_wares
 	(Building* building,
 	 std::map<Ware_Index, uint8_t>   & res)
 {
-	BOOST_FOREACH(Building_Index former_idx, building->get_former_buildings()) {
+	for (Building_Index former_idx : building->get_former_buildings()) {
 		const std::map<Ware_Index, uint8_t> * return_wares;
 		const Building_Descr* former_descr = building->tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {

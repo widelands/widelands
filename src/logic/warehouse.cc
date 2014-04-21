@@ -21,8 +21,6 @@
 
 #include <algorithm>
 
-#include <boost/foreach.hpp>
-
 #include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/flag.h"

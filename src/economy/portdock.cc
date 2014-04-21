@@ -19,8 +19,6 @@
 
 #include "economy/portdock.h"
 
-#include <boost/foreach.hpp>
-
 #include "container_iterate.h"
 #include "economy/fleet.h"
 #include "economy/ware_instance.h"
@@ -190,7 +188,7 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 	if (egbase.objects().object_still_available(m_warehouse)) {
 		// Transfer all our wares into the warehouse.
 		if (upcast(Game, game, &egbase)) {
-			BOOST_FOREACH(ShippingItem & shipping_item, m_waiting) {
+			for (ShippingItem& shipping_item : m_waiting) {
 				WareInstance* ware;
 				shipping_item.get(*game, &ware, nullptr);
 				if (ware) {
@@ -329,10 +327,10 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 			std::vector<WareInstance*> wares;
 			m_expedition_bootstrap->get_waiting_workers_and_wares(game, owner().tribe(), &workers, &wares);
 
-			BOOST_FOREACH(Worker* worker, workers) {
+			for (Worker* worker : workers) {
 				ship.add_item(game, ShippingItem(*worker));
 			}
-			BOOST_FOREACH(WareInstance* ware, wares) {
+			for (WareInstance* ware : wares) {
 				ship.add_item(game, ShippingItem(*ware));
 			}
 

@@ -22,8 +22,6 @@
 #include <cstdio>
 #include <sstream>
 
-#include <boost/foreach.hpp>
-
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "graphic/font.h"
@@ -194,7 +192,7 @@ Building & Building_Descr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	BOOST_FOREACH(Building_Index idx, former_buildings) {
+	for (Building_Index idx : former_buildings) {
 		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {
@@ -452,7 +450,7 @@ void Building::cleanup(Editor_Game_Base & egbase)
 
 	PlayerImmovable::cleanup(egbase);
 
-	BOOST_FOREACH(boost::signals2::connection& c, options_window_connections)
+	for (boost::signals2::connection& c : options_window_connections)
 		c.disconnect();
 }
 

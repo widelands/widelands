@@ -21,8 +21,6 @@
 
 #include <map>
 
-#include <boost/foreach.hpp>
-
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
@@ -1231,7 +1229,7 @@ void Map_Buildingdata_Data_Packet::Write
 			}
 			{
 				const Tribe_Descr& td = building->descr().tribe();
-				BOOST_FOREACH(Building_Index b_idx, building->m_old_buildings) {
+				for (Building_Index b_idx : building->m_old_buildings) {
 					const Building_Descr* b_descr = td.get_building_descr(b_idx);
 					fw.Unsigned8(1);
 					fw.String(b_descr->name());

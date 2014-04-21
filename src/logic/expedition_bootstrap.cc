@@ -19,8 +19,6 @@
 
 #include "logic/expedition_bootstrap.h"
 
-#include <boost/foreach.hpp>
-
 #include "economy/portdock.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
@@ -51,12 +49,12 @@ ExpeditionBootstrap::~ExpeditionBootstrap() {
 }
 
 void ExpeditionBootstrap::is_ready(Game & game) {
-	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
+	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		if (wq->get_max_fill() != wq->get_filled())
 			return;
 	}
 
-	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
+	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
 		if (ew->request)
 			return;
 	}
@@ -81,7 +79,7 @@ void ExpeditionBootstrap::worker_callback
 }
 
 void ExpeditionBootstrap::handle_worker_callback(Game& game, Request& request, Worker* worker) {
-	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
+	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
 		if (ew->request.get() == &request) {
 			ew->request.reset(nullptr);  // deletes &request.
 			ew->worker = worker;
@@ -143,14 +141,14 @@ void ExpeditionBootstrap::start() {
 void ExpeditionBootstrap::cancel(Game& game) {
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
-	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
+	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		warehouse->insert_wares(wq->get_ware(), wq->get_filled());
 		wq->cleanup();
 	}
 	wares_.clear();
 
 	// Send all workers from the expedition list back inside the warehouse
-	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
+	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
 		if (ew->worker) {
 			warehouse->incorporate_worker(game, ew->worker);
 		}
@@ -167,14 +165,14 @@ void ExpeditionBootstrap::cleanup(Editor_Game_Base& /* egbase */) {
 	// do not own them.
 	workers_.clear();
 
-	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
+	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		wq->cleanup();
 	}
 	wares_.clear();
 }
 
 WaresQueue& ExpeditionBootstrap::waresqueue(Ware_Index index) const {
-	BOOST_FOREACH(const std::unique_ptr<WaresQueue>& wq, wares_) {
+	for (const std::unique_ptr<WaresQueue>& wq : wares_) {
 		if (wq->get_ware() == index) {
 			return *wq.get();
 		}
@@ -184,7 +182,7 @@ WaresQueue& ExpeditionBootstrap::waresqueue(Ware_Index index) const {
 
 std::vector<WaresQueue*> ExpeditionBootstrap::wares() const {
 	std::vector<WaresQueue*> return_value;
-	BOOST_FOREACH(const std::unique_ptr<WaresQueue>& wq, wares_) {
+	for (const std::unique_ptr<WaresQueue>& wq : wares_) {
 		return_value.emplace_back(wq.get());
 	}
 	return return_value;
@@ -195,7 +193,7 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy) {
 		return;
 
 	// Transfer the wares.
-	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
+	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		if (economy_)
 			wq->remove_from_economy(*economy_);
 		if (new_economy)
@@ -203,7 +201,7 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy) {
 	}
 
 	// Transfer the workers.
-	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
+	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
 		if (ew->request) {
 			ew->request->set_economy(new_economy);
 		}
@@ -218,7 +216,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 	(Game& game, const Tribe_Descr& tribe, std::vector<Worker*>* return_workers,
 	 std::vector<WareInstance*>* return_wares)
 {
-	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
+	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		const Ware_Index ware_index = wq->get_ware();
 		for (uint32_t j = 0; j < wq->get_filled(); ++j) {
 			WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
@@ -230,7 +228,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 		wq->set_max_fill(0);
 	}
 
-	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
+	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
 		assert(ew->worker != nullptr);
 		assert(!ew->request);
 		return_workers->emplace_back(ew->worker);
@@ -242,7 +240,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos) {
 	// Expedition workers
 	fw.Unsigned8(workers_.size());
-	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
+	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
 		fw.Unsigned8(ew->request.get() != nullptr);
 		if (ew->request.get() != nullptr) {
 			ew->request->Write(fw, game, mos);
@@ -254,7 +252,7 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& 
 
 	// Expedition WaresQueues
 	fw.Unsigned8(wares_.size());
-	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
+	for (std::unique_ptr<WaresQueue>& wq : wares_) {
 		wq->Write(fw, game, mos);
 	}
 }

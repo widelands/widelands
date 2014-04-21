@@ -21,7 +21,6 @@
 
 #include <cstdio>
 
-#include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "graphic/font.h"
@@ -267,7 +266,7 @@ void AbstractWaresDisplay::layout()
 
 void WaresDisplay::remove_all_warelists() {
 	m_warelists.clear();
-	BOOST_FOREACH(boost::signals2::connection& c, connections_)
+	for (boost::signals2::connection& c : connections_)
 		c.disconnect();
 	connections_.clear();
 	update();
