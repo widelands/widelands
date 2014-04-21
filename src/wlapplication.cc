@@ -89,14 +89,6 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-#ifndef NDEBUG
-#ifndef _WIN32
-int32_t WLApplication::pid_me   = 0;
-int32_t WLApplication::pid_peer = 0;
-volatile int32_t WLApplication::may_run = 0;
-#endif
-#endif
-
 #define MINIMUM_DISK_SPACE 250000000lu
 #define SCREENSHOT_DIR "screenshots"
 
@@ -1082,20 +1074,6 @@ void WLApplication::handle_commandline_parameters()
 		m_commandline.erase("datadir");
 	}
 
-	if (m_commandline.count("double")) {
-#ifndef NDEBUG
-#ifndef _WIN32
-		init_double_game();
-#else
-		wout << _("\nSorry, no double-instance debugging on _WIN32.\n\n");
-#endif
-#else
-		wout << _("--double is disabled. This is not a debug build!") << endl;
-#endif
-
-		m_commandline.erase("double");
-	}
-
 	if (m_commandline.count("verbose")) {
 		g_verbose = true;
 
@@ -1260,13 +1238,6 @@ void WLApplication::show_usage()
 		     "                      Only move a window to the edge of a panel\n"
 		     "                      if the window is overlapping with the\n"
 		     "                      panel.") << "\n\n";
-#ifndef NDEBUG
-#ifndef _WIN32
-	wout
-		<< _(" --double             Start the game twice (for localhost network\n"
-		     "                      testing)") << "\n\n";
-#endif
-#endif
 	wout
 		<< _(" --verbose            Enable verbose debug messages") << "\n" << endl;
 	wout
@@ -1276,79 +1247,6 @@ void WLApplication::show_usage()
 		    "        https://launchpad.net/widelands\n\n"
 		    "Hope you enjoy this game!") << "\n\n";
 }
-
-#ifndef NDEBUG
-#ifndef _WIN32
-/**
- * Fork off a second game to test network gaming
- *
- * \warning You must call this \e before any hardware initialization - most
- * notably before \ref SDL_Init()
- */
-void WLApplication::init_double_game ()
-{
-	if (pid_me != 0)
-		return;
-
-	pid_me = getpid();
-	pid_peer = fork();
-	//TODO: handle fork errors
-
-	assert (pid_peer >= 0);
-
-	if (pid_peer == 0) {
-		pid_peer = pid_me;
-		pid_me   = getpid();
-
-		may_run = 1;
-	}
-
-	signal (SIGUSR1, signal_handler);
-
-	atexit (quit_handler);
-}
-
-/**
- * On SIGUSR1, allow ourselves to continue running
- */
-void WLApplication::signal_handler(int32_t) {++may_run;}
-
-/**
- * Kill the other instance when exiting
- *
- * \todo This works but is not very clean (each process killing each other)
- */
-void WLApplication::quit_handler()
-{
-	kill (pid_peer, SIGTERM);
-	sleep (2);
-	kill (pid_peer, SIGKILL);
-}
-
-/**
- * Voluntarily yield to the second Widelands process. This was implemented
- * because some machines got horrible responsiveness when using --double, so we
- * forced good reponsiveness by using cooperative multitasking (between the two
- * Widelands instances, that is)
- */
-void WLApplication::yield_double_game()
-{
-	if (pid_me == 0)
-		return;
-
-	if (may_run > 0) {
-		--may_run;
-		kill (pid_peer, SIGUSR1);
-	}
-
-	if (may_run == 0)
-		usleep (500000);
-
-	// using sleep instead of pause avoids a race condition
-	// and a deadlock during connect
-}
-#endif
-#endif
 
 /**
  * Run the main menu
