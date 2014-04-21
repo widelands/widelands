@@ -53,11 +53,11 @@ void Map_Objective_Data_Packet::Read
 					if (objectives->count(name)) {
 						throw game_data_error("duplicated");
 					}
-					objectives->insert(std::make_pair(name, std::move(objective)));
 					objective->set_descname(s->get_string("name", name));
 					objective->set_descr(s->get_safe_string("descr"));
 					objective->set_visible(s->get_safe_bool("visible"));
 					objective->set_done(s->get_bool("done", false));
+					objectives->insert(std::make_pair(name, std::move(objective)));
 				} catch (const _wexception & e) {
 					throw game_data_error("%s: %s", name, e.what());
 				}
