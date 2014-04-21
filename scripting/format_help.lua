@@ -492,20 +492,20 @@ end
 
 -- RST
 --
--- .. function:: building_help_building_section(tribename, building_description[, upgraded_from, former_buildings])
+-- .. function:: building_help_building_section(tribename, building_description[, enhanced_from, former_buildings])
 --
---    Formats the "Building" section in the building help: Upgrading info, costs and space required
+--    Formats the "Building" section in the building help: Enhancing info, costs and space required
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
---    :arg upgraded_from: The building name that this building is usually upgraded from.
+--    :arg enhanced_from: The building name that this building is usually enhanced from.
 --                        Leave blank if this is a basic building.
 --    :former_buildings:  A table of building names representing the chain of buildings that this
---                        building was upgraded from. This is used to calculate cumulative building 
+--                        building was enhanced from. This is used to calculate cumulative building 
 --                        and dismantle costs.
 --    :returns: an rt string describing the building section
 --
-function building_help_building_section(tribename, building_description, upgraded_from, former_buildings)
+function building_help_building_section(tribename, building_description, enhanced_from, former_buildings)
 
 	local result = rt(h2(_"Building"))
 
@@ -526,23 +526,44 @@ function building_help_building_section(tribename, building_description, upgrade
 		end
 	end
 
-	-- Upgraded from
+	-- Enhanced from
 	if (building_description.buildable or building_description.enhanced) then
+
+		if (building_description.buildable and building_description.enhanced) then
+			result = result .. text_line(_"Note:",
+				_"This building can either be built directly or obtained by enhancing another building.")
+		end
+
+		if (building_description.buildable) then
+			-- Build cost
+			if (building_description.buildable and building_description.enhanced) then
+				result = result .. rt(h3(_"Direct build cost:"))
+			else
+				result = result .. rt(h3(_"Build cost:"))
+			end
+			for ware, amount in pairs(building_description.build_cost) do
+				result = result .. building_help_building_line(tribename, ware, amount)
+			end
+		end
 		if (building_description.enhanced) then
 			local former_building = nil
-			if (upgraded_from) then
-				former_building = wl.Game():get_building_description(tribename, upgraded_from)
-				result = result .. text_line(_"Upgraded from:", former_building.descname)
+			if (enhanced_from) then
+				former_building = wl.Game():get_building_description(tribename, enhanced_from)
+				if (building_description.buildable) then
+					result = result .. text_line(_"Or enhanced from:", former_building.descname)
+				else
+					result = result .. text_line(_"Enhanced from:", former_building.descname)
+				end
 			else
-				result = result .. text_line(_"Upgraded from:", _"Unknown")
+				result = result .. text_line(_"Enhanced from:", _"Unknown")
 			end
 
 			for ware, amount in pairs(building_description.enhancement_cost) do
 				result = result .. building_help_building_line(tribename, ware, amount)
 			end
 
-			-- Cost Cumulative
-			result = result .. rt(h3(_"Cost Cumulative:"))
+			-- Cumulative cost
+			result = result .. rt(h3(_"Cumulative cost:"))
 			local warescost = {}
 			for ware, amount in pairs(building_description.enhancement_cost) do
 				if (warescost[ware]) then
@@ -581,7 +602,15 @@ function building_help_building_section(tribename, building_description, upgrade
 			end
 
 			-- Dismantle yields
-			result = result .. rt(h3(_"Dismantle yields:"))
+			if (building_description.buildable) then
+				result = result .. rt(h3(_"If built directly, dismantle yields:"))
+				for ware, amount in pairs(building_description.returned_wares) do
+					result = result .. building_help_building_line(tribename, ware, amount)
+				end
+				result = result .. rt(h3(_"If enhanced, dismantle yields:"))
+			else
+				result = result .. rt(h3(_"Dismantle yields:"))
+			end
 			local warescost = {}
 			for ware, amount in pairs(building_description.returned_wares_enhanced) do
 				if (warescost[ware]) then
@@ -617,16 +646,8 @@ function building_help_building_section(tribename, building_description, upgrade
 			else
 				result = result .. rt(p(_"Unknown"))
 			end
-
 		-- Buildable
 		else
-
-			-- Build Cost
-			result = result .. rt(h3(_"Build Cost:"))
-			for ware, amount in pairs(building_description.build_cost) do
-				result = result .. building_help_building_line(tribename, ware, amount)
-			end
-
 			-- Dismantle yields
 			result = result .. rt(h3(_"Dismantle yields:"))
 			for ware, amount in pairs(building_description.returned_wares) do
@@ -634,10 +655,10 @@ function building_help_building_section(tribename, building_description, upgrade
 			end
 		end
 
-		-- Upgradeable to
+		-- Can be enhanced to
 		if (building_description.enhancements[1]) then
 			for i, building in ipairs(building_description.enhancements) do
-				result = result .. text_line(_"Upgradeable to:", building_description.enhancements[i].descname)
+				result = result .. text_line(_"Can be enhanced to:", building_description.enhancements[i].descname)
 				for ware, amount in pairs(building_description.enhancements[i].enhancement_cost) do
 					result = result .. building_help_building_line(tribename, ware, amount)
 				end
