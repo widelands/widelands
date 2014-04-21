@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2011-04-27 18:59+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2014-04-21 01:51+0000\n"
+"Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:31+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-21 04:32+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 #: ../../campaigns/cconfig:98
@@ -30,11 +30,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians – The Second Empire"
-msgstr ""
+msgstr "バーバリアン - 第二の帝国"
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "簡単: バーバリアンの紹介"
 
 #: ../../campaigns/cconfig:31
 msgid ""
@@ -52,6 +52,11 @@ msgid ""
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
 msgstr ""
+"チャー・カルスが死んだとき、彼は老人であり、強くかつ野心的な三人の息子の父親であり、古代の森に侵攻しようとするあらゆる敵に対抗することができる軍隊の将軍だ"
+"った。彼の栄光の治世の終わりに、チャー・カルスは部族の将軍として跡を継ぐように、彼の長男トロンに言い残した――その遺言に彼の二人の弟は不服だった。老将軍に"
+"もそれがわかっていた。父が指示したとおりに、トロンはアルスラーンの首都、「木立の玉座」の故郷を出て、父親の遺体が埋葬されている小高い丘に、彼の軍隊を撤退さ"
+"せた。そこで彼は、復権のために帰還すると、神と彼の父の霊魂に誓った。彼の弟たちが、トロンと彼がアルスラーン国境を確保するために残した少数の軍隊に対して闇雲"
+"な戦争に猛り狂う一方、この若き将軍は、彼の野心的な弟たちと再会し、各部族が再び共通の旗印の下に行進するように強制しようとしていた。"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire – The Months of Exile"
@@ -59,7 +64,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "簡単: 帝国の紹介"
 
 #: ../../campaigns/cconfig:38
 msgid ""
@@ -81,7 +86,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "チャレンジ: アトランティスの紹介"
 
 #: ../../campaigns/cconfig:45
 msgid ""
@@ -95,17 +100,17 @@ msgstr ""
 #: ../../campaigns/cconfig:64
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "01 – Eyes in the Dark"
-msgstr ""
+msgstr "01 - 暗がりの中の眼"
 
 #: ../../campaigns/cconfig:69
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 – A Place to Call Home"
-msgstr ""
+msgstr "02 - 故郷と呼ばれる場所"
 
 #: ../../campaigns/cconfig:74
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 – This Land is Our Land"
-msgstr ""
+msgstr "03 - この国は私たちの国"
 
 #: ../../campaigns/cconfig:81
 #: ../../campaigns/emp01.wmf/elemental:7
@@ -121,7 +126,7 @@ msgstr ""
 #: ../../campaigns/cconfig:103
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
-msgstr ""
+msgstr "未実装"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Sorry, this map is not yet implemented."
@@ -210,6 +215,7 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
+"自然の奇妙な特徴であるにせよ、おかしな（そしてゲームに飢えた）神の創造であるにせよ、この不思議な戦場はつぎの対戦のために二人の対戦者を待っている。"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -232,7 +238,7 @@ msgstr "クレーター"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the "
 "crater. Two tribes are now fighting for the rich resources."
-msgstr ""
+msgstr "一組の山に隕石が衝突したはるかあと、クレーターで生命が開花した。 二つの部族は今豊富な資源のために戦っている。"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
@@ -321,7 +327,7 @@ msgstr ""
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
-msgstr ""
+msgstr "ファイアーゲーム"
 
 #: ../../maps/Firegames.wmf/elemental:9
 msgid ""
@@ -330,6 +336,9 @@ msgid ""
 "if you are alone, but no-one knows what might happen if you met an opposing "
 "tribe?"
 msgstr ""
+"これは神の試練かそれとも他の誰かによる凶悪な計画だろうか？ "
+"あなたとあなたの部族はこの島の炎と溶岩の中に目覚めた。これまで、まるであなたは一人きりであるように思われた。しかし、あなたが敵部族に会うなら何が起きるか誰"
+"にもわからない。"
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -361,7 +370,7 @@ msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
-msgstr ""
+msgstr "氷河の湖"
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -370,14 +379,16 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure that there is only enough space for one tribe."
 msgstr ""
+"長い間あなたの種族は、この孤立した美しい氷河湖に住んでいた。誰もあなたの邪魔をすることはなく、また資源はあなたの部族すべてにとって十分だった。しかし二、三"
+"ヶ月前、ほかの部族が山を越えて住み着いた。そして、一つの部族のためにのみ十分な場所だったとわかった。"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "黄金の半島"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr ""
+msgstr "二つの帝国が、伝説の半島の宝をもとめるレース..."
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
@@ -405,14 +416,14 @@ msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at War"
-msgstr ""
+msgstr "戦争の島々"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
+msgstr "何世紀もの間、あなたは隣り合う島のほかの部族とともに平和に生きてきた。 この平和は今終わろうとしている――あなたの隣人は拡大し始める。"
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
@@ -427,7 +438,7 @@ msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "静寂の湖"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
@@ -435,10 +446,11 @@ msgid ""
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores..."
 msgstr ""
+"古代の森深くのこの湖は、その美しさと牧歌的な平和で長く知られていた。しかし二つの敵対する部族がその岸に到着して、その静寂はいまや妨げられている..."
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
-msgstr ""
+msgstr "最後の砦"
 
 #: ../../maps/Last Bastion.wmf/elemental:11
 msgid ""
@@ -453,6 +465,11 @@ msgid ""
 "space is also a hard and small place to live. Don’t forget to take care of "
 "your timber supplies, you’ll need them."
 msgstr ""
+"気まぐれな神々は我々の祈りに答えなかった。その代わりに増加した太陽光で大地を何倍にも熱し、氷河を溶かした。そして、人々は海に飛び込んだ。しかし現在――雄大"
+"な山々の高い、最後の土地のかけらの上に――二つの生き残りの部族が避難している。神が慈悲を示し、このように気候が再び涼しくなったにもかかわらず、水面はまだ上"
+"昇し続けている。最後の安全な場所――多量の金と、一部族のみが生きるのに十分なスペースがあるもっとも高い山脈――の上へは、二本の逆のルートだけが導いている。"
+"しかし思い出して気をつけてほしい...この最後のリビングスペースは、生きるには厳しく小さな場所でもある。木材の供給に注意するのを忘れないでください。必要と"
+"なります。"
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
@@ -587,7 +604,7 @@ msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
-msgstr ""
+msgstr "極北"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -603,6 +620,12 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
 msgstr ""
+"極北への大地は、もっとも勇気ある移民やもっとも勇敢な戦士でさえ遠ざけたと言われる。 "
+"大規模な略奪ゲームのあふれる大きな古い森は湿地によって分断され、丘は神秘に包まれていた。 "
+"なんとか帰還した者は、どこかの荒野の中に雄大な山脈から、彫刻や金で装飾された素晴らしい建造物について語った。  "
+"数十年後、もろい遺跡のいくつかは、コケと木で覆われ懐かしい昔の面影を残している。それらの形状は古代の建造者の技術についての考えだけを与える。 "
+"彼らがなぜ姿を消したかについてはわかりません。 誰にも理由がわからない。人々はいまや富への道を閉ざすものはないと言う。 "
+"しかし多くは狼に引き裂かれ、沼に呑み込まれて敵対する部族に取り囲まれて...息絶える。"
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"

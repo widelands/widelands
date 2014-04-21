@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2012-12-14 21:04+0000\n"
-"Last-Translator: guess880 <Unknown>\n"
+"PO-Revision-Date: 2014-04-21 01:53+0000\n"
+"Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:41+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-21 04:32+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:15
 msgid "Nice And Easy Does It All the Time"
-msgstr ""
+msgstr "いつでも、のんびりいこう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:17
 msgid ""
@@ -29,14 +29,16 @@ msgid ""
 "and just find everything out for yourself. Otherwise, please bear with me, I "
 "am not the youngest and quickest anymore."
 msgstr ""
+"すみませんが、これを再び取り壊す必要があります。あとから、ここにスペースが必要になる場合があります。あなたにとって説明がスローペースすぎる場合は、実際のゲ"
+"ームをプレイし、自分自身ですべてを見つけるのも良いでしょう。そうでなければ、もうそれほど若くも速くもないわたしに、お付き合いください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "Widelandsのチュートリアルにようこそ！"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
-msgstr "Widelandsにようこそ!"
+msgstr "Widelandsにようこそ！"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:30
 msgid ""
@@ -44,18 +46,19 @@ msgid ""
 "construction, not destruction. This tutorial will guide you through the "
 "basics of the game."
 msgstr ""
+"Widelandsは破壊ではなく建設に重点を置いた、スローペースなビルドアップストラテジーです。このチュートリアルではゲームの基本を学びます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:32
 msgid "Dismiss this box by left-clicking on the button below."
-msgstr ""
+msgstr "下のボタンを左クリックして、このボックスを閉じてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:37
 msgid "Diving In"
-msgstr ""
+msgstr "はじめよう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "さあはじめよう！"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
 msgid ""
@@ -64,6 +67,8 @@ msgid ""
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "barbarians for now."
 msgstr ""
+"Widelandsには、バーバリアン・帝国・アトランティスの三つの異なる部族がいます。すべての部族それぞれに異なる経済、強み、弱みがありますが、基本的なゲ"
+"ームプレイは同じです。今からバーバリアンでプレイします。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:47
 msgid ""
@@ -76,6 +81,9 @@ msgid ""
 "logs and raw stone. Let’s make sure that we do not run out of logs. For "
 "this, we need a lumberjack and a hut for him to stay in."
 msgstr ""
+"本拠地からゲームを開始します。本拠地は目の前に青い旗を持つ大きな建物です。本拠地はアイテムや労働者、そして兵士を格納する倉庫です。いくつかのアイテムは他の"
+"アイテムを作るための建物や人々に必要とされています。本拠地にあるアイテムは永遠には続かないので、それらを再生産する必要があります。ゲーム序盤で最も重要なア"
+"イテムは木材や原石といった基本的な建設材料です。早速、木材が不足しないようにしましょう。そのためには木こりと木こりが滞在するための小屋が必要です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
 msgid ""
@@ -85,24 +93,26 @@ msgid ""
 "screen, which is the fourth one from the left. Or you can use the SPACE key "
 "to toggle it."
 msgstr ""
+"木こり小屋に適した場所を見つける必要があります。簡単に見つけるには、「建設スペースを表示」を有効にします。有効にするには二つの方法があります。画面下部の左"
+"から４番目の「建設スペースを表示」のボタンをクリックして切り替えるか、Spaceキーで切り替えてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:60
 msgid "Left-click the ‘OK’ button to close this box and then try it."
-msgstr ""
+msgstr "OKボタンを左クリックしてこのボックスを閉じ、実際にやってみましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Enable the showing of building spaces"
-msgstr ""
+msgstr "建設スペースの表示を有効化"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:65
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "建設スペースを表示する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:67
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
-msgstr ""
+msgstr "建設スペースを有効にすると、フィールドにどのタイプの建物を建てることが許可されているか理解しやすくなります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
 msgid ""
@@ -110,10 +120,11 @@ msgid ""
 "left at the very bottom of the screen. Right-click on this window and then "
 "give it a try."
 msgstr ""
+"Spaceキーを押すか、画面最下部の左から４番目のボタンをクリックしてください。このウィンドウを右クリックしてから、実際にやってみましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:77
 msgid "Lumberjack’s Spot"
-msgstr ""
+msgstr "木こり小屋の場所"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:81
 msgid ""
@@ -123,10 +134,12 @@ msgid ""
 "describe the steps I will take and then ask you to click on the ‘OK’ button "
 "for me to demonstrate."
 msgstr ""
+"まず、木こり小屋をどのように建て、それを道路とどのように接続するかをお見せします。木々のすぐそばが木こり小屋に適した場所です。デモをするので「OK」ボタン"
+"をクリックしてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:90
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "木こり小屋を建てる"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid ""
@@ -137,16 +150,21 @@ msgid ""
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
 msgstr ""
+"はじめに、木こり小屋を建設したい場所のシンボルを左クリックします。建物を選択できるウィンドウが表示されます。黄色の家のシンボル（中規模の建物が建設可能なこ"
+"とを意味します）をクリックすると建設可能な建物 "
+"中が表示されます。木こり小屋は小規模な建物なので小規模の建物のタブを選択します。それから木こり小屋を選びます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:100
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
 msgstr ""
+"デモを見るにはOKボタンをクリックしてください。デモではこれらをゆっくりと行ってみせます。クリックします - タブを選択します - "
+"そして最後に建物を選びます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:107
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "道路を接続する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:110
 msgid ""
@@ -155,10 +173,11 @@ msgid ""
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
 msgstr ""
+"まだ終わりではありません。道路網に木こり小屋を接続する必要があります。建設を命じた後、自動的に道路敷設モードに入るので、本拠地の前の青旗をクリックします。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr ""
+msgstr "木こり小屋が立ち上がるのを待つ"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
 msgid ""
@@ -166,10 +185,12 @@ msgid ""
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
 msgstr ""
+"建築人が本拠地を出て、建設地に行くようになることに注目してください。また、運搬人が二つの青旗の間にポジションを取り、一方の青旗から他方の青旗にアイテムを運"
+"ぶようになります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:128
 msgid "Placing Another Flag"
-msgstr ""
+msgstr "別の旗を立てる"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:131
 msgid ""
@@ -177,12 +198,14 @@ msgid ""
 "way to go. We can make it easier for him (and more efficient for us) when we "
 "place another blue flag on the road."
 msgstr ""
+"彼らは良く働いているでしょう？しかし、運搬人にとっては非常に長い道のりです。道路上に別の青旗を立てることで彼らを楽に（そして私たちのために、より効率的に）"
+"させてあげることができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid ""
 "You try it this time: click on the yellow flag symbol in between the two "
 "blue flags we just placed and then click on the"
-msgstr ""
+msgstr "ここで試してみましょう。配置済みの二つの青旗の間の黄旗のシンボルをクリックし、下記のシンボルをクリックしてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:135
 msgid "build flag symbol."
@@ -190,32 +213,32 @@ msgstr "旗を立てるシンボル"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:138
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "木こり小屋への道を分割するために旗を立てる"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:139
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "道路に旗を立てる"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:140
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr ""
+msgstr "道路の区間を短くすると、アイテムがより速く運搬されます。したがって、道路に可能な限り多くの旗を立てるべきです。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:143
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr ""
+msgstr "木こり小屋と本拠地を接続する道路のまん中に、青い旗を立てましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:148
 msgid "Waiting For the Hut to be Finished"
-msgstr ""
+msgstr "小屋が完成するのを待つ"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:151
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr ""
+msgstr "良くできました！小屋が完成するまで待ちましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:153
 msgid ""
@@ -223,10 +246,11 @@ msgid ""
 "to increase the game speed. You can use PAGE DOWN to make the game slower "
 "again."
 msgstr ""
+"早く進めたい場合、ゲーム速度を上げるためにキーボードのPageUpキーを押してください。再びゲームを遅くするためにはPageDownキーを押します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
 msgid "Lumberjack is Done"
-msgstr ""
+msgstr "木こり小屋が完成"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:163
 msgid ""
@@ -234,14 +258,15 @@ msgid ""
 "start chopping down trees, so our logs income is secured for now. Now on to "
 "the raw stone."
 msgstr ""
+"良くできました。木こり小屋が完成しました。木こりはすぐに移動し、木の伐採を開始するでしょう。これで木材の収入が確保されました。次は原石の確保です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:171
 msgid "Some Stones Were Found"
-msgstr ""
+msgstr "発見した石"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:172
 msgid "Getting a Quarry Up."
-msgstr ""
+msgstr "採石場を建設します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:174
 msgid ""
@@ -250,34 +275,36 @@ msgid ""
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
 msgstr ""
+"原石は花崗岩の鉱山で採掘されますが、もっと簡単な方法は、転がってるいくつかの岩の隣に採石場を建設することです。偶然にも、本拠地のすぐ西（左）に石の山があり"
+"ます。これから視点をそこに移動させるための方法を教えます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:178
 msgid ""
 "There are two ways to move your view. The first one is using the cursor keys "
 "on your keyboard. Go ahead and try this out."
-msgstr ""
+msgstr "視点を移動するには二つの方法があります。一つ目は、キーボードのカーソルキーを使用します。先に進んで、試してみましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:181
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-msgstr ""
+msgstr "OKボタンをクリックしてからカーソルキーを使用して視点を移動してください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:185
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "カーソルキーを使用して視点を移動する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:186
 msgid "Moving Your View"
-msgstr ""
+msgstr "視点を移動する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:187
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are two ways to move your view in Widelands."
-msgstr ""
+msgstr "視点の移動は、経済全体の完全な概要を得るために不可欠です。 Widelandsで視点を移動するには二つの方法があります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:189
 msgid "The first one is to use the cursor keys on your keyboard."
-msgstr ""
+msgstr "一つ目は、キーボードのカーソルキーを使用します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
 msgid ""
@@ -285,29 +312,31 @@ msgid ""
 "mouse button anywhere on the map, then move your mouse around and you’ll see "
 "the view scroll."
 msgstr ""
+"二つ目は、より一般的かつ早いものです。マップ上の任意の場所をマウスの右ボタンでクリックしながらホールドし、周りにマウスを移動すると、視点がスクロールされま"
+"す。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:198
 msgid "Other Ways to Move the View"
-msgstr ""
+msgstr "視点を移動する別の方法"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
 msgid ""
 "Excellent. Now there is a faster way to move, using the mouse instead:"
-msgstr ""
+msgstr "良くできました。さて、視点を移動する早い方法が別にあります。マウスを使うことです。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr ""
+msgstr "マップ上の任意の場所を右クリックしながらホールドし、マウスをドラッグすると、カーソルと同じように視点が移動します。試してみましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:207
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "マウスで視点を移動する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:212
 msgid "Onward to the Quarry"
-msgstr ""
+msgstr "採石場へ向かう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Great. Now about that quarry..."
@@ -315,12 +344,12 @@ msgstr "良くできました。さて採石場についてですが..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:222
 msgid "How to Build a Quarry"
-msgstr ""
+msgstr "採石場の建設方法"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:224
 msgid ""
 "Build a quarry next to those stones here. Remember how I did it earlier?"
-msgstr ""
+msgstr "ここでそれらの石の近くに採石場を建設します。以前やった方法を覚えていますか？"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:226
 msgid ""
@@ -329,6 +358,8 @@ msgid ""
 "appears and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
 msgstr ""
+"建設スペースが表示されていることを確認してから、建設したい場所をクリックし、表示されたウィンドウから選択、それを配置します。以前に有効化したこれらすべての"
+"建設スペースシンボルについて説明するには、多分良い時間でしょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:230
 msgid ""
@@ -336,29 +367,31 @@ msgid ""
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
 msgstr ""
+"Widelandsのフィールドには建設可能なものが4種類あります。旗、小規模の建物、中規模の建物、そして大規模な建物です。ただしすべてがどこにでも建てられ"
+"るわけではありません。建設スペースシンボルを利用することで何が建てられるか分かりやすくなります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Everything can be built on the green house symbol."
-msgstr "緑色の家のシンボルにはすべてのものが建てられます。"
+msgstr "緑色の家のシンボルには、すべてのものが建てられます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:235
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr "黄色の家のシンボルには大規模建築物以外のものが建設できます。"
+msgstr "黄色の家のシンボルには、大規模な建物以外のものが建設できます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:237
 msgid "Red building symbols can only hold small buildings and flags."
-msgstr "赤色の建築物のシンボルには小規模な建築物と旗だけが建設可能です。"
+msgstr "赤色の家のシンボルには、小規模の建物と旗だけが建設可能です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:239
 msgid "And finally the yellow flag symbol only allows for flags."
-msgstr "そして最後に黄旗のシンボルは旗を立てることだけが許されます。"
+msgstr "そして最後に黄旗のシンボルは、旗を立てることだけが許されます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:241
 msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
-msgstr ""
+msgstr "フィールドに何か設置すると、周りのフィールドは建物を建設するためのスペースがなくなっていくので、適切に配置しましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:244
 msgid ""
@@ -366,20 +399,22 @@ msgid ""
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
 msgstr ""
+"先に進んで試してみましょう。採石場は小規模の建物ですので、もし中規模もしくは大規模な建築物のシンボルをクリックした場合、採石場のシンボルを見つけるためには"
+"、最初に建物 小のタブを選択する必要があります。さあ、やってみましょう！"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:250
 msgid "Build a quarry next to the stones"
-msgstr ""
+msgstr "石のそばに採石場を建設する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:251
 msgid "Build a Quarry"
-msgstr ""
+msgstr "採石場を建設する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:252
 msgid ""
 "There are some stones to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr ""
+msgstr "本拠地の西にいくつかの石があります。その右横に採石場を建設しましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:253
 msgid ""
@@ -387,18 +422,20 @@ msgid ""
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press SPACE for that)."
 msgstr ""
+"採石場は木こり小屋のような小規模の建物です。したがって、建設スペースシンボルを有効にした（そのためにはスペースキーを押す）ときに赤、黄、緑色の建物を示す任"
+"意のフィールドにそれを建設することができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:257
 msgid ""
 "Just click on any house symbol next to the stones, select the small "
 "buildings tab in the window that opens up, then click on the quarry symbol."
-msgstr ""
+msgstr "石のそばにある家のシンボルをクリックして開いたウィンドウの小規模の建物のタブを選択して、採石場のシンボルをクリックしてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:288
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:296
 msgid "Road Building"
-msgstr ""
+msgstr "道路の敷設"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
 msgid ""
@@ -407,6 +444,8 @@ msgid ""
 "newly placed construction site. You can enter road building mode for any "
 "flag by left-clicking on a flag and selecting"
 msgstr ""
+"良くできました！あなたが建物を配置した直後には、道路敷設モードになっています。新たに配置した建設地の目の前の旗から新しい道路は開始されます。道路敷設モード"
+"に入るには、任意の旗を左クリックしてから、下のシンボルを選択してください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:272
 msgid "the road building symbol."
@@ -416,7 +455,7 @@ msgstr "道路敷設シンボル"
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting"
-msgstr ""
+msgstr "道路の敷設を止めたくなったら、道路の始点の旗を選択してクリックしてから、下のシンボルを選択してください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid "the abort symbol."
@@ -429,34 +468,36 @@ msgid ""
 "time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes like so:"
 msgstr ""
+"さて、道路についてですが、以下のことを覚えておいてください。採石場の建設を命じたので、すでに道路敷設モードになっています。敷設するルートをすべて自分で決め"
+"たい場合には、目的地まで隣接するフィールドを左クリックで一つずつ選択していきます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:290
 msgid ""
 "Or, you can directly click the flag where the road should end like so:"
-msgstr ""
+msgstr "代わりに、道路を終わらせたい場所の旗を直接クリックすることもできます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:298
 msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
-msgstr ""
+msgstr "もう一点。道路の終点のフィールドの周りに別のマーカーが表示されます。それらには以下の意味があります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr "ここの地形は平坦です。運び手はこの地形では非常に迅速に移動します。"
+msgstr "ここの地形は平坦です。運搬人はこの地形では非常に迅速に移動します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:303
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
-msgstr ""
+msgstr "このフィールドに到達するには緩やかな傾斜を上る必要があります。労働者は上りよりも下りの方が早く歩きます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
-msgstr ""
+msgstr "フィールド間は非常に急峻です。ある方向では速度の増加が大きな一方、逆方向では下降が大きくなります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:309
 msgid ""
@@ -464,27 +505,29 @@ msgid ""
 "Also, try to keep roads as short as possible and always remember to place as "
 "many flags as you can on road segments to share the load better."
 msgstr ""
+"道路を敷設する際には、傾斜を頭に入れ、活用してください。また、道路は可能な限り短くし、道路を上手くシェアできるように、道路区間に可能な限り多くの旗を立てま"
+"しょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:313
 msgid ""
 "Now please rebuild the road between your quarry and your headquarters. We’ll "
 "wait until the quarry is completed."
-msgstr ""
+msgstr "今すぐ採石場と本拠地の間の道路を再度敷設してください。そして、採石場が完成するまで待ちましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:317
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "採石場を本拠地に接続する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid "Connect Your Construction Site"
-msgstr ""
+msgstr "建設地を接続する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:319
 msgid ""
 "Connect your quarry construction site to your headquarters with a road. You "
 "would have been put directly into road building mode after ordering a new "
 "site. But now, you aren’t."
-msgstr ""
+msgstr "本拠地と採石場の建設地を、道路で接続します。新しい現場を配置するときは、直接に道路建設モードになります。しかし、今はそうではありません。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:322
 msgid ""
@@ -492,11 +535,13 @@ msgid ""
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
 msgstr ""
+"完全に新しい道路を建設するためには、建設地の前の旗をクリックして、道路敷設アイコンをクリックしてから、本拠地の前で旗をクリックします。採石場の完成を待ちま"
+"しょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:330
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:349
 msgid "Census and Statistics"
-msgstr ""
+msgstr "センサスと統計"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:332
 msgid ""
@@ -506,6 +551,9 @@ msgid ""
 "texts over the buildings. They are called the ‘census’ and you can toggle "
 "them via the ‘c’ key or via the button on the ‘Watch’ tab of any field."
 msgstr ""
+"待っている間、別の便利な機能を紹介します。すべての建設地は同じように見え、いくつかの建物も同じように見えます。そしてそれらを区別するのが難しい場合がありま"
+"す。Widelandsは、建物の上にテキストラベルを表示する機能を提供しています。それはセンサスと呼ばれ、Cキーを押す、または任意のフィールド上で監視タブ"
+"のボタンを押すことで切り替えることができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:337
 msgid ""
@@ -514,6 +562,8 @@ msgid ""
 "display information about the productivity of buildings or the progress of "
 "construction sites."
 msgstr ""
+"これと同様の機能に建物の統計情報があります。任意のフィールドの「監視」タブ上のボタンで切り替えることができます。対応するホットキーはSです。建物の生産率や"
+"建設地の進行状況に関する情報が表示されます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:341
 msgid ""
@@ -521,14 +571,16 @@ msgid ""
 "Alternatively, you can click on any field without a building on it, select "
 "the watch tab and then click on the corresponding buttons."
 msgstr ""
+"早速それらの二つを有効にします。覚えておいてください。CとSがキーです。または、建物ではなく任意のフィールドをクリックして監視のタブを選択し、対応するボタ"
+"ンをクリックします。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:351
 msgid "Now we know what’s going on. Let’s wait for this quarry to finish."
-msgstr ""
+msgstr "これで、今どうなっているのかが分かるようになりました。採石場が完成するのを待ちましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 msgid "Introducing Messages"
-msgstr ""
+msgstr "導入メッセージ"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:359
 msgid "Messages"
@@ -540,6 +592,8 @@ msgid ""
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found..."
 msgstr ""
+"今回、メッセージを送りました。メッセージとはWidelandsから以下のような重要なイベントについて通知するものです。鉱山の資源が枯渇した、他部族からの攻"
+"撃、軍事施設を奪ったもしくは奪われた、資源が見つかった..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:365
 msgid ""
@@ -548,6 +602,8 @@ msgid ""
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
 msgstr ""
+"メッセージウィンドウは画面の下部にある一番右側のボタンで表示／非表示を切り替えることができます。新しいメッセージがある時、このボタンの外観が変わりますが、"
+"ベルの音も流れます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:369
 msgid ""
@@ -557,24 +613,26 @@ msgid ""
 "your inbox so that they get a tick-symbol in front of them. Then, you can "
 "click the"
 msgstr ""
+"現在、二つのメッセージがあります。今読んでいるこれと、新本拠地が経済に組み込まれたことを知らせる一つです。では、メッセージをアーカイブする方法を学びましょ"
+"う。受信箱でメッセージをチェックすると、メッセージの前にチェックがつきます。その後以下のボタンをクリックします。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:375
 msgid "archive message button to move them into your archive."
-msgstr "アーカイブに移動させるためのアーカイブメッセージボタン"
+msgstr "保管箱に移動させるためのメッセージを保管ボタン"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:377
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
-msgstr ""
+msgstr "このメッセージも含めた、受信箱に入っているすべてのメッセージをアーカイブしましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Archive all messages in your inbox"
-msgstr ""
+msgstr "すべてのメッセージを保管箱にアーカイブする"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:382
 msgid "Archive Your Inbox Messages"
-msgstr ""
+msgstr "メッセージを保管箱にアーカイブする"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:383
 msgid ""
@@ -582,10 +640,12 @@ msgid ""
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty. "
 msgstr ""
+"メッセージウィンドウは、部族の運命を完全にコントロールするための中心的な役割を果たします。しかし、実際のゲーム内では大量のメッセージを得ます。頭をすっきり"
+"させておくには、受信箱を空に保つようにしてください。 "
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:387
 msgid "Archive all your messages in your inbox now."
-msgstr ""
+msgstr "今から、受信箱のすべてのメッセージをアーカイブします。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid ""
@@ -593,11 +653,13 @@ msgid ""
 "button at the very bottom of the screen. Then mark all messages by checking "
 "the check box in front of them. Then, click the ‘Archive All’ button."
 msgstr ""
+"そのためには、「N」キーを押すか、画面の最下部右端のボタンをクリックし、メッセージウィンドウを開きます。そして、それらの前にあるチェックボックスをオンにし"
+"て、すべてのメッセージをマークます。そのあと、「選択したメッセージを保管」ボタンをクリックしてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:398
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:420
 msgid "Closing Windows"
-msgstr ""
+msgstr "ウィンドウを閉じる"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -605,20 +667,21 @@ msgid ""
 "clicking on them. This will work with all windows except for story message "
 "windows like this one. Go ahead and try it."
 msgstr ""
+"良くできました！あなたが建物を配置した直後には、道路敷設モードになっています。新たに配置した建設地の目の前の旗から新しい道路は開始されます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:403
 msgid ""
 "First, close this window by pressing the button below, then right-click into "
 "the messages window to close it."
-msgstr ""
+msgstr "道路敷設モードに入るには、任意の旗を左クリックしてから、下のシンボルを選択してください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
 msgid "Close the messages window"
-msgstr ""
+msgstr "メッセージウィンドウを閉じる"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:408
 msgid "Close the Messages Window"
-msgstr ""
+msgstr "メッセージウィンドウを閉じる"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:409
 msgid ""
@@ -626,10 +689,12 @@ msgid ""
 "windows can also be toggled with the buttons at the very bottom of the "
 "screen."
 msgstr ""
+"Widelandsのすべてのウィンドウは、右クリックすることで閉じることができます。一部のウィンドウは、画面の最下部にあるボタンで切り替えることができます"
+"。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
 msgid "Close the messages window now by right-clicking into it."
-msgstr ""
+msgstr "それでは、メッセージウィンドウを右クリックして閉じましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:422
 msgid ""
@@ -638,10 +703,12 @@ msgid ""
 "then send a message that he can’t find any in his working area the next time "
 "he tries to do some work."
 msgstr ""
+"良くできました！メッセージが実際のゲームでどのように機能するかを見てみましょう。これのために、採石場の可哀そうな石工からすべての石を奪います。すると彼は作"
+"業領域内に同じ仕事をするための次の機会が見つからないというメッセージを送信します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:431
 msgid "Message Arrived!"
-msgstr ""
+msgstr "メッセージ到着！"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:433
 msgid ""
@@ -649,14 +716,16 @@ msgid ""
 "screen has changed appearance? You can burn this quarry down now as it is no "
 "longer of any use and just blocking space."
 msgstr ""
+"メッセージが送信されました。画面の下部にあるボタンの外観がどのように変わったでしょうか？さて、使用されなくなり、単にスペースの無駄になっている場合、この採"
+"石場を燃やしたくなるかもしれません。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 msgid "To do that, click on the quarry and select the destroy button."
-msgstr ""
+msgstr "これを行うには、採石場をクリックして、破壊ボタンを選択します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:441
 msgid "Expanding Your Territory!"
-msgstr ""
+msgstr "領土拡張！"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:443
 msgid ""
@@ -665,6 +734,8 @@ msgid ""
 "a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our territory."
 msgstr ""
+"教えることがもう一つあります。領土の拡張です。本拠地周辺で始まっている場所は、基本的なインフラ構築のためだけでやっとであり、必要としている鉱物や石炭を採掘"
+"する山へのアクセス権がありません。そのため領土を拡大する必要があります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:447
 msgid ""
@@ -676,6 +747,9 @@ msgid ""
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
 msgstr ""
+"拡大するには、領土の隅に軍事施設を建てるのが簡単です。バーバリアンは、いくつかの特徴的な軍事施設を持っています。歩哨所、関所、ダンジョン、要塞、城塞です。"
+"大きな建物は、建築するにはより高額ですが、より多くの周りの土地を支配し、より多くの兵士が駐留することができます。また、建物ごとに視界の範囲は異なります。塔"
+"のある建物は、他の建物よりもより遠くを見ることができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:454
 msgid ""
@@ -685,12 +759,14 @@ msgid ""
 "land. You therefore need military sites to keep military influence over your "
 "land."
 msgstr ""
+"軍事施設が建設されるとすぐに領土は拡大されます。場所が必要な場合は、それを破壊することができます。しかし、破壊すると防備が弱くなってしまうことに注意してく"
+"ださい。他のプレイヤーの軍事施設で、土地が征服されてしまいます。したがって、領土に軍事的影響力を維持するためには軍事施設が必要です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:459
 msgid ""
 "Let’s try it out now: build a few military buildings on your south-western "
 "border."
-msgstr ""
+msgstr "それでは早速試してみましょう。南西部国境にいくつか軍事施設を建設してください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:461
 msgid ""
@@ -698,14 +774,16 @@ msgid ""
 "there. Bigger buildings will conquer more land, which can be beneficial "
 "close to mountains, because you can’t build houses on mountains."
 msgstr ""
+"資源を探索するために、この山の一部を獲得したいのです。山の中には家を建てることができないため、大きな建物を利用して山に近い有益な多くの土地を支配しましょう"
+"。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:467
 msgid "Conquer an area were we can build mines"
-msgstr ""
+msgstr "鉱山を建設できる地域を支配する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:468
 msgid "Conquer the Mountain to the South-West"
-msgstr ""
+msgstr "南西の山を支配する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:469
 msgid ""
@@ -713,6 +791,8 @@ msgid ""
 "in mountains. Conquer some area on the mountains to the south-west of your "
 "headquarters by building some military buildings close to your border."
 msgstr ""
+"本格的な経済のためには、石炭、鉄、金が必要です。これらは山で見つけることができます。国境の近くにいくつかの軍事施設を建設することによって、本拠地の南西の山"
+"のいくらかの地域を支配しましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:473
 msgid ""
@@ -722,10 +802,12 @@ msgid ""
 "to build a big military building next to a mountain so that you can reach "
 "building sites farther up."
 msgstr ""
+"軍事施設を歩哨所、物見塔、関所、城塞から選択することができます。大規模な建物は、より建設コストがかかります。しかし、それはまた、より広い地域を支配します。"
+"山のそばに大きな軍事施設を建設することは、ときどき、より遠くのフィールドに到達できるようにするために役立ちます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:483
 msgid "Searching for Resources"
-msgstr ""
+msgstr "資源の探索"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:485
 msgid ""
@@ -734,6 +816,8 @@ msgid ""
 "granite. Each tribe uses the resources differently, but all need mines to "
 "extract the resources from the ground."
 msgstr ""
+"さて、今、この山の地域の一部を所有しています。山々には資源（石炭、鉄鉱石、金鉱石、花崗岩）があるので、非常に重要です。各部族は異なる資源を使用していますが"
+"、地面から資源を取得するためにはすべて鉱山が必要です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -741,17 +825,19 @@ msgid ""
 "the mountain and place a flag. Then, we will click on the flag and call a "
 "geologist to it. I’ll show you how it’s done."
 msgstr ""
+"この山の資源を探索してみましょう。まず、山に道路を敷設し、旗を設置します。そして、旗をクリックして、それに地質学者を呼びます。どのように行うのかお見せしま"
+"しょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Waiting for the Geologist"
-msgstr ""
+msgstr "地質学者を待つ"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:499
 msgid ""
 "The geologist will arrive at the flag shortly and start investigating the "
 "area in his surroundings. He will place the following markers for the "
 "various resources:"
-msgstr ""
+msgstr "地質学者はすぐに旗に到着し、周囲の探索を始めます。彼はさまざまな資源があることを示す以下のマークを設置します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:502
 msgid "a bit of coal"
@@ -763,11 +849,11 @@ msgstr "大量の石炭"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:504
 msgid "a bit of iron"
-msgstr "少量の鉄鉱石"
+msgstr "少量の鉄"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:505
 msgid "a lot of iron"
-msgstr "大量の鉄鉱石"
+msgstr "大量の鉄"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:506
 msgid "a bit of gold"
@@ -795,11 +881,11 @@ msgstr "何も見つからなかった"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:516
 msgid "Let’s wait and see what the geologist finds on the mountain."
-msgstr ""
+msgstr "山で地質学者が何を見つけるか待って見てみましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:523
 msgid "Mining Conclusion"
-msgstr ""
+msgstr "採掘の結果"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:525
 msgid ""
@@ -807,6 +893,8 @@ msgid ""
 "build a coal mine here. Building a mine is like building a house. The "
 "building space symbol for where a mine can be built is"
 msgstr ""
+"地質学者はこの山で大量の石炭を発見しました。したがってここには炭鉱を建設すべきです。鉱山の建設は建物を建てるのと同じです。建設可能な鉱山のスペースシンボル"
+"は"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:528
 msgid "this one."
@@ -820,10 +908,12 @@ msgid ""
 "also varies from tribe to tribe. We will explain them to you in the "
 "introduction campaigns for the three tribes."
 msgstr ""
+"鉱山には食料が必要なことに注意してください。糧食は酒場で生産され、酒場は糧食を生産するために肉、ピタパン、魚を必要とします。鉱山で効果的に生産させるには、"
+"さらに多くのインフラが必要です。インフラは部族によって異なります。三つの部族それぞれの導入キャンペーンで説明を得ることができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
 msgid "Warfare and Training"
-msgstr ""
+msgstr "戦争と訓練"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:541
 msgid "Soldiers and Warfare"
@@ -836,6 +926,8 @@ msgid ""
 "building up, not burning down: therefore, warfare is also more focused on "
 "economics than on military strategies."
 msgstr ""
+"さて、最後の話題に移りましょう。兵士と、彼らの訓練と彼らの職業、戦争についての話をします。前述したように、Widelandsは築き上げることが目的で、破壊"
+"が目的ではありません。したがって、戦争は軍事戦略というよりも経済に焦点が当てられたものです。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:546
 msgid ""
@@ -843,26 +935,28 @@ msgid ""
 "has some game mechanics that deserve explanation. The economies of the "
 "tribes are explained in their individual tutorial campaigns. "
 msgstr ""
+"しかし、戦争は他のプレイヤーに挑戦する一つの方法を提供しており、それは説明に値するいくつかのゲームの仕組みを持っています。部族の経済は、個々のチュートリア"
+"ルキャンペーンで説明されています。 "
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:550
 msgid ""
 "Ok, I am going to create a little training ground for us with a training "
 "camp and a warehouse to the north east of here."
-msgstr ""
+msgstr "では、ここから北東に訓練場と倉庫があるちょっとした訓練場所を作ります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:552
 msgid ""
 "If you want to come back to this south-western part of your realm, just "
 "scroll here via right-button scrolling or open the minimap by clicking on the"
-msgstr ""
+msgstr "もしこの領土の南西部に戻ってきたくなったら、右クリックでのスクロールか、以下のボタンをクリックしてミニマップを開いてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:555
 msgid "minimap button at the bottom of the screen."
-msgstr ""
+msgstr "画面下部のミニマップボタンです。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:557
 msgid "Alternatively, you could also press ‘m’ on your keyboard."
-msgstr ""
+msgstr "代わりにMキーを押すことでも表示できます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:559
 msgid ""
@@ -870,16 +964,20 @@ msgid ""
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
 msgstr ""
+"ミニマップは、ミニチュアの全体マップを表示します。直接それを左クリックして、任意のフィールドにジャンプすることができます。また、ミニマップの内側に建物、道"
+"路、旗およびプレイヤーのインジケータを表示することができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:562
 msgid ""
 "But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted to "
 "build a small training scenario for you. Let’s do that now."
 msgstr ""
+"話が脱線してしまいました。兵士の話に戻ります。何をしようとしていたのでしたっけ？そうだ、小さな訓練シナリオを作ろうと思っていたのでした。それではやってみま"
+"しょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:571
 msgid "Trainings Camp and Soldier Stats"
-msgstr ""
+msgstr "訓練場と兵士のステータス"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:573
 msgid ""
@@ -889,6 +987,8 @@ msgid ""
 "symbols, which symbolize the individual soldier’s current levels in the four "
 "different categories health, attack, defense and evade."
 msgstr ""
+"訓練場に向かっている兵士たちを見てみましょう。彼らは、通常の労働者とは違って見えます。彼らは、頭上に残り体力が表示されるヘルスバーを持っており、また、四つ"
+"の異なる能力の（体力、攻撃力、防御力、回避力）の現在のレベルを示す四つのシンボルを持っています。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:579
 msgid ""
@@ -898,6 +998,8 @@ msgid ""
 "of level 0. To make soldiers better in any of the four categories, training "
 "is needed."
 msgstr ""
+"兵士は、通常の労働者のように生み出されます。満たされていないある特定の職種への要求が起こるや否や、運搬人は道具をつかみます。バーバリアンの兵士を生み出すた"
+"めの道具はアックスです。新しく作成された兵士はレベル0です。兵士の四つの能力のいずれかを伸ばすためには訓練が必要です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:584
 msgid ""
@@ -908,20 +1010,23 @@ msgid ""
 "defense and level 2 evade. This is one fearsome warrior then! The individual "
 "statistics have the following meaning:"
 msgstr ""
+"訓練は訓練場もしくは闘技場のような訓練施設で行われます。兵士たちは（小さな仲間が現在行っているように）そこに行き、いくつかのアイテムを消費し、一つの能力の"
+"レベルを上げます。バーバリアンの兵士が完全に訓練されている場合、彼はレベル3の体力、レベル5の攻撃力、レベル0の防御力、そしてレベル2の回避力を持っていま"
+"す。これは、恐ろしい戦士です！個々の統計には以下の意味があります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:589
 msgid "Health:"
-msgstr ""
+msgstr "体力"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:590
 msgid ""
 "The total life of a soldier. A barbarian soldier starts with ~130 health "
 "points, and with each health level he gains 28 health points."
-msgstr ""
+msgstr "兵士の体力です。バーバリアンの兵士の体力ポイントは130からはじまり、レベルが上がるたびに28ポイントずつ増えます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:592
 msgid "Attack:"
-msgstr "攻撃力:"
+msgstr "攻撃力"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:593
 msgid ""
@@ -930,10 +1035,12 @@ msgid ""
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains 7 damage points."
 msgstr ""
+"敵に攻撃が成功したときに与えるダメージの量です。攻撃力のレベル0の兵士が攻撃に成功した場合、敵に最大14ポイントの体力ダメージを与えます。攻撃力のレベルが"
+"上がるたびに7ダメージ増加します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:596
 msgid "Defense:"
-msgstr "守備力"
+msgstr "防御力"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:597
 msgid ""
@@ -944,6 +1051,9 @@ msgid ""
 "barbarian soldier, the barbarian will lose 15 - 3 = 12 health. The 3 points "
 "are subtracted because of the defense ability."
 msgstr ""
+"防御力は攻撃値から減らされる値です。バーバリアンはこの能力を訓練することはできないため、常に防御力のレベルは0です。それは与えられたダメージからは常に3し"
+"か引けないということを意味しています。もし15ポイントの攻撃値を持つ敵がバーバリアンの兵士に攻撃すればバーバリアンは15から3を引いた12ポイントのダメー"
+"ジを受けることになります。減らされる3ポイントがすなわち防御力です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
 msgid "Evade:"
@@ -953,15 +1063,15 @@ msgstr "回避力"
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. It is 25% "
 "for a level 0 evade barbarian and increases in steps of 15% for each level."
-msgstr ""
+msgstr "回避力は兵士が攻撃を回避できる機会のことです。レベル0の回避力のバーバリアンの値は25%で、レベルが上がるごとに15%増加します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:611
 msgid "Enhance This Fortress"
-msgstr ""
+msgstr "この要塞を拡張する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:612
 msgid "Enhancing Buildings"
-msgstr ""
+msgstr "建物の拡張"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:613
 msgid ""
@@ -969,6 +1079,7 @@ msgid ""
 "prepared. This fortress is already quite strong and conquers a lot of space. "
 "But there is an even bigger building: the citadel."
 msgstr ""
+"すぐに敵を用意しますが、準備ができるのを待ちます。この要塞はすでにかなり強力で多くの土地を占領しています。しかしさらに大きな建物があります。城塞です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:617
 msgid ""
@@ -980,28 +1091,31 @@ msgid ""
 "building nearby, your construction site will burn down. No sweat, that won’t "
 "happen here."
 msgstr ""
+"城塞は直接建設することはできません。最初に要塞を建設する必要があり、それを城塞に拡張する必要があります。そのためには、要塞をクリックし、「城塞に拡張」ボタ"
+"ンを選択してください。兵士たちは拡張が終わるまで要塞から離れます。これは要塞に軍事的影響力がないことを意味しています。もし近くに敵の軍事施設がある場合、建"
+"設地は破壊されてしまいます。心配しないでください、ここではそのようなことは起きません。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:624
 msgid "Enhance your fortress to a citadel now."
-msgstr ""
+msgstr "要塞を城塞に拡張してください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:626
 msgid ""
 "Remember that you can speed time up by using PAGE_UP. Building a citadel "
 "takes a while."
-msgstr ""
+msgstr "PageUpキーで速度を上げることができるのを覚えておいてください。城塞の建設には時間がかかります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:631
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "要塞を城塞に拡張する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:632
 msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "要塞を拡張する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:633
 msgid "Enhance your fortress to a mighty citadel."
-msgstr ""
+msgstr "要塞を強大な城塞に拡張します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid ""
@@ -1010,6 +1124,8 @@ msgid ""
 "to build. It is most suited to guard strategically important points like "
 "constricted points or mountains."
 msgstr ""
+"城塞は、12人の兵士を収容し、またバーバリアンが建設することができる最大の軍事施設です。建設には多くの費用と時間もかかります。それは、狭窄地や山のような戦"
+"略的に重要なポイントを守るために最も適しています。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Defeat your enemy"
@@ -1017,7 +1133,7 @@ msgstr "敵を倒そう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "敵を倒す"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:646
 msgid ""
@@ -1028,30 +1144,33 @@ msgid ""
 "buildings. Likewise, the defenders will come from all nearby military "
 "buildings of the enemy and intercept your forces."
 msgstr ""
+"スパーリングパートナーを用意しました。城塞の近くの帝国部族です。彼らの建物を攻撃するには、目標の建物のドアをクリックし、送り込みたい兵士の人数を選択し、攻"
+"撃ボタンをクリックします。兵士は近くのすべての軍事施設から集まってくるでしょう。同様に、攻撃を妨げるために、近くのすべての軍事施設から敵が集まってきます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:652
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr ""
+msgstr "敵のすべての軍事施設を攻撃して占領し、敵の本拠地を破壊してください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:656
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "敵の部族を倒そう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "敵を倒そう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:658
 msgid "Defeat the nearby enemy."
-msgstr ""
+msgstr "近くの敵を倒そう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:660
 msgid ""
 "To attack a building, click on its doors, choose the number of attacking "
 "soldiers, then send them via the ‘Attack’ button."
 msgstr ""
+"近くの敵を倒します。建物を攻撃するためには、そのドアをクリックし、攻撃に加わる兵士の人数を選択して、「攻撃」ボタンを押すことで彼らを送りだしてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:667
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:668
@@ -1065,6 +1184,8 @@ msgid ""
 "wares is the most important thing in Widelands – but you’ve learned the "
 "ropes."
 msgstr ""
+"これでチュートリアルは終わりです。ここでは取り上げていないものがいくつかあります。生産する建物がWidelandsで最も重要なものであるにもかかわらず、一"
+"つも生産する建物を建設していません。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 msgid ""
@@ -1073,34 +1194,35 @@ msgid ""
 "the tribe and its economy while introducing the background story of "
 "Widelands. Have fun playing!"
 msgstr ""
+"残りについては個々の部族の導入キャンペーンを通じて学ぶことができます。Widelandsのバックグラウンドストーリーを紹介しながら、部族とその経済を説明す"
+"るいくつかのシナリオでキャンペーンは構成されています。楽しんで遊んでください！"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:678
 msgid ""
 "You can continue playing this map or you can end this game whenever you "
 "like. To leave this game and return to the main menu, click on the"
-msgstr ""
+msgstr "このマップを続けて遊ぶこともできますし、好きなときに止めることができます。ゲームを終了し、メインメニューに戻るには、"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:681
 msgid ""
 "‘Options’ menu button on the very left at the bottom of the screen. Then "
 "click the"
-msgstr ""
+msgstr "画面下部の一番左の「オプション」メニューボタンをクリックし、"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:684
 msgid "‘Exit Game’ button."
-msgstr ""
+msgstr "「ゲーム終了」ボタンをクリックしてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:686
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at"
-msgstr ""
+msgstr "このチュートリアルをプレイしてくれてありがとうございます。Widelandsを楽しみ、サイトに訪れることを忘れないでください。"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "『%s』"
 
 #: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "新しい目的"
