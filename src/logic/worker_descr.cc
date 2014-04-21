@@ -47,7 +47,7 @@ Worker_Descr::Worker_Descr
 	m_icon(nullptr),
 	m_buildable     (false),
 	m_level_experience(-1),
-	m_becomes (Ware_Index::Null())
+	m_becomes (INVALID_INDEX)
 {
 	add_attribute(Map_Object::WORKER);
 
@@ -63,9 +63,9 @@ Worker_Descr::Worker_Descr
 					throw wexception
 						("a buildcost item of this ware type has already been "
 						 "defined");
-				if (not (tribe().ware_index(input) or tribe().worker_index(input)))
+				if (tribe().ware_index(input) == INVALID_INDEX || tribe().worker_index(input) == INVALID_INDEX)
 					throw wexception
-						("\"%s\" has not beed defined as a ware/worker type (wrong "
+						("\"%s\" has not been defined as a ware/worker type (wrong "
 						 "declaration order?)",
 						 input.c_str());
 				int32_t const value = val->get_int();

@@ -430,12 +430,12 @@ Widelands::Building_Index Section::get_safe_Building_Index
 {
 	const Widelands::Tribe_Descr & tribe = egbase.manually_load_tribe(player);
 	char const * const b = get_safe_string(name);
-	if (Widelands::Building_Index const idx = tribe.building_index(b))
-		return idx;
-	else
+	Widelands::Building_Index const idx = tribe.building_index(b);
+	if (idx == Widelands::INVALID_INDEX)
 		throw wexception
 			("building type \"%s\" does not exist in player %u's tribe %s",
 			 b, player, tribe.name().c_str());
+	return idx;
 }
 
 
@@ -446,9 +446,8 @@ const Widelands::Building_Descr & Section::get_safe_Building_Type
 {
 	const Widelands::Tribe_Descr & tribe = egbase.manually_load_tribe(player);
 	char const * const b = get_safe_string(name);
-	if
-		(Widelands::Building_Descr const * const result =
-		 tribe.get_building_descr(tribe.building_index(b)))
+	if (Widelands::Building_Descr const* const result =
+	       tribe.get_building_descr(tribe.building_index(b)))
 		return *result;
 	else
 		throw wexception
@@ -1066,4 +1065,3 @@ void Profile::write
 
 	fw.Write(fs, filename);
 }
-

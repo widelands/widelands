@@ -71,7 +71,7 @@ void WaresQueue::cleanup() {
 
 	update();
 
-	m_ware = Ware_Index::Null();
+	m_ware = INVALID_INDEX;
 }
 
 /**
@@ -272,7 +272,7 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 				m_request =                          //  FIXME Change Request::Read
 					new Request                       //  FIXME to a constructor.
 						(m_owner,                      //  FIXME
-						 Ware_Index::First(),          //  FIXME
+						 0,          //  FIXME
 						 WaresQueue::request_callback, //  FIXME
 						 wwWORKER);             //  FIXME
 				m_request->Read(fr, game, mol);      //  FIXME

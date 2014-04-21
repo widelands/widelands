@@ -66,7 +66,7 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 				if (game)
 					for
 						(Building_Index i = tribe.get_nrbuildings();
-						 Building_Index::First() < i;)
+						 0 < i;)
 						player->allow_building_type(--i, false);
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
@@ -75,7 +75,8 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 
 					bool allowed;
 					while (const char * const name = s.get_next_bool(nullptr, &allowed)) {
-						if (Building_Index const index = tribe.building_index(name))
+						const Building_Index index = tribe.building_index(name);
+						if (index == INVALID_INDEX)
 							player->allow_building_type(index, allowed);
 						else
 							throw game_data_error
@@ -112,7 +113,7 @@ void Map_Allowed_Building_Types_Data_Packet::Write
 
 		//  Write for all buildings if it is enabled.
 		Building_Index const nr_buildings = tribe.get_nrbuildings();
-		for (Building_Index b = Building_Index::First(); b < nr_buildings; ++b)
+		for (Building_Index b = 0; b < nr_buildings; ++b)
 			if (player->is_building_type_allowed(b))
 				section.set_bool
 					(tribe.get_building_descr(b)->name().c_str(), true);

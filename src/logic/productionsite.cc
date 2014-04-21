@@ -64,7 +64,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
-			if (Ware_Index idx = tribe().ware_index(op->get_string())) {
+			Ware_Index idx = tribe().ware_index(op->get_string());
+			if (idx != INVALID_INDEX) {
 				if (m_output_ware_types.count(idx))
 					throw wexception("this ware type has already been declared as an output");
 				m_output_ware_types.insert(idx);
@@ -81,7 +82,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	if (Section * const s = prof.get_section("inputs"))
 		while (Section::Value const * const val = s->get_next_val())
 			try {
-				if (Ware_Index const idx = tribe().ware_index(val->get_name())) {
+				Ware_Index const idx = tribe().ware_index(val->get_name());
+				if (idx != INVALID_INDEX) {
 					container_iterate_const(BillOfMaterials, inputs(), i)
 						if (i.current->first == idx)
 							throw wexception("duplicated");
@@ -256,9 +258,7 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
 	container_iterate_const(Input_Queues, m_input_queues, i)
 		if ((*i.current)->get_ware() == wi)
 			return **i.current;
-	throw wexception
-		("%s (%u) has no WaresQueue for %u",
-		 name().c_str(), serial(), wi.value());
+	   throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
 }
 
 /**

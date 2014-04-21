@@ -92,10 +92,7 @@ void ProductionProgram::parse_ware_type_group
 				count_max += i.front().second;
 				break;
 			}
-		if
-			(group.first.size()
-			 and
-			 ware_index.value() <= group.first.begin()->value())
+		if (group.first.size() and ware_index <= *group.first.begin())
 			throw game_data_error
 				(
 				 "wrong order of ware types within group: ware type %s appears "
@@ -251,7 +248,8 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 			try {
 				bool reached_end;
 				char const * const type_name = match(parameters, reached_end);
-				if (Ware_Index index = tribe.ware_index(type_name)) {
+				Ware_Index index = tribe.ware_index(type_name);
+				if (index != INVALID_INDEX) {
 					tribe.set_ware_type_has_demand_check(index);
 					return
 						new ProductionProgram::ActReturn::Economy_Needs_Ware
@@ -1494,7 +1492,7 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 
 	// Early check for no resources
 	const Buildcost & buildcost = descr.buildcost();
-	Ware_Index available_resource = Ware_Index::Null();
+	Ware_Index available_resource = INVALID_INDEX;
 
 	for (Buildcost::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
 		if (psite.waresqueue(it->first).get_filled() > 0) {

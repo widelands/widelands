@@ -87,12 +87,12 @@ WarehouseSupply::~WarehouseSupply()
 
 /// Inform this supply, how much wares are to be handled
 void WarehouseSupply::set_nrwares(Ware_Index const i) {
-	assert(Ware_Index::First() == m_wares.get_nrwareids());
+	assert(0 == m_wares.get_nrwareids());
 
 	m_wares.set_nrwares(i);
 }
 void WarehouseSupply::set_nrworkers(Ware_Index const i) {
-	assert(Ware_Index::First() == m_workers.get_nrwareids());
+	assert(0 == m_workers.get_nrwareids());
 
 	m_workers.set_nrwares(i);
 }
@@ -106,10 +106,10 @@ void WarehouseSupply::set_economy(Economy * const e)
 
 	if (m_economy) {
 		m_economy->remove_supply(*this);
-		for (Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
+		for (Ware_Index i = 0; i < m_wares.get_nrwareids(); ++i)
 			if (m_wares.stock(i))
 				m_economy->remove_wares(i, m_wares.stock(i));
-		for (Ware_Index i = Ware_Index::First(); i < m_workers.get_nrwareids(); ++i)
+		for (Ware_Index i = 0; i < m_workers.get_nrwareids(); ++i)
 			if (m_workers.stock(i))
 				m_economy->remove_workers(i, m_workers.stock(i));
 	}
@@ -117,10 +117,10 @@ void WarehouseSupply::set_economy(Economy * const e)
 	m_economy = e;
 
 	if (m_economy) {
-		for (Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
+		for (Ware_Index i = 0; i < m_wares.get_nrwareids(); ++i)
 			if (m_wares.stock(i))
 				m_economy->add_wares(i, m_wares.stock(i));
-		for (Ware_Index i = Ware_Index::First(); i < m_workers.get_nrwareids(); ++i)
+		for (Ware_Index i = 0; i < m_workers.get_nrwareids(); ++i)
 			if (m_workers.stock(i))
 				m_economy->add_workers(i, m_workers.stock(i));
 		m_economy->add_supply(*this);
@@ -327,8 +327,8 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 	{
 		WareWorker type;
 		Ware_Index ware;
-
-		if ((ware = tribe().ware_index(cost_it->first)))
+		ware = tribe().ware_index(cost_it->first);
+		if (ware != INVALID_INDEX)
 			type = wwWARE;
 		else if ((ware = tribe().worker_index(cost_it->first)))
 			type = wwWORKER;
@@ -427,8 +427,8 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	m_supply->set_nrwares  (nr_wares);
 	m_supply->set_nrworkers(nr_workers);
 
-	m_ware_policy.resize(nr_wares.value(), SP_Normal);
-	m_worker_policy.resize(nr_workers.value(), SP_Normal);
+	m_ware_policy.resize(nr_wares, SP_Normal);
+	m_worker_policy.resize(nr_workers, SP_Normal);
 
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
@@ -536,7 +536,7 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	// ones.
 	if (upcast(Game, game, &egbase)) {
 		const WareList& workers = get_workers();
-		for (Ware_Index id = Ware_Index::First(); id < workers.get_nrwareids(); ++id) {
+		for (Ware_Index id = 0; id < workers.get_nrwareids(); ++id) {
 			const uint32_t stock = workers.stock(id);
 			for (uint32_t i = 0; i < stock; ++i) {
 				launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
@@ -782,7 +782,7 @@ uint32_t Warehouse::count_workers
 		}
 
 		ware = tribe().get_worker_descr(ware)->becomes();
-	} while (ware != Ware_Index::Null());
+	} while (ware != INVALID_INDEX);
 
 	return sum;
 }
@@ -836,7 +836,7 @@ Worker & Warehouse::launch_worker
 		} else {
 			ware = tribe().get_worker_descr(ware)->becomes();
 		}
-	} while (ware != Ware_Index::Null());
+	} while (ware != INVALID_INDEX);
 
 	throw wexception
 		("Warehouse::launch_worker: worker does not actually exist");
@@ -967,7 +967,7 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 	if (not (worker < m_supply->get_workers().get_nrwareids()))
 		throw wexception
 			("worker type %d does not exists (max is %d)",
-			 worker.value(), m_supply->get_workers().get_nrwareids().value());
+			 worker, m_supply->get_workers().get_nrwareids());
 
 	const Worker_Descr & w_desc = *tribe().get_worker_descr(worker);
 	assert(&w_desc);
@@ -978,7 +978,8 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 	const Worker_Descr::Buildcost & buildcost = w_desc.buildcost();
 	container_iterate_const(Worker_Descr::Buildcost, buildcost, it) {
 		const std::string & input_name = it.current->first;
-		if (Ware_Index id_w = tribe().ware_index(input_name)) {
+		Ware_Index id_w = tribe().ware_index(input_name);
+		if (id_w != INVALID_INDEX) {
 			if (m_supply->stock_wares  (id_w) < it.current->second)
 				return false;
 		} else if ((id_w = tribe().worker_index(input_name))) {
@@ -1002,7 +1003,8 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	const Worker_Descr::Buildcost & buildcost = w_desc.buildcost();
 	container_iterate_const(Worker_Descr::Buildcost, buildcost, i) {
 		const std::string & input = i.current->first;
-		if (Ware_Index const id_ware = tribe().ware_index(input)) {
+		Ware_Index const id_ware = tribe().ware_index(input);
+		if (id_ware != INVALID_INDEX) {
 			remove_wares  (id_ware,                        i.current->second);
 			//update statistic accordingly
 			owner().ware_consumed(id_ware, i.current->second);
@@ -1051,7 +1053,8 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 
 	container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
 		const std::string & input_name = bc.current->first;
-		if (Ware_Index id_w = tribe().ware_index(input_name)) {
+		Ware_Index id_w = tribe().ware_index(input_name);
+		if (id_w != INVALID_INDEX) {
 			available.push_back(get_wares().stock(id_w));
 		} else if ((id_w = tribe().worker_index(input_name))) {
 			available.push_back(get_workers().stock(id_w));
@@ -1103,7 +1106,8 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 		container_iterate_const(Worker_Descr::Buildcost, cost, cost_it) {
 			const std::string & input_name = cost_it.current->first;
 
-			if (Ware_Index id_w = tribe().ware_index(input_name)) {
+			Ware_Index id_w = tribe().ware_index(input_name);
+			if (id_w != INVALID_INDEX) {
 				pw->requests.push_back
 					(new Request
 					 (*this, id_w, &Warehouse::request_cb, wwWARE));
@@ -1139,7 +1143,8 @@ void Warehouse::_update_planned_workers
 		const std::string & input_name = cost_it.current->first;
 		uint32_t supply;
 
-		if (Ware_Index id_w = tribe().ware_index(input_name)) {
+		Ware_Index id_w = tribe().ware_index(input_name);
+		if (id_w != INVALID_INDEX) {
 			supply = m_supply->stock_wares(id_w);
 		} else if ((id_w = tribe().worker_index(input_name))) {
 			supply = m_supply->stock_workers(id_w);
@@ -1269,14 +1274,14 @@ void Warehouse::PlannedWorkers::cleanup()
 
 Warehouse::StockPolicy Warehouse::get_ware_policy(Ware_Index ware) const
 {
-	assert(ware.value() < m_ware_policy.size());
-	return m_ware_policy[ware.value()];
+	assert(ware < m_ware_policy.size());
+	return m_ware_policy[ware];
 }
 
 Warehouse::StockPolicy Warehouse::get_worker_policy(Ware_Index ware) const
 {
-	assert(ware.value() < m_worker_policy.size());
-	return m_worker_policy[ware.value()];
+	assert(ware < m_worker_policy.size());
+	return m_worker_policy[ware];
 }
 
 Warehouse::StockPolicy Warehouse::get_stock_policy
@@ -1291,15 +1296,15 @@ Warehouse::StockPolicy Warehouse::get_stock_policy
 
 void Warehouse::set_ware_policy(Ware_Index ware, Warehouse::StockPolicy policy)
 {
-	assert(ware.value() < m_ware_policy.size());
-	m_ware_policy[ware.value()] = policy;
+	assert(ware < m_ware_policy.size());
+	m_ware_policy[ware] = policy;
 }
 
 void Warehouse::set_worker_policy
 	(Ware_Index ware, Warehouse::StockPolicy policy)
 {
-	assert(ware.value() < m_worker_policy.size());
-	m_worker_policy[ware.value()] = policy;
+	assert(ware < m_worker_policy.size());
+	m_worker_policy[ware] = policy;
 }
 
 /**
@@ -1309,7 +1314,7 @@ void Warehouse::set_worker_policy
 void Warehouse::check_remove_stock(Game & game)
 {
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
-		for (Ware_Index ware = Ware_Index::First(); ware.value() < m_ware_policy.size(); ++ware) {
+		for (Ware_Index ware = 0; ware < m_ware_policy.size(); ++ware) {
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
 
@@ -1318,7 +1323,7 @@ void Warehouse::check_remove_stock(Game & game)
 		}
 	}
 
-	for (Ware_Index widx = Ware_Index::First(); widx.value() < m_worker_policy.size(); ++widx) {
+	for (Ware_Index widx = 0; widx < m_worker_policy.size(); ++widx) {
 		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
 			continue;
 

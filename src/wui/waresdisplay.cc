@@ -69,7 +69,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	                          : m_tribe.get_nrwares(), false),
 	m_selectable(selectable),
 	m_horizontal(horizontal),
-	m_selection_anchor(Widelands::Ware_Index::Null()),
+	m_selection_anchor(Widelands::INVALID_INDEX),
 	m_callback_function(callback_function)
 {
 	// Find out geometry from icons_order
@@ -154,7 +154,7 @@ bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
 		m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers() : m_tribe.get_nrwares();
 
 	bool to_be_selected = !ware_selected(m_selection_anchor);
-	for (Widelands::Ware_Index i = Widelands::Ware_Index::First(); i < number; ++i)
+	for (Widelands::Ware_Index i = 0; i < number; ++i)
 	{
 		if (!m_in_selection[i]) {
 			continue;
@@ -167,7 +167,7 @@ bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
 	}
 
 	// Release anchor, empty selection
-	m_selection_anchor = Widelands::Ware_Index::Null();
+	m_selection_anchor = Widelands::INVALID_INDEX;
 	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
 	return true;
 }
@@ -180,7 +180,7 @@ bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
 Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) const
 {
 	if (x < 0 || y < 0)
-		return Widelands::Ware_Index::Null();
+		return Widelands::INVALID_INDEX;
 
 
 	unsigned int i = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
@@ -197,7 +197,7 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 		}
 	}
 
-	return Widelands::Ware_Index::Null();
+	return Widelands::INVALID_INDEX;
 }
 
 // Update the anchored selection. An anchor has been created by mouse
@@ -287,7 +287,7 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 
 	uint8_t totid = 0;
 	for
-		(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+		(Widelands::Ware_Index id = 0;
 		 id < number;
 		 ++id, ++totid)
 	{
@@ -461,10 +461,7 @@ WaresDisplay::~WaresDisplay()
 
 std::string WaresDisplay::info_for_ware(Widelands::Ware_Index ware) {
 	uint32_t totalstock = 0;
-	for
-		(Widelands::Ware_Index i = Widelands::Ware_Index::First();
-		 i.value() < m_warelists.size();
-		 ++i)
+	for (Widelands::Ware_Index i = 0; i < m_warelists.size(); ++i)
 		totalstock += m_warelists[i]->stock(ware);
 	return boost::lexical_cast<std::string>(totalstock);
 }
@@ -509,4 +506,3 @@ std::string waremap_to_richtext
 			}
 	return ret;
 }
-

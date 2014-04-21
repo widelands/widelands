@@ -126,7 +126,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 	if (lua_isstring(L, 2)) { \
 		std::string what = luaL_checkstring(L, -1); \
 		if (what == "all") { \
-			for (Ware_Index i = Ware_Index::First(); \
+			for (Ware_Index i = 0; \
 					i < tribe.get_nr##type##s (); ++i) \
 				rv.insert(i); \
 		} else { \
@@ -244,7 +244,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 		}
 	}
 
-	if (set.size() == tribe.get_nrworkers().value()) {  // Wants all returned
+	if (set.size() == tribe.get_nrworkers()) {  // Wants all returned
 		set.clear();
 		BOOST_FOREACH(const WorkersMap::value_type& v, valid_workers) {
 			set.insert(v.first);
@@ -1386,7 +1386,7 @@ int L_Flag::get_wares(lua_State * L) {
 
 	WaresMap wares = count_wares_on_flag_(*get(L, get_egbase(L)), tribe);
 
-	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
+	if (wares_set.size() == tribe.get_nrwares()) { // Want all returned
 		wares_set.clear();
 		container_iterate_const(WaresMap, wares, w)
 			wares_set.insert(w->first);
@@ -1924,7 +1924,7 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i)
 		valid_wares.insert(i.current->first);
 
-	if (wares_set.size() == tribe.get_nrwares().value()) // Want all returned
+	if (wares_set.size() == tribe.get_nrwares()) // Want all returned
 		wares_set = valid_wares;
 
 	if (!return_number)

@@ -123,7 +123,7 @@ void find_former_buildings
 			break;
 		}
 		for
-			(Widelands::Building_Index i = Widelands::Building_Index::First();
+			(Widelands::Building_Index i = 0;
 			 i < tribe_descr.get_nrbuildings();
 			 ++i)
 		{
@@ -719,7 +719,7 @@ void Player::enhance_building
  * apart.
  */
 void Player::dismantle_building(Building * building) {
-	_enhance_or_dismantle(building);
+	_enhance_or_dismantle(building, INVALID_INDEX);
 }
 void Player::_enhance_or_dismantle
 	(Building * building, Building_Index const index_of_new_building)
@@ -783,7 +783,7 @@ void Player::flagaction(Flag & flag)
 
 
 void Player::allow_worker_type(Ware_Index const i, bool const allow) {
-	assert(i.value() < m_allowed_worker_types.size());
+	assert(i < m_allowed_worker_types.size());
 	assert(not allow or tribe().get_worker_descr(i)->is_buildable());
 	m_allowed_worker_types[i] = allow;
 }
@@ -795,7 +795,7 @@ void Player::allow_worker_type(Ware_Index const i, bool const allow) {
  * Disable or enable a building for a player
  */
 void Player::allow_building_type(Building_Index const i, bool const allow) {
-	assert(i.value() < m_allowed_building_types.size());
+	assert(i < m_allowed_building_types.size());
 	m_allowed_building_types[i] = allow;
 }
 
@@ -1163,12 +1163,12 @@ void Player::unsee_node
  */
 void Player::sample_statistics()
 {
-	assert (m_ware_productions.size() == tribe().get_nrwares().value());
-	assert (m_ware_consumptions.size() == tribe().get_nrwares().value());
-	assert (m_ware_stocks.size() == tribe().get_nrwares().value());
+	assert (m_ware_productions.size() == tribe().get_nrwares());
+	assert (m_ware_consumptions.size() == tribe().get_nrwares());
+	assert (m_ware_stocks.size() == tribe().get_nrwares());
 
 	//calculate stocks
-	std::vector<uint32_t> stocks(tribe().get_nrwares().value());
+	std::vector<uint32_t> stocks(tribe().get_nrwares());
 
 	const uint32_t nrecos = get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i) {
@@ -1206,8 +1206,8 @@ void Player::sample_statistics()
  * A ware was produced. Update the corresponding statistics.
  */
 void Player::ware_produced(Ware_Index const wareid) {
-	assert (m_ware_productions.size() == tribe().get_nrwares().value());
-	assert(wareid.value() < tribe().get_nrwares().value());
+	assert (m_ware_productions.size() == tribe().get_nrwares());
+	assert(wareid < tribe().get_nrwares());
 
 	++m_current_produced_statistics[wareid];
 }
@@ -1221,8 +1221,8 @@ void Player::ware_produced(Ware_Index const wareid) {
  * \param count the number of consumed wares
  */
 void Player::ware_consumed(Ware_Index const wareid, uint8_t const count) {
-	assert (m_ware_consumptions.size() == tribe().get_nrwares().value());
-	assert(wareid.value() < tribe().get_nrwares().value());
+	assert (m_ware_consumptions.size() == tribe().get_nrwares());
+	assert(wareid < tribe().get_nrwares());
 
 	m_current_consumed_statistics[wareid] += count;
 }
@@ -1234,7 +1234,7 @@ void Player::ware_consumed(Ware_Index const wareid, uint8_t const count) {
 const std::vector<uint32_t> * Player::get_ware_production_statistics
 		(Ware_Index const ware) const
 {
-	assert(ware.value() < m_ware_productions.size());
+	assert(ware < m_ware_productions.size());
 
 	return &m_ware_productions[ware];
 }
@@ -1246,7 +1246,7 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
 const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 		(Ware_Index const ware) const {
 
-	assert(ware.value() < m_ware_consumptions.size());
+	assert(ware < m_ware_consumptions.size());
 
 	return &m_ware_consumptions[ware];
 }
@@ -1254,7 +1254,7 @@ const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 const std::vector<uint32_t> * Player::get_ware_stock_statistics
 		(Ware_Index const ware) const
 {
-	assert(ware.value() < m_ware_stocks.size());
+	assert(ware < m_ware_stocks.size());
 
 	return &m_ware_stocks[ware];
 }
@@ -1275,8 +1275,8 @@ void Player::update_building_statistics
 	Building_Index const nr_buildings = tribe().get_nrbuildings();
 
 	// Get the valid vector for this
-	if (m_building_stats.size() < nr_buildings.value())
-		m_building_stats.resize(nr_buildings.value());
+	if (m_building_stats.size() < nr_buildings)
+		m_building_stats.resize(nr_buildings);
 
 	std::vector<Building_Stats> & stat =
 		m_building_stats[tribe().building_index(building_name.c_str())];
@@ -1351,7 +1351,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 		for (uint16_t i = 0; i < nr_wares; ++i) {
 			std::string name = fr.CString();
 			Ware_Index idx = tribe().ware_index(name);
-			if (!idx) {
+			if (idx == INVALID_INDEX) {
 				log
 					("Player %u statistics: unknown ware name %s",
 					 player_number(), name.c_str());
@@ -1375,7 +1375,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 			for (uint16_t i = 0; i < nr_wares; ++i) {
 				std::string name = fr.CString();
 				Ware_Index idx = tribe().ware_index(name);
-				if (!idx) {
+				if (idx == INVALID_INDEX) {
 					log
 						("Player %u consumption statistics: unknown ware name %s",
 						player_number(), name.c_str());
@@ -1399,7 +1399,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 				for (uint16_t i = 0; i < nr_wares; ++i) {
 					std::string name = fr.CString();
 					Ware_Index idx = tribe().ware_index(name);
-					if (!idx) {
+					if (idx == INVALID_INDEX) {
 						log
 							("Player %u stock statistics: unknown ware name %s",
 							player_number(), name.c_str());
@@ -1416,7 +1416,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 		uint16_t nr_entries = fr.Unsigned16();
 
 		if (nr_wares > 0) {
-			if (nr_wares == tribe().get_nrwares().value()) {
+			if (nr_wares == tribe().get_nrwares()) {
 				assert(m_ware_productions.size() == nr_wares);
 				assert(m_current_produced_statistics.size() == nr_wares);
 
@@ -1432,7 +1432,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 					("Statistics for player %u (%s) has %u ware types "
 					 "(should be %u). Statistics will be discarded.",
 					 player_number(), tribe().name().c_str(),
-					 nr_wares, tribe().get_nrwares().value());
+					 nr_wares, tribe().get_nrwares());
 
 				// Eat and discard all data
 				for (uint32_t i = 0; i < nr_wares; ++i) {
@@ -1490,8 +1490,7 @@ void Player::WriteStatistics(FileWrite & fw) const {
 
 	for (uint8_t i = 0; i < m_current_produced_statistics.size(); ++i) {
 		fw.CString
-			(tribe().get_ware_descr
-			 (Ware_Index(static_cast<Ware_Index::value_t>(i)))->name());
+			(tribe().get_ware_descr(i)->name());
 		fw.Unsigned32(m_current_produced_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
 			fw.Unsigned32(m_ware_productions[i][j]);
@@ -1503,8 +1502,7 @@ void Player::WriteStatistics(FileWrite & fw) const {
 
 	for (uint8_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
 		fw.CString
-			(tribe().get_ware_descr
-			 (Ware_Index(static_cast<Ware_Index::value_t>(i)))->name());
+			(tribe().get_ware_descr(i)->name());
 		fw.Unsigned32(m_current_consumed_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_consumptions[i].size(); ++j)
 			fw.Unsigned32(m_ware_consumptions[i][j]);
@@ -1515,9 +1513,7 @@ void Player::WriteStatistics(FileWrite & fw) const {
 	fw.Unsigned16(m_ware_stocks[0].size());
 
 	for (uint8_t i = 0; i < m_ware_stocks.size(); ++i) {
-		fw.CString
-			(tribe().get_ware_descr
-			 (Ware_Index(static_cast<Ware_Index::value_t>(i)))->name());
+		fw.CString(tribe().get_ware_descr(i)->name());
 		for (uint32_t j = 0; j < m_ware_stocks[i].size(); ++j)
 			fw.Unsigned32(m_ware_stocks[i][j]);
 	}

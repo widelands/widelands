@@ -239,11 +239,11 @@ private:
 	AnimationStyles   m_anim_flag;
 	uint32_t m_bob_vision_range;
 
-	IndexedDescriptionMaintainer<Worker_Descr, Ware_Index>    m_workers;
-	IndexedDescriptionMaintainer<Building_Descr, Building_Index>  m_buildings;
-	IndexedDescriptionMaintainer<WareDescr, Ware_Index> m_wares;
+	DescriptionMaintainer<Worker_Descr> m_workers;
+	DescriptionMaintainer<Building_Descr> m_buildings;
+	DescriptionMaintainer<WareDescr> m_wares;
 	DescriptionMaintainer<Immovable_Descr> m_immovables;  // The player immovables
-	DescriptionMaintainer<BobDescr>      m_bobs;
+	DescriptionMaintainer<BobDescr> m_bobs;
 	std::string                       m_carrier2;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;

@@ -110,7 +110,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 
 	const Widelands::Tribe_Descr & tribe = player.tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
+	for (Building_Index i = 0; i < nr_buildings; ++i) {
 		const Widelands::Building_Descr & building =
 			*tribe.get_building_descr(i);
 		if (not building.is_enhanced() and not building.is_buildable())

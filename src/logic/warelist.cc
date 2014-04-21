@@ -46,8 +46,8 @@ void WareList::add(Ware_Index const i, const count_type count) {
 	if (!count)
 		return;
 
-	if (m_wares.size() <= i.value())
-		m_wares.resize(i.value() + 1, 0);
+	if (m_wares.size() <= i)
+		m_wares.resize(i + 1, 0);
 	m_wares[i] += count;
 	assert(m_wares[i] >= count);
 
@@ -58,9 +58,9 @@ void WareList::add(Ware_Index const i, const count_type count) {
 void WareList::add(const WareList & wl)
 {
 	Ware_Index const nr_wares = wl.get_nrwareids();
-	if (m_wares.size() < nr_wares.value())
-		m_wares.reserve(nr_wares.value());
-	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i)
+	if (m_wares.size() < nr_wares)
+		m_wares.reserve(nr_wares);
+	for (Ware_Index i = 0; i < nr_wares; ++i)
 		if (wl.m_wares[i])
 			add(i, wl.m_wares[i]);
 }
@@ -73,7 +73,7 @@ void WareList::remove(Ware_Index const i, const count_type count) {
 	if (!count)
 		return;
 
-	assert(i.value() < m_wares.size());
+	assert(i < m_wares.size());
 	assert(m_wares[i] >= count);
 	m_wares[i] -= count;
 
@@ -84,7 +84,7 @@ void WareList::remove(Ware_Index const i, const count_type count) {
 void WareList::remove(const WareList & wl)
 {
 	Ware_Index const nr_wares = wl.get_nrwareids();
-	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i)
+	for (Ware_Index i = 0; i < nr_wares; ++i)
 		if (wl.m_wares[i])
 			remove(i, wl.m_wares[i]);
 }
@@ -93,7 +93,7 @@ void WareList::remove(const WareList & wl)
  * Return the number of wares of a given type stored in this storage.
  */
 WareList::count_type WareList::stock(Ware_Index const id) const {
-	return id.value() < m_wares.size() ? m_wares[id] : 0;
+	return id < m_wares.size() ? m_wares[id] : 0;
 }
 
 

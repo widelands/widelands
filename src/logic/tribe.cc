@@ -229,7 +229,7 @@ Tribe_Descr::Tribe_Descr
 \
 		/* Check that every ##w## has been added */ \
 		for \
-			(Ware_Index id = Ware_Index::First(); \
+			(Ware_Index id = 0; \
 			 id < m_##w##s.get_nitems(); ++id) { \
 			if (id != m_ ## w ## s_order[m_ ## w ## s_order_coords[id].first] \
 					[m_##w##s_order_coords[id].second]) { \
@@ -323,14 +323,14 @@ Load tribe graphics
 */
 void Tribe_Descr::load_graphics()
 {
-	for (Ware_Index i = Ware_Index::First(); i < m_workers.get_nitems(); ++i)
+	for (Ware_Index i = 0; i < m_workers.get_nitems(); ++i)
 		m_workers.get(i)->load_graphics();
 
-	for (Ware_Index i = Ware_Index::First(); i < m_wares.get_nitems  (); ++i)
+	for (Ware_Index i = 0; i < m_wares.get_nitems  (); ++i)
 		m_wares.get(i)->load_graphics();
 
 	for
-		(Building_Index i = Building_Index::First();
+		(Building_Index i = 0;
 		 i < m_buildings.get_nitems();
 		 ++i)
 		m_buildings.get(i)->load_graphics();
@@ -541,8 +541,7 @@ Building_Index Tribe_Descr::safe_building_index
 	(char const * const buildingname) const
 {
 	Building_Index const result = building_index(buildingname);
-
-	if (not result)
+	if (result == INVALID_INDEX)
 		throw game_data_error
 			("tribe %s does not define building type \"%s\"",
 			 name().c_str(), buildingname);
