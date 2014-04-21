@@ -20,27 +20,6 @@
 #ifndef CONTAINER_ITERATE_H
 #define CONTAINER_ITERATE_H
 
-// Helper structure for representing an integer or Index range in
-// for loops.
-// Usage:
-// for (wl_index_range<int> i(1, 10);i;++i)
-//     std::cout << i.current;
-//
-template<typename T>
-struct wl_index_range
-{
-	wl_index_range(const T & beginIndex, const T & endIndex) : current(beginIndex), end(endIndex) {}
-	wl_index_range(const wl_index_range & r) : current(r.current), end(r.end) {}
-	wl_index_range(T & r) : current(r.begin()), end(r.end()) {}
-	T current;
-	wl_index_range & operator++() {++current; return *this;}
-	bool empty() const {return current == end;}
-	operator bool() const {return empty() ? false : true;}
-private:
-	T end;
-};
-
-
 // Helper structure for representing an iterator range in
 // for loops.
 // Usage:

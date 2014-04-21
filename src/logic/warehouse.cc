@@ -272,17 +272,6 @@ IMPLEMENTATION
 ==============================
 */
 
-#define SET_WORKER_WITHOUT_COST_SPAWNS(nr, value)                             \
-   for                                                                        \
-      (wl_index_range<uint32_t *>                                             \
-       i(                                                                     \
-          m_next_worker_without_cost_spawn,                                   \
-          m_next_worker_without_cost_spawn + nr                               \
-		);                                                                      \
-       i;                                                                     \
-       ++i)                                                                   \
-      *i.current = value;                                                     \
-
 Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
 	Building(warehouse_descr),
 	m_supply(new WarehouseSupply(this)),
@@ -293,8 +282,9 @@ Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
 		warehouse_descr.tribe().worker_types_without_cost().size();
 	m_next_worker_without_cost_spawn =
 		new uint32_t[nr_worker_types_without_cost];
-	SET_WORKER_WITHOUT_COST_SPAWNS(nr_worker_types_without_cost, Never());
-
+	for (int i = 0; i < nr_worker_types_without_cost; ++i) {
+		m_next_worker_without_cost_spawn[i] = Never();
+	}
 	m_next_stock_remove_act = 0;
 }
 
@@ -445,14 +435,11 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			const std::vector<Ware_Index> & worker_types_without_cost =
 				tribe().worker_types_without_cost();
 
-			for
-				(wl_index_range<uint32_t> i
-				(0, worker_types_without_cost.size());
-				i; ++i)
-				if
-					(owner().is_worker_type_allowed
-						(worker_types_without_cost.at(i.current)))
-					m_next_worker_without_cost_spawn[i.current] = act_time;
+			for (size_t i = 0; i < worker_types_without_cost.size(); ++i) {
+				if (owner().is_worker_type_allowed(worker_types_without_cost.at(i))) {
+					m_next_worker_without_cost_spawn[i] = act_time;
+				}
+			}
 		}
 		// m_next_military_act is not touched in the loading code. Is only needed
 		// if there warehous is created in the game?  I assume it's for the
