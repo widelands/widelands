@@ -67,11 +67,11 @@ struct BuildGrid : public UI::Icon_Grid {
 	          int32_t y,
 	          int32_t cols);
 
-	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildclicked;
-	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildmouseout;
-	boost::signals2::signal<void(Widelands::Building_Index::value_t)> buildmousein;
+	boost::signals2::signal<void(Widelands::Building_Index)> buildclicked;
+	boost::signals2::signal<void(Widelands::Building_Index)> buildmouseout;
+	boost::signals2::signal<void(Widelands::Building_Index)> buildmousein;
 
-	void add(Widelands::Building_Index::value_t);
+	void add(Widelands::Building_Index);
 
 private:
 	void clickslot(int32_t idx);
@@ -100,7 +100,7 @@ BuildGrid::BuildGrid(
 Add a new building to the list of buildable buildings
 ===============
 */
-void BuildGrid::add(Widelands::Building_Index::value_t id)
+void BuildGrid::add(Widelands::Building_Index id)
 {
 	const Widelands::Building_Descr & descr =
 		*tribe_.get_building_descr(Widelands::Building_Index(id));
@@ -198,9 +198,9 @@ public:
 	void act_buildroad();
 	void act_abort_buildroad();
 	void act_removeroad();
-	void act_build              (Widelands::Building_Index::value_t);
-	void building_icon_mouse_out(Widelands::Building_Index::value_t);
-	void building_icon_mouse_in (Widelands::Building_Index::value_t);
+	void act_build              (Widelands::Building_Index);
+	void building_icon_mouse_out(Widelands::Building_Index);
+	void building_icon_mouse_in (Widelands::Building_Index);
 	void act_geologist();
 	void act_attack();      /// Launch the attack
 
@@ -524,7 +524,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& pla
 
 	const Widelands::Building_Index nr_buildings = tribe.get_nrbuildings();
 	for
-		(Widelands::Building_Index id = Widelands::Building_Index::First();
+		(Widelands::Building_Index id = 0;
 		 id < nr_buildings;
 		 ++id)
 	{
@@ -571,7 +571,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& pla
 		}
 
 		// Add it to the grid
-		(*ppgrid)->add(id.value());
+		(*ppgrid)->add(id);
 	}
 
 	// Add all necessary tabs
@@ -820,7 +820,7 @@ void FieldActionWindow::act_removeroad()
 Start construction of the building with the give description index
 ===============
 */
-void FieldActionWindow::act_build(Widelands::Building_Index::value_t idx)
+void FieldActionWindow::act_build(Widelands::Building_Index idx)
 {
 	Widelands::Game & game = ref_cast<Game, Editor_Game_Base>(ibase().egbase());
 	game.send_player_build
@@ -836,7 +836,7 @@ void FieldActionWindow::act_build(Widelands::Building_Index::value_t idx)
 
 
 void FieldActionWindow::building_icon_mouse_out
-	(Widelands::Building_Index::value_t)
+	(Widelands::Building_Index)
 {
 	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
@@ -846,7 +846,7 @@ void FieldActionWindow::building_icon_mouse_out
 
 
 void FieldActionWindow::building_icon_mouse_in
-	(const Widelands::Building_Index::value_t idx)
+	(const Widelands::Building_Index idx)
 {
 	if (ibase().m_show_workarea_preview and not m_workarea_preview_job_id) {
 		const Workarea_Info & workarea_info =

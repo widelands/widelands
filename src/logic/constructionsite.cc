@@ -106,7 +106,7 @@ WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
 	}
 	throw wexception
 		("%s (%u) (building %s) has no WaresQueue for %u",
-		 name().c_str(), serial(), m_building->name().c_str(), wi.value());
+		 name().c_str(), serial(), m_building->name().c_str(), wi);
 }
 
 

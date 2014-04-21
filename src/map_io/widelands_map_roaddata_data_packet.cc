@@ -159,7 +159,7 @@ void Map_Roaddata_Data_Packet::Read
 							(carrier_request =
 							 	new Request
 							 		(road,
-							 		 Ware_Index::First(),
+							 		 0,
 							 		 Road::_request_carrier_callback,
 							 		 wwWORKER))
 							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);

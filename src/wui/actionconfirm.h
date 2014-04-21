@@ -20,11 +20,12 @@
 #ifndef _ACTIONCONFIRM_H_
 #define _ACTIONCONFIRM_H_
 
+#include "logic/widelands.h"
+
 class Interactive_Player;
 
 namespace Widelands {
 class Building;
-struct Building_Index;
 struct PlayerImmovable;
 struct Ship;
 }

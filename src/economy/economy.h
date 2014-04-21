@@ -157,16 +157,16 @@ public:
 	bool needs_worker(Ware_Index) const;
 
 	const Target_Quantity & ware_target_quantity  (Ware_Index const i) const {
-		return m_ware_target_quantities[i.value()];
+		return m_ware_target_quantities[i];
 	}
 	Target_Quantity       & ware_target_quantity  (Ware_Index const i)       {
-		return m_ware_target_quantities[i.value()];
+		return m_ware_target_quantities[i];
 	}
 	const Target_Quantity & worker_target_quantity(Ware_Index const i) const {
-		return m_worker_target_quantities[i.value()];
+		return m_worker_target_quantities[i];
 	}
 	Target_Quantity       & worker_target_quantity(Ware_Index const i)       {
-		return m_worker_target_quantities[i.value()];
+		return m_worker_target_quantities[i];
 	}
 
 	void show_options_window();

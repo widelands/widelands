@@ -145,7 +145,7 @@ int L_Player::get_allowed_buildings(lua_State * L) {
 
 	lua_newtable(L);
 	for
-		(Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i)
+		(Building_Index i = 0; i < t.get_nrbuildings(); ++i)
 	{
 		lua_pushstring(L, t.get_building_descr(i)->name().c_str());
 		lua_pushboolean(L, p.is_building_type_allowed(i));
@@ -822,7 +822,7 @@ int L_Player::get_suitability(lua_State * L) {
 
 	const char * name = luaL_checkstring(L, 2);
 	Building_Index i = tribe.building_index(name);
-	if (i == Building_Index::Null())
+	if (i == INVALID_INDEX)
 		report_error(L, "Unknown building type: <%s>", name);
 
 	lua_pushint32
@@ -853,7 +853,7 @@ int L_Player::allow_workers(lua_State * L) {
 	const std::vector<Ware_Index> & worker_types_without_cost =
 		tribe.worker_types_without_cost();
 
-	for (Ware_Index i = Ware_Index::First(); i < tribe.get_nrworkers(); ++i) {
+	for (Ware_Index i = 0; i < tribe.get_nrworkers(); ++i) {
 		const Worker_Descr & worker_descr = *tribe.get_worker_descr(i);
 		if (not worker_descr.is_buildable())
 			continue;
@@ -918,7 +918,7 @@ void L_Player::m_parse_building_list
 		if (opt != "all")
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		for
-			(Building_Index i = Building_Index::First();
+			(Building_Index i = 0;
 			 i < tribe.get_nrbuildings(); ++i)
 				rv.push_back(i);
 	} else {
@@ -929,7 +929,7 @@ void L_Player::m_parse_building_list
 		while (lua_next(L, -2) != 0) {
 			const char * name = luaL_checkstring(L, -1);
 			Building_Index i = tribe.building_index(name);
-			if (i == Building_Index::Null())
+			if (i == INVALID_INDEX)
 				report_error(L, "Unknown building type: '%s'", name);
 
 			rv.push_back(i);

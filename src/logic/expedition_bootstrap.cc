@@ -271,7 +271,7 @@ void ExpeditionBootstrap::load
 		workers_.emplace_back(new ExpeditionWorker(nullptr));
 		if (fr.Unsigned8() == 1) {
 			Request* worker_request = new Request
-			  (warehouse, Ware_Index::First(), ExpeditionBootstrap::worker_callback, wwWORKER);
+			  (warehouse, 0, ExpeditionBootstrap::worker_callback, wwWORKER);
 			workers_.back()->request.reset(worker_request);
 			worker_request->Read(fr, game, mol);
 			workers_.back()->worker = nullptr;
@@ -284,11 +284,11 @@ void ExpeditionBootstrap::load
 	assert(wares_.empty());
 	const uint8_t num_wares = fr.Unsigned8();
 	for (uint8_t i = 0; i < num_wares; ++i) {
-		WaresQueue * wq = new WaresQueue(warehouse, Ware_Index::Null(), 0);
+		WaresQueue * wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
 		wq->Read(fr, game, mol);
 		wq->set_callback(ware_callback, this);
 
-		if (!wq->get_ware()) {
+		if (wq->get_ware() == INVALID_INDEX) {
 			delete wq;
 		} else {
 			wares_.emplace_back(wq);

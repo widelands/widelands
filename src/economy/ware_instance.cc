@@ -155,8 +155,8 @@ WareInstance & IdleWareSupply::launch_ware(Game &, const Request & req) {
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
 			 m_ware.serial(),
-			 m_ware.descr_index().value(),
-			 req.get_index().value());
+			 m_ware.descr_index(),
+			 req.get_index());
 
 	return m_ware;
 }
@@ -192,7 +192,7 @@ m_transfer   (nullptr)
 WareInstance::~WareInstance()
 {
 	if (m_supply) {
-		molog("Ware %u still has supply %p\n", m_descr_index.value(), m_supply);
+		molog("Ware %u still has supply %p\n", m_descr_index, m_supply);
 		delete m_supply;
 	}
 }
@@ -227,7 +227,7 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 */
 void WareInstance::set_economy(Economy * const e)
 {
-	if (m_descr_index == Ware_Index::Null() or m_economy == e)
+	if (m_descr_index == INVALID_INDEX or m_economy == e)
 		return;
 
 	if (m_economy)
