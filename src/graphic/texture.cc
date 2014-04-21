@@ -20,7 +20,6 @@
 #include "graphic/texture.h"
 
 #include <SDL_image.h>
-#include <boost/foreach.hpp>
 
 #include "constants.h"
 #include "container_iterate.h"

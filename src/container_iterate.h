@@ -20,27 +20,6 @@
 #ifndef CONTAINER_ITERATE_H
 #define CONTAINER_ITERATE_H
 
-// Helper structure for representing an integer or Index range in
-// for loops.
-// Usage:
-// for (wl_index_range<int> i(1, 10);i;++i)
-//     std::cout << i.current;
-//
-template<typename T>
-struct wl_index_range
-{
-	wl_index_range(const T & beginIndex, const T & endIndex) : current(beginIndex), end(endIndex) {}
-	wl_index_range(const wl_index_range & r) : current(r.current), end(r.end) {}
-	wl_index_range(T & r) : current(r.begin()), end(r.end()) {}
-	T current;
-	wl_index_range & operator++() {++current; return *this;}
-	bool empty() const {return current == end;}
-	operator bool() const {return empty() ? false : true;}
-private:
-	T end;
-};
-
-
 // Helper structure for representing an iterator range in
 // for loops.
 // Usage:
@@ -97,19 +76,6 @@ struct wl_const_range
 private:
 	typename C::const_iterator end;
 };
-
-// helper for erasing element in range so that range stays valid.
-// temporary variable ensures that end() is evaluated after erase().
-// Returns new range with updated end points.
-// This function could also reside within wl_range class, but
-// that would still require passing container in.
-template <class C>
-wl_range<C>
-wl_erase(C & c, typename C::iterator & w)
-{
-	typename C::iterator it = c.erase(w);
-	return wl_range< C >(it, c.end());
-}
 
 #define container_iterate_const(type, container, i)                           \
 	for                                                                       \

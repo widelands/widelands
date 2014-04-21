@@ -34,7 +34,7 @@ template <typename T> struct DescriptionMaintainer {
 	int32_t add(T* entry);
 
 	// Returns the number of entries in the container.
-	typename T::Index get_nitems() const {return items_.size();}
+	size_t get_nitems() const {return items_.size();}
 
 	// Returns the entry with the given 'name' if it exists or nullptr.
 	T* exists(const std::string& name) const;
@@ -42,6 +42,7 @@ template <typename T> struct DescriptionMaintainer {
 	// Returns the index of the entry with the given 'name' or -1 if the entry
 	// is not in the container.
 	int32_t get_index(const std::string& name) const {
+		// TODO(sirver): this should return INVALID_INDEX
 		NameToIndexMap::const_iterator i = name_to_index_.find(name);
 		if (i == name_to_index_.end())
 			return -1;
@@ -77,28 +78,5 @@ template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& nam
 	if (index < 0) return nullptr;
 	return items_[index].get();
 }
-
-/// This template is used to have a typesafe maintainer for Bob_Descr,
-/// Worker_Descr and so on. This version uses boxed Index type for indexing.
-/// Usage: IndexedDescriptionMaintainer<Worker_Descr, Ware_Index> workers;
-template <typename T, typename T_Index>
-struct IndexedDescriptionMaintainer : private DescriptionMaintainer<T> {
-	T* exists(const std::string& name) {
-		return DescriptionMaintainer<T>::exists(name);
-	}
-	T_Index add(T* const t) {
-		return T_Index(static_cast<typename T_Index::value_t>(DescriptionMaintainer<T>::add(t)));
-	}
-	T_Index get_nitems() const {
-		return T_Index(DescriptionMaintainer<T>::get_nitems());
-	}
-	T_Index get_index(const std::string& name) const {
-		int32_t idx = DescriptionMaintainer<T>::get_index(name);
-		return idx == -1 ? T_Index::Null() : T_Index(static_cast<typename T_Index::value_t>(idx));
-	}
-	T* get(T_Index const idx) const {
-		return idx ? DescriptionMaintainer<T>::get(idx.value()) : nullptr;
-	}
-};
 
 #endif

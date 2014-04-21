@@ -22,8 +22,6 @@
 #include <cstdio>
 #include <sstream>
 
-#include <boost/foreach.hpp>
-
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "graphic/font.h"
@@ -106,7 +104,8 @@ Building_Descr::Building_Descr
 				throw wexception("enhancement to same type");
 			if (target_name == "constructionsite")
 				throw wexception("enhancement to special type constructionsite");
-			if (Building_Index const en_i = tribe().building_index(target_name)) {
+			Building_Index const en_i = tribe().building_index(target_name);
+			if (en_i != INVALID_INDEX) {
 				if (enhancements().count(en_i))
 					throw wexception("this has already been declared");
 				m_enhancements.insert(en_i);
@@ -193,7 +192,7 @@ Building & Building_Descr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	BOOST_FOREACH(Building_Index idx, former_buildings) {
+	for (Building_Index idx : former_buildings) {
 		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {
@@ -285,39 +284,43 @@ Building::~Building()
 }
 
 void Building::load_finish(Editor_Game_Base & egbase) {
-	Leave_Queue & queue = m_leave_queue;
-	for (wl_range<Leave_Queue> i(queue); i;)
-	{
-		Worker & worker = *i->get(egbase);
-		{
-			OPtr<PlayerImmovable> const worker_location = worker.get_location();
-			if
-				(worker_location.serial() !=             serial() and
-				 worker_location.serial() != base_flag().serial())
-				log
-					("WARNING: worker %u is in the leave queue of building %u with "
-					 "base flag %u but is neither inside the building nor at the "
-					 "flag!\n",
-					 worker.serial(), serial(), base_flag().serial());
+	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& optr) {
+		Worker & worker = *optr.get(egbase);
+		OPtr<PlayerImmovable> const worker_location = worker.get_location();
+		if (worker_location.serial() != serial() &&
+		    worker_location.serial() != base_flag().serial()) {
+			log("WARNING: worker %u is in the leave queue of building %u with "
+			    "base flag %u but is neither inside the building nor at the "
+			    "flag!\n",
+			    worker.serial(),
+			    serial(),
+			    base_flag().serial());
+			return true;
 		}
-		Bob::State const * const state =
-			worker.get_state(Worker::taskLeavebuilding);
-		if (not state)
+
+		Bob::State const* const state = worker.get_state(Worker::taskLeavebuilding);
+		if (not state) {
 			log
 				("WARNING: worker %u is in the leave queue of building %u but "
 				 "does not have a leavebuilding task! Removing from queue.\n",
 				 worker.serial(), serial());
-		else if (state->objvar1 != this)
-			log
-				("WARNING: worker %u is in the leave queue of building %u but its "
-				 "leavebuilding task is for map object %u! Removing from queue.\n",
-				 worker.serial(), serial(), state->objvar1.serial());
-		else {
-			++i;
-			continue;
+			return true;
 		}
-		i = wl_erase(queue, i.current);
-	}
+
+		if (state->objvar1 != this) {
+			log("WARNING: worker %u is in the leave queue of building %u but its "
+			    "leavebuilding task is for map object %u! Removing from queue.\n",
+			    worker.serial(),
+			    serial(),
+			    state->objvar1.serial());
+			return true;
+		}
+		return false;
+	};
+
+	m_leave_queue.erase(
+	   std::remove_if(m_leave_queue.begin(), m_leave_queue.end(), should_be_deleted),
+	   m_leave_queue.end());
 }
 
 int32_t Building::get_type() const {return BUILDING;}
@@ -447,7 +450,7 @@ void Building::cleanup(Editor_Game_Base & egbase)
 
 	PlayerImmovable::cleanup(egbase);
 
-	BOOST_FOREACH(boost::signals2::connection& c, options_window_connections)
+	for (boost::signals2::connection& c : options_window_connections)
 		c.disconnect();
 }
 
@@ -595,9 +598,7 @@ std::string Building::get_statistics_string()
 
 
 WaresQueue & Building::waresqueue(Ware_Index const wi) {
-	throw wexception
-		("%s (%u) has no WaresQueue for %u",
-		 name().c_str(), serial(), wi.value());
+	throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
 }
 
 /*

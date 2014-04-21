@@ -226,7 +226,7 @@ const DescriptionMaintainer<EditorCategory>& World::editor_categories() const {
 int32_t World::safe_resource_index(const char* const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
-	if (result == -1)
+	if (result == INVALID_INDEX)
 		throw game_data_error("world does not define resource type \"%s\"", resourcename);
 	return result;
 }
@@ -241,7 +241,7 @@ TerrainDescription& World::terrain_descr(Terrain_Index const i) const {
 
 TerrainDescription const* World::get_ter(char const* const name) const {
 	int32_t const i = terrains_->get_index(name);
-	return i != -1 ? terrains_->get(i) : nullptr;
+	return i != INVALID_INDEX ? terrains_->get(i) : nullptr;
 }
 
 int32_t World::get_bob(char const* const l) const {

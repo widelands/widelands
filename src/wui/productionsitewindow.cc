@@ -172,7 +172,7 @@ void ProductionSite_Window::update_worker_table()
 					and
 					worker->get_needed_experience () != -1)
 			{
-				assert(worker->becomes());
+				assert(worker->becomes() != Widelands::INVALID_INDEX);
 
 				// Fill upgrade status
 				char buffer[7];

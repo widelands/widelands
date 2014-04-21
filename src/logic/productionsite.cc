@@ -64,11 +64,12 @@ ProductionSite_Descr::ProductionSite_Descr
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
-			if (Ware_Index idx = tribe().ware_index(op->get_string())) {
+			Ware_Index idx = tribe().ware_index(op->get_string());
+			if (idx != INVALID_INDEX) {
 				if (m_output_ware_types.count(idx))
 					throw wexception("this ware type has already been declared as an output");
 				m_output_ware_types.insert(idx);
-			} else if ((idx = tribe().worker_index(op->get_string()))) {
+			} else if ((idx = tribe().worker_index(op->get_string())) != INVALID_INDEX) {
 				if (m_output_worker_types.count(idx))
 					throw wexception("this worker type has already been declared as an output");
 				m_output_worker_types.insert(idx);
@@ -81,7 +82,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	if (Section * const s = prof.get_section("inputs"))
 		while (Section::Value const * const val = s->get_next_val())
 			try {
-				if (Ware_Index const idx = tribe().ware_index(val->get_name())) {
+				Ware_Index const idx = tribe().ware_index(val->get_name());
+				if (idx != INVALID_INDEX) {
 					container_iterate_const(BillOfMaterials, inputs(), i)
 						if (i.current->first == idx)
 							throw wexception("duplicated");
@@ -101,7 +103,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	if (Section * const working_positions_s = prof.get_section("working positions"))
 		while (Section::Value const * const v = working_positions_s->get_next_val())
 			try {
-				if (Ware_Index const woi = tribe().worker_index(v->get_name())) {
+				Ware_Index const woi = tribe().worker_index(v->get_name());
+				if (woi != INVALID_INDEX) {
 					container_iterate_const(BillOfMaterials, working_positions(), i)
 						if (i.current->first == woi)
 							throw wexception("duplicated");
@@ -225,7 +228,7 @@ std::string ProductionSite::get_statistics_string()
 
 /**
  * Detect if the workers are experienced enough for an upgrade
- * @param idx Index of the enhanchement
+ * @param idx Index of the enhancement
  */
 bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {
@@ -256,9 +259,7 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
 	container_iterate_const(Input_Queues, m_input_queues, i)
 		if ((*i.current)->get_ware() == wi)
 			return **i.current;
-	throw wexception
-		("%s (%u) has no WaresQueue for %u",
-		 name().c_str(), serial(), wi.value());
+	   throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
 }
 
 /**

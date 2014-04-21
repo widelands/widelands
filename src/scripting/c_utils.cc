@@ -116,6 +116,6 @@ void report_error(lua_State * L, const char * const fmt, ...) {
 	lua_pushinteger(L, 2);  /* skip this function and traceback */
 	lua_call(L, 2, 1);  /* call debug.traceback */
 
-	lua_error(L);
-	// lua_error never returns.
+	lua_error(L); // lua_error never returns.
+	throw LuaError("This shuts up a clang warning. But we are never here.");
 }

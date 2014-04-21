@@ -125,18 +125,14 @@ Tribe_Descr::Tribe_Descr
 					(new ConstructionSite_Descr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
-			if (not safe_building_index("constructionsite"))
-				throw game_data_error
-					("constructionsite type \"constructionsite\" is missing");
+			safe_building_index("constructionsite"); // Check that it is defined.
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
 				m_buildings.add
 					(new DismantleSite_Descr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
-			if (not safe_building_index("dismantlesite"))
-				throw game_data_error
-					("dismantlesite type \"distmantlesite\" is missing");
+			safe_building_index("dismantlesite"); // Check that it is defined.
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
@@ -230,7 +226,7 @@ Tribe_Descr::Tribe_Descr
 \
 		/* Check that every ##w## has been added */ \
 		for \
-			(Ware_Index id = Ware_Index::First(); \
+			(Ware_Index id = 0; \
 			 id < m_##w##s.get_nitems(); ++id) { \
 			if (id != m_ ## w ## s_order[m_ ## w ## s_order_coords[id].first] \
 					[m_##w##s_order_coords[id].second]) { \
@@ -325,14 +321,14 @@ Load tribe graphics
 */
 void Tribe_Descr::load_graphics()
 {
-	for (Ware_Index i = Ware_Index::First(); i < m_workers.get_nitems(); ++i)
+	for (Ware_Index i = 0; i < m_workers.get_nitems(); ++i)
 		m_workers.get(i)->load_graphics();
 
-	for (Ware_Index i = Ware_Index::First(); i < m_wares.get_nitems  (); ++i)
+	for (Ware_Index i = 0; i < m_wares.get_nitems  (); ++i)
 		m_wares.get(i)->load_graphics();
 
 	for
-		(Building_Index i = Building_Index::First();
+		(Building_Index i = 0;
 		 i < m_buildings.get_nitems();
 		 ++i)
 		m_buildings.get(i)->load_graphics();
@@ -494,47 +490,28 @@ uint32_t Tribe_Descr::get_resource_indicator
  * Return the given ware or die trying
  */
 Ware_Index Tribe_Descr::safe_ware_index(const std::string & warename) const {
-	if (Ware_Index const result = ware_index(warename))
-		return result;
-	else
+	const Ware_Index result = ware_index(warename);
+	if (result == INVALID_INDEX) {
 		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
-}
-Ware_Index Tribe_Descr::safe_ware_index(const char * const warename) const {
-	if (Ware_Index const result = ware_index(warename))
-		return result;
-	else
-		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename);
+	}
+	return result;
 }
 
 Ware_Index Tribe_Descr::ware_index(const std::string & warename) const {
 	Ware_Index const wi = m_wares.get_index(warename);
 	return wi;
 }
-Ware_Index Tribe_Descr::ware_index(char const * const warename) const {
-	Ware_Index const wi = m_wares.get_index(warename);
-	return wi;
-}
-
 
 /*
  * Return the given worker or die trying
  */
-Ware_Index Tribe_Descr::safe_worker_index(const std::string & workername) const
-{
-	if (Ware_Index const result = worker_index(workername))
-		return result;
-	else
-		throw game_data_error
-			("tribe %s does not define worker type \"%s\"",
-			 name().c_str(), workername.c_str());
-}
-Ware_Index Tribe_Descr::safe_worker_index(const char * const workername) const {
-	if (Ware_Index const result = worker_index(workername))
-		return result;
-	else
-		throw game_data_error
-			("tribe %s does not define worker type \"%s\"",
-			 name().c_str(), workername);
+Ware_Index Tribe_Descr::safe_worker_index(const std::string& workername) const {
+const Ware_Index result = worker_index(workername);
+	if (result == INVALID_INDEX) {
+		throw game_data_error(
+		   "tribe %s does not define worker type \"%s\"", name().c_str(), workername.c_str());
+	}
+	return result;
 }
 
 /*
@@ -543,12 +520,12 @@ Ware_Index Tribe_Descr::safe_worker_index(const char * const workername) const {
 Building_Index Tribe_Descr::safe_building_index
 	(char const * const buildingname) const
 {
-	Building_Index const result = building_index(buildingname);
-
-	if (not result)
+	const Building_Index result = building_index(buildingname);
+	if (result == INVALID_INDEX) {
 		throw game_data_error
 			("tribe %s does not define building type \"%s\"",
 			 name().c_str(), buildingname);
+	}
 	return result;
 }
 

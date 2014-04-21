@@ -138,7 +138,7 @@ public:
 	/// experience from. It may cause him to change his type so that he becomes
 	/// overqualified for his current working position and can be replaced.
 	/// If so, his old Ware_Index is returned so that the calling code can
-	/// request a new worker of his old type. Otherwise Ware_Index::Null is
+	/// request a new worker of his old type. Otherwise INVALID_INDEX is
 	/// returned.
 	Ware_Index gain_experience   (Game &);
 

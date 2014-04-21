@@ -1260,7 +1260,7 @@ bool Immovable::construct_ware(Game & game, Ware_Index index)
 	if (!d)
 		return false;
 
-	molog("construct_ware: index %u", index.value());
+	molog("construct_ware: index %u", index);
 
 	Buildcost::iterator it = d->delivered.find(index);
 	if (it != d->delivered.end())
@@ -1271,7 +1271,7 @@ bool Immovable::construct_ware(Game & game, Ware_Index index)
 	m_anim_construction_done = d->delivered.total();
 	m_animstart = game.get_gametime();
 
-	molog("construct_ware: total %u delivered: %u", index.value(), d->delivered[index]);
+	molog("construct_ware: total %u delivered: %u", index, d->delivered[index]);
 
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
@@ -1410,7 +1410,7 @@ void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
 {
 	throw wexception
 		("MO(%u): Received a ware(%u), do not know what to do with it",
-		 serial(), ware.value());
+		 serial(), ware);
 }
 
 /**

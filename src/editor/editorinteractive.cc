@@ -183,7 +183,7 @@ void Editor_Interactive::load(const std::string & filename) {
 	egbase().cleanup_for_load();
 	m_history.reset();
 
-	std::unique_ptr<Widelands::Map_Loader> const ml(map.get_correct_loader(filename));
+	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(filename));
 	if (not ml.get())
 		throw warning
 			(_("Unsupported format"),

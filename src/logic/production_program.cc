@@ -94,10 +94,7 @@ void ProductionProgram::parse_ware_type_group
 				count_max += i.front().second;
 				break;
 			}
-		if
-			(group.first.size()
-			 and
-			 ware_index.value() <= group.first.begin()->value())
+		if (group.first.size() and ware_index <= *group.first.begin())
 			throw game_data_error
 				(
 				 "wrong order of ware types within group: ware type %s appears "
@@ -253,12 +250,13 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 			try {
 				bool reached_end;
 				char const * const type_name = match(parameters, reached_end);
-				if (Ware_Index index = tribe.ware_index(type_name)) {
+				Ware_Index index = tribe.ware_index(type_name);
+				if (index != INVALID_INDEX) {
 					tribe.set_ware_type_has_demand_check(index);
 					return
 						new ProductionProgram::ActReturn::Economy_Needs_Ware
 							(index);
-				} else if ((index = tribe.worker_index(type_name))) {
+				} else if ((index = tribe.worker_index(type_name)) != INVALID_INDEX) {
 					tribe.set_worker_type_has_demand_check(index);
 					return
 						new ProductionProgram::ActReturn::Economy_Needs_Worker
@@ -1241,7 +1239,7 @@ void ProductionProgram::ActMine::informPlayer
 		 _("Main Vein Exhausted"),
 		 _
 		 ("This mine’s main vein is exhausted. Expect strongly diminished returns on investment. "
-		  "You should consider expanding, dismantling or destroying it."),
+		  "You should consider enhancing, dismantling or destroying it."),
 		 true,
 		 60 * 60 * 1000,
 		 0);
@@ -1496,7 +1494,7 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 
 	// Early check for no resources
 	const Buildcost & buildcost = descr.buildcost();
-	Ware_Index available_resource = Ware_Index::Null();
+	Ware_Index available_resource = INVALID_INDEX;
 
 	for (Buildcost::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
 		if (psite.waresqueue(it->first).get_filled() > 0) {
@@ -1505,7 +1503,7 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 		}
 	}
 
-	if (!available_resource) {
+	if (available_resource == INVALID_INDEX) {
 		psite.program_end(g, Failed);
 		return;
 	}

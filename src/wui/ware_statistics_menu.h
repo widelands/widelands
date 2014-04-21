@@ -28,7 +28,7 @@
 #include "ui_basic/unique_window.h"
 
 struct DifferentialPlot_Area;
-struct Interactive_Player;
+class Interactive_Player;
 struct WUIPlot_Area;
 
 struct Ware_Statistics_Menu : public UI::UniqueWindow {

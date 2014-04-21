@@ -45,7 +45,7 @@ public:
 	WaresQueue(PlayerImmovable &, Ware_Index, uint8_t size);
 
 #ifndef NDEBUG
-	~WaresQueue() {assert(not m_ware);}
+	~WaresQueue() {assert(m_ware == INVALID_INDEX);}
 #endif
 
 	Ware_Index get_ware()   const          {return m_ware;}

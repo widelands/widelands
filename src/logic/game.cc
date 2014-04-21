@@ -745,7 +745,7 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 void Game::send_player_build
 	(int32_t const pid, Coords const coords, Building_Index const id)
 {
-	assert(id);
+	assert(id != INVALID_INDEX);
 	send_player_command (*new Cmd_Build(get_gametime(), pid, coords, id));
 }
 
@@ -790,7 +790,7 @@ void Game::send_player_start_or_cancel_expedition (Building & building)
 void Game::send_player_enhance_building
 	(Building & building, Building_Index const id)
 {
-	assert(id);
+	assert(id != INVALID_INDEX);
 
 	send_player_command
 		(*new Cmd_EnhanceBuilding
@@ -992,13 +992,13 @@ void Game::sample_statistics()
 			const Tribe_Descr & tribe = plr->tribe();
 			Ware_Index const tribe_wares = tribe.get_nrwares();
 			for
-				(Ware_Index wareid = Ware_Index::First();
+				(Ware_Index wareid = 0;
 				 wareid < tribe_wares;
 				 ++wareid)
 				wastock += eco->stock_ware(wareid);
 			Ware_Index const tribe_workers = tribe.get_nrworkers();
 			for
-				(Ware_Index workerid = Ware_Index::First();
+				(Ware_Index workerid = 0;
 				 workerid < tribe_workers;
 				 ++workerid)
 				if

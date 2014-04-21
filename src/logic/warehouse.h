@@ -26,7 +26,7 @@
 #include "logic/soldiercontrol.h"
 #include "logic/wareworker.h"
 
-struct Interactive_Player;
+class Interactive_Player;
 class Profile;
 
 namespace Widelands {

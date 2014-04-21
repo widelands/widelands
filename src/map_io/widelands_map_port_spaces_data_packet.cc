@@ -20,7 +20,6 @@
 #include "map_io/widelands_map_port_spaces_data_packet.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/foreach.hpp>
 
 #include "container_iterate.h"
 #include "log.h"
@@ -82,7 +81,7 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	// spaces via a LUA script once the terrain is changed.
 	Map::PortSpacesSet port_spaces;
 	Map& map = egbase.map();
-	BOOST_FOREACH(const Coords & c, map.get_port_spaces()) {
+	for (const Coords& c : map.get_port_spaces()) {
 		FCoords fc = map.get_fcoords(c);
 		if
 			((map.get_max_nodecaps(egbase.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
@@ -100,7 +99,7 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 
 	Section & s2 = prof.create_section("port_spaces");
 	int i = 0;
-	BOOST_FOREACH(const Coords& c, port_spaces) {
+	for (const Coords& c : port_spaces) {
 		snprintf(buf, sizeof(buf), "%u", i++);
 		s2.set_Coords(buf, c);
 	}

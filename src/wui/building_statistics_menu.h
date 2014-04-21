@@ -26,7 +26,7 @@
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {struct Building_Descr;}
-struct Interactive_Player;
+class Interactive_Player;
 namespace UI {
 struct Button;
 struct Progress_Bar;

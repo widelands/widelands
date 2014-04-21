@@ -20,7 +20,6 @@
 #include "editor/ui_menus/editor_tool_set_terrain_options_menu.h"
 
 #include <SDL_keysym.h>
-#include <boost/foreach.hpp>
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_terrain_tool.h"

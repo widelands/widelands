@@ -49,7 +49,7 @@ m_click_recursion_protect(false)
 {
 	int32_t const space  =  5;
 	const Widelands::World & world = parent.egbase().world();
-	const Immovable_Descr::Index nr_immovables = world.get_nr_immovables();
+	const int nr_immovables = world.get_nr_immovables();
 	const uint32_t immovables_in_row = std::min
 		(static_cast<uint32_t>
 		 (ceil(sqrt(static_cast<float>(nr_immovables)))), 6U);
@@ -78,7 +78,7 @@ m_click_recursion_protect(false)
 	uint32_t cur_x = immovables_in_row;
 
 	UI::Box * box;
-	for (Immovable_Descr::Index i = 0; i < nr_immovables; ++cur_x, ++i) {
+	for (int i = 0; i < nr_immovables; ++cur_x, ++i) {
 		if (cur_x == immovables_in_row) {
 			cur_x = 0;
 			pos = Point(5, 15);

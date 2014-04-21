@@ -118,7 +118,7 @@ void WorkerProgram::parse_createware
 		throw wexception("Usage: createware <ware type>");
 
 	act->function = &Worker::run_createware;
-	act->iparam1 = descr->tribe().safe_ware_index(cmd[1]).value();
+	act->iparam1 = descr->tribe().safe_ware_index(cmd[1]);
 }
 
 /**

@@ -48,7 +48,7 @@ Worker_Descr::Worker_Descr
 	m_icon(nullptr),
 	m_buildable     (false),
 	m_level_experience(-1),
-	m_becomes (Ware_Index::Null())
+	m_becomes (INVALID_INDEX)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
@@ -66,10 +66,9 @@ Worker_Descr::Worker_Descr
 			try {
 				std::string const input = val->get_name();
 				if (m_buildcost.count(input))
-					throw wexception
-						("a buildcost item of this ware type has already been "
-						 "defined");
-				if (not (tribe().ware_index(input) or tribe().worker_index(input)))
+					throw wexception("a buildcost item of this ware type has already been defined");
+				if (tribe().ware_index(input) == INVALID_INDEX &&
+				    tribe().worker_index(input) == INVALID_INDEX)
 					throw wexception
 						("\"%s\" has not been defined as a ware/worker type (wrong "
 						 "declaration order?)",
@@ -211,11 +210,11 @@ bool Worker_Descr::can_act_as(Ware_Index const index) const {
 	// if requested worker type can be promoted, compare with that type
 	const Worker_Descr & descr = *tribe().get_worker_descr(index);
 	Ware_Index const becomes_index = descr.becomes();
-	return becomes_index ? can_act_as(becomes_index) : false;
+	return becomes_index != INVALID_INDEX ? can_act_as(becomes_index) : false;
 }
 
 Ware_Index Worker_Descr::worker_index() const {
-	return tribe().worker_index(name().c_str());
+	return tribe().worker_index(name());
 }
 
 }

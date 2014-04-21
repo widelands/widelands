@@ -186,7 +186,7 @@ m_toggle_help
 	m_statisticsmenu.open_window = [this] {
 		new GameMainMenu(*this, m_statisticsmenu, m_mainm_windows);
 	};
-	m_objectives.open_window = [this] {new GameObjectivesMenu(*this, m_objectives);};
+	m_objectives.open_window = [this] {new GameObjectivesMenu(this, m_objectives);};
 	m_message_menu.open_window = [this] {new GameMessageMenu(*this, m_message_menu);};
 	m_mainm_windows.stock.open_window = [this] {new Stock_Menu(*this, m_mainm_windows.stock);};
 

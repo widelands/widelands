@@ -23,7 +23,6 @@
 #include <iostream>
 
 #include <SDL_image.h>
-#include <boost/foreach.hpp>
 #include <config.h>
 
 #include "build_info.h"
@@ -535,7 +534,6 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
 	m_maptextures.emplace_back(new Texture(texture_files, frametime, *m_sdl_screen->format));
-
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
 

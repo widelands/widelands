@@ -22,7 +22,6 @@
 #include <iomanip>
 #include <iostream>
 
-#include <boost/foreach.hpp>
 #include <libintl.h>
 
 #include "constants.h"
@@ -883,7 +882,7 @@ void S2_Map_Loader::postload_fix_conversion(Widelands::Editor_Game_Base & egbase
 	const Widelands::World& world = egbase.world();
 
 	// Check if port spaces are valid
-	BOOST_FOREACH(const Widelands::Coords & c, ports) {
+	for (const Widelands::Coords& c : ports) {
 		Widelands::FCoords fc = m_map.get_fcoords(c);
 		Widelands::NodeCaps nc = m_map.get_max_nodecaps(world, fc);
 		if

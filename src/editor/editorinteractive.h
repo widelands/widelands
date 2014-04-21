@@ -84,7 +84,6 @@ public:
 		{}
 		Editor_Tool & current() const {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
-		typedef Tool_Vector::size_type Index;
 		//Tool_Vector                     tools;
 		Editor_Tool          *          current_pointer;
 		Editor_Tool::Tool_Index         use_tool;

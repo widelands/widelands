@@ -110,7 +110,7 @@ public:
 		Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Bob & create_bob(Coords, const BobDescr &, Player * owner = nullptr);
 	Bob & create_bob
-		(Coords, BobDescr::Index, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
+		(Coords, int, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
 	Bob & create_bob
 		(Coords, const std::string & name, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
 	Immovable & create_immovable(Coords, uint32_t idx, Tribe_Descr const *);

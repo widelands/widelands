@@ -32,7 +32,7 @@ struct WareDescr;
 struct Tribe_Descr;
 };
 
-struct Interactive_Player;
+class Interactive_Player;
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);

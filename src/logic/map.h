@@ -21,6 +21,7 @@
 #define MAP_H
 
 #include <cstring>
+#include <map>
 #include <memory>
 #include <set>
 #include <string>
@@ -34,7 +35,6 @@
 #include "logic/objective.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "manager.h"
 #include "random.h"
 
 class FileSystem;
@@ -44,14 +44,12 @@ struct S2_Map_Loader;
 
 namespace Widelands {
 
-class Map;
 class Map_Loader;
-class Player;
+class Objective;
 class World;
 struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
-
 
 #define WLMF_SUFFIX ".wmf"
 #define S2MF_SUFFIX ".swd"
@@ -135,13 +133,13 @@ public:
 	friend struct WL_Map_Loader;
 
 	typedef std::set<Coords, Coords::ordering_functor> PortSpacesSet;
+	typedef std::map<std::string, std::unique_ptr<Objective>> Objectives;
 
 	enum { // flags for findpath()
 
 		//  use bidirection cost instead of normal cost calculations
 		//  should be used for road building
 		fpBidiCost = 1,
-
 	};
 
 	// ORed bits for scenario types
@@ -356,8 +354,13 @@ public:
 	//  change terrain of a triangle, recalculate buildcaps
 	int32_t change_terrain(const World& world, TCoords<FCoords>, Terrain_Index);
 
-	const Manager<Objective>  & mom() const {return m_mom;}
-	Manager<Objective>        & mom()       {return m_mom;}
+	// The objectives that are defined in this map if it is a scenario.
+	const Objectives& objectives() const {
+		return objectives_;
+	}
+	Objectives* mutable_objectives() {
+		return &objectives_;
+	}
 
 	/// Returns the military influence on a location from an area.
 	Military_Influence calc_influence(Coords, Area<>) const;
@@ -406,8 +409,7 @@ private:
 	std::unique_ptr<FileSystem> filesystem_;
 
 	PortSpacesSet m_port_spaces;
-
-	Manager<Objective>  m_mom;
+	Objectives objectives_;
 
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(const World& world, FCoords);

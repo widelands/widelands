@@ -74,7 +74,7 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	}
 
 	Player & player = *get_owner();
-	Ware_Index const wareid(static_cast<Ware_Index::value_t>(action.iparam1));
+	Ware_Index const wareid(action.iparam1);
 	WareInstance & ware =
 		*new WareInstance(wareid, tribe().get_ware_descr(wareid));
 	ware.init(game);
@@ -1081,7 +1081,7 @@ void Worker::log_general_info(const Editor_Game_Base & egbase)
 	if (upcast(WareInstance, ware, m_carried_ware.get(egbase))) {
 		molog
 			("* m_carried_ware->get_ware() (id): %i\n",
-			 ware->descr_index().value());
+			 ware->descr_index());
 		molog("* m_carried_ware->get_economy() (): %p\n", ware->get_economy());
 	}
 
@@ -1306,10 +1306,9 @@ void Worker::create_needed_experience(Game & /* game */)
  * needed_experience he levels
  */
 Ware_Index Worker::gain_experience(Game & game) {
-	return
-		descr().get_level_experience() == -1 ||
-		++m_current_exp < descr().get_level_experience() ?
-		Ware_Index::Null() : level(game);
+	return descr().get_level_experience() == -1 || ++m_current_exp < descr().get_level_experience() ?
+	          INVALID_INDEX :
+	          level(game);
 }
 
 
@@ -1327,10 +1326,10 @@ Ware_Index Worker::level(Game & game) {
 	// circumstances)
 	assert(becomes());
 	const Tribe_Descr & t = tribe();
-	Ware_Index const old_index = t.worker_index(descr().name().c_str());
+	Ware_Index const old_index = t.worker_index(descr().name());
 	Ware_Index const new_index = becomes();
 	m_descr = t.get_worker_descr(new_index);
-	assert(new_index);
+	assert(new_index != INVALID_INDEX);
 
 	// Inform the economy, that something has changed
 	m_economy->remove_workers(old_index, 1);

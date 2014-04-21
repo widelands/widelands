@@ -28,7 +28,7 @@
 
 namespace Widelands {
 	struct Tribe_Descr;
-	struct Objective;
+	class Objective;
 	struct Message;
 };
 
@@ -113,7 +113,7 @@ public:
 
 	virtual ~L_Objective() {}
 
-	L_Objective(Widelands::Objective n);
+	L_Objective(const Widelands::Objective& n);
 	L_Objective() : m_name("") {}
 	L_Objective(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
