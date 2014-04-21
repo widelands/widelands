@@ -51,7 +51,7 @@ WaresQueue::WaresQueue
 	m_callback_fn     (nullptr),
 	m_callback_data   (nullptr)
 {
-	if (m_ware)
+	if (m_ware != INVALID_INDEX)
 		update();
 }
 
@@ -60,7 +60,7 @@ WaresQueue::WaresQueue
  * Clear the queue appropriately.
 */
 void WaresQueue::cleanup() {
-	assert(m_ware);
+	assert(m_ware != INVALID_INDEX);
 
 	if (m_filled && m_owner.get_economy())
 		m_owner.get_economy()->remove_wares(m_ware, m_filled);
@@ -79,7 +79,7 @@ void WaresQueue::cleanup() {
  * You must call this after every call to set_*()
 */
 void WaresQueue::update() {
-	assert(m_ware);
+	assert(m_ware != INVALID_INDEX);
 
 	if (m_filled > m_max_size) {
 		if (m_owner.get_economy())
@@ -149,7 +149,7 @@ void WaresQueue::request_callback
 */
 void WaresQueue::remove_from_economy(Economy & e)
 {
-	if (m_ware) {
+	if (m_ware != INVALID_INDEX) {
 		e.remove_wares(m_ware, m_filled);
 		if (m_request)
 			m_request->set_economy(nullptr);
@@ -161,7 +161,7 @@ void WaresQueue::remove_from_economy(Economy & e)
 */
 void WaresQueue::add_to_economy(Economy & e)
 {
-	if (m_ware) {
+	if (m_ware != INVALID_INDEX) {
 		e.add_wares(m_ware, m_filled);
 		if (m_request)
 			m_request->set_economy(&e);

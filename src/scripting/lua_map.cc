@@ -105,7 +105,7 @@ typedef std::vector<Widelands::Soldier *> SoldiersList;
 		(lua_State * L, const Tribe_Descr & tribe,  const std::string & what) \
 	{ \
 		Ware_Index idx = tribe. type ## _index(what); \
-		if (!idx) \
+		if (idx == INVALID_INDEX) \
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
 	}

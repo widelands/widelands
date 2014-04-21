@@ -288,7 +288,7 @@ void ExpeditionBootstrap::load
 		wq->Read(fr, game, mol);
 		wq->set_callback(ware_callback, this);
 
-		if (!wq->get_ware()) {
+		if (wq->get_ware() == INVALID_INDEX) {
 			delete wq;
 		} else {
 			wares_.emplace_back(wq);

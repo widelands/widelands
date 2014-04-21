@@ -76,7 +76,7 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 					bool allowed;
 					while (const char * const name = s.get_next_bool(nullptr, &allowed)) {
 						const Building_Index index = tribe.building_index(name);
-						if (index == INVALID_INDEX)
+						if (index != INVALID_INDEX)
 							player->allow_building_type(index, allowed);
 						else
 							throw game_data_error

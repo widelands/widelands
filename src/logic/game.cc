@@ -750,7 +750,7 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 void Game::send_player_build
 	(int32_t const pid, Coords const coords, Building_Index const id)
 {
-	assert(id);
+	assert(id != INVALID_INDEX);
 	send_player_command (*new Cmd_Build(get_gametime(), pid, coords, id));
 }
 
@@ -795,7 +795,7 @@ void Game::send_player_start_or_cancel_expedition (Building & building)
 void Game::send_player_enhance_building
 	(Building & building, Building_Index const id)
 {
-	assert(id);
+	assert(id != INVALID_INDEX);
 
 	send_player_command
 		(*new Cmd_EnhanceBuilding

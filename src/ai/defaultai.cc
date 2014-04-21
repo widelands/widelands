@@ -1235,7 +1235,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		}
 	}
 
-	if (not proposed_building)
+	if (proposed_building == INVALID_INDEX)
 		return false;
 
 	// do not have too many construction sites

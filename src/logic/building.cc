@@ -106,7 +106,8 @@ Building_Descr::Building_Descr
 				throw wexception("enhancement to same type");
 			if (target_name == "constructionsite")
 				throw wexception("enhancement to special type constructionsite");
-			if (Building_Index const en_i = tribe().building_index(target_name)) {
+			Building_Index const en_i = tribe().building_index(target_name);
+			if (en_i != INVALID_INDEX) {
 				if (enhancements().count(en_i))
 					throw wexception("this has already been declared");
 				m_enhancements.insert(en_i);

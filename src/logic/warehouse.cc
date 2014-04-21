@@ -311,7 +311,7 @@ Warehouse::~Warehouse()
  */
 bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 {
-	if (!pw.index || !(pw.index < m_supply->get_workers().get_nrwareids()))
+	if (pw.index == INVALID_INDEX || !(pw.index < m_supply->get_workers().get_nrwareids()))
 		return false;
 
 	const Worker_Descr * w_desc = tribe().get_worker_descr(pw.index);
@@ -330,7 +330,7 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 		ware = tribe().ware_index(cost_it->first);
 		if (ware != INVALID_INDEX)
 			type = wwWARE;
-		else if ((ware = tribe().worker_index(cost_it->first)))
+		else if ((ware = tribe().worker_index(cost_it->first)) != INVALID_INDEX)
 			type = wwWORKER;
 		else
 			return false;
@@ -980,9 +980,9 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 		const std::string & input_name = it.current->first;
 		Ware_Index id_w = tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
-			if (m_supply->stock_wares  (id_w) < it.current->second)
+			if (m_supply->stock_wares(id_w) < it.current->second)
 				return false;
-		} else if ((id_w = tribe().worker_index(input_name))) {
+		} else if ((id_w = tribe().worker_index(input_name)) != INVALID_INDEX) {
 			if (m_supply->stock_workers(id_w) < it.current->second)
 				return false;
 		} else
@@ -1056,7 +1056,7 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 		Ware_Index id_w = tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
 			available.push_back(get_wares().stock(id_w));
-		} else if ((id_w = tribe().worker_index(input_name))) {
+		} else if ((id_w = tribe().worker_index(input_name)) != INVALID_INDEX) {
 			available.push_back(get_workers().stock(id_w));
 		} else
 			throw wexception
@@ -1111,7 +1111,7 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 				pw->requests.push_back
 					(new Request
 					 (*this, id_w, &Warehouse::request_cb, wwWARE));
-			} else if ((id_w = tribe().worker_index(input_name))) {
+			} else if ((id_w = tribe().worker_index(input_name)) != INVALID_INDEX) {
 				pw->requests.push_back
 					(new Request
 					 (*this, id_w, &Warehouse::request_cb, wwWORKER));
@@ -1146,7 +1146,7 @@ void Warehouse::_update_planned_workers
 		Ware_Index id_w = tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
 			supply = m_supply->stock_wares(id_w);
-		} else if ((id_w = tribe().worker_index(input_name))) {
+		} else if ((id_w = tribe().worker_index(input_name)) != INVALID_INDEX) {
 			supply = m_supply->stock_workers(id_w);
 		} else
 			throw wexception

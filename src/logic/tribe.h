@@ -87,9 +87,7 @@ struct Tribe_Descr : boost::noncopyable {
 	}
 	Ware_Index get_nrwares() const {return m_wares.get_nitems();}
 	Ware_Index safe_ware_index(const std::string & warename) const;
-	Ware_Index safe_ware_index(const char * const warename) const;
 	Ware_Index ware_index(const std::string & warename) const;
-	Ware_Index ware_index(char const * const warename) const;
 	WareDescr const * get_ware_descr(const Ware_Index& index) const {
 		return m_wares.get(index);
 	}
@@ -100,7 +98,6 @@ struct Tribe_Descr : boost::noncopyable {
 		m_workers.get(index)->set_has_demand_check();
 	}
 	Ware_Index safe_worker_index(const std::string & workername) const;
-	Ware_Index safe_worker_index(const char * const workername) const;
 	Building_Index get_nrbuildings() const {
 		return m_buildings.get_nitems();
 	}

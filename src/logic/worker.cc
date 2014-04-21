@@ -1321,10 +1321,10 @@ Ware_Index Worker::level(Game & game) {
 	// circumstances)
 	assert(becomes());
 	const Tribe_Descr & t = tribe();
-	Ware_Index const old_index = t.worker_index(descr().name().c_str());
+	Ware_Index const old_index = t.worker_index(descr().name());
 	Ware_Index const new_index = becomes();
 	m_descr = t.get_worker_descr(new_index);
-	assert(new_index);
+	assert(new_index != INVALID_INDEX);
 
 	// Inform the economy, that something has changed
 	m_economy->remove_workers(old_index, 1);

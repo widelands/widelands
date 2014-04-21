@@ -69,7 +69,7 @@ ProductionSite_Descr::ProductionSite_Descr
 				if (m_output_ware_types.count(idx))
 					throw wexception("this ware type has already been declared as an output");
 				m_output_ware_types.insert(idx);
-			} else if ((idx = tribe().worker_index(op->get_string()))) {
+			} else if ((idx = tribe().worker_index(op->get_string())) != INVALID_INDEX) {
 				if (m_output_worker_types.count(idx))
 					throw wexception("this worker type has already been declared as an output");
 				m_output_worker_types.insert(idx);
@@ -103,7 +103,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	if (Section * const working_positions_s = prof.get_section("working positions"))
 		while (Section::Value const * const v = working_positions_s->get_next_val())
 			try {
-				if (Ware_Index const woi = tribe().worker_index(v->get_name())) {
+				Ware_Index const woi = tribe().worker_index(v->get_name());
+				if (woi != INVALID_INDEX) {
 					container_iterate_const(BillOfMaterials, working_positions(), i)
 						if (i.current->first == woi)
 							throw wexception("duplicated");

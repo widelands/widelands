@@ -115,11 +115,14 @@ void Request::Read
 			if (wai != INVALID_INDEX) {
 				m_type = wwWARE;
 				m_index = wai;
-			} else if (Ware_Index const woi = tribe.worker_index(type_name)) {
-				m_type = wwWORKER;
-				m_index = woi;
 			} else {
-				throw wexception("Request::Read: unknown type '%s'.\n", type_name);
+				Ware_Index const woi = tribe.worker_index(type_name);
+				if (woi != INVALID_INDEX) {
+					m_type = wwWORKER;
+					m_index = woi;
+				} else {
+					throw wexception("Request::Read: unknown type '%s'.\n", type_name);
+				}
 			}
 			m_count             = fr.Unsigned32();
 			m_required_time     = fr.Unsigned32();

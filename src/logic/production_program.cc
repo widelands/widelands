@@ -254,7 +254,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 					return
 						new ProductionProgram::ActReturn::Economy_Needs_Ware
 							(index);
-				} else if ((index = tribe.worker_index(type_name))) {
+				} else if ((index = tribe.worker_index(type_name)) != INVALID_INDEX) {
 					tribe.set_worker_type_has_demand_check(index);
 					return
 						new ProductionProgram::ActReturn::Economy_Needs_Worker
@@ -1501,7 +1501,7 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 		}
 	}
 
-	if (!available_resource) {
+	if (available_resource == INVALID_INDEX) {
 		psite.program_end(g, Failed);
 		return;
 	}

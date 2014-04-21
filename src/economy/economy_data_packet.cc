@@ -45,15 +45,12 @@ void EconomyDataPacket::Read(FileRead & fr)
 							fr.Unsigned32();
 						Ware_Index i = tribe.ware_index(type_name);
 						if (i != INVALID_INDEX) {
-							if
-								(tribe.get_ware_descr(i)->default_target_quantity()
-								 ==
-								 std::numeric_limits<uint32_t>::max())
-								log
-									("WARNING: target quantity configured for %s, "
-									 "which should not have target quantity, "
-									 "ignoring\n",
-									 type_name);
+							if (tribe.get_ware_descr(i)->default_target_quantity() ==
+							    std::numeric_limits<uint32_t>::max())
+								log("WARNING: target quantity configured for %s, "
+								    "which should not have target quantity, "
+								    "ignoring\n",
+								    type_name);
 							else {
 								Economy::Target_Quantity & tq =
 									m_eco->m_ware_target_quantities[i];
@@ -63,7 +60,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 								tq.permanent         = permanent;
 								tq.last_modified     = last_modified;
 							}
-						} else if ((i = tribe.worker_index(type_name))) {
+						} else if ((i = tribe.worker_index(type_name)) != INVALID_INDEX) {
 							if
 								(tribe.get_worker_descr(i)->default_target_quantity()
 								 ==

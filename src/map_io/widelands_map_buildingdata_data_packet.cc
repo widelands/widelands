@@ -576,7 +576,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				uint32_t const next_spawn = fr.Unsigned32();
 				Ware_Index const worker_index =
 					tribe.safe_worker_index("carrier");
-				if (not worker_index) {
+				if (worker_index == INVALID_INDEX) {
 					log
 						("WARNING: %s %u has a next_spawn time for nonexistent "
 						 "worker type \"%s\" set to %u, ignoring\n",
@@ -622,7 +622,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					uint32_t     const next_spawn      = fr.Unsigned32();
 					Ware_Index   const worker_index    =
 						tribe.safe_worker_index(worker_typename);
-					if (not worker_index) {
+					if (worker_index == INVALID_INDEX) {
 						log
 							("WARNING: %s %u has a next_spawn time for nonexistent "
 							 "worker type \"%s\" set to %u, ignoring\n",
@@ -1015,7 +1015,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				WaresQueue * wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->Read(fr, game, mol);
 
-				if (!wq->get_ware()) {
+				if (wq->get_ware() == INVALID_INDEX) {
 					delete wq;
 				} else {
 					productionsite.m_input_queues.push_back(wq);

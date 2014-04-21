@@ -96,15 +96,11 @@ bool AbstractWaresDisplay::handle_mousemove
 {
 	const Widelands::Ware_Index index = ware_at_point(x, y);
 
-	m_curware.set_text
-		(index ?
-		 (m_type == Widelands::wwWORKER ?
-		  m_tribe.get_worker_descr(index)->descname()
-		  :
-		  m_tribe.get_ware_descr  (index)->descname())
-		 .c_str()
-		 :
-		 "");
+	m_curware.set_text(index != Widelands::INVALID_INDEX ?
+	                      (m_type == Widelands::wwWORKER ?
+	                          m_tribe.get_worker_descr(index)->descname() :
+	                          m_tribe.get_ware_descr(index)->descname()) :
+	                      "");
 	if (m_selection_anchor) {
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
@@ -124,13 +120,13 @@ bool AbstractWaresDisplay::handle_mousepress
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::Ware_Index ware = ware_at_point(x, y);
-		if (!ware) {
+		if (ware == Widelands::INVALID_INDEX) {
 			return false;
 		}
 		if (!m_selectable) {
 			return true;
 		}
-		if (!m_selection_anchor) {
+		if (m_selection_anchor == Widelands::INVALID_INDEX) {
 			// Create the selection anchor to be able to select
 			// multiple ware by dragging.
 			m_selection_anchor = ware;
@@ -146,7 +142,7 @@ bool AbstractWaresDisplay::handle_mousepress
 
 bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
 {
-	if (btn != SDL_BUTTON_LEFT || !m_selection_anchor) {
+	if (btn != SDL_BUTTON_LEFT || m_selection_anchor == Widelands::INVALID_INDEX) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
 
@@ -206,7 +202,7 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 // and current pos to allow their selection on mouse release
 void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 {
-	if (!m_selection_anchor || x < 0 || y < 0) {
+	if (m_selection_anchor == Widelands::INVALID_INDEX || x < 0 || y < 0) {
 		return;
 	}
 
@@ -357,7 +353,7 @@ void AbstractWaresDisplay::draw_ware
 	Point p = ware_position(id);
 
 	bool draw_selected = m_selected[id];
-	if (m_selection_anchor) {
+	if (m_selection_anchor != Widelands::INVALID_INDEX) {
 		// Draw the temporary selected wares as if they were
 		// selected.
 		// TODO: Use another pic for the temporary selection
