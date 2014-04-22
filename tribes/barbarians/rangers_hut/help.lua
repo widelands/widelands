@@ -16,11 +16,11 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "log",
-		_"Plants trees in the surrounding area.", "", "5") ..
+		_"Plants trees in the surrounding area.",
+		_"The ranger’s hut needs free space within the working radius to plant the trees.", "5") ..
 
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
-	rt(p(_"The Ranger’s Hut needs free space in the immediate vicinity to plant the trees.")) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"ranger"}, "shovel") ..
@@ -30,6 +30,6 @@ return {
 
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The Ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again.":bformat("5s"))
+		text_line(_"Performance:", _"The ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again.":bformat("5s"))
    end
 }

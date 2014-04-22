@@ -17,11 +17,11 @@ return {
 	building_help_lore_string("barbarians", building_description, _[["Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack."]],_[[Krumta, carpenter of Chat'Karuth]]) ..
 	--General Section
 	building_help_general_string("barbarians", building_description, "log",
-		_"Fell trees in the surrounding area and process them into logs.", "", "10") ..
+		_"Fell trees in the surrounding area and process them into logs.",
+		_"The lumberjack's hut needs trees to fell within the working radius.", "10") ..
 
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
-	rt(p(_"The Lumberjack's Hut needs trees in the immediate vicinity to fell.")) ..
 
 	building_help_outputs("barbarians", building_description, {"constructionsite", "burners_house", "metalworks", "hardener"}, true) ..
 
@@ -33,6 +33,6 @@ return {
 
 	--Production Section
 	rt(h2(_"Production")) ..
-	text_line(_"Performance:", _"The Lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":format("12s"))
+	text_line(_"Performance:", _"The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":format("12s"))
    end
 }

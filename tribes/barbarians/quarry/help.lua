@@ -15,11 +15,10 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "raw_stone",
-		_"Carves raw stone out of rocks lying near the hut.", "", "6") ..
+		_"Carves raw stone out of rocks lying near the hut.", _"The quarry needs stones to cut within the working radius.", "6") ..
 
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
-	rt(p(_"The quarry needs stones in the vicinity.")) ..
 
 	building_help_outputs("barbarians", building_description, {"constructionsite", "lime_kiln"}, true) ..
 
