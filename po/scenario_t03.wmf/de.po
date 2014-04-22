@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-03-22 16:58+0000\n"
+"PO-Revision-Date: 2014-04-21 10:49+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:33+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-22 05:35+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
 #: ../../campaigns/t03.wmf/scripting/texts.lua:23
@@ -216,6 +216,8 @@ msgstr "Militärischer Angriff auf Al’thunran."
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
 msgstr ""
+"Vernichte alle Streitkräfte von Throns beiden Brüdern, um den Thronkreis zu "
+"befreien."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:158
 msgid "Close to Home"
@@ -287,6 +289,13 @@ msgid ""
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
 msgstr ""
+"Thron versucht zu glauben, dass Kalitath des Kämpfens müde ist und sich uns "
+"anschließen wird, sobald wir nach Al'thunran ziehen, um Recht und Ordnung "
+"wiederherzustellen. Aber ich glaube das nicht. Kalitath ist der Sohn einer "
+"der mächtigsten Generäle unserer Streitkräfte und seine Familie hat es noch "
+"nie gemocht, sich dem Banner von Chat'Karuth zu unterwerfen. Warum sollte er "
+"mit Chath'Karuths Sohn marschieren, um sein Erbe und den Thron erneut zu "
+"beanspruchen?"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:192
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
@@ -408,6 +417,11 @@ msgid ""
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
 msgstr ""
+"Aber es gibt mehr Neuigkeiten: Meine Kundschafter haben berichtet, dass die "
+"beiden tobenden Stämme meiner Brüder in Chaos sind und die neue Gefahr, die "
+"über sie hereinzubrechen droht, kaum bemerkt haben. Wie auch immer, ich "
+"denke, sie würden sich nicht darum kümmern, wenn sie es bemerkten. Blind vor "
+"Wut und Hass haben sie jeglichen Verstand verloren."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:253
 msgid "Winter Ahead"
@@ -512,6 +526,10 @@ msgid ""
 "raging wars on our doorstep. THEN we will be prepared once trouble seeks to "
 "capture our woods."
 msgstr ""
+"Um ein größeres Gebiet um unser Dorf herum überblicken zu können, sollten "
+"wir weiter erkunden und mehr Wachen und Kundschafter einteilen, die die "
+"Grenze beobachten und ein Auge auf den Krieg an unserer Türe haben. DANN "
+"werden wir vorbereitet sein, sobald der Ärger in unserm Wald ankommt."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "Mountains Found"
@@ -548,7 +566,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:330
 msgid "Fortress Needed"
-msgstr ""
+msgstr "Festung benötigt"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
 msgid ""
@@ -662,7 +680,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:387
 msgid "Military Assault"
-msgstr ""
+msgstr "Militärischer Ansturm"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:389
 msgid ""
@@ -670,6 +688,10 @@ msgid ""
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
 msgstr ""
+"So sei es, die Generäle sind dabei, meine Truppen vorzubereiten, und "
+"Boldreth selbst wird den ersten Angriff führen. Ich werde an seiner Seite "
+"reiten, um Al'thunran von diesem Krieg zu befreien und wieder Frieden in "
+"unsere Hauptstadt zu bringen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:391
 msgid ""

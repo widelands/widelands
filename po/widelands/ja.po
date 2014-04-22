@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-15 08:16+0200\n"
-"PO-Revision-Date: 2012-11-25 00:39+0000\n"
-"Last-Translator: M <applebutter-lj@infoseek.jp>\n"
+"PO-Revision-Date: 2014-04-22 00:31+0000\n"
+"Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:38+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-22 05:36+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
-msgstr ""
+msgstr "攻撃的"
 
 #: ../../src/ai/defaultai.h:93
 msgid "Normal"
-msgstr ""
+msgstr "普通"
 
 #: ../../src/ai/defaultai.h:102
 msgid "Defensive"
-msgstr ""
+msgstr "防衛的"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -37,21 +37,21 @@ msgstr "なし"
 #: ../../src/editor/editorinteractive.cc:61
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "部族読込中: %s"
 
 #: ../../src/editor/editorinteractive.cc:82
 msgid "Menu"
-msgstr ""
+msgstr "メニュー"
 
 #: ../../src/editor/editorinteractive.cc:85
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tools"
-msgstr ""
+msgstr "ツール"
 
 #: ../../src/editor/editorinteractive.cc:89
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Tool Size"
-msgstr ""
+msgstr "ツール範囲"
 
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/wui/interactive_player.cc:116
@@ -62,7 +62,7 @@ msgstr "ミニマップ"
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:119
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "建設スペース"
 
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/ui_fsmenu/launchMPG.cc:164
@@ -71,44 +71,46 @@ msgstr "プレイヤー"
 
 #: ../../src/editor/editorinteractive.cc:101
 msgid "Undo"
-msgstr ""
+msgstr "元に戻す"
 
 #: ../../src/editor/editorinteractive.cc:104
 msgid "Redo"
-msgstr ""
+msgstr "やり直し"
 
 #: ../../src/editor/editorinteractive.cc:188 ../../src/wlapplication.cc:433
 msgid "Unsupported format"
-msgstr ""
+msgstr "サポートしない形式"
 
 #: ../../src/editor/editorinteractive.cc:189 ../../src/wlapplication.cc:434
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
+msgstr "Widelandsはファイル%sを読み込めませんでした。このファイル形式は互換性がありません。"
 
 #: ../../src/editor/editorinteractive.cc:206
 msgid "Creating players"
-msgstr ""
+msgstr "プレイヤー生成"
 
 #: ../../src/editor/editorinteractive.cc:213
 #: ../../src/logic/editor_game_base.cc:275
 msgid "Loading world data"
-msgstr ""
+msgstr "ワールドデータ読込"
 
 #: ../../src/editor/editorinteractive.cc:216
 #: ../../src/editor/editorinteractive.cc:613
 msgid "Loading graphics..."
-msgstr ""
+msgstr "グラフィックを読込中..."
 
 #: ../../src/editor/editorinteractive.cc:262
 msgid "Unsaved Map"
-msgstr ""
+msgstr "マップが未保存"
 
 #: ../../src/editor/editorinteractive.cc:263
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
+"マップが保存されていません。\n"
+"このまま終了しますか？"
 
 #: ../../src/editor/editorinteractive.cc:607
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:178
@@ -116,7 +118,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
 #: ../../src/logic/map.h:169
 msgid "No Name"
-msgstr ""
+msgstr "名前なし"
 
 #: ../../src/editor/editorinteractive.cc:609
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -129,143 +131,143 @@ msgstr "不明"
 
 #: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
-msgstr ""
+msgstr "フィールド情報"
 
 #: ../../src/editor/tools/editor_info_tool.cc:53
 msgid "Node:"
-msgstr ""
+msgstr "ノード:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:55
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "座標: (%1$i, %2$i)"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " small"
-msgstr ""
+msgstr " 小"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " medium"
-msgstr ""
+msgstr " 中"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " big"
-msgstr ""
+msgstr " 大"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:74
 msgid " flag"
-msgstr ""
+msgstr " 旗"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: flag mine walk
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid " mine"
-msgstr ""
+msgstr " 鉱山"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: big flag port walk
 #: ../../src/editor/tools/editor_info_tool.cc:78
 msgid " port"
-msgstr ""
+msgstr " 港"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:80
 msgid " walk"
-msgstr ""
+msgstr " 徒歩"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: swim
 #: ../../src/editor/tools/editor_info_tool.cc:82
 msgid " swim"
-msgstr ""
+msgstr " 水泳"
 
 #: ../../src/editor/tools/editor_info_tool.cc:84
 #, c-format
 msgid "Caps:%s"
-msgstr ""
+msgstr "区画 %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:87
 #, c-format
 msgid "Owned by %i"
-msgstr ""
+msgstr "所有 %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:90
 msgid "Has base immovable"
-msgstr ""
+msgstr "ベースオブジェあり"
 
 #: ../../src/editor/tools/editor_info_tool.cc:90
 msgid "No base immovable"
-msgstr ""
+msgstr "ベースオブジェなし"
 
 #: ../../src/editor/tools/editor_info_tool.cc:93
 msgid "Has bobs"
-msgstr ""
+msgstr "生物あり"
 
 #: ../../src/editor/tools/editor_info_tool.cc:93
 msgid "No bobs"
-msgstr ""
+msgstr "生物なし"
 
 #: ../../src/editor/tools/editor_info_tool.cc:97
 msgid "Terrain:"
-msgstr ""
+msgstr "地形"
 
 #: ../../src/editor/tools/editor_info_tool.cc:104
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "名前 %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:105
 #, c-format
 msgid "Texture Number: %i"
-msgstr ""
+msgstr "テクスチャ番号 %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
 msgid "Resources:"
-msgstr ""
+msgstr "資源"
 
 #: ../../src/editor/tools/editor_info_tool.cc:115
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "資源名 %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:117
 #, c-format
 msgid "Resource amount: %i"
-msgstr ""
+msgstr "資源量 %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:121
 msgid "No resources"
-msgstr ""
+msgstr "資源なし"
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
 msgid "Map:"
-msgstr ""
+msgstr "マップ"
 
 #: ../../src/editor/tools/editor_info_tool.cc:127
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "サイズ %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:131
 #, c-format
 msgid "Players: %i"
-msgstr ""
+msgstr "人数 %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:134
 #: ../../src/editor/tools/editor_info_tool.cc:140
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "著者 %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:135
 #: ../../src/editor/tools/editor_info_tool.cc:141
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "説明 %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
@@ -274,48 +276,48 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:71
 #: ../../src/ui_fsmenu/mapselect.cc:82
 msgid "World:"
-msgstr ""
+msgstr "ワールド"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
 #: ../../src/wui/game_main_menu.cc:39
 msgid "Main Menu"
-msgstr ""
+msgstr "メインメニュー"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:46
 #: ../../src/ui_fsmenu/editor.cc:43
 msgid "New Map"
-msgstr ""
+msgstr "新規マップ"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:49
 msgid "New Random Map"
-msgstr ""
+msgstr "新規ランダムマップ"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:52
 #: ../../src/ui_fsmenu/editor.cc:48
 msgid "Load Map"
-msgstr ""
+msgstr "マップ読込"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:54
 msgid "Save Map"
-msgstr ""
+msgstr "マップ保存"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
 msgid "Map Options"
-msgstr ""
+msgstr "マップオプション"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:81
 #: ../../src/ui_fsmenu/main.cc:70
 msgid "View Readme"
-msgstr ""
+msgstr "Readme"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "Exit Editor"
-msgstr ""
+msgstr "エディタ終了"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:81
@@ -323,7 +325,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
 #: ../../src/ui_fsmenu/mapselect.cc:64
 msgid "Name:"
-msgstr ""
+msgstr "名前"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:77
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
@@ -332,7 +334,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:61
 #: ../../src/ui_fsmenu/mapselect.cc:70
 msgid "Author:"
-msgstr "著者:"
+msgstr "著者"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:66
@@ -340,7 +342,7 @@ msgstr "著者:"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:66
 #: ../../src/ui_fsmenu/mapselect.cc:76
 msgid "Size:"
-msgstr "サイズ:"
+msgstr "サイズ"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:98
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
@@ -348,13 +350,13 @@ msgstr "サイズ:"
 #: ../../src/ui_fsmenu/loadgame.cc:99 ../../src/ui_fsmenu/loadreplay.cc:85
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr ""
+msgstr "人数"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:106
 #: ../../src/ui_fsmenu/editor_mapselect.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:94
 msgid "Descr:"
-msgstr ""
+msgstr "説明"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
@@ -368,7 +370,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:110
 #: ../../src/wui/game_main_menu_save_game.cc:96
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:130
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
@@ -377,7 +379,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:421
 #: ../../src/wui/game_main_menu_save_game.cc:106 ../../src/wui/login_box.cc:70
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
@@ -385,27 +387,27 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:230
 #: ../../src/ui_fsmenu/mapselect.cc:347
 msgid "parent"
-msgstr ""
+msgstr "上位ディレクトリ"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 #: ../../src/ui_fsmenu/loadgame.cc:89 ../../src/ui_fsmenu/loadreplay.cc:75
 #: ../../src/wui/game_main_menu_save_game.cc:69
 msgid "Map Name:"
-msgstr ""
+msgstr "マップ名"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Nr Players:"
-msgstr ""
+msgstr "人数"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid "Set origin"
-msgstr ""
+msgstr "原点を設定"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:104
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
-msgstr ""
+msgstr "原点座標(0,0)の位置を設定します。これは生成されるミニマップの左上隅になります。"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:156
@@ -413,7 +415,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "幅　 %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:85
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:160
@@ -421,47 +423,47 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Height: %u"
-msgstr ""
+msgstr "高さ %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:123
 msgid "Create Map"
-msgstr ""
+msgstr "マップ生成"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:67
 msgid "Random Number:"
-msgstr ""
+msgstr "ランダム数字"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:166
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:439
 #, c-format
 msgid "Water: %u %%"
-msgstr ""
+msgstr "水　 %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:192
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:442
 #, c-format
 msgid "Land: %u %%"
-msgstr ""
+msgstr "平地 %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:218
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:445
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr ""
+msgstr "荒地 %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:228
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:448
 #, c-format
 msgid "Mountains: %u %%"
-msgstr ""
+msgstr "山地 %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:244
 msgid "Island mode:"
-msgstr ""
+msgstr "島モード"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:254
 msgid "Low"
-msgstr ""
+msgstr "低"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:255
 #: ../../src/logic/building.cc:546
@@ -470,57 +472,57 @@ msgstr "中"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "High"
-msgstr ""
+msgstr "高"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:293
 msgid "Map ID:"
-msgstr ""
+msgstr "マップID"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:327
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:451
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "人数 %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:340
 msgid "Generate Map"
-msgstr ""
+msgstr "マップ生成"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:488
 msgid "Generating random map..."
-msgstr ""
+msgstr "ランダムマップを生成中..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:116
 msgid "Descr: "
-msgstr ""
+msgstr "説明 "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:146
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
 msgid "Make Directory"
-msgstr ""
+msgstr "ディレクトリ作成"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:206
 msgid "unnamed"
-msgstr ""
+msgstr "名前なし"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "ディレクトリ"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "マップファイルではありません"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 #: ../../src/wui/game_main_menu_save_game.cc:268
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "ファイル「%s」は既に存在します。上書きしますか？"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:390
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:410
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "ゲーム保存エラー"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:406
 msgid ""
@@ -529,158 +531,163 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"ゲーム保存エラーです。\n"
+"保存したマップファイルが壊れています。\n"
+"\n"
+"原因はつぎのとおりです。\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
-msgstr ""
+msgstr "ディレクトリ名の入力 "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:44
 msgid "Player Options"
-msgstr ""
+msgstr "プレイヤーオプション"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:50
 msgid "Add player"
-msgstr ""
+msgstr "プレイヤーを追加"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:57
 msgid "Remove last player"
-msgstr ""
+msgstr "最後のプレイヤーを削除"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:72
 msgid "Number of Players"
-msgstr ""
+msgstr "プレイ人数"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #: ../../src/network/nethost.cc:2076
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "プレイヤー%s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
-msgstr ""
+msgstr "エラー"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:328
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "bobs that depend on this player and try again."
 msgstr ""
+"プレイヤーを削除できません。プレイヤーは複数の場所で参照されています。このプレイヤーに依存する建物やオブジェをすべて削除してからやり直してください。"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
-msgstr ""
+msgstr "許可された建物"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:62
 msgid "Allowed Buildings:"
-msgstr ""
+msgstr "許可された建物"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:68
 msgid "Forbidden Buildings:"
-msgstr ""
+msgstr "禁止された建物"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
 msgid "Forbid"
-msgstr ""
+msgstr "禁止"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "Allow"
-msgstr ""
+msgstr "許可"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:39
 msgid "Height Tools Options"
-msgstr ""
+msgstr "高度ツールオプション"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:49
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "値の減少／増加"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
 msgid "Set Value"
-msgstr ""
+msgstr "値を設定"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "資源"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
-msgstr ""
+msgstr "現在の選択"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
-msgstr ""
+msgstr "高度の変更"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
-msgstr ""
+msgstr "高度のランダム変更"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 #: ../../src/wui/minimap.cc:153
 msgid "Terrain"
-msgstr ""
+msgstr "地形"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "オブジェ"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Bobs"
-msgstr ""
+msgstr "生物"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
-msgstr ""
+msgstr "港スペースを設定"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:42
 msgid "Noise Height Options"
-msgstr ""
+msgstr "ランダム高度オプション"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:147
 #, c-format
 msgid "Minimum: %u"
-msgstr ""
+msgstr "最小値 %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:149
 #, c-format
 msgid "Maximum: %u"
-msgstr ""
+msgstr "最大値 %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:154
 #, c-format
 msgid "Set value: %u"
-msgstr ""
+msgstr "値を設定%u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr ""
+msgstr "オブジェ"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
-msgstr ""
+msgstr "地形選択"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:151
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:200
 msgid "Current:"
-msgstr ""
+msgstr "選択"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:75
 #, c-format
 msgid "Current Size: %u"
-msgstr ""
+msgstr "選択したサイズ %u"
 
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:847
 #: ../../src/ui_fsmenu/mapselect.cc:501 ../../src/ui_fsmenu/mapselect.cc:505
 msgid "unknown"
-msgstr ""
+msgstr "不明"
 
 #: ../../src/logic/building.cc:539
 msgid "mine"
-msgstr ""
+msgstr "鉱山"
 
 #: ../../src/logic/building.cc:540
 msgid "small"
@@ -692,11 +699,11 @@ msgstr "大"
 
 #: ../../src/logic/building.cc:541
 msgid "medium"
-msgstr ""
+msgstr "中"
 
 #: ../../src/logic/building.cc:544
 msgid "Mine"
-msgstr ""
+msgstr "鉱山"
 
 #: ../../src/logic/building.cc:545
 msgid "Small"
@@ -709,69 +716,69 @@ msgstr "大"
 #: ../../src/logic/constructionsite.cc:91 ../../src/logic/immovable.cc:543
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%%建設"
 
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%%解体"
 
 #: ../../src/logic/editor_game_base.cc:281
 msgid "Loading tribes"
-msgstr ""
+msgstr "部族を読込中"
 
 #: ../../src/logic/game.cc:140
 msgid "Not set"
-msgstr ""
+msgstr "設定なし"
 
 #: ../../src/logic/game.cc:226
 msgid "Preloading a map"
-msgstr ""
+msgstr "マップを事前読込中"
 
 #: ../../src/logic/game.cc:233
 msgid "Loading a world"
-msgstr ""
+msgstr "ワールドを読込中"
 
 #: ../../src/logic/game.cc:239
 #, c-format
 msgid "Adding player %u"
-msgstr ""
+msgstr "プレイヤー%uを追加中"
 
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:341
 #: ../../src/ui_fsmenu/launchMPG.cc:289 ../../src/ui_fsmenu/launchSPG.cc:237
 #: ../../src/wui/multiplayersetupgroup.cc:355
 msgid "Scenario"
-msgstr ""
+msgstr "シナリオ"
 
 #: ../../src/logic/game.cc:253
 msgid "Loading a map"
-msgstr ""
+msgstr "マップを読込中"
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:359
 #: ../../src/logic/game.cc:388
 msgid "Preloading map"
-msgstr ""
+msgstr "マップを事前読込中"
 
 #: ../../src/logic/game.cc:297
 msgid "Configuring players"
-msgstr ""
+msgstr "プレイヤーを設定中"
 
 #: ../../src/logic/game.cc:331
 msgid "Loading map"
-msgstr ""
+msgstr "マップを読込中"
 
 #: ../../src/logic/game.cc:372 ../../src/logic/game.cc:405
 #: ../../src/wlapplication.cc:1773
 msgid "Loading..."
-msgstr "ロード中..."
+msgstr "読込中..."
 
 #: ../../src/logic/game.cc:475
 msgid "Creating player infrastructure"
-msgstr ""
+msgstr "プレイヤーのインフラを生成中"
 
 #: ../../src/logic/game.cc:488 ../../src/logic/player.cc:218
 msgid "Missing starting position"
-msgstr ""
+msgstr "開始位置がありません"
 
 #: ../../src/logic/game.cc:490
 #, c-format
@@ -781,6 +788,8 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix "
 "this problem."
 msgstr ""
+"プレイヤー%uの開始位置がないため、Widelandsはゲームを開始できませんでした。\n"
+"手動でこの問題を解決するには、Widelandsエディタで開始位置を追加することができます。"
 
 #: ../../src/logic/map.cc:337
 msgid "Player 1"
@@ -788,14 +797,13 @@ msgstr "プレイヤー 1"
 
 #: ../../src/logic/map.h:171
 msgid "no description defined"
-msgstr ""
+msgstr "説明が定義されていません"
 
 #: ../../src/logic/militarysite.cc:125
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "兵士数%u"
 
 #. * TRANSLATORS: %1$u is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2$u are open soldier slots in the building
@@ -803,24 +811,23 @@ msgstr[1] ""
 #, c-format
 msgid "%1$u(+%2$u) soldier"
 msgid_plural "%1$u(+%2$u) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "兵士数 %1$u(+%2$u)"
 
 #: ../../src/logic/militarysite.cc:843
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "軍事施設ロスト！"
 
 #: ../../src/logic/militarysite.cc:897
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "建物の敵を討伐完了！"
 
 #: ../../src/logic/militarysite.cc:943
 msgid "You are under attack"
-msgstr ""
+msgstr "攻撃されています。</p>"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr ""
+msgstr "説明なし"
 
 #: ../../src/logic/player.cc:220
 #, c-format
@@ -830,6 +837,8 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
+"プレイヤー%uの開始位置がないため、Widelandsはゲームを開始できませんでした。\n"
+"手動でこの問題を解決するには、Widelandsエディタで開始位置を追加することができます。"
 
 #. * TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s'
 #: ../../src/logic/production_program.cc:156
@@ -843,7 +852,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:201
 #, c-format
 msgid "economy needs %s"
-msgstr ""
+msgstr "経済に%sが必要"
 
 #. * TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages.
 #. * TRANSLATORS: e.g. %1$s = 'Failed work because: water, wheat (2)' %2$s = 'are missing'
@@ -852,92 +861,91 @@ msgstr ""
 #: ../../src/logic/production_program.cc:865
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #. * TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages.
 #: ../../src/logic/production_program.cc:237
 #: ../../src/logic/production_program.cc:846
 #, c-format
 msgid "%s,"
-msgstr ""
+msgstr "%s/"
 
 #. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
 #: ../../src/logic/production_program.cc:242
 #: ../../src/logic/production_program.cc:854
 #, c-format
 msgid "%1$s (%2$i)"
-msgstr ""
+msgstr "%1$s(%2$i)"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:245
 #, c-format
 msgid "site has%s"
-msgstr ""
+msgstr "建設地に%sが保持"
 
 #. * TRANSLATORS: 'Failed/Skipped ... because: workers need experience'.
 #: ../../src/logic/production_program.cc:262
 msgid "workers need experience"
-msgstr ""
+msgstr "労働者に経験値が必要"
 
 #. * TRANSLATORS: 'Failed %s because (not): %s {and/or %s}'
 #: ../../src/logic/production_program.cc:429
 #, c-format
 msgid "Failed %s"
-msgstr ""
+msgstr "%s失敗"
 
 #. * TRANSLATORS: 'Completed %s because (not): %s {and/or %s}'
 #: ../../src/logic/production_program.cc:431
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "%s完了"
 
 #. * TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}'
 #: ../../src/logic/production_program.cc:433
 #, c-format
 msgid "Skipped %s"
-msgstr ""
+msgstr "%sスキップ"
 
 #. * TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}'
 #: ../../src/logic/production_program.cc:449
 #, c-format
 msgid "%s and "
-msgstr ""
+msgstr "%sと "
 
 #. * TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}'
 #: ../../src/logic/production_program.cc:453
 #, c-format
 msgid "%1$s because: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #. * TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}'
 #: ../../src/logic/production_program.cc:466
 #, c-format
 msgid "%s or "
-msgstr ""
+msgstr "%sまたは "
 
 #. * TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}'
 #: ../../src/logic/production_program.cc:470
 #, c-format
 msgid "%1$s because not: %2$s"
-msgstr ""
+msgstr "%1$s:%2$sなし"
 
 #. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
 #: ../../src/logic/production_program.cc:831
 #, c-format
 msgid "Failed %s because:"
-msgstr ""
+msgstr "失敗: %s"
 
 #: ../../src/logic/production_program.cc:861
 #, c-format
 msgid "%s and"
-msgstr ""
+msgstr "%sと"
 
 #. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
 #: ../../src/logic/production_program.cc:867
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " が不足"
 
 #. * TRANSLATORS: Number used in list of wares
 #. * TRANSLATORS: Number used in list of workers
@@ -952,19 +960,19 @@ msgstr "%u "
 #: ../../src/logic/production_program.cc:970
 #: ../../src/logic/production_program.cc:1069
 msgid ", "
-msgstr ", "
+msgstr "/ "
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:974
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "%sの生産"
 
 #. * TRANSLATORS: %s is a lost of workers
 #: ../../src/logic/production_program.cc:1072
 #, c-format
 msgid "Recruited %s"
-msgstr ""
+msgstr "%sの補充"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
 #: ../../src/logic/production_program.cc:1129
@@ -975,84 +983,93 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1242
 #, c-format
 msgid "Can’t find any more resources!"
-msgstr ""
+msgstr "残存資源が見つかりません"
 
 #: ../../src/logic/production_program.cc:1263
 msgid "Main Vein Exhausted"
-msgstr ""
+msgstr "主要鉱脈の枯渇"
 
 #: ../../src/logic/production_program.cc:1265
 msgid ""
 "This mine’s main vein is exhausted. Expect strongly diminished returns on "
 "investment. You should consider expanding, dismantling or destroying it."
 msgstr ""
+"この鉱山の主な鉱脈が枯渇しました。\n"
+"費用対効果の大幅な減少が予想されます。\n"
+"解体するか破壊するかを\n"
+"検討する必要があります。"
 
 #: ../../src/logic/production_program.cc:1314
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "訓練する兵士が存在しません。"
 
 #: ../../src/logic/production_program.cc:1324
 #: ../../src/logic/production_program.cc:1414
 #, c-format
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "この訓練レベルの兵士が見つかりません！"
 
 #: ../../src/logic/productionsite.cc:209
 msgid "(not occupied)"
-msgstr ""
+msgstr "(未入居)"
 
 #: ../../src/logic/productionsite.cc:213
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "労働者が不足"
 
 #: ../../src/logic/productionsite.cc:222
 msgid "(stopped)"
-msgstr ""
+msgstr "(停止中)"
 
 #: ../../src/logic/ship.cc:455
 msgid "Port Space Found"
-msgstr ""
+msgstr "港スペースを発見"
 
 #: ../../src/logic/ship.cc:456
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "探検船は新しい港建設スペースを見つけました。"
 
 #: ../../src/logic/ship.cc:563
 msgid "Island Circumnavigated"
-msgstr ""
+msgstr "島を一周"
 
 #: ../../src/logic/ship.cc:564
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
+"なにもイベントが起きないまま、\n"
+"探検船が島を巡り終えました。"
 
 #: ../../src/logic/ship.cc:618
 msgid "Coast Reached"
-msgstr ""
+msgstr "海岸に到達"
 
 #: ../../src/logic/ship.cc:620
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
+"探検船が海岸に到達し、\n"
+"さらにコマンドを待っています。"
 
 #: ../../src/logic/ship.cc:784
 msgid "Expedition Ready"
-msgstr ""
+msgstr "探検準備"
 
 #: ../../src/logic/ship.cc:785
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "探検船はコマンドを待っています。"
 
 #: ../../src/logic/soldier.cc:1563 ../../src/logic/soldier.cc:1572
 msgid "Logic error"
-msgstr ""
+msgstr "ロジックエラー"
 
 #: ../../src/logic/warehouse.cc:472
 #, c-format
 msgid "A new %s was added to your economy."
 msgstr ""
+"新しい%sを\n"
+"経済に追加しました。"
 
 #: ../../src/logic/worker.cc:111
 #, c-format
@@ -1071,34 +1088,36 @@ msgstr ""
 #: ../../src/logic/worker.cc:610
 #, c-format
 msgid "Out of %s"
-msgstr ""
+msgstr "%s不足"
 
 #: ../../src/logic/worker.cc:611
 #, c-format
 msgid "The worker of this building cannot find any more %s."
 msgstr ""
+"この建物の労働者は\n"
+"もう%sを発見できません 。"
 
 #: ../../src/logic/worker.cc:956
 msgid "A geologist found resources."
-msgstr ""
+msgstr "地質学者が資源を発見しました。"
 
 #: ../../src/logic/worker.cc:1859
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "%sが道に迷い、おそらく死んでしまいます。"
 
 #: ../../src/logic/worker.cc:1866
 msgid "Worker got lost!"
-msgstr ""
+msgstr "労働者が迷子です。"
 
 #: ../../src/map_io/widelands_map_loader.cc:82
 msgid "Invalid World"
-msgstr ""
+msgstr "不正なワールド"
 
 #: ../../src/map_io/widelands_map_loader.cc:84
 #, c-format
 msgid "The world \"%s\" set by the map does not exist on your filesystem."
-msgstr ""
+msgstr "マップに指定されているワールド%sがファイルに存在しません。"
 
 #: ../../src/network/internet_gaming.cc:117
 #: ../../src/ui_fsmenu/internet_lobby.cc:431
@@ -1107,11 +1126,11 @@ msgstr "接続エラー"
 
 #: ../../src/network/internet_gaming.cc:117
 msgid "Widelands could not connect to the metaserver."
-msgstr ""
+msgstr "Widelandsはメタサーバーに接続できませんでした。"
 
 #: ../../src/network/internet_gaming.cc:123 ../../src/network/netclient.cc:105
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "ホストへの接続を確立できませんでした"
 
 #: ../../src/network/internet_gaming.cc:125
 msgid ""
@@ -1119,10 +1138,13 @@ msgid ""
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
+"Widelandsは、指定されたアドレスへの接続を確立できませんでした。\n"
+"予期していたポートでメタサーバーが動作していなかったか、\n"
+"ネットワークの設定が壊れています。"
 
 #: ../../src/network/internet_gaming.cc:172
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr ""
+msgstr "ゲームをホストするには次の注意事項を見てみてください。"
 
 #: ../../src/network/internet_gaming.cc:303
 msgid "Something went wrong: "
@@ -1130,7 +1152,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:393
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "正常にメタサーバーに再接続しました。"
 
 #: ../../src/network/internet_gaming.cc:400
 msgid "Mixed up"
@@ -1138,11 +1160,11 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:400
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr ""
+msgstr "メタサーバーが接続時に未知のエラーを送信しました"
 
 #: ../../src/network/internet_gaming.cc:411
 msgid "Unexpected packet"
-msgstr ""
+msgstr "予期しないパケット"
 
 #: ../../src/network/internet_gaming.cc:413
 #, c-format
@@ -1150,118 +1172,118 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
+"ログインや再ログイン、またはサーバーからの拒否パケットを予期していましたが、コマンド%sを受信しました。おそらくメタサーバーが異なるプロトコルバージョンを"
+"使用しています。"
 
 #: ../../src/network/internet_gaming.cc:426
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr ""
+msgstr "警告: 接続状態ではありませんが、%sコマンドを受信しました。"
 
 #: ../../src/network/internet_gaming.cc:436
 #, c-format
 msgid "InternetGaming: Server time offset is %u second."
 msgid_plural "InternetGaming: Server time offset is %u seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ネットゲーム: サーバー時刻との差は%u秒です。"
 
 #: ../../src/network/internet_gaming.cc:441
 #, c-format
 msgid "Server time offset is %u second."
 msgid_plural "Server time offset is %u seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "サーバー時刻との差は%u秒です。"
 
 #: ../../src/network/internet_gaming.cc:464
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "不正なチャットメッセージタイプ「%s」です。"
 
 #: ../../src/network/internet_gaming.cc:464
 msgid "Invalid message type"
-msgstr ""
+msgstr "不正なメッセージタイプ"
 
 #: ../../src/network/internet_gaming.cc:500
 #, c-format
 msgid "The game %s is now available"
-msgstr ""
+msgstr "ゲーム%sは利用可能です"
 
 #: ../../src/network/internet_gaming.cc:509
 #, c-format
 msgid "The game %s has been closed"
-msgstr ""
+msgstr "ゲーム%sは閉鎖しています"
 
 #: ../../src/network/internet_gaming.cc:544
 #, c-format
 msgid "%s joined the lobby"
-msgstr ""
+msgstr "%sがロビーに入室しました"
 
 #: ../../src/network/internet_gaming.cc:553
 #, c-format
 msgid "%s left the lobby"
-msgstr ""
+msgstr "%sがロビーを退室しました"
 
 #: ../../src/network/internet_gaming.cc:587
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "チャットメッセージを送信できませんでした。 "
 
 #: ../../src/network/internet_gaming.cc:601
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "エラー: %s"
 
 #: ../../src/network/internet_gaming.cc:611
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
-msgstr ""
+msgstr "メタサーバーから不明なコマンドを受信しました: %s"
 
 #: ../../src/network/internet_gaming.cc:744
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "メッセージを送信できませんでした。あなたはメタサーバーに接続されていません"
 
 #: ../../src/network/internet_gaming.cc:756
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr ""
+msgstr "メッセージを送信できませんでした。これはプライベートメッセージになるはずでしたか？"
 
 #: ../../src/network/internet_gaming.cc:830
 msgid "Conversion error"
-msgstr ""
+msgstr "変換エラー"
 
 #: ../../src/network/internet_gaming.cc:831
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
-msgstr ""
+msgstr "std ::stringからboolへの変換に失敗しました。文字列は「%s」でした"
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "There is no user with the name %s logged in!"
-msgstr ""
+msgstr "%sというユーザーはログインしていません。"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1281
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "送信されたパスワードは正しくありません。"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "ご使用のプロトコルバージョンはサポートされていません。"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "既にログインしています。"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr ""
+msgstr "スーパーユーザーの許可なく、スーパーユーザーのコマンドを送信したため、切断されました。この事件は記録され、管理者に報告されます。"
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
-msgstr ""
+msgstr "メタサーバーが現在再起動しているため、切断されました。"
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "接続はクライアントによって正常に終了しました。"
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
@@ -1269,7 +1291,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "メタサーバーが応答しません"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game can’t be connected to from the internet"
@@ -1279,7 +1301,7 @@ msgstr ""
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr ""
+msgstr "時間内にpingに応答しなかったため、メタサーバーから切断されました。"
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -1288,12 +1310,14 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
 "internet connection for hosting a game online."
 msgstr ""
+"メタサーバーはゲームに接続できませんでした。おそらくはインターネットからの接続ではありません。オンラインでゲームをホストするためのインターネット接続をセッ"
+"トアップするにはhttp://wl.widelands.org/wiki/InternetGamingをご覧下さい。"
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
 "You tried to log back in, but the server has no knowledge of your previous "
 "state anymore."
-msgstr ""
+msgstr "再ログインしようとしましたが、サーバーはあなたの以前の状態についての記憶がありません。"
 
 #: ../../src/network/netclient.cc:107
 msgid ""
@@ -1301,125 +1325,135 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"Widelandsは指定されたアドレスへの接続を確立できませんでした。\n"
+"予期していたポートでWidelandsサーバーが動作していなかったか、\n"
+"あなたが接続しようとしたときに、サーバーがシャットダウンしました。"
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:848
 #: ../../src/wlapplication.cc:1666
 msgid "Preparing game"
-msgstr ""
+msgstr "ゲーム準備中"
 
 #: ../../src/network/netclient.cc:863
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me のファイルがMD5チェックに失敗しました。"
 
 #: ../../src/network/netclient.cc:893
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr ""
+msgstr "/me が受信したファイルをチェックしました。MD5チェックに成功しましたが、ファイルを扱うことができません。"
 
 #: ../../src/network/netclient.cc:1100
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr " 自動セーブデータを作成します。"
 
 #: ../../src/network/netclient.cc:1104
 msgid "Disconnected from Host"
-msgstr ""
+msgstr "ホストから切断"
 
 #: ../../src/network/nethost.cc:371 ../../src/network/nethost.cc:1212
 #: ../../src/network/nethost.cc:1223
 msgid "Available host commands are:"
-msgstr ""
+msgstr "利用可能なホストコマンドはつぎのとおりです。"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:373 ../../src/network/nethost.cc:1214
 #: ../../src/network/nethost.cc:1225
 msgid "/help  -  Shows this help"
-msgstr ""
+msgstr "/help - このヘルプを表示"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:375
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr ""
+"/announce<msg>\n"
+" - アナウンス（システムチャット）として\n"
+"チャットメッセージを送信"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:377
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr ""
+"/warn <name> <reason> \n"
+" - <reason>の理由でユーザー<name>に警告"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:379
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr ""
+"/kick <name> <reason> \n"
+" - <reason>の理由でユーザー<name>をキック"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:381
 msgid "/forcePause            -  Force the game to pause."
-msgstr ""
+msgstr "/forcePause - ゲームを強制的に一時停止"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:383
 msgid "/endForcedPause        -  Return game to normal speed."
-msgstr ""
+msgstr "/endForcedPause - ゲームを通常の速度に戻す"
 
 #: ../../src/network/nethost.cc:392
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "コマンドが不正です。たとえば /announce <message>"
 
 #: ../../src/network/nethost.cc:405
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "コマンドが不正です。たとえば /warn <name> <reason>"
 
 #: ../../src/network/nethost.cc:413
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "自分には警告できません。"
 
 #: ../../src/network/nethost.cc:415
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "専用サーバーには警告できません。"
 
 #: ../../src/network/nethost.cc:419 ../../src/network/nethost.cc:445
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "クライアント%sが見つかりません。"
 
 #: ../../src/network/nethost.cc:430
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "コマンドが不正です。たとえば /kick <name> <reason>"
 
 #: ../../src/network/nethost.cc:441
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "自分をキックすることはできません。"
 
 #: ../../src/network/nethost.cc:443
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "専用サーバーをキックすることはできません"
 
 #: ../../src/network/nethost.cc:448
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr ""
+msgstr "%sをキックしてもよろしいですか？"
 
 #: ../../src/network/nethost.cc:449
 #, c-format
 msgid "The stated reason was: %s"
-msgstr ""
+msgstr "宣言理由: %s"
 
 #: ../../src/network/nethost.cc:450
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "はいの場合は  /ack_kick %s と入力してください"
 
 #: ../../src/network/nethost.cc:460
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "キックの承認がキャンセルされました: 指定した名前がありません"
 
 #: ../../src/network/nethost.cc:462
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "コマンドが不正です。たとえば /ack_kick <name>"
 
 #: ../../src/network/nethost.cc:468
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "キックの承認がキャンセルされました: 指定した名前が間違っています"
 
 #: ../../src/network/nethost.cc:479
 msgid "Pause was already forced - game should be paused."
@@ -1431,34 +1465,34 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:502
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "無効なコマンドです。コマンド一覧を見るには /help と入力します。"
 
 #: ../../src/network/nethost.cc:742
 #, c-format
 msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
-msgstr ""
+msgstr "これは専用サーバーです。使用可能なコマンドのすべての一覧を取得するには「@%s help」と送信します。"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1216 ../../src/network/nethost.cc:1227
 msgid "host $ - Tries to run the host command $"
-msgstr ""
+msgstr "host $ - ホストコマンド$を実行しようとする"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1218
 msgid "save $ - Saves the current game state as $.wgf"
-msgstr ""
+msgstr "save $ - 現在のゲーム状態を$.wgfとして保存する"
 
 #: ../../src/network/nethost.cc:1231
 msgid "pwd $  - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd          $ - ホストにパスワードを送信する"
 
 #: ../../src/network/nethost.cc:1238
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
-msgstr ""
+msgstr "ホストコマンドへのアクセスが拒否されました。アクセスするには、pwdコマンドでパスワードを送信します。"
 
 #: ../../src/network/nethost.cc:1243
 #, c-format
@@ -1467,38 +1501,38 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1252
 msgid "Sorry! Saving was deactivated on this dedicated server!"
-msgstr ""
+msgstr "申し訳ありませんが、ゲーム保存はこの専用サーバー上で非アクティブにされました。"
 
 #: ../../src/network/nethost.cc:1255
 msgid "Cannot save while there is no game running!"
-msgstr ""
+msgstr "実行中のゲームがないため、保存できません。"
 
 #: ../../src/network/nethost.cc:1266
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "ゲームが正常に保存されました。"
 
 #: ../../src/network/nethost.cc:1269
 #, c-format
 msgid "Could not save the game to the file \"%1$s\"! (%2$s)"
-msgstr ""
+msgstr "ファイル「%1$s」にゲームを保存できませんでした。(%2$s)"
 
 #: ../../src/network/nethost.cc:1278
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "このサーバーはパスワードで保護されていません。"
 
 #: ../../src/network/nethost.cc:1294
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "パスワードが正しかったため、アクセスが許可されました。"
 
 #: ../../src/network/nethost.cc:1300
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr ""
+msgstr "不明なコマンド「%s」です。"
 
 #: ../../src/network/nethost.cc:2002
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "コンピュータ%u"
 
 #: ../../src/network/nethost.cc:2068
 #: ../../src/single_player_game_settings_provider.cc:86
@@ -1511,7 +1545,7 @@ msgstr "プレイヤー"
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
-msgstr ""
+msgstr "このサーバーは、パスワードで保護されています。つぎのようにしてパスワードを送信することができます: 「@%s pwd PASSWORD」"
 
 #: ../../src/network/nethost.cc:2265
 #, c-format
@@ -1526,7 +1560,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "クライアントがクラッシュし、緊急セーブを行いました。"
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
@@ -1538,29 +1572,29 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "あなたが接続しようとした直後に、ゲームが開始しました。"
 
 #: ../../src/network/network_gaming_messages.cc:127
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "サーバーがクラッシュして、緊急セーブが行われました。"
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr ""
+msgstr "クライアントへの接続がタイムアウト: 10分間応答なし"
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "クライアントとホストが非同期になっています。"
 
 #: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "ホストによってキックされました: %s"
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "クライアントは、不正な形式のコマンドを送信しました: %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
@@ -1570,41 +1604,41 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$sがゲームを退出しました(%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "不明なユーザーがゲームを退出しました(%s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
+msgstr "サーバーは、ゲームが実行されていないにもかかわらず、SYNCREQUESTを送信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Received a PLAYERCOMMAND even though no game is running."
-msgstr ""
+msgstr "ゲームが実行されていないにもかかわらず、PLAYERCOMMANDを受信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:137
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
+msgstr "予期せずにサーバーからLAUNCHコマンドを受信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:138
 msgid "Server sent a player update for a player that does not exist."
-msgstr ""
+msgstr "サーバーは存在していないプレイヤーのプレイヤー更新を送信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:139
 msgid "Server sent a user update for a user that does not exist."
-msgstr ""
+msgstr "サーバーは存在していないユーザーのユーザー更新を送信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:140
 msgid "Server uses a different protocol version"
-msgstr ""
+msgstr "サーバーは異なるプロトコルバージョンを使用しています"
 
 #: ../../src/network/network_gaming_messages.cc:141
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
-msgstr ""
+msgstr "この状態で許可されていないコマンド番号%sを受け取りました。"
 
 #: ../../src/network/network_gaming_messages.cc:143
 msgid "Client reports time to host that is running backwards."
@@ -1616,11 +1650,11 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "Client did not submit sync report in time."
-msgstr ""
+msgstr "クライアントは、時間内に同期レポートを送信しませんでした。"
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "The game has already started."
-msgstr ""
+msgstr "このゲームはすでに開始しています。"
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client has no access to other player’s settings."
@@ -1628,23 +1662,23 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "クライアントは、サーバーの設定にアクセスできません。"
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
-msgstr ""
+msgstr "クライアントは、サーバーがまだ準備できていませんが、startコマンドを送信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
-msgstr ""
+msgstr "クライアントは、ゲームが実行されていないにもかかわらず、TIMEコマンドを送信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client sent a PLAYERCOMMAND for another player."
-msgstr ""
+msgstr "クライアントは、他のプレイヤーのためにプレイヤーコマンドを送信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:152
 msgid "Client sent unexpected synchronization report."
-msgstr ""
+msgstr "クライアントが予期しない同期レポートを送信しました。"
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "Client requests file although none is available to send."
@@ -1662,63 +1696,63 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:157
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
-msgstr ""
+msgstr "警告: %1$sはバージョン%2$sを使用していますが、ホストはバージョン%3$sを使用しています。"
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%sがゲームに参加しました"
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Game was saved as %s."
-msgstr ""
+msgstr "ゲームを%sに保存しました。"
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
-msgstr ""
+msgstr "ファイル%1$sの%2$sへの送信を開始"
 
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
-msgstr ""
+msgstr "ファイル%1$sの%2$sへの転送を完了"
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "Sending part %1$s of file %2$s to %3$s"
-msgstr ""
+msgstr "ファイル%2$sの部分%1$sを%3$sに送信中"
 
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
-msgstr ""
+msgstr "プレイヤー「%s」が敗北し観客になりました。"
 
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
-msgstr ""
+msgstr "クライアント%1$sが%2$s秒以上応答しませんでした。"
 
 #: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid ""
 "Client %1$s will automatically be kicked, if no answer is received within "
 "%2$s."
-msgstr ""
+msgstr "%2$s秒以内に応答しない場合、クライアント%1$sは自動的にキックされます。"
 
 #: ../../src/replay_game_controller.cc:107
 msgid "End of replay"
-msgstr "リプレイの終了"
+msgstr "リプレイ終了"
 
 #: ../../src/replay_game_controller.cc:108
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
-msgstr ""
+msgstr "リプレイが終了したため、ゲームを一時停止しています。一時停止を解除すると観察を続行できます。"
 
 #: ../../src/s2map.cc:232
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr ""
+msgstr "Bluebyte Settlers IIのマップです。コメントが定義されていません。"
 
 #: ../../src/s2map.cc:874
 #, c-format
@@ -1731,23 +1765,24 @@ msgid_plural ""
 "removed! Some islands might be unreachable now. Please consider fixing the "
 "map in the map editor."
 msgstr[0] ""
-msgstr[1] ""
+"警告: %i "
+"不正な港建設スペースが、修正できず削除されました。現在、一部の島が到達不能になるかもしれません。マップエディタでマップを修正することを検討してください。"
 
 #: ../../src/s2map.cc:889
 msgid "WARNING"
-msgstr ""
+msgstr "警告:"
 
 #: ../../src/save_handler.cc:76
 msgid "Saving game..."
-msgstr ""
+msgstr "ゲーム保存中..."
 
 #: ../../src/save_handler.cc:95
 msgid "Saving failed!"
-msgstr ""
+msgstr "保存が失敗"
 
 #: ../../src/save_handler.cc:114
 msgid "Game saved"
-msgstr ""
+msgstr "保存に成功"
 
 #: ../../src/scripting/lua_game.cc:1085
 #, c-format
@@ -1757,7 +1792,7 @@ msgstr ""
 #: ../../src/ui_basic/helpwindow.cc:48 ../../src/ui_basic/helpwindow.cc:189
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "ヘルプ: %s"
 
 #: ../../src/ui_basic/messagebox.cc:99
 msgid "Yes"
@@ -1769,40 +1804,40 @@ msgstr "いいえ"
 
 #: ../../src/ui_basic/progresswindow.cc:51
 msgid "Preparing..."
-msgstr ""
+msgstr "準備中..."
 
 #: ../../src/ui_basic/spinbox.cc:115
 msgid "Increase the value"
-msgstr ""
+msgstr "値を増やす"
 
 #: ../../src/ui_basic/spinbox.cc:123
 msgid "Decrease the value"
-msgstr ""
+msgstr "値を減らす"
 
 #: ../../src/ui_basic/spinbox.cc:134
 msgid "Increase the value by 10"
-msgstr ""
+msgstr "値を10増やす"
 
 #: ../../src/ui_basic/spinbox.cc:142
 msgid "Decrease the value by 10"
-msgstr ""
+msgstr "値を10減らす"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:53
 msgid "Select a campaign"
-msgstr ""
+msgstr "キャンペーンを選択してください"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:55
 msgid "Campaign:"
-msgstr "キャンペーン："
+msgstr "キャンペーン"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:59
 msgid "Difficulty:"
-msgstr ""
+msgstr "難易度"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:63
 #: ../../src/ui_fsmenu/campaign_select.cc:271
 msgid "Description:"
-msgstr ""
+msgstr "説明"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:79
 #: ../../src/ui_fsmenu/campaign_select.cc:286 ../../src/ui_fsmenu/editor.cc:53
@@ -1814,7 +1849,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/netsetup_lan.cc:71
 #: ../../src/ui_fsmenu/singleplayer.cc:62
 msgid "Back"
-msgstr ""
+msgstr "戻る"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:164
 #: ../../src/ui_fsmenu/campaign_select.cc:166
@@ -1826,55 +1861,55 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:171
 msgid "[Invalid entry]"
-msgstr ""
+msgstr "[不正な入力]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:265
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "マップを選択してください"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:350
 #, c-format
 msgid "Invalid path to file in cconfig: %s"
-msgstr ""
+msgstr "cconfig内のファイルへの無効なパス: %s"
 
 #: ../../src/ui_fsmenu/editor.cc:36 ../../src/ui_fsmenu/main.cc:60
 msgid "Editor"
-msgstr ""
+msgstr "エディタ"
 
 #: ../../src/ui_fsmenu/fileview.cc:73 ../../src/wui/watchwindow.cc:139
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:54
 msgid "Metaserver Lobby"
-msgstr ""
+msgstr "メタサーバー ロビー"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:58
 msgid "Clients online:"
-msgstr ""
+msgstr "クライアント(オンライン)"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:62
 msgid "List of games:"
-msgstr ""
+msgstr "ゲーム一覧"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:66
 msgid "Name of your server:"
-msgstr ""
+msgstr "自分のサーバー名"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:70
 msgid "Maximum of players:"
-msgstr ""
+msgstr "最大プレイヤー数"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:83
 #: ../../src/ui_fsmenu/netsetup_lan.cc:61
 msgid "Join this game"
-msgstr ""
+msgstr "このゲームに参加"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:88
 msgid "Open a new game"
-msgstr ""
+msgstr "新規ゲームを開く"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "User Status"
@@ -1882,32 +1917,32 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:161
 msgid "Registered"
-msgstr ""
+msgstr "登録済"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:163
 msgid "Administrator"
-msgstr ""
+msgstr "管理者"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:165
 msgid "Unregistered"
-msgstr ""
+msgstr "未登録"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:168
 #: ../../src/wui/building_statistics_menu.cc:110
 msgid "Name"
-msgstr "名称"
+msgstr "名前"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:169
 msgid "Points"
-msgstr ""
+msgstr "ポイント"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:170
 msgid "Game"
-msgstr ""
+msgstr "ゲーム"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:401
 msgid "Connection timed out"
-msgstr ""
+msgstr "接続がタイムアウトしました"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:404
 msgid ""
@@ -1915,89 +1950,92 @@ msgid ""
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
+"Widelandsは時間内にサーバーのIPアドレスを取得することができません\n"
+"でした。あなた側もしくはサーバー側に、ネットワーク上の問題がある\n"
+"ようです。\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:432
 msgid "Widelands was unable to connect to the host."
-msgstr ""
+msgstr "Widelandsがホストに接続できませんでした。"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "ESCキーを押すかクリックして続行します..."
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game
 #: ../../src/ui_fsmenu/launchMPG.cc:54
 msgid "Please select"
-msgstr ""
+msgstr "選択してください"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:67 ../../src/ui_fsmenu/launchMPG.cc:168
 #: ../../src/ui_fsmenu/netsetup_lan.cc:126 ../../src/wui/minimap.cc:145
 msgid "Map"
-msgstr "地図"
+msgstr "マップ"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:67
 msgid "Select a map"
-msgstr ""
+msgstr "マップを選択します"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:77
 msgid "Saved game"
-msgstr ""
+msgstr "セーブデータ"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:77
 msgid "Select a saved game"
-msgstr ""
+msgstr "セーブデータを選択します"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:87
 msgid "Cancel selection"
-msgstr ""
+msgstr "選択をキャンセルします"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:124
 msgid "Change map or saved game"
-msgstr ""
+msgstr "マップまたはセーブデータを変更"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:129 ../../src/ui_fsmenu/launchSPG.cc:73
 msgid "Start game"
-msgstr ""
+msgstr "ゲームスタート"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:145
 msgid "Show the help window"
-msgstr ""
+msgstr "ヘルプウィンドウを表示"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:151 ../../src/ui_fsmenu/launchMPG.cc:669
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "マルチプレイ設定"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:160
 msgid "Clients"
-msgstr ""
+msgstr "クライアント"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:172 ../../src/ui_fsmenu/launchSPG.cc:108
 msgid "Type of game"
-msgstr ""
+msgstr "ゲームタイプ"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:217 ../../src/ui_fsmenu/launchSPG.cc:288
 msgid "(no map)"
-msgstr ""
+msgstr "(マップなし)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:218
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "ホストがまだマップまたはセーブデータを選択していません。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:291 ../../src/ui_fsmenu/launchSPG.cc:239
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "勝利条件はシナリオを設定されています"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:293
 #: ../../src/wui/multiplayersetupgroup.cc:357
 msgid "Savegame"
-msgstr ""
+msgstr "セーブデータ"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:295
 msgid "The game is a saved game – the win condition was set before."
-msgstr ""
+msgstr "保存済のゲームです。勝利条件が既に設定されています。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:394
 msgid "Saved game is directory"
-msgstr ""
+msgstr "セーブデータがディレクトリ"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:396
 msgid ""
@@ -2007,10 +2045,13 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, "
 "please select another saved game or zip the directories’ content."
 msgstr ""
+"警告: \n"
+"選択した保存したゲームはディレクトリです。これは、あなたがオプション「nozip」をtrueに設定するか、セーブデータを手動で解凍した場合に発生します。W"
+"idelandsがクライアントにディレクトリ構造を転送することはありませんので、別のセーブデータを選択またはディレクトリの内容を圧縮してください。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:425 ../../src/ui_fsmenu/launchSPG.cc:262
 msgid "File not found"
-msgstr ""
+msgstr "ファイルが見つかりません"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:427
 #, c-format
@@ -2022,133 +2063,148 @@ msgid ""
 "Normally, such a file should be sent from the host to you, but perhaps the "
 "transfer was not yet finished!?!"
 msgstr ""
+"Widelandsは、指定されたパスで見つからなかったファイルを使用して、ゲームを開始しようとしました。\n"
+"ファイル %s:\n"
+"この問題が発生した場合、ホストがあなたが所有していないファイルを選択している可能性があります。 "
+"通常このようなファイルは、ホストから送信されるはずですが、おそらく転送がまだ終了していませんでした。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:451
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr ""
+msgstr "選択したファイルが見つかりません。それが自動的に転送されていない場合は、この問題についてホストに問い合わせてください。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:483
 #: ../../src/wui/multiplayersetupgroup.cc:120
 #: ../../src/wui/multiplayersetupgroup.cc:286
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "プレイヤー %i"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:485
 #: ../../src/wui/multiplayersetupgroup.cc:122
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "観客"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:486
 #, c-format
 msgid "At the moment you are %s"
-msgstr ""
+msgstr "現在あなたは%sです"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:487
 msgid "Click on the ‘?’ in the top right corner to get help."
-msgstr ""
+msgstr "ヘルプを表示するには、画面右上の「？」をクリックしてください。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:548
 msgid "Saved players are:"
-msgstr ""
+msgstr "保存済プレイヤー"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:564
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "プレイヤー%u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "closed"
-msgstr ""
+msgstr "閉鎖"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:632
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "マップファイルが壊れている可能性があります。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:632
 msgid "There was an error!"
-msgstr ""
+msgstr "エラー"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:648
 msgid "Map details:"
-msgstr ""
+msgstr "マップ詳細"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 #, c-format
 msgid "Size: %1$u x %2$u"
-msgstr ""
+msgstr "サイズ　 %1$u x %2$u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:651
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "人数　　 %u人"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:653
 #, c-format
 msgid "World: %s"
-msgstr ""
+msgstr "ワールド %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:655
 msgid "Scenario mode selected"
-msgstr ""
+msgstr "シナリオモードを選択"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:670
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "ここはマルチプレイのゲーム起動メニューです。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:671
 msgid "Client settings"
-msgstr ""
+msgstr "クライアント設定"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:674
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role With the button following your nickname. Available roles are:"
 msgstr ""
+"画面左側は、あなたを含めたすべてのクライアントの一覧です。\n"
+"ニックネームの横のボタンを使用すると役割を設定できます。\n"
+"使用できる役割は次のとおりです。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:678
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr ""
+"色旗のプレイヤーです。複数のクライアントが同色の場合は、\n"
+"プレイヤーの操作を共有します（「共有国モード」）。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:682
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any player"
 msgstr ""
+"また観客モードではすべてを観察できますが、\n"
+"プレイヤーを操作できません。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:684
 msgid "Player settings"
-msgstr ""
+msgstr "プレイヤー設定"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:687
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
-msgstr ""
+msgstr "画面中央はプレイヤー設定です。ゲームを開始するには、各プレイヤーが次のいずれかである必要があります。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:690
 msgid "Connected to one or more clients (see ‘Client settings’)."
 msgstr ""
+"一人以上のクライアントが接続しています\n"
+"（「クライアント設定」参照）。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:693
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicate the strength of the currently selected computer player)."
 msgstr ""
+"コンピュータプレイヤーが接続しています。\n"
+"（画像の顔とマウスオーバー時のテキストは、\n"
+"コンピュータプレイヤーの強さを表します。）"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:696
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "他プレイヤーの共通開始位置として設定します。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:697
 msgid "Closed."
-msgstr ""
+msgstr "閉鎖しています。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:700
 msgid ""
@@ -2157,16 +2213,19 @@ msgid ""
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
 msgstr ""
+"あとの３つは、プレイヤーの「タイプ」ボタンを左クリックすることによって、ホスティング クライアントで設定可能なだけです。 ホスティング "
+"プレイヤーは、それぞれのプレイヤーの初期設定（プレイヤーが開始する建物、アイテム、労働者の設定）とコンピュータ プレイヤー "
+"チームの部族をさらに設定することができます。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:705
 msgid ""
 "Every client connected to a player (the set ‘role’ player) can set the tribe "
 "and the team for that player"
-msgstr ""
+msgstr "プレイヤー（プレイヤー「役割」の設定）に接続しているあらゆるクライアントは、部族とチームをそのプレイヤーに設定することができます。"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:707
 msgid "Map details"
-msgstr ""
+msgstr "マップ詳細"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:710
 msgid ""
@@ -2175,39 +2234,43 @@ msgid ""
 "map. Furthermore, the host is able to set a specific win condition, and "
 "finally can start the game as soon as all players are set up."
 msgstr ""
+"画面右側では、選択したマップやセーブデータの情報を見ることができます。\n"
+"マップ名の右横のボタンで、別のマップに変更できます。\n"
+"さらに、ホストは特定の勝利条件を設定し、\n"
+"全プレイヤーが設定でき次第にゲームを開始することができます。"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:58
 msgid "Select map"
-msgstr ""
+msgstr "マップ選択"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:79
 msgid "Launch Game"
-msgstr ""
+msgstr "ゲーム起動"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:87
 msgid "Player’s name"
-msgstr ""
+msgstr "プレイヤー名"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:92
 msgid "Player’s type"
-msgstr ""
+msgstr "プレイヤータイプ"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:461
 msgid "Team"
-msgstr ""
+msgstr "チーム"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Player’s tribe"
-msgstr ""
+msgstr "プレイヤー部族"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:104
 msgid "Start type"
-msgstr ""
+msgstr "初期設定"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:165
 msgid "Switch to position"
-msgstr ""
+msgstr "位置を入れ替える"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:264
 #, c-format
@@ -2219,82 +2282,86 @@ msgid ""
 "you do not own. Normally, such a file should be sent from the host to you, "
 "but perhaps the transfer was not yet finished!?!"
 msgstr ""
+"Widelandsは、指定されたパスで見つからなかったファイルを使用して、ゲームを開始しようとしました。\n"
+"ファイル %s:\n"
+"ネットワークゲームでこの問題が発生した場合、ホストがあなたが所有していないファイルを選択している可能性があります。 "
+"通常このようなファイルは、ホストから送信されるはずですが、おそらく転送がまだ終了していませんでした。"
 
 #: ../../src/ui_fsmenu/loadgame.cc:74 ../../src/ui_fsmenu/loadreplay.cc:59
 #: ../../src/wui/game_main_menu_save_game.cc:114
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #: ../../src/ui_fsmenu/loadgame.cc:85
 msgid "Choose saved game"
-msgstr ""
+msgstr "セーブデータを選択してください"
 
 #: ../../src/ui_fsmenu/loadgame.cc:94 ../../src/ui_fsmenu/loadreplay.cc:80
 msgid "Gametime:"
-msgstr ""
+msgstr "プレイ時間"
 
 #: ../../src/ui_fsmenu/loadgame.cc:107
 msgid "Minimap:"
-msgstr ""
+msgstr "ミニマップ"
 
 #: ../../src/ui_fsmenu/loadgame.cc:159 ../../src/ui_fsmenu/loadreplay.cc:142
 msgid "Delete file"
-msgstr ""
+msgstr "ファイル削除"
 
 #: ../../src/ui_fsmenu/loadgame.cc:160 ../../src/ui_fsmenu/loadreplay.cc:143
 #, c-format
 msgid "Do you really want to delete %s?"
-msgstr ""
+msgstr "%sを削除してもよろしいですか？"
 
 #: ../../src/ui_fsmenu/loadgame.cc:217
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "専用サーバーからのセーブデータ"
 
 #: ../../src/ui_fsmenu/loadgame.cc:218
 msgid "Unknown gametime"
-msgstr ""
+msgstr "不明なプレイ時間"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:71
 msgid "Choose a replay"
-msgstr ""
+msgstr "リプレイを選択してください"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
-msgstr ""
+msgstr "チュートリアル"
 
 #: ../../src/ui_fsmenu/main.cc:45 ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "Single Player"
-msgstr ""
+msgstr "シングルプレイ"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
-msgstr ""
+msgstr "マルチプレイ"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
-msgstr ""
+msgstr "リプレイ"
 
 #: ../../src/ui_fsmenu/main.cc:65 ../../src/wui/game_options_menu.cc:46
 #: ../../src/wui/interactive_player.cc:107
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Options"
-msgstr ""
+msgstr "オプション"
 
 #: ../../src/ui_fsmenu/main.cc:75 ../../src/wui/game_options_menu.cc:62
 msgid "License"
-msgstr ""
+msgstr "ライセンス"
 
 #: ../../src/ui_fsmenu/main.cc:80 ../../src/wui/game_options_menu.cc:93
 msgid "Exit Game"
-msgstr ""
+msgstr "ゲーム終了"
 
 #: ../../src/ui_fsmenu/main.cc:86
 msgid "Version "
-msgstr ""
+msgstr "バージョン "
 
 #: ../../src/ui_fsmenu/main.cc:91
 msgid "by the Widelands Development Team"
-msgstr ""
+msgstr "by Widelands開発チーム"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
@@ -2302,78 +2369,80 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario"
-msgstr ""
+msgstr "シナリオとしてマップ読込"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:150
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:152
 msgid "Map Name"
-msgstr ""
+msgstr "マップ名"
 
 #: ../../src/ui_fsmenu/mapselect.cc:167
 msgid "Show all maps"
-msgstr ""
+msgstr "全マップを表示"
 
 #: ../../src/ui_fsmenu/mapselect.cc:172
 msgid "Official Map"
-msgstr ""
+msgstr "公式マップ"
 
 #: ../../src/ui_fsmenu/mapselect.cc:173
 msgid "Seafaring Map"
-msgstr ""
+msgstr "航海マップ"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "1v1"
-msgstr ""
+msgstr "１対１"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 2"
-msgstr ""
+msgstr "２人チーム"
 
 #: ../../src/ui_fsmenu/mapselect.cc:178
 msgid "Teams of 3"
-msgstr ""
+msgstr "３人チーム"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Teams of 4"
-msgstr ""
+msgstr "４人チーム"
 
 #: ../../src/ui_fsmenu/mapselect.cc:182
 msgid "Free for all"
-msgstr ""
+msgstr "飛び入り自由"
 
 #: ../../src/ui_fsmenu/mapselect.cc:183
 msgid "Unbalanced"
-msgstr ""
+msgstr "アンバランス"
 
 #: ../../src/ui_fsmenu/mapselect.cc:281
 msgid "(directory)"
-msgstr ""
+msgstr "(ディレクトリ)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:502
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
 msgstr ""
+"このマップファイルは、ファイルシステム上に存在しません。\n"
+"ここに表示されたデータは、サーバーによって送信されています。"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
-msgstr ""
+msgstr "ゲームタイプを選択してください"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:48
 msgid "Internet game"
-msgstr ""
+msgstr "インターネット"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:53
 msgid "LAN / Direct IP"
-msgstr ""
+msgstr "LAN / IP直接接続"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:84
 msgid "Show login dialog"
-msgstr ""
+msgstr "ログインダイアログを表示"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120 ../../src/wui/login_box.cc:74
@@ -2382,221 +2451,222 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
-msgstr ""
+msgstr "ネットワークゲーム開始"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
-msgstr ""
+msgstr "ゲーム一覧(ローカルネットワーク)"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
-msgstr ""
+msgstr "ニックネーム"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
-msgstr ""
+msgstr "ホストに接続"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:66
 msgid "Host a new game"
-msgstr ""
+msgstr "ホストとしてゲームを起動"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:77
 msgid "Load previous host"
-msgstr ""
+msgstr "前回のホストを読込"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125
 msgid "Host"
-msgstr ""
+msgstr "ホスト"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:127
 msgid "State"
-msgstr ""
+msgstr "状態"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:196
 #: ../../src/wui/multiplayersetupgroup.cc:270
 #: ../../src/wui/playerdescrgroup.cc:159
 msgid "Open"
-msgstr ""
+msgstr "開放"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:197
 #: ../../src/wui/multiplayersetupgroup.cc:259
 msgid "Closed"
-msgstr ""
+msgstr "閉鎖"
 
 #: ../../src/ui_fsmenu/options.cc:102 ../../src/ui_fsmenu/options.cc:445
 msgid "Advanced Options"
-msgstr ""
+msgstr "詳細オプション"
 
 #: ../../src/ui_fsmenu/options.cc:112 ../../src/ui_fsmenu/options.cc:426
 msgid "Apply"
-msgstr ""
+msgstr "適用"
 
 #: ../../src/ui_fsmenu/options.cc:123
 msgid "min."
-msgstr ""
+msgstr "分"
 
 #. * TRANSLATORS: Options: Remove Replays older than:
 #. * TRANSLATORS: This will have a number added in front of it
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "日"
 
 #: ../../src/ui_fsmenu/options.cc:138
 msgid "General Options"
-msgstr ""
+msgstr "一般オプション"
 
 #: ../../src/ui_fsmenu/options.cc:145
 msgid "Fullscreen"
-msgstr ""
+msgstr "フルスクリーン"
 
 #: ../../src/ui_fsmenu/options.cc:151
 msgid "Grab Input"
-msgstr ""
+msgstr "画面内にカーソルを制限"
 
 #: ../../src/ui_fsmenu/options.cc:157
 msgid "Enable Music"
-msgstr ""
+msgstr "BGMオン"
 
 #: ../../src/ui_fsmenu/options.cc:163
 msgid "Enable Sound"
-msgstr ""
+msgstr "効果音オン"
 
 #: ../../src/ui_fsmenu/options.cc:168
 msgid "Maximum FPS:"
-msgstr ""
+msgstr "最大FPS"
 
 #: ../../src/ui_fsmenu/options.cc:178
 msgid "In-game resolution"
-msgstr ""
+msgstr "ゲーム解像度"
 
 #: ../../src/ui_fsmenu/options.cc:183
 msgid "Language"
-msgstr ""
+msgstr "言語"
 
 #: ../../src/ui_fsmenu/options.cc:194
 msgid "In-game Options"
-msgstr ""
+msgstr "ゲームオプション"
 
 #: ../../src/ui_fsmenu/options.cc:201
 msgid "Use single Watchwindow Mode"
-msgstr ""
+msgstr "シングル監視ウィンドウモードを使用する"
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "旗を設置したあとすぐに道路の敷設を始める"
 
 #: ../../src/ui_fsmenu/options.cc:214
 msgid "Show buildings area preview"
-msgstr ""
+msgstr "建物の作業範囲を表示"
 
 #: ../../src/ui_fsmenu/options.cc:221
 msgid "Snap windows only when overlapping"
-msgstr ""
+msgstr "重なっているときだけウィンドウを収納"
 
 #: ../../src/ui_fsmenu/options.cc:227
 msgid "Dock windows to edges"
-msgstr ""
+msgstr "ウィンドウ端でドッキング"
 
 #: ../../src/ui_fsmenu/options.cc:232
 msgid "Save game automatically every"
-msgstr ""
+msgstr "ゲームを自動保存する間隔"
 
 #: ../../src/ui_fsmenu/options.cc:236
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "古いリプレイデータの削除期限"
 
 #. * TRANSLATORS Options: Remove Replays older than:
 #: ../../src/ui_fsmenu/options.cc:252
 msgid "Off"
-msgstr ""
+msgstr "オフ"
 
 #. * TRANSLATORS Options: Remove Replays older than:
 #: ../../src/ui_fsmenu/options.cc:254
 msgid "Never"
-msgstr ""
+msgstr "しない"
 
 #. * TRANSLATORS Options: Remove Replays older than:
 #: ../../src/ui_fsmenu/options.cc:256
 msgid "1 day"
-msgstr ""
+msgstr "1 日"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:320
 #, c-format
 msgid "%1$i x %2$i"
-msgstr ""
+msgstr "%1$i x %2$i"
 
 #: ../../src/ui_fsmenu/options.cc:340
 msgid "Try system language"
-msgstr ""
+msgstr "システム言語を試す"
 
 #: ../../src/ui_fsmenu/options.cc:432 ../../src/ui_fsmenu/options.cc:437
 msgid "px."
-msgstr ""
+msgstr "px"
 
 #: ../../src/ui_fsmenu/options.cc:456
 msgid "Main menu font:"
-msgstr ""
+msgstr "メインメニューのフォント"
 
 #: ../../src/ui_fsmenu/options.cc:462
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "メッセージ着信時に効果音を鳴らす"
 
 #: ../../src/ui_fsmenu/options.cc:470
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr ""
+msgstr "widelandsのデータファイル（マップ、リプレイ、セーブデータ）を圧縮しない"
 
 #: ../../src/ui_fsmenu/options.cc:475
 msgid "Distance for windows to snap to other panels:"
-msgstr ""
+msgstr "ウィンドウがパネルなどにドッキングされる距離"
 
 #: ../../src/ui_fsmenu/options.cc:479
 msgid "Distance for windows to snap to borders:"
-msgstr ""
+msgstr "ウィンドウが画面外に収納される距離"
 
 #: ../../src/ui_fsmenu/options.cc:485
 msgid "Remove Syncstream dumps on startup"
-msgstr ""
+msgstr "起動時にセグメンテーションダンプを削除"
 
 #: ../../src/ui_fsmenu/options.cc:491
 msgid "OpenGL rendering"
-msgstr ""
+msgstr "OpenGLでレンダリング"
 
 #: ../../src/ui_fsmenu/options.cc:496
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "ゲームチャットを透明な背景で表示"
 
 #: ../../src/ui_fsmenu/options.cc:537
 msgid "DejaVuSerif (Default)"
-msgstr ""
+msgstr "DejaVuSerif(デフォルト)"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:47
 msgid "New Game"
-msgstr ""
+msgstr "新規ゲーム"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:52
 msgid "Campaigns"
-msgstr ""
+msgstr "キャンペーン"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:57
 msgid "Load Game"
-msgstr ""
+msgstr "ゲーム読込"
 
 #: ../../src/wlapplication.cc:405
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr ""
+msgstr "エラー: メタサーバーに接続できませんでした（理由は上記参照）。\n"
 
 #: ../../src/wlapplication.cc:831 ../../src/wlapplication.cc:840
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "メイン実行可能ファイルのパスを見つけることができませんでした"
 
 #: ../../src/wlapplication.cc:960
 msgid ""
 "Waited 5 seconds to close audio. There are some problems here, so killing "
 "Widelands. Update your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"オーディオのクローズに５秒以上経過しています。なんらかの問題があるためwidelandsを強制終了します。この問題を解決するにはサウンドドライバーまたはS"
+"DLを更新してください。\n"
 
 #: ../../src/wlapplication.cc:1090
 msgid ""
@@ -2604,10 +2674,13 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"申し訳ありません。_WIN32では二重インスタンスでのデバッグができません。\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1093
 msgid "--double is disabled. This is not a debug build!"
-msgstr ""
+msgstr "--double は無効です。これはデバッグビルドではありません。"
 
 #: ../../src/wlapplication.cc:1194
 msgid "This is Widelands-"
@@ -2615,59 +2688,71 @@ msgstr "このWidelandsは..."
 
 #: ../../src/wlapplication.cc:1196
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "使い方: widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication.cc:1197
 msgid "Options:"
-msgstr ""
+msgstr "オプション:"
 
 #: ../../src/wlapplication.cc:1199
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
+msgstr " --<config-entry-name>=value  任意の設定ファイルで上書きします。"
 
 #: ../../src/wlapplication.cc:1200
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=FILENAME   端末に出力する代わりに、ファイルFILENAMEに\n"
+"                      ログを出力します。"
 
 #: ../../src/wlapplication.cc:1202
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" --datadir=DIRNAME    widelandsデータファイルを指定したディレクトリで\n"
+"                      使用します。"
 
 #: ../../src/wlapplication.cc:1204
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=DIRNAME    widelands設定ファイル、セーブデータ、リプレイを\n"
+"                      指定ディレクトリで使用します。"
 
 #: ../../src/wlapplication.cc:1207
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      デフォルトは ~/.widelands"
 
 #: ../../src/wlapplication.cc:1210
 msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL"
 msgstr ""
+" --coredump=[yes|no]  SDLを使用する代わりに\n"
+"                      セグメンテーション違反のコアダンプを生成します。"
 
 #: ../../src/wlapplication.cc:1212
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
 msgstr ""
+" --language=[de_DE|sv_SE|...]\n"
+"                      使用するロケール。"
 
 #: ../../src/wlapplication.cc:1214
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
-msgstr ""
+msgstr " --localedir=DIRNAME  ロケールのためにDIRNAMEをロケールとして使用します。"
 
 #: ../../src/wlapplication.cc:1215
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
 msgstr ""
+" --remove_syncstreams=[true|false]\n"
+"                      開始時にsyncstreamファイルを削除します。"
 
 #: ../../src/wlapplication.cc:1217
 msgid ""
@@ -2675,26 +2760,29 @@ msgid ""
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
 msgstr ""
+" --remove_replays=[...]\n"
+"                      この日数以前のリプレイを削除します。\n"
+"                      これが0の場合はリプレイを削除しません。"
 
 #: ../../src/wlapplication.cc:1221
 msgid "Sound options:"
-msgstr ""
+msgstr "サウンドオプション:"
 
 #: ../../src/wlapplication.cc:1222
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound            サウンドを無効にしてゲームを開始します。"
 
 #: ../../src/wlapplication.cc:1223
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx         効果音を無効にします。"
 
 #: ../../src/wlapplication.cc:1224
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music      BGMを無効にします。"
 
 #: ../../src/wlapplication.cc:1225
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
+msgstr " --nozip              バイナリzipアーカイブとしてファイルを保存しません。"
 
 #: ../../src/wlapplication.cc:1226
 msgid ""
@@ -2702,26 +2790,33 @@ msgid ""
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr ""
+" --editor             Widelandsエディタを直接起動します。\n"
+"                      エディタでマップFILENAMEを直接読み込むために\n"
+"                      =FILENAMEを追加できます。"
 
 #: ../../src/wlapplication.cc:1229
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr ""
+" --scenario=FILENAME  シナリオマップとしてファイル名を\n"
+"                      直接起動します。"
 
 #: ../../src/wlapplication.cc:1231
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
+msgstr " --loadgame=FILENAME    セーブデータFILENAMEを直接読み込みます。"
 
 #: ../../src/wlapplication.cc:1232
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
 msgstr ""
+" --script=FILENAME 初期化後に指定したLuaスクリプトを実行します。\n"
+"                      --scenario、--loadgame、--editorでのみ有効です。"
 
 #: ../../src/wlapplication.cc:1234
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr ""
+msgstr " --dedicated=FILENAME マップとしてFILENAME を指定して専用サーバーを起動します。"
 
 #: ../../src/wlapplication.cc:1235
 msgid ""
@@ -2730,10 +2825,13 @@ msgid ""
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
 msgstr ""
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      道路に接続していない旗を設置したあとで、\n"
+"                      自動的に道路敷設モードにするかどうか。"
 
 #: ../../src/wlapplication.cc:1239
 msgid "Graphic options:"
-msgstr ""
+msgstr "グラフィックオプション:"
 
 #: ../../src/wlapplication.cc:1240
 msgid ""
@@ -2741,22 +2839,27 @@ msgid ""
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr ""
+" --fullscreen=[yes|no]\n"
+"                      ゲーム画面としてディスプレイ全体を\n"
+"                      使用するかどうか。"
 
 #: ../../src/wlapplication.cc:1243
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...]         ウィンドウの幅（ピクセル）。"
 
 #: ../../src/wlapplication.cc:1244
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...]         ウィンドウの高さ（ピクセル）。"
 
 #: ../../src/wlapplication.cc:1245
 msgid " --opengl=[0|1]       Enables OpenGL rendering"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      OpenGLレンダリングを有効化します。"
 
 #: ../../src/wlapplication.cc:1246
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "内部ウィンドウマネージャーのオプション:"
 
 #: ../../src/wlapplication.cc:1247
 msgid ""
@@ -2765,6 +2868,10 @@ msgid ""
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
 msgstr ""
+" --border_snap_distance=[0 ...]\n"
+"                      画面端からこの距離内に\n"
+"                      ウィンドウ端が来たときに、\n"
+"                      画面端へウィンドウを移動します。"
 
 #: ../../src/wlapplication.cc:1251
 msgid ""
@@ -2773,6 +2880,10 @@ msgid ""
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
 msgstr ""
+" --dock_windows_to_edges=[yes|no]\n"
+"                      ウィンドウ端が画面端に隣接しているとき\n"
+"                      画面端にウィンドウ枠を\n"
+"                      収納します。"
 
 #: ../../src/wlapplication.cc:1255
 msgid ""
@@ -2781,6 +2892,10 @@ msgid ""
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
 msgstr ""
+" --panel_snap_distance=[0 ...]\n"
+"                      ウィンドウ端が\n"
+"                      パネル端からこの距離内に来たときに、\n"
+"                      パネル端へウィンドウを移動します。"
 
 #: ../../src/wlapplication.cc:1259
 msgid ""
@@ -2789,20 +2904,25 @@ msgid ""
 "                      if the window is overlapping with the\n"
 "                      panel."
 msgstr ""
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      ウィンドウがパネルと重なっているときに、\n"
+"                      パネル端へウィンドウを移動するだけ。"
 
 #: ../../src/wlapplication.cc:1266
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)"
 msgstr ""
+" --double             ゲームを二重起動します（ローカルホストネットワーク\n"
+"                      テストのため）。"
 
 #: ../../src/wlapplication.cc:1271
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            デバッグメッセージを有効化します。"
 
 #: ../../src/wlapplication.cc:1273
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help               このヘルプを表示します。"
 
 #: ../../src/wlapplication.cc:1275
 msgid ""
@@ -2811,21 +2931,25 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"バグレポートや提案がありますか？プロジェクトのウェブサイトをチェックしてください。\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"それでは良いゲームを！"
 
 #: ../../src/wlapplication.cc:1363
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "フォールバック設定の有効化"
 
 #: ../../src/wlapplication.cc:1365
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
-msgstr ""
+msgstr "ビデオ設定を有効にすることができなかったため、フォールバックの設定が有効になります。グラフィックのオプションを確認してください。"
 
 #: ../../src/wlapplication.cc:1436
 #, c-format
 msgid "Warning: %s"
-msgstr ""
+msgstr "警告: %s"
 
 #: ../../src/wlapplication.cc:1439
 msgid "Game data error"
@@ -2833,7 +2957,7 @@ msgstr "ゲームデータエラー"
 
 #: ../../src/wlapplication.cc:1444
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "ゲーム中に予期しないエラー"
 
 #: ../../src/wlapplication.cc:1449
 #, c-format
@@ -2844,6 +2968,10 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s). "
 msgstr ""
+"\n"
+"\n"
+"Widelandsの改善のためにこの問題を報告してください。標準出力（Windowsの場合はstdout.txt）に関連するメッセージを見つけましょう。あ"
+"なたはビルド%1$s (%2$s)を使用しています。 "
 
 #: ../../src/wlapplication.cc:1456
 msgid ""
@@ -2852,65 +2980,69 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often – though not always – possible to load it and continue playing.\n"
 msgstr ""
+"。報告にこの情報を追加してください。\n"
+"\n"
+"Widelandsはゲーム中にエラーが発生したときにセーブデータを作成しようとします。しばしば――常にではありませんが――それを読み込みプレイを継続するこ"
+"とができます。\n"
 
 #: ../../src/wlapplication.cc:1568
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "ゲームサーバーのアドレスが不正です"
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
-msgstr ""
+msgstr "建物を破壊しますか？"
 
 #: ../../src/wui/actionconfirm.cc:224
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "この%sを破壊してもよろしいですか？"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr ""
+msgstr "建物を解体しますか？"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
 msgid "Do you really want to dismantle this %s?"
-msgstr ""
+msgstr "この%sを解体してもよろしいですか？"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
-msgstr ""
+msgstr "建物を拡張しますか？"
 
 #: ../../src/wui/actionconfirm.cc:350
 #, c-format
 msgid "Do you really want to enhance this %s?"
-msgstr ""
+msgstr "この%sを拡張してもよろしいですか？"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
-msgstr ""
+msgstr "この船を沈めてもよろしいですか？"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr ""
+msgstr "船を沈めますか？"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
-msgstr ""
+msgstr "アクティブな探検をキャンセルしてもよろしいですか？"
 
 #: ../../src/wui/attack_box.cc:167
 msgid "Soldiers:"
-msgstr ""
+msgstr "兵士"
 
 #: ../../src/wui/attack_box.cc:175
 msgid "Send less soldiers"
-msgstr ""
+msgstr "送る兵士を減らす"
 
 #: ../../src/wui/attack_box.cc:192
 msgid "Number of soldiers"
-msgstr ""
+msgstr "兵士数"
 
 #: ../../src/wui/attack_box.cc:202
 msgid "Send more soldiers"
-msgstr ""
+msgstr "送る兵士を増やす"
 
 #: ../../src/wui/attack_box.cc:213 ../../src/wui/military_box.cc:128
 msgid "Retreat: Never!"
@@ -2927,64 +3059,64 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:77
 #: ../../src/wui/game_main_menu.cc:59
 msgid "Building Statistics"
-msgstr ""
+msgstr "建物統計"
 
 #: ../../src/wui/building_statistics_menu.cc:87
 msgid "Total Productivity:"
-msgstr ""
+msgstr "生産率合計"
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Owned:"
-msgstr ""
+msgstr "所有"
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "Being built:"
-msgstr ""
+msgstr "建設中"
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive"
-msgstr ""
+msgstr "生産のない建物にジャンプ"
 
 #: ../../src/wui/building_statistics_menu.cc:111
 #: ../../src/wui/multiplayersetupgroup.cc:441
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Prod"
-msgstr ""
+msgstr "生産率"
 
 #: ../../src/wui/building_statistics_menu.cc:113
 msgid "Owned"
-msgstr ""
+msgstr "所有"
 
 #: ../../src/wui/building_statistics_menu.cc:114
 msgid "Build"
-msgstr ""
+msgstr "建設中"
 
 #: ../../src/wui/building_statistics_menu.cc:130
 #: ../../src/wui/building_statistics_menu.cc:152
 #: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show previous"
-msgstr ""
+msgstr "前を表示"
 
 #: ../../src/wui/building_statistics_menu.cc:141
 #: ../../src/wui/building_statistics_menu.cc:163
 #: ../../src/wui/building_statistics_menu.cc:185
 msgid "Show next"
-msgstr ""
+msgstr "次を表示"
 
 #: ../../src/wui/buildingwindow.cc:182
 msgid "Cancel the expedition"
-msgstr ""
+msgstr "探検をキャンセル"
 
 #: ../../src/wui/buildingwindow.cc:192
 msgid "Start an expedition"
-msgstr ""
+msgstr "探検を開始"
 
 #: ../../src/wui/buildingwindow.cc:208 ../../src/wui/game_summary.cc:77
 msgid "Continue"
-msgstr ""
+msgstr "続行"
 
 #: ../../src/wui/buildingwindow.cc:208
 msgid "Stop"
@@ -2993,61 +3125,61 @@ msgstr "停止"
 #: ../../src/wui/buildingwindow.cc:235
 #, c-format
 msgid "Enhance to %s"
-msgstr ""
+msgstr "%sに拡張"
 
 #: ../../src/wui/buildingwindow.cc:241 ../../src/wui/fieldaction.cc:116
 msgid "Construction costs:"
-msgstr ""
+msgstr "建設コスト"
 
 #: ../../src/wui/buildingwindow.cc:262
 msgid "Destroy"
-msgstr ""
+msgstr "破壊"
 
 #: ../../src/wui/buildingwindow.cc:280
 msgid "Dismantle"
-msgstr ""
+msgstr "解体"
 
 #: ../../src/wui/buildingwindow.cc:280
 msgid "Returns:"
-msgstr ""
+msgstr "回収材"
 
 #: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:503
 msgid "Hide work area"
-msgstr ""
+msgstr "作業範囲を隠す"
 
 #: ../../src/wui/buildingwindow.cc:327
 msgid "Debug"
-msgstr ""
+msgstr "デバッグ"
 
 #: ../../src/wui/buildingwindow.cc:338
 msgid "Center view on this"
-msgstr ""
+msgstr "ここに視点移動"
 
 #: ../../src/wui/buildingwindow.cc:356
 msgid "Help"
-msgstr ""
+msgstr "ヘルプ"
 
 #: ../../src/wui/buildingwindow.cc:506
 msgid "Show work area"
-msgstr ""
+msgstr "作業範囲を表示"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
 msgid "Building materials"
-msgstr ""
+msgstr "建築材料"
 
 #: ../../src/wui/encyclopedia_window.cc:66
 #: ../../src/wui/interactive_player.cc:125
 msgid "Tribal Ware Encyclopedia"
-msgstr ""
+msgstr "部族アイテム事典"
 
 #: ../../src/wui/encyclopedia_window.cc:80
 msgid "Consumed ware type(s)"
-msgstr ""
+msgstr "消費アイテムの種類"
 
 #: ../../src/wui/encyclopedia_window.cc:81
 msgid "Quantity"
-msgstr ""
+msgstr "数量"
 
 #. * TRANSLATORS: List of wares, e.g. "Fish or Meat"
 #: ../../src/wui/encyclopedia_window.cc:195
@@ -3056,100 +3188,100 @@ msgstr " または "
 
 #: ../../src/wui/fieldaction.cc:250
 msgid "Build small building"
-msgstr ""
+msgstr "小規模の建物を建設"
 
 #: ../../src/wui/fieldaction.cc:251
 msgid "Build medium building"
-msgstr ""
+msgstr "中規模の建物を建設"
 
 #: ../../src/wui/fieldaction.cc:252
 msgid "Build large building"
-msgstr ""
+msgstr "大規模の建物を建設"
 
 #: ../../src/wui/fieldaction.cc:253
 msgid "Build port building"
-msgstr ""
+msgstr "港を建設"
 
 #: ../../src/wui/fieldaction.cc:285
 msgid "Action"
-msgstr ""
+msgstr "アクション"
 
 #: ../../src/wui/fieldaction.cc:370 ../../src/wui/fieldaction.cc:464
 msgid "Build road"
-msgstr ""
+msgstr "道路を敷設"
 
 #: ../../src/wui/fieldaction.cc:382
 msgid "Destroy this flag"
-msgstr ""
+msgstr "この旗を破壊"
 
 #: ../../src/wui/fieldaction.cc:390
 msgid "Configure economy"
-msgstr ""
+msgstr "経済を設定"
 
 #: ../../src/wui/fieldaction.cc:396
 msgid "Send geologist to explore site"
-msgstr ""
+msgstr "土地調査のために地質学者を派遣"
 
 #: ../../src/wui/fieldaction.cc:414
 msgid "Place a flag"
-msgstr ""
+msgstr "旗を設置"
 
 #: ../../src/wui/fieldaction.cc:421
 msgid "Destroy a road"
-msgstr ""
+msgstr "道路を破壊"
 
 #: ../../src/wui/fieldaction.cc:439
 msgid "Watch field in a separate window"
-msgstr ""
+msgstr "個別ウィンドウでフィールドを監視"
 
 #: ../../src/wui/fieldaction.cc:444
 msgid "Toggle building statistics display"
-msgstr ""
+msgstr "建設統計の表示を切替"
 
 #: ../../src/wui/fieldaction.cc:450
 msgid "Toggle building label display"
-msgstr ""
+msgstr "センサス表示を切替"
 
 #: ../../src/wui/fieldaction.cc:457
 msgid "Debug window"
-msgstr ""
+msgstr "デバッグウィンドウ"
 
 #: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:97
 msgid "Watch"
-msgstr ""
+msgstr "監視"
 
 #: ../../src/wui/fieldaction.cc:474
 msgid "Military settings"
-msgstr ""
+msgstr "軍事設定"
 
 #: ../../src/wui/fieldaction.cc:500
 msgid "Start attack"
-msgstr ""
+msgstr "攻撃開始"
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
-msgstr ""
+msgstr "攻撃"
 
 #: ../../src/wui/fieldaction.cc:589
 msgid "Build mines"
-msgstr ""
+msgstr "鉱山を建設"
 
 #: ../../src/wui/fieldaction.cc:605
 msgid "Build flag"
-msgstr ""
+msgstr "旗を設置"
 
 #: ../../src/wui/fieldaction.cc:609
 msgid "Cancel road"
-msgstr ""
+msgstr "道路をキャンセル"
 
 #: ../../src/wui/fieldaction.cc:612
 msgid "Build roads"
-msgstr ""
+msgstr "道路を敷設"
 
 #: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:104
 #: ../../src/wui/interactive_spectator.cc:51
 msgid "Chat"
-msgstr ""
+msgstr "チャット"
 
 #: ../../src/wui/game_chat_menu.cc:65
 msgid "Script console"
@@ -3157,50 +3289,48 @@ msgstr ""
 
 #: ../../src/wui/game_debug_ui.cc:237
 msgid "Debug Field"
-msgstr ""
+msgstr "フィールドのデバッグ"
 
 #: ../../src/wui/game_main_menu.cc:47
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
-msgstr ""
+msgstr "一般統計"
 
 #: ../../src/wui/game_main_menu.cc:53
 #: ../../src/wui/ware_statistics_menu.cc:138
 msgid "Ware Statistics"
-msgstr ""
+msgstr "アイテム統計"
 
 #: ../../src/wui/game_main_menu.cc:65 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:209 ../../src/wui/waresdisplay.cc:59
 msgid "Stock"
-msgstr ""
+msgstr "ストック"
 
 #: ../../src/wui/game_main_menu_save_game.cc:66
 #: ../../src/wui/game_options_menu.cc:84
 #: ../../src/wui/interactive_spectator.cc:55
 msgid "Save Game"
-msgstr ""
+msgstr "ゲーム保存"
 
 #: ../../src/wui/game_main_menu_save_game.cc:73
 msgid "Game Time:"
-msgstr ""
+msgstr "プレイ時間:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition:"
-msgstr ""
+msgstr "勝利条件:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:142
 #, c-format
 msgid "%i player"
 msgid_plural "%i players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i人"
 
 #. * TRANSLATORS: This is preceded by a number
 #: ../../src/wui/game_main_menu_save_game.cc:181
 msgid "player"
 msgid_plural "players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "プレイヤー"
 
 #: ../../src/wui/game_main_menu_save_game.cc:251
 msgid ""
@@ -3209,29 +3339,33 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"ゲーム保存エラーです。\n"
+"保存ゲームファイルが壊れています。\n"
+"\n"
+"原因はつぎのとおりです。\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:255
 #: ../../src/wui/game_main_menu_save_game.cc:267
 msgid "Save Game Error!"
-msgstr ""
+msgstr "ゲーム保存エラー"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
-msgstr ""
+msgstr "ファイル削除"
 
 #: ../../src/wui/game_main_menu_save_game.cc:332
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "ファイル %s を削除してもよろしいですか？"
 
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Messages: Inbox"
-msgstr ""
+msgstr "メッセージ: 受信箱"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
-msgstr ""
+msgstr "選択"
 
 #: ../../src/wui/game_message_menu.cc:57 ../../src/wui/game_summary.cc:92
 msgid "Status"
@@ -3243,54 +3377,54 @@ msgstr "タイトル"
 
 #: ../../src/wui/game_message_menu.cc:59
 msgid "Time sent"
-msgstr ""
+msgstr "受信時刻"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear"
-msgstr ""
+msgstr "クリア"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear selection"
-msgstr ""
+msgstr "選択をクリア"
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert"
-msgstr ""
+msgstr "反転"
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert selection"
-msgstr ""
+msgstr "選択を反転"
 
 #: ../../src/wui/game_message_menu.cc:85
 #: ../../src/wui/game_message_menu.cc:375
 msgid "Archive selected messages"
-msgstr ""
+msgstr "選択メッセージを保管"
 
 #: ../../src/wui/game_message_menu.cc:94
 #: ../../src/wui/game_message_menu.cc:376
 msgid "Show Archive"
-msgstr ""
+msgstr "保管箱を表示"
 
 #: ../../src/wui/game_message_menu.cc:104
 msgid "center main mapview on location"
-msgstr ""
+msgstr "この位置に視点移動"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Messages: Archive"
-msgstr ""
+msgstr "メッセージ: 保管箱"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"
-msgstr ""
+msgstr "選択したメッセージを復元"
 
 #: ../../src/wui/game_message_menu.cc:369
 msgid "Show Inbox"
-msgstr ""
+msgstr "受信箱を表示"
 
 #: ../../src/wui/game_objectives_menu.cc:44
 #: ../../src/wui/interactive_player.cc:113
 msgid "Objectives"
-msgstr ""
+msgstr "目的"
 
 #: ../../src/wui/game_objectives_menu.cc:66
 msgid "Claim Victory"
@@ -3298,101 +3432,101 @@ msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:74
 msgid "Restart Mission"
-msgstr ""
+msgstr "ミッションの再開始"
 
 #: ../../src/wui/game_options_menu.cc:55
 msgid "README"
-msgstr ""
+msgstr "README"
 
 #: ../../src/wui/game_options_menu.cc:69
 msgid "Authors"
-msgstr ""
+msgstr "開発者"
 
 #: ../../src/wui/game_options_menu.cc:76
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
-msgstr ""
+msgstr "サウンドオプション"
 
 #: ../../src/wui/game_options_sound_menu.cc:34
 msgid "Ingame Music"
-msgstr ""
+msgstr "BGM"
 
 #: ../../src/wui/game_options_sound_menu.cc:40
 msgid "Sound FX"
-msgstr ""
+msgstr "効果音"
 
 #: ../../src/wui/game_options_sound_menu.cc:44
 msgid "Ingame Music Volume"
-msgstr ""
+msgstr "BGMの音量"
 
 #: ../../src/wui/game_options_sound_menu.cc:58
 msgid "Sound FX Volume"
-msgstr ""
+msgstr "効果音の音量"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "ゲーム終了"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
-msgstr ""
+msgstr "経過時間"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "プレイを続ける"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "メインメニューに戻る"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "時間"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
-msgstr ""
+msgstr "敗北"
 
 #: ../../src/wui/game_summary.cc:160
 msgid "Won"
-msgstr ""
+msgstr "勝利"
 
 #: ../../src/wui/game_summary.cc:168
 msgid "Resigned"
-msgstr ""
+msgstr "放棄"
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
-msgstr ""
+msgstr "勝利しました！"
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "敗北しました。"
 
 #: ../../src/wui/game_summary.cc:188
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "%sが勝利しました！"
 
 #: ../../src/wui/game_summary.cc:192
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "チーム%|1$u|が勝利しました！"
 
 #: ../../src/wui/game_summary.cc:246
 msgid "Score"
-msgstr ""
+msgstr "スコア"
 
 #: ../../src/wui/game_summary.cc:255
 msgid "Player info"
-msgstr ""
+msgstr "プレイヤー情報"
 
 #: ../../src/wui/general_statistics_menu.cc:173
 msgid "Land"
-msgstr ""
+msgstr "領土"
 
 #: ../../src/wui/general_statistics_menu.cc:181
 #: ../../src/wui/transport_ui.cc:66 ../../src/wui/warehousewindow.cc:211
@@ -3401,51 +3535,51 @@ msgstr "労働者"
 
 #: ../../src/wui/general_statistics_menu.cc:189 ../../src/wui/minimap.cc:177
 msgid "Buildings"
-msgstr ""
+msgstr "建物"
 
 #: ../../src/wui/general_statistics_menu.cc:197
 #: ../../src/wui/productionsitewindow.cc:68 ../../src/wui/transport_ui.cc:61
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Wares"
-msgstr ""
+msgstr "アイテム"
 
 #: ../../src/wui/general_statistics_menu.cc:205
 msgid "Productivity"
-msgstr ""
+msgstr "生産率"
 
 #: ../../src/wui/general_statistics_menu.cc:213
 msgid "Casualties"
-msgstr ""
+msgstr "死者数"
 
 #: ../../src/wui/general_statistics_menu.cc:221
 msgid "Kills"
-msgstr ""
+msgstr "討伐数"
 
 #: ../../src/wui/general_statistics_menu.cc:229
 msgid "Military buildings lost"
-msgstr ""
+msgstr "軍事施設のロスト"
 
 #: ../../src/wui/general_statistics_menu.cc:237
 msgid "Military buildings defeated"
-msgstr ""
+msgstr "軍事施設の征服"
 
 #: ../../src/wui/general_statistics_menu.cc:245
 msgid "Civilian buildings lost"
-msgstr ""
+msgstr "民間施設のロスト"
 
 #: ../../src/wui/general_statistics_menu.cc:253
 msgid "Military"
-msgstr ""
+msgstr "軍事力"
 
 #: ../../src/wui/interactive_base.cc:324
 msgid "PAUSE"
-msgstr ""
+msgstr "一時停止"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/interactive_base.cc:344
 #, c-format
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/interactive_base.cc:351
 msgid "NO GAME CONTROLLER"
@@ -3454,108 +3588,107 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:110
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
-msgstr ""
+msgstr "統計"
 
 #: ../../src/wui/interactive_player.cc:122
 #: ../../src/wui/interactive_player.cc:260
 msgid "Messages"
-msgstr ""
+msgstr "メッセージ"
 
 #: ../../src/wui/interactive_player.cc:268
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u件の新着メッセージ"
 
 #: ../../src/wui/interactive_spectator.cc:53
 msgid "Exit Replay"
-msgstr ""
+msgstr "リプレイ終了"
 
 #: ../../src/wui/login_box.cc:29
 msgid "Metaserver login"
-msgstr ""
+msgstr "メタサーバーにログイン"
 
 #: ../../src/wui/login_box.cc:33
 msgid "Nickname:"
-msgstr ""
+msgstr "ニックネーム"
 
 #: ../../src/wui/login_box.cc:39
 msgid "Password:"
-msgstr ""
+msgstr "パスワード"
 
 #: ../../src/wui/login_box.cc:48
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
+msgstr "警告: パスワードを画面に表示します。また読取可能な状態で保存します。"
 
 #: ../../src/wui/login_box.cc:53
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "登録済のアカウントにログインします"
 
 #: ../../src/wui/login_box.cc:58
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "次回から自動的にこのログイン情報を使用します。"
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #: ../../src/wui/login_box.cc:86
 msgid "Empty Nickname"
-msgstr ""
+msgstr "ニックネームが未入力"
 
 #: ../../src/wui/login_box.cc:86
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "ニックネームを入力してください。"
 
 #: ../../src/wui/login_box.cc:93
 msgid "Space in Nickname"
-msgstr ""
+msgstr "ニックネームにスペース"
 
 #: ../../src/wui/login_box.cc:94
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "ニックネームにはスペースを使用できません"
 
 #: ../../src/wui/login_box.cc:101
 msgid "Empty Password"
-msgstr ""
+msgstr "パスワードが未入力"
 
 #: ../../src/wui/login_box.cc:101
 msgid "Please enter your password!"
-msgstr ""
+msgstr "パスワードを入力してください"
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
-msgstr ""
+msgstr "兵士"
 
 #: ../../src/wui/minimap.cc:159
 msgid "Owner"
-msgstr ""
+msgstr "所有者"
 
 #: ../../src/wui/minimap.cc:165
 msgid "Flags"
-msgstr ""
+msgstr "旗"
 
 #: ../../src/wui/minimap.cc:171
 msgid "Roads"
-msgstr ""
+msgstr "道路"
 
 #: ../../src/wui/minimap.cc:183
 msgid "Zoom"
-msgstr ""
+msgstr "拡大縮小"
 
 #: ../../src/wui/multiplayersetupgroup.cc:103
 msgid "free"
-msgstr ""
+msgstr "参加自由"
 
 #: ../../src/wui/multiplayersetupgroup.cc:281
 msgid "Shared in"
-msgstr ""
+msgstr "共有"
 
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #: ../../src/wui/playerdescrgroup.cc:172
 msgid "Computer"
-msgstr ""
+msgstr "コンピューター"
 
 #. * TRANSLATORS %s = AI type, e.g. 'Agressive'
 #: ../../src/wui/multiplayersetupgroup.cc:305
@@ -3563,213 +3696,212 @@ msgstr ""
 #: ../../src/wui/playerdescrgroup.cc:178
 #, c-format
 msgid "AI: %s"
-msgstr ""
+msgstr "AI: %s"
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
 #: ../../src/wui/multiplayersetupgroup.cc:319
 #: ../../src/wui/playerdescrgroup.cc:194
 msgid "Random"
-msgstr ""
+msgstr "ランダム"
 
 #: ../../src/wui/multiplayersetupgroup.cc:313
 #: ../../src/wui/playerdescrgroup.cc:182
 msgid "Human"
-msgstr ""
+msgstr "人間"
 
 #: ../../src/wui/multiplayersetupgroup.cc:409
 msgid "Client name"
-msgstr ""
+msgstr "クライアント名"
 
 #: ../../src/wui/multiplayersetupgroup.cc:417
 msgid "Role"
-msgstr ""
+msgstr "役割"
 
 #: ../../src/wui/multiplayersetupgroup.cc:433
 msgid "Start"
-msgstr ""
+msgstr "開始"
 
 #: ../../src/wui/multiplayersetupgroup.cc:449
 msgid "Tribe"
-msgstr ""
+msgstr "部族"
 
 #: ../../src/wui/multiplayersetupgroup.cc:457
 #: ../../src/wui/playerdescrgroup.cc:103
 msgid "Initialization"
-msgstr ""
+msgstr "初期設定"
 
 #: ../../src/wui/playerdescrgroup.cc:175
 msgid "AI: Random"
-msgstr ""
+msgstr "AI: ランダム"
 
 #: ../../src/wui/plot_area.cc:108
 msgid "d"
-msgstr ""
+msgstr "日"
 
 #: ../../src/wui/plot_area.cc:109
 msgid "h"
-msgstr ""
+msgstr "時間"
 
 #: ../../src/wui/plot_area.cc:110
 msgid "min"
-msgstr ""
+msgstr "分"
 
 #: ../../src/wui/plot_area.cc:279
 msgid "game"
-msgstr ""
+msgstr "現在"
 
 #: ../../src/wui/productionsitewindow.cc:82
 #: ../../src/wui/productionsitewindow.cc:109
 msgid "Worker"
 msgid_plural "Workers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "労働者"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"
-msgstr ""
+msgstr "経験"
 
 #: ../../src/wui/productionsitewindow.cc:85
 msgid "Next Level"
-msgstr ""
+msgstr "次レベル"
 
 #: ../../src/wui/productionsitewindow.cc:98
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "選択した労働者の雇用を終了"
 
 #: ../../src/wui/productionsitewindow.cc:199
 msgid "(coming)"
-msgstr ""
+msgstr "(接近中)"
 
 #: ../../src/wui/productionsitewindow.cc:199
 msgid "(vacant)"
-msgstr ""
+msgstr "(不在)"
 
 #: ../../src/wui/shipwindow.cc:91
 msgid "Ship"
-msgstr ""
+msgstr "船"
 
 #: ../../src/wui/shipwindow.cc:116
 msgid "Scout towards the north west"
-msgstr ""
+msgstr "北西を偵察"
 
 #: ../../src/wui/shipwindow.cc:122
 msgid "Explore the island’s coast clockwise"
-msgstr ""
+msgstr "島の沿岸を時計回りに探検"
 
 #: ../../src/wui/shipwindow.cc:128
 msgid "Scout towards the north east"
-msgstr ""
+msgstr "北東を偵察"
 
 #: ../../src/wui/shipwindow.cc:134
 msgid "Scout towards the west"
-msgstr ""
+msgstr "西へ探検"
 
 #: ../../src/wui/shipwindow.cc:140
 msgid "Construct a port at the current location"
-msgstr ""
+msgstr "選択した位置に港を建設"
 
 #: ../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
-msgstr ""
+msgstr "東へ探検"
 
 #: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south west"
-msgstr ""
+msgstr "南西へ探検"
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island’s coast counter clockwise"
-msgstr ""
+msgstr "島の沿岸を反時計回りに探検"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
-msgstr ""
+msgstr "南西を偵察"
 
 #: ../../src/wui/shipwindow.cc:176
 msgid "Go to ship"
-msgstr ""
+msgstr "船に視点移動"
 
 #: ../../src/wui/shipwindow.cc:181
 msgid "Go to destination"
-msgstr ""
+msgstr "目的地に視点移動"
 
 #: ../../src/wui/shipwindow.cc:188
 msgid "Sink the ship"
-msgstr ""
+msgstr "船を沈める"
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
-msgstr ""
+msgstr "探検キャンセル"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"
-msgstr ""
+msgstr "収容数を減らす"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:70
 msgid "Increase capacity"
-msgstr ""
+msgstr "収容数を増やす"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:76
 msgid "Capacity"
-msgstr ""
+msgstr "収容数"
 
 #: ../../src/wui/soldierlist.cc:391 ../../src/wui/soldierlist.cc:405
 #: ../../src/wui/soldierlist.cc:473
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "クリックして兵士を追い出す"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:407
 msgid "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"
-msgstr ""
+msgstr "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"
 
 #: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Rookies"
-msgstr ""
+msgstr "新兵を優先"
 
 #: ../../src/wui/soldierlist.cc:417
 msgid "Prefer Heroes"
-msgstr ""
+msgstr "熟練兵を優先"
 
 #: ../../src/wui/soldierlist.cc:478
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
-msgstr ""
+msgstr "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"
-msgstr ""
+msgstr "アイテム(合計)"
 
 #: ../../src/wui/stock_menu.cc:56
 msgid "Workers (total)"
-msgstr ""
+msgstr "労働者(合計)"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "アイテム(倉庫)"
 
 #: ../../src/wui/stock_menu.cc:69
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "労働者(倉庫)"
 
 #: ../../src/wui/trainingsitewindow.cc:58
 msgid "Soldiers in training"
-msgstr ""
+msgstr "訓練中の兵士"
 
 #: ../../src/wui/transport_ui.cc:52
 msgid "Economy options"
-msgstr ""
+msgstr "経済オプション"
 
 #: ../../src/wui/transport_ui.cc:147 ../../src/wui/transport_ui.cc:243
 msgid "Decrease target"
-msgstr ""
+msgstr "ターゲットを減らす"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:245
 msgid "Increase target"
-msgstr ""
+msgstr "ターゲットを増やす"
 
 #: ../../src/wui/transport_ui.cc:152 ../../src/wui/transport_ui.cc:248
 msgid "Reset to default"
-msgstr ""
+msgstr "デフォルトにリセット"
 
 #: ../../src/wui/ware_statistics_menu.cc:177
 msgid "Production"
@@ -3777,64 +3909,67 @@ msgstr "生産"
 
 #: ../../src/wui/ware_statistics_menu.cc:188
 msgid "Consumption"
-msgstr ""
+msgstr "消費"
 
 #: ../../src/wui/ware_statistics_menu.cc:199
 msgid "Economy Health"
-msgstr ""
+msgstr "経済健全度"
 
 #: ../../src/wui/warehousewindow.cc:138
 msgid "Normal policy"
-msgstr ""
+msgstr "通常の方針"
 
 #: ../../src/wui/warehousewindow.cc:139
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "選択したアイテムをここに優先的に格納"
 
 #: ../../src/wui/warehousewindow.cc:140
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "選択したアイテムをここに格納しない"
 
 #: ../../src/wui/warehousewindow.cc:141
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "選択したアイテムをここから移動"
 
 #: ../../src/wui/warehousewindow.cc:218
 msgid "Wares in dock"
-msgstr ""
+msgstr "アイテム(ドック)"
 
 #: ../../src/wui/warehousewindow.cc:223
 msgid "Workers in dock"
-msgstr ""
+msgstr "労働者(倉庫)"
 
 #: ../../src/wui/warehousewindow.cc:229
 msgid "Expedition"
-msgstr ""
+msgstr "探検"
 
 #: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Highest priority"
-msgstr ""
+msgstr "優先度 高"
 
 #: ../../src/wui/waresqueuedisplay.cc:187
 msgid "Normal priority"
-msgstr ""
+msgstr "優先度 中"
 
 #: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Lowest priority"
-msgstr ""
+msgstr "優先度 低"
 
 #: ../../src/wui/waresqueuedisplay.cc:236
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "ここに格納するアイテム数を減らす"
 
 #: ../../src/wui/waresqueuedisplay.cc:246
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "ここに格納するアイテム数を増やす"
 
 #: ../../src/wui/watchwindow.cc:108
 msgid "Follow"
-msgstr ""
+msgstr "追跡"
 
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
-msgstr ""
+msgstr "ここに視点移動"
+
+#~ msgid "Endless Game"
+#~ msgstr "エンドレス"
