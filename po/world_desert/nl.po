@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-09-01 09:04+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-15 10:10+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:37+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:39+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: ../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
@@ -74,7 +74,7 @@ msgstr "Kiezelsteen"
 #: ../../worlds/desert/conf:32
 #: ../../worlds/desert/conf:33
 msgid "Ruins"
-msgstr ""
+msgstr "Ruïne"
 
 #: ../../worlds/desert/conf:34
 #: ../../worlds/desert/conf:35
@@ -105,103 +105,103 @@ msgstr "Staande stenen"
 msgid "Stones"
 msgstr "Stenen"
 
-#: ../../worlds/desert/conf:51
-#: ../../worlds/desert/conf:55
-#: ../../worlds/desert/conf:59
-#: ../../worlds/desert/conf:63
-#: ../../worlds/desert/conf:67
-msgid "Palm"
-msgstr "Palmboom"
-
-#: ../../worlds/desert/conf:52
-#: ../../worlds/desert/conf:56
+#: ../../worlds/desert/conf:53
 #: ../../worlds/desert/conf:60
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
-msgid "Palm (medium)"
-msgstr ""
+#: ../../worlds/desert/conf:72
+msgid "Palm (Old)"
+msgstr "Palm (oud)"
 
-#: ../../worlds/desert/conf:53
-#: ../../worlds/desert/conf:57
+#: ../../worlds/desert/conf:55
 #: ../../worlds/desert/conf:61
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
-msgid "Palm (small)"
-msgstr ""
+#: ../../worlds/desert/conf:73
+msgid "Palm (Mature)"
+msgstr "Palm (volgroeid)"
 
-#: ../../worlds/desert/conf:54
-#: ../../worlds/desert/conf:58
+#: ../../worlds/desert/conf:57
 #: ../../worlds/desert/conf:62
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
-msgid "Palm (tiny)"
-msgstr ""
-
-#: ../../worlds/desert/conf:71
-msgid "Beech"
-msgstr "Beuk"
-
-#: ../../worlds/desert/conf:72
-msgid "Beech (medium)"
-msgstr ""
-
-#: ../../worlds/desert/conf:73
-msgid "Beech (small)"
-msgstr ""
-
 #: ../../worlds/desert/conf:74
-msgid "Beech (tiny)"
-msgstr ""
+msgid "Palm (Pole)"
+msgstr "Palm (opgroeiend)"
 
+#: ../../worlds/desert/conf:59
+#: ../../worlds/desert/conf:63
+#: ../../worlds/desert/conf:67
+#: ../../worlds/desert/conf:71
 #: ../../worlds/desert/conf:75
-msgid "Larch"
-msgstr "Larix"
+msgid "Palm (Sapling)"
+msgstr "Palm (zaailing)"
 
 #: ../../worlds/desert/conf:76
-msgid "Larch (medium)"
-msgstr ""
+msgid "Beech (Old)"
+msgstr "Beuk (oud)"
 
 #: ../../worlds/desert/conf:77
-msgid "Larch (small)"
-msgstr ""
+msgid "Beech (Mature)"
+msgstr "Beuk (volgroeid)"
 
 #: ../../worlds/desert/conf:78
-msgid "Larch (tiny)"
-msgstr ""
+msgid "Beech (Pole)"
+msgstr "Beuk (opgroeiend)"
 
 #: ../../worlds/desert/conf:79
-msgid "Rowan"
-msgstr "Lijsterbes"
+msgid "Beech (Sapling)"
+msgstr "Beuk (zaailing)"
 
 #: ../../worlds/desert/conf:80
-msgid "Rowan (medium)"
-msgstr ""
+msgid "Larch (Old)"
+msgstr "Lariks (oud)"
 
 #: ../../worlds/desert/conf:81
-msgid "Rowan (small)"
-msgstr ""
+msgid "Larch (Mature)"
+msgstr "Lariks (volgroeid)"
 
 #: ../../worlds/desert/conf:82
-msgid "Rowan (tiny)"
-msgstr ""
+msgid "Larch (Pole)"
+msgstr "Lariks (opgroeiend)"
+
+#: ../../worlds/desert/conf:83
+msgid "Larch (Sapling)"
+msgstr "Lariks (zaailing)"
+
+#: ../../worlds/desert/conf:84
+msgid "Rowan (Old)"
+msgstr "Lijsterbes (oud)"
 
 #: ../../worlds/desert/conf:85
+msgid "Rowan (Mature)"
+msgstr "Lijsterbes (volgroeid)"
+
+#: ../../worlds/desert/conf:86
+msgid "Rowan (Pole)"
+msgstr "Lijsterbes (opgroeiend)"
+
+#: ../../worlds/desert/conf:87
+msgid "Rowan (Sapling)"
+msgstr "Lijsterbes (zaailing)"
+
+#: ../../worlds/desert/conf:90
 msgid "Bunny"
 msgstr "Konijn"
 
-#: ../../worlds/desert/conf:86
+#: ../../worlds/desert/conf:91
 msgid "Deer"
 msgstr "Hert"
 
-#: ../../worlds/desert/conf:87
+#: ../../worlds/desert/conf:92
 msgid "Duck"
 msgstr "Eend"
 
-#: ../../worlds/desert/conf:88
+#: ../../worlds/desert/conf:93
 msgid "Fox"
 msgstr "Vos"
 
-#: ../../worlds/desert/conf:89
+#: ../../worlds/desert/conf:94
 msgid "Sheep"
 msgstr "Schaap"
 
@@ -232,23 +232,23 @@ msgstr "Vis"
 
 #: ../../worlds/desert/terrainconf:8
 msgid "Desert 1"
-msgstr ""
+msgstr "Woestijn 1"
 
 #: ../../worlds/desert/terrainconf:13
 msgid "Desert 2"
-msgstr ""
+msgstr "Woestijn 2"
 
 #: ../../worlds/desert/terrainconf:18
 msgid "Desert 3"
-msgstr ""
+msgstr "Woestijn 3"
 
 #: ../../worlds/desert/terrainconf:23
 msgid "Desert 4"
-msgstr ""
+msgstr "Woestijn 4"
 
 #: ../../worlds/desert/terrainconf:29
 msgid "Dry Soil"
-msgstr ""
+msgstr "Droge aarde"
 
 #: ../../worlds/desert/terrainconf:35
 msgid "Beach"
@@ -264,27 +264,27 @@ msgstr "Weide"
 
 #: ../../worlds/desert/terrainconf:52
 msgid "Mountain Meadow"
-msgstr ""
+msgstr "Bergweide"
 
 #: ../../worlds/desert/terrainconf:57
 msgid "High Mountain Meadow"
-msgstr ""
+msgstr "Hoge bergweide"
 
 #: ../../worlds/desert/terrainconf:62
 msgid "Mountain 1"
-msgstr ""
+msgstr "Berg 1"
 
 #: ../../worlds/desert/terrainconf:68
 msgid "Mountain 2"
-msgstr ""
+msgstr "Berg 2"
 
 #: ../../worlds/desert/terrainconf:74
 msgid "Mountain 3"
-msgstr ""
+msgstr "Berg 3"
 
 #: ../../worlds/desert/terrainconf:80
 msgid "Mountain 4"
-msgstr ""
+msgstr "Berg 4"
 
 #: ../../worlds/desert/terrainconf:96
 msgid "Lava"

@@ -34,6 +34,7 @@
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
 #include "logic/mapfringeregion.h"
+#include "logic/objective.h"
 #include "logic/pathfield.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
@@ -305,7 +306,7 @@ void Map::cleanup() {
 	m_background = std::string();
 
 	m_overlay_manager.reset();
-	mom().remove_all();
+	objectives_.clear();
 
 	m_port_spaces.clear();
 }
@@ -542,7 +543,7 @@ Set the starting coordinates of a player
 */
 void Map::set_starting_pos(Player_Number const plnum, Coords const c)
 {
-	assert(1 <= plnum <= get_nrplayers());
+	assert(1 <= plnum && plnum <= get_nrplayers());
 	m_starting_pos[plnum - 1] = c;
 }
 

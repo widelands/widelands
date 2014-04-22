@@ -119,9 +119,8 @@ void MilitaryBox::update() {
 }
 
 void MilitaryBox::init() {
-	char buf[10];
-
 	{ //  Retreat line
+		char buf[10];
 		UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		add(&linebox, UI::Box::AlignTop);
 

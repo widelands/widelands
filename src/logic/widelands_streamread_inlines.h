@@ -72,7 +72,7 @@ inline const Building_Descr  & StreamRead::Building_Type
 {
 	char const * const name = CString();
 	Building_Index const index = tribe.building_index(name);
-	if (not index)
+	if (index == INVALID_INDEX)
 		throw building_nonexistent(tribe.name(), name);
 	return *tribe.get_building_descr(index);
 }

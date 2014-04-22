@@ -2,13 +2,13 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-12-13 05:06+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-06 11:10+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:30+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: gd\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
@@ -33,7 +33,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:30
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Tog tuathanas crodh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:32
 msgid "Remember to build a cattle farm"
@@ -136,7 +136,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 #: ../../campaigns/t03.wmf/scripting/texts.lua:105
 msgid "Build training sites"
-msgstr ""
+msgstr "Tog làraichean trèanaidh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:108
 msgid ""
@@ -152,7 +152,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:116
 #: ../../campaigns/t03.wmf/scripting/texts.lua:118
 msgid "Build weapons production"
-msgstr ""
+msgstr "Tog saothrachadh arm"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 #: ../../campaigns/t03.wmf/scripting/texts.lua:129
@@ -162,7 +162,7 @@ msgstr "Tog ceàrdach chlogaidean"
 #: ../../campaigns/t03.wmf/scripting/texts.lua:135
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "Mill feachd Khalitath"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
@@ -188,7 +188,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:158
 msgid "Close to Home"
-msgstr ""
+msgstr "Faisg air an taigh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:170
@@ -213,7 +213,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:201
 #: ../../campaigns/t03.wmf/scripting/texts.lua:369
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Latha fuar eile"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -231,7 +231,7 @@ msgstr "Teagamh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:182
 msgid "Boldreth is shaking his head..."
-msgstr ""
+msgstr "Tha Boldreth a' crathadh a chinn."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:183
 msgid ""
@@ -246,7 +246,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:192
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
 msgid "The Story Continues"
-msgstr ""
+msgstr "Tha an sgeul a' leantainn air adhart"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:194
 msgid ""
@@ -257,7 +257,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "Tha Thron misneachail."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:203
 msgid ""
@@ -281,7 +281,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:222
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Do chompanach dìleas"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:223
 msgid "Boldreth shouts out!"
@@ -297,11 +297,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:234
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "Daingneachadh thrèigearan"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:235
 msgid "Thron says:"
-msgstr ""
+msgstr "Tha Thron a' bruidhinn:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:236
 msgid ""
@@ -331,11 +331,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:253
 msgid "Winter Ahead"
-msgstr ""
+msgstr "Tha an geamhradh romhaibh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid "Boldreth says:"
-msgstr ""
+msgstr "Tha Boldreth a' bruidhinn:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:255
 msgid ""
@@ -348,11 +348,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:263
 msgid "The Advisor"
-msgstr ""
+msgstr "An comhairleach"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:264
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "Tha Khantrukh ag aontachadh."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:265
 msgid ""
@@ -365,7 +365,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "Chaidh an t-eaconamaidh bìdh a choileanadh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:276
 msgid ""
@@ -387,7 +387,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:292
 msgid "Further Exploration"
-msgstr ""
+msgstr "Barrachd rùrachaidh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:294
 msgid ""
@@ -410,7 +410,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "Mountains Found"
-msgstr ""
+msgstr "Chaidh beanntan a lorg"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:312
 msgid ""
@@ -423,7 +423,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:321
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Chaidh an t-eaconamaidh mèinnearachd a choileanadh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:323
 msgid ""
@@ -434,7 +434,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:330
 msgid "Fortress Needed"
-msgstr ""
+msgstr "Tha feum air dùn"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
 msgid ""
@@ -448,7 +448,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:342
 msgid "Fortress Completed"
-msgstr ""
+msgstr "Chaidh an dùn a choileanadh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:344
 msgid ""
@@ -460,7 +460,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:351
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Eaconamaidh leasaichte is trèanadh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:353
 msgid ""
@@ -500,7 +500,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:379
 msgid "Victory"
-msgstr ""
+msgstr "Buaidh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:380
 msgid ""
@@ -513,7 +513,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:386
 msgid "Military Assault"
-msgstr ""
+msgstr "Ionnsaigh an airm"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:388
 msgid ""
@@ -536,7 +536,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:399
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Tha Khantrukh ag ràdh:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:401
 msgid ""
@@ -547,10 +547,12 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Amas ùr"
+msgstr[1] "Amasan ùra"
+msgstr[2] "Amasan ùra"
+msgstr[3] "Amas ùr"

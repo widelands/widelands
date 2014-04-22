@@ -62,7 +62,7 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 					if (s == nullptr)
 						continue;
 
-					for (Ware_Index w = Ware_Index::First(); w < tribe.get_nrworkers(); ++w) {
+					for (Ware_Index w = 0; w < tribe.get_nrworkers(); ++w) {
 						const Worker_Descr & w_descr = *tribe.get_worker_descr(w);
 						if (w_descr.is_buildable())
 							player->allow_worker_type
@@ -97,7 +97,7 @@ void Map_Allowed_Worker_Types_Data_Packet::Write
 		Section & section = prof.create_section(buffer);
 
 		// Only write the workers which are disabled.
-		for (Ware_Index b = Ware_Index::First(); b < tribe.get_nrworkers(); ++b) {
+		for (Ware_Index b = 0; b < tribe.get_nrworkers(); ++b) {
 			if (!player->is_worker_type_allowed(b)) {
 				section.set_bool(tribe.get_worker_descr(b)->name().c_str(), false);
 				forbidden_worker_seen = true;

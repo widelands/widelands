@@ -28,11 +28,13 @@ struct TrainingSite_Window;
 
 namespace Widelands {
 
+struct World;
+
 struct TrainingSite_Descr : public ProductionSite_Descr {
 	TrainingSite_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr & tribe);
+		 const Tribe_Descr & tribe, const World& world);
 
 	virtual Building & create_object() const override;
 

@@ -279,16 +279,13 @@ void GameMessageMenu::archive_or_restore()
 	switch (mode) {
 	case Inbox:
 		//archive selected messages
-		for
-			(wl_index_range<uint8_t> i(0, list->size());
-			 i;
-			 ++i)
-			if (list->get_record(i.current).is_checked(ColSelect))
+		for (int i = 0; i < list->size(); ++i)
+			if (list->get_record(i).is_checked(ColSelect))
 			{
 				work_done = true;
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusArchived
-					 	(gametime, plnum, Message_Id((*list)[i.current])));
+					 	(gametime, plnum, Message_Id((*list)[i])));
 			}
 
 		//archive highlighted message, if nothing was selected
@@ -302,16 +299,13 @@ void GameMessageMenu::archive_or_restore()
 		break;
 	case Archive:
 		//restore selected messages
-		for
-			(wl_index_range<uint8_t> i(0, list->size());
-			 i;
-			 ++i)
-			if (list->get_record(i.current).is_checked(ColSelect))
+		for (int i = 0; i < list->size(); ++i)
+			if (list->get_record(i).is_checked(ColSelect))
 			{
 				work_done = true;
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusRead
-					 	(gametime, plnum, Message_Id((*list)[i.current])));
+					 	(gametime, plnum, Message_Id((*list)[i])));
 			}
 
 		//restore highlighted message, if nothing was selected
@@ -346,15 +340,15 @@ void GameMessageMenu::center_view()
  */
 void GameMessageMenu::do_clear_selection()
 {
-	for (wl_index_range<uint8_t> i(0, list->size()); i; ++i)
-		list->get_record(i.current).set_checked
+	for (int i = 0; i < list->size(); ++i)
+		list->get_record(i).set_checked
 			(ColSelect, false);
 }
 
 void GameMessageMenu::do_invert_selection()
 {
-	for (wl_index_range<uint8_t> i(0, list->size()); i; ++i)
-		list->get_record(i.current).toggle(ColSelect);
+	for (int i = 0; i < list->size(); ++i)
+		list->get_record(i).toggle(ColSelect);
 }
 
 void GameMessageMenu::toggle_mode()

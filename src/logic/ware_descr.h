@@ -44,7 +44,6 @@ namespace Widelands {
  * Economy. They can be traded.
 */
 struct WareDescr : public Map_Object_Descr {
-	typedef Ware_Index::value_t Index;
 	WareDescr
 		(const Tribe_Descr & tribe, char const * const name,
 		 char const * const descname, const std::string & directory,

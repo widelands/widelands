@@ -31,10 +31,10 @@ return=skipped unless economy needs coal or not economy needs beer
 sleep=42000
 consume=beer meal
 animate=working 18000
-mine=coal 2 100 5
+mine=coal 2 100 5 2
 produce=coal:2
 animate=working 18000
-mine=coal 2 100 5
+mine=coal 2 100 5 2
 produce=coal:3
 
 [idle]

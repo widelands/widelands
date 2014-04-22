@@ -189,7 +189,7 @@ order_msg_1 = {
 _([[So you want to prepare us for a longer stay in these forests, Thron? ]] ..
 [[Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al’thunran. ]] ..
 [[Too long have we waited while our brethren have fought on the battlefield, ]] ..
-[[and our axs and swords have turned rusty over time.]])
+[[and our axes and swords have turned rusty over time.]])
    )
 }
 

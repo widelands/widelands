@@ -19,7 +19,6 @@
 
 #include "wui/buildingwindow.h"
 
-#include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "logic/building.h"
@@ -57,7 +56,7 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick,
  */
 void Building::hide_options()
 {
-	BOOST_FOREACH(boost::signals2::connection& c, options_window_connections)
+	for (boost::signals2::connection& c : options_window_connections)
 		c.disconnect();
 	delete m_optionswindow;
 	m_optionswindow = nullptr;

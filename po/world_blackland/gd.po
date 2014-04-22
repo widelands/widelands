@@ -2,20 +2,20 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-10-10 16:58+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-14 15:06+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:37+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:39+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: gd\n"
 
 #: ../../worlds/blackland/conf:2
@@ -95,155 +95,155 @@ msgstr "Tursachan"
 msgid "Stones"
 msgstr "Clachan"
 
-#: ../../worlds/blackland/conf:45
-msgid "Aspen"
-msgstr "Critheann"
-
 #: ../../worlds/blackland/conf:46
-msgid "Aspen (medium)"
-msgstr ""
-
-#: ../../worlds/blackland/conf:47
-msgid "Aspen (small)"
-msgstr ""
+msgid "Aspen (Old)"
+msgstr "Seann chraobh-chrithinn"
 
 #: ../../worlds/blackland/conf:48
-msgid "Aspen (tiny)"
-msgstr ""
-
-#: ../../worlds/blackland/conf:49
-msgid "Oak"
-msgstr "Darach"
+msgid "Aspen (Mature)"
+msgstr "Craobh-chrithinn inbheach"
 
 #: ../../worlds/blackland/conf:50
-msgid "Oak (medium)"
-msgstr ""
-
-#: ../../worlds/blackland/conf:51
-msgid "Oak (small)"
-msgstr ""
+msgid "Aspen (Pole)"
+msgstr "Craobhag-chrithinn"
 
 #: ../../worlds/blackland/conf:52
-msgid "Oak (tiny)"
-msgstr ""
+msgid "Aspen (Sapling)"
+msgstr "Fiùran crithinn"
 
 #: ../../worlds/blackland/conf:53
-msgid "Spruce"
-msgstr "Giuthas"
+msgid "Oak (Old)"
+msgstr "Seann chraobh-dharaich"
 
 #: ../../worlds/blackland/conf:54
-msgid "Spruce (medium)"
-msgstr ""
+msgid "Oak (Mature)"
+msgstr "Craobh-dharaich inbheach"
 
 #: ../../worlds/blackland/conf:55
-msgid "Spruce (small)"
-msgstr ""
+msgid "Oak (Pole)"
+msgstr "Craobhag-dharaich"
 
 #: ../../worlds/blackland/conf:56
-msgid "Spruce (tiny)"
-msgstr ""
+msgid "Oak (Sapling)"
+msgstr "Fiùran daraich"
 
 #: ../../worlds/blackland/conf:57
-msgid "Maple"
-msgstr "Malpas"
+msgid "Spruce (Old)"
+msgstr "Seann chraobh-ghiuthais"
 
 #: ../../worlds/blackland/conf:58
-msgid "Maple (medium)"
-msgstr ""
+msgid "Spruce (Mature)"
+msgstr "Craobh-ghiuthais inbheach"
 
 #: ../../worlds/blackland/conf:59
-msgid "Maple (small)"
-msgstr ""
+msgid "Spruce (Pole)"
+msgstr "Craobhag-ghiuthais"
 
 #: ../../worlds/blackland/conf:60
-msgid "Maple (tiny)"
-msgstr ""
+msgid "Spruce (Sapling)"
+msgstr "Fiùran giuthais"
 
 #: ../../worlds/blackland/conf:61
-msgid "Birch"
-msgstr "Beith"
+msgid "Maple (Old)"
+msgstr "Seann chraobh-mhalpais"
 
 #: ../../worlds/blackland/conf:62
-msgid "Birch (medium)"
-msgstr ""
+msgid "Maple (Mature)"
+msgstr "Craobh-mhalpais inbheach"
 
 #: ../../worlds/blackland/conf:63
-msgid "Birch (small)"
-msgstr ""
+msgid "Maple (Pole)"
+msgstr "Craobhag-mhalpais"
 
 #: ../../worlds/blackland/conf:64
-msgid "Birch (tiny)"
-msgstr ""
+msgid "Maple (Sapling)"
+msgstr "Fiùran malpais"
 
 #: ../../worlds/blackland/conf:65
-msgid "Beech"
-msgstr "Faidhbhile"
+msgid "Birch (Old)"
+msgstr "Seann chraobh-bheithe"
 
 #: ../../worlds/blackland/conf:66
-msgid "Beech (medium)"
-msgstr ""
+msgid "Birch (Mature)"
+msgstr "Craobh-bheithe inbheach"
 
 #: ../../worlds/blackland/conf:67
-msgid "Beech (small)"
-msgstr ""
+msgid "Birch (Pole)"
+msgstr "Craobhag-bheithe"
 
 #: ../../worlds/blackland/conf:68
-msgid "Beech (tiny)"
-msgstr ""
+msgid "Birch (Sapling)"
+msgstr "Fiùran beithe"
 
 #: ../../worlds/blackland/conf:69
-msgid "Larch"
-msgstr "Learag"
+msgid "Beech (Old)"
+msgstr "Seann chraobh-fhaidhbhile"
 
 #: ../../worlds/blackland/conf:70
-msgid "Larch (medium)"
-msgstr ""
+msgid "Beech (Mature)"
+msgstr "Craobh-fhaidhbhile inbheach"
 
 #: ../../worlds/blackland/conf:71
-msgid "Larch (small)"
-msgstr ""
+msgid "Beech (Pole)"
+msgstr "Craobhag-fhaidhbhile"
 
 #: ../../worlds/blackland/conf:72
-msgid "Larch (tiny)"
-msgstr ""
+msgid "Beech (Sapling)"
+msgstr "Fiùran faidhbhile"
 
 #: ../../worlds/blackland/conf:73
-msgid "Rowan"
-msgstr "Caorann"
+msgid "Larch (Old)"
+msgstr "Seann chraobh-learaige"
 
 #: ../../worlds/blackland/conf:74
-msgid "Rowan (medium)"
-msgstr ""
+msgid "Larch (Mature)"
+msgstr "Craobh-learaige inbheach"
 
 #: ../../worlds/blackland/conf:75
-msgid "Rowan (small)"
-msgstr ""
+msgid "Larch (Pole)"
+msgstr "Craobhag-learaige"
 
 #: ../../worlds/blackland/conf:76
-msgid "Rowan (tiny)"
-msgstr ""
+msgid "Larch (Sapling)"
+msgstr "Fiùran learaige"
+
+#: ../../worlds/blackland/conf:77
+msgid "Rowan (Old)"
+msgstr "Seann chraobh-chaorainn"
+
+#: ../../worlds/blackland/conf:78
+msgid "Rowan (Mature)"
+msgstr "Craobh-chaorainn inbheach"
 
 #: ../../worlds/blackland/conf:79
+msgid "Rowan (Pole)"
+msgstr "Craobhag-chaorainn"
+
+#: ../../worlds/blackland/conf:80
+msgid "Rowan (Sapling)"
+msgstr "Fiùran caorainn"
+
+#: ../../worlds/blackland/conf:83
 msgid "Bunny"
 msgstr "Coineanach"
 
-#: ../../worlds/blackland/conf:80
+#: ../../worlds/blackland/conf:84
 msgid "Deer"
 msgstr "Fiadh"
 
-#: ../../worlds/blackland/conf:81
+#: ../../worlds/blackland/conf:85
 msgid "Duck"
 msgstr "Tunnag"
 
-#: ../../worlds/blackland/conf:82
+#: ../../worlds/blackland/conf:86
 msgid "Fox"
 msgstr "Sionnach"
 
-#: ../../worlds/blackland/conf:83
+#: ../../worlds/blackland/conf:87
 msgid "Reindeer"
 msgstr "Fast"
 
-#: ../../worlds/blackland/conf:84
+#: ../../worlds/blackland/conf:88
 msgid "Sheep"
 msgstr "Caora"
 
@@ -278,15 +278,15 @@ msgstr "Luaithre"
 
 #: ../../worlds/blackland/terrainconf:13
 msgid "Mountain 1"
-msgstr ""
+msgstr "Beinn 1"
 
 #: ../../worlds/blackland/terrainconf:19
 msgid "Lava Rocks 1"
-msgstr ""
+msgstr "Creagan làbha 1"
 
 #: ../../worlds/blackland/terrainconf:24
 msgid "Lava Rocks 2"
-msgstr ""
+msgstr "Creagan làbha 2"
 
 #: ../../worlds/blackland/terrainconf:29
 msgid "Beach"
@@ -294,35 +294,35 @@ msgstr "Traigh"
 
 #: ../../worlds/blackland/terrainconf:41
 msgid "Hard Ground 1"
-msgstr ""
+msgstr "Talamh chruaidh 1"
 
 #: ../../worlds/blackland/terrainconf:47
 msgid "Hard Ground 2"
-msgstr ""
+msgstr "Talamh chruaidh 2"
 
 #: ../../worlds/blackland/terrainconf:53
 msgid "Hard Ground 3"
-msgstr ""
+msgstr "Talamh chruaidh 3"
 
 #: ../../worlds/blackland/terrainconf:59
 msgid "Mountain 2"
-msgstr ""
+msgstr "Beinn 2"
 
 #: ../../worlds/blackland/terrainconf:65
 msgid "Mountain 3"
-msgstr ""
+msgstr "Beinn 3"
 
 #: ../../worlds/blackland/terrainconf:71
 msgid "Mountain 4"
-msgstr ""
+msgstr "Beinn 4"
 
 #: ../../worlds/blackland/terrainconf:77
 msgid "Ashes 2"
-msgstr ""
+msgstr "Luaithre 2"
 
 #: ../../worlds/blackland/terrainconf:83
 msgid "Hard Ground 4"
-msgstr ""
+msgstr "Talamh chruaidh 4"
 
 #: ../../worlds/blackland/terrainconf:89
 msgid "Lava"
@@ -330,4 +330,4 @@ msgstr "Làbha"
 
 #: ../../worlds/blackland/terrainconf:94
 msgid "Igneous Rocks"
-msgstr ""
+msgstr "Clach theinnteach"

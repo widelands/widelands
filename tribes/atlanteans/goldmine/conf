@@ -31,13 +31,13 @@ return=skipped unless economy needs goldore or not economy needs smoked_fish
 consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
 animate=working 20000
-mine=gold 4 100 5
+mine=gold 4 100 5 2
 produce=goldore
 animate=working 20000
-mine=gold 4 100 5
+mine=gold 4 100 5 2
 produce=goldore
 animate=working 20000
-mine=gold 4 100 5
+mine=gold 4 100 5 2
 produce=goldore
 
 [idle]

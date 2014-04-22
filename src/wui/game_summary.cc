@@ -20,7 +20,6 @@
 #include "wui/game_summary.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"

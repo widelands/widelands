@@ -27,15 +27,14 @@
 #include <vector>
 
 #include "economy/itransport_cost_calculator.h"
-#include "logic/field.h"
+#include "i18n.h"
 #include "interval.h"
-#include "manager.h"
+#include "logic/field.h"
 #include "logic/map_revision.h"
 #include "logic/notification.h"
-#include "logic/objective.h"
-#include "random.h"
 #include "logic/widelands_geometry.h"
 #include "logic/world.h"
+#include "random.h"
 
 class FileSystem;
 class Image;
@@ -44,13 +43,15 @@ struct S2_Map_Loader;
 
 namespace Widelands {
 
-struct MapGenerator;
-struct BaseImmovable;
-struct PathfieldManager;
-class Player;
-struct World;
 class Map;
 class Map_Loader;
+class Objective;
+class Player;
+struct BaseImmovable;
+struct MapGenerator;
+struct PathfieldManager;
+struct World;
+
 #define WLMF_SUFFIX ".wmf"
 #define S2MF_SUFFIX ".swd"
 #define S2MF_SUFFIX2 ".wld"
@@ -134,13 +135,13 @@ public:
 	friend struct MapAStarBase;
 
 	typedef std::set<Coords, Coords::ordering_functor> PortSpacesSet;
+	typedef std::map<std::string, std::unique_ptr<Objective>> Objectives;
 
 	enum { // flags for findpath()
 
 		//  use bidirection cost instead of normal cost calculations
 		//  should be used for road building
 		fpBidiCost = 1,
-
 	};
 
 	// ORed bits for scenario types
@@ -359,8 +360,13 @@ public:
 	//  change terrain of a triangle, recalculate buildcaps
 	int32_t change_terrain(TCoords<FCoords>, Terrain_Index);
 
-	const Manager<Objective>  & mom() const {return m_mom;}
-	Manager<Objective>        & mom()       {return m_mom;}
+	// The objectives that are defined in this map if it is a scenario.
+	const Objectives& objectives() const {
+		return objectives_;
+	}
+	Objectives* mutable_objectives() {
+		return &objectives_;
+	}
 
 	/// Returns the military influence on a location from an area.
 	Military_Influence calc_influence(Coords, Area<>) const;
@@ -412,8 +418,7 @@ private:
 	std::unique_ptr<FileSystem> filesystem_;
 
 	PortSpacesSet m_port_spaces;
-
-	Manager<Objective>  m_mom;
+	Objectives objectives_;
 
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(FCoords);

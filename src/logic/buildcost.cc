@@ -29,7 +29,8 @@ void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
 {
 	while (Section::Value const * const val = buildcost_s.get_next_val())
 		try {
-			if (Ware_Index const idx = tribe.ware_index(val->get_name())) {
+			Ware_Index const idx = tribe.ware_index(val->get_name());
+			if (idx != INVALID_INDEX) {
 				if (count(idx))
 					throw wexception
 						("a buildcost item of this ware type has already been "
@@ -80,7 +81,7 @@ void Buildcost::load
 			break;
 
 		Ware_Index index = tribe.ware_index(name);
-		if (!index) {
+		if (index == INVALID_INDEX) {
 			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
 			fr.Unsigned8();
 		} else {

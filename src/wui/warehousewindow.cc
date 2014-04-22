@@ -152,7 +152,7 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 				        m_wh.owner().tribe().get_nrwares();
 	if (m_gb.can_act(m_wh.owner().player_number())) {
 		for
-			(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+			(Widelands::Ware_Index id = 0;
 			 id < nritems; ++id)
 		{
 			if (m_display.ware_selected(id)) {

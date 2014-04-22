@@ -2,22 +2,23 @@
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2012-11-02 16:13+0000\n"
-"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-11 23:14+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:39+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:41+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
+"Language: pl\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -83,7 +84,8 @@ msgid_plural "%s Gold Ore"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:132
+#: TRANSLATORS: number + resource name, e.g. '1 stone'
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:133
 msgid "%1$i %2$s"
 msgstr ""
 
@@ -103,6 +105,10 @@ msgid ""
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
 msgstr ""
+"Wyzwanie Wyspiarskie to tradycyjny turniej w kulturze Atlantów. Zasady gry "
+"są proste: Zaczynasz z kwaterą główną na pierwszej wyspie. Kiedy ukończysz "
+"zamek na pierwszej wyspie, otrzymujesz kolejną kwaterę na drugiej wyspie, "
+"która będzie zawierać wszystkie towary z pierwszej."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:15
 msgid ""
@@ -110,6 +116,9 @@ msgid ""
 "a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
 msgstr ""
+"Jeśli ukończysz zamek w odpowiedniej strefie na drugiej wyspie, otrzymasz "
+"trzecią kwaterę na trzeciej wyspie. Musisz zbudować i utrzymać zamek w "
+"centrum trzeciej wyspy przez 20 minut, aby wygrać."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:20
 msgid ""
@@ -117,6 +126,9 @@ msgid ""
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
 msgstr ""
+"Ukończenie każdej z wysp daje ci premię do zasobów zależną od tego, ilu "
+"graczy ukończyło wyspę przed tobą. Wczesne zakończenie odpowiada niewielkiej "
+"premii. Dokładny opis poniżej."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
@@ -125,6 +137,9 @@ msgid ""
 "work for you, but you will only reap the benefits at the moment you reach a "
 "new island."
 msgstr ""
+"Wskazówka: pierwsza z wysp dostarcza jedynie drewna i kamieni, druga posiada "
+"surowce i łąki. Pozostawione na wyspach ośrodki wciąż będą dostarczać ci "
+"surowców niezbędnych do rozwoju na kolejnych wyspach."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 msgid "Finally, be careful not to waste your quartz and diamonds."
@@ -132,7 +147,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "Finish Rewards"
-msgstr ""
+msgstr "Nagrody za ukończenie"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "First Island"
@@ -164,29 +179,31 @@ msgstr "Druga Wyspa"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the first to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s jako pierwszy dotarł do wyspy numer %2$s."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the second to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s jako drugi dotarł do wyspy numer %2$s."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the third to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s jako trzeci dotarł do wyspy numer %2$s."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:48
 msgid "%1$s was the fourth to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s jako czwarty dotarł do wyspy numer %2$s."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
 msgid "The reward for this feat amounts to:"
-msgstr ""
+msgstr "Zagroda za to osiągnięcie wynosi:"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr ""
+"%s jest teraz Królem Wzgórza i wygra grę, jeśli w ciągu 20 minut nikt nie "
+"przejmie wzgórza."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
 msgid "%s lost control of the hill."
@@ -194,7 +211,7 @@ msgstr "%s stracił panowanie na wzgórzu."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:58
 msgid "%1$s has been King of the Hill for %2$s!"
-msgstr ""
+msgstr "%1$s jest Królem Wzgórza od %2$s!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:59
 msgid "%s has won the game. Congratulations!"
