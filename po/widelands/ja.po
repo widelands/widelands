@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-04-22 05:36+0000\n"
+"X-Launchpad-Export-Date: 2014-04-23 05:37+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -3970,6 +3970,3 @@ msgstr "追跡"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "ここに視点移動"
-
-#~ msgid "Endless Game"
-#~ msgstr "エンドレス"
