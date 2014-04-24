@@ -873,6 +873,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Priority of woodcutters depend on the number of near trees
 					prio += bf->trees_nearby * 3;
 					prio /= 3 * (1 + bf->producers_nearby.at(bo.outputs.at(0)));
+					
+					//this is to keep territory trees-free
+					if (bf->trees_nearby>15) prio +=(bf->trees_nearby-15)*5;
 
 					// TODO improve this - it's still useless to place lumberjack huts randomly
 					/*if (prio <= 0) // no, sometimes we need wood without having a forest
