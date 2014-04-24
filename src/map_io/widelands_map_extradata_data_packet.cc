@@ -39,7 +39,7 @@ namespace Widelands {
 
 void Map_Extradata_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 Editor_Game_Base&,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &)
 {

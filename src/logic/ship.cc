@@ -19,8 +19,6 @@
 
 #include "logic/ship.h"
 
-#include <boost/foreach.hpp>
-
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
@@ -831,7 +829,7 @@ void Ship::exp_cancel (Game & game) {
 	// economy with us and the warehouse will make sure that they are
 	// getting used.
 	Worker * worker;
-	BOOST_FOREACH(ShippingItem& item, m_items) {
+	for (ShippingItem& item : m_items) {
 		item.get(game, nullptr, &worker);
 		if (worker) {
 			worker->reset_tasks(game);

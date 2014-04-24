@@ -22,7 +22,6 @@
 #include <clocale>
 #include <cstdio>
 
-#include <boost/foreach.hpp>
 #include <libintl.h>
 
 #include "economy/flag.h"
@@ -276,8 +275,7 @@ MilitarySite::find_least_suited_soldier()
 	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1:1;
 	int worst_soldier_level = INT_MIN;
 	Soldier * worst_soldier = nullptr;
-	BOOST_FOREACH (Soldier * sld, present)
-	{
+	for (Soldier* sld : present) {
 		int this_soldier_level = multiplier * static_cast<int> (sld->get_level(atrTotal));
 		if (this_soldier_level > worst_soldier_level)
 		{
@@ -867,7 +865,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// Add suffix to all descr in former buildings in cases
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
-		BOOST_FOREACH(Building_Index former_idx, m_old_buildings) {
+		for (Building_Index former_idx : m_old_buildings) {
 			const Building_Descr * old_descr = tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?

@@ -182,27 +182,6 @@ struct WLApplication {
 	bool campaign_game();
 	void replay();
 
-#ifndef NDEBUG
-#ifndef _WIN32
-	//not all of these need to be public, but I consider signal handling
-	//a public interface
-	//@{
-	void init_double_game();
-	static void signal_handler (int32_t sig);
-	static void quit_handler();
-	static void yield_double_game();
-	//@}
-
-	// Used for --double
-	//@{
-	static int32_t pid_me;
-	static int32_t pid_peer;
-	///\todo Explain me
-	static volatile int32_t may_run;
-	//@}
-#endif
-#endif
-
 	static void show_usage();
 
 	static void emergency_save(Widelands::Game &);

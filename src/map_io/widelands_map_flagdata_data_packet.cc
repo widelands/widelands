@@ -197,7 +197,7 @@ void Map_Flagdata_Data_Packet::Read
 								f.request =
 									new Request
 										(flag,
-										 Ware_Index::First(),
+										 0,
 										 Flag::flag_job_request_callback,
 										 wwWORKER);
 								f.request->Read

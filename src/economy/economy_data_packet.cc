@@ -43,26 +43,24 @@ void EconomyDataPacket::Read(FileRead & fr)
 						uint32_t const permanent = fr.Unsigned32();
 						if (version <= 2)
 							fr.Unsigned32();
-						if (Ware_Index i = tribe.ware_index(type_name)) {
-							if
-								(tribe.get_ware_descr(i)->default_target_quantity()
-								 ==
-								 std::numeric_limits<uint32_t>::max())
-								log
-									("WARNING: target quantity configured for %s, "
-									 "which should not have target quantity, "
-									 "ignoring\n",
-									 type_name);
+						Ware_Index i = tribe.ware_index(type_name);
+						if (i != INVALID_INDEX) {
+							if (tribe.get_ware_descr(i)->default_target_quantity() ==
+							    std::numeric_limits<uint32_t>::max())
+								log("WARNING: target quantity configured for %s, "
+								    "which should not have target quantity, "
+								    "ignoring\n",
+								    type_name);
 							else {
 								Economy::Target_Quantity & tq =
-									m_eco->m_ware_target_quantities[i.value()];
+									m_eco->m_ware_target_quantities[i];
 								if (tq.last_modified)
 									throw game_data_error
 										("duplicated entry for %s", type_name);
 								tq.permanent         = permanent;
 								tq.last_modified     = last_modified;
 							}
-						} else if ((i = tribe.worker_index(type_name))) {
+						} else if ((i = tribe.worker_index(type_name)) != INVALID_INDEX) {
 							if
 								(tribe.get_worker_descr(i)->default_target_quantity()
 								 ==
@@ -74,7 +72,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 									 type_name);
 							else {
 								Economy::Target_Quantity & tq =
-									m_eco->m_worker_target_quantities[i.value()];
+									m_eco->m_worker_target_quantities[i];
 								if (tq.last_modified)
 									throw game_data_error
 										("duplicated entry for %s", type_name);
@@ -104,20 +102,20 @@ void EconomyDataPacket::Write(FileWrite & fw)
 {
 	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
 	const Tribe_Descr & tribe = m_eco->owner().tribe();
-	for (Ware_Index i = tribe.get_nrwares(); i.value();) {
+	for (Ware_Index i = tribe.get_nrwares(); i;) {
 		--i;
 		const Economy::Target_Quantity & tq =
-			m_eco->m_ware_target_quantities[i.value()];
+			m_eco->m_ware_target_quantities[i];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);
 			fw.CString(tribe.get_ware_descr(i)->name());
 			fw.Unsigned32(tq.permanent);
 		}
 	}
-	for (Ware_Index i = tribe.get_nrworkers(); i.value();) {
+	for (Ware_Index i = tribe.get_nrworkers(); i;) {
 		--i;
 		const Economy::Target_Quantity & tq =
-			m_eco->m_worker_target_quantities[i.value()];
+			m_eco->m_worker_target_quantities[i];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);
 			fw.CString(tribe.get_worker_descr(i)->name());

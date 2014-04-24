@@ -140,7 +140,7 @@ m_parent(&parent)
 {
 	set_cache(false);
 
-	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
+	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares();
 
 	//init color sets
 	m_color_map.resize(nr_wares);
@@ -214,7 +214,7 @@ m_parent(&parent)
 	box->add(tabs, UI::Box::AlignLeft, true);
 
 	//register statistics data
-	for (Widelands::Ware_Index::value_t cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
+	for (Widelands::Ware_Index cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
 		m_plot_production->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_production_statistics
@@ -310,4 +310,3 @@ void Ware_Statistics_Menu::set_time(int32_t timescale) {
 	m_plot_economy->set_time_id(timescale);
 	m_plot_stock->set_time_id(timescale);
 }
-

@@ -71,12 +71,12 @@ Request::Request
 		throw wexception
 			("creating ware request with index %u, but tribe has only %u "
 			 "ware types",
-			 index.value(), _target.owner().tribe().get_nrwares  ().value());
+			 index, _target.owner().tribe().get_nrwares  ());
 	if (w == wwWORKER and _target.owner().tribe().get_nrworkers() <= index)
 		throw wexception
 			("creating worker request with index %u, but tribe has only %u "
 			 "worker types",
-			 index.value(), _target.owner().tribe().get_nrworkers().value());
+			 index, _target.owner().tribe().get_nrworkers());
 	if (m_economy)
 		m_economy->add_request(*this);
 }
@@ -111,14 +111,18 @@ void Request::Read
 		if (version == 6) {
 			const Tribe_Descr& tribe = m_target.owner().tribe();
 			char const* const type_name = fr.CString();
-			if (Ware_Index const wai = tribe.ware_index(type_name)) {
+			Ware_Index const wai = tribe.ware_index(type_name);
+			if (wai != INVALID_INDEX) {
 				m_type = wwWARE;
 				m_index = wai;
-			} else if (Ware_Index const woi = tribe.worker_index(type_name)) {
-				m_type = wwWORKER;
-				m_index = woi;
 			} else {
-				throw wexception("Request::Read: unknown type '%s'.\n", type_name);
+				Ware_Index const woi = tribe.worker_index(type_name);
+				if (woi != INVALID_INDEX) {
+					m_type = wwWORKER;
+					m_index = woi;
+				} else {
+					throw wexception("Request::Read: unknown type '%s'.\n", type_name);
+				}
 			}
 			m_count             = fr.Unsigned32();
 			m_required_time     = fr.Unsigned32();

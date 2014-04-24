@@ -237,13 +237,9 @@ Immovable_Descr::Immovable_Descr
 		 	prof.get_section("terrain affinity"))
 	{
 		memset(it, 0, sizeof(m_terrain_affinity));
-		for
-			(wl_index_range<Terrain_Index> i(0, world.get_nr_terrains());
-			 i;
-			 ++i, ++it)
-		{
+		for (int i = 0; i < world.get_nr_terrains(); ++i, ++it) {
 			char const * const terrain_type_name =
-				world.get_ter(i.current).name().c_str();
+				world.get_ter(i).name().c_str();
 			try {
 				uint32_t const value =
 					terrain_affinity_s->get_natural(terrain_type_name, 0);
@@ -1250,7 +1246,7 @@ bool Immovable::construct_ware(Game & game, Ware_Index index)
 	if (!d)
 		return false;
 
-	molog("construct_ware: index %u", index.value());
+	molog("construct_ware: index %u", index);
 
 	Buildcost::iterator it = d->delivered.find(index);
 	if (it != d->delivered.end())
@@ -1261,7 +1257,7 @@ bool Immovable::construct_ware(Game & game, Ware_Index index)
 	m_anim_construction_done = d->delivered.total();
 	m_animstart = game.get_gametime();
 
-	molog("construct_ware: total %u delivered: %u", index.value(), d->delivered[index]);
+	molog("construct_ware: total %u delivered: %u", index, d->delivered[index]);
 
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
@@ -1400,7 +1396,7 @@ void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
 {
 	throw wexception
 		("MO(%u): Received a ware(%u), do not know what to do with it",
-		 serial(), ware.value());
+		 serial(), ware);
 }
 
 /**

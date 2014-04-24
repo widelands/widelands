@@ -22,6 +22,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/objective.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -40,9 +41,6 @@ void Map_Objective_Data_Packet::Read
 
 	Profile prof;
 	try {prof.read("objective", nullptr, fs);} catch (...) {return;}
-	Map & map = egbase.map();
-	Manager<Objective> & mom = map.mom();
-
 	try {
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
@@ -50,17 +48,16 @@ void Map_Objective_Data_Packet::Read
 			while (Section * const s = prof.get_next_section(nullptr)) {
 				char const * const         name = s->get_name();
 				try {
-					Objective & objective = *new Objective();
-					objective.set_name(name);
-					try {
-						mom.register_new(objective);
-					} catch (Manager<Objective>::Already_Exists) {
+					std::unique_ptr<Objective> objective(new Objective(name));
+					Map::Objectives* objectives = egbase.map().mutable_objectives();
+					if (objectives->count(name)) {
 						throw game_data_error("duplicated");
 					}
-					objective.set_descname    (s->get_string("name", name));
-					objective.set_descr      (s->get_safe_string("descr"));
-					objective.set_visible (s->get_safe_bool  ("visible"));
-					objective.set_done       (s->get_bool  ("done", false));
+					objective->set_descname(s->get_string("name", name));
+					objective->set_descr(s->get_safe_string("descr"));
+					objective->set_visible(s->get_safe_bool("visible"));
+					objective->set_done(s->get_bool("done", false));
+					objectives->insert(std::make_pair(name, std::move(objective)));
 				} catch (const _wexception & e) {
 					throw game_data_error("%s: %s", name, e.what());
 				}
@@ -81,15 +78,12 @@ void Map_Objective_Data_Packet::Write
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	const Manager<Objective> & mom = egbase.map().mom();
-	Manager<Objective>::Index const nr_objectives = mom.size();
-	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i) {
-		const Objective & objective = mom[i];
-		Section & s = prof.create_section(objective.name().c_str());
-		s.set_string("name",     objective.descname());
-		s.set_string("descr",    objective.descr());
-		s.set_bool  ("visible",  objective.visible());
-		s.set_bool  ("done", objective.done());
+	for (const auto& item : egbase.map().objectives()) {
+		Section& s = prof.create_section(item.second->name().c_str());
+		s.set_string("name", item.second->descname());
+		s.set_string("descr", item.second->descr());
+		s.set_bool("visible", item.second->visible());
+		s.set_bool("done", item.second->done());
 	}
 
 	prof.write("objective", false, fs);

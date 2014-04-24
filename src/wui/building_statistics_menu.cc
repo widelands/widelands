@@ -374,7 +374,7 @@ void Building_Statistics_Menu::update() {
 	const Widelands::Map         & map   = iplayer().game().map();
 	Widelands::Building_Index      const nr_buildings = tribe.get_nrbuildings();
 	for
-		(Widelands::Building_Index i = Widelands::Building_Index::First();
+		(Widelands::Building_Index i = 0;
 		 i < nr_buildings;
 		 ++i)
 	{
@@ -394,7 +394,7 @@ void Building_Statistics_Menu::update() {
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
 			UI::Table<uintptr_t const>::Entry_Record & er = m_table.get_record(l);
-			if (UI::Table<uintptr_t const>::get(er) == i.value()) {
+			if (UI::Table<uintptr_t const>::get(er) == i) {
 				te = &er;
 				break;
 			}
@@ -404,7 +404,7 @@ void Building_Statistics_Menu::update() {
 		if (not te) {
 			if (! iplayer().player().is_building_type_allowed(i))
 				continue;
-			te = &m_table.add(i.value());
+			te = &m_table.add(i);
 		}
 
 		uint32_t nr_owned   = 0;
@@ -425,7 +425,7 @@ void Building_Statistics_Menu::update() {
 		}
 
 		const bool is_selected = //  Is this entry selected?
-			m_table.has_selection() and m_table.get_selected() == i.value();
+			m_table.has_selection() and m_table.get_selected() == i;
 
 		if (is_selected) {
 			m_anim = building.get_ui_anim();

@@ -24,7 +24,6 @@
 #include <vector>
 
 #include <SDL.h>
-#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
@@ -37,8 +36,6 @@
 
 using namespace std;
 using namespace boost;
-
-#define foreach BOOST_FOREACH
 
 namespace RT {
 
@@ -94,7 +91,7 @@ public:
 	string query(int16_t x, int16_t y) override {
 		// Should this linear algorithm proof to be too slow (doubtful), the
 		// RefMap could also be efficiently implemented using an R-Tree
-		foreach(const Reference& c, m_refs)
+		for (const Reference& c : m_refs)
 			if (c.contains(x, y))
 				return c.ref;
 		return "";
@@ -209,7 +206,7 @@ uint16_t Layout::m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders& 
 
 	if (expanding_nodes.size()) { // If there are expanding nodes, we fill the space
 		uint16_t individual_w = rem_space / expanding_nodes.size();
-		foreach(size_t idx, expanding_nodes) {
+		for (size_t idx : expanding_nodes) {
 			rv[idx]->set_w(individual_w);
 			for (size_t nidx = idx + 1; nidx < rv.size(); ++nidx)
 				rv[nidx]->set_x(rv[nidx]->x() + individual_w);
@@ -459,7 +456,7 @@ public:
 		m_bg_clr(0, 0, 0), m_bg_clr_set(false), m_bg_img(nullptr) {
 	}
 	virtual ~SubTagRenderNode() {
-		foreach(RenderNode* n, m_nodes_to_render) {
+		for (RenderNode* n : m_nodes_to_render) {
 			delete n;
 		}
 		m_nodes_to_render.clear();
@@ -496,7 +493,7 @@ public:
 			set_alpha = false;
 		}
 
-		foreach(RenderNode* n, m_nodes_to_render) {
+		for (RenderNode* n : m_nodes_to_render) {
 			Surface* nsur = n->render(surface_cache);
 			if (nsur) {
 				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
@@ -565,7 +562,7 @@ class FontCache {
 public:
 	FontCache(IFontLoader* fl) : m_fl(fl) {}
 	virtual ~FontCache() {
-		foreach(FontMapPair& pair, m_fontmap)
+		for (FontMapPair& pair : m_fontmap)
 			delete pair.second;
 		m_fontmap.clear();
 	}
@@ -644,7 +641,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 }
 
 void TagHandler::emit(vector<RenderNode*>& nodes) {
-	foreach(Child* c, m_tag.childs()) {
+	for (Child* c : m_tag.childs()) {
 		if (c->tag) {
 			std::unique_ptr<TagHandler> th(create_taghandler(*c->tag, m_fc, m_ns, image_cache_));
 			th->enter();
@@ -852,7 +849,7 @@ public:
 		TagHandler::emit(subnodes);
 
 		if (not m_w) { // Determine the width by the width of the widest subnode
-			foreach(RenderNode* n, subnodes) {
+			for (RenderNode* n : subnodes) {
 				if (n->width() >= INFINITE_WIDTH)
 					continue;
 				m_w = max<int>(m_w, n->width() + padding.left + padding.right);
@@ -867,8 +864,8 @@ public:
 		}
 
 		// Collect all tags from children
-	foreach(RenderNode* rn, nodes_to_render) {
-		foreach(const Reference& r, rn->get_references()) {
+		for (RenderNode* rn : nodes_to_render) {
+			for (const Reference& r : rn->get_references()) {
 			m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
 		}
 	}

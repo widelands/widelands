@@ -393,7 +393,7 @@ int L_PlayerBase::place_building(lua_State * L) {
 
 	const Tribe_Descr& td = get(L, get_egbase(L)).tribe();
 	Building_Index i = td.building_index(name);
-	if (i == Building_Index::Null())
+	if (i == INVALID_INDEX)
 		report_error(L, "Unknown Building: '%s'", name);
 
 	Building_Descr::FormerBuildings former_buildings;

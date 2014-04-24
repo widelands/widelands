@@ -19,8 +19,6 @@
 
 #include "scripting/lua_map.h"
 
-#include <boost/foreach.hpp>
-
 #include "container_iterate.h"
 #include "economy/wares_queue.h"
 #include "log.h"
@@ -105,7 +103,7 @@ typedef std::vector<Widelands::Soldier *> SoldiersList;
 		(lua_State * L, const Tribe_Descr & tribe,  const std::string & what) \
 	{ \
 		Ware_Index idx = tribe. type ## _index(what); \
-		if (!idx) \
+		if (idx == INVALID_INDEX) \
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
 	}
@@ -126,7 +124,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 	if (lua_isstring(L, 2)) { \
 		std::string what = luaL_checkstring(L, -1); \
 		if (what == "all") { \
-			for (Ware_Index i = Ware_Index::First(); \
+			for (Ware_Index i = 0; \
 					i < tribe.get_nr##type##s (); ++i) \
 				rv.insert(i); \
 		} else { \
@@ -210,7 +208,7 @@ WorkersMap get_valid_workers_for(const Road& r) {
 WorkersMap get_valid_workers_for(const ProductionSite& ps)
 {
 	WorkersMap rv;
-	BOOST_FOREACH(const Widelands::WareAmount& item, ps.descr().working_positions()) {
+	for (const Widelands::WareAmount& item : ps.descr().working_positions()) {
 		rv.insert(WorkerAmount(item.first, item.second));
 	}
 	return rv;
@@ -219,7 +217,7 @@ WorkersMap get_valid_workers_for(const ProductionSite& ps)
 // Translate the given Workers map into a (string, count) Lua table.
 int workers_map_to_lua(lua_State * L, const Tribe_Descr& tribe, const WorkersMap& valid_workers) {
 	lua_newtable(L);
-	BOOST_FOREACH(const WorkersMap::value_type& item, valid_workers) {
+	for (const WorkersMap::value_type& item : valid_workers) {
 		lua_pushstring(L, tribe.get_worker_descr(item.first)->name());
 		lua_pushuint32(L, item.second);
 		lua_rawset(L, -3);
@@ -235,7 +233,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
 
 	WorkersMap c_workers;
-	BOOST_FOREACH(const Worker* w, pi.get_workers()) {
+	for (const Worker* w : pi.get_workers()) {
 		Ware_Index i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
@@ -244,9 +242,9 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 		}
 	}
 
-	if (set.size() == tribe.get_nrworkers().value()) {  // Wants all returned
+	if (set.size() == tribe.get_nrworkers()) {  // Wants all returned
 		set.clear();
-		BOOST_FOREACH(const WorkersMap::value_type& v, valid_workers) {
+		for (const WorkersMap::value_type& v : valid_workers) {
 			set.insert(v.first);
 		}
 	}
@@ -254,7 +252,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	if (!return_number)
 		lua_newtable(L);
 
-	BOOST_FOREACH(const Ware_Index& i, set) {
+	for (const Ware_Index& i : set) {
 		uint32_t cnt = 0;
 		if (c_workers.count(i))
 			cnt = c_workers[i];
@@ -279,7 +277,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
 
 	WorkersMap c_workers;
-	BOOST_FOREACH(const Worker* w, pi->get_workers()) {
+	for (const Worker* w : pi->get_workers()) {
 		Ware_Index i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i))
 			c_workers.insert(WorkerAmount(i, 1));
@@ -291,7 +289,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 
 	// The idea is to change as little as possible
 	Editor_Game_Base& egbase = get_egbase(L);
-	BOOST_FOREACH(const WorkersMap::value_type sp, setpoints) {
+	for (const WorkersMap::value_type sp : setpoints) {
 		const Worker_Descr* wdes = tribe.get_worker_descr(sp.first);
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
@@ -304,7 +302,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 		int d = sp.second - cur;
 		if (d < 0) {
 			while (d) {
-				BOOST_FOREACH(const Worker* w, pi->get_workers()) {
+				for (const Worker* w : pi->get_workers()) {
 					if (tribe.worker_index(w->descr().name()) == sp.first) {
 						const_cast<Worker*>(w)->remove(egbase);
 						++d;
@@ -395,7 +393,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 
 		// Return All Soldiers
 		SoldiersMap hist;
-		BOOST_FOREACH(const Soldier* s, soldiers) {
+		for (const Soldier* s : soldiers) {
 			SoldierDescr sd
 				(s->get_hp_level(), s->get_attack_level(),
 				 s->get_defense_level(), s->get_evade_level());
@@ -409,7 +407,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 
 		// Get this to Lua.
 		lua_newtable(L);
-		BOOST_FOREACH(const SoldiersMap::value_type& i, hist) {
+		for (const SoldiersMap::value_type& i : hist) {
 			lua_createtable(L, 4, 0);
 #define PUSHLEVEL(idx, name)                                                                       \
 	lua_pushuint32(L, idx);                                                                         \
@@ -431,7 +429,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 		// Only return the number of those requested
 		const SoldierDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
 		uint32_t rv = 0;
-		BOOST_FOREACH(const Soldier* s, soldiers) {
+		for (const Soldier* s : soldiers) {
 			SoldierDescr sd
 				(s->get_hp_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level());
 			if (sd == wanted)
@@ -458,7 +456,7 @@ int do_set_soldiers
 	// Get information about current soldiers
 	const std::vector<Soldier*> curs = sc->stationedSoldiers();
 	SoldiersMap hist;
-	BOOST_FOREACH(const Soldier* s, curs) {
+	for (const Soldier* s : curs) {
 		SoldierDescr sd
 			(s->get_hp_level(), s->get_attack_level(),
 			 s->get_defense_level(), s->get_evade_level());
@@ -474,7 +472,7 @@ int do_set_soldiers
 
 	// Now adjust them
 	Editor_Game_Base& egbase = get_egbase(L);
-	BOOST_FOREACH(const SoldiersMap::value_type& sp, setpoints) {
+	for (const SoldiersMap::value_type& sp : setpoints) {
 		uint32_t cur = 0;
 		SoldiersMap::iterator i = hist.find(sp.first);
 		if (i != hist.end())
@@ -483,7 +481,7 @@ int do_set_soldiers
 		int d = sp.second - cur;
 		if (d < 0) {
 			while (d) {
-				BOOST_FOREACH(Soldier * s, sc->stationedSoldiers()) {
+				for (Soldier* s : sc->stationedSoldiers()) {
 					SoldierDescr is
 						(s->get_hp_level(), s->get_attack_level(),
 						 s->get_defense_level(), s->get_evade_level());
@@ -1386,7 +1384,7 @@ int L_Flag::get_wares(lua_State * L) {
 
 	WaresMap wares = count_wares_on_flag_(*get(L, get_egbase(L)), tribe);
 
-	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
+	if (wares_set.size() == tribe.get_nrwares()) { // Want all returned
 		wares_set.clear();
 		container_iterate_const(WaresMap, wares, w)
 			wares_set.insert(w->first);
@@ -1924,7 +1922,7 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i)
 		valid_wares.insert(i.current->first);
 
-	if (wares_set.size() == tribe.get_nrwares().value()) // Want all returned
+	if (wares_set.size() == tribe.get_nrwares()) // Want all returned
 		wares_set = valid_wares;
 
 	if (!return_number)
