@@ -744,10 +744,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		bool rel17comp = false;
-		if (3 == packet_version and 4 == CURRENT_MILITARYSITE_PACKET_VERSION)
-			rel17comp = true;
-		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION or rel17comp)
+		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION)
 		{
 			read_productionsite(militarysite, fr, game, mol);
 
@@ -765,9 +762,6 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			else
 				militarysite.m_normal_soldier_request.reset();
 
-			if (rel17comp) // compatibility with release 17 savegames
-				militarysite.m_upgrade_soldier_request.reset();
-			else
 			if (fr.Unsigned8())
 			{
 				militarysite.m_upgrade_soldier_request.reset
@@ -803,26 +797,14 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			//  capacity (modified by user)
 			militarysite.m_capacity = fr.Unsigned8();
 			militarysite.m_nexthealtime = fr.Signed32();
-			if (not (rel17comp)) // compatibility with release 17 savegames
-			{
 
-				uint16_t reqmin = fr.Unsigned16();
-				uint16_t reqmax = fr.Unsigned16();
-				militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
-				militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
-				militarysite.m_next_swap_soldiers_time = fr.Signed32();
-				militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
-				militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
-			}
-			else // Release 17 compatibility branch. Some safe values.
-			{
-				militarysite.m_soldier_preference = MilitarySite::kPrefersRookies;
-				if (2 < militarysite.m_capacity)
-					militarysite.m_soldier_preference = MilitarySite::kPrefersHeroes;
-				militarysite.m_next_swap_soldiers_time = militarysite.m_nexthealtime;
-				militarysite.m_soldier_upgrade_try = false;
-				militarysite.m_doing_upgrade_request = false;
-			}
+			uint16_t reqmin = fr.Unsigned16();
+			uint16_t reqmax = fr.Unsigned16();
+			militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
+			militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
+			militarysite.m_next_swap_soldiers_time = fr.Signed32();
+			militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
+			militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
 
 		} else
 			throw game_data_error
@@ -1086,11 +1068,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
 
-		bool rel17comp = false; // compatibility with release 17
-		if (4 == CURRENT_TRAININGSITE_PACKET_VERSION && 3 == trainingsite_packet_version)
-			rel17comp = true;
-
-		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION or rel17comp)
+		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION)
 		{
 			read_productionsite(trainingsite, fr, game, mol);
 
@@ -1127,20 +1105,17 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					fr.Signed32();
 				}
 			}
-			// load premature kick-out state, was not in release 17..
-			if (not rel17comp)
+
+			uint16_t mapsize = fr.Unsigned16(); // map of training levels (not _the_ map)
+			while (mapsize)
 			{
-				uint16_t mapsize = fr.Unsigned16();
-				while (mapsize)
-				{
-					uint16_t traintype  = fr.Unsigned16();
-					uint16_t trainlevel = fr.Unsigned16();
-					uint16_t trainstall = fr.Unsigned16();
-					uint16_t spresence  = fr.Unsigned8();
-					mapsize--;
-					std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
-					trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
-				}
+				uint16_t traintype  = fr.Unsigned16();
+				uint16_t trainlevel = fr.Unsigned16();
+				uint16_t trainstall = fr.Unsigned16();
+				uint16_t spresence  = fr.Unsigned8();
+				mapsize--;
+				std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
+				trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
 			}
 		} else
 			throw game_data_error
