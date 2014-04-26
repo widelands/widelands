@@ -2,7 +2,6 @@ world = wl.World()
 
 set_textdomain("world")
 
--- -- NOCOM(#sirver): rename to editor_terrain_category
 world:new_editor_terrain_category{
    name = "green",
    descname = _ "Summer",
