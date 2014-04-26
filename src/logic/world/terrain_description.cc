@@ -134,10 +134,6 @@ const EditorCategory& TerrainDescription::editor_category() const {
 	return *editor_category_;
 }
 
-int32_t TerrainDescription::resource_value(const Resource_Index resource) const {
-	return is_resource_valid(resource) ? (get_is() & TerrainDescription::UNPASSABLE ? 8 : 1) : -1;
-}
-
 Resource_Index TerrainDescription::get_valid_resource(uint8_t index) const {
 	return valid_resources_[index];
 }

@@ -61,10 +61,6 @@ public:
 	// Returns the type of terrain this is (water, walkable, and so on).
 	Type get_is() const;
 
-	// Returns the value of the resource in this field.
-	// NOCOM(#sirver): find out what this does.
-	int32_t resource_value(Resource_Index resource) const;
-
 	// Returns the valid resource with the given index.
 	Resource_Index get_valid_resource(uint8_t index) const;
 

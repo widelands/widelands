@@ -30,6 +30,22 @@
 
 using Widelands::TCoords;
 
+namespace  {
+
+int32_t resource_value(const Widelands::TerrainDescription& terrain,
+                       const Widelands::Resource_Index resource) {
+	if (!terrain.is_resource_valid(resource)) {
+		return -1;
+	}
+	if (terrain.get_is() & Widelands::TerrainDescription::UNPASSABLE) {
+		return 8;
+	}
+	return 1;
+}
+
+}  // namespace
+
+
 int32_t Editor_Change_Resource_Tool_Callback
 	(const TCoords<Widelands::FCoords>& c, Widelands::Map& map, const Widelands::World& world, int32_t const curres)
 {
@@ -39,22 +55,22 @@ int32_t Editor_Change_Resource_Tool_Callback
 	int32_t count = 0;
 
 	//  this field
-	count += world.terrain_descr(f.field->terrain_r()).resource_value(curres);
-	count += world.terrain_descr(f.field->terrain_d()).resource_value(curres);
+	count += resource_value(world.terrain_descr(f.field->terrain_r()), curres);
+	count += resource_value(world.terrain_descr(f.field->terrain_d()), curres);
 
 	//  If one of the neighbours is unpassable, count its resource stronger.
 	//  top left neigbour
 	map.get_neighbour(f, Widelands::WALK_NW, &f1);
-	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
-	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
+	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
+	count += resource_value(world.terrain_descr(f1.field->terrain_d()), curres);
 
 	//  top right neigbour
 	map.get_neighbour(f, Widelands::WALK_NE, &f1);
-	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
+	count += resource_value(world.terrain_descr(f1.field->terrain_d()), curres);
 
 	//  left neighbour
 	map.get_neighbour(f, Widelands::WALK_W, &f1);
-	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
+	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
 
 	return count <= 3 ? 0 : f.field->nodecaps();
 }
