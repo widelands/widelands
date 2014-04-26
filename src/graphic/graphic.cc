@@ -316,9 +316,8 @@ GCC_DIAG_ON ("-Wold-style-cast")
 	m_sdl_screen = sdlsurface;
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
 
-	// NOCOM(#sirver): this must now be handled based on textures under the road or so.
-	pic_road_normal_.reset(image_loader_->load("world/greenland_pics/roadt_normal.png"));
-	pic_road_busy_.reset(image_loader_->load("world/greenland_pics/roadt_busy.png"));
+	pic_road_normal_.reset(image_loader_->load("world/pics/roadt_normal.png"));
+	pic_road_busy_.reset(image_loader_->load("world/pics/roadt_busy.png"));
 }
 
 bool Graphic::check_fallback_settings_in_effect()
