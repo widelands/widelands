@@ -230,11 +230,6 @@ int32_t Panel::run()
 		if (_flags & pf_child_die)
 			check_child_death();
 
-#ifndef NDEBUG
-#ifndef _WIN32
-		WLApplication::yield_double_game ();
-#endif
-#endif
 		//  Wait until 1second/maxfps are over.
 		diffTime = SDL_GetTicks() - startTime;
 		if (diffTime < minTime)

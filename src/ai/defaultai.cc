@@ -803,7 +803,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			consider_attack(game().get_gametime());
 
 
-	Building_Index proposed_building;
+	Building_Index proposed_building = INVALID_INDEX;
 	int32_t proposed_priority = 0;
 	Coords proposed_coords;
 
