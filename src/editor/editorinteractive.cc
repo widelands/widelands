@@ -189,6 +189,7 @@ void Editor_Interactive::load(const std::string & filename) {
 			(_("Unsupported format"),
 			 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 			 filename.c_str());
+	ml->preload_map(true);
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
 	std::vector<std::string> tipstext;
@@ -571,7 +572,7 @@ bool Editor_Interactive::is_player_tribe_referenced
 	return false;
 }
 
-void Editor_Interactive::run_editor(const std::string & filename, const std::string& script_to_run) {
+void Editor_Interactive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::Editor_Game_Base editor(nullptr);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); // TODO get rid of this
