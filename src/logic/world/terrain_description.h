@@ -78,12 +78,12 @@ public:
 	int32_t dither_layer() const;
 
 	// Returns the editor category.
-	const EditorTerrainCategory& editor_terrain_category() const;
+	const EditorTerrainCategory& editor_category() const;
 
 private:
 	const std::string name_;
 	const std::string descname_;
-	const EditorTerrainCategory* editor_terrain_category_;  // not owned.
+	const EditorTerrainCategory* editor_category_;  // not owned.
 	Type is_;
 	std::vector<uint8_t> valid_resources_;
 	int8_t default_resource_index_;
