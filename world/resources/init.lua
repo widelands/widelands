@@ -68,6 +68,13 @@ world:new_resource_type{
    max_amount = 20,
    detectable = false,
    editor_pictures = {
-      [1000] = pics_dir .. "fish.png",
+      [5] = pics_dir .. "fish1.png",
+      [10] = pics_dir .. "fish2.png",
+      [15] = pics_dir .. "fish3.png",
+      [1000] = pics_dir .. "fish4.png",
+      -- Clutch: The editor chooses the image with the highest number for the
+      -- UI. So we keep a nice picture for this purpose at the top of this
+      -- list.
+      [1001] = pics_dir .. "fish.png",
    }
 }
