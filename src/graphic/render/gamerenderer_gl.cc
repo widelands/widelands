@@ -52,7 +52,6 @@ GameRendererGL::~GameRendererGL()
 
 const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture()
 {
-	// NOCOM(#sirver): this could mean trouble too
 	const std::string fname = "world/pics/edge.png";
 	const std::string cachename = std::string("gltex#") + fname;
 

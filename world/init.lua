@@ -29,7 +29,8 @@ include "world/resources/init.lua"
 include "world/terrains/init.lua"
 
 
--- NOCOM(#sirver): implement
+-- TODO(sirver): This should be implemented to make a nicer UI in the editor to
+-- place immovables.
 -- world:new_immovable_category{
    -- name = "miscellaneous",
    -- descname = _ "Miscellaneous",

@@ -481,11 +481,6 @@ void Immovable::switch_program(Game & game, const std::string & programname)
 }
 
 uint32_t Immovable_Descr::terrain_suitability(FCoords const, const Map&) const {
-	// NOCOM(#sirver): terrain affinity is a too generic concept - it does not
-	// scale well with the number of terrains. Also I never noticed that the
-	// trees have different terrain affinities. Instead we need a 'fertility'
-	// entry for terrains. This method should then be rewritten (and moved out
-	// of this class) using fertility.
 	return 6 * 255;
 }
 

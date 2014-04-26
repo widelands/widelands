@@ -42,7 +42,8 @@ public:
 	World();
 	~World();  // Defined in .cc because all forward declarations are known then.
 
-	// NOCOM(#sirver): refactor to return containers instead.
+	// TODO(sirver): Refactor these to only return the description_maintainer so that world
+	// becomes a pure container.
 	const DescriptionMaintainer<TerrainDescription>& terrains() const;
 	TerrainDescription& terrain_descr(Terrain_Index i) const;
 	TerrainDescription const* get_ter(char const* const name) const;
