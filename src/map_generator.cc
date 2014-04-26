@@ -35,6 +35,149 @@
 namespace Widelands
 {
 
+// NOCOM(#sirver): remove these
+
+// World::ParseConfiguaration(LuaInterface* lua) {
+// try {
+// i18n::Textdomain textdomain("world");
+
+// std::unique_ptr<FileSystem> fs(g_fs->MakeSubFileSystem(basedir_));
+// FileSystemLayer filesystemlayer(*fs);
+
+// {
+// Profile root_conf((basedir_ + "conf").c_str());
+// parse_root_conf(name, root_conf);
+// log("Parsing world bobs...\n");
+// parse_bobs(basedir_, root_conf);
+// root_conf.check_used();
+// }
+
+// { //  General bobs mainly for scenarios
+// Profile global_root_conf("global/conf");
+// std::string global_dir = "global/bobs/";
+// log("Parsing global bobs in world...\n");
+// parse_bobs(global_dir, global_root_conf);
+// global_root_conf.check_used();
+// }
+
+// {
+// log("Parsing map gen info...\n");
+// parse_mapgen();
+// }
+// } catch (const std::exception & e) {
+// throw game_data_error("world %s: %s", name.c_str(), e.what());
+// }
+// }
+
+// void World::parse_mapgen   ()
+// {
+// char fname[256];
+
+// snprintf(fname, sizeof(fname), "%s/mapgenconf", basedir_.c_str());
+
+// try {
+// Profile prof(fname);
+
+// mapGenInfo_->parseProfile(this, prof);
+
+// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atWater) < 1)
+// throw game_data_error("missing a water area");
+
+// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atWater) < 1)
+// throw game_data_error("too many water areas (>3)");
+
+// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atLand) < 1)
+// throw game_data_error("missing a land area");
+
+// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atLand) > 3)
+// throw game_data_error("too many land areas (>3)");
+
+// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atWasteland) < 1)
+// throw game_data_error("missing a wasteland area");
+
+// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atWasteland) > 2)
+// throw game_data_error("too many wasteland areas (>2)");
+
+// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atMountains) < 1)
+// throw game_data_error("missing a mountain area");
+
+// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atMountains) < 1)
+// throw game_data_error("too many mountain areas (>1)");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
+// (MapGenAreaInfo::ttWaterOcean) < 1)
+// throw game_data_error("missing a water/ocean terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
+// (MapGenAreaInfo::ttWaterShelf)
+// <
+// 1)
+// throw game_data_error("missing a water/shelf terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
+// (MapGenAreaInfo::ttWaterShallow)
+// <
+// 1)
+// throw game_data_error("is missing a water/shallow terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atLand, 0).getNumTerrains
+// (MapGenAreaInfo::ttLandCoast)
+// <
+// 1)
+// throw game_data_error("missing a land/coast terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atLand, 0).getNumTerrains
+// (MapGenAreaInfo::ttLandLand)
+// <
+// 1)
+// throw game_data_error("missing a land/land terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
+// (MapGenAreaInfo::ttMountainsFoot)
+// <
+// 1)
+// throw game_data_error("missing a mountain/foot terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
+// (MapGenAreaInfo::ttMountainsMountain)
+// <
+// 1)
+// throw game_data_error("missing a monutain/mountain terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
+// (MapGenAreaInfo::ttMountainsSnow)
+// <
+// 1)
+// throw game_data_error("missing a mountain/snow terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains
+// (MapGenAreaInfo::ttWastelandInner)
+// <
+// 1)
+// throw game_data_error("missing a land/coast terrain type");
+
+// if
+// (mapGenInfo_->getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains
+// (MapGenAreaInfo::ttWastelandOuter)
+// <
+// 1)
+// throw game_data_error("missing a land/land terrain type");
+
+// prof.check_used();
+// } catch (const _wexception & e) {
+// throw game_data_error("%s: %s", fname, e.what());
+// }
+// }
+
 MapGenerator::MapGenerator
 	(Map & map, const UniqueRandomMapInfo & mapInfo,
 	 Editor_Game_Base & egbase)
