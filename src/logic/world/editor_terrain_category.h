@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_CATEGORIES_H
-#define EDITOR_CATEGORIES_H
+#ifndef EDITOR_TERRAIN_CATEGORY_H
+#define EDITOR_TERRAIN_CATEGORY_H
 
 #include <string>
 
@@ -31,10 +31,9 @@ namespace Widelands {
 
 // Represents a category for grouping items in the Editor, so purely a UI
 // distinction and not a logical one.
-class EditorCategory : boost::noncopyable {
+class EditorTerrainCategory : boost::noncopyable {
 public:
-	typedef uint32_t Index;
-	EditorCategory(const LuaTable& table);
+	EditorTerrainCategory(const LuaTable& table);
 
 	// Internal name.
 	const std::string& name() const;
@@ -53,4 +52,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: EDITOR_CATEGORIES_H */
+#endif /* end of include guard: EDITOR_TERRAIN_CATEGORY_H */

@@ -31,7 +31,7 @@
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
 #include "logic/widelands.h"
-#include "logic/world/editor_category.h"
+#include "logic/world/editor_terrain_category.h"
 #include "logic/world/map_gen.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
@@ -44,7 +44,7 @@ World::World()
      immovables_(new DescriptionMaintainer<Immovable_Descr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
-     editor_categories_(new DescriptionMaintainer<EditorCategory>()),
+     editor_terrain_categories_(new DescriptionMaintainer<EditorTerrainCategory>()),
      mapGenInfo_(new MapGenInfo()) {
 }
 
@@ -71,12 +71,12 @@ void World::add_immovable_type(const LuaTable& table) {
 	immovables_->add(new Immovable_Descr(table));
 }
 
-void World::add_editor_category(const LuaTable& table) {
-	editor_categories_->add(new EditorCategory(table));
+void World::add_editor_terrain_category(const LuaTable& table) {
+	editor_terrain_categories_->add(new EditorTerrainCategory(table));
 }
 
-const DescriptionMaintainer<EditorCategory>& World::editor_categories() const {
-	return *editor_categories_;
+const DescriptionMaintainer<EditorTerrainCategory>& World::editor_terrain_categories() const {
+	return *editor_terrain_categories_;
 }
 
 int32_t World::safe_resource_index(const char* const resourcename) const {

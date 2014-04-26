@@ -38,7 +38,6 @@ public:
 		int upper_limit;
 	};
 
-	typedef Resource_Index Index;
 	ResourceDescription(const LuaTable& table);
 
 	// Returns the in engine name of this resource.

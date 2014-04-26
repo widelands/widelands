@@ -296,7 +296,7 @@ World
 const char L_World::className[] = "World";
 const MethodType<L_World> L_World::Methods[] = {
 	METHOD(L_World, new_critter_type),
-	METHOD(L_World, new_editor_category),
+	METHOD(L_World, new_editor_terrain_category),
 	METHOD(L_World, new_immovable_type),
 	METHOD(L_World, new_resource_type),
 	METHOD(L_World, new_terrain_type),
@@ -424,7 +424,7 @@ int L_World::new_immovable_type(lua_State* L) {
 }
 
 /* RST
-	.. method:: new_editor_category(table)
+	.. method:: new_editor_terrain_category(table)
 
 		Adds a new editor category that can be used to classify objects in the
 		world. This will be used to sort them into sub menus in the editor. See
@@ -432,13 +432,13 @@ int L_World::new_immovable_type(lua_State* L) {
 
 		:returns: :const:`nil`
 */
-int L_World::new_editor_category(lua_State* L) {
+int L_World::new_editor_terrain_category(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
 	try {
 		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_editor_category(table);
+		get_egbase(L).mutable_world()->add_editor_terrain_category(table);
 	}
 	catch (std::exception& e) {
 		report_error(L, "%s", e.what());

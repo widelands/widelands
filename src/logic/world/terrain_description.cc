@@ -17,18 +17,14 @@
  *
  */
 
-#include <sstream>
-
-#include <boost/foreach.hpp>
-#include <boost/format.hpp>
-#include <stdint.h>
-
 #include "logic/world/terrain_description.h"
+
+#include <boost/format.hpp>
 
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
-#include "logic/world/editor_category.h"
+#include "logic/world/editor_terrain_category.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
@@ -102,13 +98,13 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		throw game_data_error("Default resource is not in valid resources.\n");
 	}
 
-	int editor_category =
-	   world.editor_categories().get_index(table.get_string("editor_category"));
-	if (editor_category < 0) {
-		throw game_data_error(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
+	int editor_terrain_category =
+	   world.editor_terrain_categories().get_index(table.get_string("editor_terrain_category"));
+	if (editor_terrain_category < 0) {
+		throw game_data_error("Unknown editor_terrain_category: %s\n",
+		                      table.get_string("editor_terrain_category").c_str());
 	}
-	editor_category_ = world.editor_categories().get(editor_category);
+	editor_terrain_category_ = world.editor_terrain_categories().get(editor_terrain_category);
 }
 
 TerrainDescription::~TerrainDescription() {
@@ -130,8 +126,8 @@ const std::string& TerrainDescription::descname() const {
 	return descname_;
 }
 
-const EditorCategory& TerrainDescription::editor_category() const {
-	return *editor_category_;
+const EditorTerrainCategory& TerrainDescription::editor_terrain_category() const {
+	return *editor_terrain_category_;
 }
 
 Resource_Index TerrainDescription::get_valid_resource(uint8_t index) const {

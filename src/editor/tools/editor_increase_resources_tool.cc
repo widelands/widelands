@@ -47,7 +47,8 @@ int32_t resource_value(const Widelands::TerrainDescription& terrain,
 
 
 int32_t Editor_Change_Resource_Tool_Callback
-	(const TCoords<Widelands::FCoords>& c, Widelands::Map& map, const Widelands::World& world, int32_t const curres)
+	(const TCoords<Widelands::FCoords>& c, Widelands::Map& map,
+	 const Widelands::World& world, int32_t const curres)
 {
 	Widelands::FCoords f(c, &map[c]);
 

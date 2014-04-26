@@ -30,7 +30,7 @@
 #include "graphic/texture.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "logic/world/editor_category.h"
+#include "logic/world/editor_terrain_category.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "ui_basic/box.h"
@@ -45,16 +45,15 @@ namespace {
 using namespace Widelands;
 
 static const int32_t check[] = {
-   TerrainDescription::GREEN,                                 //  "green"
-   TerrainDescription::DRY,                                   //  "dry"
-   TerrainDescription::DRY | TerrainDescription::MOUNTAIN,    //  "mountain"
-   TerrainDescription::DRY | TerrainDescription::UNPASSABLE,  //  "unpassable"
-   TerrainDescription::ACID | TerrainDescription::DRY |
-      TerrainDescription::UNPASSABLE,  //  "dead" or "acid"
-   TerrainDescription::UNPASSABLE | TerrainDescription::DRY | TerrainDescription::WATER,
-   -1,  // end marker
+	TerrainDescription::GREEN,                                 //  "green"
+	TerrainDescription::DRY,                                   //  "dry"
+	TerrainDescription::DRY | TerrainDescription::MOUNTAIN,    //  "mountain"
+	TerrainDescription::DRY | TerrainDescription::UNPASSABLE,  //  "unpassable"
+	TerrainDescription::ACID | TerrainDescription::DRY |
+		TerrainDescription::UNPASSABLE,  //  "dead" or "acid"
+	TerrainDescription::UNPASSABLE | TerrainDescription::DRY | TerrainDescription::WATER,
+	-1,  // end marker
 };
-
 
 }  // namespace
 
@@ -71,21 +70,22 @@ Editor_Tool_Set_Terrain_Options_Menu::Editor_Tool_Set_Terrain_Options_Menu(
 	UI::Tab_Panel* tab_panel = new UI::Tab_Panel(vertical, 0, 0, nullptr);
 	vertical->add(tab_panel, UI::Align_Center);
 
-	for (uint32_t i = 0; i < world_.editor_categories().get_nitems(); ++i) {
-		const EditorCategory& editor_category = *world_.editor_categories().get(i);
+	for (uint32_t i = 0; i < world_.editor_terrain_categories().get_nitems(); ++i) {
+		const EditorTerrainCategory& editor_terrain_category = *world_.editor_terrain_categories().get(i);
 
 		std::vector<Terrain_Index> terrain_indices;
 		for (Terrain_Index j = 0; j < world_.terrains().get_nitems(); ++j) {
-			if (world_.terrain_descr(j).editor_category().name() != editor_category.name()) {
+			if (world_.terrain_descr(j).editor_terrain_category().name() !=
+			    editor_terrain_category.name()) {
 				continue;
 			}
 			terrain_indices.push_back(j);
 		}
 
-		tab_panel->add(editor_category.name(),
-				editor_category.picture(),
-				add_checkboxes(tab_panel, terrain_indices),
-				editor_category.descname());
+		tab_panel->add(editor_terrain_category.name(),
+		               editor_terrain_category.picture(),
+		               add_checkboxes(tab_panel, terrain_indices),
+		               editor_terrain_category.descname());
 	}
 	vertical->add(&m_cur_selection, UI::Align_Center, true);
 

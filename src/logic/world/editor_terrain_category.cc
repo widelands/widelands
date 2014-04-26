@@ -17,28 +17,28 @@
  *
  */
 
-#include "logic/world/editor_category.h"
+#include "logic/world/editor_terrain_category.h"
 
 #include "graphic/graphic.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
 
-EditorCategory::EditorCategory(const LuaTable& table)
+EditorTerrainCategory::EditorTerrainCategory(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      image_file_(table.get_string("picture")) {
 }
 
-const std::string& EditorCategory::name() const {
+const std::string& EditorTerrainCategory::name() const {
 	return name_;
 }
 
-const std::string& EditorCategory::descname() const {
+const std::string& EditorTerrainCategory::descname() const {
 	return descname_;
 }
 
-const Image* EditorCategory::picture() const {
+const Image* EditorTerrainCategory::picture() const {
 	const Image* image = g_gr->images().get(image_file_);
 	assert(image);
 	return image;

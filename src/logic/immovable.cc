@@ -246,7 +246,7 @@ Immovable_Descr::Immovable_Descr
 		while (Section::Value const * const v = global_s.get_next_val("attrib")) {
 			attributes.emplace_back(v->get_string());
 		}
-		add_attributes(attributes, { Map_Object::RESI });
+		add_attributes(attributes, {Map_Object::RESI});
 	}
 
 	//  parse the programs
@@ -743,7 +743,8 @@ void Immovable::save
 }
 
 Map_Object::Loader * Immovable::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol,
+	 FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 

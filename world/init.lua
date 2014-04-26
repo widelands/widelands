@@ -3,25 +3,25 @@ world = wl.World()
 set_textdomain("world")
 
 -- -- NOCOM(#sirver): rename to editor_terrain_category
-world:new_editor_category{
+world:new_editor_terrain_category{
    name = "green",
    descname = _ "Summer",
-   picture = "world/pics/editor_category_green.png",
+   picture = "world/pics/editor_terrain_category_green.png",
 }
-world:new_editor_category{
+world:new_editor_terrain_category{
    name = "wasteland",
    descname = _ "Wasteland",
-   picture = "world/pics/editor_category_wasteland.png",
+   picture = "world/pics/editor_terrain_category_wasteland.png",
 }
-world:new_editor_category{
+world:new_editor_terrain_category{
    name = "winter",
    descname = _ "Winter",
-   picture = "world/pics/editor_category_winter.png",
+   picture = "world/pics/editor_terrain_category_winter.png",
 }
-world:new_editor_category{
+world:new_editor_terrain_category{
    name = "desert",
    descname = _ "Desert",
-   picture = "world/pics/editor_category_desert.png",
+   picture = "world/pics/editor_terrain_category_desert.png",
 }
 
 include "world/resources/init.lua"
