@@ -1400,7 +1400,7 @@ int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
 
 	lua_newtable(L);
-	BOOST_FOREACH(const auto & positions_pair, descr->working_positions()) {
+	for (const auto& positions_pair : descr->working_positions()) {
 		lua_pushstring(L, tribe.get_worker_descr(positions_pair.first)->name());
 		lua_pushuint32(L, positions_pair.second);
 		lua_settable(L, -3);
