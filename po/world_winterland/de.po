@@ -1,20 +1,21 @@
 # Widelands po/world_winterland/de.po
 # Copyright (C) 2005-2007 Widelands Development Team
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
-#
+# Mirian Margiani <mirian.margiani@gmail.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2014-02-12 11:01+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-12 12:48+0000\n"
 "Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:38+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:39+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
+"Language: de\n"
 
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
@@ -100,179 +101,179 @@ msgstr "Steine"
 msgid "Track"
 msgstr "Spur"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr "Espe"
-
 #: ../../worlds/winterland/conf:46
-msgid "Aspen (medium)"
-msgstr ""
-
-#: ../../worlds/winterland/conf:47
-msgid "Aspen (small)"
+msgid "Aspen (Old)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:48
-msgid "Aspen (tiny)"
+msgid "Aspen (Mature)"
 msgstr ""
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "Eiche"
 
 #: ../../worlds/winterland/conf:50
-msgid "Oak (medium)"
-msgstr ""
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak (small)"
+msgid "Aspen (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:52
-msgid "Oak (tiny)"
+msgid "Aspen (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr "Fichte"
+msgid "Oak (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:54
-msgid "Spruce (medium)"
+msgid "Oak (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:55
-msgid "Spruce (small)"
+msgid "Oak (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:56
-msgid "Spruce (tiny)"
+msgid "Oak (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "Ahorn"
+msgid "Spruce (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:58
-msgid "Maple (medium)"
+msgid "Spruce (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:59
-msgid "Maple (small)"
+msgid "Spruce (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:60
-msgid "Maple (tiny)"
+msgid "Spruce (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "Birke"
+msgid "Maple (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:62
-msgid "Birch (medium)"
+msgid "Maple (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:63
-msgid "Birch (small)"
+msgid "Maple (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:64
-msgid "Birch (tiny)"
+msgid "Maple (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr "Buche"
+msgid "Birch (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:66
-msgid "Beech (medium)"
+msgid "Birch (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:67
-msgid "Beech (small)"
+msgid "Birch (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:68
-msgid "Beech (tiny)"
+msgid "Birch (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr "Lärche"
+msgid "Beech (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:70
-msgid "Larch (medium)"
+msgid "Beech (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:71
-msgid "Larch (small)"
+msgid "Beech (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:72
-msgid "Larch (tiny)"
+msgid "Beech (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr "Eberesche"
+msgid "Larch (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:74
-msgid "Rowan (medium)"
+msgid "Larch (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:75
-msgid "Rowan (small)"
+msgid "Larch (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:76
-msgid "Rowan (tiny)"
+msgid "Larch (Sapling)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:77
+msgid "Rowan (Old)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:78
+msgid "Rowan (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:79
+msgid "Rowan (Pole)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:80
+msgid "Rowan (Sapling)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:83
 msgid "Badger"
 msgstr "Dachs"
 
-#: ../../worlds/winterland/conf:80
+#: ../../worlds/winterland/conf:84
 msgid "Bunny"
 msgstr "Hase"
 
-#: ../../worlds/winterland/conf:81
+#: ../../worlds/winterland/conf:85
 msgid "Deer"
 msgstr "Hirsch"
 
-#: ../../worlds/winterland/conf:82
+#: ../../worlds/winterland/conf:86
 msgid "Duck"
 msgstr "Ente"
 
-#: ../../worlds/winterland/conf:83
+#: ../../worlds/winterland/conf:87
 msgid "Elk"
 msgstr "Elch"
 
-#: ../../worlds/winterland/conf:84
+#: ../../worlds/winterland/conf:88
 msgid "Fox"
 msgstr "Fuchs"
 
-#: ../../worlds/winterland/conf:85
+#: ../../worlds/winterland/conf:89
 msgid "Lynx"
 msgstr "Luchs"
 
-#: ../../worlds/winterland/conf:86
+#: ../../worlds/winterland/conf:90
 msgid "Marten"
 msgstr "Marder"
 
-#: ../../worlds/winterland/conf:87
+#: ../../worlds/winterland/conf:91
 msgid "Reindeer"
 msgstr "Rentier"
 
-#: ../../worlds/winterland/conf:88
+#: ../../worlds/winterland/conf:92
 msgid "Sheep"
 msgstr "Schaf"
 
-#: ../../worlds/winterland/conf:89
+#: ../../worlds/winterland/conf:93
 msgid "Wisent"
 msgstr "Wisent"
 
-#: ../../worlds/winterland/conf:90
+#: ../../worlds/winterland/conf:94
 msgid "Wolf"
 msgstr "Wolf"
 
@@ -307,15 +308,15 @@ msgstr "Tundra"
 
 #: ../../worlds/winterland/terrainconf:13
 msgid "Mountain 1"
-msgstr ""
+msgstr "Berg 1"
 
 #: ../../worlds/winterland/terrainconf:19
 msgid "Ice Floes"
-msgstr ""
+msgstr "Eisschollen"
 
 #: ../../worlds/winterland/terrainconf:25
 msgid "Ice Floes 2"
-msgstr ""
+msgstr "Eisschollen 2"
 
 #: ../../worlds/winterland/terrainconf:31
 msgid "Ice"
@@ -323,27 +324,27 @@ msgstr "Eis"
 
 #: ../../worlds/winterland/terrainconf:44
 msgid "Tundra Taiga"
-msgstr ""
+msgstr "Tundra-Taiga-Übergang"
 
 #: ../../worlds/winterland/terrainconf:50
 msgid "Tundra 2"
-msgstr ""
+msgstr "Tundra 2"
 
 #: ../../worlds/winterland/terrainconf:56
 msgid "Tundra 3"
-msgstr ""
+msgstr "Tundra 3"
 
 #: ../../worlds/winterland/terrainconf:62
 msgid "Mountain 2"
-msgstr ""
+msgstr "Berg 2"
 
 #: ../../worlds/winterland/terrainconf:68
 msgid "Mountain 3"
-msgstr ""
+msgstr "Berg 3"
 
 #: ../../worlds/winterland/terrainconf:74
 msgid "Mountain 4"
-msgstr ""
+msgstr "Berg 4"
 
 #: ../../worlds/winterland/terrainconf:80
 msgid "Beach"

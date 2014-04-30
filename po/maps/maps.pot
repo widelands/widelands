@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -352,7 +352,7 @@ msgstr ""
 
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid ""
-"Autumn follows winter. Some things are frozen, but not the war."
+"Autumn became winter. Some things are frozen, but not the war."
 msgstr ""
 
 #: ../../maps/Ice wars.wmf/elemental:12

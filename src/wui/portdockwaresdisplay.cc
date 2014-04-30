@@ -19,7 +19,6 @@
 
 #include "wui/portdockwaresdisplay.h"
 
-#include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "economy/portdock.h"
@@ -77,7 +76,7 @@ UI::Box * create_portdock_expedition_display(UI::Panel * parent, Warehouse & wh,
 	UI::Box & box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
 
 	// Add the wares queues.
-	BOOST_FOREACH(WaresQueue* wq, wh.get_portdock()->expedition_bootstrap()->wares()) {
+	for (WaresQueue* wq : wh.get_portdock()->expedition_bootstrap()->wares()) {
 		box.add(new WaresQueueDisplay(&box, 0, 0, igb, wh, wq, true), UI::Box::AlignLeft);
 	}
 

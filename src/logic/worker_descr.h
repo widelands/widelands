@@ -44,7 +44,6 @@ class Worker_Descr : public BobDescr
 public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
-	typedef Ware_Index::value_t Index;
 	enum Worker_Type {
 		NORMAL = 0,
 		CARRIER,

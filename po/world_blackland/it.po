@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-09-24 11:46+0000\n"
-"Last-Translator: Angelo Locritani <Unknown>\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-12 17:22+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:37+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:39+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: ../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
-msgstr "Il Gruppo di Sviluppo di Widelands"
+msgstr "Il team di sviluppo di Widelands"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
@@ -93,155 +93,155 @@ msgstr "Megaliti"
 msgid "Stones"
 msgstr "Pietre"
 
-#: ../../worlds/blackland/conf:45
-msgid "Aspen"
-msgstr "Pioppo tremulo"
-
 #: ../../worlds/blackland/conf:46
-msgid "Aspen (medium)"
-msgstr ""
-
-#: ../../worlds/blackland/conf:47
-msgid "Aspen (small)"
+msgid "Aspen (Old)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:48
-msgid "Aspen (tiny)"
+msgid "Aspen (Mature)"
 msgstr ""
-
-#: ../../worlds/blackland/conf:49
-msgid "Oak"
-msgstr "Quercia"
 
 #: ../../worlds/blackland/conf:50
-msgid "Oak (medium)"
-msgstr ""
-
-#: ../../worlds/blackland/conf:51
-msgid "Oak (small)"
+msgid "Aspen (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:52
-msgid "Oak (tiny)"
+msgid "Aspen (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:53
-msgid "Spruce"
-msgstr "Abete rosso"
+msgid "Oak (Old)"
+msgstr ""
 
 #: ../../worlds/blackland/conf:54
-msgid "Spruce (medium)"
+msgid "Oak (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:55
-msgid "Spruce (small)"
+msgid "Oak (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:56
-msgid "Spruce (tiny)"
+msgid "Oak (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:57
-msgid "Maple"
-msgstr "Acero"
+msgid "Spruce (Old)"
+msgstr ""
 
 #: ../../worlds/blackland/conf:58
-msgid "Maple (medium)"
+msgid "Spruce (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:59
-msgid "Maple (small)"
+msgid "Spruce (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:60
-msgid "Maple (tiny)"
+msgid "Spruce (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:61
-msgid "Birch"
-msgstr "Betulla"
+msgid "Maple (Old)"
+msgstr ""
 
 #: ../../worlds/blackland/conf:62
-msgid "Birch (medium)"
+msgid "Maple (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:63
-msgid "Birch (small)"
+msgid "Maple (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:64
-msgid "Birch (tiny)"
+msgid "Maple (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:65
-msgid "Beech"
-msgstr "Faggio"
+msgid "Birch (Old)"
+msgstr ""
 
 #: ../../worlds/blackland/conf:66
-msgid "Beech (medium)"
+msgid "Birch (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:67
-msgid "Beech (small)"
+msgid "Birch (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:68
-msgid "Beech (tiny)"
+msgid "Birch (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:69
-msgid "Larch"
-msgstr "Larice"
+msgid "Beech (Old)"
+msgstr ""
 
 #: ../../worlds/blackland/conf:70
-msgid "Larch (medium)"
+msgid "Beech (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:71
-msgid "Larch (small)"
+msgid "Beech (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:72
-msgid "Larch (tiny)"
+msgid "Beech (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:73
-msgid "Rowan"
-msgstr "Sorbo"
+msgid "Larch (Old)"
+msgstr ""
 
 #: ../../worlds/blackland/conf:74
-msgid "Rowan (medium)"
+msgid "Larch (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:75
-msgid "Rowan (small)"
+msgid "Larch (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:76
-msgid "Rowan (tiny)"
+msgid "Larch (Sapling)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:77
+msgid "Rowan (Old)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:78
+msgid "Rowan (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:79
+msgid "Rowan (Pole)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:80
+msgid "Rowan (Sapling)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:83
 msgid "Bunny"
 msgstr "Coniglio"
 
-#: ../../worlds/blackland/conf:80
+#: ../../worlds/blackland/conf:84
 msgid "Deer"
 msgstr "Cervo"
 
-#: ../../worlds/blackland/conf:81
+#: ../../worlds/blackland/conf:85
 msgid "Duck"
 msgstr "Anatra"
 
-#: ../../worlds/blackland/conf:82
+#: ../../worlds/blackland/conf:86
 msgid "Fox"
 msgstr "Volpe"
 
-#: ../../worlds/blackland/conf:83
+#: ../../worlds/blackland/conf:87
 msgid "Reindeer"
 msgstr "Renna"
 
-#: ../../worlds/blackland/conf:84
+#: ../../worlds/blackland/conf:88
 msgid "Sheep"
 msgstr "Pecora"
 
@@ -276,15 +276,15 @@ msgstr "Cenere"
 
 #: ../../worlds/blackland/terrainconf:13
 msgid "Mountain 1"
-msgstr ""
+msgstr "Montagna 1"
 
 #: ../../worlds/blackland/terrainconf:19
 msgid "Lava Rocks 1"
-msgstr ""
+msgstr "Rocce laviche 1"
 
 #: ../../worlds/blackland/terrainconf:24
 msgid "Lava Rocks 2"
-msgstr ""
+msgstr "Rocce laviche 2"
 
 #: ../../worlds/blackland/terrainconf:29
 msgid "Beach"
@@ -292,35 +292,35 @@ msgstr "Spiaggia"
 
 #: ../../worlds/blackland/terrainconf:41
 msgid "Hard Ground 1"
-msgstr ""
+msgstr "Terreno duro 1"
 
 #: ../../worlds/blackland/terrainconf:47
 msgid "Hard Ground 2"
-msgstr ""
+msgstr "Terreno duro 2"
 
 #: ../../worlds/blackland/terrainconf:53
 msgid "Hard Ground 3"
-msgstr ""
+msgstr "Terreno duro 3"
 
 #: ../../worlds/blackland/terrainconf:59
 msgid "Mountain 2"
-msgstr ""
+msgstr "Montagna 2"
 
 #: ../../worlds/blackland/terrainconf:65
 msgid "Mountain 3"
-msgstr ""
+msgstr "Montagna 3"
 
 #: ../../worlds/blackland/terrainconf:71
 msgid "Mountain 4"
-msgstr ""
+msgstr "Montagna 4"
 
 #: ../../worlds/blackland/terrainconf:77
 msgid "Ashes 2"
-msgstr ""
+msgstr "Ceneri 2"
 
 #: ../../worlds/blackland/terrainconf:83
 msgid "Hard Ground 4"
-msgstr ""
+msgstr "Terreno duro 4"
 
 #: ../../worlds/blackland/terrainconf:89
 msgid "Lava"
@@ -328,4 +328,4 @@ msgstr "Lava"
 
 #: ../../worlds/blackland/terrainconf:94
 msgid "Igneous Rocks"
-msgstr ""
+msgstr "Rocce ignee"

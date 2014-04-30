@@ -30,10 +30,10 @@ work=_Work
 sleep=43000
 consume=snack
 animate=working 18000
-mine=iron 2 66 5
+mine=iron 2 66 5 17
 produce=ironore
 animate=working 18000
-mine=iron 2 66 5
+mine=iron 2 66 5 17
 produce=ironore:1
 
 [build]

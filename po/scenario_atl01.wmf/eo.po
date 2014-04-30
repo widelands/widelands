@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
 "PO-Revision-Date: 2011-08-21 14:27+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:28+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:28+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:75
 msgid "Building lost!"
@@ -224,11 +224,11 @@ msgid "Build a dungeon and a labyrinth"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:128
-msgid "Build a warehouse and a horsefarm"
+msgid "Build a warehouse and a horse farm"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:130
-msgid "Warehouse and Horsefarm"
+msgid "Warehouse and Horse Farm"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:131
@@ -437,7 +437,12 @@ msgid "Sidolus Speaks"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:265
-msgid "May Satul warm you, Jundlina! I agree with what Loftomor proposes. "
+msgid ""
+"May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a "
+"good supply of building materials for we have to expand our territory "
+"swiftly. I will not feel safe on this island as long as we have not seen all "
+"its shores it. I brought plenty of good men from Atlantis. The military "
+"might is available. We only need some housing to live in."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:276
@@ -541,7 +546,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:339
 msgid ""
-"May Satul warm you, Jundlina. My Name is Opol, and I am the highest weaver "
+"May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver "
 "of the guild abandoning Atlantis and Lutas with you. I come with sad news "
 "indeed: we have no more spidercloth. Not a single piece is to be found in "
 "our warehouses. Could you not help the weavers’ guild by arranging the "

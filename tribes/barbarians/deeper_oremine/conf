@@ -29,13 +29,13 @@ work=_Work
 consume=meal
 sleep=40000
 animate=working 16000
-mine=iron 2 100 10
+mine=iron 2 100 10 2
 produce=ironore
 animate=working 16000
-mine=iron 2 100 10
+mine=iron 2 100 10 2
 produce=ironore:2
 animate=working 16000
-mine=iron 2 100 10
+mine=iron 2 100 10 2
 produce=ironore:2
 
 [idle]

@@ -57,7 +57,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	ProductionSite_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &);
+		 const Tribe_Descr &, const World&);
 	virtual ~ProductionSite_Descr();
 
 	virtual Building & create_object() const override;
@@ -215,6 +215,7 @@ protected:
 
 	void program_start(Game &, const std::string & program_name);
 	virtual void program_end(Game &, Program_Result);
+	virtual void train_workers(Game &);
 
 	void calc_statistics();
 	void try_start_working(Game &);

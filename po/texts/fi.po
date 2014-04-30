@@ -1,21 +1,22 @@
 # Widelands po/fi_FI/texts.po
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-12-01 12:55+0000\n"
+"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"PO-Revision-Date: 2014-03-19 18:15+0000\n"
 "Last-Translator: Teppo Mäenpää <Unknown>\n"
-"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-31 05:31+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: FINLAND\n"
+"Language: fi\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -113,30 +114,33 @@ msgid "Keyboard shortcuts (in-game)"
 msgstr "Näppäimistöoikotiet (pelin aikana)"
 
 #: ../../txts/README.lua:61
-msgid "PAGEUP: increases games peed"
-msgstr ""
+msgid "PAGEUP: increases game speed"
+msgstr "PAGEUP: nopeuta pelin kulkua"
 
 #: ../../txts/README.lua:62
-msgid "PAGEDOWN: decreases games peed"
-msgstr ""
+msgid "PAGEDOWN: decreases game speed"
+msgstr "PAGEDOWN: Hidastaapelin kulkua"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
 msgstr "PAUSE: pysäyttää pelin"
 
 #: ../../txts/README.lua:64
+#: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "VÄLILYÖNTI: Näytä tai piiloita rakennusvihjeet."
 
 #: ../../txts/README.lua:65
+#: ../../txts/editor_readme:31
 msgid "M: toggles minimap"
 msgstr "M: käännä minikartta päälle tai pois."
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: Kääntää \"news\" -viestit päälle tai pois."
 
 #: ../../txts/README.lua:67
+#: ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr "C: näytä rakennusten nimet"
 
@@ -155,6 +159,7 @@ msgstr "kirjain O: näytä tavoitteet."
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr ""
+"F: kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa."
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -166,11 +171,11 @@ msgstr "(CTRL+) 0-9: Tallenna ja palaa kohteisiin"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: palaa edelliseen kohteeseen"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ".: mene seuraavaan kohteeseen"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -191,7 +196,7 @@ msgstr "Seuraavat pikakomennot toimivat viesti-ikkunassa:"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to the location corresponding to the current message"
-msgstr ""
+msgstr "G: siirry siihen kohtaan karttaa, jota viesti koskee."
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
@@ -244,6 +249,8 @@ msgid ""
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
+"- Mitä Widelandsin versiota käytät? (joko julkaisun tai kehitysversion "
+"numero)"
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -277,7 +284,7 @@ msgstr ""
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "Pelien toistot"
 
 #: ../../txts/README.lua:120
 msgid ""
@@ -398,6 +405,8 @@ msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
+"Lista widelands-pelin kääntäjistä löytyy osoitteesta "
+"https://translations.launchpad.net/widelands"
 
 #: ../../txts/developers:186
 msgid "Czech"
@@ -510,76 +519,71 @@ msgid ""
 "progress and as the Editor becomes better and better, this text will also "
 "get longer and more complete."
 msgstr ""
+"Tämä muokkain on tarkoitettu käyttäjille, jotka haluavat suunnitella omia "
+"karttojaan Widelandsissa käytettäväksi.<br>Kuten näkyy, muokkain on vielä "
+"varsin keskeneräinen, ja sen kehittyessä tämäkin teksti pidentyy ja "
+"täydellistyy."
 
 #: ../../txts/editor_readme:12
 msgid "Please have a look at our enduser manuals on our wiki pages at:"
-msgstr ""
+msgstr "Katso myös loppukäyttäjien ohjekirjoja wikisivuillamme osoitteessa"
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"Sivuston ohjeet voivat hyvinkin olla täydellisempiä ja päiväntasaisempia "
+"kuin tämä tiedosto, ja sieltä löydät mm. lyhyen opastuksen kartan "
+"rakentamiseen."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
 msgstr "Näppäimistöoikotiet"
 
-#: ../../txts/editor_readme:21
-msgid "SPACE    Toggles if building spaces are shown"
+#: ../../txts/editor_readme:25
+msgid "E: toggles event menu"
 msgstr ""
 
-#: ../../txts/editor_readme:23
-msgid "C        Toggles census on/off"
-msgstr "C        Näytä/piilota rakennusten nimet (muokattavissa)"
-
-#: ../../txts/editor_readme:25
-msgid "E        Toggles event menu"
-msgstr "E        Näytä/piilota tapahtumavalikko"
-
 #: ../../txts/editor_readme:27
-msgid "F        Toggles fullscreen"
-msgstr "F        Koko ruudun tila käyttöön/pois"
+msgid "F: toggles fullscreen"
+msgstr "F: Siirtyy kokonäyttötilaan"
 
 #: ../../txts/editor_readme:29
-msgid "H        Toggles main menu"
-msgstr "H        Näytä/piilota päävalikko"
-
-#: ../../txts/editor_readme:31
-msgid "M        Toggles minimap"
-msgstr "M        Näytä/piilota minikartta"
+msgid "H: toggles main menu"
+msgstr ""
 
 #: ../../txts/editor_readme:33
-msgid "P        Toggles player menu"
-msgstr "P        Näytä/piilota pelaajavalikko"
+msgid "P: toggles player menu"
+msgstr ""
 
 #: ../../txts/editor_readme:35
-msgid "T        Toggles tools menu"
-msgstr "T        Näytä/piilota työkaluvalikko"
+msgid "T: toggles tools menu"
+msgstr ""
 
 #: ../../txts/editor_readme:37
-msgid "I        Activates information tool"
-msgstr "I        Aktivoi infotyökalu"
+msgid "I: activates information tool"
+msgstr ""
 
 #: ../../txts/editor_readme:39
-msgid "CTRL+L   Load Map"
-msgstr "Ctrl+L   Lataa kartta"
+msgid "CTRL+L: load Map"
+msgstr ""
 
 #: ../../txts/editor_readme:41
-msgid "CTRL+S   Save Map"
-msgstr "Ctrl+S   Tallenna kartta"
+msgid "CTRL+S: save Map"
+msgstr ""
 
 #: ../../txts/editor_readme:43
-msgid "1-0      Changes tool size"
+msgid "1-0: changes tool size"
 msgstr ""
 
 #: ../../txts/editor_readme:45
-msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr "Vaihto   (Pohjassa) Valitse 1. vaihtoehtoinen työkalu alaspainettuna"
+msgid "SHIFT (Hold): selects first alternative tool while pressed"
+msgstr ""
 
 #: ../../txts/editor_readme:47
-msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr "Alt      (Pohjassa) Valitse 2. vaihtoehtoinen työkalu alaspainettuna"
+msgid "ALT (Hold): Selects second alternative tool while pressed"
+msgstr ""
 
 #: ../../txts/license:1
 msgid "License"

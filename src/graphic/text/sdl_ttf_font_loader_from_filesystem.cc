@@ -19,7 +19,6 @@
 
 #include <string>
 
-#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 
 #include "graphic/text/rt_errors.h"
@@ -48,7 +47,7 @@ SDLTTF_FontLoaderFromFilesystem::SDLTTF_FontLoaderFromFilesystem(FileSystem* fs)
 	: fs_(fs) {
 }
 SDLTTF_FontLoaderFromFilesystem::~SDLTTF_FontLoaderFromFilesystem() {
-	BOOST_FOREACH(FileRead* fr, filereads_)
+	for (FileRead* fr : filereads_)
 		delete fr;
 	filereads_.clear();
 }
@@ -83,4 +82,3 @@ IFontLoader * ttf_fontloader_from_filesystem(FileSystem* fs) {
 }
 
 }
-

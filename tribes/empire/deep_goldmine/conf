@@ -31,10 +31,10 @@ return=skipped unless economy needs goldore or not economy needs wine
 sleep=43000
 consume=meal wine
 animate=working 18000
-mine=gold 2 100 5
+mine=gold 2 100 5 2
 produce=goldore
 animate=working 18000
-mine=gold 2 100 5
+mine=gold 2 100 5 2
 produce=goldore:2
 
 [idle]

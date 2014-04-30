@@ -51,7 +51,6 @@ struct Path;
  * link them together
  */
 struct Map_Object_Descr : boost::noncopyable {
-	typedef uint8_t Index;
 	Map_Object_Descr(char const * const _name, char const * const _descname)
 		: m_name(_name), m_descname(_descname)
 	{}

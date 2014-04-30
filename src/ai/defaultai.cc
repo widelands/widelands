@@ -229,8 +229,8 @@ void DefaultAI::late_initialization ()
 	log ("ComputerPlayer(%d): initializing (%u)\n", player_number(), type);
 
 	Ware_Index const nr_wares = tribe->get_nrwares();
-	wares.resize(nr_wares.value());
-	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+	wares.resize(nr_wares);
+	for (Ware_Index i = 0; i < nr_wares; ++i) {
 		wares.at(i).producers    = 0;
 		wares.at(i).consumers    = 0;
 		wares.at(i).preciousness = tribe->get_ware_descr(i)->preciousness();
@@ -239,7 +239,7 @@ void DefaultAI::late_initialization ()
 	// collect information about the different buildings our tribe can construct
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
 	const World & world = game().map().world();
-	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
+	for (Building_Index i = 0; i < nr_buildings; ++i) {
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
 		const BuildingHints & bh = bld.hints();
@@ -268,7 +268,7 @@ void DefaultAI::late_initialization ()
 		bo.space_consumer         = bh.is_space_consumer();
 
 		if (char const * const s = bh.get_renews_map_resource())
-			bo.production_hint = tribe->safe_ware_index(s).value();
+			bo.production_hint = tribe->safe_ware_index(s);
 
 		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSite_Descr)) {
@@ -280,11 +280,11 @@ void DefaultAI::late_initialization ()
 				BuildingObserver::PRODUCTIONSITE;
 
 			container_iterate_const(BillOfMaterials, prod.inputs(), j)
-				bo.inputs.push_back(j.current->first.value());
+				bo.inputs.push_back(j.current->first);
 
 			container_iterate_const
 				(ProductionSite_Descr::Output, prod.output_ware_types(), j)
-				bo.outputs.push_back(j.current->     value());
+				bo.outputs.push_back(*j.current);
 
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
@@ -803,7 +803,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			consider_attack(game().get_gametime());
 
 
-	Building_Index proposed_building;
+	Building_Index proposed_building = INVALID_INDEX;
 	int32_t proposed_priority = 0;
 	Coords proposed_coords;
 
@@ -908,7 +908,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Calculate the need for this building
 					int16_t inout = wares.at(bo.production_hint).consumers;
 					if
-						(tribe->safe_ware_index("log").value()
+						(tribe->safe_ware_index("log")
 						 ==
 						 bo.production_hint)
 						inout += total_constructionsites / 4;
@@ -1144,29 +1144,6 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				continue;
 
 
-		/* - uninteresting if a mine ware is needed - we exploit the raw material
-		// Check if the produced wares are needed
-		bool needed = false;
-		container_iterate(std::list<EconomyObserver *>, economies, l) {
-			// Don't check if the economy has no warehouse.
-			if ((*l.current)->economy.warehouses().empty())
-				continue;
-			for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-				Ware_Index wt(static_cast<size_t>(bo.outputs.at(m)));
-				if ((*l.current)->economy.needs_ware(wt)) {
-					needed = true;
-					break;
-				}
-			}
-			if (needed)
-				break;
-		}
-
-		// Only try to build mines that produce needed wares.
-		if (!needed)
-			continue;
-		*/
-
 		for
 			(std::list<MineableField *>::iterator j = mineable_fields.begin();
 			 j != mineable_fields.end();
@@ -1235,7 +1212,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		}
 	}
 
-	if (not proposed_building)
+	if (proposed_building == INVALID_INDEX)
 		return false;
 
 	// do not have too many construction sites

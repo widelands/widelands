@@ -56,7 +56,7 @@ struct WareList {
 
 	void set_nrwares(Ware_Index const i) {
 		assert(m_wares.empty());
-		m_wares.resize(i.value(), 0);
+		m_wares.resize(i, 0);
 	}
 
 	bool operator== (const WareList &)    const;

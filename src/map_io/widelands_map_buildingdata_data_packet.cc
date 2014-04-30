@@ -21,8 +21,6 @@
 
 #include <map>
 
-#include <boost/foreach.hpp>
-
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
@@ -279,7 +277,7 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i) {
+		for (Building_Index i = 0; i < t.get_nrbuildings(); ++i) {
 			Building_Descr const * ob = t.get_building_descr(i);
 			if (ob->enhancements().count(former_idx)) {
 				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
@@ -308,7 +306,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 				pfb.m_builder_request =
 					new Request
 					(pfb,
-					 Ware_Index::First(),
+					 0,
 					 Partially_Finished_Building::request_builder_callback,
 					 wwWORKER);
 				pfb.m_builder_request->Read(fr, game, mol);
@@ -332,7 +330,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 				{
 					pfb.m_wares[i] =
 						new WaresQueue
-						(pfb, Ware_Index::Null(), 0);
+						(pfb, INVALID_INDEX, 0);
 					pfb.m_wares[i]->Read(fr, game, mol);
 				}
 			} catch (const _wexception & e) {
@@ -407,7 +405,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 		constructionsite.m_builder_request =
 			new Request
 			(constructionsite,
-			 Ware_Index::First(),
+			 0,
 			 ConstructionSite::request_builder_callback,
 			 wwWORKER);
 		constructionsite.m_builder_request->Read(fr, game, mol);
@@ -431,7 +429,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 		{
 			constructionsite.m_wares[i] =
 				new WaresQueue
-				(constructionsite, Ware_Index::Null(), 0);
+				(constructionsite, INVALID_INDEX, 0);
 			constructionsite.m_wares[i]->set_callback
 				(ConstructionSite::wares_queue_callback, &constructionsite);
 			constructionsite.m_wares[i]->Read(fr, game, mol);
@@ -485,9 +483,9 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			Ware_Index const nr_tribe_workers = warehouse.tribe().get_nrworkers();
 			warehouse.m_supply->set_nrwares  (nr_wares);
 			warehouse.m_supply->set_nrworkers(nr_tribe_workers);
-			warehouse.m_ware_policy.resize(nr_wares.value(), Warehouse::SP_Normal);
+			warehouse.m_ware_policy.resize(nr_wares, Warehouse::SP_Normal);
 			warehouse.m_worker_policy.resize
-				(nr_tribe_workers.value(), Warehouse::SP_Normal);
+				(nr_tribe_workers, Warehouse::SP_Normal);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
 			const Tribe_Descr & tribe = warehouse.tribe();
@@ -498,14 +496,14 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					Warehouse::StockPolicy policy =
 						static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
 
-					if (id) {
+					if (id != INVALID_INDEX) {
 						warehouse.insert_wares(id, amount);
 						warehouse.set_ware_policy(id, policy);
 					}
 				} else {
 					uint16_t amount = fr.Unsigned16();
 
-					if (id)
+					if (id != INVALID_INDEX)
 						warehouse.insert_wares(id, amount);
 				}
 			}
@@ -516,14 +514,14 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					Warehouse::StockPolicy policy =
 						static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
 
-					if (id) {
+					if (id != INVALID_INDEX) {
 						warehouse.insert_workers(id, amount);
 						warehouse.set_worker_policy(id, policy);
 					}
 				} else {
 					uint16_t amount = fr.Unsigned16();
 
-					if (id)
+					if (id != INVALID_INDEX)
 						warehouse.insert_workers(id, amount);
 				}
 			}
@@ -535,7 +533,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					std::unique_ptr<Request> req
 						(new Request
 						 	(warehouse,
-						 	 Ware_Index::First(),
+						 	 0,
 						 	 &Warehouse::request_cb,
 						 	 wwWORKER));
 					req->Read(fr, game, mol);
@@ -576,7 +574,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				uint32_t const next_spawn = fr.Unsigned32();
 				Ware_Index const worker_index =
 					tribe.safe_worker_index("carrier");
-				if (not worker_index) {
+				if (worker_index == INVALID_INDEX) {
 					log
 						("WARNING: %s %u has a next_spawn time for nonexistent "
 						 "worker type \"%s\" set to %u, ignoring\n",
@@ -622,7 +620,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					uint32_t     const next_spawn      = fr.Unsigned32();
 					Ware_Index   const worker_index    =
 						tribe.safe_worker_index(worker_typename);
-					if (not worker_index) {
+					if (worker_index == INVALID_INDEX) {
 						log
 							("WARNING: %s %u has a next_spawn time for nonexistent "
 							 "worker type \"%s\" set to %u, ignoring\n",
@@ -681,7 +679,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						pw.requests.push_back
 							(new Request
 							 	(warehouse,
-							 	 Ware_Index::First(),
+							 	 0,
 							 	 &Warehouse::request_cb,
 							 	 wwWORKER));
 						pw.requests.back()->Read(fr, game, mol);
@@ -746,10 +744,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		bool rel17comp = false;
-		if (3 == packet_version and 4 == CURRENT_MILITARYSITE_PACKET_VERSION)
-			rel17comp = true;
-		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION or rel17comp)
+		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION)
 		{
 			read_productionsite(militarysite, fr, game, mol);
 
@@ -759,7 +754,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 				militarysite.m_normal_soldier_request.reset
 					(new Request
 						(militarysite,
-						 Ware_Index::First(),
+						 0,
 						 MilitarySite::request_soldier_callback,
 						 wwWORKER));
 				militarysite.m_normal_soldier_request->Read(fr, game, mol);
@@ -767,15 +762,12 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			else
 				militarysite.m_normal_soldier_request.reset();
 
-			if (rel17comp) // compatibility with release 17 savegames
-				militarysite.m_upgrade_soldier_request.reset();
-			else
 			if (fr.Unsigned8())
 			{
 				militarysite.m_upgrade_soldier_request.reset
 					(new Request
 						(militarysite,
-						 (!militarysite.m_normal_soldier_request) ? Ware_Index::First()
+						 (!militarysite.m_normal_soldier_request) ? 0
 						: militarysite.descr().tribe().safe_worker_index("soldier"),
 						MilitarySite::request_soldier_callback,
 						wwWORKER));
@@ -805,26 +797,14 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			//  capacity (modified by user)
 			militarysite.m_capacity = fr.Unsigned8();
 			militarysite.m_nexthealtime = fr.Signed32();
-			if (not (rel17comp)) // compatibility with release 17 savegames
-			{
 
-				uint16_t reqmin = fr.Unsigned16();
-				uint16_t reqmax = fr.Unsigned16();
-				militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
-				militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
-				militarysite.m_next_swap_soldiers_time = fr.Signed32();
-				militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
-				militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
-			}
-			else // Release 17 compatibility branch. Some safe values.
-			{
-				militarysite.m_soldier_preference = MilitarySite::kPrefersRookies;
-				if (2 < militarysite.m_capacity)
-					militarysite.m_soldier_preference = MilitarySite::kPrefersHeroes;
-				militarysite.m_next_swap_soldiers_time = militarysite.m_nexthealtime;
-				militarysite.m_soldier_upgrade_try = false;
-				militarysite.m_doing_upgrade_request = false;
-			}
+			uint16_t reqmin = fr.Unsigned16();
+			uint16_t reqmax = fr.Unsigned16();
+			militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
+			militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
+			militarysite.m_next_swap_soldiers_time = fr.Signed32();
+			militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
+			militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
 
 		} else
 			throw game_data_error
@@ -883,7 +863,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				Request & req =
 					*new Request
 						(productionsite,
-						 Ware_Index::First(),
+						 0,
 						 ProductionSite::request_worker_callback,
 						 wwWORKER);
 				req.Read(fr, game, mol);
@@ -1012,10 +992,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			uint16_t nr_queues = fr.Unsigned16();
 			assert(!productionsite.m_input_queues.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
-				WaresQueue * wq = new WaresQueue(productionsite, Ware_Index::Null(), 0);
+				WaresQueue * wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->Read(fr, game, mol);
 
-				if (!wq->get_ware()) {
+				if (wq->get_ware() == INVALID_INDEX) {
 					delete wq;
 				} else {
 					productionsite.m_input_queues.push_back(wq);
@@ -1088,11 +1068,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
 
-		bool rel17comp = false; // compatibility with release 17
-		if (4 == CURRENT_TRAININGSITE_PACKET_VERSION && 3 == trainingsite_packet_version)
-			rel17comp = true;
-
-		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION or rel17comp)
+		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION)
 		{
 			read_productionsite(trainingsite, fr, game, mol);
 
@@ -1102,7 +1078,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 				trainingsite.m_soldier_request =
 					new Request
 						(trainingsite,
-						 Ware_Index::First(),
+						 0,
 						 TrainingSite::request_soldier_callback,
 						 wwWORKER);
 				trainingsite.m_soldier_request->Read(fr, game, mol);
@@ -1129,20 +1105,17 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					fr.Signed32();
 				}
 			}
-			// load premature kick-out state, was not in release 17..
-			if (not rel17comp)
+
+			uint16_t mapsize = fr.Unsigned16(); // map of training levels (not _the_ map)
+			while (mapsize)
 			{
-				uint16_t mapsize = fr.Unsigned16();
-				while (mapsize)
-				{
-					uint16_t traintype  = fr.Unsigned16();
-					uint16_t trainlevel = fr.Unsigned16();
-					uint16_t trainstall = fr.Unsigned16();
-					uint16_t spresence  = fr.Unsigned8();
-					mapsize--;
-					std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
-					trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
-				}
+				uint16_t traintype  = fr.Unsigned16();
+				uint16_t trainlevel = fr.Unsigned16();
+				uint16_t trainstall = fr.Unsigned16();
+				uint16_t spresence  = fr.Unsigned8();
+				mapsize--;
+				std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
+				trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
 			}
 		} else
 			throw game_data_error
@@ -1231,7 +1204,7 @@ void Map_Buildingdata_Data_Packet::Write
 			}
 			{
 				const Tribe_Descr& td = building->descr().tribe();
-				BOOST_FOREACH(Building_Index b_idx, building->m_old_buildings) {
+				for (Building_Index b_idx : building->m_old_buildings) {
 					const Building_Descr* b_descr = td.get_building_descr(b_idx);
 					fw.Unsigned8(1);
 					fw.String(b_descr->name());
@@ -1370,7 +1343,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	//  supply
 	const Tribe_Descr & tribe = warehouse.tribe();
 	const WareList & wares = warehouse.m_supply->get_wares();
-	for (Ware_Index i = Ware_Index::First(); i < wares.get_nrwareids  (); ++i) {
+	for (Ware_Index i = 0; i < wares.get_nrwareids  (); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_ware_descr(i)->name());
 		fw.Unsigned32(wares.stock(i));
@@ -1378,7 +1351,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	}
 	fw.Unsigned8(0);
 	const WareList & workers = warehouse.m_supply->get_workers();
-	for (Ware_Index i = Ware_Index::First(); i < workers.get_nrwareids(); ++i) {
+	for (Ware_Index i = 0; i < workers.get_nrwareids(); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_worker_descr(i)->name());
 		fw.Unsigned32(workers.stock(i));

@@ -468,11 +468,9 @@ Table<void *>::Entry_Record & Table<void *>::add
 	Entry_Record & result = *new Entry_Record(entry);
 	m_entry_records.push_back(&result);
 	result.m_data.resize(m_columns.size());
-	for
-		(wl_index_range<Columns::size_type> i(0, m_columns.size());
-		 i; ++i)
-		if (m_columns.at(i.current).is_checkbox_column) {
-			result.m_data.at(i.current).d_picture =
+	for (size_t i = 0; i < m_columns.size(); ++i)
+		if (m_columns.at(i).is_checkbox_column) {
+			result.m_data.at(i).d_picture =
 				g_gr->images().get("pics/checkbox_empty.png");
 		}
 

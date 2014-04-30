@@ -42,10 +42,10 @@ const uint32_t TrainingSite::training_state_multiplier = 12;
 TrainingSite_Descr::TrainingSite_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const Tribe_Descr & _tribe, const World& world)
 	:
 	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe),
+		(_name, _descname, directory, prof, global_s, _tribe, world),
 
 	//  FIXME This is currently hardcoded for "soldier" but should allow any
 	//  FIXME soldier type name.
