@@ -122,7 +122,7 @@ void DefaultAI::think ()
 
 	// if there are more than one economy try to connect them with a road.
 	if (next_road_due <= gametime) {
-		if (gametime%10 ==0) //just to reduce number of printouts
+		if (gametime%50 ==0) //just to reduce number of printouts
 			printf (" TDEBUG: postponing road check by additional: %d\n",(productionsites.size() + militarysites.size()) * 25 );
 		next_road_due = gametime + 1000 + (productionsites.size() + militarysites.size()) * 15;
 		if (construct_roads (gametime)) {
@@ -751,14 +751,14 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		//onlymissing = true;
 	//penalty can be zero or negative
 	int32_t overconst_penalty=0;
-	if (total_constructionsites>10 and (militarysites.size()/3 +  mines.size() + productionsites.size())>2) {
-		//printf (" y\n");
-		//printf ("penalty: %d %d %d %d %d\n",total_constructionsites,10 - static_cast<int32_t>(total_constructionsites),militarysites.size(),mines.size(),productionsites.size());
-		overconst_penalty = (10 - static_cast<int32_t>(total_constructionsites))*100/static_cast<int32_t>(militarysites.size()/3 +  mines.size() + productionsites.size());
-		//printf (" penalty: %d, (%d / %d) \n",overconst_penalty,total_constructionsites,(militarysites.size()/3 +  mines.size() + productionsites.size()+ 1 ));
-		}
-	//else
-		//printf (" penalty: %d\n",overconst_penalty);
+	if (total_constructionsites>10 and (militarysites.size()/3 +  mines.size() + productionsites.size())>2) 
+		overconst_penalty = (10 - static_cast<int32_t>(total_constructionsites))*100 / 
+		static_cast<int32_t>(militarysites.size()/3 +  mines.size() + productionsites.size());
+	int32_t slowing_penalty=0;
+	if (productionsites.size()>100)
+		slowing_penalty=(100-static_cast<int32_t>(productionsites.size()))/10;
+	//if (militarysites.size()<20)
+		//slowing_penalty+=militarysites.size()-20;
 
 
 	//  Just used for easy checking whether a mine or something else was built.
@@ -777,50 +777,73 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		++spots_avail.at((*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK);
 
 	int32_t expand_factor = 0;
-
+	expand_factor=type;
 	//printf (" military check - production sites: %d\n",productionsites.size());
 
-	if (type != DEFENSIVE) {
-		++expand_factor;
-		// check space and set the need for expansion
-		if
-			(spots_avail.at(BUILDCAPS_BIG)
-			 <
-			 static_cast<uint16_t>(2 + (productionsites.size() / 50)))
-			expand_factor += 3;
-		if
-			(spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG)
-			 <
-			 static_cast<uint16_t>(4 + (productionsites.size() / 50)))
-			expand_factor += type;
+	uint32_t spots = spots_avail.at(BUILDCAPS_SMALL);
+	spots += spots_avail.at(BUILDCAPS_MEDIUM);
+	spots += spots_avail.at(BUILDCAPS_BIG);
+	if (spots<60)
+		expand_factor+=30-spots/2;
+	//printf (" TDEBUG EA1: %d\n",expand_factor);
+	if (spots<productionsites.size())
+		expand_factor+=1 + (productionsites.size()-spots)/5*(1+type);
+	//printf (" TDEBUG EA2: %d: %d %d\n",expand_factor,productionsites.size(),spots);
+	if (spots_avail.at(BUILDCAPS_BIG)<static_cast<int32_t>(productionsites.size())/2)
+		expand_factor += 3*type+1;
+	//printf (" TDEBUG EA3: %d: %d - %d\n",expand_factor,spots_avail.at(BUILDCAPS_BIG),productionsites.size());
+	//if (type != DEFENSIVE) {
+		
+		//// check space and set the need for expansion
+		//if
+			//(spots_avail.at(BUILDCAPS_BIG)
+			 //<
+			 //static_cast<uint16_t>(2 + (productionsites.size() / 10))) {
+			//expand_factor += 2 + (productionsites.size() / 5 - spots_avail.at(BUILDCAPS_BIG)  );
+			////if (game().get_gametime()%100==0)
+				//printf (" TDEBUG: increasing expand factor by %d -> %d\n", 2 + productionsites.size() / 5 - spots_avail.at(BUILDCAPS_BIG),expand_factor);
+			//}
+		//if
+			//(spots_avail.at(BUILDCAPS_BIG) < 15 )
+			//expand_factor += 15-spots_avail.at(BUILDCAPS_BIG);
+		//if
+			//(spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG)
+			 //<
+			 //static_cast<uint16_t>(4 + (productionsites.size() / 50)))
+			//expand_factor += type;
 
-		uint32_t spots = spots_avail.at(BUILDCAPS_SMALL);
-		spots += spots_avail.at(BUILDCAPS_MEDIUM);
-		spots += spots_avail.at(BUILDCAPS_BIG);
-		if (type == AGGRESSIVE)
-			spots -= militarysites.size() / 20;
-		if (spots < 16)
-			expand_factor *= 2;
-		if ((type == AGGRESSIVE) && spots < 32)
-			expand_factor *= 2;
-		if (productionsites.size()>80){
-			expand_factor += 10;			
-			//printf ("changing expand factor to: %d\n",expand_factor);
-			}
-	} else {
-		// check space and set the need for expansion
-		if (spots_avail.at(BUILDCAPS_BIG) < 7)
-			++expand_factor;
-		if (spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG) < 12)
-			++expand_factor;
-		if
-			(spots_avail.at(BUILDCAPS_SMALL)  +
-			 spots_avail.at(BUILDCAPS_MEDIUM) +
-			 spots_avail.at(BUILDCAPS_BIG)
-			 <
-			 16)
-			expand_factor *= 3;
-	}
+		//uint32_t spots = spots_avail.at(BUILDCAPS_SMALL);
+		//spots += spots_avail.at(BUILDCAPS_MEDIUM);
+		//spots += spots_avail.at(BUILDCAPS_BIG);
+		//if (type == AGGRESSIVE)
+			//spots -= militarysites.size() / 20;
+		//if (spots < 16)
+			//expand_factor *= 2;
+		//if ((type == AGGRESSIVE) && spots < 32)
+			//expand_factor *= 2;
+		//if (productionsites.size()>80){
+			//expand_factor += 10;			
+			////printf ("changing expand factor to: %d\n",expand_factor);
+			//}
+	//} else {
+		//// check space and set the need for expansion
+		//if (spots_avail.at(BUILDCAPS_BIG) < 4)
+			//expand_factor += 7-spots_avail.at(BUILDCAPS_BIG);
+		//if (spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG) < 12)
+			//++expand_factor;
+		//if
+			//(spots_avail.at(BUILDCAPS_SMALL)  +
+			 //spots_avail.at(BUILDCAPS_MEDIUM) +
+			 //spots_avail.at(BUILDCAPS_BIG)
+			 //<
+			 //16)
+			//expand_factor *= 3;
+	//}
+
+		
+	if (game().get_gametime() % 100 ==0)
+		printf (" TDEBUG: expand factor: %d\n",expand_factor);
+		
 
 	// don't expand when we have unoccupied military buildings
 	//if (TODO) expand_factor = 0;
@@ -829,6 +852,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	if (type == DEFENSIVE && expand_factor > 1)
 		if (next_attack_consideration_due <= game().get_gametime())
 			consider_attack(game().get_gametime());
+
+
 
 
 	Building_Index proposed_building = INVALID_INDEX;
@@ -852,12 +877,14 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		 ++i)
 	{
 		BuildableField * const bf = *i;
-
+		//printf(" TDEBUG W\n");
 		if (!bf->reachable)
 			continue;
-
+		//printf(" TDEBUG blocked items: %d\n",blocked_fields.size() );
+		
+		
 		// Continue if field is blocked at the moment
-
+		field_blocked=false;
 		for
 			(std::list<BlockedField>::iterator j = blocked_fields.begin();
 			 j != blocked_fields.end();
@@ -870,6 +897,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		assert(player);
 		int32_t const maxsize =
 			player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
+
+		//printf(" TDEBUG A\n");
 
 		// Check all buildable buildings
 		for (uint32_t j = 0; j < buildings.size(); ++j) {
@@ -893,6 +922,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 			if (bo.desc->get_size() > maxsize)
 				continue;
+
 
 			int32_t prio = 0;
 
@@ -995,10 +1025,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Ware_Index const soldier_index = tribe().worker_index("soldier");
 
 
-					if (overconst_penalty<-20)
+					if (overconst_penalty+slowing_penalty<-20)
 						continue;
 						
-					prio += overconst_penalty;
+					prio += overconst_penalty+slowing_penalty;
 					
 					if (bo.is_basic && (bo.total_count() == 0))
 						prio += 100; // for very important buildings
@@ -1021,10 +1051,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 
 							// if the economy needs this ware
-							if ((*l.current)->economy.needs_ware(wt) and bo.cnt_under_construction<=1) {
+							if ((*l.current)->economy.needs_ware(wt) and bo.cnt_under_construction<1) {
 								prio += 2 * wares.at(bo.outputs.at(m)).preciousness;
 								if ((*l.current)->economy.stock_ware(wt) == 0)
-									prio += 10;
+									prio += 5;
 								if (bo.total_count() == 0)
 									// big bonus, this site might be elemental
 									prio += 3 * wares.at(bo.outputs.at(m)).preciousness;
@@ -1068,6 +1098,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 					// take care about borders and enemies
 					prio = recalc_with_border_range(*bf, prio);
+					
+					//take care about expand factor
+					if (expand_factor>20)
+						prio-=(expand_factor-20)/20;
 
 					// do not construct more than one building,
 					// if supply line is already broken.
@@ -1075,25 +1109,49 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						prio -= 12;
 
 				}
+				
+
 			} else if (bo.type == BuildingObserver::MILITARYSITE) {
 				if (!bf->unowned_land_nearby)
 					continue;
-				prio  = bf->unowned_land_nearby * (1 + type);
-				prio -= bf->military_influence * (5 - type);
-				// set to at least 1
-				prio  = prio > 0 ? prio : 1;
-				prio *= expand_factor;
-				prio /= 2;
-
-				if (bf->enemy_nearby)
-					prio *= 2;
-				else
-					prio -= bf->military_influence * 4; //<============ military
-
+				prio=expand_factor;	
+				
+				if (bf->enemy_nearby) {
+					if (bf->military_influence< 6)
+						prio=4*(6-bf->military_influence) + expand_factor;
+					}
+				else  {
+					if (bf->military_influence==1){
+						prio+=8 + expand_factor;
+					}
+					//if (bf->military_influence==2){
+					//	prio+= expand_factor;
+					//}
+					if (bf->military_influence>= 3) {
+						prio-=6*(bf->military_influence)-2;
+						prio += overconst_penalty/3;
+					}
+				}
+					
 				if (bf->avoid_military)
-					prio /= 5;
+					prio /= 5;				
+				
+				//prio  = bf->unowned_land_nearby * (1 + type);
+				//prio -= bf->military_influence * (5 - type);
+				//// set to at least 1
+				//prio  = prio > 0 ? prio : 1;
+				//prio *= expand_factor;
+				//prio /= 2;
 
-				prio -= militarysites.size() - productionsites.size() / (3 - type);
+				//if (bf->enemy_nearby)
+					//prio *= 2;
+				//else
+					//prio -= bf->military_influence * 4; //<============ military
+
+				//if (bf->avoid_military)
+					//prio /= 5;
+
+				//prio -= militarysites.size() - productionsites.size() / (3 - type);
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 				//  Build one warehouse for ~every 35 productionsites and mines.
@@ -1123,6 +1181,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				prio = recalc_with_border_range(*bf, prio);
 			}
 
+	
+
 			// avoid to have too many construction sites
 			// but still enable the player to build up basic productionsites
 			if
@@ -1146,7 +1206,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			}
 
 			// think of space consuming buildings nearby like farms or vineyards
-			prio /= 1 + bf->space_consumers_nearby;
+			prio -= 15 * bf->space_consumers_nearby;
 
 			// Stop here, if priority is 0 or less.
 			if (prio <= 0)
@@ -1173,7 +1233,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 		if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
 			continue;
-
+		
 		// Don't build another building of this type, if there is already
 		// one that is unoccupied at the moment
 		if (bo.unoccupied)
@@ -1184,7 +1244,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 
 		// Only have 2 mines of a type under construction
-		if (bo.cnt_under_construction > 2)
+		if (bo.cnt_under_construction >= 2)
 			continue;
 
 		if (overconst_penalty<-10)
@@ -1288,6 +1348,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	if (proposed_building == INVALID_INDEX)
 		return false;
 
+
 	// do not have too many construction sites
 	if
 		(proposed_priority < static_cast<int32_t>(total_constructionsites)
@@ -1295,12 +1356,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		 overconst_penalty<-20) // only return here, if we do NOT try to build a missing bld
 		return false;
 
-	//this is here for debug only, comment out the lines!!!!
-	for	(std::list<BlockedField>::iterator j = blocked_fields.begin();
-		j != blocked_fields.end();
-		++j)
-		if (j->coords == proposed_coords)
-				printf("  NOTE: field in blocked list (should not happen)\n");
+
 	// send the command to construct a new building
 	game().send_player_build
 		(player_number(), proposed_coords, proposed_building);
@@ -1308,7 +1364,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		(game().map().get_fcoords(proposed_coords), game().get_gametime() + 600000);  //five minutes
 		blocked_fields.push_back(blocked);
 
-	printf (" TDEBUG:  winning priority %d, building %d, coords: %d x %d, penalty: %d\n",proposed_priority,proposed_building,proposed_coords.x,proposed_coords.y,overconst_penalty);
+	printf (" TDEBUG:  winning priority %d, building %d, coords: %d x %d, penalty: %d + %d\n",proposed_priority,proposed_building,proposed_coords.x,proposed_coords.y,overconst_penalty,slowing_penalty);
 	
 	// set the type of update that is needed
 	if (mine)
@@ -1688,19 +1744,20 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 	(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		 	 nullptr,
 		 	 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
-		 ==
-		 0)
+		 < 5)
 	{
-		if (site.site->get_statistics_percent() == 0) {
-			// Do not destruct the last lumberjack - perhaps some small trees are
-			// near, a forester will plant some trees or some new trees will seed
-			// in reach. Computer players can easily run out of wood if this check
-			// is not done.
-			if (site.bo->cnt_built == 1)
-				return false;
+		
+		// Do not destruct the last lumberjack - perhaps some small trees are
+		// near, a forester will plant some trees or some new trees will seed
+		// in reach. Computer players can easily run out of wood if this check
+		// is not done.
+		if (site.bo->cnt_built <= 3)
+			return false;
+		if (site.site->get_statistics_percent() < 20 ) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
+			printf (" TDEBUG: dismantling lumberjacks hut\n");
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
 			return true;
@@ -2054,14 +2111,24 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 int32_t DefaultAI::recalc_with_border_range(const BuildableField & bf, int32_t prio)
 {
 	// Prefer building space in the inner land.
-	prio /= (1 + (bf.unowned_land_nearby / 4));
+	//prio /= (1 + (bf.unowned_land_nearby / 4));
+	if (bf.unowned_land_nearby){
+		if (prio>8)
+		prio /= (1 + (bf.unowned_land_nearby / 4));
+		else
+			prio -= 2;}
 
 	// Especially places near the frontier to the enemies are unlikely
 	//  NOTE take care about the type of computer player. The more
 	//  NOTE aggressive a computer player is, the more important is
 	//  NOTE this check. So we add \var type as bonus.
-	if (bf.enemy_nearby)
-		prio /= (3 + type);
+	if (bf.enemy_nearby){
+		if (prio>(3 + type)*6)
+			prio /= (3 + type);
+		else
+			prio -= 6;
+		}
+		
 
 	return prio;
 }
