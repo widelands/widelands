@@ -429,7 +429,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
 		}
 
 		update_mineable_field (*mf);
-		if (gametime%50 ==0) //just to reduce number of printouts
+		if (gametime%500 ==0) //just to reduce number of printouts
 			printf (" TDEBUG: postponing mineable fields check by : %d\n",mineable_fields.size() * 5 );
 		mf->next_update_due = gametime + FIELD_UPDATE_INTERVAL + mineable_fields.size() * 5 ;
 
@@ -1023,7 +1023,15 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 					// ToDo: prefer soldier producing things
 					// Ware_Index const soldier_index = tribe().worker_index("soldier");
+					
+					if (!bo.is_basic and game().get_gametime() < 300000 )
+						continue;
+						
+					if (bo.is_basic and game().get_gametime() < 300000 and bo.total_count() > 0)
+						continue;
 
+					if (!bo.is_basic and game().get_gametime() < 600000 and bo.total_count() > 0)
+						continue;
 
 					if (overconst_penalty+slowing_penalty<-20)
 						continue;
@@ -1241,7 +1249,11 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 		if (bo.current_stats<70)   //<=====================????
 			continue;
-
+		if (game().get_gametime() < 900000)
+			continue;
+			
+		if (game().get_gametime() < 1800000 and bo.total_count()>0)
+			continue;		
 
 		// Only have 2 mines of a type under construction
 		if (bo.cnt_under_construction >= 2)
