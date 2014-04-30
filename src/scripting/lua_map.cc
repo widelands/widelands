@@ -1332,9 +1332,9 @@ int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
 
 	lua_newtable(L);
-	BOOST_FOREACH(const auto & positions_pair, descr->inputs()) {
-		lua_pushstring(L, tribe.get_ware_descr(positions_pair.first)->name());
-		lua_pushuint32(L, positions_pair.second);
+	for (const WareAmount& ware_amount : descr->inputs()) {
+		lua_pushstring(L, tribe.get_ware_descr(ware_amount.first)->name());
+		lua_pushuint32(L, ware_amount.second);
 		lua_settable(L, -3);
 	}
 	return 1;
