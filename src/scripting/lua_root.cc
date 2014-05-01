@@ -296,6 +296,7 @@ World
 const char L_World::className[] = "World";
 const MethodType<L_World> L_World::Methods[] = {
 	METHOD(L_World, new_critter_type),
+	METHOD(L_World, new_editor_immovable_category),
 	METHOD(L_World, new_editor_terrain_category),
 	METHOD(L_World, new_immovable_type),
 	METHOD(L_World, new_resource_type),
@@ -439,6 +440,27 @@ int L_World::new_editor_terrain_category(lua_State* L) {
 	try {
 		LuaTable table(L);
 		get_egbase(L).mutable_world()->add_editor_terrain_category(table);
+	}
+	catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_editor_immovable_category(table)
+
+		Like :func:`new_editor_terrain_category`, but for immovables.
+
+		:returns: :const:`nil`
+*/
+int L_World::new_editor_immovable_category(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	try {
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_editor_immovable_category(table);
 	}
 	catch (std::exception& e) {
 		report_error(L, "%s", e.what());

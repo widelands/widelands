@@ -2,86 +2,63 @@ world = wl.World()
 
 set_textdomain("world")
 
-world:new_editor_terrain_category{
-   name = "green",
-   descname = _ "Summer",
-   picture = "world/pics/editor_terrain_category_green.png",
-}
-world:new_editor_terrain_category{
-   name = "wasteland",
-   descname = _ "Wasteland",
-   picture = "world/pics/editor_terrain_category_wasteland.png",
-}
-world:new_editor_terrain_category{
-   name = "winter",
-   descname = _ "Winter",
-   picture = "world/pics/editor_terrain_category_winter.png",
-}
-world:new_editor_terrain_category{
-   name = "desert",
-   descname = _ "Desert",
-   picture = "world/pics/editor_terrain_category_desert.png",
-}
-
 include "world/resources/init.lua"
 include "world/terrains/init.lua"
 
 
--- TODO(sirver): This should be implemented to make a nicer UI in the editor to
--- place immovables.
--- world:new_immovable_category{
-   -- name = "miscellaneous",
-   -- descname = _ "Miscellaneous",
-   -- picture = "world/immovables/ruin5/idle.png",
--- }
+world:new_editor_immovable_category{
+   name = "miscellaneous",
+   descname = _ "Miscellaneous",
+   picture = "world/immovables/ruin5/idle.png",
+}
 
--- -- world:new_immovable_category{
-   -- name = "plants",
-   -- descname = _ "Plants",
-   -- picture = "world/immovables/cactus3/idle.png",
--- }
+world:new_editor_immovable_category{
+   name = "plants",
+   descname = _ "Plants",
+   picture = "world/immovables/cactus3/idle.png",
+}
 
--- world:new_immovable_category{
-   -- name = "standing_stones",
-   -- descname = _ "Standing Stones",
-   -- picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
--- }
+world:new_editor_immovable_category{
+   name = "standing_stones",
+   descname = _ "Standing Stones",
+   picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
+}
 
--- -- world:new_immovable_category{
-   -- name = "stones",
-   -- descname = _ "Stones",
-   -- picture = "world/immovables/stones/greenland_stones6/idle.png",
--- }
+world:new_editor_immovable_category{
+   name = "stones",
+   descname = _ "Stones",
+   picture = "world/immovables/stones/greenland_stones6/idle.png",
+}
 
--- world:new_immovable_category{
-   -- name = "trees_coniferous",
-   -- descname = _ "Coniferous Trees",
-   -- picture = "world/immovables/trees/spruce_summer_old/idle_0.png",
--- }
+world:new_editor_immovable_category{
+   name = "trees_coniferous",
+   descname = _ "Coniferous Trees",
+   picture = "world/immovables/trees/spruce_summer_old/idle_0.png",
+}
 
--- -- world:new_immovable_category{
-   -- name = "trees_dead",
-   -- descname = _ "Dead Trees",
-   -- picture = "world/immovables/trees/deadtree2/idle.png",
--- }
+world:new_editor_immovable_category{
+   name = "trees_dead",
+   descname = _ "Dead Trees",
+   picture = "world/immovables/trees/deadtree2/idle.png",
+}
 
--- world:new_immovable_category{
-   -- name = "trees_deciduous",
-   -- descname = _ "Deciduous Trees",
-   -- picture = "world/immovables/trees/alder_summer_old/idle_0.png",
--- }
+world:new_editor_immovable_category{
+   name = "trees_deciduous",
+   descname = _ "Deciduous Trees",
+   picture = "world/immovables/trees/alder_summer_old/idle_0.png",
+}
 
--- -- world:new_immovable_category{
-   -- name = "trees_palm",
-   -- descname = _ "Palm Trees",
-   -- picture = "world/immovables/trees/palm_borassus_desert_old/idle_0.png",
--- }
+world:new_editor_immovable_category{
+   name = "trees_palm",
+   descname = _ "Palm Trees",
+   picture = "world/immovables/trees/palm_borassus_desert_old/idle_0.png",
+}
 
--- world:new_immovable_category{
-   -- name = "trees_wasteland",
-   -- descname = _ "Wasteland Trees",
-   -- picture = "world/immovables/trees/aspen_wasteland_old/idle_0.png",
--- }
+world:new_editor_immovable_category{
+   name = "trees_wasteland",
+   descname = _ "Wasteland Trees",
+   picture = "world/immovables/trees/aspen_wasteland_old/idle_0.png",
+}
 
 include "world/immovables/grass1/init.lua"
 include "world/immovables/bush1/init.lua"

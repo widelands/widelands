@@ -53,6 +53,7 @@ public:
 	BobDescr const* get_bob_descr(const std::string& name) const;
 	int32_t get_nr_bobs() const;
 
+	const DescriptionMaintainer<Immovable_Descr>& immovables() const;
 	int32_t get_immovable_index(char const* const l) const;
 	int32_t get_nr_immovables() const;
 	Immovable_Descr const* get_immovable_descr(int32_t index) const;
@@ -75,11 +76,13 @@ public:
 	// Add a new immovable to the world description.
 	void add_immovable_type(const LuaTable& table);
 
-	// Add an editor category for grouping items in the editor.
+	// Add an editor categories for grouping items in the editor.
 	void add_editor_terrain_category(const LuaTable& table);
+	void add_editor_immovable_category(const LuaTable& table);
 
 	// Access to the editor categories.
 	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
+	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
 
 	const MapGenInfo& getMapGenInfo() const;
 
@@ -89,6 +92,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;
+	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_immovable_categories_;
 	std::unique_ptr<MapGenInfo> mapGenInfo_;
 };
 }  // namespace Widelands

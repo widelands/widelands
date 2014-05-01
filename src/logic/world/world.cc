@@ -45,6 +45,7 @@ World::World()
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
      editor_terrain_categories_(new DescriptionMaintainer<EditorCategory>()),
+     editor_immovable_categories_(new DescriptionMaintainer<EditorCategory>()),
      mapGenInfo_(new MapGenInfo()) {
 }
 
@@ -67,6 +68,10 @@ void World::add_critter_type(const LuaTable& table) {
 	bobs_->add(new Critter_Bob_Descr(table));
 }
 
+const DescriptionMaintainer<Immovable_Descr>& World::immovables() const {
+	return *immovables_;
+}
+
 void World::add_immovable_type(const LuaTable& table) {
 	immovables_->add(new Immovable_Descr(table));
 }
@@ -77,6 +82,14 @@ void World::add_editor_terrain_category(const LuaTable& table) {
 
 const DescriptionMaintainer<EditorCategory>& World::editor_terrain_categories() const {
 	return *editor_terrain_categories_;
+}
+
+void World::add_editor_immovable_category(const LuaTable& table) {
+	editor_immovable_categories_->add(new EditorCategory(table));
+}
+
+const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories() const {
+	return *editor_immovable_categories_;
 }
 
 int32_t World::safe_resource_index(const char* const resourcename) const {
