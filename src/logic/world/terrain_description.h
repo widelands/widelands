@@ -31,7 +31,7 @@ class LuaTable;
 
 namespace Widelands {
 
-class EditorTerrainCategory;
+class EditorCategory;
 class World;
 
 class TerrainDescription : boost::noncopyable {
@@ -78,12 +78,12 @@ public:
 	int32_t dither_layer() const;
 
 	// Returns the editor category.
-	const EditorTerrainCategory& editor_category() const;
+	const EditorCategory& editor_category() const;
 
 private:
 	const std::string name_;
 	const std::string descname_;
-	const EditorTerrainCategory* editor_category_;  // not owned.
+	const EditorCategory* editor_category_;  // not owned.
 	Type is_;
 	std::vector<uint8_t> valid_resources_;
 	int8_t default_resource_index_;

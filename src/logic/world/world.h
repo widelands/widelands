@@ -27,7 +27,7 @@
 
 namespace Widelands {
 
-class EditorTerrainCategory;
+class EditorCategory;
 class Editor_Game_Base;
 class ResourceDescription;
 class TerrainDescription;
@@ -79,7 +79,7 @@ public:
 	void add_editor_terrain_category(const LuaTable& table);
 
 	// Access to the editor categories.
-	const DescriptionMaintainer<EditorTerrainCategory>& editor_terrain_categories() const;
+	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
 
 	const MapGenInfo& getMapGenInfo() const;
 
@@ -88,7 +88,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<Immovable_Descr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
-	std::unique_ptr<DescriptionMaintainer<EditorTerrainCategory>> editor_terrain_categories_;
+	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;
 	std::unique_ptr<MapGenInfo> mapGenInfo_;
 };
 }  // namespace Widelands

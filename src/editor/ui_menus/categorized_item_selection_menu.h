@@ -24,7 +24,7 @@
 #include <cmath>
 
 #include "description_maintainer.h"
-#include "logic/world/editor_terrain_category.h"
+#include "logic/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
@@ -43,7 +43,7 @@ public:
 	// not take ownership.
 	CategorizedItemSelectionMenu(
 	   UI::Panel* parent,
-	   const DescriptionMaintainer<Widelands::EditorTerrainCategory>& categories,
+	   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
 	   const DescriptionMaintainer<DescriptionType>& descriptions,
 	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
 	   const std::function<void()> select_correct_tool,
@@ -67,7 +67,7 @@ private:
 template <typename DescriptionType, typename ToolType>
 CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu(
    UI::Panel* parent,
-   const DescriptionMaintainer<Widelands::EditorTerrainCategory>& categories,
+   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
    const DescriptionMaintainer<DescriptionType>& descriptions,
    const std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)>
       create_checkbox,
@@ -85,7 +85,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	this->add(tab_panel, UI::Align_Center);
 
 	for (uint32_t category_index = 0; category_index < categories.get_nitems(); ++category_index) {
-		const Widelands::EditorTerrainCategory& category = *categories.get(category_index);
+		const Widelands::EditorCategory& category = *categories.get(category_index);
 
 		std::vector<int> item_indices;
 		for (size_t j = 0; j < descriptions_.get_nitems(); ++j) {

@@ -30,7 +30,7 @@
 #include "graphic/texture.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "logic/world/editor_terrain_category.h"
+#include "logic/world/editor_category.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "ui_basic/checkbox.h"

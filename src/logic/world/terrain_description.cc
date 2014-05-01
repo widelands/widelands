@@ -24,7 +24,7 @@
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
-#include "logic/world/editor_terrain_category.h"
+#include "logic/world/editor_category.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
@@ -126,7 +126,7 @@ const std::string& TerrainDescription::descname() const {
 	return descname_;
 }
 
-const EditorTerrainCategory& TerrainDescription::editor_category() const {
+const EditorCategory& TerrainDescription::editor_category() const {
 	return *editor_category_;
 }
 
