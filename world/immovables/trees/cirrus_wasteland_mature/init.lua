@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "cirrus_wasteland_mature",
    descname = _ "Cirrus Tree (Mature)",
-   -- category = "trees_wasteland",
+   editor_category = "trees_wasteland",
    size = "small",
    attributes = {},
    programs = {

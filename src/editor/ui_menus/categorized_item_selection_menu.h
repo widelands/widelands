@@ -24,13 +24,15 @@
 #include <cmath>
 
 #include "description_maintainer.h"
+#include "graphic/image.h"
+#include "graphic/image_transformations.h"
+#include "i18n.h"
 #include "logic/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "i18n.h"
 
 template <typename DescriptionType, typename ToolType>
 class CategorizedItemSelectionMenu : public UI::Box {
@@ -121,7 +123,15 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
-		tab_panel->add(category.name(), category.picture(), vertical, category.descname());
+
+		const Image* category_picture = category.picture();
+		const int kCategoryImageSize = 24;
+		if (category_picture->width() > kCategoryImageSize ||
+		    category_picture->height() > kCategoryImageSize) {
+			category_picture =
+			   ImageTransformations::resize(category_picture, kCategoryImageSize, kCategoryImageSize);
+		}
+		tab_panel->add(category.name(), category_picture, vertical, category.descname());
 	}
 	this->add(&current_selection_names_, UI::Align_Center, true);
 }

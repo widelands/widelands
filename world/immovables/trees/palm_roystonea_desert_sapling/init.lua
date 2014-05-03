@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "palm_roystonea_desert_sapling",
    descname = _ "Roystonea regia Palm (Sapling)",
-   -- category = "trees_palm",
+   editor_category = "trees_palm",
    size = "small",
    attributes = { "seed" },
    programs = {

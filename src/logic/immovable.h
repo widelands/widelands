@@ -37,6 +37,7 @@ class Map;
 struct Tribe_Descr;
 class WareInstance;
 class Worker;
+class World;
 
 /**
  * BaseImmovable is the base for all non-moving objects (immovables such as
@@ -95,7 +96,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 Tribe_Descr const * const);
-	Immovable_Descr(const LuaTable&);
+	Immovable_Descr(const LuaTable&, const World&);
 
 	~Immovable_Descr();
 
@@ -111,6 +112,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
+	// Returns the editor category.
+	const EditorCategory& editor_category() const;
+
 protected:
 	int32_t     m_size;
 	Programs    m_programs;
@@ -124,6 +128,8 @@ protected:
 	Buildcost m_buildcost;
 
 private:
+	EditorCategory* editor_category_;  // not owned.
+
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 };

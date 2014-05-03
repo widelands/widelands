@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 world:new_immovable_type{
    name = "umbrella_red_wasteland_mature",
    descname = _ "Red Umbrella Tree (Mature)",
-   -- category = "trees_wasteland",
+   editor_category = "trees_wasteland",
    size = "small",
    attributes = {},
    programs = {
@@ -13,7 +13,7 @@ world:new_immovable_type{
          "seed=aspen_wasteland_sapling",
          "animate=idle 20000",
          "remove=20",
-         "grow=aspen_wasteland_old",
+         "grow=umbrella_red_wasteland_old",
       },
    },
    animations = {

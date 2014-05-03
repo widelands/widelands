@@ -276,7 +276,7 @@ Immovable_Descr::Immovable_Descr
 	}
 }
 
-Immovable_Descr::Immovable_Descr(const LuaTable& table)
+Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world)
    : Map_Object_Descr(table.get_string("name"), table.get_string("descname")),
      m_size(BaseImmovable::NONE),
      m_owner_tribe(nullptr)  // Can only parse world immovables for now.
@@ -299,8 +299,21 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table)
 		}
 	}
 
+	int editor_category =
+	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
+	if (editor_category < 0) {
+		throw game_data_error("Unknown editor_category: %s\n",
+		                      table.get_string("editor_category").c_str());
+	}
+	editor_category_ = world.editor_immovable_categories().get(editor_category);
+
 	make_sure_default_program_is_there();
 }
+
+const EditorCategory& Immovable_Descr::editor_category() const {
+	return *editor_category_;
+}
+
 
 void Immovable_Descr::make_sure_default_program_is_there() {
 	if (m_programs.find("program") == m_programs.end()) {  //  default program

@@ -57,7 +57,7 @@ world:new_editor_immovable_category{
 world:new_editor_immovable_category{
    name = "trees_wasteland",
    descname = _ "Wasteland Trees",
-   picture = "world/immovables/trees/aspen_wasteland_old/idle_0.png",
+   picture = "world/immovables/trees/umbrella_red_wasteland_old/idle_0.png",
 }
 
 include "world/immovables/grass1/init.lua"

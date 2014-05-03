@@ -43,6 +43,7 @@ namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
 
+class EditorCategory;
 class Map_Map_Object_Loader;
 class Player;
 struct Path;

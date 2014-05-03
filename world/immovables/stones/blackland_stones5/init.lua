@@ -10,7 +10,7 @@ animations = {
 world:new_immovable_type{
    name = "blackland_stones5",
    descname = _ "Stones 5",
-   -- category = "stones",
+   editor_category = "stones",
    size = "big",
    attributes = { "stone" },
    programs = {
