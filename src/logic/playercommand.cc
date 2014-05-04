@@ -651,7 +651,7 @@ void Cmd_EnhanceBuilding::Read
 		if (packet_version == PLAYER_CMD_ENHANCEBUILDING_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Building>(fr.Unsigned32(), mol);
-			bi =fr.Unsigned16();
+			bi = fr.Unsigned16();
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);
