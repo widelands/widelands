@@ -14,6 +14,7 @@ with grep which is currently also around.
 from collections import defaultdict
 from glob import glob
 from time import time
+import io
 import os
 import re
 
@@ -288,7 +289,7 @@ class CodeChecker(object):
         preprocessor = Preprocessor()
 
         # Check line by line (currently)
-        with open(fn, "r") as file:
+        with io.open(fn, "r", newline='') as file:
             data = file.read()
             for c in self._checkers:
                 if self._benchmark:
