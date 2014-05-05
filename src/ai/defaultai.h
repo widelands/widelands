@@ -134,6 +134,7 @@ private:
 	bool check_productionsites (int32_t);
 	bool check_mines           (int32_t);
 	bool check_militarysites   (int32_t);
+	void check_wood_cutters	   (int32_t);
 
 	int32_t recalc_with_border_range(const BuildableField &, int32_t);
 	int32_t calculate_need_for_ps(BuildingObserver &, int32_t);
@@ -190,8 +191,13 @@ private:
 	int32_t next_attack_consideration_due;
 	int32_t inhibit_road_building;
 	int32_t time_of_last_construction;
+	int32_t next_wood_cutting_check_due;	
 
 	uint16_t numof_warehouses;
+	
+	bool new_buildings_stop;
+	uint16_t unstationed_milit_buildings; //counts empty military buildings (ones where no soldier is belogning to)
+	uint16_t military_under_constr;
 };
 
 #endif
