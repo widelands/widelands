@@ -56,10 +56,8 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 	}
 }
 
-#define CMD_LUACOROUTINE_VERSION 2
-void Cmd_LuaCoroutine::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
-{
+#define CMD_LUACOROUTINE_VERSION 3
+void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_Object_Loader& mol) {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_LUACOROUTINE_VERSION) {
@@ -70,7 +68,7 @@ void Cmd_LuaCoroutine::Read
 			upcast(LuaGameInterface, lgi, &egbase.lua());
 			assert(lgi); // If this is not true, this is not a game.
 
-			m_cr = lgi->read_coroutine(fr, mol, fr.Unsigned32());
+			m_cr = lgi->read_coroutine(fr);
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);
@@ -84,16 +82,12 @@ void Cmd_LuaCoroutine::Write
 	fw.Unsigned16(CMD_LUACOROUTINE_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);
 
-	FileWrite::Pos p = fw.GetPos();
-	fw.Unsigned32(0); // N bytes written, follows below
-
-	// This function is only called when saving/loading savegames. So save
-	// to cast here
+	// This function is only called when saving/loading savegames. So save to
+	// cast here
 	upcast(LuaGameInterface, lgi, &egbase.lua());
 	assert(lgi); // If this is not true, this is not a game.
 
-	uint32_t nwritten = Little32(lgi->write_coroutine(fw, mos, m_cr));
-	fw.Data(&nwritten, 4, p);
+	lgi->write_coroutine(fw, m_cr);
 }
 
 }

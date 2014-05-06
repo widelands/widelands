@@ -74,10 +74,8 @@ public:
 	virtual ~LuaGameInterface();
 
 	// Input/output for coroutines.
-	LuaCoroutine * read_coroutine
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
-	uint32_t write_coroutine
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &, LuaCoroutine *);
+	LuaCoroutine* read_coroutine(Widelands::FileRead&);
+	void write_coroutine(Widelands::FileWrite&, LuaCoroutine*);
 
 	// Input output for the global game state.
 	void read_global_env

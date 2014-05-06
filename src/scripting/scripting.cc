@@ -315,20 +315,14 @@ LuaGameInterface::LuaGameInterface(Widelands::Game * g)
 LuaGameInterface::~LuaGameInterface() {
 }
 
-LuaCoroutine * LuaGameInterface::read_coroutine
-	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
-	 uint32_t size)
-{
+LuaCoroutine* LuaGameInterface::read_coroutine(Widelands::FileRead& fr) {
 	LuaCoroutine * rv = new LuaCoroutine(nullptr);
-	rv->read(m_L, fr, mol, size);
-
+	rv->read(m_L, fr);
 	return rv;
 }
 
-uint32_t LuaGameInterface::write_coroutine
-	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos, LuaCoroutine * cr)
-{
-	return cr->write(m_L, fw, mos);
+void LuaGameInterface::write_coroutine(Widelands::FileWrite& fw, LuaCoroutine* cr) {
+	cr->write(fw);
 }
 
 

@@ -28,18 +28,34 @@
 
 namespace {
 
-// Push a reference to this coroutine into the registry so that it will not get
-// garbage collected. Returns the index of the reference in the registry.
+const char* kReferenceTableName = "__coroutine_registry";
+
+// Push a reference to this coroutine into a private table so that it will not
+// get garbage collected. We do not use the registry here, so that this table
+// is saved with the rest of the state and we can use it after load to restore
+// our coroutines. Returns the index of the reference.
 uint32_t reference_coroutine(lua_State* L) {
 	assert(L != nullptr);
-	lua_pushthread(L);
-	return luaL_ref(L, LUA_REGISTRYINDEX);
+	lua_getglobal(L, kReferenceTableName);
+	if (lua_isnil(L, -1)) {
+		lua_pop(L, 1);
+		lua_newtable(L);
+		lua_setglobal(L, kReferenceTableName);
+		lua_getglobal(L, kReferenceTableName);
+	}
+	// S: __references
+	lua_pushthread(L); // S: __references thread
+	uint32_t idx = luaL_ref(L, -2);
+	lua_pop(L, 1); // S:
+	return idx;
 }
 
 // Unreference the coroutine with the given index in the registry again. I might then get garbage
 // collected.
 void unreference_coroutine(lua_State* L, uint32_t idx) {
-	luaL_unref(L, LUA_REGISTRYINDEX, idx);
+	lua_getglobal(L, kReferenceTableName);
+	luaL_unref(L, -1, idx);
+	lua_pop(L, 1);
 }
 
 }  // namespace
@@ -92,55 +108,26 @@ void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
 	++m_nargs;
 }
 
-#define COROUTINE_DATA_PACKET_VERSION 1
-uint32_t LuaCoroutine::write
-	(lua_State * parent, Widelands::FileWrite & fw,
-	 Widelands::Map_Map_Object_Saver & mos)
-{
-	// Clean out the garbage before we write this.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
-
+#define COROUTINE_DATA_PACKET_VERSION 2
+void LuaCoroutine::write(Widelands::FileWrite& fw) {
 	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
 
 	// The current numbers of arguments on the stack
 	fw.Unsigned32(m_nargs);
-
-	// Empty table + object to persist on the stack Stack
-	lua_newtable(parent);
-	lua_pushthread(m_L);
-	lua_xmove (m_L, parent, 1);
-
-	const uint32_t nwritten = persist_object(parent, fw, mos);
-
-	// Clean out the garbage again.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
-
-	return nwritten;
+	fw.Unsigned32(m_idx);
 }
 
-void LuaCoroutine::read
-	(lua_State * parent, Widelands::FileRead & fr,
-	 Widelands::Map_Map_Object_Loader & mol, uint32_t size)
-{
+void LuaCoroutine::read(lua_State* parent, Widelands::FileRead& fr) {
 	uint8_t version = fr.Unsigned8();
 
 	if (version != COROUTINE_DATA_PACKET_VERSION)
-		throw wexception("Unknown data packet version: %i\n", version);
+		throw wexception("Unhandled data packet version: %i\n", version);
 
-	// The current numbers of arguments on the stack
 	m_nargs = fr.Unsigned32();
+	m_idx = fr.Unsigned32();
 
-	// Empty table + object to persist on the stack Stack
-	unpersist_object(parent, fr, mol, size);
-
+	lua_getglobal(parent, kReferenceTableName);
+	lua_rawgeti(parent, -1, m_idx);
 	m_L = luaL_checkthread(parent, -1);
-	lua_pop(parent, 1);
-
-	// Cache a lua reference to this object so that it does not
-	// get garbage collected
-	lua_pushthread(m_L);
-	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
-
-	// Clean out the garbage again.
-	lua_gc(m_L, LUA_GCCOLLECT, 0);
+	lua_pop(parent, 2);
 }
