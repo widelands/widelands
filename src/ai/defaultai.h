@@ -198,6 +198,7 @@ private:
 	bool new_buildings_stop;
 	uint16_t unstationed_milit_buildings; //counts empty military buildings (ones where no soldier is belogning to)
 	uint16_t military_under_constr;
+	int32_t military_last_build;  //sometimes expansions just stops, this is time of last military building build
 };
 
 #endif
