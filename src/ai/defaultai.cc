@@ -1064,7 +1064,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						} else if (bo.inputs.size()==0){
 							if (output_is_needed and (bo.cnt_under_construction + bo.unoccupied==0)){
 								prio=max_preciousness+bulgarian_constant;
-								if (PRODUCTION_DEBUG) printf (" TDEBUG: %2d/%-15s without inputs: stats: %3d/%2d bld., setting priority: %2d, on %3d %3d\n",bo.id,bo.name,bo.current_stats/bo.total_count(),prio,bf->coords.x,bf->coords.y);
+								if (PRODUCTION_DEBUG) printf (" TDEBUG: %2d/%-15s without inputs: stats: %3d/%2d, setting priority: %2d, on %3d %3d\n",bo.id,bo.name,bo.current_stats,bo.total_count(),prio,bf->coords.x,bf->coords.y);
 							}
 						} else if (bo.inputs.size()>0) {
 							//if output is needed and there are no idle buildings
