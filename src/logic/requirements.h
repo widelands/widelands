@@ -27,8 +27,9 @@
 #include <boost/shared_ptr.hpp>
 
 #include "logic/tattribute.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
+
+class FileRead;
 
 namespace Widelands {
 

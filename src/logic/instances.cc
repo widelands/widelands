@@ -25,11 +25,11 @@
 #include <string>
 
 #include "container_iterate.h"
+#include "io/fileread.h"
 #include "log.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/queue_cmd_ids.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"

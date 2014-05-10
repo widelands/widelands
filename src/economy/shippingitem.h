@@ -22,8 +22,9 @@
 
 #include "logic/game.h"
 #include "logic/instances.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
+
+class FileRead;
 
 namespace Widelands {
 

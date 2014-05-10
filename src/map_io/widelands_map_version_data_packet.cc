@@ -20,10 +20,10 @@
 #include "map_io/widelands_map_version_data_packet.h"
 
 #include "build_info.h"
+#include "io/fileread.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "profile/profile.h"
 

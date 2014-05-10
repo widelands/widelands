@@ -20,7 +20,8 @@
 #ifndef ECONOMY_DATA_PACKET_H
 #define ECONOMY_DATA_PACKET_H
 
-#include "logic/widelands_streamread.h"
+class FileRead;
+
 #include "logic/widelands_filewrite.h"
 
 namespace Widelands {

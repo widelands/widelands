@@ -21,8 +21,8 @@
 
 #include <memory>
 
+#include "io/fileread.h"
 #include "log.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "scripting/c_utils.h"
 #include "scripting/eris.h"

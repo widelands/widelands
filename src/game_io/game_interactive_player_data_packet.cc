@@ -19,11 +19,11 @@
 
 #include "game_io/game_interactive_player_data_packet.h"
 
+#include "io/fileread.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "wui/interactive_player.h"
 #include "wui/mapview.h"
@@ -42,7 +42,11 @@ void Game_Interactive_Player_Data_Packet::Read
 		fr.Open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Player_Number player_number = ReadPlayer_Number8(&fr, game.map().get_nrplayers());
+			Player_Number player_number = fr.Unsigned8();
+			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
+				throw game_data_error("Invalid player number: %i.", player_number);
+			}
+
 			if (not game.get_player(player_number)) {
 				// This happens if the player, that saved the game, was a spectator
 				// and the slot for player 1 was not used in the game.

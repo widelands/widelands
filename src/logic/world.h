@@ -31,6 +31,7 @@ struct Section;
 namespace Widelands {
 
 class Editor_Game_Base;
+struct World;
 
 #define WORLD_NAME_LEN 128
 #define WORLD_AUTHOR_LEN 128

@@ -24,11 +24,11 @@
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
+#include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "profile/profile.h"
 

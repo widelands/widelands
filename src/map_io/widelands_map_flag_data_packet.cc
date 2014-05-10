@@ -24,10 +24,10 @@
 #include <boost/format.hpp>
 
 #include "economy/flag.h"
+#include "io/fileread.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
@@ -58,7 +58,11 @@ void Map_Flag_Data_Packet::Read
 			Widelands::Extent const extent = map.extent();
 			iterate_Map_FCoords(map, extent, fc)
 				if (fr.Unsigned8()) {
-					Player_Number const owner  = ReadPlayer_Number8(&fr, nr_players);
+					Player_Number const owner  = fr.Unsigned8();
+					if (!(0 < owner && owner <= nr_players)) {
+						throw game_data_error("Invalid player number: %i.", owner);
+					}
+
 					Serial        const serial = fr.Unsigned32();
 
 					try {

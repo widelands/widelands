@@ -107,74 +107,219 @@ struct Map_Object_Data {
 };
 
 namespace {
-#define OPEN_INPUT_FILE(filetype, file, filename, filename_template, version) \
-   char (filename)[FILENAME_SIZE];                                            \
-   snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
-   filetype file;                                                             \
-   try {(file).Open(fs, filename);}                                           \
-   catch (const File_error &) {                                               \
-      throw game_data_error                                                   \
-         ("Map_Players_View_Data_Packet::Read: player %u:Could not open "     \
-          "\"%s\" for reading. This file should exist when \"%s\" exists",    \
-          plnum, filename, unseen_times_filename);                            \
-   }
+#define OPEN_INPUT_FILE(filetype, file, filename, filename_template, version)                      \
+	char(filename)[FILENAME_SIZE];                                                                  \
+	snprintf(filename, sizeof(filename), filename_template, plnum, version);                        \
+	filetype file;                                                                                  \
+	try {                                                                                           \
+		(file).Open(fs, filename);                                                                   \
+	}                                                                                               \
+	catch (const File_error&) {                                                                     \
+		throw game_data_error("Map_Players_View_Data_Packet::Read: player %u:Could not open "        \
+		                      "\"%s\" for reading. This file should exist when \"%s\" exists",       \
+		                      plnum,                                                                 \
+		                      filename,                                                              \
+		                      unseen_times_filename);                                                \
+	}
 
 // Try to find the file with newest fitting version number
-#define OPEN_INPUT_FILE_NEW_VERSION(filetype, file, filename, fileversion, filename_template, version) \
-	uint8_t fileversion = version;                                                                      \
-	filetype file;                                                                                      \
-	char (filename)[FILENAME_SIZE];                                                                     \
-	for (;; --fileversion) {                                                            \
-		snprintf(filename, sizeof(filename), filename_template, plnum, fileversion);                         \
-		try {(file).Open(fs, filename); break;}                                                          \
-		catch (...) {                                                                     \
-			if (fileversion == 0)                                                                         \
-				throw game_data_error                                                                      \
-					("Map_Players_View_Data_Packet::Read: player %u:Could not open "                        \
-					 "\"%s\" for reading. This file should exist when \"%s\" exists",                       \
-					 plnum, filename, unseen_times_filename);                                               \
-		}                                                                                                \
+#define OPEN_INPUT_FILE_NEW_VERSION(                                                               \
+   filetype, file, filename, fileversion, filename_template, version)                              \
+	uint8_t fileversion = version;                                                                  \
+	filetype file;                                                                                  \
+	char(filename)[FILENAME_SIZE];                                                                  \
+	for (;; --fileversion) {                                                                        \
+		snprintf(filename, sizeof(filename), filename_template, plnum, fileversion);                 \
+		try {                                                                                        \
+			(file).Open(fs, filename);                                                                \
+			break;                                                                                    \
+		}                                                                                            \
+		catch (...) {                                                                                \
+			if (fileversion == 0)                                                                     \
+				throw game_data_error("Map_Players_View_Data_Packet::Read: player %u:Could not open "  \
+				                      "\"%s\" for reading. This file should exist when \"%s\" exists", \
+				                      plnum,                                                           \
+				                      filename,                                                        \
+				                      unseen_times_filename);                                          \
+		}                                                                                            \
 	}
 
 // Using this macro, if no file exists, fileversion will be set to -1
-#define OPEN_INPUT_FILE_NEW_VERSION_SILENT(filetype, file, filename, fileversion, file_templ, v) \
-	int8_t fileversion = v;                                                                      \
-	filetype file;                                                                                      \
-	char (filename)[FILENAME_SIZE];                                                                     \
-	for (; fileversion >= -1; --fileversion) {                                                            \
-		snprintf(filename, sizeof(filename), file_templ, plnum, fileversion);                         \
-		try {(file).Open(fs, filename); break;}                                                          \
-		catch (...) {                                                                     \
-		}                                                                                                \
+#define OPEN_INPUT_FILE_NEW_VERSION_SILENT(filetype, file, filename, fileversion, file_templ, v)   \
+	int8_t fileversion = v;                                                                         \
+	filetype file;                                                                                  \
+	char(filename)[FILENAME_SIZE];                                                                  \
+	for (; fileversion >= -1; --fileversion) {                                                      \
+		snprintf(filename, sizeof(filename), file_templ, plnum, fileversion);                        \
+		try {                                                                                        \
+			(file).Open(fs, filename);                                                                \
+			break;                                                                                    \
+		}                                                                                            \
+		catch (...) {                                                                                \
+		}                                                                                            \
 	}
 
-#define CHECK_TRAILING_BYTES(file, filename)                                  \
-   if (not (file).EndOfFile())                                                \
-      throw game_data_error                                                   \
-         ("Map_Players_View_Data_Packet::Read: player %u:"                    \
-          "Found %lu trailing bytes in \"%s\"",                               \
-          plnum,                                                              \
-          static_cast<long unsigned int>((file).GetSize() - (file).GetPos()), \
-          filename);
+#define CHECK_TRAILING_BYTES(file, filename)                                                       \
+	if (not(file).EndOfFile())                                                                      \
+		throw game_data_error("Map_Players_View_Data_Packet::Read: player %u:"                       \
+		                      "Found %lu trailing bytes in \"%s\"",                                  \
+		                      plnum,                                                                 \
+		                      static_cast<long unsigned int>((file).GetSize() - (file).GetPos()),    \
+		                      filename);
 
 // FIXME: Legacy code deprecated since build18
-template<uint8_t const Size> struct BitInBuffer {
+template <uint8_t const Size> struct BitInBuffer {
 	static_assert(Size == 1 or Size == 2 or Size == 4, "Unexpected Size.");
-	BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {m_fr = fr;}
+	BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {
+		m_fr = fr;
+	}
 
 	uint8_t get() {
-		if (mask == 0x00) {buffer = m_fr->Unsigned8(); mask = 0xff;}
+		if (mask == 0x00) {
+			buffer = m_fr->Unsigned8();
+			mask = 0xff;
+		}
 		uint8_t const result = buffer >> (8 - Size);
 		buffer <<= Size;
-		mask   <<= Size;
+		mask <<= Size;
 		assert(result < (1 << Size));
 		return result;
 	}
+
 private:
 	FileRead* m_fr;
 	uint8_t buffer, mask;
 };
+
+// Errors for the Read* functions.
+struct tribe_nonexistent : public FileRead::_data_error {
+	tribe_nonexistent(char const* const Name)
+	   : _data_error("tribe \"%s\" does not exist", Name), name(Name) {
+	}
+	char const* const name;
+};
+struct tribe_immovable_nonexistent : public FileRead::_data_error {
+	tribe_immovable_nonexistent(const std::string& Tribename, const std::string& Name)
+	   : _data_error(
+	        "tribe %s does not define immovable type \"%s\"", Tribename.c_str(), Name.c_str()),
+	     tribename(Tribename),
+	     name(Name) {
+	}
+	virtual ~tribe_immovable_nonexistent() throw() {
+	}
+	std::string tribename;
+	std::string name;
+};
+struct world_immovable_nonexistent : public FileRead::_data_error {
+	world_immovable_nonexistent(char const* const Worldname, char const* const Name)
+	   : _data_error("world %s does not define immovable type \"%s\"", Worldname, Name),
+	     worldname(Worldname),
+	     name(Name) {
+	}
+	char const* const worldname, *const name;
+};
+struct building_nonexistent : public FileRead::_data_error {
+	building_nonexistent(const std::string& Tribename, char const* const Name)
+	   : _data_error("tribe %s does not define building type \"%s\"", Tribename.c_str(), Name),
+	     tribename(Tribename),
+	     name(Name) {
+	}
+	const std::string& tribename;
+	char const* const name;
+};
+
+// Reads a CString and interprets t as the name of an immovable type.
+//
+// \returns a reference to the immovable type description.
+//
+// \throws Immovable_Nonexistent if there is no imovable type with that
+// name in the tribe.
+const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const Tribe_Descr& tribe) {
+	std::string name = fr->CString();
+	int32_t const index = tribe.get_immovable_index(name);
+	if (index == -1)
+		throw tribe_immovable_nonexistent(tribe.name(), name);
+	return *tribe.get_immovable_descr(index);
 }
+
+// Reads a CString and interprets it as the name of a tribe.
+//
+// \returns a pointer to the tribe description.
+//
+// \throws Tribe_Nonexistent if the there is no tribe with that name.
+const Tribe_Descr& ReadTribe(StreamRead* fr, const Editor_Game_Base& egbase) {
+	char const* const name = fr->CString();
+	if (Tribe_Descr const* const result = egbase.get_tribe(name))
+		return *result;
+	else
+		throw tribe_nonexistent(name);
+}
+
+// Reads a CString and interprets it as the name of a tribe.
+//
+// \returns 0 if the name is empty, otherwise a pointer to the tribe
+// description.
+//
+// \throws Tribe_Nonexistent if the name is not empty and there is no tribe
+// with that name.
+Tribe_Descr const* ReadTribe_allow_null(StreamRead* fr, const Editor_Game_Base& egbase) {
+	char const* const name = fr->CString();
+	if (*name)
+		if (Tribe_Descr const* const result = egbase.get_tribe(name))
+			return result;
+		else
+			throw tribe_nonexistent(name);
+	else
+		return nullptr;
+}
+
+// Reads a CString and interprets t as the name of an immovable type.
+//
+// \returns a reference to the immovable type description.
+//
+// \throws Immovable_Nonexistent if there is no imovable type with that
+// name in the World.
+const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const World& world) {
+	char const* const name = fr->CString();
+	int32_t const index = world.get_immovable_index(name);
+	if (index == -1)
+		throw world_immovable_nonexistent(world.get_name(), name);
+	return *world.get_immovable_descr(index);
+}
+
+// Calls Tribe_allow_null(const Editor_Game_Base &). If it returns a tribe,
+// Immovable_Type(const Tribe_Descr &) is called with that tribe and the
+// result is returned. Otherwise Immovable_Type(const World &) is called
+// and the result is returned.
+const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
+	if (Tribe_Descr const* const tribe = ReadTribe_allow_null(fr, egbase))
+		return ReadImmovable_Type(fr, *tribe);
+	else
+		return ReadImmovable_Type(fr, egbase.map().world());
+}
+
+// Reads a CString and interprets t as the name of an immovable type.
+//
+// \returns a reference to the building type description.
+//
+// \throws Building_Nonexistent if there is no building type with that
+const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe) {
+	char const* const name = fr->CString();
+	Building_Index const index = tribe.building_index(name);
+	if (index == INVALID_INDEX)
+		throw building_nonexistent(tribe.name(), name);
+	return *tribe.get_building_descr(index);
+}
+
+// Calls ReadTribe(const Editor_Game_Base &) to read a tribe and then reads a
+// CString and interprets it as the name of a building type in that tribe.
+//
+// \returns a reference to the building type description.
+const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
+	return ReadBuilding_Type(fr, ReadTribe(fr, egbase));
+}
+
+}  // namespace
 
 inline static Map_Object_Data read_unseen_immovable
 	(const Editor_Game_Base & egbase,

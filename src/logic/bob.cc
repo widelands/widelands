@@ -36,6 +36,7 @@
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
+#include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"

@@ -35,9 +35,9 @@
 #include "port.h"
 #include "ref_cast.h"
 
-
-struct DirAnimations;
+class FileRead;
 class RenderTarget;
+struct DirAnimations;
 namespace UI {struct Tab_Panel;}
 
 namespace Widelands {

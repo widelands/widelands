@@ -25,10 +25,11 @@
 
 #include <stdint.h>
 
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "scripting/eris/lua.hpp"
 #include "scripting/lua_errors.h"
+
+class FileRead;
 
 namespace Widelands {
 	class Editor_Game_Base;

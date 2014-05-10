@@ -36,6 +36,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
+#include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "ref_cast.h"

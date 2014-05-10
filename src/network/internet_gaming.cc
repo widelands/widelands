@@ -26,6 +26,7 @@
 #include "compile_diagnostics.h"
 #include "i18n.h"
 #include "io/dedicated_log.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "network/internet_gaming_messages.h"

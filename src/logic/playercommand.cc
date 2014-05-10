@@ -21,6 +21,7 @@
 
 #include "economy/economy.h"
 #include "economy/wares_queue.h"
+#include "io/fileread.h"
 #include "io/streamwrite.h"
 #include "log.h"
 #include "logic/game.h"
@@ -30,8 +31,8 @@
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
+#include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"

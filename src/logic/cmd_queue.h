@@ -23,8 +23,9 @@
 #include <queue>
 
 #include "logic/queue_cmd_ids.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
+
+class FileRead;
 
 namespace Widelands {
 

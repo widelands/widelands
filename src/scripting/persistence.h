@@ -22,9 +22,10 @@
 
 #include <string>
 
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "scripting/eris/lua.hpp"
+
+class FileRead;
 
 namespace Widelands {
 	class Map_Map_Object_Loader;

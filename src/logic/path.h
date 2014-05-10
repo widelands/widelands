@@ -23,9 +23,10 @@
 #include <vector>
 
 #include "logic/widelands.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/widelands_geometry.h"
+
+class FileRead;
 
 namespace Widelands {
 

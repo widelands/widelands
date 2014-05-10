@@ -40,20 +40,33 @@
 class FileRead : public StreamRead {
 public:
 	struct Pos {
-		Pos(size_t const p = 0) : pos(p) {}
+		Pos(size_t const p = 0) : pos(p) {
+		}
 		/// Returns a special value indicating invalidity.
-		static Pos Null() {return std::numeric_limits<size_t>::max();}
+		static Pos Null() {
+			return std::numeric_limits<size_t>::max();
+		}
 
-		bool isNull() const {return *this == Null();}
-		operator size_t() const {return pos;}
-		Pos operator++ () {return ++pos;}
-		Pos operator+= (Pos const other) {return pos += other.pos;}
+		bool isNull() const {
+			return *this == Null();
+		}
+		operator size_t() const {
+			return pos;
+		}
+		Pos operator++() {
+			return ++pos;
+		}
+		Pos operator+=(Pos const other) {
+			return pos += other.pos;
+		}
+
 	private:
 		size_t pos;
 	};
 
 	struct File_Boundary_Exceeded : public StreamRead::_data_error {
-		File_Boundary_Exceeded() : StreamRead::_data_error("end of file") {}
+		File_Boundary_Exceeded() : StreamRead::_data_error("end of file") {
+		}
 	};
 
 	/// Create the object with nothing to read.
@@ -64,19 +77,19 @@ public:
 	// See base class.
 	size_t Data(void* dst, size_t bufsize) override;
 	bool EndOfFile() const override;
-	char const * CString() override;
+	char const* CString() override;
 
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
 	/// so that text files can be handled like a null-terminated string.
 	/// \throws an exception if the file couldn't be loaded for whatever reason.
 	/// \todo error handling
-	void Open(FileSystem & fs, const char * const filename);
+	void Open(FileSystem& fs, const char* const filename);
 
 	// As open, but tries to use mmap.
-	void fastOpen(FileSystem & fs, const char * const filename);
+	void fastOpen(FileSystem& fs, const char* const filename);
 
 	/// Works just like Open, but returns false when the load fails.
-	bool TryOpen(FileSystem & fs, const char * const filename);
+	bool TryOpen(FileSystem& fs, const char* const filename);
 
 	/// Frees allocated memory.
 	void Close();
@@ -94,19 +107,19 @@ public:
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
-	char * Data(uint32_t const bytes, const Pos pos = Pos::Null()) ;
+	char* Data(uint32_t const bytes, const Pos pos = Pos::Null());
 
 	// Returns the whole file as a string starting from 'pos'.
 	char* CString(Pos const pos);
 
 	// Returns the next line.
-	char * ReadLine();
+	char* ReadLine();
 
 private:
-	char * data_;
+	char* data_;
 	size_t length_;
-	Pos    filepos_;
-	bool   fast_;
+	Pos filepos_;
+	bool fast_;
 };
 
 #endif

@@ -26,13 +26,13 @@
 
 #include <SDL_net.h>
 
+#include "io/streamread.h"
 #include "logic/cmd_queue.h"
-#include "logic/widelands_streamread.h"
 #include "logic/widelands_streamwrite.h"
 #include "network/network_protocol.h"
 
-
 class Deserializer;
+class FileRead;
 
 struct SyncCallback {
 	virtual ~SyncCallback() {}

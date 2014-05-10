@@ -22,8 +22,7 @@
 
 #include <map>
 
-#include "logic/widelands.h"
-#include "logic/widelands_streamread.h"
+#include "io/fileread.h"
 #include "logic/widelands_filewrite.h"
 
 struct Section;
