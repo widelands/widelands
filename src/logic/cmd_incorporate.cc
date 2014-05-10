@@ -20,7 +20,7 @@
 #include "logic/cmd_incorporate.h"
 
 #include "i18n.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"

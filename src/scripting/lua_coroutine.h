@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "scripting/eris/lua.hpp"
 
@@ -66,7 +66,7 @@ private:
 	// Input/Output for coroutines. Do not call directly, instead use
 	// LuaGameInterface methods for this.
 	void write(Widelands::FileWrite&);
-	void read(lua_State*, Widelands::FileRead&);
+	void read(lua_State*, FileRead&);
 
 	lua_State* m_L;
 	uint32_t m_idx;

@@ -23,6 +23,7 @@
 #include <cassert>
 
 #include "io/streamread.h"
+#include "io/fileread.h" // NOCOM(#sirver): should probably not be needed here. But in .cc files.
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 

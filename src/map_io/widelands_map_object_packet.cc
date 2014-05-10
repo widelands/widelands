@@ -27,7 +27,7 @@
 #include "logic/immovable.h"
 #include "logic/map.h"
 #include "logic/ship.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"

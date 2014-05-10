@@ -136,10 +136,10 @@ const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const World& world) {
 }
 
 const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
-	if (Tribe_Descr const* const tribe = Tribe_allow_null(egbase))
-		return ReadImmovable_Type(*tribe);
+	if (Tribe_Descr const* const tribe = ReadTribe_allow_null(fr, egbase))
+		return ReadImmovable_Type(fr, *tribe);
 	else
-		return ReadImmovable_Type(egbase.map().world());
+		return ReadImmovable_Type(fr, egbase.map().world());
 }
 
 const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe) {
@@ -151,7 +151,7 @@ const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe
 }
 
 const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
-	return ReadBuilding_Type(ReadTribe(fr, egbase));
+	return ReadBuilding_Type(fr, ReadTribe(fr, egbase));
 }
 
 }

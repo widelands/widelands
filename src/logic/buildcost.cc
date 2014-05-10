@@ -70,9 +70,7 @@ void Buildcost::save
 	fw.CString("");
 }
 
-void Buildcost::load
-	(Widelands::FileRead & fr, const Widelands::Tribe_Descr & tribe)
-{
+void Buildcost::load(FileRead& fr, const Widelands::Tribe_Descr& tribe) {
 	clear();
 
 	for (;;) {

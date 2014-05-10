@@ -25,7 +25,7 @@
 #include "logic/instances.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/worker.h"
 #include "machdep.h"
 #include "upcast.h"

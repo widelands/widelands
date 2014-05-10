@@ -52,7 +52,7 @@ void Map_Scripting_Data_Packet::Read
 	// coroutines could run. But make sure that this is really a game, other
 	// wise this makes no sense.
 	upcast(Game, g, &egbase);
-	Widelands::FileRead fr;
+	FileRead fr;
 	if (g and fr.TryOpen(fs, "scripting/globals.dump"))
 	{
 		const uint32_t sentinel = fr.Unsigned32();

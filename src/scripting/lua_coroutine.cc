@@ -117,7 +117,7 @@ void LuaCoroutine::write(Widelands::FileWrite& fw) {
 	fw.Unsigned32(m_idx);
 }
 
-void LuaCoroutine::read(lua_State* parent, Widelands::FileRead& fr) {
+void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
 	uint8_t version = fr.Unsigned8();
 
 	if (version != COROUTINE_DATA_PACKET_VERSION)

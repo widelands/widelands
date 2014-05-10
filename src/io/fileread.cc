@@ -36,7 +36,7 @@ void FileRead::Open(FileSystem& fs, const char* const filename) {
 
 void FileRead::fastOpen(FileSystem& fs, const char* const filename) {
 	data_ = static_cast<char*>(fs.fastLoad(filename, length_, fast_));
-	filepos = 0;
+	filepos_ = 0;
 }
 
 bool FileRead::TryOpen(FileSystem& fs, const char* const filename) {
@@ -78,7 +78,7 @@ void FileRead::SetFilePos(Pos const pos) {
 	filepos_ = pos;
 }
 
-Pos FileRead::GetPos() const {
+FileRead::Pos FileRead::GetPos() const {
 	return filepos_;
 }
 
@@ -91,7 +91,7 @@ size_t FileRead::Data(void* dst, size_t bufsize) {
 	return read;
 }
 
-char* FileRead::Data(uint32_t const bytes, const Pos pos = Pos::Null()) {
+char* FileRead::Data(uint32_t const bytes, const Pos pos) {
 	assert(data_);
 
 	Pos i = pos;

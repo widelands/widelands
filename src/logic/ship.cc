@@ -961,7 +961,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
 				uint8_t numofports = fr.Unsigned8();
 				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(fr.Coords32());
+					m_expedition->seen_port_buildspaces->push_back(ReadCoords32(&fr));
 				// Swimability of the directions
 				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
 					m_expedition->swimable[i] = (fr.Unsigned8() == 1);
@@ -970,7 +970,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				// current direction
 				m_expedition->direction = fr.Unsigned8();
 				// Start coordinates of an island exploration
-				m_expedition->exploration_start = fr.Coords32();
+				m_expedition->exploration_start = ReadCoords32(&fr);
 				// Whether the exploration is done clockwise or counter clockwise
 				m_expedition->clockwise = fr.Unsigned8() == 1;
 			}

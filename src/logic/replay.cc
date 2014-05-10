@@ -91,8 +91,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 		gl.load_game();
 	}
 
-	m_cmdlog =
-		static_cast<Widelands::StreamRead *>(g_fs->OpenStreamRead(filename));
+	m_cmdlog = g_fs->OpenStreamRead(filename);
 
 	try {
 		const uint32_t magic = m_cmdlog->Unsigned32();

@@ -49,7 +49,7 @@
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"

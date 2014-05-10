@@ -786,7 +786,7 @@ void InternetGaming::send(const std::string & msg) {
 				temp = arg.substr(1); // cut of the "%"
 				if (g_fs->FileExists(temp) && !g_fs->IsDirectory(temp)) {
 					// Read in the file
-					Widelands::FileRead fr;
+					FileRead fr;
 					fr.Open(*g_fs, temp.c_str());
 					if (!fr.EndOfFile()) {
 						arg = fr.ReadLine();

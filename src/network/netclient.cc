@@ -593,9 +593,7 @@ void NetClient::setPaused(bool /* paused */)
 {
 }
 
-void NetClient::recvOnePlayer
-	(uint8_t const number, Widelands::StreamRead & packet)
-{
+void NetClient::recvOnePlayer(uint8_t const number, StreamRead& packet) {
 	if (number >= d->settings.players.size())
 		throw DisconnectException("PLAYER_UPDATE_FOR_N_E_P");
 
@@ -611,9 +609,7 @@ void NetClient::recvOnePlayer
 	player.shared_in = packet.Unsigned8();
 }
 
-void NetClient::recvOneUser
-	(uint32_t const number, Widelands::StreamRead & packet)
-{
+void NetClient::recvOneUser(uint32_t const number, StreamRead& packet) {
 	if (number > d->settings.users.size())
 		throw DisconnectException("USER_UPDATE_FOR_N_E_U");
 

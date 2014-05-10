@@ -24,7 +24,7 @@
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 
 namespace Widelands {

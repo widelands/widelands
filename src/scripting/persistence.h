@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "scripting/eris/lua.hpp"
 
@@ -47,7 +47,7 @@ uint32_t persist_object
 // stack after the function returns.
 void unpersist_object
 	(lua_State * L,
-	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	 FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size);
 
 #endif /* end of include guard: PERSISTENCE_H */

@@ -38,7 +38,7 @@
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
@@ -599,7 +599,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	}
 
 	// Position
-	imm.m_position = fr.Coords32(egbase().map().extent());
+	imm.m_position = ReadCoords32(&fr, egbase().map().extent());
 	imm.set_position(egbase(), imm.m_position);
 
 	// Animation

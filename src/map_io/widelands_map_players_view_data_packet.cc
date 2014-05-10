@@ -30,7 +30,6 @@
 #include "logic/instances.h" //for g_flag_descr
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_streamread_inlines.h"
 #include "logic/widelands_streamwrite_inlines.h"
 #include "upcast.h"
 
@@ -190,17 +189,17 @@ inline static Map_Object_Data read_unseen_immovable
 		case 0:  //  The player sees no immovable.
 			m.map_object_descr = nullptr;                                       break;
 		case 1: //  The player sees a tribe or world immovable.
-			m.map_object_descr = &immovables_file.Immovable_Type(egbase); break;
+			m.map_object_descr = &ReadImmovable_Type(&immovables_file, egbase); break;
 		case 2:  //  The player sees a flag.
 			m.map_object_descr = &g_flag_descr;                           break;
 		case 3: //  The player sees a building.
-			m.map_object_descr = &immovables_file.Building_Type (egbase);
+			m.map_object_descr = &ReadBuilding_Type(&immovables_file, egbase);
 			if (version > 1) {
 				// Read data from immovables file
 				if (immovables_file.Unsigned8() == 1) { // the building is a constructionsite
-					m.csi.becomes       = &immovables_file.Building_Type(egbase);
+					m.csi.becomes       = &ReadBuilding_Type(&immovables_file, egbase);
 					if (immovables_file.Unsigned8() == 1)
-						m.csi.was        = &immovables_file.Building_Type(egbase);
+						m.csi.was        = &ReadBuilding_Type(&immovables_file, egbase);
 					m.csi.totaltime     =  immovables_file.Unsigned32();
 					m.csi.completedtime =  immovables_file.Unsigned32();
 				}

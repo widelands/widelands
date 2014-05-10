@@ -108,7 +108,7 @@ private:
 /**
  * One packet, as received by the deserializer.
  */
-struct RecvPacket : public Widelands::StreamRead {
+struct RecvPacket : public StreamRead {
 public:
 	RecvPacket(Deserializer &);
 

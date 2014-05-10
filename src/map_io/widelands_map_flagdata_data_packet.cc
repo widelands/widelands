@@ -28,7 +28,7 @@
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
@@ -76,7 +76,7 @@ void Map_Flagdata_Data_Packet::Read
 							(upcast
 							 	(Flag const,
 							 	 mf,
-							 	 map[flag.m_position = fr.Coords32(extent)]
+							 	 map[flag.m_position = ReadCoords32(&fr, extent)]
 							 	 .get_immovable()))
 						{
 							if (mf != &flag)

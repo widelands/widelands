@@ -23,7 +23,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/queue_cmd_factory.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "upcast.h"
 

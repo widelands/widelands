@@ -41,7 +41,7 @@
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/worker.h"
 #include "logic/world.h"
 #include "parse_map_object_types.h"

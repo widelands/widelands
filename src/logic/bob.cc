@@ -1106,12 +1106,12 @@ void Bob::Loader::load(FileRead & fr)
 		bob.set_owner(owner);
 	}
 
-	bob.set_position(egbase(), fr.Coords32());
+	bob.set_position(egbase(), ReadCoords32(&fr));
 
 	std::string animname = fr.CString();
 	bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
 	bob.m_animstart = fr.Signed32();
-	bob.m_walking = static_cast<WalkingDir>(fr.Direction8_allow_null());
+	bob.m_walking = static_cast<WalkingDir>(ReadDirection8_allow_null(&fr));
 	if (bob.m_walking) {
 		bob.m_walkstart = fr.Signed32();
 		bob.m_walkend = fr.Signed32();
@@ -1133,7 +1133,7 @@ void Bob::Loader::load(FileRead & fr)
 		state.ivar3 = fr.Signed32();
 		loadstate.objvar1 = fr.Unsigned32();
 		state.svar1 = fr.CString();
-		state.coords = fr.Coords32_allow_null(egbase().map().extent());
+		state.coords = ReadCoords32_allow_null(&fr, egbase().map().extent());
 
 		if (fr.Unsigned8()) {
 			uint32_t anims[6];

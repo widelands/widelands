@@ -46,7 +46,7 @@
 #include "io/streamwrite.h"
 #include "log.h"
 #include "logic/roadtype.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"

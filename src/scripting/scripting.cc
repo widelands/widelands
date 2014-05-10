@@ -315,7 +315,7 @@ LuaGameInterface::LuaGameInterface(Widelands::Game * g)
 LuaGameInterface::~LuaGameInterface() {
 }
 
-LuaCoroutine* LuaGameInterface::read_coroutine(Widelands::FileRead& fr) {
+LuaCoroutine* LuaGameInterface::read_coroutine(FileRead& fr) {
 	LuaCoroutine * rv = new LuaCoroutine(nullptr);
 	rv->read(m_L, fr);
 	return rv;
@@ -327,7 +327,7 @@ void LuaGameInterface::write_coroutine(Widelands::FileWrite& fw, LuaCoroutine* c
 
 
 void LuaGameInterface::read_global_env
-	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	(FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
 	// Clean out the garbage before loading.

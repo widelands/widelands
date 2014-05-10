@@ -25,7 +25,7 @@
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/ship.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "upcast.h"
 

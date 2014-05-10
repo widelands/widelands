@@ -30,7 +30,7 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
@@ -108,7 +108,7 @@ void Map_Roaddata_Data_Packet::Read
 					Path p(road.m_flags[0]->get_position());
 					for (Path::Step_Vector::size_type i = nr_steps; i; --i)
 						try {
-							p.append(egbase.map(), fr.Direction8());
+							p.append(egbase.map(), ReadDirection8(&fr));
 						} catch (const _wexception & e) {
 							throw game_data_error
 								("step #%lu: %s",

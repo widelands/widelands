@@ -23,7 +23,7 @@
 #include "logic/requirements.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "trackptr.h"
 

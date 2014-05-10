@@ -40,7 +40,7 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
@@ -983,7 +983,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 					uint32_t serial = fr.Unsigned32();
 					if (serial)
 						productionsite.m_stack[i].objvar = &mol.get<Map_Object>(serial);
-					productionsite.m_stack[i].coord = fr.Coords32_allow_null(game.map().extent());
+					productionsite.m_stack[i].coord = ReadCoords32_allow_null(&fr, game.map().extent());
 				}
 			}
 			productionsite.m_program_timer = fr.Unsigned8();

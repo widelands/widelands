@@ -31,7 +31,7 @@
 #include "log.h"
 #include "logic/critter_bob.h"
 #include "logic/game_data_error.h"
-#include "logic/widelands_fileread.h"
+#include "logic/widelands_streamread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worlddata.h"
 #include "parse_map_object_types.h"
