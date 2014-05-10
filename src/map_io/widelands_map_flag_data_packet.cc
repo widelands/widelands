@@ -58,7 +58,7 @@ void Map_Flag_Data_Packet::Read
 			Widelands::Extent const extent = map.extent();
 			iterate_Map_FCoords(map, extent, fc)
 				if (fr.Unsigned8()) {
-					Player_Number const owner  = fr.Player_Number8(nr_players);
+					Player_Number const owner  = ReadPlayer_Number8(&fr, nr_players);
 					Serial        const serial = fr.Unsigned32();
 
 					try {

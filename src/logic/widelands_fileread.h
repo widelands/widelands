@@ -23,6 +23,9 @@
 #include "io/basic_fileread.h"
 #include "logic/widelands_streamread.h"
 
-namespace Widelands {typedef basic_FileRead<StreamRead> FileRead;}
+// NOCOM(#sirver): nonsense
+namespace Widelands {
+typedef ::FileRead FileRead;
+}
 
 #endif

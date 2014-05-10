@@ -64,7 +64,7 @@ void Game_Player_Economies_Data_Packet::Read
 						} else {
 							bool read_this_economy = false;
 
-							Bob* bob = map[fr.Map_Index32(max_index)].get_first_bob();
+							Bob* bob = map[ReadMap_Index32(&fr, max_index)].get_first_bob();
 							while (bob) {
 								if (upcast(Ship const, ship, bob)) {
 									assert(ship->get_economy());

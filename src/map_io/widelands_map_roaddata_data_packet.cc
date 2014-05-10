@@ -71,7 +71,7 @@ void Map_Roaddata_Data_Packet::Read
 					Road & road = mol.get<Road>(serial);
 					if (mol.is_object_loaded(road))
 						throw game_data_error("already loaded");
-					Player & plr = egbase.player(fr.Player_Number8(nr_players));
+					Player & plr = egbase.player(ReadPlayer_Number8(&fr, nr_players));
 
 					road.set_owner(&plr);
 					if (4 <= packet_version) {

@@ -42,8 +42,7 @@ void Game_Interactive_Player_Data_Packet::Read
 		fr.Open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Player_Number player_number =
-				fr.Player_Number8(game.map().get_nrplayers());
+			Player_Number player_number = ReadPlayer_Number8(&fr, game.map().get_nrplayers());
 			if (not game.get_player(player_number)) {
 				// This happens if the player, that saved the game, was a spectator
 				// and the slot for player 1 was not used in the game.

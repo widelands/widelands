@@ -47,8 +47,7 @@ void Game_Player_Info_Data_Packet::Read
 				if (fr.Unsigned8()) {
 					bool    const see_all = fr.Unsigned8();
 
-					int32_t const plnum   =
-						packet_version < 7 ? fr.Signed32() : fr.Player_Number8();
+					int32_t const plnum   = fr.Unsigned8();
 					if (plnum < 1 or MAX_PLAYERS < plnum)
 						throw game_data_error
 							("player number (%i) is out of range (1 .. %u)",

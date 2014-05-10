@@ -477,7 +477,7 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 
 	pd.m_dockpoints.resize(nrdockpoints);
 	for (uint16_t i = 0; i < nrdockpoints; ++i) {
-		pd.m_dockpoints[i] = fr.Coords32(egbase().map().extent());
+		pd.m_dockpoints[i] = ReadCoords32(&fr, egbase().map().extent());
 		pd.set_position(egbase(), pd.m_dockpoints[i]);
 	}
 
