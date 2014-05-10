@@ -69,7 +69,7 @@ void Map_Extradata_Data_Packet::Read
 					if (!g_gr->images().has(hash)) {
 						FileRead fr;
 
-						fr.Open(fs, pname->c_str());
+						fr.Open(fs, *pname);
 						SDL_Surface * const surf =
 							IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 						if (!surf)

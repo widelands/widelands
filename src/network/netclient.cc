@@ -753,7 +753,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// host. If it is a ziped file, we can check, whether the host and the client have got the same file.
 			if (!g_fs->IsDirectory(path)) {
 				FileRead fr;
-				fr.Open(*g_fs, path.c_str());
+				fr.Open(*g_fs, path);
 				if (bytes == fr.GetSize()) {
 					std::unique_ptr<char[]> complete(new char[bytes]);
 					if (!complete) throw wexception("Out of memory");
@@ -838,7 +838,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 			// Check for consistence
 			FileRead fr;
-			fr.Open(*g_fs, file->filename.c_str());
+			fr.Open(*g_fs, file->filename);
 
 			std::unique_ptr<char[]> complete(new char[file->bytes]);
 			if (!complete) throw wexception("Out of memory");

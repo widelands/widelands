@@ -27,13 +27,13 @@ FileRead::~FileRead() {
 	}
 }
 
-void FileRead::Open(FileSystem& fs, const char* const filename) {
+void FileRead::Open(FileSystem& fs, const std::string& filename) {
 	assert(!data_);
 	data_ = static_cast<char*>(fs.Load(filename, length_));
 	filepos_ = 0;
 }
 
-bool FileRead::TryOpen(FileSystem& fs, const char* const filename) {
+bool FileRead::TryOpen(FileSystem& fs, const std::string& filename) {
 	try {
 		Open(fs, filename);
 	}

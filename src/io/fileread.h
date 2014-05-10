@@ -31,8 +31,6 @@
 #include "io/streamread.h"
 #include "machdep.h"
 
-// NOCOM(#sirver): kille use of bare char* pointers?
-
 /// Can be used to read a file. It works quite naively by reading the entire
 /// file into memory. Convenience functions are available for endian-safe
 /// access of common data types.
@@ -82,10 +80,12 @@ public:
 	/// so that text files can be handled like a null-terminated string.
 	/// \throws an exception if the file couldn't be loaded for whatever reason.
 	/// \todo error handling
-	void Open(FileSystem& fs, const char* const filename);
+	void Open(FileSystem& fs, const std::string& filename);
 
 	/// Works just like Open, but returns false when the load fails.
-	bool TryOpen(FileSystem& fs, const char* const filename);
+	// TODO(sirver): This method can be expressed through Open() and should not
+	// be part of the public API, rather a stand alone function.
+	bool TryOpen(FileSystem& fs, const std::string& filename);
 
 	/// Frees allocated memory.
 	void Close();

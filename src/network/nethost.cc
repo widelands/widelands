@@ -1537,7 +1537,7 @@ void NetHost::setMap
 	if (!g_fs->IsDirectory(mapfilename)) {
 		// Read in the file
 		FileRead fr;
-		fr.Open(*g_fs, mapfilename.c_str());
+		fr.Open(*g_fs, mapfilename);
 		if (file)
 			delete file;
 		file = new NetTransferFile();

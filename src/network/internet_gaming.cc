@@ -788,7 +788,7 @@ void InternetGaming::send(const std::string & msg) {
 				if (g_fs->FileExists(temp) && !g_fs->IsDirectory(temp)) {
 					// Read in the file
 					FileRead fr;
-					fr.Open(*g_fs, temp.c_str());
+					fr.Open(*g_fs, temp);
 					if (!fr.EndOfFile()) {
 						arg = fr.ReadLine();
 						while (!fr.EndOfFile()) {

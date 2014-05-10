@@ -42,6 +42,7 @@ inline void StreamWrite::Building_Type(const Building_Descr & building) {
 	Tribe (building.tribe());
 	String(building.name());
 }
+// NOCOM(#sirver): kill this file and Widelands::StreamWrite
 
 }
 

@@ -345,7 +345,7 @@ bool Tribe_Descr::exists_tribe
 
 	LuaInterface lua;
 	FileRead f;
-	if (f.TryOpen(*g_fs, buf.c_str())) {
+	if (f.TryOpen(*g_fs, buf)) {
 		if (info)
 			try {
 				Profile prof(buf.c_str());
