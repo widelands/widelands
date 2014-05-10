@@ -31,7 +31,6 @@
 #include "io/streamread.h"
 #include "machdep.h"
 
-// NOCOM(#sirver): kill mmap methods?
 // NOCOM(#sirver): kille use of bare char* pointers?
 
 /// Can be used to read a file. It works quite naively by reading the entire
@@ -85,9 +84,6 @@ public:
 	/// \todo error handling
 	void Open(FileSystem& fs, const char* const filename);
 
-	// As open, but tries to use mmap.
-	void fastOpen(FileSystem& fs, const char* const filename);
-
 	/// Works just like Open, but returns false when the load fails.
 	bool TryOpen(FileSystem& fs, const char* const filename);
 
@@ -119,7 +115,6 @@ private:
 	char* data_;
 	size_t length_;
 	Pos filepos_;
-	bool fast_;
 };
 
 #endif

@@ -19,7 +19,7 @@
 
 #include "io/fileread.h"
 
-FileRead::FileRead() : data_(nullptr), length_(0), fast_(0) {};
+FileRead::FileRead() : data_(nullptr), length_(0) {};
 
 FileRead::~FileRead() {
 	if (data_) {
@@ -29,13 +29,7 @@ FileRead::~FileRead() {
 
 void FileRead::Open(FileSystem& fs, const char* const filename) {
 	assert(!data_);
-
 	data_ = static_cast<char*>(fs.Load(filename, length_));
-	filepos_ = 0;
-}
-
-void FileRead::fastOpen(FileSystem& fs, const char* const filename) {
-	data_ = static_cast<char*>(fs.fastLoad(filename, length_, fast_));
 	filepos_ = 0;
 }
 
@@ -51,15 +45,7 @@ bool FileRead::TryOpen(FileSystem& fs, const char* const filename) {
 
 void FileRead::Close() {
 	assert(data_);
-	if (fast_) {
-#ifdef _WIN32
-		assert(false);
-#else
-		munmap(data_, length_);
-#endif
-	} else {
-		free(data_);
-	}
+	free(data_);
 	data_ = nullptr;
 }
 
@@ -93,7 +79,6 @@ size_t FileRead::Data(void* dst, size_t bufsize) {
 
 char* FileRead::Data(uint32_t const bytes, const Pos pos) {
 	assert(data_);
-
 	Pos i = pos;
 	if (pos.isNull()) {
 		i = filepos_;
