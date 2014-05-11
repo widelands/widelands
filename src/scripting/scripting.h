@@ -25,11 +25,11 @@
 
 #include <stdint.h>
 
-#include "logic/widelands_filewrite.h"
 #include "scripting/eris/lua.hpp"
 #include "scripting/lua_errors.h"
 
 class FileRead;
+class FileWrite;
 
 namespace Widelands {
 	class Editor_Game_Base;
@@ -76,13 +76,13 @@ public:
 
 	// Input/output for coroutines.
 	LuaCoroutine* read_coroutine(FileRead&);
-	void write_coroutine(Widelands::FileWrite&, LuaCoroutine*);
+	void write_coroutine(FileWrite&, LuaCoroutine*);
 
 	// Input output for the global game state.
 	void read_global_env
 		(FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
 	uint32_t write_global_env
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+		(FileWrite &, Widelands::Map_Map_Object_Saver &);
 
 private:
 	std::unique_ptr<GameFactory> m_factory;

@@ -21,6 +21,8 @@
 
 #include <algorithm>
 
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/map.h"
@@ -64,13 +66,13 @@ void Path::append(const Map & map, const Direction dir) {
 void Path::save(FileWrite & fw) const
 {
 	fw.Unsigned8(1); // version number
-	fw.Coords32(m_start);
+	WriteCoords32(&fw, m_start);
 
 	// Careful: steps are stored in the reverse order in m_path
 	// However, we save them in the forward order, to make loading easier
 	fw.Unsigned32(m_path.size());
 	for (uint32_t i = m_path.size(); i > 0; --i)
-		fw.Direction8(m_path[i - 1]);
+		WriteDirection8(&fw, m_path[i - 1]);
 }
 
 /**

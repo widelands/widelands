@@ -30,6 +30,7 @@
 #include "graphic/rendertarget.h"
 #include "helper.h"
 #include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -39,7 +40,6 @@
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_filewrite.h"
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
@@ -701,8 +701,8 @@ void Immovable::save
 	// The main loading data follows
 	BaseImmovable::save(egbase, mos, fw);
 
-	fw.Player_Number8(get_owner() ? get_owner()->player_number() : 0);
-	fw.Coords32(m_position);
+	fw.Unsigned8(get_owner() ? get_owner()->player_number() : 0);
+	WriteCoords32(&fw, m_position);
 
 	// Animations
 	fw.String(descr().get_animation_name(m_anim));

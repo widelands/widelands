@@ -96,6 +96,18 @@ Coords ReadCoords32_allow_null(StreamRead* fr, const Extent& extent);
 
 Area<Coords, uint16_t> ReadArea48(StreamRead* fr, const Extent& extent);
 
+// Writes 'd' to 'wr'.
+void WriteDirection8(StreamWrite* wr, Direction const d);
+
+// Writes 'd' into 'wr'.
+void WriteDirection8_allow_null(StreamWrite* wr, Direction const d);
+
+// Writes 'c' to 'wr'.
+void WriteCoords32(StreamWrite* wr, const Coords& c);
+
+// Writes 'area' to 'wr'.
+void WriteArea48(StreamWrite* wr, Area<Coords, uint16_t> const area);
+
 }  // namespace Widelands
 
 #endif /* end of include guard: WIDELANDS_GEOMETRY_IO_H */

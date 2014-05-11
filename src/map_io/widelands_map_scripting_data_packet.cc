@@ -24,6 +24,8 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -88,10 +90,10 @@ void Map_Scripting_Data_Packet::Write
 
 	// Dump the global environment if this is a game and not in the editor
 	if (upcast(Game, g, &egbase)) {
-		Widelands::FileWrite fw;
+		FileWrite fw;
 		fw.Unsigned32(0xDEADBEEF);  // Sentinel, because there was no packet version.
 		fw.Unsigned32(SCRIPTING_DATA_PACKET_VERSION);
-		const Widelands::FileWrite::Pos pos = fw.GetPos();
+		const FileWrite::Pos pos = fw.GetPos();
 		fw.Unsigned32(0); // N bytes written, follows below
 
 		upcast(LuaGameInterface, lgi, &g->lua());

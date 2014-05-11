@@ -23,6 +23,7 @@
 #include "economy/fleet.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/expedition_bootstrap.h"
 #include "logic/game.h"
@@ -563,7 +564,7 @@ void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileW
 	fw.Unsigned32(mos.get_object_file_index(*m_warehouse));
 	fw.Unsigned16(m_dockpoints.size());
 	container_iterate_const(PositionList, m_dockpoints, it) {
-		fw.Coords32(*it);
+		WriteCoords32(&fw, *it);
 	}
 
 	fw.Unsigned8(m_need_ship);

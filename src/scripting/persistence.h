@@ -22,10 +22,10 @@
 
 #include <string>
 
-#include "logic/widelands_filewrite.h"
 #include "scripting/eris/lua.hpp"
 
 class FileRead;
+class FileWrite;
 
 namespace Widelands {
 	class Map_Map_Object_Loader;
@@ -42,7 +42,7 @@ namespace Widelands {
  */
 uint32_t persist_object
 	(lua_State * L,
-	 Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+	 FileWrite &, Widelands::Map_Map_Object_Saver &);
 
 // Does all the unpersisting work. The unpersisted object is at the top of the
 // stack after the function returns.

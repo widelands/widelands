@@ -22,6 +22,7 @@
 #include "economy/economy.h"
 #include "economy/wares_queue.h"
 #include "io/fileread.h"
+#include "io/filewrite.h"
 #include "io/streamwrite.h"
 #include "log.h"
 #include "logic/game.h"
@@ -31,7 +32,6 @@
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "logic/widelands_filewrite.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
@@ -244,7 +244,7 @@ void Cmd_Build::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_BUILD);
 	ser.Unsigned8 (sender());
 	ser.Signed16  (bi);
-	ser.Coords32  (coords);
+	WriteCoords32  (&ser, coords);
 }
 #define PLAYER_CMD_BUILD_VERSION 1
 void Cmd_Build::Read
@@ -272,7 +272,7 @@ void Cmd_Build::Write
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 	fw.Unsigned16(bi);
-	fw.Coords32  (coords);
+	WriteCoords32  (&fw, coords);
 }
 
 
@@ -293,7 +293,7 @@ void Cmd_BuildFlag::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BUILDFLAG);
 	ser.Unsigned8 (sender());
-	ser.Coords32  (coords);
+	WriteCoords32  (&ser, coords);
 }
 #define PLAYER_CMD_BUILDFLAG_VERSION 1
 void Cmd_BuildFlag::Read
@@ -318,7 +318,7 @@ void Cmd_BuildFlag::Write
 	fw.Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
-	fw.Coords32  (coords);
+	WriteCoords32  (&fw, coords);
 }
 
 /*** class Cmd_BuildRoad ***/
@@ -369,7 +369,7 @@ void Cmd_BuildRoad::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BUILDROAD);
 	ser.Unsigned8 (sender());
-	ser.Coords32  (start);
+	WriteCoords32  (&ser, start);
 	ser.Unsigned16(nsteps);
 
 	assert (path || steps);
@@ -405,7 +405,7 @@ void Cmd_BuildRoad::Write
 	fw.Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
-	fw.Coords32  (start);
+	WriteCoords32  (&fw, start);
 	fw.Unsigned16(nsteps);
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 		fw.Unsigned8(path ? (*path)[i] : steps[i]);
@@ -851,7 +851,7 @@ void Cmd_ShipConstructPort::serialize (StreamWrite & ser)
 	ser.Unsigned8 (PLCMD_SHIP_CONSTRUCT);
 	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
-	ser.Coords32  (coords);
+	WriteCoords32  (&ser, coords);
 }
 
 #define PLAYER_CMD_SHIP_CONSTRUCT_PORT_VERSION 1
@@ -883,7 +883,7 @@ void Cmd_ShipConstructPort::Write
 	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 
 	// Coords
-	fw.Coords32(coords);
+	WriteCoords32(&fw, coords);
 }
 
 

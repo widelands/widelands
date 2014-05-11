@@ -27,6 +27,7 @@
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
 #include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
@@ -41,7 +42,6 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "logic/widelands_filewrite.h"
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
@@ -1532,7 +1532,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		fw.  Signed32(productionsite.m_stack[i].phase);
 		fw.Unsigned32(productionsite.m_stack[i].flags);
 		fw.Unsigned32(mos.get_object_file_index_or_zero(productionsite.m_stack[i].objvar.get(game)));
-		fw.Coords32(productionsite.m_stack[i].coord);
+		WriteCoords32(&fw, productionsite.m_stack[i].coord);
 	}
 	fw.Unsigned8(productionsite.m_program_timer);
 	fw. Signed32(productionsite.m_program_time);

@@ -21,8 +21,7 @@
 #define ECONOMY_DATA_PACKET_H
 
 class FileRead;
-
-#include "logic/widelands_filewrite.h"
+class FileWrite;
 
 namespace Widelands {
 class Economy;

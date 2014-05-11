@@ -20,11 +20,11 @@
 #include "game_io/game_interactive_player_data_packet.h"
 
 #include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_filewrite.h"
 #include "wui/interactive_player.h"
 #include "wui/mapview.h"
 #include "wui/overlay_manager.h"

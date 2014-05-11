@@ -25,6 +25,7 @@
 #include "logic/building.h"
 #include "logic/soldiercontrol.h"
 #include "logic/wareworker.h"
+#include "wexception.h"
 
 class Interactive_Player;
 struct Profile;

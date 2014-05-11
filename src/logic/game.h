@@ -20,6 +20,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
 #include "md5.h"

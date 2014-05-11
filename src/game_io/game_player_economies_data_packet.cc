@@ -22,11 +22,11 @@
 #include "economy/economy_data_packet.h"
 #include "economy/flag.h"
 #include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/ship.h"
-#include "logic/widelands_filewrite.h"
 #include "logic/widelands_geometry_io.h"
 #include "upcast.h"
 
@@ -113,7 +113,7 @@ void Game_Player_Economies_Data_Packet::Write
 			for (Field const * field = &field_0; field < &map[map.max_index()]; ++field) {
 				if (upcast(Flag const, flag, field->get_immovable())) {
 					if (flag->get_economy() == *i.current) {
-						fw.Map_Index32(field - &field_0);
+						fw.Unsigned32(field - &field_0);
 
 						EconomyDataPacket d(flag->get_economy());
 						d.Write(fw);
@@ -135,7 +135,7 @@ void Game_Player_Economies_Data_Packet::Write
 							if (ship->get_economy() == *i.current) {
 								// TODO(sirver): the 0xffffffff is ugly and fragile.
 								fw.Unsigned32(0xffffffff); // Sentinel value.
-								fw.Map_Index32(field - &field_0);
+								fw.Unsigned32(field - &field_0);
 
 								EconomyDataPacket d(ship->get_economy());
 								d.Write(fw);

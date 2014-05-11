@@ -26,6 +26,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
+#include "io/fileread.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "wui/mapviewpixelconstants.h"

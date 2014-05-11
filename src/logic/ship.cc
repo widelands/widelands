@@ -25,6 +25,8 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/constructionsite.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
@@ -1090,7 +1092,7 @@ void Ship::save
 			 it != m_expedition->seen_port_buildspaces->end();
 			 ++it)
 		{
-			fw.Coords32(*it);
+			WriteCoords32(&fw, *it);
 		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
@@ -1100,7 +1102,7 @@ void Ship::save
 		// current direction
 		fw.Unsigned8(m_expedition->direction);
 		// Start coordinates of an island exploration
-		fw.Coords32(m_expedition->exploration_start);
+		WriteCoords32(&fw, m_expedition->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
 		fw.Unsigned8(m_expedition->clockwise ? 1 : 0);
 	}

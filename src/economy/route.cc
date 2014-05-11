@@ -21,8 +21,8 @@
 
 #include "economy/flag.h"
 #include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/editor_game_base.h"
-#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 

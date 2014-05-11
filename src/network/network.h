@@ -27,8 +27,8 @@
 #include <SDL_net.h>
 
 #include "io/streamread.h"
+#include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
-#include "logic/widelands_streamwrite.h"
 #include "network/network_protocol.h"
 
 class Deserializer;
@@ -92,7 +92,7 @@ private:
  * Buffered StreamWrite object for assembling a packet that will be
  * sent via the \ref send() function.
  */
-struct SendPacket : public Widelands::StreamWrite {
+struct SendPacket : public StreamWrite {
 	SendPacket ();
 
 	void send (TCPsocket);

@@ -22,9 +22,10 @@
 
 #include <map>
 
-#include "io/fileread.h"
-#include "logic/widelands_filewrite.h"
+#include "logic/widelands.h"
 
+class FileRead;
+class FileWrite;
 struct Section;
 
 namespace Widelands {

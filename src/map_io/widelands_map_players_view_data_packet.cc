@@ -23,6 +23,8 @@
 #include <typeinfo>
 
 #include "economy/road.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
@@ -30,7 +32,6 @@
 #include "logic/instances.h" //for g_flag_descr
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_streamwrite_inlines.h"
 #include "upcast.h"
 
 
@@ -205,7 +206,7 @@ struct tribe_immovable_nonexistent : public FileRead::_data_error {
 	     tribename(Tribename),
 	     name(Name) {
 	}
-	virtual ~tribe_immovable_nonexistent() throw() {
+	virtual ~tribe_immovable_nonexistent() throw () {
 	}
 	std::string tribename;
 	std::string name;
@@ -317,6 +318,28 @@ const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe
 // \returns a reference to the building type description.
 const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
 	return ReadBuilding_Type(fr, ReadTribe(fr, egbase));
+}
+
+// Encode a tribe into 'wr'.
+void WriteTribe(StreamWrite* wr, const Tribe_Descr& tribe) {
+	wr->String(tribe.name());
+}
+
+// Encode a tribe into 'wr'.
+void WriteTribe(StreamWrite* wr, Tribe_Descr const* tribe) {
+	wr->CString(tribe ? tribe->name().c_str() : "");
+}
+
+// Encode a Immovable_Type into 'wr'.
+void WriteImmovable_Type(StreamWrite* wr, const Immovable_Descr& immovable) {
+	WriteTribe(wr, immovable.get_owner_tribe());
+	wr->String(immovable.name());
+}
+
+// Encode a Building_Type into 'wr'.
+void WriteBuilding_Type(StreamWrite* wr, const Building_Descr& building) {
+	WriteTribe(wr, building.tribe());
+	wr->String(building.name());
 }
 
 }  // namespace
@@ -980,24 +1003,24 @@ inline static void write_unseen_immovable
 		immovable_kind = 0;
 	else if (upcast(Immovable_Descr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
-		immovables_file.Immovable_Type(*immovable_descr);
+		WriteImmovable_Type(&immovables_file, *immovable_descr);
 	} else if (map_object_descr == &g_flag_descr)
 		immovable_kind = 2;
 	else if (upcast(Building_Descr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
-		immovables_file.Building_Type(*building_descr);
+		WriteBuilding_Type(&immovables_file, *building_descr);
 		if (!csi.becomes)
 			immovables_file.Unsigned8(0);
 		else {
 			// the building is a constructionsite
 			immovables_file.Unsigned8(1);
-			immovables_file.Building_Type(*csi.becomes);
+			WriteBuilding_Type(&immovables_file, *csi.becomes);
 			if (!csi.was)
 				immovables_file.Unsigned8(0);
 			else {
 				// constructionsite is an enhancement, therefor we write down the enhancement
 				immovables_file.Unsigned8(1);
-				immovables_file.Building_Type(*csi.was);
+				WriteBuilding_Type(&immovables_file, *csi.was);
 			}
 			immovables_file.Unsigned32(csi.totaltime);
 			immovables_file.Unsigned32(csi.completedtime);

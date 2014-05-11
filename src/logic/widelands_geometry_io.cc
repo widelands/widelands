@@ -19,6 +19,9 @@
 
 #include "logic/widelands_geometry_io.h"
 
+#include "io/streamread.h"
+#include "io/streamwrite.h"
+
 namespace Widelands {
 
 Direction ReadDirection8(StreamRead* fr) {
@@ -77,6 +80,35 @@ Area<Coords, uint16_t> ReadArea48(StreamRead* fr, const Extent& extent) {
 	Coords const c = ReadCoords32(fr, extent);
 	uint16_t const r = fr->Unsigned16();
 	return Area<Coords, uint16_t>(c, r);
+}
+
+void WriteDirection8(StreamWrite* wr, Direction const d) {
+	assert(0 < d);
+	assert(d <= 6);
+	wr->Data(&d, 1);
+}
+
+void WriteDirection8_allow_null(StreamWrite* wr, Direction const d) {
+	assert(d <= 6);
+	wr->Data(&d, 1);
+}
+
+void WriteCoords32(StreamWrite* wr, const Coords& c) {
+	assert(static_cast<uint16_t>(c.x) < 0x8000 or c.x == -1);
+	assert(static_cast<uint16_t>(c.y) < 0x8000 or c.y == -1);
+	{
+		uint16_t const x = Little16(c.x);
+		wr->Data(&x, 2);
+	}
+	{
+		uint16_t const y = Little16(c.y);
+		wr->Data(&y, 2);
+	}
+}
+
+void WriteArea48(StreamWrite* wr, Area<Coords, uint16_t> const area) {
+	WriteCoords32(wr, area);
+	wr->Unsigned16(area.radius);
 }
 
 }  // namespace Widelands

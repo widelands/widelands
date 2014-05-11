@@ -21,11 +21,11 @@
 
 #include "computer_player.h"
 #include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_filewrite.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
@@ -162,7 +162,7 @@ void Game_Player_Info_Data_Packet::Write
 
 		fw.Unsigned8(plr->m_see_all);
 
-		fw.Player_Number8(plr->m_plnum);
+		fw.Unsigned8(plr->m_plnum);
 		fw.Unsigned8(plr->team_number());
 
 		{

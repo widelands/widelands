@@ -24,9 +24,10 @@
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "logic/instances.h"
+#include "logic/walkingdir.h"
+#include "logic/widelands_geometry.h"
 #include "point.h"
 #include "port.h"
-#include "logic/walkingdir.h"
 
 struct Profile;
 

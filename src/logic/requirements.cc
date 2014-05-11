@@ -22,6 +22,7 @@
 #include "container_iterate.h"
 #include "i18n.h"
 #include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game_data_error.h"
 #include "logic/instances.h"
 

@@ -20,7 +20,6 @@
 #ifndef S2MAP_H
 #define S2MAP_H
 
-#include "io/fileread.h"
 #include "map_io/map_loader.h"
 
 struct S2MapDescrHeader {
