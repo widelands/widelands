@@ -38,10 +38,10 @@ void MapGenBobKind::parseSection (Section & s)
 {
 	std::string str;
 
-	str = s.get_safe_string("immovable_bobs");
+	str = s.get_safe_string("immovables");
 	MapGenAreaInfo::split_string(m_ImmovableBobs, str);
 
-	str = s.get_safe_string("moveable_bobs");
+	str = s.get_safe_string("critters");
 	MapGenAreaInfo::split_string(m_MoveableBobs, str);
 }
 
@@ -68,13 +68,13 @@ const MapGenBobKind * MapGenBobArea::getBobKind
 
 void MapGenBobArea::parseSection (Section & s, MapGenInfo & mapGenInfo)
 {
-	m_Weight = s.get_int("weight", 1);
-	m_Immovable_Density =
+	weight_ = s.get_int("weight", 1);
+	immovable_density_ =
 		static_cast<uint8_t>
 			(s.get_safe_int("immovable_density"));
-	m_Moveable_Density =
+	critter_density_ =
 		static_cast<uint8_t>
-			(s.get_safe_int("moveable_density"));
+			(s.get_safe_int("critter_density"));
 
 	std::string str;
 
@@ -350,10 +350,10 @@ void MapGenInfo::parseProfile(World * const world, Profile & profile)
 	std::vector<std::string> bob_area_strs;
 	std::vector<std::string> bob_kind_strs;
 
-	str = bobs_s.get_string("areas");
+	str = bobs_s.get_string("land_resources");
 	MapGenAreaInfo::split_string(bob_area_strs, str);
 
-	str = bobs_s.get_string("bob_kinds");
+	str = bobs_s.get_string("categories");
 	MapGenAreaInfo::split_string(bob_kind_strs, str);
 
 	for (uint32_t ix = 0; ix < bob_kind_strs.size(); ++ix) {

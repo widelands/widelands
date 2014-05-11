@@ -37,8 +37,10 @@ struct MapGenInfo;
 /// Holds world and area specific information for the map generator.
 /// Areas are: Water, Land, Wasteland and Mountains.
 struct MapGenAreaInfo {
+	// NOCOM(#sirver): kill
 	static int split_string(std::vector<std::string> & strs, std::string & str);
 
+	// NOCOM(#sirver): convert to enum class
 	enum MapGenAreaType {
 		atWater,
 		atLand,
@@ -109,17 +111,17 @@ struct MapGenBobArea {
 
 	void parseSection (Section &, MapGenInfo & mapGenInfo);
 
-	uint32_t getWeight() const {return m_Weight;};
+	uint32_t getWeight() const {return weight_;};
 	const MapGenBobKind * getBobKind
 		(MapGenAreaInfo::MapGenTerrainType terrType) const;
 
-	uint8_t getImmovableDensity() const {return m_Immovable_Density;};
-	uint8_t getMoveableDensity() const {return m_Moveable_Density;};
+	uint8_t getImmovableDensity() const {return immovable_density_;};
+	uint8_t getMoveableDensity() const {return critter_density_;};
 
 private:
-	uint32_t        m_Weight;
-	uint8_t         m_Immovable_Density; // In percent
-	uint8_t         m_Moveable_Density;  // In percent
+	uint32_t        weight_;
+	uint8_t         immovable_density_; // In percent
+	uint8_t         critter_density_;  // In percent
 	const MapGenBobKind * m_LandCoastBobKind;
 	const MapGenBobKind * m_LandInnerBobKind;
 	const MapGenBobKind * m_LandUpperBobKind;
