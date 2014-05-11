@@ -20,6 +20,7 @@
 #ifndef CMD_QUEUE_H
 #define CMD_QUEUE_H
 
+#include <memory>
 #include <queue>
 
 #include "logic/queue_cmd_ids.h"
