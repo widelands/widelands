@@ -33,104 +33,6 @@ class ResourceDescription;
 class TerrainDescription;
 struct Critter_Bob_Descr;
 struct Immovable_Descr;
-
-#define WORLD_NAME_LEN 128
-#define WORLD_AUTHOR_LEN 128
-#define WORLD_DESCR_LEN 1024
-
-struct World_Descr_Header {
-	char name  [WORLD_NAME_LEN];
-	char author[WORLD_AUTHOR_LEN];
-	char descr [WORLD_DESCR_LEN];
-};
-
-struct Resource_Descr : boost::noncopyable {
-	Resource_Descr() : m_is_detectable(true), m_max_amount(0) {}
-	~Resource_Descr() {}
-
-	void parse(Section &, const std::string &);
-
-	const std::string & name     () const {return m_name;}
-	const std::string & descname() const {return m_descname;}
-
-	bool is_detectable() const {return m_is_detectable;}
-	int32_t get_max_amount() const {return m_max_amount;}
-
-	const std::string & get_editor_pic(uint32_t amount) const;
-
-private:
-	struct Indicator {
-		std::string bobname;
-		int32_t         upperlimit;
-	};
-	struct Editor_Pic {
-		std::string picname;
-		int32_t     upperlimit;
-	};
-
-	bool                    m_is_detectable;
-	int32_t                 m_max_amount;
-	std::string             m_name;
-	std::string             m_descname;
-	std::vector<Editor_Pic> m_editor_pics;
-};
-
-struct Terrain_Descr : boost::noncopyable {
-	friend struct World;
-
-	Terrain_Descr
-		(char const * directory, Section *, DescriptionMaintainer<Resource_Descr> *);
-	~Terrain_Descr();
-
-	void load_graphics();
-
-	uint32_t         get_texture() const {return m_texture;}
-	uint8_t        get_is     () const {return m_is;}
-	const std::string & name() const {return m_name;}
-	const std::string & descname() const {return m_descname;}
-	int32_t resource_value(const Resource_Index resource) const {
-		return
-			resource == get_default_resources() or is_resource_valid(resource) ?
-			(get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
-	}
-
-	uint8_t get_num_valid_resources() const {
-		return m_nr_valid_resources;
-	}
-
-	Resource_Index get_valid_resource(uint8_t index) const {
-		return m_valid_resources[index];
-	}
-
-	bool is_resource_valid(const int32_t res) const {
-		for (int32_t i = 0; i < m_nr_valid_resources; ++i)
-			if (m_valid_resources[i] == res)
-				return true;
-		return false;
-	}
-	int8_t get_default_resources() const {return m_default_resources;}
-	int32_t get_default_resources_amount() const {
-		return m_default_amount;
-	}
-	int32_t dither_layer() const {return m_dither_layer;}
-
-private:
-	const std::string m_name;
-	const std::string m_descname;
-	std::string m_picnametempl;
-	uint32_t    m_frametime;
-	uint8_t   m_is;
-
-	int32_t m_dither_layer;
-
-	uint8_t         * m_valid_resources;
-	uint8_t           m_nr_valid_resources;
-	int8_t            m_default_resources;
-	int32_t           m_default_amount;
-	uint32_t          m_texture; //  renderer's texture
-};
-
->>>>>>> MERGE-SOURCE
 struct MapGenInfo;
 
 // This is the in memory descriptions of the world and provides access to
@@ -160,7 +62,6 @@ public:
 	ResourceDescription const* get_resource(Resource_Index res) const;
 	int32_t get_nr_resources() const;
 	int32_t safe_resource_index(const char* const warename) const;
-
 
 	// Add this new resource to the world description.
 	void add_resource_type(const LuaTable& table);
@@ -193,6 +94,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_immovable_categories_;
 	std::unique_ptr<MapGenInfo> mapGenInfo_;
 };
+
 }  // namespace Widelands
 
 #endif

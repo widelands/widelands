@@ -24,6 +24,8 @@
 
 #include "map_io/map_loader.h"
 
+class FileRead;
+
 struct S2_Map_Loader : public Widelands::Map_Loader {
 	enum WorldType {
 		GREENLAND = 0,

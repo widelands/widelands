@@ -20,6 +20,10 @@
 #ifndef WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
 #define WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
 
+#include <string>
+
+#include <stdint.h>
+
 #include "map_io/widelands_map_data_packet.h"
 
 namespace Widelands {

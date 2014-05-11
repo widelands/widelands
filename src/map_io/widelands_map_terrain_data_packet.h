@@ -22,9 +22,8 @@
 
 #include <string>
 
-#include "logic/widelands_filewrite.h"
-
 class OneWorldLegacyLookupTable;
+class FileSystem;
 
 namespace Widelands {
 
