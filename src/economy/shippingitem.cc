@@ -21,6 +21,8 @@
 
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game_data_error.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"

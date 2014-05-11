@@ -103,7 +103,7 @@ Mix_Music * Songset::get_song()
 	}
 
 	//then open the new song
-	if (m_fr.TryOpen(*g_fs, filename.c_str())) {
+	if (m_fr.TryOpen(*g_fs, filename)) {
 		if (!(m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize()))) {
 			m_fr.Close();  // m_fr should be Open iff m_rwops != 0
 			return nullptr;

@@ -25,6 +25,8 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/constructionsite.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
@@ -36,6 +38,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
+#include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "ref_cast.h"
@@ -961,7 +964,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
 				uint8_t numofports = fr.Unsigned8();
 				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(fr.Coords32());
+					m_expedition->seen_port_buildspaces->push_back(ReadCoords32(&fr));
 				// Swimability of the directions
 				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
 					m_expedition->swimable[i] = (fr.Unsigned8() == 1);
@@ -970,7 +973,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				// current direction
 				m_expedition->direction = fr.Unsigned8();
 				// Start coordinates of an island exploration
-				m_expedition->exploration_start = fr.Coords32();
+				m_expedition->exploration_start = ReadCoords32(&fr);
 				// Whether the exploration is done clockwise or counter clockwise
 				m_expedition->clockwise = fr.Unsigned8() == 1;
 			}
@@ -1089,7 +1092,7 @@ void Ship::save
 			 it != m_expedition->seen_port_buildspaces->end();
 			 ++it)
 		{
-			fw.Coords32(*it);
+			WriteCoords32(&fw, *it);
 		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
@@ -1099,7 +1102,7 @@ void Ship::save
 		// current direction
 		fw.Unsigned8(m_expedition->direction);
 		// Start coordinates of an island exploration
-		fw.Coords32(m_expedition->exploration_start);
+		WriteCoords32(&fw, m_expedition->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
 		fw.Unsigned8(m_expedition->clockwise ? 1 : 0);
 	}

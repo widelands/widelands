@@ -26,6 +26,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
+#include "io/fileread.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -59,7 +60,7 @@ const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture(const Widelands
 	// TODO: This duplicates code from the ImageLoader, but as we cannot convert
 	// a GLSurface into another format currently, we have to eat this frog.
 	FileRead fr;
-	fr.fastOpen(*g_fs, fname.c_str());
+	fr.Open(*g_fs, fname);
 
 	SDL_Surface * sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 	if (!sdlsurf)
@@ -665,4 +666,3 @@ void GameRendererGL::draw_roads()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 }
-

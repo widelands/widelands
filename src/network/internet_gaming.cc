@@ -26,6 +26,7 @@
 #include "compile_diagnostics.h"
 #include "i18n.h"
 #include "io/dedicated_log.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "network/internet_gaming_messages.h"
@@ -786,8 +787,8 @@ void InternetGaming::send(const std::string & msg) {
 				temp = arg.substr(1); // cut of the "%"
 				if (g_fs->FileExists(temp) && !g_fs->IsDirectory(temp)) {
 					// Read in the file
-					Widelands::FileRead fr;
-					fr.Open(*g_fs, temp.c_str());
+					FileRead fr;
+					fr.Open(*g_fs, temp);
 					if (!fr.EndOfFile()) {
 						arg = fr.ReadLine();
 						while (!fr.EndOfFile()) {

@@ -22,9 +22,10 @@
 
 #include <stdint.h>
 
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "scripting/eris/lua.hpp"
+
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 class Player;
@@ -65,8 +66,8 @@ private:
 
 	// Input/Output for coroutines. Do not call directly, instead use
 	// LuaGameInterface methods for this.
-	void write(Widelands::FileWrite&);
-	void read(lua_State*, Widelands::FileRead&);
+	void write(FileWrite&);
+	void read(lua_State*, FileRead&);
 
 	lua_State* m_L;
 	uint32_t m_idx;

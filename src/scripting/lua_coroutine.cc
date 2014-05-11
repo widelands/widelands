@@ -19,6 +19,8 @@
 
 #include "scripting/lua_coroutine.h"
 
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
@@ -109,7 +111,7 @@ void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
 }
 
 #define COROUTINE_DATA_PACKET_VERSION 2
-void LuaCoroutine::write(Widelands::FileWrite& fw) {
+void LuaCoroutine::write(FileWrite& fw) {
 	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
 
 	// The current numbers of arguments on the stack
@@ -117,7 +119,7 @@ void LuaCoroutine::write(Widelands::FileWrite& fw) {
 	fw.Unsigned32(m_idx);
 }
 
-void LuaCoroutine::read(lua_State* parent, Widelands::FileRead& fr) {
+void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
 	uint8_t version = fr.Unsigned8();
 
 	if (version != COROUTINE_DATA_PACKET_VERSION)

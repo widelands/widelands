@@ -28,6 +28,8 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/attackable.h"
 #include "logic/battle.h"
 #include "logic/building.h"

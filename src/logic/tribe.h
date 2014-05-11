@@ -26,7 +26,6 @@
 #include "TribeBasicInfo.h"
 #include "description_maintainer.h"
 #include "graphic/animation.h"
-#include "io/filewrite.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/immovable.h"

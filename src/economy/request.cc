@@ -23,6 +23,8 @@
 #include "economy/portdock.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/constructionsite.h"
 #include "logic/game.h"
 #include "logic/player.h"

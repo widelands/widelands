@@ -20,6 +20,8 @@
 #include "logic/cmd_luacoroutine.h"
 
 #include "gamecontroller.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

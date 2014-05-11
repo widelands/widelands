@@ -30,13 +30,13 @@
 #endif
 
 #include "sound/fxset.h"
-#include "io/fileread.h"
 #include "logic/widelands_geometry.h"
 #include "random.h"
 
 namespace Widelands {class Editor_Game_Base;}
 struct Songset;
 struct SDL_mutex;
+class FileRead;
 
 /// How many milliseconds in the past to consider for
 /// Sound_Handler::play_or_not()

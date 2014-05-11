@@ -22,6 +22,8 @@
 #include <cstdio>
 
 #include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/critter_bob_program.h"
 #include "logic/field.h"
 #include "logic/game.h"

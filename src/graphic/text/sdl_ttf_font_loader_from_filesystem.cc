@@ -60,7 +60,7 @@ IFont* SDLTTF_FontLoaderFromFilesystem::load(const string& face, int ptsize) {
 	// remain intact, therefore, we keep it around till the program exits and
 	// this class is destroyed.
 	FileRead* fr = new FileRead();
-	fr->Open(*fs_, filename.c_str());
+	fr->Open(*fs_, filename);
 	filereads_.push_back(fr);
 
 	SDL_RWops* ops = SDL_RWFromMem(fr->Data(0), fr->GetSize());

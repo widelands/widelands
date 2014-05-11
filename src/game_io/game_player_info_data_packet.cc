@@ -20,12 +20,12 @@
 #include "game_io/game_player_info_data_packet.h"
 
 #include "computer_player.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
@@ -47,8 +47,7 @@ void Game_Player_Info_Data_Packet::Read
 				if (fr.Unsigned8()) {
 					bool    const see_all = fr.Unsigned8();
 
-					int32_t const plnum   =
-						packet_version < 7 ? fr.Signed32() : fr.Player_Number8();
+					int32_t const plnum   = fr.Unsigned8();
 					if (plnum < 1 or MAX_PLAYERS < plnum)
 						throw game_data_error
 							("player number (%i) is out of range (1 .. %u)",
@@ -163,7 +162,7 @@ void Game_Player_Info_Data_Packet::Write
 
 		fw.Unsigned8(plr->m_see_all);
 
-		fw.Player_Number8(plr->m_plnum);
+		fw.Unsigned8(plr->m_plnum);
 		fw.Unsigned8(plr->team_number());
 
 		{

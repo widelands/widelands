@@ -284,7 +284,7 @@ class CodeChecker(object):
             return
         errors = []
 
-        bm = defaultdict(lambda: 0.)
+        benchmark_results = defaultdict(lambda: 0.)
 
         preprocessor = Preprocessor()
 
@@ -296,7 +296,7 @@ class CodeChecker(object):
                     start = time()
                     e =  c.check_text( preprocessor, fn, data )
                     errors.extend( e )
-                    bm[c.name] += time()-start
+                    benchmark_results[c.name] += time()-start
                 else:
                     e =  c.check_text( preprocessor, fn, data )
                     errors.extend( e )
@@ -306,7 +306,7 @@ class CodeChecker(object):
             self._cache[fn] = self._print_errors(errors)
 
         if self._benchmark:
-            self._bench_results = [ (v,k) for k,v in bm.items() ]
+            self._bench_results = [ (v,k) for k,v in benchmark_results.items() ]
             self._bench_results.sort(reverse=True)
 
         return errors
@@ -390,4 +390,3 @@ if __name__ == '__main__':
             check_files(source_files,color,benchmark)
 
     main()
-
