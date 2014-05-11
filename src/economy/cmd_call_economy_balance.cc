@@ -20,6 +20,8 @@
 #include "economy/cmd_call_economy_balance.h"
 
 #include "economy/economy.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/widelands_map_map_object_loader.h"

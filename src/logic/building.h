@@ -27,7 +27,6 @@
 #include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
-#include "io/filewrite.h"
 #include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"

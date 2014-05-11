@@ -24,18 +24,12 @@
 
 #include "constants.h"
 #include "graphic/graphic.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "log.h"
-#include "logic/bob.h"
-#include "logic/critter_bob.h"
-#include "logic/game_data_error.h"
 #include "logic/immovable.h"
 #include "logic/widelands.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/map_gen.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
-#include "wexception.h"
 
 namespace Widelands {
 

@@ -22,7 +22,6 @@
 
 #include <string>
 
-#include "io/fileread.h"
 #include "map_io/map_loader.h"
 
 struct S2_Map_Loader : public Widelands::Map_Loader {

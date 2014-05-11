@@ -110,8 +110,8 @@ private:
 	void handle_packet(RecvPacket &);
 	void handle_network ();
 	void sendTime();
-	void recvOnePlayer(uint8_t  number, Widelands::StreamRead &);
-	void recvOneUser  (uint32_t number, Widelands::StreamRead &);
+	void recvOnePlayer(uint8_t  number, StreamRead &);
+	void recvOneUser  (uint32_t number, StreamRead &);
 	void disconnect
 		(const std::string & reason, const std::string & arg = "", bool sendreason = true, bool showmsg = true);
 

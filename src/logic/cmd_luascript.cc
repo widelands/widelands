@@ -19,6 +19,8 @@
 
 #include "logic/cmd_luascript.h"
 
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

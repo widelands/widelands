@@ -21,6 +21,8 @@
 
 #include "economy/economy.h"
 #include "economy/wares_queue.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "io/streamwrite.h"
 #include "log.h"
 #include "logic/game.h"
@@ -30,8 +32,7 @@
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
+#include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
@@ -229,7 +230,7 @@ Cmd_Build::Cmd_Build (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	bi = des.Signed16();
-	coords = des.Coords32  ();
+	coords = ReadCoords32(&des);
 }
 
 void Cmd_Build::execute (Game & game)
@@ -243,7 +244,7 @@ void Cmd_Build::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_BUILD);
 	ser.Unsigned8 (sender());
 	ser.Signed16  (bi);
-	ser.Coords32  (coords);
+	WriteCoords32  (&ser, coords);
 }
 #define PLAYER_CMD_BUILD_VERSION 1
 void Cmd_Build::Read
@@ -254,7 +255,7 @@ void Cmd_Build::Read
 		if (packet_version == PLAYER_CMD_BUILD_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
 			bi = fr.Unsigned16();
-			coords = fr.Coords32  (egbase.map().extent());
+			coords = ReadCoords32(&fr, egbase.map().extent());
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);
@@ -271,7 +272,7 @@ void Cmd_Build::Write
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 	fw.Unsigned16(bi);
-	fw.Coords32  (coords);
+	WriteCoords32  (&fw, coords);
 }
 
 
@@ -280,7 +281,7 @@ void Cmd_Build::Write
 Cmd_BuildFlag::Cmd_BuildFlag (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	coords = des.Coords32  ();
+	coords = ReadCoords32(&des);
 }
 
 void Cmd_BuildFlag::execute (Game & game)
@@ -292,7 +293,7 @@ void Cmd_BuildFlag::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BUILDFLAG);
 	ser.Unsigned8 (sender());
-	ser.Coords32  (coords);
+	WriteCoords32  (&ser, coords);
 }
 #define PLAYER_CMD_BUILDFLAG_VERSION 1
 void Cmd_BuildFlag::Read
@@ -302,7 +303,7 @@ void Cmd_BuildFlag::Read
 		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_BUILDFLAG_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			coords = fr.Coords32(egbase.map().extent());
+			coords = ReadCoords32(&fr, egbase.map().extent());
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);
@@ -317,7 +318,7 @@ void Cmd_BuildFlag::Write
 	fw.Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
-	fw.Coords32  (coords);
+	WriteCoords32  (&fw, coords);
 }
 
 /*** class Cmd_BuildRoad ***/
@@ -333,7 +334,7 @@ steps        (nullptr)
 Cmd_BuildRoad::Cmd_BuildRoad (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	start  = des.Coords32  ();
+	start = ReadCoords32(&des);
 	nsteps = des.Unsigned16();
 
 	// we cannot completely deserialize the path here because we don't have a Map
@@ -368,7 +369,7 @@ void Cmd_BuildRoad::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BUILDROAD);
 	ser.Unsigned8 (sender());
-	ser.Coords32  (start);
+	WriteCoords32  (&ser, start);
 	ser.Unsigned16(nsteps);
 
 	assert (path || steps);
@@ -384,7 +385,7 @@ void Cmd_BuildRoad::Read
 		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_BUILDROAD_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			start  = fr.Coords32  (egbase.map().extent());
+			start = ReadCoords32(&fr, egbase.map().extent());
 			nsteps = fr.Unsigned16();
 			path = nullptr;
 			steps = new char[nsteps];
@@ -404,7 +405,7 @@ void Cmd_BuildRoad::Write
 	fw.Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
-	fw.Coords32  (start);
+	WriteCoords32  (&fw, start);
 	fw.Unsigned16(nsteps);
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 		fw.Unsigned8(path ? (*path)[i] : steps[i]);
@@ -651,7 +652,7 @@ void Cmd_EnhanceBuilding::Read
 		if (packet_version == PLAYER_CMD_ENHANCEBUILDING_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Building>(fr.Unsigned32(), mol);
-			bi =fr.Unsigned16();
+			bi = fr.Unsigned16();
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);
@@ -834,7 +835,7 @@ Cmd_ShipConstructPort::Cmd_ShipConstructPort (StreamRead& des) :
 	PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
-	coords = des.Coords32();
+	coords = ReadCoords32(&des);
 }
 
 void Cmd_ShipConstructPort::execute (Game & game)
@@ -850,7 +851,7 @@ void Cmd_ShipConstructPort::serialize (StreamWrite & ser)
 	ser.Unsigned8 (PLCMD_SHIP_CONSTRUCT);
 	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
-	ser.Coords32  (coords);
+	WriteCoords32  (&ser, coords);
 }
 
 #define PLAYER_CMD_SHIP_CONSTRUCT_PORT_VERSION 1
@@ -863,7 +864,7 @@ void Cmd_ShipConstructPort::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.Unsigned32(), mol);
 			// Coords
-			coords = fr.Coords32();
+			coords = ReadCoords32(&fr);
 		} else
 			throw game_data_error("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
@@ -882,7 +883,7 @@ void Cmd_ShipConstructPort::Write
 	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 
 	// Coords
-	fw.Coords32(coords);
+	WriteCoords32(&fw, coords);
 }
 
 

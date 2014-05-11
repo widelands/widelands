@@ -1144,29 +1144,6 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				continue;
 
 
-		/* - uninteresting if a mine ware is needed - we exploit the raw material
-		// Check if the produced wares are needed
-		bool needed = false;
-		container_iterate(std::list<EconomyObserver *>, economies, l) {
-			// Don't check if the economy has no warehouse.
-			if ((*l.current)->economy.warehouses().empty())
-				continue;
-			for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-				Ware_Index wt(static_cast<size_t>(bo.outputs.at(m)));
-				if ((*l.current)->economy.needs_ware(wt)) {
-					needed = true;
-					break;
-				}
-			}
-			if (needed)
-				break;
-		}
-
-		// Only try to build mines that produce needed wares.
-		if (!needed)
-			continue;
-		*/
-
 		for
 			(std::list<MineableField *>::iterator j = mineable_fields.begin();
 			 j != mineable_fields.end();

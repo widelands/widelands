@@ -58,7 +58,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 		SDL_Surface * surf;
 		m_texture_image = fname;
 		FileRead fr;
-		fr.fastOpen(*g_fs, fname.c_str());
+		fr.Open(*g_fs, fname);
 
 		surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 		if (!surf) {

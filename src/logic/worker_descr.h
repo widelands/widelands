@@ -23,7 +23,6 @@
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 #include "logic/immovable.h"
-#include "io/filewrite.h"
 
 class Image;
 

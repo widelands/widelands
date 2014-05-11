@@ -401,49 +401,6 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	return data;
 }
 
-void * RealFSImpl::fastLoad
-	(const std::string & fname, size_t & length, bool & fast)
-{
-#ifdef _WIN32
-	fast = false;
-	return Load(fname, length);
-#else
-	const std::string fullname = FS_CanonicalizeName(fname);
-	int file = 0;
-	void * data = nullptr;
-
-#ifdef __APPLE__
-	file = open(fullname.c_str(), O_RDONLY);
-#elif defined (__FreeBSD__) || defined (__OpenBSD__)
-	file = open(fullname.c_str(), O_RDONLY);
-#else
-	file = open(fullname.c_str(), O_RDONLY|O_NOATIME);
-#endif
-	length = lseek(file, 0, SEEK_END);
-	lseek(file, 0, SEEK_SET);
-
-	data = mmap(nullptr, length, PROT_READ, MAP_PRIVATE, file, 0);
-
-	//if mmap doesn't work for some strange reason try the old way
-GCC_DIAG_OFF("-Wold-style-cast")
-	if (data == MAP_FAILED) {
-GCC_DIAG_ON("-Wold-style-cast")
-		return Load(fname, length);
-	}
-
-	fast = true;
-
-	assert(data);
-GCC_DIAG_OFF("-Wold-style-cast")
-	assert(data != MAP_FAILED);
-GCC_DIAG_ON("-Wold-style-cast")
-
-	close(file);
-
-	return data;
-#endif
-}
-
 /**
  * Write the given block of memory to the repository.
  * if \arg append is true and a file of name \arg fname is already existing the data will be appended to

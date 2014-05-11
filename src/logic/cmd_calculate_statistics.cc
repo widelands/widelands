@@ -19,6 +19,8 @@
 
 #include "logic/cmd_calculate_statistics.h"
 
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 
@@ -55,4 +57,3 @@ void Cmd_CalculateStatistics::Write
 }
 
 }
-

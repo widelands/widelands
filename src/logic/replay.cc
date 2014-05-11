@@ -22,6 +22,7 @@
 #include "game_io/game_loader.h"
 #include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/streamread.h"
 #include "io/streamwrite.h"
 #include "log.h"
 #include "logic/game.h"
@@ -91,8 +92,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 		gl.load_game();
 	}
 
-	m_cmdlog =
-		static_cast<Widelands::StreamRead *>(g_fs->OpenStreamRead(filename));
+	m_cmdlog = g_fs->OpenStreamRead(filename);
 
 	try {
 		const uint32_t magic = m_cmdlog->Unsigned32();
@@ -250,8 +250,7 @@ ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 	game.enqueue_command
 		(new Cmd_ReplaySyncWrite(game.get_gametime() + SYNC_INTERVAL));
 
-	m_cmdlog =
-		static_cast<Widelands::StreamWrite *>(g_fs->OpenStreamWrite(filename));
+	m_cmdlog = g_fs->OpenStreamWrite(filename);
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
 	m_cmdlog->Unsigned8(REPLAY_VERSION);
 

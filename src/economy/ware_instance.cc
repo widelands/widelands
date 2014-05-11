@@ -25,6 +25,8 @@
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/transfer.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/ship.h"
 #include "logic/tribe.h"

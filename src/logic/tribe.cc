@@ -26,6 +26,7 @@
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
+#include "io/fileread.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
@@ -41,7 +42,6 @@
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
-#include "logic/widelands_fileread.h"
 #include "logic/worker.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
@@ -347,7 +347,7 @@ bool Tribe_Descr::exists_tribe
 
 	LuaInterface lua;
 	FileRead f;
-	if (f.TryOpen(*g_fs, buf.c_str())) {
+	if (f.TryOpen(*g_fs, buf)) {
 		if (info)
 			try {
 				Profile prof(buf.c_str());

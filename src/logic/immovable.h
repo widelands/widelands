@@ -32,12 +32,12 @@ class Profile;
 namespace Widelands {
 
 class Economy;
-struct Flag;
 class Map;
-struct Tribe_Descr;
 class WareInstance;
 class Worker;
 class World;
+struct Flag;
+struct Tribe_Descr;
 
 /**
  * BaseImmovable is the base for all non-moving objects (immovables such as

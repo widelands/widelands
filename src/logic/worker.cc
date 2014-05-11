@@ -29,6 +29,8 @@
 #include "gamecontroller.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_incorporate.h"
@@ -1860,7 +1862,7 @@ void Worker::return_update(Game & game, State & state)
 		char buffer[2048];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _ ("Your %s can’t find a way home and will likely die."),
+			 _ ("Your %s can't find a way home and will likely die."),
 			 descname().c_str());
 		owner().add_message
 			(game,

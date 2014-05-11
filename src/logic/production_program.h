@@ -26,10 +26,10 @@
 #include <string>
 #include <vector>
 
+#include <boost/noncopyable.hpp>
 #include <stdint.h>
 
 #include "container_iterate.h"
-#include "io/filewrite.h"
 #include "log.h"
 #include "logic/bill_of_materials.h"
 #include "logic/program_result.h"

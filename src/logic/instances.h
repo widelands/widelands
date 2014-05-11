@@ -31,14 +31,15 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
-#include "logic/cmd_queue.h"
 #include "log.h"
+#include "logic/cmd_queue.h"
 #include "port.h"
 #include "ref_cast.h"
+#include "widelands.h"
 
-
-struct DirAnimations;
+class FileRead;
 class RenderTarget;
+struct DirAnimations;
 namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
