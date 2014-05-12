@@ -56,6 +56,7 @@
 #define WINNER_DEBUG false
 #define NEW_BUILDING_DEBUG false
 #define STANDBY_DEBUG false
+#define MINES_DEBUG false
 
 using namespace Widelands;
 
@@ -136,9 +137,7 @@ void DefaultAI::think ()
 
 	// if there are more than one economy try to connect them with a road.
 	if (next_road_due <= gametime) {
-		if (gametime%500 ==0) //just to reduce number of printouts
-			printf (" TDEBUG: postponing road check by additional: %d\n",(productionsites.size() + militarysites.size()) * 25 );
-		next_road_due = gametime + 1000 + (productionsites.size() + militarysites.size()) * 15;
+		next_road_due = gametime + 1000 ;
 		if (construct_roads (gametime)) {
 			m_buildable_changed = true;
 			m_mineable_changed = true;
@@ -281,7 +280,7 @@ void DefaultAI::late_initialization ()
 		bo.cnt_built              = 0;
 		bo.cnt_under_construction = 0;
 		bo.production_hint        = -1;
-		bo.current_stats          = 100;
+		bo.current_stats          = 0;
 		bo.unoccupied             = false;
 
 		bo.is_basic               = false;
@@ -411,9 +410,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime)
 		}
 
 		update_buildable_field (bf);
-		if (gametime%1000 ==0) //just to reduce number of printouts
-			printf (" TDEBUG: postponing buildable_fields check by : %d\n",buildable_fields.size() * 5);
-		bf.next_update_due = gametime + FIELD_UPDATE_INTERVAL + buildable_fields.size() * 5;
+		bf.next_update_due = gametime + FIELD_UPDATE_INTERVAL ;
 
 		buildable_fields.push_back (&bf);
 		buildable_fields.pop_front ();
@@ -452,9 +449,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
 		}
 
 		update_mineable_field (*mf);
-		if (gametime%500 ==0) //just to reduce number of printouts
-			printf (" TDEBUG: postponing mineable fields check by : %d\n",mineable_fields.size() * 5 );
-		mf->next_update_due = gametime + FIELD_UPDATE_INTERVAL + mineable_fields.size() * 5 ;
+		mf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
 
 		mineable_fields.push_back (mf);
 		mineable_fields.pop_front ();
@@ -707,7 +702,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 }
 
 
-/// Updates the productionsites statistics needed for construction decision.
+/// Updates the production and MINE sites statistics needed for construction decision.
 void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 	// Updating the stats every 20 seconds should be enough
 	next_stats_update_due = gametime + 20000;
@@ -718,7 +713,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 			buildings.at(i).current_stats = 0;
 		// If there are no buildings of that type set the current_stats to 100
 		else
-			buildings.at(i).current_stats = 100;
+			buildings.at(i).current_stats = 0;  //there was 100, this confuses algorithm
 		buildings.at(i).unoccupied = false;
 	}
 
@@ -738,6 +733,29 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 		productionsites.push_back(productionsites.front());
 		productionsites.pop_front();
 	}
+
+	//for mines also
+	// Check all available productionsites
+	for (uint32_t i = 0; i < mines.size(); ++i) {
+		assert(mines.front().bo->cnt_built > 0);
+
+		// Add statistics value
+		mines.front().bo->current_stats +=
+			mines.front().site->get_statistics_percent();
+
+		// Check whether this building is completely occupied
+		mines.front().bo->unoccupied |=
+			!mines.front().site->can_start_working();
+
+		// Now reorder the buildings
+		mines.push_back(mines.front());
+		mines.pop_front();
+	}
+
+
+
+
+
 
 	// Scale statistics down
 	for (uint32_t i = 0; i < buildings.size(); ++i) {
@@ -819,7 +837,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 	//checking amount of free spots, if needed setting new building stop flag
 	new_buildings_stop=false;
-	if (militarysites.size()*2+20<	productionsites.size() or spots+mines.size()<8 or game().get_gametime()<300000){
+	if (militarysites.size()*2+20<	productionsites.size() or spots+mines.size()<8 or game().get_gametime()<900000){
 		new_buildings_stop=true;
 	}
 		if (NEW_BUILDING_DEBUG) printf (" TDEBUG new buildings stop: %s; milit: %d vs prod: %d buildings, spots: %d\n",new_buildings_stop?"Y":"N",militarysites.size(),productionsites.size(),spots);	
@@ -972,8 +990,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// production hint (f.e. associate forester with logs)
 					if (bo.need_water and  bf->water_nearby < 3) //probably some of them needs water
 							continue;					
-					if (bo.total_count() < 3)
+					if (bo.total_count() < 3){
 						prio=bulgarian_constant+2;
+						prio = recalc_with_border_range(*bf, prio);
+						}
 					else if (bo.cnt_under_construction==0 and bo.unoccupied==0 and
 						bo.total_count()*6< static_cast<int32_t>(productionsites.size() + militarysites.size())) {
 
@@ -991,10 +1011,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						
 						//we treat separately lumberjacts and other supporters
 						if (tribe->safe_ware_index("log") == bo.production_hint and is_needed)
-							prio=bulgarian_constant+10;
+							prio=bulgarian_constant+5+bf->producers_nearby.at(bo.production_hint)*3;
 						//number of supporting buldings should be less then producers of final material
+						else if (game().get_gametime()<1800000)
+							prio=-1;
 						else if (is_needed and (bo.cnt_under_construction +bo.unoccupied) ==0 and bo.total_count()<wares.at(bo.production_hint).producers)
-							prio=bulgarian_constant+10;
+							prio=bulgarian_constant+5+bf->producers_nearby.at(bo.production_hint)*3;
 						else
 							prio=-1;
 
@@ -1065,7 +1087,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 								prio=150+max_preciousness;
 						} else if (game().get_gametime() < 600000) {
 							if ((bo.is_basic or bo.prod_build_material) and  output_is_needed and (bo.total_count() + bo.cnt_under_construction + bo.unoccupied)<=1 and (bo.cnt_under_construction + bo.unoccupied<=1)==0)
-								prio=max_preciousness+bulgarian_constant;
+								prio=max_preciousness+80+bulgarian_constant;
 							//else if (bo.is_basic and  bo.total_count()<=0 and bo.cnt_under_construction==0 )
 								//prio=max_preciousness;
 							else if (! bo.is_basic and  bo.total_count()+bo.cnt_under_construction+bo.unoccupied<=1 and  output_is_needed){
@@ -1103,9 +1125,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						if (prio<=0 )
 							continue;
 						
-						//then we consider borders and enemies nearby (if any)		
+						//then we consider borders and enemies nearby (if any)	
+						//printf ("  TDEBUG: 	%s: prio before: %d, unowned nearby %d,coords: %3d x %3d,\n",
+						//bo.name,prio,bf->unowned_land_nearby,bf->coords.x,bf->coords.y);
 						prio = recalc_with_border_range(*bf, prio);	
-
+						//printf ("  TDEBUG: 	 prio after: %d\n",prio);
+						
+						
 						//+1 if any consumers are nearby
 						consumers_nearby_count=0;
 						for (size_t k = 0; k < bo.outputs.size(); ++k)
@@ -1129,8 +1155,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				if (new_military_buildings_stop and not bf->enemy_nearby)
 					continue;
 
-				if (bo.desc->get_size()==3 and game().get_gametime() < 1800000) //do not built fortresses in first half of hour of game
-					continue;
+				//if (bo.desc->get_size()==3 and game().get_gametime() < 1800000) //do not built fortresses in first half of hour of game
+					//continue;
 				
 				if (!bf->unowned_land_nearby)
 					continue;				
@@ -1144,6 +1170,11 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				prio  = prio > 0 ? prio : 1;
 				prio *= expand_factor;
 				prio /= 2;
+
+				//adding weight for stones, but only affecting small buildings (? good idea ?)
+				//printf (" TDEBUG stones nearby: %3d\n",bf->stones_nearby);
+				if (bo.desc->get_size()==1)
+					prio+=bf->stones_nearby/5;
 
 				if (bf->enemy_nearby)
 					prio *= 2;
@@ -1209,7 +1240,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			}	
 				
 			// think of space consuming buildings nearby like farms or vineyards
-			prio /= 1 + bf->space_consumers_nearby;				
+			prio -=  bf->space_consumers_nearby*10;				
 				
 			// Stop here, if priority is 0 or less.
 			if (prio <= 0)
@@ -1219,7 +1250,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			prio += bf->preferred ?  1 : 0;				
 				
 			// don't waste good land for small huts
-			prio -= (maxsize - bo.desc->get_size()) * 3;
+			prio -= (maxsize - bo.desc->get_size()) * 5;
 			if (prio > proposed_priority) {
 				proposed_building = bo.id;
 				proposed_priority = prio;
@@ -1242,14 +1273,16 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		if (game().get_gametime() < 900000)
 			continue;
 			
-		if (game().get_gametime() < 1800000 and bo.total_count()>0)
+		if (game().get_gametime() < 1800000 and (bo.total_count() + bo.unoccupied + bo.cnt_under_construction)>0)
 			continue;	
+
 
 		// Only have 1 mine of a type under construction
 		if ((bo.cnt_under_construction + bo.unoccupied )>= 1)
 			continue;
 		
-		if (bo.current_stats<50 and (bo.cnt_built-bo.unoccupied)>2)
+		if (MINES_DEBUG) printf (" TDEBUG: considering %12s: stat: %3d, count %2d / %2d / %2d\n",bo.name,bo.current_stats,bo.total_count(),bo.unoccupied,bo.cnt_under_construction);
+		if ((bo.cnt_built-bo.unoccupied)>0 and bo.current_stats<50)
 			continue;
 			
 		//iterating over fields
@@ -1281,15 +1314,18 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				}
 			if (blocked) continue;
 
-			//if mines nearby
-			prio -= 3 * (*j)->mines_nearby ;
-
+			if (MINES_DEBUG) printf ("  TDEBUG: priority before near mines consideration: %3d, at  %3d x %3d\n",prio,(*j)->coords.x,(*j)->coords.y);
+	
+			//if mines nearby - this check mines in too big radius - no sense to consider this
+			//prio -= 4 * (*j)->mines_nearby ;
+			//if (MINES_DEBUG) printf ("  TDEBUG: priority after near mines consideration: %3d; value: %2d\n",prio,(*j)->mines_nearby);		
 			if (prio > proposed_priority) {
 
 				proposed_building = bo.id;
 				proposed_priority = prio;
 				proposed_coords = (*j)->coords;
 				mine = true;
+				if (MINES_DEBUG) printf ("   TDEBUG: using %-12s as a candidate\n",bo.name);	
 			}
 		} //ending interation over fields
 	} //ending iteration over buildings
@@ -2335,6 +2371,10 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 	bool changed = false;
 	int32_t stocklevel;
 
+	// Reorder and set new values; - better now because there are multiple returns in the function
+	productionsites.push_back(productionsites.front());
+	productionsites.pop_front();
+
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
 
@@ -2344,6 +2384,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 			radius = i.current->first;
 
 	Map & map = game().map();
+
+	if (STANDBY_DEBUG) printf ("  TDEBUG: check_productionsites(): testing building %s\n",site.bo->name);
 
 	// Lumberjack / Woodcutter handling
 	if
@@ -2360,13 +2402,13 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		// near, a forester will plant some trees or some new trees will seed
 		// in reach. Computer players can easily run out of wood if this check
 		// is not done.
-		if (site.bo->cnt_built <= 3)
+		if (site.bo->cnt_built <= 5)
 			return false;
-		if (site.site->get_statistics_percent() < 20 ) {
+		if (site.site->get_statistics_percent() < 10 ) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
-			printf (" TDEBUG: dismantling lumberjacks hut\n");
+			//printf (" TDEBUG: dismantling lumberjacks hut\n");
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
 			return true;
@@ -2442,7 +2484,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 			stocklevel+=(*l.current)->economy.stock_ware(wt);
 		}
 					
-		if (STANDBY_DEBUG) printf ("  %s:stock level: %d\n",site.bo->name,stocklevel);
+		if (STANDBY_DEBUG) printf ("  %s:stock level: %d, status: %s\n",site.bo->name,stocklevel,site.site->is_stopped()?"stopped":"running");
 		if (stocklevel>200 and not site.site->is_stopped()){
 			if (STANDBY_DEBUG) printf ("  stopping building\n");
 			game().send_player_start_stop_building (*site.site);}
@@ -2526,9 +2568,9 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		changed = true;
 	}
 
-	// Reorder and set new values;
-	productionsites.push_back(productionsites.front());
-	productionsites.pop_front();
+	//// Reorder and set new values;
+	//productionsites.push_back(productionsites.front());
+	//productionsites.pop_front();
 	return changed;
 }
 
@@ -2548,6 +2590,10 @@ bool DefaultAI::check_mines(int32_t const gametime)
 	ProductionSiteObserver & site = mines.front();
 	Map & map = game().map();
 	Field * field = map.get_fcoords(site.site->get_position()).field;
+
+	// Reorder and set new values; - due to returns within the function
+	mines.push_back(mines.front());
+	mines.pop_front();
 
 	// Don't try to enhance as long as stats are not down to 0% - it is possible,
 	// that some neighbour fields still have resources
@@ -2597,9 +2643,9 @@ bool DefaultAI::check_mines(int32_t const gametime)
 		changed = true;
 	}
 
-	// Reorder and set new values;
-	mines.push_back(mines.front());
-	mines.pop_front();
+	//// Reorder and set new values;
+	//mines.push_back(mines.front());
+	//mines.pop_front();
 	return changed;
 }
 
@@ -2767,12 +2813,14 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField & bf, int32_t p
 {
 	// Prefer building space in the inner land.
 	prio /= (1 + (bf.unowned_land_nearby / 4));
+	if (bf.unowned_land_nearby>15)
+		prio-=(bf.unowned_land_nearby-15);
 
 	// Especially places near the frontier to the enemies are unlikely
 	//  NOTE take care about the type of computer player. The more
 	//  NOTE aggressive a computer player is, the more important is
 	//  NOTE this check. So we add \var type as bonus.
-	if (bf.enemy_nearby)
+	if (bf.enemy_nearby and prio>0)
 		prio /= (3 + type);
 
 	return prio;
