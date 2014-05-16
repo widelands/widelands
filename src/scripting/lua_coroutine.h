@@ -22,15 +22,14 @@
 
 #include <stdint.h>
 
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "scripting/eris/lua.hpp"
 
+class FileRead;
+class FileWrite;
+
 namespace Widelands {
-class Map_Map_Object_Loader;
 class Player;
 struct Coords;
-struct Map_Map_Object_Saver;
 }  // namespace Widelands
 
 // Easy handling of function objects and coroutines.
@@ -67,8 +66,8 @@ private:
 
 	// Input/Output for coroutines. Do not call directly, instead use
 	// LuaGameInterface methods for this.
-	uint32_t write(lua_State*, Widelands::FileWrite&, Widelands::Map_Map_Object_Saver&);
-	void read(lua_State*, Widelands::FileRead&, Widelands::Map_Map_Object_Loader&, uint32_t);
+	void write(FileWrite&);
+	void read(lua_State*, FileRead&);
 
 	lua_State* m_L;
 	uint32_t m_idx;

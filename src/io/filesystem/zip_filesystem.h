@@ -44,8 +44,6 @@ public:
 	virtual bool FileExists (const std::string & path) override;
 
 	virtual void * Load(const std::string & fname, size_t & length) override;
-	virtual void * fastLoad
-		(const std::string & fname, size_t & length, bool & fast) override;
 
 	virtual void Write
 		(const std::string & fname, void const * data, int32_t length) override;

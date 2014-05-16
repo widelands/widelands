@@ -20,6 +20,8 @@
 #ifndef REPLAY_GAME_CONTROLLER_H
 #define REPLAY_GAME_CONTROLLER_H
 
+#include <memory>
+
 #include "gamecontroller.h"
 #include "logic/cmd_queue.h"
 #include "wlapplication.h"

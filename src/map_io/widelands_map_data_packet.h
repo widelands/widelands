@@ -20,7 +20,6 @@
 #ifndef WIDELANDS_MAP_DATA_PACKET_H
 #define WIDELANDS_MAP_DATA_PACKET_H
 
-#include "logic/widelands_filewrite.h"
 #include "wexception.h"
 
 class FileSystem;

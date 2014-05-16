@@ -74,8 +74,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 
 		FileRead fr;
 
-		//fastOpen tries to use mmap
-		fr.fastOpen(*g_fs, fname);
+		fr.Open(*g_fs, fname);
 
 		surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 

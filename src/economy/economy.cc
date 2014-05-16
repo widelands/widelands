@@ -50,7 +50,7 @@ Economy::Economy(Player & player) :
 
 	player.add_economy(*this);
 
-	m_ware_target_quantities   = new Target_Quantity[nr_wares  ];
+	m_ware_target_quantities   = new Target_Quantity[nr_wares];
 	for (Ware_Index i = 0; i < nr_wares; ++i) {
 		Target_Quantity tq;
 		tq.permanent =

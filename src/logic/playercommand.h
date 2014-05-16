@@ -20,6 +20,8 @@
 #ifndef PLAYERCOMMAND_H
 #define PLAYERCOMMAND_H
 
+#include <memory>
+
 #include "logic/cmd_queue.h"
 #include "economy/flag.h"
 #include "logic/message_id.h"

@@ -29,6 +29,8 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -38,8 +40,7 @@
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
+#include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
@@ -599,7 +600,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	}
 
 	// Position
-	imm.m_position = fr.Coords32(egbase().map().extent());
+	imm.m_position = ReadCoords32(&fr, egbase().map().extent());
 	imm.set_position(egbase(), imm.m_position);
 
 	// Animation
@@ -700,8 +701,8 @@ void Immovable::save
 	// The main loading data follows
 	BaseImmovable::save(egbase, mos, fw);
 
-	fw.Player_Number8(get_owner() ? get_owner()->player_number() : 0);
-	fw.Coords32(m_position);
+	fw.Unsigned8(get_owner() ? get_owner()->player_number() : 0);
+	WriteCoords32(&fw, m_position);
 
 	// Animations
 	fw.String(descr().get_animation_name(m_anim));

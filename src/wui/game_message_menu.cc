@@ -279,7 +279,7 @@ void GameMessageMenu::archive_or_restore()
 	switch (mode) {
 	case Inbox:
 		//archive selected messages
-		for (int i = 0; i < list->size(); ++i)
+		for (size_t i = 0; i < list->size(); ++i)
 			if (list->get_record(i).is_checked(ColSelect))
 			{
 				work_done = true;
@@ -299,7 +299,7 @@ void GameMessageMenu::archive_or_restore()
 		break;
 	case Archive:
 		//restore selected messages
-		for (int i = 0; i < list->size(); ++i)
+		for (size_t i = 0; i < list->size(); ++i)
 			if (list->get_record(i).is_checked(ColSelect))
 			{
 				work_done = true;
@@ -340,14 +340,14 @@ void GameMessageMenu::center_view()
  */
 void GameMessageMenu::do_clear_selection()
 {
-	for (int i = 0; i < list->size(); ++i)
+	for (size_t i = 0; i < list->size(); ++i)
 		list->get_record(i).set_checked
 			(ColSelect, false);
 }
 
 void GameMessageMenu::do_invert_selection()
 {
-	for (int i = 0; i < list->size(); ++i)
+	for (size_t i = 0; i < list->size(); ++i)
 		list->get_record(i).toggle(ColSelect);
 }
 

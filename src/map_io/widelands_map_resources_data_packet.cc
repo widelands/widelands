@@ -19,12 +19,12 @@
 
 #include "map_io/widelands_map_resources_data_packet.h"
 
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "logic/world.h"
 
 namespace Widelands {

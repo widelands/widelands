@@ -20,9 +20,10 @@
 #ifndef WIDELANDS_MAP_BUILDING_DATA_PACKET_H
 #define WIDELANDS_MAP_BUILDING_DATA_PACKET_H
 
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_data_packet.h"
+
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 

@@ -26,6 +26,7 @@
 
 #include "constants.h"
 #include "i18n.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
