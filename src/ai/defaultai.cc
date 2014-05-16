@@ -49,16 +49,16 @@
 #include <valgrind/callgrind.h> //remove
 
 #define FIELD_UPDATE_INTERVAL 1000
-#define MILITARY_DEBUG false
-#define MIL_DISM_DEBUG false
-#define PRODUCTION_DEBUG false
-#define HINT_DEBUG false
-#define ENABLE_CALLGRIND false
-#define WINNER_DEBUG false
-#define NEW_BUILDING_DEBUG false
-#define STANDBY_DEBUG false
-#define MINES_DEBUG false
-#define UPGRADE_DEBUG false
+#define MILITARY_DEBUG 		false
+#define MIL_DISM_DEBUG 		false
+#define PRODUCTION_DEBUG 	false
+#define HINT_DEBUG 			false
+#define ENABLE_CALLGRIND 	false
+#define WINNER_DEBUG 		false
+#define NEW_BUILDING_DEBUG 	false
+#define STANDBY_DEBUG 		false
+#define MINES_DEBUG 		false
+#define UPGRADE_DEBUG 		false
 
 using namespace Widelands;
 
@@ -116,7 +116,9 @@ DefaultAI::~DefaultAI()
  */
 void DefaultAI::think ()
 {
-	if (ENABLE_CALLGRIND) {CALLGRIND_START_INSTRUMENTATION;}
+	if (ENABLE_CALLGRIND and game().get_gametime()>20*60*1000) {CALLGRIND_START_INSTRUMENTATION;}
+	if (ENABLE_CALLGRIND and game().get_gametime()>22*60*1000) {CALLGRIND_STOP_INSTRUMENTATION;}
+
 	
 	if (tribe == nullptr)
 		late_initialization ();
@@ -139,7 +141,7 @@ void DefaultAI::think ()
 
 	// if there are more than one economy try to connect them with a road.
 	if (next_road_due <= gametime) {
-		next_road_due = gametime + 1000 ;
+		next_road_due = gametime + 1000;
 		if (construct_roads (gametime)) {
 			m_buildable_changed = true;
 			m_mineable_changed = true;
@@ -197,11 +199,6 @@ void DefaultAI::think ()
 	if (check_militarysites(gametime))
 		return;
 
-	// going over helper buildings and start/stop them depending
-	// on stock level 
-	//check_helpersites(gametime);
-
-
 	//  Finally consider military actions if defaultAI type is Aggressive or
 	// Normal.
 	if (!(type == DEFENSIVE))
@@ -221,7 +218,7 @@ void DefaultAI::think ()
 		inhibit_road_building = gametime + 2500;
 		return;
 	}
-	 if (ENABLE_CALLGRIND) {CALLGRIND_STOP_INSTRUMENTATION;}
+
 }
 
 /// called by Widelands game engine when an immovable changed
@@ -412,7 +409,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime)
 		}
 
 		update_buildable_field (bf);
-		bf.next_update_due = gametime + FIELD_UPDATE_INTERVAL ;
+		bf.next_update_due = gametime + FIELD_UPDATE_INTERVAL;
 
 		buildable_fields.push_back (&bf);
 		buildable_fields.pop_front ();
@@ -512,11 +509,17 @@ void DefaultAI::update_buildable_field
 	// look if there is any unowned land nearby
 	Map & map = game().map();
 	FindNodeUnowned find_unowned(player, game());
+	FindNodeUnownedMineable find_unowned_minespots(player, game());
 	Player_Number const pn = player->player_number();
 
 	field.unowned_land_nearby =
 		map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned);
-
+	if (field.unowned_land_nearby>2) // 2 is 'reasonably low' number here
+		field.unowned_minespots_nearby =
+			map.find_fields(Area<FCoords>(field.coords, range+2), nullptr, find_unowned_minespots); //+2: a mine can mine raw materials from some range
+	else 
+		field.unowned_minespots_nearby = 0;
+		
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
 
@@ -940,7 +943,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				continue;   //add randomnes and ease AI
 
 			if (bo.type == BuildingObserver::MINE)
-				continue;	
+				continue;
 	
 			if (bo.unoccupied)
 				continue;
@@ -1004,7 +1007,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				
 					// production hint (f.e. associate forester with logs)
 					if (bo.need_water and  bf->water_nearby < 3) //probably some of them needs water
-							continue;					
+							continue;
+					
+					//to eliminate to many fisher huts - this refers probably to underground water
+					//but this deserves better algorithm - to count fishes in water
+					//if (bo.need_water and  bf->producers_nearby.at(bo.outputs.at(0))>2)
+						//continue;
+												
 					if (bo.total_count() < 3){
 						prio=bulgarian_constant+2;
 						prio = recalc_with_border_range(*bf, prio);
@@ -1137,8 +1146,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
 				
-				if (MILITARY_DEBUG) printf (" Considering field %3dx%3d: unowned_land: %3d, enemy nearby:% 2d, cur stat: %2d/%2d/%2d, stops:%s %s\n"
-				,bf->coords.x,bf->coords.y,bf->unowned_land_nearby,bf->enemy_nearby,bo.cnt_built,unstationed_milit_buildings,bo.cnt_under_construction,
+				if (MILITARY_DEBUG) printf (" Considering field %3dx%3d: unowned_land: %3d, near minespots: %3d, enemy nearby:% 2d, cur stat: %2d/%2d/%2d, stops:%s %s\n"
+				,bf->coords.x,bf->coords.y,bf->unowned_land_nearby,bf->unowned_minespots_nearby,bf->enemy_nearby,bo.cnt_built,unstationed_milit_buildings,bo.cnt_under_construction,
 				new_military_buildings_stop?"Y":"N",near_enemy_b_buildings_stop?"Y":"N");
 				
 				if (military_boost>1 and MILITARY_DEBUG)
@@ -1149,13 +1158,14 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 				if (near_enemy_b_buildings_stop and bf->enemy_nearby) 
 					continue;
-				//if (bo.desc->get_size()==3 and game().get_gametime() < 1800000) //do not built fortresses in first half of hour of game
-					//continue;
+				if (bo.desc->get_size()==3 and game().get_gametime() < 15*60*1000) //do not built fortresses in first half of hour of game
+					continue;
 				
 				if (!bf->unowned_land_nearby)
-					continue;				
+					continue;
 				
-				prio  = bf->unowned_land_nearby * (1 + type);
+				//printf (" TDEBUG field: %3dx%3d: unowned land: %3d, mine spots: %3d\n",bf->coords.x,bf->coords.y,bf->unowned_land_nearby,bf->unowned_minespots_nearby);
+				prio  = (bf->unowned_land_nearby + 10 * bf->unowned_minespots_nearby) * (1 + type);
 				if (military_boost>1 and MILITARY_DEBUG)
 					printf (" TDEBUG: Original priority before boosting: %d \n",prio);
 				prio *= military_boost;
@@ -1210,7 +1220,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				continue;
 
 			// Prefer road side fields
-			prio += bf->preferred ?  1 : 0;				
+			prio += bf->preferred ?  1 : 0;
 				
 			// don't waste good land for small huts
 			prio -= (maxsize - bo.desc->get_size()) * 5;
@@ -1234,8 +1244,6 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
 			continue;
 		
-		//if (MINES_DEBUG ) printf(" TDEBUG: b\n");
-		
 		if (game().get_gametime() < 15*60*1000)
 			continue;
 			
@@ -1243,10 +1251,35 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			continue;	
 		//if (MINES_DEBUG ) printf(" TDEBUG: c\n");
 
-		// Only have 1 mine of a type under construction
+		// Don't build another building of this type, if there is already
+		// one that is unoccupied at the moment
+		// or under construction
 		if ((bo.cnt_under_construction + bo.unoccupied )> 0)
 			continue;
-		
+
+		/* - uninteresting if a mine ware is needed - we exploit the raw material
+		// Check if the produced wares are needed
+		bool needed = false;
+		container_iterate(std::list<EconomyObserver *>, economies, l) {
+			// Don't check if the economy has no warehouse.
+			if ((*l.current)->economy.warehouses().empty())
+				continue;
+			for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
+				Ware_Index wt(static_cast<size_t>(bo.outputs.at(m)));
+				if ((*l.current)->economy.needs_ware(wt)) {
+					needed = true;
+					break;
+				}
+			}
+			if (needed)
+				break;
+		}
+
+		// Only try to build mines that produce needed wares.
+		if (!needed)
+			continue;
+		*/
+	
 		//calculating actual amount of mined raw materials
 		stocklevel=0;
 		container_iterate(std::list<EconomyObserver *>, economies, l) {
@@ -1261,7 +1294,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			}
 					
 			
-		if (MINES_DEBUG ) printf (" TDEBUG: considering %12s: stat: %3d(50), stocklevel: %2d(50), count %2d / %2d / %2d\n",bo.name,bo.current_stats,stocklevel,bo.total_count(),bo.unoccupied,bo.cnt_under_construction);
+		if (MINES_DEBUG ) printf (" TDEBUG: considering %12s/%1d: stat: %3d(50), stocklevel: %2d(50), count %2d / %2d / %2d\n",bo.name,bo.mines,bo.current_stats,stocklevel,bo.total_count(),bo.unoccupied,bo.cnt_under_construction);
+
+		// Only try to build mines that produce needed wares.
 		if (((bo.cnt_built-bo.unoccupied)>0 and bo.current_stats<50) or stocklevel>50)
 			continue;
 			

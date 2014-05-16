@@ -77,6 +77,31 @@ struct FindNodeUnowned {
 };
 
 
+struct FindNodeUnownedMineable {
+	bool accept (const Map &, const FCoords & fc) const {
+		// when looking for unowned terrain to acquire, we are actually
+		// only interested in fields where mines can be built.
+		// Fields should be completely unowned
+		//this is just modified copy of  FindNodeUnowned (:
+		return
+			(fc.field->nodecaps() & BUILDCAPS_MINE)
+			&&
+			(fc.field->get_owned_by() == 0);
+			 //|| player->is_hostile(*game.get_player(fc.field->get_owned_by())))
+			//&& (!onlyenemies || (fc.field->get_owned_by() != 0));
+	}
+
+	//int8_t playernum;
+	Player * player;
+	Game & game;
+	//bool onlyenemies;
+
+	FindNodeUnownedMineable(Player * p, Game & g)
+		: player(p), game(g)//, onlyenemies(oe)
+	{}
+};
+
+
 struct FindNodeWater {
 	bool accept(const Map & map, const FCoords & coord) const {
 		return
@@ -152,6 +177,7 @@ struct BuildableField {
 	bool    enemy_nearby;
 
 	uint8_t unowned_land_nearby;
+	uint8_t unowned_minespots_nearby;
 
 	uint8_t trees_nearby;
 	uint8_t stones_nearby;
