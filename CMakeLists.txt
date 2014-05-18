@@ -183,7 +183,6 @@ IF (Compiler_std_supported)
   set (WL_COMPILERFLAG_CXXSTD " ${PARAMETER_COMPILERFLAG_CXXSTD}") #the space is on purpose!
 ENDIF (Compiler_std_supported)
 
-
 CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
 IF (Compiler_old-style-cast_supported)
   IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -211,8 +210,6 @@ IF (Compiler_gcc_warnings_supported)
 ELSE (Compiler_gcc_warnings_supported)
   message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM or Visual Studio.")
 ENDIF (Compiler_gcc_warnings_supported)
-
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)
 
 IF (WL_STRICT)
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
