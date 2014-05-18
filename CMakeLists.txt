@@ -155,10 +155,9 @@ endif (WL_UNIT_TESTS)
 
 option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
 
-set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
-set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
+set (PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR "-isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wall -Wextra")
-set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wformat -Wformat-nonliteral -Wformat-security -Wformat-y2k -Winit-self -Winvalid-pch -Wmissing-include-dirs -Woverlength-strings -Wpacked -Wpointer-arith -Wredundant-decls -Wshadow -Wsign-promo -Wswitch-default -Wundef -Wunused -Wunused-macros")
+set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wformat -Wformat-nonliteral -Wformat-security -Wformat-y2k -Winit-self -Winvalid-pch -Wmissing-include-dirs -Wold-style-cast -Woverlength-strings -Wpacked -Wpointer-arith -Wredundant-decls -Wshadow -Wsign-promo -Wswitch-default -Wundef -Wunused -Wunused-macros")
 set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op -Wsync-nand -Wtrampolines")
 set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 include(CheckCXXCompilerFlag) #this include should be safe
@@ -183,14 +182,14 @@ IF (Compiler_std_supported)
   set (WL_COMPILERFLAG_CXXSTD " ${PARAMETER_COMPILERFLAG_CXXSTD}") #the space is on purpose!
 ENDIF (Compiler_std_supported)
 
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
-IF (Compiler_old-style-cast_supported)
+CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR} Compiler_boost_include_dir_supported)
+IF (Compiler_boost_include_dir_supported)
   IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED}") #the space is on purpose!
+    set (WL_COMPILERFLAG_BOOST_INCLUDE_DIR " ${PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR}") #the space is on purpose!
   ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
     include_directories(SYSTEM ${Boost_INCLUDE_DIR})
   ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-ENDIF (Compiler_old-style-cast_supported)
+ENDIF()
 
 CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)
 IF (Compiler_generic_warnings_supported)
@@ -220,11 +219,11 @@ IF (WL_STRICT)
 ENDIF (WL_STRICT)
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "${WL_COMPILERFLAG_CXXSTD} -g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "${WL_COMPILERFLAG_CXXSTD} -g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_BOOST_INCLUDE_DIR}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 set (WL_COMPILERFLAG_OPTIMIZATIONS "-O3")
 
-set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_CXXSTD} ${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_CXXSTD} ${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
