@@ -134,6 +134,9 @@ private:
 	bool check_productionsites (int32_t);
 	bool check_mines           (int32_t);
 	bool check_militarysites   (int32_t);
+	uint32_t get_stocklevel_by_hint 		(size_t);
+	uint32_t get_stocklevel 		(BuildingObserver & );
+	uint32_t get_stocklevel 		(size_t); //count all direct outputs
 	void check_helpersites	   (int32_t);
 
 	int32_t recalc_with_border_range(const BuildableField &, int32_t);
@@ -199,6 +202,7 @@ private:
 	bool new_buildings_stop;
 	uint16_t unstationed_milit_buildings; //counts empty military buildings (ones where no soldier is belogning to)
 	uint16_t military_under_constr;
+	uint16_t military_last_dismantle;
 	int32_t military_last_build;  //sometimes expansions just stops, this is time of last military building build
 };
 

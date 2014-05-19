@@ -186,6 +186,7 @@ struct BuildableField {
 
 	int16_t military_influence;
 
+
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
 
@@ -276,6 +277,10 @@ struct BuildingObserver {
 
 	int32_t                           cnt_built;
 	int32_t                           cnt_under_construction;
+	
+	//used to track amount of stocklevel
+	uint32_t						  stocklevel;
+	int32_t						  stocklevel_time;  //time when stocklevel was last time recalculated
 
 	int32_t total_count() const {return cnt_built + cnt_under_construction;}
 	bool buildable(Widelands::Player & player) {
