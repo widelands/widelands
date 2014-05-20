@@ -36,6 +36,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	-- TODO get tool from C++
    -- -- NOCOM(#gunchleoc): needs more wrapping - especially for the worker description.
    -- -- NOCOM(#gunchleoc2sirver): I tried and failed - see src/scripting/lua_map.cc, comment line 1393
+	building_help_crew_string("barbarians", building_description, building_description.working_positions, "pick") .. --test: we get nil instead of a table
 	building_help_crew_string("barbarians", building_description, {"chief-miner", "miner"}, "pick") ..
 
 	--Building Section
