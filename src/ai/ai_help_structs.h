@@ -181,10 +181,14 @@ struct BuildableField {
 
 	uint8_t trees_nearby;
 	uint8_t stones_nearby;
-	uint8_t water_nearby;
+	int8_t water_nearby;
 	uint8_t space_consumers_nearby;
 
 	int16_t military_influence;
+	int16_t military_capacity;
+	int16_t military_loneliness ;
+	int16_t military_presence    ;	
+	int16_t military_stationed    ;
 
 
 	std::vector<uint8_t> consumers_nearby;
@@ -200,10 +204,13 @@ struct BuildableField {
 		enemy_nearby(0),
 		unowned_land_nearby(0),
 		trees_nearby       (0),
-		stones_nearby      (0),
-		water_nearby(0),
+		stones_nearby      (1),		//just indicate "value must be calculated"
+		water_nearby       (-1),  //this is not changed over game, -1 indicated that value has never been calculated
 		space_consumers_nearby(0),
-		military_influence(0)
+		military_influence(0),
+		military_capacity (0),
+		military_loneliness   (1000),
+		military_presence     (0)
 	{}
 };
 
@@ -281,6 +288,7 @@ struct BuildingObserver {
 	//used to track amount of stocklevel
 	uint32_t						  stocklevel;
 	int32_t						  stocklevel_time;  //time when stocklevel was last time recalculated
+	int32_t							last_dismantle_time;
 
 	int32_t total_count() const {return cnt_built + cnt_under_construction;}
 	bool buildable(Widelands::Player & player) {

@@ -164,7 +164,7 @@ private:
 
 	bool m_buildable_changed;
 	bool m_mineable_changed;
-
+	
 	Widelands::Player                * player;
 	Widelands::Tribe_Descr const     * tribe;
 
@@ -188,6 +188,7 @@ private:
 	int32_t next_road_due;
 	int32_t next_stats_update_due;
 	int32_t next_construction_due;
+	int32_t next_mine_construction_due;
 	int32_t next_productionsite_check_due;
 	int32_t next_mine_check_due;
 	int32_t next_militarysite_check_due;
