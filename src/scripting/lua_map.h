@@ -357,6 +357,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_producers(lua_State *);
 
 	/*
 	 * Lua methods

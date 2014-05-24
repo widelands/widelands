@@ -1724,6 +1724,7 @@ const MethodType<L_WareDescription> L_WareDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
+	PROP_RO(L_WareDescription, producers),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1737,6 +1738,25 @@ void L_WareDescription::__unpersist(lua_State * /* L */) {
  PROPERTIES
  ==========================================================
  */
+
+
+/* RST
+	.. attribute:: producers
+
+		(RO) a list of building descriptions that can procude this ware.
+*/
+int L_WareDescription::get_producers(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+
+	lua_newtable(L);
+	int index = 1;
+	for (auto building_index : get()->producers()) {
+		lua_pushint32(L, index++);
+		upcasted_building_descr_to_lua(L, tribe.get_building_descr(building_index));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
 
 
 /* RST

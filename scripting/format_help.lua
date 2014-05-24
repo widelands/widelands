@@ -400,6 +400,16 @@ end
 function building_help_inputs(tribename, building_description, buildinglist, warename)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
+	result = result .. rt(h3("Test!!!:"))
+
+	local ware_description = wl.Game():get_ware_description(tribename, "coal")
+	for i, building in ipairs(ware_description.producers) do
+		result = result ..
+			rt(p(building.name))
+	end
+	result = result .. rt(h3("Test!!! end"))
+
+
 	result = result .. rt(h3(_"Incoming:"))
 
 	-- TODO get the buildinglist with the help of the resource
