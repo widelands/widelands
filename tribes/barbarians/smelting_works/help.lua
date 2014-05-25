@@ -10,7 +10,6 @@ return {
 	return
 
 	--Lore Section
--- TODO crashes
 	building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section

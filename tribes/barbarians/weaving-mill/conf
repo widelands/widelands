@@ -29,13 +29,13 @@ consume=thatchreed
 produce=cloth
 
 [idle]
-pics=i_??.png
+pics=weaving-mill_i_??.png
 hotspot=36 74
 
 [build]
-pics=b_??.png
+pics=weaving-mill_b_??.png
 hotspot=36 74
 
 [working]
-pics=w_??.png
+pics=weaving-mill_w_??.png
 hotspot=36 74

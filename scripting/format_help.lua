@@ -441,12 +441,18 @@ function building_help_outputs(tribename, building_description, is_basic, add_co
 				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
 		end
 	elseif(building_description.ismine) then
+
 		-- TRANSLATORS: This is a verb (The miner mines)
 		result = result .. rt(h3(_"Mines:"))
-
 		for i, ware in ipairs(building_description.output_ware_types) do
+			-- TODO need to hack this because of inconsitency in the naming system.
+			-- Can't rename the files, because geologist won't work.
+			local resi_name = ware
+			if(resi_name == "ironore") then resi_name = "iron" end
+			if(resi_name == "raw_stone") then resi_name = "granit" end
+			if(resi_name == "goldore") then resi_name = "gold" end
 			result = result ..
-				building_help_dependencies_resi(tribename, {"resi_"..ware.."2", building_description.name, ware}, ware)
+				building_help_dependencies_resi(tribename, {"resi_"..resi_name.."2", building_description.name, ware}, ware)
 		end
 	else
 		result = result .. rt(h3(_"Produces:"))

@@ -10,8 +10,7 @@ return {
 	return
 
 	--Lore Section
--- TODO crashes
---	building_help_lore_string("barbarians", building_description, _[[‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,<br> as deadly as a viper.’]], _[[‘The Art of Hunting’]]) ..
+	building_help_lore_string("barbarians", building_description, _[[‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,<br> as deadly as a viper.’]], _[[‘The Art of Hunting’]]) ..
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "meat",

@@ -10,8 +10,7 @@ return {
 	return
 
 	--Lore Section
-	-- TODO crashes
-	--building_help_lore_string("barbarians", building_description, _[[‘What do you mean, my fish ain’t fresh?!’]], _[[Source needed]]) ..
+	building_help_lore_string("barbarians", building_description, _[[‘What do you mean, my fish ain’t fresh?!’]], _[[Source needed]]) ..
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "blackwood",

@@ -14,10 +14,9 @@ return {
 
 	--General Section
 	-- TODO this building acts like a warehouse
-	-- TODO crashes, because no menu.png
---	building_help_general_string("barbarians", building_description, "ship",
---		_[[Text needed]],
---		"") ..
+	building_help_general_string("barbarians", building_description, "ship",
+		_[[Text needed]],
+		"") ..
 
 	--Dependencies
 	-- TODO

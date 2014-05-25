@@ -20,7 +20,6 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
-
 	building_help_inputs("barbarians", building_description) ..
 	building_help_outputs("barbarians", building_description) ..
 

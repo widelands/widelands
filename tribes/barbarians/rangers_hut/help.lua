@@ -11,8 +11,7 @@ return {
 
 	--Lore Section
 	--"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
-	-- TODO crashes
---	building_help_lore_string("barbarians", building_description, _[[‘He who can grow two trees where normally only one will grow exceeds the most important general!’]],_[[Chat’Karuth in a conversation with a Ranger]]) ..
+	building_help_lore_string("barbarians", building_description, _[[‘He who can grow two trees where normally only one will grow exceeds the most important general!’]],_[[Chat’Karuth in a conversation with a Ranger]]) ..
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "log",

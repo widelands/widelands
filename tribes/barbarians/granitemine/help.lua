@@ -19,9 +19,9 @@ return {
 		"2") ..
 
 	--Dependencies
+	rt(h2(_"Dependencies")) ..
 	building_help_inputs("barbarians", building_description) ..
--- TODO crashes
---	building_help_outputs("barbarians", building_description, false, true) ..
+	building_help_outputs("barbarians", building_description, false, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

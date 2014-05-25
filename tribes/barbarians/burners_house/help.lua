@@ -10,8 +10,7 @@ return {
 	return
 
 	--Lore Section
-	-- TODO this crashes: Could not find filename: could not find file or directory: tribes/barbarians/burners_house/burners_house_i_00.png
-	--building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
+	building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "coal",
