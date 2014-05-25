@@ -19,7 +19,7 @@ return {
 		_"The ranger’s hut needs free space within the working radius to plant the trees.", "5") ..
 
 	--Dependencies
-	rt(h2(_"Dependencies")) ..
+	building_help_dependencies_production("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

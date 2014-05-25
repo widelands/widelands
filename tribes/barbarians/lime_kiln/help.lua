@@ -18,10 +18,7 @@ return {
 		_"The Lime Kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites.") ..
 
 	--Dependencies
-	rt(h2(_"Dependencies")) ..
-
-	building_help_inputs("barbarians", building_description) ..
-	building_help_outputs("barbarians", building_description, false, true) ..
+	building_help_dependencies_production("barbarians", building_description, false, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

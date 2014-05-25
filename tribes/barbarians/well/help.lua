@@ -19,8 +19,7 @@ return {
 		"", "1") ..
 
 	--Dependencies
-	rt(h2(_"Dependencies")) ..
-	building_help_outputs("barbarians", building_description, true) ..
+	building_help_dependencies_production("barbarians", building_description, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

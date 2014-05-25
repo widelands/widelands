@@ -19,9 +19,9 @@ return {
 
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
-	building_help_inputs("barbarians", building_description) ..
+	building_help_dependencies_production("barbarians", building_description) ..
 
-		rt(h3(_"Outgoing:")) ..
+-- outgoing
 -- TODO warmill-> ax -> headquarters -> soldier
 -- TODO warmill -> sharpax, broadax, bronzeax, battleax, warriorsax -> trainingcamp
 

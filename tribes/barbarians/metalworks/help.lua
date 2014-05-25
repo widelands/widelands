@@ -18,10 +18,10 @@ return {
 		_"The barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that barbarians need. The others are for weapons.") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description) ..
+	building_help_dependencies_production("barbarians", building_description) ..
 
 	-- TODO Handle multiple output wares
-		rt(h3(_"Outgoing:")) ..
+
 --		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/bread_paddle/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/baker/menu.png" },p(_"Baker")) ..
 --		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/felling_ax/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/lumberjack/menu.png" },p(_"Lumberjack")) ..
 --		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/fire_tongs/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/smelter/menu.png" },p(_"Smelter")) ..

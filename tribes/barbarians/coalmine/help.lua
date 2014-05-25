@@ -19,9 +19,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 		_"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal.":bformat("1/3"), "2") ..
 
 	--Dependencies
-	rt(h2(_"Dependencies")) ..
-	building_help_inputs("barbarians", building_description) ..
-	building_help_outputs("barbarians", building_description) ..
+	building_help_dependencies_production("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

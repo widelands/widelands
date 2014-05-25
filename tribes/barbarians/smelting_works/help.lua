@@ -17,8 +17,7 @@ return {
 		_"Smelts iron ore into iron and gold ore into gold.", "") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description) ..
-	building_help_outputs("barbarians", building_description) ..
+	building_help_dependencies_production("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

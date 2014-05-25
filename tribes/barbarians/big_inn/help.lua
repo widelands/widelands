@@ -18,8 +18,7 @@ return {
 		_[[Text needed]]) ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description) ..
-	building_help_outputs("barbarians", building_description) ..
+	building_help_dependencies_production("barbarians", building_description) ..
 
 	--Workers Section
 -- TODO: where is the second innkeeper?

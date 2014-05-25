@@ -18,8 +18,8 @@ return {
 		_"The barbarian axfactory is the intermediate production site in a series of three buildings. It is an upgrade from the metal workshop but doesn’t require additional qualification for the worker.") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description) ..
-		rt(h3(_"Outgoing:")) ..
+	building_help_dependencies_production("barbarians", building_description) ..
+--		rt(h3(_"Outgoing:")) ..
 -- TODO axfactory-> ax -> headquarters -> soldier
 -- TODO axfactory -> broadax -> trainingcamp
 

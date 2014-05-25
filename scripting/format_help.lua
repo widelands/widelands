@@ -387,18 +387,18 @@ end
 
 
 -- RST
--- .. function:: building_help_inputs(tribename, building_description)
+-- .. function:: building_help_outputs(tribename, building_description)
 --
---    The input buildings of a ware
+--    The input and output wares of a productionsite
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
+--    :arg is_basic: True if this is a basic productionsite like a quarry that has no input wares.
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_inputs(tribename, building_description)
+function building_help_dependencies_production(tribename, building_description, is_basic, add_constructionsite)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
-
 	local hasinput = false
 	for i, warename in ipairs(building_description.inputs) do
 	 hasinput = true
@@ -413,35 +413,17 @@ function building_help_inputs(tribename, building_description)
 		result =  rt(h3(_"Incoming:")) .. result
 	end
 
-	return result
-end
-
-
--- RST
--- .. function:: building_help_outputs(tribename, building_description)
---
---    The output wares of a building
---
---    :arg tribename: e.g. "barbarians".
---    :arg building_description: The building description we get from C++
---    :arg is_basic: True if this is a basic productionsite like a quarry that has no input wares.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_outputs(tribename, building_description, is_basic, add_constructionsite)
-	local building_description = wl.Game():get_building_description(tribename, building_description.name)
-	local result = ""
 
 	-- TODO get is_basic from [aihints] in conf, so we can define "Collects" from the output?
 	-- or check if the list of input wares is empty
-	if(is_basic) then
+	if (is_basic) then
 		result = result .. rt(h3(_"Collects:"))
 
 		for i, ware in ipairs(building_description.output_ware_types) do
 			result = result ..
 				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
 		end
-	elseif(building_description.ismine) then
-
+	elseif (building_description.ismine) then
 		-- TRANSLATORS: This is a verb (The miner mines)
 		result = result .. rt(h3(_"Mines:"))
 		for i, ware in ipairs(building_description.output_ware_types) do
@@ -455,15 +437,17 @@ function building_help_outputs(tribename, building_description, is_basic, add_co
 				building_help_dependencies_resi(tribename, {"resi_"..resi_name.."2", building_description.name, ware}, ware)
 		end
 	else
-		result = result .. rt(h3(_"Produces:"))
+		
 		for i, ware in ipairs(building_description.output_ware_types) do
+			if(i == 1) then result = result .. rt(h3(_"Produces:")) end
 			result = result ..
 				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
 		end
 	end
 
-	result = result .. rt(h3(_"Outgoing:"))
+	--result = result .. rt(h3(_"Outgoing:"))
 	for i, ware in ipairs(building_description.output_ware_types) do
+		if(i == 1) then result = result .. rt(h3(_"Outgoing:")) end
 		local ware_description = wl.Game():get_ware_description(tribename, ware)
 
 		-- constructionsite isn't listed with the consumers, and needs special treatment because it isn't a building
@@ -479,7 +463,8 @@ function building_help_outputs(tribename, building_description, is_basic, add_co
 			)
 		end
 	end
-	return result
+	if (result == "") then result = rt(p(_"None")) end
+	return rt(h2(_"Dependencies")) .. result
 end
 
 

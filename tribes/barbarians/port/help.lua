@@ -19,7 +19,7 @@ return {
 		"") ..
 
 	--Dependencies
-	-- TODO
+	-- TODO expedition costs here?
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..
