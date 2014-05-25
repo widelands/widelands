@@ -1,4 +1,7 @@
-file(GLOB WL_TEST_IO_FILESYSTEM_SRCS *.cc)
+set(WL_TEST_IO_FILESYSTEM_SRCS 
+	./filesystem_test_main.cc
+	./test_filesystem.cc
+)
 
 add_executable(test_io_filesystem ${WL_TEST_IO_FILESYSTEM_SRCS} ${TEST_EXTRA_SOURCES})
 

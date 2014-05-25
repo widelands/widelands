@@ -1,6 +1,3 @@
-file(GLOB_RECURSE ERIS_SRCS_C *.c)
-file(GLOB_RECURSE ERIS_SRCS_H *.h)
-
 SET(ERIS_SOURCES
   eris/eris.c
   eris/lapi.c

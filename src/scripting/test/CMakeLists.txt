@@ -1,5 +1,8 @@
 if (WL_UNIT_TESTS)
-  file(GLOB WL_SCRIPTING_TEST_SRCS *.cc)
+  set(WL_SCRIPTING_TEST_SRCS 
+    ./scripting_test_main.cc
+    ./test_luna.cc
+  )
 
   add_executable(test_widelands_scripting ${WL_SCRIPTING_TEST_SRCS} ${TEST_EXTRA_SOURCES})
 

@@ -1,4 +1,9 @@
-file(GLOB WL_TEST_ECONOMY_SRCS *.cc)
+set(WL_TEST_ECONOMY_SRCS 
+	./economy_test_main.cc
+	./test_economy.cc
+	./test_road.cc
+	./test_routing.cc
+)
 
 add_executable(test_economy ${WL_TEST_ECONOMY_SRCS} ${TEST_EXTRA_SOURCES})
 
