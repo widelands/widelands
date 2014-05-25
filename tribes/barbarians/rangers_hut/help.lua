@@ -23,7 +23,7 @@ return {
 	rt(h2(_"Dependencies")) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"ranger"}, "shovel") ..
+	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

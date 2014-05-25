@@ -27,7 +27,7 @@ return {
 		dependencies_basic({"tribes/barbarians/axfactory/menu.png","tribes/barbarians/sharpax/menu.png;tribes/barbarians/broadax/menu.png","tribes/barbarians/trainingcamp/menu.png"},p(_"Training Camp")) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"blacksmith"}, "hammer") ..
+	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description, "metalworks", {"metalworks"}) ..

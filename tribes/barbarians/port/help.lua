@@ -20,8 +20,7 @@ return {
 --		"") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description) ..
-	-- TODO output
+	-- TODO
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

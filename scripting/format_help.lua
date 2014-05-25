@@ -676,16 +676,15 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribename, building_description [, toolname])
+-- .. function building_help_crew_string(tribename, building_description)
 --
---    Displays a worker with an image
+--    Displays the building's workers with an image and the tool they use
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: the building_description from C++.
---    :arg toolname: the name of the tool the workers use, e.g. "pick"
 --    :returns: Workers/Crew section of the help file
 --
-function building_help_crew_string(tribename, building_description, toolname)
+function building_help_crew_string(tribename, building_description)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
@@ -697,9 +696,20 @@ function building_help_crew_string(tribename, building_description, toolname)
 		local worker_descr = nil
 		local becomes_descr = nil
 		local number_of_workers = 0
+		local toolname = nil
 
 		for i, worker in ipairs(building_description.working_positions) do
 			worker_descr = wl.Game():get_worker_description(tribename, worker)
+
+			-- get the tool for the workers. This assumes that each building only uses 1 tool
+			if(worker_descr.buildable) then
+				for j, buildcost in ipairs(worker_descr.buildcost) do
+					if( not (buildcost == "carrier" or buildcost == "none" or buildcost == nil)) then
+						toolname = buildcost
+					end
+				end
+			end
+
 			becomes_descr = worker_descr.becomes
 			number_of_workers = number_of_workers + 1
 

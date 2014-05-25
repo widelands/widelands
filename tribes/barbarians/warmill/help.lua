@@ -29,7 +29,7 @@ return {
 		--dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpax/menu.png;tribes/barbarians/broadax/menu.png;tribes/barbarians/bronzeax/menu.png;tribes/barbarians/battleax/menu.png;tribes/barbarians/warriorsax/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
 
 	--Workers Section
---	building_help_crew_string("barbarians", building_description, {"master-blacksmith", "blacksmith"}, "hammer") ..
+	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description, "axfactory", {"metalworks", "axfactory"}) ..

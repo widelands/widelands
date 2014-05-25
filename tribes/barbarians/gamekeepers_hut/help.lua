@@ -22,7 +22,7 @@ return {
 	--Dependencies: none
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"gamekeeper"}) ..
+	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

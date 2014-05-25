@@ -27,7 +27,7 @@ return {
 	dependencies_training_food("barbarians", { {"fish", "meat"}, {"strongbeer"}, {"pittabread"}}) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"trainer"}) ..
+	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

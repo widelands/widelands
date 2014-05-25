@@ -23,7 +23,7 @@ return {
 --	building_help_outputs("barbarians", building_description, {"smelting_works"}) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"miner"}, "pick") ..
+	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

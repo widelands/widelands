@@ -26,8 +26,7 @@ return {
 	building_help_outputs("barbarians", building_description, true, true) ..
 
 	--Workers Section
--- TODO causes crashes after merge from master
---	building_help_crew_string("barbarians", building_description, {"lumberjack"}, "felling_ax") ..
+	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

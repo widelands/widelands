@@ -22,7 +22,7 @@ return {
 	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"baker"}, "bread_paddle") ..
+	building_help_crew_string("barbarians", building_description) ..
 
 
 	--Building Section

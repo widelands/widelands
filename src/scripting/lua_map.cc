@@ -1816,6 +1816,8 @@ const MethodType<L_WorkerDescription> L_WorkerDescription::Methods[] = {
 const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 	PROP_RO(L_WorkerDescription, becomes),
 	PROP_RO(L_WorkerDescription, level_experience),
+	PROP_RO(L_WorkerDescription, buildable),
+	PROP_RO(L_WorkerDescription, buildcost),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1839,7 +1841,7 @@ void L_WorkerDescription::__unpersist(lua_State * /* L */) {
 */
 int L_WorkerDescription::get_becomes(lua_State * L) {
 	const Ware_Index becomes_index = get()->becomes();
-	if (!becomes_index) {
+	if (becomes_index == INVALID_INDEX) {
 		lua_pushnil(L);
 		return 1;
 	}
@@ -1857,6 +1859,35 @@ int L_WorkerDescription::get_level_experience(lua_State * L) {
 	lua_pushinteger(L, get()->get_level_experience());
 	return 1;
 }
+
+/* RST
+	.. attribute:: buildable
+
+			(RO) `true` if the worker is buildable.
+*/
+int L_WorkerDescription::get_buildable(lua_State * L) {
+	lua_pushboolean(L, get()->is_buildable());
+	return 1;
+}
+
+
+
+/* RST
+	.. attribute:: buildcost
+
+		(RO) a list of building requirements, e.g. {"carrier", "ax"}
+*/
+int L_WorkerDescription::get_buildcost(lua_State * L) {
+	lua_newtable(L);
+	int index = 1;
+	for (const auto& buildcost_pair : get()->buildcost()) {
+		lua_pushint32(L, index++);
+		lua_pushstring(L, buildcost_pair.first);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 
 /*
  ==========================================================
