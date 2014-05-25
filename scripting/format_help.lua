@@ -387,45 +387,32 @@ end
 
 
 -- RST
--- .. function:: building_help_inputs(tribename, building_description, buildinglist, ware)
+-- .. function:: building_help_inputs(tribename, building_description)
 --
 --    The input buildings of a ware
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
---    :arg buildinglist: A table of building names that produce the ware
---    :arg warename: The name of the ware for which the buildings are displayed
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_inputs(tribename, building_description, buildinglist, warename)
+function building_help_inputs(tribename, building_description)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
-	result = result .. rt(h3("Test!!!:"))
 
-	local ware_description = wl.Game():get_ware_description(tribename, "coal")
-	for i, building in ipairs(ware_description.producers) do
-		result = result ..
-			rt(p(building.name))
+	local hasinput = false
+	for i, warename in ipairs(building_description.inputs) do
+	 hasinput = true
+		local ware_description = wl.Game():get_ware_description(tribename, warename)
+		for j, producer in ipairs(ware_description.producers) do
+			result = result .. building_help_dependencies_ware_building(
+				tribename, {producer.name, warename}, warename, producer.name
+			)
+		end
 	end
-	result = result .. rt(h3("Test!!! end"))
-
-
-	result = result .. rt(h3(_"Incoming:"))
-
-	-- TODO get the buildinglist with the help of the resource
-	for j, building in ipairs(buildinglist) do
-		result = result .. building_help_dependencies_ware_building(
-			tribename, {building, ware, building_description.name}, warename, building
-		)
+	if (hasinput) then
+		result =  rt(h3(_"Incoming:")) .. result
 	end
 
-	result = result .. rt(h2("Inputs test"))
-
-	for i, ware in ipairs(building_description.inputs) do
-		result = result .. rt(p(ware))
-	end
-
-	result = result .. rt(h2("End Inputs test"))
 	return result
 end
 
@@ -437,11 +424,10 @@ end
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
---    :arg buildinglist: A table of building names that produce the ware
 --    :arg is_basic: True if this is a basic productionsite like a quarry that has no input wares.
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_outputs(tribename, building_description, buildinglist, is_basic)
+function building_help_outputs(tribename, building_description, is_basic, add_constructionsite)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
 
@@ -472,10 +458,19 @@ function building_help_outputs(tribename, building_description, buildinglist, is
 
 	result = result .. rt(h3(_"Outgoing:"))
 	for i, ware in ipairs(building_description.output_ware_types) do
-		-- TODO get the buildinglist with the help of the resource
-		for j, building in ipairs(buildinglist) do
-			result = result ..
-				building_help_dependencies_building(tribename, {ware, building}, building)
+		local ware_description = wl.Game():get_ware_description(tribename, ware)
+
+		-- constructionsite isn't listed with the consumers, and needs special treatment because it isn't a building
+		if (add_constructionsite) then
+			local string =  "image=tribes/" .. tribename .. "/" .. ware  .. "/menu.png"
+			string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/constructionsite/menu.png"
+			result = result .. rt(string, p(_"Construction Site"))
+		end
+
+		for j, consumer in ipairs(ware_description.consumers) do
+			result = result .. building_help_dependencies_building(
+				tribename, {ware, consumer.name}, consumer.name
+			)
 		end
 	end
 	return result

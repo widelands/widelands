@@ -86,8 +86,6 @@ struct WareDescr : public Map_Object_Descr {
 	// class type needed for Lua stuff
 	std::string get_type() const {return "ware";}
 
-	std::set<Building_Index> & producers();
-
 private:
 	const Tribe_Descr & m_tribe;
 	std::string m_helptext;   ///< Long descriptive text
@@ -95,7 +93,6 @@ private:
 	std::string m_icon_fname; ///< Filename of ware's main picture
 	const Image* m_icon;       ///< Index of ware's picture in picture stack
 	uint8_t     m_preciousness;
-	std::set<Building_Index>  m_producers; /// Index of Productionsites that produce this ware
 };
 
 }

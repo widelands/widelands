@@ -18,7 +18,8 @@ return {
 		_[[Text needed]]) ..
 
 	--Dependencies
-	-- TODO
+	building_help_inputs("barbarians", building_description) ..
+	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"master-brewer", "brewer"}) ..

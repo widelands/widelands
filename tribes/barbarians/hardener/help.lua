@@ -18,8 +18,8 @@ return {
 		"") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description, {"lumberjacks_hut"}, "log") ..
-	-- TODO outputs
+	building_help_inputs("barbarians", building_description) ..
+	building_help_outputs("barbarians", building_description, false, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"lumberjack"}, "felling_ax") ..

@@ -18,11 +18,8 @@ return {
 		"") ..
 
 	--Dependencies
-	-- TODO where are the resource chain images?
-	building_help_inputs("barbarians", building_description, {"farm"}, "wheat") ..
-	building_help_inputs("barbarians", building_description, {"well"}, "water") ..
-
-	building_help_outputs("barbarians", building_description, {"tavern", "inn", "big_inn", "battlearena", "trainingcamp"}) ..
+	building_help_inputs("barbarians", building_description) ..
+	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"baker"}, "bread_paddle") ..

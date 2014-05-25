@@ -21,7 +21,7 @@ return {
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
 
-	building_help_outputs("barbarians", building_description, {"battlearena", "trainingcamp", "tavern", "inn", "big_inn"}, true) ..
+	building_help_outputs("barbarians", building_description, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"fisher"}, "fishing_rod") ..

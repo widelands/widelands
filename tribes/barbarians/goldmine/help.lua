@@ -18,7 +18,7 @@ return {
 		_"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore.":bformat("1/3"), "2") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description, {"tavern", "inn", "big_inn"}, "ration") ..
+	building_help_inputs("barbarians", building_description) ..
 -- TODO the following line causes a crash
 --	building_help_outputs("barbarians", building_description, {"smelting_works"}) ..
 

@@ -19,6 +19,7 @@ return {
 		"15") ..
 
 	--Dependencies
+	building_help_inputs("barbarians", building_description) ..
 	-- TODO
 
 	--Workers Section

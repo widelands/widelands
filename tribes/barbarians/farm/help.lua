@@ -19,7 +19,7 @@ return {
 		"2") ..
 
 	--Dependencies
-	building_help_outputs("barbarians", building_description, {"bakery", "micro-brewery", "brewery", "cattlefarm"}) ..
+	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"farmer"}, "scythe") ..

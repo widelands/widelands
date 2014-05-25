@@ -18,7 +18,9 @@ return {
 		_"Weaves cloth out of thatch reed.", "") ..
 
 	--Dependencies
-	-- TODO
+	rt(h2(_"Dependencies")) ..
+	building_help_inputs("barbarians", building_description) ..
+	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"weaver"}) ..

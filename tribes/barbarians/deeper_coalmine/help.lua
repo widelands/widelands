@@ -21,8 +21,8 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 		"2") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description, {"big_inn"}, "meal") ..
-	building_help_outputs("barbarians", building_description, {"axfactory", "warmill", "helmsmithy", "smelting_works", "lime_kiln"}) ..
+	building_help_inputs("barbarians", building_description) ..
+	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"master-miner", "chief-miner", "miner"}, "pick") ..

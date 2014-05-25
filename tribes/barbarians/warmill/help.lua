@@ -19,20 +19,17 @@ return {
 
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
-	building_help_inputs("barbarians", building_description, {"smelting_works"}, "iron") ..
-	building_help_inputs("barbarians", building_description, {"smelting_works"}, "gold") ..
-	building_help_inputs("barbarians", building_description, {"burners_house", "coalmine"}, "coal") ..
+	building_help_inputs("barbarians", building_description) ..
 
 		rt(h3(_"Outgoing:")) ..
 -- TODO warmill-> ax -> headquarters -> soldier
 -- TODO warmill -> sharpax, broadax, bronzeax, battleax, warriorsax -> trainingcamp
 
-
 		--dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/ax/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
 		--dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpax/menu.png;tribes/barbarians/broadax/menu.png;tribes/barbarians/bronzeax/menu.png;tribes/barbarians/battleax/menu.png;tribes/barbarians/warriorsax/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"master-blacksmith", "blacksmith"}, "hammer") ..
+--	building_help_crew_string("barbarians", building_description, {"master-blacksmith", "blacksmith"}, "hammer") ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description, "axfactory", {"metalworks", "axfactory"}) ..

@@ -20,9 +20,9 @@ return {
 		"2") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description, {"big_inn"}, "meal") ..
+	building_help_inputs("barbarians", building_description) ..
 -- TODO the following line causes a crash
---	building_help_outputs("barbarians", building_description, {"smelting_works"}) ..
+--	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"master-miner", "chief-miner", "miner"}, "pick") ..

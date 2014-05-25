@@ -23,13 +23,8 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
-
-	-- TODO read dependencies from C++ and automate
-   -- -- NOCOM(#gunchleoc): not sure what you want to display here.
-   -- -- NOCOM(#gunchleoc2sirver): This is the dependencies/incoming section: snack from  big inn / snack from inn
-	building_help_inputs("barbarians", building_description, {"inn", "big_inn"}, "snack") ..
-   -- -- NOCOM(#gunchleoc2sirver): This is the dependencies/outgoing section: coal -> Axfactory / coal -> War mill etc.
-	building_help_outputs("barbarians", building_description, {"axfactory", "warmill", "helmsmithy", "smelting_works", "lime_kiln"}) ..
+	building_help_inputs("barbarians", building_description) ..
+	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
 	-- TODO get worker list from C++ and handle in format_help

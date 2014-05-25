@@ -19,7 +19,8 @@ return {
 		"", "1") ..
 
 	--Dependencies
-	building_help_outputs("barbarians", building_description, {"bakery", "micro-brewery", "brewery", "cattlefarm", "lime_kiln"}, true) ..
+	rt(h2(_"Dependencies")) ..
+	building_help_outputs("barbarians", building_description, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"carrier"}) ..

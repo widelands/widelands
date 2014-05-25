@@ -18,8 +18,7 @@ return {
 		_"The barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that barbarians need. The others are for weapons.") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description, {"smelting_works"}, "iron") ..
-	building_help_inputs("barbarians", building_description, {"lumberjacks_hut"}, "log") ..
+	building_help_inputs("barbarians", building_description) ..
 
 	-- TODO Handle multiple output wares
 		rt(h3(_"Outgoing:")) ..

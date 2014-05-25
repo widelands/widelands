@@ -20,10 +20,12 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 
-	building_help_outputs("barbarians", building_description, {"constructionsite", "lime_kiln"}, true) ..
+	building_help_outputs("barbarians", building_description, true, true) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"stonemason"}, "pick") ..
+	-- TODO crashes
+--lua_map.h:126: const Widelands::Map_Object_Descr* LuaMap::L_MapObjectDescription::get() const: Assertion `mapobjectdescr_ != nullptr' failed.
+--	building_help_crew_string("barbarians", building_description, {"stonemason"}, "pick") ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

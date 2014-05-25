@@ -18,10 +18,8 @@ return {
 		"") ..
 
 	--Dependencies
-	building_help_inputs("barbarians", building_description, {"well"}, "water") ..
-	building_help_inputs("barbarians", building_description, {"farm"}, "wheat") ..
-
-	building_help_outputs("barbarians", building_description, {"inn", "big_inn"}) ..
+	building_help_inputs("barbarians", building_description) ..
+	building_help_outputs("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description, {"brewer"}) ..

@@ -20,10 +20,10 @@ return {
 
 	--Dependencies
 
-	building_help_outputs("barbarians", building_description, {"constructionsite"}) ..
+	building_help_outputs("barbarians", building_description, false, true) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"gardener"}, "shovel") ..
+--	building_help_crew_string("barbarians", building_description, {"gardener"}, "shovel") ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

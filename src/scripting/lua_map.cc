@@ -19,6 +19,8 @@
 
 #include "scripting/lua_map.h"
 
+#include <boost/lexical_cast.hpp>
+
 #include "container_iterate.h"
 #include "economy/wares_queue.h"
 #include "log.h"
@@ -1324,7 +1326,6 @@ void L_ProductionSiteDescription::__unpersist(lua_State * /* L */) {
 
 /* RST
 	.. attribute:: inputs
-TODO always returns empty
 		(RO) An array with pairs of int, ware_descr.name describing the input of the productionsite
 */
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
@@ -1332,9 +1333,10 @@ int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
 
 	lua_newtable(L);
+	int index = 1;
 	for (const WareAmount& ware_amount : descr->inputs()) {
+		lua_pushint32(L, index++);
 		lua_pushstring(L, tribe.get_ware_descr(ware_amount.first)->name());
-		lua_pushuint32(L, ware_amount.second);
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1725,6 +1727,7 @@ const MethodType<L_WareDescription> L_WareDescription::Methods[] = {
 };
 const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
 	PROP_RO(L_WareDescription, producers),
+	PROP_RO(L_WareDescription, consumers),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1747,13 +1750,64 @@ void L_WareDescription::__unpersist(lua_State * /* L */) {
 */
 int L_WareDescription::get_producers(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
+	Building_Index const nr_buildings = tribe.get_nrbuildings();
 
 	lua_newtable(L);
 	int index = 1;
-	for (auto building_index : get()->producers()) {
-		lua_pushint32(L, index++);
-		upcasted_building_descr_to_lua(L, tribe.get_building_descr(building_index));
-		lua_rawset(L, -3);
+
+	for (Building_Index i = 0; i < nr_buildings; ++i) {
+
+		const Building_Descr & descr = *tribe.get_building_descr(i);
+
+		if (upcast(ProductionSite_Descr const, de, &descr)) {
+			for (auto ware_index : de->output_ware_types()) {
+				// NOCOM(#gunchleoc2sirver): using lexical_cast here, because I don't know how to compare a char*.
+				// Can this be done more elegantly?
+				if (boost::lexical_cast<std::string>(get()->name()).compare(
+						boost::lexical_cast<std::string>(tribe.get_ware_descr(ware_index)->name())
+					) == 0) {
+					lua_pushint32(L, index++);
+					upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
+					lua_rawset(L, -3);
+				}
+			}
+		}
+	}
+	return 1;
+}
+
+
+
+/* RST
+	.. attribute:: consumers
+
+		(RO) a list of building descriptions that can consume this ware.
+*/
+int L_WareDescription::get_consumers(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+	Building_Index const nr_buildings = tribe.get_nrbuildings();
+
+	lua_newtable(L);
+	int index = 1;
+
+	for (Building_Index i = 0; i < nr_buildings; ++i) {
+
+		const Building_Descr & descr = *tribe.get_building_descr(i);
+
+		if (upcast(ProductionSite_Descr const, de, &descr)) {
+			// inputs() returns type WareAmount = std::pair<Ware_Index, uint32_t>
+			for (auto ware_amount : de->inputs()) {
+				// NOCOM(#gunchleoc2sirver): using lexical_cast here, because I don't know how to compare a char*.
+				// Can this be done more elegantly?
+				if (boost::lexical_cast<std::string>(get()->name()).compare(
+						boost::lexical_cast<std::string>(tribe.get_ware_descr(ware_amount.first)->name())
+					) == 0) {
+					lua_pushint32(L, index++);
+					upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
+					lua_rawset(L, -3);
+				}
+			}
+		}
 	}
 	return 1;
 }

@@ -23,10 +23,11 @@ return {
 	--Dependencies
 	rt(h2(_"Dependencies")) ..
 
-	building_help_outputs("barbarians", building_description, {"constructionsite", "burners_house", "metalworks", "hardener"}, true) ..
+	building_help_outputs("barbarians", building_description, true, true) ..
 
 	--Workers Section
-	building_help_crew_string("barbarians", building_description, {"lumberjack"}, "felling_ax") ..
+-- TODO causes crashes after merge from master
+--	building_help_crew_string("barbarians", building_description, {"lumberjack"}, "felling_ax") ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..
