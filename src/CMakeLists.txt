@@ -202,7 +202,6 @@ set(WL_SRCS_CC
 	./logic/worker_descr.cc
 	./logic/worker_program.cc
 	./logic/world.cc
-	./main.cc
 	./map_generator.cc
 	./map_io/widelands_map_allowed_building_types_data_packet.cc
 	./map_io/widelands_map_allowed_worker_types_data_packet.cc
@@ -233,7 +232,6 @@ set(WL_SRCS_CC
 	./map_io/widelands_map_terrain_data_packet.cc
 	./map_io/widelands_map_version_data_packet.cc
 	./md5.cc
-	./minizip/unzip.cc
 	./network/internet_gaming.cc
 	./network/internet_gaming_messages.cc
 	./network/netclient.cc
@@ -687,9 +685,6 @@ set(WL_SRCS_H
 ./map_io/widelands_map_terrain_data_packet.h
 ./map_io/widelands_map_version_data_packet.h
 ./md5.h
-./minizip/ioapi.h
-./minizip/unzip.h
-./minizip/zip.h
 ./network/internet_gaming.h
 ./network/internet_gaming_messages.h
 ./network/internet_gaming_protocol.h
@@ -716,34 +711,6 @@ set(WL_SRCS_H
 ./save_handler.h
 ./scoped_timer.h
 ./scripting/c_utils.h
-./scripting/eris/eris.h
-./scripting/eris.h
-./scripting/eris/lapi.h
-./scripting/eris/lauxlib.h
-./scripting/eris/lcode.h
-./scripting/eris/lctype.h
-./scripting/eris/ldebug.h
-./scripting/eris/ldo.h
-./scripting/eris/lfunc.h
-./scripting/eris/lgc.h
-./scripting/eris/llex.h
-./scripting/eris/llimits.h
-./scripting/eris/lmathlib.c
-./scripting/eris/lmem.h
-./scripting/eris/lobject.h
-./scripting/eris/lopcodes.h
-./scripting/eris/lparser.h
-./scripting/eris/lstate.h
-./scripting/eris/lstring.h
-./scripting/eris/ltable.h
-./scripting/eris/ltm.h
-./scripting/eris/luaconf.h
-./scripting/eris/lua.h
-./scripting/eris/lua.hpp
-./scripting/eris/lualib.h
-./scripting/eris/lundump.h
-./scripting/eris/lvm.h
-./scripting/eris/lzio.h
 ./scripting/factory.h
 ./scripting/lua_bases.h
 ./scripting/lua_coroutine.h
@@ -880,21 +847,13 @@ set(WL_SRCS_H
 )
 
 #convention: any directory called "test" contains test sources, including subdirectories
-set(WL_TEST_SRCS "")
 set(WL_CODECHECK_SRCS "")
 foreach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
-  if (${sourcefile} MATCHES ".*/test/.*")
-    list (APPEND WL_TEST_SRCS ${sourcefile})
-    list (REMOVE_ITEM WL_SRCS_CC ${sourcefile})
-    list (REMOVE_ITEM WL_SRCS_H ${sourcefile})
-  endif (${sourcefile} MATCHES ".*/test/.*")
-  # exclude test sources from Codecheck, as well as the scripting/eris sources from lua and minizip
-  if (NOT ${sourcefile} MATCHES ".*/scripting/eris/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*" AND NOT ${sourcefile} MATCHES ".*/minizip/.*")
+  # exclude test sources from Codecheck
+  if (NOT ${sourcefile} MATCHES ".*/test/.*")
     list (APPEND WL_CODECHECK_SRCS ${sourcefile})
-  endif (NOT ${sourcefile} MATCHES ".*/scripting/eris/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*" AND NOT ${sourcefile} MATCHES ".*/minizip/.*")
+  endif ()
 endforeach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
-#convention: main.cc should be removed from all lists
-list (REMOVE_ITEM WL_SRCS_CC "${CMAKE_CURRENT_SOURCE_DIR}/main.cc")
 
 IF (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
@@ -968,10 +927,12 @@ target_link_libraries(widelands_all ${Boost_LIBRARIES})
 if (MINIZIP_FOUND)
   target_link_libraries(widelands_all ${MINIZIP_LIBRARY})
 endif (MINIZIP_FOUND)
+
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_all ${EXECINFO_LIBRARY})
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
+#FIXME: Find out whether this is ever used.
 if (DEFINED WL_EXTRA_LINK_LIBRARIES)
   target_link_libraries(widelands_all ${WL_EXTRA_LINK_LIBRARIES})
 endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
