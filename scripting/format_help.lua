@@ -676,17 +676,16 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribename, building_description, workernames[, toolname])
+-- .. function building_help_crew_string(tribename, building_description [, toolname])
 --
 --    Displays a worker with an image
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: the building_description from C++.
---    :arg workernames: an array with the most basic worker in the last position, e.g. {"chief-miner", "miner"}.
 --    :arg toolname: the name of the tool the workers use, e.g. "pick"
 --    :returns: Workers/Crew section of the help file
 --
-function building_help_crew_string(tribename, building_description, workernames, toolname)
+function building_help_crew_string(tribename, building_description, toolname)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
@@ -695,16 +694,11 @@ function building_help_crew_string(tribename, building_description, workernames,
 
 		result = result .. rt(h2(_"Workers")) .. rt(h3(_"Crew required:"))
 
-		-- TODO this is empty
-		--for i, building in ipairs(building_description.working_positions) do
-		--	result = result .. text_line(_"Found worker!", building_description.working_positions[i].descname)
-		--end
-
 		local worker_descr = nil
 		local becomes_descr = nil
 		local number_of_workers = 0
 
-		for i, worker in ipairs(workernames) do
+		for i, worker in ipairs(building_description.working_positions) do
 			worker_descr = wl.Game():get_worker_description(tribename, worker)
 			becomes_descr = worker_descr.becomes
 			number_of_workers = number_of_workers + 1

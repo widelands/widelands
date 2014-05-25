@@ -161,7 +161,6 @@ function test_descr:test_name()
 end
 
 -- TODO	int get_inputs(lua_State *);
--- TODO	int get_nr_working_positions(lua_State *);
 -- TODO	int get_output_ware_types(lua_State *);
 
 function test_descr:test_type()
@@ -303,6 +302,8 @@ end
 function test_descr:test_name()
    assert_equal("thatchreed", egbase:get_ware_description("barbarians","thatchreed").name)
 end
+
+-- TODO consumers and producers
 
 
 --  =======================================================
