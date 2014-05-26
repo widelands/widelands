@@ -21,7 +21,6 @@ return {
 	building_help_dependencies_production("barbarians", building_description) ..
 
 	--Workers Section
--- TODO: where is the second innkeeper?
 	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section

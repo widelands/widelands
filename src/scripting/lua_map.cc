@@ -1387,9 +1387,13 @@ int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
 	for (const auto& positions_pair : descr->working_positions()) {
-		lua_pushint32(L, index++);
-		lua_pushstring(L, tribe.get_worker_descr(positions_pair.first)->name());
-		lua_settable(L, -3);
+		int amount = positions_pair.second;
+		while (amount-- > 0)
+		{
+			lua_pushint32(L, index++);
+			lua_pushstring(L, tribe.get_worker_descr(positions_pair.first)->name());
+			lua_settable(L, -3);
+		}
 	}
 	return 1;
 }
@@ -1654,6 +1658,7 @@ const MethodType<L_WarehouseDescription> L_WarehouseDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] = {
+	PROP_RO(L_WarehouseDescription, heal_per_second),
 	PROP_RO(L_WarehouseDescription, type),
 	{nullptr, nullptr, nullptr},
 };
@@ -1671,8 +1676,6 @@ void L_WarehouseDescription::__unpersist(lua_State * /* L */) {
 
 
 /* RST
-TODO this returns nil. Why?
-
 	.. attribute:: heal_per_second
 
 		(RO) The :int:`number` of health healed per second by the warehouse

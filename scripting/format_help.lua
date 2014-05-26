@@ -325,20 +325,20 @@ function building_help_general_string(tribename, building_description, resourcen
 		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
 	if (note ~= "") then	result = result .. rt(h3(_"Note:")) .. rt(p(note)) end
 
-	--result = result .. text_line(_"TEST TODO remove this when done:", building_description.type)
-
 	if(building_description.type == "productionsite") then
 		if (working_radius) then result = result .. text_line(_"Working radius:", working_radius) end
+
 	elseif(building_description.type == "warehouse") then
 		result = result .. rt(h3(_"Healing:")
-	-- TODO heal_per_second = nil, why?
 			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.heal_per_second)))
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
+
 	elseif(building_description.type == "militarysite") then
 		result = result .. rt(h3(_"Healing:")
 			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.heal_per_second)))
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
+
 	elseif(building_description.type == "trainingsite") then
 		result = result .. rt(h2(_"Training"))
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
