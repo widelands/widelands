@@ -1087,7 +1087,7 @@ BuildingDescription
 */
 const char L_BuildingDescription::className[] = "BuildingDescription";
 const MethodType<L_BuildingDescription> L_BuildingDescription::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = {
 	PROP_RO(L_BuildingDescription, build_cost),
@@ -1114,7 +1114,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, size),
 	PROP_RO(L_BuildingDescription, type),
 	PROP_RO(L_BuildingDescription, vision_range),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 void L_BuildingDescription::__persist(lua_State * /* L */) {
