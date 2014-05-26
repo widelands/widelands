@@ -1097,17 +1097,11 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, enhanced),
 	PROP_RO(L_BuildingDescription, enhancement_cost),
 	PROP_RO(L_BuildingDescription, enhancements),
-	// TODO(GunChleoc): I rather have a type similar to Building.building_type.
-	// In fact, Building.building_type can be killed after thatn and be replaced
-	// through building.description.building_type. I am not sure if I like
-	// building.description. Maybe building.static_data is better? Opinions? see
-	// also https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.Building
 	PROP_RO(L_BuildingDescription, ismine),
 	PROP_RO(L_BuildingDescription, isport),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
-
-	// size should be similar to
+	// TODO(GunChleoc) size should be similar to
 	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
@@ -2563,7 +2557,6 @@ const MethodType<L_Building> L_Building::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_Building> L_Building::Properties[] = {
-	PROP_RO(L_Building, building_type),
 	PROP_RO(L_Building, flag),
 	{nullptr, nullptr, nullptr},
 };
@@ -2573,21 +2566,6 @@ const PropertyType<L_Building> L_Building::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: building_type
-
-		(RO) What type of building is this. Can be either of:
-
-		* constructionsite
-		* militarysite
-		* productionsite
-		* trainingsite
-		* warehouse
-*/
-int L_Building::get_building_type(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->type_name());
-	return 1;
-}
 
 /* RST
 	.. attribute:: flag

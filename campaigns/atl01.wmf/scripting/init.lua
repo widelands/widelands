@@ -325,10 +325,10 @@ function water_rising()
 
       -- Flags are not so interesting
       if f.immovable.type == "flag" and
-         (f.tln.immovable and f.tln.immovable.building_type) then
+         (f.tln.immovable and is_building(f.tln.immovable)) then
          f = f.tln
       end
-      if f.immovable.building_type then
+      if is_building(f.immovable) then
          send_building_lost_message(f)
       end
    end

@@ -157,3 +157,19 @@ function place_building_in_region(
       building, plr.number)
    )
 end
+
+
+-- RST
+-- .. function:: is_building(immovable)
+--
+--    Checks whether an immpvable is a building.
+--
+--    :arg immovable: The immovable to test
+--
+--    :returns: true if the immovable is a building
+function is_building(immovable)
+	return immovable.type == "productionsite" or
+		immovable.type == "warehouse" or
+		immovable.type == "militarysite" or
+		immovable.type == "trainingsite"
+end

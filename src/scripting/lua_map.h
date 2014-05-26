@@ -549,7 +549,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_building_type(lua_State* L);
 	int get_flag(lua_State* L);
 
 	/*
