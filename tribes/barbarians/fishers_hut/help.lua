@@ -15,7 +15,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description, "blackwood",
 		_"Fishes on the coast near the hut.",
-		_"The fisher’s hut needs water full of fish within the working radius.", "7") ..
+		_"The fisher’s hut needs water full of fish within the working radius.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

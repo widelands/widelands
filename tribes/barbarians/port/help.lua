@@ -15,8 +15,7 @@ return {
 	--General Section
 	-- TODO this building acts like a warehouse
 	building_help_general_string("barbarians", building_description, "ship",
-		_[[Text needed]],
-		"") ..
+		_[[Text needed]]) ..
 
 	--Dependencies
 	-- TODO expedition costs here?

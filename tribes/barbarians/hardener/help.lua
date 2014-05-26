@@ -14,8 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "blackwood",
-		_[[Text needed]],
-		"") ..
+		_[[Text needed]]) ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description, true) ..

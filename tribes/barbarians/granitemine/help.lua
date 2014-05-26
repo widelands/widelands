@@ -15,8 +15,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description, "raw_stone",
 		_"Carve raw stone out of the rock in mountain terrain.",
-		_"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more raw stone.":bformat("5%") .. "<br>" .. _" It cannot be upgraded.",
-		"2") ..
+		_"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more raw stone.":bformat("5%") .. "<br>" .. _"It cannot be upgraded.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description, true) ..

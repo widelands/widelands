@@ -14,8 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "ox",
-		_"Breeds oxen for adding them to the transportation system.",
-		"") ..
+		_"Breeds oxen for adding them to the transportation system.") ..
 
 	--Dependencies
 	-- TODO: why is "Produces" empty?

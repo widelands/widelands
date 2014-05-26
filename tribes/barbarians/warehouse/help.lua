@@ -13,8 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
 	--General Section
 	building_help_general_string("barbarians", building_description, "log",
-		_"Warehouses store soldiers, wares and tools.",
-		_[[Text needed]]) ..
+		_"Warehouses store soldiers, wares and tools.") ..
 
 	--Building Section
 	building_help_building_section("barbarians", building_description)

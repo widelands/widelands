@@ -15,7 +15,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description, "meat",
 		_"Hunts animals to produce meat.",
-		_"The hunter’s hut needs animals to hunt within the working radius.", "13") ..
+		_"The hunter’s hut needs animals to hunt within the working radius.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

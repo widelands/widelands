@@ -15,8 +15,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description, "thatchreed",
 		_"The Reed Yard cultivates reed that serves two different purposes for the Barbarian tribe.",
-		"Thatch reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.",
-		"1") ..
+		"Thatch reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description, true) ..

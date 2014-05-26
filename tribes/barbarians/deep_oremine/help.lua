@@ -16,8 +16,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description, "ironore",
 		_"Digs iron ore out of the ground in mountain terrain.",
-		_"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore.":bformat("2/3"),
-		"2") ..
+		_"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore.":bformat("2/3")) ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

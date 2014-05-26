@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "cloth",
-		_"Weaves cloth out of thatch reed.", "") ..
+		_"Weaves cloth out of thatch reed.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

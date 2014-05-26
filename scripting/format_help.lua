@@ -1,5 +1,5 @@
 -- TODO Textdomain?
--- TODO: menu.png, resi_00.png etc. will need to be replaced by representative_image eventually
+-- TODO: get images from C++, e.g. menu.png, resi_00.png for the small image, first idle picture for the big header images. soldiers, tools, wares etc. 
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -312,7 +312,7 @@ end
 --  =======================================================
 
 -- RST
--- .. function building_help_general_string(tribename, building_description, resourcename, purpose, note[, working_radius])
+-- .. function building_help_general_string(tribename, building_description, resourcename, purpose[, note])
 --
 --    Creates the string for the general section in building help
 --
@@ -320,20 +320,21 @@ end
 --    :arg building_description: The building's building description from C++
 --    :arg resourcename: The name of a representative resource that this building produces
 --    :arg purpose: A string explaining the purpose of the building
---    :arg purpose: A string with a note about the building. Use an empty string if you don't want to add a note.
---    :arg working_radius: The int working radius of the building. This paramater is optional.
+--    :arg purpose: A string with a note about the building. Drop this argument if you don't want to add a note.
 --    :returns: rt of the formatted text
 --
-function building_help_general_string(tribename, building_description, resourcename, purpose, note, working_radius)
+function building_help_general_string(tribename, building_description, resourcename, purpose, note)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = rt(h2(_"General"))
 	result = result .. rt(h3(_"Purpose:")) ..
 		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
-	if (note ~= "") then	result = result .. rt(h3(_"Note:")) .. rt(p(note)) end
+	if (note) then	result = result .. rt(h3(_"Note:")) .. rt(p(note)) end
 
 	if(building_description.type == "productionsite") then
-		if (working_radius) then result = result .. text_line(_"Working radius:", working_radius) end
+		if(building_description.workarea_radius and building_description.workarea_radius > 0) then
+			result = result .. text_line(_"Working radius:", building_description.workarea_radius)
+		end
 
 	elseif(building_description.type == "warehouse") then
 		result = result .. rt(h3(_"Healing:")
@@ -347,25 +348,25 @@ function building_help_general_string(tribename, building_description, resourcen
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
 
 	elseif(building_description.type == "trainingsite") then
-		result = result .. rt(h2(_"Training"))
-		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
+		result = result .. rt(h3(_"Training:"))
 		if(building_description.max_attack > 0) then
-			result = result .. text_line(_"Attack:", _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Attack", building_description.min_attack, building_description.max_attack+1))
+			result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Attack", building_description.min_attack, building_description.max_attack+1)))
 		end
 		if(building_description.max_defense > 0) then
-			result = result .. text_line(_"Defense:", _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Defense", building_description.min_defense, building_description.max_defense+1))
+			result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Defense", building_description.min_defense, building_description.max_defense+1)))
 		end
 		if(building_description.max_evade > 0) then
-			result = result .. text_line(_"Evade:", _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Evade", building_description.min_evade, building_description.max_evade+1))
+			result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Evade", building_description.min_evade, building_description.max_evade+1)))
 		end
 		if(building_description.max_hp > 0) then
 			-- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
-			result = result .. text_line(_"Health:", _"Trains ‘%1$s’ from %2$s up to %3$s":
-				bformat(_"Health", building_description.min_hp, building_description.max_hp+1))
+			result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
+				bformat(_"Health", building_description.min_hp, building_description.max_hp+1)))
 		end
+		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
 	end
 	result = result .. text_line(_"Vision range:", building_description.vision_range)
 	return result

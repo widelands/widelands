@@ -14,9 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "wheat",
-		_"Sow and harvest wheat.",
-		"",
-		"2") ..
+		_"Sow and harvest wheat.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

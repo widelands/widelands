@@ -14,8 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "beer",
-		_"The micro brewery produces Beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.",
-		"") ..
+		_"The micro brewery produces Beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

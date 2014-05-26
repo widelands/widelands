@@ -14,9 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "scout",
-		_[[Text needed]],
-		"",
-		"15") ..
+		_[[Text needed]]) ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

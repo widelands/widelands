@@ -14,7 +14,6 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "meal",
-		_[[Text needed]],
 		_[[Text needed]]) ..
 
 	--Dependencies

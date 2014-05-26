@@ -15,8 +15,7 @@ return {
 	--General Section
 	--General Section
 	building_help_general_string("barbarians", building_description, "coal",
-		_"Draws water out of the deep.",
-		"", "1") ..
+		_"Draws water out of the deep.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

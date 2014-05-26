@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "iron",
-		_"Smelts iron ore into iron and gold ore into gold.", "") ..
+		_"Smelts iron ore into iron and gold ore into gold.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

@@ -16,8 +16,7 @@ return {
 	--General Section
 	building_help_general_string("barbarians", building_description, "ironore",
 		_"Digs iron ore out of the ground in mountain terrain.",
-		_"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more iron ore.":bformat("10%"),
-		"2") ..
+		_"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more iron ore.":bformat("10%")) ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

@@ -171,6 +171,7 @@ public:
 	// Subclasses all need to overwrite get_type, otherwise the type of the parent class would be fetched
 	int get_type(lua_State *);
 	int get_vision_range(lua_State *);
+	int get_workarea_radius(lua_State *);
 
 	/*
 	 * Lua methods

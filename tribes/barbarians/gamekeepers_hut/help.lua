@@ -15,9 +15,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "meat",
-		_"Releases animals into the wild to steady the meat production.",
-		"",
-		"3") ..
+		_"Releases animals into the wild to steady the meat production.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

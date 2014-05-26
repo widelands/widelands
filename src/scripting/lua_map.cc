@@ -1101,13 +1101,14 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, isport),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
-	// TODO(GunChleoc) size should be similar to
+	// TODO size should be similar to
 	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
 	PROP_RO(L_BuildingDescription, size),
 	PROP_RO(L_BuildingDescription, type),
 	PROP_RO(L_BuildingDescription, vision_range),
+	PROP_RO(L_BuildingDescription, workarea_radius),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1277,6 +1278,16 @@ int L_BuildingDescription::get_size(lua_State * L) {
 */
 int L_BuildingDescription::get_vision_range(lua_State * L) {
 	lua_pushinteger(L, get()->vision_range());
+	return 1;
+}
+
+/* RST
+	.. attribute:: workarea_radius
+
+			(RO) the :int:`workarea_radius` of the building as an int.
+*/
+int L_BuildingDescription::get_workarea_radius(lua_State * L) {
+	lua_pushinteger(L, get()->m_workarea_info.begin()->first);
 	return 1;
 }
 
