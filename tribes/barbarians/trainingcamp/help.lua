@@ -42,7 +42,9 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Production Section
-		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a training camp can train one new soldier in %1$s and %2$s to the final level in %3$s on average.":bformat(_"attack",_"health",_"%1$im%2$is":bformat(4,40)))
+	building_help_production_section(_"If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %1$s and %2$s on average.":bformat(
+		ngettext("%d minute", "%d minutes", 4):bformat(4),
+		ngettext("%d second", "%d seconds", 40):bformat(40)
+	))
    end
 }

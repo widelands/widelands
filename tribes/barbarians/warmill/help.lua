@@ -27,8 +27,10 @@ return {
 	building_help_building_section("barbarians", building_description, "axfactory", {"metalworks", "axfactory"}) ..
 
 	--Production Section
-		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce each axs in about %s on average.":bformat("57s")) ..
-		rt(p(_"All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold."))
+	building_help_production_section(_"If all needed wares are delivered in time, this building can produce each ax in about %s on average.":bformat(
+		ngettext("%d second", "%d seconds", 57):bformat(57)
+		) .. " " ..
+		_"All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold."
+	)
    end
 }

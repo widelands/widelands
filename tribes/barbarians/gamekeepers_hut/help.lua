@@ -29,7 +29,8 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Production Section
-		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The gamekeeper pauses %s before going to work again.":bformat("52.5s"))
+	building_help_production_section(_"The gamekeeper pauses %s before going to work again.":bformat(
+		ngettext("%d second", "%d seconds", 52.5):bformat(52.5)
+	))
    end
 }

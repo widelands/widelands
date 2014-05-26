@@ -27,7 +27,8 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Production Section
-		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If the food supply is steady, this mine can produce gold ore in %s on average.":bformat("65s"))
+	building_help_production_section(_"If the food supply is steady, this mine can produce gold ore in %s on average.":bformat(
+		ngettext("%d second", "%d seconds", 65):bformat(65)
+	))
   end
 }

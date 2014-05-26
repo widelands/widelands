@@ -769,3 +769,14 @@ function building_help_tool_string(tribename, toolname, no_of_workers)
 		ware_descr.descname, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
 end
 
+-- RST
+-- .. building_help_production_section(performance_description)
+--
+--    Displays the production/performance section with a headline
+--
+--    :arg performance_description: a string describing the performance of tha building
+--    :returns: rt for the production section
+--
+function building_help_production_section(performance_description)
+	return rt(h2(_"Production")) .. text_line(_"Performance:", performance_description)
+end

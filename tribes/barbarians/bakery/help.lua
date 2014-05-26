@@ -28,7 +28,8 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Production Section
-		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce a pitta bread in %s on average.":bformat("30s"))
+	building_help_production_section(_"If all needed wares are delivered in time, this building can produce a pitta bread in %s on average.":bformat(
+		ngettext("%d second", "%d seconds", 30):bformat(30)
+	))
   end
 }

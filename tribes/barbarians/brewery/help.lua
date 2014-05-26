@@ -27,7 +27,6 @@ return {
 	building_help_building_section("barbarians", building_description, "micro-brewery", {"micro-brewery"}) ..
 
 	--Production Section
-	rt(h2(_"Production")) ..
-	text_line(_"Performance:", _[[Text needed]])
+	building_help_production_section(_[[Calculation needed]])
   end
 }

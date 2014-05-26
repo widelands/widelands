@@ -29,7 +29,8 @@ return {
 	building_help_building_section("barbarians", building_description, "oremine", {"oremine"}) ..
 
 	--Production Section
-		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If the food supply is steady, this mine can produce iron ore in %s on average.":bformat("39.5s"))
+	building_help_production_section(_"If the food supply is steady, this mine can produce iron ore in %s on average.":bformat(
+		ngettext("%d second", "%d seconds", 39.5):bformat(39.5)
+	))
   end
 }

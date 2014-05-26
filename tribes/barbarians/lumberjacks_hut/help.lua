@@ -30,7 +30,8 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Production Section
-	rt(h2(_"Production")) ..
-	text_line(_"Performance:", _"The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":format("12s"))
+	building_help_production_section(_"The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":format(
+		ngettext("%d second", "%d seconds", 12):bformat(12)
+	))
    end
 }

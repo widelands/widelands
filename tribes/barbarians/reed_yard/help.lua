@@ -28,7 +28,8 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Production Section
-		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"A reed yard can produce a sheaf of thatch reed in about %s on average.":bformat("65s"))
+	building_help_production_section(_"A reed yard can produce a sheaf of thatch reed in about %s on average.":bformat(
+		ngettext("%d second", "%d seconds", 65):bformat(65)
+	))
    end
 }

@@ -28,7 +28,8 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Production Section
-		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The carrier needs %s to get one bucket full of water.":format("40s"))
+	building_help_production_section(_"The carrier needs %s to get one bucket full of water.":bformat(
+		ngettext("%d second", "%d seconds", 40):bformat(40)
+	))
   end
 }
