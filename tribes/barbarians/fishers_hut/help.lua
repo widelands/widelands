@@ -18,9 +18,7 @@ return {
 		_"The fisher’s hut needs water full of fish within the working radius.", "7") ..
 
 	--Dependencies
-	rt(h2(_"Dependencies")) ..
-
-	building_help_dependencies_production("barbarians", building_description, true) ..
+	building_help_dependencies_production("barbarians", building_description) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

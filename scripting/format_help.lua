@@ -387,16 +387,16 @@ end
 
 
 -- RST
--- .. function:: building_help_outputs(tribename, building_description)
+-- .. function:: building_help_outputs(tribename, building_description[, add_constructionsite])
 --
 --    The input and output wares of a productionsite
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
---    :arg is_basic: True if this is a basic productionsite like a quarry that has no input wares.
+--    :arg add_constructionsite: True if this is building supplies its wares to constructionsites.
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_dependencies_production(tribename, building_description, is_basic, add_constructionsite)
+function building_help_dependencies_production(tribename, building_description, add_constructionsite)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
 	local hasinput = false
@@ -413,21 +413,18 @@ function building_help_dependencies_production(tribename, building_description, 
 		result =  rt(h3(_"Incoming:")) .. result
 	end
 
-
-	-- TODO get is_basic from [aihints] in conf, so we can define "Collects" from the output?
-	-- or check if the list of input wares is empty
-	if (is_basic) then
+	if ((not hasinput) and building_description.output_ware_types[1]) then
 		result = result .. rt(h3(_"Collects:"))
-
 		for i, ware in ipairs(building_description.output_ware_types) do
 			result = result ..
 				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
 		end
+
 	elseif (building_description.ismine) then
 		-- TRANSLATORS: This is a verb (The miner mines)
 		result = result .. rt(h3(_"Mines:"))
 		for i, ware in ipairs(building_description.output_ware_types) do
-			-- TODO need to hack this because of inconsitency in the naming system.
+			-- Need to hack this because of inconsistency in the naming system.
 			-- Can't rename the files, because geologist won't work.
 			local resi_name = ware
 			if(resi_name == "ironore") then resi_name = "iron" end
@@ -436,8 +433,8 @@ function building_help_dependencies_production(tribename, building_description, 
 			result = result ..
 				building_help_dependencies_resi(tribename, {"resi_"..resi_name.."2", building_description.name, ware}, ware)
 		end
+
 	else
-		
 		for i, ware in ipairs(building_description.output_ware_types) do
 			if(i == 1) then result = result .. rt(h3(_"Produces:")) end
 			result = result ..
@@ -463,6 +460,7 @@ function building_help_dependencies_production(tribename, building_description, 
 			)
 		end
 	end
+
 	if (result == "") then result = rt(p(_"None")) end
 	return rt(h2(_"Dependencies")) .. result
 end

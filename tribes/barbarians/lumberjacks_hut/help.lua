@@ -21,7 +21,7 @@ return {
 		_"The lumberjack's hut needs trees to fell within the working radius.", "10") ..
 
 	--Dependencies
-	building_help_dependencies_production("barbarians", building_description, true, true) ..
+	building_help_dependencies_production("barbarians", building_description, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

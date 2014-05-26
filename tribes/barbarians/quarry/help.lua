@@ -17,7 +17,7 @@ return {
 		_"Carves raw stone out of rocks lying near the hut.", _"The quarry needs stones to cut within the working radius.", "6") ..
 
 	--Dependencies
-	building_help_dependencies_production("barbarians", building_description, true, true) ..
+	building_help_dependencies_production("barbarians", building_description, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

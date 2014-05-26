@@ -21,6 +21,8 @@ return {
 	building_help_dependencies_production("barbarians", building_description) ..
 
 	-- TODO Handle multiple output wares
+-- outgoing is empty. We should have special treatment for tools to get the worker using it.
+
 
 --		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/bread_paddle/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/baker/menu.png" },p(_"Baker")) ..
 --		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/felling_ax/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/lumberjack/menu.png" },p(_"Lumberjack")) ..

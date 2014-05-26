@@ -21,7 +21,7 @@ return {
 	building_help_dependencies_production("barbarians", building_description) ..
 --		rt(h3(_"Outgoing:")) ..
 -- TODO axfactory-> ax -> headquarters -> soldier
--- TODO axfactory -> broadax -> trainingcamp
+-- TODO axfactory -> sharpax, broadax -> trainingcamp
 
 		dependencies_basic({"tribes/barbarians/axfactory/menu.png","tribes/barbarians/ax/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
 		dependencies_basic({"tribes/barbarians/axfactory/menu.png","tribes/barbarians/sharpax/menu.png;tribes/barbarians/broadax/menu.png","tribes/barbarians/trainingcamp/menu.png"},p(_"Training Camp")) ..

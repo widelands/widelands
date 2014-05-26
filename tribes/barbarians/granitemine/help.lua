@@ -19,7 +19,7 @@ return {
 		"2") ..
 
 	--Dependencies
-	building_help_dependencies_production("barbarians", building_description, false, true) ..
+	building_help_dependencies_production("barbarians", building_description, true) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..
