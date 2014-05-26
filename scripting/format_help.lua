@@ -435,9 +435,12 @@ function building_help_dependencies_production(tribename, building_description, 
 			-- Need to hack this because of inconsistency in the naming system.
 			-- Can't rename the files, because geologist won't work.
 			local resi_name = ware
-			if(resi_name == "ironore") then resi_name = "iron" end
-			if(resi_name == "raw_stone") then resi_name = "granit" end
-			if(resi_name == "goldore") then resi_name = "gold" end
+			if(resi_name == "ironore") then resi_name = "iron"
+			elseif(resi_name == "raw_stone") then resi_name = "granit"
+			elseif(resi_name == "stone") then resi_name = "granit"
+			elseif(resi_name == "stones") then resi_name = "granit"
+			elseif(resi_name == "marble") then resi_name = "granit"
+			elseif(resi_name == "goldore") then resi_name = "gold" end
 			result = result ..
 				building_help_dependencies_resi(tribename, {"resi_"..resi_name.."2", building_description.name, ware}, ware)
 		end

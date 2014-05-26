@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "raw_stone",
-		_"Carves raw stone out of rocks lying near the hut.", _"The quarry needs stones to cut within the working radius.") ..
+		_"Carves raw stone out of rocks in the vicinity.", _"The quarry needs stones to cut within the working radius.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description, true) ..
