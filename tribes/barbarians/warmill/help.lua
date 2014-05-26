@@ -18,15 +18,7 @@ return {
 		_"The barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an axfactory.") ..
 
 	--Dependencies
-		rt(h2(_"Dependencies")) ..
 	building_help_dependencies_production("barbarians", building_description) ..
-
--- outgoing
--- TODO warmill-> ax -> headquarters -> soldier - these have no outgoing stuff
--- TODO warmill -> sharpax, broadax, bronzeax, battleax, warriorsax -> trainingcamp - there are outgoing to Training Camp
-
-		--dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/ax/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
-		--dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpax/menu.png;tribes/barbarians/broadax/menu.png;tribes/barbarians/bronzeax/menu.png;tribes/barbarians/battleax/menu.png;tribes/barbarians/warriorsax/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

@@ -449,15 +449,21 @@ function building_help_dependencies_production(tribename, building_description, 
 
 		-- constructionsite isn't listed with the consumers, and needs special treatment because it isn't a building
 		if (add_constructionsite) then
-			local string =  "image=tribes/" .. tribename .. "/" .. ware  .. "/menu.png"
-			string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/constructionsite/menu.png"
-			result = result .. rt(string, p(_"Construction Site"))
+			result = result .. dependencies(tribename, {ware, "constructionsite"}, _"Construction Site")
 		end
 
 		for j, consumer in ipairs(ware_description.consumers) do
 			result = result .. building_help_dependencies_building(
 				tribename, {ware, consumer.name}, consumer.name
 			)
+		end
+
+		local soldier  = wl.Game():get_worker_description(tribename, "soldier")
+		local addsoldier = false
+		for j, buildcost in ipairs(soldier.buildcost) do
+			if(buildcost == ware) then
+			result = result .. dependencies(tribename, {ware, "headquarters", soldier.name}, soldier.descname)
+			end
 		end
 	end
 
