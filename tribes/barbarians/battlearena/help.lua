@@ -20,7 +20,7 @@ return {
 		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.") ..
 
 	--Dependencies
-	-- TODO still a lot of manual paramaters in here
+	-- We would need to parse the production programs to aotumate the parameters here; so we do it manually
 	dependencies_training("barbarians", building_description, "untrained+evade", "fulltrained-evade") ..
 
 	rt(h3(_"Evade Training:")) ..

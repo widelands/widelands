@@ -226,7 +226,7 @@ end
 --
 function dependencies_training(tribename, building_description, interim1, interim2)
 	return
-		rt(h2(_"Dependencies")) ..
+		rt(h2(_"Dependencies")) .. rt(h3(_"Soldiers:")) ..
 		dependencies_basic({
 			"tribes/" .. tribename .. "/soldier/untrained.png",
 			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
@@ -273,17 +273,18 @@ end
 
 
 -- RST
--- .. function:: dependencies_training_weapons(tribename, building_description, weapons, manufacturer)
+-- .. function:: dependencies_training_weapons(tribename, building_description, and_or, weapons, manufacturer)
 --
 --    Creates a dependencies line for any number of weapons.
 --
 --    :arg tribename: name of the tribe.
 --    :arg building_description: the trainingsite's building description from C++
+--    :arg and_or: if this is "and" or "or", adds these keyword at the beginning of the equipment string
 --    :arg weapons: an array of weapon names
 --    :arg manufacturer: the name of the building manufacturing the weapons
 --    :returns: a list weapons images with the producing and receiving building
 --
-function dependencies_training_weapons(tribename, building_description, weapons, manufacturer)
+function dependencies_training_weapons(tribename, building_description, and_or, weapons, manufacturer)
 	local manufacturer_descr = wl.Game():get_building_description(tribename, manufacturer)
 	local weaponsstring = ""
 	for count, weapon in pairs(weapons) do
@@ -292,11 +293,17 @@ function dependencies_training_weapons(tribename, building_description, weapons,
 		end
 		weaponsstring = weaponsstring .. "tribes/" .. tribename .. "/" .. weapon .. "/menu.png"
 	end
-	return dependencies_basic({
+	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+	local equipmentstring = _"Equipment from"
+	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+	if (and_or == "and" ) then equipmentstring = _"and equipment from"
+	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+	elseif (and_or == "or" ) then equipmentstring = _"or equipment from" end
+	return rt(p(equipmentstring)) ..
+		dependencies_basic({
 			"tribes/" .. tribename .. "/" .. manufacturer_descr.name  .. "/menu.png",
 			weaponsstring,
-			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
-		}) .. rt(p(_"Provided by: %s":bformat(manufacturer_descr.descname)))
+		}, rt(p(manufacturer_descr.descname)))
 end
 
 
@@ -761,3 +768,4 @@ function building_help_tool_string(tribename, toolname, no_of_workers)
 	return text_line((ngettext("Worker uses:","Workers use:", no_of_workers)),
 		ware_descr.descname, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
 end
+

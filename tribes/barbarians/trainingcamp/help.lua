@@ -22,20 +22,18 @@ return {
 		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.") ..
 
 	--Dependencies
-	-- TODO still a lot of manual paramaters in here
+	-- We would need to parse the production programs to aotumate the parameters here; so we do it manually
 	dependencies_training("barbarians", building_description, "fulltrained-evade", "untrained+evade") ..
 
-	rt(h3(_"Training Attack:")) ..
-
-	dependencies_training_weapons("barbarians", building_description, {"sharpax", "broadax"}, "axfactory") ..
-	dependencies_training_weapons("barbarians", building_description,
+	rt(h3(_"Attack Training:")) ..
+	dependencies_training_food("barbarians", { {"fish", "meat"}, {"pittabread"}}) ..
+	dependencies_training_weapons("barbarians", building_description, "and", {"sharpax", "broadax"}, "axfactory") ..
+	dependencies_training_weapons("barbarians", building_description, "or", 
 		{"sharpax", "broadax", "bronzeax", "battleax", "warriorsax"}, "warmill") ..
 
-	rt(h3(_"Training Health:")) ..
-	dependencies_training_weapons("barbarians", building_description, {"helm", "mask", "warhelm"}, "helmsmithy") ..
-
-	rt(h3(_"Training Both")) ..
+	rt(h3(_"Health Training:")) ..
 	dependencies_training_food("barbarians", { {"fish", "meat"}, {"pittabread"}}) ..
+	dependencies_training_weapons("barbarians", building_description, "and", {"helm", "mask", "warhelm"}, "helmsmithy") ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..
