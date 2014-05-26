@@ -143,12 +143,17 @@ int L_EditorGameBase::get_players(lua_State * L) {
  */
 
 /* RST
-	// TODO(GunChleoc): documentation
-	Registers building description so Lua can reference it from the game. Call this with
-	wl.Game():get_building_description(tribe_name,building_name)
+	.. function:: get_building_description(tribename, building_description.name)
+
+		:arg tribe_name: the name of the tribe that this building belongs to
+		:arg building_name: the name of the building
+
+	Registers a building description so Lua can reference it from the game. Call this with
+	wl.Game():get_building_description(tribe_name, building_name)
+
+		(RO) The :class:`~wl.Game.Building_description`.
 */
 int L_EditorGameBase::get_building_description(lua_State* L) {
-	// TODO(GunChleoc): style comment - askew abbreviations. I know we wrote that code together :)
 	if (lua_gettop(L) != 3) {
 		report_error(L, "Wrong number of arguments");
 	}
@@ -159,20 +164,26 @@ int L_EditorGameBase::get_building_description(lua_State* L) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
 	Building_Index building_index = tribe_description->building_index(building_name);
-	if (!building_index) {
+	if (building_index == INVALID_INDEX) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
-	const Building_Descr* building_descr = tribe_description->get_building_descr(building_index);
+	const Building_Descr* building_description = tribe_description->get_building_descr(building_index);
 
-	return LuaMap::upcasted_building_descr_to_lua(L, building_descr);
+	return LuaMap::upcasted_building_descr_to_lua(L, building_description);
 }
 
-/* RST
-	// TODO(GunChleoc): documentation
-	Registers ware description so Lua can reference it from the game. Call this with
-	wl.Game():get_ware_description(tribe_name,ware_name)
-*/
 
+/* RST
+	.. function:: get_ware_description(tribename, ware_description.name)
+
+		:arg tribe_name: the name of the tribe that this building belongs to
+		:arg ware_name: the name of the ware
+
+	Registers a ware description so Lua can reference it from the game. Call this with
+	wl.Game():get_ware_description(tribe_name, ware_name)
+
+		(RO) The :class:`~wl.Game.Ware_description`.
+*/
 int L_EditorGameBase::get_ware_description(lua_State* L) {
 	if (lua_gettop(L) != 3) {
 		report_error(L, "Wrong number of arguments");
@@ -184,18 +195,24 @@ int L_EditorGameBase::get_ware_description(lua_State* L) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
 	Ware_Index ware_index = tribe_description->ware_index(ware_name);
-	if (!ware_index) {
+	if (ware_index == INVALID_INDEX) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
-	const WareDescr* ware_descr = tribe_description->get_ware_descr(ware_index);
-	return to_lua<LuaMap::L_WareDescription>(L, new LuaMap::L_WareDescription(ware_descr));
+	const WareDescr* ware_description = tribe_description->get_ware_descr(ware_index);
+	return to_lua<LuaMap::L_WareDescription>(L, new LuaMap::L_WareDescription(ware_description));
 }
 
 
 /* RST
-	// TODO(GunChleoc): documentation
-	Registers worker description so Lua can reference it from the game. Call this with
-	wl.Game():get_worker_description(tribe_name,worker_name)
+	.. function:: get_worker_description(tribename, worker_description.name)
+
+		:arg tribe_name: the name of the tribe that this building belongs to
+		:arg worker_name: the name of the worker
+
+	Registers a worker description so Lua can reference it from the game. Call this with
+	wl.Game():get_worker_description(tribe_name, worker_name)
+
+		(RO) The :class:`~wl.Game.Worker_description`.
 */
 int L_EditorGameBase::get_worker_description(lua_State* L) {
 	if (lua_gettop(L) != 3) {
@@ -208,11 +225,11 @@ int L_EditorGameBase::get_worker_description(lua_State* L) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
 	Ware_Index worker_index = tribe_description->worker_index(worker_name);
-	if (!worker_index) {
+	if (worker_index == INVALID_INDEX) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
-	const Worker_Descr* worker_descr = tribe_description->get_worker_descr(worker_index);
-	return to_lua<LuaMap::L_WorkerDescription>(L, new LuaMap::L_WorkerDescription(worker_descr));
+	const Worker_Descr* worker_description = tribe_description->get_worker_descr(worker_index);
+	return to_lua<LuaMap::L_WorkerDescription>(L, new LuaMap::L_WorkerDescription(worker_description));
 }
 
 /*

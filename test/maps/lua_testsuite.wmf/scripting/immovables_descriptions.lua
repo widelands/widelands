@@ -312,7 +312,7 @@ end
 
 function test_descr:test_worker_descr()
    assert_error("Wrong tribe", function() egbase:get_worker_description("XXX","miner") end)
-   assert_error("Wrong ware", function() egbase:get_worker_description("barbarians","XXX") end)
+   assert_error("Wrong worker", function() egbase:get_worker_description("barbarians","XXX") end)
    assert_error("Wrong number of parameters: 1", function() egbase:get_worker_description("XXX") end)
    assert_error("Wrong number of parameters: 3", function() egbase:get_worker_description("XXX","YYY","ZZZ") end)
 end
