@@ -20,27 +20,6 @@ return {
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..
 
-	-- TODO Handle multiple output wares
--- outgoing is empty. We should have special treatment for tools to get the worker using it.
-
-
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/bread_paddle/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/baker/menu.png" },p(_"Baker")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/felling_ax/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/lumberjack/menu.png" },p(_"Lumberjack")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/fire_tongs/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/smelter/menu.png" },p(_"Smelter")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/fishing_rod/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/fisher/menu.png" },p(_"Fisher")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/hammer/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/builder/menu.png" },p(_"Builder")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/hammer/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/geologist/menu.png" },p(_"Geologist")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/hammer/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/helmsmith/menu.png" },p(_"Helmsmith")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/hammer/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/blacksmith/menu.png" },p(_"Blacksmith")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/hunting_spear/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/hunter/menu.png" },p(_"Hunter")) ..
---		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/kitchen_tools/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/innkeeper/menu.png" },p(_"Innkeeper")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/pick/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/miner/menu.png" },p(_"Miner")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/pick/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/stonemason/menu.png" },p(_"Stonemason")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/scythe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/farmer/menu.png" },p(_"Farmer")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/shovel/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/ranger/menu.png" },p(_"Ranger")) ..
---		dependencies_basic({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/shovel/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/gardener/menu.png" },p(_"Gardener")) ..
-
-
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..
 

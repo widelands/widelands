@@ -442,30 +442,31 @@ function building_help_dependencies_production(tribename, building_description, 
 		end
 	end
 
-	--result = result .. rt(h3(_"Outgoing:"))
+	local outgoing = ""
 	for i, ware in ipairs(building_description.output_ware_types) do
-		if(i == 1) then result = result .. rt(h3(_"Outgoing:")) end
 		local ware_description = wl.Game():get_ware_description(tribename, ware)
 
 		-- constructionsite isn't listed with the consumers, and needs special treatment because it isn't a building
 		if (add_constructionsite) then
-			result = result .. dependencies(tribename, {ware, "constructionsite"}, _"Construction Site")
+			outgoing = outgoing .. dependencies(tribename, {ware, "constructionsite"}, _"Construction Site")
 		end
 
 		for j, consumer in ipairs(ware_description.consumers) do
-			result = result .. building_help_dependencies_building(
+			outgoing = outgoing .. building_help_dependencies_building(
 				tribename, {ware, consumer.name}, consumer.name
 			)
 		end
 
+		-- soldiers aren't listed with the consumers
 		local soldier  = wl.Game():get_worker_description(tribename, "soldier")
 		local addsoldier = false
 		for j, buildcost in ipairs(soldier.buildcost) do
 			if(buildcost == ware) then
-			result = result .. dependencies(tribename, {ware, "headquarters", soldier.name}, soldier.descname)
+			outgoing = outgoing .. dependencies(tribename, {ware, "headquarters", soldier.name}, soldier.descname)
 			end
 		end
 	end
+	if (outgoing ~= "") then result = result .. rt(h3(_"Outgoing:")) .. outgoing end
 
 	if (result == "") then result = rt(p(_"None")) end
 	return rt(h2(_"Dependencies")) .. result
