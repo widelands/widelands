@@ -1519,7 +1519,7 @@ int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
 	if (descr->get_train_attack())
 		lua_pushinteger(L, descr->get_max_level(atrAttack));
-	else lua_pushinteger(L, 0);
+	else lua_pushinteger(L, -1);
 	return 1;
 }
 
@@ -1532,7 +1532,7 @@ int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
 	if (descr->get_train_defense())
 		lua_pushinteger(L, descr->get_max_level(atrDefense));
-	else lua_pushinteger(L, 0);
+	else lua_pushinteger(L, -1);
 	return 1;
 }
 
@@ -1546,7 +1546,7 @@ int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
 	if (descr->get_train_evade())
 		lua_pushinteger(L, descr->get_max_level(atrEvade));
-	else lua_pushinteger(L, 0);
+	else lua_pushinteger(L, -1);
 	return 1;
 }
 
@@ -1560,7 +1560,7 @@ int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_max_level(atrHP));
-	else lua_pushinteger(L, 0);
+	else lua_pushinteger(L, -1);
 	return 1;
 }
 
@@ -1586,7 +1586,7 @@ int L_TrainingSiteDescription::get_min_attack(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
 	if (descr->get_train_attack())
 		lua_pushinteger(L, descr->get_min_level(atrAttack));
-	else lua_pushinteger(L, 0);
+	else lua_pushinteger(L, -1);
 	return 1;
 }
 
@@ -1599,7 +1599,7 @@ int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
 	if (descr->get_train_defense())
 		lua_pushinteger(L, descr->get_min_level(atrDefense));
-	else lua_pushinteger(L, 0);
+	else lua_pushinteger(L, -1);
 	return 1;
 }
 
@@ -1613,7 +1613,7 @@ int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
 	if (descr->get_train_evade())
 		lua_pushinteger(L, descr->get_min_level(atrEvade));
-	else lua_pushinteger(L, 0);
+	else lua_pushinteger(L, -1);
 	return 1;
 }
 
@@ -1627,7 +1627,7 @@ int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
 	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_min_level(atrHP));
-	else lua_pushinteger(L, 0);
+	else lua_pushinteger(L, -1);
 	return 1;
 }
 
