@@ -89,7 +89,7 @@ private:
 	Widelands::Player_Number m_capscache_player_number;
 	bool m_caps_setup;
 
-	Overlay_Manager::Job_Id m_workarea_job_id;
+	OverlayManager::JobId m_workarea_job_id;
 	bool m_avoid_fastclick;
 };
 

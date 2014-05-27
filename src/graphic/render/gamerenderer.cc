@@ -228,15 +228,15 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the node
-				Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_NODE];
+				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_NODE];
 
-				const Overlay_Manager::Overlay_Info * const end =
+				const OverlayManager::Overlay_Info * const end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays(coords[F], overlay_info);
 
 				for
-					(const Overlay_Manager::Overlay_Info * it = overlay_info;
+					(const OverlayManager::Overlay_Info * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(pos[F] - it->hotspot, it->pic);
@@ -244,8 +244,8 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the R triangle
-				Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				Overlay_Manager::Overlay_Info const * end =
+				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
+				OverlayManager::Overlay_Info const * end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays
@@ -256,7 +256,7 @@ void GameRenderer::draw_objects()
 					 (pos[F].y + pos[R].y + pos[BR].y) / 3);
 
 				for
-					(Overlay_Manager::Overlay_Info const * it = overlay_info;
+					(OverlayManager::Overlay_Info const * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(tripos - it->hotspot, it->pic);
@@ -264,8 +264,8 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the D triangle
-				Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				Overlay_Manager::Overlay_Info const * end =
+				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
+				OverlayManager::Overlay_Info const * end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays
@@ -276,7 +276,7 @@ void GameRenderer::draw_objects()
 					 (pos[F].y + pos[BL].y + pos[BR].y) / 3);
 
 				for
-					(Overlay_Manager::Overlay_Info const * it = overlay_info;
+					(OverlayManager::Overlay_Info const * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(tripos - it->hotspot, it->pic);
