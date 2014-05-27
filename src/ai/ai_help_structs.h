@@ -40,11 +40,13 @@ struct CheckStepRoadAI {
 		: player(pl), movecaps(mc), openend(oe)
 	{}
 
-	void set_openend (bool const oe) {openend = oe;}
+	void set_openend (bool const oe) {
+		openend = oe;
+	}
 
 	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
-		const;
+	(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+	const;
 	bool reachabledest(Map &, FCoords dest) const;
 
 	Player * player;
@@ -59,11 +61,11 @@ struct FindNodeUnowned {
 		// only interested in fields we can walk on.
 		// Fields should either be completely unowned or owned by an opposing player
 		return
-			(fc.field->nodecaps() & MOVECAPS_WALK)
-			&&
-			((fc.field->get_owned_by() == 0)
-			 || player->is_hostile(*game.get_player(fc.field->get_owned_by())))
-			&& (!onlyenemies || (fc.field->get_owned_by() != 0));
+		    (fc.field->nodecaps() & MOVECAPS_WALK)
+		    &&
+		    ((fc.field->get_owned_by() == 0)
+		     || player->is_hostile(*game.get_player(fc.field->get_owned_by())))
+		    && (!onlyenemies || (fc.field->get_owned_by() != 0));
 	}
 
 	//int8_t playernum;
@@ -84,11 +86,11 @@ struct FindNodeUnownedMineable {
 		// Fields should be completely unowned
 		//this is just modified copy of  FindNodeUnowned (:
 		return
-			(fc.field->nodecaps() & BUILDCAPS_MINE)
-			&&
-			(fc.field->get_owned_by() == 0);
-			 //|| player->is_hostile(*game.get_player(fc.field->get_owned_by())))
-			//&& (!onlyenemies || (fc.field->get_owned_by() != 0));
+		    (fc.field->nodecaps() & BUILDCAPS_MINE)
+		    &&
+		    (fc.field->get_owned_by() == 0);
+		//|| player->is_hostile(*game.get_player(fc.field->get_owned_by())))
+		//&& (!onlyenemies || (fc.field->get_owned_by() != 0));
 	}
 
 	//int8_t playernum;
@@ -105,11 +107,11 @@ struct FindNodeUnownedMineable {
 struct FindNodeWater {
 	bool accept(const Map & map, const FCoords & coord) const {
 		return
-			(map.world().terrain_descr(coord.field->terrain_d()).get_is()
-			 & TERRAIN_WATER)
-			||
-			(map.world().terrain_descr(coord.field->terrain_r()).get_is()
-			 & TERRAIN_WATER);
+		    (map.world().terrain_descr(coord.field->terrain_d()).get_is()
+		     & TERRAIN_WATER)
+		    ||
+		    (map.world().terrain_descr(coord.field->terrain_r()).get_is()
+		     & TERRAIN_WATER);
 	}
 };
 
@@ -129,9 +131,13 @@ struct NearFlag {
 		flag(&f), cost(c), distance(d)
 	{}
 
-	bool operator< (const NearFlag & f) const {return cost > f.cost;}
+	bool operator< (const NearFlag & f) const {
+		return cost > f.cost;
+	}
 
-	bool operator== (Flag const * const f) const {return flag == f;}
+	bool operator== (Flag const * const f) const {
+		return flag == f;
+	}
 };
 
 
@@ -187,7 +193,7 @@ struct BuildableField {
 	int16_t military_influence;
 	int16_t military_capacity;
 	int16_t military_loneliness ;
-	int16_t military_presence    ;	
+	int16_t military_presence    ;
 	int16_t military_stationed    ;
 
 
@@ -284,13 +290,16 @@ struct BuildingObserver {
 
 	int32_t                           cnt_built;
 	int32_t                           cnt_under_construction;
-	
+
 	//used to track amount of stocklevel
 	uint32_t						  stocklevel;
 	int32_t						  stocklevel_time;  //time when stocklevel was last time recalculated
 	int32_t							last_dismantle_time;
+	int32_t							construction_decision_time;
 
-	int32_t total_count() const {return cnt_built + cnt_under_construction;}
+	int32_t total_count() const {
+		return cnt_built + cnt_under_construction;
+	}
 	bool buildable(Widelands::Player & player) {
 		return is_buildable && player.is_building_type_allowed(id);
 	}
