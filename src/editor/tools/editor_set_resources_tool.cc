@@ -38,7 +38,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 	Editor_Action_Args        &          args)
 {
 	const Widelands::World & world = map.world();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
 	 Widelands::Area<Widelands::FCoords>
@@ -85,7 +85,7 @@ int32_t Editor_Set_Resources_Tool::handle_undo_impl
 	Editor_Interactive & /* parent */, Editor_Action_Args & args)
 {
 	const Widelands::World & world = map.world();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
 	 Widelands::Area<Widelands::FCoords>
