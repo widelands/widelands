@@ -19,8 +19,6 @@
 
 #include "scripting/lua_map.h"
 
-#include <boost/lexical_cast.hpp>
-
 #include "container_iterate.h"
 #include "economy/wares_queue.h"
 #include "log.h"
@@ -1742,6 +1740,12 @@ void L_WareDescription::__unpersist(lua_State * /* L */) {
 
 		(RO) a list of building descriptions that can procude this ware.
 */
+// TODO(GunChleoc): move the calculation somewhere else.
+// You get the (mutable) wares_description container from the tribe_description
+// into the building constructor and add a member (mutable_ware_description(), either in Tribe_Descr
+// or if there is a container with every ware in there than there).
+// So you can get something like this in the buildingdesc constructor:
+// tribe.mutable_ware_description("log")->add_producer(*this);
 int L_WareDescription::get_producers(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
@@ -1755,11 +1759,8 @@ int L_WareDescription::get_producers(lua_State * L) {
 
 		if (upcast(ProductionSite_Descr const, de, &descr)) {
 			for (auto ware_index : de->output_ware_types()) {
-				// NOCOM(#gunchleoc2sirver): using lexical_cast here, because I don't know how to compare a char*.
-				// Can this be done more elegantly?
-				if (boost::lexical_cast<std::string>(get()->name()).compare(
-						boost::lexical_cast<std::string>(tribe.get_ware_descr(ware_index)->name())
-					) == 0) {
+				if (std::string(get()->name()) ==
+					std::string(tribe.get_ware_descr(ware_index)->name())) {
 					lua_pushint32(L, index++);
 					upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
 					lua_rawset(L, -3);
@@ -1777,6 +1778,12 @@ int L_WareDescription::get_producers(lua_State * L) {
 
 		(RO) a list of building descriptions that can consume this ware.
 */
+// TODO(GunChleoc): move the calculation somewhere else.
+// You get the (mutable) wares_description container from the tribe_description
+// into the building constructor and add a member (mutable_ware_description(), either in Tribe_Descr
+// or if there is a container with every ware in there than there).
+// So you can get something like this in the buildingdesc constructor:
+// tribe.mutable_ware_description("log")->add_producer(*this);
 int L_WareDescription::get_consumers(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
@@ -1791,11 +1798,8 @@ int L_WareDescription::get_consumers(lua_State * L) {
 		if (upcast(ProductionSite_Descr const, de, &descr)) {
 			// inputs() returns type WareAmount = std::pair<Ware_Index, uint32_t>
 			for (auto ware_amount : de->inputs()) {
-				// NOCOM(#gunchleoc2sirver): using lexical_cast here, because I don't know how to compare a char*.
-				// Can this be done more elegantly?
-				if (boost::lexical_cast<std::string>(get()->name()).compare(
-						boost::lexical_cast<std::string>(tribe.get_ware_descr(ware_amount.first)->name())
-					) == 0) {
+				if (std::string(get()->name()) ==
+					std::string(tribe.get_ware_descr(ware_amount.first)->name())) {
 					lua_pushint32(L, index++);
 					upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
 					lua_rawset(L, -3);
