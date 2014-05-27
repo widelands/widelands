@@ -16,9 +16,8 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "soldier",
-		_"Trains soldiers in Attack up to level %1$s, and in Health up to level %2$s."
-			:bformat(building_description.max_attack+1,building_description.max_hp+1)
-			.. "<br>" .."Equips the soldiers with all necessary weapons and armor parts.",
+		_"Trains soldiers in ‘Attack’ and in ‘Health’."
+			.. " " .."Equips the soldiers with all necessary weapons and armor parts.",
 		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.") ..
 
 	--Dependencies

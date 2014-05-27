@@ -49,9 +49,9 @@ call=produce_advanced_shield
 return=skipped
 
 [idle]
-pics=armorsmith_i_??.png
+pics=armorsmithy_i_??.png
 hotspot=53 60
 
 [working]
-pics=armorsmith_i_??.png
+pics=armorsmithy_i_??.png
 hotspot=53 60

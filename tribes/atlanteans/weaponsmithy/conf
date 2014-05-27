@@ -91,9 +91,9 @@ call=produce_heavy_double_trident
 return=skipped
 
 [idle]
-pics=weaponsmith_i_??.png  # ???
+pics=weaponsmithy_i_??.png  # ???
 hotspot=50 58
 
 [working]
-pics=weaponsmith_i_??.png  # ???
+pics=weaponsmithy_i_??.png  # ???
 hotspot=50 58

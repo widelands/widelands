@@ -149,9 +149,9 @@ call=produce_shovel
 return=skipped
 
 [idle]
-pics=toolsmith_i_??.png
+pics=toolsmithy_i_??.png
 hotspot=50 53
 
 [working]
-pics=toolsmith_i_??.png
+pics=toolsmithy_i_??.png
 hotspot=50 53

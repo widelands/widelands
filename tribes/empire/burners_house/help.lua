@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("empire", building_description, "coal",
-		_"Bakes pitta bread for soldiers and miners alike.") ..
+		_[[Text needed]]) ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description) ..

@@ -24,5 +24,5 @@ sleep=24000
 worker=breed
 
 [idle]
-pics=fish_breeder_i_??.png  # ???
+pics=fish_breeders_house_i_??.png  # ???
 hotspot=34 42

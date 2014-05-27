@@ -14,8 +14,8 @@ return {
 
 	--General Section
 	building_help_general_string("empire", building_description, "fish",
-		_"Fishes on the coast near the hut.",
-		_"The fisher’s hut needs water full of fish within the working radius.") ..
+		_"Fishes on the coast near the house.",
+		_"The fisher’s house needs water full of fish within the working radius.") ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description) ..

@@ -16,9 +16,9 @@ return {
 
 	--General Section
 	building_help_general_string("empire", building_description, "soldier",
-		_"Trains soldiers in Attack up to level %1$s, and in Health up to level %2$s."
-			:bformat(building_description.max_attack+1,building_description.max_hp+1)
-			.. "<br>" .."Equips the soldiers with all necessary weapons and armor parts.") ..
+		_"Trains soldiers in ‘Attack’ and in ‘Health’."
+			.. " " .."Equips the soldiers with all necessary weapons and armor parts.",
+		_"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.") ..
 
 	--Dependencies
 	-- We would need to parse the production programs to automate the parameters here; so we do it manually

@@ -16,7 +16,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description, "soldier",
-		_"Trains soldiers in ‘Evade’ up to level %d.":bformat(building_description.max_evade+1) .. "<br>" .. _"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.",
+		_"Trains soldiers in ‘Evade’." .. " " .. _"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.",
 		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.") ..
 
 	--Dependencies

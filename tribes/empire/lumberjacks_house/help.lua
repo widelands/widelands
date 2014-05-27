@@ -14,7 +14,7 @@ return {
 	--General Section
 	building_help_general_string("empire", building_description, "log",
 		_"Fell trees in the surrounding area and process them into logs.",
-		_"The lumberjack's house needs trees to fell within the working radius.", "10") ..
+		_"The lumberjack's house needs trees to fell within the working radius.") ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description, true) ..
