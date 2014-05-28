@@ -21,6 +21,10 @@ return {
 	name = wc_name,
 	description = wc_desc,
 	func = function()
+		local plrs = wl.Game().players
+
+		-- set the objective with the game type for all players
+		broadcast_objective(plrs, "win_condition", wc_name, wc_desc)
 
 		-- Get all valueable fields of the map
 		local fields = {}
@@ -49,12 +53,6 @@ return {
 		local currentcandidate = "" -- Name of Team or Player
 		local candidateisteam = false
 		local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
-
-		-- Find all valid players
-      local plrs = wl.Game().players
-
-		-- send a message with the game type to all players
-		broadcast(plrs, wc_name, wc_desc)
 
 		-- Find all valid teams
 		local teamnumbers = {} -- array with team numbers

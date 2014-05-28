@@ -21,10 +21,10 @@ return {
 	name = wc_name,
 	description = wc_desc,
 	func = function()
-	local plrs = wl.Game().players
+		local plrs = wl.Game().players
 
-	-- send a message with the game type to all players
-	broadcast(plrs, wc_name, wc_desc)
+		-- set the objective with the game type for all players
+		broadcast_objective(plrs, "win_condition", wc_name, wc_desc)
 
 	local remaining_time = 4 * 60 -- 4 hours
 

@@ -22,6 +22,10 @@ return {
 	name = wc_name,
 	description = wc_desc,
 	func = function()
+		local plrs = wl.Game().players
+
+		-- set the objective with the game type for all players
+		broadcast_objective(plrs, "win_condition", wc_name, wc_desc)
 
 -- Simple flowing text. One Paragraph
 local function p(s)
@@ -167,12 +171,6 @@ hooks.custom_statistic = {
 sleep(1000)
 
 local remaining_time = 60 * 4
-local plrs = wl.Game().players
-
--- send a message with the game type to all players
-for idx, p in ipairs(plrs) do
-	p:send_message(wc_name, wc_desc)
-end
 
 -- Endless loop
 while true do
