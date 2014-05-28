@@ -90,7 +90,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 
 		//  check if field is valid
 		if (Editor_Tool_Set_Starting_Pos_Callback(map.get_fcoords(center.node), map)) {
-			Overlay_Manager & overlay_manager = map.overlay_manager();
+			OverlayManager & overlay_manager = map.overlay_manager();
 			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, pic);
 

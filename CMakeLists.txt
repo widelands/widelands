@@ -155,10 +155,9 @@ endif (WL_UNIT_TESTS)
 
 option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
 
-set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
-set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
+set (PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR "-isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wall -Wextra")
-set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wformat -Wformat-nonliteral -Wformat-security -Wformat-y2k -Winit-self -Winvalid-pch -Wmissing-include-dirs -Woverlength-strings -Wpacked -Wpointer-arith -Wredundant-decls -Wshadow -Wsign-promo -Wswitch-default -Wundef -Wunused -Wunused-macros")
+set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wformat -Wformat-nonliteral -Wformat-security -Wformat-y2k -Winit-self -Winvalid-pch -Wmissing-include-dirs -Wold-style-cast -Woverlength-strings -Wpacked -Wpointer-arith -Wredundant-decls -Wshadow -Wsign-promo -Wswitch-default -Wundef -Wunused -Wunused-macros")
 set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op -Wsync-nand -Wtrampolines")
 set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 include(CheckCXXCompilerFlag) #this include should be safe
@@ -171,21 +170,10 @@ else()
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
+  #TODO: look into replacing this with CMAKE_CXX_COMPILER_VERSION when we move to a more recent CMake version than 2.6
   EXECUTE_PROCESS(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
   if (GCC_VERSION VERSION_LESS 4.7)
-    if (GCC_VERSION VERSION_LESS 4.6)
-      if (NOT WIN32)
-        set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++0x -Dnullptr=NULL")
-      else()
-        set (PARAMETER_COMPILERFLAG_CXXSTD "-std=gnu++0x -Dnullptr=NULL")
-      endif()
-    else()
-      if (NOT WIN32)
-        set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++0x")
-      else()
-        set (PARAMETER_COMPILERFLAG_CXXSTD "-std=gnu++0x")
-      endif()
-    endif()
+    message(FATAL_ERROR "You seem to be running an older version of GCC. Widelands use various C++11 features, which require GCC 4.7 or a later version.")
   endif()
 endif()
 
@@ -194,42 +182,14 @@ IF (Compiler_std_supported)
   set (WL_COMPILERFLAG_CXXSTD " ${PARAMETER_COMPILERFLAG_CXXSTD}") #the space is on purpose!
 ENDIF (Compiler_std_supported)
 
-
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
-IF (Compiler_old-style-cast_supported)
-  EXEC_PROGRAM(${CMAKE_CXX_COMPILER}
-    ARGS --version
-    OUTPUT_VARIABLE WLBUILD_COMPILERVERSION
-  )
-  STRING(REGEX REPLACE ".*([0-9])\\.([0-9])\\.([0-9]).*" "\\1.\\2.\\3" WLBUILD_COMPILERVERSION_REP ${WLBUILD_COMPILERVERSION})
-  IF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
-    message("===== ATTENTION ===================================================")
-    message("Your compiler has been identified as GCC 4.3.1 or GCC 4.3.2")
-    message(" ")
-    message("There is a bug regarding this version, see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=38000")
-    message("and https://bugs.launchpad.net/widelands/+bug/549479 for details.")
-    message("Build will disable -isystem usage, expect lots of warnings from Boost header files.")
-    message("Widelands should still compile and link correctly.")
-    message("If the compiler identification is correct, please consider updating your gcc.")
-    message("This warning message will disappear at GCC 4.3.3 and higher.")
-    message("If you feel this is wrong, please submit a bug with widelands (not with GCC!)")
-    message("and add the following information how cmake sees your C++ compiler:")
-    message(" ")
-    message("--------------------------------")
-    message("${WLBUILD_COMPILERVERSION}")
-    message("--------------------------------")
-    message(" ")
-    message("Thank you for taking your time to read this.")
-    message("===================================================================")
-    set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST}") #the space is on purpose!
-  ELSE (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
-    IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-      set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED}") #the space is on purpose!
-    ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
-      include_directories(SYSTEM ${Boost_INCLUDE_DIR})
-    ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
-ENDIF (Compiler_old-style-cast_supported)
+CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR} Compiler_boost_include_dir_supported)
+IF (Compiler_boost_include_dir_supported)
+  IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set (WL_COMPILERFLAG_BOOST_INCLUDE_DIR " ${PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR}") #the space is on purpose!
+  ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    include_directories(SYSTEM ${Boost_INCLUDE_DIR})
+  ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+ENDIF()
 
 CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)
 IF (Compiler_generic_warnings_supported)
@@ -250,8 +210,6 @@ ELSE (Compiler_gcc_warnings_supported)
   message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM or Visual Studio.")
 ENDIF (Compiler_gcc_warnings_supported)
 
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)
-
 IF (WL_STRICT)
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
   IF (Compiler_strict_mode_supported)
@@ -261,26 +219,11 @@ IF (WL_STRICT)
 ENDIF (WL_STRICT)
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "${WL_COMPILERFLAG_CXXSTD} -g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "${WL_COMPILERFLAG_CXXSTD} -g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_BOOST_INCLUDE_DIR}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 set (WL_COMPILERFLAG_OPTIMIZATIONS "-O3")
 
-#This can be removed if no one uses gcc 4.5.1 or 4.5.2 any more
-IF (CMAKE_COMPILER_IS_GNUCXX)
-  EXEC_PROGRAM (
-    ${CMAKE_CXX_COMPILER}
-    ARGS --version
-    OUTPUT_VARIABLE WLBUILD_COMPILERVERSION
-  )
-  STRING(REGEX REPLACE ".*(4)\\.(5)\\.([0-9]).*" "\\1.\\2.\\3" WLBUILD_COMPILERVERSION_REP ${WLBUILD_COMPILERVERSION})
-  IF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
-    message("Detected gcc ${WLBUILD_COMPILERVERSION_REP}")
-    message("Suffering from gcc bug, disabling -O3")
-    set (WL_COMPILERFLAG_OPTIMIZATIONS "-O2")
-  ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
-ENDIF (CMAKE_COMPILER_IS_GNUCXX)
-
-set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_CXXSTD} ${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_CXXSTD} ${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
