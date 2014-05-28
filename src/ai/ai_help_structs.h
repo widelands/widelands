@@ -268,10 +268,9 @@ struct BuildingObserver {
 
 	bool                              is_basic; // is a "must" to have for the ai
 	bool                              prod_build_material;
+	bool						      plants_trees;
 	bool                              recruitment; // is "producing" workers?
-
 	bool                              is_buildable;
-
 	bool                              need_trees;  // lumberjack = true
 	bool                              need_stones; // quarry = true
 	bool                              need_water;  // fisher, fish_breeder = true
@@ -290,6 +289,7 @@ struct BuildingObserver {
 
 	int32_t                           cnt_built;
 	int32_t                           cnt_under_construction;
+	int32_t							  cnt_target; //number of buildings as target
 
 	//used to track amount of stocklevel
 	uint32_t						  stocklevel;
