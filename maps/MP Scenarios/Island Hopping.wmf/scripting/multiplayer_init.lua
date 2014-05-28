@@ -239,6 +239,9 @@ function initialize()
    disable_unused_buildings()
 
    send_to_all(welcome_msg)
+   -- set the objective with the game type for all players
+   -- TODO change this to a broadcast once individual game objectives have been implementes
+   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg)
 
    for idx,plr in ipairs(game.players) do
       run(function() run_island(plr, 1) end)

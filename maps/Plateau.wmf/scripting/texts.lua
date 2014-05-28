@@ -23,6 +23,19 @@ function add_obj(o)
    return p1:add_objective(o.name, o.title, _obj(reflow(o.body)), o)
 end
 
+obj_forbidden_island = {
+   name = "forbidden_island",
+   title =_"The Forbidden Island",
+   body = _(
+[[Finally! We have just taken our first step towards victory! ]] ..
+[[Last night, we landed on the forbidden island and defeated the few guards that were watching the ]] ..
+[[north-western part of the island. ]] ..
+[[I am quite sure that none of the other warlords has detected us so far, ]] ..
+[[so we should keep quiet and build up our infrastructure. Soon we will be strong enough to raid their positions.]]),
+}
+
+
+
 obj_capture_ancient_castle = {
    name = "capture_ancient_castle",
    title =_ "Capture the Ancient Castle",
