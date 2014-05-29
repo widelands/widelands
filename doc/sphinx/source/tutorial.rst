@@ -269,4 +269,62 @@ the value of the variable a asynchronously. So we see in this example that
 coroutines share the same environment and can therefore use global variables
 to communicate with each other.  
 
+
+Preparing Strings for Translation
+---------------------------------
+
+When writing your scenario's text, it is important to keep in mind that these will be translated into various languages. This entails that word forms and word order will change, and some languages have more than one plural form. So, here are some pointers for good string design. For examples for the formatting discussed here, have a look at ``maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua`` in the source code.
+
+
+Translator Comments
+^^^^^^^^^^^^^^^^^^^
+
+If you have a string where you feel that translators will need a bit of help to understand what it does, you can add a translator comment to it. Translator comments are particularly useful when you are working with placeholders, because you can tell the translator what the placeholder will be replaced with. Translator comments need to be inserted into the code in the line directly above the translation. Each line of a translator comment has to be prefixed by ``-- TRANSLATORS: ``, like this:
+
+.. code-block:: lua
+
+   -- TRANSLATORS: This is just a test string
+   -- TRANSLATORS: With a multiline comment
+   print _ "Hello Word" -- Will print in German: "Hallo Welt"
+
+
+Working with Placeholders
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you have multiple variables in your script that you wish to include dynamically in the same string, please use ordered placeholders to give translators control over the word order. We have implemented a special Lua function for this called ``bformat`` that works just like the ``boost::format`` function in C++. Example:
+
+.. code-block:: lua
+
+   local world = _("world") -- Will print in Gaelic: "saoghal"
+   local hello = _("hello") -- Will print in Gaelic: "halò"
+   -- TRANSLATORS: %1$s = hello, %2$s = world
+   print  (_ "The %1$s is '%2$s'"):bformat(hello, world) -- Will print in Gaelic: "Is 'halò' an saoghal"
+
+
+Numbers in Placeholders
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Not all languages' number systems work the same as in English. So, mocking up an example with putting Gaelic grammar on an English word for illustration, we would have something like `0 boat`, `1 or 2 bhoat`, `3 boats`, `20 boat`... So, instead of using ``_`` to fetch the translation, any string containing a placeholder that is a number should be fetched with ``ngettext`` instead. First, you fetch the correct plural form, using the number variable and ``ngettext``:
+
+.. code-block:: lua
+
+   pretty_plurals_string = ngettext("There is %s world" , "There are %s worlds", number_of_worlds)
+
+
+Then you still need to format the string with your variable:
+
+.. code-block:: lua
+
+   print pretty_plurals_string:format(number_of_worlds)
+
+If you have a string with multiple numbers in it that would trigger plural forms, split it into separate strings that you can fetch with ``ngettext``. You can then combine them with ``bformat`` and ordered placeholders.
+
+
+Handling Long Strings
+^^^^^^^^^^^^^^^^^^^^^
+
+If you have a really long string, check if there is a logical place where you could split this into two separate strings for translators. It is easier for translators to translate smaller chunks, and if you should have to change the string later on, e.g. to fix a typo, you will break less stuff. The strings will be put into the translation files in the same order as they appear in the source code, so the context will remain intact for the translators.
+
+Also, please hide all formatting control characers from our translators. This includes HTML tags as well as new lines in the code! For an example, have a look at ``campaigns/atl01.wmf/scripting/texts.lua``
+
 .. vim:ft=rst:spelllang=en:spell
