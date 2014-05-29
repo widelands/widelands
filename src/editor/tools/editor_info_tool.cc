@@ -49,15 +49,10 @@ int32_t Editor_Info_Tool::handle_click_impl
 	Widelands::Field & f = map[center.node];
 
 	// *** Node info
-	char buf1[1024];
 	std::string buf = _("Node:");
 	buf += "\n";
 	buf += std::string("• ") + (boost::format(_("Coordinates: (%1$i, %2$i)"))
 					 % center.node.x % center.node.y).str() + "\n";
-
-	buf += std::string("• ");
-	buf += buf1;
-	buf += std::string("\n");
 
 	std::string temp = "";
 	Widelands::NodeCaps const caps = f.nodecaps();
@@ -83,9 +78,15 @@ int32_t Editor_Info_Tool::handle_click_impl
 
 	buf += std::string("• ") + (boost::format(_("Caps:%s")) % temp).str() + "\n";
 
-	buf += std::string("• ");
-	snprintf(buf1, sizeof(buf1), _("Owned by %i"), f.get_owned_by());
-	buf += std::string(buf1) + "\n";
+	if(f.get_owned_by() > 0) {
+		buf += std::string("• ");
+		char buf1[1024];
+		snprintf(buf1, sizeof(buf1), _("Owned by: %u"), f.get_owned_by());
+		buf += std::string(buf1) + "\n";
+	}
+	else {
+		buf += std::string("• ") + _("Owned by: —") + "\n";
+	}
 
 	temp = f.get_immovable() ? _("Has base immovable") : _("No base immovable");
 	buf += std::string("• ") + temp + "\n";
@@ -116,8 +117,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 			).str() + "\n";
 		buf += std::string("• ") + (boost::format(_("Resource amount: %i")) % ramount).str() + "\n";
 	}
-	else
-	{
+	else {
 		buf += std::string("• ") + std::string(_("No resources")) + "\n";
 	}
 
@@ -127,10 +127,13 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += std::string("• ") + (boost::format(_("Size: %1$ix%2$i"))
 					 % map.get_width() % map.get_height()).str() + "\n";
 
-	buf += std::string("• ");
-	snprintf(buf1, sizeof(buf1), _("Players: %i"), map.get_nrplayers());
+	if (map.get_nrplayers() > 0) {
+		buf += std::string("• ") + (boost::format(_("Players: %u")) % map.get_nrplayers()).str() + "\n";
+	}
+	else {
+		buf += std::string("• ") + (boost::format(_("Players: %s")) % "—").str() + "\n";
+	}
 
-	buf += std::string(buf1) + "\n";
 	buf += std::string("• ") + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
 	buf += std::string("• ") + (boost::format(_("Descr: %s")) % map.get_description()).str() + "\n";
 
