@@ -74,6 +74,7 @@
 #define WOOD_DEBUG 			false
 #define SPACE_DEBUG			false
 #define STAT_DEBUG			true
+#define BASE_INFRASTRUCTURE_TIME 20*60*1000
 
 using namespace Widelands;
 
@@ -308,6 +309,7 @@ void DefaultAI::late_initialization () {
 		bo.is_buildable           = bld.is_buildable();
 		bo.need_trees             = bh.is_logproducer();
 		bo.need_stones            = bh.is_stoneproducer();
+		bo.is_stoneproducer       = bh.is_stoneproducer();
 		bo.need_water             = bh.get_needs_water();
 		bo.recruitment            = bh.for_recruitment();
 		bo.space_consumer         = bh.is_space_consumer();
@@ -1146,7 +1148,7 @@ bool DefaultAI::construct_building (int32_t gametime) { // (int32_t gametime)
 										else
 											continue; //we are above tresh
 								}
-							} else { //gamekeepers or so
+							} else if(gametime>BASE_INFRASTRUCTURE_TIME and not new_buildings_stop) { //gamekeepers or so
 								if (bo.stocklevel_time<game().get_gametime()-5*1000) {
 									bo.stocklevel=get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint));
 									bo.stocklevel_time=game().get_gametime();
@@ -1171,7 +1173,7 @@ bool DefaultAI::construct_building (int32_t gametime) { // (int32_t gametime)
 							if (prio<=0)
 								continue;
 						} else
-							if (bo.recruitment) {
+							if (bo.recruitment and gametime>BASE_INFRASTRUCTURE_TIME and not new_buildings_stop) {
 								//this will depend on number of mines and productionsites
 								if (static_cast<int32_t>((productionsites.size() + mines.size())/30)>bo.total_count() and bo.cnt_under_construction==0)
 									prio=4+bulgarian_constant;
@@ -1189,7 +1191,7 @@ bool DefaultAI::construct_building (int32_t gametime) { // (int32_t gametime)
 								if ((bo.is_basic or bo.prod_build_material) and bo.total_count()==0)
 									prio=150+max_preciousness;
 								else
-									if (game().get_gametime()<15*60*1000)  //leave 15 minutes for basic infrastructure only
+									if (game().get_gametime()<BASE_INFRASTRUCTURE_TIME or new_buildings_stop)  //leave 15 minutes for basic infrastructure only
 										continue;
 									else
 										if  ( ((bo.is_basic or bo.prod_build_material) and  bo.total_count()<=1) or
@@ -1381,7 +1383,7 @@ bool DefaultAI::construct_building (int32_t gametime) { // (int32_t gametime)
 
 	//if (MINES_DEBUG ) printf(" TDEBUG: a\n");
 	// then try all mines - as soon as basic economy is build up.
-	if (gametime>next_mine_construction_due) {
+	if (gametime>next_mine_construction_due ) {
 		//if (MINES_UPDATE_DEBUG) printf (" TDEBUG: testing mines and updating mineable fields (on %10d)\n",gametime);
 		update_all_mineable_fields(gametime);
 		next_mine_construction_due=gametime+IDLE_MINE_UPDATE_INTERVAL;
@@ -1391,6 +1393,9 @@ bool DefaultAI::construct_building (int32_t gametime) { // (int32_t gametime)
 		(uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i) {
 			BuildingObserver & bo = buildings.at(i);
 
+			if (not bo.is_stoneproducer and gametime<BASE_INFRASTRUCTURE_TIME) //allow only stone mines in early stages of game
+				continue;
+			
 			if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
 				continue;
 

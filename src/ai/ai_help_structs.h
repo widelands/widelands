@@ -273,6 +273,7 @@ struct BuildingObserver {
 	bool                              is_buildable;
 	bool                              need_trees;  // lumberjack = true
 	bool                              need_stones; // quarry = true
+	bool                              is_stoneproducer; // quarry = true, also mines
 	bool                              need_water;  // fisher, fish_breeder = true
 	bool                              space_consumer; // farm, vineyard... = true
 

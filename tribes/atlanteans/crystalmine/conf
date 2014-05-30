@@ -17,6 +17,7 @@ miner=3
 
 [aihints]
 mines=granit
+stoneproducer=true
 
 [inputs]
 bread=10
