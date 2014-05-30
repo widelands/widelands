@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-03-13 01:31+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-05-29 20:55+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:33+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-05-30 05:32+0000\n"
+"X-Generator: Launchpad (build 17023)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -42,6 +42,11 @@ msgid ""
 "started\n"
 "through playable tutorials."
 msgstr ""
+"Widelands je real-time strategie šířená zdarma s otevřeným zdrojovým kódem,\n"
+"obsahuje kampaň pro jednoho hráče a hru více hráčů. Hra je inspirována "
+"Settlers II\n"
+"ale je rozmanitější a jde více do hloubky. I přes to je snadné začít hrát\n"
+"díky hratelným tutoriálům."
 
 #: ../../txts/README.lua:25
 msgid ""
@@ -61,6 +66,8 @@ msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
 msgstr ""
+"Widelands je licencováno pod GNU General Public License (GPL). Pro více\n"
+"informací se podívejte do souboru \"COPYING\"."
 
 #: ../../txts/README.lua:38
 msgid "Status"
@@ -98,12 +105,18 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Pokud držíte CTRL při stavbě cest, vlajky budou umístěny automaticky.\n"
+"Pokud držíte CTRL při rušení cest, všechny vlajky až k první křižovatce "
+"budou\n"
+"odstraněny."
 
 #: ../../txts/README.lua:56
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr ""
+"Můžeš přeskočit potvrzovací okno nevratné operace, když držíš CTRL\n"
+"a klikneš na tlačítko dané operace."
 
 #: ../../txts/README.lua:59
 msgid "Keyboard shortcuts (in-game)"
@@ -111,11 +124,11 @@ msgstr "Klávesové zkratky (během hry)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "PAGEUP: zvýší rychlost hry"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "PAGEDOWN: sníží rychlost hry"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -124,7 +137,7 @@ msgstr "PAUSE: pozastaví hru"
 #: ../../txts/README.lua:64
 #: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "SPACE: zobrazí/skryje místa pro stavbu budov"
 
 #: ../../txts/README.lua:65
 #: ../../txts/editor_readme:29
@@ -223,13 +236,15 @@ msgstr "Prosím specifikuj dostatek souvisejících informací. Zejména:"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Podrobný postup jak chybu vyvolat, je-li to možné."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
+"- Co jste očekávali, že se stane, když jste učinili tyto kroky a co se "
+"doopravdy stalo."
 
 #: ../../txts/README.lua:103
 msgid ""
