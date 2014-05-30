@@ -73,6 +73,7 @@
 #define MINES_UPDATE_DEBUG	false
 #define WOOD_DEBUG 			false
 #define SPACE_DEBUG			false
+#define STAT_DEBUG			true
 
 using namespace Widelands;
 
@@ -804,7 +805,12 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 		assert(productionsites.front().bo->cnt_built > 0);
 		// Add statistics value
 		productionsites.front().bo->current_stats +=
-		    productionsites.front().site->get_statistics_percent();
+		    productionsites.front().site->get_crude_statistics();
+		if (STAT_DEBUG and abs(productionsites.front().site->get_crude_statistics()-productionsites.front().site->get_statistics_percent())>50)
+			printf (" STAT DEBUG: %15s (%3dx%3d): crude statistic: %3d vs official statistics: %3d\n",
+			productionsites.front().site->name().c_str(),
+			productionsites.front().site->get_position().x, productionsites.front().site->get_position().y ,
+			productionsites.front().site->get_crude_statistics(),productionsites.front().site->get_statistics_percent());
 		// Check whether this building is completely occupied
 		productionsites.front().bo->unoccupied |=
 		    !productionsites.front().site->can_start_working();
@@ -819,7 +825,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 		assert(mines.front().bo->cnt_built > 0);
 		// Add statistics value
 		mines.front().bo->current_stats +=
-		    mines.front().site->get_statistics_percent();
+		    mines.front().site->get_statistics_percent(); 
 		// Check whether this building is completely occupied
 		mines.front().bo->unoccupied |=
 		    !mines.front().site->can_start_working();

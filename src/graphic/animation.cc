@@ -205,11 +205,18 @@ void NonPackedAnimation::load_graphics() {
 		if (g_fs->FileExists(pc_filename)) {
 			hasplrclrs_ = true;
 			const Image* pc_image = g_gr->images().get(pc_filename);
-			if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height())
-				throw wexception
-					("playercolor mask has wrong size: (%u, %u), should "
-					 "be (%u, %u) like the animation frame",
-					 pc_image->width(), pc_image->height(), frames_[0]->width(), frames_[0]->height());
+			//temporary workaround, just to avoid crashes
+			if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()){
+				printf("ANIMATION ERROR: playercolor mask has wrong size: (%s: %u, %u), should "
+					 "be (%u, %u) like the animation frame\n",
+					 pc_filename.c_str(),pc_image->width(), pc_image->height(), frames_[0]->width(), frames_[0]->height());
+					 hasplrclrs_ = false;
+					 break;
+				}
+				//throw wexception
+					//("playercolor mask has wrong size: (%s: %u, %u), should "
+					 //"be (%u, %u) like the animation frame",
+					 //pc_filename.c_str(),pc_image->width(), pc_image->height(), frames_[0]->width(), frames_[0]->height());
 			pcmasks_.push_back(pc_image);
 		}
 	}
