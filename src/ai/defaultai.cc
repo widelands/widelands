@@ -1402,11 +1402,11 @@ bool DefaultAI::construct_building (int32_t gametime) { // (int32_t gametime)
 			if (gametime-bo.construction_decision_time<BUILDING_MIN_INTERVAL)
 				continue;
 
-			if (game().get_gametime() < 15*60*1000)
-				continue;
+			//if (game().get_gametime() < 15*60*1000)
+				//continue;
 
-			if (game().get_gametime() < 30*60*1000 and (bo.total_count() + bo.unoccupied + bo.cnt_under_construction)>0)
-				continue;
+			//if (game().get_gametime() < 30*60*1000 and (bo.total_count() + bo.unoccupied + bo.cnt_under_construction)>0)
+				//continue;
 
 			//if (MINES_DEBUG ) printf(" TDEBUG: c\n");
 
@@ -1459,6 +1459,8 @@ bool DefaultAI::construct_building (int32_t gametime) { // (int32_t gametime)
 			        ++j) {
 				int32_t prio = 0;
 
+
+				
 				if ((*j)->coords.field->get_resources() != bo.mines)
 					continue;
 				else
@@ -1470,6 +1472,10 @@ bool DefaultAI::construct_building (int32_t gametime) { // (int32_t gametime)
 				// Only build mines on locations where some material can be mined
 				if (prio < 2)
 					continue;
+
+				if (bo.is_stoneproducer and (bo.cnt_built+bo.cnt_under_construction)==0)
+					prio*=3;
+
 
 				// Continue if field is blocked at the moment
 				bool blocked = false;
