@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-04-15 08:16+0200\n"
-"PO-Revision-Date: 2014-05-29 21:16+0000\n"
+"PO-Revision-Date: 2014-05-30 19:34+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-05-30 05:33+0000\n"
-"X-Generator: Launchpad (build 17023)\n"
+"X-Launchpad-Export-Date: 2014-05-31 05:28+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -64,7 +64,7 @@ msgstr "Minimapa"
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:119
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Zobrazit místa pro stavbu (zap/vyp)"
 
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/ui_fsmenu/launchMPG.cc:164
@@ -854,7 +854,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:156
 #, c-format
 msgid "not %s"
-msgstr ""
+msgstr "ne %s"
 
 #. * TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s'
 #. * TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s'
@@ -871,21 +871,21 @@ msgstr "Ekonomika potřebuje %s"
 #: ../../src/logic/production_program.cc:865
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #. * TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages.
 #: ../../src/logic/production_program.cc:237
 #: ../../src/logic/production_program.cc:846
 #, c-format
 msgid "%s,"
-msgstr ""
+msgstr "%s,"
 
 #. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
 #: ../../src/logic/production_program.cc:242
 #: ../../src/logic/production_program.cc:854
 #, c-format
 msgid "%1$s (%2$i)"
-msgstr ""
+msgstr "%1$s (%2$i)"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:245
@@ -1057,7 +1057,7 @@ msgstr "Pobřeží dosaženo"
 #: ../../src/logic/ship.cc:620
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Loď expedice dosáhla přístavu a čeká na další rozkazy."
 
 #: ../../src/logic/ship.cc:784
 msgid "Expedition Ready"
@@ -1097,7 +1097,7 @@ msgstr ""
 #: ../../src/logic/worker.cc:610
 #, c-format
 msgid "Out of %s"
-msgstr ""
+msgstr "Došlo %s"
 
 #: ../../src/logic/worker.cc:611
 #, c-format
@@ -1193,15 +1193,17 @@ msgstr ""
 #, c-format
 msgid "InternetGaming: Server time offset is %u second."
 msgid_plural "InternetGaming: Server time offset is %u seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "InternetGaming: Offset serveru je %u sekunda."
+msgstr[1] "InternetGaming: Offset serveru je %u sekundy."
+msgstr[2] "InternetGaming: Offset serveru je %u sekund."
 
 #: ../../src/network/internet_gaming.cc:441
 #, c-format
 msgid "Server time offset is %u second."
 msgid_plural "Server time offset is %u seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Offset serveru je %u sekunda."
+msgstr[1] "Offset serveru je %u sekundy."
+msgstr[2] "Offset serveru je %u sekund."
 
 #: ../../src/network/internet_gaming.cc:464
 #, c-format
@@ -1573,8 +1575,9 @@ msgstr ""
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%li sekunda"
+msgstr[1] "%li sekundy"
+msgstr[2] "%li sekund"
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
@@ -1790,7 +1793,17 @@ msgid_plural ""
 "removed! Some islands might be unreachable now. Please consider fixing the "
 "map in the map editor."
 msgstr[0] ""
+"Varování: %i nedostupné stavební místo pro přístav. Nemůže být opraveno a "
+"bude smazáno! Některé ostrovy mohou být nyní nedostupné. Prosím zvažte "
+"opravu mapy v editoru map."
 msgstr[1] ""
+"Varování: %i nedostupná stavební místa pro přístav. Nemohou být opravena a "
+"budou smazána! Některé ostrovy mohou být nyní nedostupné. Prosím zvažte "
+"opravu mapy v editoru map."
+msgstr[2] ""
+"Varování: %i nedostupných stavebních míst pro přístav. Nemohou být opravena "
+"a budou smazána! Některé ostrovy mohou být nyní nedostupné. Prosím zvažte "
+"opravu mapy v editoru map."
 
 #: ../../src/s2map.cc:889
 msgid "WARNING"
@@ -1811,7 +1824,7 @@ msgstr "Hra uložena"
 #: ../../src/scripting/lua_game.cc:1085
 #, c-format
 msgid "%1$s (achieved %2$s)"
-msgstr ""
+msgstr "%1$s (dosaženo %2$s)"
 
 #: ../../src/ui_basic/helpwindow.cc:48 ../../src/ui_basic/helpwindow.cc:189
 #, c-format
@@ -2161,8 +2174,9 @@ msgstr "Velikost: %1$u x %2$u"
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Hráč"
+msgstr[1] "%u Hráči"
+msgstr[2] "%u Hráčů"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:653
 #, c-format
@@ -2186,6 +2200,8 @@ msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role With the button following your nickname. Available roles are:"
 msgstr ""
+"Na levé straně je seznam všech klientů včetně tebe. Můžeš si vybrat svou "
+"roli tlačítkem vedle tvého nicku. Dostupné role jsou:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:678
 msgid ""
@@ -2422,7 +2438,7 @@ msgstr "Oficiální mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:173
 msgid "Seafaring Map"
-msgstr ""
+msgstr "Námořní mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "1v1"
@@ -2946,13 +2962,15 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1363
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Zapnuto záložní nastavení"
 
 #: ../../src/wlapplication.cc:1365
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Zvolené nastavení grafiky nelze zapnout, proto zapínám záložní. Prosím "
+"zkontrolujte nastavení grafiky."
 
 #: ../../src/wlapplication.cc:1436
 #, c-format
@@ -3027,11 +3045,11 @@ msgstr "Opravdu chcete vylepšit %s?"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
-msgstr ""
+msgstr "Opravdu chcete potopit tuto loď?"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr ""
+msgstr "Potopit loď?"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
@@ -3080,7 +3098,7 @@ msgstr "Vlastněno:"
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "Being built:"
-msgstr ""
+msgstr "Staví se:"
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive"
@@ -3117,11 +3135,11 @@ msgstr "Ukázat následující"
 
 #: ../../src/wui/buildingwindow.cc:182
 msgid "Cancel the expedition"
-msgstr ""
+msgstr "Zrušit expedici"
 
 #: ../../src/wui/buildingwindow.cc:192
 msgid "Start an expedition"
-msgstr ""
+msgstr "Zahájit expedici"
 
 #: ../../src/wui/buildingwindow.cc:208 ../../src/wui/game_summary.cc:77
 msgid "Continue"
@@ -3138,7 +3156,7 @@ msgstr "Vylepšit na %s"
 
 #: ../../src/wui/buildingwindow.cc:241 ../../src/wui/fieldaction.cc:116
 msgid "Construction costs:"
-msgstr ""
+msgstr "Stavební náklady:"
 
 #: ../../src/wui/buildingwindow.cc:262
 msgid "Destroy"
@@ -3150,7 +3168,7 @@ msgstr "Rozebrat"
 
 #: ../../src/wui/buildingwindow.cc:280
 msgid "Returns:"
-msgstr ""
+msgstr "Výnosy:"
 
 #: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:503
 msgid "Hide work area"
@@ -3197,19 +3215,19 @@ msgstr " nebo "
 
 #: ../../src/wui/fieldaction.cc:250
 msgid "Build small building"
-msgstr ""
+msgstr "Postavit malou budovu"
 
 #: ../../src/wui/fieldaction.cc:251
 msgid "Build medium building"
-msgstr ""
+msgstr "Postavit střední budovu"
 
 #: ../../src/wui/fieldaction.cc:252
 msgid "Build large building"
-msgstr ""
+msgstr "Postavit velkou budovu"
 
 #: ../../src/wui/fieldaction.cc:253
 msgid "Build port building"
-msgstr ""
+msgstr "Postavit budovu přístavu"
 
 #: ../../src/wui/fieldaction.cc:285
 msgid "Action"
@@ -3233,7 +3251,7 @@ msgstr "Poslat geologa na průzkum"
 
 #: ../../src/wui/fieldaction.cc:414
 msgid "Place a flag"
-msgstr ""
+msgstr "Umístit vlajku"
 
 #: ../../src/wui/fieldaction.cc:421
 msgid "Destroy a road"
@@ -3327,21 +3345,23 @@ msgstr "Herní čas:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition:"
-msgstr ""
+msgstr "Podmínky vítězství:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:142
 #, c-format
 msgid "%i player"
 msgid_plural "%i players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i hráč"
+msgstr[1] "%i hráči"
+msgstr[2] "%i hráčů"
 
 #. * TRANSLATORS: This is preceded by a number
 #: ../../src/wui/game_main_menu_save_game.cc:181
 msgid "player"
 msgid_plural "players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "hráč"
+msgstr[1] "hráči"
+msgstr[2] "hráčů"
 
 #: ../../src/wui/game_main_menu_save_game.cc:251
 msgid ""
@@ -3358,7 +3378,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:255
 #: ../../src/wui/game_main_menu_save_game.cc:267
 msgid "Save Game Error!"
-msgstr ""
+msgstr "Chyba při ukládání hry!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
@@ -3372,7 +3392,7 @@ msgstr "Opravu chcete smazat soubor %s?"
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Messages: Inbox"
-msgstr ""
+msgstr "Zprávy: Doručená pošta"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
@@ -3422,7 +3442,7 @@ msgstr "vycentrovat pohled hlavní mapy na lokaci"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Messages: Archive"
-msgstr ""
+msgstr "Zprávy: Archiv"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"
@@ -3484,7 +3504,7 @@ msgstr "Uplynulý čas:"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Pokračovat ve hře"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
