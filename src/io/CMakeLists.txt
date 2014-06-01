@@ -10,6 +10,7 @@ wl_library(io_stream
     base_exceptions
 )
 
+# TODO(sirver): Splitting this into filesystem and fileread.
 wl_library(io_filesystem
   USES_MINIZIP
   SRCS

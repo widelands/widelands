@@ -4,12 +4,12 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_
 # See
 # http://www.cmake.org/cmake/help/v3.0/module/CMakeParseArguments.html
 function(wl_library NAME)
-  # TODO(sirver): add options for the other external libraries we
+  # TODO(sirver): add OPTIONS for the other external libraries we
   # use
-  set(options USES_MINIZIP)
-  set(oneValueArgs )
-  set(multiValueArgs SRCS DEPENDS)
-  cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}"
+  set(OPTIONS USES_MINIZIP)
+  set(ONE_VALUE_ARG )
+  set(MULTI_VALUE_ARGS SRCS DEPENDS)
+  cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
     ${ARGN}
   )
 
