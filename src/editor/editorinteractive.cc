@@ -25,6 +25,7 @@
 #include <SDL_keysym.h>
 #include <boost/format.hpp>
 
+#include "base/warning.h"
 #include "editor/tools/editor_delete_immovable_tool.h"
 #include "editor/ui_menus/editor_main_menu.h"
 #include "editor/ui_menus/editor_main_menu_load_map.h"
@@ -44,7 +45,6 @@
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "warning.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"

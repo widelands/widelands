@@ -17,13 +17,11 @@
  *
  */
 
-#include "log.h"
+#include "base/log.h"
 
 #include <cstdarg>
 #include <cstdio>
 #include <iostream>
-
-#include "io/dedicated_log.h"
 
 // Default to stdout for logging.
 std::ostream & wout = std::cout;
@@ -41,5 +39,3 @@ void log(const char * const fmt, ...) {
 	wout << buffer;
 	wout.flush();
 }
-
-

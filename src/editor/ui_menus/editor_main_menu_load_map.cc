@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
@@ -40,7 +41,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
 #include "wui/overlay_manager.h"
 
 using Widelands::WL_Map_Loader;

@@ -22,6 +22,7 @@
 #include <boost/format.hpp>
 #include <libintl.h>
 
+#include "base/warning.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
@@ -38,7 +39,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-#include "warning.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
 

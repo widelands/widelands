@@ -1,6 +1,47 @@
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
 
+# See
+# http://www.cmake.org/cmake/help/v3.0/module/CMakeParseArguments.html
+function(wl_library NAME)
+  # TODO(sirver): add options for the other external libraries we
+  # use
+  set(options USES_MINIZIP)
+  set(oneValueArgs )
+  set(multiValueArgs SRCS DEPENDS)
+  cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}"
+    ${ARGN}
+  )
+
+  # TODO(sirver): Add a codecheck target for each ARG_SRCS here.
+  # TODO(sirver): I do not get any unresolved dependency errors
+  # when building a STATIC library, only for SHARED. We should
+  # always gets those errors to track down cyclic dependencies.
+  add_library(${NAME} STATIC
+    ${ARG_SRCS}
+  )
+
+  if(ARG_USES_MINIZIP)
+    # TODO(sirver): always use the one we bundle and never search
+    # for a system one.
+    if(NOT MINIZIP_FOUND)
+      target_link_libraries(${NAME} wl_minizip)
+    else(NOT MINIZIP_FOUND)
+      target_link_libraries(${NAME} ${MINIZIP_LIBRARY})
+    endif(NOT MINIZIP_FOUND)
+  endif(ARG_USES_MINIZIP)
+
+  foreach(DEPENDENCY ${ARG_DEPENDS})
+    target_link_libraries(${NAME} ${DEPENDENCY})
+  endforeach(DEPENDENCY)
+endfunction(wl_library)
+
+wl_library(build_info
+  SRCS
+    build_info.cc
+    build_info.h
+)
+
 IF (WIN32)
   configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/msvc/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
   if (NOT WL_VERSION_MAJOR OR WL_VERSION_MAJOR STREQUAL "")
@@ -29,7 +70,6 @@ set(WL_SRCS_CC
 	./ai/defaultai.cc
 	./align.cc
 	./backtrace.cc
-	./build_info.cc.cmake
 	./campvis.cc
 	./chat.cc
 	./computer_player.cc
@@ -89,7 +129,6 @@ set(WL_SRCS_CC
 	./editor/ui_menus/editor_tool_place_immovable_options_menu.cc
 	./editor/ui_menus/editor_tool_set_terrain_options_menu.cc
 	./editor/ui_menus/editor_toolsize_menu.cc
-	./exceptions.cc
 	./game_io/game_cmd_queue_data_packet.cc
 	./game_io/game_game_class_data_packet.cc
 	./game_io/game_interactive_player_data_packet.cc
@@ -134,7 +173,6 @@ set(WL_SRCS_CC
 	./graphic/wordwrap.cc
 	./helper.cc
 	./i18n.cc
-	./log.cc
 	./logic/battle.cc
 	./logic/bob.cc
 	./logic/buildcost.cc
@@ -540,7 +578,6 @@ set(WL_SRCS_H
 ./helper.h
 ./i18n.h
 ./interval.h
-./log.h
 ./logic/attackable.h
 ./logic/battle.h
 ./logic/bill_of_materials.h
@@ -679,7 +716,6 @@ set(WL_SRCS_H
 ./network/network_system.h
 ./parse_map_object_types.h
 ./point.h
-./port.h
 ./profile/profile.h
 ./random.h
 ./rect.h
@@ -769,8 +805,6 @@ set(WL_SRCS_H
 ./utf8.h
 ./vector.h
 ./vertex.h
-./warning.h
-./wexception.h
 ./wlapplication.h
 ./workarea_info.h
 ./wui/actionconfirm.h
@@ -873,6 +907,8 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
   add_dependencies(widelands codecheck)
 endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
+add_subdirectory(base)
+
 #the subdirectories are only used for test definition
 #temporarily disabled the 'old' tests due to incompatibility
 if (WL_UNIT_TESTS)
@@ -890,19 +926,20 @@ add_subdirectory(scripting)
 #TODO: It looks like various things have cyclic dependencies
 #in all directions. Ideally this core shouldn't exist(?) or at least
 #be a limited set of header files needed to boostrap the other
-#parts. For now it is absolutely everything to make things build :( 
-add_library(widelands_core STATIC
+#parts. For now it is absolutely everything to make things build :(
+add_library(widelands_ball_of_mud STATIC
   ${WL_SRCS_H}
 )
 
-
+# TODO(sirver): add a third_party directory and put stuff like minizip, eris in there.
 if (NOT MINIZIP_FOUND)
   add_subdirectory(minizip)
-  target_link_libraries(widelands_core wl_minizip)
+  target_link_libraries(widelands_ball_of_mud wl_minizip)
 endif (NOT MINIZIP_FOUND)
 
 target_link_libraries(widelands_all eris)
-target_link_libraries(widelands_all widelands_io)
+target_link_libraries(widelands_all io_filesystem)
+target_link_libraries(widelands_all io_dedicated_log)
 target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
 target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
 target_link_libraries(widelands_all ${SDLNET_LIBRARY})
@@ -915,7 +952,7 @@ target_link_libraries(widelands_all ${GLEW_LIBRARY})
 target_link_libraries(widelands_all ${Boost_LIBRARIES})
 
 if (MINIZIP_FOUND)
-  target_link_libraries(widelands_core ${MINIZIP_LIBRARY})
+  target_link_libraries(widelands_ball_of_mud ${MINIZIP_LIBRARY})
 endif (MINIZIP_FOUND)
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")

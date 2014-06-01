@@ -21,6 +21,7 @@
 
 #include <cstdio>
 
+#include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
@@ -32,7 +33,6 @@
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
 #include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 

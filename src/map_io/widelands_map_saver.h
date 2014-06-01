@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_MAP_SAVER_H
 #define WIDELANDS_MAP_SAVER_H
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 class FileSystem;
 

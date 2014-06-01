@@ -19,13 +19,13 @@
 
 #include "ui_fsmenu/campaign_select.h"
 
+#include "base/wexception.h"
 #include "campvis.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 
 /*

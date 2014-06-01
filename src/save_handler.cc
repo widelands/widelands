@@ -19,15 +19,15 @@
 
 #include "save_handler.h"
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "chat.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
-#include "log.h"
 #include "logic/game.h"
 #include "profile/profile.h"
 #include "scoped_timer.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 

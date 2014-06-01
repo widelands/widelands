@@ -22,6 +22,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "constants.h"
 #include "container_iterate.h"
 #include "graphic/graphic.h"
@@ -30,13 +32,11 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/critter_bob.h"
 #include "logic/game_data_error.h"
 #include "logic/worlddata.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 using std::cerr;
 using std::endl;

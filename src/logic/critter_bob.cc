@@ -21,6 +21,7 @@
 
 #include <cstdio>
 
+#include "base/wexception.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -30,7 +31,6 @@
 #include "logic/game_data_error.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 
 namespace Widelands {

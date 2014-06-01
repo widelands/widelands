@@ -19,6 +19,7 @@
 
 #include "ui_basic/panel.h"
 
+#include "base/log.h"
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
@@ -27,7 +28,6 @@
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "helper.h"
-#include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "text_layout.h"

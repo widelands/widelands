@@ -28,6 +28,8 @@
 #include <windows.h>
 #endif
 
+#include "base/log.h"
+#include "base/warning.h"
 #include "computer_player.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
@@ -38,7 +40,6 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/carrier.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
@@ -61,7 +62,6 @@
 #include "timestring.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
-#include "warning.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"

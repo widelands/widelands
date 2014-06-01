@@ -20,7 +20,7 @@
 #ifndef GAME_DATA_ERROR_H
 #define GAME_DATA_ERROR_H
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 namespace Widelands {
 

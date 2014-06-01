@@ -22,6 +22,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
@@ -32,7 +33,6 @@
 #include "graphic/text/rt_render.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "io/filesystem/filesystem.h"
-#include "wexception.h"
 
 
 using namespace std;

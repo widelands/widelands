@@ -17,8 +17,8 @@
  *
  */
 
-#include "warning.h"
-#include "wexception.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 
 #include <cstdarg>
 #include <cstdio>

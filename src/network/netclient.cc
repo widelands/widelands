@@ -23,6 +23,8 @@
 #include <boost/lexical_cast.hpp>
 #include <config.h>
 
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "game_io/game_loader.h"
 #include "helper.h"
@@ -44,8 +46,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launchMPG.h"
-#include "warning.h"
-#include "wexception.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"

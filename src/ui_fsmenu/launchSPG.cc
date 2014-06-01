@@ -21,6 +21,7 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/warning.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
@@ -37,7 +38,6 @@
 #include "scripting/scripting.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-#include "warning.h"
 #include "wui/playerdescrgroup.h"
 
 Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG

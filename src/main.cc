@@ -29,8 +29,8 @@
 #endif
 #include <unistd.h>
 
+#include "base/wexception.h"
 #include "build_info.h"
-#include "wexception.h"
 #include "wlapplication.h"
 
 using std::cout;

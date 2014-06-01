@@ -22,12 +22,12 @@
 #include <cstdio>
 #include <memory>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "container_iterate.h"
 #include "io/fileread.h"
 #include "io/streamread.h"
-#include "log.h"
-#include "wexception.h"
 
 LayeredFileSystem * g_fs;
 

@@ -1,34 +1,45 @@
 add_subdirectory(filesystem)
 
-set(IO_SOURCES
-./dedicated_log.cc
-./fileread.cc
-./filesystem/disk_filesystem.cc
-./filesystem/filesystem.cc
-./filesystem/layered_filesystem.cc
-./filesystem/zip_filesystem.cc
-./filewrite.cc
-./streamread.cc
-./streamwrite.cc
+wl_library(io_stream
+  SRCS
+    streamread.cc
+    streamread.h
+    streamwrite.cc
+    streamwrite.h
+  DEPENDS
+    base_exceptions
 )
 
-set(IO_HEADERS
-./dedicated_log.h
-./fileread.h
-./filesystem/disk_filesystem.h
-./filesystem/filesystem_exceptions.h
-./filesystem/filesystem.h
-./filesystem/layered_filesystem.h
-./filesystem/zip_exceptions.h
-./filesystem/zip_filesystem.h
-./filewrite.h
-./streamread.h
-./streamwrite.h
+wl_library(io_filesystem
+  USES_MINIZIP
+  SRCS
+    fileread.cc
+    fileread.h
+    filewrite.cc
+    filewrite.h
+    filesystem/disk_filesystem.cc
+    filesystem/disk_filesystem.h
+    filesystem/filesystem.cc
+    filesystem/filesystem.h
+    filesystem/filesystem_exceptions.h
+    filesystem/layered_filesystem.cc
+    filesystem/layered_filesystem.h
+    filesystem/zip_exceptions.h
+    filesystem/zip_filesystem.cc
+    filesystem/zip_filesystem.h
+  DEPENDS
+    base_log
+    build_info
+    io_stream
 )
 
-add_library(widelands_io STATIC
-  ${IO_SOURCES}
-  ${IO_HEADERS}
-)
 
-target_link_libraries(widelands_io widelands_core)
+# TODO(sirver): This depends on logic, so it should not be here.
+wl_library(io_dedicated_log
+  SRCS
+    dedicated_log.h
+    dedicated_log.cc
+  DEPENDS
+    base_log
+    io_filesystem
+)

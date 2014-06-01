@@ -25,7 +25,7 @@
 #include <config.h>
 #include <libintl.h>
 
-#include "log.h"
+#include "base/log.h"
 #include "profile/profile.h"
 
 #ifdef __APPLE__

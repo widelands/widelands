@@ -24,16 +24,16 @@
 #include <cstring>
 #include <string>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "container_iterate.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/queue_cmd_ids.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wexception.h"
 
 namespace Widelands {
 

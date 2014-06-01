@@ -22,11 +22,11 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
+#include "base/log.h"
 #include "compile_diagnostics.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "log.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"

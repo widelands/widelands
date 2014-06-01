@@ -19,7 +19,7 @@
 
 #include "network/network.h"
 
-#include "log.h"
+#include "base/log.h"
 #include "wlapplication.h"
 
 

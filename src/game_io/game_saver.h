@@ -20,7 +20,7 @@
 #ifndef GAME_SAVER_H
 #define GAME_SAVER_H
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 class FileSystem;
 

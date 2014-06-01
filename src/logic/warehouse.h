@@ -20,12 +20,12 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
+#include "base/wexception.h"
 #include "economy/request.h"
 #include "logic/attackable.h"
 #include "logic/building.h"
 #include "logic/soldiercontrol.h"
 #include "logic/wareworker.h"
-#include "wexception.h"
 
 class Interactive_Player;
 struct Profile;

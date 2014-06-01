@@ -22,13 +22,15 @@
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
+#include "base/log.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/building.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_expire_message.h"
@@ -48,8 +50,6 @@
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "upcast.h"
-#include "warning.h"
-#include "wexception.h"
 #include "wui/interactive_player.h"
 
 

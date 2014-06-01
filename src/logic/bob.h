@@ -20,6 +20,7 @@
 #ifndef BOB_H
 #define BOB_H
 
+#include "base/port.h"
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
@@ -27,7 +28,6 @@
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
 #include "point.h"
-#include "port.h"
 
 struct Profile;
 

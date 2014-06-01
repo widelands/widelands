@@ -23,6 +23,7 @@
 
 #include <boost/lexical_cast.hpp>
 
+#include "base/wexception.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
@@ -34,7 +35,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "text_layout.h"
-#include "wexception.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 

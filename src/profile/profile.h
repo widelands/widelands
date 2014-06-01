@@ -25,13 +25,12 @@
 
 #include <boost/noncopyable.hpp>
 
-//TODO: as soon as g_fs is not needed anymore, next include can be changed
-//to ..../filesystem.h
+//TODO: as soon as g_fs is not needed anymore, include "filesystem.h" instead of layered_filesystem.h.
+#include "base/port.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 #include "point.h"
-#include "port.h"
 
 
 namespace Widelands {

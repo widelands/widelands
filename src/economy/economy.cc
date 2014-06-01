@@ -21,6 +21,7 @@
 
 #include <boost/bind.hpp>
 
+#include "base/wexception.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "economy/flag.h"
 #include "economy/request.h"
@@ -34,7 +35,6 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 

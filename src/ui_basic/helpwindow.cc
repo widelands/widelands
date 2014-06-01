@@ -21,13 +21,13 @@
 
 #include <boost/format.hpp>
 
+#include "base/log.h"
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"

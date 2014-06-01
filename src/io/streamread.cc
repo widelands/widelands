@@ -23,7 +23,7 @@
 #include <cstdarg>
 #include <cstdio>
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 StreamRead::~StreamRead() {}
 

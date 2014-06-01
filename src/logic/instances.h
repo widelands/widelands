@@ -30,9 +30,9 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
-#include "log.h"
+#include "base/log.h"
+#include "base/port.h"
 #include "logic/cmd_queue.h"
-#include "port.h"
 #include "ref_cast.h"
 #include "widelands.h"
 

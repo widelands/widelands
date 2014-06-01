@@ -19,6 +19,7 @@
 
 #include "logic/worker_descr.h"
 
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
@@ -31,7 +32,6 @@
 #include "profile/profile.h"
 #include "ref_cast.h"
 #include "sound/sound_handler.h"
-#include "wexception.h"
 
 namespace Widelands {
 

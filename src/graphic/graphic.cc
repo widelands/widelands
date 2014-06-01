@@ -25,6 +25,8 @@
 #include <SDL_image.h>
 #include <config.h>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "compile_diagnostics.h"
 #include "constants.h"
@@ -44,11 +46,9 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
-#include "log.h"
 #include "logic/roadtype.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
-#include "wexception.h"
 
 using namespace std;
 

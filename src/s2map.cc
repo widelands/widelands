@@ -24,11 +24,12 @@
 
 #include <libintl.h>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "constants.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -39,7 +40,6 @@
 #include "logic/world.h"
 #include "map_io/map_loader.h"
 #include "upcast.h"
-#include "wexception.h"
 
 using std::cerr;
 using std::endl;

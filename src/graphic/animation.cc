@@ -29,6 +29,8 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "constants.h"
 #include "container_iterate.h"
 #include "graphic/diranimations.h"
@@ -41,12 +43,10 @@
 #include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/bob.h"
 #include "logic/instances.h"  // For Map_Object_Descr.
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "wexception.h"
 
 
 using namespace std;

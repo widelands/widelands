@@ -19,8 +19,8 @@
 
 #include "scripting/lua_root.h"
 
+#include "base/log.h"
 #include "gamecontroller.h"
-#include "log.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"

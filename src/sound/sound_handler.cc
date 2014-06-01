@@ -28,12 +28,12 @@
 #include <windows.h>
 #endif
 
+#include "base/log.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "profile/profile.h"

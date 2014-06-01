@@ -23,8 +23,8 @@
 
 #include <boost/bind.hpp>
 
+#include "base/log.h"
 #include "chat.h"
-#include "log.h"
 
 namespace DebugConsole {
 

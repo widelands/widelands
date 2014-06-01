@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 #include <config.h>
 
+#include "base/wexception.h"
 #include "container_iterate.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
@@ -46,7 +47,6 @@
 #include "sound/sound_handler.h"
 #include "text_layout.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {

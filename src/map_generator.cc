@@ -19,8 +19,8 @@
 
 #include "map_generator.h"
 
+#include "base/log.h"
 #include "editor/tools/editor_increase_resources_tool.h"
-#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"

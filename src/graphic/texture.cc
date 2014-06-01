@@ -21,12 +21,12 @@
 
 #include <SDL_image.h>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "constants.h"
 #include "container_iterate.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
-#include "wexception.h"
 
 extern bool g_opengl;
 

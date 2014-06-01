@@ -21,9 +21,9 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "scripting/c_utils.h"
 #include "scripting/eris.h"
 #include "scripting/luna_impl.h"

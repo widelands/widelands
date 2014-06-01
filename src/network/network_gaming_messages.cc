@@ -24,8 +24,8 @@
 #include <boost/format.hpp>
 #include <stdint.h>
 
+#include "base/log.h"
 #include "i18n.h"
-#include "log.h"
 
 static std::map <std::string, std::string> ngmessages;
 

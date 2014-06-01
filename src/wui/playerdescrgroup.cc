@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/wexception.h"
 #include "constants.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
@@ -31,7 +32,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
 
 
 struct PlayerDescriptionGroupImpl {
