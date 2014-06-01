@@ -224,14 +224,14 @@ private:
 
 	Widelands::Player * m_plr;
 	Widelands::Map    * m_map;
-	Overlay_Manager & m_overlay_manager;
+	OverlayManager & m_overlay_manager;
 
 	Widelands::FCoords  m_node;
 
 	UI::Tab_Panel      m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
-	Overlay_Manager::Job_Id m_workarea_preview_job_id;
+	OverlayManager::JobId m_workarea_preview_job_id;
 
 	/// Variables to use with attack dialog.
 	AttackBox * m_attack_box;
@@ -290,7 +290,7 @@ FieldActionWindow::FieldActionWindow
 	m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png")),
 	m_fastclick(true),
 	m_best_tab(0),
-	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null()),
+	m_workarea_preview_job_id(0),
 	m_attack_box(nullptr)
 {
 	ib->set_sel_freeze(true);
@@ -840,7 +840,7 @@ void FieldActionWindow::building_icon_mouse_out
 {
 	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
-		m_workarea_preview_job_id = Overlay_Manager::Job_Id::Null();
+		m_workarea_preview_job_id = 0;
 	}
 }
 
