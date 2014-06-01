@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-05-29 19:32+0000\n"
+"PO-Revision-Date: 2014-05-31 20:25+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-05-30 05:32+0000\n"
-"X-Generator: Launchpad (build 17023)\n"
+"X-Launchpad-Export-Date: 2014-06-01 05:26+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -247,7 +247,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:128
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Postavit rákosové pole"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid ""
@@ -255,6 +255,9 @@ msgid ""
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
 msgstr ""
+"Třetím materiálem nutným pro vylepšení budov je doškový rákos, užívaný pro "
+"zakrytí střechy. Doškový rákos je pěstovaný zahradníkem okolo jeho budovy, "
+"rákosového dvora."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:138
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:140
@@ -384,6 +387,10 @@ msgid ""
 "to Al’thunran. Too long have we waited while our brethren have fought on the "
 "battlefield, and our axes and swords have turned rusty over time."
 msgstr ""
+"Tak ty nás chceš připravit na delší pobyt v těchto lesech, Thronene? Ačkoliv "
+"je toto moudré rozhodnutí, stejně mé srdce touží po slavném návratu do "
+"Al’thunran. Příliš dlouho jsme čekali zatímco naši bratři bojovali na "
+"bitevním poli a naše sekery a meče mezitím rezavěli."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:204
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:224
@@ -848,5 +855,6 @@ msgstr "“%s”"
 #: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nový úkol"
+msgstr[1] "Nové úkoly"
+msgstr[2] "Nové úkoly"
