@@ -134,15 +134,6 @@ set(WL_SRCS_CC
 	./graphic/wordwrap.cc
 	./helper.cc
 	./i18n.cc
-	./io/dedicated_log.cc
-	./io/fileread.cc
-	./io/filesystem/disk_filesystem.cc
-	./io/filesystem/filesystem.cc
-	./io/filesystem/layered_filesystem.cc
-	./io/filesystem/zip_filesystem.cc
-	./io/filewrite.cc
-	./io/streamread.cc
-	./io/streamwrite.cc
 	./log.cc
 	./logic/battle.cc
 	./logic/bob.cc
@@ -549,17 +540,6 @@ set(WL_SRCS_H
 ./helper.h
 ./i18n.h
 ./interval.h
-./io/dedicated_log.h
-./io/fileread.h
-./io/filesystem/disk_filesystem.h
-./io/filesystem/filesystem_exceptions.h
-./io/filesystem/filesystem.h
-./io/filesystem/layered_filesystem.h
-./io/filesystem/zip_exceptions.h
-./io/filesystem/zip_filesystem.h
-./io/filewrite.h
-./io/streamread.h
-./io/streamwrite.h
 ./log.h
 ./logic/attackable.h
 ./logic/battle.h
@@ -907,12 +887,22 @@ endif (WL_UNIT_TESTS)
 
 add_subdirectory(scripting)
 
+#TODO: It looks like various things have cyclic dependencies
+#in all directions. Ideally this core shouldn't exist(?) or at least
+#be a limited set of header files needed to boostrap the other
+#parts. For now it is absolutely everything to make things build :( 
+add_library(widelands_core STATIC
+  ${WL_SRCS_H}
+)
+
+
 if (NOT MINIZIP_FOUND)
   add_subdirectory(minizip)
-  target_link_libraries(widelands_all wl_minizip)
+  target_link_libraries(widelands_core wl_minizip)
 endif (NOT MINIZIP_FOUND)
 
 target_link_libraries(widelands_all eris)
+target_link_libraries(widelands_all widelands_io)
 target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
 target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
 target_link_libraries(widelands_all ${SDLNET_LIBRARY})
@@ -925,7 +915,7 @@ target_link_libraries(widelands_all ${GLEW_LIBRARY})
 target_link_libraries(widelands_all ${Boost_LIBRARIES})
 
 if (MINIZIP_FOUND)
-  target_link_libraries(widelands_all ${MINIZIP_LIBRARY})
+  target_link_libraries(widelands_core ${MINIZIP_LIBRARY})
 endif (MINIZIP_FOUND)
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
