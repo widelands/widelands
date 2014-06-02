@@ -431,469 +431,469 @@ set(WL_SRCS_CC
 )
 
 set(WL_SRCS_H
-./ai/ai_help_structs.cc
-./ai/ai_help_structs.h
-./ai/ai_hints.cc
-./ai/ai_hints.h
-./ai/defaultai.h
-./align.h
-./backtrace.h
-./build_info.h
-./campvis.h
-./chat.cc
-./chat.h
-./CodeCheck.cmake
-./compile_diagnostics.h
-./computer_player.h
-./config.h.cmake
-./constants.h
-./container_iterate.h
-./cookie_priority_queue.h
-./debugconsole.h
-./description_maintainer.h
-./economy/cmd_call_economy_balance.h
-./economy/economy_data_packet.h
-./economy/economy.h
-./economy/flag.h
-./economy/fleet.h
-./economy/idleworkersupply.h
-./economy/iroute.h
-./economy/itransport_cost_calculator.h
-./economy/portdock.h
-./economy/request.h
-./economy/road.h
-./economy/routeastar.h
-./economy/route.h
-./economy/router.h
-./economy/routing_node.h
-./economy/shippingitem.cc
-./economy/shippingitem.h
-./economy/supply.h
-./economy/supply_list.h
-./economy/transfer.h
-./economy/warehousesupply.h
-./economy/ware_instance.h
-./economy/wares_queue.h
-./editor/editorinteractive.h
-./editor/tools/editor_action_args.h
-./editor/tools/editor_decrease_height_tool.cc
-./editor/tools/editor_decrease_height_tool.h
-./editor/tools/editor_decrease_resources_tool.h
-./editor/tools/editor_delete_bob_tool.h
-./editor/tools/editor_delete_immovable_tool.h
-./editor/tools/editor_draw_tool.h
-./editor/tools/editor_history.cc
-./editor/tools/editor_history.h
-./editor/tools/editor_increase_height_tool.cc
-./editor/tools/editor_increase_height_tool.h
-./editor/tools/editor_increase_resources_tool.h
-./editor/tools/editor_info_tool.h
-./editor/tools/editor_make_infrastructure_tool.h
-./editor/tools/editor_noise_height_tool.cc
-./editor/tools/editor_noise_height_tool.h
-./editor/tools/editor_place_bob_tool.h
-./editor/tools/editor_place_immovable_tool.h
-./editor/tools/editor_set_height_tool.cc
-./editor/tools/editor_set_height_tool.h
-./editor/tools/editor_set_origin_tool.h
-./editor/tools/editor_set_port_space_tool.h
-./editor/tools/editor_set_resources_tool.h
-./editor/tools/editor_set_starting_pos_tool.h
-./editor/tools/editor_set_terrain_tool.h
-./editor/tools/editor_tool_action.h
-./editor/tools/editor_tool.h
-./editor/tools/multi_select.h
-./editor/ui_menus/editor_main_menu.h
-./editor/ui_menus/editor_main_menu_load_map.h
-./editor/ui_menus/editor_main_menu_map_options.h
-./editor/ui_menus/editor_main_menu_new_map.h
-./editor/ui_menus/editor_main_menu_random_map.h
-./editor/ui_menus/editor_main_menu_save_map.h
-./editor/ui_menus/editor_main_menu_save_map_make_directory.h
-./editor/ui_menus/editor_player_menu_allowed_buildings_menu.h
-./editor/ui_menus/editor_player_menu.h
-./editor/ui_menus/editor_tool_change_height_options_menu.cc
-./editor/ui_menus/editor_tool_change_height_options_menu.h
-./editor/ui_menus/editor_tool_change_resources_options_menu.cc
-./editor/ui_menus/editor_tool_change_resources_options_menu.h
-./editor/ui_menus/editor_tool_menu.h
-./editor/ui_menus/editor_tool_noise_height_options_menu.cc
-./editor/ui_menus/editor_tool_noise_height_options_menu.h
-./editor/ui_menus/editor_tool_options_menu.h
-./editor/ui_menus/editor_tool_place_bob_options_menu.h
-./editor/ui_menus/editor_tool_place_immovable_options_menu.h
-./editor/ui_menus/editor_tool_set_terrain_options_menu.h
-./editor/ui_menus/editor_toolsize_menu.h
-./gamecontroller.h
-./game_io/game_cmd_queue_data_packet.h
-./game_io/game_data_packet.h
-./game_io/game_game_class_data_packet.h
-./game_io/game_interactive_player_data_packet.h
-./game_io/game_loader.h
-./game_io/game_map_data_packet.h
-./game_io/game_player_economies_data_packet.h
-./game_io/game_player_info_data_packet.h
-./game_io/game_preload_data_packet.h
-./game_io/game_saver.h
-./gamesettings.h
-./graphic
-./graphic/animation.cc
-./graphic/animation.h
-./graphic/colormap.cc
-./graphic/colormap.h
-./graphic/compositemode.h
-./graphic/diranimations.h
-./graphic/font.cc
-./graphic/font.h
-./graphic/font_handler1.cc
-./graphic/font_handler1.h
-./graphic/font_handler.cc
-./graphic/font_handler.h
-./graphic/graphic.cc
-./graphic/graphic.h
-./graphic/image_cache.cc
-./graphic/image_cache.h
-./graphic/image.h
-./graphic/image_loader.h
-./graphic/image_loader_impl.cc
-./graphic/image_loader_impl.h
-./graphic/image_transformations.cc
-./graphic/image_transformations.h
-./graphic/in_memory_image.cc
-./graphic/in_memory_image.h
-./graphic/render
-./graphic/render/gamerenderer.cc
-./graphic/render/gamerenderer_gl.cc
-./graphic/render/gamerenderer_gl.h
-./graphic/render/gamerenderer.h
-./graphic/render/gamerenderer_sdl.cc
-./graphic/render/gamerenderer_sdl.h
-./graphic/render/gl_surface.cc
-./graphic/render/gl_surface.h
-./graphic/render/gl_surface_screen.cc
-./graphic/render/gl_surface_screen.h
-./graphic/render/gl_surface_texture.cc
-./graphic/render/gl_surface_texture.h
-./graphic/render/gl_utils.cc
-./graphic/render/gl_utils.h
-./graphic/render/minimaprenderer.cc
-./graphic/render/minimaprenderer.h
-./graphic/render/sdl_helper.cc
-./graphic/render/sdl_helper.h
-./graphic/render/sdl_surface.cc
-./graphic/render/sdl_surface.h
-./graphic/rendertarget.cc
-./graphic/rendertarget.h
-./graphic/render/terrain_sdl.cc
-./graphic/render/terrain_sdl.h
-./graphic/richtext.cc
-./graphic/richtext.h
-./graphic/surface_cache.cc
-./graphic/surface_cache.h
-./graphic/surface.cc
-./graphic/surface.h
-./graphic/text
-./graphic/text/rt_errors.h
-./graphic/text/rt_errors_impl.h
-./graphic/text/rt_parse.cc
-./graphic/text/rt_parse.h
-./graphic/text/rt_render.cc
-./graphic/text/rt_render.h
-./graphic/text/sdl_ttf_font.h
-./graphic/text/sdl_ttf_font_impl.cc
-./graphic/text/sdl_ttf_font_impl.h
-./graphic/text/sdl_ttf_font_loader_from_file.cc
-./graphic/text/sdl_ttf_font_loader_from_filesystem.cc
-./graphic/text/textstream.cc
-./graphic/text/textstream.h
-./graphic/texture.cc
-./graphic/texture.h
-./graphic/wordwrap.cc
-./graphic/wordwrap.h
-./helper.cc
-./helper.h
-./i18n.h
-./interval.h
-./logic/attackable.h
-./logic/battle.h
-./logic/bill_of_materials.h
-./logic/bob.h
-./logic/buildcost.h
-./logic/building.h
-./logic/carrier.h
-./logic/checkstep.cc
-./logic/checkstep.h
-./logic/cmd_calculate_statistics.h
-./logic/cmd_expire_message.h
-./logic/cmd_incorporate.h
-./logic/cmd_luacoroutine.h
-./logic/cmd_luascript.h
-./logic/cmd_queue.h
-./logic/constructionsite.h
-./logic/critter_bob.h
-./logic/critter_bob_program.h
-./logic/dismantlesite.h
-./logic/editor_game_base.h
-./logic/expedition_bootstrap.h
-./logic/field.h
-./logic/findbob.h
-./logic/findimmovable.h
-./logic/findnode.h
-./logic/game_data_error.h
-./logic/game.h
-./logic/immovable.h
-./logic/immovable_program.h
-./logic/instances.h
-./logic/mapastar.h
-./logic/mapdifferenceregion.h
-./logic/mapfringeregion.h
-./logic/map.h
-./logic/maphollowregion.cc
-./logic/maphollowregion.h
-./logic/mapregion.h
-./logic/map_revision.h
-./logic/maptriangleregion.h
-./logic/message.h
-./logic/message_id.h
-./logic/message_queue.h
-./logic/military_data.h
-./logic/militarysite.h
-./logic/nodecaps.h
-./logic/notification.h
-./logic/objective.h
-./logic/partially_finished_building.cc
-./logic/partially_finished_building.h
-./logic/path.cc
-./logic/pathfield.cc
-./logic/pathfield.h
-./logic/path.h
-./logic/player_area.h
-./logic/playercommand.h
-./logic/player.h
-./logic/playersmanager.h
-./logic/production_program.h
-./logic/productionsite.h
-./logic/program_result.h
-./logic/queue_cmd_factory.h
-./logic/queue_cmd_ids.h
-./logic/replay.h
-./logic/requirements.h
-./logic/roadtype.h
-./logic/ship.cc
-./logic/ship.h
-./logic/soldiercontrol.h
-./logic/soldier_counts.h
-./logic/soldier.h
-./logic/tattribute.h
-./logic/trainingsite.h
-./logic/tribe.h
-./logic/walkingdir.h
-./logic/ware_descr.h
-./logic/warehouse.cc
-./logic/warehouse.h
-./logic/warelist.h
-./logic/wareworker.h
-./logic/widelands_geometry.h
-./logic/widelands_geometry_io.h
-./logic/widelands.h
-./logic/worker_descr.h
-./logic/worker.h
-./logic/worker_program.h
-./logic/worlddata.h
-./logic/world.h
-./logmessage.h
-./machdep.h
-./map_generator.h
-./map_io/map_loader.h
-./map_io/widelands_map_allowed_building_types_data_packet.h
-./map_io/widelands_map_allowed_worker_types_data_packet.h
-./map_io/widelands_map_buildingdata_data_packet.h
-./map_io/widelands_map_building_data_packet.h
-./map_io/widelands_map_data_packet.h
-./map_io/widelands_map_elemental_data_packet.h
-./map_io/widelands_map_exploration_data_packet.h
-./map_io/widelands_map_extradata_data_packet.h
-./map_io/widelands_map_flagdata_data_packet.h
-./map_io/widelands_map_flag_data_packet.h
-./map_io/widelands_map_heights_data_packet.cc
-./map_io/widelands_map_heights_data_packet.h
-./map_io/widelands_map_loader.h
-./map_io/widelands_map_map_object_loader.h
-./map_io/widelands_map_map_object_saver.h
-./map_io/widelands_map_message_saver.h
-./map_io/widelands_map_node_ownership_data_packet.cc
-./map_io/widelands_map_node_ownership_data_packet.h
-./map_io/widelands_map_objective_data_packet.h
-./map_io/widelands_map_object_packet.h
-./map_io/widelands_map_player_names_and_tribes_data_packet.h
-./map_io/widelands_map_player_position_data_packet.h
-./map_io/widelands_map_players_messages_data_packet.h
-./map_io/widelands_map_players_view_data_packet.h
-./map_io/widelands_map_port_spaces_data_packet.h
-./map_io/widelands_map_resources_data_packet.h
-./map_io/widelands_map_roaddata_data_packet.h
-./map_io/widelands_map_road_data_packet.h
-./map_io/widelands_map_saver.h
-./map_io/widelands_map_scripting_data_packet.h
-./map_io/widelands_map_terrain_data_packet.h
-./map_io/widelands_map_version_data_packet.h
-./md5.h
-./network/internet_gaming.h
-./network/internet_gaming_messages.h
-./network/internet_gaming_protocol.h
-./network/netclient.h
-./network/nethost.cc
-./network/nethost.h
-./network/network_gaming_messages.h
-./network/network.h
-./network/network_lan_promotion.h
-./network/network_player_settings_backend.h
-./network/network_protocol.h
-./network/network_system.h
-./parse_map_object_types.h
-./point.h
-./profile/profile.h
-./random.h
-./rect.h
-./ref_cast.h
-./replay_game_controller.h
-./rgbcolor.h
-./s2map.h
-./save_handler.cc
-./save_handler.h
-./scoped_timer.h
-./scripting/c_utils.h
-./scripting/factory.h
-./scripting/lua_bases.h
-./scripting/lua_coroutine.h
-./scripting/lua_editor.h
-./scripting/lua_errors.h
-./scripting/lua_game.h
-./scripting/lua_globals.h
-./scripting/lua_map.h
-./scripting/lua_root.h
-./scripting/lua_table.h
-./scripting/lua_ui.h
-./scripting/luna.h
-./scripting/luna_impl.h
-./scripting/persistence.h
-./scripting/scripting.h
-./single_player_game_controller.h
-./single_player_game_settings_provider.h
-./singleton.h
-./sound/fxset.h
-./sound/songset.h
-./sound/sound_handler.cc
-./sound/sound_handler.h
-./text_layout.h
-./text_parser.h
-./timestring.h
-./trackptr.h
-./TribeBasicInfo.h
-./ui_basic/box.h
-./ui_basic/button.h
-./ui_basic/checkbox.cc
-./ui_basic/checkbox.h
-./ui_basic/editbox.h
-./ui_basic/helpwindow.cc
-./ui_basic/helpwindow.h
-./ui_basic/icongrid.h
-./ui_basic/icon.h
-./ui_basic/listselect.h
-./ui_basic/messagebox.h
-./ui_basic/mouse_constants.h
-./ui_basic/multilineeditbox.h
-./ui_basic/multilinetextarea.h
-./ui_basic/panel.h
-./ui_basic/progressbar.h
-./ui_basic/progresswindow.h
-./ui_basic/radiobutton.h
-./ui_basic/scrollbar.h
-./ui_basic/slider.h
-./ui_basic/spinbox.h
-./ui_basic/table.h
-./ui_basic/tabpanel.h
-./ui_basic/textarea.h
-./ui_basic/unique_window.h
-./ui_basic/window.h
-./ui_fsmenu/base.h
-./ui_fsmenu/campaign_select.h
-./ui_fsmenu/editor.h
-./ui_fsmenu/editor_mapselect.h
-./ui_fsmenu/fileview.h
-./ui_fsmenu/internet_lobby.h
-./ui_fsmenu/intro.h
-./ui_fsmenu/launchMPG.cc
-./ui_fsmenu/launchMPG.h
-./ui_fsmenu/launchSPG.cc
-./ui_fsmenu/launchSPG.h
-./ui_fsmenu/loadgame.h
-./ui_fsmenu/loadreplay.h
-./ui_fsmenu/main.h
-./ui_fsmenu/mapselect.h
-./ui_fsmenu/multiplayer.h
-./ui_fsmenu/netsetup_lan.h
-./ui_fsmenu/options.h
-./ui_fsmenu/singleplayer.h
-./unique_window_handler.cc
-./unique_window_handler.h
-./upcast.h
-./utf8.h
-./vector.h
-./vertex.h
-./wlapplication.h
-./workarea_info.h
-./wui/actionconfirm.h
-./wui/attack_box.h
-./wui/building_statistics_menu.h
-./wui/buildingwindow.h
-./wui/chatoverlay.cc
-./wui/chatoverlay.h
-./wui/encyclopedia_window.h
-./wui/fieldaction.h
-./wui/game_chat_menu.cc
-./wui/game_chat_menu.h
-./wui/gamechatpanel.cc
-./wui/gamechatpanel.h
-./wui/game_debug_ui.h
-./wui/game_main_menu.h
-./wui/game_main_menu_save_game.h
-./wui/game_message_menu.h
-./wui/game_objectives_menu.h
-./wui/game_options_menu.h
-./wui/game_options_sound_menu.h
-./wui/game_summary.h
-./wui/game_tips.h
-./wui/general_statistics_menu.h
-./wui/interactive_base.h
-./wui/interactive_gamebase.h
-./wui/interactive_player.h
-./wui/interactive_spectator.h
-./wui/itemwaresdisplay.h
-./wui/login_box.h
-./wui/mapview.h
-./wui/mapviewpixelconstants.h
-./wui/mapviewpixelfunctions.h
-./wui/military_box.h
-./wui/minimap.h
-./wui/multiplayersetupgroup.h
-./wui/overlay_manager.h
-./wui/playerdescrgroup.h
-./wui/plot_area.h
-./wui/portdockwaresdisplay.h
-./wui/productionsitewindow.h
-./wui/quicknavigation.h
-./wui/shipwindow.cc
-./wui/soldiercapacitycontrol.h
-./wui/soldierlist.h
-./wui/stock_menu.h
-./wui/story_message_box.h
-./wui/warehousewindow.cc
-./wui/waresdisplay.h
-./wui/waresqueuedisplay.h
-./wui/ware_statistics_menu.h
-./wui/watchwindow.cc
-./wui/watchwindow.h
+  ./ai/ai_help_structs.cc
+  ./ai/ai_help_structs.h
+  ./ai/ai_hints.cc
+  ./ai/ai_hints.h
+  ./ai/defaultai.h
+  ./align.h
+  ./backtrace.h
+  ./build_info.h
+  ./campvis.h
+  ./chat.cc
+  ./chat.h
+  ./CodeCheck.cmake
+  ./compile_diagnostics.h
+  ./computer_player.h
+  ./config.h.cmake
+  ./constants.h
+  ./container_iterate.h
+  ./cookie_priority_queue.h
+  ./debugconsole.h
+  ./description_maintainer.h
+  ./economy/cmd_call_economy_balance.h
+  ./economy/economy_data_packet.h
+  ./economy/economy.h
+  ./economy/flag.h
+  ./economy/fleet.h
+  ./economy/idleworkersupply.h
+  ./economy/iroute.h
+  ./economy/itransport_cost_calculator.h
+  ./economy/portdock.h
+  ./economy/request.h
+  ./economy/road.h
+  ./economy/routeastar.h
+  ./economy/route.h
+  ./economy/router.h
+  ./economy/routing_node.h
+  ./economy/shippingitem.cc
+  ./economy/shippingitem.h
+  ./economy/supply.h
+  ./economy/supply_list.h
+  ./economy/transfer.h
+  ./economy/warehousesupply.h
+  ./economy/ware_instance.h
+  ./economy/wares_queue.h
+  ./editor/editorinteractive.h
+  ./editor/tools/editor_action_args.h
+  ./editor/tools/editor_decrease_height_tool.cc
+  ./editor/tools/editor_decrease_height_tool.h
+  ./editor/tools/editor_decrease_resources_tool.h
+  ./editor/tools/editor_delete_bob_tool.h
+  ./editor/tools/editor_delete_immovable_tool.h
+  ./editor/tools/editor_draw_tool.h
+  ./editor/tools/editor_history.cc
+  ./editor/tools/editor_history.h
+  ./editor/tools/editor_increase_height_tool.cc
+  ./editor/tools/editor_increase_height_tool.h
+  ./editor/tools/editor_increase_resources_tool.h
+  ./editor/tools/editor_info_tool.h
+  ./editor/tools/editor_make_infrastructure_tool.h
+  ./editor/tools/editor_noise_height_tool.cc
+  ./editor/tools/editor_noise_height_tool.h
+  ./editor/tools/editor_place_bob_tool.h
+  ./editor/tools/editor_place_immovable_tool.h
+  ./editor/tools/editor_set_height_tool.cc
+  ./editor/tools/editor_set_height_tool.h
+  ./editor/tools/editor_set_origin_tool.h
+  ./editor/tools/editor_set_port_space_tool.h
+  ./editor/tools/editor_set_resources_tool.h
+  ./editor/tools/editor_set_starting_pos_tool.h
+  ./editor/tools/editor_set_terrain_tool.h
+  ./editor/tools/editor_tool_action.h
+  ./editor/tools/editor_tool.h
+  ./editor/tools/multi_select.h
+  ./editor/ui_menus/editor_main_menu.h
+  ./editor/ui_menus/editor_main_menu_load_map.h
+  ./editor/ui_menus/editor_main_menu_map_options.h
+  ./editor/ui_menus/editor_main_menu_new_map.h
+  ./editor/ui_menus/editor_main_menu_random_map.h
+  ./editor/ui_menus/editor_main_menu_save_map.h
+  ./editor/ui_menus/editor_main_menu_save_map_make_directory.h
+  ./editor/ui_menus/editor_player_menu_allowed_buildings_menu.h
+  ./editor/ui_menus/editor_player_menu.h
+  ./editor/ui_menus/editor_tool_change_height_options_menu.cc
+  ./editor/ui_menus/editor_tool_change_height_options_menu.h
+  ./editor/ui_menus/editor_tool_change_resources_options_menu.cc
+  ./editor/ui_menus/editor_tool_change_resources_options_menu.h
+  ./editor/ui_menus/editor_tool_menu.h
+  ./editor/ui_menus/editor_tool_noise_height_options_menu.cc
+  ./editor/ui_menus/editor_tool_noise_height_options_menu.h
+  ./editor/ui_menus/editor_tool_options_menu.h
+  ./editor/ui_menus/editor_tool_place_bob_options_menu.h
+  ./editor/ui_menus/editor_tool_place_immovable_options_menu.h
+  ./editor/ui_menus/editor_tool_set_terrain_options_menu.h
+  ./editor/ui_menus/editor_toolsize_menu.h
+  ./gamecontroller.h
+  ./game_io/game_cmd_queue_data_packet.h
+  ./game_io/game_data_packet.h
+  ./game_io/game_game_class_data_packet.h
+  ./game_io/game_interactive_player_data_packet.h
+  ./game_io/game_loader.h
+  ./game_io/game_map_data_packet.h
+  ./game_io/game_player_economies_data_packet.h
+  ./game_io/game_player_info_data_packet.h
+  ./game_io/game_preload_data_packet.h
+  ./game_io/game_saver.h
+  ./gamesettings.h
+  ./graphic
+  ./graphic/animation.cc
+  ./graphic/animation.h
+  ./graphic/colormap.cc
+  ./graphic/colormap.h
+  ./graphic/compositemode.h
+  ./graphic/diranimations.h
+  ./graphic/font.cc
+  ./graphic/font.h
+  ./graphic/font_handler1.cc
+  ./graphic/font_handler1.h
+  ./graphic/font_handler.cc
+  ./graphic/font_handler.h
+  ./graphic/graphic.cc
+  ./graphic/graphic.h
+  ./graphic/image_cache.cc
+  ./graphic/image_cache.h
+  ./graphic/image.h
+  ./graphic/image_loader.h
+  ./graphic/image_loader_impl.cc
+  ./graphic/image_loader_impl.h
+  ./graphic/image_transformations.cc
+  ./graphic/image_transformations.h
+  ./graphic/in_memory_image.cc
+  ./graphic/in_memory_image.h
+  ./graphic/render
+  ./graphic/render/gamerenderer.cc
+  ./graphic/render/gamerenderer_gl.cc
+  ./graphic/render/gamerenderer_gl.h
+  ./graphic/render/gamerenderer.h
+  ./graphic/render/gamerenderer_sdl.cc
+  ./graphic/render/gamerenderer_sdl.h
+  ./graphic/render/gl_surface.cc
+  ./graphic/render/gl_surface.h
+  ./graphic/render/gl_surface_screen.cc
+  ./graphic/render/gl_surface_screen.h
+  ./graphic/render/gl_surface_texture.cc
+  ./graphic/render/gl_surface_texture.h
+  ./graphic/render/gl_utils.cc
+  ./graphic/render/gl_utils.h
+  ./graphic/render/minimaprenderer.cc
+  ./graphic/render/minimaprenderer.h
+  ./graphic/render/sdl_helper.cc
+  ./graphic/render/sdl_helper.h
+  ./graphic/render/sdl_surface.cc
+  ./graphic/render/sdl_surface.h
+  ./graphic/rendertarget.cc
+  ./graphic/rendertarget.h
+  ./graphic/render/terrain_sdl.cc
+  ./graphic/render/terrain_sdl.h
+  ./graphic/richtext.cc
+  ./graphic/richtext.h
+  ./graphic/surface_cache.cc
+  ./graphic/surface_cache.h
+  ./graphic/surface.cc
+  ./graphic/surface.h
+  ./graphic/text
+  ./graphic/text/rt_errors.h
+  ./graphic/text/rt_errors_impl.h
+  ./graphic/text/rt_parse.cc
+  ./graphic/text/rt_parse.h
+  ./graphic/text/rt_render.cc
+  ./graphic/text/rt_render.h
+  ./graphic/text/sdl_ttf_font.h
+  ./graphic/text/sdl_ttf_font_impl.cc
+  ./graphic/text/sdl_ttf_font_impl.h
+  ./graphic/text/sdl_ttf_font_loader_from_file.cc
+  ./graphic/text/sdl_ttf_font_loader_from_filesystem.cc
+  ./graphic/text/textstream.cc
+  ./graphic/text/textstream.h
+  ./graphic/texture.cc
+  ./graphic/texture.h
+  ./graphic/wordwrap.cc
+  ./graphic/wordwrap.h
+  ./helper.cc
+  ./helper.h
+  ./i18n.h
+  ./interval.h
+  ./logic/attackable.h
+  ./logic/battle.h
+  ./logic/bill_of_materials.h
+  ./logic/bob.h
+  ./logic/buildcost.h
+  ./logic/building.h
+  ./logic/carrier.h
+  ./logic/checkstep.cc
+  ./logic/checkstep.h
+  ./logic/cmd_calculate_statistics.h
+  ./logic/cmd_expire_message.h
+  ./logic/cmd_incorporate.h
+  ./logic/cmd_luacoroutine.h
+  ./logic/cmd_luascript.h
+  ./logic/cmd_queue.h
+  ./logic/constructionsite.h
+  ./logic/critter_bob.h
+  ./logic/critter_bob_program.h
+  ./logic/dismantlesite.h
+  ./logic/editor_game_base.h
+  ./logic/expedition_bootstrap.h
+  ./logic/field.h
+  ./logic/findbob.h
+  ./logic/findimmovable.h
+  ./logic/findnode.h
+  ./logic/game_data_error.h
+  ./logic/game.h
+  ./logic/immovable.h
+  ./logic/immovable_program.h
+  ./logic/instances.h
+  ./logic/mapastar.h
+  ./logic/mapdifferenceregion.h
+  ./logic/mapfringeregion.h
+  ./logic/map.h
+  ./logic/maphollowregion.cc
+  ./logic/maphollowregion.h
+  ./logic/mapregion.h
+  ./logic/map_revision.h
+  ./logic/maptriangleregion.h
+  ./logic/message.h
+  ./logic/message_id.h
+  ./logic/message_queue.h
+  ./logic/military_data.h
+  ./logic/militarysite.h
+  ./logic/nodecaps.h
+  ./logic/notification.h
+  ./logic/objective.h
+  ./logic/partially_finished_building.cc
+  ./logic/partially_finished_building.h
+  ./logic/path.cc
+  ./logic/pathfield.cc
+  ./logic/pathfield.h
+  ./logic/path.h
+  ./logic/player_area.h
+  ./logic/playercommand.h
+  ./logic/player.h
+  ./logic/playersmanager.h
+  ./logic/production_program.h
+  ./logic/productionsite.h
+  ./logic/program_result.h
+  ./logic/queue_cmd_factory.h
+  ./logic/queue_cmd_ids.h
+  ./logic/replay.h
+  ./logic/requirements.h
+  ./logic/roadtype.h
+  ./logic/ship.cc
+  ./logic/ship.h
+  ./logic/soldiercontrol.h
+  ./logic/soldier_counts.h
+  ./logic/soldier.h
+  ./logic/tattribute.h
+  ./logic/trainingsite.h
+  ./logic/tribe.h
+  ./logic/walkingdir.h
+  ./logic/ware_descr.h
+  ./logic/warehouse.cc
+  ./logic/warehouse.h
+  ./logic/warelist.h
+  ./logic/wareworker.h
+  ./logic/widelands_geometry.h
+  ./logic/widelands_geometry_io.h
+  ./logic/widelands.h
+  ./logic/worker_descr.h
+  ./logic/worker.h
+  ./logic/worker_program.h
+  ./logic/worlddata.h
+  ./logic/world.h
+  ./logmessage.h
+  ./machdep.h
+  ./map_generator.h
+  ./map_io/map_loader.h
+  ./map_io/widelands_map_allowed_building_types_data_packet.h
+  ./map_io/widelands_map_allowed_worker_types_data_packet.h
+  ./map_io/widelands_map_buildingdata_data_packet.h
+  ./map_io/widelands_map_building_data_packet.h
+  ./map_io/widelands_map_data_packet.h
+  ./map_io/widelands_map_elemental_data_packet.h
+  ./map_io/widelands_map_exploration_data_packet.h
+  ./map_io/widelands_map_extradata_data_packet.h
+  ./map_io/widelands_map_flagdata_data_packet.h
+  ./map_io/widelands_map_flag_data_packet.h
+  ./map_io/widelands_map_heights_data_packet.cc
+  ./map_io/widelands_map_heights_data_packet.h
+  ./map_io/widelands_map_loader.h
+  ./map_io/widelands_map_map_object_loader.h
+  ./map_io/widelands_map_map_object_saver.h
+  ./map_io/widelands_map_message_saver.h
+  ./map_io/widelands_map_node_ownership_data_packet.cc
+  ./map_io/widelands_map_node_ownership_data_packet.h
+  ./map_io/widelands_map_objective_data_packet.h
+  ./map_io/widelands_map_object_packet.h
+  ./map_io/widelands_map_player_names_and_tribes_data_packet.h
+  ./map_io/widelands_map_player_position_data_packet.h
+  ./map_io/widelands_map_players_messages_data_packet.h
+  ./map_io/widelands_map_players_view_data_packet.h
+  ./map_io/widelands_map_port_spaces_data_packet.h
+  ./map_io/widelands_map_resources_data_packet.h
+  ./map_io/widelands_map_roaddata_data_packet.h
+  ./map_io/widelands_map_road_data_packet.h
+  ./map_io/widelands_map_saver.h
+  ./map_io/widelands_map_scripting_data_packet.h
+  ./map_io/widelands_map_terrain_data_packet.h
+  ./map_io/widelands_map_version_data_packet.h
+  ./md5.h
+  ./network/internet_gaming.h
+  ./network/internet_gaming_messages.h
+  ./network/internet_gaming_protocol.h
+  ./network/netclient.h
+  ./network/nethost.cc
+  ./network/nethost.h
+  ./network/network_gaming_messages.h
+  ./network/network.h
+  ./network/network_lan_promotion.h
+  ./network/network_player_settings_backend.h
+  ./network/network_protocol.h
+  ./network/network_system.h
+  ./parse_map_object_types.h
+  ./point.h
+  ./profile/profile.h
+  ./random.h
+  ./rect.h
+  ./ref_cast.h
+  ./replay_game_controller.h
+  ./rgbcolor.h
+  ./s2map.h
+  ./save_handler.cc
+  ./save_handler.h
+  ./scoped_timer.h
+  ./scripting/c_utils.h
+  ./scripting/factory.h
+  ./scripting/lua_bases.h
+  ./scripting/lua_coroutine.h
+  ./scripting/lua_editor.h
+  ./scripting/lua_errors.h
+  ./scripting/lua_game.h
+  ./scripting/lua_globals.h
+  ./scripting/lua_map.h
+  ./scripting/lua_root.h
+  ./scripting/lua_table.h
+  ./scripting/lua_ui.h
+  ./scripting/luna.h
+  ./scripting/luna_impl.h
+  ./scripting/persistence.h
+  ./scripting/scripting.h
+  ./single_player_game_controller.h
+  ./single_player_game_settings_provider.h
+  ./singleton.h
+  ./sound/fxset.h
+  ./sound/songset.h
+  ./sound/sound_handler.cc
+  ./sound/sound_handler.h
+  ./text_layout.h
+  ./text_parser.h
+  ./timestring.h
+  ./trackptr.h
+  ./TribeBasicInfo.h
+  ./ui_basic/box.h
+  ./ui_basic/button.h
+  ./ui_basic/checkbox.cc
+  ./ui_basic/checkbox.h
+  ./ui_basic/editbox.h
+  ./ui_basic/helpwindow.cc
+  ./ui_basic/helpwindow.h
+  ./ui_basic/icongrid.h
+  ./ui_basic/icon.h
+  ./ui_basic/listselect.h
+  ./ui_basic/messagebox.h
+  ./ui_basic/mouse_constants.h
+  ./ui_basic/multilineeditbox.h
+  ./ui_basic/multilinetextarea.h
+  ./ui_basic/panel.h
+  ./ui_basic/progressbar.h
+  ./ui_basic/progresswindow.h
+  ./ui_basic/radiobutton.h
+  ./ui_basic/scrollbar.h
+  ./ui_basic/slider.h
+  ./ui_basic/spinbox.h
+  ./ui_basic/table.h
+  ./ui_basic/tabpanel.h
+  ./ui_basic/textarea.h
+  ./ui_basic/unique_window.h
+  ./ui_basic/window.h
+  ./ui_fsmenu/base.h
+  ./ui_fsmenu/campaign_select.h
+  ./ui_fsmenu/editor.h
+  ./ui_fsmenu/editor_mapselect.h
+  ./ui_fsmenu/fileview.h
+  ./ui_fsmenu/internet_lobby.h
+  ./ui_fsmenu/intro.h
+  ./ui_fsmenu/launchMPG.cc
+  ./ui_fsmenu/launchMPG.h
+  ./ui_fsmenu/launchSPG.cc
+  ./ui_fsmenu/launchSPG.h
+  ./ui_fsmenu/loadgame.h
+  ./ui_fsmenu/loadreplay.h
+  ./ui_fsmenu/main.h
+  ./ui_fsmenu/mapselect.h
+  ./ui_fsmenu/multiplayer.h
+  ./ui_fsmenu/netsetup_lan.h
+  ./ui_fsmenu/options.h
+  ./ui_fsmenu/singleplayer.h
+  ./unique_window_handler.cc
+  ./unique_window_handler.h
+  ./upcast.h
+  ./utf8.h
+  ./vector.h
+  ./vertex.h
+  ./wlapplication.h
+  ./workarea_info.h
+  ./wui/actionconfirm.h
+  ./wui/attack_box.h
+  ./wui/building_statistics_menu.h
+  ./wui/buildingwindow.h
+  ./wui/chatoverlay.cc
+  ./wui/chatoverlay.h
+  ./wui/encyclopedia_window.h
+  ./wui/fieldaction.h
+  ./wui/game_chat_menu.cc
+  ./wui/game_chat_menu.h
+  ./wui/gamechatpanel.cc
+  ./wui/gamechatpanel.h
+  ./wui/game_debug_ui.h
+  ./wui/game_main_menu.h
+  ./wui/game_main_menu_save_game.h
+  ./wui/game_message_menu.h
+  ./wui/game_objectives_menu.h
+  ./wui/game_options_menu.h
+  ./wui/game_options_sound_menu.h
+  ./wui/game_summary.h
+  ./wui/game_tips.h
+  ./wui/general_statistics_menu.h
+  ./wui/interactive_base.h
+  ./wui/interactive_gamebase.h
+  ./wui/interactive_player.h
+  ./wui/interactive_spectator.h
+  ./wui/itemwaresdisplay.h
+  ./wui/login_box.h
+  ./wui/mapview.h
+  ./wui/mapviewpixelconstants.h
+  ./wui/mapviewpixelfunctions.h
+  ./wui/military_box.h
+  ./wui/minimap.h
+  ./wui/multiplayersetupgroup.h
+  ./wui/overlay_manager.h
+  ./wui/playerdescrgroup.h
+  ./wui/plot_area.h
+  ./wui/portdockwaresdisplay.h
+  ./wui/productionsitewindow.h
+  ./wui/quicknavigation.h
+  ./wui/shipwindow.cc
+  ./wui/soldiercapacitycontrol.h
+  ./wui/soldierlist.h
+  ./wui/stock_menu.h
+  ./wui/story_message_box.h
+  ./wui/warehousewindow.cc
+  ./wui/waresdisplay.h
+  ./wui/waresqueuedisplay.h
+  ./wui/ware_statistics_menu.h
+  ./wui/watchwindow.cc
+  ./wui/watchwindow.h
 )
 
 #convention: any directory called "test" contains test sources, including subdirectories
