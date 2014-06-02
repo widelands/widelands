@@ -13,13 +13,13 @@ function(wl_library NAME)
     ${ARGN}
   )
 
-  # TODO(sirver): Add a codecheck target for each ARG_SRCS here.
   # TODO(sirver): I do not get any unresolved dependency errors
   # when building a STATIC library, only for SHARED. We should
   # always gets those errors to track down cyclic dependencies.
   add_library(${NAME} STATIC
     ${ARG_SRCS}
   )
+  run_codecheck(${NAME} SRCS ${ARG_SRCS})
 
   if(ARG_USES_MINIZIP)
     # TODO(sirver): always use the one we bundle and never search
@@ -35,6 +35,42 @@ function(wl_library NAME)
     target_link_libraries(${NAME} ${DEPENDENCY})
   endforeach(DEPENDENCY)
 endfunction(wl_library)
+
+function(run_codecheck NAME)
+  set(OPTIONS)
+  set(ONE_VALUE_ARG)
+  set(MULTI_VALUE_ARGS SRCS)
+  cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
+    ${ARGN}
+  )
+
+  if (CMAKE_BUILD_TYPE STREQUAL Debug)
+    #TODO: higher-level check for Python before we come here
+    find_package (PythonInterp REQUIRED)
+    set (commands "")
+    foreach(sourcefile ${ARG_SRCS})
+      string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
+      string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcewithoutpath})
+      if (WIN32)
+        string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
+      endif (WIN32)
+      get_filename_component(sourcename ${sourcefile} NAME)
+      set(stamp ${sourcename}_)
+      #FIXME: Ends up using current source directory plus the file name as the argument to codecheck. They need to be joined which is currently
+      # done in the least possible cross-platform way, presumably making it fail pretty hard on Windows. This MUST be fixed before a merge.
+      # I've started looking at getting cross-platform (or as CMake calls it) native paths...
+      add_custom_command(
+        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash}"
+        COMMAND ${CMAKE_COMMAND} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${CMAKE_CURRENT_SOURCE_DIR}"/"${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
+        DEPENDS ${sourcefile}
+        COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
+      )
+      list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash})
+    endforeach()
+    add_custom_target(codecheck${NAME} DEPENDS ${commands})
+    add_dependencies(${NAME} codecheck${NAME})
+  endif (CMAKE_BUILD_TYPE STREQUAL Debug)
+endfunction()
 
 wl_library(build_info
   SRCS
@@ -880,32 +916,12 @@ else (DEFINED MSVC)
 endif (DEFINED MSVC)
 
 add_library (widelands_all STATIC ${WL_SRCS_CC} ${WL_SRCS_H})
+# TODO: This will ultimately be dealt with when the sources in equestions are passed into wl_library
+# but in the meantime we pass in the remainder here to check the rest of the code.
+run_codecheck(widelands_all SRCS ${WL_CODECHECK_SRCS})
 
 set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
-
-if (CMAKE_BUILD_TYPE STREQUAL Debug)
-  find_package (PythonInterp REQUIRED)
-  set (commands "")
-  foreach(sourcefile ${WL_CODECHECK_SRCS})
-    string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
-    string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcewithoutpath})
-    if (WIN32)
-      string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
-    endif (WIN32)
-    get_filename_component(sourcename ${sourcefile} NAME)
-    set(stamp ${sourcename}_)
-    add_custom_command(
-      OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash}"
-      COMMAND ${CMAKE_COMMAND} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
-      DEPENDS ${sourcefile}
-      COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
-    )
-    list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash})
-  endforeach(sourcefile ${WL_CODECHECK_SRCS})
-  add_custom_target(codecheck DEPENDS ${commands})
-  add_dependencies(widelands codecheck)
-endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
 add_subdirectory(base)
 
