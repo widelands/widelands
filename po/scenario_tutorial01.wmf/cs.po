@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-03-13 01:29+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-06-02 18:01+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:41+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-06-03 05:30+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "Language: cs\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:15
@@ -30,6 +30,10 @@ msgid ""
 "and just find everything out for yourself. Otherwise, please bear with me, I "
 "am not the youngest and quickest anymore."
 msgstr ""
+"Omlouvám se ale budu to muset opět strhnout. Později budeme toto místo "
+"potřebovat. Pokud jsem pro tebe příliš pomalý, možná by bylo lepší spustit "
+"normální hru a zjistit si vše sám. V opačném případě se mnou prosím zůstaň, "
+"už nejsem nejmladší ani nejrychlejší."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
@@ -110,17 +114,19 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Enable the showing of building spaces"
-msgstr ""
+msgstr "Zapnout zobrazení míst pro stavbu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:65
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Zobrazit stavební místa."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:67
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
 msgstr ""
+"Je snazší rozeznat, jaký typ budov lze stavět na jakém políčku, když je "
+"zapnuté zobrazení stavebních míst."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
 msgid ""
@@ -128,6 +134,8 @@ msgid ""
 "left at the very bottom of the screen. Right-click on this window and then "
 "give it a try."
 msgstr ""
+"Provede se to buď stiskem mezerníku nebo klikem na čtvrté tlačítko zleva v "
+"dolní části obrazovky. Klikni pravým tlačítkem na toto okno a zkus to."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:77
 msgid "Lumberjack’s Spot"
@@ -245,12 +253,17 @@ msgid ""
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
 msgstr ""
+"Čím jsou úseky tvých cest kratší, tím rychleji je tvé zboží přepravováno. "
+"Proto by jsi měl zajistit, že tvé cesty budou mít tolik vlajek, kolik je jen "
+"možné."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:143
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
 msgstr ""
+"Nyní postav modrou vlajku v prostředku cesty, která spojuje tvou hlavní "
+"budovu s tvým dřevorubcem."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:148
 msgid "Waiting For the Hut to be Finished"
@@ -298,16 +311,21 @@ msgid ""
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
 msgstr ""
+"Kameny lze těžit v žulových dolech ale je jednodušší postavit lom vedle "
+"kamenů ležících v okolí. Jak to tak bývá, je zde hromada kamení na západ "
+"(vlevo) od tvé hlavní budovy. Nyní tě naučím, jak se tam přesunout kamerou."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:178
 msgid ""
 "There are two ways to move your view. The first one is using the cursor keys "
 "on your keyboard. Go ahead and try this out."
 msgstr ""
+"Jsou dva způsoby, jak přesunout kameru. První je pomocí šipek na klávesnici. "
+"Tak do toho, zkus to."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:181
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-msgstr ""
+msgstr "Klikni na \"OK\" a pak přesuň kameru pomocí šipek na klávesnici."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:185
 msgid "Move your view with the cursor keys"
@@ -322,10 +340,12 @@ msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are two ways to move your view in Widelands."
 msgstr ""
+"Pohyb kamery je základ pro to abys měl přehled o své ekonomice. Jsou dva "
+"způsoby jak ve Widelands lze pohybovat kamerou."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:189
 msgid "The first one is to use the cursor keys on your keyboard."
-msgstr ""
+msgstr "První je použít šipky na klávesnici."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
 msgid ""
@@ -333,6 +353,8 @@ msgid ""
 "mouse button anywhere on the map, then move your mouse around and you’ll see "
 "the view scroll."
 msgstr ""
+"Druhý je obvyklejší a rychlejší: stikni a drž pravé tlačítko myši kdekoliv "
+"na mapě, když pohneš myší, můžeš vidět jak se tvá kamera pohybuje."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:198
 msgid "Other Ways to Move the View"
@@ -442,7 +464,7 @@ msgstr "Postav lom"
 msgid ""
 "There are some stones to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr ""
+msgstr "Západně od tvé hlavní budovy jsou kameny. Postav vedle nich lom."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:253
 msgid ""
@@ -687,7 +709,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:387
 msgid "Archive all your messages in your inbox now."
-msgstr ""
+msgstr "Historie všech tvých zpráv je ve tvé poště."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid ""
