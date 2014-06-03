@@ -29,7 +29,7 @@ std::ostream & wout = std::cout;
 bool g_verbose = false;
 
 void log(const char * const fmt, ...) {
-	char buffer[2048];
+ char buffer[2048];
 	va_list va;
 
 	va_start(va, fmt);

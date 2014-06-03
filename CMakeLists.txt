@@ -284,6 +284,8 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
+# We use python here and there.
+find_package (PythonInterp REQUIRED)
 
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path

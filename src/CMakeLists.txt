@@ -1,6 +1,9 @@
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
 
+# Catchall target to codecheck all files.
+add_custom_target(codecheck)
+
 # See
 # http://www.cmake.org/cmake/help/v3.0/module/CMakeParseArguments.html
 function(wl_library NAME)
@@ -19,7 +22,10 @@ function(wl_library NAME)
   add_library(${NAME} STATIC
     ${ARG_SRCS}
   )
-  run_codecheck(${NAME} SRCS ${ARG_SRCS})
+
+  foreach(SRC ${ARG_SRCS})
+    run_codecheck(${NAME} ${SRC})
+  endforeach(SRC)
 
   if(ARG_USES_MINIZIP)
     # TODO(sirver): always use the one we bundle and never search
@@ -36,41 +42,42 @@ function(wl_library NAME)
   endforeach(DEPENDENCY)
 endfunction(wl_library)
 
-function(run_codecheck NAME)
-  set(OPTIONS)
-  set(ONE_VALUE_ARG)
-  set(MULTI_VALUE_ARGS SRCS)
-  cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
-    ${ARGN}
-  )
+# Checks a single 'SRC' file using Codecheck and writes a file named
+# codecheck_<shasum of input> if the codecheck did not yield anything.
+# The target for the codecheck will be added as a dependency to 'NAME' for
+# debug builds, but always for the target 'codecheck', so that make codecheck
+# checks all source code.
+function(run_codecheck NAME SRC)
+  get_filename_component(ABSOLUTE_SRC ${SRC} ABSOLUTE)
 
-  if (CMAKE_BUILD_TYPE STREQUAL Debug)
-    #TODO: higher-level check for Python before we come here
-    find_package (PythonInterp REQUIRED)
-    set (commands "")
-    foreach(sourcefile ${ARG_SRCS})
-      string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
-      string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcewithoutpath})
-      if (WIN32)
-        string(REGEX REPLACE "^.*:" "" sourcenoslash ${sourcenoslash})
-      endif (WIN32)
-      get_filename_component(sourcename ${sourcefile} NAME)
-      set(stamp ${sourcename}_)
-      #FIXME: Ends up using current source directory plus the file name as the argument to codecheck. They need to be joined which is currently
-      # done in the least possible cross-platform way, presumably making it fail pretty hard on Windows. This MUST be fixed before a merge.
-      # I've started looking at getting cross-platform (or as CMake calls it) native paths...
-      add_custom_command(
-        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash}"
-        COMMAND ${CMAKE_COMMAND} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${CMAKE_CURRENT_SOURCE_DIR}"/"${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
-        DEPENDS ${sourcefile}
-        COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
-      )
-      list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash})
-    endforeach()
-    add_custom_target(codecheck${NAME} DEPENDS ${commands})
-    add_dependencies(${NAME} codecheck${NAME})
-  endif (CMAKE_BUILD_TYPE STREQUAL Debug)
-endfunction()
+  # If the file does not exist, it is probably auto-generated. In that case, it
+  # makes no sense to codecheck it.
+  if(EXISTS ${ABSOLUTE_SRC})
+    file(SHA1 ${ABSOLUTE_SRC} CHECKSUM)
+
+    set(OUTPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${CHECKSUM}")
+    add_custom_command(
+      OUTPUT
+        ${OUTPUT_FILE}
+      COMMAND
+        ${CMAKE_COMMAND}
+        -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+        -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py
+        -DSRC=${ABSOLUTE_SRC}
+        -DOUTPUT_FILE=${OUTPUT_FILE}
+        -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}
+        -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
+      DEPENDS ${ABSOLUTE_SRC}
+      COMMENT "Checking ${SRC} with CodeCheck"
+    )
+    add_custom_target(run_codecheck_for_${CHECKSUM} DEPENDS ${OUTPUT_FILE})
+    add_dependencies(codecheck run_codecheck_for_${CHECKSUM})
+
+    if(CMAKE_BUILD_TYPE STREQUAL Debug)
+      add_dependencies(${NAME} run_codecheck_for_${CHECKSUM})
+    endif(CMAKE_BUILD_TYPE STREQUAL Debug)
+  endif(EXISTS ${ABSOLUTE_SRC})
+endfunction(run_codecheck)
 
 wl_library(build_info
   SRCS
@@ -431,29 +438,24 @@ set(WL_SRCS_CC
 )
 
 set(WL_SRCS_H
-  ./ai/ai_help_structs.cc
+  ./TribeBasicInfo.h
   ./ai/ai_help_structs.h
-  ./ai/ai_hints.cc
   ./ai/ai_hints.h
   ./ai/defaultai.h
   ./align.h
   ./backtrace.h
-  ./build_info.h
   ./campvis.h
-  ./chat.cc
   ./chat.h
-  ./CodeCheck.cmake
   ./compile_diagnostics.h
   ./computer_player.h
-  ./config.h.cmake
   ./constants.h
   ./container_iterate.h
   ./cookie_priority_queue.h
   ./debugconsole.h
   ./description_maintainer.h
   ./economy/cmd_call_economy_balance.h
-  ./economy/economy_data_packet.h
   ./economy/economy.h
+  ./economy/economy_data_packet.h
   ./economy/flag.h
   ./economy/fleet.h
   ./economy/idleworkersupply.h
@@ -462,46 +464,40 @@ set(WL_SRCS_H
   ./economy/portdock.h
   ./economy/request.h
   ./economy/road.h
-  ./economy/routeastar.h
   ./economy/route.h
+  ./economy/routeastar.h
   ./economy/router.h
   ./economy/routing_node.h
-  ./economy/shippingitem.cc
   ./economy/shippingitem.h
   ./economy/supply.h
   ./economy/supply_list.h
   ./economy/transfer.h
-  ./economy/warehousesupply.h
   ./economy/ware_instance.h
+  ./economy/warehousesupply.h
   ./economy/wares_queue.h
   ./editor/editorinteractive.h
   ./editor/tools/editor_action_args.h
-  ./editor/tools/editor_decrease_height_tool.cc
   ./editor/tools/editor_decrease_height_tool.h
   ./editor/tools/editor_decrease_resources_tool.h
   ./editor/tools/editor_delete_bob_tool.h
   ./editor/tools/editor_delete_immovable_tool.h
   ./editor/tools/editor_draw_tool.h
-  ./editor/tools/editor_history.cc
   ./editor/tools/editor_history.h
-  ./editor/tools/editor_increase_height_tool.cc
   ./editor/tools/editor_increase_height_tool.h
   ./editor/tools/editor_increase_resources_tool.h
   ./editor/tools/editor_info_tool.h
   ./editor/tools/editor_make_infrastructure_tool.h
-  ./editor/tools/editor_noise_height_tool.cc
   ./editor/tools/editor_noise_height_tool.h
   ./editor/tools/editor_place_bob_tool.h
   ./editor/tools/editor_place_immovable_tool.h
-  ./editor/tools/editor_set_height_tool.cc
   ./editor/tools/editor_set_height_tool.h
   ./editor/tools/editor_set_origin_tool.h
   ./editor/tools/editor_set_port_space_tool.h
   ./editor/tools/editor_set_resources_tool.h
   ./editor/tools/editor_set_starting_pos_tool.h
   ./editor/tools/editor_set_terrain_tool.h
-  ./editor/tools/editor_tool_action.h
   ./editor/tools/editor_tool.h
+  ./editor/tools/editor_tool_action.h
   ./editor/tools/multi_select.h
   ./editor/ui_menus/editor_main_menu.h
   ./editor/ui_menus/editor_main_menu_load_map.h
@@ -510,21 +506,17 @@ set(WL_SRCS_H
   ./editor/ui_menus/editor_main_menu_random_map.h
   ./editor/ui_menus/editor_main_menu_save_map.h
   ./editor/ui_menus/editor_main_menu_save_map_make_directory.h
-  ./editor/ui_menus/editor_player_menu_allowed_buildings_menu.h
   ./editor/ui_menus/editor_player_menu.h
-  ./editor/ui_menus/editor_tool_change_height_options_menu.cc
+  ./editor/ui_menus/editor_player_menu_allowed_buildings_menu.h
   ./editor/ui_menus/editor_tool_change_height_options_menu.h
-  ./editor/ui_menus/editor_tool_change_resources_options_menu.cc
   ./editor/ui_menus/editor_tool_change_resources_options_menu.h
   ./editor/ui_menus/editor_tool_menu.h
-  ./editor/ui_menus/editor_tool_noise_height_options_menu.cc
   ./editor/ui_menus/editor_tool_noise_height_options_menu.h
   ./editor/ui_menus/editor_tool_options_menu.h
   ./editor/ui_menus/editor_tool_place_bob_options_menu.h
   ./editor/ui_menus/editor_tool_place_immovable_options_menu.h
   ./editor/ui_menus/editor_tool_set_terrain_options_menu.h
   ./editor/ui_menus/editor_toolsize_menu.h
-  ./gamecontroller.h
   ./game_io/game_cmd_queue_data_packet.h
   ./game_io/game_data_packet.h
   ./game_io/game_game_class_data_packet.h
@@ -535,82 +527,46 @@ set(WL_SRCS_H
   ./game_io/game_player_info_data_packet.h
   ./game_io/game_preload_data_packet.h
   ./game_io/game_saver.h
+  ./gamecontroller.h
   ./gamesettings.h
-  ./graphic
-  ./graphic/animation.cc
   ./graphic/animation.h
-  ./graphic/colormap.cc
   ./graphic/colormap.h
   ./graphic/compositemode.h
   ./graphic/diranimations.h
-  ./graphic/font.cc
   ./graphic/font.h
-  ./graphic/font_handler1.cc
-  ./graphic/font_handler1.h
-  ./graphic/font_handler.cc
   ./graphic/font_handler.h
-  ./graphic/graphic.cc
+  ./graphic/font_handler1.h
   ./graphic/graphic.h
-  ./graphic/image_cache.cc
-  ./graphic/image_cache.h
   ./graphic/image.h
+  ./graphic/image_cache.h
   ./graphic/image_loader.h
-  ./graphic/image_loader_impl.cc
   ./graphic/image_loader_impl.h
-  ./graphic/image_transformations.cc
   ./graphic/image_transformations.h
-  ./graphic/in_memory_image.cc
   ./graphic/in_memory_image.h
-  ./graphic/render
-  ./graphic/render/gamerenderer.cc
-  ./graphic/render/gamerenderer_gl.cc
-  ./graphic/render/gamerenderer_gl.h
   ./graphic/render/gamerenderer.h
-  ./graphic/render/gamerenderer_sdl.cc
+  ./graphic/render/gamerenderer_gl.h
   ./graphic/render/gamerenderer_sdl.h
-  ./graphic/render/gl_surface.cc
   ./graphic/render/gl_surface.h
-  ./graphic/render/gl_surface_screen.cc
   ./graphic/render/gl_surface_screen.h
-  ./graphic/render/gl_surface_texture.cc
   ./graphic/render/gl_surface_texture.h
-  ./graphic/render/gl_utils.cc
   ./graphic/render/gl_utils.h
-  ./graphic/render/minimaprenderer.cc
   ./graphic/render/minimaprenderer.h
-  ./graphic/render/sdl_helper.cc
   ./graphic/render/sdl_helper.h
-  ./graphic/render/sdl_surface.cc
   ./graphic/render/sdl_surface.h
-  ./graphic/rendertarget.cc
-  ./graphic/rendertarget.h
-  ./graphic/render/terrain_sdl.cc
   ./graphic/render/terrain_sdl.h
-  ./graphic/richtext.cc
+  ./graphic/rendertarget.h
   ./graphic/richtext.h
-  ./graphic/surface_cache.cc
-  ./graphic/surface_cache.h
-  ./graphic/surface.cc
   ./graphic/surface.h
-  ./graphic/text
+  ./graphic/surface_cache.h
   ./graphic/text/rt_errors.h
   ./graphic/text/rt_errors_impl.h
-  ./graphic/text/rt_parse.cc
   ./graphic/text/rt_parse.h
-  ./graphic/text/rt_render.cc
   ./graphic/text/rt_render.h
   ./graphic/text/sdl_ttf_font.h
-  ./graphic/text/sdl_ttf_font_impl.cc
   ./graphic/text/sdl_ttf_font_impl.h
-  ./graphic/text/sdl_ttf_font_loader_from_file.cc
-  ./graphic/text/sdl_ttf_font_loader_from_filesystem.cc
-  ./graphic/text/textstream.cc
   ./graphic/text/textstream.h
-  ./graphic/texture.cc
   ./graphic/texture.h
-  ./graphic/wordwrap.cc
   ./graphic/wordwrap.h
-  ./helper.cc
   ./helper.h
   ./i18n.h
   ./interval.h
@@ -621,7 +577,6 @@ set(WL_SRCS_H
   ./logic/buildcost.h
   ./logic/building.h
   ./logic/carrier.h
-  ./logic/checkstep.cc
   ./logic/checkstep.h
   ./logic/cmd_calculate_statistics.h
   ./logic/cmd_expire_message.h
@@ -639,19 +594,18 @@ set(WL_SRCS_H
   ./logic/findbob.h
   ./logic/findimmovable.h
   ./logic/findnode.h
-  ./logic/game_data_error.h
   ./logic/game.h
+  ./logic/game_data_error.h
   ./logic/immovable.h
   ./logic/immovable_program.h
   ./logic/instances.h
+  ./logic/map.h
+  ./logic/map_revision.h
   ./logic/mapastar.h
   ./logic/mapdifferenceregion.h
   ./logic/mapfringeregion.h
-  ./logic/map.h
-  ./logic/maphollowregion.cc
   ./logic/maphollowregion.h
   ./logic/mapregion.h
-  ./logic/map_revision.h
   ./logic/maptriangleregion.h
   ./logic/message.h
   ./logic/message_id.h
@@ -661,15 +615,12 @@ set(WL_SRCS_H
   ./logic/nodecaps.h
   ./logic/notification.h
   ./logic/objective.h
-  ./logic/partially_finished_building.cc
   ./logic/partially_finished_building.h
-  ./logic/path.cc
-  ./logic/pathfield.cc
-  ./logic/pathfield.h
   ./logic/path.h
+  ./logic/pathfield.h
+  ./logic/player.h
   ./logic/player_area.h
   ./logic/playercommand.h
-  ./logic/player.h
   ./logic/playersmanager.h
   ./logic/production_program.h
   ./logic/productionsite.h
@@ -679,60 +630,56 @@ set(WL_SRCS_H
   ./logic/replay.h
   ./logic/requirements.h
   ./logic/roadtype.h
-  ./logic/ship.cc
   ./logic/ship.h
-  ./logic/soldiercontrol.h
-  ./logic/soldier_counts.h
   ./logic/soldier.h
+  ./logic/soldier_counts.h
+  ./logic/soldiercontrol.h
   ./logic/tattribute.h
   ./logic/trainingsite.h
   ./logic/tribe.h
   ./logic/walkingdir.h
   ./logic/ware_descr.h
-  ./logic/warehouse.cc
   ./logic/warehouse.h
   ./logic/warelist.h
   ./logic/wareworker.h
+  ./logic/widelands.h
   ./logic/widelands_geometry.h
   ./logic/widelands_geometry_io.h
-  ./logic/widelands.h
-  ./logic/worker_descr.h
   ./logic/worker.h
+  ./logic/worker_descr.h
   ./logic/worker_program.h
-  ./logic/worlddata.h
   ./logic/world.h
+  ./logic/worlddata.h
   ./logmessage.h
   ./machdep.h
   ./map_generator.h
   ./map_io/map_loader.h
   ./map_io/widelands_map_allowed_building_types_data_packet.h
   ./map_io/widelands_map_allowed_worker_types_data_packet.h
-  ./map_io/widelands_map_buildingdata_data_packet.h
   ./map_io/widelands_map_building_data_packet.h
+  ./map_io/widelands_map_buildingdata_data_packet.h
   ./map_io/widelands_map_data_packet.h
   ./map_io/widelands_map_elemental_data_packet.h
   ./map_io/widelands_map_exploration_data_packet.h
   ./map_io/widelands_map_extradata_data_packet.h
-  ./map_io/widelands_map_flagdata_data_packet.h
   ./map_io/widelands_map_flag_data_packet.h
-  ./map_io/widelands_map_heights_data_packet.cc
+  ./map_io/widelands_map_flagdata_data_packet.h
   ./map_io/widelands_map_heights_data_packet.h
   ./map_io/widelands_map_loader.h
   ./map_io/widelands_map_map_object_loader.h
   ./map_io/widelands_map_map_object_saver.h
   ./map_io/widelands_map_message_saver.h
-  ./map_io/widelands_map_node_ownership_data_packet.cc
   ./map_io/widelands_map_node_ownership_data_packet.h
-  ./map_io/widelands_map_objective_data_packet.h
   ./map_io/widelands_map_object_packet.h
+  ./map_io/widelands_map_objective_data_packet.h
   ./map_io/widelands_map_player_names_and_tribes_data_packet.h
   ./map_io/widelands_map_player_position_data_packet.h
   ./map_io/widelands_map_players_messages_data_packet.h
   ./map_io/widelands_map_players_view_data_packet.h
   ./map_io/widelands_map_port_spaces_data_packet.h
   ./map_io/widelands_map_resources_data_packet.h
-  ./map_io/widelands_map_roaddata_data_packet.h
   ./map_io/widelands_map_road_data_packet.h
+  ./map_io/widelands_map_roaddata_data_packet.h
   ./map_io/widelands_map_saver.h
   ./map_io/widelands_map_scripting_data_packet.h
   ./map_io/widelands_map_terrain_data_packet.h
@@ -742,10 +689,9 @@ set(WL_SRCS_H
   ./network/internet_gaming_messages.h
   ./network/internet_gaming_protocol.h
   ./network/netclient.h
-  ./network/nethost.cc
   ./network/nethost.h
-  ./network/network_gaming_messages.h
   ./network/network.h
+  ./network/network_gaming_messages.h
   ./network/network_lan_promotion.h
   ./network/network_player_settings_backend.h
   ./network/network_protocol.h
@@ -759,7 +705,6 @@ set(WL_SRCS_H
   ./replay_game_controller.h
   ./rgbcolor.h
   ./s2map.h
-  ./save_handler.cc
   ./save_handler.h
   ./scoped_timer.h
   ./scripting/c_utils.h
@@ -783,22 +728,18 @@ set(WL_SRCS_H
   ./singleton.h
   ./sound/fxset.h
   ./sound/songset.h
-  ./sound/sound_handler.cc
   ./sound/sound_handler.h
   ./text_layout.h
   ./text_parser.h
   ./timestring.h
   ./trackptr.h
-  ./TribeBasicInfo.h
   ./ui_basic/box.h
   ./ui_basic/button.h
-  ./ui_basic/checkbox.cc
   ./ui_basic/checkbox.h
   ./ui_basic/editbox.h
-  ./ui_basic/helpwindow.cc
   ./ui_basic/helpwindow.h
-  ./ui_basic/icongrid.h
   ./ui_basic/icon.h
+  ./ui_basic/icongrid.h
   ./ui_basic/listselect.h
   ./ui_basic/messagebox.h
   ./ui_basic/mouse_constants.h
@@ -823,9 +764,7 @@ set(WL_SRCS_H
   ./ui_fsmenu/fileview.h
   ./ui_fsmenu/internet_lobby.h
   ./ui_fsmenu/intro.h
-  ./ui_fsmenu/launchMPG.cc
   ./ui_fsmenu/launchMPG.h
-  ./ui_fsmenu/launchSPG.cc
   ./ui_fsmenu/launchSPG.h
   ./ui_fsmenu/loadgame.h
   ./ui_fsmenu/loadreplay.h
@@ -835,7 +774,6 @@ set(WL_SRCS_H
   ./ui_fsmenu/netsetup_lan.h
   ./ui_fsmenu/options.h
   ./ui_fsmenu/singleplayer.h
-  ./unique_window_handler.cc
   ./unique_window_handler.h
   ./upcast.h
   ./utf8.h
@@ -847,14 +785,10 @@ set(WL_SRCS_H
   ./wui/attack_box.h
   ./wui/building_statistics_menu.h
   ./wui/buildingwindow.h
-  ./wui/chatoverlay.cc
   ./wui/chatoverlay.h
   ./wui/encyclopedia_window.h
   ./wui/fieldaction.h
-  ./wui/game_chat_menu.cc
   ./wui/game_chat_menu.h
-  ./wui/gamechatpanel.cc
-  ./wui/gamechatpanel.h
   ./wui/game_debug_ui.h
   ./wui/game_main_menu.h
   ./wui/game_main_menu_save_game.h
@@ -864,6 +798,7 @@ set(WL_SRCS_H
   ./wui/game_options_sound_menu.h
   ./wui/game_summary.h
   ./wui/game_tips.h
+  ./wui/gamechatpanel.h
   ./wui/general_statistics_menu.h
   ./wui/interactive_base.h
   ./wui/interactive_gamebase.h
@@ -883,16 +818,13 @@ set(WL_SRCS_H
   ./wui/portdockwaresdisplay.h
   ./wui/productionsitewindow.h
   ./wui/quicknavigation.h
-  ./wui/shipwindow.cc
   ./wui/soldiercapacitycontrol.h
   ./wui/soldierlist.h
   ./wui/stock_menu.h
   ./wui/story_message_box.h
-  ./wui/warehousewindow.cc
+  ./wui/ware_statistics_menu.h
   ./wui/waresdisplay.h
   ./wui/waresqueuedisplay.h
-  ./wui/ware_statistics_menu.h
-  ./wui/watchwindow.cc
   ./wui/watchwindow.h
 )
 
@@ -918,7 +850,10 @@ endif (DEFINED MSVC)
 add_library (widelands_all STATIC ${WL_SRCS_CC} ${WL_SRCS_H})
 # TODO: This will ultimately be dealt with when the sources in equestions are passed into wl_library
 # but in the meantime we pass in the remainder here to check the rest of the code.
-run_codecheck(widelands_all SRCS ${WL_CODECHECK_SRCS})
+foreach(SRC ${WL_CODECHECK_SRCS})
+  run_codecheck(widelands_all ${SRC})
+endforeach(SRC)
+
 
 set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})

@@ -33,8 +33,8 @@
 #include "base/log.h"
 #include "base/port.h"
 #include "logic/cmd_queue.h"
+#include "logic/widelands.h"
 #include "ref_cast.h"
-#include "widelands.h"
 
 class FileRead;
 class RenderTarget;
