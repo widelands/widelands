@@ -23,6 +23,8 @@
 #include <memory>
 #include <queue>
 
+#include <stdint.h>
+
 #include "logic/queue_cmd_ids.h"
 #include <stdint.h>
 
