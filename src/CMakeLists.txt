@@ -854,9 +854,6 @@ foreach(SRC ${WL_CODECHECK_SRCS})
 endforeach(SRC)
 
 
-set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
-set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
-
 add_subdirectory(base)
 
 #the subdirectories are only used for test definition
@@ -909,17 +906,12 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_all ${EXECINFO_LIBRARY})
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
-#FIXME: Find out whether this is ever used.
-if (DEFINED WL_EXTRA_LINK_LIBRARIES)
-  target_link_libraries(widelands_all ${WL_EXTRA_LINK_LIBRARIES})
-endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
-
-target_link_libraries(widelands widelands_all)
-target_link_libraries(widelands ${SDL_LIBRARY})
-
 if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   target_link_libraries(widelands_all ${INTL_LIBRARY})
 endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
+target_link_libraries(widelands widelands_all)
+target_link_libraries(widelands ${SDL_LIBRARY})
 
 if (WIN32)
   if (DEFINED MSVC)
