@@ -85,6 +85,8 @@ wl_library(build_info
     build_info.h
 )
 
+# TODO(sirver): This seems to introduce another notion of version that needs to
+# be kept updated manually.
 IF (WIN32)
   configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/msvc/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
   if (NOT WL_VERSION_MAJOR OR WL_VERSION_MAJOR STREQUAL "")
