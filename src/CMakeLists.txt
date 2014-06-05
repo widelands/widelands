@@ -645,6 +645,7 @@ set(WL_SRCS
   logic/widelands.h
   logic/widelands_geometry.h
   logic/widelands_geometry_io.h
+  logic/workarea_info.h
   logic/worker.h
   logic/worker_descr.h
   logic/worker_program.h
@@ -778,7 +779,6 @@ set(WL_SRCS
   utf8.h
   vector.h
   wlapplication.h
-  workarea_info.h
   wui/actionconfirm.h
   wui/attack_box.h
   wui/building_statistics_menu.h
