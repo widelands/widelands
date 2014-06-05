@@ -19,6 +19,8 @@
 
 #include "map_generator.h"
 
+#include <stdint.h>
+
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
@@ -26,11 +28,11 @@
 #include "logic/map.h"
 #include "logic/world/world.h"
 
-#define AVG_ELEVATION   (0x80000000)
-#define MAX_ELEVATION   (0xffffffff)
-#define MAP_ID_DIGITS   24
-#define ISLAND_BORDER   10
-#define MAX_ELEVATION_HALF (0x80000000)
+constexpr uint32_t kAverageElevation = 0x80000000;
+constexpr uint32_t kMaxElevation = 0xffffffff;
+constexpr int kMapIdDigits = 24;
+constexpr int kIslandBorder = 10;
+constexpr uint32_t kMaxElevationHalf = 0x80000000;
 
 namespace Widelands
 {
@@ -226,8 +228,8 @@ void MapGenerator::generate_bobs
 	immovDens *= max_val / 100;
 	movDens   *= max_val / 100;
 
-	immovDens = immovDens >= MAX_ELEVATION_HALF ? MAX_ELEVATION : immovDens * 2;
-	movDens   = movDens   >= MAX_ELEVATION_HALF ? MAX_ELEVATION : movDens   * 2;
+	immovDens = immovDens >= kMaxElevationHalf ? kMaxElevation : immovDens * 2;
+	movDens   = movDens   >= kMaxElevationHalf ? kMaxElevation : movDens   * 2;
 
 	uint32_t val = rng.rand();
 	bool set_immovable = (val <= immovDens);
@@ -241,7 +243,7 @@ void MapGenerator::generate_bobs
 		m_egbase.create_immovable
 			(fc,
 			 bobKind->getImmovableBob
-			 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num))),
+			 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
 			 nullptr);
 
 	if (set_moveable and (num = bobKind->getNumMoveableBobs()))
@@ -249,7 +251,7 @@ void MapGenerator::generate_bobs
 			(fc,
 			 m_egbase.world().get_bob
 			 	(bobKind->getMoveableBob
-			 	 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num)))
+			 	 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
 			 	 .c_str()),
 			 nullptr);
 }
@@ -259,7 +261,7 @@ void MapGenerator::generate_bobs
 	{                                                                                               \
 		Resource_Index const res_idx = terr.get_valid_resource(res);                                 \
 		uint32_t const max_amount = m_egbase.world().get_resource(res_idx)->max_amount();            \
-		uint8_t res_val = static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));                 \
+		uint8_t res_val = static_cast<uint8_t>(rnd1 / (kMaxElevation / max_amount));                 \
 		res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;                              \
 		res_val /= 3;                                                                                \
 		if (Editor_Change_Resource_Tool_Callback(fc, m_map, res_idx)) {                              \
@@ -369,11 +371,11 @@ uint8_t MapGenerator::make_node_elevation
 			std::min
 				(std::min<X_Coordinate>(c.x, m_mapInfo.w - c.x),
 				 std::min<Y_Coordinate>(c.y, m_mapInfo.h - c.y));
-		if (border_dist <= ISLAND_BORDER) {
+		if (border_dist <= kIslandBorder) {
 			res_h =
 				static_cast<uint8_t>
 					(static_cast<double>(res_h) * border_dist /
-					 static_cast<double>(ISLAND_BORDER));
+					 static_cast<double>(kIslandBorder));
 			if (res_h < water_h)
 				res_h = water_h;
 		}
@@ -396,8 +398,8 @@ bottom border values. This means we have some kind of "endlessly"
 repeating set of random values.
 What is more, the different heights are weighed so that the
 random distribution of all random values in the array is linear.
-The minimum valu will be 0, the maximum value will be MAX_ELEVATION,
-the average will be AVG_ELEVATION.
+The minimum valu will be 0, the maximum value will be kMaxElevation,
+the average will be kAverageElevation.
 
 w, h: are width and height of the two-dimensional array
       produced. Thus, the array has w * h entries. To access a certain
@@ -419,7 +421,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		//  We will do some initing here...
 
 		for (uint32_t ix = 0; ix < numFields; ++ix)
-			values[ix] = AVG_ELEVATION;
+			values[ix] = kAverageElevation;
 
 		//  This will be the first starting random values...
 
@@ -427,7 +429,7 @@ uint32_t * MapGenerator::generate_random_value_map
 			for (uint32_t y = 0; y < h; y += 16) {
 				values[x + y * w] = rng.rand();
 				if (x % 32 or y % 32) {
-					values[x + y * w] += AVG_ELEVATION;
+					values[x + y * w] += kAverageElevation;
 					values[x + y * w] /= 2;
 				}
 			}
@@ -435,7 +437,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		//  randomize the values
 
 		uint32_t step_x  = std::min(16U, w), step_y  = std::min(16U, h);
-		uint32_t max = AVG_ELEVATION, min = AVG_ELEVATION;
+		uint32_t max = kAverageElevation, min = kAverageElevation;
 		double    ele_fac  = 0.15;
 
 		bool end = false;
@@ -465,17 +467,17 @@ uint32_t * MapGenerator::generate_random_value_map
 					uint32_t x_new       =
 						x_0_y_0 / 2 + x_1_y_0 / 2 +
 						static_cast<uint32_t>
-							(ele_fac * rng.rand() - ele_fac * AVG_ELEVATION);
+							(ele_fac * rng.rand() - ele_fac * kAverageElevation);
 
 					uint32_t y_new       =
 						x_0_y_0 / 2 + x_0_y_1 / 2 +
 						static_cast<uint32_t>
-							(ele_fac * rng.rand() - ele_fac * AVG_ELEVATION);
+							(ele_fac * rng.rand() - ele_fac * kAverageElevation);
 
 					uint32_t xy_new      =
 						x_0_y_0 / 4 + x_1_y_1 / 4 + x_1_y_0 / 4 + x_0_y_1 / 4 +
 						static_cast<uint32_t>
-							(ele_fac * rng.rand() - ele_fac * AVG_ELEVATION);
+							(ele_fac * rng.rand() - ele_fac * kAverageElevation);
 
 					values[x + step_x / 2 + w * (y)]              =  x_new;
 					values[x + step_x / 2 + w * (y + step_y / 2)] = xy_new;
@@ -525,7 +527,7 @@ uint32_t * MapGenerator::generate_random_value_map
 					 /
 					 static_cast<double>(max - min))
 					*
-					MAX_ELEVATION;
+					kMaxElevation;
 				++histo[values[x + y * w] >> 22];
 			}
 
@@ -548,7 +550,7 @@ uint32_t * MapGenerator::generate_random_value_map
 				values[x + y * w] =
 					minVals[values[x + y * w] >> 22]
 					*
-					static_cast<double>(MAX_ELEVATION);
+					static_cast<double>(kMaxElevation);
 		return values;
 	} catch (...) {
 		delete[] values;
@@ -620,32 +622,32 @@ Terrain_Index MapGenerator::figure_out_terrain
 
 	if        (numWasteLandAreas == 0) {
 	} else if (numWasteLandAreas == 1) {
-		if (rand4 < (AVG_ELEVATION * m_mapInfo.wastelandRatio)) {
+		if (rand4 < (kAverageElevation * m_mapInfo.wastelandRatio)) {
 			numLandAreas = numWasteLandAreas;
 			isDesert = true;
 			isDesertOuter =
-				rand4 > (AVG_ELEVATION * m_mapInfo.wastelandRatio / 4) * 3;
+				rand4 > (kAverageElevation * m_mapInfo.wastelandRatio / 4) * 3;
 			landAreaIndex = 0;
 		}
 	} else {
-		if (rand4<(AVG_ELEVATION * m_mapInfo.wastelandRatio * 0.5)) {
+		if (rand4<(kAverageElevation * m_mapInfo.wastelandRatio * 0.5)) {
 			numLandAreas = numWasteLandAreas;
 			isDesert = true;
 			isDesertOuter =
-				rand4 > (AVG_ELEVATION * m_mapInfo.wastelandRatio * 0.5 / 4) * 3;
+				rand4 > (kAverageElevation * m_mapInfo.wastelandRatio * 0.5 / 4) * 3;
 			landAreaIndex = 0;
 		}
 		else if
 			(rand4
 			 >
-			 (MAX_ELEVATION - AVG_ELEVATION * m_mapInfo.wastelandRatio * 0.5))
+			 (kMaxElevation - kAverageElevation * m_mapInfo.wastelandRatio * 0.5))
 		{
 			numLandAreas = numWasteLandAreas;
 			isDesert = true;
 			isDesertOuter =
 				rand4
 				<
-				1 - AVG_ELEVATION * m_mapInfo.wastelandRatio * 0.5 / 4 * 3;
+				1 - kAverageElevation * m_mapInfo.wastelandRatio * 0.5 / 4 * 3;
 			landAreaIndex = 1;
 		}
 	}
@@ -666,7 +668,7 @@ Terrain_Index MapGenerator::figure_out_terrain
 			if
 				(weight1 * (random2[c0.x + m_mapInfo.w * c0.y] / sum)
 				 >=
-				 weight2 * (AVG_ELEVATION / sum))
+				 weight2 * (kAverageElevation / sum))
 				landAreaIndex = 0;
 			else
 				landAreaIndex = 1;
@@ -822,7 +824,7 @@ void MapGenerator::create_random_map()
 			(make_node_elevation
 				(static_cast<double>(elevations[fc.x + m_mapInfo.w * fc.y])
 				 /
-				 static_cast<double>(MAX_ELEVATION),
+				 static_cast<double>(kMaxElevation),
 				 fc));
 
 	//  Now lets set the terrain right according to the heights.
@@ -952,7 +954,7 @@ void MapGenerator::create_random_map()
 			if (lines == 1)
 				playerstart.y = m_mapInfo.h / 2;
 			else
-				playerstart.y = m_mapInfo.h / 7 + ISLAND_BORDER;
+				playerstart.y = m_mapInfo.h / 7 + kIslandBorder;
 		} else if (line[0] + line[1] + 1 > pn[n - 1]) {
 			// X-Coordinates
 			uint8_t pos = pn[n - 1] - line[0];
@@ -963,7 +965,7 @@ void MapGenerator::create_random_map()
 			if (lines == 3)
 				playerstart.y = m_mapInfo.h / 2;
 			else
-				playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
+				playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - kIslandBorder;
 		} else {
 			// X-Coordinates
 			uint8_t pos = pn[n - 1] - line[0] - line[1];
@@ -971,7 +973,7 @@ void MapGenerator::create_random_map()
 			playerstart.x *= line[2] * line[2] + 1 - pos * pos;
 			playerstart.x /= line[2] * line[2] + 1;
 			// Y-Coordinates
-			playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
+			playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - kIslandBorder;
 		}
 
 		// Now try to find a place as near as possible to the wished
@@ -1101,18 +1103,18 @@ bool UniqueRandomMapInfo::setFromIdString
 {
 	//  check string
 
-	if (mapIdString.length() != MAP_ID_DIGITS + MAP_ID_DIGITS / 4 - 1)
+	if (mapIdString.length() != kMapIdDigits + kMapIdDigits / 4 - 1)
 		return false;
 
-	for (uint32_t ix = 4; ix < MAP_ID_DIGITS; ix += 5)
+	for (uint32_t ix = 4; ix < kMapIdDigits; ix += 5)
 		if (mapIdString[ix] != '-')
 			return false;
 
 	//  convert digits to values
 
-	int32_t nums[MAP_ID_DIGITS];
+	int32_t nums[kMapIdDigits];
 
-	for (uint32_t ix = 0; ix < MAP_ID_DIGITS; ++ix) {
+	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
 		int const num = mapIdCharToNumber(mapIdString[ix + (ix / 4)]);
 		if (num < 0)
 			return false;
@@ -1121,9 +1123,9 @@ bool UniqueRandomMapInfo::setFromIdString
 
 	//  get xxor start value
 
-	int32_t xorr = nums[MAP_ID_DIGITS - 1];
+	int32_t xorr = nums[kMapIdDigits - 1];
 
-	for (int32_t ix = MAP_ID_DIGITS - 1; ix >= 0; --ix) {
+	for (int32_t ix = kMapIdDigits - 1; ix >= 0; --ix) {
 		nums[ix] = nums[ix] ^ xorr;
 		xorr -= 7;
 		xorr -= ix;
@@ -1132,15 +1134,15 @@ bool UniqueRandomMapInfo::setFromIdString
 	}
 
 	//  check if xxor was right
-	if (nums[MAP_ID_DIGITS - 1])
+	if (nums[kMapIdDigits - 1])
 		return false;
 
 	//  check if version number is 1
-	if (nums[MAP_ID_DIGITS - 2] != 1)
+	if (nums[kMapIdDigits - 2] != 1)
 		return false;
 
 	//  check if csm is right
-	if (nums[MAP_ID_DIGITS - 3] != 0x15)
+	if (nums[kMapIdDigits - 3] != 0x15)
 		return false;
 
 
@@ -1217,8 +1219,8 @@ void UniqueRandomMapInfo::generateIdString
 	assert(mapInfo.resource_amount <= Widelands::UniqueRandomMapInfo::raHigh);
 
 	mapIdsString_out = "";
-	int32_t nums[MAP_ID_DIGITS];
-	for (uint32_t ix = 0; ix < MAP_ID_DIGITS; ++ix)
+	int32_t nums[kMapIdDigits];
+	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix)
 		nums[ix] = 0;
 
 	// Generate world name hash
@@ -1261,11 +1263,11 @@ void UniqueRandomMapInfo::generateIdString
 	nums[17] = (nameHash >> 15) & 1;
 
 	//  Set id csm
-	nums[MAP_ID_DIGITS - 3] = 0x15;
+	nums[kMapIdDigits - 3] = 0x15;
 	//  Set id version number
-	nums[MAP_ID_DIGITS - 2] = 0x01;
+	nums[kMapIdDigits - 2] = 0x01;
 	//  Last number intentionally left blank
-	nums[MAP_ID_DIGITS - 1] = 0x00;
+	nums[kMapIdDigits - 1] = 0x00;
 
 
 	//  Nox xor everything
@@ -1273,10 +1275,10 @@ void UniqueRandomMapInfo::generateIdString
 	//  Every change in a digit will result in a complete id change
 
 	int32_t xorr = 0x0a;
-	for (uint32_t ix = 0; ix < MAP_ID_DIGITS; ++ix)
+	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix)
 		xorr = xorr ^ nums[ix];
 
-	for (int32_t ix = MAP_ID_DIGITS - 1; ix >= 0; --ix) {
+	for (int32_t ix = kMapIdDigits - 1; ix >= 0; --ix) {
 		nums[ix] = nums[ix] ^ xorr;
 		xorr -= 7;
 		xorr -= ix;
@@ -1285,9 +1287,9 @@ void UniqueRandomMapInfo::generateIdString
 	}
 
 	//  translate it to ASCII
-	for (uint32_t ix = 0; ix < MAP_ID_DIGITS; ++ix) {
+	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
 		mapIdsString_out += mapIdNumberToChar(nums[ix]);
-		if (ix % 4 == 3 && ix != MAP_ID_DIGITS - 1)
+		if (ix % 4 == 3 && ix != kMapIdDigits - 1)
 			mapIdsString_out += "-";
 	}
 }

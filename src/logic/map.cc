@@ -130,7 +130,7 @@ void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 	}
 
 	{ //  Now only recaluclate the overlays.
-		Overlay_Manager & om = overlay_manager();
+		OverlayManager & om = overlay_manager();
 		MapRegion<Area<FCoords> > mr(*this, area);
 		do om.recalc_field_overlays(mr.location()); while (mr.advance(*this));
 	}
@@ -411,7 +411,7 @@ void Map::set_origin(Coords const new_origin) {
 	}
 	m_port_spaces = new_port_spaces;
 
-	m_overlay_manager.reset(new Overlay_Manager());
+	m_overlay_manager.reset(new OverlayManager());
 }
 
 
@@ -434,7 +434,7 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 
 	m_pathfieldmgr->setSize(w * h);
 
-	m_overlay_manager.reset(new Overlay_Manager());
+	m_overlay_manager.reset(new OverlayManager());
 }
 
 /*

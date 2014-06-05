@@ -158,7 +158,7 @@ void Editor_Interactive::register_overlays() {
 
 	//  Resources: we do not calculate default resources, therefore we do not
 	//  expect to meet them here.
-	Overlay_Manager& overlay_manager = map.overlay_manager();
+	OverlayManager& overlay_manager = map.overlay_manager();
 	Widelands::Extent const extent = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {

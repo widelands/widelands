@@ -388,7 +388,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
    // so must be true)
 	Widelands::Editor_Game_Base & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
 	assert(start_pos);
 

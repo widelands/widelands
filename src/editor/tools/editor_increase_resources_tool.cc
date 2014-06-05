@@ -90,7 +90,7 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
                                                   Widelands::Node_and_Triangle<> const center,
                                                   Editor_Interactive& /* parent */,
                                                   Editor_Action_Args& args) {
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 			Widelands::Area<Widelands::FCoords>

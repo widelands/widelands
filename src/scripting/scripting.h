@@ -21,6 +21,7 @@
 #define SCRIPTING_H
 
 #include <map>
+#include <memory>
 #include <string>
 
 #include <stdint.h>
