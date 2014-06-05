@@ -134,6 +134,10 @@ Resource_Index TerrainDescription::get_valid_resource(uint8_t index) const {
 	return valid_resources_[index];
 }
 
+int TerrainDescription::get_num_valid_resources() const {
+	return valid_resources_.size();
+}
+
 bool TerrainDescription::is_resource_valid(const int32_t res) const {
 	for (const uint8_t resource_index : valid_resources_) {
 		if (resource_index == res) {

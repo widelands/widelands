@@ -21,6 +21,7 @@
 #define MAP_GENERATOR_H
 
 #include <memory>
+
 #include "logic/widelands_geometry.h"
 #include "logic/world/map_gen.h"
 
@@ -116,9 +117,10 @@ private:
 		 RNG                       &       rng,
 		 MapGenAreaInfo::MapGenTerrainType & terrType);
 
-	Map &                        m_map;
-	const UniqueRandomMapInfo & m_mapInfo;
-	Editor_Game_Base &           m_egbase;
+	const MapGenInfo map_gen_info_;
+	Map& map_;
+	const UniqueRandomMapInfo& map_info_;
+	Editor_Game_Base& egbase_;
 };
 
 }

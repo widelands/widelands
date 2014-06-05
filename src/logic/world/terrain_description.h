@@ -63,6 +63,9 @@ public:
 	// Returns the valid resource with the given index.
 	Resource_Index get_valid_resource(uint8_t index) const;
 
+	// Returns the number of valid resources.
+	int get_num_valid_resources() const;
+
 	// Returns true if this resource can be found in this terrain type.
 	bool is_resource_valid(int32_t res) const;
 

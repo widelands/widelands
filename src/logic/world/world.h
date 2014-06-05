@@ -33,7 +33,6 @@ class ResourceDescription;
 class TerrainDescription;
 struct Critter_Bob_Descr;
 struct Immovable_Descr;
-struct MapGenInfo;
 
 // This is the in memory descriptions of the world and provides access to
 // terrains, immovables and resources.
@@ -83,8 +82,6 @@ public:
 	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
 	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
 
-	const MapGenInfo& getMapGenInfo() const;
-
 private:
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;
 	std::unique_ptr<DescriptionMaintainer<Immovable_Descr>> immovables_;
@@ -92,7 +89,6 @@ private:
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_immovable_categories_;
-	std::unique_ptr<MapGenInfo> mapGenInfo_;
 };
 
 }  // namespace Widelands

@@ -26,7 +26,10 @@
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
+#include "logic/world/map_gen.h"
 #include "logic/world/world.h"
+#include "scripting/lua_table.h"
+#include "scripting/scripting.h"
 
 constexpr uint32_t kAverageElevation = 0x80000000;
 constexpr uint32_t kMaxElevation = 0xffffffff;
@@ -37,31 +40,7 @@ constexpr uint32_t kMaxElevationHalf = 0x80000000;
 namespace Widelands
 {
 
-// NOCOM(#sirver): remove these
-
-// World::ParseConfiguaration(LuaInterface* lua) {
-// try {
-// i18n::Textdomain textdomain("world");
-
-// std::unique_ptr<FileSystem> fs(g_fs->MakeSubFileSystem(basedir_));
-// FileSystemLayer filesystemlayer(*fs);
-
-// {
-// Profile root_conf((basedir_ + "conf").c_str());
-// parse_root_conf(name, root_conf);
-// log("Parsing world bobs...\n");
-// parse_bobs(basedir_, root_conf);
-// root_conf.check_used();
-// }
-
-// { //  General bobs mainly for scenarios
-// Profile global_root_conf("global/conf");
-// std::string global_dir = "global/bobs/";
-// log("Parsing global bobs in world...\n");
-// parse_bobs(global_dir, global_root_conf);
-// global_root_conf.check_used();
-// }
-
+	// NOCOM(#sirver): remove
 // {
 // log("Parsing map gen info...\n");
 // parse_mapgen();
@@ -77,6 +56,7 @@ namespace Widelands
 
 // snprintf(fname, sizeof(fname), "%s/mapgenconf", basedir_.c_str());
 
+// NOCOM(#sirver): these sanity checks should be kept
 // try {
 // Profile prof(fname);
 
@@ -180,12 +160,11 @@ namespace Widelands
 // }
 // }
 
-MapGenerator::MapGenerator
-	(Map & map, const UniqueRandomMapInfo & mapInfo,
-	 Editor_Game_Base & egbase)
-	: m_map(map), m_mapInfo(mapInfo), m_egbase(egbase)
-{
-
+MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, Editor_Game_Base& egbase)
+   : map_gen_info_(*egbase.lua().run_script("world/map_generation.lua"), egbase.world()),
+     map_(map),
+     map_info_(mapInfo),
+     egbase_(egbase) {
 }
 
 void MapGenerator::generate_bobs
@@ -195,16 +174,13 @@ void MapGenerator::generate_bobs
 	 MapGenAreaInfo::MapGenTerrainType const terrType)
 {
 	//  Figure out which bob area is due here...
-
-	const MapGenInfo & mapGenInfo = m_egbase.world().getMapGenInfo();
-
-	size_t num = mapGenInfo.getNumBobAreas();
+	size_t num = map_gen_info_.getNumBobAreas();
 	size_t found = num;
-	uint32_t sum_weight = mapGenInfo.getSumBobAreaWeight();
+	uint32_t sum_weight = map_gen_info_.getSumBobAreaWeight();
 	uint32_t max_val = 0;
 	for (size_t ix = 0; ix < num; ++ix) {
-		uint32_t val = random_bobs[ix][fc.x + m_mapInfo.w * fc.y];
-		val = (val / sum_weight) * mapGenInfo.getBobArea(ix).getWeight();
+		uint32_t val = random_bobs[ix][fc.x + map_info_.w * fc.y];
+		val = (val / sum_weight) * map_gen_info_.getBobArea(ix).getWeight();
 		if (val >= max_val) {
 			found = ix;
 			max_val = val;
@@ -215,7 +191,7 @@ void MapGenerator::generate_bobs
 
 	// Figure out if we really need to set a bob here...
 
-	const MapGenBobArea & bobArea = mapGenInfo.getBobArea(found);
+	const MapGenBobArea & bobArea = map_gen_info_.getBobArea(found);
 
 	const MapGenBobKind * bobKind = bobArea.getBobKind(terrType);
 
@@ -240,101 +216,100 @@ void MapGenerator::generate_bobs
 	// Set bob according to bob area
 
 	if (set_immovable and (num = bobKind->getNumImmovableBobs()))
-		m_egbase.create_immovable
+		egbase_.create_immovable
 			(fc,
 			 bobKind->getImmovableBob
 			 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
 			 nullptr);
 
 	if (set_moveable and (num = bobKind->getNumMoveableBobs()))
-		m_egbase.create_bob
+		egbase_.create_bob
 			(fc,
-			 m_egbase.world().get_bob
+			 egbase_.world().get_bob
 			 	(bobKind->getMoveableBob
 			 	 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
 			 	 .c_str()),
 			 nullptr);
 }
 
-// TODO(sirver): this should most certainly be a function.
-#define set_resource_helper(rnd1, res)                                                             \
-	{                                                                                               \
-		Resource_Index const res_idx = terr.get_valid_resource(res);                                 \
-		uint32_t const max_amount = m_egbase.world().get_resource(res_idx)->max_amount();            \
-		uint8_t res_val = static_cast<uint8_t>(rnd1 / (kMaxElevation / max_amount));                 \
-		res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;                              \
-		res_val /= 3;                                                                                \
-		if (Editor_Change_Resource_Tool_Callback(fc, m_map, res_idx)) {                              \
-			fc.field->set_resources(res_idx, res_val);                                                \
-			fc.field->set_starting_res_amount(res_val);                                               \
-		}                                                                                            \
-	}
-
-void MapGenerator::generate_resources
-	(uint32_t            const * const random1,
-	 uint32_t            const * const random2,
-	 uint32_t            const * const random3,
-	 uint32_t            const * const random4,
-	 FCoords                     const fc)
-{
+void MapGenerator::generate_resources(uint32_t const* const random1,
+                                      uint32_t const* const random2,
+                                      uint32_t const* const random3,
+                                      uint32_t const* const random4,
+                                      FCoords const fc) {
 	// We'll take the "D" terrain at first...
 	// TODO: Check how the editor handles this...
 
-	// NOCOM(#sirver): broke this. Seems horrible.
-	// Terrain_Index const tix = fc.field->get_terrains().d;
-	// const TerrainDescription & terr = m_egbase.world().get_ter(tix);
-	// switch (terr.get_num_valid_resources()) {
-	// case 1: {
-		// uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
-		// set_resource_helper(rnd1, 0);
-		// break;
-	// }
-	// case 2: {
-		// uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
-		// uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
-		// if (rnd1 > rnd2) {
-			// set_resource_helper(rnd1, 0)
-		// } else
-			// set_resource_helper(rnd2, 1);
-		// break;
-	// }
-	// case 3: {
-		// uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
-		// uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
-		// uint32_t const rnd3 = random3[fc.x + m_mapInfo.w * fc.y];
-		// if        (rnd1 > rnd2 && rnd1 > rnd3) {
-			// set_resource_helper(rnd1, 0);
-		// } else if (rnd2 > rnd1 && rnd2 > rnd3) {
-			// set_resource_helper(rnd2, 1);
-		// } else
-			// set_resource_helper(rnd3, 2);
-		// break;
-	// }
-	// case 4: {
-		// uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
-		// uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
-		// uint32_t const rnd3 = random3[fc.x + m_mapInfo.w * fc.y];
-		// uint32_t const rnd4 = random4[fc.x + m_mapInfo.w * fc.y];
-		// if        (rnd1 > rnd2 && rnd1 > rnd3 && rnd1 > rnd4) {
-			// set_resource_helper(rnd1, 0);
-		// } else if (rnd2 > rnd1 && rnd2 > rnd3 && rnd2 > rnd4) {
-			// set_resource_helper(rnd2, 1);
-		// } else if (rnd3 > rnd1 && rnd3 > rnd2 && rnd3 > rnd4) {
-			// set_resource_helper(rnd3, 2);
-		// } else
-			// set_resource_helper(rnd4, 3);
-		// break;
-	// }
-	// default:
-		// break; // currently mountains have the maximum of allowed resources, which is 4
-	// }
+	const World& world = egbase_.world();
+	Terrain_Index const tix = fc.field->get_terrains().d;
+	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
+
+	const auto set_resource_helper = [this, &world, &terrain_description, &fc] (
+	   const uint32_t random_value, const int valid_resource_index) {
+		const Resource_Index  res_idx = terrain_description.get_valid_resource(valid_resource_index);
+		const uint32_t max_amount = world.get_resource(res_idx)->max_amount();
+		uint8_t res_val = static_cast<uint8_t>(random_value / (kMaxElevation / max_amount));
+		res_val *= static_cast<uint8_t>(map_info_.resource_amount) + 1;
+		res_val /= 3;
+		if (Editor_Change_Resource_Tool_Callback(fc, map_, world, res_idx)) {
+			fc.field->set_resources(res_idx, res_val);
+			fc.field->set_starting_res_amount(res_val);
+		}
+	};
+
+	switch (terrain_description.get_num_valid_resources()) {
+	case 1: {
+		uint32_t const rnd1 = random1[fc.x + map_info_.w * fc.y];
+		set_resource_helper(rnd1, 0);
+		break;
+	}
+	case 2: {
+		uint32_t const rnd1 = random1[fc.x + map_info_.w * fc.y];
+		uint32_t const rnd2 = random2[fc.x + map_info_.w * fc.y];
+		if (rnd1 > rnd2) {
+			set_resource_helper(rnd1, 0);
+		} else
+			set_resource_helper(rnd2, 1);
+		break;
+	}
+	case 3: {
+		uint32_t const rnd1 = random1[fc.x + map_info_.w * fc.y];
+		uint32_t const rnd2 = random2[fc.x + map_info_.w * fc.y];
+		uint32_t const rnd3 = random3[fc.x + map_info_.w * fc.y];
+		if (rnd1 > rnd2 && rnd1 > rnd3) {
+			set_resource_helper(rnd1, 0);
+		} else if (rnd2 > rnd1 && rnd2 > rnd3) {
+			set_resource_helper(rnd2, 1);
+		} else
+			set_resource_helper(rnd3, 2);
+		break;
+	}
+	case 4: {
+		uint32_t const rnd1 = random1[fc.x + map_info_.w * fc.y];
+		uint32_t const rnd2 = random2[fc.x + map_info_.w * fc.y];
+		uint32_t const rnd3 = random3[fc.x + map_info_.w * fc.y];
+		uint32_t const rnd4 = random4[fc.x + map_info_.w * fc.y];
+		if (rnd1 > rnd2 && rnd1 > rnd3 && rnd1 > rnd4) {
+			set_resource_helper(rnd1, 0);
+		} else if (rnd2 > rnd1 && rnd2 > rnd3 && rnd2 > rnd4) {
+			set_resource_helper(rnd2, 1);
+		} else if (rnd3 > rnd1 && rnd3 > rnd2 && rnd3 > rnd4) {
+			set_resource_helper(rnd3, 2);
+		} else
+			set_resource_helper(rnd4, 3);
+		break;
+	}
+	default:
+		break;
+		// currently mountains have the maximum of allowed resources, which is 4
+	}
 }
 
 /// Translates a random value into a map node height. This method is used
 /// within the random map generation methods.
 ///
 /// \param elevation Random value.
-/// \param mapGenInfo Map generator information used to translate random values
+/// \param map_gen_info_ Map generator information used to translate random values
 /// to height information (world specific info).
 /// \param c position within map
 /// \param mapInfo Information about the random map currently begin created
@@ -345,14 +320,12 @@ uint8_t MapGenerator::make_node_elevation
 	(double                      const elevation,
 	 Coords                      const c)
 {
-	const MapGenInfo & mapGenInfo = m_egbase.world().getMapGenInfo();
+	int32_t const water_h  = map_gen_info_.getWaterShallowHeight();
+	int32_t const mount_h  = map_gen_info_.getMountainFootHeight();
+	int32_t const summit_h = map_gen_info_.getSummitHeight      ();
 
-	int32_t const water_h  = mapGenInfo.getWaterShallowHeight();
-	int32_t const mount_h  = mapGenInfo.getMountainFootHeight();
-	int32_t const summit_h = mapGenInfo.getSummitHeight      ();
-
-	double const water_fac = m_mapInfo.waterRatio;
-	double const land_fac  = m_mapInfo.landRatio;
+	double const water_fac = map_info_.waterRatio;
+	double const land_fac  = map_info_.landRatio;
 
 	uint8_t res_h =
 		elevation < water_fac            ? water_h :
@@ -366,11 +339,11 @@ uint8_t MapGenerator::make_node_elevation
 			(summit_h - mount_h);
 
 	//  Handle Map Border in island mode
-	if (m_mapInfo.islandMode) {
+	if (map_info_.islandMode) {
 		int32_t const border_dist =
 			std::min
-				(std::min<X_Coordinate>(c.x, m_mapInfo.w - c.x),
-				 std::min<Y_Coordinate>(c.y, m_mapInfo.h - c.y));
+				(std::min<X_Coordinate>(c.x, map_info_.w - c.x),
+				 std::min<Y_Coordinate>(c.y, map_info_.h - c.y));
 		if (border_dist <= kIslandBorder) {
 			res_h =
 				static_cast<uint8_t>
@@ -565,7 +538,7 @@ uint32_t * MapGenerator::generate_random_value_map
 ===============
 Figures out terrain info for a field in a random map.
 
-mapGenInfo:  Map generator information used to translate
+map_gen_info_:  Map generator information used to translate
              Random values to height information (world-
              specific info)
 x, y:        first coordinate of the current triangle
@@ -594,60 +567,58 @@ Terrain_Index MapGenerator::figure_out_terrain
 	 RNG                       &       rng,
 	 MapGenAreaInfo::MapGenTerrainType & terrType)
 {
-	const MapGenInfo & mapGenInfo = m_egbase.world().getMapGenInfo();
-
 	uint32_t       numLandAreas      =
-		mapGenInfo.getNumAreas(MapGenAreaInfo::atLand);
+		map_gen_info_.getNumAreas(MapGenAreaInfo::atLand);
 	uint32_t const numWasteLandAreas =
-		mapGenInfo.getNumAreas(MapGenAreaInfo::atWasteland);
+		map_gen_info_.getNumAreas(MapGenAreaInfo::atWasteland);
 
 	bool isDesert  = false;
 	bool isDesertOuter = false;
 	uint32_t landAreaIndex = 0;
 
 	uint32_t rand2 =
-		random2[c0.x + m_mapInfo.w * c0.y] / 3 +
-		random2[c1.x + m_mapInfo.w * c1.y] / 3 +
-		random2[c2.x + m_mapInfo.w * c2.y] / 3;
+		random2[c0.x + map_info_.w * c0.y] / 3 +
+		random2[c1.x + map_info_.w * c1.y] / 3 +
+		random2[c2.x + map_info_.w * c2.y] / 3;
 	uint32_t rand3 =
-		random3[c0.x + m_mapInfo.w * c0.y] / 3 +
-		random3[c1.x + m_mapInfo.w * c1.y] / 3 +
-		random3[c2.x + m_mapInfo.w * c2.y] / 3;
+		random3[c0.x + map_info_.w * c0.y] / 3 +
+		random3[c1.x + map_info_.w * c1.y] / 3 +
+		random3[c2.x + map_info_.w * c2.y] / 3;
 	uint32_t rand4 =
-		random4[c0.x + m_mapInfo.w * c0.y] / 3 +
-		random4[c1.x + m_mapInfo.w * c1.y] / 3 +
-		random4[c2.x + m_mapInfo.w * c2.y] / 3;
+		random4[c0.x + map_info_.w * c0.y] / 3 +
+		random4[c1.x + map_info_.w * c1.y] / 3 +
+		random4[c2.x + map_info_.w * c2.y] / 3;
 
 	//  At first we figure out if it is wasteland or not.
 
 	if        (numWasteLandAreas == 0) {
 	} else if (numWasteLandAreas == 1) {
-		if (rand4 < (kAverageElevation * m_mapInfo.wastelandRatio)) {
+		if (rand4 < (kAverageElevation * map_info_.wastelandRatio)) {
 			numLandAreas = numWasteLandAreas;
 			isDesert = true;
 			isDesertOuter =
-				rand4 > (kAverageElevation * m_mapInfo.wastelandRatio / 4) * 3;
+				rand4 > (kAverageElevation * map_info_.wastelandRatio / 4) * 3;
 			landAreaIndex = 0;
 		}
 	} else {
-		if (rand4<(kAverageElevation * m_mapInfo.wastelandRatio * 0.5)) {
+		if (rand4<(kAverageElevation * map_info_.wastelandRatio * 0.5)) {
 			numLandAreas = numWasteLandAreas;
 			isDesert = true;
 			isDesertOuter =
-				rand4 > (kAverageElevation * m_mapInfo.wastelandRatio * 0.5 / 4) * 3;
+				rand4 > (kAverageElevation * map_info_.wastelandRatio * 0.5 / 4) * 3;
 			landAreaIndex = 0;
 		}
 		else if
 			(rand4
 			 >
-			 (kMaxElevation - kAverageElevation * m_mapInfo.wastelandRatio * 0.5))
+			 (kMaxElevation - kAverageElevation * map_info_.wastelandRatio * 0.5))
 		{
 			numLandAreas = numWasteLandAreas;
 			isDesert = true;
 			isDesertOuter =
 				rand4
 				<
-				1 - kAverageElevation * m_mapInfo.wastelandRatio * 0.5 / 4 * 3;
+				1 - kAverageElevation * map_info_.wastelandRatio * 0.5 / 4 * 3;
 			landAreaIndex = 1;
 		}
 	}
@@ -661,12 +632,12 @@ Terrain_Index MapGenerator::figure_out_terrain
 			landAreaIndex = 0;
 		else if (numLandAreas == 2) {
 			uint32_t const weight1 =
-				mapGenInfo.getArea(MapGenAreaInfo::atLand, 0).getWeight();
+				map_gen_info_.getArea(MapGenAreaInfo::atLand, 0).getWeight();
 			uint32_t const weight2 =
-				mapGenInfo.getArea(MapGenAreaInfo::atLand, 1).getWeight();
-			uint32_t const sum     = mapGenInfo.getSumLandWeight();
+				map_gen_info_.getArea(MapGenAreaInfo::atLand, 1).getWeight();
+			uint32_t const sum     = map_gen_info_.getSumLandWeight();
 			if
-				(weight1 * (random2[c0.x + m_mapInfo.w * c0.y] / sum)
+				(weight1 * (random2[c0.x + map_info_.w * c0.y] / sum)
 				 >=
 				 weight2 * (kAverageElevation / sum))
 				landAreaIndex = 0;
@@ -674,12 +645,12 @@ Terrain_Index MapGenerator::figure_out_terrain
 				landAreaIndex = 1;
 		} else {
 			uint32_t const weight1 =
-				mapGenInfo.getArea(MapGenAreaInfo::atLand, 0).getWeight();
+				map_gen_info_.getArea(MapGenAreaInfo::atLand, 0).getWeight();
 			uint32_t const weight2 =
-				mapGenInfo.getArea(MapGenAreaInfo::atLand, 1).getWeight();
+				map_gen_info_.getArea(MapGenAreaInfo::atLand, 1).getWeight();
 			uint32_t const weight3 =
-				mapGenInfo.getArea(MapGenAreaInfo::atLand, 2).getWeight();
-			uint32_t const sum     = mapGenInfo.getSumLandWeight();
+				map_gen_info_.getArea(MapGenAreaInfo::atLand, 2).getWeight();
+			uint32_t const sum     = map_gen_info_.getSumLandWeight();
 			uint32_t const randomX = (rand2 + rand3) / 2;
 			if
 				(weight1 * (rand2 / sum) > weight2 * (rand3   / sum) &&
@@ -702,14 +673,14 @@ Terrain_Index MapGenerator::figure_out_terrain
 
 	//  see whether it is water
 
-	uint32_t const coast_h   = mapGenInfo.getLandCoastHeight();
+	uint32_t const coast_h   = map_gen_info_.getLandCoastHeight();
 	if (h1 <= coast_h && h2 <= coast_h && h3 <= coast_h) { //  water or coast...
 		atp = MapGenAreaInfo::atLand;
 		ttp = MapGenAreaInfo::ttLandCoast;
 
-		uint32_t const ocean_h   = mapGenInfo.getWaterOceanHeight();
-		uint32_t const shelf_h   = mapGenInfo.getWaterShelfHeight();
-		uint32_t const shallow_h = mapGenInfo.getWaterShallowHeight();
+		uint32_t const ocean_h   = map_gen_info_.getWaterOceanHeight();
+		uint32_t const shelf_h   = map_gen_info_.getWaterShelfHeight();
+		uint32_t const shallow_h = map_gen_info_.getWaterShallowHeight();
 
 		//  TODO: The heights can not be lower than water-Shallow --
 		//  TODO: there will never be an ocean yet
@@ -725,10 +696,10 @@ Terrain_Index MapGenerator::figure_out_terrain
 			ttp = MapGenAreaInfo::ttWaterShallow;
 		}
 	} else { //  it is not water
-		uint32_t const upper_h = mapGenInfo.getLandUpperHeight   ();
-		uint32_t const foot_h  = mapGenInfo.getMountainFootHeight();
-		uint32_t const mount_h = mapGenInfo.getMountainHeight    ();
-		uint32_t const snow_h  = mapGenInfo.getSnowHeight        ();
+		uint32_t const upper_h = map_gen_info_.getLandUpperHeight   ();
+		uint32_t const foot_h  = map_gen_info_.getMountainFootHeight();
+		uint32_t const mount_h = map_gen_info_.getMountainHeight    ();
+		uint32_t const snow_h  = map_gen_info_.getSnowHeight        ();
 		if        (h1 >= snow_h  && h2 >= snow_h  && h3 >= snow_h)  {
 			atp = MapGenAreaInfo::atMountains;
 			ttp = MapGenAreaInfo::ttMountainsSnow;
@@ -761,11 +732,11 @@ Terrain_Index MapGenerator::figure_out_terrain
 
 	//  Figure out which terrain to use at this point in the map...
 	return
-		mapGenInfo.getArea(atp, usedLandIndex).getTerrain
+		map_gen_info_.getArea(atp, usedLandIndex).getTerrain
 			(ttp,
 			 rng.rand()
 			 %
-			 mapGenInfo.getArea(atp, usedLandIndex).getNumTerrains(ttp));
+			 map_gen_info_.getArea(atp, usedLandIndex).getNumTerrains(ttp));
 
 }
 
@@ -778,58 +749,55 @@ void MapGenerator::create_random_map()
 	//  someone else...
 	RNG rng;
 
-	rng.seed(m_mapInfo.mapNumber);
-
-	//  get world generator info
-	const MapGenInfo & mapGenInfo = m_egbase.world().getMapGenInfo();
+	rng.seed(map_info_.mapNumber);
 
 	//  Create a "raw" random elevation matrix.
 	//  We will transform this into reasonable elevations and terrains later on.
 
 	std::unique_ptr<uint32_t[]> elevations
-		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+		(generate_random_value_map(map_info_.w, map_info_.h, rng));
 
 	//  for land stuff
 	std::unique_ptr<uint32_t[]> random2
-		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+		(generate_random_value_map(map_info_.w, map_info_.h, rng));
 	std::unique_ptr<uint32_t[]> random3
-		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+		(generate_random_value_map(map_info_.w, map_info_.h, rng));
 
 	//  for desert/land
 	std::unique_ptr<uint32_t[]> random4
-		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+		(generate_random_value_map(map_info_.w, map_info_.h, rng));
 
 	// for resources
 	std::unique_ptr<uint32_t[]> random_rsrc_1
-		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+		(generate_random_value_map(map_info_.w, map_info_.h, rng));
 	std::unique_ptr<uint32_t[]> random_rsrc_2
-		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+		(generate_random_value_map(map_info_.w, map_info_.h, rng));
 	std::unique_ptr<uint32_t[]> random_rsrc_3
-		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+		(generate_random_value_map(map_info_.w, map_info_.h, rng));
 	std::unique_ptr<uint32_t[]> random_rsrc_4
-		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+		(generate_random_value_map(map_info_.w, map_info_.h, rng));
 
 	// for bobs
 	std::unique_ptr<std::unique_ptr<uint32_t[]> []> random_bobs
-		(new std::unique_ptr<uint32_t[]> [mapGenInfo.getNumBobAreas()]);
+		(new std::unique_ptr<uint32_t[]> [map_gen_info_.getNumBobAreas()]);
 
-	for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ++ix)
+	for (size_t ix = 0; ix < map_gen_info_.getNumBobAreas(); ++ix)
 		random_bobs[ix].reset
-			(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
+			(generate_random_value_map(map_info_.w, map_info_.h, rng));
 
 	//  Now we have generated a lot of random data!!
 	//  Lets use it !!!
-	iterate_Map_FCoords(m_map, m_mapInfo, fc)
+	iterate_Map_FCoords(map_, map_info_, fc)
 		fc.field->set_height
 			(make_node_elevation
-				(static_cast<double>(elevations[fc.x + m_mapInfo.w * fc.y])
+				(static_cast<double>(elevations[fc.x + map_info_.w * fc.y])
 				 /
 				 static_cast<double>(kMaxElevation),
 				 fc));
 
 	//  Now lets set the terrain right according to the heights.
 
-	iterate_Map_FCoords(m_map, m_mapInfo, fc) {
+	iterate_Map_FCoords(map_, map_info_, fc) {
 		//  Calculate coordinates of left and bottom left neighbours of the
 		//  current node.
 
@@ -841,22 +809,22 @@ void MapGenerator::create_random_map()
 		uint32_t lower_x       = fc.x - x_dec;
 		uint32_t lower_right_x = fc.x - x_dec + 1;
 
-		if       (lower_x >  m_mapInfo.w)       lower_x += m_mapInfo.w;
-		if       (right_x >= m_mapInfo.w)       right_x -= m_mapInfo.w;
-		if       (lower_x >= m_mapInfo.w)       lower_x -= m_mapInfo.w;
-		if (lower_right_x >= m_mapInfo.w) lower_right_x -= m_mapInfo.w;
-		if       (lower_y >= m_mapInfo.h)       lower_y -= m_mapInfo.h;
+		if       (lower_x >  map_info_.w)       lower_x += map_info_.w;
+		if       (right_x >= map_info_.w)       right_x -= map_info_.w;
+		if       (lower_x >= map_info_.w)       lower_x -= map_info_.w;
+		if (lower_right_x >= map_info_.w) lower_right_x -= map_info_.w;
+		if       (lower_y >= map_info_.h)       lower_y -= map_info_.h;
 
 		//  get the heights of my neighbour nodes and of my current node
 
 		uint8_t height_x0_y0 =
 			fc.field                            ->get_height();
 		uint8_t height_x1_y0 =
-			m_map[Coords(right_x,          fc.y)].get_height();
+			map_[Coords(right_x,          fc.y)].get_height();
 		uint8_t height_x0_y1 =
-			m_map[Coords(lower_x,       lower_y)].get_height();
+			map_[Coords(lower_x,       lower_y)].get_height();
 		uint8_t height_x1_y1 =
-			m_map[Coords(lower_right_x, lower_y)].get_height();
+			map_[Coords(lower_right_x, lower_y)].get_height();
 
 		MapGenAreaInfo::MapGenTerrainType terrType;
 
@@ -885,52 +853,52 @@ void MapGenerator::create_random_map()
 	}
 
 	//  Aftermaths...
-	m_map.recalc_whole_map(m_egbase.world());
+	map_.recalc_whole_map(egbase_.world());
 
 	// Care about players and place their start positions
-	const std::string tribe = m_map.get_scenario_player_tribe(1);
-	const std::string ai    = m_map.get_scenario_player_ai(1);
-	m_map.set_nrplayers(m_mapInfo.numPlayers);
+	const std::string tribe = map_.get_scenario_player_tribe(1);
+	const std::string ai    = map_.get_scenario_player_ai(1);
+	map_.set_nrplayers(map_info_.numPlayers);
 	FindNodeSize functor(FindNodeSize::sizeBig);
 	Coords playerstart;
 
 	// Build a basic structure how player start positions are placed
 	uint8_t line[3];
 	uint8_t rows = 1, lines = 1;
-	if (m_mapInfo.numPlayers > 1) {
+	if (map_info_.numPlayers > 1) {
 		++lines;
-		if (m_mapInfo.numPlayers > 2) {
+		if (map_info_.numPlayers > 2) {
 			++rows;
-			if (m_mapInfo.numPlayers > 4) {
+			if (map_info_.numPlayers > 4) {
 				++lines;
-				if (m_mapInfo.numPlayers > 6) {
+				if (map_info_.numPlayers > 6) {
 					++rows;
 				}
 			}
 		}
 	}
 	line[0] = line[1] = line[2] = rows;
-	if (rows * lines > m_mapInfo.numPlayers) {
+	if (rows * lines > map_info_.numPlayers) {
 		--line[1];
-		if (rows * lines - 1 > m_mapInfo.numPlayers)
+		if (rows * lines - 1 > map_info_.numPlayers)
 			--line[2];
 	}
 
 	// Random placement of starting positions
-	assert(m_mapInfo.numPlayers);
-	std::vector<Player_Number> pn(m_mapInfo.numPlayers);
-	for (Player_Number n = 1; n <= m_mapInfo.numPlayers; ++n) {
+	assert(map_info_.numPlayers);
+	std::vector<Player_Number> pn(map_info_.numPlayers);
+	for (Player_Number n = 1; n <= map_info_.numPlayers; ++n) {
 		bool okay = false;
 		// This is a kinda dump algorithm -> we generate a random number and increase it until it fits.
 		// However it's working and simple ;) - if you've got a better idea, feel free to fix it.
-		Player_Number x = rng.rand() % m_mapInfo.numPlayers;
+		Player_Number x = rng.rand() % map_info_.numPlayers;
 		while (!okay) {
 			okay = true;
 			++x; // Player_Number begins at 1 not at 0
 			for (Player_Number p = 1; p < n; ++p) {
 				if (pn[p - 1] == x) {
 					okay = false;
-					x = x % m_mapInfo.numPlayers;
+					x = x % map_info_.numPlayers;
 					break;
 				}
 			}
@@ -938,56 +906,56 @@ void MapGenerator::create_random_map()
 		pn[n - 1] = x;
 	}
 
-	for (Player_Number n = 1; n <= m_mapInfo.numPlayers; ++n) {
+	for (Player_Number n = 1; n <= map_info_.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
-		m_map.set_scenario_player_name(n, "Random Player");
-		m_map.set_scenario_player_tribe(n, tribe);
-		m_map.set_scenario_player_ai(n, ai);
-		m_map.set_scenario_player_closeable(n, false);
+		map_.set_scenario_player_name(n, "Random Player");
+		map_.set_scenario_player_tribe(n, tribe);
+		map_.set_scenario_player_ai(n, ai);
+		map_.set_scenario_player_closeable(n, false);
 
 		// Calculate wished coords for player starting position
 		if (line[0] + 1 > pn[n - 1]) {
 			// X-Coordinates
-			playerstart.x  = m_mapInfo.w * (line[0] * line[0] + 1 - pn[n - 1] * pn[n - 1]);
+			playerstart.x  = map_info_.w * (line[0] * line[0] + 1 - pn[n - 1] * pn[n - 1]);
 			playerstart.x /= line[0] * line[0] + 1;
 			// Y-Coordinates
 			if (lines == 1)
-				playerstart.y = m_mapInfo.h / 2;
+				playerstart.y = map_info_.h / 2;
 			else
-				playerstart.y = m_mapInfo.h / 7 + kIslandBorder;
+				playerstart.y = map_info_.h / 7 + kIslandBorder;
 		} else if (line[0] + line[1] + 1 > pn[n - 1]) {
 			// X-Coordinates
 			uint8_t pos = pn[n - 1] - line[0];
-			playerstart.x  = m_mapInfo.w;
+			playerstart.x  = map_info_.w;
 			playerstart.x *= line[1] * line[1] + 1 - pos * pos;
 			playerstart.x /= line[1] * line[1] + 1;
 			// Y-Coordinates
 			if (lines == 3)
-				playerstart.y = m_mapInfo.h / 2;
+				playerstart.y = map_info_.h / 2;
 			else
-				playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - kIslandBorder;
+				playerstart.y = map_info_.h - map_info_.h / 7 - kIslandBorder;
 		} else {
 			// X-Coordinates
 			uint8_t pos = pn[n - 1] - line[0] - line[1];
-			playerstart.x  = m_mapInfo.w;
+			playerstart.x  = map_info_.w;
 			playerstart.x *= line[2] * line[2] + 1 - pos * pos;
 			playerstart.x /= line[2] * line[2] + 1;
 			// Y-Coordinates
-			playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - kIslandBorder;
+			playerstart.y = map_info_.h - map_info_.h / 7 - kIslandBorder;
 		}
 
 		// Now try to find a place as near as possible to the wished
 		// starting position
 		std::vector<Coords> coords;
-		m_map.find_fields
-			(Area<FCoords>(m_map.get_fcoords(playerstart), 20),
+		map_.find_fields
+			(Area<FCoords>(map_.get_fcoords(playerstart), 20),
 			 &coords, functor);
 
 		// Take the nearest ones
 		uint32_t min_distance = -1;
 		Coords coords2;
 		for (uint16_t i = 0; i < coords.size(); ++i) {
-			uint32_t test = m_map.calc_distance(coords[i], playerstart);
+			uint32_t test = map_.calc_distance(coords[i], playerstart);
 			if (test < min_distance) {
 				min_distance = test;
 				coords2 = coords[i];
@@ -1002,7 +970,7 @@ void MapGenerator::create_random_map()
 		}
 
 		// Finally set the found starting position
-		m_map.set_starting_pos(n, coords2);
+		map_.set_starting_pos(n, coords2);
 	}
 }
 

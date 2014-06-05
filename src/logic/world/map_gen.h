@@ -26,8 +26,8 @@
 
 #include "logic/world/terrain_description.h"
 
-class Section;
-class Profile;
+// NOCOM(#sirver): remove
+class LuaTable;
 
 namespace Widelands {
 
@@ -37,9 +37,6 @@ struct MapGenInfo;
 /// Holds world and area specific information for the map generator.
 /// Areas are: Water, Land, Wasteland and Mountains.
 struct MapGenAreaInfo {
-	// NOCOM(#sirver): kill
-	static int split_string(std::vector<std::string> & strs, std::string & str);
-
 	// NOCOM(#sirver): convert to enum class
 	enum MapGenAreaType {
 		atWater,
@@ -65,7 +62,8 @@ struct MapGenAreaInfo {
 		ttMountainsSnow
 	};
 
-	void parseSection (World *, Section &, MapGenAreaType areaType);
+	MapGenAreaInfo(const LuaTable& table, const World& world, MapGenAreaType areaType);
+
 	size_t getNumTerrains(MapGenTerrainType) const;
 	Terrain_Index getTerrain(MapGenTerrainType terrType, uint32_t index) const;
 	uint32_t getWeight() const {return m_weight;}
@@ -73,23 +71,19 @@ struct MapGenAreaInfo {
 private:
 
 	void readTerrains
-		(std::vector<Terrain_Index> & list, Section &, char const * value_name);
+		(const LuaTable& table, std::vector<Terrain_Index> & list, char const * value_name);
 
 	std::vector<Terrain_Index>  m_Terrains1; //  ocean, coast, inner or foot
 	std::vector<Terrain_Index>  m_Terrains2; //  shelf, land, outer or mountain
 	std::vector<Terrain_Index>  m_Terrains3; //  shallow, upper, snow
 
 	uint32_t m_weight;
-
 	MapGenAreaType m_areaType;
-
-	World * m_world;
-
+	const World& m_world;
 };
 
 struct MapGenBobKind {
-
-	void parseSection (Section &);
+	MapGenBobKind(const LuaTable& table);
 
 	size_t getNumImmovableBobs() const {return m_ImmovableBobs.size();}
 	size_t getNumMoveableBobs() const {return m_MoveableBobs.size();}
@@ -108,8 +102,7 @@ private:
 };
 
 struct MapGenBobArea {
-
-	void parseSection (Section &, MapGenInfo & mapGenInfo);
+	MapGenBobArea(const LuaTable& table, MapGenInfo& mapGenInfo);
 
 	uint32_t getWeight() const {return weight_;};
 	const MapGenBobKind * getBobKind
@@ -135,8 +128,7 @@ private:
   * This info is usually read from the file "mapgeninfo" of a world.
   */
 struct MapGenInfo {
-
-	void parseProfile(World * world, Profile & profile);
+	MapGenInfo(const LuaTable& table, const World& world);
 
 	size_t getNumAreas(MapGenAreaInfo::MapGenAreaType areaType) const;
 	const MapGenAreaInfo & getArea
@@ -161,8 +153,7 @@ struct MapGenInfo {
 	uint32_t getSumBobAreaWeight() const;
 
 private:
-
-	World * m_world;
+	const World& m_world;
 
 	std::vector<MapGenAreaInfo> m_WaterAreas;
 	std::vector<MapGenAreaInfo> m_LandAreas;

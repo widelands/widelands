@@ -29,7 +29,6 @@
 #include "logic/immovable.h"
 #include "logic/widelands.h"
 #include "logic/world/editor_category.h"
-#include "logic/world/map_gen.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
 
@@ -41,8 +40,7 @@ World::World()
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
      editor_terrain_categories_(new DescriptionMaintainer<EditorCategory>()),
-     editor_immovable_categories_(new DescriptionMaintainer<EditorCategory>()),
-     mapGenInfo_(new MapGenInfo()) {
+     editor_immovable_categories_(new DescriptionMaintainer<EditorCategory>()) {
 }
 
 World::~World() {
@@ -94,10 +92,6 @@ int32_t World::safe_resource_index(const char* const resourcename) const {
 	if (result == INVALID_INDEX)
 		throw game_data_error("world does not define resource type \"%s\"", resourcename);
 	return result;
-}
-
-const MapGenInfo& World::getMapGenInfo() const {
-	return *mapGenInfo_;
 }
 
 TerrainDescription& World::terrain_descr(Terrain_Index const i) const {
