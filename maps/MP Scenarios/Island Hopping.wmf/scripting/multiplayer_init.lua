@@ -240,7 +240,7 @@ function initialize()
 
    send_to_all(welcome_msg)
    -- set the objective with the game type for all players
-   -- TODO change this to a broadcast once individual game objectives have been implementes
+   -- TODO change this to a broadcast once individual game objectives have been implemented
    game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg)
 
    for idx,plr in ipairs(game.players) do
