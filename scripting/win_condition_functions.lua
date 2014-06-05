@@ -128,16 +128,16 @@ end
 
 
 -- RST
--- .. function:: broadcast_objective(plrs, header, msg, body)
---
---    :arg plrs:    This should be wl.Game().players
---    :arg name:    A unique name for the objective
---    :arg title:   The title to be displayed for the objective
---    :arg body:    The content text to be displayed for the objective
+-- .. function:: broadcast_objective(header, msg, body)
 --
 --    broadcast an objective to all players
 --    technically, it is assigned to player1, because all players will see all objectives
-function broadcast_objective(plrs, name, title, body)
+--
+--    :arg name:    A unique name for the objective
+--    :arg title:   The title to be displayed for the objective
+--    :arg body:    The content text to be displayed for the objective
+function broadcast_objective(name, title, body)
+	local plrs = wl.Game().players
 	plrs[1]:add_objective(name, title, body)
 end
 

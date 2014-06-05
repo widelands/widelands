@@ -19,7 +19,7 @@ return {
 		local plrs = wl.Game().players
 
 		-- set the objective with the game type for all players
-		broadcast_objective(plrs, "win_condition", wc_name, wc_desc)
+		broadcast_objective("win_condition", wc_name, wc_desc)
 
 		-- reveal the whole map for every player
 		local game = wl.Game()

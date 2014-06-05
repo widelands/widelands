@@ -24,7 +24,7 @@ return {
 		local plrs = wl.Game().players
 
 		-- set the objective with the game type for all players
-		broadcast_objective(plrs, "win_condition", wc_name, wc_desc)
+		broadcast_objective("win_condition", wc_name, wc_desc)
 
 	local remaining_time = 4 * 60 -- 4 hours
 

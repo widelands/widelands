@@ -19,7 +19,7 @@ return {
 		local plrs = wl.Game().players
 
 		-- set the objective with the game type for all players
-		broadcast_objective(plrs, "win_condition", wc_name, wc_desc)
+		broadcast_objective("win_condition", wc_name, wc_desc)
 
 		-- Iterate all players, if one is defeated, remove him
 		-- from the list, send him a defeated message and give him full vision
