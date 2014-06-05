@@ -553,6 +553,7 @@ set(WL_SRCS
   graphic/render/sdl_helper.h
   graphic/render/sdl_surface.h
   graphic/render/terrain_sdl.h
+  graphic/render/vertex.h
   graphic/rendertarget.h
   graphic/richtext.h
   graphic/surface.h
@@ -777,7 +778,6 @@ set(WL_SRCS
   upcast.h
   utf8.h
   vector.h
-  vertex.h
   wlapplication.h
   workarea_info.h
   wui/actionconfirm.h
