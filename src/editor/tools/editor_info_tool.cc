@@ -51,7 +51,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	// *** Node info
 	std::string buf = _("Node:");
 	buf += "\n";
-	buf += std::string("• ") + (boost::format(_("Coordinates: (%1$i, %2$i)"))
+	buf += "• " + (boost::format(_("Coordinates: (%1$i, %2$i)"))
 					 % center.node.x % center.node.y).str() + "\n";
 
 	std::string temp = "";
@@ -89,10 +89,10 @@ int32_t Editor_Info_Tool::handle_click_impl
 	}
 
 	temp = f.get_immovable() ? _("Has base immovable") : _("No base immovable");
-	buf += std::string("• ") + temp + "\n";
+	buf += "• " + temp + "\n";
 
 	temp = f.get_first_bob() ? _("Has bobs") : _("No bobs");
-	buf += std::string("• ") + temp + "\n";
+	buf += "• " + temp + "\n";
 
 	// *** Terrain info
 	buf += std::string("\n") + _("Terrain:") + "\n";
@@ -102,8 +102,8 @@ int32_t Editor_Info_Tool::handle_click_impl
 	                                       (center.triangle.t == Widelands::TCoords<>::D ?
 	                                        tf.terrain_d() : tf.terrain_r());
 
-	buf += std::string("• ") + (boost::format(_("Name: %s")) % ter.descname()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Texture Number: %i")) % ter.get_texture()).str() + "\n";
+	buf += "• " + (boost::format(_("Name: %s")) % ter.descname()).str() + "\n";
+	buf += "• " + (boost::format(_("Texture Number: %i")) % ter.get_texture()).str() + "\n";
 
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";
@@ -112,36 +112,36 @@ int32_t Editor_Info_Tool::handle_click_impl
 	int ramount = f.get_resources_amount();
 
 	if (ramount > 0) {
-		buf += std::string("• ") + (boost::format(
+		buf += "• " + (boost::format(
 				_("Resource name: %s")) % world.get_resource(ridx)->name().c_str()
 			).str() + "\n";
-		buf += std::string("• ") + (boost::format(_("Resource amount: %i")) % ramount).str() + "\n";
+		buf += "• " + (boost::format(_("Resource amount: %i")) % ramount).str() + "\n";
 	}
 	else {
-		buf += std::string("• ") + std::string(_("No resources")) + "\n";
+		buf += "• " + std::string(_("No resources")) + "\n";
 	}
 
 	// *** Map info
 	buf += std::string("\n") + _("Map:") + "\n";
-	buf += std::string("• ") + (boost::format(_("Name: %s")) % map.get_name()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Size: %1$ix%2$i"))
+	buf += "• " + (boost::format(_("Name: %s")) % map.get_name()).str() + "\n";
+	buf += "• " + (boost::format(_("Size: %1$ix%2$i"))
 					 % map.get_width() % map.get_height()).str() + "\n";
 
 	if (map.get_nrplayers() > 0) {
-		buf += std::string("• ") + (boost::format(_("Players: %u")) % map.get_nrplayers()).str() + "\n";
+		buf += "• " + (boost::format(_("Players: %u")) % map.get_nrplayers()).str() + "\n";
 	}
 	else {
-		buf += std::string("• ") + (boost::format(_("Players: %s")) % "—").str() + "\n";
+		buf += "• " + (boost::format(_("Players: %s")) % "—").str() + "\n";
 	}
 
-	buf += std::string("• ") + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Descr: %s")) % map.get_description()).str() + "\n";
+	buf += "• " + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
+	buf += "• " + (boost::format(_("Descr: %s")) % map.get_description()).str() + "\n";
 
 	// *** World info
 	buf += std::string("\n") + _("World:") + "\n";
-	buf += std::string("• ") + (boost::format(_("Name: %s")) % world.get_name()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Author: %s")) % world.get_author()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Descr: %s")) % world.get_descr()).str() + "\n";
+	buf += "• " + (boost::format(_("Name: %s")) % world.get_name()).str() + "\n";
+	buf += "• " + (boost::format(_("Author: %s")) % world.get_author()).str() + "\n";
+	buf += "• " + (boost::format(_("Descr: %s")) % world.get_descr()).str() + "\n";
 
 	multiline_textarea->set_text(buf.c_str());
 
