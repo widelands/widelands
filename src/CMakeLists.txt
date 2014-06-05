@@ -382,7 +382,6 @@ set(WL_SRCS
 	ui_fsmenu/netsetup_lan.cc
 	ui_fsmenu/options.cc
 	ui_fsmenu/singleplayer.cc
-	unique_window_handler.cc
 	wlapplication.cc
 	wui/actionconfirm.cc
 	wui/attack_box.cc
@@ -432,6 +431,7 @@ set(WL_SRCS
 	wui/trainingsitewindow.cc
 	wui/transport_draw.cc
 	wui/transport_ui.cc
+	wui/unique_window_handler.cc
 	wui/ware_statistics_menu.cc
 	wui/warehousewindow.cc
 	wui/waresdisplay.cc
@@ -774,7 +774,6 @@ set(WL_SRCS
   ui_fsmenu/netsetup_lan.h
   ui_fsmenu/options.h
   ui_fsmenu/singleplayer.h
-  unique_window_handler.h
   upcast.h
   utf8.h
   vector.h
@@ -821,6 +820,7 @@ set(WL_SRCS
   wui/soldierlist.h
   wui/stock_menu.h
   wui/story_message_box.h
+  wui/unique_window_handler.h
   wui/ware_statistics_menu.h
   wui/waresdisplay.h
   wui/waresqueuedisplay.h
