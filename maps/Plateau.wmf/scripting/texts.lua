@@ -25,7 +25,7 @@ end
 
 obj_forbidden_island = {
    name = "forbidden_island",
-   title =_"The Forbidden Island",
+   title = _"The Forbidden Island",
    body = _(
 [[Finally! We have just taken our first step towards victory! ]] ..
 [[Last night, we landed on the forbidden island and defeated the few guards that were watching the ]] ..
@@ -38,20 +38,20 @@ obj_forbidden_island = {
 
 obj_capture_ancient_castle = {
    name = "capture_ancient_castle",
-   title =_ "Capture the Ancient Castle",
+   title = _"Capture the Ancient Castle",
    body = [[• ]] .. _
 [[Defeat Lanissa and capture the ancient castle.]],
 }
 
 obj_defeat_erwyn = {
    name = "defeat_erwyn",
-   title =_ "Defeat Erwyn",
+   title = _"Defeat Erwyn",
    body = [[• ]] .. _
 [[Defeat Erwyn. He commands the strongest opposing military force left on this island.]],
 }
 obj_defeat_jomo = {
    name = "defeat_jomo",
-   title =_ "Defeat Jomo",
+   title = _"Defeat Jomo",
    body = [[• ]] .. _
 [[Defeat Jomo. He is taking care of the soldiers’ food supply.]]
    ,
@@ -82,11 +82,11 @@ function send_msg(t)
 end
 
 briefing_1_the_forbidden_island = {
-   title =_ "First Briefing",
+   title = _"First Briefing",
    width = 400,
    height = 300,
    posy = 1,
-   body = _msg( _"The Forbidden Island", _(
+   body = _msg(_"The Forbidden Island", _(
 [[Finally! We have just taken our first step towards victory! ]] ..
 [[Last night, we landed on the forbidden island and defeated the few guards that were watching the ]] ..
 [[north-western part of the island. ]] ..
@@ -95,7 +95,7 @@ briefing_1_the_forbidden_island = {
 }
 
 briefing_2_found_ancient_castle = {
-   title =_ "Second Briefing",
+   title = _"Second Briefing",
    width = 400,
    height = 300,
    posy = 1,
@@ -110,7 +110,7 @@ _([[Let’s hope that Lanissa – the warlord holding sway over that castle – 
 }
 
 briefing_3_captured_ancient_castle = {
-   title = _ "Second Briefing",
+   title = _"Second Briefing",
    width = 400,
    height = 300,
    posy = 1,
@@ -127,7 +127,7 @@ _([[It is amazing how far one can see from the highest tower of the castle. We c
 }
 
 briefing_erwyn_defeated = {
-   title=_ "Another Briefing",
+   title = _"Another Briefing",
    width = 400,
    height = 300,
    posy = 1,
@@ -136,19 +136,19 @@ briefing_erwyn_defeated = {
 }
 
 briefing_jomo_defeated = {
-   title=_ "Another Briefing",
+   title = _"Another Briefing",
    width = 400,
    height = 300,
    posy = 1,
-   body= _msg( _"Jomo Defeated", _
+   body = _msg( _"Jomo Defeated", _
 [[Great! Jomo gave up when he saw his last buildings burning down. That’s one less warlord on this island!]]),
 }
 
 last_briefing_victory = {
-   title=_ "Last Briefing",
-   width=400,
-   height=300,
-   posy=1,
+   title = _"Last Briefing",
+   width = 400,
+   height = 300,
+   posy = 1,
    body = _msg( _"Victory!", _
 [[Finally! The island is completely ours. Now we just have to defend it better than the warlords did.]] .. paragraphdivider() ..
 _"Congratulations! You have mastered this scenario. You may play on if you like!"
