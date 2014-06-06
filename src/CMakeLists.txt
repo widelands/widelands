@@ -336,9 +336,6 @@ set(WL_SRCS
 	scripting/scripting.cc
 	single_player_game_controller.cc
 	single_player_game_settings_provider.cc
-	sound/fxset.cc
-	sound/songset.cc
-	sound/sound_handler.cc
 	text_layout.cc
 	text_parser.cc
 	timestring.cc
@@ -727,9 +724,6 @@ set(WL_SRCS
   single_player_game_controller.h
   single_player_game_settings_provider.h
   singleton.h
-  sound/fxset.h
-  sound/songset.h
-  sound/sound_handler.h
   text_layout.h
   text_parser.h
   timestring.h
@@ -855,6 +849,8 @@ endforeach(SRC)
 
 
 add_subdirectory(base)
+add_subdirectory(sound)
+add_subdirectory(scripting)
 
 #the subdirectories are only used for test definition
 #temporarily disabled the 'old' tests due to incompatibility
@@ -867,8 +863,6 @@ if (WL_UNIT_TESTS)
   add_subdirectory(economy)
   add_subdirectory(io)
 endif (WL_UNIT_TESTS)
-
-add_subdirectory(scripting)
 
 #TODO: It looks like various things have cyclic dependencies
 #in all directions. Ideally this core shouldn't exist(?) or at least
@@ -887,6 +881,7 @@ endif (NOT MINIZIP_FOUND)
 target_link_libraries(widelands_all eris)
 target_link_libraries(widelands_all io_filesystem)
 target_link_libraries(widelands_all io_dedicated_log)
+target_link_libraries(widelands_all sound)
 target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
 target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
 target_link_libraries(widelands_all ${SDLNET_LIBRARY})
