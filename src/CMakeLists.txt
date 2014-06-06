@@ -451,7 +451,6 @@ set(WL_SRCS
   container_iterate.h
   cookie_priority_queue.h
   debugconsole.h
-  description_maintainer.h
   economy/cmd_call_economy_balance.h
   economy/economy.h
   economy/economy_data_packet.h
@@ -587,6 +586,7 @@ set(WL_SRCS
   logic/constructionsite.h
   logic/critter_bob.h
   logic/critter_bob_program.h
+  logic/description_maintainer.h
   logic/dismantlesite.h
   logic/editor_game_base.h
   logic/expedition_bootstrap.h
