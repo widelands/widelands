@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-05-31 20:58+0000\n"
+"PO-Revision-Date: 2014-06-05 19:56+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-01 05:26+0000\n"
+"X-Launchpad-Export-Date: 2014-06-06 05:28+0000\n"
 "X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
@@ -34,31 +34,31 @@ msgstr "Nepřítel porazil tvé vojáky v kasárnách."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "Tví vojáci porazili nepřítele v kasárnách."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Tvá hradba objevila nepřítele."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Na tvou hradbu se útočí."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Nepřítel porazil tvé vojáky v hradbě."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Tví vojáci porazili nepřítele v hradbě."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
@@ -83,22 +83,22 @@ msgstr "Tví vojáci porazili nepřítele v hradu."
 #: ../../global/militarysites/citadel.barbarians/conf:8
 #: ../../tribes/barbarians/citadel/conf:9
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "Tvá citadela objevila nepřítele."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "Na tvou citadelu se útočí."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "Nepřítel porazil tvé vojáky v citadele."
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 #: ../../tribes/barbarians/citadel/conf:12
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "Tví vojáci porazili nepřítele v citadele."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
@@ -146,7 +146,7 @@ msgstr "Tví vojáci porazili nepřítele v pevnosti."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Tvá velká strážnice objevila nepřítele."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
@@ -367,6 +367,8 @@ msgid ""
 "‘A new Warrior’s Ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
 msgstr ""
+"Sekera nového bojvníka může přinést to nejlepší vladaři nebo to nejhorší "
+"jejímu tvůrci."
 
 #: ../../tribes/barbarians/axfactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -444,6 +446,9 @@ msgid ""
 "three buildings. It is an upgrade from the Metal Workshop but doesn’t "
 "require additional qualification for the worker."
 msgstr ""
+"Dílna na výrobu seker barbarů je středně pokročilým výrobním místem ze série "
+"tří budov. Je to vylepšení dílny na železo ale nevyžaduje vyšší kvalifikaci "
+"pracovníků."
 
 #: ../../tribes/barbarians/axfactory/help.lua:17
 msgid "It can make axes, Sharp axes and Broad axes."

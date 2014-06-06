@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-05-29 21:23+0000\n"
+"PO-Revision-Date: 2014-06-05 19:30+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-30 05:32+0000\n"
-"X-Generator: Launchpad (build 17023)\n"
+"X-Launchpad-Export-Date: 2014-06-06 05:28+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -49,7 +49,7 @@ msgstr "Na tvou hradbu se útočí."
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Nepřítel porazil tvé vojáky v hradbě."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
@@ -194,83 +194,83 @@ msgstr "Tví vojáci porazili nepřítele ve vysoké věži."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "Tvá hraniční věž objevila nepřítele."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Útočí na tvou hraniční věž."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Nepřítel porazil tvé vojáky v hraniční věži."
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "Tvoji vojáci porazili nepřítele v hraniční věži."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Tvá hlídka objevila nepřítele."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Útočí na tvou hlídku."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Nepřítel porazil tvé vojáky na hlídce."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "Tví vojáci porazili nepřítele na hlídce."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "Tvá malá věž objevila nepřítele."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/small_tower/conf:9
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "Útočí na tvou malou věž"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/small_tower/conf:10
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "Nepřítel porazil tvé vojáky v malé věži."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "Tví vojáci porazili nepřítele v malé věži."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Tvá věž objevila nepřítele."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/atlanteans/tower/conf:10
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Útočí na tvou věž."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Nepřítel porazil tvé vojáky ve věži."
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Tví vojáci porazili nepřítele ve věži."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -395,7 +395,7 @@ msgstr "Nosí předměty po cestách."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Tvoji vojáci zabrali hrad."
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -403,6 +403,8 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of logs by a "
 "charcoal burner."
 msgstr ""
+"Atlantské ohně už žhnou v huti, platnéři a zbrojíři je krmí uhlím. Toto uhlí "
+"je dolováno v uhelných dolech nebo vyráběno uhlířem z polen."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
@@ -681,7 +683,7 @@ msgstr "Tabard"
 
 #: ../../tribes/atlanteans/conf:98
 msgid "Log"
-msgstr ""
+msgstr "Poleno"
 
 #: ../../tribes/atlanteans/conf:99
 msgid "Water"
@@ -954,7 +956,7 @@ msgstr "Pavoučí farma"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Tkalcovna"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Farm"
@@ -1059,19 +1061,19 @@ msgstr "Vyčkat"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Vylepšuje útok vojáků z úrovně 0 na 1."
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Vylepšuje útok vojáků z úrovně 1 na 2."
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Vylepšuje útok vojáků z úrovně 2 na 3."
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Vylepšuje útok vojáků z úrovně 3 na 4."
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
@@ -1136,6 +1138,8 @@ msgid ""
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
+"Zlaté tabardy jsou vyráběny Atlanťany ve tkalcovně ze zlaté příze. Používají "
+"se v labyrintu - spolu s jídlem - k trénování vojáku z úrovně zdraví 0 na 1."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -1143,20 +1147,25 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Zlatá ruda je dolována v dole na zlato. Tavena v huti, což ji změní ve "
+"zlato, které je použito jako vzácný stavební materiál a k výrobě zbraní a "
+"brnění."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
 "golden tabard in the weaving mill."
 msgstr ""
+"Tato příze, vyrobená ze zlata tkalcem zlata, se používá k předení "
+"speciálního zlatého tabardu v tkalcovně."
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
+msgstr "Tví vojáci obsadili velká strážnici."
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Tví vojáci obsadili strážnici."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -1182,7 +1191,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
+msgstr "Tvoji vojáci obsadili vysokou věž."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1196,6 +1205,7 @@ msgstr ""
 msgid ""
 "Horses help to carry items along busy roads. They are reared in a horse farm."
 msgstr ""
+"Koně pomáhají nosit věci na rušných cestách. Jsou chováni na koňské farmě."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1227,23 +1237,23 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "Vylepšuje vojákovu obranu z úrovně 0 na 1."
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
 msgid "Upgrade soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "Vylepšuje vojákovu obranu z úrovně 1 na 2."
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Vylepšuje vojákovo zdraví z úrovně 0 na 1."
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Vylepšeno vojákovo vyhnutí z úrovně 0 na úroveň 1."
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Vylepšeno vojákovo vyhnutí z úrovně 1 na úroveň 2."
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1261,6 +1271,9 @@ msgid ""
 "Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
 "smokery also need logs for their work."
 msgstr ""
+"Polena jsou základem pro prkna, která se používají ve skoro všech "
+"Atlantských budovách. Krom pily, uhlíře, dílny a udírna které také potřebují "
+"polena k práci."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1322,6 +1335,9 @@ msgid ""
 "produced out of logs by the sawmill. The weapon smithy and the shipyard also "
 "use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Prkna jsou důležitým stavebním materiálem Atlanťanů. Vyrábějí se na pile z "
+"polen. Zbrojíř a loděnice používají prkna k výrobě různých trojzubců a "
+"mocných lodí."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1395,7 +1411,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
+msgstr "Tvoji vojáci obsadili malou věž."
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1453,12 +1469,16 @@ msgid ""
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
+"Pavoučí látka se vyrábí z pavoučí příze v tkalcovně. Používá se v dílně a "
+"loděnici. Také je potřeba pro stavbu některých pokročilých budov."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
 msgstr ""
+"Tato příze je vyráběna pavouky, kteří jsou chováni na pavoučí farmě. Je "
+"zpracována na pavoučí látku v tkalcovně."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
@@ -1494,6 +1514,8 @@ msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
 msgstr ""
+"Tabard a lehký trojzubec jsou základním vybavením mladých vojáků. Tabardy se "
+"vyrábějí v tkalcovně."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -1501,7 +1523,7 @@ msgstr "Vyrábí nástroje pro pracovníky."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "Vyrábí pekařovu vařečku"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bucket"
@@ -1549,7 +1571,7 @@ msgstr "Vyrobit lopatu"
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Tvoji vojáci obsadili tvou věž."
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
