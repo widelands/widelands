@@ -821,15 +821,6 @@ set(WL_SRCS
   wui/watchwindow.h
 )
 
-#convention: any directory called "test" contains test sources, including subdirectories
-set(WL_CODECHECK_SRCS "")
-foreach (sourcefile ${WL_SRCS})
-  # exclude test sources from Codecheck
-  if (NOT ${sourcefile} MATCHES ".*/test/.*")
-    list (APPEND WL_CODECHECK_SRCS ${sourcefile})
-  endif ()
-endforeach (sourcefile ${WL_SRCS})
-
 IF (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
 else (DEFINED MSVC)
@@ -843,10 +834,9 @@ endif (DEFINED MSVC)
 add_library (widelands_all STATIC ${WL_SRCS})
 # TODO: This will ultimately be dealt with when the sources in equestions are passed into wl_library
 # but in the meantime we pass in the remainder here to check the rest of the code.
-foreach(SRC ${WL_CODECHECK_SRCS})
+foreach(SRC ${WL_SRCS})
   run_codecheck(widelands_all ${SRC})
 endforeach(SRC)
-
 
 add_subdirectory(base)
 add_subdirectory(sound)
