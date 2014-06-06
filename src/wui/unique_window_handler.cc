@@ -17,7 +17,7 @@
  *
  */
 
-#include "unique_window_handler.h"
+#include "wui/unique_window_handler.h"
 
 UI::UniqueWindow::Registry& UniqueWindowHandler::get_registry(const std::string& name) {
 	return registries_[name];
