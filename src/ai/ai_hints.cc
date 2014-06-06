@@ -37,6 +37,7 @@ BuildingHints::BuildingHints(Section* const section)
      stone_producer_(section ? section->get_bool("stoneproducer") : false),
      marble_producer_(section ? section->get_bool("marbleproducer") : false),
      needs_water_(section ? section->get_bool("needs_water") : false),
+     mines_water_(section ? section->get_bool("mines_water") : false),
      recruitment_(section ? section->get_bool("recruitment") : false),
      space_consumer_(section ? section->get_bool("space_consumer") : false),
      mines_percent_(section ? section->get_int("mines_percent", 100) : 0) {

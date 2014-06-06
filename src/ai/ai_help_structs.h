@@ -170,6 +170,7 @@ struct BuildableField {
 	uint8_t trees_nearby_;
 	uint8_t stones_nearby_;
 	int8_t water_nearby_;
+	int8_t ground_water_;  // used by wells
 	uint8_t space_consumers_nearby_;
 	// to manage the military better following variables exists:
 	// capacity of nearby buildings:
@@ -206,6 +207,7 @@ struct BuildableField {
 	     // non-negative, water is not recaldulated
 	     stones_nearby_(1),
 	     water_nearby_(-1),
+	     ground_water_(1),
 	     space_consumers_nearby_(0),
 	     military_capacity_(0),
 	     military_loneliness_(1000),
@@ -265,6 +267,7 @@ struct BuildingObserver {
 	bool need_trees_;      // lumberjack = true
 	bool need_stones_;     // quarry = true
 	bool mines_marble_;    // need to distinquish mines_ that produce marbles
+	bool mines_water_;     // wells
 	bool need_water_;      // fisher, fish_breeder = true
 	bool space_consumer_;  // farm, vineyard... = true
 

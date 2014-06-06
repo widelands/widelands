@@ -54,6 +54,7 @@ constexpr int kBuildingMinInterval =
 constexpr bool kMilitaryDebug = false;
 constexpr bool kMilDismDebug = false;
 constexpr bool kMilitScoreDebug = false;
+constexpr bool kQuarryDismDebug = false;
 constexpr bool kProductionDebug = false;
 constexpr bool kHintDebug = false;
 constexpr bool kWinnerDebug = false;
@@ -67,6 +68,7 @@ constexpr bool kWoodDebug = false;
 constexpr bool kSpaceDebug = false;
 constexpr bool kStatDebug = false;
 constexpr bool kIdleDismantle = false;
+constexpr bool kWellDebug = false;
 constexpr int kBaseInfrastructureTime = 20 * 60 * 1000;
 
 using namespace Widelands;
@@ -191,7 +193,7 @@ void DefaultAI::think() {
 	if (check_productionsites(gametime))
 		return;
 
-	// Check the mines_ and consider upgrading or destroying one
+	// Check the mines and consider upgrading or destroying one
 	if (check_mines_(gametime))
 		return;
 
@@ -288,6 +290,7 @@ void DefaultAI::late_initialization() {
 		bo.need_stones_ = bh.is_stoneproducer();
 		bo.mines_marble_ = bh.is_marbleproducer();
 		bo.need_water_ = bh.get_needs_water();
+		bo.mines_water_ = bh.mines_water();
 		bo.recruitment_ = bh.for_recruitment();
 		bo.space_consumer_ = bh.is_space_consumer();
 
@@ -327,6 +330,7 @@ void DefaultAI::late_initialization() {
 
 			bo.is_basic_ = bh.is_basic();
 			bo.prod_build_material_ = bh.prod_build_material();
+
 			continue;
 		}
 
@@ -587,6 +591,15 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				if (immovables.at(j).object->has_attribute(stone_attr))
 					++field.stones_nearby_;
 			}
+		}
+
+		//// ground water is not renewable and its amount can only fall, we will count them only if
+		/// previous state si nonzero
+		if (field.ground_water_ > 0) {
+			field.ground_water_ =
+			   field.coords.field->get_resources_amount();  // field->get_resources();
+
+			// printf(" RESOURCE DEBUG: %2d",field.get_resources());
 		}
 	}
 
@@ -1018,7 +1031,38 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			int32_t prio = 0;  // score of a bulding on a field
 
 			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
-				if (bo.need_trees_) {  // LUMBERJACS
+
+				// this can be only a well (as by now)
+				if (bo.mines_water_) {
+					if (bf->ground_water_ < 2)
+						continue;
+
+					if (bo.cnt_under_construction_ + bo.unoccupied_ > 0)
+						continue;
+					if ((bo.cnt_built_ + bo.unoccupied_) > 0 and gametime < kBaseInfrastructureTime)
+						continue;
+					if (new_buildings_stop_)
+						continue;
+					bo.cnt_target_ =
+					   2 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
+					if ((bo.cnt_built_ + bo.cnt_under_construction_ + bo.unoccupied_) > bo.cnt_target_)
+						continue;
+
+					if (bo.stocklevel_time < game().get_gametime() - 30 * 1000) {
+						bo.stocklevel_ = get_stocklevel(bo);
+						bo.stocklevel_time = game().get_gametime();
+					}
+					if (bo.stocklevel_ > 50)
+						continue;
+					if (kWellDebug)
+						printf(" kWellDebug: %-15s has %2d resources, stocklevel: %3d\n",
+						       bo.name,
+						       bf->ground_water_,
+						       bo.stocklevel_);
+					prio = bf->ground_water_ - 2;
+					prio = recalc_with_border_range(*bf, prio);
+
+				} else if (bo.need_trees_) {  // LUMBERJACS
 
 					if (kWoodDebug)
 						printf(" TDEBUG: %1d: buildings count:%2d-%2d-%2d, trees nearby: %3d, "
@@ -1044,21 +1088,28 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						       prio,
 						       bo.cnt_built_ + bo.cnt_under_construction_ + bo.unoccupied_);
 				} else if (bo.need_stones_) {
-					if (bo.total_count() == 0 and output_is_needed and bo.cnt_under_construction_ ==
-					    0 and bf->stones_nearby_ > 2)
-						prio = 45 + bf->stones_nearby_;
-					else if (bf->stones_nearby_ > 0 and bo.cnt_under_construction_ < 1) {
-						if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
-							bo.stocklevel_ =
-							   get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint_));
-							bo.stocklevel_time = game().get_gametime();
-						}
 
-						if (bo.stocklevel_ < 20)
-							prio = bulgarian_constant + bf->stones_nearby_ * 5;
-						else
-							prio = bulgarian_constant + bf->stones_nearby_;
+					// quaries are generally to be built everywhere where stones are
+					// no matter the need for stones, as stones are considered an obstacle
+					// to expansion
+					if (bo.cnt_under_construction_ > 0)
+						continue;
+					prio = bf->stones_nearby_;
+
+					if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
+						bo.stocklevel_ = get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint_));
+						bo.stocklevel_time = game().get_gametime();
 					}
+
+					if (bo.stocklevel_ < 20)
+						prio = prio * 2;
+
+					if (bo.total_count() == 0)
+						prio = prio * 2;
+
+					// to prevent to many quaries on one spot
+					prio = prio - 30 * bf->producers_nearby_.at(bo.outputs_.at(0));
+
 				} else if (bo.production_hint_ >= 0) {
 					// first setting targets (needed also for dismantling)
 					if (bo.plants_trees_)
@@ -1378,107 +1429,127 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		update_all_mineable_fields(gametime);
 		next_mine_construction_due_ = gametime + kIdleMineUpdateInterval;
 
-		for (uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i) {
-			BuildingObserver& bo = buildings.at(i);
+		if (mineable_fields.size() > 0) {
 
-			if (not bo.mines_marble_ and gametime <
-			    kBaseInfrastructureTime)  // allow only stone mines_ in early stages of game
-				continue;
+			for (uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i) {
+				BuildingObserver& bo = buildings.at(i);
 
-			if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
-				continue;
-
-			if (gametime - bo.construction_decision_time_ < kBuildingMinInterval)
-				continue;
-
-			// Don't build another building of this type, if there is already
-			// one that is unoccupied_ at the moment
-			// or under construction
-			if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0)
-				continue;
-
-			// calculating actual amount of mined raw materials
-			if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
-				bo.stocklevel_ = get_stocklevel(bo);
-				bo.stocklevel_time = game().get_gametime();
-			}
-
-			if (kMinesDebug)
-				printf(" TDEBUG: considering %12s/%1d: stat: %3d(50), stocklevel_: %2d(50), count %2d "
-				       "/ %2d / %2d\n",
-				       bo.name,
-				       bo.mines_,
-				       bo.current_stats_,
-				       bo.stocklevel_,
-				       bo.total_count(),
-				       bo.unoccupied_,
-				       bo.cnt_under_construction_);
-
-			// Only try to build mines_ that produce needed wares.
-			if (((bo.cnt_built_ - bo.unoccupied_) > 0 and bo.current_stats_ < 50)or bo.stocklevel_ >
-			    50)
-				continue;
-
-			// iterating over fields
-			for (std::list<MineableField*>::iterator j = mineable_fields.begin();
-			     j != mineable_fields.end();
-			     ++j) {
-				int32_t prio = 0;
-
-				if ((*j)->coords.field->get_resources() != bo.mines_)
-					continue;
-				else if ((*j)->mines_nearby_ > 1)
-					prio +=
-					   (*j)->coords.field->get_resources_amount() * 4 / 3 - (*j)->mines_nearby_ * 10;
-				else
-					prio += (*j)->coords.field->get_resources_amount() * 4 / 3;
-
-				// Only build mines_ on locations where some material can be mined
-				if (prio < 2)
+				if (not bo.mines_marble_ and gametime <
+				    kBaseInfrastructureTime)  // allow only stone mines_ in early stages of game
 					continue;
 
-				if (bo.mines_marble_) {
-					if ((bo.cnt_built_ + bo.cnt_under_construction_) == 0)
-						prio *= 3;
-					else
-						prio *= 2;
+				if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
+					continue;
+
+				if (gametime - bo.construction_decision_time_ < kBuildingMinInterval)
+					continue;
+
+				// Don't build another building of this type, if there is already
+				// one that is unoccupied_ at the moment
+				// or under construction
+				if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0)
+					continue;
+
+				// calculating actual amount of mined raw materials
+				if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
+					bo.stocklevel_ = get_stocklevel(bo);
+					bo.stocklevel_time = game().get_gametime();
 				}
-
-				// Continue if field is blocked at the moment
-				bool blocked = false;
-
-				for (std::list<BlockedField>::iterator k = blocked_fields.begin();
-				     k != blocked_fields.end();
-				     ++k)
-					if ((*j)->coords == k->coords) {
-						blocked = true;
-						break;
-					}
-
-				if (blocked)
-					continue;
 
 				if (kMinesDebug)
-					printf("  TDEBUG: priority of potential mines_: %3d (%3d - %3d), at  %3d x %3d\n",
-					       prio,
-					       (*j)->coords.field->get_resources_amount() * 4 / 3,
-					       (*j)->mines_nearby_ * 10,
-					       (*j)->coords.x,
-					       (*j)->coords.y);
+					printf(
+					   " TDEBUG: %1d considering %12s/%1d: stat: %3d(<20), stocklevel_: %2d, count %2d "
+					   "/ %2d / %2d\n",
+					   player_number(),
+					   bo.name,
+					   bo.mines_,
+					   bo.current_stats_,
+					   bo.stocklevel_,
+					   bo.total_count(),
+					   bo.unoccupied_,
+					   bo.cnt_under_construction_);
 
-				if (prio > proposed_priority) {
-					// proposed_building = bo.id;
-					best_building = &bo;
-					proposed_priority = prio;
-					proposed_coords = (*j)->coords;
-					mine = true;
+				// Only try to build mines_ that produce needed wares.
+				if (((bo.cnt_built_ - bo.unoccupied_) > 0 and bo.current_stats_ < 20)or bo.stocklevel_ >
+				    40 + static_cast<uint32_t>(bo.mines_marble_) * 30) {
+					if (kMinesDebug)
+						printf("  No need to seek for this mine type: stat: %2d, stock :%2d/%2d\n",
+						       bo.current_stats_,
+						       bo.stocklevel_,
+						       40 + bo.mines_marble_ * 30);
+					continue;
+				}
+
+				// this is penalty if there are existing mines too close
+				// it is treated as multiplicator for count of near mines
+				uint32_t nearness_penalty = 0;
+				if ((bo.cnt_built_ + bo.cnt_under_construction_) == 0)
+					nearness_penalty = 0;
+				else if (bo.mines_marble_)
+					nearness_penalty = 7;
+				else
+					nearness_penalty = 10;
+
+				// iterating over fields
+				for (std::list<MineableField*>::iterator j = mineable_fields.begin();
+				     j != mineable_fields.end();
+				     ++j) {
+
+					if ((*j)->coords.field->get_resources() != bo.mines_)
+						continue;
+
+					int32_t prio = (*j)->coords.field->get_resources_amount();
+
+					// applying nearnes penalty
+					prio = prio - (*j)->mines_nearby_ * nearness_penalty;
 
 					if (kMinesDebug)
-						printf("   TDEBUG: using %-12s as a candidate\n", bo.name);
-				}
-			}  // ending interation over fields
-		}     // ending iteration over buildings
-	}        // end of mines_ section
+						printf("  TDEBUG: priority of spot at %3d x %3d: %3d (%2d - %2d*%2d) , current "
+						       "best: %2d \n",
+						       (*j)->coords.x,
+						       (*j)->coords.y,
+						       prio,
+						       (*j)->coords.field->get_resources_amount(),
+						       (*j)->mines_nearby_,
+						       nearness_penalty,
+						       proposed_priority);
+
+					// Only build mines_ on locations where some material can be mined
+					if (prio < 2)
+						continue;
+
+					// Continue if field is blocked at the moment
+					bool blocked = false;
+
+					for (std::list<BlockedField>::iterator k = blocked_fields.begin();
+					     k != blocked_fields.end();
+					     ++k)
+						if ((*j)->coords == k->coords) {
+							blocked = true;
+							break;
+						}
+
+					if (blocked) {
+						if (kMinesDebug)
+							printf("   spot blocked!\n");
+						continue;
+					}
+
+					if (prio > proposed_priority) {
+						// proposed_building = bo.id;
+						best_building = &bo;
+						proposed_priority = prio;
+						proposed_coords = (*j)->coords;
+						mine = true;
+
+						if (kMinesDebug)
+							printf("   TDEBUG: using %-12s as a candidate\n", bo.name);
+					}
+				}  // end of evaluation of field
+			}
+
+		}  // section if mine size >0
+	}     // end of mines_ section
 
 	// if there is no winner:
 	// if (proposed_building == INVALID_INDEX) {
@@ -1865,7 +1936,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	if ((next_productionsite_check_due_ > gametime) || productionsites.empty())
 		return false;
 
-	next_productionsite_check_due_ = gametime + 10000;
+	next_productionsite_check_due_ = gametime + 5000;
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver& site = productionsites.front();
 	bool changed = false;
@@ -1888,47 +1959,79 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		return false;
 
 	// Lumberjack / Woodcutter handling
-	if (site.bo->need_trees_ and map.find_immovables(
-	       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-	       nullptr,
-	       FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree"))) < 6) {
-		// Do not destruct the last lumberjack - perhaps some small trees are
-		// near, a forester will plant some trees or some new trees will seed
-		// in reach. Computer player_s can easily run out of wood if this check
-		// is not done.
-		if (site.bo->cnt_built_ <=
-		    3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20) {
-			if (kWoodDebug)
-				printf(" TDEBUG: %1d: cutter without trees, but not dismantling due to low numbers of "
-				       "cutters (%2d)\n",
-				       player_number(),
-				       site.bo->cnt_built_);
+	if (site.bo->need_trees_) {
+		if (map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
+		                        nullptr,
+		                        FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree"))) <
+		    6) {
+			// Do not destruct the last lumberjack - perhaps some small trees are
+			// near, a forester will plant some trees or some new trees will seed
+			// in reach. Computer player_s can easily run out of wood if this check
+			// is not done.
+			if (site.bo->cnt_built_ <=
+			    3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20) {
+				if (kWoodDebug)
+					printf(
+					   " TDEBUG: %1d: cutter without trees, but not dismantling due to low numbers of "
+					   "cutters (%2d)\n",
+					   player_number(),
+					   site.bo->cnt_built_);
 
+				return false;
+			}
+
+			if (site.site->get_statistics_percent() <= 20) {
+				// destruct the building and it's flag (via flag destruction)
+				// the destruction of the flag avoids that defaultAI will have too many
+				// unused roads - if needed the road will be rebuild directly.
+				// printf (" TDEBUG: dismantling lumberjacks hut\n");
+				flags_to_be_removed.push_back(site.site->base_flag().get_position());
+				game().send_player_dismantle(*site.site);
+
+				if (kWoodDebug)
+					printf(" TDEBUG %1d: cutter without trees, dismantling..., remaining cutters: %2d\n",
+					       player_number(),
+					       site.bo->cnt_built_);
+
+				site.bo->last_dismantle_time_ = game().get_gametime();
+				return true;
+			}
 			return false;
 		}
+		return false;
+	}
 
-		if (site.site->get_statistics_percent() <= 20) {
-			// destruct the building and it's flag (via flag destruction)
-			// the destruction of the flag avoids that defaultAI will have too many
-			// unused roads - if needed the road will be rebuild directly.
-			// printf (" TDEBUG: dismantling lumberjacks hut\n");
+	// Wells handling
+	if (site.bo->mines_water_) {
+		if (site.built_time_ + 6 * 60 * 1000 < game().get_gametime()
+		                                       and site.site->get_statistics_percent() ==
+		    0) {
+			if (kWellDebug)
+				printf(" TDEBUG: dismantling Well, statistics: %3d,\n",
+				       site.site->get_statistics_percent());
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
-
-			if (kWoodDebug)
-				printf(" TDEBUG %1d: cutter without trees, dismantling..., remaining cutters: %2d\n",
-				       player_number(),
-				       site.bo->cnt_built_);
-
 			site.bo->last_dismantle_time_ = game().get_gametime();
 			return true;
 		}
-
 		return false;
 	}
 
 	// Quarry handling
 	if (site.bo->need_stones_) {
+		if (kQuarryDismDebug) {
+			printf(" QUARRY at %3d x %3d: statistics: %3d/%3d, age: %5d(>360s), stones:%3d\n",
+			       site.site->get_position().x,
+			       site.site->get_position().y,
+			       site.site->get_statistics_percent(),
+			       site.site->get_crude_statistics(),
+			       (gametime - site.built_time_) / 1000,
+			       map.find_immovables(
+			          Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
+			          nullptr,
+			          FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone"))));
+		}
+
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		       nullptr,
@@ -1939,9 +2042,11 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
 			return true;
-		} else if (site.built_time_ + 6 * 60 * 1000 < game().get_gametime()
-		                                              and site.site->get_statistics_percent() ==
-		           0) {
+		}
+
+		if (site.built_time_ + 6 * 60 * 1000 < game().get_gametime()
+		                                       and site.site->get_statistics_percent() ==
+		    0) {
 			// it is possible that there are stones but quary is not able to mine them
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
@@ -2199,9 +2304,9 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 		   site.site->get_statistics_percent(),
 		   field->get_resources_amount());
 
-	// Don't try to enhance as long as stats are not down to 0% - it is possible,
-	// that some neighbour fields still have resources
-	if (site.site->get_statistics_percent() > 10)
+	// It takes some time till performance gets to 0
+	// so I use 40% as a limit to check if there are some resources left
+	if (site.site->get_statistics_percent() > 40)
 		return false;
 
 	// Check if mine ran out of resources

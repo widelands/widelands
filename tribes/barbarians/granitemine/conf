@@ -14,7 +14,6 @@ miner=1
 
 [aihints]
 mines=granit
-stoneproducer=true
 
 [inputs]
 ration=8

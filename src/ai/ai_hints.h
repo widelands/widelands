@@ -60,6 +60,10 @@ struct BuildingHints : boost::noncopyable {
 		return marble_producer_;
 	}
 
+	bool mines_water() const {
+		return mines_water_;
+	}
+
 	bool get_needs_water() const {
 		return needs_water_;
 	}
@@ -85,6 +89,7 @@ private:
 	bool stone_producer_;
 	bool marble_producer_;
 	bool needs_water_;
+	bool mines_water_;
 	bool recruitment_;  // whether building recruits special workers
 	bool space_consumer_;
 	uint8_t mines_percent_;
