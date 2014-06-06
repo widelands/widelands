@@ -114,7 +114,6 @@ set(WL_SRCS
 	ai/ai_hints.cc
 	ai/defaultai.cc
 	align.cc
-	backtrace.cc
 	campvis.cc
 	chat.cc
 	computer_player.cc
@@ -218,6 +217,7 @@ set(WL_SRCS
 	graphic/wordwrap.cc
 	helper.cc
 	i18n.cc
+	logic/backtrace.cc
 	logic/battle.cc
 	logic/bob.cc
 	logic/buildcost.cc
@@ -439,7 +439,6 @@ set(WL_SRCS
   ai/ai_hints.h
   ai/defaultai.h
   align.h
-  backtrace.h
   campvis.h
   chat.h
   compile_diagnostics.h
@@ -567,6 +566,7 @@ set(WL_SRCS
   i18n.h
   interval.h
   logic/attackable.h
+  logic/backtrace.h
   logic/battle.h
   logic/bill_of_materials.h
   logic/bob.h
