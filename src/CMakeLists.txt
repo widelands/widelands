@@ -747,7 +747,6 @@ set(WL_SRCS
   scripting/scripting.h
   single_player_game_controller.h
   single_player_game_settings_provider.h
-  singleton.h
   text_layout.h
   timestring.h
   trackptr.h
