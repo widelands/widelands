@@ -22,7 +22,7 @@
 
 #include <vector>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "graphic/compositemode.h"
 #include "graphic/image.h"
 #include "graphic/rect.h"

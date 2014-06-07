@@ -136,7 +136,6 @@ set(WL_SRCS
 	ai/ai_help_structs.cc
 	ai/ai_hints.cc
 	ai/defaultai.cc
-	align.cc
 	campvis.cc
 	chat.cc
 	computer_player.cc
@@ -205,6 +204,7 @@ set(WL_SRCS
 	game_io/game_player_info_data_packet.cc
 	game_io/game_preload_data_packet.cc
 	game_io/game_saver.cc
+	graphic/align.cc
 	graphic/animation.cc
 	graphic/colormap.cc
 	graphic/font.cc
@@ -236,6 +236,7 @@ set(WL_SRCS
 	graphic/text/sdl_ttf_font_loader_from_file.cc
 	graphic/text/sdl_ttf_font_loader_from_filesystem.cc
 	graphic/text/textstream.cc
+	graphic/text_parser.cc
 	graphic/texture.cc
 	graphic/wordwrap.cc
 	helper.cc
@@ -360,7 +361,6 @@ set(WL_SRCS
 	single_player_game_controller.cc
 	single_player_game_settings_provider.cc
 	text_layout.cc
-	text_parser.cc
 	timestring.cc
 	ui_basic/box.cc
 	ui_basic/button.cc
@@ -461,7 +461,6 @@ set(WL_SRCS
   ai/ai_help_structs.h
   ai/ai_hints.h
   ai/defaultai.h
-  align.h
   campvis.h
   chat.h
   compile_diagnostics.h
@@ -546,6 +545,7 @@ set(WL_SRCS
   game_io/game_saver.h
   gamecontroller.h
   gamesettings.h
+  graphic/align.h
   graphic/animation.h
   graphic/colormap.h
   graphic/compositemode.h
@@ -584,6 +584,7 @@ set(WL_SRCS
   graphic/text/sdl_ttf_font.h
   graphic/text/sdl_ttf_font_impl.h
   graphic/text/textstream.h
+  graphic/text_parser.h
   graphic/texture.h
   graphic/wordwrap.h
   helper.h
@@ -748,7 +749,6 @@ set(WL_SRCS
   single_player_game_settings_provider.h
   singleton.h
   text_layout.h
-  text_parser.h
   timestring.h
   trackptr.h
   ui_basic/box.h

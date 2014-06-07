@@ -17,7 +17,7 @@
  *
  */
 
-#include "align.h"
+#include "graphic/align.h"
 
 namespace UI {
 

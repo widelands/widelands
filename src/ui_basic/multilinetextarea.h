@@ -20,7 +20,7 @@
 #ifndef UI_MULTILINE_TEXTAREA_H
 #define UI_MULTILINE_TEXTAREA_H
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/panel.h"
 #include "rgbcolor.h"
 #include "ui_basic/scrollbar.h"

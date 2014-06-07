@@ -27,7 +27,7 @@
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/panel.h"
 #include "rgbcolor.h"
 
