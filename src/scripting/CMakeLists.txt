@@ -69,6 +69,4 @@ add_library(eris STATIC
   ${ERIS_HEADERS}
 )
 
-if (WL_UNIT_TESTS)
-  add_subdirectory(test)
-endif (WL_UNIT_TESTS)
+add_subdirectory(test)

@@ -1,3 +1,15 @@
+#TODO: Why doesn't this work?
+#wl_testsuite(test_scripting 
+#  SRCS
+#    ./scripting_test_main.cc
+#    ./test_luna.cc
+#  DEPENDS
+#    widelands_all
+#    eris
+#    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+#    ${TEST_EXTRA_LIBS}
+#)
+
 if (WL_UNIT_TESTS)
   set(WL_SCRIPTING_TEST_SRCS 
     ./scripting_test_main.cc

@@ -1,12 +1,9 @@
-set(WL_TEST_IO_FILESYSTEM_SRCS
-	./filesystem_test_main.cc
-	./test_filesystem.cc
+wl_testsuite(test_io_filesystem
+  SRCS
+    ./filesystem_test_main.cc
+    ./test_filesystem.cc
+  DEPENDS
+    io_filesystem
+    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+    ${TEST_EXTRA_LIBS}
 )
-
-add_executable(test_io_filesystem ${WL_TEST_IO_FILESYSTEM_SRCS} ${TEST_EXTRA_SOURCES})
-
-target_link_libraries(test_io_filesystem io_filesystem)
-target_link_libraries(test_io_filesystem ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-target_link_libraries(test_io_filesystem ${TEST_EXTRA_LIBS})
-
-add_test(test_io_filesystem test_io_filesystem)

@@ -1,14 +1,12 @@
-set(WL_TEST_ECONOMY_SRCS 
-	./economy_test_main.cc
-	./test_economy.cc
-	./test_road.cc
-	./test_routing.cc
+wl_testsuite(test_economy
+  SRCS 
+    ./economy_test_main.cc
+    #TODO: (code review): are these three tests all run even though we only add one test at the end?
+    ./test_economy.cc
+    ./test_road.cc
+    ./test_routing.cc
+  DEPENDS
+    widelands_all
+    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+    ${TEST_EXTRA_LIBS}
 )
-
-add_executable(test_economy ${WL_TEST_ECONOMY_SRCS} ${TEST_EXTRA_SOURCES})
-
-target_link_libraries(test_economy widelands_all)
-target_link_libraries(test_economy ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-target_link_libraries(test_economy ${TEST_EXTRA_LIBS})
-
-add_test(test_economy test_economy)

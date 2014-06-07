@@ -42,6 +42,29 @@ function(wl_library NAME)
   endforeach(DEPENDENCY)
 endfunction(wl_library)
 
+function(wl_testsuite NAME)
+  set(OPTIONS)
+  set(ONE_VALUE_ARG)
+  set(MULTI_VALUE_ARGS SRCS DEPENDS)
+  cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
+    ${ARGN}
+  )
+
+  if (WL_UNIT_TESTS)
+    add_executable(${NAME} ${ARG_SRCS} ${TEST_EXTRA_SOURCES})
+
+    foreach(SRC ${ARG_SRCS})
+      run_codecheck(${NAME} ${SRC})
+    endforeach(SRC)
+
+    foreach(DEPENDENCY ${ARG_DEPENDS})
+      target_link_libraries(${NAME} ${DEPENDENCY})
+    endforeach()
+
+    add_test(${NAME} ${NAME})
+  endif()
+endfunction()
+
 # Checks a single 'SRC' file using Codecheck and writes a file named
 # codecheck_<shasum of input> if the codecheck did not yield anything.
 # The target for the codecheck will be added as a dependency to 'NAME' for
@@ -839,6 +862,7 @@ foreach(SRC ${WL_SRCS})
 endforeach(SRC)
 
 add_subdirectory(base)
+add_subdirectory(io)
 add_subdirectory(sound)
 add_subdirectory(scripting)
 
@@ -849,10 +873,9 @@ if (WL_UNIT_TESTS)
   set(TEST_EXTRA_SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
   set(TEST_EXTRA_LIBS ${SDL_LIBRARY} )
   list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY})
-
-  add_subdirectory(economy)
-  add_subdirectory(io)
 endif (WL_UNIT_TESTS)
+
+add_subdirectory(economy)
 
 #TODO: It looks like various things have cyclic dependencies
 #in all directions. Ideally this core shouldn't exist(?) or at least
