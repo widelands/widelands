@@ -22,12 +22,12 @@
 
 #include <SDL_keysym.h>
 
-#include "debugconsole.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/notification.h"
-#include "logmessage.h"
 #include "wui/chatoverlay.h"
+#include "wui/debugconsole.h"
+#include "wui/logmessage.h"
 #include "wui/mapview.h"
 #include "wui/overlay_manager.h"
 #include "ui_basic/box.h"

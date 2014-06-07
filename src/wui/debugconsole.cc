@@ -17,7 +17,7 @@
  *
  */
 
-#include "debugconsole.h"
+#include "wui/debugconsole.h"
 
 #include <map>
 

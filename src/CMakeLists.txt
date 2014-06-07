@@ -139,7 +139,6 @@ set(WL_SRCS
 	campvis.cc
 	chat.cc
 	computer_player.cc
-	debugconsole.cc
 	economy/cmd_call_economy_balance.cc
 	economy/economy.cc
 	economy/economy_data_packet.cc
@@ -410,6 +409,7 @@ set(WL_SRCS
 	wui/buildingwindow.cc
 	wui/chatoverlay.cc
 	wui/constructionsitewindow.cc
+	wui/debugconsole.cc
 	wui/dismantlesitewindow.cc
 	wui/encyclopedia_window.cc
 	wui/fieldaction.cc
@@ -468,7 +468,6 @@ set(WL_SRCS
   constants.h
   container_iterate.h
   cookie_priority_queue.h
-  debugconsole.h
   economy/cmd_call_economy_balance.h
   economy/economy.h
   economy/economy_data_packet.h
@@ -674,7 +673,6 @@ set(WL_SRCS
   logic/worker_program.h
   logic/world.h
   logic/worlddata.h
-  logmessage.h
   machdep.h
   map_generator.h
   map_io/map_loader.h
@@ -800,6 +798,7 @@ set(WL_SRCS
   wui/building_statistics_menu.h
   wui/buildingwindow.h
   wui/chatoverlay.h
+  wui/debugconsole.h
   wui/encyclopedia_window.h
   wui/fieldaction.h
   wui/game_chat_menu.h
@@ -820,6 +819,7 @@ set(WL_SRCS
   wui/interactive_spectator.h
   wui/itemwaresdisplay.h
   wui/login_box.h
+  wui/logmessage.h
   wui/mapview.h
   wui/mapviewpixelconstants.h
   wui/mapviewpixelfunctions.h

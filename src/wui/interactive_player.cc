@@ -27,7 +27,6 @@
 #include <boost/type_traits.hpp>
 #include <libintl.h>
 
-#include "debugconsole.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/font_handler.h"
@@ -46,6 +45,7 @@
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
 #include "wui/building_statistics_menu.h"
+#include "wui/debugconsole.h"
 #include "wui/encyclopedia_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
