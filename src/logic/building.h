@@ -33,7 +33,7 @@
 #include "logic/soldier_counts.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "workarea_info.h"
+#include "logic/workarea_info.h"
 
 namespace UI {class Window;}
 struct BuildingHints;

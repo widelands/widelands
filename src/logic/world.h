@@ -21,7 +21,7 @@
 #define WORLD_H
 
 #include "logic/bob.h"
-#include "description_maintainer.h"
+#include "logic/description_maintainer.h"
 #include "logic/immovable.h"
 #include "logic/widelands.h"
 #include "logic/worlddata.h"

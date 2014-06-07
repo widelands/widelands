@@ -24,10 +24,10 @@
 #include <vector>
 
 #include "TribeBasicInfo.h"
-#include "description_maintainer.h"
 #include "graphic/animation.h"
 #include "logic/bob.h"
 #include "logic/building.h"
+#include "logic/description_maintainer.h"
 #include "logic/immovable.h"
 #include "logic/military_data.h"
 #include "logic/ware_descr.h"

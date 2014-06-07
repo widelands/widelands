@@ -21,7 +21,6 @@
 
 #include <cstdlib>
 
-#include "backtrace.h"
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
@@ -29,6 +28,7 @@
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/backtrace.h"
 #include "logic/checkstep.h"
 #include "logic/critter_bob.h"
 #include "logic/findbob.h"
