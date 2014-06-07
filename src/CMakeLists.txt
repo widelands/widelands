@@ -865,7 +865,7 @@ add_subdirectory(io)
 add_subdirectory(sound)
 add_subdirectory(scripting)
 
-#the subdirectories are only used for test definition
+#TODO (code review): The comment below???
 #temporarily disabled the 'old' tests due to incompatibility
 if (WL_UNIT_TESTS)
   # Tests need to link with SDL library without main

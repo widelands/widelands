@@ -153,6 +153,16 @@ else (WL_UNIT_TESTS)
     REQUIRED)
 endif (WL_UNIT_TESTS)
 
+#TODO: (code review):
+#Would anyone miss this option if I removed it?
+#Back when I added more warnings we discussed -Werror briefly, but found that
+#it is not really feasible due to the number of configurations and combinations
+#of operating systems and compiler versions people might use. Also, it seems a
+#bit odd that some warnings are manually ignored.
+#And the last additional option passed to the compiler seem to have been
+#reversed and enabled by default, so it shouldn't be necessary. Compare
+#https://gcc.gnu.org/onlinedocs/gcc-4.5.0/gcc/Language-Independent-Options.html
+#https://gcc.gnu.org/onlinedocs/gcc-4.6.0/gcc/Language-Independent-Options.html
 option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
 
 set (PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR "-isystem ${Boost_INCLUDE_DIR}")
