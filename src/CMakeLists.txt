@@ -885,10 +885,12 @@ add_library(widelands_ball_of_mud STATIC
 )
 
 # TODO(sirver): add a third_party directory and put stuff like minizip, eris in there.
-if (NOT MINIZIP_FOUND)
+if (MINIZIP_FOUND)
+  target_link_libraries(widelands_ball_of_mud ${MINIZIP_LIBRARY})
+else ()
   add_subdirectory(minizip)
   target_link_libraries(widelands_ball_of_mud wl_minizip)
-endif (NOT MINIZIP_FOUND)
+endif ()
 
 target_link_libraries(widelands_all eris)
 target_link_libraries(widelands_all io_filesystem)
@@ -904,10 +906,6 @@ target_link_libraries(widelands_all ${ZLIB_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
 target_link_libraries(widelands_all ${GLEW_LIBRARY})
 target_link_libraries(widelands_all ${Boost_LIBRARIES})
-
-if (MINIZIP_FOUND)
-  target_link_libraries(widelands_ball_of_mud ${MINIZIP_LIBRARY})
-endif (MINIZIP_FOUND)
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_all ${EXECINFO_LIBRARY})
