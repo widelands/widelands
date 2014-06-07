@@ -23,8 +23,8 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/rect.h"
 #include "graphic/rendertarget.h"
-#include "rect.h"
 #include "text_parser.h"
 
 namespace UI {

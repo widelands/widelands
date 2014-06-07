@@ -560,6 +560,7 @@ set(WL_SRCS
   graphic/image_loader_impl.h
   graphic/image_transformations.h
   graphic/in_memory_image.h
+  graphic/rect.h
   graphic/render/gamerenderer.h
   graphic/render/gamerenderer_gl.h
   graphic/render/gamerenderer_sdl.h
@@ -721,7 +722,6 @@ set(WL_SRCS
   point.h
   profile/profile.h
   random.h
-  rect.h
   ref_cast.h
   replay_game_controller.h
   rgbcolor.h

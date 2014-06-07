@@ -28,7 +28,7 @@
 #include <png.h>
 
 #include "graphic/image_cache.h"
-#include "rect.h"
+#include "graphic/rect.h"
 
 #define MAX_RECTS 20
 
