@@ -34,8 +34,8 @@
 #include "io/filewrite.h"
 #include "logic/critter_bob.h"
 #include "logic/game_data_error.h"
+#include "logic/parse_map_object_types.h"
 #include "logic/worlddata.h"
-#include "parse_map_object_types.h"
 #include "profile/profile.h"
 
 using std::cerr;

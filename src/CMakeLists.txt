@@ -635,6 +635,7 @@ set(WL_SRCS
   logic/nodecaps.h
   logic/notification.h
   logic/objective.h
+  logic/parse_map_object_types.h
   logic/partially_finished_building.h
   logic/path.h
   logic/pathfield.h
@@ -717,7 +718,6 @@ set(WL_SRCS
   network/network_player_settings_backend.h
   network/network_protocol.h
   network/network_system.h
-  parse_map_object_types.h
   point.h
   profile/profile.h
   random.h
