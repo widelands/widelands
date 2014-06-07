@@ -17,7 +17,7 @@
  *
  */
 
-#include "text_parser.h"
+#include "graphic/text_parser.h"
 
 #include <algorithm>
 #include <cstring>
