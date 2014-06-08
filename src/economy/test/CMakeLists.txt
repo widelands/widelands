@@ -1,5 +1,5 @@
-wl_testsuite(test_economy
-  SRCS 
+wl_test(test_economy
+  SRCS
     ./economy_test_main.cc
     #TODO: (code review): are these three tests all run even though we only add one test at the end?
     ./test_economy.cc

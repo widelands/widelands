@@ -98,60 +98,44 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
-# Unit tests are built per default in Debug and not build in Release
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  option (WL_UNIT_TESTS "build and run unit tests (requires boost_unit_test_framework)" ON)
-else (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  option (WL_UNIT_TESTS "build and run unit tests (requires boost_unit_test_framework)" OFF)
-endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
-
 # we only include Boost Headers to the main executable, no libraries
 # unit_test_framework is for testing only
-if (WL_UNIT_TESTS)
-  message(STATUS "Enabled unit tests")
-  if (DEFINED MSVC)
-    set (BUILD_SHARED_LIBS OFF)
-	set (Boost_USE_STATIC_RUNTIME ON)
-	set (Boost_USE_STATIC_LIBS ON)
-  else (DEFINED MSVC)
-    set (Boost_USE_STATIC_LIBS  OFF)
-  endif (DEFINED MSVC)
-  set (Boost_FIND_COMPONENTS unit_test_framework)
-  set (Boost_USE_MULTITHREADED ON)
-  set (Boost_DETAILED_FAILURE_MSG ON)
-  find_package(Boost 1.48
-    COMPONENTS
-      unit_test_framework
-      regex
-    REQUIRED)
+message(STATUS "Enabled unit tests")
+if (DEFINED MSVC)
+  set (BUILD_SHARED_LIBS OFF)
+set (Boost_USE_STATIC_RUNTIME ON)
+set (Boost_USE_STATIC_LIBS ON)
+else (DEFINED MSVC)
+  set (Boost_USE_STATIC_LIBS  OFF)
+endif (DEFINED MSVC)
+set (Boost_FIND_COMPONENTS unit_test_framework)
+set (Boost_USE_MULTITHREADED ON)
+set (Boost_DETAILED_FAILURE_MSG ON)
+find_package(Boost 1.48
+  COMPONENTS
+    unit_test_framework
+    regex
+  REQUIRED)
 
-  if (NOT DEFINED MSVC)
-  # If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
-    string( REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-    if (NOT BOOST_STATIC_UNIT_TEST_LIB)
-      add_definitions(-DBOOST_TEST_DYN_LINK)
-    endif (NOT BOOST_STATIC_UNIT_TEST_LIB)
-  endif(NOT DEFINED MSVC)
+if (NOT DEFINED MSVC)
+# If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
+  string( REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+  if (NOT BOOST_STATIC_UNIT_TEST_LIB)
+    add_definitions(-DBOOST_TEST_DYN_LINK)
+  endif (NOT BOOST_STATIC_UNIT_TEST_LIB)
+endif(NOT DEFINED MSVC)
 
-  include(CTest)
-  enable_testing()
+include(CTest)
+enable_testing()
 
-  #automatic unit testing hook, must be updated to reflect all tests
-  #if this is too intricate, we can also have this as an automatic detection
-  #but the current way allows to disable certain checks if they are taking
-  #too much time when ran every compile time
-  add_custom_target(autotest ALL
-    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    DEPENDS widelands;test_widelands_scripting;test_economy;test_io_filesystem
-  )
-else (WL_UNIT_TESTS)
-  message(STATUS "Disabled Unit Tests")
-  find_package(Boost 1.48
-    COMPONENTS
-      regex
-    REQUIRED)
-endif (WL_UNIT_TESTS)
+# Run a test after a normal compile. This magic is needed as 'make test' will
+# not rebuild tests:
+# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+add_custom_target(_run_all_tests ALL
+  COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  DEPENDS wl_tests
+)
 
 #TODO: (code review):
 #Would anyone miss this option if I removed it?

@@ -4,6 +4,11 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_
 # Catchall target to codecheck all files.
 add_custom_target(codecheck)
 
+# A target that depends on all unit tests as 'make test' will not rebuild
+# tests:
+# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+add_custom_target(wl_tests)
+
 # See
 # http://www.cmake.org/cmake/help/v3.0/module/CMakeParseArguments.html
 function(wl_library NAME)
@@ -42,7 +47,7 @@ function(wl_library NAME)
   endforeach(DEPENDENCY)
 endfunction(wl_library)
 
-function(wl_testsuite NAME)
+function(wl_test NAME)
   set(OPTIONS)
   set(ONE_VALUE_ARG)
   set(MULTI_VALUE_ARGS SRCS DEPENDS)
@@ -50,19 +55,19 @@ function(wl_testsuite NAME)
     ${ARGN}
   )
 
-  if (WL_UNIT_TESTS)
-    add_executable(${NAME} ${ARG_SRCS} ${TEST_EXTRA_SOURCES})
+  # TODO(sirver): look into using a cMake macro to reduce code duplication.
+  add_executable(${NAME} ${ARG_SRCS} ${TEST_EXTRA_SOURCES})
 
-    foreach(SRC ${ARG_SRCS})
-      run_codecheck(${NAME} ${SRC})
-    endforeach(SRC)
+  foreach(SRC ${ARG_SRCS})
+    run_codecheck(${NAME} ${SRC})
+  endforeach(SRC)
 
-    foreach(DEPENDENCY ${ARG_DEPENDS})
-      target_link_libraries(${NAME} ${DEPENDENCY})
-    endforeach()
+  foreach(DEPENDENCY ${ARG_DEPENDS})
+    target_link_libraries(${NAME} ${DEPENDENCY})
+  endforeach()
 
-    add_test(${NAME} ${NAME})
-  endif()
+  add_test(${NAME} ${NAME})
+  add_dependencies(wl_tests ${NAME})
 endfunction()
 
 # Checks a single 'SRC' file using Codecheck and writes a file named
@@ -867,12 +872,10 @@ add_subdirectory(scripting)
 
 #TODO (code review): The comment below???
 #temporarily disabled the 'old' tests due to incompatibility
-if (WL_UNIT_TESTS)
-  # Tests need to link with SDL library without main
-  set(TEST_EXTRA_SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
-  set(TEST_EXTRA_LIBS ${SDL_LIBRARY} )
-  list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY})
-endif (WL_UNIT_TESTS)
+# Tests need to link with SDL library without main
+set(TEST_EXTRA_SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
+set(TEST_EXTRA_LIBS ${SDL_LIBRARY} )
+list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY})
 
 add_subdirectory(economy)
 

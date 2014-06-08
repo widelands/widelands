@@ -102,4 +102,3 @@ BOOST_FIXTURE_TEST_CASE(InstantiateEditorGameBase, SimpleRoadTestsFixture) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
