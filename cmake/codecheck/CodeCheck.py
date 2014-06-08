@@ -289,7 +289,7 @@ class CodeChecker(object):
         preprocessor = Preprocessor()
 
         # Check line by line (currently)
-        with io.open(fn, "r", newline='') as file:
+        with io.open(fn, "r", newline='', encoding='utf-8') as file:
             data = file.read()
             for c in self._checkers:
                 if self._benchmark:
