@@ -10,5 +10,4 @@ wl_library(sound
   DEPENDS
     io_filesystem
     base_log
-    #TODO: (code review): Oh, and another thing; do we want to specificy dependencies for SDL/Boost/et al for each library? Does this make dependencies clearer and explicit or is it overkill?
 )
