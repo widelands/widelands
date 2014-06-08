@@ -51,7 +51,7 @@ public:
 		Pos operator++() {
 			return ++pos;
 		}
-		Pos operator+=(Pos const other) {
+		Pos operator += (Pos const other) {
 			return pos += other.pos;
 		}
 
@@ -86,13 +86,13 @@ public:
 
 	/// Set the file pointer to a new location. The position can be beyond the
 	/// current end of file.
-	void SetPos(const Pos pos);
+	void SetPos(Pos pos);
 
 	/// Write data at the given location.
-	void Data(const void* const src, const size_t size, Pos const pos);
+	void Data(const void* src, size_t size, Pos pos);
 
 	/// Write data at the current file pointer and advance it.
-	void Data(void const* const src, size_t const size) override;
+	void Data(void const* src, size_t size) override;
 
 private:
 	char* data_;

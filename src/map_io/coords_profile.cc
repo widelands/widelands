@@ -19,9 +19,8 @@
 
 #include "map_io/coords_profile.h"
 
+#include <cstdlib>
 #include <string>
-
-#include <stdlib.h>
 
 #include "base/wexception.h"
 #include "logic/widelands_geometry.h"
@@ -58,10 +57,8 @@ void set_coords(const std::string& name, const Coords& value, Section* section) 
 	section->set_string(name.c_str(), buffer);
 }
 
-Coords get_coords(const std::string& name,
-                             const Extent& extent,
-                             const Coords& def,
-                             Section* section) {
+Coords
+get_coords(const std::string& name, const Extent& extent, const Coords& def, Section* section) {
 	const char* const v = section->get_string(name.c_str());
 	if (!v) {
 		return def;

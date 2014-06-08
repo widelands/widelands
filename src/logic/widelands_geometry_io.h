@@ -97,10 +97,10 @@ Coords ReadCoords32_allow_null(StreamRead* fr, const Extent& extent);
 Area<Coords, uint16_t> ReadArea48(StreamRead* fr, const Extent& extent);
 
 // Writes 'd' to 'wr'.
-void WriteDirection8(StreamWrite* wr, Direction const d);
+void WriteDirection8(StreamWrite* wr, Direction d);
 
 // Writes 'd' into 'wr'.
-void WriteDirection8_allow_null(StreamWrite* wr, Direction const d);
+void WriteDirection8_allow_null(StreamWrite* wr, Direction d);
 
 // Writes 'c' to 'wr'.
 void WriteCoords32(StreamWrite* wr, const Coords& c);
