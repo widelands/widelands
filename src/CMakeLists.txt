@@ -685,6 +685,8 @@ set(WL_SRCS
   logic/worlddata.h
   machdep.h
   map_generator.h
+  map_io/coords_profile.cc
+  map_io/coords_profile.h
   map_io/map_loader.h
   map_io/widelands_map_allowed_building_types_data_packet.h
   map_io/widelands_map_allowed_worker_types_data_packet.h
