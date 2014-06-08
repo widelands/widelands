@@ -22,6 +22,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "map_io/coords_profile.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -49,7 +50,7 @@ void Map_Player_Position_Data_Packet::Read
 				try {
 					char buffer[10];
 					snprintf(buffer, sizeof(buffer), "player_%u", p);
-					map.set_starting_pos(p, s.get_safe_Coords(buffer, extent));
+					map.set_starting_pos(p, get_safe_coords(buffer, extent, &s));
 				} catch (const _wexception & e) {
 					throw game_data_error("player %u: %s", p, e.what());
 				}
@@ -76,7 +77,7 @@ void Map_Player_Position_Data_Packet::Write
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		s.set_Coords(buffer, map.get_starting_pos(p));
+		set_coords(buffer, map.get_starting_pos(p), &s);
 	}
 
 	prof.write("player_position", false, fs);
