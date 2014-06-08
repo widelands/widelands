@@ -346,7 +346,6 @@ set(WL_SRCS
 	network/network_gaming_messages.cc
 	network/network_lan_promotion.cc
 	network/network_player_settings_backend.cc
-	profile/profile.cc
 	random.cc
 	replay_game_controller.cc
 	s2map.cc
@@ -729,7 +728,6 @@ set(WL_SRCS
   network/network_protocol.h
   network/network_system.h
   point.h
-  profile/profile.h
   random.h
   ref_cast.h
   replay_game_controller.h
@@ -871,11 +869,11 @@ foreach(SRC ${WL_SRCS})
 endforeach(SRC)
 
 add_subdirectory(base)
-add_subdirectory(io)
-add_subdirectory(sound)
-add_subdirectory(scripting)
-
 add_subdirectory(economy)
+add_subdirectory(io)
+add_subdirectory(profile)
+add_subdirectory(scripting)
+add_subdirectory(sound)
 
 #TODO: It looks like various things have cyclic dependencies
 #in all directions. Ideally this core shouldn't exist(?) or at least
@@ -893,11 +891,12 @@ else ()
   target_link_libraries(widelands_ball_of_mud wl_minizip)
 endif ()
 
-target_link_libraries(widelands_all eris)
-target_link_libraries(widelands_all io_filesystem)
-target_link_libraries(widelands_all io_dedicated_log)
-target_link_libraries(widelands_all sound)
 target_link_libraries(widelands_all base_i18n)
+target_link_libraries(widelands_all eris)
+target_link_libraries(widelands_all io_dedicated_log)
+target_link_libraries(widelands_all io_filesystem)
+target_link_libraries(widelands_all profile)
+target_link_libraries(widelands_all sound)
 target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
 target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
 target_link_libraries(widelands_all ${SDLNET_LIBRARY})
