@@ -55,14 +55,19 @@ function(wl_test NAME)
     ${ARGN}
   )
 
-  # TODO(sirver): look into using a cMake macro to reduce code duplication.
-  add_executable(${NAME} ${ARG_SRCS} ${TEST_EXTRA_SOURCES})
+  # TODO(sirver): look into using a CMAKE macro to reduce code duplication.
+  add_executable(${NAME} ${ARG_SRCS})
 
   foreach(SRC ${ARG_SRCS})
     run_codecheck(${NAME} ${SRC})
   endforeach(SRC)
 
-  foreach(DEPENDENCY ${ARG_DEPENDS})
+  # Tests need to link with SDL library without main.
+  set(TEST_DEPENDENCIES ${SDL_LIBRARY}
+    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} ${ARG_DEPENDS})
+  list(REMOVE_ITEM TEST_DEPENDENCIES  ${SDLMAIN_LIBRARY})
+
+  foreach(DEPENDENCY ${TEST_DEPENDENCIES})
     target_link_libraries(${NAME} ${DEPENDENCY})
   endforeach()
 
@@ -869,13 +874,6 @@ add_subdirectory(base)
 add_subdirectory(io)
 add_subdirectory(sound)
 add_subdirectory(scripting)
-
-#TODO (code review): The comment below???
-#temporarily disabled the 'old' tests due to incompatibility
-# Tests need to link with SDL library without main
-set(TEST_EXTRA_SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
-set(TEST_EXTRA_LIBS ${SDL_LIBRARY} )
-list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY})
 
 add_subdirectory(economy)
 

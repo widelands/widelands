@@ -5,6 +5,4 @@ wl_test(test_scripting
  DEPENDS
    widelands_all
    eris
-   ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
-   ${TEST_EXTRA_LIBS}
 )

@@ -7,6 +7,4 @@ wl_test(test_economy
     ./test_routing.cc
   DEPENDS
     widelands_all
-    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
-    ${TEST_EXTRA_LIBS}
 )

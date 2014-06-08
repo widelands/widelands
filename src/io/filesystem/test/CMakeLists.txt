@@ -4,6 +4,4 @@ wl_test(test_io_filesystem
     ./test_filesystem.cc
   DEPENDS
     io_filesystem
-    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
-    ${TEST_EXTRA_LIBS}
 )

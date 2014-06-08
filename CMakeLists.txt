@@ -1,5 +1,7 @@
 project (widelands)
 
+# TODO(sirver): cmake 2.8 is released in 2009. I think we should require it and
+# simplify more here.
 cmake_minimum_required (VERSION 2.6)
 
 # Used as versioning, if WL_VERSION_STANDARD is definded.
