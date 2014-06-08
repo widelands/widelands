@@ -26,8 +26,8 @@
 #include <string>
 #include <vector>
 
+#include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
-#include "i18n.h"
 #include "interval.h"
 #include "logic/field.h"
 #include "logic/map_revision.h"

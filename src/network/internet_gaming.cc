@@ -23,10 +23,10 @@
 #include <boost/lexical_cast.hpp>
 #include <libintl.h>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
 #include "compile_diagnostics.h"
-#include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"

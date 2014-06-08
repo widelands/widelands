@@ -249,7 +249,6 @@ set(WL_SRCS
 	graphic/texture.cc
 	graphic/wordwrap.cc
 	helper.cc
-	i18n.cc
 	logic/backtrace.cc
 	logic/battle.cc
 	logic/bob.cc
@@ -597,7 +596,6 @@ set(WL_SRCS
   graphic/texture.h
   graphic/wordwrap.h
   helper.h
-  i18n.h
   interval.h
   logic/attackable.h
   logic/backtrace.h
@@ -899,6 +897,7 @@ target_link_libraries(widelands_all eris)
 target_link_libraries(widelands_all io_filesystem)
 target_link_libraries(widelands_all io_dedicated_log)
 target_link_libraries(widelands_all sound)
+target_link_libraries(widelands_all base_i18n)
 target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
 target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
 target_link_libraries(widelands_all ${SDLNET_LIBRARY})

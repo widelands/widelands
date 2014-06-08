@@ -21,8 +21,8 @@
 
 #include <vector>
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/bob.h"
 #include "logic/game.h"
 #include "logic/map.h"

@@ -21,11 +21,11 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/wexception.h"
 #include "constants.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"

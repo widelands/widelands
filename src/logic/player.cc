@@ -22,13 +22,13 @@
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/building.h"

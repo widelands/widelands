@@ -22,12 +22,12 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "map_io/widelands_map_loader.h"

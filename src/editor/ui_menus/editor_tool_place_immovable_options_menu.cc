@@ -21,10 +21,10 @@
 
 #include <SDL_keysym.h>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_immovable_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/world.h"
 #include "ui_basic/box.h"

@@ -21,9 +21,9 @@
 
 #include <cstdio>
 
+#include "base/i18n.h"
 #include "economy/request.h"
 #include "helper.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"

@@ -22,12 +22,12 @@
 #include <algorithm>
 #include <set>
 
+#include "base/i18n.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/battle.h"
 #include "logic/building.h"
 #include "logic/dismantlesite.h"

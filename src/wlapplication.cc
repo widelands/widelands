@@ -39,6 +39,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
 #include "base/wexception.h"
@@ -49,7 +50,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"

@@ -25,12 +25,12 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/wexception.h"
 #include "constants.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"

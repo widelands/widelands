@@ -27,11 +27,11 @@
 #include <boost/type_traits.hpp>
 #include <libintl.h>
 
+#include "base/i18n.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/font_handler.h"
 #include "helper.h"
-#include "i18n.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
 #include "logic/constructionsite.h"

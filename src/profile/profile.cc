@@ -26,10 +26,10 @@
 #include <limits>
 #include <string>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/player.h"

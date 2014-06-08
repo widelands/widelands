@@ -22,11 +22,11 @@
 #include <boost/format.hpp>
 #include <libintl.h>
 
+#include "base/i18n.h"
 #include "base/warning.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/instances.h"

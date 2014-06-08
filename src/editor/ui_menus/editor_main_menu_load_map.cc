@@ -23,11 +23,11 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"

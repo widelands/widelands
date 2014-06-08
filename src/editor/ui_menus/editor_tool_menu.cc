@@ -19,6 +19,7 @@
 
 #include "editor/ui_menus/editor_tool_menu.h"
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_decrease_height_tool.h"
 #include "editor/tools/editor_decrease_resources_tool.h"
@@ -36,7 +37,6 @@
 #include "editor/ui_menus/editor_tool_place_immovable_options_menu.h"
 #include "editor/ui_menus/editor_tool_set_terrain_options_menu.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
 

@@ -29,6 +29,7 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "constants.h"
@@ -41,7 +42,6 @@
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"  // For Map_Object_Descr.

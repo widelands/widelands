@@ -22,12 +22,12 @@
 #include <boost/format.hpp>
 #include <libintl.h>
 
+#include "base/i18n.h"
 #include "constants.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"
 #include "gamecontroller.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"

@@ -21,11 +21,11 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "gamecontroller.h"
-#include "i18n.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"

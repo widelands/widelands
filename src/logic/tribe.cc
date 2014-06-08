@@ -23,9 +23,9 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"

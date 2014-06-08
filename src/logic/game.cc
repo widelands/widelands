@@ -28,6 +28,7 @@
 #include <windows.h>
 #endif
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
 #include "computer_player.h"
@@ -36,7 +37,6 @@
 #include "game_io/game_preload_data_packet.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
