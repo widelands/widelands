@@ -111,8 +111,8 @@ greenland = {
       {
          name = "wasteland_doodads",
          immovables = {
-            "skeleton1", "skeleton2", "skeleton3", "cactus1", "cactus1",
-            "cactus2", "cactus2", "fallentree", "deadtree1", "deadtree2",
+            "skeleton1", "skeleton2", "skeleton3", "cactus1",
+            "cactus2", "fallentree", "deadtree1", "deadtree2",
             "deadtree3", "deadtree4"
          },
          critters = {},
@@ -177,149 +177,196 @@ greenland = {
    } -- land resources
 }
 
--- NOCOM(#sirver): temporary
-return greenland
 ------------------------
 --  Former blackland  --
 ------------------------
 
+blackland = {
+   heights = {
+      ocean = 10,
+      shelf = 10,
+      shallow = 10,
+      coast = 11,
+      upperland = 14,
+      mountainfoot = 15,
+      mountain = 16,
+      snow = 39,
+      summit = 45,
+   },
+   areas = {
+      water = {
+         {
+            name = "ocean",
+            weight = 1,
+            ocean_terrains = { "wasteland_water" },
+            shelf_terrains = { "wasteland_water" },
+            shallow_terrains = { "wasteland_water" },
+         }
+      },
+      land = {
+         {
+            name = "hardground1",
+            weight = 2,
+            coast_terrains = { "wasteland_beach" },
+            land_terrains = { "hardground1", "hardground2" },
+            upper_terrains = { "hardground1", "hardground2" },
+         },
+         {
+            name = "hardground2",
+            weight = 2,
+            coast_terrains = { "wasteland_beach" },
+            land_terrains = { "hardground3", "hardground4" },
+            upper_terrains = { "hardground3", "hardground4" },
+         },
+         {
+            name = "ashes",
+            weight = 1,
+            coast_terrains = { "ashes2" },
+            land_terrains = { "ashes" },
+            upper_terrains = { "ashes" },
+         },
+      },
+      wasteland = {
+         {
+            name = "wasteland1",
+            weight = 1,
+            inner_terrains = { "lava", "lava-stone1" },
+            outer_terrains = { "hardlava", "lava-stone2" },
+         },
+         {
+            name = "wasteland2",
+            weight = 2,
+            inner_terrains = { "hardlava", "lava-stone2" },
+            outer_terrains = { "hardlava", "lava-stone2" },
+         },
+      },
+      mountains = {
+         {
+            name = "mountains",
+            weight = 1,
+            mountainfoot_terrains = { "hardlava" },
+            mountain_terrains = {
+               "wasteland_mountain1", "wasteland_mountain2",
+               "wasteland_mountain3", "wasteland_mountain4"
+            },
+            snow_terrains = { "lava", "lava-stone1", "lava-stone2" },
+         }
+      }
+   }, -- areas
+   bob_categories = {
+      {
+         name = "trees",
+         immovables = {
+            "umbrella_red_wasteland_old",
+            "mushroom_dark_wasteland_mature",
+            "twine_wasteland_old", "umbrella_green_wasteland_old",
+            "mushroom_red_wasteland_old",
+            "mushroom_green_wasteland_old", "cirrus_wasteland_old",
+            "liana_wasteland_old"
+         },
+         critters = { "deer", "reindeer" },
+      },
+      {
+         name = "bushes",
+         immovables = { "bush1", "bush2", "bush3", "bush4", "bush5" },
+         critters = { "bunny", "fox", "sheep" },
+      },
+      {
+         name = "grasses",
+         immovables = { "grass1", "grass2", "grass3" },
+         critters = { "bunny", "fox", "sheep" },
+      },
+      {
+         name = "standing_stones",
+         immovables = {
+            "standing_stone1_wasteland",
+            "standing_stone2_wasteland",
+            "standing_stone3_wasteland",
+            "standing_stone4_wasteland",
+            "standing_stone5_wasteland",
+         },
+         critters = {},
+      },
+      {
+         name = "stones",
+         immovables = {
+            "blackland_stones1", "blackland_stones2",
+            "blackland_stones3", "blackland_stones4",
+            "blackland_stones5", "blackland_stones6",
+         },
+         critters = {},
+      },
+      {
+         name = "wasteland_doodads",
+         immovables = {
+            "skeleton1", "skeleton2", "skeleton3", "cactus1",
+            "cactus2", "fallentree", "deadtree1", "deadtree2",
+            "deadtree3", "deadtree4"
+         },
+         critters = {},
+      }
+   }, -- bob_categories
+   land_resources = {
+      {
+         name = "forest",
+         weight = 6,
+         immovable_density = 40,
+         critter_density = 20,
+         land_coast_bobs = "bushes",
+         land_inner_bobs = "trees",
+         land_upper_bobs = "bushes",
+         wasteland_inner_bobs = "wasteland_doodads",
+         wasteland_outer_bobs = "bushes",
+      },
+      {
+         name = "bushland",
+         weight = 2,
+         immovable_density = 50,
+         critter_density = 20,
+         land_coast_bobs = "grasses",
+         land_inner_bobs = "bushes",
+         land_upper_bobs = "grasses",
+         wasteland_inner_bobs = "wasteland_doodads",
+         wasteland_outer_bobs = "grasses",
+      },
+      {
+         name = "meadow",
+         weight = 2,
+         immovable_density = 10,
+         critter_density = 20,
+         land_coast_bobs = "grasses",
+         land_inner_bobs = "grasses",
+         land_upper_bobs = "grasses",
+         wasteland_inner_bobs = "wasteland_doodads",
+         wasteland_outer_bobs = "grasses",
+      },
+      {
+         name = "stone",
+         weight = 4,
+         immovable_density = 100,
+         critter_density = 0,
+         land_coast_bobs = "",
+         land_inner_bobs = "stones",
+         land_upper_bobs = "",
+         wasteland_inner_bobs = "stones",
+         wasteland_outer_bobs = "stones",
+      },
+      {
+         name = "standing_stones",
+         weight = 2,
+         immovable_density = 100,
+         critter_density = 0,
+         land_coast_bobs = "",
+         land_inner_bobs = "standing_stones",
+         land_upper_bobs = "",
+         wasteland_inner_bobs = "standing_stones",
+         wasteland_outer_bobs = "standing_stones",
+      }
+   } -- land resources
+}
 
--- [water]
-            -- NOCOM(#sirver): terrains have been renamed
--- ocean_terrains=water
--- shelf_terrains=water
--- shallow_terrains=water
-
-
--- [areas]
--- water=water
--- land=hardground1,hardground2,ashes
--- wasteland=wasteland1,wasteland2
--- mountains=mountains
-
-
--- [hardground1]
--- weight=2
-
--- coast_terrains=strand
--- land_terrains=hardground1,hardground2
--- upper_terrains=hardground1,hardground2
-
-
--- [hardground2]
--- weight=2
-
--- coast_terrains=strand
--- land_terrains=hardground3,hardground4
--- upper_terrains=hardground3,hardground4
-
-
--- [ashes]
--- weight=1
-
--- coast_terrains=ashes2
--- land_terrains=ashes
--- upper_terrains=ashes
-
-
--- [mountains]
--- mountainfoot_terrains=hardlava
--- mountain_terrains=mountain1,mountain2,mountain3,mountain4
--- snow_terrains=lava,lava-stone1,lava-stone2
-
-
--- [wasteland1]
--- weight=1
-
--- inner_terrains=lava,lava-stone1
--- outer_terrains=hardlava,lava-stone2
-
-
--- [wasteland2]
--- weight=2
-
--- inner_terrains=hardlava,lava-stone2
--- outer_terrains=hardlava,lava-stone2
-
-
-
--- [bobs]
--- land_resources=forest,bushland,meadow,stone,standing_stones
--- categories=trees,bushes,grasses,stones,standing_stones,wasteland_doodads
-
--- [forest]
--- weight=6
--- immovable_density=40
--- critter_density=20
--- land_coast_bobs=bushes
--- land_inner_bobs=trees
--- land_upper_bobs=bushes
--- wasteland_inner_bobs=wasteland_doodads
--- wasteland_outer_bobs=bushes
-
--- [bushland]
--- weight=2
--- immovable_density=50
--- critter_density=20
--- land_coast_bobs=grasses
--- land_inner_bobs=bushes
--- land_upper_bobs=grasses
--- wasteland_inner_bobs=wasteland_doodads
--- wasteland_outer_bobs=grasses
-
--- [meadow]
--- weight=2
--- immovable_density=10
--- critter_density=20
--- land_coast_bobs=grasses
--- land_inner_bobs=grasses
--- land_upper_bobs=grasses
--- wasteland_inner_bobs=wasteland_doodads
--- wasteland_outer_bobs=grasses
-
--- [stone]
--- weight=4
--- immovable_density=100
--- critter_density=0
--- land_coast_bobs=
--- land_inner_bobs=stones
--- land_upper_bobs=
--- wasteland_inner_bobs=stones
--- wasteland_outer_bobs=stones
-
--- [standing_stones]
--- weight=2
--- immovable_density=100
--- critter_density=0
--- land_coast_bobs=
--- land_inner_bobs=standing_stones
--- land_upper_bobs=
--- wasteland_inner_bobs=standing_stones
--- wasteland_outer_bobs=standing_stones
-
--- [trees]
--- immovables=tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8
--- critters=deer,reindeer
-
--- [bushes]
--- immovables=bush1,bush2,bush3,bush4,bush5
--- critters=bunny,fox,sheep,sheep
-
--- [grasses]
--- immovables=grass1,grass2,grass3
--- critters=bunny,fox,sheep,sheep
-
--- [standing_stones]
--- immovables=sstones1,sstones2,sstones3,sstones4,sstones5,sstones6,sstones7
--- critters=
-
--- [stones]
--- immovables=stones1,stones2,stones3,stones4,stones5,stones5,stones6,stones6,stones6
--- critters=
-
--- [wasteland_doodads]
--- immovables=skeleton1,skeleton2,skeleton3,cactus1,cactus1,cactus2,cactus2,deadtree1,deadtree2,deadtree3,deadtree4
--- critters=
+-- NOCOM(#sirver): temporary
+return blackland
 
 -- ---------------------
 -- --  Former desert  --
