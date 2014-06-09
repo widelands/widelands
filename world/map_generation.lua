@@ -365,26 +365,182 @@ blackland = {
    } -- land resources
 }
 
--- NOCOM(#sirver): temporary
-return blackland
-
 -- ---------------------
 -- --  Former desert  --
 -- ---------------------
 
+desert = {
+   heights = {
+      ocean = 10,
+      shelf = 10,
+      shallow = 10,
+      coast = 11,
+      upperland = 14,
+      mountainfoot = 15,
+      mountain = 16,
+      snow = 39,
+      summit = 45,
+   },
+   areas = {
+      water = {
+         {
+            name = "water",
+            weight = 1,
+            ocean_terrains = { "desert_water" },
+            shelf_terrains = { "desert_water" },
+            shallow_terrains = { "desert_water" },
+         }
+      },
+      land = {
+         {
+            name = "meadow_land",
+            weight = 1,
+            coast_terrains = { "desert_beach" },
+            land_terrains = { "meadow" },
+            upper_terrains = { "mountainmeadow" },
+         },
+      },
+      wasteland = {
+         {
+            name = "desert",
+            weight = 1,
+            inner_terrains = { "desert1", "desert2", "desert3", "desert4" },
+            outer_terrains = { "desert1", "desert2", "desert3", "desert4" },
+         },
+      },
+      mountains = {
+         {
+            name = "mountains",
+            weight = 1,
+            mountainfoot_terrains = { "mountainmeadow" },
+            mountain_terrains = {
+               "mountain1", "mountain2", "mountain3", "mountain4"
+            },
+            snow_terrains = {
+               "mountain1", "mountain2", "mountain3", "mountain4"
+            },
+         }
+      }
+   }, -- areas
+   bob_categories = {
+      {
+         name = "trees",
+         immovables = {
+            "palm_date_desert_old", "palm_borassus_desert_old",
+            "palm_coconut_desert_old", "palm_roystonea_desert_old",
+            "palm_oil_desert_old", "beech_summer_old",
+            "larch_summer_old", "rowan_summer_old",
+         },
+         critters = { "deer" },
+      },
+      {
+         name = "bushes",
+         immovables = { "bush1", "bush4", "bush5" },
+         critters = { "bunny", "fox", "sheep" },
+      },
+      {
+         name = "grasses",
+         immovables = {
+            "grass1", "grass2", "grass3", "ruin1", "ruin2",
+            "ruin3", "ruin4",
+         },
+         critters = { "bunny", "fox", "sheep" },
+      },
+      {
+         name = "standing_stones",
+         immovables = {
+            "standing_stone1_desert",
+            "standing_stone2_desert",
+            "standing_stone3_desert",
+            "standing_stone4_desert",
+            "standing_stone5_desert",
+         },
+         critters = {},
+      },
+      {
+         name = "stones",
+         immovables = {
+            "desert_stones1", "desert_stones2",
+            "desert_stones3", "desert_stones4",
+            "desert_stones5", "desert_stones6",
+         },
+         critters = {},
+      },
+      {
+         name = "wasteland_doodads",
+         immovables = {
+            "skeleton1", "skeleton2", "skeleton3", "cactus1",
+            "cactus2", "fallentree", "deadtree1", "deadtree5",
+            "deadtree6", "deadtree4"
+         },
+         critters = {},
+      }
+   }, -- bob_categories
+   land_resources = {
+      {
+         name = "forest",
+         weight = 6,
+         immovable_density = 40,
+         critter_density = 20,
+         land_coast_bobs = "bushes",
+         land_inner_bobs = "trees",
+         land_upper_bobs = "bushes",
+         wasteland_inner_bobs = "wasteland_doodads",
+         wasteland_outer_bobs = "bushes",
+      },
+      {
+         name = "bushland",
+         weight = 2,
+         immovable_density = 50,
+         critter_density = 20,
+         land_coast_bobs = "grasses",
+         land_inner_bobs = "bushes",
+         land_upper_bobs = "grasses",
+         wasteland_inner_bobs = "wasteland_doodads",
+         wasteland_outer_bobs = "grasses",
+      },
+      {
+         name = "meadow",
+         weight = 2,
+         immovable_density = 10,
+         critter_density = 20,
+         land_coast_bobs = "grasses",
+         land_inner_bobs = "grasses",
+         land_upper_bobs = "grasses",
+         wasteland_inner_bobs = "wasteland_doodads",
+         wasteland_outer_bobs = "grasses",
+      },
+      {
+         name = "stone",
+         weight = 4,
+         immovable_density = 100,
+         critter_density = 0,
+         land_coast_bobs = "",
+         land_inner_bobs = "stones",
+         land_upper_bobs = "",
+         wasteland_inner_bobs = "stones",
+         wasteland_outer_bobs = "stones",
+      },
+      {
+         name = "standing_stones",
+         weight = 2,
+         immovable_density = 100,
+         critter_density = 0,
+         land_coast_bobs = "",
+         land_inner_bobs = "standing_stones",
+         land_upper_bobs = "",
+         wasteland_inner_bobs = "standing_stones",
+         wasteland_outer_bobs = "standing_stones",
+      }
+   } -- land resources
+}
 
+-- NOCOM(#sirver): temporary
+return desert
 
--- [heights]
--- ocean=10
--- shelf=10
--- shallow=10
--- coast=11
--- upperland=14
--- mountainfoot=15
--- mountain=16
--- snow=39
--- summit=45
-
+-- -------------------------
+-- --  Former winterland  --
+-- -------------------------
 -- [areas]
 -- water=water,water_iceflows,water_ice
 -- land=land
@@ -392,116 +548,6 @@ return blackland
 -- mountains=mountains
 
 
--- [water]
--- ocean_terrains=wasser
--- shelf_terrains=wasser
--- shallow_terrains=wasser
-
--- [desert]
--- inner_terrains=desert1,desert2,desert3,desert4
--- outer_terrains=desert1,desert2,desert3,desert4
-
--- [mountains]
--- mountainfoot_terrains=mountainmeadow
--- mountain_terrains=mountain1,mountain2,mountain3,mountain4
--- snow_terrains=mountain1,mountain2,mountain3,mountain4
-
--- [meadow_land]
--- coast_terrains=beach
--- land_terrains=meadow
--- upper_terrains=mountainmeadow
-
-
-
-
--- [bobs]
--- land_resources=forest,bushland,meadow,stone,standing_stones
--- categories=trees,bushes,grasses,stones,standing_stones,wasteland_doodads
-
--- [forest]
--- weight=6
--- immovable_density=40
--- critter_density=20
--- land_coast_bobs=bushes
--- land_inner_bobs=trees
--- land_upper_bobs=bushes
--- wasteland_inner_bobs=wasteland_doodads
--- wasteland_outer_bobs=bushes
-
--- [bushland]
--- weight=2
--- immovable_density=50
--- critter_density=20
--- land_coast_bobs=grasses
--- land_inner_bobs=bushes
--- land_upper_bobs=grasses
--- wasteland_inner_bobs=wasteland_doodads
--- wasteland_outer_bobs=grasses
-
--- [meadow]
--- weight=2
--- immovable_density=10
--- critter_density=20
--- land_coast_bobs=grasses
--- land_inner_bobs=grasses
--- land_upper_bobs=grasses
--- wasteland_inner_bobs=wasteland_doodads
--- wasteland_outer_bobs=grasses
-
--- [stone]
--- weight=4
--- immovable_density=100
--- critter_density=0
--- land_coast_bobs=
--- land_inner_bobs=stones
--- land_upper_bobs=
--- wasteland_inner_bobs=stones
--- wasteland_outer_bobs=stones
-
--- [standing_stones]
--- weight=2
--- immovable_density=100
--- critter_density=0
--- land_coast_bobs=
--- land_inner_bobs=standing_stones
--- land_upper_bobs=
--- wasteland_inner_bobs=standing_stones
--- wasteland_outer_bobs=standing_stones
-
--- [trees]
--- immovables=tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8
--- critters=deer
-
--- [bushes]
--- immovables=bush1,bush4,bush5
--- critters=bunny,fox,sheep,sheep
-
--- [grasses]
--- immovables=grass1,grass2,grass3,grass1,grass2,grass3,ruin1,ruin2,ruin3,ruin4,ruin5
--- critters=bunny,fox,sheep,sheep
-
--- [standing_stones]
--- immovables=sstones1,sstones2,sstones3,sstones4,sstones5,sstones6,sstones7
--- critters=
-
--- [stones]
--- immovables=stones1,stones2,stones3,stones4,stones5,stones5,stones6,stones6,stones6
--- critters=
-
--- [wasteland_doodads]
--- immovables=skeleton1,skeleton2,skeleton3,cactus1,cactus1,cactus2,cactus2,deadtree1,deadtree2,deadtree3,deadtree4
--- critters=
-
--- -------------------------
--- --  Former winterland  --
--- -------------------------
-
-
--- [areas]
--- water=water
--- land=meadow_land
--- wasteland=desert
--- mountains=mountains
 
 
 -- [water]
