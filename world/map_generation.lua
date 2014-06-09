@@ -25,7 +25,6 @@ greenland = {
          {
             name = "ocean",
             weight = 1,
-            -- NOCOM(#sirver): terrains have been renamed
             ocean_terrains = { "wasser" },
             shelf_terrains = { "wasser" },
             shallow_terrains = { "wasser" },
@@ -74,17 +73,18 @@ greenland = {
    bob_categories = {
       {
          name = "trees",
-         -- NOCOM(#sirver): trees have been renamed
-         immovables = { "tree1", "tree2", "tree3", "tree4", "tree5", "tree6", "tree7", "tree8" },
-         critters = { "brownbear", "chamois", "deer", "elk", "lynx", "reindeer", "wolf" },
+         immovables = {
+            "aspen_summer_old", "oak_summer_old", "spruce_summer_old",
+            "alder_summer_old", "birch_summer_old", "beech_summer_old",
+            "larch_summer_old", "rowan_summer_old"
+         },
+         critters = { "brownbear", "chamois", "stag", "elk", "lynx", "reindeer", "wolf" },
       },
-      -- NOCOM(#sirver): check plural
       {
          name = "bushes",
          immovables = { "bush1", "bush2", "bush3", "bush4", "bush5" },
          critters = { "wisent", "wolf", "bunny", "elk", "fox", "lynx", "wolf", "marten", "sheep", "sheep" },
       },
-      -- NOCOM(#sirver): check plural
       {
          name = "grasses",
          immovables = { "grass1", "grass2", "grass3" },
@@ -92,18 +92,29 @@ greenland = {
       },
       {
          name = "standing_stones",
-         immovables = { "sstones1", "sstones2", "sstones3", "sstones4", "sstones5", "sstones6", "sstones7" },
+         immovables = {
+            "standing_stone1_summer", "standing_stone2_summer",
+            "standing_stone3_summer", "standing_stone4_summer",
+            "standing_stone5_summer", "standing_stone6", "standing_stone7"
+         },
          critters = {},
       },
       {
          name = "stones",
-         immovables = { "stones1", "stones2", "stones3", "stones4", "stones5", "stones5", "stones6", "stones6", "stones6" },
+         immovables = {
+            "greenland_stones1", "greenland_stones2", "greenland_stones3",
+            "greenland_stones4", "greenland_stones5", "greenland_stones5",
+            "greenland_stones6"
+         },
          critters = {},
       },
-      -- NOCOM(#sirver): look up writing.
       {
          name = "wasteland_doodads",
-         immovables = { "skeleton1", "skeleton2", "skeleton3", "cactus1", "cactus1", "cactus2", "cactus2", "fallentree", "deadtree1", "deadtree2", "deadtree3", "deadtree4" },
+         immovables = {
+            "skeleton1", "skeleton2", "skeleton3", "cactus1", "cactus1",
+            "cactus2", "cactus2", "fallentree", "deadtree1", "deadtree2",
+            "deadtree3", "deadtree4"
+         },
          critters = {},
       }
    },
@@ -174,6 +185,7 @@ return greenland
 
 
 -- [water]
+            -- NOCOM(#sirver): terrains have been renamed
 -- ocean_terrains=water
 -- shelf_terrains=water
 -- shallow_terrains=water
