@@ -9,6 +9,17 @@
 
 
 greenland = {
+   heights = {
+      ocean = 10,
+      shelf = 10,
+      shallow = 10,
+      coast = 11,
+      upperland = 14,
+      mountainfoot = 15,
+      mountain = 16,
+      snow = 39,
+      summit = 45,
+   },
    areas = {
       water = {
          {
@@ -39,18 +50,21 @@ greenland = {
       wasteland = {
          {
             name = "swamp",
+            weight = 1,
             inner_terrains = { "sumpf" },
             outer_terrains = { "sumpf" },
          },
          {
             name = "tundra",
             inner_terrains = { "steppe_kahl" },
+            weight = 1,
             outer_terrains = { "steppe" },
          }
       },
       mountains = {
-         -- Greenland mountains.
          {
+            name = "mountains",
+            weight = 1,
             mountainfoot_terrains = { "bergwiese" },
             mountain_terrains = { "berg1", "berg2", "berg3", "berg4" },
             snow_terrains = { "schnee" },

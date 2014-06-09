@@ -21,7 +21,11 @@
 
 #include <boost/format.hpp>
 
-LuaTable::LuaTable(lua_State* L) : L_(L), index_(lua_gettop(L)), warn_about_unaccessed_keys_(true) {
+LuaTable::LuaTable(lua_State* L) : L_(L), warn_about_unaccessed_keys_(true) {
+	// S: <table>
+	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
+	lua_pushvalue(L, -2); // S: <table> this <table>
+	lua_rawset(L, LUA_REGISTRYINDEX);
 }
 
 LuaTable::~LuaTable() {
@@ -40,7 +44,9 @@ LuaTable::~LuaTable() {
 		}
 	}
 
-	lua_remove(L_, index_);
+	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
+	lua_pushnil(L_); // S: this nil
+	lua_rawset(L_, LUA_REGISTRYINDEX);
 }
 
 void LuaTable::do_not_warn_about_unaccessed_keys() {
@@ -59,12 +65,32 @@ void LuaTable::get_existing_table_value(const int key) const {
 }
 
 void LuaTable::check_if_key_was_in_table(const std::string& key) const {
-	lua_rawget(L_, index_);
+	// S: key
+	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
+	lua_rawget(L_, LUA_REGISTRYINDEX); // S: key table
+	lua_pushvalue(L_, -2); // S: key table key
+
+	lua_rawget(L_, -2); // S: key table value
+	lua_remove(L_, -2); // S: key value
+	lua_remove(L_, -2); // S: value
+
 	if (lua_isnil(L_, -1)) {
 		lua_pop(L_, 1);
 		throw LuaTableKeyError(key);
 	}
 	accessed_keys_.insert(key);
+}
+
+template <> std::unique_ptr<LuaTable> LuaTable::get_value() const {
+	lua_pushvalue(L_, -1);
+	if (!lua_istable(L_, -1)) {
+		lua_pop(L_, 1);
+		throw LuaError("Could not convert value at the top of the stack to table value.");
+	}
+
+	std::unique_ptr<LuaTable> rv(new LuaTable(L_));
+	lua_pop(L_, 1);
+	return rv;
 }
 
 template <> std::string LuaTable::get_value() const {

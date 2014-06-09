@@ -26,6 +26,7 @@
 #include "logic/game_data_error.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
@@ -100,77 +101,65 @@ MapGenBobArea::MapGenBobArea (const LuaTable& table, MapGenInfo & mapGenInfo)
 	// m_WastelandOuterBobKind = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
 }
 
-void MapGenAreaInfo::readTerrains(const LuaTable& table,
-                                  std::vector<Terrain_Index>& list,
-                                  char const* const value_name) {
-	// NOCOM(#sirver): fix
-	// std::string str = s.get_string(value_name, "");
-	// if (str.empty())
-		// throw game_data_error("terrain info \"%s\" missing in section \"%s\" mapgenconf for world.",
-									 // value_name,
-									 // s.get_name());
-	// std::vector<std::string> strs;
-
-	// split_string(strs, str);
-
-	// for (uint32_t ix = 0; ix < strs.size(); ++ix) {
-		// Terrain_Index const tix = m_world.terrains().get_index(strs[ix]);
-		// if (tix > 128)
-			// throw game_data_error("unknown terrain \"%s\" in section \"%s\" in mapgenconf for world.",
-										 // value_name,
-										 // s.get_name());
-		// list.push_back(tix);
-	// }
-}
-
 MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
                                     const World& world,
                                     MapGenAreaType const areaType)
-	: m_world(world) {
-		// NOCOM(#sirver): fix
-	// m_weight = s.get_positive("weight", 1);
-	// switch (areaType) {
-		// case atWater:
-			// readTerrains(m_Terrains1, s, "ocean_terrains");
-			// readTerrains(m_Terrains2, s, "shelf_terrains");
-			// readTerrains(m_Terrains3, s, "shallow_terrains");
-			// break;
-		// case atLand:
-			// readTerrains(m_Terrains1, s, "coast_terrains");
-			// readTerrains(m_Terrains2, s, "land_terrains");
-			// readTerrains(m_Terrains3, s, "upper_terrains");
-			// break;
-		// case atMountains:
-			// readTerrains(m_Terrains1, s, "mountainfoot_terrains");
-			// readTerrains(m_Terrains2, s, "mountain_terrains");
-			// readTerrains(m_Terrains3, s, "snow_terrains");
-			// break;
-		// case atWasteland:
-			// readTerrains(m_Terrains1, s, "inner_terrains");
-			// readTerrains(m_Terrains2, s, "outer_terrains");
-			// break;
-		// default:
-			// throw wexception("bad areaType");
-	// }
+	// NOCOM(#sirver): probably unused
+	: world_(world) {
+	weight_ = get_positive_int(table, "weight");
+
+	const auto& read_terrains = [this, &table, &world](
+	   const std::string& key, std::vector<Terrain_Index>* list) {
+		const std::vector<std::string> terrains = table.get_table(key)->array_entries<std::string>();
+
+		for (const std::string& terrain : terrains) {
+			const Terrain_Index tix = world.terrains().get_index(terrain);
+			list->push_back(tix);
+		}
+	};
+
+	switch (areaType) {
+	case atWater:
+		read_terrains("ocean_terrains", &terrains1_);
+		read_terrains("shelf_terrains", &terrains2_);
+		read_terrains("shallow_terrains", &terrains3_);
+		break;
+	case atLand:
+		read_terrains("coast_terrains", &terrains1_);
+		read_terrains("land_terrains", &terrains2_);
+		read_terrains("upper_terrains", &terrains3_);
+		break;
+	case atMountains:
+		read_terrains("mountainfoot_terrains", &terrains1_);
+		read_terrains("mountain_terrains", &terrains2_);
+		read_terrains("snow_terrains", &terrains3_);
+		break;
+	case atWasteland:
+		read_terrains("inner_terrains", &terrains1_);
+		read_terrains("outer_terrains", &terrains2_);
+		break;
+	default:
+		throw wexception("bad areaType");
+	}
 }
 
 size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType) const
 {
 	switch (terrType) {
-		case ttWaterOcean:        return m_Terrains1.size();
-		case ttWaterShelf:        return m_Terrains2.size();
-		case ttWaterShallow:      return m_Terrains3.size();
+		case ttWaterOcean:        return terrains1_.size();
+		case ttWaterShelf:        return terrains2_.size();
+		case ttWaterShallow:      return terrains3_.size();
 
-		case ttLandCoast:         return m_Terrains1.size();
-		case ttLandLand:          return m_Terrains2.size();
-		case ttLandUpper:         return m_Terrains3.size();
+		case ttLandCoast:         return terrains1_.size();
+		case ttLandLand:          return terrains2_.size();
+		case ttLandUpper:         return terrains3_.size();
 
-		case ttWastelandInner:    return m_Terrains1.size();
-		case ttWastelandOuter:    return m_Terrains2.size();
+		case ttWastelandInner:    return terrains1_.size();
+		case ttWastelandOuter:    return terrains2_.size();
 
-		case ttMountainsFoot:     return m_Terrains1.size();
-		case ttMountainsMountain: return m_Terrains2.size();
-		case ttMountainsSnow:     return m_Terrains3.size();
+		case ttMountainsFoot:     return terrains1_.size();
+		case ttMountainsMountain: return terrains2_.size();
+		case ttMountainsSnow:     return terrains3_.size();
 
 		default:                  return 0;
 	}
@@ -180,20 +169,20 @@ Terrain_Index MapGenAreaInfo::getTerrain
 	(MapGenTerrainType const terrType, uint32_t const index) const
 {
 	switch (terrType) {
-		case ttWaterOcean:        return m_Terrains1[index];
-		case ttWaterShelf:        return m_Terrains2[index];
-		case ttWaterShallow:      return m_Terrains3[index];
+		case ttWaterOcean:        return terrains1_[index];
+		case ttWaterShelf:        return terrains2_[index];
+		case ttWaterShallow:      return terrains3_[index];
 
-		case ttLandCoast:         return m_Terrains1[index];
-		case ttLandLand:          return m_Terrains2[index];
-		case ttLandUpper:         return m_Terrains3[index];
+		case ttLandCoast:         return terrains1_[index];
+		case ttLandLand:          return terrains2_[index];
+		case ttLandUpper:         return terrains3_[index];
 
-		case ttWastelandInner:    return m_Terrains1[index];
-		case ttWastelandOuter:    return m_Terrains2[index];
+		case ttWastelandInner:    return terrains1_[index];
+		case ttWastelandOuter:    return terrains2_[index];
 
-		case ttMountainsFoot:     return m_Terrains1[index];
-		case ttMountainsMountain: return m_Terrains2[index];
-		case ttMountainsSnow:     return m_Terrains3[index];
+		case ttMountainsFoot:     return terrains1_[index];
+		case ttMountainsMountain: return terrains2_[index];
+		case ttMountainsSnow:     return terrains3_[index];
 
 		default:                  return 0;
 	}
@@ -202,50 +191,50 @@ Terrain_Index MapGenAreaInfo::getTerrain
 
 uint32_t MapGenInfo::getSumLandWeight() const
 {
-	if (m_land_weight_valid)
-		return m_land_weight;
+	if (land_weight_valid_)
+		return land_weight_;
 
 	uint32_t sum = 0;
 	for (uint32_t ix = 0; ix < getNumAreas(MapGenAreaInfo::atLand); ++ix)
 		sum += getArea(MapGenAreaInfo::atLand, ix).getWeight();
-	m_land_weight = sum;
-	m_land_weight_valid = true;
+	land_weight_ = sum;
+	land_weight_valid_ = true;
 
-	return m_land_weight;
+	return land_weight_;
 }
 
 const MapGenBobArea & MapGenInfo::getBobArea(size_t index) const
 {
-	return m_BobAreas[index];
+	return bob_areas_[index];
 }
 
 size_t MapGenInfo::getNumBobAreas() const
 {
-	return m_BobAreas.size();
+	return bob_areas_.size();
 }
 
 uint32_t MapGenInfo::getSumBobAreaWeight() const
 {
-	if (m_sum_bob_area_weights_valid)
-		return m_sum_bob_area_weights;
+	if (sum_bob_area_weights_valid_)
+		return sum_bob_area_weights_;
 
 	uint32_t sum = 0;
-	for (uint32_t ix = 0; ix < m_BobAreas.size(); ++ix)
-		sum += m_BobAreas[ix].getWeight();
-	m_sum_bob_area_weights = sum;
-	m_sum_bob_area_weights_valid = true;
+	for (uint32_t ix = 0; ix < bob_areas_.size(); ++ix)
+		sum += bob_areas_[ix].getWeight();
+	sum_bob_area_weights_ = sum;
+	sum_bob_area_weights_valid_ = true;
 
-	return m_sum_bob_area_weights;
+	return sum_bob_area_weights_;
 }
 
 size_t MapGenInfo::getNumAreas
 	(MapGenAreaInfo::MapGenAreaType const areaType) const
 {
 	switch (areaType) {
-	case MapGenAreaInfo::atWater:     return m_WaterAreas    .size();
-	case MapGenAreaInfo::atLand:      return m_LandAreas     .size();
-	case MapGenAreaInfo::atMountains: return m_MountainAreas .size();
-	case MapGenAreaInfo::atWasteland: return m_WasteLandAreas.size();
+	case MapGenAreaInfo::atWater:     return water_areas_    .size();
+	case MapGenAreaInfo::atLand:      return land_areas_     .size();
+	case MapGenAreaInfo::atMountains: return mountain_areas_ .size();
+	case MapGenAreaInfo::atWasteland: return wasteland_areas_.size();
 	default:
 		throw wexception("invalid MapGenAreaType %u", areaType);
 	}
@@ -257,10 +246,10 @@ const MapGenAreaInfo & MapGenInfo::getArea
 	const
 {
 	switch (areaType) {
-	case MapGenAreaInfo::atWater:     return m_WaterAreas    .at(index);
-	case MapGenAreaInfo::atLand:      return m_LandAreas     .at(index);
-	case MapGenAreaInfo::atMountains: return m_MountainAreas .at(index);
-	case MapGenAreaInfo::atWasteland: return m_WasteLandAreas.at(index);
+	case MapGenAreaInfo::atWater:     return water_areas_    .at(index);
+	case MapGenAreaInfo::atLand:      return land_areas_     .at(index);
+	case MapGenAreaInfo::atMountains: return mountain_areas_ .at(index);
+	case MapGenAreaInfo::atWasteland: return wasteland_areas_.at(index);
 	default:
 		throw wexception("invalid MapGenAreaType %u", areaType);
 	}
@@ -269,75 +258,53 @@ const MapGenAreaInfo & MapGenInfo::getArea
 const MapGenBobKind * MapGenInfo::getBobKind
 	(const std::string & bobKindName) const
 {
-	if (m_BobKinds.find(bobKindName) == m_BobKinds.end())
+	if (bob_kinds_.find(bobKindName) == bob_kinds_.end())
 		throw wexception("invalid MapGenBobKind %s", bobKindName.c_str());
 	// Ugly workaround because at is not defined for some systems
 	// and operator[] does not fare well with constants
-	return & m_BobKinds.find(bobKindName)->second;
+	return & bob_kinds_.find(bobKindName)->second;
 }
 
-MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) : m_world(world) {
-	m_land_weight_valid = false;
-	m_sum_bob_area_weights_valid = false;
+MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) : world_(world) {
+	land_weight_valid_ = false;
+	sum_bob_area_weights_valid_ = false;
 
-	// NOCOM(#sirver): fix
-	// { //  find out about the general heights
-		// Section & s = profile.get_safe_section("heights");
-		// m_ocean_height        = s.get_positive("ocean",        10);
-		// m_shelf_height        = s.get_positive("shelf",        10);
-		// m_shallow_height      = s.get_positive("shallow",      10);
-		// m_coast_height        = s.get_positive("coast",        12);
-		// m_upperland_height    = s.get_positive("upperland",    16);
-		// m_mountainfoot_height = s.get_positive("mountainfoot", 18);
-		// m_mountain_height     = s.get_positive("mountain",     20);
-		// m_snow_height         = s.get_positive("snow",         33);
-		// m_summit_height       = s.get_positive("summit",       40);
-	// }
+	{ //  find out about the general heights
+		std::unique_ptr<LuaTable> heights(table.get_table("heights"));
+		ocean_height_ = get_uint(*heights, "ocean");
+		shelf_height_ = get_uint(*heights, "shelf");
+		shallow_height_ = get_uint(*heights, "shallow");
+		coast_height_ = get_uint(*heights, "coast");
+		upperland_height_ = get_uint(*heights, "upperland");
+		mountainfoot_height_ = get_uint(*heights, "mountainfoot");
+		mountain_height_ = get_uint(*heights, "mountain");
+		snow_height_ = get_uint(*heights, "snow");
+		summit_height_ = get_uint(*heights, "summit");
+	}
 
+	//  read the areas.
+	{
+		std::unique_ptr<LuaTable> areas(table.get_table("areas"));
 
-	// //  read the area names
-	// Section & areas_s = profile.get_safe_section("areas");
-	// std::string              str;
-	// std::vector<std::string> water_strs;
-	// std::vector<std::string> land_strs;
-	// std::vector<std::string> wasteland_strs;
-	// std::vector<std::string> mountain_strs;
+		const auto read_area = [this, &areas](const std::string& area_name,
+		                                       const MapGenAreaInfo::MapGenAreaType area_type,
+		                                       std::vector<MapGenAreaInfo>* area_vector) {
+			std::unique_ptr<LuaTable> area(areas->get_table(area_name));
+			std::vector<std::unique_ptr<LuaTable>> entries =
+			   area->array_entries<std::unique_ptr<LuaTable>>();
+			log("#sirver entries.size(): %u\n", entries.size());
+			for (std::unique_ptr<LuaTable>& entry : entries) {
+				log("#sirver entry.get_string('name'): %s\n", entry->get_string("name").c_str());
+				area_vector->push_back(MapGenAreaInfo(*entry, world_, area_type));
+			}
+		};
 
-	// str = areas_s.get_string("water", "water_area");
-	// split_string(water_strs, str);
-
-	// str = areas_s.get_string("land", "land_area");
-	// split_string(land_strs, str);
-
-	// str = areas_s.get_string("wasteland", "wasteland_area");
-	// split_string(wasteland_strs, str);
-
-	// str = areas_s.get_string("mountains", "mountains_area");
-	// split_string(mountain_strs, str);
-
-	// for (uint32_t ix = 0; ix < water_strs.size(); ++ix) {
-		// // Section & s = profile.get_safe_section(water_strs[ix].c_str());
-		// // NOCOM(#sirver): which table
-		// m_WaterAreas.push_back(MapGenAreaInfo(table, m_world, MapGenAreaInfo::atWater));
-	// }
-
-	// for (uint32_t ix = 0; ix < land_strs.size(); ++ix) {
-		// // NOCOM(#sirver): what
-		// // Section & s = profile.get_safe_section(land_strs[ix].c_str());
-		// m_LandAreas.push_back(MapGenAreaInfo(table, m_world, MapGenAreaInfo::atLand));
-	// }
-
-	// for (uint32_t ix = 0; ix < wasteland_strs.size(); ++ix) {
-		// // NOCOM(#sirver): what
-		// // Section & s = profile.get_safe_section(wasteland_strs[ix].c_str());
-		// m_WasteLandAreas.push_back(MapGenAreaInfo(table, m_world, MapGenAreaInfo::atWasteland));
-	// }
-
-	// for (uint32_t ix = 0; ix < mountain_strs.size(); ++ix) {
-		// // NOCOM(#sirver): what
-		// // Section & s = profile.get_safe_section(mountain_strs[ix].c_str());
-		// m_MountainAreas.push_back(MapGenAreaInfo(table, m_world, MapGenAreaInfo::atMountains));
-	// }
+		read_area("water", MapGenAreaInfo::atWater, &water_areas_);
+		read_area("land", MapGenAreaInfo::atLand, &land_areas_);
+		read_area("wasteland", MapGenAreaInfo::atWasteland, &wasteland_areas_);
+		read_area("mountains", MapGenAreaInfo::atMountains, &mountain_areas_);
+	}
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	// Section & bobs_s = profile.get_safe_section("bobs");
 	// std::vector<std::string> bob_area_strs;
@@ -353,11 +320,11 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) : m_world(worl
 		// // Section & s = profile.get_safe_section(bob_kind_strs[ix].c_str());
 		// // NOCOM(#sirver): what
 		// MapGenBobKind kind(table);;
-		// m_BobKinds[bob_kind_strs[ix]] = kind;
+		// bob_kinds_[bob_kind_strs[ix]] = kind;
 
 		// for (size_t jx = 0; jx < kind.getNumImmovableBobs(); jx++)
 			// if
-				// (m_world.get_immovable_index(kind.getImmovableBob(jx).c_str())
+				// (world_.get_immovable_index(kind.getImmovableBob(jx).c_str())
 				 // <
 				 // 0)
 				// throw wexception
@@ -365,7 +332,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) : m_world(worl
 
 		// for (size_t jx = 0; jx < kind.getNumMoveableBobs(); jx++)
 			// if
-				// (m_world.get_bob(kind.getMoveableBob(jx).c_str()) < 0)
+				// (world_.get_bob(kind.getMoveableBob(jx).c_str()) < 0)
 				// throw wexception
 					// ("unknown moveable %s", kind.getMoveableBob(jx).c_str());
 	// }
@@ -373,7 +340,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) : m_world(worl
 	// for (uint32_t ix = 0; ix < bob_area_strs.size(); ++ix) {
 		// // Section & s = profile.get_safe_section(bob_area_strs[ix].c_str());
 		// // NOCOM(#sirver): which table
-		// m_BobAreas.push_back(MapGenBobArea(table, *this));
+		// bob_areas_.push_back(MapGenBobArea(table, *this));
 	// }
 }
 
