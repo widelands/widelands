@@ -26,7 +26,6 @@
 
 #include "logic/world/terrain_description.h"
 
-// NOCOM(#sirver): remove
 class LuaTable;
 
 namespace Widelands {
@@ -37,7 +36,6 @@ struct MapGenInfo;
 /// Holds world and area specific information for the map generator.
 /// Areas are: Water, Land, Wasteland and Mountains.
 struct MapGenAreaInfo {
-	// NOCOM(#sirver): convert to enum class
 	enum MapGenAreaType {
 		atWater,
 		atLand,
@@ -75,33 +73,31 @@ private:
 
 	uint32_t weight_;
 	MapGenAreaType areaType_;
-	const World& world_;
 };
 
-struct MapGenBobKind {
-	MapGenBobKind(const LuaTable& table);
+struct MapGenBobCategory {
+	MapGenBobCategory(const LuaTable& table);
 
-	size_t getNumImmovableBobs() const {return m_ImmovableBobs.size();}
-	size_t getNumMoveableBobs() const {return m_MoveableBobs.size();}
+	size_t num_immovables() const {return immovables_.size();}
+	size_t num_critters() const {return critters_.size();}
 
-	const std::string & getImmovableBob(size_t index) const {
-		return m_ImmovableBobs[index];
+	const std::string & get_immovable(size_t index) const {
+		return immovables_[index];
 	};
-	const std::string & getMoveableBob(size_t index) const {
-		return m_MoveableBobs[index];
+	const std::string & get_critter(size_t index) const {
+		return critters_[index];
 	};
 
 private:
-	std::vector<std::string> m_ImmovableBobs;
-	std::vector<std::string> m_MoveableBobs;
-
+	std::vector<std::string> immovables_;
+	std::vector<std::string> critters_;
 };
 
-struct MapGenBobArea {
-	MapGenBobArea(const LuaTable& table, MapGenInfo& mapGenInfo);
+struct MapGenLandResource {
+	MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo);
 
 	uint32_t getWeight() const {return weight_;};
-	const MapGenBobKind * getBobKind
+	const MapGenBobCategory * getBobCategory
 		(MapGenAreaInfo::MapGenTerrainType terrType) const;
 
 	uint8_t getImmovableDensity() const {return immovable_density_;};
@@ -111,11 +107,11 @@ private:
 	uint32_t        weight_;
 	uint8_t         immovable_density_; // In percent
 	uint8_t         critter_density_;  // In percent
-	const MapGenBobKind * m_LandCoastBobKind;
-	const MapGenBobKind * m_LandInnerBobKind;
-	const MapGenBobKind * m_LandUpperBobKind;
-	const MapGenBobKind * m_WastelandInnerBobKind;
-	const MapGenBobKind * m_WastelandOuterBobKind;
+	const MapGenBobCategory * land_coast_bob_category_;
+	const MapGenBobCategory * land_inner_bob_category_;
+	const MapGenBobCategory * land_upper_bob_category_;
+	const MapGenBobCategory * wasteland_inner_bob_category_;
+	const MapGenBobCategory * wasteland_outer_bob_category_;
 };
 
 /** struct MapGenInfo
@@ -130,7 +126,7 @@ struct MapGenInfo {
 	const MapGenAreaInfo & getArea
 		(MapGenAreaInfo::MapGenAreaType const areaType, uint32_t const index)
 		const;
-	const MapGenBobKind * getBobKind(const std::string & bobKindName) const;
+	const MapGenBobCategory * getBobCategory(const std::string & bobCategory) const;
 
 	uint8_t getWaterOceanHeight  () const {return ocean_height_;}
 	uint8_t getWaterShelfHeight  () const {return shelf_height_;}
@@ -144,20 +140,18 @@ struct MapGenInfo {
 
 	uint32_t getSumLandWeight() const;
 
-	size_t getNumBobAreas() const;
-	const MapGenBobArea & getBobArea(size_t index) const;
-	uint32_t getSumBobAreaWeight() const;
+	size_t getNumLandResources() const;
+	const MapGenLandResource & getLandResource(size_t index) const;
+	uint32_t getSumLandResourceWeight() const;
 
 private:
-	const World& world_;
-
 	std::vector<MapGenAreaInfo> water_areas_;
 	std::vector<MapGenAreaInfo> land_areas_;
 	std::vector<MapGenAreaInfo> wasteland_areas_;
 	std::vector<MapGenAreaInfo> mountain_areas_;
 
-	std::vector<MapGenBobArea>           bob_areas_;
-	std::map<std::string, MapGenBobKind> bob_kinds_;
+	std::vector<MapGenLandResource>           land_resources_;
+	std::map<std::string, MapGenBobCategory> bob_categories_;
 
 	uint8_t ocean_height_;
 	uint8_t shelf_height_;

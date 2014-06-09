@@ -30,82 +30,56 @@
 
 namespace Widelands {
 
-namespace  {
-
-// NOCOM(#sirver): kill
-int split_string(std::vector<std::string>& strs, std::string& str) {
-	strs = ::split_string(str, ",");
-	return strs.size();
+MapGenBobCategory::MapGenBobCategory(const LuaTable& table) {
+	immovables_ = table.get_table("immovables")->array_entries<std::string>();
+	critters_ = table.get_table("critters")->array_entries<std::string>();
 }
 
-}  // namespace
-
-
-MapGenBobKind::MapGenBobKind(const LuaTable& table) {
-	// NOCOM(#sirver): fix
-	// std::string str;
-	// str = s.get_safe_string("immovables");
-	// split_string(m_ImmovableBobs, str);
-
-	// str = s.get_safe_string("critters");
-	// split_string(m_MoveableBobs, str);
-}
-
-const MapGenBobKind * MapGenBobArea::getBobKind
-	(MapGenAreaInfo::MapGenTerrainType terrType) const
-{
-	switch (terrType)
-	{
-		case MapGenAreaInfo::ttLandCoast:
-			return m_LandCoastBobKind;
-		case MapGenAreaInfo::ttLandLand:
-			return m_LandInnerBobKind;
-		case MapGenAreaInfo::ttLandUpper:
-			return m_LandUpperBobKind;
-		case MapGenAreaInfo::ttWastelandInner:
-			return m_WastelandInnerBobKind;
-		case MapGenAreaInfo::ttWastelandOuter:
-			return m_WastelandOuterBobKind;
-		default:
-			return nullptr;
+const MapGenBobCategory*
+MapGenLandResource::getBobCategory(MapGenAreaInfo::MapGenTerrainType terrType) const {
+	switch (terrType) {
+	case MapGenAreaInfo::ttLandCoast:
+		return land_coast_bob_category_;
+	case MapGenAreaInfo::ttLandLand:
+		return land_inner_bob_category_;
+	case MapGenAreaInfo::ttLandUpper:
+		return land_upper_bob_category_;
+	case MapGenAreaInfo::ttWastelandInner:
+		return wasteland_inner_bob_category_;
+	case MapGenAreaInfo::ttWastelandOuter:
+		return wasteland_outer_bob_category_;
+	default:
+		return nullptr;
 	};
 	return nullptr;
 }
 
-MapGenBobArea::MapGenBobArea (const LuaTable& table, MapGenInfo & mapGenInfo)
-{
-	// NOCOM(#sirver): fix
-	// weight_ = s.get_int("weight", 1);
-	// immovable_density_ =
-		// static_cast<uint8_t>
-			// (s.get_safe_int("immovable_density"));
-	// critter_density_ =
-		// static_cast<uint8_t>
-			// (s.get_safe_int("critter_density"));
+MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo) {
+	weight_ = get_uint(table, "weight");
 
-	// std::string str;
+	immovable_density_ = static_cast<uint8_t>(get_uint(table, "immovable_density"));
+	critter_density_ = static_cast<uint8_t>(get_uint(table, "critter_density"));
 
-	// str = s.get_safe_string("land_coast_bobs");
-	// m_LandCoastBobKind      = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
+	const auto& do_assign = [&table, &mapGenInfo](
+	   const std::string& key, const MapGenBobCategory** our_pointer) {
+		const std::string value = table.get_string(key);
+		if (value.empty()) {
+			*our_pointer = nullptr;
+			return;
+		}
+		*our_pointer = mapGenInfo.getBobCategory(value);
+	};
 
-	// str = s.get_safe_string("land_inner_bobs");
-	// m_LandInnerBobKind      = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
-
-	// str = s.get_safe_string("land_upper_bobs");
-	// m_LandUpperBobKind      = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
-
-	// str = s.get_safe_string("wasteland_inner_bobs");
-	// m_WastelandInnerBobKind = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
-
-	// str = s.get_safe_string("wasteland_outer_bobs");
-	// m_WastelandOuterBobKind = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
+	do_assign("land_coast_bobs", &land_coast_bob_category_);
+	do_assign("land_inner_bobs", &land_inner_bob_category_);
+	do_assign("land_upper_bobs", &land_upper_bob_category_);
+	do_assign("wasteland_inner_bobs", &wasteland_inner_bob_category_);
+	do_assign("wasteland_outer_bobs", &wasteland_outer_bob_category_);
 }
 
 MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
-                                    const World& world,
-                                    MapGenAreaType const areaType)
-	// NOCOM(#sirver): probably unused
-	: world_(world) {
+                               const World& world,
+                               MapGenAreaType const areaType) {
 	weight_ = get_positive_int(table, "weight");
 
 	const auto& read_terrains = [this, &table, &world](
@@ -143,54 +117,74 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 	}
 }
 
-size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType) const
-{
+size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType) const {
 	switch (terrType) {
-		case ttWaterOcean:        return terrains1_.size();
-		case ttWaterShelf:        return terrains2_.size();
-		case ttWaterShallow:      return terrains3_.size();
+	case ttWaterOcean:
+		return terrains1_.size();
+	case ttWaterShelf:
+		return terrains2_.size();
+	case ttWaterShallow:
+		return terrains3_.size();
 
-		case ttLandCoast:         return terrains1_.size();
-		case ttLandLand:          return terrains2_.size();
-		case ttLandUpper:         return terrains3_.size();
+	case ttLandCoast:
+		return terrains1_.size();
+	case ttLandLand:
+		return terrains2_.size();
+	case ttLandUpper:
+		return terrains3_.size();
 
-		case ttWastelandInner:    return terrains1_.size();
-		case ttWastelandOuter:    return terrains2_.size();
+	case ttWastelandInner:
+		return terrains1_.size();
+	case ttWastelandOuter:
+		return terrains2_.size();
 
-		case ttMountainsFoot:     return terrains1_.size();
-		case ttMountainsMountain: return terrains2_.size();
-		case ttMountainsSnow:     return terrains3_.size();
+	case ttMountainsFoot:
+		return terrains1_.size();
+	case ttMountainsMountain:
+		return terrains2_.size();
+	case ttMountainsSnow:
+		return terrains3_.size();
 
-		default:                  return 0;
+	default:
+		return 0;
 	}
 }
 
-Terrain_Index MapGenAreaInfo::getTerrain
-	(MapGenTerrainType const terrType, uint32_t const index) const
-{
+Terrain_Index MapGenAreaInfo::getTerrain(MapGenTerrainType const terrType,
+                                         uint32_t const index) const {
 	switch (terrType) {
-		case ttWaterOcean:        return terrains1_[index];
-		case ttWaterShelf:        return terrains2_[index];
-		case ttWaterShallow:      return terrains3_[index];
+	case ttWaterOcean:
+		return terrains1_[index];
+	case ttWaterShelf:
+		return terrains2_[index];
+	case ttWaterShallow:
+		return terrains3_[index];
 
-		case ttLandCoast:         return terrains1_[index];
-		case ttLandLand:          return terrains2_[index];
-		case ttLandUpper:         return terrains3_[index];
+	case ttLandCoast:
+		return terrains1_[index];
+	case ttLandLand:
+		return terrains2_[index];
+	case ttLandUpper:
+		return terrains3_[index];
 
-		case ttWastelandInner:    return terrains1_[index];
-		case ttWastelandOuter:    return terrains2_[index];
+	case ttWastelandInner:
+		return terrains1_[index];
+	case ttWastelandOuter:
+		return terrains2_[index];
 
-		case ttMountainsFoot:     return terrains1_[index];
-		case ttMountainsMountain: return terrains2_[index];
-		case ttMountainsSnow:     return terrains3_[index];
+	case ttMountainsFoot:
+		return terrains1_[index];
+	case ttMountainsMountain:
+		return terrains2_[index];
+	case ttMountainsSnow:
+		return terrains3_[index];
 
-		default:                  return 0;
+	default:
+		return 0;
 	}
 }
 
-
-uint32_t MapGenInfo::getSumLandWeight() const
-{
+uint32_t MapGenInfo::getSumLandWeight() const {
 	if (land_weight_valid_)
 		return land_weight_;
 
@@ -203,73 +197,71 @@ uint32_t MapGenInfo::getSumLandWeight() const
 	return land_weight_;
 }
 
-const MapGenBobArea & MapGenInfo::getBobArea(size_t index) const
-{
-	return bob_areas_[index];
+const MapGenLandResource& MapGenInfo::getLandResource(size_t index) const {
+	return land_resources_[index];
 }
 
-size_t MapGenInfo::getNumBobAreas() const
-{
-	return bob_areas_.size();
+size_t MapGenInfo::getNumLandResources() const {
+	return land_resources_.size();
 }
 
-uint32_t MapGenInfo::getSumBobAreaWeight() const
-{
+uint32_t MapGenInfo::getSumLandResourceWeight() const {
 	if (sum_bob_area_weights_valid_)
 		return sum_bob_area_weights_;
 
 	uint32_t sum = 0;
-	for (uint32_t ix = 0; ix < bob_areas_.size(); ++ix)
-		sum += bob_areas_[ix].getWeight();
+	for (uint32_t ix = 0; ix < land_resources_.size(); ++ix)
+		sum += land_resources_[ix].getWeight();
 	sum_bob_area_weights_ = sum;
 	sum_bob_area_weights_valid_ = true;
 
 	return sum_bob_area_weights_;
 }
 
-size_t MapGenInfo::getNumAreas
-	(MapGenAreaInfo::MapGenAreaType const areaType) const
-{
+size_t MapGenInfo::getNumAreas(MapGenAreaInfo::MapGenAreaType const areaType) const {
 	switch (areaType) {
-	case MapGenAreaInfo::atWater:     return water_areas_    .size();
-	case MapGenAreaInfo::atLand:      return land_areas_     .size();
-	case MapGenAreaInfo::atMountains: return mountain_areas_ .size();
-	case MapGenAreaInfo::atWasteland: return wasteland_areas_.size();
+	case MapGenAreaInfo::atWater:
+		return water_areas_.size();
+	case MapGenAreaInfo::atLand:
+		return land_areas_.size();
+	case MapGenAreaInfo::atMountains:
+		return mountain_areas_.size();
+	case MapGenAreaInfo::atWasteland:
+		return wasteland_areas_.size();
 	default:
 		throw wexception("invalid MapGenAreaType %u", areaType);
 	}
 }
 
-const MapGenAreaInfo & MapGenInfo::getArea
-	(MapGenAreaInfo::MapGenAreaType const areaType,
-	 uint32_t const index)
-	const
-{
+const MapGenAreaInfo& MapGenInfo::getArea(MapGenAreaInfo::MapGenAreaType const areaType,
+                                          uint32_t const index) const {
 	switch (areaType) {
-	case MapGenAreaInfo::atWater:     return water_areas_    .at(index);
-	case MapGenAreaInfo::atLand:      return land_areas_     .at(index);
-	case MapGenAreaInfo::atMountains: return mountain_areas_ .at(index);
-	case MapGenAreaInfo::atWasteland: return wasteland_areas_.at(index);
+	case MapGenAreaInfo::atWater:
+		return water_areas_.at(index);
+	case MapGenAreaInfo::atLand:
+		return land_areas_.at(index);
+	case MapGenAreaInfo::atMountains:
+		return mountain_areas_.at(index);
+	case MapGenAreaInfo::atWasteland:
+		return wasteland_areas_.at(index);
 	default:
 		throw wexception("invalid MapGenAreaType %u", areaType);
 	}
 }
 
-const MapGenBobKind * MapGenInfo::getBobKind
-	(const std::string & bobKindName) const
-{
-	if (bob_kinds_.find(bobKindName) == bob_kinds_.end())
-		throw wexception("invalid MapGenBobKind %s", bobKindName.c_str());
+const MapGenBobCategory* MapGenInfo::getBobCategory(const std::string& bobCategory) const {
+	if (bob_categories_.find(bobCategory) == bob_categories_.end())
+		throw wexception("invalid MapGenBobCategory %s", bobCategory.c_str());
 	// Ugly workaround because at is not defined for some systems
 	// and operator[] does not fare well with constants
-	return & bob_kinds_.find(bobKindName)->second;
+	return &bob_categories_.find(bobCategory)->second;
 }
 
-MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) : world_(world) {
+MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 	land_weight_valid_ = false;
 	sum_bob_area_weights_valid_ = false;
 
-	{ //  find out about the general heights
+	{  //  find out about the general heights
 		std::unique_ptr<LuaTable> heights(table.get_table("heights"));
 		ocean_height_ = get_uint(*heights, "ocean");
 		shelf_height_ = get_uint(*heights, "shelf");
@@ -286,16 +278,16 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) : world_(world
 	{
 		std::unique_ptr<LuaTable> areas(table.get_table("areas"));
 
-		const auto read_area = [this, &areas](const std::string& area_name,
-		                                       const MapGenAreaInfo::MapGenAreaType area_type,
-		                                       std::vector<MapGenAreaInfo>* area_vector) {
+		const auto read_area = [&world, &areas](const std::string& area_name,
+		                                        const MapGenAreaInfo::MapGenAreaType area_type,
+		                                        std::vector<MapGenAreaInfo>* area_vector) {
 			std::unique_ptr<LuaTable> area(areas->get_table(area_name));
 			std::vector<std::unique_ptr<LuaTable>> entries =
 			   area->array_entries<std::unique_ptr<LuaTable>>();
-			log("#sirver entries.size(): %u\n", entries.size());
 			for (std::unique_ptr<LuaTable>& entry : entries) {
-				log("#sirver entry.get_string('name'): %s\n", entry->get_string("name").c_str());
-				area_vector->push_back(MapGenAreaInfo(*entry, world_, area_type));
+				entry->get_string("name");  // name is only for debugging really. Touch it so LuaTable
+				                            // will not complain.
+				area_vector->push_back(MapGenAreaInfo(*entry, world, area_type));
 			}
 		};
 
@@ -304,44 +296,92 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) : world_(world
 		read_area("wasteland", MapGenAreaInfo::atWasteland, &wasteland_areas_);
 		read_area("mountains", MapGenAreaInfo::atMountains, &mountain_areas_);
 	}
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-	// Section & bobs_s = profile.get_safe_section("bobs");
-	// std::vector<std::string> bob_area_strs;
-	// std::vector<std::string> bob_kind_strs;
+	// read the bobs.
+	{
+		std::unique_ptr<LuaTable> bobs(table.get_table("bob_categories"));
 
-	// str = bobs_s.get_string("land_resources");
-	// split_string(bob_area_strs, str);
+		for (std::unique_ptr<LuaTable>& entry : bobs->array_entries<std::unique_ptr<LuaTable>>()) {
+			bob_categories_.insert(
+			   std::make_pair(entry->get_string("name"), MapGenBobCategory(*entry)));
+			MapGenBobCategory& category = bob_categories_.at(entry->get_string("name"));
 
-	// str = bobs_s.get_string("categories");
-	// split_string(bob_kind_strs, str);
+			for (size_t jx = 0; jx < category.num_immovables(); jx++)
+				if (world.get_immovable_index(category.get_immovable(jx).c_str()) < 0)
+					throw wexception("unknown immovable %s", category.get_immovable(jx).c_str());
 
-	// for (uint32_t ix = 0; ix < bob_kind_strs.size(); ++ix) {
-		// // Section & s = profile.get_safe_section(bob_kind_strs[ix].c_str());
-		// // NOCOM(#sirver): what
-		// MapGenBobKind kind(table);;
-		// bob_kinds_[bob_kind_strs[ix]] = kind;
+			for (size_t jx = 0; jx < category.num_critters(); jx++)
+				if (world.get_bob(category.get_critter(jx).c_str()) < 0)
+					throw wexception("unknown moveable %s", category.get_critter(jx).c_str());
+		}
+	}
 
-		// for (size_t jx = 0; jx < kind.getNumImmovableBobs(); jx++)
-			// if
-				// (world_.get_immovable_index(kind.getImmovableBob(jx).c_str())
-				 // <
-				 // 0)
-				// throw wexception
-					// ("unknown immovable %s", kind.getImmovableBob(jx).c_str());
+	// read the land resources.
+	{
+		std::unique_ptr<LuaTable> land_resources(table.get_table("land_resources"));
 
-		// for (size_t jx = 0; jx < kind.getNumMoveableBobs(); jx++)
-			// if
-				// (world_.get_bob(kind.getMoveableBob(jx).c_str()) < 0)
-				// throw wexception
-					// ("unknown moveable %s", kind.getMoveableBob(jx).c_str());
-	// }
+		for (std::unique_ptr<LuaTable>& entry :
+		     land_resources->array_entries<std::unique_ptr<LuaTable>>()) {
+			entry->get_string(
+			   "name");  // name is only for debugging really. Touch it so LuaTable will not complain.
+			land_resources_.push_back(MapGenLandResource(*entry, *this));
+		}
+	}
 
-	// for (uint32_t ix = 0; ix < bob_area_strs.size(); ++ix) {
-		// // Section & s = profile.get_safe_section(bob_area_strs[ix].c_str());
-		// // NOCOM(#sirver): which table
-		// bob_areas_.push_back(MapGenBobArea(table, *this));
-	// }
+	if (getNumAreas(MapGenAreaInfo::atWater) < 1)
+		throw game_data_error("missing a water area");
+
+	if (getNumAreas(MapGenAreaInfo::atWater) < 1)
+		throw game_data_error("too many water areas (>3)");
+
+	if (getNumAreas(MapGenAreaInfo::atLand) < 1)
+		throw game_data_error("missing a land area");
+
+	if (getNumAreas(MapGenAreaInfo::atLand) > 3)
+		throw game_data_error("too many land areas (>3)");
+
+	if (getNumAreas(MapGenAreaInfo::atWasteland) < 1)
+		throw game_data_error("missing a wasteland area");
+
+	if (getNumAreas(MapGenAreaInfo::atWasteland) > 2)
+		throw game_data_error("too many wasteland areas (>2)");
+
+	if (getNumAreas(MapGenAreaInfo::atMountains) < 1)
+		throw game_data_error("missing a mountain area");
+
+	if (getNumAreas(MapGenAreaInfo::atMountains) < 1)
+		throw game_data_error("too many mountain areas (>1)");
+
+	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterOcean) < 1)
+		throw game_data_error("missing a water/ocean terrain type");
+
+	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterShelf) < 1)
+		throw game_data_error("missing a water/shelf terrain type");
+
+	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterShallow) < 1)
+		throw game_data_error("is missing a water/shallow terrain type");
+
+	if (getArea(MapGenAreaInfo::atLand, 0).getNumTerrains(MapGenAreaInfo::ttLandCoast) < 1)
+		throw game_data_error("missing a land/coast terrain type");
+
+	if (getArea(MapGenAreaInfo::atLand, 0).getNumTerrains(MapGenAreaInfo::ttLandLand) < 1)
+		throw game_data_error("missing a land/land terrain type");
+
+	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsFoot) < 1)
+		throw game_data_error("missing a mountain/foot terrain type");
+
+	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsMountain) <
+	    1)
+		throw game_data_error("missing a monutain/mountain terrain type");
+
+	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsSnow) < 1)
+		throw game_data_error("missing a mountain/snow terrain type");
+
+	if (getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains(MapGenAreaInfo::ttWastelandInner) < 1)
+		throw game_data_error("missing a land/coast terrain type");
+
+	if (getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains(MapGenAreaInfo::ttWastelandOuter) < 1)
+		throw game_data_error("missing a land/land terrain type");
 }
 
 }  // namespace Widelands

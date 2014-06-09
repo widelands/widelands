@@ -37,128 +37,7 @@ constexpr int kMapIdDigits = 24;
 constexpr int kIslandBorder = 10;
 constexpr uint32_t kMaxElevationHalf = 0x80000000;
 
-namespace Widelands
-{
-
-	// NOCOM(#sirver): remove
-// {
-// log("Parsing map gen info...\n");
-// parse_mapgen();
-// }
-// } catch (const std::exception & e) {
-// throw game_data_error("world %s: %s", name.c_str(), e.what());
-// }
-// }
-
-// void World::parse_mapgen   ()
-// {
-// char fname[256];
-
-// snprintf(fname, sizeof(fname), "%s/mapgenconf", basedir_.c_str());
-
-// NOCOM(#sirver): these sanity checks should be kept
-// try {
-// Profile prof(fname);
-
-// mapGenInfo_->parseProfile(this, prof);
-
-// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atWater) < 1)
-// throw game_data_error("missing a water area");
-
-// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atWater) < 1)
-// throw game_data_error("too many water areas (>3)");
-
-// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atLand) < 1)
-// throw game_data_error("missing a land area");
-
-// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atLand) > 3)
-// throw game_data_error("too many land areas (>3)");
-
-// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atWasteland) < 1)
-// throw game_data_error("missing a wasteland area");
-
-// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atWasteland) > 2)
-// throw game_data_error("too many wasteland areas (>2)");
-
-// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atMountains) < 1)
-// throw game_data_error("missing a mountain area");
-
-// if (mapGenInfo_->getNumAreas(MapGenAreaInfo::atMountains) < 1)
-// throw game_data_error("too many mountain areas (>1)");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
-// (MapGenAreaInfo::ttWaterOcean) < 1)
-// throw game_data_error("missing a water/ocean terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
-// (MapGenAreaInfo::ttWaterShelf)
-// <
-// 1)
-// throw game_data_error("missing a water/shelf terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
-// (MapGenAreaInfo::ttWaterShallow)
-// <
-// 1)
-// throw game_data_error("is missing a water/shallow terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atLand, 0).getNumTerrains
-// (MapGenAreaInfo::ttLandCoast)
-// <
-// 1)
-// throw game_data_error("missing a land/coast terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atLand, 0).getNumTerrains
-// (MapGenAreaInfo::ttLandLand)
-// <
-// 1)
-// throw game_data_error("missing a land/land terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
-// (MapGenAreaInfo::ttMountainsFoot)
-// <
-// 1)
-// throw game_data_error("missing a mountain/foot terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
-// (MapGenAreaInfo::ttMountainsMountain)
-// <
-// 1)
-// throw game_data_error("missing a monutain/mountain terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
-// (MapGenAreaInfo::ttMountainsSnow)
-// <
-// 1)
-// throw game_data_error("missing a mountain/snow terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains
-// (MapGenAreaInfo::ttWastelandInner)
-// <
-// 1)
-// throw game_data_error("missing a land/coast terrain type");
-
-// if
-// (mapGenInfo_->getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains
-// (MapGenAreaInfo::ttWastelandOuter)
-// <
-// 1)
-// throw game_data_error("missing a land/land terrain type");
-
-// prof.check_used();
-// } catch (const _wexception & e) {
-// throw game_data_error("%s: %s", fname, e.what());
-// }
-// }
+namespace Widelands {
 
 MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, Editor_Game_Base& egbase)
    : map_gen_info_(*egbase.lua().run_script("world/map_generation.lua"), egbase.world()),
@@ -174,13 +53,13 @@ void MapGenerator::generate_bobs
 	 MapGenAreaInfo::MapGenTerrainType const terrType)
 {
 	//  Figure out which bob area is due here...
-	size_t num = map_gen_info_.getNumBobAreas();
+	size_t num = map_gen_info_.getNumLandResources();
 	size_t found = num;
-	uint32_t sum_weight = map_gen_info_.getSumBobAreaWeight();
+	uint32_t sum_weight = map_gen_info_.getSumLandResourceWeight();
 	uint32_t max_val = 0;
 	for (size_t ix = 0; ix < num; ++ix) {
 		uint32_t val = random_bobs[ix][fc.x + map_info_.w * fc.y];
-		val = (val / sum_weight) * map_gen_info_.getBobArea(ix).getWeight();
+		val = (val / sum_weight) * map_gen_info_.getLandResource(ix).getWeight();
 		if (val >= max_val) {
 			found = ix;
 			max_val = val;
@@ -191,15 +70,15 @@ void MapGenerator::generate_bobs
 
 	// Figure out if we really need to set a bob here...
 
-	const MapGenBobArea & bobArea = map_gen_info_.getBobArea(found);
+	const MapGenLandResource & landResource = map_gen_info_.getLandResource(found);
 
-	const MapGenBobKind * bobKind = bobArea.getBobKind(terrType);
+	const MapGenBobCategory * bobCategory = landResource.getBobCategory(terrType);
 
-	if (not bobKind) //  no bobs defined here...
+	if (not bobCategory) //  no bobs defined here...
 		return;
 
-	uint32_t immovDens = bobArea.getImmovableDensity();
-	uint32_t movDens   = bobArea.getMoveableDensity();
+	uint32_t immovDens = landResource.getImmovableDensity();
+	uint32_t movDens   = landResource.getMoveableDensity();
 
 	immovDens *= max_val / 100;
 	movDens   *= max_val / 100;
@@ -215,18 +94,18 @@ void MapGenerator::generate_bobs
 
 	// Set bob according to bob area
 
-	if (set_immovable and (num = bobKind->getNumImmovableBobs()))
+	if (set_immovable and (num = bobCategory->num_immovables()))
 		egbase_.create_immovable
 			(fc,
-			 bobKind->getImmovableBob
+			 bobCategory->get_immovable
 			 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
 			 nullptr);
 
-	if (set_moveable and (num = bobKind->getNumMoveableBobs()))
+	if (set_moveable and (num = bobCategory->num_critters()))
 		egbase_.create_bob
 			(fc,
 			 egbase_.world().get_bob
-			 	(bobKind->getMoveableBob
+			 	(bobCategory->get_critter
 			 	 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
 			 	 .c_str()),
 			 nullptr);
@@ -779,9 +658,9 @@ void MapGenerator::create_random_map()
 
 	// for bobs
 	std::unique_ptr<std::unique_ptr<uint32_t[]> []> random_bobs
-		(new std::unique_ptr<uint32_t[]> [map_gen_info_.getNumBobAreas()]);
+		(new std::unique_ptr<uint32_t[]> [map_gen_info_.getNumLandResources()]);
 
-	for (size_t ix = 0; ix < map_gen_info_.getNumBobAreas(); ++ix)
+	for (size_t ix = 0; ix < map_gen_info_.getNumLandResources(); ++ix)
 		random_bobs[ix].reset
 			(generate_random_value_map(map_info_.w, map_info_.h, rng));
 
@@ -1284,7 +1163,7 @@ uint16_t Widelands::UniqueRandomMapInfo::generateWorldNameHash
 // TODO: Also take mountain and water areas into bob generation
 // (we have ducks and chamois)
 // TODO: Move other map generation functions from Map to MapGenerator
-// TODO: Define the "none"-bob to weigh other bobs lower within BobKinds...
+// TODO: Define the "none"-bob to weigh other bobs lower within BobCategory...
 // TODO: Clean up code
 // TODO: Improve mapgenconf files for nicer generated worlds
 // TODO: MapGen: Bob generation, configurable in mapgenconf

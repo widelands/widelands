@@ -117,7 +117,7 @@ greenland = {
          },
          critters = {},
       }
-   },
+   }, -- bob_categories
    land_resources = {
       {
          name = "forest",
@@ -150,7 +150,7 @@ greenland = {
          land_inner_bobs = "grasses",
          land_upper_bobs = "grasses",
          wasteland_inner_bobs = "wasteland_doodads",
-         wastaland_outer_bobs = "grasses",
+         wasteland_outer_bobs = "grasses",
       },
       {
          name = "stone",
@@ -241,9 +241,6 @@ return greenland
 -- inner_terrains=hardlava,lava-stone2
 -- outer_terrains=hardlava,lava-stone2
 
-
-
--- -- NOCOM(#sirver): Check the existence of the bobs.
 
 
 -- [bobs]

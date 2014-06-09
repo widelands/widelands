@@ -118,6 +118,7 @@ public:
 			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a table value.");
 		}
 		std::unique_ptr<LuaTable> rv(new LuaTable(L_));
+		lua_pop(L_, 1);
 		return rv;
 	}
 

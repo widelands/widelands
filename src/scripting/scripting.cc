@@ -121,7 +121,9 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 	}
 	lua_setglobal(L, "__file__");
 
-	return std::unique_ptr<LuaTable>(new LuaTable(L));
+	std::unique_ptr<LuaTable> return_value(new LuaTable(L));
+	lua_pop(L, 1);
+	return return_value;
 }
 
 // Reads the 'filename' from the 'fs' and returns its content.
@@ -218,7 +220,9 @@ std::unique_ptr<LuaTable> LuaInterface::get_hook(const std::string& name) {
 	}
 	lua_remove(m_L, -2);
 
-	return std::unique_ptr<LuaTable>(new LuaTable(m_L));
+	std::unique_ptr<LuaTable> return_value(new LuaTable(m_L));
+	lua_pop(m_L, 1);
+	return return_value;
 }
 
 
