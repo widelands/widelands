@@ -28,17 +28,8 @@
 //TODO: as soon as g_fs is not needed anymore, next include can be changed
 //to ..../filesystem.h
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/widelands.h"
-#include "logic/widelands_geometry.h"
 #include "point.h"
 #include "port.h"
-
-
-namespace Widelands {
-struct Building_Descr;
-class Editor_Game_Base;
-struct Immovable_Descr;
-};
 
 extern class Profile g_options;
 class FileSystem;
@@ -88,7 +79,6 @@ public:
 		char const * get_string() const {return m_value;}
 		char       * get_string()       {return m_value;}
 		Point  get_Point () const;
-		Widelands::Coords get_Coords(Widelands::Extent) const;
 
 		void set_string(char const *);
 	};
@@ -134,13 +124,6 @@ public:
 	Point                    get_Point
 		(char             const * name,
 		 Point                    def = Point (0, 0));
-	Widelands::Coords        get_Coords
-		(char             const * name, Widelands::Extent,
-		 Widelands::Coords        def);
-	Widelands::Player_Number get_Player_Number
-		(char             const * name,
-		 Widelands::Player_Number nr_players,
-		 Widelands::Player_Number def = 1);
 
 	int32_t                   get_safe_int
 		(const char * name);
@@ -153,20 +136,6 @@ public:
 	const char *              get_safe_string
 		(const char * name);
 	const char * get_safe_string(const std::string & name);
-	Widelands::Coords         get_safe_Coords
-		(const char * name, Widelands::Extent);
-	Widelands::Player_Number  get_safe_Player_Number
-		(char const * name,
-		 Widelands::Player_Number nr_players);
-	const Widelands::Immovable_Descr & get_safe_Immovable_Type
-		(char const * tribe, char const * name,
-		 Widelands::Editor_Game_Base &);
-	Widelands::Building_Index get_safe_Building_Index
-		(char const * name,
-		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
-	const Widelands::Building_Descr & get_safe_Building_Type
-		(char const * name,
-		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
 
 	char const * get_next_bool(char const * name, bool * value);
 
@@ -191,15 +160,6 @@ public:
 	{
 		set_string_duplicate(name, value.c_str());
 	}
-	void set_Coords
-		(char const * name, Widelands::Coords value);
-	void set_Immovable_Type
-		(char const * tribe, char const * name,
-		 const Widelands::Immovable_Descr &);
-	void set_Building_Index
-		(char const * name,
-		 Widelands::Building_Index value,
-		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
 
 	/// If a Value with this name already exists, update it with the given
 	/// value. Otherwise create a new Value with the given name and value.
