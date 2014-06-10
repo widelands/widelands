@@ -650,8 +650,8 @@ Supply * Economy::_find_best_supply
 			 	 best_cost))
 		{
 			if (!best_route)
-				throw wexception
-					("Economy::find_best_supply: COULD NOT FIND A ROUTE!");
+			//	throw wexception
+			printf ("Economy::find_best_supply: COULD NOT FIND A ROUTE!");
 			continue;
 		}
 

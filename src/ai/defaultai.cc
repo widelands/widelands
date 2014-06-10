@@ -1985,6 +1985,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 				// the destruction of the flag avoids that defaultAI will have too many
 				// unused roads - if needed the road will be rebuild directly.
 				// printf (" TDEBUG: dismantling lumberjacks hut\n");
+				site.bo->last_dismantle_time_ = game().get_gametime();				
 				flags_to_be_removed.push_back(site.site->base_flag().get_position());
 				game().send_player_dismantle(*site.site);
 
@@ -1993,7 +1994,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 					       player_number(),
 					       site.bo->cnt_built_);
 
-				site.bo->last_dismantle_time_ = game().get_gametime();
 				return true;
 			}
 			return false;
@@ -2009,9 +2009,10 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			if (kWellDebug)
 				printf(" TDEBUG: dismantling Well, statistics: %3d,\n",
 				       site.site->get_statistics_percent());
+			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
-			site.bo->last_dismantle_time_ = game().get_gametime();
+
 			return true;
 		}
 		return false;
@@ -2048,9 +2049,10 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		                                       and site.site->get_statistics_percent() ==
 		    0) {
 			// it is possible that there are stones but quary is not able to mine them
+			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
-			site.bo->last_dismantle_time_ = game().get_gametime();
+
 			return true;
 		}
 
@@ -2090,9 +2092,9 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 			if (site.site->get_statistics_percent()<
 			       95 and site.bo->stocklevel_> 100) {  // production stats == 0%
+			    site.bo->last_dismantle_time_ = game().get_gametime();
 				flags_to_be_removed.push_back(site.site->base_flag().get_position());
 				game().send_player_dismantle(*site.site);
-				site.bo->last_dismantle_time_ = game().get_gametime();
 				return true;
 			}
 		}
@@ -2122,10 +2124,10 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			       site.site->get_position().x,
 			       site.site->get_position().y,
 			       site.bo->cnt_built_,
-			       site.bo->current_stats_);
+			       site.bo->current_stats_);	
+		site.bo->last_dismantle_time_ = game().get_gametime();
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
-		site.bo->last_dismantle_time_ = game().get_gametime();
 		return true;
 	}
 
@@ -2150,9 +2152,9 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			if (kStandbyDebug)
 				printf("   * dismantling the building\n");
 
+			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
-			site.bo->last_dismantle_time_ = game().get_gametime();
 			return true;
 		}
 
