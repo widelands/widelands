@@ -20,6 +20,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include <memory>
 #include <string>
 #include <vector>
 
