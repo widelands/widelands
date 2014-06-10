@@ -21,6 +21,7 @@
 #define ONE_WORLD_LEGACY_CONVERSION_H
 
 #include <map>
+#include <memory>
 #include <string>
 
 #include <boost/noncopyable.hpp>
