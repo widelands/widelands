@@ -721,5 +721,9 @@ winterland = {
    } -- land resources
 }
 
--- NOCOM(#sirver): temporary
-return winterland
+return {
+   greenland = greenland,
+   blackland = blackland,
+   desert = desert,
+   winterland = winterland,
+}

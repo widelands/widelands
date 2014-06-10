@@ -17,10 +17,10 @@
  *
  */
 
+#include "logic/world/map_gen.h"
+
 #include <string>
 #include <vector>
-
-#include "logic/world/map_gen.h"
 
 #include "helper.h"
 #include "logic/game_data_error.h"

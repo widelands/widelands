@@ -40,14 +40,23 @@
 
 using namespace Widelands;
 
-Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
-	(Editor_Interactive & parent)
-	:
-	UI::Window
-		(&parent, "random_map_menu",
-		 (parent.get_w() - 260) / 2, (parent.get_h() - 450) / 2, 260, 490,
-		 _("New Random Map"))
-{
+Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
+	UI::Window(&parent,
+                "random_map_menu",
+                (parent.get_w() - 260) / 2,
+                (parent.get_h() - 450) / 2,
+                260,
+                490,
+                _("New Random Map")),
+     // TRANSLATORS: The next are world names for the random map generator.
+	m_world_descriptions(
+	{
+		{"greenland", _("Summer")},
+		{"winterland", _("Winter")},
+		{"desert", _("Desert")},
+		{"blackland", _("Black")},
+	}),
+	m_current_world(0) {
 	char buffer[250];
 	int32_t const offsx   =  5;
 	int32_t const offsy   =  5;
@@ -265,6 +274,17 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	posy += height + spacing + spacing + spacing;
 
+	// ---------- Worlds ----------
+	m_world = new UI::Button
+		(this, "world",
+		 posx, posy, width, height,
+		 g_gr->images().get("pics/but1.png"),
+		 m_world_descriptions[m_current_world].descrname);
+	m_world->sigclicked.connect
+		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, SWITCH_WORLD));
+
+	posy += height + spacing + spacing + spacing;
+
 	// ---------- Map ID String edit ----------
 
 	new UI::Textarea(this, posx + spacing + 20, posy, _("Map ID:"));
@@ -370,6 +390,11 @@ void Main_Menu_New_Random_Map::button_clicked(Main_Menu_New_Random_Map::ButtonID
 	case LAND_MINUS:
 		if (m_landval > 0)
 			m_landval -= 5;
+		break;
+	case SWITCH_WORLD:
+		++ m_current_world;
+		m_current_world %= m_world_descriptions.size();
+		m_world->set_title(m_world_descriptions[m_current_world].descrname);
 		break;
 	case SWITCH_ISLAND_MODE:
 		break;
@@ -545,4 +570,5 @@ void Main_Menu_New_Random_Map::set_map_info
 	mapInfo.resource_amount = static_cast
 		<Widelands::UniqueRandomMapInfo::Resource_Amount>
 			(m_res_amount);
+	mapInfo.world_name = m_world_descriptions[m_current_world].name;
 }

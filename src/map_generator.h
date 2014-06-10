@@ -58,7 +58,7 @@ struct UniqueRandomMapInfo {
 	uint32_t w;
 	uint32_t h;
 	Resource_Amount resource_amount;
-	std::string worldName;
+	std::string world_name;
 
 	double        waterRatio;     //  How much of the map is water?
 	double        landRatio;      //  How much of the map is land?
@@ -117,7 +117,7 @@ private:
 		 RNG                       &       rng,
 		 MapGenAreaInfo::MapGenTerrainType & terrType);
 
-	const MapGenInfo map_gen_info_;
+	std::unique_ptr<const MapGenInfo> map_gen_info_;
 	Map& map_;
 	const UniqueRandomMapInfo& map_info_;
 	Editor_Game_Base& egbase_;
