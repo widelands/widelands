@@ -19,6 +19,7 @@
 
 #include "editor/editorinteractive.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 

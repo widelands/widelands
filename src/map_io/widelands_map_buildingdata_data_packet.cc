@@ -20,6 +20,7 @@
 #include "map_io/widelands_map_buildingdata_data_packet.h"
 
 #include <map>
+#include <memory>
 
 #include "economy/flag.h"
 #include "economy/portdock.h"

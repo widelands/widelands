@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <cstring>
+#include <memory>
 #include <string>
 
 #include <boost/format.hpp>

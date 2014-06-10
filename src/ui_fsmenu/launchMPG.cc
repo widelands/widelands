@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/launchMPG.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 #include <libintl.h>
 

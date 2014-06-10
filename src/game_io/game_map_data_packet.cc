@@ -19,6 +19,8 @@
 
 #include "game_io/game_map_data_packet.h"
 
+#include <memory>
+
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

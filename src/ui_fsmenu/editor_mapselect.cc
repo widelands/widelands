@@ -20,6 +20,7 @@
 #include "ui_fsmenu/editor_mapselect.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
