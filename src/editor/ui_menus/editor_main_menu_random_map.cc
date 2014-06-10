@@ -48,7 +48,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
                 260,
                 490,
                 _("New Random Map")),
-     // TRANSLATORS: The next are world names for the random map generator.
+   // TRANSLATORS: The next are world names for the random map generator.
 	m_world_descriptions(
 	{
 		{"greenland", _("Summer")},
