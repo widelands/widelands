@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: 2014-04-18 17:27+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-19 05:21+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-06-11 05:34+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "Language: nl\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -118,17 +118,17 @@ msgid "Build a farm and a blackroot farm"
 msgstr "Bouw een boerderij en een helmkruidkwekerij"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:70
-msgid "Build a mill to make flour and blackroot flour"
-msgstr "Bouw een molen om meel en helmkruidmeel te maken"
+msgid "Build a mill to make cornflour and blackroot flour"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:71
 msgid "Build a well"
 msgstr "Bouw een put"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:72
-msgid "Build a bakery to bake bread from flour, blackroot flour and water"
+msgid ""
+"Build a bakery to bake bread from cornflour, blackroot flour and water"
 msgstr ""
-"Bouw een bakkerij om brood te bakken van meel, helmkruidmeel en water"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a hunter’s house to get raw meat"
@@ -1086,3 +1086,10 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nieuwe opdracht"
 msgstr[1] "Nieuwe opdrachten"
+
+#~ msgid "Build a mill to make flour and blackroot flour"
+#~ msgstr "Bouw een molen om meel en helmkruidmeel te maken"
+
+#~ msgid "Build a bakery to bake bread from flour, blackroot flour and water"
+#~ msgstr ""
+#~ "Bouw een bakkerij om brood te bakken van meel, helmkruidmeel en water"

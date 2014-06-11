@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: 2014-04-16 02:07+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-17 05:31+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-06-11 05:34+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "Language: it\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -122,18 +122,17 @@ msgid "Build a farm and a blackroot farm"
 msgstr "Costruisci una fattoria e una fattoria di radice nera."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:70
-msgid "Build a mill to make flour and blackroot flour"
-msgstr "Costruisci un mulino per produrre farina e farina di radice nera."
+msgid "Build a mill to make cornflour and blackroot flour"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:71
 msgid "Build a well"
 msgstr "Costruisci un pozzo."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:72
-msgid "Build a bakery to bake bread from flour, blackroot flour and water"
+msgid ""
+"Build a bakery to bake bread from cornflour, blackroot flour and water"
 msgstr ""
-"Costruisci un forno per produrre del pane partendo da farina, farina di "
-"radice nera e acqua."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a hunter’s house to get raw meat"
@@ -1068,3 +1067,11 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo obiettivo"
 msgstr[1] "Nuovi obiettivi"
+
+#~ msgid "Build a mill to make flour and blackroot flour"
+#~ msgstr "Costruisci un mulino per produrre farina e farina di radice nera."
+
+#~ msgid "Build a bakery to bake bread from flour, blackroot flour and water"
+#~ msgstr ""
+#~ "Costruisci un forno per produrre del pane partendo da farina, farina di "
+#~ "radice nera e acqua."

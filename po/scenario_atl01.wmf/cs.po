@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: 2014-04-16 03:01+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-04-17 05:31+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-06-11 05:34+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "Language: cs\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -116,17 +116,17 @@ msgid "Build a farm and a blackroot farm"
 msgstr "Postav statek a pěstírnu koření"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:70
-msgid "Build a mill to make flour and blackroot flour"
-msgstr "Postav mlýn, který umele mouku a drcené koření"
+msgid "Build a mill to make cornflour and blackroot flour"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:71
 msgid "Build a well"
 msgstr "Postav studnu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:72
-msgid "Build a bakery to bake bread from flour, blackroot flour and water"
+msgid ""
+"Build a bakery to bake bread from cornflour, blackroot flour and water"
 msgstr ""
-"Postav pekárnu, která z mouky, drceného rozrazilu a vody upeče chleba"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a hunter’s house to get raw meat"
@@ -1041,3 +1041,10 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Build a mill to make flour and blackroot flour"
+#~ msgstr "Postav mlýn, který umele mouku a drcené koření"
+
+#~ msgid "Build a bakery to bake bread from flour, blackroot flour and water"
+#~ msgstr ""
+#~ "Postav pekárnu, která z mouky, drceného rozrazilu a vody upeče chleba"
