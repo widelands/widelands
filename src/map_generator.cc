@@ -1169,18 +1169,10 @@ uint16_t Widelands::UniqueRandomMapInfo::generateWorldNameHash
 
 // TODO: Also take mountain and water areas into bob generation
 // (we have ducks and chamois)
-// TODO: Move other map generation functions from Map to MapGenerator
 // TODO: Define the "none"-bob to weigh other bobs lower within BobCategory...
-// TODO: Clean up code
-// TODO: Improve mapgenconf files for nicer generated worlds
 // TODO: MapGen: Bob generation, configurable in mapgenconf
-// TODO: MapGen: How to handle "Bob layers" ???
 // TODO: MapGen: Resource generation, configurable in mapgenconf
 // TODO: MapGen: Check out sample map
-// TODO: MapGen: Generate Start positions
 // TODO: MapGen: How to handle height profile in make_blah...
-// TODO: MapGen: Display something else than
-// TODO:         "Preparing..." when generating map...
-// TODO: MapGen: Allow up to 3 different water areas
 
 };

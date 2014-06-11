@@ -602,7 +602,7 @@ void Worker::informPlayer
 	if (building.name() == "fish_breeders_house")
 		return;
 
-	// TODO "stone" is defined as "granit" in the worlds
+	// TODO "stone" is defined as "granit" in the world
 	if (res_type == "stone") res_type = "granit";
 
 	// Translate the Resource name (if it is defined by the world)
