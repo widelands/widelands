@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:70
 msgid ""
-"Build a mill to make flour and blackroot flour"
+"Build a mill to make cornflour and blackroot flour"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:71
@@ -116,7 +116,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:72
 msgid ""
-"Build a bakery to bake bread from flour, blackroot flour and water"
+"Build a bakery to bake bread from cornflour, blackroot flour and water"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73

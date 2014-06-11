@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-04-11 08:33+0000\n"
-"Last-Translator: Yves MATHIEU <MisterY_vonvon@hotmail.com>\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-04-16 18:59+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-12 05:40+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:35+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -26,7 +26,7 @@ msgstr "Greenland"
 
 #: ../../worlds/greenland/conf:4
 msgid "These are the beautiful and bountiful countries of the barbarians"
-msgstr ""
+msgstr "Voici les belles et abondantes  terres des barbares."
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -99,31 +99,31 @@ msgstr "Pierres"
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Tremble (vieux)"
 
 #: ../../worlds/greenland/conf:49
 msgid "Aspen (Mature)"
-msgstr ""
+msgstr "Tremble (mature)"
 
 #: ../../worlds/greenland/conf:51
 msgid "Aspen (Pole)"
-msgstr ""
+msgstr "Tremble (baton)"
 
 #: ../../worlds/greenland/conf:53
 msgid "Aspen (Sapling)"
-msgstr ""
+msgstr "Tremble (jeune arbre)"
 
 #: ../../worlds/greenland/conf:54
 msgid "Oak (Old)"
-msgstr ""
+msgstr "Chêne (vieux)"
 
 #: ../../worlds/greenland/conf:55
 msgid "Oak (Mature)"
-msgstr ""
+msgstr "Chêne (mature)"
 
 #: ../../worlds/greenland/conf:56
 msgid "Oak (Pole)"
-msgstr ""
+msgstr "Chêne (baton)"
 
 #: ../../worlds/greenland/conf:57
 msgid "Oak (Sapling)"
@@ -131,11 +131,11 @@ msgstr "Chêne (pousse)"
 
 #: ../../worlds/greenland/conf:58
 msgid "Spruce (Old)"
-msgstr ""
+msgstr "Epicéa (vieux)"
 
 #: ../../worlds/greenland/conf:59
 msgid "Spruce (Mature)"
-msgstr ""
+msgstr "Epicéa (mature)"
 
 #: ../../worlds/greenland/conf:60
 msgid "Spruce (Pole)"
@@ -147,31 +147,31 @@ msgstr "Epicéa (pousse)"
 
 #: ../../worlds/greenland/conf:62
 msgid "Alder (Old)"
-msgstr ""
+msgstr "Aulne (Vieux)"
 
 #: ../../worlds/greenland/conf:63
 msgid "Alder (Mature)"
-msgstr ""
+msgstr "Aulne (Mature)"
 
 #: ../../worlds/greenland/conf:64
 msgid "Alder (Pole)"
-msgstr ""
+msgstr "Aulne (Baton)"
 
 #: ../../worlds/greenland/conf:65
 msgid "Alder (Sapling)"
-msgstr ""
+msgstr "Aulne (Jeune arbre)"
 
 #: ../../worlds/greenland/conf:66
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Bouleau (vieux)"
 
 #: ../../worlds/greenland/conf:67
 msgid "Birch (Mature)"
-msgstr ""
+msgstr "Bouleau (Mature)"
 
 #: ../../worlds/greenland/conf:68
 msgid "Birch (Pole)"
-msgstr ""
+msgstr "Bouleau (Baton)"
 
 #: ../../worlds/greenland/conf:69
 msgid "Birch (Sapling)"
@@ -179,51 +179,51 @@ msgstr "Bouleau (pousse)"
 
 #: ../../worlds/greenland/conf:70
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Hêtre (Vieux)"
 
 #: ../../worlds/greenland/conf:71
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Hêtre (Mature)"
 
 #: ../../worlds/greenland/conf:72
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Hêtre (Baton)"
 
 #: ../../worlds/greenland/conf:73
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Hêtre (Jeune arbre)"
 
 #: ../../worlds/greenland/conf:74
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Mélèze (Vieux)"
 
 #: ../../worlds/greenland/conf:75
 msgid "Larch (Mature)"
-msgstr ""
+msgstr "Mélèze (Mature)"
 
 #: ../../worlds/greenland/conf:76
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Mélèze (Baton)"
 
 #: ../../worlds/greenland/conf:77
 msgid "Larch (Sapling)"
-msgstr ""
+msgstr "Mélèze (Jeune arbre)"
 
 #: ../../worlds/greenland/conf:78
 msgid "Rowan (Old)"
-msgstr ""
+msgstr "Sorbier des oiseleurs (Vieux)"
 
 #: ../../worlds/greenland/conf:79
 msgid "Rowan (Mature)"
-msgstr ""
+msgstr "Sorbier des oiseleurs (Mature)"
 
 #: ../../worlds/greenland/conf:80
 msgid "Rowan (Pole)"
-msgstr ""
+msgstr "Sorbier des oiseleurs (Baton)"
 
 #: ../../worlds/greenland/conf:81
 msgid "Rowan (Sapling)"
-msgstr ""
+msgstr "Sorbier des oiseleurs (Jeune arbre)"
 
 #: ../../worlds/greenland/conf:84
 msgid "Badger"
@@ -312,7 +312,7 @@ msgstr "Steppe"
 
 #: ../../worlds/greenland/terrainconf:13
 msgid "Mountain 1"
-msgstr ""
+msgstr "Montagne 1"
 
 #: ../../worlds/greenland/terrainconf:19
 msgid "Snow"
@@ -328,35 +328,35 @@ msgstr "Plage"
 
 #: ../../worlds/greenland/terrainconf:43
 msgid "Meadow 1"
-msgstr ""
+msgstr "Prairie 1"
 
 #: ../../worlds/greenland/terrainconf:49
 msgid "Meadow 2"
-msgstr ""
+msgstr "Prairie 2"
 
 #: ../../worlds/greenland/terrainconf:55
 msgid "Meadow 3"
-msgstr ""
+msgstr "Prairie 3"
 
 #: ../../worlds/greenland/terrainconf:61
 msgid "Mountain 2"
-msgstr ""
+msgstr "Montagne 2"
 
 #: ../../worlds/greenland/terrainconf:67
 msgid "Mountain 3"
-msgstr ""
+msgstr "Montagne 3"
 
 #: ../../worlds/greenland/terrainconf:73
 msgid "Mountain 4"
-msgstr ""
+msgstr "Montagne 4"
 
 #: ../../worlds/greenland/terrainconf:79
 msgid "Barren Steppe"
-msgstr ""
+msgstr "Steppe aride"
 
 #: ../../worlds/greenland/terrainconf:85
 msgid "Meadow 4"
-msgstr ""
+msgstr "Prairie 4"
 
 #: ../../worlds/greenland/terrainconf:91
 msgid "Lava"
@@ -364,4 +364,4 @@ msgstr "Lave"
 
 #: ../../worlds/greenland/terrainconf:96
 msgid "Mountain Meadow"
-msgstr ""
+msgstr "Pâture de montage"

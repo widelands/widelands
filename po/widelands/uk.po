@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-30 16:10+0200\n"
-"PO-Revision-Date: 2014-03-09 07:54+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-04-15 08:16+0200\n"
+"PO-Revision-Date: 2014-04-16 03:45+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:38+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:35+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: uk\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -79,11 +79,11 @@ msgstr ""
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:188 ../../src/wlapplication.cc:430
+#: ../../src/editor/editorinteractive.cc:188 ../../src/wlapplication.cc:433
 msgid "Unsupported format"
 msgstr "Формат не підтримується"
 
-#: ../../src/editor/editorinteractive.cc:189 ../../src/wlapplication.cc:431
+#: ../../src/editor/editorinteractive.cc:189 ../../src/wlapplication.cc:434
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -97,7 +97,7 @@ msgid "Creating players"
 msgstr "Створення гравців"
 
 #: ../../src/editor/editorinteractive.cc:213
-#: ../../src/logic/editor_game_base.cc:276
+#: ../../src/logic/editor_game_base.cc:275
 msgid "Loading world data"
 msgstr "Завантажую дані про світ"
 
@@ -281,7 +281,7 @@ msgid "World:"
 msgstr "Світ:"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
-#: ../../src/wui/game_main_menu.cc:42
+#: ../../src/wui/game_main_menu.cc:39
 msgid "Main Menu"
 msgstr "Головне меню"
 
@@ -681,17 +681,6 @@ msgstr "Поточний:"
 msgid "Current Size: %u"
 msgstr "Поточний розмір: %u"
 
-#: ../../src/game_io/game_preload_data_packet.cc:73
-msgid "Endless Game"
-msgstr "Безкінечна гра"
-
-#: ../../src/game_io/game_preload_data_packet.cc:78
-#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:341
-#: ../../src/ui_fsmenu/launchMPG.cc:289 ../../src/ui_fsmenu/launchSPG.cc:237
-#: ../../src/wui/multiplayersetupgroup.cc:355
-msgid "Scenario"
-msgstr "Сценарій"
-
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:847
 #: ../../src/ui_fsmenu/mapselect.cc:501 ../../src/ui_fsmenu/mapselect.cc:505
 msgid "unknown"
@@ -735,7 +724,7 @@ msgstr ""
 msgid "%u%% dismantled"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:282
+#: ../../src/logic/editor_game_base.cc:281
 msgid "Loading tribes"
 msgstr ""
 
@@ -756,6 +745,12 @@ msgstr "Завантаження світу"
 msgid "Adding player %u"
 msgstr "Додати гравця %u"
 
+#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:341
+#: ../../src/ui_fsmenu/launchMPG.cc:289 ../../src/ui_fsmenu/launchSPG.cc:237
+#: ../../src/wui/multiplayersetupgroup.cc:355
+msgid "Scenario"
+msgstr "Сценарій"
+
 #: ../../src/logic/game.cc:253
 msgid "Loading a map"
 msgstr "Завантаження мапи"
@@ -774,7 +769,7 @@ msgid "Loading map"
 msgstr "Завантаження мапи"
 
 #: ../../src/logic/game.cc:372 ../../src/logic/game.cc:405
-#: ../../src/wlapplication.cc:1770
+#: ../../src/wlapplication.cc:1773
 msgid "Loading..."
 msgstr "Завантаження..."
 
@@ -797,7 +792,7 @@ msgstr ""
 "Неможливо розпочати грау, тому, в гравця %u відсутня стартова позиція.\n"
 "Ви можете додати стартову позицію в редакторв Widelands."
 
-#: ../../src/logic/map.cc:342
+#: ../../src/logic/map.cc:337
 msgid "Player 1"
 msgstr "Гравець 1"
 
@@ -1113,11 +1108,11 @@ msgstr ""
 msgid "Worker got lost!"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:87
+#: ../../src/map_io/widelands_map_loader.cc:82
 msgid "Invalid World"
 msgstr "Невірний світ"
 
-#: ../../src/map_io/widelands_map_loader.cc:89
+#: ../../src/map_io/widelands_map_loader.cc:84
 #, c-format
 msgid "The world \"%s\" set by the map does not exist on your filesystem."
 msgstr "Карта світу \"%s\" не існує."
@@ -1328,7 +1323,7 @@ msgstr ""
 "сервер вимкнено."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:848
-#: ../../src/wlapplication.cc:1663
+#: ../../src/wlapplication.cc:1666
 msgid "Preparing game"
 msgstr "Підготовка гри"
 
@@ -1779,12 +1774,12 @@ msgstr ""
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/scripting/lua_game.cc:1089
+#: ../../src/scripting/lua_game.cc:1085
 #, c-format
 msgid "%1$s (achieved %2$s)"
 msgstr ""
 
-#: ../../src/ui_basic/helpwindow.cc:48 ../../src/ui_basic/helpwindow.cc:193
+#: ../../src/ui_basic/helpwindow.cc:48 ../../src/ui_basic/helpwindow.cc:189
 #, c-format
 msgid "Help: %s"
 msgstr "Довідка: %s"
@@ -2614,50 +2609,50 @@ msgstr "Кампанії"
 msgid "Load Game"
 msgstr "Завантажити гру"
 
-#: ../../src/wlapplication.cc:402
+#: ../../src/wlapplication.cc:405
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr "Помилка: Не вдалось підключитись до сервера (помилка вище)!\\n\n"
 
-#: ../../src/wlapplication.cc:828 ../../src/wlapplication.cc:837
+#: ../../src/wlapplication.cc:831 ../../src/wlapplication.cc:840
 msgid "could not find the path of the main executable"
 msgstr "не можливо найти шлях до основного виконуваного файлу"
 
-#: ../../src/wlapplication.cc:957
+#: ../../src/wlapplication.cc:960
 msgid ""
 "Waited 5 seconds to close audio. There are some problems here, so killing "
 "Widelands. Update your sound driver and/or SDL to fix this problem\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1087
+#: ../../src/wlapplication.cc:1090
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1090
+#: ../../src/wlapplication.cc:1093
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double відключає. Це не збірка налагодження!"
 
-#: ../../src/wlapplication.cc:1191
+#: ../../src/wlapplication.cc:1194
 msgid "This is Widelands-"
 msgstr "Це Widelands -"
 
-#: ../../src/wlapplication.cc:1193
+#: ../../src/wlapplication.cc:1196
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
 msgstr "Використання: widelands <опція0>=<значення0> ... <опціяN>=<значеняN>"
 
-#: ../../src/wlapplication.cc:1194
+#: ../../src/wlapplication.cc:1197
 msgid "Options:"
 msgstr "Опції:"
 
-#: ../../src/wlapplication.cc:1196
+#: ../../src/wlapplication.cc:1199
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr ""
 " --<назва-параметру-налаштування>=значення переписує вказаний параметр в "
 "налаштуваннях"
 
-#: ../../src/wlapplication.cc:1197
+#: ../../src/wlapplication.cc:1200
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
@@ -2665,7 +2660,7 @@ msgstr ""
 " --logfile=ІМ'Я_ФАЙЛУ запис логу до вказаного файлу із\n"
 "                      виводу термінала"
 
-#: ../../src/wlapplication.cc:1199
+#: ../../src/wlapplication.cc:1202
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
@@ -2673,7 +2668,7 @@ msgstr ""
 " ----datadir=ІМ'Я_ПАПКИ використовувати вказану папку для файлів даних,\n"
 "                      гри widelands"
 
-#: ../../src/wlapplication.cc:1201
+#: ../../src/wlapplication.cc:1204
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
@@ -2682,11 +2677,11 @@ msgstr ""
 "налаштування\n"
 "                      збурежень, та повторів"
 
-#: ../../src/wlapplication.cc:1204
+#: ../../src/wlapplication.cc:1207
 msgid "                      Default is ~/.widelands"
 msgstr "                      За замовчуванням ~/.widelands"
 
-#: ../../src/wlapplication.cc:1207
+#: ../../src/wlapplication.cc:1210
 msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL"
@@ -2694,7 +2689,7 @@ msgstr ""
 " --coredump=[yes|no] збирати дамп ядра при помилках сегментації\n"
 "                      використанням SDL"
 
-#: ../../src/wlapplication.cc:1209
+#: ../../src/wlapplication.cc:1212
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
@@ -2702,12 +2697,12 @@ msgstr ""
 " --language=[de_DE|uk_UA|...]\n"
 "                      Використовувана локалізація"
 
-#: ../../src/wlapplication.cc:1211
+#: ../../src/wlapplication.cc:1214
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
 msgstr ""
 " --localedir=ІМ'Я_ПАПКИ Використовувати вказану папка з файлами перекладу"
 
-#: ../../src/wlapplication.cc:1212
+#: ../../src/wlapplication.cc:1215
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
@@ -2715,7 +2710,7 @@ msgstr ""
 " --remove_syncstreams=[true|false]\n"
 "                      Видалити файли синхронізації при старті"
 
-#: ../../src/wlapplication.cc:1214
+#: ../../src/wlapplication.cc:1217
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
@@ -2725,27 +2720,27 @@ msgstr ""
 "                      Видалити повтори через вказану кількість днів.\n"
 "                      Якщо тут 0, то повтори не видаляються"
 
-#: ../../src/wlapplication.cc:1218
+#: ../../src/wlapplication.cc:1221
 msgid "Sound options:"
 msgstr "Параметри звуку:"
 
-#: ../../src/wlapplication.cc:1219
+#: ../../src/wlapplication.cc:1222
 msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound            Запуск гри без звуку."
 
-#: ../../src/wlapplication.cc:1220
+#: ../../src/wlapplication.cc:1223
 msgid " --disable_fx         Disable sound effects."
 msgstr " --disable_fx         Вимкнути звукові ефекти."
 
-#: ../../src/wlapplication.cc:1221
+#: ../../src/wlapplication.cc:1224
 msgid " --disable_music      Disable music."
 msgstr " --disable_music      Вимкнути музику."
 
-#: ../../src/wlapplication.cc:1222
+#: ../../src/wlapplication.cc:1225
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr " --nozip              Не зберігати файли в zip архівах."
 
-#: ../../src/wlapplication.cc:1223
+#: ../../src/wlapplication.cc:1226
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
@@ -2755,27 +2750,27 @@ msgstr ""
 "                      Ви можете додати =ІМ'Я_ФАЙЛУ для відкриття\n"
 "                      файлу ІМ'Я_ФАЙЛУ в редакторі."
 
-#: ../../src/wlapplication.cc:1226
+#: ../../src/wlapplication.cc:1229
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=ІМ'Я_ФАЙЛУ  Запустити гру на карті ІМ'Я_ФАЙЛУ"
 
-#: ../../src/wlapplication.cc:1228
+#: ../../src/wlapplication.cc:1231
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=ІМ'Я_ФАЙЛУ  Завантажити збереження гри ІМ'Я_ФАЙЛУ."
 
-#: ../../src/wlapplication.cc:1229
+#: ../../src/wlapplication.cc:1232
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1231
+#: ../../src/wlapplication.cc:1234
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1232
+#: ../../src/wlapplication.cc:1235
 msgid ""
 " --auto_roadbuild_mode=[yes|no]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -2783,34 +2778,34 @@ msgid ""
 "                      not connected to a road."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1236
+#: ../../src/wlapplication.cc:1239
 msgid "Graphic options:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1237
+#: ../../src/wlapplication.cc:1240
 msgid ""
 " --fullscreen=[yes|no]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1240
+#: ../../src/wlapplication.cc:1243
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1241
+#: ../../src/wlapplication.cc:1244
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1242
+#: ../../src/wlapplication.cc:1245
 msgid " --opengl=[0|1]       Enables OpenGL rendering"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1243
+#: ../../src/wlapplication.cc:1246
 msgid "Options for the internal window manager:"
 msgstr "Параметри внутрішнього менеджера вікна:"
 
-#: ../../src/wlapplication.cc:1244
+#: ../../src/wlapplication.cc:1247
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -2822,7 +2817,7 @@ msgstr ""
 "                      край вікна не буде на заданій \n"
 "                      відстані від краю екрана."
 
-#: ../../src/wlapplication.cc:1248
+#: ../../src/wlapplication.cc:1251
 msgid ""
 " --dock_windows_to_edges=[yes|no]\n"
 "                      Eliminate a window's border towards the\n"
@@ -2834,7 +2829,7 @@ msgstr ""
 "                      сторони якою вікно торкається\n"
 "                      краю екрана."
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1255
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -2846,7 +2841,7 @@ msgstr ""
 "                      край вікна не буде на заданій\n"
 "                      відстані від краю панелі."
 
-#: ../../src/wlapplication.cc:1256
+#: ../../src/wlapplication.cc:1259
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -2858,7 +2853,7 @@ msgstr ""
 "                      коли воно перекриває(-ться)\n"
 "                      панель(-лю)."
 
-#: ../../src/wlapplication.cc:1263
+#: ../../src/wlapplication.cc:1266
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)"
@@ -2866,15 +2861,15 @@ msgstr ""
 " --double             Запустити дві копії гри (для тестування\n"
 "                      локальної мережі)"
 
-#: ../../src/wlapplication.cc:1268
+#: ../../src/wlapplication.cc:1271
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Ввімкнути дедальні повідомлення налагодження"
 
-#: ../../src/wlapplication.cc:1270
+#: ../../src/wlapplication.cc:1273
 msgid " --help               Show this help"
 msgstr " --help               Показати цю довідку"
 
-#: ../../src/wlapplication.cc:1272
+#: ../../src/wlapplication.cc:1275
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -2886,30 +2881,30 @@ msgstr ""
 "\n"
 "Маємо надію що гра вам сподобається!"
 
-#: ../../src/wlapplication.cc:1360
+#: ../../src/wlapplication.cc:1363
 msgid "Fallback settings in effect"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1362
+#: ../../src/wlapplication.cc:1365
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1433
+#: ../../src/wlapplication.cc:1436
 #, c-format
 msgid "Warning: %s"
 msgstr "Попередження: %s"
 
-#: ../../src/wlapplication.cc:1436
+#: ../../src/wlapplication.cc:1439
 msgid "Game data error"
 msgstr "Помилка даних гри"
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1444
 msgid "Unexpected error during the game"
 msgstr "Не передбачена помилка гри"
 
-#: ../../src/wlapplication.cc:1446
+#: ../../src/wlapplication.cc:1449
 #, c-format
 msgid ""
 "\n"
@@ -2924,7 +2919,7 @@ msgstr ""
 "Повідомлення яке стосується даної помилки Ви знайдете в стандартному виводі "
 "(stdout.txt в Windows). Ви використовуєте збірку %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1453
+#: ../../src/wlapplication.cc:1456
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2937,7 +2932,7 @@ msgstr ""
 "гри. В більшості випадків, хоча не завжди, можна завантажити його і "
 "продовжити гру\n"
 
-#: ../../src/wlapplication.cc:1565
+#: ../../src/wlapplication.cc:1568
 msgid "The address of the game server is invalid"
 msgstr "Не вірна адреса ігрового сервера"
 
@@ -3009,7 +3004,7 @@ msgid "Once injured"
 msgstr "Коли поранені"
 
 #: ../../src/wui/building_statistics_menu.cc:77
-#: ../../src/wui/game_main_menu.cc:62
+#: ../../src/wui/game_main_menu.cc:59
 msgid "Building Statistics"
 msgstr "Статистика будівель"
 
@@ -3058,60 +3053,60 @@ msgstr "Показати попередні"
 msgid "Show next"
 msgstr "Показати наступного"
 
-#: ../../src/wui/buildingwindow.cc:183
+#: ../../src/wui/buildingwindow.cc:182
 msgid "Cancel the expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:193
+#: ../../src/wui/buildingwindow.cc:192
 msgid "Start an expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:209 ../../src/wui/game_summary.cc:77
+#: ../../src/wui/buildingwindow.cc:208 ../../src/wui/game_summary.cc:77
 msgid "Continue"
 msgstr "Продовжити"
 
-#: ../../src/wui/buildingwindow.cc:209
+#: ../../src/wui/buildingwindow.cc:208
 msgid "Stop"
 msgstr "Стоп"
 
-#: ../../src/wui/buildingwindow.cc:236
+#: ../../src/wui/buildingwindow.cc:235
 #, c-format
 msgid "Enhance to %s"
 msgstr "Підвищити до %s"
 
-#: ../../src/wui/buildingwindow.cc:242 ../../src/wui/fieldaction.cc:112
+#: ../../src/wui/buildingwindow.cc:241 ../../src/wui/fieldaction.cc:116
 msgid "Construction costs:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:263
+#: ../../src/wui/buildingwindow.cc:262
 msgid "Destroy"
 msgstr "Знищити"
 
-#: ../../src/wui/buildingwindow.cc:281
+#: ../../src/wui/buildingwindow.cc:280
 msgid "Dismantle"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:281
+#: ../../src/wui/buildingwindow.cc:280
 msgid "Returns:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:313 ../../src/wui/buildingwindow.cc:516
+#: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:503
 msgid "Hide work area"
 msgstr "Приховати робочу область"
 
-#: ../../src/wui/buildingwindow.cc:328
+#: ../../src/wui/buildingwindow.cc:327
 msgid "Debug"
 msgstr "Відладження"
 
-#: ../../src/wui/buildingwindow.cc:339
+#: ../../src/wui/buildingwindow.cc:338
 msgid "Center view on this"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:357
+#: ../../src/wui/buildingwindow.cc:356
 msgid "Help"
 msgstr "Допомога"
 
-#: ../../src/wui/buildingwindow.cc:519
+#: ../../src/wui/buildingwindow.cc:506
 msgid "Show work area"
 msgstr "Показати робочу область"
 
@@ -3138,118 +3133,122 @@ msgstr "Кількість"
 msgid " or "
 msgstr " або "
 
-#: ../../src/wui/fieldaction.cc:247
+#: ../../src/wui/fieldaction.cc:250
 msgid "Build small building"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:248
+#: ../../src/wui/fieldaction.cc:251
 msgid "Build medium building"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:249
+#: ../../src/wui/fieldaction.cc:252
 msgid "Build large building"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:250
+#: ../../src/wui/fieldaction.cc:253
 msgid "Build port building"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:282
+#: ../../src/wui/fieldaction.cc:285
 msgid "Action"
 msgstr "Дія"
 
-#: ../../src/wui/fieldaction.cc:367 ../../src/wui/fieldaction.cc:461
+#: ../../src/wui/fieldaction.cc:370 ../../src/wui/fieldaction.cc:464
 msgid "Build road"
 msgstr "Прокласти дорогу"
 
-#: ../../src/wui/fieldaction.cc:379
+#: ../../src/wui/fieldaction.cc:382
 msgid "Destroy this flag"
 msgstr "Знищити цей прапорець"
 
-#: ../../src/wui/fieldaction.cc:387
+#: ../../src/wui/fieldaction.cc:390
 msgid "Configure economy"
 msgstr "Налаштувати економіку"
 
-#: ../../src/wui/fieldaction.cc:393
+#: ../../src/wui/fieldaction.cc:396
 msgid "Send geologist to explore site"
 msgstr "Надіслати геолога для дослідження території"
 
-#: ../../src/wui/fieldaction.cc:411
+#: ../../src/wui/fieldaction.cc:414
 msgid "Place a flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:418
+#: ../../src/wui/fieldaction.cc:421
 msgid "Destroy a road"
 msgstr "Знищити дорогу"
 
-#: ../../src/wui/fieldaction.cc:436
+#: ../../src/wui/fieldaction.cc:439
 msgid "Watch field in a separate window"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:441
+#: ../../src/wui/fieldaction.cc:444
 msgid "Toggle building statistics display"
 msgstr "Відсоток будівництва"
 
-#: ../../src/wui/fieldaction.cc:447
+#: ../../src/wui/fieldaction.cc:450
 msgid "Toggle building label display"
 msgstr "Назви будівель"
 
-#: ../../src/wui/fieldaction.cc:454
+#: ../../src/wui/fieldaction.cc:457
 msgid "Debug window"
 msgstr "Вікно відлагоджувача"
 
-#: ../../src/wui/fieldaction.cc:463 ../../src/wui/watchwindow.cc:97
+#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:97
 msgid "Watch"
 msgstr "Дивитись"
 
-#: ../../src/wui/fieldaction.cc:471
+#: ../../src/wui/fieldaction.cc:474
 msgid "Military settings"
 msgstr "Військові налаштування"
 
-#: ../../src/wui/fieldaction.cc:497
+#: ../../src/wui/fieldaction.cc:500
 msgid "Start attack"
 msgstr "Почати напад"
 
-#: ../../src/wui/fieldaction.cc:502
+#: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
 msgstr "Напад"
 
-#: ../../src/wui/fieldaction.cc:586
+#: ../../src/wui/fieldaction.cc:589
 msgid "Build mines"
 msgstr "будувати шахти"
 
-#: ../../src/wui/fieldaction.cc:602
+#: ../../src/wui/fieldaction.cc:605
 msgid "Build flag"
 msgstr "Встановити прапорець"
 
-#: ../../src/wui/fieldaction.cc:606
+#: ../../src/wui/fieldaction.cc:609
 msgid "Cancel road"
 msgstr "Відмінити дорогу"
 
-#: ../../src/wui/fieldaction.cc:609
+#: ../../src/wui/fieldaction.cc:612
 msgid "Build roads"
 msgstr "Будувати дороги"
 
-#: ../../src/wui/game_chat_menu.cc:37 ../../src/wui/interactive_player.cc:104
+#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:104
 #: ../../src/wui/interactive_spectator.cc:51
 msgid "Chat"
 msgstr "Чат"
+
+#: ../../src/wui/game_chat_menu.cc:65
+msgid "Script console"
+msgstr ""
 
 #: ../../src/wui/game_debug_ui.cc:237
 msgid "Debug Field"
 msgstr "Поле відлагодження"
 
-#: ../../src/wui/game_main_menu.cc:50
+#: ../../src/wui/game_main_menu.cc:47
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
 msgstr "Загальна статистика"
 
-#: ../../src/wui/game_main_menu.cc:56
+#: ../../src/wui/game_main_menu.cc:53
 #: ../../src/wui/ware_statistics_menu.cc:138
 msgid "Ware Statistics"
 msgstr "Статистика товарів"
 
-#: ../../src/wui/game_main_menu.cc:68 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/game_main_menu.cc:65 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:209 ../../src/wui/waresdisplay.cc:59
 msgid "Stock"
 msgstr "Запаси"
@@ -3457,20 +3456,20 @@ msgstr ""
 msgid "You lost."
 msgstr "Ви програли."
 
-#: ../../src/wui/game_summary.cc:187
+#: ../../src/wui/game_summary.cc:188
 #, c-format
 msgid "%s won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:191
+#: ../../src/wui/game_summary.cc:192
 msgid "Team %|1$u| won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:245
+#: ../../src/wui/game_summary.cc:246
 msgid "Score"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:254
+#: ../../src/wui/game_summary.cc:255
 msgid "Player info"
 msgstr ""
 
@@ -3521,17 +3520,17 @@ msgstr "Втрачено цивільну будівлю"
 msgid "Military"
 msgstr "Військо"
 
-#: ../../src/wui/interactive_base.cc:318
+#: ../../src/wui/interactive_base.cc:324
 msgid "PAUSE"
 msgstr "ПАУЗА"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_base.cc:338
+#: ../../src/wui/interactive_base.cc:344
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_base.cc:345
+#: ../../src/wui/interactive_base.cc:351
 msgid "NO GAME CONTROLLER"
 msgstr "ІГРОВИ КОНТРОЛЕР ВІДСУТНІЙ"
 
@@ -3541,11 +3540,11 @@ msgid "Statistics"
 msgstr "Статистика"
 
 #: ../../src/wui/interactive_player.cc:122
-#: ../../src/wui/interactive_player.cc:285
+#: ../../src/wui/interactive_player.cc:260
 msgid "Messages"
 msgstr "Повідомлення"
 
-#: ../../src/wui/interactive_player.cc:293
+#: ../../src/wui/interactive_player.cc:268
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -3797,26 +3796,25 @@ msgstr ""
 msgid "Capacity"
 msgstr "Ємність"
 
-#: ../../src/wui/soldierlist.cc:390 ../../src/wui/soldierlist.cc:404
-#: ../../src/wui/soldierlist.cc:472
+#: ../../src/wui/soldierlist.cc:391 ../../src/wui/soldierlist.cc:405
+#: ../../src/wui/soldierlist.cc:473
 msgid "Click soldier to send away"
 msgstr "Клікніть на солдатів щоб надіслати їх"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/soldierlist.cc:406
+#: ../../src/wui/soldierlist.cc:407
 msgid "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:414
+#: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Rookies"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:416
+#: ../../src/wui/soldierlist.cc:417
 msgid "Prefer Heroes"
 msgstr ""
 
-#. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/soldierlist.cc:489
+#: ../../src/wui/soldierlist.cc:478
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr ""

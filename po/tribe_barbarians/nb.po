@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-04-14 15:09+0000\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-04-17 20:18+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-15 05:35+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-18 05:31+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: nb\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -1191,7 +1191,7 @@ msgstr "Hammer"
 #: ../../tribes/barbarians/trainingcamp/help.lua:59
 #: ../../tribes/barbarians/well/help.lua:44
 msgid "Worker uses:"
-msgstr ""
+msgstr "Arbeider bruker:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1222,7 +1222,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:61
 #: ../../tribes/barbarians/well/help.lua:45
 msgid "Experience levels:"
-msgstr ""
+msgstr "Erfaringsnivåer:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:54
@@ -1249,7 +1249,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s til %s (%s EP)"
 
 #: ../../tribes/barbarians/axfactory/help.lua:60
 #: ../../tribes/barbarians/conf:109
@@ -1584,7 +1584,7 @@ msgstr "Trener"
 #: ../../tribes/barbarians/battlearena/help.lua:55
 #: ../../tribes/barbarians/trainingcamp/help.lua:63
 msgid "%1$im%2$is"
-msgstr ""
+msgstr "%1$im%2$is"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
@@ -2290,7 +2290,7 @@ msgstr "Bonde"
 #: ../../tribes/barbarians/metalworks/help.lua:42
 #: ../../tribes/barbarians/reed_yard/help.lua:42
 msgid "Gardener"
-msgstr ""
+msgstr "Gartner"
 
 #: ../../tribes/barbarians/conf:119
 #: ../../tribes/barbarians/fishers_hut/help.lua:44
@@ -2414,7 +2414,7 @@ msgstr "Vaktpost"
 
 #: ../../tribes/barbarians/conf:154
 msgid "Barracks"
-msgstr "Brakke"
+msgstr "Kaserne"
 
 #: ../../tribes/barbarians/conf:155
 #: ../../tribes/barbarians/conf:207
@@ -2520,7 +2520,7 @@ msgstr "Kvegfarm"
 
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/reed_yard/help.lua:27
-msgid "Weaving-Mill"
+msgid "Weaving Mill"
 msgstr "Veveri"
 
 #: ../../tribes/barbarians/conf:193
@@ -3077,7 +3077,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
-"It can make Bread Paddles, Felling axs, Fire Tongs, Fishing Rods, Hammers, "
+"It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
 
@@ -3212,7 +3212,7 @@ msgstr "«Vi dyrker tak»"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:13
 msgid "Slogan of the Guild of Gardeners"
-msgstr ""
+msgstr "Motto til gartnerlauget"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:16
 msgid ""
