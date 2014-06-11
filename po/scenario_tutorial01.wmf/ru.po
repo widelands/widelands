@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-13 16:36+0000\n"
-"Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-05-24 20:52+0000\n"
+"Last-Translator: Ruslan Kovtun <koutoftimer@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:40+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-05-25 05:28+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:15
 msgid "Nice And Easy Does It All the Time"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
-msgstr "Добро подаловать на учебный курс Widelands!"
+msgstr "Добро пожаловать на учебный курс Widelands!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:28
 msgid "Welcome to Widelands!"
@@ -113,17 +113,19 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Enable the showing of building spaces"
-msgstr ""
+msgstr "Включить показ мест для зданий"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:65
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Показать места для зданий"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:67
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
 msgstr ""
+"Когда включен показ иконок зданий, легче понять какой тип зданий может быть "
+"построен на участке земли."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
 msgid ""
@@ -131,10 +133,13 @@ msgid ""
 "left at the very bottom of the screen. Right-click on this window and then "
 "give it a try."
 msgstr ""
+"Сделайте это нажав ПРОБЕЛ или нажав четвертую кнопку слева на панели снизу "
+"экрана. Нажмите правую кнопку мыши чтобы закрыть это окно и перейти к "
+"выполнению."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:77
 msgid "Lumberjack’s Spot"
-msgstr ""
+msgstr "Хижина лесоруба"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:81
 msgid ""
@@ -144,10 +149,14 @@ msgid ""
 "describe the steps I will take and then ask you to click on the ‘OK’ button "
 "for me to demonstrate."
 msgstr ""
+"Вот вы где. Давайте я объясню вам значение этих иконок. Для начала, давайте "
+"рассмотрим как создать хижину лесоруба и присоединить ее к дороге. Возле "
+"этих деревьев, как раз, хорошее место для лесоруба. Далее я опишу шаги, "
+"которые необходимо выполнить, и попрошу закрыть это окно для демонстрации."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:90
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "Построение хижины лесоруба"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid ""
@@ -158,16 +167,24 @@ msgid ""
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
 msgstr ""
+"Только что, я нажал левой кнопкой мыши на иконке где я хотел расположить "
+"хижину лесоруба. Далее появится окно, где я смогу выбрать здание. Так как я "
+"нажал на желтый дом, который обозначает возможность построения здания малых "
+"и средний размеров, мне показаны все строения малых и средних размеров. Но "
+"хижина лесоруба - это здание малых размеров, поэтому я перейду на вкладку "
+"малых зданий, после чего выберу хижину."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:100
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
 msgstr ""
+"Нажмите \"ОК\" для продолжения. Я покажу все медленно: кликну, потом выберу "
+"вкладку и выберу строение."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:107
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "Построение соединяющей дороги"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:110
 msgid ""
@@ -176,10 +193,14 @@ msgid ""
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
 msgstr ""
+"Лесоруб не приступит к работе. Я все еще должен присоединить хижину к сети "
+"дорог. После приведения в порядок места строительства, я автоматически войду "
+"в режим построение дорог, поэтому, все что мне надо сделать это нажать на "
+"синий флаг штаба."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr ""
+msgstr "Ожидание построения хижины лесоруба"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
 msgid ""
@@ -187,10 +208,12 @@ msgid ""
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
 msgstr ""
+"Сейчас строитель покинет штаб и пойдет на строительную площадку. Также, "
+"перевозчик начнет доставку изделий от одного синего флага к другому."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:128
 msgid "Placing Another Flag"
-msgstr ""
+msgstr "Установка дополнительного флага"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:131
 msgid ""
@@ -198,16 +221,21 @@ msgid ""
 "way to go. We can make it easier for him (and more efficient for us) when we "
 "place another blue flag on the road."
 msgstr ""
+"На работу то как работаю другие можно смотреть вечно, но бедному посыльному "
+"очень долго идти. Мы можем облегчить ему задачу (и повысить эффективность) "
+"поместив дополнительный синий флаг на дороге."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid ""
 "You try it this time: click on the yellow flag symbol in between the two "
 "blue flags we just placed and then click on the"
 msgstr ""
+"Теперь ваша очередь: нажмите на желтый флаг между двумя синими, "
+"расположенными только что, и нажмите на"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:135
 msgid "build flag symbol."
-msgstr "кнопку установки флажка."
+msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:138
 msgid "Build a flag to divide the road to the lumberjack"
@@ -215,7 +243,7 @@ msgstr "Установить флаг на тропе к хижине лесор
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:139
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "Установка флажка на дороге"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:140
 msgid ""
@@ -223,20 +251,24 @@ msgid ""
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
 msgstr ""
+"Чем короче дорога, тем скорее будут доставлены изделия. Поэтому, вам следует "
+"убедиться, что на дороге расположено максимальное количество флажков."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:143
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
 msgstr ""
+"Установите синий флаг посредине дороги, что соединяет ваш штаб с хижиной "
+"лесоруба."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:148
 msgid "Waiting For the Hut to be Finished"
-msgstr ""
+msgstr "Ожидание строительства хижины"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:151
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr ""
+msgstr "Хорошо. Давайте подождем, когда построится хижина."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:153
 msgid ""
@@ -244,10 +276,12 @@ msgid ""
 "to increase the game speed. You can use PAGE DOWN to make the game slower "
 "again."
 msgstr ""
+"Если хотите ускорить игру, воспользуйтесь кнопкой PAGE UP. Для замедления "
+"используется кнопка PAGE DOWN."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
 msgid "Lumberjack is Done"
-msgstr ""
+msgstr "Лесопилка готова."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:163
 msgid ""
@@ -1127,7 +1161,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

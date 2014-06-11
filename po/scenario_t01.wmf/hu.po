@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
 "PO-Revision-Date: 2014-03-10 08:47+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:30+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 05:32+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: hu\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
@@ -388,7 +388,7 @@ msgstr ""
 "visszafoglalásáért vívott harcunk elhúzódhat, ezért talán bölcs lenne "
 "előkészületeket tennünk."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:133
+#: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
 "I would advise that we obtain stones for the future – who knows what "
 "fortifications we might be forced to build very soon. And – like a gift of "
@@ -398,7 +398,7 @@ msgstr ""
 "erődítményeket kell építenünk hamarosan. És - mintha a sors ajándéka lenne -"
 ", épp a közelben, hatalmas sziklák vannak..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:136
+#: ../../campaigns/t01.wmf/scripting/texts.lua:137
 msgid ""
 "Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead."
@@ -406,11 +406,11 @@ msgstr ""
 "Szép munka, törzsfőnök. Most már mindenünk megvan, hogy szembenézhessünk a "
 "téllel, és készülhetünk az előttünk álló csatákra."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:137
+#: ../../campaigns/t01.wmf/scripting/texts.lua:138
 msgid "Victory"
 msgstr "Győzelem"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:138
+#: ../../campaigns/t01.wmf/scripting/texts.lua:139
 msgid ""
 "You may continue to play this map if you wish. Otherwise, move on to the "
 "next mission."
@@ -418,16 +418,16 @@ msgstr ""
 "Ha akarod, játszhatsz tovább ezen a térképen. Ha nem, akkor folytasd a "
 "következő küldetéssel."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:145
+#: ../../campaigns/t01.wmf/scripting/texts.lua:146
 msgid "In the Night"
 msgstr "Éjjel"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:146
-#: ../../campaigns/t01.wmf/scripting/texts.lua:154
+#: ../../campaigns/t01.wmf/scripting/texts.lua:147
+#: ../../campaigns/t01.wmf/scripting/texts.lua:155
 msgid "Thron says..."
 msgstr "Thron:"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:147
+#: ../../campaigns/t01.wmf/scripting/texts.lua:148
 msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s "
@@ -436,7 +436,7 @@ msgstr ""
 "Egy újabb álmatlan éjszakámon felmentem a dombra és a távolba figyeltem. A "
 "tüzek még mindig égnek, apám hagyatékával csillapítva éhségüket."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:148
+#: ../../campaigns/t01.wmf/scripting/texts.lua:149
 msgid ""
 "They are a constant reminder of why we have to hide here... and why we must "
 "return in the end!"
@@ -444,11 +444,11 @@ msgstr ""
 "Ezek folyvást emlékeztetnek, miért kell itt bujkálnunk... és hogy miért kell "
 "a végén visszatérnünk!"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:153
+#: ../../campaigns/t01.wmf/scripting/texts.lua:154
 msgid "At the Tomb"
 msgstr "A nyughelynél"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:155
+#: ../../campaigns/t01.wmf/scripting/texts.lua:156
 msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
@@ -458,7 +458,7 @@ msgstr ""
 "Kal'mavrath hegy lábánál. Csak álltam ott, megfeledkezve a múló órákról és a "
 "sötét égből aláhulló hideg esőről is..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:156
+#: ../../campaigns/t01.wmf/scripting/texts.lua:157
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me..."
@@ -466,15 +466,15 @@ msgstr ""
 "Valahogy olyan érzés volt ez, mint egy búcsú. Most először eltűnődtem rajta, "
 "mit tartogat számomra a jövő..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:161
+#: ../../campaigns/t01.wmf/scripting/texts.lua:162
 msgid "The Other Day"
 msgstr "A minap"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:162
+#: ../../campaigns/t01.wmf/scripting/texts.lua:163
 msgid "Thron says thoughtfully..."
 msgstr "Thron gondolkodik..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:163
+#: ../../campaigns/t01.wmf/scripting/texts.lua:164
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer "
 "to home – to strike at the first sign of my brothers’ forces wavering."
@@ -483,7 +483,7 @@ msgstr ""
 "hazánkhoz – hogy rögtön lecsaphassunk, amint fivérem erői megingani "
 "látszanak."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:164
+#: ../../campaigns/t01.wmf/scripting/texts.lua:165
 msgid ""
 "But when I look over the forests I can still see black smoke rising to the "
 "sky. I know – it is too early yet, and what he hopes for will not happen any "
@@ -495,15 +495,15 @@ msgstr ""
 "lesz. Persze akár igaza is lehet, de én félek a vérfürdőtől, amit korai "
 "visszatérésünk okozhatna mindkét oldalon..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:168
+#: ../../campaigns/t01.wmf/scripting/texts.lua:169
 msgid "The Oath"
 msgstr "Az eskü"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:169
+#: ../../campaigns/t01.wmf/scripting/texts.lua:170
 msgid "Thron looks furious..."
 msgstr "Thron dühösnek tűnik..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:170
+#: ../../campaigns/t01.wmf/scripting/texts.lua:171
 msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
@@ -513,7 +513,7 @@ msgstr ""
 "sötét erdőben. Elszörnyedve hallgattuk beszámolóját az Al'thunranban folyó "
 "embertelenségekről."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:171
+#: ../../campaigns/t01.wmf/scripting/texts.lua:172
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr "Ezennel megújítom eskümet - mindenáron megállítom ezt az őrültséget!"
 
@@ -521,7 +521,7 @@ msgstr "Ezennel megújítom eskümet - mindenáron megállítom ezt az őrülts�
 msgid "“%s”"
 msgstr "„%s”"
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

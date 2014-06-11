@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-13 13:17+0000\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-04-16 03:42+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:33+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-17 05:33+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: ru\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -951,8 +951,8 @@ msgid "Spider Farm"
 msgstr "Паучья ферма"
 
 #: ../../tribes/atlanteans/conf:186
-msgid "Weaving-Mill"
-msgstr "Ткацкая фабрика"
+msgid "Weaving Mill"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Farm"
@@ -1131,12 +1131,10 @@ msgstr ""
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
-"Golden tabards are produced in Atlantean weaving-mills out of gold yarn. "
+"Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
-"Золотые накидки производятся из золотой нити на ткацкой фабрике. В лабиринте "
-"солдаты увеличивают своё здоровье с 0 до 1 с помощью золотой накидки и еды."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -1150,10 +1148,8 @@ msgstr ""
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
-"golden tabard in the weaving-mill."
+"golden tabard in the weaving mill."
 msgstr ""
-"Эта нить, изготовленная ювелиром, используется для плетения уникальных "
-"золотых накидок в ткацкой фабрике."
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your guardhall."
@@ -1460,21 +1456,16 @@ msgstr "Разводит пауков для получения шёлковой
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
-"Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
+"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
-"Ткацкая фабрика производит шёлк из шёлковой нити. Он используется в "
-"мастерской и на верфи. Кроме того, ткань нужна для постройки некоторых "
-"высокотехнологичных зданий."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving-mill."
+"processed into spidercloth in a weaving mill."
 msgstr ""
-"Шёлковая нить добывается на паучей ферме. Используется на ткацкой фабрике "
-"для производства шёлка."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
@@ -1508,10 +1499,8 @@ msgstr "Вырезает камень из валунов."
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
-"Tabards are produced in the weaving-mill."
+"Tabards are produced in the weaving mill."
 msgstr ""
-"Накидка и лёгкий трезубец это базовое снаряжение новобранцев. Накидки "
-"производятся на ткацкой фабрике."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."

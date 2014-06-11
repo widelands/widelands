@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-13 01:30+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-06-02 18:02+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:28+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-03 05:29+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -154,7 +154,7 @@ msgstr "Ještě nezavedeno"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Je nám líto, ale tato mapa nebyla ještě implementována"
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -208,7 +208,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial 1"
-msgstr ""
+msgstr "Tutoriál 1"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid ""
@@ -230,7 +230,7 @@ msgstr "Doporučené týmy: (modrý, žlutý) proti (červený, zelený)"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
-msgstr ""
+msgstr "Calvisson"
 
 #: ../../maps/Calvisson.wmf/elemental:11
 msgid ""
@@ -244,6 +244,8 @@ msgid ""
 "Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
 "green) | (blue, green) vs. (red, yellow)"
 msgstr ""
+"Navrhované týmy: modrý vs. červený | žlutý vs. zelený | (modrý, žlutý) vs. "
+"(červený, zelený) | (modrý, zelený) vs. (červený, žlutý)"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -291,11 +293,11 @@ msgstr ""
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
-msgstr ""
+msgstr "Překračování horizontu"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Zmocni se lodi a pluj k horizontu."
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 #: ../../maps/Rendez-Vous.wmf/elemental:10
@@ -358,7 +360,7 @@ msgstr ""
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
-msgstr ""
+msgstr "Družnost"
 
 #: ../../maps/Fellowships.wmf/elemental:11
 msgid ""
@@ -366,6 +368,9 @@ msgid ""
 "similar, so the map should be fair. There is plenty of gold near the "
 "starting point – Do you see it?"
 msgstr ""
+"Uhlí je těžko k nalezení - nauč se ho těžit efektivně. Startovní pozice jsou "
+"si podobné, takže mapa by měla být fér. Je tu spousta zlata hned u startovní "
+"pozice - Vidíš?"
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
@@ -373,6 +378,9 @@ msgid ""
 "somewhat above the normal value. The AI performed badly at the time of "
 "writing (2013)."
 msgstr ""
+"Tato mapa je nejvhodnější pro dva nebo tři lidské protivníky, při herní "
+"rychlosti trochu vyšší než je normální. AI si tu v době kdy toto bylo psáno "
+"vedla špatně (2013)."
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -425,6 +433,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
+"Každý kmen je obklopen čtyřmi velkými horami. Kdo je první zdolá a vytěží "
+"suroviny pro svůj kmen? Nápověda I: Vodu lze nalézt podél řeky. Nápověda II: "
+"Sněhulák značí další zdroje vody. Nápověda III: Každá hora obsahuje pouze "
+"jeden druh suroviny."
 
 #: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
@@ -460,11 +472,11 @@ msgstr "Dvě říše soupeří o poklady bájného poloostrova..."
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
-msgstr ""
+msgstr "Ledové války"
 
 #: ../../maps/Ice wars.wmf/elemental:11
-msgid "Autumn follows winter. Some things are frozen, but not the war."
-msgstr ""
+msgid "Autumn became winter. Some things are frozen, but not the war."
+msgstr "Z podzimu se stala zima. Některé věci zmrzly ale válka ne."
 
 #: ../../maps/Ice wars.wmf/elemental:12
 #: ../../maps/Sun of fire.wmf/elemental:12
@@ -499,7 +511,7 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Králové a královny"
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
@@ -622,7 +634,7 @@ msgstr ""
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested Teams: blue vs. yellow"
-msgstr ""
+msgstr "Doporučené týmy: modrý vs. žlutý"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -643,7 +655,7 @@ msgstr ""
 
 #: ../../maps/River Explorers.wmf/elemental:9
 msgid "River Explorers"
-msgstr ""
+msgstr "Říční průzkumníci"
 
 #: ../../maps/River Explorers.wmf/elemental:11
 msgid ""
