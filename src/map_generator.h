@@ -25,10 +25,6 @@
 #include "logic/widelands_geometry.h"
 #include "logic/world/map_gen.h"
 
-// This is the first step of separating map generation from
-// map.
-// TODO: Put other generation stuff here too...
-
 struct RNG;
 
 namespace Widelands {

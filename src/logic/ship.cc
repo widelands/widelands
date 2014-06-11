@@ -19,6 +19,8 @@
 
 #include "logic/ship.h"
 
+#include <memory>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"

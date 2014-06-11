@@ -19,6 +19,7 @@
 
 #include "graphic/text/rt_render.h"
 
+#include <memory>
 #include <queue>
 #include <string>
 #include <vector>

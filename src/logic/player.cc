@@ -19,6 +19,8 @@
 
 #include "logic/player.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 

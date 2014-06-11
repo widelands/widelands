@@ -20,6 +20,8 @@
 #ifndef UI_MULTILINEEDITBOX_H
 #define UI_MULTILINEEDITBOX_H
 
+#include <memory>
+
 #include <boost/signals2.hpp>
 
 #include "ui_basic/panel.h"

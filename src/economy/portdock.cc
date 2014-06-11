@@ -19,6 +19,8 @@
 
 #include "economy/portdock.h"
 
+#include <memory>
+
 #include "container_iterate.h"
 #include "economy/fleet.h"
 #include "economy/ware_instance.h"

@@ -20,6 +20,7 @@
 #include "logic/game.h"
 
 #include <cstring>
+#include <memory>
 #include <string>
 
 #ifndef _WIN32

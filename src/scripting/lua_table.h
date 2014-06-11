@@ -20,6 +20,7 @@
 #ifndef LUA_TABLE_H
 #define LUA_TABLE_H
 
+#include <memory>
 #include <set>
 #include <string>
 

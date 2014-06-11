@@ -21,6 +21,7 @@
 
 #include <cstring>
 #include <iostream>
+#include <memory>
 
 #include <SDL_image.h>
 #include <config.h>

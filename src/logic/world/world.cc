@@ -20,6 +20,7 @@
 #include "logic/world/world.h"
 
 #include <iostream>
+#include <memory>
 #include <sstream>
 
 #include "constants.h"

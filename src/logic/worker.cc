@@ -19,6 +19,8 @@
 
 #include "logic/worker.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "economy/economy.h"
