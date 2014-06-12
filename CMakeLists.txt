@@ -382,12 +382,6 @@ include_directories(${PNG_INCLUDE_DIR})
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIR})
 
-# Check if we have a working minizip library
-find_package(Minizip)
-if (MINIZIP_FOUND)
-  include_directories(${MINIZIP_INCLUDE_DIR})
-endif (MINIZIP_FOUND)
-
 if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_package(intl REQUIRED)
@@ -398,6 +392,11 @@ endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 # Gettext is required, but it does not provide GETTEXT_INCLUDE_DIR or
 # GETTEXT_LIBRARY as "usual" libraries do
 find_package(Gettext REQUIRED)
+
+find_package(ZLIB REQUIRED)
+if (NOT ZLIB_FOUND)
+  message(FATAL_ERROR "Required package ZLIB not found, please install and re-run cmake")
+endif()
 
 find_package(SDL REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})

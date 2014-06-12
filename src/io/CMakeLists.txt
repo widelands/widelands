@@ -12,7 +12,6 @@ wl_library(io_stream
 
 # TODO(sirver): Splitting this into filesystem and fileread.
 wl_library(io_filesystem
-  USES_MINIZIP
   SRCS
     fileread.cc
     fileread.h
@@ -32,6 +31,7 @@ wl_library(io_filesystem
     base_log
     build_info
     io_stream
+    third_party_minizip
 )
 
 

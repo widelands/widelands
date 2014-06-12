@@ -10,13 +10,18 @@ add_custom_target(codecheck)
 add_custom_target(wl_tests)
 
 macro(_common_compile_tasks)
-  foreach(SRC ${ARG_SRCS})
-    run_codecheck(${NAME} ${SRC})
-  endforeach(SRC)
+  # TODO(sirver): Disable all warnings for third_party targets, but keep debug
+  # and optimization settings.
+  if(NOT ARG_THIRD_PARTY)
+    foreach(SRC ${ARG_SRCS})
+      run_codecheck(${NAME} ${SRC})
+    endforeach(SRC)
+  endif()
 
-  if(ARG_USES_MINIZIP)
-    target_link_libraries(${NAME} wl_minizip)
-  endif(ARG_USES_MINIZIP)
+  if(ARG_USES_ZLIB)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${ZLIB_INCLUDE_DIRS})
+    target_link_libraries(${NAME} ${ZLIB_LIBRARY})
+  endif(ARG_USES_ZLIB)
 
   foreach(DEPENDENCY ${ARG_DEPENDS})
     target_link_libraries(${NAME} ${DEPENDENCY})
@@ -25,7 +30,7 @@ endmacro(_common_compile_tasks)
 
 macro(_parse_common_args ARGS)
   # TODO(sirver): add OPTIONS for the other external libraries we use
-  set(OPTIONS USES_MINIZIP)
+  set(OPTIONS THIRD_PARTY USES_ZLIB)
   set(ONE_VALUE_ARG )
   set(MULTI_VALUE_ARGS SRCS DEPENDS)
   cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
@@ -41,7 +46,9 @@ function(wl_library NAME)
   # TODO(sirver): I do not get any unresolved dependency errors
   # when building a STATIC library, only for SHARED. We should
   # always gets those errors to track down cyclic dependencies.
-  add_library(${NAME} STATIC
+  add_library(${NAME}
+    STATIC
+    EXCLUDE_FROM_ALL
     ${ARG_SRCS}
   )
 
@@ -863,6 +870,8 @@ add_subdirectory(io)
 add_subdirectory(profile)
 add_subdirectory(scripting)
 add_subdirectory(sound)
+# TODO(sirver): Move eris into third_party.
+add_subdirectory(third_party)
 
 #TODO: It looks like various things have cyclic dependencies
 #in all directions. Ideally this core shouldn't exist(?) or at least
@@ -871,10 +880,6 @@ add_subdirectory(sound)
 add_library(widelands_ball_of_mud STATIC
   ${WL_SRCS}
 )
-
-# TODO(sirver): add a third_party directory and put stuff like minizip, eris in there.
-add_subdirectory(minizip)
-target_link_libraries(widelands_ball_of_mud wl_minizip)
 
 target_link_libraries(widelands_all base_i18n)
 target_link_libraries(widelands_all eris)
@@ -888,7 +893,6 @@ target_link_libraries(widelands_all ${SDLNET_LIBRARY})
 target_link_libraries(widelands_all ${SDLTTF_LIBRARY})
 target_link_libraries(widelands_all ${SDLGFX_LIBRARY})
 target_link_libraries(widelands_all ${PNG_LIBRARY})
-target_link_libraries(widelands_all ${ZLIB_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
 target_link_libraries(widelands_all ${GLEW_LIBRARY})
 target_link_libraries(widelands_all ${Boost_LIBRARIES})
