@@ -19,6 +19,8 @@
 
 #include "scripting/lua_game.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"

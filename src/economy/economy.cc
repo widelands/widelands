@@ -19,6 +19,8 @@
 
 #include "economy/economy.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 
 #include "base/wexception.h"

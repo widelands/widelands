@@ -19,6 +19,8 @@
 
 #include "network/netclient.h"
 
+#include <memory>
+
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
 #include <config.h>

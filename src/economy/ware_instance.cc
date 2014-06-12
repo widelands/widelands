@@ -19,6 +19,8 @@
 
 #include "economy/ware_instance.h"
 
+#include <memory>
+
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"

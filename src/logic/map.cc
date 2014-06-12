@@ -20,6 +20,7 @@
 #include "logic/map.h"
 
 #include <algorithm>
+#include <memory>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>

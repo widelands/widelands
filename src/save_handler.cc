@@ -19,6 +19,8 @@
 
 #include "save_handler.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "chat.h"

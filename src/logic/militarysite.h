@@ -20,6 +20,8 @@
 #ifndef MILITARYSITE_H
 #define MILITARYSITE_H
 
+#include <memory>
+
 #include "logic/attackable.h"
 #include "logic/productionsite.h"
 #include "logic/requirements.h"

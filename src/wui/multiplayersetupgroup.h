@@ -21,6 +21,7 @@
 #define MULTIPLAYERSETUPGROUP_H
 
 #include <map>
+#include <memory>
 #include <string>
 
 #include "constants.h"

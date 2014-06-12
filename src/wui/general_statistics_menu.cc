@@ -19,6 +19,8 @@
 
 #include "wui/general_statistics_menu.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
