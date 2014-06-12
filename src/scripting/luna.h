@@ -59,8 +59,8 @@
 #define UNPERS_UINT32(name, value) _UNPERS_TYPE(name, value, uint32)
 #define UNPERS_STRING(name, value) _UNPERS_TYPE(name, value, string)
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna_impl.h"
+#include "third_party/eris/lua.hpp"
 
 /**
  * Base Class. All Luna class must derive from this

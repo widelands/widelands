@@ -870,7 +870,6 @@ add_subdirectory(io)
 add_subdirectory(profile)
 add_subdirectory(scripting)
 add_subdirectory(sound)
-# TODO(sirver): Move eris into third_party.
 add_subdirectory(third_party)
 
 #TODO: It looks like various things have cyclic dependencies
@@ -882,7 +881,7 @@ add_library(widelands_ball_of_mud STATIC
 )
 
 target_link_libraries(widelands_all base_i18n)
-target_link_libraries(widelands_all eris)
+target_link_libraries(widelands_all third_party_eris)
 target_link_libraries(widelands_all io_dedicated_log)
 target_link_libraries(widelands_all io_filesystem)
 target_link_libraries(widelands_all profile)

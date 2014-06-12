@@ -4,5 +4,5 @@ wl_test(test_scripting
    ./test_luna.cc
  DEPENDS
    widelands_all
-   eris
+   third_party_eris
 )

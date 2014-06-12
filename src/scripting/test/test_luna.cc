@@ -22,9 +22,9 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
 #include "scripting/luna_impl.h"
+#include "third_party/eris/lua.hpp"
 
 #ifndef BEGIN_LUNA_PROPERTIES
 #define BEGIN_LUNA_PROPERTIES(klass) \

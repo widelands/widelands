@@ -20,7 +20,7 @@
 #ifndef LUA_GLOBALS_H
 #define LUA_GLOBALS_H
 
-#include "scripting/eris/lua.hpp"
+#include "third_party/eris/lua.hpp"
 
 namespace LuaGlobals {
 
