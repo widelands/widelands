@@ -9,17 +9,36 @@ add_custom_target(codecheck)
 # http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
 add_custom_target(wl_tests)
 
-# See
-# http://www.cmake.org/cmake/help/v3.0/module/CMakeParseArguments.html
-function(wl_library NAME)
-  # TODO(sirver): add OPTIONS for the other external libraries we
-  # use
+macro(_common_compile_tasks)
+  foreach(SRC ${ARG_SRCS})
+    run_codecheck(${NAME} ${SRC})
+  endforeach(SRC)
+
+  if(ARG_USES_MINIZIP)
+    # TODO(sirver): always use the one we bundle and never search for a system
+    # one.
+    if(NOT MINIZIP_FOUND)
+      target_link_libraries(${NAME} wl_minizip)
+    else(NOT MINIZIP_FOUND)
+      target_link_libraries(${NAME} ${MINIZIP_LIBRARY})
+    endif(NOT MINIZIP_FOUND)
+  endif(ARG_USES_MINIZIP)
+endmacro(_common_compile_tasks)
+
+macro(_parse_common_args ARGS)
+  # TODO(sirver): add OPTIONS for the other external libraries we use
   set(OPTIONS USES_MINIZIP)
   set(ONE_VALUE_ARG )
   set(MULTI_VALUE_ARGS SRCS DEPENDS)
   cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
-    ${ARGN}
+    ${ARGS}
   )
+endmacro(_parse_common_args)
+
+# See
+# http://www.cmake.org/cmake/help/v3.0/module/CMakeParseArguments.html
+function(wl_library NAME)
+  _parse_common_args("${ARGN}")
 
   # TODO(sirver): I do not get any unresolved dependency errors
   # when building a STATIC library, only for SHARED. We should
@@ -28,19 +47,7 @@ function(wl_library NAME)
     ${ARG_SRCS}
   )
 
-  foreach(SRC ${ARG_SRCS})
-    run_codecheck(${NAME} ${SRC})
-  endforeach(SRC)
-
-  if(ARG_USES_MINIZIP)
-    # TODO(sirver): always use the one we bundle and never search
-    # for a system one.
-    if(NOT MINIZIP_FOUND)
-      target_link_libraries(${NAME} wl_minizip)
-    else(NOT MINIZIP_FOUND)
-      target_link_libraries(${NAME} ${MINIZIP_LIBRARY})
-    endif(NOT MINIZIP_FOUND)
-  endif(ARG_USES_MINIZIP)
+  _common_compile_tasks()
 
   foreach(DEPENDENCY ${ARG_DEPENDS})
     target_link_libraries(${NAME} ${DEPENDENCY})
@@ -48,28 +55,16 @@ function(wl_library NAME)
 endfunction(wl_library)
 
 function(wl_test NAME)
-  set(OPTIONS)
-  set(ONE_VALUE_ARG)
-  set(MULTI_VALUE_ARGS SRCS DEPENDS)
-  cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
-    ${ARGN}
-  )
+  _parse_common_args("${ARGN}")
 
-  # TODO(sirver): look into using a CMAKE macro to reduce code duplication.
   add_executable(${NAME} ${ARG_SRCS})
 
-  foreach(SRC ${ARG_SRCS})
-    run_codecheck(${NAME} ${SRC})
-  endforeach(SRC)
-
   # Tests need to link with SDL library without main.
-  set(TEST_DEPENDENCIES ${SDL_LIBRARY}
+  set(ARG_DEPENDENCIES ${SDL_LIBRARY}
     ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} ${ARG_DEPENDS})
-  list(REMOVE_ITEM TEST_DEPENDENCIES  ${SDLMAIN_LIBRARY})
+  list(REMOVE_ITEM ARG_DEPENDENCIES  ${SDLMAIN_LIBRARY})
 
-  foreach(DEPENDENCY ${TEST_DEPENDENCIES})
-    target_link_libraries(${NAME} ${DEPENDENCY})
-  endforeach()
+  _common_compile_tasks()
 
   add_test(${NAME} ${NAME})
   add_dependencies(wl_tests ${NAME})
