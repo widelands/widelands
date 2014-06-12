@@ -2,88 +2,34 @@ project (widelands)
 
 cmake_minimum_required (VERSION 2.8)
 
-# Used as versioning, if WL_VERSION_STANDARD is definded.
-# TODO(sirver): This is redundant and should not be used anywhere. We have a
-# script that determines the version.
-if (WL_VERSION_STANDARD)
-	# Set the values below for standard versioning.
-	# As long as WL_VERSION_MAJOR is 0, the naming will be in form of
-	# "Build${WL_VERSION_MINOR}" + ".${WL_VERSION_PATCH}" if WL_VERSION_PATCH is
-	# defined.
-	set (WL_VERSION_MAJOR 0)
-	set (WL_VERSION_MINOR 19)
-
-	# Just define in case that we release patches for official builds
-	#set (WL_VERSION_PATCH 90)
-
-	# An addition to the version name (e.g. RC1, DEV, ...)
-	set (WL_VERSION_ADDITION DEV)
-endif (WL_VERSION_STANDARD)
-
-# Define the directory structure for installation - will be hardcoded in WL bin
-# If nothing is given on command line, set the standard values depending on platform.
-
-if (WIN32 OR APPLE OR WL_PORTABLE)
-  if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-    set (WL_INSTALL_PREFIX ".")
-  endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-
-  if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
-    set (WL_INSTALL_DATADIR ".")
-  endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
-
-  if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
-    set (WL_INSTALL_LOCALEDIR "locale")
-  endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
-
-  if (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
-    set (WL_INSTALL_BINDIR ".")
-  endif (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
-elseif (WIN32 OR APPLE OR WL_PORTABLE)
-  if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-    set (WL_INSTALL_PREFIX "/usr/local")
-  endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-
-  if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
-    set (WL_INSTALL_DATADIR "share/games/widelands")
-  endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
-
-  if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
-    set (WL_INSTALL_LOCALEDIR "${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale")
-  endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
-
-  if (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
-    set (WL_INSTALL_BINDIR "games")
-  endif (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
-endif (WIN32 OR APPLE OR WL_PORTABLE)
-
-# General install prefix for config.h
-if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-	set (WL_INSTALL_PREFIX /usr/local)
-endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-
-# Widelands binary directory
-if (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
-	set (WL_INSTALL_BINDIR games)
-endif (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
-
-# Widelands data directory
-if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
-	set (WL_INSTALL_DATADIR share/games/widelands)
-endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
-
-# Widelands locale directory
-if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
-	set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale)
-endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
-
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
-  message(FATAL_ERROR "Build-directory and source-directory are the same!")
+  message(FATAL_ERROR "Build directory and source directory must not be the same.")
 endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 
+# Define the directory structure for installation - will be hardcoded in WL bin
+# (through config.h).
+macro(_set_if_unset VAR VALUE)
+  if (NOT ${VAR} OR ${VAR} STREQUAL "")
+    set (${VAR} ".")
+  endif()
+endmacro(_set_if_unset)
+
+if(WIN32 OR APPLE OR WL_PORTABLE)
+  _set_if_unset(WL_INSTALL_PREFIX ".")
+  _set_if_unset(WL_INSTALL_DATADIR ".")
+  _set_if_unset(WL_INSTALL_LOCALEDIR "locale")
+  _set_if_unset(WL_INSTALL_BINDIR ".")
+else()
+  _set_if_unset (WL_INSTALL_PREFIX "/usr/local")
+  _set_if_unset (WL_INSTALL_DATADIR "share/games/widelands")
+  _set_if_unset (WL_INSTALL_LOCALEDIR "${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale")
+  _set_if_unset (WL_INSTALL_BINDIR "games")
+endif()
+
 if (CMAKE_INSTALL_PREFIX STREQUAL CMAKE_BINARY_DIR)
-  message(FATAL_ERROR "Build-directory and install-directory are the same!")
+  message(FATAL_ERROR "Build directory and install directory must not be the same.")
 endif (CMAKE_INSTALL_PREFIX STREQUAL CMAKE_BINARY_DIR)
+
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
@@ -167,7 +113,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   #TODO: look into replacing this with CMAKE_CXX_COMPILER_VERSION when we move to a more recent CMake version than 2.6
   EXECUTE_PROCESS(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
   if (GCC_VERSION VERSION_LESS 4.7)
-    message(FATAL_ERROR "You seem to be running an older version of GCC. Widelands use various C++11 features, which require GCC 4.7 or a later version.")
+    message(FATAL_ERROR "Widelands needs GCC >= 4.7 to compile.")
   endif()
 endif()
 
