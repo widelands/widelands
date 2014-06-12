@@ -9,6 +9,16 @@ add_custom_target(codecheck)
 # http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
 add_custom_target(wl_tests)
 
+macro(_parse_common_args ARGS)
+  # TODO(sirver): add OPTIONS for the other external libraries we use
+  set(OPTIONS THIRD_PARTY USES_ZLIB)
+  set(ONE_VALUE_ARG )
+  set(MULTI_VALUE_ARGS SRCS DEPENDS)
+  cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
+    ${ARGS}
+  )
+endmacro(_parse_common_args)
+
 macro(_common_compile_tasks)
   # TODO(sirver): Disable all warnings for third_party targets, but keep debug
   # and optimization settings.
@@ -27,16 +37,6 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} ${DEPENDENCY})
   endforeach(DEPENDENCY)
 endmacro(_common_compile_tasks)
-
-macro(_parse_common_args ARGS)
-  # TODO(sirver): add OPTIONS for the other external libraries we use
-  set(OPTIONS THIRD_PARTY USES_ZLIB)
-  set(ONE_VALUE_ARG )
-  set(MULTI_VALUE_ARGS SRCS DEPENDS)
-  cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
-    ${ARGS}
-  )
-endmacro(_parse_common_args)
 
 # See
 # http://www.cmake.org/cmake/help/v3.0/module/CMakeParseArguments.html
