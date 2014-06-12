@@ -84,16 +84,10 @@ add_custom_target(_run_all_tests ALL
 )
 
 #TODO: (code review):
-#Would anyone miss this option if I removed it?
-#Back when I added more warnings we discussed -Werror briefly, but found that
-#it is not really feasible due to the number of configurations and combinations
-#of operating systems and compiler versions people might use. Also, it seems a
-#bit odd that some warnings are manually ignored.
 #And the last additional option passed to the compiler seem to have been
 #reversed and enabled by default, so it shouldn't be necessary. Compare
 #https://gcc.gnu.org/onlinedocs/gcc-4.5.0/gcc/Language-Independent-Options.html
 #https://gcc.gnu.org/onlinedocs/gcc-4.6.0/gcc/Language-Independent-Options.html
-option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
 
 set (PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR "-isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wall -Wextra")
@@ -153,14 +147,6 @@ IF (Compiler_gcc_warnings_supported)
 ELSE (Compiler_gcc_warnings_supported)
   message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM or Visual Studio.")
 ENDIF (Compiler_gcc_warnings_supported)
-
-IF (WL_STRICT)
-  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
-  IF (Compiler_strict_mode_supported)
-    set (WL_COMPILERFLAG_STRICT " ${PARAMETER_COMPILERFLAG_STRICT}") #the space is on purpose!
-    message(STATUS "Strict mode enabled, expect compilation errors instead of compilation warnings!")
-  ENDIF (Compiler_strict_mode_supported)
-ENDIF (WL_STRICT)
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
 set (CMAKE_CXX_FLAGS_DEBUG "${WL_COMPILERFLAG_CXXSTD} -g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_BOOST_INCLUDE_DIR}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
