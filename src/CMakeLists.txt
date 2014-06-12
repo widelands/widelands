@@ -114,15 +114,6 @@ wl_library(build_info
     build_info.h
 )
 
-IF (WIN32)
-	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
-	ADD_CUSTOM_COMMAND( OUTPUT ${WIN32_ICON_O}
-		COMMAND ${MINGW_PREFIX}windres
-			-o${WIN32_ICON_O}
-			-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
-		)
-endif (WIN32)
-
 set(WL_SRCS
 	ai/ai_help_structs.cc
 	ai/ai_hints.cc
@@ -832,11 +823,16 @@ set(WL_SRCS
   wui/watchwindow.h
 )
 
-if (DEFINED MINGW)
-  # NOCOMMIT(#sirver): care for gui_type
-  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
+if (WIN32)
+	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
+	ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
+		COMMAND ${MINGW_PREFIX}windres
+			-o${WIN32_ICON_O}
+			-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
+  )
+  add_executable (widelands WIN32 main.cc build_info.cc ${WIN32_ICON_O})
 else()
-  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
+  add_executable (widelands main.cc build_info.cc)
 endif()
 
 add_library (widelands_all STATIC ${WL_SRCS})
@@ -855,7 +851,7 @@ add_subdirectory(sound)
 add_subdirectory(third_party)
 
 #TODO: It looks like various things have cyclic dependencies
-#in all directions. Ideally this core shouldn't exist(?) or at least
+#in all directions. Ideally this core shouldn't exist or at least
 #be a limited set of header files needed to boostrap the other
 #parts. For now it is absolutely everything to make things build :(
 add_library(widelands_ball_of_mud STATIC

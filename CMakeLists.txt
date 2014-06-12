@@ -88,10 +88,10 @@ set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error
 include(CheckCXXCompilerFlag) #this include should be safe
 
 # Enable c++11 features.
-if (NOT WIN32)
-  set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++11")
-else()
+if (WIN32)
   set (PARAMETER_COMPILERFLAG_CXXSTD "-std=gnu++11")
+else()
+  set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++11")
 endif()
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -146,10 +146,10 @@ set (WL_COMPILERFLAG_OPTIMIZATIONS "-O3")
 
 set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_CXXSTD} ${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
-IF (MINGW)
+IF (WIN32)
   set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
   message (STATUS "Enabled large address awareness on mingw32")
-endif (MINGW)
+endif (WIN32)
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   message (STATUS "Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
@@ -306,10 +306,6 @@ include_directories(${SDLGFX_INCLUDE_DIR})
 if (NOT SDLGFX_FOUND)
   message(FATAL_ERROR "Required package SDL_gfx not found, please install and re-run cmake")
 endif (NOT SDLGFX_FOUND)
-
-IF (WIN32)
-  SET(GUI_TYPE WIN32)
-ENDIF (WIN32)
 
 add_subdirectory(doc)
 add_subdirectory(po)
