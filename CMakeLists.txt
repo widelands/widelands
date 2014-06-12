@@ -1,8 +1,6 @@
 project (widelands)
 
-# TODO(sirver): cmake 2.8 is released in 2009. I think we should require it and
-# simplify more here.
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 2.8)
 
 # Used as versioning, if WL_VERSION_STANDARD is definded.
 # TODO(sirver): This is redundant and should not be used anywhere. We have a
@@ -280,7 +278,6 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
-# We use python here and there.
 find_package (PythonInterp REQUIRED)
 
 # Check for opengl
@@ -335,9 +332,6 @@ if (DEFINED WL_VERSION_MAJOR)
 	# Widelands is compiled in a bzr export
 	file (WRITE WL_RELEASE "${WL_VERSION}")
 endif (DEFINED WL_VERSION_MAJOR)
-
-# we need python to determine the current version
-find_package (PythonInterp REQUIRED)
 
 if (NOT DEFINED WL_VERSION)
   add_custom_target (
