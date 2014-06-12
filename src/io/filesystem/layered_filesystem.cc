@@ -208,12 +208,8 @@ std::set<std::string> LayeredFileSystem::ListDirectory(const std::string& path) 
 	{
 		files = (*it)->ListDirectory(path);
 
-		// need to workaround MSVC++6 issues
-		for
-			(filenameset_t::iterator fnit = files.begin();
-			 fnit != files.end();
-			 ++fnit)
-				results.insert(*fnit);
+		for (filenameset_t::iterator fnit = files.begin(); fnit != files.end(); ++fnit)
+			   results.insert(*fnit);
 	}
 	return results;
 }

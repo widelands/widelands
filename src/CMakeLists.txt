@@ -114,28 +114,13 @@ wl_library(build_info
     build_info.h
 )
 
-# TODO(sirver): This seems to introduce another notion of version that needs to
-# be kept updated manually.
 IF (WIN32)
-  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/msvc/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
-  if (NOT WL_VERSION_MAJOR OR WL_VERSION_MAJOR STREQUAL "")
-    set (WL_VERSION_MAJOR 0)
-  endif (NOT WL_VERSION_MAJOR OR WL_VERSION_MAJOR STREQUAL "")
-  if (NOT WL_VERSION_MINOR OR WL_VERSION_MINOR STREQUAL "")
-    set (WL_VERSION_MINOR 15)
-  endif (NOT WL_VERSION_MINOR OR WL_VERSION_MINOR STREQUAL "")
-  if (NOT WL_VERSION_PATCH OR WL_VERSION_PATCH STREQUAL "")
-    set (WL_VERSION_PATCH 1)
-  endif (NOT WL_VERSION_PATCH OR WL_VERSION_PATCH STREQUAL "")
-  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/msvc/Widelands-msvc.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/Widelands-msvc.iss)
-  IF (MINGW)
 	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
 	ADD_CUSTOM_COMMAND( OUTPUT ${WIN32_ICON_O}
 		COMMAND ${MINGW_PREFIX}windres
 			-o${WIN32_ICON_O}
 			-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
 		)
-	ENDIF (MINGW)
 endif (WIN32)
 
 set(WL_SRCS
@@ -847,15 +832,12 @@ set(WL_SRCS
   wui/watchwindow.h
 )
 
-IF (DEFINED MSVC)
-  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
-else (DEFINED MSVC)
-  if (DEFINED MINGW)
-    add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
-  else (DEFINED MINGW)
-    add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
-  endif (DEFINED MINGW)
-endif (DEFINED MSVC)
+if (DEFINED MINGW)
+  # NOCOMMIT(#sirver): care for gui_type
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc ${WIN32_ICON_O})
+else()
+  add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
+endif()
 
 add_library (widelands_all STATIC ${WL_SRCS})
 # TODO: This will ultimately be dealt with when the sources in equestions are passed into wl_library
@@ -908,16 +890,7 @@ target_link_libraries(widelands widelands_all)
 target_link_libraries(widelands ${SDL_LIBRARY})
 
 if (WIN32)
-  if (DEFINED MSVC)
-    target_link_libraries(widelands_all ws2_32)
-
-    #gettext on MSVC using 3rdparty bundle needs iconv library
-    find_library(ICONV_LIBRARY iconv libiconv REQUIRED)
-    target_link_libraries(widelands_all ${ICONV_LIBRARY})
-
-  else (DEFINED MSVC)
-    target_link_libraries(widelands_all wsock32)
-  endif (DEFINED MSVC)
+  target_link_libraries(widelands_all wsock32)
 endif (WIN32)
 
 install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

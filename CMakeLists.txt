@@ -46,13 +46,7 @@ set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 # we only include Boost Headers to the main executable, no libraries
 # unit_test_framework is for testing only
 message(STATUS "Enabled unit tests")
-if (DEFINED MSVC)
-  set (BUILD_SHARED_LIBS OFF)
-set (Boost_USE_STATIC_RUNTIME ON)
-set (Boost_USE_STATIC_LIBS ON)
-else (DEFINED MSVC)
-  set (Boost_USE_STATIC_LIBS  OFF)
-endif (DEFINED MSVC)
+set (Boost_USE_STATIC_LIBS  OFF)
 set (Boost_FIND_COMPONENTS unit_test_framework)
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
@@ -62,13 +56,11 @@ find_package(Boost 1.48
     regex
   REQUIRED)
 
-if (NOT DEFINED MSVC)
 # If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
-  string( REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-  if (NOT BOOST_STATIC_UNIT_TEST_LIB)
-    add_definitions(-DBOOST_TEST_DYN_LINK)
-  endif (NOT BOOST_STATIC_UNIT_TEST_LIB)
-endif(NOT DEFINED MSVC)
+string( REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+if (NOT BOOST_STATIC_UNIT_TEST_LIB)
+  add_definitions(-DBOOST_TEST_DYN_LINK)
+endif (NOT BOOST_STATIC_UNIT_TEST_LIB)
 
 include(CTest)
 enable_testing()
@@ -153,41 +145,6 @@ set (CMAKE_CXX_FLAGS_DEBUG "${WL_COMPILERFLAG_CXXSTD} -g -DDEBUG -DNOPARACHUTE${
 set (WL_COMPILERFLAG_OPTIMIZATIONS "-O3")
 
 set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_CXXSTD} ${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-#If building with MSVC, then check for 3rdparty libs
-if (DEFINED MSVC)
-  set (WL_3RDPARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty" CACHE STRING "Widelands 3rdparty dir")
-  set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
-  set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
-
-  add_definitions( -Dand=&& -Dor=|| -Dnot=! -Dxor=^ )
-  add_definitions( -Dstrcasecmp=_stricmp )
-  add_definitions( -Dstrncasecmp=_strnicmp )
-  add_definitions( -Dsnprintf=_snprintf )
-  add_definitions( -Drint=floor )
-  add_definitions( -Dstrtoll=_strtoi64 )
-  add_definitions( -Dstrtoull=_strtoui64 )
-  add_definitions( -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS )
-  add_definitions( -Dssize_t=size_t )
-  add_definitions( -Dmkdir=_mkdir )
-  add_definitions( -DREDIRECT_OUTPUT )
-
-  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBRARIES
-  LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
-  set(Boost_LIBRARIES "")
-  include_directories(${Boost_INCLUDE_DIR})
-
-
-  find_library(INTL_LIBRARY NAMES intl libintl)
-
-  set (MSVC_DISABLE_WARNINGS "/wd4146 /wd4290 /wd4355 /wd4373 /wd4800")
-  # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-  set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG ${MSVC_DISABLE_WARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-  set (CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG /MT /GL ${MSVC_DISABLE_WARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-  set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /LTCG /NODEFAULTLIB:libcmt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-endif (DEFINED MSVC)
 
 IF (MINGW)
   set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
