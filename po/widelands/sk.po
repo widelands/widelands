@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:44+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:37+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: sk\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -4008,50 +4008,3 @@ msgstr "Nasledovať"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Vycentrovať pohľad na túto pozíciu"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Opakovať misiu"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Vyhlásiť víťazstvo"
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr "Váš %s nedokáže nájsť cestu domov a pravdepodobne zomrie."
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. You can set your "
-#~ "role With the button following your nickname. Available roles are:"
-#~ msgstr ""
-#~ "Na ľavej strane je zoznam všetkých klientov vrátane vás. Pomocou tlačidla v "
-#~ "zadnej časti vašej prezývky si môžete nastaviť rolu. Dostupné roly:"
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Načítať mapu ako scenár"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double             Spustiť hru dvakrát (na testovanie cez localhost)"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "Hlavná žila tejto bane je vyčerpaná. Očakávajte prudko zníženú návratnosť "
-#~ "investície. Mali by ste zvážiť rozšírenie, rozobratie alebo zničenie bane."
-
-#~ msgid ""
-#~ "\n"
-#~ "Sorry, no double-instance debugging on _WIN32.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Ospravedlňujeme sa, ladenie v dvoch inštanciách nie je povolené na platforme "
-#~ "_WIN32.\n"
-#~ "\n"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr ""
-#~ "Možnosť --double je zakázaná. Toto nie je zostavenie s podporou ladenia!"

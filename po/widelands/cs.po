@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:41+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:35+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -3973,40 +3973,3 @@ msgstr "Následovat"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Vycentrovat hlavní pohled"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double je zakázáno. Toto není ladicí build!"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Vyhlásit vítězství"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Restart mise"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "Hlavní žíla tohoto dolu je vyčerpána. Očekávej silně zredukovanou návratnost "
-#~ "investic. Měl bys zvážit jeho rozšíření, rozebrání nebo zničení."
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr "Tvoje %s nemohou najít cestu domů a pravděpodobně zemřou."
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Nahrej mapu jako scénář"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double             Spustí hru dvakrát (pro testování lokální\n"
-#~ "                      sítě)"
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. You can set your "
-#~ "role With the button following your nickname. Available roles are:"
-#~ msgstr ""
-#~ "Na levé straně je seznam všech klientů včetně tebe. Můžeš si vybrat svou "
-#~ "roli tlačítkem vedle tvého nicku. Dostupné role jsou:"

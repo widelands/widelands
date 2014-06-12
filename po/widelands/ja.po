@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:42+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:36+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -3933,49 +3933,3 @@ msgstr "追跡"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "ここに視点移動"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "この鉱山の主な鉱脈が枯渇しました。\n"
-#~ "費用対効果の大幅な減少が予想されます。\n"
-#~ "解体するか破壊するかを\n"
-#~ "検討する必要があります。"
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr "%sが道に迷い、おそらく死んでしまいます。"
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. You can set your "
-#~ "role With the button following your nickname. Available roles are:"
-#~ msgstr ""
-#~ "画面左側は、あなたを含めたすべてのクライアントの一覧です。\n"
-#~ "ニックネームの横のボタンを使用すると役割を設定できます。\n"
-#~ "使用できる役割は次のとおりです。"
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "シナリオとしてマップ読込"
-
-#~ msgid ""
-#~ "\n"
-#~ "Sorry, no double-instance debugging on _WIN32.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "申し訳ありません。_WIN32では二重インスタンスでのデバッグができません。\n"
-#~ "\n"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double は無効です。これはデバッグビルドではありません。"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double             ゲームを二重起動します（ローカルホストネットワーク\n"
-#~ "                      テストのため）。"
-
-#~ msgid "Restart Mission"
-#~ msgstr "ミッションの再開始"

@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:42+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:35+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: FINLAND\n"
 "Language: fi\n"
 "X-Poedit-Language: Finnish\n"
@@ -3966,39 +3966,3 @@ msgstr "Seuraa"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Keskitä päänäkymä tähän"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double ei ole käytettävissä. Tämä ei ole debug-käännös!"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Voitto!"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Aloita alusta"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "Huono saanto, malmisuoni louhittu loppuun. Laajenna kaivosta tai pura kaivos."
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr "Sinun %s ei löydä tietä kotiin ja todennäköisesti kuolee."
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Lataa kartta skenaariona"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double             Käynnistä peli kahdesti (paikallisverkon testausta\n"
-#~ "                      varten)"
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. You can set your "
-#~ "role With the button following your nickname. Available roles are:"
-#~ msgstr ""
-#~ "Vasemmalla näet listan pelaajista, myös itsesi. Voit asettaa roolisi "
-#~ "nimimerkkisi vieressä olevalla painikkeella. Vaihtoehdot ovat:"

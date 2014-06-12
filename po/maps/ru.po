@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-11 05:12+0000\n"
-"PO-Revision-Date: 2014-03-06 19:11+0000\n"
-"Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
+"PO-Revision-Date: 2014-06-11 11:15+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:34+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:28+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -78,7 +78,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans – The Run for the Fire"
-msgstr ""
+msgstr "Атланты - Побег от огня"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
@@ -239,11 +239,11 @@ msgstr ""
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the Horizon"
-msgstr ""
+msgstr "Пересекая горизонт"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Снарядите корабль и плывите к горизонту."
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 #: ../../maps/Rendez-Vous.wmf/elemental:10
@@ -387,7 +387,7 @@ msgstr ""
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
-msgstr ""
+msgstr "Ледяные войны"
 
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "Autumn became winter. Some things are frozen, but not the war."
@@ -508,6 +508,8 @@ msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
 msgstr ""
+"В воздухе повисли два больших вопроса: кто создал этот невероятно большой "
+"лабиринт и что скрывается внутри?"
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
@@ -673,7 +675,7 @@ msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
-msgstr ""
+msgstr "Большое озеро"
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -687,7 +689,7 @@ msgstr ""
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The Long Way"
-msgstr ""
+msgstr "Длинный путь"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
@@ -697,7 +699,7 @@ msgstr ""
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
-msgstr ""
+msgstr "Горный перевал"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -721,7 +723,7 @@ msgstr ""
 
 #: ../../maps/Together we're strong.wmf/elemental:9
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "Вместе мы сила"
 
 #: ../../maps/Together we're strong.wmf/elemental:11
 msgid ""

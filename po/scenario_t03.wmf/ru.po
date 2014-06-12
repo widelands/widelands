@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-11 05:12+0000\n"
-"PO-Revision-Date: 2014-03-06 19:13+0000\n"
+"PO-Revision-Date: 2014-06-11 12:48+0000\n"
 "Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:36+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:30+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
 #: ../../campaigns/t03.wmf/scripting/texts.lua:23
@@ -28,10 +28,12 @@ msgid ""
 "Build up a basic food economy to provide your people with food – a fisher’s "
 "hut, a hunter’s hut, a well, a farm and a bakery."
 msgstr ""
+"Создайте базовое производство пищи, чтобы обеспечить ваших людей едой – "
+"хижину рыболова, хижину охотника, колодец и пекарню."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:30
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Постройте ранчо"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:32
 msgid "Remember to build a cattle farm"
@@ -54,6 +56,9 @@ msgid ""
 "Build a donjon at the north-east of your territory to get greater visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"Постройте дозорную башню на северо-востоке вашей территории, чтобы получить "
+"лучшую дальность видимости и защитить ваших людей от внезапной атаки "
+"противника."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 #: ../../campaigns/t03.wmf/scripting/texts.lua:50
@@ -85,7 +90,7 @@ msgstr "Постройте крепость"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:69
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Постройте крепость на востоке от гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
 #: ../../campaigns/t03.wmf/scripting/texts.lua:76
@@ -121,7 +126,7 @@ msgstr "Постройте склад"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Постройте склад западнее гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:95
 msgid ""

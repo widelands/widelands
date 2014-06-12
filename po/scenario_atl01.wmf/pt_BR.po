@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:35+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:29+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: pt_BR\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -1046,11 +1046,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo Objetivo"
 msgstr[1] "Novos Objetivos"
-
-#~ msgid "Build a mill to make flour and blackroot flour"
-#~ msgstr "Construa um moinho para fazer farinha e farinha de raiz escura"
-
-#~ msgid "Build a bakery to bake bread from flour, blackroot flour and water"
-#~ msgstr ""
-#~ "Construa uma padaria para fazer pães a partir de farinha, farinha de raiz "
-#~ "escura e água"

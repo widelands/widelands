@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:35+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:29+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: sk\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -1038,10 +1038,3 @@ msgid_plural "New Objectives"
 msgstr[0] "Nové úlohy"
 msgstr[1] "Nová úloha"
 msgstr[2] "Nové úlohy"
-
-#~ msgid "Build a mill to make flour and blackroot flour"
-#~ msgstr "Postavte mlyn na výrobu múky a prášku z čierneho koreňa"
-
-#~ msgid "Build a bakery to bake bread from flour, blackroot flour and water"
-#~ msgstr ""
-#~ "Postavte pekáreň na výrobu chleba z múky, prášku z čierneho koreňa a vody."

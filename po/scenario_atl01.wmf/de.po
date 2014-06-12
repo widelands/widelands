@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-11 05:12+0000\n"
-"PO-Revision-Date: 2014-04-16 03:43+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-06-11 06:18+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:34+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:28+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: de\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -120,7 +120,7 @@ msgstr "Baue einen Bauernhof und eine Schwarzwurzelfarm"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:70
 msgid "Build a mill to make cornflour and blackroot flour"
-msgstr ""
+msgstr "Baue eine Mühle, um Maismehl und Schwarzwurzelmehl herzustellen."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:71
 msgid "Build a well"
@@ -130,6 +130,8 @@ msgstr "Baue einen Brunnen"
 msgid ""
 "Build a bakery to bake bread from cornflour, blackroot flour and water"
 msgstr ""
+"Baue eine Bäckerei, um Brot aus Maismehl, Schwarzwurzelmehl und Wasser "
+"herzustellen."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a hunter’s house to get raw meat"
@@ -1105,10 +1107,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"
 msgstr[1] "Neue Ziele"
-
-#~ msgid "Build a mill to make flour and blackroot flour"
-#~ msgstr "Baue eine Mühle, um Mehl und Schwarzwurzelmehl zu mahlen"
-
-#~ msgid "Build a bakery to bake bread from flour, blackroot flour and water"
-#~ msgstr ""
-#~ "Baue eine Bäckerei, um Brot aus Mehl, Schwarzwurzelmehl und Wasser zu backen"

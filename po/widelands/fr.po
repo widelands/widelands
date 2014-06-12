@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:42+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:35+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -4031,51 +4031,3 @@ msgstr "Suivre"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Centrer la vue principale sur ceci"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Recommencer la mission"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Revendiquer la victoire"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "La veine principale de cette mine est épuisée. Attendez-vous à des retours "
-#~ "sur investissement fortement diminués. Vous pouvez l'agrandir, la démanteler "
-#~ "ou la détruire."
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr "Votre %s ne peut revenir au foyer et va probablement mourir."
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Charger carte en tant que scénario"
-
-#~ msgid ""
-#~ "\n"
-#~ "Sorry, no double-instance debugging on _WIN32.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Désolé, il n'a pas de débogage en double instance sur _WIN32.\n"
-#~ "\n"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double est désactivé. Ce n'est pas une version de débogage!"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double             Démarre le jeu deux fois(pour tester réseau\n"
-#~ "                      local)"
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. You can set your "
-#~ "role With the button following your nickname. Available roles are:"
-#~ msgstr ""
-#~ "Il y a sur le coté gauche une liste de tous les clients vous incluant. Avec "
-#~ "le bouton derrière votre surnom, vous pouvez définir votre rôle. Les rôles "
-#~ "disponibles sont:"

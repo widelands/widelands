@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:45+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:38+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -3813,6 +3813,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "重複修正 。將無法儲存"

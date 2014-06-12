@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:44+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:37+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -3838,12 +3838,3 @@ msgstr "Sledi"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Restart Mission"
-#~ msgstr "Ponovno začni misijo"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Zmagaj"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double je onemogočeno. To ni razhroščevalna različica!"

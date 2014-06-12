@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:35+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:29+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: sv\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -1040,10 +1040,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid "Build a mill to make flour and blackroot flour"
-#~ msgstr "Bygg en kvarn för att mala vete- och svartrotsmjöl"
-
-#~ msgid "Build a bakery to bake bread from flour, blackroot flour and water"
-#~ msgstr ""
-#~ "Bygg ett bageri för att baka bröd med vetemjöl, svartrotsmjöl och vatten"

@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-11 07:12+0200\n"
-"PO-Revision-Date: 2014-06-01 12:18+0000\n"
+"PO-Revision-Date: 2014-06-11 06:14+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:42+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:35+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: de\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -1003,6 +1003,8 @@ msgid ""
 "This mine’s main vein is exhausted. Expect strongly diminished returns on "
 "investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"Die Hauptader dieser Mine ist erschöpft. Die Produktivität wird stark "
+"einbrechen. Du solltest die Mine erweitern, abreißen oder zerstören."
 
 #: ../../src/logic/production_program.cc:1285
 #, c-format
@@ -1110,7 +1112,7 @@ msgstr "Ein Geologe hat Ressourcen entdeckt."
 #: ../../src/logic/worker.cc:1862
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Dein %s findet keinen Weg heim und wird wahrscheinlich sterben."
 
 #: ../../src/logic/worker.cc:1869
 msgid "Worker got lost!"
@@ -2237,6 +2239,9 @@ msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr ""
+"Auf der linken Seite befindet sich eine Liste aller Benutzer einschließlich "
+"dir. Du kannst deine Rolle mit den Knöpfen hinter deinem Nicknamen "
+"festlegen. Verfügbare Rollen sind:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:680
 msgid ""
@@ -2458,7 +2463,7 @@ msgstr "Lizenziert unter der GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:60
 msgid "Load map as scenario"
-msgstr ""
+msgstr "Lade diese Karte als Szenario"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:151
@@ -4040,54 +4045,3 @@ msgstr "Folge"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Zentriere die Ansicht hierauf"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Sieg annehmen"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Mission neustarten"
-
-#~ msgid ""
-#~ "\n"
-#~ "Sorry, no double-instance debugging on _WIN32.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Entschuldigung, Widelands unterstützt keine Doppelt-Instanz Fehlersuche auf "
-#~ "WIN32 Systemen.\n"
-#~ "\n"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double ist deaktiviert. Dies ist keine Debug-Version!"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "Die Hauptader dieses Bergwerks ist erschöpft. Es ist davon auszugehen, dass "
-#~ "die Produktivität des Bergwerks drastisch einbricht. Daher solltest du in "
-#~ "Betracht ziehen, das Bergwerk - falls möglich - auszubauen, abzureißen oder "
-#~ "zu zerstören."
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr ""
-#~ "Dein %s kann keinen Weg nach Hause finden und wird wahrscheinlich sterben."
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. You can set your "
-#~ "role With the button following your nickname. Available roles are:"
-#~ msgstr ""
-#~ "Auf der linken Seite ist eine Liste mit allen Clients, inkl. dir. Du kannst "
-#~ "deine Rolle mit dem Knopf neben deinem Nickname festlegen. Verfügbare Rollen "
-#~ "sind:"
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Lade die Karte als Szenario"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double             Startet das Spiel doppelt (für Tests über das\n"
-#~ "                      lokale Netz)"

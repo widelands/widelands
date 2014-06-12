@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:42+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:35+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: gd\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -4123,54 +4123,3 @@ msgstr "Lean air"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Meadhanaich am prìomh shealladh air seo"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Gairm buaidh"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Ath-thòisich am misean"
-
-#~ msgid ""
-#~ "\n"
-#~ "Sorry, no double-instance debugging on _WIN32.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Duilich ach chan eil dì-bhugachadh airson ionstansan dùblaichte ri làimh air "
-#~ "_WIN32.\n"
-#~ "\n"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "Tha --double à comas Chan e togail dhì-bhugachaidh a th' ann!"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "Tha cuisle na mèinne seo air a caitheamh. Bi an dùil gum faigh thu mòran nas "
-#~ "lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile "
-#~ "no a mhilleadh."
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr ""
-#~ "Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh e "
-#~ "bàs."
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. You can set your "
-#~ "role With the button following your nickname. Available roles are:"
-#~ msgstr ""
-#~ "Tha liosta de na h-uile cliant air an tabh deas, a' gabhail a-steach thu "
-#~ "fhèin. 'S urrainn dhut do dhreuchd a shuidheachadh leis a' phutain às dèidh "
-#~ "d' far-ainm. Seo na dreuchdan a tha ri làimh:"
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Luchdaich am mapa mar chnàmh-sgeul"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double                  Tòisich an geama dà thuras (airson deuchainnean\n"
-#~ "                           lìonraidh air localhost)"

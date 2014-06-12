@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:41+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:35+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -4012,50 +4012,3 @@ msgstr "Volg"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Beeld centreren"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double is uitgeschakeld. Dit is geen debug-build!"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Eis overwinning op"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Herstart missie"
-
-#~ msgid ""
-#~ "\n"
-#~ "Sorry, no double-instance debugging on _WIN32.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Excuses, geen dubbele instantie debugging onder _WIN32.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "De hoofdader van deze mijn is uitgeput. Verwacht sterk verminderde "
-#~ "opbrengsten uit investeringen. Jou zou moeten overwegen deze mijn uit te "
-#~ "breiden, te ontmantelen of te vernietigen."
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr "Jouw %s kan geen terugweg vinden en zal waarschijnlijk sterven."
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. You can set your "
-#~ "role With the button following your nickname. Available roles are:"
-#~ msgstr ""
-#~ "Aan de linkerzijde is een lijst met alle cliënten inclusief jou. Je kunt "
-#~ "jouw rol instellen met de knop achter je nickname. Beschikbare rollen zijn:"
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Laad kaart als scenario"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double       Start het spel tweemaal (voor netwerktests op de\n"
-#~ "                  locale computer)"

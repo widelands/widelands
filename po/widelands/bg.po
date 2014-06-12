@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:41+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:35+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: bg\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -3853,19 +3853,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double е деактивирано. Това не е дебъг билд!"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Предявяване иск за признаване на победа"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Започване на мисията на ново"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double Стартира играта два пъти (за тестване на \n"
-#~ "                      локалната мрежа)"

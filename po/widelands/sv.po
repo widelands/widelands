@@ -11,8 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:44+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:37+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: sv\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -3916,42 +3916,3 @@ msgstr "Följ"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Centrera huvudanblicken på detta"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double är inaktiverat. Detta är ingen avlusningsversion!"
-
-#~ msgid "Restart Mission"
-#~ msgstr "Starta om uppdrag"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Ta ut seger"
-
-#~ msgid ""
-#~ "\n"
-#~ "Sorry, no double-instance debugging on _WIN32.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Tyvärr, ingen dubbel-instans avlusning under _WIN32.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "This mine’s main vein is exhausted. Expect strongly diminished returns on "
-#~ "investment. You should consider expanding, dismantling or destroying it."
-#~ msgstr ""
-#~ "Den här gruvans huvudven är tömd. Förvänta dig kraftigt minskad återbäring "
-#~ "på investering. Du borde överväga att uppgradera, nedmontera eller förstöra "
-#~ "gruvan."
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr "Dina %s kan inte finna en väg hem och kommer troligen att dö."
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Ladda karta som scenario"
-
-#~ msgid ""
-#~ " --double             Start the game twice (for localhost network\n"
-#~ "                      testing)"
-#~ msgstr ""
-#~ " --double             Starta spelet två gånger (för lokal nätverkstestning)"

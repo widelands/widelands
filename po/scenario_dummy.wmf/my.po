@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:47+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:39+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../campaigns/dummy.wmf/scripting/init.lua:10
 msgid "Not yet implemented"

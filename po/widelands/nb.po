@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-11 05:43+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:36+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -3918,28 +3918,3 @@ msgstr "Følg"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Restart Mission"
-#~ msgstr "Start oppdrag på nytt"
-
-#~ msgid "--double is disabled. This is not a debug build!"
-#~ msgstr "--double er deaktivert. Dette er ikke en feilsøkingsversjon!"
-
-#, c-format
-#~ msgid "Your %s can’t find a way home and will likely die."
-#~ msgstr "Din %s kan ikke finne en vei hjem og vil sannsynligvis dø."
-
-#~ msgid ""
-#~ "\n"
-#~ "Sorry, no double-instance debugging on _WIN32.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Beklager, ingen feilsøking med to instanser på _WIN32.\n"
-#~ "\n"
-
-#~ msgid "Load Map as scenario"
-#~ msgstr "Last kart som scenario"
-
-#~ msgid "Claim Victory"
-#~ msgstr "Krev seier"
