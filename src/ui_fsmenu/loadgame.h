@@ -22,6 +22,8 @@
 
 #include "ui_fsmenu/base.h"
 
+#include <memory>
+
 #include "graphic/image.h"
 #include "graphic/image_loader.h"
 #include "io/filesystem/filesystem.h"

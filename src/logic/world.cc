@@ -20,6 +20,7 @@
 #include "logic/world.h"
 
 #include <iostream>
+#include <memory>
 #include <sstream>
 
 #include "base/i18n.h"

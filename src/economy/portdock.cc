@@ -19,6 +19,8 @@
 
 #include "economy/portdock.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "container_iterate.h"
 #include "economy/fleet.h"

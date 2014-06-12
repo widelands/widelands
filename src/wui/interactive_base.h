@@ -20,6 +20,8 @@
 #ifndef INTERACTIVE_BASE_H
 #define INTERACTIVE_BASE_H
 
+#include <memory>
+
 #include <SDL_keysym.h>
 
 #include "logic/editor_game_base.h"

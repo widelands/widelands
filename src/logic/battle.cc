@@ -19,6 +19,8 @@
 
 #include "logic/battle.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"

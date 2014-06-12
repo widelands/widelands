@@ -19,6 +19,8 @@
 
 #include "graphic/font_handler1.h"
 
+#include <memory>
+
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 

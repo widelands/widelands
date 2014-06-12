@@ -20,6 +20,8 @@
 #ifndef LUA_TABLE_H
 #define LUA_TABLE_H
 
+#include <memory>
+
 #include <boost/lexical_cast.hpp>
 
 #include "scripting/c_utils.h"

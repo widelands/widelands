@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/campaign_select.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "campvis.h"

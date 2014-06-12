@@ -21,6 +21,7 @@
 #define PATHFIELD_H
 
 #include <vector>
+#include <memory>
 
 #include <boost/shared_ptr.hpp>
 #include <stdint.h>

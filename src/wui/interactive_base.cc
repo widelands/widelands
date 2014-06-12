@@ -19,6 +19,8 @@
 
 #include "wui/interactive_base.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 

@@ -72,10 +72,10 @@ function(wl_test NAME)
 endfunction()
 
 # Checks a single 'SRC' file using Codecheck and writes a file named
-# codecheck_<shasum of input> if the codecheck did not yield anything.
-# The target for the codecheck will be added as a dependency to 'NAME' for
-# debug builds, but always for the target 'codecheck', so that make codecheck
-# checks all source code.
+# codecheck_<shasum of input> if the codecheck did not yield anything. The
+# target for the codecheck will be added as a dependency to 'NAME' for debug
+# builds, but always for the target 'codecheck', so that make codecheck checks
+# all source code.
 function(run_codecheck NAME SRC)
   get_filename_component(ABSOLUTE_SRC ${SRC} ABSOLUTE)
 

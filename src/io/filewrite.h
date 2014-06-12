@@ -23,6 +23,7 @@
 #include <cassert>
 #include <cstdarg>
 #include <limits>
+#include <memory>
 
 #include "io/streamwrite.h"
 

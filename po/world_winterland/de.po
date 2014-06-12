@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-12 12:48+0000\n"
-"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
+"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"PO-Revision-Date: 2014-04-21 21:25+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:39+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-22 05:36+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: de\n"
 
 #: ../../worlds/winterland/conf:2
@@ -103,131 +103,131 @@ msgstr "Spur"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Espe (alt)"
 
 #: ../../worlds/winterland/conf:48
 msgid "Aspen (Mature)"
-msgstr ""
+msgstr "Espe (reif)"
 
 #: ../../worlds/winterland/conf:50
 msgid "Aspen (Pole)"
-msgstr ""
+msgstr "Espe (jung)"
 
 #: ../../worlds/winterland/conf:52
 msgid "Aspen (Sapling)"
-msgstr ""
+msgstr "Espe (Keimling)"
 
 #: ../../worlds/winterland/conf:53
 msgid "Oak (Old)"
-msgstr ""
+msgstr "Eiche (alt)"
 
 #: ../../worlds/winterland/conf:54
 msgid "Oak (Mature)"
-msgstr ""
+msgstr "Eiche (reif)"
 
 #: ../../worlds/winterland/conf:55
 msgid "Oak (Pole)"
-msgstr ""
+msgstr "Eiche (jung)"
 
 #: ../../worlds/winterland/conf:56
 msgid "Oak (Sapling)"
-msgstr ""
+msgstr "Eiche (Keimling)"
 
 #: ../../worlds/winterland/conf:57
 msgid "Spruce (Old)"
-msgstr ""
+msgstr "Fichte (alt)"
 
 #: ../../worlds/winterland/conf:58
 msgid "Spruce (Mature)"
-msgstr ""
+msgstr "Fichte (reif)"
 
 #: ../../worlds/winterland/conf:59
 msgid "Spruce (Pole)"
-msgstr ""
+msgstr "Fichte (jung)"
 
 #: ../../worlds/winterland/conf:60
 msgid "Spruce (Sapling)"
-msgstr ""
+msgstr "Fichte (Keimling)"
 
 #: ../../worlds/winterland/conf:61
 msgid "Maple (Old)"
-msgstr ""
+msgstr "Ahorn (alt)"
 
 #: ../../worlds/winterland/conf:62
 msgid "Maple (Mature)"
-msgstr ""
+msgstr "Ahorn (reif)"
 
 #: ../../worlds/winterland/conf:63
 msgid "Maple (Pole)"
-msgstr ""
+msgstr "Ahorn (jung)"
 
 #: ../../worlds/winterland/conf:64
 msgid "Maple (Sapling)"
-msgstr ""
+msgstr "Ahorn (Keimling)"
 
 #: ../../worlds/winterland/conf:65
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Birke (alt)"
 
 #: ../../worlds/winterland/conf:66
 msgid "Birch (Mature)"
-msgstr ""
+msgstr "Birke (reif)"
 
 #: ../../worlds/winterland/conf:67
 msgid "Birch (Pole)"
-msgstr ""
+msgstr "Birke (jung)"
 
 #: ../../worlds/winterland/conf:68
 msgid "Birch (Sapling)"
-msgstr ""
+msgstr "Birke (Keimling)"
 
 #: ../../worlds/winterland/conf:69
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Buche (alt)"
 
 #: ../../worlds/winterland/conf:70
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Buche (reif)"
 
 #: ../../worlds/winterland/conf:71
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Buche (jung)"
 
 #: ../../worlds/winterland/conf:72
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Buche (Keimling)"
 
 #: ../../worlds/winterland/conf:73
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Lärche (alt)"
 
 #: ../../worlds/winterland/conf:74
 msgid "Larch (Mature)"
-msgstr ""
+msgstr "Lärche (reif)"
 
 #: ../../worlds/winterland/conf:75
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Lärche (jung)"
 
 #: ../../worlds/winterland/conf:76
 msgid "Larch (Sapling)"
-msgstr ""
+msgstr "Lärche (Keimling)"
 
 #: ../../worlds/winterland/conf:77
 msgid "Rowan (Old)"
-msgstr ""
+msgstr "Eberesche (alt)"
 
 #: ../../worlds/winterland/conf:78
 msgid "Rowan (Mature)"
-msgstr ""
+msgstr "Eberesche (reif)"
 
 #: ../../worlds/winterland/conf:79
 msgid "Rowan (Pole)"
-msgstr ""
+msgstr "Eberesche (jung)"
 
 #: ../../worlds/winterland/conf:80
 msgid "Rowan (Sapling)"
-msgstr ""
+msgstr "Eberesche (Keimling)"
 
 #: ../../worlds/winterland/conf:83
 msgid "Badger"

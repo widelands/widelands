@@ -11,4 +11,7 @@ if (checkresult STREQUAL "" AND NOT exitcode)
   )
 else (checkresult STREQUAL "" AND NOT exitcode)
   message ("${checkresult}")
+  execute_process(
+    COMMAND cmake -E remove ${OUTPUT_FILE}
+  )
 endif (checkresult STREQUAL "" AND NOT exitcode)

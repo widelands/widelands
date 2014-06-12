@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 16:10+0200\n"
-"PO-Revision-Date: 2014-03-12 12:46+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-04-15 08:16+0200\n"
+"PO-Revision-Date: 2014-04-19 10:58+0000\n"
+"Last-Translator: Teppo Mäenpää <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:36+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-20 05:31+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "X-Poedit-Country: FINLAND\n"
 "Language: fi\n"
 "X-Poedit-Language: Finnish\n"
@@ -62,12 +62,12 @@ msgstr "Työkalun koko"
 #: ../../src/wui/interactive_player.cc:116
 #: ../../src/wui/interactive_spectator.cc:61
 msgid "Minimap"
-msgstr "Minikartta"
+msgstr "Pienoiskartta"
 
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:119
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Näytä/piilota rakennuskelpoiset paikat"
 
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/ui_fsmenu/launchMPG.cc:164
@@ -82,11 +82,11 @@ msgstr "Kumoa"
 msgid "Redo"
 msgstr "Tee uudelleen"
 
-#: ../../src/editor/editorinteractive.cc:188 ../../src/wlapplication.cc:430
+#: ../../src/editor/editorinteractive.cc:188 ../../src/wlapplication.cc:433
 msgid "Unsupported format"
 msgstr "Epäyhteensopiva tiedostomuoto"
 
-#: ../../src/editor/editorinteractive.cc:189 ../../src/wlapplication.cc:431
+#: ../../src/editor/editorinteractive.cc:189 ../../src/wlapplication.cc:434
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -100,7 +100,7 @@ msgid "Creating players"
 msgstr "Luon pelaajia"
 
 #: ../../src/editor/editorinteractive.cc:213
-#: ../../src/logic/editor_game_base.cc:276
+#: ../../src/logic/editor_game_base.cc:275
 msgid "Loading world data"
 msgstr "Lataan maailma-asetuksia"
 
@@ -111,11 +111,11 @@ msgstr "Ladataan grafiikkaa..."
 
 #: ../../src/editor/editorinteractive.cc:262
 msgid "Unsaved Map"
-msgstr ""
+msgstr "Tallentamaton kartta"
 
 #: ../../src/editor/editorinteractive.cc:263
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Karttaa ei ole tallennettu. Haluatko poistua?"
 
 #: ../../src/editor/editorinteractive.cc:607
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:178
@@ -140,12 +140,12 @@ msgstr "Tietoa kentästä"
 
 #: ../../src/editor/tools/editor_info_tool.cc:53
 msgid "Node:"
-msgstr ""
+msgstr "Solmu:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:55
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "Koordinaatit: (%1$i, %2$i)"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:66
@@ -160,7 +160,7 @@ msgstr " keskik"
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " big"
-msgstr ""
+msgstr " Iso"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:74
@@ -195,7 +195,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:87
 #, c-format
 msgid "Owned by %i"
-msgstr ""
+msgstr "%i:n omistama"
 
 #: ../../src/editor/tools/editor_info_tool.cc:90
 msgid "Has base immovable"
@@ -246,7 +246,7 @@ msgstr "Resurssimäärä: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:121
 msgid "No resources"
-msgstr ""
+msgstr "Ei resursseja"
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
 msgid "Map:"
@@ -255,7 +255,7 @@ msgstr "Kartta:"
 #: ../../src/editor/tools/editor_info_tool.cc:127
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "Koko: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:131
 #, c-format
@@ -284,7 +284,7 @@ msgid "World:"
 msgstr "Maailma:"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
-#: ../../src/wui/game_main_menu.cc:42
+#: ../../src/wui/game_main_menu.cc:39
 msgid "Main Menu"
 msgstr "Päävalikko"
 
@@ -392,7 +392,7 @@ msgstr "Peruuta"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:230
 #: ../../src/ui_fsmenu/mapselect.cc:347
 msgid "parent"
-msgstr ""
+msgstr "ylätaso"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 #: ../../src/ui_fsmenu/loadgame.cc:89 ../../src/ui_fsmenu/loadreplay.cc:75
@@ -524,12 +524,12 @@ msgstr "Ei karttatiedosto"
 #: ../../src/wui/game_main_menu_save_game.cc:268
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "Tiedosto '%s' on jo olemassa. Ylikirjoitanko?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:390
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:410
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "Kartan tallennus epäonnistui!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:406
 msgid ""
@@ -579,6 +579,8 @@ msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "bobs that depend on this player and try again."
 msgstr ""
+"En voi poistaa pelaajaa; siihen viitataan jossain. Poista pelaajan "
+"rakennukset ja irtaimisto, yritä sitten uudelleen."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
@@ -688,17 +690,6 @@ msgstr "Nykyinen:"
 msgid "Current Size: %u"
 msgstr "Nykykoko: %u"
 
-#: ../../src/game_io/game_preload_data_packet.cc:73
-msgid "Endless Game"
-msgstr "Loputon peli"
-
-#: ../../src/game_io/game_preload_data_packet.cc:78
-#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:341
-#: ../../src/ui_fsmenu/launchMPG.cc:289 ../../src/ui_fsmenu/launchSPG.cc:237
-#: ../../src/wui/multiplayersetupgroup.cc:355
-msgid "Scenario"
-msgstr "Skenaario"
-
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:847
 #: ../../src/ui_fsmenu/mapselect.cc:501 ../../src/ui_fsmenu/mapselect.cc:505
 msgid "unknown"
@@ -736,14 +727,14 @@ msgstr "Suuri"
 #: ../../src/logic/constructionsite.cc:91 ../../src/logic/immovable.cc:543
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% rakennettu"
 
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
 msgstr "%u%% purettu"
 
-#: ../../src/logic/editor_game_base.cc:282
+#: ../../src/logic/editor_game_base.cc:281
 msgid "Loading tribes"
 msgstr "Lataan heimoja"
 
@@ -764,6 +755,12 @@ msgstr "Lataan maailmaa"
 msgid "Adding player %u"
 msgstr "Lisään pelaajan %u"
 
+#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:341
+#: ../../src/ui_fsmenu/launchMPG.cc:289 ../../src/ui_fsmenu/launchSPG.cc:237
+#: ../../src/wui/multiplayersetupgroup.cc:355
+msgid "Scenario"
+msgstr "Skenaario"
+
 #: ../../src/logic/game.cc:253
 msgid "Loading a map"
 msgstr "Lataan karttaa"
@@ -783,7 +780,7 @@ msgid "Loading map"
 msgstr "Lataan karttaa"
 
 #: ../../src/logic/game.cc:372 ../../src/logic/game.cc:405
-#: ../../src/wlapplication.cc:1770
+#: ../../src/wlapplication.cc:1773
 msgid "Loading..."
 msgstr "Lataan..."
 
@@ -808,7 +805,7 @@ msgstr ""
 "Voit lisätä aloitussijainnin käsin Widelandsin karttamuokkaimella "
 "korjataksesi ongelman."
 
-#: ../../src/logic/map.cc:342
+#: ../../src/logic/map.cc:337
 msgid "Player 1"
 msgstr "Pelaaja 1"
 
@@ -830,8 +827,8 @@ msgstr[1] "%u sotilasta"
 #, c-format
 msgid "%1$u(+%2$u) soldier"
 msgid_plural "%1$u(+%2$u) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u(+%2$u) sotilas"
+msgstr[1] "%1$u(+%2$u) sotilasta"
 
 #: ../../src/logic/militarysite.cc:843
 msgid "Militarysite lost!"
@@ -867,7 +864,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:156
 #, c-format
 msgid "not %s"
-msgstr ""
+msgstr "ei %s"
 
 #. * TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s'
 #. * TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s'
@@ -875,7 +872,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:201
 #, c-format
 msgid "economy needs %s"
-msgstr ""
+msgstr "Talous tarvitsee %s:a."
 
 #. * TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages.
 #. * TRANSLATORS: e.g. %1$s = 'Failed work because: water, wheat (2)' %2$s = 'are missing'
@@ -884,27 +881,27 @@ msgstr ""
 #: ../../src/logic/production_program.cc:865
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #. * TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages.
 #: ../../src/logic/production_program.cc:237
 #: ../../src/logic/production_program.cc:846
 #, c-format
 msgid "%s,"
-msgstr ""
+msgstr "%s,"
 
 #. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
 #: ../../src/logic/production_program.cc:242
 #: ../../src/logic/production_program.cc:854
 #, c-format
 msgid "%1$s (%2$i)"
-msgstr ""
+msgstr "%1$s (%2$i)"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:245
 #, c-format
 msgid "site has%s"
-msgstr ""
+msgstr "paikalla on %s"
 
 #. * TRANSLATORS: 'Failed/Skipped ... because: workers need experience'.
 #: ../../src/logic/production_program.cc:262
@@ -915,54 +912,54 @@ msgstr "työläiset tarvitsevat kokemusta"
 #: ../../src/logic/production_program.cc:429
 #, c-format
 msgid "Failed %s"
-msgstr ""
+msgstr "%s epäonnistui"
 
 #. * TRANSLATORS: 'Completed %s because (not): %s {and/or %s}'
 #: ../../src/logic/production_program.cc:431
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "%s valmis"
 
 #. * TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}'
 #: ../../src/logic/production_program.cc:433
 #, c-format
 msgid "Skipped %s"
-msgstr ""
+msgstr "%s ohitettu"
 
 #. * TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}'
 #: ../../src/logic/production_program.cc:449
 #, c-format
 msgid "%s and "
-msgstr ""
+msgstr "%s ja "
 
 #. * TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}'
 #: ../../src/logic/production_program.cc:453
 #, c-format
 msgid "%1$s because: %2$s"
-msgstr ""
+msgstr "%1$s, koska %2$s"
 
 #. * TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}'
 #: ../../src/logic/production_program.cc:466
 #, c-format
 msgid "%s or "
-msgstr ""
+msgstr "%s tai "
 
 #. * TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}'
 #: ../../src/logic/production_program.cc:470
 #, c-format
 msgid "%1$s because not: %2$s"
-msgstr ""
+msgstr "%1$s, koskei %2$s"
 
 #. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
 #: ../../src/logic/production_program.cc:831
 #, c-format
 msgid "Failed %s because:"
-msgstr ""
+msgstr "%s epäonnistui, koska"
 
 #: ../../src/logic/production_program.cc:861
 #, c-format
 msgid "%s and"
-msgstr ""
+msgstr "%s ja"
 
 #. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
 #: ../../src/logic/production_program.cc:867
@@ -996,18 +993,18 @@ msgstr "Tuotettu %s"
 #: ../../src/logic/production_program.cc:1072
 #, c-format
 msgid "Recruited %s"
-msgstr ""
+msgstr "%s rektytoitu"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
 #: ../../src/logic/production_program.cc:1129
 #, c-format
 msgid "%1$s %2$s mine %3$s"
-msgstr ""
+msgstr "%1$s %2$s louhii %3$s"
 
 #: ../../src/logic/production_program.cc:1242
 #, c-format
 msgid "Can’t find any more resources!"
-msgstr ""
+msgstr "Resurssit lopussa!"
 
 #: ../../src/logic/production_program.cc:1263
 msgid "Main Vein Exhausted"
@@ -1038,8 +1035,8 @@ msgstr "(tyhjillään)"
 #: ../../src/logic/productionsite.cc:213
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Työläinen puuttuu"
+msgstr[1] "Työläisiä puuttuu"
 
 #: ../../src/logic/productionsite.cc:222
 msgid "(stopped)"
@@ -1055,7 +1052,7 @@ msgstr "Tutkimusmatka-alus löysi sopivan satamapaikan"
 
 #: ../../src/logic/ship.cc:563
 msgid "Island Circumnavigated"
-msgstr ""
+msgstr "Saari ympäripurjehdittu"
 
 #: ../../src/logic/ship.cc:564
 msgid "An expedition ship sailed around its island without any events."
@@ -1108,12 +1105,12 @@ msgstr ""
 #: ../../src/logic/worker.cc:610
 #, c-format
 msgid "Out of %s"
-msgstr ""
+msgstr "%s puuttuu"
 
 #: ../../src/logic/worker.cc:611
 #, c-format
 msgid "The worker of this building cannot find any more %s."
-msgstr ""
+msgstr "Työntekijä ei löytänyt lisää %s:aa."
 
 #: ../../src/logic/worker.cc:956
 msgid "A geologist found resources."
@@ -1128,11 +1125,11 @@ msgstr "Sinun %s ei löydä tietä kotiin ja todennäköisesti kuolee."
 msgid "Worker got lost!"
 msgstr "Työläinen eksyi!"
 
-#: ../../src/map_io/widelands_map_loader.cc:87
+#: ../../src/map_io/widelands_map_loader.cc:82
 msgid "Invalid World"
 msgstr "Epäkelpo maailma"
 
-#: ../../src/map_io/widelands_map_loader.cc:89
+#: ../../src/map_io/widelands_map_loader.cc:84
 #, c-format
 msgid "The world \"%s\" set by the map does not exist on your filesystem."
 msgstr "Maailmaa \"%s\", jonka kartta asettaa, ei löydy koneeltasi."
@@ -1203,20 +1200,20 @@ msgstr "HUOMIO: Sain paketin %s, vaikka olen CONNECTING-tilassa."
 #, c-format
 msgid "InternetGaming: Server time offset is %u second."
 msgid_plural "InternetGaming: Server time offset is %u seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Verkkopeli: Aikaero palvelimeen %u sekunti."
+msgstr[1] "Verkkopeli: Aikaero palvelimeen %u sekuntia."
 
 #: ../../src/network/internet_gaming.cc:441
 #, c-format
 msgid "Server time offset is %u second."
 msgid_plural "Server time offset is %u seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aikaero palvelimeen %u sekunti."
+msgstr[1] "Aikaero palvelimeen %u sekuntia."
 
 #: ../../src/network/internet_gaming.cc:464
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Virheellinen viestityyppi  \"%s\"."
 
 #: ../../src/network/internet_gaming.cc:464
 msgid "Invalid message type"
@@ -1225,26 +1222,26 @@ msgstr "Virheellinen viestityyppi"
 #: ../../src/network/internet_gaming.cc:500
 #, c-format
 msgid "The game %s is now available"
-msgstr ""
+msgstr "Peli %s avautui."
 
 #: ../../src/network/internet_gaming.cc:509
 #, c-format
 msgid "The game %s has been closed"
-msgstr ""
+msgstr "Peli %s sulkeutui."
 
 #: ../../src/network/internet_gaming.cc:544
 #, c-format
 msgid "%s joined the lobby"
-msgstr ""
+msgstr "%s saapui."
 
 #: ../../src/network/internet_gaming.cc:553
 #, c-format
 msgid "%s left the lobby"
-msgstr ""
+msgstr "%s poistui"
 
 #: ../../src/network/internet_gaming.cc:587
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "Viestin lähettäminen epäonnistui. "
 
 #: ../../src/network/internet_gaming.cc:601
 #, c-format
@@ -1343,6 +1340,8 @@ msgid ""
 "You tried to log back in, but the server has no knowledge of your previous "
 "state anymore."
 msgstr ""
+"Yritit kirjautua takaisin, mutta palvelin on jo unohtanut viimeisimmän "
+"tilasi."
 
 #: ../../src/network/netclient.cc:107
 msgid ""
@@ -1355,7 +1354,7 @@ msgstr ""
 "palvelin sulkeutui kun yritit ottaa yhteyttä."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:848
-#: ../../src/wlapplication.cc:1663
+#: ../../src/wlapplication.cc:1666
 msgid "Preparing game"
 msgstr "Valmistelen peliä"
 
@@ -1368,6 +1367,8 @@ msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
+"/me tarkasti saadun tiedoston. Tiedoston avaus epäonnistui, vaikka md5-"
+"tarkistus onnistui."
 
 #: ../../src/network/netclient.cc:1100
 msgid " An automatic savegame will be created."
@@ -1427,7 +1428,7 @@ msgstr "Miksi varoittaisit itseäsi?"
 
 #: ../../src/network/nethost.cc:415
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Miksi haluat varoittaa pelipalvelinta?"
 
 #: ../../src/network/nethost.cc:419 ../../src/network/nethost.cc:445
 #, c-format
@@ -1444,17 +1445,17 @@ msgstr "Et pysty potkaisemaan itseäsi!"
 
 #: ../../src/network/nethost.cc:443
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "Et voi erottaa pelipalvelinta"
 
 #: ../../src/network/nethost.cc:448
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr ""
+msgstr "Oletko varma, että haluat erottaa %s:n?"
 
 #: ../../src/network/nethost.cc:449
 #, c-format
 msgid "The stated reason was: %s"
-msgstr ""
+msgstr "Syy: %s"
 
 #: ../../src/network/nethost.cc:450
 #, c-format
@@ -1491,6 +1492,8 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
+"Tämä on pelipalvelin. Saat toiminnelistan, kun lähetät minulle komennon "
+"\"@%s help\""
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1216 ../../src/network/nethost.cc:1227
@@ -1504,18 +1507,18 @@ msgstr "save $ - Saves the current game state as $.wgf"
 
 #: ../../src/network/nethost.cc:1231
 msgid "pwd $  - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd $  - Lähettää salasanan $ palvelimelle"
 
 #: ../../src/network/nethost.cc:1238
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
-msgstr ""
+msgstr "Ei pääsyä palvelinkomentoihin. Lähetä salasana pwd-komennolla ensin."
 
 #: ../../src/network/nethost.cc:1243
 #, c-format
 msgid "%1$s told me to run the command: \"%2$s\""
-msgstr ""
+msgstr "%1$s käski minua suorittamaan komennon \"%2$s\""
 
 #: ../../src/network/nethost.cc:1252
 msgid "Sorry! Saving was deactivated on this dedicated server!"
@@ -1523,7 +1526,7 @@ msgstr "Tallentaminen on poissa päältä tällä palvelimella"
 
 #: ../../src/network/nethost.cc:1255
 msgid "Cannot save while there is no game running!"
-msgstr ""
+msgstr "En voi tallentaa, koska peli ei ole käynnissä."
 
 #: ../../src/network/nethost.cc:1266
 msgid "Game successfully saved!"
@@ -1570,8 +1573,8 @@ msgstr ""
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%li sekunti"
+msgstr[1] "%li sekuntia"
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
@@ -1599,7 +1602,7 @@ msgstr "Palvelin on kaatunut ja tehnyt hätätallennuksen."
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr ""
+msgstr "Yhteys katkesi: ei vastausta kymmeneen minuuttiin."
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
@@ -1608,12 +1611,12 @@ msgstr "Asiakasohjelma ja palvelin eivät enää ole synkronoidut."
 #: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Palvelin katkaisi yhteyden %s:ltä."
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "Asiakas lähetti viallisen komennon: %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
@@ -1637,7 +1640,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Received a PLAYERCOMMAND even though no game is running."
-msgstr ""
+msgstr "Sain PLAYERCOMMAND -komennon, vaikka peli ei ole käynnissä."
 
 #: ../../src/network/network_gaming_messages.cc:137
 msgid "Unexpectedly received LAUNCH command from server."
@@ -1658,7 +1661,7 @@ msgstr "Palvelin käyttää eri yhteyskäytäntöversiota"
 #: ../../src/network/network_gaming_messages.cc:141
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
-msgstr ""
+msgstr "Sain komennon %s, joka ei ole tässä tilanteessa sallittu."
 
 # Todo: grammar
 #: ../../src/network/network_gaming_messages.cc:143
@@ -1679,15 +1682,16 @@ msgstr "Peli on jo alkanut."
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client has no access to other player’s settings."
-msgstr ""
+msgstr "Asiakkaalla ei ole pääsyä toisten pelaajien asetuksiin."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Asiakkaalla ei ole pääsyä palvelimen asetuksiin."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
 msgstr ""
+"Asiakas lähettin start -komennon, vaikka palvelin ei ole vielä valmis."
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
@@ -1695,7 +1699,7 @@ msgstr "Asiakasohjelma lähetti TIME-komennon, vaikka peli ei ole käynnissä."
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client sent a PLAYERCOMMAND for another player."
-msgstr ""
+msgstr "Asiakas lähetti PLAYERCOMMAND -komennon toiselle pelaajalle."
 
 #: ../../src/network/network_gaming_messages.cc:152
 msgid "Client sent unexpected synchronization report."
@@ -1703,7 +1707,7 @@ msgstr "Asiakasohjelma lähetti odottamattoman synkronisointiraportin."
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "Client requests file although none is available to send."
-msgstr ""
+msgstr "Asiakas pyytää tiedostoja, vaikka yhtään ei ole saatavilla."
 
 #: ../../src/network/network_gaming_messages.cc:154
 msgid "Client requests file part that does not exist."
@@ -1752,14 +1756,14 @@ msgstr "Pelaaja \"%s\" lyötiin. Hän on nyt tarkkailijana."
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
-msgstr ""
+msgstr "Asiakas %1$s ei ole vastannut yli %2$s."
 
 #: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid ""
 "Client %1$s will automatically be kicked, if no answer is received within "
 "%2$s."
-msgstr ""
+msgstr "Asiakas %1$s erotetaan, jollei hän vastaa ajassa %2$s."
 
 #: ../../src/replay_game_controller.cc:107
 msgid "End of replay"
@@ -1789,7 +1793,11 @@ msgid_plural ""
 "removed! Some islands might be unreachable now. Please consider fixing the "
 "map in the map editor."
 msgstr[0] ""
+"VAROITUS: %i sataman paikka ei ollut kelvollinen, ja on nyt poistettu. Avaa "
+"karttaeditori, ja varmista että kartta on kunnossa."
 msgstr[1] ""
+"VAROITUS: Löysin %i viallista sataman paikkaa, ja poistin ne. Avaa "
+"karttaeditori, ja varmista että kartta on yhä pelikunnossa."
 
 #: ../../src/s2map.cc:889
 msgid "WARNING"
@@ -1807,12 +1815,12 @@ msgstr "Tallentaminen epäonnistui!"
 msgid "Game saved"
 msgstr "Peli tallennettu."
 
-#: ../../src/scripting/lua_game.cc:1089
+#: ../../src/scripting/lua_game.cc:1085
 #, c-format
 msgid "%1$s (achieved %2$s)"
-msgstr ""
+msgstr "%1$s (saaavutettu %2$s)"
 
-#: ../../src/ui_basic/helpwindow.cc:48 ../../src/ui_basic/helpwindow.cc:193
+#: ../../src/ui_basic/helpwindow.cc:48 ../../src/ui_basic/helpwindow.cc:189
 #, c-format
 msgid "Help: %s"
 msgstr "Ohje: %s"
@@ -1912,7 +1920,7 @@ msgstr "Metapalvelimen aula"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:58
 msgid "Clients online:"
-msgstr ""
+msgstr "Pelaajia verkossa:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:62
 msgid "List of games:"
@@ -1937,19 +1945,19 @@ msgstr "Avaa uusi peli"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "User Status"
-msgstr ""
+msgstr "Käyttäjän tila"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:161
 msgid "Registered"
-msgstr ""
+msgstr "Rekisteröitynyt"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:163
 msgid "Administrator"
-msgstr ""
+msgstr "Pääkäyytäjä"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:165
 msgid "Unregistered"
-msgstr ""
+msgstr "Rekisteröitymätön"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:168
 #: ../../src/wui/building_statistics_menu.cc:110
@@ -1974,6 +1982,8 @@ msgid ""
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
+"Widelands ei kyennyt selvittämään IP-osoitetta ajoissa.\n"
+"Tämä näyttää verkko-ongelmalta, joko palvelimen tai sinun päässäsi.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:432
 msgid "Widelands was unable to connect to the host."
@@ -2092,6 +2102,8 @@ msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr ""
+"Valittua tiedostoa ei löydy. Jollei se siirry automaattisesti sinulle, kerro "
+"hostaajalle ongelmasta."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:483
 #: ../../src/wui/multiplayersetupgroup.cc:120
@@ -2138,7 +2150,7 @@ msgstr "Virhe havaittu!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:648
 msgid "Map details:"
-msgstr ""
+msgstr "Kartan tiedot:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 #, c-format
@@ -2149,8 +2161,8 @@ msgstr "Koko: %1$u x %2$u"
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u pelaaja"
+msgstr[1] "%u pelaajaa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:653
 #, c-format
@@ -2174,6 +2186,8 @@ msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role With the button following your nickname. Available roles are:"
 msgstr ""
+"Vasemmalla näet listan pelaajista, myös itsesi. Voit asettaa roolisi "
+"nimimerkkisi vieressä olevalla painikkeella. Vaihtoehdot ovat:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:678
 msgid ""
@@ -2242,7 +2256,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:707
 msgid "Map details"
-msgstr ""
+msgstr "Kartan tiedot"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:710
 msgid ""
@@ -2325,7 +2339,7 @@ msgstr "Poista tiedosto"
 #: ../../src/ui_fsmenu/loadgame.cc:160 ../../src/ui_fsmenu/loadreplay.cc:143
 #, c-format
 msgid "Do you really want to delete %s?"
-msgstr ""
+msgstr "Haluatko poistaa %s:n?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:217
 msgid "Savegame from dedicated server"
@@ -2333,11 +2347,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:218
 msgid "Unknown gametime"
-msgstr ""
+msgstr "Tuntemanton peliaika"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:71
 msgid "Choose a replay"
-msgstr ""
+msgstr "Valitse toistettava peli"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -2380,7 +2394,7 @@ msgstr "Widelands-kehittäjätiimi"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Lisensoitu GNU General Public License (GPL) V2.0 -lisenssillä."
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario"
@@ -2413,15 +2427,15 @@ msgstr "1v1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 2"
-msgstr ""
+msgstr "Kanden pelaajan joukkueet"
 
 #: ../../src/ui_fsmenu/mapselect.cc:178
 msgid "Teams of 3"
-msgstr ""
+msgstr "Kolmen pelaajan joukkueet"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Teams of 4"
-msgstr ""
+msgstr "Neljän pelaajan joukkueet"
 
 #: ../../src/ui_fsmenu/mapselect.cc:182
 msgid "Free for all"
@@ -2522,8 +2536,8 @@ msgstr "min välein"
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "päivä"
+msgstr[1] "päivää"
 
 #: ../../src/ui_fsmenu/options.cc:138
 msgid "General Options"
@@ -2670,16 +2684,16 @@ msgstr "Kampanjat"
 msgid "Load Game"
 msgstr "Lataa peli"
 
-#: ../../src/wlapplication.cc:402
+#: ../../src/wlapplication.cc:405
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
 "VIRHE: Metapalvelimeen yhdistäminen epäonnistui yllä näkyvästä syystä.\n"
 
-#: ../../src/wlapplication.cc:828 ../../src/wlapplication.cc:837
+#: ../../src/wlapplication.cc:831 ../../src/wlapplication.cc:840
 msgid "could not find the path of the main executable"
 msgstr "pääohjelman tiedostopolkua ei löytynyt"
 
-#: ../../src/wlapplication.cc:957
+#: ../../src/wlapplication.cc:960
 msgid ""
 "Waited 5 seconds to close audio. There are some problems here, so killing "
 "Widelands. Update your sound driver and/or SDL to fix this problem\n"
@@ -2687,34 +2701,34 @@ msgstr ""
 "En saanut äänilaitetta suljettua viidessä sekunnissa. Sammutan Widelandsin. "
 "Tee jotain äänilaiteajurillesi ja(tai SDL:lle.\n"
 
-#: ../../src/wlapplication.cc:1087
+#: ../../src/wlapplication.cc:1090
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1090
+#: ../../src/wlapplication.cc:1093
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double ei ole käytettävissä. Tämä ei ole debug-käännös!"
 
-#: ../../src/wlapplication.cc:1191
+#: ../../src/wlapplication.cc:1194
 msgid "This is Widelands-"
 msgstr "Tämä on Widelands-"
 
-#: ../../src/wlapplication.cc:1193
+#: ../../src/wlapplication.cc:1196
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
 msgstr "Käyttö: widelands <asetus0>=<arvo0> ... <asetusN>=<arvoN>"
 
-#: ../../src/wlapplication.cc:1194
+#: ../../src/wlapplication.cc:1197
 msgid "Options:"
 msgstr "Asetukset:"
 
-#: ../../src/wlapplication.cc:1196
+#: ../../src/wlapplication.cc:1199
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr " --<asetuksen-nimi>=arvo Ylikirjoittaa asetustiedoston asetuksen"
 
-#: ../../src/wlapplication.cc:1197
+#: ../../src/wlapplication.cc:1200
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
@@ -2722,13 +2736,13 @@ msgstr ""
 " --logfile=TIEDOSTO Kirjoittaa loki tulostuksen päätteen sijasta\n"
 "                      TIEDOSTO:on."
 
-#: ../../src/wlapplication.cc:1199
+#: ../../src/wlapplication.cc:1202
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr " --datadir=HAKEMISTO Käytä HAKEMISTO:a widelands data hakemistona."
 
-#: ../../src/wlapplication.cc:1201
+#: ../../src/wlapplication.cc:1204
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
@@ -2736,11 +2750,11 @@ msgstr ""
 " --homedir=HAKEMISTO Käytä HAKEMISTO:a widelands asetustiedstoille,\n"
 "                      pelitallenteilla ja toistotiedostoille."
 
-#: ../../src/wlapplication.cc:1204
+#: ../../src/wlapplication.cc:1207
 msgid "                      Default is ~/.widelands"
 msgstr "                      Oletus on ~/.widelands"
 
-#: ../../src/wlapplication.cc:1207
+#: ../../src/wlapplication.cc:1210
 msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL"
@@ -2748,7 +2762,7 @@ msgstr ""
 " --coredump=[yes|no] Luo core dump:n segfaults-tilanteissa \n"
 "                      SDL:n sijaan."
 
-#: ../../src/wlapplication.cc:1209
+#: ../../src/wlapplication.cc:1212
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
@@ -2756,11 +2770,11 @@ msgstr ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      Käytetty lokalisaatio."
 
-#: ../../src/wlapplication.cc:1211
+#: ../../src/wlapplication.cc:1214
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
 msgstr " --localedir=HAKEMISTO Käyttää HAKEMISTO:a lokalisaatioille."
 
-#: ../../src/wlapplication.cc:1212
+#: ../../src/wlapplication.cc:1215
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
@@ -2768,7 +2782,7 @@ msgstr ""
 " --remove_syncstreams=[true|false]\n"
 "                      Poista syncstream käynnistyksessä"
 
-#: ../../src/wlapplication.cc:1214
+#: ../../src/wlapplication.cc:1217
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
@@ -2778,28 +2792,28 @@ msgstr ""
 "                      Poista nauhoitukset näin monelta päivältä.\n"
 "                      Jos 0, nauhoituksia ei tuhota."
 
-#: ../../src/wlapplication.cc:1218
+#: ../../src/wlapplication.cc:1221
 msgid "Sound options:"
 msgstr "Ääniasetukset:"
 
-#: ../../src/wlapplication.cc:1219
+#: ../../src/wlapplication.cc:1222
 msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound            Käynnistää pelin ilman ääniä."
 
-#: ../../src/wlapplication.cc:1220
+#: ../../src/wlapplication.cc:1223
 msgid " --disable_fx         Disable sound effects."
 msgstr " --disable_fx         Poistaa äänitehosteet käytöstä."
 
-#: ../../src/wlapplication.cc:1221
+#: ../../src/wlapplication.cc:1224
 msgid " --disable_music      Disable music."
 msgstr " --disable_music      Poistaa musiikin käytöstä."
 
-#: ../../src/wlapplication.cc:1222
+#: ../../src/wlapplication.cc:1225
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr ""
 " --nozip              Älä pakkaa tallennustiedostoja zip-arkistoiksi."
 
-#: ../../src/wlapplication.cc:1223
+#: ../../src/wlapplication.cc:1226
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
@@ -2809,29 +2823,29 @@ msgstr ""
 "                      Voit lisätä arvon =TIEDOSTO ladataksesi muokkaimeen\n"
 "                      suoraan tietyn karttatiedoston."
 
-#: ../../src/wlapplication.cc:1226
+#: ../../src/wlapplication.cc:1229
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=TIEDOSTO  Käynnistää annetun kartan suoraan kenaariona."
 
-#: ../../src/wlapplication.cc:1228
+#: ../../src/wlapplication.cc:1231
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=TIEDOSTO  Avaa suoraan annetun pelitallennuksen"
 
-#: ../../src/wlapplication.cc:1229
+#: ../../src/wlapplication.cc:1232
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1231
+#: ../../src/wlapplication.cc:1234
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
 msgstr ""
 " --dedicated=TIEDOSTONNIMI käynnyistää pelipalvelimen kartalla, joka löytyy "
 "TIEDOSTONNIMESTÄ."
 
-#: ../../src/wlapplication.cc:1232
+#: ../../src/wlapplication.cc:1235
 msgid ""
 " --auto_roadbuild_mode=[yes|no]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -2839,34 +2853,34 @@ msgid ""
 "                      not connected to a road."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1236
+#: ../../src/wlapplication.cc:1239
 msgid "Graphic options:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1237
+#: ../../src/wlapplication.cc:1240
 msgid ""
 " --fullscreen=[yes|no]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1240
+#: ../../src/wlapplication.cc:1243
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1241
+#: ../../src/wlapplication.cc:1244
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1242
+#: ../../src/wlapplication.cc:1245
 msgid " --opengl=[0|1]       Enables OpenGL rendering"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1243
+#: ../../src/wlapplication.cc:1246
 msgid "Options for the internal window manager:"
 msgstr "Sisäisen ikkunointijärjestelmän asetukset:"
 
-#: ../../src/wlapplication.cc:1244
+#: ../../src/wlapplication.cc:1247
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -2877,7 +2891,7 @@ msgstr ""
 "                      Siirrä ikkuna ruudun reunaan kun sen oma reuna\n"
 "                      on tällä etäisyydellä ruudun reunasta."
 
-#: ../../src/wlapplication.cc:1248
+#: ../../src/wlapplication.cc:1251
 msgid ""
 " --dock_windows_to_edges=[yes|no]\n"
 "                      Eliminate a window's border towards the\n"
@@ -2889,7 +2903,7 @@ msgstr ""
 "                      kun ikkunan reuna on vasten ruudun laitaa.\n"
 "                      (Asetus säästää ruututilaa.)"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1255
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -2900,7 +2914,7 @@ msgstr ""
 "                      Siirrä ikkuna paneelin reunaan kun ikkunan reuna\n"
 "                      on tällä etäisyydellä paneelin reunasta."
 
-#: ../../src/wlapplication.cc:1256
+#: ../../src/wlapplication.cc:1259
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -2911,7 +2925,7 @@ msgstr ""
 "                      Siirrä ikkuna paneelin reunaan vain jos se on\n"
 "                      paneelin päällä."
 
-#: ../../src/wlapplication.cc:1263
+#: ../../src/wlapplication.cc:1266
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)"
@@ -2919,15 +2933,15 @@ msgstr ""
 " --double             Käynnistä peli kahdesti (paikallisverkon testausta\n"
 "                      varten)"
 
-#: ../../src/wlapplication.cc:1268
+#: ../../src/wlapplication.cc:1271
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose Käytä laajaa debug-tulostusta."
 
-#: ../../src/wlapplication.cc:1270
+#: ../../src/wlapplication.cc:1273
 msgid " --help               Show this help"
 msgstr " --help               Näytä tämä ohje"
 
-#: ../../src/wlapplication.cc:1272
+#: ../../src/wlapplication.cc:1275
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -2939,11 +2953,11 @@ msgstr ""
 "\n"
 "Toivottavasti nautit pelistä!"
 
-#: ../../src/wlapplication.cc:1360
+#: ../../src/wlapplication.cc:1363
 msgid "Fallback settings in effect"
 msgstr "Vikasietoasetukset käytössä"
 
-#: ../../src/wlapplication.cc:1362
+#: ../../src/wlapplication.cc:1365
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2951,20 +2965,20 @@ msgstr ""
 "Videoasetuksiasi ei voitu ottaa käyttöön. Palasin turvallisiksi luultuihin "
 "asetuksiin. Yritä uudelleen!"
 
-#: ../../src/wlapplication.cc:1433
+#: ../../src/wlapplication.cc:1436
 #, c-format
 msgid "Warning: %s"
 msgstr "Varoitus: %s"
 
-#: ../../src/wlapplication.cc:1436
+#: ../../src/wlapplication.cc:1439
 msgid "Game data error"
 msgstr "Pelitietovirhe"
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1444
 msgid "Unexpected error during the game"
 msgstr "Odottamaton virhe pelin aikana"
 
-#: ../../src/wlapplication.cc:1446
+#: ../../src/wlapplication.cc:1449
 #, c-format
 msgid ""
 "\n"
@@ -2979,7 +2993,7 @@ msgstr ""
 "Löydät asiaankuuluvat viestit ohjelman perustulosteesta (stdout, Windowsissa "
 "tiedosto stdout.txt). Käytät versiota  %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1453
+#: ../../src/wlapplication.cc:1456
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2991,7 +3005,7 @@ msgstr ""
 "Widelands pyrkii tallentamaan pelin automaattisesti virheiden sattuessa. "
 "Usein - ei aina - peliä voi täten jatkaa tallennuksesta.\n"
 
-#: ../../src/wlapplication.cc:1565
+#: ../../src/wlapplication.cc:1568
 msgid "The address of the game server is invalid"
 msgstr "Pelipalvelimen osoite ei kelpaa"
 
@@ -3063,7 +3077,7 @@ msgid "Once injured"
 msgstr "Kun luokkaantuu"
 
 #: ../../src/wui/building_statistics_menu.cc:77
-#: ../../src/wui/game_main_menu.cc:62
+#: ../../src/wui/game_main_menu.cc:59
 msgid "Building Statistics"
 msgstr "Rakennustilastot"
 
@@ -3077,7 +3091,7 @@ msgstr "Omistaja:"
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "Being built:"
-msgstr ""
+msgstr "Rakenteilla"
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive"
@@ -3112,60 +3126,60 @@ msgstr "Näytä edellinen"
 msgid "Show next"
 msgstr "Näytä seuraava"
 
-#: ../../src/wui/buildingwindow.cc:183
+#: ../../src/wui/buildingwindow.cc:182
 msgid "Cancel the expedition"
 msgstr "Peru tutkimusmatka"
 
-#: ../../src/wui/buildingwindow.cc:193
+#: ../../src/wui/buildingwindow.cc:192
 msgid "Start an expedition"
 msgstr "Aloita tutkimusmatka"
 
-#: ../../src/wui/buildingwindow.cc:209 ../../src/wui/game_summary.cc:77
+#: ../../src/wui/buildingwindow.cc:208 ../../src/wui/game_summary.cc:77
 msgid "Continue"
 msgstr "Jatka"
 
-#: ../../src/wui/buildingwindow.cc:209
+#: ../../src/wui/buildingwindow.cc:208
 msgid "Stop"
 msgstr "Pysäytä"
 
-#: ../../src/wui/buildingwindow.cc:236
+#: ../../src/wui/buildingwindow.cc:235
 #, c-format
 msgid "Enhance to %s"
 msgstr "Paranna rakennukseksi %s"
 
-#: ../../src/wui/buildingwindow.cc:242 ../../src/wui/fieldaction.cc:112
+#: ../../src/wui/buildingwindow.cc:241 ../../src/wui/fieldaction.cc:116
 msgid "Construction costs:"
 msgstr "Rakennuskustannukset:"
 
-#: ../../src/wui/buildingwindow.cc:263
+#: ../../src/wui/buildingwindow.cc:262
 msgid "Destroy"
 msgstr "Tuhoa"
 
-#: ../../src/wui/buildingwindow.cc:281
+#: ../../src/wui/buildingwindow.cc:280
 msgid "Dismantle"
 msgstr "Pura"
 
-#: ../../src/wui/buildingwindow.cc:281
+#: ../../src/wui/buildingwindow.cc:280
 msgid "Returns:"
 msgstr "Saadaan:"
 
-#: ../../src/wui/buildingwindow.cc:313 ../../src/wui/buildingwindow.cc:516
+#: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:503
 msgid "Hide work area"
 msgstr "Piilota työalue"
 
-#: ../../src/wui/buildingwindow.cc:328
+#: ../../src/wui/buildingwindow.cc:327
 msgid "Debug"
 msgstr "Debug"
 
-#: ../../src/wui/buildingwindow.cc:339
+#: ../../src/wui/buildingwindow.cc:338
 msgid "Center view on this"
 msgstr "Keskitä näkymä tänne"
 
-#: ../../src/wui/buildingwindow.cc:357
+#: ../../src/wui/buildingwindow.cc:356
 msgid "Help"
 msgstr "Ohje"
 
-#: ../../src/wui/buildingwindow.cc:519
+#: ../../src/wui/buildingwindow.cc:506
 msgid "Show work area"
 msgstr "Näytä työalue"
 
@@ -3192,119 +3206,123 @@ msgstr "Määrä"
 msgid " or "
 msgstr " tai "
 
-#: ../../src/wui/fieldaction.cc:247
-msgid "Build small building"
-msgstr ""
-
-#: ../../src/wui/fieldaction.cc:248
-msgid "Build medium building"
-msgstr ""
-
-#: ../../src/wui/fieldaction.cc:249
-msgid "Build large building"
-msgstr ""
-
 #: ../../src/wui/fieldaction.cc:250
-msgid "Build port building"
-msgstr ""
+msgid "Build small building"
+msgstr "Rakenna pieni rakennus"
 
-#: ../../src/wui/fieldaction.cc:282
+#: ../../src/wui/fieldaction.cc:251
+msgid "Build medium building"
+msgstr "Rakenna keskikokoinen rakennus"
+
+#: ../../src/wui/fieldaction.cc:252
+msgid "Build large building"
+msgstr "Rakenna suuri rakennus"
+
+#: ../../src/wui/fieldaction.cc:253
+msgid "Build port building"
+msgstr "Rakenna satamarakennus"
+
+#: ../../src/wui/fieldaction.cc:285
 msgid "Action"
 msgstr "Toiminto"
 
-#: ../../src/wui/fieldaction.cc:367 ../../src/wui/fieldaction.cc:461
+#: ../../src/wui/fieldaction.cc:370 ../../src/wui/fieldaction.cc:464
 msgid "Build road"
 msgstr "Rakenna tie"
 
-#: ../../src/wui/fieldaction.cc:379
+#: ../../src/wui/fieldaction.cc:382
 msgid "Destroy this flag"
 msgstr "Poista tämä lippu"
 
-#: ../../src/wui/fieldaction.cc:387
+#: ../../src/wui/fieldaction.cc:390
 msgid "Configure economy"
 msgstr "Muuta talouden asetuksia"
 
-#: ../../src/wui/fieldaction.cc:393
+#: ../../src/wui/fieldaction.cc:396
 msgid "Send geologist to explore site"
 msgstr "Lähetä geologi tutkimaan aluetta"
 
-#: ../../src/wui/fieldaction.cc:411
+#: ../../src/wui/fieldaction.cc:414
 msgid "Place a flag"
-msgstr ""
+msgstr "pystytä lippu"
 
-#: ../../src/wui/fieldaction.cc:418
+#: ../../src/wui/fieldaction.cc:421
 msgid "Destroy a road"
 msgstr "Poista tie"
 
-#: ../../src/wui/fieldaction.cc:436
+#: ../../src/wui/fieldaction.cc:439
 msgid "Watch field in a separate window"
 msgstr "Tarkkaile aluetta erillisessä ikkunassa"
 
 # TODO: indicate kb shortcuts in tooltips
-#: ../../src/wui/fieldaction.cc:441
+#: ../../src/wui/fieldaction.cc:444
 msgid "Toggle building statistics display"
 msgstr "Näytä/piilota rakennusten tuotantotiedot (S)"
 
-#: ../../src/wui/fieldaction.cc:447
+#: ../../src/wui/fieldaction.cc:450
 msgid "Toggle building label display"
 msgstr "Näytä/piilota rakennusten nimet (C)"
 
-#: ../../src/wui/fieldaction.cc:454
+#: ../../src/wui/fieldaction.cc:457
 msgid "Debug window"
 msgstr "Debug-ikkuna"
 
-#: ../../src/wui/fieldaction.cc:463 ../../src/wui/watchwindow.cc:97
+#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:97
 msgid "Watch"
 msgstr "Tarkkailunäkymä"
 
-#: ../../src/wui/fieldaction.cc:471
+#: ../../src/wui/fieldaction.cc:474
 msgid "Military settings"
 msgstr "Armeijan asetukset"
 
-#: ../../src/wui/fieldaction.cc:497
+#: ../../src/wui/fieldaction.cc:500
 msgid "Start attack"
 msgstr "Aloita hyökkäys"
 
-#: ../../src/wui/fieldaction.cc:502
+#: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
 msgstr "Hyökkää"
 
-#: ../../src/wui/fieldaction.cc:586
+#: ../../src/wui/fieldaction.cc:589
 msgid "Build mines"
 msgstr "Rakenna kaivoksia"
 
-#: ../../src/wui/fieldaction.cc:602
+#: ../../src/wui/fieldaction.cc:605
 msgid "Build flag"
 msgstr "Pystytä lippu"
 
-#: ../../src/wui/fieldaction.cc:606
+#: ../../src/wui/fieldaction.cc:609
 msgid "Cancel road"
 msgstr "Peruuta tie"
 
-#: ../../src/wui/fieldaction.cc:609
+#: ../../src/wui/fieldaction.cc:612
 msgid "Build roads"
 msgstr "Rakenna teitä"
 
-#: ../../src/wui/game_chat_menu.cc:37 ../../src/wui/interactive_player.cc:104
+#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:104
 #: ../../src/wui/interactive_spectator.cc:51
 msgid "Chat"
 msgstr "Keskustelu"
+
+#: ../../src/wui/game_chat_menu.cc:65
+msgid "Script console"
+msgstr "Komentopääte"
 
 #: ../../src/wui/game_debug_ui.cc:237
 msgid "Debug Field"
 msgstr "Debug-kenttä"
 
-#: ../../src/wui/game_main_menu.cc:50
+#: ../../src/wui/game_main_menu.cc:47
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
 msgstr "Yleistilastot"
 
-#: ../../src/wui/game_main_menu.cc:56
+#: ../../src/wui/game_main_menu.cc:53
 #: ../../src/wui/ware_statistics_menu.cc:138
 msgid "Ware Statistics"
 msgstr "Tuotetilastot"
 
-#: ../../src/wui/game_main_menu.cc:68 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/game_main_menu.cc:65 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:209 ../../src/wui/waresdisplay.cc:59
 msgid "Stock"
 msgstr "Varasto"
@@ -3327,15 +3345,15 @@ msgstr "Tavoite:"
 #, c-format
 msgid "%i player"
 msgid_plural "%i players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i pelaaja"
+msgstr[1] "%i pelaajaa"
 
 #. * TRANSLATORS: This is preceded by a number
 #: ../../src/wui/game_main_menu_save_game.cc:181
 msgid "player"
 msgid_plural "players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pelaaja"
+msgstr[1] "pelaajaa"
 
 #: ../../src/wui/game_main_menu_save_game.cc:251
 msgid ""
@@ -3352,7 +3370,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:255
 #: ../../src/wui/game_main_menu_save_game.cc:267
 msgid "Save Game Error!"
-msgstr ""
+msgstr "Pelitallennusvirhe"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
@@ -3366,7 +3384,7 @@ msgstr "Oletko varma, että haluat poistaa tiedoston %s?"
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Messages: Inbox"
-msgstr ""
+msgstr "Saapuneet viestit"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
@@ -3416,7 +3434,7 @@ msgstr "keskitä iso karttanäkymä paikkaan"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Messages: Archive"
-msgstr ""
+msgstr "Viestiarkisto"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"
@@ -3512,20 +3530,20 @@ msgstr "Voitit!"
 msgid "You lost."
 msgstr "Sinä hävisit"
 
-#: ../../src/wui/game_summary.cc:187
+#: ../../src/wui/game_summary.cc:188
 #, c-format
 msgid "%s won!"
 msgstr "%s voitti!"
 
-#: ../../src/wui/game_summary.cc:191
+#: ../../src/wui/game_summary.cc:192
 msgid "Team %|1$u| won!"
 msgstr "Joukkue %|1$u| voitti!"
 
-#: ../../src/wui/game_summary.cc:245
+#: ../../src/wui/game_summary.cc:246
 msgid "Score"
 msgstr "Arvosana"
 
-#: ../../src/wui/game_summary.cc:254
+#: ../../src/wui/game_summary.cc:255
 msgid "Player info"
 msgstr "Pelaajan tiedot"
 
@@ -3576,18 +3594,18 @@ msgstr "Menetetyt siviilirakennukset"
 msgid "Military"
 msgstr "Armeija"
 
-#: ../../src/wui/interactive_base.cc:318
+#: ../../src/wui/interactive_base.cc:324
 msgid "PAUSE"
 msgstr "PYSÄYTETTY"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_base.cc:338
+#: ../../src/wui/interactive_base.cc:344
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
 # TODO: trans-comment! controller?
-#: ../../src/wui/interactive_base.cc:345
+#: ../../src/wui/interactive_base.cc:351
 msgid "NO GAME CONTROLLER"
 msgstr "EI PELIKONTROLLERIA"
 
@@ -3597,11 +3615,11 @@ msgid "Statistics"
 msgstr "Tilastot"
 
 #: ../../src/wui/interactive_player.cc:122
-#: ../../src/wui/interactive_player.cc:285
+#: ../../src/wui/interactive_player.cc:260
 msgid "Messages"
 msgstr "Viestit"
 
-#: ../../src/wui/interactive_player.cc:293
+#: ../../src/wui/interactive_player.cc:268
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -3761,8 +3779,8 @@ msgstr "peli"
 #: ../../src/wui/productionsitewindow.cc:109
 msgid "Worker"
 msgid_plural "Workers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Työläinen"
+msgstr[1] "Työläiset"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"
@@ -3852,26 +3870,25 @@ msgstr "Suurenna kapasiteettia"
 msgid "Capacity"
 msgstr "Kapasiteetti"
 
-#: ../../src/wui/soldierlist.cc:390 ../../src/wui/soldierlist.cc:404
-#: ../../src/wui/soldierlist.cc:472
+#: ../../src/wui/soldierlist.cc:391 ../../src/wui/soldierlist.cc:405
+#: ../../src/wui/soldierlist.cc:473
 msgid "Click soldier to send away"
 msgstr "Lähetä sotilas pois napsauttamalla sotilasta"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/soldierlist.cc:406
+#: ../../src/wui/soldierlist.cc:407
 msgid "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:414
+#: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Rookies"
 msgstr "Suosi alokkaita"
 
-#: ../../src/wui/soldierlist.cc:416
+#: ../../src/wui/soldierlist.cc:417
 msgid "Prefer Heroes"
 msgstr "Suosi ammattisotilaita"
 
-#. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/soldierlist.cc:489
+#: ../../src/wui/soldierlist.cc:478
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr ""
@@ -3922,7 +3939,7 @@ msgstr "Kulutus"
 
 #: ../../src/wui/ware_statistics_menu.cc:199
 msgid "Economy Health"
-msgstr ""
+msgstr "Talouden kunto"
 
 #: ../../src/wui/warehousewindow.cc:138
 msgid "Normal policy"

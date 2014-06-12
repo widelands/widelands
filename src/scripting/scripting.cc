@@ -19,6 +19,7 @@
 
 #include "scripting/scripting.h"
 
+#include <memory>
 #include <stdexcept>
 #include <string>
 
