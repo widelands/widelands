@@ -95,7 +95,7 @@ function(run_codecheck NAME SRC)
         -DSRC=${ABSOLUTE_SRC}
         -DOUTPUT_FILE=${OUTPUT_FILE}
         -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}
-        -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
+        -P ${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.cmake
       DEPENDS ${ABSOLUTE_SRC}
       COMMENT "Checking ${SRC} with CodeCheck"
     )
