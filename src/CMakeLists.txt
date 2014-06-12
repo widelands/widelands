@@ -15,14 +15,12 @@ macro(_common_compile_tasks)
   endforeach(SRC)
 
   if(ARG_USES_MINIZIP)
-    # TODO(sirver): always use the one we bundle and never search for a system
-    # one.
-    if(NOT MINIZIP_FOUND)
-      target_link_libraries(${NAME} wl_minizip)
-    else(NOT MINIZIP_FOUND)
-      target_link_libraries(${NAME} ${MINIZIP_LIBRARY})
-    endif(NOT MINIZIP_FOUND)
+    target_link_libraries(${NAME} wl_minizip)
   endif(ARG_USES_MINIZIP)
+
+  foreach(DEPENDENCY ${ARG_DEPENDS})
+    target_link_libraries(${NAME} ${DEPENDENCY})
+  endforeach(DEPENDENCY)
 endmacro(_common_compile_tasks)
 
 macro(_parse_common_args ARGS)
@@ -48,10 +46,6 @@ function(wl_library NAME)
   )
 
   _common_compile_tasks()
-
-  foreach(DEPENDENCY ${ARG_DEPENDS})
-    target_link_libraries(${NAME} ${DEPENDENCY})
-  endforeach(DEPENDENCY)
 endfunction(wl_library)
 
 function(wl_test NAME)
@@ -60,9 +54,9 @@ function(wl_test NAME)
   add_executable(${NAME} ${ARG_SRCS})
 
   # Tests need to link with SDL library without main.
-  set(ARG_DEPENDENCIES ${SDL_LIBRARY}
-    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} ${ARG_DEPENDS})
-  list(REMOVE_ITEM ARG_DEPENDENCIES  ${SDLMAIN_LIBRARY})
+  set(ARG_DEPENDS ${ARG_DEPENDS} ${SDL_LIBRARY}
+    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+  list(REMOVE_ITEM ARG_DEPENDS ${SDLMAIN_LIBRARY})
 
   _common_compile_tasks()
 
@@ -879,12 +873,8 @@ add_library(widelands_ball_of_mud STATIC
 )
 
 # TODO(sirver): add a third_party directory and put stuff like minizip, eris in there.
-if (MINIZIP_FOUND)
-  target_link_libraries(widelands_ball_of_mud ${MINIZIP_LIBRARY})
-else ()
-  add_subdirectory(minizip)
-  target_link_libraries(widelands_ball_of_mud wl_minizip)
-endif ()
+add_subdirectory(minizip)
+target_link_libraries(widelands_ball_of_mud wl_minizip)
 
 target_link_libraries(widelands_all base_i18n)
 target_link_libraries(widelands_all eris)
