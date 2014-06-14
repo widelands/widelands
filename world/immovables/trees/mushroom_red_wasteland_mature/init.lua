@@ -10,10 +10,10 @@ world:new_immovable_type{
       program = {
          "animate=idle 27000",
          "remove=10",
-         "seed=birch_wasteland_sapling",
+         "seed=mushroom_red_wasteland_sapling",
          "animate=idle 29000",
          "remove=10",
-         "grow=birch_wasteland_old",
+         "grow=mushroom_red_wasteland_old",
       },
    },
    animations = {

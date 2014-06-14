@@ -10,7 +10,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 53000",
          "remove=19",
-         "grow=maple_wasteland_mature",
+         "grow=umbrella_green_wasteland_mature",
       },
    },
    animations = {

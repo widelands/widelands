@@ -10,7 +10,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 1050000",
          "transform=deadtree2 32",
-         "seed=aspen_wasteland_sapling",
+         "seed=umbrella_red_wasteland_sapling",
       },
       fall = {
          "remove=",
