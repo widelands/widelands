@@ -22,7 +22,6 @@
 #include <typeinfo>
 
 #include <SDL_main.h>
-#include <config.h>
 #ifndef _WIN32
 #include <fcntl.h>
 #include <syslog.h>
@@ -31,6 +30,7 @@
 
 #include "base/wexception.h"
 #include "build_info.h"
+#include "config.h"
 #include "wlapplication.h"
 
 using std::cout;

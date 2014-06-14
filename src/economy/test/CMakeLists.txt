@@ -5,5 +5,5 @@ wl_test(test_economy
     ./test_road.cc
     ./test_routing.cc
   DEPENDS
-    widelands_all
+    widelands_ball_of_mud
 )

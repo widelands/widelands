@@ -23,9 +23,9 @@
 #include <memory>
 
 #include <boost/format.hpp>
-#include <config.h>
 
 #include "base/wexception.h"
+#include "config.h"
 #include "container_iterate.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"

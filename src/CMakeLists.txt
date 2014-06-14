@@ -11,7 +11,7 @@ add_custom_target(wl_tests)
 
 macro(_parse_common_args ARGS)
   # TODO(sirver): add OPTIONS for the other external libraries we use
-  set(OPTIONS THIRD_PARTY USES_ZLIB)
+  set(OPTIONS THIRD_PARTY C_LIBRARY USES_BOOST_REGEX USES_ZLIB WIN32)
   set(ONE_VALUE_ARG )
   set(MULTI_VALUE_ARGS SRCS DEPENDS)
   cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
@@ -20,18 +20,42 @@ macro(_parse_common_args ARGS)
 endmacro(_parse_common_args)
 
 macro(_common_compile_tasks)
-  # TODO(sirver): Disable all warnings for third_party targets, but keep debug
-  # and optimization settings.
-  if(NOT ARG_THIRD_PARTY)
+  if (NOT ARG_C_LIBRARY)
+    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_GENERIC_CXX_FLAGS}")
+  endif()
+
+  set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_OPTIMIZE_FLAGS} ${WL_DEBUG_FLAGS}")
+
+  if(ARG_THIRD_PARTY)
+    # Disable all warings for third_party.
+    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -w")
+  else()
     foreach(SRC ${ARG_SRCS})
       run_codecheck(${NAME} ${SRC})
     endforeach(SRC)
+
+    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_COMPILE_WARNING_FLAGS}")
+  endif()
+
+  set_target_properties(${NAME} PROPERTIES COMPILE_FLAGS ${TARGET_COMPILE_FLAGS})
+
+  if(NOT ARG_THIRD_PARTY)
+    # src/ is the base for all of our includes. The binary one is for generated files.
+    target_include_directories(${NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src)
+
+    # Boost is practically the standard library, so we always add a search path
+    # to include it easily. Except for third party.
+    target_include_directories(${NAME} SYSTEM INTERFACE ${Boost_INCLUDE_DIR})
   endif()
 
   if(ARG_USES_ZLIB)
     target_include_directories(${NAME} SYSTEM INTERFACE ${ZLIB_INCLUDE_DIRS})
     target_link_libraries(${NAME} ${ZLIB_LIBRARY})
-  endif(ARG_USES_ZLIB)
+  endif()
+
+  if (ARG_USES_BOOST_REGEX)
+    target_link_libraries(${NAME} ${Boost_LIBRARIES})
+  endif()
 
   foreach(DEPENDENCY ${ARG_DEPENDS})
     target_link_libraries(${NAME} ${DEPENDENCY})
@@ -53,12 +77,35 @@ function(wl_library NAME)
   )
 
   _common_compile_tasks()
-endfunction(wl_library)
+endfunction()
+
+function(wl_binary NAME)
+  _parse_common_args("${ARGN}")
+
+  if (ARG_WIN32)
+    add_executable(${NAME}
+      WIN32
+      ${ARG_SRCS}
+    )
+  else()
+    add_executable(${NAME}
+      ${ARG_SRCS}
+    )
+  endif()
+
+  _common_compile_tasks()
+endfunction()
 
 function(wl_test NAME)
   _parse_common_args("${ARGN}")
 
   add_executable(${NAME} ${ARG_SRCS})
+
+  # If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
+  string(REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+  if (NOT BOOST_STATIC_UNIT_TEST_LIB)
+    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -DBOOST_TEST_DYN_LINK")
+  endif()
 
   # Tests need to link with SDL library without main.
   set(ARG_DEPENDS ${ARG_DEPENDS} ${SDL_LIBRARY}
@@ -830,17 +877,30 @@ if (WIN32)
 			-o${WIN32_ICON_O}
 			-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
   )
-  add_executable (widelands WIN32 main.cc build_info.cc ${WIN32_ICON_O})
+  wl_binary(
+    widelands
+    WIN32
+    SRCS
+      main.cc
+      ${WIN32_ICON_O}
+    DEPENDS
+      widelands_ball_of_mud
+      build_info
+      # TODO(sirver): USE_SDL
+      ${SDL_LIBRARY}
+  )
 else()
-  add_executable (widelands main.cc build_info.cc)
+  wl_binary(
+    widelands
+    SRCS
+      main.cc
+    DEPENDS
+      widelands_ball_of_mud
+      build_info
+      # TODO(sirver): USE_SDL
+      ${SDL_LIBRARY}
+  )
 endif()
-
-add_library (widelands_all STATIC ${WL_SRCS})
-# TODO: This will ultimately be dealt with when the sources in equestions are passed into wl_library
-# but in the meantime we pass in the remainder here to check the rest of the code.
-foreach(SRC ${WL_SRCS})
-  run_codecheck(widelands_all ${SRC})
-endforeach(SRC)
 
 add_subdirectory(base)
 add_subdirectory(economy)
@@ -854,39 +914,38 @@ add_subdirectory(third_party)
 #in all directions. Ideally this core shouldn't exist or at least
 #be a limited set of header files needed to boostrap the other
 #parts. For now it is absolutely everything to make things build :(
-add_library(widelands_ball_of_mud STATIC
-  ${WL_SRCS}
+wl_library(widelands_ball_of_mud
+  SRCS
+    ${WL_SRCS}
+  DEPENDS
+    base_i18n
+    third_party_eris
+    io_dedicated_log
+    io_filesystem
+    profile
+    sound
+    # TODO(sirver): add USES_* for each of these
+    ${SDLIMAGE_LIBRARY}
+    ${SDLMIXER_LIBRARY}
+    ${SDLNET_LIBRARY}
+    ${SDLTTF_LIBRARY}
+    ${SDLGFX_LIBRARY}
+    ${PNG_LIBRARY}
+    ${OPENGL_gl_LIBRARY}
+    ${GLEW_LIBRARY}
 )
 
-target_link_libraries(widelands_all base_i18n)
-target_link_libraries(widelands_all third_party_eris)
-target_link_libraries(widelands_all io_dedicated_log)
-target_link_libraries(widelands_all io_filesystem)
-target_link_libraries(widelands_all profile)
-target_link_libraries(widelands_all sound)
-target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
-target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
-target_link_libraries(widelands_all ${SDLNET_LIBRARY})
-target_link_libraries(widelands_all ${SDLTTF_LIBRARY})
-target_link_libraries(widelands_all ${SDLGFX_LIBRARY})
-target_link_libraries(widelands_all ${PNG_LIBRARY})
-target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
-target_link_libraries(widelands_all ${GLEW_LIBRARY})
-target_link_libraries(widelands_all ${Boost_LIBRARIES})
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
-  target_link_libraries(widelands_all ${EXECINFO_LIBRARY})
+  target_link_libraries(widelands_ball_of_mud ${EXECINFO_LIBRARY})
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
-  target_link_libraries(widelands_all ${INTL_LIBRARY})
+  target_link_libraries(widelands_ball_of_mud ${INTL_LIBRARY})
 endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
-target_link_libraries(widelands widelands_all)
-target_link_libraries(widelands ${SDL_LIBRARY})
-
 if (WIN32)
-  target_link_libraries(widelands_all wsock32)
+  target_link_libraries(widelands_ball_of_mud wsock32)
 endif (WIN32)
 
 install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

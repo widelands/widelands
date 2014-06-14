@@ -1,12 +1,13 @@
 wl_library(third_party_minizip
   THIRD_PARTY
-  USES_ZLIB
   SRCS
     minizip/unzip.cc
+  USES_ZLIB
 )
 
 wl_library(third_party_eris
   THIRD_PARTY
+  C_LIBRARY
   SRCS
     eris/eris.c
     eris/eris.h

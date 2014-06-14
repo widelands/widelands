@@ -997,7 +997,7 @@ inline static void write_unseen_immovable
 	Map_Object_Descr const * const map_object_descr = map_object_data->map_object_descr;
 	const Player::Constructionsite_Information & csi = map_object_data->csi;
 	assert(not Road::IsRoadDescr(map_object_descr));
-	uint8_t immovable_kind;
+	uint8_t immovable_kind = 255;
 
 	if (not map_object_descr)
 		immovable_kind = 0;

@@ -53,13 +53,7 @@ if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   endif()
 endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
-set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
-
-# we only include Boost Headers to the main executable, no libraries
-# unit_test_framework is for testing only
-message(STATUS "Enabled unit tests")
 set (Boost_USE_STATIC_LIBS  OFF)
-set (Boost_FIND_COMPONENTS unit_test_framework)
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
 find_package(Boost 1.48
@@ -67,12 +61,6 @@ find_package(Boost 1.48
     unit_test_framework
     regex
   REQUIRED)
-
-# If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
-string( REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-if (NOT BOOST_STATIC_UNIT_TEST_LIB)
-  add_definitions(-DBOOST_TEST_DYN_LINK)
-endif (NOT BOOST_STATIC_UNIT_TEST_LIB)
 
 include(CTest)
 enable_testing()
@@ -86,81 +74,73 @@ add_custom_target(_run_all_tests ALL
   DEPENDS wl_tests
 )
 
-#TODO: (code review):
-#And the last additional option passed to the compiler seem to have been
-#reversed and enabled by default, so it shouldn't be necessary. Compare
-#https://gcc.gnu.org/onlinedocs/gcc-4.5.0/gcc/Language-Independent-Options.html
-#https://gcc.gnu.org/onlinedocs/gcc-4.6.0/gcc/Language-Independent-Options.html
+include(CheckCXXCompilerFlag)
+function(_add_flag_if_supported VAR_NAME FLAG TEST_NAME)
+  CHECK_CXX_COMPILER_FLAG(${FLAG} ${TEST_NAME})
+  if(${TEST_NAME})
+    if (${VAR_NAME})
+      set(${VAR_NAME} "${${VAR_NAME}} ${FLAG}" PARENT_SCOPE)
+    else()
+      set(${VAR_NAME} "${FLAG}" PARENT_SCOPE)
+    endif()
+  endif()
+endfunction()
 
-set (PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR "-isystem ${Boost_INCLUDE_DIR}")
-set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wall -Wextra")
-set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wformat -Wformat-nonliteral -Wformat-security -Wformat-y2k -Winit-self -Winvalid-pch -Wmissing-include-dirs -Wold-style-cast -Woverlength-strings -Wpacked -Wpointer-arith -Wredundant-decls -Wshadow -Wsign-promo -Wswitch-default -Wundef -Wunused -Wunused-macros")
-set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op -Wsync-nand -Wtrampolines")
-set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
-include(CheckCXXCompilerFlag) #this include should be safe
+_add_flag_if_supported(WL_GENERIC_CXX_FLAGS "-std=c++11" CXX_SUPPORTS_STD_CPP11)
 
-# Enable c++11 features.
-if (WIN32)
-  set (PARAMETER_COMPILERFLAG_CXXSTD "-std=gnu++11")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(WL_DEBUG_FLAGS "-g -DDEBUG")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+  set(WL_OPTIMIZE_FLAGS "-O3")
+  set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
+elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+  set(WL_OPTIMIZE_FLAGS "-O3")
+  set(WL_DEBUG_FLAGS "-g -DNDEBUG -DNOPARACHUTE")
 else()
-  set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++11")
+  message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
 
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_CXXSTD} Compiler_std_supported)
-IF (Compiler_std_supported)
-  set (WL_COMPILERFLAG_CXXSTD " ${PARAMETER_COMPILERFLAG_CXXSTD}") #the space is on purpose!
-ENDIF (Compiler_std_supported)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wall" CXX_SUPPORTS_WALL)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Weverything" CXX_SUPPORTS_WEVERYTHING)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wpedantic" CXX_SUPPORTS_PEDANTIC)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wdeprecated-declarations" CXX_SUPPORTS_WDEPRECATED_DECLARATIONS)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wextra" CXX_SUPPORTS_WEXTRA)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wformat" CXX_SUPPORTS_WFORMAT)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wformat-nonliteral" CXX_SUPPORTS_WFORMAT_NONLITERAL)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wformat-security" CXX_SUPPORTS_WFORMAT_SECURITY)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wformat-y2k" CXX_SUPPORTS_WFORMAT_Y2K)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Winit-self" CXX_SUPPORTS_WINIT_SELF)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Winvalid-pch" CXX_SUPPORTS_WINVALID_PCH)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wlogical-op" CXX_SUPPORTS_WLOGICAL_OP)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wmissing-include-dirs" CXX_SUPPORTS_WMISSING_INCLUDE_DIRS)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-undef" CXX_SUPPORTS_WNO_UNDEF)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wold-style-cast" CXX_SUPPORTS_WOLD_STYLE_CAST)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Woverlength-strings" CXX_SUPPORTS_WOVERLENGTH_STRINGS)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wpacked" CXX_SUPPORTS_WPACKED)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wpointer-arith" CXX_SUPPORTS_WPOINTER_ARITH)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wredundant-decls" CXX_SUPPORTS_WREDUNDANT_DECLS)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wshadow" CXX_SUPPORTS_WSHADOW)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wsign-promo" CXX_SUPPORTS_WSIGN_PROMO)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wswitch-default" CXX_SUPPORTS_WSWITCH_DEFAULT)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wsync-nand" CXX_SUPPORTS_WSYNC_NAND)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wtrampolines" CXX_SUPPORTS_WTRAMPOLINES)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wundef" CXX_SUPPORTS_WUNDEF)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wunused" CXX_SUPPORTS_WUNUSED)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wunused-macros" CXX_SUPPORTS_WUNUSED_MACROS)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-fdiagnostics-show-option" CXX_SUPPORTS_FDIAGNOSTICS_SHOW_OPTION)
 
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR} Compiler_boost_include_dir_supported)
-IF (Compiler_boost_include_dir_supported)
-  IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set (WL_COMPILERFLAG_BOOST_INCLUDE_DIR " ${PARAMETER_COMPILERFLAG_BOOST_INCLUDE_DIR}") #the space is on purpose!
-  ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    include_directories(SYSTEM ${Boost_INCLUDE_DIR})
-  ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-ENDIF()
+# Warnings that should rather be errors.
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Werror=uninitialized" CXX_SUPPORTS_WERROR_UNINITIALIZED)
 
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)
-IF (Compiler_generic_warnings_supported)
-  set (WL_COMPILERFLAG_GENERICWARNINGS " ${PARAMETER_COMPILERFLAG_GENERICWARNINGS}") #the space is on purpose!
-ENDIF (Compiler_generic_warnings_supported)
-
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_EXTRAWARNINGS} Compiler_extra_warnings_supported)
-IF (Compiler_extra_warnings_supported)
-  set (WL_COMPILERFLAG_EXTRAWARNINGS " ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}") #the space is on purpose!
-ELSE (Compiler_extra_warnings_supported)
-  message("Warning: couldn't set the following compiler options: ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}. Most likely these options are available in a newer release of your compiler.")
-ENDIF (Compiler_extra_warnings_supported)
-
-CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)
-IF (Compiler_gcc_warnings_supported)
-  set (WL_COMPILERFLAG_GCCWARNINGS " ${PARAMETER_COMPILERFLAG_GCCWARNINGS}") #the space is on purpose!
-ELSE (Compiler_gcc_warnings_supported)
-  message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM or Visual Studio.")
-ENDIF (Compiler_gcc_warnings_supported)
-
-# CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "${WL_COMPILERFLAG_CXXSTD} -g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_BOOST_INCLUDE_DIR}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-set (WL_COMPILERFLAG_OPTIMIZATIONS "-O3")
-
-set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_CXXSTD} ${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+# Disabled Clang warnings that come from -Weverything.
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-padded" CXX_SUPPORTS_WNO_PADDED)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-c++98-compat" CXX_SUPPORTS_WNO_CPP98_COMPAT)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-sign-conversion" CXX_SUPPORTS_WNO_SIGN_CONVERSION)
 
 IF (WIN32)
   set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
   message (STATUS "Enabled large address awareness on mingw32")
 endif (WIN32)
-
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message (STATUS "Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
-ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message (STATUS "Using compiler flags: ${CMAKE_CXX_FLAGS_RELEASE}")
-ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-
-if (DEFINED WL_3RDPARTY_DIR)
-  set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
-  set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
-endif (DEFINED WL_3RDPARTY_DIR)
 
 # on BSD this must be explicitly linked
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
@@ -209,19 +189,20 @@ install (
   COMPONENT CoreVersionFile
 )
 
-include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
-
 include(CheckIncludeFile)
 
 find_package(PNG REQUIRED)
+# TODO(sirver): Do not globally include for all targets.
 include_directories(${PNG_INCLUDE_DIR})
 
 find_package(ZLIB REQUIRED)
+# TODO(sirver): Do not globally include for all targets.
 include_directories(${ZLIB_INCLUDE_DIR})
 
 if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_package(intl REQUIRED)
+    # TODO(sirver): Do not globally include for all targets.
     include_directories(${INTL_INCLUDE_DIR})
     endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
 endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
@@ -233,18 +214,23 @@ find_package(Gettext REQUIRED)
 find_package(ZLIB REQUIRED)
 
 find_package(SDL REQUIRED)
+# TODO(sirver): Do not globally include for all targets.
 include_directories(${SDL_INCLUDE_DIR})
 
 find_package(SDL_image REQUIRED)
+# TODO(sirver): Do not globally include for all targets.
 include_directories(${SDLIMAGE_INCLUDE_DIR})
 
 find_package(SDL_mixer REQUIRED)
+# TODO(sirver): Do not globally include for all targets.
 include_directories(${SDLMIXER_INCLUDE_DIR})
 
 find_package(SDL_net REQUIRED)
+# TODO(sirver): Do not globally include for all targets.
 include_directories(${SDLNET_INCLUDE_DIR})
 
 find_package(SDL_ttf REQUIRED)
+# TODO(sirver): Do not globally include for all targets.
 include_directories(${SDLTTF_INCLUDE_DIR})
 
 find_package(SDL_gfx REQUIRED)

@@ -77,7 +77,7 @@ m_click_recursion_protect(false)
 	Point pos;
 	uint32_t cur_x = immovables_in_row;
 
-	UI::Box * box;
+	UI::Box * box = nullptr;
 	for (int i = 0; i < nr_immovables; ++cur_x, ++i) {
 		if (cur_x == immovables_in_row) {
 			cur_x = 0;

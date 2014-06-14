@@ -3,6 +3,6 @@ wl_test(test_scripting
    ./scripting_test_main.cc
    ./test_luna.cc
  DEPENDS
-   widelands_all
+   widelands_ball_of_mud
    third_party_eris
 )

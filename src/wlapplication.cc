@@ -33,7 +33,6 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <config.h>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #endif
@@ -46,6 +45,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "computer_player.h"
+#include "config.h"
 #include "editor/editorinteractive.h"
 #include "gamesettings.h"
 #include "graphic/font_handler.h"

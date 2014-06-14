@@ -20,9 +20,9 @@
 #include "logic/production_program.h"
 
 #include <boost/format.hpp>
-#include <config.h>
 #include <libintl.h>
 
+#include "config.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/wares_queue.h"

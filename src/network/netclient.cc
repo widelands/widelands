@@ -23,12 +23,12 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
-#include <config.h>
 
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "config.h"
 #include "game_io/game_loader.h"
 #include "helper.h"
 #include "io/fileread.h"

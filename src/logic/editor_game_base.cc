@@ -527,7 +527,7 @@ void Editor_Game_Base::set_road
 	f.field->set_road(direction, roadtype);
 
 	FCoords neighbour;
-	uint8_t mask;
+	uint8_t mask = 0;
 	switch (direction) {
 	case Road_SouthWest:
 		neighbour = m.bl_n(f);
