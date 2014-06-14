@@ -26,6 +26,7 @@
 #include <stdint.h>
 
 #include "logic/queue_cmd_ids.h"
+#include <stdint.h>
 
 class FileRead;
 class FileWrite;
@@ -83,7 +84,7 @@ class Game;
  * the same for all parallel simulation.
  */
 struct Command {
-	Command (int32_t const _duetime) : m_duetime(_duetime) {}
+	Command ( const int32_t _duetime) : m_duetime(_duetime) {}
 	virtual ~Command ();
 
 	virtual void execute (Game &) = 0;

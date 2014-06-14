@@ -348,14 +348,6 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	void * data = nullptr;
 
 	try {
-		//debug info
-		//printf("------------------------------------------\n");
-		//printf("RealFSImpl::Load():\n");
-		//printf("     fname       = %s\n", fname.c_str());
-		//printf("     m_directory = %s\n", m_directory.c_str());
-		//printf("     fullname    = %s\n", fullname.c_str());
-		//printf("------------------------------------------\n");
-
 		file = fopen(fullname.c_str(), "rb");
 		if (not file)
 			throw File_error("RealFSImpl::Load", fullname.c_str());
