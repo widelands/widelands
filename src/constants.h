@@ -88,6 +88,7 @@
 #define UI_FONT_CLR_BAD_HEX       "bb0000"
 #define UI_FONT_CLR_OK_HEX        "ffe11e"
 #define UI_FONT_CLR_GOOD_HEX      "00bb00"
+#define UI_FONT_CLR_IDLE_HEX      "0090ff"
 //@}
 
 /** \name Text colors
