@@ -93,9 +93,6 @@ const std::string & ResourceDescription::get_editor_pic
 		}
 	}
 
-	//noLog("Resource(%s): Editor_Pic '%s' for amount = %u\n",
-	//name_.c_str(), editor_pictures_[bestmatch].picname.c_str(), amount);
-
 	return editor_pictures_[bestmatch].picname;
 }
 

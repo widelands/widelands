@@ -804,9 +804,9 @@ void Profile::read
 
 					if (translate_line && *tail) {
 						data += i18n::translate(tail);
-					 } else {
+					} else {
 						data += tail;
-					 }
+					}
 					if (s && ! reading_multiline) {
 						s->create_val_duplicate(key, data.c_str());
 						data.clear();

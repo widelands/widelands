@@ -40,20 +40,20 @@ public:
 
 	ResourceDescription(const LuaTable& table);
 
-	// Returns the in engine name of this resource.
+	/// Returns the in engine name of this resource.
 	const std::string& name() const;
 
-	// Returns the name of this resource for users. Usually translated.
+	/// Returns the name of this resource for users. Usually translated.
 	const std::string& descname() const;
 
-	// Returns if this resource is detectable by a geologist.
+	/// Returns if this resource is detectable by a geologist.
 	bool detectable() const;
 
-	// Returns the maximum amount that can be in a field for this resource.
+	/// Returns the maximum amount that can be in a field for this resource.
 	int32_t max_amount() const;
 
-	// Returns the path to the image that should be used in the editor to
-	// represent an 'amount' of this resource.
+	/// Returns the path to the image that should be used in the editor to
+	/// represent an 'amount' of this resource.
 	const std::string& get_editor_pic(uint32_t amount) const;
 
 private:

@@ -65,7 +65,7 @@ public:
 		return m_buildcost;
 	}
 
-	// The tribe in which this worker is defined.
+	/// The tribe in which this worker is defined.
 	const Tribe_Descr & tribe() const;
 
 	std::string helptext() const {return m_helptext;}

@@ -23,8 +23,8 @@
 
 namespace  {
 
-// If the map is newish and there is no old world to convert names from, we use
-// this one that simply returns the looked up values.
+/// If the map is newish and there is no old world to convert names from, we use
+/// this one that simply returns the looked up values.
 class PassthroughOneWorldLegacyLookupTable : public OneWorldLegacyLookupTable {
 public:
 	// Implements OneWorldLegacyLookupTable.

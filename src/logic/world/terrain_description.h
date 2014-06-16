@@ -48,52 +48,52 @@ public:
 	TerrainDescription(const LuaTable& table, const World&);
 	~TerrainDescription();
 
-	// The name used internally for this terrain.
+	/// The name used internally for this terrain.
 	const std::string& name() const;
 
-	// The name showed to users of Widelands. Usually translated.
+	/// The name showed to users of Widelands. Usually translated.
 	const std::string& descname() const;
 
-	// Returns the texture index for this terrain.
+	/// Returns the texture index for this terrain.
 	uint32_t get_texture() const;
 
-	// Returns the type of terrain this is (water, walkable, and so on).
+	/// Returns the type of terrain this is (water, walkable, and so on).
 	Type get_is() const;
 
-	// Returns the valid resource with the given index.
+	/// Returns the valid resource with the given index.
 	Resource_Index get_valid_resource(uint8_t index) const;
 
-	// Returns the number of valid resources.
+	/// Returns the number of valid resources.
 	int get_num_valid_resources() const;
 
-	// Returns true if this resource can be found in this terrain type.
+	/// Returns true if this resource can be found in this terrain type.
 	bool is_resource_valid(int32_t res) const;
 
-	// Returns the resource index that can by default always be found in this
-	// terrain.
+	/// Returns the resource index that can by default always be found in this
+	/// terrain.
 	int8_t get_default_resource() const;
 
-	// Returns the default amount of resources you can find in this terrain.
+	/// Returns the default amount of resources you can find in this terrain.
 	int32_t get_default_resource_amount() const;
 
-	// Returns the dither layer, i.e. the information in which zlayer this
-	// texture should be drawn.
+	/// Returns the dither layer, i.e. the information in which zlayer this
+	/// texture should be drawn.
 	int32_t dither_layer() const;
 
-	// Returns the editor category.
+	/// Returns the editor category.
 	const EditorCategory& editor_category() const;
 
 private:
 	const std::string name_;
 	const std::string descname_;
-	const EditorCategory* editor_category_;  // not owned.
+	const EditorCategory* editor_category_;  ///< not owned.
 	Type is_;
 	std::vector<uint8_t> valid_resources_;
 	int8_t default_resource_index_;
 	int32_t default_resource_amount_;
 	const std::vector<std::string> texture_paths_;
 	int32_t dither_layer_;
-	uint32_t texture_;  //  renderer's texture
+	uint32_t texture_;  ///< renderer's texture
 };
 
 }  // namespace Widelands

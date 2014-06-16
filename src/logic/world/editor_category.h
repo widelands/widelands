@@ -29,19 +29,19 @@ class LuaTable;
 
 namespace Widelands {
 
-// Represents a category for grouping items in the Editor, so purely a UI
-// distinction and not a logical one.
+/// Represents a category for grouping items in the Editor, so purely a UI
+/// distinction and not a logical one.
 class EditorCategory : boost::noncopyable {
 public:
 	EditorCategory(const LuaTable& table);
 
-	// Internal name.
+	/// Internal name.
 	const std::string& name() const;
 
-	// User facing (translated) name.
+	/// User facing (translated) name.
 	const std::string& descname() const;
 
-	// The menu image for the category.
+	/// The menu image for the category.
 	const Image* picture() const;
 
 private:
@@ -53,3 +53,4 @@ private:
 }  // namespace Widelands
 
 #endif /* end of include guard: EDITOR_CATEGORY_H */
+

@@ -331,7 +331,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 	if (getNumAreas(MapGenAreaInfo::atWater) < 1)
 		throw game_data_error("missing a water area");
 
-	if (getNumAreas(MapGenAreaInfo::atWater) < 1)
+	if (getNumAreas(MapGenAreaInfo::atWater) > 3)
 		throw game_data_error("too many water areas (>3)");
 
 	if (getNumAreas(MapGenAreaInfo::atLand) < 1)
@@ -349,7 +349,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 	if (getNumAreas(MapGenAreaInfo::atMountains) < 1)
 		throw game_data_error("missing a mountain area");
 
-	if (getNumAreas(MapGenAreaInfo::atMountains) < 1)
+	if (getNumAreas(MapGenAreaInfo::atMountains) > 1)
 		throw game_data_error("too many mountain areas (>1)");
 
 	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterOcean) < 1)

@@ -30,16 +30,16 @@ class OneWorldLegacyLookupTable : boost::noncopyable {
 public:
 	virtual ~OneWorldLegacyLookupTable();
 
-	// Looks up the new name for the 'resource'.
+	/// Looks up the new name for the 'resource'.
 	virtual std::string lookup_resource(const std::string& resource) const = 0;
 
-	// Looks up the new name for the 'terrain'.
+	/// Looks up the new name for the 'terrain'.
 	virtual std::string lookup_terrain(const std::string& terrain) const = 0;
 
-	// Looks up the new name for the 'critter'.
+	/// Looks up the new name for the 'critter'.
 	virtual std::string lookup_critter(const std::string& critter) const = 0;
 
-	// Looks up the new name for the 'immovable'.
+	/// Looks up the new name for the 'immovable'.
 	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
 };
 
@@ -47,3 +47,4 @@ std::unique_ptr<OneWorldLegacyLookupTable>
 create_one_world_legacy_lookup_table(const std::string& old_world);
 
 #endif /* end of include guard: ONE_WORLD_LEGACY_CONVERSION_H */
+

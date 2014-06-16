@@ -34,8 +34,8 @@ class TerrainDescription;
 struct Critter_Bob_Descr;
 struct Immovable_Descr;
 
-// This is the in memory descriptions of the world and provides access to
-// terrains, immovables and resources.
+/// This is the in memory descriptions of the world and provides access to
+/// terrains, immovables and resources.
 class World : boost::noncopyable {
 public:
 	World();
@@ -62,23 +62,23 @@ public:
 	int32_t get_nr_resources() const;
 	int32_t safe_resource_index(const char* const warename) const;
 
-	// Add this new resource to the world description.
+	/// Add this new resource to the world description.
 	void add_resource_type(const LuaTable& table);
 
-	// Add this new terrain to the world description.
+	/// Add this new terrain to the world description.
 	void add_terrain_type(const LuaTable& table);
 
-	// Add a new critter to the world description.
+	/// Add a new critter to the world description.
 	void add_critter_type(const LuaTable& table);
 
-	// Add a new immovable to the world description.
+	/// Add a new immovable to the world description.
 	void add_immovable_type(const LuaTable& table);
 
-	// Add an editor categories for grouping items in the editor.
+	/// Add an editor categories for grouping items in the editor.
 	void add_editor_terrain_category(const LuaTable& table);
 	void add_editor_immovable_category(const LuaTable& table);
 
-	// Access to the editor categories.
+	/// Access to the editor categories.
 	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
 	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
 

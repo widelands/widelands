@@ -168,7 +168,7 @@ const int BOB_GRASS3 = 0x0f;
 /// This is the work-around.
 ///
 /// Returns a pointer to the (packed) contents of the section. nullptr if the
-//read / failed.
+/// read failed.
 std::unique_ptr<uint8_t[]>
 load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	char buffer[256];
@@ -228,9 +228,9 @@ std::string get_world_name(S2_Map_Loader::WorldType world) {
 	}
 }
 
-// Returns S2 terrain index into (pre one-world) terrain names. Those are then
-// looked up in the legacy conversion code and this gives the Widelands
-// terrain.
+/// Returns S2 terrain index into (pre one-world) terrain names. Those are then
+/// looked up in the legacy conversion code and this gives the Widelands
+/// terrain.
 class TerrainConverter : boost::noncopyable {
 public:
 	TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table);

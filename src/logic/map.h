@@ -164,7 +164,7 @@ public:
 
 	void create_empty_map  // for editor
 	   (const World& world,
-		 uint32_t w = 64,
+	    uint32_t w = 64,
 	    uint32_t h = 64,
 	    char const* name = _("No Name"),
 	    char const* author = _("Unknown"),
