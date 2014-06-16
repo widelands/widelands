@@ -602,7 +602,11 @@ void Worker::informPlayer
 	if (building.name() == "fish_breeders_house")
 		return;
 
-	// TODO "stone" is defined as "granit" in the world
+	// TODO "stone" is defined as "granit" in the world. But this code is
+	// erroneus anyways: it translates immovable attribute stone as resource
+	// granit. Instead, the immovable attributes should be made translatable in
+	// the world or the quarry should define its out of stone message in its
+	// configuartion.
 	if (res_type == "stone") res_type = "granit";
 
 	// Translate the Resource name (if it is defined by the world)
