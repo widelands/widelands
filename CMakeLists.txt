@@ -87,6 +87,7 @@ function(_add_flag_if_supported VAR_NAME FLAG TEST_NAME)
 endfunction()
 
 _add_flag_if_supported(WL_GENERIC_CXX_FLAGS "-std=c++11" CXX_SUPPORTS_STD_CPP11)
+_add_flag_if_supported(WL_GENERIC_CXX_FLAGS "-std=gnu++11" CXX_SUPPORTS_STD_CPP11_GNU)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(WL_DEBUG_FLAGS "-g -DDEBUG")
