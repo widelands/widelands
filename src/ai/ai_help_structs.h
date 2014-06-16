@@ -125,7 +125,7 @@ struct NearFlag {
 		return cost_ > f.cost_;
 	}
 
-	bool operator==(Flag const* const f) const {
+	bool operator == (Flag const* const f) const {
 		return flag == f;
 	}
 };

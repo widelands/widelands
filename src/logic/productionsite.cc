@@ -869,13 +869,13 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 			train_workers(game);
 			//m_result_buffer[0] = '\0';  //changed by TB
 		//}
-		m_crude_percent=m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
+		m_crude_percent = m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
 	case Skipped:
 		m_skipped_programs[program_name] = game.get_gametime();
 		//changed by TB below
-		m_crude_percent=m_crude_percent * 98 / 100;
+		m_crude_percent = m_crude_percent * 98 / 100;
 		//end of changed by TB
 		break;
 	case None:

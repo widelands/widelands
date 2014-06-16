@@ -19,8 +19,9 @@
 
 #include "economy/economy.h"
 
-#include <boost/bind.hpp>
 #include <memory>
+
+#include <boost/bind.hpp>
 
 #include "economy/cmd_call_economy_balance.h"
 #include "economy/flag.h"

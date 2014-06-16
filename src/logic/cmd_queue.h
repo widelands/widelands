@@ -84,7 +84,7 @@ class Game;
  * the same for all parallel simulation.
  */
 struct Command {
-	Command ( const int32_t _duetime) : m_duetime(_duetime) {}
+	Command (const int32_t _duetime) : m_duetime(_duetime) {}
 	virtual ~Command ();
 
 	virtual void execute (Game &) = 0;
