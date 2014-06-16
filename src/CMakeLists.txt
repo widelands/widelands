@@ -106,11 +106,12 @@ function(wl_test NAME)
   if (NOT BOOST_STATIC_UNIT_TEST_LIB)
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -DBOOST_TEST_DYN_LINK")
   endif()
+  target_link_libraries(${NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
   # Tests need to link with SDL library without main.
-  set(ARG_DEPENDS ${ARG_DEPENDS} ${SDL_LIBRARY}
-    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-  list(REMOVE_ITEM ARG_DEPENDS ${SDLMAIN_LIBRARY})
+  set(SDL_LIBRARY_TEMP ${SDL_LIBRARY})
+  list(REMOVE_ITEM SDL_LIBRARY_TEMP ${SDLMAIN_LIBRARY})
+  target_link_libraries(${NAME} ${SDL_LIBRARY_TEMP})
 
   _common_compile_tasks()
 
