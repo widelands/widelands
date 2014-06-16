@@ -100,6 +100,7 @@ else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
 
+# Enable warnings.
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wall" CXX_SUPPORTS_WALL)
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Weverything" CXX_SUPPORTS_WEVERYTHING)
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wpedantic" CXX_SUPPORTS_PEDANTIC)
@@ -129,13 +130,20 @@ _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wunused" CXX_SUPPORTS_WUNUSED)
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wunused-macros" CXX_SUPPORTS_WUNUSED_MACROS)
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-fdiagnostics-show-option" CXX_SUPPORTS_FDIAGNOSTICS_SHOW_OPTION)
 
-# Warnings that should rather be errors.
+# Turn some warnings into errors.
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Werror=uninitialized" CXX_SUPPORTS_WERROR_UNINITIALIZED)
 
-# Disabled Clang warnings that come from -Weverything.
+# Disabled warnings that are overly verbose right now or just do not make sense.
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-padded" CXX_SUPPORTS_WNO_PADDED)
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-c++98-compat" CXX_SUPPORTS_WNO_CPP98_COMPAT)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-c++98-compat-pedantic" CXX_SUPPORTS_WNO_CPP98_COMPAT_PEDANTIC)
 _add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-sign-conversion" CXX_SUPPORTS_WNO_SIGN_CONVERSION)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-conversion" CXX_SUPPORTS_WNO_CONVERSION)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-exit-time-destructors" CXX_SUPPORTS_WNO_EXIT_TIME_DESTRUCTOR)
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-global-destructors" CXX_SUPPORTS_WGLOBAL_DESTRUCTOR)
+
+# TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
+_add_flag_if_supported(WL_COMPILE_WARNING_FLAGS "-Wno-weak-vtables" CXX_SUPPORTS_WNO_WEAK_VTABLES)
 
 IF (WIN32)
   set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
