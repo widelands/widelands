@@ -40,12 +40,10 @@ class Building;
 /*
  * This cares for the data of buildings
  */
-struct Map_Buildingdata_Data_Packet : public Map_Data_Packet {
-	void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &) override
-	;
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &) override
-	;
+class Map_Buildingdata_Data_Packet {
+public:
+	void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&);
+	void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);
 
 private:
 	virtual void read_constructionsite

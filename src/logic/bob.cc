@@ -21,10 +21,11 @@
 
 #include <cstdlib>
 
+#include <stdint.h>
+
 #include "backtrace.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -49,6 +50,12 @@
 
 namespace Widelands {
 
+BobDescr::BobDescr(const std::string& init_name,
+                  const std::string& init_descname,
+                  Tribe_Descr const* tribe)
+   : Map_Object_Descr(init_name, init_descname), owner_tribe_(tribe) {
+}
+
 /**
  * Only tribe bobs have a vision range, since it would be irrelevant
  * for world bobs.
@@ -59,41 +66,14 @@ namespace Widelands {
  */
 uint32_t BobDescr::vision_range() const
 {
-	if (m_owner_tribe) {
+	if (owner_tribe_) {
 		if (upcast(const Ship_Descr, ship, this))
 			return ship->vision_range();
-		return m_owner_tribe->get_bob_vision_range();
+		return owner_tribe_->get_bob_vision_range();
 	}
 
 	return 0;
 }
-
-
-BobDescr::BobDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const tribe)
-	:
-	Map_Object_Descr(_name, _descname),
-	m_owner_tribe(tribe)
-{
-	{ //  global options
-		Section & idle_s = prof.get_safe_section("idle");
-
-		add_animation("idle", g_gr->animations().load(directory, idle_s));
-	}
-
-	// Parse attributes
-	while (Section::Value const * val = global_s.get_next_val("attrib")) {
-		uint32_t const attrib = get_attribute_id(val->get_string());
-
-		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			throw game_data_error("bad attribute \"%s\"", val->get_string());
-
-		add_attribute(attrib);
-	}
-}
-
 
 /**
  * Create a bob of this type

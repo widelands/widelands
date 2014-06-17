@@ -39,12 +39,15 @@ struct Editor_History {
 	Editor_History(UI::Button & undo, UI::Button & redo):
 		m_undo_button(undo), m_redo_button(redo) {};
 
-	uint32_t do_action
-		(Editor_Tool & tool, Editor_Tool::Tool_Index ind, Widelands::Map & map,
-		 Widelands::Node_and_Triangle<> const center,
-		 Editor_Interactive & parent, bool draw = false);
-	uint32_t undo_action();
-	uint32_t redo_action();
+	uint32_t do_action(Editor_Tool& tool,
+	                   Editor_Tool::Tool_Index ind,
+	                   Widelands::Map& map,
+	                   const Widelands::World& world,
+	                   Widelands::Node_and_Triangle<> const center,
+	                   Editor_Interactive& parent,
+	                   bool draw = false);
+	uint32_t undo_action(const Widelands::World& world);
+	uint32_t redo_action(const Widelands::World& world);
 
 	/// Must be called after every change of map, world, or ... to avoid undo errors
 	void reset();
@@ -64,4 +67,3 @@ private:
 
 
 #endif
-

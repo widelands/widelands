@@ -265,10 +265,10 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_inputgrab       .set_state(opt.inputgrab);
 	m_label_music     .set_textstyle(ts_small());
 	m_music           .set_state(opt.music);
-	m_music           .set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_music           .set_enabled(not g_sound_handler.lock_audio_disabling_);
 	m_label_fx        .set_textstyle(ts_small());
 	m_fx              .set_state(opt.fx);
-	m_fx              .set_enabled(not g_sound_handler.m_lock_audio_disabling);
+	m_fx              .set_enabled(not g_sound_handler.lock_audio_disabling_);
 	m_label_maxfps    .set_textstyle(ts_small());
 	m_label_resolution.set_textstyle(ts_small());
 	m_reslist         .set_font(ui_fn(), fs_small());

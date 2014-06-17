@@ -33,6 +33,7 @@
 #include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/world/world.h"
 #include "wexception.h"
 
 #define TRUE_WORDS 4
@@ -352,7 +353,6 @@ const char * Section::get_safe_string(const std::string & name)
 {
 	return get_safe_string(name.c_str());
 }
-
 
 /**
  * Returns the integer value of the given key. Falls back to a default value
@@ -802,11 +802,12 @@ void Profile::read
 							throw wexception("key %s outside section", p);
 					}
 
-					if (translate_line && *tail)
+					if (translate_line && *tail) {
 						data += i18n::translate(tail);
-					else
+					} else {
 						data += tail;
-					if (s && ! reading_multiline) { // error() may or may not throw
+					}
+					if (s && ! reading_multiline) {
 						s->create_val_duplicate(key, data.c_str());
 						data.clear();
 					}

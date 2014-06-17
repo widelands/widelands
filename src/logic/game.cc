@@ -229,10 +229,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	std::string const background = map().get_background();
 	if (background.size() > 0)
 		loaderUI.set_background(background);
-	else
-		loaderUI.set_background(map().get_world_name());
-	loaderUI.step (_("Loading a world"));
-	maploader->load_world();
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
@@ -293,8 +289,6 @@ void Game::init_newgame
 	if (loaderUI) {
 		if (background.size() > 0)
 			loaderUI->set_background(background);
-		else
-			loaderUI->set_background(map().get_world_name());
 		loaderUI->step(_("Configuring players"));
 	}
 	std::vector<PlayerSettings> shared;
@@ -335,6 +329,7 @@ void Game::init_newgame
 	// Check for win_conditions
 	if (!settings.scenario) {
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
+		table->do_not_warn_about_unaccessed_keys();
 		m_win_condition_displayname = table->get_string("name");
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr.release()));
@@ -501,7 +496,7 @@ bool Game::run
 				(map().get_starting_pos(get_ipl()->player_number()));
 
 		// Prepare the map, set default textures
-		map().recalc_default_resources();
+		map().recalc_default_resources(world());
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -647,9 +642,9 @@ void Game::cleanup_for_load()
 	m_state = gs_notrunning;
 
 	Editor_Game_Base::cleanup_for_load();
-	container_iterate_const(std::vector<Tribe_Descr *>, m_tribes, i)
+	container_iterate_const(std::vector<Tribe_Descr *>, tribes_, i)
 		delete *i.current;
-	m_tribes.clear();
+	tribes_.clear();
 	cmdqueue().flush();
 
 	// Statistics
@@ -1033,8 +1028,9 @@ void Game::sample_statistics()
 	// game, call the corresponding Lua function
 	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
+		hook->do_not_warn_about_unaccessed_keys();
 		iterate_players_existing(p, nr_plrs, *this, plr) {
-			std::unique_ptr<LuaCoroutine> cr = hook->get_coroutine("calculator");
+			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
 			cr->push_arg(plr);
 			cr->resume(&custom_statistic[p - 1]);
 		}

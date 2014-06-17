@@ -25,11 +25,11 @@
 
 using Widelands::TCoords;
 
-int32_t Editor_Set_Terrain_Tool::handle_click_impl
-	(Widelands::Map           &          map,
-	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive        &          /* parent */, Editor_Action_Args & args)
-{
+int32_t Editor_Set_Terrain_Tool::handle_click_impl(Widelands::Map& map,
+                                                   const Widelands::World& world,
+                                                   Widelands::Node_and_Triangle<> const center,
+                                                   Editor_Interactive& /* parent */,
+                                                   Editor_Action_Args& args) {
 	assert
 	(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
 	uint16_t const radius = args.sel_radius;
@@ -60,17 +60,19 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl
 		std::list<Widelands::Terrain_Index>::iterator i = args.terrainType.begin();
 		do {
 			max = std::max
-			      (max, map.change_terrain(mr.location(), *i));
+			      (max, map.change_terrain(world, mr.location(), *i));
 			++i;
 		} while (mr.advance(map));
 	}
 	return radius + max;
 }
 
-int32_t Editor_Set_Terrain_Tool::handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
-	Editor_Interactive & /* parent */, Editor_Action_Args & args)
-{
+int32_t
+Editor_Set_Terrain_Tool::handle_undo_impl(Widelands::Map& map,
+                                          const Widelands::World& world,
+                                          Widelands::Node_and_Triangle<Widelands::Coords> center,
+                                          Editor_Interactive& /* parent */,
+                                          Editor_Action_Args& args) {
 	assert
 	(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
 	uint16_t const radius = args.sel_radius;
@@ -88,7 +90,7 @@ int32_t Editor_Set_Terrain_Tool::handle_undo_impl
 		std::list<Widelands::Terrain_Index>::iterator i = args.origTerrainType.begin();
 		do {
 			max = std::max
-			      (max, map.change_terrain(mr.location(), *i));
+			      (max, map.change_terrain(world, mr.location(), *i));
 			++i;
 		} while (mr.advance(map));
 		return radius + max;

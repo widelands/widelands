@@ -29,7 +29,7 @@
 #include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"
@@ -43,8 +43,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	UI::Window
 		(&parent, "new_map_menu",
 		 (parent.get_w() - 140) / 2, (parent.get_h() - 150) / 2, 140, 150,
-		 _("New Map")),
-	m_currentworld(0)
+		 _("New Map"))
 {
 	char buffer[250];
 	int32_t const offsx   =  5;
@@ -101,19 +100,6 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 
 	posy += 20 + spacing + spacing;
 
-	Widelands::World::get_all_worlds(m_worlds);
-
-	assert(m_worlds.size());
-	while (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
-		++m_currentworld;
-
-	m_world = new UI::Button
-		(this, "world",
-		 posx, posy, width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
-	m_world->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 4));
-
 	posy += height + spacing + spacing + spacing;
 
 	UI::Button * createbtn = new UI::Button
@@ -134,14 +120,6 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 	case 1: --m_w; break;
 	case 2: ++m_h; break;
 	case 3: --m_h; break;
-	case 4:
-		++m_currentworld;
-		if (m_currentworld == m_worlds.size())
-			m_currentworld = 0;
-		m_world->set_title
-			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name
-			 	());
-		break;
 	default:
 		assert(false);
 	}
@@ -170,18 +148,16 @@ void Main_Menu_New_Map::clicked_create_map() {
 
 	egbase.cleanup_for_load();
 
-	if (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
-		eia.change_world();
-	map.create_empty_map
-		(Widelands::MAP_DIMENSIONS[m_w], Widelands::MAP_DIMENSIONS[m_h],
-		 m_worlds[m_currentworld],
-		 _("No Name"),
-		 g_options.pull_section("global").get_string("realname", _("Unknown")));
+	map.create_empty_map(egbase.world(),
+	                     Widelands::MAP_DIMENSIONS[m_w],
+	                     Widelands::MAP_DIMENSIONS[m_h],
+	                     _("No Name"),
+	                     g_options.pull_section("global").get_string("realname", _("Unknown")));
 
 	egbase.postload     ();
 	egbase.load_graphics(loader);
 
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase.world());
 
 	eia.set_need_save(true);
 	eia.need_complete_redraw();

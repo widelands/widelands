@@ -49,7 +49,7 @@ inline Player_Number Neutral() {return 0;}
  */
 typedef uint8_t TeamNumber;
 
-typedef uint8_t  Terrain_Index;   /// 4 bits used, so 0 .. 15.
+typedef uint8_t  Terrain_Index;
 typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.
 typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
 

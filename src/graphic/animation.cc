@@ -43,8 +43,9 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/bob.h"
-#include "logic/instances.h"  // For Map_Object_Descr.
+#include "logic/instances.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wexception.h"
 
@@ -53,6 +54,16 @@ using namespace std;
 
 
 namespace  {
+
+// Parses an array { 12, 23 } into a point.
+void get_point(const LuaTable& table, Point* p) {
+	std::vector<int> pts = table.array_entries<int>();
+	if (pts.size() != 2) {
+		throw wexception("Expected 2 entries, but got %" PRIuS ".", pts.size());
+	}
+	p->x = pts[0];
+	p->y = pts[1];
+}
 
 /**
  * An Image Implementation that draws a static animation into a surface.
@@ -96,7 +107,8 @@ private:
 class NonPackedAnimation : public Animation {
 public:
 	virtual ~NonPackedAnimation() {}
-	NonPackedAnimation(const string& directory, Section & s);
+	NonPackedAnimation(const string& directory, Section & section);
+	NonPackedAnimation(const LuaTable& table);
 
 	// Implements Animation.
 	virtual uint16_t width() const override;
@@ -121,114 +133,129 @@ private:
 	uint32_t frametime_;
 	Point hotspot_;
 	bool hasplrclrs_;
-	std::string picnametempl_;
+	std::vector<std::string> image_files_;
+	std::vector<std::string> pc_mask_image_files_;
 
 	vector<const Image*> frames_;
 	vector<const Image*> pcmasks_;
 
-	/// mapping of soundeffect name to frame number, indexed by frame number .
-	map<uint32_t, string> sfx_cues;
+	// name of sound effect that will be played at frame 0.
+	// TODO(sirver): this should be done using playFX in a program instead of
+	// binding it to the animation.
+	string sound_effect_;
 };
 
-NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
+NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section)
 		: frametime_(FRAME_LENGTH),
 		  hasplrclrs_(false) {
-	// Read mapping from frame numbers to sound effect names and load effects
-	while (Section::Value * const v = s.get_next_val("sfx")) {
-		char * parameters = v->get_string(), * endp;
-		string fx_name;
-		unsigned long long int const value = strtoull(parameters, &endp, 0);
-		const uint32_t frame_number = value;
-		try {
-			if (endp == parameters or frame_number != value)
-				throw wexception("expected %s but found \"%s\"", "frame number", parameters);
-			parameters = endp;
-			force_skip(parameters);
-
-			fx_name = string(directory) + "/" + string(parameters);
-			g_sound_handler.load_fx_if_needed(directory, parameters, fx_name);
-			map<uint32_t, string>::const_iterator const it =
-				sfx_cues.find(frame_number);
-			if (it != sfx_cues.end())
-				throw wexception
-					("redefinition for frame %u to \"%s\" (previously defined to "
-					 "\"%s\")",
-					 frame_number, parameters, it->second.c_str());
-		} catch (const _wexception & e) {
-			throw wexception("sfx: %s", e.what());
-		}
-		sfx_cues[frame_number] = fx_name;
+	// If this animation has a sound effect associated, try to load it now.
+	const std::string sfx = section.get_string("sfx", "");
+	if (!sfx.empty()) {
+			sound_effect_ = string(directory) + "/" + sfx;
+			g_sound_handler.load_fx_if_needed(directory, sfx, sound_effect_);
 	}
 
-	int32_t const fps = s.get_int("fps");
+	int32_t const fps = section.get_int("fps");
 	if (fps < 0)
 		throw wexception("fps is %i, must be non-negative", fps);
 	if (fps > 0)
 		frametime_ = 1000 / fps;
 
-	hotspot_ = s.get_Point("hotspot");
+	hotspot_ = section.get_Point("hotspot");
 
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
 	//  replaced with "idle_00". Then the code looks if there is a PNG with that
 	//  name, increments the number and continues . on until it can not find any
 	//  file. Then it is assumed that there are no more frames in the animation.
-	if (char const * const pics = s.get_string("pics")) {
-		picnametempl_ = directory + pics;
+	string picnametempl;
+	if (char const * const pics = section.get_string("pics")) {
+		picnametempl = directory + pics;
 	} else {
-		picnametempl_ = directory + s.get_name();
+		picnametempl = directory + section.get_name();
 	}
 	// Strip the .png extension if it has one.
-	boost::replace_all(picnametempl_, ".png", "");
-}
+	boost::replace_all(picnametempl, ".png", "");
 
-void NonPackedAnimation::load_graphics() {
-	NumberGlob glob(picnametempl_);
+	NumberGlob glob(picnametempl);
 	string filename_wo_ext;
 	while (glob.next(&filename_wo_ext)) {
 		const string filename = filename_wo_ext + ".png";
 		if (!g_fs->FileExists(filename))
 			break;
+		image_files_.push_back(filename);
 
-		const Image* image = g_gr->images().get(filename);
-		if
-			(frames_.size() &&
-			 (frames_[0]->width() != image->width() or frames_[0]->height() != image->height()))
-					throw wexception
-						("wrong size: (%u, %u), should be (%u, %u) like the first frame",
-						 image->width(), image->height(), frames_[0]->width(), frames_[0]->height());
-		frames_.push_back(image);
-
-		//TODO Do not load playercolor mask as opengl texture or use it as
-		//     opengl texture.
 		const string pc_filename = filename_wo_ext + "_pc.png";
 		if (g_fs->FileExists(pc_filename)) {
 			hasplrclrs_ = true;
-			const Image* pc_image = g_gr->images().get(pc_filename);
-			if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {
-				log("ANIMATION ERROR: playercolor mask has wrong size: (%s: %u, %u), should "
-					 "be (%u, %u) like the animation frame\n",
-					 pc_filename.c_str(), pc_image->width(), pc_image->height(), frames_[0]->width(),
-						frames_[0]->height());
-					 hasplrclrs_ = false;
-					 break;
-				}
-				//throw wexception
-					//("playercolor mask has wrong size: (%s: %u, %u), should "
-					 //"be (%u, %u) like the animation frame",
-					 //pc_filename.c_str(),pc_image->width(), pc_image->height(), frames_[0]->width(),
-							//frames_[0]->height());
-			pcmasks_.push_back(pc_image);
+			pc_mask_image_files_.push_back(pc_filename);
 		}
 	}
+}
 
-	if (frames_.empty())
-		throw wexception("animation %s has no frames", picnametempl_.c_str());
+NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
+		: frametime_(FRAME_LENGTH),
+		  hasplrclrs_(false) {
+	// TODO(sirver): the LuaTable constructor has no support for player_colors right now.
+	get_point(*table.get_table("hotspot"), &hotspot_);
 
-	if (pcmasks_.size() and pcmasks_.size() != frames_.size())
+	if (table.has_key("sound_effect")) {
+		std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
+
+		const std::string name = sound_effects->get_string("name");
+		const std::string directory = sound_effects->get_string("directory");
+		sound_effect_ = directory + "/" + name;
+		g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
+	}
+
+	image_files_ = table.get_table("pictures")->array_entries<std::string>();
+	if (image_files_.empty()) {
+		throw wexception("Animation without pictures.");
+	} else if (image_files_.size() == 1) {
+		if (table.has_key("fps")) {
+			throw wexception("Animation with one picture must not have 'fps'.");
+		}
+	} else {
+		frametime_ = 1000 / get_positive_int(table, "fps");
+	}
+}
+
+void NonPackedAnimation::load_graphics() {
+	if (image_files_.empty())
+		throw wexception("animation without pictures.");
+
+	if (pc_mask_image_files_.size() and pc_mask_image_files_.size() != image_files_.size())
 		throw wexception
 			("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
-			 frames_.size(), pcmasks_.size());
+			 image_files_.size(), pc_mask_image_files_.size());
+
+	for (const std::string& filename : image_files_) {
+		const Image* image = g_gr->images().get(filename);
+		if (frames_.size() &&
+		    (frames_[0]->width() != image->width() or frames_[0]->height() != image->height())) {
+			throw wexception("wrong size: (%u, %u), should be (%u, %u) like the first frame",
+			                 image->width(),
+			                 image->height(),
+			                 frames_[0]->width(),
+			                 frames_[0]->height());
+		}
+		frames_.push_back(image);
+	}
+
+	for (const std::string& filename : pc_mask_image_files_) {
+		// TODO Do not load playercolor mask as opengl texture or use it as
+		//     opengl texture.
+		const Image* pc_image = g_gr->images().get(filename);
+		if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {
+			throw wexception("playercolor mask has wrong size: (%u, %u), should "
+			                 "be (%u, %u) like the animation frame",
+			                 pc_image->width(),
+			                 pc_image->height(),
+			                 frames_[0]->width(),
+			                 frames_[0]->height());
+		}
+		pcmasks_.push_back(pc_image);
+	}
 }
 
 uint16_t NonPackedAnimation::width() const {
@@ -268,12 +295,14 @@ const Image& NonPackedAnimation::representative_image_from_disk() const {
 	return get_frame(0, nullptr);
 }
 
-void NonPackedAnimation::trigger_soundfx
-	(uint32_t time, uint32_t stereo_position) const {
+void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
+	if (sound_effect_.empty()) {
+		return;
+	}
 	const uint32_t framenumber = time / frametime_ % nr_frames();
-	const map<uint32_t, string>::const_iterator sfx_cue = sfx_cues.find(framenumber);
-	if (sfx_cue != sfx_cues.end())
-		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
+	if (framenumber == 0) {
+		g_sound_handler.play_fx(sound_effect_, stereo_position, 1);
+	}
 }
 
 void NonPackedAnimation::blit
@@ -408,6 +437,11 @@ AnimationManager IMPLEMENTATION
 
 uint32_t AnimationManager::load(const string& directory, Section & s) {
 	m_animations.push_back(new NonPackedAnimation(directory, s));
+	return m_animations.size();
+}
+
+uint32_t AnimationManager::load(const LuaTable& table) {
+	m_animations.push_back(new NonPackedAnimation(table));
 	return m_animations.size();
 }
 

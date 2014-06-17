@@ -27,21 +27,22 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-
-void Map_Terrain_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
-{
+void Map_Terrain_Data_Packet::Read(FileSystem& fs,
+                                   Editor_Game_Base& egbase,
+                                   const OneWorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.Open(fs, "binary/terrain");
 
 	Map & map = egbase.map();
-	World & world = map.world();
+	const World & world = egbase.world();
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -51,19 +52,19 @@ void Map_Terrain_Data_Packet::Read
 			typedef std::map<const uint16_t, Terrain_Index> terrain_id_map;
 			terrain_id_map smap;
 			for (uint16_t i = 0; i < nr_terrains; ++i) {
-				uint16_t                       const id   = fr.Unsigned16();
-				char                   const * const name = fr.CString   ();
-				terrain_id_map::const_iterator const it   = smap.find(id);
-				if (it != smap.end())
-					log
-						("Map_Terrain_Data_Packet::Read: WARNING: Found duplicate "
-						 "terrain id %i: Previously defined as \"%s\", now as "
-						 "\"%s\".",
-						 id, world.terrain_descr(it->second).name().c_str(), name);
-				if (not world.get_ter(name))
-					throw game_data_error
-						("Terrain '%s' exists in map, not in world!", name);
-				smap[id] = world.index_of_terrain(name);
+				const uint16_t id = fr.Unsigned16();
+				char const* const old_terrain_name = fr.CString();
+				terrain_id_map::const_iterator const it = smap.find(id);
+				if (it != smap.end()) {
+					throw game_data_error(
+					   "Map_Terrain_Data_Packet::Read: WARNING: Found duplicate terrain id %i.", id);
+				}
+				const std::string new_terrain_name =
+				   lookup_table.lookup_terrain(old_terrain_name);
+				if (!world.get_ter(new_terrain_name.c_str())) {
+					throw game_data_error("Terrain '%s' exists in map, not in world!", new_terrain_name.c_str());
+				}
+				smap[id] = world.terrains().get_index(new_terrain_name.c_str());
 			}
 
 			Map_Index const max_index = map.max_index();
@@ -72,9 +73,9 @@ void Map_Terrain_Data_Packet::Read
 				f.set_terrain_r(smap[fr.Unsigned8()]);
 				f.set_terrain_d(smap[fr.Unsigned8()]);
 			}
-		} else
-			throw game_data_error
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw game_data_error("unknown/unhandled version %u", packet_version);
+		}
 	} catch (const _wexception & e) {
 		throw game_data_error("terrain: %s", e.what());
 	}
@@ -82,7 +83,7 @@ void Map_Terrain_Data_Packet::Read
 
 
 void Map_Terrain_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase)
 {
 
 	FileWrite fw;
@@ -92,13 +93,13 @@ void Map_Terrain_Data_Packet::Write
 	//  This is a bit more complicated saved so that the order of loading of the
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase.map();
-	const World & world = map.world();
-	Terrain_Index const nr_terrains = world.get_nr_terrains();
+	const World & world = egbase.world();
+	Terrain_Index const nr_terrains = world.terrains().get_nitems();
 	fw.Unsigned16(nr_terrains);
 
 	std::map<const char * const, Terrain_Index> smap;
 	for (Terrain_Index i = 0; i < nr_terrains; ++i) {
-		const char * const name = world.get_ter(i).name().c_str();
+		const char * const name = world.terrain_descr(i).name().c_str();
 		smap[name] = i;
 		fw.Unsigned16(i);
 		fw.CString(name);

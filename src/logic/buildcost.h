@@ -26,7 +26,7 @@
 
 class FileRead;
 class FileWrite;
-struct Section;
+class Section;
 
 namespace Widelands {
 

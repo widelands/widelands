@@ -42,7 +42,7 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "upcast.h"
 
@@ -260,7 +260,7 @@ void DefaultAI::late_initialization() {
 
 	// collect information about the different buildings our tribe can construct
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
-	const World& world = game().map().world();
+	const World & world = game().world();
 
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
 		const Building_Descr& bld = *tribe->get_building_descr(i);
@@ -530,7 +530,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		std::vector<Coords> water_list;
 
 		if (field.water_nearby_ == -1) {  //-1 means "value has never been calculated"
-			FindNodeWater find_water;
+			FindNodeWater find_water(game().world());
 			map.find_fields(Area<FCoords>(field.coords, 4), &water_list, find_water);
 			field.water_nearby_ = water_list.size();
 		}

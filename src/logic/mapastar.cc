@@ -19,6 +19,7 @@
 
 #include "logic/mapastar.h"
 
+#include "logic/instances.h"
 #include "logic/path.h"
 
 namespace Widelands {

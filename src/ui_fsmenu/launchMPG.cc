@@ -297,6 +297,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
 		std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->getWinConditionScript());
+		t->do_not_warn_about_unaccessed_keys();
 
 		try {
 			std::string name = t->get_string("name");
@@ -640,19 +641,12 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 		ml->preload_map(true);
 	}
 
-	// get translated worldsname
-	std::string worldpath((format("worlds/%s") % map.get_world_name()).str());
-	Profile prof ((worldpath + "/conf").c_str(), nullptr, (format("world_%s") % map.get_world_name()).str());
-	Section & global = prof.get_safe_section("world");
-	std::string world(global.get_safe_string("name"));
-
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
 	infotext += std::string("• ") + (format(_("Size: %1$u x %2$u"))
 					 % map.get_width() % map.get_height()).str() + "\n";
 	infotext += std::string("• ") + (format(ngettext("%u Player", "%u Players", m_nr_players))
 					 % m_nr_players).str() + "\n";
-	infotext += std::string("• ") + (format(_("World: %s")) % world).str() + "\n";
 	if (m_settings->settings().scenario)
 		infotext += std::string("• ") + (format(_("Scenario mode selected"))).str() + "\n";
 	infotext += "\n";

@@ -27,8 +27,8 @@
 
 #include "logic/instances.h"
 
-struct Profile;
-struct Section;
+class Profile;
+class Section;
 class Image;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons

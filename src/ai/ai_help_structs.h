@@ -29,6 +29,8 @@
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 
 namespace Widelands {
 
@@ -102,10 +104,15 @@ struct FindNodeUnownedMineable {
 };
 
 struct FindNodeWater {
-	bool accept(const Map& map, const FCoords& coord) const {
-		return (map.world().terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
-		       (map.world().terrain_descr(coord.field->terrain_r()).get_is() & TERRAIN_WATER);
+	FindNodeWater(const World& world) : world_(world) {}
+
+	bool accept(const Map& /* map */, const FCoords& coord) const {
+		return (world_.terrain_descr(coord.field->terrain_d()).get_is() & TerrainDescription::WATER) ||
+		       (world_.terrain_descr(coord.field->terrain_r()).get_is() & TerrainDescription::WATER);
 	}
+
+private:
+	const World& world_;
 };
 
 struct FindNodeWithFlagOrRoad {

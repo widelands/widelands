@@ -22,11 +22,19 @@
 
 #include "map_io/widelands_map_data_packet.h"
 
+namespace Widelands {
+
 /*
  * This packet contains all extra data in the map. This can currently be one of
  * the followings
  *   - Images
  */
-MAP_DATA_PACKET(Map_Extradata_Data_Packet);
+class Map_Extradata_Data_Packet {
+public:
+	void Read(FileSystem&, bool);
+	void Write(FileSystem&, Editor_Game_Base&);
+};
+
+}  // namespace Widelands
 
 #endif

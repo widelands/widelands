@@ -51,7 +51,7 @@ struct DismantleSite_Descr : public Building_Descr {
 };
 
 class DismantleSite : public Partially_Finished_Building {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 
 	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
 
