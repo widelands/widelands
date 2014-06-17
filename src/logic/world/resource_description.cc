@@ -48,48 +48,16 @@ const std::string & ResourceDescription::get_editor_pic
 	(uint32_t const amount) const
 {
 	uint32_t bestmatch = 0;
+	int32_t min_diff = editor_pictures_[bestmatch].upper_limit - static_cast<int32_t>(amount);
 
 	assert(editor_pictures_.size());
 
 	for (uint32_t i = 1; i < editor_pictures_.size(); ++i) {
-		const int32_t diff1 =
-			editor_pictures_[bestmatch].upper_limit - static_cast<int32_t>(amount);
-		const int32_t diff2 =
-			editor_pictures_[i].upper_limit - static_cast<int32_t>(amount);
+		const int32_t diff = editor_pictures_[i].upper_limit - static_cast<int32_t>(amount);
 
-		// This is a catch-all for high amounts
-		if (editor_pictures_[i].upper_limit < 0)
-		{
-			if (diff1 < 0) {
-				bestmatch = i;
-				continue;
-			}
-
-			continue;
-		}
-
-		// This is lower than the actual amount
-		if (diff2 < 0)
-		{
-			if (editor_pictures_[bestmatch].upper_limit < 0)
-				continue;
-
-			if (diff1 < diff2) {
-				bestmatch = i; // still better than previous best match
-				continue;
-			}
-
-			continue;
-		}
-
-		// This is higher than the actual amount
-		if
-			(editor_pictures_[bestmatch].upper_limit < 0     ||
-			 diff2                               < diff1 ||
-			 diff1                               < 0)
-		{
+		if (min_diff < 0 || diff < min_diff) {
 			bestmatch = i;
-			continue;
+			min_diff = diff;
 		}
 	}
 
