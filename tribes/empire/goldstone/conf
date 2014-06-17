@@ -1,7 +1,0 @@
-help=_Gold Ore is mined in goldmines and processed at the smelting works.
-
-preciousness=2
-
-[idle]
-pics=idle.png
-hotspot=4 4

@@ -25,6 +25,8 @@
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/transfer.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/ship.h"
 #include "logic/tribe.h"
@@ -155,8 +157,8 @@ WareInstance & IdleWareSupply::launch_ware(Game &, const Request & req) {
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
 			 m_ware.serial(),
-			 m_ware.descr_index().value(),
-			 req.get_index().value());
+			 m_ware.descr_index(),
+			 req.get_index());
 
 	return m_ware;
 }
@@ -192,7 +194,7 @@ m_transfer   (nullptr)
 WareInstance::~WareInstance()
 {
 	if (m_supply) {
-		molog("Ware %u still has supply %p\n", m_descr_index.value(), m_supply);
+		molog("Ware %u still has supply %p\n", m_descr_index, m_supply);
 		delete m_supply;
 	}
 }
@@ -227,7 +229,7 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 */
 void WareInstance::set_economy(Economy * const e)
 {
-	if (m_descr_index == Ware_Index::Null() or m_economy == e)
+	if (m_descr_index == INVALID_INDEX or m_economy == e)
 		return;
 
 	if (m_economy)
@@ -636,31 +638,12 @@ Map_Object::Loader * WareInstance::load
 		if (!tribe)
 			throw wexception("unknown tribe '%s'", tribename.c_str());
 
-		bool kill = false;
 		Ware_Index wareindex = tribe->ware_index(warename);
-		if (!wareindex) {
-			// Old savegame, using a ware that no longer exists
-			// We need to do the loading anyway to ensure that the
-			// correct number of bytes is read, but we will mark
-			// the object for immediate removal.
-			log("WARNING: Tribe %s has no ware %s\n", tribename.c_str(), warename.c_str());
-			wareindex = Ware_Index::First();
-			kill = true;
-		}
 		const WareDescr * descr = tribe->get_ware_descr(wareindex);
 
 		std::unique_ptr<Loader> loader(new Loader);
 		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
 		loader->load(fr);
-
-		if (kill) {
-			if (upcast(Game, game, &egbase))
-				loader->add_finish
-					(boost::bind
-					 (&Map_Object::schedule_destroy,
-					  loader->get_object(),
-					  boost::ref(*game)));
-		}
 
 		return loader.release();
 	} catch (const std::exception & e) {

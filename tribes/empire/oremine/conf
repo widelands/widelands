@@ -3,11 +3,11 @@ output=ironore
 enhancement=deep_oremine
 
 [buildcost]
-trunk=4
+log=4
 wood=2
 
 [return_on_dismantle]
-trunk=2
+log=2
 wood=1
 
 [working positions]
@@ -31,10 +31,10 @@ return=skipped unless economy needs ironore or not economy needs beer
 sleep=45000
 consume=ration beer
 animate=working 20000
-mine=iron 2 50 5
+mine=iron 2 50 5 17
 produce=ironore
 animate=working 20000
-mine=iron 2 50 5
+mine=iron 2 50 5 17
 produce=ironore:2
 
 [idle]

@@ -19,6 +19,8 @@
 
 #include "wui/interactive_base.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
@@ -39,6 +41,7 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "text_layout.h"
+#include "unique_window_handler.h"
 #include "upcast.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
@@ -89,8 +92,8 @@ Interactive_Base::Interactive_Base
 	m_lastframe                   (WLApplication::get()->get_time()),
 	m_frametime                   (0),
 	m_avg_usframetime             (0),
-	m_jobid                       (Overlay_Manager::Job_Id::Null()),
-	m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
+	m_jobid                       (0),
+	m_road_buildhelp_overlay_jobid(0),
 	m_buildroad                   (nullptr),
 	m_road_build_player           (0),
 	// Initialize chatoveraly before the toolbar so it is below
@@ -99,7 +102,8 @@ Interactive_Base::Interactive_Base
 	m_label_speed_shadow
 		(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
 	m_label_speed
-		(this, get_w(), 1, std::string(), UI::Align_TopRight)
+		(this, get_w(), 1, std::string(), UI::Align_TopRight),
+	unique_window_handler_(new UniqueWindowHandler())
 {
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
@@ -154,16 +158,20 @@ Interactive_Base::~Interactive_Base()
 		abort_build_road();
 }
 
+UniqueWindowHandler& Interactive_Base::unique_windows() {
+	return *unique_window_handler_;
+}
+
 
 void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 {
 	Map & map = egbase().map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 
 	// Remove old sel pointer
 	if (m_sel.jobid)
 		overlay_manager.remove_overlay(m_sel.jobid);
-	const Overlay_Manager::Job_Id jobid =
+	const OverlayManager::JobId jobid =
 		m_sel.jobid = overlay_manager.get_a_job_id();
 
 	m_sel.pos = center;
@@ -246,21 +254,21 @@ void Interactive_Base::show_buildhelp(bool t) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated
-Overlay_Manager::Job_Id Interactive_Base::show_work_area
+OverlayManager::JobId Interactive_Base::show_work_area
 	(const Workarea_Info & workarea_info, Widelands::Coords coords)
 {
 	uint8_t workareas_nrs = workarea_info.size();
 	Workarea_Info::size_type wa_index;
 	switch (workareas_nrs) {
-		case 0: return Overlay_Manager::Job_Id::Null(); break; // no workarea
+		case 0: return 0; break; // no workarea
 		case 1: wa_index = 5; break;
 		case 2: wa_index = 3; break;
 		case 3: wa_index = 0; break;
 		default: assert(false); break;
 	}
 	Widelands::Map & map = m_egbase.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
-	Overlay_Manager::Job_Id job_id = overlay_manager.get_a_job_id();
+	OverlayManager & overlay_manager = map.overlay_manager();
+	OverlayManager::JobId job_id = overlay_manager.get_a_job_id();
 
 	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
 
@@ -282,20 +290,11 @@ Overlay_Manager::Job_Id Interactive_Base::show_work_area
 		hollow_area.hole_radius = hollow_area.radius;
 	}
 	return job_id;
-#if 0
-		//  This is debug output.
-		//  Improvement suggestion: add to sign explanation window instead.
-		container_iterate_const(Workarea_Info, workarea_info, i) {
-			log("Radius: %i\n", i.current->first);
-			container_iterate_const(std::set<std::string>, i.current->second, j)
-				log("        %s\n", j.current->c_str());
-		}
-#endif
 }
 
-void Interactive_Base::hide_work_area(Overlay_Manager::Job_Id job_id) {
+void Interactive_Base::hide_work_area(OverlayManager::JobId job_id) {
 	Widelands::Map & map = m_egbase.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.remove_overlay(job_id);
 }
 
@@ -312,8 +311,7 @@ static std::string speedString(uint32_t const speed)
 {
 	if (speed) {
 		char buffer[32];
-		/** TRANSLATORS: Game speed, e.g. 2.5x */
-		snprintf(buffer, sizeof(buffer), _("%1$u.%2$ux"), speed / 1000, speed / 100 % 10);
+		snprintf(buffer, sizeof(buffer), ("%u.%ux"), speed / 1000, speed / 100 % 10);
 		return buffer;
 	}
 	return _("PAUSE");
@@ -333,13 +331,14 @@ void Interactive_Base::update_speedlabel()
 				m_label_speed.set_text
 					(real == 1000 ? std::string() : speedString(real));
 			else {
-				char buffer[128];
-				snprintf
-					(buffer, sizeof(buffer),
-					 /** TRANSLATORS: actual_speed (desired_speed) */
-					 _("%1$s (%2$s)"),
-					 speedString(real).c_str(), speedString(desired).c_str());
-				m_label_speed.set_text(buffer);
+				m_label_speed.set_text(
+					(format
+						 /** TRANSLATORS: actual_speed (desired_speed) */
+						(_("%1$s (%2$s)"))
+						% speedString(real).c_str()
+						% speedString(desired).c_str()
+					).str().c_str()
+				);
 			}
 		} else
 			m_label_speed.set_text(_("NO GAME CONTROLLER"));
@@ -789,7 +788,7 @@ void Interactive_Base::roadb_add_overlay()
 	//log("Add overlay\n");
 
 	Map & map = egbase().map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 
 	// preview of the road
 	assert(not m_jobid);
@@ -886,15 +885,15 @@ void Interactive_Base::roadb_remove_overlay()
 	//log("Remove overlay\n");
 
 	//  preview of the road
-	Overlay_Manager & overlay_manager = egbase().map().overlay_manager();
+	OverlayManager & overlay_manager = egbase().map().overlay_manager();
 	if (m_jobid)
 		overlay_manager.remove_road_overlay(m_jobid);
-	m_jobid = Overlay_Manager::Job_Id::Null();
+	m_jobid = 0;
 
 	// build hints
 	if (m_road_buildhelp_overlay_jobid)
 		overlay_manager.remove_overlay(m_road_buildhelp_overlay_jobid);
-	m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
+	m_road_buildhelp_overlay_jobid = 0;
 }
 
 
@@ -943,8 +942,8 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 #ifndef NDEBUG //  only in debug builds
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
-				new GameChatMenu
-					(this, m_debugconsole, *DebugConsole::getChatProvider());
+				GameChatMenu::create_script_console(
+					this, m_debugconsole, *DebugConsole::getChatProvider());
 			}
 			return true;
 #endif

@@ -21,15 +21,15 @@
 #define S__SUPPLY_H
 
 #include "logic/wareworker.h"
+#include "logic/widelands.h"
 #include "trackptr.h"
 
 namespace Widelands {
 
 struct PlayerImmovable;
 class Game;
-struct Request;
+class Request;
 class Warehouse;
-struct Ware_Index;
 class WareInstance;
 class Worker;
 

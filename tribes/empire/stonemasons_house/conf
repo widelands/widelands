@@ -5,7 +5,7 @@ output=marblecolumn
 is_basic=true
 
 [buildcost]
-trunk=1
+log=1
 wood=1
 stone=1
 marble=3 # someone who works on marble should like marble

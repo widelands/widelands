@@ -77,29 +77,31 @@ Flag::~Flag()
 }
 
 void Flag::load_finish(Editor_Game_Base & egbase) {
-	CapacityWaitQueue & queue = m_capacity_wait;
-	for (wl_range<CapacityWaitQueue > r(queue); r;)
-	{
-		Worker & worker = *r->get(egbase);
-		Bob::State const * const state =
-			worker.get_state(Worker::taskWaitforcapacity);
-		if (not state)
-			log
-				("WARNING: worker %u is in the capacity wait queue of flag %u but "
-				 "does not have a waitforcapacity task! Removing from queue.\n",
-				 worker.serial(), serial());
-		else if (state->objvar1 != this)
-			log
-				("WARNING: worker %u is in the capacity wait queue of flag %u but "
-				 "its waitforcapacity task is for map object %u! Removing from "
-				 "queue.\n",
-				 worker.serial(), serial(), state->objvar1.serial());
-		else {
-			++r;
-			continue;
+	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& r) {
+		Worker& worker = *r.get(egbase);
+		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
+		if (not state) {
+			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
+			    "does not have a waitforcapacity task! Removing from queue.\n",
+			    worker.serial(),
+			    serial());
+			return true;
 		}
-		r = wl_erase(queue, r.current);
-	}
+		if (state->objvar1 != this) {
+			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
+			    "its waitforcapacity task is for map object %u! Removing from "
+			    "queue.\n",
+			    worker.serial(),
+			    serial(),
+			    state->objvar1.serial());
+			return true;
+		}
+		return false;
+	};
+
+	m_capacity_wait.erase(
+	   std::remove_if(m_capacity_wait.begin(), m_capacity_wait.end(), should_be_deleted),
+	   m_capacity_wait.end());
 }
 
 /**

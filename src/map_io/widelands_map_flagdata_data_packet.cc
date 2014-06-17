@@ -24,12 +24,13 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/building.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
+#include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
@@ -76,7 +77,7 @@ void Map_Flagdata_Data_Packet::Read
 							(upcast
 							 	(Flag const,
 							 	 mf,
-							 	 map[flag.m_position = fr.Coords32(extent)]
+							 	 map[flag.m_position = ReadCoords32(&fr, extent)]
 							 	 .get_immovable()))
 						{
 							if (mf != &flag)
@@ -197,7 +198,7 @@ void Map_Flagdata_Data_Packet::Read
 								f.request =
 									new Request
 										(flag,
-										 Ware_Index::First(),
+										 0,
 										 Flag::flag_job_request_callback,
 										 wwWORKER);
 								f.request->Read

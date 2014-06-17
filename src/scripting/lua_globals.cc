@@ -19,15 +19,18 @@
 
 #include "scripting/lua_globals.h"
 
+#include <exception>
+
 #include <boost/format.hpp>
 #include <libintl.h>
 
 #include "build_info.h"
 #include "i18n.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "scripting/c_utils.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-
 
 namespace LuaGlobals {
 
@@ -39,6 +42,8 @@ The following functions are imported into the global namespace
 of all scripts that are running inside widelands. They provide convenient
 access to other scripts in other locations, localisation features and more.
 
+There is also a global variable called __file__ defined that is the current
+files name.
 */
 
 /*
@@ -108,7 +113,7 @@ static int L_string_bformat(lua_State * L) {
 		lua_pushstring(L, fmt.str());
 		return 1;
 	} catch (const boost::io::format_error& err) {
-		return report_error(L, "Error in bformat: %s", err.what());
+		report_error(L, "Error in bformat: %s", err.what());
 	}
 }
 /* RST
@@ -164,7 +169,7 @@ static int L__(lua_State * L) {
 	:arg msgid: text to translate (singular)
 	:type msgid: :class:`string`
 	:arg msgid_plural: text to translate (plural)
-	:type msgid_plural :class:`string`
+	:type msgid_plural: :class:`string`
 	:arg n: The number of elements.
 	:type n: An unsigned integer.
 
@@ -188,38 +193,26 @@ static int L_ngettext(lua_State * L) {
 }
 
 /* RST
-	.. function:: use(ns, script)
+	.. function:: include(script)
 
-		Includes the script referenced at the caller location. Use this
-		to factor your scripts into smaller parts.
+		Includes the script at the given location at the current position in the
+		file. The script can begin with 'map:' to include files from the map.
 
-		:arg ns:
-			The namespace were the imported script resides. Can be any of
-				:const:`map`
-					The script is in the ``scripting/`` directory of the current map.
-				:const:`aux`
-					The script is one of the auxiliary scripts that come bundled in
-					the ``scripting/`` directory of Widelands itself.
-
-		:type ns: :class:`string`
-		:arg script: The filename of the string without the extension ``.lua``.
 		:type script: :class:`string`
+		:arg script: The filename relative to the root of the data directory.
 		:returns: :const:`nil`
 */
-static int L_use(lua_State * L) {
-	const char * ns = luaL_checkstring(L, -2);
-	const char * script = luaL_checkstring(L, -1);
-
-	// remove our argument so that the executed script gets a clear stack
-	lua_pop(L, 2);
+static int L_include(lua_State * L) {
+	const std::string script = luaL_checkstring(L, -1);
+	// remove our arguments so that the executed script gets a clear stack
+	lua_pop(L, 1);
 
 	try {
 		lua_getfield(L, LUA_REGISTRYINDEX, "lua_interface");
 		LuaInterface * lua = static_cast<LuaInterface *>(lua_touserdata(L, -1));
 		lua_pop(L, 1); // pop this userdata
-
-		lua->run_script(ns, script);
-	} catch (LuaError & e) {
+		lua->run_script(script);
+	} catch (std::exception & e) {
 		report_error(L, "%s", e.what());
 	}
 	return 0;
@@ -237,11 +230,11 @@ static int L_get_build_id(lua_State * L) {
 }
 
 const static struct luaL_Reg globals [] = {
-	{"set_textdomain", &L_set_textdomain},
-	{"use", &L_use},
-	{"get_build_id", &L_get_build_id},
 	{"_", &L__},
+	{"get_build_id", &L_get_build_id},
+	{"include", &L_include},
 	{"ngettext", &L_ngettext},
+	{"set_textdomain", &L_set_textdomain},
 	{nullptr, nullptr}
 };
 
@@ -260,4 +253,4 @@ void luaopen_globals(lua_State * L) {
 }
 
 
-};
+}  // namespace LuaGlobals

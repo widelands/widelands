@@ -22,6 +22,8 @@
 
 #include "ui_fsmenu/base.h"
 
+#include <memory>
+
 #include "graphic/image.h"
 #include "graphic/image_loader.h"
 #include "io/filesystem/filesystem.h"
@@ -41,7 +43,7 @@ class Map_Loader;
 };
 class Image;
 class RenderTarget;
-struct GameController;
+class GameController;
 struct GameSettingsProvider;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.

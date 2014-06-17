@@ -22,8 +22,6 @@
 #include <cstdio>
 #include <sstream>
 
-#include <boost/foreach.hpp>
-
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "graphic/font.h"
@@ -106,7 +104,8 @@ Building_Descr::Building_Descr
 				throw wexception("enhancement to same type");
 			if (target_name == "constructionsite")
 				throw wexception("enhancement to special type constructionsite");
-			if (Building_Index const en_i = tribe().building_index(target_name)) {
+			Building_Index const en_i = tribe().building_index(target_name);
+			if (en_i != INVALID_INDEX) {
 				if (enhancements().count(en_i))
 					throw wexception("this has already been declared");
 				m_enhancements.insert(en_i);
@@ -142,7 +141,7 @@ Building_Descr::Building_Descr
 			if (build_s->get_int("fps", -1) != -1)
 				throw wexception("fps defined for build animation!");
 			if (!is_animation_known("build"))
-				add_animation("build", g_anim.get(directory.c_str(), *build_s, nullptr));
+				add_animation("build", g_gr->animations().load(directory, *build_s));
 		}
 
 		// Get costs
@@ -168,13 +167,13 @@ Building_Descr::Building_Descr
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
-			add_animation("idle", g_anim.get(directory.c_str(), idle_s, nullptr));
+			add_animation("idle", g_gr->animations().load(directory, idle_s));
 		if (Section * unoccupied = prof.get_section("unoccupied"))
 			if (!is_animation_known("unoccupied"))
-				add_animation("unoccupied", g_anim.get(directory.c_str(), *unoccupied, nullptr));
+				add_animation("unoccupied", g_gr->animations().load(directory, *unoccupied));
 		if (Section * empty = prof.get_section("empty"))
 			if (!is_animation_known("empty"))
-				add_animation("empty", g_anim.get(directory.c_str(), *empty, nullptr));
+				add_animation("empty", g_gr->animations().load(directory, *empty));
 	}
 
 	m_vision_range = global_s.get_int("vision_range");
@@ -193,7 +192,7 @@ Building & Building_Descr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	BOOST_FOREACH(Building_Index idx, former_buildings) {
+	for (Building_Index idx : former_buildings) {
 		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {
@@ -285,39 +284,43 @@ Building::~Building()
 }
 
 void Building::load_finish(Editor_Game_Base & egbase) {
-	Leave_Queue & queue = m_leave_queue;
-	for (wl_range<Leave_Queue> i(queue); i;)
-	{
-		Worker & worker = *i->get(egbase);
-		{
-			OPtr<PlayerImmovable> const worker_location = worker.get_location();
-			if
-				(worker_location.serial() !=             serial() and
-				 worker_location.serial() != base_flag().serial())
-				log
-					("WARNING: worker %u is in the leave queue of building %u with "
-					 "base flag %u but is neither inside the building nor at the "
-					 "flag!\n",
-					 worker.serial(), serial(), base_flag().serial());
+	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& optr) {
+		Worker & worker = *optr.get(egbase);
+		OPtr<PlayerImmovable> const worker_location = worker.get_location();
+		if (worker_location.serial() != serial() &&
+		    worker_location.serial() != base_flag().serial()) {
+			log("WARNING: worker %u is in the leave queue of building %u with "
+			    "base flag %u but is neither inside the building nor at the "
+			    "flag!\n",
+			    worker.serial(),
+			    serial(),
+			    base_flag().serial());
+			return true;
 		}
-		Bob::State const * const state =
-			worker.get_state(Worker::taskLeavebuilding);
-		if (not state)
+
+		Bob::State const* const state = worker.get_state(Worker::taskLeavebuilding);
+		if (not state) {
 			log
 				("WARNING: worker %u is in the leave queue of building %u but "
 				 "does not have a leavebuilding task! Removing from queue.\n",
 				 worker.serial(), serial());
-		else if (state->objvar1 != this)
-			log
-				("WARNING: worker %u is in the leave queue of building %u but its "
-				 "leavebuilding task is for map object %u! Removing from queue.\n",
-				 worker.serial(), serial(), state->objvar1.serial());
-		else {
-			++i;
-			continue;
+			return true;
 		}
-		i = wl_erase(queue, i.current);
-	}
+
+		if (state->objvar1 != this) {
+			log("WARNING: worker %u is in the leave queue of building %u but its "
+			    "leavebuilding task is for map object %u! Removing from queue.\n",
+			    worker.serial(),
+			    serial(),
+			    state->objvar1.serial());
+			return true;
+		}
+		return false;
+	};
+
+	m_leave_queue.erase(
+	   std::remove_if(m_leave_queue.begin(), m_leave_queue.end(), should_be_deleted),
+	   m_leave_queue.end());
 }
 
 int32_t Building::get_type() const {return BUILDING;}
@@ -447,7 +450,7 @@ void Building::cleanup(Editor_Game_Base & egbase)
 
 	PlayerImmovable::cleanup(egbase);
 
-	BOOST_FOREACH(boost::signals2::connection& c, options_window_connections)
+	for (boost::signals2::connection& c : options_window_connections)
 		c.disconnect();
 }
 
@@ -595,9 +598,7 @@ std::string Building::get_statistics_string()
 
 
 WaresQueue & Building::waresqueue(Ware_Index const wi) {
-	throw wexception
-		("%s (%u) has no WaresQueue for %u",
-		 name().c_str(), serial(), wi.value());
+	throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
 }
 
 /*
@@ -919,23 +920,25 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const std::string & picnametempl =
-		g_anim.get_animation(descr().get_ui_anim()).picnametempl;
+	// TODO(sirver): add support into the font renderer to get to representative
+	// animations of buildings so that the messages can still be displayed, even
+	// after reload.
+	const std::string& img = g_gr->animations().get_animation
+		(descr().get_ui_anim()).representative_image_from_disk().hash();
 	std::string rt_description;
 	rt_description.reserve
-		(strlen("<rt image=") + picnametempl.size() + 1 +
+		(strlen("<rt image=") + img.size() + 1 +
 		 strlen("<p font-size=14 font-face=DejaVuSerif></p>") +
 		 description.size() +
 		 strlen("</rt>"));
 	rt_description  = "<rt image=";
-	rt_description += picnametempl;
+	rt_description += img;
 	{
 		std::string::iterator it = rt_description.end() - 1;
 		for (; it != rt_description.begin() and *it != '?'; --it) {}
 		for (;                                  *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description += ".png";
 	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
 	rt_description += description;
 	rt_description += "</p></rt>";

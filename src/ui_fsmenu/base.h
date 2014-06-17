@@ -21,6 +21,7 @@
 #define FULLSCREEN_MENU_BASE_H
 
 #include <string>
+#include <memory>
 
 #include "ui_basic/panel.h"
 

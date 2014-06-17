@@ -25,7 +25,6 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
-#include "logic/areawatcher.h"
 #include "logic/battle.h"
 #include "logic/bob.h"
 #include "logic/building.h"
@@ -104,8 +103,7 @@ Serial Map_Map_Object_Saver::register_object(const Map_Object & obj) {
 
 	assert(!rec.registered);
 
-	if      (dynamic_cast<AreaWatcher  const *>(&obj)) {/* do nothing */}
-	else if (dynamic_cast<Flag         const *>(&obj)) ++m_nr_flags;
+	if      (dynamic_cast<Flag         const *>(&obj)) ++m_nr_flags;
 	else if (dynamic_cast<Road         const *>(&obj)) ++m_nr_roads;
 	else if (dynamic_cast<Building     const *>(&obj)) ++m_nr_buildings;
 	else if (dynamic_cast<Immovable    const *>(&obj)) ++m_nr_immovables;

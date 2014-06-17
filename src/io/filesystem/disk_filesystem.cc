@@ -96,17 +96,7 @@ bool RealFSImpl::FileIsWriteable(const std::string & path) {
 }
 
 
-/**
- * Returns the number of files found, and stores the filenames (without the
- * pathname) in the results. There doesn't seem to be an even remotely
- * cross-platform way of doing this
- */
-// note: the Win32 version may be broken, feel free to fix it
-int32_t RealFSImpl::FindFiles
-	(const std::string & path,
-	 const std::string & pattern,
-	 filenameset_t     * results,
-	 uint32_t)
+std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
 {
 #ifdef _WIN32
 	std::string buf;
@@ -114,65 +104,63 @@ int32_t RealFSImpl::FindFiles
 	long hFile;
 
 	if (path.size())
-		buf = m_directory + '\\' + path + '\\' + pattern;
+		buf = m_directory + '\\' + path + "\\*";
 	else
-		buf = m_directory + '\\' + pattern;
+		buf = m_directory + "\\*";
+
+	std::set<std::string> results;
 
 	hFile = _findfirst(buf.c_str(), &c_file);
 	if (hFile == -1)
-		return 0;
+		return results;
 
 	std::string realpath = path;
 
-	// Check if path is relative - both \ and / are possibly used depending on the file we work on,
-	// so we have to check for both.
-	if ((not pattern.compare(0, 3, "../")) || (not pattern.compare(0, 3, "..\\"))) {
-		// Workaround: If pattern is a relative we need to fix the path
-		std::string m_root_save(m_root); // save orginal m_root
-		m_root = FS_CanonicalizeName(path);
-		realpath = FS_CanonicalizeName(pattern);
-		realpath = realpath.substr(0, realpath.rfind('\\'));
-		m_root = m_root_save; // reset m_root
+	if (!realpath.empty()) {
+		realpath.append("\\");
 	}
-
-	if (!realpath.empty()) realpath.append("\\");
 	do {
-		results->insert(realpath + c_file.name);
+		if ((strcmp(c_file.name, ".") == 0) || (strcmp(c_file.name, "..") == 0)) {
+			continue;
+		}
+		const std::string filename = FS_CanonicalizeName(realpath + c_file.name);
+		const std::string result = filename.substr(m_root.size() + 1);
+		results.insert(result);
 	} while (_findnext(hFile, &c_file) == 0);
 
 	_findclose(hFile);
 
-	return results->size();
+	return results;
 #else
 	std::string buf;
 	glob_t gl;
-	int32_t i, count;
 	int32_t ofs;
 
 	if (path.size()) {
 		if (pathIsAbsolute(path)) {
-			buf = path + '/' + pattern;
+			buf = path + "/*";
 			ofs = 0;
 		} else {
-			buf = m_directory + '/' + path + '/' + pattern;
+			buf = m_directory + '/' + path + "/*";
 			ofs = m_directory.length() + 1;
 		}
 	} else {
-		buf = m_directory + '/' + pattern;
+		buf = m_directory + "/*";
 		ofs = m_directory.length() + 1;
 	}
+	std::set<std::string> results;
+
 	if (glob(buf.c_str(), 0, nullptr, &gl))
-		return 0;
+		return results;
 
-	count = gl.gl_pathc;
-
-	for (i = 0; i < count; ++i) {
-		results->insert(&gl.gl_pathv[i][ofs]);
+	for (size_t i = 0; i < gl.gl_pathc; ++i) {
+		const std::string filename(FS_CanonicalizeName(&gl.gl_pathv[i][ofs]));
+		results.insert(filename.substr(m_root.size() + 1));
 	}
 
 	globfree(&gl);
 
-	return count;
+	return results;
 #endif
 }
 
@@ -263,10 +251,7 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 	assert(fspath.m_exists);  //TODO: throw an exception instead
 	assert(fspath.m_isDirectory);  //TODO: throw an exception instead
 
-	filenameset_t files;
-
-	FindFiles(file, "*", &files);
-
+	filenameset_t files = ListDirectory(file);
 	for
 		(filenameset_t::iterator pname = files.begin();
 		 pname != files.end();
@@ -363,14 +348,6 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	void * data = nullptr;
 
 	try {
-		//debug info
-		//printf("------------------------------------------\n");
-		//printf("RealFSImpl::Load():\n");
-		//printf("     fname       = %s\n", fname.c_str());
-		//printf("     m_directory = %s\n", m_directory.c_str());
-		//printf("     fullname    = %s\n", fullname.c_str());
-		//printf("------------------------------------------\n");
-
 		file = fopen(fullname.c_str(), "rb");
 		if (not file)
 			throw File_error("RealFSImpl::Load", fullname.c_str());
@@ -384,7 +361,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 			if (ftell_pos < 0)
 				throw wexception
 					("RealFSImpl::Load: error when loading \"%s\" (\"%s\"): file "
-					 "size calculation yieded negative value %i",
+					 "size calculation yielded negative value %i",
 					 fname.c_str(), fullname.c_str(), ftell_pos);
 			size = ftell_pos;
 		}
@@ -406,56 +383,14 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 
 		length = size;
 	} catch (...) {
-		if (file)
+		if (file) {
 			fclose(file);
+		}
 		free(data);
 		throw;
 	}
 
 	return data;
-}
-
-void * RealFSImpl::fastLoad
-	(const std::string & fname, size_t & length, bool & fast)
-{
-#ifdef _WIN32
-	fast = false;
-	return Load(fname, length);
-#else
-	const std::string fullname = FS_CanonicalizeName(fname);
-	int file = 0;
-	void * data = nullptr;
-
-#ifdef __APPLE__
-	file = open(fullname.c_str(), O_RDONLY);
-#elif defined (__FreeBSD__) || defined (__OpenBSD__)
-	file = open(fullname.c_str(), O_RDONLY);
-#else
-	file = open(fullname.c_str(), O_RDONLY|O_NOATIME);
-#endif
-	length = lseek(file, 0, SEEK_END);
-	lseek(file, 0, SEEK_SET);
-
-	data = mmap(nullptr, length, PROT_READ, MAP_PRIVATE, file, 0);
-
-	//if mmap doesn't work for some strange reason try the old way
-GCC_DIAG_OFF("-Wold-style-cast")
-	if (data == MAP_FAILED) {
-GCC_DIAG_ON("-Wold-style-cast")
-		return Load(fname, length);
-	}
-
-	fast = true;
-
-	assert(data);
-GCC_DIAG_OFF("-Wold-style-cast")
-	assert(data != MAP_FAILED);
-GCC_DIAG_ON("-Wold-style-cast")
-
-	close(file);
-
-	return data;
-#endif
 }
 
 /**

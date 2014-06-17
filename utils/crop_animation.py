@@ -51,6 +51,7 @@ def crop_images(basepath, section):
     else:
         filepattern=section['dirpics']
 
+    # TODO(sirver): playercolor is never used in the conf files anymore. remove this.
     use_playercolor=False
     if 'playercolor' in section and \
        section['playercolor'].upper().strip()=="TRUE":
@@ -225,8 +226,8 @@ def read_conffile(filename):
                         fname=section[2]['dirpics']
                     if ('pics' in sec[2] and sec[2]['pics']==fname) or \
                        ('dirpics' in sec[2] and sec[2]['dirpics']==fname):
-                        # Simply go through the lines of the section and 
-                        # search for hotspot= if found replace the line. It 
+                        # Simply go through the lines of the section and
+                        # search for hotspot= if found replace the line. It
                         # will be written to the conf file a the end
                         for i in range(sec[0], sec[1]+1):
                             #print i,

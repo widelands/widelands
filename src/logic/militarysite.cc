@@ -22,7 +22,6 @@
 #include <clocale>
 #include <cstdio>
 
-#include <boost/foreach.hpp>
 #include <libintl.h>
 
 #include "economy/flag.h"
@@ -47,10 +46,11 @@ MilitarySite_Descr::MilitarySite_Descr
 	(char        const * const _name,
 	 char        const * const _descname,
 	 const std::string & directory, Profile & prof,  Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const Tribe_Descr & _tribe,
+	 const World& world)
 :
 	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe),
+		(_name, _descname, directory, prof, global_s, _tribe, world),
 m_conquer_radius     (0),
 m_num_soldiers       (0),
 m_heal_per_second    (0)
@@ -93,11 +93,6 @@ m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
 m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kPrefersRookies),
-m_occupied_str(ms_descr.m_occupied_str),
-m_aggressor_str(ms_descr.m_aggressor_str),
-m_attack_str(ms_descr.m_attack_str),
-m_defeated_enemy_str(ms_descr.m_defeated_enemy_str),
-m_defeated_you_str(ms_descr.m_defeated_you_str),
 m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
@@ -250,7 +245,7 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 				(*game,
 				 "site_occupied",
 				 descname(),
-				 m_occupied_str,
+				 descr().m_occupied_str,
 				 true);
 		}
 	}
@@ -280,8 +275,7 @@ MilitarySite::find_least_suited_soldier()
 	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1:1;
 	int worst_soldier_level = INT_MIN;
 	Soldier * worst_soldier = nullptr;
-	BOOST_FOREACH (Soldier * sld, present)
-	{
+	for (Soldier* sld : present) {
 		int this_soldier_level = multiplier * static_cast<int> (sld->get_level(atrTotal));
 		if (this_soldier_level > worst_soldier_level)
 		{
@@ -846,7 +840,7 @@ bool MilitarySite::attack(Soldier & enemy)
 				(game,
 				 "site_lost",
 				 _("Militarysite lost!"),
-				 m_defeated_enemy_str,
+				 descr().m_defeated_enemy_str,
 				 false);
 		}
 
@@ -871,7 +865,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// Add suffix to all descr in former buildings in cases
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
-		BOOST_FOREACH(Building_Index former_idx, m_old_buildings) {
+		for (Building_Index former_idx : m_old_buildings) {
 			const Building_Descr * old_descr = tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
@@ -900,7 +894,7 @@ bool MilitarySite::attack(Soldier & enemy)
 			(game,
 			 "site_defeated",
 			 _("Enemy at site defeated!"),
-			 newsite->m_defeated_you_str,
+			 newsite->descr().m_defeated_you_str,
 			 true);
 
 		return false;
@@ -946,7 +940,7 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 		(game,
 		 "under_attack",
 		 _("You are under attack"),
-		 discovered ? m_aggressor_str : m_attack_str,
+		 discovered ? descr().m_aggressor_str : descr().m_attack_str,
 		 false,
 		 60 * 1000, 5);
 }

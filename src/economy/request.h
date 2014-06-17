@@ -23,9 +23,10 @@
 #include "logic/requirements.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "trackptr.h"
+
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 
@@ -33,7 +34,7 @@ class Economy;
 class Editor_Game_Base;
 struct Flag;
 class Game;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 struct PlayerImmovable;
 class RequestList;
@@ -57,7 +58,8 @@ class ConstructionSite;
  * left, a transfer may be initiated.
  * The required time has no meaning for idle requests.
  */
-struct Request : public Trackable {
+class Request : public Trackable {
+public:
 	friend class Economy;
 	friend class RequestList;
 

@@ -21,29 +21,19 @@
 
 #include <algorithm>
 
+#include <stdint.h>
+
 #include "graphic/graphic.h"
 #include "logic/field.h"
 
-
-Overlay_Manager::Overlay_Manager() :
-m_are_graphics_loaded(false),
-m_showbuildhelp(false),
-m_callback(nullptr),
-m_callback_data(nullptr),
-m_callback_data_i(0)
-#ifndef NDEBUG
-//  No need to initialize (see comment for get_a_job_id) other than to shut up
-//  Valgrind.
-/**/,
-m_current_job_id(Job_Id::Null())
-#endif
-{}
-
+OverlayManager::OverlayManager() :
+	m_are_graphics_loaded(false), m_showbuildhelp(false), m_current_job_id(0) {
+}
 
 /**
  * \returns the currently registered overlays and the buildhelp for a node.
  */
-uint8_t Overlay_Manager::get_overlays
+uint8_t OverlayManager::get_overlays
 	(Widelands::FCoords const c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
@@ -83,7 +73,7 @@ end:
 /**
  * \returns the currently registered overlays for a triangle.
  */
-uint8_t Overlay_Manager::get_overlays
+uint8_t OverlayManager::get_overlays
 	(Widelands::TCoords<> const c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
@@ -108,32 +98,12 @@ uint8_t Overlay_Manager::get_overlays
 	return num_ret;
 }
 
-
-/**
- * remove all registered overlays. The Overlay_Manager
- * can than be reused without needing to be delete()ed
- */
-void Overlay_Manager::reset() {
-	m_are_graphics_loaded = false;
-	m_callback = nullptr;
-
-	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
-	for (Registered_Overlays_Map * it = m_overlays; it != overlays_end; ++it)
-		it->clear();
-	m_road_overlays.clear();
-}
-
-
 /**
  * Recalculates all calculatable overlays for fields
  */
-void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
+void OverlayManager::recalc_field_overlays(const Widelands::FCoords fc) {
 	Widelands::NodeCaps const caps =
-		m_callback ?
-		static_cast<Widelands::NodeCaps>
-			(m_callback(fc, m_callback_data, m_callback_data_i))
-		:
-		fc.field->nodecaps();
+	   m_callback ? static_cast<Widelands::NodeCaps>(m_callback(fc)) : fc.field->nodecaps();
 
 	fc.field->set_buildhelp_overlay_index
 		(caps & Widelands::BUILDCAPS_MINE                                      ?
@@ -154,12 +124,12 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 /**
  * finally, register a new overlay
  */
-void Overlay_Manager::register_overlay
+void OverlayManager::register_overlay
 	(Widelands::TCoords<> const c,
 	 const Image* pic,
 	 int32_t              const level,
 	 Point                      hotspot,
-	 Job_Id               const jobid)
+	 JobId               const jobid)
 {
 	assert(c.t <= 2);
 	assert(level != 5); //  level == 5 is undefined behavior
@@ -213,7 +183,7 @@ void Overlay_Manager::register_overlay
 /**
  * remove one (or many) overlays from a node or triangle
  */
-void Overlay_Manager::remove_overlay
+void OverlayManager::remove_overlay
 	(Widelands::TCoords<> const c, const Image* pic)
 {
 	assert(c.t <= 2);
@@ -236,7 +206,7 @@ void Overlay_Manager::remove_overlay
 /**
  * remove all overlays with this jobid
  */
-void Overlay_Manager::remove_overlay(const Job_Id jobid) {
+void OverlayManager::remove_overlay(const JobId jobid) {
 	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
 	for (Registered_Overlays_Map * j = m_overlays; j != overlays_end; ++j)
 		for (Registered_Overlays_Map::iterator it = j->begin(); it != j->end();) {
@@ -251,8 +221,8 @@ void Overlay_Manager::remove_overlay(const Job_Id jobid) {
 /**
  * Register road overlays
  */
-void Overlay_Manager::register_road_overlay
-	(Widelands::Coords const c, uint8_t const where, Job_Id const jobid)
+void OverlayManager::register_road_overlay
+	(Widelands::Coords const c, uint8_t const where, JobId const jobid)
 {
 	const Registered_Road_Overlays overlay = {jobid, where};
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
@@ -267,7 +237,7 @@ void Overlay_Manager::register_road_overlay
 /**
  * Remove road overlay
  */
-void Overlay_Manager::remove_road_overlay(const Widelands::Coords c) {
+void OverlayManager::remove_road_overlay(const Widelands::Coords c) {
 	const Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
 	if (it != m_road_overlays.end())
 		m_road_overlays.erase(it);
@@ -276,7 +246,7 @@ void Overlay_Manager::remove_road_overlay(const Widelands::Coords c) {
 /**
  * remove all overlays with this jobid
  */
-void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
+void OverlayManager::remove_road_overlay(JobId const jobid) {
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.begin();
 	const Registered_Road_Overlays_Map::const_iterator end =
 		m_road_overlays.end();
@@ -293,7 +263,7 @@ void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
  *
  * Load all the needed graphics
  */
-void Overlay_Manager::load_graphics() {
+void OverlayManager::load_graphics() {
 	if (m_are_graphics_loaded)
 		return;
 
@@ -323,4 +293,19 @@ void Overlay_Manager::load_graphics() {
 	}
 
 	m_are_graphics_loaded = true;
+}
+
+void OverlayManager::register_overlay_callback_function(CallbackFunction function) {
+	m_callback = function;
+}
+
+void OverlayManager::remove_overlay_callback_function() {
+	m_callback.clear();
+}
+
+OverlayManager::JobId OverlayManager::get_a_job_id() {
+	++m_current_job_id;
+	if (m_current_job_id == 0)
+		++m_current_job_id;
+	return m_current_job_id;
 }

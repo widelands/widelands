@@ -1,9 +1,9 @@
 -- =======================================================================
---                           Dummy Mission Map                        
+--                           Dummy Mission Map
 -- =======================================================================
 set_textdomain("scenario_dummy.wmf")
 
-use("aux", "ui")
+include "scripting/ui.lua"
 
 p1 = wl.Game().players[1]
 dummy_msg = {
@@ -14,4 +14,3 @@ dummy_msg = {
    posy=1,
 }
 p1:message_box(dummy_msg.title, dummy_msg.body, dummy_msg)
-

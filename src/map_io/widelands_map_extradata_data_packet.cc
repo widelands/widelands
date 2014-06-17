@@ -24,25 +24,18 @@
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
+#include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "profile/profile.h"
 
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-
-void Map_Extradata_Data_Packet::Read
-	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
-	 bool                    const skip,
-	 Map_Map_Object_Loader &)
-{
+void Map_Extradata_Data_Packet::Read(FileSystem& fs, bool const skip) {
 	if (skip)
 		return;
 
@@ -53,11 +46,9 @@ void Map_Extradata_Data_Packet::Read
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Map & map = egbase.map();
-			//  Nothing more. But read all pics.
+			// Read all pics.
 			if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
-				filenameset_t pictures;
-				fs.FindFiles("pics", "*", &pictures);
+				filenameset_t pictures = fs.ListDirectory("pics");
 				for
 					(filenameset_t::iterator pname = pictures.begin();
 					 pname != pictures.end();
@@ -71,7 +62,7 @@ void Map_Extradata_Data_Packet::Read
 					if (!g_gr->images().has(hash)) {
 						FileRead fr;
 
-						fr.Open(fs, pname->c_str());
+						fr.Open(fs, *pname);
 						SDL_Surface * const surf =
 							IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 						if (!surf)
@@ -81,16 +72,6 @@ void Map_Extradata_Data_Packet::Read
 						image = g_gr->images().get(hash);
 					}
 					assert(image);
-
-					//  OK, the pic is now known to the game. But when the game is
-					//  saved, this data has to be regenerated.
-					Map::Extradata_Info info;
-					info.type     = Map::Extradata_Info::PIC;
-					info.filename = *pname;
-					info.data     = image;
-					// replace \ with / in path or pics won't be saved on Windows
-					std::replace(info.filename.begin(), info.filename.end(), '\\', '/');
-					map.m_extradatainfos.push_back(info);
 				}
 			}
 		} else
@@ -103,27 +84,23 @@ void Map_Extradata_Data_Packet::Read
 
 
 void Map_Extradata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase)
 {
 	Profile prof;
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	//  Nothing more. All pics in the dir pic are loaded as pictures.
-	const Map::Extradata_Infos & extradatainfos =
-		egbase.map().m_extradatainfos;
-	for (uint32_t i = 0; i < extradatainfos.size(); ++i) {
-		const Map::Extradata_Info & edi = extradatainfos[i];
-		assert(edi.type == Map::Extradata_Info::PIC);
-
+	// Copy all files from pics/ from the old map to the new.
+	FileSystem* map_fs = egbase.map().filesystem();
+	if (map_fs && map_fs->FileExists("pics") && map_fs->IsDirectory("pics")) {
 		fs.EnsureDirectoryExists("pics");
-		FileWrite fw;
-
-		g_gr->save_png(edi.data, &fw);
-
-		fw.Write(fs, edi.filename.c_str());
+		for (const std::string& picture : map_fs->ListDirectory("pics")) {
+		size_t length;
+		void* input_data = map_fs->Load(picture, length);
+		fs.Write(picture, input_data, length);
+		free(input_data);
+		}
 	}
-
 	prof.write("extra_data", false, fs);
 }
 

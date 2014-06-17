@@ -37,7 +37,7 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "upcast.h"
 #include "wexception.h"
@@ -45,8 +45,6 @@
 namespace Widelands {
 
 static const size_t STATISTICS_VECTOR_LENGTH = 20;
-
-
 
 /*
 ==============================================================================
@@ -59,18 +57,19 @@ ProductionSite BUILDING
 ProductionSite_Descr::ProductionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const Tribe_Descr & _tribe, const World& world)
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
-			if (Ware_Index idx = tribe().ware_index(op->get_string())) {
+			Ware_Index idx = tribe().ware_index(op->get_string());
+			if (idx != INVALID_INDEX) {
 				if (m_output_ware_types.count(idx))
 					throw wexception("this ware type has already been declared as an output");
 				m_output_ware_types.insert(idx);
-			} else if ((idx = tribe().worker_index(op->get_string()))) {
+			} else if ((idx = tribe().worker_index(op->get_string())) != INVALID_INDEX) {
 				if (m_output_worker_types.count(idx))
 					throw wexception("this worker type has already been declared as an output");
 				m_output_worker_types.insert(idx);
@@ -83,7 +82,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	if (Section * const s = prof.get_section("inputs"))
 		while (Section::Value const * const val = s->get_next_val())
 			try {
-				if (Ware_Index const idx = tribe().ware_index(val->get_name())) {
+				Ware_Index const idx = tribe().ware_index(val->get_name());
+				if (idx != INVALID_INDEX) {
 					container_iterate_const(BillOfMaterials, inputs(), i)
 						if (i.current->first == idx)
 							throw wexception("duplicated");
@@ -103,7 +103,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	if (Section * const working_positions_s = prof.get_section("working positions"))
 		while (Section::Value const * const v = working_positions_s->get_next_val())
 			try {
-				if (Ware_Index const woi = tribe().worker_index(v->get_name())) {
+				Ware_Index const woi = tribe().worker_index(v->get_name());
+				if (woi != INVALID_INDEX) {
 					container_iterate_const(BillOfMaterials, working_positions(), i)
 						if (i.current->first == woi)
 							throw wexception("duplicated");
@@ -128,20 +129,10 @@ ProductionSite_Descr::ProductionSite_Descr
 				throw wexception("this program has already been declared");
 			m_programs[program_name] =
 				new ProductionProgram
-					(directory, prof, program_name, v->get_string(), this);
+					(directory, prof, program_name, v->get_string(), world, this);
 		} catch (const std::exception & e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
-	}
-
-	if (Section * compat_s = prof.get_section("compatibility_programs")) {
-		while (const Section::Value * v = compat_s->get_next_val())
-			m_compatibility_programs[v->get_name()] = split_string(v->get_string(), " ");
-	}
-
-	if (Section * compat_s = prof.get_section("compatibility working positions")) {
-		while (const Section::Value * v = compat_s->get_next_val())
-			m_compatibility_working_positions[v->get_name()] = split_string(v->get_string(), " ");
 	}
 }
 
@@ -166,32 +157,6 @@ const ProductionProgram * ProductionSite_Descr::get_program
 			("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second;
 }
-
-/**
- * If there is a compatibility action for the given program, return it.
- *
- * Otherwise, return an empty vector.
- */
-const std::vector<std::string> & ProductionSite_Descr::compatibility_program
-	(const std::string & progname) const
-{
-	static const std::vector<std::string> empty;
-	Compatibility::const_iterator it = m_compatibility_programs.find(progname);
-	if (it != m_compatibility_programs.end())
-		return it->second;
-	return empty;
-}
-
-const std::vector<std::string> & ProductionSite_Descr::compatibility_working_positions
-	(const std::string & workername) const
-{
-	static const std::vector<std::string> empty;
-	Compatibility::const_iterator it = m_compatibility_working_positions.find(workername);
-	if (it != m_compatibility_working_positions.end())
-		return it->second;
-	return empty;
-}
-
 
 /**
  * Create a new building of this type
@@ -219,6 +184,7 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
 	m_statistics_changed(true),
 	m_last_stat_percent (0),
+	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle")
 {
@@ -263,7 +229,7 @@ std::string ProductionSite::get_statistics_string()
 
 /**
  * Detect if the workers are experienced enough for an upgrade
- * @param idx Index of the enhanchement
+ * @param idx Index of the enhancement
  */
 bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {
@@ -294,9 +260,7 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
 	container_iterate_const(Input_Queues, m_input_queues, i)
 		if ((*i.current)->get_ware() == wi)
 			return **i.current;
-	throw wexception
-		("%s (%u) has no WaresQueue for %u",
-		 name().c_str(), serial(), wi.value());
+	   throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
 }
 
 /**
@@ -320,7 +284,9 @@ void ProductionSite::calc_statistics()
 	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk < 33)
+	if (percOk > (m_crude_percent / 10000) and percOk - (m_crude_percent / 10000) > 50)
+		color = UI_FONT_CLR_IDLE_HEX;
+	else if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
 	else if (percOk < 66)
 		color = UI_FONT_CLR_OK_HEX;
@@ -886,21 +852,31 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 
 	switch (result) {
 	case Failed:
+		//changed by TB below
+		m_statistics_changed = true;
+		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
+		m_statistics.push_back(false);
+		calc_statistics();
+		m_crude_percent = m_crude_percent * 8 / 10;
+		break;
+		//end of changed by TB
 	case Completed:
 		m_skipped_programs.erase(program_name);
 		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
-		m_statistics.push_back(result == Completed);
-		if (result == Completed) {
-			for (uint32_t i = descr().nr_working_positions(); i;)
-				m_working_positions[--i].worker->gain_experience(game);
-			m_result_buffer[0] = '\0';
-			Building::workers_changed();
-		}
+		m_statistics.push_back(true);
+		//if (result == Completed) {
+			train_workers(game);
+			//m_result_buffer[0] = '\0';  //changed by TB
+		//}
+		m_crude_percent = m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
 	case Skipped:
 		m_skipped_programs[program_name] = game.get_gametime();
+		//changed by TB below
+		m_crude_percent = m_crude_percent * 98 / 100;
+		//end of changed by TB
 		break;
 	case None:
 		break;
@@ -911,6 +887,14 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	m_program_timer = true;
 	m_program_time = schedule_act(game, m_post_timer);
 }
+
+void ProductionSite::train_workers(Game & game)
+{
+	for (uint32_t i = descr().nr_working_positions(); i;)
+		m_working_positions[--i].worker->gain_experience(game);
+	Building::workers_changed();
+}
+
 
 /// Changes the default anim string to \li anim
 void ProductionSite::set_default_anim(std::string anim)

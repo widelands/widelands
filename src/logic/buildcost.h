@@ -23,10 +23,10 @@
 #include <map>
 
 #include "logic/widelands.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 
-struct Section;
+class FileRead;
+class FileWrite;
+class Section;
 
 namespace Widelands {
 

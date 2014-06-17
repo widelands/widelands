@@ -23,6 +23,7 @@
 #include <string>
 
 #include "logic/cmd_queue.h"
+#include "scripting/lua_coroutine.h"
 #include "scripting/scripting.h"
 
 namespace Widelands {

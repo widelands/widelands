@@ -24,8 +24,8 @@
 
 namespace Widelands {
 
-struct Request;
-struct WaresQueue;
+class Request;
+class WaresQueue;
 
 /*
 Partially_Finished_Building
@@ -35,7 +35,7 @@ This class is the base for constructionsites and
 dismantlesites.
 */
 class Partially_Finished_Building : public Building {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 	friend struct Map_Building_Data_Packet;
 
 public:

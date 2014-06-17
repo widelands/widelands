@@ -38,6 +38,9 @@
 #define TEXTURE_HEIGHT TEXTURE_WIDTH
 //@}
 
+//sizes for the images in the build menu (containing building icons)
+#define BUILDMENU_IMAGE_SIZE 30. // used for width and height
+
 #define XRES 800 ///< Fullscreen Menu Width
 #define YRES 600 ///< Fullscreen Menu Height
 
@@ -85,6 +88,7 @@
 #define UI_FONT_CLR_BAD_HEX       "bb0000"
 #define UI_FONT_CLR_OK_HEX        "ffe11e"
 #define UI_FONT_CLR_GOOD_HEX      "00bb00"
+#define UI_FONT_CLR_IDLE_HEX      "0090ff"
 //@}
 
 /** \name Text colors

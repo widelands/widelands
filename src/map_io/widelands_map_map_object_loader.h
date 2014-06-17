@@ -32,7 +32,7 @@
 
 
 namespace Widelands {
-struct Bob;
+class Bob;
 class Map_Object;
 class Editor_Game_Base;
 
@@ -41,7 +41,8 @@ class Editor_Game_Base;
  *   - keep track of map objects on the map (to be loaded)
  *   - translate file index pointers into Map_Objects
  */
-struct Map_Map_Object_Loader {
+class Map_Map_Object_Loader {
+public:
 	bool is_object_known(uint32_t);
 
 	/// Registers the object as a new one.

@@ -27,14 +27,15 @@
 #include <boost/shared_ptr.hpp>
 
 #include "logic/tattribute.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
+
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 
 class Map_Object;
 class Editor_Game_Base;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 
 struct RequirementsStorage;

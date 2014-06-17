@@ -66,13 +66,10 @@ using boost::format;
 
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
-	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
+	(Widelands::TCoords<Widelands::FCoords> const c, Interactive_Player& iap)
 {
-	assert(data);
-	assert(static_cast<Interactive_Player const *>(data)->get_player());
-	return
-		static_cast<const Interactive_Player *>(data)->get_player()->
-		get_buildcaps(c);
+	assert(iap.get_player());
+	return iap.get_player()->get_buildcaps(c);
 }
 
 Interactive_Player::Interactive_Player
@@ -172,8 +169,8 @@ m_toggle_help
 	set_display_flag(dfSpeed, true);
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
+ registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
+ registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
@@ -184,32 +181,14 @@ m_toggle_help
 	INIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
 	INIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
 
-	m_encyclopedia.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<EncyclopediaWindow>(),
-		 boost::ref(*this),
-		 boost::ref(m_encyclopedia));
-	m_options.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<GameOptionsMenu>(),
-		 boost::ref(*this),
-		 boost::ref(m_options),
-		 boost::ref(m_mainm_windows));
-	m_statisticsmenu.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<GameMainMenu>(),
-		 boost::ref(*this),
-		 boost::ref(m_statisticsmenu),
-		 boost::ref(m_mainm_windows));
-	m_objectives.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<GameObjectivesMenu>(),
-		 boost::ref(*this),
-		 boost::ref(m_objectives));
-	m_message_menu.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<GameMessageMenu>(),
-		 boost::ref(*this),
-		 boost::ref(m_message_menu));
-	m_mainm_windows.stock.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<Stock_Menu>(),
-		 boost::ref(*this),
-		 boost::ref(m_mainm_windows.stock));
+	m_encyclopedia.open_window = [this] {new EncyclopediaWindow(*this, m_encyclopedia);};
+	m_options.open_window = [this] {new GameOptionsMenu(*this, m_options, m_mainm_windows);};
+	m_statisticsmenu.open_window = [this] {
+		new GameMainMenu(*this, m_statisticsmenu, m_mainm_windows);
+	};
+	m_objectives.open_window = [this] {new GameObjectivesMenu(this, m_objectives);};
+	m_message_menu.open_window = [this] {new GameMessageMenu(*this, m_message_menu);};
+	m_mainm_windows.stock.open_window = [this] {new Stock_Menu(*this, m_mainm_windows.stock);};
 
 #ifndef NDEBUG //  only in debug builds
 	addCommand
@@ -219,16 +198,9 @@ m_toggle_help
 }
 
 Interactive_Player::~Interactive_Player() {
-	// We need to remove these callbacks because the opened window might
-	// (theoretically) live longer than 'this' window, and thus the
-	// buttons. The assertions are safeguards in case somewhere else in the
-	// code someone would overwrite our hooks.
-
-#define DEINIT_BTN_HOOKS(registry, btn)                                                \
- assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed, &btn, true));  \
- assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed, &btn, false)); \
- registry.onCreate = 0;                                                                \
- registry.onDelete = 0;                                                                \
+#define DEINIT_BTN_HOOKS(registry, btn)                                                            \
+	registry.on_create = 0;                                                                         \
+	registry.on_delete = 0;
 
 	DEINIT_BTN_HOOKS(m_chat, m_toggle_chat)
 	DEINIT_BTN_HOOKS(m_options, m_toggle_options_menu)
@@ -310,10 +282,10 @@ void Interactive_Player::think()
 void Interactive_Player::postload()
 {
 	Map & map = egbase().map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
-			(&Int_Player_overlay_callback_function, static_cast<void *>(this));
+			(boost::bind(&Int_Player_overlay_callback_function, _1, boost::ref(*this)));
 
 	// Connect buildhelp button to reflect build help state. Needs to be
 	// done here rather than in the constructor as the map is not present then.
@@ -324,7 +296,7 @@ void Interactive_Player::postload()
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
 	delete m_fieldaction.window;
@@ -348,7 +320,7 @@ void Interactive_Player::toggle_chat() {
 	if (m_chat.window)
 		delete m_chat.window;
 	else if (m_chatProvider)
-		new GameChatMenu(this, m_chat, *m_chatProvider);
+		GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 }
 
 bool Interactive_Player::can_see(Widelands::Player_Number const p) const
@@ -453,7 +425,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 				break;
 
 			if (!m_chat.window)
-				new GameChatMenu(this, m_chat, *m_chatProvider);
+				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 
 			return true;
 		default:
@@ -498,7 +470,7 @@ void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 		 	 % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
 	Map              &       map             = egbase().map();
-	Overlay_Manager  &       overlay_manager = map.overlay_manager();
+	OverlayManager  &       overlay_manager = map.overlay_manager();
 	Widelands::Extent  const extent          = map.extent         ();
 	for (Widelands::Y_Coordinate y = 0; y < extent.h; ++y)
 		for (Widelands::X_Coordinate x = 0; x < extent.w; ++x)
@@ -511,4 +483,3 @@ void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 			(*building_statistics_window)
 			.update();
 }
-

@@ -21,6 +21,7 @@
 
 #include <sstream>
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <libintl.h>
@@ -33,6 +34,7 @@
 #include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
@@ -283,31 +285,30 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerNumber(number);
 	}
 
-	virtual std::string getWinCondition() override {
-		return h->settings().win_condition;
+	virtual std::string getWinConditionScript() override {
+		return h->settings().win_condition_script;
 	}
 
-	virtual void setWinCondition(std::string wc) override {
-		h->setWinCondition(wc);
+	virtual void setWinConditionScript(std::string wc) override {
+		h->setWinConditionScript(wc);
 	}
 
 	virtual void nextWinCondition() override {
-		if (m_win_conditions.size() < 1) {
-			// Register win condition scripts
+		if (m_win_condition_scripts.size() < 1) {
 			if (!m_lua)
 				m_lua = new LuaInterface();
-			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-
-			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
-			container_iterate_const(ScriptContainer, sc, wc)
-			m_win_conditions.push_back(wc->first);
+			std::set<std::string> win_conditions =
+			   filter(g_fs->ListDirectory("scripting/win_conditions"),
+			          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
+			m_win_condition_scripts.insert(
+			   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
 			m_cur_wincondition = -1;
 		}
 
 		if (canChangeMap()) {
 			m_cur_wincondition++;
-			m_cur_wincondition %= m_win_conditions.size();
-			setWinCondition(m_win_conditions[m_cur_wincondition]);
+			m_cur_wincondition %= m_win_condition_scripts.size();
+			setWinConditionScript(m_win_condition_scripts[m_cur_wincondition]);
 		}
 	}
 
@@ -315,7 +316,7 @@ private:
 	NetHost                * h;
 	LuaInterface           * m_lua;
 	int16_t                  m_cur_wincondition;
-	std::vector<std::string> m_win_conditions;
+	std::vector<std::string> m_win_condition_scripts;
 };
 
 struct HostChatProvider : public ChatProvider {
@@ -444,8 +445,8 @@ struct HostChatProvider : public ChatProvider {
 						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
 					else {
 						kickClient = num;
-						c.msg  = (format(_("Are you sure you want to kick %s?<br>")) % arg1).str();
-						c.msg += (format(_("The stated reason was: %s<br>")) % kickReason).str();
+						c.msg  = (format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
+						c.msg += (format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
 						c.msg += (format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
@@ -650,7 +651,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	Widelands::Tribe_Descr::get_all_tribe_infos(d->settings.tribes);
+	d->settings.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
 	setMultiplayerGameSettings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -832,7 +833,7 @@ void NetHost::run(bool const autorun)
 				Widelands::Game_Preload_Data_Packet gpdp;
 				gl.preload_game(gpdp);
 
-				setWinCondition(gpdp.get_win_condition());
+				setWinConditionScript(gpdp.get_win_condition());
 			}
 		} else {
 			loaderUI.reset(new UI::ProgressWindow ("pics/progress.png"));
@@ -857,7 +858,7 @@ void NetHost::run(bool const autorun)
 				Widelands::Game_Preload_Data_Packet gpdp;
 				gl.preload_game(gpdp);
 
-				setWinCondition(gpdp.get_win_condition());
+				setWinConditionScript(gpdp.get_win_condition());
 			}
 
 			if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
@@ -1309,14 +1310,13 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		std::vector<std::string> directories;
 		directories.push_back("maps");
 		while (!directories.empty()) {
-			filenameset_t files;
-			g_fs->FindFiles(directories.at(directories.size() - 1).c_str(), "*", &files, 0);
+			filenameset_t files = g_fs->ListDirectory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
 			const filenameset_t & gamefiles = files;
 			container_iterate_const(filenameset_t, gamefiles, i) {
 				char const * const name = i.current->c_str();
-				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 				if (ml) {
 					map.set_filename(name);
 					ml->preload_map(true);
@@ -1325,7 +1325,6 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 					info.players  = map.get_nrplayers();
 					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
 					d->settings.maps.push_back(info);
-					delete ml;
 				} else {
 					if
 						(g_fs->IsDirectory(name)
@@ -1343,8 +1342,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 
 	if (d->settings.saved_games.empty()) {
 		// Read in saved games
-		filenameset_t files;
-		g_fs->FindFiles("save", "*", &files, 0);
+		filenameset_t files = g_fs->ListDirectory("save");
 		Widelands::Game game;
 		Widelands::Game_Preload_Data_Packet gpdp;
 		const filenameset_t & gamefiles = files;
@@ -1539,7 +1537,7 @@ void NetHost::setMap
 	if (!g_fs->IsDirectory(mapfilename)) {
 		// Read in the file
 		FileRead fr;
-		fr.Open(*g_fs, mapfilename.c_str());
+		fr.Open(*g_fs, mapfilename);
 		if (file)
 			delete file;
 		file = new NetTransferFile();
@@ -1799,9 +1797,9 @@ void NetHost::setPlayerNumber(uint8_t const number)
 	switchToPlayer(0, number);
 }
 
-void NetHost::setWinCondition(std::string wc)
+void NetHost::setWinConditionScript(std::string wc)
 {
-	d->settings.win_condition = wc;
+	d->settings.win_condition_script = wc;
 
 	// Broadcast changes
 	SendPacket s;
@@ -2133,7 +2131,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 
 	s.reset();
 	s.Unsigned8(NETCMD_WIN_CONDITION);
-	s.String(d->settings.win_condition);
+	s.String(d->settings.win_condition_script);
 	s.send(client.sock);
 
 	// Broadcast new information about the player to everybody
@@ -2659,14 +2657,13 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					// Check if file is a map and if yes read out the needed data
 					Widelands::Map   map;
 					i18n::Textdomain td("maps");
-					Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
-					if (ml) {
+					std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(path);
+					if (ml.get() != nullptr) {
 						// Yes it is a map file :)
 						map.set_filename(path.c_str());
 						ml->preload_map(true);
 						d->settings.scenario = scenario;
 						d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
-						delete ml;
 					}
 				}
 			}

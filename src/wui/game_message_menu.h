@@ -33,7 +33,7 @@ namespace Widelands {
 class Game;
 struct Message;
 };
-struct Interactive_Player;
+class Interactive_Player;
 
 ///  Shows the not already fulfilled objectives.
 struct GameMessageMenu : public UI::UniqueWindow {

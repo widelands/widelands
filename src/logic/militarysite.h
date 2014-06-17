@@ -28,12 +28,13 @@
 namespace Widelands {
 
 class Soldier;
+class World;
 
 struct MilitarySite_Descr : public ProductionSite_Descr {
 	MilitarySite_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
-		 const Tribe_Descr & tribe);
+		 const Tribe_Descr & tribe, const World& world);
 
 	virtual Building & create_object() const override;
 
@@ -60,7 +61,7 @@ private:
 class MilitarySite :
 	public ProductionSite, public SoldierControl, public Attackable
 {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 	MO_DESCR(MilitarySite_Descr);
 
 public:
@@ -170,11 +171,6 @@ private:
 	};
 	std::vector<SoldierJob> m_soldierjobs;
 	SoldierPreference m_soldier_preference;
-	std::string m_occupied_str;
-	std::string m_aggressor_str;
-	std::string m_attack_str;
-	std::string m_defeated_enemy_str;
-	std::string m_defeated_you_str;
 	int32_t m_next_swap_soldiers_time;
 	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
 	bool m_doing_upgrade_request;

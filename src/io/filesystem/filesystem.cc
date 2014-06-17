@@ -178,13 +178,13 @@ std::string FileSystem::GetHomedir()
 #endif
 
 	if (homedir.empty()) {
-		printf
+		log
 			("\nWARNING: either we can not detect your home directory "
 			 "or you do not have one! Please contact the developers.\n\n");
 
 		//TODO: is it really a good idea to set homedir to "." then ??
 
-		printf("Instead of your home directory, '.' will be used.\n\n");
+		log("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
 	}
 
@@ -327,6 +327,11 @@ const char * FileSystem::FS_Filename(const char * p) {
 	}
 
 	return result;
+}
+
+std::string FileSystem::FS_Dirname(const std::string& full_path) {
+	const std::string filename = FS_Filename(full_path.c_str());
+	return full_path.substr(0, full_path.size() - filename.size());
 }
 
 std::string FileSystem::FS_FilenameExt(const std::string & f)

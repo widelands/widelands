@@ -30,6 +30,8 @@
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/world.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
@@ -343,10 +345,9 @@ void FieldDebugWindow::think()
 		switch (vision) {
 		case 0: str += "  never seen\n"; break;
 		case 1: {
-			std::string animation_name = "(none)";
+			std::string animation_name = "(no animation)";
 			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
-				animation_name = g_anim.get_animation
-					(player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation()).picnametempl;
+				animation_name = "(seen an animation)";
 			}
 
 			snprintf
@@ -371,9 +372,10 @@ void FieldDebugWindow::think()
 		Widelands::Resource_Index ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
 		int startingAmount = m_coords.field->get_starting_res_amount();
-		snprintf
-		(buffer, sizeof(buffer), "Resource: %s\n",
-			m_map.get_world()->get_resource(ridx)->name().c_str());
+		snprintf(buffer,
+		         sizeof(buffer),
+		         "Resource: %s\n",
+		         ibase().egbase().world().get_resource(ridx)->name().c_str());
 
 		str += buffer;
 

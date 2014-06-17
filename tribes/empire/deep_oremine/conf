@@ -4,11 +4,11 @@ enhanced_building=yes
 output=ironore
 
 [enhancement_cost]
-trunk=4
+log=4
 wood=2
 
 [return_on_dismantle_on_enhanced]
-trunk=2
+log=2
 wood=1
 
 [working positions]
@@ -31,10 +31,10 @@ return=skipped unless economy needs ironore or not economy needs beer
 sleep=43000
 consume=meal beer
 animate=working 18000
-mine=iron 2 100 5
+mine=iron 2 100 5 2
 produce=ironore:2
 animate=working 18000
-mine=iron 2 100 5
+mine=iron 2 100 5 2
 produce=ironore:2
 
 [idle]

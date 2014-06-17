@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_scenario")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)
@@ -20,7 +20,7 @@ obj_build_small_food_economy = {
    name = "build_small_food_economy",
    title=_"Build up a small food economy",
    number = 5,
-   body = objective_text(_"Build up a small food economy", 
+   body = objective_text(_"Build up a small food economy",
 [[• ]] .. _([[Build up a basic food economy to provide your people with food]] ..
 [[ – a fisher’s hut, a hunter’s hut, a well, a farm and a bakery.]])),
 }
@@ -29,7 +29,7 @@ obj_build_cattlefarm = {
    name = "obj_build_cattlefarm",
    title = _ "Build a cattle farm",
    number = 1,
-   body = objective_text(_"Remember to build a cattle farm", 
+   body = objective_text(_"Remember to build a cattle farm",
 _([[As your roads grow longer and your economy bigger, you should make good use of your oxen ]] ..
 [[to help transport wares more quickly. Remember to build a cattle farm!]])),
 }
@@ -91,7 +91,7 @@ obj_build_a_warehouse = {
    number = 1,
    body = objective_text(_"Build a warehouse",
 [[• ]] .. _"Build a warehouse to the west of the mountains." ..
-"<br><br>" ..
+paragraphdivider() ..
 [[→ ]] .. _([[Warehouses are similar to your headquarters, ]] ..
 [[with the only difference that they aren’t defended by soldiers. ]] ..
 [[It is often wise to build a warehouse when your territory is growing ]] ..
@@ -136,7 +136,7 @@ obj_destroy_kalitaths_army = {
    number = 2,
    body = objective_text(_"Destroy Kalitath’s army",
 [[• ]] .. _"Destroy Kalitath’s army and expand your territory to the east." ..
-"<br><br>" ..
+paragraphdivider() ..
 [[→ ]] .. _([[To attack an enemy, you must click on the door of an adversary’s military building. ]] ..
 [[A menu will pop up allowing you to select the number of soldiers that should attack. ]] ..
 [[When you are ready with setting the number, click on the cross (‘Start Attack’).]])),
@@ -160,7 +160,7 @@ story_msg_1 = {
 _([[These last days, we came closer to our capital. ]] ..
 [[Many people have already joined us on our march and set their hopes on me. ]] ..
 [[However, I fear that we are not strong enough to take up the battle against my brothers.]]) ..
-"<br><br>" ..
+paragraphdivider() ..
 _([[For now, we are resting at the borders of the old forest and preparing for the coming days.]])),
 }
 
@@ -236,7 +236,7 @@ order_msg_7_renegade_fortification = {
 _([[The traitor left his armies dying where they lay when he saw that he would not keep my forces back. ]] ..
 [[Kalitath disappeared in the confusion of the war, but I don’t care now. ]] ..
 [[Shall he flee and be forgotten for all times as a tribal leader that would not bow before the wooden throne, ]] ..
-[[that is mine to take now.]]) .. "<br><br>" ..
+[[that is mine to take now.]]) .. paragraphdivider() ..
 _([[Furthermore, his flight brought us a great benefit: ]] ..
 [[all year, Kalitath was so busy fighting that he did not even care to store enough food for all his men. ]] ..
 [[Now that he has fled, their hunger has caused some of his younger followers to desert. ]] ..
@@ -297,7 +297,7 @@ _([[The first fortification Thron ordered has just been completed. ]] ..
 [[But Thron is not yet satisfied – and I fully understand his fears: ]] ..
 [[the forests are deep, and the frontier to Al’thunran is near. ]] ..
 [[I am sure that there are a thousand greater dangers out there than the unknown tracks.]]) ..
-"<br><br>" ..
+paragraphdivider() ..
 _([[To overlook more of the area around our hall, we should explore further ]] ..
 [[and set up more guards and scouts to observe the frontier ]] ..
 [[and keep an eye on the raging wars on our doorstep. ]] ..
@@ -353,7 +353,7 @@ order_msg_6_build_enhanced_economy_and_training = {
 _([[Our mining economy seems to work fine, that is already good news! ]] ..
 [[Anyway, there are still a lot of men and women waiting in our hall to get a task, ]] ..
 [[so they can help our soldiers to prepare for the future fights.]]) ..
-"<br><br>" ..
+paragraphdivider() ..
 _([[Our geologists found a lot more deposits of iron ore, coal and even gold. ]] ..
 [[We should enhance our current mines as soon as our miners are more experienced. ]] ..
 [[We should build up some more mines, a bigger food infrastructure ]] ..
@@ -370,13 +370,14 @@ story_msg_7 = {
    body= thron(_"Thron looks worried...",
 _([[My brothers and their soldiers are dead and left fire and destruction behind. ]] ..
 [[In none of all the ruins could I find any man or woman of the normal folk, ]] ..
-[[and so I just may hope that they fled from this cruel battleground and started a better life somewhere else.]]) .. "<br><br>" ..
+[[and so I just may hope that they fled from this cruel battleground and started a better life somewhere else.]])
+.. paragraphdivider() ..
 _([[Nothing is left of that beauty I remember, only ruins remain of the old capital. ]] ..
 [[I am sorrowful but also relieved. I never hoped to ever see Al’thunran’s old beauty again]] ..
 [[ – it was only a few months ago that I wondered whether I would ever be able to set my feet in Al’thunran again. ]] ..
 [[Now the old town is back in my hands, and I will not hesitate to rebuild it with all the strength my people have. ]] ..
 [[I can’t wait to see it again in its old beauty.]]))
-..  objective_text(_"Victory", 
+..  objective_text(_"Victory",
    _([[You have completed the last mission of the barbarian tutorial campaign. ]] ..
 [[You may continue playing if you wish, otherwise move on to the next campaign.]]))
 }
@@ -386,11 +387,11 @@ order_msg_7_free_althunran = {
    title=_"Military Assault",
    body= thron(
 _([[So be it, the generals are out and about arranging my troops, and Boldreth himself will lead the first strike. ]] ..
-[[I will ride by his side, to free Al’thunran of this war and return peace to our capital.]]) .. "<br><br>" ..
+[[I will ride by his side, to free Al’thunran of this war and return peace to our capital.]]) .. paragraphdivider() ..
 _([[When the young sun rises above the trees tomorrow morning, I will order the assault. ]] ..
 [[By dusk, I will celebrate my victory in the wooden halls of the warlord ]] ..
 [[and sacrifice a newborn lamb in the honor of my father, whose eyes are set upon me today.]]) ..
-"<br><br>" ..
+paragraphdivider() ..
 _([[So be it!]]))
 .. new_objectives(obj_military_assault_on_althunran),
 }
@@ -403,4 +404,3 @@ _([[Chieftain, remember the poor carriers: Our roads get longer and longer ]] ..
 [[We should breed more oxen to make their work lighter and our transportation more efficient.]]))
 .. new_objectives(obj_build_cattlefarm),
 }
-

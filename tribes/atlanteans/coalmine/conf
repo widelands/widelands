@@ -2,12 +2,12 @@ size=mine
 output=coal
 
 [buildcost]
-trunk=7
+log=7
 planks=4
 spidercloth=1
 
 [return_on_dismantle]
-trunk=3
+log=3
 planks=2
 
 [working positions]
@@ -30,26 +30,23 @@ return=skipped unless economy needs coal or not economy needs smoked_fish
 consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
 animate=working 20000
-mine=coal 4 100 5
+mine=coal 4 100 5 2
 produce=coal:2
 animate=working 20000
-mine=coal 4 100 5
+mine=coal 4 100 5 2
 produce=coal:2
 animate=working 20000
-mine=coal 4 100 5
+mine=coal 4 100 5 2
 produce=coal:3
 
 [idle]
 pics=coalmine_i_??.png
 hotspot=50 56
-playercolor=true
 
 [working]
 pics=coalmine_i_??.png
 hotspot=50 56
-playercolor=true
 
 [empty]
 pics=coalmine_e_??.png
 hotspot=50 56
-playercolor=true

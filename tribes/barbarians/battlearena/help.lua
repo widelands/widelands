@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_help")
+include "scripting/formatting.lua"
+include "scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -36,13 +36,13 @@ return {
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 3), 3) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 6), 6) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 4), 4) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 6), 6) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 6), 6) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "gold", ngettext("%i Gold", "%i Gold", 2), 2) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 2), 2) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 3), 3) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 3), 3) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 3), 3) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
@@ -52,5 +52,5 @@ return {
 		text_line(_"Experience levels:", "n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a %1$s can train %2$s for one soldier from 0 to the highest level in %3$s on average.":bformat(_"Battle Arena",_"Evade",_"%1$im%2$is":bformat(1,10)))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, a Battle Arena can train %1$s for one soldier from 0 to the highest level in %2$s on average.":bformat(_"Evade",_"%1$im%2$is":bformat(1,10)))
 }

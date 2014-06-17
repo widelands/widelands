@@ -19,6 +19,8 @@
 
 #include "logic/worker.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "economy/economy.h"
@@ -29,6 +31,8 @@
 #include "gamecontroller.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_incorporate.h"
@@ -46,6 +50,9 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker_program.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
@@ -71,7 +78,7 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	}
 
 	Player & player = *get_owner();
-	Ware_Index const wareid(static_cast<Ware_Index::value_t>(action.iparam1));
+	Ware_Index const wareid(action.iparam1);
 	WareInstance & ware =
 		*new WareInstance(wareid, tribe().get_ware_descr(wareid));
 	ware.init(game);
@@ -104,7 +111,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
-		map.get_world()->get_resource(action.sparam1.c_str());
+		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
 		throw game_data_error
 			(_
@@ -209,7 +216,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
-		map.get_world()->get_resource(action.sparam1.c_str());
+		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
 		throw game_data_error
 			(_
@@ -342,7 +349,7 @@ bool Worker::run_setbobdescription
 
 	state.ivar2 =
 		state.svar1 == "world" ?
-		game.map().world().get_bob(bob.c_str())
+		game.world().get_bob(bob.c_str())
 		:
 		descr ().tribe().get_bob(bob.c_str());
 
@@ -538,7 +545,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 {
 	std::vector<Coords> list;
 	Map & map = game.map();
-	World * const w = &map.world();
+	const World& world = game.world();
 
 	CheckStepDefault cstep(descr().movecaps());
 
@@ -550,10 +557,10 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 		if (action.iparam4)
 			functor.add
 				(FindNodeResourceBreedable
-				 	(w->get_resource(action.sparam1.c_str())));
+				 	(world.get_resource(action.sparam1.c_str())));
 		else
 			functor.add
-				(FindNodeResource(w->get_resource(action.sparam1.c_str())));
+				(FindNodeResource(world.get_resource(action.sparam1.c_str())));
 	}
 
 	if (action.iparam5 > -1)
@@ -588,31 +595,31 @@ void Worker::informPlayer
 	(Game & game, Building & building, std::string res_type) const
 {
 	// NOTE this is just an ugly hack for now, to avoid getting messages
-	// NOTE for farms, ferneries, vineyards, etc.
+	// NOTE for farms, reed yards, vineyards, etc.
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
 	// NOTE  AND fish_breeders
 	if (building.name() == "fish_breeders_house")
 		return;
 
+	// TODO "stone" is defined as "granit" in the world. But this code is
+	// erroneus anyways: it translates immovable attribute stone as resource
+	// granit. Instead, the immovable attributes should be made translatable in
+	// the world or the quarry should define its out of stone message in its
+	// configuartion.
+	if (res_type == "stone") res_type = "granit";
+
 	// Translate the Resource name (if it is defined by the world)
-	const World & world = game.map().world();
+	const World & world = game.world();
 	int32_t residx = world.get_resource(res_type.c_str());
 	if (residx != -1)
 		res_type = world.get_resource(residx)->descname();
 
-	// NOTE mirroring the above ugly hack.
-	// Avoiding placeholders for the resouce names to avert grammar trouble in translations.
-	std::string out_of_message =_("Out of Resources");
-	if (res_type == "fish") out_of_message =_("Out of Fish");
-	else if (res_type == "stone") out_of_message =_("Out of Stone");
-
 	building.send_message
 		(game,
 		 "mine",
-		 out_of_message,
-		 (boost::format(_("The worker of this building cannot find any more resources "
-		 	 "of the following type: %s")) % res_type).str(),
+		 (boost::format(_("Out of %s")) % res_type).str(),
+		 (boost::format(_("The worker of this building cannot find any more %s.")) % res_type).str(),
 		 true,
 		 1800000, 0);
 }
@@ -809,10 +816,10 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		if (list.size() == 1) {
 			state.svar1 = "world";
 			immovable = list[0];
-			state.ivar2 = map.world().get_immovable_index(immovable.c_str());
+			state.ivar2 = game.world().get_immovable_index(immovable.c_str());
 			if (state.ivar2 > 0) {
 				Immovable_Descr const * imm =
-					map.world().get_immovable_descr(state.ivar2);
+					game.world().get_immovable_descr(state.ivar2);
 				uint32_t suits = imm->terrain_suitability(fpos, map);
 				// Remove existing, if this immovable suits better
 				if (suits > terrain_suitability) {
@@ -941,23 +948,25 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 	const Map & map = game.map();
 	const FCoords position = map.get_fcoords(get_position());
 	BaseImmovable const * const imm = position.field->get_immovable();
-	const World & world = map.world();
+	const World & world = game.world();
 
 	if (imm && imm->get_size() > BaseImmovable::NONE) {
 		//NoLog("  Field is no longer empty\n");
 	} else if
-		(const Resource_Descr * const rdescr =
+		(const ResourceDescription * const rdescr =
 		 	world.get_resource(position.field->get_resources()))
 	{
 		// Geologist also sends a message notifying the player
-		if (rdescr->is_detectable() && position.field->get_resources_amount()) {
+		if (rdescr->detectable() && position.field->get_resources_amount()) {
 			char message[1024];
-			snprintf
-				(message, sizeof(message),
-				 "<rt image=%sresources/%s_1f.png>"
-				 "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
-				 world.basedir().c_str(), rdescr->name().c_str(),
-				 _("A geologist found resources."));
+			// TODO(sirver): this is very wrong: It assumes a directory layout
+			// that might not be around forever.
+			snprintf(message,
+			         sizeof(message),
+			         "<rt image=world/resources/%s_1f.png>"
+			         "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
+			         rdescr->name().c_str(),
+			         _("A geologist found resources."));
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -979,7 +988,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			(position,
 			 t.get_resource_indicator
 			 	(rdescr,
-			 	 rdescr->is_detectable() ?
+			 	 rdescr->detectable() ?
 			 	 position.field->get_resources_amount() : 0),
 			 &t);
 	}
@@ -1080,7 +1089,7 @@ void Worker::log_general_info(const Editor_Game_Base & egbase)
 	if (upcast(WareInstance, ware, m_carried_ware.get(egbase))) {
 		molog
 			("* m_carried_ware->get_ware() (id): %i\n",
-			 ware->descr_index().value());
+			 ware->descr_index());
 		molog("* m_carried_ware->get_economy() (): %p\n", ware->get_economy());
 	}
 
@@ -1305,10 +1314,9 @@ void Worker::create_needed_experience(Game & /* game */)
  * needed_experience he levels
  */
 Ware_Index Worker::gain_experience(Game & game) {
-	return
-		descr().get_level_experience() == -1 ||
-		++m_current_exp < descr().get_level_experience() ?
-		Ware_Index::Null() : level(game);
+	return descr().get_level_experience() == -1 || ++m_current_exp < descr().get_level_experience() ?
+	          INVALID_INDEX :
+	          level(game);
 }
 
 
@@ -1326,10 +1334,10 @@ Ware_Index Worker::level(Game & game) {
 	// circumstances)
 	assert(becomes());
 	const Tribe_Descr & t = tribe();
-	Ware_Index const old_index = t.worker_index(descr().name().c_str());
+	Ware_Index const old_index = t.worker_index(descr().name());
 	Ware_Index const new_index = becomes();
 	m_descr = t.get_worker_descr(new_index);
-	assert(new_index);
+	assert(new_index != INVALID_INDEX);
 
 	// Inform the economy, that something has changed
 	m_economy->remove_workers(old_index, 1);
@@ -1337,19 +1345,6 @@ Ware_Index Worker::level(Game & game) {
 
 	create_needed_experience(game);
 	return old_index; //  So that the caller knows what to replace him with.
-}
-
-/**
- * Change this worker into a different type.
- *
- * \warning Using this function is very dangerous. The only reason it exists
- * is to fix certain savegame compatibility issues.
- */
-void Worker::flash(const std::string & newname)
-{
-	log("WARNING: Flashing worker of type %s to %s\n", name().c_str(), newname.c_str());
-
-	m_descr = tribe().get_worker_descr(tribe().safe_worker_index(newname));
 }
 
 /**
@@ -1873,7 +1868,7 @@ void Worker::return_update(Game & game, State & state)
 		char buffer[2048];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _ ("Your %s can’t find a way home and will likely die."),
+			 _ ("Your %s can't find a way home and will likely die."),
 			 descname().c_str());
 		owner().add_message
 			(game,
@@ -2680,7 +2675,7 @@ void Worker::geologist_update(Game & game, State & state)
 
 	//
 	Map & map = game.map();
-	const World & world = map.world();
+	const World & world = game.world();
 	Area<FCoords> owner_area
 		(map.get_fcoords
 		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),
@@ -2717,11 +2712,11 @@ void Worker::geologist_update(Game & game, State & state)
 			bool is_center_mountain =
 				(world.terrain_descr(owner_area.field->terrain_d()).get_is()
 				 &
-				 TERRAIN_MOUNTAIN)
+				 TerrainDescription::MOUNTAIN)
 				|
 				(world.terrain_descr(owner_area.field->terrain_r()).get_is()
 				 &
-				 TERRAIN_MOUNTAIN);
+				 TerrainDescription::MOUNTAIN);
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2734,11 +2729,11 @@ void Worker::geologist_update(Game & game, State & state)
 				is_target_mountain =
 					(world.terrain_descr(target.field->terrain_d()).get_is()
 					 &
-					 TERRAIN_MOUNTAIN)
+					 TerrainDescription::MOUNTAIN)
 					|
 					(world.terrain_descr(target.field->terrain_r()).get_is()
 					 &
-					 TERRAIN_MOUNTAIN);
+					 TerrainDescription::MOUNTAIN);
 				if (i == 0)
 					i = list.size();
 				--i;
@@ -3050,14 +3045,6 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
 	Worker & worker = get<Worker>();
-	const std::string & compatibility = worker.descr().compatibility_program(name);
-
-	if (compatibility == "fail") {
-		if (upcast(Game, game, &egbase()))
-			add_finish(boost::bind(&Worker::send_signal, &worker, boost::ref(*game), "fail"));
-		return nullptr;
-	}
-
 	return worker.descr().get_program(name);
 }
 

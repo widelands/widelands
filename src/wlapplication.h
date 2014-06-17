@@ -38,7 +38,6 @@
 
 
 namespace Widelands {class Game;}
-struct Journal;
 
 ///Thrown if a commandline parameter is faulty
 struct Parameter_error : public std::runtime_error {
@@ -109,19 +108,6 @@ struct InputCallback {
 /// Forking does not work on windows, but nobody cares enough to investigate.
 /// It is only a debugging convenience anyway.
 ///
-/// \par Session recording and playback
-///
-/// For debugging, e.g. profiling a real game without incurring the speed
-/// disadvantage while playing, the WLApplication can record (and of course
-/// play back) a complete game session. To do so with guaranteed repeatability,
-/// every single event - including low level stuff like mouse movement - gets
-/// recorded or played back.
-///
-/// During playback, external events are ignored to avoid interference with the
-/// playback (exception: F10 will cancel the playback immediately).
-///
-/// Recording/Playback does not work with --double. It could be made possible
-/// but that feature would not be very useful.
 ///
 /// \par The mouse cursor
 ///
@@ -135,21 +121,12 @@ struct InputCallback {
 /// always available.
 /// \todo Actually do grab the mouse when it is locked
 ///
-/// \todo What happens if a playback is canceled? Does the game continue or
-/// quit?
-/// \todo Can recording be canceled?
-/// \todo Should we allow to trigger recording ingame, starting with a snapshot
-/// savegame? Preferably, the log would be stored inside the savegame. A new
-/// user interface for starting / stopping playback may bue useful with this.
-/// \todo How about a "pause" button during playback to examine the current
-/// game state?
 /// \todo Graphics are currently not handled by WLApplication, and it is
 /// non essential for playback anyway. Additionally, we will want several
 /// rendering backends (software and OpenGL). Maybe the graphics backend loader
 /// code should be in System, while the actual graphics work is done elsewhere.
 /// \todo Refactor the mainloop
 /// \todo Sensible use of exceptions (goes for whole game)
-/// \todo Default filenames for recording and playback
 struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();
@@ -205,27 +182,6 @@ struct WLApplication {
 	bool campaign_game();
 	void replay();
 
-#ifndef NDEBUG
-#ifndef _WIN32
-	//not all of these need to be public, but I consider signal handling
-	//a public interface
-	//@{
-	void init_double_game();
-	static void signal_handler (int32_t sig);
-	static void quit_handler();
-	static void yield_double_game();
-	//@}
-
-	// Used for --double
-	//@{
-	static int32_t pid_me;
-	static int32_t pid_peer;
-	///\todo Explain me
-	static volatile int32_t may_run;
-	//@}
-#endif
-#endif
-
 	static void show_usage();
 
 	static void emergency_save(Widelands::Game &);
@@ -233,7 +189,7 @@ struct WLApplication {
 protected:
 	WLApplication(int argc, char const * const * argv);
 
-	bool poll_event(SDL_Event &, bool throttle);
+	bool poll_event(SDL_Event &);
 
 	bool init_settings();
 	void init_language();
@@ -271,8 +227,6 @@ protected:
 	std::string m_logfile;
 
 	GameType m_game_type;
-	///the event recorder object
-	Journal * journal;
 
 	///True if left and right mouse button should be swapped
 	bool  m_mouse_swapped;

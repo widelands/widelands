@@ -27,7 +27,7 @@
 #include "i18n.h"
 #include "logic/critter_bob.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -49,7 +49,7 @@ m_pit               (pit),
 m_click_recursion_protect(false)
 {
 	int32_t const space  =  5;
-	const Widelands::World & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().world();
 	int32_t const nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
 		std::max
@@ -62,9 +62,11 @@ m_click_recursion_protect(false)
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
-		const Image* pic = g_gr->images().get(world.get_bob_descr(j)->get_picture());
-		uint16_t w = pic->width();
-		uint16_t h = pic->height();
+		const Image& pic =
+			g_gr->animations().get_animation(world.get_bob_descr(j)->main_animation())
+				.representative_image(RGBColor(0, 0, 0));
+		uint16_t w = pic.width();
+		uint16_t h = pic.height();
 		if (w > width)
 			width = w;
 		if (h > height)
@@ -85,12 +87,13 @@ m_click_recursion_protect(false)
 			m_tabpanel.add("icons", tab_icon, box);
 		}
 
-		const Widelands::Bob::Descr & descr = *world.get_bob_descr(i);
+		const Widelands::BobDescr & descr = *world.get_bob_descr(i);
 		upcast(Widelands::Critter_Bob_Descr const, critter_descr, &descr);
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,
 			 pos,
-			 g_gr->images().get(descr.get_picture()),
+			 &g_gr->animations().get_animation(descr.main_animation())
+				.representative_image(RGBColor(0, 0, 0)),
 			 critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);

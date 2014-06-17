@@ -19,13 +19,13 @@
 
 #include "logic/cmd_queue.h"
 
+#include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/widelands_fileread.h"
 #include "logic/worker.h"
 #include "machdep.h"
 #include "upcast.h"

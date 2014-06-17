@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -419,47 +419,47 @@ msgid ""
 "My brothers and their soldiers are dead and left fire and destruction behind. In none of all the ruins could I find any man or woman of the normal folk, and so I just may hope that they fled from this cruel battleground and started a better life somewhere else."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:374
+#: ../../campaigns/t03.wmf/scripting/texts.lua:375
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old capital. I am sorrowful but also relieved. I never hoped to ever see Al’thunran’s old beauty again – it was only a few months ago that I wondered whether I would ever be able to set my feet in Al’thunran again. Now the old town is back in my hands, and I will not hesitate to rebuild it with all the strength my people have. I can’t wait to see it again in its old beauty."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:379
+#: ../../campaigns/t03.wmf/scripting/texts.lua:380
 msgid ""
 "Victory"
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:380
+#: ../../campaigns/t03.wmf/scripting/texts.lua:381
 msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You may continue playing if you wish, otherwise move on to the next campaign."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:386
+#: ../../campaigns/t03.wmf/scripting/texts.lua:387
 msgid ""
 "Military Assault"
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:388
+#: ../../campaigns/t03.wmf/scripting/texts.lua:389
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth himself will lead the first strike. I will ride by his side, to free Al’thunran of this war and return peace to our capital."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:390
+#: ../../campaigns/t03.wmf/scripting/texts.lua:391
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the assault. By dusk, I will celebrate my victory in the wooden halls of the warlord and sacrifice a newborn lamb in the honor of my father, whose eyes are set upon me today."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:394
+#: ../../campaigns/t03.wmf/scripting/texts.lua:395
 msgid ""
 "So be it!"
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:399
+#: ../../campaigns/t03.wmf/scripting/texts.lua:400
 msgid ""
 "Khantrukh says:"
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:401
+#: ../../campaigns/t03.wmf/scripting/texts.lua:402
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and the burden on their shoulders never gets lighter. We should breed more oxen to make their work lighter and our transportation more efficient."
 msgstr ""
@@ -469,7 +469,7 @@ msgid ""
 "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid ""
 "New Objective"
 msgid_plural ""

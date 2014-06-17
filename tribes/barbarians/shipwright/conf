@@ -16,25 +16,21 @@ carrier=1
 
 [work]
 pics=work_??.png
-sfx=0 ../../../sound/hammering/hammering
+sfx=../../../sound/hammering/hammering
 hotspot=11 26
-playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=9 24
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=11 22
-playercolor=true
 fps=10
 
 [idle]
 pics=idle_??.png
 hotspot=11 23
-playercolor=true
 fps=10

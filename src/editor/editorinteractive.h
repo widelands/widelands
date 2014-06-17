@@ -81,11 +81,9 @@ public:
 			place_bob(delete_bob),
 			increase_resources(decrease_resources, set_resources),
 			set_port_space(unset_port_space)
-
 		{}
 		Editor_Tool & current() const {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
-		typedef Tool_Vector::size_type Index;
 		//Tool_Vector                     tools;
 		Editor_Tool          *          current_pointer;
 		Editor_Tool::Tool_Index         use_tool;
@@ -121,10 +119,6 @@ public:
 	void unreference_player_tribe(Widelands::Player_Number, void const * const);
 	bool is_player_tribe_referenced(Widelands::Player_Number);
 	void set_need_save(bool const t) {m_need_save = t;}
-
-	/// Must be called when the world is changed. Takes care of closing the tool
-	/// menus that are showing elements from the old world.
-	void change_world();
 
 private:
 	void toggle_buildhelp();

@@ -43,7 +43,7 @@ GameMessageMenu::GameMessageMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
-		(&plr, "messages", &registry, 580, 375, _("Message Menu: Inbox")),
+		(&plr, "messages", &registry, 580, 375, _("Messages: Inbox")),
 	message_body
 		(this,
 		 5, 150, 570, 220,
@@ -53,8 +53,8 @@ GameMessageMenu::GameMessageMenu
 	list = new UI::Table<uintptr_t>(this, 5, 35, 570, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
-	list->add_column (60, _("Select"), UI::Align_HCenter, true);
-	list->add_column (60, _("Status"), UI::Align_HCenter);
+	list->add_column (60, _("Select"), "", UI::Align_HCenter, true);
+	list->add_column (60, _("Status"), "", UI::Align_HCenter);
 	list->add_column(330, _("Title"));
 	list->add_column(120, _("Time sent"));
 
@@ -279,16 +279,13 @@ void GameMessageMenu::archive_or_restore()
 	switch (mode) {
 	case Inbox:
 		//archive selected messages
-		for
-			(wl_index_range<uint8_t> i(0, list->size());
-			 i;
-			 ++i)
-			if (list->get_record(i.current).is_checked(ColSelect))
+		for (size_t i = 0; i < list->size(); ++i)
+			if (list->get_record(i).is_checked(ColSelect))
 			{
 				work_done = true;
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusArchived
-					 	(gametime, plnum, Message_Id((*list)[i.current])));
+					 	(gametime, plnum, Message_Id((*list)[i])));
 			}
 
 		//archive highlighted message, if nothing was selected
@@ -302,16 +299,13 @@ void GameMessageMenu::archive_or_restore()
 		break;
 	case Archive:
 		//restore selected messages
-		for
-			(wl_index_range<uint8_t> i(0, list->size());
-			 i;
-			 ++i)
-			if (list->get_record(i.current).is_checked(ColSelect))
+		for (size_t i = 0; i < list->size(); ++i)
+			if (list->get_record(i).is_checked(ColSelect))
 			{
 				work_done = true;
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusRead
-					 	(gametime, plnum, Message_Id((*list)[i.current])));
+					 	(gametime, plnum, Message_Id((*list)[i])));
 			}
 
 		//restore highlighted message, if nothing was selected
@@ -346,15 +340,15 @@ void GameMessageMenu::center_view()
  */
 void GameMessageMenu::do_clear_selection()
 {
-	for (wl_index_range<uint8_t> i(0, list->size()); i; ++i)
-		list->get_record(i.current).set_checked
+	for (size_t i = 0; i < list->size(); ++i)
+		list->get_record(i).set_checked
 			(ColSelect, false);
 }
 
 void GameMessageMenu::do_invert_selection()
 {
-	for (wl_index_range<uint8_t> i(0, list->size()); i; ++i)
-		list->get_record(i.current).toggle(ColSelect);
+	for (size_t i = 0; i < list->size(); ++i)
+		list->get_record(i).toggle(ColSelect);
 }
 
 void GameMessageMenu::toggle_mode()
@@ -363,14 +357,14 @@ void GameMessageMenu::toggle_mode()
 	switch (mode) {
 	case Inbox:
 		mode = Archive;
-		set_title(_("Message Menu: Archive"));
+		set_title(_("Messages: Archive"));
 		m_archivebtn->set_pic(g_gr->images().get("pics/message_restore.png"));
 		m_archivebtn->set_tooltip(_("Restore selected messages"));
 		m_togglemodebtn->set_title(_("Show Inbox"));
 		break;
 	case Archive:
 		mode = Inbox;
-		set_title(_("Message Menu: Inbox"));
+		set_title(_("Messages: Inbox"));
 		m_archivebtn->set_pic(g_gr->images().get("pics/message_archive.png"));
 		m_archivebtn->set_tooltip(_("Archive selected messages"));
 		m_togglemodebtn->set_title(_("Show Archive"));

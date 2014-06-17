@@ -1,0 +1,12 @@
+help=_Logs are a principal building material of the barbarians. The trees are felled by lumberjacks; rangers care for the supply of trees. Logs are also used in the metal workshop to build basic tools, and in the charcoal burner’s house in the production of coal. The wood hardener refines logs by hardening them in the fire which gives blackwood.
+
+
+preciousness=14
+default_target_quantity=40
+
+# Barbarian logs are made of black wood from the black forests
+# they come from.
+
+[idle]
+pics=idle.png
+hotspot=6 7

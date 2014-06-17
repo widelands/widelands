@@ -20,7 +20,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "logic/areawatcher.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
@@ -72,9 +71,9 @@ public:
 	friend class Editor_Game_Base;
 	friend struct Game_Player_Info_Data_Packet;
 	friend struct Game_Player_Economies_Data_Packet;
-	friend struct Map_Buildingdata_Data_Packet;
-	friend struct Map_Players_View_Data_Packet;
-	friend struct Map_Exploration_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
+	friend class Map_Players_View_Data_Packet;
+	friend class Map_Exploration_Data_Packet;
 
 	Player
 		(Editor_Game_Base &,
@@ -156,11 +155,7 @@ public:
 		{
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
-			//  darkening that actually hides the ground from the user). This is
-			//  important for worlds where the number of terrain types is not
-			//  maximal (16), so that an uninitialized terrain index could cause a
-			//  not found error in
-			//  Descr_Maintainer<Terrain_Descr>::get(Terrain_Index).
+			//  darkening that actually hides the ground from the user).
 			terrains.d = terrains.r = 0;
 
 			time_triangle_last_surveyed[0] = Never();
@@ -510,26 +505,6 @@ public:
 	void count_civil_bld_lost    () {++m_civil_blds_lost;}
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
-	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {
-		assert(player_area.player_number == player_number());
-		see_area
-			(Area<FCoords>
-			 	(egbase().map().get_fcoords(player_area), player_area.radius));
-		AreaWatcher & result = AreaWatcher::create(egbase(), player_area);
-		m_areawatchers.insert(&result);
-		return result;
-	}
-
-	void remove_areawatcher(AreaWatcher & areawatcher) {
-		unsee_area
-			(Area<FCoords>
-			 	(egbase().map().get_fcoords(areawatcher), areawatcher.radius));
-		m_areawatchers.erase(&areawatcher);
-	}
-
-	typedef std::set<OPtr<AreaWatcher> > AreaWatchers;
-	const AreaWatchers & areawatchers() const {return m_areawatchers;}
-
 	uint32_t frontier_anim() const {
 		return tribe().frontier_animation(m_frontier_style_index);
 	}
@@ -579,11 +554,10 @@ private:
 	void update_team_players();
 	void play_message_sound(const std::string & sender);
 	void _enhance_or_dismantle
-		(Building *, Building_Index const index_of_new_building = Building_Index::Null());
+		(Building *, Building_Index const index_of_new_building);
 
 private:
 	MessageQueue           m_messages;
-	AreaWatchers           m_areawatchers;
 
 	Editor_Game_Base     & m_egbase;
 	uint8_t                m_initialization_index;

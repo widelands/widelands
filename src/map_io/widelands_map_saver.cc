@@ -40,7 +40,6 @@
 #include "map_io/widelands_map_objective_data_packet.h"
 #include "map_io/widelands_map_player_names_and_tribes_data_packet.h"
 #include "map_io/widelands_map_player_position_data_packet.h"
-#include "map_io/widelands_map_players_areawatchers_data_packet.h"
 #include "map_io/widelands_map_players_messages_data_packet.h"
 #include "map_io/widelands_map_players_view_data_packet.h"
 #include "map_io/widelands_map_port_spaces_data_packet.h"
@@ -95,7 +94,7 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Terrain Data ... ");
-	{Map_Terrain_Data_Packet                 p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Terrain_Data_Packet                 p; p.Write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Player Start Position Data ... ");
@@ -110,18 +109,17 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Resources Data ... ");
-	{Map_Resources_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Resources_Data_Packet               p; p.Write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Writing Map Extra Data ... ");
-	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Version ... ");
 	{Map_Version_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
-
 
 
 	const Map & map = m_egbase.map();
@@ -136,7 +134,7 @@ void Map_Saver::save() {
  //  allowed building types
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
 		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
-		for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i)
+		for (Building_Index i = 0; i < nr_buildings; ++i)
 			if (not player->is_building_type_allowed(i)) {
 				log("Writing Allowed Building Types Data ... ");
 				Map_Allowed_Building_Types_Data_Packet p;
@@ -160,11 +158,6 @@ void Map_Saver::save() {
 
 	log("Writing Building Data ... ");
 	{Map_Building_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
-	log("took %ums\n ", timer.ms_since_last_query());
-
-
-	log("Writing Area Watchers Data ... ");
-	{Map_Players_AreaWatchers_Data_Packet   p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Objects ... ");

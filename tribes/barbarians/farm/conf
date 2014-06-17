@@ -5,12 +5,12 @@ output=wheat
 space_consumer=true
 
 [buildcost]
-trunk=4
+log=4
 blackwood=1
 raw_stone=3
 
 [return_on_dismantle]
-trunk=1
+log=1
 blackwood=1
 raw_stone=2
 
@@ -19,24 +19,14 @@ farmer=1
 
 [programs]
 plant_wheat=_Plant wheat
-plant=Plant wheat (only for compatibility with old savegames (build13))
 harvest_wheat=_Harvest wheat
-harvest=Harvest wheat (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_wheat]
 sleep=14000  #orig 20000
 worker=plant
 
-[plant]
-sleep=14000  #orig 20000
-worker=plant
-
 [harvest_wheat]
-sleep=4000  #orig 5000
-worker=harvest
-
-[harvest]
 sleep=4000  #orig 5000
 worker=harvest
 

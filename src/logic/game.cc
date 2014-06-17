@@ -20,6 +20,7 @@
 #include "logic/game.h"
 
 #include <cstring>
+#include <memory>
 #include <string>
 
 #ifndef _WIN32
@@ -32,11 +33,12 @@
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/carrier.h"
 #include "logic/cmd_calculate_statistics.h"
@@ -50,12 +52,12 @@
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
+#include "single_player_game_controller.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
 #include "ui_basic/progresswindow.h"
@@ -138,8 +140,6 @@ Game::Game() :
 	m_replaywriter        (nullptr),
 	m_win_condition_displayname(_("Not set"))
 {
-	// Preload win_conditions as they are displayed in UI
-	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 }
 
 Game::~Game()
@@ -229,10 +229,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	std::string const background = map().get_background();
 	if (background.size() > 0)
 		loaderUI.set_background(background);
-	else
-		loaderUI.set_background(map().get_world_name());
-	loaderUI.step (_("Loading a world"));
-	maploader->load_world();
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
@@ -255,7 +251,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	maploader->load_map_complete(*this, true);
 	maploader.reset();
 
-	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
+	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
 		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false);
 		delete m_ctrl;
@@ -287,14 +283,12 @@ void Game::init_newgame
 	set_map(new Map);
 
 	std::unique_ptr<Map_Loader> maploader
-		(map().get_correct_loader(settings.mapfilename.c_str()));
+		(map().get_correct_loader(settings.mapfilename));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
 	if (loaderUI) {
 		if (background.size() > 0)
 			loaderUI->set_background(background);
-		else
-			loaderUI->set_background(map().get_world_name());
 		loaderUI->step(_("Configuring players"));
 	}
 	std::vector<PlayerSettings> shared;
@@ -334,12 +328,11 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		std::unique_ptr<LuaTable> table
-			(lua().run_script
-			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
+		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
+		table->do_not_warn_about_unaccessed_keys();
 		m_win_condition_displayname = table->get_string("name");
-		LuaCoroutine * cr = table->get_coroutine("func");
-		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
+		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr.release()));
 	} else {
 		m_win_condition_displayname = _("Scenario");
 	}
@@ -412,7 +405,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
-	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
+	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
 		bool const result = run(&loaderUI, Loaded, script_to_run, false);
 		delete m_ctrl;
@@ -503,7 +496,7 @@ bool Game::run
 				(map().get_starting_pos(get_ipl()->player_number()));
 
 		// Prepare the map, set default textures
-		map().recalc_default_resources();
+		map().recalc_default_resources(world());
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -521,19 +514,17 @@ bool Game::run
 
 		// Run the init script, if the map provides one.
 		if (start_game_type == NewSPScenario)
-			enqueue_command(new Cmd_LuaScript(get_gametime(), "map", "init"));
+			enqueue_command(new Cmd_LuaScript(get_gametime(), "map:scripting/init.lua"));
 		else if (start_game_type == NewMPScenario)
 			enqueue_command
-				(new Cmd_LuaScript(get_gametime(), "map", "multiplayer_init"));
+				(new Cmd_LuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 
 		// Queue first statistics calculation
 		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
-		const std::string registered_script =
-			lua().register_script(*g_fs, "commandline", script_to_run);
-		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, "commandline", registered_script));
+		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, script_to_run));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -585,9 +576,6 @@ bool Game::run
 		cleanup_objects();
 		delete get_ibase();
 		set_ibase(nullptr);
-
-		g_anim.flush();
-		g_gr->flush_animations();
 
 		m_state = gs_notrunning;
 	} else {
@@ -649,15 +637,14 @@ void Game::end_dedicated_game() {
  * \todo Get rid of this. Prefer to delete and recreate Game-style objects
  * Note that this needs fixes in the editor.
  */
-void Game::cleanup_for_load
-	(bool const flush_graphics, bool const flush_animations)
+void Game::cleanup_for_load()
 {
 	m_state = gs_notrunning;
 
-	Editor_Game_Base::cleanup_for_load(flush_graphics, flush_animations);
-	container_iterate_const(std::vector<Tribe_Descr *>, m_tribes, i)
+	Editor_Game_Base::cleanup_for_load();
+	container_iterate_const(std::vector<Tribe_Descr *>, tribes_, i)
 		delete *i.current;
-	m_tribes.clear();
+	tribes_.clear();
 	cmdqueue().flush();
 
 	// Statistics
@@ -759,7 +746,7 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 void Game::send_player_build
 	(int32_t const pid, Coords const coords, Building_Index const id)
 {
-	assert(id);
+	assert(id != INVALID_INDEX);
 	send_player_command (*new Cmd_Build(get_gametime(), pid, coords, id));
 }
 
@@ -804,7 +791,7 @@ void Game::send_player_start_or_cancel_expedition (Building & building)
 void Game::send_player_enhance_building
 	(Building & building, Building_Index const id)
 {
-	assert(id);
+	assert(id != INVALID_INDEX);
 
 	send_player_command
 		(*new Cmd_EnhanceBuilding
@@ -1006,13 +993,13 @@ void Game::sample_statistics()
 			const Tribe_Descr & tribe = plr->tribe();
 			Ware_Index const tribe_wares = tribe.get_nrwares();
 			for
-				(Ware_Index wareid = Ware_Index::First();
+				(Ware_Index wareid = 0;
 				 wareid < tribe_wares;
 				 ++wareid)
 				wastock += eco->stock_ware(wareid);
 			Ware_Index const tribe_workers = tribe.get_nrworkers();
 			for
-				(Ware_Index workerid = Ware_Index::First();
+				(Ware_Index workerid = 0;
 				 workerid < tribe_workers;
 				 ++workerid)
 				if
@@ -1041,11 +1028,11 @@ void Game::sample_statistics()
 	// game, call the corresponding Lua function
 	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
+		hook->do_not_warn_about_unaccessed_keys();
 		iterate_players_existing(p, nr_plrs, *this, plr) {
-			LuaCoroutine * cr = hook->get_coroutine("calculator");
+			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
 			cr->push_arg(plr);
 			cr->resume(&custom_statistic[p - 1]);
-			delete cr;
 		}
 	}
 

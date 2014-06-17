@@ -2,18 +2,18 @@ size=mine
 output=raw_stone
 
 [buildcost]
-trunk=4
+log=4
 raw_stone=2
 
 [return_on_dismantle]
-trunk=2
+log=2
 raw_stone=1
 
 [working positions]
 miner=1
 
 [aihints]
-mines=granit
+mines=granite
 
 [inputs]
 ration=8
@@ -25,25 +25,21 @@ work=_Work
 consume=ration
 sleep=20000
 animate=working 20000
-mine=granit 2 100 5
+mine=granite 2 100 5 17
 produce=raw_stone:2
 
 [idle]
 pics=granitemine_i_??.png
 hotspot=42 35
-playercolor=true
 
 [working]
 pics=granitemine_w_??.png
 hotspot=42 35
-playercolor=true
 
 [build]
 pics=granitemine_b_??.png
 hotspot=42 35
-playercolor=true
 
 [empty]
 pics=granitemine_e_??.png
 hotspot=42 35
-playercolor=true

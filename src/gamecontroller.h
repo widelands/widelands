@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2008-2011, 2013, 2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,8 @@ enum class PlayerEndResult: uint8_t;
  * vs. multiplayer vs. replay issues and have a \ref GameController
  * handle all that.
  */
-struct GameController {
+class GameController {
+public:
 	virtual ~GameController() {}
 
 	virtual void think() = 0;
@@ -81,15 +82,6 @@ struct GameController {
 	void togglePaused() {
 		setPaused(not isPaused());
 	}
-
-	/**
-	 * Allocate a new \ref GameController suitable for normal singleplayer.
-	 * \param cpls is \c true when computer players should be generated
-	 * \return newly allocated \ref GameController object, must be freed
-	 * by the caller.
-	 */
-	static GameController * createSinglePlayer
-		(Widelands::Game &, bool cpls, Widelands::Player_Number local);
 
 	/**
 	 * Report a player result once he has left the game. This may be done through lua

@@ -2,12 +2,12 @@ size=small
 output=water
 
 [buildcost]
-trunk=2
+log=2
 stone=1
 planks=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=1
 
 [working positions]
@@ -19,15 +19,17 @@ work=_Work
 [work]
 sleep=20000
 animate=working 20000
-mine=water 1 100 65
+mine=water 1 100 65 2
 produce=water
 
 [idle]
 pics=well_i_??.png  # ???
 hotspot=31 32
-playercolor=true
 
 [working]
 pics=well_i_??.png  # ???
 hotspot=31 32
-playercolor=true
+
+[aihints]
+mines_water=true
+

@@ -20,6 +20,8 @@
 #ifndef INTERACTIVE_BASE_H
 #define INTERACTIVE_BASE_H
 
+#include <memory>
+
 #include <SDL_keysym.h>
 
 #include "debugconsole.h"
@@ -37,6 +39,7 @@
 namespace Widelands {struct CoordPath;}
 
 struct InteractiveBaseInternals;
+class UniqueWindowHandler;
 
 /**
  * This is used to represent the code that Interactive_Player and
@@ -53,6 +56,9 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 		dfSpeed          = 8, ///< show game speed and speed controls
 	};
 
+	// Manages all UniqueWindows.
+	UniqueWindowHandler& unique_windows();
+
 	Interactive_Base(Widelands::Editor_Game_Base &, Section & global_s);
 	virtual ~Interactive_Base();
 
@@ -60,8 +66,8 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	virtual void reference_player_tribe(Widelands::Player_Number, const void * const) {}
 
 	bool m_show_workarea_preview;
-	Overlay_Manager::Job_Id show_work_area(const Workarea_Info & workarea_info, Widelands::Coords coords);
-	void hide_work_area(Overlay_Manager::Job_Id job_id);
+	OverlayManager::JobId show_work_area(const Workarea_Info & workarea_info, Widelands::Coords coords);
+	void hide_work_area(OverlayManager::JobId job_id);
 
 	//  point of view for drawing
 	virtual Widelands::Player * get_player() const = 0;
@@ -137,7 +143,7 @@ private:
 			 		 	(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
 			 const Image* Pic                     = nullptr,
-			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
+			 const OverlayManager::JobId Jobid = 0)
 			:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
 			pic(Pic), jobid(Jobid)
@@ -147,7 +153,7 @@ private:
 		Widelands::Node_and_Triangle<>     pos;
 		uint32_t              radius;
 		const Image* pic;
-		Overlay_Manager::Job_Id jobid;
+		OverlayManager::JobId jobid;
 	} m_sel;
 
 	uint32_t m_display_flags;
@@ -156,8 +162,8 @@ private:
 	uint32_t          m_frametime;         //  in millseconds
 	uint32_t          m_avg_usframetime;   //  in microseconds!
 
-	Overlay_Manager::Job_Id m_jobid;
-	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
+	OverlayManager::JobId m_jobid;
+	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
 	const Image* workarea_pics[NUMBER_OF_WORKAREA_PICS];
@@ -193,6 +199,7 @@ private:
 
 	UI::UniqueWindow::Registry m_debugconsole;
 	Widelands::NoteSender<LogMessage> m_log_sender;
+	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 };
 
 #define PIC2 g_gr->images().get("pics/but2.png")

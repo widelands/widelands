@@ -20,6 +20,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
 #include "md5.h"
@@ -28,11 +29,11 @@
 
 namespace UI {struct ProgressWindow;}
 struct Computer_Player;
-struct Interactive_Player;
+class Interactive_Player;
 struct Game_Main_Menu_Load_Game;
 struct WLApplication;
 struct GameSettings;
-struct GameController;
+class GameController;
 
 namespace Widelands {
 
@@ -129,8 +130,7 @@ public:
 	bool is_loaded() {return m_state == gs_running;}
 	void end_dedicated_game();
 
-	void cleanup_for_load
-		(const bool flush_graphics = true, const bool flush_animations = true) override;
+	void cleanup_for_load();
 
 	// in-game logic
 	const Cmd_Queue & cmdqueue() const {return m_cmdqueue;}

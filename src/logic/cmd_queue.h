@@ -20,17 +20,22 @@
 #ifndef CMD_QUEUE_H
 #define CMD_QUEUE_H
 
+#include <memory>
 #include <queue>
 
+#include <stdint.h>
+
 #include "logic/queue_cmd_ids.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
+#include <stdint.h>
+
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 
 class Editor_Game_Base;
 struct Map_Map_Object_Saver;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
@@ -79,7 +84,7 @@ class Game;
  * the same for all parallel simulation.
  */
 struct Command {
-	Command (int32_t const _duetime) : m_duetime(_duetime) {}
+	Command (const int32_t _duetime) : m_duetime(_duetime) {}
 	virtual ~Command ();
 
 	virtual void execute (Game &) = 0;

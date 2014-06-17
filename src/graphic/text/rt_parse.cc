@@ -19,6 +19,7 @@
 
 #include "graphic/text/rt_parse.h"
 
+#include <memory>
 #include <vector>
 
 #include <SDL.h>
@@ -82,27 +83,26 @@ RGBColor Attr::get_color() const {
 // .at() in the STL, we need to define our own read only map
 class AttrMap : public IAttrMap {
 public:
-	virtual ~AttrMap() {
-		for (map<string, Attr*>::iterator i = m_attrs.begin(); i != m_attrs.end(); ++i)
-			delete (i->second);
-		m_attrs.clear();
+	void add_attribute(const string& name, Attr* a) {
+		m_attrs[name] = std::unique_ptr<Attr>(a);
 	}
-	void add_attribute(string name, Attr * a) {
-		m_attrs[name] = a;
-	}
-	const IAttr & operator[] (const std::string & s) const override {
-		map<string, Attr*>::const_iterator i = m_attrs.find(s);
-		if (i == m_attrs.end())
+
+	const IAttr& operator[](const std::string& s) const override {
+		AttributesMap::const_iterator i = m_attrs.find(s);
+		if (i == m_attrs.end()) {
 			throw AttributeNotFound(s);
+		}
 		return *(i->second);
 	}
+
 	bool has(const std::string & s) const override {
 		return m_attrs.count(s);
 	}
 
 
 private:
-	map<string, Attr*> m_attrs;
+	typedef map<string, std::unique_ptr<Attr>> AttributesMap;
+	AttributesMap m_attrs;
 };
 
 class Tag : public ITag {

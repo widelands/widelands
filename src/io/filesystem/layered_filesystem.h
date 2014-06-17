@@ -51,11 +51,7 @@ public:
 
 	virtual void RemoveFileSystem(const FileSystem &);
 
-	virtual int32_t FindFiles
-		(const std::string & path,
-		 const std::string & pattern,
-		 filenameset_t     * results,
-		 uint32_t            depth = 0) override;
+	virtual std::set<std::string> ListDirectory(const std::string& path) override;
 
 	virtual bool IsWritable() const override;
 	virtual bool            FileExists(const std::string & path) override;
@@ -64,8 +60,6 @@ public:
 	virtual void   MakeDirectory      (const std::string & dirname) override;
 
 	virtual void * Load(const std::string & fname, size_t & length) override;
-	virtual void * fastLoad
-		(const std::string & fname, size_t & length, bool & fast) override;
 	virtual void Write
 		(const std::string & fname, void const * data, int32_t length) override;
 

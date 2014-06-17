@@ -28,11 +28,13 @@ struct TrainingSite_Window;
 
 namespace Widelands {
 
+class World;
+
 struct TrainingSite_Descr : public ProductionSite_Descr {
 	TrainingSite_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr & tribe);
+		 const Tribe_Descr & tribe, const World& world);
 
 	virtual Building & create_object() const override;
 
@@ -96,7 +98,7 @@ private:
  *        contains soldiers!
  */
 class TrainingSite : public ProductionSite, public SoldierControl {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 	MO_DESCR(TrainingSite_Descr);
 	friend struct ::TrainingSite_Window;
 

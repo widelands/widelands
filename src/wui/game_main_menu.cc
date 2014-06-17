@@ -20,9 +20,6 @@
 #include "wui/game_main_menu.h"
 
 #include <boost/bind.hpp>
-#include <boost/lambda/bind.hpp>
-#include <boost/lambda/construct.hpp>
-#include <boost/type_traits.hpp>
 
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -77,10 +74,10 @@ stock
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.stock)));
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
- assert (not registry.onCreate);                                             \
- assert (not registry.onDelete);                                             \
- registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
- registry.onDelete = boost::bind(&UI::Button::set_perm_pressed, &btn, false); \
+ assert (not registry.on_create);                                             \
+ assert (not registry.on_delete);                                             \
+ registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
+ registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
 	INIT_BTN_HOOKS(m_windows.general_stats, general_stats)
@@ -88,22 +85,16 @@ stock
 	INIT_BTN_HOOKS(m_windows.building_stats, building_stats)
 	INIT_BTN_HOOKS(m_windows.stock, stock)
 
-	m_windows.general_stats.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<General_Statistics_Menu>(),
-		 boost::ref(m_player),
-		 boost::ref(m_windows.general_stats));
-	m_windows.ware_stats.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<Ware_Statistics_Menu>(),
-		 boost::ref(m_player),
-		 boost::ref(m_windows.ware_stats));
-	m_windows.building_stats.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<Building_Statistics_Menu>(),
-		 boost::ref(m_player),
-		 boost::ref(m_windows.building_stats));
-	m_windows.stock.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<Stock_Menu>(),
-		 boost::ref(m_player),
-		 boost::ref(m_windows.stock));
+	m_windows.general_stats.open_window = [this] {
+		new General_Statistics_Menu(m_player, m_windows.general_stats);
+	};
+	m_windows.ware_stats.open_window = [this] {
+		new Ware_Statistics_Menu(m_player, m_windows.ware_stats);
+	};
+	m_windows.building_stats.open_window = [this] {
+		new Building_Statistics_Menu(m_player, m_windows.building_stats);
+	};
+
 	if (get_usedefaultpos())
 		center_to_parent();
 }
@@ -114,11 +105,9 @@ GameMainMenu::~GameMainMenu() {
 	// are safeguards in case somewhere else in the code someone would
 	// overwrite our hooks.
 
-#define DEINIT_BTN_HOOKS(registry, btn)                                                \
- assert (registry.onCreate == boost::bind(&UI::Button::set_perm_pressed, &btn, true));  \
- assert (registry.onDelete == boost::bind(&UI::Button::set_perm_pressed, &btn, false)); \
- registry.onCreate = 0;                                                                \
- registry.onDelete = 0;                                                                \
+#define DEINIT_BTN_HOOKS(registry, btn)                                                            \
+	registry.on_create = 0;                                                                         \
+	registry.on_delete = 0;
 
 	DEINIT_BTN_HOOKS(m_windows.general_stats, general_stats)
 	DEINIT_BTN_HOOKS(m_windows.ware_stats, ware_stats)

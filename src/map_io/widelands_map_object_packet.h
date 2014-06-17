@@ -25,11 +25,12 @@
 #include "logic/instances.h"
 
 class FileSystem;
+class OneWorldLegacyLookupTable;
 
 namespace Widelands {
 
 class Editor_Game_Base;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 
 /**
@@ -53,7 +54,7 @@ struct Map_Object_Packet {
 
 	~Map_Object_Packet();
 
-	void Read (FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader &);
+	void Read (FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader &, const OneWorldLegacyLookupTable& lookup_table);
 
 	void LoadFinish();
 

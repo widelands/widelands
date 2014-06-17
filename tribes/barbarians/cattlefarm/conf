@@ -6,7 +6,7 @@ build_material=false
 recruitment=true
 
 [buildcost]
-trunk=2
+log=2
 raw_stone=2
 blackwood=1
 

@@ -36,8 +36,8 @@ namespace Widelands {
 struct WareDescr;
 struct ProductionProgram;
 class Soldier;
-struct Request;
-struct WaresQueue;
+class Request;
+class WaresQueue;
 class Worker_Descr;
 
 
@@ -57,7 +57,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	ProductionSite_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &);
+		 const Tribe_Descr &, const World&);
 	virtual ~ProductionSite_Descr();
 
 	virtual Building & create_object() const override;
@@ -85,29 +85,16 @@ struct ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
-	const std::vector<std::string> & compatibility_program(const std::string & progname) const;
-	const std::vector<std::string> & compatibility_working_positions(const std::string & workername) const;
-
 private:
 	BillOfMaterials m_working_positions;
 	BillOfMaterials m_inputs;
 	Output   m_output_ware_types;
 	Output   m_output_worker_types;
 	Programs m_programs;
-
-	typedef std::map<std::string, std::vector<std::string> > Compatibility;
-
-	/**
-	 * For savegame compatibility purposes, associate with old program
-	 * names a string describing actions that should be taken to preserve
-	 * compatibility.
-	 */
-	Compatibility m_compatibility_programs;
-	Compatibility m_compatibility_working_positions;
 };
 
 class ProductionSite : public Building {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::Workers_Need_Experience;
 	friend struct ProductionProgram::ActCall;
@@ -149,6 +136,7 @@ public:
 	virtual std::string get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
+	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 	char const * result_string() const {return m_result_buffer;}
 
 	virtual WaresQueue & waresqueue(Ware_Index) override;
@@ -224,6 +212,7 @@ protected:
 
 	void program_start(Game &, const std::string & program_name);
 	virtual void program_end(Game &, Program_Result);
+	virtual void train_workers(Game &);
 
 	void calc_statistics();
 	void try_start_working(Game &);
@@ -256,6 +245,7 @@ protected:  // TrainingSite must have access to this stuff
 	char                     m_statistics_buffer[128];
 	char                     m_result_buffer   [213];
 	uint8_t                  m_last_stat_percent;
+	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 };

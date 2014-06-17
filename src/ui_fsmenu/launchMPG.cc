@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/launchMPG.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 #include <libintl.h>
 
@@ -33,6 +35,7 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
@@ -49,6 +52,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		(UI::Panel * parent, GameController * gc, uint32_t w, uint32_t h,
 		 UI::Font * font)
 	:
+	/** TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game */
 	Window(parent, "selection_window", 0, 0, w, h, _("Please select")),
 	m_ctrl(gc)
 	{
@@ -202,7 +206,6 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_wincondition_type.set_textstyle(ts_small());
 
 	m_lua = new LuaInterface();
-	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 	win_condition_clicked();
 
 	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -293,11 +296,10 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("The game is a saved game – the win condition was set before."));
 	} else {
-		std::unique_ptr<LuaTable> t = m_lua->run_script
-			("win_conditions", m_settings->getWinCondition());
+		std::unique_ptr<LuaTable> t = m_lua->run_script(m_settings->getWinConditionScript());
+		t->do_not_warn_about_unaccessed_keys();
 
 		try {
-
 			std::string name = t->get_string("name");
 			std::string descr = t->get_string("description");
 
@@ -395,10 +397,11 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 				(this, _("Saved game is directory"),
 				_
 				("WARNING:\n"
-					"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to "
+					"The saved game you selected is a directory."
+					" This happens if you set the option ‘nozip’ to "
 					"true or manually unzipped the saved game.\n"
-					"Widelands is not able to transfer directory structures to the clients, please select another "
-					"saved game or zip the directories’ content."),
+					"Widelands is not able to transfer directory structures to the clients,"
+					" please select another saved game or zip the directories’ content."),
 				UI::WLMessageBox::OK);
 			warning.run();
 		}
@@ -515,7 +518,7 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 		throw wexception
 			("settings()->scenario was set to true, but no map is available");
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-	Widelands::Map_Loader * const ml = map.get_correct_loader(settings.mapfilename.c_str());
+	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(settings.mapfilename));
 	map.set_filename(settings.mapfilename.c_str());
 	ml->preload_map(true);
 	Widelands::Player_Number const nrplayers = map.get_nrplayers();
@@ -627,7 +630,7 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
 
 	char const * const name = m_settings->settings().mapfilename.c_str();
-	Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+	std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 	if (!ml) {
 		throw warning(_("There was an error!"), _("The map file seems to be invalid!"));
 	}
@@ -637,19 +640,13 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 		i18n::Textdomain td("maps");
 		ml->preload_map(true);
 	}
-	delete ml;
-
-	// get translated worldsname
-	std::string worldpath((format("worlds/%s") % map.get_world_name()).str());
-	Profile prof ((worldpath + "/conf").c_str(), nullptr, (format("world_%s") % map.get_world_name()).str());
-	Section & global = prof.get_safe_section("world");
-	std::string world(global.get_safe_string("name"));
 
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
-	infotext += std::string("• ") + (format(_("Size: %1$u x %2$u")) % map.get_width() % map.get_height()).str() + "\n";
-	infotext += std::string("• ") + (format(ngettext("%u Player", "%u Players", m_nr_players)) % m_nr_players).str() + "\n";
-	infotext += std::string("• ") + (format(_("World: %s")) % world).str() + "\n";
+	infotext += std::string("• ") + (format(_("Size: %1$u x %2$u"))
+					 % map.get_width() % map.get_height()).str() + "\n";
+	infotext += std::string("• ") + (format(ngettext("%u Player", "%u Players", m_nr_players))
+					 % m_nr_players).str() + "\n";
 	if (m_settings->settings().scenario)
 		infotext += std::string("• ") + (format(_("Scenario mode selected"))).str() + "\n";
 	infotext += "\n";
@@ -671,7 +668,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	m_help->add_paragraph
 		(_
 		 ("On the left side is a list of all clients including you. You can set your role "
-		  "With the button following your nickname. Available roles are:"));
+		  "with the button following your nickname. Available roles are:"));
 	m_help->add_picture_li
 		(_
 		 ("The player with the color of the flag. If more than one client selected the same color, these "

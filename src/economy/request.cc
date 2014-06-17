@@ -23,9 +23,10 @@
 #include "economy/portdock.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/constructionsite.h"
 #include "logic/game.h"
-#include "logic/legacy.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
@@ -72,12 +73,12 @@ Request::Request
 		throw wexception
 			("creating ware request with index %u, but tribe has only %u "
 			 "ware types",
-			 index.value(), _target.owner().tribe().get_nrwares  ().value());
+			 index, _target.owner().tribe().get_nrwares  ());
 	if (w == wwWORKER and _target.owner().tribe().get_nrworkers() <= index)
 		throw wexception
 			("creating worker request with index %u, but tribe has only %u "
 			 "worker types",
-			 index.value(), _target.owner().tribe().get_nrworkers().value());
+			 index, _target.owner().tribe().get_nrworkers());
 	if (m_economy)
 		m_economy->add_request(*this);
 }
@@ -109,132 +110,61 @@ void Request::Read
 {
 	try {
 		uint16_t const version = fr.Unsigned16();
-		if (2 <= version and version <= REQUEST_VERSION) {
-			bool fudged_type = false;
-			const Tribe_Descr & tribe = m_target.owner().tribe();
-			if (version <= 3) {
-				//  Unfortunately, old versions wrote the index. The best thing
-				//  that we can do with that is to look it up in a table.
-				WareWorker newtype = static_cast<WareWorker>(fr.Unsigned8());
-				if (newtype != wwWARE and newtype != wwWORKER)
-					throw wexception
-						("type is %u but must be %u (ware) or %u (worker)",
-						 m_type, wwWARE, wwWORKER);
-				uint32_t const legacy_index = fr.Unsigned32();
-				if (newtype == wwWORKER) {
-					m_type = wwWORKER;
-					m_index = Legacy::worker_index
-						(tribe,
-						 m_target.descr().descname(),
-						 "requests",
-						 legacy_index);
-				} else {
-					Ware_Index newindex = Legacy::ware_index
-						(tribe,
-						 m_target.descr().descname(),
-						 "requests",
-						 legacy_index);
-					if (newindex) {
-						m_type = wwWARE;
-						m_index = newindex;
-					} else {
-						log("Request::Read: Legacy ware no longer exists, sticking with default\n");
-						fudged_type = true;
-					}
-				}
+		if (version == 6) {
+			const Tribe_Descr& tribe = m_target.owner().tribe();
+			char const* const type_name = fr.CString();
+			Ware_Index const wai = tribe.ware_index(type_name);
+			if (wai != INVALID_INDEX) {
+				m_type = wwWARE;
+				m_index = wai;
 			} else {
-				char const * const type_name = fr.CString();
-				if (Ware_Index const wai = tribe.ware_index(type_name)) {
-					m_type = wwWARE;
-					m_index = wai;
-				} else if (Ware_Index const woi = tribe.worker_index(type_name)) {
+				Ware_Index const woi = tribe.worker_index(type_name);
+				if (woi != INVALID_INDEX) {
 					m_type = wwWORKER;
 					m_index = woi;
 				} else {
-					log
-						("Request::Read: unknown type '%s', stick with default %i/%i\n",
-						 type_name, m_type, m_index.value());
-					fudged_type = true;
+					throw wexception("Request::Read: unknown type '%s'.\n", type_name);
 				}
 			}
-			if (version <= 5)
-				fr.Unsigned8(); // was m_idle
 			m_count             = fr.Unsigned32();
 			m_required_time     = fr.Unsigned32();
 			m_required_interval = fr.Unsigned32();
 
-			if (3 <= version)
-				m_last_request_time = fr.Unsigned32();
+			m_last_request_time = fr.Unsigned32();
 
 			assert(m_transfers.empty());
 
 			uint16_t const nr_transfers = fr.Unsigned16();
 			for (uint16_t i = 0; i < nr_transfers; ++i)
 				try {
-					if (version >= 6) {
-						Map_Object * obj = &mol.get<Map_Object>(fr.Unsigned32());
-						Transfer * transfer;
+					Map_Object* obj = &mol.get<Map_Object>(fr.Unsigned32());
+					Transfer* transfer;
 
-						if (upcast(Worker, worker, obj)) {
-							transfer = worker->get_transfer();
-							if (m_type != wwWORKER || !worker->descr().can_act_as(m_index)) {
-								log("Request::Read: incompatible transfer type\n");
-								if (!fudged_type)
-									throw wexception
-										("Request::Read: incompatible transfer type");
-								transfer->has_failed();
-								transfer = nullptr;
-							}
-						} else if (upcast(WareInstance, ware, obj)) {
-							transfer = ware->get_transfer();
-							if (m_type != wwWARE || ware->descr_index() != m_index) {
-								log("Request::Read: incompatible transfer type\n");
-								if (!fudged_type)
-									throw wexception
-										("Request::Read: incompatible transfer type");
-								transfer->has_failed();
-								transfer = nullptr;
-							}
-						} else
-							throw wexception
-								("transfer target %u is neither ware nor worker",
-								 obj->serial());
-
-						if (!transfer) {
-							log
-								("WARNING: loading request, transferred object "
-								 "%u has no transfer\n",
-								 obj->serial());
-						} else {
-							transfer->set_request(this);
-							m_transfers.push_back(transfer);
+					if (upcast(Worker, worker, obj)) {
+						transfer = worker->get_transfer();
+						if (m_type != wwWORKER || !worker->descr().can_act_as(m_index)) {
+							throw wexception("Request::Read: incompatible transfer type");
+						}
+					} else if (upcast(WareInstance, ware, obj)) {
+						transfer = ware->get_transfer();
+						if (m_type != wwWARE || ware->descr_index() != m_index) {
+							throw wexception("Request::Read: incompatible transfer type");
 						}
 					} else {
-						uint8_t const what_is = fr.Unsigned8();
-						if (what_is != wwWARE and what_is != wwWORKER and what_is != 2)
-							throw wexception
-								("type is %u but must be one of {%u (WARE), %u "
-								 "(WORKER), %u (SOLDIER)}",
-								 what_is, wwWARE, wwWORKER, 2);
-						uint32_t const reg = fr.Unsigned32();
-						if (not mol.is_object_known(reg))
-							throw wexception("%u is not known", reg);
-						Transfer * const trans =
-							what_is == wwWARE ?
-							new Transfer(game, *this, mol.get<WareInstance>(reg)) :
-							new Transfer(game, *this, mol.get<Worker>      (reg));
-						fr.Unsigned8(); // was: is_idle
-						m_transfers.push_back(trans);
-
-						if (version < 5)
-							if (fr.Unsigned8())
-								m_requirements.Read (fr, game, mol);
+						throw wexception("transfer target %u is neither ware nor worker", obj->serial());
 					}
-				} catch (const _wexception & e) {
-					throw wexception("transfer %u: %s", i, e.what());
+
+					if (!transfer) {
+						log("WARNING: loading request, transferred object %u has no transfer\n",
+						    obj->serial());
+					} else {
+						transfer->set_request(this);
+						m_transfers.push_back(transfer);
+					}
+				} catch (const _wexception& e) {
+				   throw wexception("transfer %u: %s", i, e.what());
 				}
-			if (version >= 5)
-				m_requirements.Read (fr, game, mol);
+			m_requirements.Read (fr, game, mol);
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
 		} else

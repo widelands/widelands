@@ -23,7 +23,7 @@
 #include "ui_basic/unique_window.h"
 #include "wui/waresdisplay.h"
 
-struct Interactive_Player;
+class Interactive_Player;
 
 /*
  * Shows statistics about all stocks currently in the game of

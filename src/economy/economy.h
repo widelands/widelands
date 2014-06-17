@@ -42,7 +42,7 @@ class Soldier;
 class Warehouse;
 struct Flag;
 struct RSPairStruct;
-struct Request;
+class Request;
 struct Route;
 struct Router;
 struct Supply;
@@ -157,21 +157,22 @@ public:
 	bool needs_worker(Ware_Index) const;
 
 	const Target_Quantity & ware_target_quantity  (Ware_Index const i) const {
-		return m_ware_target_quantities[i.value()];
+		return m_ware_target_quantities[i];
 	}
 	Target_Quantity       & ware_target_quantity  (Ware_Index const i)       {
-		return m_ware_target_quantities[i.value()];
+		return m_ware_target_quantities[i];
 	}
 	const Target_Quantity & worker_target_quantity(Ware_Index const i) const {
-		return m_worker_target_quantities[i.value()];
+		return m_worker_target_quantities[i];
 	}
 	Target_Quantity       & worker_target_quantity(Ware_Index const i)       {
-		return m_worker_target_quantities[i.value()];
+		return m_worker_target_quantities[i];
 	}
 
 	void show_options_window();
-	UI::UniqueWindow::Registry m_optionswindow_registry;
-
+	UI::UniqueWindow::Registry& optionswindow_registry() {
+		return m_optionswindow_registry;
+	}
 
 	const WareList & get_wares  () const {return m_wares;}
 	const WareList & get_workers() const {return m_workers;}
@@ -233,7 +234,7 @@ private:
 	uint32_t m_request_timerid;
 
 	static std::unique_ptr<Soldier> m_soldier_prototype;
-
+	UI::UniqueWindow::Registry m_optionswindow_registry;
 };
 
 }

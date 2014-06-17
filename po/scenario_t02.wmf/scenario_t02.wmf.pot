@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:44
 msgid ""
-"Mines can only be built on mountain terrain. Suitable places for mines are displayed as a mining symbol."
+"Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols."
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:50
@@ -195,7 +195,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:138
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:140
 msgid ""
-"Build a cattlefarm"
+"Build a cattle farm"
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
@@ -255,7 +255,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:239
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:249
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:267
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:285
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:312
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:341
@@ -278,7 +278,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:232
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:257
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:276
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:294
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:322
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:351
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:363
@@ -388,47 +388,50 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:278
 msgid ""
-"Wisdom commands to seek variety.\n"
-"\n"
+"Wisdom commands to seek variety."
+msgstr ""
+
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:279
+msgid ""
 "North of the great mountain is a large plain – why don’t we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baked pitta bread for a change..."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:287
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
 msgid ""
 "Boldreth cheers up..."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:288
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:287
 msgid ""
 "Our hunters are out in the forests, Thron."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:289
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:288
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal fit for the chieftain of all clans!"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:295
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:294
 msgid ""
 "Khantrukh gazes over the plains..."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:296
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:295
 msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread reserved for our chieftain alone!"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:302
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:301
 msgid ""
 "A Beautiful Morning"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:303
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:302
 msgid ""
 "Thron recognizes..."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:304
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:303
 msgid ""
 "A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home means to my people. Their songs filled the air until deep in the night, and they were in higher spirits still the day after."
 msgstr ""
@@ -449,7 +452,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:323
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:385
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:386
 msgid ""
 "Khantrukh speaks..."
 msgstr ""
@@ -529,98 +532,98 @@ msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would cheer me up, he said."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:374
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:375
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:377
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:378
 msgid ""
 "The news he brought changed everything..."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:378
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:379
 msgid ""
 "Victory"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:379
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:380
 msgid ""
 "You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:384
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:385
 msgid ""
 "We Need Oxen!"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:386
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:387
 msgid ""
 "As our realm is getting bigger and bigger, the traffic on the roads is overwhelming. Our poor carriers are no longer able to transport the goods as fast as we need them to. I suggest we give them some support by breeding oxen."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:389
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid ""
 "They are amazing animals: The ox is as swift as a human being while being much stronger and very frugal: all we need is wheat and water to breed them and they will do their work on the roads loyally and reliably."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:395
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
 msgid ""
 "One Full Moon Night"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:417
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:397
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:419
 msgid ""
 "Thron speaks..."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:397
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of Kal’mavrath."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:399
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I will see Al’thunran again – will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:406
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:407
 msgid ""
 "Another Cold Day"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:407
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:408
 msgid ""
 "Thron looks worried..."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:408
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:409
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore – it must not be far anymore."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:410
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:411
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would finally come to an end."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:411
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid ""
 "So far, it seems that neither prayer was fulfilled."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:416
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:418
 msgid ""
 "A friendly village has joined us!"
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:418
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:420
 msgid ""
 "We have found a village with friendly and productive people, impressed by our wealth, technology and strength."
 msgstr ""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:419
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:421
 msgid ""
 "They have decided to join us!"
 msgstr ""
@@ -630,7 +633,7 @@ msgid ""
 "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid ""
 "New Objective"
 msgid_plural ""

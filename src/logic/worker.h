@@ -89,7 +89,6 @@ public:
 	const Image* icon() const {return descr().icon();}
 	Ware_Index becomes() const {return descr().becomes();}
 	Ware_Index worker_index() const {return descr().worker_index();}
-	const Tribe_Descr * get_tribe() const {return descr().get_tribe();}
 	const Tribe_Descr & tribe() const {return descr().tribe();}
 	const std::string & descname() const {return descr().descname();}
 
@@ -139,14 +138,12 @@ public:
 	/// experience from. It may cause him to change his type so that he becomes
 	/// overqualified for his current working position and can be replaced.
 	/// If so, his old Ware_Index is returned so that the calling code can
-	/// request a new worker of his old type. Otherwise Ware_Index::Null is
+	/// request a new worker of his old type. Otherwise INVALID_INDEX is
 	/// returned.
 	Ware_Index gain_experience   (Game &);
 
 	void create_needed_experience(Game &);
 	Ware_Index level             (Game &);
-
-	void flash(const std::string & newname);
 
 	int32_t get_needed_experience() const {
 		return descr().get_level_experience();

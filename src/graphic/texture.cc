@@ -20,7 +20,6 @@
 #include "graphic/texture.h"
 
 #include <SDL_image.h>
-#include <boost/foreach.hpp>
 
 #include "constants.h"
 #include "container_iterate.h"
@@ -38,74 +37,45 @@ using namespace std;
  * Currently it converts a 16 bit image to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
-Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFormat& format)
-	: m_colormap (nullptr),
-		m_pixels   (nullptr),
-		m_curframe (nullptr),
-		m_frame_num(0),
-		m_nrframes (0),
-		m_frametime(frametime),
-		is_32bit   (format.BytesPerPixel == 4),
-		m_was_animated(false)
-{
-	// TODO(sirver): There is no 16bit mode anymore. Kill is_32bit and replace through true.
-	assert(is_32bit);
+Texture::Texture(const std::vector<std::string>& texture_files,
+                 const uint32_t frametime,
+                 const SDL_PixelFormat& format)
+   : m_colormap(nullptr),
+     m_pixels(nullptr),
+     m_curframe(nullptr),
+     m_frame_num(0),
+     m_nrframes(0),
+     m_frametime(frametime) {
+	if (texture_files.empty()) {
+		throw wexception("No images for texture.");
+	}
 
-	// Load the images one by one
-	char fname[256];
-
-	for (;;) {
-		int32_t nr = m_nrframes;
-
-		// create the file name by reverse-scanning for '?' and replacing
-		snprintf(fname, sizeof(fname), "%s", fnametmpl.c_str());
-		char * p = fname + strlen(fname);
-		while (p > fname) {
-			if (*--p != '?')
-				continue;
-
-			*p = '0' + (nr % 10);
-			nr = nr / 10;
+	for (const std::string& fname : texture_files) {
+		if (!g_fs->FileExists(fname)) {
+			throw wexception("Could not find %s.", fname.c_str());
 		}
-
-		if (nr) // cycled up to maximum possible frame number
-			break;
-
-		if (!g_fs->FileExists(fname))
-			break;
 
 		SDL_Surface * surf;
-
 		m_texture_image = fname;
-
 		FileRead fr;
-
-		//fastOpen tries to use mmap
-		fr.fastOpen(*g_fs, fname);
+		fr.Open(*g_fs, fname);
 
 		surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-
 		if (!surf) {
-			log
-				("WARNING: Failed to load texture frame %s: %s\n",
-				 fname, IMG_GetError());
-			break;
+			throw wexception("WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
 		}
-
 		if (surf->w != TEXTURE_WIDTH || surf->h != TEXTURE_HEIGHT) {
 			SDL_FreeSurface(surf);
-			log
-				("WARNING: %s: texture must be %ix%i pixels big\n",
-				 fname,
-				 TEXTURE_WIDTH,
-				 TEXTURE_HEIGHT);
-			break;
+			throw wexception("WARNING: %s: texture must be %ix%i pixels big\n",
+			                 fname.c_str(),
+			                 TEXTURE_WIDTH,
+			                 TEXTURE_HEIGHT);
 		}
 
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
 			GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
-			m_glFrames.push_back(surface);
+			m_glFrames.emplace_back(surface);
 
 			// calculate shades on the first frame
 			if (!m_nrframes) {
@@ -140,12 +110,12 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
-			if (surf->format->BitsPerPixel == 8)
-				m_colormap = new Colormap(*surf->format->palette->colors, format);
-			else {
+			if (surf->format->BitsPerPixel == 8) {
+				m_colormap.reset(new Colormap(*surf->format->palette->colors, format));
+			} else {
 				SDL_Color pal[256];
 
-				log("WARNING: %s: using 332 default palette\n", fname);
+				log("WARNING: %s: using 332 default palette\n", fname.c_str());
 
 				for (int32_t r = 0; r < 8; ++r)
 					for (int32_t g = 0; g < 8; ++g)
@@ -155,7 +125,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 							pal[(r << 5) | (g << 2) | b].b = b << 6;
 						}
 
-				m_colormap = new Colormap(*pal, format);
+				m_colormap.reset(new Colormap(*pal, format));
 			}
 		}
 
@@ -199,18 +169,13 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 	}
 
 	if (!m_nrframes)
-		throw wexception("%s: texture has no frames", fnametmpl.c_str());
+		throw wexception("Texture has no frames");
 }
 
 
 Texture::~Texture ()
 {
-	delete m_colormap;
 	free(m_pixels);
-
-	BOOST_FOREACH(GLSurfaceTexture* surf, m_glFrames)
-		delete surf;
-	m_glFrames.clear();
 }
 
 /**
@@ -223,13 +188,7 @@ Uint32 Texture::get_minimap_color(char shade) {
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
 
 	uint32_t table = static_cast<uint8_t>(shade);
-	return
-		is_32bit ?
-		static_cast<const Uint32 *>(m_colormap->get_colormap())
-		[clr | (table << 8)]
-		:
-		static_cast<const Uint16 *>(m_colormap->get_colormap())
-		[clr | (table << 8)];
+	return static_cast<const Uint32*>(m_colormap->get_colormap())[clr | (table << 8)];
 }
 
 /**
@@ -238,13 +197,7 @@ Uint32 Texture::get_minimap_color(char shade) {
 void Texture::animate(uint32_t time)
 {
 	m_frame_num = (time / m_frametime) % m_nrframes;
-
 	if (g_opengl)
 		return;
-
-	uint8_t * const lastframe = m_curframe;
-
 	m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_frame_num];
-	if (lastframe != m_curframe)
-		m_was_animated = true;
 }

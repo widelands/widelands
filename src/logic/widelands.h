@@ -49,7 +49,7 @@ inline Player_Number Neutral() {return 0;}
  */
 typedef uint8_t TeamNumber;
 
-typedef uint8_t  Terrain_Index;   /// 4 bits used, so 0 .. 15.
+typedef uint8_t  Terrain_Index;
 typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.
 typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
 
@@ -63,70 +63,9 @@ inline Duration Forever() {return 0xffffffff;}
 
 typedef uint32_t Serial; /// Serial number for Map_Object.
 
-/// Index for ware (and worker), building and other game object types.
-/// Boxed for type-safety. Has a special null value to indicate invalidity.
-/// Has operator bool so that an index can be tested for validity with code
-/// like "if (index) ...". Operator bool asserts that the index is not null.
-/// The null value is guaranteed to be greater than any valid value. Therefore
-/// validity and upper limit can be tested using "if (index < nrItems)".
-template <typename T> struct Index_ {
-	typedef uint8_t value_t;
-	Index_(const Index_ & other = Null()) : i(other.i) {}
-	explicit Index_(value_t const I) : i(I) {}
-	explicit Index_(size_t  const I)
-		: i(static_cast<value_t>(I))
-	{
-		assert(I < std::numeric_limits<value_t>::max());
-	}
-
-	/// For compatibility with old code that use int32_t for building index
-	/// and use -1 to indicate invalidity.
-
-	static T First() {return T(static_cast<value_t>(0));}
-
-	/// Returns a special value indicating invalidity.
-	static T Null() {return T(std::numeric_limits<value_t>::max());}
-
-	///  Get a value for array subscripting.
-	value_t value() const {assert(*this); return i;}
-
-	bool operator== (const Index_& other) const {return i == other.i;}
-	bool operator!= (const Index_& other) const {return i != other.i;}
-	bool operator<  (const Index_& other) const {return i <  other.i;}
-	bool operator<= (const Index_& other) const {return i <=  other.i;}
-
-	T operator++ () {return T(++i);}
-	T operator-- () {return T(--i);}
-
-	operator bool() const {return operator!= (Null());}
-
-	/// Implicit conversion to size_t type for array indexing.
-	operator size_t() const {return static_cast<size_t>(i);}
-
-	// DO NOT REMOVE THE DECLARATION OF operator int32_t
-	// Rationale: If only operator bool() is present, the compiler may
-	// choose to use it in an implied cast when a user of this class
-	// forgets to use value() in order to obtain a value_t. As long as
-	// the declaration of operator int32_t is present, the compile will
-	// fail with an ambiguous operator overload error instead of
-	// producing erroneous code.
-	operator int32_t() const __attribute__((deprecated));
-
-private:
-	value_t i;
-};
-
-#define DEFINE_INDEX(NAME)                                                    \
-   struct NAME : public Index_<NAME> {                                        \
-      NAME(const NAME & other = Null()) : Index_<NAME>(other) {}              \
-      explicit NAME(value_t const I) : Index_<NAME>(I) {}                     \
-      explicit NAME(size_t  const I) : Index_<NAME>(I) {}                     \
-      explicit NAME(int32_t const I) __attribute__((deprecated));             \
-   };                                                                         \
-
-DEFINE_INDEX(Building_Index)
-DEFINE_INDEX(Ware_Index)
-
+constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
+typedef uint8_t Ware_Index;
+typedef uint8_t Building_Index;
 typedef uint8_t Direction;
 
 struct Soldier_Strength {

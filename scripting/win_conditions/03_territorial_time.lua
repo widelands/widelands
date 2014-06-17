@@ -2,13 +2,13 @@
 --                   Territorial Time Win condition
 -- =======================================================================
 
-use("aux", "coroutine") -- for sleep
-use("aux", "table")
-use("aux", "win_condition_functions")
+include "scripting/coroutine.lua" -- for sleep
+include "scripting/table.lua"
+include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-use("aux", "win_condition_texts")
+include "scripting/win_condition_texts.lua"
 
 local wc_name = _ "Territorial Time"
 local wc_version = 1

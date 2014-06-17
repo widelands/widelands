@@ -24,9 +24,8 @@
 #include <vector>
 
 #include "TribeBasicInfo.h"
-#include "descr_maintainer.h"
+#include "description_maintainer.h"
 #include "graphic/animation.h"
-#include "io/filewrite.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/immovable.h"
@@ -36,14 +35,14 @@
 
 namespace Widelands {
 
+class Editor_Game_Base;
+class ResourceDescription;
 class Warehouse;
 class Worker_Descr;
+class World;
 struct Building_Descr;
-class Editor_Game_Base;
 struct Event;
 struct WareDescr;
-struct Resource_Descr;
-struct World;
 
 /*
 Tribes
@@ -54,22 +53,16 @@ buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
 struct Tribe_Descr : boost::noncopyable {
-	enum {
-		OK = 0,
-		ERR_WRONGVERSION
-	};
-
 	Tribe_Descr(const std::string & name, Editor_Game_Base &);
 
 	//  Static function to check for tribes.
 	static bool exists_tribe
 		(const std::string & name, TribeBasicInfo * info = nullptr);
-	static void get_all_tribenames(std::vector<std::string> &);
-	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
+	static std::vector<std::string> get_all_tribenames();
+	static std::vector<TribeBasicInfo> get_all_tribe_infos();
 
 
 	const std::string & name() const {return m_name;}
-	const World & world() const {return m_world;}
 
 	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
 	Worker_Descr const * get_worker_descr(const Ware_Index& index) const {
@@ -88,9 +81,7 @@ struct Tribe_Descr : boost::noncopyable {
 	}
 	Ware_Index get_nrwares() const {return m_wares.get_nitems();}
 	Ware_Index safe_ware_index(const std::string & warename) const;
-	Ware_Index safe_ware_index(const char * const warename) const;
 	Ware_Index ware_index(const std::string & warename) const;
-	Ware_Index ware_index(char const * const warename) const;
 	WareDescr const * get_ware_descr(const Ware_Index& index) const {
 		return m_wares.get(index);
 	}
@@ -101,7 +92,6 @@ struct Tribe_Descr : boost::noncopyable {
 		m_workers.get(index)->set_has_demand_check();
 	}
 	Ware_Index safe_worker_index(const std::string & workername) const;
-	Ware_Index safe_worker_index(const char * const workername) const;
 	Building_Index get_nrbuildings() const {
 		return m_buildings.get_nitems();
 	}
@@ -130,10 +120,10 @@ struct Tribe_Descr : boost::noncopyable {
 		return m_immovables.get(get_immovable_index(imm_name.c_str()));
 	}
 	int32_t get_bob(char const * const l) const {return m_bobs.get_index(l);}
-	Bob::Descr const * get_bob_descr(uint16_t const index) const {
+	BobDescr const * get_bob_descr(uint16_t const index) const {
 		return m_bobs.get(index);
 	}
-	Bob::Descr const * get_bob_descr(const std::string & bob_name) const {
+	BobDescr const * get_bob_descr(const std::string & bob_name) const {
 		return m_bobs.exists(bob_name.c_str());
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
@@ -202,7 +192,7 @@ struct Tribe_Descr : boost::noncopyable {
 	uint32_t get_bob_vision_range() const {return m_bob_vision_range;}
 
 	uint32_t get_resource_indicator
-		(const Resource_Descr * const res, const uint32_t amount) const;
+		(const ResourceDescription * const res, const uint32_t amount) const;
 
 	void postload(Editor_Game_Base &);
 	void load_graphics();
@@ -210,7 +200,7 @@ struct Tribe_Descr : boost::noncopyable {
 	Military_Data get_military_data() const {return m_military_data;}
 
 	struct Initialization {
-		std::string          name;
+		std::string          script;
 		std::string          descname;
 	};
 	typedef std::vector<Initialization> Initializations;
@@ -234,20 +224,17 @@ struct Tribe_Descr : boost::noncopyable {
 
 	void resize_ware_orders(size_t maxLength);
 
-	const std::vector<std::string> & compatibility_immovable(const std::string & name) const;
-
 private:
 	const std::string m_name;
-	const World & m_world;
 	AnimationStyles   m_anim_frontier;
 	AnimationStyles   m_anim_flag;
 	uint32_t m_bob_vision_range;
 
-	Indexed_Descr_Maintainer<Worker_Descr, Ware_Index>    m_workers;
-	Indexed_Descr_Maintainer<Building_Descr, Building_Index>  m_buildings;
-	Indexed_Descr_Maintainer<WareDescr, Ware_Index> m_wares;
-	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
-	Descr_Maintainer<Bob::Descr>      m_bobs;
+	DescriptionMaintainer<Worker_Descr> m_workers;
+	DescriptionMaintainer<Building_Descr> m_buildings;
+	DescriptionMaintainer<WareDescr> m_wares;
+	DescriptionMaintainer<Immovable_Descr> m_immovables;  // The player immovables
+	DescriptionMaintainer<BobDescr> m_bobs;
 	std::string                       m_carrier2;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;
@@ -260,15 +247,6 @@ private:
 	Initializations m_initializations;
 
 	Military_Data   m_military_data;
-
-	typedef std::map<std::string, std::vector<std::string> > Compatibility;
-	/**
-	 * For savegame compatibility, this maps immovable names to strings
-	 * describing the appropriate compatibility preserving action.
-	 */
-	Compatibility m_compatibility_immovable;
-	std::map<std::string, std::string> m_compatibility_wares;
-
 };
 
 }

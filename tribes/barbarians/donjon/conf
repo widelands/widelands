@@ -4,16 +4,16 @@ heal_per_second=150
 conquers=8
 vision_range=17
 prefer_heroes=true
-occupied_string=_Your soldiers have occupied your Donjon
-aggressor_string=_Your Donjon discovered an aggressor.
-attack_string=_Your Donjon is under attack.
-defeated_enemy_string=_The enemy defeated your soldiers at the Donjon
-defeated_you_string=_Your soldiers defeated the enemy at the Donjon
+occupied_string=_Your soldiers have occupied your donjon.
+aggressor_string=_Your donjon discovered an aggressor.
+attack_string=_Your donjon is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the donjon.
+defeated_you_string=_Your soldiers defeated the enemy at the donjon.
 
 
 [buildcost]
 blackwood=7
-trunk=1
+log=1
 raw_stone=4
 
 [return_on_dismantle]
@@ -27,7 +27,6 @@ hotspot=48 84
 [idle]
 pics=donjon_i_??.png
 hotspot=48 84
-playercolor=true
 fps=10
 
 [unoccupied]

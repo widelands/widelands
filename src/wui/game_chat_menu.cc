@@ -32,9 +32,10 @@ GameChatMenu IMPLEMENTATION
 GameChatMenu::GameChatMenu
 	(UI::Panel                  * parent,
 	 UI::UniqueWindow::Registry & registry,
-	 ChatProvider               & chat)
+	 ChatProvider               & chat,
+	 const std::string          & title)
 :
-UI::UniqueWindow(parent, "chat", &registry, 440, 235, _("Chat Menu")),
+UI::UniqueWindow(parent, "chat", &registry, 440, 235, title),
 m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 {
 	if (get_usedefaultpos())
@@ -48,6 +49,21 @@ m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 	enter_chat_message(m_close_on_send);
 }
 
+GameChatMenu* GameChatMenu::create_chat_console(
+	UI::Panel                  * parent,
+	UI::UniqueWindow::Registry & registry,
+	ChatProvider               & chat)
+{
+	return new GameChatMenu(parent, registry, chat, _("Chat"));
+}
+
+GameChatMenu* GameChatMenu::create_script_console(
+	UI::Panel                  * parent,
+	UI::UniqueWindow::Registry & registry,
+	ChatProvider               & chat)
+{
+	return new GameChatMenu(parent, registry, chat, _("Script console"));
+}
 
 void GameChatMenu::enter_chat_message(bool close_on_send)
 {

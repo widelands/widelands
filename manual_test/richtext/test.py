@@ -8,8 +8,8 @@ import tempfile
 import unittest
 import time
 
+from PIL import Image
 from numpy.testing import assert_equal
-import Image
 import numpy as np
 
 import pyrt_render

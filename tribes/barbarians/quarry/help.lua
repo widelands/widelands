@@ -1,5 +1,5 @@
-use("aux", "formatting")
-use("aux", "format_help")
+include "scripting/formatting.lua"
+include "scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -31,9 +31,9 @@ return {
 		text_line(_"Space required:",_"Small plot","pics/small.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build cost:")) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 4), 4) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
@@ -43,5 +43,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The %s pauses %s before going to work again.":format(_"Stonemason","25s"))
+		text_line(_"Performance:", _"The stonemason pauses 25s before going to work again.")
 }

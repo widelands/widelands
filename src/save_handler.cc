@@ -19,6 +19,8 @@
 
 #include "save_handler.h"
 
+#include <memory>
+
 #include "chat.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"

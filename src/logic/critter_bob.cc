@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,63 +21,78 @@
 
 #include <cstdio>
 
+#include <stdint.h>
+
+#include "graphic/graphic.h"
 #include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/critter_bob_program.h"
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/tribe.h"
+#include "logic/world/world.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "wexception.h"
 
 
 namespace Widelands {
 
-const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
-	{"remove",            &Critter_BobProgram::parse_remove},
-	{nullptr,                   nullptr}
-};
+namespace {
 
-
-void Critter_BobProgram::parse(Parser * const parser, char const * const name)
-{
-	Section & program_s = parser->prof->get_safe_section(name);
-
+// Parses program lines in a section into a vector of strings.
+std::vector<std::string> section_to_strings(Section* section) {
+	std::vector<std::string> return_value;
 	for (uint32_t idx = 0;; ++idx) {
+		char buffer[32];
+		snprintf(buffer, sizeof(buffer), "%i", idx);
+		char const* const string = section->get_string(buffer, nullptr);
+		if (!string)
+			break;
+		return_value.emplace_back(string);
+	}
+	// Check for line numbering problems
+	if (section->get_num_values() != return_value.size())
+		throw wexception("Line numbers appear to be wrong");
+	return return_value;
+}
+
+// Sets the dir animations in 'anims' with the animations
+// '<prefix>_(ne|e|se|sw|w|nw)' which must be defined in 'mo'.
+void assign_diranimation(DirAnimations* anims, Map_Object_Descr& mo, const std::string& prefix) {
+	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+	for (int32_t dir = 1; dir <= 6; ++dir) {
+		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir - 1]));
+	}
+}
+
+}  // namespace
+
+void Critter_BobProgram::parse(const std::vector<std::string>& lines) {
+	for (const std::string& line : lines) {
 		try {
-			char buffer[32];
-
-			snprintf(buffer, sizeof(buffer), "%i", idx);
-			char const * const string = program_s.get_string(buffer, nullptr);
-			if (!string)
-				break;
-
-			const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
+			const std::vector<std::string> cmd(split_string(line, " \t\r\n"));
 			if (cmd.empty())
 				continue;
 
-			//  find the appropriate parser
 			Critter_BobAction act;
-			uint32_t mapidx;
-
-			for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
-				if (cmd[0] == s_parsemap[mapidx].name)
-					break;
-
-			if (!s_parsemap[mapidx].name)
+			if (cmd[0] == "remove") {
+				if (cmd.size() != 1)
+					throw wexception("Usage: remove");
+				act.function = &Critter_Bob::run_remove;
+			} else {
 				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
-
-			(this->*s_parsemap[mapidx].function)(&act, parser, cmd);
+			}
 
 			m_actions.push_back(act);
-		} catch (const std::exception & e) {
-			throw wexception("Line %i: %s", idx, e.what());
+		}
+		catch (const std::exception& e) {
+			throw wexception("Line '%s': %s", line.c_str(), e.what());
 		}
 	}
-
-	// Check for line numbering problems
-	if (program_s.get_num_values() != m_actions.size())
-		throw wexception("Line numbers appear to be wrong");
 }
 
 /*
@@ -97,15 +112,6 @@ Remove this critter
 
 ==============================
 */
-void Critter_BobProgram::parse_remove
-	(Critter_BobAction * act, Parser *, const std::vector<std::string> & cmd)
-{
-	if (cmd.size() != 1)
-		throw wexception("Usage: remove");
-
-	act->function = &Critter_Bob::run_remove;
-}
-
 bool Critter_Bob::run_remove
 	(Game & game, State & state, const Critter_BobAction &)
 {
@@ -124,20 +130,30 @@ bool Critter_Bob::run_remove
 ===========================================================================
 */
 
-Critter_Bob_Descr::Critter_Bob_Descr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const _tribe)
-	:
-	Bob::Descr(_name, _descname, directory, prof, global_s, _tribe),
-	m_swimming(global_s.get_bool("swimming", false))
-{
-	m_walk_anims.parse
-		(*this,
-		 directory,
-		 prof,
-		 (name() + "_walk_??").c_str(),
-		 prof.get_section("walk"));
+Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
+                                     char const* const _descname,
+                                     const std::string& directory,
+                                     Profile& prof,
+                                     Section& global_s,
+                                     Tribe_Descr const* const _tribe)
+   : BobDescr(_name, _descname, _tribe) {
+	{ //  global options
+		Section & idle_s = prof.get_safe_section("idle");
+		add_animation("idle", g_gr->animations().load(directory, idle_s));
+	}
+
+	// Parse attributes
+	{
+		std::vector<std::string> attributes;
+		while (Section::Value const* val = global_s.get_next_val("attrib")) {
+			attributes.emplace_back(val->get_string());
+		}
+		add_attributes(attributes, std::set<uint32_t>());
+	}
+
+	char defaultpics[256];
+	snprintf(defaultpics, sizeof(defaultpics), "%s_walk_!!_??.png", _name);
+	m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
 		std::string program_name = v->get_string();
@@ -148,14 +164,10 @@ Critter_Bob_Descr::Critter_Bob_Descr
 		try {
 			if (m_programs.count(program_name))
 				throw wexception("this program has already been declared");
-			Critter_BobProgram::Parser parser;
-
-			parser.descr = this;
-			parser.directory = directory;
-			parser.prof = &prof;
 
 			prog = new Critter_BobProgram(v->get_string());
-			prog->parse(&parser, v->get_string());
+			std::vector<std::string> lines(section_to_strings(&prof.get_safe_section(program_name)));
+			prog->parse(lines);
 			m_programs[program_name] = prog;
 		} catch (const std::exception & e) {
 			delete prog;
@@ -165,10 +177,42 @@ Critter_Bob_Descr::Critter_Bob_Descr
 	}
 }
 
+Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
+   : BobDescr(table.get_string("name"),
+              table.get_string("descname"),
+              nullptr)  // Can only handle world critters.
+{
+	{
+		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+		for (const std::string& animation : anims->keys<std::string>()) {
+			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+		}
+		assign_diranimation(&m_walk_anims, *this, "walk");
+	}
+
+	add_attributes(
+	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
+
+	std::unique_ptr<LuaTable> programs = table.get_table("programs");
+	for (const std::string& program_name : programs->keys<std::string>()) {
+		try {
+			std::unique_ptr<Critter_BobProgram> prog(new Critter_BobProgram(program_name));
+			prog->parse(programs->get_table(program_name)->array_entries<std::string>());
+			m_programs[program_name] = prog.release();
+		} catch (const std::exception& e) {
+			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
+		}
+	}
+}
 
 Critter_Bob_Descr::~Critter_Bob_Descr() {
 	container_iterate_const(Programs, m_programs, i)
 		delete i.current->second;
+}
+
+bool Critter_Bob_Descr::is_swimming() const {
+	const static uint32_t swimming_attribute = get_attribute_id("swimming");
+	return has_attribute(swimming_attribute);
 }
 
 
@@ -351,10 +395,10 @@ const BobProgramBase * Critter_Bob::Loader::get_program
 	return critter.descr().get_program(name);
 }
 
-
-Map_Object::Loader * Critter_Bob::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
-{
+Map_Object::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
+                                      Map_Map_Object_Loader& mol,
+                                      FileRead& fr,
+                                      const OneWorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -362,24 +406,25 @@ Map_Object::Loader * Critter_Bob::load
 
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version && version <= CRITTER_SAVEGAME_VERSION) {
-			std::string owner = fr.CString();
-			std::string name = fr.CString();
+			const std::string owner = fr.CString();
+			std::string critter_name = fr.CString();
 			const Critter_Bob_Descr * descr = nullptr;
 
 			if (owner == "world") {
-				descr = dynamic_cast<const Critter_Bob_Descr *>
-					(egbase.map().world().get_bob_descr(name));
+				critter_name = lookup_table.lookup_critter(critter_name);
+				descr =
+				   dynamic_cast<const Critter_Bob_Descr*>(egbase.world().get_bob_descr(critter_name));
 			} else {
 				egbase.manually_load_tribe(owner);
 
 				if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
 					descr = dynamic_cast<const Critter_Bob_Descr *>
-						(tribe->get_bob_descr(name));
+						(tribe->get_bob_descr(critter_name));
 			}
 
 			if (!descr)
 				throw game_data_error
-					("undefined critter %s/%s", owner.c_str(), name.c_str());
+					("undefined critter %s/%s", owner.c_str(), critter_name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);

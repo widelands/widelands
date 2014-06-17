@@ -259,7 +259,7 @@ int L_PlayerBase::place_flag(lua_State * L) {
 	if (not force) {
 		f = get(L, get_egbase(L)).build_flag(c->fcoords(L));
 		if (!f)
-			return report_error(L, "Couldn't build flag!");
+			report_error(L, "Couldn't build flag!");
 	} else {
 		f = &get(L, get_egbase(L)).force_flag(c->fcoords(L));
 	}
@@ -324,7 +324,7 @@ int L_PlayerBase::place_road(lua_State * L) {
 			path.append(map, 6);
 			map.get_tln(current, &current);
 		} else
-			return report_error(L, "Illegal direction: %s", d.c_str());
+			report_error(L, "Illegal direction: %s", d.c_str());
 
 		cstep.add_allowed_location(current);
 	}
@@ -338,7 +338,7 @@ int L_PlayerBase::place_road(lua_State * L) {
 		 cstep,
 		 Map::fpBidiCost);
 	if (optimal_path.get_nsteps() != path.get_nsteps())
-		return report_error(L, "Cannot build a road that crosses itself!");
+		report_error(L, "Cannot build a road that crosses itself!");
 
 	Road * r = nullptr;
 	if (force_road) {
@@ -347,20 +347,20 @@ int L_PlayerBase::place_road(lua_State * L) {
 		BaseImmovable * bi = map.get_immovable(current);
 		if (!bi or bi->get_type() != Map_Object::FLAG) {
 			if (!get(L, egbase).build_flag(current))
-				return report_error(L, "Could not place end flag!");
+				report_error(L, "Could not place end flag!");
 		}
 		if (bi and bi == starting_flag)
-		  return report_error(L, "Cannot build a closed loop!");
+		  report_error(L, "Cannot build a closed loop!");
 
 		r = get(L, egbase).build_road(path);
 	}
 
-	if (!r)
-		return
-			report_error
-			  (L, "Error while creating Road. May be: something is in "
-					"the way or you do not own the territory were you want to build "
-					"the road");
+	if (!r) {
+		report_error(L,
+		             "Error while creating Road. May be: something is in "
+		             "the way or you do not own the territory were you want to build "
+		             "the road");
+	}
 
 	return to_lua<LuaMap::L_Road>(L, new LuaMap::L_Road(*r));
 }
@@ -393,8 +393,8 @@ int L_PlayerBase::place_building(lua_State * L) {
 
 	const Tribe_Descr& td = get(L, get_egbase(L)).tribe();
 	Building_Index i = td.building_index(name);
-	if (i == Building_Index::Null())
-		return report_error(L, "Unknown Building: '%s'", name);
+	if (i == INVALID_INDEX)
+		report_error(L, "Unknown Building: '%s'", name);
 
 	Building_Descr::FormerBuildings former_buildings;
 	find_former_buildings(td, i, &former_buildings);
@@ -416,7 +416,7 @@ int L_PlayerBase::place_building(lua_State * L) {
 			(c->coords(), i, constructionsite, former_buildings);
 	}
 	if (not b)
-		return report_error(L, "Couldn't place building!");
+		report_error(L, "Couldn't place building!");
 
 	LuaMap::upcasted_immovable_to_lua(L, b);
 	return 1;

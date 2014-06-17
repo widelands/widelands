@@ -1,4 +1,4 @@
-use("map", "common_init")
+include "map:scripting/common_init.lua"
 
 -- ==========
 -- Constants
@@ -21,42 +21,43 @@ player3 = egbase.players[3]
 -- =================================
 -- Tests for the core functionality
 -- =================================
-include "egbase"
+include "map:scripting/egbase.lua"
 
-include "math_random"
-include "string_bformat"
-include "map"
-include "cplayer"
-include "cfield"
-include "cplr_access"
+include "map:scripting/math_random.lua"
+include "map:scripting/string_bformat.lua"
+include "map:scripting/path.lua"
+include "map:scripting/map.lua"
+include "map:scripting/cplayer.lua"
+include "map:scripting/cfield.lua"
+include "map:scripting/cplr_access.lua"
 
-include "immovables"
+include "map:scripting/immovables.lua"
 
 if not wl.editor then
-   include "game"
+   include "map:scripting/game.lua"
 
-   include "gplayer"
-   include "gfield"
-   include "gplr_access"
+   include "map:scripting/gplayer.lua"
+   include "map:scripting/gfield.lua"
+   include "map:scripting/gplr_access.lua"
 
-   include "objectives"
-   include "messages"
+   include "map:scripting/objectives.lua"
+   include "map:scripting/messages.lua"
 
    -- The functionality of UI scripting is identical but we only test it in game
    -- though as it is cumbersome to make those tests work also in the editor.
-   include "ui"
+   include "map:scripting/ui.lua"
 else
-   include "editor"
-   include "eplr_access"
+   include "map:scripting/editor.lua"
+   include "map:scripting/eplr_access.lua"
 
-   include "efield"
+   include "map:scripting/efield.lua"
 end
 
 -- ===========================
 -- Test for auxiliary scripts
 -- ===========================
-include "table"
-include "set"
+include "map:scripting/table.lua"
+include "map:scripting/set.lua"
 
 -- ============
 -- Test Runner

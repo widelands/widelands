@@ -19,8 +19,6 @@
 
 #include "scripting/lua_map.h"
 
-#include <boost/foreach.hpp>
-
 #include "container_iterate.h"
 #include "economy/wares_queue.h"
 #include "log.h"
@@ -34,6 +32,9 @@
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -105,7 +106,7 @@ typedef std::vector<Widelands::Soldier *> SoldiersList;
 		(lua_State * L, const Tribe_Descr & tribe,  const std::string & what) \
 	{ \
 		Ware_Index idx = tribe. type ## _index(what); \
-		if (!idx) \
+		if (idx == INVALID_INDEX) \
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
 	}
@@ -126,7 +127,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 	if (lua_isstring(L, 2)) { \
 		std::string what = luaL_checkstring(L, -1); \
 		if (what == "all") { \
-			for (Ware_Index i = Ware_Index::First(); \
+			for (Ware_Index i = 0; \
 					i < tribe.get_nr##type##s (); ++i) \
 				rv.insert(i); \
 		} else { \
@@ -210,7 +211,7 @@ WorkersMap get_valid_workers_for(const Road& r) {
 WorkersMap get_valid_workers_for(const ProductionSite& ps)
 {
 	WorkersMap rv;
-	BOOST_FOREACH(const Widelands::WareAmount& item, ps.descr().working_positions()) {
+	for (const Widelands::WareAmount& item : ps.descr().working_positions()) {
 		rv.insert(WorkerAmount(item.first, item.second));
 	}
 	return rv;
@@ -219,7 +220,7 @@ WorkersMap get_valid_workers_for(const ProductionSite& ps)
 // Translate the given Workers map into a (string, count) Lua table.
 int workers_map_to_lua(lua_State * L, const Tribe_Descr& tribe, const WorkersMap& valid_workers) {
 	lua_newtable(L);
-	BOOST_FOREACH(const WorkersMap::value_type& item, valid_workers) {
+	for (const WorkersMap::value_type& item : valid_workers) {
 		lua_pushstring(L, tribe.get_worker_descr(item.first)->name());
 		lua_pushuint32(L, item.second);
 		lua_rawset(L, -3);
@@ -235,7 +236,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
 
 	WorkersMap c_workers;
-	BOOST_FOREACH(const Worker* w, pi.get_workers()) {
+	for (const Worker* w : pi.get_workers()) {
 		Ware_Index i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
@@ -244,9 +245,9 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 		}
 	}
 
-	if (set.size() == tribe.get_nrworkers().value()) {  // Wants all returned
+	if (set.size() == tribe.get_nrworkers()) {  // Wants all returned
 		set.clear();
-		BOOST_FOREACH(const WorkersMap::value_type& v, valid_workers) {
+		for (const WorkersMap::value_type& v : valid_workers) {
 			set.insert(v.first);
 		}
 	}
@@ -254,7 +255,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	if (!return_number)
 		lua_newtable(L);
 
-	BOOST_FOREACH(const Ware_Index& i, set) {
+	for (const Ware_Index& i : set) {
 		uint32_t cnt = 0;
 		if (c_workers.count(i))
 			cnt = c_workers[i];
@@ -279,7 +280,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
 
 	WorkersMap c_workers;
-	BOOST_FOREACH(const Worker* w, pi->get_workers()) {
+	for (const Worker* w : pi->get_workers()) {
 		Ware_Index i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i))
 			c_workers.insert(WorkerAmount(i, 1));
@@ -291,7 +292,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 
 	// The idea is to change as little as possible
 	Editor_Game_Base& egbase = get_egbase(L);
-	BOOST_FOREACH(const WorkersMap::value_type sp, setpoints) {
+	for (const WorkersMap::value_type sp : setpoints) {
 		const Worker_Descr* wdes = tribe.get_worker_descr(sp.first);
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
@@ -304,7 +305,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 		int d = sp.second - cur;
 		if (d < 0) {
 			while (d) {
-				BOOST_FOREACH(const Worker* w, pi->get_workers()) {
+				for (const Worker* w : pi->get_workers()) {
 					if (tribe.worker_index(w->descr().name()) == sp.first) {
 						const_cast<Worker*>(w)->remove(egbase);
 						++d;
@@ -315,7 +316,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 		} else if (d > 0) {
 			for (; d; --d)
 				if (T::create_new_worker(*pi, egbase, wdes))
-					return report_error(L, "No space left for this worker");
+					report_error(L, "No space left for this worker");
 		}
 	}
 	return 0;
@@ -386,16 +387,16 @@ SoldiersMap m_parse_set_soldiers_arguments(lua_State* L, const Soldier_Descr& so
 // Does most of the work of get_soldiers for buildings.
 int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tribe_Descr& tribe) {
 	if (lua_gettop(L) != 2)
-		return report_error(L, "Invalid arguments!");
+		report_error(L, "Invalid arguments!");
 
 	const SoldiersList soldiers = sc.stationedSoldiers();
 	if (lua_isstring(L, -1)) {
 		if (std::string(luaL_checkstring(L, -1)) != "all")
-			return report_error(L, "Invalid arguments!");
+			report_error(L, "Invalid arguments!");
 
 		// Return All Soldiers
 		SoldiersMap hist;
-		BOOST_FOREACH(const Soldier* s, soldiers) {
+		for (const Soldier* s : soldiers) {
 			SoldierDescr sd
 				(s->get_hp_level(), s->get_attack_level(),
 				 s->get_defense_level(), s->get_evade_level());
@@ -409,7 +410,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 
 		// Get this to Lua.
 		lua_newtable(L);
-		BOOST_FOREACH(const SoldiersMap::value_type& i, hist) {
+		for (const SoldiersMap::value_type& i : hist) {
 			lua_createtable(L, 4, 0);
 #define PUSHLEVEL(idx, name)                                                                       \
 	lua_pushuint32(L, idx);                                                                         \
@@ -431,7 +432,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 		// Only return the number of those requested
 		const SoldierDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
 		uint32_t rv = 0;
-		BOOST_FOREACH(const Soldier* s, soldiers) {
+		for (const Soldier* s : soldiers) {
 			SoldierDescr sd
 				(s->get_hp_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level());
 			if (sd == wanted)
@@ -458,7 +459,7 @@ int do_set_soldiers
 	// Get information about current soldiers
 	const std::vector<Soldier*> curs = sc->stationedSoldiers();
 	SoldiersMap hist;
-	BOOST_FOREACH(const Soldier* s, curs) {
+	for (const Soldier* s : curs) {
 		SoldierDescr sd
 			(s->get_hp_level(), s->get_attack_level(),
 			 s->get_defense_level(), s->get_evade_level());
@@ -474,7 +475,7 @@ int do_set_soldiers
 
 	// Now adjust them
 	Editor_Game_Base& egbase = get_egbase(L);
-	BOOST_FOREACH(const SoldiersMap::value_type& sp, setpoints) {
+	for (const SoldiersMap::value_type& sp : setpoints) {
 		uint32_t cur = 0;
 		SoldiersMap::iterator i = hist.find(sp.first);
 		if (i != hist.end())
@@ -483,7 +484,7 @@ int do_set_soldiers
 		int d = sp.second - cur;
 		if (d < 0) {
 			while (d) {
-				BOOST_FOREACH(Soldier * s, sc->stationedSoldiers()) {
+				for (Soldier* s : sc->stationedSoldiers()) {
 					SoldierDescr is
 						(s->get_hp_level(), s->get_attack_level(),
 						 s->get_defense_level(), s->get_evade_level());
@@ -504,7 +505,7 @@ int do_set_soldiers
 					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
 				if (sc->incorporateSoldier(egbase, soldier)) {
 					soldier.remove(egbase);
-					return report_error(L, "No space left for soldier!");
+					report_error(L, "No space left for soldier!");
 				}
 			}
 		}
@@ -890,7 +891,7 @@ int L_Map::place_immovable(lua_State * const L) {
 	if
 	 (BaseImmovable const * const imm = c->fcoords(L).field->get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
-			return report_error(L, "Node is no longer free!");
+			report_error(L, "Node is no longer free!");
 
 	Editor_Game_Base & egbase = get_egbase(L);
 
@@ -901,23 +902,18 @@ int L_Map::place_immovable(lua_State * const L) {
 				egbase.manually_load_tribe(from_where);
 
 			int32_t const imm_idx = tribe.get_immovable_index(objname);
-			if (imm_idx < 0)
-				return
-					report_error
-					(L, "Unknown immovable <%s> for tribe <%s>",
-					 objname, from_where.c_str());
+			if (imm_idx < 0) {
+				report_error(L, "Unknown immovable <%s> for tribe <%s>", objname, from_where.c_str());
+			}
 
 			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
 		} catch (game_data_error &) {
-			return
-				report_error
-					(L, "Problem loading tribe <%s>. Maybe not existent?",
-					 from_where.c_str());
+			report_error(L, "Problem loading tribe <%s>. Maybe not existent?", from_where.c_str());
 		}
 	} else {
-		int32_t const imm_idx = egbase.map().world().get_immovable_index(objname);
+		int32_t const imm_idx = egbase.world().get_immovable_index(objname);
 		if (imm_idx < 0)
-			return report_error(L, "Unknown immovable <%s>", objname);
+			report_error(L, "Unknown immovable <%s>", objname);
 
 		m = &egbase.create_immovable(c->coords(), imm_idx, nullptr);
 	}
@@ -953,7 +949,8 @@ int L_Map::get_field(lua_State * L) {
 */
 // TODO: do we really want this function?
 int L_Map::recalculate(lua_State * L) {
-	get_egbase(L).map().recalc_whole_map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	egbase.map().recalc_whole_map(egbase.world());
 	return 0;
 }
 
@@ -1196,11 +1193,8 @@ int L_BaseImmovable::get_size(lua_State * L) {
 		case BaseImmovable::MEDIUM: lua_pushstring(L, "medium"); break;
 		case BaseImmovable::BIG: lua_pushstring(L, "big"); break;
 		default:
-			return
-				report_error
-					(L, "Unknown size in L_BaseImmovable::get_size: %i",
-					 o->get_size());
-			break;
+		   report_error(L, "Unknown size in L_BaseImmovable::get_size: %i", o->get_size());
+		   break;
 	}
 	return 1;
 }
@@ -1358,7 +1352,7 @@ int L_Flag::set_wares(lua_State * L)
 		nwares += d;
 
 		if (f->total_capacity() < nwares)
-			return report_error(L, "Flag has no capacity left!");
+			report_error(L, "Flag has no capacity left!");
 
 		if (d < 0) {
 			while (d) {
@@ -1394,7 +1388,7 @@ int L_Flag::get_wares(lua_State * L) {
 
 	WaresMap wares = count_wares_on_flag_(*get(L, get_egbase(L)), tribe);
 
-	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
+	if (wares_set.size() == tribe.get_nrwares()) { // Want all returned
 		wares_set.clear();
 		container_iterate_const(WaresMap, wares, w)
 			wares_set.insert(w->first);
@@ -1505,8 +1499,7 @@ int L_Road::get_road_type(lua_State * L) {
 		case Road_Busy:
 			lua_pushstring(L, "busy"); break;
 		default:
-			return
-				report_error(L, "Unknown Roadtype! This is a bug in widelands!");
+		   report_error(L, "Unknown Roadtype! This is a bug in widelands!");
 	}
 	return 1;
 }
@@ -1907,17 +1900,13 @@ int L_ProductionSite::set_wares(lua_State * L) {
 
 	container_iterate_const(WaresMap, setpoints, i) {
 		if (!valid_wares.count(i->first))
-			return
-				report_error
-				 (L, "<%s> can't be stored here!",
-				  tribe.get_ware_descr(i->first)->name().c_str());
+			report_error(
+			   L, "<%s> can't be stored here!", tribe.get_ware_descr(i->first)->name().c_str());
 
 		WaresQueue & wq = ps->waresqueue(i->first);
 		if (i->second > wq.get_max_size())
-			return
-				report_error
-					(L, "Not enough space for %u items, only for %i",
-					 i->second, wq.get_max_size());
+			report_error(
+			   L, "Not enough space for %u items, only for %i", i->second, wq.get_max_size());
 
 		wq.set_filled(i->second);
 	}
@@ -1937,7 +1926,7 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i)
 		valid_wares.insert(i.current->first);
 
-	if (wares_set.size() == tribe.get_nrwares().value()) // Want all returned
+	if (wares_set.size() == tribe.get_nrwares()) // Want all returned
 		wares_set = valid_wares;
 
 	if (!return_number)
@@ -2148,7 +2137,7 @@ int L_Bob::has_caps(lua_State * L) {
 	else if (query == "walks")
 		lua_pushboolean(L,  movecaps & MOVECAPS_WALK);
 	else
-		return report_error(L, "Unknown caps queried: %s!", query.c_str());
+		report_error(L, "Unknown caps queried: %s!", query.c_str());
 
 	return 1;
 }
@@ -2546,7 +2535,8 @@ int L_Field::set_height(lua_State * L) {
 	if (height > MAX_FIELD_HEIGHT)
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-	get_egbase(L).map().set_height(f, height);
+	Editor_Game_Base & egbase = get_egbase(L);
+	egbase.map().set_height(egbase.world(), f, height);
 
 	return 0;
 }
@@ -2609,18 +2599,18 @@ int L_Field::get_viewpoint_y(lua_State * L) {
 */
 int L_Field::get_resource(lua_State * L) {
 	lua_pushstring
-		(L, get_egbase(L).map().world().get_resource
+		(L, get_egbase(L).world().get_resource
 			 (fcoords(L).field->get_resources())->name().c_str());
 
 	return 1;
 }
 int L_Field::set_resource(lua_State * L) {
 	Field * field = fcoords(L).field;
-	int32_t res = get_egbase(L).map().world().get_resource
+	int32_t res = get_egbase(L).world().get_resource
 		(luaL_checkstring(L, -1));
 
 	if (res == -1)
-		return report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
+		report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
 
 	field->set_resources(res, field->get_resources_amount());
 
@@ -2642,13 +2632,10 @@ int L_Field::set_resource_amount(lua_State * L) {
 	Field * field = fcoords(L).field;
 	int32_t res = field->get_resources();
 	int32_t amount = luaL_checkint32(L, -1);
-	int32_t max_amount = get_egbase(L).map().world().get_resource
-		(res)->get_max_amount();
+	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
 
 	if (amount < 0 or amount > max_amount)
-		return
-			report_error
-			(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
 
@@ -2701,44 +2688,44 @@ int L_Field::get_bobs(lua_State * L) {
 		valid name to these variables.
 */
 int L_Field::get_terr(lua_State * L) {
-	Terrain_Descr & td =
-		get_egbase(L).map().world().terrain_descr
+	TerrainDescription & td =
+		get_egbase(L).world().terrain_descr
 			(fcoords(L).field->terrain_r());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
-int L_Field::set_terr(lua_State * L) {
-	const char * name = luaL_checkstring(L, -1);
-	Map & map = get_egbase(L).map();
-	Terrain_Index td =
-		map.world().index_of_terrain(name);
+int L_Field::set_terr(lua_State* L) {
+	const char* name = luaL_checkstring(L, -1);
+	Editor_Game_Base& egbase = get_egbase(L);
+	const World& world = egbase.world();
+	const Terrain_Index td = world.terrains().get_index(name);
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	map.change_terrain(TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
-
+	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
 }
 
 int L_Field::get_terd(lua_State * L) {
-	Terrain_Descr & td =
-		get_egbase(L).map().world().terrain_descr
+	TerrainDescription & td =
+		get_egbase(L).world().terrain_descr
 			(fcoords(L).field->terrain_d());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
 int L_Field::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
-	Map & map = get_egbase(L).map();
-	Terrain_Index td =
-		map.world().index_of_terrain(name);
+	Editor_Game_Base& egbase = get_egbase(L);
+	const World& world = egbase.world();
+	const Terrain_Index td =
+		world.terrains().get_index(name);
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	map.change_terrain
-		(TCoords<FCoords> (fcoords(L), TCoords<FCoords>::D), td);
+	egbase.map().change_terrain
+		(world, TCoords<FCoords> (fcoords(L), TCoords<FCoords>::D), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -2927,7 +2914,7 @@ int L_Field::has_caps(lua_State * L) {
 	else if (query == "flag")
 		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_FLAG);
 	else
-		return report_error(L, "Unknown caps queried: %s!", query.c_str());
+		report_error(L, "Unknown caps queried: %s!", query.c_str());
 
 	return 1;
 }

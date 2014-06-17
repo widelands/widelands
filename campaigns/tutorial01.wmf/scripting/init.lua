@@ -9,14 +9,14 @@ plr = wl.Game().players[1]
 plr:allow_buildings("all")
 
 -- A default headquarters
-use("tribe_barbarians", "sc00_headquarters_medium")
+include "tribes/barbarians/scripting/sc00_headquarters_medium.lua"
 init.func(plr) -- defined in sc00_headquarters_medium
 
 set_textdomain("scenario_tutorial01.wmf")
 
-use("aux", "coroutine")
-use("aux", "ui")
-use("aux", "table")
+include "scripting/coroutine.lua"
+include "scripting/ui.lua"
+include "scripting/table.lua"
 
 -- Constants
 first_lumberjack_field = wl.Game().map:get_field(16,10)
@@ -29,7 +29,7 @@ registered_player_immovables = {}
 terminate_bad_boy_sentinel = false
 illegal_immovable_found = function(i) return false end
 
-use("map", "texts")
+include "map:scripting/texts.lua"
 
 -- =================
 -- Helper functions
@@ -236,7 +236,7 @@ function build_eastern_trainings_area(citadel_field)
             builder = 1
          },
          wares = {
-            trunk = 40,
+            log = 40,
             blackwood = 40,
             cloth = 10,
             gold = 10,
@@ -245,7 +245,7 @@ function build_eastern_trainings_area(citadel_field)
             thatchreed = 40,
          }
       },
-      {"trainingscamp", 31, 56, soldiers = {} },
+      {"trainingcamp", 31, 56, soldiers = {} },
       {"sentry", 28, 57, soldiers = {[{3,5,0,2}] = 2 }},
       {"sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
    }
@@ -788,4 +788,3 @@ end
 
 run(bad_boy_sentry)
 run(starting_infos)
-

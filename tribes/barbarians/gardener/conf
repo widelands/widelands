@@ -1,0 +1,48 @@
+help=_Grows thatch reed.
+program=plantreed
+program=harvestreed
+
+[buildcost]
+carrier=1
+shovel=1
+
+[plantreed]
+0=findspace size:any radius:1
+1=walk coords
+2=animation reedplanting 1500 # Play a planting animation
+3=plant tribe:reed0t
+4=animation reedplanting 1500
+5=return
+
+[harvestreed]
+0=findobject attrib:grown_reed radius:1
+1=walk object
+2=animation harvesting 12000  #4sec animation cycle
+3=object harvest
+4=animation harvesting 1
+5=createware thatchreed
+6=return
+
+[idle]
+pics=idle_??.png
+hotspot=-4 11
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=8 23
+fps=10
+
+[walkload]
+dirpics=walkload_!!_??.png
+hotspot=7 23
+fps=10
+
+[reedplanting]
+pics=plantreed_??.png
+hotspot=10 21
+fps=10
+
+[harvesting]
+pics=harvest_??.png
+hotspot=10 22
+fps=5

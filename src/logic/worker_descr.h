@@ -23,7 +23,6 @@
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 #include "logic/immovable.h"
-#include "io/filewrite.h"
 
 class Image;
 
@@ -35,7 +34,7 @@ class Worker;
 struct WorkerProgram;
 
 
-class Worker_Descr : public Bob::Descr
+class Worker_Descr : public BobDescr
 {
 	friend struct Tribe_Descr;
 	friend class Warehouse;
@@ -44,7 +43,6 @@ class Worker_Descr : public Bob::Descr
 public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
-	typedef Ware_Index::value_t Index;
 	enum Worker_Type {
 		NORMAL = 0,
 		CARRIER,
@@ -67,8 +65,9 @@ public:
 		return m_buildcost;
 	}
 
-	const Tribe_Descr * get_tribe() const {return m_owner_tribe;}
-	const Tribe_Descr & tribe() const {return *m_owner_tribe;}
+	/// The tribe in which this worker is defined.
+	const Tribe_Descr & tribe() const;
+
 	std::string helptext() const {return m_helptext;}
 	Point get_ware_hotspot() const {return m_ware_hotspot;}
 
@@ -114,8 +113,6 @@ public:
 	typedef std::map<std::string, WorkerProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
-	const std::string & compatibility_program(const std::string & programname) const;
-
 protected:
 
 	std::string       m_helptext;   ///< Short (tooltip-like) help text
@@ -139,14 +136,6 @@ protected:
 	 */
 	Ware_Index  m_becomes;
 	Programs    m_programs;
-
-	/**
-	 * Compatibility hints for loading save games of older versions.
-	 *
-	 * Maps program name to a string that is to be interpreted by the
-	 * game loading logic.
-	 */
-	std::map<std::string, std::string> m_compatibility_programs;
 };
 
 }

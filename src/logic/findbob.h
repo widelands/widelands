@@ -24,6 +24,7 @@
 
 namespace Widelands {
 
+class Player;
 
 struct FindBobAttribute : public FindBob {
 	FindBobAttribute(uint32_t const attrib) : m_attrib(attrib) {}

@@ -2,12 +2,12 @@ size=medium
 output=flour
 
 [buildcost]
-trunk=3
+log=3
 stone=3
 marble=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=2
 marble=1
 
@@ -34,10 +34,8 @@ produce=flour
 [idle]
 pics=windmill_i_??.png  # ???
 hotspot=41 87
-playercolor=true
 
 [working]
 pics=windmill_w_??.png  # lets see the mill turn!
 hotspot=41 87
-playercolor=true
 fps=25

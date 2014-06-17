@@ -20,6 +20,8 @@
 #ifndef UI_MESSAGEBOX_H
 #define UI_MESSAGEBOX_H
 
+#include <memory>
+
 #include <boost/signals2.hpp>
 
 #include "align.h"

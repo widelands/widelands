@@ -32,7 +32,6 @@ class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 class Player;
 class Request;
-struct WaresQueue;
 class Worker;
 
 /**
@@ -46,7 +45,7 @@ public:
 	WaresQueue(PlayerImmovable &, Ware_Index, uint8_t size);
 
 #ifndef NDEBUG
-	~WaresQueue() {assert(not m_ware);}
+	~WaresQueue() {assert(m_ware == INVALID_INDEX);}
 #endif
 
 	Ware_Index get_ware()   const          {return m_ware;}

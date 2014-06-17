@@ -2,8 +2,8 @@
 --                 Texts for the Atlantean tutorial mission
 -- =======================================================================
 
-use("aux", "formatting")
-use("aux", "format_scenario")
+include "scripting/formatting.lua"
+include "scripting/format_scenario.lua"
 
 function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
@@ -59,7 +59,7 @@ obj_make_food_infrastructure = {
 [[Food is very important for mines and military training areas. ]] ..
 [[Establish a well working food environment by building at least one farm, one blackroot farm and a mill. ]] ..
 [[The two kinds of flour together with water from a well will be baked into bread in a bakery, ]] ..
-[[so build a bakery and a well, too.]]) .. [[<br><br>]] ..
+[[so build a bakery and a well, too.]]) .. paragraphdivider() ..
 _([[The other two important food wares are smoked fish and smoked meat. ]] ..
 [[Raw meat is delivered from a hunter. ]] ..
 [[A fisher gets the fish out of the sea while a fish breeder makes sure that a school of fish does not go extinct ]] ..
@@ -67,9 +67,9 @@ _([[The other two important food wares are smoked fish and smoked meat. ]] ..
 [[otherwise the fish breeder won’t be able to breed new ones. ]] ..
 [[The smoking happens in a smokery, you will need at least two of those.]]) .. [[<br>]] ..
 [[• ]] .. _[[Build a farm and a blackroot farm]] .. "<br>" ..
-[[• ]] .. _[[Build a mill to make flour and blackroot flour]] .. "<br>" ..
+[[• ]] .. _[[Build a mill to make cornflour and blackroot flour]] .. "<br>" ..
 [[• ]] .. _[[Build a well]] .. "<br>" ..
-[[• ]] .. _[[Build a bakery to bake bread from flour, blackroot flour and water]] .. "<br>" ..
+[[• ]] .. _[[Build a bakery to bake bread from cornflour, blackroot flour and water]] .. "<br>" ..
 [[• ]] .. _[[Build a hunter’s house to get raw meat]] .. "<br>" ..
 [[• ]] .. _[[Build a fisher’s house close to water to get raw fish]] .. "<br>" ..
 [[• ]] .. _[[Build a fish breeder’s house close to the fisher to make sure the fish do not die out]] .. "<br>" ..
@@ -82,12 +82,12 @@ obj_spidercloth_production = {
    title = _ "Build a spider farm and a weaving mill",
    number = 3,
    body = objective_text(_"Spidercloth Production", _(
-[[The weavers produce spidercloth and tabards in the weaving-mill. ]] ..
+[[The weavers produce spidercloth and tabards in the weaving mill. ]] ..
 [[Spidercloth is needed for the construction of some buildings and clothing, ]] ..
 [[while tabards are the uniforms of soldiers. ]] ..
-[[The weaving-mill needs gold yarn and spideryarn as raw material. ]] ..
+[[The weaving mill needs gold yarn and spideryarn as raw material. ]] ..
 [[Spideryarn is produced by the spider farm, while gold yarn is produced by the gold weaver out of gold.]]) .. "<br>" ..
-[[• ]] .. _[[Build a weaving-mill]] .. "<br>" ..
+[[• ]] .. _[[Build a weaving mill]] .. "<br>" ..
 [[• ]] .. _[[Build a spider farm]] .. "<br>" ..
 [[• ]] .. _[[Build a goldweaver]]
  )
@@ -125,9 +125,9 @@ obj_make_training_buildings = {
 
 obj_horsefarm_and_warehouse = {
    name = "obj_horsefarm_and_warehouse",
-   title = _"Build a warehouse and a horsefarm",
+   title = _"Build a warehouse and a horse farm",
    number = 2,
-   body = objective_text(_"Warehouse and Horsefarm", _(
+   body = objective_text(_"Warehouse and Horse Farm", _(
 [[As your road network gets longer and more complicated, you should employ horses ]] ..
 [[to help out your carriers. Horses are bred at horse farms using water and corn. ]] ..
 [[A warehouse will also help to ensure that your transportation system does not collapse.]]) .. "<br>" ..
@@ -227,13 +227,13 @@ first_briefing_messages = {
 [[and without Lutas having smashed our ship. Now, we are out of his reach. ]] ..
 [[One day later, we sighted an island which seems to have one of these fire spitting mountains on it. ]] ..
 [[I deemed this a sign from the fire god and we landed on its shore.]])
-   .. "<br><br>" .. _(
+.. paragraphdivider() .. _(
 [[We spent the last week building two watchtowers on the mountains close to our landing area; ]] ..
 [[and, of course, a hall for us all. We have very talented constructors in our group – still, ]] ..
 [[the buildings do not match the art we had on Atlantis. I hope they will withstand the next rain. ]] ..
 [[At least, the towers will warn us if a ship from Atlantis follows us and if the island is inhabited, ]] ..
 [[we will see attackers a long time before they arrive.]])
-   .. "<br><br>" .. _(
+.. paragraphdivider() .. _(
 [[We have established ourselves on this island. The next step is now to make it a home. ]] ..
 [[I reckon we need to establish a sustainable economy and to explore our surroundings. ]] ..
 [[I called for specialists and will follow their advice.]])
@@ -261,12 +261,12 @@ first_briefing_messages = {
 },
 {
    title = _ "Sidolus Speaks",
-   body = sidolus(_
+   body = sidolus(_(
 [[May Satul warm you, Jundlina! I agree with what Loftomor proposes. ]] ..
 [[We need a good supply of building materials for we have to expand our territory swiftly. ]] ..
 [[I will not feel safe on this island as long as we have not seen all its shores it. ]] ..
 [[I brought plenty of good men from Atlantis. The military might is available. ]] ..
-[[We only need some housing to live in.]]
+[[We only need some housing to live in.]])
    ) ..  new_objectives(obj_expand)
 }
 }
@@ -298,21 +298,13 @@ food_story_message = {
 },
 {
    title = _ "Colionder is in Thought",
-   body = colionder(p(_(
-[[Ahh, but I think this is impossible to change. ]] ..
-[[The preparing and eating of food is something deeply ingrained in us Atlanteans]] ..
-[[ – it is a ceremony that we just need for our well-being. ]] ..
-[[So I guess we cannot take this away from the individuals completely.]])) .. p(_(
-[[But we might find a compromise in between: for me, making bread is a troublesome task. ]] ..
-[[Grinding the blackroot and corn to flour and then baking the bread is tedious and boring; ]] ..
-[[I feel a more industrial approach would be helpful here. ]] ..
-[[I for one would love to just have fresh bread delivered to my house every day.]])) .. p(_(
-[[Oooh and even more important: the smoking of fish and meat to cleanse them and improve their taste is terrible. ]] ..
-[[My house is full of smoke and stinks for weeks afterwards. ]] ..
-[[Don’t you think that this could be done in a special building were the side effects do not matter? ]] ..
-[[I think those two things would be accepted by the people ]] ..
-[[and would reduce the cooking time without taking away the ritual.]]
- )))
+   body = colionder(_(
+[[Ahh, but I think this is impossible to change. The preparing and eating of food is something deeply ingrained in us Atlanteans – it is a ceremony that we just need for our well-being. So I guess we cannot take this away from the individuals completely.]])
+.. paragraphdivider() .. _(
+[[But we might find a compromise in between: for me, making bread is a troublesome task. Grinding the blackroot and corn to flour and then baking the bread is tedious and boring; I feel a more industrial approach would be helpful here. I for one would love to just have fresh bread delivered to my house every day.]])
+.. paragraphdivider() .. _(
+[[Oooh and even more important: the smoking of fish and meat to cleanse them and improve their taste is terrible. My house is full of smoke and stinks for weeks afterwards. Don’t you think that this could be done in a special building where the side effects do not matter? I think those two things would be accepted by the people and would reduce the cooking time without taking away the ritual.]]
+ ))
 },
 {
    title = _ "Jundlina Agrees",
@@ -335,20 +327,16 @@ food_story_ended_messages = {
 spidercloth_messages = {
    {
       title = _"A Man Comes to Jundlina",
-      body = opol(p(_(
-[[May Satul warm you, Jundlina. ]] ..
-[[My Name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. ]] ..
-[[I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. ]] ..
-[[Could you not help the weavers’ guild by arranging the building of a weaving-mill and a spider farm? ]] ..
-[[The spiders deliver the finest silk and we will produce the finest spidercloth from it.]])) .. p(_(
-[[We offer to also produce the tabards for young soldiers and the golden tabards for officers for you in exchange. ]] ..
-[[You will need them for sure as soon as you want to recruit new soldiers.]])))
+      body = opol(_(
+[[May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. Could you not help the weavers’ guild by arranging the building of a weaving mill and a spider farm? The spiders deliver the finest silk and we will produce the finest spidercloth from it.]])
+.. paragraphdivider() .. _(
+[[We offer to also produce the tabards for young soldiers and the golden tabards for officers for you in exchange. You will need them for sure as soon as you want to recruit new soldiers.]]))
  },
  {
     title = _ "Jundlina Replies",
     body = jundlina(_ "Jundlina Replies", _(
 [[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand your urgency. ]] ..
-[[Your suggestion sounds fair to me, I will build your weaving-mill and spider farm. ]] ..
+[[Your suggestion sounds fair to me, I will build your weaving mill and spider farm. ]] ..
 [[I will also build a goldweaver so that the golden tabards you make will not be golden by name alone.]]
     )) ..  new_objectives(obj_spidercloth_production)
  }
@@ -359,7 +347,7 @@ spidercloth_story_ended_messages = {
       title = _ "Opol Seeks Out Jundlina",
       body = opol(_(
 [[May Satul warm you, Jundlina! ]] ..
-[[The weaving-mill, goldweaver and spider farm buildings are complete ]] ..
+[[The weaving mill, goldweaver and spider farm buildings are complete ]] ..
 [[and are starting their work at this very moment. The weavers’ guild is very grateful for your support ]] ..
 [[and we will stand by our word and deliver the first tabard very soon.]]
       ))
@@ -388,8 +376,7 @@ heavy_industry_story = {
    {
       title = _ "Jundlina Replies",
       body = jundlina(_"Jundlina Nods", _(
-[[I have considered this, Sidolus. I think, it is about time. We will make this a priority for now. ]] ..
-[[You shall get your industry and soon!]]
+[[I have considered this, Sidolus. I think  it is about time. We will make this a priority for now. You shall get your industry soon!]]
       )) .. new_objectives(obj_make_heavy_industry_and_mining)
    },
 }
@@ -431,7 +418,7 @@ training_story_end = {
 [[I received an invitation from Sidolus. The first day of training in the newly finished labyrinth will be tomorrow. ]] ..
 [[The dungeon is done as well and will start its work soon. I am looking forward to tomorrow; ]] ..
 [[I am very interested in how our soldiers are trained, and I wonder if the additional workload ]] ..
-[[will keep them from bullying the civil population.]]
+[[will keep them from bullying the civilian population.]]
       ))
    }
 }
@@ -439,14 +426,11 @@ training_story_end = {
 horsefarm_and_warehouse_story = {
    {
       title = _ "Jundlina Considers the Economy",
-      body = jundlina(_"Jundlina", p(_(
-[[People are complaining about crowded streets and slow transportation. ]] ..
-[[We need to help out our carriers on the roads. ]] ..
-[[I have decided to build a horse farm so that the horses can help with the heavy wares.]])) .. p(_(
-[[Another way to take load from our roads is to build warehouses. ]] ..
-[[We have claimed the mountain now, it seems a good idea to have a warehouse on the plateau ]] ..
-[[to avoid having to transport everything up and down the slopes.]]
-      ))) .. new_objectives(obj_horsefarm_and_warehouse)
+      body = jundlina(_"Jundlina", _(
+[[People are complaining about crowded streets and slow transportation. We need to help out our carriers on the roads. I have decided to build a horse farm so that the horses can help with the heavy wares.]])
+.. paragraphdivider() .. _(
+[[Another way to take load from our roads is to build warehouses. We have claimed the mountain now, it seems a good idea to have a warehouse on the plateau to avoid having to transport everything up and down the slopes.]]
+      )) .. new_objectives(obj_horsefarm_and_warehouse)
    }
 }
 
@@ -458,18 +442,12 @@ first_leftover_building_found = {
    posx = 100000,
    posy = 0,
    title = _ "A Dangerous Discovery",
-   body = jundlina(_ "Jundlina is in Thought", p(_(
-[[We found an old building, destroyed and burned by flames. I am very worried about this discovery. ]] ..
-[[The building is not of any kind I’ve ever seen. ]] ..
-[[It is certainly not designed by any Atlantean architect I’ve ever heard about. ]] ..
-[[The building is crude, the assemblage is sloppy. But the materials are very enduring: ]] ..
-[[the wood used for it seemed to have been burned in a strange way before it was used as building material]] ..
-[[ – it is hard as stone.]])) .. p(_(
-[[The implications frighten me. Are there others on this island? Where are they then? ]] ..
-[[They work with fire, are they praying to Satul too? Are they friends or foe? ]] ..
-[[And why is the building burned down? Has this island seen war? Is a war being waged on it right now?]])) .. p(_(
-[[We must improve our military capabilities. If there are foes on the island, we have to be prepared when we meet them. ]] ..
-[[We should also enforce the fortification of our borders.]]))
+   body = jundlina(_ "Jundlina is in Thought", _(
+[[We found an old building, destroyed and burned by flames. I am very worried about this discovery. The building is not of any kind I’ve ever seen. It is certainly not designed by any Atlantean architect I’ve ever heard about. The building is crude, the assemblage is sloppy. But the materials are very enduring: the wood used for it seemed to have been burned in a strange way before it was used as building material – it is hard as stone.]])
+.. paragraphdivider() .. _(
+[[The implications frighten me. Are there others on this island? Where are they then? They work with fire, are they praying to Satul too? Are they friends or foe? And why is the building burned down? Has this island seen war? Is a war being waged on it right now?]])
+.. paragraphdivider() .. _(
+[[We must improve our military capabilities. If there are foes on the island, we have to be prepared when we meet them. We should also enforce the fortification of our borders.]])
    )
 }
 }
@@ -552,13 +530,11 @@ field_flooded_msg = {
 },
 {
    title = _ "Jundlina Replies",
-   body = jundlina(p(_(
-[[Your red hair is a signal from the fire god. I will trust you and support your plan. ]] ..
-[[Our survival lies in your hands now, Ostur.]])) .. p(_(
-[[Swift now, we need a house for Ostur next to the lake, and we need planks, logs and spidercloth ]] ..
-[[for the construction there. Forget about everything else, ]] ..
-[[we need those wares on top of the mountain before our warehouses are all swallowed by the sea.]]
-   ))) .. new_objectives(obj_build_ships)
+   body = jundlina(_(
+[[Your red hair is a signal from the fire god. I will trust you and support your plan. Our survival lies in your hands now, Ostur.]])
+.. paragraphdivider() .. _(
+[[Swift now, we need a house for Ostur next to the lake, and we need planks, logs and spidercloth for the construction there. Forget about everything else, we need those wares on top of the mountain before our warehouses are all swallowed by the sea.]]
+   )) .. new_objectives(obj_build_ships)
 }
 }
 
@@ -577,5 +553,3 @@ scenario_won = {
       )),
    },
 }
-
-

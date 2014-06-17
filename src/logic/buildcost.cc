@@ -19,6 +19,8 @@
 
 #include "logic/buildcost.h"
 
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
 #include "wexception.h"
@@ -29,7 +31,8 @@ void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
 {
 	while (Section::Value const * const val = buildcost_s.get_next_val())
 		try {
-			if (Ware_Index const idx = tribe.ware_index(val->get_name())) {
+			Ware_Index const idx = tribe.ware_index(val->get_name());
+			if (idx != INVALID_INDEX) {
 				if (count(idx))
 					throw wexception
 						("a buildcost item of this ware type has already been "
@@ -59,9 +62,7 @@ uint32_t Buildcost::total() const
 	return sum;
 }
 
-void Buildcost::save
-	(Widelands::FileWrite & fw, const Widelands::Tribe_Descr & tribe) const
-{
+void Buildcost::save(FileWrite& fw, const Widelands::Tribe_Descr& tribe) const {
 	for (const_iterator it = begin(); it != end(); ++it) {
 		fw.CString(tribe.get_ware_descr(it->first)->name());
 		fw.Unsigned8(it->second);
@@ -69,9 +70,7 @@ void Buildcost::save
 	fw.CString("");
 }
 
-void Buildcost::load
-	(Widelands::FileRead & fr, const Widelands::Tribe_Descr & tribe)
-{
+void Buildcost::load(FileRead& fr, const Widelands::Tribe_Descr& tribe) {
 	clear();
 
 	for (;;) {
@@ -80,7 +79,7 @@ void Buildcost::load
 			break;
 
 		Ware_Index index = tribe.ware_index(name);
-		if (!index) {
+		if (index == INVALID_INDEX) {
 			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
 			fr.Unsigned8();
 		} else {

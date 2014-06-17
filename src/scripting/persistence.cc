@@ -21,9 +21,9 @@
 
 #include <memory>
 
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "log.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "scripting/c_utils.h"
 #include "scripting/eris.h"
 #include "scripting/luna_impl.h"
@@ -42,9 +42,9 @@ struct LuaReaderHelper {
 };
 
 int LuaWriter(lua_State* /* L */, const void* data, size_t len, void* userdata) {
-	Widelands::FileWrite* fw = static_cast<Widelands::FileWrite*>(userdata);
+	FileWrite* fw = static_cast<FileWrite*>(userdata);
 
-	fw->Data(data, len, Widelands::FileWrite::Pos::Null());
+	fw->Data(data, len, FileWrite::Pos::Null());
 	return 0;
 }
 
@@ -160,13 +160,14 @@ static void m_add_iterator_function_to_not_unpersist
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
 // break safe game compatibility.
 static const char * m_persistent_globals[] = {
-	"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
-	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
-	"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
-	"os", "package", "pairs", "pcall", "print", "rawequal",
-	"rawget", "rawset", "rawlen", "require", "select", "setfenv", "setmetatable",
-	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", "_", "set_textdomain", "get_build_id", "coroutine.yield", "ngettext", nullptr
+	"_VERSION", "assert", "collectgarbage", "coroutine", "debug", "dofile",
+	"error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs", "load",
+	"loadfile", "loadstring", "math", "module", "newproxy", "next", "os",
+	"package", "pairs", "pcall", "print", "rawequal", "rawget", "rawset",
+	"rawlen", "require", "select", "setfenv", "setmetatable", "table",
+	"tonumber", "tostring", "type", "unpack", "wl", "xpcall", "string",
+	"_", "set_textdomain", "get_build_id", "coroutine.yield", "ngettext",
+	"include", "path", nullptr
 };
 
 /**
@@ -175,7 +176,7 @@ static const char * m_persistent_globals[] = {
  */
 uint32_t persist_object
 	(lua_State * L,
-	 Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
+	 FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
 	assert(lua_gettop(L) == 2); // S: globals_table object
 
@@ -222,7 +223,7 @@ uint32_t persist_object
 
 void unpersist_object
 	(lua_State * L,
-	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	 FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
 	assert(lua_gettop(L) == 0); // S:

@@ -19,6 +19,8 @@
 
 #include "ui_basic/helpwindow.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "constants.h"
@@ -28,6 +30,7 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -90,7 +93,6 @@ HelpWindow::HelpWindow
 
 HelpWindow::~HelpWindow()
 {
-	delete textarea;
 }
 
 /// Adds a new heading.
@@ -182,19 +184,18 @@ LuaTextHelpWindow
 */
 
 LuaTextHelpWindow::LuaTextHelpWindow
-	(Panel * const parent,
-	 UI::UniqueWindow::Registry & reg,
-	 const std::string & caption,
-	 std::string path_to_script,
-	 uint32_t width, uint32_t height)
-	:
-	UI::UniqueWindow(parent, "help_window", &reg, width, height, (boost::format(_("Help: %s")) % caption).str().c_str()),
-	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
+	(Panel* const parent, UI::UniqueWindow::Registry& reg, const std::string&
+	 caption, const std::string& path_to_script, uint32_t width,
+	 uint32_t height)
+	: UI::UniqueWindow(parent, "help_window", &reg, width, height,
+			(boost::format(_("Help: %s")) % caption).str().c_str()),
+	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height - 10,
+				std::string(), Align_Left))
 {
 	LuaInterface lua;
 
 	try {
-		std::unique_ptr<LuaTable> t = lua.run_script(*g_fs, path_to_script, "help");
+		std::unique_ptr<LuaTable> t = lua.run_script(path_to_script);
 		textarea->set_text(t->get_string("text"));
 	} catch (LuaError & err) {
 		textarea->set_text(err.what());
@@ -203,7 +204,6 @@ LuaTextHelpWindow::LuaTextHelpWindow
 
 LuaTextHelpWindow::~LuaTextHelpWindow()
 {
-	delete textarea;
 }
 
 }

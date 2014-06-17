@@ -26,10 +26,9 @@
 #include <stdint.h>
 
 #include "logic/instances.h"
-#include "io/filewrite.h"
 
-struct Profile;
-struct Section;
+class Profile;
+class Section;
 class Image;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
@@ -39,12 +38,13 @@ class Image;
 
 namespace Widelands {
 
+struct Tribe_Descr;
+
 /**
  * Wares can be stored in warehouses. They can be transferred across an
  * Economy. They can be traded.
 */
 struct WareDescr : public Map_Object_Descr {
-	typedef Ware_Index::value_t Index;
 	WareDescr
 		(const Tribe_Descr & tribe, char const * const name,
 		 char const * const descname, const std::string & directory,

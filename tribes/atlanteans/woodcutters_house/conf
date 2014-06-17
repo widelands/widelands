@@ -1,12 +1,12 @@
 size=small
-output=trunk
+output=log
 
 [buildcost]
-trunk=2
+log=2
 planks=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 planks=1
 
 [working positions]
@@ -14,7 +14,7 @@ woodcutter=1
 
 [aihints]
 is_basic=true
-trunkproducer=true
+logproducer=true
 
 [programs]
 work=_Work
@@ -26,4 +26,3 @@ worker=harvest
 [idle]
 pics=woodcutter_i_??.png
 hotspot=37 44
-playercolor=true

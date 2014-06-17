@@ -20,6 +20,8 @@
 #ifndef PLAYERCOMMAND_H
 #define PLAYERCOMMAND_H
 
+#include <memory>
+
 #include "logic/cmd_queue.h"
 #include "economy/flag.h"
 #include "logic/message_id.h"
@@ -518,7 +520,7 @@ private:
 };
 
 struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
-	Cmd_ResetWareTargetQuantity() : Cmd_ChangeTargetQuantity(), m_ware_type() {}
+	Cmd_ResetWareTargetQuantity() : Cmd_ChangeTargetQuantity() {}
 	Cmd_ResetWareTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index);
@@ -533,9 +535,6 @@ struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
 
 	virtual void execute (Game &) override;
 	virtual void serialize (StreamWrite &) override;
-
-private:
-	Ware_Index m_ware_type;
 };
 
 struct Cmd_SetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
@@ -561,7 +560,7 @@ private:
 };
 
 struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
-	Cmd_ResetWorkerTargetQuantity() : Cmd_ChangeTargetQuantity(), m_ware_type() {}
+	Cmd_ResetWorkerTargetQuantity() : Cmd_ChangeTargetQuantity() {}
 	Cmd_ResetWorkerTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index);
@@ -576,9 +575,6 @@ struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
 
 	virtual void execute (Game &) override;
 	virtual void serialize (StreamWrite &) override;
-
-private:
-	Ware_Index m_ware_type;
 };
 
 struct Cmd_ChangeTrainingOptions : public PlayerCommand {

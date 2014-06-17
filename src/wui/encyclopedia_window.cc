@@ -91,7 +91,7 @@ void EncyclopediaWindow::fillWares() {
 	Ware_Index const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
 
-	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+	for (Ware_Index i = 0; i < nr_wares; ++i) {
 		WareDescr const * ware = tribe.get_ware_descr(i);
 		Ware w(i, ware);
 		ware_vec.push_back(w);
@@ -117,7 +117,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 	bool found = false;
 
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
+	for (Building_Index i = 0; i < nr_buildings; ++i) {
 		const Building_Descr & descr = *tribe.get_building_descr(i);
 		if (upcast(ProductionSite_Descr const, de, &descr)) {
 
@@ -191,7 +191,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 							tribe.get_ware_descr(*k)->descname();
 						if (k.advance().empty())
 							break;
-						/** TRANSLATORS: List or wares, e.g. "Fish or Meat" */
+						/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
 						ware_type_names += _(" or ");
 					}
 

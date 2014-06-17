@@ -78,7 +78,9 @@ ProductionSite_Window::ProductionSite_Window
 		m_worker_table = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
 		m_worker_caps = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
-		m_worker_table->add_column(150, (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions())));
+		m_worker_table->add_column(150, (ngettext
+			("Worker", "Workers", productionsite().descr().nr_working_positions())
+		));
 		m_worker_table->add_column(60, _("Exp"));
 		m_worker_table->add_column(150, _("Next Level"));
 
@@ -170,7 +172,7 @@ void ProductionSite_Window::update_worker_table()
 					and
 					worker->get_needed_experience () != -1)
 			{
-				assert(worker->becomes());
+				assert(worker->becomes() != Widelands::INVALID_INDEX);
 
 				// Fill upgrade status
 				char buffer[7];

@@ -97,9 +97,25 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 		srcsdl = extract_sdl_surface(*src, srcrect);
 	}
 
+	// If we actually shrink a surface, ballpark the zoom so that the shrinking
+	// effect is weakened.
+	int factor = 1;
+	while ((static_cast<double>(w) * factor / srcsdl->w) < 1. ||
+	       (static_cast<double>(h) * factor / srcsdl->h) < 1.) {
+		++factor;
+	}
+	if (factor > 2) {
+		SDL_Surface* temp = shrinkSurface(srcsdl, factor - 1, factor - 1);
+		if (free_source) {
+			SDL_FreeSurface(srcsdl);
+		}
+		srcsdl = temp;
+		free_source = true;
+	}
+
 	// Third step: perform the zoom and placement
-	SDL_Surface * zoomed = zoomSurface
-		(srcsdl, double(w) / srcsdl->w, double(h) / srcsdl->h, 1);
+	SDL_Surface* zoomed = zoomSurface(srcsdl, double(w) / srcsdl->w, double(h) / srcsdl->h, 1);
+
 	if (free_source)
 		SDL_FreeSurface(srcsdl);
 

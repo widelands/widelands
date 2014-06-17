@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -30,31 +31,32 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
-#include "logic/cmd_queue.h"
 #include "log.h"
+#include "logic/cmd_queue.h"
 #include "port.h"
 #include "ref_cast.h"
+#include "widelands.h"
 
-
-struct DirAnimations;
+class FileRead;
 class RenderTarget;
+struct DirAnimations;
 namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
 
-struct Path;
+class EditorCategory;
+class Map_Map_Object_Loader;
 class Player;
-struct Map_Map_Object_Loader;
+struct Path;
 
 /**
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
 struct Map_Object_Descr : boost::noncopyable {
-	typedef uint8_t Index;
-	Map_Object_Descr(char const * const _name, char const * const _descname)
-		: m_name(_name), m_descname(_descname)
-	{}
+	Map_Object_Descr(const std::string& init_name, const std::string& init_descname)
+	   : m_name(init_name), m_descname(init_descname) {
+	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
 	const std::string &     name() const {return m_name;}
@@ -83,8 +85,10 @@ struct Map_Object_Descr : boost::noncopyable {
 	void add_animation(const std::string & name, uint32_t anim);
 
 protected:
+	// Add all the special attributes to the attribute list. Only the 'allowed_special'
+	// attributes are allowed to appear - i.e. resi are fine for immovables.
+	void add_attributes(const std::vector<std::string>& attributes, const std::set<uint32_t>& allowed_special);
 	void add_attribute(uint32_t attr);
-
 
 private:
 	typedef std::map<std::string, uint32_t> Anims;
@@ -153,7 +157,7 @@ class Map_Object : boost::noncopyable {
 public:
 	enum {
 		AREAWATCHER,
-		BOB,  //  struct Bob
+		BOB,  //  class Bob
 
 		WARE, //  class WareInstance
 		BATTLE,
@@ -240,18 +244,14 @@ public:
 	/// Called when a new logsink is set. Used to give general information.
 	virtual void log_general_info(const Editor_Game_Base &);
 
-	// saving and loading
-	/**
-	 * Header bytes to distinguish between data packages for the different
-	 * Map_Object classes.
-	 *
-	 * Be careful in changing those, since they are written to files.
-	 */
+	// Header bytes to distinguish between data packages for the different
+	// Map_Object classes. Be careful in changing those, since they are written
+	// to files.
 	enum {
 		header_Map_Object = 1,
 		header_Immovable = 2,
-		header_Legacy_Battle = 3,
-		header_Legacy_AttackController = 4,
+		// 3 was battle object.
+		// 4 was attack controller.
 		header_Battle = 5,
 		header_Critter = 6,
 		header_Worker = 7,
@@ -279,8 +279,6 @@ public:
 		Loader() : m_egbase(nullptr), m_mol(nullptr), m_object(nullptr) {}
 
 	public:
-		typedef boost::function<void ()> FinishFn;
-
 		virtual ~Loader() {}
 
 		void init
@@ -298,17 +296,12 @@ public:
 			return ref_cast<T, Map_Object>(*m_object);
 		}
 
-		void add_finish(const FinishFn & fini);
-
 	protected:
 		void load(FileRead &);
 
 	public:
 		virtual void load_pointers();
 		virtual void load_finish();
-
-	private:
-		std::vector<FinishFn> m_finish;
 	};
 
 	/// This is just a fail-safe guard for the time until we fully transition

@@ -1,11 +1,11 @@
-include "baseimmovables"
+include "map:scripting/baseimmovables.lua"
 
 -- Player immovables
-include "flag"
-include "road"
+include "map:scripting/flag.lua"
+include "map:scripting/road.lua"
 
-include "constructionsite"
-include "productionsite"
-include "warehouse"
-include "militarysite"
-include "trainingsite"
+include "map:scripting/constructionsite.lua"
+include "map:scripting/productionsite.lua"
+include "map:scripting/warehouse.lua"
+include "map:scripting/militarysite.lua"
+include "map:scripting/trainingsite.lua"

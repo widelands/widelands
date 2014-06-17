@@ -19,6 +19,7 @@
 #include "ui_fsmenu/mapselect.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -56,7 +57,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_label_load_map_as_scenario
 		(this,
 		 get_w() * 23 / 25, get_h() * 11 / 40,
-		 _("Load Map as scenario"),
+		 _("Load map as scenario"),
 		 UI::Align_Right),
 	m_label_name
 		(this,
@@ -76,12 +77,6 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		 _("Size:"),
 		 UI::Align_Right),
 	m_size (this, get_w() * 71 / 100, get_h() * 41 / 100),
-	m_label_world
-		(this,
-		 get_w() * 7 / 10, get_h() * 89 / 200,
-		 _("World:"),
-		 UI::Align_Right),
-	m_world (this, get_w() * 71 / 100, get_h() * 89 / 200),
 	m_label_nr_players
 		(this,
 		 get_w() * 7 / 10, get_h() * 12 / 25,
@@ -134,8 +129,6 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_author                    .set_textstyle(ts_small());
 	m_label_size                .set_textstyle(ts_small());
 	m_size                      .set_textstyle(ts_small());
-	m_label_world               .set_textstyle(ts_small());
-	m_world                     .set_textstyle(ts_small());
 	m_label_nr_players          .set_textstyle(ts_small());
 	m_nr_players                .set_textstyle(ts_small());
 	m_label_descr               .set_textstyle(ts_small());
@@ -147,9 +140,9 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 
 #define NR_PLAYERS_WIDTH 35
 	/** TRANSLATORS: Column title for number of players in map list */
-	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), UI::Align_HCenter);
+	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), "", UI::Align_HCenter);
 	m_table.add_column
-		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), UI::Align_Left);
+		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), "", UI::Align_Left);
 	m_table.set_column_compare
 		(1,
 		 boost::bind
@@ -256,15 +249,6 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 	if (map.width) {
 		char buf[256];
 
-		// get translated worldsname
-		std::string world(map.world);
-		if (map.height) { // if height == 0 : dedicated server map info without local map
-			std::string worldpath("worlds/" + map.world);
-			Profile prof((worldpath + "/conf").c_str(), nullptr, "world_" + map.world);
-			Section & global = prof.get_safe_section("world");
-			world = global.get_safe_string("name");
-		}
-
 		// Translate the map data
 		i18n::Textdomain td("maps");
 		m_name      .set_text(_(map.name));
@@ -274,7 +258,6 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		sprintf(buf, "%i", map.nrplayers);
 		m_nr_players.set_text(buf);
 		m_descr     .set_text(_(map.description) + (map.hint.empty() ? "" : (std::string("\n") + _(map.hint))));
-		m_world     .set_text(world);
 		m_load_map_as_scenario.set_enabled(map.scenario);
 	} else {
 		// Directory
@@ -283,7 +266,6 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		m_size      .set_text(std::string());
 		m_nr_players.set_text(std::string());
 		m_descr     .set_text(std::string());
-		m_world     .set_text(std::string());
 		m_load_map_as_scenario.set_enabled(false);
 	}
 	m_ok.set_enabled(true);
@@ -325,8 +307,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		// This is the normal case
 
 		//  Fill it with all files we find in all directories.
-		filenameset_t files;
-		g_fs->FindFiles(m_curdir, "*", &files);
+		filenameset_t files = g_fs->ListDirectory(m_curdir);
 
 		int32_t ndirs = 0;
 
@@ -395,7 +376,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			{
 				char const * const name = pname->c_str();
 
-				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 				if (!ml)
 					continue;
 
@@ -409,7 +390,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					mapdata.author      = map.get_author();
 					mapdata.description = map.get_description();
 					mapdata.hint        = map.get_hint();
-					mapdata.world       = map.get_world_name();
 					mapdata.nrplayers   = map.get_nrplayers();
 					mapdata.width       = map.get_width();
 					mapdata.height      = map.get_height();
@@ -435,7 +415,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					i18n::Textdomain td("maps");
 					te.set_picture
 						(1,  g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader const *>(ml) ?
+						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ?
 							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
 						_(mapdata.name));
@@ -446,8 +426,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				} catch (...) {
 					log("Mapselect: Skip %s due to unknown exception\n", name);
 				}
-
-				delete ml;
 			}
 		}
 	} else {
@@ -459,7 +437,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
 			char const * const name = dmap.path.c_str();
-			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+			std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
 			try {
 				if (!ml)
 					throw wexception("Not useable!");
@@ -472,7 +450,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.author      = map.get_author();
 				mapdata.description = map.get_description();
 				mapdata.hint        = map.get_hint();
-				mapdata.world       = map.get_world_name();
 				mapdata.nrplayers   = map.get_nrplayers();
 				mapdata.width       = map.get_width();
 				mapdata.height      = map.get_height();
@@ -502,10 +479,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.filename    = name;
 				mapdata.name        = dmap.path.substr(5, dmap.path.size() - 1);
 				mapdata.author      = _("unknown");
-				mapdata.description =
-					_("This map file is not present in your filesystem. The data shown here was sent by the server.");
+				mapdata.description = _("This map file is not present in your filesystem."
+							" The data shown here was sent by the server.");
 				mapdata.hint        = "";
-				mapdata.world       = _("unknown");
 				mapdata.nrplayers   = dmap.players;
 				mapdata.width       = 1;
 				mapdata.height      = 0;
@@ -522,8 +498,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					(1, g_gr->images().get
 					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
 			}
-
-			delete ml;
 		}
 	}
 
@@ -578,4 +552,3 @@ void Fullscreen_Menu_MapSelect::_tagbox_changed(int32_t id, bool to) {
 
 	fill_list();
 }
-

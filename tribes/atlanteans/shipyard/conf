@@ -5,13 +5,13 @@ build_material=false
 needs_water=true
 
 [buildcost]
-trunk=3
+log=3
 planks=2
 stone=3
 spidercloth=2
 
 [return_on_dismantle]
-trunk=1
+log=1
 planks=1
 stone=2
 spidercloth=1
@@ -21,7 +21,7 @@ shipwright=1
 
 [inputs]
 planks=10
-trunk=2
+log=2
 spidercloth=4
 
 [programs]
@@ -40,19 +40,15 @@ return=completed
 [idle]
 pics=shipyard_i_??.png
 hotspot=53 66
-playercolor=true
 
 [build]
 pics=shipyard_b_??.png
 hotspot=53 66
-playercolor=true
 
 #[working]
 #pics=shipyard_i_??.png
 #hotspot=53 66
-#playercolor=true
 #
 #[outofhouse]
 #pics=shipyard_i_??.png
 #hotspot=53 66
-#playercolor=true

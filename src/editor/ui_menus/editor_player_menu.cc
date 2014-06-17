@@ -65,7 +65,7 @@ Editor_Player_Menu::Editor_Player_Menu
 	int32_t const width   = 20;
 	int32_t       posy    = 0;
 
-	Widelands::Tribe_Descr::get_all_tribenames(m_tribes);
+	m_tribes = Widelands::Tribe_Descr::get_all_tribenames();
 
 	set_inner_size(375, 135);
 
@@ -354,9 +354,9 @@ void Editor_Player_Menu::set_starting_pos_clicked(uint8_t n) {
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
-	map.overlay_manager().register_overlay_callback_function
-		(&Editor_Tool_Set_Starting_Pos_Callback, &map);
-	map.recalc_whole_map();
+	map.overlay_manager().register_overlay_callback_function(
+	   boost::bind(&Editor_Tool_Set_Starting_Pos_Callback, _1, boost::ref(map)));
+	map.recalc_whole_map(menu.egbase().world());
 	update();
 }
 
@@ -388,7 +388,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
    // so must be true)
 	Widelands::Editor_Game_Base & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
 	assert(start_pos);
 
@@ -416,7 +416,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 		const Widelands::Tribe_Descr & tribe = p->tribe();
 		const Widelands::Building_Index idx =
 			tribe.building_index("headquarters");
-		if (not idx)
+		if (idx == Widelands::INVALID_INDEX)
 			throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
 		// Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
 		//         (egbase.warp_building(starting_pos, player_number, idx));
@@ -439,10 +439,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 
 	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);
 	parent.tools.make_infrastructure.set_player(n);
-	overlay_manager.register_overlay_callback_function
-		(&Editor_Make_Infrastructure_Tool_Callback,
-		 static_cast<void *>(&egbase),
-		 n);
-	map.recalc_whole_map();
+	overlay_manager.register_overlay_callback_function(
+	   boost::bind(&Editor_Make_Infrastructure_Tool_Callback, _1, boost::ref(egbase), n));
+	map.recalc_whole_map(egbase.world());
 }
-

@@ -20,6 +20,7 @@
 #include "wui/soldierlist.h"
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 
 #include "container_iterate.h"
 #include "graphic/font.h"
@@ -473,22 +474,14 @@ void SoldierList::mouseover(const Soldier * soldier)
 		return;
 	}
 
-	uint32_t const  hl = soldier->get_hp_level         ();
-	uint32_t const mhl = soldier->get_max_hp_level     ();
-	uint32_t const  al = soldier->get_attack_level     ();
-	uint32_t const mal = soldier->get_max_attack_level ();
-	uint32_t const  dl = soldier->get_defense_level    ();
-	uint32_t const mdl = soldier->get_max_defense_level();
-	uint32_t const  el = soldier->get_evade_level      ();
-	uint32_t const mel = soldier->get_max_evade_level  ();
-
-	char buffer[5 * 30];
-	snprintf
-		(buffer, sizeof(buffer),
-		 /** TRANSLATORS: Health, Attack, Defense, Evade */
-		 _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
-		 hl, mhl, al, mal, dl, mdl, el, mel);
-	m_infotext.set_text(buffer);
+	m_infotext.set_text(
+		(boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"))
+			% soldier->get_hp_level() % soldier->get_max_hp_level()
+			% soldier->get_attack_level() % soldier->get_max_attack_level()
+			% soldier->get_defense_level() % soldier->get_max_defense_level()
+			% soldier->get_evade_level() % soldier->get_max_evade_level()
+		).str()
+	);
 }
 
 void SoldierList::eject(const Soldier * soldier)

@@ -21,8 +21,6 @@
 
 #include <cstdio>
 
-#include <boost/foreach.hpp>
-
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
@@ -74,7 +72,7 @@ Partially_Finished_Building(gdescr)
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
-	BOOST_FOREACH(Building_Index former_idx, former_buildings) {
+	for (Building_Index former_idx : former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
 	const Building_Descr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
@@ -134,7 +132,7 @@ void DismantleSite::count_returned_wares
 	(Building* building,
 	 std::map<Ware_Index, uint8_t>   & res)
 {
-	BOOST_FOREACH(Building_Index former_idx, building->get_former_buildings()) {
+	for (Building_Index former_idx : building->get_former_buildings()) {
 		const std::map<Ware_Index, uint8_t> * return_wares;
 		const Building_Descr* former_descr = building->tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
@@ -255,18 +253,19 @@ void DismantleSite::draw
 	if (m_working)
 		completed_time += DISMANTLESITE_STEP_TIME + gametime - m_work_steptime;
 
-	uint32_t anim;
+	uint32_t anim_idx;
 	try {
-		anim = m_building->get_animation("unoccupied");
+		anim_idx = m_building->get_animation("unoccupied");
 	} catch (Map_Object_Descr::Animation_Nonexistent &) {
-		anim = m_building->get_animation("idle");
+		anim_idx = m_building->get_animation("idle");
 	}
-	uint32_t w, h;
-	g_gr->get_animation_size(anim, tanim, w, h);
+	const Animation& anim = g_gr->animations().get_animation(anim_idx);
+	const uint16_t w = anim.width();
+	const uint16_t h = anim.height();
 
 	uint32_t lines = h * completed_time / total_time;
 
-	dst.drawanimrect(pos, anim, tanim, get_owner(), Rect(Point(0, lines), w, h - lines));
+	dst.drawanimrect(pos, anim_idx, tanim, get_owner(), Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);

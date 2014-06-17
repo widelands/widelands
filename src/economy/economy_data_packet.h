@@ -20,13 +20,13 @@
 #ifndef ECONOMY_DATA_PACKET_H
 #define ECONOMY_DATA_PACKET_H
 
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 class Economy;
 class Game;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 
 class EconomyDataPacket {

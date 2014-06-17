@@ -33,7 +33,7 @@ UniqueWindow IMPLEMENTATION
 */
 void UniqueWindow::Registry::create() {
 	if (not window) {
-		constr();
+		open_window();
 	}
 }
 
@@ -53,7 +53,7 @@ void UniqueWindow::Registry::toggle() {
 	if (window) {
 		window->die();
 	} else {
-		constr();
+		open_window();
 	}
 }
 
@@ -88,8 +88,8 @@ UniqueWindow::UniqueWindow
 			set_pos(Point(m_registry->x, m_registry->y));
 			m_usedefaultpos = false;
 		}
-		if (m_registry->onCreate) {
-			m_registry->onCreate();
+		if (m_registry->on_create) {
+			m_registry->on_create();
 		}
 	}
 }
@@ -108,8 +108,8 @@ UniqueWindow::~UniqueWindow()
 		m_registry->y = get_y();
 		m_registry->valid_pos = true;
 
-		if (m_registry->onDelete) {
-			m_registry->onDelete();
+		if (m_registry->on_delete) {
+			m_registry->on_delete();
 		}
 	}
 }

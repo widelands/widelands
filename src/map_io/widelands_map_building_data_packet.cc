@@ -23,13 +23,13 @@
 
 #include "economy/request.h"
 #include "graphic/graphic.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/constructionsite.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
@@ -74,7 +74,7 @@ void Map_Building_Data_Packet::Read
 						if (Player * const player = egbase.get_safe_player(p)) {
 							const Tribe_Descr & tribe = player->tribe();
 							const Building_Index index = tribe.building_index(name);
-							if (not index) {
+							if (index == INVALID_INDEX) {
 								throw game_data_error
 									("tribe %s does not define building type \"%s\"",
 									 tribe.name().c_str(), name);

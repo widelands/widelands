@@ -1,7 +1,7 @@
 size=small
 
 [buildcost]
-trunk=1
+log=1
 wood=1
 stone=1
 
@@ -14,7 +14,7 @@ forester=1
 
 [aihints]
 space_consumer=true
-renews_map_resource=trunk
+renews_map_resource=log
 
 [programs]
 work=_Work

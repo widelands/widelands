@@ -25,12 +25,12 @@
 #include <string>
 
 #include "container_iterate.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/queue_cmd_ids.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "wexception.h"
@@ -283,6 +283,18 @@ void Map_Object_Descr::add_attribute(uint32_t const attr)
 		m_attributes.push_back(attr);
 }
 
+void Map_Object_Descr::add_attributes(const std::vector<std::string>& attributes,
+                                      const std::set<uint32_t>& allowed_special) {
+	for (const std::string& attribute : attributes) {
+		uint32_t const attrib = get_attribute_id(attribute);
+		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE) {
+			if (!allowed_special.count(attrib)) {
+				throw game_data_error("bad attribute \"%s\"", attribute.c_str());
+			}
+		}
+		add_attribute(attrib);
+	}
+}
 
 /**
  * Lookup an attribute by name. If the attribute name hasn't been encountered
@@ -518,26 +530,7 @@ void Map_Object::Loader::load_pointers() {}
  */
 void Map_Object::Loader::load_finish()
 {
-	while (!m_finish.empty()) {
-		m_finish.back()();
-		m_finish.pop_back();
-	}
 }
-
-/**
- * Register a callback function that will automatically be run at
- * \ref load_finish time.
- *
- * This is useful for registering save game compatibility fixups that need
- * to be run after everything else has loaded.
- *
- * Callbacks are run in LIFO order.
- */
-void Map_Object::Loader::add_finish(const FinishFn & fini)
-{
-	m_finish.push_back(fini);
-}
-
 
 /**
  * Save the Map_Object to the given file.

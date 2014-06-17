@@ -1,18 +1,18 @@
 size=small
-output=trunk
+output=log
 
 [buildcost]
-trunk=3
+log=3
 
 [return_on_dismantle]
-trunk=2
+log=2
 
 [working positions]
 lumberjack=1
 
 [aihints]
 is_basic=true
-trunkproducer=true
+logproducer=true
 
 [programs]
 work=_Work

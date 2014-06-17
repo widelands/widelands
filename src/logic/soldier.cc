@@ -28,6 +28,8 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/attackable.h"
 #include "logic/battle.h"
 #include "logic/building.h"
@@ -194,8 +196,7 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 				anim_s = prof.get_safe_section((*i.current).c_str());
 
 			add_animation
-				((*i.current).c_str(),
-				 g_anim.get (directory, anim_s, "idle_00.png"));
+				((*i.current).c_str(), g_gr->animations().load(directory, anim_s));
 		}
 	} catch (const _wexception & e) {
 		throw game_data_error("%s : %s", anim_name, e.what());
@@ -556,17 +557,9 @@ void Soldier::draw
 	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
-
 		const Point drawpos = calc_drawpos(game, pos);
-
-		uint32_t w, h;
-		g_gr->get_animation_size
-			(anim,
-			 game.get_gametime() - get_animstart(),
-			 w,
-			 h);
-
-		draw_info_icon(dst, Point(drawpos.x, drawpos.y - h - 7), true);
+		draw_info_icon
+			(dst, Point(drawpos.x, drawpos.y - g_gr->animations().get_animation(anim).height() - 7), true);
 
 		draw_inner(game, dst, drawpos);
 	}
@@ -1557,14 +1550,12 @@ void Soldier::battle_update(Game & game, State &)
 						 descname().c_str(), serial(), owner().player_number(),
 						 get_position().x, get_position().y,
 						 immovable_position ?
-						/** TRANSLATORS this is followed by "immovable" in the source string */
-						 immovable_position->descr().descname().c_str() : _("no"),
+						 immovable_position->descr().descname().c_str() : ("no"),
 						 opponent.descname().c_str(), opponent.serial(),
 						 opponent.owner().player_number(),
 						 dest.x, dest.y,
 						 immovable_dest ?
-						/** TRANSLATORS this is followed by "immovable" in the source string */
-						 immovable_dest->descr().descname().c_str() : _("no"),
+						 immovable_dest->descr().descname().c_str() : ("no"),
 						 descname().c_str());
 					owner().add_message
 						(game,

@@ -2,16 +2,17 @@ size=small
 output=water
 
 [buildcost]
-trunk=2
+log=2
 stone=1
 marble=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 marble=1
 
 [aihints]
 build_material=false
+mines_water=true
 
 [working positions]
 carrier=1
@@ -22,7 +23,7 @@ work=_Work
 [work]
 sleep=20000
 animate=working 20000
-mine=water 1 100 65
+mine=water 1 100 65 2
 produce=water
 
 [idle]

@@ -48,7 +48,7 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 	Economy_Options_Window(Interactive_GameBase & parent, Economy & economy)
 		:
 		UI::UniqueWindow
-			(&parent, "economy_options", &economy.m_optionswindow_registry, 0, 0,
+			(&parent, "economy_options", &economy.optionswindow_registry(), 0, 0,
 			 _("Economy options")),
 		m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png"))
 	{
@@ -88,14 +88,14 @@ private:
 		{
 			if (type == Widelands::wwWORKER) {
 				Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
-				for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+				for (Ware_Index i = 0; i < nr_wares; ++i) {
 					if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
 				}
 			} else {
 				Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
-				for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+				for (Ware_Index i = 0; i < nr_wares; ++i) {
 					if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
@@ -156,7 +156,7 @@ private:
 			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrwares();
 
 			for
-				(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+				(Widelands::Ware_Index id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -179,7 +179,7 @@ private:
 			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrwares();
 
 			for
-				(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+				(Widelands::Ware_Index id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -200,7 +200,7 @@ private:
 			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrwares();
 
 			for
-				(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+				(Widelands::Ware_Index id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -253,7 +253,7 @@ private:
 			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrworkers();
 
 			for
-				(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+				(Widelands::Ware_Index id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -276,7 +276,7 @@ private:
 			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrworkers();
 
 			for
-				(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+				(Widelands::Ware_Index id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -296,7 +296,7 @@ private:
 		void reset_target() {
 			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrworkers();
 			for
-				(Widelands::Ware_Index id = Widelands::Ware_Index::First();
+				(Widelands::Ware_Index id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {

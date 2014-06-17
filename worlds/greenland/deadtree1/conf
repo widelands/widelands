@@ -1,9 +1,0 @@
-program=program
-picture=idle.png
-
-[idle]
-hotspot=25 56
-
-[program]
-animate=idle 40000
-remove=16

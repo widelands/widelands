@@ -26,17 +26,17 @@
 #include <string>
 #include <vector>
 
+#include <boost/noncopyable.hpp>
 #include <stdint.h>
 
 #include "container_iterate.h"
-#include "io/filewrite.h"
 #include "log.h"
 #include "logic/bill_of_materials.h"
 #include "logic/program_result.h"
 #include "logic/tattribute.h"
 #include "logic/widelands.h"
 
-struct Profile;
+class Profile;
 
 namespace Widelands {
 
@@ -46,6 +46,7 @@ struct ProductionSite_Descr;
 class ProductionSite;
 struct Tribe_Descr;
 class Worker;
+class World;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {
@@ -244,9 +245,9 @@ struct ProductionProgram {
 	///    program:
 	///       The name of a program defined in the productionsite's main worker.
 	struct ActWorker : public Action {
-		ActWorker
-			(char * parameters, ProductionSite_Descr &,
-			 const std::string & production_program_name);
+		ActWorker(char* parameters,
+		          const std::string& production_program_name,
+		          ProductionSite_Descr*);
 		virtual void execute(Game &, ProductionSite &) const override;
 		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const override;
 		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const override;
@@ -266,7 +267,7 @@ struct ProductionProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		ActSleep(char * parameters, const ProductionSite_Descr &);
+		ActSleep(char * parameters);
 		virtual void execute(Game &, ProductionSite &) const override;
 	private:
 		Duration m_duration;
@@ -283,7 +284,7 @@ struct ProductionProgram {
 	///
 	/// Ends the program if the feature is not enabled.
 	struct ActCheck_Map : public Action {
-		ActCheck_Map(char * parameters, const ProductionSite_Descr &);
+		ActCheck_Map(char * parameters);
 		virtual void execute(Game &, ProductionSite &) const override;
 	private:
 		 enum {
@@ -309,9 +310,7 @@ struct ProductionProgram {
 	/// animation will not be stopped by this command. It will run until another
 	/// animation is started.)
 	struct ActAnimate : public Action {
-		ActAnimate
-			(char * parameters, ProductionSite_Descr &,
-			 const std::string & directory, Profile &);
+		ActAnimate(char* parameters, const std::string& directory, Profile&, ProductionSite_Descr*);
 		virtual void execute(Game &, ProductionSite &) const override;
 	private:
 		uint32_t m_id;
@@ -420,20 +419,22 @@ struct ProductionProgram {
 	};
 
 	struct ActMine : public Action {
-		ActMine
-			(char * parameters, ProductionSite_Descr &,
-			 const std::string & production_program_name);
+		ActMine(char* parameters,
+		        const World&,
+		        const std::string& production_program_name,
+		        ProductionSite_Descr*);
 		virtual void execute(Game &, ProductionSite &) const override;
 		virtual void informPlayer(Game &, ProductionSite &) const;
 	private:
 		Resource_Index m_resource;
-		uint8_t        m_distance;
-		uint8_t        m_max;
-		uint8_t        m_chance;
+		uint8_t        m_distance; // width/radius of mine
+		uint8_t        m_max;  // Can work up to this percent (of total mountain resources)
+		uint8_t        m_chance; // odds of finding resources from empty mine
+		uint8_t        m_training; // probability of training in _empty_ mines
 	};
 
 	struct ActCheck_Soldier : public Action {
-		ActCheck_Soldier(char * parameters, const ProductionSite_Descr &);
+		ActCheck_Soldier(char * parameters);
 		virtual void execute(Game &, ProductionSite &) const override;
 	private:
 		tAttribute attribute;
@@ -441,7 +442,7 @@ struct ProductionProgram {
 	};
 
 	struct ActTrain : public Action {
-		ActTrain(char * parameters, const ProductionSite_Descr &);
+		ActTrain(char * parameters);
 		virtual void execute(Game &, ProductionSite &) const override;
 	private:
 		tAttribute attribute;
@@ -465,7 +466,7 @@ struct ProductionProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(const std::string & directory, char * parameters, const ProductionSite_Descr &);
+		ActPlayFX(const std::string & directory, char * parameters);
 		virtual void execute(Game &, ProductionSite &) const override;
 	private:
 		std::string name;
@@ -485,9 +486,9 @@ struct ProductionProgram {
 	///    radius
 	///       Activity radius
 	struct ActConstruct : public Action {
-		ActConstruct
-			(char * parameters, ProductionSite_Descr &,
-			 const std::string & production_program_name);
+		ActConstruct(char* parameters,
+		             const std::string& production_program_name,
+		             ProductionSite_Descr*);
 		virtual void execute(Game &, ProductionSite &) const override;
 		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const override;
 		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const override;
@@ -500,12 +501,12 @@ struct ProductionProgram {
 		uint32_t radius;
 	};
 
-	ProductionProgram
-		(const std::string    & directory,
-		 Profile              &,
-		 const std::string    & name,
-		 char           const * descname,
-		 ProductionSite_Descr *);
+	ProductionProgram(const std::string& directory,
+	                  Profile&,
+	                  const std::string& name,
+	                  const std::string& descname,
+	                  const World&,
+	                  ProductionSite_Descr*);
 	~ProductionProgram() {
 		container_iterate_const(Actions, m_actions, i)
 			delete *i.current;

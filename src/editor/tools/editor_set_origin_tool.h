@@ -27,13 +27,17 @@
 struct Editor_Set_Origin_Tool : public Editor_Tool {
 	Editor_Set_Origin_Tool() : Editor_Tool(*this, *this) {}
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & eia, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& eia,
+	                          Editor_Action_Args& args) override;
 
-	int32_t handle_undo_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_undo_impl(Widelands::Map& map,
+	                         const Widelands::World& world,
+	                         Widelands::Node_and_Triangle<> center,
+	                         Editor_Interactive& parent,
+	                         Editor_Action_Args& args) override;
 
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
 

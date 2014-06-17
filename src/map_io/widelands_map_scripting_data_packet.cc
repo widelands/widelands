@@ -19,11 +19,18 @@
 
 #include "map_io/widelands_map_scripting_data_packet.h"
 
+#include <string>
+
+#include <boost/algorithm/string/predicate.hpp>
+
+#include "helper.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
@@ -41,18 +48,14 @@ const int SCRIPTING_DATA_PACKET_VERSION = 1;
 void Map_Scripting_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
-	 bool is_normal_game,
+	 bool,
 	 Map_Map_Object_Loader &       mol)
 {
-	if (not is_normal_game) { // Only load scripting stuff if this is a scenario
-		egbase.lua().register_scripts(fs, "map", "scripting");
-	}
-
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
 	// wise this makes no sense.
 	upcast(Game, g, &egbase);
-	Widelands::FileRead fr;
+	FileRead fr;
 	if (g and fr.TryOpen(fs, "scripting/globals.dump"))
 	{
 		const uint32_t sentinel = fr.Unsigned32();
@@ -70,24 +73,28 @@ void Map_Scripting_Data_Packet::Read
 void Map_Scripting_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
-	const ScriptContainer& p = egbase.lua().get_scripts_for("map");
-
 	fs.EnsureDirectoryExists("scripting");
 
-	for (ScriptContainer::const_iterator i = p.begin(); i != p.end(); ++i) {
-		std::string fname = "scripting/";
-		fname += i->first;
-		fname += ".lua";
-
-		fs.Write(fname, i->second.c_str(), i->second.size());
+	FileSystem* map_fs = egbase.map().filesystem();
+	if (map_fs) {
+		for (const std::string& script :
+		     filter(map_fs->ListDirectory("scripting"),
+		            [](const std::string& fn) {
+							return boost::ends_with(fn, ".lua");
+						})) {
+			size_t length;
+			void* input_data = map_fs->Load(script, length);
+			fs.Write(script, input_data, length);
+			free(input_data);
+		}
 	}
 
 	// Dump the global environment if this is a game and not in the editor
 	if (upcast(Game, g, &egbase)) {
-		Widelands::FileWrite fw;
+		FileWrite fw;
 		fw.Unsigned32(0xDEADBEEF);  // Sentinel, because there was no packet version.
 		fw.Unsigned32(SCRIPTING_DATA_PACKET_VERSION);
-		const Widelands::FileWrite::Pos pos = fw.GetPos();
+		const FileWrite::Pos pos = fw.GetPos();
 		fw.Unsigned32(0); // N bytes written, follows below
 
 		upcast(LuaGameInterface, lgi, &g->lua());

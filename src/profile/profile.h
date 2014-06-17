@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include <cstring>
 #include <vector>
 
 #include <boost/noncopyable.hpp>
@@ -27,19 +28,10 @@
 //TODO: as soon as g_fs is not needed anymore, next include can be changed
 //to ..../filesystem.h
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/widelands.h"
-#include "logic/widelands_geometry.h"
 #include "point.h"
 #include "port.h"
 
-
-namespace Widelands {
-struct Building_Descr;
-class Editor_Game_Base;
-struct Immovable_Descr;
-};
-
-extern struct Profile g_options;
+extern class Profile g_options;
 class FileSystem;
 
 /**
@@ -60,8 +52,9 @@ class FileSystem;
  * retrieve any unused key. Value::used is used to determine which key is next.
  * The value of the key is stored in the second parameter.
  */
-struct Section {
-	friend struct Profile;
+class Section {
+public:
+	friend class Profile;
 
 	struct Value {
 		bool   m_used;
@@ -86,7 +79,6 @@ struct Section {
 		char const * get_string() const {return m_value;}
 		char       * get_string()       {return m_value;}
 		Point  get_Point () const;
-		Widelands::Coords get_Coords(Widelands::Extent) const;
 
 		void set_string(char const *);
 	};
@@ -95,7 +87,6 @@ struct Section {
 
 	Section(Profile *, char const * name);
 	Section(const Section &);
-	~Section();
 
 	Section & operator= (const Section &);
 
@@ -108,6 +99,7 @@ struct Section {
 	uint32_t get_num_values() const {return m_values.size();}
 
 	char const * get_name() const;
+	void set_name(const std::string&);
 
 	bool is_used() const;
 	void mark_used();
@@ -132,13 +124,6 @@ struct Section {
 	Point                    get_Point
 		(char             const * name,
 		 Point                    def = Point (0, 0));
-	Widelands::Coords        get_Coords
-		(char             const * name, Widelands::Extent,
-		 Widelands::Coords        def);
-	Widelands::Player_Number get_Player_Number
-		(char             const * name,
-		 Widelands::Player_Number nr_players,
-		 Widelands::Player_Number def = 1);
 
 	int32_t                   get_safe_int
 		(const char * name);
@@ -150,20 +135,7 @@ struct Section {
 		(const char * name);
 	const char *              get_safe_string
 		(const char * name);
-	Widelands::Coords         get_safe_Coords
-		(const char * name, Widelands::Extent);
-	Widelands::Player_Number  get_safe_Player_Number
-		(char const * name,
-		 Widelands::Player_Number nr_players);
-	const Widelands::Immovable_Descr & get_safe_Immovable_Type
-		(char const * tribe, char const * name,
-		 Widelands::Editor_Game_Base &);
-	Widelands::Building_Index get_safe_Building_Index
-		(char const * name,
-		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
-	const Widelands::Building_Descr & get_safe_Building_Type
-		(char const * name,
-		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
+	const char * get_safe_string(const std::string & name);
 
 	char const * get_next_bool(char const * name, bool * value);
 
@@ -188,15 +160,6 @@ struct Section {
 	{
 		set_string_duplicate(name, value.c_str());
 	}
-	void set_Coords
-		(char const * name, Widelands::Coords value);
-	void set_Immovable_Type
-		(char const * tribe, char const * name,
-		 const Widelands::Immovable_Descr &);
-	void set_Building_Index
-		(char const * name,
-		 Widelands::Building_Index value,
-		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
 
 	/// If a Value with this name already exists, update it with the given
 	/// value. Otherwise create a new Value with the given name and value.
@@ -208,7 +171,7 @@ struct Section {
 private:
 	Profile  * m_profile;
 	bool       m_used;
-	char     * m_section_name;
+	std::string m_section_name;
 	Value_list m_values;
 };
 
@@ -226,7 +189,8 @@ private:
  * Returns the next unused section of the given name, or 0 if all sections
  * have been used. name can be 0 to retrieve any remaining sections.
  */
-struct Profile : boost::noncopyable {
+class Profile : boost::noncopyable {
+public:
 	enum {
 		err_ignore = 0,
 		err_log,
@@ -256,7 +220,7 @@ struct Profile : boost::noncopyable {
 		 bool used_only = true,
 		 FileSystem & = *g_fs);
 
-	Section * get_section     (char const * name);
+	Section * get_section     (const std::string & name);
 	Section & get_safe_section(const std::string & name);
 	Section & pull_section    (char const * name);
 	Section * get_next_section(char const * name = nullptr);

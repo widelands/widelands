@@ -19,12 +19,13 @@
 
 #include "economy/portdock.h"
 
-#include <boost/foreach.hpp>
+#include <memory>
 
 #include "container_iterate.h"
 #include "economy/fleet.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/expedition_bootstrap.h"
 #include "logic/game.h"
@@ -32,6 +33,7 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/warehouse.h"
+#include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "wui/interactive_gamebase.h"
@@ -190,7 +192,7 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 	if (egbase.objects().object_still_available(m_warehouse)) {
 		// Transfer all our wares into the warehouse.
 		if (upcast(Game, game, &egbase)) {
-			BOOST_FOREACH(ShippingItem & shipping_item, m_waiting) {
+			for (ShippingItem& shipping_item : m_waiting) {
 				WareInstance* ware;
 				shipping_item.get(*game, &ware, nullptr);
 				if (ware) {
@@ -329,10 +331,10 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 			std::vector<WareInstance*> wares;
 			m_expedition_bootstrap->get_waiting_workers_and_wares(game, owner().tribe(), &workers, &wares);
 
-			BOOST_FOREACH(Worker* worker, workers) {
+			for (Worker* worker : workers) {
 				ship.add_item(game, ShippingItem(*worker));
 			}
-			BOOST_FOREACH(WareInstance* ware, wares) {
+			for (WareInstance* ware : wares) {
 				ship.add_item(game, ShippingItem(*ware));
 			}
 
@@ -479,7 +481,7 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 
 	pd.m_dockpoints.resize(nrdockpoints);
 	for (uint16_t i = 0; i < nrdockpoints; ++i) {
-		pd.m_dockpoints[i] = fr.Coords32(egbase().map().extent());
+		pd.m_dockpoints[i] = ReadCoords32(&fr, egbase().map().extent());
 		pd.set_position(egbase(), pd.m_dockpoints[i]);
 	}
 
@@ -564,7 +566,7 @@ void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileW
 	fw.Unsigned32(mos.get_object_file_index(*m_warehouse));
 	fw.Unsigned16(m_dockpoints.size());
 	container_iterate_const(PositionList, m_dockpoints, it) {
-		fw.Coords32(*it);
+		WriteCoords32(&fw, *it);
 	}
 
 	fw.Unsigned8(m_need_ship);

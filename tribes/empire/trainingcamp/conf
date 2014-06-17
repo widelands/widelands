@@ -1,0 +1,118 @@
+size=big
+soldier_capacity=12
+trainer_patience=12
+
+[buildcost]
+log=2
+stone=5
+wood=4
+marble=5
+gold=4
+marblecolumn=3
+cloth=2
+
+[return_on_dismantle]
+stone=3
+wood=2
+marble=3
+gold=2
+marblecolumn=1
+
+[working positions]
+trainer=1
+
+[inputs]
+bread=10
+fish=6
+meat=6
+lance=2
+advanced_lance=2
+heavy_lance=2
+war_lance=2
+helm=2
+armor=2
+chain_armor=2
+plate_armor=2
+
+[soldier attack]
+min_level=0
+max_level=3
+
+[soldier hp]
+min_level=0
+max_level=3
+
+[programs]
+sleep=_Sleep
+upgrade_soldier_attack_0=_Upgrade soldier attack from level 0 to level 1
+upgrade_soldier_attack_1=_Upgrade soldier attack from level 1 to level 2
+upgrade_soldier_attack_2=_Upgrade soldier attack from level 2 to level 3
+upgrade_soldier_attack_3=_Upgrade soldier attack from level 3 to level 4
+upgrade_soldier_hp_0=_Upgrade soldier health from level 0 to level 1
+upgrade_soldier_hp_1=_Upgrade soldier health from level 1 to level 2
+upgrade_soldier_hp_2=_Upgrade soldier health from level 2 to level 3
+upgrade_soldier_hp_3=_Upgrade soldier health from level 3 to level 4
+
+[sleep]
+sleep=5000
+check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
+
+[upgrade_soldier_attack_0]
+check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
+sleep=30000
+check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
+consume=lance bread fish,meat
+train=soldier attack 0 1
+
+[upgrade_soldier_attack_1]
+check_soldier=soldier attack 1
+sleep=30000
+check_soldier=soldier attack 1
+consume=advanced_lance bread fish,meat
+train=soldier attack 1 2
+
+[upgrade_soldier_attack_2]
+check_soldier=soldier attack 2
+sleep=30000
+check_soldier=soldier attack 2
+consume=heavy_lance bread fish,meat:2
+train=soldier attack 2 3
+
+[upgrade_soldier_attack_3]
+check_soldier=soldier attack 3
+sleep=30000
+check_soldier=soldier attack 3
+consume=war_lance bread:2 fish,meat
+train=soldier attack 3 4
+
+[upgrade_soldier_hp_0]
+check_soldier=soldier hp 0
+sleep=30000
+check_soldier=soldier hp 0
+consume=helm bread,fish,meat
+train=soldier hp 0 1
+
+[upgrade_soldier_hp_1]
+check_soldier=soldier hp 1
+sleep=30000
+check_soldier=soldier hp 1
+consume=armor bread fish,meat
+train=soldier hp 1 2
+
+[upgrade_soldier_hp_2]
+check_soldier=soldier hp 2
+sleep=30000
+check_soldier=soldier hp 2
+consume=chain_armor bread:2 fish,meat:2
+train=soldier hp 2 3
+
+[upgrade_soldier_hp_3]
+check_soldier=soldier hp 3
+sleep=30000
+check_soldier=soldier hp 3
+consume=plate_armor bread:2 fish,meat:2
+train=soldier hp 3 4
+
+[idle]
+pics=trainingcamp_i_??.png  # ???
+hotspot=82 105

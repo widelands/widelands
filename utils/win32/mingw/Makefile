@@ -130,7 +130,7 @@ doc: $(SRC) $(HEADERS)
 dist:
 	@rm -rf ../../../widelands-$(VERSION)
 	@mkdir ../../../widelands-$(VERSION)
-	@cp -r ../../../campaigns ../../../doc ../../../fonts ../../../game_server ../../../locale ../../../maps ../../../music ../../../pics ../../../sound ../../../tribes ../../../txts ../../../worlds ../../../ChangeLog ../../../COPYING ../../../CREDITS ../../../widelands.exe ../../../widelands-$(VERSION)
+	@cp -r ../../../campaigns ../../../doc ../../../fonts ../../../game_server ../../../locale ../../../maps ../../../music ../../../pics ../../../sound ../../../tribes ../../../txts ../../../world ../../../ChangeLog ../../../COPYING ../../../CREDITS ../../../widelands.exe ../../../widelands-$(VERSION)
 	@find ../../../widelands-$(VERSION) -name .svn | xargs rm -rf
 	@find ../../../widelands-$(VERSION) -name .cvsignore | xargs rm -f
 	@echo "    Your build was exported to widelands-$(VERSION)"

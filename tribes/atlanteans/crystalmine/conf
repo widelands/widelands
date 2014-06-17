@@ -4,19 +4,19 @@ output=quartz
 output=stone
 
 [buildcost]
-trunk=7
+log=7
 planks=4
 spidercloth=1
 
 [return_on_dismantle]
-trunk=3
+log=3
 planks=2
 
 [working positions]
 miner=3
 
 [aihints]
-mines=granit
+mines=granite
 
 [inputs]
 bread=10
@@ -35,16 +35,16 @@ return=skipped unless economy needs stone or not economy needs smoked_fish
 consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=stone:2
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=stone:2
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=stone
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=quartz
 
 [mine_quartz]
@@ -53,13 +53,13 @@ return=skipped unless economy needs quartz or not economy needs smoked_fish
 consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=stone:2
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=stone quartz
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=quartz:2
 
 [mine_diamond]
@@ -68,13 +68,13 @@ return=skipped unless economy needs diamond or not economy needs smoked_fish
 consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=diamond
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=diamond
 animate=working 20000
-mine=granit 4 100 5
+mine=granite 4 100 5 2
 produce=stone
 
 [work]
@@ -86,14 +86,11 @@ return=skipped
 [idle]
 pics=crystalmine_i_??.png
 hotspot=50 56
-playercolor=true
 
 [working]
 pics=crystalmine_i_??.png
 hotspot=50 56
-playercolor=true
 
 [empty]
 pics=crystalmine_e_??.png
 hotspot=50 56
-playercolor=true

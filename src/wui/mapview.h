@@ -20,6 +20,8 @@
 #ifndef MAPVIEW_H
 #define MAPVIEW_H
 
+#include <memory>
+
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 

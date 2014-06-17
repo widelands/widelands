@@ -1,0 +1,57 @@
+size=medium
+output=advanced_shield
+output=steel_shield
+
+[aihints]
+build_material=false
+
+[buildcost]
+log=2
+stone=2
+planks=2
+quartz=1
+
+[return_on_dismantle]
+stone=1
+planks=1
+quartz=1
+
+[working positions]
+armorsmith=1
+
+[inputs]
+iron=8
+gold=8
+coal=8
+
+[programs]
+produce_steel_shield=_Produce steel shield
+produce_advanced_shield=_Produce advanced shield
+work=_Work
+
+[produce_steel_shield]
+return=skipped unless economy needs steel_shield
+sleep=32000
+consume=iron:2 coal:2
+animate=working 35000
+produce=steel_shield
+
+[produce_advanced_shield]
+return=skipped unless economy needs advanced_shield
+sleep=32000
+consume=iron:2 coal:2 gold
+animate=working 45000
+produce=advanced_shield
+
+[work]
+call=produce_steel_shield
+call=produce_advanced_shield
+return=skipped
+
+[idle]
+pics=armorsmith_i_??.png
+hotspot=53 60
+
+[working]
+pics=armorsmith_i_??.png
+hotspot=53 60

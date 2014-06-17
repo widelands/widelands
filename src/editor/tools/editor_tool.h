@@ -28,7 +28,10 @@
 #include "logic/widelands_geometry.h"
 
 struct Editor_Interactive;
-namespace Widelands {class Map;}
+namespace Widelands {
+class Map;
+class World;
+}
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
@@ -46,22 +49,22 @@ public:
 	enum Tool_Index {First, Second, Third};
 	int32_t handle_click
 		(const Tool_Index i,
-		Widelands::Map & map, Widelands::Node_and_Triangle<> const center,
+		Widelands::Map & map, const Widelands::World& world, Widelands::Node_and_Triangle<> const center,
 		Editor_Interactive & parent, Editor_Action_Args & args)
 	{
 		return
 		    (i == First ? *this : i == Second ? m_second : m_third)
-		    .handle_click_impl(map, center, parent, args);
+		    .handle_click_impl(map, world, center, parent, args);
 	}
 
 	int32_t handle_undo
 		(const Tool_Index i,
-		Widelands::Map & map, Widelands::Node_and_Triangle<> const center,
+		Widelands::Map & map, const Widelands::World& world, Widelands::Node_and_Triangle<> const center,
 		Editor_Interactive & parent, Editor_Action_Args & args)
 	{
 		return
 		    (i == First ? *this : i == Second ? m_second : m_third)
-		    .handle_undo_impl(map, center, parent, args);
+		    .handle_undo_impl(map, world, center, parent, args);
 	}
 
 	const char * get_sel(const Tool_Index i) {
@@ -81,12 +84,18 @@ public:
 	virtual Editor_Action_Args format_args_impl(Editor_Interactive & parent) {
 		return Editor_Action_Args(parent);
 	}
-	virtual int32_t handle_click_impl
-	(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &, Editor_Action_Args &)
-	= 0;
-	virtual int32_t handle_undo_impl
-	(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &, Editor_Action_Args &)
-	{return 0;} // non unduable tools don't need to implement this.
+	virtual int32_t handle_click_impl(Widelands::Map&,
+	                                  const Widelands::World& world,
+	                                  Widelands::Node_and_Triangle<>,
+	                                  Editor_Interactive&,
+	                                  Editor_Action_Args&) = 0;
+	virtual int32_t handle_undo_impl(Widelands::Map&,
+	                                 const Widelands::World&,
+	                                 Widelands::Node_and_Triangle<>,
+	                                 Editor_Interactive&,
+	                                 Editor_Action_Args&) {
+		return 0;
+	}  // non unduable tools don't need to implement this.
 	virtual const char * get_sel_impl() const = 0;
 	virtual bool operates_on_triangles() const {return false;};
 

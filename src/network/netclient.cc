@@ -19,11 +19,13 @@
 
 #include "network/netclient.h"
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
 #include <config.h>
 
 #include "build_info.h"
 #include "game_io/game_loader.h"
+#include "helper.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -37,6 +39,7 @@
 #include "network/network_protocol.h"
 #include "network/network_system.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -119,14 +122,11 @@ NetClient::NetClient
 	file = nullptr;
 
 	// Temporarily register win condition scripts to get the default
-	LuaInterface lua;
-	lua.register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-	ScriptContainer sc = lua.get_scripts_for("win_conditions");
-	std::vector<std::string> win_conditions;
-	container_iterate_const(ScriptContainer, sc, wc)
-		win_conditions.push_back(wc->first);
-	assert(win_conditions.size());
-	d->settings.win_condition = win_conditions[0];
+	std::set<std::string> win_condition_scripts =
+	   filter(g_fs->ListDirectory("scripting/win_conditions"),
+	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
+	assert(win_condition_scripts.size());
+	d->settings.win_condition_script = *win_condition_scripts.begin();
 }
 
 NetClient::~NetClient ()
@@ -519,11 +519,11 @@ void NetClient::setPlayer(uint8_t, PlayerSettings)
 	// setPlayerNumber(uint8_t) to the host.
 }
 
-std::string NetClient::getWinCondition() {
-	return d->settings.win_condition;
+std::string NetClient::getWinConditionScript() {
+	return d->settings.win_condition_script;
 }
 
-void NetClient::setWinCondition(std::string) {
+void NetClient::setWinConditionScript(std::string) {
 	// Clients are not allowed to change this
 }
 
@@ -593,9 +593,7 @@ void NetClient::setPaused(bool /* paused */)
 {
 }
 
-void NetClient::recvOnePlayer
-	(uint8_t const number, Widelands::StreamRead & packet)
-{
+void NetClient::recvOnePlayer(uint8_t const number, StreamRead& packet) {
 	if (number >= d->settings.players.size())
 		throw DisconnectException("PLAYER_UPDATE_FOR_N_E_P");
 
@@ -611,9 +609,7 @@ void NetClient::recvOnePlayer
 	player.shared_in = packet.Unsigned8();
 }
 
-void NetClient::recvOneUser
-	(uint32_t const number, Widelands::StreamRead & packet)
-{
+void NetClient::recvOneUser(uint32_t const number, StreamRead& packet) {
 	if (number > d->settings.users.size())
 		throw DisconnectException("USER_UPDATE_FOR_N_E_U");
 
@@ -757,7 +753,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// host. If it is a ziped file, we can check, whether the host and the client have got the same file.
 			if (!g_fs->IsDirectory(path)) {
 				FileRead fr;
-				fr.Open(*g_fs, path.c_str());
+				fr.Open(*g_fs, path);
 				if (bytes == fr.GetSize()) {
 					std::unique_ptr<char[]> complete(new char[bytes]);
 					if (!complete) throw wexception("Out of memory");
@@ -842,7 +838,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 			// Check for consistence
 			FileRead fr;
-			fr.Open(*g_fs, file->filename.c_str());
+			fr.Open(*g_fs, file->filename);
 
 			std::unique_ptr<char[]> complete(new char[file->bytes]);
 			if (!complete) throw wexception("Out of memory");
@@ -877,7 +873,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			} else {
 				// Map check - does Widelands recognize the file as map?
 				Widelands::Map map;
-				Widelands::Map_Loader * const ml = map.get_correct_loader(file->filename.c_str());
+				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(file->filename);
 				if (!ml)
 					invalid = true;
 			}
@@ -906,20 +902,13 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 			// Get initializations (we have to do this locally, for translations)
 			LuaInterface lua;
-			std::string path = "tribes/" + info.name;
-			if (g_fs->IsDirectory(path)) {
-				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				lua.register_scripts(*sub_fs, "tribe_" + info.name, "scripting");
-			}
-
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
-				std::string const name = packet.String();
-				std::unique_ptr<LuaTable> t = lua.run_script
-					("tribe_" + info.name, name);
+				std::string const initialization_script = packet.String();
+				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
+				t->do_not_warn_about_unaccessed_keys();
 				info.initializations.push_back
-					(TribeBasicInfo::Initialization(name, t->get_string("name")));
+					(TribeBasicInfo::Initialization(initialization_script, t->get_string("name")));
 			}
-
 			d->settings.tribes.push_back(info);
 		}
 		break;
@@ -954,7 +943,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		break;
 	}
 	case NETCMD_WIN_CONDITION: {
-		d->settings.win_condition = packet.String();
+		d->settings.win_condition_script = packet.String();
 		break;
 	}
 

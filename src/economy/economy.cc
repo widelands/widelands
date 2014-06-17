@@ -19,6 +19,8 @@
 
 #include "economy/economy.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 
 #include "economy/cmd_call_economy_balance.h"
@@ -50,21 +52,21 @@ Economy::Economy(Player & player) :
 
 	player.add_economy(*this);
 
-	m_ware_target_quantities   = new Target_Quantity[nr_wares  .value()];
-	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
+	m_ware_target_quantities   = new Target_Quantity[nr_wares];
+	for (Ware_Index i = 0; i < nr_wares; ++i) {
 		Target_Quantity tq;
 		tq.permanent =
 			tribe.get_ware_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
-		m_ware_target_quantities[i.value()] = tq;
+		m_ware_target_quantities[i] = tq;
 	}
-	m_worker_target_quantities = new Target_Quantity[nr_workers.value()];
-	for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
+	m_worker_target_quantities = new Target_Quantity[nr_workers];
+	for (Ware_Index i = 0; i < nr_workers; ++i) {
 		Target_Quantity tq;
 		tq.permanent =
 			tribe.get_worker_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
-		m_worker_target_quantities[i.value()] = tq;
+		m_worker_target_quantities[i] = tq;
 	}
 
 	m_router =
@@ -327,7 +329,7 @@ void Economy::set_ware_target_quantity
 	 uint32_t   const permanent,
 	 Time       const mod_time)
 {
-	Target_Quantity & tq = m_ware_target_quantities[ware_type.value()];
+	Target_Quantity & tq = m_ware_target_quantities[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }
@@ -338,7 +340,7 @@ void Economy::set_worker_target_quantity
 	 uint32_t   const permanent,
 	 Time       const mod_time)
 {
-	Target_Quantity & tq = m_worker_target_quantities[ware_type.value()];
+	Target_Quantity & tq = m_worker_target_quantities[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }
@@ -527,14 +529,14 @@ bool Economy::needs_worker(Ware_Index const worker_type) const {
 */
 void Economy::_merge(Economy & e)
 {
-	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares().value(); i;) {
+	for (Ware_Index i = m_owner.tribe().get_nrwares(); i;) {
 		--i;
 		Target_Quantity other_tq = e.m_ware_target_quantities[i];
 		Target_Quantity & this_tq = m_ware_target_quantities[i];
 		if (this_tq.last_modified < other_tq.last_modified)
 			this_tq = other_tq;
 	}
-	for (Ware_Index::value_t i = m_owner.tribe().get_nrworkers().value(); i;) {
+	for (Ware_Index i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
 		Target_Quantity other_tq = e.m_worker_target_quantities[i];
 		Target_Quantity & this_tq = m_worker_target_quantities[i];
@@ -580,11 +582,11 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 
 	Economy & e = *new Economy(m_owner);
 
-	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares  ().value(); i;) {
+	for (Ware_Index i = m_owner.tribe().get_nrwares  (); i;) {
 		--i;
 		e.m_ware_target_quantities[i] = m_ware_target_quantities[i];
 	}
-	for (Ware_Index::value_t i = m_owner.tribe().get_nrworkers().value(); i;) {
+	for (Ware_Index i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
 		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
 	}
@@ -650,8 +652,7 @@ Supply * Economy::_find_best_supply
 			 	 best_cost))
 		{
 			if (!best_route)
-				throw wexception
-					("Economy::find_best_supply: COULD NOT FIND A ROUTE!");
+			log ("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
 			continue;
 		}
 
@@ -719,7 +720,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		{
 			::StreamWrite & ss = game.syncstream();
 			ss.Unsigned8 (req.get_type  ());
-			ss.Unsigned8 (req.get_index ().value());
+			ss.Unsigned8 (req.get_index ());
 			ss.Unsigned32(req.target    ().serial());
 		}
 
@@ -934,7 +935,7 @@ void Economy::_create_requested_workers(Game & game)
 
 	const Tribe_Descr & tribe = owner().tribe();
 	for
-		(Ware_Index index = Ware_Index::First();
+		(Ware_Index index = 0;
 		 index < tribe.get_nrworkers(); ++index)
 	{
 		if (!owner().is_worker_type_allowed(index))

@@ -23,8 +23,6 @@
 #include <map>
 #include <string>
 
-#include <boost/foreach.hpp>
-
 #include "graphic/image.h"
 #include "graphic/image_loader.h"
 #include "graphic/surface.h"
@@ -100,7 +98,7 @@ private:
 };
 
 ImageCacheImpl::~ImageCacheImpl() {
-	BOOST_FOREACH(ImageMap::value_type& p, images_)
+	for (ImageMap::value_type& p : images_)
 		delete p.second;
 	images_.clear();
 }
@@ -129,4 +127,3 @@ const Image* ImageCacheImpl::get(const string& hash) {
 ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache) {
 	return new ImageCacheImpl(loader, surface_cache);
 }
-

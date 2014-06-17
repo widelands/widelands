@@ -52,8 +52,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 		Section & sec = prof.get_safe_section("idle_with_worker");
 		if (!is_animation_known("idle_with_worker"))
 			add_animation
-				("idle_with_worker",
-				 g_anim.get(directory.c_str(), sec, nullptr));
+				("idle_with_worker", g_gr->animations().load(directory, sec));
 	}
 }
 
@@ -89,7 +88,7 @@ std::string ConstructionSite::get_statistics_string()
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
 	std::string perc_s =
 		(boost::format("<font color=%s>%s</font>")
-		 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%1$i%% built")) % percent).str())
+		 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
 		 .str();
 	return perc_s;
 }
@@ -107,7 +106,7 @@ WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
 	}
 	throw wexception
 		("%s (%u) (building %s) has no WaresQueue for %u",
-		 name().c_str(), serial(), m_building->name().c_str(), wi.value());
+		 name().c_str(), serial(), m_building->name().c_str(), wi);
 }
 
 
@@ -363,24 +362,25 @@ void ConstructionSite::draw
 		m_info.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 	}
 
-	uint32_t anim;
+	uint32_t anim_idx;
 	uint32_t cur_frame;
 	try {
-		anim = building().get_animation("build");
-	} catch (Map_Object_Descr::Animation_Nonexistent &) {
+		anim_idx = building().get_animation("build");
+	} catch (Map_Object_Descr::Animation_Nonexistent & e) {
 		try {
-			anim = building().get_animation("unoccupied");
+			anim_idx = building().get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent) {
-			anim = building().get_animation("idle");
+			anim_idx = building().get_animation("idle");
 		}
 	}
-	const size_t nr_frames = g_gr->nr_frames(anim);
+	const Animation& anim = g_gr->animations().get_animation(anim_idx);
+	const size_t nr_frames = anim.nr_frames();
 	cur_frame = m_info.totaltime ? m_info.completedtime * nr_frames / m_info.totaltime : 0;
 	// Redefine tanim
 	tanim = cur_frame * FRAME_LENGTH;
 
-	uint32_t w, h;
-	g_gr->get_animation_size(anim, tanim, w, h);
+	const uint16_t w = anim.width();
+	const uint16_t h = anim.height();
 
 	uint32_t lines = h * m_info.completedtime * nr_frames;
 	if (m_info.totaltime)
@@ -390,27 +390,27 @@ void ConstructionSite::draw
 
 	if (cur_frame) //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
-		dst.drawanimrect(pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
+		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (!m_old_buildings.empty()) {
 		Building_Index prev_idx = m_old_buildings.back();
 		const Building_Descr* prev_building = tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
-		uint32_t a;
+		uint32_t prev_building_anim_idx;
 		try {
-			a = prev_building->get_animation("unoccupied");
+			prev_building_anim_idx = prev_building->get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent &) {
-			a = prev_building->get_animation("idle");
+			prev_building_anim_idx = prev_building->get_animation("idle");
 		}
-		uint32_t wa, ha;
-		g_gr->get_animation_size(a, tanim, wa, ha);
+		const Animation& prev_building_anim = g_gr->animations().get_animation(prev_building_anim_idx);
 		dst.drawanimrect
-			(pos, a, tanim - FRAME_LENGTH, get_owner(),
-			 Rect(Point(0, 0), wa, std::min(ha, h - lines)));
+			(pos, prev_building_anim_idx, tanim - FRAME_LENGTH, get_owner(),
+			 Rect
+			 (Point(0, 0), prev_building_anim.width(), std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);
-	dst.drawanimrect(pos, anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
+	dst.drawanimrect(pos, anim_idx, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);
