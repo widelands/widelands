@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-11 07:21+0200\n"
+"POT-Creation-Date: 2014-06-17 18:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../../src/ai/defaultai.h:84
+#: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
 msgstr ""
 
-#: ../../src/ai/defaultai.h:93
+#: ../../src/ai/defaultai.h:95
 msgid "Normal"
 msgstr ""
 
-#: ../../src/ai/defaultai.h:102
+#: ../../src/ai/defaultai.h:105
 msgid "Defensive"
 msgstr ""
 
@@ -780,7 +780,7 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/map.cc:332
+#: ../../src/logic/map.cc:333
 msgid "Player 1"
 msgstr ""
 
@@ -996,17 +996,17 @@ msgstr ""
 msgid "No soldier found for this training level!"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:210
+#: ../../src/logic/productionsite.cc:211
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:214
+#: ../../src/logic/productionsite.cc:215
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/productionsite.cc:223
+#: ../../src/logic/productionsite.cc:224
 msgid "(stopped)"
 msgstr ""
 
@@ -1065,26 +1065,26 @@ msgid ""
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/worker.cc:617
+#: ../../src/logic/worker.cc:621
 #, c-format
 msgid "Out of %s"
 msgstr ""
 
-#: ../../src/logic/worker.cc:618
+#: ../../src/logic/worker.cc:622
 #, c-format
 msgid "The worker of this building cannot find any more %s."
 msgstr ""
 
-#: ../../src/logic/worker.cc:965
+#: ../../src/logic/worker.cc:969
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1867
+#: ../../src/logic/worker.cc:1871
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1874
+#: ../../src/logic/worker.cc:1878
 msgid "Worker got lost!"
 msgstr ""
 
