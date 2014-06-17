@@ -27,6 +27,7 @@
 #include "logic/checkstep.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
+#include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/world/terrain_description.h"
@@ -308,7 +309,7 @@ struct BuildingObserver {
 };
 
 struct ProductionSiteObserver {
-	Widelands::ProductionSite* site;
+	Widelands::OPtr<Widelands::ProductionSite> site;
 	int32_t built_time_;
 	uint8_t stats_zero_;
 	BuildingObserver* bo;
