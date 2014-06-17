@@ -50,7 +50,7 @@ constexpr int kFieldUpdateInterval = 1000;
 constexpr int kIdleMineUpdateInterval = 22000;
 constexpr int kBusyMineUpdateInterval = 2000;
 constexpr int kBuildingMinInterval =
-   25 * 1000;  // building of the same building can be started after 25s at earliest
+	25 * 1000;  // building of the same building can be started after 25s at earliest
 constexpr bool kMilitaryDebug = false;
 constexpr bool kMilDismDebug = false;
 constexpr bool kMilitScoreDebug = false;
@@ -79,30 +79,30 @@ DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
-   : Computer_Player(ggame, pid),
-     type(t),
-     m_buildable_changed(true),
-     m_mineable_changed(true),
-     player(nullptr),
-     tribe(nullptr),
-     total_constructionsites(0),
-     next_road_due_(2000),
-     next_stats_update_due_(30000),
-     next_construction_due_(1000),
-     next_mine_construction_due_(0),
-     next_productionsite_check_due_(0),
-     next_mine_check_due_(0),
-     next_militarysite_check_due_(0),
-     next_attack_consideration_due_(300000),
-     next_helpersites_check_due_(180000),
-     inhibit_road_building_(0),
-     time_of_last_construction_(0),
-     numof_warehouses_(0),
-     new_buildings_stop_(false),
-     unstationed_milit_buildings_(0),
-     military_under_constr_(0),
-     military_last_dismantle_(0),
-     military_last_build_(0) {
+	: Computer_Player(ggame, pid),
+	type(t),
+	m_buildable_changed(true),
+	m_mineable_changed(true),
+	player(nullptr),
+	tribe(nullptr),
+	total_constructionsites(0),
+	next_road_due_(2000),
+	next_stats_update_due_(30000),
+	next_construction_due_(1000),
+	next_mine_construction_due_(0),
+	next_productionsite_check_due_(0),
+	next_mine_check_due_(0),
+	next_militarysite_check_due_(0),
+	next_attack_consideration_due_(300000),
+	next_helpersites_check_due_(180000),
+	inhibit_road_building_(0),
+	time_of_last_construction_(0),
+	numof_warehouses_(0),
+	new_buildings_stop_(false),
+	unstationed_milit_buildings_(0),
+	military_under_constr_(0),
+	military_last_dismantle_(0),
+	military_last_build_(0) {
 }
 
 DefaultAI::~DefaultAI() {
@@ -2652,9 +2652,10 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver& bo, int32_t prio) {
 	return prio;
 }
 
-void DefaultAI::consider_productionsite_influence(BuildableField& field,
-                                                  Coords coords,
-                                                  const BuildingObserver& bo) {
+void DefaultAI::consider_productionsite_influence(
+	BuildableField& field,
+	Coords coords,
+	const BuildingObserver& bo) {
 	if (bo.space_consumer_ and game().map().calc_distance(coords, field.coords) < 4)
 		++field.space_consumers_nearby_;
 
