@@ -8,6 +8,7 @@ wl_library(sound
     ./sound_handler.cc
     ./sound_handler.h
   USES_BOOST_REGEX
+  USES_SDL_MIXER
   DEPENDS
     base_log
     io_filesystem

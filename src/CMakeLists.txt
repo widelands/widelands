@@ -11,7 +11,14 @@ add_custom_target(wl_tests)
 
 macro(_parse_common_args ARGS)
   # TODO(sirver): add OPTIONS for the other external libraries we use
-  set(OPTIONS THIRD_PARTY C_LIBRARY USES_BOOST_REGEX USES_ZLIB WIN32)
+  set(OPTIONS
+    THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
+    C_LIBRARY # Pure C library. No CXX flags.
+    WIN32 # Windows binary/library.
+    USES_BOOST_REGEX
+    USES_SDL_MIXER
+    USES_ZLIB
+  )
   set(ONE_VALUE_ARG )
   set(MULTI_VALUE_ARGS SRCS DEPENDS)
   cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
@@ -51,6 +58,11 @@ macro(_common_compile_tasks)
   if(ARG_USES_ZLIB)
     target_include_directories(${NAME} SYSTEM INTERFACE ${ZLIB_INCLUDE_DIRS})
     target_link_libraries(${NAME} ${ZLIB_LIBRARY})
+  endif()
+
+  if(ARG_USES_SDL_MIXER)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLMIXER_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDLMIXER_LIBRARY})
   endif()
 
   if (ARG_USES_BOOST_REGEX)
@@ -944,7 +956,6 @@ wl_library(widelands_ball_of_mud
     sound
     # TODO(sirver): add USES_* for each of these
     ${SDLIMAGE_LIBRARY}
-    ${SDLMIXER_LIBRARY}
     ${SDLNET_LIBRARY}
     ${SDLTTF_LIBRARY}
     ${SDLGFX_LIBRARY}
