@@ -71,16 +71,6 @@ find_package(ZLIB REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
 include_directories(${ZLIB_INCLUDE_DIR})
 
-if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
-  if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
-    find_package(intl REQUIRED)
-    # TODO(sirver): Do not globally include for all targets.
-    include_directories(${INTL_INCLUDE_DIR})
-    endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
-endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
-
-
-
 find_package(SDL REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
 include_directories(${SDL_INCLUDE_DIR})
@@ -90,11 +80,16 @@ find_package(SDL_gfx REQUIRED)
 find_package(SDL_image REQUIRED)
 find_package(SDL_mixer REQUIRED)
 find_package(SDL_net REQUIRED)
+find_package(SDL_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
 
-find_package(SDL_ttf REQUIRED)
-# TODO(sirver): Do not globally include for all targets.
-include_directories(${SDLTTF_INCLUDE_DIR})
+if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+  if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
+    find_package(intl REQUIRED)
+    # TODO(sirver): Do not globally include for all targets.
+    include_directories(${INTL_INCLUDE_DIR})
+  endif ()
+endif()
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 

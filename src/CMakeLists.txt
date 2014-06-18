@@ -20,6 +20,7 @@ macro(_parse_common_args ARGS)
     USES_SDL_IMAGE
     USES_SDL_MIXER
     USES_SDL_NET
+    USES_SDL_TTF
     USES_ZLIB
   )
   set(ONE_VALUE_ARG )
@@ -81,6 +82,11 @@ macro(_common_compile_tasks)
   if(ARG_USES_SDL_GFX)
     target_include_directories(${NAME} SYSTEM INTERFACE ${SDLGFX_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLGFX_LIBRARY})
+  endif()
+
+  if(ARG_USES_SDL_TTF)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLTTF_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDLTTF_LIBRARY})
   endif()
 
   if (ARG_USES_BOOST_REGEX)
@@ -820,7 +826,6 @@ wl_library(widelands_ball_of_mud
     map_io
     graphic
     # TODO(sirver): add USES_* for each of these
-    ${SDLTTF_LIBRARY}
     ${PNG_LIBRARY}
     ${OPENGL_gl_LIBRARY}
     ${GLEW_LIBRARY}
