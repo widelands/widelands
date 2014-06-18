@@ -65,6 +65,7 @@ wl_library(map_io
     widelands_map_version_data_packet.cc
     widelands_map_version_data_packet.h
   USES_SDL_IMAGE
+  DEPENDS
     base_log
     base_i18n
 )
