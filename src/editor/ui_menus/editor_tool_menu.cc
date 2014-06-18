@@ -143,7 +143,7 @@ void Editor_Tool_Menu::changed_to() {
 		Widelands::Map & map = parent.egbase().map();
 		map.overlay_manager().register_overlay_callback_function(
 				boost::bind(&Editor_Tool_Set_Port_Space_Callback, _1, boost::ref(map)));
-		map.recalc_whole_map();
+		map.recalc_whole_map(parent.egbase().world());
 		update();
 	}
 

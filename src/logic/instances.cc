@@ -283,6 +283,18 @@ void Map_Object_Descr::add_attribute(uint32_t const attr)
 		m_attributes.push_back(attr);
 }
 
+void Map_Object_Descr::add_attributes(const std::vector<std::string>& attributes,
+                                      const std::set<uint32_t>& allowed_special) {
+	for (const std::string& attribute : attributes) {
+		uint32_t const attrib = get_attribute_id(attribute);
+		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE) {
+			if (!allowed_special.count(attrib)) {
+				throw game_data_error("bad attribute \"%s\"", attribute.c_str());
+			}
+		}
+		add_attribute(attrib);
+	}
+}
 
 /**
  * Lookup an attribute by name. If the attribute name hasn't been encountered

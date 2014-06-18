@@ -63,6 +63,13 @@ struct Main_Menu_New_Random_Map : public UI::Window {
 	} ButtonID;
 
 private:
+	struct WorldDescription {
+		std::string name;
+		std::string descrname;
+	};
+
+	const std::vector<WorldDescription> m_world_descriptions;
+	int m_current_world;
 	UI::Textarea * m_width, * m_height, * m_land;
 	UI::Textarea * m_water, * m_mountains, * m_wasteland, * m_players;
 	UI::Button * m_res;
@@ -72,9 +79,7 @@ private:
 	int32_t m_w, m_h, m_landval, m_waterval, m_wastelandval;
 	uint8_t m_pn;
 	uint32_t m_mapNumber;
-	std::vector<std::string>::size_type m_currentworld;
 	uint32_t m_res_amount;
-	std::vector<std::string> m_worlds;
 	std::vector<std::string> m_res_amounts;
 
 	UI::EditBox * m_nrEditbox;

@@ -22,6 +22,16 @@
 
 #include "map_io/widelands_map_data_packet.h"
 
-MAP_DATA_PACKET(Map_Resources_Data_Packet);
+class OneWorldLegacyLookupTable;
+
+namespace Widelands {
+
+class Map_Resources_Data_Packet {
+public:
+	void Read(FileSystem&, Editor_Game_Base&, const OneWorldLegacyLookupTable&);
+	void Write(FileSystem&, Editor_Game_Base&);
+};
+
+}
 
 #endif

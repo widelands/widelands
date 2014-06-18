@@ -25,7 +25,9 @@
 #include "logic/instances.h"
 #include "logic/widelands_geometry.h"
 
-struct Profile;
+class LuaTable;
+class OneWorldLegacyLookupTable;
+class Profile;
 
 namespace Widelands {
 
@@ -33,9 +35,9 @@ class Economy;
 class Map;
 class WareInstance;
 class Worker;
+class World;
 struct Flag;
 struct Tribe_Descr;
-struct World;
 
 /**
  * BaseImmovable is the base for all non-moving objects (immovables such as
@@ -48,7 +50,7 @@ struct World;
  * For more information, see the Map::recalc_* functions.
  */
 struct BaseImmovable : public Map_Object {
-	enum {
+	enum Size {
 		NONE = 0, ///< not robust (i.e. removable by building something over it)
 		SMALL,    ///< small building or robust map element, including trees
 		MEDIUM,   ///< medium size building
@@ -93,7 +95,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 	Immovable_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const World & world, Tribe_Descr const * const);
+		 Tribe_Descr const * const);
+	Immovable_Descr(const LuaTable&, const World&);
+
 	~Immovable_Descr();
 
 	int32_t get_size() const {return m_size;}
@@ -108,6 +112,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
+	// Returns the editor category.
+	const EditorCategory& editor_category() const;
+
 protected:
 	int32_t     m_size;
 	Programs    m_programs;
@@ -121,7 +128,10 @@ protected:
 	Buildcost m_buildcost;
 
 private:
-	uint8_t m_terrain_affinity[16];
+	EditorCategory* editor_category_;  // not owned.
+
+	// Adds a default program if none was defined.
+	void make_sure_default_program_is_there();
 };
 
 class Immovable : public BaseImmovable {
@@ -240,7 +250,7 @@ public:
 
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &, const OneWorldLegacyLookupTable& lookup_table);
 
 private:
 	void increment_program_pointer();

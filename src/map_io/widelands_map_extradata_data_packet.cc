@@ -35,13 +35,7 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-
-void Map_Extradata_Data_Packet::Read
-	(FileSystem            &       fs,
-	 Editor_Game_Base&,
-	 bool                    const skip,
-	 Map_Map_Object_Loader &)
-{
+void Map_Extradata_Data_Packet::Read(FileSystem& fs, bool const skip) {
 	if (skip)
 		return;
 
@@ -90,7 +84,7 @@ void Map_Extradata_Data_Packet::Read
 
 
 void Map_Extradata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase)
 {
 	Profile prof;
 	prof.create_section("global").set_int

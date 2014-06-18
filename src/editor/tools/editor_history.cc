@@ -55,8 +55,7 @@ Editor_Action_Args::~Editor_Action_Args()
 
 // === Editor_History === //
 
-uint32_t Editor_History::undo_action()
-{
+uint32_t Editor_History::undo_action(const Widelands::World& world) {
 	if (undo_stack.empty())
 		return 0;
 
@@ -67,14 +66,15 @@ uint32_t Editor_History::undo_action()
 	m_undo_button.set_enabled(!undo_stack.empty());
 	m_redo_button.set_enabled(true);
 
-	return
-		uac.tool.handle_undo
-		(static_cast<Editor_Tool::Tool_Index>(uac.i),
-		 uac.map, uac.center, uac.parent, *uac.args);
+	return uac.tool.handle_undo(static_cast<Editor_Tool::Tool_Index>(uac.i),
+	                            uac.map,
+	                            world,
+	                            uac.center,
+	                            uac.parent,
+	                            *uac.args);
 }
 
-uint32_t Editor_History::redo_action()
-{
+uint32_t Editor_History::redo_action(const Widelands::World& world) {
 	if (redo_stack.empty())
 		return 0;
 
@@ -85,20 +85,21 @@ uint32_t Editor_History::redo_action()
 	m_undo_button.set_enabled(true);
 	m_redo_button.set_enabled(!redo_stack.empty());
 
-	return
-		rac.tool.handle_click
-		(static_cast<Editor_Tool::Tool_Index>(rac.i),
-		 rac.map, rac.center, rac.parent, *rac.args);
+	return rac.tool.handle_click(static_cast<Editor_Tool::Tool_Index>(rac.i),
+	                             rac.map,
+	                             world,
+	                             rac.center,
+	                             rac.parent,
+	                             *rac.args);
 }
 
-uint32_t Editor_History::do_action
-	(Editor_Tool & tool,
-	Editor_Tool::Tool_Index ind,
-	Widelands::Map & map,
-	const Widelands::Node_and_Triangle< Widelands::Coords > center,
-	Editor_Interactive & parent,
-	bool draw)
-{
+uint32_t Editor_History::do_action(Editor_Tool& tool,
+                                   Editor_Tool::Tool_Index ind,
+                                   Widelands::Map& map,
+                                   const Widelands::World& world,
+                                   const Widelands::Node_and_Triangle<Widelands::Coords> center,
+                                   Editor_Interactive& parent,
+                                   bool draw) {
 	Editor_Tool_Action ac
 		(tool, static_cast<uint32_t>(ind),
 		 map, center, parent, tool.format_args(ind, parent));
@@ -130,7 +131,7 @@ uint32_t Editor_History::do_action
 		m_undo_button.set_enabled(true);
 		m_redo_button.set_enabled(false);
 	}
-	return tool.handle_click(ind, map, center, parent, *ac.args);
+	return tool.handle_click(ind, map, world, center, parent, *ac.args);
 }
 
 
@@ -141,4 +142,3 @@ void Editor_History::reset()
 	m_undo_button.set_enabled(false);
 	m_redo_button.set_enabled(false);
 }
-

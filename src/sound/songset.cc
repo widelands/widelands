@@ -39,20 +39,20 @@ namespace {
 }
 
 /// Prepare infrastructure for reading song files from disk
-Songset::Songset() : m_m(nullptr), m_rwops(nullptr) {}
+Songset::Songset() : m_(nullptr), rwops_(nullptr) {}
 
 /// Close and delete all songs to avoid memory leaks.
 Songset::~Songset()
 {
-	m_songs.clear();
+	songs_.clear();
 
-	if (m_m)
-		Mix_FreeMusic(m_m);
+	if (m_)
+		Mix_FreeMusic(m_);
 
-	if (m_rwops) {
+	if (rwops_) {
 		if (have_to_free_rw())
-			SDL_FreeRW(m_rwops);
-		m_fr.Close();
+			SDL_FreeRW(rwops_);
+		fr_.Close();
 	}
 }
 
@@ -63,8 +63,8 @@ Songset::~Songset()
  * \ref register_song() all songs before you start playing
  */
 void Songset::add_song(const std::string & filename) {
-	m_songs.push_back(filename);
-	m_current_song = m_songs.begin();
+	songs_.push_back(filename);
+	current_song_ = songs_.begin();
 }
 
 /** Get a song from the songset. Depending on
@@ -77,50 +77,50 @@ Mix_Music * Songset::get_song()
 {
 	std::string filename;
 
-	if (g_sound_handler.get_disable_music() || m_songs.empty())
+	if (g_sound_handler.get_disable_music() || songs_.empty())
 		return nullptr;
 
-	if (g_sound_handler.m_random_order)
-		filename = m_songs.at(g_sound_handler.m_rng.rand() % m_songs.size());
+	if (g_sound_handler.random_order_)
+		filename = songs_.at(g_sound_handler.rng_.rand() % songs_.size());
 	else {
-		if (m_current_song == m_songs.end())
-			m_current_song = m_songs.begin();
+		if (current_song_ == songs_.end())
+			current_song_ = songs_.begin();
 
-		filename = *(m_current_song++);
+		filename = *(current_song_++);
 	}
 
 	//first, close the previous song and remove it from memory
-	if (m_m) {
-		Mix_FreeMusic(m_m);
-		m_m = nullptr;
+	if (m_) {
+		Mix_FreeMusic(m_);
+		m_ = nullptr;
 	}
 
-	if (m_rwops) {
+	if (rwops_) {
 		if (have_to_free_rw())
-			SDL_FreeRW(m_rwops);
-		m_rwops = nullptr;
-		m_fr.Close();
+			SDL_FreeRW(rwops_);
+		rwops_ = nullptr;
+		fr_.Close();
 	}
 
 	//then open the new song
-	if (m_fr.TryOpen(*g_fs, filename)) {
-		if (!(m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize()))) {
-			m_fr.Close();  // m_fr should be Open iff m_rwops != 0
+	if (fr_.TryOpen(*g_fs, filename)) {
+		if (!(rwops_ = SDL_RWFromMem(fr_.Data(0), fr_.GetSize()))) {
+			fr_.Close();  // fr_ should be Open iff rwops_ != 0
 			return nullptr;
 		}
 	}
 	else
 		return nullptr;
 
-	if (m_rwops)
-		m_m = Mix_LoadMUS_RW(m_rwops);
+	if (rwops_)
+		m_ = Mix_LoadMUS_RW(rwops_);
 
-	if (m_m)
+	if (m_)
 		log("Sound_Handler: loaded song \"%s\"\n", filename.c_str());
 	else {
 		log("Sound_Handler: loading song \"%s\" failed!\n", filename.c_str());
 		log("Sound_Handler: %s\n", Mix_GetError());
 	}
 
-	return m_m;
+	return m_;
 }

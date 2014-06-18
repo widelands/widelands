@@ -30,8 +30,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "point.h"
 
-
-extern struct Profile g_options;
+extern class Profile g_options;
 class FileSystem;
 
 /**
@@ -52,8 +51,9 @@ class FileSystem;
  * retrieve any unused key. Value::used is used to determine which key is next.
  * The value of the key is stored in the second parameter.
  */
-struct Section {
-	friend struct Profile;
+class Section {
+public:
+	friend class Profile;
 
 	struct Value {
 		bool   m_used;
@@ -188,7 +188,8 @@ private:
  * Returns the next unused section of the given name, or 0 if all sections
  * have been used. name can be 0 to retrieve any remaining sections.
  */
-struct Profile : boost::noncopyable {
+class Profile : boost::noncopyable {
+public:
 	enum {
 		err_ignore = 0,
 		err_log,

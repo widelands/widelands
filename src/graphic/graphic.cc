@@ -314,6 +314,9 @@ GCC_DIAG_ON ("-Wold-style-cast")
 
 	m_sdl_screen = sdlsurface;
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
+
+	pic_road_normal_.reset(image_loader_->load("world/pics/roadt_normal.png"));
+	pic_road_busy_.reset(image_loader_->load("world/pics/roadt_busy.png"));
 }
 
 bool Graphic::check_fallback_settings_in_effect()
@@ -322,7 +325,7 @@ bool Graphic::check_fallback_settings_in_effect()
 }
 
 void Graphic::cleanup() {
-	flush_maptextures();
+	m_maptextures.clear();
 	surface_cache_->flush();
 	// TODO: this should really not be needed, but currently is :(
 	if (UI::g_fh)
@@ -526,34 +529,9 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
-void Graphic::flush_maptextures()
+uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
-	for (Texture* texture : m_maptextures)
-		delete texture;
-	m_maptextures.clear();
-}
-
-/**
- * Creates a terrain texture.
- *
- * fnametempl is a filename with possible wildcard characters '?'. The function
- * fills the wildcards with decimal numbers to get the different frames of a
- * texture animation. For example, if fnametempl is "foo_??.png", it tries
- * "foo_00.png", "foo_01.png" etc...
- * frametime is in milliseconds.
- * \return 0 if the texture couldn't be loaded.
- * \note Terrain textures are not reused, even if fnametempl matches.
-*/
-uint32_t Graphic::get_maptexture(const string& fnametempl, uint32_t frametime)
-{
-	try {
-		m_maptextures.push_back
-			(new Texture(fnametempl, frametime, *m_sdl_screen->format));
-	} catch (exception& e) {
-		log("Failed to load maptexture %s: %s\n", fnametempl.c_str(), e.what());
-		return 0;
-	}
-
+	m_maptextures.emplace_back(new Texture(texture_files, frametime, *m_sdl_screen->format));
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
 
@@ -564,16 +542,6 @@ void Graphic::animate_maptextures(uint32_t time)
 {
 	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->animate(time);
-	}
-}
-
-/**
- * reset that the map texture have been animated
- */
-void Graphic::reset_texture_animation_reminder()
-{
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
-		m_maptextures[i]->reset_was_animated();
 	}
 }
 
@@ -618,24 +586,9 @@ void Graphic::m_png_flush_function
 Texture * Graphic::get_maptexture_data(uint32_t id)
 {
 	--id; // ID 1 is at m_maptextures[0]
-	if (id < m_maptextures.size())
-		return m_maptextures[id];
-	else
-		return nullptr;
-}
 
-
-/**
- * Sets the name of the current world and loads the fitting road and edge textures
- */
-void Graphic::set_world(string worldname) {
-	char buf[255];
-
-	// Load the road textures
-	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
-	pic_road_normal_.reset(image_loader_->load(buf));
-	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
-	pic_road_busy_.reset(image_loader_->load(buf));
+	assert(id < m_maptextures.size());
+	return m_maptextures[id].get();
 }
 
 /**

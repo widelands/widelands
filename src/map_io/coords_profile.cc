@@ -19,6 +19,7 @@
 
 #include "map_io/coords_profile.h"
 
+#include <cstdio>
 #include <cstdlib>
 #include <memory>
 #include <string>

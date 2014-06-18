@@ -30,14 +30,11 @@ class Map;
  * This data packet contains player names
  * and tribes (scenario packet)
  */
-struct Map_Player_Names_And_Tribes_Data_Packet : public Map_Data_Packet {
+struct Map_Player_Names_And_Tribes_Data_Packet {
 	virtual ~Map_Player_Names_And_Tribes_Data_Packet();
 
-	virtual void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &) override
-	;
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &) override
-	;
+	virtual void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&);
+	void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);
 
 	void Pre_Read(FileSystem &, Map *, bool skip);
 };

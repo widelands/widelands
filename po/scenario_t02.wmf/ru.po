@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-04-15 06:16+0000\n"
-"PO-Revision-Date: 2014-03-06 19:12+0000\n"
-"Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-06-11 11:47+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:33+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:30+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -33,6 +33,9 @@ msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory. Get to the rocks north-east from you and build a quarry there."
 msgstr ""
+"Стройте военные здания (такие как караульни или фортпосты), чтобы расширить "
+"вашу территорию. Достигнув груды камней на северо-востоке, постройте там "
+"каменоломню."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:33
 msgid "Start building mines on the mountain"
@@ -51,28 +54,35 @@ msgid ""
 "otherwise, they would search for water. Then build a mine for both kinds of "
 "resources that he will find, choosing the mine to be built appropriately:"
 msgstr ""
+"Постройте угольную шахту и рудник. Для этого разместите флаг на восточном "
+"склоне горы (на горной местности, не на лугу). Когда вы щелкните на новом "
+"флаге, вы сможете послать туда геологов. Поскольку флаг на горе, геологи "
+"будут искать руду; иначе они бы искали воду. Затем постройте шахты для обоих "
+"видов найденых ресурсов, выбирая для постройки соответствующие шахты:"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:40
 msgid "Black – coal"
-msgstr ""
+msgstr "Черный – уголь"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:41
 msgid "Red – iron ore"
-msgstr ""
+msgstr "Красный – железная руда"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:42
 msgid "Yellow – gold"
-msgstr ""
+msgstr "Желтый – золото"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:43
 msgid "Grey – granite"
-msgstr ""
+msgstr "Серый – гранит"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:44
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
 msgstr ""
+"Шахты могут быть построены только на горной местности. Подходящие места для "
+"шахт обозначены оранжевыми символами шахт."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:50
 msgid "Provide your miners with food"
@@ -84,7 +94,7 @@ msgstr "Построить хижину охотника, хижину егер�
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:53
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Для того, чтобы работать, шахтерам нужна еда."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:54
 msgid ""

@@ -31,13 +31,17 @@ class Editor_Unset_Port_Space_Tool : public Editor_Tool {
 public:
 	Editor_Unset_Port_Space_Tool();
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& parent,
+	                          Editor_Action_Args& args) override;
 
-	int32_t handle_undo_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_undo_impl(Widelands::Map& map,
+	                         const Widelands::World& world,
+	                         Widelands::Node_and_Triangle<> center,
+	                         Editor_Interactive& parent,
+	                         Editor_Action_Args& args) override;
 
 	char const * get_sel_impl() const override {return FSEL_EUPS_FILENAME;}
 };
@@ -48,13 +52,17 @@ class Editor_Set_Port_Space_Tool : public Editor_Tool {
 public:
 	Editor_Set_Port_Space_Tool(Editor_Unset_Port_Space_Tool &);
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& parent,
+	                          Editor_Action_Args& args) override;
 
-	int32_t handle_undo_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_undo_impl(Widelands::Map& map,
+	                         const Widelands::World& world,
+	                         Widelands::Node_and_Triangle<> center,
+	                         Editor_Interactive& parent,
+	                         Editor_Action_Args& args) override;
 
 	char const * get_sel_impl() const override {return FSEL_ESPS_FILENAME;}
 };

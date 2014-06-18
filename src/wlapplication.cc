@@ -382,7 +382,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			// disable sound completely
-			g_sound_handler.m_nosound = true;
+			g_sound_handler.nosound_ = true;
 
 			// setup some details of the dedicated server
 			Section & s = g_options.pull_section      ("global");
@@ -435,7 +435,6 @@ void WLApplication::run()
 				mapdata.name = map.get_name();
 				mapdata.author = map.get_author();
 				mapdata.description = map.get_description();
-				mapdata.world = map.get_world_name();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
 				mapdata.height = map.get_height();
@@ -1049,7 +1048,7 @@ void WLApplication::handle_commandline_parameters()
 		m_commandline.erase("logfile");
 	}
 	if (m_commandline.count("nosound")) {
-		g_sound_handler.m_nosound = true;
+		g_sound_handler.nosound_ = true;
 		m_commandline.erase("nosound");
 	}
 	if (m_commandline.count("nozip")) {

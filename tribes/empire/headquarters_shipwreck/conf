@@ -5,6 +5,5 @@ heal_per_second=170
 conquers=9
 
 [idle]
-# sfx=0 ../../../sound/spoken/warehouse-bringitin
 pics=headquarters_shipwreck_i_??.png
 hotspot=93 40

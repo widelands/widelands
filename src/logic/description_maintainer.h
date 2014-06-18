@@ -20,10 +20,12 @@
 #ifndef DESCR_MAINTAINER_H
 #define DESCR_MAINTAINER_H
 
-#include <cassert>
 #include <map>
 #include <memory>
+#include <string>
 #include <vector>
+
+#include "wexception.h"
 
 // Used to have a typesafe maintainer for description classes.
 template <typename T> struct DescriptionMaintainer {
@@ -62,11 +64,13 @@ private:
 
 template <typename T>
 int32_t DescriptionMaintainer<T>::add(T * const item) {
-	assert(exists(item->name()) == nullptr);
+	if (exists(item->name()) != nullptr) {
+		throw wexception("Tried to add %s twice.", item->name().c_str());
+	}
 	int32_t index = items_.size();
 	items_.emplace_back(item);
 	name_to_index_[item->name()] = index;
-	return index;;
+	return index;
 }
 
 template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& name) const {

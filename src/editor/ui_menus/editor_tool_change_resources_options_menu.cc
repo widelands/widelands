@@ -28,7 +28,8 @@
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/widelands.h"
-#include "logic/world.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/world.h"
 #include "ui_basic/button.h"
 #include "wui/overlay_manager.h"
 
@@ -124,7 +125,7 @@ Editor_Tool_Change_Resources_Options_Menu
 	m_change_by_decrease.set_repeating(true);
 	m_set_to_increase   .set_repeating(true);
 	m_set_to_decrease   .set_repeating(true);
-	const Widelands::World & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().world();
 	Widelands::Resource_Index const nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
@@ -211,11 +212,11 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 	m_increase_tool.set_cur_res(n);
 	m_increase_tool.decrease_tool().set_cur_res(n);
 
-	Widelands::Map & map = ref_cast<Editor_Interactive, UI::Panel>(*get_parent())
-		.egbase().map();
+	Widelands::Editor_Game_Base& egbase = ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase();
+	Widelands::Map & map = egbase.map();
 	map.overlay_manager().register_overlay_callback_function(
-	   boost::bind(&Editor_Change_Resource_Tool_Callback, _1, boost::ref(map), n));
-	map.recalc_whole_map();
+	   boost::bind(&Editor_Change_Resource_Tool_Callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
+	map.recalc_whole_map(egbase.world());
 	select_correct_tool();
 
 	update();
@@ -232,7 +233,7 @@ void Editor_Tool_Change_Resources_Options_Menu::update() {
 	m_set_to_value.set_text(buf);
 
 	m_cur_selection.set_text
-		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase().map()
+		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase()
 		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->descname());
 	m_cur_selection.set_pos
 		(Point

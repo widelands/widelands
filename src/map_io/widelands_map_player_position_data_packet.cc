@@ -46,7 +46,7 @@ void Map_Player_Position_Data_Packet::Read
 			Map               & map        = egbase.map();
 			Extent        const extent     = map.extent       ();
 			Player_Number const nr_players = map.get_nrplayers();
-			iterate_player_numbers(p, nr_players)
+			iterate_player_numbers(p, nr_players) {
 				try {
 					char buffer[10];
 					snprintf(buffer, sizeof(buffer), "player_%u", p);
@@ -54,6 +54,7 @@ void Map_Player_Position_Data_Packet::Read
 				} catch (const _wexception & e) {
 					throw game_data_error("player %u: %s", p, e.what());
 				}
+			}
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);

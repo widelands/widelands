@@ -27,6 +27,10 @@
 #include "logic/instances.h"
 #include "logic/player.h"
 
+namespace Widelands {
+class World;
+}  // namespace Widelands
+
 using namespace Widelands;
 
 /******************/
@@ -41,7 +45,7 @@ struct TestingFlag : public Flag {
 struct TestingMap : public Map {
 	TestingMap(int const w, int const h) : Map() {set_size(w, h);}
 
-	virtual void recalc_for_field_area(Area<FCoords>) override {}
+	virtual void recalc_for_field_area(const World&, Area<FCoords>) override {}
 
 };
 

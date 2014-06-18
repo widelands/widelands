@@ -257,7 +257,7 @@ install(
     global
     tribes
     txts
-    worlds
+    world
     pics
     scripting
   DESTINATION ${WL_INSTALL_DATADIR}

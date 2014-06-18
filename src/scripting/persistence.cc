@@ -167,7 +167,7 @@ static const char * m_persistent_globals[] = {
 	"rawlen", "require", "select", "setfenv", "setmetatable", "table",
 	"tonumber", "tostring", "type", "unpack", "wl", "xpcall", "string",
 	"_", "set_textdomain", "get_build_id", "coroutine.yield", "ngettext",
-	"include", nullptr
+	"include", "path", nullptr
 };
 
 /**

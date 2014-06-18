@@ -50,7 +50,7 @@ private:
 
 	UI::Textarea    m_title,            m_label_name,       m_name;
 	UI::Textarea    m_label_author,     m_author,           m_label_size;
-	UI::Textarea    m_size,             m_label_world,      m_world;
+	UI::Textarea    m_size;
 	UI::Textarea    m_label_nr_players, m_nr_players,       m_label_descr;
 	UI::Multiline_Textarea              m_descr;
 	UI::Button             m_back,             m_ok;

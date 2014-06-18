@@ -85,7 +85,7 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	for (const Coords& c : map.get_port_spaces()) {
 		FCoords fc = map.get_fcoords(c);
 		if
-			((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
+			((map.get_max_nodecaps(egbase.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
 			 ||
 			 map.find_portdock(fc).empty())
 		{

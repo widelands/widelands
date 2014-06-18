@@ -32,6 +32,7 @@
 #include "logic/instances.h" //for g_flag_descr
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/world/world.h"
 #include "upcast.h"
 
 
@@ -212,12 +213,11 @@ struct tribe_immovable_nonexistent : public FileRead::_data_error {
 	std::string name;
 };
 struct world_immovable_nonexistent : public FileRead::_data_error {
-	world_immovable_nonexistent(char const* const Worldname, char const* const Name)
-	   : _data_error("world %s does not define immovable type \"%s\"", Worldname, Name),
-	     worldname(Worldname),
+	world_immovable_nonexistent(char const* const Name)
+	   : _data_error("world does not define immovable type \"%s\"",  Name),
 	     name(Name) {
 	}
-	char const* const worldname, *const name;
+	char const* const name;
 };
 struct building_nonexistent : public FileRead::_data_error {
 	building_nonexistent(const std::string& Tribename, char const* const Name)
@@ -284,7 +284,7 @@ const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const World& world) {
 	char const* const name = fr->CString();
 	int32_t const index = world.get_immovable_index(name);
 	if (index == -1)
-		throw world_immovable_nonexistent(world.get_name(), name);
+		throw world_immovable_nonexistent(name);
 	return *world.get_immovable_descr(index);
 }
 
@@ -296,7 +296,7 @@ const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const Editor_Game_Base
 	if (Tribe_Descr const* const tribe = ReadTribe_allow_null(fr, egbase))
 		return ReadImmovable_Type(fr, *tribe);
 	else
-		return ReadImmovable_Type(fr, egbase.map().world());
+		return ReadImmovable_Type(fr, egbase.world());
 }
 
 // Reads a CString and interprets t as the name of an immovable type.
@@ -472,10 +472,7 @@ void Map_Players_View_Data_Packet::Read
 						//  Must be initialized because the rendering code is
 						//  accessing it even for triangles that the player does not
 						//  see (it is the darkening that actually hides the ground
-						//  from the player). This is important for worlds where the
-						//  number of terrain types is not maximal (16), so that an
-						//  uninitialized terrain index could cause a not found error
-						//  in DescriptionMaintainer<Terrain_Descr>::get(Terrain_Index).
+						//  from the player).
 						Field::Terrains terrains; terrains.d = terrains.r = 0;
 
 						if (f_vision | bl_vision | br_vision)

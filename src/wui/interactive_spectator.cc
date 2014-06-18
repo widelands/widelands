@@ -152,7 +152,7 @@ void Interactive_Spectator::start()
 	overlay_manager.show_buildhelp(false);
 
 	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map();
+	map.recalc_whole_map(game().world());
 }
 
 

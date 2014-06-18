@@ -32,8 +32,8 @@ namespace Widelands {
 // end a scenario successfully.
 class Objective  {
 public:
-	Objective(const std::string& name)
-	   : m_name(name), m_descname(name), m_descr(_("no descr")), m_visible(true), m_done(false) {
+	Objective(const std::string& init_name)
+	   : m_name(init_name), m_descname(init_name), m_descr(_("no descr")), m_visible(true), m_done(false) {
 	}
 
 	// Unique internal name of the objective.

@@ -27,8 +27,11 @@
 #include "logic/checkstep.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
+#include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 
 namespace Widelands {
 
@@ -102,10 +105,15 @@ struct FindNodeUnownedMineable {
 };
 
 struct FindNodeWater {
-	bool accept(const Map& map, const FCoords& coord) const {
-		return (map.world().terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
-		       (map.world().terrain_descr(coord.field->terrain_r()).get_is() & TERRAIN_WATER);
+	FindNodeWater(const World& world) : world_(world) {}
+
+	bool accept(const Map& /* map */, const FCoords& coord) const {
+		return (world_.terrain_descr(coord.field->terrain_d()).get_is() & TerrainDescription::WATER) ||
+		       (world_.terrain_descr(coord.field->terrain_r()).get_is() & TerrainDescription::WATER);
 	}
+
+private:
+	const World& world_;
 };
 
 struct FindNodeWithFlagOrRoad {
@@ -125,7 +133,7 @@ struct NearFlag {
 		return cost_ > f.cost_;
 	}
 
-	bool operator==(Flag const* const f) const {
+	bool operator == (Flag const* const f) const {
 		return flag == f;
 	}
 };
@@ -301,7 +309,7 @@ struct BuildingObserver {
 };
 
 struct ProductionSiteObserver {
-	Widelands::ProductionSite* site;
+	Widelands::OPtr<Widelands::ProductionSite> site;
 	int32_t built_time_;
 	uint8_t stats_zero_;
 	BuildingObserver* bo;

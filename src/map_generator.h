@@ -22,11 +22,8 @@
 
 #include <memory>
 
-#include "logic/world.h"
-
-// This is the first step of separating map generation from
-// map.
-// TODO: Put other generation stuff here too...
+#include "logic/widelands_geometry.h"
+#include "logic/world/map_gen.h"
 
 struct RNG;
 
@@ -57,7 +54,7 @@ struct UniqueRandomMapInfo {
 	uint32_t w;
 	uint32_t h;
 	Resource_Amount resource_amount;
-	std::string worldName;
+	std::string world_name;
 
 	double        waterRatio;     //  How much of the map is water?
 	double        landRatio;      //  How much of the map is land?
@@ -67,8 +64,7 @@ struct UniqueRandomMapInfo {
 
 	//  other stuff
 	static bool setFromIdString
-		(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString,
-		 const std::vector<std::string> & worlds);
+		(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString);
 	static void generateIdString
 		(std::string & mapIdsString_out, const UniqueRandomMapInfo & mapInfo);
 
@@ -117,9 +113,10 @@ private:
 		 RNG                       &       rng,
 		 MapGenAreaInfo::MapGenTerrainType & terrType);
 
-	Map &                        m_map;
-	const UniqueRandomMapInfo & m_mapInfo;
-	Editor_Game_Base &           m_egbase;
+	std::unique_ptr<const MapGenInfo> map_gen_info_;
+	Map& map_;
+	const UniqueRandomMapInfo& map_info_;
+	Editor_Game_Base& egbase_;
 };
 
 }

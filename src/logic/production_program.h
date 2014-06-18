@@ -36,7 +36,7 @@
 #include "logic/tattribute.h"
 #include "logic/widelands.h"
 
-struct Profile;
+class Profile;
 
 namespace Widelands {
 
@@ -46,7 +46,7 @@ struct ProductionSite_Descr;
 class ProductionSite;
 struct Tribe_Descr;
 class Worker;
-struct World;
+class World;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {

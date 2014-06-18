@@ -907,6 +907,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const initialization_script = packet.String();
 				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
+				t->do_not_warn_about_unaccessed_keys();
 				info.initializations.push_back
 					(TribeBasicInfo::Initialization(initialization_script, t->get_string("name")));
 			}

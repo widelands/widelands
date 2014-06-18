@@ -27,12 +27,11 @@
 #include "logic/mapregion.h"
 
 /// Sets the heights to random values. Changes surrounding nodes if necessary.
-int32_t Editor_Noise_Height_Tool::handle_click_impl
-	(Widelands::Map           &           map,
-	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         /* parent */,
-	Editor_Action_Args & args)
-{
+int32_t Editor_Noise_Height_Tool::handle_click_impl(Widelands::Map& map,
+                                                    const Widelands::World& world,
+                                                    Widelands::Node_and_Triangle<> const center,
+                                                    Editor_Interactive& /* parent */,
+                                                    Editor_Action_Args& args) {
 	if (args.origHights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
@@ -50,27 +49,25 @@ int32_t Editor_Noise_Height_Tool::handle_click_impl
 	 Widelands::Area<Widelands::FCoords>
 	 (map.get_fcoords(center.node), args.sel_radius));
 	do {
-		max =
-		    std::max
-		    (max,
-		     map.set_height
-		     (mr.location(),
-		      args.m_interval.min
-		      +
-		      static_cast<int32_t>
-		      (static_cast<double>
-		       (args.m_interval.max - args.m_interval.min + 1) * rand()
-		       /
-		       (RAND_MAX + 1.0))));
+		max = std::max(
+		   max,
+		   map.set_height(world,
+		                  mr.location(),
+		                  args.m_interval.min +
+		                     static_cast<int32_t>(
+		                        static_cast<double>(args.m_interval.max - args.m_interval.min + 1) *
+		                        rand() / (RAND_MAX + 1.0))));
 	} while (mr.advance(map));
 	return mr.radius() + max;
 }
 
-int32_t Editor_Noise_Height_Tool::handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
-	Editor_Interactive & parent, Editor_Action_Args & args)
-{
-	return m_set_tool.handle_undo_impl(map, center, parent, args);
+int32_t
+Editor_Noise_Height_Tool::handle_undo_impl(Widelands::Map& map,
+                                           const Widelands::World& world,
+                                           Widelands::Node_and_Triangle<Widelands::Coords> center,
+                                           Editor_Interactive& parent,
+                                           Editor_Action_Args& args) {
+	return m_set_tool.handle_undo_impl(map, world, center, parent, args);
 }
 
 Editor_Action_Args Editor_Noise_Height_Tool::format_args_impl(Editor_Interactive & parent)
@@ -79,4 +76,3 @@ Editor_Action_Args Editor_Noise_Height_Tool::format_args_impl(Editor_Interactive
 	a.m_interval = m_interval;
 	return a;
 }
-

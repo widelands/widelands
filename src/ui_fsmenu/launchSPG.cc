@@ -243,6 +243,7 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 		try {
 			std::unique_ptr<LuaTable> t =
 			   m_lua->run_script(m_settings->getWinConditionScript());
+			t->do_not_warn_about_unaccessed_keys();
 			const std::string name = t->get_string("name");
 			const std::string descr = t->get_string("description");
 			m_wincondition.set_title(name);

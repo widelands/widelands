@@ -27,12 +27,11 @@
 #include "logic/mapregion.h"
 
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.
-int32_t Editor_Decrease_Height_Tool::handle_click_impl
-	(Widelands::Map & map,
-	Widelands::Node_and_Triangle<> center,
-	Editor_Interactive & /* parent */,
-	Editor_Action_Args & args)
-{
+int32_t Editor_Decrease_Height_Tool::handle_click_impl(Widelands::Map& map,
+                                                       const Widelands::World& world,
+                                                       Widelands::Node_and_Triangle<> center,
+                                                       Editor_Interactive& /* parent */,
+                                                       Editor_Action_Args& args) {
 	if (args.origHights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
@@ -42,15 +41,15 @@ int32_t Editor_Decrease_Height_Tool::handle_click_impl
 		while (mr.advance(map));
 	}
 
-	return
-	    map.change_height
-	    (Widelands::Area<Widelands::FCoords>
-	     (map.get_fcoords(center.node), args.sel_radius),
-	     -args.change_by);
+	return map.change_height(
+	   world,
+	   Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius),
+	   -args.change_by);
 }
 
 int32_t Editor_Decrease_Height_Tool::handle_undo_impl
 	(Widelands::Map & map,
+	 const Widelands::World& world,
 	Widelands::Node_and_Triangle<> center,
 	Editor_Interactive & /* parent */,
 	Editor_Action_Args & args)
@@ -65,10 +64,10 @@ int32_t Editor_Decrease_Height_Tool::handle_undo_impl
 		mr.location().field->set_height(*i); ++i;
 	} while (mr.advance(map));
 
-	map.recalc_for_field_area
-		(Widelands::Area<Widelands::FCoords>
-			(map.get_fcoords(center.node),
-				args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
+	map.recalc_for_field_area(world,
+	                          Widelands::Area<Widelands::FCoords>(
+	                             map.get_fcoords(center.node),
+	                             args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
 
 	return mr.radius() + 1;
 }
@@ -79,5 +78,3 @@ Editor_Action_Args Editor_Decrease_Height_Tool::format_args_impl(Editor_Interact
 	a.change_by = m_change_by;
 	return a;
 }
-
-
