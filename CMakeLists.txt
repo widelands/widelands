@@ -79,30 +79,22 @@ if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
 endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
-# Gettext is required, but it does not provide GETTEXT_INCLUDE_DIR or
-# GETTEXT_LIBRARY as "usual" libraries do
-find_package(Gettext REQUIRED)
 
-find_package(ZLIB REQUIRED)
 
 find_package(SDL REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
 include_directories(${SDL_INCLUDE_DIR})
 
+find_package(Gettext REQUIRED)
+find_package(SDL_gfx REQUIRED)
 find_package(SDL_image REQUIRED)
-# TODO(sirver): Do not globally include for all targets.
-include_directories(${SDLIMAGE_INCLUDE_DIR})
-
 find_package(SDL_mixer REQUIRED)
-
 find_package(SDL_net REQUIRED)
+find_package(ZLIB REQUIRED)
 
 find_package(SDL_ttf REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
 include_directories(${SDLTTF_INCLUDE_DIR})
-
-find_package(SDL_gfx REQUIRED)
-include_directories(${SDLGFX_INCLUDE_DIR})
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 

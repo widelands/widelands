@@ -16,6 +16,8 @@ macro(_parse_common_args ARGS)
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_BOOST_REGEX
+    USES_SDL_GFX
+    USES_SDL_IMAGE
     USES_SDL_MIXER
     USES_SDL_NET
     USES_ZLIB
@@ -69,6 +71,16 @@ macro(_common_compile_tasks)
   if(ARG_USES_SDL_NET)
     target_include_directories(${NAME} SYSTEM INTERFACE ${SDLNET_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLNET_LIBRARY})
+  endif()
+
+  if(ARG_USES_SDL_IMAGE)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLIMAGE_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDLIMAGE_LIBRARY})
+  endif()
+
+  if(ARG_USES_SDL_GFX)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLGFX_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDLGFX_LIBRARY})
   endif()
 
   if (ARG_USES_BOOST_REGEX)
@@ -256,41 +268,6 @@ set(WL_SRCS
 	game_io/game_player_info_data_packet.cc
 	game_io/game_preload_data_packet.cc
 	game_io/game_saver.cc
-	graphic/align.cc
-	graphic/animation.cc
-	graphic/colormap.cc
-	graphic/font.cc
-	graphic/font_handler.cc
-	graphic/font_handler1.cc
-	graphic/graphic.cc
-	graphic/image_cache.cc
-	graphic/image_loader_impl.cc
-	graphic/image_transformations.cc
-	graphic/in_memory_image.cc
-	graphic/render/gamerenderer.cc
-	graphic/render/gamerenderer_gl.cc
-	graphic/render/gamerenderer_sdl.cc
-	graphic/render/gl_surface.cc
-	graphic/render/gl_surface_screen.cc
-	graphic/render/gl_surface_texture.cc
-	graphic/render/gl_utils.cc
-	graphic/render/minimaprenderer.cc
-	graphic/render/sdl_helper.cc
-	graphic/render/sdl_surface.cc
-	graphic/render/terrain_sdl.cc
-	graphic/rendertarget.cc
-	graphic/richtext.cc
-	graphic/surface.cc
-	graphic/surface_cache.cc
-	graphic/text/rt_parse.cc
-	graphic/text/rt_render.cc
-	graphic/text/sdl_ttf_font_impl.cc
-	graphic/text/sdl_ttf_font_loader_from_file.cc
-	graphic/text/sdl_ttf_font_loader_from_filesystem.cc
-	graphic/text/textstream.cc
-	graphic/text_parser.cc
-	graphic/texture.cc
-	graphic/wordwrap.cc
 	helper.cc
 	logic/backtrace.cc
 	logic/battle.cc
@@ -351,36 +328,6 @@ set(WL_SRCS
 	logic/worker_descr.cc
 	logic/worker_program.cc
 	map_generator.cc
-	map_io/one_world_legacy_lookup_table.cc
-	map_io/one_world_legacy_lookup_table.h
-	map_io/widelands_map_allowed_building_types_data_packet.cc
-	map_io/widelands_map_allowed_worker_types_data_packet.cc
-	map_io/widelands_map_building_data_packet.cc
-	map_io/widelands_map_buildingdata_data_packet.cc
-	map_io/widelands_map_elemental_data_packet.cc
-	map_io/widelands_map_exploration_data_packet.cc
-	map_io/widelands_map_extradata_data_packet.cc
-	map_io/widelands_map_flag_data_packet.cc
-	map_io/widelands_map_flagdata_data_packet.cc
-	map_io/widelands_map_heights_data_packet.cc
-	map_io/widelands_map_loader.cc
-	map_io/widelands_map_map_object_loader.cc
-	map_io/widelands_map_map_object_saver.cc
-	map_io/widelands_map_node_ownership_data_packet.cc
-	map_io/widelands_map_object_packet.cc
-	map_io/widelands_map_objective_data_packet.cc
-	map_io/widelands_map_player_names_and_tribes_data_packet.cc
-	map_io/widelands_map_player_position_data_packet.cc
-	map_io/widelands_map_players_messages_data_packet.cc
-	map_io/widelands_map_players_view_data_packet.cc
-	map_io/widelands_map_port_spaces_data_packet.cc
-	map_io/widelands_map_resources_data_packet.cc
-	map_io/widelands_map_road_data_packet.cc
-	map_io/widelands_map_roaddata_data_packet.cc
-	map_io/widelands_map_saver.cc
-	map_io/widelands_map_scripting_data_packet.cc
-	map_io/widelands_map_terrain_data_packet.cc
-	map_io/widelands_map_version_data_packet.cc
 	md5.cc
 	random.cc
 	replay_game_controller.cc
@@ -589,48 +536,6 @@ set(WL_SRCS
   game_io/game_saver.h
   gamecontroller.h
   gamesettings.h
-  graphic/align.h
-  graphic/animation.h
-  graphic/colormap.h
-  graphic/compositemode.h
-  graphic/diranimations.h
-  graphic/font.h
-  graphic/font_handler.h
-  graphic/font_handler1.h
-  graphic/graphic.h
-  graphic/image.h
-  graphic/image_cache.h
-  graphic/image_loader.h
-  graphic/image_loader_impl.h
-  graphic/image_transformations.h
-  graphic/in_memory_image.h
-  graphic/rect.h
-  graphic/render/gamerenderer.h
-  graphic/render/gamerenderer_gl.h
-  graphic/render/gamerenderer_sdl.h
-  graphic/render/gl_surface.h
-  graphic/render/gl_surface_screen.h
-  graphic/render/gl_surface_texture.h
-  graphic/render/gl_utils.h
-  graphic/render/minimaprenderer.h
-  graphic/render/sdl_helper.h
-  graphic/render/sdl_surface.h
-  graphic/render/terrain_sdl.h
-  graphic/render/vertex.h
-  graphic/rendertarget.h
-  graphic/richtext.h
-  graphic/surface.h
-  graphic/surface_cache.h
-  graphic/text/rt_errors.h
-  graphic/text/rt_errors_impl.h
-  graphic/text/rt_parse.h
-  graphic/text/rt_render.h
-  graphic/text/sdl_ttf_font.h
-  graphic/text/sdl_ttf_font_impl.h
-  graphic/text/textstream.h
-  graphic/text_parser.h
-  graphic/texture.h
-  graphic/wordwrap.h
   helper.h
   interval.h
   logic/attackable.h
@@ -727,39 +632,6 @@ set(WL_SRCS
   logic/world/world.h
   machdep.h
   map_generator.h
-  map_io/coords_profile.cc
-  map_io/coords_profile.h
-  map_io/map_loader.h
-  map_io/widelands_map_allowed_building_types_data_packet.h
-  map_io/widelands_map_allowed_worker_types_data_packet.h
-  map_io/widelands_map_building_data_packet.h
-  map_io/widelands_map_buildingdata_data_packet.h
-  map_io/widelands_map_data_packet.h
-  map_io/widelands_map_elemental_data_packet.h
-  map_io/widelands_map_exploration_data_packet.h
-  map_io/widelands_map_extradata_data_packet.h
-  map_io/widelands_map_flag_data_packet.h
-  map_io/widelands_map_flagdata_data_packet.h
-  map_io/widelands_map_heights_data_packet.h
-  map_io/widelands_map_loader.h
-  map_io/widelands_map_map_object_loader.h
-  map_io/widelands_map_map_object_saver.h
-  map_io/widelands_map_message_saver.h
-  map_io/widelands_map_node_ownership_data_packet.h
-  map_io/widelands_map_object_packet.h
-  map_io/widelands_map_objective_data_packet.h
-  map_io/widelands_map_player_names_and_tribes_data_packet.h
-  map_io/widelands_map_player_position_data_packet.h
-  map_io/widelands_map_players_messages_data_packet.h
-  map_io/widelands_map_players_view_data_packet.h
-  map_io/widelands_map_port_spaces_data_packet.h
-  map_io/widelands_map_resources_data_packet.h
-  map_io/widelands_map_road_data_packet.h
-  map_io/widelands_map_roaddata_data_packet.h
-  map_io/widelands_map_saver.h
-  map_io/widelands_map_scripting_data_packet.h
-  map_io/widelands_map_terrain_data_packet.h
-  map_io/widelands_map_version_data_packet.h
   md5.h
   point.h
   random.h
@@ -920,6 +792,8 @@ else()
 endif()
 
 add_subdirectory(base)
+add_subdirectory(map_io)
+add_subdirectory(graphic)
 add_subdirectory(economy)
 add_subdirectory(io)
 add_subdirectory(network)
@@ -943,10 +817,10 @@ wl_library(widelands_ball_of_mud
     profile
     sound
     third_party_eris
+    map_io
+    graphic
     # TODO(sirver): add USES_* for each of these
-    ${SDLIMAGE_LIBRARY}
     ${SDLTTF_LIBRARY}
-    ${SDLGFX_LIBRARY}
     ${PNG_LIBRARY}
     ${OPENGL_gl_LIBRARY}
     ${GLEW_LIBRARY}
