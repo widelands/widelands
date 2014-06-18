@@ -17,6 +17,7 @@ macro(_parse_common_args ARGS)
     WIN32 # Windows binary/library.
     USES_BOOST_REGEX
     USES_SDL_MIXER
+    USES_SDL_NET
     USES_ZLIB
   )
   set(ONE_VALUE_ARG )
@@ -63,6 +64,11 @@ macro(_common_compile_tasks)
   if(ARG_USES_SDL_MIXER)
     target_include_directories(${NAME} SYSTEM INTERFACE ${SDLMIXER_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLMIXER_LIBRARY})
+  endif()
+
+  if(ARG_USES_SDL_NET)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLNET_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDLNET_LIBRARY})
   endif()
 
   if (ARG_USES_BOOST_REGEX)
@@ -376,14 +382,6 @@ set(WL_SRCS
 	map_io/widelands_map_terrain_data_packet.cc
 	map_io/widelands_map_version_data_packet.cc
 	md5.cc
-	network/internet_gaming.cc
-	network/internet_gaming_messages.cc
-	network/netclient.cc
-	network/nethost.cc
-	network/network.cc
-	network/network_gaming_messages.cc
-	network/network_lan_promotion.cc
-	network/network_player_settings_backend.cc
 	random.cc
 	replay_game_controller.cc
 	s2map.cc
@@ -763,17 +761,6 @@ set(WL_SRCS
   map_io/widelands_map_terrain_data_packet.h
   map_io/widelands_map_version_data_packet.h
   md5.h
-  network/internet_gaming.h
-  network/internet_gaming_messages.h
-  network/internet_gaming_protocol.h
-  network/netclient.h
-  network/nethost.h
-  network/network.h
-  network/network_gaming_messages.h
-  network/network_lan_promotion.h
-  network/network_player_settings_backend.h
-  network/network_protocol.h
-  network/network_system.h
   point.h
   random.h
   ref_cast.h
@@ -935,6 +922,7 @@ endif()
 add_subdirectory(base)
 add_subdirectory(economy)
 add_subdirectory(io)
+add_subdirectory(network)
 add_subdirectory(profile)
 add_subdirectory(scripting)
 add_subdirectory(sound)
@@ -949,14 +937,14 @@ wl_library(widelands_ball_of_mud
     ${WL_SRCS}
   DEPENDS
     base_i18n
-    third_party_eris
     io_dedicated_log
     io_filesystem
+    network
     profile
     sound
+    third_party_eris
     # TODO(sirver): add USES_* for each of these
     ${SDLIMAGE_LIBRARY}
-    ${SDLNET_LIBRARY}
     ${SDLTTF_LIBRARY}
     ${SDLGFX_LIBRARY}
     ${PNG_LIBRARY}

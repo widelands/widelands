@@ -1,0 +1,27 @@
+# TODO(sirver): has lots of dependencies on logic and other stuff.
+wl_library(network
+  SRCS
+    internet_gaming.cc
+    internet_gaming.h
+    internet_gaming_messages.cc
+    internet_gaming_messages.h
+    internet_gaming_protocol.h
+    netclient.cc
+    netclient.h
+    nethost.cc
+    nethost.h
+    network.cc
+    network.h
+    network_gaming_messages.cc
+    network_gaming_messages.h
+    network_lan_promotion.cc
+    network_lan_promotion.h
+    network_player_settings_backend.cc
+    network_player_settings_backend.h
+    network_protocol.h
+    network_system.h
+  USES_SDL_NET
+  DEPENDS
+    base_log
+    io_filesystem
+)

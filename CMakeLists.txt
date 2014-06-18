@@ -96,8 +96,6 @@ include_directories(${SDLIMAGE_INCLUDE_DIR})
 find_package(SDL_mixer REQUIRED)
 
 find_package(SDL_net REQUIRED)
-# TODO(sirver): Do not globally include for all targets.
-include_directories(${SDLNET_INCLUDE_DIR})
 
 find_package(SDL_ttf REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
