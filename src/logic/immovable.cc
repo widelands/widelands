@@ -301,13 +301,13 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world)
 		}
 	}
 
-	int editor_category =
+	int editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
-	if (editor_category < 0) {
+	if (editor_category_index < 0) {
 		throw game_data_error("Unknown editor_category: %s\n",
 		                      table.get_string("editor_category").c_str());
 	}
-	editor_category_ = world.editor_immovable_categories().get(editor_category);
+	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
 
 	make_sure_default_program_is_there();
 }

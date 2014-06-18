@@ -98,13 +98,13 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		throw game_data_error("Default resource is not in valid resources.\n");
 	}
 
-	int editor_category =
+	int editor_category_index =
 	   world.editor_terrain_categories().get_index(table.get_string("editor_category"));
-	if (editor_category < 0) {
+	if (editor_category_index < 0) {
 		throw game_data_error("Unknown editor_category: %s\n",
 		                      table.get_string("editor_category").c_str());
 	}
-	editor_category_ = world.editor_terrain_categories().get(editor_category);
+	editor_category_ = world.editor_terrain_categories().get(editor_category_index);
 }
 
 TerrainDescription::~TerrainDescription() {
