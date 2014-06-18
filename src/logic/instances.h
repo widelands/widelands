@@ -59,6 +59,10 @@ struct Map_Object_Descr : boost::noncopyable {
 	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
+	virtual std::string type() const {
+		return "mapobject";
+	}
+
 	const std::string &     name() const {return m_name;}
 	const std::string & descname() const {return m_descname;}
 	struct Animation_Nonexistent {};
@@ -83,9 +87,6 @@ struct Map_Object_Descr : boost::noncopyable {
 
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
-
-	// class type needed for Lua stuff
-	std::string get_type() const {return "mapobject";}
 
 protected:
 	// Add all the special attributes to the attribute list. Only the 'allowed_special'

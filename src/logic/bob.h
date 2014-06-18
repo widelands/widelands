@@ -55,6 +55,8 @@ class BobDescr : public Map_Object_Descr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
+	std::string type() const override {return "bob";}
+
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);
@@ -70,9 +72,6 @@ public:
 		return 0;
 	}
 	uint32_t vision_range() const;
-
-	// class type needed for Lua stuff
-	std::string get_type() const {return "bob";}
 
 protected:
 	virtual Bob& create_object() const = 0;

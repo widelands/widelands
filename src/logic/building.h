@@ -66,6 +66,11 @@ struct Building_Descr : public Map_Object_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 
+	std::string type() const override {
+		return "building";
+	}
+
+
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
@@ -129,11 +134,6 @@ struct Building_Descr : public Map_Object_Descr {
 
 	virtual int32_t suitability(const Map &, FCoords) const;
 	const BuildingHints & hints() const {return m_hints;}
-
-	// class type needed for Lua stuff
-	std::string get_type() const {
-		return "building";
-	}
 
 protected:
 	virtual Building & create_object() const = 0;

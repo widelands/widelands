@@ -42,16 +42,18 @@ struct Ship_Descr : BobDescr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 
+	virtual Bob & create_object() const override;
+
+	std::string type() const override {
+		return "ship";
+	}
+
 	virtual uint32_t movecaps() const override;
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
 	uint32_t get_capacity() const {return m_capacity;}
 	uint32_t vision_range() const {return m_vision_range;}
 
-	virtual Bob & create_object() const override;
-
-	// class type needed for Lua stuff
-	std::string get_type() const {return "ship";}
 
 private:
 	DirAnimations m_sail_anims;

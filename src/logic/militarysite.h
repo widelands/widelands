@@ -37,6 +37,9 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		 const Tribe_Descr & tribe, const World& world);
 
 	virtual Building & create_object() const override;
+	virtual std::string type() const override {
+		return "militarysite";
+	}
 
 	virtual uint32_t get_conquers() const override {return m_conquer_radius;}
 	uint32_t get_max_number_of_soldiers () const {
@@ -53,8 +56,6 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	std::string m_defeated_enemy_str;
 	std::string m_defeated_you_str;
 
-	// class type needed for Lua stuff
-	std::string get_type() const {return "militarysite";}
 
 private:
 	uint32_t m_conquer_radius;

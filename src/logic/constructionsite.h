@@ -56,9 +56,7 @@ struct ConstructionSite_Descr : public Building_Descr {
 		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const override;
-
-	// class type needed for Lua stuff
-	std::string get_type() const {return "constructionsite";}
+	std::string type() const override {return "constructionsite";}
 };
 
 class ConstructionSite : public Partially_Finished_Building {

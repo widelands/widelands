@@ -52,6 +52,8 @@ struct WareDescr : public Map_Object_Descr {
 
 	virtual ~WareDescr() {};
 
+	std::string type() const override {return "ware";}
+
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack
@@ -83,9 +85,6 @@ struct WareDescr : public Map_Object_Descr {
 
 	/// returns the preciousness of the ware. It is used by the computer player
 	uint8_t preciousness() const {return m_preciousness;}
-
-	// class type needed for Lua stuff
-	std::string get_type() const {return "ware";}
 
 private:
 	const Tribe_Descr & m_tribe;

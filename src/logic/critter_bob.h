@@ -43,6 +43,7 @@ struct Critter_Bob_Descr : public BobDescr {
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const override;
+	std::string type() const override {return "critterbob";}
 
 	bool is_swimming() const;
 	uint32_t movecaps() const override;
@@ -50,8 +51,6 @@ struct Critter_Bob_Descr : public BobDescr {
 
 	Critter_BobProgram const * get_program(const std::string &) const;
 
-	// class type needed for Lua stuff
-	std::string get_type() const {return "critterbob";}
 
 private:
 	DirAnimations m_walk_anims;

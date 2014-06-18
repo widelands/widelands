@@ -100,6 +100,8 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	~Immovable_Descr();
 
+	std::string type() const override {return "immovable";}
+
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
 
@@ -112,8 +114,6 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
-	// class type needed for Lua stuff
-	std::string get_type() const {return "immovable";}
 
 	// Returns the editor category.
 	const EditorCategory& editor_category() const;

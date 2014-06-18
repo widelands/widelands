@@ -62,6 +62,10 @@ struct ProductionSite_Descr : public Building_Descr {
 
 	virtual Building & create_object() const override;
 
+	virtual std::string type() const override {
+		return "productionsite";
+	}
+
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
 		container_iterate_const(BillOfMaterials, working_positions(), i)
@@ -84,9 +88,6 @@ struct ProductionSite_Descr : public Building_Descr {
 	const ProductionProgram * get_program(const std::string &) const;
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
-
-	// class type needed for Lua stuff
-	std::string get_type() const {return "productionsite";}
 
 
 private:

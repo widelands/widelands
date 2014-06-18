@@ -55,6 +55,8 @@ public:
 		 const Tribe_Descr &);
 	virtual ~Worker_Descr();
 
+	std::string type() const override {return "worker";}
+
 	virtual Bob & create_object() const override;
 
 	virtual void load_graphics();
@@ -112,9 +114,6 @@ public:
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
-
-	// class type needed for Lua stuff
-	std::string get_type() const {return "worker";}
 
 protected:
 

@@ -112,6 +112,7 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State *);
+	int get_type(lua_State *);
 	int get_descname(lua_State *);
 
 	/*
@@ -168,8 +169,6 @@ public:
 	int get_returned_wares(lua_State *);
 	int get_returned_wares_enhanced(lua_State *);
 	int get_size(lua_State *);
-	// Subclasses all need to overwrite get_type, otherwise the type of the parent class would be fetched
-	int get_type(lua_State *);
 	int get_vision_range(lua_State *);
 	int get_workarea_radius(lua_State *);
 
@@ -207,7 +206,6 @@ public:
 	 */
 	int get_inputs(lua_State *);
 	int get_output_ware_types(lua_State *);
-	int get_type(lua_State *);
 	int get_working_positions(lua_State *);
 
 	/*
@@ -244,7 +242,6 @@ public:
 	 */
 	int get_heal_per_second(lua_State *);
 	int get_max_number_of_soldiers(lua_State *);
-	int get_type(lua_State *);
 
 	/*
 	 * Lua methods
@@ -287,7 +284,6 @@ public:
 	int get_min_defense(lua_State *);
 	int get_min_evade(lua_State *);
 	int get_min_hp(lua_State *);
-	int get_type(lua_State *);
 
 	/*
 	 * Lua methods
@@ -323,7 +319,6 @@ public:
 	 * Properties
 	 */
 	int get_heal_per_second(lua_State *);
-	int get_type(lua_State *);
 
 	/*
 	 * Lua methods

@@ -49,6 +49,8 @@ struct Soldier_Descr : public Worker_Descr {
 	// NOTE as well defined in an enum in instances.h
 	virtual Worker_Type get_worker_type() const override {return Worker_Descr::SOLDIER;}
 
+	std::string type() const override {return "soldier";}
+
 	virtual void load_graphics() override;
 
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
@@ -81,9 +83,6 @@ struct Soldier_Descr : public Worker_Descr {
 	}
 
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
-
-	// class type needed for Lua stuff
-	std::string get_type() const {return "soldier";}
 
 protected:
 	virtual Bob & create_object() const override;

@@ -1034,8 +1034,9 @@ const MethodType<L_MapObjectDescription> L_MapObjectDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] = {
-	PROP_RO(L_MapObjectDescription, name),
 	PROP_RO(L_MapObjectDescription, descname),
+	PROP_RO(L_MapObjectDescription, name),
+	PROP_RO(L_MapObjectDescription, type),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1058,6 +1059,17 @@ void L_MapObjectDescription::__unpersist(lua_State * /* L */) {
 
 int L_MapObjectDescription::get_name(lua_State * L) {
 	lua_pushstring(L, get()->name());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: type
+
+			(RO) the name of the building, e.g. building.
+*/
+int L_MapObjectDescription::get_type(lua_State * L) {
+	lua_pushstring(L, get()->type());
 	return 1;
 }
 
@@ -1108,7 +1120,6 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
 	PROP_RO(L_BuildingDescription, size),
-	PROP_RO(L_BuildingDescription, type),
 	PROP_RO(L_BuildingDescription, vision_range),
 	PROP_RO(L_BuildingDescription, workarea_radius),
 	{nullptr, nullptr, nullptr},
@@ -1230,18 +1241,6 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 	return 1;
 }
 
-
-/* RST
-	.. attribute:: type
-
-			(RO) the name of the building, e.g. building.
-*/
-int L_BuildingDescription::get_type(lua_State * L) {
-	const Building_Descr * descr = get();
-	lua_pushstring(L, descr->get_type());
-	return 1;
-}
-
 /* RST
 	.. attribute:: returned_wares
 
@@ -1313,7 +1312,6 @@ const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Metho
 const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Properties[] = {
 	PROP_RO(L_ProductionSiteDescription, inputs),
 	PROP_RO(L_ProductionSiteDescription, output_ware_types),
-	PROP_RO(L_ProductionSiteDescription, type),
 	PROP_RO(L_ProductionSiteDescription, working_positions),
 	{nullptr, nullptr, nullptr},
 };
@@ -1372,18 +1370,6 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 
 
 /* RST
-	.. attribute:: type
-
-			(RO) the :string:`type` of the building, e.g. productionsite.
-*/
-int L_ProductionSiteDescription::get_type(lua_State * L) {
-	const ProductionSite_Descr * descr = get();
-	lua_pushstring(L, descr->get_type());
-	return 1;
-}
-
-
-/* RST
 	.. attribute:: working_positions
 		(RO) An array with pairs of int, worker_descr.name describing the worker positions of the productionsite
 */
@@ -1424,7 +1410,6 @@ const MethodType<L_MilitarySiteDescription> L_MilitarySiteDescription::Methods[]
 const PropertyType<L_MilitarySiteDescription> L_MilitarySiteDescription::Properties[] = {
 	PROP_RO(L_MilitarySiteDescription, heal_per_second),
 	PROP_RO(L_MilitarySiteDescription, max_number_of_soldiers),
-	PROP_RO(L_MilitarySiteDescription, type),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1463,18 +1448,6 @@ int L_MilitarySiteDescription::get_max_number_of_soldiers(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: type
-
-			(RO) the :string:`type` of the building, e.g. militarysite.
-*/
-int L_MilitarySiteDescription::get_type(lua_State * L) {
-	const MilitarySite_Descr * descr = get();
-	lua_pushstring(L, descr->get_type());
-	return 1;
-}
-
-
-/* RST
 TrainingSiteDescription
 ----------
 
@@ -1502,7 +1475,6 @@ const PropertyType<L_TrainingSiteDescription> L_TrainingSiteDescription::Propert
 	PROP_RO(L_TrainingSiteDescription, min_defense),
 	PROP_RO(L_TrainingSiteDescription, min_evade),
 	PROP_RO(L_TrainingSiteDescription, min_hp),
-	PROP_RO(L_TrainingSiteDescription, type),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1644,18 +1616,6 @@ int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
 
 
 /* RST
-	.. attribute:: type
-
-			(RO) the :string:`type` of the building, e.g. trainingsite.
-*/
-int L_TrainingSiteDescription::get_type(lua_State * L) {
-	const TrainingSite_Descr * descr = get();
-	lua_pushstring(L, descr->get_type());
-	return 1;
-}
-
-
-/* RST
 WarehouseDescription
 ----------
 
@@ -1673,7 +1633,6 @@ const MethodType<L_WarehouseDescription> L_WarehouseDescription::Methods[] = {
 };
 const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] = {
 	PROP_RO(L_WarehouseDescription, heal_per_second),
-	PROP_RO(L_WarehouseDescription, type),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1699,20 +1658,6 @@ int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
 	lua_pushinteger(L, descr->get_heal_per_second());
 	return 1;
 }
-
-
-/* RST
-	.. attribute:: type
-
-			(RO) the :string:`type` of the building, e.g. warehouse.
-*/
-int L_WarehouseDescription::get_type(lua_State * L) {
-	const Warehouse_Descr * descr = get();
-	lua_pushstring(L, descr->get_type());
-	return 1;
-}
-
-
 
 /* RST
 WareDescription
