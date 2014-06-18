@@ -55,20 +55,13 @@ find_package(Boost 1.48
 
 find_package (PythonInterp REQUIRED)
 
-# Check for opengl
-# TODO Check for SDL_opengl.h and add to include path
-find_package(OpenGL REQUIRED)
-
-# OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
-find_package(GLEW REQUIRED)
-# TODO(sirver): Do not globally include for all targets.
-add_definitions(${GLEW_EXTRA_DEFINITIONS})
-
 find_package(SDL REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
 include_directories(${SDL_INCLUDE_DIR})
 
+find_package(GLEW REQUIRED)
 find_package(Gettext REQUIRED)
+find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
 find_package(SDL_gfx REQUIRED)
 find_package(SDL_image REQUIRED)

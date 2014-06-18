@@ -16,6 +16,7 @@ macro(_parse_common_args ARGS)
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_BOOST_REGEX
+    USES_OPENGL
     USES_PNG
     USES_SDL_GFX
     USES_SDL_IMAGE
@@ -63,6 +64,15 @@ macro(_common_compile_tasks)
   if(ARG_USES_ZLIB)
     target_include_directories(${NAME} SYSTEM INTERFACE ${ZLIB_INCLUDE_DIRS})
     target_link_libraries(${NAME} ${ZLIB_LIBRARY})
+  endif()
+
+  # OpenGL and GLEW are one thing for us. If you use the one, you also use the
+  # other.
+  if(ARG_USES_OPENGL)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${GLEW_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${GLEW_LIBRARY})
+    target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
+    add_definitions(${GLEW_EXTRA_DEFINITIONS})
   endif()
 
   if(ARG_USES_PNG)
@@ -831,9 +841,6 @@ wl_library(widelands_ball_of_mud
     third_party_eris
     map_io
     graphic
-    # TODO(sirver): add USES_* for each of these
-    ${OPENGL_gl_LIBRARY}
-    ${GLEW_LIBRARY}
 )
 
 

@@ -78,10 +78,11 @@ wl_library(graphic
     texture.h
     wordwrap.cc
     wordwrap.h
+  USES_OPENGL
+  USES_PNG
   USES_SDL_GFX
   USES_SDL_IMAGE
   USES_SDL_TTF
-  USES_PNG
   DEPENDS
     base_log
     base_i18n
