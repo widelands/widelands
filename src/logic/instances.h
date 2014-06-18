@@ -152,7 +152,7 @@ class Map_Object : boost::noncopyable {
 	friend struct Object_Manager;
 	friend struct Object_Ptr;
 
-	MO_DESCR(Map_Object_Descr);
+	MO_DESCR(Map_Object_Descr)
 
 public:
 	enum {

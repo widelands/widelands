@@ -221,7 +221,7 @@ public:
 		const BobProgramBase * program; ///< pointer to current program
 	};
 
-	MO_DESCR(BobDescr);
+	MO_DESCR(BobDescr)
 
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}

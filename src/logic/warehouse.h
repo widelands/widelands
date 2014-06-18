@@ -70,7 +70,7 @@ class Warehouse : public Building, public Attackable, public SoldierControl {
 	friend class PortDock;
 	friend class Map_Buildingdata_Data_Packet;
 
-	MO_DESCR(Warehouse_Descr);
+	MO_DESCR(Warehouse_Descr)
 
 public:
 	/**

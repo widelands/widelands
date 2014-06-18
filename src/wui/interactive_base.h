@@ -118,7 +118,7 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	Widelands::Coords    get_build_road_start  () const;
 	Widelands::Coords    get_build_road_end    () const;
 
-	virtual void cleanup_for_load() {};
+	virtual void cleanup_for_load() {}
 
 	/**
 	 * Log a message to be displayed on screen

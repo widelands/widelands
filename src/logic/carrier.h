@@ -63,7 +63,7 @@ struct Carrier : public Worker {
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
 private:
-	MO_DESCR(Descr);
+	MO_DESCR(Descr)
 
 	void find_pending_ware(Game &);
 	int32_t find_closest_flag(Game &);

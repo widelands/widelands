@@ -46,7 +46,7 @@ class Worker : public Bob {
 	friend struct WorkerProgram;
 	friend struct Map_Bobdata_Data_Packet;
 
-	MO_DESCR(Worker_Descr);
+	MO_DESCR(Worker_Descr)
 
 	struct Action {
 		typedef bool (Worker::*execute_t)(Game &, Bob::State &, const Action &);

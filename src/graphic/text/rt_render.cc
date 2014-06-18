@@ -346,7 +346,7 @@ public:
 	FillingTextNode(IFont& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
 		TextNode(font, ns, txt), m_expanding(expanding) {
 			m_w = w;
-		};
+		}
 	virtual ~FillingTextNode() {}
 	virtual Surface* render(SurfaceCache*) override;
 

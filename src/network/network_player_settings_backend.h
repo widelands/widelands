@@ -31,7 +31,7 @@ struct NetworkPlayerSettingsBackend {
 	{
 		for (uint8_t i = 0; i < MAX_PLAYERS; ++i)
 			shared_in_tribe[i] = std::string();
-	};
+	}
 
 	void toggle_type (uint8_t id);
 	void toggle_tribe(uint8_t id);

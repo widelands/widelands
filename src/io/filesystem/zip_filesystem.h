@@ -63,7 +63,7 @@ public:
 
 	static FileSystem * CreateFromDirectory(const std::string & directory);
 
-	virtual std::string getBasename() override {return m_zipfilename;};
+	virtual std::string getBasename() override {return m_zipfilename;}
 
 protected:
 	void m_OpenUnzip();

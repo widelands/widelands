@@ -43,8 +43,6 @@ _wexception::_wexception
 	m_what = ost.str();
 }
 
-_wexception::~_wexception() noexcept {}
-
 char const * _wexception::what() const noexcept {
 	return m_what.c_str();
 }

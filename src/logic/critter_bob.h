@@ -60,7 +60,7 @@ class Critter_Bob : public Bob {
 	friend struct Map_Bobdata_Data_Packet;
 	friend struct Critter_BobProgram;
 
-	MO_DESCR(Critter_Bob_Descr);
+	MO_DESCR(Critter_Bob_Descr)
 
 public:
 	Critter_Bob(const Critter_Bob_Descr &);

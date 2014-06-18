@@ -33,7 +33,7 @@
 #define LUNA_CLASS_HEAD(klass) \
 	static const char className[]; \
 	static const MethodType<klass> Methods[]; \
-	static const PropertyType<klass> Properties[];
+	static const PropertyType<klass> Properties[]
 
 /*
  * Macros for filling the description tables
