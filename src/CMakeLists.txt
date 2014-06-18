@@ -130,7 +130,7 @@ function(run_codecheck NAME SRC)
   # If the file does not exist, it is probably auto-generated. In that case, it
   # makes no sense to codecheck it.
   if(EXISTS ${ABSOLUTE_SRC})
-    file(SHA1 ${ABSOLUTE_SRC} CHECKSUM)
+    string(SHA1 CHECKSUM ${ABSOLUTE_SRC})
 
     set(OUTPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${CHECKSUM}")
     add_custom_command(
@@ -147,11 +147,16 @@ function(run_codecheck NAME SRC)
       DEPENDS ${ABSOLUTE_SRC}
       COMMENT "Checking ${SRC} with CodeCheck"
     )
-    add_custom_target(run_codecheck_for_${CHECKSUM} DEPENDS ${OUTPUT_FILE})
-    add_dependencies(codecheck run_codecheck_for_${CHECKSUM})
+    add_custom_target(
+      see_if_codecheck_needs_to_run_${CHECKSUM}
+      DEPENDS ${OUTPUT_FILE}
+      COMMENT ""
+    )
+
+    add_dependencies(codecheck see_if_codecheck_needs_to_run_${CHECKSUM})
 
     if(CMAKE_BUILD_TYPE STREQUAL Debug)
-      add_dependencies(${NAME} run_codecheck_for_${CHECKSUM})
+      add_dependencies(${NAME} see_if_codecheck_needs_to_run_${CHECKSUM})
     endif(CMAKE_BUILD_TYPE STREQUAL Debug)
   endif(EXISTS ${ABSOLUTE_SRC})
 endfunction(run_codecheck)
