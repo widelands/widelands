@@ -159,6 +159,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 else()
   # Assuming GCC 4.7 or higher.
   if(WIN32)
+    # TODO(sirver): theoretically, this should not be needed.
     add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
   endif()
 
