@@ -1490,6 +1490,9 @@ const MethodType<L_TrainingSiteDescription> L_TrainingSiteDescription::Methods[]
 	{nullptr, nullptr},
 };
 const PropertyType<L_TrainingSiteDescription> L_TrainingSiteDescription::Properties[] = {
+	// NOCOM(#GunChleoc): I changed max_* to return 0 when the site does not
+	// provide the training, because the tests where written that way. On second
+	// thought though, returning nil is more natural.
 	PROP_RO(L_TrainingSiteDescription, max_attack),
 	PROP_RO(L_TrainingSiteDescription, max_defense),
 	PROP_RO(L_TrainingSiteDescription, max_evade),
