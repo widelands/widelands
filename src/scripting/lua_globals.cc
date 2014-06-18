@@ -169,7 +169,7 @@ static int L__(lua_State * L) {
 	:arg msgid: text to translate (singular)
 	:type msgid: :class:`string`
 	:arg msgid_plural: text to translate (plural)
-	:type msgid_plural :class:`string`
+	:type msgid_plural: :class:`string`
 	:arg n: The number of elements.
 	:type n: An unsigned integer.
 

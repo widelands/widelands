@@ -21,11 +21,14 @@
 
 #include <cstdlib>
 
+#include <stdint.h>
+
 #include "backtrace.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/checkstep.h"
 #include "logic/critter_bob.h"
 #include "logic/findbob.h"
@@ -36,6 +39,7 @@
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
+#include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
@@ -45,6 +49,12 @@
 
 
 namespace Widelands {
+
+BobDescr::BobDescr(const std::string& init_name,
+                  const std::string& init_descname,
+                  Tribe_Descr const* tribe)
+   : Map_Object_Descr(init_name, init_descname), owner_tribe_(tribe) {
+}
 
 /**
  * Only tribe bobs have a vision range, since it would be irrelevant
@@ -56,40 +66,14 @@ namespace Widelands {
  */
 uint32_t BobDescr::vision_range() const
 {
-	if (m_owner_tribe) {
+	if (owner_tribe_) {
 		if (upcast(const Ship_Descr, ship, this))
 			return ship->vision_range();
-		return m_owner_tribe->get_bob_vision_range();
+		return owner_tribe_->get_bob_vision_range();
 	}
 
 	return 0;
 }
-
-BobDescr::BobDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const tribe)
-	:
-	Map_Object_Descr(_name, _descname),
-	m_owner_tribe(tribe)
-{
-	{ //  global options
-		Section & idle_s = prof.get_safe_section("idle");
-
-		add_animation("idle", g_gr->animations().load(directory, idle_s));
-	}
-
-	// Parse attributes
-	while (Section::Value const * val = global_s.get_next_val("attrib")) {
-		uint32_t const attrib = get_attribute_id(val->get_string());
-
-		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			throw game_data_error("bad attribute \"%s\"", val->get_string());
-
-		add_attribute(attrib);
-	}
-}
-
 
 /**
  * Create a bob of this type
@@ -1105,12 +1089,12 @@ void Bob::Loader::load(FileRead & fr)
 		bob.set_owner(owner);
 	}
 
-	bob.set_position(egbase(), fr.Coords32());
+	bob.set_position(egbase(), ReadCoords32(&fr));
 
 	std::string animname = fr.CString();
 	bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
 	bob.m_animstart = fr.Signed32();
-	bob.m_walking = static_cast<WalkingDir>(fr.Direction8_allow_null());
+	bob.m_walking = static_cast<WalkingDir>(ReadDirection8_allow_null(&fr));
 	if (bob.m_walking) {
 		bob.m_walkstart = fr.Signed32();
 		bob.m_walkend = fr.Signed32();
@@ -1132,7 +1116,7 @@ void Bob::Loader::load(FileRead & fr)
 		state.ivar3 = fr.Signed32();
 		loadstate.objvar1 = fr.Unsigned32();
 		state.svar1 = fr.CString();
-		state.coords = fr.Coords32_allow_null(egbase().map().extent());
+		state.coords = ReadCoords32_allow_null(&fr, egbase().map().extent());
 
 		if (fr.Unsigned8()) {
 			uint32_t anims[6];
@@ -1212,13 +1196,13 @@ void Bob::save
 	fw.Unsigned8(BOB_SAVEGAME_VERSION);
 
 	fw.Unsigned8(m_owner ? m_owner->player_number() : 0);
-	fw.Coords32(m_position);
+	WriteCoords32(&fw, m_position);
 
 	// m_linkpprev and m_linknext are recreated automatically
 
 	fw.CString(m_anim ? descr().get_animation_name(m_anim) : "");
 	fw.Signed32(m_animstart);
-	fw.Direction8_allow_null(m_walking);
+	WriteDirection8_allow_null(&fw, m_walking);
 	if (m_walking) {
 		fw.Signed32(m_walkstart);
 		fw.Signed32(m_walkend);
@@ -1242,7 +1226,7 @@ void Bob::save
 		}
 		fw.CString(state.svar1);
 
-		fw.Coords32(state.coords);
+		WriteCoords32(&fw, state.coords);
 
 		if (state.diranims) {
 			fw.Unsigned8(1);

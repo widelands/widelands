@@ -23,7 +23,6 @@
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 #include "logic/immovable.h"
-#include "io/filewrite.h"
 
 class Image;
 
@@ -66,8 +65,9 @@ public:
 		return m_buildcost;
 	}
 
-	const Tribe_Descr * get_tribe() const {return m_owner_tribe;}
-	const Tribe_Descr & tribe() const {return *m_owner_tribe;}
+	/// The tribe in which this worker is defined.
+	const Tribe_Descr & tribe() const;
+
 	std::string helptext() const {return m_helptext;}
 	Point get_ware_hotspot() const {return m_ware_hotspot;}
 

@@ -19,12 +19,12 @@
 
 #include "game_io/game_cmd_queue_data_packet.h"
 
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/queue_cmd_factory.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "upcast.h"
 
 namespace Widelands {

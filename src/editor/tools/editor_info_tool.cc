@@ -26,18 +26,17 @@
 #include "editor/editorinteractive.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t Editor_Info_Tool::handle_click_impl
-	(Widelands::Map            &         map,
-	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         parent,
-	Editor_Action_Args         &         /* args */)
-{
-	const Widelands::World & world = map.world();
+int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
+					    const Widelands::World& world,
+					    Widelands::Node_and_Triangle<> center,
+					    Editor_Interactive& parent,
+					    Editor_Action_Args& /* args */) {
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,
@@ -97,9 +96,8 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += std::string("\n") + _("Terrain:") + "\n";
 
 	const Widelands::Field         & tf  = map[center.triangle];
-	const Widelands::Terrain_Descr & ter = world.terrain_descr
-	                                       (center.triangle.t == Widelands::TCoords<>::D ?
-	                                        tf.terrain_d() : tf.terrain_r());
+	const Widelands::TerrainDescription& ter = world.terrain_descr(
+	   center.triangle.t == Widelands::TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf += std::string("• ") + (boost::format(_("Name: %s")) % ter.descname()).str() + "\n";
 	buf += std::string("• ") + (boost::format(_("Texture Number: %i")) % ter.get_texture()).str() + "\n";
@@ -133,12 +131,6 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += std::string(buf1) + "\n";
 	buf += std::string("• ") + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
 	buf += std::string("• ") + (boost::format(_("Descr: %s")) % map.get_description()).str() + "\n";
-
-	// *** World info
-	buf += std::string("\n") + _("World:") + "\n";
-	buf += std::string("• ") + (boost::format(_("Name: %s")) % world.get_name()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Author: %s")) % world.get_author()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Descr: %s")) % world.get_descr()).str() + "\n";
 
 	multiline_textarea->set_text(buf.c_str());
 

@@ -24,6 +24,8 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/routing_node.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/mapastar.h"
 #include "logic/path.h"

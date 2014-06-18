@@ -282,7 +282,7 @@ void Interactive_Player::think()
 void Interactive_Player::postload()
 {
 	Map & map = egbase().map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
 			(boost::bind(&Int_Player_overlay_callback_function, _1, boost::ref(*this)));
@@ -296,7 +296,7 @@ void Interactive_Player::postload()
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
 	delete m_fieldaction.window;
@@ -470,7 +470,7 @@ void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 		 	 % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
 	Map              &       map             = egbase().map();
-	Overlay_Manager  &       overlay_manager = map.overlay_manager();
+	OverlayManager  &       overlay_manager = map.overlay_manager();
 	Widelands::Extent  const extent          = map.extent         ();
 	for (Widelands::Y_Coordinate y = 0; y < extent.h; ++y)
 		for (Widelands::X_Coordinate x = 0; x < extent.w; ++x)

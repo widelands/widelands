@@ -2,14 +2,14 @@
 function automatic_forester()
 
 local region_to_forest = map:get_field(0,0):region(23)
-	while true do 
+	while true do
 		for x,field in next,region_to_forest,f do
-			if not _fully_flooded(map:get_field(field.x,field.y)) then 
+			if not _fully_flooded(map:get_field(field.x,field.y)) then
 				if map:get_field(field.x,field.y).immovable == 	nil then
 					if (field.x + field.y) % 2 == 0 then
-						map:place_immovable("tree1_t", map:get_field(field.x,field.y))
+						map:place_immovable("aspen_summer_sapling", map:get_field(field.x,field.y))
 					else
-						map:place_immovable("tree2_t", map:get_field(field.x,field.y))
+						map:place_immovable("oak_summer_sapling", map:get_field(field.x,field.y))
 					end
 					sleep(750)
 				end
@@ -109,7 +109,7 @@ function volcano_eruptions()
 			end
 		end
 		sleep(10*60*1000)
---		set back all eruptions		
+--		set back all eruptions
 		while fields_to_erupt.size > 0 do
 			local ff = fields_to_erupt:pop_at(1)
 			local tr_to_setback = Set:new{Triangle:new(ff._f,"d")}
@@ -163,7 +163,7 @@ function f_Field:new(f, ter_d, ter_r)
    local rv = {
       _f = f,
       _td = ter_d,
-      _tr = ter_r, 
+      _tr = ter_r,
       __hash = ("%i_%i_%s_%s"):format(f.x, f.y, ter_d, ter_r),
    }
    setmetatable(rv,self)
@@ -178,5 +178,3 @@ function joinTables(t1, t2)
 	end
 	return t1
 end
-
-

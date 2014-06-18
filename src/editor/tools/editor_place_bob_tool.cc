@@ -24,17 +24,17 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
+#include "logic/world/world.h"
 
 /**
  * Choses an object to place randomly from all enabled
  * and places this on the current field
 */
-int32_t Editor_Place_Bob_Tool::handle_click_impl
-	(Widelands::Map           &           map,
-	 Widelands::Node_and_Triangle<> const center,
-	 Editor_Interactive       &           parent,
-	 Editor_Action_Args       &           args)
-{
+int32_t Editor_Place_Bob_Tool::handle_click_impl(Widelands::Map& map,
+                                                 const Widelands::World& world,
+                                                 Widelands::Node_and_Triangle<> const center,
+                                                 Editor_Interactive& parent,
+                                                 Editor_Action_Args& args) {
 
 	if (get_nr_enabled() && args.obob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
@@ -44,7 +44,7 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 		do {
 			Widelands::Bob * const mbob = mr.location().field->get_first_bob();
 			args.obob_type.push_back((mbob ? &mbob->descr() : nullptr));
-			args.nbob_type.push_back(map.world().get_bob_descr(get_random_enabled()));
+			args.nbob_type.push_back(world.get_bob_descr(get_random_enabled()));
 		} while (mr.advance(map));
 	}
 
@@ -69,10 +69,12 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 		return 0;
 }
 
-int32_t Editor_Place_Bob_Tool::handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
-	Editor_Interactive & parent, Editor_Action_Args & args)
-{
+int32_t
+Editor_Place_Bob_Tool::handle_undo_impl(Widelands::Map& map,
+                                        const Widelands::World&,
+                                        Widelands::Node_and_Triangle<Widelands::Coords> center,
+                                        Editor_Interactive& parent,
+                                        Editor_Action_Args& args) {
 	if (not args.nbob_type.empty()) {
 		Widelands::Editor_Game_Base & egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr

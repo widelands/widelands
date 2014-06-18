@@ -19,6 +19,8 @@
 
 #include "logic/player.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
@@ -26,6 +28,8 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "i18n.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "log.h"
 #include "logic/building.h"
 #include "logic/checkstep.h"
@@ -42,8 +46,6 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"

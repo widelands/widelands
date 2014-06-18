@@ -20,6 +20,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -39,8 +40,9 @@
 * changed to load 8 bit bitmaps directly.
 */
 struct Texture {
-	Texture
-		(const std::string& fnametempl, uint32_t frametime, const SDL_PixelFormat&);
+	Texture(const std::vector<std::string>& texture_files,
+	        uint32_t frametime,
+	        const SDL_PixelFormat&);
 	~Texture();
 
 	const std::string & get_texture_image() const {return m_texture_image;}
@@ -52,8 +54,6 @@ struct Texture {
 	uint32_t get_minimap_color(char shade);
 
 	void animate(uint32_t time);
-	void reset_was_animated() {m_was_animated = false;}
-	bool was_animated() const {return m_was_animated;}
 	uint32_t getTexture() const
 		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
 
@@ -66,7 +66,6 @@ private:
 	std::string m_texture_image;
 	uint32_t    m_nrframes;
 	uint32_t    m_frametime;
-	bool        m_was_animated;
 	std::vector<std::unique_ptr<GLSurfaceTexture>> m_glFrames;
 };
 

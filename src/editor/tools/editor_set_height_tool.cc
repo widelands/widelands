@@ -26,12 +26,11 @@
 #include "logic/map.h"
 #include "logic/mapregion.h"
 
-
-int32_t Editor_Set_Height_Tool::handle_click_impl
-	(Widelands::Map           &           map,
-	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         /* parent */, Editor_Action_Args & args)
-{
+int32_t Editor_Set_Height_Tool::handle_click_impl(Widelands::Map& map,
+                                                  const Widelands::World& world,
+                                                  Widelands::Node_and_Triangle<> const center,
+                                                  Editor_Interactive& /* parent */,
+                                                  Editor_Action_Args& args) {
 	if (args.origHights.empty())
 	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
@@ -41,17 +40,18 @@ int32_t Editor_Set_Height_Tool::handle_click_impl
 		do args.origHights.push_back(mr.location().field->get_height());
 		while (mr.advance(map));
 	}
-	return
-	    map.set_height
-	    (Widelands::Area<Widelands::FCoords>
-	     (map.get_fcoords(center.node), args.sel_radius),
-	     args.m_interval);
+	return map.set_height(
+	   world,
+	   Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius),
+	   args.m_interval);
 }
 
-int32_t Editor_Set_Height_Tool::handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
-	Editor_Interactive & /* parent */, Editor_Action_Args & args)
-{
+int32_t
+Editor_Set_Height_Tool::handle_undo_impl(Widelands::Map& map,
+                                         const Widelands::World& world,
+                                         Widelands::Node_and_Triangle<Widelands::Coords> center,
+                                         Editor_Interactive& /* parent */,
+                                         Editor_Action_Args& args) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
 	Widelands::Area<Widelands::FCoords>
@@ -65,7 +65,7 @@ int32_t Editor_Set_Height_Tool::handle_undo_impl
 	} while (mr.advance(map));
 
 	map.recalc_for_field_area
-		(Widelands::Area<Widelands::FCoords>
+		(world, Widelands::Area<Widelands::FCoords>
 		(map.get_fcoords(center.node),
 		args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
 
@@ -78,6 +78,3 @@ Editor_Action_Args Editor_Set_Height_Tool::format_args_impl(Editor_Interactive &
 	a.m_interval = m_interval;
 	return a;
 }
-
-
-

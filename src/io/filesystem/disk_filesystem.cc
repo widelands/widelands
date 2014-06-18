@@ -348,14 +348,6 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	void * data = nullptr;
 
 	try {
-		//debug info
-		//printf("------------------------------------------\n");
-		//printf("RealFSImpl::Load():\n");
-		//printf("     fname       = %s\n", fname.c_str());
-		//printf("     m_directory = %s\n", m_directory.c_str());
-		//printf("     fullname    = %s\n", fullname.c_str());
-		//printf("------------------------------------------\n");
-
 		file = fopen(fullname.c_str(), "rb");
 		if (not file)
 			throw File_error("RealFSImpl::Load", fullname.c_str());
@@ -391,56 +383,14 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 
 		length = size;
 	} catch (...) {
-		if (file)
+		if (file) {
 			fclose(file);
+		}
 		free(data);
 		throw;
 	}
 
 	return data;
-}
-
-void * RealFSImpl::fastLoad
-	(const std::string & fname, size_t & length, bool & fast)
-{
-#ifdef _WIN32
-	fast = false;
-	return Load(fname, length);
-#else
-	const std::string fullname = FS_CanonicalizeName(fname);
-	int file = 0;
-	void * data = nullptr;
-
-#ifdef __APPLE__
-	file = open(fullname.c_str(), O_RDONLY);
-#elif defined (__FreeBSD__) || defined (__OpenBSD__)
-	file = open(fullname.c_str(), O_RDONLY);
-#else
-	file = open(fullname.c_str(), O_RDONLY|O_NOATIME);
-#endif
-	length = lseek(file, 0, SEEK_END);
-	lseek(file, 0, SEEK_SET);
-
-	data = mmap(nullptr, length, PROT_READ, MAP_PRIVATE, file, 0);
-
-	//if mmap doesn't work for some strange reason try the old way
-GCC_DIAG_OFF("-Wold-style-cast")
-	if (data == MAP_FAILED) {
-GCC_DIAG_ON("-Wold-style-cast")
-		return Load(fname, length);
-	}
-
-	fast = true;
-
-	assert(data);
-GCC_DIAG_OFF("-Wold-style-cast")
-	assert(data != MAP_FAILED);
-GCC_DIAG_ON("-Wold-style-cast")
-
-	close(file);
-
-	return data;
-#endif
 }
 
 /**

@@ -37,7 +37,7 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "upcast.h"
 #include "wexception.h"
@@ -184,6 +184,7 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
 	m_statistics_changed(true),
 	m_last_stat_percent (0),
+	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle")
 {
@@ -283,7 +284,9 @@ void ProductionSite::calc_statistics()
 	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk < 33)
+	if (percOk > (m_crude_percent / 10000) and percOk - (m_crude_percent / 10000) > 50)
+		color = UI_FONT_CLR_IDLE_HEX;
+	else if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
 	else if (percOk < 66)
 		color = UI_FONT_CLR_OK_HEX;
@@ -849,19 +852,31 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 
 	switch (result) {
 	case Failed:
+		//changed by TB below
+		m_statistics_changed = true;
+		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
+		m_statistics.push_back(false);
+		calc_statistics();
+		m_crude_percent = m_crude_percent * 8 / 10;
+		break;
+		//end of changed by TB
 	case Completed:
 		m_skipped_programs.erase(program_name);
 		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
-		m_statistics.push_back(result == Completed);
-		if (result == Completed) {
+		m_statistics.push_back(true);
+		//if (result == Completed) {
 			train_workers(game);
-			m_result_buffer[0] = '\0';
-		}
+			//m_result_buffer[0] = '\0';  //changed by TB
+		//}
+		m_crude_percent = m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
 	case Skipped:
 		m_skipped_programs[program_name] = game.get_gametime();
+		//changed by TB below
+		m_crude_percent = m_crude_percent * 98 / 100;
+		//end of changed by TB
 		break;
 	case None:
 		break;

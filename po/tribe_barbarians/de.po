@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-31 09:06+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-05-28 17:50+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-04-01 05:23+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:33+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -1009,7 +1009,7 @@ msgstr[1] "%i Stämme"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:37
 #: ../../tribes/barbarians/warmill/help.lua:42
 msgid "Cost cumulative:"
-msgstr "Zunehmende Kosten:"
+msgstr "Gesamtkosten:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:46
 #: ../../tribes/barbarians/bakery/help.lua:41
@@ -1141,7 +1141,7 @@ msgstr "Arbeiter"
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:42
 msgid "Crew required:"
-msgstr "Mannschaft benötigt:"
+msgstr "benötigte Arbeiter:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:56
 #: ../../tribes/barbarians/coalmine/help.lua:51
@@ -1345,7 +1345,7 @@ msgstr "Leistung:"
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr "jedes"
+msgstr "jeden Gegenstand"
 
 #: ../../tribes/barbarians/axfactory/help.lua:64
 msgid ""
@@ -2570,7 +2570,7 @@ msgstr "Rinderzucht"
 
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/reed_yard/help.lua:27
-msgid "Weaving-Mill"
+msgid "Weaving Mill"
 msgstr "Weberei"
 
 #: ../../tribes/barbarians/conf:193
@@ -3046,7 +3046,7 @@ msgstr "Brennt Kalk im Kalkofen."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr "‘Bilde mit Hilfe von Feuer und Wasser neue Steine.’"
+msgstr "‘Ich mache mit Hilfe von Feuer und Wasser neue Steine.’"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid ""
@@ -3061,7 +3061,7 @@ msgid ""
 "The Lime Kiln processes Raw Stones to make ‘Grout’, a substance that "
 "solidifies and so reinforces masonry."
 msgstr ""
-"Die Kalkbrennerei verarbeitet Felsen um daraus Mörtel zu machen, ein "
+"Die Kalkbrennerei verarbeitet Felsen, um daraus Mörtel zu machen; einen "
 "Werkstoff, um Mauerwerk zu härten."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:24
@@ -3222,7 +3222,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
-"It can make Bread Paddles, Felling axs, Fire Tongs, Fishing Rods, Hammers, "
+"It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
 "Sie stellt Brotschieber, Holzfälleräxte, Feuerzangen, Angeln, Hämmer, "

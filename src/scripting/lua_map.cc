@@ -32,6 +32,9 @@
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "scripting/c_utils.h"
 #include "scripting/eris/lua.hpp"
 #include "scripting/lua_game.h"
@@ -961,7 +964,7 @@ int L_Map::place_immovable(lua_State * const L) {
 			report_error(L, "Problem loading tribe <%s>. Maybe not existent?", from_where.c_str());
 		}
 	} else {
-		int32_t const imm_idx = egbase.map().world().get_immovable_index(objname);
+		int32_t const imm_idx = egbase.world().get_immovable_index(objname);
 		if (imm_idx < 0)
 			report_error(L, "Unknown immovable <%s>", objname);
 
@@ -999,7 +1002,8 @@ int L_Map::get_field(lua_State * L) {
 */
 // TODO: do we really want this function?
 int L_Map::recalculate(lua_State * L) {
-	get_egbase(L).map().recalc_whole_map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	egbase.map().recalc_whole_map(egbase.world());
 	return 0;
 }
 
@@ -3475,7 +3479,8 @@ int L_Field::set_height(lua_State * L) {
 	if (height > MAX_FIELD_HEIGHT)
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-	get_egbase(L).map().set_height(f, height);
+	Editor_Game_Base & egbase = get_egbase(L);
+	egbase.map().set_height(egbase.world(), f, height);
 
 	return 0;
 }
@@ -3538,14 +3543,14 @@ int L_Field::get_viewpoint_y(lua_State * L) {
 */
 int L_Field::get_resource(lua_State * L) {
 	lua_pushstring
-		(L, get_egbase(L).map().world().get_resource
+		(L, get_egbase(L).world().get_resource
 			 (fcoords(L).field->get_resources())->name().c_str());
 
 	return 1;
 }
 int L_Field::set_resource(lua_State * L) {
 	Field * field = fcoords(L).field;
-	int32_t res = get_egbase(L).map().world().get_resource
+	int32_t res = get_egbase(L).world().get_resource
 		(luaL_checkstring(L, -1));
 
 	if (res == -1)
@@ -3571,8 +3576,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 	Field * field = fcoords(L).field;
 	int32_t res = field->get_resources();
 	int32_t amount = luaL_checkint32(L, -1);
-	int32_t max_amount = get_egbase(L).map().world().get_resource
-		(res)->get_max_amount();
+	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
 
 	if (amount < 0 or amount > max_amount)
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
@@ -3628,44 +3632,44 @@ int L_Field::get_bobs(lua_State * L) {
 		valid name to these variables.
 */
 int L_Field::get_terr(lua_State * L) {
-	Terrain_Descr & td =
-		get_egbase(L).map().world().terrain_descr
+	TerrainDescription & td =
+		get_egbase(L).world().terrain_descr
 			(fcoords(L).field->terrain_r());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
-int L_Field::set_terr(lua_State * L) {
-	const char * name = luaL_checkstring(L, -1);
-	Map & map = get_egbase(L).map();
-	Terrain_Index td =
-		map.world().index_of_terrain(name);
+int L_Field::set_terr(lua_State* L) {
+	const char* name = luaL_checkstring(L, -1);
+	Editor_Game_Base& egbase = get_egbase(L);
+	const World& world = egbase.world();
+	const Terrain_Index td = world.terrains().get_index(name);
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	map.change_terrain(TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
-
+	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
 }
 
 int L_Field::get_terd(lua_State * L) {
-	Terrain_Descr & td =
-		get_egbase(L).map().world().terrain_descr
+	TerrainDescription & td =
+		get_egbase(L).world().terrain_descr
 			(fcoords(L).field->terrain_d());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
 int L_Field::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
-	Map & map = get_egbase(L).map();
-	Terrain_Index td =
-		map.world().index_of_terrain(name);
+	Editor_Game_Base& egbase = get_egbase(L);
+	const World& world = egbase.world();
+	const Terrain_Index td =
+		world.terrains().get_index(name);
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	map.change_terrain
-		(TCoords<FCoords> (fcoords(L), TCoords<FCoords>::D), td);
+	egbase.map().change_terrain
+		(world, TCoords<FCoords> (fcoords(L), TCoords<FCoords>::D), td);
 
 	lua_pushstring(L, name);
 	return 1;

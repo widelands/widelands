@@ -19,6 +19,8 @@
 
 #include "wui/interactive_base.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
@@ -90,8 +92,8 @@ Interactive_Base::Interactive_Base
 	m_lastframe                   (WLApplication::get()->get_time()),
 	m_frametime                   (0),
 	m_avg_usframetime             (0),
-	m_jobid                       (Overlay_Manager::Job_Id::Null()),
-	m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
+	m_jobid                       (0),
+	m_road_buildhelp_overlay_jobid(0),
 	m_buildroad                   (nullptr),
 	m_road_build_player           (0),
 	// Initialize chatoveraly before the toolbar so it is below
@@ -164,12 +166,12 @@ UniqueWindowHandler& Interactive_Base::unique_windows() {
 void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 {
 	Map & map = egbase().map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 
 	// Remove old sel pointer
 	if (m_sel.jobid)
 		overlay_manager.remove_overlay(m_sel.jobid);
-	const Overlay_Manager::Job_Id jobid =
+	const OverlayManager::JobId jobid =
 		m_sel.jobid = overlay_manager.get_a_job_id();
 
 	m_sel.pos = center;
@@ -252,21 +254,21 @@ void Interactive_Base::show_buildhelp(bool t) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated
-Overlay_Manager::Job_Id Interactive_Base::show_work_area
+OverlayManager::JobId Interactive_Base::show_work_area
 	(const Workarea_Info & workarea_info, Widelands::Coords coords)
 {
 	uint8_t workareas_nrs = workarea_info.size();
 	Workarea_Info::size_type wa_index;
 	switch (workareas_nrs) {
-		case 0: return Overlay_Manager::Job_Id::Null(); break; // no workarea
+		case 0: return 0; break; // no workarea
 		case 1: wa_index = 5; break;
 		case 2: wa_index = 3; break;
 		case 3: wa_index = 0; break;
 		default: assert(false); break;
 	}
 	Widelands::Map & map = m_egbase.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
-	Overlay_Manager::Job_Id job_id = overlay_manager.get_a_job_id();
+	OverlayManager & overlay_manager = map.overlay_manager();
+	OverlayManager::JobId job_id = overlay_manager.get_a_job_id();
 
 	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
 
@@ -288,20 +290,11 @@ Overlay_Manager::Job_Id Interactive_Base::show_work_area
 		hollow_area.hole_radius = hollow_area.radius;
 	}
 	return job_id;
-#if 0
-		//  This is debug output.
-		//  Improvement suggestion: add to sign explanation window instead.
-		container_iterate_const(Workarea_Info, workarea_info, i) {
-			log("Radius: %i\n", i.current->first);
-			container_iterate_const(std::set<std::string>, i.current->second, j)
-				log("        %s\n", j.current->c_str());
-		}
-#endif
 }
 
-void Interactive_Base::hide_work_area(Overlay_Manager::Job_Id job_id) {
+void Interactive_Base::hide_work_area(OverlayManager::JobId job_id) {
 	Widelands::Map & map = m_egbase.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.remove_overlay(job_id);
 }
 
@@ -795,7 +788,7 @@ void Interactive_Base::roadb_add_overlay()
 	//log("Add overlay\n");
 
 	Map & map = egbase().map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 
 	// preview of the road
 	assert(not m_jobid);
@@ -892,15 +885,15 @@ void Interactive_Base::roadb_remove_overlay()
 	//log("Remove overlay\n");
 
 	//  preview of the road
-	Overlay_Manager & overlay_manager = egbase().map().overlay_manager();
+	OverlayManager & overlay_manager = egbase().map().overlay_manager();
 	if (m_jobid)
 		overlay_manager.remove_road_overlay(m_jobid);
-	m_jobid = Overlay_Manager::Job_Id::Null();
+	m_jobid = 0;
 
 	// build hints
 	if (m_road_buildhelp_overlay_jobid)
 		overlay_manager.remove_overlay(m_road_buildhelp_overlay_jobid);
-	m_road_buildhelp_overlay_jobid = Overlay_Manager::Job_Id::Null();
+	m_road_buildhelp_overlay_jobid = 0;
 }
 
 

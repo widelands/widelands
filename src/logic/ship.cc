@@ -19,12 +19,16 @@
 
 #include "logic/ship.h"
 
+#include <memory>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/constructionsite.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
@@ -36,6 +40,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
+#include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "ref_cast.h"
@@ -47,8 +52,12 @@ Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
-: BobDescr(given_name, gdescname, directory, prof, global_s, &gtribe)
+: BobDescr(given_name, gdescname, &gtribe)
 {
+	{ //  global options
+		Section & idle_s = prof.get_safe_section("idle");
+		add_animation("idle", g_gr->animations().load(directory, idle_s));
+	}
 	m_sail_anims.parse(*this, directory, prof, "sail");
 
 	Section * sinking_s = prof.get_section("sinking");
@@ -351,7 +360,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// Check whether the maximum theoretical possible NodeCap of the field is of the size big
 				// and whether it can theoretically be a port space
 				if
-					((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
+					((map.get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
 					 ||
 					 map.find_portdock(fc).empty())
 				{
@@ -961,7 +970,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
 				uint8_t numofports = fr.Unsigned8();
 				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(fr.Coords32());
+					m_expedition->seen_port_buildspaces->push_back(ReadCoords32(&fr));
 				// Swimability of the directions
 				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
 					m_expedition->swimable[i] = (fr.Unsigned8() == 1);
@@ -970,7 +979,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				// current direction
 				m_expedition->direction = fr.Unsigned8();
 				// Start coordinates of an island exploration
-				m_expedition->exploration_start = fr.Coords32();
+				m_expedition->exploration_start = ReadCoords32(&fr);
 				// Whether the exploration is done clockwise or counter clockwise
 				m_expedition->clockwise = fr.Unsigned8() == 1;
 			}
@@ -1089,7 +1098,7 @@ void Ship::save
 			 it != m_expedition->seen_port_buildspaces->end();
 			 ++it)
 		{
-			fw.Coords32(*it);
+			WriteCoords32(&fw, *it);
 		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
@@ -1099,7 +1108,7 @@ void Ship::save
 		// current direction
 		fw.Unsigned8(m_expedition->direction);
 		// Start coordinates of an island exploration
-		fw.Coords32(m_expedition->exploration_start);
+		WriteCoords32(&fw, m_expedition->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
 		fw.Unsigned8(m_expedition->clockwise ? 1 : 0);
 	}

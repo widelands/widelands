@@ -32,7 +32,7 @@
 #include "ui_basic/textarea.h"
 
 class Fullscreen_Menu_Options;
-struct Section;
+class Section;
 
 class Options_Ctrl {
 public:

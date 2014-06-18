@@ -20,6 +20,7 @@
 #include "ui_fsmenu/editor_mapselect.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -65,11 +66,6 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 		 get_w() * 7 / 10, get_h() * 41 / 100,
 		 _("Size:"), UI::Align_Right),
 	m_size (this, get_w() * 71 / 100, get_h() * 41 / 100, std::string()),
-	m_label_world
-		(this,
-		 get_w() * 7 / 10, get_h() * 89 / 200,
-		 _("World:"), UI::Align_Right),
-	m_world (this, get_w() * 71 / 100, get_h() * 89 / 200, std::string()),
 	m_label_nr_players
 		(this,
 		 get_w() * 7 / 10, get_h() * 12 / 25,
@@ -117,8 +113,6 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_author          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_size      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_size            .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_world     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_world           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_nr_players.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_nr_players      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_descr     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -174,20 +168,12 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 			ml->preload_map(true); //  This has worked before, no problem.
 		}
 
-		// get translated worldsname
-		std::string world(map.get_world_name());
-		std::string worldpath("worlds/" + world);
-		Profile prof((worldpath + "/conf").c_str(), nullptr, "world_" + world);
-		Section & global = prof.get_safe_section("world");
-		world = global.get_safe_string("name");
-
 		// Translate the map data
 		i18n::Textdomain td("maps");
 		m_name  .set_text(_(map.get_name()));
 		m_author.set_text(map.get_author());
 		m_descr .set_text
 			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
-		m_world .set_text(world);
 
 		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());
@@ -199,7 +185,6 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 		m_name      .set_text(std::string());
 		m_author    .set_text(std::string());
 		m_descr     .set_text(std::string());
-		m_world     .set_text(std::string());
 		m_nr_players.set_text(std::string());
 		m_size      .set_text(std::string());
 	}

@@ -26,7 +26,6 @@
 #include "TribeBasicInfo.h"
 #include "description_maintainer.h"
 #include "graphic/animation.h"
-#include "io/filewrite.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/immovable.h"
@@ -36,14 +35,14 @@
 
 namespace Widelands {
 
+class Editor_Game_Base;
+class ResourceDescription;
 class Warehouse;
 class Worker_Descr;
+class World;
 struct Building_Descr;
-class Editor_Game_Base;
 struct Event;
 struct WareDescr;
-struct Resource_Descr;
-struct World;
 
 /*
 Tribes
@@ -54,11 +53,6 @@ buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
 struct Tribe_Descr : boost::noncopyable {
-	enum {
-		OK = 0,
-		ERR_WRONGVERSION
-	};
-
 	Tribe_Descr(const std::string & name, Editor_Game_Base &);
 
 	//  Static function to check for tribes.
@@ -198,7 +192,7 @@ struct Tribe_Descr : boost::noncopyable {
 	uint32_t get_bob_vision_range() const {return m_bob_vision_range;}
 
 	uint32_t get_resource_indicator
-		(const Resource_Descr * const res, const uint32_t amount) const;
+		(const ResourceDescription * const res, const uint32_t amount) const;
 
 	void postload(Editor_Game_Base &);
 	void load_graphics();

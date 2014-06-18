@@ -46,8 +46,8 @@ class Request;
  * road.
  */
 struct Road : public PlayerImmovable {
-	friend struct Map_Roaddata_Data_Packet; // For saving
-	friend struct Map_Road_Data_Packet; // For init()
+	friend class Map_Roaddata_Data_Packet; // For saving
+	friend class Map_Road_Data_Packet; // For init()
 
 	static bool IsRoadDescr(Map_Object_Descr const *);
 

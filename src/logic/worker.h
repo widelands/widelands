@@ -89,7 +89,6 @@ public:
 	const Image* icon() const {return descr().icon();}
 	Ware_Index becomes() const {return descr().becomes();}
 	Ware_Index worker_index() const {return descr().worker_index();}
-	const Tribe_Descr * get_tribe() const {return descr().get_tribe();}
 	const Tribe_Descr & tribe() const {return descr().tribe();}
 	const std::string & descname() const {return descr().descname();}
 

@@ -19,6 +19,8 @@
 
 #include "ui_basic/helpwindow.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "constants.h"

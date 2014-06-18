@@ -21,36 +21,35 @@
 #define MAP_H
 
 #include <cstring>
+#include <map>
 #include <memory>
 #include <set>
 #include <string>
 #include <vector>
 
 #include "economy/itransport_cost_calculator.h"
-#include "i18n.h"
 #include "interval.h"
 #include "logic/field.h"
 #include "logic/map_revision.h"
 #include "logic/notification.h"
+#include "logic/objective.h"
+#include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "logic/world.h"
 #include "random.h"
 
 class FileSystem;
 class Image;
-struct Overlay_Manager;
+struct OverlayManager;
 struct S2_Map_Loader;
 
 namespace Widelands {
 
-class Map;
 class Map_Loader;
 class Objective;
-class Player;
+class World;
 struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
-struct World;
 
 #define WLMF_SUFFIX ".wmf"
 #define S2MF_SUFFIX ".swd"
@@ -122,17 +121,16 @@ class Map :
 	public NoteSender<NoteFieldTransformed>
 {
 public:
+	friend class Editor;
 	friend class Editor_Game_Base;
 	friend class Map_Loader;
+	friend class Map_Version_Data_Packet;
 	friend struct ::S2_Map_Loader;
-	friend struct WL_Map_Loader;
-	friend struct Map_Elemental_Data_Packet;
-	friend struct Map_Extradata_Data_Packet;
-	friend struct Map_Version_Data_Packet;
-	friend class Editor;
 	friend struct Main_Menu_New_Map;
-	friend struct MapGenerator;
 	friend struct MapAStarBase;
+	friend struct MapGenerator;
+	friend struct Map_Elemental_Data_Packet;
+	friend struct WL_Map_Loader;
 
 	typedef std::set<Coords, Coords::ordering_functor> PortSpacesSet;
 	typedef std::map<std::string, std::unique_ptr<Objective>> Objectives;
@@ -154,27 +152,27 @@ public:
 	Map ();
 	virtual ~Map();
 
-	Overlay_Manager * get_overlay_manager()       {return m_overlay_manager.get();}
-	Overlay_Manager * get_overlay_manager() const {return m_overlay_manager.get();}
-	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
-	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
+	OverlayManager * get_overlay_manager()       {return m_overlay_manager.get();}
+	OverlayManager * get_overlay_manager() const {return m_overlay_manager.get();}
+	const OverlayManager & overlay_manager() const {return *m_overlay_manager;}
+	OverlayManager       & overlay_manager()       {return *m_overlay_manager;}
 
 	/// Returns the correct initialized loader for the given mapfile
 	std::unique_ptr<Map_Loader> get_correct_loader(const std::string& filename);
 
 	void cleanup();
 
-	void create_empty_map // for editor
-		(uint32_t w = 64, uint32_t h = 64,
-		 const std::string & worldname   =   "greenland",
-		 char        const * name        = _("No Name"),
-		 char        const * author      = _("Unknown"),
-		 char        const * description = _("no description defined"));
+	void create_empty_map  // for editor
+	   (const World& world,
+	    uint32_t w = 64,
+	    uint32_t h = 64,
+	    char const* name = _("No Name"),
+	    char const* author = _("Unknown"),
+	    char const* description = _("no description defined"));
 
-	void load_graphics();
-	void recalc_whole_map();
-	virtual void recalc_for_field_area(Area<FCoords>);
-	void recalc_default_resources();
+	void recalc_whole_map(const World& world);
+	virtual void recalc_for_field_area(const World& world, Area<FCoords>);
+	void recalc_default_resources(const World& world);
 
 	void set_nrplayers(Player_Number);
 
@@ -186,7 +184,6 @@ public:
 
 	void set_filename   (char const *);
 	void set_author     (char const *);
-	void set_world_name (char const *);
 	void set_name       (char const *);
 	void set_description(char const *);
 	void set_hint       (std::string);
@@ -204,7 +201,6 @@ public:
 	const char * get_name()        const {return m_name;}
 	const char * get_description() const {return m_description;}
 	std::string  get_hint()        const {return m_hint;}
-	const char * get_world_name()  const {return m_worldname;}
 	const std::string & get_background() const {return m_background;}
 	typedef std::set<std::string> Tags;
 	const Tags & get_tags() const {return m_tags;}
@@ -215,8 +211,6 @@ public:
 	Extent extent() const {return Extent(m_width, m_height);}
 	X_Coordinate get_width   () const {return m_width;}
 	Y_Coordinate get_height  () const {return m_height;}
-	World & world() const {return *m_world;}
-	World * get_world() const {return m_world;}
 
 	//  The next few functions are only valid when the map is loaded as a
 	//  scenario.
@@ -230,7 +224,7 @@ public:
 	void set_scenario_player_closeable(Player_Number, bool);
 
 	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
-	NodeCaps get_max_nodecaps(FCoords &);
+	NodeCaps get_max_nodecaps(const World& world, FCoords &);
 
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
@@ -337,10 +331,10 @@ public:
 	/// value, because it adjusts the heights of surrounding nodes in each call,
 	/// so it will be terribly slow. Use set_height for Area for that purpose
 	/// instead.
-	uint32_t set_height(FCoords, Field::Height);
+	uint32_t set_height(const World& world, FCoords, Field::Height);
 
 	/// Changes the height of the nodes in an Area by a difference.
-	uint32_t change_height(Area<FCoords>, int16_t difference);
+	uint32_t change_height(const World& world, Area<FCoords>, int16_t difference);
 
 	/**
 	 * Ensures that the height of each node within radius from fc is in
@@ -355,10 +349,10 @@ public:
 	 * the area, because this adjusts the surrounding nodes only once, after all
 	 * nodes in the area had their new height set.
 	 */
-	uint32_t set_height(Area<FCoords>, interval<Field::Height> height_interval);
+	uint32_t set_height(const World& world, Area<FCoords>, interval<Field::Height> height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
-	int32_t change_terrain(TCoords<FCoords>, Terrain_Index);
+	int32_t change_terrain(const World& world, TCoords<FCoords>, Terrain_Index);
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {
@@ -384,7 +378,6 @@ protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);
 
 private:
-	void load_world();
 	void recalc_border(FCoords);
 
 	/// # of players this map supports (!= Game's number of players!)
@@ -398,15 +391,13 @@ private:
 	char        m_name         [61];
 	char        m_description[1024];
 	std::string m_hint;
-	char        m_worldname  [1024];
 	std::string m_background;
 	Tags        m_tags;
-	World     * m_world;           //  world type
 	std::vector<Coords> m_starting_pos;    //  players' starting positions
 
 	std::unique_ptr<Field[]> m_fields;
 
-	std::unique_ptr<Overlay_Manager> m_overlay_manager;
+	std::unique_ptr<OverlayManager> m_overlay_manager;
 
 	std::unique_ptr<PathfieldManager> m_pathfieldmgr;
 	std::vector<std::string> m_scenario_tribes;
@@ -421,13 +412,16 @@ private:
 	Objectives objectives_;
 
 	void recalc_brightness(FCoords);
-	void recalc_nodecaps_pass1(FCoords);
-	void recalc_nodecaps_pass2(const FCoords & f);
-	NodeCaps _calc_nodecaps_pass1(FCoords, bool consider_mobs = true);
-	NodeCaps _calc_nodecaps_pass2(FCoords, bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
+	void recalc_nodecaps_pass1(const World& world, FCoords);
+	void recalc_nodecaps_pass2(const World& world, const FCoords & f);
+	NodeCaps _calc_nodecaps_pass1(const World& world, FCoords, bool consider_mobs = true);
+	NodeCaps _calc_nodecaps_pass2(const World& world,
+	                              FCoords,
+	                              bool consider_mobs = true,
+	                              NodeCaps initcaps = CAPS_NONE);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
 	int calc_buildsize
-		(const Widelands::FCoords& f, bool avoidnature, bool * ismine = nullptr,
+		(const World& world, const FCoords& f, bool avoidnature, bool * ismine = nullptr,
 		 bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
 	bool is_cycle_connected
 		(const FCoords & start, uint32_t length, const WalkingDir * dirs);

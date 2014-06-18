@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-04-14 15:06+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-05-03 20:26+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-15 05:35+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:32+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -329,6 +329,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use their "
 "flour for making bread."
 msgstr ""
+"Svartrot er en spesiell type røtter dyrket på svartrotgårdene og malt til "
+"mel i møllene. Atlanterne liker den sterke smaken og brøker melet i "
+"brødbaking."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:22
 msgid "Plant blackroot"
@@ -356,6 +359,9 @@ msgid ""
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
 msgstr ""
+"Det velsmakende brødet lages i bakerier av maismel, svartrotmel og vann. Det "
+"brukes som enkel mat for gruvearbeidere, speidere og soldater i "
+"treningsleire (labyrint og fangekjeller)."
 
 #: ../../tribes/atlanteans/bread_paddle/conf:1
 msgid ""
@@ -389,6 +395,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of logs by a "
 "charcoal burner."
 msgstr ""
+"Den atlantiske ilden i smelteverket, rustningssmiene og våpensmiene mates "
+"med kull. Kullet blir gravd ut i kullgruver eller produsert av tømmerstokker "
+"hos kullbrenneren."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
@@ -826,7 +835,7 @@ msgstr "Vaktpost"
 
 #: ../../tribes/atlanteans/conf:152
 msgid "Barracks"
-msgstr "Brakke"
+msgstr "Kaserne"
 
 #: ../../tribes/atlanteans/conf:154
 #: ../../tribes/atlanteans/conf:201
@@ -939,7 +948,7 @@ msgid "Spider Farm"
 msgstr "Edderkoppgård"
 
 #: ../../tribes/atlanteans/conf:186
-msgid "Weaving-Mill"
+msgid "Weaving Mill"
 msgstr "Veveri"
 
 #: ../../tribes/atlanteans/conf:187
@@ -1081,6 +1090,8 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Atlanterne spiser for det meste fisk. Den må være røyket i et røkeri før den "
+"kan leveres til gruver, treningsleire og speidere."
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -1108,10 +1119,12 @@ msgid ""
 "in the smelting works. Gold is used by the armor smithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"Gull er et av de mest verdifulle metallene. Det blir produsert av gullmalm i "
+"smelteverket. Gull brukes i rustningssmien, våpensmien og gullveveriet."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
-"Golden tabards are produced in Atlantean weaving-mills out of gold yarn. "
+"Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
@@ -1122,11 +1135,14 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Gullmalm utvinnes i en gullgruve. Så blir det smeltet i smelteverket til "
+"gull, som brukes som et verdifullt byggemateriale samt til å produsere våpen "
+"og rustninger."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
-"golden tabard in the weaving-mill."
+"golden tabard in the weaving mill."
 msgstr ""
 
 #: ../../tribes/atlanteans/guardhall/conf:6
@@ -1143,6 +1159,9 @@ msgid ""
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"Hammeren er et viktig verktøy. Den brukes av geologen, byggeren, rustnings- "
+"og våpensmeden. Sørg for at du alltid har noen i reserve! Den blir laget av "
+"verktøysmeden."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1166,6 +1185,8 @@ msgstr ""
 msgid ""
 "Horses help to carry items along busy roads. They are reared in a horse farm."
 msgstr ""
+"Hester hjelper til å frakte varer langs mye brukte veier. De blir alet opp "
+"på en hestegård."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1187,12 +1208,16 @@ msgid ""
 "Iron is made out of iron ore in the smelting works. It is used in the "
 "toolsmithy, armor smithy and weapon smithy."
 msgstr ""
+"Jern blir laget av jernmalm på smelteverket. Det brukes i verktøysmier, "
+"rustningssmier og våpensmier."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Jernmalm utvinnes i jerngruvene. Det blir smeltet på et smelteverk for å "
+"hente ut jernet."
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense from level 0 to level 1"
@@ -1227,6 +1252,9 @@ msgid ""
 "Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
 "smokery also need logs for their work."
 msgstr ""
+"Tømmerstokker er grunnlaget for planker, som er brukt i nesten hver "
+"atlantiske bygning. I tillegg trenger sagbruket, kullbrenneren, verktøysmien "
+"og røkeriet også tømmerstokker."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1287,6 +1315,8 @@ msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
+"Gjennomsiktig kvarts brukes til å bygge enkelte eksklusive bygninger. "
+"Utvinnes i krystallgruvene."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -1399,7 +1429,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
-"Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
+"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
@@ -1407,7 +1437,7 @@ msgstr ""
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving-mill."
+"processed into spidercloth in a weaving mill."
 msgstr ""
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
@@ -1436,7 +1466,7 @@ msgstr ""
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
-"Tabards are produced in the weaving-mill."
+"Tabards are produced in the weaving mill."
 msgstr ""
 
 #: ../../tribes/atlanteans/toolsmith/conf:1

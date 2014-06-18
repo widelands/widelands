@@ -20,6 +20,8 @@
 #ifndef UI_EDITBOX_H
 #define UI_EDITBOX_H
 
+#include <memory>
+
 #include <SDL_keyboard.h>
 #include <boost/signals2.hpp>
 

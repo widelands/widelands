@@ -71,9 +71,9 @@ public:
 	friend class Editor_Game_Base;
 	friend struct Game_Player_Info_Data_Packet;
 	friend struct Game_Player_Economies_Data_Packet;
-	friend struct Map_Buildingdata_Data_Packet;
-	friend struct Map_Players_View_Data_Packet;
-	friend struct Map_Exploration_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
+	friend class Map_Players_View_Data_Packet;
+	friend class Map_Exploration_Data_Packet;
 
 	Player
 		(Editor_Game_Base &,
@@ -155,11 +155,7 @@ public:
 		{
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
-			//  darkening that actually hides the ground from the user). This is
-			//  important for worlds where the number of terrain types is not
-			//  maximal (16), so that an uninitialized terrain index could cause a
-			//  not found error in
-			//  DescriptionMaintainer<Terrain_Descr>::get(Terrain_Index).
+			//  darkening that actually hides the ground from the user).
 			terrains.d = terrains.r = 0;
 
 			time_triangle_last_surveyed[0] = Never();

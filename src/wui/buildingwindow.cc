@@ -58,7 +58,7 @@ Building_Window::Building_Window
 		 b.descname()),
 	m_registry(registry),
 	m_building       (b),
-	m_workarea_job_id(Overlay_Manager::Job_Id::Null()),
+	m_workarea_job_id(0),
 	m_avoid_fastclick(false)
 {
 	delete m_registry;
@@ -487,7 +487,7 @@ void Building_Window::hide_workarea()
 {
 	if (m_workarea_job_id) {
 		igbase().hide_work_area(m_workarea_job_id);
-		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
+		m_workarea_job_id = 0;
 
 		configure_workarea_button();
 	}

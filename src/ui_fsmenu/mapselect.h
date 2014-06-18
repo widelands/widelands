@@ -51,7 +51,6 @@ struct MapData {
 	std::string author;
 	std::string description;
 	std::string hint;
-	std::string world;
 	Tags tags;
 
 	uint32_t width;
@@ -92,7 +91,6 @@ private:
 	UI::Textarea m_label_name,       m_name;
 	UI::Textarea m_label_author,     m_author;
 	UI::Textarea m_label_size,       m_size;
-	UI::Textarea m_label_world,      m_world;
 	UI::Textarea m_label_nr_players, m_nr_players;
 	UI::Textarea m_label_descr;
 	UI::Multiline_Textarea m_descr;

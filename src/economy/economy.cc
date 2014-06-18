@@ -19,6 +19,8 @@
 
 #include "economy/economy.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 
 #include "economy/cmd_call_economy_balance.h"
@@ -50,7 +52,7 @@ Economy::Economy(Player & player) :
 
 	player.add_economy(*this);
 
-	m_ware_target_quantities   = new Target_Quantity[nr_wares  ];
+	m_ware_target_quantities   = new Target_Quantity[nr_wares];
 	for (Ware_Index i = 0; i < nr_wares; ++i) {
 		Target_Quantity tq;
 		tq.permanent =
@@ -650,8 +652,7 @@ Supply * Economy::_find_best_supply
 			 	 best_cost))
 		{
 			if (!best_route)
-				throw wexception
-					("Economy::find_best_supply: COULD NOT FIND A ROUTE!");
+			log ("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
 			continue;
 		}
 

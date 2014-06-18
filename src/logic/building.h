@@ -27,7 +27,6 @@
 #include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
-#include "io/filewrite.h"
 #include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
@@ -39,7 +38,7 @@
 namespace UI {class Window;}
 struct BuildingHints;
 class Interactive_GameBase;
-struct Profile;
+class Profile;
 class Image;
 
 namespace Widelands {
@@ -166,7 +165,7 @@ private:
 
 class Building : public PlayerImmovable {
 	friend struct Building_Descr;
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Building_Descr)
 

@@ -32,7 +32,6 @@ class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 class Player;
 class Request;
-class WaresQueue;
 class Worker;
 
 /**

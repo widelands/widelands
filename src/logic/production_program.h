@@ -26,17 +26,17 @@
 #include <string>
 #include <vector>
 
+#include <boost/noncopyable.hpp>
 #include <stdint.h>
 
 #include "container_iterate.h"
-#include "io/filewrite.h"
 #include "log.h"
 #include "logic/bill_of_materials.h"
 #include "logic/program_result.h"
 #include "logic/tattribute.h"
 #include "logic/widelands.h"
 
-struct Profile;
+class Profile;
 
 namespace Widelands {
 
@@ -46,7 +46,7 @@ struct ProductionSite_Descr;
 class ProductionSite;
 struct Tribe_Descr;
 class Worker;
-struct World;
+class World;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {

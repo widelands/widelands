@@ -25,9 +25,10 @@
 #include "logic/building.h"
 #include "logic/soldiercontrol.h"
 #include "logic/wareworker.h"
+#include "wexception.h"
 
 class Interactive_Player;
-struct Profile;
+class Profile;
 
 namespace Widelands {
 
@@ -70,7 +71,7 @@ private:
 
 class Warehouse : public Building, public Attackable, public SoldierControl {
 	friend class PortDock;
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
 

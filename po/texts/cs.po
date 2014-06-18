@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-13 01:31+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-05-29 20:55+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:31+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:31+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -42,6 +42,11 @@ msgid ""
 "started\n"
 "through playable tutorials."
 msgstr ""
+"Widelands je real-time strategie šířená zdarma s otevřeným zdrojovým kódem,\n"
+"obsahuje kampaň pro jednoho hráče a hru více hráčů. Hra je inspirována "
+"Settlers II\n"
+"ale je rozmanitější a jde více do hloubky. I přes to je snadné začít hrát\n"
+"díky hratelným tutoriálům."
 
 #: ../../txts/README.lua:25
 msgid ""
@@ -61,6 +66,8 @@ msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
 msgstr ""
+"Widelands je licencováno pod GNU General Public License (GPL). Pro více\n"
+"informací se podívejte do souboru \"COPYING\"."
 
 #: ../../txts/README.lua:38
 msgid "Status"
@@ -98,12 +105,18 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Pokud držíte CTRL při stavbě cest, vlajky budou umístěny automaticky.\n"
+"Pokud držíte CTRL při rušení cest, všechny vlajky až k první křižovatce "
+"budou\n"
+"odstraněny."
 
 #: ../../txts/README.lua:56
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr ""
+"Můžeš přeskočit potvrzovací okno nevratné operace, když držíš CTRL\n"
+"a klikneš na tlačítko dané operace."
 
 #: ../../txts/README.lua:59
 msgid "Keyboard shortcuts (in-game)"
@@ -111,11 +124,11 @@ msgstr "Klávesové zkratky (během hry)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "PAGEUP: zvýší rychlost hry"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "PAGEDOWN: sníží rychlost hry"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -124,10 +137,10 @@ msgstr "PAUSE: pozastaví hru"
 #: ../../txts/README.lua:64
 #: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "SPACE: zobrazí/skryje místa pro stavbu budov"
 
 #: ../../txts/README.lua:65
-#: ../../txts/editor_readme:31
+#: ../../txts/editor_readme:29
 msgid "M: toggles minimap"
 msgstr "M: přepíná náhledovou mapku"
 
@@ -223,13 +236,15 @@ msgstr "Prosím specifikuj dostatek souvisejících informací. Zejména:"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Podrobný postup jak chybu vyvolat, je-li to možné."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
+"- Co jste očekávali, že se stane, když jste učinili tyto kroky a co se "
+"doopravdy stalo."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -320,61 +335,65 @@ msgid "Elders"
 msgstr "Rada starších"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:354
+#: ../../txts/developers:359
 msgid "Graphics"
 msgstr "Grafika"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:347
+#: ../../txts/developers:352
 msgid "Homepage"
 msgstr "Domovská stránka"
 
 #: ../../txts/developers:28
-#: ../../txts/developers:361
+#: ../../txts/developers:366
 msgid "Sound"
 msgstr "Zvuk"
 
-#: ../../txts/developers:34
+#: ../../txts/developers:33
+msgid "Tongues"
+msgstr ""
+
+#: ../../txts/developers:38
 msgid "Coders"
 msgstr "Programátoři"
 
-#: ../../txts/developers:86
+#: ../../txts/developers:91
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:116
+#: ../../txts/developers:121
 msgid "Musicians"
 msgstr "Hudebníci"
 
-#: ../../txts/developers:128
+#: ../../txts/developers:133
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
-#: ../../txts/developers:138
+#: ../../txts/developers:143
 msgid "Maps and Missions"
 msgstr "Mapy a mise"
 
-#: ../../txts/developers:158
+#: ../../txts/developers:163
 msgid "Campaign Story"
 msgstr "Kampaně"
 
-#: ../../txts/developers:161
+#: ../../txts/developers:166
 msgid "Barbarian"
 msgstr "Barbaři"
 
-#: ../../txts/developers:167
+#: ../../txts/developers:172
 msgid "Empire"
 msgstr "Císařství"
 
-#: ../../txts/developers:171
+#: ../../txts/developers:176
 msgid "Atlantean"
 msgstr "Atleanťan"
 
-#: ../../txts/developers:178
+#: ../../txts/developers:183
 msgid "Translators"
 msgstr "Překladatelé"
 
-#: ../../txts/developers:181
+#: ../../txts/developers:186
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -382,7 +401,7 @@ msgstr ""
 "POZNÁMKA: v tomto seznamu jsou lidé, kteří překládali Widelands před "
 "přechodem na launchpad.net. "
 
-#: ../../txts/developers:182
+#: ../../txts/developers:187
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -390,99 +409,99 @@ msgstr ""
 "Seznam lidí, kteří pomohli s překladem Widelands přes launchpad.net, je na "
 "https://translations.launchpad.net/widelands"
 
-#: ../../txts/developers:186
+#: ../../txts/developers:191
 msgid "Czech"
 msgstr "Čeština"
 
-#: ../../txts/developers:193
+#: ../../txts/developers:198
 msgid "Dansk"
 msgstr "Dánština"
 
-#: ../../txts/developers:199
+#: ../../txts/developers:204
 msgid "Dutch"
 msgstr "Holandština"
 
-#: ../../txts/developers:206
+#: ../../txts/developers:211
 msgid "Finnish"
 msgstr "Finština"
 
-#: ../../txts/developers:212
+#: ../../txts/developers:217
 msgid "French"
 msgstr "Francouzština"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:224
 msgid "Galician"
 msgstr "Galicijština"
 
-#: ../../txts/developers:224
+#: ../../txts/developers:229
 msgid "German"
 msgstr "Němčina"
 
-#: ../../txts/developers:236
+#: ../../txts/developers:241
 msgid "Hebrew"
 msgstr "Hebrejština"
 
-#: ../../txts/developers:241
+#: ../../txts/developers:246
 msgid "Hungarian"
 msgstr "Maďarština"
 
-#: ../../txts/developers:246
+#: ../../txts/developers:251
 msgid "Italian"
 msgstr "Italština"
 
-#: ../../txts/developers:251
+#: ../../txts/developers:256
 msgid "Polish"
 msgstr "Polština"
 
-#: ../../txts/developers:259
+#: ../../txts/developers:264
 msgid "Russian"
 msgstr "Ruština"
 
-#: ../../txts/developers:264
+#: ../../txts/developers:269
 msgid "Slovak"
 msgstr "Slovenština"
 
-#: ../../txts/developers:269
+#: ../../txts/developers:274
 msgid "Spanish"
 msgstr "Španělština"
 
-#: ../../txts/developers:274
+#: ../../txts/developers:279
 msgid "Swedish"
 msgstr "Švédština"
 
-#: ../../txts/developers:281
+#: ../../txts/developers:286
 msgid "Packagers"
 msgstr "Baliči"
 
-#: ../../txts/developers:285
+#: ../../txts/developers:290
 msgid "Linux Distributions"
 msgstr "Linuxové distribuce"
 
-#: ../../txts/developers:296
+#: ../../txts/developers:301
 msgid "Other Unix Distributions"
 msgstr "Další linuxové distribuce"
 
-#: ../../txts/developers:307
+#: ../../txts/developers:312
 msgid "Non Unix Distributions"
 msgstr "Nelinuxové distribuce"
 
-#: ../../txts/developers:319
+#: ../../txts/developers:324
 msgid "Homepage Coders"
 msgstr "Programátoři domovské stránky"
 
-#: ../../txts/developers:328
+#: ../../txts/developers:333
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentace, nápověda a wiki"
 
-#: ../../txts/developers:343
+#: ../../txts/developers:348
 msgid "Former elders"
 msgstr "Dřívější starší členové"
 
-#: ../../txts/developers:366
+#: ../../txts/developers:371
 msgid "Translation"
 msgstr "Překlad"
 
-#: ../../txts/developers:373
+#: ../../txts/developers:378
 msgid "Other"
 msgstr "Další"
 
@@ -523,46 +542,42 @@ msgid "Keyboard shortcuts"
 msgstr "Klávesové zkratky"
 
 #: ../../txts/editor_readme:25
-msgid "E: toggles event menu"
-msgstr ""
-
-#: ../../txts/editor_readme:27
 msgid "F: toggles fullscreen"
 msgstr ""
 
-#: ../../txts/editor_readme:29
+#: ../../txts/editor_readme:27
 msgid "H: toggles main menu"
 msgstr ""
 
-#: ../../txts/editor_readme:33
+#: ../../txts/editor_readme:31
 msgid "P: toggles player menu"
 msgstr ""
 
-#: ../../txts/editor_readme:35
+#: ../../txts/editor_readme:33
 msgid "T: toggles tools menu"
 msgstr ""
 
-#: ../../txts/editor_readme:37
+#: ../../txts/editor_readme:35
 msgid "I: activates information tool"
 msgstr ""
 
+#: ../../txts/editor_readme:37
+msgid "CTRL+L: load map"
+msgstr ""
+
 #: ../../txts/editor_readme:39
-msgid "CTRL+L: load Map"
+msgid "CTRL+S: save map"
 msgstr ""
 
 #: ../../txts/editor_readme:41
-msgid "CTRL+S: save Map"
-msgstr ""
-
-#: ../../txts/editor_readme:43
 msgid "1-0: changes tool size"
 msgstr ""
 
-#: ../../txts/editor_readme:45
+#: ../../txts/editor_readme:43
 msgid "SHIFT (Hold): selects first alternative tool while pressed"
 msgstr ""
 
-#: ../../txts/editor_readme:47
+#: ../../txts/editor_readme:45
 msgid "ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
 

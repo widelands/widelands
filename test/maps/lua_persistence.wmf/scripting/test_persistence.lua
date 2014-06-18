@@ -5,8 +5,12 @@
 -- environment.
 
 include "scripting/lunit.lua"
+include "scripting/coroutine.lua"
 
 include "scripting/set.lua"
+
+global_value_1 = false
+global_table = { 1 }
 
 function save_coroutine()
    my_name = "SirVer"
@@ -21,12 +25,18 @@ function save_coroutine()
    a = { "Hallo", "Welt" }
    c = { func = function(a) return "I say " .. a .. "!" end }
    field = map:get_field(32,34)
-   tree = map:place_immovable("tree3", field)
-   removed_tree = map:place_immovable("tree4", map:get_field(34,34))
+   tree = map:place_immovable("spruce_summer_old", field)
+   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34))
    removed_tree:remove()
 
    corout = coroutine.create(function()
       local a = 100
+      global_value_1 = true
+
+      run(function()
+         sleep(500)
+         global_table[1] = 2
+      end)
       coroutine.yield("What cool is that?")
       coroutine.yield(a)
    end)
@@ -76,17 +86,20 @@ function check_coroutine()
    assert_function(c.func)
    assert_equal("I say zonk!", c.func("zonk"))
 
-   assert_equal("tree3", tree.name)
+   assert_equal("spruce_summer_old", tree.name)
 
    assert_equal(32, field.x)
    assert_equal(34, field.y)
    assert_equal(tree, field.immovable)
 
+   assert_equal(global_value_1, false)
    assert_thread(corout)
    _,rv = coroutine.resume(corout)
+   assert_equal(global_table[1], 1)
    assert_equal("What cool is that?", rv)
    _,rv = coroutine.resume(corout)
    assert_equal(100, rv)
+   assert_equal(global_value_1, true)
 
    assert_table(objective)
    assert_equal("lumber", objective.name)
@@ -119,6 +132,10 @@ function check_coroutine()
    assert_equal(mapview.viewpoint_y, 40)
    assert_equal(false, mapview.statistics)
    assert_equal(true, mapview.census)
+
+   sleep(500)
+
+   assert_equal(global_table[1], 2)
 
    print("# All Tests passed.")
 

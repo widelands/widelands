@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/campaign_select.h"
 
+#include <memory>
+
 #include "campvis.h"
 #include "constants.h"
 #include "graphic/graphic.h"

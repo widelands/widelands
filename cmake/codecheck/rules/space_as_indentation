@@ -3,17 +3,32 @@
 #
 
 """
-Cry when space appears as first character on a line. Indentation should be done with tabs.
-There is no reason to have spaces as the first line
+Indentation should be done with tabs, but spaces are allowed for alignment.
 
 This is not obligatory for macros, because of the Alignement of the \\ at the end
 """
+
+import re
 
 error_msg="Use tabs for indentation."
 
 strip_comments_and_strings = True
 strip_macros = True
-regexp = r"^ +"
+
+class EvalMatches( object ):
+    STARTS_WITH_SPACES = re.compile(r"^ +")
+    def __call__(self, lines, fn):
+        errors = []
+        for curline, l in enumerate(lines, 1):
+            if self.STARTS_WITH_SPACES.match(l):
+                last_char = l.rstrip()[-1] if l.rstrip() else ""
+                if last_char in ",{)":
+                    continue
+                errors.append( (fn, curline, error_msg))
+        return errors
+
+
+evaluate_matches = EvalMatches()
 
 forbidden = [
     "   if(a)\n",

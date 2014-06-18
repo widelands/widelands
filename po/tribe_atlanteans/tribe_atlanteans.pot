@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-04-15 06:16+0000\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -359,7 +359,7 @@ msgstr ""
 #: ../../tribes/atlanteans/scouts_house/conf:21
 #: ../../tribes/atlanteans/shipyard/conf:29
 #: ../../tribes/atlanteans/smelting_works/conf:28
-#: ../../tribes/atlanteans/smokery/conf:30
+#: ../../tribes/atlanteans/smokery/conf:31
 #: ../../tribes/atlanteans/spiderfarm/conf:21
 #: ../../tribes/atlanteans/toolsmithy/conf:50
 #: ../../tribes/atlanteans/weaponsmithy/conf:38
@@ -1556,12 +1556,12 @@ msgid ""
 "Smokes meat and fish."
 msgstr ""
 
-#: ../../tribes/atlanteans/smokery/conf:28
+#: ../../tribes/atlanteans/smokery/conf:29
 msgid ""
 "Smoke meat"
 msgstr ""
 
-#: ../../tribes/atlanteans/smokery/conf:29
+#: ../../tribes/atlanteans/smokery/conf:30
 msgid ""
 "Smoke fish"
 msgstr ""

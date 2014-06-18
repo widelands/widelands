@@ -19,6 +19,7 @@
 
 #include "scripting/scripting.h"
 
+#include <memory>
 #include <stdexcept>
 #include <string>
 
@@ -38,6 +39,7 @@
 #include "scripting/lua_game.h"
 #include "scripting/lua_globals.h"
 #include "scripting/lua_map.h"
+#include "scripting/lua_path.h"
 #include "scripting/lua_root.h"
 #include "scripting/lua_table.h"
 #include "scripting/lua_ui.h"
@@ -120,7 +122,9 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 	}
 	lua_setglobal(L, "__file__");
 
-	return std::unique_ptr<LuaTable>(new LuaTable(L));
+	std::unique_ptr<LuaTable> return_value(new LuaTable(L));
+	lua_pop(L, 1);
+	return return_value;
 }
 
 // Reads the 'filename' from the 'fs' and returns its content.
@@ -171,6 +175,9 @@ LuaInterface::LuaInterface() {
 	// Now our own
 	LuaGlobals::luaopen_globals(m_L);
 
+	// And helper methods.
+	LuaPath::luaopen_path(m_L);
+
 	// Also push the "wl" table.
 	lua_newtable(m_L);
 	lua_setglobal(m_L, "wl");
@@ -214,7 +221,9 @@ std::unique_ptr<LuaTable> LuaInterface::get_hook(const std::string& name) {
 	}
 	lua_remove(m_L, -2);
 
-	return std::unique_ptr<LuaTable>(new LuaTable(m_L));
+	std::unique_ptr<LuaTable> return_value(new LuaTable(m_L));
+	lua_pop(m_L, 1);
+	return return_value;
 }
 
 
@@ -315,25 +324,19 @@ LuaGameInterface::LuaGameInterface(Widelands::Game * g)
 LuaGameInterface::~LuaGameInterface() {
 }
 
-LuaCoroutine * LuaGameInterface::read_coroutine
-	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
-	 uint32_t size)
-{
+LuaCoroutine* LuaGameInterface::read_coroutine(FileRead& fr) {
 	LuaCoroutine * rv = new LuaCoroutine(nullptr);
-	rv->read(m_L, fr, mol, size);
-
+	rv->read(m_L, fr);
 	return rv;
 }
 
-uint32_t LuaGameInterface::write_coroutine
-	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos, LuaCoroutine * cr)
-{
-	return cr->write(m_L, fw, mos);
+void LuaGameInterface::write_coroutine(FileWrite& fw, LuaCoroutine* cr) {
+	cr->write(fw);
 }
 
 
 void LuaGameInterface::read_global_env
-	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	(FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
 	// Clean out the garbage before loading.
@@ -372,7 +375,7 @@ void LuaGameInterface::read_global_env
 }
 
 uint32_t LuaGameInterface::write_global_env
-	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
 	// Clean out the garbage before writing.
 	lua_gc(m_L, LUA_GCCOLLECT, 0);

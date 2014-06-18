@@ -593,9 +593,7 @@ void NetClient::setPaused(bool /* paused */)
 {
 }
 
-void NetClient::recvOnePlayer
-	(uint8_t const number, Widelands::StreamRead & packet)
-{
+void NetClient::recvOnePlayer(uint8_t const number, StreamRead& packet) {
 	if (number >= d->settings.players.size())
 		throw DisconnectException("PLAYER_UPDATE_FOR_N_E_P");
 
@@ -611,9 +609,7 @@ void NetClient::recvOnePlayer
 	player.shared_in = packet.Unsigned8();
 }
 
-void NetClient::recvOneUser
-	(uint32_t const number, Widelands::StreamRead & packet)
-{
+void NetClient::recvOneUser(uint32_t const number, StreamRead& packet) {
 	if (number > d->settings.users.size())
 		throw DisconnectException("USER_UPDATE_FOR_N_E_U");
 
@@ -757,7 +753,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// host. If it is a ziped file, we can check, whether the host and the client have got the same file.
 			if (!g_fs->IsDirectory(path)) {
 				FileRead fr;
-				fr.Open(*g_fs, path.c_str());
+				fr.Open(*g_fs, path);
 				if (bytes == fr.GetSize()) {
 					std::unique_ptr<char[]> complete(new char[bytes]);
 					if (!complete) throw wexception("Out of memory");
@@ -842,7 +838,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 			// Check for consistence
 			FileRead fr;
-			fr.Open(*g_fs, file->filename.c_str());
+			fr.Open(*g_fs, file->filename);
 
 			std::unique_ptr<char[]> complete(new char[file->bytes]);
 			if (!complete) throw wexception("Out of memory");
@@ -909,6 +905,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const initialization_script = packet.String();
 				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
+				t->do_not_warn_about_unaccessed_keys();
 				info.initializations.push_back
 					(TribeBasicInfo::Initialization(initialization_script, t->get_string("name")));
 			}

@@ -20,6 +20,8 @@
 #include "economy/economy_data_packet.h"
 
 #include "economy/economy.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "map_io/widelands_map_map_object_loader.h"

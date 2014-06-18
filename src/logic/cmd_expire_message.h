@@ -20,6 +20,8 @@
 #ifndef CMD_EXPIRE_MESSAGE_H
 #define CMD_EXPIRE_MESSAGE_H
 
+#include <memory>
+
 #include "logic/cmd_queue.h"
 #include "logic/message_queue.h"
 

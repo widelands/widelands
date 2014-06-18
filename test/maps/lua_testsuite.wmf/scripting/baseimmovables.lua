@@ -1,16 +1,16 @@
 -- =======================================================================
---                         BaseImmovable Usage Tests                          
+--                         BaseImmovable Usage Tests
 -- =======================================================================
 
 -- ====================
--- Creation & Deletion 
+-- Creation & Deletion
 -- ====================
 -- Note: these next functions implicitly also check that inheritance
 -- works because serial is a property of a MapObject.
 immovable_creation_tests = lunit.TestCase("Immovable Creation")
 function immovable_creation_tests:test_create()
-   imm = map:place_immovable("tree1", map:get_field(9, 10))
-   imm2 = map:place_immovable("tree2", map:get_field(10, 10))
+   imm = map:place_immovable("aspen_summer_old", map:get_field(9, 10))
+   imm2 = map:place_immovable("oak_summer_old", map:get_field(10, 10))
    assert_table(imm)
    assert_table(imm2)
    assert_true(imm.serial > 0)
@@ -25,11 +25,11 @@ function immovable_creation_tests:test_create_tribe_immovables()
    imm:remove()
 end
 function immovable_creation_tests:test_create_world_immovables()
-   imm = map:place_immovable("tree1", map:get_field(10,10), "world")
+   imm = map:place_immovable("aspen_summer_old", map:get_field(10,10), "world")
    imm:remove()
 end
 function immovable_creation_tests:test_create_world_immovables1()
-   imm = map:place_immovable("tree1", map:get_field(10,10), nil)
+   imm = map:place_immovable("aspen_summer_old", map:get_field(10,10), nil)
    imm:remove()
 end
 function immovable_creation_tests:test_create_tribe_immovables_ill_tribe()
@@ -44,11 +44,11 @@ function immovable_creation_tests:test_create_tribe_immovables_ill_immovable()
 end
 function immovable_creation_tests:test_create_wrong_usage()
    assert_error("Needs table, not integer", function()
-      map:place_immovable("tree1", 9, 10) end)
+      map:place_immovable("aspen_summer_old", 9, 10) end)
 end
 function immovable_creation_tests:test_create_wrong_usage()
    assert_error("Needs table, not integer", function()
-      map:place_immovable("tree1", 9, 10) end)
+      map:place_immovable("aspen_summer_old", 9, 10) end)
 end
 
 -- ===================
@@ -56,7 +56,7 @@ end
 -- ===================
 immovable_tests = lunit.TestCase("Immovable usage")
 function immovable_tests:setup()
-   self.i = map:place_immovable("tree1", map:get_field(9, 10))
+   self.i = map:place_immovable("aspen_summer_old", map:get_field(9, 10))
 end
 function immovable_tests:teardown()
    pcall(self.i.remove, self.i)
@@ -73,7 +73,7 @@ function immovable_tests:test_serial_is_readonly()
 end
 function immovable_tests:test_field_access()
    f = map:get_field(9,10)
-   assert_equal("tree1", f.immovable.name)
+   assert_equal("aspen_summer_old", f.immovable.name)
 end
 function immovable_tests:test_map_object_equality()
    f = map:get_field(9,10)
@@ -96,11 +96,11 @@ end
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
    self.none = map:place_immovable("pebble1", map:get_field(19, 10))
-   self.small = map:place_immovable("tree1", map:get_field(18, 10))
+   self.small = map:place_immovable("aspen_summer_old", map:get_field(18, 10))
    self.medium = player1:place_building(
       "burners_house", map:get_field(10,10), false, true
    )
-   self.big = map:place_immovable("stones4", map:get_field(20, 10))
+   self.big = map:place_immovable("greenland_stones4", map:get_field(20, 10))
    self.big_building = player1:place_building(
       "fortress", map:get_field(15,11), false, true
    )
@@ -133,13 +133,13 @@ function immovable_property_tests:test_name_pebble()
    assert_equal("pebble1", self.none.name)
 end
 function immovable_property_tests:test_name_tree()
-   assert_equal("tree1", self.small.name)
+   assert_equal("aspen_summer_old", self.small.name)
 end
 function immovable_property_tests:test_name_charcoal_burner()
    assert_equal("burners_house", self.medium.name)
 end
 function immovable_property_tests:test_name_stone()
-   assert_equal("stones4", self.big.name)
+   assert_equal("greenland_stones4", self.big.name)
 end
 function immovable_property_tests:test_name_fortress()
    assert_equal("fortress", self.big_building.name)
@@ -202,4 +202,3 @@ function plr_immovables_test:test_owner()
    assert_equal(player1.number, self.f.owner.number)
    assert_equal(player1, self.f.owner)
 end
-

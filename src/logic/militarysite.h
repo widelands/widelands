@@ -28,7 +28,7 @@
 namespace Widelands {
 
 class Soldier;
-struct World;
+class World;
 
 struct MilitarySite_Descr : public ProductionSite_Descr {
 	MilitarySite_Descr
@@ -65,7 +65,7 @@ private:
 class MilitarySite :
 	public ProductionSite, public SoldierControl, public Attackable
 {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 	MO_DESCR(MilitarySite_Descr);
 
 public:

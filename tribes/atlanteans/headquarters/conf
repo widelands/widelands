@@ -6,5 +6,4 @@ conquers=9
 
 [idle]
 pics=headquarters_i_??.png
-# sfx=0 ../../../sound/spoken/warehouse-bringitin
 hotspot=81 110

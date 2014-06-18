@@ -148,11 +148,11 @@ Widelands::Player * Interactive_Spectator::get_player() const
 void Interactive_Spectator::start()
 {
 	Widelands::Map & map = game().map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 
 	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map();
+	map.recalc_whole_map(game().world());
 }
 
 

@@ -24,25 +24,18 @@
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
+#include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
 #include "profile/profile.h"
 
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-
-void Map_Extradata_Data_Packet::Read
-	(FileSystem            &       fs,
-	 Editor_Game_Base&,
-	 bool                    const skip,
-	 Map_Map_Object_Loader &)
-{
+void Map_Extradata_Data_Packet::Read(FileSystem& fs, bool const skip) {
 	if (skip)
 		return;
 
@@ -69,7 +62,7 @@ void Map_Extradata_Data_Packet::Read
 					if (!g_gr->images().has(hash)) {
 						FileRead fr;
 
-						fr.Open(fs, pname->c_str());
+						fr.Open(fs, *pname);
 						SDL_Surface * const surf =
 							IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 						if (!surf)
@@ -91,7 +84,7 @@ void Map_Extradata_Data_Packet::Read
 
 
 void Map_Extradata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase)
 {
 	Profile prof;
 	prof.create_section("global").set_int

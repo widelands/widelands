@@ -354,9 +354,9 @@ void Editor_Player_Menu::set_starting_pos_clicked(uint8_t n) {
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
-	map.overlay_manager().register_overlay_callback_function
-		(boost::bind(&Editor_Tool_Set_Starting_Pos_Callback, _1, boost::ref(map)));
-	map.recalc_whole_map();
+	map.overlay_manager().register_overlay_callback_function(
+	   boost::bind(&Editor_Tool_Set_Starting_Pos_Callback, _1, boost::ref(map)));
+	map.recalc_whole_map(menu.egbase().world());
 	update();
 }
 
@@ -388,7 +388,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
    // so must be true)
 	Widelands::Editor_Game_Base & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
+	OverlayManager & overlay_manager = map.overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
 	assert(start_pos);
 
@@ -441,5 +441,5 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 	parent.tools.make_infrastructure.set_player(n);
 	overlay_manager.register_overlay_callback_function(
 	   boost::bind(&Editor_Make_Infrastructure_Tool_Callback, _1, boost::ref(egbase), n));
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase.world());
 }

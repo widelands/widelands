@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: 2010-06-06 20:58+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:33+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:33+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -2510,7 +2510,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/reed_yard/help.lua:27
-msgid "Weaving-Mill"
+msgid "Weaving Mill"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:193
@@ -3061,7 +3061,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
-"It can make Bread Paddles, Felling axs, Fire Tongs, Fishing Rods, Hammers, "
+"It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
 

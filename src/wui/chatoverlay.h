@@ -20,6 +20,8 @@
 #ifndef CHATOVERLAY_H
 #define CHATOVERLAY_H
 
+#include <memory>
+
 #include "logic/notification.h"
 #include "ui_basic/panel.h"
 

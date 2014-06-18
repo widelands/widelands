@@ -35,9 +35,9 @@ Surface* ImageLoaderImpl::load(const string& fname, FileSystem* fs) const {
 	//log("Loading image %s.\n", fname.c_str());
 
 	if (fs) {
-		fr.fastOpen(*fs, fname.c_str());
+		fr.Open(*fs, fname);
 	} else {
-		fr.fastOpen(*g_fs, fname.c_str());
+		fr.Open(*g_fs, fname);
 	}
 	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
@@ -46,4 +46,3 @@ Surface* ImageLoaderImpl::load(const string& fname, FileSystem* fs) const {
 
 	return Surface::create(sdlsurf);
 }
-

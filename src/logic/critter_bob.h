@@ -23,6 +23,9 @@
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 
+class LuaTable;
+class OneWorldLegacyLookupTable;
+
 namespace Widelands {
 
 struct Critter_BobAction;
@@ -35,12 +38,13 @@ struct Critter_Bob_Descr : public BobDescr {
 	Critter_Bob_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 Tribe_Descr const *);
+		 const Tribe_Descr *);
+	Critter_Bob_Descr(const LuaTable&);
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const override;
 
-	bool is_swimming() const {return m_swimming;}
+	bool is_swimming() const;
 	uint32_t movecaps() const override;
 	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 
@@ -51,7 +55,6 @@ struct Critter_Bob_Descr : public BobDescr {
 
 private:
 	DirAnimations m_walk_anims;
-	bool          m_swimming;
 	typedef std::map<std::string, Critter_BobProgram *> Programs;
 	Programs      m_programs;
 };
@@ -73,6 +76,19 @@ public:
 	void start_task_program(Game &, const std::string & name);
 	const std::string & descname() const {return descr().descname();}
 
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+
+	static Map_Object::Loader*
+	load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
+
+protected:
+	struct Loader : Bob::Loader {
+		Loader();
+
+		virtual const Task * get_task(const std::string & name) override;
+		virtual const BobProgramBase * get_program(const std::string & name) override;
+	};
+
 private:
 	void roam_update   (Game &, State &);
 	void program_update(Game &, State &);
@@ -82,20 +98,6 @@ private:
 	static Task const taskRoam;
 	static Task const taskProgram;
 
-	// saving and loading
-protected:
-	struct Loader : Bob::Loader {
-		Loader();
-
-		virtual const Task * get_task(const std::string & name) override;
-		virtual const BobProgramBase * get_program(const std::string & name) override;
-	};
-
-public:
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
-
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 
 }

@@ -62,12 +62,11 @@ Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
 	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
 }
 
-
-int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
-	(Widelands::Map           &          map,
-	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive &, Editor_Action_Args &)
-{
+int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl(Widelands::Map& map,
+                                                        const Widelands::World&,
+                                                        Widelands::Node_and_Triangle<> const center,
+                                                        Editor_Interactive&,
+                                                        Editor_Action_Args&) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -90,7 +89,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 
 		//  check if field is valid
 		if (Editor_Tool_Set_Starting_Pos_Callback(map.get_fcoords(center.node), map)) {
-			Overlay_Manager & overlay_manager = map.overlay_manager();
+			OverlayManager & overlay_manager = map.overlay_manager();
 			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, pic);
 

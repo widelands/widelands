@@ -26,10 +26,9 @@
 #include <stdint.h>
 
 #include "logic/instances.h"
-#include "io/filewrite.h"
 
-struct Profile;
-struct Section;
+class Profile;
+class Section;
 class Image;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
@@ -38,6 +37,8 @@ class Image;
 #define WARE_MENU_PIC_PAD_Y    4  //< Default padding between menu icons
 
 namespace Widelands {
+
+struct Tribe_Descr;
 
 /**
  * Wares can be stored in warehouses. They can be transferred across an

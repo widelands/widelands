@@ -53,11 +53,11 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	typedef std::vector<const WareInstance *> Wares;
 
 	friend class Economy;
-	friend struct Router;
 	friend class FlagQueue;
+	friend class Map_Flagdata_Data_Packet; // has to read/write this to a file
 	friend struct Map_Ware_Data_Packet;     // has to look at pending wares
 	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
-	friend struct Map_Flagdata_Data_Packet; // has to read/write this to a file
+	friend struct Router;
 
 	Flag(); /// empty flag for savegame loading
 	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
