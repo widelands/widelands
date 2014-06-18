@@ -34,7 +34,7 @@ macro(_common_compile_tasks)
       run_codecheck(${NAME} ${SRC})
     endforeach(SRC)
 
-    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_COMPILE_WARNING_FLAGS}")
+    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_COMPILE_DIAGNOSTICS}")
   endif()
 
   set_target_properties(${NAME} PROPERTIES COMPILE_FLAGS ${TARGET_COMPILE_FLAGS})
@@ -327,8 +327,9 @@ set(WL_SRCS
 	logic/worker.cc
 	logic/worker_descr.cc
 	logic/worker_program.cc
-	logic/world.cc
 	map_generator.cc
+	map_io/one_world_legacy_lookup_table.cc
+	map_io/one_world_legacy_lookup_table.h
 	map_io/widelands_map_allowed_building_types_data_packet.cc
 	map_io/widelands_map_allowed_worker_types_data_packet.cc
 	map_io/widelands_map_building_data_packet.cc
@@ -379,6 +380,7 @@ set(WL_SRCS
 	scripting/lua_game.cc
 	scripting/lua_globals.cc
 	scripting/lua_map.cc
+	scripting/lua_path.cc
 	scripting/lua_root.cc
 	scripting/lua_table.cc
 	scripting/lua_ui.cc
@@ -698,8 +700,16 @@ set(WL_SRCS
   logic/worker.h
   logic/worker_descr.h
   logic/worker_program.h
-  logic/world.h
-  logic/worlddata.h
+  logic/world/editor_category.cc
+  logic/world/editor_category.h
+  logic/world/map_gen.cc
+  logic/world/map_gen.h
+  logic/world/resource_description.cc
+  logic/world/resource_description.h
+  logic/world/terrain_description.cc
+  logic/world/terrain_description.h
+  logic/world/world.cc
+  logic/world/world.h
   machdep.h
   map_generator.h
   map_io/coords_profile.cc

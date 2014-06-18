@@ -45,7 +45,6 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "logic/world.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "parse_map_object_types.h"

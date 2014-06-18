@@ -59,7 +59,7 @@ public:
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);
 
-	virtual ~BobDescr() {};
+	virtual ~BobDescr() {}
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
 
 	Tribe_Descr const* get_owner_tribe() const {
@@ -311,7 +311,7 @@ public:
 	void signal_handled();
 
 	/// Automatically select a task.
-	virtual void init_auto_task(Game &) {};
+	virtual void init_auto_task(Game &) {}
 
 	// low level animation and walking handling
 	void set_animation(Editor_Game_Base &, uint32_t anim);

@@ -39,7 +39,7 @@ struct Carrier : public Worker {
 				Worker_Descr
 					(_name, _descname, directory,
 					 prof, global_s, _tribe)
-		{};
+		{}
 
 		virtual Worker_Type get_worker_type() const override {return CARRIER;}
 
@@ -51,7 +51,7 @@ struct Carrier : public Worker {
 	Carrier(const Descr & carrier_descr)
 		: Worker(carrier_descr), m_promised_pickup_to(-1)
 	{}
-	virtual ~Carrier() {};
+	virtual ~Carrier() {}
 
 	bool notify_ware(Game &, int32_t flag);
 

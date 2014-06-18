@@ -45,16 +45,16 @@ struct _wexception : public std::exception {
 	explicit _wexception
 		(const char * file, uint32_t line, const char * fmt, ...)
 	 PRINTF_FORMAT(4, 5);
-	virtual ~_wexception() throw ();
+	virtual ~_wexception() noexcept;
 
 	/**
     * The target of the returned pointer remains valid during the lifetime of
 	 * the _wexception object.
 	 */
-	virtual const char * what() const throw () override;
+	virtual const char * what() const noexcept override;
 
 protected:
-	_wexception() {};
+	_wexception() {}
 	std::string m_what;
 };
 

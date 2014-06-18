@@ -20,7 +20,6 @@
 #include "logic/world/resource_description.h"
 
 #include "helper.h"
-#include "log.h"
 #include "logic/game_data_error.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"

@@ -207,7 +207,7 @@ struct tribe_immovable_nonexistent : public FileRead::_data_error {
 	     tribename(Tribename),
 	     name(Name) {
 	}
-	virtual ~tribe_immovable_nonexistent() throw () {
+	virtual ~tribe_immovable_nonexistent() noexcept {
 	}
 	std::string tribename;
 	std::string name;

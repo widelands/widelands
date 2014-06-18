@@ -40,7 +40,6 @@
 #include "logic/world/editor_category.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
-#include "logic/worlddata.h"
 #include "profile/profile.h"
 
 namespace Widelands {

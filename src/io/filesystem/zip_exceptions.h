@@ -44,7 +44,7 @@ struct ZipOperation_error : public std::logic_error {
 		m_thrower(thrower), m_filename(filename), m_zipfilename(zipfilename)
 	{}
 
-	virtual ~ZipOperation_error() throw () {}
+	virtual ~ZipOperation_error() noexcept {}
 
 	std::string m_thrower;
 	std::string m_filename;

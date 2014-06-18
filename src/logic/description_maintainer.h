@@ -25,7 +25,7 @@
 #include <string>
 #include <vector>
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 // Used to have a typesafe maintainer for description classes.
 template <typename T> struct DescriptionMaintainer {

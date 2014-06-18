@@ -41,15 +41,15 @@
 struct warning : public std::exception {
 	explicit warning (char const * title, char const * message, ...)
 	 PRINTF_FORMAT(3, 4);
-	virtual ~warning() throw ();
+	virtual ~warning() noexcept;
 
 	/// The target of the returned pointer remains valid during the lifetime of
 	/// the warning object.
 	virtual const char * title() const;
-	virtual const char * what() const throw () override;
+	virtual const char * what() const noexcept override;
 
 protected:
-	warning() {};
+	warning() {}
 	std::string m_what;
 	std::string m_title;
 };

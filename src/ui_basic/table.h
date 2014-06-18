@@ -91,7 +91,7 @@ public:
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () override {
+		char const * what() const noexcept override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
@@ -219,7 +219,7 @@ public:
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () override {
+		char const * what() const noexcept override {
 			return "UI::Table<void *>: No selection";
 		}
 	};

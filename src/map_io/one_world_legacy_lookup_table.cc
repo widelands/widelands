@@ -19,8 +19,6 @@
 
 #include "map_io/one_world_legacy_lookup_table.h"
 
-#include "log.h"
-
 namespace  {
 
 /// If the map is newish and there is no old world to convert names from, we use
