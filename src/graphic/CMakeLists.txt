@@ -81,6 +81,7 @@ wl_library(graphic
   USES_SDL_GFX
   USES_SDL_IMAGE
   USES_SDL_TTF
+  USES_PNG
   DEPENDS
     base_log
     base_i18n

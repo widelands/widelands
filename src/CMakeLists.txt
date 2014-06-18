@@ -16,6 +16,7 @@ macro(_parse_common_args ARGS)
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_BOOST_REGEX
+    USES_PNG
     USES_SDL_GFX
     USES_SDL_IMAGE
     USES_SDL_MIXER
@@ -62,6 +63,11 @@ macro(_common_compile_tasks)
   if(ARG_USES_ZLIB)
     target_include_directories(${NAME} SYSTEM INTERFACE ${ZLIB_INCLUDE_DIRS})
     target_link_libraries(${NAME} ${ZLIB_LIBRARY})
+  endif()
+
+  if(ARG_USES_PNG)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${PNG_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${PNG_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_MIXER)
@@ -826,7 +832,6 @@ wl_library(widelands_ball_of_mud
     map_io
     graphic
     # TODO(sirver): add USES_* for each of these
-    ${PNG_LIBRARY}
     ${OPENGL_gl_LIBRARY}
     ${GLEW_LIBRARY}
 )

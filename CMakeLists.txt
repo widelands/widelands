@@ -63,9 +63,6 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 add_definitions(${GLEW_EXTRA_DEFINITIONS})
 
-find_package(PNG REQUIRED)
-# TODO(sirver): Do not globally include for all targets.
-include_directories(${PNG_INCLUDE_DIR})
 
 find_package(ZLIB REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
@@ -76,6 +73,7 @@ find_package(SDL REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})
 
 find_package(Gettext REQUIRED)
+find_package(PNG REQUIRED)
 find_package(SDL_gfx REQUIRED)
 find_package(SDL_image REQUIRED)
 find_package(SDL_mixer REQUIRED)
