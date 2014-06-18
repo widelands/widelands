@@ -1234,10 +1234,10 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 /* RST
 	.. attribute:: type
 
-			(RO) the :int:`type` of the building, e.g. building.
+			(RO) the name of the building, e.g. building.
 */
 int L_BuildingDescription::get_type(lua_State * L) {
-	const Building_Descr * descr = static_cast<const Building_Descr *>(get());
+	const Building_Descr * descr = get();
 	lua_pushstring(L, descr->get_type());
 	return 1;
 }
@@ -1265,7 +1265,7 @@ int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
 /* RST
 	.. attribute:: size
 
-			(RO) the :int:`size` of the building: 1 = small, 2 = medium, 3 = big.
+			(RO) the size of the building: 1 = small, 2 = medium, 3 = big.
 */
 int L_BuildingDescription::get_size(lua_State * L) {
 	lua_pushinteger(L, get()->get_size());
@@ -1276,7 +1276,7 @@ int L_BuildingDescription::get_size(lua_State * L) {
 /* RST
 	.. attribute:: vision range
 
-			(RO) the :int:`vision_range` of the building as an int.
+			(RO) the vision_range of the building as an int.
 */
 int L_BuildingDescription::get_vision_range(lua_State * L) {
 	lua_pushinteger(L, get()->vision_range());
@@ -1286,7 +1286,7 @@ int L_BuildingDescription::get_vision_range(lua_State * L) {
 /* RST
 	.. attribute:: workarea_radius
 
-			(RO) the :int:`workarea_radius` of the building as an int.
+			(RO) the workarea_radius of the building as an int.
 */
 int L_BuildingDescription::get_workarea_radius(lua_State * L) {
 	lua_pushinteger(L, get()->m_workarea_info.begin()->first);
@@ -1336,7 +1336,7 @@ void L_ProductionSiteDescription::__unpersist(lua_State * /* L */) {
 */
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
-	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+	const ProductionSite_Descr * descr = get();
 
 	lua_newtable(L);
 	int index = 1;
@@ -1356,7 +1356,7 @@ int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 */
 int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
-	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+	const ProductionSite_Descr * descr = get();
 
 	lua_newtable(L);
 	int index = 1;
@@ -1377,7 +1377,7 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 			(RO) the :string:`type` of the building, e.g. productionsite.
 */
 int L_ProductionSiteDescription::get_type(lua_State * L) {
-	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+	const ProductionSite_Descr * descr = get();
 	lua_pushstring(L, descr->get_type());
 	return 1;
 }
@@ -1389,7 +1389,7 @@ int L_ProductionSiteDescription::get_type(lua_State * L) {
 */
 int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
-	const ProductionSite_Descr * descr = static_cast<const ProductionSite_Descr *>(get());
+	const ProductionSite_Descr * descr = get();
 
 	lua_newtable(L);
 	int index = 1;
@@ -1443,10 +1443,10 @@ void L_MilitarySiteDescription::__unpersist(lua_State * /* L */) {
 /* RST
 	.. attribute:: heal_per_second
 
-		(RO) The :int:`number` of health healed ber second by the militarysite
+		(RO) The number of health healed ber second by the militarysite
 */
 int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
-	const MilitarySite_Descr * descr = static_cast<const MilitarySite_Descr *>(get());
+	const MilitarySite_Descr * descr = get();
 	lua_pushinteger(L, descr->get_heal_per_second());
 	return 1;
 }
@@ -1454,10 +1454,10 @@ int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
 /* RST
 	.. attribute:: max_number_of_soldiers
 
-		(RO) The :int:`number` of soldiers that can be garrisoned at the militarysite
+		(RO) The number of soldiers that can be garrisoned at the militarysite
 */
 int L_MilitarySiteDescription::get_max_number_of_soldiers(lua_State * L) {
-	const MilitarySite_Descr * descr = static_cast<const MilitarySite_Descr *>(get());
+	const MilitarySite_Descr * descr = get();
 	lua_pushinteger(L, descr->get_max_number_of_soldiers());
 	return 1;
 }
@@ -1468,7 +1468,7 @@ int L_MilitarySiteDescription::get_max_number_of_soldiers(lua_State * L) {
 			(RO) the :string:`type` of the building, e.g. militarysite.
 */
 int L_MilitarySiteDescription::get_type(lua_State * L) {
-	const MilitarySite_Descr * descr = static_cast<const MilitarySite_Descr *>(get());
+	const MilitarySite_Descr * descr = get();
 	lua_pushstring(L, descr->get_type());
 	return 1;
 }
@@ -1517,26 +1517,30 @@ void L_TrainingSiteDescription::__unpersist(lua_State * /* L */) {
 /* RST
 	.. attribute:: max_attack
 
-		(RO) The :int:`number` of attack points that a soldier can train
+		(RO) The number of attack points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
-	if (descr->get_train_attack())
+	const TrainingSite_Descr* descr = get();
+	if (descr->get_train_attack()) {
 		lua_pushinteger(L, descr->get_max_level(atrAttack));
-	else lua_pushinteger(L, -1);
+	} else {
+		lua_pushinteger(L, 0);
+	}
 	return 1;
 }
 
 /* RST
 	.. attribute:: max_defense
 
-		(RO) The :int:`number` of defense points that a soldier can train
+		(RO) The number of defense points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
-	if (descr->get_train_defense())
+	const TrainingSite_Descr* descr = get();
+	if (descr->get_train_defense()) {
 		lua_pushinteger(L, descr->get_max_level(atrDefense));
-	else lua_pushinteger(L, -1);
+	} else {
+		lua_pushinteger(L, 0);
+	}
 	return 1;
 }
 
@@ -1544,13 +1548,13 @@ int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
 /* RST
 	.. attribute:: max_evade
 
-		(RO) The :int:`number` of evade points that a soldier can train
+		(RO) The number of evade points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_evade())
 		lua_pushinteger(L, descr->get_max_level(atrEvade));
-	else lua_pushinteger(L, -1);
+	else lua_pushinteger(L, 0);
 	return 1;
 }
 
@@ -1558,13 +1562,13 @@ int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
 /* RST
 	.. attribute:: max_hp
 
-		(RO) The :int:`number` of health points that a soldier can train
+		(RO) The number of health points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_max_level(atrHP));
-	else lua_pushinteger(L, -1);
+	else lua_pushinteger(L, 0);
 	return 1;
 }
 
@@ -1572,10 +1576,10 @@ int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
 /* RST
 	.. attribute:: max_number_of_soldiers
 
-		(RO) The :int:`number` of soldiers that can be garrisoned at the trainingsite
+		(RO) The number of soldiers that can be garrisoned at the trainingsite
 */
 int L_TrainingSiteDescription::get_max_number_of_soldiers(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	const TrainingSite_Descr * descr = get();
 	lua_pushinteger(L, descr->get_max_number_of_soldiers());
 	return 1;
 }
@@ -1584,26 +1588,26 @@ int L_TrainingSiteDescription::get_max_number_of_soldiers(lua_State * L) {
 /* RST
 	.. attribute:: min_attack
 
-		(RO) The :int:`number` of attack points that a soldier starts training with
+		(RO) The number of attack points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_attack(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_attack())
 		lua_pushinteger(L, descr->get_min_level(atrAttack));
-	else lua_pushinteger(L, -1);
+	else lua_pushinteger(L, 0);
 	return 1;
 }
 
 /* RST
 	.. attribute:: min_defense
 
-		(RO) The :int:`number` of defense points that a soldier starts training with
+		(RO) The number of defense points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_defense())
 		lua_pushinteger(L, descr->get_min_level(atrDefense));
-	else lua_pushinteger(L, -1);
+	else lua_pushinteger(L, 0);
 	return 1;
 }
 
@@ -1611,13 +1615,13 @@ int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
 /* RST
 	.. attribute:: min_evade
 
-		(RO) The :int:`number` of evade points that a soldier starts training with
+		(RO) The number of evade points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_evade())
 		lua_pushinteger(L, descr->get_min_level(atrEvade));
-	else lua_pushinteger(L, -1);
+	else lua_pushinteger(L, 0);
 	return 1;
 }
 
@@ -1625,13 +1629,13 @@ int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
 /* RST
 	.. attribute:: min_hp
 
-		(RO) The :int:`number` of health points that a soldier starts training with
+		(RO) The number of health points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_min_level(atrHP));
-	else lua_pushinteger(L, -1);
+	else lua_pushinteger(L, 0);
 	return 1;
 }
 
@@ -1642,7 +1646,7 @@ int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
 			(RO) the :string:`type` of the building, e.g. trainingsite.
 */
 int L_TrainingSiteDescription::get_type(lua_State * L) {
-	const TrainingSite_Descr * descr = static_cast<const TrainingSite_Descr *>(get());
+	const TrainingSite_Descr * descr = get();
 	lua_pushstring(L, descr->get_type());
 	return 1;
 }
@@ -1685,10 +1689,10 @@ void L_WarehouseDescription::__unpersist(lua_State * /* L */) {
 /* RST
 	.. attribute:: heal_per_second
 
-		(RO) The :int:`number` of health healed per second by the warehouse
+		(RO) The number of health healed per second by the warehouse
 */
 int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
-	const Warehouse_Descr * descr = static_cast<const Warehouse_Descr *>(get());
+	const Warehouse_Descr * descr = get();
 	lua_pushinteger(L, descr->get_heal_per_second());
 	return 1;
 }
@@ -1700,7 +1704,7 @@ int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
 			(RO) the :string:`type` of the building, e.g. warehouse.
 */
 int L_WarehouseDescription::get_type(lua_State * L) {
-	const Warehouse_Descr * descr = static_cast<const Warehouse_Descr *>(get());
+	const Warehouse_Descr * descr = get();
 	lua_pushstring(L, descr->get_type());
 	return 1;
 }
@@ -1869,7 +1873,7 @@ int L_WorkerDescription::get_becomes(lua_State * L) {
 /* RST
 	.. attribute:: level_experience
 
-			(RO) the :int:`experience` the worker needs to reach this level.
+			(RO) the experience the worker needs to reach this level.
 */
 int L_WorkerDescription::get_level_experience(lua_State * L) {
 	lua_pushinteger(L, get()->get_level_experience());
@@ -2040,7 +2044,6 @@ int L_MapObject::__eq(lua_State * L) {
 
 	Map_Object * me = m_get_or_zero(egbase);
 	Map_Object * you = other->m_get_or_zero(egbase);
-
 
 	// Both objects are destroyed: they are equal
 	if (me == you) lua_pushboolean(L, true);
