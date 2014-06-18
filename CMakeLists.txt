@@ -61,12 +61,8 @@ find_package(OpenGL REQUIRED)
 
 # OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
 find_package(GLEW REQUIRED)
-add_definitions(${GLEW_EXTRA_DEFINITIONS})
-
-
-find_package(ZLIB REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
-include_directories(${ZLIB_INCLUDE_DIR})
+add_definitions(${GLEW_EXTRA_DEFINITIONS})
 
 find_package(SDL REQUIRED)
 # TODO(sirver): Do not globally include for all targets.
