@@ -165,6 +165,7 @@ void Panel::free_children() {while (_fchild) delete _fchild;}
  */
 int32_t Panel::run()
 {
+	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication * const app = WLApplication::get();
 	Panel * const prevmodal = _modal;
 	_modal = this;

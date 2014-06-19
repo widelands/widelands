@@ -34,7 +34,6 @@
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "wlapplication.h"
 
 
 using boost::format;

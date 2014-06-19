@@ -234,7 +234,7 @@ public:
 			throw No_Selection();
 		remove(m_selection);
 	}
-	void * get_selected() const {return get_selected_record().entry();};
+	void * get_selected() const {return get_selected_record().entry();}
 
 	uint32_t get_lineheight() const {return m_lineheight + 2;}
 	uint32_t get_eff_w     () const {return get_w();}

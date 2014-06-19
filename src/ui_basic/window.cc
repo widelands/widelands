@@ -28,7 +28,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "text_layout.h"
-#include "wlapplication.h"
 
 
 using namespace std;

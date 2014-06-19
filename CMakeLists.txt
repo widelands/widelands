@@ -117,13 +117,14 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Weverything")
 
   # Disabled warnings that are overly verbose right now or just do not make sense.
-  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-c++98-compat")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-c++98-compat-pedantic")
-  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-conversion")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-exit-time-destructors")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-global-constructors")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
