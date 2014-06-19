@@ -43,11 +43,10 @@
 #include "logic/tribe.h"
 #include "logic/world/world.h"
 #include "map_generator.h"
+#include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
-#include "s2map.h"
 #include "upcast.h"
 #include "wui/overlay_manager.h"
-
 
 namespace Widelands {
 

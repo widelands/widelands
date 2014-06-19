@@ -396,8 +396,6 @@ set(WL_SRCS
   replay_game_controller.cc
   replay_game_controller.h
   rgbcolor.h
-  s2map.cc
-  s2map.h
   save_handler.cc
   save_handler.h
   scoped_timer.cc

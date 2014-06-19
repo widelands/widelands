@@ -1,9 +1,28 @@
-# TODO(sirver): Has more dependencies than are listed here.
+wl_library(map_io_map_loader
+  SRCS
+    map_loader.h
+    widelands_map_loader.cc
+    widelands_map_loader.h
+    s2map.cc
+    s2map.h
+  DEPENDS
+    base_log
+    base_i18n
+    base_exceptions
+    io_filesystem
+    logic
+    # TODO(sirver): These headers are not yet in separate libraries, therefore we need ball of mud.
+    #include "constants.h"
+    #include "scoped_timer.h"
+    #include "scripting/scripting.h"
+    #include "upcast.h"
+    widelands_ball_of_mud
+)
+
 wl_library(map_io
   SRCS
     coords_profile.cc
     coords_profile.h
-    map_loader.h
     one_world_legacy_lookup_table.cc
     one_world_legacy_lookup_table.h
     widelands_map_allowed_building_types_data_packet.cc
@@ -27,8 +46,6 @@ wl_library(map_io
     widelands_map_flagdata_data_packet.h
     widelands_map_heights_data_packet.cc
     widelands_map_heights_data_packet.h
-    widelands_map_loader.cc
-    widelands_map_loader.h
     widelands_map_map_object_loader.cc
     widelands_map_map_object_loader.h
     widelands_map_map_object_saver.cc
@@ -68,4 +85,27 @@ wl_library(map_io
   DEPENDS
     base_log
     base_i18n
+    base_exceptions
+    build_info
+    graphic
+    io_filesystem
+    logic
+    wui
+    # TODO(sirver): These headers are not yet in separate libraries, therefore we need ball of mud.
+    #include "constants.h"
+    #include "container_iterate.h"
+    #include "economy/flag.h"
+    #include "economy/fleet.h"
+    #include "economy/portdock.h"
+    #include "economy/request.h"
+    #include "economy/road.h"
+    #include "economy/ware_instance.h"
+    #include "economy/warehousesupply.h"
+    #include "economy/wares_queue.h"
+    #include "helper.h"
+    #include "profile/profile.h"
+    #include "scoped_timer.h"
+    #include "scripting/scripting.h"
+    #include "upcast.h"
+    widelands_ball_of_mud
 )

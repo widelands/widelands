@@ -156,4 +156,6 @@ wl_library(logic
     base_log
     io_filesystem
     profile
+    map_io
+    map_io_map_loader
 )

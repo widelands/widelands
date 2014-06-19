@@ -33,7 +33,6 @@
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "s2map.h"
 
 using Widelands::WL_Map_Loader;
 

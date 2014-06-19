@@ -33,7 +33,6 @@
 #include "logic/editor_game_base.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "s2map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 

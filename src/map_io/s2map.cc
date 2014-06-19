@@ -17,7 +17,7 @@
  *
  */
 
-#include "s2map.h"
+#include "map_io/s2map.h"
 
 #include <iomanip>
 #include <iostream>
