@@ -380,156 +380,6 @@ set(WL_SRCS
   helper.cc
   helper.h
   interval.h
-  logic/attackable.h
-  logic/backtrace.cc
-  logic/backtrace.h
-  logic/battle.cc
-  logic/battle.h
-  logic/bill_of_materials.h
-  logic/bob.cc
-  logic/bob.h
-  logic/buildcost.cc
-  logic/buildcost.h
-  logic/building.cc
-  logic/building.h
-  logic/carrier.cc
-  logic/carrier.h
-  logic/checkstep.cc
-  logic/checkstep.h
-  logic/cmd_calculate_statistics.cc
-  logic/cmd_calculate_statistics.h
-  logic/cmd_expire_message.cc
-  logic/cmd_expire_message.h
-  logic/cmd_incorporate.cc
-  logic/cmd_incorporate.h
-  logic/cmd_luacoroutine.cc
-  logic/cmd_luacoroutine.h
-  logic/cmd_luascript.cc
-  logic/cmd_luascript.h
-  logic/cmd_queue.cc
-  logic/cmd_queue.h
-  logic/constructionsite.cc
-  logic/constructionsite.h
-  logic/critter_bob.cc
-  logic/critter_bob.h
-  logic/critter_bob_program.h
-  logic/description_maintainer.h
-  logic/dismantlesite.cc
-  logic/dismantlesite.h
-  logic/editor_game_base.cc
-  logic/editor_game_base.h
-  logic/expedition_bootstrap.cc
-  logic/expedition_bootstrap.h
-  logic/field.cc
-  logic/field.h
-  logic/findbob.cc
-  logic/findbob.h
-  logic/findimmovable.cc
-  logic/findimmovable.h
-  logic/findnode.cc
-  logic/findnode.h
-  logic/game.cc
-  logic/game.h
-  logic/game_data_error.cc
-  logic/game_data_error.h
-  logic/immovable.cc
-  logic/immovable.h
-  logic/immovable_program.h
-  logic/instances.cc
-  logic/instances.h
-  logic/map.cc
-  logic/map.h
-  logic/map_revision.cc
-  logic/map_revision.h
-  logic/mapastar.cc
-  logic/mapastar.h
-  logic/mapdifferenceregion.cc
-  logic/mapdifferenceregion.h
-  logic/mapfringeregion.cc
-  logic/mapfringeregion.h
-  logic/maphollowregion.cc
-  logic/maphollowregion.h
-  logic/mapregion.h
-  logic/maptriangleregion.cc
-  logic/maptriangleregion.h
-  logic/message.h
-  logic/message_id.h
-  logic/message_queue.h
-  logic/military_data.cc
-  logic/military_data.h
-  logic/militarysite.cc
-  logic/militarysite.h
-  logic/nodecaps.h
-  logic/notification.h
-  logic/objective.h
-  logic/parse_map_object_types.h
-  logic/partially_finished_building.cc
-  logic/partially_finished_building.h
-  logic/path.cc
-  logic/path.h
-  logic/pathfield.cc
-  logic/pathfield.h
-  logic/player.cc
-  logic/player.h
-  logic/player_area.h
-  logic/playercommand.cc
-  logic/playercommand.h
-  logic/playersmanager.cc
-  logic/playersmanager.h
-  logic/production_program.cc
-  logic/production_program.h
-  logic/productionsite.cc
-  logic/productionsite.h
-  logic/program_result.h
-  logic/queue_cmd_factory.cc
-  logic/queue_cmd_factory.h
-  logic/queue_cmd_ids.h
-  logic/replay.cc
-  logic/replay.h
-  logic/requirements.cc
-  logic/requirements.h
-  logic/roadtype.h
-  logic/ship.cc
-  logic/ship.h
-  logic/soldier.cc
-  logic/soldier.h
-  logic/soldier_counts.h
-  logic/soldiercontrol.h
-  logic/tattribute.h
-  logic/trainingsite.cc
-  logic/trainingsite.h
-  logic/tribe.cc
-  logic/tribe.h
-  logic/walkingdir.cc
-  logic/walkingdir.h
-  logic/ware_descr.cc
-  logic/ware_descr.h
-  logic/warehouse.cc
-  logic/warehouse.h
-  logic/warelist.cc
-  logic/warelist.h
-  logic/wareworker.h
-  logic/widelands.h
-  logic/widelands_geometry.h
-  logic/widelands_geometry_io.cc
-  logic/widelands_geometry_io.h
-  logic/workarea_info.h
-  logic/worker.cc
-  logic/worker.h
-  logic/worker_descr.cc
-  logic/worker_descr.h
-  logic/worker_program.cc
-  logic/worker_program.h
-  logic/world/editor_category.cc
-  logic/world/editor_category.h
-  logic/world/map_gen.cc
-  logic/world/map_gen.h
-  logic/world/resource_description.cc
-  logic/world/resource_description.h
-  logic/world/terrain_description.cc
-  logic/world/terrain_description.h
-  logic/world/world.cc
-  logic/world/world.h
   machdep.h
   map_generator.cc
   map_generator.h
@@ -814,10 +664,11 @@ else()
 endif()
 
 add_subdirectory(base)
-add_subdirectory(map_io)
-add_subdirectory(graphic)
 add_subdirectory(economy)
+add_subdirectory(graphic)
 add_subdirectory(io)
+add_subdirectory(logic)
+add_subdirectory(map_io)
 add_subdirectory(network)
 add_subdirectory(profile)
 add_subdirectory(scripting)
@@ -833,14 +684,15 @@ wl_library(widelands_ball_of_mud
     ${WL_SRCS}
   DEPENDS
     base_i18n
+    graphic
     io_dedicated_log
     io_filesystem
+    logic
+    map_io
     network
     profile
     sound
     third_party_eris
-    map_io
-    graphic
 )
 
 
