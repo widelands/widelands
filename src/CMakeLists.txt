@@ -478,112 +478,8 @@ set(WL_SRCS
   ui_fsmenu/singleplayer.h
   upcast.h
   utf8.h
-  vector.h
   wlapplication.cc
   wlapplication.h
-  wui/actionconfirm.cc
-  wui/actionconfirm.h
-  wui/attack_box.cc
-  wui/attack_box.h
-  wui/building_statistics_menu.cc
-  wui/building_statistics_menu.h
-  wui/building_ui.cc
-  wui/buildingwindow.cc
-  wui/buildingwindow.h
-  wui/chatoverlay.cc
-  wui/chatoverlay.h
-  wui/constructionsitewindow.cc
-  wui/debugconsole.cc
-  wui/debugconsole.h
-  wui/dismantlesitewindow.cc
-  wui/encyclopedia_window.cc
-  wui/encyclopedia_window.h
-  wui/fieldaction.cc
-  wui/fieldaction.h
-  wui/game_chat_menu.cc
-  wui/game_chat_menu.h
-  wui/game_debug_ui.cc
-  wui/game_debug_ui.h
-  wui/game_main_menu.cc
-  wui/game_main_menu.h
-  wui/game_main_menu_save_game.cc
-  wui/game_main_menu_save_game.h
-  wui/game_message_menu.cc
-  wui/game_message_menu.h
-  wui/game_objectives_menu.cc
-  wui/game_objectives_menu.h
-  wui/game_options_menu.cc
-  wui/game_options_menu.h
-  wui/game_options_sound_menu.cc
-  wui/game_options_sound_menu.h
-  wui/game_summary.cc
-  wui/game_summary.h
-  wui/game_tips.cc
-  wui/game_tips.h
-  wui/gamechatpanel.cc
-  wui/gamechatpanel.h
-  wui/general_statistics_menu.cc
-  wui/general_statistics_menu.h
-  wui/interactive_base.cc
-  wui/interactive_base.h
-  wui/interactive_gamebase.cc
-  wui/interactive_gamebase.h
-  wui/interactive_player.cc
-  wui/interactive_player.h
-  wui/interactive_spectator.cc
-  wui/interactive_spectator.h
-  wui/itemwaresdisplay.cc
-  wui/itemwaresdisplay.h
-  wui/login_box.cc
-  wui/login_box.h
-  wui/logmessage.h
-  wui/mapview.cc
-  wui/mapview.h
-  wui/mapviewpixelconstants.h
-  wui/mapviewpixelfunctions.cc
-  wui/mapviewpixelfunctions.h
-  wui/military_box.cc
-  wui/military_box.h
-  wui/militarysitewindow.cc
-  wui/minimap.cc
-  wui/minimap.h
-  wui/multiplayersetupgroup.cc
-  wui/multiplayersetupgroup.h
-  wui/overlay_manager.cc
-  wui/overlay_manager.h
-  wui/playerdescrgroup.cc
-  wui/playerdescrgroup.h
-  wui/plot_area.cc
-  wui/plot_area.h
-  wui/portdockwaresdisplay.cc
-  wui/portdockwaresdisplay.h
-  wui/productionsitewindow.cc
-  wui/productionsitewindow.h
-  wui/quicknavigation.cc
-  wui/quicknavigation.h
-  wui/shipwindow.cc
-  wui/soldiercapacitycontrol.cc
-  wui/soldiercapacitycontrol.h
-  wui/soldierlist.cc
-  wui/soldierlist.h
-  wui/stock_menu.cc
-  wui/stock_menu.h
-  wui/story_message_box.cc
-  wui/story_message_box.h
-  wui/trainingsitewindow.cc
-  wui/transport_draw.cc
-  wui/transport_ui.cc
-  wui/unique_window_handler.cc
-  wui/unique_window_handler.h
-  wui/ware_statistics_menu.cc
-  wui/ware_statistics_menu.h
-  wui/warehousewindow.cc
-  wui/waresdisplay.cc
-  wui/waresdisplay.h
-  wui/waresqueuedisplay.cc
-  wui/waresqueuedisplay.h
-  wui/watchwindow.cc
-  wui/watchwindow.h
 )
 
 if (WIN32)
@@ -632,6 +528,7 @@ add_subdirectory(scripting)
 add_subdirectory(sound)
 add_subdirectory(third_party)
 add_subdirectory(ui_basic)
+add_subdirectory(wui)
 
 #TODO: It looks like various things have cyclic dependencies
 #in all directions. Ideally this core shouldn't exist or at least
@@ -652,6 +549,7 @@ wl_library(widelands_ball_of_mud
     sound
     third_party_eris
     ui_basic
+    wui
 )
 
 
