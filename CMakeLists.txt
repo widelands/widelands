@@ -78,7 +78,8 @@ if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   endif ()
 endif()
 
-set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
+# TODO(sirver): One day, this should be enabled. Then we have no more cycles in our dependencies....
+# set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 
 if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   find_path(FILE_WL_RELEASE "WL_RELEASE" ${CMAKE_CURRENT_SOURCE_DIR})

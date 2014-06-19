@@ -10,6 +10,7 @@ wl_library(sound
   USES_BOOST_REGEX
   USES_SDL_MIXER
   DEPENDS
+    logic
     base_log
     io_filesystem
     profile
