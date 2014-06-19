@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:38+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:40+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -3972,42 +3972,3 @@ msgstr "Volg"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Beeld centreren"
-
-#~ msgid "World:"
-#~ msgstr "Wereld:"
-
-#~ msgid "Immovable Bobs"
-#~ msgstr "Immobiele Bobs"
-
-#~ msgid "Loading a world"
-#~ msgstr "Een wereld laden"
-
-#~ msgid "Invalid World"
-#~ msgstr "Ongeldige wereld"
-
-#~ msgid "The world \"%s\" set by the map does not exist on your filesystem."
-#~ msgstr ""
-#~ "De wereld \"%s\" ingesteld door de kaart bestaat niet in jouw bestandsysteem."
-
-#~ msgid ""
-#~ "WARNING: %i invalid port building space could not be fixed and has been "
-#~ "removed! Some islands might be unreachable now. Please consider fixing the "
-#~ "map in the map editor."
-#~ msgid_plural ""
-#~ "WARNING: %i invalid port building spaces could not be fixed and have been "
-#~ "removed! Some islands might be unreachable now. Please consider fixing the "
-#~ "map in the map editor."
-#~ msgstr[0] ""
-#~ "WAARSCHUWING: %i ongeldige havenbouwlocatie kon niet worden gerepareerd en "
-#~ "is verwijderd! Sommige eilanden zijn nu mogelijk onbereikbaar. Overweeg "
-#~ "a.u.b. om de kaart te repareren met de map editor."
-#~ msgstr[1] ""
-#~ "WAARSCHUWING: %i ongeldige havenbouwlocaties konden niet worden gerepareerd "
-#~ "en zijn verwijderd! Sommige eilanden zijn nu mogelijk onbereikbaar. Overweeg "
-#~ "a.u.b. om de kaart te repareren met de map editor."
-
-#~ msgid "WARNING"
-#~ msgstr "WAARSCHUWING"
-
-#~ msgid "World: %s"
-#~ msgstr "Wereld: %s"

@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-17 18:11+0200\n"
-"PO-Revision-Date: 2014-06-18 04:17+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-06-18 06:17+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:39+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:40+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 "Language: de\n"
 
 #: ../../src/ai/defaultai.h:85
@@ -637,7 +637,7 @@ msgstr "Gelände"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr "Feststehende Objekte"
+msgstr "Unbewegliche Objekte"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
@@ -669,7 +669,7 @@ msgstr "Wert setzen: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:58
 msgid "Immovable Select"
-msgstr ""
+msgstr "Auswahl unbeweglicher Objekte"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:116
 msgid "Terrain Select"
@@ -4003,44 +4003,3 @@ msgstr "Folge"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Zentriere die Ansicht hierauf"
-
-#~ msgid "World:"
-#~ msgstr "Welt:"
-
-#~ msgid "Immovable Bobs"
-#~ msgstr "Feststehende Bobs"
-
-#~ msgid "Loading a world"
-#~ msgstr "Lade eine Welt"
-
-#~ msgid "Invalid World"
-#~ msgstr "Unzulässige Welt"
-
-#~ msgid "The world \"%s\" set by the map does not exist on your filesystem."
-#~ msgstr ""
-#~ "Die Welt „%s“ die von der Karte vorgegeben wird, existiert nicht auf deinem "
-#~ "Dateisystem."
-
-#~ msgid ""
-#~ "WARNING: %i invalid port building space could not be fixed and has been "
-#~ "removed! Some islands might be unreachable now. Please consider fixing the "
-#~ "map in the map editor."
-#~ msgid_plural ""
-#~ "WARNING: %i invalid port building spaces could not be fixed and have been "
-#~ "removed! Some islands might be unreachable now. Please consider fixing the "
-#~ "map in the map editor."
-#~ msgstr[0] ""
-#~ "WARNING: %i ungültiger Hafenbauplatz konnte nicht repariert werden und wurde "
-#~ "entfernt! Eventuell sind nun einige Inseln unerreichbar. Bitte öffne die "
-#~ "Karte im Editor und korrigiere sie."
-#~ msgstr[1] ""
-#~ "WARNUNG: %i ungültige Hafenbauplätze konnten nicht repariert werden und "
-#~ "wurden daher komplett entfernt! Eventuell sind nun manche Inseln "
-#~ "unerreichbar. Möglichst die Karte mittels des Karten-Editors öffnen, "
-#~ "überprüfen und korrrigieren."
-
-#~ msgid "WARNING"
-#~ msgstr "Warnung"
-
-#~ msgid "World: %s"
-#~ msgstr "Welt: %s"

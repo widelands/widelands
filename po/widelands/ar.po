@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:38+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:40+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 "Language: ar\n"
 
 #: ../../src/ai/defaultai.h:85
@@ -3792,12 +3792,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "World:"
-#~ msgstr "العالم:"
-
-#~ msgid "WARNING"
-#~ msgstr "تحذير"
-
-#~ msgid "World: %s"
-#~ msgstr "العالم: %s"

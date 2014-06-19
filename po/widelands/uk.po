@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:41+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:42+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 "Language: uk\n"
 
 #: ../../src/ai/defaultai.h:85
@@ -3862,15 +3862,3 @@ msgstr "Сліувати"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Центрувати екран тут"
-
-#~ msgid "World:"
-#~ msgstr "Світ:"
-
-#~ msgid "Loading a world"
-#~ msgstr "Завантаження світу"
-
-#~ msgid "Invalid World"
-#~ msgstr "Невірний світ"
-
-#~ msgid "The world \"%s\" set by the map does not exist on your filesystem."
-#~ msgstr "Карта світу \"%s\" не існує."

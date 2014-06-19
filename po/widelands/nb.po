@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:40+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:41+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
@@ -3885,24 +3885,3 @@ msgstr "Følg"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "World:"
-#~ msgstr "Verden:"
-
-#~ msgid "Immovable Bobs"
-#~ msgstr "Uflyttbare objekter"
-
-#~ msgid "Loading a world"
-#~ msgstr "Laster en verden"
-
-#~ msgid "Invalid World"
-#~ msgstr "Ugyldig verden"
-
-#~ msgid "The world \"%s\" set by the map does not exist on your filesystem."
-#~ msgstr "Verdenen «%s» er satt av kartet, men finnes ikke i filsystemet ditt."
-
-#~ msgid "WARNING"
-#~ msgstr "ADVARSEL"
-
-#~ msgid "World: %s"
-#~ msgstr "Verden: %s"

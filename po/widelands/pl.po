@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:40+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:42+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
@@ -3825,18 +3825,3 @@ msgstr "Podążaj"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "World:"
-#~ msgstr "Świat:"
-
-#~ msgid "Immovable Bobs"
-#~ msgstr "Statyczne boby"
-
-#~ msgid "Loading a world"
-#~ msgstr "Wczytywanie świata"
-
-#~ msgid "Invalid World"
-#~ msgstr "Błędny świat"
-
-#~ msgid "WARNING"
-#~ msgstr "UWAGA"

@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:39+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:41+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
@@ -3785,12 +3785,3 @@ msgstr "Sequere"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "World:"
-#~ msgstr "Mundus:"
-
-#~ msgid "Loading a world"
-#~ msgstr "Tollo mundum"
-
-#~ msgid "Invalid World"
-#~ msgstr "Mundus vetitus"

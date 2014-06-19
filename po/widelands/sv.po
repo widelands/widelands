@@ -11,8 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:41+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:42+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 "Language: sv\n"
 
 #: ../../src/ai/defaultai.h:85
@@ -3882,22 +3882,3 @@ msgstr "Följ"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Centrera huvudanblicken på detta"
-
-#~ msgid "World:"
-#~ msgstr "Värld:"
-
-#~ msgid "Loading a world"
-#~ msgstr "Förladdar en värld"
-
-#~ msgid "Invalid World"
-#~ msgstr "Ogiltig värld"
-
-#~ msgid "The world \"%s\" set by the map does not exist on your filesystem."
-#~ msgstr ""
-#~ "Världen \"%s\" som satts av kartan, existerar inte på ditt filsystem."
-
-#~ msgid "WARNING"
-#~ msgstr "VARNING"
-
-#~ msgid "World: %s"
-#~ msgstr "Värld: %s"

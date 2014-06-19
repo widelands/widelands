@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:41+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:42+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
@@ -3805,12 +3805,3 @@ msgstr "Sledi"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "World:"
-#~ msgstr "Svet:"
-
-#~ msgid "Loading a world"
-#~ msgstr "Nalagam svet"
-
-#~ msgid "Invalid World"
-#~ msgstr "Neveljaven svet"

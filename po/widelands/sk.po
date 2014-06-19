@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:41+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-19 05:42+0000\n"
+"X-Generator: Launchpad (build 17048)\n"
 "Language: sk\n"
 
 #: ../../src/ai/defaultai.h:85
@@ -3965,45 +3965,3 @@ msgstr "Nasledovať"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Vycentrovať pohľad na túto pozíciu"
-
-#~ msgid "World:"
-#~ msgstr "Svet:"
-
-#~ msgid "Immovable Bobs"
-#~ msgstr "Nehnuteľné objekty"
-
-#~ msgid "Loading a world"
-#~ msgstr "Načítava sa svet"
-
-#~ msgid "Invalid World"
-#~ msgstr "Neplatný svet"
-
-#~ msgid "The world \"%s\" set by the map does not exist on your filesystem."
-#~ msgstr "Mapou určený svet „%s“ sa nenachádza vo vašom súborovom systéme."
-
-#~ msgid ""
-#~ "WARNING: %i invalid port building space could not be fixed and has been "
-#~ "removed! Some islands might be unreachable now. Please consider fixing the "
-#~ "map in the map editor."
-#~ msgid_plural ""
-#~ "WARNING: %i invalid port building spaces could not be fixed and have been "
-#~ "removed! Some islands might be unreachable now. Please consider fixing the "
-#~ "map in the map editor."
-#~ msgstr[0] ""
-#~ "UPOZORNENIE: Nebolo možné opraviť %i miesta na postavenie prístavu, a preto "
-#~ "boli odstránené! Niektoré ostrovy teraz môžu byť neprístupné. Zvážte, "
-#~ "prosím, opravu mapy v editore máp."
-#~ msgstr[1] ""
-#~ "UPOZORNENIE: Nebolo možné opraviť %i miest na postavenie prístavu, a preto "
-#~ "boli odstránené! Niektoré ostrovy teraz môžu byť neprístupné. Zvážte, "
-#~ "prosím, opravu mapy v editore máp."
-#~ msgstr[2] ""
-#~ "UPOZORNENIE: Nebolo možné opraviť %i miesto na postavenie prístavu, a preto "
-#~ "bolo odstránené! Niektoré ostrovy teraz môžu byť neprístupné. Zvážte, "
-#~ "prosím, opravu mapy v editore máp."
-
-#~ msgid "WARNING"
-#~ msgstr "UPOZORNENIE"
-
-#~ msgid "World: %s"
-#~ msgstr "Svet: %s"
