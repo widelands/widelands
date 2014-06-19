@@ -35,6 +35,10 @@ endmacro(_parse_common_args)
 macro(_common_compile_tasks)
   if (NOT ARG_C_LIBRARY)
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_GENERIC_CXX_FLAGS}")
+
+    # This is needed for header only libraries. While they do not really mean
+    # anything for cmake, they are useful to make dependencies explicit.
+    set_target_properties(${NAME} PROPERTIES LINKER_LANGUAGE CXX)
   endif()
 
   set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_OPTIMIZE_FLAGS} ${WL_DEBUG_FLAGS}")
@@ -438,53 +442,6 @@ set(WL_SRCS
   timestring.cc
   timestring.h
   trackptr.h
-  ui_basic/box.cc
-  ui_basic/box.h
-  ui_basic/button.cc
-  ui_basic/button.h
-  ui_basic/checkbox.cc
-  ui_basic/checkbox.h
-  ui_basic/editbox.cc
-  ui_basic/editbox.h
-  ui_basic/helpwindow.cc
-  ui_basic/helpwindow.h
-  ui_basic/icon.cc
-  ui_basic/icon.h
-  ui_basic/icongrid.cc
-  ui_basic/icongrid.h
-  ui_basic/listselect.cc
-  ui_basic/listselect.h
-  ui_basic/messagebox.cc
-  ui_basic/messagebox.h
-  ui_basic/mouse_constants.h
-  ui_basic/multilineeditbox.cc
-  ui_basic/multilineeditbox.h
-  ui_basic/multilinetextarea.cc
-  ui_basic/multilinetextarea.h
-  ui_basic/panel.cc
-  ui_basic/panel.h
-  ui_basic/progressbar.cc
-  ui_basic/progressbar.h
-  ui_basic/progresswindow.cc
-  ui_basic/progresswindow.h
-  ui_basic/radiobutton.cc
-  ui_basic/radiobutton.h
-  ui_basic/scrollbar.cc
-  ui_basic/scrollbar.h
-  ui_basic/slider.cc
-  ui_basic/slider.h
-  ui_basic/spinbox.cc
-  ui_basic/spinbox.h
-  ui_basic/table.cc
-  ui_basic/table.h
-  ui_basic/tabpanel.cc
-  ui_basic/tabpanel.h
-  ui_basic/textarea.cc
-  ui_basic/textarea.h
-  ui_basic/unique_window.cc
-  ui_basic/unique_window.h
-  ui_basic/window.cc
-  ui_basic/window.h
   ui_fsmenu/base.cc
   ui_fsmenu/base.h
   ui_fsmenu/campaign_select.cc
@@ -674,6 +631,7 @@ add_subdirectory(profile)
 add_subdirectory(scripting)
 add_subdirectory(sound)
 add_subdirectory(third_party)
+add_subdirectory(ui_basic)
 
 #TODO: It looks like various things have cyclic dependencies
 #in all directions. Ideally this core shouldn't exist or at least
@@ -693,6 +651,7 @@ wl_library(widelands_ball_of_mud
     profile
     sound
     third_party_eris
+    ui_basic
 )
 
 
