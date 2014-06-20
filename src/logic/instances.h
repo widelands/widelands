@@ -33,9 +33,9 @@
 
 #include "log.h"
 #include "logic/cmd_queue.h"
+#include "logic/widelands.h"
 #include "port.h"
 #include "ref_cast.h"
-#include "widelands.h"
 
 class FileRead;
 class RenderTarget;

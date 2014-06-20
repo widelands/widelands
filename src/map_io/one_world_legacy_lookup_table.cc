@@ -19,6 +19,8 @@
 
 #include "map_io/one_world_legacy_lookup_table.h"
 
+#include <memory>
+
 #include "log.h"
 
 namespace  {

@@ -20,6 +20,7 @@
 #include "editor/ui_menus/editor_main_menu_load_map.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 

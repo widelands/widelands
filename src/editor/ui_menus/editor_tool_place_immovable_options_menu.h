@@ -20,6 +20,7 @@
 #ifndef EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 #define EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 
+#include <memory>
 #include <vector>
 
 #include "editor/ui_menus/categorized_item_selection_menu.h"

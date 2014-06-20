@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/fileview.h"
 
+#include <memory>
+
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "constants.h"

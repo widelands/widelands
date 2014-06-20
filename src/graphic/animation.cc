@@ -22,6 +22,7 @@
 #include <cassert>
 #include <cstdio>
 #include <limits>
+#include <memory>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>

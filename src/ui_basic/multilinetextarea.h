@@ -20,6 +20,8 @@
 #ifndef UI_MULTILINE_TEXTAREA_H
 #define UI_MULTILINE_TEXTAREA_H
 
+#include <memory>
+
 #include "align.h"
 #include "ui_basic/panel.h"
 #include "rgbcolor.h"

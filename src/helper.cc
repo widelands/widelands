@@ -113,7 +113,7 @@ string random_string(const string& chars, int nlen) {
 	return string(buffer.get(), nlen);
 }
 
-char* next_word(char*& p, bool& reached_end, char const terminator) {
+char* next_word(char* & p, bool& reached_end, char const terminator) {
 	assert(terminator);
 	char* const result = p;
 	for (; *p != terminator; ++p)
@@ -130,7 +130,7 @@ end:
 	throw wexception("expected word");
 }
 
-bool match(char*& candidate, const char* pattern) {
+bool match(char* & candidate, const char* pattern) {
 	for (char* p = candidate;; ++p, ++pattern)
 		if (not * pattern) {
 			candidate = p;
@@ -140,7 +140,7 @@ bool match(char*& candidate, const char* pattern) {
 	return false;
 }
 
-bool skip(char*& p, char const c) {
+bool skip(char* & p, char const c) {
 	char* t = p;
 	while (*t == c)
 		++t;
@@ -151,7 +151,7 @@ bool skip(char*& p, char const c) {
 		return false;
 }
 
-void force_skip(char*& p, char const c) {
+void force_skip(char* & p, char const c) {
 	char* t = p;
 	while (*t == c)
 		++t;
@@ -161,7 +161,7 @@ void force_skip(char*& p, char const c) {
 		throw wexception("expected '%c' but found \"%s\"", c, p);
 }
 
-bool match_force_skip(char*& candidate, const char* pattern) {
+bool match_force_skip(char* & candidate, const char* pattern) {
 	for (char* p = candidate;; ++p, ++pattern)
 		if (not * pattern) {
 			force_skip(p);

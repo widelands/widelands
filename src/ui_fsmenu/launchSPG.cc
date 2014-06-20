@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/launchSPG.h"
 
+#include <memory>
+
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "gamecontroller.h"

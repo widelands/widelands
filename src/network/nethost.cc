@@ -19,6 +19,7 @@
 
 #include "network/nethost.h"
 
+#include <memory>
 #include <sstream>
 
 #include <boost/algorithm/string/predicate.hpp>

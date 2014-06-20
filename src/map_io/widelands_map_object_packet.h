@@ -54,7 +54,9 @@ struct Map_Object_Packet {
 
 	~Map_Object_Packet();
 
-	void Read (FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader &, const OneWorldLegacyLookupTable& lookup_table);
+	void Read
+		(FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader &,
+		 const OneWorldLegacyLookupTable& lookup_table);
 
 	void LoadFinish();
 

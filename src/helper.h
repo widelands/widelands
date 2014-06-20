@@ -40,19 +40,19 @@
 ///    char const * candidate = "return   75";
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
-bool match(char*& candidate, const char* pattern);
+bool match(char* & candidate, const char* pattern);
 
 /// Returns the word starting at the character that p points to and ending
 /// before the first terminator character. Replaces the terminator with null.
-char* next_word(char*& p, bool& reached_end, char terminator = ' ');
+char* next_word(char* & p, bool& reached_end, char terminator = ' ');
 
 /// Skips a sequence of consecutive characters with the value c, starting at p.
 /// Returns whether any characters were skipped.
-bool skip(char*& p, char c = ' ');
+bool skip(char* & p, char c = ' ');
 
 /// Skips a sequence of consecutive characters with the value c, starting at p.
 /// Throws _wexception if no characters were skipped.
-void force_skip(char*& p, char c = ' ');
+void force_skip(char* & p, char c = ' ');
 
 /// Combines match and force_skip.
 ///
@@ -65,7 +65,7 @@ void force_skip(char*& p, char c = ' ');
 ///   char const * candidate = "return75";
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws _wexception
-bool match_force_skip(char*& candidate, const char* pattern);
+bool match_force_skip(char* & candidate, const char* pattern);
 
 /**
  * Convert std::string to any sstream-compatible type

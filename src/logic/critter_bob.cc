@@ -20,6 +20,7 @@
 #include "logic/critter_bob.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <stdint.h>
 

@@ -19,6 +19,8 @@
 
 #include "logic/expedition_bootstrap.h"
 
+#include <memory>
+
 #include "economy/portdock.h"
 #include "io/filewrite.h"
 #include "logic/player.h"

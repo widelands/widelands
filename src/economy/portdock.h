@@ -20,6 +20,8 @@
 #ifndef ECONOMY_PORTDOCK_H
 #define ECONOMY_PORTDOCK_H
 
+#include <memory>
+
 #include "logic/immovable.h"
 #include "logic/wareworker.h"
 #include "economy/shippingitem.h"

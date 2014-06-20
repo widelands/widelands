@@ -21,6 +21,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <memory>
 
 #include <libintl.h>
 
@@ -242,7 +243,8 @@ protected:
 	const std::map<S2_Map_Loader::WorldType, std::vector<std::string>> table_;
 };
 
-TerrainConverter::TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table) :
+TerrainConverter::TerrainConverter
+		(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table) :
 	one_world_legacy_lookup_table_(lookup_table),
 	world_(world),
 	table_

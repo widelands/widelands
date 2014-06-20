@@ -20,6 +20,8 @@
 #ifndef IMMOVABLE_H
 #define IMMOVABLE_H
 
+#include <memory>
+
 #include "graphic/animation.h"
 #include "logic/buildcost.h"
 #include "logic/instances.h"
@@ -250,7 +252,8 @@ public:
 
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &, const OneWorldLegacyLookupTable& lookup_table);
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &,
+		 const OneWorldLegacyLookupTable& lookup_table);
 
 private:
 	void increment_program_pointer();

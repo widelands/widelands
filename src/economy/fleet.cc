@@ -19,6 +19,8 @@
 
 #include "economy/fleet.h"
 
+#include <memory>
+
 #include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
