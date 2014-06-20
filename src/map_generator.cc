@@ -1035,12 +1035,6 @@ bool UniqueRandomMapInfo::setFromIdString
 	//  Island mode
 	mapInfo_out.islandMode      = (nums[13] == 1) ? true : false;
 
-	// World name hash
-	uint16_t nameHash = nums[14];
-	nameHash |= nums[15] << 5;
-	nameHash |= nums[16] << 10;
-	nameHash |= nums[17] << 15;
-
 	return false; // No valid world name found
 }
 
