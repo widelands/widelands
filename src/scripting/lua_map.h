@@ -129,6 +129,7 @@ public:
 	 */
 	int __eq(lua_State * L);
 	int remove(lua_State * L);
+	int destroy(lua_State * L);
 	int has_attribute(lua_State * L);
 
 	/*

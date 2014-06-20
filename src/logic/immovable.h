@@ -186,7 +186,7 @@ public:
 	T * get_action_data() {
 		if (!m_action_data)
 			return nullptr;
-		if (T * data = dynamic_cast<T *>(m_action_data))
+		if (T * data = dynamic_cast<T *>(m_action_data.get()))
 			return data;
 		set_action_data(nullptr);
 		return nullptr;
@@ -227,7 +227,7 @@ protected:
 	 *
 	 * \warning Use get_action_data to access this.
 	 */
-	ImmovableActionData * m_action_data;
+	std::unique_ptr<ImmovableActionData> m_action_data;
 
 	/**
 	 * Immovables like trees are reserved by a worker that is walking

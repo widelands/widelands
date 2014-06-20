@@ -249,7 +249,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 		if (match_force_skip(parameters, "needs"))
 			try {
 				bool reached_end;
-				char const * const type_name = match(parameters, reached_end);
+				char const * const type_name = next_word(parameters, reached_end);
 				Ware_Index index = tribe.ware_index(type_name);
 				if (index != INVALID_INDEX) {
 					tribe.set_ware_type_has_demand_check(index);
@@ -480,7 +480,7 @@ ProductionProgram::ActCall::ActCall
 	try {
 		bool reached_end;
 		{
-			char const * const program_name = match(parameters, reached_end);
+			char const * const program_name = next_word(parameters, reached_end);
 			const ProductionSite_Descr::Programs & programs = descr.programs();
 			ProductionSite_Descr::Programs::const_iterator const it =
 				programs.find(program_name);
@@ -697,7 +697,7 @@ ProductionProgram::ActAnimate::ActAnimate(
 	char* parameters, const std::string& directory, Profile& prof, ProductionSite_Descr* descr) {
 	try {
 		bool reached_end;
-		char * const animation_name = match(parameters, reached_end);
+		char * const animation_name = next_word(parameters, reached_end);
 		if (not strcmp(animation_name, "idle"))
 			throw game_data_error
 				("idle animation is default; calling is not allowed");
@@ -1056,7 +1056,7 @@ ProductionProgram::ActMine::ActMine(
 {
 	try {
 		bool reached_end;
-		m_resource = world.safe_resource_index(match(parameters, reached_end));
+		m_resource = world.safe_resource_index(next_word(parameters, reached_end));
 
 		{
 			char * endp;
@@ -1428,7 +1428,7 @@ ProductionProgram::ActPlayFX::ActPlayFX
 {
 	try {
 		bool reached_end;
-		std::string filename = match(parameters, reached_end);
+		std::string filename = next_word(parameters, reached_end);
 		name = directory + "/" + filename;
 
 		if (not reached_end) {
