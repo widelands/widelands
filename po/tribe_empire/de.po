@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-17 16:11+0000\n"
-"PO-Revision-Date: 2014-03-31 09:10+0000\n"
+"PO-Revision-Date: 2014-06-20 15:16+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:37+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-21 05:29+0000\n"
+"X-Generator: Launchpad (build 17058)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -468,9 +468,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of logs."
 msgstr ""
-"Die Feuer der Gießereien, Rüstungsschmieden und Waffenschmieden werden mit "
-"Kohle beheizt. Sie wird in Kohleminen abgebaut oder in Köhlereien aus "
-"Stämmen hergestellt."
+"Die Feuer in den Hochöfen, den Rüstungs- und Waffenschmieden des Imperiums "
+"werden mit Kohle geheizt. Sie wird in Kohleminen abgebaut oder in Köhlereien "
+"aus Stämmen hergestellt."
 
 #: ../../tribes/empire/colosseum/conf:37
 msgid "Upgrade soldier evade from level 1 to level 2"
@@ -912,7 +912,7 @@ msgstr "Spähturm"
 #: ../../tribes/empire/conf:152
 #: ../../tribes/empire/conf:208
 msgid "Tower"
-msgstr "Turm"
+msgstr "Wachturm"
 
 #: ../../tribes/empire/conf:153
 #: ../../tribes/empire/conf:206
@@ -947,7 +947,7 @@ msgstr "Schiffswrack-Hauptquartier"
 
 #: ../../tribes/empire/conf:162
 msgid "Warehouse"
-msgstr "Warenlager"
+msgstr "Lagerhaus"
 
 #: ../../tribes/empire/conf:163
 msgid "Port"
@@ -1071,19 +1071,19 @@ msgstr "Marmormine"
 
 #: ../../tribes/empire/conf:195
 msgid "Deep Coal Mine"
-msgstr "Tiefe Kohlenmine"
+msgstr "Tiefe Kohlemine"
 
 #: ../../tribes/empire/conf:196
 msgid "Coal Mine"
-msgstr "Kohlenmine"
+msgstr "Kohlemine"
 
 #: ../../tribes/empire/conf:197
 msgid "Deep Iron Ore Mine"
-msgstr "Tiefe Eisenmine"
+msgstr "Tiefe Eisenerzmine"
 
 #: ../../tribes/empire/conf:198
 msgid "Iron Ore Mine"
-msgstr "Eisenmine"
+msgstr "Eisenerzmine"
 
 #: ../../tribes/empire/conf:199
 msgid "Deep Gold Mine"
@@ -1151,8 +1151,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
-"Die Feuerzange ist das Werkzeug des Schmelzers, der am Hochofen arbeitet. "
-"Sie wird vom Werkzeugschmied hergestellt."
+"Die Feuerzange ist das Werkzeug des Hüttenarbeiters, der am Hochofen "
+"arbeitet. Sie wird vom Werkzeugschmied hergestellt."
 
 #: ../../tribes/empire/fish/conf:1
 msgid ""
@@ -1201,7 +1201,7 @@ msgid ""
 "in the armor smithy and the weapon smithy."
 msgstr ""
 "Gold ist das wertvollste Material; Rüstungen und Waffen werden aus ihm "
-"hergestellt. Es wird in Gießereien aus Golderz hergestellt und in "
+"hergestellt. Es wird in Hochöfen aus Golderz hergestellt und in "
 "Rüstungsschmieden und Waffenschmieden weiterverarbeitet."
 
 #: ../../tribes/empire/goldore/conf:1
@@ -1284,16 +1284,16 @@ msgid ""
 "Weapons, armor and tools are made of iron. It is extracted from iron ore in "
 "the smelting works."
 msgstr ""
-"Waffen, Rüstungen und Werkzeuge sind aus Eisen gemacht. Es wird in "
-"Gießereien aus Eisenerz gewonnen."
+"Waffen, Rüstungen und Werkzeuge sind aus Eisen gemacht. Es wird in Hochöfen "
+"aus Eisenerz gewonnen."
 
 #: ../../tribes/empire/ironore/conf:1
 msgid ""
 "Iron ore needs to be smelted in the smelting works to yield iron. Iron ore "
 "is produced in iron mines."
 msgstr ""
-"Eisenerz muss in Gießereien geschmolzen werden um Eisen zu gewinnen. "
-"Eisenerz wird in Eisenminen abgebaut."
+"Eisenerz muss in Hochöfen geschmolzen werden, um Eisen zu gewinnen. Eisenerz "
+"wird in Eisenerzminen abgebaut."
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""

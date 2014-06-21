@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-17 18:11+0200\n"
-"PO-Revision-Date: 2014-06-18 06:05+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-06-20 22:40+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-06-19 05:40+0000\n"
-"X-Generator: Launchpad (build 17048)\n"
+"X-Launchpad-Export-Date: 2014-06-21 05:29+0000\n"
+"X-Generator: Launchpad (build 17058)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -421,19 +421,19 @@ msgstr "Créer une carte"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:54
 msgid "Summer"
-msgstr ""
+msgstr "Été"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:55
 msgid "Winter"
-msgstr ""
+msgstr "Hiver"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:56
 msgid "Desert"
-msgstr ""
+msgstr "Désert"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:57
 msgid "Black"
-msgstr ""
+msgstr "Noir"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:75
 msgid "Random Number:"
@@ -671,7 +671,7 @@ msgstr "Définir la valeur: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:58
 msgid "Immovable Select"
-msgstr ""
+msgstr "Sélection d'immeuble"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:116
 msgid "Terrain Select"
@@ -1003,6 +1003,9 @@ msgid ""
 "This mine’s main vein is exhausted. Expect strongly diminished returns on "
 "investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"La veine principale de la mine est épuisée. Attendez vous à des retours sur "
+"investissement fortement diminués. Vous devriez penser à l'améliorer, la "
+"démonter ou la détruire."
 
 #: ../../src/logic/production_program.cc:1287
 #, c-format
@@ -1108,6 +1111,8 @@ msgstr "Un géologue a trouvé des ressources."
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
+"Vos %s ne peuvent trouver de chemin pour rentrer et vont probablement "
+"mourrir."
 
 #: ../../src/logic/worker.cc:1878
 msgid "Worker got lost!"
@@ -2172,6 +2177,9 @@ msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr ""
+"Sur le coté gauche se tient une liste des joueurs vous incluant. Vous pouvez "
+"définir votre rôle avec le bouton qui suit votre surnom. Les rôles "
+"disponibles sont:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:674
 msgid ""
@@ -2394,7 +2402,7 @@ msgstr "Sous licence GNU Général Public Licence V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:60
 msgid "Load map as scenario"
-msgstr ""
+msgstr "Charger carte en tant que scénario"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:143
