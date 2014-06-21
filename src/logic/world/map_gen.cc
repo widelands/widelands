@@ -19,6 +19,7 @@
 
 #include "logic/world/map_gen.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 

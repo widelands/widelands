@@ -34,15 +34,11 @@ using namespace std;
 /// \note This ignores empty elements, so do not use this for example to split
 /// a string with newline characters into lines, because it would ignore empty
 /// lines.
-vector<string> split_string
-	(const string & s, char const * const separators)
-{
+vector<string> split_string(const string& s, const char* const separators) {
 	vector<string> result;
-	for
-		(string::size_type pos = 0, endpos;
-		 (pos = s.find_first_not_of(separators, pos)) != string::npos;
-		 pos = endpos)
-	{
+	for (string::size_type pos = 0, endpos;
+	     (pos = s.find_first_not_of(separators, pos)) != string::npos;
+	     pos = endpos) {
 		endpos = s.find_first_of(separators, pos);
 		result.push_back(s.substr(pos, endpos - pos));
 	}
@@ -52,10 +48,11 @@ vector<string> split_string
 /**
  * remove spaces at the beginning or the end of a string
  */
-void remove_spaces(string & s) {
-	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n') s.erase(0, 1);
+void remove_spaces(string& s) {
+	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n')
+		s.erase(0, 1);
 
-	while (*s.rbegin() == ' '  or *s.rbegin() == '\t' or *s.rbegin() == '\n')
+	while (*s.rbegin() == ' ' or * s.rbegin() == '\t' or * s.rbegin() == '\n')
 		s.erase(s.size() - 1, 1);
 }
 
@@ -72,13 +69,10 @@ void remove_spaces(string & s) {
  * current locale into account; perhaps there already is a fitting gettext
  * function?
  */
-bool is_printable(SDL_keysym k)
-{
-	return
-		(k.sym == SDLK_TAB)                                   ||
-		((k.sym >= SDLK_SPACE)   && (k.sym <= SDLK_z))        ||
-		((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
-		((k.sym >= SDLK_KP0)     && (k.sym <= SDLK_KP_EQUALS));
+bool is_printable(SDL_keysym k) {
+	return (k.sym == SDLK_TAB) || ((k.sym >= SDLK_SPACE) && (k.sym <= SDLK_z)) ||
+	       ((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
+	       ((k.sym >= SDLK_KP0) && (k.sym <= SDLK_KP_EQUALS));
 }
 
 /**
@@ -119,3 +113,62 @@ string random_string(const string& chars, int nlen) {
 	return string(buffer.get(), nlen);
 }
 
+char* next_word(char* & p, bool& reached_end, char const terminator) {
+	assert(terminator);
+	char* const result = p;
+	for (; *p != terminator; ++p)
+		if (*p == '\0') {
+			reached_end = true;
+			goto end;
+		}
+	reached_end = false;
+	*p = '\0';  //  terminate the word
+	++p;        //  move past the terminator
+end:
+	if (result < p)
+		return result;
+	throw wexception("expected word");
+}
+
+bool match(char* & candidate, const char* pattern) {
+	for (char* p = candidate;; ++p, ++pattern)
+		if (not * pattern) {
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			break;
+	return false;
+}
+
+bool skip(char* & p, char const c) {
+	char* t = p;
+	while (*t == c)
+		++t;
+	if (p < t) {
+		p = t;
+		return true;
+	} else
+		return false;
+}
+
+void force_skip(char* & p, char const c) {
+	char* t = p;
+	while (*t == c)
+		++t;
+	if (p < t)
+		p = t;
+	else
+		throw wexception("expected '%c' but found \"%s\"", c, p);
+}
+
+bool match_force_skip(char* & candidate, const char* pattern) {
+	for (char* p = candidate;; ++p, ++pattern)
+		if (not * pattern) {
+			force_skip(p);
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			return false;
+
+	return false;
+}

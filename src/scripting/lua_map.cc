@@ -974,6 +974,7 @@ MapObject
 const char L_MapObject::className[] = "MapObject";
 const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	METHOD(L_MapObject, remove),
+	METHOD(L_MapObject, destroy),
 	METHOD(L_MapObject, __eq),
 	METHOD(L_MapObject, has_attribute),
 	{nullptr, nullptr},
@@ -1101,12 +1102,28 @@ int L_MapObject::__eq(lua_State * L) {
 */
 int L_MapObject::remove(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object * o = get(L, egbase);
-
+	Map_Object* o = get(L, egbase);
 	if (!o)
 		return 0;
 
 	o->remove(egbase);
+	return 0;
+}
+
+/* RST
+	.. method:: destroy()
+
+		Removes this object immediately. Might do special actions (like leaving a
+		burning fire). If you want to remove an object without side effects, see
+		:func:`remove`.
+*/
+int L_MapObject::destroy(lua_State * L) {
+	Editor_Game_Base& egbase = get_egbase(L);
+	Map_Object* o = get(L, egbase);
+	if (!o)
+		return 0;
+
+	o->destroy(egbase);
 	return 0;
 }
 

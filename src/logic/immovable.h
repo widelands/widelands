@@ -20,6 +20,8 @@
 #ifndef IMMOVABLE_H
 #define IMMOVABLE_H
 
+#include <memory>
+
 #include "graphic/animation.h"
 #include "logic/buildcost.h"
 #include "logic/instances.h"
@@ -186,7 +188,7 @@ public:
 	T * get_action_data() {
 		if (!m_action_data)
 			return nullptr;
-		if (T * data = dynamic_cast<T *>(m_action_data))
+		if (T * data = dynamic_cast<T *>(m_action_data.get()))
 			return data;
 		set_action_data(nullptr);
 		return nullptr;
@@ -227,7 +229,7 @@ protected:
 	 *
 	 * \warning Use get_action_data to access this.
 	 */
-	ImmovableActionData * m_action_data;
+	std::unique_ptr<ImmovableActionData> m_action_data;
 
 	/**
 	 * Immovables like trees are reserved by a worker that is walking
@@ -250,7 +252,8 @@ public:
 
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &, const OneWorldLegacyLookupTable& lookup_table);
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &,
+		 const OneWorldLegacyLookupTable& lookup_table);
 
 private:
 	void increment_program_pointer();

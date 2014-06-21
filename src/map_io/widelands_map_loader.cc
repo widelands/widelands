@@ -19,6 +19,8 @@
 
 #include "map_io/widelands_map_loader.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/warning.h"
 #include "logic/editor_game_base.h"
@@ -137,7 +139,8 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Heights_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table(create_one_world_legacy_lookup_table(old_world_name));
+	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table
+		(create_one_world_legacy_lookup_table(old_world_name));
 	log("Reading Terrain Data ... ");
 	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());

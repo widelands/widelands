@@ -47,7 +47,6 @@
 #include "logic/worker.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"

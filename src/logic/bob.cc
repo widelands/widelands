@@ -23,7 +23,6 @@
 
 #include <stdint.h>
 
-#include "backtrace.h"
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"

@@ -19,6 +19,8 @@
 
 #include "logic/world/resource_description.h"
 
+#include <memory>
+
 #include "helper.h"
 #include "logic/game_data_error.h"
 #include "profile/profile.h"

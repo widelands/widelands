@@ -1119,7 +1119,9 @@ void Map::recalc_nodecaps_pass2(const World& world, const FCoords & f) {
 	f.field->caps = _calc_nodecaps_pass2(world, f, true);
 }
 
-NodeCaps Map::_calc_nodecaps_pass2(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps) {
+NodeCaps Map::_calc_nodecaps_pass2
+	(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps)
+{
 	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
 
 	// NOTE  This dependency on the bottom-right neighbour is the reason
@@ -1226,7 +1228,8 @@ NodeCaps Map::_calc_nodecaps_pass2(const World& world, FCoords const f, bool con
  * for the calculation. If not (calculation of maximum theoretical possible buildsize) initcaps must be set.
  */
 int Map::calc_buildsize
-	(const World& world, const FCoords & f, bool avoidnature, bool * ismine, bool consider_mobs, NodeCaps initcaps)
+	(const World& world, const FCoords & f, bool avoidnature, bool * ismine,
+	 bool consider_mobs, NodeCaps initcaps)
 {
 	if (consider_mobs) {
 		if (!(f.field->get_caps() & MOVECAPS_WALK))
