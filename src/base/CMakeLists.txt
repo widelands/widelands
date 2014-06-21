@@ -17,5 +17,6 @@ wl_library(base_i18n
     i18n.cc
   DEPENDS
     base_log
+    # TODO(sirver): should be a USES_INTL_LIBRARY
     ${INTL_LIBRARY}
 )
