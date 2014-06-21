@@ -1,3 +1,18 @@
+wl_library(logic_notification
+  SRCS
+    notification.h
+    notification.cc
+  DEPENDS
+    logic_widelands_geometry
+)
+
+
+wl_library(logic_widelands_geometry
+  SRCS
+    widelands_geometry.cc
+    widelands_geometry.h
+)
+
 wl_library(logic
   SRCS
     attackable.h
@@ -80,7 +95,6 @@ wl_library(logic
     militarysite.cc
     militarysite.h
     nodecaps.h
-    notification.h
     objective.h
     parse_map_object_types.h
     partially_finished_building.cc
@@ -130,7 +144,6 @@ wl_library(logic
     warelist.h
     wareworker.h
     widelands.h
-    widelands_geometry.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
     workarea_info.h
@@ -162,6 +175,8 @@ wl_library(logic
     io_fileread
     io_filesystem
     io_stream
+    logic_notification
+    logic_widelands_geometry
     map_io
     map_io_map_loader
     network

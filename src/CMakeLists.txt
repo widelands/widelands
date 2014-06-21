@@ -553,6 +553,8 @@ wl_library(widelands_ball_of_mud
     io_filesystem
     io_stream
     logic
+    logic_notification
+    logic_widelands_geometry
     map_io
     map_io_map_loader
     network

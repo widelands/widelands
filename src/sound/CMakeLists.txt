@@ -16,6 +16,7 @@ wl_library(sound
     io_fileread
     io_filesystem
     logic
+    logic_widelands_geometry
     profile
     widelands_ball_of_mud
     wui

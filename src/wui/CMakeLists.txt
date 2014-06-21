@@ -113,6 +113,8 @@ wl_library(wui
     io_fileread
     io_filesystem
     logic
+    logic_notification
+    logic_widelands_geometry
     network
     profile
     sound

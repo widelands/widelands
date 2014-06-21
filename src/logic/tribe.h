@@ -138,37 +138,25 @@ struct Tribe_Descr : boost::noncopyable {
 		for (uint8_t result = m_anim_frontier.size();;)
 			if (m_anim_frontier.at(--result).first == stylename)
 				return result;
-			else if (not result)
-				throw Nonexistent();
-
-		return 0;
+		throw Nonexistent();
 	}
 	uint8_t flag_style_index    (const std::string & stylename) const {
 		for (uint8_t result = m_anim_flag.size();;)
 			if (m_anim_flag.at(--result).first == stylename)
 				return result;
-			else if (not result)
-				throw Nonexistent();
-
-		return 0;
+		throw Nonexistent();
 	}
 	uint8_t frontier_style_index(char const * const stylename) const {
 		for (uint8_t result = m_anim_frontier.size();;)
 			if (m_anim_frontier.at(--result).first == stylename)
 				return result;
-			else if (not result)
-				throw Nonexistent();
-
-		return 0;
+		throw Nonexistent();
 	}
 	uint8_t flag_style_index    (char const * const stylename) const {
 		for (uint8_t result = m_anim_flag.size();;)
 			if (m_anim_flag.at(--result).first == stylename)
 				return result;
-			else if (not result)
-				throw Nonexistent();
-
-		return 0;
+		throw Nonexistent();
 	}
 	uint8_t next_frontier_style_index(uint8_t i) const {
 		return ++i == m_anim_frontier.size() ? 0 : i;

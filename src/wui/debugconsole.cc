@@ -51,10 +51,10 @@ struct Console : public ChatProvider, public Handler {
 		write("Use 'ls' to list all available commands.");
 	}
 
-	void cmdLs(const std::vector<std::string> &)
-	{
-		container_iterate_const(CommandMap, commands, i)
-			write(i.current->first);
+	void cmdLs(const std::vector<std::string>&) {
+		for (const auto& command : commands) {
+			write(command.first);
+		}
 	}
 
 	void cmdErr(const std::vector<std::string> & args) {
@@ -130,9 +130,11 @@ Handler::~Handler()
 {
 	// This check is an evil hack to account for the singleton-nature
 	// of the Console
-	if (this != &g_console)
-		container_iterate_const(std::vector<std::string>, m_commands, i)
-			g_console.commands.erase(*i.current);
+	if (this != &g_console) {
+		for (const auto& command : m_commands) {
+			g_console.commands.erase(command);
+		}
+	}
 }
 
 void Handler::addCommand(const std::string & cmd, const HandlerFn & fun)

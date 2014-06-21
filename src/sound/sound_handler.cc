@@ -30,6 +30,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "container_iterate.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"

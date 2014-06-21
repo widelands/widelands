@@ -468,7 +468,8 @@ struct BlockedTracker {
 		bool operator()(const CoordData & a, const CoordData & b) const {
 			if (a.dist != b.dist)
 				return a.dist < b.dist;
-			return a.coord.all < b.coord.all;
+			return std::forward_as_tuple(a.coord.y, a.coord.x) <
+			       std::forward_as_tuple(b.coord.y, b.coord.x);
 		}
 	};
 	typedef std::map<CoordData, bool, CoordOrdering> Cache;

@@ -6,5 +6,6 @@ wl_test(test_economy
     test_routing.cc
   DEPENDS
     logic
+    logic_widelands_geometry
     widelands_ball_of_mud
 )

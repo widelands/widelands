@@ -304,8 +304,8 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		Widelands::Game_Preload_Data_Packet gpdp;
 
 		const filenameset_t & gamefiles = m_gamefiles;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
+		for (const std::string& gamefile : gamefiles) {
+			char const * const name = gamefile.c_str();
 
 			try {
 				Widelands::Game_Loader gl(name, m_game);

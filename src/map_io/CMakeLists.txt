@@ -86,6 +86,7 @@ wl_library(map_io
     graphic
     io_fileread
     logic
+    logic_widelands_geometry
     profile
     widelands_ball_of_mud
     wui

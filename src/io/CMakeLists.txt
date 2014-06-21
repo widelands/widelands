@@ -48,7 +48,6 @@ wl_library(io_filesystem
 )
 
 
-# TODO(sirver): This depends on logic, so it should not be here.
 wl_library(io_dedicated_log
   SRCS
     dedicated_log.h
