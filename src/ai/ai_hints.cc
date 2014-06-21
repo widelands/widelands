@@ -20,6 +20,7 @@
 #include "ai/ai_hints.h"
 
 #include <cstring>
+#include <cstdlib>
 
 #include "profile/profile.h"
 
