@@ -21,7 +21,6 @@
 #include "logic/productionsite.h"
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
 #include "base/i18n.h"
 #include "base/wexception.h"

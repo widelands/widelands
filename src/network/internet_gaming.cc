@@ -21,7 +21,6 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <libintl.h>
 
 #include "base/i18n.h"
 #include "base/log.h"

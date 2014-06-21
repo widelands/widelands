@@ -22,7 +22,6 @@
 #include <exception>
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
 #include "base/i18n.h"
 #include "build_info.h"

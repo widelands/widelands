@@ -19,8 +19,8 @@
 
 #include "ai/ai_hints.h"
 
-#include <cstring>
 #include <cstdlib>
+#include <cstring>
 
 #include "profile/profile.h"
 

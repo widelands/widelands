@@ -23,9 +23,8 @@ wl_library(base_i18n
   SRCS
     i18n.h
     i18n.cc
+  USES_INTL
   DEPENDS
     base_log
     base_port
-    # TODO(sirver): should be a USES_INTL_LIBRARY
-    ${INTL_LIBRARY}
 )

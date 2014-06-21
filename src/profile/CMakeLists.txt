@@ -8,6 +8,7 @@ wl_library(profile
     base_log
     base_port
     build_info
+    io_fileread
     io_filesystem
     logic
     widelands_ball_of_mud

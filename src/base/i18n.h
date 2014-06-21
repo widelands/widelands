@@ -24,8 +24,9 @@
 #include <string>
 #include <vector>
 
-#include <config.h>
+#include <libintl.h>  // for ngettext.
 
+#include "config.h"
 #include "base/port.h"
 
 ///A macro to make i18n more readable and aid in tagging strings for translation

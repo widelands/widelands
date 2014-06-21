@@ -22,8 +22,6 @@
 #include <clocale>
 #include <cstdio>
 
-#include <libintl.h>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "economy/flag.h"

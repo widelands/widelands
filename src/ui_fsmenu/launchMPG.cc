@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
 #include "base/i18n.h"
 #include "base/warning.h"

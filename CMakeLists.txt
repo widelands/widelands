@@ -70,9 +70,7 @@ find_package(ZLIB REQUIRED)
 if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_package(intl REQUIRED)
-    # TODO(sirver): Do not globally include for all targets.
-    include_directories(${INTL_INCLUDE_DIR})
-  endif ()
+  endif()
 endif()
 
 # TODO(sirver): One day, this should be enabled. Then we have no more cycles in our dependencies....

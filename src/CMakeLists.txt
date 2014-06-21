@@ -15,6 +15,7 @@ macro(_parse_common_args ARGS)
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_BOOST_REGEX
+    USES_INTL
     USES_OPENGL
     USES_PNG
     USES_SDL
@@ -114,6 +115,15 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} ${SDLTTF_LIBRARY})
   endif()
 
+  if (ARG_USES_INTL)
+    # libintl is not used on all systems, so only include it, when we actually
+    # found it.
+    if (INTL_FOUND)
+      target_include_directories(${NAME} SYSTEM INTERFACE ${INTL_INCLUDE_DIR})
+      target_link_libraries(${NAME} ${INTL_LIBRARY})
+    endif()
+  endif()
+
   if (ARG_USES_BOOST_REGEX)
     target_link_libraries(${NAME} ${Boost_LIBRARIES})
   endif()
@@ -128,8 +138,6 @@ endmacro(_common_compile_tasks)
 function(wl_library NAME)
   _parse_common_args("${ARGN}")
 
-  # TODO(sirver): I do not get any unresolved dependency errors when building a
-  # STATIC library.
   add_library(${NAME}
     STATIC
     EXCLUDE_FROM_ALL
@@ -541,6 +549,7 @@ wl_library(widelands_ball_of_mud
     build_info
     graphic
     io_dedicated_log
+    io_fileread
     io_filesystem
     io_stream
     logic
@@ -558,10 +567,6 @@ wl_library(widelands_ball_of_mud
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_ball_of_mud ${EXECINFO_LIBRARY})
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
-
-if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
-  target_link_libraries(widelands_ball_of_mud ${INTL_LIBRARY})
-endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
 if (WIN32)
   target_link_libraries(widelands_ball_of_mud wsock32)

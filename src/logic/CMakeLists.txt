@@ -159,6 +159,7 @@ wl_library(logic
     base_port
     build_info
     graphic
+    io_fileread
     io_filesystem
     io_stream
     map_io

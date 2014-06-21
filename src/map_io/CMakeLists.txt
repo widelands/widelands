@@ -9,6 +9,7 @@ wl_library(map_io_map_loader
     base_exceptions
     base_i18n
     base_log
+    io_fileread
     io_filesystem
     logic
     map_io
@@ -83,7 +84,7 @@ wl_library(map_io
     base_log
     build_info
     graphic
-    io_filesystem
+    io_fileread
     logic
     profile
     widelands_ball_of_mud

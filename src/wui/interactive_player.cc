@@ -25,7 +25,6 @@
 #include <boost/lambda/construct.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/type_traits.hpp>
-#include <libintl.h>
 
 #include "base/i18n.h"
 #include "economy/flag.h"

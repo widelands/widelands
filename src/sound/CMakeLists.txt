@@ -13,6 +13,7 @@ wl_library(sound
     base_i18n
     base_log
     graphic
+    io_fileread
     io_filesystem
     logic
     profile

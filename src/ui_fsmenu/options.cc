@@ -23,7 +23,6 @@
 #include <iostream>
 
 #include <boost/algorithm/string/predicate.hpp>
-#include <libintl.h>
 
 #include "base/i18n.h"
 #include "constants.h"

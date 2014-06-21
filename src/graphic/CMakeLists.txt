@@ -88,6 +88,7 @@ wl_library(graphic
     base_i18n
     base_log
     build_info
+    io_fileread
     io_filesystem
     io_stream
     logic

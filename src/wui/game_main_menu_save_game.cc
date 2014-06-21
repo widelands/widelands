@@ -20,7 +20,6 @@
 #include "wui/game_main_menu_save_game.h"
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
 #include "base/i18n.h"
 #include "constants.h"

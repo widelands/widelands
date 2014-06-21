@@ -23,10 +23,8 @@
 #include <map>
 #include <utility>
 
-#include <config.h>
-#include <libintl.h>
-
 #include "base/log.h"
+#include "config.h"
 
 #ifdef __APPLE__
 # if LIBINTL_VERSION >= 0x001201

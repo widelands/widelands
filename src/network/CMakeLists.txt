@@ -26,6 +26,7 @@ wl_library(network
     base_log
     build_info
     io_dedicated_log
+    io_fileread
     io_filesystem
     io_stream
     logic

@@ -12,13 +12,20 @@ wl_library(io_stream
     widelands_ball_of_mud
 )
 
-# TODO(sirver): Split this into filesystem and fileread.
-wl_library(io_filesystem
+wl_library(io_fileread
   SRCS
     fileread.cc
     fileread.h
     filewrite.cc
     filewrite.h
+  DEPENDS
+    io_filesystem
+    io_stream
+    widelands_ball_of_mud
+)
+
+wl_library(io_filesystem
+  SRCS
     filesystem/disk_filesystem.cc
     filesystem/disk_filesystem.h
     filesystem/filesystem.cc
@@ -30,10 +37,11 @@ wl_library(io_filesystem
     filesystem/zip_filesystem.cc
     filesystem/zip_filesystem.h
   DEPENDS
+    base_exceptions
     base_log
     base_port
-    base_exceptions
     build_info
+    io_fileread
     io_stream
     third_party_minizip
     widelands_ball_of_mud
@@ -48,6 +56,7 @@ wl_library(io_dedicated_log
   DEPENDS
     base_i18n
     base_log
+    io_fileread
     io_filesystem
     widelands_ball_of_mud
 )

@@ -106,10 +106,11 @@ wl_library(wui
     watchwindow.h
   USES_SDL
   DEPENDS
-    base_log
-    base_i18n
     base_exceptions
+    base_i18n
+    base_log
     graphic
+    io_fileread
     io_filesystem
     logic
     network
