@@ -6,16 +6,12 @@ wl_library(map_io_map_loader
     s2map.cc
     s2map.h
   DEPENDS
-    base_log
-    base_i18n
     base_exceptions
+    base_i18n
+    base_log
     io_filesystem
     logic
-    # TODO(sirver): These headers are not yet in separate libraries, therefore we need ball of mud.
-    #include "constants.h"
-    #include "scoped_timer.h"
-    #include "scripting/scripting.h"
-    #include "upcast.h"
+    map_io
     widelands_ball_of_mud
 )
 
@@ -83,29 +79,14 @@ wl_library(map_io
     widelands_map_version_data_packet.h
   USES_SDL_IMAGE
   DEPENDS
-    base_log
-    base_i18n
     base_exceptions
+    base_i18n
+    base_log
     build_info
     graphic
     io_filesystem
     logic
-    wui
-    # TODO(sirver): These headers are not yet in separate libraries, therefore we need ball of mud.
-    #include "constants.h"
-    #include "container_iterate.h"
-    #include "economy/flag.h"
-    #include "economy/fleet.h"
-    #include "economy/portdock.h"
-    #include "economy/request.h"
-    #include "economy/road.h"
-    #include "economy/ware_instance.h"
-    #include "economy/warehousesupply.h"
-    #include "economy/wares_queue.h"
-    #include "helper.h"
-    #include "profile/profile.h"
-    #include "scoped_timer.h"
-    #include "scripting/scripting.h"
-    #include "upcast.h"
+    profile
     widelands_ball_of_mud
+    wui
 )

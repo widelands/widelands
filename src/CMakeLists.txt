@@ -248,6 +248,7 @@ else()
     SRCS
       main.cc
     DEPENDS
+      base_exceptions
       widelands_ball_of_mud
       build_info
       # TODO(sirver): USE_SDL
@@ -533,12 +534,17 @@ wl_library(widelands_ball_of_mud
     wlapplication.cc
     wlapplication.h
   DEPENDS
+    base_exceptions
     base_i18n
+    base_log
+    build_info
     graphic
     io_dedicated_log
     io_filesystem
+    io_stream
     logic
     map_io
+    map_io_map_loader
     network
     profile
     sound

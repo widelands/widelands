@@ -1,6 +1,7 @@
 wl_library(base_port
   SRCS
     port.h
+    port.cc
 )
 
 wl_library(base_log
@@ -14,6 +15,8 @@ wl_library(base_exceptions
     exceptions.cc
     warning.h
     wexception.h
+  DEPENDS
+    base_port
 )
 
 wl_library(base_i18n
@@ -22,6 +25,7 @@ wl_library(base_i18n
     i18n.cc
   DEPENDS
     base_log
+    base_port
     # TODO(sirver): should be a USES_INTL_LIBRARY
     ${INTL_LIBRARY}
 )

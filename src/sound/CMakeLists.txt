@@ -4,14 +4,17 @@ wl_library(sound
     fxset.h
     songset.cc
     songset.h
-    #TODO: Has dependencies on graphic, logic, and wui... and various things in src root
     sound_handler.cc
     sound_handler.h
   USES_BOOST_REGEX
   USES_SDL_MIXER
   DEPENDS
-    logic
+    base_i18n
     base_log
+    graphic
     io_filesystem
+    logic
     profile
+    widelands_ball_of_mud
+    wui
 )

@@ -8,6 +8,8 @@ wl_library(io_stream
     streamwrite.h
   DEPENDS
     base_exceptions
+    base_port
+    widelands_ball_of_mud
 )
 
 # TODO(sirver): Splitting this into filesystem and fileread.
@@ -29,9 +31,13 @@ wl_library(io_filesystem
     filesystem/zip_filesystem.h
   DEPENDS
     base_log
+    base_port
+    base_exceptions
     build_info
+    io_filesystem
     io_stream
     third_party_minizip
+    widelands_ball_of_mud
 )
 
 
@@ -41,6 +47,8 @@ wl_library(io_dedicated_log
     dedicated_log.h
     dedicated_log.cc
   DEPENDS
+    base_i18n
     base_log
     io_filesystem
+    widelands_ball_of_mud
 )

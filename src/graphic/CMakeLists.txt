@@ -84,6 +84,16 @@ wl_library(graphic
   USES_SDL_IMAGE
   USES_SDL_TTF
   DEPENDS
-    base_log
+    base_exceptions
     base_i18n
+    base_log
+    build_info
+    io_filesystem
+    io_stream
+    logic
+    profile
+    sound
+    ui_basic
+    widelands_ball_of_mud
+    wui
 )

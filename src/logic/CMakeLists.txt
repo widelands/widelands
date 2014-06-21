@@ -152,10 +152,20 @@ wl_library(logic
     world/world.cc
     world/world.h
   DEPENDS
-    sound
+    base_exceptions
+    base_i18n
     base_log
+    base_port
+    build_info
+    graphic
     io_filesystem
-    profile
+    io_stream
     map_io
     map_io_map_loader
+    network
+    profile
+    sound
+    ui_basic
+    widelands_ball_of_mud
+    wui
 )

@@ -1,4 +1,3 @@
-# TODO(sirver): has lots of dependencies on logic and other stuff.
 wl_library(network
   SRCS
     internet_gaming.cc
@@ -22,6 +21,17 @@ wl_library(network
     network_system.h
   USES_SDL_NET
   DEPENDS
+    base_exceptions
+    base_i18n
     base_log
+    build_info
+    io_dedicated_log
     io_filesystem
+    io_stream
+    logic
+    map_io_map_loader
+    profile
+    ui_basic
+    widelands_ball_of_mud
+    wui
 )

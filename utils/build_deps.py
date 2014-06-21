@@ -107,10 +107,8 @@ def extract_targets(cmake_file):
     targets = []
     while len(lines):
         line_idx, line = lines.pop(0)
-        print "#sirver line: %r\n" % (line)
         match = __START_TARGET.match(line)
         if match:
-            print "#sirver match.group(0): %r\n" % (match.group(0))
             content = []
             while len(lines):
                 _, line = lines.pop(0)

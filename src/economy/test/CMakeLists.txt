@@ -1,9 +1,10 @@
 wl_test(test_economy
   SRCS
-    ./economy_test_main.cc
-    ./test_economy.cc
-    ./test_road.cc
-    ./test_routing.cc
+    economy_test_main.cc
+    test_economy.cc
+    test_road.cc
+    test_routing.cc
   DEPENDS
+    logic
     widelands_ball_of_mud
 )
