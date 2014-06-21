@@ -963,7 +963,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			// that might not be around forever.
 			snprintf(message,
 			         sizeof(message),
-			         "<rt image=world/resources/%s_1f.png>"
+			         "<rt image=world/resources/pics/%s4.png>"
 			         "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
 			         rdescr->name().c_str(),
 			         _("A geologist found resources."));
