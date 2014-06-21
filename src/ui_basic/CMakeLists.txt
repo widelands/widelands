@@ -49,6 +49,7 @@ wl_library(ui_basic
     window.cc
     window.h
   USES_BOOST_REGEX
+  USES_SDL
   DEPENDS
     base_exceptions
     base_i18n
@@ -57,16 +58,5 @@ wl_library(ui_basic
     io_filesystem
     profile
     sound
-    # TODO(sirver): These headers are not yet in separate libraries, therefore we need ball of mud.
-    #include "constants.h"
-    #include "container_iterate.h"
-    #include "helper.h"
-    #include "point.h"
-    #include "rgbcolor.h"
-    #include "scripting/lua_table.h"
-    #include "scripting/scripting.h"
-    #include "text_layout.h"
-    #include "utf8.h"
-    #include "wlapplication.h"
     widelands_ball_of_mud
 )

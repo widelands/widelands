@@ -104,6 +104,7 @@ wl_library(wui
     waresqueuedisplay.h
     watchwindow.cc
     watchwindow.h
+  USES_SDL
   DEPENDS
     base_log
     base_i18n
@@ -115,32 +116,5 @@ wl_library(wui
     profile
     sound
     ui_basic
-    # TODO(sirver): These headers are not yet in separate libraries, therefore we need ball of mud.
-    #include "chat.h"
-    #include "constants.h"
-    #include "container_iterate.h"
-    #include "economy/economy.h"
-    #include "economy/flag.h"
-    #include "economy/portdock.h"
-    #include "economy/request.h"
-    #include "economy/road.h"
-    #include "economy/ware_instance.h"
-    #include "economy/wares_queue.h"
-    #include "game_io/game_loader.h"
-    #include "game_io/game_preload_data_packet.h"
-    #include "game_io/game_saver.h"
-    #include "gamecontroller.h"
-    #include "gamesettings.h"
-    #include "helper.h"
-    #include "point.h"
-    #include "ref_cast.h"
-    #include "rgbcolor.h"
-    #include "scripting/lua_table.h"
-    #include "scripting/scripting.h"
-    #include "text_layout.h"
-    #include "timestring.h"
-    #include "ui_fsmenu/fileview.h"
-    #include "upcast.h"
-    #include "wlapplication.h"
     widelands_ball_of_mud
 )

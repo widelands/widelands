@@ -55,14 +55,11 @@ find_package(Boost 1.48
 
 find_package (PythonInterp REQUIRED)
 
-find_package(SDL REQUIRED)
-# TODO(sirver): Do not globally include for all targets.
-include_directories(${SDL_INCLUDE_DIR})
-
 find_package(GLEW REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
+find_package(SDL REQUIRED)
 find_package(SDL_gfx REQUIRED)
 find_package(SDL_image REQUIRED)
 find_package(SDL_mixer REQUIRED)

@@ -20,7 +20,6 @@
 #ifndef AI_HINTS_H
 #define AI_HINTS_H
 
-#include <SDL_types.h>
 #include <boost/noncopyable.hpp>
 
 class Section;

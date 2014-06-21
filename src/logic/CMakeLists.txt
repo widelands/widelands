@@ -151,6 +151,8 @@ wl_library(logic
     world/terrain_description.h
     world/world.cc
     world/world.h
+  # TODO(sirver): Uses SDL only on WIN32 for a dirty hack.
+  USES_SDL
   DEPENDS
     base_exceptions
     base_i18n

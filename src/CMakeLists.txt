@@ -18,6 +18,7 @@ macro(_parse_common_args ARGS)
     USES_BOOST_REGEX
     USES_OPENGL
     USES_PNG
+    USES_SDL
     USES_SDL_GFX
     USES_SDL_IMAGE
     USES_SDL_MIXER
@@ -82,6 +83,11 @@ macro(_common_compile_tasks)
   if(ARG_USES_PNG)
     target_include_directories(${NAME} SYSTEM INTERFACE ${PNG_INCLUDE_DIR})
     target_link_libraries(${NAME} ${PNG_LIBRARY})
+  endif()
+
+  if(ARG_USES_SDL)
+    target_include_directories(${NAME} SYSTEM INTERFACE ${SDL_INCLUDE_DIR})
+    target_link_libraries(${NAME} ${SDL_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_MIXER)
@@ -237,22 +243,20 @@ if (WIN32)
     SRCS
       main.cc
       ${WIN32_ICON_O}
+    USES_SDL
     DEPENDS
       widelands_ball_of_mud
       build_info
-      # TODO(sirver): USE_SDL
-      ${SDL_LIBRARY}
   )
 else()
   wl_binary(widelands
     SRCS
       main.cc
+    USES_SDL
     DEPENDS
       base_exceptions
       widelands_ball_of_mud
       build_info
-      # TODO(sirver): USE_SDL
-      ${SDL_LIBRARY}
   )
 endif()
 
@@ -533,6 +537,7 @@ wl_library(widelands_ball_of_mud
     utf8.h
     wlapplication.cc
     wlapplication.h
+  USES_SDL
   DEPENDS
     base_exceptions
     base_i18n

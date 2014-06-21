@@ -80,6 +80,7 @@ wl_library(graphic
     wordwrap.h
   USES_OPENGL
   USES_PNG
+  USES_SDL
   USES_SDL_GFX
   USES_SDL_IMAGE
   USES_SDL_TTF
