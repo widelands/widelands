@@ -15,6 +15,40 @@ import os
 import re
 import sys
 
+ansicolor = {
+    "default" : '\033[0m',
+
+    "black" : '\033[30m',
+    "red" : '\033[31m',
+    "green" : '\033[32m',
+    "yellow" : '\033[33m',
+    "blue" : '\033[34m',
+    "magenta" : '\033[35m',
+    "purple" : '\033[35m',
+    "cyan" : '\033[36m',
+    "white" : '\033[37m',
+
+    "reset" : '\033[0;0m',
+    "bold" : '\033[1m',
+
+    "blackbg" : '\033[40m',
+    "redbg" : '\033[41m',
+    "greenbg" : '\033[42m',
+    "yellowbg" : '\033[43m',
+    "bluebg" : '\033[44m',
+    "magentabg" : '\033[45m',
+    "cyanbg" : '\033[46m',
+    "whitebg" : '\033[47m',
+}
+
+def print_error(filename, line_index, message):
+    term = os.environ.get("TERM", "dumb")
+    if term != "dumb":
+        filename = '%s%s%s' % (ansicolor["green"], filename, ansicolor["reset"])
+        line_index = '%s%s%s' % (ansicolor["cyan"], line_index, ansicolor["reset"])
+        message = '%s%s%s%s' % (ansicolor["yellow"], ansicolor["bold"], message, ansicolor["reset"])
+    print("%s:%s: %s" % (filename, line_index, message))
+
 __INCLUDE = re.compile(r'#include "([^"]+)"')
 def extract_includes(srcdir, source):
     """Returns all locally included files."""
@@ -100,18 +134,31 @@ def find_source_and_cmake_files(srcdir):
                 sources.add(path.join(dirpath, filename))
     return cmake_files, sources
 
-def report_unused_sources(srcdir, target, sources):
-    users = defaultdict(list)
-    for lib in target.values():
-        for src in lib.srcs:
-            users[src].append(lib)
-
-    unused_sources = sources - set(users.keys())
+def report_unused_sources(srcdir, sources, owners_of_src):
+    unused_sources = sources - set(owners_of_src.keys())
     for src in sorted(unused_sources):
         rel = os.path.relpath(src, srcdir)
-        print "%s:1: File is not mentioned in any build rule." % (rel)
+        print_error(rel, 1, "(CRITICAL) File not mentioned in any build rule.")
+    return len(unused_sources) != 0
 
-    return len(unused_sources)
+def report_unmentioned_dependencies(srcdir, target, includes_by_src, owners_of_src):
+    target_includes = set()
+    for src in target.srcs:
+        target_includes.update(includes_by_src[src])
+
+    deps = defaultdict(set)
+    for include in target_includes:
+        rel = os.path.relpath(include, srcdir)
+        deps[owners_of_src[include].name].add(rel)
+    if target.name in deps:
+        del deps[target.name]
+
+    unmentioned = set(deps.keys()) - set(target.depends)
+    cmake_rel = os.path.relpath(target.defined_at[1], srcdir)
+    for name in unmentioned:
+        print_error(rel, target.defined_at[0], "%s misses DEPENDS on %s, because it includes %s" %(
+                target.name, sorted(deps[name])))
+    return False
 
 def parse_args():
     p = argparse.ArgumentParser(description=
@@ -127,21 +174,31 @@ def main():
     srcdir = path.join(base_dir(), "src")
     cmake_files, sources = find_source_and_cmake_files(srcdir)
 
-    includes = {
-        source_file: extract_includes(
-            srcdir, source_file) for source_file in sources
-    }
-
-    errors = False
+    includes_by_src = {}
+    for src in sources:
+        includes_by_src[src] = extract_includes(srcdir, src)
 
     target_list = []
     for cmake_file in cmake_files:
         target_list.extend(extract_targets(cmake_file))
     targets = {l.name: l for l in target_list}
 
-    errors |= report_unused_sources(srcdir, targets, sources)
+    owners_of_src = {}
+    for lib in targets.values():
+        for src in lib.srcs:
+            if src in owners_of_src:
+                print "%s:1 is owned by more than one target." % src
+            owners_of_src[src] = lib
 
-    return errors
+
+    if (report_unused_sources(srcdir, sources, owners_of_src)):
+        return 1
+
+    has_errors = False
+    for t in targets.values():
+        has_errors |= report_unmentioned_dependencies(srcdir, t, includes_by_src, owners_of_src)
+
+    return has_errors
 
 if __name__ == '__main__':
     sys.exit(main())
