@@ -1565,7 +1565,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		if (kWinnerDebug)
 			log(" TDEBUG:  no building picked up\n");
 
-		mine = false;
 		return false;
 	}
 
