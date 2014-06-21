@@ -1,4 +1,3 @@
-# TODO(sirver): Has more dependencies than are listed here.
 wl_library(graphic
   SRCS
     align.cc

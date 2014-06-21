@@ -12,7 +12,7 @@ wl_library(io_stream
     widelands_ball_of_mud
 )
 
-# TODO(sirver): Splitting this into filesystem and fileread.
+# TODO(sirver): Split this into filesystem and fileread.
 wl_library(io_filesystem
   SRCS
     fileread.cc

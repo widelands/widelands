@@ -10,7 +10,6 @@ add_custom_target(codecheck)
 add_custom_target(wl_tests)
 
 macro(_parse_common_args ARGS)
-  # TODO(sirver): add OPTIONS for the other external libraries we use
   set(OPTIONS
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
     C_LIBRARY # Pure C library. No CXX flags.
@@ -129,9 +128,8 @@ endmacro(_common_compile_tasks)
 function(wl_library NAME)
   _parse_common_args("${ARGN}")
 
-  # TODO(sirver): I do not get any unresolved dependency errors
-  # when building a STATIC library, only for SHARED. We should
-  # always gets those errors to track down cyclic dependencies.
+  # TODO(sirver): I do not get any unresolved dependency errors when building a
+  # STATIC library.
   add_library(${NAME}
     STATIC
     EXCLUDE_FROM_ALL
@@ -274,10 +272,8 @@ add_subdirectory(third_party)
 add_subdirectory(ui_basic)
 add_subdirectory(wui)
 
-#TODO: It looks like various things have cyclic dependencies
-#in all directions. Ideally this core shouldn't exist or at least
-#be a limited set of header files needed to boostrap the other
-#parts. For now it is absolutely everything to make things build :(
+# TODO: Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
+# library.
 wl_library(widelands_ball_of_mud
   SRCS
     TribeBasicInfo.h

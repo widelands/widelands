@@ -1,4 +1,3 @@
-# TODO(sirver): more dependencies
 wl_library(logic
   SRCS
     attackable.h
