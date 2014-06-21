@@ -80,7 +80,6 @@ wl_library(map_io
   USES_SDL_IMAGE
   DEPENDS
     base_exceptions
-    base_i18n
     base_log
     build_info
     graphic

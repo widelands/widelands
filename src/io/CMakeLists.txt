@@ -34,7 +34,6 @@ wl_library(io_filesystem
     base_port
     base_exceptions
     build_info
-    io_filesystem
     io_stream
     third_party_minizip
     widelands_ball_of_mud
