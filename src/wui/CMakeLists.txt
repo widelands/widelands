@@ -11,7 +11,6 @@ wl_library(wui
     buildingwindow.h
     chatoverlay.cc
     chatoverlay.h
-    CMakeLists.txt
     constructionsitewindow.cc
     debugconsole.cc
     debugconsole.h

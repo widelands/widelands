@@ -1,7 +1,10 @@
 wl_library(third_party_minizip
   THIRD_PARTY
   SRCS
+    minizip/ioapi.h
     minizip/unzip.cc
+    minizip/unzip.h
+    minizip/zip.h
   USES_ZLIB
 )
 

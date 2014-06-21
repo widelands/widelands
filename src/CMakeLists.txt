@@ -232,8 +232,7 @@ if (WIN32)
 			-o${WIN32_ICON_O}
 			-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
   )
-  wl_binary(
-    widelands
+  wl_binary(widelands
     WIN32
     SRCS
       main.cc
@@ -245,8 +244,7 @@ if (WIN32)
       ${SDL_LIBRARY}
   )
 else()
-  wl_binary(
-    widelands
+  wl_binary(widelands
     SRCS
       main.cc
     DEPENDS
@@ -377,6 +375,7 @@ wl_library(widelands_ball_of_mud
     editor/tools/editor_tool.h
     editor/tools/editor_tool_action.h
     editor/tools/multi_select.h
+    editor/ui_menus/categorized_item_selection_menu.h
     editor/ui_menus/editor_main_menu.cc
     editor/ui_menus/editor_main_menu.h
     editor/ui_menus/editor_main_menu_load_map.cc
@@ -455,6 +454,7 @@ wl_library(widelands_ball_of_mud
     scoped_timer.h
     scripting/c_utils.cc
     scripting/c_utils.h
+    scripting/eris.h
     scripting/factory.cc
     scripting/factory.h
     scripting/lua_bases.cc
@@ -471,6 +471,7 @@ wl_library(widelands_ball_of_mud
     scripting/lua_map.cc
     scripting/lua_map.h
     scripting/lua_path.cc
+    scripting/lua_path.h
     scripting/lua_root.cc
     scripting/lua_root.h
     scripting/lua_table.cc

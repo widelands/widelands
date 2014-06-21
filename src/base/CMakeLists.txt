@@ -1,3 +1,8 @@
+wl_library(base_port
+  SRCS
+    port.h
+)
+
 wl_library(base_log
   SRCS
     log.cc
