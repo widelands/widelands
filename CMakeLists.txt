@@ -1,6 +1,6 @@
 project (widelands)
 
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 2.8.12)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -131,11 +131,17 @@ else()
     add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
   endif()
 
-  # Because of: https://svn.boost.org/trac/boost/ticket/9240.
-  add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.7.99)
+     # Because of: https://svn.boost.org/trac/boost/ticket/9240.
+     add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
+  endif()
 
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wall")
-  add_flag(WL_COMPILE_DIAGNOSTICS "-Wpedantic")
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+    add_flag(WL_COMPILE_DIAGNOSTICS "-pedantic")
+  else()
+    add_flag(WL_COMPILE_DIAGNOSTICS "-Wpedantic")
+  endif()
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wdeprecated-declarations")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wextra")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wformat")
