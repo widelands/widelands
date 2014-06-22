@@ -25,8 +25,6 @@ run(function()
    assert_equal(6, #p1.inbox)
    mv.buttons.messages:click()
 
-   for k,v in pairs(mv.windows.messages.buttons) do print(v.name) end
-
    for t=0,6 do
      sleep(1000)
      mv.windows.messages.buttons.archive_or_restore_selected_messages:click()
