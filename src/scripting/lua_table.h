@@ -137,7 +137,7 @@ public:
 	template <typename KeyType> int get_int(const KeyType& key) const {
 		const double value = get_double(key);
 
-		if (std::abs(value - std::floorf(value)) > 1e-7) {
+		if (std::abs(value - std::floor(value)) > 1e-7) {
 			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a integer value.");
 		}
 		return static_cast<int>(value);
