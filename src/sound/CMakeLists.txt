@@ -1,0 +1,23 @@
+wl_library(sound
+  SRCS
+    fxset.cc
+    fxset.h
+    songset.cc
+    songset.h
+    sound_handler.cc
+    sound_handler.h
+  USES_BOOST_REGEX
+  USES_SDL
+  USES_SDL_MIXER
+  DEPENDS
+    base_i18n
+    base_log
+    graphic
+    io_fileread
+    io_filesystem
+    logic
+    logic_widelands_geometry
+    profile
+    widelands_ball_of_mud
+    wui
+)

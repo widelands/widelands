@@ -21,7 +21,7 @@
 
 #include <map>
 
-#include "i18n.h"
+#include "base/i18n.h"
 
 static std::map <std::string, std::string> igmessages;
 

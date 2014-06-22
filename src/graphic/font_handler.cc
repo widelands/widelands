@@ -26,13 +26,13 @@
 #include <SDL_ttf.h>
 #include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "graphic/wordwrap.h"
-#include "log.h"
-#include "wexception.h"
 
 namespace UI {
 

@@ -23,9 +23,9 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/i18n.h"
 #include "constants.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"

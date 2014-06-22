@@ -19,8 +19,8 @@
 
 #include "logic/pathfield.h"
 
+#include "base/wexception.h"
 #include "container_iterate.h"
-#include "wexception.h"
 
 namespace Widelands {
 

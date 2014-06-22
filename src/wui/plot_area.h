@@ -66,14 +66,14 @@ struct WUIPlot_Area : public UI::Panel {
 			set_time(TIME_GAME);
 		else
 			set_time(static_cast<TIME>(time));
-	};
-	TIME get_time() {return static_cast<TIME>(m_time); };
+	}
+	TIME get_time() {return static_cast<TIME>(m_time); }
 	int32_t get_time_id() {
 		if (m_time == TIME_GAME)
 			return m_game_time_id;
 		else
 			return m_time;
-	};
+	}
 	void set_sample_rate(uint32_t id); // in milliseconds
 
 	int32_t get_game_time_id();

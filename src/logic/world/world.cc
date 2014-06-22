@@ -23,15 +23,24 @@
 #include <memory>
 #include <sstream>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "constants.h"
 #include "graphic/graphic.h"
+#include "helper.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
 #include "logic/critter_bob.h"
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
+#include "logic/parse_map_object_types.h"
 #include "logic/widelands.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
+#include "profile/profile.h"
 
 namespace Widelands {
 

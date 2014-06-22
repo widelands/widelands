@@ -22,6 +22,7 @@
 #include <cstdio>
 #include <list>
 
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "gamecontroller.h"
@@ -49,7 +50,6 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wui/mapviewpixelconstants.h"
 
 namespace Widelands {
@@ -763,7 +763,7 @@ void Soldier::init_auto_task(Game & game) {
 
 struct FindNodeOwned {
 	FindNodeOwned(Player_Number owner) : m_owner(owner)
-	{};
+	{}
 	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}

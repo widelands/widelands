@@ -28,8 +28,8 @@ class Exception : public std::exception {
 public:
 	Exception(std::string msg) : std::exception(), m_msg(msg) {
 	}
-	virtual ~Exception() throw () {}
-	virtual const char* what() const throw () override {return m_msg.c_str();}
+	virtual ~Exception() noexcept {}
+	virtual const char* what() const noexcept override {return m_msg.c_str();}
 
 private:
 	std::string m_msg;

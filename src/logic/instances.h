@@ -31,10 +31,10 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
-#include "log.h"
+#include "base/log.h"
+#include "base/port.h"
 #include "logic/cmd_queue.h"
 #include "logic/widelands.h"
-#include "port.h"
 #include "ref_cast.h"
 
 class FileRead;
@@ -152,7 +152,7 @@ class Map_Object : boost::noncopyable {
 	friend struct Object_Manager;
 	friend struct Object_Ptr;
 
-	MO_DESCR(Map_Object_Descr);
+	MO_DESCR(Map_Object_Descr)
 
 public:
 	enum {

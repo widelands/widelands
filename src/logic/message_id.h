@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#include "port.h"
+#include "base/port.h"
 
 namespace Widelands {
 

@@ -64,7 +64,7 @@ class MilitarySite :
 	public ProductionSite, public SoldierControl, public Attackable
 {
 	friend class Map_Buildingdata_Data_Packet;
-	MO_DESCR(MilitarySite_Descr);
+	MO_DESCR(MilitarySite_Descr)
 
 public:
 	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.

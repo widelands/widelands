@@ -19,6 +19,7 @@
 
 #include "economy/flag.h"
 
+#include "base/wexception.h"
 #include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
@@ -34,7 +35,6 @@
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 

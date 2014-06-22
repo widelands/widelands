@@ -22,9 +22,9 @@
 #include <string>
 #include <vector>
 
+#include "base/i18n.h"
 #include "container_iterate.h"
 #include "helper.h"
-#include "i18n.h"
 #include "logic/game_data_error.h"
 
 namespace Widelands {
@@ -83,4 +83,3 @@ void Military_Data::parse(Section & s)
 }
 
 }
-

@@ -97,7 +97,7 @@ public:
 		return 0;
 	}  // non unduable tools don't need to implement this.
 	virtual const char * get_sel_impl() const = 0;
-	virtual bool operates_on_triangles() const {return false;};
+	virtual bool operates_on_triangles() const {return false;}
 
 protected:
 	Editor_Tool & m_second, & m_third;

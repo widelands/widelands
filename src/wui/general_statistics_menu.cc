@@ -21,9 +21,9 @@
 
 #include <memory>
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"

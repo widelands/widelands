@@ -20,7 +20,7 @@
 #ifndef LOGIC_MAPASTAR_H
 #define LOGIC_MAPASTAR_H
 
-#include "log.h"
+#include "base/log.h"
 #include "logic/map.h"
 #include "logic/pathfield.h"
 

@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -58,7 +59,6 @@
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 

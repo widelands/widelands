@@ -49,7 +49,7 @@ public:
 		UNDERLINE = 4,
 		SHADOW = 8,
 	};
-	virtual ~IFont() {};
+	virtual ~IFont() {}
 
 	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
 	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) = 0;
@@ -64,7 +64,7 @@ public:
  */
 class IFontLoader {
 public:
-	virtual ~IFontLoader() {};
+	virtual ~IFontLoader() {}
 
 	virtual IFont * load(const std::string& name, int ptsize) = 0;
 };
@@ -75,7 +75,7 @@ public:
  */
 class IRefMap {
 public:
-	virtual ~IRefMap() {};
+	virtual ~IRefMap() {}
 	virtual std::string query(int16_t x, int16_t y) = 0;
 };
 
@@ -86,8 +86,8 @@ public:
 typedef std::set<std::string> TagSet;
 class IRenderer {
 public:
-	IRenderer() {};
-	virtual ~IRenderer() {};
+	IRenderer() {}
+	virtual ~IRenderer() {}
 
 	// Render the given string in the given width. Restricts the allowed tags to
 	// the ones in TagSet. The renderer does not do caching in the SurfaceCache
@@ -105,4 +105,3 @@ IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*, IFontLoader* fl);
 };
 
 #endif /* end of include guard: RT_RENDER_H */
-

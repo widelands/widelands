@@ -55,7 +55,7 @@ struct Transfer;
 class WareInstance : public Map_Object {
 	friend struct Map_Waredata_Data_Packet;
 
-	MO_DESCR(WareDescr);
+	MO_DESCR(WareDescr)
 
 public:
 	WareInstance(Ware_Index, const WareDescr* const);

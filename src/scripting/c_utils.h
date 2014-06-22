@@ -24,8 +24,8 @@
 #include "logic/game.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/factory.h"
+#include "third_party/eris/lua.hpp"
 
 Factory & get_factory(lua_State *);
 Widelands::Game & get_game(lua_State *);

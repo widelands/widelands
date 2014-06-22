@@ -22,7 +22,6 @@
 #include <boost/format.hpp>
 
 #include "gamecontroller.h"
-#include "log.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/critter_bob.h"
 #include "logic/findimmovable.h"

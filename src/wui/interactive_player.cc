@@ -25,14 +25,12 @@
 #include <boost/lambda/construct.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/type_traits.hpp>
-#include <libintl.h>
 
-#include "debugconsole.h"
+#include "base/i18n.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/font_handler.h"
 #include "helper.h"
-#include "i18n.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
 #include "logic/constructionsite.h"
@@ -46,6 +44,7 @@
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
 #include "wui/building_statistics_menu.h"
+#include "wui/debugconsole.h"
 #include "wui/encyclopedia_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"

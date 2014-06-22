@@ -24,6 +24,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
@@ -34,7 +35,6 @@
 #include "graphic/text/rt_render.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "io/filesystem/filesystem.h"
-#include "wexception.h"
 
 
 using namespace std;
@@ -92,7 +92,7 @@ namespace UI {
 class Font_Handler1 : public IFont_Handler1 {
 public:
 	Font_Handler1(ImageCache* image_cache, SurfaceCache* surface_cache, RT::IRenderer* renderer) :
-		surface_cache_(surface_cache), image_cache_(image_cache), renderer_(renderer) {};
+		surface_cache_(surface_cache), image_cache_(image_cache), renderer_(renderer) {}
 	virtual ~Font_Handler1() {}
 
 	const Image* render(const string& text, uint16_t w = 0) override {

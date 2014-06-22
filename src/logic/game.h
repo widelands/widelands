@@ -130,7 +130,7 @@ public:
 	bool is_loaded() {return m_state == gs_running;}
 	void end_dedicated_game();
 
-	void cleanup_for_load();
+	void cleanup_for_load() override;
 
 	// in-game logic
 	const Cmd_Queue & cmdqueue() const {return m_cmdqueue;}
@@ -199,7 +199,7 @@ public:
 
 	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
 
-	bool is_replay() const {return m_replay;};
+	bool is_replay() const {return m_replay;}
 
 private:
 	void SyncReset();

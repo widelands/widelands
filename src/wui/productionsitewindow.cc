@@ -19,8 +19,6 @@
 
 #include "wui/productionsitewindow.h"
 
-#include <libintl.h>
-
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "logic/constructionsite.h"

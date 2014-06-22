@@ -71,7 +71,7 @@ public:
 	virtual void Unlink(const std::string & file) override;
 	virtual void Rename(const std::string &, const std::string &) override;
 
-	virtual std::string getBasename() override {return std::string();};
+	virtual std::string getBasename() override {return std::string();}
 
 	bool FindConflictingVersionFile(FileSystem &);
 	bool FindMatchingVersionFile(FileSystem &);

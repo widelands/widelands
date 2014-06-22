@@ -23,11 +23,12 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/tribe.h"
@@ -35,7 +36,6 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {

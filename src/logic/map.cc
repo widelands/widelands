@@ -25,12 +25,13 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -42,12 +43,10 @@
 #include "logic/tribe.h"
 #include "logic/world/world.h"
 #include "map_generator.h"
+#include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
-#include "s2map.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wui/overlay_manager.h"
-
 
 namespace Widelands {
 

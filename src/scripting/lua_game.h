@@ -22,9 +22,9 @@
 
 #include "logic/building.h"
 #include "logic/message_id.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
+#include "third_party/eris/lua.hpp"
 
 namespace Widelands {
 	struct Tribe_Descr;

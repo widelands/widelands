@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 class LuaError : public _wexception {
 public:

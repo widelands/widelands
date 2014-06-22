@@ -19,9 +19,9 @@
 
 #include "wui/ware_statistics_menu.h"
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"

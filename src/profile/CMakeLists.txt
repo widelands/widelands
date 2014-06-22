@@ -1,0 +1,15 @@
+wl_library(profile
+  SRCS
+    profile.h
+    profile.cc
+  DEPENDS
+    base_exceptions
+    base_i18n
+    base_log
+    base_port
+    build_info
+    io_fileread
+    io_filesystem
+    logic
+    widelands_ball_of_mud
+ )

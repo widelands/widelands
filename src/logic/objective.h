@@ -24,7 +24,7 @@
 #include <cstring>
 #include <string>
 
-#include "i18n.h"
+#include "base/i18n.h"
 
 namespace Widelands {
 

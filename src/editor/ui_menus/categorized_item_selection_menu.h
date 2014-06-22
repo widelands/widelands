@@ -23,10 +23,10 @@
 #include <string>
 #include <cmath>
 
-#include "description_maintainer.h"
+#include "base/i18n.h"
 #include "graphic/image.h"
 #include "graphic/image_transformations.h"
-#include "i18n.h"
+#include "logic/description_maintainer.h"
 #include "logic/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
