@@ -131,7 +131,7 @@ else()
     add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
   endif()
 
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.7.99)
+  if (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8))
      # Because of: https://svn.boost.org/trac/boost/ticket/9240.
      add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
   endif()
