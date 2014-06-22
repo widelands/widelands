@@ -110,7 +110,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlayFX;
 	friend struct ProductionProgram::ActConstruct;
-	MO_DESCR(ProductionSite_Descr);
+	MO_DESCR(ProductionSite_Descr)
 
 public:
 	ProductionSite(const ProductionSite_Descr & descr);

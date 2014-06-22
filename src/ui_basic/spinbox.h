@@ -22,7 +22,7 @@
 
 #include <cstring>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/button.h"
 #include "graphic/graphic.h"
 

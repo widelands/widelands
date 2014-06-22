@@ -27,9 +27,9 @@
 #include <boost/lexical_cast.hpp>
 
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_errors.h"
+#include "third_party/eris/lua.hpp"
 
 class LuaTableKeyError : public LuaError {
 public:

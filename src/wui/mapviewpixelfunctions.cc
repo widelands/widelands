@@ -19,7 +19,7 @@
 
 #include "wui/mapviewpixelfunctions.h"
 
-#include "vector.h"
+#include "wui/vector.h"
 
 using namespace Widelands;
 

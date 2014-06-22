@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
+#include "base/log.h"
 #include "game_io/game_cmd_queue_data_packet.h"
 #include "game_io/game_game_class_data_packet.h"
 #include "game_io/game_interactive_player_data_packet.h"
@@ -30,7 +31,6 @@
 #include "game_io/game_player_info_data_packet.h"
 #include "game_io/game_preload_data_packet.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/cmd_expire_message.h"
 #include "logic/game.h"
 #include "logic/player.h"

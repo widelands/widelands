@@ -26,8 +26,8 @@
 
 #include <stdint.h>
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_errors.h"
+#include "third_party/eris/lua.hpp"
 
 class FileRead;
 class FileWrite;

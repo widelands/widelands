@@ -19,6 +19,7 @@
 
 #include "ai/ai_hints.h"
 
+#include <cstdlib>
 #include <cstring>
 
 #include "profile/profile.h"

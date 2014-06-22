@@ -21,12 +21,12 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "container_iterate.h"
 #include "economy/fleet.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/expedition_bootstrap.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

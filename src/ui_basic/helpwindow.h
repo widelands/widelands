@@ -22,7 +22,7 @@
 
 #include <memory>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"

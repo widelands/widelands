@@ -18,8 +18,8 @@
 
 #include "wui/game_options_sound_menu.h"
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "sound/sound_handler.h"
 
 GameOptionsSoundMenu::GameOptionsSoundMenu

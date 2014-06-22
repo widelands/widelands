@@ -19,9 +19,9 @@
 
 #include "network/network_player_settings_backend.h"
 
+#include "base/i18n.h"
+#include "base/log.h"
 #include "gamesettings.h"
-#include "i18n.h"
-#include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"

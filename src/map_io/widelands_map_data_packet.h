@@ -40,4 +40,3 @@ struct Map_Map_Object_Saver;
 	}
 
 #endif
-

@@ -27,7 +27,7 @@
 #define LUNA_IMPL_H
 
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
+#include "third_party/eris/lua.hpp"
 
 int luna_unpersisting_closure(lua_State * L);
 

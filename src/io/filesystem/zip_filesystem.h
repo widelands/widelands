@@ -23,13 +23,12 @@
 #include <cstring>
 #include <string>
 
-#include <minizip/unzip.h>
-#include <minizip/zip.h>
-
+#include "base/port.h"
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "port.h"
+#include "third_party/minizip/unzip.h"
+#include "third_party/minizip/zip.h"
 
 class ZipFilesystem : public FileSystem {
 public:
@@ -64,7 +63,7 @@ public:
 
 	static FileSystem * CreateFromDirectory(const std::string & directory);
 
-	virtual std::string getBasename() override {return m_zipfilename;};
+	virtual std::string getBasename() override {return m_zipfilename;}
 
 protected:
 	void m_OpenUnzip();

@@ -19,12 +19,12 @@
 
 #include "logic/cmd_incorporate.h"
 
-#include "i18n.h"
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wexception.h"
 
 namespace Widelands {
 

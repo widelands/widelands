@@ -33,25 +33,27 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <config.h>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #endif
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "computer_player.h"
+#include "config.h"
 #include "editor/editorinteractive.h"
 #include "gamesettings.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -84,8 +86,6 @@
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "warning.h"
-#include "wexception.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"

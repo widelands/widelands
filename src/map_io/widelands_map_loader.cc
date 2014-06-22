@@ -21,7 +21,8 @@
 
 #include <memory>
 
-#include "log.h"
+#include "base/log.h"
+#include "base/warning.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
@@ -53,7 +54,6 @@
 #include "map_io/widelands_map_terrain_data_packet.h"
 #include "map_io/widelands_map_version_data_packet.h"
 #include "scoped_timer.h"
-#include "warning.h"
 
 namespace Widelands {
 

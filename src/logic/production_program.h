@@ -29,8 +29,8 @@
 #include <boost/noncopyable.hpp>
 #include <stdint.h>
 
+#include "base/log.h"
 #include "container_iterate.h"
-#include "log.h"
 #include "logic/bill_of_materials.h"
 #include "logic/program_result.h"
 #include "logic/tattribute.h"

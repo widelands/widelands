@@ -55,7 +55,7 @@ class DismantleSite : public Partially_Finished_Building {
 
 	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
 
-	MO_DESCR(DismantleSite_Descr);
+	MO_DESCR(DismantleSite_Descr)
 
 public:
 	DismantleSite(const DismantleSite_Descr & descr);

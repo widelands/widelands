@@ -29,10 +29,10 @@
 #include <boost/lexical_cast.hpp>
 
 #include "graphic/image_cache.h"
+#include "graphic/rect.h"
 #include "graphic/surface.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
-#include "rect.h"
 
 
 using namespace std;
@@ -111,7 +111,7 @@ public:
 	};
 	RenderNode(NodeStyle& ns)
 		: m_floating(NO_FLOAT), m_halign(ns.halign), m_valign(ns.valign), m_x(0), m_y(0) {}
-	virtual ~RenderNode() {};
+	virtual ~RenderNode() {}
 
 	virtual uint16_t width() = 0;
 	virtual uint16_t height() = 0;
@@ -299,7 +299,7 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p) {
 class TextNode : public RenderNode {
 public:
 	TextNode(IFont& font, NodeStyle&, const string& txt);
-	virtual ~TextNode() {};
+	virtual ~TextNode() {}
 
 	virtual uint16_t width() override {return m_w;}
 	virtual uint16_t height() override {return m_h + m_s.spacing;}
@@ -346,8 +346,8 @@ public:
 	FillingTextNode(IFont& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
 		TextNode(font, ns, txt), m_expanding(expanding) {
 			m_w = w;
-		};
-	virtual ~FillingTextNode() {};
+		}
+	virtual ~FillingTextNode() {}
 	virtual Surface* render(SurfaceCache*) override;
 
 	virtual bool is_expanding() override {return m_expanding;}
@@ -612,9 +612,9 @@ class TagHandler {
 public:
 	TagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
 		m_tag(tag), m_fc(fc), m_ns(ns), image_cache_(image_cache) {}
-	virtual ~TagHandler() {};
+	virtual ~TagHandler() {}
 
-	virtual void enter() {};
+	virtual void enter() {}
 	virtual void emit(vector<RenderNode*>&);
 
 private:

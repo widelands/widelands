@@ -54,7 +54,7 @@ public:
 	virtual void Unlink(const std::string & file) override;
 	virtual void Rename(const std::string & old_name, const std::string & new_name) override;
 
-	virtual std::string getBasename() override {return m_directory;};
+	virtual std::string getBasename() override {return m_directory;}
 	virtual unsigned long long DiskSpace() override;
 
 private:

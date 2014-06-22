@@ -24,6 +24,8 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/log.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "gamecontroller.h"
@@ -33,9 +35,7 @@
 #include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/game.h"
 #include "timestring.h"
 #include "ui_basic/icon.h"
@@ -304,8 +304,8 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		Widelands::Game_Preload_Data_Packet gpdp;
 
 		const filenameset_t & gamefiles = m_gamefiles;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
+		for (const std::string& gamefile : gamefiles) {
+			char const * const name = gamefile.c_str();
 
 			try {
 				Widelands::Game_Loader gl(name, m_game);

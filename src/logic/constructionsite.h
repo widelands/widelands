@@ -63,7 +63,7 @@ class ConstructionSite : public Partially_Finished_Building {
 
 	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
 
-	MO_DESCR(ConstructionSite_Descr);
+	MO_DESCR(ConstructionSite_Descr)
 
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);

@@ -19,9 +19,9 @@
 
 #include "ui_fsmenu/main.h"
 
+#include "base/i18n.h"
 #include "build_info.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 
 Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 	Fullscreen_Menu_Base("mainmenu.jpg"),

@@ -24,10 +24,13 @@
 #include <memory>
 
 #include <SDL_image.h>
-#include <config.h>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "compile_diagnostics.h"
+#include "config.h"
 #include "constants.h"
 #include "container_iterate.h"
 #include "graphic/animation.h"
@@ -41,15 +44,12 @@
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
-#include "log.h"
 #include "logic/roadtype.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
-#include "wexception.h"
 
 using namespace std;
 

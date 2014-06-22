@@ -20,10 +20,10 @@
 #ifndef DEDICATED_LOG_H
 #define DEDICATED_LOG_H
 
+#include "base/log.h"
 #include "chat.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filewrite.h"
-#include "log.h"
 
 void dedicatedlog(const char *, ...) PRINTF_FORMAT(1, 2);
 

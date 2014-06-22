@@ -22,11 +22,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/surface.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
-#include "wexception.h"
 
 using namespace std;
 

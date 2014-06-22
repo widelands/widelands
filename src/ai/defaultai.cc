@@ -25,10 +25,10 @@
 #include <typeinfo>
 
 #include "ai/ai_hints.h"
+#include "base/log.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "log.h"
 #include "logic/constructionsite.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"

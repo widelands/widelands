@@ -19,9 +19,9 @@
 
 #include "wui/stock_menu.h"
 
+#include "base/i18n.h"
 #include "economy/economy.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "ui_basic/tabpanel.h"

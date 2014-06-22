@@ -21,11 +21,11 @@
 
 #include <cstdio>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_increase_height_tool.h"
 #include "editor/tools/editor_set_height_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "ui_basic/button.h"
 
 #define width  20

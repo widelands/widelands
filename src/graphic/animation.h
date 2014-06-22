@@ -27,8 +27,8 @@
 
 #include <boost/utility.hpp>
 
+#include "graphic/rect.h"
 #include "point.h"
-#include "rect.h"
 
 class Image;
 class LuaTable;

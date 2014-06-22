@@ -41,7 +41,6 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "text_layout.h"
-#include "unique_window_handler.h"
 #include "upcast.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
@@ -52,6 +51,7 @@
 #include "wui/minimap.h"
 #include "wui/overlay_manager.h"
 #include "wui/quicknavigation.h"
+#include "wui/unique_window_handler.h"
 
 using boost::format;
 using Widelands::Area;
@@ -264,7 +264,10 @@ OverlayManager::JobId Interactive_Base::show_work_area
 		case 1: wa_index = 5; break;
 		case 2: wa_index = 3; break;
 		case 3: wa_index = 0; break;
-		default: assert(false); break;
+		default:
+		  wa_index = 0;
+		  assert(false);
+		  break;
 	}
 	Widelands::Map & map = m_egbase.map();
 	OverlayManager & overlay_manager = map.overlay_manager();
