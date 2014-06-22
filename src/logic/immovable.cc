@@ -1051,8 +1051,6 @@ void ImmovableProgram::ActRemove::execute
 		immovable.program_step(game);
 }
 
-// NOCOM(#sirver): tribes use transform instead of grow for plants. (wine, cornfarm, blackroot farm, nursery).
-
 ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 {
 	try {

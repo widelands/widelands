@@ -48,7 +48,8 @@ public:
 	// Preferred humidity in percent [0, 1].
 	double preferred_humidity() const;
 
-	// NOCOM(#sirver): figure this out
+	// A value in [0, 1] that defines how well this can deal with non-ideal
+	// situations. Lower means it is less picky, i.e. it can deal better.
 	double pickiness() const;
 
 private:

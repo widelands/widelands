@@ -873,11 +873,8 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	}
 
 	// Randomly pick one of the immovables to be planted.
-	// const uint32_t idx = game.logic_rand() % best_suited_immovables_index.size();
-	const uint32_t idx = 0;
+	const uint32_t idx = game.logic_rand() % best_suited_immovables_index.size();
 	state.ivar2 = std::get<1>(*std::next(best_suited_immovables_index.begin(), idx));
-	log("#sirver best_suited_immovables_index.begin(): %f\n",
-	    std::get<0>(*best_suited_immovables_index.begin()));
 
 	Immovable& newimm =
 	   game.create_immovable(pos, state.ivar2, state.svar1 == "tribe" ? &descr().tribe() : nullptr);

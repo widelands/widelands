@@ -49,10 +49,12 @@ TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immov
 	if (!(0 <= preferred_humidity_ && preferred_humidity_ <= 1.)) {
 		throw game_data_error("%s: preferred_humidity is not in [0, 1].", immovable_name.c_str());
 	}
+	if (!(0 <= pickiness_ && pickiness_ <= 1.)) {
+		throw game_data_error("%s: pickiness is not in [0, 1].", immovable_name.c_str());
+	}
 	if (preferred_temperature_ < 0) {
 		throw game_data_error("%s: preferred_temperature is not in Kelvin.", immovable_name.c_str());
 	}
-	// NOCOM(#sirver): bound check pickiness?
 }
 
 double TerrainAffinity::preferred_temperature() const {
@@ -108,16 +110,14 @@ double probability_to_grow
 		average(ln.field->terrain_r());
 	}
 
-	constexpr double kTemperatureSigma = 15.;
-	constexpr double kFertilitySigma = 0.1;
-	constexpr double kHumiditySigma = 0.1;
+	const double sigma_fertility = (1. - affinity.pickiness()) * 0.25 + 1e-2;
+	const double sigma_humidity = (1. - affinity.pickiness()) * 0.25 + 1e-2;
+	const double sigma_temperature = (1. - affinity.pickiness()) * 12.5 + 1e-1;
 
-	return std::exp(-pow2(affinity.preferred_fertility() - terrain_fertility) /
-	                   (2 * pow2(kFertilitySigma * affinity.pickiness())) -
-	                pow2(affinity.preferred_humidity() - terrain_humidity) /
-	                   (2 * pow2(kHumiditySigma * affinity.pickiness())) -
-	                pow2(affinity.preferred_temperature() - terrain_temperature) /
-	                   (2 * pow2(kTemperatureSigma * affinity.pickiness())));
+	return std::exp(
+	   -pow2(affinity.preferred_fertility() - terrain_fertility) / (2 * pow2(sigma_fertility)) -
+	   pow2(affinity.preferred_humidity() - terrain_humidity) / (2 * pow2(sigma_temperature)) -
+	   pow2(affinity.preferred_temperature() - terrain_temperature) / (2 * pow2(sigma_temperature)));
 }
 
 }  // namespace Widelands
