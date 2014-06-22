@@ -71,7 +71,7 @@ double TerrainAffinity::pickiness() const {
 	return pickiness_;
 }
 
-double terrain_affinity
+double probability_to_grow
 	(const TerrainAffinity& affinity, const FCoords& fcoords,
 	 const Map& map, const DescriptionMaintainer<TerrainDescription>& terrains)
 {

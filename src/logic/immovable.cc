@@ -1008,16 +1008,18 @@ ImmovableProgram::ActGrow::ActGrow
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
-	// NOCOM(#sirver): implement.
-	// const Map& map = game.map();
-	// const Immovable_Descr& descr = immovable.descr();
-	// FCoords const f = map.get_fcoords(immovable.get_position());
-	// if (game.logic_rand() % (6 * 255) < descr.terrain_suitability(f, map)) {
-		// Tribe_Descr const* const owner_tribe = tribe ? immovable.descr().get_owner_tribe() : nullptr;
-		// immovable.remove(game);  //  Now immovable is a dangling reference!
-		// game.create_immovable(f, type_name, owner_tribe);
-	// } else
-		// immovable.program_step(game);
+	const Map& map = game.map();
+	FCoords const f = map.get_fcoords(immovable.get_position());
+	const Immovable_Descr& descr = immovable.descr();
+
+	if (logic_rand_as_double(&game) <
+	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		Tribe_Descr const* const owner_tribe = tribe ? descr.get_owner_tribe() : nullptr;
+		immovable.remove(game);  //  Now immovable is a dangling reference!
+		game.create_immovable(f, type_name, owner_tribe);
+	} else {
+		immovable.program_step(game);
+	}
 }
 
 /**
@@ -1109,29 +1111,36 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 void ImmovableProgram::ActSeed::execute
 	(Game & game, Immovable & immovable) const
 {
-	// NOCOM(#sirver): Implement.
-	// const Immovable_Descr & descr = immovable.descr();
-	// const Map & map = game.map();
-	// if (game.logic_rand() % (6 * 256) <
-		 // descr.terrain_suitability(map.get_fcoords(immovable.get_position()), map)) {
-		// MapFringeRegion<> mr(map, Area<>(immovable.get_position(), 0));
-		// uint32_t fringe_size = 0;
-		// do {
-			// mr.extend(map);
-			// fringe_size += 6;
-		// } while (game.logic_rand() % 256 < probability);
+	const Map& map = game.map();
+	FCoords const f = map.get_fcoords(immovable.get_position());
+	const Immovable_Descr& descr = immovable.descr();
+	double p =
+	   probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains());
 
-		// for (uint32_t n = game.logic_rand() % fringe_size; n; --n) {
-			// mr.advance(map);
-		// }
+	if (logic_rand_as_double(&game) <
+	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		// Seed a new tree.
+		MapFringeRegion<> mr(map, Area<>(f, 0));
+		uint32_t fringe_size = 0;
+		do {
+			mr.extend(map);
+			fringe_size += 6;
+		} while (game.logic_rand() % std::numeric_limits<uint8_t>::max() < probability);
 
-		// const FCoords f = map.get_fcoords(mr.location());
-		// if (!f.field->get_immovable() && (f.field->nodecaps() & MOVECAPS_WALK) &&
-			 // game.logic_rand() % (6 * 256) < descr.terrain_suitability(f, map)) {
-			// game.create_immovable(
-				// mr.location(), type_name, tribe ? immovable.descr().get_owner_tribe() : nullptr);
-		// }
-	// }
+		for (uint32_t n = game.logic_rand() % fringe_size; n; --n) {
+			mr.advance(map);
+		}
+
+		const FCoords new_location = map.get_fcoords(mr.location());
+		if (!new_location.field->get_immovable() &&
+		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
+		    logic_rand_as_double(&game) <
+		       probability_to_grow(
+		          descr.terrain_affinity(), new_location, map, game.world().terrains())) {
+			game.create_immovable(
+			   mr.location(), type_name, tribe ? immovable.descr().get_owner_tribe() : nullptr);
+		}
+	}
 
 	immovable.program_step(game);
 }

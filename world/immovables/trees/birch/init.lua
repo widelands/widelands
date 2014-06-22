@@ -21,6 +21,7 @@ world:new_immovable_type{
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "seed" },
+   terrain_affinity = terrain_affinity,
    programs = {
       program = {
          "animate=idle 42000",

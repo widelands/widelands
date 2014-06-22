@@ -323,10 +323,10 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { pics_dir .. "wasteland/ashes_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   -- NOCOM(#sirver): these have only be changed to be better suited to mushroom_red for testing.
+   temperature = 301,
+   humidity = 0.3,
+   fertility = 0.2,
 }
 
 world:new_terrain_type{

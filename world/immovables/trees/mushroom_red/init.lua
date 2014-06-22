@@ -1,15 +1,15 @@
 dirname = path.dirname(__file__)
 
--- NOCOM(#sirver): these are concept values and all the same for all trees right now.
+-- NOCOM(#sirver): changed to be close to "ashes" for testing
 terrain_affinity = {
    -- In Kelvin.
-   preferred_temperature = 289.65,
+   preferred_temperature = 299.65,
 
    -- In percent (1 being very wet).
-   preferred_humidity = 0.66,
+   preferred_humidity = 0.30,
 
    -- In percent (1 being very fertile).
-   preferred_fertility = 0.9,
+   preferred_fertility = 0.2,
 
    -- NOCOM(#sirver): figure this out. I imagine a scaling factor for the sigma of the gaussian.
    pickiness = 1.,
