@@ -1,11 +1,27 @@
 dirname = path.dirname(__file__)
 
+-- NOCOM(#sirver): these are concept values and all the same for all trees right now.
+terrain_affinity = {
+   -- In Kelvin.
+   preferred_temperature = 289.65,
+
+   -- In percent (1 being very wet).
+   preferred_humidity = 0.66,
+
+   -- In percent (1 being very fertile).
+   preferred_fertility = 0.9,
+
+   -- NOCOM(#sirver): figure this out. I imagine a scaling factor for the sigma of the gaussian.
+   pickiness = 1.,
+}
+
 world:new_immovable_type{
    name = "umbrella_red_wasteland_sapling",
    descname = _ "Red Umbrella Tree (Sapling)",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "seed" },
+   terrain_affinity = terrain_affinity,
    programs = {
       program = {
          "animate=idle 38000",
@@ -28,6 +44,7 @@ world:new_immovable_type{
    editor_category = "trees_wasteland",
    size = "small",
    attributes = {},
+   terrain_affinity = terrain_affinity,
    programs = {
       program = {
          "animate=idle 38000",
@@ -50,6 +67,7 @@ world:new_immovable_type{
    editor_category = "trees_wasteland",
    size = "small",
    attributes = {},
+   terrain_affinity = terrain_affinity,
    programs = {
       program = {
          "animate=idle 20000",
@@ -75,6 +93,7 @@ world:new_immovable_type{
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },
+   terrain_affinity = terrain_affinity,
    programs = {
       program = {
          "animate=idle 1050000",

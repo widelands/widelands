@@ -19,7 +19,26 @@
 
 #include "logic/terrain_affinity.h"
 
+#include "scripting/lua_table.h"
+
 namespace Widelands {
+
+TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immovable_name)
+   : preferred_temperature_(table.get_double("preferred_temperature")),
+     preferred_humidity_(table.get_double("preferred_humidity")),
+     preferred_fertility_(table.get_double("preferred_fertility")),
+     pickiness_(table.get_double("pickiness")) {
+	if (!(0 <= preferred_fertility_ && preferred_fertility_ <= 1.)) {
+		throw game_data_error("%s: preferred_fertility is not in [0, 1].", immovable_name.c_str());
+	}
+	if (!(0 <= preferred_humidity_ && preferred_humidity_ <= 1.)) {
+		throw game_data_error("%s: preferred_humidity is not in [0, 1].", immovable_name.c_str());
+	}
+	if (preferred_temperature_ < 0) {
+		throw game_data_error("%s: preferred_temperature is not in Kelvin.", immovable_name.c_str());
+	}
+	// NOCOM(#sirver): bound check pickiness
+}
 
 double TerrainAffinity::preferred_temperature() const {
 	return preferred_temperature_;

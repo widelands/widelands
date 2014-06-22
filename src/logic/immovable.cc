@@ -296,7 +296,9 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world)
 		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
 
-	// NOCOM(#sirver): parse terrain affinity.
+	if (table.has_key("terrain_affinity")) {
+		terrain_affinity_.reset(new TerrainAffinity(table.get_table("terrain_affinity")));
+	}
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {

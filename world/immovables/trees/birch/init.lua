@@ -1,5 +1,20 @@
 dirname = path.dirname(__file__)
 
+-- NOCOM(#sirver): these are concept values and all the same for all trees right now.
+terrain_affinity = {
+   -- In Kelvin.
+   preferred_temperature = 289.65,
+
+   -- In percent (1 being very wet).
+   preferred_humidity = 0.66,
+
+   -- In percent (1 being very fertile).
+   preferred_fertility = 0.9,
+
+   -- NOCOM(#sirver): figure this out. I imagine a scaling factor for the sigma of the gaussian.
+   pickiness = 1.,
+}
+
 world:new_immovable_type{
    name = "birch_summer_sapling",
    descname = _ "Birch (Sapling)",
@@ -28,6 +43,7 @@ world:new_immovable_type{
    editor_category = "trees_deciduous",
    size = "small",
    attributes = {},
+   terrain_affinity = terrain_affinity,
    programs = {
       program = {
          "animate=idle 40000",
@@ -50,6 +66,7 @@ world:new_immovable_type{
    editor_category = "trees_deciduous",
    size = "small",
    attributes = {},
+   terrain_affinity = terrain_affinity,
    programs = {
       program = {
          "animate=idle 25000",
@@ -75,6 +92,7 @@ world:new_immovable_type{
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
+   terrain_affinity = terrain_affinity,
    programs = {
       program = {
          "animate=idle 800000",

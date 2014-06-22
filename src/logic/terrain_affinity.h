@@ -17,6 +17,8 @@
  *
  */
 
+#include <string>
+
 #include <boost/noncopyable.hpp>
 
 class LuaTable;
@@ -28,7 +30,7 @@ namespace Widelands {
 // define this.
 class TerrainAffinity : boost::noncopyable {
 public:
-	explicit TerrainAffinity(const LuaTable& table);
+	explicit TerrainAffinity(const LuaTable& table, const std::string& immovable_name);
 
 	// Preferred temperature in Kelvin.
 	double preferred_temperature() const;
