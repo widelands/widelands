@@ -41,6 +41,7 @@
 #include "logic/map.h"
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
+#include "logic/terrain_affinity.h"
 #include "logic/tribe.h"
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
@@ -295,6 +296,8 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world)
 		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
 
+	// NOCOM(#sirver): parse terrain affinity.
+
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
@@ -320,6 +323,13 @@ const EditorCategory& Immovable_Descr::editor_category() const {
 	return *editor_category_;
 }
 
+bool Immovable_Descr::has_terrain_affinity() const {
+	return terrain_affinity_.get() != nullptr;
+}
+
+const TerrainAffinity& Immovable_Descr::terrain_affinity() const {
+	return *terrain_affinity_;
+}
 
 void Immovable_Descr::make_sure_default_program_is_there() {
 	if (!m_programs.count("program")) {  //  default program
@@ -956,6 +966,12 @@ void ImmovableProgram::ActTransform::execute
 ImmovableProgram::ActGrow::ActGrow
 	(char * parameters, Immovable_Descr & descr)
 {
+	// NOCOM(#sirver): care for foresters so that they plant useful stuff.
+	if (!descr.has_terrain_affinity()) {
+		throw game_data_error(
+		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
+	}
+
 	try {
 		tribe = true;
 		for (char * p = parameters;;)
@@ -1039,6 +1055,8 @@ void ImmovableProgram::ActRemove::execute
 		immovable.program_step(game);
 }
 
+// NOCOM(#sirver): Who uses seed= except for trees.
+// NOCOM(#sirver): tribes use transform instead of grow for plants. (wine, cornfarm, blackroot farm, nursery).
 
 ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 {

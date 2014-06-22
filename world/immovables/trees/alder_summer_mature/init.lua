@@ -6,6 +6,9 @@ world:new_immovable_type{
    editor_category = "trees_deciduous",
    size = "small",
    attributes = {},
+   -- NOCOM(#sirver): these are default values and need adjusting
+   terrain_affinity = {
+   },
    programs = {
       program = {
          "animate=idle 50000",

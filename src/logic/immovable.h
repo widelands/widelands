@@ -35,6 +35,7 @@ namespace Widelands {
 
 class Economy;
 class Map;
+class TerrainAffinity;
 class WareInstance;
 class Worker;
 class World;
@@ -117,6 +118,14 @@ struct Immovable_Descr : public Map_Object_Descr {
 	// Returns the editor category.
 	const EditorCategory& editor_category() const;
 
+	// Every immovable that can 'grow' needs to have terrain affinity defined,
+	// all others do not. Returns true if this one has it defined.
+	bool has_terrain_affinity() const;
+
+	// Returns the terrain affinity. If !has_terrain_affinity() this will return
+	// an undefined value.
+	const TerrainAffinity& terrain_affinity() const;
+
 protected:
 	int32_t     m_size;
 	Programs    m_programs;
@@ -130,10 +139,11 @@ protected:
 	Buildcost m_buildcost;
 
 private:
-	EditorCategory* editor_category_;  // not owned.
-
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
+
+	EditorCategory* editor_category_;  // not owned.
+	std::unique_ptr<TerrainAffinity> terrain_affinity_;
 };
 
 class Immovable : public BaseImmovable {

@@ -26,15 +26,44 @@ world:new_editor_terrain_category{
 
 pics_dir = path.dirname(__file__) .. "pics/"
 world:new_terrain_type{
+   -- The internal name of this terrain.
    name = "wiese1",
+
+   -- The name that will be used in UI and translated.
    descname = _ "Meadow 1",
+
+   -- The category for sorting this into menus in the editor.
    editor_category = "green",
+
+   -- Type of terrain. Describes if the terrain is walkable, swimmable, if
+   -- mines or buildings can be build on it, if flags can be build on it and so
+   -- on.
    is = "green",
+
+   -- The list resources that can be found in this terrain.
    valid_resources = {"water"},
+
+   -- The resources that is always in this terrain (if not overwritten by the
+   -- map maker through the editor) and the amount.
    default_resource = "water",
    default_resource_amount = 10,
+
+   -- The images used for this terrain.
    textures = { pics_dir .. "green/wiese1_00.png" },
+
+   -- This describes the z layer of the terrain when rendered next to another
+   -- one and blending slightly over it to hide the triangles.
    dither_layer = 40,
+
+   -- Terrain affinity constants. This is used to model how well plants grow on this terrain.
+   -- Temperature are in Kelvin.
+   temperature = 289.65,
+
+   -- Humidity is in percent (1 being very wet).
+   humidity = 0.66,
+
+   -- Fertility is in percent (1 being very fertile).
+   fertility = 0.9,
 }
 
 world:new_terrain_type{
