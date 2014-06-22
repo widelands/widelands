@@ -33,7 +33,7 @@ world:new_editor_immovable_category{
 world:new_editor_immovable_category{
    name = "trees_coniferous",
    descname = _ "Coniferous Trees",
-   picture = "world/immovables/trees/spruce_summer_old/idle_0.png",
+   picture = "world/immovables/trees/spruce/old/idle_0.png",
 }
 
 world:new_editor_immovable_category{
@@ -45,19 +45,19 @@ world:new_editor_immovable_category{
 world:new_editor_immovable_category{
    name = "trees_deciduous",
    descname = _ "Deciduous Trees",
-   picture = "world/immovables/trees/alder_summer_old/idle_0.png",
+   picture = "world/immovables/trees/alder/old/idle_0.png",
 }
 
 world:new_editor_immovable_category{
    name = "trees_palm",
    descname = _ "Palm Trees",
-   picture = "world/immovables/trees/palm_borassus_desert_old/idle_0.png",
+   picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
 }
 
 world:new_editor_immovable_category{
    name = "trees_wasteland",
    descname = _ "Wasteland Trees",
-   picture = "world/immovables/trees/umbrella_red_wasteland_old/idle_0.png",
+   picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
 }
 
 include "world/immovables/grass1/init.lua"
@@ -150,125 +150,101 @@ include "world/immovables/stones/winterland_stones5/init.lua"
 include "world/immovables/stones/winterland_stones6/init.lua"
 
 -- Trees
-include "world/immovables/trees/alder_summer_mature/init.lua"
-include "world/immovables/trees/alder_summer_old/init.lua"
-include "world/immovables/trees/alder_summer_pole/init.lua"
-include "world/immovables/trees/alder_summer_sapling/init.lua"
-
-include "world/immovables/trees/aspen_summer_mature/init.lua"
-include "world/immovables/trees/aspen_summer_old/init.lua"
-include "world/immovables/trees/aspen_summer_pole/init.lua"
-include "world/immovables/trees/aspen_summer_sapling/init.lua"
-
-include "world/immovables/trees/beech_summer_mature/init.lua"
-include "world/immovables/trees/beech_summer_old/init.lua"
-include "world/immovables/trees/beech_summer_pole/init.lua"
-include "world/immovables/trees/beech_summer_sapling/init.lua"
-
-include "world/immovables/trees/birch_summer_mature/init.lua"
-include "world/immovables/trees/birch_summer_old/init.lua"
-include "world/immovables/trees/birch_summer_pole/init.lua"
-include "world/immovables/trees/birch_summer_sapling/init.lua"
-
-include "world/immovables/trees/cirrus_wasteland_mature/init.lua"
-include "world/immovables/trees/cirrus_wasteland_old/init.lua"
-include "world/immovables/trees/cirrus_wasteland_pole/init.lua"
-include "world/immovables/trees/cirrus_wasteland_sapling/init.lua"
-
+include "world/immovables/trees/alder/mature/init.lua"
+include "world/immovables/trees/alder/old/init.lua"
+include "world/immovables/trees/alder/pole/init.lua"
+include "world/immovables/trees/alder/sapling/init.lua"
+include "world/immovables/trees/aspen/mature/init.lua"
+include "world/immovables/trees/aspen/old/init.lua"
+include "world/immovables/trees/aspen/pole/init.lua"
+include "world/immovables/trees/aspen/sapling/init.lua"
+include "world/immovables/trees/beech/mature/init.lua"
+include "world/immovables/trees/beech/old/init.lua"
+include "world/immovables/trees/beech/pole/init.lua"
+include "world/immovables/trees/beech/sapling/init.lua"
+include "world/immovables/trees/birch/mature/init.lua"
+include "world/immovables/trees/birch/old/init.lua"
+include "world/immovables/trees/birch/pole/init.lua"
+include "world/immovables/trees/birch/sapling/init.lua"
+include "world/immovables/trees/cirrus/mature/init.lua"
+include "world/immovables/trees/cirrus/old/init.lua"
+include "world/immovables/trees/cirrus/pole/init.lua"
+include "world/immovables/trees/cirrus/sapling/init.lua"
 include "world/immovables/trees/deadtree1/init.lua"
 include "world/immovables/trees/deadtree2/init.lua"
 include "world/immovables/trees/deadtree3/init.lua"
 include "world/immovables/trees/deadtree4/init.lua"
 include "world/immovables/trees/deadtree5/init.lua"
 include "world/immovables/trees/deadtree6/init.lua"
-
 include "world/immovables/trees/fallentree/init.lua"
-
-include "world/immovables/trees/larch_summer_mature/init.lua"
-include "world/immovables/trees/larch_summer_old/init.lua"
-include "world/immovables/trees/larch_summer_pole/init.lua"
-include "world/immovables/trees/larch_summer_sapling/init.lua"
-
-include "world/immovables/trees/liana_wasteland_mature/init.lua"
-include "world/immovables/trees/liana_wasteland_old/init.lua"
-include "world/immovables/trees/liana_wasteland_pole/init.lua"
-include "world/immovables/trees/liana_wasteland_sapling/init.lua"
-
-include "world/immovables/trees/maple_winter_mature/init.lua"
-include "world/immovables/trees/maple_winter_old/init.lua"
-include "world/immovables/trees/maple_winter_pole/init.lua"
-include "world/immovables/trees/maple_winter_sapling/init.lua"
-
-include "world/immovables/trees/mushroom_dark_wasteland_mature/init.lua"
-include "world/immovables/trees/mushroom_dark_wasteland_old/init.lua"
-include "world/immovables/trees/mushroom_dark_wasteland_pole/init.lua"
-include "world/immovables/trees/mushroom_dark_wasteland_sapling/init.lua"
-
-include "world/immovables/trees/mushroom_green_wasteland_mature/init.lua"
-include "world/immovables/trees/mushroom_green_wasteland_old/init.lua"
-include "world/immovables/trees/mushroom_green_wasteland_pole/init.lua"
-include "world/immovables/trees/mushroom_green_wasteland_sapling/init.lua"
-
-include "world/immovables/trees/mushroom_red_wasteland_mature/init.lua"
-include "world/immovables/trees/mushroom_red_wasteland_old/init.lua"
-include "world/immovables/trees/mushroom_red_wasteland_pole/init.lua"
-include "world/immovables/trees/mushroom_red_wasteland_sapling/init.lua"
-
-include "world/immovables/trees/oak_summer_mature/init.lua"
-include "world/immovables/trees/oak_summer_old/init.lua"
-include "world/immovables/trees/oak_summer_pole/init.lua"
-include "world/immovables/trees/oak_summer_sapling/init.lua"
-
-include "world/immovables/trees/palm_borassus_desert_mature/init.lua"
-include "world/immovables/trees/palm_borassus_desert_old/init.lua"
-include "world/immovables/trees/palm_borassus_desert_pole/init.lua"
-include "world/immovables/trees/palm_borassus_desert_sapling/init.lua"
-
-include "world/immovables/trees/palm_coconut_desert_mature/init.lua"
-include "world/immovables/trees/palm_coconut_desert_old/init.lua"
-include "world/immovables/trees/palm_coconut_desert_pole/init.lua"
-include "world/immovables/trees/palm_coconut_desert_sapling/init.lua"
-
-include "world/immovables/trees/palm_date_desert_mature/init.lua"
-include "world/immovables/trees/palm_date_desert_old/init.lua"
-include "world/immovables/trees/palm_date_desert_pole/init.lua"
-include "world/immovables/trees/palm_date_desert_sapling/init.lua"
-
-include "world/immovables/trees/palm_oil_desert_mature/init.lua"
-include "world/immovables/trees/palm_oil_desert_old/init.lua"
-include "world/immovables/trees/palm_oil_desert_pole/init.lua"
-include "world/immovables/trees/palm_oil_desert_sapling/init.lua"
-
-include "world/immovables/trees/palm_roystonea_desert_mature/init.lua"
-include "world/immovables/trees/palm_roystonea_desert_old/init.lua"
-include "world/immovables/trees/palm_roystonea_desert_pole/init.lua"
-include "world/immovables/trees/palm_roystonea_desert_sapling/init.lua"
-
-include "world/immovables/trees/rowan_summer_mature/init.lua"
-include "world/immovables/trees/rowan_summer_old/init.lua"
-include "world/immovables/trees/rowan_summer_pole/init.lua"
-include "world/immovables/trees/rowan_summer_sapling/init.lua"
-
-include "world/immovables/trees/spruce_summer_mature/init.lua"
-include "world/immovables/trees/spruce_summer_old/init.lua"
-include "world/immovables/trees/spruce_summer_pole/init.lua"
-include "world/immovables/trees/spruce_summer_sapling/init.lua"
-
-include "world/immovables/trees/twine_wasteland_mature/init.lua"
-include "world/immovables/trees/twine_wasteland_old/init.lua"
-include "world/immovables/trees/twine_wasteland_pole/init.lua"
-include "world/immovables/trees/twine_wasteland_sapling/init.lua"
-
-include "world/immovables/trees/umbrella_red_wasteland_mature/init.lua"
-include "world/immovables/trees/umbrella_red_wasteland_old/init.lua"
-include "world/immovables/trees/umbrella_red_wasteland_pole/init.lua"
-include "world/immovables/trees/umbrella_red_wasteland_sapling/init.lua"
-
-include "world/immovables/trees/umbrella_green_wasteland_mature/init.lua"
-include "world/immovables/trees/umbrella_green_wasteland_old/init.lua"
-include "world/immovables/trees/umbrella_green_wasteland_pole/init.lua"
-include "world/immovables/trees/umbrella_green_wasteland_sapling/init.lua"
-
+include "world/immovables/trees/larch/mature/init.lua"
+include "world/immovables/trees/larch/old/init.lua"
+include "world/immovables/trees/larch/pole/init.lua"
+include "world/immovables/trees/larch/sapling/init.lua"
+include "world/immovables/trees/liana/mature/init.lua"
+include "world/immovables/trees/liana/old/init.lua"
+include "world/immovables/trees/liana/pole/init.lua"
+include "world/immovables/trees/liana/sapling/init.lua"
+include "world/immovables/trees/maple/mature/init.lua"
+include "world/immovables/trees/maple/old/init.lua"
+include "world/immovables/trees/maple/pole/init.lua"
+include "world/immovables/trees/maple/sapling/init.lua"
+include "world/immovables/trees/mushroom_dark/mature/init.lua"
+include "world/immovables/trees/mushroom_dark/old/init.lua"
+include "world/immovables/trees/mushroom_dark/pole/init.lua"
+include "world/immovables/trees/mushroom_dark/sapling/init.lua"
+include "world/immovables/trees/mushroom_green/mature/init.lua"
+include "world/immovables/trees/mushroom_green/old/init.lua"
+include "world/immovables/trees/mushroom_green/pole/init.lua"
+include "world/immovables/trees/mushroom_green/sapling/init.lua"
+include "world/immovables/trees/mushroom_red/mature/init.lua"
+include "world/immovables/trees/mushroom_red/old/init.lua"
+include "world/immovables/trees/mushroom_red/pole/init.lua"
+include "world/immovables/trees/mushroom_red/sapling/init.lua"
+include "world/immovables/trees/oak/mature/init.lua"
+include "world/immovables/trees/oak/old/init.lua"
+include "world/immovables/trees/oak/pole/init.lua"
+include "world/immovables/trees/oak/sapling/init.lua"
+include "world/immovables/trees/palm_borassus/mature/init.lua"
+include "world/immovables/trees/palm_borassus/old/init.lua"
+include "world/immovables/trees/palm_borassus/pole/init.lua"
+include "world/immovables/trees/palm_borassus/sapling/init.lua"
+include "world/immovables/trees/palm_coconut/mature/init.lua"
+include "world/immovables/trees/palm_coconut/old/init.lua"
+include "world/immovables/trees/palm_coconut/pole/init.lua"
+include "world/immovables/trees/palm_coconut/sapling/init.lua"
+include "world/immovables/trees/palm_date/mature/init.lua"
+include "world/immovables/trees/palm_date/old/init.lua"
+include "world/immovables/trees/palm_date/pole/init.lua"
+include "world/immovables/trees/palm_date/sapling/init.lua"
+include "world/immovables/trees/palm_oil/mature/init.lua"
+include "world/immovables/trees/palm_oil/old/init.lua"
+include "world/immovables/trees/palm_oil/pole/init.lua"
+include "world/immovables/trees/palm_oil/sapling/init.lua"
+include "world/immovables/trees/palm_roystonea/mature/init.lua"
+include "world/immovables/trees/palm_roystonea/old/init.lua"
+include "world/immovables/trees/palm_roystonea/pole/init.lua"
+include "world/immovables/trees/palm_roystonea/sapling/init.lua"
+include "world/immovables/trees/rowan/mature/init.lua"
+include "world/immovables/trees/rowan/old/init.lua"
+include "world/immovables/trees/rowan/pole/init.lua"
+include "world/immovables/trees/rowan/sapling/init.lua"
+include "world/immovables/trees/spruce/mature/init.lua"
+include "world/immovables/trees/spruce/old/init.lua"
+include "world/immovables/trees/spruce/pole/init.lua"
+include "world/immovables/trees/spruce/sapling/init.lua"
+include "world/immovables/trees/twine/mature/init.lua"
+include "world/immovables/trees/twine/old/init.lua"
+include "world/immovables/trees/twine/pole/init.lua"
+include "world/immovables/trees/twine/sapling/init.lua"
+include "world/immovables/trees/umbrella_green/mature/init.lua"
+include "world/immovables/trees/umbrella_green/old/init.lua"
+include "world/immovables/trees/umbrella_green/pole/init.lua"
+include "world/immovables/trees/umbrella_green/sapling/init.lua"
+include "world/immovables/trees/umbrella_red/mature/init.lua"
+include "world/immovables/trees/umbrella_red/old/init.lua"
+include "world/immovables/trees/umbrella_red/pole/init.lua"
+include "world/immovables/trees/umbrella_red/sapling/init.lua"
 
 -- Adds 6 animations for each walking direction into 'table'. The pictures are
 -- searched for in 'dirname'. All files should look like this

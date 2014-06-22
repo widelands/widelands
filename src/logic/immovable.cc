@@ -967,10 +967,10 @@ ImmovableProgram::ActGrow::ActGrow
 	(char * parameters, Immovable_Descr & descr)
 {
 	// NOCOM(#sirver): care for foresters so that they plant useful stuff.
-	if (!descr.has_terrain_affinity()) {
-		throw game_data_error(
-		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
-	}
+	/* if (!descr.has_terrain_affinity()) { */
+		// throw game_data_error(
+			// "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
+	/* } */
 
 	try {
 		tribe = true;
