@@ -110,9 +110,6 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	Tribe_Descr const * get_owner_tribe() const {return m_owner_tribe;}
 
-	/// How well the terrain around f suits an immovable of this type.
-	uint32_t terrain_suitability(FCoords, const Map &) const;
-
 	const Buildcost & buildcost() const {return m_buildcost;}
 
 	// Returns the editor category.

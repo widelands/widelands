@@ -808,59 +808,61 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 
 	std::vector<int32_t> best_fitting;
 	std::vector<bool> is_tribe_specific;
-	uint32_t terrain_suitability = 0;
-	for (uint8_t i = 0; i < action.sparamv.size(); ++i) {
-		std::vector<std::string> const list(split_string(action.sparamv[i], ":"));
-		std::string immovable;
+	// NOCOM(#sirver): fix this. this broke forresters
+	// uint32_t terrain_suitability = 0;
+	// for (uint8_t i = 0; i < action.sparamv.size(); ++i) {
+		// std::vector<std::string> const list(split_string(action.sparamv[i], ":"));
+		// std::string immovable;
 
-		if (list.size() == 1) {
-			state.svar1 = "world";
-			immovable = list[0];
-			state.ivar2 = game.world().get_immovable_index(immovable.c_str());
-			if (state.ivar2 > 0) {
-				Immovable_Descr const * imm =
-					game.world().get_immovable_descr(state.ivar2);
-				uint32_t suits = imm->terrain_suitability(fpos, map);
-				// Remove existing, if this immovable suits better
-				if (suits > terrain_suitability) {
-					best_fitting.clear();
-					is_tribe_specific.clear();
-				}
-				if (suits >= terrain_suitability) {
-					terrain_suitability = suits;
-					best_fitting.push_back(state.ivar2);
-					is_tribe_specific.push_back(false);
-				}
-				continue;
-			}
-		} else {
-			state.svar1 = "tribe";
-			immovable = list[1];
-			state.ivar2 = descr().tribe().get_immovable_index(immovable.c_str());
-			if (state.ivar2 > 0) {
-				Immovable_Descr const * imm =
-					descr().tribe().get_immovable_descr(state.ivar2);
-				uint32_t suits = imm->terrain_suitability(fpos, map);
-				// Remove existing, if this immovable suits better
-				if (suits > terrain_suitability) {
-					best_fitting.clear();
-					is_tribe_specific.clear();
-				}
-				if (suits >= terrain_suitability) {
-					terrain_suitability = suits;
-					best_fitting.push_back(state.ivar2);
-					is_tribe_specific.push_back(true);
-				}
-				continue;
-			}
-		}
+		// if (list.size() == 1) {
+			// state.svar1 = "world";
+			// immovable = list[0];
+			// state.ivar2 = game.world().get_immovable_index(immovable.c_str());
+			// if (state.ivar2 > 0) {
+				// Immovable_Descr const * imm =
+					// game.world().get_immovable_descr(state.ivar2);
 
-		// Only here if immovable was not found
-		molog("  WARNING: Unknown immovable %s\n", action.sparamv[i].c_str());
-		send_signal(game, "fail");
-		pop_task(game);
-		return true;
-	}
+				// uint32_t suits = imm->terrain_suitability(fpos, map);
+				// // Remove existing, if this immovable suits better
+				// if (suits > terrain_suitability) {
+					// best_fitting.clear();
+					// is_tribe_specific.clear();
+				// }
+				// if (suits >= terrain_suitability) {
+					// terrain_suitability = suits;
+					// best_fitting.push_back(state.ivar2);
+					// is_tribe_specific.push_back(false);
+				// }
+				// continue;
+			// }
+		// } else {
+			// state.svar1 = "tribe";
+			// immovable = list[1];
+			// state.ivar2 = descr().tribe().get_immovable_index(immovable.c_str());
+			// if (state.ivar2 > 0) {
+				// Immovable_Descr const * imm =
+					// descr().tribe().get_immovable_descr(state.ivar2);
+				// uint32_t suits = imm->terrain_suitability(fpos, map);
+				// // Remove existing, if this immovable suits better
+				// if (suits > terrain_suitability) {
+					// best_fitting.clear();
+					// is_tribe_specific.clear();
+				// }
+				// if (suits >= terrain_suitability) {
+					// terrain_suitability = suits;
+					// best_fitting.push_back(state.ivar2);
+					// is_tribe_specific.push_back(true);
+				// }
+				// continue;
+			// }
+		// }
+
+		// // Only here if immovable was not found
+		// molog("  WARNING: Unknown immovable %s\n", action.sparamv[i].c_str());
+		// send_signal(game, "fail");
+		// pop_task(game);
+		// return true;
+	// }
 
 	assert(best_fitting.size() == is_tribe_specific.size());
 	if (best_fitting.empty()) {

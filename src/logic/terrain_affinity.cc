@@ -19,14 +19,29 @@
 
 #include "logic/terrain_affinity.h"
 
+#include <vector>
+
+#include "logic/description_maintainer.h"
+#include "logic/field.h"
+#include "logic/map.h"
+#include "logic/widelands_geometry.h"
+#include "logic/world/terrain_description.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
 
+namespace  {
+
+constexpr double pow2(const double& a) {
+	return a * a;
+}
+
+}  // namespace
+
 TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immovable_name)
-   : preferred_temperature_(table.get_double("preferred_temperature")),
+   : preferred_fertility_(table.get_double("preferred_fertility")),
      preferred_humidity_(table.get_double("preferred_humidity")),
-     preferred_fertility_(table.get_double("preferred_fertility")),
+     preferred_temperature_(table.get_double("preferred_temperature")),
      pickiness_(table.get_double("pickiness")) {
 	if (!(0 <= preferred_fertility_ && preferred_fertility_ <= 1.)) {
 		throw game_data_error("%s: preferred_fertility is not in [0, 1].", immovable_name.c_str());
@@ -54,6 +69,55 @@ double TerrainAffinity::preferred_humidity() const {
 
 double TerrainAffinity::pickiness() const {
 	return pickiness_;
+}
+
+double terrain_affinity
+	(const TerrainAffinity& affinity, const FCoords& fcoords,
+	 const Map& map, const DescriptionMaintainer<TerrainDescription>& terrains)
+{
+	double terrain_humidity = 0;
+	double terrain_fertility = 0;
+	double terrain_temperature = 0;
+
+	const auto average = [&terrain_humidity, &terrain_fertility, &terrain_temperature, &terrains](
+	   const int terrain_index) {
+		const TerrainDescription& t = terrains.get_unmutable(terrain_index);
+		terrain_humidity += t.humidity() / 6.;
+		terrain_temperature += t.temperature() / 6.;
+		terrain_fertility += t.fertility() / 6.;
+	};
+
+	average(fcoords.field->terrain_d());
+	average(fcoords.field->terrain_r());
+	{
+		FCoords tln;
+		map.get_tln(fcoords, &tln);
+		average(tln.field->terrain_d());
+		average(tln.field->terrain_r());
+	}
+
+	{
+		FCoords trn;
+		map.get_trn(fcoords, &trn);
+		average(trn.field->terrain_d());
+	}
+
+	{
+		FCoords ln;
+		map.get_ln(fcoords, &ln);
+		average(ln.field->terrain_r());
+	}
+
+	constexpr double kTemperatureSigma = 15.;
+	constexpr double kFertilitySigma = 0.1;
+	constexpr double kHumiditySigma = 0.1;
+
+	return std::exp(-pow2(affinity.preferred_fertility() - terrain_fertility) /
+	                   (2 * pow2(kFertilitySigma * affinity.pickiness())) -
+	                pow2(affinity.preferred_humidity() - terrain_humidity) /
+	                   (2 * pow2(kHumiditySigma * affinity.pickiness())) -
+	                pow2(affinity.preferred_temperature() - terrain_temperature) /
+	                   (2 * pow2(kTemperatureSigma * affinity.pickiness())));
 }
 
 }  // namespace Widelands

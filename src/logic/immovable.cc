@@ -505,10 +505,6 @@ void Immovable::switch_program(Game& game, const std::string& program_name) {
 	schedule_act(game, 1);
 }
 
-uint32_t Immovable_Descr::terrain_suitability(FCoords const, const Map&) const {
-	return 6 * 255;
-}
-
 /**
  * Run program timer.
 */
@@ -969,10 +965,10 @@ ImmovableProgram::ActGrow::ActGrow
 	(char * parameters, Immovable_Descr & descr)
 {
 	// NOCOM(#sirver): care for foresters so that they plant useful stuff.
-	// if (!descr.has_terrain_affinity()) {
-		// throw game_data_error(
-			// "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
-	// }
+	if (!descr.has_terrain_affinity()) {
+		throw game_data_error(
+		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
+	}
 
 	try {
 		tribe = true;
@@ -1011,21 +1007,18 @@ ImmovableProgram::ActGrow::ActGrow
 	}
 }
 
-void ImmovableProgram::ActGrow::execute
-	(Game & game, Immovable & immovable) const
-{
-	const Map             & map   = game     .map  ();
-	const Immovable_Descr & descr = immovable.descr();
-	FCoords const f = map.get_fcoords(immovable.get_position());
-	if (game.logic_rand() % (6 * 255) < descr.terrain_suitability(f, map)) {
-		Tribe_Descr const * const owner_tribe =
-			tribe ? immovable.descr().get_owner_tribe() : nullptr;
-		immovable.remove(game); //  Now immovable is a dangling reference!
-		game.create_immovable(f, type_name, owner_tribe);
-	} else
-		immovable.program_step(game);
+void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
+	// NOCOM(#sirver): implement.
+	// const Map& map = game.map();
+	// const Immovable_Descr& descr = immovable.descr();
+	// FCoords const f = map.get_fcoords(immovable.get_position());
+	// if (game.logic_rand() % (6 * 255) < descr.terrain_suitability(f, map)) {
+		// Tribe_Descr const* const owner_tribe = tribe ? immovable.descr().get_owner_tribe() : nullptr;
+		// immovable.remove(game);  //  Now immovable is a dangling reference!
+		// game.create_immovable(f, type_name, owner_tribe);
+	// } else
+		// immovable.program_step(game);
 }
-
 
 /**
  * remove
@@ -1116,32 +1109,29 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 void ImmovableProgram::ActSeed::execute
 	(Game & game, Immovable & immovable) const
 {
-	const Immovable_Descr & descr = immovable.descr();
-	const Map & map = game.map();
-	if
-		(game.logic_rand() % (6 * 256)
-		 <
-		 descr.terrain_suitability
-		 	(map.get_fcoords(immovable.get_position()), map))
-	{
-		MapFringeRegion<> mr(map, Area<>(immovable.get_position(), 0));
-		uint32_t fringe_size = 0;
-		do {
-			mr.extend(map);
-			fringe_size += 6;
-		} while (game.logic_rand() % 256 < probability);
-		for (uint32_t n = game.logic_rand() % fringe_size; n; --n)
-			mr.advance(map);
-		FCoords const f = map.get_fcoords(mr.location());
-		if
-			(not f.field->get_immovable()        and
-			 (f.field->nodecaps() & MOVECAPS_WALK) and
-			 game.logic_rand() % (6 * 256) < descr.terrain_suitability(f, map))
-			game.create_immovable
-				(mr.location(),
-				 type_name,
-				 tribe ? immovable.descr().get_owner_tribe() : nullptr);
-	}
+	// NOCOM(#sirver): Implement.
+	// const Immovable_Descr & descr = immovable.descr();
+	// const Map & map = game.map();
+	// if (game.logic_rand() % (6 * 256) <
+		 // descr.terrain_suitability(map.get_fcoords(immovable.get_position()), map)) {
+		// MapFringeRegion<> mr(map, Area<>(immovable.get_position(), 0));
+		// uint32_t fringe_size = 0;
+		// do {
+			// mr.extend(map);
+			// fringe_size += 6;
+		// } while (game.logic_rand() % 256 < probability);
+
+		// for (uint32_t n = game.logic_rand() % fringe_size; n; --n) {
+			// mr.advance(map);
+		// }
+
+		// const FCoords f = map.get_fcoords(mr.location());
+		// if (!f.field->get_immovable() && (f.field->nodecaps() & MOVECAPS_WALK) &&
+			 // game.logic_rand() % (6 * 256) < descr.terrain_suitability(f, map)) {
+			// game.create_immovable(
+				// mr.location(), type_name, tribe ? immovable.descr().get_owner_tribe() : nullptr);
+		// }
+	// }
 
 	immovable.program_step(game);
 }

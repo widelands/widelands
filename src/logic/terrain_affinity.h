@@ -21,9 +21,16 @@
 
 #include <boost/noncopyable.hpp>
 
+#include "logic/description_maintainer.h"
+
 class LuaTable;
 
 namespace Widelands {
+
+class Map;
+class TerrainDescription;
+class World;
+struct FCoords;
 
 // Describes the parameters and the pickiness of Immovables towards terrain
 // parameters. Alls immovables that use 'grow' in any of their programs must
@@ -45,10 +52,16 @@ public:
 	double pickiness() const;
 
 private:
-	double preferred_temperature_;
 	double preferred_fertility_;
 	double preferred_humidity_;
+	double preferred_temperature_;
 	double pickiness_;
 };
+
+// Returns a value in [0., 1.] that describes the suitability for the
+// 'immovable_affinity' for 'field'. Higher is better suited.
+double terrain_affinity
+	(const TerrainAffinity& immovable_affinity, const FCoords& fcoords,
+	 const Map& map, const DescriptionMaintainer<TerrainDescription>& terrains);
 
 }  // namespace Widelands
