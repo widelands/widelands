@@ -23,7 +23,7 @@ class LuaTable;
 
 namespace Widelands {
 
-// Describes the parameters and the pickyness of Immovables towards terrain
+// Describes the parameters and the pickiness of Immovables towards terrain
 // parameters. Alls immovables that use 'grow' in any of their programs must
 // define this.
 class TerrainAffinity : boost::noncopyable {
