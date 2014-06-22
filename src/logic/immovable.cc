@@ -297,7 +297,7 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world)
 	}
 
 	if (table.has_key("terrain_affinity")) {
-		terrain_affinity_.reset(new TerrainAffinity(table.get_table("terrain_affinity")));
+		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
 	}
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");

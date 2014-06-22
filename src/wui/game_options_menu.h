@@ -43,8 +43,8 @@ private:
 	UI::Button exit_game;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
-	uint32_t hspacing() const {return 5;};
-	uint32_t vspacing() const {return 5;};
+	uint32_t hspacing() const {return 5;}
+	uint32_t vspacing() const {return 5;}
 
 	/** Returns the horizontal/vertical margin between edge and buttons. */
 	uint32_t hmargin() const {return 2 * hspacing();}

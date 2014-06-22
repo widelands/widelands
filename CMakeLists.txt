@@ -120,7 +120,9 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
+
   add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
+
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
