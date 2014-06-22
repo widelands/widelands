@@ -191,8 +191,9 @@ void Player::create_default_infrastructure() {
 			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
 
 			// Run the corresponding script
-			std::unique_ptr<LuaCoroutine> cr =
-			   game.lua().run_script(initialization.script)->get_coroutine("func");
+			std::unique_ptr<LuaTable> table(game.lua().run_script(initialization.script));
+			table->do_not_warn_about_unaccessed_keys();
+			std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr.release()));
 
