@@ -3,6 +3,13 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_
 
 # Catchall target to codecheck all files.
 add_custom_target(codecheck)
+add_custom_target(run_build_deps
+  COMMAND
+    ${PYTHON_EXECUTABLE}
+    ${CMAKE_SOURCE_DIR}/utils/build_deps.py
+  COMMENT "Checking CMakeLists.txt files."
+)
+add_dependencies(codecheck run_build_deps)
 
 # A target that depends on all unit tests as 'make test' will not rebuild
 # tests:
