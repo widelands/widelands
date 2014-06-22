@@ -1,6 +1,5 @@
 run(function()
-   game.desired_speed = 1000
-   sleep(1000)
+   sleep(5000)
 
    assert_equal(1, #p1:get_buildings("headquarters"))
 
@@ -9,9 +8,9 @@ run(function()
    local fhq = hq.flag
    hq:set_workers("geologist", 2)
 
-   local field = map:get_field(26,24)
+   local field = map:get_field(25,22)
    local flag = p1:place_flag(field)
-   local road = p1:place_road(flag, "bl", "bl", "l", "l")
+   local road = p1:place_road(flag, "bl", "bl", "bl", "bl")
    sleep(1000)
 
    local mv = wl.ui.MapView()
@@ -21,18 +20,17 @@ run(function()
    mv.windows.field_action.buttons.geologist:click()
    sleep(1000)
 
-   local field2 = map:get_field(23,23)
-   local flag2 = p1:place_flag(field2)
-   local road2 = p1:place_road(flag2, "br", "bl", "bl")
-   sleep(1000)
+   sleep(360000)
 
-   mv:click(field2)
-   sleep(1000)
+   assert_equal(6, #p1.inbox)
+   mv.buttons.messages:click()
 
-   mv.windows.field_action.buttons.geologist:click()
-   sleep(1000)
+   for k,v in pairs(mv.windows.messages.buttons) do print(v.name) end
 
-   sleep(5555500000)
+   for t=0,6 do
+     sleep(1000)
+     mv.windows.messages.buttons.archive_or_restore_selected_messages:click()
+   end
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
