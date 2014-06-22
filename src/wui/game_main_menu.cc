@@ -21,8 +21,8 @@
 
 #include <boost/bind.hpp>
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/general_statistics_menu.h"

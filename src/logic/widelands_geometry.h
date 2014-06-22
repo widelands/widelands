@@ -21,6 +21,7 @@
 #define WIDELANDS_GEOMETRY_H
 
 #include <cmath>
+#include <tuple>
 
 #include <stdint.h>
 
@@ -33,53 +34,37 @@ struct Extent {
 	uint16_t w, h;
 };
 
+// TODO(sirver): Remove these typedefs.
 typedef int16_t Coordinate;
 typedef Coordinate X_Coordinate;
 typedef Coordinate Y_Coordinate;
+
 /**
  * Structure used to store map coordinates
  */
 struct Coords {
-	explicit Coords() {}
-	Coords(const X_Coordinate nx, const Y_Coordinate ny)
-		: x(nx), y(ny)
-	{}
+	Coords();
+	Coords(X_Coordinate nx, Y_Coordinate ny);
 
 	/// Returns a special value indicating invalidity.
-	static Coords Null() {return Coords(-1, -1);}
+	static Coords Null();
 
-	bool operator== (const Coords& other) const {
-		return x == other.x and y == other.y;
-	}
-	bool operator!= (const Coords & other) const {
-		return not (*this == other);
-	}
+	bool operator== (const Coords& other) const;
+	bool operator!= (const Coords & other) const;
+	operator bool() const;
 
-	operator bool() const {return *this != Null();}
-
-	/**
-	 * For use with standard containers.
-	 */
+	// Ordering functor for use with std:: containers.
 	struct ordering_functor {
 		bool operator()(const Coords & a, const Coords & b) const {
-			return a.all < b.all;
+			return std::forward_as_tuple(a.y, a.x) < std::forward_as_tuple(b.y, b.x);
 		}
 	};
 
-	void reorigin(Coords new_origin, const Extent & extent) {
-		if (*this) {
-			if (y < new_origin.y)
-				y += extent.h;
-			y -= new_origin.y;
-			if ((y & 1) and (new_origin.y & 1) and ++new_origin.x == extent.w)
-				new_origin.x = 0;
-			if (x < new_origin.x)
-				x += extent.w;
-			x -= new_origin.x;
-		}
-	}
+	// Move the coords to the 'new_origin'.
+	void reorigin(Coords new_origin, const Extent & extent);
 
-	union {struct {X_Coordinate x; Y_Coordinate y;}; uint32_t all;};
+	X_Coordinate x;
+	Y_Coordinate y;
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 

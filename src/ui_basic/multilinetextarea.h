@@ -22,9 +22,9 @@
 
 #include <memory>
 
-#include "align.h"
-#include "ui_basic/panel.h"
+#include "graphic/align.h"
 #include "rgbcolor.h"
+#include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {

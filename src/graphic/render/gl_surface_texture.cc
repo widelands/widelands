@@ -20,10 +20,10 @@
 
 #include <cassert>
 
+#include "base/wexception.h"
 #include "gl_surface.h"  // for glew.h
 #include "graphic/graphic.h"
 #include "graphic/render/gl_utils.h"
-#include "wexception.h"
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
 bool use_arb_;

@@ -23,6 +23,7 @@
 #include <sys/time.h>
 #endif
 
+#include "base/i18n.h"
 #include "constants.h"
 #include "container_iterate.h"
 #include "graphic/font.h"
@@ -30,7 +31,6 @@
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)

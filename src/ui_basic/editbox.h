@@ -25,7 +25,7 @@
 #include <SDL_keyboard.h>
 #include <boost/signals2.hpp>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/button.h"
 #include "graphic/graphic.h"
 

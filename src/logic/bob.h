@@ -20,6 +20,7 @@
 #ifndef BOB_H
 #define BOB_H
 
+#include "base/port.h"
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
@@ -27,7 +28,6 @@
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
 #include "point.h"
-#include "port.h"
 
 class Profile;
 
@@ -59,7 +59,7 @@ public:
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);
 
-	virtual ~BobDescr() {};
+	virtual ~BobDescr() {}
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
 
 	Tribe_Descr const* get_owner_tribe() const {
@@ -221,7 +221,7 @@ public:
 		const BobProgramBase * program; ///< pointer to current program
 	};
 
-	MO_DESCR(BobDescr);
+	MO_DESCR(BobDescr)
 
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
@@ -311,7 +311,7 @@ public:
 	void signal_handled();
 
 	/// Automatically select a task.
-	virtual void init_auto_task(Game &) {};
+	virtual void init_auto_task(Game &) {}
 
 	// low level animation and walking handling
 	void set_animation(Editor_Game_Base &, uint32_t anim);

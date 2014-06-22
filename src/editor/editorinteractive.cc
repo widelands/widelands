@@ -26,6 +26,8 @@
 #include <SDL_keysym.h>
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/warning.h"
 #include "editor/tools/editor_delete_immovable_tool.h"
 #include "editor/ui_menus/editor_main_menu.h"
 #include "editor/ui_menus/editor_main_menu_load_map.h"
@@ -34,7 +36,6 @@
 #include "editor/ui_menus/editor_tool_menu.h"
 #include "editor/ui_menus/editor_toolsize_menu.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
@@ -47,7 +48,6 @@
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "warning.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"

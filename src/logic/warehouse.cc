@@ -21,6 +21,8 @@
 
 #include <algorithm>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -29,7 +31,6 @@
 #include "economy/ware_instance.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
-#include "log.h"
 #include "logic/battle.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
@@ -45,7 +46,6 @@
 #include "logic/worker.h"
 #include "profile/profile.h"
 #include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 

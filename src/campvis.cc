@@ -24,9 +24,9 @@
 
 #include <sys/stat.h>
 
+#include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 /**
  * Get the path of campaign visibility save-file

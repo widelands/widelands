@@ -19,7 +19,7 @@
 
 #include "ui_fsmenu/intro.h"
 
-#include "i18n.h"
+#include "base/i18n.h"
 
 
 Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()

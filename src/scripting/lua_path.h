@@ -20,7 +20,6 @@
 #ifndef LUA_PATH_H
 #define LUA_PATH_H
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
 
 namespace LuaPath {
@@ -38,4 +37,3 @@ void luaopen_path(lua_State *);
 };
 
 #endif /* end of include guard: LUA_PATH_H */
-

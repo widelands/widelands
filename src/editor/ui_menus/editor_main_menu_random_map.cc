@@ -24,9 +24,9 @@
 #include <string>
 #include <vector>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/world/world.h"

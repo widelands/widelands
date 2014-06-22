@@ -21,7 +21,7 @@
 
 #include <cstdarg>
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 StreamWrite::~StreamWrite() {}
 
@@ -66,4 +66,3 @@ void StreamWrite::Printf(char const * const fmt, ...)
 		delete[] heapbuf;
 	}
 }
-

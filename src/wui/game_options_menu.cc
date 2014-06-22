@@ -24,8 +24,8 @@
 #include <boost/lambda/construct.hpp>
 #include <boost/type_traits.hpp>
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "sound/sound_handler.h"
 #include "ui_fsmenu/fileview.h"
 #include "wui/game_main_menu_save_game.h"

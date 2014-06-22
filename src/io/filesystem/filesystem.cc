@@ -32,7 +32,6 @@
 #include <string>
 #include <vector>
 
-#include <config.h>
 #ifdef _WIN32
 #include <direct.h>
 #include <io.h>
@@ -44,11 +43,12 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "base/log.h"
+#include "config.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
-#include "log.h"
 
 #ifdef _WIN32
 #define stat _stat

@@ -19,6 +19,7 @@
 
 #include "logic/queue_cmd_factory.h"
 
+#include "base/wexception.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_incorporate.h"
@@ -27,7 +28,6 @@
 #include "logic/instances.h"
 #include "logic/playercommand.h"
 #include "logic/queue_cmd_ids.h"
-#include "wexception.h"
 
 namespace Widelands {
 

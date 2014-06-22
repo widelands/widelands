@@ -103,7 +103,7 @@ public:
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
-	char* Data(uint32_t const bytes, const Pos pos = Pos::Null());
+	char* Data(uint32_t bytes, Pos pos = Pos::Null());
 
 	// Returns the whole file as a string starting from 'pos'.
 	char* CString(Pos pos);

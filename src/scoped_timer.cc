@@ -22,7 +22,7 @@
 #include <SDL.h>
 #include <boost/format.hpp>
 
-#include "log.h"
+#include "base/log.h"
 
 ScopedTimer::ScopedTimer(const std::string& message)
 		: message_(message)

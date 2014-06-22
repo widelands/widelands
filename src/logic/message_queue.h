@@ -159,9 +159,9 @@ private:
 	void clear() {
 		assert_counts();
 		m_current_message_id        = Message_Id::Null();
-		m_counts[Message::New]      = 0; //  C++0x: m_counts = {};
-		m_counts[Message::Read]     = 0; //  C++0x:
-		m_counts[Message::Archived] = 0; //  C++0x:
+		m_counts[Message::New]      = 0;
+		m_counts[Message::Read]     = 0;
+		m_counts[Message::Archived] = 0;
 		std::map<Message_Id, Message *>::clear();
 		assert_counts();
 	}

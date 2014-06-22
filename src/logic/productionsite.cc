@@ -21,14 +21,14 @@
 #include "logic/productionsite.h"
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "helper.h"
-#include "i18n.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -40,7 +40,6 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 #include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 

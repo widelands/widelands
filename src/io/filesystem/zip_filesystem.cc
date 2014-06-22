@@ -27,11 +27,11 @@
 #include <cstring>
 #include <string>
 
+#include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_exceptions.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "wexception.h"
 
 /**
  * Initialize the real file-system

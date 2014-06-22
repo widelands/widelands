@@ -20,12 +20,12 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
+#include "base/wexception.h"
 #include "economy/request.h"
 #include "logic/attackable.h"
 #include "logic/building.h"
 #include "logic/soldiercontrol.h"
 #include "logic/wareworker.h"
-#include "wexception.h"
 
 class Interactive_Player;
 class Profile;
@@ -70,7 +70,7 @@ class Warehouse : public Building, public Attackable, public SoldierControl {
 	friend class PortDock;
 	friend class Map_Buildingdata_Data_Packet;
 
-	MO_DESCR(Warehouse_Descr);
+	MO_DESCR(Warehouse_Descr)
 
 public:
 	/**

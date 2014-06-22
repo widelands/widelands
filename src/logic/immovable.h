@@ -151,7 +151,7 @@ class Immovable : public BaseImmovable {
 	friend struct ImmovableProgram;
 	friend class Map;
 
-	MO_DESCR(Immovable_Descr);
+	MO_DESCR(Immovable_Descr)
 
 public:
 	Immovable(const Immovable_Descr &);

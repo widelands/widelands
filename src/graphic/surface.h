@@ -23,7 +23,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "graphic/compositemode.h"
-#include "rect.h"
+#include "graphic/rect.h"
 #include "rgbcolor.h"
 
 /**

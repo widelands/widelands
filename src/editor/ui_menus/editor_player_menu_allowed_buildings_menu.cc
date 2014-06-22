@@ -19,8 +19,8 @@
 
 #include "editor/ui_menus/editor_player_menu_allowed_buildings_menu.h"
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"

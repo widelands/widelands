@@ -19,12 +19,13 @@
 
 #include "logic/playercommand.h"
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/wares_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/militarysite.h"
@@ -36,7 +37,6 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 

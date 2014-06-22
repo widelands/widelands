@@ -50,7 +50,7 @@ struct WareDescr : public Map_Object_Descr {
 		 char const * const descname, const std::string & directory,
 		 Profile &, Section & global_s);
 
-	virtual ~WareDescr() {};
+	virtual ~WareDescr() {}
 
 	const Tribe_Descr & tribe() const {return m_tribe;}
 

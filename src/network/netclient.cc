@@ -23,12 +23,14 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
-#include <config.h>
 
+#include "base/i18n.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "build_info.h"
+#include "config.h"
 #include "game_io/game_loader.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -46,8 +48,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launchMPG.h"
-#include "warning.h"
-#include "wexception.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"

@@ -23,6 +23,7 @@
 
 #include <SDL_keysym.h>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "graphic/graphic.h"
@@ -30,7 +31,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "graphic/texture.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/terrain_description.h"

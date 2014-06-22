@@ -19,12 +19,12 @@
 
 #include "wui/fieldaction.h"
 
+#include "base/i18n.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
-#include "i18n.h"
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
 #include "logic/maphollowregion.h"

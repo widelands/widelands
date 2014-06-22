@@ -46,8 +46,8 @@ typedef unordered_map<string, TagConstraint> TagConstraints;
 // Interface Stuff {{{
 class Attr : public IAttr {
 public:
-	Attr(string gname, string value) : m_name(gname), m_value(value) {};
-	virtual ~Attr() {};
+	Attr(string gname, string value) : m_name(gname), m_value(value) {}
+	virtual ~Attr() {}
 
 	virtual const string & name() const override {return m_name;}
 	virtual long get_int() const override;

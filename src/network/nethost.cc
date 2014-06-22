@@ -25,18 +25,18 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <libintl.h>
 #ifndef _WIN32
 #include <unistd.h> // for usleep
 #endif
 
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -57,7 +57,6 @@
 #include "scripting/scripting.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launchMPG.h"
-#include "wexception.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"

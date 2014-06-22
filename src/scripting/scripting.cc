@@ -29,8 +29,8 @@
 #endif
 #include <stdint.h>
 
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "scripting/c_utils.h"
 #include "scripting/factory.h"
 #include "scripting/lua_bases.h"

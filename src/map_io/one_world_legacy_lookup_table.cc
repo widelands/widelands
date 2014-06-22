@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include "log.h"
-
 namespace  {
 
 /// If the map is newish and there is no old world to convert names from, we use

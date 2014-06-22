@@ -19,10 +19,10 @@
 
 #include "wui/interactive_spectator.h"
 
+#include "base/i18n.h"
 #include "chat.h"
 #include "gamecontroller.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"

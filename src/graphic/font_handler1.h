@@ -24,7 +24,7 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "point.h"
 
 class FileSystem;
@@ -38,7 +38,7 @@ namespace UI {
  */
 class IFont_Handler1 : boost::noncopyable {
 public:
-	virtual ~IFont_Handler1() {};
+	virtual ~IFont_Handler1() {}
 
 	/*
 	 * Renders the given text into an image. The image is cached and therefore

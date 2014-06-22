@@ -19,10 +19,10 @@
 
 #include "ui_fsmenu/netsetup_lan.h"
 
+#include "base/i18n.h"
 #include "compile_diagnostics.h"
 #include "constants.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "network/network.h"
 #include "profile/profile.h"
 
@@ -265,4 +265,3 @@ void Fullscreen_Menu_NetSetupLAN::clicked_lasthost() {
 		joingame.set_enabled(true);
 	opengames.select(opengames.no_selection_index());
 }
-

@@ -24,9 +24,9 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -39,6 +39,7 @@
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
 #include "logic/militarysite.h"
+#include "logic/parse_map_object_types.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
@@ -46,7 +47,6 @@
 #include "logic/worker.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"

@@ -21,9 +21,9 @@
 
 #include <boost/format.hpp>
 
-#include "i18n.h"
+#include "base/i18n.h"
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 
 /// The dedicated server logger
 static DedicatedLog * logger;

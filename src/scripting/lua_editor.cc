@@ -19,7 +19,7 @@
 
 #include "scripting/lua_editor.h"
 
-#include "log.h"
+#include "base/log.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "scripting/c_utils.h"

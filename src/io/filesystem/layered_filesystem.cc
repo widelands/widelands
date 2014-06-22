@@ -22,12 +22,12 @@
 #include <cstdio>
 #include <memory>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "container_iterate.h"
 #include "io/fileread.h"
 #include "io/streamread.h"
-#include "log.h"
-#include "wexception.h"
 
 LayeredFileSystem * g_fs;
 
@@ -208,12 +208,8 @@ std::set<std::string> LayeredFileSystem::ListDirectory(const std::string& path) 
 	{
 		files = (*it)->ListDirectory(path);
 
-		// need to workaround MSVC++6 issues
-		for
-			(filenameset_t::iterator fnit = files.begin();
-			 fnit != files.end();
-			 ++fnit)
-				results.insert(*fnit);
+		for (filenameset_t::iterator fnit = files.begin(); fnit != files.end(); ++fnit)
+			   results.insert(*fnit);
 	}
 	return results;
 }
