@@ -52,7 +52,7 @@ TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immov
 	if (preferred_temperature_ < 0) {
 		throw game_data_error("%s: preferred_temperature is not in Kelvin.", immovable_name.c_str());
 	}
-	// NOCOM(#sirver): bound check pickiness
+	// NOCOM(#sirver): bound check pickiness?
 }
 
 double TerrainAffinity::preferred_temperature() const {

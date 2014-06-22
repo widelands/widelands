@@ -20,7 +20,7 @@ world:new_immovable_type{
    descname = _ "Birch (Sapling)",
    editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "seed" },
+   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {

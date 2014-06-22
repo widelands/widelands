@@ -59,7 +59,7 @@ template <typename T> struct DescriptionMaintainer {
 	// Returns the entry at 'index'. If 'index' is out of bounds the result is
 	// undefined.
 	// TODO(sirver): this should be called get and the other should be called get_mutable.
-	T& get_unmutable(const int32_t index) const {
+	T& get_unmutable(const uint32_t index) const {
 		assert(0 <= index && index < items_.size());
 		return *items_.at(index);
 	}

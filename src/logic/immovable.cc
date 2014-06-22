@@ -964,7 +964,6 @@ void ImmovableProgram::ActTransform::execute
 ImmovableProgram::ActGrow::ActGrow
 	(char * parameters, Immovable_Descr & descr)
 {
-	// NOCOM(#sirver): care for foresters so that they plant useful stuff.
 	if (!descr.has_terrain_affinity()) {
 		throw game_data_error(
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
@@ -1052,7 +1051,6 @@ void ImmovableProgram::ActRemove::execute
 		immovable.program_step(game);
 }
 
-// NOCOM(#sirver): Who uses seed= except for trees.
 // NOCOM(#sirver): tribes use transform instead of grow for plants. (wine, cornfarm, blackroot farm, nursery).
 
 ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
