@@ -101,4 +101,4 @@ void luaopen_wleditor(lua_State * const L) {
 	lua_pop(L, 1); // Pop the meta table
 }
 
-};
+}

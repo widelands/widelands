@@ -330,4 +330,4 @@ void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 				(i * m_ndatasets + m_selected_information, false);
 		}
 	m_selected_information = id;
-};
+}

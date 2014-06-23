@@ -26,6 +26,6 @@
  * This packet loads lua scripts from the scripting sub directory.
  * It also safes them there again.
  */
-MAP_DATA_PACKET(Map_Scripting_Data_Packet);
+MAP_DATA_PACKET(Map_Scripting_Data_Packet)
 
 #endif

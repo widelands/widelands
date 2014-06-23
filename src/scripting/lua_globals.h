@@ -27,4 +27,4 @@ namespace LuaGlobals {
 void luaopen_globals(lua_State *);
 
 #endif /* end of include guard: LUA_GLOBALS_H */
-};
+}

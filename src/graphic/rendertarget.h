@@ -32,7 +32,7 @@ class Surface;
 
 namespace Widelands {
 class Player;
-};
+}
 
 /**
  * This class represents anything that can be rendered to.

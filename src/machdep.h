@@ -29,7 +29,7 @@
 #include "compile_diagnostics.h"
 
 // Disable this warning for files where we might use these macros.
-CLANG_DIAG_OFF("-Wself-assign");
+CLANG_DIAG_OFF("-Wself-assign")
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
 #define Little16(x)    (x)

@@ -30,7 +30,7 @@
 namespace Widelands {
 struct WareDescr;
 struct Tribe_Descr;
-};
+}
 
 class Interactive_Player;
 

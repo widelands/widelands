@@ -479,7 +479,7 @@ void WUIPlot_Area::set_plotcolor(uint32_t id, RGBColor color) {
 void WUIPlot_Area::show_plot(uint32_t const id, bool const t) {
 	assert(id < m_plotdata.size());
 	m_plotdata[id].showplot = t;
-};
+}
 
 /*
  * Set sample rate the data uses

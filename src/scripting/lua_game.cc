@@ -1356,4 +1356,4 @@ void luaopen_wlgame(lua_State * L) {
 	register_class<L_Message>(L, "game");
 }
 
-};
+}

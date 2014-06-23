@@ -780,4 +780,4 @@ void luaopen_wlui(lua_State * L) {
 }
 
 
-};
+}

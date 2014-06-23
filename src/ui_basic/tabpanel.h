@@ -109,6 +109,6 @@ private:
 
 	const Image* m_pic_background; ///< picture used to draw background
 };
-};
+}
 
 #endif

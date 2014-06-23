@@ -25,6 +25,6 @@
 /*
  * This packet contains the version information of the map.
  */
-MAP_DATA_PACKET(Map_Version_Data_Packet);
+MAP_DATA_PACKET(Map_Version_Data_Packet)
 
 #endif

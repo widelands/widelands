@@ -40,18 +40,18 @@ public: \
 		  name(std::string msg) : Exception(msg) {} \
 };
 
-DEF_ERR(AttributeNotFound);
-DEF_ERR(BadFont);
-DEF_ERR(BadImage);
-DEF_ERR(EOT);
-DEF_ERR(InvalidColor);
-DEF_ERR(RenderError);
-DEF_ERR(SyntaxError);
-DEF_ERR(WidthTooSmall);
+DEF_ERR(AttributeNotFound)
+DEF_ERR(BadFont)
+DEF_ERR(BadImage)
+DEF_ERR(EOT)
+DEF_ERR(InvalidColor)
+DEF_ERR(RenderError)
+DEF_ERR(SyntaxError)
+DEF_ERR(WidthTooSmall)
 
 #undef DEF_ERR
 
 
-};
+}
 
 #endif /* end of include guard: RT_ERRORS_H */

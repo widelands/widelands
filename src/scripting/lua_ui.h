@@ -212,6 +212,6 @@ public:
 
 void luaopen_wlui(lua_State *);
 
-};
+}
 
 #endif

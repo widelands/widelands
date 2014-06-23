@@ -1004,4 +1004,4 @@ IRenderer* setup_renderer(ImageCache* image_cache, SurfaceCache* surface_cache, 
 	return new Renderer(image_cache, surface_cache, fl, setup_parser());
 }
 
-};
+}
