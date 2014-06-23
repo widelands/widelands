@@ -41,7 +41,6 @@
 struct warning : public std::exception {
 	explicit warning (char const * title, char const * message, ...)
 	 PRINTF_FORMAT(3, 4);
-	virtual ~warning() noexcept;
 
 	/// The target of the returned pointer remains valid during the lifetime of
 	/// the warning object.

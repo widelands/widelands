@@ -297,10 +297,8 @@ const Widelands::Tribe_Descr::WaresOrder & AbstractWaresDisplay::icons_order() c
 	switch (m_type) {
 	case Widelands::wwWARE:
 		return m_tribe.wares_order();
-		break;
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order();
-		break;
 	default:
 		throw wexception("Invalid m_type %d", m_type);
 	}
@@ -311,10 +309,8 @@ const Widelands::Tribe_Descr::WaresOrderCoords & AbstractWaresDisplay::icons_ord
 	switch (m_type) {
 	case Widelands::wwWARE:
 		return m_tribe.wares_order_coords();
-		break;
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order_coords();
-		break;
 	default:
 		throw wexception("Invalid m_type %d", m_type);
 	}

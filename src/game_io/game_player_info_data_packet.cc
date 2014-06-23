@@ -78,33 +78,6 @@ void Game_Player_Info_Data_Packet::Read
 
 					game.add_player(plnum, 0, tribe_name, name, team);
 					Player & player = game.player(plnum);
-					{
-						const Tribe_Descr & tribe = player.tribe();
-						try {
-							player.m_frontier_style_index =
-								frontier_style_name ?
-								tribe.frontier_style_index(frontier_style_name) : 0;
-						} catch (Tribe_Descr::Nonexistent) {
-							log
-								("WARNING: player %1$u has frontier style index \"%2$s\", "
-								 "which does not exist in his tribe %3$s; will use "
-								 "default frontier style \"%4$s\" instead\n",
-								 plnum, frontier_style_name, tribe.name().c_str(),
-								 tribe.frontier_style_name(0).c_str());
-						}
-						try {
-							player.m_flag_style_index =
-								flag_style_name ?
-								tribe.flag_style_index(flag_style_name) : 0;
-						} catch (Tribe_Descr::Nonexistent) {
-							log
-								("WARNING: player %1$u has flag style index \"%2$s\", "
-								 "which does not exist in his tribe %3$s; will use "
-								 "default flag style \"%4$s\" instead\n",
-								 plnum, flag_style_name, tribe.name().c_str(),
-								 tribe.flag_style_name(0).c_str());
-						}
-					}
 					player.set_see_all(see_all);
 
 					if (packet_version >= 6)
@@ -168,8 +141,6 @@ void Game_Player_Info_Data_Packet::Write
 		{
 			const Tribe_Descr & tribe = plr->tribe();
 			fw.CString(tribe.name().c_str());
-			fw.CString(tribe.frontier_style_name(plr->m_frontier_style_index));
-			fw.CString(tribe.flag_style_name    (plr->m_flag_style_index));
 		}
 
 		// Seen fields is in a map packet

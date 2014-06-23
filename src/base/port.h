@@ -27,6 +27,4 @@
 #endif
 #endif
 
-
 #endif /* end of include guard: PORT_H */
-

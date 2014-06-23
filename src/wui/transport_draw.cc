@@ -41,7 +41,7 @@ void Flag::draw
 	};
 
 	dst.drawanim
-		(pos, owner().flag_anim(), game.get_gametime() - m_animstart, &owner());
+		(pos, owner().tribe().flag_animation(), game.get_gametime() - m_animstart, &owner());
 
 	const uint32_t ware_filled = m_ware_filled;
 	for (uint32_t i = 0; i < ware_filled; ++i) { //  draw wares

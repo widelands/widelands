@@ -37,7 +37,7 @@
 #include "logic/world/world.h"
 
 #define TRUE_WORDS 4
-char const * trueWords[TRUE_WORDS] =
+static char const * trueWords[TRUE_WORDS] =
 {
 	"true",
 	"yes",
@@ -46,7 +46,7 @@ char const * trueWords[TRUE_WORDS] =
 };
 
 #define FALSE_WORDS 4
-char const * falseWords[FALSE_WORDS] =
+static char const * falseWords[FALSE_WORDS] =
 {
 	"false",
 	"no",
