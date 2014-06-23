@@ -45,9 +45,9 @@ void Game_Player_Info_Data_Packet::Read
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
 				if (fr.Unsigned8()) {
-					bool    const see_all = fr.Unsigned8();
+					bool const see_all = fr.Unsigned8();
 
-					int32_t const plnum   = fr.Unsigned8();
+					int32_t const plnum = fr.Unsigned8();
 					if (plnum < 1 or MAX_PLAYERS < plnum)
 						throw game_data_error
 							("player number (%i) is out of range (1 .. %u)",
@@ -55,24 +55,8 @@ void Game_Player_Info_Data_Packet::Read
 					Widelands::TeamNumber team = 0;
 					if (packet_version >= 9)
 						team = fr.Unsigned8();
-					// Partner id in older shared kingdom feature was saved here in
-					// packet version 11. (between Build15 and Build16)
-					// Sorry for the mess -- nasenbaer
-					if (packet_version == 11)
-						fr.Unsigned8();
-					char const * const tribe_name = fr.CString();
-					char const * const frontier_style_name =
-						packet_version < 7 ? nullptr : fr.CString();
-					char const * const flag_style_name     =
-						packet_version < 7 ? nullptr : fr.CString();
 
-					if (packet_version <= 12) { // Player colors used to be saved in this packet
-						for (uint32_t j = 0; j < 4; ++j) {
-							fr.Unsigned8();
-							fr.Unsigned8();
-							fr.Unsigned8();
-						}
-					}
+					char const * const tribe_name = fr.CString();
 
 					std::string const name = fr.CString();
 
@@ -80,8 +64,7 @@ void Game_Player_Info_Data_Packet::Read
 					Player & player = game.player(plnum);
 					player.set_see_all(see_all);
 
-					if (packet_version >= 6)
-						player.setAI(fr.CString());
+					player.setAI(fr.CString());
 
 					if (packet_version >= 15)
 						player.ReadStatistics(fr, 3);
@@ -138,10 +121,7 @@ void Game_Player_Info_Data_Packet::Write
 		fw.Unsigned8(plr->m_plnum);
 		fw.Unsigned8(plr->team_number());
 
-		{
-			const Tribe_Descr & tribe = plr->tribe();
-			fw.CString(tribe.name().c_str());
-		}
+		fw.CString(plr->tribe().name().c_str());
 
 		// Seen fields is in a map packet
 		// Allowed buildings is in a map packet

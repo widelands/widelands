@@ -366,7 +366,7 @@ void ConstructionSite::draw
 	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
-	} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+	} catch (Map_Object_Descr::Animation_Nonexistent&) {
 		try {
 			anim_idx = building().get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent) {

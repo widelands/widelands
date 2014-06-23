@@ -52,6 +52,7 @@ struct Editor_Action_Args {
 
 	Editor_Action_Args(Editor_Interactive & base);
 	~Editor_Action_Args();
+
 	uint32_t refcount;
 };
 

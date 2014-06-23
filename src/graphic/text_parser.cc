@@ -57,23 +57,6 @@ Text_Block::Text_Block() {
 	m_line_spacing = 0;
 }
 
-Text_Block::Text_Block(const Text_Block & src) {
-	m_words.clear();
-	m_line_breaks.clear();
-	for (uint32_t i = 0; i < src.m_words.size(); ++i)
-		m_words.push_back(src.m_words[i]);
-	for (uint32_t i = 0; i < src.m_line_breaks.size(); ++i)
-		m_line_breaks.push_back(src.m_line_breaks[i]);
-	m_font_size       = src.m_font_size;
-	m_font_color      = src.m_font_color;
-	m_font_weight     = src.m_font_weight;
-	m_font_style      = src.m_font_style;
-	m_font_decoration = src.m_font_decoration;
-	m_font_face       = src.m_font_face;
-	m_line_spacing    = src.m_line_spacing;
-}
-
-
 void Text_Parser::parse
 	(std::string                 & text,
 	 std::vector<Richtext_Block> & blocks)

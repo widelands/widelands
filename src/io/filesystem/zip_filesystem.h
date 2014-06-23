@@ -32,7 +32,7 @@
 
 class ZipFilesystem : public FileSystem {
 public:
-	ZipFilesystem(const std::string &);
+	explicit ZipFilesystem(const std::string &);
 	virtual ~ZipFilesystem();
 
 	virtual bool IsWritable() const override;

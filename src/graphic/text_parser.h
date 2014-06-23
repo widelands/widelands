@@ -35,7 +35,8 @@ namespace UI {
  */
 struct Text_Block {
 	Text_Block();
-	Text_Block(const Text_Block & src);
+	Text_Block(const Text_Block & src) = default;
+	Text_Block& operator = (const Text_Block&) = default;
 
 	void set_font_size(int32_t const font_size) {m_font_size = font_size;}
 	int32_t get_font_size() const {return m_font_size;}
