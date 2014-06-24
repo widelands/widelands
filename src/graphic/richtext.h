@@ -24,7 +24,7 @@
 #include <memory>
 #include <string>
 
-#include "point.h"
+#include "base/point.h"
 #include "rgbcolor.h"
 
 

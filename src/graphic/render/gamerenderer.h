@@ -22,7 +22,7 @@
 
 #include <boost/utility.hpp>
 
-#include "point.h"
+#include "base/point.h"
 
 namespace Widelands {
 	class Player;

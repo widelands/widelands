@@ -30,7 +30,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/signals2/trackable.hpp>
 
-#include "point.h"
+#include "base/point.h"
 
 class RenderTarget;
 class Image;

@@ -25,7 +25,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "graphic/align.h"
-#include "point.h"
+#include "base/point.h"
 
 class FileSystem;
 class Image;

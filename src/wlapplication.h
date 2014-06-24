@@ -34,7 +34,7 @@
 #include <SDL_keyboard.h>
 #include <SDL_types.h>
 
-#include "point.h"
+#include "base/point.h"
 
 
 namespace Widelands {class Game;}

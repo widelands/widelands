@@ -22,8 +22,8 @@
 
 #include <boost/noncopyable.hpp>
 
+#include "base/rect.h"
 #include "graphic/compositemode.h"
-#include "graphic/rect.h"
 #include "rgbcolor.h"
 
 /**

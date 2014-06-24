@@ -22,7 +22,7 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/rect.h"
+#include "base/rect.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

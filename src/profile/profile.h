@@ -28,7 +28,7 @@
 //TODO: as soon as g_fs is not needed anymore, include "filesystem.h" instead of layered_filesystem.h.
 #include "base/port.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "point.h"
+#include "base/point.h"
 
 extern class Profile g_options;
 class FileSystem;

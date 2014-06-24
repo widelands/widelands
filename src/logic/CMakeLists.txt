@@ -167,6 +167,7 @@ wl_library(logic
   USES_SDL
   DEPENDS
     base_exceptions
+    base_geometry
     base_i18n
     base_log
     base_port

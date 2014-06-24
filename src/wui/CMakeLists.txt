@@ -107,6 +107,7 @@ wl_library(wui
   USES_SDL
   DEPENDS
     base_exceptions
+    base_geometry
     base_i18n
     base_log
     graphic

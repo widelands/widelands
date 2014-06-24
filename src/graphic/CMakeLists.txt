@@ -41,9 +41,10 @@ wl_library(graphic_surface
   USES_SDL
   DEPENDS
     base_exceptions
+    base_geometry
     base_log
-    widelands_ball_of_mud
     graphic
+    widelands_ball_of_mud
 )
 
 wl_library(graphic
@@ -67,7 +68,6 @@ wl_library(graphic
     image_transformations.h
     in_memory_image.cc
     in_memory_image.h
-    rect.h
     render/gamerenderer.cc
     render/gamerenderer.h
     render/gamerenderer_gl.cc
@@ -97,11 +97,12 @@ wl_library(graphic
   USES_SDL_TTF
   DEPENDS
     base_exceptions
+    base_geometry
     base_i18n
     base_log
     build_info
-    graphic_surface
     graphic_image
+    graphic_surface
     graphic_text
     io_fileread
     io_filesystem

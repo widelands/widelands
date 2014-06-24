@@ -27,8 +27,8 @@
 #include <SDL.h>
 #include <png.h>
 
+#include "base/rect.h"
 #include "graphic/image_cache.h"
-#include "graphic/rect.h"
 
 #define MAX_RECTS 20
 

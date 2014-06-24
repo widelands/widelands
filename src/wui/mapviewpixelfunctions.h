@@ -24,7 +24,7 @@
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "wui/mapviewpixelconstants.h"
-#include "point.h"
+#include "base/point.h"
 
 namespace Widelands {class Map;}
 

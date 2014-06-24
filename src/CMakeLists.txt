@@ -457,7 +457,6 @@ wl_library(widelands_ball_of_mud
     map_generator.h
     md5.cc
     md5.h
-    point.h
     random.cc
     random.h
     ref_cast.h
@@ -551,6 +550,7 @@ wl_library(widelands_ball_of_mud
   USES_SDL
   DEPENDS
     base_exceptions
+    base_geometry
     base_i18n
     base_log
     build_info

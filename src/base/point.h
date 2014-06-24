@@ -17,33 +17,32 @@
  *
  */
 
-#ifndef RECT_H
-#define RECT_H
+#ifndef POINT_H
+#define POINT_H
 
-#include "point.h"
+#include <stdint.h>
 
-struct Rect : public Point {
-	Rect() : w(0), h(0) {}
-	Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H)
-		: Point(gx, gy), w(W), h(H)
-	{}
-	Rect(const Point& p, uint32_t W, uint32_t H)
-		: Point(p), w(W), h(H)
-	{}
-	Point bottom_right() const {return *this + Point(w, h);}
+struct Point {
+	// Initializes the Point to (0,0).
+	Point();
+	Point(int32_t px, int32_t py);
 
-	/**
-	 * Returns true if this rectangle contains the given point.
-	 *
-	 * The bottom and right borders of the rectangle are considered to be excluded.
-	 */
-	bool contains(Point pt) const {
-		return
-			pt.x >= x && pt.x < x + static_cast<int32_t>(w) &&
-			pt.y >= y && pt.y < y + static_cast<int32_t>(h);
-	}
+	// Returns an invalid point.
+	static Point invalid();
 
-	uint32_t w, h;
+	bool operator == (const Point& other) const;
+	bool operator != (const Point& other) const;
+	Point operator + (const Point& other) const;
+	Point operator - () const;
+	Point operator - (const Point& other) const;
+	Point& operator += (const Point& other);
+	Point& operator -= (const Point& other);
+
+	int32_t x, y;
 };
+
+/// Returns the point in the middle between a and b (rounded to integer
+/// values).
+Point middle(const Point& a, const Point& b);
 
 #endif

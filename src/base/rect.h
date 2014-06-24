@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,23 +17,27 @@
  *
  */
 
-#ifndef VERTEX_H
-#define VERTEX_H
+#ifndef RECT_H
+#define RECT_H
 
 #include "base/point.h"
 
-/// Like a point but with an additional bright factor and texture coordinates.
-struct Vertex:public Point {
-	Vertex() : Point (0, 0), b(0), tx(0), ty(0) {}
-	Vertex
-		(const int32_t vx,  const int32_t vy,
-		 const int32_t vb,
-		 const int32_t vtx, const int32_t vty)
+// TODO(sirver): A rect is not a point.
+struct Rect : public Point {
+	/// Generates a degenerate Rect at (0, 0) with no height or width.
+	Rect();
 
-		: Point(vx, vy), b(vb), tx(vtx), ty(vty)
-	{}
+	Rect(int32_t x, int32_t y, uint32_t width, uint32_t height);
+	Rect(const Point& p, uint32_t width, uint32_t height);
 
-	int32_t b, tx, ty;
+	/// The bottom right point of this rectangle.
+	Point bottom_right() const;
+
+	/// Returns true if this rectangle contains the given point.
+	/// The bottom and right borders of the rectangle are considered to be excluded.
+	bool contains(const Point& pt) const;
+
+	uint32_t w, h;
 };
 
 #endif

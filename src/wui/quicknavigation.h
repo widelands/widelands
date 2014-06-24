@@ -26,7 +26,7 @@
 #include <boost/function.hpp>
 #include <stdint.h>
 
-#include "point.h"
+#include "base/point.h"
 
 namespace Widelands {
 class Editor_Game_Base;

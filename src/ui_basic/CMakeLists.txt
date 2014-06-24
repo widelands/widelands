@@ -52,6 +52,7 @@ wl_library(ui_basic
   USES_SDL
   DEPENDS
     base_exceptions
+    base_geometry
     base_i18n
     base_log
     graphic

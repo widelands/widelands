@@ -27,7 +27,7 @@
 #include "logic/instances.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "point.h"
+#include "base/point.h"
 
 class Profile;
 

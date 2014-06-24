@@ -28,3 +28,11 @@ wl_library(base_i18n
     base_log
     base_port
 )
+
+wl_library(base_geometry
+  SRCS
+    point.h
+    point.cc
+    rect.h
+    rect.cc
+)

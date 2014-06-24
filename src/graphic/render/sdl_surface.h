@@ -20,7 +20,7 @@
 #ifndef SDL_SURFACE_H
 #define SDL_SURFACE_H
 
-#include "graphic/rect.h"
+#include "base/rect.h"
 #include "graphic/surface.h"
 #include "rgbcolor.h"
 

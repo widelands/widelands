@@ -20,7 +20,7 @@
 #ifndef ALIGN_H
 #define ALIGN_H
 
-#include "point.h"
+#include "base/point.h"
 
 namespace UI {
 
