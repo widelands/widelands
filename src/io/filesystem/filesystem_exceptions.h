@@ -39,8 +39,6 @@ struct File_error : public std::runtime_error {
 		m_message         (message)
 	{}
 
-	virtual ~File_error() noexcept {}
-
 	std::string m_thrower;
 	std::string m_filename;
 	std::string m_message;

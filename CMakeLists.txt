@@ -120,7 +120,17 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
+
+  # This warning warns when a default case is at a switch that handles all
+  # cases. While this is super nice, silencing this warning for clang will add
+  # a warning for GCC (which is not as clever and does not figure out that all
+  # cases are handled). Therefore we disable the warning and the unreachable as
+  # they always come in pairs in these cases.
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-covered-switch-default")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")

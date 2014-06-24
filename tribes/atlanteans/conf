@@ -16,13 +16,11 @@ workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, for
 
 # Some blue fires would be fine, but just an idea
 [frontier]
-name=frontier
 pics=pics/frontier_??.png
 hotspot=3 12
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
-name=flag
 pics=pics/flag_??.png
 hotspot=15 35
 fps=10

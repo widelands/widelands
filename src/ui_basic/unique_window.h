@@ -22,6 +22,8 @@
 
 #include <functional>
 
+#include "boost/noncopyable.hpp"
+
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
 
@@ -54,6 +56,9 @@ struct UniqueWindow : public Window {
 
 		int32_t x, y;
 		bool valid_pos;
+
+		Registry(const Registry&) = default;
+		Registry& operator = (const Registry&) = default;
 
 		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {}
 		~Registry();

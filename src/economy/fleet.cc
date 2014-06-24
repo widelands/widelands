@@ -40,7 +40,16 @@
 
 namespace Widelands {
 
-Map_Object_Descr fleet_descr("fleet", "Fleet");
+namespace  {
+
+// Every Map_Object() needs to have a description. So we make a dummy one for
+// Fleet.
+Map_Object_Descr* fleet_description() {
+	static Map_Object_Descr fleet_descr("fleet", "Fleet");
+	return &fleet_descr;
+}
+
+}  // namespace
 
 /**
  * Fleets are initialized empty.
@@ -50,7 +59,7 @@ Map_Object_Descr fleet_descr("fleet", "Fleet");
  * The Fleet takes care of merging with existing fleets, if any.
  */
 Fleet::Fleet(Player & player) :
-	Map_Object(&fleet_descr),
+	Map_Object(fleet_description()),
 	m_owner(player),
 	m_act_pending(false)
 {

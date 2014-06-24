@@ -226,10 +226,6 @@ DisconnectException::DisconnectException(const char * fmt, ...)
 	m_what = buffer;
 }
 
-DisconnectException::~DisconnectException() noexcept
-{
-}
-
 char const * DisconnectException::what() const noexcept
 {
 	return m_what.c_str();

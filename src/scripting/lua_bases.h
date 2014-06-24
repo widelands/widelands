@@ -39,7 +39,7 @@ public:
 	LUNA_CLASS_HEAD(L_EditorGameBase);
 
 	L_EditorGameBase() {}
-	L_EditorGameBase(lua_State * L) {
+	L_EditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
 	virtual ~L_EditorGameBase() {}
@@ -72,7 +72,7 @@ public:
 
 
 	L_PlayerBase() : m_pl(NONE) {}
-	L_PlayerBase(lua_State * L) : m_pl(NONE) {
+	L_PlayerBase (lua_State * L) : m_pl(NONE) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
 	L_PlayerBase(Widelands::Player_Number n) {

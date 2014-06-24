@@ -37,7 +37,7 @@ Widelands::Map_Map_Object_Saver * get_mos(lua_State *);
 void report_error(lua_State*, const char*, ...)
 	__attribute__((__format__(__printf__, 2, 3), noreturn));
 #else
-void report_error [[noreturn]] (lua_State*, const char*, ...)
+[[noreturn]] void report_error(lua_State*, const char*, ...)
 #endif
 
 #define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
