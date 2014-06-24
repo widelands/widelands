@@ -265,8 +265,9 @@ OverlayManager::JobId Interactive_Base::show_work_area
 		case 2: wa_index = 3; break;
 		case 3: wa_index = 0; break;
 		default:
-		  assert(false);
-		  break;
+			wa_index = 0;
+			assert(false);
+			break;
 	}
 	Widelands::Map & map = m_egbase.map();
 	OverlayManager & overlay_manager = map.overlay_manager();
