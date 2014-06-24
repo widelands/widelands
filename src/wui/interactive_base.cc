@@ -265,7 +265,6 @@ OverlayManager::JobId Interactive_Base::show_work_area
 		case 2: wa_index = 3; break;
 		case 3: wa_index = 0; break;
 		default:
-		  wa_index = 0;
 		  assert(false);
 		  break;
 	}
