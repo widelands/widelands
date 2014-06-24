@@ -84,6 +84,7 @@ wl_library(map_io
     base_log
     build_info
     graphic
+    graphic_surface
     io_fileread
     logic
     logic_widelands_geometry

@@ -1,0 +1,25 @@
+wl_library(graphic_text
+  SRCS
+    rt_errors.h
+    rt_errors_impl.h
+    rt_parse.cc
+    rt_parse.h
+    rt_render.cc
+    rt_render.h
+    sdl_ttf_font.h
+    sdl_ttf_font_impl.cc
+    sdl_ttf_font_impl.h
+    sdl_ttf_font_loader_from_file.cc
+    sdl_ttf_font_loader_from_filesystem.cc
+    textstream.cc
+    textstream.h
+  USES_SDL
+  USES_SDL_GFX
+  DEPENDS
+    graphic
+    graphic_image
+    graphic_surface
+    io_fileread
+    io_filesystem
+    widelands_ball_of_mud
+)

@@ -555,6 +555,8 @@ wl_library(widelands_ball_of_mud
     base_log
     build_info
     graphic
+    graphic_image
+    graphic_surface
     io_dedicated_log
     io_fileread
     io_filesystem

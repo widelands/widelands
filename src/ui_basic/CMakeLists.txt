@@ -55,6 +55,8 @@ wl_library(ui_basic
     base_i18n
     base_log
     graphic
+    graphic_image
+    graphic_surface
     io_filesystem
     profile
     sound
