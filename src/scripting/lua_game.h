@@ -30,7 +30,7 @@ namespace Widelands {
 	struct Tribe_Descr;
 	class Objective;
 	struct Message;
-};
+}
 
 namespace LuaGame {
 
@@ -191,4 +191,4 @@ public:
 void luaopen_wlgame(lua_State *);
 
 #endif
-};
+}

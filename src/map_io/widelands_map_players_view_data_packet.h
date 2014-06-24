@@ -31,6 +31,6 @@
 /// This information can not be loaded before the terrains, roads, immovables
 /// and players' vision maps are loaded. The vision maps are completely loaded
 /// after Map_Bobdata_Data_Packet has been loaded.
-MAP_DATA_PACKET(Map_Players_View_Data_Packet);
+MAP_DATA_PACKET(Map_Players_View_Data_Packet)
 
 #endif

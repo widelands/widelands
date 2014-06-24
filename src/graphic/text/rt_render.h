@@ -102,6 +102,6 @@ public:
 
 // Setup a renderer, takes ownership of fl but of nothing else.
 IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*, IFontLoader* fl);
-};
+}
 
 #endif /* end of include guard: RT_RENDER_H */

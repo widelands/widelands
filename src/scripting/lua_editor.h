@@ -55,7 +55,7 @@ private:
 
 void luaopen_wleditor(lua_State *);
 
-};
+}
 
 
 #endif

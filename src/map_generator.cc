@@ -1168,4 +1168,4 @@ uint16_t Widelands::UniqueRandomMapInfo::generateWorldNameHash
 // TODO: MapGen: Check out sample map
 // TODO: MapGen: How to handle height profile in make_blah...
 
-};
+}

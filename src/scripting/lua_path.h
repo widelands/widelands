@@ -34,6 +34,6 @@ class L_PathModuleClass : public LunaClass {
 
 void luaopen_path(lua_State *);
 
-};
+}
 
 #endif /* end of include guard: LUA_PATH_H */

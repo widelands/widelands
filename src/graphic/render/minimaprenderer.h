@@ -27,7 +27,7 @@ class StreamWrite;
 namespace Widelands {
 	class Player;
 	class Editor_Game_Base;
-};
+}
 
 /**
  * This class renders the minimap.

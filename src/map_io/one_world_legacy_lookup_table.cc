@@ -352,7 +352,7 @@ std::string RealOneWorldLegacyLookupTable::lookup_resource(const std::string& re
 		return resource;
 	}
 	return i->second;
-};
+}
 
 std::string RealOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
 	const std::map<std::string, std::string>& world_terrains = terrains_.at(old_world_name_);

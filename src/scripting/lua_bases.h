@@ -113,6 +113,6 @@ protected:
 
 void luaopen_wlbases(lua_State *);
 
-};
+}
 
 #endif

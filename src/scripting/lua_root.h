@@ -125,4 +125,4 @@ public:
 void luaopen_wlroot(lua_State *, bool in_editor);
 
 #endif
-};
+}

@@ -462,7 +462,7 @@ private:
 	FILE * m_file;
 };
 
-};
+}
 
 StreamRead * RealFSImpl::OpenStreamRead(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
@@ -508,7 +508,7 @@ private:
 	FILE * m_file;
 };
 
-};
+}
 
 StreamWrite * RealFSImpl::OpenStreamWrite(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);

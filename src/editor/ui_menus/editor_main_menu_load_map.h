@@ -29,7 +29,7 @@ struct Button;
 template <typename T> struct Listselect;
 struct Textarea;
 struct Multiline_Textarea;
-};
+}
 
 /**
  * Choose a filename and save your brand new created map

@@ -357,6 +357,6 @@ string Parser::remaining_text() {
 
 IParser * setup_parser() {
 	return new Parser();
-};
+}
 
 }

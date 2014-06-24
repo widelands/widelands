@@ -27,7 +27,7 @@
 namespace Widelands {
 	class Player;
 	class Editor_Game_Base;
-};
+}
 
 class RenderTarget;
 

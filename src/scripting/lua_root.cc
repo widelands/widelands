@@ -495,4 +495,4 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 	register_class<L_World>(L, "", false);
 }
 
-};
+}

@@ -26,6 +26,6 @@
  * This parses the roads data (where it is, where it belongs to
  * and so on)
  */
-MAP_DATA_PACKET(Map_Roaddata_Data_Packet);
+MAP_DATA_PACKET(Map_Roaddata_Data_Packet)
 
 #endif
