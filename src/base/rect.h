@@ -22,13 +22,15 @@
 
 #include "base/point.h"
 
-// TODO(sirver): A rect is not a point.
-struct Rect : public Point {
+struct Rect {
 	/// Generates a degenerate Rect at (0, 0) with no height or width.
 	Rect();
 
 	Rect(int32_t x, int32_t y, uint32_t width, uint32_t height);
 	Rect(const Point& p, uint32_t width, uint32_t height);
+
+	/// The top left point of this rectangle.
+	Point top_left() const;
 
 	/// The bottom right point of this rectangle.
 	Point bottom_right() const;
@@ -37,6 +39,7 @@ struct Rect : public Point {
 	/// The bottom and right borders of the rectangle are considered to be excluded.
 	bool contains(const Point& pt) const;
 
+	int32_t x, y;
 	uint32_t w, h;
 };
 

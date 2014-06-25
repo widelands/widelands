@@ -1228,7 +1228,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r + Point(2, 2), rendered_text);
+	dst.blit(r.top_left() + Point(2, 2), rendered_text);
 	return true;
 }
 

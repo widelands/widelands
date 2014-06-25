@@ -19,17 +19,21 @@
 
 #include "base/rect.h"
 
-Rect::Rect() : w(0), h(0) {
+Rect::Rect() : x(0), y(0), w(0), h(0) {
 }
 
-Rect::Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H) : Point(gx, gy), w(W), h(H) {
+Rect::Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H) : x(gx), y(gy), w(W), h(H) {
 }
 
-Rect::Rect(const Point& p, uint32_t W, uint32_t H) : Point(p), w(W), h(H) {
+Rect::Rect(const Point& p, uint32_t W, uint32_t H) : Rect(p.x, p.y, W, H) {
+}
+
+Point Rect::top_left() const {
+	return Point(x, y);
 }
 
 Point Rect::bottom_right() const {
-	return *this + Point(w, h);
+	return top_left() + Point(w, h);
 }
 
 bool Rect::contains(const Point& pt) const {

@@ -129,7 +129,7 @@ void GameRendererGL::draw()
 	if (!m_surface)
 		return;
 	m_rect = m_dst->get_rect();
-	m_surface_offset = m_dst_offset + m_rect + m_dst->get_offset();
+	m_surface_offset = m_dst_offset + m_rect.top_left() + m_dst->get_offset();
 
 	m_patch_size.x = m_minfx - 1;
 	m_patch_size.y = m_minfy;

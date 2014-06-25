@@ -328,8 +328,8 @@ void SDLSurface::blit
 		0, 0
 		};
 
-	bool alpha;
-	uint8_t alphaval;
+	bool alpha = false;
+	uint8_t alphaval = 0;
 	if (cm == CM_Solid || cm == CM_Copy) {
 		alpha = sdlsurf->flags & SDL_SRCALPHA;
 		alphaval = sdlsurf->format->alpha;
@@ -339,6 +339,6 @@ void SDLSurface::blit
 	SDL_BlitSurface(sdlsurf, &srcrect, m_surface, &dstrect);
 
 	if (cm == CM_Solid || cm == CM_Copy) {
-		SDL_SetAlpha(sdlsurf, alpha?SDL_SRCALPHA:0, alphaval);
+		SDL_SetAlpha(sdlsurf, alpha ? SDL_SRCALPHA : 0, alphaval);
 	}
 }
