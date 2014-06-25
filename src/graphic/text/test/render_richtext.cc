@@ -32,8 +32,8 @@
 #include "base/log.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/text/rt_errors.h"
-#include "graphic/text/test/lodepng.h"
 #include "graphic/text/test/render.h"
+#include "third_party/lodepng/lodepng.h"
 
 namespace {
 

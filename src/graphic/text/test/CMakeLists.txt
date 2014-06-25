@@ -5,10 +5,11 @@ wl_binary(render_richtext
   SRCS
     render_richtext.cc
   DEPENDS
+    base_log
     graphic_surface
-    lodepng
     graphic_text
     graphic_text_test_render
+    third_party_lodepng
 )
 
 wl_library(graphic_text_test_render
@@ -16,16 +17,8 @@ wl_library(graphic_text_test_render
     render.cc
     render.h
   DEPENDS
+    io_filesystem
     graphic_image
     graphic_surface
     graphic_text
-    lodepng
-)
-
-# NOCOMMIT(#sirver): We really should not have this
-wl_library(lodepng
-  SRCS
-    lodepng.h
-    lodepng.cc
-  THIRD_PARTY
 )

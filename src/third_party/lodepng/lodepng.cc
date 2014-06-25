@@ -1,7 +1,7 @@
 /*
-LodePNG version 20120528
+LodePNG version 20140624
 
-Copyright (c) 2005-2012 Lode Vandevenne
+Copyright (c) 2005-2014 Lode Vandevenne
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
@@ -37,7 +37,12 @@ Rename this file to lodepng.cpp to use it for C++, or to lodepng.c to use it for
 #include <fstream>
 #endif /*LODEPNG_COMPILE_CPP*/
 
-#define VERSION_STRING "20120528"
+#define VERSION_STRING "20140624"
+
+#if (_MSC_VER >= 1310) /*Visual Studio: Kept warning-free but a few warning types are not desired here.*/
+#pragma warning( disable : 4244 ) /*implicit conversions: not warned by gcc -Wall -Wextra and requires too much casts*/
+#pragma warning( disable : 4996 ) /*VS does not like fopen, but fopen_s is not standard C so unusable here*/
+#endif /*_MSC_VER >= 1310*/
 
 /*
 This source file is built up in the following large parts. The code sections
@@ -48,52 +53,35 @@ with the "LODEPNG_COMPILE_" #defines divide this up further in an intermixed way
 -The C++ wrapper around all of the above
 */
 
-/*The malloc, realloc and free functions defined here with "my" in front of the
-name, so that you can easily change them to others related to your platform in
-this one location if needed. Everything else in the code calls these.*/
+/*The malloc, realloc and free functions defined here with "lodepng_" in front
+of the name, so that you can easily change them to others related to your
+platform if needed. Everything else in the code calls these. Pass
+-DLODEPNG_NO_COMPILE_ALLOCATORS to the compiler, or comment out
+#define LODEPNG_COMPILE_ALLOCATORS in the header, to disable the ones here and
+define them in your own project's source files without needing to change
+lodepng source code. Don't forget to remove "static" if you copypaste them
+from here.*/
 
-static void* mymalloc(size_t size)
+#ifdef LODEPNG_COMPILE_ALLOCATORS
+static void* lodepng_malloc(size_t size)
 {
   return malloc(size);
 }
 
-static void* myrealloc(void* ptr, size_t new_size)
+static void* lodepng_realloc(void* ptr, size_t new_size)
 {
   return realloc(ptr, new_size);
 }
 
-static void myfree(void* ptr)
+static void lodepng_free(void* ptr)
 {
   free(ptr);
 }
-
-/*
-Declaration of the custom functions used if LODEPNG_COMPILE_ZLIB isn't defined
-or LODEPNG_CUSTOM_ZLIB_DECODER or LODEPNG_CUSTOM_ZLIB_ENCODER are enabled.
-
-In that case, you need to define these yourself (which you can do in one of your
-own source files) so that LodePNG can link to it.
-
-By default, this is not needed. If LODEPNG_COMPILE_ZLIB isn't defined, then only
-the two zlib related ones are needed.
-
-If needed, the functions must act as follows:
-*out must be nullptr and *outsize must be 0 initially, and after the function is done,
-*out must point to the decompressed data, *outsize must be the size of it, and must
-be the size of the useful data in bytes, not the alloc size.
-*/
-unsigned lodepng_custom_zlib_decompress(unsigned char** out, size_t* outsize,
-                                        const unsigned char* in, size_t insize,
-                                        const LodePNGDecompressSettings* settings);
-unsigned lodepng_custom_zlib_compress(unsigned char** out, size_t* outsize,
-                                      const unsigned char* in, size_t insize,
-                                      const LodePNGCompressSettings* settings);
-unsigned lodepng_custom_inflate(unsigned char** out, size_t* outsize,
-                                const unsigned char* in, size_t insize,
-                                const LodePNGDecompressSettings* settings);
-unsigned lodepng_custom_deflate(unsigned char** out, size_t* outsize,
-                                const unsigned char* in, size_t insize,
-                                const LodePNGCompressSettings* settings);
+#else /*LODEPNG_COMPILE_ALLOCATORS*/
+void* lodepng_malloc(size_t size);
+void* lodepng_realloc(void* ptr, size_t new_size);
+void lodepng_free(void* ptr);
+#endif /*LODEPNG_COMPILE_ALLOCATORS*/
 
 /* ////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////// */
@@ -152,8 +140,8 @@ typedef struct uivector
 static void uivector_cleanup(void* p)
 {
   ((uivector*)p)->size = ((uivector*)p)->allocsize = 0;
-  myfree(((uivector*)p)->data);
-  ((uivector*)p)->data = nullptr;
+  lodepng_free(((uivector*)p)->data);
+  ((uivector*)p)->data = NULL;
 }
 
 /*returns 1 if success, 0 if failure ==> nothing done*/
@@ -162,7 +150,7 @@ static unsigned uivector_resize(uivector* p, size_t size)
   if(size * sizeof(unsigned) > p->allocsize)
   {
     size_t newsize = size * sizeof(unsigned) * 2;
-    void* data = myrealloc(p->data, newsize);
+    void* data = lodepng_realloc(p->data, newsize);
     if(data)
     {
       p->allocsize = newsize;
@@ -186,7 +174,7 @@ static unsigned uivector_resizev(uivector* p, size_t size, unsigned value)
 
 static void uivector_init(uivector* p)
 {
-  p->data = nullptr;
+  p->data = NULL;
   p->size = p->allocsize = 0;
 }
 
@@ -207,15 +195,6 @@ static unsigned uivector_copy(uivector* p, const uivector* q)
   for(i = 0; i < q->size; i++) p->data[i] = q->data[i];
   return 1;
 }
-
-static void uivector_swap(uivector* p, uivector* q)
-{
-  size_t tmp;
-  unsigned* tmpp;
-  tmp = p->size; p->size = q->size; q->size = tmp;
-  tmp = p->allocsize; p->allocsize = q->allocsize; q->allocsize = tmp;
-  tmpp = p->data; p->data = q->data; q->data = tmpp;
-}
 #endif /*LODEPNG_COMPILE_ENCODER*/
 #endif /*LODEPNG_COMPILE_ZLIB*/
 
@@ -229,20 +208,13 @@ typedef struct ucvector
   size_t allocsize; /*allocated size*/
 } ucvector;
 
-static void ucvector_cleanup(void* p)
-{
-  ((ucvector*)p)->size = ((ucvector*)p)->allocsize = 0;
-  myfree(((ucvector*)p)->data);
-  ((ucvector*)p)->data = nullptr;
-}
-
 /*returns 1 if success, 0 if failure ==> nothing done*/
 static unsigned ucvector_resize(ucvector* p, size_t size)
 {
   if(size * sizeof(unsigned char) > p->allocsize)
   {
     size_t newsize = size * sizeof(unsigned char) * 2;
-    void* data = myrealloc(p->data, newsize);
+    void* data = lodepng_realloc(p->data, newsize);
     if(data)
     {
       p->allocsize = newsize;
@@ -255,8 +227,22 @@ static unsigned ucvector_resize(ucvector* p, size_t size)
   return 1;
 }
 
-#ifdef LODEPNG_COMPILE_DECODER
 #ifdef LODEPNG_COMPILE_PNG
+
+static void ucvector_cleanup(void* p)
+{
+  ((ucvector*)p)->size = ((ucvector*)p)->allocsize = 0;
+  lodepng_free(((ucvector*)p)->data);
+  ((ucvector*)p)->data = NULL;
+}
+
+static void ucvector_init(ucvector* p)
+{
+  p->data = NULL;
+  p->size = p->allocsize = 0;
+}
+
+#ifdef LODEPNG_COMPILE_DECODER
 /*resize and give all new elements the value*/
 static unsigned ucvector_resizev(ucvector* p, size_t size, unsigned char value)
 {
@@ -265,14 +251,8 @@ static unsigned ucvector_resizev(ucvector* p, size_t size, unsigned char value)
   for(i = oldsize; i < size; i++) p->data[i] = value;
   return 1;
 }
-#endif /*LODEPNG_COMPILE_PNG*/
 #endif /*LODEPNG_COMPILE_DECODER*/
-
-static void ucvector_init(ucvector* p)
-{
-  p->data = nullptr;
-  p->size = p->allocsize = 0;
-}
+#endif /*LODEPNG_COMPILE_PNG*/
 
 #ifdef LODEPNG_COMPILE_ZLIB
 /*you can both convert from vector to buffer&size and vica versa. If you use
@@ -284,7 +264,7 @@ static void ucvector_init_buffer(ucvector* p, unsigned char* buffer, size_t size
 }
 #endif /*LODEPNG_COMPILE_ZLIB*/
 
-#ifdef LODEPNG_COMPILE_ENCODER
+#if (defined(LODEPNG_COMPILE_PNG) && defined(LODEPNG_COMPILE_ANCILLARY_CHUNKS)) || defined(LODEPNG_COMPILE_ENCODER)
 /*returns 1 if success, 0 if failure ==> nothing done*/
 static unsigned ucvector_push_back(ucvector* p, unsigned char c)
 {
@@ -292,7 +272,7 @@ static unsigned ucvector_push_back(ucvector* p, unsigned char c)
   p->data[p->size - 1] = c;
   return 1;
 }
-#endif /*LODEPNG_COMPILE_ENCODER*/
+#endif /*defined(LODEPNG_COMPILE_PNG) || defined(LODEPNG_COMPILE_ENCODER)*/
 
 
 /* ////////////////////////////////////////////////////////////////////////// */
@@ -302,7 +282,7 @@ static unsigned ucvector_push_back(ucvector* p, unsigned char c)
 /*returns 1 if success, 0 if failure ==> nothing done*/
 static unsigned string_resize(char** out, size_t size)
 {
-  char* data = (char*)myrealloc(*out, size + 1);
+  char* data = (char*)lodepng_realloc(*out, size + 1);
   if(data)
   {
     data[size] = 0; /*null termination char*/
@@ -314,15 +294,15 @@ static unsigned string_resize(char** out, size_t size)
 /*init a {char*, size_t} pair for use as string*/
 static void string_init(char** out)
 {
-  *out = nullptr;
+  *out = NULL;
   string_resize(out, 0);
 }
 
 /*free the above pair again*/
 static void string_cleanup(char** out)
 {
-  myfree(*out);
-  *out = nullptr;
+  lodepng_free(*out);
+  *out = NULL;
 }
 
 static void string_set(char** out, const char* in)
@@ -343,9 +323,10 @@ static void string_set(char** out, const char* in)
 
 unsigned lodepng_read32bitInt(const unsigned char* buffer)
 {
-  return (buffer[0] << 24) | (buffer[1] << 16) | (buffer[2] << 8) | buffer[3];
+  return (unsigned)((buffer[0] << 24) | (buffer[1] << 16) | (buffer[2] << 8) | buffer[3]);
 }
 
+#if defined(LODEPNG_COMPILE_PNG) || defined(LODEPNG_COMPILE_ENCODER)
 /*buffer must have at least 4 allocated bytes available*/
 static void lodepng_set32bitInt(unsigned char* buffer, unsigned value)
 {
@@ -354,11 +335,12 @@ static void lodepng_set32bitInt(unsigned char* buffer, unsigned value)
   buffer[2] = (unsigned char)((value >>  8) & 0xff);
   buffer[3] = (unsigned char)((value      ) & 0xff);
 }
+#endif /*defined(LODEPNG_COMPILE_PNG) || defined(LODEPNG_COMPILE_ENCODER)*/
 
 #ifdef LODEPNG_COMPILE_ENCODER
 static void lodepng_add32bitInt(ucvector* buffer, unsigned value)
 {
-  ucvector_resize(buffer, buffer->size + 4);
+  ucvector_resize(buffer, buffer->size + 4); /*todo: give error if resize failed*/
   lodepng_set32bitInt(&buffer->data[buffer->size - 4], value);
 }
 #endif /*LODEPNG_COMPILE_ENCODER*/
@@ -388,7 +370,7 @@ unsigned lodepng_load_file(unsigned char** out, size_t* outsize, const char* fil
 
   /*read contents of the file into the vector*/
   *outsize = 0;
-  *out = (unsigned char*)mymalloc((size_t)size);
+  *out = (unsigned char*)lodepng_malloc((size_t)size);
   if(size && (*out)) (*outsize) = fread(*out, 1, (size_t)size, file);
 
   fclose(file);
@@ -417,13 +399,14 @@ unsigned lodepng_save_file(const unsigned char* buffer, size_t buffersize, const
 
 #ifdef LODEPNG_COMPILE_ZLIB
 #ifdef LODEPNG_COMPILE_ENCODER
-static void addBitToStream(size_t* bitpointer, ucvector* bitstream, unsigned char bit)
-{
-  /*add a new byte at the end*/
-  if((*bitpointer) % 8 == 0) ucvector_push_back(bitstream, (unsigned char)0);
-  /*earlier bit of huffman code is in a lesser significant bit of an earlier byte*/
-  (bitstream->data[bitstream->size - 1]) |= (bit << ((*bitpointer) & 0x7));
-  (*bitpointer)++;
+/*TODO: this ignores potential out of memory errors*/
+#define addBitToStream(/*size_t**/ bitpointer, /*ucvector**/ bitstream, /*unsigned char*/ bit)\
+{\
+  /*add a new byte at the end*/\
+  if(((*bitpointer) & 7) == 0) ucvector_push_back(bitstream, (unsigned char)0);\
+  /*earlier bit of huffman code is in a lesser significant bit of an earlier byte*/\
+  (bitstream->data[bitstream->size - 1]) |= (bit << ((*bitpointer) & 0x7));\
+  (*bitpointer)++;\
 }
 
 static void addBitsToStream(size_t* bitpointer, ucvector* bitstream, unsigned value, size_t nbits)
@@ -515,7 +498,7 @@ typedef struct HuffmanTree
 } HuffmanTree;
 
 /*function used for debug purposes to draw the tree in ascii art with C++*/
-/*#include <iostream>
+/*
 static void HuffmanTree_draw(HuffmanTree* tree)
 {
   std::cout << "tree. length: " << tree->numcodes << " maxbitlen: " << tree->maxbitlen << std::endl;
@@ -536,9 +519,9 @@ static void HuffmanTree_init(HuffmanTree* tree)
 
 static void HuffmanTree_cleanup(HuffmanTree* tree)
 {
-  myfree(tree->tree2d);
-  myfree(tree->tree1d);
-  myfree(tree->lengths);
+  lodepng_free(tree->tree2d);
+  lodepng_free(tree->tree1d);
+  lodepng_free(tree->lengths);
 }
 
 /*the tree representation used by the decoder. return value is error*/
@@ -548,7 +531,7 @@ static unsigned HuffmanTree_make2DTree(HuffmanTree* tree)
   unsigned treepos = 0; /*position in the tree (1 of the numcodes columns)*/
   unsigned n, i;
 
-  tree->tree2d = (unsigned*)mymalloc(tree->numcodes * 2 * sizeof(unsigned));
+  tree->tree2d = (unsigned*)lodepng_malloc(tree->numcodes * 2 * sizeof(unsigned));
   if(!tree->tree2d) return 83; /*alloc fail*/
 
   /*
@@ -593,7 +576,7 @@ static unsigned HuffmanTree_make2DTree(HuffmanTree* tree)
     }
   }
 
-  for(n = 0;  n < tree->numcodes * 2; n++)
+  for(n = 0; n < tree->numcodes * 2; n++)
   {
     if(tree->tree2d[n] == 32767) tree->tree2d[n] = 0; /*remove possible remaining 32767's*/
   }
@@ -615,7 +598,7 @@ static unsigned HuffmanTree_makeFromLengths2(HuffmanTree* tree)
   uivector_init(&blcount);
   uivector_init(&nextcode);
 
-  tree->tree1d = (unsigned*)mymalloc(tree->numcodes * sizeof(unsigned));
+  tree->tree1d = (unsigned*)lodepng_malloc(tree->numcodes * sizeof(unsigned));
   if(!tree->tree1d) error = 83; /*alloc fail*/
 
   if(!uivector_resizev(&blcount, tree->maxbitlen + 1, 0)
@@ -654,7 +637,7 @@ static unsigned HuffmanTree_makeFromLengths(HuffmanTree* tree, const unsigned* b
                                             size_t numcodes, unsigned maxbitlen)
 {
   unsigned i;
-  tree->lengths = (unsigned*)mymalloc(numcodes * sizeof(unsigned));
+  tree->lengths = (unsigned*)lodepng_malloc(numcodes * sizeof(unsigned));
   if(!tree->lengths) return 83; /*alloc fail*/
   for(i = 0; i < numcodes; i++) tree->lengths[i] = bitlen[i];
   tree->numcodes = (unsigned)numcodes; /*number of symbols*/
@@ -711,32 +694,10 @@ static void cleanup_coins(Coin* coins, size_t num)
   for(i = 0; i < num; i++) coin_cleanup(&coins[i]);
 }
 
-/*
-This uses a simple combsort to sort the data. This function is not critical for
-overall encoding speed and the data amount isn't that large.
-*/
-static void sort_coins(Coin* data, size_t amount)
-{
-  size_t gap = amount;
-  unsigned char swapped = 0;
-  while((gap > 1) || swapped)
-  {
-    size_t i;
-    gap = (gap * 10) / 13; /*shrink factor 1.3*/
-    if(gap == 9 || gap == 10) gap = 11; /*combsort11*/
-    if(gap < 1) gap = 1;
-    swapped = 0;
-    for(i = 0; i < amount - gap; i++)
-    {
-      size_t j = i + gap;
-      if(data[j].weight < data[i].weight)
-      {
-        float temp = data[j].weight; data[j].weight = data[i].weight; data[i].weight = temp;
-        uivector_swap(&data[i].symbols, &data[j].symbols);
-        swapped = 1;
-      }
-    }
-  }
+static int coin_compare(const void* a, const void* b) {
+  float wa = ((const Coin*)a)->weight;
+  float wb = ((const Coin*)b)->weight;
+  return wa > wb ? 1 : wa < wb ? -1 : 0;
 }
 
 static unsigned append_symbol_coins(Coin* coins, const unsigned* frequencies, unsigned numcodes, size_t sum)
@@ -763,8 +724,8 @@ unsigned lodepng_huffman_code_lengths(unsigned* lengths, const unsigned* frequen
   unsigned error = 0;
   Coin* coins; /*the coins of the currently calculated row*/
   Coin* prev_row; /*the previous row of coins*/
-  unsigned numcoins;
-  unsigned coinmem;
+  size_t numcoins;
+  size_t coinmem;
 
   if(numcodes == 0) return 80; /*error: a tree of 0 symbols is not supposed to be made*/
 
@@ -779,16 +740,26 @@ unsigned lodepng_huffman_code_lengths(unsigned* lengths, const unsigned* frequen
 
   for(i = 0; i < numcodes; i++) lengths[i] = 0;
 
-  /*there are no symbols at all, in that case add one symbol of value 0 to the tree (see RFC 1951 section 3.2.7) */
+  /*ensure at least two present symbols. There should be at least one symbol
+  according to RFC 1951 section 3.2.7. To decoders incorrectly require two. To
+  make these work as well ensure there are at least two symbols. The
+  Package-Merge code below also doesn't work correctly if there's only one
+  symbol, it'd give it the theoritical 0 bits but in practice zlib wants 1 bit*/
   if(numpresent == 0)
   {
-    lengths[0] = 1;
+    lengths[0] = lengths[1] = 1; /*note that for RFC 1951 section 3.2.7, only lengths[0] = 1 is needed*/
   }
-  /*the package merge algorithm gives wrong results if there's only one symbol
-  (theoretically 0 bits would then suffice, but we need a proper symbol for zlib)*/
   else if(numpresent == 1)
   {
-    for(i = 0; i < numcodes; i++) if(frequencies[i]) lengths[i] = 1;
+    for(i = 0; i < numcodes; i++)
+    {
+      if(frequencies[i])
+      {
+        lengths[i] = 1;
+        lengths[i == 0 ? 1 : 0] = 1;
+        break;
+      }
+    }
   }
   else
   {
@@ -796,16 +767,21 @@ unsigned lodepng_huffman_code_lengths(unsigned* lengths, const unsigned* frequen
     For every symbol, maxbitlen coins will be created*/
 
     coinmem = numpresent * 2; /*max amount of coins needed with the current algo*/
-    coins = (Coin*)mymalloc(sizeof(Coin) * coinmem);
-    prev_row = (Coin*)mymalloc(sizeof(Coin) * coinmem);
-    if(!coins || !prev_row) return 83; /*alloc fail*/
+    coins = (Coin*)lodepng_malloc(sizeof(Coin) * coinmem);
+    prev_row = (Coin*)lodepng_malloc(sizeof(Coin) * coinmem);
+    if(!coins || !prev_row)
+    {
+      lodepng_free(coins);
+      lodepng_free(prev_row);
+      return 83; /*alloc fail*/
+    }
     init_coins(coins, coinmem);
     init_coins(prev_row, coinmem);
 
     /*first row, lowest denominator*/
     error = append_symbol_coins(coins, frequencies, numcodes, sum);
     numcoins = numpresent;
-    sort_coins(coins, numcoins);
+    qsort(coins, numcoins, sizeof(Coin), coin_compare);
     if(!error)
     {
       unsigned numprev = 0;
@@ -836,7 +812,7 @@ unsigned lodepng_huffman_code_lengths(unsigned* lengths, const unsigned* frequen
           error = append_symbol_coins(coins + numcoins, frequencies, numcodes, sum);
           numcoins += numpresent;
         }
-        sort_coins(coins, numcoins);
+        qsort(coins, numcoins, sizeof(Coin), coin_compare);
       }
     }
 
@@ -851,9 +827,9 @@ unsigned lodepng_huffman_code_lengths(unsigned* lengths, const unsigned* frequen
     }
 
     cleanup_coins(coins, coinmem);
-    myfree(coins);
+    lodepng_free(coins);
     cleanup_coins(prev_row, coinmem);
-    myfree(prev_row);
+    lodepng_free(prev_row);
   }
 
   return error;
@@ -861,12 +837,13 @@ unsigned lodepng_huffman_code_lengths(unsigned* lengths, const unsigned* frequen
 
 /*Create the Huffman tree given the symbol frequencies*/
 static unsigned HuffmanTree_makeFromFrequencies(HuffmanTree* tree, const unsigned* frequencies,
-                                                size_t numcodes, unsigned maxbitlen)
+                                                size_t mincodes, size_t numcodes, unsigned maxbitlen)
 {
   unsigned error = 0;
+  while(!frequencies[numcodes - 1] && numcodes > mincodes) numcodes--; /*trim zeroes*/
   tree->maxbitlen = maxbitlen;
   tree->numcodes = (unsigned)numcodes; /*number of symbols*/
-  tree->lengths = (unsigned*)myrealloc(tree->lengths, numcodes * sizeof(unsigned));
+  tree->lengths = (unsigned*)lodepng_realloc(tree->lengths, numcodes * sizeof(unsigned));
   if(!tree->lengths) return 83; /*alloc fail*/
   /*initialize all lengths to 0*/
   memset(tree->lengths, 0, numcodes * sizeof(unsigned));
@@ -891,7 +868,7 @@ static unsigned HuffmanTree_getLength(const HuffmanTree* tree, unsigned index)
 static unsigned generateFixedLitLenTree(HuffmanTree* tree)
 {
   unsigned i, error = 0;
-  unsigned* bitlen = (unsigned*)mymalloc(NUM_DEFLATE_CODE_SYMBOLS * sizeof(unsigned));
+  unsigned* bitlen = (unsigned*)lodepng_malloc(NUM_DEFLATE_CODE_SYMBOLS * sizeof(unsigned));
   if(!bitlen) return 83; /*alloc fail*/
 
   /*288 possible codes: 0-255=literals, 256=endcode, 257-285=lengthcodes, 286-287=unused*/
@@ -902,7 +879,7 @@ static unsigned generateFixedLitLenTree(HuffmanTree* tree)
 
   error = HuffmanTree_makeFromLengths(tree, bitlen, NUM_DEFLATE_CODE_SYMBOLS, 15);
 
-  myfree(bitlen);
+  lodepng_free(bitlen);
   return error;
 }
 
@@ -910,14 +887,14 @@ static unsigned generateFixedLitLenTree(HuffmanTree* tree)
 static unsigned generateFixedDistanceTree(HuffmanTree* tree)
 {
   unsigned i, error = 0;
-  unsigned* bitlen = (unsigned*)mymalloc(NUM_DISTANCE_SYMBOLS * sizeof(unsigned));
+  unsigned* bitlen = (unsigned*)lodepng_malloc(NUM_DISTANCE_SYMBOLS * sizeof(unsigned));
   if(!bitlen) return 83; /*alloc fail*/
 
   /*there are 32 distance codes, but 30-31 are unused*/
   for(i = 0; i < NUM_DISTANCE_SYMBOLS; i++) bitlen[i] = 5;
   error = HuffmanTree_makeFromLengths(tree, bitlen, NUM_DISTANCE_SYMBOLS, 15);
 
-  myfree(bitlen);
+  lodepng_free(bitlen);
   return error;
 }
 
@@ -957,6 +934,7 @@ static unsigned huffmanDecodeSymbol(const unsigned char* in, size_t* bp,
 /*get the tree of a deflated block with fixed tree, as specified in the deflate specification*/
 static void getTreeInflateFixed(HuffmanTree* tree_ll, HuffmanTree* tree_d)
 {
+  /*TODO: check for out of memory errors*/
   generateFixedLitLenTree(tree_ll);
   generateFixedDistanceTree(tree_d);
 }
@@ -992,7 +970,7 @@ static unsigned getTreeInflateDynamic(HuffmanTree* tree_ll, HuffmanTree* tree_d,
   {
     /*read the code length codes out of 3 * (amount of code length codes) bits*/
 
-    bitlen_cl = (unsigned*)mymalloc(NUM_CODE_LENGTH_CODES * sizeof(unsigned));
+    bitlen_cl = (unsigned*)lodepng_malloc(NUM_CODE_LENGTH_CODES * sizeof(unsigned));
     if(!bitlen_cl) ERROR_BREAK(83 /*alloc fail*/);
 
     for(i = 0; i < NUM_CODE_LENGTH_CODES; i++)
@@ -1005,8 +983,8 @@ static unsigned getTreeInflateDynamic(HuffmanTree* tree_ll, HuffmanTree* tree_d,
     if(error) break;
 
     /*now we can use this tree to read the lengths for the tree that this function will return*/
-    bitlen_ll = (unsigned*)mymalloc(NUM_DEFLATE_CODE_SYMBOLS * sizeof(unsigned));
-    bitlen_d = (unsigned*)mymalloc(NUM_DISTANCE_SYMBOLS * sizeof(unsigned));
+    bitlen_ll = (unsigned*)lodepng_malloc(NUM_DEFLATE_CODE_SYMBOLS * sizeof(unsigned));
+    bitlen_d = (unsigned*)lodepng_malloc(NUM_DISTANCE_SYMBOLS * sizeof(unsigned));
     if(!bitlen_ll || !bitlen_d) ERROR_BREAK(83 /*alloc fail*/);
     for(i = 0; i < NUM_DEFLATE_CODE_SYMBOLS; i++) bitlen_ll[i] = 0;
     for(i = 0; i < NUM_DISTANCE_SYMBOLS; i++) bitlen_d[i] = 0;
@@ -1101,9 +1079,9 @@ static unsigned getTreeInflateDynamic(HuffmanTree* tree_ll, HuffmanTree* tree_d,
     break; /*end of error-while*/
   }
 
-  myfree(bitlen_cl);
-  myfree(bitlen_ll);
-  myfree(bitlen_d);
+  lodepng_free(bitlen_cl);
+  lodepng_free(bitlen_ll);
+  lodepng_free(bitlen_d);
   HuffmanTree_cleanup(&tree_cl);
 
   return error;
@@ -1122,10 +1100,7 @@ static unsigned inflateHuffmanBlock(ucvector* out, const unsigned char* in, size
   HuffmanTree_init(&tree_d);
 
   if(btype == 1) getTreeInflateFixed(&tree_ll, &tree_d);
-  else if(btype == 2)
-  {
-    error = getTreeInflateDynamic(&tree_ll, &tree_d, in, bp, inlength);
-  }
+  else if(btype == 2) error = getTreeInflateDynamic(&tree_ll, &tree_d, in, bp, inlength);
 
   while(!error) /*decode all symbols until end reached, breaks at end code*/
   {
@@ -1223,8 +1198,8 @@ static unsigned inflateNoCompression(ucvector* out, const unsigned char* in, siz
 
   /*read LEN (2 bytes) and NLEN (2 bytes)*/
   if(p >= inlength - 4) return 52; /*error, bit pointer will jump past memory*/
-  LEN = in[p] + 256 * in[p + 1]; p += 2;
-  NLEN = in[p] + 256 * in[p + 1]; p += 2;
+  LEN = in[p] + 256u * in[p + 1]; p += 2;
+  NLEN = in[p] + 256u * in[p + 1]; p += 2;
 
   /*check if 16-bit NLEN is really the one's complement of LEN*/
   if(LEN + NLEN != 65535) return 21; /*error: NLEN is not one's complement of LEN*/
@@ -1261,8 +1236,8 @@ static unsigned lodepng_inflatev(ucvector* out,
     unsigned BTYPE;
     if(bp + 2 >= insize * 8) return 52; /*error, bit pointer will jump past memory*/
     BFINAL = readBitFromStream(&bp, in);
-    BTYPE = 1 * readBitFromStream(&bp, in);
-    BTYPE += 2 * readBitFromStream(&bp, in);
+    BTYPE = 1u * readBitFromStream(&bp, in);
+    BTYPE += 2u * readBitFromStream(&bp, in);
 
     if(BTYPE == 3) return 20; /*error: invalid BTYPE*/
     else if(BTYPE == 0) error = inflateNoCompression(out, in, &bp, &pos, insize); /*no compression*/
@@ -1281,24 +1256,27 @@ unsigned lodepng_inflate(unsigned char** out, size_t* outsize,
                          const unsigned char* in, size_t insize,
                          const LodePNGDecompressSettings* settings)
 {
-#if LODEPNG_CUSTOM_ZLIB_DECODER == 2
-  if(settings->custom_decoder)
+  unsigned error;
+  ucvector v;
+  ucvector_init_buffer(&v, *out, *outsize);
+  error = lodepng_inflatev(&v, in, insize, settings);
+  *out = v.data;
+  *outsize = v.size;
+  return error;
+}
+
+static unsigned inflate(unsigned char** out, size_t* outsize,
+                        const unsigned char* in, size_t insize,
+                        const LodePNGDecompressSettings* settings)
+{
+  if(settings->custom_inflate)
   {
-    return lodepng_custom_inflate(out, outsize, in, insize, settings);
+    return settings->custom_inflate(out, outsize, in, insize, settings);
   }
   else
   {
-#endif /*LODEPNG_CUSTOM_ZLIB_DECODER == 2*/
-    unsigned error;
-    ucvector v;
-    ucvector_init_buffer(&v, *out, *outsize);
-    error = lodepng_inflatev(&v, in, insize, settings);
-    *out = v.data;
-    *outsize = v.size;
-    return error;
-#if LODEPNG_CUSTOM_ZLIB_DECODER == 2
+    return lodepng_inflate(out, outsize, in, insize, settings);
   }
-#endif /*LODEPNG_CUSTOM_ZLIB_DECODER == 2*/
 }
 
 #endif /*LODEPNG_COMPILE_DECODER*/
@@ -1357,67 +1335,84 @@ static void addLengthDistance(uivector* values, size_t length, size_t distance)
   uivector_push_back(values, extra_distance);
 }
 
+/*3 bytes of data get encoded into two bytes. The hash cannot use more than 3
+bytes as input because 3 is the minimum match length for deflate*/
 static const unsigned HASH_NUM_VALUES = 65536;
-static const unsigned HASH_NUM_CHARACTERS = 3;
-static const unsigned HASH_SHIFT = 2;
-/*
-The HASH_NUM_CHARACTERS value is used to make encoding faster by using longer
-sequences to generate a hash value from the stream bytes. Setting it to 3
-gives exactly the same compression as the brute force method, since deflate's
-run length encoding starts with lengths of 3. Setting it to higher values,
-like 6, can make the encoding faster (not always though!), but will cause the
-encoding to miss any length between 3 and this value, so that the compression
-may be worse (but this can vary too depending on the image, sometimes it is
-even a bit better instead).
-The HASH_NUM_VALUES is the amount of unique possible hash values that
-combinations of bytes can give, the higher it is the more memory is needed, but
-if it's too low the advantage of hashing is gone.
-*/
+static const unsigned HASH_BIT_MASK = 65535; /*HASH_NUM_VALUES - 1, but C90 does not like that as initializer*/
 
 typedef struct Hash
 {
-  int* head; /*hash value to head circular pos*/
-  int* val; /*circular pos to hash value*/
+  int* head; /*hash value to head circular pos - can be outdated if went around window*/
   /*circular pos to prev circular pos*/
   unsigned short* chain;
-  unsigned short* zeros;
+  int* val; /*circular pos to hash value*/
+
+  /*TODO: do this not only for zeros but for any repeated byte. However for PNG
+  it's always going to be the zeros that dominate, so not important for PNG*/
+  int* headz; /*similar to head, but for chainz*/
+  unsigned short* chainz; /*those with same amount of zeros*/
+  unsigned short* zeros; /*length of zeros streak, used as a second hash chain*/
 } Hash;
 
 static unsigned hash_init(Hash* hash, unsigned windowsize)
 {
   unsigned i;
-  hash->head = (int*)mymalloc(sizeof(int) * HASH_NUM_VALUES);
-  hash->val = (int*)mymalloc(sizeof(int) * windowsize);
-  hash->chain = (unsigned short*)mymalloc(sizeof(unsigned short) * windowsize);
-  hash->zeros = (unsigned short*)mymalloc(sizeof(unsigned short) * windowsize);
+  hash->head = (int*)lodepng_malloc(sizeof(int) * HASH_NUM_VALUES);
+  hash->val = (int*)lodepng_malloc(sizeof(int) * windowsize);
+  hash->chain = (unsigned short*)lodepng_malloc(sizeof(unsigned short) * windowsize);
 
-  if(!hash->head || !hash->val || !hash->chain || !hash->zeros) return 83; /*alloc fail*/
+  hash->zeros = (unsigned short*)lodepng_malloc(sizeof(unsigned short) * windowsize);
+  hash->headz = (int*)lodepng_malloc(sizeof(int) * (MAX_SUPPORTED_DEFLATE_LENGTH + 1));
+  hash->chainz = (unsigned short*)lodepng_malloc(sizeof(unsigned short) * windowsize);
+
+  if(!hash->head || !hash->chain || !hash->val  || !hash->headz|| !hash->chainz || !hash->zeros)
+  {
+    return 83; /*alloc fail*/
+  }
 
   /*initialize hash table*/
   for(i = 0; i < HASH_NUM_VALUES; i++) hash->head[i] = -1;
   for(i = 0; i < windowsize; i++) hash->val[i] = -1;
   for(i = 0; i < windowsize; i++) hash->chain[i] = i; /*same value as index indicates uninitialized*/
 
+  for(i = 0; i <= MAX_SUPPORTED_DEFLATE_LENGTH; i++) hash->headz[i] = -1;
+  for(i = 0; i < windowsize; i++) hash->chainz[i] = i; /*same value as index indicates uninitialized*/
+
   return 0;
 }
 
 static void hash_cleanup(Hash* hash)
 {
-  myfree(hash->head);
-  myfree(hash->val);
-  myfree(hash->chain);
-  myfree(hash->zeros);
+  lodepng_free(hash->head);
+  lodepng_free(hash->val);
+  lodepng_free(hash->chain);
+
+  lodepng_free(hash->zeros);
+  lodepng_free(hash->headz);
+  lodepng_free(hash->chainz);
 }
+
+
 
 static unsigned getHash(const unsigned char* data, size_t size, size_t pos)
 {
   unsigned result = 0;
-  size_t amount, i;
-  if(pos >= size) return 0;
-  amount = HASH_NUM_CHARACTERS;
-  if(pos + amount >= size) amount = size - pos;
-  for(i = 0; i < amount; i++) result ^= (data[pos + i] << (i * HASH_SHIFT));
-  return result % HASH_NUM_VALUES;
+  if (pos + 2 < size)
+  {
+    /*A simple shift and xor hash is used. Since the data of PNGs is dominated
+    by zeroes due to the filters, a better hash does not have a significant
+    effect on speed in traversing the chain, and causes more time spend on
+    calculating the hash.*/
+    result ^= (unsigned)(data[pos + 0] << 0u);
+    result ^= (unsigned)(data[pos + 1] << 4u);
+    result ^= (unsigned)(data[pos + 2] << 8u);
+  } else {
+    size_t amount, i;
+    if(pos >= size) return 0;
+    amount = size - pos;
+    for(i = 0; i < amount; i++) result ^= (unsigned)(data[pos + i] << (i * 8u));
+  }
+  return result & HASH_BIT_MASK;
 }
 
 static unsigned countZeros(const unsigned char* data, size_t size, size_t pos)
@@ -1427,25 +1422,21 @@ static unsigned countZeros(const unsigned char* data, size_t size, size_t pos)
   if(end > data + size) end = data + size;
   data = start;
   while (data != end && *data == 0) data++;
-  return data - start;
+  /*subtracting two addresses returned as 32-bit number (max value is MAX_SUPPORTED_DEFLATE_LENGTH)*/
+  return (unsigned)(data - start);
 }
 
-static void updateHashChain(Hash* hash,
-                            size_t pos, int hashval, unsigned windowsize)
+/*wpos = pos & (windowsize - 1)*/
+static void updateHashChain(Hash* hash, size_t wpos, unsigned hashval, unsigned short numzeros)
 {
-  unsigned wpos = pos % windowsize;
-  hash->val[wpos] = hashval;
-  if(hash->head[hashval] != -1)
-  {
-    hash->chain[wpos] = hash->head[hashval];
-  }
+  hash->val[wpos] = (int)hashval;
+  if(hash->head[hashval] != -1) hash->chain[wpos] = hash->head[hashval];
   hash->head[hashval] = wpos;
-}
 
-/*Enable to use lazy instead of greedy matching. It looks one byte further
-to see if that one gives a longer distance. This gives slightly better compression, at the cost
-of a speed loss.*/
-#define LAZY_MATCHING
+  hash->zeros[wpos] = numzeros;
+  if(hash->headz[numzeros] != -1) hash->chainz[wpos] = hash->headz[numzeros];
+  hash->headz[numzeros] = wpos;
+}
 
 /*
 LZ77-encode the data. Return value is error code. The input are raw bytes, the output
@@ -1457,106 +1448,121 @@ the "dictionary". A brute force search through all possible distances would be s
 this hash technique is one out of several ways to speed this up.
 */
 static unsigned encodeLZ77(uivector* out, Hash* hash,
-                           const unsigned char* in, size_t inpos, size_t insize, unsigned windowsize)
+                           const unsigned char* in, size_t inpos, size_t insize, unsigned windowsize,
+                           unsigned minmatch, unsigned nicematch, unsigned lazymatching)
 {
-  unsigned short numzeros = 0;
-  int usezeros = windowsize >= 8192; /*for small window size, the 'max chain length' optimization does a better job*/
-  unsigned pos, i, error = 0;
+  size_t pos;
+  unsigned i, error = 0;
+  /*for large window lengths, assume the user wants no compression loss. Otherwise, max hash chain length speedup.*/
+  unsigned maxchainlength = windowsize >= 8192 ? windowsize : windowsize / 8;
+  unsigned maxlazymatch = windowsize >= 8192 ? MAX_SUPPORTED_DEFLATE_LENGTH : 64;
 
-  if(!error)
+  unsigned usezeros = 1; /*not sure if setting it to false for windowsize < 8192 is better or worse*/
+  unsigned numzeros = 0;
+
+  unsigned offset; /*the offset represents the distance in LZ77 terminology*/
+  unsigned length;
+  unsigned lazy = 0;
+  unsigned lazylength = 0, lazyoffset = 0;
+  unsigned hashval;
+  unsigned current_offset, current_length;
+  unsigned prev_offset;
+  const unsigned char *lastptr, *foreptr, *backptr;
+  unsigned hashpos;
+
+  if(windowsize <= 0 || windowsize > 32768) return 60; /*error: windowsize smaller/larger than allowed*/
+  if((windowsize & (windowsize - 1)) != 0) return 90; /*error: must be power of two*/
+
+  if(nicematch > MAX_SUPPORTED_DEFLATE_LENGTH) nicematch = MAX_SUPPORTED_DEFLATE_LENGTH;
+
+  for(pos = inpos; pos < insize; pos++)
   {
-    unsigned offset; /*the offset represents the distance in LZ77 terminology*/
-    unsigned length;
-#ifdef LAZY_MATCHING
-    unsigned lazy = 0;
-    unsigned lazylength = 0, lazyoffset = 0;
-#endif /*LAZY_MATCHING*/
-    unsigned hashval;
-    unsigned current_offset, current_length;
-    const unsigned char *lastptr, *foreptr, *backptr;
-    unsigned short hashpos, prevpos;
+    size_t wpos = pos & (windowsize - 1); /*position for in 'circular' hash buffers*/
+    unsigned chainlength = 0;
 
-    for(pos = inpos; pos < insize; pos++)
+    hashval = getHash(in, insize, pos);
+
+    if(usezeros && hashval == 0)
     {
-      size_t wpos = pos % windowsize; /*position for in 'circular' hash buffers*/
+      if (numzeros == 0) numzeros = countZeros(in, insize, pos);
+      else if (pos + numzeros > insize || in[pos + numzeros - 1] != 0) numzeros--;
+    }
+    else
+    {
+      numzeros = 0;
+    }
 
-      hashval = getHash(in, insize, pos);
-      updateHashChain(hash, pos, hashval, windowsize);
+    updateHashChain(hash, wpos, hashval, numzeros);
 
-      if(usezeros && hashval == 0)
+    /*the length and offset found for the current position*/
+    length = 0;
+    offset = 0;
+
+    hashpos = hash->chain[wpos];
+
+    lastptr = &in[insize < pos + MAX_SUPPORTED_DEFLATE_LENGTH ? insize : pos + MAX_SUPPORTED_DEFLATE_LENGTH];
+
+    /*search for the longest string*/
+    prev_offset = 0;
+    for(;;)
+    {
+      if(chainlength++ >= maxchainlength) break;
+      current_offset = hashpos <= wpos ? wpos - hashpos : wpos - hashpos + windowsize;
+
+      if(current_offset < prev_offset) break; /*stop when went completely around the circular buffer*/
+      prev_offset = current_offset;
+      if(current_offset > 0)
       {
-        numzeros = countZeros(in, insize, pos);
-        hash->zeros[wpos] = numzeros;
-      }
+        /*test the next characters*/
+        foreptr = &in[pos];
+        backptr = &in[pos - current_offset];
 
-
-      /*the length and offset found for the current position*/
-      length = 0;
-      offset = 0;
-
-      prevpos = hash->head[hashval];
-      hashpos = hash->chain[prevpos];
-
-      lastptr = &in[insize < pos + MAX_SUPPORTED_DEFLATE_LENGTH ? insize : pos + MAX_SUPPORTED_DEFLATE_LENGTH];
-
-      /*search for the longest string*/
-      if(hash->val[wpos] == (int)hashval)
-      {
-        /*for large window lengths, assume the user wants no compression loss. Otherwise, max hash chain length speedup.*/
-        unsigned maxchainlength = windowsize >= 8192 ? windowsize : windowsize / 8;
-        for(;;)
+        /*common case in PNGs is lots of zeros. Quickly skip over them as a speedup*/
+        if(numzeros >= 3)
         {
-          /*stop when went completely around the circular buffer*/
-          if(prevpos < wpos && hashpos > prevpos && hashpos <= wpos) break;
-          if(prevpos > wpos && (hashpos <= wpos || hashpos > prevpos)) break;
-          if(maxchainlength-- == 0) break;
+          unsigned skip = hash->zeros[hashpos];
+          if(skip > numzeros) skip = numzeros;
+          backptr += skip;
+          foreptr += skip;
+        }
 
-          current_offset = hashpos <= wpos ? wpos - hashpos : wpos - hashpos + windowsize;
-          if(current_offset > 0) {
-            /*test the next characters*/
-            foreptr = &in[pos];
-            backptr = &in[pos - current_offset];
+        while(foreptr != lastptr && *backptr == *foreptr) /*maximum supported length by deflate is max length*/
+        {
+          ++backptr;
+          ++foreptr;
+        }
+        current_length = (unsigned)(foreptr - &in[pos]);
 
-            /*common case in PNGs is lots of zeros. Quickly skip over them as a speedup*/
-            if(usezeros && hashval == 0 && hash->val[hashpos] == 0 /*hashval[hashpos] may be out of date*/)
-            {
-              unsigned short skip = hash->zeros[hashpos];
-              if(skip > numzeros) skip = numzeros;
-              backptr += skip;
-              foreptr += skip;
-            }
-
-            /* multiple checks at once per array bounds check */
-            while(foreptr != lastptr && *backptr == *foreptr) /*maximum supported length by deflate is max length*/
-            {
-              ++backptr;
-              ++foreptr;
-            }
-            current_length = (unsigned)(foreptr - &in[pos]);
-
-            if(current_length > length)
-            {
-              length = current_length; /*the longest length*/
-              offset = current_offset; /*the offset that is related to this longest length*/
-              /*jump out once a length of max length is found (speed gain)*/
-              if(current_length == MAX_SUPPORTED_DEFLATE_LENGTH) break;
-            }
-          }
-
-          if(hashpos == hash->chain[hashpos]) break;
-
-          prevpos = hashpos;
-          hashpos = hash->chain[hashpos];
+        if(current_length > length)
+        {
+          length = current_length; /*the longest length*/
+          offset = current_offset; /*the offset that is related to this longest length*/
+          /*jump out once a length of max length is found (speed gain). This also jumps
+          out if length is MAX_SUPPORTED_DEFLATE_LENGTH*/
+          if(current_length >= nicematch) break;
         }
       }
 
-#ifdef LAZY_MATCHING
-      if(!lazy && length >= 3 && length < MAX_SUPPORTED_DEFLATE_LENGTH)
+      if(hashpos == hash->chain[hashpos]) break;
+      
+      if(numzeros >= 3 && length > numzeros) {
+        hashpos = hash->chainz[hashpos];
+        if(hash->zeros[hashpos] != numzeros) break;
+      } else {
+        hashpos = hash->chain[hashpos];
+        /*outdated hash value, happens if particular value was not encountered in whole last window*/
+        if(hash->val[hashpos] != (int)hashval) break;
+      }
+    }
+
+    if(lazymatching)
+    {
+      if(!lazy && length >= 3 && length <= maxlazymatch && length < MAX_SUPPORTED_DEFLATE_LENGTH)
       {
         lazy = 1;
         lazylength = length;
         lazyoffset = offset;
-        continue;
+        continue; /*try the next byte*/
       }
       if(lazy)
       {
@@ -1572,47 +1578,45 @@ static unsigned encodeLZ77(uivector* out, Hash* hash,
           length = lazylength;
           offset = lazyoffset;
           hash->head[hashval] = -1; /*the same hashchain update will be done, this ensures no wrong alteration*/
+          hash->headz[numzeros] = -1; /*idem*/
           pos--;
         }
       }
-#endif /*LAZY_MATCHING*/
+    }
+    if(length >= 3 && offset > windowsize) ERROR_BREAK(86 /*too big (or overflown negative) offset*/);
 
-      if(length >= 3 && offset > windowsize) ERROR_BREAK(86 /*too big (or overflown negative) offset*/);
-
-
-      /**encode it as length/distance pair or literal value**/
-      if(length < 3) /*only lengths of 3 or higher are supported as length/distance pair*/
+    /*encode it as length/distance pair or literal value*/
+    if(length < 3) /*only lengths of 3 or higher are supported as length/distance pair*/
+    {
+      if(!uivector_push_back(out, in[pos])) ERROR_BREAK(83 /*alloc fail*/);
+    }
+    else if(length < minmatch || (length == 3 && offset > 4096))
+    {
+      /*compensate for the fact that longer offsets have more extra bits, a
+      length of only 3 may be not worth it then*/
+      if(!uivector_push_back(out, in[pos])) ERROR_BREAK(83 /*alloc fail*/);
+    }
+    else
+    {
+      addLengthDistance(out, length, offset);
+      for(i = 1; i < length; i++)
       {
-        if(!uivector_push_back(out, in[pos])) ERROR_BREAK(83 /*alloc fail*/);
-      }
-      else
-      {
-        if(length == 3 && offset > 2048)
+        pos++;
+        wpos = pos & (windowsize - 1);
+        hashval = getHash(in, insize, pos);
+        if(usezeros && hashval == 0)
         {
-          /*compensate for the fact that longer offsets have more extra bits, a
-          length of only 3 may be not worth it then*/
-          if(!uivector_push_back(out, in[pos + 0])) ERROR_BREAK(83 /*alloc fail*/);
-          if(!uivector_push_back(out, in[pos + 1])) ERROR_BREAK(83 /*alloc fail*/);
-          if(!uivector_push_back(out, in[pos + 2])) ERROR_BREAK(83 /*alloc fail*/);
+          if (numzeros == 0) numzeros = countZeros(in, insize, pos);
+          else if (pos + numzeros > insize || in[pos + numzeros - 1] != 0) numzeros--;
         }
         else
         {
-          addLengthDistance(out, length, offset);
+          numzeros = 0;
         }
-        for(i = 1; i < length; i++)
-        {
-          pos++;
-          hashval = getHash(in, insize, pos);
-          updateHashChain(hash, pos, hashval, windowsize);
-          if(usezeros && hashval == 0)
-          {
-            hash->zeros[pos % windowsize] = countZeros(in, insize, pos);
-          }
-        }
+        updateHashChain(hash, wpos, hashval, numzeros);
       }
-
-    } /*end of the loop through each character of input*/
-  } /*end of "if(!error)"*/
+    }
+  } /*end of the loop through each character of input*/
 
   return error;
 }
@@ -1692,7 +1696,7 @@ static void writeLZ77data(size_t* bp, ucvector* out, const uivector* lz77_encode
 /*Deflate for a block of type "dynamic", that is, with freely, optimally, created huffman trees*/
 static unsigned deflateDynamic(ucvector* out, size_t* bp, Hash* hash,
                                const unsigned char* data, size_t datapos, size_t dataend,
-                               const LodePNGCompressSettings* settings, int final)
+                               const LodePNGCompressSettings* settings, unsigned final)
 {
   unsigned error = 0;
 
@@ -1745,13 +1749,14 @@ static unsigned deflateDynamic(ucvector* out, size_t* bp, Hash* hash,
   uivector_init(&bitlen_lld_e);
   uivector_init(&bitlen_cl);
 
-  /*This while loop is never loops due to a break at the end, it is here to
+  /*This while loop never loops due to a break at the end, it is here to
   allow breaking out of it to the cleanup phase on error conditions.*/
   while(!error)
   {
     if(settings->use_lz77)
     {
-      error = encodeLZ77(&lz77_encoded, hash, data, datapos, dataend, settings->windowsize); /*LZ77 encoded*/
+      error = encodeLZ77(&lz77_encoded, hash, data, datapos, dataend, settings->windowsize,
+                         settings->minmatch, settings->nicematch, settings->lazymatching);
       if(error) break;
     }
     else
@@ -1778,9 +1783,10 @@ static unsigned deflateDynamic(ucvector* out, size_t* bp, Hash* hash,
     frequencies_ll.data[256] = 1; /*there will be exactly 1 end code, at the end of the block*/
 
     /*Make both huffman trees, one for the lit and len codes, one for the dist codes*/
-    error = HuffmanTree_makeFromFrequencies(&tree_ll, frequencies_ll.data, frequencies_ll.size, 15);
+    error = HuffmanTree_makeFromFrequencies(&tree_ll, frequencies_ll.data, 257, frequencies_ll.size, 15);
     if(error) break;
-    error = HuffmanTree_makeFromFrequencies(&tree_d, frequencies_d.data, frequencies_d.size, 15);
+    /*2, not 1, is chosen for mincodes: some buggy PNG decoders require at least 2 symbols in the dist tree*/
+    error = HuffmanTree_makeFromFrequencies(&tree_d, frequencies_d.data, 2, frequencies_d.size, 15);
     if(error) break;
 
     numcodes_ll = tree_ll.numcodes; if(numcodes_ll > 286) numcodes_ll = 286;
@@ -1847,11 +1853,12 @@ static unsigned deflateDynamic(ucvector* out, size_t* bp, Hash* hash,
       if(bitlen_lld_e.data[i] >= 16) i++;
     }
 
-    error = HuffmanTree_makeFromFrequencies(&tree_cl, frequencies_cl.data, frequencies_cl.size, 7);
+    error = HuffmanTree_makeFromFrequencies(&tree_cl, frequencies_cl.data,
+                                            frequencies_cl.size, frequencies_cl.size, 7);
     if(error) break;
 
-    if(!uivector_resize(&bitlen_cl, NUM_CODE_LENGTH_CODES)) ERROR_BREAK(83 /*alloc fail*/);
-    for(i = 0; i < NUM_CODE_LENGTH_CODES; i++)
+    if(!uivector_resize(&bitlen_cl, tree_cl.numcodes)) ERROR_BREAK(83 /*alloc fail*/);
+    for(i = 0; i < tree_cl.numcodes; i++)
     {
       /*lenghts of code length tree is in the order as specified by deflate*/
       bitlen_cl.data[i] = HuffmanTree_getLength(&tree_cl, CLCL_ORDER[i]);
@@ -1886,6 +1893,8 @@ static unsigned deflateDynamic(ucvector* out, size_t* bp, Hash* hash,
     HLIT = (unsigned)(numcodes_ll - 257);
     HDIST = (unsigned)(numcodes_d - 1);
     HCLEN = (unsigned)bitlen_cl.size - 4;
+    /*trim zeroes for HCLEN. HLIT and HDIST were already trimmed at tree creation*/
+    while(!bitlen_cl.data[HCLEN + 4 - 1] && HCLEN > 0) HCLEN--;
     addBitsToStream(bp, out, HLIT, 5);
     addBitsToStream(bp, out, HDIST, 5);
     addBitsToStream(bp, out, HCLEN, 4);
@@ -1933,7 +1942,7 @@ static unsigned deflateDynamic(ucvector* out, size_t* bp, Hash* hash,
 static unsigned deflateFixed(ucvector* out, size_t* bp, Hash* hash,
                              const unsigned char* data,
                              size_t datapos, size_t dataend,
-                             const LodePNGCompressSettings* settings, int final)
+                             const LodePNGCompressSettings* settings, unsigned final)
 {
   HuffmanTree tree_ll; /*tree for literal values and length codes*/
   HuffmanTree tree_d; /*tree for distance codes*/
@@ -1956,7 +1965,8 @@ static unsigned deflateFixed(ucvector* out, size_t* bp, Hash* hash,
   {
     uivector lz77_encoded;
     uivector_init(&lz77_encoded);
-    error = encodeLZ77(&lz77_encoded, hash, data, datapos, dataend, settings->windowsize);
+    error = encodeLZ77(&lz77_encoded, hash, data, datapos, dataend, settings->windowsize,
+                       settings->minmatch, settings->nicematch, settings->lazymatching);
     if(!error) writeLZ77data(bp, out, &lz77_encoded, &tree_ll, &tree_d);
     uivector_cleanup(&lz77_encoded);
   }
@@ -1980,59 +1990,40 @@ static unsigned deflateFixed(ucvector* out, size_t* bp, Hash* hash,
 static unsigned lodepng_deflatev(ucvector* out, const unsigned char* in, size_t insize,
                                  const LodePNGCompressSettings* settings)
 {
-#if LODEPNG_CUSTOM_ZLIB_ENCODER == 2
-  if(settings->custom_encoder)
+  unsigned error = 0;
+  size_t i, blocksize, numdeflateblocks;
+  size_t bp = 0; /*the bit pointer*/
+  Hash hash;
+
+  if(settings->btype > 2) return 61;
+  else if(settings->btype == 0) return deflateNoCompression(out, in, insize);
+  else if(settings->btype == 1) blocksize = insize;
+  else /*if(settings->btype == 2)*/
   {
-    unsigned char** out2 = &out->data;
-    size_t* outsize = &out->size;
-
-    unsigned error = lodepng_custom_deflate(out2, outsize, in, insize, settings);
-
-    if(!error) ucvector_init_buffer(out, *out2, *outsize);
-    return error;
+    blocksize = insize / 8 + 8;
+    if(blocksize < 65535) blocksize = 65535;
   }
-  else
+
+  numdeflateblocks = (insize + blocksize - 1) / blocksize;
+  if(numdeflateblocks == 0) numdeflateblocks = 1;
+
+  error = hash_init(&hash, settings->windowsize);
+  if(error) return error;
+
+  for(i = 0; i < numdeflateblocks && !error; i++)
   {
-#endif /*LODEPNG_CUSTOM_ZLIB_ENCODER == 2*/
-    unsigned error = 0;
-    size_t i, blocksize, numdeflateblocks;
-    size_t bp = 0; /*the bit pointer*/
-    Hash hash;
+    unsigned final = (i == numdeflateblocks - 1);
+    size_t start = i * blocksize;
+    size_t end = start + blocksize;
+    if(end > insize) end = insize;
 
-    if(settings->btype > 2) return 61;
-
-    if(settings->btype == 0) return deflateNoCompression(out, in, insize);
-
-    if(settings->btype == 1) blocksize = insize;
-    else /*if(settings->btype == 2)*/
-    {
-      blocksize = insize / 8 + 8;
-      if(blocksize < 65535) blocksize = 65535;
-    }
-
-    numdeflateblocks = (insize + blocksize - 1) / blocksize;
-    if(numdeflateblocks == 0) numdeflateblocks = 1;
-
-    error = hash_init(&hash, settings->windowsize);
-    if(error) return error;
-
-    for(i = 0; i < numdeflateblocks && !error; i++)
-    {
-      int final = i == numdeflateblocks - 1;
-      size_t start = i * blocksize;
-      size_t end = start + blocksize;
-      if(end > insize) end = insize;
-
-      if(settings->btype == 1) error = deflateFixed(out, &bp, &hash, in, start, end, settings, final);
-      else if(settings->btype == 2) error = deflateDynamic(out, &bp, &hash, in, start, end, settings, final);
-    }
-
-    hash_cleanup(&hash);
-
-    return error;
-#if LODEPNG_CUSTOM_ZLIB_ENCODER == 2
+    if(settings->btype == 1) error = deflateFixed(out, &bp, &hash, in, start, end, settings, final);
+    else if(settings->btype == 2) error = deflateDynamic(out, &bp, &hash, in, start, end, settings, final);
   }
-#endif /*LODEPNG_CUSTOM_ZLIB_ENCODER == 2*/
+
+  hash_cleanup(&hash);
+
+  return error;
 }
 
 unsigned lodepng_deflate(unsigned char** out, size_t* outsize,
@@ -2046,6 +2037,20 @@ unsigned lodepng_deflate(unsigned char** out, size_t* outsize,
   *out = v.data;
   *outsize = v.size;
   return error;
+}
+
+static unsigned deflate(unsigned char** out, size_t* outsize,
+                        const unsigned char* in, size_t insize,
+                        const LodePNGCompressSettings* settings)
+{
+  if(settings->custom_deflate)
+  {
+    return settings->custom_deflate(out, outsize, in, insize, settings);
+  }
+  else
+  {
+    return lodepng_deflate(out, outsize, in, insize, settings);
+  }
 }
 
 #endif /*LODEPNG_COMPILE_DECODER*/
@@ -2066,8 +2071,8 @@ static unsigned update_adler32(unsigned adler, const unsigned char* data, unsign
     len -= amount;
     while(amount > 0)
     {
-      s1 = (s1 + *data++);
-      s2 = (s2 + s1);
+      s1 += (*data++);
+      s2 += s1;
       amount--;
     }
     s1 %= 65521;
@@ -2092,57 +2097,59 @@ static unsigned adler32(const unsigned char* data, unsigned len)
 unsigned lodepng_zlib_decompress(unsigned char** out, size_t* outsize, const unsigned char* in,
                                  size_t insize, const LodePNGDecompressSettings* settings)
 {
-#if LODEPNG_CUSTOM_ZLIB_DECODER == 1
-  if(settings->custom_decoder)
+  unsigned error = 0;
+  unsigned CM, CINFO, FDICT;
+
+  if(insize < 2) return 53; /*error, size of zlib data too small*/
+  /*read information from zlib header*/
+  if((in[0] * 256 + in[1]) % 31 != 0)
   {
-    return lodepng_custom_zlib_decompress(out, outsize, in, insize, settings);
+    /*error: 256 * in[0] + in[1] must be a multiple of 31, the FCHECK value is supposed to be made that way*/
+    return 24;
+  }
+
+  CM = in[0] & 15;
+  CINFO = (in[0] >> 4) & 15;
+  /*FCHECK = in[1] & 31;*/ /*FCHECK is already tested above*/
+  FDICT = (in[1] >> 5) & 1;
+  /*FLEVEL = (in[1] >> 6) & 3;*/ /*FLEVEL is not used here*/
+
+  if(CM != 8 || CINFO > 7)
+  {
+    /*error: only compression method 8: inflate with sliding window of 32k is supported by the PNG spec*/
+    return 25;
+  }
+  if(FDICT != 0)
+  {
+    /*error: the specification of PNG says about the zlib stream:
+      "The additional flags shall not specify a preset dictionary."*/
+    return 26;
+  }
+
+  error = inflate(out, outsize, in + 2, insize - 2, settings);
+  if(error) return error;
+
+  if(!settings->ignore_adler32)
+  {
+    unsigned ADLER32 = lodepng_read32bitInt(&in[insize - 4]);
+    unsigned checksum = adler32(*out, (unsigned)(*outsize));
+    if(checksum != ADLER32) return 58; /*error, adler checksum not correct, data must be corrupted*/
+  }
+
+  return 0; /*no error*/
+}
+
+static unsigned zlib_decompress(unsigned char** out, size_t* outsize, const unsigned char* in,
+                                size_t insize, const LodePNGDecompressSettings* settings)
+{
+  if(settings->custom_zlib)
+  {
+    return settings->custom_zlib(out, outsize, in, insize, settings);
   }
   else
   {
-#endif /*LODEPNG_CUSTOM_ZLIB_DECODER == 1*/
-    unsigned error = 0;
-    unsigned CM, CINFO, FDICT;
-
-    if(insize < 2) return 53; /*error, size of zlib data too small*/
-    /*read information from zlib header*/
-    if((in[0] * 256 + in[1]) % 31 != 0)
-    {
-      /*error: 256 * in[0] + in[1] must be a multiple of 31, the FCHECK value is supposed to be made that way*/
-      return 24;
-    }
-
-    CM = in[0] & 15;
-    CINFO = (in[0] >> 4) & 15;
-    /*FCHECK = in[1] & 31;*/ /*FCHECK is already tested above*/
-    FDICT = (in[1] >> 5) & 1;
-    /*FLEVEL = (in[1] >> 6) & 3;*/ /*FLEVEL is not used here*/
-
-    if(CM != 8 || CINFO > 7)
-    {
-      /*error: only compression method 8: inflate with sliding window of 32k is supported by the PNG spec*/
-      return 25;
-    }
-    if(FDICT != 0)
-    {
-      /*error: the specification of PNG says about the zlib stream:
-        "The additional flags shall not specify a preset dictionary."*/
-      return 26;
-    }
-
-    error = lodepng_inflate(out, outsize, in + 2, insize - 2, settings);
-    if(error) return error;
-
-    if(!settings->ignore_adler32)
-    {
-      unsigned ADLER32 = lodepng_read32bitInt(&in[insize - 4]);
-      unsigned checksum = adler32(*out, (unsigned)(*outsize));
-      if(checksum != ADLER32) return 58; /*error, adler checksum not correct, data must be corrupted*/
-    }
-
-    return 0; /*no error*/
-#if LODEPNG_CUSTOM_ZLIB_DECODER == 1
+    return lodepng_zlib_decompress(out, outsize, in, insize, settings);
   }
-#endif /*LODEPNG_CUSTOM_ZLIB_DECODER == 1*/
 }
 
 #endif /*LODEPNG_COMPILE_DECODER*/
@@ -2152,53 +2159,57 @@ unsigned lodepng_zlib_decompress(unsigned char** out, size_t* outsize, const uns
 unsigned lodepng_zlib_compress(unsigned char** out, size_t* outsize, const unsigned char* in,
                                size_t insize, const LodePNGCompressSettings* settings)
 {
-#if LODEPNG_CUSTOM_ZLIB_ENCODER == 1
-  if(settings->custom_encoder)
+  /*initially, *out must be NULL and outsize 0, if you just give some random *out
+  that's pointing to a non allocated buffer, this'll crash*/
+  ucvector outv;
+  size_t i;
+  unsigned error;
+  unsigned char* deflatedata = 0;
+  size_t deflatesize = 0;
+
+  unsigned ADLER32;
+  /*zlib data: 1 byte CMF (CM+CINFO), 1 byte FLG, deflate data, 4 byte ADLER32 checksum of the Decompressed data*/
+  unsigned CMF = 120; /*0b01111000: CM 8, CINFO 7. With CINFO 7, any window size up to 32768 can be used.*/
+  unsigned FLEVEL = 0;
+  unsigned FDICT = 0;
+  unsigned CMFFLG = 256 * CMF + FDICT * 32 + FLEVEL * 64;
+  unsigned FCHECK = 31 - CMFFLG % 31;
+  CMFFLG += FCHECK;
+
+  /*ucvector-controlled version of the output buffer, for dynamic array*/
+  ucvector_init_buffer(&outv, *out, *outsize);
+
+  ucvector_push_back(&outv, (unsigned char)(CMFFLG / 256));
+  ucvector_push_back(&outv, (unsigned char)(CMFFLG % 256));
+
+  error = deflate(&deflatedata, &deflatesize, in, insize, settings);
+
+  if(!error)
   {
-    return lodepng_custom_zlib_decompress(out, outsize, in, insize, settings);
+    ADLER32 = adler32(in, (unsigned)insize);
+    for(i = 0; i < deflatesize; i++) ucvector_push_back(&outv, deflatedata[i]);
+    lodepng_free(deflatedata);
+    lodepng_add32bitInt(&outv, ADLER32);
+  }
+
+  *out = outv.data;
+  *outsize = outv.size;
+
+  return error;
+}
+
+/* compress using the default or custom zlib function */
+static unsigned zlib_compress(unsigned char** out, size_t* outsize, const unsigned char* in,
+                              size_t insize, const LodePNGCompressSettings* settings)
+{
+  if(settings->custom_zlib)
+  {
+    return settings->custom_zlib(out, outsize, in, insize, settings);
   }
   else
   {
-#endif /*LODEPNG_CUSTOM_ZLIB_ENCODER == 1*/
-    /*initially, *out must be nullptr and outsize 0, if you just give some random *out
-    that's pointing to a non allocated buffer, this'll crash*/
-    ucvector deflatedata, outv;
-    size_t i;
-    unsigned error;
-
-    unsigned ADLER32;
-    /*zlib data: 1 byte CMF (CM+CINFO), 1 byte FLG, deflate data, 4 byte ADLER32 checksum of the Decompressed data*/
-    unsigned CMF = 120; /*0b01111000: CM 8, CINFO 7. With CINFO 7, any window size up to 32768 can be used.*/
-    unsigned FLEVEL = 0;
-    unsigned FDICT = 0;
-    unsigned CMFFLG = 256 * CMF + FDICT * 32 + FLEVEL * 64;
-    unsigned FCHECK = 31 - CMFFLG % 31;
-    CMFFLG += FCHECK;
-
-    /*ucvector-controlled version of the output buffer, for dynamic array*/
-    ucvector_init_buffer(&outv, *out, *outsize);
-
-    ucvector_push_back(&outv, (unsigned char)(CMFFLG / 256));
-    ucvector_push_back(&outv, (unsigned char)(CMFFLG % 256));
-
-    ucvector_init(&deflatedata);
-    error = lodepng_deflatev(&deflatedata, in, insize, settings);
-
-    if(!error)
-    {
-      ADLER32 = adler32(in, (unsigned)insize);
-      for(i = 0; i < deflatedata.size; i++) ucvector_push_back(&outv, deflatedata.data[i]);
-      ucvector_cleanup(&deflatedata);
-      lodepng_add32bitInt(&outv, ADLER32);
-    }
-
-    *out = outv.data;
-    *outsize = outv.size;
-
-    return error;
-#if LODEPNG_CUSTOM_ZLIB_ENCODER == 1
+    return lodepng_zlib_compress(out, outsize, in, insize, settings);
   }
-#endif /*LODEPNG_CUSTOM_ZLIB_ENCODER == 1*/
 }
 
 #endif /*LODEPNG_COMPILE_ENCODER*/
@@ -2206,17 +2217,19 @@ unsigned lodepng_zlib_compress(unsigned char** out, size_t* outsize, const unsig
 #else /*no LODEPNG_COMPILE_ZLIB*/
 
 #ifdef LODEPNG_COMPILE_DECODER
-static unsigned lodepng_zlib_decompress(unsigned char** out, size_t* outsize, const unsigned char* in,
-                                        size_t insize, const LodePNGDecompressSettings* settings)
+static unsigned zlib_decompress(unsigned char** out, size_t* outsize, const unsigned char* in,
+                                size_t insize, const LodePNGDecompressSettings* settings)
 {
-  return lodepng_custom_zlib_decompress(out, outsize, in, insize, settings);
+  if (!settings->custom_zlib) return 87; /*no custom zlib function provided */
+  return settings->custom_zlib(out, outsize, in, insize, settings);
 }
 #endif /*LODEPNG_COMPILE_DECODER*/
 #ifdef LODEPNG_COMPILE_ENCODER
-static unsigned lodepng_zlib_compress(unsigned char** out, size_t* outsize, const unsigned char* in,
-                                      size_t insize, const LodePNGCompressSettings* settings)
+static unsigned zlib_compress(unsigned char** out, size_t* outsize, const unsigned char* in,
+                              size_t insize, const LodePNGCompressSettings* settings)
 {
-  return lodepng_custom_zlib_compress(out, outsize, in, insize, settings);
+  if (!settings->custom_zlib) return 87; /*no custom zlib function provided */
+  return settings->custom_zlib(out, outsize, in, insize, settings);
 }
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
@@ -2235,18 +2248,16 @@ void lodepng_compress_settings_init(LodePNGCompressSettings* settings)
   settings->btype = 2;
   settings->use_lz77 = 1;
   settings->windowsize = DEFAULT_WINDOWSIZE;
-#if LODEPNG_CUSTOM_ZLIB_ENCODER == 0
-  settings->custom_encoder = 0;
-#else
-  settings->custom_encoder = 1;
-#endif
+  settings->minmatch = 3;
+  settings->nicematch = 128;
+  settings->lazymatching = 1;
+
+  settings->custom_zlib = 0;
+  settings->custom_deflate = 0;
+  settings->custom_context = 0;
 }
 
-#if LODEPNG_CUSTOM_ZLIB_ENCODER == 0
-const LodePNGCompressSettings lodepng_default_compress_settings = {2, 1, DEFAULT_WINDOWSIZE, 0};
-#else
-const LodePNGCompressSettings lodepng_default_compress_settings = {2, 1, DEFAULT_WINDOWSIZE, 1};
-#endif
+const LodePNGCompressSettings lodepng_default_compress_settings = {2, 1, DEFAULT_WINDOWSIZE, 3, 128, 1, 0, 0, 0};
 
 
 #endif /*LODEPNG_COMPILE_ENCODER*/
@@ -2256,18 +2267,13 @@ const LodePNGCompressSettings lodepng_default_compress_settings = {2, 1, DEFAULT
 void lodepng_decompress_settings_init(LodePNGDecompressSettings* settings)
 {
   settings->ignore_adler32 = 0;
-#if LODEPNG_CUSTOM_ZLIB_DECODER == 0
-  settings->custom_decoder = 0;
-#else
-  settings->custom_decoder = 1;
-#endif
+
+  settings->custom_zlib = 0;
+  settings->custom_inflate = 0;
+  settings->custom_context = 0;
 }
 
-#if LODEPNG_CUSTOM_ZLIB_DECODER == 0
-const LodePNGDecompressSettings lodepng_default_decompress_settings = {0, 0};
-#else
-const LodePNGDecompressSettings lodepng_default_decompress_settings = {0, 1};
-#endif
+const LodePNGDecompressSettings lodepng_default_decompress_settings = {0, 0, 0, 0};
 
 #endif /*LODEPNG_COMPILE_DECODER*/
 
@@ -2283,46 +2289,53 @@ const LodePNGDecompressSettings lodepng_default_decompress_settings = {0, 1};
 /* / CRC32                                                                  / */
 /* ////////////////////////////////////////////////////////////////////////// */
 
-static unsigned Crc32_crc_table_computed = 0;
-static unsigned Crc32_crc_table[256];
-
-/*Make the table for a fast CRC.*/
-static void Crc32_make_crc_table(void)
-{
-  unsigned c, k, n;
-  for(n = 0; n < 256; n++)
-  {
-    c = n;
-    for(k = 0; k < 8; k++)
-    {
-      if(c & 1) c = 0xedb88320L ^ (c >> 1);
-      else c = c >> 1;
-    }
-    Crc32_crc_table[n] = c;
-  }
-  Crc32_crc_table_computed = 1;
-}
-
-/*Update a running CRC with the bytes buf[0..len-1]--the CRC should be
-initialized to all 1's, and the transmitted value is the 1's complement of the
-final running CRC (see the crc() routine below).*/
-static unsigned Crc32_update_crc(const unsigned char* buf, unsigned crc, size_t len)
-{
-  unsigned c = crc;
-  size_t n;
-
-  if(!Crc32_crc_table_computed) Crc32_make_crc_table();
-  for(n = 0; n < len; n++)
-  {
-    c = Crc32_crc_table[(c ^ buf[n]) & 0xff] ^ (c >> 8);
-  }
-  return c;
-}
+/* CRC polynomial: 0xedb88320 */
+static unsigned lodepng_crc32_table[256] = {
+           0u, 1996959894u, 3993919788u, 2567524794u,  124634137u, 1886057615u, 3915621685u, 2657392035u,
+   249268274u, 2044508324u, 3772115230u, 2547177864u,  162941995u, 2125561021u, 3887607047u, 2428444049u,
+   498536548u, 1789927666u, 4089016648u, 2227061214u,  450548861u, 1843258603u, 4107580753u, 2211677639u,
+   325883990u, 1684777152u, 4251122042u, 2321926636u,  335633487u, 1661365465u, 4195302755u, 2366115317u,
+   997073096u, 1281953886u, 3579855332u, 2724688242u, 1006888145u, 1258607687u, 3524101629u, 2768942443u,
+   901097722u, 1119000684u, 3686517206u, 2898065728u,  853044451u, 1172266101u, 3705015759u, 2882616665u,
+   651767980u, 1373503546u, 3369554304u, 3218104598u,  565507253u, 1454621731u, 3485111705u, 3099436303u,
+   671266974u, 1594198024u, 3322730930u, 2970347812u,  795835527u, 1483230225u, 3244367275u, 3060149565u,
+  1994146192u,   31158534u, 2563907772u, 4023717930u, 1907459465u,  112637215u, 2680153253u, 3904427059u,
+  2013776290u,  251722036u, 2517215374u, 3775830040u, 2137656763u,  141376813u, 2439277719u, 3865271297u,
+  1802195444u,  476864866u, 2238001368u, 4066508878u, 1812370925u,  453092731u, 2181625025u, 4111451223u,
+  1706088902u,  314042704u, 2344532202u, 4240017532u, 1658658271u,  366619977u, 2362670323u, 4224994405u,
+  1303535960u,  984961486u, 2747007092u, 3569037538u, 1256170817u, 1037604311u, 2765210733u, 3554079995u,
+  1131014506u,  879679996u, 2909243462u, 3663771856u, 1141124467u,  855842277u, 2852801631u, 3708648649u,
+  1342533948u,  654459306u, 3188396048u, 3373015174u, 1466479909u,  544179635u, 3110523913u, 3462522015u,
+  1591671054u,  702138776u, 2966460450u, 3352799412u, 1504918807u,  783551873u, 3082640443u, 3233442989u,
+  3988292384u, 2596254646u,   62317068u, 1957810842u, 3939845945u, 2647816111u,   81470997u, 1943803523u,
+  3814918930u, 2489596804u,  225274430u, 2053790376u, 3826175755u, 2466906013u,  167816743u, 2097651377u,
+  4027552580u, 2265490386u,  503444072u, 1762050814u, 4150417245u, 2154129355u,  426522225u, 1852507879u,
+  4275313526u, 2312317920u,  282753626u, 1742555852u, 4189708143u, 2394877945u,  397917763u, 1622183637u,
+  3604390888u, 2714866558u,  953729732u, 1340076626u, 3518719985u, 2797360999u, 1068828381u, 1219638859u,
+  3624741850u, 2936675148u,  906185462u, 1090812512u, 3747672003u, 2825379669u,  829329135u, 1181335161u,
+  3412177804u, 3160834842u,  628085408u, 1382605366u, 3423369109u, 3138078467u,  570562233u, 1426400815u,
+  3317316542u, 2998733608u,  733239954u, 1555261956u, 3268935591u, 3050360625u,  752459403u, 1541320221u,
+  2607071920u, 3965973030u, 1969922972u,   40735498u, 2617837225u, 3943577151u, 1913087877u,   83908371u,
+  2512341634u, 3803740692u, 2075208622u,  213261112u, 2463272603u, 3855990285u, 2094854071u,  198958881u,
+  2262029012u, 4057260610u, 1759359992u,  534414190u, 2176718541u, 4139329115u, 1873836001u,  414664567u,
+  2282248934u, 4279200368u, 1711684554u,  285281116u, 2405801727u, 4167216745u, 1634467795u,  376229701u,
+  2685067896u, 3608007406u, 1308918612u,  956543938u, 2808555105u, 3495958263u, 1231636301u, 1047427035u,
+  2932959818u, 3654703836u, 1088359270u,  936918000u, 2847714899u, 3736837829u, 1202900863u,  817233897u,
+  3183342108u, 3401237130u, 1404277552u,  615818150u, 3134207493u, 3453421203u, 1423857449u,  601450431u,
+  3009837614u, 3294710456u, 1567103746u,  711928724u, 3020668471u, 3272380065u, 1510334235u,  755167117u
+};
 
 /*Return the CRC of the bytes buf[0..len-1].*/
 unsigned lodepng_crc32(const unsigned char* buf, size_t len)
 {
-  return Crc32_update_crc(buf, 0xffffffffL, len) ^ 0xffffffffL;
+  unsigned c = 0xffffffffL;
+  size_t n;
+
+  for(n = 0; n < len; n++)
+  {
+    c = lodepng_crc32_table[(c ^ buf[n]) & 0xff] ^ (c >> 8);
+  }
+  return c ^ 0xffffffffL;
 }
 
 /* ////////////////////////////////////////////////////////////////////////// */
@@ -2380,7 +2393,7 @@ unsigned lodepng_chunk_length(const unsigned char* chunk)
 void lodepng_chunk_type(char type[5], const unsigned char* chunk)
 {
   unsigned i;
-  for(i = 0; i < 4; i++) type[i] = chunk[4 + i];
+  for(i = 0; i < 4; i++) type[i] = (char)chunk[4 + i];
   type[4] = 0; /*null termination char*/
 }
 
@@ -2452,7 +2465,7 @@ unsigned lodepng_chunk_append(unsigned char** out, size_t* outlength, const unsi
   size_t new_length = (*outlength) + total_chunk_length;
   if(new_length < total_chunk_length || new_length < (*outlength)) return 77; /*integer overflow happened*/
 
-  new_buffer = (unsigned char*)myrealloc(*out, new_length);
+  new_buffer = (unsigned char*)lodepng_realloc(*out, new_length);
   if(!new_buffer) return 83; /*alloc fail*/
   (*out) = new_buffer;
   (*outlength) = new_length;
@@ -2470,7 +2483,7 @@ unsigned lodepng_chunk_create(unsigned char** out, size_t* outlength, unsigned l
   unsigned char *chunk, *new_buffer;
   size_t new_length = (*outlength) + length + 12;
   if(new_length < length + 12 || new_length < (*outlength)) return 77; /*integer overflow happened*/
-  new_buffer = (unsigned char*)myrealloc(*out, new_length);
+  new_buffer = (unsigned char*)lodepng_realloc(*out, new_length);
   if(!new_buffer) return 83; /*alloc fail*/
   (*out) = new_buffer;
   (*outlength) = new_length;
@@ -2480,10 +2493,10 @@ unsigned lodepng_chunk_create(unsigned char** out, size_t* outlength, unsigned l
   lodepng_set32bitInt(chunk, (unsigned)length);
 
   /*2: chunk name (4 letters)*/
-  chunk[4] = type[0];
-  chunk[5] = type[1];
-  chunk[6] = type[2];
-  chunk[7] = type[3];
+  chunk[4] = (unsigned char)type[0];
+  chunk[5] = (unsigned char)type[1];
+  chunk[6] = (unsigned char)type[2];
+  chunk[7] = (unsigned char)type[3];
 
   /*3: the data*/
   for(i = 0; i < length; i++) chunk[8 + i] = data[i];
@@ -2556,7 +2569,7 @@ unsigned lodepng_color_mode_copy(LodePNGColorMode* dest, const LodePNGColorMode*
   *dest = *source;
   if(source->palette)
   {
-    dest->palette = (unsigned char*)mymalloc(source->palettesize * 4);
+    dest->palette = (unsigned char*)lodepng_malloc(1024);
     if(!dest->palette && source->palettesize) return 83; /*alloc fail*/
     for(i = 0; i < source->palettesize * 4; i++) dest->palette[i] = source->palette[i];
   }
@@ -2585,7 +2598,8 @@ static int lodepng_color_mode_equal(const LodePNGColorMode* a, const LodePNGColo
 
 void lodepng_palette_clear(LodePNGColorMode* info)
 {
-  if(info->palette) myfree(info->palette);
+  if(info->palette) lodepng_free(info->palette);
+  info->palette = 0;
   info->palettesize = 0;
 }
 
@@ -2595,11 +2609,10 @@ unsigned lodepng_palette_add(LodePNGColorMode* info,
   unsigned char* data;
   /*the same resize technique as C++ std::vectors is used, and here it's made so that for a palette with
   the max of 256 colors, it'll have the exact alloc size*/
-  if(!(info->palettesize & (info->palettesize - 1))) /*if palettesize is 0 or a power of two*/
+  if(!info->palette) /*allocate palette if empty*/
   {
-    /*allocated data must be at least 4* palettesize (for 4 color bytes)*/
-    size_t alloc_size = info->palettesize == 0 ? 4 : info->palettesize * 4 * 2;
-    data = (unsigned char*)myrealloc(info->palette, alloc_size);
+    /*room for 256 colors with 4 bytes each*/
+    data = (unsigned char*)lodepng_realloc(info->palette, 1024);
     if(!data) return 83; /*alloc fail*/
     else info->palette = data;
   }
@@ -2676,7 +2689,7 @@ static void LodePNGUnknownChunks_init(LodePNGInfo* info)
 static void LodePNGUnknownChunks_cleanup(LodePNGInfo* info)
 {
   unsigned i;
-  for(i = 0; i < 3; i++) myfree(info->unknown_chunks_data[i]);
+  for(i = 0; i < 3; i++) lodepng_free(info->unknown_chunks_data[i]);
 }
 
 static unsigned LodePNGUnknownChunks_copy(LodePNGInfo* dest, const LodePNGInfo* src)
@@ -2689,7 +2702,7 @@ static unsigned LodePNGUnknownChunks_copy(LodePNGInfo* dest, const LodePNGInfo* 
   {
     size_t j;
     dest->unknown_chunks_size[i] = src->unknown_chunks_size[i];
-    dest->unknown_chunks_data[i] = (unsigned char*)mymalloc(src->unknown_chunks_size[i]);
+    dest->unknown_chunks_data[i] = (unsigned char*)lodepng_malloc(src->unknown_chunks_size[i]);
     if(!dest->unknown_chunks_data[i] && dest->unknown_chunks_size[i]) return 83; /*alloc fail*/
     for(j = 0; j < src->unknown_chunks_size[i]; j++)
     {
@@ -2705,8 +2718,8 @@ static unsigned LodePNGUnknownChunks_copy(LodePNGInfo* dest, const LodePNGInfo* 
 static void LodePNGText_init(LodePNGInfo* info)
 {
   info->text_num = 0;
-  info->text_keys = nullptr;
-  info->text_strings = nullptr;
+  info->text_keys = NULL;
+  info->text_strings = NULL;
 }
 
 static void LodePNGText_cleanup(LodePNGInfo* info)
@@ -2717,8 +2730,8 @@ static void LodePNGText_cleanup(LodePNGInfo* info)
     string_cleanup(&info->text_keys[i]);
     string_cleanup(&info->text_strings[i]);
   }
-  myfree(info->text_keys);
-  myfree(info->text_strings);
+  lodepng_free(info->text_keys);
+  lodepng_free(info->text_strings);
 }
 
 static unsigned LodePNGText_copy(LodePNGInfo* dest, const LodePNGInfo* source)
@@ -2741,12 +2754,12 @@ void lodepng_clear_text(LodePNGInfo* info)
 
 unsigned lodepng_add_text(LodePNGInfo* info, const char* key, const char* str)
 {
-  char** new_keys = (char**)(myrealloc(info->text_keys, sizeof(char*) * (info->text_num + 1)));
-  char** new_strings = (char**)(myrealloc(info->text_strings, sizeof(char*) * (info->text_num + 1)));
+  char** new_keys = (char**)(lodepng_realloc(info->text_keys, sizeof(char*) * (info->text_num + 1)));
+  char** new_strings = (char**)(lodepng_realloc(info->text_strings, sizeof(char*) * (info->text_num + 1)));
   if(!new_keys || !new_strings)
   {
-    myfree(new_keys);
-    myfree(new_strings);
+    lodepng_free(new_keys);
+    lodepng_free(new_strings);
     return 83; /*alloc fail*/
   }
 
@@ -2768,10 +2781,10 @@ unsigned lodepng_add_text(LodePNGInfo* info, const char* key, const char* str)
 static void LodePNGIText_init(LodePNGInfo* info)
 {
   info->itext_num = 0;
-  info->itext_keys = nullptr;
-  info->itext_langtags = nullptr;
-  info->itext_transkeys = nullptr;
-  info->itext_strings = nullptr;
+  info->itext_keys = NULL;
+  info->itext_langtags = NULL;
+  info->itext_transkeys = NULL;
+  info->itext_strings = NULL;
 }
 
 static void LodePNGIText_cleanup(LodePNGInfo* info)
@@ -2784,10 +2797,10 @@ static void LodePNGIText_cleanup(LodePNGInfo* info)
     string_cleanup(&info->itext_transkeys[i]);
     string_cleanup(&info->itext_strings[i]);
   }
-  myfree(info->itext_keys);
-  myfree(info->itext_langtags);
-  myfree(info->itext_transkeys);
-  myfree(info->itext_strings);
+  lodepng_free(info->itext_keys);
+  lodepng_free(info->itext_langtags);
+  lodepng_free(info->itext_transkeys);
+  lodepng_free(info->itext_strings);
 }
 
 static unsigned LodePNGIText_copy(LodePNGInfo* dest, const LodePNGInfo* source)
@@ -2814,16 +2827,16 @@ void lodepng_clear_itext(LodePNGInfo* info)
 unsigned lodepng_add_itext(LodePNGInfo* info, const char* key, const char* langtag,
                            const char* transkey, const char* str)
 {
-  char** new_keys = (char**)(myrealloc(info->itext_keys, sizeof(char*) * (info->itext_num + 1)));
-  char** new_langtags = (char**)(myrealloc(info->itext_langtags, sizeof(char*) * (info->itext_num + 1)));
-  char** new_transkeys = (char**)(myrealloc(info->itext_transkeys, sizeof(char*) * (info->itext_num + 1)));
-  char** new_strings = (char**)(myrealloc(info->itext_strings, sizeof(char*) * (info->itext_num + 1)));
+  char** new_keys = (char**)(lodepng_realloc(info->itext_keys, sizeof(char*) * (info->itext_num + 1)));
+  char** new_langtags = (char**)(lodepng_realloc(info->itext_langtags, sizeof(char*) * (info->itext_num + 1)));
+  char** new_transkeys = (char**)(lodepng_realloc(info->itext_transkeys, sizeof(char*) * (info->itext_num + 1)));
+  char** new_strings = (char**)(lodepng_realloc(info->itext_strings, sizeof(char*) * (info->itext_num + 1)));
   if(!new_keys || !new_langtags || !new_transkeys || !new_strings)
   {
-    myfree(new_keys);
-    myfree(new_langtags);
-    myfree(new_transkeys);
-    myfree(new_strings);
+    lodepng_free(new_keys);
+    lodepng_free(new_langtags);
+    lodepng_free(new_transkeys);
+    lodepng_free(new_strings);
     return 83; /*alloc fail*/
   }
 
@@ -2906,13 +2919,14 @@ void lodepng_info_swap(LodePNGInfo* a, LodePNGInfo* b)
 
 /* ////////////////////////////////////////////////////////////////////////// */
 
-/*index: bitgroup index, bits: bitgroup size(1, 2 or 4, in: bitgroup value, out: octet array to add bits to*/
+/*index: bitgroup index, bits: bitgroup size(1, 2 or 4), in: bitgroup value, out: octet array to add bits to*/
 static void addColorBits(unsigned char* out, size_t index, unsigned bits, unsigned in)
 {
+  unsigned m = bits == 1 ? 7 : bits == 2 ? 3 : 1; /*8 / bits - 1*/
   /*p = the partial index in the byte, e.g. with 4 palettebits it is 0 for first half or 1 for second half*/
-  unsigned p = index % (8 / bits);
-  in &= (1 << bits) - 1; /*filter out any other bits of the input value*/
-  in = in << (bits * (8 / bits - p - 1));
+  unsigned p = index & m;
+  in &= (1u << bits) - 1u; /*filter out any other bits of the input value*/
+  in = in << (bits * (m - p));
   if(p == 0) out[index * bits / 8] = in;
   else out[index * bits / 8] |= in;
 }
@@ -2922,55 +2936,46 @@ typedef struct ColorTree ColorTree;
 /*
 One node of a color tree
 This is the data structure used to count the number of unique colors and to get a palette
-index for a color. This could use up to 256x the memory of the amount of colors, but it
-is only used to count up to 256, and is used because implementing a whole dictionary data
-structure in C here would take too much room.
+index for a color. It's like an octree, but because the alpha channel is used too, each
+node has 16 instead of 8 children.
 */
 struct ColorTree
 {
-  ColorTree* next; /*null, or array of 256 pointers to ColorTree of next level*/
-  int index; /*the payload. Only has a meaningful value if this is in the 4th level*/
+  ColorTree* children[16]; /*up to 16 pointers to ColorTree of next level*/
+  int index; /*the payload. Only has a meaningful value if this is in the last level*/
 };
 
-static void color_tree_make_next(ColorTree* tree);
-
-/*next: whether to create the next array or not*/
-static void color_tree_init(ColorTree* tree, int next)
-{
-  if(next) color_tree_make_next(tree);
-  else tree->next = 0;
-  tree->index = -1;
-}
-
-static void color_tree_make_next(ColorTree* tree)
+static void color_tree_init(ColorTree* tree)
 {
   int i;
-  tree->next = (ColorTree*)mymalloc(256 * sizeof(ColorTree));
-  for(i = 0; i <  256; i++) color_tree_init(&tree->next[i], 0);
+  for(i = 0; i < 16; i++) tree->children[i] = 0;
+  tree->index = -1;
 }
 
 static void color_tree_cleanup(ColorTree* tree)
 {
-  if(tree->next)
+  int i;
+  for(i = 0; i < 16; i++)
   {
-    int i;
-    for(i = 0; i <  256; i++) color_tree_cleanup(&tree->next[i]);
-    myfree(tree->next);
+    if(tree->children[i])
+    {
+      color_tree_cleanup(tree->children[i]);
+      lodepng_free(tree->children[i]);
+    }
   }
 }
 
 /*returns -1 if color not present, its index otherwise*/
 static int color_tree_get(ColorTree* tree, unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
-  tree = &tree->next[r];
-  if(tree->next == 0) return -1;
-  tree = &tree->next[g];
-  if(tree->next == 0) return -1;
-  tree = &tree->next[b];
-  if(tree->next == 0) return -1;
-  tree = &tree->next[a];
-
-  return tree->index;
+  int bit = 0;
+  for(bit = 0; bit < 8; bit++)
+  {
+    int i = 8 * ((r >> bit) & 1) + 4 * ((g >> bit) & 1) + 2 * ((b >> bit) & 1) + 1 * ((a >> bit) & 1);
+    if(!tree->children[i]) return -1;
+    else tree = tree->children[i];
+  }
+  return tree ? tree->index : -1;
 }
 
 #ifdef LODEPNG_COMPILE_ENCODER
@@ -2980,18 +2985,23 @@ static int color_tree_has(ColorTree* tree, unsigned char r, unsigned char g, uns
 }
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
-/*color is not allowed to already exist. Index should be >= 0 (it's signed to be compatible with using -1 for "doesn't exist")*/
-static void color_tree_add(ColorTree* tree, unsigned char r, unsigned char g, unsigned char b, unsigned char a, int index)
+/*color is not allowed to already exist.
+Index should be >= 0 (it's signed to be compatible with using -1 for "doesn't exist")*/
+static void color_tree_add(ColorTree* tree,
+                           unsigned char r, unsigned char g, unsigned char b, unsigned char a, unsigned index)
 {
-  tree = &tree->next[r];
-  if(tree->next == 0) color_tree_make_next(tree);
-  tree = &tree->next[g];
-  if(tree->next == 0) color_tree_make_next(tree);
-  tree = &tree->next[b];
-  if(tree->next == 0) color_tree_make_next(tree);
-  tree = &tree->next[a];
-
-  tree->index = index;
+  int bit;
+  for(bit = 0; bit < 8; bit++)
+  {
+    int i = 8 * ((r >> bit) & 1) + 4 * ((g >> bit) & 1) + 2 * ((b >> bit) & 1) + 1 * ((a >> bit) & 1);
+    if(!tree->children[i])
+    {
+      tree->children[i] = (ColorTree*)lodepng_malloc(sizeof(ColorTree));
+      color_tree_init(tree->children[i]);
+    }
+    tree = tree->children[i];
+  }
+  tree->index = (int)index;
 }
 
 /*put a pixel, given its RGBA color, into image of any color type*/
@@ -3031,7 +3041,7 @@ static unsigned rgba8ToPixel(unsigned char* out, size_t i,
     int index = color_tree_get(tree, r, g, b, a);
     if(index < 0) return 82; /*color not in palette*/
     if(mode->bitdepth == 8) out[i] = index;
-    else addColorBits(out, i, mode->bitdepth, index);
+    else addColorBits(out, i, mode->bitdepth, (unsigned)index);
   }
   else if(mode->colortype == LCT_GREY_ALPHA)
   {
@@ -3113,8 +3123,11 @@ static unsigned rgba16ToPixel(unsigned char* out, size_t i,
 }
 
 /*Get RGBA8 color of pixel with index i (y * width + x) from the raw image with given color type.*/
-static unsigned getPixelColorRGBA8(unsigned char* r, unsigned char* g, unsigned char* b, unsigned char* a,
-                                   const unsigned char* in, size_t i, const LodePNGColorMode* mode)
+static unsigned getPixelColorRGBA8(unsigned char* r, unsigned char* g,
+                                   unsigned char* b, unsigned char* a,
+                                   const unsigned char* in, size_t i,
+                                   const LodePNGColorMode* mode,
+                                   unsigned fix_png)
 {
   if(mode->colortype == LCT_GREY)
   {
@@ -3168,11 +3181,21 @@ static unsigned getPixelColorRGBA8(unsigned char* r, unsigned char* g, unsigned 
       size_t j = i * mode->bitdepth;
       index = readBitsFromReversedStream(&j, in, mode->bitdepth);
     }
-    if(index >= mode->palettesize) return 47; /*index out of palette*/
-    *r = mode->palette[index * 4 + 0];
-    *g = mode->palette[index * 4 + 1];
-    *b = mode->palette[index * 4 + 2];
-    *a = mode->palette[index * 4 + 3];
+
+    if(index >= mode->palettesize)
+    {
+      /*This is an error according to the PNG spec, but fix_png can ignore it*/
+      if(!fix_png) return (mode->bitdepth == 8 ? 46 : 47); /*index out of palette*/
+      *r = *g = *b = 0;
+      *a = 255;
+    }
+    else
+    {
+      *r = mode->palette[index * 4 + 0];
+      *g = mode->palette[index * 4 + 1];
+      *b = mode->palette[index * 4 + 2];
+      *a = mode->palette[index * 4 + 3];
+    }
   }
   else if(mode->colortype == LCT_GREY_ALPHA)
   {
@@ -3191,11 +3214,157 @@ static unsigned getPixelColorRGBA8(unsigned char* r, unsigned char* g, unsigned 
   {
     if(mode->bitdepth == 8)
     {
-      *r = in[i * 4 + 0]; *g = in[i * 4 + 1]; *b = in[i * 4 + 2]; *a = in[i * 4 + 3];
+      *r = in[i * 4 + 0];
+      *g = in[i * 4 + 1];
+      *b = in[i * 4 + 2];
+      *a = in[i * 4 + 3];
     }
     else
     {
-      *r = in[i * 8 + 0]; *g = in[i * 8 + 2]; *b = in[i * 8 + 4]; *a = in[i * 8 + 6];
+      *r = in[i * 8 + 0];
+      *g = in[i * 8 + 2];
+      *b = in[i * 8 + 4];
+      *a = in[i * 8 + 6];
+    }
+  }
+
+  return 0; /*no error*/
+}
+
+/*Similar to getPixelColorRGBA8, but with all the for loops inside of the color
+mode test cases, optimized to convert the colors much faster, when converting
+to RGBA or RGB with 8 bit per cannel. buffer must be RGBA or RGB output with
+enough memory, if has_alpha is true the output is RGBA. mode has the color mode
+of the input buffer.*/
+static unsigned getPixelColorsRGBA8(unsigned char* buffer, size_t numpixels,
+                                    unsigned has_alpha, const unsigned char* in,
+                                    const LodePNGColorMode* mode,
+                                    unsigned fix_png)
+{
+  unsigned num_channels = has_alpha ? 4 : 3;
+  size_t i;
+  if(mode->colortype == LCT_GREY)
+  {
+    if(mode->bitdepth == 8)
+    {
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        buffer[0] = buffer[1] = buffer[2] = in[i];
+        if(has_alpha) buffer[3] = mode->key_defined && in[i] == mode->key_r ? 0 : 255;
+      }
+    }
+    else if(mode->bitdepth == 16)
+    {
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        buffer[0] = buffer[1] = buffer[2] = in[i * 2];
+        if(has_alpha) buffer[3] = mode->key_defined && 256U * in[i * 2 + 0] + in[i * 2 + 1] == mode->key_r ? 0 : 255;
+      }
+    }
+    else
+    {
+      unsigned highest = ((1U << mode->bitdepth) - 1U); /*highest possible value for this bit depth*/
+      size_t j = 0;
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        unsigned value = readBitsFromReversedStream(&j, in, mode->bitdepth);
+        buffer[0] = buffer[1] = buffer[2] = (value * 255) / highest;
+        if(has_alpha) buffer[3] = mode->key_defined && value == mode->key_r ? 0 : 255;
+      }
+    }
+  }
+  else if(mode->colortype == LCT_RGB)
+  {
+    if(mode->bitdepth == 8)
+    {
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        buffer[0] = in[i * 3 + 0];
+        buffer[1] = in[i * 3 + 1];
+        buffer[2] = in[i * 3 + 2];
+        if(has_alpha) buffer[3] = mode->key_defined && buffer[0] == mode->key_r
+           && buffer[1]== mode->key_g && buffer[2] == mode->key_b ? 0 : 255;
+      }
+    }
+    else
+    {
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        buffer[0] = in[i * 6 + 0];
+        buffer[1] = in[i * 6 + 2];
+        buffer[2] = in[i * 6 + 4];
+        if(has_alpha) buffer[3] = mode->key_defined
+           && 256U * in[i * 6 + 0] + in[i * 6 + 1] == mode->key_r
+           && 256U * in[i * 6 + 2] + in[i * 6 + 3] == mode->key_g
+           && 256U * in[i * 6 + 4] + in[i * 6 + 5] == mode->key_b ? 0 : 255;
+      }
+    }
+  }
+  else if(mode->colortype == LCT_PALETTE)
+  {
+    unsigned index;
+    size_t j = 0;
+    for(i = 0; i < numpixels; i++, buffer += num_channels)
+    {
+      if(mode->bitdepth == 8) index = in[i];
+      else index = readBitsFromReversedStream(&j, in, mode->bitdepth);
+
+      if(index >= mode->palettesize)
+      {
+        /*This is an error according to the PNG spec, but fix_png can ignore it*/
+        if(!fix_png) return (mode->bitdepth == 8 ? 46 : 47); /*index out of palette*/
+        buffer[0] = buffer[1] = buffer[2] = 0;
+        if(has_alpha) buffer[3] = 255;
+      }
+      else
+      {
+        buffer[0] = mode->palette[index * 4 + 0];
+        buffer[1] = mode->palette[index * 4 + 1];
+        buffer[2] = mode->palette[index * 4 + 2];
+        if(has_alpha) buffer[3] = mode->palette[index * 4 + 3];
+      }
+    }
+  }
+  else if(mode->colortype == LCT_GREY_ALPHA)
+  {
+    if(mode->bitdepth == 8)
+    {
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        buffer[0] = buffer[1] = buffer[2] = in[i * 2 + 0];
+        if(has_alpha) buffer[3] = in[i * 2 + 1];
+      }
+    }
+    else
+    {
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        buffer[0] = buffer[1] = buffer[2] = in[i * 4 + 0];
+        if(has_alpha) buffer[3] = in[i * 4 + 2];
+      }
+    }
+  }
+  else if(mode->colortype == LCT_RGBA)
+  {
+    if(mode->bitdepth == 8)
+    {
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        buffer[0] = in[i * 4 + 0];
+        buffer[1] = in[i * 4 + 1];
+        buffer[2] = in[i * 4 + 2];
+        if(has_alpha) buffer[3] = in[i * 4 + 3];
+      }
+    }
+    else
+    {
+      for(i = 0; i < numpixels; i++, buffer += num_channels)
+      {
+        buffer[0] = in[i * 8 + 0];
+        buffer[1] = in[i * 8 + 2];
+        buffer[2] = in[i * 8 + 4];
+        if(has_alpha) buffer[3] = in[i * 8 + 6];
+      }
     }
   }
 
@@ -3237,7 +3406,7 @@ static unsigned getPixelColorRGBA16(unsigned short* r, unsigned short* g, unsign
     *b = 256 * in[i * 8 + 4] + in[i * 8 + 5];
     *a = 256 * in[i * 8 + 6] + in[i * 8 + 7];
   }
-  else return 85; /*error: this function only supports 16-bit input*/
+  else return 85; /*error: this function only supports 16-bit input, not palettes*/
 
   return 0; /*no error*/
 }
@@ -3248,12 +3417,13 @@ the out buffer must have (w * h * bpp + 7) / 8 bytes, where bpp is the bits per 
 (lodepng_get_bpp) for < 8 bpp images, there may _not_ be padding bits at the end of scanlines.
 */
 unsigned lodepng_convert(unsigned char* out, const unsigned char* in,
-                         LodePNGColorMode* mode_out, LodePNGColorMode* mode_in,
-                         unsigned w, unsigned h)
+                         LodePNGColorMode* mode_out, const LodePNGColorMode* mode_in,
+                         unsigned w, unsigned h, unsigned fix_png)
 {
   unsigned error = 0;
   size_t i;
   ColorTree tree;
+  size_t numpixels = w * h;
 
   if(lodepng_color_mode_equal(mode_out, mode_in))
   {
@@ -3264,9 +3434,9 @@ unsigned lodepng_convert(unsigned char* out, const unsigned char* in,
 
   if(mode_out->colortype == LCT_PALETTE)
   {
-    size_t palsize = 1 << mode_out->bitdepth;
+    size_t palsize = 1u << mode_out->bitdepth;
     if(mode_out->palettesize < palsize) palsize = mode_out->palettesize;
-    color_tree_init(&tree, 1);
+    color_tree_init(&tree);
     for(i = 0; i < palsize; i++)
     {
       unsigned char* p = &mode_out->palette[i * 4];
@@ -3276,26 +3446,32 @@ unsigned lodepng_convert(unsigned char* out, const unsigned char* in,
 
   if(mode_in->bitdepth == 16 && mode_out->bitdepth == 16)
   {
-    size_t numpixels = w * h;
     for(i = 0; i < numpixels; i++)
     {
       unsigned short r = 0, g = 0, b = 0, a = 0;
       error = getPixelColorRGBA16(&r, &g, &b, &a, in, i, mode_in);
-      if(error) return error;
+      if(error) break;
       error = rgba16ToPixel(out, i, mode_out, r, g, b, a);
-      if(error) return error;
+      if(error) break;
     }
+  }
+  else if(mode_out->bitdepth == 8 && mode_out->colortype == LCT_RGBA)
+  {
+    error = getPixelColorsRGBA8(out, numpixels, 1, in, mode_in, fix_png);
+  }
+  else if(mode_out->bitdepth == 8 && mode_out->colortype == LCT_RGB)
+  {
+    error = getPixelColorsRGBA8(out, numpixels, 0, in, mode_in, fix_png);
   }
   else
   {
-    size_t numpixels = w * h;
+    unsigned char r = 0, g = 0, b = 0, a = 0;
     for(i = 0; i < numpixels; i++)
     {
-      unsigned char r = 0, g = 0, b = 0, a = 0;
-      error = getPixelColorRGBA8(&r, &g, &b, &a, in, i, mode_in);
-      if(error) return error;
+      error = getPixelColorRGBA8(&r, &g, &b, &a, in, i, mode_in, fix_png);
+      if(error) break;
       error = rgba8ToPixel(out, i, mode_out, &tree, r, g, b, a);
-      if(error) return error;
+      if(error) break;
     }
   }
 
@@ -3336,7 +3512,7 @@ typedef struct ColorProfile
 
 } ColorProfile;
 
-static void color_profile_init(ColorProfile* profile, LodePNGColorMode* mode)
+static void color_profile_init(ColorProfile* profile, const LodePNGColorMode* mode)
 {
   profile->sixteenbit = 0;
   profile->sixteenbit_done = mode->bitdepth == 16 ? 0 : 1;
@@ -3349,12 +3525,12 @@ static void color_profile_init(ColorProfile* profile, LodePNGColorMode* mode)
   profile->alpha_done = lodepng_can_have_alpha(mode) ? 0 : 1;
 
   profile->numcolors = 0;
-  color_tree_init(&profile->tree, 1);
-  profile->palette = (unsigned char*)mymalloc(1024);
+  color_tree_init(&profile->tree);
+  profile->palette = (unsigned char*)lodepng_malloc(1024);
   profile->maxnumcolors = 257;
   if(lodepng_get_bpp(mode) <= 8)
   {
-    int bpp = lodepng_get_bpp(mode);
+    unsigned bpp = lodepng_get_bpp(mode);
     profile->maxnumcolors = bpp == 1 ? 2 : (bpp == 2 ? 4 : (bpp == 4 ? 16 : 256));
   }
   profile->numcolors_done = 0;
@@ -3366,7 +3542,7 @@ static void color_profile_init(ColorProfile* profile, LodePNGColorMode* mode)
 static void color_profile_cleanup(ColorProfile* profile)
 {
   color_tree_cleanup(&profile->tree);
-  myfree(profile->palette);
+  lodepng_free(profile->palette);
 }
 
 /*function used for debug purposes with C++*/
@@ -3390,7 +3566,7 @@ static void color_profile_cleanup(ColorProfile* profile)
 }*/
 
 /*Returns how many bits needed to represent given value (max 8 bit)*/
-unsigned getValueRequiredBits(unsigned char value)
+unsigned getValueRequiredBits(unsigned short value)
 {
   if(value == 0 || value == 255) return 1;
   /*The scaling of 2-bit and 4-bit values uses multiples of 85 and 17*/
@@ -3401,8 +3577,10 @@ unsigned getValueRequiredBits(unsigned char value)
 /*profile must already have been inited with mode.
 It's ok to set some parameters of profile to done already.*/
 static unsigned get_color_profile(ColorProfile* profile,
-                                  const unsigned char* in, size_t numpixels,
-                                  LodePNGColorMode* mode)
+                                  const unsigned char* in,
+                                  size_t numpixels /*must be full image size, for certain filesize based choices*/,
+                                  const LodePNGColorMode* mode,
+                                  unsigned fix_png)
 {
   unsigned error = 0;
   size_t i;
@@ -3435,11 +3613,12 @@ static unsigned get_color_profile(ColorProfile* profile,
         profile->greybits_done = 1; /*greybits is not applicable anymore*/
       }
 
-      if(!profile->alpha_done && a != 255)
+      if(!profile->alpha_done && a != 65535)
       {
-        if(a == 0 && !(profile->key && (r != profile->key_r || g != profile->key_g || b != profile->key_b)))
+        /*only use color key if numpixels large enough to justify tRNS chunk size*/
+        if(a == 0 && numpixels > 16 && !(profile->key && (r != profile->key_r || g != profile->key_g || b != profile->key_b)))
         {
-          if(!profile->key)
+          if(!profile->alpha && !profile->key)
           {
             profile->key = 1;
             profile->key_r = r;
@@ -3455,6 +3634,15 @@ static unsigned get_color_profile(ColorProfile* profile,
         }
       }
 
+      /* Color key cannot be used if an opaque pixel also has that RGB color. */
+      if(!profile->alpha_done && a == 65535 && profile->key
+          && r == profile->key_r && g == profile->key_g && b == profile->key_b)
+      {
+          profile->alpha = 1;
+          profile->alpha_done = 1;
+          profile->greybits_done = 1; /*greybits is not applicable anymore*/
+      }
+
       if(!profile->greybits_done)
       {
         /*assuming 8-bit r, this test does not care about 16-bit*/
@@ -3466,17 +3654,18 @@ static unsigned get_color_profile(ColorProfile* profile,
       if(!profile->numcolors_done)
       {
         /*assuming 8-bit rgba, this test does not care about 16-bit*/
-        if(!color_tree_has(&profile->tree, r, g, b, a))
+        if(!color_tree_has(&profile->tree, (unsigned char)r, (unsigned char)g, (unsigned char)b, (unsigned char)a))
         {
-          color_tree_add(&profile->tree, r, g, b, a, profile->numcolors);
+          color_tree_add(&profile->tree, (unsigned char)r, (unsigned char)g, (unsigned char)b, (unsigned char)a,
+            profile->numcolors);
           if(profile->numcolors < 256)
           {
             unsigned char* p = profile->palette;
             unsigned i = profile->numcolors;
-            p[i * 4 + 0] = r;
-            p[i * 4 + 1] = g;
-            p[i * 4 + 2] = b;
-            p[i * 4 + 3] = a;
+            p[i * 4 + 0] = (unsigned char)r;
+            p[i * 4 + 1] = (unsigned char)g;
+            p[i * 4 + 2] = (unsigned char)b;
+            p[i * 4 + 3] = (unsigned char)a;
           }
           profile->numcolors++;
           if(profile->numcolors >= profile->maxnumcolors) profile->numcolors_done = 1;
@@ -3490,12 +3679,12 @@ static unsigned get_color_profile(ColorProfile* profile,
       }
     };
   }
-  else
+  else /* < 16-bit */
   {
     for(i = 0; i < numpixels; i++)
     {
-      unsigned char r, g, b, a;
-      error = getPixelColorRGBA8(&r, &g, &b, &a, in, i, mode);
+      unsigned char r = 0, g = 0, b = 0, a = 0;
+      error = getPixelColorRGBA8(&r, &g, &b, &a, in, i, mode, fix_png);
       if(error) break;
 
       if(!profile->colored_done && (r != g || r != b))
@@ -3525,6 +3714,15 @@ static unsigned get_color_profile(ColorProfile* profile,
         }
       }
 
+      /* Color key cannot be used if an opaque pixel also has that RGB color. */
+      if(!profile->alpha_done && a == 255 && profile->key
+          && r == profile->key_r && g == profile->key_g && b == profile->key_b)
+      {
+          profile->alpha = 1;
+          profile->alpha_done = 1;
+          profile->greybits_done = 1; /*greybits is not applicable anymore*/
+      }
+
       if(!profile->greybits_done)
       {
         unsigned bits = getValueRequiredBits(r);
@@ -3536,7 +3734,6 @@ static unsigned get_color_profile(ColorProfile* profile,
       {
         if(!color_tree_has(&profile->tree, r, g, b, a))
         {
-
           color_tree_add(&profile->tree, r, g, b, a, profile->numcolors);
           if(profile->numcolors < 256)
           {
@@ -3571,14 +3768,26 @@ static unsigned get_color_profile(ColorProfile* profile,
   return error;
 }
 
+static void setColorKeyFrom16bit(LodePNGColorMode* mode_out, unsigned r, unsigned g, unsigned b, unsigned bitdepth)
+{
+  unsigned mask = (1u << bitdepth) - 1u;
+  mode_out->key_defined = 1;
+  mode_out->key_r = r & mask;
+  mode_out->key_g = g & mask;
+  mode_out->key_b = b & mask;
+}
+
 /*updates values of mode with a potentially smaller color model. mode_out should
 contain the user chosen color model, but will be overwritten with the new chosen one.*/
-static unsigned doAutoChooseColor(LodePNGColorMode* mode_out,
-                                  const unsigned char* image, unsigned w, unsigned h, LodePNGColorMode* mode_in,
-                                  LodePNGAutoConvert auto_convert)
+unsigned lodepng_auto_choose_color(LodePNGColorMode* mode_out,
+                                   const unsigned char* image, unsigned w, unsigned h,
+                                   const LodePNGColorMode* mode_in,
+                                   LodePNGAutoConvert auto_convert)
 {
   ColorProfile profile;
   unsigned error = 0;
+  int no_nibbles = auto_convert == LAC_AUTO_NO_NIBBLES || auto_convert == LAC_AUTO_NO_NIBBLES_NO_PALETTE;
+  int no_palette = auto_convert == LAC_AUTO_NO_PALETTE || auto_convert == LAC_AUTO_NO_NIBBLES_NO_PALETTE;
 
   if(auto_convert == LAC_ALPHA)
   {
@@ -3593,13 +3802,13 @@ static unsigned doAutoChooseColor(LodePNGColorMode* mode_out,
     profile.numcolors_done = 1;
     profile.sixteenbit_done = 1;
   }
-  error = get_color_profile(&profile, image, w * h, mode_in);
-
+  error = get_color_profile(&profile, image, w * h, mode_in, 0 /*fix_png*/);
   if(!error && auto_convert == LAC_ALPHA)
   {
     if(!profile.alpha)
     {
       mode_out->colortype = (mode_out->colortype == LCT_RGBA ? LCT_RGB : LCT_GREY);
+      if(profile.key) setColorKeyFrom16bit(mode_out, profile.key_r, profile.key_g, profile.key_b, mode_out->bitdepth);
     }
   }
   else if(!error && auto_convert != LAC_ALPHA)
@@ -3616,43 +3825,32 @@ static unsigned doAutoChooseColor(LodePNGColorMode* mode_out,
       else
       {
         mode_out->colortype = profile.colored ? LCT_RGB : LCT_GREY;
-        if(profile.key)
-        {
-          mode_out->key_defined = 1;
-          mode_out->key_r = profile.key_r;
-          mode_out->key_g = profile.key_g;
-          mode_out->key_b = profile.key_b;
-        }
+        if(profile.key) setColorKeyFrom16bit(mode_out, profile.key_r, profile.key_g, profile.key_b, mode_out->bitdepth);
       }
     }
     else /*less than 16 bits per channel*/
     {
       /*don't add palette overhead if image hasn't got a lot of pixels*/
       unsigned n = profile.numcolors;
-      int palette_ok = n <= 256 && (n * 2 < w * h);
+      int palette_ok = !no_palette && n <= 256 && (n * 2 < w * h);
       unsigned palettebits = n <= 2 ? 1 : (n <= 4 ? 2 : (n <= 16 ? 4 : 8));
       int grey_ok = !profile.colored && !profile.alpha; /*grey without alpha, with potentially low bits*/
       if(palette_ok || grey_ok)
       {
         if(!palette_ok || (grey_ok && profile.greybits <= palettebits))
         {
+          unsigned grey = profile.key_r;
           mode_out->colortype = LCT_GREY;
           mode_out->bitdepth = profile.greybits;
-          if(profile.key)
-          {
-            unsigned keyval = profile.key_r;
-            keyval &= (profile.greybits - 1); /*same subgroup of bits repeated, so taking right bits is fine*/
-            mode_out->key_defined = 1;
-            mode_out->key_r = keyval;
-            mode_out->key_g = keyval;
-            mode_out->key_b = keyval;
-          }
+          if(profile.key) setColorKeyFrom16bit(mode_out, grey, grey, grey, mode_out->bitdepth);
         }
         else
         {
           /*fill in the palette*/
           unsigned i;
           unsigned char* p = profile.palette;
+          /*remove potential earlier palette*/
+          lodepng_palette_clear(mode_out);
           for(i = 0; i < profile.numcolors; i++)
           {
             error = lodepng_palette_add(mode_out, p[i * 4 + 0], p[i * 4 + 1], p[i * 4 + 2], p[i * 4 + 3]);
@@ -3673,13 +3871,7 @@ static unsigned doAutoChooseColor(LodePNGColorMode* mode_out,
         else
         {
           mode_out->colortype = profile.colored ? LCT_RGB : LCT_GREY /*LCT_GREY normally won't occur, already done earlier*/;
-          if(profile.key)
-          {
-            mode_out->key_defined = 1;
-            mode_out->key_r = profile.key_r % 256;
-            mode_out->key_g = profile.key_g % 256;
-            mode_out->key_b = profile.key_b % 256;
-          }
+          if(profile.key) setColorKeyFrom16bit(mode_out, profile.key_r, profile.key_g, profile.key_b, mode_out->bitdepth);
         }
       }
     }
@@ -3687,8 +3879,8 @@ static unsigned doAutoChooseColor(LodePNGColorMode* mode_out,
 
   color_profile_cleanup(&profile);
 
-  if(mode_in->colortype == LCT_PALETTE && mode_out->colortype == LCT_PALETTE
-     && mode_in->palettesize == mode_out->palettesize) {
+  if(mode_out->colortype == LCT_PALETTE && mode_in->palettesize == mode_out->palettesize)
+  {
     /*In this case keep the palette order of the input, so that the user can choose an optimal one*/
     size_t i;
     for(i = 0; i < mode_in->palettesize * 4; i++)
@@ -3697,7 +3889,7 @@ static unsigned doAutoChooseColor(LodePNGColorMode* mode_out,
     }
   }
 
-  if(auto_convert == LAC_AUTO_NO_NIBBLES && mode_out->bitdepth < 8)
+  if(no_nibbles && mode_out->bitdepth < 8)
   {
     /*palette can keep its small amount of colors, as long as no indices use it*/
     mode_out->bitdepth = 8;
@@ -3719,14 +3911,9 @@ static unsigned char paethPredictor(short a, short b, short c)
   short pb = abs(a - c);
   short pc = abs(a + b - c - c);
 
-  /*short pc = a + b - c;
-  short pa = abs(pc - a);
-  short pb = abs(pc - b);
-  pc = abs(pc - c);*/
-
-  if(pa <= pb && pa <= pc) return (unsigned char)a;
-  else if(pb <= pc) return (unsigned char)b;
-  else return (unsigned char)c;
+  if(pc < pa && pc < pb) return (unsigned char)c;
+  else if(pb < pa) return (unsigned char)b;
+  else return (unsigned char)a;
 }
 
 /*shared values used by multiple Adam7 related functions*/
@@ -3736,6 +3923,21 @@ static const unsigned ADAM7_IY[7] = { 0, 0, 4, 0, 2, 0, 1 }; /*y start values*/
 static const unsigned ADAM7_DX[7] = { 8, 8, 4, 4, 2, 2, 1 }; /*x delta values*/
 static const unsigned ADAM7_DY[7] = { 8, 8, 8, 4, 4, 2, 2 }; /*y delta values*/
 
+/*
+Outputs various dimensions and positions in the image related to the Adam7 reduced images.
+passw: output containing the width of the 7 passes
+passh: output containing the height of the 7 passes
+filter_passstart: output containing the index of the start and end of each
+ reduced image with filter bytes
+padded_passstart output containing the index of the start and end of each
+ reduced image when without filter bytes but with padded scanlines
+passstart: output containing the index of the start and end of each reduced
+ image without padding between scanlines, but still padding between the images
+w, h: width and height of non-interlaced image
+bpp: bits per pixel
+"padded" is only relevant if bpp is less than 8 and a scanline or image does not
+ end at a full byte
+*/
 static void Adam7_getpassvalues(unsigned passw[7], unsigned passh[7], size_t filter_passstart[8],
                                 size_t padded_passstart[8], size_t passstart[8], unsigned w, unsigned h, unsigned bpp)
 {
@@ -3847,8 +4049,8 @@ static unsigned unfilterScanline(unsigned char* recon, const unsigned char* scan
       for(i = 0; i < length; i++) recon[i] = scanline[i];
       break;
     case 1:
-      for(i =         0; i < bytewidth; i++) recon[i] = scanline[i];
-      for(i = bytewidth; i <    length; i++) recon[i] = scanline[i] + recon[i - bytewidth];
+      for(i = 0; i < bytewidth; i++) recon[i] = scanline[i];
+      for(i = bytewidth; i < length; i++) recon[i] = scanline[i] + recon[i - bytewidth];
       break;
     case 2:
       if(precon)
@@ -3863,13 +4065,13 @@ static unsigned unfilterScanline(unsigned char* recon, const unsigned char* scan
     case 3:
       if(precon)
       {
-        for(i =         0; i < bytewidth; i++) recon[i] = scanline[i] + precon[i] / 2;
-        for(i = bytewidth; i <    length; i++) recon[i] = scanline[i] + ((recon[i - bytewidth] + precon[i]) / 2);
+        for(i = 0; i < bytewidth; i++) recon[i] = scanline[i] + precon[i] / 2;
+        for(i = bytewidth; i < length; i++) recon[i] = scanline[i] + ((recon[i - bytewidth] + precon[i]) / 2);
       }
       else
       {
-        for(i =         0; i < bytewidth; i++) recon[i] = scanline[i];
-        for(i = bytewidth; i <    length; i++) recon[i] = scanline[i] + recon[i - bytewidth] / 2;
+        for(i = 0; i < bytewidth; i++) recon[i] = scanline[i];
+        for(i = bytewidth; i < length; i++) recon[i] = scanline[i] + recon[i - bytewidth] / 2;
       }
       break;
     case 4:
@@ -3933,12 +4135,19 @@ static unsigned unfilter(unsigned char* out, const unsigned char* in, unsigned w
   return 0;
 }
 
+/*
+in: Adam7 interlaced image, with no padding bits between scanlines, but between
+ reduced images so that each reduced image starts at a byte.
+out: the same pixels, but re-ordered so that they're now a non-interlaced image with size w*h
+bpp: bits per pixel
+out has the following size in bits: w * h * bpp.
+in is possibly bigger due to padding bits between reduced images.
+out must be big enough AND must be 0 everywhere if bpp < 8 in the current implementation
+(because that's likely a little bit faster)
+NOTE: comments about padding bits are only relevant if bpp < 8
+*/
 static void Adam7_deinterlace(unsigned char* out, const unsigned char* in, unsigned w, unsigned h, unsigned bpp)
 {
-  /*Note: this function works on image buffers WITHOUT padding bits at end of scanlines
-  with non-multiple-of-8 bit amounts, only between reduced images is padding
-  out must be big enough AND must be 0 everywhere if bpp < 8 in the current implementation
-  (because that's likely a little bit faster)*/
   unsigned passw[7], passh[7];
   size_t filter_passstart[8], padded_passstart[8], passstart[8];
   unsigned i;
@@ -4050,6 +4259,8 @@ static unsigned postProcessScanlines(unsigned char* out, unsigned char* in,
     for(i = 0; i < 7; i++)
     {
       CERROR_TRY_RETURN(unfilter(&in[padded_passstart[i]], &in[filter_passstart[i]], passw[i], passh[i], bpp));
+      /*TODO: possible efficiency improvement: if in this reduced image the bits fit nicely in 1 scanline,
+      move bytes instead of bits or move not at all*/
       if(bpp < 8)
       {
         /*remove padding bits in scanlines; after this there still may be padding
@@ -4065,6 +4276,312 @@ static unsigned postProcessScanlines(unsigned char* out, unsigned char* in,
   return 0;
 }
 
+static unsigned readChunk_PLTE(LodePNGColorMode* color, const unsigned char* data, size_t chunkLength)
+{
+  unsigned pos = 0, i;
+  if(color->palette) lodepng_free(color->palette);
+  color->palettesize = chunkLength / 3;
+  color->palette = (unsigned char*)lodepng_malloc(4 * color->palettesize);
+  if(!color->palette && color->palettesize)
+  {
+    color->palettesize = 0;
+    return 83; /*alloc fail*/
+  }
+  if(color->palettesize > 256) return 38; /*error: palette too big*/
+
+  for(i = 0; i < color->palettesize; i++)
+  {
+    color->palette[4 * i + 0] = data[pos++]; /*R*/
+    color->palette[4 * i + 1] = data[pos++]; /*G*/
+    color->palette[4 * i + 2] = data[pos++]; /*B*/
+    color->palette[4 * i + 3] = 255; /*alpha*/
+  }
+
+  return 0; /* OK */
+}
+
+static unsigned readChunk_tRNS(LodePNGColorMode* color, const unsigned char* data, size_t chunkLength)
+{
+  unsigned i;
+  if(color->colortype == LCT_PALETTE)
+  {
+    /*error: more alpha values given than there are palette entries*/
+    if(chunkLength > color->palettesize) return 38;
+
+    for(i = 0; i < chunkLength; i++) color->palette[4 * i + 3] = data[i];
+  }
+  else if(color->colortype == LCT_GREY)
+  {
+    /*error: this chunk must be 2 bytes for greyscale image*/
+    if(chunkLength != 2) return 30;
+
+    color->key_defined = 1;
+    color->key_r = color->key_g = color->key_b = 256u * data[0] + data[1];
+  }
+  else if(color->colortype == LCT_RGB)
+  {
+    /*error: this chunk must be 6 bytes for RGB image*/
+    if(chunkLength != 6) return 41;
+
+    color->key_defined = 1;
+    color->key_r = 256u * data[0] + data[1];
+    color->key_g = 256u * data[2] + data[3];
+    color->key_b = 256u * data[4] + data[5];
+  }
+  else return 42; /*error: tRNS chunk not allowed for other color models*/
+
+  return 0; /* OK */
+}
+
+
+#ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
+/*background color chunk (bKGD)*/
+static unsigned readChunk_bKGD(LodePNGInfo* info, const unsigned char* data, size_t chunkLength)
+{
+  if(info->color.colortype == LCT_PALETTE)
+  {
+    /*error: this chunk must be 1 byte for indexed color image*/
+    if(chunkLength != 1) return 43;
+
+    info->background_defined = 1;
+    info->background_r = info->background_g = info->background_b = data[0];
+  }
+  else if(info->color.colortype == LCT_GREY || info->color.colortype == LCT_GREY_ALPHA)
+  {
+    /*error: this chunk must be 2 bytes for greyscale image*/
+    if(chunkLength != 2) return 44;
+
+    info->background_defined = 1;
+    info->background_r = info->background_g = info->background_b = 256u * data[0] + data[1];
+  }
+  else if(info->color.colortype == LCT_RGB || info->color.colortype == LCT_RGBA)
+  {
+    /*error: this chunk must be 6 bytes for greyscale image*/
+    if(chunkLength != 6) return 45;
+
+    info->background_defined = 1;
+    info->background_r = 256u * data[0] + data[1];
+    info->background_g = 256u * data[2] + data[3];
+    info->background_b = 256u * data[4] + data[5];
+  }
+
+  return 0; /* OK */
+}
+
+/*text chunk (tEXt)*/
+static unsigned readChunk_tEXt(LodePNGInfo* info, const unsigned char* data, size_t chunkLength)
+{
+  unsigned error = 0;
+  char *key = 0, *str = 0;
+  unsigned i;
+
+  while(!error) /*not really a while loop, only used to break on error*/
+  {
+    unsigned length, string2_begin;
+
+    length = 0;
+    while(length < chunkLength && data[length] != 0) length++;
+    /*even though it's not allowed by the standard, no error is thrown if
+    there's no null termination char, if the text is empty*/
+    if(length < 1 || length > 79) CERROR_BREAK(error, 89); /*keyword too short or long*/
+
+    key = (char*)lodepng_malloc(length + 1);
+    if(!key) CERROR_BREAK(error, 83); /*alloc fail*/
+
+    key[length] = 0;
+    for(i = 0; i < length; i++) key[i] = (char)data[i];
+
+    string2_begin = length + 1; /*skip keyword null terminator*/
+
+    length = chunkLength < string2_begin ? 0 : chunkLength - string2_begin;
+    str = (char*)lodepng_malloc(length + 1);
+    if(!str) CERROR_BREAK(error, 83); /*alloc fail*/
+
+    str[length] = 0;
+    for(i = 0; i < length; i++) str[i] = (char)data[string2_begin + i];
+
+    error = lodepng_add_text(info, key, str);
+
+    break;
+  }
+
+  lodepng_free(key);
+  lodepng_free(str);
+
+  return error;
+}
+
+/*compressed text chunk (zTXt)*/
+static unsigned readChunk_zTXt(LodePNGInfo* info, const LodePNGDecompressSettings* zlibsettings,
+                               const unsigned char* data, size_t chunkLength)
+{
+  unsigned error = 0;
+  unsigned i;
+
+  unsigned length, string2_begin;
+  char *key = 0;
+  ucvector decoded;
+
+  ucvector_init(&decoded);
+
+  while(!error) /*not really a while loop, only used to break on error*/
+  {
+    for(length = 0; length < chunkLength && data[length] != 0; length++) ;
+    if(length + 2 >= chunkLength) CERROR_BREAK(error, 75); /*no null termination, corrupt?*/
+    if(length < 1 || length > 79) CERROR_BREAK(error, 89); /*keyword too short or long*/
+
+    key = (char*)lodepng_malloc(length + 1);
+    if(!key) CERROR_BREAK(error, 83); /*alloc fail*/
+
+    key[length] = 0;
+    for(i = 0; i < length; i++) key[i] = (char)data[i];
+
+    if(data[length + 1] != 0) CERROR_BREAK(error, 72); /*the 0 byte indicating compression must be 0*/
+
+    string2_begin = length + 2;
+    if(string2_begin > chunkLength) CERROR_BREAK(error, 75); /*no null termination, corrupt?*/
+
+    length = chunkLength - string2_begin;
+    /*will fail if zlib error, e.g. if length is too small*/
+    error = zlib_decompress(&decoded.data, &decoded.size,
+                            (unsigned char*)(&data[string2_begin]),
+                            length, zlibsettings);
+    if(error) break;
+    ucvector_push_back(&decoded, 0);
+
+    error = lodepng_add_text(info, key, (char*)decoded.data);
+
+    break;
+  }
+
+  lodepng_free(key);
+  ucvector_cleanup(&decoded);
+
+  return error;
+}
+
+/*international text chunk (iTXt)*/
+static unsigned readChunk_iTXt(LodePNGInfo* info, const LodePNGDecompressSettings* zlibsettings,
+                               const unsigned char* data, size_t chunkLength)
+{
+  unsigned error = 0;
+  unsigned i;
+
+  unsigned length, begin, compressed;
+  char *key = 0, *langtag = 0, *transkey = 0;
+  ucvector decoded;
+  ucvector_init(&decoded);
+
+  while(!error) /*not really a while loop, only used to break on error*/
+  {
+    /*Quick check if the chunk length isn't too small. Even without check
+    it'd still fail with other error checks below if it's too short. This just gives a different error code.*/
+    if(chunkLength < 5) CERROR_BREAK(error, 30); /*iTXt chunk too short*/
+
+    /*read the key*/
+    for(length = 0; length < chunkLength && data[length] != 0; length++) ;
+    if(length + 3 >= chunkLength) CERROR_BREAK(error, 75); /*no null termination char, corrupt?*/
+    if(length < 1 || length > 79) CERROR_BREAK(error, 89); /*keyword too short or long*/
+
+    key = (char*)lodepng_malloc(length + 1);
+    if(!key) CERROR_BREAK(error, 83); /*alloc fail*/
+
+    key[length] = 0;
+    for(i = 0; i < length; i++) key[i] = (char)data[i];
+
+    /*read the compression method*/
+    compressed = data[length + 1];
+    if(data[length + 2] != 0) CERROR_BREAK(error, 72); /*the 0 byte indicating compression must be 0*/
+
+    /*even though it's not allowed by the standard, no error is thrown if
+    there's no null termination char, if the text is empty for the next 3 texts*/
+
+    /*read the langtag*/
+    begin = length + 3;
+    length = 0;
+    for(i = begin; i < chunkLength && data[i] != 0; i++) length++;
+
+    langtag = (char*)lodepng_malloc(length + 1);
+    if(!langtag) CERROR_BREAK(error, 83); /*alloc fail*/
+
+    langtag[length] = 0;
+    for(i = 0; i < length; i++) langtag[i] = (char)data[begin + i];
+
+    /*read the transkey*/
+    begin += length + 1;
+    length = 0;
+    for(i = begin; i < chunkLength && data[i] != 0; i++) length++;
+
+    transkey = (char*)lodepng_malloc(length + 1);
+    if(!transkey) CERROR_BREAK(error, 83); /*alloc fail*/
+
+    transkey[length] = 0;
+    for(i = 0; i < length; i++) transkey[i] = (char)data[begin + i];
+
+    /*read the actual text*/
+    begin += length + 1;
+
+    length = chunkLength < begin ? 0 : chunkLength - begin;
+
+    if(compressed)
+    {
+      /*will fail if zlib error, e.g. if length is too small*/
+      error = zlib_decompress(&decoded.data, &decoded.size,
+                              (unsigned char*)(&data[begin]),
+                              length, zlibsettings);
+      if(error) break;
+      if(decoded.allocsize < decoded.size) decoded.allocsize = decoded.size;
+      ucvector_push_back(&decoded, 0);
+    }
+    else
+    {
+      if(!ucvector_resize(&decoded, length + 1)) CERROR_BREAK(error, 83 /*alloc fail*/);
+
+      decoded.data[length] = 0;
+      for(i = 0; i < length; i++) decoded.data[i] = data[begin + i];
+    }
+
+    error = lodepng_add_itext(info, key, langtag, transkey, (char*)decoded.data);
+
+    break;
+  }
+
+  lodepng_free(key);
+  lodepng_free(langtag);
+  lodepng_free(transkey);
+  ucvector_cleanup(&decoded);
+
+  return error;
+}
+
+static unsigned readChunk_tIME(LodePNGInfo* info, const unsigned char* data, size_t chunkLength)
+{
+  if(chunkLength != 7) return 73; /*invalid tIME chunk size*/
+
+  info->time_defined = 1;
+  info->time.year = 256u * data[0] + data[1];
+  info->time.month = data[2];
+  info->time.day = data[3];
+  info->time.hour = data[4];
+  info->time.minute = data[5];
+  info->time.second = data[6];
+
+  return 0; /* OK */
+}
+
+static unsigned readChunk_pHYs(LodePNGInfo* info, const unsigned char* data, size_t chunkLength)
+{
+  if(chunkLength != 9) return 74; /*invalid pHYs chunk size*/
+
+  info->phys_defined = 1;
+  info->phys_x = 16777216u * data[0] + 65536u * data[1] + 256u * data[2] + data[3];
+  info->phys_y = 16777216u * data[4] + 65536u * data[5] + 256u * data[6] + data[7];
+  info->phys_unit = data[8];
+
+  return 0; /* OK */
+}
+#endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
+
 /*read a PNG, the result will be in the same color type as the PNG (hence "generic")*/
 static void decodeGeneric(unsigned char** out, unsigned* w, unsigned* h,
                           LodePNGState* state,
@@ -4074,6 +4591,7 @@ static void decodeGeneric(unsigned char** out, unsigned* w, unsigned* h,
   const unsigned char* chunk;
   size_t i;
   ucvector idat; /*the data from idat chunks*/
+  ucvector scanlines;
 
   /*for unknown chunk order*/
   unsigned unknown = 0;
@@ -4130,24 +4648,8 @@ static void decodeGeneric(unsigned char** out, unsigned* w, unsigned* h,
     /*palette chunk (PLTE)*/
     else if(lodepng_chunk_type_equals(chunk, "PLTE"))
     {
-      unsigned pos = 0;
-      if(state->info_png.color.palette) myfree(state->info_png.color.palette);
-      state->info_png.color.palettesize = chunkLength / 3;
-      state->info_png.color.palette = (unsigned char*)mymalloc(4 * state->info_png.color.palettesize);
-      if(!state->info_png.color.palette && state->info_png.color.palettesize)
-      {
-        state->info_png.color.palettesize = 0;
-        CERROR_BREAK(state->error, 83); /*alloc fail*/
-      }
-      if(state->info_png.color.palettesize > 256) CERROR_BREAK(state->error, 38); /*error: palette too big*/
-
-      for(i = 0; i < state->info_png.color.palettesize; i++)
-      {
-        state->info_png.color.palette[4 * i + 0] = data[pos++]; /*R*/
-        state->info_png.color.palette[4 * i + 1] = data[pos++]; /*G*/
-        state->info_png.color.palette[4 * i + 2] = data[pos++]; /*B*/
-        state->info_png.color.palette[4 * i + 3] = 255; /*alpha*/
-      }
+      state->error = readChunk_PLTE(&state->info_png.color, data, chunkLength);
+      if(state->error) break;
 #ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
       critical_pos = 2;
 #endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
@@ -4155,106 +4657,23 @@ static void decodeGeneric(unsigned char** out, unsigned* w, unsigned* h,
     /*palette transparency chunk (tRNS)*/
     else if(lodepng_chunk_type_equals(chunk, "tRNS"))
     {
-      if(state->info_png.color.colortype == LCT_PALETTE)
-      {
-        /*error: more alpha values given than there are palette entries*/
-        if(chunkLength > state->info_png.color.palettesize) CERROR_BREAK(state->error, 38);
-
-        for(i = 0; i < chunkLength; i++) state->info_png.color.palette[4 * i + 3] = data[i];
-      }
-      else if(state->info_png.color.colortype == LCT_GREY)
-      {
-        /*error: this chunk must be 2 bytes for greyscale image*/
-        if(chunkLength != 2) CERROR_BREAK(state->error, 30);
-
-        state->info_png.color.key_defined = 1;
-        state->info_png.color.key_r = state->info_png.color.key_g
-                                     = state->info_png.color.key_b = 256 * data[0] + data[1];
-      }
-      else if(state->info_png.color.colortype == LCT_RGB)
-      {
-        /*error: this chunk must be 6 bytes for RGB image*/
-        if(chunkLength != 6) CERROR_BREAK(state->error, 41);
-
-        state->info_png.color.key_defined = 1;
-        state->info_png.color.key_r = 256 * data[0] + data[1];
-        state->info_png.color.key_g = 256 * data[2] + data[3];
-        state->info_png.color.key_b = 256 * data[4] + data[5];
-      }
-      else CERROR_BREAK(state->error, 42); /*error: tRNS chunk not allowed for other color models*/
+      state->error = readChunk_tRNS(&state->info_png.color, data, chunkLength);
+      if(state->error) break;
     }
 #ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
     /*background color chunk (bKGD)*/
     else if(lodepng_chunk_type_equals(chunk, "bKGD"))
     {
-      if(state->info_png.color.colortype == LCT_PALETTE)
-      {
-        /*error: this chunk must be 1 byte for indexed color image*/
-        if(chunkLength != 1) CERROR_BREAK(state->error, 43);
-
-        state->info_png.background_defined = 1;
-        state->info_png.background_r = state->info_png.background_g = state->info_png.background_b = data[0];
-      }
-      else if(state->info_png.color.colortype == LCT_GREY || state->info_png.color.colortype == LCT_GREY_ALPHA)
-      {
-        /*error: this chunk must be 2 bytes for greyscale image*/
-        if(chunkLength != 2) CERROR_BREAK(state->error, 44);
-
-        state->info_png.background_defined = 1;
-        state->info_png.background_r = state->info_png.background_g = state->info_png.background_b
-                                     = 256 * data[0] + data[1];
-      }
-      else if(state->info_png.color.colortype == LCT_RGB || state->info_png.color.colortype == LCT_RGBA)
-      {
-        /*error: this chunk must be 6 bytes for greyscale image*/
-        if(chunkLength != 6) CERROR_BREAK(state->error, 45);
-
-        state->info_png.background_defined = 1;
-        state->info_png.background_r = 256 * data[0] + data[1];
-        state->info_png.background_g = 256 * data[2] + data[3];
-        state->info_png.background_b = 256 * data[4] + data[5];
-      }
+      state->error = readChunk_bKGD(&state->info_png, data, chunkLength);
+      if(state->error) break;
     }
     /*text chunk (tEXt)*/
     else if(lodepng_chunk_type_equals(chunk, "tEXt"))
     {
       if(state->decoder.read_text_chunks)
       {
-        char *key = 0, *str = 0;
-
-        while(!state->error) /*not really a while loop, only used to break on error*/
-        {
-          unsigned length, string2_begin;
-
-          length = 0;
-          while(length < chunkLength && data[length] != 0) length++;
-          /*error, end reached, no null terminator?*/
-          if(length + 1 >= chunkLength) CERROR_BREAK(state->error, 75);
-
-          key = (char*)mymalloc(length + 1);
-          if(!key) CERROR_BREAK(state->error, 83); /*alloc fail*/
-
-          key[length] = 0;
-          for(i = 0; i < length; i++) key[i] = data[i];
-
-          string2_begin = length + 1;
-          /*error, end reached, no null terminator?*/
-          if(string2_begin > chunkLength) CERROR_BREAK(state->error, 75);
-
-          length = chunkLength - string2_begin;
-          str = (char*)mymalloc(length + 1);
-          if(!str) CERROR_BREAK(state->error, 83); /*alloc fail*/
-
-          str[length] = 0;
-          for(i = 0; i < length; i++) str[i] = data[string2_begin + i];
-
-          state->error = lodepng_add_text(&state->info_png, key, str);
-
-          break;
-        }
-
-        myfree(key);
-        myfree(str);
+        state->error = readChunk_tEXt(&state->info_png, data, chunkLength);
+        if(state->error) break;
       }
     }
     /*compressed text chunk (zTXt)*/
@@ -4262,42 +4681,7 @@ static void decodeGeneric(unsigned char** out, unsigned* w, unsigned* h,
     {
       if(state->decoder.read_text_chunks)
       {
-        unsigned length, string2_begin;
-        char *key = 0;
-        ucvector decoded;
-
-        ucvector_init(&decoded);
-
-        while(!state->error) /*not really a while loop, only used to break on error*/
-        {
-          for(length = 0; length < chunkLength && data[length] != 0; length++) ;
-          if(length + 2 >= chunkLength) CERROR_BREAK(state->error, 75); /*no null termination, corrupt?*/
-
-          key = (char*)mymalloc(length + 1);
-          if(!key) CERROR_BREAK(state->error, 83); /*alloc fail*/
-
-          key[length] = 0;
-          for(i = 0; i < length; i++) key[i] = data[i];
-
-          if(data[length + 1] != 0) CERROR_BREAK(state->error, 72); /*the 0 byte indicating compression must be 0*/
-
-          string2_begin = length + 2;
-          if(string2_begin > chunkLength) CERROR_BREAK(state->error, 75); /*no null termination, corrupt?*/
-
-          length = chunkLength - string2_begin;
-          state->error = lodepng_zlib_decompress(&decoded.data, &decoded.size,
-                                                   (unsigned char*)(&data[string2_begin]),
-                                                   length, &state->decoder.zlibsettings);
-          if(state->error) break;
-          ucvector_push_back(&decoded, 0);
-
-          state->error = lodepng_add_text(&state->info_png, key, (char*)decoded.data);
-
-          break;
-        }
-
-        myfree(key);
-        ucvector_cleanup(&decoded);
+        state->error = readChunk_zTXt(&state->info_png, &state->decoder.zlibsettings, data, chunkLength);
         if(state->error) break;
       }
     }
@@ -4306,110 +4690,19 @@ static void decodeGeneric(unsigned char** out, unsigned* w, unsigned* h,
     {
       if(state->decoder.read_text_chunks)
       {
-        unsigned length, begin, compressed;
-        char *key = 0, *langtag = 0, *transkey = 0;
-        ucvector decoded;
-        ucvector_init(&decoded);
-
-        while(!state->error) /*not really a while loop, only used to break on error*/
-        {
-          /*Quick check if the chunk length isn't too small. Even without check
-          it'd still fail with other error checks below if it's too short. This just gives a different error code.*/
-          if(chunkLength < 5) CERROR_BREAK(state->error, 30); /*iTXt chunk too short*/
-
-          /*read the key*/
-          for(length = 0; length < chunkLength && data[length] != 0; length++) ;
-          if(length + 2 >= chunkLength) CERROR_BREAK(state->error, 75); /*no null termination char found*/
-
-          key = (char*)mymalloc(length + 1);
-          if(!key) CERROR_BREAK(state->error, 83); /*alloc fail*/
-
-          key[length] = 0;
-          for(i = 0; i < length; i++) key[i] = data[i];
-
-          /*read the compression method*/
-          compressed = data[length + 1];
-          if(data[length + 2] != 0) CERROR_BREAK(state->error, 72); /*the 0 byte indicating compression must be 0*/
-
-          /*read the langtag*/
-          begin = length + 3;
-          length = 0;
-          for(i = begin; i < chunkLength && data[i] != 0; i++) length++;
-          if(begin + length + 1 >= chunkLength) CERROR_BREAK(state->error, 75); /*no null termination char found*/
-
-          langtag = (char*)mymalloc(length + 1);
-          if(!langtag) CERROR_BREAK(state->error, 83); /*alloc fail*/
-
-          langtag[length] = 0;
-          for(i = 0; i < length; i++) langtag[i] = data[begin + i];
-
-          /*read the transkey*/
-          begin += length + 1;
-          length = 0;
-          for(i = begin; i < chunkLength && data[i] != 0; i++) length++;
-          if(begin + length + 1 >= chunkLength) CERROR_BREAK(state->error, 75); /*no null termination, corrupt?*/
-
-          transkey = (char*)mymalloc(length + 1);
-          if(!transkey) CERROR_BREAK(state->error, 83); /*alloc fail*/
-
-          transkey[length] = 0;
-          for(i = 0; i < length; i++) transkey[i] = data[begin + i];
-
-          /*read the actual text*/
-          begin += length + 1;
-          if(begin > chunkLength) CERROR_BREAK(state->error, 75); /*no null termination, corrupt?*/
-
-          length = chunkLength - begin;
-
-          if(compressed)
-          {
-            state->error = lodepng_zlib_decompress(&decoded.data, &decoded.size,
-                                                   (unsigned char*)(&data[begin]),
-                                                   length, &state->decoder.zlibsettings);
-            if(state->error) break;
-            if(decoded.allocsize < decoded.size) decoded.allocsize = decoded.size;
-            ucvector_push_back(&decoded, 0);
-          }
-          else
-          {
-            if(!ucvector_resize(&decoded, length + 1)) CERROR_BREAK(state->error, 83 /*alloc fail*/);
-
-            decoded.data[length] = 0;
-            for(i = 0; i < length; i++) decoded.data[i] = data[begin + i];
-          }
-
-          state->error = lodepng_add_itext(&state->info_png, key, langtag, transkey, (char*)decoded.data);
-
-          break;
-        }
-
-        myfree(key);
-        myfree(langtag);
-        myfree(transkey);
-        ucvector_cleanup(&decoded);
+        state->error = readChunk_iTXt(&state->info_png, &state->decoder.zlibsettings, data, chunkLength);
         if(state->error) break;
       }
     }
     else if(lodepng_chunk_type_equals(chunk, "tIME"))
     {
-      if(chunkLength != 7) CERROR_BREAK(state->error, 73); /*invalid tIME chunk size*/
-
-      state->info_png.time_defined = 1;
-      state->info_png.time.year = 256 * data[0] + data[+ 1];
-      state->info_png.time.month = data[2];
-      state->info_png.time.day = data[3];
-      state->info_png.time.hour = data[4];
-      state->info_png.time.minute = data[5];
-      state->info_png.time.second = data[6];
+      state->error = readChunk_tIME(&state->info_png, data, chunkLength);
+      if(state->error) break;
     }
     else if(lodepng_chunk_type_equals(chunk, "pHYs"))
     {
-      if(chunkLength != 9) CERROR_BREAK(state->error, 74); /*invalid pHYs chunk size*/
-
-      state->info_png.phys_defined = 1;
-      state->info_png.phys_x = 16777216 * data[0] + 65536 * data[1] + 256 * data[2] + data[3];
-      state->info_png.phys_y = 16777216 * data[4] + 65536 * data[5] + 256 * data[6] + data[7];
-      state->info_png.phys_unit = data[8];
+      state->error = readChunk_pHYs(&state->info_png, data, chunkLength);
+      if(state->error) break;
     }
 #endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
     else /*it's not an implemented chunk type, so ignore it: skip over the data*/
@@ -4436,36 +4729,33 @@ static void decodeGeneric(unsigned char** out, unsigned* w, unsigned* h,
     if(!IEND) chunk = lodepng_chunk_next_const(chunk);
   }
 
+  ucvector_init(&scanlines);
   if(!state->error)
   {
-    ucvector scanlines;
-    ucvector_init(&scanlines);
-
     /*maximum final image length is already reserved in the vector's length - this is not really necessary*/
     if(!ucvector_resize(&scanlines, lodepng_get_raw_size(*w, *h, &state->info_png.color) + *h))
     {
       state->error = 83; /*alloc fail*/
     }
-    if(!state->error)
-    {
-      /*decompress with the Zlib decompressor*/
-      state->error = lodepng_zlib_decompress(&scanlines.data, &scanlines.size, idat.data,
-                                             idat.size, &state->decoder.zlibsettings);
-    }
-
-    if(!state->error)
-    {
-      ucvector outv;
-      ucvector_init(&outv);
-      if(!ucvector_resizev(&outv,
-          lodepng_get_raw_size(*w, *h, &state->info_png.color), 0)) state->error = 83; /*alloc fail*/
-      if(!state->error) state->error = postProcessScanlines(outv.data, scanlines.data, *w, *h, &state->info_png);
-      *out = outv.data;
-    }
-    ucvector_cleanup(&scanlines);
   }
-
+  if(!state->error)
+  {
+    /*decompress with the Zlib decompressor*/
+    state->error = zlib_decompress(&scanlines.data, &scanlines.size, idat.data,
+                                   idat.size, &state->decoder.zlibsettings);
+  }
   ucvector_cleanup(&idat);
+
+  if(!state->error)
+  {
+    ucvector outv;
+    ucvector_init(&outv);
+    if(!ucvector_resizev(&outv,
+        lodepng_get_raw_size(*w, *h, &state->info_png.color), 0)) state->error = 83; /*alloc fail*/
+    if(!state->error) state->error = postProcessScanlines(outv.data, scanlines.data, *w, *h, &state->info_png);
+    *out = outv.data;
+  }
+  ucvector_cleanup(&scanlines);
 }
 
 unsigned lodepng_decode(unsigned char** out, unsigned* w, unsigned* h,
@@ -4492,6 +4782,8 @@ unsigned lodepng_decode(unsigned char** out, unsigned* w, unsigned* h,
     unsigned char* data = *out;
     size_t outsize;
 
+    /*TODO: check if this works according to the statement in the documentation: "The converter can convert
+    from greyscale input color type, to 8-bit greyscale or greyscale with alpha"*/
     if(!(state->info_raw.colortype == LCT_RGB || state->info_raw.colortype == LCT_RGBA)
        && !(state->info_raw.bitdepth == 8))
     {
@@ -4499,13 +4791,13 @@ unsigned lodepng_decode(unsigned char** out, unsigned* w, unsigned* h,
     }
 
     outsize = lodepng_get_raw_size(*w, *h, &state->info_raw);
-    *out = (unsigned char*)mymalloc(outsize);
+    *out = (unsigned char*)lodepng_malloc(outsize);
     if(!(*out))
     {
       state->error = 83; /*alloc fail*/
     }
-    else state->error = lodepng_convert(*out, data, &state->info_raw, &state->info_png.color, *w, *h);
-    myfree(data);
+    else state->error = lodepng_convert(*out, data, &state->info_raw, &state->info_png.color, *w, *h, state->decoder.fix_png);
+    lodepng_free(data);
   }
   return state->error;
 }
@@ -4542,7 +4834,7 @@ unsigned lodepng_decode_file(unsigned char** out, unsigned* w, unsigned* h, cons
   unsigned error;
   error = lodepng_load_file(&buffer, &buffersize, filename);
   if(!error) error = lodepng_decode_memory(out, w, h, buffer, buffersize, colortype, bitdepth);
-  myfree(buffer);
+  lodepng_free(buffer);
   return error;
 }
 
@@ -4565,6 +4857,7 @@ void lodepng_decoder_settings_init(LodePNGDecoderSettings* settings)
   settings->remember_unknown_chunks = 0;
 #endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
   settings->ignore_crc = 0;
+  settings->fix_png = 0;
   lodepng_decompress_settings_init(&settings->zlibsettings);
 }
 
@@ -4676,8 +4969,15 @@ static unsigned addChunk_tRNS(ucvector* out, const LodePNGColorMode* info)
   ucvector_init(&tRNS);
   if(info->colortype == LCT_PALETTE)
   {
+    size_t amount = info->palettesize;
+    /*the tail of palette values that all have 255 as alpha, does not have to be encoded*/
+    for(i = info->palettesize; i > 0; i--)
+    {
+      if(info->palette[4 * (i - 1) + 3] == 255) amount--;
+      else break;
+    }
     /*add only alpha channel*/
-    for(i = 0; i < info->palettesize; i++) ucvector_push_back(&tRNS, info->palette[4 * i + 3]);
+    for(i = 0; i < amount; i++) ucvector_push_back(&tRNS, info->palette[4 * i + 3]);
   }
   else if(info->colortype == LCT_GREY)
   {
@@ -4714,7 +5014,7 @@ static unsigned addChunk_IDAT(ucvector* out, const unsigned char* data, size_t d
 
   /*compress with the Zlib compressor*/
   ucvector_init(&zlibdata);
-  error = lodepng_zlib_compress(&zlibdata.data, &zlibdata.size, data, datasize, zlibsettings);
+  error = zlib_compress(&zlibdata.data, &zlibdata.size, data, datasize, zlibsettings);
   if(!error) error = addChunk(out, "IDAT", zlibdata.data, zlibdata.size);
   ucvector_cleanup(&zlibdata);
 
@@ -4737,7 +5037,8 @@ static unsigned addChunk_tEXt(ucvector* out, const char* keyword, const char* te
   ucvector text;
   ucvector_init(&text);
   for(i = 0; keyword[i] != 0; i++) ucvector_push_back(&text, (unsigned char)keyword[i]);
-  ucvector_push_back(&text, 0);
+  if(i < 1 || i > 79) return 89; /*error: invalid keyword size*/
+  ucvector_push_back(&text, 0); /*0 termination char*/
   for(i = 0; textstring[i] != 0; i++) ucvector_push_back(&text, (unsigned char)textstring[i]);
   error = addChunk(out, "tEXt", text.data, text.size);
   ucvector_cleanup(&text);
@@ -4755,11 +5056,12 @@ static unsigned addChunk_zTXt(ucvector* out, const char* keyword, const char* te
   ucvector_init(&data);
   ucvector_init(&compressed);
   for(i = 0; keyword[i] != 0; i++) ucvector_push_back(&data, (unsigned char)keyword[i]);
+  if(i < 1 || i > 79) return 89; /*error: invalid keyword size*/
   ucvector_push_back(&data, 0); /*0 termination char*/
   ucvector_push_back(&data, 0); /*compression method: 0*/
 
-  error = lodepng_zlib_compress(&compressed.data, &compressed.size,
-                                (unsigned char*)textstring, textsize, zlibsettings);
+  error = zlib_compress(&compressed.data, &compressed.size,
+                        (unsigned char*)textstring, textsize, zlibsettings);
   if(!error)
   {
     for(i = 0; i < compressed.size; i++) ucvector_push_back(&data, compressed.data[i]);
@@ -4781,6 +5083,7 @@ static unsigned addChunk_iTXt(ucvector* out, unsigned compressed, const char* ke
   ucvector_init(&data);
 
   for(i = 0; keyword[i] != 0; i++) ucvector_push_back(&data, (unsigned char)keyword[i]);
+  if(i < 1 || i > 79) return 89; /*error: invalid keyword size*/
   ucvector_push_back(&data, 0); /*null termination char*/
   ucvector_push_back(&data, compressed ? 1 : 0); /*compression flag*/
   ucvector_push_back(&data, 0); /*compression method*/
@@ -4793,8 +5096,8 @@ static unsigned addChunk_iTXt(ucvector* out, unsigned compressed, const char* ke
   {
     ucvector compressed_data;
     ucvector_init(&compressed_data);
-    error = lodepng_zlib_compress(&compressed_data.data, &compressed_data.size,
-                                  (unsigned char*)textstring, textsize, zlibsettings);
+    error = zlib_compress(&compressed_data.data, &compressed_data.size,
+                          (unsigned char*)textstring, textsize, zlibsettings);
     if(!error)
     {
       for(i = 0; i < compressed_data.size; i++) ucvector_push_back(&data, compressed_data.data[i]);
@@ -4844,17 +5147,17 @@ static unsigned addChunk_bKGD(ucvector* out, const LodePNGInfo* info)
 static unsigned addChunk_tIME(ucvector* out, const LodePNGTime* time)
 {
   unsigned error = 0;
-  unsigned char* data = (unsigned char*)mymalloc(7);
+  unsigned char* data = (unsigned char*)lodepng_malloc(7);
   if(!data) return 83; /*alloc fail*/
   data[0] = (unsigned char)(time->year / 256);
   data[1] = (unsigned char)(time->year % 256);
-  data[2] = time->month;
-  data[3] = time->day;
-  data[4] = time->hour;
-  data[5] = time->minute;
-  data[6] = time->second;
+  data[2] = (unsigned char)time->month;
+  data[3] = (unsigned char)time->day;
+  data[4] = (unsigned char)time->hour;
+  data[5] = (unsigned char)time->minute;
+  data[6] = (unsigned char)time->second;
   error = addChunk(out, "tIME", data, 7);
-  myfree(data);
+  lodepng_free(data);
   return error;
 }
 
@@ -4940,6 +5243,15 @@ static void filterScanline(unsigned char* out, const unsigned char* scanline, co
   }
 }
 
+/* log2 approximation. A slight bit faster than std::log. */
+static float flog2(float f)
+{
+  float result = 0;
+  while(f > 32) { result += 4; f /= 16; }
+  while(f > 2) { result++; f /= 2; }
+  return result + 1.442695f * (f * f * f / 3 - 3 * f * f / 2 + 3 * f - 1.83333f);
+}
+
 static unsigned filter(unsigned char* out, const unsigned char* in, unsigned w, unsigned h,
                        const LodePNGColorMode* info, const LodePNGEncoderSettings* settings)
 {
@@ -4957,89 +5269,155 @@ static unsigned filter(unsigned char* out, const unsigned char* in, unsigned w, 
   const unsigned char* prevline = 0;
   unsigned x, y;
   unsigned error = 0;
+  LodePNGFilterStrategy strategy = settings->filter_strategy;
+
+  /*
+  There is a heuristic called the minimum sum of absolute differences heuristic, suggested by the PNG standard:
+   *  If the image type is Palette, or the bit depth is smaller than 8, then do not filter the image (i.e.
+      use fixed filtering, with the filter None).
+   * (The other case) If the image type is Grayscale or RGB (with or without Alpha), and the bit depth is
+     not smaller than 8, then use adaptive filtering heuristic as follows: independently for each row, apply
+     all five filters and select the filter that produces the smallest sum of absolute values per row.
+  This heuristic is used if filter strategy is LFS_MINSUM and filter_palette_zero is true.
+
+  If filter_palette_zero is true and filter_strategy is not LFS_MINSUM, the above heuristic is followed,
+  but for "the other case", whatever strategy filter_strategy is set to instead of the minimum sum
+  heuristic is used.
+  */
+  if(settings->filter_palette_zero &&
+     (info->colortype == LCT_PALETTE || info->bitdepth < 8)) strategy = LFS_ZERO;
 
   if(bpp == 0) return 31; /*error: invalid color type*/
 
-  if(settings->filter_strategy == LFS_HEURISTIC)
+  if(strategy == LFS_ZERO)
   {
-    /*
-    There is a heuristic called the minimum sum of absolute differences heuristic, suggested by the PNG standard:
-       *  If the image type is Palette, or the bit depth is smaller than 8, then do not filter the image (i.e.
-          use fixed filtering, with the filter None).
-       * (The other case) If the image type is Grayscale or RGB (with or without Alpha), and the bit depth is
-         not smaller than 8, then use adaptive filtering heuristic as follows: independently for each row, apply
-         all five filters and select the filter that produces the smallest sum of absolute values per row.
-    */
-    if(info->colortype == LCT_PALETTE || info->bitdepth < 8) /*None filtertype for everything*/
+    for(y = 0; y < h; y++)
+    {
+      size_t outindex = (1 + linebytes) * y; /*the extra filterbyte added to each row*/
+      size_t inindex = linebytes * y;
+      out[outindex] = 0; /*filter type byte*/
+      filterScanline(&out[outindex + 1], &in[inindex], prevline, linebytes, bytewidth, 0);
+      prevline = &in[inindex];
+    }
+  }
+  else if(strategy == LFS_MINSUM)
+  {
+    /*adaptive filtering*/
+    size_t sum[5];
+    ucvector attempt[5]; /*five filtering attempts, one for each filter type*/
+    size_t smallest = 0;
+    unsigned char type, bestType = 0;
+
+    for(type = 0; type < 5; type++)
+    {
+      ucvector_init(&attempt[type]);
+      if(!ucvector_resize(&attempt[type], linebytes)) return 83; /*alloc fail*/
+    }
+
+    if(!error)
     {
       for(y = 0; y < h; y++)
       {
-        size_t outindex = (1 + linebytes) * y; /*the extra filterbyte added to each row*/
-        size_t inindex = linebytes * y;
-        const unsigned TYPE = 0;
-        out[outindex] = TYPE; /*filter type byte*/
-        filterScanline(&out[outindex + 1], &in[inindex], prevline, linebytes, bytewidth, TYPE);
-        prevline = &in[inindex];
-      }
-    }
-    else /*adaptive filtering*/
-    {
-      size_t sum[5];
-      ucvector attempt[5]; /*five filtering attempts, one for each filter type*/
-      size_t smallest = 0;
-      unsigned type, bestType = 0;
-
-      for(type = 0; type < 5; type++) ucvector_init(&attempt[type]);
-      for(type = 0; type < 5; type++)
-      {
-        if(!ucvector_resize(&attempt[type], linebytes)) ERROR_BREAK(83 /*alloc fail*/);
-      }
-
-      if(!error)
-      {
-        for(y = 0; y < h; y++)
+        /*try the 5 filter types*/
+        for(type = 0; type < 5; type++)
         {
-          /*try the 5 filter types*/
-          for(type = 0; type < 5; type++)
-          {
-            filterScanline(attempt[type].data, &in[y * linebytes], prevline, linebytes, bytewidth, type);
+          filterScanline(attempt[type].data, &in[y * linebytes], prevline, linebytes, bytewidth, type);
 
-            /*calculate the sum of the result*/
-            sum[type] = 0;
-            /*note that not all pixels are checked to speed this up while still having probably the best choice*/
-            for(x = 0; x < attempt[type].size; x+=3)
+          /*calculate the sum of the result*/
+          sum[type] = 0;
+          if(type == 0)
+          {
+            for(x = 0; x < linebytes; x++) sum[type] += (unsigned char)(attempt[type].data[x]);
+          }
+          else
+          {
+            for(x = 0; x < linebytes; x++)
             {
               /*For differences, each byte should be treated as signed, values above 127 are negative
               (converted to signed char). Filtertype 0 isn't a difference though, so use unsigned there.
               This means filtertype 0 is almost never chosen, but that is justified.*/
-              if(type == 0) sum[type] += (unsigned char)(attempt[type].data[x]);
-              else
-              {
-                signed char s = (signed char)(attempt[type].data[x]);
-                sum[type] += s < 0 ? -s : s;
-              }
-            }
-
-            /*check if this is smallest sum (or if type == 0 it's the first case so always store the values)*/
-            if(type == 0 || sum[type] < smallest)
-            {
-              bestType = type;
-              smallest = sum[type];
+              unsigned char s = attempt[type].data[x];
+              sum[type] += s < 128 ? s : (255U - s);
             }
           }
 
-          prevline = &in[y * linebytes];
+          /*check if this is smallest sum (or if type == 0 it's the first case so always store the values)*/
+          if(type == 0 || sum[type] < smallest)
+          {
+            bestType = type;
+            smallest = sum[type];
+          }
+        }
 
-          /*now fill the out values*/
-          out[y * (linebytes + 1)] = bestType; /*the first byte of a scanline will be the filter type*/
-          for(x = 0; x < linebytes; x++) out[y * (linebytes + 1) + 1 + x] = attempt[bestType].data[x];
+        prevline = &in[y * linebytes];
+
+        /*now fill the out values*/
+        out[y * (linebytes + 1)] = bestType; /*the first byte of a scanline will be the filter type*/
+        for(x = 0; x < linebytes; x++) out[y * (linebytes + 1) + 1 + x] = attempt[bestType].data[x];
+      }
+    }
+
+    for(type = 0; type < 5; type++) ucvector_cleanup(&attempt[type]);
+  }
+  else if(strategy == LFS_ENTROPY)
+  {
+    float sum[5];
+    ucvector attempt[5]; /*five filtering attempts, one for each filter type*/
+    float smallest = 0;
+    unsigned type, bestType = 0;
+    unsigned count[256];
+
+    for(type = 0; type < 5; type++)
+    {
+      ucvector_init(&attempt[type]);
+      if(!ucvector_resize(&attempt[type], linebytes)) return 83; /*alloc fail*/
+    }
+
+    for(y = 0; y < h; y++)
+    {
+      /*try the 5 filter types*/
+      for(type = 0; type < 5; type++)
+      {
+        filterScanline(attempt[type].data, &in[y * linebytes], prevline, linebytes, bytewidth, type);
+        for(x = 0; x < 256; x++) count[x] = 0;
+        for(x = 0; x < linebytes; x++) count[attempt[type].data[x]]++;
+        count[type]++; /*the filter type itself is part of the scanline*/
+        sum[type] = 0;
+        for(x = 0; x < 256; x++)
+        {
+          float p = count[x] / (float)(linebytes + 1);
+          sum[type] += count[x] == 0 ? 0 : flog2(1 / p) * p;
+        }
+        /*check if this is smallest sum (or if type == 0 it's the first case so always store the values)*/
+        if(type == 0 || sum[type] < smallest)
+        {
+          bestType = type;
+          smallest = sum[type];
         }
       }
 
-      for(type = 0; type < 5; type++) ucvector_cleanup(&attempt[type]);
+      prevline = &in[y * linebytes];
+
+      /*now fill the out values*/
+      out[y * (linebytes + 1)] = bestType; /*the first byte of a scanline will be the filter type*/
+      for(x = 0; x < linebytes; x++) out[y * (linebytes + 1) + 1 + x] = attempt[bestType].data[x];
+    }
+
+    for(type = 0; type < 5; type++) ucvector_cleanup(&attempt[type]);
+  }
+  else if(strategy == LFS_PREDEFINED)
+  {
+    for(y = 0; y < h; y++)
+    {
+      size_t outindex = (1 + linebytes) * y; /*the extra filterbyte added to each row*/
+      size_t inindex = linebytes * y;
+      unsigned char type = settings->predefined_filters[y];
+      out[outindex] = type; /*filter type byte*/
+      filterScanline(&out[outindex + 1], &in[inindex], prevline, linebytes, bytewidth, type);
+      prevline = &in[inindex];
     }
   }
-  else /*LFS_BRUTE_FORCE*/
+  else if(strategy == LFS_BRUTE_FORCE)
   {
     /*brute force filter chooser.
     deflate the scanline after every filter attempt to see which one deflates best.
@@ -5057,11 +5435,12 @@ static unsigned filter(unsigned char* out, const unsigned char* in, unsigned w, 
     zlibsettings.btype = 1;
     /*a custom encoder likely doesn't read the btype setting and is optimized for complete PNG
     images only, so disable it*/
-    zlibsettings.custom_encoder = 0;
+    zlibsettings.custom_zlib = 0;
+    zlibsettings.custom_deflate = 0;
     for(type = 0; type < 5; type++)
     {
       ucvector_init(&attempt[type]);
-      ucvector_resize(&attempt[type], linebytes);
+      ucvector_resize(&attempt[type], linebytes); /*todo: give error if resize failed*/
     }
     for(y = 0; y < h; y++) /*try the 5 filter types*/
     {
@@ -5073,8 +5452,8 @@ static unsigned filter(unsigned char* out, const unsigned char* in, unsigned w, 
         filterScanline(attempt[type].data, &in[y * linebytes], prevline, linebytes, bytewidth, type);
         size[type] = 0;
         dummy = 0;
-        lodepng_zlib_compress(&dummy, &size[type], attempt[type].data, testsize, &zlibsettings);
-        myfree(dummy);
+        zlib_compress(&dummy, &size[type], attempt[type].data, testsize, &zlibsettings);
+        lodepng_free(dummy);
         /*check if this is smallest size (or if type == 0 it's the first case so always store the values)*/
         if(type == 0 || size[type] < smallest)
         {
@@ -5088,6 +5467,7 @@ static unsigned filter(unsigned char* out, const unsigned char* in, unsigned w, 
     }
     for(type = 0; type < 5; type++) ucvector_cleanup(&attempt[type]);
   }
+  else return 88; /* unknown filter strategy */
 
   return error;
 }
@@ -5114,10 +5494,19 @@ static void addPaddingBits(unsigned char* out, const unsigned char* in,
   }
 }
 
+/*
+in: non-interlaced image with size w*h
+out: the same pixels, but re-ordered according to PNG's Adam7 interlacing, with
+ no padding bits between scanlines, but between reduced images so that each
+ reduced image starts at a byte.
+bpp: bits per pixel
+there are no padding bits, not between scanlines, not between reduced images
+in has the following size in bits: w * h * bpp.
+out is possibly bigger due to padding bits between reduced images
+NOTE: comments about padding bits are only relevant if bpp < 8
+*/
 static void Adam7_interlace(unsigned char* out, const unsigned char* in, unsigned w, unsigned h, unsigned bpp)
 {
-  /*Note: this function works on image buffers WITHOUT padding bits at end of scanlines with non-multiple-of-8
-  bit amounts, only between reduced images is padding*/
   unsigned passw[7], passh[7];
   size_t filter_passstart[8], padded_passstart[8], passstart[8];
   unsigned i;
@@ -5182,7 +5571,7 @@ static unsigned preProcessScanlines(unsigned char** out, size_t* outsize, const 
   if(info_png->interlace_method == 0)
   {
     *outsize = h + (h * ((w * bpp + 7) / 8)); /*image size plus an extra byte per scanline + possible padding bits*/
-    *out = (unsigned char*)mymalloc(*outsize);
+    *out = (unsigned char*)lodepng_malloc(*outsize);
     if(!(*out) && (*outsize)) error = 83; /*alloc fail*/
 
     if(!error)
@@ -5190,15 +5579,14 @@ static unsigned preProcessScanlines(unsigned char** out, size_t* outsize, const 
       /*non multiple of 8 bits per scanline, padding bits needed per scanline*/
       if(bpp < 8 && w * bpp != ((w * bpp + 7) / 8) * 8)
       {
-        ucvector padded;
-        ucvector_init(&padded);
-        if(!ucvector_resize(&padded, h * ((w * bpp + 7) / 8))) error = 83; /*alloc fail*/
+        unsigned char* padded = (unsigned char*)lodepng_malloc(h * ((w * bpp + 7) / 8));
+        if(!padded) error = 83; /*alloc fail*/
         if(!error)
         {
-          addPaddingBits(padded.data, in, ((w * bpp + 7) / 8) * 8, w * bpp, h);
-          error = filter(*out, padded.data, w, h, &info_png->color, settings);
+          addPaddingBits(padded, in, ((w * bpp + 7) / 8) * 8, w * bpp, h);
+          error = filter(*out, padded, w, h, &info_png->color, settings);
         }
-        ucvector_cleanup(&padded);
+        lodepng_free(padded);
       }
       else
       {
@@ -5209,51 +5597,47 @@ static unsigned preProcessScanlines(unsigned char** out, size_t* outsize, const 
   }
   else /*interlace_method is 1 (Adam7)*/
   {
-    unsigned char* adam7 = (unsigned char*)mymalloc((h * w * bpp + 7) / 8);
-    if(!adam7 && ((h * w * bpp + 7) / 8)) error = 83; /*alloc fail*/
+    unsigned passw[7], passh[7];
+    size_t filter_passstart[8], padded_passstart[8], passstart[8];
+    unsigned char* adam7;
 
-    while(!error) /*not a real while loop, used to break out to cleanup to avoid a goto*/
+    Adam7_getpassvalues(passw, passh, filter_passstart, padded_passstart, passstart, w, h, bpp);
+
+    *outsize = filter_passstart[7]; /*image size plus an extra byte per scanline + possible padding bits*/
+    *out = (unsigned char*)lodepng_malloc(*outsize);
+    if(!(*out)) error = 83; /*alloc fail*/
+
+    adam7 = (unsigned char*)lodepng_malloc(passstart[7]);
+    if(!adam7 && passstart[7]) error = 83; /*alloc fail*/
+
+    if(!error)
     {
-      unsigned passw[7], passh[7];
-      size_t filter_passstart[8], padded_passstart[8], passstart[8];
       unsigned i;
 
-      Adam7_getpassvalues(passw, passh, filter_passstart, padded_passstart, passstart, w, h, bpp);
-
-      *outsize = filter_passstart[7]; /*image size plus an extra byte per scanline + possible padding bits*/
-      *out = (unsigned char*)mymalloc(*outsize);
-      if(!(*out) && (*outsize)) ERROR_BREAK(83 /*alloc fail*/);
-
       Adam7_interlace(adam7, in, w, h, bpp);
-
       for(i = 0; i < 7; i++)
       {
         if(bpp < 8)
         {
-          ucvector padded;
-          ucvector_init(&padded);
-          if(!ucvector_resize(&padded, h * ((w * bpp + 7) / 8))) error = 83; /*alloc fail*/
-          if(!error)
-          {
-            addPaddingBits(&padded.data[padded_passstart[i]], &adam7[passstart[i]],
-                           ((passw[i] * bpp + 7) / 8) * 8, passw[i] * bpp, passh[i]);
-            error = filter(&(*out)[filter_passstart[i]], &padded.data[padded_passstart[i]],
-                           passw[i], passh[i], &info_png->color, settings);
-          }
-
-          ucvector_cleanup(&padded);
+          unsigned char* padded = (unsigned char*)lodepng_malloc(padded_passstart[i + 1] - padded_passstart[i]);
+          if(!padded) ERROR_BREAK(83); /*alloc fail*/
+          addPaddingBits(padded, &adam7[passstart[i]],
+                         ((passw[i] * bpp + 7) / 8) * 8, passw[i] * bpp, passh[i]);
+          error = filter(&(*out)[filter_passstart[i]], padded,
+                         passw[i], passh[i], &info_png->color, settings);
+          lodepng_free(padded);
         }
         else
         {
           error = filter(&(*out)[filter_passstart[i]], &adam7[padded_passstart[i]],
                          passw[i], passh[i], &info_png->color, settings);
         }
-      }
 
-      break;
+        if(error) break;
+      }
     }
 
-    myfree(adam7);
+    lodepng_free(adam7);
   }
 
   return error;
@@ -5267,8 +5651,9 @@ returns 2 if the palette is semi-translucent.
 */
 static unsigned getPaletteTranslucency(const unsigned char* palette, size_t palettesize)
 {
-  size_t i, key = 0;
-  unsigned r, g, b; /*the value of the color with alpha 0, so long as color keying is possible*/
+  size_t i;
+  unsigned key = 0;
+  unsigned r = 0, g = 0, b = 0; /*the value of the color with alpha 0, so long as color keying is possible*/
   for(i = 0; i < palettesize; i++)
   {
     if(!key && palette[4 * i + 3] == 0)
@@ -5324,15 +5709,11 @@ unsigned lodepng_encode(unsigned char** out, size_t* outsize,
 
   if(state->encoder.auto_convert != LAC_NO)
   {
-    state->error = doAutoChooseColor(&info.color, image, w, h, &state->info_raw,
-                                     state->encoder.auto_convert);
+    state->error = lodepng_auto_choose_color(&info.color, image, w, h, &state->info_raw,
+                                             state->encoder.auto_convert);
   }
   if(state->error) return state->error;
 
-  if(state->encoder.zlibsettings.windowsize > 32768)
-  {
-    CERROR_RETURN_ERROR(state->error, 60); /*error: windowsize larger than allowed*/
-  }
   if(state->encoder.zlibsettings.btype > 2)
   {
     CERROR_RETURN_ERROR(state->error, 61); /*error: unexisting btype*/
@@ -5341,24 +5722,25 @@ unsigned lodepng_encode(unsigned char** out, size_t* outsize,
   {
     CERROR_RETURN_ERROR(state->error, 71); /*error: unexisting interlace mode*/
   }
-  /*error: unexisting color type given*/
-  if((state->error = checkColorValidity(info.color.colortype, info.color.bitdepth))) return state->error;
-  /*error: unexisting color type given*/
-  if((state->error = checkColorValidity(state->info_raw.colortype, state->info_raw.bitdepth))) return state->error;
+
+  state->error = checkColorValidity(info.color.colortype, info.color.bitdepth);
+  if(state->error) return state->error; /*error: unexisting color type given*/
+  state->error = checkColorValidity(state->info_raw.colortype, state->info_raw.bitdepth);
+  if(state->error) return state->error; /*error: unexisting color type given*/
 
   if(!lodepng_color_mode_equal(&state->info_raw, &info.color))
   {
     unsigned char* converted;
     size_t size = (w * h * lodepng_get_bpp(&info.color) + 7) / 8;
 
-    converted = (unsigned char*)mymalloc(size);
+    converted = (unsigned char*)lodepng_malloc(size);
     if(!converted && size) state->error = 83; /*alloc fail*/
     if(!state->error)
     {
-      state->error = lodepng_convert(converted, image, &info.color, &state->info_raw, w, h);
+      state->error = lodepng_convert(converted, image, &info.color, &state->info_raw, w, h, 0 /*fix_png*/);
     }
     if(!state->error) preProcessScanlines(&data, &datasize, converted, w, h, &info, &state->encoder);
-    myfree(converted);
+    lodepng_free(converted);
   }
   else preProcessScanlines(&data, &datasize, image, w, h, &info, &state->encoder);
 
@@ -5431,9 +5813,13 @@ unsigned lodepng_encode(unsigned char** out, size_t* outsize,
         break;
       }
       if(state->encoder.text_compression)
+      {
         addChunk_zTXt(&outv, info.text_keys[i], info.text_strings[i], &state->encoder.zlibsettings);
+      }
       else
+      {
         addChunk_tEXt(&outv, info.text_keys[i], info.text_strings[i]);
+      }
     }
     /*LodePNG version id in text chunk*/
     if(state->encoder.add_id)
@@ -5448,7 +5834,9 @@ unsigned lodepng_encode(unsigned char** out, size_t* outsize,
         }
       }
       if(alread_added_id_text == 0)
+      {
         addChunk_tEXt(&outv, "LodePNG", VERSION_STRING); /*it's shorter as tEXt than as zTXt chunk*/
+      }
     }
     /*iTXt*/
     for(i = 0; i < info.itext_num; i++)
@@ -5475,14 +5863,13 @@ unsigned lodepng_encode(unsigned char** out, size_t* outsize,
       if(state->error) break;
     }
 #endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
-    /*IEND*/
     addChunk_IEND(&outv);
 
     break; /*this isn't really a while loop; no error happened so break out now!*/
   }
 
   lodepng_info_cleanup(&info);
-  myfree(data);
+  lodepng_free(data);
   /*instead of cleaning the vector up, give it to the output*/
   *out = outv.data;
   *outsize = outv.size;
@@ -5524,7 +5911,7 @@ unsigned lodepng_encode_file(const char* filename, const unsigned char* image, u
   size_t buffersize;
   unsigned error = lodepng_encode_memory(&buffer, &buffersize, image, w, h, colortype, bitdepth);
   if(!error) error = lodepng_save_file(buffer, buffersize, filename);
-  myfree(buffer);
+  lodepng_free(buffer);
   return error;
 }
 
@@ -5542,9 +5929,11 @@ unsigned lodepng_encode24_file(const char* filename, const unsigned char* image,
 void lodepng_encoder_settings_init(LodePNGEncoderSettings* settings)
 {
   lodepng_compress_settings_init(&settings->zlibsettings);
-  settings->filter_strategy = LFS_HEURISTIC;
+  settings->filter_palette_zero = 1;
+  settings->filter_strategy = LFS_MINSUM;
   settings->auto_convert = LAC_AUTO;
   settings->force_palette = 0;
+  settings->predefined_filters = 0;
 #ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
   settings->add_id = 0;
   settings->text_compression = 1;
@@ -5576,13 +5965,11 @@ const char* lodepng_error_text(unsigned code)
     case 19: return "end of out buffer memory reached while inflating";
     case 20: return "invalid deflate block BTYPE encountered while decoding";
     case 21: return "NLEN is not ones complement of LEN in a deflate block";
-
      /*end of out buffer memory reached while inflating:
      This can happen if the inflated deflate data is longer than the amount of bytes required to fill up
      all the pixels of the image, given the color depth and image dimensions. Something that doesn't
      happen in a normal, well encoded, PNG image.*/
     case 22: return "end of out buffer memory reached while inflating";
-
     case 23: return "end of in buffer memory reached while inflating";
     case 24: return "invalid FCHECK in zlib header";
     case 25: return "invalid compression method in zlib header";
@@ -5619,12 +6006,10 @@ const char* lodepng_error_text(unsigned code)
     case 52: return "jumped past memory while inflating";
     case 53: return "size of zlib data too small";
     case 54: return "repeat symbol in tree while there was no value symbol yet";
-
     /*jumped past tree while generating huffman tree, this could be when the
     tree will have more leaves than symbols after generating it out of the
     given lenghts. They call this an oversubscribed dynamic bit lengths tree in zlib.*/
     case 55: return "jumped past tree while generating huffman tree";
-
     case 56: return "given output image colortype or bitdepth not supported for color conversion";
     case 57: return "invalid CRC encountered (checking CRC can be disabled)";
     case 58: return "invalid ADLER32 encountered (checking ADLER32 can be disabled)";
@@ -5657,6 +6042,11 @@ const char* lodepng_error_text(unsigned code)
     case 84: return "given image too small to contain all pixels to be encoded";
     case 85: return "internal color conversion bug";
     case 86: return "impossible offset in lz77 encoding (internal bug)";
+    case 87: return "must provide custom zlib function pointer if LODEPNG_COMPILE_ZLIB is not defined";
+    case 88: return "invalid filter strategy given for LodePNGEncoderSettings.filter_strategy";
+    case 89: return "text chunk keyword too short or long: must have size 1-79";
+    /*the windowsize in the LodePNGCompressSettings. Requiring POT(==> & instead of %) makes encoding 12% faster.*/
+    case 90: return "windowsize must be a power of two";
   }
   return "unknown error code";
 }
@@ -5667,7 +6057,6 @@ const char* lodepng_error_text(unsigned code)
 /* // C++ Wrapper                                                          // */
 /* ////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////// */
-
 
 #ifdef LODEPNG_COMPILE_CPP
 namespace lodepng
@@ -5703,11 +6092,11 @@ unsigned decompress(std::vector<unsigned char>& out, const unsigned char* in, si
 {
   unsigned char* buffer = 0;
   size_t buffersize = 0;
-  unsigned error = lodepng_zlib_decompress(&buffer, &buffersize, in, insize, &settings);
+  unsigned error = zlib_decompress(&buffer, &buffersize, in, insize, &settings);
   if(buffer)
   {
     out.insert(out.end(), &buffer[0], &buffer[buffersize]);
-    myfree(buffer);
+    lodepng_free(buffer);
   }
   return error;
 }
@@ -5725,11 +6114,11 @@ unsigned compress(std::vector<unsigned char>& out, const unsigned char* in, size
 {
   unsigned char* buffer = 0;
   size_t buffersize = 0;
-  unsigned error = lodepng_zlib_compress(&buffer, &buffersize, in, insize, &settings);
+  unsigned error = zlib_compress(&buffer, &buffersize, in, insize, &settings);
   if(buffer)
   {
     out.insert(out.end(), &buffer[0], &buffer[buffersize]);
-    myfree(buffer);
+    lodepng_free(buffer);
   }
   return error;
 }
@@ -5781,7 +6170,7 @@ unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h, const
     state.info_raw.bitdepth = bitdepth;
     size_t buffersize = lodepng_get_raw_size(w, h, &state.info_raw);
     out.insert(out.end(), &buffer[0], &buffer[buffersize]);
-    myfree(buffer);
+    lodepng_free(buffer);
   }
   return error;
 }
@@ -5796,14 +6185,14 @@ unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h,
                 State& state,
                 const unsigned char* in, size_t insize)
 {
-  unsigned char* buffer;
+  unsigned char* buffer = NULL;
   unsigned error = lodepng_decode(&buffer, &w, &h, &state, in, insize);
   if(buffer && !error)
   {
     size_t buffersize = lodepng_get_raw_size(w, h, &state.info_raw);
     out.insert(out.end(), &buffer[0], &buffer[buffersize]);
-    myfree(buffer);
   }
+  lodepng_free(buffer);
   return error;
 }
 
@@ -5835,7 +6224,7 @@ unsigned encode(std::vector<unsigned char>& out, const unsigned char* in, unsign
   if(buffer)
   {
     out.insert(out.end(), &buffer[0], &buffer[buffersize]);
-    myfree(buffer);
+    lodepng_free(buffer);
   }
   return error;
 }
@@ -5858,7 +6247,7 @@ unsigned encode(std::vector<unsigned char>& out,
   if(buffer)
   {
     out.insert(out.end(), &buffer[0], &buffer[buffersize]);
-    myfree(buffer);
+    lodepng_free(buffer);
   }
   return error;
 }

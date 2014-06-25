@@ -8,6 +8,14 @@ wl_library(third_party_minizip
   USES_ZLIB
 )
 
+# See http://lodev.org/lodepng/
+wl_library(third_party_lodepng
+  SRCS
+    lodepng/lodepng.h
+    lodepng/lodepng.cc
+  THIRD_PARTY
+)
+
 wl_library(third_party_eris
   THIRD_PARTY
   C_LIBRARY

@@ -17,6 +17,7 @@ wl_library(graphic_text
   USES_SDL
   USES_SDL_GFX
   DEPENDS
+    base_log
     base_geometry
     graphic_color
     graphic_image
