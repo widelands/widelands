@@ -1,3 +1,5 @@
+add_subdirectory(test)
+
 wl_library(graphic_text
   SRCS
     rt_errors.h
@@ -9,7 +11,6 @@ wl_library(graphic_text
     sdl_ttf_font.h
     sdl_ttf_font_impl.cc
     sdl_ttf_font_impl.h
-    sdl_ttf_font_loader_from_file.cc
     sdl_ttf_font_loader_from_filesystem.cc
     textstream.cc
     textstream.h

@@ -1,6 +1,6 @@
 <rt>
 <sub background="ff0000">
-<sub margin=5 padding=16 background=chessboard.png width=370>
+<sub margin=5 padding=16 background=pics/chessboard.png width=370>
 <p><font color=ff0000 bold=true>
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
 tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At

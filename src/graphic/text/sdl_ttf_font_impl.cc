@@ -22,6 +22,7 @@
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
+#include "base/log.h" // NOCOM(#sirver): remove again
 #include "graphic/render/sdl_helper.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
@@ -58,18 +59,25 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16
 
 const Surface& SDLTTF_Font::render
 	(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	const string hash =
 		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 		 static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 			.str();
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	const Surface* rv = surface_cache->get(hash);
 	if (rv) return *rv;
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	m_set_style(style);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	SDL_Surface * text_surface = nullptr;
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	SDL_Color sdlclr = {clr.r, clr.g, clr.b, 0};
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (style & SHADOW) {
 		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface * shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
@@ -78,13 +86,16 @@ const Surface& SDLTTF_Font::render
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
 
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		SDL_Rect dstrct1 = {0, 0, 0, 0};
 		SDL_SetAlpha(shadow, 0, SDL_ALPHA_OPAQUE);
 		SDL_BlitSurface(shadow, nullptr, text_surface, &dstrct1);
 
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		Uint32* spix = static_cast<Uint32*>(tsurf->pixels);
 		Uint32* dpix = static_cast<Uint32*>(text_surface->pixels);
 
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		// Alpha Blend the Text onto the Shadow. This is really slow, but it is
 		// the only compatible way to do it using SDL 1.2. SDL 2.0 offers more
 		// functionality but is not yet released.
@@ -95,6 +106,7 @@ const Surface& SDLTTF_Font::render
 				size_t didx = ((y + SHADOW_OFFSET) * text_surface->pitch + (x + SHADOW_OFFSET) * 4) / 4;
 
 				SDL_GetRGBA(spix[sidx], tsurf->format, &sr, &sg, &sb, &sa);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				SDL_GetRGBA(dpix[didx], text_surface->format, &dr, &dg, &db, &da);
 
 				outa = (255 * sa + da * (255 - sa)) / 255;
@@ -106,15 +118,22 @@ const Surface& SDLTTF_Font::render
 				dpix[didx] = SDL_MapRGBA(text_surface->format, outr, outg, outb, outa);
 			}
 		}
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		SDL_FreeSurface(tsurf);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		SDL_FreeSurface(shadow);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	} else
 		text_surface = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *surface_cache->insert(hash, Surface::create(text_surface), true);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		auto* surface = Surface::create(text_surface);
+		log("#sirver surface: %p\n", surface);
+	return *surface_cache->insert(hash, surface, true);
 }
 
 uint16_t SDLTTF_Font::ascent(int style) const {

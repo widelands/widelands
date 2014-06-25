@@ -21,6 +21,7 @@
 
 #include <SDL.h>
 
+#include "base/log.h" // NOCOM(#sirver): remove again
 #include "graphic/render/gl_surface_texture.h"
 #include "graphic/render/sdl_helper.h"
 #include "graphic/render/sdl_surface.h"
@@ -32,20 +33,29 @@ Surface* Surface::create(SDL_Surface* surf) {
 		return new GLSurfaceTexture(surf);
 	}
 	SDL_Surface * surface = SDL_DisplayFormatAlpha(surf);
-	SDL_FreeSurface(surf);
-	return new SDLSurface(surface);
+	// NOCOM(#sirver): bring back
+	// SDL_FreeSurface(surf);
+	// return new SDLSurface(surface);
+	return new SDLSurface(surf);
 }
 
 Surface* Surface::create(uint16_t w, uint16_t h) {
+	log("#sirver g_opengl: %u\n", g_opengl);
+	log("#sirver w: %u,h: %u\n", w, h);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (g_opengl) {
 		return new GLSurfaceTexture(w, h);
-	} else
-	{
+	} else {
 		SDL_Surface* tsurf = empty_sdl_surface(w, h);
-		SDL_Surface* surf = SDL_DisplayFormatAlpha(tsurf);
-		SDL_FreeSurface(tsurf);
-		return new SDLSurface(surf);
+		// SDL_Surface* surf = SDL_DisplayFormatAlpha(tsurf);
+		// if (surf != tsurf) {
+			// SDL_FreeSurface(tsurf);
+		// }
+		// SDLSurface* rv = new SDLSurface(surf);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		SDLSurface* rv = new SDLSurface(tsurf);
+		log("#sirver rv: %p\n", rv);
+
+		return rv;
 	}
 }
-
-
