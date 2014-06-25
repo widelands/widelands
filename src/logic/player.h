@@ -20,12 +20,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "graphic/color.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/notification.h"
-#include "rgbcolor.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands.h"

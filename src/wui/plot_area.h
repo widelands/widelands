@@ -24,7 +24,7 @@
 
 #include <boost/bind.hpp>
 
-#include "rgbcolor.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/slider.h"
 

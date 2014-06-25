@@ -21,8 +21,8 @@
 #define SDL_SURFACE_H
 
 #include "base/rect.h"
+#include "graphic/color.h"
 #include "graphic/surface.h"
-#include "rgbcolor.h"
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right

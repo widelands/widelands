@@ -20,8 +20,8 @@
 #ifndef UI_ICON_H
 #define UI_ICON_H
 
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 
 namespace UI {
 

@@ -111,6 +111,7 @@ wl_library(wui
     base_i18n
     base_log
     graphic
+    graphic_color
     graphic_image
     graphic_surface
     io_fileread

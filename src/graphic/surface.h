@@ -23,8 +23,8 @@
 #include <boost/noncopyable.hpp>
 
 #include "base/rect.h"
+#include "graphic/color.h"
 #include "graphic/compositemode.h"
-#include "rgbcolor.h"
 
 /**
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.

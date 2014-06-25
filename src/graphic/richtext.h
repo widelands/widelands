@@ -25,7 +25,7 @@
 #include <string>
 
 #include "base/point.h"
-#include "rgbcolor.h"
+#include "graphic/color.h"
 
 
 class RenderTarget;

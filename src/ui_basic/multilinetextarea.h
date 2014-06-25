@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "rgbcolor.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 

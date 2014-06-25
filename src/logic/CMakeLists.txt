@@ -173,6 +173,7 @@ wl_library(logic
     base_port
     build_info
     graphic
+    graphic_color
     io_fileread
     io_filesystem
     io_stream

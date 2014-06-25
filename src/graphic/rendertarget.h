@@ -24,9 +24,9 @@
 
 #include "base/rect.h"
 #include "graphic/align.h"
+#include "graphic/color.h"
 #include "graphic/compositemode.h"
 #include "graphic/image.h"
-#include "rgbcolor.h"
 
 class Surface;
 

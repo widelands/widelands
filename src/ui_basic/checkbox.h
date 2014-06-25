@@ -22,8 +22,8 @@
 
 #include <boost/signals2.hpp>
 
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 
 #define STATEBOX_WIDTH 20
 #define STATEBOX_HEIGHT 20

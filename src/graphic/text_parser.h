@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "graphic/align.h"
-#include "rgbcolor.h"
+#include "graphic/color.h"
 
 namespace UI {
 

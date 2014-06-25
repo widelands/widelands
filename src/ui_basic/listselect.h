@@ -27,8 +27,8 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/align.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {

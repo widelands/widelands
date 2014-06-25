@@ -1,5 +1,12 @@
 add_subdirectory(text)
 
+wl_library(graphic_color
+  SRCS
+    color.h
+    color.cc
+  USES_SDL
+)
+
 wl_library(graphic_image
   SRCS
     image.h
@@ -44,6 +51,7 @@ wl_library(graphic_surface
     base_geometry
     base_log
     graphic
+    graphic_color
     widelands_ball_of_mud
 )
 
@@ -101,6 +109,7 @@ wl_library(graphic
     base_i18n
     base_log
     build_info
+    graphic_color
     graphic_image
     graphic_surface
     graphic_text

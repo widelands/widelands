@@ -25,8 +25,8 @@
 
 #include <stdint.h>
 
+#include "graphic/color.h"
 #include "graphic/image.h"
-#include "rgbcolor.h"
 
 class SurfaceCache;
 class ImageCache;
