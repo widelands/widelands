@@ -38,7 +38,7 @@
 namespace Widelands {
 
 namespace {
-const int SCRIPTING_DATA_PACKET_VERSION = 1;
+const uint32_t SCRIPTING_DATA_PACKET_VERSION = 1;
 }  // namespace
 /*
  * ========================================================================
