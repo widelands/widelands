@@ -139,15 +139,10 @@ int main(int argc, char** argv) {
 	std::unique_ptr<RT::IRenderer> renderer(setup_standalone_renderer());
 
 	try {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		SDLSurface& surf = *static_cast<SDLSurface*>(renderer->render(txt, w, allowed_tags));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		surf.lock(Surface::Lock_Normal);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		save_png(outname, surf);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		surf.unlock(Surface::Unlock_NoChange);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	}
 	catch (RT::Exception& e) {
 		std::cout << e.what() << std::endl;

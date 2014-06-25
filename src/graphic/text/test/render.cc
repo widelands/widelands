@@ -37,47 +37,38 @@
 
 using namespace std;
 
-namespace {
+StandaloneRenderer::StandaloneRenderer() {
+	g_fs = new LayeredFileSystem();
+	g_fs->AddFileSystem(FileSystem::Create(RICHTEXT_DATA_DIR));
+	g_fs->AddFileSystem(FileSystem::Create(WIDELANDS_DATA_DIR));
 
-class OwningRenderer : public RT::IRenderer {
-	public:
-		OwningRenderer() {
-			g_fs = new LayeredFileSystem();
-			g_fs->AddFileSystem(FileSystem::Create(RICHTEXT_DATA_DIR));
-			g_fs->AddFileSystem(FileSystem::Create(WIDELANDS_DATA_DIR));
+	image_loader_.reset(new ImageLoaderImpl());
+	surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
+	image_cache_.reset(create_image_cache(image_loader_.get(), surface_cache_.get()));
+	renderer_.reset(RT::setup_renderer(
+	   image_cache_.get(), surface_cache_.get(), RT::ttf_fontloader_from_filesystem(g_fs)));
+}
 
-			// NOCOM(#sirver): use the one in Widelands
-			image_loader_.reset(new ImageLoaderImpl());
-			surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
-			image_cache_.reset
-				(create_image_cache(image_loader_.get(), surface_cache_.get()));
-		   renderer_.reset(RT::setup_renderer(image_cache_.get(),
-		                                      surface_cache_.get(),
-		                                      RT::ttf_fontloader_from_filesystem(g_fs)));
-	   }
-		virtual ~OwningRenderer() {
-			delete g_fs;
-			g_fs = nullptr;
-		}
+StandaloneRenderer::~StandaloneRenderer() {
+	delete g_fs;
+	g_fs = nullptr;
+}
 
-		// Implements RT::IRenderer.
-		virtual Surface* render(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
-			return renderer_->render(text, w, tagset);
-		}
-		virtual RT::IRefMap* make_reference_map
-			(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
-			return renderer_->make_reference_map(text, w, tagset);
-		}
+Surface* StandaloneRenderer::render(const std::string& text,
+                                            uint16_t w,
+                                            const RT::TagSet& tagset) {
+	return renderer_->render(text, w, tagset);
+}
 
-	private:
-		std::unique_ptr<IImageLoader> image_loader_;
-		std::unique_ptr<SurfaceCache> surface_cache_;
-		std::unique_ptr<ImageCache> image_cache_;
-		std::unique_ptr<RT::IRenderer> renderer_;
-};
+RT::IRefMap* StandaloneRenderer::make_reference_map(
+   const std::string& text, uint16_t w, const RT::TagSet& tagset) {
+	return renderer_->make_reference_map(text, w, tagset);
+}
 
-}  // namespace
+IImageLoader* StandaloneRenderer::image_loader() {
+	return image_loader_.get();
+}
 
-RT::IRenderer* setup_standalone_renderer() {
-	return new OwningRenderer();
+StandaloneRenderer* setup_standalone_renderer() {
+	return new StandaloneRenderer();
 }

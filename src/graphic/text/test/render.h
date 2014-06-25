@@ -20,9 +20,34 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include "graphic/text/rt_render.h"
+#include <memory>
 
-RT::IRenderer* setup_standalone_renderer();
+#include "graphic/text/rt_render.h"
+#include "graphic/image_loader.h"
+
+// A stand alone richtext renderer for tests and binaries.
+class StandaloneRenderer : public RT::IRenderer {
+	public:
+		StandaloneRenderer();
+		virtual ~StandaloneRenderer() override;
+
+		// Ownership is maintained.
+		IImageLoader* image_loader();
+
+		// Implements RT::IRenderer.
+	   virtual Surface*
+	   render(const std::string& text, uint16_t w, const RT::TagSet& tagset = RT::TagSet()) override;
+	   virtual RT::IRefMap* make_reference_map
+			(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) override;
+
+
+	private:
+		std::unique_ptr<IImageLoader> image_loader_;
+		std::unique_ptr<SurfaceCache> surface_cache_;
+		std::unique_ptr<ImageCache> image_cache_;
+		std::unique_ptr<RT::IRenderer> renderer_;
+};
+
+StandaloneRenderer* setup_standalone_renderer();
 
 #endif /* end of include guard: RENDER_H */
-

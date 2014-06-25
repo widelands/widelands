@@ -28,7 +28,6 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include "base/log.h" // NOCOM(#sirver): remove again
 #include "base/rect.h"
 #include "graphic/image_cache.h"
 #include "graphic/surface.h"
@@ -332,13 +331,9 @@ uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
 Surface* TextNode::render(SurfaceCache* surface_cache) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	const Surface& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Surface* rv = Surface::create(img.width(), img.height());
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	rv->blit(Point(0, 0), &img, Rect(0, 0, img.width(), img.height()), CM_Copy);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return rv;
 }
 
@@ -362,7 +357,6 @@ private:
 	bool m_expanding;
 };
 Surface* FillingTextNode::render(SurfaceCache* surface_cache) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	const Surface& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
 	Surface* rv = Surface::create(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
@@ -382,7 +376,6 @@ public:
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
 	virtual Surface* render(SurfaceCache* surface_cache) override {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (m_show_spaces) {
 			Surface* rv = Surface::create(m_w, m_h);
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
@@ -408,7 +401,6 @@ public:
 	virtual uint16_t width() override {return INFINITE_WIDTH; }
 	virtual uint16_t hotspot_y() override {return 0;}
 	virtual Surface* render(SurfaceCache* /* surface_cache */) override {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		assert(false);
 		throw RenderError("This should never be called. This is a bug, please submit a report.");
 	}
@@ -427,7 +419,6 @@ public:
 	virtual uint16_t width() override {return m_w;}
 	virtual uint16_t hotspot_y() override {return m_h;}
 	virtual Surface* render(SurfaceCache* /* surface_cache */) override {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		Surface* rv = Surface::create(m_w, m_h);
 
 		// Draw background image (tiling)
@@ -476,11 +467,8 @@ public:
 	virtual uint16_t height() override {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint16_t hotspot_y() override {return height();}
 	virtual Surface* render(SurfaceCache* surface_cache) override {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		Surface* rv = Surface::create(width(), height());
-		log("#sirver rv: %x\n", rv);
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 		// Draw Solid background Color
 		bool set_alpha = true;
@@ -562,7 +550,6 @@ private:
 };
 
 Surface* ImgRenderNode::render(SurfaceCache* /* surface_cache */) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Surface* rv = Surface::create(m_image.width(), m_image.height());
 	rv->blit(Point(0, 0), m_image.surface(), Rect(0, 0, m_image.width(), m_image.height()), CM_Copy);
 	return rv;
@@ -1002,9 +989,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 }
 
 Surface* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	return node->render(surface_cache_);
 }
