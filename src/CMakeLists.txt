@@ -66,59 +66,59 @@ macro(_common_compile_tasks)
 
   if(NOT ARG_THIRD_PARTY)
     # src/ is the base for all of our includes. The binary one is for generated files.
-    target_include_directories(${NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src)
+    target_include_directories(${NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src)
 
     # Boost is practically the standard library, so we always add a search path
     # to include it easily. Except for third party.
-    target_include_directories(${NAME} SYSTEM INTERFACE ${Boost_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
   endif()
 
   if(ARG_USES_ZLIB)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${ZLIB_INCLUDE_DIRS})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${ZLIB_INCLUDE_DIRS})
     target_link_libraries(${NAME} ${ZLIB_LIBRARY})
   endif()
 
   # OpenGL and GLEW are one thing for us. If you use the one, you also use the
   # other.
   if(ARG_USES_OPENGL)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${GLEW_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${GLEW_INCLUDE_DIR})
     target_link_libraries(${NAME} ${GLEW_LIBRARY})
     target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
     add_definitions(${GLEW_EXTRA_DEFINITIONS})
   endif()
 
   if(ARG_USES_PNG)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${PNG_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${PNG_INCLUDE_DIR})
     target_link_libraries(${NAME} ${PNG_LIBRARY})
   endif()
 
   if(ARG_USES_SDL)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${SDL_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${SDL_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDL_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_MIXER)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLMIXER_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLMIXER_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLMIXER_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_NET)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLNET_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLNET_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLNET_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_IMAGE)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLIMAGE_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLIMAGE_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLIMAGE_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_GFX)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLGFX_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLGFX_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLGFX_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_TTF)
-    target_include_directories(${NAME} SYSTEM INTERFACE ${SDLTTF_INCLUDE_DIR})
+    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLTTF_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLTTF_LIBRARY})
   endif()
 
@@ -126,7 +126,7 @@ macro(_common_compile_tasks)
     # libintl is not used on all systems, so only include it, when we actually
     # found it.
     if (INTL_FOUND)
-      target_include_directories(${NAME} SYSTEM INTERFACE ${INTL_INCLUDE_DIR})
+      target_include_directories(${NAME} SYSTEM PUBLIC ${INTL_INCLUDE_DIR})
       target_link_libraries(${NAME} ${INTL_LIBRARY})
     endif()
   endif()
@@ -462,7 +462,6 @@ wl_library(widelands_ball_of_mud
     ref_cast.h
     replay_game_controller.cc
     replay_game_controller.h
-    rgbcolor.h
     save_handler.cc
     save_handler.h
     scoped_timer.cc
@@ -555,6 +554,7 @@ wl_library(widelands_ball_of_mud
     base_log
     build_info
     graphic
+    graphic_color
     graphic_image
     graphic_surface
     io_dedicated_log
