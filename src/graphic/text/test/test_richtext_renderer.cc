@@ -27,6 +27,7 @@
 #include <SDL_TTF.h>
 #undef main
 
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
@@ -46,14 +47,16 @@ struct RichTextTestFixture {
 	std::unique_ptr<StandaloneRenderer> renderer;
 };
 
-
 BOOST_FIXTURE_TEST_SUITE(richtext_test_suite, RichTextTestFixture)
-
-
 
 namespace {
 
-void EnsureSDLIsInitialized() {
+struct RefMapTestSample {
+	int x, y;
+	std::string expected_text;
+};
+
+void ensure_sdl_is_initialized() {
 	static bool done = false;
 	if (!done) {
 		SDL_Init(SDL_INIT_VIDEO);
@@ -72,39 +75,83 @@ int read_width(const std::string& basedir) {
 	return 0;
 }
 
+bool read_ref_map(const std::string& basedir, std::vector<RefMapTestSample>* samples) {
+	const std::string filename = basedir + "ref_map";
+	if (!g_fs->FileExists(filename)) {
+		return true;
+	}
+	FileRead fr;
+	fr.Open(*g_fs, filename);
+	while (!fr.EndOfFile()) {
+		const std::string current_line = fr.ReadLine();
+		log("#sirver current_line: %s\n", current_line.c_str());
+		const size_t beginning_of_string = current_line.find('"');
+		const size_t end_of_string = current_line.rfind('"');
+		const std::string expected_text =
+		   current_line.substr(beginning_of_string, end_of_string - beginning_of_string);
+		log("#sirver expected_string: %s\n", expected_text.c_str());
+		std::vector<std::string> position_strings;
+const std::string numbers = current_line.substr(0, beginning_of_string);
+log("#sirver numbers: %s\n", numbers.c_str());
+		boost::algorithm::split(
+		   position_strings, numbers, boost::is_any_of(" "));
+
+		if (position_strings.size() != 2) {
+			log("%s contains invalid line %s.\n", basedir.c_str(), current_line.c_str());
+			return false;
+		}
+
+		samples->push_back(RefMapTestSample());
+		samples->back().expected_text = expected_text;
+		samples->back().x = boost::lexical_cast<int>(position_strings[0]);
+		samples->back().y = boost::lexical_cast<int>(position_strings[1]);
+	}
+}
+
 std::string read_file(const std::string& filename) {
 	FileRead fr;
 	fr.Open(*g_fs, filename);
 	return std::string(fr.Data(fr.GetSize()), fr.GetSize());
 }
 
-bool CompareSurfaces(Surface* correct, Surface* generated) {
+bool compare_surfaces(Surface* correct, Surface* generated) {
 	if (correct->height() != generated->height()) {
+		log(" correct->height() != generated->height(): (%d, %d)\n",
+		    correct->height(),
+		    generated->height());
 		return false;
 	}
 	if (correct->width() != generated->width()) {
+		log(" correct->width() != generated->width(): (%d, %d)\n",
+		    correct->width(),
+		    generated->width());
 		return false;
 	}
 
 	correct->lock(Surface::Lock_Normal);
 	generated->lock(Surface::Lock_Normal);
 
-	bool are_equal = true;
+	int nwrong = 0;
 	for (int y = 0; y < correct->height(); ++y) {
 		for (int x = 0; x < correct->width(); ++x) {
 			if (correct->get_pixel(x, y) != generated->get_pixel(x, y)) {
-				are_equal = false;
+				++nwrong;
 			}
 		}
 	}
 
 	generated->unlock(Surface::Unlock_NoChange);
 	correct->unlock(Surface::Unlock_NoChange);
-	return are_equal;
+
+	if (nwrong) {
+		log(" wrong pixels: %.2f %%\n",
+		    static_cast<float>(nwrong) / (correct->width() * correct->height()));
+	}
+	return nwrong != 0;
 }
 
 bool compare_for_test(StandaloneRenderer* renderer) {
-	EnsureSDLIsInitialized();
+	ensure_sdl_is_initialized();
 
 	const std::string test_name = boost::unit_test::framework::current_test_case().p_name.value;
 	const std::string basedir = std::string("data/") + test_name + "/";
@@ -114,7 +161,7 @@ bool compare_for_test(StandaloneRenderer* renderer) {
 
 	std::unique_ptr<Surface> correct(renderer->image_loader()->load(basedir + "correct.png"));
 	if (!correct) {
-		log("Could not load %s/correct.png.", basedir.c_str());
+		log("Could not load %s/correct.png.\n", basedir.c_str());
 		return false;
 	}
 
@@ -124,14 +171,15 @@ bool compare_for_test(StandaloneRenderer* renderer) {
 	for (const std::string& input : inputs) {
 		const std::string input_text = read_file(input);
 		std::unique_ptr<Surface> output(renderer->render(input_text, width));
-		if (!CompareSurfaces(correct.get(), output.get())) {
-			log("%s does not compare equal to correct.png.", input.c_str());
+		if (!compare_surfaces(correct.get(), output.get())) {
+			log("Render output of %s does not compare equal to correct.png.\n", input.c_str());
 		}
 	}
 	return true;
 }
 
 }  // namespace
+
 
 BOOST_AUTO_TEST_CASE(text_simple) {BOOST_CHECK(compare_for_test(renderer.get()));}
 BOOST_AUTO_TEST_CASE(br) {BOOST_CHECK(compare_for_test(renderer.get()));}
