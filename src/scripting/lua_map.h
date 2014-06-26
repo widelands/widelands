@@ -150,9 +150,6 @@ public:
 	L_BuildingDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
-
 	/*
 	 * Properties
 	 */
@@ -163,8 +160,8 @@ public:
 	int get_enhanced(lua_State *);
 	int get_enhancement_cost(lua_State *);
 	int get_enhancements(lua_State *);
-	int get_ismine(lua_State *);
-	int get_isport(lua_State *);
+	int get_is_mine(lua_State *);
+	int get_is_port(lua_State *);
 	int get_isproductionsite(lua_State *);
 	int get_returned_wares(lua_State *);
 	int get_returned_wares_enhanced(lua_State *);
@@ -197,9 +194,6 @@ public:
 	}
 	L_ProductionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
 	}
-
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -234,9 +228,6 @@ public:
 	L_MilitarySiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
-
 	/*
 	 * Properties
 	 */
@@ -268,9 +259,6 @@ public:
 	}
 	L_TrainingSiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
 	}
-
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -312,9 +300,6 @@ public:
 	L_WarehouseDescription(lua_State* L) : L_BuildingDescription(L) {
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
-
 	/*
 	 * Properties
 	 */
@@ -345,9 +330,6 @@ public:
 		: L_MapObjectDescription(waredescr) {}
 	L_WareDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
-
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -380,9 +362,6 @@ public:
 	}
 	L_WorkerDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
-
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties

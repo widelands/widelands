@@ -589,9 +589,9 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
+#undef CAST_TO_LUA
 
 // use the dynamic type of BuildingDescription
-#undef CAST_TO_LUA
 #define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
    (L, new lua_klass(static_cast<const klass *>(desc)))
 
@@ -851,6 +851,7 @@ const PropertyType<L_Map> L_Map::Properties[] = {
 
 void L_Map::__persist(lua_State * /* L */) {
 }
+
 void L_Map::__unpersist(lua_State * /* L */) {
 }
 
@@ -1028,6 +1029,7 @@ const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] 
 };
 
 void L_MapObjectDescription::__persist(lua_State * /* L */) {
+	// NOCOM(#sirver): do this
 }
 void L_MapObjectDescription::__unpersist(lua_State * /* L */) {
 }
@@ -1098,8 +1100,8 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, enhanced),
 	PROP_RO(L_BuildingDescription, enhancement_cost),
 	PROP_RO(L_BuildingDescription, enhancements),
-	PROP_RO(L_BuildingDescription, ismine),
-	PROP_RO(L_BuildingDescription, isport),
+	PROP_RO(L_BuildingDescription, is_mine),
+	PROP_RO(L_BuildingDescription, is_port),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
 	// TODO size should be similar to
@@ -1111,13 +1113,6 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, workarea_radius),
 	{nullptr, nullptr, nullptr},
 };
-
-void L_BuildingDescription::__persist(lua_State * /* L */) {
-	// TODO(GunChleoc): we probably need to persist something here, so that a
-	// description can be held in a local variable on save.
-}
-void L_BuildingDescription::__unpersist(lua_State * /* L */) {
-}
 
 /*
  ==========================================================
@@ -1209,22 +1204,22 @@ int L_BuildingDescription::get_enhancements(lua_State * L) {
 
 
 /* RST
-	.. attribute:: ismine
+	.. attribute:: is_mine
 
 			(RO) true if the building is a mine.
 */
-int L_BuildingDescription::get_ismine(lua_State * L) {
-	lua_pushboolean(L, get()->get_ismine());
+int L_BuildingDescription::get_is_mine(lua_State * L) {
+	lua_pushboolean(L, get()->get_is_mine());
 	return 1;
 }
 
 /* RST
-	.. attribute:: isport
+	.. attribute:: is_port
 
 			(RO) true if the building is a port.
 */
-int L_BuildingDescription::get_isport(lua_State * L) {
-	lua_pushboolean(L, get()->get_isport());
+int L_BuildingDescription::get_is_port(lua_State * L) {
+	lua_pushboolean(L, get()->get_is_port());
 	return 1;
 }
 
@@ -1303,11 +1298,6 @@ const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Pro
 	{nullptr, nullptr, nullptr},
 };
 
-void L_ProductionSiteDescription::__persist(lua_State * /* L */) {
-}
-void L_ProductionSiteDescription::__unpersist(lua_State * /* L */) {
-}
-
 /*
  ==========================================================
  PROPERTIES
@@ -1319,6 +1309,7 @@ void L_ProductionSiteDescription::__unpersist(lua_State * /* L */) {
 	.. attribute:: inputs
 		(RO) An array with pairs of int, ware_descr.name describing the input of the productionsite
 */
+// NOCOM(#gunchleco): Why is this not pushing waredecsriptions direcly? more flexible.
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	const ProductionSite_Descr * descr = get();
@@ -1360,6 +1351,8 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	.. attribute:: working_positions
 		(RO) An array with pairs of int, worker_descr.name describing the worker positions of the productionsite
 */
+// NOCOM(#gunchleco): should also push descriptions.
+// NOCOM(#gunchleco): the documentation is not correct. this will push {miner, miner, miner} for an atlantean mine.
 int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	const ProductionSite_Descr * descr = get();
@@ -1368,11 +1361,12 @@ int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	int index = 1;
 	for (const auto& positions_pair : descr->working_positions()) {
 		int amount = positions_pair.second;
-		while (amount-- > 0)
+		while (amount > 0)
 		{
 			lua_pushint32(L, index++);
 			lua_pushstring(L, tribe.get_worker_descr(positions_pair.first)->name());
 			lua_settable(L, -3);
+			--amount;
 		}
 	}
 	return 1;
@@ -1399,11 +1393,6 @@ const PropertyType<L_MilitarySiteDescription> L_MilitarySiteDescription::Propert
 	PROP_RO(L_MilitarySiteDescription, max_number_of_soldiers),
 	{nullptr, nullptr, nullptr},
 };
-
-void L_MilitarySiteDescription::__persist(lua_State * /* L */) {
-}
-void L_MilitarySiteDescription::__unpersist(lua_State * /* L */) {
-}
 
 /*
  ==========================================================
@@ -1464,11 +1453,6 @@ const PropertyType<L_TrainingSiteDescription> L_TrainingSiteDescription::Propert
 	PROP_RO(L_TrainingSiteDescription, min_hp),
 	{nullptr, nullptr, nullptr},
 };
-
-void L_TrainingSiteDescription::__persist(lua_State * /* L */) {
-}
-void L_TrainingSiteDescription::__unpersist(lua_State * /* L */) {
-}
 
 /*
  ==========================================================
@@ -1623,11 +1607,6 @@ const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] 
 	{nullptr, nullptr, nullptr},
 };
 
-void L_WarehouseDescription::__persist(lua_State * /* L */) {
-}
-void L_WarehouseDescription::__unpersist(lua_State * /* L */) {
-}
-
 /*
  ==========================================================
  PROPERTIES
@@ -1665,11 +1644,6 @@ const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
 	PROP_RO(L_WareDescription, consumers),
 	{nullptr, nullptr, nullptr},
 };
-
-void L_WareDescription::__persist(lua_State * /* L */) {
-}
-void L_WareDescription::__unpersist(lua_State * /* L */) {
-}
 
 /*
  ==========================================================
@@ -1775,11 +1749,6 @@ const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 	PROP_RO(L_WorkerDescription, buildcost),
 	{nullptr, nullptr, nullptr},
 };
-
-void L_WorkerDescription::__persist(lua_State * /* L */) {
-}
-void L_WorkerDescription::__unpersist(lua_State * /* L */) {
-}
 
 /*
  ==========================================================
@@ -3387,6 +3356,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 void L_Field::__persist(lua_State * L) {
 	PERS_INT32("x", m_c.x); PERS_INT32("y", m_c.y);
 }
+
 void L_Field::__unpersist(lua_State * L) {
 	UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
 }
@@ -3891,6 +3861,7 @@ const PropertyType<L_PlayerSlot> L_PlayerSlot::Properties[] = {
 void L_PlayerSlot::__persist(lua_State * L) {
 	PERS_UINT32("player", m_plr);
 }
+
 void L_PlayerSlot::__unpersist(lua_State * L) {
 	UNPERS_UINT32("player", m_plr);
 }
