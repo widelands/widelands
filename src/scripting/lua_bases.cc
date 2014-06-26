@@ -148,8 +148,7 @@ int L_EditorGameBase::get_players(lua_State * L) {
 		:arg tribe_name: the name of the tribe that this building belongs to
 		:arg building_name: the name of the building
 
-	Registers a building description so Lua can reference it from the game. Call this with
-	wl.Game():get_building_description(tribe_name, building_name)
+		Registers a building description so Lua can reference it from the game.
 
 		(RO) The :class:`~wl.Game.Building_description`.
 */
@@ -163,7 +162,7 @@ int L_EditorGameBase::get_building_description(lua_State* L) {
 	if (!tribe_description) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	Building_Index building_index = tribe_description->building_index(building_name);
+	const Building_Index building_index = tribe_description->building_index(building_name);
 	if (building_index == INVALID_INDEX) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
@@ -179,8 +178,7 @@ int L_EditorGameBase::get_building_description(lua_State* L) {
 		:arg tribe_name: the name of the tribe that this building belongs to
 		:arg ware_name: the name of the ware
 
-	Registers a ware description so Lua can reference it from the game. Call this with
-	wl.Game():get_ware_description(tribe_name, ware_name)
+		Registers a ware description so Lua can reference it from the game.
 
 		(RO) The :class:`~wl.Game.Ware_description`.
 */
@@ -209,8 +207,7 @@ int L_EditorGameBase::get_ware_description(lua_State* L) {
 		:arg tribe_name: the name of the tribe that this building belongs to
 		:arg worker_name: the name of the worker
 
-	Registers a worker description so Lua can reference it from the game. Call this with
-	wl.Game():get_worker_description(tribe_name, worker_name)
+		Registers a worker description so Lua can reference it from the game.
 
 		(RO) The :class:`~wl.Game.Worker_description`.
 */
@@ -224,7 +221,7 @@ int L_EditorGameBase::get_worker_description(lua_State* L) {
 	if (!tribe_description) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	Ware_Index worker_index = tribe_description->worker_index(worker_name);
+	const Ware_Index worker_index = tribe_description->worker_index(worker_name);
 	if (worker_index == INVALID_INDEX) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}

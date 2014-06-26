@@ -391,4 +391,3 @@ uint32_t LuaGameInterface::write_global_env
 
 	return nwritten;
 }
-
