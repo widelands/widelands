@@ -62,7 +62,7 @@ public:
 	void push_arg(const Widelands::Coords&);
 	void push_arg(const Widelands::Building_Descr*);
 
-	// NOCOM(#sirver): document
+	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();
 	std::string pop_string();
 
