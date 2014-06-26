@@ -127,9 +127,13 @@ protected:
 		assert(mapobjectdescr_ != nullptr);
 		return mapobjectdescr_;
 	}
+	// For persistence.
+	void set_description_pointer(const Widelands::Map_Object_Descr* pointer) {
+		mapobjectdescr_ = pointer;
+	}
 
 private:
-	const Widelands::Map_Object_Descr * const mapobjectdescr_;
+	const Widelands::Map_Object_Descr* mapobjectdescr_;
 };
 
 #define CASTED_GET_DESCRIPTION(klass)                                                              \
@@ -149,6 +153,9 @@ public:
 	}
 	L_BuildingDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -331,6 +338,9 @@ public:
 	L_WareDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
 
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
 	/*
 	 * Properties
 	 */
@@ -362,6 +372,9 @@ public:
 	}
 	L_WorkerDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties

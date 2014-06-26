@@ -43,22 +43,6 @@ using namespace Widelands;
 
 namespace LuaMap {
 
-namespace  {
-
-// Pushes a lua table with (name, count) pairs for the given 'wares_map' on the
-// stack. Returns 1.
-int wares_map_to_lua(lua_State* L, const Buildcost& wares_map, const Tribe_Descr& tribe) {
-	lua_newtable(L);
-	for (const auto& cost : wares_map) {
-		lua_pushstring(L, tribe.get_ware_descr(cost.first)->name());
-		lua_pushuint32(L, cost.second);
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-
-}  // namespace
 
 /* RST
 :mod:`wl.map`
@@ -74,6 +58,19 @@ int wares_map_to_lua(lua_State* L, const Buildcost& wares_map, const Tribe_Descr
 */
 
 namespace {
+
+// Pushes a lua table with (name, count) pairs for the given 'wares_map' on the
+// stack. Returns 1.
+int wares_map_to_lua(lua_State* L, const Buildcost& wares_map, const Tribe_Descr& tribe) {
+	lua_newtable(L);
+	for (const auto& cost : wares_map) {
+		lua_pushstring(L, tribe.get_ware_descr(cost.first)->name());
+		lua_pushuint32(L, cost.second);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 
 struct SoldierDescr {
 	SoldierDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev)
@@ -1028,10 +1025,13 @@ const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] 
 	{nullptr, nullptr, nullptr},
 };
 
-void L_MapObjectDescription::__persist(lua_State * /* L */) {
-	// NOCOM(#sirver): do this
+// Only base classes can be persisted.
+void L_MapObjectDescription::__persist(lua_State*) {
+	assert(false);
 }
-void L_MapObjectDescription::__unpersist(lua_State * /* L */) {
+
+void L_MapObjectDescription::__unpersist(lua_State*) {
+	assert(false);
 }
 
 /*
@@ -1113,6 +1113,26 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, workarea_radius),
 	{nullptr, nullptr, nullptr},
 };
+
+// NOCOM(#gunchleoc): This is a sample of how it should work. It is
+// untested though. Could you duplicate this for WareDescription
+// and WorkerDescription and add tests to lua_persistence.wgf?
+void L_BuildingDescription::__persist(lua_State* L) {
+	const Building_Descr* descr = get();
+	PERS_STRING("tribe", descr->tribe().name());
+	PERS_STRING("name", descr->name());
+}
+
+void L_BuildingDescription::__unpersist(lua_State* L) {
+	std::string name, tribe_name;
+	UNPERS_STRING("tribe", tribe_name);
+	UNPERS_STRING("name", name);
+	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
+	Building_Index idx = tribe->safe_building_index(name.c_str());
+	set_description_pointer(
+			tribe->get_building_descr(idx));
+}
+
 
 /*
  ==========================================================
@@ -1209,7 +1229,7 @@ int L_BuildingDescription::get_enhancements(lua_State * L) {
 			(RO) true if the building is a mine.
 */
 int L_BuildingDescription::get_is_mine(lua_State * L) {
-	lua_pushboolean(L, get()->get_is_mine());
+	lua_pushboolean(L, get()->get_ismine());
 	return 1;
 }
 
@@ -1219,7 +1239,7 @@ int L_BuildingDescription::get_is_mine(lua_State * L) {
 			(RO) true if the building is a port.
 */
 int L_BuildingDescription::get_is_port(lua_State * L) {
-	lua_pushboolean(L, get()->get_is_port());
+	lua_pushboolean(L, get()->get_isport());
 	return 1;
 }
 
@@ -1309,7 +1329,7 @@ const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Pro
 	.. attribute:: inputs
 		(RO) An array with pairs of int, ware_descr.name describing the input of the productionsite
 */
-// NOCOM(#gunchleco): Why is this not pushing waredecsriptions direcly? more flexible.
+// NOCOM(#gunchleoc): Why is this not pushing waredecsriptions direcly? more flexible.
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	const ProductionSite_Descr * descr = get();
@@ -1351,8 +1371,9 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	.. attribute:: working_positions
 		(RO) An array with pairs of int, worker_descr.name describing the worker positions of the productionsite
 */
-// NOCOM(#gunchleco): should also push descriptions.
-// NOCOM(#gunchleco): the documentation is not correct. this will push {miner, miner, miner} for an atlantean mine.
+// NOCOM(#gunchleoc): should also push descriptions.
+// NOCOM(#gunchleoc): the documentation is not correct. this will push {miner,
+// miner, miner} for an atlantean mine.
 int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	const ProductionSite_Descr * descr = get();
@@ -1439,7 +1460,7 @@ const MethodType<L_TrainingSiteDescription> L_TrainingSiteDescription::Methods[]
 	{nullptr, nullptr},
 };
 const PropertyType<L_TrainingSiteDescription> L_TrainingSiteDescription::Properties[] = {
-	// NOCOM(#GunChleoc): I changed max_* to return 0 when the site does not
+	// NOCOM(#gunchleoc): I changed max_* to return 0 when the site does not
 	// provide the training, because the tests where written that way. On second
 	// thought though, returning nil is more natural.
 	PROP_RO(L_TrainingSiteDescription, max_attack),
@@ -1607,6 +1628,13 @@ const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] 
 	{nullptr, nullptr, nullptr},
 };
 
+// NOCOM(#gunchleoc): implement and test me
+void L_WareDescription::__persist(lua_State* /* L */) {
+}
+
+void L_WareDescription::__unpersist(lua_State* /* L */) {
+}
+
 /*
  ==========================================================
  PROPERTIES
@@ -1749,6 +1777,13 @@ const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 	PROP_RO(L_WorkerDescription, buildcost),
 	{nullptr, nullptr, nullptr},
 };
+
+// NOCOM(#gunchleoc): implement and test me
+void L_WorkerDescription::__persist(lua_State* /* L */) {
+}
+
+void L_WorkerDescription::__unpersist(lua_State* /* L */) {
+}
 
 /*
  ==========================================================
