@@ -47,6 +47,13 @@ else (CMAKE_VERSION VERSION_LESS 2.8.11)
   include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectories.cmake)
 endif (CMAKE_VERSION VERSION_LESS 2.8.11)
 
+function(_include_directories TARGET DIR)
+  _include_directories_internal(${TARGET} ${DIR} FALSE)
+endfunction(_include_directories TARGET DIR)
+function(_include_system_directories TARGET DIR)
+  _include_directories_internal(${TARGET} ${DIR} TRUE)
+endfunction(_include_system_directories TARGET_DIR)
+
 macro(_common_compile_tasks)
   if (NOT ARG_C_LIBRARY)
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_GENERIC_CXX_FLAGS}")
@@ -73,60 +80,60 @@ macro(_common_compile_tasks)
 
   if(NOT ARG_THIRD_PARTY)
     # src/ is the base for all of our includes. The binary one is for generated files.
-    _include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src FALSE)
-    _include_directories(${NAME} ${CMAKE_BINARY_DIR}/src FALSE)
+    _include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src)
+    _include_directories(${NAME} ${CMAKE_BINARY_DIR}/src)
 
     # Boost is practically the standard library, so we always add a search path
     # to include it easily. Except for third party.
-    _include_directories(${NAME} ${Boost_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${Boost_INCLUDE_DIR})
   endif()
 
   if(ARG_USES_ZLIB)
-    _include_directories(${NAME} ${ZLIB_INCLUDE_DIRS} TRUE)
+    _include_system_directories(${NAME} ${ZLIB_INCLUDE_DIRS})
     target_link_libraries(${NAME} ${ZLIB_LIBRARY})
   endif()
 
   # OpenGL and GLEW are one thing for us. If you use the one, you also use the
   # other.
   if(ARG_USES_OPENGL)
-    _include_directories(${NAME} ${GLEW_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
     target_link_libraries(${NAME} ${GLEW_LIBRARY})
     target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
     add_definitions(${GLEW_EXTRA_DEFINITIONS})
   endif()
 
   if(ARG_USES_PNG)
-    _include_directories(${NAME} ${PNG_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${PNG_INCLUDE_DIR})
     target_link_libraries(${NAME} ${PNG_LIBRARY})
   endif()
 
   if(ARG_USES_SDL)
-    _include_directories(${NAME} ${SDL_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${SDL_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDL_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_MIXER)
-    _include_directories(${NAME} ${SDLMIXER_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${SDLMIXER_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLMIXER_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_NET)
-    _include_directories(${NAME} ${SDLNET_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${SDLNET_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLNET_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_IMAGE)
-    _include_directories(${NAME} ${SDLIMAGE_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${SDLIMAGE_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLIMAGE_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_GFX)
-    _include_directories(${NAME} ${SDLGFX_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${SDLGFX_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLGFX_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_TTF)
-    _include_directories(${NAME} ${SDLTTF_INCLUDE_DIR} TRUE)
+    _include_system_directories(${NAME} ${SDLTTF_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLTTF_LIBRARY})
   endif()
 
@@ -134,7 +141,7 @@ macro(_common_compile_tasks)
     # libintl is not used on all systems, so only include it, when we actually
     # found it.
     if (INTL_FOUND)
-      _include_directories(${NAME} ${INTL_INCLUDE_DIR} TRUE)
+      _include_system_directories(${NAME} ${INTL_INCLUDE_DIR})
       target_link_libraries(${NAME} ${INTL_LIBRARY})
     endif()
   endif()
