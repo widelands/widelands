@@ -123,7 +123,7 @@ public:
 	 * C methods
 	 */
 protected:
-	const Widelands::Map_Object_Descr* get(void) const {
+	const Widelands::Map_Object_Descr* get() const {
 		assert(mapobjectdescr_ != nullptr);
 		return mapobjectdescr_;
 	}

@@ -60,6 +60,8 @@ wl_library(ui_basic
     graphic_image
     graphic_surface
     io_filesystem
+    # TODO(sirver): should not depend on logic
+    logic
     profile
     sound
     widelands_ball_of_mud

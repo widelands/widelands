@@ -36,7 +36,6 @@
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
 
