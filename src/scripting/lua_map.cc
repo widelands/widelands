@@ -46,25 +46,13 @@ namespace LuaMap {
 namespace  {
 
 // Pushes a lua table with (name, count) pairs for the given 'wares_map' on the
-// stack, sorted by tribe.wares_order(). Returns 1.
+// stack. Returns 1.
 int wares_map_to_lua(lua_State* L, const Buildcost& wares_map, const Tribe_Descr& tribe) {
-
-	// sorting according to wares order, code copied from waremap_to_richtext in waredisplay.cc
-	std::map<Widelands::Ware_Index, uint8_t>::const_iterator c;
-	Widelands::Tribe_Descr::WaresOrder::iterator i;
-	std::vector<Widelands::Ware_Index>::iterator j;
-	Widelands::Tribe_Descr::WaresOrder order = tribe.wares_order();
-
 	lua_newtable(L);
-	for (i = order.begin(); i != order.end(); i++) {
-		for (j = i->begin(); j != i->end(); ++j) {
-			if ((c = wares_map.find(*j)) != wares_map.end()) {
-
-				lua_pushstring(L, tribe.get_ware_descr(c->first)->name());
-				lua_pushuint32(L, c->second);
-				lua_settable(L, -3);
-			}
-		}
+	for (const auto& cost : wares_map) {
+		lua_pushstring(L, tribe.get_ware_descr(cost.first)->name());
+		lua_pushuint32(L, cost.second);
+		lua_settable(L, -3);
 	}
 	return 1;
 }
