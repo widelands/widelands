@@ -22,6 +22,7 @@
 #include <cstdio>
 #include <list>
 
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "gamecontroller.h"
@@ -49,7 +50,6 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wui/mapviewpixelconstants.h"
 
 namespace Widelands {
@@ -610,7 +610,7 @@ void Soldier::draw_info_icon
 	uint32_t health_width = 2 * (w - 1) * m_hp_current / get_max_hitpoints();
 	Rect energy_inner(Point(pt.x - w + 1, pt.y + 1), health_width, 3);
 	Rect energy_complement
-		(energy_inner + Point(health_width, 0), 2 * (w - 1) - health_width, 3);
+		(energy_inner.top_left() + Point(health_width, 0), 2 * (w - 1) - health_width, 3);
 	const RGBColor & color = owner().get_playercolor();
 	RGBColor complement_color;
 
@@ -763,7 +763,7 @@ void Soldier::init_auto_task(Game & game) {
 
 struct FindNodeOwned {
 	FindNodeOwned(Player_Number owner) : m_owner(owner)
-	{};
+	{}
 	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}

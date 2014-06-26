@@ -28,6 +28,7 @@
 #include <vector>
 
 #include <stdint.h>
+#include <boost/noncopyable.hpp>
 
 #include "io/filesystem/filesystem_exceptions.h"
 

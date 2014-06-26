@@ -19,6 +19,8 @@
 
 #include "scripting/lua_table.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 LuaTable::LuaTable(lua_State* L) : L_(L), warn_about_unaccessed_keys_(true) {

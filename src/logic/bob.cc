@@ -23,12 +23,13 @@
 
 #include <stdint.h>
 
-#include "backtrace.h"
+#include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/backtrace.h"
 #include "logic/checkstep.h"
 #include "logic/critter_bob.h"
 #include "logic/findbob.h"
@@ -44,7 +45,6 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wui/mapviewpixelconstants.h"
 
 
@@ -468,7 +468,8 @@ struct BlockedTracker {
 		bool operator()(const CoordData & a, const CoordData & b) const {
 			if (a.dist != b.dist)
 				return a.dist < b.dist;
-			return a.coord.all < b.coord.all;
+			return std::forward_as_tuple(a.coord.y, a.coord.x) <
+			       std::forward_as_tuple(b.coord.y, b.coord.x);
 		}
 	};
 	typedef std::map<CoordData, bool, CoordOrdering> Cache;

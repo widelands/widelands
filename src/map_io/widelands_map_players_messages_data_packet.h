@@ -22,6 +22,6 @@
 
 #include "map_io/widelands_map_data_packet.h"
 
-MAP_DATA_PACKET(Map_Players_Messages_Data_Packet);
+MAP_DATA_PACKET(Map_Players_Messages_Data_Packet)
 
 #endif

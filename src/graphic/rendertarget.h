@@ -22,17 +22,17 @@
 
 #include <vector>
 
-#include "align.h"
+#include "base/rect.h"
+#include "graphic/align.h"
+#include "graphic/color.h"
 #include "graphic/compositemode.h"
 #include "graphic/image.h"
-#include "rect.h"
-#include "rgbcolor.h"
 
 class Surface;
 
 namespace Widelands {
 class Player;
-};
+}
 
 /**
  * This class represents anything that can be rendered to.

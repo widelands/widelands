@@ -102,7 +102,7 @@ private:
  */
 class TrainingSite : public ProductionSite, public SoldierControl {
 	friend class Map_Buildingdata_Data_Packet;
-	MO_DESCR(TrainingSite_Descr);
+	MO_DESCR(TrainingSite_Descr)
 	friend struct ::TrainingSite_Window;
 
 	struct Upgrade {

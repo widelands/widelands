@@ -20,11 +20,12 @@
 #ifndef FONT_HANDLER_H
 #define FONT_HANDLER_H
 
+#include <limits>
 #include <memory>
 #include <string>
 
-#include "align.h"
-#include "point.h"
+#include "graphic/align.h"
+#include "base/point.h"
 
 class RenderTarget;
 

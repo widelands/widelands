@@ -28,7 +28,7 @@
 
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
-#include "point.h"
+#include "base/point.h"
 
 class Image;
 

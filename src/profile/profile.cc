@@ -26,18 +26,18 @@
 #include <limits>
 #include <string>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"
-#include "wexception.h"
 
 #define TRUE_WORDS 4
-char const * trueWords[TRUE_WORDS] =
+static char const * trueWords[TRUE_WORDS] =
 {
 	"true",
 	"yes",
@@ -46,7 +46,7 @@ char const * trueWords[TRUE_WORDS] =
 };
 
 #define FALSE_WORDS 4
-char const * falseWords[FALSE_WORDS] =
+static char const * falseWords[FALSE_WORDS] =
 {
 	"false",
 	"no",

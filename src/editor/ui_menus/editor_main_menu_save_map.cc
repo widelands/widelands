@@ -26,11 +26,12 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "constants.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
@@ -44,7 +45,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "upcast.h"
-#include "wexception.h"
 
 inline Editor_Interactive & Main_Menu_Save_Map::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());

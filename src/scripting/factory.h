@@ -22,7 +22,7 @@
 
 
 #include "logic/widelands.h"
-#include "scripting/eris/lua.hpp"
+#include "third_party/eris/lua.hpp"
 
 /*
  * Class to create the correct type for types shared between Editor and Game.

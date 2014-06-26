@@ -25,8 +25,8 @@
 #include <boost/signals2.hpp>
 
 #include "constants.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 
 namespace UI {
 

@@ -107,7 +107,7 @@ end
 function assert_not_equal(unexpected, actual, msg)
   lunit_stats_inc("assertions")
   lunit_check_msg("assert_not_equal", msg)
-  lunit_do_assert(unexpected ~= actual, "'"..tostring(expected).."' not expected but was one", msg)
+  lunit_do_assert(unexpected ~= actual, "'"..tostring(unexpected).."' not expected", msg)
   return actual
 end
 

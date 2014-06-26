@@ -23,11 +23,11 @@
 #include <map>
 #include <string>
 
+#include "base/log.h"
 #include "graphic/image.h"
 #include "graphic/image_loader.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
-#include "log.h"
 
 
 using namespace std;

@@ -27,7 +27,7 @@
 
 #include <stdint.h>
 
-#include "rgbcolor.h"
+#include "graphic/color.h"
 #include "graphic/text/rt_errors.h"
 
 namespace RT {
@@ -35,7 +35,7 @@ namespace RT {
 struct Child;
 class IAttr {
 public:
-	virtual ~IAttr() {};
+	virtual ~IAttr() {}
 
 	virtual const std::string & name() const = 0;
 	virtual long get_int() const = 0;
@@ -46,7 +46,7 @@ public:
 
 class IAttrMap {
 public:
-	virtual ~IAttrMap() {};
+	virtual ~IAttrMap() {}
 
 	virtual const IAttr & operator[] (const std::string&) const = 0;
 	virtual bool has(const std::string &) const = 0;
@@ -56,7 +56,7 @@ class ITag {
 public:
 	typedef std::vector<Child*> ChildList;
 
-	virtual ~ITag() {};
+	virtual ~ITag() {}
 	virtual const std::string & name() const = 0;
 	virtual const IAttrMap & attrs() const = 0;
 	virtual const ChildList & childs() const = 0;
@@ -78,7 +78,7 @@ typedef std::set<std::string> TagSet;
 
 class IParser {
 public:
-	virtual ~IParser() {};
+	virtual ~IParser() {}
 
 	virtual ITag * parse(std::string text, const TagSet &) = 0;
 	virtual std::string remaining_text() = 0;

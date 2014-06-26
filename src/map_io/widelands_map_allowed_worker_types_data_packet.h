@@ -24,6 +24,6 @@
 
 /// If present, this contains all worker types that are allowed to be build
 /// by players. If absent, all worker types are allowed per default.
-MAP_DATA_PACKET(Map_Allowed_Worker_Types_Data_Packet);
+MAP_DATA_PACKET(Map_Allowed_Worker_Types_Data_Packet)
 
 #endif

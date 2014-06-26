@@ -24,8 +24,8 @@
 #include <string>
 #include <vector>
 
-#include "point.h"
-#include "rect.h"
+#include "base/point.h"
+#include "base/rect.h"
 
 class Image;
 class RenderTarget;

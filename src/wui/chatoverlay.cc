@@ -22,8 +22,8 @@
 #include "chat.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "logmessage.h"
 #include "profile/profile.h"
+#include "wui/logmessage.h"
 
 /**
  * Time, in seconds, that chat messages are shown in the overlay.

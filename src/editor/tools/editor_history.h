@@ -37,7 +37,7 @@ namespace UI {struct Button;}
 struct Editor_History {
 
 	Editor_History(UI::Button & undo, UI::Button & redo):
-		m_undo_button(undo), m_redo_button(redo) {};
+		m_undo_button(undo), m_redo_button(redo) {}
 
 	uint32_t do_action(Editor_Tool& tool,
 	                   Editor_Tool::Tool_Index ind,

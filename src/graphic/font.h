@@ -22,8 +22,8 @@
 
 #include <SDL_ttf.h>
 
+#include "graphic/color.h"
 #include "io/fileread.h"
-#include "rgbcolor.h"
 
 namespace UI {
 

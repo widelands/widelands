@@ -22,8 +22,8 @@
 
 #include <memory>
 
-#include "description_maintainer.h"
 #include "logic/bob.h"
+#include "logic/description_maintainer.h"
 
 namespace Widelands {
 

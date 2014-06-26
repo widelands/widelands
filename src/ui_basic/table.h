@@ -27,9 +27,9 @@
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 
-#include "align.h"
+#include "graphic/align.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 
 
 namespace UI {
@@ -91,7 +91,7 @@ public:
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () override {
+		char const * what() const noexcept override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
@@ -219,7 +219,7 @@ public:
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () override {
+		char const * what() const noexcept override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
@@ -234,7 +234,7 @@ public:
 			throw No_Selection();
 		remove(m_selection);
 	}
-	void * get_selected() const {return get_selected_record().entry();};
+	void * get_selected() const {return get_selected_record().entry();}
 
 	uint32_t get_lineheight() const {return m_lineheight + 2;}
 	uint32_t get_eff_w     () const {return get_w();}

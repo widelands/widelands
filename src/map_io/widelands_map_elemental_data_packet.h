@@ -46,7 +46,9 @@ struct Map_Elemental_Data_Packet {
 
 	/// If this map was created before the one_world merge was done, this returns
 	/// the old world name, otherwise "".
-	const std::string& old_world_name() const { return old_world_name_; }
+	const std::string& old_world_name() const {
+		return old_world_name_;
+	}
 
 private:
 	std::string old_world_name_;

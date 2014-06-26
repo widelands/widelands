@@ -19,8 +19,11 @@
 
 #include "editor/ui_menus/editor_tool_set_terrain_options_menu.h"
 
+#include <memory>
+
 #include <SDL_keysym.h>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "graphic/graphic.h"
@@ -28,7 +31,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "graphic/texture.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/terrain_description.h"
@@ -42,14 +44,14 @@ namespace {
 using namespace Widelands;
 
 static const int32_t check[] = {
-   TerrainDescription::GREEN,                                 //  "green"
-   TerrainDescription::DRY,                                   //  "dry"
-   TerrainDescription::DRY | TerrainDescription::MOUNTAIN,    //  "mountain"
-   TerrainDescription::DRY | TerrainDescription::UNPASSABLE,  //  "unpassable"
-   TerrainDescription::ACID | TerrainDescription::DRY |
-      TerrainDescription::UNPASSABLE,  //  "dead" or "acid"
-   TerrainDescription::UNPASSABLE | TerrainDescription::DRY | TerrainDescription::WATER,
-   -1,  // end marker
+	TerrainDescription::GREEN,                                 //  "green"
+	TerrainDescription::DRY,                                   //  "dry"
+	TerrainDescription::DRY | TerrainDescription::MOUNTAIN,    //  "mountain"
+	TerrainDescription::DRY | TerrainDescription::UNPASSABLE,  //  "unpassable"
+	TerrainDescription::ACID | TerrainDescription::DRY |
+		TerrainDescription::UNPASSABLE,  //  "dead" or "acid"
+	TerrainDescription::UNPASSABLE | TerrainDescription::DRY | TerrainDescription::WATER,
+	-1,  // end marker
 };
 
 UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
@@ -123,7 +125,7 @@ Editor_Tool_Set_Terrain_Options_Menu::Editor_Tool_Set_Terrain_Options_Menu(
 	      [this](UI::Panel* cb_parent, const TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, terrain_descr, &offscreen_images_);
 		   },
-	      [this] { select_correct_tool(); },
+	      [this] {select_correct_tool();},
 	      &tool));
 	set_center_panel(multi_select_menu_.get());
 }

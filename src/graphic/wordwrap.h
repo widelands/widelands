@@ -21,9 +21,9 @@
 
 #include <string>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "graphic/font.h"
-#include "point.h"
+#include "base/point.h"
 
 class RenderTarget;
 

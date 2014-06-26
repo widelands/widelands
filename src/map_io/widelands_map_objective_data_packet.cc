@@ -19,6 +19,8 @@
 
 #include "map_io/widelands_map_objective_data_packet.h"
 
+#include <memory>
+
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"

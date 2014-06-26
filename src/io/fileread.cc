@@ -19,7 +19,7 @@
 
 #include "io/fileread.h"
 
-FileRead::FileRead() : data_(nullptr), length_(0) {};
+FileRead::FileRead() : data_(nullptr), length_(0) {}
 
 FileRead::~FileRead() {
 	if (data_) {

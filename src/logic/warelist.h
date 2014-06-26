@@ -23,7 +23,6 @@
 #include <cassert>
 #include <vector>
 
-#include <SDL.h>
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
@@ -36,7 +35,7 @@ namespace Widelands {
  * It is useful for warehouses and for economy-wide inventory.
  */
 struct WareList {
-	WareList() {};
+	WareList() {}
 	~WareList();
 
 	void clear() {m_wares.clear();} /// Clear the storage

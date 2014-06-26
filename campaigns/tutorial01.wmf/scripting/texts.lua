@@ -505,9 +505,9 @@ mining_01 = {
    rt("image=tribes/barbarians/resi_iron2/resi_00.png", p(_ "a lot of iron")) ..
    rt("image=tribes/barbarians/resi_gold1/resi_00.png", p(_ "a bit of gold")) ..
    rt("image=tribes/barbarians/resi_gold2/resi_00.png", p(_ "a lot of gold")) ..
-   rt("image=tribes/barbarians/resi_granit1/resi_00.png",
+   rt("image=tribes/barbarians/resi_granite1/resi_00.png",
       p(_ "a bit of granite")) ..
-   rt("image=tribes/barbarians/resi_granit2/resi_00.png",
+   rt("image=tribes/barbarians/resi_granite2/resi_00.png",
       p(_ "a lot of granite")) ..
    rt("image=tribes/barbarians/resi_water1/resi_00.png", p(_ "water")) ..
    rt("image=tribes/barbarians/resi_none/resi_00.png",

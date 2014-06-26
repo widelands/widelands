@@ -24,16 +24,15 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "s2map.h"
-#include "wexception.h"
 
 using Widelands::WL_Map_Loader;
 

@@ -19,13 +19,16 @@
 
 #include "ui_fsmenu/launchSPG.h"
 
+#include <memory>
+
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/i18n.h"
+#include "base/warning.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/instances.h"
@@ -37,7 +40,6 @@
 #include "scripting/scripting.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-#include "warning.h"
 #include "wui/playerdescrgroup.h"
 
 Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG

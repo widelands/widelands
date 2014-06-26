@@ -24,8 +24,9 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
-#include <config.h>
 
+#include "base/wexception.h"
+#include "config.h"
 #include "container_iterate.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
@@ -51,7 +52,6 @@
 #include "sound/sound_handler.h"
 #include "text_layout.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {
@@ -142,9 +142,13 @@ ImmovableProgram::ImmovableProgram(const std::string& directory,
 	while (Section::Value* const v = program_s.get_next_val()) {
 		Action* action;
 		if (not strcmp(v->get_name(), "animate")) {
+			// Copying, as next_word() modifies the string..... Awful design.
+			std::unique_ptr<char []> arguments(new char[strlen(v->get_string()) + 1]);
+			strncpy(arguments.get(), v->get_string(), strlen(v->get_string()) + 1);
+
+			char* full_line = arguments.get();
 			bool reached_end;
-			char * full_line = v->get_string();
-			char * const animation_name = match(full_line, reached_end);
+			char * const animation_name = next_word(full_line, reached_end);
 			if (!immovable.is_animation_known(animation_name)) {
 				immovable.add_animation(
 				   animation_name,
@@ -318,7 +322,7 @@ const EditorCategory& Immovable_Descr::editor_category() const {
 
 
 void Immovable_Descr::make_sure_default_program_is_there() {
-	if (m_programs.find("program") == m_programs.end()) {  //  default program
+	if (!m_programs.count("program")) {  //  default program
 		assert(is_animation_known("idle"));
 		char parameters[] = "idle";
 		m_programs["program"] = new ImmovableProgram(
@@ -342,14 +346,14 @@ Immovable_Descr::~Immovable_Descr()
  * Find the program of the given name.
 */
 ImmovableProgram const * Immovable_Descr::get_program
-	(const std::string & programname) const
+	(const std::string & program_name) const
 {
-	Programs::const_iterator const it = m_programs.find(programname);
+	Programs::const_iterator const it = m_programs.find(program_name);
 
 	if (it == m_programs.end())
 		throw game_data_error
 			("immovable %s has no program \"%s\"",
-			 name().c_str(), programname.c_str());
+			 name().c_str(), program_name.c_str());
 
 	return it->second;
 }
@@ -387,14 +391,11 @@ m_program_ptr (0),
 m_anim_construction_total(0),
 m_anim_construction_done(0),
 m_program_step(0),
-m_action_data(nullptr),
 m_reserved_by_worker(false)
 {}
 
 Immovable::~Immovable()
 {
-	delete m_action_data;
-	m_action_data = nullptr;
 }
 
 int32_t Immovable::get_type() const
@@ -441,8 +442,7 @@ void Immovable::start_animation
 void Immovable::increment_program_pointer()
 {
 	m_program_ptr = (m_program_ptr + 1) % m_program->size();
-	delete m_action_data;
-	m_action_data = nullptr;
+	m_action_data.reset(nullptr);
 }
 
 
@@ -457,17 +457,16 @@ void Immovable::init(Editor_Game_Base & egbase)
 
 	//  Set animation data according to current program state.
 	ImmovableProgram const * prog = m_program;
-	if (!prog)
+	if (!prog) {
 		prog = descr().get_program("program");
-	if
-		(upcast
-		 	(ImmovableProgram::ActAnimate const,
-		 	 act_animate,
-		 	 &(*prog)[m_program_ptr]))
+		assert(prog != nullptr);
+	}
+	if (upcast(ImmovableProgram::ActAnimate const, act_animate, &(*prog)[m_program_ptr]))
 		start_animation(egbase, act_animate->animation());
 
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		switch_program(*game, "program");
+	}
 }
 
 
@@ -485,13 +484,12 @@ void Immovable::cleanup(Editor_Game_Base & egbase)
 /**
  * Switch the currently running program.
 */
-void Immovable::switch_program(Game & game, const std::string & programname)
-{
-	m_program = descr().get_program(programname);
+void Immovable::switch_program(Game& game, const std::string& program_name) {
+	m_program = descr().get_program(program_name);
+	assert(m_program != nullptr);
 	m_program_ptr = 0;
 	m_program_step = 0;
-	delete m_action_data;
-	m_action_data = nullptr;
+	m_action_data.reset(nullptr);
 	schedule_act(game, 1);
 }
 
@@ -506,9 +504,10 @@ void Immovable::act(Game & game, uint32_t const data)
 {
 	BaseImmovable::act(game, data);
 
-	if (m_program_step <= game.get_gametime())
+	if (m_program_step <= game.get_gametime()) {
 		//  Might delete itself!
 		(*m_program)[m_program_ptr].execute(game, *this);
+	}
 }
 
 
@@ -598,8 +597,7 @@ void Immovable::set_reserved_by_worker(bool reserve)
  */
 void Immovable::set_action_data(ImmovableActionData * data)
 {
-	delete m_action_data;
-	m_action_data = data;
+	m_action_data.reset(data);
 }
 
 
@@ -813,7 +811,7 @@ ImmovableProgram::Action::~Action() {}
 ImmovableProgram::ActAnimate::ActAnimate(char* parameters, Immovable_Descr& descr) {
 	try {
 		bool reached_end;
-		char * const animation_name = match(parameters, reached_end);
+		char * const animation_name = next_word(parameters, reached_end);
 		if (!descr.is_animation_known(animation_name)) {
 			throw game_data_error("Unknown animation: %s.", animation_name);
 		}
@@ -823,12 +821,11 @@ ImmovableProgram::ActAnimate::ActAnimate(char* parameters, Immovable_Descr& desc
 			char * endp;
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value <= 0)
-				throw game_data_error
-					("expected %s but found \"%s\"",
-					 "duration in ms", parameters);
+				throw game_data_error("expected %s but found \"%s\"", "duration in ms", parameters);
 			m_duration = value;
-		} else
+		} else {
 			m_duration = 0; //  forever
+		}
 	} catch (const _wexception & e) {
 		throw game_data_error("animate: %s", e.what());
 	}
@@ -841,12 +838,8 @@ void ImmovableProgram::ActAnimate::execute
 	(Game & game, Immovable & immovable) const
 {
 	immovable.start_animation(game, m_id);
-	immovable.program_step
-		(game,
-		 m_duration ?
-		 1 + game.logic_rand() % m_duration + game.logic_rand() % m_duration
-		 :
-		 0);
+	immovable.program_step(
+	   game, m_duration ? 1 + game.logic_rand() % m_duration + game.logic_rand() % m_duration : 0);
 }
 
 
@@ -855,7 +848,7 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 {
 	try {
 		bool reached_end;
-		std::string filename = match(parameters, reached_end);
+		std::string filename = next_word(parameters, reached_end);
 		name = directory + "/" + filename;
 
 		if (not reached_end) {

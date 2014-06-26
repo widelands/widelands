@@ -19,6 +19,7 @@
 
 #include "map_io/widelands_map_object_packet.h"
 
+#include "base/wexception.h"
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "io/fileread.h"
@@ -32,7 +33,6 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -48,7 +48,8 @@ Map_Object_Packet::~Map_Object_Packet() {
 
 
 void Map_Object_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, const OneWorldLegacyLookupTable& lookup_table)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol,
+	 const OneWorldLegacyLookupTable& lookup_table)
 {
 	try {
 		FileRead fr;

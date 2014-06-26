@@ -171,7 +171,7 @@ enum CombatFlags {
 
 class Soldier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
-	MO_DESCR(Soldier_Descr);
+	MO_DESCR(Soldier_Descr)
 
 public:
 	Soldier(const Soldier_Descr &);

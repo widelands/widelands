@@ -20,12 +20,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "graphic/color.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/notification.h"
-#include "rgbcolor.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
@@ -117,8 +117,6 @@ public:
 
 	const std::string & get_name() const {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
-	void set_frontier_style(uint8_t a) {m_frontier_style_index = a;}
-	void set_flag_style(uint8_t a) {m_flag_style_index = a;}
 	void set_team_number(TeamNumber team);
 
 	void create_default_infrastructure();
@@ -505,13 +503,6 @@ public:
 	void count_civil_bld_lost    () {++m_civil_blds_lost;}
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
-	uint32_t frontier_anim() const {
-		return tribe().frontier_animation(m_frontier_style_index);
-	}
-	uint32_t flag_anim    () const {
-		return tribe().flag_animation    (m_flag_style_index);
-	}
-
 	// Statistics
 	const Building_Stats_vector & get_building_statistics
 		(const Building_Index& i) const
@@ -563,8 +554,6 @@ private:
 	uint8_t                m_initialization_index;
 	std::vector<uint8_t>   m_further_initializations;    // used in shared kingdom mode
 	std::vector<uint8_t>   m_further_shared_in_player;   //  ''  ''   ''     ''     ''
-	uint8_t                m_frontier_style_index;
-	uint8_t                m_flag_style_index;
 	TeamNumber             m_team_number;
 	std::vector<Player *>  m_team_player;
 	bool                   m_team_player_uptodate;

@@ -27,8 +27,8 @@
 
 #include <boost/noncopyable.hpp>
 
+#include "base/port.h"
 #include "machdep.h"
-#include "port.h"
 
 /**
  * Abstract base class for stream-like data sinks.

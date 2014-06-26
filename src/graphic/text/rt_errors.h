@@ -28,8 +28,7 @@ class Exception : public std::exception {
 public:
 	Exception(std::string msg) : std::exception(), m_msg(msg) {
 	}
-	virtual ~Exception() throw () {}
-	virtual const char* what() const throw () override {return m_msg.c_str();}
+	virtual const char* what() const noexcept override {return m_msg.c_str();}
 
 private:
 	std::string m_msg;
@@ -40,18 +39,18 @@ public: \
 		  name(std::string msg) : Exception(msg) {} \
 };
 
-DEF_ERR(AttributeNotFound);
-DEF_ERR(BadFont);
-DEF_ERR(BadImage);
-DEF_ERR(EOT);
-DEF_ERR(InvalidColor);
-DEF_ERR(RenderError);
-DEF_ERR(SyntaxError);
-DEF_ERR(WidthTooSmall);
+DEF_ERR(AttributeNotFound)
+DEF_ERR(BadFont)
+DEF_ERR(BadImage)
+DEF_ERR(EOT)
+DEF_ERR(InvalidColor)
+DEF_ERR(RenderError)
+DEF_ERR(SyntaxError)
+DEF_ERR(WidthTooSmall)
 
 #undef DEF_ERR
 
 
-};
+}
 
 #endif /* end of include guard: RT_ERRORS_H */

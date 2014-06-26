@@ -21,9 +21,9 @@
 
 #include <cstdio>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "profile/profile.h"
 #include "ui_basic/editbox.h"

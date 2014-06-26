@@ -24,9 +24,9 @@
 #include <memory>
 #include <string>
 
+#include "base/wexception.h"
 #include "logic/widelands_geometry.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 namespace Widelands {
 

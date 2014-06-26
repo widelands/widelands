@@ -20,7 +20,7 @@
 
 #include <SDL_video.h>
 
-#include "log.h"
+#include "base/log.h"
 
 /**
  * Return the smallest power of two greater than or equal to \p x.

@@ -666,4 +666,4 @@ void luaopen_wlbases(lua_State * const L) {
 	register_class<L_PlayerBase>(L, "bases");
 }
 
-};
+}

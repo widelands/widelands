@@ -22,10 +22,10 @@
 #include <iostream>
 #include <typeinfo>
 
+#include "base/log.h"
 #include "economy/road.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
@@ -207,8 +207,7 @@ struct tribe_immovable_nonexistent : public FileRead::_data_error {
 	     tribename(Tribename),
 	     name(Name) {
 	}
-	virtual ~tribe_immovable_nonexistent() throw () {
-	}
+
 	std::string tribename;
 	std::string name;
 };
@@ -994,7 +993,7 @@ inline static void write_unseen_immovable
 	Map_Object_Descr const * const map_object_descr = map_object_data->map_object_descr;
 	const Player::Constructionsite_Information & csi = map_object_data->csi;
 	assert(not Road::IsRoadDescr(map_object_descr));
-	uint8_t immovable_kind;
+	uint8_t immovable_kind = 255;
 
 	if (not map_object_descr)
 		immovable_kind = 0;

@@ -19,9 +19,11 @@
 
 #include "wui/general_statistics_menu.h"
 
+#include <memory>
+
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -328,4 +330,4 @@ void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 				(i * m_ndatasets + m_selected_information, false);
 		}
 	m_selected_information = id;
-};
+}

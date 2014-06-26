@@ -21,10 +21,10 @@
 
 #include <SDL_keysym.h>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_immovable_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
 #include "ui_basic/box.h"
@@ -65,7 +65,7 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
 	      [this](UI::Panel* cb_parent, const Immovable_Descr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, immovable_descr);
 		   },
-	      [this] { select_correct_tool(); },
+	      [this] {select_correct_tool();},
 	      &tool));
 	set_center_panel(multi_select_menu_.get());
 }

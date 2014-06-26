@@ -24,13 +24,15 @@
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/building.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_expire_message.h"
@@ -50,8 +52,6 @@
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "upcast.h"
-#include "warning.h"
-#include "wexception.h"
 #include "wui/interactive_player.h"
 
 
@@ -147,8 +147,6 @@ Player::Player
 	:
 	m_egbase              (the_egbase),
 	m_initialization_index(initialization_index),
-	m_frontier_style_index(0),
-	m_flag_style_index    (0),
 	m_team_number(0),
 	m_team_player_uptodate(false),
 	m_see_all           (false),
@@ -184,36 +182,30 @@ Player::~Player() {
 void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
 	if (map.get_starting_pos(m_plnum)) {
-		try {
-			const Tribe_Descr::Initialization & initialization =
-				tribe().initialization(m_initialization_index);
+		const Tribe_Descr::Initialization & initialization =
+			tribe().initialization(m_initialization_index);
 
-			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
+		Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
+
+		// Run the corresponding script
+		std::unique_ptr<LuaTable> table(game.lua().run_script(initialization.script));
+		table->do_not_warn_about_unaccessed_keys();
+		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
+		cr->push_arg(this);
+		game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr.release()));
+
+		// Check if other starting positions are shared in and initialize them as well
+		for (uint8_t n = 0; n < m_further_shared_in_player.size(); ++n) {
+			Coords const further_pos = map.get_starting_pos(m_further_shared_in_player.at(n));
 
 			// Run the corresponding script
-			std::unique_ptr<LuaCoroutine> cr =
-			   game.lua().run_script(initialization.script)->get_coroutine("func");
-			cr->push_arg(this);
-			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr.release()));
-
-			// Check if other starting positions are shared in and initialize them as well
-			for (uint8_t n = 0; n < m_further_shared_in_player.size(); ++n) {
-				Coords const further_pos = map.get_starting_pos(m_further_shared_in_player.at(n));
-
-				// Run the corresponding script
-				std::unique_ptr<LuaCoroutine> ncr =
-				   game.lua()
-				      .run_script(tribe().initialization(m_further_initializations.at(n)).script)
-				      ->get_coroutine("func");
-				ncr->push_arg(this);
-				ncr->push_arg(further_pos);
-				game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr.release()));
-			}
-		} catch (Tribe_Descr::Nonexistent &) {
-			throw game_data_error
-				("the selected initialization index (%u) is outside the range "
-				 "(tribe edited between preload and game start?)",
-				 m_initialization_index);
+			std::unique_ptr<LuaCoroutine> ncr =
+				game.lua()
+					.run_script(tribe().initialization(m_further_initializations.at(n)).script)
+					->get_coroutine("func");
+			ncr->push_arg(this);
+			ncr->push_arg(further_pos);
+			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr.release()));
 		}
 	} else
 		throw warning

@@ -20,9 +20,11 @@
 #include "logic/critter_bob.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <stdint.h>
 
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
@@ -36,7 +38,6 @@
 #include "map_io/one_world_legacy_lookup_table.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
-#include "wexception.h"
 
 
 namespace Widelands {

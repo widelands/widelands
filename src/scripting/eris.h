@@ -22,7 +22,7 @@
 
 // We need eris in a cpp context. Include it as such.
 extern "C" {
-#include "scripting/eris/eris.h"
+#include "third_party/eris/eris.h"
 }
 
 

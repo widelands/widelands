@@ -25,12 +25,13 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -42,12 +43,10 @@
 #include "logic/tribe.h"
 #include "logic/world/world.h"
 #include "map_generator.h"
+#include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
-#include "s2map.h"
 #include "upcast.h"
-#include "wexception.h"
 #include "wui/overlay_manager.h"
-
 
 namespace Widelands {
 
@@ -1120,7 +1119,9 @@ void Map::recalc_nodecaps_pass2(const World& world, const FCoords & f) {
 	f.field->caps = _calc_nodecaps_pass2(world, f, true);
 }
 
-NodeCaps Map::_calc_nodecaps_pass2(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps) {
+NodeCaps Map::_calc_nodecaps_pass2
+	(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps)
+{
 	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
 
 	// NOTE  This dependency on the bottom-right neighbour is the reason
@@ -1227,7 +1228,8 @@ NodeCaps Map::_calc_nodecaps_pass2(const World& world, FCoords const f, bool con
  * for the calculation. If not (calculation of maximum theoretical possible buildsize) initcaps must be set.
  */
 int Map::calc_buildsize
-	(const World& world, const FCoords & f, bool avoidnature, bool * ismine, bool consider_mobs, NodeCaps initcaps)
+	(const World& world, const FCoords & f, bool avoidnature, bool * ismine,
+	 bool consider_mobs, NodeCaps initcaps)
 {
 	if (consider_mobs) {
 		if (!(f.field->get_caps() & MOVECAPS_WALK))

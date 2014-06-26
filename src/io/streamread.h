@@ -25,8 +25,8 @@
 
 #include <boost/noncopyable.hpp>
 
+#include "base/wexception.h"
 #include "machdep.h"
-#include "wexception.h"
 
 
 /**

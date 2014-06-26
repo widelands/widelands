@@ -25,11 +25,11 @@
 #include <SDL_rotozoom.h>
 #include <boost/format.hpp>
 
+#include "graphic/color.h"
 #include "graphic/graphic.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
-#include "rgbcolor.h"
 #include "upcast.h"
 
 using namespace std;

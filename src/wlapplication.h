@@ -34,7 +34,7 @@
 #include <SDL_keyboard.h>
 #include <SDL_types.h>
 
-#include "point.h"
+#include "base/point.h"
 
 
 namespace Widelands {class Game;}
@@ -45,7 +45,6 @@ struct Parameter_error : public std::runtime_error {
 	explicit Parameter_error(std::string text)
 		: std::runtime_error(text)
 	{}
-	virtual ~Parameter_error() throw () {}
 };
 
 // input

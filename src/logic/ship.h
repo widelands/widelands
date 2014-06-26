@@ -67,7 +67,7 @@ private:
  * are an economy of their own and are not part of a Fleet.
  */
 struct Ship : Bob {
-	MO_DESCR(Ship_Descr);
+	MO_DESCR(Ship_Descr)
 
 	Ship(const Ship_Descr & descr);
 	virtual ~Ship();

@@ -23,12 +23,11 @@
 #include <iostream>
 
 #include <boost/algorithm/string/predicate.hpp>
-#include <libintl.h>
 
+#include "base/i18n.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 #include "save_handler.h"

@@ -40,13 +40,13 @@
 #include <sys/types.h>
 #endif
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "compile_diagnostics.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "log.h"
-#include "wexception.h"
 
 struct FileSystemPath: public std::string
 {
@@ -462,7 +462,7 @@ private:
 	FILE * m_file;
 };
 
-};
+}
 
 StreamRead * RealFSImpl::OpenStreamRead(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
@@ -508,7 +508,7 @@ private:
 	FILE * m_file;
 };
 
-};
+}
 
 StreamWrite * RealFSImpl::OpenStreamWrite(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);

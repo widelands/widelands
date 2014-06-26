@@ -19,9 +19,9 @@
 
 #include "scripting/lua_map.h"
 
+#include "base/log.h"
 #include "container_iterate.h"
 #include "economy/wares_queue.h"
-#include "log.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
@@ -140,8 +140,8 @@ typedef std::vector<Widelands::Soldier *> SoldiersList;
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
 	}
-GET_INDEX(ware);
-GET_INDEX(worker);
+GET_INDEX(ware)
+GET_INDEX(worker)
 #undef GET_INDEX
 
 #define PARSERS(type, btype) \
@@ -204,8 +204,8 @@ btype##sMap m_parse_set_##type##s_arguments \
 	} \
 	return rv; \
 }
-PARSERS(ware, Ware);
-PARSERS(worker, Worker);
+PARSERS(ware, Ware)
+PARSERS(worker, Worker)
 #undef PARSERS
 
 WaresMap count_wares_on_flag_(Flag& f, const Tribe_Descr & tribe) {
@@ -1886,6 +1886,7 @@ MapObject
 const char L_MapObject::className[] = "MapObject";
 const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	METHOD(L_MapObject, remove),
+	METHOD(L_MapObject, destroy),
 	METHOD(L_MapObject, __eq),
 	METHOD(L_MapObject, has_attribute),
 	{nullptr, nullptr},
@@ -2012,12 +2013,28 @@ int L_MapObject::__eq(lua_State * L) {
 */
 int L_MapObject::remove(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object * o = get(L, egbase);
-
+	Map_Object* o = get(L, egbase);
 	if (!o)
 		return 0;
 
 	o->remove(egbase);
+	return 0;
+}
+
+/* RST
+	.. method:: destroy()
+
+		Removes this object immediately. Might do special actions (like leaving a
+		burning fire). If you want to remove an object without side effects, see
+		:func:`remove`.
+*/
+int L_MapObject::destroy(lua_State * L) {
+	Editor_Game_Base& egbase = get_egbase(L);
+	Map_Object* o = get(L, egbase);
+	if (!o)
+		return 0;
+
+	o->destroy(egbase);
 	return 0;
 }
 
@@ -2676,9 +2693,9 @@ int L_Warehouse::set_##type##s(lua_State * L) { \
 	return 0; \
 }
 // documented in parent class
-WH_SET(ware, Ware);
+WH_SET(ware, Ware)
 // documented in parent class
-WH_SET(worker, Worker);
+WH_SET(worker, Worker)
 #undef WH_SET
 
 #define WH_GET(type, btype) \
@@ -2702,9 +2719,9 @@ int L_Warehouse::get_##type##s(lua_State * L) { \
 	return 1; \
 }
 // documented in parent class
-WH_GET(ware, Ware);
+WH_GET(ware, Ware)
 // documented in parent class
-WH_GET(worker, Worker);
+WH_GET(worker, Worker)
 #undef GET
 
 // documented in parent class
@@ -3651,12 +3668,12 @@ int L_Field::set_terd(lua_State * L) {
    to_lua<L_Field>(L, new L_Field(n.x, n.y)); \
 	return 1; \
 }
-GET_X_NEIGHBOUR(rn);
-GET_X_NEIGHBOUR(ln);
-GET_X_NEIGHBOUR(trn);
-GET_X_NEIGHBOUR(tln);
-GET_X_NEIGHBOUR(bln);
-GET_X_NEIGHBOUR(brn);
+GET_X_NEIGHBOUR(rn)
+GET_X_NEIGHBOUR(ln)
+GET_X_NEIGHBOUR(trn)
+GET_X_NEIGHBOUR(tln)
+GET_X_NEIGHBOUR(bln)
+GET_X_NEIGHBOUR(brn)
 
 /* RST
 	.. attribute:: owner
@@ -4090,4 +4107,4 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // Pop the meta table
 }
 
-};
+}

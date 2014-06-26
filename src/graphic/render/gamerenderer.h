@@ -22,12 +22,12 @@
 
 #include <boost/utility.hpp>
 
-#include "point.h"
+#include "base/point.h"
 
 namespace Widelands {
 	class Player;
 	class Editor_Game_Base;
-};
+}
 
 class RenderTarget;
 

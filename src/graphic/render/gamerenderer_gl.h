@@ -23,9 +23,9 @@
 #include <memory>
 #include <vector>
 
+#include "base/rect.h"
 #include "graphic/render/gamerenderer.h"
 #include "logic/widelands.h"
-#include "rect.h"
 
 namespace Widelands {
 struct Coords;

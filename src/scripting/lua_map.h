@@ -34,8 +34,8 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
+#include "third_party/eris/lua.hpp"
 
 
 namespace Widelands {
@@ -446,6 +446,7 @@ public:
 	 */
 	int __eq(lua_State * L);
 	int remove(lua_State * L);
+	int destroy(lua_State * L);
 	int has_attribute(lua_State * L);
 
 	/*
@@ -479,7 +480,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(BaseImmovable);
+	CASTED_GET(BaseImmovable)
 };
 
 class L_PlayerImmovable : public L_BaseImmovable {
@@ -505,7 +506,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(PlayerImmovable);
+	CASTED_GET(PlayerImmovable)
 };
 
 class L_PortDock : public L_PlayerImmovable {
@@ -529,7 +530,7 @@ public:
 	/*
 	 * C methods
 	 */
-	CASTED_GET(PortDock);
+	CASTED_GET(PortDock)
 };
 
 class L_Building : public L_PlayerImmovable {
@@ -554,7 +555,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Building);
+	CASTED_GET(Building)
 };
 
 class L_Flag : public L_PlayerImmovable {

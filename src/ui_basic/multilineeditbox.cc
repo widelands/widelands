@@ -28,7 +28,6 @@
 #include "helper.h"
 #include "ui_basic/scrollbar.h"
 #include "utf8.h"
-#include "wlapplication.h"
 
 namespace UI {
 

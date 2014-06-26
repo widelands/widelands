@@ -23,7 +23,7 @@
 #include <string>
 
 #include "constants.h"
-#include "rgbcolor.h"
+#include "graphic/color.h"
 
 
 /**
@@ -45,4 +45,3 @@ std::string as_window_title(const std::string&);
 std::string as_game_tip(const std::string&);
 
 #endif /* end of include guard: TEXT_LAYOUT_H */
-

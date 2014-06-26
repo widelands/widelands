@@ -27,10 +27,10 @@
 #include <typeinfo>
 #include <vector>
 
+#include "base/i18n.h"
 #include "economy/economy.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "logic/building.h"
 #include "logic/player.h"
 #include "logic/production_program.h"

@@ -20,6 +20,8 @@
 #ifndef MILITARYSITE_H
 #define MILITARYSITE_H
 
+#include <memory>
+
 #include "logic/attackable.h"
 #include "logic/productionsite.h"
 #include "logic/requirements.h"
@@ -67,7 +69,7 @@ class MilitarySite :
 	public ProductionSite, public SoldierControl, public Attackable
 {
 	friend class Map_Buildingdata_Data_Packet;
-	MO_DESCR(MilitarySite_Descr);
+	MO_DESCR(MilitarySite_Descr)
 
 public:
 	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.

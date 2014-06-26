@@ -19,6 +19,7 @@
 
 #include "economy/wares_queue.h"
 
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/request.h"
 #include "io/fileread.h"
@@ -29,7 +30,6 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wexception.h"
 
 namespace Widelands {
 

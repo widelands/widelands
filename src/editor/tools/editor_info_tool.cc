@@ -23,8 +23,8 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"

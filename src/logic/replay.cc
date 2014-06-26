@@ -19,19 +19,19 @@
 
 #include "logic/replay.h"
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "game_io/game_loader.h"
 #include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"
-#include "wexception.h"
 
 namespace Widelands {
 

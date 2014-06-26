@@ -273,7 +273,7 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
 
 	m_igb.game().send_player_set_ware_priority
 			(m_building, m_ware_type, m_ware_index, priority);
-};
+}
 
 /**
  * One of the buttons to increase or decrease the amount of wares

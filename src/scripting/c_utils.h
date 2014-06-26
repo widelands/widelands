@@ -24,8 +24,8 @@
 #include "logic/game.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/factory.h"
+#include "third_party/eris/lua.hpp"
 
 Factory & get_factory(lua_State *);
 Widelands::Game & get_game(lua_State *);
@@ -37,7 +37,7 @@ Widelands::Map_Map_Object_Saver * get_mos(lua_State *);
 void report_error(lua_State*, const char*, ...)
 	__attribute__((__format__(__printf__, 2, 3), noreturn));
 #else
-void report_error [[noreturn]] (lua_State*, const char*, ...)
+[[noreturn]] void report_error(lua_State*, const char*, ...)
 #endif
 
 #define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))

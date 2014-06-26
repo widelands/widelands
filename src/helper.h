@@ -29,7 +29,7 @@
 #include <SDL_keyboard.h>
 #include <boost/utility.hpp>
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 /// Matches the string that candidate points to against the string that
 /// template points to. Stops at when reaching a null character or the
@@ -40,64 +40,19 @@
 ///    char const * candidate = "return   75";
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
-inline bool match(char * & candidate, char const * pattern) {
-	for (char * p = candidate;; ++p, ++pattern)
-		if (not *pattern) {
-			candidate = p;
-			return true;
-		} else if (*p != *pattern)
-			break;
-	return false;
-}
-
+bool match(char* & candidate, const char* pattern);
 
 /// Returns the word starting at the character that p points to and ending
 /// before the first terminator character. Replaces the terminator with null.
-inline char * match
-	(char * & p, bool & reached_end, char const terminator = ' ')
-{
-	assert(terminator);
-	char * const result = p;
-	for (; *p != terminator; ++p)
-		if (*p == '\0') {
-			reached_end = true;
-			goto end;
-		}
-	reached_end = false;
-	*p = '\0'; //  terminate the word
-	++p; //  move past the terminator
-end:
-	if (result < p)
-		return result;
-	throw wexception("expected word");
-}
-
+char* next_word(char* & p, bool& reached_end, char terminator = ' ');
 
 /// Skips a sequence of consecutive characters with the value c, starting at p.
 /// Returns whether any characters were skipped.
-inline bool skip(char * & p, char const c = ' ') {
-	char * t = p;
-	while (*t == c)
-		++t;
-	if (p < t) {
-		p = t;
-		return true;
-	} else
-		return false;
-}
-
+bool skip(char* & p, char c = ' ');
 
 /// Skips a sequence of consecutive characters with the value c, starting at p.
 /// Throws _wexception if no characters were skipped.
-inline void force_skip(char * & p, char const c = ' ') {
-	char * t = p;
-	while (*t == c)
-		++t;
-	if (p < t)
-		p = t;
-	else
-		throw wexception("expected '%c' but found \"%s\"", c, p);
-}
+void force_skip(char* & p, char c = ' ');
 
 /// Combines match and force_skip.
 ///
@@ -110,17 +65,7 @@ inline void force_skip(char * & p, char const c = ' ') {
 ///   char const * candidate = "return75";
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws _wexception
-inline bool match_force_skip(char * & candidate, char const * pattern) {
-	for (char * p = candidate;; ++p, ++pattern)
-		if (not *pattern) {
-			force_skip(p);
-			candidate = p;
-			return true;
-		} else if (*p != *pattern)
-			return false;
-
-	return false;
-}
+bool match_force_skip(char* & candidate, const char* pattern);
 
 /**
  * Convert std::string to any sstream-compatible type

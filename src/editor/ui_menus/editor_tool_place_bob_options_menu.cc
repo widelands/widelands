@@ -21,10 +21,10 @@
 
 #include <SDL_keysym.h>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_bob_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/critter_bob.h"
 #include "logic/map.h"
 #include "logic/world/world.h"

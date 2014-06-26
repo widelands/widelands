@@ -35,11 +35,11 @@
 #include "logic/warehouse.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
-#include "unique_window_handler.h"
 #include "upcast.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
+#include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";

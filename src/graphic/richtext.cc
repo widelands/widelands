@@ -19,13 +19,13 @@
 
 #include "graphic/richtext.h"
 
+#include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
-#include "rect.h"
-#include "text_parser.h"
+#include "graphic/text_parser.h"
 
 namespace UI {
 
@@ -481,8 +481,7 @@ void RichText::draw(RenderTarget & dst, const Point& offset, bool background)
 	{
 		Rect oldbox;
 		Point oldofs;
-		Rect bbox = (*elt)->bbox;
-		bbox += offset;
+		Rect bbox((*elt)->bbox.top_left() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
 			if (background)

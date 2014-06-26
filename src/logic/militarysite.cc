@@ -22,12 +22,10 @@
 #include <clocale>
 #include <cstdio>
 
-#include <libintl.h>
-
+#include "base/i18n.h"
+#include "base/log.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "i18n.h"
-#include "log.h"
 #include "logic/battle.h"
 #include "logic/editor_game_base.h"
 #include "logic/findbob.h"

@@ -20,9 +20,9 @@
 #include "logic/ware_descr.h"
 #include "logic/tribe.h"
 
+#include "base/i18n.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "profile/profile.h"
 #include "upcast.h"
 

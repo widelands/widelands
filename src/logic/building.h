@@ -33,7 +33,7 @@
 #include "logic/soldier_counts.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "workarea_info.h"
+#include "logic/workarea_info.h"
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -256,8 +256,8 @@ public:
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	//  Use on training sites only.
-	virtual void change_train_priority(uint32_t, int32_t) {};
-	virtual void switch_train_mode () {};
+	virtual void change_train_priority(uint32_t, int32_t) {}
+	virtual void switch_train_mode () {}
 
 	///  Stores the Player_Number of the player who has defeated this building.
 	void set_defeating_player(Player_Number const player_number) {
