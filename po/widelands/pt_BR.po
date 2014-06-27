@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-06-17 18:11+0200\n"
-"PO-Revision-Date: 2014-06-18 03:24+0000\n"
-"Last-Translator: daniel reis <danielreis40@yahoo.com.br>\n"
+"PO-Revision-Date: 2014-06-26 21:58+0000\n"
+"Last-Translator: Juarez S. <juarezpedraiii@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-06-19 05:42+0000\n"
-"X-Generator: Launchpad (build 17048)\n"
+"X-Launchpad-Export-Date: 2014-06-27 05:34+0000\n"
+"X-Generator: Launchpad (build 17077)\n"
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
@@ -135,7 +135,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "Coordenadas: (%1$i, %2$i)"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
@@ -2438,16 +2438,16 @@ msgstr "min."
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dia"
+msgstr[1] "dias"
 
 #: ../../src/ui_fsmenu/options.cc:138
 msgid "General Options"
-msgstr "Opções gerais"
+msgstr "Opções Gerais"
 
 #: ../../src/ui_fsmenu/options.cc:145
 msgid "Fullscreen"
-msgstr "Tela completa"
+msgstr "Tela cheia"
 
 #: ../../src/ui_fsmenu/options.cc:151
 msgid "Grab Input"
@@ -2549,7 +2549,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:475
 msgid "Distance for windows to snap to other panels:"
-msgstr "Distância min. para as janelas se acopolarem aos paineis:"
+msgstr "Distância para janelas se acoplarem a painéis:"
 
 #: ../../src/ui_fsmenu/options.cc:479
 msgid "Distance for windows to snap to borders:"
@@ -2561,7 +2561,7 @@ msgstr "Remover Syncstream dumps ao iniciar"
 
 #: ../../src/ui_fsmenu/options.cc:491
 msgid "OpenGL rendering"
-msgstr "Renderizando o OpenGl"
+msgstr "Renderização OpenGL"
 
 #: ../../src/ui_fsmenu/options.cc:496
 msgid "Show in-game chat with transparent background"
@@ -2607,7 +2607,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1174
 msgid "Options:"
-msgstr ""
+msgstr "Opções:"
 
 #: ../../src/wlapplication.cc:1176
 msgid " --<config-entry-name>=value overwrites any config file setting"
