@@ -12,8 +12,10 @@ wl_library(graphic_png_io
     png_io.h
     png_io.cc
   USES_PNG
-    io_stream
+  DEPENDS
+    base_exceptions
     graphic_surface
+    io_stream
 )
 
 wl_library(graphic_image
@@ -119,6 +121,7 @@ wl_library(graphic
     build_info
     graphic_color
     graphic_image
+    graphic_png_io
     graphic_surface
     graphic_text
     io_fileread

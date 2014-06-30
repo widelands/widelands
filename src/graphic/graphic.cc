@@ -39,11 +39,15 @@
 #include "graphic/image.h"
 #include "graphic/image_loader_impl.h"
 #include "graphic/image_transformations.h"
+#include "graphic/png_io.h"
 #include "graphic/render/gl_surface_screen.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "io/streamwrite.h"
 #include "logic/roadtype.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
@@ -451,7 +455,7 @@ void Graphic::refresh(bool force)
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const Image* image, StreamWrite * sw) const {
-	save_surface_to_png(*image->surface(), sw);
+	save_surface_to_png(image->surface(), sw);
 }
 
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
@@ -477,8 +481,7 @@ void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
 	StreamWrite * sw = g_fs->OpenStreamWrite(fname);
-	Surface& screen = *screen_.get();
-	save_png_(screen, sw);
+	save_surface_to_png(screen_.get(), sw);
 	delete sw;
 }
 

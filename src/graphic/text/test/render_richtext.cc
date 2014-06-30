@@ -30,9 +30,12 @@
 #undef main // No, we do not want SDL_main
 
 #include "base/log.h"
+#include "graphic/png_io.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/test/render.h"
+#include "io/filesystem/filesystem.h"
+#include "io/streamwrite.h"
 
 namespace {
 
@@ -117,10 +120,14 @@ int main(int argc, char** argv) {
 	std::unique_ptr<RT::IRenderer> renderer(setup_standalone_renderer());
 
 	try {
-		SDLSurface& surf = *static_cast<SDLSurface*>(renderer->render(txt, w, allowed_tags));
-		surf.lock(Surface::Lock_Normal);
-		save_png(outname, surf);
-		surf.unlock(Surface::Unlock_NoChange);
+		std::unique_ptr<SDLSurface> surf(
+		   static_cast<SDLSurface*>(renderer->render(txt, w, allowed_tags)));
+
+		std::unique_ptr<FileSystem> fs(&FileSystem::Create("."));
+		std::unique_ptr<StreamWrite> sw(fs->OpenStreamWrite(outname));
+		if (!save_surface_to_png(surf.get(), sw.get())) {
+			std::cout << "Could not encode PNG." << std::endl;
+		}
 	}
 	catch (RT::Exception& e) {
 		std::cout << e.what() << std::endl;

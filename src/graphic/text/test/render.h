@@ -53,6 +53,4 @@ class StandaloneRenderer : public RT::IRenderer {
 
 StandaloneRenderer* setup_standalone_renderer();
 
-int save_png(const std::string& fn, const SDLSurface& surf);
-
 #endif /* end of include guard: RENDER_H */

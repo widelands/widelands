@@ -35,14 +35,16 @@
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/test/paths.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/streamwrite.h"
 #include "third_party/lodepng/lodepng.h"
 
+// NOCOM(#sirver): delet lodepng.
 using namespace std;
 
 StandaloneRenderer::StandaloneRenderer() {
 	g_fs = new LayeredFileSystem();
-	g_fs->AddFileSystem(FileSystem::Create(WIDELANDS_DATA_DIR));
 	g_fs->AddFileSystem(FileSystem::Create(RICHTEXT_DATA_DIR));
+	g_fs->AddFileSystem(FileSystem::Create(WIDELANDS_DATA_DIR));
 
 	image_loader_.reset(new ImageLoaderImpl());
 	surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
@@ -73,27 +75,4 @@ IImageLoader* StandaloneRenderer::image_loader() {
 
 StandaloneRenderer* setup_standalone_renderer() {
 	return new StandaloneRenderer();
-}
-
-int save_png(const std::string& fn, const SDLSurface& surf) {
-	std::vector<unsigned char> png;
-
-	lodepng::State st;
-	st.encoder.auto_convert = LAC_NO;
-	st.encoder.force_palette = LAC_NO;
-	st.info_raw.colortype = LCT_RGBA;
-	st.info_raw.bitdepth = 8;
-	st.info_png.color.colortype = LCT_RGBA;
-	st.info_png.color.bitdepth = 8;
-	std::vector<unsigned char> out;
-	int error = lodepng::encode(
-	   out, static_cast<const unsigned char*>(surf.get_pixels()), surf.width(), surf.height(), st);
-	if (error) {
-		std::cout << "PNG encoding error: " << lodepng_error_text(error) << std::endl;
-		return 0;
-	}
-
-	lodepng::save_file(out, fn);
-
-	return 0;
 }

@@ -7,9 +7,12 @@ wl_binary(render_richtext
     render_richtext.cc
   DEPENDS
     base_log
+    graphic_png_io
     graphic_surface
     graphic_text
     graphic_text_test_render
+    io_filesystem
+    io_stream
 )
 
 wl_library(graphic_text_test_render
@@ -17,10 +20,12 @@ wl_library(graphic_text_test_render
     render.cc
     render.h
   DEPENDS
-    io_filesystem
+    base_log
     graphic_image
     graphic_surface
     graphic_text
+    io_filesystem
+    io_stream
     third_party_lodepng
 )
 

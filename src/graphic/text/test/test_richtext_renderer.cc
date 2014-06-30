@@ -34,6 +34,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "base/log.h"
+#include "graphic/png_io.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface.h"
 #include "graphic/text/test/paths.h"
@@ -41,6 +42,7 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/streamwrite.h"
 
 struct RichTextTestFixture {
 	RichTextTestFixture() : renderer(setup_standalone_renderer()) {}
@@ -188,8 +190,11 @@ bool compare_for_test(StandaloneRenderer* renderer) {
 		std::unique_ptr<Surface> output(renderer->render(input_text, width));
 		if (!compare_surfaces(correct.get(), output.get())) {
 			log("Render output of %s does not compare equal to correct.png. Saved wrong.png.\n", input.c_str());
-			save_png(RICHTEXT_DATA_DIR + std::string("/") + basedir + "wrong.png",
-			         *static_cast<SDLSurface*>(output.get()));
+
+			std::unique_ptr<StreamWrite> sw(g_fs->OpenStreamWrite(basedir + "wrong.png"));
+			if (!save_surface_to_png(output.get(), sw.get())) {
+				std::cout << "Could not encode PNG." << std::endl;
+			}
 			return false;
 		}
 	}
