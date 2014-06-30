@@ -33,30 +33,8 @@
 #include "graphic/render/sdl_surface.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/test/render.h"
-#include "third_party/lodepng/lodepng.h"
 
 namespace {
-
-int save_png(const std::string& fn, const SDLSurface& surf) {
-	// Save png data
-	std::vector<unsigned char> png;
-
-	lodepng::State st;
-
-	st.encoder.auto_convert = LAC_NO;
-	st.encoder.force_palette = LAC_NO;
-	std::vector<unsigned char> out;
-	int error = lodepng::encode(
-	   out, static_cast<const unsigned char*>(surf.get_pixels()), surf.width(), surf.height(), st);
-	if (error) {
-		std::cout << "PNG encoding error: " << lodepng_error_text(error) << std::endl;
-		return 0;
-	}
-
-	lodepng::save_file(out, fn);
-
-	return 0;
-}
 
 std::string read_stdin() {
 	std::string txt;

@@ -28,6 +28,7 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include "base/log.h" // NOCOM(#sirver): remove again
 #include "base/rect.h"
 #include "graphic/image_cache.h"
 #include "graphic/surface.h"
@@ -79,6 +80,7 @@ struct Reference {
 	// Rect::contains() excludes the bottom and right edges.
 	// Reference::contains() includes the bottom and right edges
 	// TODO: check this, likely that it is with the test cases
+	// NOCOM(#sirver): what
 	inline bool contains(int16_t x, int16_t y) const {
 		return
 			dim.x <= x && x <= dim.x + static_cast<int32_t>(dim.w) &&
@@ -174,8 +176,10 @@ private:
 uint16_t Layout::m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders& p) {
 	while
 		(m_idx < m_all_nodes.size()
-		 and m_all_nodes[m_idx]->is_non_mandatory_space()
-		 and m_all_nodes[m_idx]->width() >= INFINITE_WIDTH) // only remove newline
+		 and m_all_nodes[m_idx]->is_non_mandatory_space())
+
+			// NOCOM(#sirver): that fixes a bug, but changes behavior.
+		 // and m_all_nodes[m_idx]->width() >= INFINITE_WIDTH) // only remove newline
 		delete m_all_nodes[m_idx++];
 
 	uint16_t x = p.left;
@@ -759,11 +763,8 @@ public:
 
 		if (a.has("fill")) {
 			m_fill_text = a["fill"].get_string();
-			try {
-				m_bg = image_cache_->get(m_fill_text);
-				m_fill_text = "";
-			} catch (BadImage&) {
-			}
+			m_bg = image_cache_->get(m_fill_text);
+			m_fill_text = "";
 		}
 	}
 

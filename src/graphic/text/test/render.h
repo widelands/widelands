@@ -21,9 +21,12 @@
 #define RENDER_H
 
 #include <memory>
+#include <string>
 
 #include "graphic/text/rt_render.h"
 #include "graphic/image_loader.h"
+
+class SDLSurface;
 
 // A stand alone richtext renderer for tests and binaries.
 class StandaloneRenderer : public RT::IRenderer {
@@ -49,5 +52,7 @@ class StandaloneRenderer : public RT::IRenderer {
 };
 
 StandaloneRenderer* setup_standalone_renderer();
+
+int save_png(const std::string& fn, const SDLSurface& surf);
 
 #endif /* end of include guard: RENDER_H */

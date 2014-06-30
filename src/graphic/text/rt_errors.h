@@ -41,7 +41,6 @@ public: \
 
 DEF_ERR(AttributeNotFound)
 DEF_ERR(BadFont)
-DEF_ERR(BadImage)
 DEF_ERR(EOT)
 DEF_ERR(InvalidColor)
 DEF_ERR(RenderError)

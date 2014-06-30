@@ -25,7 +25,6 @@
 #include <vector>
 
 #include <SDL.h>
-#include <png.h>
 
 #include "base/rect.h"
 #include "graphic/image_cache.h"
@@ -125,18 +124,10 @@ public:
 
 private:
 	void cleanup();
-	void save_png_(Surface & surf, StreamWrite*) const;
 
 	bool m_fallback_settings_in_effect;
 
 protected:
-	// Static helper function for png writing
-	static void m_png_write_function
-		(png_structp png_ptr,
-		 png_bytep data,
-		 png_size_t length);
-	static void m_png_flush_function (png_structp png_ptr);
-
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
 	std::unique_ptr<Surface> screen_;

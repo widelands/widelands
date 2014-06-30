@@ -7,6 +7,15 @@ wl_library(graphic_color
   USES_SDL
 )
 
+wl_library(graphic_png_io
+  SRCS
+    png_io.h
+    png_io.cc
+  USES_PNG
+    io_stream
+    graphic_surface
+)
+
 wl_library(graphic_image
   SRCS
     image.h
@@ -98,7 +107,6 @@ wl_library(graphic
     wordwrap.cc
     wordwrap.h
   USES_OPENGL
-  USES_PNG
   USES_SDL
   USES_SDL_GFX
   USES_SDL_IMAGE

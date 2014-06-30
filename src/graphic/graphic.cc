@@ -44,9 +44,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
-#include "io/fileread.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "io/streamwrite.h"
 #include "logic/roadtype.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
@@ -55,6 +52,7 @@ using namespace std;
 
 Graphic * g_gr;
 bool g_opengl;
+
 
 /**
  * Initialize the SDL video mode.
@@ -136,7 +134,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log("Graphics: FULLSCREEN ENABLED\n");
 
 	bool use_arb = true;
-	const char * extensions;
+	const char * extensions = nullptr;
 
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
@@ -453,80 +451,7 @@ void Graphic::refresh(bool force)
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const Image* image, StreamWrite * sw) const {
-	save_png_(*image->surface(), sw);
-}
-void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
-{
-	// Save a png
-	png_structp png_ptr =
-		png_create_write_struct
-			(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
-
-	if (!png_ptr)
-		throw wexception("Graphic::save_png: could not create png struct");
-
-	png_infop info_ptr = png_create_info_struct(png_ptr);
-	if (!info_ptr) {
-		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(nullptr));
-		throw wexception("Graphic::save_png: could not create png info struct");
-	}
-
-	// Set jump for error
-	if (setjmp(png_jmpbuf(png_ptr))) {
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-		throw wexception("Graphic::save_png: Error writing PNG!");
-	}
-
-	//  Set another write function. This is potentially dangerouse because the
-	//  flush function is internally called by png_write_end(), this will crash
-	//  on newer libpngs. See here:
-	//     https://bugs.freedesktop.org/show_bug.cgi?id=17212
-	//
-	//  Simple solution is to define a dummy flush function which I did here.
-	png_set_write_fn
-		(png_ptr,
-		 sw,
-		 &Graphic::m_png_write_function, &Graphic::m_png_flush_function);
-
-	// Fill info struct
-	png_set_IHDR
-		(png_ptr, info_ptr, surf.width(), surf.height(),
-		 8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
-		 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-
-	// Start writing
-	png_write_info(png_ptr, info_ptr);
-	{
-		uint16_t surf_w = surf.width();
-		uint16_t surf_h = surf.height();
-		uint32_t row_size = 4 * surf_w;
-
-		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
-
-		//Write each row
-		const SDL_PixelFormat & fmt = surf.format();
-		surf.lock(Surface::Lock_Normal);
-
-		// Write each row
-		for (uint32_t y = 0; y < surf_h; ++y) {
-			for (uint32_t x = 0; x < surf_w; ++x) {
-				RGBAColor color;
-				color.set(fmt, surf.get_pixel(x, y));
-				row[4 * x] = color.r;
-				row[4 * x + 1] = color.g;
-				row[4 * x + 2] = color.b;
-				row[4 * x + 3] = color.a;
-			}
-
-			png_write_row(png_ptr, row.get());
-		}
-
-		surf.unlock(Surface::Unlock_NoChange);
-	}
-
-	// End write
-	png_write_end(png_ptr, info_ptr);
-	png_destroy_write_struct(&png_ptr, &info_ptr);
+	save_surface_to_png(*image->surface(), sw);
 }
 
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
@@ -555,28 +480,6 @@ void Graphic::screenshot(const string& fname) const
 	Surface& screen = *screen_.get();
 	save_png_(screen, sw);
 	delete sw;
-}
-
-/**
- * A helper function for save_png.
- * Writes the compressed data to the StreamWrite.
- * @see save_png()
- */
-void Graphic::m_png_write_function
-	(png_structp png_ptr, png_bytep data, png_size_t length)
-{
-	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Data(data, length);
-}
-
-/**
-* A helper function for save_png.
-* Flush function to avoid crashes with default libpng flush function
-* @see save_png()
-*/
-void Graphic::m_png_flush_function
-	(png_structp png_ptr)
-{
-	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Flush();
 }
 
 /**

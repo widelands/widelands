@@ -53,6 +53,8 @@ struct RGBAColor {
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
 	void set(const SDL_PixelFormat & fmt, uint32_t clr);
 
+	bool operator == (const RGBAColor& other) const;
+
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;

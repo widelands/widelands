@@ -1,6 +1,7 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/paths.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/paths.h)
 
-# NOCOMMIT(#sirver): should be wl_test
+# Simple binary that renders a text into an image for manual
+# testing/experimenting with the rich text renderer.
 wl_binary(render_richtext
   SRCS
     render_richtext.cc
@@ -9,7 +10,6 @@ wl_binary(render_richtext
     graphic_surface
     graphic_text
     graphic_text_test_render
-    third_party_lodepng
 )
 
 wl_library(graphic_text_test_render
@@ -21,6 +21,7 @@ wl_library(graphic_text_test_render
     graphic_image
     graphic_surface
     graphic_text
+    third_party_lodepng
 )
 
 wl_test(test_richtext_renderer

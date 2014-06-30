@@ -22,7 +22,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "base/log.h"
+#include "base/log.h" // NOCOM(#sirver): remove again
 #include "base/wexception.h"
 #include "graphic/surface.h"
 #include "io/fileread.h"
@@ -32,7 +32,7 @@ using namespace std;
 
 Surface* ImageLoaderImpl::load(const string& fname, FileSystem* fs) const {
 	FileRead fr;
-	//log("Loading image %s.\n", fname.c_str());
+	log("Loading image %s.\n", fname.c_str());
 
 	if (fs) {
 		fr.Open(*fs, fname);
