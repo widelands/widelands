@@ -40,6 +40,20 @@ macro(_parse_common_args ARGS)
   )
 endmacro(_parse_common_args)
 
+#include the cmake version dependend macro _include_directories
+if (CMAKE_VERSION VERSION_LESS 2.8.11)
+  include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectoriesOld.cmake)
+else (CMAKE_VERSION VERSION_LESS 2.8.11)
+  include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectories.cmake)
+endif (CMAKE_VERSION VERSION_LESS 2.8.11)
+
+function(_include_directories TARGET DIR)
+  _include_directories_internal(${TARGET} ${DIR} FALSE)
+endfunction(_include_directories TARGET DIR)
+function(_include_system_directories TARGET DIR)
+  _include_directories_internal(${TARGET} ${DIR} TRUE)
+endfunction(_include_system_directories TARGET_DIR)
+
 macro(_common_compile_tasks)
   if (NOT ARG_C_LIBRARY)
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_GENERIC_CXX_FLAGS}")
@@ -66,59 +80,60 @@ macro(_common_compile_tasks)
 
   if(NOT ARG_THIRD_PARTY)
     # src/ is the base for all of our includes. The binary one is for generated files.
-    target_include_directories(${NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src)
+    _include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src)
+    _include_directories(${NAME} ${CMAKE_BINARY_DIR}/src)
 
     # Boost is practically the standard library, so we always add a search path
     # to include it easily. Except for third party.
-    target_include_directories(${NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${Boost_INCLUDE_DIR})
   endif()
 
   if(ARG_USES_ZLIB)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${ZLIB_INCLUDE_DIRS})
+    _include_system_directories(${NAME} ${ZLIB_INCLUDE_DIRS})
     target_link_libraries(${NAME} ${ZLIB_LIBRARY})
   endif()
 
   # OpenGL and GLEW are one thing for us. If you use the one, you also use the
   # other.
   if(ARG_USES_OPENGL)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${GLEW_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
     target_link_libraries(${NAME} ${GLEW_LIBRARY})
     target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
     add_definitions(${GLEW_EXTRA_DEFINITIONS})
   endif()
 
   if(ARG_USES_PNG)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${PNG_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${PNG_INCLUDE_DIR})
     target_link_libraries(${NAME} ${PNG_LIBRARY})
   endif()
 
   if(ARG_USES_SDL)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${SDL_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${SDL_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDL_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_MIXER)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLMIXER_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${SDLMIXER_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLMIXER_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_NET)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLNET_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${SDLNET_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLNET_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_IMAGE)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLIMAGE_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${SDLIMAGE_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLIMAGE_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_GFX)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLGFX_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${SDLGFX_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLGFX_LIBRARY})
   endif()
 
   if(ARG_USES_SDL_TTF)
-    target_include_directories(${NAME} SYSTEM PUBLIC ${SDLTTF_INCLUDE_DIR})
+    _include_system_directories(${NAME} ${SDLTTF_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDLTTF_LIBRARY})
   endif()
 
@@ -126,7 +141,7 @@ macro(_common_compile_tasks)
     # libintl is not used on all systems, so only include it, when we actually
     # found it.
     if (INTL_FOUND)
-      target_include_directories(${NAME} SYSTEM PUBLIC ${INTL_INCLUDE_DIR})
+      _include_system_directories(${NAME} ${INTL_INCLUDE_DIR})
       target_link_libraries(${NAME} ${INTL_LIBRARY})
     endif()
   endif()

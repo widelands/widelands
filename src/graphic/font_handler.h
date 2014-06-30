@@ -20,6 +20,7 @@
 #ifndef FONT_HANDLER_H
 #define FONT_HANDLER_H
 
+#include <limits>
 #include <memory>
 #include <string>
 
