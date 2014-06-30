@@ -26,7 +26,6 @@ wl_library(graphic_text_test_render
     graphic_text
     io_filesystem
     io_stream
-    third_party_lodepng
 )
 
 wl_test(test_richtext_renderer

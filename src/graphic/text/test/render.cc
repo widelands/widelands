@@ -36,9 +36,7 @@
 #include "graphic/text/test/paths.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
-#include "third_party/lodepng/lodepng.h"
 
-// NOCOM(#sirver): delet lodepng.
 using namespace std;
 
 StandaloneRenderer::StandaloneRenderer() {
