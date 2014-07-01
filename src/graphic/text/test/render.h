@@ -28,24 +28,17 @@
 class SDLSurface;
 
 // A stand alone richtext renderer for tests and binaries.
-class StandaloneRenderer : public RT::IRenderer {
+class StandaloneRenderer {
 	public:
 		StandaloneRenderer();
-		virtual ~StandaloneRenderer() override;
+		~StandaloneRenderer();
 
-		// Implements RT::IRenderer.
-	   virtual Surface*
-	   render(const std::string& text, uint16_t w, const RT::TagSet& tagset = RT::TagSet()) override;
-	   virtual RT::IRefMap* make_reference_map
-			(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) override;
-
+		RT::IRenderer* renderer();
 
 	private:
 		std::unique_ptr<SurfaceCache> surface_cache_;
 		std::unique_ptr<ImageCache> image_cache_;
 		std::unique_ptr<RT::IRenderer> renderer_;
 };
-
-StandaloneRenderer* setup_standalone_renderer();
 
 #endif /* end of include guard: RENDER_H */

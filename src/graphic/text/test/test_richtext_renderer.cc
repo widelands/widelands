@@ -47,9 +47,7 @@
 #include "io/streamwrite.h"
 
 struct RichTextTestFixture {
-	RichTextTestFixture() : renderer(setup_standalone_renderer()) {}
-
-	std::unique_ptr<StandaloneRenderer> renderer;
+	StandaloneRenderer sar;
 };
 
 BOOST_FIXTURE_TEST_SUITE(richtext_test_suite, RichTextTestFixture)
@@ -182,7 +180,7 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 	return nwrong == 0;
 }
 
-bool compare_for_test(StandaloneRenderer* renderer) {
+bool compare_for_test(RT::IRenderer* renderer) {
 	ensure_sdl_is_initialized();
 
 	const std::string test_name = boost::unit_test::framework::current_test_case().p_name.value;
@@ -218,53 +216,53 @@ bool compare_for_test(StandaloneRenderer* renderer) {
 
 }  // namespace
 
-BOOST_AUTO_TEST_CASE(br) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(bullet_point) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(escaped_text_simple) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_bold) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_color_blue) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_color_green) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_color_red) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_face) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_italic) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_ref) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_shadow) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_size_bigger) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_size_smaller) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_underline) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(font_various_attr) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(hline) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(hspace_dynamic1) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(hspace_dynamic2) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(hspace_dynamic_img) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(hspace_dynamic_text) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(hspace_fixed) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(img_simple) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(p_align) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(p_indent) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(p_spacing) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(p_valign_center) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(p_valign_default) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(p_valign_top) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(rt_bgcolor) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(rt_padding) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(rt_padding_allsites) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_autowidth_floatleftimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_background_img) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatbothsides) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatleft) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatleftimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatright) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_margin_bgclr) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_margin_bgimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_nonfloating_valign) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(sub_padding) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(table_like) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(text_linebreak) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(text_linebreak01) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(text_linebreak02) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(text_simple) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(text_simple_autowidth) {BOOST_CHECK(compare_for_test(renderer.get()));}
-BOOST_AUTO_TEST_CASE(vspace) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(br) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(bullet_point) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(escaped_text_simple) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_bold) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_color_blue) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_color_green) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_color_red) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_face) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_italic) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_ref) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_shadow) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_size_bigger) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_size_smaller) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_underline) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(font_various_attr) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(hline) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(hspace_dynamic1) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(hspace_dynamic2) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(hspace_dynamic_img) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(hspace_dynamic_text) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(hspace_fixed) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(img_simple) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(p_align) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(p_indent) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(p_spacing) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(p_valign_center) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(p_valign_default) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(p_valign_top) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(rt_bgcolor) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(rt_padding) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(rt_padding_allsites) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_autowidth_floatleftimg) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_background_img) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatbothsides) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatleft) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatleftimg) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatright) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_margin_bgclr) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_margin_bgimg) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_nonfloating_valign) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(sub_padding) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(table_like) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(text_linebreak) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(text_linebreak01) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(text_linebreak02) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(text_simple) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(text_simple_autowidth) {BOOST_CHECK(compare_for_test(sar.renderer()));}
+BOOST_AUTO_TEST_CASE(vspace) {BOOST_CHECK(compare_for_test(sar.renderer()));}
 
 BOOST_AUTO_TEST_SUITE_END();

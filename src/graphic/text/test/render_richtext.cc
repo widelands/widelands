@@ -117,11 +117,11 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	std::unique_ptr<RT::IRenderer> renderer(setup_standalone_renderer());
+	StandaloneRenderer standalone_renderer;
 
 	try {
 		std::unique_ptr<SDLSurface> surf(
-		   static_cast<SDLSurface*>(renderer->render(txt, w, allowed_tags)));
+		   static_cast<SDLSurface*>(standalone_renderer.renderer()->render(txt, w, allowed_tags)));
 
 		std::unique_ptr<FileSystem> fs(&FileSystem::Create("."));
 		std::unique_ptr<StreamWrite> sw(fs->OpenStreamWrite(outname));

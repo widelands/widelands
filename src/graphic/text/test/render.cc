@@ -24,18 +24,11 @@
 #include <memory>
 #include <string>
 
-#include "base/log.h" // NOCOM(#sirver): remove again
 #include "graphic/image_cache.h"
-#include "graphic/render/sdl_helper.h"
-#include "graphic/render/sdl_surface.h"
 #include "graphic/surface_cache.h"
 #include "graphic/text/rt_render.h"
-#include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/test/paths.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "io/streamwrite.h"
-
-using namespace std;
 
 StandaloneRenderer::StandaloneRenderer() {
 	g_fs = new LayeredFileSystem();
@@ -52,17 +45,6 @@ StandaloneRenderer::~StandaloneRenderer() {
 	g_fs = nullptr;
 }
 
-Surface* StandaloneRenderer::render(const std::string& text,
-                                            uint16_t w,
-                                            const RT::TagSet& tagset) {
-	return renderer_->render(text, w, tagset);
-}
-
-RT::IRefMap* StandaloneRenderer::make_reference_map(
-   const std::string& text, uint16_t w, const RT::TagSet& tagset) {
-	return renderer_->make_reference_map(text, w, tagset);
-}
-
-StandaloneRenderer* setup_standalone_renderer() {
-	return new StandaloneRenderer();
+RT::IRenderer* StandaloneRenderer::renderer() {
+	return renderer_.get();
 }
