@@ -110,12 +110,9 @@ private:
 	std::unique_ptr<RT::IRenderer> renderer_;
 };
 
-IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs) {
-	return
-		new Font_Handler1
-		(&gr->images(), &gr->surfaces(),
-		 RT::setup_renderer
-		 (&gr->images(), &gr->surfaces(), RT::ttf_fontloader_from_filesystem(fs)));
+IFont_Handler1 * create_fonthandler(Graphic* gr) {
+	return new Font_Handler1(
+	   &gr->images(), &gr->surfaces(), RT::setup_renderer(&gr->images(), &gr->surfaces()));
 }
 
 IFont_Handler1 * g_fh1 = nullptr;

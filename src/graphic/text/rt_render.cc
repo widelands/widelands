@@ -33,6 +33,7 @@
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/surface.h"
+#include "graphic/text/font_io.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
 
@@ -566,7 +567,6 @@ Surface* ImgRenderNode::render(SurfaceCache* /* surface_cache */) {
  */
 class FontCache {
 public:
-	FontCache(IFontLoader* fl) : m_fl(fl) {}
 	virtual ~FontCache() {
 		for (FontMapPair& pair : m_fontmap)
 			delete pair.second;
@@ -588,8 +588,8 @@ private:
 	typedef pair<const FontDescr, IFont*> FontMapPair;
 
 	FontMap m_fontmap;
-	std::unique_ptr<IFontLoader> m_fl;
 };
+
 IFont& FontCache::get_font(NodeStyle& ns) {
 	if (ns.font_style & IFont::BOLD) {
 		ns.font_face += "Bold";
@@ -604,7 +604,7 @@ IFont& FontCache::get_font(NodeStyle& ns) {
 	if (i != m_fontmap.end())
 		return *i->second;
 
-	IFont* font = m_fl->load(ns.font_face + ".ttf", ns.font_size);
+	IFont* font = load_font(ns.font_face + ".ttf", ns.font_size);
 	m_fontmap[fd] = font;
 	return *font;
 }
@@ -950,7 +950,7 @@ TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCach
 
 class Renderer : public IRenderer {
 public:
-	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IFontLoader* fl, IParser* p);
+	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IParser* p);
 	virtual ~Renderer();
 
 	virtual Surface* render(const string&, uint16_t, const TagSet&) override;
@@ -965,8 +965,8 @@ private:
 	SurfaceCache* const surface_cache_;  // Not owned.
 };
 
-Renderer::Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IFontLoader* fl, IParser* p) :
-	m_fc(fl), m_p(p), image_cache_(image_cache), surface_cache_(surface_cache) {
+Renderer::Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IParser* p) :
+	m_p(p), image_cache_(image_cache), surface_cache_(surface_cache) {
 }
 
 Renderer::~Renderer() {
@@ -1006,8 +1006,8 @@ IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const 
 	return new RefMap(node->get_references());
 }
 
-IRenderer* setup_renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IFontLoader* fl) {
-	return new Renderer(image_cache, surface_cache, fl, setup_parser());
+IRenderer* setup_renderer(ImageCache* image_cache, SurfaceCache* surface_cache) {
+	return new Renderer(image_cache, surface_cache, setup_parser());
 }
 
 }

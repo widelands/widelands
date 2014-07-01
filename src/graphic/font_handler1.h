@@ -48,7 +48,7 @@ public:
 };
 
 // Create a new Font_Handler1. Ownership for the objects is not taken.
-IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs);
+IFont_Handler1 * create_fonthandler(Graphic* gr);
 
 extern IFont_Handler1 * g_fh1;
 

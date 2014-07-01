@@ -17,68 +17,46 @@
  *
  */
 
+#include "graphic/text/font_io.h"
+
+#include <memory>
 #include <string>
 
 #include <boost/format.hpp>
 
 #include "graphic/text/rt_errors.h"
-#include "graphic/text/sdl_ttf_font_impl.h"
-
+#include "graphic/text/sdl_ttf_font.h"
 #include "io/fileread.h"
-#include "io/filesystem/filesystem.h"
-
-using namespace std;
-using namespace boost;
+#include "io/filesystem/layered_filesystem.h"
 
 namespace RT {
 
-class SDLTTF_FontLoaderFromFilesystem : public IFontLoader {
-public:
-	SDLTTF_FontLoaderFromFilesystem(FileSystem* fs);
-	virtual ~SDLTTF_FontLoaderFromFilesystem();
-	virtual IFont * load(const string& name, int ptsize) override;
-
-private:
-	FileSystem* fs_;
-	vector<FileRead*> filereads_;
-};
-
-SDLTTF_FontLoaderFromFilesystem::SDLTTF_FontLoaderFromFilesystem(FileSystem* fs)
-	: fs_(fs) {
-}
-SDLTTF_FontLoaderFromFilesystem::~SDLTTF_FontLoaderFromFilesystem() {
-	for (FileRead* fr : filereads_)
-		delete fr;
-	filereads_.clear();
-}
-
-IFont* SDLTTF_FontLoaderFromFilesystem::load(const string& face, int ptsize) {
+IFont* load_font(const std::string& face, int ptsize) {
 	std::string filename = "fonts/";
 	filename += face;
 
 	// Some older versions of sdl_ttf seem to rely on this block of memory to
 	// remain intact, therefore, we keep it around till the program exits and
 	// this class is destroyed.
-	FileRead* fr = new FileRead();
-	fr->Open(*fs_, filename);
-	filereads_.push_back(fr);
+	std::unique_ptr<std::string> memory;
+	{
+		FileRead* fr = new FileRead();
+		fr->Open(*g_fs, filename);
+		memory.reset(new std::string(fr->Data(0), fr->GetSize()));
+	}
 
-	SDL_RWops* ops = SDL_RWFromMem(fr->Data(0), fr->GetSize());
+	SDL_RWops* ops = SDL_RWFromConstMem(memory->data(), memory->size());
 	if (!ops)
 		throw BadFont("could not load font!: RWops Pointer invalid");
 
 	TTF_Font* font = TTF_OpenFontIndexRW(ops, true, ptsize, 0);
 	if (!font)
-		throw BadFont((format("could not load font!: %s") % TTF_GetError()).str());
+		throw BadFont((boost::format("could not load font!: %s") % TTF_GetError()).str());
 
 	if (!font)
-		throw BadFont((format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError()).str());
+		throw BadFont((boost::format("Font loading error for %s, %i pts: %s") % face % ptsize %
+		               TTF_GetError()).str());
 
-	return new SDLTTF_Font(font, face, ptsize);
+	return new SDLTTF_Font(font, face, ptsize, memory.release());
 }
-
-IFontLoader * ttf_fontloader_from_filesystem(FileSystem* fs) {
-	return new SDLTTF_FontLoaderFromFilesystem(fs);
-}
-
 }

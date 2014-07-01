@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,40 +17,19 @@
  *
  */
 
-
-#ifndef SDL_TTF_FONT_IMPL_H
-#define SDL_TTF_FONT_IMPL_H
+#ifndef FONT_IO_H
+#define FONT_IO_H
 
 #include <string>
 
-#include <SDL_ttf.h>
-
-#include "graphic/text/rt_render.h"
-
 namespace RT {
 
-// Implementation of a Font object using SDL_ttf.
-class SDLTTF_Font : public IFont {
-public:
-	SDLTTF_Font(TTF_Font* ttf, const std::string& face, int ptsize);
-	virtual ~SDLTTF_Font();
+class IFont;
 
-	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h) override;
-	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) override;
-	uint16_t ascent(int) const override;
-
-private:
-	void m_set_style(int);
-
-	TTF_Font * font_;
-	int style_;
-	const std::string font_name_;
-	const int ptsize_;
-};
+// Loads the font 'face' at the given 'point_size' from the g_fs.
+IFont* load_font(const std::string& face, int point_size);
 
 }  // namespace RT
 
 
-
-#endif /* end of include guard: SDL_TTF_FONT_IMPL_H */
-
+#endif /* end of include guard: FONT_IO_H */

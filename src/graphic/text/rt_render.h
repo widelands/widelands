@@ -58,18 +58,6 @@ public:
 };
 
 /**
- * Loader class that can create Fonts from a name. This is the bridge
- * to the g_fs in Widelands but can be reimplemented for standalone programs/test
- * cases.
- */
-class IFontLoader {
-public:
-	virtual ~IFontLoader() {}
-
-	virtual IFont * load(const std::string& name, int ptsize) = 0;
-};
-
-/**
  * A map that maps pixels to a string. The string are the references which can be used
  * for hyperlink like constructions.
  */
@@ -101,7 +89,7 @@ public:
 };
 
 // Setup a renderer, takes ownership of fl but of nothing else.
-IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*, IFontLoader* fl);
+IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*);
 }
 
 #endif /* end of include guard: RT_RENDER_H */

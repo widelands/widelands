@@ -290,7 +290,7 @@ m_redirected_stdio(false)
 				("True Type library did not initialize: %s\n", TTF_GetError());
 
 		UI::g_fh = new UI::Font_Handler();
-		UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
+		UI::g_fh1 = UI::create_fonthandler(g_gr);
 	} else
 		g_gr = nullptr;
 

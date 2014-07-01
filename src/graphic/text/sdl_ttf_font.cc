@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/text/sdl_ttf_font_impl.h"
+#include "graphic/text/sdl_ttf_font.h"
 
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
@@ -35,8 +35,9 @@ static const SDL_Color SHADOW_CLR = {0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
 
-SDLTTF_Font::SDLTTF_Font(TTF_Font * font, const string& face, int ptsize) :
-	font_(font), style_(TTF_STYLE_NORMAL), font_name_(face), ptsize_(ptsize) {
+SDLTTF_Font::SDLTTF_Font(TTF_Font * font, const string& face, int ptsize, string* ttf_memory_block) :
+	font_(font), style_(TTF_STYLE_NORMAL), font_name_(face), ptsize_(ptsize),
+	ttf_file_memory_block_(ttf_memory_block) {
 }
 
 SDLTTF_Font::~SDLTTF_Font() {
