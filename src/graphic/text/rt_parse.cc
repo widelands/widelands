@@ -201,12 +201,10 @@ public:
 
 private:
 	TagConstraints m_tcs;
-	TextStream * m_ts;
+	std::unique_ptr<TextStream> m_ts;
 };
 
-Parser::Parser() :
-	m_ts(nullptr)
-{
+Parser::Parser() {
 	{ // rt tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
@@ -315,16 +313,10 @@ Parser::Parser() :
 }
 
 Parser::~Parser() {
-	if (m_ts)
-		delete m_ts;
 }
 
 ITag * Parser::parse(string text, const TagSet & allowed_tags) {
-	if (m_ts) {
-		delete m_ts;
-		m_ts = nullptr;
-	}
-	m_ts = new TextStream(text);
+	m_ts.reset(new TextStream(text));
 
 	m_ts->skip_ws(); m_ts->rskip_ws();
 	Tag * rv = new Tag();
@@ -333,7 +325,7 @@ ITag * Parser::parse(string text, const TagSet & allowed_tags) {
 	return rv;
 }
 string Parser::remaining_text() {
-	if (!m_ts)
+	if (m_ts == nullptr)
 		return "";
 	return m_ts->remaining_text();
 }
