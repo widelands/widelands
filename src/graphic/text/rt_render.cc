@@ -31,6 +31,7 @@
 #include "base/log.h" // NOCOM(#sirver): remove again
 #include "base/rect.h"
 #include "graphic/image_cache.h"
+#include "graphic/image_loader.h"
 #include "graphic/surface.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
@@ -763,8 +764,12 @@ public:
 
 		if (a.has("fill")) {
 			m_fill_text = a["fill"].get_string();
-			m_bg = image_cache_->get(m_fill_text);
-			m_fill_text = "";
+			try {
+				m_bg = image_cache_->get(m_fill_text);
+				m_fill_text = "";
+			}
+			catch (ImageNotFound&) {
+			}
 		}
 	}
 

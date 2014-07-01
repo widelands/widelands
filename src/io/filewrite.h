@@ -24,6 +24,7 @@
 #include <cstdarg>
 #include <limits>
 #include <memory>
+#include <string>
 
 #include "io/streamwrite.h"
 
@@ -94,6 +95,9 @@ public:
 
 	/// Write data at the current file pointer and advance it.
 	void Data(void const* src, size_t size) override;
+
+	/// Returns the current buffer. Use this for in_memory operations.
+	std::string GetData() const;
 
 private:
 	char* data_;

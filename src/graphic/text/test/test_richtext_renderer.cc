@@ -24,6 +24,7 @@
 #define BOOST_TEST_MODULE RichTextRendering
 
 #include <SDL.h>
+#include <SDL_Image.h>
 #include <SDL_TTF.h>
 #undef main
 
@@ -42,6 +43,7 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
 #include "io/streamwrite.h"
 
 struct RichTextTestFixture {
@@ -132,8 +134,19 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 		return false;
 	}
 
+	// Saving a PNG slightly changes some pixel values. So we save and reload
+	// the generated PNG in memory to get the same effects on the generated
+	// image too.
+	FileWrite fw;
+	if (!save_surface_to_png(generated, &fw)) {
+		std::cout << "Could not encode PNG." << std::endl;
+	}
+	const std::string encoded_data = fw.GetData();
+	std::unique_ptr<SDLSurface> converted(new SDLSurface(IMG_Load_RW(
+	   SDL_RWFromConstMem(encoded_data.data(), encoded_data.size()), false /* free source */)));
+
 	correct->lock(Surface::Lock_Normal);
-	generated->lock(Surface::Lock_Normal);
+	converted->lock(Surface::Lock_Normal);
 
 	int nwrong = 0;
 	for (int y = 0; y < correct->height(); ++y) {
@@ -142,10 +155,11 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 			SDL_GetRGBA(
 			   correct->get_pixel(x, y), &correct->format(), &cclr.r, &cclr.g, &cclr.b, &cclr.a);
 			SDL_GetRGBA(
-			   generated->get_pixel(x, y), &generated->format(), &gclr.r, &gclr.g, &gclr.b, &gclr.a);
+			   converted->get_pixel(x, y), &converted->format(), &gclr.r, &gclr.g, &gclr.b, &gclr.a);
 
 			// When saving/loading PNGs which have fully transparent pixels, the
 			// color values seem to be changed for these.
+			// NOCOM(#sirver): no longer needed?
 			if (cclr == gclr || (cclr.a == SDL_ALPHA_TRANSPARENT && gclr.a == SDL_ALPHA_TRANSPARENT)) {
 				continue;
 			}
@@ -157,7 +171,7 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 		}
 	}
 
-	generated->unlock(Surface::Unlock_Update);
+	converted->unlock(Surface::Unlock_Update);
 	correct->unlock(Surface::Unlock_NoChange);
 
 	if (nwrong) {
@@ -211,45 +225,45 @@ BOOST_AUTO_TEST_CASE(font_color_blue) {BOOST_CHECK(compare_for_test(renderer.get
 BOOST_AUTO_TEST_CASE(font_color_green) {BOOST_CHECK(compare_for_test(renderer.get()));}
 BOOST_AUTO_TEST_CASE(font_color_red) {BOOST_CHECK(compare_for_test(renderer.get()));}
 BOOST_AUTO_TEST_CASE(font_face) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(font_italic) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(font_ref) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(font_shadow) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(font_size_bigger) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(font_size_smaller) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(font_underline) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(font_various_attr) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(hline) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(hspace_dynamic1) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(hspace_dynamic2) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(hspace_dynamic_img) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(hspace_dynamic_text) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(hspace_fixed) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(img_simple) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(p_align) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(p_indent) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(p_spacing) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(p_valign_center) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(p_valign_default) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(p_valign_top) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(rt_bgcolor) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(rt_padding) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(rt_padding_allsites) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_autowidth_floatleftimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_background_img) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatbothsides) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatleft) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatleftimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatright) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_margin_bgclr) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_margin_bgimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_nonfloating_valign) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(sub_padding) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(table_like) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(text_linebreak) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(text_linebreak01) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(text_linebreak02) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(text_simple) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(text_simple_autowidth) {BOOST_CHECK(compare_for_test(renderer.get()));}
-// BOOST_AUTO_TEST_CASE(vspace) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(font_italic) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(font_ref) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(font_shadow) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(font_size_bigger) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(font_size_smaller) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(font_underline) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(font_various_attr) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(hline) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(hspace_dynamic1) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(hspace_dynamic2) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(hspace_dynamic_img) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(hspace_dynamic_text) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(hspace_fixed) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(img_simple) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(p_align) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(p_indent) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(p_spacing) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(p_valign_center) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(p_valign_default) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(p_valign_top) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(rt_bgcolor) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(rt_padding) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(rt_padding_allsites) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_autowidth_floatleftimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_background_img) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatbothsides) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatleft) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatleftimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_fixedwidth_floatright) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_margin_bgclr) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_margin_bgimg) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_nonfloating_valign) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(sub_padding) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(table_like) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(text_linebreak) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(text_linebreak01) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(text_linebreak02) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(text_simple) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(text_simple_autowidth) {BOOST_CHECK(compare_for_test(renderer.get()));}
+BOOST_AUTO_TEST_CASE(vspace) {BOOST_CHECK(compare_for_test(renderer.get()));}
 
 BOOST_AUTO_TEST_SUITE_END();

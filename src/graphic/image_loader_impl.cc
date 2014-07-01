@@ -34,15 +34,29 @@ Surface* ImageLoaderImpl::load(const string& fname, FileSystem* fs) const {
 	FileRead fr;
 	log("Loading image %s.\n", fname.c_str());
 
+	bool found;
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (fs) {
-		fr.Open(*fs, fname);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		found = fr.TryOpen(*fs, fname);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	} else {
-		fr.Open(*g_fs, fname);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		found = fr.TryOpen(*g_fs, fname);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	}
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
+	if (!found) {
+		throw ImageNotFound(fname);
+	}
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
 	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
-	if (!sdlsurf)
-		throw wexception("Could not open image %s: %s", fname.c_str(), IMG_GetError());
+	if (!sdlsurf) {
+		throw ImageLoadingError(fname.c_str(), IMG_GetError());
+	}
 
 	return Surface::create(sdlsurf);
 }

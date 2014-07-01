@@ -41,8 +41,8 @@ using namespace std;
 
 StandaloneRenderer::StandaloneRenderer() {
 	g_fs = new LayeredFileSystem();
-	g_fs->AddFileSystem(FileSystem::Create(RICHTEXT_DATA_DIR));
 	g_fs->AddFileSystem(FileSystem::Create(WIDELANDS_DATA_DIR));
+	g_fs->AddFileSystem(FileSystem::Create(RICHTEXT_DATA_DIR));
 
 	image_loader_.reset(new ImageLoaderImpl());
 	surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB

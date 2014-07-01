@@ -20,6 +20,8 @@
 #ifndef RT_ERRORS_H
 #define RT_ERRORS_H
 
+#include "base/wexception.h"
+
 #include <exception>
 
 namespace RT {
