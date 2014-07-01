@@ -26,7 +26,6 @@
 
 #include "base/log.h" // NOCOM(#sirver): remove again
 #include "graphic/image_cache.h"
-#include "graphic/image_loader_impl.h"
 #include "graphic/render/sdl_helper.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface_cache.h"
@@ -44,9 +43,8 @@ StandaloneRenderer::StandaloneRenderer() {
 	g_fs->AddFileSystem(FileSystem::Create(WIDELANDS_DATA_DIR));
 	g_fs->AddFileSystem(FileSystem::Create(RICHTEXT_DATA_DIR));
 
-	image_loader_.reset(new ImageLoaderImpl());
 	surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
-	image_cache_.reset(create_image_cache(image_loader_.get(), surface_cache_.get()));
+	image_cache_.reset(create_image_cache(surface_cache_.get()));
 	renderer_.reset(RT::setup_renderer(
 	   image_cache_.get(), surface_cache_.get(), RT::ttf_fontloader_from_filesystem(g_fs)));
 }
@@ -65,10 +63,6 @@ Surface* StandaloneRenderer::render(const std::string& text,
 RT::IRefMap* StandaloneRenderer::make_reference_map(
    const std::string& text, uint16_t w, const RT::TagSet& tagset) {
 	return renderer_->make_reference_map(text, w, tagset);
-}
-
-IImageLoader* StandaloneRenderer::image_loader() {
-	return image_loader_.get();
 }
 
 StandaloneRenderer* setup_standalone_renderer() {

@@ -30,7 +30,7 @@
 #undef main // No, we do not want SDL_main
 
 #include "base/log.h"
-#include "graphic/png_io.h"
+#include "graphic/image_io.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/test/render.h"

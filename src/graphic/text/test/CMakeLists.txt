@@ -7,7 +7,7 @@ wl_binary(render_richtext
     render_richtext.cc
   DEPENDS
     base_log
-    graphic_png_io
+    graphic_image_io
     graphic_surface
     graphic_text
     graphic_text_test_render
@@ -33,9 +33,11 @@ wl_test(test_richtext_renderer
     test_richtext_renderer.cc
   DEPENDS
     base_log
+    graphic_image_io
     graphic_surface
     graphic_text_test_render
     io_fileread
     io_filesystem
+    io_stream
     widelands_ball_of_mud
 )

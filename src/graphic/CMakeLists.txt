@@ -7,14 +7,18 @@ wl_library(graphic_color
   USES_SDL
 )
 
-wl_library(graphic_png_io
+wl_library(graphic_image_io
   SRCS
-    png_io.h
-    png_io.cc
+    image_io.h
+    image_io.cc
   USES_PNG
+  USES_SDL
+  USES_SDL_IMAGE
   DEPENDS
     base_exceptions
     graphic_surface
+    io_fileread
+    io_filesystem
     io_stream
 )
 
@@ -23,17 +27,12 @@ wl_library(graphic_image
     image.h
     image_cache.cc
     image_cache.h
-    image_loader.h
-    image_loader_impl.cc
-    image_loader_impl.h
   USES_SDL
   USES_SDL_IMAGE
   DEPENDS
     base_log
-    base_exceptions
+    graphic_image_io
     graphic_surface
-    io_fileread
-    io_filesystem
 )
 
 wl_library(graphic_surface
@@ -121,7 +120,7 @@ wl_library(graphic
     build_info
     graphic_color
     graphic_image
-    graphic_png_io
+    graphic_image_io
     graphic_surface
     graphic_text
     io_fileread

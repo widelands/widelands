@@ -24,7 +24,6 @@
 #include <string>
 
 #include "graphic/text/rt_render.h"
-#include "graphic/image_loader.h"
 
 class SDLSurface;
 
@@ -34,9 +33,6 @@ class StandaloneRenderer : public RT::IRenderer {
 		StandaloneRenderer();
 		virtual ~StandaloneRenderer() override;
 
-		// Ownership is maintained.
-		IImageLoader* image_loader();
-
 		// Implements RT::IRenderer.
 	   virtual Surface*
 	   render(const std::string& text, uint16_t w, const RT::TagSet& tagset = RT::TagSet()) override;
@@ -45,7 +41,6 @@ class StandaloneRenderer : public RT::IRenderer {
 
 
 	private:
-		std::unique_ptr<IImageLoader> image_loader_;
 		std::unique_ptr<SurfaceCache> surface_cache_;
 		std::unique_ptr<ImageCache> image_cache_;
 		std::unique_ptr<RT::IRenderer> renderer_;

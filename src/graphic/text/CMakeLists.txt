@@ -17,10 +17,12 @@ wl_library(graphic_text
   USES_SDL
   USES_SDL_GFX
   DEPENDS
+    base_exceptions
     base_geometry
     base_log
     graphic_color
     graphic_image
+    graphic_image_io
     graphic_surface
     io_fileread
     io_filesystem

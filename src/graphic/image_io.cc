@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,18 @@
  *
  */
 
-#include "graphic/png_io.h"
+#include "graphic/image_io.h"
 
 #include <memory>
 
+#include <SDL.h>
+#include <SDL_image.h>
 #include <png.h>
 
 #include "base/wexception.h"
 #include "graphic/surface.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 
 namespace {
@@ -42,6 +46,27 @@ void png_flush_function(png_structp png_ptr) {
 }
 
 }  // namespace
+
+Surface* load_image(const std::string& fname, FileSystem* fs) {
+	FileRead fr;
+	bool found;
+	if (fs) {
+		found = fr.TryOpen(*fs, fname);
+	} else {
+		found = fr.TryOpen(*g_fs, fname);
+	}
+
+	if (!found) {
+		throw ImageNotFound(fname);
+	}
+
+	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+	if (!sdlsurf) {
+		throw ImageLoadingError(fname.c_str(), IMG_GetError());
+	}
+
+	return Surface::create(sdlsurf);
+}
 
 bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
 	png_structp png_ptr = png_create_write_struct(

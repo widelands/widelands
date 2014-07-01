@@ -32,7 +32,6 @@
 #define MAX_RECTS 20
 
 class AnimationManager;
-class ImageLoaderImpl;
 class RenderTarget;
 class Surface;
 class SurfaceCache;
@@ -147,8 +146,6 @@ protected:
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 
-	/// The class that gets images from disk.
-	std::unique_ptr<ImageLoaderImpl> image_loader_;
 	/// Volatile cache of Hardware dependant surfaces.
 	std::unique_ptr<SurfaceCache> surface_cache_;
 	/// Non-volatile cache of hardware independent images. The use the

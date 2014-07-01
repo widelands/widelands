@@ -17,20 +17,35 @@
  *
  */
 
-#ifndef IMAGE_LOADER_IMPL_H
-#define IMAGE_LOADER_IMPL_H
+#ifndef IMAGE_IO_H
+#define IMAGE_IO_H
 
 #include <string>
 
-#include "graphic/image_loader.h"
+#include "base/wexception.h"
 
-class ImageLoaderImpl : public IImageLoader {
+class FileSystem;
+class StreamWrite;
+class Surface;
+
+class ImageNotFound : public _wexception {
 public:
-	virtual ~ImageLoaderImpl() {}
-
-	Surface* load(const std::string& fname, FileSystem* fs = nullptr) const override;
+	ImageNotFound(const std::string& fn) : wexception("Image not found: %s", fn.c_str()) {
+	}
 };
 
+class ImageLoadingError : public _wexception {
+public:
+	ImageLoadingError(const std::string& fn, const std::string& reason)
+	   : wexception("Error loading %s: %s", fn.c_str(), reason.c_str()) {
+	}
+};
 
-#endif /* end of include guard: IMAGE_LOADER_IMPL_H */
+/// Loads the image 'fn' from 'fs'.
+// NOCOM(#sirver): comment
+Surface* load_image(const std::string& fn, FileSystem* fs = nullptr);
 
+// Saves the 'surface' to 'sw' as a PNG.
+bool save_surface_to_png(Surface* surface, StreamWrite* sw);
+
+#endif /* end of include guard:  */

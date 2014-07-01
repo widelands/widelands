@@ -31,7 +31,7 @@
 #include "base/log.h" // NOCOM(#sirver): remove again
 #include "base/rect.h"
 #include "graphic/image_cache.h"
-#include "graphic/image_loader.h"
+#include "graphic/image_io.h"
 #include "graphic/surface.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"

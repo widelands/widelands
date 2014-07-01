@@ -37,9 +37,8 @@
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
-#include "graphic/image_loader_impl.h"
+#include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
-#include "graphic/png_io.h"
 #include "graphic/render/gl_surface_screen.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/rendertarget.h"
@@ -66,9 +65,8 @@ Graphic::Graphic()
 	m_fallback_settings_in_effect (false),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
-	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
-	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get())),
+	image_cache_(create_image_cache(surface_cache_.get())),
 	animation_manager_(new AnimationManager())
 {
 	ImageTransformations::initialize();
@@ -317,8 +315,8 @@ GCC_DIAG_ON ("-Wold-style-cast")
 	m_sdl_screen = sdlsurface;
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
 
-	pic_road_normal_.reset(image_loader_->load("world/pics/roadt_normal.png"));
-	pic_road_busy_.reset(image_loader_->load("world/pics/roadt_busy.png"));
+	pic_road_normal_.reset(load_image("world/pics/roadt_normal.png"));
+	pic_road_busy_.reset(load_image("world/pics/roadt_busy.png"));
 }
 
 bool Graphic::check_fallback_settings_in_effect()

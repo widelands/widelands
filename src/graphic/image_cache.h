@@ -26,7 +26,6 @@
 
 #include "graphic/image.h"
 
-class IImageLoader;
 class SurfaceCache;
 
 // For historic reasons, most part of the Widelands code base expect that an
@@ -55,8 +54,7 @@ public:
 
 };
 
-// Create a new ImageCache. Takes no ownership.
-ImageCache* create_image_cache(IImageLoader*, SurfaceCache*);
+// Create a new ImageCache. Does not take ownership.
+ImageCache* create_image_cache(SurfaceCache*);
 
 #endif /* end of include guard: IMAGE_CACHE_H */
-

@@ -59,6 +59,7 @@ const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture()
 	if (Surface* surface = g_gr->surfaces().get(cachename))
 		return dynamic_cast<GLSurfaceTexture *>(surface);
 
+	// NOCOM(#sirver): This can be fixed through a bit of refactoring now.
 	// TODO: This duplicates code from the ImageLoader, but as we cannot convert
 	// a GLSurface into another format currently, we have to eat this frog.
 	FileRead fr;

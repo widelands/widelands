@@ -571,6 +571,7 @@ wl_library(widelands_ball_of_mud
     graphic
     graphic_color
     graphic_image
+    graphic_image_io
     graphic_surface
     io_dedicated_log
     io_fileread

@@ -35,7 +35,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "base/log.h"
-#include "graphic/png_io.h"
+#include "graphic/image_io.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface.h"
 #include "graphic/text/test/paths.h"
@@ -190,7 +190,7 @@ bool compare_for_test(StandaloneRenderer* renderer) {
 	const int width = read_width(basedir);
 	log("#sirver width: %u\n", width);
 
-	std::unique_ptr<Surface> correct(renderer->image_loader()->load(basedir + "correct.png"));
+	std::unique_ptr<Surface> correct(load_image(basedir + "correct.png", g_fs));
 	if (!correct) {
 		log("Could not load %s/correct.png.\n", basedir.c_str());
 		return false;
