@@ -20,6 +20,8 @@
 #ifndef RT_ERRORS_IMPL_H
 #define RT_ERRORS_IMPL_H
 
+#include <boost/format.hpp>
+
 #include "graphic/text/rt_errors.h"
 
 namespace RT {
@@ -35,6 +37,3 @@ struct SyntaxError_Impl : public SyntaxError {
 }
 
 #endif /* end of include guard: RT_ERRORS_IMPL_H */
-
-
-

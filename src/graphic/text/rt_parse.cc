@@ -20,28 +20,18 @@
 #include "graphic/text/rt_parse.h"
 
 #include <memory>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <SDL.h>
 #include <boost/format.hpp>
-#include <boost/unordered_map.hpp>
-#include <boost/unordered_set.hpp>
 
 #include "graphic/text/rt_errors_impl.h"
 #include "graphic/text/textstream.h"
 
-using namespace std;
-using namespace boost;
 
 namespace RT {
-
-struct TagConstraint {
-	unordered_set<string> allowed_attrs;
-	unordered_set<string> allowed_childs;
-	bool text_allowed;
-	bool has_closing_tag;
-};
-typedef unordered_map<string, TagConstraint> TagConstraints;
 
 Attr::Attr(const std::string& gname, const std::string& value) : m_name(gname), m_value(value) {
 }
@@ -55,7 +45,7 @@ long Attr::get_int() const {
 	return rv;
 }
 
-string Attr::get_string() const {
+std::string Attr::get_string() const {
 	return m_value;
 }
 
@@ -67,13 +57,13 @@ bool Attr::get_bool() const {
 
 RGBColor Attr::get_color() const {
 	if (m_value.size() != 6)
-		throw InvalidColor((format("Could not parse '%s' as a color.") % m_value).str());
+		throw InvalidColor((boost::format("Could not parse '%s' as a color.") % m_value).str());
 
 	uint32_t clrn = strtol(m_value.c_str(), nullptr, 16);
 	return RGBColor((clrn >> 16) & 0xff, (clrn >> 8) & 0xff, clrn & 0xff);
 }
 
-void AttrMap::add_attribute(const string& name, Attr* a) {
+void AttrMap::add_attribute(const std::string& name, Attr* a) {
 	m_attrs[name] = std::unique_ptr<Attr>(a);
 }
 
@@ -94,7 +84,7 @@ public:
 	Tag();
 	virtual ~Tag();
 
-	virtual const string & name() const override {return m_name;}
+	virtual const std::string & name() const override {return m_name;}
 	virtual const AttrMap & attrs() const override {return m_am;}
 	virtual const ChildList & childs() const override {return m_childs;}
 	void parse(TextStream & ts, TagConstraints & tcs, const TagSet &);
@@ -102,10 +92,10 @@ public:
 private:
 	void m_parse_opening_tag(TextStream & ts, TagConstraints & tcs);
 	void m_parse_closing_tag(TextStream & ts);
-	void m_parse_attribute(TextStream & ts, unordered_set<string> &);
+	void m_parse_attribute(TextStream & ts, std::unordered_set<std::string> &);
 	void m_parse_content(TextStream & ts, TagConstraints & tc, const TagSet &);
 
-	string m_name;
+	std::string m_name;
 	AttrMap m_am;
 	ChildList m_childs;
 };
@@ -137,8 +127,8 @@ void Tag::m_parse_closing_tag(TextStream & ts) {
 	ts.expect(">", false);
 }
 
-void Tag::m_parse_attribute(TextStream & ts, unordered_set<string> & allowed_attrs) {
-	string aname = ts.till_any("=");
+void Tag::m_parse_attribute(TextStream & ts, std::unordered_set<std::string> & allowed_attrs) {
+	std::string aname = ts.till_any("=");
 	if (!allowed_attrs.count(aname))
 		throw SyntaxError_Impl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
 
@@ -156,7 +146,7 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 			ts.skip_ws();
 
 		size_t line = ts.line(), col = ts.col();
-		string text = ts.till_any("<");
+		std::string text = ts.till_any("<");
 		if (text != "") {
 			if (not tc.text_allowed)
 				throw SyntaxError_Impl(line, col, "no text, as only tags are allowed here", text, ts.peek(100));
@@ -192,18 +182,6 @@ void Tag::parse(TextStream & ts, TagConstraints & tcs, const TagSet & allowed_ta
 /*
  * Class Parser
  */
-class Parser : public IParser {
-public:
-	Parser();
-	virtual ~Parser();
-	virtual ITag * parse(string text, const TagSet &) override;
-	virtual string remaining_text() override;
-
-private:
-	TagConstraints m_tcs;
-	std::unique_ptr<TextStream> m_ts;
-};
-
 Parser::Parser() {
 	{ // rt tag
 		TagConstraint tc;
@@ -315,7 +293,7 @@ Parser::Parser() {
 Parser::~Parser() {
 }
 
-ITag * Parser::parse(string text, const TagSet & allowed_tags) {
+ITag * Parser::parse(std::string text, const TagSet & allowed_tags) {
 	m_ts.reset(new TextStream(text));
 
 	m_ts->skip_ws(); m_ts->rskip_ws();
@@ -324,14 +302,10 @@ ITag * Parser::parse(string text, const TagSet & allowed_tags) {
 
 	return rv;
 }
-string Parser::remaining_text() {
+std::string Parser::remaining_text() {
 	if (m_ts == nullptr)
 		return "";
 	return m_ts->remaining_text();
-}
-
-IParser * setup_parser() {
-	return new Parser();
 }
 
 }

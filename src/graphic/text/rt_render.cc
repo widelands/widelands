@@ -950,7 +950,7 @@ TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCach
 
 class Renderer : public IRenderer {
 public:
-	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IParser* p);
+	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache);
 	virtual ~Renderer();
 
 	virtual Surface* render(const string&, uint16_t, const TagSet&) override;
@@ -960,20 +960,20 @@ private:
 	RenderNode* layout_(const string& text, uint16_t width, const TagSet& allowed_tags);
 
 	FontCache m_fc;
-	std::unique_ptr<IParser> m_p;
+	Parser m_parser;
 	ImageCache* const image_cache_;  // Not owned.
 	SurfaceCache* const surface_cache_;  // Not owned.
 };
 
-Renderer::Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IParser* p) :
-	m_p(p), image_cache_(image_cache), surface_cache_(surface_cache) {
+Renderer::Renderer(ImageCache* image_cache, SurfaceCache* surface_cache) :
+	image_cache_(image_cache), surface_cache_(surface_cache) {
 }
 
 Renderer::~Renderer() {
 }
 
 RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::unique_ptr<ITag> rt(m_p->parse(text, allowed_tags));
+	std::unique_ptr<ITag> rt(m_parser.parse(text, allowed_tags));
 
 	NodeStyle default_style = {
 		"DejaVuSerif", 16,
@@ -1007,7 +1007,7 @@ IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const 
 }
 
 IRenderer* setup_renderer(ImageCache* image_cache, SurfaceCache* surface_cache) {
-	return new Renderer(image_cache, surface_cache, setup_parser());
+	return new Renderer(image_cache, surface_cache);
 }
 
 }

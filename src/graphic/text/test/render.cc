@@ -29,7 +29,6 @@
 #include "graphic/render/sdl_helper.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface_cache.h"
-#include "graphic/text/rt_parse.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/test/paths.h"

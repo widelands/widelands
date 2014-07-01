@@ -24,6 +24,8 @@
 #include <memory>
 #include <set>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <stdint.h>
@@ -33,6 +35,7 @@
 
 namespace RT {
 
+class TextStream;
 struct Child;
 
 class Attr {
@@ -48,7 +51,6 @@ public:
 private:
 	const std::string m_name, m_value;
 };
-
 
 // This is basically a map<string, Attr>.
 class AttrMap {
@@ -70,36 +72,48 @@ class ITag {
 public:
 	typedef std::vector<Child*> ChildList;
 
-	virtual ~ITag() {}
-	virtual const std::string & name() const = 0;
-	virtual const AttrMap & attrs() const = 0;
-	virtual const ChildList & childs() const = 0;
+	virtual ~ITag() {
+	}
+	virtual const std::string& name() const = 0;
+	virtual const AttrMap& attrs() const = 0;
+	virtual const ChildList& childs() const = 0;
 };
 
 struct Child {
-	Child() : tag(nullptr), text() {}
-	Child(ITag * t) : tag(t) {}
-	Child(std::string t) : tag(nullptr), text(t) {}
-	~Child() {
-		if (tag) delete tag;
+	Child() : tag(nullptr), text() {
 	}
-	ITag * tag;
+	Child(ITag* t) : tag(t) {
+	}
+	Child(std::string t) : tag(nullptr), text(t) {
+	}
+	~Child() {
+		if (tag)
+			delete tag;
+	}
+	ITag* tag;
 	std::string text;
 };
 
-
+struct TagConstraint {
+	std::unordered_set<std::string> allowed_attrs;
+	std::unordered_set<std::string> allowed_childs;
+	bool text_allowed;
+	bool has_closing_tag;
+};
+typedef std::unordered_map<std::string, TagConstraint> TagConstraints;
 typedef std::set<std::string> TagSet;
 
-class IParser {
+class Parser {
 public:
-	virtual ~IParser() {}
+	Parser();
+	~Parser();
+	ITag* parse(std::string text, const TagSet&);
+	std::string remaining_text();
 
-	virtual ITag * parse(std::string text, const TagSet &) = 0;
-	virtual std::string remaining_text() = 0;
+private:
+	TagConstraints m_tcs;
+	std::unique_ptr<TextStream> m_ts;
 };
-
-// This function is mainly for testing
-IParser * setup_parser();
 }
 
 #endif /* end of include guard: RT_PARSER_H */
