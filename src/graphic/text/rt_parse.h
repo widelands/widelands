@@ -68,32 +68,6 @@ private:
 	std::map<std::string, std::unique_ptr<Attr>> m_attrs;
 };
 
-class ITag {
-public:
-	typedef std::vector<Child*> ChildList;
-
-	virtual ~ITag() {
-	}
-	virtual const std::string& name() const = 0;
-	virtual const AttrMap& attrs() const = 0;
-	virtual const ChildList& childs() const = 0;
-};
-
-struct Child {
-	Child() : tag(nullptr), text() {
-	}
-	Child(ITag* t) : tag(t) {
-	}
-	Child(std::string t) : tag(nullptr), text(t) {
-	}
-	~Child() {
-		if (tag)
-			delete tag;
-	}
-	ITag* tag;
-	std::string text;
-};
-
 struct TagConstraint {
 	std::unordered_set<std::string> allowed_attrs;
 	std::unordered_set<std::string> allowed_childs;
@@ -103,11 +77,48 @@ struct TagConstraint {
 typedef std::unordered_map<std::string, TagConstraint> TagConstraints;
 typedef std::set<std::string> TagSet;
 
+class Tag {
+public:
+	typedef std::vector<Child*> ChildList;
+
+	~Tag();
+
+	const std::string & name() const;
+	const AttrMap & attrs() const;
+	const ChildList & childs() const;
+	void parse(TextStream& ts, TagConstraints& tcs, const TagSet&);
+
+private:
+	void m_parse_opening_tag(TextStream & ts, TagConstraints & tcs);
+	void m_parse_closing_tag(TextStream & ts);
+	void m_parse_attribute(TextStream & ts, std::unordered_set<std::string> &);
+	void m_parse_content(TextStream & ts, TagConstraints & tc, const TagSet &);
+
+	std::string m_name;
+	AttrMap m_am;
+	ChildList m_childs;
+};
+
+struct Child {
+	Child() : tag(nullptr), text() {
+	}
+	Child(Tag* t) : tag(t) {
+	}
+	Child(std::string t) : tag(nullptr), text(t) {
+	}
+	~Child() {
+		if (tag)
+			delete tag;
+	}
+	Tag* tag;
+	std::string text;
+};
+
 class Parser {
 public:
 	Parser();
 	~Parser();
-	ITag* parse(std::string text, const TagSet&);
+	Tag* parse(std::string text, const TagSet&);
 	std::string remaining_text();
 
 private:

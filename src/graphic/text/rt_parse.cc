@@ -79,27 +79,17 @@ bool AttrMap::has(const std::string& s) const {
 	return m_attrs.count(s);
 }
 
-class Tag : public ITag {
-public:
-	Tag();
-	virtual ~Tag();
+const std::string& Tag::name() const {
+	return m_name;
+}
 
-	virtual const std::string & name() const override {return m_name;}
-	virtual const AttrMap & attrs() const override {return m_am;}
-	virtual const ChildList & childs() const override {return m_childs;}
-	void parse(TextStream & ts, TagConstraints & tcs, const TagSet &);
+const AttrMap& Tag::attrs() const {
+	return m_am;
+}
 
-private:
-	void m_parse_opening_tag(TextStream & ts, TagConstraints & tcs);
-	void m_parse_closing_tag(TextStream & ts);
-	void m_parse_attribute(TextStream & ts, std::unordered_set<std::string> &);
-	void m_parse_content(TextStream & ts, TagConstraints & tc, const TagSet &);
-
-	std::string m_name;
-	AttrMap m_am;
-	ChildList m_childs;
-};
-Tag::Tag() {}
+const Tag::ChildList& Tag::childs() const {
+	return m_childs;
+}
 
 Tag::~Tag() {
 	while (m_childs.size()) {
@@ -293,7 +283,7 @@ Parser::Parser() {
 Parser::~Parser() {
 }
 
-ITag * Parser::parse(std::string text, const TagSet & allowed_tags) {
+Tag * Parser::parse(std::string text, const TagSet & allowed_tags) {
 	m_ts.reset(new TextStream(text));
 
 	m_ts->skip_ws(); m_ts->rskip_ws();

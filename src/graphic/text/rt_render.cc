@@ -611,11 +611,11 @@ IFont& FontCache::get_font(NodeStyle& ns) {
 
 
 class TagHandler;
-TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache);
+TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache);
 
 class TagHandler {
 public:
-	TagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+	TagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
 		m_tag(tag), m_fc(fc), m_ns(ns), image_cache_(image_cache) {}
 	virtual ~TagHandler() {}
 
@@ -626,7 +626,7 @@ private:
 	void m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns);
 
 protected:
-	ITag& m_tag;
+	Tag& m_tag;
 	FontCache& m_fc;
 	NodeStyle m_ns;
 	ImageCache* image_cache_;  // Not owned
@@ -659,7 +659,7 @@ void TagHandler::emit(vector<RenderNode*>& nodes) {
 
 class FontTagHandler : public TagHandler {
 public:
-	FontTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
+	FontTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
 		: TagHandler(tag, fc, ns, image_cache) {}
 
 	void enter() override {
@@ -677,7 +677,7 @@ public:
 
 class PTagHandler : public TagHandler {
 public:
-	PTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
+	PTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
 		: TagHandler(tag, fc, ns, image_cache), m_indent(0) {
 	}
 
@@ -714,7 +714,7 @@ private:
 
 class ImgTagHandler : public TagHandler {
 public:
-	ImgTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+	ImgTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
 		TagHandler(tag, fc, ns, image_cache), m_rn(nullptr) {
 	}
 
@@ -732,7 +732,7 @@ private:
 
 class VspaceTagHandler : public TagHandler {
 public:
-	VspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+	VspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
 		TagHandler(tag, fc, ns, image_cache), m_space(0) {}
 
 	void enter() override {
@@ -751,7 +751,7 @@ private:
 
 class HspaceTagHandler : public TagHandler {
 public:
-	HspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+	HspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
 		TagHandler(tag, fc, ns, image_cache), m_bg(nullptr), m_space(0) {}
 
 	void enter() override {
@@ -802,7 +802,7 @@ private:
 
 class BrTagHandler : public TagHandler {
 public:
-	BrTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+	BrTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
 		TagHandler(tag, fc, ns, image_cache) {
 	}
 
@@ -815,7 +815,7 @@ public:
 class SubTagHandler : public TagHandler {
 public:
 	SubTagHandler
-		(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+		(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
 		 uint16_t max_w = 0, bool shrink_to_fit = false)
 		:
 			TagHandler(tag, fc, ns, image_cache),
@@ -912,7 +912,7 @@ private:
 
 class RTTagHandler : public SubTagHandler {
 public:
-	RTTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache, uint16_t w) :
+	RTTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache, uint16_t w) :
 		SubTagHandler(tag, fc, ns, image_cache, w, true) {
 	}
 
@@ -924,13 +924,13 @@ public:
 };
 
 template<typename T> TagHandler* create_taghandler
-	(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)
+	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)
 {
 	return new T(tag, fc, ns, image_cache);
 }
 typedef map<const string, TagHandler* (*)
-	(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)> TagHandlerMap;
-TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache) {
+	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)> TagHandlerMap;
+TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache) {
 	static TagHandlerMap map;
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
@@ -973,7 +973,7 @@ Renderer::~Renderer() {
 }
 
 RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::unique_ptr<ITag> rt(m_parser.parse(text, allowed_tags));
+	std::unique_ptr<Tag> rt(m_parser.parse(text, allowed_tags));
 
 	NodeStyle default_style = {
 		"DejaVuSerif", 16,
