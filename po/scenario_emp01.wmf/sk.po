@@ -2,20 +2,21 @@
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 # GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Miroslav Remák <Unknown>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-17 16:11+0000\n"
-"PO-Revision-Date: 2014-03-11 10:13+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Widelands fixxer upper\n"
+"PO-Revision-Date: 2014-06-30 09:34+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
+"Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:32+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-01 05:27+0000\n"
+"X-Generator: Launchpad (build 17082)\n"
 "Language: sk\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:28
@@ -24,7 +25,7 @@ msgstr "Postavte kasárne"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Kasárne"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
@@ -40,7 +41,7 @@ msgstr "Postavte drevorubačský dom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Drevorubačský dom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid ""
@@ -80,7 +81,7 @@ msgstr "Postavte horáreň"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr ""
+msgstr "Horáreň"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
@@ -93,7 +94,7 @@ msgstr "Postavte kameňolom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "Quarry"
-msgstr ""
+msgstr "Kameňolom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid ""
@@ -120,7 +121,7 @@ msgid ""
 "forbid me from fighting against that monstrous barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
 msgstr ""
-"Čo sa stalo z nášho impéria? Skutočne si kladiem túto otázku - prečo mi kráľ "
+"Čo sa stalo z nášho impéria? Skutočne si kladiem túto otázku – prečo mi kráľ "
 "zakázal bojovať proti tomu odpornému barbarskému kmeňu, ktorý sa najprv "
 "tváril ako mierumilovný spojenec a potom zaútočil na moju armádu počas "
 "najtmavšej noci?"
@@ -133,11 +134,11 @@ msgid ""
 "of my men even traded with them and their kids came to us, to admire our "
 "clean and tidy uniforms and weapons."
 msgstr ""
-"S armádou 150 mužov som bol pridelený držať hliadku na našej severnej "
+"So 150-člennou armádou som bol pridelený držať hliadku na našej severnej "
 "hranici, ktorá leží pri pohorí Galdin vo veľkom, prekrásnom a prastarom "
-"lese. Čoskoro sme stretli barbarský kmeň, ktorý bol najprv priateľský. Zopár "
-"mojich mužov s nimi dokonca obchodovalo a ich deti k nám prišli obdivovať "
-"naše čisté a slušné uniformy a zbrane."
+"lese. Onedlho sme stretli barbarský kmeň, ktorý bol spočiatku priateľský. "
+"Niekoľko mojich mužov s nimi dokonca obchodovalo a ich deti k nám chodili "
+"obdivovať naše čisté uniformy a zbrane."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:86
 msgid ""
@@ -148,12 +149,12 @@ msgid ""
 "forest was their land – and it would stay theirs until the ghosts took the "
 "last man of his folk!"
 msgstr ""
-"Ale počas piatej noci strávenej v tejto oblasti, zaútočili na nás bez "
-"príčiny. Stratil som tucty dobrých mužov a ocitol som sa uväznený a "
-"privedený k ich náčelníkovi. Pľuvol na mňa, vysmial ma a povedal mi, aby som "
-"túto zem navždy opustil. Nechcel novú zem a nechcel ani tú našu, ale povedal "
-"mi, že TENTO les je ich zemou - a aj ňou ostane, kým si duchovia neodvedú "
-"posledného človeka z jeho ľudu."
+"Počas piatej noci strávenej v tejto oblasti však na nás zaútočili bez "
+"príčiny. Stratil som tucty dobrých mužov a mňa uväznili a priviedli k ich "
+"náčelníkovi. Pľuvol na mňa, vysmial ma a povedal mi, aby som túto zem navždy "
+"opustil. Nechcel novú zem a nechcel ani tú našu, ale povedal mi, že TENTO "
+"les je ich zemou – a aj ňou ostane, kým si duchovia neodvedú posledného "
+"človeka z jeho ľudu."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:91
 msgid ""
@@ -162,9 +163,10 @@ msgid ""
 "believed that our army was too weak to survive in a war against the "
 "barbarians."
 msgstr ""
-"O tri týždne neskôr som sa vrátil do Fremilu, aby som rozprával s naším "
-"kráľom. Zúril na barbarov, ale aj tak zakázal útočiť na tieto kmene. Veril, "
-"že naša armáda bola príliš slabá na to, aby prežila vo vojne proti barbarom."
+"O tri týždne neskôr som sa vrátil do Fremilu, aby som to oznámil nášmu "
+"kráľovi. Zúril na barbarov, ale napriek tomu zakázal útočiť na tieto kmene. "
+"Veril, že naša armáda bola príliš slabá na to, aby prežila vo vojne proti "
+"barbarom."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:94
 msgid ""
@@ -217,7 +219,7 @@ msgid ""
 "when I woke up this morning, I saw nothing but sand around us."
 msgstr ""
 "Vylodili sme na neznámom ostrove a našli pokojný odpočinok pod palmami "
-"rastúcimi na jeho brehu. Ale nič lepšie nás nečaká. Pravdou je: keď som sa "
+"rastúcimi na jeho brehu. Nič lepšie nás však nečaká. Pravdou je: keď som sa "
 "dnes ráno zobudil, nezbadal som okolo nás nič viac než piesok."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:121
@@ -269,7 +271,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:143
 msgid "Safe For Now"
-msgstr "V bezpečí"
+msgstr "Zatiaľ v bezpečí"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid "Saledus speaks with a sigh of relief..."
@@ -367,8 +369,8 @@ msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into lumber."
 msgstr ""
-"Všimla som si, že píla už je hotová, takže môžeme začať upravovať drevo, "
-"ktoré ťažia drevorubači."
+"Všimla som si, že sme dostavali pílu, nuž môžeme začať zdokonaľovať kláty, "
+"ktoré ťažia drevorubači, na stavebné drevo."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:183
 msgid ""
@@ -445,7 +447,7 @@ msgstr "Teraz sa skutočne môžeme tešiť na to, že sa usadíme na inom ostro
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:215
 msgid "Mission Complete"
-msgstr "Misia splnená."
+msgstr "Misia splnená"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:217
 msgid ""
@@ -471,7 +473,7 @@ msgstr "Stále som zvedavý, či ešte niekedy uvidíme Fremil."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:223
 msgid "Victory"
-msgstr ""
+msgstr "Víťazstvo"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:224
 msgid ""
@@ -498,7 +500,7 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "„%s“"
 
 #: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
