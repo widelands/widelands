@@ -985,7 +985,6 @@ Surface* Renderer::render(const string& text, uint16_t width, const TagSet& allo
 }
 
 IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {
-
 	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 	return new RefMap(node->get_references());
 }
