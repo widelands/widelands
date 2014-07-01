@@ -21,6 +21,7 @@
 #define RT_PARSER_H
 
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -33,23 +34,36 @@
 namespace RT {
 
 struct Child;
-class IAttr {
-public:
-	virtual ~IAttr() {}
 
-	virtual const std::string & name() const = 0;
-	virtual long get_int() const = 0;
-	virtual bool get_bool() const = 0;
-	virtual std::string get_string() const = 0;
-	virtual RGBColor get_color() const = 0;
+class Attr {
+public:
+	Attr(const std::string& gname, const std::string& value);
+
+	const std::string& name() const;
+	long get_int() const;
+	bool get_bool() const;
+	std::string get_string() const;
+	RGBColor get_color() const;
+
+private:
+	const std::string m_name, m_value;
 };
 
-class IAttrMap {
-public:
-	virtual ~IAttrMap() {}
 
-	virtual const IAttr & operator[] (const std::string&) const = 0;
-	virtual bool has(const std::string &) const = 0;
+// This is basically a map<string, Attr>.
+class AttrMap {
+public:
+	// Adds a 'a' with 'name' to the list of attributes.
+	void add_attribute(const std::string& name, Attr* a);
+
+	// Returns the attribute with 'name' or throws an error if it is not found.
+	const Attr& operator[](const std::string& name) const;
+
+	// Returns true if 'name' is a known attribute.
+	bool has(const std::string& name) const;
+
+private:
+	std::map<std::string, std::unique_ptr<Attr>> m_attrs;
 };
 
 class ITag {
@@ -58,7 +72,7 @@ public:
 
 	virtual ~ITag() {}
 	virtual const std::string & name() const = 0;
-	virtual const IAttrMap & attrs() const = 0;
+	virtual const AttrMap & attrs() const = 0;
 	virtual const ChildList & childs() const = 0;
 };
 

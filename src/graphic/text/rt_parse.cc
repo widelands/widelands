@@ -43,34 +43,28 @@ struct TagConstraint {
 };
 typedef unordered_map<string, TagConstraint> TagConstraints;
 
-// Interface Stuff {{{
-class Attr : public IAttr {
-public:
-	Attr(string gname, string value) : m_name(gname), m_value(value) {}
-	virtual ~Attr() {}
+Attr::Attr(const std::string& gname, const std::string& value) : m_name(gname), m_value(value) {
+}
 
-	virtual const string & name() const override {return m_name;}
-	virtual long get_int() const override;
-	virtual bool get_bool() const override;
-	virtual string get_string() const override;
-	virtual RGBColor get_color() const override;
-
-private:
-	string m_name, m_value;
-};
+const std::string& Attr::name() const {
+	return m_name;
+}
 
 long Attr::get_int() const {
 	long rv = strtol(m_value.c_str(), nullptr, 10);
 	return rv;
 }
+
 string Attr::get_string() const {
 	return m_value;
 }
+
 bool Attr::get_bool() const {
 	if (m_value == "true" or m_value == "1" or m_value == "yes")
 		return true;
 	return false;
 }
+
 RGBColor Attr::get_color() const {
 	if (m_value.size() != 6)
 		throw InvalidColor((format("Could not parse '%s' as a color.") % m_value).str());
@@ -79,31 +73,21 @@ RGBColor Attr::get_color() const {
 	return RGBColor((clrn >> 16) & 0xff, (clrn >> 8) & 0xff, clrn & 0xff);
 }
 
-// This is basically a map<string, Attr>, but because there is no
-// .at() in the STL, we need to define our own read only map
-class AttrMap : public IAttrMap {
-public:
-	void add_attribute(const string& name, Attr* a) {
-		m_attrs[name] = std::unique_ptr<Attr>(a);
+void AttrMap::add_attribute(const string& name, Attr* a) {
+	m_attrs[name] = std::unique_ptr<Attr>(a);
+}
+
+const Attr& AttrMap::operator[](const std::string& s) const {
+	const auto i = m_attrs.find(s);
+	if (i == m_attrs.end()) {
+		throw AttributeNotFound(s);
 	}
+	return *(i->second);
+}
 
-	const IAttr& operator[](const std::string& s) const override {
-		AttributesMap::const_iterator i = m_attrs.find(s);
-		if (i == m_attrs.end()) {
-			throw AttributeNotFound(s);
-		}
-		return *(i->second);
-	}
-
-	bool has(const std::string & s) const override {
-		return m_attrs.count(s);
-	}
-
-
-private:
-	typedef map<string, std::unique_ptr<Attr>> AttributesMap;
-	AttributesMap m_attrs;
-};
+bool AttrMap::has(const std::string& s) const {
+	return m_attrs.count(s);
+}
 
 class Tag : public ITag {
 public:
@@ -353,7 +337,6 @@ string Parser::remaining_text() {
 		return "";
 	return m_ts->remaining_text();
 }
-// End: Interface Stuff }}}
 
 IParser * setup_parser() {
 	return new Parser();

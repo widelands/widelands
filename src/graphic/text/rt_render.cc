@@ -663,7 +663,7 @@ public:
 		: TagHandler(tag, fc, ns, image_cache) {}
 
 	void enter() override {
-		const IAttrMap& a = m_tag.attrs();
+		const AttrMap& a = m_tag.attrs();
 		if (a.has("color")) m_ns.font_color = a["color"].get_color();
 		if (a.has("size")) m_ns.font_size = a["size"].get_int();
 		if (a.has("face")) m_ns.font_face = a["face"].get_string();
@@ -682,7 +682,7 @@ public:
 	}
 
 	void enter() override {
-		const IAttrMap& a = m_tag.attrs();
+		const AttrMap& a = m_tag.attrs();
 		if (a.has("indent")) m_indent = a["indent"].get_int();
 		if (a.has("align")) {
 			const string align = a["align"].get_string();
@@ -719,7 +719,7 @@ public:
 	}
 
 	void enter() override {
-		const IAttrMap& a = m_tag.attrs();
+		const AttrMap& a = m_tag.attrs();
 		m_rn = new ImgRenderNode(m_ns, *image_cache_->get(a["src"].get_string()));
 	}
 	void emit(vector<RenderNode*>& nodes) override {
@@ -736,7 +736,7 @@ public:
 		TagHandler(tag, fc, ns, image_cache), m_space(0) {}
 
 	void enter() override {
-		const IAttrMap& a = m_tag.attrs();
+		const AttrMap& a = m_tag.attrs();
 
 		m_space = a["gap"].get_int();
 	}
@@ -755,7 +755,7 @@ public:
 		TagHandler(tag, fc, ns, image_cache), m_bg(nullptr), m_space(0) {}
 
 	void enter() override {
-		const IAttrMap& a = m_tag.attrs();
+		const AttrMap& a = m_tag.attrs();
 
 		if (a.has("gap"))
 			m_space = a["gap"].get_int();
@@ -829,7 +829,7 @@ public:
 		Borders padding, margin;
 
 		handle_unique_attributes();
-		const IAttrMap& a = m_tag.attrs();
+		const AttrMap& a = m_tag.attrs();
 		if (a.has("background")) {
 			RGBColor clr;
 			try {
@@ -886,7 +886,7 @@ public:
 
 	// Handle attributes that are in sub, but not in rt.
 	virtual void handle_unique_attributes() {
-		const IAttrMap& a = m_tag.attrs();
+		const AttrMap& a = m_tag.attrs();
 		if (a.has("width")) {
 			m_w = a["width"].get_int();
 			shrink_to_fit_ = false;
@@ -918,7 +918,7 @@ public:
 
 	// Handle attributes that are in rt, but not in sub.
 	virtual void handle_unique_attributes() override {
-		const IAttrMap& a = m_tag.attrs();
+		const AttrMap& a = m_tag.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
 	}
 };

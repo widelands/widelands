@@ -98,6 +98,7 @@ bool read_ref_map(const std::string& basedir, std::vector<RefMapTestSample>* sam
 		std::vector<std::string> position_strings;
 const std::string numbers = current_line.substr(0, beginning_of_string);
 log("#sirver numbers: %s\n", numbers.c_str());
+// NOCOM(#sirver): add ref_map testing too.
 		boost::algorithm::split(
 		   position_strings, numbers, boost::is_any_of(" "));
 

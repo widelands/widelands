@@ -33,7 +33,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-class IImageLoader;
 namespace Widelands {
 class Editor_Game_Base;
 class Game;
