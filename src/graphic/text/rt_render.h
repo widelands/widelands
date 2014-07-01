@@ -20,6 +20,7 @@
 #ifndef RT_RENDER_H
 #define RT_RENDER_H
 
+#include <memory>
 #include <set>
 #include <string>
 
@@ -32,6 +33,11 @@ class SurfaceCache;
 class ImageCache;
 
 namespace RT {
+
+class FontCache;
+class Parser;
+class RenderNode;
+
 /**
  * Wrapper object around a font.
  *
@@ -72,24 +78,31 @@ public:
  * caller.
  */
 typedef std::set<std::string> TagSet;
-class IRenderer {
+class Renderer {
 public:
-	IRenderer() {}
-	virtual ~IRenderer() {}
+	// Ownership is not taken.
+	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache);
+	~Renderer();
 
 	// Render the given string in the given width. Restricts the allowed tags to
 	// the ones in TagSet. The renderer does not do caching in the SurfaceCache
 	// for its individual nodes, but the font render does.
-	virtual Surface* render(const std::string&, uint16_t, const TagSet & = TagSet()) = 0;
+	Surface* render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
 
 	// Returns a reference map of the clickable hyperlinks in the image. This
 	// will do no caching and needs to do all layouting, so do not call this too
 	// often. The returned object must be freed.
-	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet & = TagSet()) = 0;
+	IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet&);
+
+private:
+	RenderNode* layout_(const std::string& text, uint16_t width, const TagSet& allowed_tags);
+
+	std::unique_ptr<FontCache> font_cache_;
+	std::unique_ptr<Parser> parser_;
+	ImageCache* const image_cache_;  // Not owned.
+	SurfaceCache* const surface_cache_;  // Not owned.
 };
 
-// Setup a renderer, takes ownership of fl but of nothing else.
-IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*);
 }
 
 #endif /* end of include guard: RT_RENDER_H */

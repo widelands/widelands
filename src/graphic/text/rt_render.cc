@@ -616,7 +616,7 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 class TagHandler {
 public:
 	TagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		m_tag(tag), m_fc(fc), m_ns(ns), image_cache_(image_cache) {}
+		m_tag(tag), font_cache_(fc), m_ns(ns), image_cache_(image_cache) {}
 	virtual ~TagHandler() {}
 
 	virtual void enter() {}
@@ -627,7 +627,7 @@ private:
 
 protected:
 	Tag& m_tag;
-	FontCache& m_fc;
+	FontCache& font_cache_;
 	NodeStyle m_ns;
 	ImageCache* image_cache_;  // Not owned
 };
@@ -639,17 +639,17 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 		size_t cpos = ts.pos();
 		ts.skip_ws();
 		if (ts.pos() != cpos)
-			nodes.push_back(new WordSpacerNode(m_fc.get_font(ns), ns));
+			nodes.push_back(new WordSpacerNode(font_cache_.get_font(ns), ns));
 		const string word = ts.till_any_or_end(" \t\n\r");
 		if (word.size())
-			nodes.push_back(new TextNode(m_fc.get_font(ns), ns, word));
+			nodes.push_back(new TextNode(font_cache_.get_font(ns), ns, word));
 	}
 }
 
 void TagHandler::emit(vector<RenderNode*>& nodes) {
 	for (Child* c : m_tag.childs()) {
 		if (c->tag) {
-			std::unique_ptr<TagHandler> th(create_taghandler(*c->tag, m_fc, m_ns, image_cache_));
+			std::unique_ptr<TagHandler> th(create_taghandler(*c->tag, font_cache_, m_ns, image_cache_));
 			th->enter();
 			th->emit(nodes);
 		} else
@@ -777,9 +777,9 @@ public:
 		RenderNode* rn = nullptr;
 		if (not m_fill_text.empty()) {
 			if (m_space < INFINITE_WIDTH)
-				rn = new FillingTextNode(m_fc.get_font(m_ns), m_ns, m_space, m_fill_text);
+				rn = new FillingTextNode(font_cache_.get_font(m_ns), m_ns, m_space, m_fill_text);
 			else
-				rn = new FillingTextNode(m_fc.get_font(m_ns), m_ns, 0, m_fill_text, true);
+				rn = new FillingTextNode(font_cache_.get_font(m_ns), m_ns, 0, m_fill_text, true);
 		} else {
 			SpaceNode* sn;
 			if (m_space < INFINITE_WIDTH)
@@ -948,24 +948,8 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 	return i->second(tag, fc, ns, image_cache);
 }
 
-class Renderer : public IRenderer {
-public:
-	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache);
-	virtual ~Renderer();
-
-	virtual Surface* render(const string&, uint16_t, const TagSet&) override;
-	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet&) override;
-
-private:
-	RenderNode* layout_(const string& text, uint16_t width, const TagSet& allowed_tags);
-
-	FontCache m_fc;
-	Parser m_parser;
-	ImageCache* const image_cache_;  // Not owned.
-	SurfaceCache* const surface_cache_;  // Not owned.
-};
-
 Renderer::Renderer(ImageCache* image_cache, SurfaceCache* surface_cache) :
+	font_cache_(new FontCache()), parser_(new Parser()),
 	image_cache_(image_cache), surface_cache_(surface_cache) {
 }
 
@@ -973,7 +957,7 @@ Renderer::~Renderer() {
 }
 
 RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::unique_ptr<Tag> rt(m_parser.parse(text, allowed_tags));
+	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
 		"DejaVuSerif", 16,
@@ -984,7 +968,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	if (!width)
 		width = INFINITE_WIDTH;
 
-	RTTagHandler rtrn(*rt, m_fc, default_style, image_cache_, width);
+	RTTagHandler rtrn(*rt, *font_cache_, default_style, image_cache_, width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);
@@ -1004,10 +988,6 @@ IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const 
 
 	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 	return new RefMap(node->get_references());
-}
-
-IRenderer* setup_renderer(ImageCache* image_cache, SurfaceCache* surface_cache) {
-	return new Renderer(image_cache, surface_cache);
 }
 
 }

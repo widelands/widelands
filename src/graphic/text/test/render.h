@@ -33,12 +33,12 @@ class StandaloneRenderer {
 		StandaloneRenderer();
 		~StandaloneRenderer();
 
-		RT::IRenderer* renderer();
+		RT::Renderer* renderer();
 
 	private:
 		std::unique_ptr<SurfaceCache> surface_cache_;
 		std::unique_ptr<ImageCache> image_cache_;
-		std::unique_ptr<RT::IRenderer> renderer_;
+		std::unique_ptr<RT::Renderer> renderer_;
 };
 
 #endif /* end of include guard: RENDER_H */

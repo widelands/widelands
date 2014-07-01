@@ -37,7 +37,7 @@ StandaloneRenderer::StandaloneRenderer() {
 
 	surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
 	image_cache_.reset(create_image_cache(surface_cache_.get()));
-	renderer_.reset(RT::setup_renderer(image_cache_.get(), surface_cache_.get()));
+	renderer_.reset(new RT::Renderer(image_cache_.get(), surface_cache_.get()));
 }
 
 StandaloneRenderer::~StandaloneRenderer() {
@@ -45,6 +45,6 @@ StandaloneRenderer::~StandaloneRenderer() {
 	g_fs = nullptr;
 }
 
-RT::IRenderer* StandaloneRenderer::renderer() {
+RT::Renderer* StandaloneRenderer::renderer() {
 	return renderer_.get();
 }

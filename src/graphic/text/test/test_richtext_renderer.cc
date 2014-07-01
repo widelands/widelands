@@ -180,7 +180,7 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 	return nwrong == 0;
 }
 
-bool compare_for_test(RT::IRenderer* renderer) {
+bool compare_for_test(RT::Renderer* renderer) {
 	ensure_sdl_is_initialized();
 
 	const std::string test_name = boost::unit_test::framework::current_test_case().p_name.value;
