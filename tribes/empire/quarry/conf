@@ -22,12 +22,12 @@ mine_marble=_Mine marble
 work=_Work
 
 [mine_stone]
-sleep=25000
 worker=cut_stone
+sleep=25000
 
 [mine_marble]
-sleep=25000
 worker=cut_marble
+sleep=25000
 
 [work]
 call=mine_stone

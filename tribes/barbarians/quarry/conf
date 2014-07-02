@@ -18,8 +18,8 @@ stoneproducer=true
 work=_Work
 
 [work]
-sleep=25000
 worker=cut
+sleep=25000
 
 [idle]
 pics=b_quarry_i_??.png  # ???
