@@ -48,6 +48,10 @@ void png_flush_function(png_structp png_ptr) {
 }  // namespace
 
 Surface* load_image(const std::string& fname, FileSystem* fs) {
+	return Surface::create(load_image_as_sdl_surface(fname, fs));
+}
+
+SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {
 	FileRead fr;
 	bool found;
 	if (fs) {
@@ -64,8 +68,7 @@ Surface* load_image(const std::string& fname, FileSystem* fs) {
 	if (!sdlsurf) {
 		throw ImageLoadingError(fname.c_str(), IMG_GetError());
 	}
-
-	return Surface::create(sdlsurf);
+	return sdlsurf;
 }
 
 bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
