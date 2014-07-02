@@ -23,8 +23,8 @@ work=_Work
 
 [work]
 return=skipped unless economy needs blackwood
-consume=log:2
 sleep=43000
+consume=log:2
 animate=working 24000
 produce=blackwood
 

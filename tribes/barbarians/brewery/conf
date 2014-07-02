@@ -26,8 +26,8 @@ work=_Work
 [work]
 return=skipped unless economy needs strongbeer or not economy needs water
 return=skipped unless economy needs strongbeer or not economy needs wheat
-consume=water wheat
 sleep=30000
+consume=water wheat
 animate=working 30000
 produce=strongbeer
 

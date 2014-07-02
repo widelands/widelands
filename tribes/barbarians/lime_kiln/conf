@@ -23,8 +23,8 @@ work=_Work
 
 [work]
 return=skipped unless economy needs grout
-consume=coal raw_stone:2 water:2
 sleep=50000
+consume=coal raw_stone:2 water:2
 animate=working 32000
 produce=grout:2
 

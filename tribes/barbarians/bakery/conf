@@ -26,9 +26,9 @@ water=6
 work=_Work
 
 [work]
-sleep=20000
 return=skipped unless economy needs pittabread or not economy needs water
 return=skipped unless economy needs pittabread or not economy needs wheat
+sleep=20000
 consume=water:3 wheat:3
 animate=working 20000
 produce=pittabread
