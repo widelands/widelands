@@ -42,10 +42,9 @@ public:
 };
 
 /// Loads the image 'fn' from 'fs'.
-// NOCOM(#sirver): comment
 Surface* load_image(const std::string& fn, FileSystem* fs = nullptr);
 
-// Saves the 'surface' to 'sw' as a PNG.
+/// Saves the 'surface' to 'sw' as a PNG.
 bool save_surface_to_png(Surface* surface, StreamWrite* sw);
 
 #endif /* end of include guard:  */

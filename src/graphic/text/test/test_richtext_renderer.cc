@@ -87,26 +87,20 @@ bool read_ref_map(const std::string& basedir, std::vector<RefMapTestSample>* sam
 	fr.Open(*g_fs, filename);
 	while (!fr.EndOfFile()) {
 		const std::string current_line = fr.ReadLine();
-		log("#sirver current_line: %s\n", current_line.c_str());
 		const size_t beginning_of_string = current_line.find('"');
 		const size_t end_of_string = current_line.rfind('"');
-		const std::string expected_text =
-		   current_line.substr(beginning_of_string, end_of_string - beginning_of_string);
-		log("#sirver expected_string: %s\n", expected_text.c_str());
-		std::vector<std::string> position_strings;
-const std::string numbers = current_line.substr(0, beginning_of_string);
-log("#sirver numbers: %s\n", numbers.c_str());
-// NOCOM(#sirver): add ref_map testing too.
-		boost::algorithm::split(
-		   position_strings, numbers, boost::is_any_of(" "));
 
+		std::vector<std::string> position_strings;
+		const std::string numbers = current_line.substr(0, beginning_of_string - 1);
+		boost::algorithm::split(position_strings, numbers, boost::is_any_of(" "));
 		if (position_strings.size() != 2) {
-			log("%s contains invalid line %s.\n", basedir.c_str(), current_line.c_str());
+			log("%s/ref_map contains invalid line '%s'.\n", basedir.c_str(), current_line.c_str());
 			return false;
 		}
 
 		samples->push_back(RefMapTestSample());
-		samples->back().expected_text = expected_text;
+		samples->back().expected_text =
+		   current_line.substr(beginning_of_string + 1, end_of_string - beginning_of_string - 1);
 		samples->back().x = boost::lexical_cast<int>(position_strings[0]);
 		samples->back().y = boost::lexical_cast<int>(position_strings[1]);
 	}
@@ -162,10 +156,9 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 			if (cclr == gclr || (cclr.a == SDL_ALPHA_TRANSPARENT && gclr.a == SDL_ALPHA_TRANSPARENT)) {
 				continue;
 			}
-			log("\n");
-			log("#sirver cclr.r: %x,cclr.g: %x,cclr.b: %x,cclr.a: %x\n", cclr.r, cclr.g, cclr.b, cclr.a);
-			log("#sirver cclr.r: %x,cclr.g: %x,cclr.b: %x,cclr.a: %x\n", gclr.r, gclr.g, gclr.b, gclr.a);
-			log("\n");
+			log("Mismatched pixel: (%d, %d)\n", x, y);
+			log(" expected: (%x, %x, %x, %x)\n", cclr.r, cclr.g, cclr.b, cclr.a);
+			log(" seen:     (%x, %x, %x, %x)\n\n", gclr.r, gclr.g, gclr.b, gclr.a);
 			++nwrong;
 		}
 	}
@@ -187,11 +180,16 @@ bool compare_for_test(RT::Renderer* renderer) {
 	const std::string basedir = std::string("data/") + test_name + "/";
 
 	const int width = read_width(basedir);
-	log("#sirver width: %u\n", width);
 
 	std::unique_ptr<Surface> correct(load_image(basedir + "correct.png", g_fs));
 	if (!correct) {
 		log("Could not load %s/correct.png.\n", basedir.c_str());
+		return false;
+	}
+
+	std::vector<RefMapTestSample> ref_map_samples;
+	if (!read_ref_map(basedir, &ref_map_samples)) {
+		log("Could not load %s/ref_map.\n", basedir.c_str());
 		return false;
 	}
 
@@ -209,6 +207,11 @@ bool compare_for_test(RT::Renderer* renderer) {
 				std::cout << "Could not encode PNG." << std::endl;
 			}
 			return false;
+		}
+
+		std::unique_ptr<RT::IRefMap> ref_map(renderer->make_reference_map(input_text, width));
+		for (const auto& sample : ref_map_samples) {
+			BOOST_CHECK_EQUAL(sample.expected_text, ref_map->query(sample.x, sample.y));
 		}
 	}
 	return true;

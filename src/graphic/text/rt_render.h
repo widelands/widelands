@@ -92,7 +92,7 @@ public:
 	// Returns a reference map of the clickable hyperlinks in the image. This
 	// will do no caching and needs to do all layouting, so do not call this too
 	// often. The returned object must be freed.
-	IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet&);
+	IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet& = TagSet());
 
 private:
 	RenderNode* layout_(const std::string& text, uint16_t width, const TagSet& allowed_tags);

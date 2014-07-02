@@ -28,7 +28,7 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include "base/log.h" // NOCOM(#sirver): remove again
+#include "base/point.h"
 #include "base/rect.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -74,20 +74,8 @@ struct NodeStyle {
 };
 
 struct Reference {
-	Rect dim; // w & h are uint32_t; x & y are int32_t
+	Rect dim;
 	string ref;
-
-	// Why isn't Rect::contains() suitable?
-	// There is a small difference...
-	// Rect::contains() excludes the bottom and right edges.
-	// Reference::contains() includes the bottom and right edges
-	// TODO: check this, likely that it is with the test cases
-	// NOCOM(#sirver): what
-	inline bool contains(int16_t x, int16_t y) const {
-		return
-			dim.x <= x && x <= dim.x + static_cast<int32_t>(dim.w) &&
-			dim.y <= y && y <= dim.y + static_cast<int32_t>(dim.h);
-	}
 };
 
 class RefMap : public IRefMap {
@@ -97,7 +85,7 @@ public:
 		// Should this linear algorithm proof to be too slow (doubtful), the
 		// RefMap could also be efficiently implemented using an R-Tree
 		for (const Reference& c : m_refs)
-			if (c.contains(x, y))
+			if (c.dim.contains(Point(x, y)))
 				return c.ref;
 		return "";
 	}
