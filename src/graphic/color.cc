@@ -37,6 +37,9 @@ void RGBColor::set(SDL_PixelFormat* const fmt, Uint32 const clr) {
 bool RGBColor::operator == (const RGBColor& other) const {
 	return r == other.r and g == other.g and b == other.b;
 }
+bool RGBColor::operator != (const RGBColor& other) const {
+	return !(*this == other);
+}
 
 RGBAColor::RGBAColor(uint8_t R, uint8_t G, uint8_t B, uint8_t A) : r(R), g(G), b(B), a(A) {
 }
@@ -61,4 +64,7 @@ void RGBAColor::set(const SDL_PixelFormat& fmt, const uint32_t clr) {
 
 bool RGBAColor::operator == (const RGBAColor& other) const {
 	return (r == other.r && g == other.g && b == other.b && a == other.a);
+}
+bool RGBAColor::operator != (const RGBAColor& other) const {
+	return !(*this == other);
 }

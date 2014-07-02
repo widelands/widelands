@@ -36,6 +36,7 @@ struct RGBColor : public SDL_Color {
 	void set(SDL_PixelFormat * fmt, uint32_t clr);
 
 	bool operator == (const RGBColor& other) const;
+	bool operator != (const RGBColor& other) const;
 };
 
 struct RGBAColor {
@@ -54,6 +55,7 @@ struct RGBAColor {
 	void set(const SDL_PixelFormat & fmt, uint32_t clr);
 
 	bool operator == (const RGBAColor& other) const;
+	bool operator != (const RGBAColor& other) const;
 
 	uint8_t r;
 	uint8_t g;

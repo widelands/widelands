@@ -150,16 +150,12 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 			SDL_GetRGBA(
 			   converted->get_pixel(x, y), &converted->format(), &gclr.r, &gclr.g, &gclr.b, &gclr.a);
 
-			// When saving/loading PNGs which have fully transparent pixels, the
-			// color values seem to be changed for these.
-			// NOCOM(#sirver): no longer needed?
-			if (cclr == gclr || (cclr.a == SDL_ALPHA_TRANSPARENT && gclr.a == SDL_ALPHA_TRANSPARENT)) {
-				continue;
+			if (cclr != gclr) {
+				log("Mismatched pixel: (%d, %d)\n", x, y);
+				log(" expected: (%x, %x, %x, %x)\n", cclr.r, cclr.g, cclr.b, cclr.a);
+				log(" seen:     (%x, %x, %x, %x)\n\n", gclr.r, gclr.g, gclr.b, gclr.a);
+				++nwrong;
 			}
-			log("Mismatched pixel: (%d, %d)\n", x, y);
-			log(" expected: (%x, %x, %x, %x)\n", cclr.r, cclr.g, cclr.b, cclr.a);
-			log(" seen:     (%x, %x, %x, %x)\n\n", gclr.r, gclr.g, gclr.b, gclr.a);
-			++nwrong;
 		}
 	}
 
