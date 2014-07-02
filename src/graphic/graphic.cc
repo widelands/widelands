@@ -66,7 +66,7 @@ Graphic::Graphic()
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
-	image_cache_(create_image_cache(surface_cache_.get())),
+	image_cache_(new ImageCache(surface_cache_.get())),
 	animation_manager_(new AnimationManager())
 {
 	ImageTransformations::initialize();
