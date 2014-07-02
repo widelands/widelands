@@ -28,8 +28,8 @@ work=_Work
 
 [work]
 return=skipped unless economy needs ration
-consume=bread,fish,meat
 sleep=14000
+consume=bread,fish,meat
 animate=working 19000
 produce=ration
 

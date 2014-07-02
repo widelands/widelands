@@ -39,8 +39,8 @@ work=_Work
 
 [produce_wood_lance]
 return=skipped unless economy needs wood_lance
-consume=wood
 sleep=20000
+consume=wood
 playFX=../../../sound/smiths/smith 192
 animate=working 30000
 playFX=../../../sound/smiths/sharpening 120
@@ -48,8 +48,8 @@ produce=wood_lance
 
 [produce_lance]
 return=skipped unless economy needs lance
-consume=coal iron wood
 sleep=32000
+consume=coal iron wood
 playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 120
@@ -57,8 +57,8 @@ produce=lance
 
 [produce_advanced_lance]
 return=skipped unless economy needs advanced_lance
-consume=coal iron:2 wood
 sleep=32000
+consume=coal iron:2 wood
 playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 120
@@ -66,8 +66,8 @@ produce=advanced_lance
 
 [produce_heavy_lance]
 return=skipped unless economy needs heavy_lance
-consume=coal:2 gold iron wood
 sleep=32000
+consume=coal:2 gold iron wood
 playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 120
@@ -75,8 +75,8 @@ produce=heavy_lance
 
 [produce_war_lance]
 return=skipped unless economy needs war_lance
-consume=coal:2 gold iron:2 wood
 sleep=32000
+consume=coal:2 gold iron:2 wood
 playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 120

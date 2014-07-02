@@ -25,8 +25,8 @@ work=_Work
 
 [work]
 return=skipped unless economy needs flour or not economy needs wheat
-consume=wheat
 sleep=5000
+consume=wheat
 playFX=../../../sound/mill/mill_turning 240
 animate=working 10000
 produce=flour

@@ -25,8 +25,8 @@ work=_Work
 
 [work]
 return=skipped unless economy needs coal or not economy needs log
-consume=log:6
 sleep=30000
+consume=log:6
 animate=working 90000 # charcoal fires are burning some days in real life
 produce=coal
 

@@ -24,8 +24,8 @@ water=6
 work=_Work
 
 [work]
-sleep=15000
 return=skipped unless economy needs bread
+sleep=15000
 consume=flour water
 animate=working 15000
 produce=bread
