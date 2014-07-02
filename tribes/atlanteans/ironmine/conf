@@ -28,8 +28,8 @@ work=_Work
 [work]
 return=skipped unless economy needs ironore or not economy needs bread
 return=skipped unless economy needs ironore or not economy needs smoked_fish
-consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
+consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=iron 4 100 5 2
 produce=ironore
