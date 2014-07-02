@@ -173,6 +173,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 				throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
 		}
 	}
+	Surface::display_format_is_now_defined();
 
 	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {

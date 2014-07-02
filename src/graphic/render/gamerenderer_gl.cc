@@ -60,7 +60,6 @@ const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture()
 	if (Surface* surface = g_gr->surfaces().get(cachename))
 		return dynamic_cast<GLSurfaceTexture *>(surface);
 
-	// NOCOM(#sirver): verify.
 	SDL_Surface* sdlsurf = load_image_as_sdl_surface(fname, g_fs);
 	GLSurfaceTexture* edgetexture = new GLSurfaceTexture(sdlsurf, true);
 	g_gr->surfaces().insert(cachename, edgetexture, false);

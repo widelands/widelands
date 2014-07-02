@@ -32,6 +32,13 @@
  */
 class Surface : boost::noncopyable {
 public:
+	// Surfaces can either be converted to display format on creation or kept in
+	// the format they were created. The only reason not to convert to display
+	// format is when no display format is defined - trying will then crash the
+	// program. This is only the case when SDL_SetVideoMode() has never been
+	// called, so call this method after you called SDL_SetVideoMode.
+	static void display_format_is_now_defined();
+
 	// Create a new surface from an SDL_Surface. Ownership is taken.
 	static Surface* create(SDL_Surface*);
 
