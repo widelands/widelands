@@ -30,10 +30,6 @@
 
 using namespace std;
 
-/// Split a string by separators.
-/// \note This ignores empty elements, so do not use this for example to split
-/// a string with newline characters into lines, because it would ignore empty
-/// lines.
 vector<string> split_string(const string& s, const char* const separators) {
 	vector<string> result;
 	for (string::size_type pos = 0, endpos;
