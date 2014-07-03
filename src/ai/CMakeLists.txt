@@ -7,6 +7,7 @@ wl_library(ai
     defaultai.cc
     defaultai.h
   DEPENDS
+    economy
     base_log
     profile
     base_i18n

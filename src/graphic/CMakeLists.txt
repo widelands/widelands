@@ -109,6 +109,7 @@ wl_library(graphic
     base_i18n
     base_log
     build_info
+    economy
     graphic_color
     graphic_image
     graphic_surface

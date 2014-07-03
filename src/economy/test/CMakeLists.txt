@@ -5,6 +5,7 @@ wl_test(test_economy
     test_road.cc
     test_routing.cc
   DEPENDS
+    economy
     io_filesystem
     logic
     logic_widelands_geometry

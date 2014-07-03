@@ -42,6 +42,7 @@ wl_library(scripting
     base_i18n
     base_log
     build_info
+    economy
     io_fileread
     io_filesystem
     logic

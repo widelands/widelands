@@ -110,6 +110,7 @@ wl_library(wui
     base_geometry
     base_i18n
     base_log
+    economy
     graphic
     graphic_color
     graphic_image

@@ -86,6 +86,7 @@ wl_library(map_io
     base_exceptions
     base_log
     build_info
+    economy
     graphic
     graphic_surface
     io_fileread

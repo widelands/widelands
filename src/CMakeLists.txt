@@ -317,45 +317,6 @@ wl_library(widelands_ball_of_mud
     constants.h
     container_iterate.h
     cookie_priority_queue.h
-    economy/cmd_call_economy_balance.cc
-    economy/cmd_call_economy_balance.h
-    economy/economy.cc
-    economy/economy.h
-    economy/economy_data_packet.cc
-    economy/economy_data_packet.h
-    economy/flag.cc
-    economy/flag.h
-    economy/fleet.cc
-    economy/fleet.h
-    economy/idleworkersupply.cc
-    economy/idleworkersupply.h
-    economy/iroute.h
-    economy/itransport_cost_calculator.h
-    economy/portdock.cc
-    economy/portdock.h
-    economy/request.cc
-    economy/request.h
-    economy/road.cc
-    economy/road.h
-    economy/route.cc
-    economy/route.h
-    economy/routeastar.cc
-    economy/routeastar.h
-    economy/router.cc
-    economy/router.h
-    economy/routing_node.h
-    economy/shippingitem.cc
-    economy/shippingitem.h
-    economy/supply.h
-    economy/supply_list.cc
-    economy/supply_list.h
-    economy/transfer.cc
-    economy/transfer.h
-    economy/ware_instance.cc
-    economy/ware_instance.h
-    economy/warehousesupply.h
-    economy/wares_queue.cc
-    economy/wares_queue.h
     editor/editorinteractive.cc
     editor/editorinteractive.h
     editor/tools/editor_action_args.h
@@ -529,6 +490,7 @@ wl_library(widelands_ball_of_mud
     base_i18n
     base_log
     build_info
+    economy
     graphic
     graphic_color
     graphic_image
