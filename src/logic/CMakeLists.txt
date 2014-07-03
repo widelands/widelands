@@ -45,6 +45,7 @@ wl_library(logic
     cmd_queue.h
     constructionsite.cc
     constructionsite.h
+    cookie_priority_queue.h
     critter_bob.cc
     critter_bob.h
     critter_bob_program.h

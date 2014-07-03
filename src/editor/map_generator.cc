@@ -17,7 +17,7 @@
  *
  */
 
-#include "map_generator.h"
+#include "editor/map_generator.h"
 
 #include <memory>
 

@@ -4,6 +4,8 @@ wl_library(ai
     ai_help_structs.h
     ai_hints.cc
     ai_hints.h
+    computer_player.cc
+    computer_player.h
     defaultai.cc
     defaultai.h
   DEPENDS
@@ -13,4 +15,5 @@ wl_library(ai
     base_i18n
     widelands_ball_of_mud
     logic
+    logic_notification
 )

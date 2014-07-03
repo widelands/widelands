@@ -315,18 +315,13 @@ wl_library(widelands_ball_of_mud
     chat.cc
     chat.h
     compile_diagnostics.h
-    computer_player.cc
-    computer_player.h
     constants.h
     container_iterate.h
-    cookie_priority_queue.h
     gamecontroller.h
     helper.cc
     helper.h
     interval.h
     machdep.h
-    map_generator.cc
-    map_generator.h
     md5.cc
     md5.h
     random.cc
@@ -367,11 +362,9 @@ wl_library(widelands_ball_of_mud
     io_stream
     logic
     logic_notification
-    logic_widelands_geometry
     map_io_map_loader
     network
     profile
-    scripting
     sound
     ui_basic
     ui_fsmenu

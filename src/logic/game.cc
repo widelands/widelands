@@ -33,7 +33,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
-#include "computer_player.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"

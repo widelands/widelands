@@ -22,7 +22,7 @@
 
 #include <vector>
 
-#include "cookie_priority_queue.h"
+#include "logic/cookie_priority_queue.h"
 #include "logic/wareworker.h"
 #include "logic/widelands_geometry.h"
 
@@ -93,5 +93,3 @@ public:
 }
 
 #endif
-
-

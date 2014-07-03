@@ -21,6 +21,7 @@ wl_library(network
     network_system.h
   USES_SDL_NET
   DEPENDS
+    ai
     base_exceptions
     base_i18n
     base_log

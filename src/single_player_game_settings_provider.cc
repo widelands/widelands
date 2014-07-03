@@ -19,7 +19,7 @@
 
 #include "single_player_game_settings_provider.h"
 
-#include "computer_player.h"
+#include "ai/computer_player.h"
 #include "logic/tribe.h"
 
 

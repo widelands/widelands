@@ -19,7 +19,7 @@
 
 #include "single_player_game_controller.h"
 
-#include "computer_player.h"
+#include "ai/computer_player.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"

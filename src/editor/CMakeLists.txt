@@ -2,6 +2,8 @@ wl_library(editor
   SRCS
     editorinteractive.cc
     editorinteractive.h
+    map_generator.cc
+    map_generator.h
     tools/editor_action_args.h
     tools/editor_decrease_height_tool.cc
     tools/editor_decrease_height_tool.h

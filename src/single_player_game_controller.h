@@ -20,7 +20,7 @@
 #ifndef SINGLE_PLAYER_GAME_CONTROLLER_H
 #define SINGLE_PLAYER_GAME_CONTROLLER_H
 
-#include "computer_player.h"
+#include "ai/computer_player.h"
 #include "gamecontroller.h"
 
 

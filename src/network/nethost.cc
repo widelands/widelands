@@ -29,11 +29,11 @@
 #include <unistd.h> // for usleep
 #endif
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "chat.h"
-#include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "helper.h"

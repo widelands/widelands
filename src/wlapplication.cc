@@ -44,7 +44,6 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "computer_player.h"
 #include "config.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
