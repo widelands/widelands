@@ -22,6 +22,7 @@
 #include <cstdio>
 #include <cstring>
 
+#include "base/log.h"
 #include "build_info.h"
 #include "compile_diagnostics.h"
 #include "constants.h"
@@ -196,7 +197,7 @@ void LAN_Game_Promoter::run ()
 		if (recv(magic, 8, &addr) < 8)
 			continue;
 
-		printf ("Received %s packet\n", magic);
+		log ("Received %s packet\n", magic);
 
 		if
 			(!strncmp(magic, "QUERY", 6)
@@ -247,7 +248,7 @@ void LAN_Game_Finder::run ()
 			 	(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
 			continue;
 
-		printf ("Received %s packet\n", info.magic);
+		log ("Received %s packet\n", info.magic);
 
 		if (strncmp(info.magic, "GAME", 6))
 			continue;

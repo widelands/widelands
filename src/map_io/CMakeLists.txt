@@ -86,6 +86,7 @@ wl_library(map_io
     graphic
     graphic_surface
     io_fileread
+    io_filesystem
     logic
     logic_widelands_geometry
     profile

@@ -884,13 +884,10 @@ void FieldActionWindow::act_attack ()
 	assert(m_attack_box);
 	if (upcast(Building, building, game.map().get_immovable(m_node)))
 		if (m_attack_box->soldiers() > 0)
-			game.send_player_enemyflagaction
-				(building->base_flag(),
-				 ref_cast<const Interactive_Player, const Interactive_Base>
-				 	(ibase())
-				 .player_number(),
-				 m_attack_box->soldiers(), //  number of soldiers
-				 m_attack_box->retreat());
+			game.send_player_enemyflagaction(
+			   building->base_flag(),
+			   ref_cast<const Interactive_Player, const Interactive_Base>(ibase()).player_number(),
+			   m_attack_box->soldiers() /*  number of soldiers */);
 	okdialog();
 }
 

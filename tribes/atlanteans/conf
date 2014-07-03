@@ -202,8 +202,3 @@ castle=_Castle
 [trainingsite types]
 dungeon=_Dungeon
 labyrinth=_Labyrinth
-
-[military_data]
-retreat_interval=20-100
-retreat=60
-

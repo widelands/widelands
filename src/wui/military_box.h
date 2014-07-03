@@ -73,10 +73,6 @@ struct MilitaryBox : public UI::Box {
 		Widelands::Map        * m_map;
 
 		bool                    m_allowed_change;
-
-		UI::Slider            * m_slider_retreat;
-		UI::Textarea          * m_text_retreat;
-
 };
 
 #endif

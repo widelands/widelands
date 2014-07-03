@@ -29,7 +29,6 @@
 #include "logic/building.h"
 #include "logic/description_maintainer.h"
 #include "logic/immovable.h"
-#include "logic/military_data.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 
@@ -148,8 +147,6 @@ struct Tribe_Descr : boost::noncopyable {
 	void postload(Editor_Game_Base &);
 	void load_graphics();
 
-	Military_Data get_military_data() const {return m_military_data;}
-
 	struct Initialization {
 		std::string script;
 		std::string descname;
@@ -195,8 +192,6 @@ private:
 	std::vector<Ware_Index> m_worker_types_without_cost;
 
 	std::vector<Initialization> m_initializations;
-
-	Military_Data   m_military_data;
 };
 
 }

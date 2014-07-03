@@ -54,6 +54,10 @@
 
 namespace Widelands {
 
+namespace  {
+constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
+}  // namespace
+
 Soldier_Descr::Soldier_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
@@ -787,28 +791,21 @@ Bob::Task const Soldier::taskAttack = {
 };
 
 void Soldier::start_task_attack
-	(Game & game, Building & building, uint8_t retreat)
+	(Game & game, Building & building)
 {
-	//dynamic_cast<const Attackable &>(building);
-
 	push_task(game, taskAttack);
 	State & state  = top_state();
 	state.objvar1  = &building;
 	state.coords   = building.get_position();
 	state.ivar2    = 0; // Thre return state 1=go home 2=go back in known land
 
-	if (retreat) {
-		assert(retreat < 101);
-		state.ivar1    |= CF_RETREAT_WHEN_INJURED;
-		state.ui32var3  = retreat * get_max_hitpoints() / 100;
+	state.ivar1    |= CF_RETREAT_WHEN_INJURED;
+	state.ui32var3 = kRetreatWhenHealthDropsBelowThisPercentage * get_max_hitpoints() / 100;
 
-		// Injured soldiers are not allowed to attack
-		if (state.ui32var3 > get_current_hitpoints()) {
-			state.ui32var3 = get_current_hitpoints();
-			//send_signal(game, "injured");
-		}
+	// Injured soldiers are not allowed to attack
+	if (state.ui32var3 > get_current_hitpoints()) {
+		state.ui32var3 = get_current_hitpoints();
 	}
-
 }
 
 void Soldier::attack_update(Game & game, State & state)
@@ -1089,7 +1086,7 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
  * Variables used:
  * \li ivar1 used to store \c CombatFlags
  * \li ivar2 when CF_DEFEND_STAYHOME, 1 if it has reached the flag
-//           when CF_RETREAT_WHEN_INJURED, the lesser HP before retreat
+//           when CF_RETREAT_WHEN_INJURED, the lesser HP before fleeing
  */
 Bob::Task const Soldier::taskDefense = {
 	"defense",
@@ -1100,7 +1097,7 @@ Bob::Task const Soldier::taskDefense = {
 };
 
 void Soldier::start_task_defense
-	(Game & game, bool stayhome, uint8_t retreat)
+	(Game & game, bool stayhome)
 {
 	molog("[defense] starting\n");
 	push_task(game, taskDefense);
@@ -1113,15 +1110,13 @@ void Soldier::start_task_defense
 	if (stayhome) {
 		state.ivar1 |= CF_DEFEND_STAYHOME;
 	} else {
-		/* Flag defenders are not allowed to retreat, to avoid abuses */
-		if (retreat) {
-			state.ivar1 |= CF_RETREAT_WHEN_INJURED;
-			state.ui32var3 = get_max_hitpoints() * retreat / 100;
+		/* Flag defenders are not allowed to flee, to avoid abuses */
+		state.ivar1 |= CF_RETREAT_WHEN_INJURED;
+		state.ui32var3 = get_max_hitpoints() * kRetreatWhenHealthDropsBelowThisPercentage / 100;
 
-			// Soldier must defend even if he starts injured
-			if (state.ui32var3 < get_current_hitpoints())
-				state.ui32var3 = get_current_hitpoints();
-		}
+		// Soldier must defend even if he starts injured
+		if (state.ui32var3 < get_current_hitpoints())
+			state.ui32var3 = get_current_hitpoints();
 	}
 }
 

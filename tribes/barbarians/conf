@@ -215,8 +215,3 @@ trainingcamp=_Training Camp
 [initializations]
 headquarters_medium=_Headquarters Medium
 castle_village=_Citadel Village
-
-[military_data]
-retreat_interval=0-80
-retreat=20
-

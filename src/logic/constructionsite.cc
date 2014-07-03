@@ -33,6 +33,7 @@
 #include "logic/game.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
+#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 #include "upcast.h"

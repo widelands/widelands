@@ -96,6 +96,22 @@
 //Always specifying namespaces is good, but let's not go too far ;-)
 using std::endl;
 
+namespace {
+
+/**
+ * Shut the hardware down: stop graphics mode, stop sound handler
+ */
+void terminate(int) {
+	log(_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
+	      " Update your sound driver and/or SDL to fix this problem\n"));
+#ifndef _WIN32
+	raise(SIGKILL);
+#endif
+}
+
+}  // namespace
+
+
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
  * \todo Handle exception FileType_error
@@ -817,12 +833,12 @@ std::string WLApplication::get_executable_path()
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
 	_NSGetExecutablePath(nullptr, &buffersize);
-	char buffer[buffersize];
-	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
+	std::unique_ptr<char []> buffer(new char[buffersize]);
+	int32_t check = _NSGetExecutablePath(buffer.get(), &buffersize);
 	if (check != 0) {
 		throw wexception (_("could not find the path of the main executable"));
 	}
-	executabledir = std::string(buffer);
+	executabledir = std::string(buffer.get());
 	executabledir.resize(executabledir.rfind('/') + 1);
 #endif
 #ifdef __linux__
@@ -941,19 +957,6 @@ bool WLApplication::init_hardware() {
 	g_sound_handler.init(); //  FIXME memory leak!
 
 	return true;
-}
-
-/**
- * Shut the hardware down: stop graphics mode, stop sound handler
- */
-
-void terminate (int) {
-	 log
-		  (_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
-			  " Update your sound driver and/or SDL to fix this problem\n"));
-#ifndef _WIN32
-	raise(SIGKILL);
-#endif
 }
 
 void WLApplication::shutdown_hardware()

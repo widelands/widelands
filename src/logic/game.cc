@@ -865,8 +865,7 @@ void Game::send_player_change_soldier_capacity
 void Game::send_player_enemyflagaction
 	(const Flag  &       flag,
 	 Player_Number const who_attacks,
-	 uint32_t      const num_soldiers,
-	 uint8_t       const retreat)
+	 uint32_t      const num_soldiers)
 {
 	if
 		(1
@@ -876,15 +875,9 @@ void Game::send_player_enemyflagaction
 		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
 			(*new Cmd_EnemyFlagAction
-			 	(get_gametime(), who_attacks, flag, num_soldiers, retreat));
+			 	(get_gametime(), who_attacks, flag, num_soldiers));
 }
 
-
-void Game::send_player_changemilitaryconfig(Player_Number const pid, uint8_t const retreat)
-{
-	send_player_command
-		(*new Cmd_ChangeMilitaryConfig(get_gametime(), pid, retreat));
-}
 
 void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {

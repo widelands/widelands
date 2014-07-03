@@ -12,7 +12,6 @@ Contents:
    :maxdepth: 2
 
    development
-   hidden_features
    server
    geometry
    productionsite_program

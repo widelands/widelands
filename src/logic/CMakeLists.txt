@@ -90,8 +90,6 @@ wl_library(logic
     message.h
     message_id.h
     message_queue.h
-    military_data.cc
-    military_data.h
     militarysite.cc
     militarysite.h
     nodecaps.h

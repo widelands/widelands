@@ -178,13 +178,6 @@ Tribe_Descr::Tribe_Descr
 
 		}
 
-		{
-			/// Loads military data
-			Section * military_data_s = root_conf.get_section("military_data");
-			if (military_data_s)
-				m_military_data.parse(*military_data_s);
-		}
-
 		try {
 			{
 				Section & tribe_s = root_conf.get_safe_section("tribe");
