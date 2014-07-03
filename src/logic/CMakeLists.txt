@@ -174,6 +174,7 @@ wl_library(logic
     base_port
     build_info
     economy
+    editor
     graphic
     graphic_color
     io_fileread

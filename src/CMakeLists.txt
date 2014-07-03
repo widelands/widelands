@@ -291,6 +291,7 @@ endif()
 add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(economy)
+add_subdirectory(editor)
 add_subdirectory(graphic)
 add_subdirectory(io)
 add_subdirectory(logic)
@@ -318,87 +319,6 @@ wl_library(widelands_ball_of_mud
     constants.h
     container_iterate.h
     cookie_priority_queue.h
-    editor/editorinteractive.cc
-    editor/editorinteractive.h
-    editor/tools/editor_action_args.h
-    editor/tools/editor_decrease_height_tool.cc
-    editor/tools/editor_decrease_height_tool.h
-    editor/tools/editor_decrease_resources_tool.cc
-    editor/tools/editor_decrease_resources_tool.h
-    editor/tools/editor_delete_bob_tool.cc
-    editor/tools/editor_delete_bob_tool.h
-    editor/tools/editor_delete_immovable_tool.cc
-    editor/tools/editor_delete_immovable_tool.h
-    editor/tools/editor_draw_tool.cc
-    editor/tools/editor_draw_tool.h
-    editor/tools/editor_history.cc
-    editor/tools/editor_history.h
-    editor/tools/editor_increase_height_tool.cc
-    editor/tools/editor_increase_height_tool.h
-    editor/tools/editor_increase_resources_tool.cc
-    editor/tools/editor_increase_resources_tool.h
-    editor/tools/editor_info_tool.cc
-    editor/tools/editor_info_tool.h
-    editor/tools/editor_make_infrastructure_tool.cc
-    editor/tools/editor_make_infrastructure_tool.h
-    editor/tools/editor_noise_height_tool.cc
-    editor/tools/editor_noise_height_tool.h
-    editor/tools/editor_place_bob_tool.cc
-    editor/tools/editor_place_bob_tool.h
-    editor/tools/editor_place_immovable_tool.cc
-    editor/tools/editor_place_immovable_tool.h
-    editor/tools/editor_set_height_tool.cc
-    editor/tools/editor_set_height_tool.h
-    editor/tools/editor_set_origin_tool.cc
-    editor/tools/editor_set_origin_tool.h
-    editor/tools/editor_set_port_space_tool.cc
-    editor/tools/editor_set_port_space_tool.h
-    editor/tools/editor_set_resources_tool.cc
-    editor/tools/editor_set_resources_tool.h
-    editor/tools/editor_set_starting_pos_tool.cc
-    editor/tools/editor_set_starting_pos_tool.h
-    editor/tools/editor_set_terrain_tool.cc
-    editor/tools/editor_set_terrain_tool.h
-    editor/tools/editor_tool.h
-    editor/tools/editor_tool_action.h
-    editor/tools/multi_select.h
-    editor/ui_menus/categorized_item_selection_menu.h
-    editor/ui_menus/editor_main_menu.cc
-    editor/ui_menus/editor_main_menu.h
-    editor/ui_menus/editor_main_menu_load_map.cc
-    editor/ui_menus/editor_main_menu_load_map.h
-    editor/ui_menus/editor_main_menu_map_options.cc
-    editor/ui_menus/editor_main_menu_map_options.h
-    editor/ui_menus/editor_main_menu_new_map.cc
-    editor/ui_menus/editor_main_menu_new_map.h
-    editor/ui_menus/editor_main_menu_random_map.cc
-    editor/ui_menus/editor_main_menu_random_map.h
-    editor/ui_menus/editor_main_menu_save_map.cc
-    editor/ui_menus/editor_main_menu_save_map.h
-    editor/ui_menus/editor_main_menu_save_map_make_directory.cc
-    editor/ui_menus/editor_main_menu_save_map_make_directory.h
-    editor/ui_menus/editor_player_menu.cc
-    editor/ui_menus/editor_player_menu.h
-    editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc
-    editor/ui_menus/editor_player_menu_allowed_buildings_menu.h
-    editor/ui_menus/editor_tool_change_height_options_menu.cc
-    editor/ui_menus/editor_tool_change_height_options_menu.h
-    editor/ui_menus/editor_tool_change_resources_options_menu.cc
-    editor/ui_menus/editor_tool_change_resources_options_menu.h
-    editor/ui_menus/editor_tool_menu.cc
-    editor/ui_menus/editor_tool_menu.h
-    editor/ui_menus/editor_tool_noise_height_options_menu.cc
-    editor/ui_menus/editor_tool_noise_height_options_menu.h
-    editor/ui_menus/editor_tool_options_menu.cc
-    editor/ui_menus/editor_tool_options_menu.h
-    editor/ui_menus/editor_tool_place_bob_options_menu.cc
-    editor/ui_menus/editor_tool_place_bob_options_menu.h
-    editor/ui_menus/editor_tool_place_immovable_options_menu.cc
-    editor/ui_menus/editor_tool_place_immovable_options_menu.h
-    editor/ui_menus/editor_tool_set_terrain_options_menu.cc
-    editor/ui_menus/editor_tool_set_terrain_options_menu.h
-    editor/ui_menus/editor_toolsize_menu.cc
-    editor/ui_menus/editor_toolsize_menu.h
     game_io/game_cmd_queue_data_packet.cc
     game_io/game_cmd_queue_data_packet.h
     game_io/game_data_packet.h
@@ -458,9 +378,9 @@ wl_library(widelands_ball_of_mud
     base_log
     build_info
     economy
+    editor
     graphic
     graphic_color
-    graphic_image
     graphic_surface
     io_dedicated_log
     io_fileread
