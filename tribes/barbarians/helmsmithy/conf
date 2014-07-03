@@ -58,7 +58,6 @@ produce=warhelm
 call=produce_helm
 call=produce_mask
 call=produce_warhelm
-sleep=20000               # other buildings don't have this ...
 return=skipped
 
 [idle]
