@@ -315,6 +315,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
+		// TODO(sirver): must use boost::format
 		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		sprintf(buf, _("%1$i x %2$i"), m_resolutions[i].xres, m_resolutions[i].yres);
 		const bool selected =

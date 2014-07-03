@@ -34,7 +34,9 @@
 
 namespace Widelands {
 
+namespace  {
 Battle::Descr g_Battle_Descr("battle", "Battle");
+}  // namespace
 
 
 Battle::Battle ()

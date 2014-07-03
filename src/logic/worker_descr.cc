@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "helper.h"
 #include "logic/carrier.h"
 #include "logic/game_data_error.h"
 #include "logic/nodecaps.h"

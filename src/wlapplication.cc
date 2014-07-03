@@ -946,7 +946,7 @@ bool WLApplication::init_hardware() {
 			 SDL_GetError());
 
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
+	SDL_EnableUNICODE(1);
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	refresh_graphics();

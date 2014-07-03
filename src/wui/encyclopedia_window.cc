@@ -31,7 +31,6 @@
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/graphic.h"
-#include "helper.h"
 #include "logic/building.h"
 #include "logic/player.h"
 #include "logic/production_program.h"

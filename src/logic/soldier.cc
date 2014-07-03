@@ -55,6 +55,19 @@
 namespace Widelands {
 
 namespace  {
+
+/**
+ * remove spaces at the beginning or the end of a string
+ */
+void remove_spaces(std::string& s) {
+	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n')
+		s.erase(0, 1);
+
+	while (*s.rbegin() == ' ' or * s.rbegin() == '\t' or * s.rbegin() == '\n')
+		s.erase(s.size() - 1, 1);
+}
+
+
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 

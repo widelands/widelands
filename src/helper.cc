@@ -45,64 +45,6 @@ vector<string> split_string(const string& s, const char* const separators) {
 	return result;
 }
 
-/**
- * remove spaces at the beginning or the end of a string
- */
-void remove_spaces(string& s) {
-	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n')
-		s.erase(0, 1);
-
-	while (*s.rbegin() == ' ' or * s.rbegin() == '\t' or * s.rbegin() == '\n')
-		s.erase(s.size() - 1, 1);
-}
-
-/**
- * Tell whether a SDL_Keysym is printable.
- *
- * \param k SDL_Keysym to be checked for printability
- *
- * \return True if k is a printable character
- *
- * \todo This is _by_far_ not complete enough
- * \todo Should be based on k.unicode (already enabled by
- * WLApplication::init_hardware()) instead of k.sym. Doing so needs to take the
- * current locale into account; perhaps there already is a fitting gettext
- * function?
- */
-bool is_printable(SDL_keysym k) {
-	return (k.sym == SDLK_TAB) || ((k.sym >= SDLK_SPACE) && (k.sym <= SDLK_z)) ||
-	       ((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
-	       ((k.sym >= SDLK_KP0) && (k.sym <= SDLK_KP_EQUALS));
-}
-
-/**
- * Implemantation for NumberGlob.
- */
-NumberGlob::NumberGlob(const string& pictmp) : templ_(pictmp), cur_(0) {
-	int nchars = count(pictmp.begin(), pictmp.end(), '?');
-	fmtstr_ = "%0" + boost::lexical_cast<string>(nchars) + "i";
-
-	max_ = 1;
-	for (int i = 0; i < nchars; ++i) {
-		max_ *= 10;
-		replstr_ += "?";
-	}
-	max_ -= 1;
-}
-
-bool NumberGlob::next(string* s) {
-	if (cur_ > max_)
-		return false;
-
-	if (max_) {
-		*s = boost::replace_last_copy(templ_, replstr_, (boost::format(fmtstr_) % cur_).str());
-	} else {
-		*s = templ_;
-	}
-	++cur_;
-	return true;
-}
-
 static boost::mt19937 random_generator;
 string random_string(const string& chars, int nlen) {
 	boost::uniform_int<> index_dist(0, chars.size() - 1);
@@ -128,47 +70,4 @@ end:
 	if (result < p)
 		return result;
 	throw wexception("expected word");
-}
-
-bool match(char* & candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
-		if (not * pattern) {
-			candidate = p;
-			return true;
-		} else if (*p != *pattern)
-			break;
-	return false;
-}
-
-bool skip(char* & p, char const c) {
-	char* t = p;
-	while (*t == c)
-		++t;
-	if (p < t) {
-		p = t;
-		return true;
-	} else
-		return false;
-}
-
-void force_skip(char* & p, char const c) {
-	char* t = p;
-	while (*t == c)
-		++t;
-	if (p < t)
-		p = t;
-	else
-		throw wexception("expected '%c' but found \"%s\"", c, p);
-}
-
-bool match_force_skip(char* & candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
-		if (not * pattern) {
-			force_skip(p);
-			candidate = p;
-			return true;
-		} else if (*p != *pattern)
-			return false;
-
-	return false;
 }

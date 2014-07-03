@@ -31,7 +31,6 @@
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/font_handler.h"
-#include "helper.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
 #include "logic/constructionsite.h"
@@ -63,6 +62,8 @@ using Widelands::Map;
 using boost::format;
 
 
+namespace  {
+
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
 	(Widelands::TCoords<Widelands::FCoords> const c, Interactive_Player& iap)
@@ -70,6 +71,8 @@ int32_t Int_Player_overlay_callback_function
 	assert(iap.get_player());
 	return iap.get_player()->get_buildcaps(c);
 }
+
+}  // namespace
 
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,

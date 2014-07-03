@@ -28,7 +28,6 @@
 #include "base/wexception.h"
 #include "constants.h"
 #include "graphic/graphic.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
