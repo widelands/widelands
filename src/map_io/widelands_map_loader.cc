@@ -23,7 +23,7 @@
 
 #include "base/log.h"
 #include "base/warning.h"
-#include "io/filesystem/Filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
