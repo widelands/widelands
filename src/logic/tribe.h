@@ -23,12 +23,12 @@
 #include <map>
 #include <vector>
 
-#include "TribeBasicInfo.h"
 #include "graphic/animation.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/description_maintainer.h"
 #include "logic/immovable.h"
+#include "logic/tribe_basic_info.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 

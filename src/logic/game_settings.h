@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-#include "TribeBasicInfo.h"
+#include "logic/tribe_basic_info.h"
 #include "logic/widelands.h"
 
 namespace Widelands {

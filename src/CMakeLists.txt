@@ -306,7 +306,6 @@ add_subdirectory(wui)
 # library.
 wl_library(widelands_ball_of_mud
   SRCS
-    TribeBasicInfo.h
     ai/ai_help_structs.cc
     ai/ai_help_structs.h
     ai/ai_hints.cc
@@ -463,7 +462,6 @@ wl_library(widelands_ball_of_mud
     game_io/game_saver.cc
     game_io/game_saver.h
     gamecontroller.h
-    gamesettings.h
     helper.cc
     helper.h
     interval.h
@@ -537,10 +535,10 @@ wl_library(widelands_ball_of_mud
     ui_fsmenu/internet_lobby.h
     ui_fsmenu/intro.cc
     ui_fsmenu/intro.h
-    ui_fsmenu/launchMPG.cc
-    ui_fsmenu/launchMPG.h
-    ui_fsmenu/launchSPG.cc
-    ui_fsmenu/launchSPG.h
+    ui_fsmenu/launch_mpg.cc
+    ui_fsmenu/launch_mpg.h
+    ui_fsmenu/launch_spg.cc
+    ui_fsmenu/launch_spg.h
     ui_fsmenu/loadgame.cc
     ui_fsmenu/loadgame.h
     ui_fsmenu/loadreplay.cc

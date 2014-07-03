@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_fsmenu/launchSPG.h"
+#include "ui_fsmenu/launch_spg.h"
 
 #include <memory>
 
@@ -26,11 +26,11 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "gamecontroller.h"
-#include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
+#include "logic/game_settings.h"
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"

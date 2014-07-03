@@ -67,6 +67,7 @@ wl_library(logic
     game.h
     game_data_error.cc
     game_data_error.h
+    game_settings.h
     immovable.cc
     immovable.h
     immovable_program.h
@@ -132,6 +133,7 @@ wl_library(logic
     trainingsite.h
     tribe.cc
     tribe.h
+    tribe_basic_info.h
     walkingdir.cc
     walkingdir.h
     ware_descr.cc
