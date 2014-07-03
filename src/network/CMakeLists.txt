@@ -32,6 +32,7 @@ wl_library(network
     logic
     map_io_map_loader
     profile
+    scripting
     ui_basic
     widelands_ball_of_mud
     wui

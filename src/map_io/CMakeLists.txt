@@ -13,9 +13,12 @@ wl_library(map_io_map_loader
     io_filesystem
     logic
     map_io
+    scripting
     widelands_ball_of_mud
 )
 
+# TODO(sirver): separate widelands_map_map_object_loader/saver into
+# own library.
 wl_library(map_io
   SRCS
     coords_profile.cc
@@ -90,6 +93,7 @@ wl_library(map_io
     logic
     logic_widelands_geometry
     profile
+    scripting
     widelands_ball_of_mud
     wui
 )

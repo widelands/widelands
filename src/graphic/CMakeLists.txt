@@ -118,6 +118,7 @@ wl_library(graphic
     io_stream
     logic
     profile
+    scripting
     sound
     ui_basic
     widelands_ball_of_mud

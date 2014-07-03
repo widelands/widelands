@@ -184,6 +184,7 @@ wl_library(logic
     map_io_map_loader
     network
     profile
+    scripting
     sound
     ui_basic
     widelands_ball_of_mud

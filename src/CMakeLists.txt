@@ -474,39 +474,6 @@ wl_library(widelands_ball_of_mud
     save_handler.h
     scoped_timer.cc
     scoped_timer.h
-    scripting/c_utils.cc
-    scripting/c_utils.h
-    scripting/eris.h
-    scripting/factory.cc
-    scripting/factory.h
-    scripting/lua_bases.cc
-    scripting/lua_bases.h
-    scripting/lua_coroutine.cc
-    scripting/lua_coroutine.h
-    scripting/lua_editor.cc
-    scripting/lua_editor.h
-    scripting/lua_errors.h
-    scripting/lua_game.cc
-    scripting/lua_game.h
-    scripting/lua_globals.cc
-    scripting/lua_globals.h
-    scripting/lua_map.cc
-    scripting/lua_map.h
-    scripting/lua_path.cc
-    scripting/lua_path.h
-    scripting/lua_root.cc
-    scripting/lua_root.h
-    scripting/lua_table.cc
-    scripting/lua_table.h
-    scripting/lua_ui.cc
-    scripting/lua_ui.h
-    scripting/luna.h
-    scripting/luna_impl.cc
-    scripting/luna_impl.h
-    scripting/persistence.cc
-    scripting/persistence.h
-    scripting/scripting.cc
-    scripting/scripting.h
     single_player_game_controller.cc
     single_player_game_controller.h
     single_player_game_settings_provider.cc
@@ -577,8 +544,8 @@ wl_library(widelands_ball_of_mud
     map_io_map_loader
     network
     profile
+    scripting
     sound
-    third_party_eris
     ui_basic
     wui
 )

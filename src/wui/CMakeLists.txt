@@ -121,6 +121,7 @@ wl_library(wui
     logic_widelands_geometry
     network
     profile
+    scripting
     sound
     ui_basic
     widelands_ball_of_mud
