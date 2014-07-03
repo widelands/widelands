@@ -166,6 +166,7 @@ wl_library(logic
   # TODO(sirver): Uses SDL only on WIN32 for a dirty hack.
   USES_SDL
   DEPENDS
+    ai
     base_exceptions
     base_geometry
     base_i18n

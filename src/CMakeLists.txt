@@ -288,6 +288,7 @@ else()
   )
 endif()
 
+add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(economy)
 add_subdirectory(graphic)
@@ -306,12 +307,6 @@ add_subdirectory(wui)
 # library.
 wl_library(widelands_ball_of_mud
   SRCS
-    ai/ai_help_structs.cc
-    ai/ai_help_structs.h
-    ai/ai_hints.cc
-    ai/ai_hints.h
-    ai/defaultai.cc
-    ai/defaultai.h
     campvis.cc
     campvis.h
     chat.cc
@@ -561,6 +556,7 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
   USES_SDL
   DEPENDS
+    ai
     base_exceptions
     base_geometry
     base_i18n
