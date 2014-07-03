@@ -314,7 +314,6 @@ wl_library(widelands_ball_of_mud
     campvis.h
     chat.cc
     chat.h
-    compile_diagnostics.h
     constants.h
     container_iterate.h
     gamecontroller.h
@@ -339,7 +338,6 @@ wl_library(widelands_ball_of_mud
     text_layout.h
     timestring.cc
     timestring.h
-    upcast.h
     wlapplication.cc
     wlapplication.h
   USES_SDL
@@ -349,6 +347,7 @@ wl_library(widelands_ball_of_mud
     base_geometry
     base_i18n
     base_log
+    base_macros
     build_info
     editor
     graphic

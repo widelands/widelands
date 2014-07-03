@@ -23,6 +23,7 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/macros.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -33,7 +34,6 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 namespace Widelands {
 

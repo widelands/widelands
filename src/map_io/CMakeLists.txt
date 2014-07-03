@@ -14,6 +14,7 @@ wl_library(map_io_map_loader
     logic
     map_io
     scripting
+    base_macros
     widelands_ball_of_mud
 )
 
@@ -85,6 +86,7 @@ wl_library(map_io
   DEPENDS
     base_exceptions
     base_log
+    base_macros
     build_info
     economy
     graphic

@@ -28,6 +28,7 @@
 #include <vector>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/graphic.h"
 #include "helper.h"
@@ -40,7 +41,6 @@
 #include "ui_basic/table.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 
 #define WINDOW_WIDTH  std::min(700, g_gr->get_xres() - 40)

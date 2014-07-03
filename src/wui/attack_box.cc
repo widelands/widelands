@@ -19,9 +19,9 @@
 
 #include "wui/attack_box.h"
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "logic/soldier.h"
-#include "upcast.h"
 
 AttackBox::AttackBox
 	(UI::Panel              * parent,

@@ -19,6 +19,7 @@
 
 #include "economy/request.h"
 
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
 #include "economy/transfer.h"
@@ -35,7 +36,6 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 
 
 namespace Widelands {

@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -52,7 +53,6 @@
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 
 

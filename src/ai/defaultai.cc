@@ -26,6 +26,7 @@
 
 #include "ai/ai_hints.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -41,7 +42,6 @@
 #include "logic/warehouse.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 constexpr int kFieldUpdateInterval = 1000;
 constexpr int kIdleMineUpdateInterval = 22000;

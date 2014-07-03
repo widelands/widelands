@@ -7,7 +7,7 @@ wl_library(profile
     base_geometry
     base_i18n
     base_log
-    base_port
+    base_macros
     build_info
     io_fileread
     io_filesystem

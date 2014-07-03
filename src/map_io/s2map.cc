@@ -25,6 +25,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "constants.h"
 #include "io/fileread.h"
@@ -39,7 +40,6 @@
 #include "map_io/one_world_legacy_lookup_table.h"
 #include "scoped_timer.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 using std::cerr;
 using std::endl;

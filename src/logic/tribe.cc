@@ -25,6 +25,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
@@ -50,7 +51,6 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 
 using namespace std;

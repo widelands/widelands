@@ -1,7 +1,7 @@
-wl_library(base_port
+wl_library(base_macros
   SRCS
-    port.h
-    port.cc
+    macros.h
+    macros.cc
 )
 
 wl_library(base_log
@@ -16,7 +16,7 @@ wl_library(base_exceptions
     warning.h
     wexception.h
   DEPENDS
-    base_port
+    base_macros
 )
 
 wl_library(base_i18n
@@ -27,7 +27,7 @@ wl_library(base_i18n
   USES_INTL
   DEPENDS
     base_log
-    base_port
+    base_macros
 )
 
 wl_library(base_geometry
@@ -43,5 +43,5 @@ wl_library(base_md5
     md5.cc
     md5.h
   DEPENDS
-    widelands_ball_of_mud
+    base_macros
 )

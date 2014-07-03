@@ -87,6 +87,7 @@ wl_library(editor
   DEPENDS
     base_exceptions
     base_i18n
+    base_macros
     graphic
     graphic_image
     graphic_surface

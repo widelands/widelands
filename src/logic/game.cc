@@ -32,6 +32,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/warning.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
@@ -62,7 +63,6 @@
 #include "sound/sound_handler.h"
 #include "timestring.h"
 #include "ui_basic/progresswindow.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"

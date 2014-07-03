@@ -22,6 +22,7 @@
 #include <algorithm>
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "container_iterate.h"
 #include "economy/economy.h"
@@ -45,7 +46,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 

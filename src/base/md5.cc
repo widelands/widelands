@@ -25,7 +25,7 @@
 
 #include <cstdio>
 
-#include "compile_diagnostics.h"
+#include "base/macros.h"
 
 using namespace std;
 

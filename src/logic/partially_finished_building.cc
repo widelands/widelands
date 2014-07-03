@@ -19,6 +19,7 @@
 
 #include "logic/partially_finished_building.h"
 
+#include "base/macros.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "logic/game.h"
@@ -26,7 +27,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
 

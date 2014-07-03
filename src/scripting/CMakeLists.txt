@@ -41,6 +41,7 @@ wl_library(scripting
     base_exceptions
     base_i18n
     base_log
+    base_macros
     build_info
     economy
     io_fileread

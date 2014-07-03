@@ -24,7 +24,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "compile_diagnostics.h"
+#include "base/macros.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "network/internet_gaming.h"

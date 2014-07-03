@@ -48,6 +48,7 @@ wl_library(economy
     logic_widelands_geometry
     map_io
     ui_basic
+    base_macros
     widelands_ball_of_mud
     wui
 )

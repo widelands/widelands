@@ -20,6 +20,7 @@
 #include "wui/fieldaction.h"
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -39,7 +40,6 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
 #include "wui/game_debug_ui.h"

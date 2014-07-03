@@ -22,6 +22,7 @@
 #include <vector>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "logic/bob.h"
 #include "logic/game.h"
@@ -30,7 +31,6 @@
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "upcast.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 #include "wui/mapview.h"

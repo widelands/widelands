@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -58,7 +59,6 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
 

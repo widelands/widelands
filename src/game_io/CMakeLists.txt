@@ -22,6 +22,7 @@ wl_library(game_io
   DEPENDS
     base_exceptions
     base_log
+    base_macros
     economy
     graphic
     graphic_surface

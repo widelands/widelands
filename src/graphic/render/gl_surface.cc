@@ -22,9 +22,9 @@
 #include <cassert>
 #include <cmath>
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/render/gl_surface_texture.h"
-#include "upcast.h"
 
 uint16_t GLSurface::width() const {
 	return m_w;
@@ -220,5 +220,3 @@ void GLSurface::blit
 		glVertex2f(dst.x, dst.y + srcrc.h);
 	} glEnd();
 }
-
-

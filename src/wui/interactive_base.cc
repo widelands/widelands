@@ -24,6 +24,7 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -41,7 +42,6 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "text_layout.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"

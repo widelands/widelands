@@ -110,6 +110,7 @@ wl_library(wui
     base_geometry
     base_i18n
     base_log
+    base_macros
     economy
     game_io
     graphic

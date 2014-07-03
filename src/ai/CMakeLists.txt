@@ -9,11 +9,11 @@ wl_library(ai
     defaultai.cc
     defaultai.h
   DEPENDS
+    base_macros
     economy
     base_log
     profile
     base_i18n
-    widelands_ball_of_mud
     logic
     logic_notification
 )

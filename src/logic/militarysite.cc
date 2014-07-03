@@ -24,6 +24,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "logic/battle.h"
@@ -36,7 +37,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 

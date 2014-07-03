@@ -25,6 +25,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
 #include "container_iterate.h"
@@ -51,7 +52,6 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "text_layout.h"
-#include "upcast.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {

@@ -23,8 +23,8 @@
 #include <cstring>
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "build_info.h"
-#include "compile_diagnostics.h"
 #include "constants.h"
 #include "container_iterate.h"
 

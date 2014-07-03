@@ -19,6 +19,7 @@
 
 #include "logic/carrier.h"
 
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -27,7 +28,6 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "upcast.h"
 
 namespace Widelands {
 

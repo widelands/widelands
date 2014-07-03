@@ -38,6 +38,7 @@ wl_library(ui_fsmenu
     base_exceptions
     base_i18n
     base_log
+    base_macros
     build_info
     game_io
     graphic

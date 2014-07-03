@@ -47,12 +47,12 @@ wl_library(graphic_surface
   USES_OPENGL
   USES_SDL
   DEPENDS
+    base_macros
     base_exceptions
     base_geometry
     base_log
     graphic
     graphic_color
-    widelands_ball_of_mud
 )
 
 wl_library(graphic
@@ -108,6 +108,7 @@ wl_library(graphic
     base_geometry
     base_i18n
     base_log
+    base_macros
     build_info
     economy
     graphic_color

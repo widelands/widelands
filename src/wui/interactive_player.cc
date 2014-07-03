@@ -27,6 +27,7 @@
 #include <boost/type_traits.hpp>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/font_handler.h"
@@ -42,7 +43,6 @@
 #include "logic/tribe.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/encyclopedia_window.h"
