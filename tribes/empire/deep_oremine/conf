@@ -26,9 +26,9 @@ beer=6
 work=_Work
 
 [work]
+sleep=43000
 return=skipped unless economy needs ironore or not economy needs meal
 return=skipped unless economy needs ironore or not economy needs beer
-sleep=43000
 consume=meal beer
 animate=working 18000
 mine=iron 2 100 5 2

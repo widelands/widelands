@@ -27,8 +27,8 @@ meat=5
 work=_Work
 
 [work]
-return=skipped unless economy needs ration
 sleep=14000
+return=skipped unless economy needs ration
 consume=bread,fish,meat
 animate=working 19000
 produce=ration

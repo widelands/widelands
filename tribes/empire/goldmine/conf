@@ -26,9 +26,9 @@ wine=6
 work=_Work
 
 [work]
+sleep=45000
 return=skipped unless economy needs goldore or not economy needs ration
 return=skipped unless economy needs goldore or not economy needs wine
-sleep=45000
 consume=ration wine
 animate=working 20000
 mine=gold 2 50 5 17

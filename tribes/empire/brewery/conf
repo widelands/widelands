@@ -24,9 +24,9 @@ wheat=7
 work=_Work
 
 [work]
+sleep=30000
 return=skipped unless economy needs beer or not economy needs water
 return=skipped unless economy needs beer or not economy needs wheat
-sleep=30000
 consume=water wheat
 animate=working 30000
 produce=beer

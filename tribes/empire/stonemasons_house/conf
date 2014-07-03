@@ -24,8 +24,8 @@ marble=6
 work=_Work
 
 [work]
-return=skipped unless economy needs marblecolumn
 sleep=50000
+return=skipped unless economy needs marblecolumn
 consume=marble:2
 playFX=../../../sound/stonecutting/stonemason 192
 animate=working 32000

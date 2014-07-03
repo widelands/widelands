@@ -22,8 +22,8 @@ ration=8
 work=_Work
 
 [work]
-consume=ration
 sleep=20000
+consume=ration
 animate=working 20000
 mine=granite 2 100 5 17
 produce=raw_stone:2
