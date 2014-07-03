@@ -175,6 +175,7 @@ wl_library(logic
     build_info
     economy
     editor
+    game_io
     graphic
     graphic_color
     io_fileread

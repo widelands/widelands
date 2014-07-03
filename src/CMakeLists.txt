@@ -292,6 +292,7 @@ add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(economy)
 add_subdirectory(editor)
+add_subdirectory(game_io)
 add_subdirectory(graphic)
 add_subdirectory(io)
 add_subdirectory(logic)
@@ -319,25 +320,6 @@ wl_library(widelands_ball_of_mud
     constants.h
     container_iterate.h
     cookie_priority_queue.h
-    game_io/game_cmd_queue_data_packet.cc
-    game_io/game_cmd_queue_data_packet.h
-    game_io/game_data_packet.h
-    game_io/game_game_class_data_packet.cc
-    game_io/game_game_class_data_packet.h
-    game_io/game_interactive_player_data_packet.cc
-    game_io/game_interactive_player_data_packet.h
-    game_io/game_loader.cc
-    game_io/game_loader.h
-    game_io/game_map_data_packet.cc
-    game_io/game_map_data_packet.h
-    game_io/game_player_economies_data_packet.cc
-    game_io/game_player_economies_data_packet.h
-    game_io/game_player_info_data_packet.cc
-    game_io/game_player_info_data_packet.h
-    game_io/game_preload_data_packet.cc
-    game_io/game_preload_data_packet.h
-    game_io/game_saver.cc
-    game_io/game_saver.h
     gamecontroller.h
     helper.cc
     helper.h
@@ -377,19 +359,15 @@ wl_library(widelands_ball_of_mud
     base_i18n
     base_log
     build_info
-    economy
     editor
     graphic
     graphic_color
-    graphic_surface
     io_dedicated_log
-    io_fileread
     io_filesystem
     io_stream
     logic
     logic_notification
     logic_widelands_geometry
-    map_io
     map_io_map_loader
     network
     profile
@@ -398,6 +376,7 @@ wl_library(widelands_ball_of_mud
     ui_basic
     ui_fsmenu
     wui
+    game_io
 )
 
 

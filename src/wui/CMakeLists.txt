@@ -111,6 +111,7 @@ wl_library(wui
     base_i18n
     base_log
     economy
+    game_io
     graphic
     graphic_color
     graphic_image

@@ -25,6 +25,7 @@ wl_library(network
     base_i18n
     base_log
     build_info
+    game_io
     io_dedicated_log
     io_fileread
     io_filesystem

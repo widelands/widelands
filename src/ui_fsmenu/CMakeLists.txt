@@ -39,6 +39,7 @@ wl_library(ui_fsmenu
     base_i18n
     base_log
     build_info
+    game_io
     graphic
     graphic_image
     graphic_surface
