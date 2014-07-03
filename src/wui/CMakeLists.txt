@@ -125,5 +125,6 @@ wl_library(wui
     scripting
     sound
     ui_basic
+    ui_fsmenu
     widelands_ball_of_mud
 )

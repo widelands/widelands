@@ -34,6 +34,7 @@ wl_library(network
     profile
     scripting
     ui_basic
+    ui_fsmenu
     widelands_ball_of_mud
     wui
 )

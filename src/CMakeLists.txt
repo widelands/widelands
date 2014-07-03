@@ -301,6 +301,7 @@ add_subdirectory(scripting)
 add_subdirectory(sound)
 add_subdirectory(third_party)
 add_subdirectory(ui_basic)
+add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
 
 # TODO: Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
@@ -444,40 +445,6 @@ wl_library(widelands_ball_of_mud
     timestring.cc
     timestring.h
     trackptr.h
-    ui_fsmenu/base.cc
-    ui_fsmenu/base.h
-    ui_fsmenu/campaign_select.cc
-    ui_fsmenu/campaign_select.h
-    ui_fsmenu/editor.cc
-    ui_fsmenu/editor.h
-    ui_fsmenu/editor_mapselect.cc
-    ui_fsmenu/editor_mapselect.h
-    ui_fsmenu/fileview.cc
-    ui_fsmenu/fileview.h
-    ui_fsmenu/internet_lobby.cc
-    ui_fsmenu/internet_lobby.h
-    ui_fsmenu/intro.cc
-    ui_fsmenu/intro.h
-    ui_fsmenu/launch_mpg.cc
-    ui_fsmenu/launch_mpg.h
-    ui_fsmenu/launch_spg.cc
-    ui_fsmenu/launch_spg.h
-    ui_fsmenu/loadgame.cc
-    ui_fsmenu/loadgame.h
-    ui_fsmenu/loadreplay.cc
-    ui_fsmenu/loadreplay.h
-    ui_fsmenu/main.cc
-    ui_fsmenu/main.h
-    ui_fsmenu/mapselect.cc
-    ui_fsmenu/mapselect.h
-    ui_fsmenu/multiplayer.cc
-    ui_fsmenu/multiplayer.h
-    ui_fsmenu/netsetup_lan.cc
-    ui_fsmenu/netsetup_lan.h
-    ui_fsmenu/options.cc
-    ui_fsmenu/options.h
-    ui_fsmenu/singleplayer.cc
-    ui_fsmenu/singleplayer.h
     upcast.h
     utf8.h
     wlapplication.cc
@@ -509,6 +476,7 @@ wl_library(widelands_ball_of_mud
     scripting
     sound
     ui_basic
+    ui_fsmenu
     wui
 )
 
