@@ -1,28 +1,26 @@
 #!/usr/bin/python -tt
 
 
-def does_include_memory(lines, fn):
-    includes_memory = False
+import re
+
+__PRINTF = re.compile(r"\bf?printf")
+def check_for_printf(lines, fn):
+    errors = []
     for lineno, line in enumerate(lines, 1):
-        if "include <memory>" in line:
-            includes_memory = True
+        if __PRINTF.search(line):
+            errors.append((fn, lineno,
+                "Use log() from base/log.h instead of printf."))
+    return errors
 
-        if "unique_ptr" in line and not includes_memory:
-            return [ (fn, lineno,
-                "This file uses unique_ptr but does not include <memory>.") ]
-    return []
-
-evaluate_matches = does_include_memory
+evaluate_matches = check_for_printf
 
 
 #################
 # ALLOWED TESTS #
 #################
 allowed = [
-"""#include <memory>
-
-std::unique_ptr foo;
-""",
+"""log ("blubi")""",
+"""trianetn sprintf("rnae")""",
 ]
 
 
@@ -30,12 +28,8 @@ std::unique_ptr foo;
 # FORBIDDEN TESTS #
 ###################
 forbidden = [
-"""
-    std::unique_ptr<Blub> foo;
-""",
-"""
-std::unique_ptr<Blub> foo;
-
-#include <memory>
-""",
+"""printf ("blubi")""",
+"""trianetn printf("rnae")""",
+"""fprintf ("blubi")""",
+"""trianetn fprintf("rnae")""",
 ]
