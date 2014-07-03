@@ -25,6 +25,7 @@ wl_library(network
     base_exceptions
     base_i18n
     base_log
+    base_md5
     build_info
     game_io
     io_dedicated_log

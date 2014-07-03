@@ -31,6 +31,7 @@
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "base/md5.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "chat.h"
@@ -46,7 +47,6 @@
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
-#include "md5.h"
 #include "network/internet_gaming.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"

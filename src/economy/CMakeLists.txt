@@ -32,6 +32,7 @@ wl_library(economy
     supply.h
     supply_list.cc
     supply_list.h
+    trackptr.h
     transfer.cc
     transfer.h
     ware_instance.cc

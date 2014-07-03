@@ -172,6 +172,7 @@ wl_library(logic
     base_geometry
     base_i18n
     base_log
+    base_md5
     base_port
     build_info
     economy

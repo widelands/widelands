@@ -322,8 +322,6 @@ wl_library(widelands_ball_of_mud
     helper.h
     interval.h
     machdep.h
-    md5.cc
-    md5.h
     random.cc
     random.h
     ref_cast.h
@@ -341,9 +339,7 @@ wl_library(widelands_ball_of_mud
     text_layout.h
     timestring.cc
     timestring.h
-    trackptr.h
     upcast.h
-    utf8.h
     wlapplication.cc
     wlapplication.h
   USES_SDL

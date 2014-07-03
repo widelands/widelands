@@ -20,10 +20,10 @@
 #ifndef REQUEST_H
 #define REQUEST_H
 
+#include "economy/trackptr.h"
 #include "logic/requirements.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "trackptr.h"
 
 class FileRead;
 class FileWrite;
