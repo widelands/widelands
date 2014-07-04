@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-17 16:11+0000\n"
-"PO-Revision-Date: 2014-06-17 10:08+0000\n"
-"Last-Translator: Vit Hrachovy <Unknown>\n"
+"PO-Revision-Date: 2014-07-03 18:29+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:30+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-04 05:28+0000\n"
+"X-Generator: Launchpad (build 17086)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -752,7 +752,7 @@ msgstr ""
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
-msgstr ""
+msgstr "Nil"
 
 #: ../../maps/The Nile.wmf/elemental:11
 msgid ""
@@ -888,7 +888,7 @@ msgstr ""
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Ohnivý trojzubec"
 
 #: ../../maps/Trident of Fire.wmf/elemental:11
 msgid ""
@@ -903,6 +903,9 @@ msgid ""
 "Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue, "
 "black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
 msgstr ""
+"Navrhované týmy: červený vs. zelený | (modrý, žlutý) vs. (zelený, oranžový) "
+"| (modrý, černý) vs. (zelený, červený) | (modrý, černý, žlutý) vs. (zelený, "
+"červený, oranžový)"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
