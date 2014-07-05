@@ -1,11 +1,10 @@
 dirname = path.dirname(__file__)
 
--- NOCOM(#sirver): changed to be close to "ashes" for testing
 terrain_affinity = {
-   preferred_temperature = 299.65,
-   preferred_humidity = 0.30,
-   preferred_fertility = 0.2,
-   pickiness = 0.2,
+   preferred_temperature = 308,
+   preferred_humidity = 0.2,
+   preferred_fertility = 0.8,
+   pickiness = 0.65,
 }
 
 world:new_immovable_type{

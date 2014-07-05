@@ -1,11 +1,10 @@
 dirname = path.dirname(__file__)
 
--- NOCOM(#sirver): these are concept values and all the same for all trees right now.
 terrain_affinity = {
-   preferred_temperature = 289.65,
-   preferred_humidity = 0.66,
-   preferred_fertility = 0.9,
-   pickiness = 0.2,
+   preferred_temperature = 308,
+   preferred_humidity = 0.27,
+   preferred_fertility = 0.6,
+   pickiness = 0.7,
 }
 
 world:new_immovable_type{
