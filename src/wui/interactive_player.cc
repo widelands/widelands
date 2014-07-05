@@ -258,20 +258,14 @@ void Interactive_Player::think()
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
 	{
-		char         buffer[128];
-		char const * msg_icon    = "pics/menu_toggle_oldmessage_menu.png";
-		char const * msg_tooltip = _("Messages");
+		char const * msg_icon = "pics/menu_toggle_oldmessage_menu.png";
+		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
-			snprintf(buffer,
-			         sizeof(buffer),
-			         "%s",
-			         ngettext("%u new message", "%u new messages", nr_new_messages),
-			         nr_new_messages);
-			msg_tooltip = buffer;
+			msg_tooltip = (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) % nr_new_messages).str();
 		}
 		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
