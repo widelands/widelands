@@ -13,6 +13,32 @@ wl_library(logic_widelands_geometry
     widelands_geometry.h
 )
 
+wl_library(logic_game_settings
+  SRCS
+    game_settings.h
+    single_player_game_settings_provider.cc
+    single_player_game_settings_provider.h
+  DEPENDS
+    logic
+    ai
+)
+
+wl_library(logic_game_controller
+  SRCS
+    game_controller.h
+    replay_game_controller.h
+    replay_game_controller.cc
+    single_player_game_controller.h
+    single_player_game_controller.cc
+  DEPENDS
+    ai
+    logic
+    profile
+    ui_basic
+    widelands_ball_of_mud
+    wui
+)
+
 wl_library(logic
   SRCS
     attackable.h
@@ -68,7 +94,6 @@ wl_library(logic
     game.h
     game_data_error.cc
     game_data_error.h
-    game_settings.h
     immovable.cc
     immovable.h
     immovable_program.h
@@ -184,6 +209,8 @@ wl_library(logic
     io_fileread
     io_filesystem
     io_stream
+    logic_game_controller
+    logic_game_settings
     logic_notification
     logic_widelands_geometry
     map_io

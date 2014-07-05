@@ -27,7 +27,7 @@
 #include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "gamecontroller.h"
+#include "logic/game_controller.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"

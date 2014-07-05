@@ -143,6 +143,7 @@ void ProgressWindow::update(bool const repaint) {
  * std:string style format broke format argument list
  * on windows visual studio.
  */
+// TODO(sirver): this should just take a string.
 void ProgressWindow::stepf(const char * format, ...) {
 	char buffer[1024];
 	va_list va;

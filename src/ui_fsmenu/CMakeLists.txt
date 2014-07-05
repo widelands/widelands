@@ -47,6 +47,8 @@ wl_library(ui_fsmenu
     graphic_surface
     io_filesystem
     logic
+    logic_game_controller
+    logic_game_settings
     map_io_map_loader
     network
     profile

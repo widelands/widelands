@@ -57,15 +57,15 @@
 #include "logic/game_settings.h"
 #include "logic/map.h"
 #include "logic/replay.h"
+#include "logic/replay_game_controller.h"
+#include "logic/single_player_game_controller.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "logic/tribe.h"
 #include "map_io/map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "profile/profile.h"
-#include "replay_game_controller.h"
-#include "single_player_game_controller.h"
-#include "single_player_game_settings_provider.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
 #include "ui_basic/messagebox.h"
@@ -651,6 +651,7 @@ void WLApplication::_handle_mousebutton
  * Return the current time, in milliseconds
  * \todo Use our internally defined time type
  */
+// TODO(sirver): get rid of this method and use SDL_GetTicks() directly.
 int32_t WLApplication::get_time() {
 	uint32_t time = SDL_GetTicks();
 

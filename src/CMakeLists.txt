@@ -315,7 +315,6 @@ wl_library(widelands_ball_of_mud
     chat.cc
     chat.h
     constants.h
-    gamecontroller.h
     helper.cc
     helper.h
     interval.h
@@ -323,16 +322,10 @@ wl_library(widelands_ball_of_mud
     random.cc
     random.h
     ref_cast.h
-    replay_game_controller.cc
-    replay_game_controller.h
     save_handler.cc
     save_handler.h
     scoped_timer.cc
     scoped_timer.h
-    single_player_game_controller.cc
-    single_player_game_controller.h
-    single_player_game_settings_provider.cc
-    single_player_game_settings_provider.h
     text_layout.cc
     text_layout.h
     timestring.cc
@@ -341,7 +334,6 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
   USES_SDL
   DEPENDS
-    ai
     base_exceptions
     base_geometry
     base_i18n
@@ -349,12 +341,15 @@ wl_library(widelands_ball_of_mud
     base_macros
     build_info
     editor
+    game_io
     graphic
     graphic_color
     io_dedicated_log
     io_filesystem
     io_stream
     logic
+    logic_game_controller
+    logic_game_settings
     logic_notification
     map_io_map_loader
     network
@@ -363,7 +358,6 @@ wl_library(widelands_ball_of_mud
     ui_basic
     ui_fsmenu
     wui
-    game_io
 )
 
 

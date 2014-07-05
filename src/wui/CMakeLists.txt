@@ -121,6 +121,8 @@ wl_library(wui
     io_fileread
     io_filesystem
     logic
+    logic_game_controller
+    logic_game_settings
     logic_notification
     logic_widelands_geometry
     network

@@ -265,10 +265,11 @@ void Interactive_Player::think()
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
-			snprintf
-				(buffer, sizeof(buffer),
-				 ngettext("%u new message", "%u new messages", nr_new_messages),
-				 nr_new_messages);
+			snprintf(buffer,
+			         sizeof(buffer),
+			         "%s",
+			         ngettext("%u new message", "%u new messages", nr_new_messages),
+			         nr_new_messages);
 			msg_tooltip = buffer;
 		}
 		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
