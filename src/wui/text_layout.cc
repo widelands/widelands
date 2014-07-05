@@ -17,9 +17,11 @@
  *
  */
 
-#include "text_layout.h"
+#include "wui/text_layout.h"
 
 #include <boost/format.hpp>
+
+#include "wui/text_constants.h"
 
 using namespace std;
 using namespace boost;
@@ -71,4 +73,3 @@ string as_waresinfo(const string & txt) {
 	f % txt;
 	return f.str();
 }
-

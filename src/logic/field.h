@@ -23,7 +23,7 @@
 #include <cassert>
 #include <limits>
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/nodecaps.h"
 #include "logic/roadtype.h"
 #include "logic/widelands.h"

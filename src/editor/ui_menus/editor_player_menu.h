@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"

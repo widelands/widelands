@@ -20,7 +20,7 @@
 #include "scripting/lua_ui.h"
 
 #include "base/macros.h"
-#include "gamecontroller.h"
+#include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_map.h"

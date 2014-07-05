@@ -73,6 +73,7 @@ wl_library(graphic
     animation.h
     colormap.cc
     colormap.h
+    default_resolution.h
     diranimations.h
     font.cc
     font.h
@@ -113,6 +114,7 @@ wl_library(graphic
   USES_SDL_IMAGE
   USES_SDL_TTF
   DEPENDS
+    base_deprecated
     base_exceptions
     base_geometry
     base_i18n
@@ -130,9 +132,11 @@ wl_library(graphic
     io_stream
     logic
     profile
+    random
     scripting
     sound
     ui_basic
     widelands_ball_of_mud
     wui
+    wui_text_layout
 )

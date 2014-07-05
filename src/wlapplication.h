@@ -126,6 +126,8 @@ struct InputCallback {
 /// code should be in System, while the actual graphics work is done elsewhere.
 /// \todo Refactor the mainloop
 /// \todo Sensible use of exceptions (goes for whole game)
+// TODO(sirver): this class makes no sense for c++ - most of these should be
+// stand alone functions.
 struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();

@@ -33,6 +33,7 @@
 #include "graphic/font_handler.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
+#include "logic/constants.h"
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
@@ -265,10 +266,11 @@ void Interactive_Player::think()
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
-			snprintf
-				(buffer, sizeof(buffer),
-				 ngettext("%u new message", "%u new messages", nr_new_messages),
-				 nr_new_messages);
+			snprintf(buffer,
+			         sizeof(buffer),
+			         "%s",
+			         ngettext("%u new message", "%u new messages", nr_new_messages),
+			         nr_new_messages);
 			msg_tooltip = buffer;
 		}
 		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));

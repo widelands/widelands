@@ -24,7 +24,6 @@
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 
-#include "constants.h"
 #include "graphic/color.h"
 #include "ui_basic/panel.h"
 

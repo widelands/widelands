@@ -21,11 +21,11 @@
 
 #include <boost/format.hpp>
 
-#include "gamecontroller.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/critter_bob.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"

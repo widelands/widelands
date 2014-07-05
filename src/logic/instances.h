@@ -31,11 +31,11 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
+#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "logic/cmd_queue.h"
 #include "logic/widelands.h"
-#include "ref_cast.h"
 
 class FileRead;
 class RenderTarget;

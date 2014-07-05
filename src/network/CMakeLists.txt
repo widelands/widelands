@@ -1,5 +1,6 @@
 wl_library(network
   SRCS
+    constants.h
     internet_gaming.cc
     internet_gaming.h
     internet_gaming_messages.cc
@@ -22,6 +23,7 @@ wl_library(network
   USES_SDL_NET
   DEPENDS
     ai
+    base_deprecated
     base_exceptions
     base_i18n
     base_log
@@ -34,6 +36,8 @@ wl_library(network
     io_filesystem
     io_stream
     logic
+    logic_game_controller
+    logic_game_settings
     map_io_map_loader
     profile
     scripting

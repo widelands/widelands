@@ -34,7 +34,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "text_layout.h"
+#include "wui/text_layout.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 

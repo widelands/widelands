@@ -88,6 +88,7 @@ wl_library(editor
     base_exceptions
     base_i18n
     base_macros
+    base_scoped_timer
     graphic
     graphic_image
     graphic_surface
@@ -97,6 +98,7 @@ wl_library(editor
     map_io
     map_io_map_loader
     profile
+    random
     scripting
     ui_basic
     ui_fsmenu

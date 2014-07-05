@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/deprecated.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
@@ -44,7 +45,6 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
-#include "ref_cast.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {

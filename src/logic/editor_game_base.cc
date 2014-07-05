@@ -24,6 +24,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -32,6 +33,7 @@
 #include "graphic/graphic.h"
 #include "logic/battle.h"
 #include "logic/building.h"
+#include "logic/constants.h"
 #include "logic/dismantlesite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
@@ -44,7 +46,6 @@
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
-#include "scoped_timer.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"

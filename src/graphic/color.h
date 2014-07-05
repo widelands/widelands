@@ -22,8 +22,7 @@
 
 #include <SDL.h>
 
-// TODO(sirver): Do not inherit from SDL_Color if possible.
-struct RGBColor : public SDL_Color {
+struct RGBColor {
 	RGBColor(uint8_t R, uint8_t G, uint8_t B);
 
 	// Initializes the color to black.
@@ -37,6 +36,8 @@ struct RGBColor : public SDL_Color {
 
 	bool operator == (const RGBColor& other) const;
 	bool operator != (const RGBColor& other) const;
+
+	uint8_t r, g, b;
 };
 
 struct RGBAColor {

@@ -29,7 +29,6 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "constants.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 #include "graphic/graphic.h"

@@ -20,7 +20,7 @@
 #ifndef NETHOST_H
 #define NETHOST_H
 
-#include "gamecontroller.h"
+#include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/widelands.h"
 #include "network/network.h"

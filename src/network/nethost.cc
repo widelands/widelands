@@ -47,6 +47,7 @@
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
+#include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"

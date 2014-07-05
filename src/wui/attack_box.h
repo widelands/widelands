@@ -30,6 +30,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
+#include "wui/text_constants.h"
 
 using Widelands::Bob;
 using Widelands::Building;

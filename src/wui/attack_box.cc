@@ -22,6 +22,7 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "logic/soldier.h"
+#include "wui/text_constants.h"
 
 AttackBox::AttackBox
 	(UI::Panel              * parent,

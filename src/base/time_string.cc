@@ -17,14 +17,17 @@
  *
  */
 
-#include "timestring.h"
+#include "base/time_string.h"
 
 #include <cassert>
 #include <ctime>
 
 #include <stdint.h>
 
+namespace  {
 char timestring_buffer[] = "YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character for FAT FS
+char gamestringbuffer[] = "000:00:00";
+}  // namespace
 
 char * timestring() {
 	time_t t;
@@ -79,7 +82,6 @@ char * timestring() {
 	return timestring_buffer;
 }
 
-char gamestringbuffer[] = "000:00:00";
 char * gametimestring(uint32_t gametime)
 {
 	uint32_t time = gametime / 1000;
@@ -92,4 +94,3 @@ char * gametimestring(uint32_t gametime)
 	gamestringbuffer[0] = '0' + (time /= 10);
 	return gamestringbuffer;
 }
-

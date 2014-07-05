@@ -21,8 +21,8 @@
 
 #include <memory>
 
+#include "base/deprecated.h"
 #include "base/log.h"
-#include "container_iterate.h"
 #include "economy/fleet.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"

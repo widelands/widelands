@@ -24,8 +24,8 @@
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
-#include "random.h"
-#include "save_handler.h"
+#include "logic/save_handler.h"
+#include "random/random.h"
 
 namespace UI {struct ProgressWindow;}
 struct Computer_Player;

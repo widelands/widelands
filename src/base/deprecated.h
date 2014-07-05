@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,14 +13,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#ifndef CONTAINER_ITERATE_H
-#define CONTAINER_ITERATE_H
+#ifndef DEPRECATED_H
+#define DEPRECATED_H
 
-// TODO(sirver): move this into a base_deprecated lib.
+// Code that is still used all over the place, but should not be used anymore.
+
+#include <cassert>
 
 // Helper structure for representing an iterator range in
 // for loops.
@@ -29,6 +31,7 @@
 // for (wl_range< std::vector<int> > i(v);i;++i)
 //     std::cout << *i;
 //
+// DEPRECATED!! do not use.
 template<typename C>
 struct wl_range
 {
@@ -57,6 +60,7 @@ private:
 // for (wl_const_range< std::vector<int> > i(v);i;++i)
 //     std::cout << *i;
 //
+// DEPRECATED!! do not use.
 template<typename C>
 struct wl_const_range
 {
@@ -79,16 +83,18 @@ private:
 	typename C::const_iterator end;
 };
 
-#define container_iterate_const(type, container, i)                           \
-	for                                                                       \
-	   (wl_const_range< type > i(container);                                  \
-		i;                                                                    \
-		++i)                                                                  \
 
-#define container_iterate(type, container, i)                                 \
-	for                                                                       \
-	   (wl_range< type > i(container);                                        \
-		i;                                                                    \
-		++i)                                                                  \
+// DEPRECATED: use for (blah : container) syntax.
+#define container_iterate_const(type, container, i) for (wl_const_range<type> i(container); i; ++i)
 
-#endif
+#define container_iterate(type, container, i) for (wl_range<type> i(container); i; ++i)
+
+// DEPRECATED: leads to unsafe code. Instead use upcast() or is_a() to check at
+// runtime for the type you are expecting.
+template<typename Derived, typename Base> Derived & ref_cast(Base & base) {
+	assert(dynamic_cast<Derived *>(&base) == static_cast<Derived *>(&base));
+	return static_cast<Derived &>(base);
+}
+
+
+#endif /* end of include guard: DEPRECATED_H */

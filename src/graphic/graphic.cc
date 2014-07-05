@@ -25,14 +25,13 @@
 
 #include <SDL_image.h>
 
+#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
-#include "constants.h"
-#include "container_iterate.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
@@ -55,6 +54,17 @@ using namespace std;
 Graphic * g_gr;
 bool g_opengl;
 
+#define FALLBACK_GRAPHICS_WIDTH 800
+#define FALLBACK_GRAPHICS_HEIGHT 600
+#define FALLBACK_GRAPHICS_DEPTH 32
+
+namespace  {
+
+/// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
+/// These are all surfaces that are not loaded from disk.
+const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
+
+}  // namespace
 
 /**
  * Initialize the SDL video mode.
@@ -224,9 +234,9 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
-GCC_DIAG_ON ("-Wold-style-cast")
+DIAG_ON ("-Wold-style-cast")
 	}
 
 	/* Information about the video capabilities. */

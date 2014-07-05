@@ -17,41 +17,46 @@
  *
  */
 
-#ifndef SINGLE_PLAYER_GAME_CONTROLLER_H
-#define SINGLE_PLAYER_GAME_CONTROLLER_H
+#ifndef REPLAY_GAME_CONTROLLER_H
+#define REPLAY_GAME_CONTROLLER_H
 
-#include "ai/computer_player.h"
-#include "gamecontroller.h"
+#include <memory>
 
+#include "logic/cmd_queue.h"
+#include "logic/game_controller.h"
 
-class SinglePlayerGameController : public GameController {
+namespace Widelands {
+	class ReplayReader;
+}
+
+class ReplayGameController : public GameController {
 public:
-	SinglePlayerGameController
-		(Widelands::Game &, bool useai, Widelands::Player_Number local);
-	~SinglePlayerGameController();
+	ReplayGameController(Widelands::Game & game, const std::string & filename);
 
 	void think() override;
+
 	void sendPlayerCommand(Widelands::PlayerCommand &) override;
 	int32_t getFrametime() override;
 	std::string getGameDescription() override;
-
 	uint32_t realSpeed() override;
 	uint32_t desiredSpeed() override;
-	void setDesiredSpeed(uint32_t speed) override;
+	void setDesiredSpeed(uint32_t const speed) override;
 	bool isPaused() override;
-	void setPaused(bool paused) override;
-	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
+	void setPaused(bool const paused) override;
 
 private:
+	struct Cmd_ReplayEnd : public Widelands::Command {
+		Cmd_ReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
+		virtual void execute (Widelands::Game & game);
+		virtual uint8_t id() const;
+	};
+
 	Widelands::Game & m_game;
-	bool m_useai;
+	std::unique_ptr<Widelands::ReplayReader> m_replayreader;
 	int32_t m_lastframe;
 	int32_t m_time;
-	uint32_t m_speed; ///< current game speed, in milliseconds per second
+	uint32_t m_speed;
 	bool m_paused;
-	uint32_t m_player_cmdserial;
-	Widelands::Player_Number m_local;
-	std::vector<Computer_Player *> m_computerplayers;
 };
 
 #endif

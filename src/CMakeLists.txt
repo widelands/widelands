@@ -299,6 +299,7 @@ add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
 add_subdirectory(profile)
+add_subdirectory(random)
 add_subdirectory(scripting)
 add_subdirectory(sound)
 add_subdirectory(third_party)
@@ -310,52 +311,30 @@ add_subdirectory(wui)
 # library.
 wl_library(widelands_ball_of_mud
   SRCS
-    campvis.cc
-    campvis.h
     chat.cc
     chat.h
-    constants.h
-    container_iterate.h
-    gamecontroller.h
     helper.cc
     helper.h
     interval.h
     machdep.h
-    random.cc
-    random.h
-    ref_cast.h
-    replay_game_controller.cc
-    replay_game_controller.h
-    save_handler.cc
-    save_handler.h
-    scoped_timer.cc
-    scoped_timer.h
-    single_player_game_controller.cc
-    single_player_game_controller.h
-    single_player_game_settings_provider.cc
-    single_player_game_settings_provider.h
-    text_layout.cc
-    text_layout.h
-    timestring.cc
-    timestring.h
     wlapplication.cc
     wlapplication.h
   USES_SDL
   DEPENDS
-    ai
     base_exceptions
     base_geometry
     base_i18n
     base_log
     base_macros
+    base_time_string
     build_info
     editor
     graphic
-    graphic_color
     io_dedicated_log
     io_filesystem
-    io_stream
     logic
+    logic_game_controller
+    logic_game_settings
     logic_notification
     map_io_map_loader
     network
@@ -364,7 +343,6 @@ wl_library(widelands_ball_of_mud
     ui_basic
     ui_fsmenu
     wui
-    game_io
 )
 
 

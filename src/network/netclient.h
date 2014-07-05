@@ -21,7 +21,7 @@
 #define NETCLIENT_H
 
 #include "chat.h"
-#include "gamecontroller.h"
+#include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "network/network.h"
 

@@ -27,6 +27,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "editor/tools/editor_delete_immovable_tool.h"
 #include "editor/ui_menus/editor_main_menu.h"
@@ -43,7 +44,6 @@
 #include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "scoped_timer.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"

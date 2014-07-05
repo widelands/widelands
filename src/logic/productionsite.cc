@@ -39,6 +39,7 @@
 #include "logic/warelist.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
+#include "wui/text_constants.h"
 
 namespace Widelands {
 

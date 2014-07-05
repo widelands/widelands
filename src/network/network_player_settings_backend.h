@@ -20,7 +20,7 @@
 #ifndef NETWORK_PLAYER_SETTINGS_BACKEND_H
 #define NETWORK_PLAYER_SETTINGS_BACKEND_H
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/game_settings.h"
 
 struct NetworkPlayerSettingsBackend {

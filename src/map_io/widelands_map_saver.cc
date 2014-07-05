@@ -20,6 +20,7 @@
 #include "map_io/widelands_map_saver.h"
 
 #include "base/log.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/editor_game_base.h"
@@ -51,7 +52,6 @@
 #include "map_io/widelands_map_scripting_data_packet.h"
 #include "map_io/widelands_map_terrain_data_packet.h"
 #include "map_io/widelands_map_version_data_packet.h"
-#include "scoped_timer.h"
 
 namespace Widelands {
 

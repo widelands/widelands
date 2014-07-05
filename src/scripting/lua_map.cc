@@ -19,8 +19,8 @@
 
 #include "scripting/lua_map.h"
 
+#include "base/deprecated.h"
 #include "base/log.h"
-#include "container_iterate.h"
 #include "economy/wares_queue.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"

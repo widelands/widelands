@@ -30,11 +30,10 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "constants.h"
-#include "container_iterate.h"
 #include "graphic/diranimations.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"

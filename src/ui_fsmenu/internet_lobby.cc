@@ -25,13 +25,14 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
-#include "constants.h"
 #include "graphic/graphic.h"
+#include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "profile/profile.h"
 #include "ui_basic/messagebox.h"
+#include "wui/text_constants.h"
 
 Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	(char const * const nick, char const * const pwd, bool registered)
@@ -421,9 +422,9 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 		IPaddress peer;
 		if (hostent * const he = gethostbyname(ip.c_str())) {
 			peer.host = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 			peer.port = htons(WIDELANDS_PORT);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 		} else {
 			// Actually the game is not done, but that way we are again listed as in the lobby
 			InternetGaming::ref().set_game_done();

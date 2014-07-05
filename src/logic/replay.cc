@@ -23,15 +23,15 @@
 #include "base/md5.h"
 #include "base/wexception.h"
 #include "game_io/game_loader.h"
-#include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
-#include "random.h"
-#include "save_handler.h"
+#include "logic/save_handler.h"
+#include "random/random.h"
 
 namespace Widelands {
 

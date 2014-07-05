@@ -23,11 +23,11 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "campvis.h"
-#include "constants.h"
 #include "graphic/graphic.h"
+#include "logic/campaign_visibility.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
+#include "wui/text_constants.h"
 
 
 /*

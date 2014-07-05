@@ -25,14 +25,15 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/i18n.h"
-#include "constants.h"
+#include "graphic/default_resolution.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/save_handler.h"
 #include "profile/profile.h"
-#include "save_handler.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
 
 namespace  {
 
@@ -634,56 +635,31 @@ void Options_Ctrl::handle_menu()
 
 Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	Options_Struct opt;
-	opt.xres                = m_opt_section.get_int
-		("xres",                XRES);
-	opt.yres                = m_opt_section.get_int
-		("yres",                YRES);
-	opt.inputgrab           = m_opt_section.get_bool
-		("inputgrab",          false);
-	opt.fullscreen          = m_opt_section.get_bool
-		("fullscreen",         false);
-	opt.single_watchwin     = m_opt_section.get_bool
-		("single_watchwin",    false);
-	opt.auto_roadbuild_mode = m_opt_section.get_bool
-		("auto_roadbuild_mode", true);
-	opt.show_warea          = m_opt_section.get_bool
-		("workareapreview",    true);
-	opt.snap_windows_only_when_overlapping
-		= m_opt_section.get_bool
-			("snap_windows_only_when_overlapping",      false);
-	opt.dock_windows_to_edges
-		= m_opt_section.get_bool
-			("dock_windows_to_edges",                   false);
-	opt.language              =  m_opt_section.get_string
-		("language",         "");
-	opt.music                 = !m_opt_section.get_bool
-		("disable_music",   false);
-	opt.fx                    = !m_opt_section.get_bool
-		("disable_fx",      false);
-	opt.autosave
-		= m_opt_section.get_int
-			("autosave",        DEFAULT_AUTOSAVE_INTERVAL * 60);
-	opt.maxfps                =  m_opt_section.get_int
-		("maxfps",              25);
+	opt.xres = m_opt_section.get_int("xres", DEFAULT_RESOLUTION_W);
+	opt.yres = m_opt_section.get_int("yres", DEFAULT_RESOLUTION_H);
+	opt.inputgrab = m_opt_section.get_bool("inputgrab", false);
+	opt.fullscreen = m_opt_section.get_bool("fullscreen", false);
+	opt.single_watchwin = m_opt_section.get_bool("single_watchwin", false);
+	opt.auto_roadbuild_mode = m_opt_section.get_bool("auto_roadbuild_mode", true);
+	opt.show_warea = m_opt_section.get_bool("workareapreview", true);
+	opt.snap_windows_only_when_overlapping =
+	   m_opt_section.get_bool("snap_windows_only_when_overlapping", false);
+	opt.dock_windows_to_edges = m_opt_section.get_bool("dock_windows_to_edges", false);
+	opt.language = m_opt_section.get_string("language", "");
+	opt.music = !m_opt_section.get_bool("disable_music", false);
+	opt.fx = !m_opt_section.get_bool("disable_fx", false);
+	opt.autosave = m_opt_section.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.maxfps = m_opt_section.get_int("maxfps", 25);
 
-	opt.message_sound         =  m_opt_section.get_bool
-		("sound_at_message", true);
-	opt.nozip                 =  m_opt_section.get_bool
-		("nozip",            false);
-	opt.ui_font               =  m_opt_section.get_string
-		("ui_font",     "serif");
-	opt.border_snap_distance  =  m_opt_section.get_int
-		("border_snap_distance", 0);
-	opt.panel_snap_distance   =  m_opt_section.get_int
-		("panel_snap_distance",  0);
-	opt.remove_replays        = m_opt_section.get_int
-		("remove_replays", 0);
-	opt.remove_syncstreams    = m_opt_section.get_bool
-		("remove_syncstreams", true);
-	opt.opengl                = m_opt_section.get_bool
-		("opengl", true);
-	opt.transparent_chat      = m_opt_section.get_bool
-		("transparent_chat", true);
+	opt.message_sound = m_opt_section.get_bool("sound_at_message", true);
+	opt.nozip = m_opt_section.get_bool("nozip", false);
+	opt.ui_font = m_opt_section.get_string("ui_font", "serif");
+	opt.border_snap_distance = m_opt_section.get_int("border_snap_distance", 0);
+	opt.panel_snap_distance = m_opt_section.get_int("panel_snap_distance", 0);
+	opt.remove_replays = m_opt_section.get_int("remove_replays", 0);
+	opt.remove_syncstreams = m_opt_section.get_bool("remove_syncstreams", true);
+	opt.opengl = m_opt_section.get_bool("opengl", true);
+	opt.transparent_chat = m_opt_section.get_bool("transparent_chat", true);
 	return opt;
 }
 

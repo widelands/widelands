@@ -23,6 +23,7 @@ wl_library(game_io
     base_exceptions
     base_log
     base_macros
+    base_scoped_timer
     economy
     graphic
     graphic_surface
@@ -33,6 +34,5 @@ wl_library(game_io
     map_io_map_loader
     profile
     scripting
-    widelands_ball_of_mud
     wui
 )

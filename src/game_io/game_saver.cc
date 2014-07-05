@@ -20,6 +20,7 @@
 #include "game_io/game_saver.h"
 
 #include "base/log.h"
+#include "base/scoped_timer.h"
 #include "game_io/game_cmd_queue_data_packet.h"
 #include "game_io/game_game_class_data_packet.h"
 #include "game_io/game_interactive_player_data_packet.h"
@@ -29,7 +30,6 @@
 #include "game_io/game_preload_data_packet.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
-#include "scoped_timer.h"
 
 namespace Widelands {
 

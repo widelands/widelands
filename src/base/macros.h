@@ -62,6 +62,9 @@
 # define CLANG_DIAG_PRAGMA(x)
 #endif
 
+#define DIAG_OFF(x) GCC_DIAG_OFF(x) CLANG_DIAG_OFF(x)
+#define DIAG_ON(x) GCC_DIAG_ON(x) CLANG_DIAG_ON(x)
+
 /// Wrapper macro around a dynamic_cast.
 #define upcast(type, identifier, source) type * const identifier = \
 dynamic_cast<type *>(source)

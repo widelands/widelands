@@ -38,6 +38,7 @@
 #include "logic/checkstep.h"
 #include "logic/cmd_expire_message.h"
 #include "logic/cmd_luacoroutine.h"
+#include "logic/constants.h"
 #include "logic/constructionsite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"

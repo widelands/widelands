@@ -35,10 +35,12 @@ wl_library(ui_fsmenu
     singleplayer.cc
     singleplayer.h
   DEPENDS
+    base_deprecated
     base_exceptions
     base_i18n
     base_log
     base_macros
+    base_time_string
     build_info
     game_io
     graphic
@@ -47,6 +49,9 @@ wl_library(ui_fsmenu
     graphic_surface
     io_filesystem
     logic
+    logic_campaign_visibility
+    logic_game_controller
+    logic_game_settings
     map_io_map_loader
     network
     profile
@@ -55,4 +60,5 @@ wl_library(ui_fsmenu
     ui_basic
     widelands_ball_of_mud
     wui
+    wui_text_layout
 )

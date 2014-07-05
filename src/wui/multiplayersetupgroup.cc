@@ -25,6 +25,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
@@ -35,6 +36,7 @@
 #include "ui_basic/icon.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
+#include "wui/text_constants.h"
 
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup

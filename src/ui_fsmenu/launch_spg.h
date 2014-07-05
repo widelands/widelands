@@ -22,11 +22,12 @@
 
 #include <string>
 
-#include "ui_fsmenu/base.h"
+#include "logic/constants.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 
 struct ChatProvider;
 class GameController;

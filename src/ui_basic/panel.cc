@@ -20,7 +20,6 @@
 #include "ui_basic/panel.h"
 
 #include "base/log.h"
-#include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
@@ -30,8 +29,9 @@
 #include "helper.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 
 
 using namespace std;

@@ -38,6 +38,7 @@ wl_library(scripting
     scripting.h
   USES_BOOST_REGEX
   DEPENDS
+    base_deprecated
     base_exceptions
     base_i18n
     base_log
@@ -47,6 +48,8 @@ wl_library(scripting
     io_fileread
     io_filesystem
     logic
+    logic_campaign_visibility
+    logic_game_controller
     logic_widelands_geometry
     map_io
     profile

@@ -25,15 +25,15 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
-#include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "gamecontroller.h"
+#include "graphic/default_resolution.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/immovable.h"
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
@@ -41,7 +41,6 @@
 #include "logic/productionsite.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "text_layout.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
@@ -51,6 +50,8 @@
 #include "wui/minimap.h"
 #include "wui/overlay_manager.h"
 #include "wui/quicknavigation.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 #include "wui/unique_window_handler.h"
 
 using boost::format;
@@ -78,7 +79,9 @@ struct InteractiveBaseInternals {
 Interactive_Base::Interactive_Base
 	(Editor_Game_Base & the_egbase, Section & global_s)
 	:
-	Map_View(nullptr, 0, 0, global_s.get_int("xres", XRES), global_s.get_int("yres", YRES), *this),
+	Map_View
+		(nullptr, 0, 0, global_s.get_int("xres", DEFAULT_RESOLUTION_W),
+		 global_s.get_int("yres", DEFAULT_RESOLUTION_H), *this),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
@@ -278,7 +281,6 @@ OverlayManager::JobId Interactive_Base::show_work_area
 	// Iterate through the work areas, from building to its enhancement
 	Workarea_Info::const_iterator it = workarea_info.begin();
 	for (; it != workarea_info.end(); ++it) {
-		assert(wa_index < NUMBER_OF_WORKAREA_PICS);
 		hollow_area.radius = it->first;
 		Widelands::MapHollowRegion<> mr(map, hollow_area);
 		do

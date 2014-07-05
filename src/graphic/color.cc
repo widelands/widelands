@@ -22,9 +22,8 @@
 RGBColor::RGBColor() {
 }
 
-RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) {
-	SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;
-}
+RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) :
+	r(R), g(G), b(B) {}
 
 Uint32 RGBColor::map(const SDL_PixelFormat& fmt) const {
 	return SDL_MapRGB(&const_cast<SDL_PixelFormat&>(fmt), r, g, b);

@@ -36,6 +36,9 @@ class Section;
 class Surface;
 struct RGBColor;
 
+/// FRAME_LENGTH is the default animation speed
+constexpr int FRAME_LENGTH = 250;
+
 /**
  * Representation of an Animation in the game. An animation is a looping set of
  * image frames and their corresponding sound effects. This class makes no

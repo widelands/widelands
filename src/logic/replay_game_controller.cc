@@ -17,11 +17,12 @@
  *
  */
 
-#include "replay_game_controller.h"
+#include "logic/replay_game_controller.h"
 
 #include "logic/game.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication.h"
 #include "wui/interactive_base.h"
 
 
