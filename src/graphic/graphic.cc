@@ -25,6 +25,7 @@
 
 #include <SDL_image.h>
 
+#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
@@ -32,7 +33,6 @@
 #include "build_info.h"
 #include "config.h"
 #include "constants.h"
-#include "container_iterate.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"

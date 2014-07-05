@@ -106,6 +106,7 @@ wl_library(wui
     watchwindow.h
   USES_SDL
   DEPENDS
+    base_deprecated
     base_exceptions
     base_geometry
     base_i18n

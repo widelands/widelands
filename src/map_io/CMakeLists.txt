@@ -84,6 +84,7 @@ wl_library(map_io
     widelands_map_version_data_packet.h
   USES_SDL_IMAGE
   DEPENDS
+    base_deprecated
     base_exceptions
     base_log
     base_macros

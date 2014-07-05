@@ -35,6 +35,7 @@ wl_library(ui_fsmenu
     singleplayer.cc
     singleplayer.h
   DEPENDS
+    base_deprecated
     base_exceptions
     base_i18n
     base_log

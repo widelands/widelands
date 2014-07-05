@@ -17,4 +17,4 @@
  *
  */
 
-// Dummy file as CMake cannot deal with header only libraries.
+// Dummy file as cmake cannot handle header only libraries :(.

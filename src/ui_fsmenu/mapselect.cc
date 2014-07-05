@@ -23,10 +23,10 @@
 
 #include <boost/format.hpp>
 
+#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "container_iterate.h"
 #include "gamecontroller.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"

@@ -25,10 +25,10 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
+#include "base/deprecated.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
-#include "container_iterate.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"

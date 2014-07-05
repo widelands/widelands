@@ -168,6 +168,7 @@ wl_library(logic
   USES_SDL
   DEPENDS
     ai
+    base_deprecated
     base_exceptions
     base_geometry
     base_i18n

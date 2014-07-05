@@ -21,8 +21,8 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/deprecated.h"
 #include "base/log.h"
-#include "container_iterate.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"

@@ -315,7 +315,6 @@ wl_library(widelands_ball_of_mud
     chat.cc
     chat.h
     constants.h
-    container_iterate.h
     gamecontroller.h
     helper.cc
     helper.h

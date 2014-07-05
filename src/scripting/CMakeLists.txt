@@ -38,6 +38,7 @@ wl_library(scripting
     scripting.h
   USES_BOOST_REGEX
   DEPENDS
+    base_deprecated
     base_exceptions
     base_i18n
     base_log

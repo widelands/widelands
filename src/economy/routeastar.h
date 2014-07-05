@@ -20,7 +20,7 @@
 #ifndef ECONOMY_ROUTEASTAR_H
 #define ECONOMY_ROUTEASTAR_H
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
 #include "economy/itransport_cost_calculator.h"
 #include "economy/routing_node.h"
 

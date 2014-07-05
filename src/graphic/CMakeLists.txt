@@ -104,6 +104,7 @@ wl_library(graphic
   USES_SDL_IMAGE
   USES_SDL_TTF
   DEPENDS
+    base_deprecated
     base_exceptions
     base_geometry
     base_i18n

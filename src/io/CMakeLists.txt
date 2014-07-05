@@ -37,6 +37,7 @@ wl_library(io_filesystem
     filesystem/zip_filesystem.cc
     filesystem/zip_filesystem.h
   DEPENDS
+    base_deprecated
     base_exceptions
     base_log
     base_macros
@@ -44,7 +45,6 @@ wl_library(io_filesystem
     io_fileread
     io_stream
     third_party_minizip
-    widelands_ball_of_mud
 )
 
 

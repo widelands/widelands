@@ -20,8 +20,8 @@
 #ifndef GAME_MESSAGE_MENU_H
 #define GAME_MESSAGE_MENU_H
 
+#include "base/deprecated.h"
 #include "base/i18n.h"
-#include "container_iterate.h"
 #include "logic/message_queue.h"
 #include "ref_cast.h"
 #include "ui_basic/button.h"

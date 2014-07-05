@@ -23,9 +23,9 @@
 
 #include <boost/bind.hpp>
 
+#include "base/deprecated.h"
 #include "base/log.h"
 #include "constants.h"
-#include "container_iterate.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"

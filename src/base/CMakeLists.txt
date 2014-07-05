@@ -45,3 +45,11 @@ wl_library(base_md5
   DEPENDS
     base_macros
 )
+
+# TODO(sirver): this library should be deleted.
+wl_library(base_deprecated
+  SRCS
+    deprecated.h
+    deprecated.cc
+  DEPENDS
+)

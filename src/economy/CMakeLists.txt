@@ -41,15 +41,15 @@ wl_library(economy
     wares_queue.cc
     wares_queue.h
   DEPENDS
+    base_deprecated
     base_exceptions
     base_log
+    base_macros
     io_fileread
     logic
     logic_widelands_geometry
     map_io
     ui_basic
-    base_macros
-    widelands_ball_of_mud
     wui
 )
 add_subdirectory(test)

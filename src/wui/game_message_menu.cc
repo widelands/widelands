@@ -21,7 +21,7 @@
 
 #include <boost/bind.hpp>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
 #include "graphic/graphic.h"
 #include "logic/instances.h"
 #include "logic/message_queue.h"
