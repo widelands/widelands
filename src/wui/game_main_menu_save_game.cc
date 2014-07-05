@@ -22,6 +22,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/time_string.h"
 #include "constants.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
@@ -32,7 +33,6 @@
 #include "logic/game_controller.h"
 #include "logic/playersmanager.h"
 #include "profile/profile.h"
-#include "timestring.h"
 #include "wui/interactive_gamebase.h"
 
 using boost::format;

@@ -9,12 +9,13 @@ wl_library(map_io_map_loader
     base_exceptions
     base_i18n
     base_log
+    base_macros
+    base_scoped_timer
     io_fileread
     io_filesystem
     logic
     map_io
     scripting
-    base_macros
     widelands_ball_of_mud
 )
 
@@ -88,6 +89,7 @@ wl_library(map_io
     base_exceptions
     base_log
     base_macros
+    base_scoped_timer
     build_info
     economy
     graphic

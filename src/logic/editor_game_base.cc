@@ -24,6 +24,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -44,7 +45,6 @@
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
-#include "scoped_timer.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"

@@ -321,12 +321,8 @@ wl_library(widelands_ball_of_mud
     interval.h
     machdep.h
     ref_cast.h
-    scoped_timer.cc
-    scoped_timer.h
     text_layout.cc
     text_layout.h
-    timestring.cc
-    timestring.h
     wlapplication.cc
     wlapplication.h
   USES_SDL
@@ -336,6 +332,7 @@ wl_library(widelands_ball_of_mud
     base_i18n
     base_log
     base_macros
+    base_time_string
     build_info
     editor
     graphic

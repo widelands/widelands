@@ -17,7 +17,7 @@
  *
  */
 
-#include "scoped_timer.h"
+#include "base/scoped_timer.h"
 
 #include <SDL.h>
 #include <boost/format.hpp>

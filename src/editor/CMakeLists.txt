@@ -88,6 +88,7 @@ wl_library(editor
     base_exceptions
     base_i18n
     base_macros
+    base_scoped_timer
     graphic
     graphic_image
     graphic_surface

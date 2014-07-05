@@ -17,7 +17,7 @@
  *
  */
 
-#include "timestring.h"
+#include "base/time_string.h"
 
 #include <cassert>
 #include <ctime>
@@ -92,4 +92,3 @@ char * gametimestring(uint32_t gametime)
 	gamestringbuffer[0] = '0' + (time /= 10);
 	return gamestringbuffer;
 }
-

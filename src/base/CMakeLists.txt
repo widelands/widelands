@@ -53,3 +53,18 @@ wl_library(base_deprecated
     deprecated.cc
   DEPENDS
 )
+
+wl_library(base_scoped_timer
+  SRCS
+    scoped_timer.h
+    scoped_timer.cc
+  USES_SDL
+  DEPENDS
+    base_log
+)
+
+wl_library(base_time_string
+  SRCS
+    time_string.h
+    time_string.cc
+)

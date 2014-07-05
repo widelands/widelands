@@ -22,12 +22,12 @@
 #include <boost/bind.hpp>
 
 #include "base/deprecated.h"
+#include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "logic/instances.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "timestring.h"
 #include "wui/interactive_player.h"
 
 using Widelands::Message;

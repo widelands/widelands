@@ -41,6 +41,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/time_string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -67,7 +68,6 @@
 #include "network/nethost.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "timestring.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"

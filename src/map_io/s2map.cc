@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "constants.h"
 #include "io/fileread.h"
@@ -38,7 +39,6 @@
 #include "logic/world/world.h"
 #include "map_io/map_loader.h"
 #include "map_io/one_world_legacy_lookup_table.h"
-#include "scoped_timer.h"
 #include "scripting/scripting.h"
 
 using std::cerr;

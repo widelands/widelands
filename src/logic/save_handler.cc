@@ -23,12 +23,12 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
 #include "profile/profile.h"
-#include "scoped_timer.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 

@@ -40,6 +40,7 @@ wl_library(ui_fsmenu
     base_i18n
     base_log
     base_macros
+    base_time_string
     build_info
     game_io
     graphic

@@ -24,6 +24,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "graphic/graphic.h"
@@ -31,7 +32,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/replay.h"
-#include "timestring.h"
 #include "ui_basic/messagebox.h"
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay(Widelands::Game & g) :
