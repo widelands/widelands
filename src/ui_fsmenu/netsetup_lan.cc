@@ -158,9 +158,9 @@ bool Fullscreen_Menu_NetSetupLAN::get_host_address
 
 	if (hostent * const he = gethostbyname(host.c_str())) {
 		addr = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		port = htons(WIDELANDS_PORT);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 		return true;
 	} else
 		return false;

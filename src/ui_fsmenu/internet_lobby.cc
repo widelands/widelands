@@ -421,9 +421,9 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 		IPaddress peer;
 		if (hostent * const he = gethostbyname(ip.c_str())) {
 			peer.host = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 			peer.port = htons(WIDELANDS_PORT);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 		} else {
 			// Actually the game is not done, but that way we are again listed as in the lobby
 			InternetGaming::ref().set_game_done();

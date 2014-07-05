@@ -223,9 +223,9 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
-GCC_DIAG_ON ("-Wold-style-cast")
+DIAG_ON ("-Wold-style-cast")
 	}
 
 	/* Information about the video capabilities. */

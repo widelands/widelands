@@ -50,7 +50,7 @@ LAN_Base::LAN_Base ()
 	for (int32_t i = 0; ifnames[i].if_index; ++i) {
 		strncpy (ifr.ifr_name, ifnames[i].if_name, IFNAMSIZ);
 
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		if (ioctl(sock, SIOCGIFFLAGS, &ifr) < 0)
 			continue;
 
@@ -59,7 +59,7 @@ GCC_DIAG_OFF("-Wold-style-cast")
 
 		if (ioctl(sock, SIOCGIFBRDADDR, &ifr) < 0)
 			continue;
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 
 		broadcast_addresses.push_back
 			(reinterpret_cast<sockaddr_in *>(&ifr.ifr_broadaddr)
@@ -83,11 +83,11 @@ void LAN_Base::bind (uint16_t port)
 {
 	sockaddr_in addr;
 
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 	addr.sin_family      = AF_INET;
 	addr.sin_addr.s_addr = INADDR_ANY;
 	addr.sin_port        = htons(port);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 
 	::bind (sock, reinterpret_cast<sockaddr *>(&addr), sizeof(addr));
 }
@@ -97,10 +97,10 @@ bool LAN_Base::avail ()
 	fd_set fds;
 	timeval tv;
 
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 	FD_ZERO(&fds);
 	FD_SET(sock, &fds);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 
 	tv.tv_sec  = 0;
 	tv.tv_usec = 0;
@@ -141,9 +141,9 @@ void LAN_Base::broadcast
 		sockaddr_in addr;
 		addr.sin_family      = AF_INET;
 		addr.sin_addr.s_addr = *i.current;
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		addr.sin_port        = htons(port);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 
 		sendto
 			(sock,
@@ -261,10 +261,10 @@ void LAN_Game_Finder::run ()
 		for (wl_const_range<std::list<Net_Open_Game *> > i(opengames);; ++i)
 			if (i.empty()) {
 				opengames.push_back (new Net_Open_Game);
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 				opengames.back()->address = addr.sin_addr.s_addr;
 				opengames.back()->port    = htons(WIDELANDS_PORT);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 				opengames.back()->info    = info;
 				callback (GameOpened, opengames.back(), userdata);
 				break;
