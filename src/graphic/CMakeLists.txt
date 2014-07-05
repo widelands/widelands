@@ -121,6 +121,7 @@ wl_library(graphic
     io_stream
     logic
     profile
+    random
     scripting
     sound
     ui_basic

@@ -29,9 +29,9 @@
 #include <unistd.h>
 #endif
 
-#include "sound/fxset.h"
 #include "logic/widelands_geometry.h"
-#include "random.h"
+#include "random/random.h"
+#include "sound/fxset.h"
 
 namespace Widelands {class Editor_Game_Base;}
 struct Songset;

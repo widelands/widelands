@@ -97,6 +97,7 @@ wl_library(editor
     map_io
     map_io_map_loader
     profile
+    random
     scripting
     ui_basic
     ui_fsmenu

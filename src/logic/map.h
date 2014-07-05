@@ -36,7 +36,7 @@
 #include "logic/objective.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "random.h"
+#include "random/random.h"
 
 class FileSystem;
 class Image;

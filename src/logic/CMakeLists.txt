@@ -219,6 +219,7 @@ wl_library(logic
     map_io_map_loader
     network
     profile
+    random
     scripting
     sound
     ui_basic

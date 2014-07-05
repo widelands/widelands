@@ -19,6 +19,7 @@ wl_library(sound
     logic
     logic_widelands_geometry
     profile
+    random
     widelands_ball_of_mud
     wui
 )

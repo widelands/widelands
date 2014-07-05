@@ -299,6 +299,7 @@ add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
 add_subdirectory(profile)
+add_subdirectory(random)
 add_subdirectory(scripting)
 add_subdirectory(sound)
 add_subdirectory(third_party)
@@ -319,8 +320,6 @@ wl_library(widelands_ball_of_mud
     helper.h
     interval.h
     machdep.h
-    random.cc
-    random.h
     ref_cast.h
     scoped_timer.cc
     scoped_timer.h
@@ -343,7 +342,6 @@ wl_library(widelands_ball_of_mud
     graphic_color
     io_dedicated_log
     io_filesystem
-    io_stream
     logic
     logic_game_controller
     logic_game_settings

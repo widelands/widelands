@@ -30,7 +30,7 @@
 #include "graphic/render/vertex.h"
 #include "graphic/texture.h"
 #include "logic/roadtype.h"
-#include "random.h"
+#include "random/random.h"
 #include "wui/mapviewpixelconstants.h"
 
 ///Must be a power of two
