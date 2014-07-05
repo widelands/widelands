@@ -35,8 +35,8 @@ wl_test(test_richtext_renderer
     graphic_surface
     graphic_text
     graphic_text_test_render
+    helper
     io_fileread
     io_filesystem
     io_stream
-    widelands_ball_of_mud
 )

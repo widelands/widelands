@@ -127,6 +127,7 @@ wl_library(graphic
     graphic_image_io
     graphic_surface
     graphic_text
+    helper
     io_fileread
     io_filesystem
     io_stream
@@ -136,7 +137,6 @@ wl_library(graphic
     scripting
     sound
     ui_basic
-    widelands_ball_of_mud
     wui
     wui_text_layout
 )

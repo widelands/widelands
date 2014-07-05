@@ -313,8 +313,6 @@ wl_library(widelands_ball_of_mud
   SRCS
     chat.cc
     chat.h
-    helper.cc
-    helper.h
     interval.h
     machdep.h
     wlapplication.cc
@@ -330,6 +328,7 @@ wl_library(widelands_ball_of_mud
     build_info
     editor
     graphic
+    helper
     io_dedicated_log
     io_filesystem
     logic
@@ -344,6 +343,17 @@ wl_library(widelands_ball_of_mud
     ui_fsmenu
     wui
 )
+
+# TODO(sirver): Split into libs with useful names.
+wl_library(helper
+  SRCS
+    helper.cc
+    helper.h
+  USES_SDL
+  DEPENDS
+    base_exceptions
+)
+
 
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
