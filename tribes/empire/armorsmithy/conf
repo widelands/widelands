@@ -67,7 +67,6 @@ call=produce_helm
 call=produce_armor
 call=produce_chain_armor
 call=produce_plate_armor
-sleep=20000
 return=skipped
 
 [unoccupied]
