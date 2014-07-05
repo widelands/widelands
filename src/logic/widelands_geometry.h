@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_GEOMETRY_H
-#define WIDELANDS_GEOMETRY_H
+#ifndef WL_LOGIC_WIDELANDS_GEOMETRY_H
+#define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
 #include <cmath>
 #include <tuple>
@@ -167,4 +167,4 @@ struct Node_and_Triangle {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H

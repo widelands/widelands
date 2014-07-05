@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef NETWORK_PROTOCOL_H
-#define NETWORK_PROTOCOL_H
+#ifndef WL_NETWORK_NETWORK_PROTOCOL_H
+#define WL_NETWORK_NETWORK_PROTOCOL_H
 
 /// How many bytes will (maximal) be send as file part
 #define NETFILEPARTSIZE 511
@@ -462,4 +462,4 @@ enum {
 	NETCMD_METASERVER_PING = 64
 };
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETWORK_PROTOCOL_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef REPLAY_GAME_CONTROLLER_H
-#define REPLAY_GAME_CONTROLLER_H
+#ifndef WL_LOGIC_REPLAY_GAME_CONTROLLER_H
+#define WL_LOGIC_REPLAY_GAME_CONTROLLER_H
 
 #include <memory>
 
@@ -59,4 +59,4 @@ private:
 	bool m_paused;
 };
 
-#endif
+#endif  // end of include guard: WL_LOGIC_REPLAY_GAME_CONTROLLER_H

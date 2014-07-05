@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BASE_TIME_STRING_H
-#define BASE_TIME_STRING_H
+#ifndef WL_BASE_TIME_STRING_H
+#define WL_BASE_TIME_STRING_H
 
 #include <stdint.h>
 
@@ -32,4 +32,4 @@ char * timestring();
 /// 999 hours, it wraps around
 char * gametimestring(uint32_t gametime);
 
-#endif
+#endif  // end of include guard: WL_BASE_TIME_STRING_H

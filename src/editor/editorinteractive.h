@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITORINTERACTIVE_H
-#define EDITORINTERACTIVE_H
+#ifndef WL_EDITOR_EDITORINTERACTIVE_H
+#define WL_EDITOR_EDITORINTERACTIVE_H
 
 #include "editor/tools/editor_history.h"
 #include "editor/tools/editor_increase_height_tool.h"
@@ -162,4 +162,4 @@ private:
 	UI::Button m_redo;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

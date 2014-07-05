@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WUI_PLOT_AREA_H
-#define WUI_PLOT_AREA_H
+#ifndef WL_WUI_PLOT_AREA_H
+#define WL_WUI_PLOT_AREA_H
 
 #include <vector>
 
@@ -174,4 +174,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_PLOT_AREA_H

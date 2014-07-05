@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_MAIN_MENU_H
-#define GAME_MAIN_MENU_H
+#ifndef WL_WUI_GAME_MAIN_MENU_H
+#define WL_WUI_GAME_MAIN_MENU_H
 
 #include "wui/interactive_player.h"
 #include "ui_basic/button.h"
@@ -71,4 +71,4 @@ private:
 	}
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_H

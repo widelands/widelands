@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ECONOMY_FLEET_H
-#define ECONOMY_FLEET_H
+#ifndef WL_ECONOMY_FLEET_H
+#define WL_ECONOMY_FLEET_H
 
 #include <boost/shared_ptr.hpp>
 
@@ -138,4 +138,4 @@ public:
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_FLEET_H

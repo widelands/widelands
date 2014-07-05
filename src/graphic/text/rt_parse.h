@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_PARSER_H
-#define RT_PARSER_H
+#ifndef WL_GRAPHIC_TEXT_RT_PARSE_H
+#define WL_GRAPHIC_TEXT_RT_PARSE_H
 
 #include <map>
 #include <set>
@@ -88,4 +88,4 @@ public:
 IParser * setup_parser();
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_PARSE_H

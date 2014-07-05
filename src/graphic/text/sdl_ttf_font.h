@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SDL_TTF_FONT_H
-#define SDL_TTF_FONT_H
+#ifndef WL_GRAPHIC_TEXT_SDL_TTF_FONT_H
+#define WL_GRAPHIC_TEXT_SDL_TTF_FONT_H
 
 #include <string>
 
@@ -32,4 +32,4 @@ RT::IFontLoader * ttf_fontloader_from_filesystem(FileSystem*);
 }
 
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXT_SDL_TTF_FONT_H

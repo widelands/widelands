@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DEPRECATED_H
-#define DEPRECATED_H
+#ifndef WL_BASE_DEPRECATED_H
+#define WL_BASE_DEPRECATED_H
 
 // Code that is still used all over the place, but should not be used anymore.
 
@@ -97,4 +97,4 @@ template<typename Derived, typename Base> Derived & ref_cast(Base & base) {
 }
 
 
-#endif
+#endif  // end of include guard: WL_BASE_DEPRECATED_H

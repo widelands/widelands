@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOUND_HANDLER_H
-#define SOUND_HANDLER_H
+#ifndef WL_SOUND_SOUND_HANDLER_H
+#define WL_SOUND_SOUND_HANDLER_H
 
 #include <cstring>
 #include <map>
@@ -293,4 +293,4 @@ protected:
 	SDL_mutex * fx_lock_;
 };
 
-#endif
+#endif  // end of include guard: WL_SOUND_SOUND_HANDLER_H

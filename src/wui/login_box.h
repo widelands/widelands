@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LOGIN_BOX_H
-#define LOGIN_BOX_H
+#ifndef WL_WUI_LOGIN_BOX_H
+#define WL_WUI_LOGIN_BOX_H
 
 #include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
@@ -50,4 +50,4 @@ private:
 	UI::Multiline_Textarea * pwd_warning;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_LOGIN_BOX_H

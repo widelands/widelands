@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TRANSFER_H
-#define TRANSFER_H
+#ifndef WL_ECONOMY_TRANSFER_H
+#define WL_ECONOMY_TRANSFER_H
 
 #include "economy/route.h"
 
@@ -86,4 +86,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_TRANSFER_H

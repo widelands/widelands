@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LOGIC_FINDBOB_H
-#define LOGIC_FINDBOB_H
+#ifndef WL_LOGIC_FINDBOB_H
+#define WL_LOGIC_FINDBOB_H
 
 #include "logic/map.h"
 
@@ -54,4 +54,4 @@ struct FindBobShip : FindBob {
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_FINDBOB_H

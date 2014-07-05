@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TERRAIN_SDL_H
-#define TERRAIN_SDL_H
+#ifndef WL_GRAPHIC_RENDER_TERRAIN_SDL_H
+#define WL_GRAPHIC_RENDER_TERRAIN_SDL_H
 
 #include <cassert>
 
@@ -667,4 +667,4 @@ template<typename T> static void draw_field_int
 	// FIXME: similar textures may not need dithering
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_TERRAIN_SDL_H

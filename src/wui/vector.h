@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef WL_WUI_VECTOR_H
+#define WL_WUI_VECTOR_H
 
 #include <cmath>
 
@@ -51,4 +51,4 @@ struct Vector {
 	float x, y, z;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_VECTOR_H

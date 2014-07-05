@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_BUTTON_H
-#define UI_BUTTON_H
+#ifndef WL_UI_BASIC_BUTTON_H
+#define WL_UI_BASIC_BUTTON_H
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
@@ -114,4 +114,4 @@ protected:
 
 } // namespace UI
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_BUTTON_H

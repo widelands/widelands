@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SHIP_H
-#define SHIP_H
+#ifndef WL_LOGIC_SHIP_H
+#define WL_LOGIC_SHIP_H
 
 #include <list>
 #include <memory>
@@ -261,4 +261,4 @@ public:
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_SHIP_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CRITTER_BOB_PROGRAM_H
-#define CRITTER_BOB_PROGRAM_H
+#ifndef WL_LOGIC_CRITTER_BOB_PROGRAM_H
+#define WL_LOGIC_CRITTER_BOB_PROGRAM_H
 
 #include "logic/bob.h"
 
@@ -62,4 +62,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CRITTER_BOB_PROGRAM_H

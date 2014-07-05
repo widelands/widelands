@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SONGSET_H
-#define SONGSET_H
+#ifndef WL_SOUND_SONGSET_H
+#define WL_SOUND_SONGSET_H
 
 #include <cstring>
 #include <string>
@@ -75,4 +75,4 @@ protected:
 	SDL_RWops * rwops_;
 };
 
-#endif
+#endif  // end of include guard: WL_SOUND_SONGSET_H

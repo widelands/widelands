@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GL_SURFACE_H
-#define GL_SURFACE_H
+#ifndef WL_GRAPHIC_RENDER_GL_SURFACE_H
+#define WL_GRAPHIC_RENDER_GL_SURFACE_H
 
 #include <memory>
 
@@ -56,4 +56,4 @@ protected:
 	std::unique_ptr<uint8_t[]> m_pixels;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_SURFACE_H

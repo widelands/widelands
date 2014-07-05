@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_PRELOAD_DATA_PACKET_H
-#define GAME_PRELOAD_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_PRELOAD_DATA_PACKET_H
+#define WL_GAME_IO_GAME_PRELOAD_DATA_PACKET_H
 
 #include <cstring>
 #include <string>
@@ -56,4 +56,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_PRELOAD_DATA_PACKET_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LOGIC_CONSTANTS_H
-#define LOGIC_CONSTANTS_H
+#ifndef WL_LOGIC_CONSTANTS_H
+#define WL_LOGIC_CONSTANTS_H
 
 /// Maximum numbers of players in a game. The game logic code reserves 5 bits
 /// for player numbers, so it can keep track of 32 different player numbers, of
@@ -29,4 +29,4 @@
 /// How often are statistics to be sampled.
 #define STATISTICS_SAMPLE_TIME 30000
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CONSTANTS_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_UNIQUE_WINDOW_H
-#define UI_UNIQUE_WINDOW_H
+#ifndef WL_UI_BASIC_UNIQUE_WINDOW_H
+#define WL_UI_BASIC_UNIQUE_WINDOW_H
 
 #include <functional>
 
@@ -81,4 +81,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_UNIQUE_WINDOW_H

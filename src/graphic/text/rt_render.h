@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_RENDER_H
-#define RT_RENDER_H
+#ifndef WL_GRAPHIC_TEXT_RT_RENDER_H
+#define WL_GRAPHIC_TEXT_RT_RENDER_H
 
 #include <set>
 #include <string>
@@ -104,4 +104,4 @@ public:
 IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*, IFontLoader* fl);
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_RENDER_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FLAG_H
-#define FLAG_H
+#ifndef WL_ECONOMY_FLAG_H
+#define WL_ECONOMY_FLAG_H
 
 #include <list>
 #include <vector>
@@ -168,4 +168,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_FLAG_H

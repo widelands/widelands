@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef VERTEX_H
-#define VERTEX_H
+#ifndef WL_GRAPHIC_RENDER_VERTEX_H
+#define WL_GRAPHIC_RENDER_VERTEX_H
 
 #include "base/point.h"
 
@@ -36,4 +36,4 @@ struct Vertex:public Point {
 	int32_t b, tx, ty;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_VERTEX_H

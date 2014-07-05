@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UNIQUE_WINDOW_HANDLER_H
-#define UNIQUE_WINDOW_HANDLER_H
+#ifndef WL_WUI_UNIQUE_WINDOW_HANDLER_H
+#define WL_WUI_UNIQUE_WINDOW_HANDLER_H
 
 #include <functional>
 
@@ -40,4 +40,4 @@ private:
 	std::map<std::string, UI::UniqueWindow::Registry> registries_;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_UNIQUE_WINDOW_HANDLER_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_CALCULATE_STATISTICS_H
-#define CMD_CALCULATE_STATISTICS_H
+#ifndef WL_LOGIC_CMD_CALCULATE_STATISTICS_H
+#define WL_LOGIC_CMD_CALCULATE_STATISTICS_H
 
 #include <string>
 
@@ -44,4 +44,4 @@ struct Cmd_CalculateStatistics : public GameLogicCommand {
 
 
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_CALCULATE_STATISTICS_H

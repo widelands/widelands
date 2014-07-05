@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TRACKPTR_H
-#define TRACKPTR_H
+#ifndef WL_ECONOMY_TRACKPTR_H
+#define WL_ECONOMY_TRACKPTR_H
 
 #include <cassert>
 
@@ -166,4 +166,4 @@ struct TrackPtr : BaseTrackPtr {
 };
 
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_TRACKPTR_H

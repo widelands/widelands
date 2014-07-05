@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef STREAMWRITE_H
-#define STREAMWRITE_H
+#ifndef WL_IO_STREAMWRITE_H
+#define WL_IO_STREAMWRITE_H
 
 #include <cassert>
 #include <cstring>
@@ -92,4 +92,4 @@ public:
 	void Text   (const std::string &       x) {Data(x.c_str(), x.size());}
 };
 
-#endif
+#endif  // end of include guard: WL_IO_STREAMWRITE_H

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GL_UTILS_H
-#define GL_UTILS_H
+#ifndef WL_GRAPHIC_RENDER_GL_UTILS_H
+#define WL_GRAPHIC_RENDER_GL_UTILS_H
 
 #define NO_SDL_GLEXT
 
@@ -37,4 +37,4 @@ GLenum _handle_glerror(const char * file, unsigned int line);
  */
 #define handle_glerror() _handle_glerror(__FILE__, __LINE__)
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_UTILS_H

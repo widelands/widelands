@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GL_SURFACE_SCREEN_H
-#define GL_SURFACE_SCREEN_H
+#ifndef WL_GRAPHIC_RENDER_GL_SURFACE_SCREEN_H
+#define WL_GRAPHIC_RENDER_GL_SURFACE_SCREEN_H
 
 #include "graphic/render/gl_surface.h"
 
@@ -39,4 +39,4 @@ private:
 	void swap_rows();
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_SURFACE_SCREEN_H

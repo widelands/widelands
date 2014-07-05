@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ECONOMY_PORTDOCK_H
-#define ECONOMY_PORTDOCK_H
+#ifndef WL_ECONOMY_PORTDOCK_H
+#define WL_ECONOMY_PORTDOCK_H
 
 #include <memory>
 
@@ -159,4 +159,4 @@ public:
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_PORTDOCK_H

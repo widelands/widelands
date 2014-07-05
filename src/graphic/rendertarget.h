@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RENDERTARGET_H
-#define RENDERTARGET_H
+#ifndef WL_GRAPHIC_RENDERTARGET_H
+#define WL_GRAPHIC_RENDERTARGET_H
 
 #include <vector>
 
@@ -90,4 +90,4 @@ protected:
 	Point m_offset;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDERTARGET_H

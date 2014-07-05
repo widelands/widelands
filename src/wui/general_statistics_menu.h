@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GENERAL_STATISTICS_MENU_H
-#define GENERAL_STATISTICS_MENU_H
+#ifndef WL_WUI_GENERAL_STATISTICS_MENU_H
+#define WL_WUI_GENERAL_STATISTICS_MENU_H
 
 #include "logic/constants.h"
 #include "ui_basic/box.h"
@@ -66,4 +66,4 @@ private:
 	void radiogroup_changed(int32_t);
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GENERAL_STATISTICS_MENU_H

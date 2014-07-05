@@ -18,8 +18,8 @@
  */
 
 
-#ifndef UI_LISTSELECT_H
-#define UI_LISTSELECT_H
+#ifndef WL_UI_BASIC_LISTSELECT_H
+#define WL_UI_BASIC_LISTSELECT_H
 
 #include <deque>
 #include <limits>
@@ -252,4 +252,4 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_LISTSELECT_H

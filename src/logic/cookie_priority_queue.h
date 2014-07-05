@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef COOKIE_PRIORITY_QUEUE_H
-#define COOKIE_PRIORITY_QUEUE_H
+#ifndef WL_LOGIC_COOKIE_PRIORITY_QUEUE_H
+#define WL_LOGIC_COOKIE_PRIORITY_QUEUE_H
 
 #include <cassert>
 #include <functional>
@@ -292,4 +292,4 @@ void cookie_priority_queue<_T, _Cw, _CA>::selftest()
 	}
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_COOKIE_PRIORITY_QUEUE_H

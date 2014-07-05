@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_INTERACTIVE_PLAYER_DATA_PACKET_H
-#define GAME_INTERACTIVE_PLAYER_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_INTERACTIVE_PLAYER_DATA_PACKET_H
+#define WL_GAME_IO_GAME_INTERACTIVE_PLAYER_DATA_PACKET_H
 
 #include "game_io/game_data_packet.h"
 
@@ -35,4 +35,4 @@ struct Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_INTERACTIVE_PLAYER_DATA_PACKET_H

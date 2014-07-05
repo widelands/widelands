@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FONT_H
-#define FONT_H
+#ifndef WL_GRAPHIC_FONT_H
+#define WL_GRAPHIC_FONT_H
 
 #include <SDL_ttf.h>
 
@@ -115,4 +115,4 @@ struct TextStyle {
 
 } // namespace UI
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_FONT_H

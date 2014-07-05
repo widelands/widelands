@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MACROS_H
-#define MACROS_H
+#ifndef WL_BASE_MACROS_H
+#define WL_BASE_MACROS_H
 
 // Make sure that Visual C++ does not bark at __attribute__.
 #ifdef _MSC_VER
@@ -74,4 +74,4 @@ dynamic_cast<type *>(source)
 #define is_a(type, source) \
 (dynamic_cast<const type *>(source) != nullptr)
 
-#endif
+#endif  // end of include guard: WL_BASE_MACROS_H

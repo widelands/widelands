@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_GEOMETRY_IO_H
-#define WIDELANDS_GEOMETRY_IO_H
+#ifndef WL_LOGIC_WIDELANDS_GEOMETRY_IO_H
+#define WL_LOGIC_WIDELANDS_GEOMETRY_IO_H
 
 #include "io/fileread.h"
 #include "logic/widelands.h"
@@ -110,4 +110,4 @@ void WriteArea48(StreamWrite* wr, Area<Coords, uint16_t> const area);
 
 }  // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_IO_H

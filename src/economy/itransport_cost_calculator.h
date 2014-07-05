@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ITRANSPORT_COST_CALCULATOR_H
-#define ITRANSPORT_COST_CALCULATOR_H
+#ifndef WL_ECONOMY_ITRANSPORT_COST_CALCULATOR_H
+#define WL_ECONOMY_ITRANSPORT_COST_CALCULATOR_H
 
 #include <boost/noncopyable.hpp>
 
@@ -41,4 +41,4 @@ struct ITransportCostCalculator : boost::noncopyable {
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_ITRANSPORT_COST_CALCULATOR_H

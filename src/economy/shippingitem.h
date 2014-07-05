@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ECONOMY_SHIPPINGITEM_H
-#define ECONOMY_SHIPPINGITEM_H
+#ifndef WL_ECONOMY_SHIPPINGITEM_H
+#define WL_ECONOMY_SHIPPINGITEM_H
 
 #include "logic/game.h"
 #include "logic/instances.h"
@@ -86,4 +86,4 @@ private:
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_SHIPPINGITEM_H

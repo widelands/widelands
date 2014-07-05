@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IMAGE_LOADER_IMPL_H
-#define IMAGE_LOADER_IMPL_H
+#ifndef WL_GRAPHIC_IMAGE_LOADER_IMPL_H
+#define WL_GRAPHIC_IMAGE_LOADER_IMPL_H
 
 #include <string>
 
@@ -32,4 +32,4 @@ public:
 };
 
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_IMAGE_LOADER_IMPL_H

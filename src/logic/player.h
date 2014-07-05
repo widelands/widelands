@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef WL_LOGIC_PLAYER_H
+#define WL_LOGIC_PLAYER_H
 
 #include "graphic/color.h"
 #include "logic/building.h"
@@ -601,4 +601,4 @@ void find_former_buildings
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PLAYER_H

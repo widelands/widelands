@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RICHTEXT_H
-#define RICHTEXT_H
+#ifndef WL_GRAPHIC_RICHTEXT_H
+#define WL_GRAPHIC_RICHTEXT_H
 
 #include <limits>
 #include <memory>
@@ -59,4 +59,4 @@ private:
 
 } // namespace UI
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RICHTEXT_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WUI_PORTDOCKWARES_DISPLAY_H
-#define WUI_PORTDOCKWARES_DISPLAY_H
+#ifndef WL_WUI_PORTDOCKWARESDISPLAY_H
+#define WL_WUI_PORTDOCKWARESDISPLAY_H
 
 #include "wui/interactive_gamebase.h"
 #include "ui_basic/box.h"
@@ -36,4 +36,4 @@ UI::Box * create_portdock_expedition_display
 	(UI::Panel * parent, Widelands::Warehouse & wh, Interactive_GameBase &);
 
 
-#endif
+#endif  // end of include guard: WL_WUI_PORTDOCKWARESDISPLAY_H

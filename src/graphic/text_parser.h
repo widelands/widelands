@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TEXT_PARSER_H
-#define TEXT_PARSER_H
+#ifndef WL_GRAPHIC_TEXT_PARSER_H
+#define WL_GRAPHIC_TEXT_PARSER_H
 
 #include <string>
 #include <vector>
@@ -154,4 +154,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXT_PARSER_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PATHFIELD_H
-#define PATHFIELD_H
+#ifndef WL_LOGIC_PATHFIELD_H
+#define WL_LOGIC_PATHFIELD_H
 
 #include <vector>
 #include <memory>
@@ -88,4 +88,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PATHFIELD_H

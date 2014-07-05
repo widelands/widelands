@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_TABLE_H
-#define LUA_TABLE_H
+#ifndef WL_SCRIPTING_LUA_TABLE_H
+#define WL_SCRIPTING_LUA_TABLE_H
 
 #include <memory>
 #include <set>
@@ -211,4 +211,4 @@ template <typename KeyType> uint32_t get_positive_int(const LuaTable& table, con
 	return static_cast<uint32_t>(value);
 }
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_TABLE_H

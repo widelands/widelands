@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_PLAYER_MENU_H
-#define EDITOR_PLAYER_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_PLAYER_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_PLAYER_MENU_H
 
 #include <cstring>
 #include <string>
@@ -67,4 +67,4 @@ private:
 	void make_infrastructure_clicked(uint8_t);
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_PLAYER_MENU_H

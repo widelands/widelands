@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef LOGIC_BACKTRACE_H
-#define LOGIC_BACKTRACE_H
+#ifndef WL_LOGIC_BACKTRACE_H
+#define WL_LOGIC_BACKTRACE_H
 
 #include <string>
 
 std::string get_backtrace();
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BACKTRACE_H

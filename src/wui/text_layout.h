@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TEXT_LAYOUT_H
-#define TEXT_LAYOUT_H
+#ifndef WL_WUI_TEXT_LAYOUT_H
+#define WL_WUI_TEXT_LAYOUT_H
 
 #include <string>
 
@@ -44,4 +44,4 @@ std::string as_waresinfo(const std::string&);
 std::string as_window_title(const std::string&);
 std::string as_game_tip(const std::string&);
 
-#endif
+#endif  // end of include guard: WL_WUI_TEXT_LAYOUT_H

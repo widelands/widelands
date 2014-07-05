@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARELIST_H
-#define WARELIST_H
+#ifndef WL_LOGIC_WARELIST_H
+#define WL_LOGIC_WARELIST_H
 
 #include <cassert>
 #include <vector>
@@ -69,4 +69,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WARELIST_H

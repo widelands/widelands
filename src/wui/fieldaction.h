@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FIELDACTION_H
-#define FIELDACTION_H
+#ifndef WL_WUI_FIELDACTION_H
+#define WL_WUI_FIELDACTION_H
 
 #include "ui_basic/unique_window.h"
 
@@ -36,4 +36,4 @@ void show_field_action
 	 Widelands::Player          * player,
 	 UI::UniqueWindow::Registry * registry);
 
-#endif
+#endif  // end of include guard: WL_WUI_FIELDACTION_H

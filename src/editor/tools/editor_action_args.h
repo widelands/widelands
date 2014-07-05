@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_ACTION_ARGS_H
-#define EDITOR_ACTION_ARGS_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H
+#define WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H
 
 #include <list>
 #include <string>
@@ -56,4 +56,4 @@ struct Editor_Action_Args {
 	uint32_t refcount;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H

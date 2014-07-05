@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_INTRO_H
-#define FULLSCREEN_MENU_INTRO_H
+#ifndef WL_UI_FSMENU_INTRO_H
+#define WL_UI_FSMENU_INTRO_H
 
 #include "ui_fsmenu/base.h"
 #include "ui_basic/textarea.h"
@@ -39,4 +39,4 @@ private:
 	UI::Textarea m_message;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_INTRO_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAP_GEN_H
-#define MAP_GEN_H
+#ifndef WL_LOGIC_WORLD_MAP_GEN_H
+#define WL_LOGIC_WORLD_MAP_GEN_H
 
 #include <map>
 #include <string>
@@ -173,4 +173,4 @@ private:
 
 }  // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORLD_MAP_GEN_H

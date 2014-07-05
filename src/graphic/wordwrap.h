@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WORDWRAP_H
-#define WORDWRAP_H
+#ifndef WL_GRAPHIC_WORDWRAP_H
+#define WL_GRAPHIC_WORDWRAP_H
 
 #include <string>
 
@@ -77,4 +77,4 @@ private:
 
 } // namespace UI
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_WORDWRAP_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TEXTSTREAM_H
-#define TEXTSTREAM_H
+#ifndef WL_GRAPHIC_TEXT_TEXTSTREAM_H
+#define WL_GRAPHIC_TEXT_TEXTSTREAM_H
 
 #include <string>
 
@@ -55,4 +55,4 @@ private:
 };
 
 }
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXT_TEXTSTREAM_H

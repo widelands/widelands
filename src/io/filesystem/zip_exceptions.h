@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ZIP_EXCEPTIONS_H
-#define ZIP_EXCEPTIONS_H
+#ifndef WL_IO_FILESYSTEM_ZIP_EXCEPTIONS_H
+#define WL_IO_FILESYSTEM_ZIP_EXCEPTIONS_H
 
 #include <stdexcept>
 
@@ -48,4 +48,4 @@ struct ZipOperation_error : public std::logic_error {
 	std::string m_zipfilename;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_ZIP_EXCEPTIONS_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERACTIVE_BASE_H
-#define INTERACTIVE_BASE_H
+#ifndef WL_WUI_INTERACTIVE_BASE_H
+#define WL_WUI_INTERACTIVE_BASE_H
 
 #include <memory>
 
@@ -207,4 +207,4 @@ private:
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
     &m_toolbar, name, 0, 0, 34U, 34U, PIC2
 
-#endif
+#endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

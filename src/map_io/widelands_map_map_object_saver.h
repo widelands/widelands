@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_MAP_OBJECT_SAVER_H
-#define WIDELANDS_MAP_MAP_OBJECT_SAVER_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_SAVER_H
+#define WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 
 #include <map>
 #include <string>
@@ -92,4 +92,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_SAVER_H

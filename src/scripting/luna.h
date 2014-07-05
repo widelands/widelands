@@ -26,8 +26,8 @@
  * A lot of new features (e.g. inheritance) were added for Widelands.
  */
 
-#ifndef LUNA_H
-#define LUNA_H
+#ifndef WL_SCRIPTING_LUNA_H
+#define WL_SCRIPTING_LUNA_H
 
 
 #define LUNA_CLASS_HEAD(klass) \
@@ -189,4 +189,4 @@ T ** get_base_user_class(lua_State * const L, int narg) {
 }
 
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUNA_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TRIBEBASICINFO_H
-#define TRIBEBASICINFO_H
+#ifndef WL_LOGIC_TRIBE_BASIC_INFO_H
+#define WL_LOGIC_TRIBE_BASIC_INFO_H
 
 #include <string>
 #include <vector>
@@ -38,4 +38,4 @@ struct TribeBasicInfo {
 	Initializations initializations;
 };
 
-#endif
+#endif  // end of include guard: WL_LOGIC_TRIBE_BASIC_INFO_H

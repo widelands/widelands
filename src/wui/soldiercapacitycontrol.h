@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _SOLDIERCAPACITYCONTROL_H_
-#define _SOLDIERCAPACITYCONTROL_H_
+#ifndef WL_WUI_SOLDIERCAPACITYCONTROL_H
+#define WL_WUI_SOLDIERCAPACITYCONTROL_H
 
 class Interactive_GameBase;
 
@@ -35,4 +35,4 @@ UI::Panel * create_soldier_capacity_control
 	 Interactive_GameBase & igb,
 	 Widelands::Building & building);
 
-#endif
+#endif  // end of include guard: WL_WUI_SOLDIERCAPACITYCONTROL_H

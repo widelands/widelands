@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IDLEWORKERSUPPLY_H
-#define IDLEWORKERSUPPLY_H
+#ifndef WL_ECONOMY_IDLEWORKERSUPPLY_H
+#define WL_ECONOMY_IDLEWORKERSUPPLY_H
 
 #include "economy/supply.h"
 
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_IDLEWORKERSUPPLY_H

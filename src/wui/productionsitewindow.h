@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _PRODUCTIONSITEWINDOW_H_
-#define _PRODUCTIONSITEWINDOW_H_
+#ifndef WL_WUI_PRODUCTIONSITEWINDOW_H
+#define WL_WUI_PRODUCTIONSITEWINDOW_H
 
 #include "wui/buildingwindow.h"
 #include "logic/productionsite.h"
@@ -43,4 +43,4 @@ private:
 	UI::Box * m_worker_caps;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_PRODUCTIONSITEWINDOW_H

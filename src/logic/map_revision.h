@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAP_REVISION_H
-#define MAP_REVISION_H
+#ifndef WL_LOGIC_MAP_REVISION_H
+#define WL_LOGIC_MAP_REVISION_H
 
 #include <cstring>
 #include <ctime>
@@ -49,4 +49,4 @@ struct MapVersion {
 
 
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MAP_REVISION_H

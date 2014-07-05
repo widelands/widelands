@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef QUICKNAVIGATION_H
-#define QUICKNAVIGATION_H
+#ifndef WL_WUI_QUICKNAVIGATION_H
+#define WL_WUI_QUICKNAVIGATION_H
 
 #include <vector>
 
@@ -88,4 +88,4 @@ private:
 	Landmark m_landmarks[10];
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H

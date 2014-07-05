@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PERSISTENCE_H
-#define PERSISTENCE_H
+#ifndef WL_SCRIPTING_PERSISTENCE_H
+#define WL_SCRIPTING_PERSISTENCE_H
 
 #include <string>
 
@@ -51,4 +51,4 @@ void unpersist_object
 	 FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size);
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_PERSISTENCE_H

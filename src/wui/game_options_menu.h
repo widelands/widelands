@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_OPTIONS_MENU_H
-#define GAME_OPTIONS_MENU_H
+#ifndef WL_WUI_GAME_OPTIONS_MENU_H
+#define WL_WUI_GAME_OPTIONS_MENU_H
 
 #include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
@@ -69,4 +69,4 @@ private:
 	void clicked_exit_game();
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_OPTIONS_MENU_H

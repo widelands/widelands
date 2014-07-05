@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef REQUIREMENTS_H
-#define REQUIREMENTS_H
+#ifndef WL_LOGIC_REQUIREMENTS_H
+#define WL_LOGIC_REQUIREMENTS_H
 
 #include <climits>
 #include <map>
@@ -194,4 +194,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_REQUIREMENTS_H

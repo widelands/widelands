@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__ROADTYPE_H
-#define S__ROADTYPE_H
+#ifndef WL_LOGIC_ROADTYPE_H
+#define WL_LOGIC_ROADTYPE_H
 
 namespace Widelands {
 
@@ -46,6 +46,4 @@ enum RoadType {
 
 }
 
-#endif
-
-
+#endif  // end of include guard: WL_LOGIC_ROADTYPE_H

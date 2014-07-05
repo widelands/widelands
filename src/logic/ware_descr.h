@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ITEM_WARE_DESCR_H
-#define ITEM_WARE_DESCR_H
+#ifndef WL_LOGIC_WARE_DESCR_H
+#define WL_LOGIC_WARE_DESCR_H
 
 #include <cstring>
 #include <string>
@@ -95,4 +95,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WARE_DESCR_H

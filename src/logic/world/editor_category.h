@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_CATEGORY_H
-#define EDITOR_CATEGORY_H
+#ifndef WL_LOGIC_WORLD_EDITOR_CATEGORY_H
+#define WL_LOGIC_WORLD_EDITOR_CATEGORY_H
 
 #include <string>
 
@@ -52,4 +52,4 @@ private:
 
 }  // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORLD_EDITOR_CATEGORY_H

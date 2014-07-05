@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SINGLE_PLAYER_GAME_CONTROLLER_H
-#define SINGLE_PLAYER_GAME_CONTROLLER_H
+#ifndef WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H
+#define WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H
 
 #include "ai/computer_player.h"
 #include "logic/game_controller.h"
@@ -54,4 +54,4 @@ private:
 	std::vector<Computer_Player *> m_computerplayers;
 };
 
-#endif
+#endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H

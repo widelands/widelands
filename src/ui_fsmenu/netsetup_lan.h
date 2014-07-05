@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_NETSETUP_LAN_H
-#define FULLSCREEN_MENU_NETSETUP_LAN_H
+#ifndef WL_UI_FSMENU_NETSETUP_LAN_H
+#define WL_UI_FSMENU_NETSETUP_LAN_H
 
 #include <cstring>
 #include <list>
@@ -91,4 +91,4 @@ private:
 	void clicked_lasthost();
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_NETSETUP_LAN_H

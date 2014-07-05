@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PROFILE_H
-#define PROFILE_H
+#ifndef WL_PROFILE_PROFILE_H
+#define WL_PROFILE_PROFILE_H
 
 #include <cstring>
 #include <vector>
@@ -239,4 +239,4 @@ private:
 	int32_t m_error_level;
 };
 
-#endif
+#endif  // end of include guard: WL_PROFILE_PROFILE_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CAMPVIS_H
-#define CAMPVIS_H
+#ifndef WL_LOGIC_CAMPAIGN_VISIBILITY_H
+#define WL_LOGIC_CAMPAIGN_VISIBILITY_H
 
 #include <cstring>
 #include <string>
@@ -36,4 +36,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H

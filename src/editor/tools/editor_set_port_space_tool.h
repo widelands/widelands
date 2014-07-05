@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_SET_PORT_SPACE_TOOL_H
-#define EDITOR_SET_PORT_SPACE_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_SET_PORT_SPACE_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_SET_PORT_SPACE_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 #include "logic/widelands.h"
@@ -70,4 +70,4 @@ public:
 int32_t Editor_Tool_Set_Port_Space_Callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map);
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_PORT_SPACE_TOOL_H

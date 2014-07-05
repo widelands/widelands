@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef NOTIFICATION_H
-#define NOTIFICATION_H
+#ifndef WL_LOGIC_NOTIFICATION_H
+#define WL_LOGIC_NOTIFICATION_H
 
 #include <algorithm>
 #include <vector>
@@ -127,4 +127,4 @@ struct NoteFieldTransformed {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_NOTIFICATION_H

@@ -18,8 +18,8 @@
  */
 
 
-#ifndef SDL_TTF_FONT_IMPL_H
-#define SDL_TTF_FONT_IMPL_H
+#ifndef WL_GRAPHIC_TEXT_SDL_TTF_FONT_IMPL_H
+#define WL_GRAPHIC_TEXT_SDL_TTF_FONT_IMPL_H
 
 #include <string>
 
@@ -52,4 +52,4 @@ private:
 
 
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXT_SDL_TTF_FONT_IMPL_H

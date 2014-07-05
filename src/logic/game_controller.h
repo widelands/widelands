@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAMECONTROLLER_H
-#define GAMECONTROLLER_H
+#ifndef WL_LOGIC_GAME_CONTROLLER_H
+#define WL_LOGIC_GAME_CONTROLLER_H
 
 #include <string>
 
@@ -97,4 +97,4 @@ public:
 	{}
 };
 
-#endif
+#endif  // end of include guard: WL_LOGIC_GAME_CONTROLLER_H

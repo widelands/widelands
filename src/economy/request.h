@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef REQUEST_H
-#define REQUEST_H
+#ifndef WL_ECONOMY_REQUEST_H
+#define WL_ECONOMY_REQUEST_H
 
 #include "economy/trackptr.h"
 #include "logic/requirements.h"
@@ -143,4 +143,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_REQUEST_H

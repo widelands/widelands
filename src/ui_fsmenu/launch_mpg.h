@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_LAUNCHMPG_H
-#define FULLSCREEN_MENU_LAUNCHMPG_H
+#ifndef WL_UI_FSMENU_LAUNCH_MPG_H
+#define WL_UI_FSMENU_LAUNCH_MPG_H
 
 #include <string>
 
@@ -92,4 +92,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG_H

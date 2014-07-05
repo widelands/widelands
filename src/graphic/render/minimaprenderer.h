@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_MINIMAPRENDERER_H
-#define WIDELANDS_MINIMAPRENDERER_H
+#ifndef WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
+#define WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
 
 #include "graphic/rendertarget.h"
 #include <memory>
@@ -52,4 +52,4 @@ public:
 		 const Point& viewpoint, uint32_t flags, StreamWrite* const streamwrite);
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_MINIMAPRENDERER_H

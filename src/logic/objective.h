@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef OBJECTIVE_H
-#define OBJECTIVE_H
+#ifndef WL_LOGIC_OBJECTIVE_H
+#define WL_LOGIC_OBJECTIVE_H
 
 #include <cassert>
 #include <cstring>
@@ -84,4 +84,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_OBJECTIVE_H

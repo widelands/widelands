@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WUI_ITEMWARESDISPLAY_H
-#define WUI_ITEMWARESDISPLAY_H
+#ifndef WL_WUI_ITEMWARESDISPLAY_H
+#define WL_WUI_ITEMWARESDISPLAY_H
 
 #include <vector>
 
@@ -63,4 +63,4 @@ private:
 	std::vector<Item> m_items;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_ITEMWARESDISPLAY_H

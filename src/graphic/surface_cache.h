@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SURFACE_CACHE_H
-#define SURFACE_CACHE_H
+#ifndef WL_GRAPHIC_SURFACE_CACHE_H
+#define WL_GRAPHIC_SURFACE_CACHE_H
 
 #include <string>
 
@@ -58,4 +58,4 @@ public:
 // surface).
 SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes);
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_SURFACE_CACHE_H

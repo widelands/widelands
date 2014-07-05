@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LOGIC_WAREWORKER_H
-#define LOGIC_WAREWORKER_H
+#ifndef WL_LOGIC_WAREWORKER_H
+#define WL_LOGIC_WAREWORKER_H
 
 namespace Widelands {
 
@@ -35,4 +35,4 @@ enum WareWorker {
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WAREWORKER_H

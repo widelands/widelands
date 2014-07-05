@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef NETWORK_H
-#define NETWORK_H
+#ifndef WL_NETWORK_NETWORK_H
+#define WL_NETWORK_NETWORK_H
 
 #include <exception>
 #include <string>
@@ -189,4 +189,4 @@ private:
 	int m_what;
 };
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETWORK_H

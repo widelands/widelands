@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef AI_HINTS_H
-#define AI_HINTS_H
+#ifndef WL_AI_AI_HINTS_H
+#define WL_AI_AI_HINTS_H
 
 #include <stdint.h>
 
@@ -96,4 +96,4 @@ private:
 	uint8_t mines_percent_;
 };
 
-#endif
+#endif  // end of include guard: WL_AI_AI_HINTS_H

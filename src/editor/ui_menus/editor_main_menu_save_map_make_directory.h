@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
-#define EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 
 #include <cstring>
 #include <string>
@@ -48,4 +48,4 @@ private:
 	void edit_changed();
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H

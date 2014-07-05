@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_ERRORS_IMPL_H
-#define RT_ERRORS_IMPL_H
+#ifndef WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
+#define WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
 
 #include "graphic/text/rt_errors.h"
 
@@ -34,4 +34,4 @@ struct SyntaxError_Impl : public SyntaxError {
 };
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H

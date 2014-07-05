@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_COROUTINE_H
-#define LUA_COROUTINE_H
+#ifndef WL_SCRIPTING_LUA_COROUTINE_H
+#define WL_SCRIPTING_LUA_COROUTINE_H
 
 #include <stdint.h>
 
@@ -74,4 +74,4 @@ private:
 	uint32_t m_nargs;
 };
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_COROUTINE_H

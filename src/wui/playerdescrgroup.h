@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PLAYERDESCRGROUP_H
-#define PLAYERDESCRGROUP_H
+#ifndef WL_WUI_PLAYERDESCRGROUP_H
+#define WL_WUI_PLAYERDESCRGROUP_H
 
 #include <map>
 #include <string>
@@ -60,4 +60,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_PLAYERDESCRGROUP_H

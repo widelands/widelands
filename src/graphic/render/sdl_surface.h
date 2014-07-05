@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SDL_SURFACE_H
-#define SDL_SURFACE_H
+#ifndef WL_GRAPHIC_RENDER_SDL_SURFACE_H
+#define WL_GRAPHIC_RENDER_SDL_SURFACE_H
 
 #include "base/rect.h"
 #include "graphic/color.h"
@@ -78,4 +78,4 @@ protected:
 };
 
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_SDL_SURFACE_H

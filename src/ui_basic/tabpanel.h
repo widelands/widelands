@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_TABPANEL_H
-#define UI_TABPANEL_H
+#ifndef WL_UI_BASIC_TABPANEL_H
+#define WL_UI_BASIC_TABPANEL_H
 
 #include <vector>
 
@@ -111,4 +111,4 @@ private:
 };
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_TABPANEL_H

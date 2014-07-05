@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_ERRORS_H
-#define RT_ERRORS_H
+#ifndef WL_GRAPHIC_TEXT_RT_ERRORS_H
+#define WL_GRAPHIC_TEXT_RT_ERRORS_H
 
 #include <exception>
 
@@ -53,4 +53,4 @@ DEF_ERR(WidthTooSmall)
 
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_H
