@@ -772,10 +772,9 @@ world:new_terrain_type{
    default_resource_amount = 2,
    textures = { pics_dir .. "desert/desert4_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 318,
+   humidity = 0.3,
+   fertility = 0.33,
 }
 
 world:new_terrain_type{
@@ -788,10 +787,9 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { pics_dir .. "desert/drysoil_00.png" },
    dither_layer = 30,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 318,
+   humidity = 0.1,
+   fertility = 0.2,
 }
 
 world:new_terrain_type{
@@ -804,10 +802,9 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { pics_dir .. "desert/steppe_00.png" },
    dither_layer = 30,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 318,
+   humidity = 0.45,
+   fertility = 0.7,
 }
 
 world:new_terrain_type{
@@ -820,10 +817,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "desert/meadow_00.png" },
    dither_layer = 40,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 308,
+   humidity = 0.6,
+   fertility = 0.6,
 }
 
 world:new_terrain_type{
@@ -836,10 +832,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/mountainmeadow_00.png" },
    dither_layer = 50,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 313,
+   humidity = 0.3,
+   fertility = 0.3,
 }
 
 world:new_terrain_type{
@@ -852,10 +847,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/highmountainmeadow_00.png" },
    dither_layer = 60,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.2,
+   fertility = 0.2,
 }
 
 world:new_terrain_type{
@@ -868,10 +862,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/mountain1_00.png" },
    dither_layer = 70,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.2,
+   fertility = 0.2,
 }
 
 world:new_terrain_type{
@@ -884,10 +877,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/mountain2_00.png" },
    dither_layer = 70,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.2,
+   fertility = 0.2,
 }
 
 world:new_terrain_type{
@@ -900,10 +892,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/mountain3_00.png" },
    dither_layer = 70,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.2,
+   fertility = 0.2,
 }
 
 world:new_terrain_type{
@@ -916,10 +907,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/mountain4_00.png" },
    dither_layer = 70,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.2,
+   fertility = 0.2,
 }
 
 world:new_terrain_type{
@@ -932,10 +922,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/desert1_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 328,
+   humidity = 0.2,
+   fertility = 0.05,
 }
 
 world:new_terrain_type{
@@ -948,10 +937,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/desert2_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 328,
+   humidity = 0.2,
+   fertility = 0.05,
 }
 
 world:new_terrain_type{
@@ -964,10 +952,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/desert3_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 328,
+   humidity = 0.2,
+   fertility = 0.05,
 }
 
 world:new_terrain_type{
@@ -980,10 +967,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/beach_00.png" },
    dither_layer = 10,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 313,
+   humidity = 0.1,
+   fertility = 0.1,
 }
 
 world:new_terrain_type{
@@ -997,8 +983,7 @@ world:new_terrain_type{
    textures = path.list_directory(pics_dir .. "desert", "wasser_\\d+.png"),
    dither_layer = 0,
    fps = 5,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 308,
+   humidity = 1,
+   fertility = 0.99,
 }
