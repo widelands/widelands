@@ -166,8 +166,7 @@ private:
 	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
-	// NOCOM(#sirver): convert to vector
-	const Image* workarea_pics[static_cast<Workarea_Info::size_type>(6)];
+	std::vector<const Image*> m_workarea_pics;
 
 protected:
 	void toggle_minimap();

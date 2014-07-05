@@ -17,7 +17,6 @@
  *
  */
 
-// NOCOM(#sirver): rename do font_constants?
 #ifndef WL_WUI_TEXT_CONSTANTS_H
 #define WL_WUI_TEXT_CONSTANTS_H
 

@@ -76,37 +76,40 @@ struct InteractiveBaseInternals {
 	{}
 };
 
-Interactive_Base::Interactive_Base
-	(Editor_Game_Base & the_egbase, Section & global_s)
-	:
-	Map_View
-		(nullptr, 0, 0, global_s.get_int("xres", DEFAULT_RESOLUTION_W),
-		 global_s.get_int("yres", DEFAULT_RESOLUTION_H), *this),
-	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
-	m
-		(new InteractiveBaseInternals
-		 (new QuickNavigation(the_egbase, get_w(), get_h()))),
-	m_egbase                      (the_egbase),
+Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global_s)
+   : Map_View(nullptr,
+              0,
+              0,
+              global_s.get_int("xres", DEFAULT_RESOLUTION_W),
+              global_s.get_int("yres", DEFAULT_RESOLUTION_H),
+              *this),
+     m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
+     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
+     m_egbase(the_egbase),
 #ifndef NDEBUG //  not in releases
-	m_display_flags               (dfDebug),
+     m_display_flags(dfDebug),
 #else
-	m_display_flags               (0),
+     m_display_flags(0),
 #endif
-	m_lastframe                   (WLApplication::get()->get_time()),
-	m_frametime                   (0),
-	m_avg_usframetime             (0),
-	m_jobid                       (0),
-	m_road_buildhelp_overlay_jobid(0),
-	m_buildroad                   (nullptr),
-	m_road_build_player           (0),
-	// Initialize chatoveraly before the toolbar so it is below
-	m_chatOverlay                 (new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-	m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
-	m_label_speed_shadow
-		(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
-	m_label_speed
-		(this, get_w(), 1, std::string(), UI::Align_TopRight),
-	unique_window_handler_(new UniqueWindowHandler())
+     m_lastframe(WLApplication::get()->get_time()),
+     m_frametime(0),
+     m_avg_usframetime(0),
+     m_jobid(0),
+     m_road_buildhelp_overlay_jobid(0),
+     m_buildroad(nullptr),
+     m_road_build_player(0),
+     // Initialize chatoveraly before the toolbar so it is below
+     m_chatOverlay(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
+     m_toolbar(this, 0, 0, UI::Box::Horizontal),
+     m_label_speed_shadow(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
+     m_label_speed(this, get_w(), 1, std::string(), UI::Align_TopRight),
+     unique_window_handler_(new UniqueWindowHandler()),
+     // Load workarea images.
+     // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
+		m_workarea_pics
+		{g_gr->images().get("pics/workarea123.png"), g_gr->images().get("pics/workarea23.png"),
+			g_gr->images().get("pics/workarea3.png"), g_gr->images().get("pics/workarea12.png"),
+			g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")}
 {
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
@@ -132,15 +135,6 @@ Interactive_Base::Interactive_Base
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
 	m_sel.pic = g_gr->images().get("pics/fsel.png");
-
-	// Load workarea images.
-	// Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-	workarea_pics[0] = g_gr->images().get("pics/workarea123.png");
-	workarea_pics[1] = g_gr->images().get("pics/workarea23.png");
-	workarea_pics[2] = g_gr->images().get("pics/workarea3.png");
-	workarea_pics[3] = g_gr->images().get("pics/workarea12.png");
-	workarea_pics[4] = g_gr->images().get("pics/workarea2.png");
-	workarea_pics[5] = g_gr->images().get("pics/workarea1.png");
 
 	m_label_speed.set_visible(false);
 	m_label_speed_shadow.set_visible(false);
@@ -286,7 +280,7 @@ OverlayManager::JobId Interactive_Base::show_work_area
 		do
 			overlay_manager.register_overlay
 				(mr.location(),
-					workarea_pics[wa_index],
+					m_workarea_pics[wa_index],
 					0,
 					Point::invalid(),
 					job_id);

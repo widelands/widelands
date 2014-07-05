@@ -265,7 +265,9 @@ void Interactive_Player::think()
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
-			msg_tooltip = (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) % nr_new_messages).str();
+			msg_tooltip =
+			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
+			    nr_new_messages).str();
 		}
 		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
