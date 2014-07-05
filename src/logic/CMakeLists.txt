@@ -148,6 +148,8 @@ wl_library(logic
     requirements.cc
     requirements.h
     roadtype.h
+    save_handler.cc
+    save_handler.h
     ship.cc
     ship.h
     soldier.cc

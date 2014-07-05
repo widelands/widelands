@@ -17,14 +17,13 @@
  *
  */
 
-#include "save_handler.h"
+#include "logic/save_handler.h"
 
 #include <memory>
 
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "chat.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"

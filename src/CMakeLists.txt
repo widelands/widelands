@@ -322,8 +322,6 @@ wl_library(widelands_ball_of_mud
     random.cc
     random.h
     ref_cast.h
-    save_handler.cc
-    save_handler.h
     scoped_timer.cc
     scoped_timer.h
     text_layout.cc
@@ -341,7 +339,6 @@ wl_library(widelands_ball_of_mud
     base_macros
     build_info
     editor
-    game_io
     graphic
     graphic_color
     io_dedicated_log

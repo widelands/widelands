@@ -30,8 +30,8 @@
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
+#include "logic/save_handler.h"
 #include "random.h"
-#include "save_handler.h"
 
 namespace Widelands {
 
