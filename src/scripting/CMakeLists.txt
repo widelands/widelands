@@ -48,6 +48,7 @@ wl_library(scripting
     io_fileread
     io_filesystem
     logic
+    logic_campaign_visibility
     logic_game_controller
     logic_widelands_geometry
     map_io

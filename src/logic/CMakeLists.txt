@@ -39,6 +39,16 @@ wl_library(logic_game_controller
     wui
 )
 
+wl_library(logic_campaign_visibility
+  SRCS
+    campaign_visibility.cc
+    campaign_visibility.h
+  DEPENDS
+    base_exceptions
+    io_filesystem
+    profile
+)
+
 wl_library(logic
   SRCS
     attackable.h

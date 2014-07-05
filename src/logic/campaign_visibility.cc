@@ -17,7 +17,7 @@
  *
  */
 
-#include "campvis.h"
+#include "logic/campaign_visibility.h"
 
 #include <cstdio>
 #include <cstdlib>

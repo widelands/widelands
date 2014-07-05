@@ -24,9 +24,9 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
+#include "logic/campaign_visibility.h"
 #include "logic/game_controller.h"
 #include "logic/objective.h"
 #include "logic/path.h"

@@ -311,8 +311,6 @@ add_subdirectory(wui)
 # library.
 wl_library(widelands_ball_of_mud
   SRCS
-    campvis.cc
-    campvis.h
     chat.cc
     chat.h
     constants.h
