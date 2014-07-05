@@ -45,6 +45,7 @@ wl_library(logic
     cmd_queue.h
     constructionsite.cc
     constructionsite.h
+    cookie_priority_queue.h
     critter_bob.cc
     critter_bob.h
     critter_bob_program.h
@@ -67,6 +68,7 @@ wl_library(logic
     game.h
     game_data_error.cc
     game_data_error.h
+    game_settings.h
     immovable.cc
     immovable.h
     immovable_program.h
@@ -90,8 +92,6 @@ wl_library(logic
     message.h
     message_id.h
     message_queue.h
-    military_data.cc
-    military_data.h
     militarysite.cc
     militarysite.h
     nodecaps.h
@@ -134,6 +134,7 @@ wl_library(logic
     trainingsite.h
     tribe.cc
     tribe.h
+    tribe_basic_info.h
     walkingdir.cc
     walkingdir.h
     ware_descr.cc
@@ -166,12 +167,17 @@ wl_library(logic
   # TODO(sirver): Uses SDL only on WIN32 for a dirty hack.
   USES_SDL
   DEPENDS
+    ai
     base_exceptions
     base_geometry
     base_i18n
     base_log
-    base_port
+    base_macros
+    base_md5
     build_info
+    economy
+    editor
+    game_io
     graphic
     graphic_color
     io_fileread
@@ -183,6 +189,7 @@ wl_library(logic
     map_io_map_loader
     network
     profile
+    scripting
     sound
     ui_basic
     widelands_ball_of_mud

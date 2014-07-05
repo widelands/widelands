@@ -21,6 +21,7 @@
 
 #include <map>
 
+#include "base/macros.h"
 #include "economy/road.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -29,7 +30,6 @@
 #include "logic/player.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 
 namespace Widelands {
 

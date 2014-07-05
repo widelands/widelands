@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "chat.h"
 #include "game_io/game_saver.h"
@@ -29,7 +30,6 @@
 #include "logic/game.h"
 #include "profile/profile.h"
 #include "scoped_timer.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 

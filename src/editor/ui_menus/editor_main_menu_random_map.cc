@@ -26,11 +26,11 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "editor/map_generator.h"
 #include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
-#include "map_generator.h"
 #include "profile/profile.h"
 #include "random.h"
 #include "ui_basic/button.h"

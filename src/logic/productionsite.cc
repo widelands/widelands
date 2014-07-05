@@ -23,12 +23,12 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
-#include "helper.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -39,7 +39,6 @@
 #include "logic/warelist.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 

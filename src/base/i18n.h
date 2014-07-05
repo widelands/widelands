@@ -26,8 +26,8 @@
 
 #include <libintl.h>  // for ngettext.
 
+#include "base/macros.h"
 #include "config.h"
-#include "base/port.h"
 
 ///A macro to make i18n more readable and aid in tagging strings for translation
 #define _(str) i18n::translate(str)

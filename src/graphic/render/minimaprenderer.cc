@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
@@ -33,7 +34,6 @@
 #include "logic/player.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
-#include "upcast.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"

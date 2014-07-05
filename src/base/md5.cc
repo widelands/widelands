@@ -21,11 +21,11 @@
  *
  */
 
-#include "md5.h"
+#include "base/md5.h"
 
 #include <cstdio>
 
-#include "compile_diagnostics.h"
+#include "base/macros.h"
 
 using namespace std;
 

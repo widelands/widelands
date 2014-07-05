@@ -23,8 +23,8 @@
 #include <map>
 
 #include "ai/ai_help_structs.h"
+#include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "computer_player.h"
 
 namespace Widelands {
 struct Road;

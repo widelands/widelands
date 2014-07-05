@@ -47,7 +47,7 @@
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launchMPG.h"
+#include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"

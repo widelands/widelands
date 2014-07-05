@@ -15,6 +15,8 @@ wl_library(ui_basic
     icon.h
     icongrid.cc
     icongrid.h
+    is_printable.cc
+    is_printable.h
     listselect.cc
     listselect.h
     messagebox.cc
@@ -61,6 +63,7 @@ wl_library(ui_basic
     graphic_surface
     io_filesystem
     profile
+    scripting
     sound
     widelands_ball_of_mud
 )

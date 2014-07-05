@@ -20,7 +20,7 @@
 #ifndef SINGLE_PLAYER_GAME_SETTINGS_PROVIDE_H
 #define SINGLE_PLAYER_GAME_SETTINGS_PROVIDE_H
 
-#include "gamesettings.h"
+#include "logic/game_settings.h"
 
 /**
  * The settings provider for normal singleplayer games:

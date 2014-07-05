@@ -20,6 +20,8 @@
 #ifndef CONTAINER_ITERATE_H
 #define CONTAINER_ITERATE_H
 
+// TODO(sirver): move this into a base_deprecated lib.
+
 // Helper structure for representing an iterator range in
 // for loops.
 // Usage:

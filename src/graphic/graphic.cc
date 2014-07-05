@@ -27,9 +27,9 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "compile_diagnostics.h"
 #include "config.h"
 #include "constants.h"
 #include "container_iterate.h"
@@ -49,7 +49,6 @@
 #include "io/streamwrite.h"
 #include "logic/roadtype.h"
 #include "ui_basic/progresswindow.h"
-#include "upcast.h"
 
 using namespace std;
 

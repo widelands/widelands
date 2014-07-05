@@ -20,9 +20,9 @@
 #ifndef S__SUPPLY_H
 #define S__SUPPLY_H
 
+#include "economy/trackptr.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "trackptr.h"
 
 namespace Widelands {
 

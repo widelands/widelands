@@ -32,7 +32,7 @@
 #include <boost/signals2.hpp>
 
 #include "base/log.h"
-#include "base/port.h"
+#include "base/macros.h"
 #include "logic/cmd_queue.h"
 #include "logic/widelands.h"
 #include "ref_cast.h"

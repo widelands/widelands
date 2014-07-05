@@ -25,10 +25,10 @@
 
 #include <stdint.h>
 
+#include "base/macros.h"
 #include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/widelands.h"
-#include "upcast.h"
 
 
 namespace Widelands {

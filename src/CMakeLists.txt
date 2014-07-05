@@ -288,8 +288,11 @@ else()
   )
 endif()
 
+add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(economy)
+add_subdirectory(editor)
+add_subdirectory(game_io)
 add_subdirectory(graphic)
 add_subdirectory(io)
 add_subdirectory(logic)
@@ -300,178 +303,24 @@ add_subdirectory(scripting)
 add_subdirectory(sound)
 add_subdirectory(third_party)
 add_subdirectory(ui_basic)
+add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
 
 # TODO: Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
 # library.
 wl_library(widelands_ball_of_mud
   SRCS
-    TribeBasicInfo.h
-    ai/ai_help_structs.cc
-    ai/ai_help_structs.h
-    ai/ai_hints.cc
-    ai/ai_hints.h
-    ai/defaultai.cc
-    ai/defaultai.h
     campvis.cc
     campvis.h
     chat.cc
     chat.h
-    compile_diagnostics.h
-    computer_player.cc
-    computer_player.h
     constants.h
     container_iterate.h
-    cookie_priority_queue.h
-    economy/cmd_call_economy_balance.cc
-    economy/cmd_call_economy_balance.h
-    economy/economy.cc
-    economy/economy.h
-    economy/economy_data_packet.cc
-    economy/economy_data_packet.h
-    economy/flag.cc
-    economy/flag.h
-    economy/fleet.cc
-    economy/fleet.h
-    economy/idleworkersupply.cc
-    economy/idleworkersupply.h
-    economy/iroute.h
-    economy/itransport_cost_calculator.h
-    economy/portdock.cc
-    economy/portdock.h
-    economy/request.cc
-    economy/request.h
-    economy/road.cc
-    economy/road.h
-    economy/route.cc
-    economy/route.h
-    economy/routeastar.cc
-    economy/routeastar.h
-    economy/router.cc
-    economy/router.h
-    economy/routing_node.h
-    economy/shippingitem.cc
-    economy/shippingitem.h
-    economy/supply.h
-    economy/supply_list.cc
-    economy/supply_list.h
-    economy/transfer.cc
-    economy/transfer.h
-    economy/ware_instance.cc
-    economy/ware_instance.h
-    economy/warehousesupply.h
-    economy/wares_queue.cc
-    economy/wares_queue.h
-    editor/editorinteractive.cc
-    editor/editorinteractive.h
-    editor/tools/editor_action_args.h
-    editor/tools/editor_decrease_height_tool.cc
-    editor/tools/editor_decrease_height_tool.h
-    editor/tools/editor_decrease_resources_tool.cc
-    editor/tools/editor_decrease_resources_tool.h
-    editor/tools/editor_delete_bob_tool.cc
-    editor/tools/editor_delete_bob_tool.h
-    editor/tools/editor_delete_immovable_tool.cc
-    editor/tools/editor_delete_immovable_tool.h
-    editor/tools/editor_draw_tool.cc
-    editor/tools/editor_draw_tool.h
-    editor/tools/editor_history.cc
-    editor/tools/editor_history.h
-    editor/tools/editor_increase_height_tool.cc
-    editor/tools/editor_increase_height_tool.h
-    editor/tools/editor_increase_resources_tool.cc
-    editor/tools/editor_increase_resources_tool.h
-    editor/tools/editor_info_tool.cc
-    editor/tools/editor_info_tool.h
-    editor/tools/editor_make_infrastructure_tool.cc
-    editor/tools/editor_make_infrastructure_tool.h
-    editor/tools/editor_noise_height_tool.cc
-    editor/tools/editor_noise_height_tool.h
-    editor/tools/editor_place_bob_tool.cc
-    editor/tools/editor_place_bob_tool.h
-    editor/tools/editor_place_immovable_tool.cc
-    editor/tools/editor_place_immovable_tool.h
-    editor/tools/editor_set_height_tool.cc
-    editor/tools/editor_set_height_tool.h
-    editor/tools/editor_set_origin_tool.cc
-    editor/tools/editor_set_origin_tool.h
-    editor/tools/editor_set_port_space_tool.cc
-    editor/tools/editor_set_port_space_tool.h
-    editor/tools/editor_set_resources_tool.cc
-    editor/tools/editor_set_resources_tool.h
-    editor/tools/editor_set_starting_pos_tool.cc
-    editor/tools/editor_set_starting_pos_tool.h
-    editor/tools/editor_set_terrain_tool.cc
-    editor/tools/editor_set_terrain_tool.h
-    editor/tools/editor_tool.h
-    editor/tools/editor_tool_action.h
-    editor/tools/multi_select.h
-    editor/ui_menus/categorized_item_selection_menu.h
-    editor/ui_menus/editor_main_menu.cc
-    editor/ui_menus/editor_main_menu.h
-    editor/ui_menus/editor_main_menu_load_map.cc
-    editor/ui_menus/editor_main_menu_load_map.h
-    editor/ui_menus/editor_main_menu_map_options.cc
-    editor/ui_menus/editor_main_menu_map_options.h
-    editor/ui_menus/editor_main_menu_new_map.cc
-    editor/ui_menus/editor_main_menu_new_map.h
-    editor/ui_menus/editor_main_menu_random_map.cc
-    editor/ui_menus/editor_main_menu_random_map.h
-    editor/ui_menus/editor_main_menu_save_map.cc
-    editor/ui_menus/editor_main_menu_save_map.h
-    editor/ui_menus/editor_main_menu_save_map_make_directory.cc
-    editor/ui_menus/editor_main_menu_save_map_make_directory.h
-    editor/ui_menus/editor_player_menu.cc
-    editor/ui_menus/editor_player_menu.h
-    editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc
-    editor/ui_menus/editor_player_menu_allowed_buildings_menu.h
-    editor/ui_menus/editor_tool_change_height_options_menu.cc
-    editor/ui_menus/editor_tool_change_height_options_menu.h
-    editor/ui_menus/editor_tool_change_resources_options_menu.cc
-    editor/ui_menus/editor_tool_change_resources_options_menu.h
-    editor/ui_menus/editor_tool_menu.cc
-    editor/ui_menus/editor_tool_menu.h
-    editor/ui_menus/editor_tool_noise_height_options_menu.cc
-    editor/ui_menus/editor_tool_noise_height_options_menu.h
-    editor/ui_menus/editor_tool_options_menu.cc
-    editor/ui_menus/editor_tool_options_menu.h
-    editor/ui_menus/editor_tool_place_bob_options_menu.cc
-    editor/ui_menus/editor_tool_place_bob_options_menu.h
-    editor/ui_menus/editor_tool_place_immovable_options_menu.cc
-    editor/ui_menus/editor_tool_place_immovable_options_menu.h
-    editor/ui_menus/editor_tool_set_terrain_options_menu.cc
-    editor/ui_menus/editor_tool_set_terrain_options_menu.h
-    editor/ui_menus/editor_toolsize_menu.cc
-    editor/ui_menus/editor_toolsize_menu.h
-    game_io/game_cmd_queue_data_packet.cc
-    game_io/game_cmd_queue_data_packet.h
-    game_io/game_data_packet.h
-    game_io/game_game_class_data_packet.cc
-    game_io/game_game_class_data_packet.h
-    game_io/game_interactive_player_data_packet.cc
-    game_io/game_interactive_player_data_packet.h
-    game_io/game_loader.cc
-    game_io/game_loader.h
-    game_io/game_map_data_packet.cc
-    game_io/game_map_data_packet.h
-    game_io/game_player_economies_data_packet.cc
-    game_io/game_player_economies_data_packet.h
-    game_io/game_player_info_data_packet.cc
-    game_io/game_player_info_data_packet.h
-    game_io/game_preload_data_packet.cc
-    game_io/game_preload_data_packet.h
-    game_io/game_saver.cc
-    game_io/game_saver.h
     gamecontroller.h
-    gamesettings.h
     helper.cc
     helper.h
     interval.h
     machdep.h
-    map_generator.cc
-    map_generator.h
-    md5.cc
-    md5.h
     random.cc
     random.h
     ref_cast.h
@@ -481,39 +330,6 @@ wl_library(widelands_ball_of_mud
     save_handler.h
     scoped_timer.cc
     scoped_timer.h
-    scripting/c_utils.cc
-    scripting/c_utils.h
-    scripting/eris.h
-    scripting/factory.cc
-    scripting/factory.h
-    scripting/lua_bases.cc
-    scripting/lua_bases.h
-    scripting/lua_coroutine.cc
-    scripting/lua_coroutine.h
-    scripting/lua_editor.cc
-    scripting/lua_editor.h
-    scripting/lua_errors.h
-    scripting/lua_game.cc
-    scripting/lua_game.h
-    scripting/lua_globals.cc
-    scripting/lua_globals.h
-    scripting/lua_map.cc
-    scripting/lua_map.h
-    scripting/lua_path.cc
-    scripting/lua_path.h
-    scripting/lua_root.cc
-    scripting/lua_root.h
-    scripting/lua_table.cc
-    scripting/lua_table.h
-    scripting/lua_ui.cc
-    scripting/lua_ui.h
-    scripting/luna.h
-    scripting/luna_impl.cc
-    scripting/luna_impl.h
-    scripting/persistence.cc
-    scripting/persistence.h
-    scripting/scripting.cc
-    scripting/scripting.h
     single_player_game_controller.cc
     single_player_game_controller.h
     single_player_game_settings_provider.cc
@@ -522,72 +338,33 @@ wl_library(widelands_ball_of_mud
     text_layout.h
     timestring.cc
     timestring.h
-    trackptr.h
-    ui_fsmenu/base.cc
-    ui_fsmenu/base.h
-    ui_fsmenu/campaign_select.cc
-    ui_fsmenu/campaign_select.h
-    ui_fsmenu/editor.cc
-    ui_fsmenu/editor.h
-    ui_fsmenu/editor_mapselect.cc
-    ui_fsmenu/editor_mapselect.h
-    ui_fsmenu/fileview.cc
-    ui_fsmenu/fileview.h
-    ui_fsmenu/internet_lobby.cc
-    ui_fsmenu/internet_lobby.h
-    ui_fsmenu/intro.cc
-    ui_fsmenu/intro.h
-    ui_fsmenu/launchMPG.cc
-    ui_fsmenu/launchMPG.h
-    ui_fsmenu/launchSPG.cc
-    ui_fsmenu/launchSPG.h
-    ui_fsmenu/loadgame.cc
-    ui_fsmenu/loadgame.h
-    ui_fsmenu/loadreplay.cc
-    ui_fsmenu/loadreplay.h
-    ui_fsmenu/main.cc
-    ui_fsmenu/main.h
-    ui_fsmenu/mapselect.cc
-    ui_fsmenu/mapselect.h
-    ui_fsmenu/multiplayer.cc
-    ui_fsmenu/multiplayer.h
-    ui_fsmenu/netsetup_lan.cc
-    ui_fsmenu/netsetup_lan.h
-    ui_fsmenu/options.cc
-    ui_fsmenu/options.h
-    ui_fsmenu/singleplayer.cc
-    ui_fsmenu/singleplayer.h
-    upcast.h
-    utf8.h
     wlapplication.cc
     wlapplication.h
   USES_SDL
   DEPENDS
+    ai
     base_exceptions
     base_geometry
     base_i18n
     base_log
+    base_macros
     build_info
+    editor
     graphic
     graphic_color
-    graphic_image
-    graphic_image_io
-    graphic_surface
     io_dedicated_log
-    io_fileread
     io_filesystem
     io_stream
     logic
     logic_notification
-    logic_widelands_geometry
-    map_io
     map_io_map_loader
     network
     profile
     sound
-    third_party_eris
     ui_basic
+    ui_fsmenu
     wui
+    game_io
 )
 
 

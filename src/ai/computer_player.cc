@@ -17,7 +17,7 @@
  *
  */
 
-#include "computer_player.h"
+#include "ai/computer_player.h"
 
 #include "ai/defaultai.h"
 

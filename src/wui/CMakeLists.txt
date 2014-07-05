@@ -110,6 +110,9 @@ wl_library(wui
     base_geometry
     base_i18n
     base_log
+    base_macros
+    economy
+    game_io
     graphic
     graphic_color
     graphic_image
@@ -121,7 +124,9 @@ wl_library(wui
     logic_widelands_geometry
     network
     profile
+    scripting
     sound
     ui_basic
+    ui_fsmenu
     widelands_ball_of_mud
 )

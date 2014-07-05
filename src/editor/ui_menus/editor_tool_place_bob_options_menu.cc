@@ -22,6 +22,7 @@
 #include <SDL_keysym.h>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_bob_tool.h"
 #include "graphic/graphic.h"
@@ -33,7 +34,6 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "upcast.h"
 #include "wlapplication.h"
 
 

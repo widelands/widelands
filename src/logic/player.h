@@ -435,16 +435,6 @@ public:
 	}
 	void allow_building_type(Building_Index, bool allow);
 
-	// Battle options
-	void set_retreat_percentage(uint8_t value);
-	uint8_t get_retreat_percentage() const {
-		return m_retreat_percentage;
-	}
-	void allow_retreat_change(bool allow);
-	bool is_retreat_change_allowed() const {
-		return m_allow_retreat_change;
-	}
-
 	// Player commands
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
@@ -488,7 +478,7 @@ public:
 		 std::vector<Soldier *> * soldiers = nullptr,
 		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
 	void enemyflagaction
-		(Flag &, Player_Number attacker, uint32_t count, uint8_t retreat);
+		(Flag &, Player_Number attacker, uint32_t count);
 
 	uint32_t casualties() const {return m_casualties;}
 	uint32_t kills     () const {return m_kills;}
@@ -564,14 +554,6 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
-
-	/**
-	 * Is player allowed to modify m_retreat_percentage?
-	 * Below percentage value, soldiers will retreat when current battle finish
-	 */
-
-	bool                  m_allow_retreat_change;
-	uint8_t               m_retreat_percentage;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_worker_types;

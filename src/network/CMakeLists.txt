@@ -21,10 +21,14 @@ wl_library(network
     network_system.h
   USES_SDL_NET
   DEPENDS
+    ai
     base_exceptions
     base_i18n
     base_log
+    base_macros
+    base_md5
     build_info
+    game_io
     io_dedicated_log
     io_fileread
     io_filesystem
@@ -32,7 +36,9 @@ wl_library(network
     logic
     map_io_map_loader
     profile
+    scripting
     ui_basic
+    ui_fsmenu
     widelands_ball_of_mud
     wui
 )

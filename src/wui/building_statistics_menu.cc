@@ -24,6 +24,7 @@
 #include <boost/bind.hpp>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/building.h"
@@ -31,7 +32,6 @@
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
 #include "ui_basic/button.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/plot_area.h"

@@ -20,13 +20,13 @@
 #include "graphic/rendertarget.h"
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/surface.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/overlay_manager.h"
 

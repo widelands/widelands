@@ -22,6 +22,7 @@
 #include <algorithm>
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "container_iterate.h"
 #include "economy/economy.h"
@@ -45,7 +46,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -1227,7 +1227,7 @@ void Warehouse::aggressor(Soldier & enemy)
 
 	Soldier & defender =
 		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-	defender.start_task_defense(game, false, owner().get_retreat_percentage());
+	defender.start_task_defense(game, false);
 }
 
 bool Warehouse::attack(Soldier & enemy)
@@ -1239,7 +1239,7 @@ bool Warehouse::attack(Soldier & enemy)
 	if (count_workers(game, soldier_index, noreq)) {
 		Soldier & defender =
 			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-		defender.start_task_defense(game, true, 0);
+		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");
 		return true;
 	}

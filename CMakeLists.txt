@@ -10,7 +10,7 @@ endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 # (through config.h).
 macro(_set_if_unset VAR VALUE)
   if (NOT ${VAR} OR ${VAR} STREQUAL "")
-    set (${VAR} ".")
+	  set (${VAR} ${VALUE})
   endif()
 endmacro(_set_if_unset)
 

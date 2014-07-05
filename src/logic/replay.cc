@@ -20,6 +20,7 @@
 #include "logic/replay.h"
 
 #include "base/log.h"
+#include "base/md5.h"
 #include "base/wexception.h"
 #include "game_io/game_loader.h"
 #include "gamecontroller.h"
@@ -29,7 +30,6 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
-#include "md5.h"
 #include "random.h"
 #include "save_handler.h"
 

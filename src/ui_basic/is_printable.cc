@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef PORT_H
-#define PORT_H
+#include "ui_basic/is_printable.h"
 
-// Make sure that Visual C++ does not bark at __attribute__.
-#ifdef _MSC_VER
-#ifndef __attribute__
-#define __attribute__(x)
-#endif
-#endif
+namespace UI {
 
-#endif /* end of include guard: PORT_H */
+bool is_printable(SDL_keysym k) {
+	return (k.sym == SDLK_TAB) || ((k.sym >= SDLK_SPACE) && (k.sym <= SDLK_z)) ||
+	       ((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
+	       ((k.sym >= SDLK_KP0) && (k.sym <= SDLK_KP_EQUALS));
+}
+
+}  // namespace UI

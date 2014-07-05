@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-#include "base/port.h"
+#include "base/macros.h"
 
 namespace Widelands {
 

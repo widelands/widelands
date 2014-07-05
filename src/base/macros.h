@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,11 +13,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-#ifndef COMPILE_DIAGNOSTICS_H
-#define COMPILE_DIAGNOSTICS_H
+
+#ifndef MACROS_H
+#define MACROS_H
+
+// Make sure that Visual C++ does not bark at __attribute__.
+#ifdef _MSC_VER
+#ifndef __attribute__
+#define __attribute__(x)
+#endif
+#endif
 
 /* Macros for disabling GCC warnings and errors
  * From http://dbp-consulting.com/tutorials/SuppressingGCCWarnings.html and
@@ -54,4 +62,13 @@
 # define CLANG_DIAG_PRAGMA(x)
 #endif
 
-#endif
+/// Wrapper macro around a dynamic_cast.
+#define upcast(type, identifier, source) type * const identifier = \
+dynamic_cast<type *>(source)
+
+// Useful when you want to know if [typeid(source) == typeof(type)*], without
+// the side-effect upcast has of creating a new identifier which won't be used.
+#define is_a(type, source) \
+(dynamic_cast<const type *>(source) != nullptr)
+
+#endif /* end of include guard: MACROS_H */

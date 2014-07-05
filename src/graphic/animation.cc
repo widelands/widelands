@@ -42,7 +42,6 @@
 #include "graphic/image_transformations.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
-#include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
@@ -55,6 +54,52 @@ using namespace std;
 
 
 namespace  {
+
+/// A class that makes iteration over filename_?.png templates easy.
+class NumberGlob : boost::noncopyable {
+public:
+	typedef uint32_t type;
+	NumberGlob(const std::string& pictmp);
+
+	/// If there is a next filename, puts it in 's' and returns true.
+	bool next(std::string* s);
+
+private:
+	std::string templ_;
+	std::string fmtstr_;
+	std::string replstr_;
+	uint32_t cur_;
+	uint32_t max_;
+};
+
+/**
+ * Implemantation for NumberGlob.
+ */
+NumberGlob::NumberGlob(const string& pictmp) : templ_(pictmp), cur_(0) {
+	int nchars = count(pictmp.begin(), pictmp.end(), '?');
+	fmtstr_ = "%0" + boost::lexical_cast<string>(nchars) + "i";
+
+	max_ = 1;
+	for (int i = 0; i < nchars; ++i) {
+		max_ *= 10;
+		replstr_ += "?";
+	}
+	max_ -= 1;
+}
+
+bool NumberGlob::next(string* s) {
+	if (cur_ > max_)
+		return false;
+
+	if (max_) {
+		*s = boost::replace_last_copy(templ_, replstr_, (boost::format(fmtstr_) % cur_).str());
+	} else {
+		*s = templ_;
+	}
+	++cur_;
+	return true;
+}
+
 
 // Parses an array { 12, 23 } into a point.
 void get_point(const LuaTable& table, Point* p) {

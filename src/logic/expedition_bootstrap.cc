@@ -21,13 +21,13 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "economy/portdock.h"
 #include "io/filewrite.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {

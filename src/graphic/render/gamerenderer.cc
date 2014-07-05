@@ -19,11 +19,11 @@
 
 #include "graphic/render/gamerenderer.h"
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
-#include "upcast.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
 

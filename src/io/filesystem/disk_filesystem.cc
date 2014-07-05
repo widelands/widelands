@@ -41,8 +41,8 @@
 #endif
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
-#include "compile_diagnostics.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "io/streamread.h"

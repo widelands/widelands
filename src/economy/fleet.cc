@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -36,7 +37,6 @@
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 
 namespace Widelands {
 

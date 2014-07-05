@@ -23,6 +23,7 @@
 #include <set>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -48,7 +49,6 @@
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
-#include "upcast.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
 

@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "container_iterate.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
@@ -34,7 +35,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"

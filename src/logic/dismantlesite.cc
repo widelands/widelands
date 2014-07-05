@@ -22,6 +22,7 @@
 #include <cstdio>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
@@ -32,7 +33,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
 

@@ -19,9 +19,9 @@
 
 #include "logic/findbob.h"
 
+#include "base/macros.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "upcast.h"
 
 namespace Widelands {
 

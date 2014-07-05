@@ -28,6 +28,7 @@
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/world/terrain_description.h"

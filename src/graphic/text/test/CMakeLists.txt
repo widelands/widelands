@@ -20,12 +20,10 @@ wl_library(graphic_text_test_render
     render.cc
     render.h
   DEPENDS
-    base_log
     graphic_image
     graphic_surface
     graphic_text
     io_filesystem
-    io_stream
 )
 
 wl_test(test_richtext_renderer

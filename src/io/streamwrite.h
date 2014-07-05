@@ -27,7 +27,7 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "base/port.h"
+#include "base/macros.h"
 #include "machdep.h"
 
 /**

@@ -44,10 +44,8 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "computer_player.h"
 #include "config.h"
 #include "editor/editorinteractive.h"
-#include "gamesettings.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "helper.h"
@@ -56,6 +54,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/game_settings.h"
 #include "logic/map.h"
 #include "logic/replay.h"
 #include "logic/tribe.h"
@@ -77,7 +76,7 @@
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
-#include "ui_fsmenu/launchSPG.h"
+#include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
@@ -95,6 +94,22 @@
 
 //Always specifying namespaces is good, but let's not go too far ;-)
 using std::endl;
+
+namespace {
+
+/**
+ * Shut the hardware down: stop graphics mode, stop sound handler
+ */
+void terminate(int) {
+	log(_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
+	      " Update your sound driver and/or SDL to fix this problem\n"));
+#ifndef _WIN32
+	raise(SIGKILL);
+#endif
+}
+
+}  // namespace
+
 
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
@@ -817,12 +832,12 @@ std::string WLApplication::get_executable_path()
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
 	_NSGetExecutablePath(nullptr, &buffersize);
-	char buffer[buffersize];
-	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
+	std::unique_ptr<char []> buffer(new char[buffersize]);
+	int32_t check = _NSGetExecutablePath(buffer.get(), &buffersize);
 	if (check != 0) {
 		throw wexception (_("could not find the path of the main executable"));
 	}
-	executabledir = std::string(buffer);
+	executabledir = std::string(buffer.get());
 	executabledir.resize(executabledir.rfind('/') + 1);
 #endif
 #ifdef __linux__
@@ -931,7 +946,7 @@ bool WLApplication::init_hardware() {
 			 SDL_GetError());
 
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
+	SDL_EnableUNICODE(1);
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	refresh_graphics();
@@ -941,19 +956,6 @@ bool WLApplication::init_hardware() {
 	g_sound_handler.init(); //  FIXME memory leak!
 
 	return true;
-}
-
-/**
- * Shut the hardware down: stop graphics mode, stop sound handler
- */
-
-void terminate (int) {
-	 log
-		  (_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
-			  " Update your sound driver and/or SDL to fix this problem\n"));
-#ifndef _WIN32
-	raise(SIGKILL);
-#endif
 }
 
 void WLApplication::shutdown_hardware()

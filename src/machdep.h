@@ -26,7 +26,7 @@
 #include <SDL_endian.h>
 #include <stdint.h>
 
-#include "compile_diagnostics.h"
+#include "base/macros.h"
 
 // Disable this warning for files where we might use these macros.
 CLANG_DIAG_OFF("-Wself-assign")

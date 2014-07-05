@@ -32,12 +32,11 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/warning.h"
-#include "computer_player.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -46,6 +45,7 @@
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
+#include "logic/game_settings.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
@@ -63,7 +63,6 @@
 #include "sound/sound_handler.h"
 #include "timestring.h"
 #include "ui_basic/progresswindow.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -865,8 +864,7 @@ void Game::send_player_change_soldier_capacity
 void Game::send_player_enemyflagaction
 	(const Flag  &       flag,
 	 Player_Number const who_attacks,
-	 uint32_t      const num_soldiers,
-	 uint8_t       const retreat)
+	 uint32_t      const num_soldiers)
 {
 	if
 		(1
@@ -876,15 +874,9 @@ void Game::send_player_enemyflagaction
 		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
 			(*new Cmd_EnemyFlagAction
-			 	(get_gametime(), who_attacks, flag, num_soldiers, retreat));
+			 	(get_gametime(), who_attacks, flag, num_soldiers));
 }
 
-
-void Game::send_player_changemilitaryconfig(Player_Number const pid, uint8_t const retreat)
-{
-	send_player_command
-		(*new Cmd_ChangeMilitaryConfig(get_gametime(), pid, retreat));
-}
 
 void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {

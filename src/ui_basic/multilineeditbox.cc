@@ -21,13 +21,13 @@
 
 #include <boost/bind.hpp>
 
+#include "base/utf8.h"
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/wordwrap.h"
-#include "helper.h"
+#include "ui_basic/is_printable.h"
 #include "ui_basic/scrollbar.h"
-#include "utf8.h"
 
 namespace UI {
 

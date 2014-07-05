@@ -21,12 +21,12 @@
 
 #include <string>
 
+#include "base/macros.h"
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/immovable.h"
 #include "logic/mapregion.h"
-#include "upcast.h"
 
 /**
  * Choses an object to place randomly from all enabled

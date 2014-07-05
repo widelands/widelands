@@ -19,9 +19,12 @@
 
 #include "logic/production_program.h"
 
+#include <sstream>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "config.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -46,13 +49,97 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
+
+namespace {
 
 // For formation of better translateable texts
 using boost::format;
 
+/**
+ * Convert std::string to any sstream-compatible type
+ *
+ * \see http://www.experts-exchange.com/Programming/
+ *    Programming_Languages/Cplusplus/Q_20670737.html
+ * \author AssafLavie on http://www.experts-exchange.com
+ */
+// TODO(sirver): Use boost::lexical_cast<>
+template <typename T> T string_to_type(const std::string& s) {
+	std::istringstream iss(s);
+	T x;
+	iss >> x;
+	return x;
+}
+
+/// Matches the string that candidate points to against the string that
+/// template points to. Stops at when reaching a null character or the
+/// character terminator. If a match is found, candidate is moved beyond the
+/// matched part.
+///
+/// example:
+///    char const * candidate = "return   75";
+///    bool const result = match(candidate, "return");
+/// now candidate points to "   75" and result is true
+bool match(char* & candidate, const char* pattern) {
+	for (char* p = candidate;; ++p, ++pattern)
+		if (not * pattern) {
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			break;
+	return false;
+}
+
+/// Skips a sequence of consecutive characters with the value c, starting at p.
+/// Throws _wexception if no characters were skipped.
+void force_skip(char* & p, char const c = ' ') {
+	char* t = p;
+	while (*t == c)
+		++t;
+	if (p < t)
+		p = t;
+	else
+		throw wexception("expected '%c' but found \"%s\"", c, p);
+}
+
+/// Skips a sequence of consecutive characters with the value c, starting at p.
+/// Returns whether any characters were skipped.
+bool skip(char* & p, char const c = ' ') {
+	char* t = p;
+	while (*t == c)
+		++t;
+	if (p < t) {
+		p = t;
+		return true;
+	} else
+		return false;
+}
+
+/// Combines match and force_skip.
+///
+/// example:
+///    char const * candidate = "return   75";
+///    bool const result = match_force_skip(candidate, "return");
+/// now candidate points to "75" and result is true
+///
+/// example:
+///   char const * candidate = "return75";
+///    bool const result = match_force_skip(candidate, "return");
+/// throws _wexception
+bool match_force_skip(char* & candidate, const char* pattern) {
+	for (char* p = candidate;; ++p, ++pattern)
+		if (not * pattern) {
+			force_skip(p);
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			return false;
+
+	return false;
+}
+
+}  // namespace
 
 ProductionProgram::Action::~Action() {}
 
@@ -1464,7 +1551,7 @@ ProductionProgram::ActConstruct::ActConstruct(
 
 		objectname = params[0];
 		workerprogram = params[1];
-		radius = stringTo<uint32_t>(params[2]);
+		radius = string_to_type<uint32_t>(params[2]);
 
 		std::set<std::string> & building_radius_infos = descr->m_workarea_info[radius];
 		std::string description = descr->name() + ' ' + production_program_name;

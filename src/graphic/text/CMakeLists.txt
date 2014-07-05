@@ -20,7 +20,6 @@ wl_library(graphic_text
   DEPENDS
     base_exceptions
     base_geometry
-    base_log
     graphic_color
     graphic_image
     graphic_image_io
