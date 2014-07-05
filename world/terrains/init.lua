@@ -57,13 +57,13 @@ world:new_terrain_type{
 
    -- Terrain affinity constants. This is used to model how well plants grow on this terrain.
    -- Temperature are in Kelvin.
-   temperature = 289.65,
+   temperature = 293,
 
    -- Humidity is in percent (1 being very wet).
-   humidity = 0.66,
+   humidity = 0.7,
 
    -- Fertility is in percent (1 being very fertile).
-   fertility = 0.9,
+   fertility = 0.6,
 }
 
 world:new_terrain_type{
@@ -76,10 +76,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "green/wiese2_00.png" },
    dither_layer = 40,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 293,
+   humidity = 0.76,
+   fertility = 0.7,
 
 }
 
@@ -93,10 +92,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "green/wiese3_00.png" },
    dither_layer = 40,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 293,
+   humidity = 0.82,
+   fertility = 0.8,
 }
 
 world:new_terrain_type{
@@ -125,9 +123,8 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { pics_dir .. "green/steppe_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
+   temperature = 303,
+   humidity = 0.4,
    fertility = 0.9,
 }
 
@@ -141,10 +138,9 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { pics_dir .. "green/steppe_kahl_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 308,
+   humidity = 0.35,
+   fertility = 0.1,
 }
 
 world:new_terrain_type{
@@ -157,10 +153,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "green/bergwiese_00.png" },
    dither_layer = 50,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 288,
+   humidity = 0.3,
+   fertility = 0.4,
 }
 
 world:new_terrain_type{
@@ -173,10 +168,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "green/berg1_00.png" },
    dither_layer = 60,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 288,
+   humidity = 0.5,
+   fertility = 0.3,
 }
 
 world:new_terrain_type{
@@ -189,10 +183,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "green/berg2_00.png" },
    dither_layer = 60,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 288,
+   humidity = 0.5,
+   fertility = 0.3,
 }
 
 world:new_terrain_type{
@@ -205,10 +198,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "green/berg3_00.png" },
    dither_layer = 40,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 283,
+   humidity = 0.5,
+   fertility = 0.3,
 }
 
 world:new_terrain_type{
@@ -221,10 +213,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "green/berg4_00.png" },
    dither_layer = 60,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 283,
+   humidity = 0.5,
+   fertility = 0.3,
 }
 
 world:new_terrain_type{
@@ -254,10 +245,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "green/strand_00.png" },
    dither_layer = 10,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 298,
+   humidity = 0.3,
+   fertility = 0.1,
 }
 
 world:new_terrain_type{
@@ -270,10 +260,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "green/schnee_00.png" },
    dither_layer = 70,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 273,
+   humidity = 1,
+   fertility = 0,
 }
 
 world:new_terrain_type{
@@ -287,10 +276,9 @@ world:new_terrain_type{
    textures = path.list_directory(pics_dir .. "green", "lava_\\d+.png"),
    dither_layer = 80,
    fps = 4,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 1273,
+   humidity = 0,
+   fertility = 0.99,
 }
 
 world:new_terrain_type{
@@ -304,10 +292,9 @@ world:new_terrain_type{
    textures = path.list_directory(pics_dir .. "green", "wasser_\\d+.png"),
    dither_layer = 0,
    fps = 14,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 293,
+   humidity = 1,
+   fertility = 0.25,
 }
 ------------------------
 --  Former blackland  --
