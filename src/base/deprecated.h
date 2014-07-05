@@ -22,6 +22,7 @@
 
 // Code that is still used all over the place, but should not be used anymore.
 
+#include <cassert>
 
 // Helper structure for representing an iterator range in
 // for loops.
@@ -87,5 +88,13 @@ private:
 #define container_iterate_const(type, container, i) for (wl_const_range<type> i(container); i; ++i)
 
 #define container_iterate(type, container, i) for (wl_range<type> i(container); i; ++i)
+
+// DEPRECATED: leads to unsafe code. Instead use upcast() or is_a() to check at
+// runtime for the type you are expecting.
+template<typename Derived, typename Base> Derived & ref_cast(Base & base) {
+	assert(dynamic_cast<Derived *>(&base) == static_cast<Derived *>(&base));
+	return static_cast<Derived &>(base);
+}
+
 
 #endif /* end of include guard: DEPRECATED_H */

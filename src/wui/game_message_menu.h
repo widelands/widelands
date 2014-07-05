@@ -23,7 +23,6 @@
 #include "base/deprecated.h"
 #include "base/i18n.h"
 #include "logic/message_queue.h"
-#include "ref_cast.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"

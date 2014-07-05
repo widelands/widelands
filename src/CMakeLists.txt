@@ -320,7 +320,6 @@ wl_library(widelands_ball_of_mud
     helper.h
     interval.h
     machdep.h
-    ref_cast.h
     text_layout.cc
     text_layout.h
     wlapplication.cc
