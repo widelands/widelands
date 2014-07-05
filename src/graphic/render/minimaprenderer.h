@@ -52,4 +52,4 @@ public:
 		 const Point& viewpoint, uint32_t flags, StreamWrite* const streamwrite);
 };
 
-#endif //WIDELANDS_MINIMAPRENDERER_H
+#endif

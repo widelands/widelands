@@ -96,4 +96,4 @@ private:
 	void draw_wrapper();
 };
 
-#endif //WIDELANDS_GAMEVIEW_H
+#endif

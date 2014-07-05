@@ -41,4 +41,4 @@ bool is_printable(SDL_keysym k);
 
 }  // namespace UI
 
-#endif /* end of include guard: IS_PRINTABLE_H */
+#endif

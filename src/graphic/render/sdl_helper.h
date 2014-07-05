@@ -26,6 +26,4 @@ struct SDL_Surface;
 
 SDL_Surface * empty_sdl_surface(int16_t w, int16_t h);
 
-#endif /* end of include guard: SDL_HELPER_H */
-
-
+#endif

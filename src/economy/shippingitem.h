@@ -86,4 +86,4 @@ private:
 
 } // namespace Widelands
 
-#endif // ECONOMY_SHIPPINGITEM_H
+#endif

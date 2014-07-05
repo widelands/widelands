@@ -51,4 +51,4 @@ void unpersist_object
 	 FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size);
 
-#endif /* end of include guard: PERSISTENCE_H */
+#endif

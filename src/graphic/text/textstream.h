@@ -55,5 +55,4 @@ private:
 };
 
 }
-#endif /* end of include guard: TEXTSTREAM_H */
-
+#endif

@@ -29,4 +29,4 @@
 /// How often are statistics to be sampled.
 #define STATISTICS_SAMPLE_TIME 30000
 
-#endif /* end of include guard: LOGIC_CONSTANTS_H */
+#endif

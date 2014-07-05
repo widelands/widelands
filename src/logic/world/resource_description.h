@@ -66,4 +66,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: RESOURCE_DESCRIPTION_H */
+#endif

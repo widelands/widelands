@@ -63,4 +63,4 @@ private:
 	std::vector<Item> m_items;
 };
 
-#endif // WUI_ITEMWARESDISPLAY_H
+#endif

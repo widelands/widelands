@@ -77,4 +77,4 @@ private:
 
 } // namespace UI
 
-#endif // WORDWRAP_H
+#endif

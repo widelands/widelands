@@ -210,4 +210,4 @@ bool MapAStar<StepEval>::step(FCoords & cur, int32_t & cost)
 
 } // namespace Widelands
 
-#endif // LOGIC_MAPASTAR_H
+#endif

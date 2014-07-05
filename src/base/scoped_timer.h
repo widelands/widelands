@@ -46,4 +46,4 @@ private:
 	uint32_t startime_, lasttime_;
 };
 
-#endif /* end of include guard: SCOPED_TIMER_H */
+#endif

@@ -37,4 +37,4 @@ GLenum _handle_glerror(const char * file, unsigned int line);
  */
 #define handle_glerror() _handle_glerror(__FILE__, __LINE__)
 
-#endif // GL_UTILS_H
+#endif

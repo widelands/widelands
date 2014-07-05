@@ -138,4 +138,4 @@ public:
 
 } // namespace Widelands
 
-#endif // ECONOMY_FLEET_H
+#endif

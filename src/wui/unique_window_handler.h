@@ -40,4 +40,4 @@ private:
 	std::map<std::string, UI::UniqueWindow::Registry> registries_;
 };
 
-#endif /* end of include guard:  */
+#endif

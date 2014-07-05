@@ -39,4 +39,4 @@ private:
 	void swap_rows();
 };
 
-#endif // GL_SURFACE_SCREEN_H
+#endif

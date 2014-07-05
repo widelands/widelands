@@ -43,4 +43,4 @@ private:
 	UI::Box * m_worker_caps;
 };
 
-#endif // _PRODUCTIONSITEWINDOW_H_
+#endif

@@ -41,4 +41,4 @@ enum Composite {
 	CM_Copy
 };
 
-#endif // COMPOSITEMODE_H
+#endif

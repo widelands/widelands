@@ -125,4 +125,4 @@ private:
 	/*@}*/
 };
 
-#endif // WIDELANDS_GAMERENDERER_GL_H
+#endif

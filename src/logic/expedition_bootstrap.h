@@ -101,4 +101,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: EXPEDITION_BOOTSTRAP_H */
+#endif

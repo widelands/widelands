@@ -261,4 +261,4 @@ public:
 
 } // namespace Widelands
 
-#endif // SHIP_H
+#endif

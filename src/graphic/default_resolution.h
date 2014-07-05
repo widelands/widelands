@@ -24,4 +24,4 @@
 #define DEFAULT_RESOLUTION_W 800
 #define DEFAULT_RESOLUTION_H 600
 
-#endif /* end of include guard: DEFAULT_RESOLUTION_H */
+#endif

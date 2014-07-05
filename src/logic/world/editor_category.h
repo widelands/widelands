@@ -52,5 +52,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: EDITOR_CATEGORY_H */
-
+#endif

@@ -48,4 +48,4 @@ public:
 	virtual void push_player(lua_State * L, Widelands::Player_Number plr) override;
 };
 
-#endif /* end of include guard: FACTORY_H */
+#endif

@@ -36,4 +36,4 @@ void luaopen_path(lua_State *);
 
 }
 
-#endif /* end of include guard: LUA_PATH_H */
+#endif

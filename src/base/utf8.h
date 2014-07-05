@@ -93,4 +93,4 @@ struct Utf8 {
 	}
 };
 
-#endif // UTF8_H
+#endif

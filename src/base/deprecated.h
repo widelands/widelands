@@ -97,4 +97,4 @@ template<typename Derived, typename Base> Derived & ref_cast(Base & base) {
 }
 
 
-#endif /* end of include guard: DEPRECATED_H */
+#endif

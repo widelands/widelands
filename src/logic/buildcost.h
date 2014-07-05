@@ -43,4 +43,4 @@ struct Buildcost : std::map<Ware_Index, uint8_t> {
 
 } // namespace Widelands
 
-#endif // BUILDCOST_H
+#endif

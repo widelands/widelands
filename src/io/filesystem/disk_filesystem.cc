@@ -31,7 +31,7 @@
 #include <direct.h>
 #include <io.h>
 #define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
-#endif // _MSC_VER
+#endif
 #else  // not _WIN32
 #include <fcntl.h>
 #include <glob.h>

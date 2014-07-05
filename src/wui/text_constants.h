@@ -71,4 +71,4 @@
 #define UI_FONT_SMALL_CLR   UI_FONT_CLR_FG, UI_FONT_CLR_BG
 #define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0)
 
-#endif /* end of include guard: TEXT_CONSTANTS_H */
+#endif

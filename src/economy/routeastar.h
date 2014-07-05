@@ -183,4 +183,4 @@ struct AStarZeroEstimator {
 
 } // namespace Widelands
 
-#endif // ECONOMY_ROUTEASTAR_H
+#endif

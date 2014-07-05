@@ -46,5 +46,4 @@ public:
 std::unique_ptr<OneWorldLegacyLookupTable>
 create_one_world_legacy_lookup_table(const std::string& old_world);
 
-#endif /* end of include guard: ONE_WORLD_LEGACY_CONVERSION_H */
-
+#endif

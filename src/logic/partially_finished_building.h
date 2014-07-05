@@ -83,4 +83,4 @@ protected:
 
 }
 
-#endif /* end of include guard: PARTIALLY_FINISHED_BUILDING_H */
+#endif

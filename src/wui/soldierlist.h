@@ -35,4 +35,4 @@ UI::Panel * create_soldier_list
 	 Interactive_GameBase & igb,
 	 Widelands::Building & building);
 
-#endif // _SOLDIERLIST_H_
+#endif

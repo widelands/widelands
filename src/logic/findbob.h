@@ -54,4 +54,4 @@ struct FindBobShip : FindBob {
 
 } // namespace Widelands
 
-#endif // LOGIC_FINDBOB_H
+#endif

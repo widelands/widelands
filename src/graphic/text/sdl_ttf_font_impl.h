@@ -52,5 +52,4 @@ private:
 
 
 
-#endif /* end of include guard: SDL_TTF_FONT_IMPL_H */
-
+#endif

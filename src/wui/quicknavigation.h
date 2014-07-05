@@ -88,4 +88,4 @@ private:
 	Landmark m_landmarks[10];
 };
 
-#endif // QUICKNAVIGATION_H
+#endif

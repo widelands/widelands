@@ -73,4 +73,4 @@ private:
 	uint16_t m_tex_w, m_tex_h;
 };
 
-#endif //GL_SURFACE_TEXTURE_H
+#endif

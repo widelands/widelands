@@ -104,4 +104,4 @@ public:
 IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*, IFontLoader* fl);
 }
 
-#endif /* end of include guard: RT_RENDER_H */
+#endif

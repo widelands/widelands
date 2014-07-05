@@ -110,4 +110,4 @@ void WriteArea48(StreamWrite* wr, Area<Coords, uint16_t> const area);
 
 }  // namespace Widelands
 
-#endif /* end of include guard: WIDELANDS_GEOMETRY_IO_H */
+#endif

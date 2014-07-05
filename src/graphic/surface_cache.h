@@ -58,4 +58,4 @@ public:
 // surface).
 SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes);
 
-#endif /* end of include guard: SURFACE_CACHE_H */
+#endif

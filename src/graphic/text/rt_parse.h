@@ -88,4 +88,4 @@ public:
 IParser * setup_parser();
 }
 
-#endif /* end of include guard: RT_PARSER_H */
+#endif

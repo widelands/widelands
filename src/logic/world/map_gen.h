@@ -173,4 +173,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: MAP_GEN_H */
+#endif

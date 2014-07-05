@@ -56,5 +56,4 @@ protected:
 	std::unique_ptr<uint8_t[]> m_pixels;
 };
 
-#endif /* end of include guard: GL_SURFACE_H */
-
+#endif

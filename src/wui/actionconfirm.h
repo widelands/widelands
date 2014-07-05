@@ -54,4 +54,4 @@ void show_ship_cancel_expedition_confirm
 	(Interactive_Player & player,
 	 Widelands::Ship & ship);
 
-#endif // _ACTIONCONFIRM_H_
+#endif

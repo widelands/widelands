@@ -159,4 +159,4 @@ public:
 
 } // namespace Widelands
 
-#endif // ECONOMY_PORTDOCK_H
+#endif

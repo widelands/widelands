@@ -59,4 +59,4 @@ private:
 
 } // namespace UI
 
-#endif // RICHTEXT_H
+#endif

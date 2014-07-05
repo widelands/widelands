@@ -44,5 +44,4 @@ struct Cmd_CalculateStatistics : public GameLogicCommand {
 
 
 
-#endif /* end of include guard: CMD_CALCULATE_STATISTICS_H */
-
+#endif

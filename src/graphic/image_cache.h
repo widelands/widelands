@@ -58,5 +58,4 @@ public:
 // Create a new ImageCache. Takes no ownership.
 ImageCache* create_image_cache(IImageLoader*, SurfaceCache*);
 
-#endif /* end of include guard: IMAGE_CACHE_H */
-
+#endif

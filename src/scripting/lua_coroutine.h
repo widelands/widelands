@@ -74,4 +74,4 @@ private:
 	uint32_t m_nargs;
 };
 
-#endif /* end of include guard: LUA_COROUTINE_H */
+#endif

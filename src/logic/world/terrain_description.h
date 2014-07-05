@@ -98,4 +98,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: TERRAIN_DESCRIPTION_H */
+#endif

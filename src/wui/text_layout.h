@@ -44,4 +44,4 @@ std::string as_waresinfo(const std::string&);
 std::string as_window_title(const std::string&);
 std::string as_game_tip(const std::string&);
 
-#endif /* end of include guard: TEXT_LAYOUT_H */
+#endif

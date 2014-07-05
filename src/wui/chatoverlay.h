@@ -47,4 +47,4 @@ private:
 	std::unique_ptr<Impl> m;
 };
 
-#endif // CHATOVERLAY_H
+#endif

@@ -26,4 +26,4 @@ extern "C" {
 }
 
 
-#endif /* end of include guard: WL_ERIS_H */
+#endif

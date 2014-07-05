@@ -74,4 +74,4 @@ dynamic_cast<type *>(source)
 #define is_a(type, source) \
 (dynamic_cast<const type *>(source) != nullptr)
 
-#endif /* end of include guard: MACROS_H */
+#endif

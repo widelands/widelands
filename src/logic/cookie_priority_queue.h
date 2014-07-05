@@ -292,4 +292,4 @@ void cookie_priority_queue<_T, _Cw, _CA>::selftest()
 	}
 }
 
-#endif // COOKIE_PRIORITY_QUEUE_H
+#endif

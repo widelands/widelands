@@ -98,4 +98,4 @@ private:
 	void compute_max_fill_buttons_enabled_state();
 };
 
-#endif // _WARESQUEUEDISPLAY_H_
+#endif

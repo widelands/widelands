@@ -181,4 +181,4 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	current_selection_names_.set_text(buf);
 }
 
-#endif /* end of include guard: MULTI_SELECT_MENU_H */
+#endif

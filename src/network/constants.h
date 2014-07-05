@@ -24,4 +24,4 @@
 #define WIDELANDS_LAN_PROMOTION_PORT 7395
 #define WIDELANDS_PORT               7396
 
-#endif /* end of include guard: NETWORK_CONSTANTS_H */
+#endif

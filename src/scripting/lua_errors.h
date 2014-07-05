@@ -37,4 +37,4 @@ public:
 	}
 };
 
-#endif /* end of include guard: LUA_ERRORS_H */
+#endif

@@ -93,4 +93,4 @@ private:
 	bool m_avoid_fastclick;
 };
 
-#endif // _BUILDINGWINDOW_H_
+#endif

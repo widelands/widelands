@@ -35,4 +35,4 @@ enum WareWorker {
 
 } // namespace Widelands
 
-#endif // LOGIC_WAREWORKER_H
+#endif

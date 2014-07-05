@@ -40,4 +40,4 @@ public:
 	virtual Surface* load(const std::string& fn, FileSystem* fs = nullptr) const = 0;
 };
 
-#endif /* end of include guard: IMAGE_LOADER_H */
+#endif

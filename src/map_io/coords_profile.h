@@ -46,4 +46,4 @@ void set_coords(const std::string& name, const Widelands::Coords& value, Section
 
 }  // namespace Widelands
 
-#endif /* end of include guard: COORDS_PROFILE_H */
+#endif

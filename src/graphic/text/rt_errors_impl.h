@@ -34,7 +34,4 @@ struct SyntaxError_Impl : public SyntaxError {
 };
 }
 
-#endif /* end of include guard: RT_ERRORS_IMPL_H */
-
-
-
+#endif

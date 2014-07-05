@@ -78,4 +78,4 @@ protected:
 };
 
 
-#endif /* end of include guard: SDL_SURFACE_H */
+#endif

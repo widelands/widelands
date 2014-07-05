@@ -55,5 +55,4 @@ const Image* player_colored(const RGBColor& clr, const Image* original, const Im
 }
 
 
-#endif /* end of include guard: IMAGE_TRANSFORMATIONS_H */
-
+#endif

@@ -211,4 +211,4 @@ template <typename KeyType> uint32_t get_positive_int(const LuaTable& table, con
 	return static_cast<uint32_t>(value);
 }
 
-#endif /* end of include guard: LUA_TABLE_H */
+#endif

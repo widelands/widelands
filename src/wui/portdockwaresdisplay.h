@@ -36,4 +36,4 @@ UI::Box * create_portdock_expedition_display
 	(UI::Panel * parent, Widelands::Warehouse & wh, Interactive_GameBase &);
 
 
-#endif // WUI_PORTDOCKWARES_DISPLAY_H
+#endif

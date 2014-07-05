@@ -116,4 +116,4 @@ protected:
 
 }
 
-#endif // SOLDIERCONTROL_H
+#endif

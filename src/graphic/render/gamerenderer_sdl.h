@@ -52,4 +52,4 @@ private:
 		 const Texture &  f_r_texture);
 };
 
-#endif // WIDELANDS_GAMERENDERER_SDL_H
+#endif

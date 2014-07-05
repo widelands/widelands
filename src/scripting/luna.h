@@ -189,4 +189,4 @@ T ** get_base_user_class(lua_State * const L, int narg) {
 }
 
 
-#endif /* end of include guard: __S_LUNA_H */
+#endif
