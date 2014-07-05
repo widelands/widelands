@@ -17,7 +17,7 @@
  *
  */
 
-#include "text_layout.h"
+#include "wui/text_layout.h"
 
 #include <boost/format.hpp>
 
@@ -71,4 +71,3 @@ string as_waresinfo(const string & txt) {
 	f % txt;
 	return f.str();
 }
-

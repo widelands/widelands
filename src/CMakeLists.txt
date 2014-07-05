@@ -318,8 +318,6 @@ wl_library(widelands_ball_of_mud
     helper.h
     interval.h
     machdep.h
-    text_layout.cc
-    text_layout.h
     wlapplication.cc
     wlapplication.h
   USES_SDL
@@ -333,7 +331,6 @@ wl_library(widelands_ball_of_mud
     build_info
     editor
     graphic
-    graphic_color
     io_dedicated_log
     io_filesystem
     logic

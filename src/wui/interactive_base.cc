@@ -41,7 +41,6 @@
 #include "logic/productionsite.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "text_layout.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
@@ -51,6 +50,7 @@
 #include "wui/minimap.h"
 #include "wui/overlay_manager.h"
 #include "wui/quicknavigation.h"
+#include "wui/text_layout.h"
 #include "wui/unique_window_handler.h"
 
 using boost::format;

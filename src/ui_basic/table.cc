@@ -27,11 +27,11 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "text_layout.h"
 #include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 #include "wlapplication.h"
+#include "wui/text_layout.h"
 
 namespace UI {
 

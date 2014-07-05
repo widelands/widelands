@@ -43,8 +43,8 @@
 #include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
 #include "wui/interactive_player.h"
+#include "wui/text_layout.h"
 
 namespace Widelands {
 

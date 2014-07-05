@@ -1,3 +1,12 @@
+wl_library(wui_text_layout
+  SRCS
+    text_layout.cc
+    text_layout.h
+  DEPENDS
+    graphic_color
+    widelands_ball_of_mud
+)
+
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -133,4 +142,5 @@ wl_library(wui
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud
+    wui_text_layout
 )

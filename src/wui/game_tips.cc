@@ -27,7 +27,7 @@
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "profile/profile.h"
-#include "text_layout.h"
+#include "wui/text_layout.h"
 
 #define DEFAULT_INTERVAL 5  // seconds
 #define BG_IMAGE "pics/tips_bg.png"

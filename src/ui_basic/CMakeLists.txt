@@ -67,4 +67,5 @@ wl_library(ui_basic
     scripting
     sound
     widelands_ball_of_mud
+    wui_text_layout
 )

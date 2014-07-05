@@ -30,8 +30,8 @@
 #include "helper.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
 #include "wlapplication.h"
+#include "wui/text_layout.h"
 
 
 using namespace std;

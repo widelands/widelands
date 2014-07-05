@@ -51,8 +51,8 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
 #include "wui/interactive_base.h"
+#include "wui/text_layout.h"
 
 namespace Widelands {
 

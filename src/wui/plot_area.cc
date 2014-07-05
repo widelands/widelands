@@ -31,8 +31,8 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "text_layout.h"
 #include "ui_basic/panel.h"
+#include "wui/text_layout.h"
 
 using namespace std;
 using boost::format;
