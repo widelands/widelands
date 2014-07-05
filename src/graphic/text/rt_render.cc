@@ -156,38 +156,37 @@ private:
 		}
 	};
 
-	uint16_t m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders&);
+	uint16_t m_fit_line(uint16_t w, const Borders&, vector<RenderNode*>* rv);
 
 	uint16_t m_h;
 	size_t m_idx;
 	vector<RenderNode*>& m_all_nodes;
 	priority_queue<ConstraintChange> m_constraint_changes;
 };
-uint16_t Layout::m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders& p) {
-	while
-		(m_idx < m_all_nodes.size()
-		 and m_all_nodes[m_idx]->is_non_mandatory_space())
 
-			// NOCOM(#sirver): that fixes a bug, but changes behavior.
-		 // and m_all_nodes[m_idx]->width() >= INFINITE_WIDTH) // only remove newline
+uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv) {
+	assert(rv->empty());
+
+	while (m_idx < m_all_nodes.size() && m_all_nodes[m_idx]->is_non_mandatory_space()) {
 		delete m_all_nodes[m_idx++];
+	}
 
 	uint16_t x = p.left;
-	size_t first_idx = rv.size();
 	while (m_idx < m_all_nodes.size()) {
 		RenderNode* n = m_all_nodes[m_idx];
-		uint16_t nw = n->width();
-		if (x + nw + p.right > w or n->get_floating())
+		const uint16_t nw = n->width();
+		if (x + nw + p.right > w || n->get_floating()) {
 			break;
-
+		}
 		n->set_x(x); x += nw;
-		rv.push_back(n);
+		rv->push_back(n);
 		++m_idx;
 	}
-	if (not rv.empty() and rv.back()->is_non_mandatory_space()) {
-		x -= rv.back()->width();
-		delete rv.back();
-		rv.pop_back();
+
+	if (!rv->empty() && rv->back()->is_non_mandatory_space()) {
+		x -= rv->back()->width();
+		delete rv->back();
+		rv->pop_back();
 	}
 
 	// Remaining space in this line
@@ -195,72 +194,78 @@ uint16_t Layout::m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders& 
 
 	// Find expanding nodes
 	vector<size_t> expanding_nodes;
-	for (size_t idx = first_idx; idx < rv.size(); ++idx)
-		if (rv[idx]->is_expanding())
+	for (size_t idx = 0; idx < rv->size(); ++idx)
+		if (rv->at(idx)->is_expanding())
 			expanding_nodes.push_back(idx);
 
-	if (expanding_nodes.size()) { // If there are expanding nodes, we fill the space
-		uint16_t individual_w = rem_space / expanding_nodes.size();
-		for (size_t idx : expanding_nodes) {
-			rv[idx]->set_w(individual_w);
-			for (size_t nidx = idx + 1; nidx < rv.size(); ++nidx)
-				rv[nidx]->set_x(rv[nidx]->x() + individual_w);
+	if (!expanding_nodes.empty()) { // If there are expanding nodes, we fill the space
+		const uint16_t individual_w = rem_space / expanding_nodes.size();
+		for (const size_t idx : expanding_nodes) {
+			rv->at(idx)->set_w(individual_w);
+			for (size_t nidx = idx + 1; nidx < rv->size(); ++nidx)
+				rv->at(nidx)->set_x(rv->at(nidx)->x() + individual_w);
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (not rv.empty() and (*rv.rbegin())->halign() != HALIGN_LEFT) {
-			if ((*rv.rbegin())->halign() == HALIGN_CENTER)
-				rem_space /= 2; // Otherwise, we align right
-			for (size_t idx = first_idx; idx < rv.size(); ++idx)
-				rv[idx]->set_x(rv[idx]->x() + rem_space);
+		if (!rv->empty() && (*rv->rbegin())->halign() != HALIGN_LEFT) {
+			if ((*rv->rbegin())->halign() == HALIGN_CENTER) {
+				rem_space /= 2;  // Otherwise, we align right
+			}
+			for (RenderNode* node : *rv)  {
+				node->set_x(node->x() + rem_space);
+			}
 		}
 	}
 
 	// Find the biggest hotspot of the truly remaining items.
 	uint16_t cur_line_hotspot = 0;
-	for (size_t idx = first_idx; idx < rv.size(); ++idx)
-		cur_line_hotspot = max(cur_line_hotspot, rv[idx]->hotspot_y());
-
+	for (RenderNode* node : *rv) {
+		cur_line_hotspot = max(cur_line_hotspot, node->hotspot_y());
+	}
 	return cur_line_hotspot;
 }
+
 /*
  * Take ownership of all nodes, delete those that we do not render anyways (for
  * example unneeded spaces), append the rest to the vector we got.
  */
 uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p) {
+	assert(rv.empty());
 	m_h = p.top;
 
 	uint16_t max_line_width = 0;
 	while (m_idx < m_all_nodes.size()) {
-		size_t first_idx = rv.size();
-		uint16_t biggest_hotspot = m_fit_line(rv, w, p);
+		vector<RenderNode*> nodes_in_line;
+		int m_idx_before_iteration = m_idx;
+		uint16_t biggest_hotspot = m_fit_line(w, p, &nodes_in_line);
+
 		int line_height = 0;
-		for (size_t j = first_idx; j < rv.size(); ++j) {
-			RenderNode* n = rv[j];
+		for (RenderNode* n : nodes_in_line) {
 			line_height = max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 			n->set_y(m_h + biggest_hotspot - n->hotspot_y());
 			max_line_width = max<int>(max_line_width, n->x() + n->width() + p.right);
 		}
 
 		// Go over again and adjust position for VALIGN
-		for (size_t j = first_idx; j < rv.size(); ++j) {
-			uint16_t space = line_height - rv[j]->height();
-			if (!space or rv[j]->valign() == VALIGN_BOTTOM)
+		for (RenderNode* n : nodes_in_line) {
+			uint16_t space = line_height - n->height();
+			if (!space || n->valign() == VALIGN_BOTTOM)
 				continue;
-			if (rv[j]->valign() == VALIGN_CENTER)
+			if (n->valign() == VALIGN_CENTER)
 				space /= 2;
-			rv[j]->set_y(rv[j]->y() - space);
+			n->set_y(n->y() - space);
 		}
+		rv.insert(rv.end(), nodes_in_line.begin(), nodes_in_line.end());
 
 		m_h += line_height;
-		while (not m_constraint_changes.empty() and m_constraint_changes.top().at_y <= m_h) {
+		while (! m_constraint_changes.empty() && m_constraint_changes.top().at_y <= m_h) {
 			const ConstraintChange& top = m_constraint_changes.top();
 			w += top.delta_w;
 			p.left += top.delta_offset_x;
 			m_constraint_changes.pop();
 		}
 
-		if ((m_idx < m_all_nodes.size()) and m_all_nodes[m_idx]->get_floating()) {
+		if ((m_idx < m_all_nodes.size()) && m_all_nodes[m_idx]->get_floating()) {
 			RenderNode* n = m_all_nodes[m_idx];
 			n->set_y(m_h);
 			ConstraintChange cc = {m_h + n->height(), 0, 0};
@@ -279,8 +284,9 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p) {
 			rv.push_back(n);
 			++m_idx;
 		}
-		if (m_idx == first_idx)
+		if (m_idx == m_idx_before_iteration) {
 			throw WidthTooSmall("Could not fit a single render node in line. Width of an Element is too small!");
+		}
 	}
 
 	m_h += p.bottom;
@@ -676,13 +682,13 @@ public:
 			const string align = a["align"].get_string();
 			if (align == "left") m_ns.halign = HALIGN_LEFT;
 			else if (align == "right") m_ns.halign = HALIGN_RIGHT;
-			else if (align == "center" or align == "middle") m_ns.halign = HALIGN_CENTER;
+			else if (align == "center" || align == "middle") m_ns.halign = HALIGN_CENTER;
 		}
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
 			if (align == "top") m_ns.valign = VALIGN_TOP;
 			else if (align == "bottom") m_ns.valign = VALIGN_BOTTOM;
-			else if (align == "center" or align == "middle") m_ns.valign = VALIGN_CENTER;
+			else if (align == "center" || align == "middle") m_ns.valign = VALIGN_CENTER;
 		}
 		if (a.has("spacing"))
 			m_ns.spacing = a["spacing"].get_int();
@@ -763,7 +769,7 @@ public:
 
 	void emit(vector<RenderNode*>& nodes) override {
 		RenderNode* rn = nullptr;
-		if (not m_fill_text.empty()) {
+		if (!m_fill_text.empty()) {
 			if (m_space < INFINITE_WIDTH)
 				rn = new FillingTextNode(font_cache_.get_font(m_ns), m_ns, m_space, m_fill_text);
 			else
@@ -840,10 +846,10 @@ public:
 			margin.left = margin.top = margin.right = margin.bottom = p;
 		}
 
-		vector<RenderNode*> subnodes, nodes_to_render;
+		vector<RenderNode*> subnodes;
 		TagHandler::emit(subnodes);
 
-		if (not m_w) { // Determine the width by the width of the widest subnode
+		if (! m_w) { // Determine the width by the width of the widest subnode
 			for (RenderNode* n : subnodes) {
 				if (n->width() >= INFINITE_WIDTH)
 					continue;
@@ -853,6 +859,7 @@ public:
 
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
+		vector<RenderNode*> nodes_to_render;
 		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding);
 		if (shrink_to_fit_) {
 			m_w = min(m_w, max_line_width);
@@ -888,7 +895,7 @@ public:
 			const string align = a["valign"].get_string();
 			if (align == "top") m_rn->set_valign(VALIGN_TOP);
 			else if (align == "bottom") m_rn->set_valign(VALIGN_BOTTOM);
-			else if (align == "center" or align == "middle") m_rn->set_valign(VALIGN_CENTER);
+			else if (align == "center" || align == "middle") m_rn->set_valign(VALIGN_CENTER);
 		}
 	}
 

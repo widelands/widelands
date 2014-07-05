@@ -38,6 +38,7 @@
 #include "graphic/image_io.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface.h"
+#include "graphic/text/rt_errors.h"
 #include "graphic/text/test/paths.h"
 #include "graphic/text/test/render.h"
 #include "helper.h"
@@ -177,17 +178,13 @@ bool compare_for_test(RT::Renderer* renderer) {
 
 	const int width = read_width(basedir);
 
-	std::unique_ptr<Surface> correct(load_image(basedir + "correct.png", g_fs));
-	if (!correct) {
-		log("Could not load %s/correct.png.\n", basedir.c_str());
-		return false;
-	}
-
 	std::vector<RefMapTestSample> ref_map_samples;
 	if (!read_ref_map(basedir, &ref_map_samples)) {
 		log("Could not load %s/ref_map.\n", basedir.c_str());
 		return false;
 	}
+
+	std::unique_ptr<Surface> correct;
 
 	const std::set<std::string> inputs =
 	   filter(g_fs->ListDirectory(basedir),
@@ -195,6 +192,15 @@ bool compare_for_test(RT::Renderer* renderer) {
 	for (const std::string& input : inputs) {
 		const std::string input_text = read_file(input);
 		std::unique_ptr<Surface> output(renderer->render(input_text, width));
+
+		if (!correct) {
+			correct.reset(load_image(basedir + "correct.png", g_fs));
+			if (!correct) {
+				log("Could not load %s/correct.png.\n", basedir.c_str());
+				return false;
+			}
+		}
+
 		if (!compare_surfaces(correct.get(), output.get())) {
 			log("Render output of %s does not compare equal to correct.png. Saved wrong.png.\n", input.c_str());
 
@@ -214,6 +220,11 @@ bool compare_for_test(RT::Renderer* renderer) {
 }
 
 }  // namespace
+
+BOOST_AUTO_TEST_CASE(b1206712) {
+	// check that a single line of long chat message throws an error.
+	BOOST_CHECK_THROW(compare_for_test(sar.renderer()), RT::WidthTooSmall);
+}
 
 BOOST_AUTO_TEST_CASE(br) {BOOST_CHECK(compare_for_test(sar.renderer()));}
 BOOST_AUTO_TEST_CASE(bullet_point) {BOOST_CHECK(compare_for_test(sar.renderer()));}

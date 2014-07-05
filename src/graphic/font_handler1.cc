@@ -63,12 +63,8 @@ public:
 		if (surf)
 			return surf;
 
-		try {
-			surf = rt_renderer_->render(text_, width_);
-			surface_cache_->insert(hash_, surf, true);
-		} catch (RT::Exception& e) {
-			throw wexception("Richtext rendering error: %s", e.what());
-		}
+		surf = rt_renderer_->render(text_, width_);
+		surface_cache_->insert(hash_, surf, true);
 		return surf;
 	}
 
@@ -101,7 +97,10 @@ public:
 		if (image_cache_->has(hash))
 			return image_cache_->get(hash);
 
-		return image_cache_->insert(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
+		std::unique_ptr<RTImage> image(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
+		image->surface(); // force the rich text to get rendered in case there is an exception thrown.
+
+		return image_cache_->insert(image.release());
 	}
 
 private:

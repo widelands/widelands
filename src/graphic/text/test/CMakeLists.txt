@@ -33,6 +33,7 @@ wl_test(test_richtext_renderer
     base_log
     graphic_image_io
     graphic_surface
+    graphic_text
     graphic_text_test_render
     io_fileread
     io_filesystem
