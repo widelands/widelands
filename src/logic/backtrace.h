@@ -17,6 +17,11 @@
  *
  */
 
+#ifndef LOGIC_BACKTRACE_H
+#define LOGIC_BACKTRACE_H
+
 #include <string>
 
 std::string get_backtrace();
+
+#endif

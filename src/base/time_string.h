@@ -17,6 +17,9 @@
  *
  */
 
+#ifndef BASE_TIME_STRING_H
+#define BASE_TIME_STRING_H
+
 #include <stdint.h>
 
 /// Get a string representation conforming to ISO 8601 of the current time (in
@@ -28,3 +31,5 @@ char * timestring();
 /// as hhh:mm:ss. If Time represents more than
 /// 999 hours, it wraps around
 char * gametimestring(uint32_t gametime);
+
+#endif
