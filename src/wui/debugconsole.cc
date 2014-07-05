@@ -109,6 +109,9 @@ struct Console : public ChatProvider, public Handler {
 	}
 };
 
+// TODO(sirver): This is unsafe. boost is involved and uses this static and it
+// makes no guarantees on the number of threads it uses. this can crash at any
+// time.
 Console g_console;
 
 ChatProvider * getChatProvider()
