@@ -57,6 +57,8 @@ using Widelands::Game;
 #define BG_CELL_WIDTH  34 // extents of one cell
 #define BG_CELL_HEIGHT 34
 
+//sizes for the images in the build menu (containing building icons)
+#define BUILDMENU_IMAGE_SIZE 30. // used for width and height
 
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::Icon_Grid {

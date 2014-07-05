@@ -35,6 +35,7 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -52,6 +53,7 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_base.h"
+#include "wui/text_constants.h"
 #include "wui/text_layout.h"
 
 namespace Widelands {

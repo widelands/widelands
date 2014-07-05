@@ -47,6 +47,7 @@
 #include "build_info.h"
 #include "config.h"
 #include "editor/editorinteractive.h"
+#include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "helper.h"
@@ -729,8 +730,8 @@ void WLApplication::refresh_graphics()
 
 	//  Switch to the new graphics system now, if necessary.
 	init_graphics
-		(s.get_int("xres", XRES),
-		 s.get_int("yres", YRES),
+		(s.get_int("xres", DEFAULT_RESOLUTION_W),
+		 s.get_int("yres", DEFAULT_RESOLUTION_H),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("opengl", true));
 }

@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/i18n.h"
-#include "constants.h"
+#include "graphic/default_resolution.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -33,6 +33,7 @@
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
 
 namespace  {
 
@@ -634,8 +635,8 @@ void Options_Ctrl::handle_menu()
 
 Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	Options_Struct opt;
-	opt.xres = m_opt_section.get_int("xres", XRES);
-	opt.yres = m_opt_section.get_int("yres", YRES);
+	opt.xres = m_opt_section.get_int("xres", DEFAULT_RESOLUTION_W);
+	opt.yres = m_opt_section.get_int("yres", DEFAULT_RESOLUTION_H);
 	opt.inputgrab = m_opt_section.get_bool("inputgrab", false);
 	opt.fullscreen = m_opt_section.get_bool("fullscreen", false);
 	opt.single_watchwin = m_opt_section.get_bool("single_watchwin", false);

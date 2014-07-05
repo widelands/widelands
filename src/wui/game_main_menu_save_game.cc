@@ -23,7 +23,6 @@
 
 #include "base/i18n.h"
 #include "base/time_string.h"
-#include "constants.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"

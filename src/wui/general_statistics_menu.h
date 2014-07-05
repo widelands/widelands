@@ -20,12 +20,12 @@
 #ifndef GENERAL_STATISTICS_MENU_H
 #define GENERAL_STATISTICS_MENU_H
 
-#include "constants.h"
-#include "wui/plot_area.h"
+#include "logic/constants.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/unique_window.h"
+#include "wui/plot_area.h"
 
 class Interactive_GameBase;
 namespace UI {

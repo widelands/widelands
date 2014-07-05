@@ -40,6 +40,7 @@
 #include "logic/game_settings.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
+#include "wui/text_constants.h"
 
 
 

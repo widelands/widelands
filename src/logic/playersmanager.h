@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/widelands.h"
 
 namespace Widelands {

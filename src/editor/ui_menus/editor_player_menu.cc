@@ -26,6 +26,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
+#include "logic/constants.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"

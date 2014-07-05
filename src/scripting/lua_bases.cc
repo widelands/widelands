@@ -21,6 +21,7 @@
 
 #include "economy/economy.h"
 #include "logic/checkstep.h"
+#include "logic/constants.h"
 #include "logic/player.h"
 #include "scripting/lua_map.h"
 

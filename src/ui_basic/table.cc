@@ -31,6 +31,7 @@
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
 #include "wui/text_layout.h"
 
 namespace UI {

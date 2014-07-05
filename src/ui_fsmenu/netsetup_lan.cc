@@ -21,10 +21,11 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
-#include "constants.h"
 #include "graphic/graphic.h"
+#include "network/constants.h"
 #include "network/network.h"
 #include "profile/profile.h"
+#include "wui/text_constants.h"
 
 Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 	Fullscreen_Menu_Base("singleplmenu.jpg"), //  FIXME change this

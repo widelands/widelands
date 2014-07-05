@@ -36,6 +36,7 @@
 #include "profile/profile.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "wui/text_constants.h"
 
 
 using Widelands::WL_Map_Loader;

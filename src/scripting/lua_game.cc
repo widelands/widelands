@@ -27,6 +27,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/campaign_visibility.h"
+#include "logic/constants.h"
 #include "logic/game_controller.h"
 #include "logic/objective.h"
 #include "logic/path.h"

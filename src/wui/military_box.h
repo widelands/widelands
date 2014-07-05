@@ -28,6 +28,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
+#include "wui/text_constants.h"
 
 /**
  * Military settings tab that is part of the \ref FieldActionWindow

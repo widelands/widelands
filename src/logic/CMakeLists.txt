@@ -79,6 +79,7 @@ wl_library(logic
     cmd_luascript.h
     cmd_queue.cc
     cmd_queue.h
+    constants.h
     constructionsite.cc
     constructionsite.h
     cookie_priority_queue.h

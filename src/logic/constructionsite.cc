@@ -38,6 +38,7 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_gamebase.h"
+#include "wui/text_constants.h"
 
 namespace Widelands {
 

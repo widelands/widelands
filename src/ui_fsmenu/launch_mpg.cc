@@ -27,6 +27,7 @@
 #include "base/warning.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -42,6 +43,7 @@
 #include "ui_fsmenu/mapselect.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
+#include "wui/text_constants.h"
 
 using boost::format;
 

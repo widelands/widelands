@@ -33,6 +33,7 @@
 #include "logic/game.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
+#include "wui/text_constants.h"
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay(Widelands::Game & g) :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),

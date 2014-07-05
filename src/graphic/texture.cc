@@ -24,7 +24,6 @@
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "constants.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 

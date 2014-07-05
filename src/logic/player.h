@@ -22,6 +22,7 @@
 
 #include "graphic/color.h"
 #include "logic/building.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"

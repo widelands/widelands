@@ -33,6 +33,7 @@
 #include "graphic/font_handler.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
+#include "logic/constants.h"
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"

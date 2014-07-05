@@ -29,7 +29,6 @@
 
 #include "logic/bob.h"
 #include "logic/building.h"
-#include "constants.h"
 #include "logic/map.h"
 #include "logic/notification.h"
 #include "logic/player_area.h"

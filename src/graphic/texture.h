@@ -29,6 +29,11 @@
 #include "graphic/colormap.h"
 #include "graphic/render/gl_surface_texture.h"
 
+/// Textures have a fixed size and are squares.
+/// TEXTURE_HEIGHT is just defined for easier understanding of the code.
+#define TEXTURE_WIDTH 64
+#define TEXTURE_HEIGHT TEXTURE_WIDTH
+
 /** struct Texture
 *
 * Texture represents are terrain texture, which is strictly

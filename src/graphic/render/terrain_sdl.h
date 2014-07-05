@@ -24,7 +24,6 @@
 
 #include "base/log.h"
 #include "base/macros.h"
-#include "constants.h"
 #include "graphic/graphic.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/render/vertex.h"

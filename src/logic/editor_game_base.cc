@@ -33,6 +33,7 @@
 #include "graphic/graphic.h"
 #include "logic/battle.h"
 #include "logic/building.h"
+#include "logic/constants.h"
 #include "logic/dismantlesite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"

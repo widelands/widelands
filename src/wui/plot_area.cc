@@ -26,7 +26,6 @@
 #include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
-#include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"

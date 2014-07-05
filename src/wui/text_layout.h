@@ -22,8 +22,8 @@
 
 #include <string>
 
-#include "constants.h"
 #include "graphic/color.h"
+#include "wui/text_constants.h"
 
 
 /**

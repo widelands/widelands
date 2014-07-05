@@ -25,13 +25,14 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
-#include "constants.h"
 #include "graphic/graphic.h"
+#include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "profile/profile.h"
 #include "ui_basic/messagebox.h"
+#include "wui/text_constants.h"
 
 Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	(char const * const nick, char const * const pwd, bool registered)

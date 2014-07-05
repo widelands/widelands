@@ -23,7 +23,7 @@
 #include <map>
 #include <string>
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/widelands.h"
 #include "map_io/widelands_map_message_saver.h"
 

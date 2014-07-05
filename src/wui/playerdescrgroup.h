@@ -23,7 +23,6 @@
 #include <map>
 #include <string>
 
-#include "constants.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

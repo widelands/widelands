@@ -28,6 +28,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
 #include "graphic/graphic.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/world/world.h"

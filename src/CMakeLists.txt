@@ -313,7 +313,6 @@ wl_library(widelands_ball_of_mud
   SRCS
     chat.cc
     chat.h
-    constants.h
     helper.cc
     helper.h
     interval.h

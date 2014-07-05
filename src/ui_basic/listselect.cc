@@ -25,12 +25,12 @@
 
 #include "base/deprecated.h"
 #include "base/log.h"
-#include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
 
 namespace UI {
 /**

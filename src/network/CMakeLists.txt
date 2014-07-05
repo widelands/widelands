@@ -1,5 +1,6 @@
 wl_library(network
   SRCS
+    constants.h
     internet_gaming.cc
     internet_gaming.h
     internet_gaming_messages.cc

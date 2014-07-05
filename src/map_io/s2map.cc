@@ -28,7 +28,6 @@
 #include "base/macros.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
-#include "constants.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"

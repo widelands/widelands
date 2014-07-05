@@ -32,7 +32,6 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
-#include "constants.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
@@ -54,6 +53,19 @@ using namespace std;
 
 Graphic * g_gr;
 bool g_opengl;
+
+#define FALLBACK_GRAPHICS_WIDTH 800
+#define FALLBACK_GRAPHICS_HEIGHT 600
+#define FALLBACK_GRAPHICS_DEPTH 32
+
+namespace  {
+
+/// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
+/// These are all surfaces that are not loaded from disk.
+const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
+
+}  // namespace
+
 
 /**
  * Initialize the SDL video mode.
@@ -135,7 +147,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log("Graphics: FULLSCREEN ENABLED\n");
 
 	bool use_arb = true;
-	const char * extensions;
+	const char * extensions = nullptr;
 
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information

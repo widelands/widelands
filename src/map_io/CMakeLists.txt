@@ -16,7 +16,6 @@ wl_library(map_io_map_loader
     logic
     map_io
     scripting
-    widelands_ball_of_mud
 )
 
 # TODO(sirver): separate widelands_map_map_object_loader/saver into

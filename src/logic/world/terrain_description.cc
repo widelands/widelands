@@ -21,7 +21,6 @@
 
 #include <boost/format.hpp>
 
-#include "constants.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
 #include "logic/world/editor_category.h"

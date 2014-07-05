@@ -21,6 +21,8 @@
 
 #include <boost/format.hpp>
 
+#include "wui/text_constants.h"
+
 using namespace std;
 using namespace boost;
 

@@ -26,6 +26,7 @@
 #include "base/wexception.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
+#include "wui/text_constants.h"
 
 namespace UI {
 

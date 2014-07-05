@@ -28,6 +28,7 @@
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -41,6 +42,7 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 #include "wui/playerdescrgroup.h"
+#include "wui/text_constants.h"
 
 Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,

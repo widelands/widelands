@@ -26,7 +26,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "build_info.h"
-#include "constants.h"
+#include "network/constants.h"
 
 /*** class LAN_Base ***/
 
