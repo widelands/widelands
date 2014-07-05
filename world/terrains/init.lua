@@ -310,10 +310,9 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { pics_dir .. "wasteland/ashes_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these have only be changed to be better suited to mushroom_red for testing.
-   temperature = 301,
-   humidity = 0.3,
-   fertility = 0.2,
+   temperature = 313,
+   humidity = 0.25,
+   fertility = 0.9,
 }
 
 world:new_terrain_type{
@@ -326,9 +325,8 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { pics_dir .. "wasteland/ashes2_00.png" },
    dither_layer = 20,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
+   temperature = 313,
+   humidity = 0.25,
    fertility = 0.9,
 }
 
@@ -342,10 +340,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground1_00.png" },
    dither_layer = 30,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 308,
+   humidity = 0.2,
+   fertility = 0.7,
 }
 
 world:new_terrain_type{
@@ -358,10 +355,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground2_00.png" },
    dither_layer = 30,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 308,
+   humidity = 0.22,
+   fertility = 0.75,
 }
 
 world:new_terrain_type{
@@ -374,10 +370,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground3_00.png" },
    dither_layer = 30,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 308,
+   humidity = 0.24,
+   fertility = 0.8,
 }
 
 world:new_terrain_type{
@@ -390,10 +385,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground4_00.png" },
    dither_layer = 30,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 308,
+   humidity = 0.26,
+   fertility = 0.85,
 }
 
 world:new_terrain_type{
@@ -406,10 +400,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/hardlava_00.png" },
    dither_layer = 40,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 323,
+   humidity = 0.1,
+   fertility = 0.5,
 }
 
 world:new_terrain_type{
@@ -422,10 +415,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/mountain1_00.png" },
    dither_layer = 50,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.3,
+   fertility = 0.5,
 }
 
 world:new_terrain_type{
@@ -438,10 +430,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/mountain2_00.png" },
    dither_layer = 50,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.3,
+   fertility = 0.5,
 }
 
 world:new_terrain_type{
@@ -454,10 +445,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/mountain3_00.png" },
    dither_layer = 50,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.3,
+   fertility = 0.5,
 }
 
 world:new_terrain_type{
@@ -470,10 +460,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/mountain4_00.png" },
    dither_layer = 50,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 303,
+   humidity = 0.3,
+   fertility = 0.5,
 }
 
 world:new_terrain_type{
@@ -486,10 +475,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/strand_00.png" },
    dither_layer = 0,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 318,
+   humidity = 0.2,
+   fertility = 0.4,
 }
 
 world:new_terrain_type{
@@ -502,10 +490,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/lava-stone1_00.png" },
    dither_layer = 70,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 1273,
+   humidity = 0,
+   fertility = 0.99,
 }
 
 world:new_terrain_type{
@@ -518,10 +505,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/lava-stone2_00.png" },
    dither_layer = 70,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 1273,
+   humidity = 0,
+   fertility = 0.99,
 }
 
 world:new_terrain_type{
@@ -535,10 +521,9 @@ world:new_terrain_type{
    textures = path.list_directory(pics_dir .. "wasteland", "water_\\d+.png"),
    dither_layer = 0,
    fps = 14,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 313,
+   humidity = 1,
+   fertility = 0.8,
 }
 
 -------------------------
