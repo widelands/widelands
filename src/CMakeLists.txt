@@ -166,6 +166,10 @@ function(wl_library NAME)
     ${ARG_SRCS}
   )
 
+  # increase the tries for the linker searching for cyclic dependencies
+  # TODO remove this once cycling dependencies are history in widelands
+  set_target_properties(${NAME} PROPERTIES LINK_INTERFACE_MULTIPLICITY 5)
+
   _common_compile_tasks()
 endfunction()
 
