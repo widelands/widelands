@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MULTI_SELECT_MENU_H
-#define MULTI_SELECT_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
+#define WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 
 #include <string>
 #include <cmath>
@@ -181,4 +181,4 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	current_selection_names_.set_text(buf);
 }
 
-#endif /* end of include guard: MULTI_SELECT_MENU_H */
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _MILITARY_BOX_H_
-#define _MILITARY_BOX_H_
+#ifndef WL_WUI_MILITARY_BOX_H
+#define WL_WUI_MILITARY_BOX_H
 
 #include <list>
 
@@ -76,4 +76,4 @@ struct MilitaryBox : public UI::Box {
 		bool                    m_allowed_change;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_MILITARY_BOX_H

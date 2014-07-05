@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FIELD_H
-#define FIELD_H
+#ifndef WL_LOGIC_FIELD_H
+#define WL_LOGIC_FIELD_H
 
 #include <cassert>
 #include <limits>
@@ -240,4 +240,4 @@ static_assert(sizeof(Field) <= sizeof(void *) * 2 + 11, "Field is not tightly pa
 #endif
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_FIELD_H

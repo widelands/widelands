@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOLDIER_H
-#define SOLDIER_H
+#ifndef WL_LOGIC_SOLDIER_H
+#define WL_LOGIC_SOLDIER_H
 
 #include "logic/tattribute.h"
 #include "logic/worker.h"
@@ -328,4 +328,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_SOLDIER_H

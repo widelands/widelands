@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ROAD_H
-#define ROAD_H
+#ifndef WL_ECONOMY_ROAD_H
+#define WL_ECONOMY_ROAD_H
 
 #include <vector>
 
@@ -142,4 +142,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_ROAD_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAPDIFFERENCEREGION_H
-#define MAPDIFFERENCEREGION_H
+#ifndef WL_LOGIC_MAPDIFFERENCEREGION_H
+#define WL_LOGIC_MAPDIFFERENCEREGION_H
 
 #include "logic/map.h"
 
@@ -90,4 +90,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MAPDIFFERENCEREGION_H

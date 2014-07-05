@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_H
-#define GAME_H
+#ifndef WL_LOGIC_GAME_H
+#define WL_LOGIC_GAME_H
 
 #include "base/md5.h"
 #include "io/streamwrite.h"
@@ -276,4 +276,4 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_GAME_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IS_PRINTABLE_H
-#define IS_PRINTABLE_H
+#ifndef WL_UI_BASIC_IS_PRINTABLE_H
+#define WL_UI_BASIC_IS_PRINTABLE_H
 
 #include <SDL.h>
 
@@ -41,4 +41,4 @@ bool is_printable(SDL_keysym k);
 
 }  // namespace UI
 
-#endif /* end of include guard: IS_PRINTABLE_H */
+#endif  // end of include guard: WL_UI_BASIC_IS_PRINTABLE_H

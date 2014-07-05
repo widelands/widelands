@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DISK_FILESYSTEM_H
-#define DISK_FILESYSTEM_H
+#ifndef WL_IO_FILESYSTEM_DISK_FILESYSTEM_H
+#define WL_IO_FILESYSTEM_DISK_FILESYSTEM_H
 
 #include <cstring>
 #include <string>
@@ -64,4 +64,4 @@ private:
 	std::string m_directory;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_DISK_FILESYSTEM_H

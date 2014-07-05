@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WAREHOUSESUPPLY_H
-#define WAREHOUSESUPPLY_H
+#ifndef WL_ECONOMY_WAREHOUSESUPPLY_H
+#define WL_ECONOMY_WAREHOUSESUPPLY_H
 
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
@@ -73,4 +73,4 @@ private:
 }
 
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_WAREHOUSESUPPLY_H

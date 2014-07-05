@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_EDITBOX_H
-#define UI_EDITBOX_H
+#ifndef WL_UI_BASIC_EDITBOX_H
+#define WL_UI_BASIC_EDITBOX_H
 
 #include <memory>
 
@@ -78,4 +78,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_EDITBOX_H

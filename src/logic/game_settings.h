@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAMESETTINGS_H
-#define GAMESETTINGS_H
+#ifndef WL_LOGIC_GAME_SETTINGS_H
+#define WL_LOGIC_GAME_SETTINGS_H
 
 #include <string>
 #include <vector>
@@ -173,4 +173,4 @@ struct GameSettingsProvider {
 };
 
 
-#endif
+#endif  // end of include guard: WL_LOGIC_GAME_SETTINGS_H

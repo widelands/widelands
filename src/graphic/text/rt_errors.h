@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_ERRORS_H
-#define RT_ERRORS_H
+#ifndef WL_GRAPHIC_TEXT_RT_ERRORS_H
+#define WL_GRAPHIC_TEXT_RT_ERRORS_H
 
 #include "base/wexception.h"
 
@@ -54,4 +54,4 @@ DEF_ERR(WidthTooSmall)
 
 }
 
-#endif /* end of include guard: RT_ERRORS_H */
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_H

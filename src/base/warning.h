@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARNING_H
-#define WARNING_H
+#ifndef WL_BASE_WARNING_H
+#define WL_BASE_WARNING_H
 
 #include <cstring>
 #include <exception>
@@ -53,4 +53,4 @@ protected:
 	std::string m_title;
 };
 
-#endif
+#endif  // end of include guard: WL_BASE_WARNING_H

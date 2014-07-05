@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_ERRORS_H
-#define LUA_ERRORS_H
+#ifndef WL_SCRIPTING_LUA_ERRORS_H
+#define WL_SCRIPTING_LUA_ERRORS_H
 
 #include <string>
 
@@ -37,4 +37,4 @@ public:
 	}
 };
 
-#endif /* end of include guard: LUA_ERRORS_H */
+#endif  // end of include guard: WL_SCRIPTING_LUA_ERRORS_H

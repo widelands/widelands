@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LAYERED_FILESYSTEM_H
-#define LAYERED_FILESYSTEM_H
+#ifndef WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H
+#define WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H
 
 #include "io/filesystem/filesystem.h"
 
@@ -104,4 +104,4 @@ private:
 	const FileSystem & m_fs;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERNET_GAMING_PROTOCOL_H
-#define INTERNET_GAMING_PROTOCOL_H
+#ifndef WL_NETWORK_INTERNET_GAMING_PROTOCOL_H
+#define WL_NETWORK_INTERNET_GAMING_PROTOCOL_H
 
 #include <string>
 
@@ -357,4 +357,4 @@ static const std::string IGPCMD_GAME_START = "GAME_START";
 static const std::string IGPCMD_GAME_END = "GAME_END";
 
 
-#endif
+#endif  // end of include guard: WL_NETWORK_INTERNET_GAMING_PROTOCOL_H

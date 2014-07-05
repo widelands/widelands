@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_ERRORS_IMPL_H
-#define RT_ERRORS_IMPL_H
+#ifndef WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
+#define WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
 
 #include <boost/format.hpp>
 
@@ -34,6 +34,7 @@ struct SyntaxError_Impl : public SyntaxError {
 			.str())
 	{}
 };
+
 }
 
-#endif /* end of include guard: RT_ERRORS_IMPL_H */
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MULTIPLAYERSETUPGROUP_H
-#define MULTIPLAYERSETUPGROUP_H
+#ifndef WL_WUI_MULTIPLAYERSETUPGROUP_H
+#define WL_WUI_MULTIPLAYERSETUPGROUP_H
 
 #include <memory>
 #include <map>
@@ -73,4 +73,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_MULTIPLAYERSETUPGROUP_H

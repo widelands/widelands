@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SAVE_HANDLER_H
-#define SAVE_HANDLER_H
+#ifndef WL_LOGIC_SAVE_HANDLER_H
+#define WL_LOGIC_SAVE_HANDLER_H
 
 #include <cstring>
 #include <string>
@@ -63,4 +63,4 @@ private:
 	void initialize(int32_t currenttime);
 };
 
-#endif
+#endif  // end of include guard: WL_LOGIC_SAVE_HANDLER_H

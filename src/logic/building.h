@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BUILDING_H
-#define BUILDING_H
+#ifndef WL_LOGIC_BUILDING_H
+#define WL_LOGIC_BUILDING_H
 
 #include <cstring>
 #include <string>
@@ -317,4 +317,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BUILDING_H

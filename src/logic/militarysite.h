@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MILITARYSITE_H
-#define MILITARYSITE_H
+#ifndef WL_LOGIC_MILITARYSITE_H
+#define WL_LOGIC_MILITARYSITE_H
 
 #include <memory>
 
@@ -177,4 +177,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MILITARYSITE_H

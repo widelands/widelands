@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WORKER_H
-#define WORKER_H
+#ifndef WL_LOGIC_WORKER_H
+#define WL_LOGIC_WORKER_H
 
 #include "economy/idleworkersupply.h"
 #include "economy/portdock.h"
@@ -304,4 +304,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_H

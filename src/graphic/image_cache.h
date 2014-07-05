@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IMAGE_CACHE_H
-#define IMAGE_CACHE_H
+#ifndef WL_GRAPHIC_IMAGE_CACHE_H
+#define WL_GRAPHIC_IMAGE_CACHE_H
 
 #include <string>
 #include <map>
@@ -62,4 +62,4 @@ private:
 	SurfaceCache* const surface_cache_;  // Not owned.
 };
 
-#endif /* end of include guard: IMAGE_CACHE_H */
+#endif  // end of include guard: WL_GRAPHIC_IMAGE_CACHE_H

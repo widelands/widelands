@@ -236,7 +236,7 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p) {
 	uint16_t max_line_width = 0;
 	while (m_idx < m_all_nodes.size()) {
 		vector<RenderNode*> nodes_in_line;
-		int m_idx_before_iteration = m_idx;
+		size_t m_idx_before_iteration = m_idx;
 		uint16_t biggest_hotspot = m_fit_line(w, p, &nodes_in_line);
 
 		int line_height = 0;

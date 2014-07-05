@@ -17,9 +17,8 @@
  *
  */
 
-
-#ifndef SDL_TTF_FONT_IMPL_H
-#define SDL_TTF_FONT_IMPL_H
+#ifndef WL_GRAPHIC_TEXT_SDL_TTF_FONT_H
+#define WL_GRAPHIC_TEXT_SDL_TTF_FONT_H
 
 #include <memory>
 #include <string>
@@ -54,6 +53,4 @@ private:
 
 }  // namespace RT
 
-
-
-#endif /* end of include guard: SDL_TTF_FONT_IMPL_H */
+#endif  // end of include guard:

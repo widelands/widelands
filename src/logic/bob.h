@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BOB_H
-#define BOB_H
+#ifndef WL_LOGIC_BOB_H
+#define WL_LOGIC_BOB_H
 
 #include "base/macros.h"
 #include "base/point.h"
@@ -417,4 +417,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BOB_H

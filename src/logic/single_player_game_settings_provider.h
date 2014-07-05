@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SINGLE_PLAYER_GAME_SETTINGS_PROVIDE_H
-#define SINGLE_PLAYER_GAME_SETTINGS_PROVIDE_H
+#ifndef WL_LOGIC_SINGLE_PLAYER_GAME_SETTINGS_PROVIDER_H
+#define WL_LOGIC_SINGLE_PLAYER_GAME_SETTINGS_PROVIDER_H
 
 #include "logic/game_settings.h"
 
@@ -64,4 +64,4 @@ private:
 	GameSettings s;
 };
 
-#endif
+#endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_SETTINGS_PROVIDER_H

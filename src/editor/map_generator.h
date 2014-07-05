@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAP_GENERATOR_H
-#define MAP_GENERATOR_H
+#ifndef WL_EDITOR_MAP_GENERATOR_H
+#define WL_EDITOR_MAP_GENERATOR_H
 
 #include <memory>
 
@@ -121,4 +121,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_EDITOR_MAP_GENERATOR_H

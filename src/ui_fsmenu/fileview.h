@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_FILEVIEW_H
-#define FULLSCREEN_MENU_FILEVIEW_H
+#ifndef WL_UI_FSMENU_FILEVIEW_H
+#define WL_UI_FSMENU_FILEVIEW_H
 
 #include <cstring>
 #include <string>
@@ -60,4 +60,4 @@ struct Fullscreen_Menu_FileView : public Fullscreen_Menu_TextView {
 
 
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_FILEVIEW_H

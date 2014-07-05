@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _ATTACK_BOX_H_
-#define _ATTACK_BOX_H_
+#ifndef WL_WUI_ATTACK_BOX_H
+#define WL_WUI_ATTACK_BOX_H
 
 #include <list>
 
@@ -90,4 +90,4 @@ struct AttackBox : public UI::Box {
 		UI::Button * m_add_soldiers;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_ATTACK_BOX_H

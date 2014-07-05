@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_TOOL_ACTION_H
-#define EDITOR_TOOL_ACTION_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_TOOL_ACTION_H
+#define WL_EDITOR_TOOLS_EDITOR_TOOL_ACTION_H
 
 #include "editor/tools/editor_action_args.h"
 #include "logic/widelands_geometry.h"
@@ -63,4 +63,4 @@ struct Editor_Tool_Action {
 	{args->refcount++;}
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_TOOL_ACTION_H

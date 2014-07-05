@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RENDER_H
-#define RENDER_H
+#ifndef WL_GRAPHIC_TEXT_TEST_RENDER_H
+#define WL_GRAPHIC_TEXT_TEST_RENDER_H
 
 #include <memory>
 #include <string>
@@ -41,4 +41,4 @@ class StandaloneRenderer {
 		std::unique_ptr<RT::Renderer> renderer_;
 };
 
-#endif /* end of include guard: RENDER_H */
+#endif  // end of include guard:

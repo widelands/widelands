@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARE_STATISTICS_MENU_H
-#define WARE_STATISTICS_MENU_H
+#ifndef WL_WUI_WARE_STATISTICS_MENU_H
+#define WL_WUI_WARE_STATISTICS_MENU_H
 
 #include <vector>
 
@@ -80,4 +80,4 @@ struct WUIPlot_Generic_Area_Slider : public UI::DiscreteSlider {
 	}
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_WARE_STATISTICS_MENU_H

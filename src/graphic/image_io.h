@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IMAGE_IO_H
-#define IMAGE_IO_H
+#ifndef WL_GRAPHIC_IMAGE_IO_H
+#define WL_GRAPHIC_IMAGE_IO_H
 
 #include <string>
 
@@ -52,4 +52,4 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fn, FileSystem* fs = n
 /// Saves the 'surface' to 'sw' as a PNG.
 bool save_surface_to_png(Surface* surface, StreamWrite* sw);
 
-#endif /* end of include guard:  */
+#endif  // end of include guard: WL_GRAPHIC_IMAGE_IO_H

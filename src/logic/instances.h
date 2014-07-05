@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INSTANCES_H
-#define INSTANCES_H
+#ifndef WL_LOGIC_INSTANCES_H
+#define WL_LOGIC_INSTANCES_H
 
 #include <cstring>
 #include <map>
@@ -473,4 +473,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_INSTANCES_H

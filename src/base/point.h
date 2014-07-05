@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef POINT_H
-#define POINT_H
+#ifndef WL_BASE_POINT_H
+#define WL_BASE_POINT_H
 
 #include <stdint.h>
 
@@ -45,4 +45,4 @@ struct Point {
 /// values).
 Point middle(const Point& a, const Point& b);
 
-#endif
+#endif  // end of include guard: WL_BASE_POINT_H

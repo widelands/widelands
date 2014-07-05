@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_RENDER_H
-#define RT_RENDER_H
+#ifndef WL_GRAPHIC_TEXT_RT_RENDER_H
+#define WL_GRAPHIC_TEXT_RT_RENDER_H
 
 #include <memory>
 #include <set>
@@ -105,4 +105,4 @@ private:
 
 }
 
-#endif /* end of include guard: RT_RENDER_H */
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_RENDER_H

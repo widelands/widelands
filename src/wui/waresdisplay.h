@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARESDISPLAY_H
-#define WARESDISPLAY_H
+#ifndef WL_WUI_WARESDISPLAY_H
+#define WL_WUI_WARESDISPLAY_H
 
 #include <vector>
 
@@ -150,4 +150,4 @@ std::string waremap_to_richtext
 		(const Widelands::Tribe_Descr & tribe,
 		 const std::map<Widelands::Ware_Index, uint8_t> & map);
 
-#endif
+#endif  // end of include guard: WL_WUI_WARESDISPLAY_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_GAME_H
-#define LUA_GAME_H
+#ifndef WL_SCRIPTING_LUA_GAME_H
+#define WL_SCRIPTING_LUA_GAME_H
 
 #include "logic/building.h"
 #include "logic/message_id.h"
@@ -184,5 +184,5 @@ public:
 
 void luaopen_wlgame(lua_State *);
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_GAME_H
 }

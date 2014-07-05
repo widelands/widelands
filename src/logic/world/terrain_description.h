@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TERRAIN_DESCRIPTION_H
-#define TERRAIN_DESCRIPTION_H
+#ifndef WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H
+#define WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H
 
 #include <string>
 
@@ -98,4 +98,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: TERRAIN_DESCRIPTION_H */
+#endif  // end of include guard: WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H

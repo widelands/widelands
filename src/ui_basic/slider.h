@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef UI_SLIDER_H
-#define UI_SLIDER_H
+#ifndef WL_UI_BASIC_SLIDER_H
+#define WL_UI_BASIC_SLIDER_H
 
 #include <boost/signals2.hpp>
 
@@ -211,4 +211,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_SLIDER_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IROUTE_H
-#define IROUTE_H
+#ifndef WL_ECONOMY_IROUTE_H
+#define WL_ECONOMY_IROUTE_H
 
 #include <stdint.h>
 
@@ -45,4 +45,4 @@ struct IRoute {
 };
 
 }
-#endif
+#endif  // end of include guard: WL_ECONOMY_IROUTE_H

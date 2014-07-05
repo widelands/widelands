@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_PROGRESSWINDOW_H
-#define UI_PROGRESSWINDOW_H
+#ifndef WL_UI_BASIC_PROGRESSWINDOW_H
+#define WL_UI_BASIC_PROGRESSWINDOW_H
 
 #include <cstring>
 #include <string>
@@ -76,4 +76,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_PROGRESSWINDOW_H

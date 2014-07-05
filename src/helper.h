@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef HELPER_H
-#define HELPER_H
+#ifndef WL_HELPER_H
+#define WL_HELPER_H
 
 #include <cassert>
 #include <cstring>
@@ -59,4 +59,4 @@ ContainerType filter(const ContainerType& container, UnaryPredicate test) {
 	}
 	return filtered;
 }
-#endif
+#endif  // end of include guard: WL_HELPER_H

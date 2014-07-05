@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SUPPLY_LIST_H
-#define SUPPLY_LIST_H
+#ifndef WL_ECONOMY_SUPPLY_LIST_H
+#define WL_ECONOMY_SUPPLY_LIST_H
 
 #include <cstddef>
 #include <vector>
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_SUPPLY_LIST_H

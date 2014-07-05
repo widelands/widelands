@@ -18,8 +18,8 @@
  */
 
 // NOCOM(#sirver): rename do font_constants?
-#ifndef TEXT_CONSTANTS_H
-#define TEXT_CONSTANTS_H
+#ifndef WL_WUI_TEXT_CONSTANTS_H
+#define WL_WUI_TEXT_CONSTANTS_H
 
 // Basic constants for often used text attributes.
 
@@ -71,4 +71,4 @@
 #define UI_FONT_SMALL_CLR   UI_FONT_CLR_FG, UI_FONT_CLR_BG
 #define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0)
 
-#endif /* end of include guard: TEXT_CONSTANTS_H */
+#endif  // end of include guard: WL_WUI_TEXT_CONSTANTS_H

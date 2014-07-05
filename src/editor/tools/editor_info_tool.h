@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_INFO_TOOL_H
-#define EDITOR_INFO_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_INFO_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_INFO_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 
@@ -38,4 +38,4 @@ struct Editor_Info_Tool : public Editor_Tool {
 	}
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_INFO_TOOL_H

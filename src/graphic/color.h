@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RGBCOLOR_H
-#define RGBCOLOR_H
+#ifndef WL_GRAPHIC_COLOR_H
+#define WL_GRAPHIC_COLOR_H
 
 #include <SDL.h>
 
@@ -64,4 +64,4 @@ struct RGBAColor {
 	uint8_t a;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_COLOR_H

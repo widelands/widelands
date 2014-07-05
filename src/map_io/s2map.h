@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S2MAP_H
-#define S2MAP_H
+#ifndef WL_MAP_IO_S2MAP_H
+#define WL_MAP_IO_S2MAP_H
 
 #include <string>
 
@@ -49,4 +49,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_S2MAP_H

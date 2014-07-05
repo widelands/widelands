@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_LUACOROUTINE_H
-#define CMD_LUACOROUTINE_H
+#ifndef WL_LOGIC_CMD_LUACOROUTINE_H
+#define WL_LOGIC_CMD_LUACOROUTINE_H
 
 #include <string>
 
@@ -51,4 +51,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_LUACOROUTINE_H

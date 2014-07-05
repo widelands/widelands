@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAP_H
-#define MAP_H
+#ifndef WL_LOGIC_MAP_H
+#define WL_LOGIC_MAP_H
 
 #include <cstring>
 #include <map>
@@ -1066,4 +1066,4 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 }
 
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MAP_H

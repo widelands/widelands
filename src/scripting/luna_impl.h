@@ -23,8 +23,8 @@
  * it in a header file, not an implementation file
  */
 
-#ifndef LUNA_IMPL_H
-#define LUNA_IMPL_H
+#ifndef WL_SCRIPTING_LUNA_IMPL_H
+#define WL_SCRIPTING_LUNA_IMPL_H
 
 #include "scripting/c_utils.h"
 #include "third_party/eris/lua.hpp"
@@ -366,4 +366,4 @@ void m_extract_userdata_from_user_class(lua_State * const L, int narg) {
 	}
 }
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUNA_IMPL_H

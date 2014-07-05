@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef STREAMREAD_H
-#define STREAMREAD_H
+#ifndef WL_IO_STREAMREAD_H
+#define WL_IO_STREAMREAD_H
 
 #include <cstring>
 #include <string>
@@ -79,4 +79,4 @@ public:
 #define data_error(...) _data_error(__VA_ARGS__)
 };
 
-#endif
+#endif  // end of include guard: WL_IO_STREAMREAD_H

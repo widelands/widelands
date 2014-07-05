@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_MAP_OPTIONS_H
-#define EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H
 
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -48,4 +48,4 @@ private:
 	void update();
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H

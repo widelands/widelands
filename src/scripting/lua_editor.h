@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_EDITOR_H
-#define LUA_EDITOR_H
+#ifndef WL_SCRIPTING_LUA_EDITOR_H
+#define WL_SCRIPTING_LUA_EDITOR_H
 
 #include "scripting/lua_bases.h"
 #include "third_party/eris/lua.hpp"
@@ -58,4 +58,4 @@ void luaopen_wleditor(lua_State *);
 }
 
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_EDITOR_H

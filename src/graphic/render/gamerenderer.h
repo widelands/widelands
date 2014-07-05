@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_GAMERENDERER_H
-#define WIDELANDS_GAMERENDERER_H
+#ifndef WL_GRAPHIC_RENDER_GAMERENDERER_H
+#define WL_GRAPHIC_RENDER_GAMERENDERER_H
 
 #include <boost/utility.hpp>
 
@@ -96,4 +96,4 @@ private:
 	void draw_wrapper();
 };
 
-#endif //WIDELANDS_GAMEVIEW_H
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GAMERENDERER_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef I18N_H
-#define I18N_H
+#ifndef WL_BASE_I18N_H
+#define WL_BASE_I18N_H
 
 #include <cstring>
 #include <string>
@@ -54,4 +54,4 @@ const std::string & get_locale();
 void set_localedir(std::string);
 }
 
-#endif
+#endif  // end of include guard: WL_BASE_I18N_H

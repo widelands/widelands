@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RANDOM_H
-#define RANDOM_H
+#ifndef WL_RANDOM_RANDOM_H
+#define WL_RANDOM_RANDOM_H
 
 #include <stdint.h>
 
@@ -44,4 +44,4 @@ private:
 
 #define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x) & 0xff])
 
-#endif
+#endif  // end of include guard: WL_RANDOM_RANDOM_H

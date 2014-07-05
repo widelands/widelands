@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PLAYER_AREA_H
-#define PLAYER_AREA_H
+#ifndef WL_LOGIC_PLAYER_AREA_H
+#define WL_LOGIC_PLAYER_AREA_H
 
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
@@ -35,4 +35,4 @@ template <typename Area_type = Area<> > struct Player_Area : public Area_type {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PLAYER_AREA_H

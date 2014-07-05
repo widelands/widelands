@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PRODUCTION_PROGRAM_H
-#define PRODUCTION_PROGRAM_H
+#ifndef WL_LOGIC_PRODUCTION_PROGRAM_H
+#define WL_LOGIC_PRODUCTION_PROGRAM_H
 
 #include <cassert>
 #include <cstring>
@@ -532,4 +532,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PRODUCTION_PROGRAM_H

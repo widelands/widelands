@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WLAPPLICATION_H
-#define WLAPPLICATION_H
+#ifndef WL_WLAPPLICATION_H
+#define WL_WLAPPLICATION_H
 
 //Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
 #ifdef __MINGW32__
@@ -266,4 +266,4 @@ private:
 
 };
 
-#endif
+#endif  // end of include guard: WL_WLAPPLICATION_H

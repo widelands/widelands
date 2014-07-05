@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_MAP_H
-#define LUA_MAP_H
+#ifndef WL_SCRIPTING_LUA_MAP_H
+#define WL_SCRIPTING_LUA_MAP_H
 
 #include <set>
 
@@ -662,4 +662,4 @@ void luaopen_wlmap(lua_State *);
 
 }  // namespace LuaMap
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_MAP_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SURFACE_H
-#define SURFACE_H
+#ifndef WL_GRAPHIC_SURFACE_H
+#define WL_GRAPHIC_SURFACE_H
 
 #include <boost/noncopyable.hpp>
 
@@ -137,4 +137,4 @@ public:
 	virtual uint8_t * get_pixels() const = 0;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_SURFACE_H

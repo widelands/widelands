@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef WL_GRAPHIC_ANIMATION_H
+#define WL_GRAPHIC_ANIMATION_H
 
 #include <cstring>
 #include <map>
@@ -117,4 +117,4 @@ private:
 	std::vector<Animation*> m_animations;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_ANIMATION_H

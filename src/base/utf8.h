@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UTF8_H
-#define UTF8_H
+#ifndef WL_BASE_UTF8_H
+#define WL_BASE_UTF8_H
 
 #include <cassert>
 #include <string>
@@ -93,4 +93,4 @@ struct Utf8 {
 	}
 };
 
-#endif // UTF8_H
+#endif  // end of include guard: WL_BASE_UTF8_H

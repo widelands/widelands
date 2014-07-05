@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERACTIVE_GAMEBASE_H
-#define INTERACTIVE_GAMEBASE_H
+#ifndef WL_WUI_INTERACTIVE_GAMEBASE_H
+#define WL_WUI_INTERACTIVE_GAMEBASE_H
 
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
@@ -96,4 +96,4 @@ protected:
 	UI::UniqueWindow::Registry m_game_summary;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

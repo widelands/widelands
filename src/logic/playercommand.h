@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PLAYERCOMMAND_H
-#define PLAYERCOMMAND_H
+#ifndef WL_LOGIC_PLAYERCOMMAND_H
+#define WL_LOGIC_PLAYERCOMMAND_H
 
 #include <memory>
 
@@ -758,4 +758,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

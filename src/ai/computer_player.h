@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef COMPUTER_PLAYER_H
-#define COMPUTER_PLAYER_H
+#ifndef WL_AI_COMPUTER_PLAYER_H
+#define WL_AI_COMPUTER_PLAYER_H
 
 #include <boost/noncopyable.hpp>
 
@@ -76,4 +76,4 @@ private:
 	Widelands::Player_Number const m_player_number;
 };
 
-#endif
+#endif  // end of include guard: WL_AI_COMPUTER_PLAYER_H

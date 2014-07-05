@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WEXCEPTION_H
-#define WEXCEPTION_H
+#ifndef WL_BASE_WEXCEPTION_H
+#define WL_BASE_WEXCEPTION_H
 
 #include <cstring>
 #include <exception>
@@ -60,4 +60,4 @@ protected:
 #define wexception(...) _wexception(__FILE__, __LINE__, __VA_ARGS__)
 
 
-#endif
+#endif  // end of include guard: WL_BASE_WEXCEPTION_H

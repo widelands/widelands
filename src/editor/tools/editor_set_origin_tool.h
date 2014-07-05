@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_SET_ORIGIN_TOOL_H
-#define EDITOR_SET_ORIGIN_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_SET_ORIGIN_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_SET_ORIGIN_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 #include "logic/widelands.h"
@@ -46,4 +46,4 @@ struct Editor_Set_Origin_Tool : public Editor_Tool {
 	bool has_size_one() const override {return true;}
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_ORIGIN_TOOL_H

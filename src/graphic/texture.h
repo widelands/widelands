@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#ifndef WL_GRAPHIC_TEXTURE_H
+#define WL_GRAPHIC_TEXTURE_H
 
 #include <memory>
 #include <string>
@@ -74,4 +74,4 @@ private:
 	std::vector<std::unique_ptr<GLSurfaceTexture>> m_glFrames;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXTURE_H

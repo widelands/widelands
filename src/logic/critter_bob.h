@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CRITTER_BOB_H
-#define CRITTER_BOB_H
+#ifndef WL_LOGIC_CRITTER_BOB_H
+#define WL_LOGIC_CRITTER_BOB_H
 
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
@@ -99,4 +99,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CRITTER_BOB_H

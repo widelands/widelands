@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FILESYSTEM_EXCEPTIONS_H
-#define FILESYSTEM_EXCEPTIONS_H
+#ifndef WL_IO_FILESYSTEM_FILESYSTEM_EXCEPTIONS_H
+#define WL_IO_FILESYSTEM_FILESYSTEM_EXCEPTIONS_H
 
 #include <stdexcept>
 #include <string>
@@ -97,4 +97,4 @@ struct DirectoryCannotCreate_error : public File_error {
 		: File_error(thrower, dirname, message)
 	{}
 };
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_FILESYSTEM_EXCEPTIONS_H

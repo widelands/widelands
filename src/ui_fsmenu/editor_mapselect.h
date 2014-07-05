@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_EDITOR_MAPSELECT_H
-#define FULLSCREEN_MENU_EDITOR_MAPSELECT_H
+#ifndef WL_UI_FSMENU_EDITOR_MAPSELECT_H
+#define WL_UI_FSMENU_EDITOR_MAPSELECT_H
 
 #include "ui_fsmenu/base.h"
 #include "io/filesystem/filesystem.h"
@@ -59,4 +59,4 @@ private:
 	filenameset_t   m_mapfiles;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_EDITOR_MAPSELECT_H

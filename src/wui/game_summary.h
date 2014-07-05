@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_SUMMARY_H
-#define GAME_SUMMARY_H
+#ifndef WL_WUI_GAME_SUMMARY_H
+#define WL_WUI_GAME_SUMMARY_H
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -57,4 +57,4 @@ private:
 	UI::Table<uintptr_t const> *     m_players_table;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_SUMMARY_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_BASES_H
-#define LUA_BASES_H
+#ifndef WL_SCRIPTING_LUA_BASES_H
+#define WL_SCRIPTING_LUA_BASES_H
 
 #include "scripting/luna.h"
 #include "third_party/eris/lua.hpp"
@@ -115,4 +115,4 @@ void luaopen_wlbases(lua_State *);
 
 }
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_BASES_H

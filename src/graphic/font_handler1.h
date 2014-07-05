@@ -17,8 +17,9 @@
  *
  */
 
-#ifndef FONT_HANDLER1_H // TODO: rename
-#define FONT_HANDLER1_H
+// TODO: rename
+#ifndef WL_GRAPHIC_FONT_HANDLER1_H
+#define WL_GRAPHIC_FONT_HANDLER1_H
 
 #include <string>
 
@@ -54,4 +55,4 @@ extern IFont_Handler1 * g_fh1;
 
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER1_H

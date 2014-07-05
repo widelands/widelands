@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LOGMESSAGE_H
-#define LOGMESSAGE_H
+#ifndef WL_WUI_LOGMESSAGE_H
+#define WL_WUI_LOGMESSAGE_H
 
 #include <string>
 
@@ -38,4 +38,4 @@ struct LogMessage {
 	std::string msg;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_LOGMESSAGE_H

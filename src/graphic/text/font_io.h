@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FONT_IO_H
-#define FONT_IO_H
+#ifndef WL_GRAPHIC_TEXT_FONT_IO_H
+#define WL_GRAPHIC_TEXT_FONT_IO_H
 
 #include <string>
 
@@ -31,5 +31,4 @@ IFont* load_font(const std::string& face, int point_size);
 
 }  // namespace RT
 
-
-#endif /* end of include guard: FONT_IO_H */
+#endif  // end of include guard:

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GL_SURFACE_TEXTURE_H
-#define GL_SURFACE_TEXTURE_H
+#ifndef WL_GRAPHIC_RENDER_GL_SURFACE_TEXTURE_H
+#define WL_GRAPHIC_RENDER_GL_SURFACE_TEXTURE_H
 
 #include "graphic/render/gl_surface.h"
 
@@ -73,4 +73,4 @@ private:
 	uint16_t m_tex_w, m_tex_h;
 };
 
-#endif //GL_SURFACE_TEXTURE_H
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_SURFACE_TEXTURE_H

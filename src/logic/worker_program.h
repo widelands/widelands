@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WORKER_PROGRAM_H
-#define WORKER_PROGRAM_H
+#ifndef WL_LOGIC_WORKER_PROGRAM_H
+#define WL_LOGIC_WORKER_PROGRAM_H
 
 #include "logic/bob.h"
 #include "logic/workarea_info.h"
@@ -169,4 +169,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_PROGRAM_H

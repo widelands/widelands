@@ -19,8 +19,8 @@
  *
  */
 
-#ifndef MD5_H
-#define MD5_H
+#ifndef WL_BASE_MD5_H
+#define WL_BASE_MD5_H
 
 #include <cassert>
 #include <cstring>
@@ -124,4 +124,4 @@ private:
 class _DummyMD5Base {};
 typedef MD5Checksum<_DummyMD5Base> SimpleMD5Checksum;
 
-#endif
+#endif  // end of include guard: WL_BASE_MD5_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MESSAGE_ID_H
-#define MESSAGE_ID_H
+#ifndef WL_LOGIC_MESSAGE_ID_H
+#define WL_LOGIC_MESSAGE_ID_H
 
 #include <stdint.h>
 
@@ -68,4 +68,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MESSAGE_ID_H

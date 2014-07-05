@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TRIBE_H
-#define TRIBE_H
+#ifndef WL_LOGIC_TRIBE_H
+#define WL_LOGIC_TRIBE_H
 
 #include <map>
 #include <vector>
@@ -196,4 +196,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_TRIBE_H

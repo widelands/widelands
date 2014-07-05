@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef QUEUE_CMD_IDS_H
-#define QUEUE_CMD_IDS_H
+#ifndef WL_LOGIC_QUEUE_CMD_IDS_H
+#define WL_LOGIC_QUEUE_CMD_IDS_H
 
 /*
  * This file contains the ids for the different
@@ -89,4 +89,4 @@
 #define QUEUE_CMD_REPLAYSYNCREAD           252
 #define QUEUE_CMD_REPLAYEND                253
 
-#endif
+#endif  // end of include guard: WL_LOGIC_QUEUE_CMD_IDS_H

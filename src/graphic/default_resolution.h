@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef DEFAULT_RESOLUTION_H
-#define DEFAULT_RESOLUTION_H
+#ifndef WL_GRAPHIC_DEFAULT_RESOLUTION_H
+#define WL_GRAPHIC_DEFAULT_RESOLUTION_H
 
 // Default X/Y resolution.
 #define DEFAULT_RESOLUTION_W 800
 #define DEFAULT_RESOLUTION_H 600
 
-#endif /* end of include guard: DEFAULT_RESOLUTION_H */
+#endif  // end of include guard: WL_GRAPHIC_DEFAULT_RESOLUTION_H
