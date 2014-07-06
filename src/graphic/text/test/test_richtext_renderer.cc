@@ -60,6 +60,10 @@ struct RefMapTestSample {
 	std::string expected_text;
 };
 
+int hypot_sqr(int x, int y) {
+	return (x - y) * (x - y);
+}
+
 void ensure_sdl_is_initialized() {
 	static bool done = false;
 	if (!done) {
@@ -135,6 +139,11 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 	if (!save_surface_to_png(generated, &fw)) {
 		std::cout << "Could not encode PNG." << std::endl;
 	}
+
+	// But that is still not enough, so we let a minimum distance to be allowed.
+	// This might need tweaking to work on all systems.
+	constexpr int kMaxAllowedSquaredPixelDistance = 6;
+
 	const std::string encoded_data = fw.GetData();
 	std::unique_ptr<SDLSurface> converted(new SDLSurface(IMG_Load_RW(
 	   SDL_RWFromConstMem(encoded_data.data(), encoded_data.size()), false /* free source */)));
@@ -151,10 +160,15 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 			SDL_GetRGBA(
 			   converted->get_pixel(x, y), &converted->format(), &gclr.r, &gclr.g, &gclr.b, &gclr.a);
 
-			if (cclr != gclr) {
+			int distance = hypot_sqr(cclr.r, gclr.r) + hypot_sqr(cclr.g, gclr.g) +
+			               hypot_sqr(cclr.b, gclr.b) + hypot_sqr(cclr.a, gclr.a);
+
+			if (distance >= kMaxAllowedSquaredPixelDistance) {
 				log("Mismatched pixel: (%d, %d)\n", x, y);
 				log(" expected: (%x, %x, %x, %x)\n", cclr.r, cclr.g, cclr.b, cclr.a);
-				log(" seen:     (%x, %x, %x, %x)\n\n", gclr.r, gclr.g, gclr.b, gclr.a);
+				log(" seen:     (%x, %x, %x, %x)\n", gclr.r, gclr.g, gclr.b, gclr.a);
+				log(" distances: %d, allowed: %d\n\n", distance, kMaxAllowedSquaredPixelDistance);
+
 				++nwrong;
 			}
 		}
@@ -163,7 +177,7 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 	converted->unlock(Surface::Unlock_Update);
 	correct->unlock(Surface::Unlock_NoChange);
 
-	if (nwrong) {
+	if (nwrong > 0) {
 		log(" wrong pixels: %.2f %%\n",
 		    static_cast<float>(nwrong) / (correct->width() * correct->height()));
 	}
