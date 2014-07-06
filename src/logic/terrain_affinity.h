@@ -17,6 +17,9 @@
  *
  */
 
+#ifndef WL_LOGIC_TERRAIN_AFFINITY_H
+#define WL_LOGIC_TERRAIN_AFFINITY_H
+
 #include <string>
 
 #include <boost/noncopyable.hpp>
@@ -66,3 +69,5 @@ double probability_to_grow
 	 const Map& map, const DescriptionMaintainer<TerrainDescription>& terrains);
 
 }  // namespace Widelands
+
+#endif  // end of include guard: WL_LOGIC_TERRAIN_AFFINITY_H
