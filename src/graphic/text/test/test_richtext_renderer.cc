@@ -160,13 +160,13 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 			SDL_GetRGBA(
 			   converted->get_pixel(x, y), &converted->format(), &gclr.r, &gclr.g, &gclr.b, &gclr.a);
 
-			int distance = hypot_sqr(cclr.r, gclr.r) + hypot_sqr(cclr.g, gclr.g) +
+			const int distance = hypot_sqr(cclr.r, gclr.r) + hypot_sqr(cclr.g, gclr.g) +
 			               hypot_sqr(cclr.b, gclr.b) + hypot_sqr(cclr.a, gclr.a);
 
 			if (distance >= kMaxAllowedSquaredPixelDistance) {
 				log("Mismatched pixel: (%d, %d)\n", x, y);
-				log(" expected: (%x, %x, %x, %x)\n", cclr.r, cclr.g, cclr.b, cclr.a);
-				log(" seen:     (%x, %x, %x, %x)\n", gclr.r, gclr.g, gclr.b, gclr.a);
+				log(" expected: (%d, %d, %d, %d)\n", cclr.r, cclr.g, cclr.b, cclr.a);
+				log(" seen:     (%d, %d, %d, %d)\n", gclr.r, gclr.g, gclr.b, gclr.a);
 				log(" distances: %d, allowed: %d\n\n", distance, kMaxAllowedSquaredPixelDistance);
 
 				++nwrong;
