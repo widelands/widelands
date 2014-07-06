@@ -432,6 +432,8 @@ public:
 				srcrect.h = m_h;
 				rv->blit(dst, m_bg->surface(), srcrect, CM_Solid);
 			}
+		} else {
+			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0));
 		}
 		return rv;
 	}

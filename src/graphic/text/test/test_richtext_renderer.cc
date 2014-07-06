@@ -162,11 +162,11 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 
 			// Somehow a black pixel can have different alpha values. Probably
 			// because it does not matter when blending anyways.
-			if (cclr.r == gclr.r && cclr.r == 0 && cclr.g == gclr.g && cclr.g == 0 &&
-			    cclr.b == gclr.b && cclr.b == 0) {
-				// Only alpha differs. Ignore.
-				continue;
-			}
+			// if (cclr.r == gclr.r && cclr.r == 0 && cclr.g == gclr.g && cclr.g == 0 &&
+				 // cclr.b == gclr.b && cclr.b == 0) {
+				// // Only alpha differs. Ignore.
+				// continue;
+			// }
 
 			// NOCOM(#sirver): bring back or remove.
 			// // But that is still not enough, so we let a minimum distance to be allowed.
