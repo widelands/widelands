@@ -60,10 +60,6 @@ struct RefMapTestSample {
 	std::string expected_text;
 };
 
-int hypot_sqr(int x, int y) {
-	return (x - y) * (x - y);
-}
-
 void ensure_sdl_is_initialized() {
 	static bool done = false;
 	if (!done) {
@@ -162,26 +158,27 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 
 			// Somehow a black pixel can have different alpha values. Probably
 			// because it does not matter when blending anyways.
-			// if (cclr.r == gclr.r && cclr.r == 0 && cclr.g == gclr.g && cclr.g == 0 &&
-				 // cclr.b == gclr.b && cclr.b == 0) {
-				// // Only alpha differs. Ignore.
-				// continue;
-			// }
+			if (cclr.r == gclr.r && cclr.r == 0 && cclr.g == gclr.g && cclr.g == 0 &&
+				 cclr.b == gclr.b && cclr.b == 0) {
+				// Only alpha differs. Ignore.
+				continue;
+			}
 
-			// NOCOM(#sirver): bring back or remove.
-			// // But that is still not enough, so we let a minimum distance to be allowed.
-			// // This might need tweaking to work on all systems.
-			// const int distance = hypot_sqr(cclr.r, gclr.r) + hypot_sqr(cclr.g, gclr.g) +
-										// hypot_sqr(cclr.b, gclr.b) + hypot_sqr(cclr.a, gclr.a);
-			// constexpr int kMaxAllowedSquaredPixelDistance = 6;
-			// if (distance >= kMaxAllowedSquaredPixelDistance) {
-			log("Mismatched pixel: (%d, %d)\n", x, y);
-			log(" expected: (%d, %d, %d, %d)\n", cclr.r, cclr.g, cclr.b, cclr.a);
-			log(" seen:     (%d, %d, %d, %d)\n", gclr.r, gclr.g, gclr.b, gclr.a);
-			// log(" distances: %d, allowed: %d\n\n", distance, kMaxAllowedSquaredPixelDistance);
-
-			++nwrong;
-			// }
+			// But that is still not enough, so we let a minimum distance to be allowed.
+			// This might need tweaking to work on all systems.
+			const int kMaxClrDistance = 5;
+			const int kMaxAlphaDistance = 5;
+			const int distance_r = std::abs(cclr.r - gclr.r);
+			const int distance_g = std::abs(cclr.g - gclr.g);
+			const int distance_b = std::abs(cclr.b - gclr.b);
+			const int distance_a = std::abs(cclr.a - gclr.a);
+			if (distance_r <= kMaxClrDistance && distance_g <= kMaxClrDistance &&
+			    distance_b <= kMaxClrDistance && distance_a <= kMaxAlphaDistance) {
+				log("Mismatched pixel: (%d, %d)\n", x, y);
+				log(" expected: (%d, %d, %d, %d)\n", cclr.r, cclr.g, cclr.b, cclr.a);
+				log(" seen:     (%d, %d, %d, %d)\n", gclr.r, gclr.g, gclr.b, gclr.a);
+				++nwrong;
+			}
 		}
 	}
 
