@@ -26,7 +26,7 @@ return {
 		dependencies({"tribes/barbarians/inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/granitemine/menu.png"}, p(_"%s from an Inn":format(_"Ration"))) ..
 		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/granitemine/menu.png"}, p(_"%s from a Big Inn":format(_"Ration"))) ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/resi_granit2/resi_00.png","tribes/barbarians/granitemine/menu.png","tribes/barbarians/raw_stone/menu.png"}, p(_"Raw Stone")) ..
+		dependencies({"tribes/barbarians/resi_granite2/resi_00.png","tribes/barbarians/granitemine/menu.png","tribes/barbarians/raw_stone/menu.png"}, p(_"Raw Stone")) ..
 		dependencies({"tribes/barbarians/raw_stone/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
 		dependencies({"tribes/barbarians/raw_stone/menu.png","tribes/barbarians/lime_kiln/menu.png"}, p(_"Lime Kiln")) ..
 	--Building Section

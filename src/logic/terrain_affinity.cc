@@ -73,10 +73,10 @@ double TerrainAffinity::pickiness() const {
 	return pickiness_;
 }
 
-double probability_to_grow
-	(const TerrainAffinity& affinity, const FCoords& fcoords,
-	 const Map& map, const DescriptionMaintainer<TerrainDescription>& terrains)
-{
+double probability_to_grow(const TerrainAffinity& affinity,
+                           const FCoords& fcoords,
+                           const Map& map,
+                           const DescriptionMaintainer<TerrainDescription>& terrains) {
 	double terrain_humidity = 0;
 	double terrain_fertility = 0;
 	double terrain_temperature = 0;
@@ -114,10 +114,16 @@ double probability_to_grow
 	const double sigma_humidity = (1. - affinity.pickiness()) * 0.25 + 1e-2;
 	const double sigma_temperature = (1. - affinity.pickiness()) * 12.5 + 1e-1;
 
-	return std::exp(
+	const double pure_gauss = exp(
 	   -pow2(affinity.preferred_fertility() - terrain_fertility) / (2 * pow2(sigma_fertility)) -
 	   pow2(affinity.preferred_humidity() - terrain_humidity) / (2 * pow2(sigma_temperature)) -
 	   pow2(affinity.preferred_temperature() - terrain_temperature) / (2 * pow2(sigma_temperature)));
+
+	double advanced_gauss = pure_gauss * 1.1 + 0.05;
+	if (advanced_gauss > 0.95)
+		advanced_gauss = 0.95;
+
+	return advanced_gauss;
 }
 
 }  // namespace Widelands

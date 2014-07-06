@@ -21,6 +21,7 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 

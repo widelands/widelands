@@ -1,6 +1,6 @@
 project (widelands)
 
-cmake_minimum_required (VERSION 2.8.12)
+cmake_minimum_required (VERSION 2.8.7)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -10,7 +10,7 @@ endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 # (through config.h).
 macro(_set_if_unset VAR VALUE)
   if (NOT ${VAR} OR ${VAR} STREQUAL "")
-    set (${VAR} ".")
+	  set (${VAR} ${VALUE})
   endif()
 endmacro(_set_if_unset)
 
@@ -120,12 +120,21 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
-
-  add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
-
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
+
+  # This warning warns when a default case is at a switch that handles all
+  # cases. While this is super nice, silencing this warning for clang will add
+  # a warning for GCC (which is not as clever and does not figure out that all
+  # cases are handled). Therefore we disable the warning and the unreachable as
+  # they always come in pairs in these cases.
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-covered-switch-default")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
+
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
 else()
   # Assuming GCC 4.7 or higher.
   if(WIN32)

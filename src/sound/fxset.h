@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FXSET_H
-#define FXSET_H
+#ifndef WL_SOUND_FXSET_H
+#define WL_SOUND_FXSET_H
 
 #include <vector>
 
@@ -74,4 +74,4 @@ protected:
 	uint8_t priority_;
 };
 
-#endif
+#endif  // end of include guard: WL_SOUND_FXSET_H

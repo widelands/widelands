@@ -19,8 +19,9 @@
 
 #include "economy/flag.h"
 
+#include "base/deprecated.h"
+#include "base/macros.h"
 #include "base/wexception.h"
-#include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
@@ -34,7 +35,6 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "upcast.h"
 
 namespace Widelands {
 

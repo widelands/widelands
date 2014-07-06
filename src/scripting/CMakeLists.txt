@@ -1,1 +1,60 @@
 add_subdirectory(test)
+
+# TODO(sirver): Separate lua_table and lua_coroutine if possible.
+wl_library(scripting
+  SRCS
+    c_utils.cc
+    c_utils.h
+    eris.h
+    factory.cc
+    factory.h
+    lua_bases.cc
+    lua_bases.h
+    lua_coroutine.cc
+    lua_coroutine.h
+    lua_editor.cc
+    lua_editor.h
+    lua_errors.h
+    lua_game.cc
+    lua_game.h
+    lua_globals.cc
+    lua_globals.h
+    lua_map.cc
+    lua_map.h
+    lua_path.cc
+    lua_path.h
+    lua_root.cc
+    lua_root.h
+    lua_table.cc
+    lua_table.h
+    lua_ui.cc
+    lua_ui.h
+    luna.h
+    luna_impl.cc
+    luna_impl.h
+    persistence.cc
+    persistence.h
+    scripting.cc
+    scripting.h
+  USES_BOOST_REGEX
+  DEPENDS
+    base_deprecated
+    base_exceptions
+    base_i18n
+    base_log
+    base_macros
+    build_info
+    economy
+    io_fileread
+    io_filesystem
+    logic
+    logic_campaign_visibility
+    logic_game_controller
+    logic_widelands_geometry
+    map_io
+    profile
+    third_party_eris
+    ui_basic
+    widelands_ball_of_mud
+    wui
+)

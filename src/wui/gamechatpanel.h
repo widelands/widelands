@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAMECHATPANEL_H
-#define GAMECHATPANEL_H
+#ifndef WL_WUI_GAMECHATPANEL_H
+#define WL_WUI_GAMECHATPANEL_H
 
 #include "chat.h"
 #include "ui_basic/editbox.h"
@@ -66,4 +66,4 @@ private:
 	uint32_t chat_message_counter;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAMECHATPANEL_H

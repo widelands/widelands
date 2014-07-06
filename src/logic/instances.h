@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INSTANCES_H
-#define INSTANCES_H
+#ifndef WL_LOGIC_INSTANCES_H
+#define WL_LOGIC_INSTANCES_H
 
 #include <cstring>
 #include <map>
@@ -31,11 +31,11 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
+#include "base/deprecated.h"
 #include "base/log.h"
-#include "base/port.h"
+#include "base/macros.h"
 #include "logic/cmd_queue.h"
 #include "logic/widelands.h"
-#include "ref_cast.h"
 
 class FileRead;
 class RenderTarget;
@@ -473,4 +473,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_INSTANCES_H

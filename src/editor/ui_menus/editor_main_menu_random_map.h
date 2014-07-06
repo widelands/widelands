@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_RANDOM_MAP_H
-#define EDITOR_MAIN_MENU_RANDOM_MAP_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_RANDOM_MAP_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_RANDOM_MAP_H
 
 #include <vector>
 
@@ -93,4 +93,4 @@ private:
 	void set_map_info(Widelands::UniqueRandomMapInfo & mapInfo) const;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_RANDOM_MAP_H

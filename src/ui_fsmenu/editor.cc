@@ -20,8 +20,8 @@
 #include "ui_fsmenu/editor.h"
 
 #include "base/i18n.h"
-#include "constants.h"
 #include "graphic/graphic.h"
+#include "wui/text_constants.h"
 
 Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 	Fullscreen_Menu_Base("singleplmenu.jpg"),

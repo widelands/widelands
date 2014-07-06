@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef COMPOSITEMODE_H
-#define COMPOSITEMODE_H
+#ifndef WL_GRAPHIC_COMPOSITEMODE_H
+#define WL_GRAPHIC_COMPOSITEMODE_H
 
 /**
  * Defines composition operations performed while blitting.
@@ -41,4 +41,4 @@ enum Composite {
 	CM_Copy
 };
 
-#endif // COMPOSITEMODE_H
+#endif  // end of include guard: WL_GRAPHIC_COMPOSITEMODE_H

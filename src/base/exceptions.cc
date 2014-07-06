@@ -64,8 +64,6 @@ warning::warning(char const * const et, char const * const em, ...) :
 	m_what = buffer;
 }
 
-warning::~warning() noexcept {}
-
 char const * warning::title() const
 {
 	return m_title.c_str();

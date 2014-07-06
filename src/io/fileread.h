@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BASIC_FILEREAD_H
-#define BASIC_FILEREAD_H
+#ifndef WL_IO_FILEREAD_H
+#define WL_IO_FILEREAD_H
 
 #include <cassert>
 #include <limits>
@@ -117,4 +117,4 @@ private:
 	Pos filepos_;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILEREAD_H

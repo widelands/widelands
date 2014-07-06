@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_ROOT_H
-#define LUA_ROOT_H
+#ifndef WL_SCRIPTING_LUA_ROOT_H
+#define WL_SCRIPTING_LUA_ROOT_H
 
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
@@ -124,5 +124,5 @@ public:
 
 void luaopen_wlroot(lua_State *, bool in_editor);
 
-#endif
-};
+#endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
+}

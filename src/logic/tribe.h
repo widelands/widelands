@@ -17,19 +17,18 @@
  *
  */
 
-#ifndef TRIBE_H
-#define TRIBE_H
+#ifndef WL_LOGIC_TRIBE_H
+#define WL_LOGIC_TRIBE_H
 
 #include <map>
 #include <vector>
 
-#include "TribeBasicInfo.h"
 #include "graphic/animation.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/description_maintainer.h"
 #include "logic/immovable.h"
-#include "logic/military_data.h"
+#include "logic/tribe_basic_info.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 
@@ -132,49 +131,12 @@ struct Tribe_Descr : boost::noncopyable {
 		return m_worker_types_without_cost;
 	}
 
-	typedef std::vector<std::pair<std::string, uint32_t> > AnimationStyles;
-	struct Nonexistent {};
-	uint8_t frontier_style_index(const std::string & stylename) const {
-		for (uint8_t result = m_anim_frontier.size();;)
-			if (m_anim_frontier.at(--result).first == stylename)
-				return result;
-		throw Nonexistent();
+	uint32_t frontier_animation() const {
+		return m_frontier_animation_id;
 	}
-	uint8_t flag_style_index    (const std::string & stylename) const {
-		for (uint8_t result = m_anim_flag.size();;)
-			if (m_anim_flag.at(--result).first == stylename)
-				return result;
-		throw Nonexistent();
-	}
-	uint8_t frontier_style_index(char const * const stylename) const {
-		for (uint8_t result = m_anim_frontier.size();;)
-			if (m_anim_frontier.at(--result).first == stylename)
-				return result;
-		throw Nonexistent();
-	}
-	uint8_t flag_style_index    (char const * const stylename) const {
-		for (uint8_t result = m_anim_flag.size();;)
-			if (m_anim_flag.at(--result).first == stylename)
-				return result;
-		throw Nonexistent();
-	}
-	uint8_t next_frontier_style_index(uint8_t i) const {
-		return ++i == m_anim_frontier.size() ? 0 : i;
-	}
-	uint8_t next_flag_style_index    (uint8_t i) const {
-		return ++i == m_anim_flag    .size() ? 0 : i;
-	}
-	const std::string & frontier_style_name (uint8_t const i) const {
-		return m_anim_frontier.at(i).first;
-	}
-	const std::string & flag_style_name     (uint8_t const i) const {
-		return m_anim_flag    .at(i).first;
-	}
-	uint32_t frontier_animation  (uint8_t const i) const {
-		return m_anim_frontier.at(i).second;
-	}
-	uint32_t flag_animation      (uint8_t const i) const {
-		return m_anim_flag    .at(i).second;
+
+	uint32_t flag_animation() const {
+		return m_flag_animation_id;
 	}
 
 	uint32_t get_bob_vision_range() const {return m_bob_vision_range;}
@@ -185,17 +147,14 @@ struct Tribe_Descr : boost::noncopyable {
 	void postload(Editor_Game_Base &);
 	void load_graphics();
 
-	Military_Data get_military_data() const {return m_military_data;}
-
 	struct Initialization {
-		std::string          script;
-		std::string          descname;
+		std::string script;
+		std::string descname;
 	};
-	typedef std::vector<Initialization> Initializations;
-	const Initialization & initialization(uint8_t const index) const {
-		if (m_initializations.size() <= index)
-			throw Nonexistent();
-		return m_initializations[index];
+
+	// Returns the initalization at 'index' (which must not be out of bounds).
+	const Initialization & initialization(const uint8_t index) const {
+		return m_initializations.at(index);
 	}
 
 	typedef std::vector<std::vector<Widelands::Ware_Index> > WaresOrder;
@@ -214,8 +173,8 @@ struct Tribe_Descr : boost::noncopyable {
 
 private:
 	const std::string m_name;
-	AnimationStyles   m_anim_frontier;
-	AnimationStyles   m_anim_flag;
+	uint32_t m_frontier_animation_id;
+	uint32_t m_flag_animation_id;
 	uint32_t m_bob_vision_range;
 
 	DescriptionMaintainer<Worker_Descr> m_workers;
@@ -232,11 +191,9 @@ private:
 
 	std::vector<Ware_Index> m_worker_types_without_cost;
 
-	Initializations m_initializations;
-
-	Military_Data   m_military_data;
+	std::vector<Initialization> m_initializations;
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_TRIBE_H

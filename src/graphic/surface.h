@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef SURFACE_H
-#define SURFACE_H
+#ifndef WL_GRAPHIC_SURFACE_H
+#define WL_GRAPHIC_SURFACE_H
 
 #include <boost/noncopyable.hpp>
 
+#include "base/rect.h"
+#include "graphic/color.h"
 #include "graphic/compositemode.h"
-#include "graphic/rect.h"
-#include "rgbcolor.h"
 
 /**
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
@@ -130,4 +130,4 @@ public:
 	virtual uint8_t * get_pixels() const = 0;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_SURFACE_H

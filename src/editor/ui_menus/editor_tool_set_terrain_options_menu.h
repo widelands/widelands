@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_TOOL_SET_TERRAIN_TOOL_H
-#define EDITOR_TOOL_SET_TERRAIN_TOOL_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOL_SET_TERRAIN_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOL_SET_TERRAIN_OPTIONS_MENU_H
 
 #include <map>
 #include <memory>
@@ -45,4 +45,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_SET_TERRAIN_OPTIONS_MENU_H

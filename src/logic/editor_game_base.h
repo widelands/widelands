@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_GAME_BASE_H
-#define EDITOR_GAME_BASE_H
+#ifndef WL_LOGIC_EDITOR_GAME_BASE_H
+#define WL_LOGIC_EDITOR_GAME_BASE_H
 
 #include <cstring>
 #include <memory>
@@ -29,7 +29,6 @@
 
 #include "logic/bob.h"
 #include "logic/building.h"
-#include "constants.h"
 #include "logic/map.h"
 #include "logic/notification.h"
 #include "logic/player_area.h"
@@ -239,4 +238,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_EDITOR_GAME_BASE_H

@@ -24,9 +24,9 @@
 #include <cstring>
 #include <string>
 
+#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "container_iterate.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"

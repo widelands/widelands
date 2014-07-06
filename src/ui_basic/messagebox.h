@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_MESSAGEBOX_H
-#define UI_MESSAGEBOX_H
+#ifndef WL_UI_BASIC_MESSAGEBOX_H
+#define WL_UI_BASIC_MESSAGEBOX_H
 
 #include <memory>
 
@@ -82,4 +82,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_MESSAGEBOX_H

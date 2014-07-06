@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_CMD_QUEUE_DATA_PACKET_H
-#define GAME_CMD_QUEUE_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_CMD_QUEUE_DATA_PACKET_H
+#define WL_GAME_IO_GAME_CMD_QUEUE_DATA_PACKET_H
 
 #include "game_io/game_data_packet.h"
 
@@ -37,4 +37,4 @@ struct Game_Cmd_Queue_Data_Packet : public Game_Data_Packet {
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_CMD_QUEUE_DATA_PACKET_H

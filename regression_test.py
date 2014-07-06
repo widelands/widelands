@@ -63,8 +63,8 @@ class WidelandsTestCase(unittest.TestCase):
 
         with open(stdout_filename, 'a') as stdout_file:
             args = [self.path_to_widelands_binary, '--verbose=true',
-                    '--datadir=.', '--homedir=%s' % self.run_dir,
-                    '--disable_fx=true', '--disable_music=true' ]
+                    '--datadir=%s' % os.path.dirname(__file__), '--homedir=%s' % self.run_dir,
+                    '--disable_fx=true', '--disable_music=true', '--language=en_US' ]
             args += [ "--%s=%s" % (key, value) for key, value in wlargs.iteritems() ]
 
             widelands = subprocess.Popen(

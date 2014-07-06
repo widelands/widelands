@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERACTIVE_SPECTATOR_H
-#define INTERACTIVE_SPECTATOR_H
+#ifndef WL_WUI_INTERACTIVE_SPECTATOR_H
+#define WL_WUI_INTERACTIVE_SPECTATOR_H
 
 #include <SDL_keyboard.h>
 
@@ -71,4 +71,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_INTERACTIVE_SPECTATOR_H

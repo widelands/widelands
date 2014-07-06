@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WORLD_H
-#define WORLD_H
+#ifndef WL_LOGIC_WORLD_WORLD_H
+#define WL_LOGIC_WORLD_WORLD_H
 
 #include <memory>
 
@@ -93,4 +93,4 @@ private:
 
 }  // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORLD_WORLD_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARNING_H
-#define WARNING_H
+#ifndef WL_BASE_WARNING_H
+#define WL_BASE_WARNING_H
 
 #include <cstring>
 #include <exception>
@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-#include "base/port.h"
+#include "base/macros.h"
 
 #ifndef PRINTF_FORMAT
 #ifdef __GNUC__
@@ -41,7 +41,6 @@
 struct warning : public std::exception {
 	explicit warning (char const * title, char const * message, ...)
 	 PRINTF_FORMAT(3, 4);
-	virtual ~warning() noexcept;
 
 	/// The target of the returned pointer remains valid during the lifetime of
 	/// the warning object.
@@ -54,4 +53,4 @@ protected:
 	std::string m_title;
 };
 
-#endif
+#endif  // end of include guard: WL_BASE_WARNING_H

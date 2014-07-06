@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DEBUGCONSOLE_H
-#define DEBUGCONSOLE_H
+#ifndef WL_WUI_DEBUGCONSOLE_H
+#define WL_WUI_DEBUGCONSOLE_H
 
 #include <string>
 #include <vector>
@@ -85,4 +85,4 @@ void write(const std::string & text);
 
 }
 
-#endif
+#endif  // end of include guard: WL_WUI_DEBUGCONSOLE_H

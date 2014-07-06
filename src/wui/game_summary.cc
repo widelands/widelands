@@ -22,11 +22,11 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
+#include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
-#include "timestring.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"

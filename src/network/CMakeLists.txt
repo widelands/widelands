@@ -1,5 +1,6 @@
 wl_library(network
   SRCS
+    constants.h
     internet_gaming.cc
     internet_gaming.h
     internet_gaming_messages.cc
@@ -21,18 +22,27 @@ wl_library(network
     network_system.h
   USES_SDL_NET
   DEPENDS
+    ai
+    base_deprecated
     base_exceptions
     base_i18n
     base_log
+    base_macros
+    base_md5
     build_info
+    game_io
     io_dedicated_log
     io_fileread
     io_filesystem
     io_stream
     logic
+    logic_game_controller
+    logic_game_settings
     map_io_map_loader
     profile
+    scripting
     ui_basic
+    ui_fsmenu
     widelands_ball_of_mud
     wui
 )

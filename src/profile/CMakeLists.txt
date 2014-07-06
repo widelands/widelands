@@ -4,12 +4,12 @@ wl_library(profile
     profile.cc
   DEPENDS
     base_exceptions
+    base_geometry
     base_i18n
     base_log
-    base_port
+    base_macros
     build_info
     io_fileread
     io_filesystem
     logic
-    widelands_ball_of_mud
  )

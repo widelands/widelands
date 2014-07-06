@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_LOADER_H
-#define WIDELANDS_MAP_LOADER_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_LOADER_H
+#define WL_MAP_IO_WIDELANDS_MAP_LOADER_H
 
 #include <cstring>
 #include <memory>
@@ -57,4 +57,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_LOADER_H

@@ -28,8 +28,8 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include "base/rect.h"
 #include "graphic/image_cache.h"
-#include "graphic/rect.h"
 #include "graphic/surface.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
@@ -1004,4 +1004,4 @@ IRenderer* setup_renderer(ImageCache* image_cache, SurfaceCache* surface_cache, 
 	return new Renderer(image_cache, surface_cache, fl, setup_parser());
 }
 
-};
+}

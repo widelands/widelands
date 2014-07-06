@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef VERTEX_H
-#define VERTEX_H
+#ifndef WL_GRAPHIC_RENDER_VERTEX_H
+#define WL_GRAPHIC_RENDER_VERTEX_H
 
-#include "point.h"
+#include "base/point.h"
 
 /// Like a point but with an additional bright factor and texture coordinates.
 struct Vertex:public Point {
@@ -36,4 +36,4 @@ struct Vertex:public Point {
 	int32_t b, tx, ty;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_VERTEX_H

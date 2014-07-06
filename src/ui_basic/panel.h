@@ -18,8 +18,8 @@
  */
 
 
-#ifndef UI_PANEL_H
-#define UI_PANEL_H
+#ifndef WL_UI_BASIC_PANEL_H
+#define WL_UI_BASIC_PANEL_H
 
 #include <cassert>
 #include <cstring>
@@ -30,7 +30,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/signals2/trackable.hpp>
 
-#include "point.h"
+#include "base/point.h"
 
 class RenderTarget;
 class Image;
@@ -339,4 +339,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_PANEL_H

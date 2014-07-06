@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ECONOMY_DATA_PACKET_H
-#define ECONOMY_DATA_PACKET_H
+#ifndef WL_ECONOMY_ECONOMY_DATA_PACKET_H
+#define WL_ECONOMY_ECONOMY_DATA_PACKET_H
 
 class FileRead;
 class FileWrite;
@@ -42,4 +42,4 @@ class EconomyDataPacket {
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_ECONOMY_DATA_PACKET_H

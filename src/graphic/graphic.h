@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GRAPHIC_H
-#define GRAPHIC_H
+#ifndef WL_GRAPHIC_GRAPHIC_H
+#define WL_GRAPHIC_GRAPHIC_H
 
 #include <map>
 #include <memory>
@@ -27,8 +27,8 @@
 #include <SDL.h>
 #include <png.h>
 
+#include "base/rect.h"
 #include "graphic/image_cache.h"
-#include "graphic/rect.h"
 
 #define MAX_RECTS 20
 
@@ -176,4 +176,4 @@ protected:
 extern Graphic * g_gr;
 extern bool g_opengl;
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_GRAPHIC_H

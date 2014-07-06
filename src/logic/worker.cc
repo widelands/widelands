@@ -25,13 +25,13 @@
 
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
-#include "gamecontroller.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
 #include "io/fileread.h"
@@ -45,6 +45,7 @@
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/mapfringeregion.h"
 #include "logic/message_queue.h"
@@ -61,7 +62,6 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -605,12 +605,12 @@ void Worker::informPlayer
 	if (building.name() == "fish_breeders_house")
 		return;
 
-	// TODO "stone" is defined as "granit" in the world. But this code is
+	// TODO "stone" is defined as "granite" in the world. But this code is
 	// erroneus anyways: it translates immovable attribute stone as resource
-	// granit. Instead, the immovable attributes should be made translatable in
+	// granite. Instead, the immovable attributes should be made translatable in
 	// the world or the quarry should define its out of stone message in its
 	// configuartion.
-	if (res_type == "stone") res_type = "granit";
+	if (res_type == "stone") res_type = "granite";
 
 	// Translate the Resource name (if it is defined by the world)
 	const World & world = game.world();
@@ -968,7 +968,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			// that might not be around forever.
 			snprintf(message,
 			         sizeof(message),
-			         "<rt image=world/resources/%s_1f.png>"
+			         "<rt image=world/resources/pics/%s4.png>"
 			         "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
 			         rdescr->name().c_str(),
 			         _("A geologist found resources."));

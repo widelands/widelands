@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAPVIEWPIXELCONSTANTS_H
-#define MAPVIEWPIXELCONSTANTS_H
+#ifndef WL_WUI_MAPVIEWPIXELCONSTANTS_H
+#define WL_WUI_MAPVIEWPIXELCONSTANTS_H
 
 //  These are constants with the unit pixel.
 #define TRIANGLE_WIDTH 64
@@ -26,4 +26,4 @@
 #define HEIGHT_FACTOR 5
 
 
-#endif
+#endif  // end of include guard: WL_WUI_MAPVIEWPIXELCONSTANTS_H

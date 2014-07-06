@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_DATA_PACKET_H
-#define GAME_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_DATA_PACKET_H
+#define WL_GAME_IO_GAME_DATA_PACKET_H
 
 #include "base/wexception.h"
 
@@ -46,4 +46,4 @@ struct Game_Data_Packet {
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_DATA_PACKET_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERNET_GAMING_MESSAGES_H
-#define INTERNET_GAMING_MESSAGES_H
+#ifndef WL_NETWORK_NETWORK_GAMING_MESSAGES_H
+#define WL_NETWORK_NETWORK_GAMING_MESSAGES_H
 
 #include <string>
 
@@ -33,4 +33,4 @@ public:
 	static void fill_map();
 };
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETWORK_GAMING_MESSAGES_H

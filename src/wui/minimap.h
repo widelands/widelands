@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MINIMAP_H
-#define MINIMAP_H
+#ifndef WL_WUI_MINIMAP_H
+#define WL_WUI_MINIMAP_H
 
 #include <boost/signals2.hpp>
 
@@ -96,4 +96,4 @@ private:
 	UI::Button button_zoom;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_MINIMAP_H

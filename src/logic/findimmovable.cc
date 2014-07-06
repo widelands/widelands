@@ -19,11 +19,11 @@
 
 #include "logic/findimmovable.h"
 
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "logic/attackable.h"
 #include "logic/immovable.h"
 #include "logic/militarysite.h"
-#include "upcast.h"
 
 namespace Widelands {
 

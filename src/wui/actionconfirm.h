@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _ACTIONCONFIRM_H_
-#define _ACTIONCONFIRM_H_
+#ifndef WL_WUI_ACTIONCONFIRM_H
+#define WL_WUI_ACTIONCONFIRM_H
 
 #include "logic/widelands.h"
 
@@ -54,4 +54,4 @@ void show_ship_cancel_expedition_confirm
 	(Interactive_Player & player,
 	 Widelands::Ship & ship);
 
-#endif // _ACTIONCONFIRM_H_
+#endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H

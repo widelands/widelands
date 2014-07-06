@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef ALIGN_H
-#define ALIGN_H
+#ifndef WL_GRAPHIC_ALIGN_H
+#define WL_GRAPHIC_ALIGN_H
 
-#include "point.h"
+#include "base/point.h"
 
 namespace UI {
 
@@ -52,4 +52,4 @@ enum Align {
 void correct_for_align(Align, uint32_t w, uint32_t h, Point* pt);
 
 }
-#endif
+#endif  // end of include guard: WL_GRAPHIC_ALIGN_H

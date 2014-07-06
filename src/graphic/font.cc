@@ -21,9 +21,9 @@
 
 #include <map>
 
-#include "constants.h"
+#include "base/utf8.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "utf8.h"
+#include "wui/text_constants.h"
 
 namespace {
 

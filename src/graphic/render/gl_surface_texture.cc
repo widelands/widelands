@@ -26,7 +26,8 @@
 #include "graphic/render/gl_utils.h"
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
-bool use_arb_;
+
+static bool use_arb_;
 
 /**
  * Initial global resources needed for fast offscreen rendering.

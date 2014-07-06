@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WAREHOUSE_H
-#define WAREHOUSE_H
+#ifndef WL_LOGIC_WAREHOUSE_H
+#define WL_LOGIC_WAREHOUSE_H
 
 #include "base/wexception.h"
 #include "economy/request.h"
@@ -274,4 +274,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WAREHOUSE_H

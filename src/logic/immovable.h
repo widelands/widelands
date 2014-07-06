@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IMMOVABLE_H
-#define IMMOVABLE_H
+#ifndef WL_LOGIC_IMMOVABLE_H
+#define WL_LOGIC_IMMOVABLE_H
 
 #include <memory>
 
@@ -346,4 +346,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_IMMOVABLE_H

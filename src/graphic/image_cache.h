@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IMAGE_CACHE_H
-#define IMAGE_CACHE_H
+#ifndef WL_GRAPHIC_IMAGE_CACHE_H
+#define WL_GRAPHIC_IMAGE_CACHE_H
 
 #include <string>
 
@@ -58,5 +58,4 @@ public:
 // Create a new ImageCache. Takes no ownership.
 ImageCache* create_image_cache(IImageLoader*, SurfaceCache*);
 
-#endif /* end of include guard: IMAGE_CACHE_H */
-
+#endif  // end of include guard: WL_GRAPHIC_IMAGE_CACHE_H

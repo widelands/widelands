@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERVAL_H
-#define INTERVAL_H
+#ifndef WL_INTERVAL_H
+#define WL_INTERVAL_H
 
 template<typename T> struct interval {
 	interval(const T Min, const T Max) : min(Min), max(Max) {}
@@ -26,4 +26,4 @@ template<typename T> struct interval {
 	T min, max;
 };
 
-#endif
+#endif  // end of include guard: WL_INTERVAL_H

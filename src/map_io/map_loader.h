@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAP_LOADER_H
-#define MAP_LOADER_H
+#ifndef WL_MAP_IO_MAP_LOADER_H
+#define WL_MAP_IO_MAP_LOADER_H
 
 #include "logic/map.h"
 
@@ -61,4 +61,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_MAP_LOADER_H

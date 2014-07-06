@@ -8,7 +8,7 @@ wl_library(io_stream
     streamwrite.h
   DEPENDS
     base_exceptions
-    base_port
+    base_macros
     widelands_ball_of_mud
 )
 
@@ -37,14 +37,14 @@ wl_library(io_filesystem
     filesystem/zip_filesystem.cc
     filesystem/zip_filesystem.h
   DEPENDS
+    base_deprecated
     base_exceptions
     base_log
-    base_port
+    base_macros
     build_info
     io_fileread
     io_stream
     third_party_minizip
-    widelands_ball_of_mud
 )
 
 

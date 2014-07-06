@@ -21,7 +21,8 @@
 
 #include <memory>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -36,11 +37,19 @@
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 
 namespace Widelands {
 
-Map_Object_Descr fleet_descr("fleet", "Fleet");
+namespace  {
+
+// Every Map_Object() needs to have a description. So we make a dummy one for
+// Fleet.
+Map_Object_Descr* fleet_description() {
+	static Map_Object_Descr fleet_descr("fleet", "Fleet");
+	return &fleet_descr;
+}
+
+}  // namespace
 
 /**
  * Fleets are initialized empty.
@@ -50,7 +59,7 @@ Map_Object_Descr fleet_descr("fleet", "Fleet");
  * The Fleet takes care of merging with existing fleets, if any.
  */
 Fleet::Fleet(Player & player) :
-	Map_Object(&fleet_descr),
+	Map_Object(fleet_description()),
 	m_owner(player),
 	m_act_pending(false)
 {

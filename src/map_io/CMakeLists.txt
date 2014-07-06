@@ -9,13 +9,17 @@ wl_library(map_io_map_loader
     base_exceptions
     base_i18n
     base_log
+    base_macros
+    base_scoped_timer
     io_fileread
     io_filesystem
     logic
     map_io
-    widelands_ball_of_mud
+    scripting
 )
 
+# TODO(sirver): separate widelands_map_map_object_loader/saver into
+# own library.
 wl_library(map_io
   SRCS
     coords_profile.cc
@@ -80,14 +84,21 @@ wl_library(map_io
     widelands_map_version_data_packet.h
   USES_SDL_IMAGE
   DEPENDS
+    base_deprecated
     base_exceptions
     base_log
+    base_macros
+    base_scoped_timer
     build_info
+    economy
     graphic
+    graphic_surface
     io_fileread
+    io_filesystem
     logic
     logic_widelands_geometry
     profile
+    scripting
     widelands_ball_of_mud
     wui
 )

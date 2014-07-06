@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_NEW_MAP_H
-#define EDITOR_MAIN_MENU_NEW_MAP_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H
 
 #include <vector>
 
@@ -46,4 +46,4 @@ private:
 	void clicked_create_map();
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H

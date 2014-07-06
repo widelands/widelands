@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_NOISE_HEIGHT_TOOL_H
-#define EDITOR_NOISE_HEIGHT_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_NOISE_HEIGHT_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_NOISE_HEIGHT_TOOL_H
 
 #include "editor/tools/editor_set_height_tool.h"
 
@@ -66,4 +66,4 @@ private:
 	interval<Widelands::Field::Height> m_interval;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_NOISE_HEIGHT_TOOL_H

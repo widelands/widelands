@@ -23,6 +23,7 @@
 #include <typeinfo>
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "economy/road.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -33,7 +34,6 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"
-#include "upcast.h"
 
 
 namespace Widelands {
@@ -207,8 +207,7 @@ struct tribe_immovable_nonexistent : public FileRead::_data_error {
 	     tribename(Tribename),
 	     name(Name) {
 	}
-	virtual ~tribe_immovable_nonexistent() noexcept {
-	}
+
 	std::string tribename;
 	std::string name;
 };

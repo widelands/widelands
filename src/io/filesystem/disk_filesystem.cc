@@ -31,7 +31,7 @@
 #include <direct.h>
 #include <io.h>
 #define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
-#endif // _MSC_VER
+#endif
 #else  // not _WIN32
 #include <fcntl.h>
 #include <glob.h>
@@ -41,8 +41,8 @@
 #endif
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
-#include "compile_diagnostics.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "io/streamread.h"
@@ -462,7 +462,7 @@ private:
 	FILE * m_file;
 };
 
-};
+}
 
 StreamRead * RealFSImpl::OpenStreamRead(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
@@ -508,7 +508,7 @@ private:
 	FILE * m_file;
 };
 
-};
+}
 
 StreamWrite * RealFSImpl::OpenStreamWrite(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);

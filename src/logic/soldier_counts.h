@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOLDIER_TYPES_H
-#define SOLDIER_TYPES_H
+#ifndef WL_LOGIC_SOLDIER_COUNTS_H
+#define WL_LOGIC_SOLDIER_COUNTS_H
 
 #include <map>
 
@@ -28,4 +28,4 @@ namespace Widelands {
 typedef std::map<Soldier_Strength, uint32_t> Soldier_Counts;
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_SOLDIER_COUNTS_H

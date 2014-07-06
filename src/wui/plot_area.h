@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef WUI_PLOT_AREA_H
-#define WUI_PLOT_AREA_H
+#ifndef WL_WUI_PLOT_AREA_H
+#define WL_WUI_PLOT_AREA_H
 
 #include <vector>
 
 #include <boost/bind.hpp>
 
-#include "rgbcolor.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/slider.h"
 
@@ -174,4 +174,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_PLOT_AREA_H

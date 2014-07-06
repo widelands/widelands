@@ -22,8 +22,9 @@
 #include <cstring>
 
 #include "base/wexception.h"
-#include "gamesettings.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
+#include "logic/game_settings.h"
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"
 

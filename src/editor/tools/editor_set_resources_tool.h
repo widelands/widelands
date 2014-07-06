@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_SET_RESOURCES_TOOL_H
-#define EDITOR_SET_RESOURCES_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 
@@ -57,4 +57,4 @@ private:
 	uint8_t m_set_to;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H

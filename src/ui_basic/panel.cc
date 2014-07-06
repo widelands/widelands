@@ -20,7 +20,6 @@
 #include "ui_basic/panel.h"
 
 #include "base/log.h"
-#include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
@@ -30,8 +29,9 @@
 #include "helper.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 
 
 using namespace std;
@@ -1228,7 +1228,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r + Point(2, 2), rendered_text);
+	dst.blit(r.top_left() + Point(2, 2), rendered_text);
 	return true;
 }
 

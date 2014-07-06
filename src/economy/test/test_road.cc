@@ -23,6 +23,7 @@
 
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/instances.h"
 #include "logic/player.h"

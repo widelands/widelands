@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -330,4 +331,4 @@ void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 				(i * m_ndatasets + m_selected_information, false);
 		}
 	m_selected_information = id;
-};
+}

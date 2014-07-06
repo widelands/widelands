@@ -27,12 +27,13 @@
 #include <boost/type_traits.hpp>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/font_handler.h"
-#include "helper.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
+#include "logic/constants.h"
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
@@ -42,7 +43,6 @@
 #include "logic/tribe.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/encyclopedia_window.h"
@@ -258,19 +258,16 @@ void Interactive_Player::think()
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
 	{
-		char         buffer[128];
-		char const * msg_icon    = "pics/menu_toggle_oldmessage_menu.png";
-		char const * msg_tooltip = _("Messages");
+		char const * msg_icon = "pics/menu_toggle_oldmessage_menu.png";
+		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
-			snprintf
-				(buffer, sizeof(buffer),
-				 ngettext("%u new message", "%u new messages", nr_new_messages),
-				 nr_new_messages);
-			msg_tooltip = buffer;
+			msg_tooltip =
+			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
+			    nr_new_messages).str();
 		}
 		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);

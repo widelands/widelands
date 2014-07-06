@@ -23,7 +23,6 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
-#include "constants.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
@@ -31,6 +30,7 @@
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
 
 /*
 ==============================================================================

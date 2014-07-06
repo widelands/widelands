@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MACHDEP_H
-#define MACHDEP_H
+#ifndef WL_MACHDEP_H
+#define WL_MACHDEP_H
 
 #include <cstring>
 #include <string>
@@ -26,10 +26,10 @@
 #include <SDL_endian.h>
 #include <stdint.h>
 
-#include "compile_diagnostics.h"
+#include "base/macros.h"
 
 // Disable this warning for files where we might use these macros.
-CLANG_DIAG_OFF("-Wself-assign");
+CLANG_DIAG_OFF("-Wself-assign")
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
 #define Little16(x)    (x)
@@ -105,4 +105,4 @@ inline float DerefFloat(const void * const ptr) {
 	return r;
 }
 
-#endif
+#endif  // end of include guard: WL_MACHDEP_H

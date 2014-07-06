@@ -31,10 +31,12 @@ class EvalMatches( object ):
 evaluate_matches = EvalMatches()
 
 forbidden = [
-    "   if(a)\n",
+    " if ",
+    "   c = anrn",
 ]
 
 allowed = [
+    "   if(a)\n",
     "if\n",
     "\tif(a) {\n",
     "  // Comment is ok",

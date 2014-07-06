@@ -22,6 +22,7 @@
 #include <map>
 #include <memory>
 
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
@@ -47,7 +48,6 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 
 namespace Widelands {
 

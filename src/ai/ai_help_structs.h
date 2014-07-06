@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef AI_HELP_STRUCTS_H
-#define AI_HELP_STRUCTS_H
+#ifndef WL_AI_AI_HELP_STRUCTS_H
+#define WL_AI_AI_HELP_STRUCTS_H
 
 #include <list>
 
@@ -327,4 +327,4 @@ struct WareObserver {
 	uint8_t preciousness_;
 };
 
-#endif
+#endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

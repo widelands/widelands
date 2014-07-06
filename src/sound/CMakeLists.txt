@@ -10,6 +10,7 @@ wl_library(sound
   USES_SDL
   USES_SDL_MIXER
   DEPENDS
+    base_deprecated
     base_i18n
     base_log
     graphic
@@ -18,6 +19,7 @@ wl_library(sound
     logic
     logic_widelands_geometry
     profile
+    random
     widelands_ball_of_mud
     wui
 )

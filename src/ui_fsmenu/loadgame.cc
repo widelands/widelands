@@ -26,10 +26,9 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "gamecontroller.h"
-#include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "graphic/image_loader_impl.h"
 #include "graphic/image_transformations.h"
@@ -37,9 +36,11 @@
 #include "graphic/surface.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
-#include "timestring.h"
+#include "logic/game_controller.h"
+#include "logic/game_settings.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
+#include "wui/text_constants.h"
 
 
 

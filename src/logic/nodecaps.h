@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef NODECAPS_H
-#define NODECAPS_H
+#ifndef WL_LOGIC_NODECAPS_H
+#define WL_LOGIC_NODECAPS_H
 
 namespace Widelands {
 
@@ -62,4 +62,4 @@ enum NodeCaps {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_NODECAPS_H

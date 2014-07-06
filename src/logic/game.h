@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef GAME_H
-#define GAME_H
+#ifndef WL_LOGIC_GAME_H
+#define WL_LOGIC_GAME_H
 
+#include "base/md5.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
-#include "md5.h"
-#include "random.h"
-#include "save_handler.h"
+#include "logic/save_handler.h"
+#include "random/random.h"
 
 namespace UI {struct ProgressWindow;}
 struct Computer_Player;
@@ -174,8 +174,7 @@ public:
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
-		(const Flag &, Player_Number, uint32_t count, uint8_t retreat);
-	void send_player_changemilitaryconfig(Player_Number, uint8_t);
+		(const Flag &, Player_Number, uint32_t count);
 
 	void send_player_ship_scout_direction(Ship &, uint8_t);
 	void send_player_ship_construct_port(Ship &, Coords);
@@ -280,4 +279,4 @@ double logic_rand_as_double(Game* game);
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_GAME_H

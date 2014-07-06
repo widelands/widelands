@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef C_UTILS_H
-#define C_UTILS_H
+#ifndef WL_SCRIPTING_C_UTILS_H
+#define WL_SCRIPTING_C_UTILS_H
 
 
 #include "logic/game.h"
@@ -37,7 +37,7 @@ Widelands::Map_Map_Object_Saver * get_mos(lua_State *);
 void report_error(lua_State*, const char*, ...)
 	__attribute__((__format__(__printf__, 2, 3), noreturn));
 #else
-void report_error [[noreturn]] (lua_State*, const char*, ...)
+[[noreturn]] void report_error(lua_State*, const char*, ...)
 #endif
 
 #define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
@@ -62,4 +62,4 @@ inline bool luaL_checkboolean(lua_State * L, int n) {
 	return luaL_checkinteger(L, n);
 }
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_C_UTILS_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_MINIMAPRENDERER_H
-#define WIDELANDS_MINIMAPRENDERER_H
+#ifndef WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
+#define WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
 
 #include "graphic/rendertarget.h"
 #include <memory>
@@ -27,7 +27,7 @@ class StreamWrite;
 namespace Widelands {
 	class Player;
 	class Editor_Game_Base;
-};
+}
 
 /**
  * This class renders the minimap.
@@ -52,4 +52,4 @@ public:
 		 const Point& viewpoint, uint32_t flags, StreamWrite* const streamwrite);
 };
 
-#endif //WIDELANDS_MINIMAPRENDERER_H
+#endif  // end of include guard: WL_GRAPHIC_RENDER_MINIMAPRENDERER_H

@@ -1,3 +1,12 @@
+wl_library(wui_text_layout
+  SRCS
+    text_layout.cc
+    text_layout.h
+    text_constants.h
+  DEPENDS
+    graphic_color
+)
+
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -106,18 +115,32 @@ wl_library(wui
     watchwindow.h
   USES_SDL
   DEPENDS
+    base_deprecated
     base_exceptions
+    base_geometry
     base_i18n
     base_log
+    base_macros
+    base_time_string
+    economy
+    game_io
     graphic
+    graphic_color
+    graphic_image
+    graphic_surface
     io_fileread
     io_filesystem
     logic
+    logic_game_controller
+    logic_game_settings
     logic_notification
     logic_widelands_geometry
     network
     profile
+    scripting
     sound
     ui_basic
+    ui_fsmenu
     widelands_ball_of_mud
+    wui_text_layout
 )

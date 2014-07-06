@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_PARSER_H
-#define RT_PARSER_H
+#ifndef WL_GRAPHIC_TEXT_RT_PARSE_H
+#define WL_GRAPHIC_TEXT_RT_PARSE_H
 
 #include <map>
 #include <set>
@@ -27,7 +27,7 @@
 
 #include <stdint.h>
 
-#include "rgbcolor.h"
+#include "graphic/color.h"
 #include "graphic/text/rt_errors.h"
 
 namespace RT {
@@ -88,4 +88,4 @@ public:
 IParser * setup_parser();
 }
 
-#endif /* end of include guard: RT_PARSER_H */
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_PARSE_H

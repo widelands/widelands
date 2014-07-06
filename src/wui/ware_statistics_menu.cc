@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "logic/constants.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"

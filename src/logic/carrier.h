@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CARRIER_H
-#define CARRIER_H
+#ifndef WL_LOGIC_CARRIER_H
+#define WL_LOGIC_CARRIER_H
 
 #include "logic/worker.h"
 
@@ -110,4 +110,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CARRIER_H

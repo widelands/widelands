@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LOG_H
-#define LOG_H
+#ifndef WL_BASE_LOG_H
+#define WL_BASE_LOG_H
 
 #include <iostream>
 
@@ -53,4 +53,4 @@ void log(const char *, ...) PRINTF_FORMAT(1, 2);
 
 extern bool g_verbose;
 
-#endif
+#endif  // end of include guard: WL_BASE_LOG_H

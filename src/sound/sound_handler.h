@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOUND_HANDLER_H
-#define SOUND_HANDLER_H
+#ifndef WL_SOUND_SOUND_HANDLER_H
+#define WL_SOUND_SOUND_HANDLER_H
 
 #include <cstring>
 #include <map>
@@ -29,9 +29,9 @@
 #include <unistd.h>
 #endif
 
-#include "sound/fxset.h"
 #include "logic/widelands_geometry.h"
-#include "random.h"
+#include "random/random.h"
+#include "sound/fxset.h"
 
 namespace Widelands {class Editor_Game_Base;}
 struct Songset;
@@ -163,6 +163,10 @@ extern class Sound_Handler g_sound_handler;
  * \todo accommodate runtime changes of i18n language
  * \todo ? accommodate sound activation if it was disabled at the beginning
 */
+// This is used for SDL UserEvents to be handled in the main loop.
+enum {
+	CHANGE_MUSIC
+};
 class Sound_Handler
 {
 	friend struct Songset;
@@ -289,4 +293,4 @@ protected:
 	SDL_mutex * fx_lock_;
 };
 
-#endif
+#endif  // end of include guard: WL_SOUND_SOUND_HANDLER_H

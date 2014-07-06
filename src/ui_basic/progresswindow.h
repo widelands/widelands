@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef UI_PROGRESSWINDOW_H
-#define UI_PROGRESSWINDOW_H
+#ifndef WL_UI_BASIC_PROGRESSWINDOW_H
+#define WL_UI_BASIC_PROGRESSWINDOW_H
 
 #include <cstring>
 #include <string>
 #include <vector>
 
-#include "graphic/rect.h"
-#include "point.h"
+#include "base/point.h"
+#include "base/rect.h"
 
 class Image;
 class RenderTarget;
@@ -76,4 +76,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_PROGRESSWINDOW_H

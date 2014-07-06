@@ -17,16 +17,16 @@
  *
  */
 
-#ifndef RT_RENDER_H
-#define RT_RENDER_H
+#ifndef WL_GRAPHIC_TEXT_RT_RENDER_H
+#define WL_GRAPHIC_TEXT_RT_RENDER_H
 
 #include <set>
 #include <string>
 
 #include <stdint.h>
 
+#include "graphic/color.h"
 #include "graphic/image.h"
-#include "rgbcolor.h"
 
 class SurfaceCache;
 class ImageCache;
@@ -102,6 +102,6 @@ public:
 
 // Setup a renderer, takes ownership of fl but of nothing else.
 IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*, IFontLoader* fl);
-};
+}
 
-#endif /* end of include guard: RT_RENDER_H */
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_RENDER_H

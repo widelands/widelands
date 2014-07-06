@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CONSTRUCTIONSITE_H
-#define CONSTRUCTIONSITE_H
+#ifndef WL_LOGIC_CONSTRUCTIONSITE_H
+#define WL_LOGIC_CONSTRUCTIONSITE_H
 
 #include <vector>
 
@@ -105,4 +105,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CONSTRUCTIONSITE_H

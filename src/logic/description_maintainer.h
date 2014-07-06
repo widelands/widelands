@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DESCR_MAINTAINER_H
-#define DESCR_MAINTAINER_H
+#ifndef WL_LOGIC_DESCRIPTION_MAINTAINER_H
+#define WL_LOGIC_DESCRIPTION_MAINTAINER_H
 
 #include <cassert>
 #include <map>
@@ -88,4 +88,4 @@ template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& nam
 	return items_[index].get();
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_DESCRIPTION_MAINTAINER_H

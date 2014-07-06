@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FILEWRITE_H
-#define FILEWRITE_H
+#ifndef WL_IO_FILEWRITE_H
+#define WL_IO_FILEWRITE_H
 
 #include <cassert>
 #include <cstdarg>
@@ -102,4 +102,4 @@ private:
 	Pos filepos_;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILEWRITE_H

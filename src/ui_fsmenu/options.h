@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_OPTIONS_H
-#define FULLSCREEN_MENU_OPTIONS_H
+#ifndef WL_UI_FSMENU_OPTIONS_H
+#define WL_UI_FSMENU_OPTIONS_H
 
 #include <cstring>
 #include <string>
@@ -182,4 +182,4 @@ private:
 	Options_Ctrl::Options_Struct os;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

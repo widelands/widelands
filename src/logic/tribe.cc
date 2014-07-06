@@ -25,6 +25,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
@@ -50,7 +51,6 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 
 using namespace std;
@@ -178,13 +178,6 @@ Tribe_Descr::Tribe_Descr
 
 		}
 
-		{
-			/// Loads military data
-			Section * military_data_s = root_conf.get_section("military_data");
-			if (military_data_s)
-				m_military_data.parse(*military_data_s);
-		}
-
 		try {
 			{
 				Section & tribe_s = root_conf.get_safe_section("tribe");
@@ -241,47 +234,10 @@ Tribe_Descr::Tribe_Descr
 				PARSE_ORDER_INFORMATION(worker);
 			}
 
-			try {
-				while (Section * const s = root_conf.get_next_section("frontier"))
-				{
-					char const * const style_name = s->get_safe_string("name");
-					try {
-						if (m_anim_frontier.empty())
-							throw Nonexistent();
-						frontier_style_index(style_name);
-						throw game_data_error("\"%s\" is duplicated", style_name);
-					} catch (Nonexistent) {
-						m_anim_frontier.push_back
-							(std::pair<std::string, uint32_t>
-							 	(style_name, g_gr->animations().load(path, *s)));
-					}
-				}
-				if (m_anim_frontier.empty())
-					throw game_data_error("none found");
-			} catch (const _wexception & e) {
-				throw game_data_error("frontier styles: %s", e.what());
-			}
-			try {
-				while (Section * const s = root_conf.get_next_section("flag"))
-				{
-					char const * const style_name = s->get_safe_string("name");
-					try {
-						if (m_anim_flag.empty())
-							throw Nonexistent();
-						flag_style_index(style_name);
-						throw game_data_error("\"%s\" is duplicated", style_name);
-					} catch (Nonexistent) {
-						m_anim_flag.push_back
-							(std::pair<std::string, uint32_t>
-							 	(style_name,
-							 	 g_gr->animations().load(path, *s)));
-					}
-				}
-				if (m_anim_flag.empty())
-					throw game_data_error("none found");
-			} catch (const _wexception & e) {
-				throw game_data_error("flag styles: %s", e.what());
-			}
+			m_frontier_animation_id =
+			   g_gr->animations().load(path, root_conf.get_safe_section("frontier"));
+			m_flag_animation_id =
+			   g_gr->animations().load(path, root_conf.get_safe_section("flag"));
 
 			{
 				// Read initializations -- all scripts are initializations currently

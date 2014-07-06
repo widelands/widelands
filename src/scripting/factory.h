@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FACTORY_H
-#define FACTORY_H
+#ifndef WL_SCRIPTING_FACTORY_H
+#define WL_SCRIPTING_FACTORY_H
 
 
 #include "logic/widelands.h"
@@ -48,4 +48,4 @@ public:
 	virtual void push_player(lua_State * L, Widelands::Player_Number plr) override;
 };
 
-#endif /* end of include guard: FACTORY_H */
+#endif  // end of include guard: WL_SCRIPTING_FACTORY_H

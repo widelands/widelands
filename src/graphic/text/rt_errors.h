@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RT_ERRORS_H
-#define RT_ERRORS_H
+#ifndef WL_GRAPHIC_TEXT_RT_ERRORS_H
+#define WL_GRAPHIC_TEXT_RT_ERRORS_H
 
 #include <exception>
 
@@ -28,7 +28,6 @@ class Exception : public std::exception {
 public:
 	Exception(std::string msg) : std::exception(), m_msg(msg) {
 	}
-	virtual ~Exception() noexcept {}
 	virtual const char* what() const noexcept override {return m_msg.c_str();}
 
 private:
@@ -40,18 +39,18 @@ public: \
 		  name(std::string msg) : Exception(msg) {} \
 };
 
-DEF_ERR(AttributeNotFound);
-DEF_ERR(BadFont);
-DEF_ERR(BadImage);
-DEF_ERR(EOT);
-DEF_ERR(InvalidColor);
-DEF_ERR(RenderError);
-DEF_ERR(SyntaxError);
-DEF_ERR(WidthTooSmall);
+DEF_ERR(AttributeNotFound)
+DEF_ERR(BadFont)
+DEF_ERR(BadImage)
+DEF_ERR(EOT)
+DEF_ERR(InvalidColor)
+DEF_ERR(RenderError)
+DEF_ERR(SyntaxError)
+DEF_ERR(WidthTooSmall)
 
 #undef DEF_ERR
 
 
-};
+}
 
-#endif /* end of include guard: RT_ERRORS_H */
+#endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_H

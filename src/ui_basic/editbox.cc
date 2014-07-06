@@ -26,8 +26,9 @@
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "helper.h"
+#include "ui_basic/is_printable.h"
 #include "ui_basic/mouse_constants.h"
+#include "wui/text_constants.h"
 
 namespace UI {
 

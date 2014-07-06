@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef NETWORK_PLAYER_SETTINGS_BACKEND_H
-#define NETWORK_PLAYER_SETTINGS_BACKEND_H
+#ifndef WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
+#define WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
 
-#include "constants.h"
-#include "gamesettings.h"
+#include "logic/constants.h"
+#include "logic/game_settings.h"
 
 struct NetworkPlayerSettingsBackend {
 
@@ -43,4 +43,4 @@ struct NetworkPlayerSettingsBackend {
 	std::string            shared_in_tribe[MAX_PLAYERS];
 };
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H

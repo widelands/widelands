@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DEDICATED_LOG_H
-#define DEDICATED_LOG_H
+#ifndef WL_IO_DEDICATED_LOG_H
+#define WL_IO_DEDICATED_LOG_H
 
 #include "base/log.h"
 #include "chat.h"
@@ -87,4 +87,4 @@ private:
 	RealFSImpl * root;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_DEDICATED_LOG_H

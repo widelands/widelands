@@ -1,3 +1,60 @@
+add_subdirectory(text)
+
+wl_library(graphic_color
+  SRCS
+    color.h
+    color.cc
+  USES_SDL
+)
+
+wl_library(graphic_image
+  SRCS
+    image.h
+    image_cache.cc
+    image_cache.h
+    image_loader.h
+    image_loader_impl.cc
+    image_loader_impl.h
+  USES_SDL
+  USES_SDL_IMAGE
+  DEPENDS
+    base_log
+    base_exceptions
+    graphic_surface
+    io_fileread
+    io_filesystem
+)
+
+wl_library(graphic_surface
+  SRCS
+    compositemode.h
+    render/gl_surface.cc
+    render/gl_surface.h
+    render/gl_surface_screen.cc
+    render/gl_surface_screen.h
+    render/gl_surface_texture.cc
+    render/gl_surface_texture.h
+    render/gl_utils.cc
+    render/gl_utils.h
+    render/sdl_helper.cc
+    render/sdl_helper.h
+    render/sdl_surface.cc
+    render/sdl_surface.h
+    surface.cc
+    surface.h
+    surface_cache.cc
+    surface_cache.h
+  USES_OPENGL
+  USES_SDL
+  DEPENDS
+    base_macros
+    base_exceptions
+    base_geometry
+    base_log
+    graphic
+    graphic_color
+)
+
 wl_library(graphic
   SRCS
     align.cc
@@ -6,7 +63,7 @@ wl_library(graphic
     animation.h
     colormap.cc
     colormap.h
-    compositemode.h
+    default_resolution.h
     diranimations.h
     font.cc
     font.h
@@ -16,37 +73,18 @@ wl_library(graphic
     font_handler1.h
     graphic.cc
     graphic.h
-    image.h
-    image_cache.cc
-    image_cache.h
-    image_loader.h
-    image_loader_impl.cc
-    image_loader_impl.h
     image_transformations.cc
     image_transformations.h
     in_memory_image.cc
     in_memory_image.h
-    rect.h
     render/gamerenderer.cc
     render/gamerenderer.h
     render/gamerenderer_gl.cc
     render/gamerenderer_gl.h
     render/gamerenderer_sdl.cc
     render/gamerenderer_sdl.h
-    render/gl_surface.cc
-    render/gl_surface.h
-    render/gl_surface_screen.cc
-    render/gl_surface_screen.h
-    render/gl_surface_texture.cc
-    render/gl_surface_texture.h
-    render/gl_utils.cc
-    render/gl_utils.h
     render/minimaprenderer.cc
     render/minimaprenderer.h
-    render/sdl_helper.cc
-    render/sdl_helper.h
-    render/sdl_surface.cc
-    render/sdl_surface.h
     render/terrain_sdl.cc
     render/terrain_sdl.h
     render/vertex.h
@@ -54,23 +92,6 @@ wl_library(graphic
     rendertarget.h
     richtext.cc
     richtext.h
-    surface.cc
-    surface.h
-    surface_cache.cc
-    surface_cache.h
-    text/rt_errors.h
-    text/rt_errors_impl.h
-    text/rt_parse.cc
-    text/rt_parse.h
-    text/rt_render.cc
-    text/rt_render.h
-    text/sdl_ttf_font.h
-    text/sdl_ttf_font_impl.cc
-    text/sdl_ttf_font_impl.h
-    text/sdl_ttf_font_loader_from_file.cc
-    text/sdl_ttf_font_loader_from_filesystem.cc
-    text/textstream.cc
-    text/textstream.h
     text_parser.cc
     text_parser.h
     texture.cc
@@ -84,17 +105,28 @@ wl_library(graphic
   USES_SDL_IMAGE
   USES_SDL_TTF
   DEPENDS
+    base_deprecated
     base_exceptions
+    base_geometry
     base_i18n
     base_log
+    base_macros
     build_info
+    economy
+    graphic_color
+    graphic_image
+    graphic_surface
+    graphic_text
     io_fileread
     io_filesystem
     io_stream
     logic
     profile
+    random
+    scripting
     sound
     ui_basic
     widelands_ball_of_mud
     wui
+    wui_text_layout
 )

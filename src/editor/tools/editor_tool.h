@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_TOOL_H
-#define EDITOR_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_TOOL_H
 
 #define MAX_TOOL_AREA 9
 
@@ -104,4 +104,4 @@ protected:
 	bool undoable;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_TOOL_H

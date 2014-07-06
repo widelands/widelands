@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef UI_SCROLLBAR_H
-#define UI_SCROLLBAR_H
+#ifndef WL_UI_BASIC_SCROLLBAR_H
+#define WL_UI_BASIC_SCROLLBAR_H
 
 #include <boost/signals2.hpp>
 
-#include "graphic/rect.h"
+#include "base/rect.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -104,4 +104,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_SCROLLBAR_H

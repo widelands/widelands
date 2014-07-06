@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef SDL_SURFACE_H
-#define SDL_SURFACE_H
+#ifndef WL_GRAPHIC_RENDER_SDL_SURFACE_H
+#define WL_GRAPHIC_RENDER_SDL_SURFACE_H
 
-#include "graphic/rect.h"
+#include "base/rect.h"
+#include "graphic/color.h"
 #include "graphic/surface.h"
-#include "rgbcolor.h"
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right
@@ -78,4 +78,4 @@ protected:
 };
 
 
-#endif /* end of include guard: SDL_SURFACE_H */
+#endif  // end of include guard: WL_GRAPHIC_RENDER_SDL_SURFACE_H

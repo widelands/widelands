@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ENCYCLOPEDIA_WINDOW_H
-#define ENCYCLOPEDIA_WINDOW_H
+#ifndef WL_WUI_ENCYCLOPEDIA_WINDOW_H
+#define WL_WUI_ENCYCLOPEDIA_WINDOW_H
 
 #include "logic/ware_descr.h"
 #include "ui_basic/listselect.h"
@@ -30,7 +30,7 @@
 namespace Widelands {
 struct WareDescr;
 struct Tribe_Descr;
-};
+}
 
 class Interactive_Player;
 
@@ -62,4 +62,4 @@ private:
 	void prodSiteSelected(uint32_t);
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

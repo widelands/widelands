@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARE_TYPES_H
-#define WARE_TYPES_H
+#ifndef WL_LOGIC_BILL_OF_MATERIALS_H
+#define WL_LOGIC_BILL_OF_MATERIALS_H
 
 #include <vector>
 
@@ -47,4 +47,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BILL_OF_MATERIALS_H

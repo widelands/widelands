@@ -26,6 +26,7 @@
 
 #include "ai/ai_hints.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -41,7 +42,6 @@
 #include "logic/warehouse.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 constexpr int kFieldUpdateInterval = 1000;
 constexpr int kIdleMineUpdateInterval = 22000;
@@ -1266,9 +1266,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					} else if (bo.inputs_.size() > 0) {
 						// to have two buildings from everything (intended for upgradeable buildings)
 						// but I do not know how to identify such buildings
-						if (bo.cnt_built_ == 1 and game().get_gametime() >
-						                        60 * 60 * 1000 and bo.desc->enhancements().size() >
-						                        0 and mines_.size() > 0) {
+						if (bo.cnt_built_ == 1
+						    and game().get_gametime() > 60 * 60 * 1000
+						    and !bo.desc->enhancements().empty()
+						    and !mines_.empty()) {
 							prio = max_preciousness + bulgarian_constant;
 						}
 						// if output is needed and there are no idle buildings
@@ -1438,7 +1439,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		update_all_mineable_fields(gametime);
 		next_mine_construction_due_ = gametime + kIdleMineUpdateInterval;
 
-		if (mineable_fields.size() > 0) {
+		if (!mineable_fields.empty()) {
 
 			for (uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i) {
 				BuildingObserver& bo = buildings.at(i);
@@ -2203,7 +2204,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// buildings are needed. If yes consider an upgrade.
 	std::set<Building_Index> enhancements = productionsite->enhancements();
 	int32_t maxprio = 0;
-	Building_Index enbld;  // to get rid of this
+	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
 		// Only enhance buildings that are allowed (scenario mode)
@@ -2225,11 +2226,11 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 				continue;
 
 			// forcing first upgrade
-			if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) ==
-			    0 and(productionsite_observer.bo->cnt_built_ -
-			          productionsite_observer.bo->unoccupied_) >=
-			       1 and(game().get_gametime() - productionsite_observer.built_time_) >
-			       30 * 60 * 1000 and mines_.size() > 0) {
+			if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) == 0
+			    and (productionsite_observer.bo->cnt_built_ -
+			          productionsite_observer.bo->unoccupied_) >= 1
+			    and (game().get_gametime() - productionsite_observer.built_time_) > 30 * 60 * 1000
+			    and !mines_.empty()) {
 				if (kUpgradeDebug)
 					log(" UPGRADE: upgrading (forcing as first) %12s at %3d x %3d: age %d min.\n",
 					    productionsite_observer.bo->name,
@@ -2355,7 +2356,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	// Check whether building is enhanceable. If yes consider an upgrade.
 	std::set<Building_Index> enhancements = mine->enhancements();
 	int32_t maxprio = 0;
-	Building_Index enbld;
+	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
@@ -2889,7 +2890,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	Building* target = ms;  // dummy initialisation to silence the compiler
 	int32_t chance = 0;
 	uint32_t attackers = 0;
-	uint8_t retreat = ms->owner().get_retreat_percentage();
 	// Search in a radius of the vision of the militarysite and collect
 	// information about immovables in the area
 	std::vector<ImmovableFound> immovables;
@@ -2948,12 +2948,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		return false;
 	}
 
-	if (ms->owner().is_retreat_change_allowed()) {
-		// \todo Player is allowed to modify his retreat value
-	}
-
 	// Attack the selected target.
-	game().send_player_enemyflagaction(target->base_flag(), pn, attackers, retreat);
+	game().send_player_enemyflagaction(target->base_flag(), pn, attackers);
 	//  Do not attack again too soon - returning soldiers must get healed first.
 	next_attack_consideration_due_ = (gametime % 51 + 10) * 1000 + gametime;
 	return true;
