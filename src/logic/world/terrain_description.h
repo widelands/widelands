@@ -83,6 +83,16 @@ public:
 	/// Returns the editor category.
 	const EditorCategory& editor_category() const;
 
+	/// Parameters for terrain affinity of immovables.
+	/// Temperature in Kelvin.
+	double temperature() const;
+
+	/// Humidity in percent [0, 1].
+	double humidity() const;
+
+	/// Fertility in percent [0, 1].
+	double fertility() const;
+
 private:
 	const std::string name_;
 	const std::string descname_;
@@ -94,6 +104,9 @@ private:
 	const std::vector<std::string> texture_paths_;
 	int32_t dither_layer_;
 	uint32_t texture_;  ///< renderer's texture
+	double temperature_;
+	double fertility_;
+	double humidity_;
 };
 
 }  // namespace Widelands

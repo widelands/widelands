@@ -20,6 +20,7 @@
 #include "logic/game.h"
 
 #include <cstring>
+#include <limits>
 #include <memory>
 #include <string>
 
@@ -1152,6 +1153,10 @@ void Game::WriteStatistics(FileWrite & fw)
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
 			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
 		}
+}
+
+double logic_rand_as_double(Game* game) {
+	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
 }
 
 }

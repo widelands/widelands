@@ -19,7 +19,9 @@
 
 #include "logic/worker.h"
 
+#include <iterator>
 #include <memory>
+#include <tuple>
 
 #include <boost/format.hpp>
 
@@ -49,6 +51,7 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
+#include "logic/terrain_affinity.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker_program.h"
@@ -806,73 +809,75 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 			return true;
 		}
 
-	std::vector<int32_t> best_fitting;
 	std::vector<bool> is_tribe_specific;
-	uint32_t terrain_suitability = 0;
-	for (uint8_t i = 0; i < action.sparamv.size(); ++i) {
-		std::vector<std::string> const list(split_string(action.sparamv[i], ":"));
-		std::string immovable;
 
-		if (list.size() == 1) {
-			state.svar1 = "world";
-			immovable = list[0];
-			state.ivar2 = game.world().get_immovable_index(immovable.c_str());
-			if (state.ivar2 > 0) {
-				Immovable_Descr const * imm =
-					game.world().get_immovable_descr(state.ivar2);
-				uint32_t suits = imm->terrain_suitability(fpos, map);
-				// Remove existing, if this immovable suits better
-				if (suits > terrain_suitability) {
-					best_fitting.clear();
-					is_tribe_specific.clear();
-				}
-				if (suits >= terrain_suitability) {
-					terrain_suitability = suits;
-					best_fitting.push_back(state.ivar2);
-					is_tribe_specific.push_back(false);
-				}
-				continue;
-			}
-		} else {
-			state.svar1 = "tribe";
-			immovable = list[1];
-			state.ivar2 = descr().tribe().get_immovable_index(immovable.c_str());
-			if (state.ivar2 > 0) {
-				Immovable_Descr const * imm =
-					descr().tribe().get_immovable_descr(state.ivar2);
-				uint32_t suits = imm->terrain_suitability(fpos, map);
-				// Remove existing, if this immovable suits better
-				if (suits > terrain_suitability) {
-					best_fitting.clear();
-					is_tribe_specific.clear();
-				}
-				if (suits >= terrain_suitability) {
-					terrain_suitability = suits;
-					best_fitting.push_back(state.ivar2);
-					is_tribe_specific.push_back(true);
-				}
-				continue;
-			}
+	// Figure the (at most) six best fitting immovables (as judged by terrain
+	// affinity). We will pick one of them at random later. The container is
+	// picked to be a stable sorting one, so that no deyncs happen in
+	// multiplayer.
+	std::set<std::tuple<double, uint32_t>> best_suited_immovables_index;
+
+	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume it
+	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
+	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
+	   const uint32_t index, const Immovable_Descr& immovable_description) {
+		double p = 1.;
+		if (immovable_description.has_terrain_affinity()) {
+			p = probability_to_grow(
+			   immovable_description.terrain_affinity(), fpos, map, game.world().terrains());
 		}
+		best_suited_immovables_index.insert(std::make_tuple(p, index));
+		if (best_suited_immovables_index.size() > 6) {
+			best_suited_immovables_index.erase(best_suited_immovables_index.begin());
+		}
+	};
 
-		// Only here if immovable was not found
-		molog("  WARNING: Unknown immovable %s\n", action.sparamv[i].c_str());
-		send_signal(game, "fail");
-		pop_task(game);
-		return true;
+	if (action.sparamv.size() != 1) {
+			throw game_data_error("plant takes only one argument.");
 	}
 
-	assert(best_fitting.size() == is_tribe_specific.size());
-	if (best_fitting.empty()) {
+	std::vector<std::string> const list(split_string(action.sparamv[0], ":"));
+
+	if (list.size() != 2) {
+		throw game_data_error("plant takes either tribe:<immovable> or attrib:<attribute>");
+	}
+
+	if (list[0] == "attrib") {
+		state.svar1 = "world";
+
+		const DescriptionMaintainer<Immovable_Descr>& immovables = game.world().immovables();
+
+		const uint32_t attribute_id = Immovable_Descr::get_attribute_id(list[1]);
+		for (uint32_t i = 0; i < immovables.get_nitems(); ++i) {
+			Immovable_Descr& immovable_descr = immovables.get_unmutable(i);
+			if (!immovable_descr.has_attribute(attribute_id)) {
+				continue;
+			}
+			test_suitability(i, immovable_descr);
+		}
+	} else {
+		state.svar1 = "tribe";
+		uint32_t immovable_index = descr().tribe().get_immovable_index(list[1]);
+
+		if (immovable_index > 0) {
+			const Immovable_Descr* imm = descr().tribe().get_immovable_descr(immovable_index);
+			test_suitability(immovable_index, *imm);
+		}
+	}
+
+	if (best_suited_immovables_index.empty()) {
 		molog("  WARNING: No suitable immovable found!");
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
 	}
-	uint32_t const idx = game.logic_rand() % best_fitting.size();
 
-	Immovable & newimm = game.create_immovable
-		(pos, best_fitting[idx], is_tribe_specific[idx] ? &descr().tribe() : nullptr);
+	// Randomly pick one of the immovables to be planted.
+	const uint32_t idx = game.logic_rand() % best_suited_immovables_index.size();
+	state.ivar2 = std::get<1>(*std::next(best_suited_immovables_index.begin(), idx));
+
+	Immovable& newimm =
+	   game.create_immovable(pos, state.ivar2, state.svar1 == "tribe" ? &descr().tribe() : nullptr);
 	newimm.set_owner(get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
