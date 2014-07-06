@@ -140,10 +140,6 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 		std::cout << "Could not encode PNG." << std::endl;
 	}
 
-	// But that is still not enough, so we let a minimum distance to be allowed.
-	// This might need tweaking to work on all systems.
-	constexpr int kMaxAllowedSquaredPixelDistance = 6;
-
 	const std::string encoded_data = fw.GetData();
 	std::unique_ptr<SDLSurface> converted(new SDLSurface(IMG_Load_RW(
 	   SDL_RWFromConstMem(encoded_data.data(), encoded_data.size()), false /* free source */)));
@@ -160,17 +156,32 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 			SDL_GetRGBA(
 			   converted->get_pixel(x, y), &converted->format(), &gclr.r, &gclr.g, &gclr.b, &gclr.a);
 
-			const int distance = hypot_sqr(cclr.r, gclr.r) + hypot_sqr(cclr.g, gclr.g) +
-			               hypot_sqr(cclr.b, gclr.b) + hypot_sqr(cclr.a, gclr.a);
-
-			if (distance >= kMaxAllowedSquaredPixelDistance) {
-				log("Mismatched pixel: (%d, %d)\n", x, y);
-				log(" expected: (%d, %d, %d, %d)\n", cclr.r, cclr.g, cclr.b, cclr.a);
-				log(" seen:     (%d, %d, %d, %d)\n", gclr.r, gclr.g, gclr.b, gclr.a);
-				log(" distances: %d, allowed: %d\n\n", distance, kMaxAllowedSquaredPixelDistance);
-
-				++nwrong;
+			if (cclr == gclr) {
+				continue;
 			}
+
+			// Somehow a black pixel can have different alpha values. Probably
+			// because it does not matter when blending anyways.
+			if (cclr.r == gclr.r && cclr.r == 0 && cclr.g == gclr.g && cclr.g == 0 &&
+			    cclr.b == gclr.b && cclr.b == 0) {
+				// Only alpha differs. Ignore.
+				continue;
+			}
+
+			// NOCOM(#sirver): bring back or remove.
+			// // But that is still not enough, so we let a minimum distance to be allowed.
+			// // This might need tweaking to work on all systems.
+			// const int distance = hypot_sqr(cclr.r, gclr.r) + hypot_sqr(cclr.g, gclr.g) +
+										// hypot_sqr(cclr.b, gclr.b) + hypot_sqr(cclr.a, gclr.a);
+			// constexpr int kMaxAllowedSquaredPixelDistance = 6;
+			// if (distance >= kMaxAllowedSquaredPixelDistance) {
+			log("Mismatched pixel: (%d, %d)\n", x, y);
+			log(" expected: (%d, %d, %d, %d)\n", cclr.r, cclr.g, cclr.b, cclr.a);
+			log(" seen:     (%d, %d, %d, %d)\n", gclr.r, gclr.g, gclr.b, gclr.a);
+			// log(" distances: %d, allowed: %d\n\n", distance, kMaxAllowedSquaredPixelDistance);
+
+			++nwrong;
+			// }
 		}
 	}
 
