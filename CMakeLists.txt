@@ -177,7 +177,6 @@ else()
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
-  add_flag(WL_COMPILE_DIAGNOSTICS "-fdiagnostics-show-option")
 endif()
 
 # Turn some warnings into errors.
