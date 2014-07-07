@@ -41,17 +41,17 @@ check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - 
 [upgrade_soldier_evade_0]
 check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
 sleep=15000
-animate=working 15000
 check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
 consume=pittabread fish,meat strongbeer
+animate=working 15000
 train=soldier evade 0 1
 
 [upgrade_soldier_evade_1]
 check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
 sleep=15000
-animate=working 15000
 check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
 consume=pittabread:2 fish,meat strongbeer
+animate=working 15000
 train=soldier evade 1 2
 
 [build]

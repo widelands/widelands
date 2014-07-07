@@ -22,12 +22,12 @@ mine_marble=_Mine marble
 work=_Work
 
 [mine_stone]
-sleep=25000
-worker=cut_stone
+worker=cut_stone  # This order is on purpose so that the productivity 
+sleep=25000       # drops fast once all stones are gone.
 
 [mine_marble]
-sleep=25000
-worker=cut_marble
+worker=cut_marble  # This order is on purpose so that the productivity 
+sleep=25000        # drops fast once all stones are gone.
 
 [work]
 call=mine_stone
