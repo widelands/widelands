@@ -19,6 +19,7 @@
 
 #include "base/i18n.h"
 
+#include <clocale>
 #include <cstdlib>
 #include <map>
 #include <utility>
