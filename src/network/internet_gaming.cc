@@ -325,7 +325,7 @@ void InternetGaming::handle_metaserver_communication() {
 		}
 	}
 
-	if (!waitcmd.emtpy()) {
+	if (!waitcmd.empty()) {
 		// Check if timeout is reached
 		time_t now = time(nullptr);
 		if (now > waittimeout) {

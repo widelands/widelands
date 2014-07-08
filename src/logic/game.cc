@@ -290,7 +290,7 @@ void Game::init_newgame
 	std::string const background = map().get_background();
 	if (loaderUI) {
 		if (!background.empty()) {
-			loaderUI->set_background(background)
+			loaderUI->set_background(background);
 		}
 		loaderUI->step(_("Configuring players"));
 	}
