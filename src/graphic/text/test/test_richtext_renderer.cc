@@ -179,7 +179,6 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 				log(" seen:     (%d, %d, %d, %d)\n", gclr.r, gclr.g, gclr.b, gclr.a);
 				log(" %d, %d, %d, %d\n\n", distance_r, distance_g, distance_b, distance_a);
 				++nwrong;
-				// generated->set_pixel(x, y, SDL_MapRGBA(&generated->format(), 0, 255, 255, 255));
 			}
 		}
 	}
