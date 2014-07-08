@@ -116,7 +116,7 @@ double probability_to_grow(const TerrainAffinity& affinity,
 
 	const double pure_gauss = exp(
 	   -pow2(affinity.preferred_fertility() - terrain_fertility) / (2 * pow2(sigma_fertility)) -
-	   pow2(affinity.preferred_humidity() - terrain_humidity) / (2 * pow2(sigma_temperature)) -
+	   pow2(affinity.preferred_humidity() - terrain_humidity) / (2 * pow2(sigma_humidity)) -
 	   pow2(affinity.preferred_temperature() - terrain_temperature) / (2 * pow2(sigma_temperature)));
 
 	double advanced_gauss = pure_gauss * 1.1 + 0.05;

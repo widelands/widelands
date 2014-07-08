@@ -535,8 +535,10 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 			return CAST_TO_LUA(Worker);
 		case Bob::SHIP:
 			return CAST_TO_LUA(Ship);
+		default:
+			assert(false);  // Never here, hopefully.
+			return 0;
 	}
-	assert(false);  // Never here, hopefully.
 }
 
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {

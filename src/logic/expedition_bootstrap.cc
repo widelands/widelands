@@ -180,7 +180,7 @@ WaresQueue& ExpeditionBootstrap::waresqueue(Ware_Index index) const {
 			return *wq.get();
 		}
 	}
-	assert(false); // Never here, otherwise we do not have a queue for this ware.
+	throw wexception("Never here.");
 }
 
 std::vector<WaresQueue*> ExpeditionBootstrap::wares() const {
