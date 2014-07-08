@@ -25,9 +25,9 @@ beer=6
 work=_Work
 
 [work]
+sleep=45000
 return=skipped unless economy needs coal or not economy needs ration
 return=skipped unless economy needs coal or not economy needs beer
-sleep=45000
 consume=beer ration
 animate=working 20000
 mine=coal 2 50 5 17

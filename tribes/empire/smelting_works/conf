@@ -29,15 +29,15 @@ work=_Work
 
 [smelt_iron]
 return=skipped unless economy needs iron
-consume=ironore coal
 sleep=25000
+consume=ironore coal
 animate=working 35000
 produce=iron
 
 [smelt_gold]
 return=skipped unless economy needs gold
-consume=goldore coal
 sleep=25000
+consume=goldore coal
 animate=working 35000
 produce=gold
 

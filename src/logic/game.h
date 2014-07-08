@@ -274,6 +274,9 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	return location;
 }
 
+// Returns a value between [0., 1].
+double logic_rand_as_double(Game* game);
+
 }
 
 #endif  // end of include guard: WL_LOGIC_GAME_H

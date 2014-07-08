@@ -25,11 +25,12 @@ water=8
 work=_Work
 
 [work]
+sleep=15000
 return=skipped unless economy needs donkey or not economy needs wheat
 return=skipped unless economy needs donkey or not economy needs water
 consume=wheat water
 playFX=../../../sound/farm/donkey 192
-animate=working 30000 # feeding cute little baby donkeys ;)
+animate=working 15000 # feeding cute little baby donkeys ;)
 recruit=donkey
 
 [idle]

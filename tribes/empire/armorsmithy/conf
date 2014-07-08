@@ -36,29 +36,29 @@ work=_Work
 
 [produce_helm]
 return=skipped unless economy needs helm
-consume=iron coal
 sleep=32000
+consume=iron coal
 animate=working 35000
 produce=helm
 
 [produce_armor]
 return=skipped unless economy needs armor
-consume=iron coal cloth
 sleep=32000
+consume=iron coal cloth
 animate=working 45000
 produce=armor
 
 [produce_chain_armor]
 return=skipped unless economy needs chain_armor
-consume=iron:2 coal cloth
 sleep=32000
+consume=iron:2 coal cloth
 animate=working 45000
 produce=chain_armor
 
 [produce_plate_armor]
 return=skipped unless economy needs plate_armor
-consume=iron:2 coal:2 cloth gold
 sleep=32000
+consume=iron:2 coal:2 cloth gold
 animate=working 45000
 produce=plate_armor
 
@@ -67,7 +67,6 @@ call=produce_helm
 call=produce_armor
 call=produce_chain_armor
 call=produce_plate_armor
-sleep=20000
 return=skipped
 
 [unoccupied]

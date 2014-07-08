@@ -108,6 +108,8 @@ wl_library(logic
     immovable.cc
     immovable.h
     immovable_program.h
+    terrain_affinity.cc
+    terrain_affinity.h
     instances.cc
     instances.h
     map.cc

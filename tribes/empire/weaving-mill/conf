@@ -20,8 +20,8 @@ wool=8
 work=_Work
 
 [work]
-return=skipped unless economy needs cloth
 sleep=25000 # orig 40000
+return=skipped unless economy needs cloth
 consume=wool
 animate=working 15000 # unsure of balancing CW
 produce=cloth

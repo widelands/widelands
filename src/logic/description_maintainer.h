@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_DESCRIPTION_MAINTAINER_H
 #define WL_LOGIC_DESCRIPTION_MAINTAINER_H
 
+#include <cassert>
 #include <map>
 #include <memory>
 #include <string>
@@ -53,6 +54,14 @@ template <typename T> struct DescriptionMaintainer {
 	// bound. Ownership is retained.
 	T* get(const int32_t idx) const {
 		return (idx >= 0 && idx < static_cast<int32_t>(items_.size())) ? items_[idx].get() : nullptr;
+	}
+
+	// Returns the entry at 'index'. If 'index' is out of bounds the result is
+	// undefined.
+	// TODO(sirver): this should be called get and the other should be called get_mutable.
+	T& get_unmutable(const uint32_t index) const {
+		assert(0 <= index && index < items_.size());
+		return *items_.at(index);
 	}
 
 private:
