@@ -41,6 +41,8 @@ SDL_Surface * empty_sdl_surface(int16_t w, int16_t h) {
 #endif
 
 	surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, rmask, gmask, bmask, amask);
+	// NOCOM(#sirver): remove
+	SDL_FillRect(surface, NULL, SDL_MapRGBA(surface->format, 218, 122, 115, 61));
 	assert(surface);
 
 	return surface;
