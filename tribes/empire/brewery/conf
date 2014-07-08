@@ -3,6 +3,7 @@ output=beer
 
 [aihints]
 build_material=false
+is_food_basic=true
 
 [buildcost]
 log=1
