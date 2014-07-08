@@ -32,8 +32,8 @@
 
 StandaloneRenderer::StandaloneRenderer() {
 	g_fs = new LayeredFileSystem();
-	g_fs->AddFileSystem(FileSystem::Create(WIDELANDS_DATA_DIR));
-	g_fs->AddFileSystem(FileSystem::Create(RICHTEXT_DATA_DIR));
+	g_fs->AddFileSystem(&FileSystem::Create(WIDELANDS_DATA_DIR));
+	g_fs->AddFileSystem(&FileSystem::Create(RICHTEXT_DATA_DIR));
 
 	surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
 	image_cache_.reset(new ImageCache(surface_cache_.get()));

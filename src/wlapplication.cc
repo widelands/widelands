@@ -124,7 +124,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		// on mac and windows, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
 		log("Adding executable directory to search path\n");
-		g_fs->AddFileSystem(FileSystem::Create(s));
+		g_fs->AddFileSystem(&FileSystem::Create(s));
 #else
 		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
 		g_fs->AddFileSystem //  see config.h
@@ -189,7 +189,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		if (argv0 != ".") {
 			try {
 				log ("Adding directory: %s\n", argv0.c_str());
-				g_fs->AddFileSystem(FileSystem::Create(argv0));
+				g_fs->AddFileSystem(&FileSystem::Create(argv0));
 			}
 			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {
@@ -200,9 +200,8 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			}
 		}
 	}
-	//now make sure we always access the file with the right version first
-	g_fs->PutRightVersionOnTop();
 }
+
 void WLApplication::setup_homedir() {
 	//If we don't have a home directory don't do anything
 	if (m_homedir.size()) {
@@ -212,7 +211,7 @@ void WLApplication::setup_homedir() {
 
 			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
 			home->EnsureDirectoryExists(".");
-			g_fs->SetHomeFileSystem(*home.release());
+			g_fs->SetHomeFileSystem(home.release());
 		} catch (const std::exception & e) {
 			log("Failed to add home directory: %s\n", e.what());
 		}
@@ -1073,7 +1072,7 @@ void WLApplication::handle_commandline_parameters()
 
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
-		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
+		g_fs->AddFileSystem(&FileSystem::Create(m_commandline["datadir"]));
 		m_default_datadirs = false;
 		m_commandline.erase("datadir");
 	}
