@@ -1,0 +1,5 @@
+<rt>
+<p>
+<img src=pics/small_red_box.png><space><img src=pics/small_red_box.png>
+</p>
+</rt>

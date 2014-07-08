@@ -25,7 +25,6 @@
 #include <memory>
 
 #include "graphic/image.h"
-#include "graphic/image_loader.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -34,7 +33,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-class IImageLoader;
 namespace Widelands {
 class Editor_Game_Base;
 class Game;
@@ -93,8 +91,6 @@ private:
 	GameSettingsProvider                          * m_settings;
 	GameController                                * m_ctrl;
 	std::unique_ptr<const Image>                    m_minimap_image;
-	std::unique_ptr<const IImageLoader>             m_image_loader;
-
 };
 
 

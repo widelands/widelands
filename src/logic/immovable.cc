@@ -1112,8 +1112,6 @@ void ImmovableProgram::ActSeed::execute
 	const Map& map = game.map();
 	FCoords const f = map.get_fcoords(immovable.get_position());
 	const Immovable_Descr& descr = immovable.descr();
-	double p =
-	   probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains());
 
 	if (logic_rand_as_double(&game) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
