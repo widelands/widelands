@@ -45,6 +45,7 @@ wl_library(scripting
     base_macros
     build_info
     economy
+    helper
     io_fileread
     io_filesystem
     logic
@@ -55,6 +56,5 @@ wl_library(scripting
     profile
     third_party_eris
     ui_basic
-    widelands_ball_of_mud
     wui
 )

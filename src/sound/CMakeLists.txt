@@ -14,12 +14,12 @@ wl_library(sound
     base_i18n
     base_log
     graphic
+    helper
     io_fileread
     io_filesystem
     logic
     logic_widelands_geometry
     profile
     random
-    widelands_ball_of_mud
     wui
 )

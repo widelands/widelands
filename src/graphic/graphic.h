@@ -25,7 +25,6 @@
 #include <vector>
 
 #include <SDL.h>
-#include <png.h>
 
 #include "base/rect.h"
 #include "graphic/image_cache.h"
@@ -33,7 +32,6 @@
 #define MAX_RECTS 20
 
 class AnimationManager;
-class ImageLoaderImpl;
 class RenderTarget;
 class Surface;
 class SurfaceCache;
@@ -125,18 +123,10 @@ public:
 
 private:
 	void cleanup();
-	void save_png_(Surface & surf, StreamWrite*) const;
 
 	bool m_fallback_settings_in_effect;
 
 protected:
-	// Static helper function for png writing
-	static void m_png_write_function
-		(png_structp png_ptr,
-		 png_bytep data,
-		 png_size_t length);
-	static void m_png_flush_function (png_structp png_ptr);
-
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
 	std::unique_ptr<Surface> screen_;
@@ -156,8 +146,6 @@ protected:
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 
-	/// The class that gets images from disk.
-	std::unique_ptr<ImageLoaderImpl> image_loader_;
 	/// Volatile cache of Hardware dependant surfaces.
 	std::unique_ptr<SurfaceCache> surface_cache_;
 	/// Non-volatile cache of hardware independent images. The use the

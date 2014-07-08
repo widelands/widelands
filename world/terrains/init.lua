@@ -107,10 +107,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "green/wiese4_00.png" },
    dither_layer = 40,
-   -- NOCOM(#sirver): these are unchanged default values.
-   temperature = 289.65,
-   humidity = 0.66,
-   fertility = 0.9,
+   temperature = 293,
+   humidity = 0.76,
+   fertility = 0.7,
 }
 
 world:new_terrain_type{
@@ -229,7 +228,6 @@ world:new_terrain_type{
    textures = path.list_directory(pics_dir .. "green", "sumpf_\\d+.png"),
    dither_layer = 30,
    fps = 14,
-   -- NOCOM(#sirver): these are unchanged default values.
    temperature = 289.65,
    humidity = 0.66,
    fertility = 0.9,
@@ -310,9 +308,9 @@ world:new_terrain_type{
    default_resource_amount = 5,
    textures = { pics_dir .. "wasteland/ashes_00.png" },
    dither_layer = 20,
-   temperature = 313,
-   humidity = 0.25,
-   fertility = 0.9,
+   temperature = 310,
+   humidity = 0.23,
+   fertility = 0.8,
 }
 
 world:new_terrain_type{
@@ -325,9 +323,9 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { pics_dir .. "wasteland/ashes2_00.png" },
    dither_layer = 20,
-   temperature = 313,
-   humidity = 0.25,
-   fertility = 0.9,
+   temperature = 310,
+   humidity = 0.23,
+   fertility = 0.8,
 }
 
 world:new_terrain_type{
@@ -340,9 +338,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground1_00.png" },
    dither_layer = 30,
-   temperature = 308,
-   humidity = 0.2,
-   fertility = 0.7,
+   temperature = 310,
+   humidity = 0.25,
+   fertility = 0.5,
 }
 
 world:new_terrain_type{
@@ -355,9 +353,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground2_00.png" },
    dither_layer = 30,
-   temperature = 308,
-   humidity = 0.22,
-   fertility = 0.75,
+   temperature = 310,
+   humidity = 0.225,
+   fertility = 0.85,
 }
 
 world:new_terrain_type{
@@ -370,9 +368,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground3_00.png" },
    dither_layer = 30,
-   temperature = 308,
-   humidity = 0.24,
-   fertility = 0.8,
+   temperature = 310,
+   humidity = 0.2,
+   fertility = 0.9,
 }
 
 world:new_terrain_type{
@@ -385,8 +383,8 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground4_00.png" },
    dither_layer = 30,
-   temperature = 308,
-   humidity = 0.26,
+   temperature = 310,5,
+   humidity = 0.225,
    fertility = 0.85,
 }
 
@@ -415,9 +413,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/mountain1_00.png" },
    dither_layer = 50,
-   temperature = 303,
+   temperature = 308,
    humidity = 0.3,
-   fertility = 0.5,
+   fertility = 0.6,
 }
 
 world:new_terrain_type{
@@ -430,9 +428,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/mountain2_00.png" },
    dither_layer = 50,
-   temperature = 303,
+   temperature = 308,
    humidity = 0.3,
-   fertility = 0.5,
+   fertility = 0.6,
 }
 
 world:new_terrain_type{
@@ -445,9 +443,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/mountain3_00.png" },
    dither_layer = 50,
-   temperature = 303,
+   temperature = 308,
    humidity = 0.3,
-   fertility = 0.5,
+   fertility = 0.6,
 }
 
 world:new_terrain_type{
@@ -460,9 +458,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/mountain4_00.png" },
    dither_layer = 50,
-   temperature = 303,
+   temperature = 308,
    humidity = 0.3,
-   fertility = 0.5,
+   fertility = 0.6,
 }
 
 world:new_terrain_type{
@@ -475,9 +473,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/strand_00.png" },
    dither_layer = 0,
-   temperature = 318,
+   temperature = 308,
    humidity = 0.2,
-   fertility = 0.4,
+   fertility = 0.7,
 }
 
 world:new_terrain_type{
@@ -540,7 +538,7 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "winter/tundra_00.png" },
    dither_layer = 50,
-   temperature = 253,
+   temperature = 273,
    humidity = 0.7,
    fertility = 0.4,
 }
@@ -555,7 +553,7 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "winter/tundra2_00.png" },
    dither_layer = 50,
-   temperature = 258,
+   temperature = 273,
    humidity = 0.7,
    fertility = 0.4,
 }
@@ -570,7 +568,7 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "winter/tundra3_00.png" },
    dither_layer = 50,
-   temperature = 263,
+   temperature = 273,
    humidity = 0.7,
    fertility = 0.4,
 }
@@ -585,7 +583,7 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "winter/tundra_taiga_00.png" },
    dither_layer = 50,
-   temperature = 273,
+   temperature = 278,
    humidity = 0.8,
    fertility = 0.45,
 }
@@ -774,7 +772,7 @@ world:new_terrain_type{
    dither_layer = 20,
    temperature = 318,
    humidity = 0.3,
-   fertility = 0.33,
+   fertility = 0.6,
 }
 
 world:new_terrain_type{
@@ -803,8 +801,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/steppe_00.png" },
    dither_layer = 30,
    temperature = 318,
-   humidity = 0.45,
-   fertility = 0.7,
+   humidity = 0.58,
+   fertility = 0.62,
 }
 
 world:new_terrain_type{
@@ -817,9 +815,9 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "desert/meadow_00.png" },
    dither_layer = 40,
-   temperature = 308,
-   humidity = 0.6,
-   fertility = 0.6,
+   temperature = 313,
+   humidity = 0.58,
+   fertility = 0.62,
 }
 
 world:new_terrain_type{
@@ -922,9 +920,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/desert1_00.png" },
    dither_layer = 20,
-   temperature = 328,
-   humidity = 0.2,
-   fertility = 0.05,
+   temperature = 318,
+   humidity = 0.25,
+   fertility = 0.3,
 }
 
 world:new_terrain_type{
@@ -937,9 +935,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "desert/desert2_00.png" },
    dither_layer = 20,
-   temperature = 328,
+   temperature = 318,
    humidity = 0.2,
-   fertility = 0.05,
+   fertility = 0.3,
 }
 
 world:new_terrain_type{
@@ -953,7 +951,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert3_00.png" },
    dither_layer = 20,
    temperature = 328,
-   humidity = 0.2,
+   humidity = 0.3,
    fertility = 0.05,
 }
 
@@ -968,7 +966,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/beach_00.png" },
    dither_layer = 10,
    temperature = 313,
-   humidity = 0.1,
+   humidity = 0.2,
    fertility = 0.1,
 }
 

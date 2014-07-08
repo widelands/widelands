@@ -23,6 +23,13 @@
 
 #include <SDL.h>
 
+SDLSurface::SDLSurface(SDL_Surface* surface, bool free_surface_on_delete) :
+	m_surface(surface),
+	m_offsx(0), m_offsy(0),
+	m_w(surface->w), m_h(surface->h),
+	m_free_surface_on_delete(free_surface_on_delete)
+{}
+
 SDLSurface::~SDLSurface() {
 	assert(m_surface);
 

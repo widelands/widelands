@@ -223,6 +223,7 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    helper
     io_fileread
     io_filesystem
     io_stream

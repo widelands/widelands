@@ -45,7 +45,9 @@ wl_library(ui_fsmenu
     game_io
     graphic
     graphic_image
+    graphic_image_io
     graphic_surface
+    helper
     io_filesystem
     logic
     logic_campaign_visibility

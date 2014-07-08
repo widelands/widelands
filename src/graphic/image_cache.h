@@ -21,12 +21,12 @@
 #define WL_GRAPHIC_IMAGE_CACHE_H
 
 #include <string>
+#include <map>
 
 #include <boost/utility.hpp>
 
 #include "graphic/image.h"
 
-class IImageLoader;
 class SurfaceCache;
 
 // For historic reasons, most part of the Widelands code base expect that an
@@ -38,24 +38,28 @@ class SurfaceCache;
 // releasing their ownership.
 class ImageCache : boost::noncopyable {
 public:
-	virtual ~ImageCache() {}
+	// Does not take ownership.
+	ImageCache(SurfaceCache* surface_cache);
+	~ImageCache();
 
 	// Insert the given Image into the cache. The hash is defined by Image's hash()
 	// function. Ownership of the Image is taken. Will return a pointer to the freshly inserted
 	// image for convenience.
-	virtual const Image* insert(const Image*) = 0;
+	const Image* insert(const Image*);
 
 	// Returns the image associated with the given hash. If no image by this
 	// hash is known, it will try to load one from disk with the filename =
 	// hash. If this fails, it will throw an error.
-	virtual const Image* get(const std::string& hash) = 0;
+	const Image* get(const std::string& hash);
 
 	// Returns true if the given hash is stored in the cache.
-	virtual bool has(const std::string& hash) const = 0;
+	bool has(const std::string& hash) const;
 
+private:
+	typedef std::map<std::string, const Image*> ImageMap;
+
+	ImageMap images_;  /// hash of cached filename/image pairs
+	SurfaceCache* const surface_cache_;  // Not owned.
 };
-
-// Create a new ImageCache. Takes no ownership.
-ImageCache* create_image_cache(IImageLoader*, SurfaceCache*);
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_CACHE_H

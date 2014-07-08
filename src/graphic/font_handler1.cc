@@ -47,7 +47,7 @@ namespace {
 class RTImage : public Image {
 public:
 	RTImage
-		(const string& ghash, SurfaceCache* surface_cache, RT::IRenderer*
+		(const string& ghash, SurfaceCache* surface_cache, RT::Renderer*
 		 rt_renderer, const string& text, uint16_t gwidth)
 		: hash_(ghash), text_(text), width_(gwidth), surface_cache_(surface_cache),
 		  rt_renderer_(rt_renderer)
@@ -63,12 +63,8 @@ public:
 		if (surf)
 			return surf;
 
-		try {
-			surf = rt_renderer_->render(text_, width_);
-			surface_cache_->insert(hash_, surf, true);
-		} catch (RT::Exception& e) {
-			throw wexception("Richtext rendering error: %s", e.what());
-		}
+		surf = rt_renderer_->render(text_, width_);
+		surface_cache_->insert(hash_, surf, true);
 		return surf;
 	}
 
@@ -79,7 +75,7 @@ private:
 
 	// Nothing owned.
 	SurfaceCache* const surface_cache_;
-	RT::IRenderer* const rt_renderer_;
+	RT::Renderer* const rt_renderer_;
 };
 
 }
@@ -91,7 +87,7 @@ namespace UI {
 // be a problem.
 class Font_Handler1 : public IFont_Handler1 {
 public:
-	Font_Handler1(ImageCache* image_cache, SurfaceCache* surface_cache, RT::IRenderer* renderer) :
+	Font_Handler1(ImageCache* image_cache, SurfaceCache* surface_cache, RT::Renderer* renderer) :
 		surface_cache_(surface_cache), image_cache_(image_cache), renderer_(renderer) {}
 	virtual ~Font_Handler1() {}
 
@@ -101,21 +97,21 @@ public:
 		if (image_cache_->has(hash))
 			return image_cache_->get(hash);
 
-		return image_cache_->insert(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
+		std::unique_ptr<RTImage> image(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
+		image->surface(); // force the rich text to get rendered in case there is an exception thrown.
+
+		return image_cache_->insert(image.release());
 	}
 
 private:
 	SurfaceCache* const surface_cache_;  // not owned
 	ImageCache* const image_cache_;  // not owned
-	std::unique_ptr<RT::IRenderer> renderer_;
+	std::unique_ptr<RT::Renderer> renderer_;
 };
 
-IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs) {
-	return
-		new Font_Handler1
-		(&gr->images(), &gr->surfaces(),
-		 RT::setup_renderer
-		 (&gr->images(), &gr->surfaces(), RT::ttf_fontloader_from_filesystem(fs)));
+IFont_Handler1 * create_fonthandler(Graphic* gr) {
+	return new Font_Handler1(
+	   &gr->images(), &gr->surfaces(), new RT::Renderer(&gr->images(), &gr->surfaces()));
 }
 
 IFont_Handler1 * g_fh1 = nullptr;

@@ -132,6 +132,8 @@ class L_Second
 {
 public:
 	int get_second(lua_State* L) {lua_pushint32(L, 2001); return 1;}
+	virtual ~L_Second() {}
+
 	virtual int multitest(lua_State* L)
 	{
 		lua_pushint32(L, 2002);
@@ -171,7 +173,7 @@ const static struct luaL_Reg wl [] = {
 	{nullptr, nullptr}
 };
 
-int test_check_int(lua_State* L) {
+static int test_check_int(lua_State* L) {
 	int a = lua_tointeger(L, -2);
 	int b = lua_tointeger(L, -1);
 
@@ -179,7 +181,7 @@ int test_check_int(lua_State* L) {
 	return 0;
 }
 
-void InitLuaTests(lua_State* L)
+static void InitLuaTests(lua_State* L)
 {
 	luaL_openlibs(L);
 
