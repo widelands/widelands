@@ -128,7 +128,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 #else
 		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
 		g_fs->AddFileSystem //  see config.h
-			(FileSystem::Create
+			(&FileSystem::Create
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
@@ -144,7 +144,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 #ifdef __linux__
 		// if that fails, search in FHS standard location (obviously UNIX-only)
 		log ("Adding directory:/usr/share/games/widelands\n");
-		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
+		g_fs->AddFileSystem(&FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
 	catch (FileNotFound_error &) {}
@@ -162,7 +162,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		 * absolute fallback directory is the CWD
 		 */
 		log ("Adding directory:.\n");
-		g_fs->AddFileSystem(FileSystem::Create("."));
+		g_fs->AddFileSystem(&FileSystem::Create("."));
 #endif
 	}
 	catch (FileNotFound_error &) {}
