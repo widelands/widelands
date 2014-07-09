@@ -25,18 +25,3 @@ wl_library(graphic_text_test_render
     graphic_text
     io_filesystem
 )
-
-wl_test(test_richtext_renderer
-  SRCS
-    test_richtext_renderer.cc
-  DEPENDS
-    base_log
-    graphic_image_io
-    graphic_surface
-    graphic_text
-    graphic_text_test_render
-    helper
-    io_fileread
-    io_filesystem
-    io_stream
-)
