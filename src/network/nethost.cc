@@ -668,7 +668,7 @@ NetHost::~NetHost ()
 {
 	clearComputerPlayers();
 
-	while (d->clients.size() > 0) {
+	while (!d->clients.empty()) {
 		disconnectClient(0, "SERVER_LEFT");
 		reaper();
 	}
@@ -1258,8 +1258,9 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		} else {
 			//try to save the game
 			std::string savename =  "save/" + arg1;
-			if (arg2.size() > 0) // only add space and arg2, if arg2 has anything to print.
+			if (!arg2.empty()) { // only add space and arg2, if arg2 has anything to print.
 				savename += " " + arg2;
+			}
 			savename += ".wgf";
 			std::string * error = new std::string();
 			SaveHandler & sh = d->game->save_handler();
