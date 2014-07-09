@@ -48,7 +48,6 @@ Surface* load_image(const std::string& fn, FileSystem* fs = nullptr);
 /// Loads the image 'fn' from 'fs' into an SDL_Surface. Caller must SDL_FreeSurface() the returned value.
 SDL_Surface* load_image_as_sdl_surface(const std::string& fn, FileSystem* fs = nullptr);
 
-
 /// Saves the 'surface' to 'sw' as a PNG.
 bool save_surface_to_png(Surface* surface, StreamWrite* sw);
 

@@ -1,3 +1,4 @@
+add_subdirectory(test)
 add_subdirectory(text)
 
 wl_library(graphic_color
@@ -11,10 +12,13 @@ wl_library(graphic_image_io
   SRCS
     image_io.h
     image_io.cc
+    pam_io.cc
+    pam_io.h
   USES_PNG
   USES_SDL
   USES_SDL_IMAGE
   DEPENDS
+    helper
     base_exceptions
     graphic_surface
     io_fileread
