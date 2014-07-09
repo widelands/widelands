@@ -144,30 +144,23 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 				continue;
 			}
 
-			// Somehow a black pixel can have different alpha values. Probably
-			// because it does not matter when blending anyways.
-			if (cclr.r == gclr.r && cclr.r == 0 && cclr.g == gclr.g && cclr.g == 0 &&
-				 cclr.b == gclr.b && cclr.b == 0) {
-				// Only alpha differs. Ignore.
-				continue;
-			}
-
 			// But that is still not enough, so we let a minimum distance to be allowed.
 			// This might need tweaking to work on all systems.
-			const int kMaxClrDistance = 8;
-			const int kMaxAlphaDistance = 16;
-			const int distance_r = std::abs(cclr.r - gclr.r);
-			const int distance_g = std::abs(cclr.g - gclr.g);
-			const int distance_b = std::abs(cclr.b - gclr.b);
-			const int distance_a = std::abs(cclr.a - gclr.a);
-			if (distance_r >= kMaxClrDistance || distance_g >= kMaxClrDistance ||
-			    distance_b >= kMaxClrDistance || distance_a >= kMaxAlphaDistance) {
+			// NOCOM(#sirver): care for this.
+			// const int kMaxClrDistance = 8;
+			// const int kMaxAlphaDistance = 16;
+			// const int distance_r = std::abs(cclr.r - gclr.r);
+			// const int distance_g = std::abs(cclr.g - gclr.g);
+			// const int distance_b = std::abs(cclr.b - gclr.b);
+			// const int distance_a = std::abs(cclr.a - gclr.a);
+			// if (distance_r >= kMaxClrDistance || distance_g >= kMaxClrDistance ||
+				 // distance_b >= kMaxClrDistance || distance_a >= kMaxAlphaDistance) {
 				log("Mismatched pixel: (%d, %d)\n", x, y);
 				log(" expected: (%d, %d, %d, %d)\n", cclr.r, cclr.g, cclr.b, cclr.a);
 				log(" seen:     (%d, %d, %d, %d)\n", gclr.r, gclr.g, gclr.b, gclr.a);
-				log(" %d, %d, %d, %d\n\n", distance_r, distance_g, distance_b, distance_a);
+				// log(" %d, %d, %d, %d\n\n", distance_r, distance_g, distance_b, distance_a);
 				++nwrong;
-			}
+			// }
 		}
 	}
 
