@@ -35,7 +35,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "base/log.h"
-#include "graphic/image_io.h"
+#include "graphic/pam_io.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface.h"
 #include "graphic/text/rt_errors.h"
@@ -128,20 +128,8 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 		return false;
 	}
 
-	// Saving a PNG slightly changes some pixel values. So we save and reload
-	// the generated PNG in memory to get the same effects on the generated
-	// image too.
-	FileWrite fw;
-	if (!save_surface_to_png(generated, &fw)) {
-		std::cout << "Could not encode PNG." << std::endl;
-	}
-
-	const std::string encoded_data = fw.GetData();
-	std::unique_ptr<SDLSurface> converted(new SDLSurface(IMG_Load_RW(
-	   SDL_RWFromConstMem(encoded_data.data(), encoded_data.size()), false /* free source */)));
-
 	correct->lock(Surface::Lock_Normal);
-	converted->lock(Surface::Lock_Normal);
+	generated->lock(Surface::Lock_Normal);
 
 	int nwrong = 0;
 	for (int y = 0; y < correct->height(); ++y) {
@@ -150,7 +138,7 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 			SDL_GetRGBA(
 			   correct->get_pixel(x, y), &correct->format(), &cclr.r, &cclr.g, &cclr.b, &cclr.a);
 			SDL_GetRGBA(
-			   converted->get_pixel(x, y), &converted->format(), &gclr.r, &gclr.g, &gclr.b, &gclr.a);
+			   generated->get_pixel(x, y), &generated->format(), &gclr.r, &gclr.g, &gclr.b, &gclr.a);
 
 			if (cclr == gclr) {
 				continue;
@@ -183,7 +171,7 @@ bool compare_surfaces(Surface* correct, Surface* generated) {
 		}
 	}
 
-	converted->unlock(Surface::Unlock_Update);
+	generated->unlock(Surface::Unlock_Update);
 	correct->unlock(Surface::Unlock_NoChange);
 
 	if (nwrong > 0) {
@@ -217,20 +205,21 @@ bool compare_for_test(RT::Renderer* renderer) {
 		std::unique_ptr<Surface> output(renderer->render(input_text, width));
 
 		if (!correct) {
-			correct.reset(load_image(basedir + "correct.png", g_fs));
+			FileRead fr;
+			fr.Open(*g_fs, basedir + "correct.pam");
+			correct = load_pam(&fr);
 			if (!correct) {
-				log("Could not load %s/correct.png.\n", basedir.c_str());
+				log("Could not load %s/correct.pam.\n", basedir.c_str());
 				return false;
 			}
 		}
 
 		if (!compare_surfaces(correct.get(), output.get())) {
-			log("Render output of %s does not compare equal to correct.png. Saved wrong.png.\n", input.c_str());
+			log("Render output of %s does not compare equal to correct.pam. Saved wrong.pam.\n", input.c_str());
 
-			std::unique_ptr<StreamWrite> sw(g_fs->OpenStreamWrite(basedir + "wrong.png"));
-			if (!save_surface_to_png(output.get(), sw.get())) {
-				std::cout << "Could not encode PNG." << std::endl;
-			}
+			FileWrite fw;
+			save_pam(output.get(), &fw);
+			fw.Write(*g_fs, (basedir + "wrong.pam").c_str());
 			return false;
 		}
 
