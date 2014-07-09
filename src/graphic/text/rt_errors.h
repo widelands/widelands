@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_TEXT_RT_ERRORS_H
 #define WL_GRAPHIC_TEXT_RT_ERRORS_H
 
+#include "base/wexception.h"
+
 #include <exception>
 
 namespace RT {
@@ -41,7 +43,6 @@ public: \
 
 DEF_ERR(AttributeNotFound)
 DEF_ERR(BadFont)
-DEF_ERR(BadImage)
 DEF_ERR(EOT)
 DEF_ERR(InvalidColor)
 DEF_ERR(RenderError)

@@ -703,8 +703,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					field.military_capacity_ += militarysite->maxSoldierCapacity();
 					field.military_presence_ += militarysite->stationedSoldiers().size();
 
-					if (militarysite->stationedSoldiers().size() > 0)
+					if (!militarysite->stationedSoldiers().empty()) {
 						field.military_stationed_ += 1;
+					}
 
 					field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
 				}
@@ -995,7 +996,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			max_needed_preciousness = 0;
 
 			// Check if the produced wares are needed (if it is producing anything)
-			if (bo.outputs_.size() > 0) {
+			if (!bo.outputs_.empty()) {
 				container_iterate(std::list<EconomyObserver*>, economies, l) {
 					// Don't check if the economy has no warehouse.
 					if ((*l.current)->economy.warehouses().empty())
@@ -1317,12 +1318,12 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 								    bf->coords.x,
 								    bf->coords.y);
 						}
-					} else if (bo.inputs_.size() > 0) {
+					} else if (!bo.inputs_.empty()) {
 						// to have two buildings from everything (intended for upgradeable buildings)
 						// but I do not know how to identify such buildings
 						if (bo.cnt_built_ == 1 and game().get_gametime() >
 						                        60 * 60 * 1000 and bo.desc->enhancements().size() >
-						                        0 and mines_.size() > 0) {
+						                        0 and !mines_.empty()) {
 							prio = max_preciousness + bulgarian_constant;
 						}
 						// if output is needed and there are no idle buildings
@@ -1519,7 +1520,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		update_all_mineable_fields(gametime);
 		next_mine_construction_due_ = gametime + kIdleMineUpdateInterval;
 
-		if (mineable_fields.size() > 0) {
+		if (!mineable_fields.empty()) {
 
 			for (uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i) {
 				BuildingObserver& bo = buildings.at(i);
@@ -2227,7 +2228,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	}
 
 	// buildings with inputs_, checking if we can a dismantle some due to low performance
-	if (site.bo->inputs_.size() > 0 and(site.bo->cnt_built_ - site.bo->unoccupied_) >=
+	if (!site.bo->inputs_.empty() and(site.bo->cnt_built_ - site.bo->unoccupied_) >=
 	    3 and site.site->can_start_working() and site.site->get_statistics_percent() <
 	    20 and                             // statistics for the building
 	       site.bo->current_stats_<30 and  // overall statistics
@@ -2366,7 +2367,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) ==
 			    0 and(site.bo->cnt_built_ - site.bo->unoccupied_) >=
 			       1 and(game().get_gametime() - site.unoccupied_till_) >
-			       30 * 60 * 1000 and mines_.size() > 0) {
+			       30 * 60 * 1000 and !mines_.empty()) {
 				if (kUpgradeDebug)
 					log(" UPGRADE: upgrading (forcing as first) %12s at %3d x %3d: age %d min.\n",
 					    site.bo->name,
@@ -2589,7 +2590,7 @@ uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 	uint32_t count = 0;
 
-	if (bo.outputs_.size() > 0) {
+	if (!bo.outputs_.empty()) {
 		container_iterate(std::list<EconomyObserver*>, economies, l) {
 			// Don't check if the economy has no warehouse.
 			if ((*l.current)->economy.warehouses().empty())

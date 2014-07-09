@@ -30,7 +30,7 @@
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "graphic/graphic.h"
-#include "graphic/image_loader_impl.h"
+#include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
@@ -111,8 +111,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		(this, get_w() * 71 / 100, get_h() * 10 / 20,
 		 m_minimap_max_size, m_minimap_max_size, nullptr),
 	m_settings(gsp),
-	m_ctrl(gc),
-	m_image_loader(new ImageLoaderImpl())
+	m_ctrl(gc)
 {
 	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::clicked_ok, boost::ref(*this)));
@@ -257,7 +256,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 	if (!minimap_path.empty()) {
 		try {
 			// Load the image
-			std::unique_ptr<Surface> surface(m_image_loader->load(
+			std::unique_ptr<Surface> surface(load_image(
 			   minimap_path, std::unique_ptr<FileSystem>(g_fs->MakeSubFileSystem(name)).get()));
 			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
 			// Scale it

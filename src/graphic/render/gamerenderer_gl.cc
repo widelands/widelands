@@ -22,6 +22,7 @@
 #include <SDL_image.h>
 
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/render/gl_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
@@ -60,16 +61,8 @@ const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture()
 	if (Surface* surface = g_gr->surfaces().get(cachename))
 		return dynamic_cast<GLSurfaceTexture *>(surface);
 
-	// TODO: This duplicates code from the ImageLoader, but as we cannot convert
-	// a GLSurface into another format currently, we have to eat this frog.
-	FileRead fr;
-	fr.Open(*g_fs, fname);
-
-	SDL_Surface * sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-	if (!sdlsurf)
-		throw wexception("%s", IMG_GetError());
-
-	GLSurfaceTexture * edgetexture = new GLSurfaceTexture(sdlsurf, true);
+	SDL_Surface* sdlsurf = load_image_as_sdl_surface(fname, g_fs);
+	GLSurfaceTexture* edgetexture = new GLSurfaceTexture(sdlsurf, true);
 	g_gr->surfaces().insert(cachename, edgetexture, false);
 	return edgetexture;
 }

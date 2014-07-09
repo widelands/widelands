@@ -45,4 +45,3 @@ SDL_Surface * empty_sdl_surface(int16_t w, int16_t h) {
 
 	return surface;
 }
-

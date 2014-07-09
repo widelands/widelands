@@ -1,5 +1,0 @@
-<rt>
-<p>
-<img src="wl-ico-128.png">
-</p>
-</rt>

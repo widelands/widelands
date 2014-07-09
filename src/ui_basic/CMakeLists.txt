@@ -62,6 +62,7 @@ wl_library(ui_basic
     graphic_color
     graphic_image
     graphic_surface
+    helper
     io_filesystem
     profile
     scripting

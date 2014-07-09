@@ -41,7 +41,6 @@ wl_library(io_filesystem
     base_exceptions
     base_log
     base_macros
-    build_info
     io_fileread
     io_stream
     third_party_minizip

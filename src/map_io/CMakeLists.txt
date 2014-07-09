@@ -93,12 +93,12 @@ wl_library(map_io
     economy
     graphic
     graphic_surface
+    helper
     io_fileread
     io_filesystem
     logic
     logic_widelands_geometry
     profile
     scripting
-    widelands_ball_of_mud
     wui
 )

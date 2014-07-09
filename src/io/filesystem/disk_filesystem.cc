@@ -343,6 +343,9 @@ void RealFSImpl::MakeDirectory(const std::string & dirname) {
  */
 void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	const std::string fullname = FS_CanonicalizeName(fname);
+	if (IsDirectory(fullname)) {
+		throw File_error("RealFSImpl::Load", fullname.c_str());
+	}
 
 	FILE * file = nullptr;
 	void * data = nullptr;
@@ -371,7 +374,6 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		data = malloc(size + 1); //  FIXME memory leak!
 		int result = fread(data, size, 1, file);
 		if (size and (result != 1)) {
-			assert(false);
 			throw wexception
 				("RealFSImpl::Load: read failed for %s (%s) with size %" PRIuS "",
 				 fname.c_str(), fullname.c_str(), size);

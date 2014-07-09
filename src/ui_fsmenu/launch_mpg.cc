@@ -227,12 +227,12 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 			 settings, m_butw, m_buth, m_fn, m_fs);
 
 	// If we are the host, open the map or save selection menu at startup
-	if (m_settings->settings().usernum == 0 && m_settings->settings().mapname.empty())
-	{
+	if (m_settings->settings().usernum == 0 && m_settings->settings().mapname.empty()) {
 		change_map_or_save();
 		// Try to associate the host with the first player
-		if (m_settings->settings().players.size() > 0)
+		if (!m_settings->settings().players.empty()) {
 			m_settings->setPlayerNumber(0);
+		}
 	}
 }
 
@@ -527,7 +527,7 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 		m_settings->setPlayerTribe    (i, map.get_scenario_player_tribe    (i + 1));
 		m_settings->setPlayerCloseable(i, map.get_scenario_player_closeable(i + 1));
 		std::string ai(map.get_scenario_player_ai(i + 1));
-		if (ai.size() > 0) {
+		if (!ai.empty()) {
 			m_settings->setPlayerState(i, PlayerSettings::stateComputer);
 			m_settings->setPlayerAI   (i, ai);
 		} else if
