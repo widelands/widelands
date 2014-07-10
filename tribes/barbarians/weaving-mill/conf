@@ -24,7 +24,7 @@ work=_Work
 
 [work]
 sleep=20000
-return=skipped unless economy needs cloth or not economy needs thatchreed
+return=skipped unless economy needs cloth
 consume=thatchreed
 animate=working 25000
 produce=cloth
