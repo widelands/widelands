@@ -104,7 +104,7 @@ khantrukh_1= khantrukh(_"An old man says...",
 _[[Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days.]])
 
 khantrukh_2= khantrukh(_"Khantrukh continues...",
-_[[None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...]] .. paragraphdivider() ..
+_[[Only the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...]] .. paragraphdivider() ..
 _[[We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campsite are a few places where we could raise a lumberjack’s hut.]])
 .. new_objectives(start_lumberjack_01_01)
 
