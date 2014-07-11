@@ -1,3 +1,11 @@
+wl_binary(map_info
+  SRCS
+    map_info.cc
+  DEPENDS
+    logic
+    map_io
+)
+
 wl_library(logic_notification
   SRCS
     notification.h
