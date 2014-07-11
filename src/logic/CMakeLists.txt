@@ -2,8 +2,15 @@ wl_binary(map_info
   SRCS
     map_info.cc
   DEPENDS
+    base_log
+    graphic
+    graphic_image_io
+    graphic_surface
+    io_fileread
+    io_filesystem
     logic
-    map_io
+    map_io_map_loader
+    scripting
 )
 
 wl_library(logic_notification

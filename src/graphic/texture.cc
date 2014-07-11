@@ -109,23 +109,10 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
-			if (surf->format->BitsPerPixel == 8) {
-				m_colormap.reset(new Colormap(*surf->format->palette->colors, format));
-			} else {
-				SDL_Color pal[256];
-
-				log("WARNING: %s: using 332 default palette\n", fname.c_str());
-
-				for (int32_t r = 0; r < 8; ++r)
-					for (int32_t g = 0; g < 8; ++g)
-						for (int32_t b = 0; b < 4; ++b) {
-							pal[(r << 5) | (g << 2) | b].r = r << 5;
-							pal[(r << 5) | (g << 2) | b].g = g << 5;
-							pal[(r << 5) | (g << 2) | b].b = b << 6;
-						}
-
-				m_colormap.reset(new Colormap(*pal, format));
+			if (surf->format->BitsPerPixel != 8) {
+				throw wexception("Terrain %s is not 8 bits per pixel.", fname.c_str());
 			}
+			m_colormap.reset(new Colormap(*surf->format->palette->colors, format));
 		}
 
 		// Convert to our palette
@@ -181,10 +168,13 @@ Texture::~Texture ()
  * Return the basic terrain colour to be used in the minimap.
 */
 Uint32 Texture::get_minimap_color(char shade) {
+	log("#sirver shade: %d\n", shade);
+	log("#sirver m_pixels: %x\n", m_pixels);
 	if (not m_pixels)
 		return m_mmap_color[128 + shade];
 
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
+	log("#sirver clr: %x\n", clr);
 
 	uint32_t table = static_cast<uint8_t>(shade);
 	return static_cast<const Uint32*>(m_colormap->get_colormap())[clr | (table << 8)];

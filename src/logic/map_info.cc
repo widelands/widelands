@@ -23,8 +23,12 @@
 
 #include "base/log.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
+#include "graphic/render/minimaprenderer.h"
+#include "graphic/surface.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
@@ -32,42 +36,34 @@
 
 using namespace Widelands;
 
-int main(int /* argc */, char ** /* argv */)
+int main(int /* argc */, char ** argv)
 {
 	try {
 		SDL_Init(SDL_INIT_VIDEO);
 
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		g_fs = new LayeredFileSystem();
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		g_fs->AddFileSystem(&FileSystem::Create("/Users/sirver/Desktop/Programming/cpp/widelands/bzr_repo/"));
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		g_gr = new Graphic();
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		g_gr->initialize(640, 480, false, false);
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 		// NOCOM(#sirver): what
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		Editor_Game_Base egbase(nullptr);
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		egbase.mutable_world();
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-
 		Map* map = new Map();
 		egbase.set_map(map);
 
-		std::unique_ptr<Widelands::Map_Loader> ml(map->get_correct_loader("maps/Atoll.wmf"));
+		std::unique_ptr<Widelands::Map_Loader> ml(map->get_correct_loader(argv[1]));
 		assert(ml != nullptr);
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		ml->preload_map(true);
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		ml->load_map_complete(egbase, true);
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
+		std::unique_ptr<Surface> minimap(draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayers::Terrains));
+
+		FileWrite fw;
+		save_surface_to_png(minimap.get(), &fw);
+		std::unique_ptr<FileSystem> fs(&FileSystem::Create("."));
+		fw.Write(*fs, "minimap.png");
 	}
 	catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());

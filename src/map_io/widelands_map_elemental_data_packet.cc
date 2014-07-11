@@ -33,62 +33,34 @@ namespace Widelands {
 
 void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Profile prof;
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	prof.read("elemental", nullptr, fs);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Section & s = prof.get_safe_section("global");
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	try {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		int32_t const packet_version = s.get_int("packet_version");
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-			log("#sirver s.get_int('map_w'): %d\n", s.get_int("map_w"));
-			log("#sirver map: %p\n", map);
 			map->m_width       = s.get_int   ("map_w");
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			map->m_height      = s.get_int   ("map_h");
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			map->set_nrplayers  (s.get_int   ("nr_players"));
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			map->set_name       (s.get_string("name"));
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			map->set_author     (s.get_string("author"));
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			map->set_description(s.get_string("descr"));
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			map->set_hint       (s.get_string("hint", ""));
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			map->set_background (s.get_string("background"));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			old_world_name_ = s.get_string("world", "");
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			std::string t = s.get_string("tags", "");
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			if (t != "") {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				std::vector<std::string> tags;
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				boost::split(tags, t, boost::is_any_of(","));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				for (std::vector<std::string>::const_iterator ci = tags.begin(); ci != tags.end(); ++ci) {
 					std::string tn = *ci;
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 					boost::trim(tn);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 					map->add_tag(tn);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				}
 			}
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		} else
 			throw game_data_error
 				("unknown/unhandled version %i", packet_version);

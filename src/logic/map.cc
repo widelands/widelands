@@ -1625,33 +1625,22 @@ void Map::get_neighbour
 }
 
 std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	std::unique_ptr<Map_Loader> result;
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	std::string lower_filename = filename;
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	boost::algorithm::to_lower(lower_filename);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		try {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			result.reset(new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		} catch (...) {
 			//  If this fails, it is an illegal file.
 			//  TODO: catchall hides real errors! Replace with more specific code
 		}
 	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
 	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		result.reset(new S2_Map_Loader(filename.c_str(), *this));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	}
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return result;
 }
 
