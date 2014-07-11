@@ -17,8 +17,9 @@
  *
  */
 
-#ifndef FONT_HANDLER1_H // TODO: rename
-#define FONT_HANDLER1_H
+// TODO: rename
+#ifndef WL_GRAPHIC_FONT_HANDLER1_H
+#define WL_GRAPHIC_FONT_HANDLER1_H
 
 #include <string>
 
@@ -48,10 +49,10 @@ public:
 };
 
 // Create a new Font_Handler1. Ownership for the objects is not taken.
-IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs);
+IFont_Handler1 * create_fonthandler(Graphic* gr);
 
 extern IFont_Handler1 * g_fh1;
 
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER1_H

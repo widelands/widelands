@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_ICON_H
-#define UI_ICON_H
+#ifndef WL_UI_BASIC_ICON_H
+#define WL_UI_BASIC_ICON_H
 
 #include "graphic/color.h"
 #include "ui_basic/panel.h"
@@ -48,4 +48,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_ICON_H

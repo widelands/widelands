@@ -20,6 +20,8 @@
 #include "logic/world/editor_category.h"
 
 #include "graphic/graphic.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -28,6 +30,9 @@ EditorCategory::EditorCategory(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      image_file_(table.get_string("picture")) {
+	if (!g_fs->FileExists(image_file_)) {
+		throw game_data_error("EditorCategory %s has non-existing \"picture\".", name_.c_str());
+	}
 }
 
 const std::string& EditorCategory::name() const {

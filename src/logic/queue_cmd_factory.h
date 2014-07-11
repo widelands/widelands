@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef QUEUE_CMD_FACTORY_H
-#define QUEUE_CMD_FACTORY_H
+#ifndef WL_LOGIC_QUEUE_CMD_FACTORY_H
+#define WL_LOGIC_QUEUE_CMD_FACTORY_H
 
 #include <stdint.h>
 
@@ -36,4 +36,4 @@ namespace Queue_Cmd_Factory {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_QUEUE_CMD_FACTORY_H

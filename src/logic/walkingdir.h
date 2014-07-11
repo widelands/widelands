@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WALKINGDIR_H
-#define WALKINGDIR_H
+#ifndef WL_LOGIC_WALKINGDIR_H
+#define WL_LOGIC_WALKINGDIR_H
 
 #include <stdint.h>
 
@@ -43,4 +43,4 @@ uint8_t get_backward_dir(uint8_t dir);
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WALKINGDIR_H

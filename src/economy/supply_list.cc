@@ -19,8 +19,8 @@
 
 #include "economy/supply_list.h"
 
+#include "base/deprecated.h"
 #include "base/wexception.h"
-#include "container_iterate.h"
 #include "economy/request.h"
 #include "economy/supply.h"
 

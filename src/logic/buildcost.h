@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BUILDCOST_H
-#define BUILDCOST_H
+#ifndef WL_LOGIC_BUILDCOST_H
+#define WL_LOGIC_BUILDCOST_H
 
 #include <map>
 
@@ -43,4 +43,4 @@ struct Buildcost : std::map<Ware_Index, uint8_t> {
 
 } // namespace Widelands
 
-#endif // BUILDCOST_H
+#endif  // end of include guard: WL_LOGIC_BUILDCOST_H

@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -37,6 +38,7 @@
 #include "logic/checkstep.h"
 #include "logic/cmd_expire_message.h"
 #include "logic/cmd_luacoroutine.h"
+#include "logic/constants.h"
 #include "logic/constructionsite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
@@ -48,14 +50,15 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
+#include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 
 
 namespace {
+
 void terraform_for_building
 	(Widelands::Editor_Game_Base& egbase, const Widelands::Player_Number player_number,
 	 const Widelands::Coords location, const Widelands::Building_Descr* descr)
@@ -158,8 +161,6 @@ Player::Player
 	m_msites_defeated    (0),
 	m_civil_blds_lost    (0),
 	m_civil_blds_defeated(0),
-	m_allow_retreat_change(false),
-	m_retreat_percentage  (50),
 	m_fields            (nullptr),
 	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), true),
 	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
@@ -865,25 +866,6 @@ void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 ===========
 ===========
 */
-void Player::allow_retreat_change(bool allow) {
-	m_allow_retreat_change = allow;
-}
-
-/**
- *   Added check limits of valid values. Percentage limits are configured at
- * tribe level
- * Automatically adjust value if out of limits.
- */
-void Player::set_retreat_percentage(uint8_t percentage) {
-
-	if (tribe().get_military_data().get_min_retreat() > percentage)
-		m_retreat_percentage = tribe().get_military_data().get_min_retreat();
-	else
-	if (tribe().get_military_data().get_max_retreat() < percentage)
-		m_retreat_percentage = tribe().get_military_data().get_max_retreat();
-	else
-		m_retreat_percentage = percentage;
-}
 
 /**
  * Get a list of soldiers that this player can be used to attack the
@@ -943,8 +925,7 @@ uint32_t Player::findAttackSoldiers
  * to attack, so pretending we have more types is pointless.
  */
 void Player::enemyflagaction
-	(Flag & flag, Player_Number const attacker, uint32_t const count,
-	 uint8_t retreat)
+	(Flag & flag, Player_Number const attacker, uint32_t const count)
 {
 	if      (attacker != player_number())
 		log
@@ -960,15 +941,10 @@ void Player::enemyflagaction
 					findAttackSoldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
 
-					retreat = std::max
-						(retreat, tribe().get_military_data().get_min_retreat());
-					retreat = std::min
-						(retreat, tribe().get_military_data().get_max_retreat());
-
 					container_iterate_const(std::vector<Soldier *>, attackers, i)
 						ref_cast<MilitarySite, PlayerImmovable>
 							(*(*i.current)->get_location(egbase()))
-						.sendAttacker(**i.current, *building, retreat);
+						.sendAttacker(**i.current, *building);
 				}
 }
 

@@ -24,15 +24,17 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "gamecontroller.h"
+#include "logic/campaign_visibility.h"
+#include "logic/constants.h"
+#include "logic/game_controller.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
+#include "profile/profile.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_map.h"
 #include "scripting/scripting.h"
@@ -106,8 +108,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, allowed_buildings),
 	PROP_RO(L_Player, objectives),
 	PROP_RO(L_Player, defeated),
-	PROP_RW(L_Player, retreat_percentage),
-	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	PROP_RO(L_Player, inbox),
 	PROP_RW(L_Player, team),
 	PROP_RW(L_Player, see_all),
@@ -189,43 +189,6 @@ int L_Player::get_defeated(lua_State * L) {
 
 	lua_pushboolean(L, !have_warehouses);
 	return 1;
-}
-
-/* RST
-	.. attribute:: retreat_percentage
-
-
-		(RW) Soldiers that only have this amount of total hitpoints
-		left will go home
-*/
-// UNTESTED
-int L_Player::get_retreat_percentage(lua_State * L) {
-	lua_pushuint32(L, get(L, get_egbase(L)).get_retreat_percentage());
-	return 1;
-}
-int L_Player::set_retreat_percentage(lua_State * L) {
-	uint32_t value = luaL_checkuint32(L, -1);
-	if (value > 100)
-		report_error(L, "%i is not a valid percentage!", value);
-
-	get(L, get_egbase(L)).set_retreat_percentage(value);
-	return 0;
-}
-
-/* RST
-	.. attribute:: changing_retreat_percentage_allowed
-
-		(RW) A boolean value. :const:`true` if the player is allowed to change
-		    the :attr:`retreat_percentage`, :const:`false` otherwise.
-*/
-// UNTESTED
-int L_Player::get_changing_retreat_percentage_allowed(lua_State * L) {
-	lua_pushuint32(L, get(L, get_egbase(L)).is_retreat_change_allowed());
-	return 1;
-}
-int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
-	get(L, get_egbase(L)).allow_retreat_change(luaL_checkboolean(L, -1));
-	return 0;
 }
 
 /* RST

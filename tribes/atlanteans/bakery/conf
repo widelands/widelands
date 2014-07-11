@@ -25,9 +25,9 @@ water=8
 work=_Work
 
 [work]
+sleep=35000
 return=skipped unless economy needs bread
 consume=water:2 blackrootflour cornflour
-sleep=35000
 animate=working 30000
 produce=bread:2
 

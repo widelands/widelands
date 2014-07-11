@@ -71,11 +71,11 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		if (ter_is != check[checkfor])
 			continue;
 
-		Surface* surf = Surface::create(TEXTURE_WIDTH, TEXTURE_HEIGHT);
 		const Image* tex = g_gr->images().get(
 		   g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
+		Surface* surf = Surface::create(tex->width(), tex->height());
 		surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()), CM_Solid);
-		Point pt(1, TEXTURE_HEIGHT - kSmallPicHeight - 1);
+		Point pt(1, tex->height() - kSmallPicHeight - 1);
 
 		if (ter_is == TerrainDescription::GREEN) {
 			surf->blit(pt, green->surface(), Rect(0, 0, green->width(), green->height()));
@@ -106,8 +106,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		break;
 	}
 
-	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), offscreen_images->back().get());
-	cb->set_desired_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
+	std::unique_ptr<const Image>& image = offscreen_images->back();
+	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get());
+	cb->set_desired_size(image->width() + 1, image->height() + 1);
 	return cb;
 }
 

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_QUEUE_H
-#define CMD_QUEUE_H
+#ifndef WL_LOGIC_CMD_QUEUE_H
+#define WL_LOGIC_CMD_QUEUE_H
 
 #include <memory>
 #include <queue>
@@ -171,4 +171,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_QUEUE_H

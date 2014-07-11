@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_PLACE_IMMOVABLE_TOOL_H
-#define EDITOR_PLACE_IMMOVABLE_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_PLACE_IMMOVABLE_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_PLACE_IMMOVABLE_TOOL_H
 
 #include "editor/tools/editor_delete_immovable_tool.h"
 #include "editor/tools/multi_select.h"
@@ -50,4 +50,4 @@ struct Editor_Place_Immovable_Tool : public Editor_Tool, public MultiSelect {
 	}
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_PLACE_IMMOVABLE_TOOL_H

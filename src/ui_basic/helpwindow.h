@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_HELPWINDOW_H
-#define UI_HELPWINDOW_H
+#ifndef WL_UI_BASIC_HELPWINDOW_H
+#define WL_UI_BASIC_HELPWINDOW_H
 
 #include <memory>
 
@@ -100,4 +100,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_HELPWINDOW_H

@@ -20,6 +20,7 @@
 #include "logic/game.h"
 
 #include <cstring>
+#include <limits>
 #include <memory>
 #include <string>
 
@@ -32,12 +33,12 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
+#include "base/time_string.h"
 #include "base/warning.h"
-#include "computer_player.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -46,11 +47,13 @@
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
+#include "logic/game_settings.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/ship.h"
+#include "logic/single_player_game_controller.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
@@ -59,11 +62,8 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-#include "single_player_game_controller.h"
 #include "sound/sound_handler.h"
-#include "timestring.h"
 #include "ui_basic/progresswindow.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -228,8 +228,9 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	loaderUI.step (_("Preloading a map"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
-	if (background.size() > 0)
+	if (!background.empty()) {
 		loaderUI.set_background(background);
+	}
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
@@ -288,8 +289,9 @@ void Game::init_newgame
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
 	if (loaderUI) {
-		if (background.size() > 0)
+		if (!background.empty()) {
 			loaderUI->set_background(background);
+		}
 		loaderUI->step(_("Configuring players"));
 	}
 	std::vector<PlayerSettings> shared;
@@ -865,8 +867,7 @@ void Game::send_player_change_soldier_capacity
 void Game::send_player_enemyflagaction
 	(const Flag  &       flag,
 	 Player_Number const who_attacks,
-	 uint32_t      const num_soldiers,
-	 uint8_t       const retreat)
+	 uint32_t      const num_soldiers)
 {
 	if
 		(1
@@ -876,15 +877,9 @@ void Game::send_player_enemyflagaction
 		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
 			(*new Cmd_EnemyFlagAction
-			 	(get_gametime(), who_attacks, flag, num_soldiers, retreat));
+			 	(get_gametime(), who_attacks, flag, num_soldiers));
 }
 
-
-void Game::send_player_changemilitaryconfig(Player_Number const pid, uint8_t const retreat)
-{
-	send_player_command
-		(*new Cmd_ChangeMilitaryConfig(get_gametime(), pid, retreat));
-}
 
 void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {
@@ -1161,6 +1156,10 @@ void Game::WriteStatistics(FileWrite & fw)
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
 			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
 		}
+}
+
+double logic_rand_as_double(Game* game) {
+	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
 }
 
 }

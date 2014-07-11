@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef DEFAULTAI_H
-#define DEFAULTAI_H
+#ifndef WL_AI_DEFAULTAI_H
+#define WL_AI_DEFAULTAI_H
 
 #include <map>
 
 #include "ai/ai_help_structs.h"
+#include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "computer_player.h"
 
 namespace Widelands {
 struct Road;
@@ -211,4 +211,4 @@ private:
 	                               // building build
 };
 
-#endif
+#endif  // end of include guard: WL_AI_DEFAULTAI_H

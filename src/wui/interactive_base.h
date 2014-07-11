@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERACTIVE_BASE_H
-#define INTERACTIVE_BASE_H
+#ifndef WL_WUI_INTERACTIVE_BASE_H
+#define WL_WUI_INTERACTIVE_BASE_H
 
 #include <memory>
 
@@ -166,7 +166,7 @@ private:
 	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
-	const Image* workarea_pics[NUMBER_OF_WORKAREA_PICS];
+	std::vector<const Image*> m_workarea_pics;
 
 protected:
 	void toggle_minimap();
@@ -206,4 +206,4 @@ private:
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
     &m_toolbar, name, 0, 0, 34U, 34U, PIC2
 
-#endif
+#endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

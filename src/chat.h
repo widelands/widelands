@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CHAT_H
-#define CHAT_H
+#ifndef WL_CHAT_H
+#define WL_CHAT_H
 
 #include <ctime>
 #include <string>
@@ -123,4 +123,4 @@ protected:
 	}
 };
 
-#endif
+#endif  // end of include guard: WL_CHAT_H

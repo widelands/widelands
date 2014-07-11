@@ -13,6 +13,42 @@ wl_library(logic_widelands_geometry
     widelands_geometry.h
 )
 
+wl_library(logic_game_settings
+  SRCS
+    game_settings.h
+    single_player_game_settings_provider.cc
+    single_player_game_settings_provider.h
+  DEPENDS
+    logic
+    ai
+)
+
+wl_library(logic_game_controller
+  SRCS
+    game_controller.h
+    replay_game_controller.h
+    replay_game_controller.cc
+    single_player_game_controller.h
+    single_player_game_controller.cc
+  DEPENDS
+    ai
+    logic
+    profile
+    ui_basic
+    widelands_ball_of_mud
+    wui
+)
+
+wl_library(logic_campaign_visibility
+  SRCS
+    campaign_visibility.cc
+    campaign_visibility.h
+  DEPENDS
+    base_exceptions
+    io_filesystem
+    profile
+)
+
 wl_library(logic
   SRCS
     attackable.h
@@ -43,8 +79,10 @@ wl_library(logic
     cmd_luascript.h
     cmd_queue.cc
     cmd_queue.h
+    constants.h
     constructionsite.cc
     constructionsite.h
+    cookie_priority_queue.h
     critter_bob.cc
     critter_bob.h
     critter_bob_program.h
@@ -70,6 +108,8 @@ wl_library(logic
     immovable.cc
     immovable.h
     immovable_program.h
+    terrain_affinity.cc
+    terrain_affinity.h
     instances.cc
     instances.h
     map.cc
@@ -90,8 +130,6 @@ wl_library(logic
     message.h
     message_id.h
     message_queue.h
-    military_data.cc
-    military_data.h
     militarysite.cc
     militarysite.h
     nodecaps.h
@@ -123,6 +161,8 @@ wl_library(logic
     requirements.cc
     requirements.h
     roadtype.h
+    save_handler.cc
+    save_handler.h
     ship.cc
     ship.h
     soldier.cc
@@ -134,6 +174,7 @@ wl_library(logic
     trainingsite.h
     tribe.cc
     tribe.h
+    tribe_basic_info.h
     walkingdir.cc
     walkingdir.h
     ware_descr.cc
@@ -166,25 +207,39 @@ wl_library(logic
   # TODO(sirver): Uses SDL only on WIN32 for a dirty hack.
   USES_SDL
   DEPENDS
+    ai
+    base_deprecated
     base_exceptions
     base_geometry
     base_i18n
     base_log
-    base_port
+    base_macros
+    base_md5
+    base_scoped_timer
+    base_time_string
     build_info
+    economy
+    editor
+    game_io
     graphic
     graphic_color
+    helper
     io_fileread
     io_filesystem
     io_stream
+    logic_game_controller
+    logic_game_settings
     logic_notification
     logic_widelands_geometry
     map_io
     map_io_map_loader
     network
     profile
+    random
+    scripting
     sound
     ui_basic
     widelands_ball_of_mud
     wui
+    wui_text_layout
 )

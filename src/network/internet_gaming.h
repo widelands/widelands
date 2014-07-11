@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERNET_GAMING_H
-#define INTERNET_GAMING_H
+#ifndef WL_NETWORK_INTERNET_GAMING_H
+#define WL_NETWORK_INTERNET_GAMING_H
 
 #include <string>
 #include <vector>
@@ -196,4 +196,4 @@ private:
 
 };
 
-#endif
+#endif  // end of include guard: WL_NETWORK_INTERNET_GAMING_H

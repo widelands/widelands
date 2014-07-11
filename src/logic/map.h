@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAP_H
-#define MAP_H
+#ifndef WL_LOGIC_MAP_H
+#define WL_LOGIC_MAP_H
 
 #include <cstring>
 #include <map>
@@ -36,7 +36,7 @@
 #include "logic/objective.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "random.h"
+#include "random/random.h"
 
 class FileSystem;
 class Image;
@@ -1066,4 +1066,4 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 }
 
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MAP_H

@@ -19,12 +19,12 @@
 
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
 
+#include "base/macros.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 

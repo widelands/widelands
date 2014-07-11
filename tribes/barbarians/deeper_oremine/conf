@@ -26,8 +26,8 @@ meal=6
 work=_Work
 
 [work]
-consume=meal
 sleep=40000
+consume=meal
 animate=working 16000
 mine=iron 2 100 10 2
 produce=ironore

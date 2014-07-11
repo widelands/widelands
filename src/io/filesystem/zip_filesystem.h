@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef ZIP_FILESYSTEM_H
-#define ZIP_FILESYSTEM_H
+#ifndef WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
+#define WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 
 #include <cstring>
 #include <string>
 
-#include "base/port.h"
+#include "base/macros.h"
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
@@ -109,4 +109,4 @@ protected:
 
 
 
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H

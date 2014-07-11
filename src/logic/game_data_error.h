@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_DATA_ERROR_H
-#define GAME_DATA_ERROR_H
+#ifndef WL_LOGIC_GAME_DATA_ERROR_H
+#define WL_LOGIC_GAME_DATA_ERROR_H
 
 #include "base/wexception.h"
 
@@ -36,4 +36,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_GAME_DATA_ERROR_H

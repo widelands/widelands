@@ -10,14 +10,16 @@ wl_library(sound
   USES_SDL
   USES_SDL_MIXER
   DEPENDS
+    base_deprecated
     base_i18n
     base_log
     graphic
+    helper
     io_fileread
     io_filesystem
     logic
     logic_widelands_geometry
     profile
-    widelands_ball_of_mud
+    random
     wui
 )

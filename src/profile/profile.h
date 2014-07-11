@@ -17,18 +17,18 @@
  *
  */
 
-#ifndef PROFILE_H
-#define PROFILE_H
+#ifndef WL_PROFILE_PROFILE_H
+#define WL_PROFILE_PROFILE_H
 
 #include <cstring>
 #include <vector>
 
 #include <boost/noncopyable.hpp>
 
-//TODO: as soon as g_fs is not needed anymore, include "filesystem.h" instead of layered_filesystem.h.
-#include "base/port.h"
-#include "io/filesystem/layered_filesystem.h"
+#include "base/macros.h"
 #include "base/point.h"
+#include "io/filesystem/layered_filesystem.h"
+//TODO: as soon as g_fs is not needed anymore, include "filesystem.h" instead of layered_filesystem.h.
 
 extern class Profile g_options;
 class FileSystem;
@@ -239,4 +239,4 @@ private:
 	int32_t m_error_level;
 };
 
-#endif
+#endif  // end of include guard: WL_PROFILE_PROFILE_H

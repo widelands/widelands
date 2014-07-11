@@ -25,7 +25,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -35,6 +34,7 @@
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
+#include "wui/text_constants.h"
 
 
 using boost::format;

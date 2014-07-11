@@ -19,8 +19,8 @@
 
 #include "ai/ai_help_structs.h"
 
+#include "base/macros.h"
 #include "logic/player.h"
-#include "upcast.h"
 
 namespace Widelands {
 

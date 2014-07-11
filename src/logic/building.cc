@@ -22,6 +22,7 @@
 #include <cstdio>
 #include <sstream>
 
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
@@ -42,9 +43,8 @@
 #include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
+#include "wui/text_layout.h"
 
 namespace Widelands {
 

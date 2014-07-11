@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_SAVE_MAP_H
-#define EDITOR_MAIN_MENU_SAVE_MAP_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
 
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/window.h"
@@ -61,4 +61,4 @@ private:
 	filenameset_t m_mapfiles;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H

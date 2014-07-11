@@ -26,6 +26,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
@@ -41,11 +42,10 @@
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
+#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
-#include "map_generator.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
-#include "upcast.h"
 #include "wui/overlay_manager.h"
 
 namespace Widelands {

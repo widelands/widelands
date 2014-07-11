@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _ATTACK_BOX_H_
-#define _ATTACK_BOX_H_
+#ifndef WL_WUI_ATTACK_BOX_H
+#define WL_WUI_ATTACK_BOX_H
 
 #include <list>
 
@@ -30,6 +30,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
+#include "wui/text_constants.h"
 
 using Widelands::Bob;
 using Widelands::Building;
@@ -51,7 +52,6 @@ struct AttackBox : public UI::Box {
 	void init();
 
 	uint32_t soldiers() const;
-	uint8_t  retreat() const;
 
 	private:
 		uint32_t get_max_attackers();
@@ -83,13 +83,11 @@ struct AttackBox : public UI::Box {
 		Widelands::Map        * m_map;
 		Widelands::FCoords    * m_node;
 
-		UI::Slider            * m_slider_retreat;
 		UI::Slider            * m_slider_soldiers;
 		UI::Textarea          * m_text_soldiers;
-		UI::Textarea          * m_text_retreat;
 
 		UI::Button * m_less_soldiers;
 		UI::Button * m_add_soldiers;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_ATTACK_BOX_H

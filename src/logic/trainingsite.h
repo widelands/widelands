@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TRAININGSITE_H
-#define TRAININGSITE_H
+#ifndef WL_LOGIC_TRAININGSITE_H
+#define WL_LOGIC_TRAININGSITE_H
 
 #include "logic/productionsite.h"
 #include "logic/soldiercontrol.h"
@@ -222,4 +222,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_TRAININGSITE_H

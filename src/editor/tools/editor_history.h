@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_HISTORY_H
-#define EDITOR_HISTORY_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_HISTORY_H
+#define WL_EDITOR_TOOLS_EDITOR_HISTORY_H
 
 #include <deque>
 
@@ -66,4 +66,4 @@ private:
 
 
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_HISTORY_H

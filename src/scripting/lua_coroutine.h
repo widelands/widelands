@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_COROUTINE_H
-#define LUA_COROUTINE_H
+#ifndef WL_SCRIPTING_LUA_COROUTINE_H
+#define WL_SCRIPTING_LUA_COROUTINE_H
 
 #include <string>
 
@@ -81,4 +81,4 @@ private:
 	uint32_t m_nreturn_values;
 };
 
-#endif /* end of include guard: LUA_COROUTINE_H */
+#endif  // end of include guard: WL_SCRIPTING_LUA_COROUTINE_H

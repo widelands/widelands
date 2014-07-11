@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RECT_H
-#define RECT_H
+#ifndef WL_BASE_RECT_H
+#define WL_BASE_RECT_H
 
 #include "base/point.h"
 
@@ -43,4 +43,4 @@ struct Rect {
 	uint32_t w, h;
 };
 
-#endif
+#endif  // end of include guard: WL_BASE_RECT_H

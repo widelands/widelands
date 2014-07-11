@@ -21,6 +21,7 @@
 
 #include "economy/economy.h"
 #include "logic/checkstep.h"
+#include "logic/constants.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/ware_descr.h"

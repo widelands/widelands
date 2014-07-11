@@ -18,8 +18,8 @@
  */
 
 
-#ifndef UI_TABLE_H
-#define UI_TABLE_H
+#ifndef WL_UI_BASIC_TABLE_H
+#define WL_UI_BASIC_TABLE_H
 
 #include <limits>
 #include <vector>
@@ -445,4 +445,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_TABLE_H

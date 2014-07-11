@@ -29,11 +29,12 @@
 #include <unistd.h> // for usleep
 #endif
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "base/md5.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "chat.h"
-#include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "helper.h"
@@ -46,7 +47,7 @@
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
-#include "md5.h"
+#include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"
@@ -56,7 +57,7 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launchMPG.h"
+#include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -667,7 +668,7 @@ NetHost::~NetHost ()
 {
 	clearComputerPlayers();
 
-	while (d->clients.size() > 0) {
+	while (!d->clients.empty()) {
 		disconnectClient(0, "SERVER_LEFT");
 		reaper();
 	}
@@ -1257,8 +1258,9 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		} else {
 			//try to save the game
 			std::string savename =  "save/" + arg1;
-			if (arg2.size() > 0) // only add space and arg2, if arg2 has anything to print.
+			if (!arg2.empty()) { // only add space and arg2, if arg2 has anything to print.
 				savename += " " + arg2;
+			}
 			savename += ".wgf";
 			std::string * error = new std::string();
 			SaveHandler & sh = d->game->save_handler();

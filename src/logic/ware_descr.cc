@@ -24,7 +24,6 @@
 #include "graphic/graphic.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 

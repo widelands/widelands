@@ -17,13 +17,12 @@
  *
  */
 
-#ifndef RGBCOLOR_H
-#define RGBCOLOR_H
+#ifndef WL_GRAPHIC_COLOR_H
+#define WL_GRAPHIC_COLOR_H
 
 #include <SDL.h>
 
-// TODO(sirver): Do not inherit from SDL_Color if possible.
-struct RGBColor : public SDL_Color {
+struct RGBColor {
 	RGBColor(uint8_t R, uint8_t G, uint8_t B);
 
 	// Initializes the color to black.
@@ -36,6 +35,9 @@ struct RGBColor : public SDL_Color {
 	void set(SDL_PixelFormat * fmt, uint32_t clr);
 
 	bool operator == (const RGBColor& other) const;
+	bool operator != (const RGBColor& other) const;
+
+	uint8_t r, g, b;
 };
 
 struct RGBAColor {
@@ -53,10 +55,13 @@ struct RGBAColor {
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
 	void set(const SDL_PixelFormat & fmt, uint32_t clr);
 
+	bool operator == (const RGBAColor& other) const;
+	bool operator != (const RGBAColor& other) const;
+
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
 	uint8_t a;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_COLOR_H

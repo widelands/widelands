@@ -17,10 +17,9 @@
  *
  */
 
-#ifndef UI_TEXTAREA_H
-#define UI_TEXTAREA_H
+#ifndef WL_UI_BASIC_TEXTAREA_H
+#define WL_UI_BASIC_TEXTAREA_H
 
-#include "constants.h"
 #include "graphic/align.h"
 #include "graphic/font.h"
 #include "ui_basic/panel.h"
@@ -104,4 +103,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_TEXTAREA_H

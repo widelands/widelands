@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
-#define EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 
 #include <memory>
 #include <vector>
@@ -40,4 +40,4 @@ private:
 	multi_select_menu_;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H

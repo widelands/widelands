@@ -79,3 +79,7 @@ void FileWrite::Data(const void* const src, const size_t size, Pos const pos = P
 void FileWrite::Data(void const* const src, size_t const size) {
 	Data(src, size, Pos::Null());
 }
+
+std::string FileWrite::GetData() const {
+	return std::string(data_, length_);
+}

@@ -19,11 +19,12 @@
 
 #include "wui/military_box.h"
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/playercommand.h"
-#include "upcast.h"
+#include "wui/text_constants.h"
 
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
@@ -37,17 +38,12 @@ MilitaryBox::MilitaryBox
 	UI::Box
 		(parent, x, y, UI::Box::Vertical),
 	m_pl(player),
-	m_map(&m_pl->egbase().map()),
-	m_allowed_change(false),
-	m_slider_retreat(nullptr),
-	m_text_retreat(nullptr)
+	m_map(&m_pl->egbase().map())
 {
 	init();
 }
 
 MilitaryBox::~MilitaryBox() {
-	delete m_slider_retreat;
-	delete m_text_retreat;
 }
 
 UI::Slider & MilitaryBox::add_slider
@@ -103,56 +99,7 @@ UI::Button & MilitaryBox::add_button
 }
 
 void MilitaryBox::update() {
-	Game & game = ref_cast<Game, Editor_Game_Base>(m_pl->egbase());
-
-	if (m_pl->is_retreat_change_allowed()) {
-		char buf[20];
-		assert(m_slider_retreat);
-		assert(m_text_retreat);
-		/// Send change to player
-		game.send_player_changemilitaryconfig
-			(m_pl->player_number(), m_slider_retreat->get_value());
-		/// Update UI
-		sprintf(buf, "%u %%", m_slider_retreat->get_value());
-		m_text_retreat->set_text(buf);
-	}
 }
 
 void MilitaryBox::init() {
-	{ //  Retreat line
-		char buf[10];
-		UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
-		add(&linebox, UI::Box::AlignTop);
-
-		add_text(linebox, _("Retreat: Never!"));
-
-		//  Spliter of retreat
-		UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
-		linebox.add(&columnbox, UI::Box::AlignTop);
-
-		sprintf(buf, "%u %%", m_pl->get_retreat_percentage());
-
-		m_text_retreat =
-			&add_text(columnbox, buf, UI::Box::AlignCenter, UI_FONT_ULTRASMALL);
-
-		m_slider_retreat =
-			&add_slider
-				(columnbox,
-				 100, 10,
-				 m_pl->tribe().get_military_data().get_min_retreat(),
-				 m_pl->tribe().get_military_data().get_max_retreat(),
-				 m_pl->get_retreat_percentage(),
-				 "pics/caret.png",
-				 _("Supported damage before retreat"));
-		m_slider_retreat->changed.connect(boost::bind(&MilitaryBox::update, this));
-		add_text(linebox, _("Once injured"));
-		m_slider_retreat->set_enabled(m_pl->is_retreat_change_allowed());
-		linebox.set_visible(m_pl->is_retreat_change_allowed());
-	}
-
-	//  Add here another attack configuration parameters.
-
-	// Specify allow to change
-	m_allowed_change = m_pl->is_retreat_change_allowed();
 }
-

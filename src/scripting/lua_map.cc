@@ -19,8 +19,8 @@
 
 #include "scripting/lua_map.h"
 
+#include "base/deprecated.h"
 #include "base/log.h"
-#include "container_iterate.h"
 #include "economy/wares_queue.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
@@ -549,8 +549,10 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 			return CAST_TO_LUA(Worker);
 		case Bob::SHIP:
 			return CAST_TO_LUA(Ship);
+		default:
+			assert(false);  // Never here, hopefully.
+			return 0;
 	}
-	assert(false);  // Never here, hopefully.
 }
 
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {

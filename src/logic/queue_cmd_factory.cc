@@ -77,8 +77,6 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_SetWorkerTargetQuantity   ();
 	case QUEUE_CMD_RESETWORKERTARGETQUANTITY:
 		return *new Cmd_ResetWorkerTargetQuantity ();
-	case QUEUE_CMD_CHANGEMILITARYCONFIG:
-		return *new Cmd_ChangeMilitaryConfig      ();
 	case QUEUE_CMD_MESSAGESETSTATUSREAD:
 		return *new Cmd_MessageSetStatusRead      ();
 	case QUEUE_CMD_MESSAGESETSTATUSARCHIVED:

@@ -20,6 +20,7 @@
 #include "logic/playercommand.h"
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/wares_queue.h"
@@ -36,7 +37,6 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -75,7 +75,7 @@ enum {
 	PLCMD_RESETWARETARGETQUANTITY          = 14,
 	PLCMD_SETWORKERTARGETQUANTITY          = 15,
 	PLCMD_RESETWORKERTARGETQUANTITY        = 16,
-	PLCMD_CHANGEMILITARYCONFIG             = 17,
+	// Used to be PLCMD_CHANGEMILITARYCONFIG
 	PLCMD_MESSAGESETSTATUSREAD             = 18,
 	PLCMD_MESSAGESETSTATUSARCHIVED         = 19,
 	PLCMD_SETSTOCKPOLICY                   = 20,
@@ -122,7 +122,6 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_RESETWARETARGETQUANTITY:   return new Cmd_ResetWareTargetQuantity  (des);
 	case PLCMD_SETWORKERTARGETQUANTITY:   return new Cmd_SetWorkerTargetQuantity  (des);
 	case PLCMD_RESETWORKERTARGETQUANTITY: return new Cmd_ResetWorkerTargetQuantity(des);
-	case PLCMD_CHANGEMILITARYCONFIG:      return new Cmd_ChangeMilitaryConfig     (des);
 	case PLCMD_MESSAGESETSTATUSREAD:      return new Cmd_MessageSetStatusRead     (des);
 	case PLCMD_MESSAGESETSTATUSARCHIVED:  return new Cmd_MessageSetStatusArchived (des);
 	case PLCMD_SETSTOCKPOLICY:            return new Cmd_SetStockPolicy           (des);
@@ -1664,11 +1663,10 @@ void Cmd_ChangeSoldierCapacity::Write
 Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	des         .Unsigned8 ();
-	serial   = des.Unsigned32();
-	des         .Unsigned8 ();
-	number   = des.Unsigned8 ();
-	retreat  = des.Unsigned8 ();
+	des.Unsigned8();
+	serial = des.Unsigned32();
+	des.Unsigned8();
+	number = des.Unsigned8();
 }
 
 void Cmd_EnemyFlagAction::execute (Game & game)
@@ -1690,7 +1688,7 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 				 player.vision
 				 	(Map::get_index
 				 	 	(building->get_position(), game.map().get_width())))
-				player.enemyflagaction (*flag, sender(), number, retreat);
+				player.enemyflagaction (*flag, sender(), number);
 			else
 				log
 					("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
@@ -1706,10 +1704,8 @@ void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
 	ser.Unsigned32(serial);
 	ser.Unsigned8 (sender());
 	ser.Unsigned8 (number);
-	ser.Unsigned8 (retreat);
 }
-/// Version 2 and 3 are fully compatible: version 2 soldiers will never retreat
-/// but do not crash game.
+
 #define PLAYER_CMD_ENEMYFLAGACTION_VERSION 3
 void Cmd_EnemyFlagAction::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
@@ -1722,7 +1718,6 @@ void Cmd_EnemyFlagAction::Read
 			serial = get_object_serial_or_zero<Flag>(fr.Unsigned32(), mol);
 			fr           .Unsigned8 ();
 			number   = fr.Unsigned8 ();
-			retreat  = fr.Unsigned8 ();
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);
@@ -1747,84 +1742,7 @@ void Cmd_EnemyFlagAction::Write
 	// Now param
 	fw.Unsigned8 (sender());
 	fw.Unsigned8 (number);
-	fw.Unsigned8 (retreat);
 }
-
-/*** Cmd_ChangeMilitaryConfig ***/
-
-Cmd_ChangeMilitaryConfig::Cmd_ChangeMilitaryConfig(StreamRead & des)
-:
-PlayerCommand (0, des.Unsigned8())
-{
-	retreat = des.Unsigned8();
-	/// Read reserved data
-	des.Unsigned8();
-	des.Unsigned8();
-}
-
-void Cmd_ChangeMilitaryConfig::execute (Game & game)
-{
-	game.get_player(sender())->set_retreat_percentage(retreat);
-}
-
-void Cmd_ChangeMilitaryConfig::serialize (StreamWrite & ser)
-{
-	ser.Unsigned8 (PLCMD_CHANGEMILITARYCONFIG);
-	ser.Unsigned8 (sender());
-	ser.Unsigned8 (retreat);
-	/// Serialize reserved data
-	ser.Unsigned8 (0);
-	ser.Unsigned8 (0);
-}
-
-#define PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION 1
-void Cmd_ChangeMilitaryConfig::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
-{
-	try {
-		const uint16_t packet_version = fr.Unsigned16();
-		if (packet_version == PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION) {
-			PlayerCommand::Read(fr, egbase, mol);
-			Player * plr = egbase.get_player(sender());
-			assert(plr);
-			retreat = fr.Unsigned8();
-			if
-				(retreat < plr->tribe().get_military_data().get_min_retreat()
-				 or
-				 retreat > plr->tribe().get_military_data().get_max_retreat())
-				throw game_data_error
-					("retreat: value out of range. Received %u, but expected %u-%u",
-					 retreat,
-					 plr->tribe().get_military_data().get_min_retreat(),
-					 plr->tribe().get_military_data().get_max_retreat());
-			/// Read reserved data
-			fr.Unsigned8();
-			fr.Unsigned8();
-		} else
-			throw game_data_error
-				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("change military config: %s", e.what());
-	}
-}
-
-void Cmd_ChangeMilitaryConfig::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-{
-	// First, write version
-	fw.Unsigned16(PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION);
-	// Write base classes
-	PlayerCommand::Write(fw, egbase, mos);
-
-	// Now retreat
-	fw.Unsigned8(retreat);
-
-	// Reserved for future versions
-	fw.Unsigned8(0);
-	fw.Unsigned8(0);
-
-}
-
 
 /*** struct PlayerMessageCommand ***/
 

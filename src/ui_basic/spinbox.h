@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_SPINBOX_H
-#define UI_SPINBOX_H
+#ifndef WL_UI_BASIC_SPINBOX_H
+#define WL_UI_BASIC_SPINBOX_H
 
 #include <cstring>
 
@@ -70,4 +70,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_SPINBOX_H

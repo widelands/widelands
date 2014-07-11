@@ -26,6 +26,7 @@
 
 #include "ai/ai_hints.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -41,7 +42,6 @@
 #include "logic/warehouse.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 constexpr int kFieldUpdateInterval = 1000;
 constexpr int kIdleMineUpdateInterval = 22000;
@@ -670,8 +670,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					field.military_capacity_ += militarysite->maxSoldierCapacity();
 					field.military_presence_ += militarysite->stationedSoldiers().size();
 
-					if (militarysite->stationedSoldiers().size() > 0)
+					if (!militarysite->stationedSoldiers().empty()) {
 						field.military_stationed_ += 1;
+					}
 
 					field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
 				}
@@ -1009,7 +1010,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			max_needed_preciousness = 0;
 
 			// Check if the produced wares are needed (if it is producing anything)
-			if (bo.outputs_.size() > 0) {
+			if (!bo.outputs_.empty()) {
 				container_iterate(std::list<EconomyObserver*>, economies, l) {
 					// Don't check if the economy has no warehouse.
 					if ((*l.current)->economy.warehouses().empty())
@@ -1263,7 +1264,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 								    bf->coords.x,
 								    bf->coords.y);
 						}
-					} else if (bo.inputs_.size() > 0) {
+					} else if (!bo.inputs_.empty()) {
 						// to have two buildings from everything (intended for upgradeable buildings)
 						// but I do not know how to identify such buildings
 						if (bo.cnt_built_ == 1
@@ -2133,8 +2134,9 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	}
 
 	// buildings with inputs_, checking if we can a dismantle some due to low performance
-	if (productionsite_observer.bo->inputs_.size() > 0 and productionsite_observer.bo->cnt_built_ >=
-	    3 and productionsite_observer.bo->current_stats_ < 30) {
+	if (!productionsite_observer.bo->inputs_.empty()
+	    and productionsite_observer.bo->cnt_built_ >= 3
+	    and productionsite_observer.bo->current_stats_ < 30) {
 		if (kIdleDismantle)
 			log(" kIdleDismantle: dismantling due to too many buildings: %15s at %3d x %3d, total "
 			    "counts: %2d, stat: %2d\n",
@@ -2204,7 +2206,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// buildings are needed. If yes consider an upgrade.
 	std::set<Building_Index> enhancements = productionsite->enhancements();
 	int32_t maxprio = 0;
-	Building_Index enbld;  // to get rid of this
+	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
 		// Only enhance buildings that are allowed (scenario mode)
@@ -2356,7 +2358,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	// Check whether building is enhanceable. If yes consider an upgrade.
 	std::set<Building_Index> enhancements = mine->enhancements();
 	int32_t maxprio = 0;
-	Building_Index enbld;
+	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
@@ -2451,7 +2453,7 @@ uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 	uint32_t count = 0;
 
-	if (bo.outputs_.size() > 0) {
+	if (!bo.outputs_.empty()) {
 		container_iterate(std::list<EconomyObserver*>, economies, l) {
 			// Don't check if the economy has no warehouse.
 			if ((*l.current)->economy.warehouses().empty())
@@ -2890,7 +2892,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	Building* target = ms;  // dummy initialisation to silence the compiler
 	int32_t chance = 0;
 	uint32_t attackers = 0;
-	uint8_t retreat = ms->owner().get_retreat_percentage();
 	// Search in a radius of the vision of the militarysite and collect
 	// information about immovables in the area
 	std::vector<ImmovableFound> immovables;
@@ -2949,12 +2950,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		return false;
 	}
 
-	if (ms->owner().is_retreat_change_allowed()) {
-		// \todo Player is allowed to modify his retreat value
-	}
-
 	// Attack the selected target.
-	game().send_player_enemyflagaction(target->base_flag(), pn, attackers, retreat);
+	game().send_player_enemyflagaction(target->base_flag(), pn, attackers);
 	//  Do not attack again too soon - returning soldiers must get healed first.
 	next_attack_consideration_due_ = (gametime % 51 + 10) * 1000 + gametime;
 	return true;

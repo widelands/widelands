@@ -17,17 +17,17 @@
  *
  */
 
-#ifndef BOB_H
-#define BOB_H
+#ifndef WL_LOGIC_BOB_H
+#define WL_LOGIC_BOB_H
 
-#include "base/port.h"
+#include "base/macros.h"
+#include "base/point.h"
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "logic/instances.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "base/point.h"
 
 class Profile;
 
@@ -419,4 +419,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BOB_H

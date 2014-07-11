@@ -19,9 +19,10 @@
 
 #include "wui/attack_box.h"
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "logic/soldier.h"
-#include "upcast.h"
+#include "wui/text_constants.h"
 
 AttackBox::AttackBox
 	(UI::Panel              * parent,
@@ -35,20 +36,16 @@ AttackBox::AttackBox
 	m_pl(player),
 	m_map(&m_pl->egbase().map()),
 	m_node(target),
-	m_slider_retreat(nullptr),
 	m_slider_soldiers(nullptr),
 	m_text_soldiers(nullptr),
-	m_text_retreat(nullptr),
 	m_add_soldiers(nullptr)
 {
 	init();
 }
 
 AttackBox::~AttackBox() {
-	delete m_slider_retreat;
 	delete m_slider_soldiers;
 	delete m_text_soldiers;
-	delete m_text_retreat;
 	delete m_add_soldiers;
 }
 
@@ -137,22 +134,6 @@ void AttackBox::update_attack() {
 
 	sprintf(buf, "%u", max_attackers);
 	m_add_soldiers->set_title(buf);
-
-	if (m_pl->is_retreat_change_allowed()) {
-		assert(m_slider_retreat);
-		assert(m_text_retreat);
-
-		Widelands::Military_Data MD = m_pl->tribe().get_military_data();
-
-		if (m_slider_retreat->get_value() < MD.get_min_retreat())
-			m_slider_retreat->set_value (MD.get_min_retreat());
-
-		if (m_slider_retreat->get_value() > MD.get_max_retreat())
-			m_slider_retreat->set_value (MD.get_max_retreat());
-
-		sprintf(buf, "%u %%", m_slider_retreat->get_value());
-		m_text_retreat->set_text(buf);
-	}
 }
 
 void AttackBox::init() {
@@ -205,38 +186,6 @@ void AttackBox::init() {
 		m_add_soldiers   ->set_enabled(max_attackers > 0);
 		m_less_soldiers  ->set_enabled(max_attackers > 0);
 	}
-
-	{ //  Retreat line
-		UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
-		add(&linebox, UI::Box::AlignTop);
-
-		add_text(linebox, _("Retreat: Never!"));
-
-		//  Spliter of retreat
-		UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
-		linebox.add(&columnbox, UI::Box::AlignTop);
-
-		sprintf(buf, "%u %%", m_pl->get_retreat_percentage());
-
-		m_text_retreat =
-			&add_text(columnbox, buf, UI::Box::AlignCenter, UI_FONT_ULTRASMALL);
-
-		m_slider_retreat =
-			&add_slider
-				(columnbox,
-				 100, 10,
-				 m_pl->tribe().get_military_data().get_min_retreat(),
-				 m_pl->tribe().get_military_data().get_max_retreat(),
-				 m_pl->get_retreat_percentage(),
-				 "pics/but2.png",
-				 _("Supported damage before retreat"));
-		m_slider_retreat->changed.connect(boost::bind(&AttackBox::update_attack, this));
-		add_text(linebox, _("Once injured"));
-		m_slider_retreat->set_enabled(m_pl->is_retreat_change_allowed());
-		linebox.set_visible(m_pl->is_retreat_change_allowed());
-	}
-
-	//  Add here another attack configuration parameters.
 }
 
 void AttackBox::send_less_soldiers() {
@@ -251,9 +200,4 @@ void AttackBox::send_more_soldiers() {
 uint32_t AttackBox::soldiers() const {
 	assert(m_slider_soldiers);
 	return m_slider_soldiers->get_value();
-}
-
-uint8_t AttackBox::retreat() const {
-	assert(m_slider_retreat);
-	return m_slider_retreat->get_value();
 }

@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef S__SUPPLY_H
-#define S__SUPPLY_H
+#ifndef WL_ECONOMY_SUPPLY_H
+#define WL_ECONOMY_SUPPLY_H
 
+#include "economy/trackptr.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "trackptr.h"
 
 namespace Widelands {
 
@@ -106,4 +106,4 @@ struct Supply : public Trackable {
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_SUPPLY_H

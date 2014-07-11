@@ -25,15 +25,17 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
+#include "base/deprecated.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
-#include "container_iterate.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -42,6 +44,7 @@
 #include "logic/map.h"
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
+#include "logic/terrain_affinity.h"
 #include "logic/tribe.h"
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
@@ -50,9 +53,9 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
-#include "upcast.h"
 #include "wui/interactive_base.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 
 namespace Widelands {
 
@@ -295,6 +298,10 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world)
 		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
 
+	if (table.has_key("terrain_affinity")) {
+		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
+	}
+
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
@@ -320,6 +327,13 @@ const EditorCategory& Immovable_Descr::editor_category() const {
 	return *editor_category_;
 }
 
+bool Immovable_Descr::has_terrain_affinity() const {
+	return terrain_affinity_.get() != nullptr;
+}
+
+const TerrainAffinity& Immovable_Descr::terrain_affinity() const {
+	return *terrain_affinity_;
+}
 
 void Immovable_Descr::make_sure_default_program_is_there() {
 	if (!m_programs.count("program")) {  //  default program
@@ -491,10 +505,6 @@ void Immovable::switch_program(Game& game, const std::string& program_name) {
 	m_program_step = 0;
 	m_action_data.reset(nullptr);
 	schedule_act(game, 1);
-}
-
-uint32_t Immovable_Descr::terrain_suitability(FCoords const, const Map&) const {
-	return 6 * 255;
 }
 
 /**
@@ -956,6 +966,11 @@ void ImmovableProgram::ActTransform::execute
 ImmovableProgram::ActGrow::ActGrow
 	(char * parameters, Immovable_Descr & descr)
 {
+	if (!descr.has_terrain_affinity()) {
+		throw game_data_error(
+		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
+	}
+
 	try {
 		tribe = true;
 		for (char * p = parameters;;)
@@ -993,21 +1008,20 @@ ImmovableProgram::ActGrow::ActGrow
 	}
 }
 
-void ImmovableProgram::ActGrow::execute
-	(Game & game, Immovable & immovable) const
-{
-	const Map             & map   = game     .map  ();
-	const Immovable_Descr & descr = immovable.descr();
+void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
+	const Map& map = game.map();
 	FCoords const f = map.get_fcoords(immovable.get_position());
-	if (game.logic_rand() % (6 * 255) < descr.terrain_suitability(f, map)) {
-		Tribe_Descr const * const owner_tribe =
-			tribe ? immovable.descr().get_owner_tribe() : nullptr;
-		immovable.remove(game); //  Now immovable is a dangling reference!
-		game.create_immovable(f, type_name, owner_tribe);
-	} else
-		immovable.program_step(game);
-}
+	const Immovable_Descr& descr = immovable.descr();
 
+	if (logic_rand_as_double(&game) <
+	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		Tribe_Descr const* const owner_tribe = tribe ? descr.get_owner_tribe() : nullptr;
+		immovable.remove(game);  //  Now immovable is a dangling reference!
+		game.create_immovable(f, type_name, owner_tribe);
+	} else {
+		immovable.program_step(game);
+	}
+}
 
 /**
  * remove
@@ -1038,7 +1052,6 @@ void ImmovableProgram::ActRemove::execute
 	else
 		immovable.program_step(game);
 }
-
 
 ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 {
@@ -1096,31 +1109,33 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 void ImmovableProgram::ActSeed::execute
 	(Game & game, Immovable & immovable) const
 {
-	const Immovable_Descr & descr = immovable.descr();
-	const Map & map = game.map();
-	if
-		(game.logic_rand() % (6 * 256)
-		 <
-		 descr.terrain_suitability
-		 	(map.get_fcoords(immovable.get_position()), map))
-	{
-		MapFringeRegion<> mr(map, Area<>(immovable.get_position(), 0));
+	const Map& map = game.map();
+	FCoords const f = map.get_fcoords(immovable.get_position());
+	const Immovable_Descr& descr = immovable.descr();
+
+	if (logic_rand_as_double(&game) <
+	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		// Seed a new tree.
+		MapFringeRegion<> mr(map, Area<>(f, 0));
 		uint32_t fringe_size = 0;
 		do {
 			mr.extend(map);
 			fringe_size += 6;
-		} while (game.logic_rand() % 256 < probability);
-		for (uint32_t n = game.logic_rand() % fringe_size; n; --n)
+		} while (game.logic_rand() % std::numeric_limits<uint8_t>::max() < probability);
+
+		for (uint32_t n = game.logic_rand() % fringe_size; n; --n) {
 			mr.advance(map);
-		FCoords const f = map.get_fcoords(mr.location());
-		if
-			(not f.field->get_immovable()        and
-			 (f.field->nodecaps() & MOVECAPS_WALK) and
-			 game.logic_rand() % (6 * 256) < descr.terrain_suitability(f, map))
-			game.create_immovable
-				(mr.location(),
-				 type_name,
-				 tribe ? immovable.descr().get_owner_tribe() : nullptr);
+		}
+
+		const FCoords new_location = map.get_fcoords(mr.location());
+		if (!new_location.field->get_immovable() &&
+		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
+		    logic_rand_as_double(&game) <
+		       probability_to_grow(
+		          descr.terrain_affinity(), new_location, map, game.world().terrains())) {
+			game.create_immovable(
+			   mr.location(), type_name, tribe ? immovable.descr().get_owner_tribe() : nullptr);
+		}
 	}
 
 	immovable.program_step(game);

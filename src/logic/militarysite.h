@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MILITARYSITE_H
-#define MILITARYSITE_H
+#ifndef WL_LOGIC_MILITARYSITE_H
+#define WL_LOGIC_MILITARYSITE_H
 
 #include <memory>
 
@@ -111,11 +111,9 @@ public:
 	virtual bool attack   (Soldier &) override;
 	// End implementation of Attackable
 
-	/**
-	 * Launch the given soldier on an attack towards the given
-	 * target building.
-	 */
-	void sendAttacker(Soldier &, Building &, uint8_t);
+	/// Launch the given soldier on an attack towards the given
+	/// target building.
+	void sendAttacker(Soldier &, Building &);
 
 	/// This methods are helper for use at configure this site.
 	void set_requirements  (const Requirements &);
@@ -145,7 +143,7 @@ private:
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	Map_Object * popSoldierJob
-		(Soldier *, bool * stayhome = nullptr, uint8_t * retreat = nullptr);
+		(Soldier *, bool * stayhome = nullptr);
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);
 	void informPlayer(Game &, bool discovered = false);
@@ -174,7 +172,6 @@ private:
 		Soldier    * soldier;
 		Object_Ptr  enemy;
 		bool        stayhome;
-		uint8_t     retreat;
 	};
 	std::vector<SoldierJob> m_soldierjobs;
 	SoldierPreference m_soldier_preference;
@@ -185,4 +182,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MILITARYSITE_H

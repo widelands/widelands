@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WORKAREA_INFO_H
-#define WORKAREA_INFO_H
+#ifndef WL_LOGIC_WORKAREA_INFO_H
+#define WL_LOGIC_WORKAREA_INFO_H
 
 #include <cstring>
 #include <map>
@@ -30,4 +30,4 @@
 //  activity (or similar) that can be performed within the radius.
 typedef std::map<uint32_t, std::set<std::string> > Workarea_Info;
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKAREA_INFO_H

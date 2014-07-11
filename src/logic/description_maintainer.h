@@ -17,9 +17,10 @@
  *
  */
 
-#ifndef DESCR_MAINTAINER_H
-#define DESCR_MAINTAINER_H
+#ifndef WL_LOGIC_DESCRIPTION_MAINTAINER_H
+#define WL_LOGIC_DESCRIPTION_MAINTAINER_H
 
+#include <cassert>
 #include <map>
 #include <memory>
 #include <string>
@@ -55,6 +56,14 @@ template <typename T> struct DescriptionMaintainer {
 		return (idx >= 0 && idx < static_cast<int32_t>(items_.size())) ? items_[idx].get() : nullptr;
 	}
 
+	// Returns the entry at 'index'. If 'index' is out of bounds the result is
+	// undefined.
+	// TODO(sirver): this should be called get and the other should be called get_mutable.
+	T& get_unmutable(const uint32_t index) const {
+		assert(0 <= index && index < items_.size());
+		return *items_.at(index);
+	}
+
 private:
 	typedef std::map<std::string, int> NameToIndexMap;
 	std::vector<std::unique_ptr<T>> items_;
@@ -79,4 +88,4 @@ template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& nam
 	return items_[index].get();
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_DESCRIPTION_MAINTAINER_H

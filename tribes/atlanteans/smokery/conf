@@ -32,15 +32,15 @@ work=_Work
 
 [smoke_meat]
 return=skipped unless economy needs smoked_meat or not economy needs log
-consume=meat:2 log
 sleep=30000
+consume=meat:2 log
 animate=working 30000
 produce=smoked_meat:2
 
 [smoke_fish]
 return=skipped unless economy needs smoked_fish or not economy needs log
-consume=fish:2 log
 sleep=30000
+consume=fish:2 log
 animate=working 30000
 produce=smoked_fish:2
 

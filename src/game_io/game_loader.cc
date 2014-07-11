@@ -23,6 +23,7 @@
 #include <boost/signals2.hpp>
 
 #include "base/log.h"
+#include "base/scoped_timer.h"
 #include "game_io/game_cmd_queue_data_packet.h"
 #include "game_io/game_game_class_data_packet.h"
 #include "game_io/game_interactive_player_data_packet.h"
@@ -35,7 +36,6 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/widelands_map_map_object_loader.h"
-#include "scoped_timer.h"
 
 namespace Widelands {
 

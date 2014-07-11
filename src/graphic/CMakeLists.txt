@@ -7,22 +7,32 @@ wl_library(graphic_color
   USES_SDL
 )
 
+wl_library(graphic_image_io
+  SRCS
+    image_io.h
+    image_io.cc
+  USES_PNG
+  USES_SDL
+  USES_SDL_IMAGE
+  DEPENDS
+    base_exceptions
+    graphic_surface
+    io_fileread
+    io_filesystem
+    io_stream
+)
+
 wl_library(graphic_image
   SRCS
     image.h
     image_cache.cc
     image_cache.h
-    image_loader.h
-    image_loader_impl.cc
-    image_loader_impl.h
   USES_SDL
   USES_SDL_IMAGE
   DEPENDS
     base_log
-    base_exceptions
+    graphic_image_io
     graphic_surface
-    io_fileread
-    io_filesystem
 )
 
 wl_library(graphic_surface
@@ -47,12 +57,12 @@ wl_library(graphic_surface
   USES_OPENGL
   USES_SDL
   DEPENDS
+    base_macros
     base_exceptions
     base_geometry
     base_log
     graphic
     graphic_color
-    widelands_ball_of_mud
 )
 
 wl_library(graphic
@@ -63,6 +73,7 @@ wl_library(graphic
     animation.h
     colormap.cc
     colormap.h
+    default_resolution.h
     diranimations.h
     font.cc
     font.h
@@ -98,28 +109,34 @@ wl_library(graphic
     wordwrap.cc
     wordwrap.h
   USES_OPENGL
-  USES_PNG
   USES_SDL
   USES_SDL_GFX
   USES_SDL_IMAGE
   USES_SDL_TTF
   DEPENDS
+    base_deprecated
     base_exceptions
     base_geometry
     base_i18n
     base_log
+    base_macros
     build_info
+    economy
     graphic_color
     graphic_image
+    graphic_image_io
     graphic_surface
     graphic_text
+    helper
     io_fileread
     io_filesystem
     io_stream
     logic
     profile
+    random
+    scripting
     sound
     ui_basic
-    widelands_ball_of_mud
     wui
+    wui_text_layout
 )

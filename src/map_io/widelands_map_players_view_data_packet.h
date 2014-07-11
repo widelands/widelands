@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_PLAYERS_VIEW_DATA_PACKET_H
-#define WIDELANDS_MAP_PLAYERS_VIEW_DATA_PACKET_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_PLAYERS_VIEW_DATA_PACKET_H
+#define WL_MAP_IO_WIDELANDS_MAP_PLAYERS_VIEW_DATA_PACKET_H
 
 #include "map_io/widelands_map_data_packet.h"
 
@@ -33,4 +33,4 @@
 /// after Map_Bobdata_Data_Packet has been loaded.
 MAP_DATA_PACKET(Map_Players_View_Data_Packet)
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_PLAYERS_VIEW_DATA_PACKET_H

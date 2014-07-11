@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_SAVER_H
-#define GAME_SAVER_H
+#ifndef WL_GAME_IO_GAME_SAVER_H
+#define WL_GAME_IO_GAME_SAVER_H
 
 #include "base/wexception.h"
 
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_SAVER_H

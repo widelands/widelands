@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WORKER_DESCR_H
-#define WORKER_DESCR_H
+#ifndef WL_LOGIC_WORKER_DESCR_H
+#define WL_LOGIC_WORKER_DESCR_H
 
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
@@ -142,4 +142,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_DESCR_H

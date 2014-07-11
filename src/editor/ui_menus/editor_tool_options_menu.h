@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_TOOL_OPTIONS_MENU_H
-#define EDITOR_TOOL_OPTIONS_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOL_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOL_OPTIONS_MENU_H
 
 #include "editor/editorinteractive.h"
 #include "ui_basic/unique_window.h"
@@ -46,4 +46,4 @@ private:
 	Editor_Tool * m_current_pointer;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_OPTIONS_MENU_H

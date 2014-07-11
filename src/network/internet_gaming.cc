@@ -24,8 +24,8 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/warning.h"
-#include "compile_diagnostics.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -109,9 +109,9 @@ void InternetGaming::initialiseConnection() {
 	IPaddress peer;
 	if (hostent * const he = gethostbyname(m_meta.c_str())) {
 		peer.host = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		peer.port = htons(m_port);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 	} else
 		throw warning
 			(_("Connection problem"), "%s", _("Widelands could not connect to the metaserver."));
@@ -325,7 +325,7 @@ void InternetGaming::handle_metaserver_communication() {
 		}
 	}
 
-	if (waitcmd.size() > 0) {
+	if (!waitcmd.empty()) {
 		// Check if timeout is reached
 		time_t now = time(nullptr);
 		if (now > waittimeout) {

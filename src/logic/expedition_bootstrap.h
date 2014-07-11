@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EXPEDITION_BOOTSTRAP_H
-#define EXPEDITION_BOOTSTRAP_H
+#ifndef WL_LOGIC_EXPEDITION_BOOTSTRAP_H
+#define WL_LOGIC_EXPEDITION_BOOTSTRAP_H
 
 #include <vector>
 #include <memory>
@@ -101,4 +101,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: EXPEDITION_BOOTSTRAP_H */
+#endif  // end of include guard: WL_LOGIC_EXPEDITION_BOOTSTRAP_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_CHECKBOX_H
-#define UI_CHECKBOX_H
+#ifndef WL_UI_BASIC_CHECKBOX_H
+#define WL_UI_BASIC_CHECKBOX_H
 
 #include <boost/signals2.hpp>
 
@@ -105,4 +105,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_CHECKBOX_H

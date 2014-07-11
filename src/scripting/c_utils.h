@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef C_UTILS_H
-#define C_UTILS_H
+#ifndef WL_SCRIPTING_C_UTILS_H
+#define WL_SCRIPTING_C_UTILS_H
 
 
 #include "logic/game.h"
@@ -62,4 +62,4 @@ inline bool luaL_checkboolean(lua_State * L, int n) {
 	return luaL_checkinteger(L, n);
 }
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_C_UTILS_H

@@ -21,7 +21,6 @@
 
 #include <boost/format.hpp>
 
-#include "constants.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
 #include "logic/world/editor_category.h"
@@ -72,8 +71,20 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      is_(TerrainTypeFromString(table.get_string("is"))),
      default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
-     dither_layer_(table.get_int("dither_layer")) {
+     dither_layer_(table.get_int("dither_layer")),
+     temperature_(table.get_double("temperature")),
+     fertility_(table.get_double("fertility")),
+     humidity_(table.get_double("humidity")) {
 
+	if (!(0 <= fertility_ && fertility_ <= 1.)) {
+		throw game_data_error("%s: fertility is not in [0, 1].", name_.c_str());
+	}
+	if (!(0 <= humidity_ && humidity_ <= 1.)) {
+		throw game_data_error("%s: humidity is not in [0, 1].", name_.c_str());
+	}
+	if (temperature_ < 0) {
+		throw game_data_error("%s: temperature is not in Kelvin.", name_.c_str());
+	}
 
 	const std::vector<std::string> textures =
 	   table.get_table("textures")->array_entries<std::string>();
@@ -101,8 +112,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	int editor_category_index =
 	   world.editor_terrain_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index < 0) {
-		throw game_data_error("Unknown editor_category: %s\n",
-		                      table.get_string("editor_category").c_str());
+		throw game_data_error(
+		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
 	}
 	editor_category_ = world.editor_terrain_categories().get(editor_category_index);
 }
@@ -157,6 +168,18 @@ int32_t TerrainDescription::get_default_resource_amount() const {
 
 int32_t TerrainDescription::dither_layer() const {
 	return dither_layer_;
+}
+
+double TerrainDescription::temperature() const {
+	return temperature_;
+}
+
+double TerrainDescription::humidity() const {
+	return humidity_;
+}
+
+double TerrainDescription::fertility() const {
+	return fertility_;
 }
 
 }  // namespace Widelands

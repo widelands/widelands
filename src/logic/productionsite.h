@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PRODUCTIONSITE_H
-#define PRODUCTIONSITE_H
+#ifndef WL_LOGIC_PRODUCTIONSITE_H
+#define WL_LOGIC_PRODUCTIONSITE_H
 
 #include <cstring>
 #include <map>
@@ -276,4 +276,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PRODUCTIONSITE_H

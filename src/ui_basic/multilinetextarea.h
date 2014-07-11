@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_MULTILINE_TEXTAREA_H
-#define UI_MULTILINE_TEXTAREA_H
+#ifndef WL_UI_BASIC_MULTILINETEXTAREA_H
+#define WL_UI_BASIC_MULTILINETEXTAREA_H
 
 #include <memory>
 
@@ -93,4 +93,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

@@ -19,9 +19,9 @@
 
 #include "game_io/game_player_info_data_packet.h"
 
-#include "computer_player.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
@@ -81,11 +81,6 @@ void Game_Player_Info_Data_Packet::Read
 					player.m_msites_defeated     = fr.Unsigned32();
 					player.m_civil_blds_lost     = fr.Unsigned32();
 					player.m_civil_blds_defeated = fr.Unsigned32();
-
-					if (packet_version >= 8) {
-						player.allow_retreat_change(fr.Unsigned8());
-						player.set_retreat_percentage(fr.Unsigned8());
-					}
 				}
 			}
 
@@ -138,8 +133,6 @@ void Game_Player_Info_Data_Packet::Write
 		fw.Unsigned32(plr->msites_defeated    ());
 		fw.Unsigned32(plr->civil_blds_lost    ());
 		fw.Unsigned32(plr->civil_blds_defeated());
-		fw.Unsigned8(plr->is_retreat_change_allowed());
-		fw.Unsigned8(plr->get_retreat_percentage   ());
 	} else
 		fw.Unsigned8(0); //  Player is NOT in game.
 

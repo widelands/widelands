@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
-#ifndef BATTLE_H
-#define BATTLE_H
+#ifndef WL_LOGIC_BATTLE_H
+#define WL_LOGIC_BATTLE_H
 
 #include "logic/instances.h"
 
@@ -112,4 +112,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BATTLE_H

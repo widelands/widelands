@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MESSAGE_QUEUE_H
-#define MESSAGE_QUEUE_H
+#ifndef WL_LOGIC_MESSAGE_QUEUE_H
+#define WL_LOGIC_MESSAGE_QUEUE_H
 
 #include <cassert>
 #include <map>
@@ -185,4 +185,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MESSAGE_QUEUE_H

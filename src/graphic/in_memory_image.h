@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IN_MEMORY_IMAGE_H
-#define IN_MEMORY_IMAGE_H
+#ifndef WL_GRAPHIC_IN_MEMORY_IMAGE_H
+#define WL_GRAPHIC_IN_MEMORY_IMAGE_H
 
 #include <string>
 
@@ -27,5 +27,4 @@ class Surface;
 
 const Image* new_in_memory_image(const std::string& hash, Surface* surf);
 
-#endif /* end of include guard: IN_MEMORY_IMAGE_H */
-
+#endif  // end of include guard: WL_GRAPHIC_IN_MEMORY_IMAGE_H

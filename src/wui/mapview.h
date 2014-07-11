@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAPVIEW_H
-#define MAPVIEW_H
+#ifndef WL_WUI_MAPVIEW_H
+#define WL_WUI_MAPVIEW_H
 
 #include <memory>
 
@@ -95,4 +95,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_MAPVIEW_H

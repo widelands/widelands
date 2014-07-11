@@ -80,5 +80,4 @@ uint8_t get_backward_dir(uint8_t dir) {
 	}
 }
 
-};
-
+}

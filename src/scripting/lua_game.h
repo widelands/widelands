@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_GAME_H
-#define LUA_GAME_H
+#ifndef WL_SCRIPTING_LUA_GAME_H
+#define WL_SCRIPTING_LUA_GAME_H
 
 #include "logic/building.h"
 #include "logic/message_id.h"
@@ -63,10 +63,6 @@ public:
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
 	int get_defeated(lua_State * L);
-	int get_retreat_percentage(lua_State * L);
-	int set_retreat_percentage(lua_State * L);
-	int get_changing_retreat_percentage_allowed(lua_State * L);
-	int set_changing_retreat_percentage_allowed(lua_State * L);
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
 	int set_team(lua_State * L);
@@ -188,5 +184,5 @@ public:
 
 void luaopen_wlgame(lua_State *);
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_GAME_H
 }

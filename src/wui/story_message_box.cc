@@ -19,7 +19,6 @@
 
 #include "wui/story_message_box.h"
 
-#include "constants.h"
 #include "graphic/graphic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -98,4 +97,3 @@ bool Story_Message_Box::handle_mousepress
 
 	return UI::Window::handle_mousepress(btn, mx, my);
 }
-

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef RESOURCE_DESCRIPTION_H
-#define RESOURCE_DESCRIPTION_H
+#ifndef WL_LOGIC_WORLD_RESOURCE_DESCRIPTION_H
+#define WL_LOGIC_WORLD_RESOURCE_DESCRIPTION_H
 
 #include <string>
 #include <vector>
@@ -66,4 +66,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: RESOURCE_DESCRIPTION_H */
+#endif  // end of include guard: WL_LOGIC_WORLD_RESOURCE_DESCRIPTION_H

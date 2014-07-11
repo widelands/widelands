@@ -23,15 +23,15 @@
 #include <sys/time.h>
 #endif
 
+#include "base/deprecated.h"
 #include "base/i18n.h"
-#include "constants.h"
-#include "container_iterate.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "wui/text_constants.h"
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
@@ -93,14 +93,11 @@ void ProgressWindow::draw_background
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string & file_name) {
 	RenderTarget & rt = *g_gr->get_render_target();
-	if (file_name.size() > 0) {
-		if (g_fs->FileExists(file_name))
-			m_background = file_name;
-		else {
-			m_background = "pics/progress.png";
-		}
-	} else
+	if (!file_name.empty() && g_fs->FileExists(file_name)) {
+		m_background = file_name;
+	} else {
 		m_background = "pics/progress.png";
+	}
 	m_background_pic = nullptr;
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
@@ -143,6 +140,7 @@ void ProgressWindow::update(bool const repaint) {
  * std:string style format broke format argument list
  * on windows visual studio.
  */
+// TODO(sirver): this should just take a string.
 void ProgressWindow::stepf(const char * format, ...) {
 	char buffer[1024];
 	va_list va;

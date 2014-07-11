@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_RADIOBUTTON_H
-#define UI_RADIOBUTTON_H
+#ifndef WL_UI_BASIC_RADIOBUTTON_H
+#define WL_UI_BASIC_RADIOBUTTON_H
 
 #include <stdint.h>
 
@@ -77,4 +77,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_RADIOBUTTON_H

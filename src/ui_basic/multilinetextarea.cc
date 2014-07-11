@@ -21,10 +21,10 @@
 
 #include <boost/bind.hpp>
 
-#include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/richtext.h"
 #include "graphic/wordwrap.h"
+#include "wui/text_constants.h"
 
 namespace UI {
 

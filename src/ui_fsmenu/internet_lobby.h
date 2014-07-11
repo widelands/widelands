@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_INTERNET_LOBBY_H
-#define FULLSCREEN_MENU_INTERNET_LOBBY_H
+#ifndef WL_UI_FSMENU_INTERNET_LOBBY_H
+#define WL_UI_FSMENU_INTERNET_LOBBY_H
 
 #include <cstring>
 #include <string>
@@ -87,4 +87,4 @@ private:
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_INTERNET_LOBBY_H

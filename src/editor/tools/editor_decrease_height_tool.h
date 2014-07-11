@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_DECREASE_HEIGHT_TOOL_H
-#define EDITOR_DECREASE_HEIGHT_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_DECREASE_HEIGHT_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_DECREASE_HEIGHT_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 
@@ -51,4 +51,4 @@ private:
 	int32_t m_change_by;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_DECREASE_HEIGHT_TOOL_H

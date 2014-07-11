@@ -23,7 +23,6 @@
 #include <string>
 #include <vector>
 
-#include "helper.h"
 #include "logic/game_data_error.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"

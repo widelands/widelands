@@ -36,8 +36,8 @@ work=_Work
 
 [produce_ax]
 return=skipped unless economy needs ax
-consume=coal iron
 sleep=32000
+consume=coal iron
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
@@ -45,8 +45,8 @@ produce=ax
 
 [produce_sharpax]
 return=skipped unless economy needs sharpax
-consume=coal iron:2
 sleep=32000
+consume=coal iron:2
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
@@ -54,8 +54,8 @@ produce=sharpax
 
 [produce_broadax]
 return=skipped unless economy needs broadax
-consume=coal:2 iron:2
 sleep=32000
+consume=coal:2 iron:2
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192

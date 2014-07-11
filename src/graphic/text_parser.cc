@@ -24,9 +24,8 @@
 #include <string>
 #include <vector>
 
+#include "base/deprecated.h"
 #include "base/log.h"
-#include "constants.h"
-#include "container_iterate.h"
 #include "helper.h"
 
 namespace UI {

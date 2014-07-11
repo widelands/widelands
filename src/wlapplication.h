@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WLAPPLICATION_H
-#define WLAPPLICATION_H
+#ifndef WL_WLAPPLICATION_H
+#define WL_WLAPPLICATION_H
 
 //Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
 #ifdef __MINGW32__
@@ -126,6 +126,8 @@ struct InputCallback {
 /// code should be in System, while the actual graphics work is done elsewhere.
 /// \todo Refactor the mainloop
 /// \todo Sensible use of exceptions (goes for whole game)
+// TODO(sirver): this class makes no sense for c++ - most of these should be
+// stand alone functions.
 struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();
@@ -264,4 +266,4 @@ private:
 
 };
 
-#endif
+#endif  // end of include guard: WL_WLAPPLICATION_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DISMANTLESITE_H
-#define DISMANTLESITE_H
+#ifndef WL_LOGIC_DISMANTLESITE_H
+#define WL_LOGIC_DISMANTLESITE_H
 
 #include "logic/building.h"
 #include "logic/partially_finished_building.h"
@@ -85,4 +85,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_DISMANTLESITE_H

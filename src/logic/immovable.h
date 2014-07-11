@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IMMOVABLE_H
-#define IMMOVABLE_H
+#ifndef WL_LOGIC_IMMOVABLE_H
+#define WL_LOGIC_IMMOVABLE_H
 
 #include <memory>
 
@@ -35,6 +35,7 @@ namespace Widelands {
 
 class Economy;
 class Map;
+class TerrainAffinity;
 class WareInstance;
 class Worker;
 class World;
@@ -111,14 +112,19 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	Tribe_Descr const * get_owner_tribe() const {return m_owner_tribe;}
 
-	/// How well the terrain around f suits an immovable of this type.
-	uint32_t terrain_suitability(FCoords, const Map &) const;
-
 	const Buildcost & buildcost() const {return m_buildcost;}
 
 
 	// Returns the editor category.
 	const EditorCategory& editor_category() const;
+
+	// Every immovable that can 'grow' needs to have terrain affinity defined,
+	// all others do not. Returns true if this one has it defined.
+	bool has_terrain_affinity() const;
+
+	// Returns the terrain affinity. If !has_terrain_affinity() this will return
+	// an undefined value.
+	const TerrainAffinity& terrain_affinity() const;
 
 protected:
 	int32_t     m_size;
@@ -133,10 +139,11 @@ protected:
 	Buildcost m_buildcost;
 
 private:
-	EditorCategory* editor_category_;  // not owned.
-
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
+
+	EditorCategory* editor_category_;  // not owned.
+	std::unique_ptr<TerrainAffinity> terrain_affinity_;
 };
 
 class Immovable : public BaseImmovable {
@@ -342,4 +349,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_IMMOVABLE_H

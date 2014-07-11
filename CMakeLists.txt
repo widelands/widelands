@@ -10,7 +10,7 @@ endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 # (through config.h).
 macro(_set_if_unset VAR VALUE)
   if (NOT ${VAR} OR ${VAR} STREQUAL "")
-    set (${VAR} ".")
+	  set (${VAR} ${VALUE})
   endif()
 endmacro(_set_if_unset)
 
@@ -122,7 +122,9 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
-  add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
+
+  # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
 
   # This warning warns when a default case is at a switch that handles all
   # cases. While this is super nice, silencing this warning for clang will add
@@ -132,8 +134,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-covered-switch-default")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
 
-  # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
-  add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
 else()
   # Assuming GCC 4.7 or higher.
   if(WIN32)
@@ -176,11 +177,11 @@ else()
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
-  add_flag(WL_COMPILE_DIAGNOSTICS "-fdiagnostics-show-option")
 endif()
 
 # Turn some warnings into errors.
 add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
+add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
 
 IF (WIN32)
   set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)

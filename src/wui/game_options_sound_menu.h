@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GAME_OPTIONS_SOUND_MENU_H
-#define GAME_OPTIONS_SOUND_MENU_H
+#ifndef WL_WUI_GAME_OPTIONS_SOUND_MENU_H
+#define WL_WUI_GAME_OPTIONS_SOUND_MENU_H
 
 #include "wui/interactive_gamebase.h"
 #include "ui_basic/checkbox.h"
@@ -59,4 +59,4 @@ private:
 	void sound_volume_changed(int32_t value);
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_OPTIONS_SOUND_MENU_H
