@@ -23,9 +23,14 @@
 
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/instances.h"
 #include "logic/player.h"
+
+namespace Widelands {
+class World;
+}  // namespace Widelands
 
 using namespace Widelands;
 
@@ -41,7 +46,7 @@ struct TestingFlag : public Flag {
 struct TestingMap : public Map {
 	TestingMap(int const w, int const h) : Map() {set_size(w, h);}
 
-	virtual void recalc_for_field_area(Area<FCoords>) override {}
+	virtual void recalc_for_field_area(const World&, Area<FCoords>) override {}
 
 };
 
@@ -102,4 +107,3 @@ BOOST_FIXTURE_TEST_CASE(InstantiateEditorGameBase, SimpleRoadTestsFixture) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

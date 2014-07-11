@@ -19,14 +19,18 @@
 
 #include "network/netclient.h"
 
+#include <memory>
+
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
-#include <config.h>
 
+#include "base/i18n.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "build_info.h"
+#include "config.h"
 #include "game_io/game_loader.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -43,9 +47,7 @@
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launchMPG.h"
-#include "warning.h"
-#include "wexception.h"
+#include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -905,6 +907,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const initialization_script = packet.String();
 				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
+				t->do_not_warn_about_unaccessed_keys();
 				info.initializations.push_back
 					(TribeBasicInfo::Initialization(initialization_script, t->get_string("name")));
 			}
@@ -1073,8 +1076,9 @@ void NetClient::disconnect
 			s.Unsigned8(NETCMD_DISCONNECT);
 			s.Unsigned8(arg.size() < 1 ? 1 : 2);
 			s.String(reason);
-			if (arg.size() > 0)
+			if (!arg.empty()) {
 				s.String(arg);
+			}
 			s.send(d->sock);
 		}
 

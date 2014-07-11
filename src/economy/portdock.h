@@ -17,8 +17,10 @@
  *
  */
 
-#ifndef ECONOMY_PORTDOCK_H
-#define ECONOMY_PORTDOCK_H
+#ifndef WL_ECONOMY_PORTDOCK_H
+#define WL_ECONOMY_PORTDOCK_H
+
+#include <memory>
 
 #include "logic/immovable.h"
 #include "logic/wareworker.h"
@@ -157,4 +159,4 @@ public:
 
 } // namespace Widelands
 
-#endif // ECONOMY_PORTDOCK_H
+#endif  // end of include guard: WL_ECONOMY_PORTDOCK_H

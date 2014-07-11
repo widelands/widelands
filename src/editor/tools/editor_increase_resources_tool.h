@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_INCREASE_RESOURCES_TOOL_H
-#define EDITOR_INCREASE_RESOURCES_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_INCREASE_RESOURCES_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_INCREASE_RESOURCES_TOOL_H
 
 #include "editor/tools/editor_decrease_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
@@ -26,22 +26,26 @@
 
 /// Increases the resources of a node by a value.
 struct Editor_Increase_Resources_Tool : public Editor_Tool {
-	Editor_Increase_Resources_Tool
-	(Editor_Decrease_Resources_Tool & the_decrease_tool,
-	 Editor_Set_Resources_Tool    &   the_set_to_tool)
-		:
-		Editor_Tool(the_decrease_tool, the_set_to_tool),
-		m_decrease_tool(the_decrease_tool), m_set_tool(the_set_to_tool),
-		m_change_by(1), m_cur_res(0)
-	{}
+	Editor_Increase_Resources_Tool(Editor_Decrease_Resources_Tool& the_decrease_tool,
+	                               Editor_Set_Resources_Tool& the_set_to_tool)
+	   : Editor_Tool(the_decrease_tool, the_set_to_tool),
+	     m_decrease_tool(the_decrease_tool),
+	     m_set_tool(the_set_to_tool),
+	     m_change_by(1),
+	     m_cur_res(0) {
+	}
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& parent,
+	                          Editor_Action_Args& args) override;
 
-	int32_t handle_undo_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_undo_impl(Widelands::Map& map,
+	                         const Widelands::World& world,
+	                         Widelands::Node_and_Triangle<> center,
+	                         Editor_Interactive& parent,
+	                         Editor_Action_Args& args) override;
 
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
 
@@ -63,12 +67,13 @@ struct Editor_Increase_Resources_Tool : public Editor_Tool {
 
 private:
 	Editor_Decrease_Resources_Tool & m_decrease_tool;
-	Editor_Set_Resources_Tool    &   m_set_tool;
-	int32_t                              m_change_by;
+	Editor_Set_Resources_Tool& m_set_tool;
+	int32_t m_change_by;
 	Widelands::Resource_Index m_cur_res;
 };
 
 int32_t Editor_Change_Resource_Tool_Callback
-	(const Widelands::TCoords<Widelands::FCoords>&, Widelands::Map&, int32_t);
+	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map,
+	 const Widelands::World& world, int32_t const curres);
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_INCREASE_RESOURCES_TOOL_H

@@ -23,20 +23,22 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
+#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
-#include "upcast.h"
-#include "wexception.h"
 #include "wui/interactive_gamebase.h"
+#include "wui/text_constants.h"
 
 namespace Widelands {
 
@@ -366,7 +368,7 @@ void ConstructionSite::draw
 	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
-	} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+	} catch (Map_Object_Descr::Animation_Nonexistent&) {
 		try {
 			anim_idx = building().get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent) {

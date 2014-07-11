@@ -21,6 +21,7 @@
 
 #include "economy/economy.h"
 #include "logic/checkstep.h"
+#include "logic/constants.h"
 #include "logic/player.h"
 #include "scripting/lua_map.h"
 
@@ -571,4 +572,4 @@ void luaopen_wlbases(lua_State * const L) {
 	register_class<L_PlayerBase>(L, "bases");
 }
 
-};
+}

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef WL_GRAPHIC_ANIMATION_H
+#define WL_GRAPHIC_ANIMATION_H
 
 #include <cstring>
 #include <map>
@@ -27,13 +27,17 @@
 
 #include <boost/utility.hpp>
 
-#include "point.h"
-#include "rect.h"
+#include "base/point.h"
+#include "base/rect.h"
 
 class Image;
+class LuaTable;
+class Section;
 class Surface;
 struct RGBColor;
-struct Section;
+
+/// FRAME_LENGTH is the default animation speed
+constexpr int FRAME_LENGTH = 250;
 
 /**
  * Representation of an Animation in the game. An animation is a looping set of
@@ -103,6 +107,7 @@ public:
 	 * \param s             conffile section to search for data on this animation
 	*/
 	uint32_t load(const std::string & directory, Section& s);
+	uint32_t load(const LuaTable& table);
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.
@@ -112,4 +117,4 @@ private:
 	std::vector<Animation*> m_animations;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_ANIMATION_H

@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_SAVER_H
-#define WIDELANDS_MAP_SAVER_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_SAVER_H
+#define WL_MAP_IO_WIDELANDS_MAP_SAVER_H
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 class FileSystem;
 
@@ -56,4 +56,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_SAVER_H

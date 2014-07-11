@@ -19,8 +19,12 @@
 
 #include "economy/economy.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "economy/flag.h"
 #include "economy/request.h"
@@ -33,8 +37,6 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -650,8 +652,7 @@ Supply * Economy::_find_best_supply
 			 	 best_cost))
 		{
 			if (!best_route)
-				throw wexception
-					("Economy::find_best_supply: COULD NOT FIND A ROUTE!");
+			log ("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
 			continue;
 		}
 

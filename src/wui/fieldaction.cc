@@ -19,12 +19,13 @@
 
 #include "wui/fieldaction.h"
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
-#include "i18n.h"
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
 #include "logic/maphollowregion.h"
@@ -39,7 +40,6 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
 #include "wui/game_debug_ui.h"
@@ -57,6 +57,8 @@ using Widelands::Game;
 #define BG_CELL_WIDTH  34 // extents of one cell
 #define BG_CELL_HEIGHT 34
 
+//sizes for the images in the build menu (containing building icons)
+#define BUILDMENU_IMAGE_SIZE 30. // used for width and height
 
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::Icon_Grid {
@@ -884,13 +886,10 @@ void FieldActionWindow::act_attack ()
 	assert(m_attack_box);
 	if (upcast(Building, building, game.map().get_immovable(m_node)))
 		if (m_attack_box->soldiers() > 0)
-			game.send_player_enemyflagaction
-				(building->base_flag(),
-				 ref_cast<const Interactive_Player, const Interactive_Base>
-				 	(ibase())
-				 .player_number(),
-				 m_attack_box->soldiers(), //  number of soldiers
-				 m_attack_box->retreat());
+			game.send_player_enemyflagaction(
+			   building->base_flag(),
+			   ref_cast<const Interactive_Player, const Interactive_Base>(ibase()).player_number(),
+			   m_attack_box->soldiers() /*  number of soldiers */);
 	okdialog();
 }
 

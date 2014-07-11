@@ -25,6 +25,7 @@ include "map:scripting/egbase.lua"
 
 include "map:scripting/math_random.lua"
 include "map:scripting/string_bformat.lua"
+include "map:scripting/path.lua"
 include "map:scripting/map.lua"
 include "map:scripting/cplayer.lua"
 include "map:scripting/cfield.lua"

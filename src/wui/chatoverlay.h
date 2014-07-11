@@ -17,8 +17,10 @@
  *
  */
 
-#ifndef CHATOVERLAY_H
-#define CHATOVERLAY_H
+#ifndef WL_WUI_CHATOVERLAY_H
+#define WL_WUI_CHATOVERLAY_H
+
+#include <memory>
 
 #include "logic/notification.h"
 #include "ui_basic/panel.h"
@@ -45,4 +47,4 @@ private:
 	std::unique_ptr<Impl> m;
 };
 
-#endif // CHATOVERLAY_H
+#endif  // end of include guard: WL_WUI_CHATOVERLAY_H

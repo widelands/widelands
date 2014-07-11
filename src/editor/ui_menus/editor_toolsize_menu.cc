@@ -21,10 +21,10 @@
 
 #include <cstdio>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 
 inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());

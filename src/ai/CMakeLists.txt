@@ -1,0 +1,19 @@
+wl_library(ai
+  SRCS
+    ai_help_structs.cc
+    ai_help_structs.h
+    ai_hints.cc
+    ai_hints.h
+    computer_player.cc
+    computer_player.h
+    defaultai.cc
+    defaultai.h
+  DEPENDS
+    base_macros
+    economy
+    base_log
+    profile
+    base_i18n
+    logic
+    logic_notification
+)

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FILESYSTEM_H
-#define FILESYSTEM_H
+#ifndef WL_IO_FILESYSTEM_FILESYSTEM_H
+#define WL_IO_FILESYSTEM_FILESYSTEM_H
 
 #include <cstring>
 #include <memory>
@@ -28,6 +28,7 @@
 #include <vector>
 
 #include <stdint.h>
+#include <boost/noncopyable.hpp>
 
 #include "io/filesystem/filesystem_exceptions.h"
 
@@ -147,4 +148,4 @@ private:
 
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_FILESYSTEM_H

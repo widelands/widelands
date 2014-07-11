@@ -19,15 +19,14 @@
 
 #include "wui/game_tips.h"
 
-#include "constants.h"
+#include "base/i18n.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "profile/profile.h"
-#include "text_layout.h"
+#include "wui/text_layout.h"
 
 #define DEFAULT_INTERVAL 5  // seconds
 #define BG_IMAGE "pics/tips_bg.png"

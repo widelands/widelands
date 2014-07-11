@@ -16,7 +16,7 @@ carrier=1
 
 [idle]
 pics=idle_??.png
-sfx=0 ../../../sound/hammering/hammering
+sfx=../../../sound/hammering/hammering
 hotspot=12 28
 fps=10
 

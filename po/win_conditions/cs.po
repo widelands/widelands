@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-15 03:08+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-05-29 18:29+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:40+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:39+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: cs\n"
 
 #: ../../scripting/win_condition_texts.lua:2
@@ -36,6 +36,8 @@ msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as "
 "spectator if you want."
 msgstr ""
+"Ztratil jsi poslední skladiště a proto jsi poražen. Můžeš pokračovat jako "
+"pozorovatel pokud chceš."
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
@@ -105,8 +107,9 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:110
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Celkem: %i bod"
+msgstr[1] "Celkem: %i body"
+msgstr[2] "Celkem: %i bodů"
 
 #: TRANSLATORS: Context: 'The game will end in %s.'
 #: ../../scripting/win_conditions/02_collectors.lua:123
@@ -116,8 +119,9 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:125
 msgid "%i minute"
 msgid_plural "%i minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i minuta"
+msgstr[1] "%i minuty"
+msgstr[2] "%i minut"
 
 #: ../../scripting/win_conditions/02_collectors.lua:127
 msgid "The game will end in %s."
@@ -151,8 +155,9 @@ msgstr "%s ovládá více než polovinu mapy."
 #: ../../scripting/win_conditions/03_territorial_time.lua:201
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Stále máš %i minutu k zabránění vítězství."
+msgstr[1] "Stále máš %i minuty k zabránění vítězství."
+msgstr[2] "Stále máš %i minut k zabránění vítězství."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:162
 #: ../../scripting/win_conditions/03_territorial_time.lua:206
@@ -163,8 +168,9 @@ msgstr "Olvládáš více než polovinu mapy."
 #: ../../scripting/win_conditions/03_territorial_time.lua:208
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vydrž ještě %i minutu a vyhraješ."
+msgstr[1] "Vydrž ještě %i minuty a vyhraješ."
+msgstr[2] "Vydrž ještě %i minut a vyhraješ."
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:13
 msgid "Territorial Time"
@@ -177,6 +183,9 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
 msgstr ""
+"Každý hráč nebo tým se snaží získat více než polovinu mapy. Vítězí hráč nebo "
+"tým, který je schopen udržet si tento prostor po dobu alespoň 20 minut nebo "
+"ten s největším uzemím po uplynutí 4 hodin, podle toho, co nastane dříve."
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:21
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -189,15 +198,17 @@ msgstr ""
 #: ../../scripting/win_conditions/03_territorial_time.lua:222
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "V opačném případě hra skončí za %i minutu."
+msgstr[1] "V opačném případě hra skončí za %i minuty."
+msgstr[2] "V opačném případě hra skončí za %i minut."
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:227
 #: ../../scripting/win_conditions/04_wood_gnome.lua:83
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hra skončí za %i minutu."
+msgstr[1] "Hra skončí za %i minuty."
+msgstr[2] "Hra skončí za %i minut."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid "Wood Gnome"
@@ -222,8 +233,9 @@ msgstr "Vlastněné stromy"
 #: ../../scripting/win_conditions/04_wood_gnome.lua:145
 msgid "%i tree"
 msgid_plural "%i trees"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i strom"
+msgstr[1] "%i stromy"
+msgstr[2] "%i stromů"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:91
 msgid "%1$s has %2$s at the moment."
@@ -231,7 +243,7 @@ msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "%1$s had %2$s."
-msgstr ""
+msgstr "%1$s měl %2$s."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:147
 msgid "The winner is %1$s with %2$s."

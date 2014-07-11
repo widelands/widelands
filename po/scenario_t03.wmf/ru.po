@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-06 19:13+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-06-11 12:48+0000\n"
 "Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:31+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:30+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
 #: ../../campaigns/t03.wmf/scripting/texts.lua:23
@@ -28,10 +28,12 @@ msgid ""
 "Build up a basic food economy to provide your people with food – a fisher’s "
 "hut, a hunter’s hut, a well, a farm and a bakery."
 msgstr ""
+"Создайте базовое производство пищи, чтобы обеспечить ваших людей едой – "
+"хижину рыболова, хижину охотника, колодец и пекарню."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:30
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Постройте ранчо"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:32
 msgid "Remember to build a cattle farm"
@@ -54,6 +56,9 @@ msgid ""
 "Build a donjon at the north-east of your territory to get greater visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"Постройте дозорную башню на северо-востоке вашей территории, чтобы получить "
+"лучшую дальность видимости и защитить ваших людей от внезапной атаки "
+"противника."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 #: ../../campaigns/t03.wmf/scripting/texts.lua:50
@@ -85,7 +90,7 @@ msgstr "Постройте крепость"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:69
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Постройте крепость на востоке от гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
 #: ../../campaigns/t03.wmf/scripting/texts.lua:76
@@ -121,7 +126,7 @@ msgstr "Постройте склад"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Постройте склад западнее гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:95
 msgid ""
@@ -486,7 +491,7 @@ msgid ""
 "started a better life somewhere else."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:374
+#: ../../campaigns/t03.wmf/scripting/texts.lua:375
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to ever see "
@@ -496,11 +501,11 @@ msgid ""
 "strength my people have. I can’t wait to see it again in its old beauty."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:379
+#: ../../campaigns/t03.wmf/scripting/texts.lua:380
 msgid "Victory"
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:380
+#: ../../campaigns/t03.wmf/scripting/texts.lua:381
 msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
@@ -508,18 +513,18 @@ msgstr ""
 "Вы завершили последнюю миссию ознакомительной кампании. Вы можете продолжить "
 "играть, если хотите, или перейти к следующей кампании."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:386
+#: ../../campaigns/t03.wmf/scripting/texts.lua:387
 msgid "Military Assault"
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:388
+#: ../../campaigns/t03.wmf/scripting/texts.lua:389
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:390
+#: ../../campaigns/t03.wmf/scripting/texts.lua:391
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -527,15 +532,15 @@ msgid ""
 "are set upon me today."
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:394
+#: ../../campaigns/t03.wmf/scripting/texts.lua:395
 msgid "So be it!"
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:399
+#: ../../campaigns/t03.wmf/scripting/texts.lua:400
 msgid "Khantrukh says:"
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:401
+#: ../../campaigns/t03.wmf/scripting/texts.lua:402
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
@@ -546,7 +551,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

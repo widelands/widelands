@@ -17,15 +17,16 @@
  *
  */
 
-#ifndef FONT_HANDLER1_H // TODO: rename
-#define FONT_HANDLER1_H
+// TODO: rename
+#ifndef WL_GRAPHIC_FONT_HANDLER1_H
+#define WL_GRAPHIC_FONT_HANDLER1_H
 
 #include <string>
 
 #include <boost/noncopyable.hpp>
 
-#include "align.h"
-#include "point.h"
+#include "graphic/align.h"
+#include "base/point.h"
 
 class FileSystem;
 class Image;
@@ -38,7 +39,7 @@ namespace UI {
  */
 class IFont_Handler1 : boost::noncopyable {
 public:
-	virtual ~IFont_Handler1() {};
+	virtual ~IFont_Handler1() {}
 
 	/*
 	 * Renders the given text into an image. The image is cached and therefore
@@ -48,10 +49,10 @@ public:
 };
 
 // Create a new Font_Handler1. Ownership for the objects is not taken.
-IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs);
+IFont_Handler1 * create_fonthandler(Graphic* gr);
 
 extern IFont_Handler1 * g_fh1;
 
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER1_H

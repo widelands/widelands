@@ -19,6 +19,7 @@
 
 #include "scripting/scripting.h"
 
+#include <memory>
 #include <stdexcept>
 #include <string>
 
@@ -28,8 +29,8 @@
 #endif
 #include <stdint.h>
 
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "scripting/c_utils.h"
 #include "scripting/factory.h"
 #include "scripting/lua_bases.h"
@@ -38,6 +39,7 @@
 #include "scripting/lua_game.h"
 #include "scripting/lua_globals.h"
 #include "scripting/lua_map.h"
+#include "scripting/lua_path.h"
 #include "scripting/lua_root.h"
 #include "scripting/lua_table.h"
 #include "scripting/lua_ui.h"
@@ -120,7 +122,9 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 	}
 	lua_setglobal(L, "__file__");
 
-	return std::unique_ptr<LuaTable>(new LuaTable(L));
+	std::unique_ptr<LuaTable> return_value(new LuaTable(L));
+	lua_pop(L, 1);
+	return return_value;
 }
 
 // Reads the 'filename' from the 'fs' and returns its content.
@@ -171,6 +175,9 @@ LuaInterface::LuaInterface() {
 	// Now our own
 	LuaGlobals::luaopen_globals(m_L);
 
+	// And helper methods.
+	LuaPath::luaopen_path(m_L);
+
 	// Also push the "wl" table.
 	lua_newtable(m_L);
 	lua_setglobal(m_L, "wl");
@@ -214,7 +221,9 @@ std::unique_ptr<LuaTable> LuaInterface::get_hook(const std::string& name) {
 	}
 	lua_remove(m_L, -2);
 
-	return std::unique_ptr<LuaTable>(new LuaTable(m_L));
+	std::unique_ptr<LuaTable> return_value(new LuaTable(m_L));
+	lua_pop(m_L, 1);
+	return return_value;
 }
 
 

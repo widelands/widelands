@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MULTI_SELECT_H
-#define MULTI_SELECT_H
+#ifndef WL_EDITOR_TOOLS_MULTI_SELECT_H
+#define WL_EDITOR_TOOLS_MULTI_SELECT_H
 
 #include <cassert>
 #include <climits>
@@ -73,4 +73,4 @@ private:
 	std::vector<bool> m_enabled;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_MULTI_SELECT_H

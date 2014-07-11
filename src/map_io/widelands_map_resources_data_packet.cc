@@ -19,13 +19,15 @@
 
 #include "map_io/widelands_map_resources_data_packet.h"
 
+#include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/world.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -33,14 +35,13 @@ namespace Widelands {
 
 
 void Map_Resources_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
+	(FileSystem & fs, Editor_Game_Base & egbase, const OneWorldLegacyLookupTable& lookup_table)
 {
 	FileRead fr;
-
 	fr.Open(fs, "binary/resource");
 
 	Map   & map   = egbase.map();
-	World & world = map.world();
+	const World & world = egbase.world();
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
@@ -55,11 +56,11 @@ void Map_Resources_Data_Packet::Read
 		std::map<uint8_t, uint8_t> smap;
 		for (uint8_t i = 0; i < nr_res; ++i) {
 			uint8_t const id = fr.Unsigned16();
-			char const * const buffer = fr.CString();
-			int32_t const res = world.get_resource(buffer);
+			const std::string resource_name = lookup_table.lookup_resource(fr.CString());
+			int32_t const res = world.get_resource(resource_name.c_str());
 			if (res == -1)
 				throw game_data_error
-					("resource '%s' exists in map but not in world", buffer);
+					("resource '%s' exists in map but not in world", resource_name.c_str());
 			smap[id] = res;
 		}
 
@@ -102,7 +103,7 @@ void Map_Resources_Data_Packet::Read
  * in nearly all cases.
  */
 void Map_Resources_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase)
 {
 	FileWrite fw;
 
@@ -113,13 +114,13 @@ void Map_Resources_Data_Packet::Write
 	// (saved like terrains)
 	// Write the number of resources
 	const Map   & map   = egbase.map  ();
-	const World & world = map   .world();
+	const World& world = egbase.world();
 	uint8_t const nr_res = world.get_nr_resources();
 	fw.Unsigned16(nr_res);
 
 	//  write all resources names and their id's
 	for (int32_t i = 0; i < nr_res; ++i) {
-		const Resource_Descr & res = *world.get_resource(i);
+		const ResourceDescription & res = *world.get_resource(i);
 		fw.Unsigned16(i);
 		fw.CString(res.name().c_str());
 	}

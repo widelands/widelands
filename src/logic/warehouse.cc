@@ -21,7 +21,10 @@
 
 #include <algorithm>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -29,7 +32,6 @@
 #include "economy/ware_instance.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
-#include "log.h"
 #include "logic/battle.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
@@ -44,8 +46,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -1227,7 +1227,7 @@ void Warehouse::aggressor(Soldier & enemy)
 
 	Soldier & defender =
 		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-	defender.start_task_defense(game, false, owner().get_retreat_percentage());
+	defender.start_task_defense(game, false);
 }
 
 bool Warehouse::attack(Soldier & enemy)
@@ -1239,7 +1239,7 @@ bool Warehouse::attack(Soldier & enemy)
 	if (count_workers(game, soldier_index, noreq)) {
 		Soldier & defender =
 			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-		defender.start_task_defense(game, true, 0);
+		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");
 		return true;
 	}

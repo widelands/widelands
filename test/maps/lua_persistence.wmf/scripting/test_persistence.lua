@@ -25,8 +25,8 @@ function save_coroutine()
    a = { "Hallo", "Welt" }
    c = { func = function(a) return "I say " .. a .. "!" end }
    field = map:get_field(32,34)
-   tree = map:place_immovable("tree3", field)
-   removed_tree = map:place_immovable("tree4", map:get_field(34,34))
+   tree = map:place_immovable("spruce_summer_old", field)
+   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34))
    removed_tree:remove()
 
    corout = coroutine.create(function()
@@ -86,7 +86,7 @@ function check_coroutine()
    assert_function(c.func)
    assert_equal("I say zonk!", c.func("zonk"))
 
-   assert_equal("tree3", tree.name)
+   assert_equal("spruce_summer_old", tree.name)
 
    assert_equal(32, field.x)
    assert_equal(34, field.y)

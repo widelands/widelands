@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_GEOMETRY_IO_H
-#define WIDELANDS_GEOMETRY_IO_H
+#ifndef WL_LOGIC_WIDELANDS_GEOMETRY_IO_H
+#define WL_LOGIC_WIDELANDS_GEOMETRY_IO_H
 
 #include "io/fileread.h"
 #include "logic/widelands.h"
@@ -97,10 +97,10 @@ Coords ReadCoords32_allow_null(StreamRead* fr, const Extent& extent);
 Area<Coords, uint16_t> ReadArea48(StreamRead* fr, const Extent& extent);
 
 // Writes 'd' to 'wr'.
-void WriteDirection8(StreamWrite* wr, Direction const d);
+void WriteDirection8(StreamWrite* wr, Direction d);
 
 // Writes 'd' into 'wr'.
-void WriteDirection8_allow_null(StreamWrite* wr, Direction const d);
+void WriteDirection8_allow_null(StreamWrite* wr, Direction d);
 
 // Writes 'c' to 'wr'.
 void WriteCoords32(StreamWrite* wr, const Coords& c);
@@ -110,4 +110,4 @@ void WriteArea48(StreamWrite* wr, Area<Coords, uint16_t> const area);
 
 }  // namespace Widelands
 
-#endif /* end of include guard: WIDELANDS_GEOMETRY_IO_H */
+#endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_IO_H

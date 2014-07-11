@@ -17,8 +17,10 @@
  *
  */
 
-#ifndef UI_MULTILINEEDITBOX_H
-#define UI_MULTILINEEDITBOX_H
+#ifndef WL_UI_BASIC_MULTILINEEDITBOX_H
+#define WL_UI_BASIC_MULTILINEEDITBOX_H
+
+#include <memory>
 
 #include <boost/signals2.hpp>
 
@@ -62,4 +64,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_MULTILINEEDITBOX_H

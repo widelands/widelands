@@ -25,16 +25,15 @@
 #include <boost/lambda/construct.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/type_traits.hpp>
-#include <libintl.h>
 
-#include "debugconsole.h"
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/font_handler.h"
-#include "helper.h"
-#include "i18n.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
+#include "logic/constants.h"
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
@@ -44,8 +43,8 @@
 #include "logic/tribe.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/building_statistics_menu.h"
+#include "wui/debugconsole.h"
 #include "wui/encyclopedia_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
@@ -64,6 +63,8 @@ using Widelands::Map;
 using boost::format;
 
 
+namespace  {
+
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
 	(Widelands::TCoords<Widelands::FCoords> const c, Interactive_Player& iap)
@@ -71,6 +72,8 @@ int32_t Int_Player_overlay_callback_function
 	assert(iap.get_player());
 	return iap.get_player()->get_buildcaps(c);
 }
+
+}  // namespace
 
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
@@ -255,19 +258,16 @@ void Interactive_Player::think()
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
 	{
-		char         buffer[128];
-		char const * msg_icon    = "pics/menu_toggle_oldmessage_menu.png";
-		char const * msg_tooltip = _("Messages");
+		char const * msg_icon = "pics/menu_toggle_oldmessage_menu.png";
+		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
-			snprintf
-				(buffer, sizeof(buffer),
-				 ngettext("%u new message", "%u new messages", nr_new_messages),
-				 nr_new_messages);
-			msg_tooltip = buffer;
+			msg_tooltip =
+			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
+			    nr_new_messages).str();
 		}
 		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
@@ -296,7 +296,7 @@ void Interactive_Player::postload()
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
 	delete m_fieldaction.window;

@@ -21,39 +21,50 @@
 
 #include <cstring>
 #include <iostream>
+#include <memory>
 
 #include <SDL_image.h>
-#include <config.h>
 
+#include "base/deprecated.h"
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "build_info.h"
-#include "compile_diagnostics.h"
-#include "constants.h"
-#include "container_iterate.h"
+#include "config.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
-#include "graphic/image_loader_impl.h"
+#include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/render/gl_surface_screen.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
-#include "log.h"
 #include "logic/roadtype.h"
 #include "ui_basic/progresswindow.h"
-#include "upcast.h"
-#include "wexception.h"
 
 using namespace std;
 
 Graphic * g_gr;
 bool g_opengl;
+
+#define FALLBACK_GRAPHICS_WIDTH 800
+#define FALLBACK_GRAPHICS_HEIGHT 600
+#define FALLBACK_GRAPHICS_DEPTH 32
+
+namespace  {
+
+/// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
+/// These are all surfaces that are not loaded from disk.
+const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
+
+}  // namespace
 
 /**
  * Initialize the SDL video mode.
@@ -63,9 +74,8 @@ Graphic::Graphic()
 	m_fallback_settings_in_effect (false),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
-	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
-	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get())),
+	image_cache_(new ImageCache(surface_cache_.get())),
 	animation_manager_(new AnimationManager())
 {
 	ImageTransformations::initialize();
@@ -135,7 +145,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log("Graphics: FULLSCREEN ENABLED\n");
 
 	bool use_arb = true;
-	const char * extensions;
+	const char * extensions = nullptr;
 
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
@@ -172,6 +182,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 				throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
 		}
 	}
+	Surface::display_format_is_now_defined();
 
 	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
@@ -223,9 +234,9 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
-GCC_DIAG_ON ("-Wold-style-cast")
+DIAG_ON ("-Wold-style-cast")
 	}
 
 	/* Information about the video capabilities. */
@@ -313,6 +324,9 @@ GCC_DIAG_ON ("-Wold-style-cast")
 
 	m_sdl_screen = sdlsurface;
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
+
+	pic_road_normal_.reset(load_image("world/pics/roadt_normal.png"));
+	pic_road_busy_.reset(load_image("world/pics/roadt_busy.png"));
 }
 
 bool Graphic::check_fallback_settings_in_effect()
@@ -321,7 +335,7 @@ bool Graphic::check_fallback_settings_in_effect()
 }
 
 void Graphic::cleanup() {
-	flush_maptextures();
+	m_maptextures.clear();
 	surface_cache_->flush();
 	// TODO: this should really not be needed, but currently is :(
 	if (UI::g_fh)
@@ -449,110 +463,12 @@ void Graphic::refresh(bool force)
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const Image* image, StreamWrite * sw) const {
-	save_png_(*image->surface(), sw);
-}
-void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
-{
-	// Save a png
-	png_structp png_ptr =
-		png_create_write_struct
-			(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
-
-	if (!png_ptr)
-		throw wexception("Graphic::save_png: could not create png struct");
-
-	png_infop info_ptr = png_create_info_struct(png_ptr);
-	if (!info_ptr) {
-		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(nullptr));
-		throw wexception("Graphic::save_png: could not create png info struct");
-	}
-
-	// Set jump for error
-	if (setjmp(png_jmpbuf(png_ptr))) {
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-		throw wexception("Graphic::save_png: Error writing PNG!");
-	}
-
-	//  Set another write function. This is potentially dangerouse because the
-	//  flush function is internally called by png_write_end(), this will crash
-	//  on newer libpngs. See here:
-	//     https://bugs.freedesktop.org/show_bug.cgi?id=17212
-	//
-	//  Simple solution is to define a dummy flush function which I did here.
-	png_set_write_fn
-		(png_ptr,
-		 sw,
-		 &Graphic::m_png_write_function, &Graphic::m_png_flush_function);
-
-	// Fill info struct
-	png_set_IHDR
-		(png_ptr, info_ptr, surf.width(), surf.height(),
-		 8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
-		 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-
-	// Start writing
-	png_write_info(png_ptr, info_ptr);
-	{
-		uint16_t surf_w = surf.width();
-		uint16_t surf_h = surf.height();
-		uint32_t row_size = 4 * surf_w;
-
-		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
-
-		//Write each row
-		const SDL_PixelFormat & fmt = surf.format();
-		surf.lock(Surface::Lock_Normal);
-
-		// Write each row
-		for (uint32_t y = 0; y < surf_h; ++y) {
-			for (uint32_t x = 0; x < surf_w; ++x) {
-				RGBAColor color;
-				color.set(fmt, surf.get_pixel(x, y));
-				row[4 * x] = color.r;
-				row[4 * x + 1] = color.g;
-				row[4 * x + 2] = color.b;
-				row[4 * x + 3] = color.a;
-			}
-
-			png_write_row(png_ptr, row.get());
-		}
-
-		surf.unlock(Surface::Unlock_NoChange);
-	}
-
-	// End write
-	png_write_end(png_ptr, info_ptr);
-	png_destroy_write_struct(&png_ptr, &info_ptr);
+	save_surface_to_png(image->surface(), sw);
 }
 
-void Graphic::flush_maptextures()
+uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
-	for (Texture* texture : m_maptextures)
-		delete texture;
-	m_maptextures.clear();
-}
-
-/**
- * Creates a terrain texture.
- *
- * fnametempl is a filename with possible wildcard characters '?'. The function
- * fills the wildcards with decimal numbers to get the different frames of a
- * texture animation. For example, if fnametempl is "foo_??.png", it tries
- * "foo_00.png", "foo_01.png" etc...
- * frametime is in milliseconds.
- * \return 0 if the texture couldn't be loaded.
- * \note Terrain textures are not reused, even if fnametempl matches.
-*/
-uint32_t Graphic::get_maptexture(const string& fnametempl, uint32_t frametime)
-{
-	try {
-		m_maptextures.push_back
-			(new Texture(fnametempl, frametime, *m_sdl_screen->format));
-	} catch (exception& e) {
-		log("Failed to load maptexture %s: %s\n", fnametempl.c_str(), e.what());
-		return 0;
-	}
-
+	m_maptextures.emplace_back(new Texture(texture_files, frametime, *m_sdl_screen->format));
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
 
@@ -567,47 +483,14 @@ void Graphic::animate_maptextures(uint32_t time)
 }
 
 /**
- * reset that the map texture have been animated
- */
-void Graphic::reset_texture_animation_reminder()
-{
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
-		m_maptextures[i]->reset_was_animated();
-	}
-}
-
-/**
  * Save a screenshot to the given file.
 */
 void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
 	StreamWrite * sw = g_fs->OpenStreamWrite(fname);
-	Surface& screen = *screen_.get();
-	save_png_(screen, sw);
+	save_surface_to_png(screen_.get(), sw);
 	delete sw;
-}
-
-/**
- * A helper function for save_png.
- * Writes the compressed data to the StreamWrite.
- * @see save_png()
- */
-void Graphic::m_png_write_function
-	(png_structp png_ptr, png_bytep data, png_size_t length)
-{
-	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Data(data, length);
-}
-
-/**
-* A helper function for save_png.
-* Flush function to avoid crashes with default libpng flush function
-* @see save_png()
-*/
-void Graphic::m_png_flush_function
-	(png_structp png_ptr)
-{
-	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Flush();
 }
 
 /**
@@ -617,24 +500,9 @@ void Graphic::m_png_flush_function
 Texture * Graphic::get_maptexture_data(uint32_t id)
 {
 	--id; // ID 1 is at m_maptextures[0]
-	if (id < m_maptextures.size())
-		return m_maptextures[id];
-	else
-		return nullptr;
-}
 
-
-/**
- * Sets the name of the current world and loads the fitting road and edge textures
- */
-void Graphic::set_world(string worldname) {
-	char buf[255];
-
-	// Load the road textures
-	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
-	pic_road_normal_.reset(image_loader_->load(buf));
-	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
-	pic_road_busy_.reset(image_loader_->load(buf));
+	assert(id < m_maptextures.size());
+	return m_maptextures[id].get();
 }
 
 /**

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_OBJECTIVE_MENU_H
-#define GAME_OBJECTIVE_MENU_H
+#ifndef WL_WUI_GAME_OBJECTIVES_MENU_H
+#define WL_WUI_GAME_OBJECTIVES_MENU_H
 
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
@@ -44,4 +44,4 @@ private:
 	UI::Multiline_Textarea objectivetext;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_OBJECTIVES_MENU_H

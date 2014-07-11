@@ -17,13 +17,12 @@
  *
  */
 
-#ifndef NOTIFICATION_H
-#define NOTIFICATION_H
+#ifndef WL_LOGIC_NOTIFICATION_H
+#define WL_LOGIC_NOTIFICATION_H
 
 #include <algorithm>
 #include <vector>
 
-#include "container_iterate.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
@@ -55,8 +54,9 @@ public:
 	}
 
 	void send(const T & note) const {
-		container_iterate_const(Links, m_links, i)
-			(*i.current)->receive(note);
+		for (auto& link : m_links) {
+			link->receive(note);
+		}
 	}
 
 private:
@@ -127,4 +127,4 @@ struct NoteFieldTransformed {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_NOTIFICATION_H

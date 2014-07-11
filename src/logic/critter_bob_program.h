@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CRITTER_BOB_PROGRAM_H
-#define CRITTER_BOB_PROGRAM_H
+#ifndef WL_LOGIC_CRITTER_BOB_PROGRAM_H
+#define WL_LOGIC_CRITTER_BOB_PROGRAM_H
 
 #include "logic/bob.h"
 
@@ -43,16 +43,6 @@ struct Critter_BobAction {
 };
 
 struct Critter_BobProgram : public BobProgramBase {
-	struct Parser {
-		Critter_Bob_Descr * descr;
-		std::string         directory;
-		Profile           * prof;
-	};
-
-	typedef
-		void (Critter_BobProgram::*parse_t)
-			(Critter_BobAction *, Parser *, const std::vector<std::string> & cmd);
-
 	Critter_BobProgram(const std::string & name) : m_name(name) {}
 	virtual ~Critter_BobProgram() {}
 
@@ -63,26 +53,13 @@ struct Critter_BobProgram : public BobProgramBase {
 		return m_actions[idx];
 	}
 
-	void parse(Parser *, char const * name);
-
-private:
-	struct ParseMap {
-		const char * name;
-		parse_t      function;
-	};
-
-private:
-	void parse_remove
-		(Critter_BobAction *, Parser *, const std::vector<std::string> & cmd);
+	void parse(const std::vector<std::string>& lines);
 
 private:
 	std::string                    m_name;
 	std::vector<Critter_BobAction> m_actions;
-
-private:
-	static const ParseMap          s_parsemap[];
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CRITTER_BOB_PROGRAM_H

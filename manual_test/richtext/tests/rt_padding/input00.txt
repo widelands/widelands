@@ -1,5 +1,0 @@
-<rt padding=5>
-<p>
-<img src="red_box.png">
-</p>
-</rt>

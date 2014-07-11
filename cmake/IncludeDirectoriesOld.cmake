@@ -1,0 +1,7 @@
+macro(_include_directories_internal TARGET DIR SYSTEM)
+  if ("${SYSTEM}" STREQUAL "TRUE")
+    include_directories(SYSTEM "${DIR}")
+  else ("${SYSTEM}" STREQUAL "TRUE")
+    include_directories("${DIR}")
+  endif ("${SYSTEM}" STREQUAL "TRUE")
+endmacro(_include_directories_internal TARGET DIR SYSTEM)

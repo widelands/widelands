@@ -17,33 +17,27 @@
  *
  */
 
-#ifndef EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
-#define EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 
+#include <memory>
 #include <vector>
 
+#include "editor/ui_menus/categorized_item_selection_menu.h"
 #include "editor/ui_menus/editor_tool_options_menu.h"
-#include "ui_basic/tabpanel.h"
+#include "editor/tools/editor_place_immovable_tool.h"
 
 struct Editor_Interactive;
-struct Editor_Place_Immovable_Tool;
-namespace UI {struct Checkbox;}
 
-struct Editor_Tool_Place_Immovable_Options_Menu :
-	public Editor_Tool_Options_Menu
-{
-	Editor_Tool_Place_Immovable_Options_Menu
-		(Editor_Interactive          &,
-		 Editor_Place_Immovable_Tool &,
-		 UI::UniqueWindow::Registry  &);
+struct Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu {
+	Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive&,
+	                                         Editor_Place_Immovable_Tool&,
+	                                         UI::UniqueWindow::Registry&);
 	virtual ~Editor_Tool_Place_Immovable_Options_Menu();
 
 private:
-	std::vector<UI::Checkbox *> m_checkboxes;
-	UI::Tab_Panel m_tabpanel;
-	Editor_Place_Immovable_Tool & m_pit;
-	void clicked(int32_t, bool);
-	bool m_click_recursion_protect;
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::Immovable_Descr, Editor_Place_Immovable_Tool>>
+	multi_select_menu_;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARES_QUEUE_H
-#define WARES_QUEUE_H
+#ifndef WL_ECONOMY_WARES_QUEUE_H
+#define WL_ECONOMY_WARES_QUEUE_H
 
 #include "logic/immovable.h"
 #include "logic/widelands.h"
@@ -32,7 +32,6 @@ class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 class Player;
 class Request;
-class WaresQueue;
 class Worker;
 
 /**
@@ -93,4 +92,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_WARES_QUEUE_H

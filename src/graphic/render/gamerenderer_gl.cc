@@ -22,13 +22,17 @@
 #include <SDL_image.h>
 
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/render/gl_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
@@ -49,24 +53,16 @@ GameRendererGL::~GameRendererGL()
 {
 }
 
-const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture(const Widelands::World & world)
+const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture()
 {
-	const std::string fname = world.basedir() + "/pics/edge.png";
+	const std::string fname = "world/pics/edge.png";
 	const std::string cachename = std::string("gltex#") + fname;
 
 	if (Surface* surface = g_gr->surfaces().get(cachename))
 		return dynamic_cast<GLSurfaceTexture *>(surface);
 
-	// TODO: This duplicates code from the ImageLoader, but as we cannot convert
-	// a GLSurface into another format currently, we have to eat this frog.
-	FileRead fr;
-	fr.Open(*g_fs, fname);
-
-	SDL_Surface * sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-	if (!sdlsurf)
-		throw wexception("%s", IMG_GetError());
-
-	GLSurfaceTexture * edgetexture = new GLSurfaceTexture(sdlsurf, true);
+	SDL_Surface* sdlsurf = load_image_as_sdl_surface(fname, g_fs);
+	GLSurfaceTexture* edgetexture = new GLSurfaceTexture(sdlsurf, true);
 	g_gr->surfaces().insert(cachename, edgetexture, false);
 	return edgetexture;
 }
@@ -117,11 +113,17 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 
 void GameRendererGL::draw()
 {
+	const World & world = m_egbase->world();
+	if (m_terrain_freq.size() < world.terrains().get_nitems()) {
+		m_terrain_freq.resize(world.terrains().get_nitems());
+		m_terrain_edge_freq.resize(world.terrains().get_nitems());
+	}
+
 	m_surface = dynamic_cast<GLSurface *>(m_dst->get_surface());
 	if (!m_surface)
 		return;
 	m_rect = m_dst->get_rect();
-	m_surface_offset = m_dst_offset + m_rect + m_dst->get_offset();
+	m_surface_offset = m_dst_offset + m_rect.top_left() + m_dst->get_offset();
 
 	m_patch_size.x = m_minfx - 1;
 	m_patch_size.y = m_minfy;
@@ -242,8 +244,6 @@ void GameRendererGL::prepare_terrain_base()
 		m_patch_vertices_size = reqsize;
 	}
 
-	if (m_terrain_freq.size() < 16)
-		m_terrain_freq.resize(16);
 	m_terrain_freq.assign(m_terrain_freq.size(), 0);
 
 	collect_terrain_base(true);
@@ -273,8 +273,7 @@ void GameRendererGL::prepare_terrain_base()
 
 void GameRendererGL::draw_terrain_base()
 {
-	const Map & map = m_egbase->map();
-	const World & world = map.world();
+	const World & world = m_egbase->world();
 
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
@@ -313,8 +312,7 @@ void GameRendererGL::add_terrain_dither_triangle
 	(bool onlyscan, Terrain_Index ter, const Coords & edge1, const Coords & edge2, const Coords & opposite)
 {
 	if (onlyscan) {
-		if (ter >= m_terrain_edge_freq.size())
-			m_terrain_edge_freq.resize(ter + 1);
+		assert(ter < m_terrain_edge_freq.size());
 		m_terrain_edge_freq[ter] += 1;
 	} else {
 		static const float TyZero = 1.0 / TEXTURE_HEIGHT;
@@ -340,7 +338,7 @@ void GameRendererGL::add_terrain_dither_triangle
 void GameRendererGL::collect_terrain_dither(bool onlyscan)
 {
 	const Map & map = m_egbase->map();
-	const World & world = map.world();
+	const World & world = m_egbase->world();
 
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
 		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
@@ -354,12 +352,12 @@ void GameRendererGL::collect_terrain_dither(bool onlyscan)
 			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
 			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
 			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
-			int32_t lyr_d = world.get_ter(ter_d).dither_layer();
-			int32_t lyr_r = world.get_ter(ter_r).dither_layer();
-			int32_t lyr_u = world.get_ter(ter_u).dither_layer();
-			int32_t lyr_rr = world.get_ter(ter_rr).dither_layer();
-			int32_t lyr_l = world.get_ter(ter_l).dither_layer();
-			int32_t lyr_dd = world.get_ter(ter_dd).dither_layer();
+			int32_t lyr_d = world.terrain_descr(ter_d).dither_layer();
+			int32_t lyr_r = world.terrain_descr(ter_r).dither_layer();
+			int32_t lyr_u = world.terrain_descr(ter_u).dither_layer();
+			int32_t lyr_rr = world.terrain_descr(ter_rr).dither_layer();
+			int32_t lyr_l = world.terrain_descr(ter_l).dither_layer();
+			int32_t lyr_dd = world.terrain_descr(ter_dd).dither_layer();
 
 			Coords f(fx, fy);
 			Coords rn(fx + 1, fy);
@@ -408,8 +406,6 @@ void GameRendererGL::prepare_terrain_dither()
 {
 	static_assert(sizeof(dithervertex) == 32, "assert(sizeof(dithervertex) == 32) failed.");
 
-	if (m_terrain_edge_freq.size() < 16)
-		m_terrain_edge_freq.resize(16);
 	m_terrain_edge_freq.assign(m_terrain_edge_freq.size(), 0);
 
 	collect_terrain_dither(true);
@@ -439,9 +435,6 @@ void GameRendererGL::prepare_terrain_dither()
 
 void GameRendererGL::draw_terrain_dither()
 {
-	const Map & map = m_egbase->map();
-	const World & world = map.world();
-
 	if (m_edge_vertices_size == 0)
 		return;
 
@@ -456,7 +449,7 @@ void GameRendererGL::draw_terrain_dither()
 	glClientActiveTextureARB(GL_TEXTURE1_ARB);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].edgex);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	GLuint edge = get_dither_edge_texture(world)->get_gl_texture();
+	GLuint edge = get_dither_edge_texture()->get_gl_texture();
 	glBindTexture(GL_TEXTURE_2D, edge);
 	glEnable(GL_TEXTURE_2D);
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
@@ -478,7 +471,7 @@ void GameRendererGL::draw_terrain_dither()
 
 		const Texture & texture =
 				*g_gr->get_maptexture_data
-					(world.terrain_descr(ter).get_texture());
+					(m_egbase->world().terrain_descr(ter).get_texture());
 		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
 		glDrawArrays
 			(GL_TRIANGLES,

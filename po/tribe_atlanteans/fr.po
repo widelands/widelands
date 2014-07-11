@@ -6,268 +6,268 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-22 10:10+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-04-16 15:44+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:32+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:31+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr ""
+msgstr "Votre caserne a découvert un assaillant."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "Votre caserne est attaquée."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "L'enemi a battu vos soldats dans la caserne."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "Vos soldats ont battu l'enemi dans la caserne."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Votre barricade a découvert un assaillant."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Votre barricade est attaquée."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "L'enemi a battu vos soldats à la barricade."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Vos soldats ont battu l'enemi à la barricade."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/atlanteans/castle/conf:7
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "Votre château à découvert un assaillant."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/atlanteans/castle/conf:8
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Votre château est attaqué."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/atlanteans/castle/conf:9
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "L'enemi à vaincu vos soldats au château."
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/atlanteans/castle/conf:10
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi au château."
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "Votre citadelle à découvert un assaillant."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "Votre citadelle est attaquée."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "L'enemi à vaincu vos soldats à la citadelle."
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi à la citadelle."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 msgid "Your donjon discovered an aggressor."
-msgstr ""
+msgstr "Votre donjon à découvert un assaillant."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your donjon is under attack."
-msgstr ""
+msgstr "Votre donjon est attaqué."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr ""
+msgstr "L'ennemi à vaincu vos soldats au donjon."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi au donjon."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Votre forteresse à découvert un assaillant."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Votre forteresse est attaquée."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "L'ennemi à vaincu vos soldats à la forteresse."
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi à la forteresse."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhall/conf:7
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Votre salle de gardes à découvert un assaillant."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhall/conf:8
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Votre salle de gardes est attaquée."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhall/conf:9
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "L'ennemi à vaincu vos soldats à la salle de gardes."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhall/conf:10
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi à la salle de gardes."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhouse/conf:7
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Votre salle de gardes à découvert un assaillant."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhouse/conf:8
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Votre salle de gardes est attaquée."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhouse/conf:9
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "L'ennemi à vaincu vos soldats à la salle de gardes."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhouse/conf:10
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi à la salle de gardes."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "Votre tour haute à découvert un assaillant."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/high_tower/conf:11
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "Votre tour haute est attaquée."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/high_tower/conf:12
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "L'ennemi à vaincu vos soldats à la tour haute."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/high_tower/conf:13
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi à la tour haute."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "Votre poste avancé à découvert un assaillant."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Votre poste avancé est attaqué."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "L'ennemi a vaincu vos soldats au poste avancé."
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi au poste avancé."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Votre sentinelle à découvert un assaillant."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Votre sentinelle est attaquée."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "L'ennemi a vaincu vos soldats à la sentinelle."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi à la sentinelle."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "Votre petite tour à découvert un assaillant."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/small_tower/conf:9
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "Votre petite tour est attaquée."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/small_tower/conf:10
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "L'ennemi a vaincu vos soldats à la petite tour."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi à la petite tour."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Votre tour à découvert un assaillant."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/atlanteans/tower/conf:10
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Votre tour est attaquée."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "L'ennemi a vaincu vos soldats à la tour."
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Vos soldats ont vaincu l'ennemi à la tour."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -396,7 +396,7 @@ msgstr "Transporte des objets sur vos routes."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Vos soldats ont occupé votre chateau."
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -958,7 +958,7 @@ msgid "Spider Farm"
 msgstr "Ferme d'araignées"
 
 #: ../../tribes/atlanteans/conf:186
-msgid "Weaving-Mill"
+msgid "Weaving Mill"
 msgstr "Atelier de tissage"
 
 #: ../../tribes/atlanteans/conf:187
@@ -1142,14 +1142,13 @@ msgstr ""
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
-"Golden tabards are produced in Atlantean weaving-mills out of gold yarn. "
+"Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
-"Un tabard doré est produit dans l'atelier de tissage Atlante à partir de "
-"fils dorés. Il est utilisé dans les camps d'entraînement - avec de la "
-"nourriture - pour former les soldats en points de vie du niveau 0 au niveau "
-"1."
+"Les tabards dorés sont produits dans les ateliers de tissage à partir de fil "
+"d'or. Ils sont utilisés au labyrinthe - avec de la nourriture - pour "
+"entraîner la santé des soldats du niveau 0 au niveau 1."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -1164,18 +1163,18 @@ msgstr ""
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
-"golden tabard in the weaving-mill."
+"golden tabard in the weaving mill."
 msgstr ""
-"Ce fil, fait d'or par le tisserand d'or, est utilisé pour le tissage des "
-"tabards dorés exclusifs dans l'atelier de tissage."
+"Ce fil, fait d'or par le tisserand d'or, est utilisé exclusivement pour la "
+"fabrication des tabards dorés à l'atelier de tissage."
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
+msgstr "Vos soldats ont occupé votre salle de gardes."
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Vos soldats ont occupé votre poste de gardes."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -1201,7 +1200,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
+msgstr "Vos soldats ont occupé votre haute tour."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1215,6 +1214,8 @@ msgstr ""
 msgid ""
 "Horses help to carry items along busy roads. They are reared in a horse farm."
 msgstr ""
+"Les chevaux aident au transport des marchandises au long des routes "
+"encombrées. Ils sont élevés au haras."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1433,7 +1434,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
+msgstr "Vos soldats ont occupé votre petite tour."
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1487,23 +1488,22 @@ msgstr "Élève des araignées pour leur soie."
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
-"Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
+"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
-"Le tissu d'araignée est fait à partir de fils d'araignée dans un atelier de "
-"tissage. Il est utilisé dans la fabrique d'outils et le chantier naval. "
-"D'autres bâtiments plus développés nécessitent aussi du tissu d'araignée "
-"pour leur construction."
+"Le tissu d'araignée est fait à partir de fil d'araignée dans un atelier de "
+"tissage. Il est utilisé à la fabrique d'outil et au chantier naval. Certains "
+"bâtiments plus hautement développé ont aussi besoin de tissu d'araignée pour "
+"leur construction."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving-mill."
+"processed into spidercloth in a weaving mill."
 msgstr ""
-"Ces fils sont produits par les araignées, qui sont élevées dans les fermes "
-"aracnéïcoles. Il est transformé en tissu d'araignée dans un atelier de "
-"tissage."
+"Le fil est produit par les araignées, qui sont élevées par les fermes "
+"aracnéïcole. Ils est préparé en tissu dans un atelier de tissage."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
@@ -1539,10 +1539,10 @@ msgstr "Coupe des blocs de granit à partir des pierres disponibles."
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
-"Tabards are produced in the weaving-mill."
+"Tabards are produced in the weaving mill."
 msgstr ""
-"Un tabard et un trident léger sont l'équipement de base pour les jeunes "
-"soldats. Les manteaux sont produits dans l'atelier de tissage."
+"Un tabard et un trident léger sont l'équipement basique des jeunes soldats. "
+"Les tabards sont produits dans l'atelier de tissage."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -1550,7 +1550,7 @@ msgstr "Produit des outils pour les ouvriers."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "Produit des planches à pain."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bucket"
@@ -1598,7 +1598,7 @@ msgstr "Produit des pelles"
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Vos soldats ont occupé votre tour."
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."

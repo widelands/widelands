@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IROUTE_H
-#define IROUTE_H
+#ifndef WL_ECONOMY_IROUTE_H
+#define WL_ECONOMY_IROUTE_H
 
 #include <stdint.h>
 
@@ -38,11 +38,11 @@ struct RoutingNode;
  * interface
  **/
 struct IRoute {
-	virtual ~IRoute() {};
+	virtual ~IRoute() {}
 
 	virtual void init(int32_t) = 0;
 	virtual void insert_as_first(RoutingNode * node) = 0;
 };
 
 }
-#endif
+#endif  // end of include guard: WL_ECONOMY_IROUTE_H

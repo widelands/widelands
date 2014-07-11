@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DISK_FILESYSTEM_H
-#define DISK_FILESYSTEM_H
+#ifndef WL_IO_FILESYSTEM_DISK_FILESYSTEM_H
+#define WL_IO_FILESYSTEM_DISK_FILESYSTEM_H
 
 #include <cstring>
 #include <string>
@@ -54,7 +54,7 @@ public:
 	virtual void Unlink(const std::string & file) override;
 	virtual void Rename(const std::string & old_name, const std::string & new_name) override;
 
-	virtual std::string getBasename() override {return m_directory;};
+	virtual std::string getBasename() override {return m_directory;}
 	virtual unsigned long long DiskSpace() override;
 
 private:
@@ -64,4 +64,4 @@ private:
 	std::string m_directory;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_DISK_FILESYSTEM_H

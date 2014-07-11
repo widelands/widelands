@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BUILDING_STATISTICS_MENU_H
-#define BUILDING_STATISTICS_MENU_H
+#ifndef WL_WUI_BUILDING_STATISTICS_MENU_H
+#define WL_WUI_BUILDING_STATISTICS_MENU_H
 
 #include "ui_basic/progressbar.h"
 #include "ui_basic/table.h"
@@ -72,4 +72,4 @@ private:
 	int32_t validate_pointer(int32_t *, int32_t);
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H

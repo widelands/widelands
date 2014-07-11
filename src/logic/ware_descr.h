@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ITEM_WARE_DESCR_H
-#define ITEM_WARE_DESCR_H
+#ifndef WL_LOGIC_WARE_DESCR_H
+#define WL_LOGIC_WARE_DESCR_H
 
 #include <cstring>
 #include <string>
@@ -27,8 +27,8 @@
 
 #include "logic/instances.h"
 
-struct Profile;
-struct Section;
+class Profile;
+class Section;
 class Image;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
@@ -50,7 +50,7 @@ struct WareDescr : public Map_Object_Descr {
 		 char const * const descname, const std::string & directory,
 		 Profile &, Section & global_s);
 
-	virtual ~WareDescr() {};
+	virtual ~WareDescr() {}
 
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
@@ -95,4 +95,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WARE_DESCR_H

@@ -29,3 +29,7 @@ hotspot=31 32
 [working]
 pics=well_i_??.png  # ???
 hotspot=31 32
+
+[aihints]
+mines_water=true
+

@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef LUA_UI_H
-#define LUA_UI_H
+#ifndef WL_SCRIPTING_LUA_UI_H
+#define WL_SCRIPTING_LUA_UI_H
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
+#include "third_party/eris/lua.hpp"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
@@ -212,6 +212,6 @@ public:
 
 void luaopen_wlui(lua_State *);
 
-};
+}
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_UI_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef STORY_MESSAGE_BOX_H
-#define STORY_MESSAGE_BOX_H
+#ifndef WL_WUI_STORY_MESSAGE_BOX_H
+#define WL_WUI_STORY_MESSAGE_BOX_H
 
 #include <vector>
 
@@ -36,4 +36,4 @@ private:
 	void clicked_ok();
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_STORY_MESSAGE_BOX_H

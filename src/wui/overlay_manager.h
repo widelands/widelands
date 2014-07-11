@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef OVERLAY_MANAGER_H
-#define OVERLAY_MANAGER_H
+#ifndef WL_WUI_OVERLAY_MANAGER_H
+#define WL_WUI_OVERLAY_MANAGER_H
 
 #include <map>
 #include <set>
@@ -28,6 +28,7 @@
 
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
+#include "base/point.h"
 
 class Image;
 
@@ -168,4 +169,4 @@ private:
 	uint32_t m_current_job_id;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_OVERLAY_MANAGER_H

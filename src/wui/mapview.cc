@@ -19,13 +19,13 @@
 
 #include "wui/mapview.h"
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/render/gamerenderer_gl.h"
 #include "graphic/render/gamerenderer_sdl.h"
 #include "graphic/rendertarget.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_player.h"

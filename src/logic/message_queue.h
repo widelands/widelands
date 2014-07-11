@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MESSAGE_QUEUE_H
-#define MESSAGE_QUEUE_H
+#ifndef WL_LOGIC_MESSAGE_QUEUE_H
+#define WL_LOGIC_MESSAGE_QUEUE_H
 
 #include <cassert>
 #include <map>
@@ -31,7 +31,7 @@
 namespace Widelands {
 
 struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *> {
-	friend struct Map_Players_Messages_Data_Packet;
+	friend class Map_Players_Messages_Data_Packet;
 	// Make typedefs public so that this looks like proper
 	// STL container to templated algorithms.
 	typedef std::map<Message_Id, Message *> _Mybase;
@@ -159,9 +159,9 @@ private:
 	void clear() {
 		assert_counts();
 		m_current_message_id        = Message_Id::Null();
-		m_counts[Message::New]      = 0; //  C++0x: m_counts = {};
-		m_counts[Message::Read]     = 0; //  C++0x:
-		m_counts[Message::Archived] = 0; //  C++0x:
+		m_counts[Message::New]      = 0;
+		m_counts[Message::Read]     = 0;
+		m_counts[Message::Archived] = 0;
 		std::map<Message_Id, Message *>::clear();
 		assert_counts();
 	}
@@ -185,4 +185,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MESSAGE_QUEUE_H

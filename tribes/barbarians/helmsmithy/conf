@@ -35,22 +35,22 @@ work=_Work
 
 [produce_helm]
 return=skipped unless economy needs helm
-consume=coal iron
 sleep=32000
+consume=coal iron
 animate=working 35000
 produce=helm
 
 [produce_mask]
 return=skipped unless economy needs mask
-consume=coal iron:2
 sleep=32000
+consume=coal iron:2
 animate=working 45000
 produce=mask
 
 [produce_warhelm]
 return=skipped unless economy needs warhelm
-consume=coal gold iron:2
 sleep=32000
+consume=coal gold iron:2
 animate=working 55000
 produce=warhelm
 
@@ -58,7 +58,6 @@ produce=warhelm
 call=produce_helm
 call=produce_mask
 call=produce_warhelm
-sleep=20000
 return=skipped
 
 [idle]

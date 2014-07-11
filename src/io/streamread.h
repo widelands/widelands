@@ -17,16 +17,16 @@
  *
  */
 
-#ifndef STREAMREAD_H
-#define STREAMREAD_H
+#ifndef WL_IO_STREAMREAD_H
+#define WL_IO_STREAMREAD_H
 
 #include <cstring>
 #include <string>
 
 #include <boost/noncopyable.hpp>
 
+#include "base/wexception.h"
 #include "machdep.h"
-#include "wexception.h"
 
 
 /**
@@ -79,4 +79,4 @@ public:
 #define data_error(...) _data_error(__VA_ARGS__)
 };
 
-#endif
+#endif  // end of include guard: WL_IO_STREAMREAD_H

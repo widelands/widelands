@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-13 17:02+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-04-16 03:15+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:32+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:32+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
 "X-Poedit-Language: Italian\n"
@@ -958,8 +958,8 @@ msgid "Spider Farm"
 msgstr "Allevamento dei ragni"
 
 #: ../../tribes/atlanteans/conf:186
-msgid "Weaving-Mill"
-msgstr "Mulino di tessitura"
+msgid "Weaving Mill"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Farm"
@@ -1140,7 +1140,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
-"Golden tabards are produced in Atlantean weaving-mills out of gold yarn. "
+"Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
@@ -1155,10 +1155,8 @@ msgstr ""
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
-"golden tabard in the weaving-mill."
+"golden tabard in the weaving mill."
 msgstr ""
-"Questo filato, prodotto utilizzando oro da parte del tessitore d'oro, è "
-"usato per filare l'esclusivo tabarro d'oro nel mulino di tessitura"
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your guardhall."
@@ -1470,21 +1468,16 @@ msgstr "Alleva ragni per filati."
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
-"Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
+"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
-"La stoffa di ragno è prodotta dal filato di ragno in un mulino di tessitura. "
-"È usata nella fucina di attrezzi e nel cantiere navale. Anche alcuni edifici "
-"più avanzati hanno bisogno di stoffa di ragno per la loro costruzione."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving-mill."
+"processed into spidercloth in a weaving mill."
 msgstr ""
-"Questo filato è prodotto dai ragni, che sono allevati negli allevamenti dei "
-"ragni. È trasformato in stoffa di ragno in un mulino tessile."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
@@ -1520,10 +1513,8 @@ msgstr "Taglia da grezzi pezzi di granito pietre da posa."
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
-"Tabards are produced in the weaving-mill."
+"Tabards are produced in the weaving mill."
 msgstr ""
-"Un tabarro ed un tridente leggero sono l'equipaggiamento di base per i "
-"giovani soldati. I tabarri sono prodotti nel mulino di tessitura."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."

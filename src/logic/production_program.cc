@@ -19,10 +19,13 @@
 
 #include "logic/production_program.h"
 
-#include <boost/format.hpp>
-#include <config.h>
-#include <libintl.h>
+#include <sstream>
 
+#include <boost/format.hpp>
+
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "config.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/wares_queue.h"
@@ -42,15 +45,101 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/worker_program.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
+
+namespace {
 
 // For formation of better translateable texts
 using boost::format;
 
+/**
+ * Convert std::string to any sstream-compatible type
+ *
+ * \see http://www.experts-exchange.com/Programming/
+ *    Programming_Languages/Cplusplus/Q_20670737.html
+ * \author AssafLavie on http://www.experts-exchange.com
+ */
+// TODO(sirver): Use boost::lexical_cast<>
+template <typename T> T string_to_type(const std::string& s) {
+	std::istringstream iss(s);
+	T x;
+	iss >> x;
+	return x;
+}
+
+/// Matches the string that candidate points to against the string that
+/// template points to. Stops at when reaching a null character or the
+/// character terminator. If a match is found, candidate is moved beyond the
+/// matched part.
+///
+/// example:
+///    char const * candidate = "return   75";
+///    bool const result = match(candidate, "return");
+/// now candidate points to "   75" and result is true
+bool match(char* & candidate, const char* pattern) {
+	for (char* p = candidate;; ++p, ++pattern)
+		if (not * pattern) {
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			break;
+	return false;
+}
+
+/// Skips a sequence of consecutive characters with the value c, starting at p.
+/// Throws _wexception if no characters were skipped.
+void force_skip(char* & p, char const c = ' ') {
+	char* t = p;
+	while (*t == c)
+		++t;
+	if (p < t)
+		p = t;
+	else
+		throw wexception("expected '%c' but found \"%s\"", c, p);
+}
+
+/// Skips a sequence of consecutive characters with the value c, starting at p.
+/// Returns whether any characters were skipped.
+bool skip(char* & p, char const c = ' ') {
+	char* t = p;
+	while (*t == c)
+		++t;
+	if (p < t) {
+		p = t;
+		return true;
+	} else
+		return false;
+}
+
+/// Combines match and force_skip.
+///
+/// example:
+///    char const * candidate = "return   75";
+///    bool const result = match_force_skip(candidate, "return");
+/// now candidate points to "75" and result is true
+///
+/// example:
+///   char const * candidate = "return75";
+///    bool const result = match_force_skip(candidate, "return");
+/// throws _wexception
+bool match_force_skip(char* & candidate, const char* pattern) {
+	for (char* p = candidate;; ++p, ++pattern)
+		if (not * pattern) {
+			force_skip(p);
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			return false;
+
+	return false;
+}
+
+}  // namespace
 
 ProductionProgram::Action::~Action() {}
 
@@ -247,7 +336,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 		if (match_force_skip(parameters, "needs"))
 			try {
 				bool reached_end;
-				char const * const type_name = match(parameters, reached_end);
+				char const * const type_name = next_word(parameters, reached_end);
 				Ware_Index index = tribe.ware_index(type_name);
 				if (index != INVALID_INDEX) {
 					tribe.set_ware_type_has_demand_check(index);
@@ -478,7 +567,7 @@ ProductionProgram::ActCall::ActCall
 	try {
 		bool reached_end;
 		{
-			char const * const program_name = match(parameters, reached_end);
+			char const * const program_name = next_word(parameters, reached_end);
 			const ProductionSite_Descr::Programs & programs = descr.programs();
 			ProductionSite_Descr::Programs::const_iterator const it =
 				programs.find(program_name);
@@ -695,7 +784,7 @@ ProductionProgram::ActAnimate::ActAnimate(
 	char* parameters, const std::string& directory, Profile& prof, ProductionSite_Descr* descr) {
 	try {
 		bool reached_end;
-		char * const animation_name = match(parameters, reached_end);
+		char * const animation_name = next_word(parameters, reached_end);
 		if (not strcmp(animation_name, "idle"))
 			throw game_data_error
 				("idle animation is default; calling is not allowed");
@@ -1054,7 +1143,7 @@ ProductionProgram::ActMine::ActMine(
 {
 	try {
 		bool reached_end;
-		m_resource = world.safe_resource_index(match(parameters, reached_end));
+		m_resource = world.safe_resource_index(next_word(parameters, reached_end));
 
 		{
 			char * endp;
@@ -1426,7 +1515,7 @@ ProductionProgram::ActPlayFX::ActPlayFX
 {
 	try {
 		bool reached_end;
-		std::string filename = match(parameters, reached_end);
+		std::string filename = next_word(parameters, reached_end);
 		name = directory + "/" + filename;
 
 		if (not reached_end) {
@@ -1462,7 +1551,7 @@ ProductionProgram::ActConstruct::ActConstruct(
 
 		objectname = params[0];
 		workerprogram = params[1];
-		radius = stringTo<uint32_t>(params[2]);
+		radius = string_to_type<uint32_t>(params[2]);
 
 		std::set<std::string> & building_radius_infos = descr->m_workarea_info[radius];
 		std::string description = descr->name() + ' ' + production_program_name;

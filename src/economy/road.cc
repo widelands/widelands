@@ -19,6 +19,7 @@
 
 #include "economy/road.h"
 
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/request.h"
@@ -28,7 +29,6 @@
 #include "logic/instances.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 
 namespace Widelands {
 

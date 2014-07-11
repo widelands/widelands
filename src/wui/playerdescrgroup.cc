@@ -21,17 +21,17 @@
 
 #include <boost/format.hpp>
 
-#include "constants.h"
-#include "gamesettings.h"
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/game_settings.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 
 struct PlayerDescriptionGroupImpl {

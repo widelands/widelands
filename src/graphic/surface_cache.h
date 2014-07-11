@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SURFACE_CACHE_H
-#define SURFACE_CACHE_H
+#ifndef WL_GRAPHIC_SURFACE_CACHE_H
+#define WL_GRAPHIC_SURFACE_CACHE_H
 
 #include <string>
 
@@ -35,8 +35,8 @@ class Surface;
 // need it.
 class SurfaceCache : boost::noncopyable {
 public:
-	SurfaceCache() {};
-	virtual ~SurfaceCache() {};
+	SurfaceCache() {}
+	virtual ~SurfaceCache() {}
 
 	/// Deletes all surfaces in the cache leaving it as if it were just created.
 	virtual void flush() = 0;
@@ -58,5 +58,4 @@ public:
 // surface).
 SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes);
 
-#endif /* end of include guard: SURFACE_CACHE_H */
-
+#endif  // end of include guard: WL_GRAPHIC_SURFACE_CACHE_H

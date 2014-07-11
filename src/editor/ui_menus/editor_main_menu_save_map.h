@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_SAVE_MAP_H
-#define EDITOR_MAIN_MENU_SAVE_MAP_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H
 
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/window.h"
@@ -50,7 +50,7 @@ private:
 	bool save_map(std::string, bool);
 
 	UI::EditBox * m_editbox;
-	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
+	UI::Textarea * m_name, * m_author, * m_size, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
 	UI::Listselect<const char *> * m_ls;
 	UI::Button * m_ok_btn;
@@ -61,4 +61,4 @@ private:
 	filenameset_t m_mapfiles;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H

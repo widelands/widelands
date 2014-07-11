@@ -19,8 +19,8 @@ stoneproducer=true
 work=_Work
 
 [work]
-sleep=25000
-worker=cut_stone
+worker=cut_stone  # This order is on purpose so that the productivity 
+sleep=25000       # drops fast once all stones are gone.     
 
 [idle]
 pics=quarry_i_??.png  # ???

@@ -21,11 +21,12 @@
 
 #include <vector>
 
-#include "container_iterate.h"
-#include "i18n.h"
+#include "base/deprecated.h"
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 namespace UI {
 

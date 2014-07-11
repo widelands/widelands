@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_WINDOW_H
-#define UI_WINDOW_H
+#ifndef WL_UI_BASIC_WINDOW_H
+#define WL_UI_BASIC_WINDOW_H
 
 #include "ui_basic/panel.h"
 
@@ -115,4 +115,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_WINDOW_H

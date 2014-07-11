@@ -26,17 +26,18 @@
 #include <limits>
 #include <string>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "wexception.h"
+#include "logic/world/world.h"
 
 #define TRUE_WORDS 4
-char const * trueWords[TRUE_WORDS] =
+static char const * trueWords[TRUE_WORDS] =
 {
 	"true",
 	"yes",
@@ -45,7 +46,7 @@ char const * trueWords[TRUE_WORDS] =
 };
 
 #define FALSE_WORDS 4
-char const * falseWords[FALSE_WORDS] =
+static char const * falseWords[FALSE_WORDS] =
 {
 	"false",
 	"no",
@@ -146,29 +147,6 @@ Point Section::Value::get_Point() const
 		throw wexception("%s: '%s' is not a Point", get_name(), m_value);
 
 	return Point(x, y);
-}
-
-Widelands::Coords Section::Value::get_Coords
-	(Widelands::Extent const extent) const
-{
-	char * endp = m_value;
-	long int const x = strtol(endp, &endp, 0);
-	long int const y = strtol(endp, &endp, 0);
-
-	//  Check of consistence should NOT be at x, y < 0 as (-1, -1) is used for
-	//  not set starting positions in the editor. So check whether x, y < -1 so
-	//  the editor can load incomplete maps. For games the starting positions
-	//  will be checked in player initalisation anyway.
-	if
-		(((x < 0 or extent.w <= x or y < 0 or extent.h <= y) and
-		  (x != -1 or y != -1))
-		 or
-		 *endp)
-		throw wexception
-			("%s: \"%s\" is not a Coords on a map with size (%u, %u)",
-			 get_name(), m_value, extent.w, extent.h);
-
-	return Widelands::Coords(x, y);
 }
 
 void Section::Value::set_string(char const * const value)
@@ -376,86 +354,6 @@ const char * Section::get_safe_string(const std::string & name)
 	return get_safe_string(name.c_str());
 }
 
-/** Section::get_safe_Coords(const char * const name)
- *
- * Return the key value as a Coords or throw an exception if the key
- * doesn't exist
- */
-Widelands::Coords Section::get_safe_Coords
-	(char const * const name, Widelands::Extent const extent)
-{
-	if (const Value * const v = get_val(name))
-		return v->get_Coords(extent);
-	else
-		throw wexception("[%s]: missing key '%s'", get_name(), name);
-}
-
-
-const Widelands::Immovable_Descr & Section::get_safe_Immovable_Type
-	(char const * tribe, char const * name,
-	 Widelands::Editor_Game_Base & egbase)
-{
-	char const * const immname = get_safe_string(name);
-	if (char const * const tribename = get_string(tribe, nullptr)) {
-		const Widelands::Tribe_Descr & tridescr =
-			egbase.manually_load_tribe(tribename);
-		if
-			(Widelands::Immovable_Descr const * const result =
-			 tridescr.get_immovable_descr(tridescr.get_immovable_index(immname)))
-			return *result;
-		else
-			throw wexception
-				("tribe %s does not define immovable type \"%s\"",
-				 tribename,        immname);
-	} else {
-		const Widelands::World       & world    =
-			egbase.map().world();
-		if
-			(Widelands::Immovable_Descr const * const result =
-			 world   .get_immovable_descr(world   .get_immovable_index(immname)))
-			return *result;
-		else
-			throw wexception
-				("world %s does not define immovable type \"%s\"",
-				 world.get_name(), immname);
-	}
-}
-
-
-
-Widelands::Building_Index Section::get_safe_Building_Index
-	(char const * const name,
-	 Widelands::Editor_Game_Base &       egbase,
-	 Widelands::Player_Number      const player)
-{
-	const Widelands::Tribe_Descr & tribe = egbase.manually_load_tribe(player);
-	char const * const b = get_safe_string(name);
-	Widelands::Building_Index const idx = tribe.building_index(b);
-	if (idx == Widelands::INVALID_INDEX)
-		throw wexception
-			("building type \"%s\" does not exist in player %u's tribe %s",
-			 b, player, tribe.name().c_str());
-	return idx;
-}
-
-
-const Widelands::Building_Descr & Section::get_safe_Building_Type
-	(char const * const name,
-	 Widelands::Editor_Game_Base &       egbase,
-	 Widelands::Player_Number      const player)
-{
-	const Widelands::Tribe_Descr & tribe = egbase.manually_load_tribe(player);
-	char const * const b = get_safe_string(name);
-	if (Widelands::Building_Descr const* const result =
-	       tribe.get_building_descr(tribe.building_index(b)))
-		return *result;
-	else
-		throw wexception
-			("building type \"%s\" does not exist in player %u's tribe %s",
-			 b, player, tribe.name().c_str());
-}
-
-
 /**
  * Returns the integer value of the given key. Falls back to a default value
  * if the key is not found.
@@ -559,33 +457,6 @@ Point Section::get_Point(const char * const name, const Point def)
 }
 
 
-Widelands::Coords Section::get_Coords
-	(char const * const name, Widelands::Extent const extent,
-	 Widelands::Coords const def)
-{
-	Value const * const v = get_val(name);
-	return v ? v->get_Coords(extent) : def;
-}
-
-
-Widelands::Player_Number Section::get_Player_Number
-	(char const * const name,
-	 Widelands::Player_Number const nr_players,
-	 Widelands::Player_Number const def)
-{
-	if (Value const * const v = get_val(name)) {
-		int32_t const value = v->get_int();
-		if (1 <= value and value <= nr_players)
-			return value;
-		else
-			throw wexception
-				("player number is %i but there are only %u players",
-				 value, nr_players);
-	} else
-		return def;
-}
-
-
 /**
  * Retrieve the next unused key with the given name as a boolean value.
  *
@@ -628,40 +499,6 @@ void Section::set_string_duplicate
 {
 	create_val_duplicate(name, string).mark_used();
 }
-
-/**
- * Modifies/Creates the given key.
- */
-void Section::set_Coords
-	(char const * const name, Widelands::Coords const value)
-{
-	char buffer[sizeof("-32769 -32769")];
-	sprintf(buffer, "%i %i", value.x, value.y);
-	set_string(name, buffer);
-}
-
-
-void Section::set_Immovable_Type
-	(char const * const tribe, char const * const name,
-	 const Widelands::Immovable_Descr & descr)
-{
-	if (Widelands::Tribe_Descr const * const tridescr = descr.get_owner_tribe())
-		set_string(tribe, tridescr->name());
-	set_string   (name,     descr. name());
-}
-
-
-void Section::set_Building_Index
-	(char const                  * const name,
-	 Widelands::Building_Index     const value,
-	 Widelands::Editor_Game_Base &       egbase,
-	 Widelands::Player_Number      const player)
-{
-	set_string
-		(name,
-		 egbase.manually_load_tribe(player).get_building_descr(value)->name());
-}
-
 
 /*
 ==============================================================================
@@ -965,11 +802,12 @@ void Profile::read
 							throw wexception("key %s outside section", p);
 					}
 
-					if (translate_line && *tail)
+					if (translate_line && *tail) {
 						data += i18n::translate(tail);
-					else
+					} else {
 						data += tail;
-					if (s && ! reading_multiline) { // error() may or may not throw
+					}
+					if (s && ! reading_multiline) {
 						s->create_val_duplicate(key, data.c_str());
 						data.clear();
 					}

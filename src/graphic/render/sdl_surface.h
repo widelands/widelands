@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef SDL_SURFACE_H
-#define SDL_SURFACE_H
+#ifndef WL_GRAPHIC_RENDER_SDL_SURFACE_H
+#define WL_GRAPHIC_RENDER_SDL_SURFACE_H
 
+#include "base/rect.h"
+#include "graphic/color.h"
 #include "graphic/surface.h"
-#include "rect.h"
-#include "rgbcolor.h"
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right
@@ -34,12 +34,7 @@ class SDLSurface : public Surface {
 public:
 	// The surface set by SetVideoMode must not be freed according to the SDL
 	// docs, so we need 'free_surface_on_delete'.
-	SDLSurface(SDL_Surface* surface, bool free_surface_on_delete = true) :
-		m_surface(surface),
-		m_offsx(0), m_offsy(0),
-		m_w(surface->w), m_h(surface->h),
-		m_free_surface_on_delete(free_surface_on_delete)
-	{}
+	SDLSurface(SDL_Surface* surface, bool free_surface_on_delete = true);
 	virtual ~SDLSurface();
 
 	// Implements Image
@@ -78,4 +73,4 @@ protected:
 };
 
 
-#endif /* end of include guard: SDL_SURFACE_H */
+#endif  // end of include guard: WL_GRAPHIC_RENDER_SDL_SURFACE_H

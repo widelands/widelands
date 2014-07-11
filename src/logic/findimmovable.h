@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FINDIMMOVABLE_H
-#define FINDIMMOVABLE_H
+#ifndef WL_LOGIC_FINDIMMOVABLE_H
+#define WL_LOGIC_FINDIMMOVABLE_H
 
 #include <stdint.h>
 
@@ -142,4 +142,4 @@ struct FindFlagOf {
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_FINDIMMOVABLE_H

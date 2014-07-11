@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WLAPPLICATION_H
-#define WLAPPLICATION_H
+#ifndef WL_WLAPPLICATION_H
+#define WL_WLAPPLICATION_H
 
 //Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
 #ifdef __MINGW32__
@@ -34,7 +34,7 @@
 #include <SDL_keyboard.h>
 #include <SDL_types.h>
 
-#include "point.h"
+#include "base/point.h"
 
 
 namespace Widelands {class Game;}
@@ -45,7 +45,6 @@ struct Parameter_error : public std::runtime_error {
 	explicit Parameter_error(std::string text)
 		: std::runtime_error(text)
 	{}
-	virtual ~Parameter_error() throw () {}
 };
 
 // input
@@ -127,6 +126,8 @@ struct InputCallback {
 /// code should be in System, while the actual graphics work is done elsewhere.
 /// \todo Refactor the mainloop
 /// \todo Sensible use of exceptions (goes for whole game)
+// TODO(sirver): this class makes no sense for c++ - most of these should be
+// stand alone functions.
 struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();
@@ -265,4 +266,4 @@ private:
 
 };
 
-#endif
+#endif  // end of include guard: WL_WLAPPLICATION_H

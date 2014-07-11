@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef MAPVIEWPIXELFUNCTIONS_H
-#define MAPVIEWPIXELFUNCTIONS_H
+#ifndef WL_WUI_MAPVIEWPIXELFUNCTIONS_H
+#define WL_WUI_MAPVIEWPIXELFUNCTIONS_H
 
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
 #include "wui/mapviewpixelconstants.h"
-#include "point.h"
+#include "base/point.h"
 
 namespace Widelands {class Map;}
 
@@ -135,4 +135,4 @@ inline void MapviewPixelFunctions::get_save_pix
 	get_pix(fc, px, py);
 }
 
-#endif
+#endif  // end of include guard: WL_WUI_MAPVIEWPIXELFUNCTIONS_H

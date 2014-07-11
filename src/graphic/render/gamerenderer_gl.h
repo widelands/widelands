@@ -17,20 +17,20 @@
  *
  */
 
-#ifndef WIDELANDS_GAMERENDERER_GL_H
-#define WIDELANDS_GAMERENDERER_GL_H
+#ifndef WL_GRAPHIC_RENDER_GAMERENDERER_GL_H
+#define WL_GRAPHIC_RENDER_GAMERENDERER_GL_H
 
 #include <memory>
 #include <vector>
 
+#include "base/rect.h"
 #include "graphic/render/gamerenderer.h"
 #include "logic/widelands.h"
-#include "rect.h"
 
 namespace Widelands {
 struct Coords;
 struct FCoords;
-struct World;
+class World;
 }
 
 class GLSurface;
@@ -65,7 +65,7 @@ private:
 		uint32_t pad[1];
 	};
 
-	const GLSurfaceTexture * get_dither_edge_texture(const Widelands::World & world);
+	const GLSurfaceTexture * get_dither_edge_texture();
 
 	void draw() override;
 	void prepare_terrain_base();
@@ -125,4 +125,4 @@ private:
 	/*@}*/
 };
 
-#endif // WIDELANDS_GAMERENDERER_GL_H
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GAMERENDERER_GL_H

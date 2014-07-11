@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_MAP_OBJECT_SAVER_H
-#define WIDELANDS_MAP_MAP_OBJECT_SAVER_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_SAVER_H
+#define WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 
 #include <map>
 #include <string>
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/widelands.h"
 #include "map_io/widelands_map_message_saver.h"
 
@@ -92,4 +92,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_SAVER_H

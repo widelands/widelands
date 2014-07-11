@@ -19,7 +19,7 @@
 
 #include "ui_basic/panel.h"
 
-#include "constants.h"
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
@@ -27,11 +27,11 @@
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "helper.h"
-#include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 
 
 using namespace std;
@@ -165,6 +165,7 @@ void Panel::free_children() {while (_fchild) delete _fchild;}
  */
 int32_t Panel::run()
 {
+	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication * const app = WLApplication::get();
 	Panel * const prevmodal = _modal;
 	_modal = this;
@@ -1227,7 +1228,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r + Point(2, 2), rendered_text);
+	dst.blit(r.top_left() + Point(2, 2), rendered_text);
 	return true;
 }
 

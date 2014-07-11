@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_TOOL_MENU_H
-#define EDITOR_TOOL_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOL_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOL_MENU_H
 
 #include "editor/editorinteractive.h"
 #include "ui_basic/radiobutton.h"
@@ -34,4 +34,4 @@ private:
 	void changed_to();
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_MENU_H

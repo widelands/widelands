@@ -17,10 +17,12 @@
  *
  */
 
-#ifndef UI_UNIQUE_WINDOW_H
-#define UI_UNIQUE_WINDOW_H
+#ifndef WL_UI_BASIC_UNIQUE_WINDOW_H
+#define WL_UI_BASIC_UNIQUE_WINDOW_H
 
 #include <functional>
+
+#include "boost/noncopyable.hpp"
 
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -55,6 +57,9 @@ struct UniqueWindow : public Window {
 		int32_t x, y;
 		bool valid_pos;
 
+		Registry(const Registry&) = default;
+		Registry& operator = (const Registry&) = default;
+
 		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {}
 		~Registry();
 	};
@@ -76,4 +81,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_UNIQUE_WINDOW_H

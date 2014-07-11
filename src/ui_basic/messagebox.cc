@@ -19,14 +19,12 @@
 
 #include "ui_basic/messagebox.h"
 
-#include "constants.h"
+#include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
-#include "wlapplication.h"
 
 namespace UI {
 

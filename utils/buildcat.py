@@ -23,34 +23,43 @@ import confgettext
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
 # to let .po[t] comments point to somewhere useful
-MAINPOTS = [( "maps/maps", [
-                "../../maps/*/elemental",
-                "../../maps/*/*/elemental",
-                "../../campaigns/cconfig",
-                "../../campaigns/*/elemental"
-            ] ),
-            ( "texts/texts", ["../../txts/license",
-                          "../../txts/*.lua",
-                          "../../txts/developers",
-                          "../../txts/editor_readme",
-                          "../../txts/tips/*.tip"] ),
-            ( "widelands/widelands", [
-                            "../../src/*.cc",
-                            "../../src/*/*.cc",
-                            "../../src/*/*/*.cc",
-                            "../../src/*.h",
-                            "../../src/*/*.h",
-                            "../../src/*/*/*.h",
-            ] ),
-            ( "win_conditions/win_conditions", [
-                "../../scripting/win_conditions/*.lua",
-                "../../scripting/win_condition_texts.lua",
-            ]),
+MAINPOTS = [
+    ( "maps/maps", [
+        "../../maps/*/elemental",
+        "../../maps/*/*/elemental",
+        "../../campaigns/cconfig",
+        "../../campaigns/*/elemental"
+    ] ),
+    ( "texts/texts", ["../../txts/license",
+                  "../../txts/*.lua",
+                  "../../txts/developers",
+                  "../../txts/editor_readme",
+                  "../../txts/tips/*.tip"] ),
+    ( "widelands/widelands", [
+                    "../../src/*.cc",
+                    "../../src/*/*.cc",
+                    "../../src/*/*/*.cc",
+                    "../../src/*.h",
+                    "../../src/*/*.h",
+                    "../../src/*/*/*.h",
+    ] ),
+    ( "win_conditions/win_conditions", [
+        "../../scripting/win_conditions/*.lua",
+        "../../scripting/win_condition_texts.lua",
+    ]),
+    ("world/world", [
+        "../../world/*.lua",
+        "../../world/*/*.lua",
+        "../../world/*/*/*.lua",
+        "../../world/*/*/*/*.lua",
+        "../../world/*/*/*/*/*.lua",
+        "../../world/*/*/*/*/*/*.lua",
+    ]),
 ]
 
 
 # This defines the rules for iterative generation of catalogs. This allows
-# to automatically add new .pot files for newly created tribes, worlds, ...
+# to automatically add new .pot files for newly created directories.
 #
 # This is a list with structure:
 #       - target .pot file mask
@@ -84,9 +93,6 @@ ITERATIVEPOTS = [
          "../../global/militarysites/*/conf"
     ]
     ),
-    ("world_%(name)s/world_%(name)s", "worlds/",
-     ["../../worlds/%(name)s/*conf", "../../worlds/%(name)s/*/conf"]
-    )
 ]
 
 # Paths to search for exectuables

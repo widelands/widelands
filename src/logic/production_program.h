@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PRODUCTION_PROGRAM_H
-#define PRODUCTION_PROGRAM_H
+#ifndef WL_LOGIC_PRODUCTION_PROGRAM_H
+#define WL_LOGIC_PRODUCTION_PROGRAM_H
 
 #include <cassert>
 #include <cstring>
@@ -29,14 +29,14 @@
 #include <boost/noncopyable.hpp>
 #include <stdint.h>
 
-#include "container_iterate.h"
-#include "log.h"
+#include "base/deprecated.h"
+#include "base/log.h"
 #include "logic/bill_of_materials.h"
 #include "logic/program_result.h"
 #include "logic/tattribute.h"
 #include "logic/widelands.h"
 
-struct Profile;
+class Profile;
 
 namespace Widelands {
 
@@ -46,7 +46,7 @@ struct ProductionSite_Descr;
 class ProductionSite;
 struct Tribe_Descr;
 class Worker;
-struct World;
+class World;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {
@@ -532,4 +532,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PRODUCTION_PROGRAM_H

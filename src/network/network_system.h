@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef NETWORK_SYSTEM_H
-#define NETWORK_SYSTEM_H
+#ifndef WL_NETWORK_NETWORK_SYSTEM_H
+#define WL_NETWORK_NETWORK_SYSTEM_H
 
 #include <stdint.h>
 #ifndef _WIN32
@@ -56,4 +56,4 @@ typedef uint32_t in_addr_t;
 
 #endif
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETWORK_SYSTEM_H

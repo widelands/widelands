@@ -17,12 +17,14 @@
  *
  */
 
-#ifndef UI_MULTILINE_TEXTAREA_H
-#define UI_MULTILINE_TEXTAREA_H
+#ifndef WL_UI_BASIC_MULTILINETEXTAREA_H
+#define WL_UI_BASIC_MULTILINETEXTAREA_H
 
-#include "align.h"
+#include <memory>
+
+#include "graphic/align.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
@@ -91,4 +93,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

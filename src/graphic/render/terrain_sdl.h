@@ -17,20 +17,19 @@
  *
  */
 
-#ifndef TERRAIN_SDL_H
-#define TERRAIN_SDL_H
+#ifndef WL_GRAPHIC_RENDER_TERRAIN_SDL_H
+#define WL_GRAPHIC_RENDER_TERRAIN_SDL_H
 
 #include <cassert>
 
-#include "constants.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
-#include "graphic/texture.h"
-#include "log.h"
-#include "logic/roadtype.h"
-#include "random.h"
 #include "graphic/render/sdl_surface.h"
-#include "upcast.h"
-#include "vertex.h"
+#include "graphic/render/vertex.h"
+#include "graphic/texture.h"
+#include "logic/roadtype.h"
+#include "random/random.h"
 #include "wui/mapviewpixelconstants.h"
 
 ///Must be a power of two
@@ -668,4 +667,4 @@ template<typename T> static void draw_field_int
 	// FIXME: similar textures may not need dithering
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_TERRAIN_SDL_H

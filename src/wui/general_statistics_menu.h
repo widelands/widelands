@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef GENERAL_STATISTICS_MENU_H
-#define GENERAL_STATISTICS_MENU_H
+#ifndef WL_WUI_GENERAL_STATISTICS_MENU_H
+#define WL_WUI_GENERAL_STATISTICS_MENU_H
 
-#include "constants.h"
-#include "wui/plot_area.h"
+#include "logic/constants.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/unique_window.h"
+#include "wui/plot_area.h"
 
 class Interactive_GameBase;
 namespace UI {
@@ -66,4 +66,4 @@ private:
 	void radiogroup_changed(int32_t);
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GENERAL_STATISTICS_MENU_H

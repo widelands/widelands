@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FINDNODE_H
-#define FINDNODE_H
+#ifndef WL_LOGIC_FINDNODE_H
+#define WL_LOGIC_FINDNODE_H
 
 #include <vector>
 
@@ -190,4 +190,4 @@ struct FindNodeShore {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_FINDNODE_H

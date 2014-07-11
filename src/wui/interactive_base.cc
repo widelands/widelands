@@ -19,18 +19,21 @@
 
 #include "wui/interactive_base.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "constants.h"
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "gamecontroller.h"
+#include "graphic/default_resolution.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/immovable.h"
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
@@ -38,9 +41,6 @@
 #include "logic/productionsite.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "text_layout.h"
-#include "unique_window_handler.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
@@ -50,6 +50,9 @@
 #include "wui/minimap.h"
 #include "wui/overlay_manager.h"
 #include "wui/quicknavigation.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
+#include "wui/unique_window_handler.h"
 
 using boost::format;
 using Widelands::Area;
@@ -73,35 +76,40 @@ struct InteractiveBaseInternals {
 	{}
 };
 
-Interactive_Base::Interactive_Base
-	(Editor_Game_Base & the_egbase, Section & global_s)
-	:
-	Map_View(nullptr, 0, 0, global_s.get_int("xres", XRES), global_s.get_int("yres", YRES), *this),
-	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
-	m
-		(new InteractiveBaseInternals
-		 (new QuickNavigation(the_egbase, get_w(), get_h()))),
-	m_egbase                      (the_egbase),
+Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global_s)
+   : Map_View(nullptr,
+              0,
+              0,
+              global_s.get_int("xres", DEFAULT_RESOLUTION_W),
+              global_s.get_int("yres", DEFAULT_RESOLUTION_H),
+              *this),
+     m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
+     m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
+     m_egbase(the_egbase),
 #ifndef NDEBUG //  not in releases
-	m_display_flags               (dfDebug),
+     m_display_flags(dfDebug),
 #else
-	m_display_flags               (0),
+     m_display_flags(0),
 #endif
-	m_lastframe                   (WLApplication::get()->get_time()),
-	m_frametime                   (0),
-	m_avg_usframetime             (0),
-	m_jobid                       (0),
-	m_road_buildhelp_overlay_jobid(0),
-	m_buildroad                   (nullptr),
-	m_road_build_player           (0),
-	// Initialize chatoveraly before the toolbar so it is below
-	m_chatOverlay                 (new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-	m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
-	m_label_speed_shadow
-		(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
-	m_label_speed
-		(this, get_w(), 1, std::string(), UI::Align_TopRight),
-	unique_window_handler_(new UniqueWindowHandler())
+     m_lastframe(WLApplication::get()->get_time()),
+     m_frametime(0),
+     m_avg_usframetime(0),
+     m_jobid(0),
+     m_road_buildhelp_overlay_jobid(0),
+     m_buildroad(nullptr),
+     m_road_build_player(0),
+     // Initialize chatoveraly before the toolbar so it is below
+     m_chatOverlay(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
+     m_toolbar(this, 0, 0, UI::Box::Horizontal),
+     m_label_speed_shadow(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
+     m_label_speed(this, get_w(), 1, std::string(), UI::Align_TopRight),
+     unique_window_handler_(new UniqueWindowHandler()),
+     // Load workarea images.
+     // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
+		m_workarea_pics
+		{g_gr->images().get("pics/workarea123.png"), g_gr->images().get("pics/workarea23.png"),
+			g_gr->images().get("pics/workarea3.png"), g_gr->images().get("pics/workarea12.png"),
+			g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")}
 {
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
@@ -127,15 +135,6 @@ Interactive_Base::Interactive_Base
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
 	m_sel.pic = g_gr->images().get("pics/fsel.png");
-
-	// Load workarea images.
-	// Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-	workarea_pics[0] = g_gr->images().get("pics/workarea123.png");
-	workarea_pics[1] = g_gr->images().get("pics/workarea23.png");
-	workarea_pics[2] = g_gr->images().get("pics/workarea3.png");
-	workarea_pics[3] = g_gr->images().get("pics/workarea12.png");
-	workarea_pics[4] = g_gr->images().get("pics/workarea2.png");
-	workarea_pics[5] = g_gr->images().get("pics/workarea1.png");
 
 	m_label_speed.set_visible(false);
 	m_label_speed_shadow.set_visible(false);
@@ -262,7 +261,10 @@ OverlayManager::JobId Interactive_Base::show_work_area
 		case 1: wa_index = 5; break;
 		case 2: wa_index = 3; break;
 		case 3: wa_index = 0; break;
-		default: assert(false); break;
+		default:
+			wa_index = 0;
+			assert(false);
+			break;
 	}
 	Widelands::Map & map = m_egbase.map();
 	OverlayManager & overlay_manager = map.overlay_manager();
@@ -273,13 +275,12 @@ OverlayManager::JobId Interactive_Base::show_work_area
 	// Iterate through the work areas, from building to its enhancement
 	Workarea_Info::const_iterator it = workarea_info.begin();
 	for (; it != workarea_info.end(); ++it) {
-		assert(wa_index < NUMBER_OF_WORKAREA_PICS);
 		hollow_area.radius = it->first;
 		Widelands::MapHollowRegion<> mr(map, hollow_area);
 		do
 			overlay_manager.register_overlay
 				(mr.location(),
-					workarea_pics[wa_index],
+					m_workarea_pics[wa_index],
 					0,
 					Point::invalid(),
 					job_id);

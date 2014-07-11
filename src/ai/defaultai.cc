@@ -16,9 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
-/**
- * Default AI
- */
 
 #include "ai/defaultai.h"
 
@@ -28,10 +25,11 @@
 #include <typeinfo>
 
 #include "ai/ai_hints.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "log.h"
 #include "logic/constructionsite.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -42,11 +40,33 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
-#define FIELD_UPDATE_INTERVAL 1000
+constexpr int kFieldUpdateInterval = 1000;
+constexpr int kIdleMineUpdateInterval = 22000;
+constexpr int kBusyMineUpdateInterval = 2000;
+// building of the same building can be started after 25s at earliest
+constexpr int kBuildingMinInterval = 25 * 1000;
+constexpr bool kMilitaryDebug = false;
+constexpr bool kMilDismDebug = false;
+constexpr bool kMilitScoreDebug = false;
+constexpr bool kQuarryDismDebug = false;
+constexpr bool kProductionDebug = false;
+constexpr bool kHintDebug = false;
+constexpr bool kWinnerDebug = false;
+constexpr bool kNewBuildingDebug = false;
+constexpr bool kStandbyDebug = false;
+constexpr bool kMinesDebug = false;
+constexpr bool kUpgradeDebug = false;
+constexpr bool kStockDebug = false;
+constexpr bool kMinesUpdateDebug = false;
+constexpr bool kWoodDebug = false;
+constexpr bool kSpaceDebug = false;
+constexpr bool kStatDebug = false;
+constexpr bool kIdleDismantle = false;
+constexpr bool kWellDebug = false;
+constexpr int kBaseInfrastructureTime = 20 * 60 * 1000;
 
 using namespace Widelands;
 
@@ -55,52 +75,59 @@ DefaultAI::NormalImpl DefaultAI::normalImpl;
 DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
-DefaultAI::DefaultAI(Game & ggame, Player_Number const pid, uint8_t const t) :
-	Computer_Player              (ggame, pid),
-	type                         (t),
-	m_buildable_changed          (true),
-	m_mineable_changed           (true),
-	player                       (nullptr),
-	tribe                        (nullptr),
-	total_constructionsites      (0),
-	next_road_due                (2000),
-	next_stats_update_due        (30000),
-	next_construction_due        (1000),
-	next_productionsite_check_due(0),
-	next_mine_check_due          (0),
-	next_militarysite_check_due  (0),
-	next_attack_consideration_due(300000),
-	inhibit_road_building        (0),
-	time_of_last_construction    (0),
-	numof_warehouses             (0)
-{}
+DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
+   : Computer_Player(ggame, pid),
+     type(t),
+     m_buildable_changed(true),
+     m_mineable_changed(true),
+     player(nullptr),
+     tribe(nullptr),
+     total_constructionsites(0),
+     next_road_due_(2000),
+     next_stats_update_due_(30000),
+     next_construction_due_(1000),
+     next_mine_construction_due_(0),
+     next_productionsite_check_due_(0),
+     next_mine_check_due_(0),
+     next_militarysite_check_due_(0),
+     next_attack_consideration_due_(300000),
+     next_helpersites_check_due_(180000),
+     inhibit_road_building_(0),
+     time_of_last_construction_(0),
+     numof_warehouses_(0),
+     new_buildings_stop_(false),
+     unstationed_milit_buildings_(0),
+     military_under_constr_(0),
+     military_last_dismantle_(0),
+     military_last_build_(0) {
+}
 
-DefaultAI::~DefaultAI()
-{
+DefaultAI::~DefaultAI() {
 	while (not buildable_fields.empty()) {
 		delete buildable_fields.back();
 		buildable_fields.pop_back();
 	}
+
 	while (not mineable_fields.empty()) {
 		delete mineable_fields.back();
 		mineable_fields.pop_back();
 	}
+
 	while (not economies.empty()) {
 		delete economies.back();
 		economies.pop_back();
 	}
 }
 
-
 /**
- * Main loop of computer player "defaultAI"
+ * Main loop of computer player_ "defaultAI"
  *
  * General behaviour is defined here.
  */
-void DefaultAI::think ()
-{
+void DefaultAI::think() {
+
 	if (tribe == nullptr)
-		late_initialization ();
+		late_initialization();
 
 	const int32_t gametime = game().get_gametime();
 
@@ -108,19 +135,16 @@ void DefaultAI::think ()
 		// update statistics about buildable fields
 		update_all_buildable_fields(gametime);
 	}
-	if (m_mineable_changed) {
-		// do the same for mineable fields
-		update_all_mineable_fields(gametime);
-	}
+
 	m_buildable_changed = false;
-	m_mineable_changed = false;
 
 	// if there are more than one economy try to connect them with a road.
-	if (next_road_due <= gametime) {
-		next_road_due = gametime + 1000;
-		if (construct_roads (gametime)) {
+	if (next_road_due_ <= gametime) {
+		next_road_due_ = gametime + 1000;
+
+		if (construct_roads(gametime)) {
 			m_buildable_changed = true;
-			m_mineable_changed = true;
+			// m_mineable_changed = true;
 			return;
 		}
 	} else
@@ -129,9 +153,8 @@ void DefaultAI::think ()
 
 	// NOTE Because of the check above, the following parts of think() are used
 	// NOTE only once every second at maximum. This increases performance and as
-	// NOTE human players can not even react that fast, it should not be a
+	// NOTE human player_s can not even react that fast, it should not be a
 	// NOTE disadvantage for the defaultAI.
-
 	// This must be checked every time as changes of bobs in AI area aren't
 	// handled by the AI itself.
 	update_all_not_buildable_fields();
@@ -139,7 +162,7 @@ void DefaultAI::think ()
 	// IF defaultAI is AGGRESSIVE - we definitely should consider to attack as
 	// often as possible.
 	if (type == AGGRESSIVE)
-		if (next_attack_consideration_due <= gametime)
+		if (next_attack_consideration_due_ <= gametime)
 			consider_attack(gametime);
 
 	// check if anything in the economies changed.
@@ -150,14 +173,15 @@ void DefaultAI::think ()
 
 	// Before thinking about a new construction, update current stats, to have
 	// a better view on current economy.
-	if (next_stats_update_due <= gametime)
+	if (next_stats_update_due_ <= gametime)
 		update_productionsite_stats(gametime);
 
 	// Now try to build something if possible
-	if (next_construction_due <= gametime) {
-		next_construction_due = gametime + 2000;
+	if (next_construction_due_ <= gametime) {
+		next_construction_due_ = gametime + 2000;
+
 		if (construct_building(gametime)) {
-			time_of_last_construction = gametime;
+			time_of_last_construction_ = gametime;
 			return;
 		}
 	}
@@ -167,7 +191,7 @@ void DefaultAI::think ()
 		return;
 
 	// Check the mines and consider upgrading or destroying one
-	if (check_mines(gametime))
+	if (check_mines_(gametime))
 		return;
 
 	// consider whether a change of the soldier capacity of some militarysites
@@ -178,7 +202,7 @@ void DefaultAI::think ()
 	//  Finally consider military actions if defaultAI type is Aggressive or
 	// Normal.
 	if (!(type == DEFENSIVE))
-		if (next_attack_consideration_due <= gametime)
+		if (next_attack_consideration_due_ <= gametime)
 			consider_attack(gametime);
 
 	// improve existing roads!
@@ -191,14 +215,13 @@ void DefaultAI::think ()
 	if (improve_roads(gametime)) {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
-		inhibit_road_building = gametime + 2500;
+		inhibit_road_building_ = gametime + 2500;
 		return;
 	}
 }
 
 /// called by Widelands game engine when an immovable changed
-void DefaultAI::receive(const NoteImmovable & note)
-{
+void DefaultAI::receive(const NoteImmovable& note) {
 	if (note.lg == LOSE)
 		lose_immovable(*note.pi);
 	else
@@ -206,12 +229,10 @@ void DefaultAI::receive(const NoteImmovable & note)
 }
 
 /// called by Widelands game engine when a field changed
-void DefaultAI::receive(const NoteFieldPossession & note)
-{
+void DefaultAI::receive(const NoteFieldPossession& note) {
 	if (note.lg == GAIN)
 		unusable_fields.push_back(note.fc);
 }
-
 
 /**
  * Cares for all variables not initialised during construction
@@ -219,82 +240,93 @@ void DefaultAI::receive(const NoteFieldPossession & note)
  * When DefaultAI is constructed, some information is not yet available (e.g.
  * world), so this is done after complete loading of the map.
  */
-void DefaultAI::late_initialization ()
-{
+void DefaultAI::late_initialization() {
 	player = game().get_player(player_number());
 	NoteReceiver<NoteImmovable>::connect(*player);
 	NoteReceiver<NoteFieldPossession>::connect(*player);
 	tribe = &player->tribe();
-
-	log ("ComputerPlayer(%d): initializing (%u)\n", player_number(), type);
-
+	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type);
 	Ware_Index const nr_wares = tribe->get_nrwares();
 	wares.resize(nr_wares);
+
 	for (Ware_Index i = 0; i < nr_wares; ++i) {
-		wares.at(i).producers    = 0;
-		wares.at(i).consumers    = 0;
-		wares.at(i).preciousness = tribe->get_ware_descr(i)->preciousness();
+		wares.at(i).producers_ = 0;
+		wares.at(i).consumers_ = 0;
+		wares.at(i).preciousness_ = tribe->get_ware_descr(i)->preciousness();
 	}
 
 	// collect information about the different buildings our tribe can construct
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
-	const World & world = game().map().world();
+	const World& world = game().world();
+
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
-		const Building_Descr & bld = *tribe->get_building_descr(i);
-		const std::string & building_name = bld.name();
-		const BuildingHints & bh = bld.hints();
+		const Building_Descr& bld = *tribe->get_building_descr(i);
+		const std::string& building_name = bld.name();
+		const BuildingHints& bh = bld.hints();
+		buildings.resize(buildings.size() + 1);
+		BuildingObserver& bo = buildings.back();
+		bo.name = building_name.c_str();
+		bo.id = i;
+		bo.desc = &bld;
+		bo.type = BuildingObserver::BORING;
+		bo.cnt_built_ = 0;
+		bo.cnt_under_construction_ = 0;
+		bo.cnt_target_ = 0;
+		bo.stocklevel_ = 0;
+		bo.stocklevel_time = 0;
+		bo.last_dismantle_time_ = 0;
+		// this is set to negative number, otherwise the AI would wait 25 sec
+		// after game start not building anything
+		bo.construction_decision_time_ = -60 * 60 * 1000;
+		bo.production_hint_ = -1;
+		bo.current_stats_ = 0;
+		bo.unoccupied_ = false;
+		bo.is_basic_ = false;
+		bo.is_buildable_ = bld.is_buildable();
+		bo.need_trees_ = bh.is_logproducer();
+		bo.need_stones_ = bh.is_stoneproducer();
+		bo.mines_marble_ = bh.is_marbleproducer();
+		bo.need_water_ = bh.get_needs_water();
+		bo.mines_water_ = bh.mines_water();
+		bo.recruitment_ = bh.for_recruitment();
+		bo.space_consumer_ = bh.is_space_consumer();
 
-		buildings.resize (buildings.size() + 1);
+		if (char const* const s = bh.get_renews_map_resource()) {
+			bo.production_hint_ = tribe->safe_ware_index(s);
 
-		BuildingObserver & bo     = buildings.back();
-		bo.name                   = building_name.c_str();
-		bo.id                     = i;
-		bo.desc                   = &bld;
-		bo.type                   = BuildingObserver::BORING;
-		bo.cnt_built              = 0;
-		bo.cnt_under_construction = 0;
-		bo.production_hint        = -1;
-		bo.current_stats          = 100;
-		bo.unoccupied             = false;
+			if (kHintDebug)
+				log(" TDEBUG: %-20s get production hint: %d\n", bo.name, bo.production_hint_);
+		}
 
-		bo.is_basic               = false;
+		// I just presume cut wood is named "log" in the game
+		if (tribe->safe_ware_index("log") == bo.production_hint_)
+			bo.plants_trees_ = true;
+		else
+			bo.plants_trees_ = false;
 
-		bo.is_buildable           = bld.is_buildable();
-
-		bo.need_trees             = bh.is_logproducer();
-		bo.need_stones            = bh.is_stoneproducer();
-		bo.need_water             = bh.get_needs_water();
-		bo.recruitment            = bh.for_recruitment();
-		bo.space_consumer         = bh.is_space_consumer();
-
-		if (char const * const s = bh.get_renews_map_resource())
-			bo.production_hint = tribe->safe_ware_index(s);
+		if (kHintDebug)
+			log(" building %-15s: plants trees: %s\n", bo.name, bo.plants_trees_ ? "Y" : "N");
 
 		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSite_Descr)) {
-			const ProductionSite_Descr & prod =
-				ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
-
-			bo.type =
-				bld.get_ismine() ? BuildingObserver::MINE :
-				BuildingObserver::PRODUCTIONSITE;
-
+			const ProductionSite_Descr& prod =
+			   ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
+			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 			container_iterate_const(BillOfMaterials, prod.inputs(), j)
-				bo.inputs.push_back(j.current->first);
-
-			container_iterate_const
-				(ProductionSite_Descr::Output, prod.output_ware_types(), j)
-				bo.outputs.push_back(*j.current);
+			bo.inputs_.push_back(j.current->first);
+			container_iterate_const(ProductionSite_Descr::Output, prod.output_ware_types(), j)
+			bo.outputs_.push_back(*j.current);
 
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
-				if (char const * const s = bh.get_mines())
-					bo.mines = world.get_resource(s);
-				bo.mines_percent = bh.get_mines_percent();
+				if (char const* const s = bh.get_mines())
+					bo.mines_ = world.get_resource(s);
+
+				bo.mines_percent_ = bh.get_mines_percent();
 			}
 
-			bo.is_basic            = bh.is_basic();
-			bo.prod_build_material = bh.prod_build_material();
+			bo.is_basic_ = bh.is_basic();
+			bo.prod_build_material_ = bh.prod_build_material();
 
 			continue;
 		}
@@ -320,15 +352,14 @@ void DefaultAI::late_initialization ()
 		}
 	}
 
-	total_constructionsites       =    0;
-	next_construction_due         =    0;
-	next_road_due                 = 1000;
-	next_productionsite_check_due =    0;
-	inhibit_road_building         =    0;
-
+	total_constructionsites = 0;
+	next_construction_due_ = 0;
+	next_road_due_ = 1000;
+	next_productionsite_check_due_ = 0;
+	inhibit_road_building_ = 0;
 	// Add all fields that we own
-	Map & map = game().map();
-	std::set<OPtr<PlayerImmovable> > found_immovables;
+	Map& map = game().map();
+	std::set<OPtr<PlayerImmovable>> found_immovables;
 
 	for (Y_Coordinate y = 0; y < map.get_height(); ++y) {
 		for (X_Coordinate x = 0; x < map.get_width(); ++x) {
@@ -337,9 +368,10 @@ void DefaultAI::late_initialization ()
 			if (f.field->get_owned_by() != player_number())
 				continue;
 
-			unusable_fields.push_back (f);
+			unusable_fields.push_back(f);
 
 			if (upcast(PlayerImmovable, imm, f.field->get_immovable()))
+
 				//  Guard by a set - immovables might be on several nodes at once.
 				if (&imm->owner() == player and not found_immovables.count(imm)) {
 					found_immovables.insert(imm);
@@ -349,21 +381,15 @@ void DefaultAI::late_initialization ()
 	}
 }
 
-
 /**
  * Checks ALL available buildable fields.
  *
  * this shouldn't be used often, as it might hang the game for some 100
  * milliseconds if the area the computer owns is big.
  */
-void DefaultAI::update_all_buildable_fields(const int32_t gametime)
-{
-	while
-		(not buildable_fields.empty()
-		 and
-		 buildable_fields.front()->next_update_due <= gametime)
-	{
-		BuildableField & bf = *buildable_fields.front();
+void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
+	while (not buildable_fields.empty() and buildable_fields.front()->next_update_due_ <= gametime) {
+		BuildableField& bf = *buildable_fields.front();
 
 		//  check whether we lost ownership of the node
 		if (bf.coords.field->get_owned_by() != player_number()) {
@@ -374,17 +400,16 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime)
 
 		//  check whether we can still construct regular buildings on the node
 		if ((player->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
-			unusable_fields.push_back (bf.coords);
+			unusable_fields.push_back(bf.coords);
 			delete &bf;
 			buildable_fields.pop_front();
 			continue;
 		}
 
-		update_buildable_field (bf);
-		bf.next_update_due = gametime + FIELD_UPDATE_INTERVAL;
-
-		buildable_fields.push_back (&bf);
-		buildable_fields.pop_front ();
+		update_buildable_field(bf);
+		bf.next_update_due_ = gametime + kFieldUpdateInterval;
+		buildable_fields.push_back(&bf);
+		buildable_fields.pop_front();
 	}
 }
 
@@ -394,14 +419,9 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime)
  * this shouldn't be used often, as it might hang the game for some 100
  * milliseconds if the area the computer owns is big.
  */
-void DefaultAI::update_all_mineable_fields(const int32_t gametime)
-{
-	while
-		(not mineable_fields.empty()
-		 and
-		 mineable_fields.front()->next_update_due <= gametime)
-	{
-		MineableField * mf = mineable_fields.front();
+void DefaultAI::update_all_mineable_fields(const int32_t gametime) {
+	while (not mineable_fields.empty() and mineable_fields.front()->next_update_due_ <= gametime) {
+		MineableField* mf = mineable_fields.front();
 
 		//  check whether we lost ownership of the node
 		if (mf->coords.field->get_owned_by() != player_number()) {
@@ -412,18 +432,16 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
 
 		//  check whether we can still construct regular buildings on the node
 		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE) == 0) {
-			unusable_fields.push_back (mf->coords);
+			unusable_fields.push_back(mf->coords);
 			delete mf;
-
 			mineable_fields.pop_front();
 			continue;
 		}
 
-		update_mineable_field (*mf);
-		mf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
-
-		mineable_fields.push_back (mf);
-		mineable_fields.pop_front ();
+		update_mineable_field(*mf);
+		mf->next_update_due_ = gametime + kFieldUpdateInterval;  // in fact this has very small effect
+		mineable_fields.push_back(mf);
+		mineable_fields.pop_front();
 	}
 }
 
@@ -432,10 +450,10 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
  *
  * milliseconds if the area the computer owns is big.
  */
-void DefaultAI::update_all_not_buildable_fields()
-{
+void DefaultAI::update_all_not_buildable_fields() {
 	int32_t const pn = player_number();
 	uint32_t maxchecks = unusable_fields.size();
+
 	if (maxchecks > 50)
 		maxchecks = 50;
 
@@ -447,24 +465,17 @@ void DefaultAI::update_all_not_buildable_fields()
 		}
 
 		// check whether building capabilities have improved
-		if (player->get_buildcaps(unusable_fields.front()) & BUILDCAPS_SIZEMASK)
-		{
-
-			buildable_fields.push_back
-				(new BuildableField(unusable_fields.front()));
+		if (player->get_buildcaps(unusable_fields.front()) & BUILDCAPS_SIZEMASK) {
+			buildable_fields.push_back(new BuildableField(unusable_fields.front()));
 			unusable_fields.pop_front();
-
-			update_buildable_field (*buildable_fields.back());
+			update_buildable_field(*buildable_fields.back());
 			continue;
 		}
 
 		if (player->get_buildcaps(unusable_fields.front()) & BUILDCAPS_MINE) {
-
-			mineable_fields.push_back
-				(new MineableField(unusable_fields.front()));
+			mineable_fields.push_back(new MineableField(unusable_fields.front()));
 			unusable_fields.pop_front();
-
-			update_mineable_field (*mineable_fields.back());
+			update_mineable_field(*mineable_fields.back());
 			continue;
 		}
 
@@ -473,763 +484,1128 @@ void DefaultAI::update_all_not_buildable_fields()
 	}
 }
 
-
 /// Updates one buildable field
-void DefaultAI::update_buildable_field
-	(BuildableField & field, uint16_t range, bool military)
-{
+void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bool military) {
 	// look if there is any unowned land nearby
-	Map & map = game().map();
+	Map& map = game().map();
 	FindNodeUnowned find_unowned(player, game());
+	FindNodeUnownedMineable find_unowned_mines_pots(player, game());
 	Player_Number const pn = player->player_number();
+	field.unowned_land_nearby_ =
+	   map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned);
 
-	field.unowned_land_nearby =
-		map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned);
+	if (field.unowned_land_nearby_ > 2)  // 2 is 'reasonably low' number here
+		field.unowned_mines_pots_nearby_ = map.find_fields(
+		   Area<FCoords>(field.coords, range + 2),
+		   nullptr,
+		   find_unowned_mines_pots);  //+2: a mine can mine raw materials from some range
+	else
+		field.unowned_mines_pots_nearby_ = 0;
 
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
-
 	// Search in a radius of range
-	map.find_immovables (Area<FCoords>(field.coords, range), &immovables);
+	map.find_immovables(Area<FCoords>(field.coords, range), &immovables);
 
 	// Is this a general update or just for military consideration
 	// (second is used in check_militarysites)
 	if (!military) {
-		int32_t const tree_attr  = Map_Object_Descr::get_attribute_id("tree");
-		int32_t const stone_attr = Map_Object_Descr::get_attribute_id("stone");
-
-		field.reachable      = false;
-		field.preferred      = false;
-		field.avoid_military = false;
-		field.enemy_nearby   = false;
-
-		field.military_influence     = 0;
-		field.trees_nearby           = 0;
-		field.stones_nearby          = 0;
-		field.space_consumers_nearby = 0;
-		field.producers_nearby.clear();
-		field.producers_nearby.resize(wares.size());
-		field.consumers_nearby.clear();
-		field.consumers_nearby.resize(wares.size());
+		int32_t const tree_attr = Map_Object_Descr::get_attribute_id("tree");
+		field.reachable = false;
+		field.preferred_ = false;
+		field.enemy_nearby_ = false;
+		field.military_capacity_ = 0;
+		field.military_loneliness_ = 1000;  // instead of floats(v-
+		field.military_presence_ = 0;
+		field.military_stationed_ = 0;
+		field.trees_nearby_ = 0;
+		field.space_consumers_nearby_ = 0;
+		field.producers_nearby_.clear();
+		field.producers_nearby_.resize(wares.size());
+		field.consumers_nearby_.clear();
+		field.consumers_nearby_.resize(wares.size());
 		std::vector<Coords> water_list;
-		FindNodeWater find_water;
-		map.find_fields(Area<FCoords>(field.coords, 4), &water_list, find_water);
-		field.water_nearby = water_list.size();
+
+		if (field.water_nearby_ == -1) {  //-1 means "value has never been calculated"
+			FindNodeWater find_water(game().world());
+			map.find_fields(Area<FCoords>(field.coords, 4), &water_list, find_water);
+			field.water_nearby_ = water_list.size();
+		}
 
 		FCoords fse;
-		map.get_neighbour (field.coords, WALK_SE, &fse);
+		map.get_neighbour(field.coords, WALK_SE, &fse);
 
-		if (BaseImmovable const * const imm = fse.field->get_immovable())
-			if
-				(dynamic_cast<Flag const *>(imm)
-				 or
-				 (dynamic_cast<Road const *>(imm)
-				  &&
-				  (fse.field->nodecaps() & BUILDCAPS_FLAG)))
-			field.preferred = true;
+		if (BaseImmovable const* const imm = fse.field->get_immovable())
+			if (dynamic_cast<Flag const*>(imm)
+			    or(dynamic_cast<Road const*>(imm) && (fse.field->nodecaps() & BUILDCAPS_FLAG)))
+				field.preferred_ = true;
 
 		for (uint32_t i = 0; i < immovables.size(); ++i) {
-			const BaseImmovable & base_immovable = *immovables.at(i).object;
-			if (dynamic_cast<const Flag *>(&base_immovable))
+			const BaseImmovable& base_immovable = *immovables.at(i).object;
+
+			if (dynamic_cast<const Flag*>(&base_immovable))
 				field.reachable = true;
+
 			if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
-				// TODO  Only continue; if this is an opposing site
-				// TODO  allied sites should be counted for military influence
+
+				//// TODO  Only continue; if this is an opposing site
+				//// TODO  allied sites should be counted for military influence
 				if (player_immovable->owner().player_number() != pn) {
 					if (player->is_hostile(player_immovable->owner()))
-						field.enemy_nearby = true;
+						field.enemy_nearby_ = true;
+
 					continue;
 				}
 
 			if (upcast(Building const, building, &base_immovable)) {
-
 				if (upcast(ConstructionSite const, constructionsite, building)) {
-					const Building_Descr & target_descr =
-						constructionsite->building();
+					const Building_Descr& target_descr = constructionsite->building();
 
-					if
-						(upcast
-						 	(MilitarySite_Descr const, target_ms_d, &target_descr))
-					{
-						const int32_t v =
-							target_ms_d->get_conquers()
-							-
-							map.calc_distance(field.coords, immovables.at(i).coords);
-
-						if (0 < v) {
-							field.military_influence += v * (v + 2) * 6;
-							field.avoid_military = true;
-						}
-					}
-
-					if (dynamic_cast<ProductionSite_Descr const *>(&target_descr))
-						consider_productionsite_influence
-							(field,
-							 immovables.at(i).coords,
-							 get_building_observer(constructionsite->name().c_str()));
+					if (dynamic_cast<ProductionSite_Descr const*>(&target_descr))
+						consider_productionsite_influence(
+						   field,
+						   immovables.at(i).coords,
+						   get_building_observer(constructionsite->name().c_str()));
 				}
 
-				if (upcast(MilitarySite const, militarysite, building)) {
-					const int32_t v =
-						militarysite->get_conquers()
-						-
-						map.calc_distance(field.coords, immovables.at(i).coords);
+				if (dynamic_cast<const ProductionSite*>(building))
+					consider_productionsite_influence(
+					   field, immovables.at(i).coords, get_building_observer(building->name().c_str()));
+			}
 
-					if (v > 0)
-						field.military_influence +=
-							v * v * militarysite->soldierCapacity();
-				}
+			if (immovables.at(i).object->has_attribute(tree_attr))
+				++field.trees_nearby_;
+		}
 
-				if (dynamic_cast<const ProductionSite *>(building))
-					consider_productionsite_influence
-						(field,
-						 immovables.at(i).coords,
-						 get_building_observer(building->name().c_str()));
+		// stones are not renewable, we will count them only if previous state si nonzero
+		if (field.stones_nearby_ > 0) {
+
+			int32_t const stone_attr = Map_Object_Descr::get_attribute_id("stone");
+			field.stones_nearby_ = 0;
+
+			for (uint32_t j = 0; j < immovables.size(); ++j) {
+				// const BaseImmovable & base_immovable = *immovables.at(i).object;
+				if (immovables.at(j).object->has_attribute(stone_attr))
+					++field.stones_nearby_;
+			}
+		}
+
+		//// ground water is not renewable and its amount can only fall, we will count them only if
+		/// previous state si nonzero
+		if (field.ground_water_ > 0) {
+			field.ground_water_ =
+			   field.coords.field->get_resources_amount();  // field->get_resources();
+
+			// log(" RESOURCE DEBUG: %2d",field.get_resources());
+		}
+	}
+
+	// folowing is done allways (regardless of military or not)
+
+	if (kMilitScoreDebug)
+		log(" FIELD SCORE: central building: %3dx%3d\n", field.coords.x, field.coords.y);
+
+	field.military_stationed_ = 0;
+
+	for (uint32_t i = 0; i < immovables.size(); ++i) {
+		const BaseImmovable& base_immovable = *immovables.at(i).object;
+
+		// testing if it is enemy-owned field
+		// TODO count such fields...
+		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
+
+			// TODO  Only continue; if this is an opposing site
+			// TODO  allied sites should be counted for military influence
+			if (player_immovable->owner().player_number() != pn) {
+				if (player->is_hostile(player_immovable->owner()))
+					field.enemy_nearby_ = true;
 
 				continue;
 			}
 
-			if (immovables.at(i).object->has_attribute(tree_attr))
-				++field.trees_nearby;
+		if (upcast(Building const, building, &base_immovable)) {
+			if (upcast(ConstructionSite const, constructionsite, building)) {
+				const Building_Descr& target_descr = constructionsite->building();
 
-			if (immovables.at(i).object->has_attribute(stone_attr))
-				++field.stones_nearby;
-		}
-	} else { // the small update just for military consideration
-		for (uint32_t i = 0; i < immovables.size(); ++i) {
-			const BaseImmovable & base_immovable = *immovables.at(i).object;
-			if (upcast(Building const, building, &base_immovable)) {
-				if (upcast(ConstructionSite const, constructionsite, building)) {
-					const Building_Descr & target_descr =
-						constructionsite->building();
+				if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr)) {
+					const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
+					const int32_t radius = target_ms_d->get_conquers() + 4;
+					const int32_t v = radius - dist;
 
-					if
-						(upcast
-						 	(MilitarySite_Descr const, target_ms_d, &target_descr))
-					{
-						const int32_t v =
-							target_ms_d->get_conquers()
-							-
-							map.calc_distance(field.coords, immovables.at(i).coords);
+					if (v > 0) {
+						if (kMilitScoreDebug)
+							log(" FIELD SCORE:  testing near military construction site at %3dx%3d, "
+							    "presumed capacity: %d, loneliness:%4f (%2d:%2d)\n",
+							    immovables.at(i).coords.x,
+							    immovables.at(i).coords.y,
+							    2,
+							    static_cast<double>(dist) / radius,
+							    dist,
+							    radius);
 
-						if (0 < v) {
-							field.military_influence += v * (v + 2) * 6;
-							field.avoid_military = true;
-						}
+						field.military_capacity_ += 2;
+						field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
+						field.military_in_constr_nearby_ += 1;
 					}
 				}
-				if (upcast(MilitarySite const, militarysite, building)) {
-					const int32_t v =
-						militarysite->get_conquers()
-						-
-						map.calc_distance(field.coords, immovables.at(i).coords);
+			}
 
-					if (v > 0)
-						field.military_influence +=
-							v * v * militarysite->soldierCapacity();
+			if (upcast(MilitarySite const, militarysite, building)) {
+				const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
+				const int32_t radius = militarysite->get_conquers() + 4;
+				const int32_t v = radius - dist;
+
+				if (v > 0 and dist > 0) {
+					if (kMilitScoreDebug)
+						log(" FIELD SCORE:  testing near military building at %3dx%3d, capacity: %d, "
+						    "loneliness:%3f (%2d:%2d), stationed: %" PRIuS "\n",
+						    immovables.at(i).coords.x,
+						    immovables.at(i).coords.y,
+						    militarysite->maxSoldierCapacity(),
+						    static_cast<double>(dist) / radius,
+						    dist,
+						    radius,
+						    militarysite->stationedSoldiers().size());
+
+					field.military_capacity_ += militarysite->maxSoldierCapacity();
+					field.military_presence_ += militarysite->stationedSoldiers().size();
+
+					if (!militarysite->stationedSoldiers().empty()) {
+						field.military_stationed_ += 1;
+					}
+
+					field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
 				}
 			}
 		}
 	}
+
+	if (kMilitScoreDebug)
+		log(" FIELD SCORE:  results: capacity: %d, presence: %d, loneliness: %4d, stationed: %1d\n",
+		    field.military_capacity_,
+		    field.military_presence_,
+		    field.military_loneliness_,
+		    field.military_stationed_);
+
+	//}
 }
 
 /// Updates one mineable field
-void DefaultAI::update_mineable_field (MineableField & field)
-{
+void DefaultAI::update_mineable_field(MineableField& field) {
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
-	Map & map = game().map();
-
-	map.find_immovables (Area<FCoords>(field.coords, 6), &immovables);
-
-	field.reachable    = false;
-	field.preferred    = false;
-	field.mines_nearby = 1;
-
+	Map& map = game().map();
+	map.find_immovables(Area<FCoords>(field.coords, 5), &immovables);
+	field.reachable = false;
+	field.preferred_ = false;
+	field.mines_nearby_ = 1;
 	FCoords fse;
 	map.get_brn(field.coords, &fse);
 
-	if (BaseImmovable const * const imm = fse.field->get_immovable())
-		if
-			(dynamic_cast<Flag const *>(imm)
-			 or
-			 (dynamic_cast<Road const *>(imm)
-			  &&
-			  (fse.field->nodecaps() & BUILDCAPS_FLAG)))
-		field.preferred = true;
+	if (BaseImmovable const* const imm = fse.field->get_immovable())
+		if (dynamic_cast<Flag const*>(imm)
+		    or(dynamic_cast<Road const*>(imm) && (fse.field->nodecaps() & BUILDCAPS_FLAG)))
+			field.preferred_ = true;
 
 	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
-		if (dynamic_cast<Flag const *>(i.current->object))
+		if (dynamic_cast<Flag const*>(i.current->object))
 			field.reachable = true;
 		else if (upcast(Building const, bld, i.current->object)) {
 			if (bld->descr().get_ismine()) {
-				++field.mines_nearby;
+				++field.mines_nearby_;
 			} else if (upcast(ConstructionSite const, cs, bld)) {
 				if (cs->building().get_ismine())
-					++field.mines_nearby;
+					++field.mines_nearby_;
 			}
 		}
 	}
 }
 
-
-/// Updates the productionsites statistics needed for construction decision.
+/// Updates the production and MINE sites statistics needed for construction decision.
 void DefaultAI::update_productionsite_stats(int32_t const gametime) {
-	// Updating the stats every 20 seconds should be enough
-	next_stats_update_due = gametime + 20000;
+	// Updating the stats every 10 seconds should be enough
+	next_stats_update_due_ = gametime + 10000;
 
 	// Reset statistics for all buildings
 	for (uint32_t i = 0; i < buildings.size(); ++i) {
-		if (buildings.at(i).cnt_built > 0)
-			buildings.at(i).current_stats = 0;
-		// If there are no buildings of that type set the current_stats to 100
+		if (buildings.at(i).cnt_built_ > 0)
+			buildings.at(i).current_stats_ = 0;
+		// If there are no buildings of that type set the current_stats_ to 100
 		else
-			buildings.at(i).current_stats = 100;
-		buildings.at(i).unoccupied = false;
+			buildings.at(i).current_stats_ = 0;  // there was 100, this confuses algorithm
+
+		buildings.at(i).unoccupied_ = false;
 	}
 
 	// Check all available productionsites
 	for (uint32_t i = 0; i < productionsites.size(); ++i) {
-		assert(productionsites.front().bo->cnt_built > 0);
-
-		// Add statistics value
-		productionsites.front().bo->current_stats +=
-			productionsites.front().site->get_statistics_percent();
-
-		// Check whether this building is completely occupied
-		productionsites.front().bo->unoccupied |=
-			!productionsites.front().site->can_start_working();
-
-		// Now reorder the buildings
-		productionsites.push_back(productionsites.front());
+		ProductionSiteObserver& productionsite_observer = productionsites.front();
+		// TODO(sirver): Popping here means that we HAVE to push another thing at
+		// the end or our loop will not do the right think. This is terrible
+		// design. It would be much better to push to a new vector and swap the
+		// productionsites' content after the loop. I refuse to fix this though.
 		productionsites.pop_front();
+
+		assert(productionsite_observer.bo->cnt_built_ > 0);
+
+		ProductionSite* productionsite = productionsite_observer.site.get(game());
+		if (productionsite != nullptr) {
+			// Add statistics value
+			productionsite_observer.bo->current_stats_ += productionsite->get_crude_statistics();
+			if (kStatDebug and abs(productionsite->get_crude_statistics() -
+			                       productionsite->get_statistics_percent()) > 50)
+				log(" STAT DEBUG: %15s (%3dx%3d): crude statistic: %3d vs official statistics: %3d\n",
+				    productionsite->name().c_str(),
+				    productionsite->get_position().x,
+				    productionsite->get_position().y,
+				    productionsite->get_crude_statistics(),
+				    productionsite->get_statistics_percent());
+			// Check whether this building is completely occupied
+			productionsite_observer.bo->unoccupied_ |= !productionsite->can_start_working();
+		}
+		// Now reorder the buildings
+		productionsites.push_back(productionsite_observer);
+	}
+
+	// for mines_ also
+	// Check all available productionsites
+	for (uint32_t i = 0; i < mines_.size(); ++i) {
+		assert(mines_.front().bo->cnt_built_ > 0);
+		ProductionSite* mine = mines_.front().site.get(game());
+		if (mine != nullptr) {
+			// Add statistics value
+			mines_.front().bo->current_stats_ += mine->get_statistics_percent();
+			// Check whether this building is completely occupied
+			mines_.front().bo->unoccupied_ |= !mine->can_start_working();
+		}
+		// Now reorder the buildings
+		mines_.push_back(mines_.front());
+		mines_.pop_front();
 	}
 
 	// Scale statistics down
 	for (uint32_t i = 0; i < buildings.size(); ++i) {
-		if (buildings.at(i).cnt_built > 0)
-			buildings.at(i).current_stats /= buildings.at(i).cnt_built;
+		if (buildings.at(i).cnt_built_ > 0)
+			buildings.at(i).current_stats_ /= buildings.at(i).cnt_built_;
 	}
 }
 
-
-/**
- * constructs the most needed building
- *
- * The need for a productionsite or a mine is calculated by the need for
- * their produced wares. The need for logproducers (like lumberjack's huts),
- * stoneproducers (like quarries) and resource refreshing buildings (like
- * forester's houses, gamekeeper's huts or fishbreeder houses) are calculated
- * separately as these buildings should have another priority (on one hand they
- * are important for the basic infrastructure, but there is no need for a lot
- * of these buildings.
- * Militarysites, warehouses and trainingsites have a different calculation,
- * that (should) depend on the initialisation type (Aggressive, Normal,
- * Defensive)
- */
-bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
-{
-	// TODO make this smarter, easier and yet more effective
-
-	// TODO implement handling of seafaring
-
-	// Do not have too many constructionsites
-	uint32_t producers = mines.size() + productionsites.size();
-	bool onlymissing = false;
-	if (total_constructionsites >= (2 + (producers / 10)))
-		onlymissing = true;
-
+// * Constructs the most needed building
+//   algorithm goes over all available spots and all allowed buildings,
+//   scores every combination and one with highest and positive score
+//   is built.
+// * Buildings are split into categories
+// * The logic is complex but aproximatelly:
+// - buildings producing building material are preffered
+// - buildings identified as basic are preffered
+// - first bulding of a type is preffered
+// - if a bulding is upgradeable, second building is also preffered
+//   (there should be no upgrade when there are not two buildings of the same type)
+// - algorigthm is trying to take into account actual utlization of buildings
+//   (the one shown in GUI/game is not reliable, it calculates own statistics)
+// * military buildings have own strategy, split into two situations:
+// - there is no enemy
+// - there is an enemy
+//   Currently more military buildings are built then needed
+//   and "optimalization" (dismantling not needed buildings) is done afterwards
+bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	//  Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
-
+	bool field_blocked = false;
+	int32_t spots = 0;
+	uint32_t consumers_nearby_count = 0;
+	// this is to increase score so also building near borders can be built
+	int32_t bulgarian_constant = 12;
 	std::vector<int32_t> spots_avail;
 	spots_avail.resize(4);
 
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
 
-	for
-		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
-		 i != buildable_fields.end();
-		 ++i)
+	for (std::list<BuildableField*>::iterator i = buildable_fields.begin();
+	     i != buildable_fields.end();
+	     ++i)
 		++spots_avail.at((*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK);
 
+	// calculating expand factor
 	int32_t expand_factor = 0;
 
 	if (type != DEFENSIVE) {
 		++expand_factor;
+
 		// check space and set the need for expansion
-		if
-			(spots_avail.at(BUILDCAPS_BIG)
-			 <
-			 static_cast<uint16_t>(2 + (productionsites.size() / 50)))
+		if (spots_avail.at(BUILDCAPS_BIG) < static_cast<uint16_t>(2 + (productionsites.size() / 50)))
 			expand_factor += 2;
-		if
-			(spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG)
-			 <
-			 static_cast<uint16_t>(4 + (productionsites.size() / 50)))
+
+		if (spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG) <
+		    static_cast<uint16_t>(4 + (productionsites.size() / 50)))
 			expand_factor += type;
 
-		uint32_t spots = spots_avail.at(BUILDCAPS_SMALL);
+		spots = spots_avail.at(BUILDCAPS_SMALL);
 		spots += spots_avail.at(BUILDCAPS_MEDIUM);
 		spots += spots_avail.at(BUILDCAPS_BIG);
+
 		if (type == AGGRESSIVE)
 			spots -= militarysites.size() / 20;
+
 		if (spots < 16)
 			expand_factor *= 2;
+
 		if ((type == AGGRESSIVE) && spots < 32)
 			expand_factor *= 2;
 	} else {
 		// check space and set the need for expansion
 		if (spots_avail.at(BUILDCAPS_BIG) < 7)
 			++expand_factor;
+
 		if (spots_avail.at(BUILDCAPS_MEDIUM) + spots_avail.at(BUILDCAPS_BIG) < 12)
 			++expand_factor;
-		if
-			(spots_avail.at(BUILDCAPS_SMALL)  +
-			 spots_avail.at(BUILDCAPS_MEDIUM) +
-			 spots_avail.at(BUILDCAPS_BIG)
-			 <
-			 16)
+
+		if (spots_avail.at(BUILDCAPS_SMALL) + spots_avail.at(BUILDCAPS_MEDIUM) +
+		       spots_avail.at(BUILDCAPS_BIG) <
+		    16)
 			expand_factor *= 3;
 	}
 
-	// don't expand when we have unoccupied military buildings
-	//if (TODO) expand_factor = 0;
+	// checking amount of free spots, if needed setting new building stop flag
+	new_buildings_stop_ = false;
+
+	if (militarysites.size() * 2 + 20 < productionsites.size() or spots <
+	    (7 + static_cast<int32_t>(productionsites.size()) / 5)) {
+		new_buildings_stop_ = true;
+	}
+
+	if (kNewBuildingDebug)
+		log(" TDEBUG new buildings stop: %s; milit: %3" PRIuS " vs prod: %3" PRIuS
+		    " buildings, spots: %4d\n",
+		    new_buildings_stop_ ? "Y" : "N",
+		    militarysites.size(),
+		    productionsites.size(),
+		    spots);
+
+	// sometimes there is to many military buildings in construction, so we must
+	// prevent initialization of further buildings start
+	bool new_military_buildings_stop = false;
+	// in areas close to enemies, above limit is not effective, so we have second one
+	// more benevolent limit
+	bool near_enemy_b_buildings_stop = false;
+	// in some situation expansion just halts because there are not good spots to expand
+	// so this is a boost to increase a score and allow building a military building on a spot
+	// that is normally not suitable for building
+	int32_t military_boost = 1;
+
+	int32_t treshold = (militarysites.size() + productionsites.size()) / 100 + 1;
+
+	if (unstationed_milit_buildings_ + military_under_constr_ / 3 > treshold) {
+		new_military_buildings_stop = true;
+
+		if (kMilitaryDebug)
+			log(" TDEBUG new military buildings stop ON, %d %d \n",
+			    unstationed_milit_buildings_,
+			    military_under_constr_);
+	} else if (kMilitaryDebug)
+		log(" TDEBUG new military buildings stop OFF, %d %d\n",
+		    unstationed_milit_buildings_,
+		    military_under_constr_);
+
+	if (unstationed_milit_buildings_ + military_under_constr_ / 3 > 2 * treshold) {
+		near_enemy_b_buildings_stop = true;
+
+		if (kMilitaryDebug)
+			log(" TDEBUG new military near-enemy buildings stop ON, %d %d \n",
+			    unstationed_milit_buildings_,
+			    military_under_constr_);
+	}
+
+	// here we deal with situation when for some time no new military building was built
+	// in fact this is a last time when there were any military buildings in construction
+	if ((unstationed_milit_buildings_ + military_under_constr_) > 0)
+		military_last_build_ = game().get_gametime();
+
+	if (military_last_build_ + 1 * 60 * 1000 < game().get_gametime()) {
+		if (kMilitaryDebug)
+			log(" TDEBUG: Boosting military building\n");
+
+		military_boost = 200;
+	}
 
 	// Defensive AIs also attack sometimes (when they want to expand)
 	if (type == DEFENSIVE && expand_factor > 1)
-		if (next_attack_consideration_due <= game().get_gametime())
+		if (next_attack_consideration_due_ <= game().get_gametime())
 			consider_attack(game().get_gametime());
 
-
-	Building_Index proposed_building = INVALID_INDEX;
+	// Building_Index proposed_building = INVALID_INDEX; // I need BuildingObserver not index
+	BuildingObserver* best_building = nullptr;
 	int32_t proposed_priority = 0;
 	Coords proposed_coords;
 
 	// Remove outdated fields from blocker list
-	for
-		(std::list<BlockedField>::iterator i = blocked_fields.begin();
-		 i != blocked_fields.end();)
-		if (i->blocked_until < game().get_gametime()) {
+	for (std::list<BlockedField>::iterator i = blocked_fields.begin(); i != blocked_fields.end();)
+		if (i->blocked_until_ < game().get_gametime()) {
 			i = blocked_fields.erase(i);
-		}
-		else ++i;
+		} else
+			++i;
+
+	// these are 3 helping variables
+	bool output_is_needed = false;
+	int16_t max_preciousness = 0;         // preciousness_ of most precious output
+	int16_t max_needed_preciousness = 0;  // preciousness_ of most precious NEEDED output
 
 	// first scan all buildable fields for regular buildings
-	for
-		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
-		 i != buildable_fields.end();
-		 ++i)
-	{
-		BuildableField * const bf = *i;
+	for (std::list<BuildableField*>::iterator i = buildable_fields.begin();
+	     i != buildable_fields.end();
+	     ++i) {
+		BuildableField* const bf = *i;
 
 		if (!bf->reachable)
 			continue;
 
+		if (time(nullptr) % 5 == 0)
+			continue;  // add randomnes and ease AI
+
 		// Continue if field is blocked at the moment
-		for
-			(std::list<BlockedField>::iterator j = blocked_fields.begin();
-			 j != blocked_fields.end();
-			 ++j)
+		field_blocked = false;
+
+		for (std::list<BlockedField>::iterator j = blocked_fields.begin(); j != blocked_fields.end();
+		     ++j)
 			if (j->coords == bf->coords)
-				continue;
+				field_blocked = true;
+
+		// continue;
+		if (field_blocked)
+			continue;
 
 		assert(player);
-		int32_t const maxsize =
-			player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
+		int32_t const maxsize = player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
 
-		// Check all buildable buildings
+		// For every field test all buildings
 		for (uint32_t j = 0; j < buildings.size(); ++j) {
-			BuildingObserver & bo = buildings.at(j);
+			BuildingObserver& bo = buildings.at(j);
 
 			if (!bo.buildable(*player))
 				continue;
 
+			if (time(nullptr) % 3 == 0)
+				continue;  // add randomnes and ease AI
+
 			if (bo.type == BuildingObserver::MINE)
 				continue;
 
-			// If there are already a lot of constructionsites, only missing
-			// productionsites that produce build material are allowed
-			// (perhaps they are needed to finish the other constructionsites?)
-			if (onlymissing) {
-				if (!(bo.type == BuildingObserver::PRODUCTIONSITE))
-					continue;
-				if ((bo.total_count() > 0) || !bo.prod_build_material)
-					continue;
+			if (gametime - bo.construction_decision_time_ < kBuildingMinInterval)
+				continue;
+
+			if (bo.unoccupied_)
+				continue;
+
+			if (bo.type != BuildingObserver::MILITARYSITE and bo.cnt_under_construction_ >= 2)
+				continue;
+
+			// so we are going to seriously evaluate this building on this field,
+			// first some base info
+			// if at least on of outputs is needed
+			output_is_needed = false;
+			// max presiousness of outputs
+			max_preciousness = 0;
+			// max preciousness of most needed output
+			max_needed_preciousness = 0;
+
+			// Check if the produced wares are needed (if it is producing anything)
+			if (!bo.outputs_.empty()) {
+				container_iterate(std::list<EconomyObserver*>, economies, l) {
+					// Don't check if the economy has no warehouse.
+					if ((*l.current)->economy.warehouses().empty())
+						continue;
+
+					for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
+						Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
+
+						if ((*l.current)->economy.needs_ware(wt)) {
+							output_is_needed = true;
+
+							if (wares.at(bo.outputs_.at(m)).preciousness_ > max_needed_preciousness)
+								max_needed_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
+
+							max_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
+						} else {
+							if (wares.at(bo.outputs_.at(m)).preciousness_ > max_preciousness)
+								max_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
+						}
+					}
+				}
 			}
 
+			// if current field is not big enough
 			if (bo.desc->get_size() > maxsize)
 				continue;
 
-			int32_t prio = 0;
+			int32_t prio = 0;  // score of a bulding on a field
 
 			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
-				// Don't build another building of this type, if there is already
-				// one that is unoccupied at the moment
-				if (bo.unoccupied)
-					continue;
-				if (bo.need_trees) {
-					// Priority of woodcutters depend on the number of near trees
-					prio += bf->trees_nearby * 3;
-					prio /= 3 * (1 + bf->producers_nearby.at(bo.outputs.at(0)));
 
-					// TODO improve this - it's still useless to place lumberjack huts randomly
-					/*if (prio <= 0) // no, sometimes we need wood without having a forest
-						continue;*/
+				// this can be only a well (as by now)
+				if (bo.mines_water_) {
+					if (bf->ground_water_ < 2)
+						continue;
 
-					// Check if the produced wares are needed
-					Ware_Index wt(static_cast<size_t>(bo.outputs.at(0)));
-					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						// Don't check if the economy has no warehouse.
-						if ((*l.current)->economy.warehouses().empty())
-							continue;
-						if ((*l.current)->economy.needs_ware(wt))
-							prio += 1 + wares.at(bo.outputs.at(0)).preciousness;
+					if (bo.cnt_under_construction_ + bo.unoccupied_ > 0)
+						continue;
+					if ((bo.cnt_built_ + bo.unoccupied_) > 0 and gametime < kBaseInfrastructureTime)
+						continue;
+					if (new_buildings_stop_)
+						continue;
+					bo.cnt_target_ =
+					   2 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
+					if ((bo.cnt_built_ + bo.cnt_under_construction_ + bo.unoccupied_) > bo.cnt_target_)
+						continue;
+
+					if (bo.stocklevel_time < game().get_gametime() - 30 * 1000) {
+						bo.stocklevel_ = get_stocklevel(bo);
+						bo.stocklevel_time = game().get_gametime();
+					}
+					if (bo.stocklevel_ > 50)
+						continue;
+					if (kWellDebug)
+						log(" kWellDebug: %-15s has %2d resources, stocklevel: %3d\n",
+						    bo.name,
+						    bf->ground_water_,
+						    bo.stocklevel_);
+					prio = bf->ground_water_ - 2;
+					prio = recalc_with_border_range(*bf, prio);
+
+				} else if (bo.need_trees_) {  // LUMBERJACS
+
+					if (kWoodDebug)
+						log(" TDEBUG: %1d: buildings count:%2d-%2d-%2d, trees nearby: %3d, "
+						    "build.stop: %s\n",
+						    player_number(),
+						    bo.cnt_built_,
+						    bo.cnt_under_construction_,
+						    bo.unoccupied_,
+						    bf->trees_nearby_ * 2,
+						    (new_buildings_stop_) ? "Y" : "N");
+
+					if (bo.cnt_built_ + bo.cnt_under_construction_ + bo.unoccupied_ <= 2)
+						prio = bulgarian_constant + 200 + bf->trees_nearby_;
+					else if (bo.cnt_under_construction_ + bo.unoccupied_ <= 1) {
+						prio =
+						   bf->trees_nearby_ - 5 -
+						   new_buildings_stop_ * 40;  //+ bf->producers_nearby_.at(bo.outputs_.at(0))*5;
 					}
 
-					if (bo.total_count() < 2) {
-						prio *= 6; // big bonus for the basics
-						if (bo.total_count() == 0)
-							prio *= 4; // even more for the absolute basics
+					if (kWoodDebug and prio > 0)
+						log(" TDEBUG: %1d: suggesting woodcutter with prio: %2d, total: %2d\n",
+						    player_number(),
+						    prio,
+						    bo.cnt_built_ + bo.cnt_under_construction_ + bo.unoccupied_);
+				} else if (bo.need_stones_) {
+
+					// quaries are generally to be built everywhere where stones are
+					// no matter the need for stones, as stones are considered an obstacle
+					// to expansion
+					if (bo.cnt_under_construction_ > 0)
+						continue;
+					prio = bf->stones_nearby_;
+
+					if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
+						bo.stocklevel_ = get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint_));
+						bo.stocklevel_time = game().get_gametime();
 					}
-				} else if (bo.need_stones) {
-					// Priority of quarries depend on the number of near stones
-					prio += bf->stones_nearby * 3;
-					prio /= 3 * (1 + bf->producers_nearby.at(bo.outputs.at(0)));
-					if (bo.total_count() < 2) {
-						prio *= 6; // big bonus for the basics
-						if (bo.total_count() == 0)
-							prio *= 4; // even more for the absolute basics
-					}
-				} else if (bo.production_hint >= 0) {
+
+					if (bo.stocklevel_ < 20)
+						prio = prio * 2;
+
+					if (bo.total_count() == 0)
+						prio = prio * 2;
+
+					// to prevent to many quaries on one spot
+					prio = prio - 30 * bf->producers_nearby_.at(bo.outputs_.at(0));
+
+				} else if (bo.production_hint_ >= 0) {
+					// first setting targets (needed also for dismantling)
+					if (bo.plants_trees_)
+						bo.cnt_target_ =
+						   2 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 15;
+					else
+						bo.cnt_target_ =
+						   1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
+
+					if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0)
+						continue;
+
 					// production hint (f.e. associate forester with logs)
 
-					// Calculate the need for this building
-					int16_t inout = wares.at(bo.production_hint).consumers;
-					if
-						(tribe->safe_ware_index("log")
-						 ==
-						 bo.production_hint)
-						inout += total_constructionsites / 4;
-					inout -= wares.at(bo.production_hint).producers;
-					if (inout < 1)
-						inout = 1;
-					// the ware they're refreshing
-					Ware_Index wt(static_cast<size_t>(bo.production_hint));
-					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						// Don't check if the economy has no warehouse.
-						if ((*l.current)->economy.warehouses().empty())
-							continue;
-						if ((*l.current)->economy.needs_ware(wt)) {
-							prio += wares.at(bo.production_hint).preciousness * inout * 2;
-							break;
-						}
-					}
-
-					// Do not build too many of these buildings, but still care
-					// to build at least two.
-					// And add bonus near buildings outputting production_hint ware.
-					prio += (5 * bf->producers_nearby.at(bo.production_hint)) / 2;
-					prio -= bo.total_count() * 2;
-					prio /= bo.total_count() + 1;
-					prio += (bf->producers_nearby.at(bo.production_hint) - 1) * 5;
-					if (bo.total_count() > 2)
-						prio -= bo.total_count();
-					else {
-						prio += wares.at(bo.production_hint).preciousness;
-						prio *= 3;
-					}
-					if (prio < 0)
-						continue;
-				} else if (bo.recruitment) {
-					// "recruitment centeres" like the donkey farm should be build up
-					// as soon as a basic infrastructure was completed.
-					// and of course the defaultAI should think of further
-					// constructions of that type later in game.
-					prio -= 12; // start calculation with an offset
-					prio += productionsites.size() + mines.size();
-					prio -= (bo.total_count()) * 40;
-					prio *= 2;
-
-					// take care about borders and enemies
-					prio = recalc_with_border_range(*bf, prio);
-				} else { // "normal" productionsites
-
-					// ToDo: prefer soldier producing things
-					// Ware_Index const soldier_index = tribe().worker_index("soldier");
-
-					if (bo.is_basic && (bo.total_count() == 0))
-						prio += 100; // for very important buildings
-
-					// Check if the produced wares are needed
-					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						// Don't check if the economy has no warehouse.
-						if ((*l.current)->economy.warehouses().empty())
-							continue;
-						for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-							Ware_Index wt(static_cast<size_t>(bo.outputs.at(m)));
-
-							// if we have too much of it (avoids mass storage)
-							if
-								((*l.current)->economy.stock_ware(wt) > 6 *
-								 (*l.current)->economy.ware_target_quantity(wt).permanent)
-								prio -= 20;
-
-							// if the economy needs this ware
-							if ((*l.current)->economy.needs_ware(wt)) {
-								prio += 1 + wares.at(bo.outputs.at(m)).preciousness;
-								if (bo.total_count() == 0)
-									// big bonus, this site might be elemental
-									prio += 3 * wares.at(bo.outputs.at(m)).preciousness;
-							}
-
-							// we can enhance this building. build more
-							// maybe the enhancement can produce needed ware
-							if (bo.desc->enhancements().size() > 0) {
-								// this code builds more metalworks
-								if (bo.total_count() == 0)
-									prio += 2;
-								if (bo.total_count() == 1)
-									prio += 8;
-							}
-						}
-						for (uint32_t m = 0; m < bo.inputs.size(); ++m) {
-							Ware_Index wt(static_cast<size_t>(bo.inputs.at(m)));
-
-							// if the economies don't need it: "waste" it
-							if (!(*l.current)->economy.needs_ware(wt)) {
-								if (bo.total_count() == 0 && bo.prod_build_material)
-									// big bonus, this site might be elemental
-									prio += 3 * wares.at(bo.inputs.at(m)).preciousness;
-							}
-						}
-					}
-
-					// If the produced wares are needed
-					if (prio > 0) {
-						int32_t inout_prio = 0;
-						for (size_t k = 0; k < bo.inputs.size(); ++k) {
-							inout_prio += bf->producers_nearby.at(bo.inputs.at(k));
-							inout_prio -= bf->consumers_nearby.at(bo.inputs.at(k)) / 2;
-						}
-						for (size_t k = 0; k < bo.outputs.size(); ++k)
-							inout_prio += bf->consumers_nearby.at(bo.outputs.at(k));
-						prio += 2 * inout_prio;
-						prio = calculate_need_for_ps(bo, prio);
-					} else
+					if (bo.need_water_ and bf->water_nearby_ < 3)  // probably some of them needs water
 						continue;
 
-					// take care about borders and enemies
+					if (bo.plants_trees_) {  // RANGERS
+						if (bo.total_count() < bo.cnt_target_)
+							prio = 70;
+						else {  // even when we are above goal we need to consider level of stock
+							if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
+								bo.stocklevel_ =
+								   get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint_));
+								bo.stocklevel_time = game().get_gametime();
+							}
+
+							if (bo.stocklevel_ < 5 and new_buildings_stop_)
+								prio = bf->producers_nearby_.at(bo.production_hint_) * 5 - 5 -
+								       bf->trees_nearby_ * 2;
+							else if (bo.stocklevel_ < 50)
+								prio = 50 + bf->producers_nearby_.at(bo.production_hint_) * 5 -
+								       bf->trees_nearby_ * 2;
+							else
+								continue;  // we are above tresh
+						}
+					} else if (gametime > kBaseInfrastructureTime and not
+					                         new_buildings_stop_) {  // gamekeepers or so
+						if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
+							bo.stocklevel_ =
+							   get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint_));
+							bo.stocklevel_time = game().get_gametime();
+						}
+
+						if (bo.total_count() < bo.cnt_target_) {
+							prio = bf->producers_nearby_.at(bo.production_hint_) * 10;
+							prio = recalc_with_border_range(*bf, prio);
+
+						} else if (bo.stocklevel_ < 50 and not new_buildings_stop_) {
+							prio = bf->producers_nearby_.at(bo.production_hint_) * 5;
+							prio = recalc_with_border_range(*bf, prio);  // only for not wood producers_
+						} else
+							continue;
+					}
+
+					if (kHintDebug or(kWoodDebug and bo.plants_trees_))
+						log(" TDEBUG: %1d: suggesting new %16s at %3dx%3d, current count: %2d, goal: "
+						    "%2d, stocklevel_:%3d, new build. stop: %s, prio: %d\n",
+						    player_number(),
+						    bo.name,
+						    bf->coords.x,
+						    bf->coords.y,
+						    bo.total_count(),
+						    bo.cnt_target_,
+						    bo.stocklevel_,
+						    new_buildings_stop_ ? "Y" : "N",
+						    prio);
+
+					if (prio <= 0)
+						continue;
+				} else if (bo.recruitment_ and gametime >
+				           kBaseInfrastructureTime and not new_buildings_stop_) {
+					// this will depend on number of mines_ and productionsites
+					if (static_cast<int32_t>((productionsites.size() + mines_.size()) / 30) >
+					       bo.total_count() and bo.cnt_under_construction_ ==
+					    0)
+						prio = 4 + bulgarian_constant;
+				} else {  // finally normal productionsites
+					if (bo.production_hint_ >= 0)
+						continue;
+
+					if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0)
+						continue;
+
+					// first eliminate buildings needing water if there is short supplies
+					if (bo.need_water_ and bf->water_nearby_ < 3)
+						continue;
+
+					if ((bo.is_basic_ or bo.prod_build_material_)and bo.total_count() == 0)
+						prio = 150 + max_preciousness;
+					else if (game().get_gametime() <
+					         kBaseInfrastructureTime or
+					            new_buildings_stop_)  // leave 15 minutes for basic infrastructure only
+						continue;
+					else if (((bo.is_basic_ or bo.prod_build_material_)and bo.total_count() <=
+					          1)or(output_is_needed and bo.total_count() == 0))
+						prio = 80 + max_preciousness;
+					else if (bo.inputs_.size() == 0) {
+						bo.cnt_target_ =
+						   1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 8;
+
+						if (bo.cnt_built_ >
+						    bo.cnt_target_ and not
+						       bo.space_consumer_)  // spaceconsumers_ can be built more then target
+							continue;
+
+						if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
+							bo.stocklevel_ = get_stocklevel(bo);
+							bo.stocklevel_time = game().get_gametime();
+						}
+						if (kSpaceDebug and bo.space_consumer_)
+							log(" TDEBUG: %1d: considering %-15s, stock: %3d\n",
+							    player_number(),
+							    bo.name,
+							    bo.stocklevel_);
+
+						if (bo.stocklevel_ < 50) {
+							prio = max_preciousness + bulgarian_constant;
+
+							if (bo.space_consumer_)
+								prio += 5;
+
+							if (not bo.space_consumer_)
+								prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) *
+								        20;  // leave some free space between them
+
+							if (bo.cnt_built_ < 2)
+								prio += 5;
+
+							prio = recalc_with_border_range(*bf, prio);
+
+							if (kProductionDebug or(kSpaceDebug and bo.space_consumer_))
+								log(" TDEBUG: %1d: proposing %-15s , on stock: %3d(<50), stat: %3d, "
+								    "count: %2d/T:%2d, setting priority: %2d, on %3d %3d\n",
+								    player_number(),
+								    bo.name,
+								    bo.stocklevel_,
+								    bo.current_stats_,
+								    bo.total_count(),
+								    bo.cnt_target_,
+								    prio,
+								    bf->coords.x,
+								    bf->coords.y);
+						}
+					} else if (!bo.inputs_.empty()) {
+						// to have two buildings from everything (intended for upgradeable buildings)
+						// but I do not know how to identify such buildings
+						if (bo.cnt_built_ == 1
+						    and game().get_gametime() > 60 * 60 * 1000
+						    and !bo.desc->enhancements().empty()
+						    and !mines_.empty()) {
+							prio = max_preciousness + bulgarian_constant;
+						}
+						// if output is needed and there are no idle buildings
+						else if (output_is_needed) {
+							if (bo.cnt_built_ > 0 and bo.current_stats_ > 80) {
+								prio = max_preciousness + bulgarian_constant + 30;
+
+								if (kProductionDebug)
+									log(" TDEBUG: %2d/%-15s with inputs_: stats: %3d>90, setting "
+									    "priority: %2d, on %3d %3d\n",
+									    bo.id,
+									    bo.name,
+									    bo.current_stats_,
+									    prio,
+									    bf->coords.x,
+									    bf->coords.y);
+							} else if (bo.cnt_built_ > 0 and bo.current_stats_ > 55) {
+								prio = max_preciousness + bulgarian_constant;
+
+								if (kProductionDebug)
+									log(" TDEBUG: %2d/%-15s with inputs_: stats: %3d>60, setting "
+									    "priority: %2d, on %3d %3d\n",
+									    bo.id,
+									    bo.name,
+									    bo.current_stats_,
+									    prio,
+									    bf->coords.x,
+									    bf->coords.y);
+							}
+						}
+					}
+
+					if (prio <= 0)
+						continue;
+
+					// then we consider borders and enemies nearby (if any)
 					prio = recalc_with_border_range(*bf, prio);
 
-					// do not construct more than one building,
-					// if supply line is already broken.
-					if (!check_supply(bo) && bo.total_count() > 0)
-						prio -= 12;
+					//+1 if any consumers_ are nearby
+					consumers_nearby_count = 0;
 
+					for (size_t k = 0; k < bo.outputs_.size(); ++k)
+						consumers_nearby_count += bf->consumers_nearby_.at(bo.outputs_.at(k));
+
+					if (consumers_nearby_count > 0)
+						prio += 1;
 				}
-			} else if (bo.type == BuildingObserver::MILITARYSITE) {
-				if (!bf->unowned_land_nearby)
+			}  // production sites done
+			else if (bo.type == BuildingObserver::MILITARYSITE) {
+				if (military_boost > 1 and kMilitaryDebug)
+					log(" TDEBUG: boosting: unowned land %d \n", bf->unowned_land_nearby_);
+
+				if (new_military_buildings_stop and not bf->enemy_nearby_)
 					continue;
-				prio  = bf->unowned_land_nearby * (1 + type);
-				prio -= bf->military_influence * (5 - type);
-				// set to at least 1
-				prio  = prio > 0 ? prio : 1;
-				prio *= expand_factor;
-				prio /= 2;
 
-				if (bf->enemy_nearby)
-					prio *= 2;
-				else
-					prio -= bf->military_influence * 2;
+				if (near_enemy_b_buildings_stop and bf->enemy_nearby_)
+					continue;
 
-				if (bf->avoid_military)
-					prio /= 5;
+				if (bo.desc->get_size() ==
+				    3 and game().get_gametime() <
+				       15 * 60 * 1000)  // do not built fortresses in first half of hour of game
+					continue;
 
-				prio -= militarysites.size() - productionsites.size() / (3 - type);
+				if (!bf->unowned_land_nearby_)
+					continue;
 
+				// not to build so many military buildings nearby
+				if (!bf->enemy_nearby_ and bf->military_in_constr_nearby_ > 1)
+					continue;
+
+				// here is to consider unowned potential mines
+				int32_t mines_spots_score = 0;
+				mines_spots_score = bf->unowned_mines_pots_nearby_;
+
+				if (mines_spots_score > 0) {
+					mines_spots_score *= 4;
+					mines_spots_score += 8;
+				}
+
+				prio = (bf->unowned_land_nearby_ - 4 + mines_spots_score + bf->stones_nearby_ / 2 +
+				        bf->military_loneliness_ / 5 - 100 + military_boost);  // * (1 + type);
+
+				if (kMilitaryDebug)
+					log(" NEW MILITARY: %3dx%3d: unowned: %3d(%3d), mines_: %3d, lonel.: %4d (%4d), "
+					    "stones: %2d, boost: %3d,result: %3d, enemy:% 2d, cur stat: %2d/%2d/%2d, "
+					    "stops:%s %s\n",
+					    bf->coords.x,
+					    bf->coords.y,
+					    bf->unowned_land_nearby_ - 4,
+					    mines_spots_score,
+					    bf->unowned_mines_pots_nearby_,
+					    bf->military_loneliness_ / 5 - 100,
+					    bf->military_loneliness_,
+					    bf->stones_nearby_ / 2,
+					    military_boost,
+					    prio,
+					    bf->enemy_nearby_,
+					    bo.cnt_built_,
+					    unstationed_milit_buildings_,
+					    bo.cnt_under_construction_,
+					    new_military_buildings_stop ? "Y" : "N",
+					    near_enemy_b_buildings_stop ? "Y" : "N");
+
+				if (bo.desc->get_size() < maxsize)
+					prio = prio - 5;  // penalty
+
+				if (bf->enemy_nearby_ and bf->military_capacity_ < 12) {
+					if (kMilitaryDebug)
+						log(" NEW MILITARY: Military capacity: %2d, boosting priority by 100d\n",
+						    bf->military_capacity_);
+
+					prio += 100;
+				}
+
+				if (kMilitaryDebug and prio > 0)
+					log(" NEW MILITARY:  candidate's final priority: %d \n", prio);
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
-				//  Build one warehouse for ~every 35 productionsites and mines.
+				//  Build one warehouse for ~every 35 productionsites and mines_.
 				//  Militarysites are slightly important as well, to have a bigger
 				//  chance for a warehouses (containing waiting soldiers or wares
 				//  needed for soldier training) near the frontier.
-				prio += productionsites.size() + mines.size();
-				prio += militarysites.size() / 3;
-				prio -= (bo.cnt_under_construction + numof_warehouses) * 35;
-				prio *= 2;
+				if ((static_cast<int32_t>(productionsites.size() + mines_.size())) / 35 >
+				       static_cast<int32_t>(numof_warehouses_) and bo.cnt_under_construction_ ==
+				    0)
+					prio = 13;
 
 				// take care about borders and enemies
 				prio = recalc_with_border_range(*bf, prio);
+
+				// TODO:
+				// introduce check that there is no warehouse nearby to prevent to close placing
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
-				// Start building trainingsites when there are already more than 50
-				// other buildings. That should be enough for a working economy.
-				//  On the other hand only build more trainingsites of the same
-				//  type if the economy is really big.
-				prio += productionsites.size() + militarysites.size();
-				prio += mines.size();
-				prio += type * 10; // +0 / +10 / +20 for DEFF/NORM/AGGR
-				prio  = prio / (bo.total_count() + 1);
-				prio -= (bo.total_count() + 1) * 70;
+				// build after 20 production sites and then after each 50 production site
+				if (static_cast<int32_t>((productionsites.size() + 30) / 50) >
+				       bo.total_count() and bo.cnt_under_construction_ ==
+				    0)
+					prio = 4;
 
 				// take care about borders and enemies
 				prio = recalc_with_border_range(*bf, prio);
-			}
-
-			// avoid to have too many construction sites
-			// but still enable the player to build up basic productionsites
-			if
-				(bo.type != BuildingObserver::PRODUCTIONSITE ||
-				 !bo.is_basic || bo.total_count() > 0)
-				prio /=
-					1 + bo.cnt_under_construction * (bo.cnt_under_construction + 1);
-
-			// add big penalty if water is needed, but is not near
-			if (bo.need_water) {
-				if (bf->water_nearby < 3)
-					continue;
-				int effect = bf->water_nearby - 8;
-				prio +=
-					effect > 0 ?
-					static_cast<int>(sqrt(static_cast<double>(effect))) : effect;
-				// if same producers are nearby, then give some penalty
-				for (size_t k = 0; k < bo.outputs.size(); ++k)
-					if (bf->producers_nearby.at(bo.outputs.at(k)) > 0)
-						prio -= 3;
 			}
 
 			// think of space consuming buildings nearby like farms or vineyards
-			prio /= 1 + bf->space_consumers_nearby;
+			prio -= bf->space_consumers_nearby_ * 10;
 
 			// Stop here, if priority is 0 or less.
 			if (prio <= 0)
 				continue;
 
 			// Prefer road side fields
-			prio += bf->preferred ?  1 : 0;
-
+			prio += bf->preferred_ ? 1 : 0;
 			// don't waste good land for small huts
-			prio -= (maxsize - bo.desc->get_size()) * 3;
+			prio -= (maxsize - bo.desc->get_size()) * 5;
+
 			if (prio > proposed_priority) {
-				proposed_building = bo.id;
+				best_building = &bo;
 				proposed_priority = prio;
-				proposed_coords   = bf->coords;
+				proposed_coords = bf->coords;
 			}
-		}
-	}
+		}  // ending loop over buildings
+	}     // ending loop over fields
 
-	// then try all mines - as soon as basic economy is build up.
-	for
-		(uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i)
-	{
-		BuildingObserver & bo = buildings.at(i);
+	// then try all mines_ - as soon as basic economy is build up.
+	if (gametime > next_mine_construction_due_) {
 
-		if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
-			continue;
+		update_all_mineable_fields(gametime);
+		next_mine_construction_due_ = gametime + kIdleMineUpdateInterval;
 
-		// Don't build another building of this type, if there is already
-		// one that is unoccupied at the moment
-		if (bo.unoccupied)
-			continue;
+		if (!mineable_fields.empty()) {
 
+			for (uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i) {
+				BuildingObserver& bo = buildings.at(i);
 
-		// Only have 2 mines of a type under construction
-		if (bo.cnt_under_construction > 2)
-			continue;
+				if (not bo.mines_marble_ and gametime <
+				    kBaseInfrastructureTime)  // allow only stone mines_ in early stages of game
+					continue;
 
-		if (onlymissing)
-			// Do not build mines twice, as long as other buildings might be more needed
-			if (bo.total_count() > 0)
-				continue;
+				if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
+					continue;
 
+				if (gametime - bo.construction_decision_time_ < kBuildingMinInterval)
+					continue;
 
-		for
-			(std::list<MineableField *>::iterator j = mineable_fields.begin();
-			 j != mineable_fields.end();
-			 ++j)
-		{
-			int32_t prio = 0;
+				// Don't build another building of this type, if there is already
+				// one that is unoccupied_ at the moment
+				// or under construction
+				if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0)
+					continue;
 
-			if ((*j)->coords.field->get_resources() != bo.mines)
-				continue;
-			else
-				prio += (*j)->coords.field->get_resources_amount() * 4 / 3;
-
-			// Only build mines on locations where some material can be mined
-			if (prio < 2)
-				continue;
-
-			// Continue if field is blocked at the moment
-			bool blocked = false;
-			for
-				(std::list<BlockedField>::iterator k = blocked_fields.begin();
-				 k != blocked_fields.end();
-				 ++k)
-				if ((*j)->coords == k->coords) {
-					blocked = true;
-					break;
+				// calculating actual amount of mined raw materials
+				if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
+					bo.stocklevel_ = get_stocklevel(bo);
+					bo.stocklevel_time = game().get_gametime();
 				}
-			if (blocked) continue;
 
-			// Check if current economy can supply enough food for production.
-			for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
-				prio += wares.at(bo.inputs.at(k)).producers;
-				prio -= wares.at(bo.inputs.at(k)).consumers / 2;
+				if (kMinesDebug)
+					log(" TDEBUG: %1d considering %12s/%1d: stat: %3d(<20), stocklevel_: %2d, count %2d "
+					    "/ %2d / %2d\n",
+					    player_number(),
+					    bo.name,
+					    bo.mines_,
+					    bo.current_stats_,
+					    bo.stocklevel_,
+					    bo.total_count(),
+					    bo.unoccupied_,
+					    bo.cnt_under_construction_);
+
+				// Only try to build mines_ that produce needed wares.
+				if (((bo.cnt_built_ - bo.unoccupied_) > 0 and bo.current_stats_ < 20)or bo.stocklevel_ >
+				    40 + static_cast<uint32_t>(bo.mines_marble_) * 30) {
+					if (kMinesDebug)
+						log("  No need to seek for this mine type: stat: %2d, stock :%2d/%2d\n",
+						    bo.current_stats_,
+						    bo.stocklevel_,
+						    40 + bo.mines_marble_ * 30);
+					continue;
+				}
+
+				// this is penalty if there are existing mines too close
+				// it is treated as multiplicator for count of near mines
+				uint32_t nearness_penalty = 0;
+				if ((bo.cnt_built_ + bo.cnt_under_construction_) == 0)
+					nearness_penalty = 0;
+				else if (bo.mines_marble_)
+					nearness_penalty = 7;
+				else
+					nearness_penalty = 10;
+
+				// iterating over fields
+				for (std::list<MineableField*>::iterator j = mineable_fields.begin();
+				     j != mineable_fields.end();
+				     ++j) {
+
+					if ((*j)->coords.field->get_resources() != bo.mines_)
+						continue;
+
+					int32_t prio = (*j)->coords.field->get_resources_amount();
+
+					// applying nearnes penalty
+					prio = prio - (*j)->mines_nearby_ * nearness_penalty;
+
+					if (kMinesDebug)
+						log("  TDEBUG: priority of spot at %3d x %3d: %3d (%2d - %2d*%2d) , current "
+						    "best: %2d \n",
+						    (*j)->coords.x,
+						    (*j)->coords.y,
+						    prio,
+						    (*j)->coords.field->get_resources_amount(),
+						    (*j)->mines_nearby_,
+						    nearness_penalty,
+						    proposed_priority);
+
+					// Only build mines_ on locations where some material can be mined
+					if (prio < 2)
+						continue;
+
+					// Continue if field is blocked at the moment
+					bool blocked = false;
+
+					for (std::list<BlockedField>::iterator k = blocked_fields.begin();
+					     k != blocked_fields.end();
+					     ++k)
+						if ((*j)->coords == k->coords) {
+							blocked = true;
+							break;
+						}
+
+					if (blocked) {
+						if (kMinesDebug)
+							log("   spot blocked!\n");
+						continue;
+					}
+
+					if (prio > proposed_priority) {
+						// proposed_building = bo.id;
+						best_building = &bo;
+						proposed_priority = prio;
+						proposed_coords = (*j)->coords;
+						mine = true;
+
+						if (kMinesDebug)
+							log("   TDEBUG: using %-12s as a candidate\n", bo.name);
+					}
+				}  // end of evaluation of field
 			}
 
-			// our wares are needed? gimme more
-			uint32_t ioprio = 0;
-			for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-				ioprio += 5 * wares.at(bo.outputs.at(m)).preciousness;
-			}
+		}  // section if mine size >0
+	}     // end of mines_ section
 
-			// tribes that have enhanceable mines should build more mines
-			prio *= 1 + 100 / bo.mines_percent;
+	// if there is no winner:
+	// if (proposed_building == INVALID_INDEX) {
+	if (best_building == nullptr) {
+		if (kWinnerDebug)
+			log(" TDEBUG:  no building picked up\n");
 
-			// No plus for mines with multiple output
-			ioprio /= bo.outputs.size();
-			prio += ioprio;
-
-			prio -= 3 * (*j)->mines_nearby * (*j)->mines_nearby;
-			//prio /= 1 + bo.cnt_built * 2;
-
-			// multiply with current statistics of all other buildings of this
-			// type to avoid constructing buildings where already some are running
-			// on low resources.
-			prio *= 5 + bo.current_stats;
-			prio /= 100;
-
-			if (onlymissing) // mines aren't *that* important
-				prio /= 3;
-			if (prio > proposed_priority) {
-
-				proposed_building = bo.id;
-				proposed_priority = prio;
-				proposed_coords = (*j)->coords;
-				mine = true;
-			}
-		}
+		return false;
 	}
-
-	if (proposed_building == INVALID_INDEX)
-		return false;
-
-	// do not have too many construction sites
-	if
-		(proposed_priority < static_cast<int32_t>(total_constructionsites)
-		 and not
-		 onlymissing) // only return here, if we do NOT try to build a missing bld
-		return false;
 
 	// send the command to construct a new building
-	game().send_player_build
-		(player_number(), proposed_coords, proposed_building);
+	game().send_player_build(player_number(), proposed_coords, best_building->id);
+	BlockedField blocked(
+	   game().map().get_fcoords(proposed_coords), game().get_gametime() + 120000);  // two minutes
+	blocked_fields.push_back(blocked);
+
+	if (best_building->type != BuildingObserver::MILITARYSITE)
+		best_building->construction_decision_time_ = gametime;
+	else  // very ugly hack here
+		best_building->construction_decision_time_ = gametime - kBuildingMinInterval / 2;
+
+	if (kWinnerDebug)
+		log(" TDEBUG:  winning priority %4d, building %2d, coords: %3d x %3d, M: %s\n",
+		    proposed_priority,
+		    best_building->id,
+		    proposed_coords.x,
+		    proposed_coords.y,
+		    mine ? "Y" : "N");
 
 	// set the type of update that is needed
-	if (mine)
-		m_mineable_changed = true;
-	else
+	if (mine) {
+		next_mine_construction_due_ = gametime + kBusyMineUpdateInterval;
+
+		if (kMinesUpdateDebug)
+			log(" TDEBUG expanding mine update by: %d,building %2d, coords: %3d x %3d  \n",
+			    kBusyMineUpdateInterval,
+			    best_building->id,
+			    proposed_coords.x,
+			    proposed_coords.y);
+
+		if (kMinesUpdateDebug)
+			log("  new next_mine_construction_due_=%10d\n", next_mine_construction_due_);
+
+		// m_mineable_changed = true;
+	} else
+		// last_mine_constr_time=gametime;
 		m_buildable_changed = true;
 
 	return true;
@@ -1239,25 +1615,25 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
  * This function searches for places where a new road is needed to connect two
  * economies. It then sends the request to build the road.
  */
-bool DefaultAI::construct_roads (int32_t gametime)
-{
+bool DefaultAI::construct_roads(int32_t gametime) {
 	if (economies.size() < 2) {
 		// only one economy, no need for new roads
 		return false;
 	}
 
 	uint32_t economies_to_connect = 0;
-	EconomyObserver * eo_to_connect = economies.front(); // dummy initialisation
+	EconomyObserver* eo_to_connect = economies.front();  // dummy initialisation
 
 	//  fetch first two economies that might be connectable
-	for
-		(std::list<EconomyObserver *>::iterator i = economies.begin();
-		 economies_to_connect < 2 && i != economies.end();
-		 ++i)
+	for (std::list<EconomyObserver*>::iterator i = economies.begin();
+	     economies_to_connect < 2 && i != economies.end();
+	     ++i)
+
 		//  Do not try to connect economies that already failed in last time.
 		if ((*i)->next_connection_try <= gametime) {
 			if (economies_to_connect == 1)
 				eo_to_connect = *i;
+
 			++economies_to_connect;
 		}
 
@@ -1287,22 +1663,19 @@ bool DefaultAI::construct_roads (int32_t gametime)
 
 	// If the economy consists of just one constructionsite, and the defaultAI
 	// failed more than 4 times to connect, we remove the constructionsite
-	if
-		(eo_to_connect->failed_connection_tries > 3
-		 and
-		 eo_to_connect->flags.size() == 1)
-	{
-		Building * bld = eo_to_connect->flags.front()->get_building();
+	if (eo_to_connect->failed_connection_tries > 3 and eo_to_connect->flags.size() == 1) {
+		Building* bld = eo_to_connect->flags.front()->get_building();
+
 		if (bld) {
-			BuildingObserver & bo = get_building_observer(bld->name().c_str());
+			BuildingObserver& bo = get_building_observer(bld->name().c_str());
+
 			if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-				game().send_player_bulldoze(*const_cast<Flag *>(eo_to_connect->flags.front()));
+				game().send_player_bulldoze(*const_cast<Flag*>(eo_to_connect->flags.front()));
 				eo_to_connect->flags.pop_front();
 				// Block the field at constructionsites coords for 5 minutes
 				// against new construction tries.
-				BlockedField blocked
-					(game().map().get_fcoords(bld->get_position()),
-					 game().get_gametime() + 300000);
+				BlockedField blocked(
+				   game().map().get_fcoords(bld->get_position()), game().get_gametime() + 300000);
 				blocked_fields.push_back(blocked);
 			}
 		}
@@ -1315,58 +1688,62 @@ bool DefaultAI::construct_roads (int32_t gametime)
 }
 
 /// improves current road system
-bool DefaultAI::improve_roads (int32_t gametime)
-{
+bool DefaultAI::improve_roads(int32_t gametime) {
 	// Remove flags of dead end roads, as long as no more wares are stored on them
-	container_iterate(std::list<EconomyObserver *>, economies, i)
-		container_iterate(std::list<Flag const *>, (*i.current)->flags, j)
-			if ((*j.current)->is_dead_end() && (*j.current)->current_wares() == 0) {
-				game().send_player_bulldoze(*const_cast<Flag *>((*j.current)));
-				j.current = (*i.current)->flags.erase(j.current);
-				return true;
-			}
+	container_iterate(std::list<EconomyObserver*>, economies, i)
+	container_iterate(std::list<Flag const*>, (*i.current)->flags, j)
+
+	if ((*j.current)->is_dead_end() && (*j.current)->current_wares() == 0) {
+		game().send_player_bulldoze(*const_cast<Flag*>((*j.current)));
+		j.current = (*i.current)->flags.erase(j.current);
+		return true;
+	}
 
 	// force a split on roads that are longer than 3 parts
 	// actually we do not care for loss of building capabilities - normal maps
 	// should have enough space and the computer can expand it's territory.
 	if (!roads.empty()) {
-		const Path & path = roads.front()->get_path();
+		const Path& path = roads.front()->get_path();
 
 		if (path.get_nsteps() > 3) {
-			const Map & map = game().map();
+			const Map& map = game().map();
 			CoordPath cp(map, path);
-
 			// try to split after two steps
 			CoordPath::Step_Vector::size_type i = cp.get_nsteps() - 1, j = 1;
+
 			for (; i >= j; --i, ++j) {
 				{
 					const Coords c = cp.get_coords().at(i);
+
 					if (map[c].nodecaps() & BUILDCAPS_FLAG) {
-						game().send_player_build_flag (player_number(), c);
+						game().send_player_build_flag(player_number(), c);
 						return true;
 					}
 				}
 				{
 					const Coords c = cp.get_coords().at(j);
+
 					if (map[c].nodecaps() & BUILDCAPS_FLAG) {
-						game().send_player_build_flag (player_number(), c);
+						game().send_player_build_flag(player_number(), c);
 						return true;
 					}
 				}
 			}
+
 			// Unable to set a flag - perhaps the road was build stupid
-			game().send_player_bulldoze(*const_cast<Road *>(roads.front()));
+			game().send_player_bulldoze(*const_cast<Road*>(roads.front()));
 		}
 
-		roads.push_back (roads.front());
-		roads.pop_front ();
+		roads.push_back(roads.front());
+		roads.pop_front();
 	}
 
-	if (!economies.empty() && inhibit_road_building <= gametime) {
-		EconomyObserver * eco = economies.front();
+	if (!economies.empty() && inhibit_road_building_ <= gametime) {
+		EconomyObserver* eco = economies.front();
+
 		if (!eco->flags.empty()) {
 			bool finish = false;
-			const Flag & flag = *eco->flags.front();
+			const Flag& flag = *eco->flags.front();
 
 			// try to connect to another economy
 			if (economies.size() > 1)
@@ -1376,17 +1753,15 @@ bool DefaultAI::improve_roads (int32_t gametime)
 			//  TODO do this only on useful places - the attempt below
 			//  TODO  unfortunatey did not work as it should...
 			//  if the flag is full of wares or if it is not yet a fork.
-			if (!finish) //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
+			if (!finish)  //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
 				finish = improve_transportation_ways(flag);
 
 			// cycle through flags one at a time
 			eco->flags.push_back(eco->flags.front());
 			eco->flags.pop_front();
-
 			// and cycle through economies
 			economies.push_back(eco);
 			economies.pop_front();
-
 			return finish;
 		} else
 			// If the economy has no flag, the observers need to be updated.
@@ -1396,32 +1771,28 @@ bool DefaultAI::improve_roads (int32_t gametime)
 	return false;
 }
 
-
 // connects a specific flag to another economy
-bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
-{
+bool DefaultAI::connect_flag_to_another_economy(const Flag& flag) {
 	FindNodeWithFlagOrRoad functor;
 	CheckStepRoadAI check(player, MOVECAPS_WALK, true);
 	std::vector<Coords> reachable;
 	// first look for possible destinations
 	functor.economy = flag.get_economy();
-	Map & map = game().map();
-	map.find_reachable_fields
-		(Area<FCoords>(map.get_fcoords(flag.get_position()), 16),
-		 &reachable,
-		 check,
-		 functor);
+	Map& map = game().map();
+	map.find_reachable_fields(
+	   Area<FCoords>(map.get_fcoords(flag.get_position()), 16), &reachable, check, functor);
 
 	if (reachable.empty())
 		return false;
 
 	// then choose the one with the shortest path
-	Path * path = new Path();
+	Path* path = new Path();
 	bool found = false;
 	check.set_openend(false);
 	Coords closest;
 	container_iterate_const(std::vector<Coords>, reachable, i) {
-		Path * path2 = new Path();
+		Path* path2 = new Path();
+
 		if (map.findpath(flag.get_position(), *i.current, 0, *path2, check) >= 0) {
 			if (!found || path->get_nsteps() > path2->get_nsteps()) {
 				delete path;
@@ -1431,12 +1802,13 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 				found = true;
 			}
 		}
+
 		delete path2;
 	}
 
 	if (found) {
 		// if we join a road and there is no flag yet, build one
-		if (dynamic_cast<const Road *>(map[closest].get_immovable()))
+		if (dynamic_cast<const Road*>(map[closest].get_immovable()))
 			game().send_player_build_flag(player_number(), closest);
 
 		// and finally build the road
@@ -1449,12 +1821,12 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 }
 
 /// adds alternative ways to already existing ones
-bool DefaultAI::improve_transportation_ways (const Flag & flag)
-{
+bool DefaultAI::improve_transportation_ways(const Flag& flag) {
 	// First of all try to remove old building flags to clean up the road web if possible
 	container_iterate(std::list<Widelands::Coords>, flags_to_be_removed, i) {
 		// Maybe the flag was already removed?
 		FCoords f = game().map().get_fcoords(*(i.current));
+
 		if (upcast(Flag, other_flag, f.field->get_immovable())) {
 			// Check if building is dismantled, but don't waste precious wares
 			if (!other_flag->get_building() && other_flag->current_wares() == 0) {
@@ -1467,15 +1839,15 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 			break;
 		}
 	}
-
 	std::priority_queue<NearFlag> queue;
 	std::vector<NearFlag> nearflags;
-
-	queue.push (NearFlag(flag, 0, 0));
-	Map & map = game().map();
+	queue.push(NearFlag(flag, 0, 0));
+	Map& map = game().map();
 
 	while (!queue.empty()) {
-		std::vector<NearFlag>::iterator f = find(nearflags.begin(), nearflags.end(), queue.top().flag);
+		std::vector<NearFlag>::iterator f =
+		   find(nearflags.begin(), nearflags.end(), queue.top().flag);
+
 		if (f != nearflags.end()) {
 			queue.pop();
 			continue;
@@ -1483,46 +1855,40 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 
 		nearflags.push_back(queue.top());
 		queue.pop();
-
-		NearFlag & nf = nearflags.back();
+		NearFlag& nf = nearflags.back();
 
 		for (uint8_t i = 1; i <= 6; ++i) {
-			Road * const road = nf.flag->get_road(i);
+			Road* const road = nf.flag->get_road(i);
 
 			if (!road)
 				continue;
 
-			Flag * endflag = &road->get_flag(Road::FlagStart);
+			Flag* endflag = &road->get_flag(Road::FlagStart);
+
 			if (endflag == nf.flag)
 				endflag = &road->get_flag(Road::FlagEnd);
 
 			int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
-			if (dist > 12) //  out of range
+
+			if (dist > 12)  //  out of range
 				continue;
 
-			queue.push(NearFlag(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
+			queue.push(NearFlag(*endflag, nf.cost_ + road->get_path().get_nsteps(), dist));
 		}
 	}
 
-	std::sort (nearflags.begin(), nearflags.end(), CompareDistance());
-
+	std::sort(nearflags.begin(), nearflags.end(), CompareDistance());
 	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
 
 	for (uint32_t i = 1; i < nearflags.size(); ++i) {
-		NearFlag & nf = nearflags.at(i);
+		NearFlag& nf = nearflags.at(i);
 
-		if (2 * nf.distance + 2 < nf.cost) {
+		if (2 * nf.distance_ + 2 < nf.cost_) {
+			Path& path = *new Path();
 
-			Path & path = *new Path();
-			if
-				(map.findpath
-				 	(flag.get_position(), nf.flag->get_position(), 0, path, check)
-				 >=
-				 0
-				 and
-				 static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost)
-			{
-				game().send_player_build_road (player_number(), path);
+			if (map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check) >=
+			    0 and static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost_) {
+				game().send_player_build_road(player_number(), path);
 				return true;
 			}
 
@@ -1533,25 +1899,24 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 	return false;
 }
 
-
 /**
  * Checks if anything in one of the economies changed and takes care for these
  * changes.
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_economies ()
-{
+bool DefaultAI::check_economies() {
 	while (!new_flags.empty()) {
-		const Flag & flag = *new_flags.front();
+		const Flag& flag = *new_flags.front();
 		new_flags.pop_front();
-		get_economy_observer(flag.economy())->flags.push_back (&flag);
+		get_economy_observer(flag.economy())->flags.push_back(&flag);
 	}
 
-	container_iterate(std::list<EconomyObserver *>, economies, i) {
+	container_iterate(std::list<EconomyObserver*>, economies, i) {
 		// check if any flag has changed its economy
-		std::list<Flag const *> &fl = (*i.current)->flags;
-		for (std::list<Flag const *>::iterator j = fl.begin(); j != fl.end();) {
+		std::list<Flag const*>& fl = (*i.current)->flags;
+
+		for (std::list<Flag const*>::iterator j = fl.begin(); j != fl.end();) {
 			if (&(*i.current)->economy != &(*j)->economy()) {
 				get_economy_observer((*j)->economy())->flags.push_back(*j);
 				j = fl.erase(j);
@@ -1576,184 +1941,360 @@ bool DefaultAI::check_economies ()
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_productionsites(int32_t gametime)
-{
-	if ((next_productionsite_check_due > gametime) || productionsites.empty())
+bool DefaultAI::check_productionsites(int32_t gametime) {
+	if ((next_productionsite_check_due_ > gametime) || productionsites.empty())
 		return false;
-	next_productionsite_check_due = gametime + 1300;
+
+	next_productionsite_check_due_ = gametime + 5000;
 
 	// Get link to productionsite that should be checked
-	ProductionSiteObserver & site = productionsites.front();
-	bool changed = false;
+	ProductionSiteObserver& productionsite_observer = productionsites.front();
+	productionsites.pop_front();
 
+	ProductionSite* productionsite = productionsite_observer.site.get(game());
+	if (!productionsite) {
+		// Site has vanished.
+		return false;
+	}
+	// Push the back for future consideration.
+	productionsites.push_back(productionsite_observer);
+
+	bool changed = false;
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
-
-	const Workarea_Info & workarea_info = site.bo->desc->m_workarea_info;
+	const Workarea_Info& workarea_info = productionsite_observer.bo->desc->m_workarea_info;
 	container_iterate_const(Workarea_Info, workarea_info, i)
-		if (radius < i.current->first)
-			radius = i.current->first;
 
-	Map & map = game().map();
+	if (radius < i.current->first)
+		radius = i.current->first;
+
+	Map& map = game().map();
+
+	// do not dismantle same type of building too soon - to give some time to update statistics
+	// yes it interferes with building updates, but not big problem here
+	if (productionsite_observer.bo->last_dismantle_time_ > game().get_gametime() - 30 * 1000)
+		return false;
 
 	// Lumberjack / Woodcutter handling
-	if
-		(site.bo->need_trees
-		 and
-		 map.find_immovables
-		 	(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-		 	 nullptr,
-		 	 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
-		 ==
-		 0)
-	{
-		if (site.site->get_statistics_percent() == 0) {
+	if (productionsite_observer.bo->need_trees_) {
+		if (map.find_immovables(
+		       Area<FCoords>(map.get_fcoords(productionsite->get_position()), radius),
+		       nullptr,
+		       FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree"))) < 6) {
 			// Do not destruct the last lumberjack - perhaps some small trees are
 			// near, a forester will plant some trees or some new trees will seed
-			// in reach. Computer players can easily run out of wood if this check
+			// in reach. Computer player_s can easily run out of wood if this check
 			// is not done.
-			if (site.bo->cnt_built == 1)
+			if (productionsite_observer.bo->cnt_built_ <=
+			    3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20) {
+				if (kWoodDebug)
+					log(" TDEBUG: %1d: cutter without trees, but not dismantling due to low numbers of "
+					    "cutters (%2d)\n",
+					    player_number(),
+					    productionsite_observer.bo->cnt_built_);
+
 				return false;
-			// destruct the building and it's flag (via flag destruction)
-			// the destruction of the flag avoids that defaultAI will have too many
-			// unused roads - if needed the road will be rebuild directly.
-			flags_to_be_removed.push_back(site.site->base_flag().get_position());
-			game().send_player_dismantle(*site.site);
+			}
+
+			if (productionsite->get_statistics_percent() <= 20) {
+				// destruct the building and it's flag (via flag destruction)
+				// the destruction of the flag avoids that defaultAI will have too many
+				// unused roads - if needed the road will be rebuild directly.
+				// log (" TDEBUG: dismantling lumberjacks hut\n");
+				productionsite_observer.bo->last_dismantle_time_ = game().get_gametime();
+				flags_to_be_removed.push_back(productionsite->base_flag().get_position());
+				game().send_player_dismantle(*productionsite);
+
+				if (kWoodDebug)
+					log(" TDEBUG %1d: cutter without trees, dismantling..., remaining cutters: %2d\n",
+					    player_number(),
+					    productionsite_observer.bo->cnt_built_);
+
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+
+	// Wells handling
+	if (productionsite_observer.bo->mines_water_) {
+		if (productionsite_observer.built_time_ + 6 * 60 * 1000 <
+		       game().get_gametime() and productionsite->get_statistics_percent() ==
+		    0) {
+			if (kWellDebug)
+				log(" TDEBUG: dismantling Well, statistics: %3d,\n",
+				    productionsite->get_statistics_percent());
+			productionsite_observer.bo->last_dismantle_time_ = game().get_gametime();
+			flags_to_be_removed.push_back(productionsite->base_flag().get_position());
+			game().send_player_dismantle(*productionsite);
+
 			return true;
 		}
+		return false;
 	}
 
 	// Quarry handling
-	if
-		(site.bo->need_stones
-		 and
-		 map.find_immovables
-		 	(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-		 	 nullptr,
-		 	 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))
-		 ==
-		 0)
-	{
-		// destruct the building and it's flag (via flag destruction)
-		// the destruction of the flag avoids that defaultAI will have too many
-		// unused roads - if needed the road will be rebuild directly.
-		flags_to_be_removed.push_back(site.site->base_flag().get_position());
-		game().send_player_dismantle(*site.site);
+	if (productionsite_observer.bo->need_stones_) {
+		if (kQuarryDismDebug) {
+			log(" QUARRY at %3d x %3d: statistics: %3d/%3d, age: %5d(>360s), stones:%3d\n",
+			    productionsite->get_position().x,
+			    productionsite->get_position().y,
+			    productionsite->get_statistics_percent(),
+			    productionsite->get_crude_statistics(),
+			    (gametime - productionsite_observer.built_time_) / 1000,
+			    map.find_immovables(
+			       Area<FCoords>(map.get_fcoords(productionsite->get_position()), radius),
+			       nullptr,
+			       FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone"))));
+		}
+
+		if (map.find_immovables(
+		       Area<FCoords>(map.get_fcoords(productionsite->get_position()), radius),
+		       nullptr,
+		       FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone"))) == 0) {
+			// destruct the building and it's flag (via flag destruction)
+			// the destruction of the flag avoids that defaultAI will have too many
+			// unused roads - if needed the road will be rebuild directly.
+			flags_to_be_removed.push_back(productionsite->base_flag().get_position());
+			game().send_player_dismantle(*productionsite);
+			return true;
+		}
+
+		if (productionsite_observer.built_time_ + 6 * 60 * 1000 <
+		       game().get_gametime() and productionsite->get_statistics_percent() ==
+		    0) {
+			// it is possible that there are stones but quary is not able to mine them
+			productionsite_observer.bo->last_dismantle_time_ = game().get_gametime();
+			flags_to_be_removed.push_back(productionsite->base_flag().get_position());
+			game().send_player_dismantle(*productionsite);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	// All other SPACE_CONSUMERS without input and above target_count
+	if (kSpaceDebug and productionsite_observer.bo->space_consumer_ and not
+	       productionsite_observer.bo->plants_trees_)
+		log(" TDEBUG: space consumer here: %15s at %3d x %3d: statistics: %3d, age: %5d(>360s)\n",
+		    productionsite_observer.bo->name,
+		    productionsite->get_position().x,
+		    productionsite->get_position().y,
+		    productionsite->get_statistics_percent(),
+		    (gametime - productionsite_observer.built_time_) / 1000);
+
+	if (productionsite_observer.bo->inputs_.empty()  // does not consume anything
+	    and productionsite_observer.bo->production_hint_ ==
+	    -1  // not a renewing building (forester...)
+	          and productionsite_observer.built_time_ +
+	          6 * 60 * 1000 <
+	       game().get_gametime()                    // > 10 minutes old
+	       and productionsite->can_start_working()  // building is occupied
+	       and productionsite_observer.bo->space_consumer_ and not
+	          productionsite_observer.bo->plants_trees_) {
+		if (productionsite_observer.bo->cnt_built_ > productionsite_observer.bo->cnt_target_) {
+			if (productionsite_observer.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
+				productionsite_observer.bo->stocklevel_ = get_stocklevel(*productionsite_observer.bo);
+				productionsite_observer.bo->stocklevel_time = game().get_gametime();
+			}
+
+			if (kSpaceDebug)
+				log(" TDEBUG: considering dismantle of space consumer: %15s, count %2d/T:%2d, stock "
+				    "level:%3d(>100)\n",
+				    productionsite_observer.bo->name,
+				    productionsite_observer.bo->cnt_built_,
+				    productionsite_observer.bo->cnt_target_,
+				    productionsite_observer.bo->stocklevel_);
+
+			if (productionsite->get_statistics_percent()<
+			       95 and productionsite_observer.bo->stocklevel_> 100) {  // production stats == 0%
+				productionsite_observer.bo->last_dismantle_time_ = game().get_gametime();
+				flags_to_be_removed.push_back(productionsite->base_flag().get_position());
+				game().send_player_dismantle(*productionsite);
+				return true;
+			}
+		}
+
+		if (productionsite->get_statistics_percent() <= 20) {
+			if (kSpaceDebug)
+				log(" TDEBUG: dismantling: %15s at %3d x %3d: due to low performance: %2d\n",
+				    productionsite_observer.bo->name,
+				    productionsite->get_position().x,
+				    productionsite->get_position().y,
+				    productionsite->get_statistics_percent());
+
+			flags_to_be_removed.push_back(productionsite->base_flag().get_position());
+			game().send_player_dismantle(*productionsite);
+			return true;
+		}
+
+		return false;
+	}
+
+	// buildings with inputs_, checking if we can a dismantle some due to low performance
+	if (!productionsite_observer.bo->inputs_.empty()
+	    and productionsite_observer.bo->cnt_built_ >= 3
+	    and productionsite_observer.bo->current_stats_ < 30) {
+		if (kIdleDismantle)
+			log(" kIdleDismantle: dismantling due to too many buildings: %15s at %3d x %3d, total "
+			    "counts: %2d, stat: %2d\n",
+			    productionsite_observer.bo->name,
+			    productionsite->get_position().x,
+			    productionsite->get_position().y,
+			    productionsite_observer.bo->cnt_built_,
+			    productionsite_observer.bo->current_stats_);
+		productionsite_observer.bo->last_dismantle_time_ = game().get_gametime();
+		flags_to_be_removed.push_back(productionsite->base_flag().get_position());
+		game().send_player_dismantle(*productionsite);
 		return true;
 	}
 
-	// All other productionsites without input...
-	if
-		(site.bo->inputs.empty() // does not consume anything
-		 and
-		 site.bo->production_hint == -1 // not a renewing building (forester...)
-		 and
-		 site.builttime + 600000 < game().get_gametime() // > 10 minutes old
-		 and
-		 site.site->can_start_working()) // building is occupied
-	{
-		if (site.site->get_statistics_percent() == 0) { // production stats == 0%
-			++site.statszero;
-			// Only continue here, if at least 3 following times, the stats were 0%
-			if (site.statszero >= 3) {
-				// Do not destruct building, if it's basic and the last of this
-				// type left.
-				if (site.bo->is_basic && site.bo->cnt_built <= 1)
-					return false;
+	// supporting productionsites (rangers)
+	// stop/start them based on stock avaiable
+	if (productionsite_observer.bo->production_hint_ >= 0) {
+		if (productionsite_observer.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
+			productionsite_observer.bo->stocklevel_ =
+			   get_stocklevel_by_hint(productionsite_observer.bo->production_hint_);
+			productionsite_observer.bo->stocklevel_time = game().get_gametime();
+		}
 
-				// If building seems to be useless, think about destructing it and
-				// it's flag (via flag destruction) more or less randomly. The
-				// destruction of the flag avoids that defaultAI will have too many
-				// unused roads - if needed the road will be rebuild directly.
-				//
-				// Add a bonus if one building of this type is still unoccupied
-				if (((game().get_gametime() % 4) + site.bo->unoccupied) > 2) {
-					flags_to_be_removed.push_back(site.site->base_flag().get_position());
-					game().send_player_dismantle(*site.site);
-					return true;
-				}
-				else
-					return false;
-			}
-			return false;
-		} else
-			site.statszero = 0; // reset zero counter
+		if (kStandbyDebug)
+			log("  TDEBUG: standby review: %-16s(%dx):stock level: %3d, status: %s\n",
+			    productionsite_observer.bo->name,
+			    productionsite_observer.bo->cnt_built_,
+			    productionsite_observer.bo->stocklevel_,
+			    productionsite->is_stopped() ? "stopped" : "running");
+
+		if (productionsite_observer.bo->stocklevel_ > 200 and productionsite_observer.bo->cnt_built_ >
+		    productionsite_observer.bo->cnt_target_) {
+			if (kStandbyDebug)
+				log("   * dismantling the building\n");
+
+			productionsite_observer.bo->last_dismantle_time_ = game().get_gametime();
+			flags_to_be_removed.push_back(productionsite->base_flag().get_position());
+			game().send_player_dismantle(*productionsite);
+			return true;
+		}
+
+		if (productionsite_observer.bo->stocklevel_ > 150 and not productionsite->is_stopped()) {
+			if (kStandbyDebug)
+				log("   * stopping building\n");
+
+			game().send_player_start_stop_building(*productionsite);
+		}
+
+		if (productionsite_observer.bo->stocklevel_ < 100 and productionsite->is_stopped()) {
+			if (kStandbyDebug)
+				log("   * starting building\n");
+
+			game().send_player_start_stop_building(*productionsite);
+		}
 	}
 
-	// Do not have too many constructionsites
-	uint32_t producers = mines.size() + productionsites.size();
-	if (total_constructionsites >= (5 + (producers / 10)))
+	// Upgrading policy
+	// a) if there are two buildings and none enhanced, one is enhanced
+	// b) if there are two buildings and at least one functional
+	// statistics percents are decisive
+
+	// do not upgrade if current building is only one in operation
+	if ((productionsite_observer.bo->cnt_built_ - productionsite_observer.bo->unoccupied_) <= 1)
 		return false;
 
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
-	std::set<Building_Index> enhancements = site.site->enhancements();
+	std::set<Building_Index> enhancements = productionsite->enhancements();
 	int32_t maxprio = 0;
-	Building_Index enbld;
+	Building_Index enbld = INVALID_INDEX;
+	BuildingObserver* bestbld = nullptr;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
 		// Only enhance buildings that are allowed (scenario mode)
 		if (player->is_building_type_allowed(*x.current)) {
-			const Building_Descr & bld = *tribe->get_building_descr(*x.current);
-			BuildingObserver & en_bo = get_building_observer(bld.name().c_str());
+			const Building_Descr& bld = *tribe->get_building_descr(*x.current);
+			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+
+			// do not build the same building so soon (kind of duplicity check)
+			if (gametime - en_bo.construction_decision_time_ < kBuildingMinInterval)
+				continue;
 
 			// Don't enhance this building, if there is already one of same type
-			// under construction
-			if (en_bo.cnt_under_construction > 0)
+			// under construction or unoccupied_
+			if (en_bo.cnt_under_construction_ + en_bo.unoccupied_ > 0)
 				continue;
 
 			// don't upgrade without workers
-			if (!site.site->has_workers(*x.current, game()))
+			if (!productionsite->has_workers(*x.current, game()))
 				continue;
 
-			int32_t prio = 0; // priority for enhancement
+			// forcing first upgrade
+			if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) == 0
+			    and (productionsite_observer.bo->cnt_built_ -
+			          productionsite_observer.bo->unoccupied_) >= 1
+			    and (game().get_gametime() - productionsite_observer.built_time_) > 30 * 60 * 1000
+			    and !mines_.empty()) {
+				if (kUpgradeDebug)
+					log(" UPGRADE: upgrading (forcing as first) %12s at %3d x %3d: age %d min.\n",
+					    productionsite_observer.bo->name,
+					    productionsite->get_position().x,
+					    productionsite->get_position().y,
+					    (game().get_gametime() - productionsite_observer.built_time_) / 60000);
 
-			// Find new outputs of enhanced building
-			std::vector<int16_t> & current_outputs = site.bo->outputs;
-			std::vector<int16_t> new_outputs;
-			for (uint16_t i = 0; i < en_bo.outputs.size(); ++i) {
-				for (uint16_t j = 0; j < current_outputs.size(); ++j)
-					if (current_outputs.at(j) == en_bo.outputs.at(i)) {
-						Ware_Index wt(static_cast<size_t>(current_outputs.at(j)));
-						if (site.site->economy().needs_ware(wt))
-							prio -=
-								(2 + wares.at(current_outputs.at(j)).preciousness) / 2;
-						continue;
-					}
-				new_outputs.push_back(static_cast<int16_t>(i));
+				game().send_player_enhance_building(*productionsite, (*x.current));
+				return true;
 			}
 
-			// Check if the new wares are needed in economy of the building
-			for (uint32_t i = 0; i < new_outputs.size(); ++i) {
-				Ware_Index wt(static_cast<size_t>(new_outputs.at(i)));
-				if (site.site->economy().needs_ware(wt))
-					prio += 2 + wares.at(new_outputs.at(i)).preciousness;
+			// now, let consider normal upgrade
+
+			if (kUpgradeDebug)
+				log(" UPGRADE: %1d: working enhanced buildings (%15s): %1d, statitistics: %2d\n",
+				    player_number(),
+				    en_bo.name,
+				    en_bo.cnt_built_ - en_bo.unoccupied_,
+				    en_bo.current_stats_);
+
+			// do not upgrade if candidate production % is too low
+			if ((en_bo.cnt_built_ - en_bo.unoccupied_) ==
+			    0 or(en_bo.cnt_under_construction_ + en_bo.unoccupied_) > 0 or en_bo.current_stats_ <
+			       50)
+				continue;
+
+			int32_t prio = 0;
+
+			if (en_bo.current_stats_ > 65) {
+				prio = en_bo.current_stats_ -
+				       productionsite_observer.bo->current_stats_;  // priority for enhancement
+				prio += en_bo.current_stats_ - 65;
+
+				if (kUpgradeDebug)
+					log(" UPGRADE:  proposing upgrade (non-first building) %12s at %3d x %3d: prio: "
+					    "%2d, target statistics: %2d\n",
+					    productionsite_observer.bo->name,
+					    productionsite->get_position().x,
+					    productionsite->get_position().y,
+					    prio,
+					    en_bo.current_stats_);
 			}
 
-			// Compare the number of buildings of current type with the number
-			// of buildings of enhanced type
-			prio += (site.bo->total_count() - en_bo.total_count()) * 2;
-
-			// If the new wares are needed
-			if (prio > 0) {
-				prio = calculate_need_for_ps(en_bo, prio);
-				if (prio > maxprio) {
-					maxprio = prio;
-					enbld = (*x.current);
-				}
+			if (prio > maxprio) {
+				maxprio = prio;
+				enbld = (*x.current);
+				bestbld = &en_bo;
 			}
 		}
 	}
 
 	// Enhance if enhanced building is useful
 	// additional: we dont want to lose the old building
-	if (maxprio > 0 && site.bo->total_count() > 1) {
-		game().send_player_enhance_building(*site.site, enbld);
+	if (maxprio > 0) {
+		if (kUpgradeDebug)
+			log(" UPGRADE:   upgrading %15s(as non first)\n", bestbld->name);
+
+		game().send_player_enhance_building(*productionsite, enbld);
+		bestbld->construction_decision_time_ = gametime;
 		changed = true;
 	}
 
-	// Reorder and set new values;
-	productionsites.push_back(productionsites.front());
-	productionsites.pop_front();
 	return changed;
 }
 
@@ -1763,54 +2304,109 @@ bool DefaultAI::check_productionsites(int32_t gametime)
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_mines(int32_t const gametime)
-{
-	if ((next_mine_check_due > gametime) || mines.empty())
+bool DefaultAI::check_mines_(int32_t const gametime) {
+	if ((next_mine_check_due_ > gametime) || mines_.empty())
 		return false;
-	next_mine_check_due = gametime + 1000;
 
+	next_mine_check_due_ = gametime + 10000;  // 10 seconds is enough
+	// also statistics must be recalculated
 	// Get link to productionsite that should be checked
-	ProductionSiteObserver & site = mines.front();
-	Map & map = game().map();
-	Field * field = map.get_fcoords(site.site->get_position()).field;
+	ProductionSiteObserver& productionsite_observer = mines_.front();
+	mines_.pop_front();
 
-	// Don't try to enhance as long as stats are not down to 0% - it is possible,
-	// that some neighbour fields still have resources
-	if (site.site->get_statistics_percent() > 0)
+	ProductionSite* mine = productionsite_observer.site.get(game());
+	if (!mine) {
+		// Building has vanished.
+		return false;
+	}
+
+	Map& map = game().map();
+	Field* field = map.get_fcoords(mine->get_position()).field;
+	// Reorder and set new values; - due to returns within the function
+	mines_.push_back(productionsite_observer);
+
+	if (kMinesUpdateDebug)
+		log(" MINES_UPDATE: %1d: reviewing %-15s at %3dx%3d, statistics: %3d, left resources: %2d\n",
+		    player_number(),
+		    productionsite_observer.bo->name,
+		    mine->get_position().x,
+		    mine->get_position().y,
+		    mine->get_statistics_percent(),
+		    field->get_resources_amount());
+
+	// It takes some time till performance gets to 0
+	// so I use 40% as a limit to check if there are some resources left
+	if (mine->get_statistics_percent() > 40)
 		return false;
 
 	// Check if mine ran out of resources
 	uint8_t current = field->get_resources_amount();
+
 	if (current < 1) {
 		// destruct the building and it's flag (via flag destruction)
 		// the destruction of the flag avoids that defaultAI will have too many
 		// unused roads - if needed the road will be rebuild directly.
-		flags_to_be_removed.push_back(site.site->base_flag().get_position());
-		game().send_player_dismantle(*site.site);
+		flags_to_be_removed.push_back(mine->base_flag().get_position());
+		game().send_player_dismantle(*mine);
+
+		if (kMinesUpdateDebug)
+			log(" MINES_UPDATE: Dismantling...\n");
+
 		return true;
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	std::set<Building_Index> enhancements = site.site->enhancements();
+	std::set<Building_Index> enhancements = mine->enhancements();
 	int32_t maxprio = 0;
-	Building_Index enbld;
+	Building_Index enbld = INVALID_INDEX;
+	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
 		// Only enhance buildings that are allowed (scenario mode)
 		if (player->is_building_type_allowed(*x.current)) {
+			// first exclude possibility there are enhancements in construction or unoccupied_
+			const Building_Descr& bld = *tribe->get_building_descr(*x.current);
+			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+
+			if (kMinesUpdateDebug)
+				log(" MINES_UPDATE:   considering upgrade to %15s, count B:%1d(stat:%3d)  U:%1d  "
+				    "C:%1d\n",
+				    en_bo.name,
+				    en_bo.cnt_built_,
+				    en_bo.current_stats_,
+				    en_bo.unoccupied_,
+				    en_bo.cnt_under_construction_);
+
+			if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ > 0)
+				continue;
+
+			// do not upgrade target building are not working properly (probably do not have food)
+			if (en_bo.cnt_built_ > 0 and en_bo.current_stats_ < 60)
+				continue;
+
+			// do not build the same building so soon (kind of duplicity check)
+			if (gametime - en_bo.construction_decision_time_ < kBuildingMinInterval)
+				continue;
 
 			// Check if mine needs an enhancement to mine more resources
-			uint8_t const until =
-				field->get_starting_res_amount() * (100 - site.bo->mines_percent)
-				/
-				100;
+			uint8_t const until = field->get_starting_res_amount() *
+			                      (100 - productionsite_observer.bo->mines_percent_) / 100;
+
+			if (kMinesUpdateDebug)
+				log(" MINES_UPDATE:    until:%3d ?>, current: %3d\n", until, current);
+
 			if (until >= current) {
 				// add some randomness - just for the case if more than one
 				// enhancement is available (not in any tribe yet)
 				int32_t const prio = time(nullptr) % 3 + 1;
+
 				if (prio > maxprio) {
 					maxprio = prio;
 					enbld = (*x.current);
+					bestbld = &en_bo;
+
+					if (kMinesUpdateDebug)
+						log(" MINES_UPDATE:    ..is candidate\n");
 				}
 			}
 		}
@@ -1818,14 +2414,65 @@ bool DefaultAI::check_mines(int32_t const gametime)
 
 	// Enhance if enhanced building is useful
 	if (maxprio > 0) {
-		game().send_player_enhance_building(*site.site, enbld);
+		game().send_player_enhance_building(*mine, enbld);
+		bestbld->construction_decision_time_ = gametime;
 		changed = true;
+
+		if (kMinesUpdateDebug)
+			log(" MINES_UPDATE:    ..enhancing\n");
 	}
 
-	// Reorder and set new values;
-	mines.push_back(mines.front());
-	mines.pop_front();
+	//// Reorder and set new values;
+	// mines_.push_back(mines_.front());
+	// mines_.pop_front();
 	return changed;
+}
+
+// this count ware as hints
+uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
+	uint32_t count = 0;
+	Ware_Index wt(hintoutput);
+	container_iterate(std::list<EconomyObserver*>, economies, l) {
+		// Don't check if the economy has no warehouse.
+		if ((*l.current)->economy.warehouses().empty())
+			continue;
+
+		count += (*l.current)->economy.stock_ware(wt);
+	}
+
+	if (kStockDebug)
+		log(" TDEBUG: stock : %3u for hint: %2" PRIuS ", time: %3d\n",
+		    count,
+		    hintoutput,
+		    game().get_gametime() / 1000);
+
+	return count;
+}
+
+// this count all stock for all output
+uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
+	uint32_t count = 0;
+
+	if (!bo.outputs_.empty()) {
+		container_iterate(std::list<EconomyObserver*>, economies, l) {
+			// Don't check if the economy has no warehouse.
+			if ((*l.current)->economy.warehouses().empty())
+				continue;
+
+			for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
+				Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
+				count += (*l.current)->economy.stock_ware(wt);
+			}
+		}
+	}
+
+	if (kStockDebug)
+		log(" TDEBUG: stock : %3d for building: %s, time: %3d\n",
+		    count,
+		    bo.name,
+		    game().get_gametime() / 1000);
+
+	return count;
 }
 
 /**
@@ -1836,10 +2483,31 @@ bool DefaultAI::check_mines(int32_t const gametime)
  *
  * \returns true if something was changed
  */
-bool DefaultAI::check_militarysites(int32_t gametime)
-{
-	if (next_militarysite_check_due > gametime)
+bool DefaultAI::check_militarysites(int32_t gametime) {
+	if (next_militarysite_check_due_ > gametime)
 		return false;
+
+	// just to be sure the value is reset
+	next_militarysite_check_due_ = gametime + 5 * 1000;  // 10 seconds is really fine
+	// even if there are no finished & attended military sites, probably there are ones just in
+	// construction
+	unstationed_milit_buildings_ = 0;
+
+	for (std::list<MilitarySiteObserver>::iterator it = militarysites.begin();
+	     it != militarysites.end();
+	     ++it)
+		if (it->site->stationedSoldiers().size() == 0)
+			unstationed_milit_buildings_ += 1;
+
+	// count militarysites in construction
+	military_under_constr_ = 0;
+
+	for (uint32_t j = 0; j < buildings.size(); ++j) {
+		BuildingObserver& bo = buildings.at(j);
+
+		if (bo.type == BuildingObserver::MILITARYSITE)
+			military_under_constr_ += bo.cnt_under_construction_;
+	}
 
 	// Only useable, if defaultAI owns at least one militarysite
 	if (militarysites.empty())
@@ -1847,28 +2515,26 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 
 	// Check next militarysite
 	bool changed = false;
-	Map & map = game().map();
-	MilitarySite * ms = militarysites.front().site;
+	Map& map = game().map();
+	MilitarySite* ms = militarysites.front().site;
 	uint32_t const vision = ms->vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
-
 	// look if there is any enemy land nearby
-	FindNodeUnowned find_unowned(player, game(), true);
+	FindNodeEnemy find_enemy(player, game());
 
-	if (map.find_fields(Area<FCoords>(f, vision), nullptr, find_unowned) == 0) {
+	// first if there are enemies nearby
+	if (map.find_fields(Area<FCoords>(f, vision), nullptr, find_enemy) == 0) {
 		// If no enemy in sight - decrease the number of stationed soldiers
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
 		if (ms->economy().warehouses().size()) {
 			uint32_t const j = ms->soldierCapacity();
-			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference())
-			{
-					game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
-			}
-			else
-			if (j > 1)
-				game().send_player_change_soldier_capacity(*ms, -1);
 
+			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
+				game().send_player_militarysite_set_soldier_preference(
+				   *ms, MilitarySite::kPrefersRookies);
+			} else if (j > 1)
+				game().send_player_change_soldier_capacity(*ms, -1);
 			// if the building is in inner land and other militarysites still
 			// hold the miliary influence of the field, consider to destruct the
 			// building to free some building space.
@@ -1876,65 +2542,35 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 				// treat this field like a buildable and write military info to it.
 				BuildableField bf(f);
 				update_buildable_field(bf, vision, true);
+				const int32_t size_penalty = ms->get_size() - 1;
 
-				// watch out if there is any unowned land in vision range. If there
-				// is none, there must be another building nearer to the frontier.
-				if (bf.unowned_land_nearby == 0) {
-					// bigger buildings are only checked after all smaller
-					// ones are at least one time checked.
-					if (militarysites.front().checks == 0) {
-						// If the military influence of other near buildings is higher
-						// than the own doubled max SoldierCapacity destruct the
-						// building and it's flag (via flag destruction)
-						// the destruction of the flag avoids that defaultAI will have
-						// too many unused roads - if needed the road will be rebuild
-						// directly.
-						if (static_cast<int32_t>(ms->maxSoldierCapacity() * 4) < bf.military_influence) {
-							if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-								flags_to_be_removed.push_back(ms->base_flag().get_position());
-								game().send_player_dismantle(*ms);
-							} else {
-								game().send_player_bulldoze(*ms);
-							}
-						}
+				if (kMilDismDebug)
+					log(" DISMANTLE CHECK: testing finished building %3dx%3d, capacity: %2d(>9), "
+					    "presence: %2d(>3), loneliness: %4d(<160), stationed: %1d(>2+%d as size "
+					    "penalty)\n",
+					    f.x,
+					    f.y,
+					    bf.military_capacity_,
+					    bf.military_presence_,
+					    bf.military_loneliness_,
+					    bf.military_stationed_,
+					    size_penalty);
 
-						// Else consider enhancing the building (if possible)
-						else {
-							// Do not have too many constructionsites
-							uint32_t producers = mines.size() + productionsites.size();
-							if (total_constructionsites >= (5 + (producers / 10)))
-								goto reorder;
-							std::set<Building_Index> enhancements = ms->enhancements();
-							int32_t maxprio = 10000; // surely never reached
-							Building_Index enbld;
-							container_iterate_const
-								(std::set<Building_Index>, enhancements, x)
-							{
-								// Only enhance building to allowed (scenario mode)
-								if (player->is_building_type_allowed(*x.current)) {
-									const Building_Descr & bld =
-										*tribe->get_building_descr(*x.current);
-									BuildingObserver & en_bo =
-										get_building_observer(bld.name().c_str());
+				if (bf.military_capacity_ > 9 and bf.military_presence_ >
+				    3 and bf.military_loneliness_<160 and bf.military_stationed_>(2 + size_penalty)) {
+					if (kMilDismDebug)
+						log(" DISMANTLE CHECK:  * dismantling the building on %5d, last dismantle: %5d\n",
+						    game().get_gametime() / 1000,
+						    military_last_dismantle_ / 1000);
 
-									// Don't enhance this building, if there is
-									// already one of same type under construction
-									if (en_bo.cnt_under_construction > 0)
-										continue;
-									if (en_bo.cnt_built < maxprio) {
-										maxprio = en_bo.cnt_built;
-										enbld = (*x.current);
-									}
-								}
-							}
-							// Enhance if enhanced building is useful
-							if (maxprio < 10000) {
-								game().send_player_enhance_building(*ms, enbld);
-								changed = true;
-							}
-						}
-					} else
-						--militarysites.front().checks;
+					if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
+						flags_to_be_removed.push_back(ms->base_flag().get_position());
+						game().send_player_dismantle(*ms);
+						military_last_dismantle_ = game().get_gametime();
+					} else {
+						game().send_player_bulldoze(*ms);
+						military_last_dismantle_ = game().get_gametime();
+					}
 				}
 			}
 		}
@@ -1943,19 +2579,22 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		// at maximum - set it to maximum.
 		uint32_t const j = ms->maxSoldierCapacity();
 		uint32_t const k = ms->soldierCapacity();
+
 		if (j > k)
 			game().send_player_change_soldier_capacity(*ms, j - k);
+
 		if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference())
 			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
+
 		changed = true;
 	}
-	reorder:;
+
+	// reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
-	next_militarysite_check_due = gametime + 1000;
+	next_militarysite_check_due_ = gametime + 5 * 1000;  // 10 seconds is really fine
 	return changed;
 }
-
 
 /**
  * This function takes care about the unowned and opposing territory and
@@ -1967,22 +2606,22 @@ bool DefaultAI::check_militarysites(int32_t gametime)
  *
  * \returns the recalculated priority
  */
-int32_t DefaultAI::recalc_with_border_range(const BuildableField & bf, int32_t prio)
-{
+int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t prio) {
 	// Prefer building space in the inner land.
-	prio /= (1 + (bf.unowned_land_nearby / 4));
+	prio /= (1 + (bf.unowned_land_nearby_ / 4));
+
+	if (bf.unowned_land_nearby_ > 15)
+		prio -= (bf.unowned_land_nearby_ - 15);
 
 	// Especially places near the frontier to the enemies are unlikely
-	//  NOTE take care about the type of computer player. The more
-	//  NOTE aggressive a computer player is, the more important is
+	//  NOTE take care about the type of computer player_. The more
+	//  NOTE aggressive a computer player_ is, the more important is
 	//  NOTE this check. So we add \var type as bonus.
-	if (bf.enemy_nearby)
+	if (bf.enemy_nearby_ and prio > 0)
 		prio /= (3 + type);
 
 	return prio;
 }
-
-
 
 /**
  * calculates how much a productionsite of type \arg bo is needed inside it's
@@ -1990,8 +2629,7 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField & bf, int32_t p
  *
  * \returns the calculated priority
  */
-int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
-{
+int32_t DefaultAI::calculate_need_for_ps(BuildingObserver& bo, int32_t prio) {
 	// some randomness to avoid that defaultAI is building always
 	// the same (always == another game but same map with
 	// defaultAI on same coords)
@@ -1999,77 +2637,73 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 
 	// check if current economy can supply enough material for
 	// production.
-	for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
-		prio += 2 * wares.at(bo.inputs.at(k)).producers;
-		prio -= wares.at(bo.inputs.at(k)).consumers;
+	for (uint32_t k = 0; k < bo.inputs_.size(); ++k) {
+		prio += 2 * wares.at(bo.inputs_.at(k)).producers_;
+		prio -= wares.at(bo.inputs_.at(k)).consumers_;
 	}
-	if (bo.inputs.empty())
+
+	if (bo.inputs_.empty())
 		prio += 4;
 
 	int32_t output_prio = 0;
-	for (uint32_t k = 0; k < bo.outputs.size(); ++k) {
-		WareObserver & wo = wares.at(bo.outputs.at(k));
-		if (wo.consumers > 0) {
-			output_prio += wo.preciousness;
-			output_prio += wo.consumers * 2;
-			output_prio -= wo.producers * 2;
+
+	for (uint32_t k = 0; k < bo.outputs_.size(); ++k) {
+		WareObserver& wo = wares.at(bo.outputs_.at(k));
+
+		if (wo.consumers_ > 0) {
+			output_prio += wo.preciousness_;
+			output_prio += wo.consumers_ * 2;
+			output_prio -= wo.producers_ * 2;
+
 			if (bo.total_count() == 0)
-				output_prio += 10; // add a big bonus
+				output_prio += 10;  // add a big bonus
 		}
 	}
-	if (bo.outputs.size() > 1)
-		output_prio = static_cast<int32_t>
-			(ceil(output_prio / sqrt(static_cast<double>(bo.outputs.size()))));
+
+	if (bo.outputs_.size() > 1)
+		output_prio =
+		   static_cast<int32_t>(ceil(output_prio / sqrt(static_cast<double>(bo.outputs_.size()))));
+
 	prio += 2 * output_prio;
 
 	// If building consumes some wares, multiply with current statistics of all
 	// other buildings of this type to avoid constructing buildings where already
 	// some are running on low resources.
 	// Else at least add a part of the stats t the calculation.
-	if (!bo.inputs.empty()) {
-		prio *= bo.current_stats;
+	if (!bo.inputs_.empty()) {
+		prio *= bo.current_stats_;
 		prio /= 100;
 	} else
-		prio = ((prio * bo.current_stats) / 100) + (prio / 2);
+		prio = ((prio * bo.current_stats_) / 100) + (prio / 2);
 
 	return prio;
 }
 
+void DefaultAI::consider_productionsite_influence(BuildableField& field,
+                                                  Coords coords,
+                                                  const BuildingObserver& bo) {
+	if (bo.space_consumer_ and game().map().calc_distance(coords, field.coords) < 4)
+		++field.space_consumers_nearby_;
 
-void DefaultAI::consider_productionsite_influence
-	(BuildableField & field, Coords coords, const BuildingObserver & bo)
-{
-	if
-		(bo.space_consumer
-		 and
-		 game().map().calc_distance(coords, field.coords) < 4)
-		++field.space_consumers_nearby;
+	for (size_t i = 0; i < bo.inputs_.size(); ++i)
+		++field.consumers_nearby_.at(bo.inputs_.at(i));
 
-	for (size_t i = 0; i < bo.inputs.size(); ++i)
-		++field.consumers_nearby.at(bo.inputs.at(i));
-	for (size_t i = 0; i < bo.outputs.size(); ++i)
-		++field.producers_nearby.at(bo.outputs.at(i));
+	for (size_t i = 0; i < bo.outputs_.size(); ++i)
+		++field.producers_nearby_.at(bo.outputs_.at(i));
 }
 
-
 /// \returns the economy observer containing \arg economy
-EconomyObserver * DefaultAI::get_economy_observer(Economy & economy)
-{
-	for
-		(std::list<EconomyObserver *>::iterator i = economies.begin();
-		 i != economies.end();
-		 ++i)
+EconomyObserver* DefaultAI::get_economy_observer(Economy& economy) {
+	for (std::list<EconomyObserver*>::iterator i = economies.begin(); i != economies.end(); ++i)
 		if (&(*i)->economy == &economy)
 			return *i;
 
-	economies.push_front (new EconomyObserver(economy));
-
+	economies.push_front(new EconomyObserver(economy));
 	return economies.front();
 }
 
 /// \returns the building observer
-BuildingObserver & DefaultAI::get_building_observer(char const * const name)
-{
+BuildingObserver& DefaultAI::get_building_observer(char const* const name) {
 	if (tribe == nullptr)
 		late_initialization();
 
@@ -2080,181 +2714,162 @@ BuildingObserver & DefaultAI::get_building_observer(char const * const name)
 	throw wexception("Help: I do not know what to do with a %s", name);
 }
 
-
 /// this is called whenever we gain ownership of a PlayerImmovable
-void DefaultAI::gain_immovable(PlayerImmovable & pi)
-{
-	if      (upcast(Building,   building, &pi))
-		gain_building (*building);
-	else if (upcast(Flag const, flag,     &pi))
-		new_flags.push_back (flag);
-	else if (upcast(Road const, road,     &pi))
-		roads    .push_front(road);
+void DefaultAI::gain_immovable(PlayerImmovable& pi) {
+	if (upcast(Building, building, &pi))
+		gain_building(*building);
+	else if (upcast(Flag const, flag, &pi))
+		new_flags.push_back(flag);
+	else if (upcast(Road const, road, &pi))
+		roads.push_front(road);
 }
 
 /// this is called whenever we lose ownership of a PlayerImmovable
-void DefaultAI::lose_immovable(const PlayerImmovable & pi)
-{
-	if        (upcast(Building const, building, &pi))
-		lose_building (*building);
-	else if   (upcast(Flag     const, flag,     &pi)) {
-		container_iterate_const(std::list<EconomyObserver *>, economies, i)
-			container_iterate(std::list<Flag const *>, (*i.current)->flags, j)
-				if (*j.current == flag) {
-					(*i.current)->flags.erase (j.current);
-					return;
-				}
-		container_iterate(std::list<Flag const *>, new_flags, i)
-			if (*i.current == flag) {
-				new_flags.erase(i.current);
-				return;
-			}
-	} else if (upcast(Road     const, road,     &pi))
-		roads.remove (road);
+void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
+	if (upcast(Building const, building, &pi))
+		lose_building(*building);
+	else if (upcast(Flag const, flag, &pi)) {
+		container_iterate_const(std::list<EconomyObserver*>, economies, i)
+		container_iterate(std::list<Flag const*>, (*i.current)->flags, j)
+
+		if (*j.current == flag) {
+			(*i.current)->flags.erase(j.current);
+			return;
+		}
+
+		container_iterate(std::list<Flag const*>, new_flags, i)
+
+		if (*i.current == flag) {
+			new_flags.erase(i.current);
+			return;
+		}
+	} else if (upcast(Road const, road, &pi))
+		roads.remove(road);
 }
 
 /// this is called whenever we gain a new building
-void DefaultAI::gain_building(Building & b)
-{
-	BuildingObserver & bo = get_building_observer(b.name().c_str());
+void DefaultAI::gain_building(Building& b) {
+	BuildingObserver& bo = get_building_observer(b.name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-		BuildingObserver & target_bo =
-			get_building_observer
-				(ref_cast<ConstructionSite, Building>(b)
-				 .building().name().c_str());
-		++target_bo.cnt_under_construction;
+		BuildingObserver& target_bo =
+		   get_building_observer(ref_cast<ConstructionSite, Building>(b).building().name().c_str());
+		++target_bo.cnt_under_construction_;
 		++total_constructionsites;
 		// Let defaultAI try to directly connect the constructionsite
-		next_road_due = game().get_gametime();
-	}
-	else {
-		++bo.cnt_built;
+		next_road_due_ = game().get_gametime();
+	} else {
+		++bo.cnt_built_;
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
-			productionsites.push_back (ProductionSiteObserver());
+			productionsites.push_back(ProductionSiteObserver());
 			productionsites.back().site = &ref_cast<ProductionSite, Building>(b);
 			productionsites.back().bo = &bo;
-			productionsites.back().builttime = game().get_gametime();
-			productionsites.back().statszero = 0;
+			productionsites.back().built_time_ = game().get_gametime();
+			productionsites.back().stats_zero_ = 0;
 
-			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
-				++wares.at(bo.outputs.at(i)).producers;
+			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)
+				++wares.at(bo.outputs_.at(i)).producers_;
 
-			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
-				++wares.at(bo.inputs.at(i)).consumers;
+			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
+				++wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MINE) {
-			mines.push_back (ProductionSiteObserver());
-			mines.back().site = &ref_cast<ProductionSite, Building>(b);
-			mines.back().bo = &bo;
+			mines_.push_back(ProductionSiteObserver());
+			mines_.back().site = &ref_cast<ProductionSite, Building>(b);
+			mines_.back().bo = &bo;
 
-			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
-				++wares.at(bo.outputs.at(i)).producers;
+			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)
+				++wares.at(bo.outputs_.at(i)).producers_;
 
-			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
-				++wares.at(bo.inputs.at(i)).consumers;
+			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
+				++wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
-			militarysites.push_back (MilitarySiteObserver());
+			militarysites.push_back(MilitarySiteObserver());
 			militarysites.back().site = &ref_cast<MilitarySite, Building>(b);
 			militarysites.back().bo = &bo;
 			militarysites.back().checks = bo.desc->get_size();
 		} else if (bo.type == BuildingObserver::WAREHOUSE)
-			++numof_warehouses;
+			++numof_warehouses_;
 	}
 }
 
 /// this is called whenever we lose a building
-void DefaultAI::lose_building(const Building & b)
-{
-	BuildingObserver & bo = get_building_observer(b.name().c_str());
+void DefaultAI::lose_building(const Building& b) {
+	BuildingObserver& bo = get_building_observer(b.name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-		BuildingObserver & target_bo =
-			get_building_observer
-				(ref_cast<ConstructionSite const, Building const>(b)
-				 .building().name().c_str());
-		--target_bo.cnt_under_construction;
+		BuildingObserver& target_bo = get_building_observer(
+		   ref_cast<ConstructionSite const, Building const>(b).building().name().c_str());
+		--target_bo.cnt_under_construction_;
 		--total_constructionsites;
 	} else {
-		--bo.cnt_built;
+		--bo.cnt_built_;
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
-			for
-				(std::list<ProductionSiteObserver>::iterator i =
-				 productionsites.begin();
-				 i != productionsites.end();
-				 ++i)
-				if (i->site == &b) {
+			for (std::list<ProductionSiteObserver>::iterator i = productionsites.begin();
+			     i != productionsites.end();
+			     ++i)
+				if (i->site.get(game()) == &b) {
 					productionsites.erase(i);
 					break;
 				}
 
-			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
-				--wares.at(bo.outputs.at(i)).producers;
+			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)
+				--wares.at(bo.outputs_.at(i)).producers_;
 
-			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
-				--wares.at(bo.inputs.at(i)).consumers;
+			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
+				--wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MINE) {
-			for
-				(std::list<ProductionSiteObserver>::iterator i =
-				 mines.begin();
-				 i != mines.end();
-				 ++i)
-				if (i->site == &b) {
-					mines.erase(i);
+			for (std::list<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end();
+			     ++i)
+				if (i->site.get(game()) == &b) {
+					mines_.erase(i);
 					break;
 				}
 
-			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
-				--wares.at(bo.outputs.at(i)).producers;
+			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)
+				--wares.at(bo.outputs_.at(i)).producers_;
 
-			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
-				--wares.at(bo.inputs.at(i)).consumers;
+			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
+				--wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
-			for
-				(std::list<MilitarySiteObserver>::iterator i =
-				 militarysites.begin();
-				 i != militarysites.end();
-				 ++i)
+			for (std::list<MilitarySiteObserver>::iterator i = militarysites.begin();
+			     i != militarysites.end();
+			     ++i)
 				if (i->site == &b) {
 					militarysites.erase(i);
 					break;
 				}
 		} else if (bo.type == BuildingObserver::WAREHOUSE) {
-			assert(numof_warehouses > 0);
-			--numof_warehouses;
+			assert(numof_warehouses_ > 0);
+			--numof_warehouses_;
 		}
 	}
+
 	m_buildable_changed = true;
 	m_mineable_changed = true;
 }
 
-
 /// Checks that supply line exists for given building.
-/// Recurcsively verify that all inputs have a producer.
+/// Recurcsively verify that all inputs_ have a producer.
 // TODO: this function leads to periodic freezes of ~1 second on big games on my system.
 // TODO: It needs profiling and optimization.
-bool DefaultAI::check_supply(const BuildingObserver & bo)
-{
+// NOTE: This is not needed anymore and it seems it is not missed neither
+bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;
-	container_iterate_const(std::vector<int16_t>, bo.inputs, i)
-		container_iterate_const(std::vector<BuildingObserver>, buildings, j)
-			if
-				(j.current->cnt_built &&
-				 std::find
-				 	(j.current->outputs.begin(), j.current->outputs.end(),
-				 	 *i.current)
-				 !=
-				 j.current->outputs.end()
-				 &&
-				 check_supply(*j.current))
-			{
-				++supplied;
-				break;
-			}
-	return supplied == bo.inputs.size();
-}
+	container_iterate_const(std::vector<int16_t>, bo.inputs_, i)
+	container_iterate_const(std::vector<BuildingObserver>, buildings, j)
 
+	if (j.current->cnt_built_ &&
+	    std::find(j.current->outputs_.begin(), j.current->outputs_.end(), *i.current) !=
+	       j.current->outputs_.end() &&
+	    check_supply(*j.current)) {
+		++supplied;
+		break;
+	}
+
+	return supplied == bo.inputs_.size();
+}
 
 /**
  * The defaultAi "considers" via this function whether to attack an
@@ -2268,37 +2883,36 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	if (militarysites.empty())
 		return false;
 
-	Map & map = game().map();
+	Map& map = game().map();
 	uint16_t const pn = player_number();
-
 	// Check next militarysite
-	MilitarySite * ms = militarysites.front().site;
+	MilitarySite* ms = militarysites.front().site;
 	uint32_t const vision = ms->vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
-
-	Building * target = ms; // dummy initialisation to silence the compiler
-	int32_t    chance    = 0;
-	uint32_t   attackers = 0;
-	uint8_t    retreat   = ms->owner().get_retreat_percentage();
-
+	Building* target = ms;  // dummy initialisation to silence the compiler
+	int32_t chance = 0;
+	uint32_t attackers = 0;
 	// Search in a radius of the vision of the militarysite and collect
 	// information about immovables in the area
 	std::vector<ImmovableFound> immovables;
-	map.find_immovables
-		(Area<FCoords>(f, vision), &immovables, FindImmovableAttackable());
+	map.find_immovables(Area<FCoords>(f, vision), &immovables, FindImmovableAttackable());
 
 	for (uint32_t j = 0; j < immovables.size(); ++j)
 		if (upcast(MilitarySite, bld, immovables.at(j).object)) {
 			if (!player->is_hostile(bld->owner()))
 				continue;
+
 			if (bld->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(bld->base_flag());
+
 				if (type == NORMAL)
 					ta = ta * 2 / 3;
+
 				if (ta < 1)
 					continue;
 
 				int32_t const tc = ta - bld->presentSoldiers().size();
+
 				if (tc > chance) {
 					target = bld;
 					chance = tc;
@@ -2308,13 +2922,16 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		} else if (upcast(Warehouse, wh, immovables.at(j).object)) {
 			if (!player->is_hostile(wh->owner()))
 				continue;
+
 			if (wh->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(wh->base_flag());
+
 				if (ta < 1)
 					continue;
 
 				// extra priority push!
 				int32_t tc = ta * 2;
+
 				if (tc > chance) {
 					target = wh;
 					chance = tc;
@@ -2329,19 +2946,13 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	// Return if chance to win is too low
 	if (chance < 3) {
-		next_attack_consideration_due = gametime % 7 * 1000 + gametime;
+		next_attack_consideration_due_ = gametime % 7 * 1000 + gametime;
 		return false;
 	}
 
-	if (ms->owner().is_retreat_change_allowed()) {
-		// \todo Player is allowed to modify his retreat value
-	}
-
 	// Attack the selected target.
-	game().send_player_enemyflagaction
-		(target->base_flag(), pn, attackers, retreat);
-
+	game().send_player_enemyflagaction(target->base_flag(), pn, attackers);
 	//  Do not attack again too soon - returning soldiers must get healed first.
-	next_attack_consideration_due = (gametime % 51 + 10) * 1000 + gametime;
+	next_attack_consideration_due_ = (gametime % 51 + 10) * 1000 + gametime;
 	return true;
 }

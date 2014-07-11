@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_PLACE_BOB_TOOL_H
-#define EDITOR_PLACE_BOB_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_PLACE_BOB_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_PLACE_BOB_TOOL_H
 
 #include "editor/tools/editor_delete_bob_tool.h"
 #include "editor/tools/multi_select.h"
@@ -29,17 +29,21 @@ struct Editor_Place_Bob_Tool : public Editor_Tool, public MultiSelect {
 		: Editor_Tool(tool, tool)
 	{}
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& parent,
+	                          Editor_Action_Args& args) override;
 
-	int32_t handle_undo_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_undo_impl(Widelands::Map& map,
+	                         const Widelands::World& world,
+	                         Widelands::Node_and_Triangle<> center,
+	                         Editor_Interactive& parent,
+	                         Editor_Action_Args& args) override;
 
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
 
 	char const * get_sel_impl() const override {return "pics/fsel_editor_place_bob.png";}
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_PLACE_BOB_TOOL_H

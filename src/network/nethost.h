@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef NETHOST_H
-#define NETHOST_H
+#ifndef WL_NETWORK_NETHOST_H
+#define WL_NETWORK_NETHOST_H
 
-#include "gamecontroller.h"
-#include "gamesettings.h"
+#include "logic/game_controller.h"
+#include "logic/game_settings.h"
 #include "logic/widelands.h"
 #include "network/network.h"
 
@@ -166,4 +166,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETHOST_H

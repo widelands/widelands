@@ -19,12 +19,12 @@
 
 #include "scripting/lua_ui.h"
 
-#include "gamecontroller.h"
+#include "base/macros.h"
+#include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 
 namespace LuaUi {
@@ -780,4 +780,4 @@ void luaopen_wlui(lua_State * L) {
 }
 
 
-};
+}

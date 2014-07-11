@@ -17,17 +17,19 @@
  *
  */
 
-#ifndef INTERACTIVE_BASE_H
-#define INTERACTIVE_BASE_H
+#ifndef WL_WUI_INTERACTIVE_BASE_H
+#define WL_WUI_INTERACTIVE_BASE_H
+
+#include <memory>
 
 #include <SDL_keysym.h>
 
-#include "debugconsole.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/notification.h"
-#include "logmessage.h"
 #include "wui/chatoverlay.h"
+#include "wui/debugconsole.h"
+#include "wui/logmessage.h"
 #include "wui/mapview.h"
 #include "wui/overlay_manager.h"
 #include "ui_basic/box.h"
@@ -116,7 +118,7 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	Widelands::Coords    get_build_road_start  () const;
 	Widelands::Coords    get_build_road_end    () const;
 
-	virtual void cleanup_for_load() {};
+	virtual void cleanup_for_load() {}
 
 	/**
 	 * Log a message to be displayed on screen
@@ -164,7 +166,7 @@ private:
 	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
-	const Image* workarea_pics[NUMBER_OF_WORKAREA_PICS];
+	std::vector<const Image*> m_workarea_pics;
 
 protected:
 	void toggle_minimap();
@@ -204,4 +206,4 @@ private:
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
     &m_toolbar, name, 0, 0, 34U, 34U, PIC2
 
-#endif
+#endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

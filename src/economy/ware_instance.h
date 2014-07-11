@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__WARE_INSTANCE_H
-#define S__WARE_INSTANCE_H
+#ifndef WL_ECONOMY_WARE_INSTANCE_H
+#define WL_ECONOMY_WARE_INSTANCE_H
 
 #include "economy/transfer.h"
 #include "logic/instances.h"
@@ -55,7 +55,7 @@ struct Transfer;
 class WareInstance : public Map_Object {
 	friend struct Map_Waredata_Data_Packet;
 
-	MO_DESCR(WareDescr);
+	MO_DESCR(WareDescr)
 
 public:
 	WareInstance(Ware_Index, const WareDescr* const);
@@ -133,4 +133,4 @@ public:
 };
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_WARE_INSTANCE_H

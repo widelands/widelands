@@ -1,9 +1,0 @@
-size=big
-attrib=stone
-program=shrink
-
-[idle]
-hotspot=38 91
-
-[shrink]
-transform=stones5

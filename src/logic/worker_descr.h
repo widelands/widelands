@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WORKER_DESCR_H
-#define WORKER_DESCR_H
+#ifndef WL_LOGIC_WORKER_DESCR_H
+#define WL_LOGIC_WORKER_DESCR_H
 
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
@@ -65,8 +65,9 @@ public:
 		return m_buildcost;
 	}
 
-	const Tribe_Descr * get_tribe() const {return m_owner_tribe;}
-	const Tribe_Descr & tribe() const {return *m_owner_tribe;}
+	/// The tribe in which this worker is defined.
+	const Tribe_Descr & tribe() const;
+
 	std::string helptext() const {return m_helptext;}
 	Point get_ware_hotspot() const {return m_ware_hotspot;}
 
@@ -139,4 +140,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_DESCR_H

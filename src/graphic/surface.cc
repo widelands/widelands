@@ -27,25 +27,35 @@
 
 extern bool g_opengl;
 
+namespace {
+
+bool s_is_diplay_format_defined = false;
+
+SDL_Surface* maybe_convert_to_diplay_format(SDL_Surface* surface) {
+	if (!s_is_diplay_format_defined) {
+		return surface;
+	}
+	SDL_Surface * converted = SDL_DisplayFormatAlpha(surface);
+	SDL_FreeSurface(surface);
+	return converted;
+}
+
+} // namespace
+
+void Surface::display_format_is_now_defined() {
+	s_is_diplay_format_defined = true;
+}
+
 Surface* Surface::create(SDL_Surface* surf) {
 	if (g_opengl) {
 		return new GLSurfaceTexture(surf);
 	}
-	SDL_Surface * surface = SDL_DisplayFormatAlpha(surf);
-	SDL_FreeSurface(surf);
-	return new SDLSurface(surface);
+	return new SDLSurface(maybe_convert_to_diplay_format(surf));
 }
 
 Surface* Surface::create(uint16_t w, uint16_t h) {
 	if (g_opengl) {
 		return new GLSurfaceTexture(w, h);
-	} else
-	{
-		SDL_Surface* tsurf = empty_sdl_surface(w, h);
-		SDL_Surface* surf = SDL_DisplayFormatAlpha(tsurf);
-		SDL_FreeSurface(tsurf);
-		return new SDLSurface(surf);
 	}
+	return new SDLSurface(empty_sdl_surface(w, h));
 }
-
-

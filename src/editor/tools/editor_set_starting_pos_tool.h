@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_SET_STARTING_POS_TOOL_H
-#define EDITOR_SET_STARTING_POS_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_SET_STARTING_POS_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_SET_STARTING_POS_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 #include "logic/widelands.h"
@@ -34,9 +34,11 @@
 struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 	Editor_Set_Starting_Pos_Tool();
 
-	int32_t handle_click_impl
-		(Widelands::Map &, Widelands::Node_and_Triangle<>,
-		 Editor_Interactive &, Editor_Action_Args &) override;
+	int32_t handle_click_impl(Widelands::Map&,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<>,
+	                          Editor_Interactive&,
+	                          Editor_Action_Args&) override;
 	char const * get_sel_impl() const override
 		{return m_current_sel_pic;}
 
@@ -52,4 +54,4 @@ private:
 int32_t Editor_Tool_Set_Starting_Pos_Callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map);
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_STARTING_POS_TOOL_H

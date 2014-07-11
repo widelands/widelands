@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BASIC_FILEREAD_H
-#define BASIC_FILEREAD_H
+#ifndef WL_IO_FILEREAD_H
+#define WL_IO_FILEREAD_H
 
 #include <cassert>
 #include <limits>
@@ -53,7 +53,7 @@ public:
 		Pos operator++() {
 			return ++pos;
 		}
-		Pos operator+=(Pos const other) {
+		Pos operator += (Pos const other) {
 			return pos += other.pos;
 		}
 
@@ -95,7 +95,7 @@ public:
 
 	/// Set the file pointer to the given location.
 	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
-	void SetFilePos(Pos const pos);
+	void SetFilePos(Pos pos);
 
 	/// Get the position that will be read from in the next read operation that
 	/// does not specify a position.
@@ -103,10 +103,10 @@ public:
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
-	char* Data(uint32_t const bytes, const Pos pos = Pos::Null());
+	char* Data(uint32_t bytes, Pos pos = Pos::Null());
 
 	// Returns the whole file as a string starting from 'pos'.
-	char* CString(Pos const pos);
+	char* CString(Pos pos);
 
 	// Returns the next line.
 	char* ReadLine();
@@ -117,4 +117,4 @@ private:
 	Pos filepos_;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILEREAD_H

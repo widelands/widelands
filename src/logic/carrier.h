@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CARRIER_H
-#define CARRIER_H
+#ifndef WL_LOGIC_CARRIER_H
+#define WL_LOGIC_CARRIER_H
 
 #include "logic/worker.h"
 
@@ -39,7 +39,7 @@ struct Carrier : public Worker {
 				Worker_Descr
 					(_name, _descname, directory,
 					 prof, global_s, _tribe)
-		{};
+		{}
 
 		virtual Worker_Type get_worker_type() const override {return CARRIER;}
 
@@ -51,7 +51,7 @@ struct Carrier : public Worker {
 	Carrier(const Descr & carrier_descr)
 		: Worker(carrier_descr), m_promised_pickup_to(-1)
 	{}
-	virtual ~Carrier() {};
+	virtual ~Carrier() {}
 
 	bool notify_ware(Game &, int32_t flag);
 
@@ -63,7 +63,7 @@ struct Carrier : public Worker {
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
 private:
-	MO_DESCR(Descr);
+	MO_DESCR(Descr)
 
 	void find_pending_ware(Game &);
 	int32_t find_closest_flag(Game &);
@@ -110,4 +110,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CARRIER_H

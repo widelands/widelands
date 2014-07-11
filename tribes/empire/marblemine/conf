@@ -15,8 +15,9 @@ wood=1
 miner=1
 
 [aihints]
-mines=granit
+mines=granite
 mines_percent=50
+marbleproducer=true
 
 [inputs]
 ration=6
@@ -31,20 +32,20 @@ work=_Work
 sleep=20000
 consume=wine ration
 animate=working 20000
-mine=granit 2 50 5 17
+mine=granite 2 50 5 17
 produce=marble:2
 animate=working 20000
-mine=granit 2 50 5 17
+mine=granite 2 50 5 17
 produce=marble stone
 
 [mine_stone]
 sleep=20000
 consume=ration wine
 animate=working 20000
-mine=granit 2 50 5 17
+mine=granite 2 50 5 17
 produce=stone marble
 animate=working 20000
-mine=granit 2 50 5 17
+mine=granite 2 50 5 17
 produce=stone:2
 
 [work]

@@ -17,8 +17,10 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_PORT_SPACES_DATA_PACKET_H
-#define WIDELANDS_MAP_PORT_SPACES_DATA_PACKET_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_PORT_SPACES_DATA_PACKET_H
+#define WL_MAP_IO_WIDELANDS_MAP_PORT_SPACES_DATA_PACKET_H
+
+#include <stdint.h>
 
 #include "map_io/widelands_map_data_packet.h"
 
@@ -27,10 +29,9 @@ namespace Widelands {
 class Map;
 
 /// The port data packet contains all port build spaces
-struct Map_Port_Spaces_Data_Packet : public Map_Data_Packet {
-	void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &) override;
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &) override;
+struct Map_Port_Spaces_Data_Packet {
+	void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&);
+	void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);
 
 	//  The following function prereads a given map without the need of a
 	//  properly configured Editor_Game_Base object.
@@ -44,4 +45,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_PORT_SPACES_DATA_PACKET_H

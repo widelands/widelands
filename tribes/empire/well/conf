@@ -12,6 +12,7 @@ marble=1
 
 [aihints]
 build_material=false
+mines_water=true
 
 [working positions]
 carrier=1

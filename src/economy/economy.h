@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ECONOMY_H
-#define ECONOMY_H
+#ifndef WL_ECONOMY_ECONOMY_H
+#define WL_ECONOMY_ECONOMY_H
 
 #include <memory>
 #include <set>
@@ -239,4 +239,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_ECONOMY_H

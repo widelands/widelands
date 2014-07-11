@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef FONT_H
-#define FONT_H
+#ifndef WL_GRAPHIC_FONT_H
+#define WL_GRAPHIC_FONT_H
 
 #include <SDL_ttf.h>
 
+#include "graphic/color.h"
 #include "io/fileread.h"
-#include "rgbcolor.h"
 
 namespace UI {
 
@@ -115,4 +115,4 @@ struct TextStyle {
 
 } // namespace UI
 
-#endif // FONT_H
+#endif  // end of include guard: WL_GRAPHIC_FONT_H

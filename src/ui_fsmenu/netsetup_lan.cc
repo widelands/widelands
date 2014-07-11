@@ -19,12 +19,13 @@
 
 #include "ui_fsmenu/netsetup_lan.h"
 
-#include "compile_diagnostics.h"
-#include "constants.h"
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "network/constants.h"
 #include "network/network.h"
 #include "profile/profile.h"
+#include "wui/text_constants.h"
 
 Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 	Fullscreen_Menu_Base("singleplmenu.jpg"), //  FIXME change this
@@ -158,9 +159,9 @@ bool Fullscreen_Menu_NetSetupLAN::get_host_address
 
 	if (hostent * const he = gethostbyname(host.c_str())) {
 		addr = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		port = htons(WIDELANDS_PORT);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 		return true;
 	} else
 		return false;
@@ -265,4 +266,3 @@ void Fullscreen_Menu_NetSetupLAN::clicked_lasthost() {
 		joingame.set_enabled(true);
 	opengames.select(opengames.no_selection_index());
 }
-

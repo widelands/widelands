@@ -23,11 +23,10 @@
 
 #include <boost/format.hpp>
 
-#include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "text_layout.h"
+#include "wui/text_layout.h"
 
 namespace UI {
 /**

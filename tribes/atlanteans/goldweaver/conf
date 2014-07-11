@@ -23,9 +23,9 @@ gold=5
 work=_Work
 
 [work]
+sleep=15000
 return=skipped unless economy needs goldyarn
 consume=gold
-sleep=15000
 animate=working 25000
 produce=goldyarn
 

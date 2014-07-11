@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef WL_ERIS_H
-#define WL_ERIS_H
+#ifndef WL_SCRIPTING_ERIS_H
+#define WL_SCRIPTING_ERIS_H
 
 // We need eris in a cpp context. Include it as such.
 extern "C" {
-#include "scripting/eris/eris.h"
+#include "third_party/eris/eris.h"
 }
 
 
-#endif /* end of include guard: WL_ERIS_H */
+#endif  // end of include guard: WL_SCRIPTING_ERIS_H

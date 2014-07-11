@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef WL_GRAPHIC_IMAGE_H
+#define WL_GRAPHIC_IMAGE_H
 
 #include <string>
 
@@ -44,4 +44,4 @@ public:
 };
 
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_IMAGE_H

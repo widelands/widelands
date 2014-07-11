@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_ROADDATA_DATA_PACKET_H
-#define WIDELANDS_MAP_ROADDATA_DATA_PACKET_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_ROADDATA_DATA_PACKET_H
+#define WL_MAP_IO_WIDELANDS_MAP_ROADDATA_DATA_PACKET_H
 
 #include "map_io/widelands_map_data_packet.h"
 
@@ -26,6 +26,6 @@
  * This parses the roads data (where it is, where it belongs to
  * and so on)
  */
-MAP_DATA_PACKET(Map_Roaddata_Data_Packet);
+MAP_DATA_PACKET(Map_Roaddata_Data_Packet)
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_ROADDATA_DATA_PACKET_H

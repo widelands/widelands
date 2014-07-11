@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TATTRIBUTE_H
-#define TATTRIBUTE_H
+#ifndef WL_LOGIC_TATTRIBUTE_H
+#define WL_LOGIC_TATTRIBUTE_H
 
 namespace Widelands {
 
@@ -36,4 +36,4 @@ enum tAttribute {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_TATTRIBUTE_H

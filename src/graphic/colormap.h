@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef COLORMAP_H
-#define COLORMAP_H
+#ifndef WL_GRAPHIC_COLORMAP_H
+#define WL_GRAPHIC_COLORMAP_H
 
 #include <SDL_video.h>
 
@@ -43,4 +43,4 @@ public:
 	void * get_colormap () const {return colormap;}
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_COLORMAP_H

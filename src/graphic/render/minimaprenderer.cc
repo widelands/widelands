@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
@@ -31,7 +32,8 @@
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "upcast.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
@@ -66,7 +68,7 @@ inline uint32_t calc_minimap_color
 		pixelcolor =
 			g_gr->
 			get_maptexture_data
-				(egbase.map().world()
+				(egbase.world()
 				 .terrain_descr(f.field->terrain_d()).get_texture())
 			->get_minimap_color(f.field->get_brightness()) | format.Amask;
 	}
@@ -91,10 +93,7 @@ inline uint32_t calc_minimap_color
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
 			if ((flags & MiniMap::Roads) and dynamic_cast<Road const *>(immovable)) {
-				if (!(flags & MiniMap::Owner) && !strcmp(egbase.map().get_world_name(), "winterland"))
-						pixelcolor = blend_color(format, pixelcolor, 255, 127, 0);
-				else //ownership layer displayed or greenland
-						pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
+				pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
 			}
 
 			if
@@ -104,14 +103,7 @@ inline uint32_t calc_minimap_color
 				  and
 				  dynamic_cast<Widelands::Building const *>(immovable)))
 			{
-				if (!(flags & MiniMap::Owner) && !strcmp(egbase.map().get_world_name(), "winterland"))
-					pixelcolor =
-						SDL_MapRGB
-							(&const_cast<SDL_PixelFormat &>(format), 255, 127, 0);
-				else //ownership layer displayed or greenland
-					pixelcolor =
-						SDL_MapRGB
-							(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
+				pixelcolor = SDL_MapRGB(&const_cast<SDL_PixelFormat&>(format), 255, 255, 255);
 			}
 		}
 	}

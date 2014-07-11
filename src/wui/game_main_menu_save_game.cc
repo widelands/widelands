@@ -20,20 +20,18 @@
 #include "wui/game_main_menu_save_game.h"
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
-#include "constants.h"
+#include "base/i18n.h"
+#include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"
-#include "gamecontroller.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/playersmanager.h"
 #include "profile/profile.h"
-#include "timestring.h"
 #include "wui/interactive_gamebase.h"
 
 using boost::format;

@@ -19,20 +19,24 @@
 
 #include "logic/battle.h"
 
+#include <memory>
+
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 
+namespace  {
 Battle::Descr g_Battle_Descr("battle", "Battle");
+}  // namespace
 
 
 Battle::Battle ()

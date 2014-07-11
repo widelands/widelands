@@ -17,8 +17,10 @@
  *
  */
 
-#ifndef LAYERED_FILESYSTEM_H
-#define LAYERED_FILESYSTEM_H
+#ifndef WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H
+#define WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H
+
+#include <memory>
 
 #include "io/filesystem/filesystem.h"
 
@@ -46,8 +48,13 @@ public:
 	LayeredFileSystem();
 	virtual ~LayeredFileSystem();
 
-	virtual void    AddFileSystem(FileSystem &);
-	virtual void    SetHomeFileSystem(FileSystem &);
+	// Add a new filesystem to the top of the stack. Take ownership of the given
+	// filesystem.
+	void AddFileSystem(FileSystem*);
+
+	// Set the home filesystem (which is the preferred filesystem for writing
+	// files). Take ownership of the given filesystem.
+	void SetHomeFileSystem(FileSystem*);
 
 	virtual void RemoveFileSystem(const FileSystem &);
 
@@ -71,37 +78,16 @@ public:
 	virtual void Unlink(const std::string & file) override;
 	virtual void Rename(const std::string &, const std::string &) override;
 
-	virtual std::string getBasename() override {return std::string();};
-
-	bool FindConflictingVersionFile(FileSystem &);
-	bool FindMatchingVersionFile(FileSystem &);
-
-	void PutRightVersionOnTop();
+	virtual std::string getBasename() override {return std::string();}
 
 	virtual unsigned long long DiskSpace() override;
 
 private:
-	bool m_read_version_from_version_file(FileSystem &, std::string *);
-
-	typedef std::vector<FileSystem *>::reverse_iterator FileSystem_rit;
-
-	std::vector<FileSystem *> m_filesystems;
-	FileSystem * m_home;
+	std::vector<std::unique_ptr<FileSystem>> m_filesystems;
+	std::unique_ptr<FileSystem> m_home;
 };
 
 /// Access all game data files etc. through this FileSystem
 extern LayeredFileSystem * g_fs;
 
-/// Create an object of this type to add a new filesystem to the top of the
-/// stack and make sure that it is removed when the object goes out of scope.
-/// This is exception-safe, unlike calling g_fs->AddFileSystem and
-/// g_fs->RemoveFileSystem directly.
-class FileSystemLayer {
-public:
-	FileSystemLayer(FileSystem & fs) : m_fs(fs) {g_fs->AddFileSystem(fs);}
-	~FileSystemLayer() {g_fs->RemoveFileSystem(m_fs);}
-private:
-	const FileSystem & m_fs;
-};
-
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H

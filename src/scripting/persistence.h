@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef PERSISTENCE_H
-#define PERSISTENCE_H
+#ifndef WL_SCRIPTING_PERSISTENCE_H
+#define WL_SCRIPTING_PERSISTENCE_H
 
 #include <string>
 
-#include "scripting/eris/lua.hpp"
+#include "third_party/eris/lua.hpp"
 
 class FileRead;
 class FileWrite;
@@ -51,4 +51,4 @@ void unpersist_object
 	 FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size);
 
-#endif /* end of include guard: PERSISTENCE_H */
+#endif  // end of include guard: WL_SCRIPTING_PERSISTENCE_H

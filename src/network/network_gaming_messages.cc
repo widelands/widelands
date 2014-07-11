@@ -24,8 +24,8 @@
 #include <boost/format.hpp>
 #include <stdint.h>
 
-#include "i18n.h"
-#include "log.h"
+#include "base/i18n.h"
+#include "base/log.h"
 
 static std::map <std::string, std::string> ngmessages;
 
@@ -50,11 +50,11 @@ const std::string NetworkGamingMessages::get_message
 	// push code and all arguments - if existing - in a vector for easier handling
 	std::vector<std::string> strings;
 	strings.push_back(get_message(code));
-	if (arg1.size() > 0) {
+	if (!arg1.empty()) {
 		strings.push_back(get_message(arg1));
-		if (arg2.size() > 0) {
+		if (!arg2.empty()) {
 			strings.push_back(get_message(arg2));
-			if (arg3.size() > 0)
+			if (!arg3.empty())
 				strings.push_back(get_message(arg3));
 		}
 	}

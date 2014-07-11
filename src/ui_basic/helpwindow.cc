@@ -19,20 +19,21 @@
 
 #include "ui_basic/helpwindow.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
-#include "constants.h"
+#include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "wlapplication.h"
+#include "wui/text_constants.h"
 
 
 using boost::format;

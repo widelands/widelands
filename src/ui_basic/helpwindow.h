@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef UI_HELPWINDOW_H
-#define UI_HELPWINDOW_H
+#ifndef WL_UI_BASIC_HELPWINDOW_H
+#define WL_UI_BASIC_HELPWINDOW_H
 
 #include <memory>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
@@ -94,4 +94,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_HELPWINDOW_H

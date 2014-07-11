@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CONSTRUCTIONSITE_H
-#define CONSTRUCTIONSITE_H
+#ifndef WL_LOGIC_CONSTRUCTIONSITE_H
+#define WL_LOGIC_CONSTRUCTIONSITE_H
 
 #include <vector>
 
@@ -59,11 +59,11 @@ struct ConstructionSite_Descr : public Building_Descr {
 };
 
 class ConstructionSite : public Partially_Finished_Building {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 
 	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
 
-	MO_DESCR(ConstructionSite_Descr);
+	MO_DESCR(ConstructionSite_Descr)
 
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
@@ -105,4 +105,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CONSTRUCTIONSITE_H

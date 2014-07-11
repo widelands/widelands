@@ -20,12 +20,14 @@
 #include "logic/tribe.h"
 
 #include <iostream>
+#include <memory>
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -38,17 +40,17 @@
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
 #include "logic/militarysite.h"
+#include "logic/parse_map_object_types.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "logic/world.h"
-#include "parse_map_object_types.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 
 using namespace std;
@@ -95,12 +97,12 @@ Tribe_Descr::Tribe_Descr
 					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 
-			const World& world = egbase.map().world();
+			const World& world = egbase.world();
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
 				m_immovables.add
 					(new Immovable_Descr
-					 	(_name, _descname, path, prof, global_s, world, this));
+					 	(_name, _descname, path, prof, global_s, this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 #define PARSE_WORKER_TYPES(name, descr_type)                                  \
@@ -176,13 +178,6 @@ Tribe_Descr::Tribe_Descr
 
 		}
 
-		{
-			/// Loads military data
-			Section * military_data_s = root_conf.get_section("military_data");
-			if (military_data_s)
-				m_military_data.parse(*military_data_s);
-		}
-
 		try {
 			{
 				Section & tribe_s = root_conf.get_safe_section("tribe");
@@ -239,47 +234,10 @@ Tribe_Descr::Tribe_Descr
 				PARSE_ORDER_INFORMATION(worker);
 			}
 
-			try {
-				while (Section * const s = root_conf.get_next_section("frontier"))
-				{
-					char const * const style_name = s->get_safe_string("name");
-					try {
-						if (m_anim_frontier.empty())
-							throw Nonexistent();
-						frontier_style_index(style_name);
-						throw game_data_error("\"%s\" is duplicated", style_name);
-					} catch (Nonexistent) {
-						m_anim_frontier.push_back
-							(std::pair<std::string, uint32_t>
-							 	(style_name, g_gr->animations().load(path, *s)));
-					}
-				}
-				if (m_anim_frontier.empty())
-					throw game_data_error("none found");
-			} catch (const _wexception & e) {
-				throw game_data_error("frontier styles: %s", e.what());
-			}
-			try {
-				while (Section * const s = root_conf.get_next_section("flag"))
-				{
-					char const * const style_name = s->get_safe_string("name");
-					try {
-						if (m_anim_flag.empty())
-							throw Nonexistent();
-						flag_style_index(style_name);
-						throw game_data_error("\"%s\" is duplicated", style_name);
-					} catch (Nonexistent) {
-						m_anim_flag.push_back
-							(std::pair<std::string, uint32_t>
-							 	(style_name,
-							 	 g_gr->animations().load(path, *s)));
-					}
-				}
-				if (m_anim_flag.empty())
-					throw game_data_error("none found");
-			} catch (const _wexception & e) {
-				throw game_data_error("flag styles: %s", e.what());
-			}
+			m_frontier_animation_id =
+			   g_gr->animations().load(path, root_conf.get_safe_section("frontier"));
+			m_flag_animation_id =
+			   g_gr->animations().load(path, root_conf.get_safe_section("flag"));
 
 			{
 				// Read initializations -- all scripts are initializations currently
@@ -287,6 +245,7 @@ Tribe_Descr::Tribe_Descr
 				     filter(g_fs->ListDirectory(path + "scripting"),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
+					t->do_not_warn_about_unaccessed_keys();
 
 					m_initializations.resize(m_initializations.size() + 1);
 					Initialization& init = m_initializations.back();
@@ -358,6 +317,7 @@ bool Tribe_Descr::exists_tribe
 				     filter(g_fs->ListDirectory(path),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = lua.run_script(script);
+					t->do_not_warn_about_unaccessed_keys();
 					info->initializations.push_back(
 					   TribeBasicInfo::Initialization(script, t->get_string("name")));
 				}
@@ -429,7 +389,7 @@ Find the best matching indicator for the given amount.
 ==============
 */
 uint32_t Tribe_Descr::get_resource_indicator
-	(Resource_Descr const * const res, uint32_t const amount) const
+	(ResourceDescription const * const res, uint32_t const amount) const
 {
 	if (not res or not amount) {
 		int32_t idx = get_immovable_index("resi_none");
@@ -460,7 +420,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 
 	int32_t bestmatch =
 		static_cast<int32_t>
-			((static_cast<float>(amount) / res->get_max_amount())
+			((static_cast<float>(amount) / res->max_amount())
 			 *
 			 num_indicators);
 	if (bestmatch > num_indicators)
@@ -468,8 +428,8 @@ uint32_t Tribe_Descr::get_resource_indicator
 			("Amount of %s is %i but max amount is %i",
 			 res->name().c_str(),
 			 amount,
-			 res->get_max_amount());
-	if (static_cast<int32_t>(amount) < res->get_max_amount())
+			 res->max_amount());
+	if (static_cast<int32_t>(amount) < res->max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 
 	snprintf

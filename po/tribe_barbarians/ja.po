@@ -7,285 +7,285 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2011-08-21 14:15+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-04-21 09:14+0000\n"
+"Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:34+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:33+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr ""
+msgstr "兵舎が侵略者を発見しました。"
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "兵舎が攻撃を受けています。"
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "敵が兵舎であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "あなたの兵士が兵舎で敵を討伐しました。"
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "関所が侵略者を発見しました。"
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "関所が攻撃を受けています。"
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "敵が関所であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "あなたの兵士が関所で敵を討伐しました。"
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "城郭が侵略者を発見しました。"
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "城郭が攻撃を受けています。"
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "敵が城郭であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "あなたの兵士が城郭で敵を討伐しました。"
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 #: ../../tribes/barbarians/citadel/conf:9
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "城塞が侵略者を発見しました。"
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "城塞が攻撃を受けています。"
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "敵が城塞であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 #: ../../tribes/barbarians/citadel/conf:12
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "あなたの兵士が城塞で敵を討伐しました。"
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your donjon discovered an aggressor."
-msgstr ""
+msgstr "物見塔が侵略者を発見しました。"
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr ""
+msgstr "物見塔が攻撃を受けています。"
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr ""
+msgstr "敵が物見塔であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr ""
+msgstr "あなたの兵士が物見塔で敵を討伐しました。"
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 #: ../../tribes/barbarians/fortress/conf:8
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "要塞が侵略者を発見しました。"
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/barbarians/fortress/conf:9
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "要塞が攻撃を受けています。"
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 #: ../../tribes/barbarians/fortress/conf:10
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "敵が要塞であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 #: ../../tribes/barbarians/fortress/conf:11
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "あなたの兵士が要塞で敵を討伐しました。"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "警備所が侵略者を発見しました。"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "警備所が攻撃を受けています。"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "敵が警備所であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "あなたの兵士が警備所で敵を討伐しました。"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "警備小屋が侵略者を発見しました。"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "警備小屋が攻撃を受けています。"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "敵が警備小屋であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "あなたの兵士が警備小屋で敵を討伐しました。"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "高監視塔が侵略者を発見しました。"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "高監視塔が攻撃を受けています。"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "敵が高監視塔であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "あなたの兵士が高監視塔で敵を討伐しました。"
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "前哨基地が侵略者を発見しました。"
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "前哨基地が攻撃を受けています。"
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "敵が前哨基地であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "あなたの兵士が前哨基地で敵を討伐しました。"
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "歩哨所が侵略者を発見しました。"
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "歩哨所が攻撃を受けています。"
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "敵が歩哨所であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "あなたの兵士が歩哨所で敵を討伐しました。"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "小監視塔が侵略者を発見しました。"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "小監視塔が攻撃を受けています。"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "敵が小監視塔であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "あなたの兵士が小監視塔で敵を討伐しました。"
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "監視塔が侵略者を発見しました。"
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "監視塔が攻撃を受けています。"
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "敵が監視塔であなたの兵士を倒しました。"
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "あなたの兵士が監視塔で敵を討伐しました。"
 
 #: ../../tribes/barbarians/ax/conf:1
 msgid ""
 "The Ax is the basic weapon of the barbarians. All young soldiers are "
 "equipped with it."
-msgstr ""
+msgstr "アックスはバーバリアンの基本武器です。すべての若い兵士はそれを装備します。"
 
 #: ../../tribes/barbarians/axfactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce ax"
-msgstr ""
+msgstr "アックスの生産"
 
 #: ../../tribes/barbarians/axfactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce sharp ax"
-msgstr ""
+msgstr "シャープアックスの生産"
 
 #: ../../tribes/barbarians/axfactory/conf:34
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce broad ax"
-msgstr ""
+msgstr "ブロードアックスの生産"
 
 #: ../../tribes/barbarians/axfactory/conf:35
 #: ../../tribes/barbarians/bakery/conf:26
@@ -325,7 +325,7 @@ msgstr ""
 #: ../../tribes/barbarians/weaving-mill/conf:23
 #: ../../tribes/barbarians/well/conf:17
 msgid "Work"
-msgstr "仕事"
+msgstr "作業"
 
 #: ../../tribes/barbarians/axfactory/help.lua:10
 #: ../../tribes/barbarians/bakery/help.lua:10
@@ -356,7 +356,7 @@ msgstr "仕事"
 #: ../../tribes/barbarians/warmill/help.lua:10
 #: ../../tribes/barbarians/well/help.lua:10
 msgid "Lore"
-msgstr ""
+msgstr "伝承"
 
 #: ../../tribes/barbarians/axfactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -364,6 +364,12 @@ msgid ""
 "‘A new Warrior’s Ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
 msgstr ""
+"「新しい最高の\n"
+"　ウォリアーズアックスは、\n"
+"　その装備者の手で\n"
+"　生み出される\n"
+"　――そして最低のものは\n"
+"　作り手の手で」"
 
 #: ../../tribes/barbarians/axfactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -371,6 +377,8 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
+"バーバリアンの古いことわざ\n"
+"ときにはリスクを取るべきという意味"
 
 #: ../../tribes/barbarians/axfactory/help.lua:15
 #: ../../tribes/barbarians/bakery/help.lua:15
@@ -401,7 +409,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:15
 #: ../../tribes/barbarians/well/help.lua:15
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: ../../tribes/barbarians/axfactory/help.lua:16
 #: ../../tribes/barbarians/bakery/help.lua:16
@@ -432,7 +440,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:16
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Purpose:"
-msgstr ""
+msgstr "目的:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:16
 msgid ""
@@ -440,10 +448,17 @@ msgid ""
 "three buildings. It is an upgrade from the Metal Workshop but doesn’t "
 "require additional qualification for the worker."
 msgstr ""
+"バーバリアンの斧工房は、\n"
+"三つの建物のシリーズの中間生産施設です。\n"
+"それは、鍛冶工房から拡張されますが、\n"
+"労働者のための追加の資格を必要としません。"
 
 #: ../../tribes/barbarians/axfactory/help.lua:17
 msgid "It can make axes, Sharp axes and Broad axes."
 msgstr ""
+"アックス、シャープアックス、\n"
+"ブロードアックスを\n"
+"つくります。"
 
 #: ../../tribes/barbarians/axfactory/help.lua:18
 #: ../../tribes/barbarians/bakery/help.lua:17
@@ -474,7 +489,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:18
 #: ../../tribes/barbarians/well/help.lua:17
 msgid "Working radius:"
-msgstr ""
+msgstr "作業半径:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:19
 #: ../../tribes/barbarians/bakery/help.lua:18
@@ -505,7 +520,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:19
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Conquer range:"
-msgstr ""
+msgstr "征服範囲:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:20
 #: ../../tribes/barbarians/bakery/help.lua:19
@@ -536,7 +551,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:20
 #: ../../tribes/barbarians/well/help.lua:19
 msgid "Vision range:"
-msgstr ""
+msgstr "視野範囲:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:22
 #: ../../tribes/barbarians/bakery/help.lua:21
@@ -567,7 +582,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:22
 #: ../../tribes/barbarians/well/help.lua:21
 msgid "Dependencies"
-msgstr ""
+msgstr "依存関係"
 
 #: ../../tribes/barbarians/axfactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -596,14 +611,14 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:23
 #: ../../tribes/barbarians/well/help.lua:22
 msgid "Incoming:"
-msgstr ""
+msgstr "入力元:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr ""
+msgstr "%s(製錬所から)"
 
 #: ../../tribes/barbarians/axfactory/help.lua:24
 #: ../../tribes/barbarians/conf:78
@@ -615,7 +630,7 @@ msgstr "鉄"
 #: ../../tribes/barbarians/axfactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner’s House"
-msgstr ""
+msgstr "%s(炭鉱または炭焼小屋から)"
 
 #: ../../tribes/barbarians/axfactory/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:18
@@ -662,7 +677,7 @@ msgstr "石炭"
 #: ../../tribes/barbarians/warmill/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:23
 msgid "Outgoing:"
-msgstr ""
+msgstr "出力先:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:28
 #: ../../tribes/barbarians/conf:105
@@ -677,7 +692,7 @@ msgstr "兵士"
 #: ../../tribes/barbarians/hunters_hut/help.lua:28
 #: ../../tribes/barbarians/warmill/help.lua:31
 msgid "Training Camp"
-msgstr ""
+msgstr "訓練場"
 
 #: ../../tribes/barbarians/axfactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:33
@@ -708,7 +723,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:33
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "Building"
-msgstr ""
+msgstr "施設"
 
 #: ../../tribes/barbarians/axfactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -718,7 +733,7 @@ msgstr ""
 #: ../../tribes/barbarians/reed_yard/help.lua:30
 #: ../../tribes/barbarians/warmill/help.lua:34
 msgid "Medium plot"
-msgstr ""
+msgstr "中区画"
 
 #: ../../tribes/barbarians/axfactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -749,13 +764,13 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:34
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Space required:"
-msgstr ""
+msgstr "必要スペース:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:33
 #: ../../tribes/barbarians/conf:190
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid "Metal Workshop"
-msgstr ""
+msgstr "鍛冶工房"
 
 #: ../../tribes/barbarians/axfactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -786,7 +801,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:33
 msgid "Upgraded from:"
-msgstr ""
+msgstr "拡張元施設:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:34
 #: ../../tribes/barbarians/deep_coalmine/help.lua:40
@@ -797,7 +812,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_oremine/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
 msgid "Upgrade cost:"
-msgstr ""
+msgstr "拡張コスト:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:35
 #: ../../tribes/barbarians/axfactory/help.lua:41
@@ -996,7 +1011,7 @@ msgstr[1] ""
 #: ../../tribes/barbarians/deeper_oremine/help.lua:37
 #: ../../tribes/barbarians/warmill/help.lua:42
 msgid "Cost cumulative:"
-msgstr ""
+msgstr "累積コスト:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:46
 #: ../../tribes/barbarians/bakery/help.lua:41
@@ -1027,7 +1042,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:37
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "解体回収材:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:52
 #: ../../tribes/barbarians/bakery/help.lua:46
@@ -1058,7 +1073,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:54
 #: ../../tribes/barbarians/well/help.lua:39
 msgid "Upgradeable to:"
-msgstr ""
+msgstr "拡張施設:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:52
 #: ../../tribes/barbarians/coalmine/help.lua:33
@@ -1066,7 +1081,7 @@ msgstr ""
 #: ../../tribes/barbarians/deep_coalmine/help.lua:32
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:31
 msgid "War Mill"
-msgstr ""
+msgstr "戦斧工房"
 
 #: ../../tribes/barbarians/axfactory/help.lua:54
 #: ../../tribes/barbarians/bakery/help.lua:48
@@ -1097,7 +1112,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:56
 #: ../../tribes/barbarians/well/help.lua:41
 msgid "Workers"
-msgstr ""
+msgstr "労働者"
 
 #: ../../tribes/barbarians/axfactory/help.lua:55
 #: ../../tribes/barbarians/bakery/help.lua:49
@@ -1128,7 +1143,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:42
 msgid "Crew required:"
-msgstr ""
+msgstr "必要職種:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:56
 #: ../../tribes/barbarians/coalmine/help.lua:51
@@ -1147,7 +1162,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:59
 msgid "%s or better"
-msgstr ""
+msgstr "%s以上"
 
 #: ../../tribes/barbarians/axfactory/help.lua:56
 #: ../../tribes/barbarians/axfactory/help.lua:60
@@ -1158,7 +1173,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:59
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "Blacksmith"
-msgstr "鍛冶屋"
+msgstr "鍛冶職人"
 
 #: ../../tribes/barbarians/axfactory/help.lua:57
 #: ../../tribes/barbarians/conf:75
@@ -1188,7 +1203,7 @@ msgstr "ハンマー"
 #: ../../tribes/barbarians/trainingcamp/help.lua:59
 #: ../../tribes/barbarians/well/help.lua:44
 msgid "Worker uses:"
-msgstr ""
+msgstr "作業道具:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1219,7 +1234,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:61
 #: ../../tribes/barbarians/well/help.lua:45
 msgid "Experience levels:"
-msgstr ""
+msgstr "経験値レベル:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:54
@@ -1246,7 +1261,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s→%s(%s exp)"
 
 #: ../../tribes/barbarians/axfactory/help.lua:60
 #: ../../tribes/barbarians/conf:109
@@ -1254,7 +1269,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:58
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "Master Blacksmith"
-msgstr ""
+msgstr "鍛冶師"
 
 #: ../../tribes/barbarians/axfactory/help.lua:62
 #: ../../tribes/barbarians/bakery/help.lua:54
@@ -1285,7 +1300,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:64
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "Production"
-msgstr ""
+msgstr "生産"
 
 #: ../../tribes/barbarians/axfactory/help.lua:63
 #: ../../tribes/barbarians/lime_kiln/help.lua:54
@@ -1294,6 +1309,9 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %1$s in "
 "about %2$s on average."
 msgstr ""
+"必要なすべてのアイテムが時間内に届いた場合、\n"
+"この建物は%1$sを生産するために\n"
+"平均約%2$sかかります。"
 
 #: ../../tribes/barbarians/axfactory/help.lua:63
 #: ../../tribes/barbarians/bakery/help.lua:55
@@ -1324,30 +1342,33 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:65
 #: ../../tribes/barbarians/well/help.lua:48
 msgid "Performance:"
-msgstr ""
+msgstr "性能:"
 
 #: ../../tribes/barbarians/axfactory/help.lua:63
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "各アイテム"
 
 #: ../../tribes/barbarians/axfactory/help.lua:64
 msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
 msgstr ""
+"三つの武器すべては、\n"
+"つくるために同じ時間がかかりますが、\n"
+"必要な原材料は変わります。"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "労働者のためにパンを焼きます。"
 
 #: ../../tribes/barbarians/bakery/help.lua:12
 #: ../../tribes/barbarians/cattlefarm/help.lua:12
 #: ../../tribes/barbarians/farm/help.lua:12
 #: ../../tribes/barbarians/quarry/help.lua:12
 msgid "Text needed"
-msgstr ""
+msgstr "テキストなし"
 
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
@@ -1355,24 +1376,24 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "出典なし"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr ""
+msgstr "兵士と鉱夫たちに同じようにピタパンを焼きます。"
 
 #: ../../tribes/barbarians/bakery/help.lua:23
 #: ../../tribes/barbarians/cattlefarm/help.lua:23
 #: ../../tribes/barbarians/micro-brewery/help.lua:24
 msgid "Wheat from the Farm"
-msgstr ""
+msgstr "小麦(農場から)"
 
 #: ../../tribes/barbarians/bakery/help.lua:24
 #: ../../tribes/barbarians/cattlefarm/help.lua:24
 #: ../../tribes/barbarians/lime_kiln/help.lua:27
 #: ../../tribes/barbarians/micro-brewery/help.lua:23
 msgid "Water from the Well"
-msgstr ""
+msgstr "水(井戸から)"
 
 #: ../../tribes/barbarians/bakery/help.lua:26
 #: ../../tribes/barbarians/battlearena/help.lua:27
@@ -1394,7 +1415,7 @@ msgstr "酒場"
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 #: ../../tribes/barbarians/micro-brewery/help.lua:27
 msgid "Inn"
-msgstr "宿屋"
+msgstr "食堂"
 
 #: ../../tribes/barbarians/bakery/help.lua:29
 #: ../../tribes/barbarians/conf:182
@@ -1402,7 +1423,7 @@ msgstr "宿屋"
 #: ../../tribes/barbarians/hunters_hut/help.lua:31
 #: ../../tribes/barbarians/micro-brewery/help.lua:28
 msgid "Big Inn"
-msgstr ""
+msgstr "大食堂"
 
 #: ../../tribes/barbarians/bakery/help.lua:30
 #: ../../tribes/barbarians/conf:214
@@ -1432,7 +1453,7 @@ msgstr "闘技場"
 #: ../../tribes/barbarians/trainingcamp/help.lua:42
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build cost:"
-msgstr ""
+msgstr "建設コスト:"
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:108
@@ -1443,7 +1464,7 @@ msgstr "パン職人"
 #: ../../tribes/barbarians/bakery/help.lua:51
 #: ../../tribes/barbarians/conf:60
 msgid "Bread Paddle"
-msgstr ""
+msgstr "パンパドル"
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 #: ../../tribes/barbarians/cattlefarm/help.lua:47
@@ -1451,14 +1472,19 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %1$s in "
 "%2$s on average."
 msgstr ""
+"必要なすべてのアイテムが時間内に届いた場合、\n"
+"この建物は%1$sを生産するために\n"
+"平均%2$sかかります。"
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 msgid "a Pitta Bread"
-msgstr ""
+msgstr "ピタパン"
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your barrier."
 msgstr ""
+"あなたの兵士が\n"
+"あなたの関所を占拠しました。"
 
 #: ../../tribes/barbarians/barrier/help.lua:8
 #: ../../tribes/barbarians/big_inn/help.lua:8
@@ -1481,7 +1507,7 @@ msgstr ""
 #: ../../tribes/barbarians/warehouse/help.lua:8
 #: ../../tribes/barbarians/weaving-mill/help.lua:8
 msgid "The help text of this building is under construction."
-msgstr ""
+msgstr "この建物のヘルプは執筆中です。"
 
 #: ../../tribes/barbarians/battlearena/conf:33
 #: ../../tribes/barbarians/trainingcamp/conf:43
@@ -1490,34 +1516,41 @@ msgstr "休止"
 
 #: ../../tribes/barbarians/battlearena/conf:34
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "回避訓練Lv0→1"
 
 #: ../../tribes/barbarians/battlearena/conf:35
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "回避訓練Lv1→2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
 msgstr ""
+"「敵の打ち損じ\n"
+"　同様に、\n"
+"　戦いに親友は\n"
+"　ありえない」"
 
 #: ../../tribes/barbarians/battlearena/help.lua:13
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr ""
+msgstr "有名な教官、ナイトハルトの開始の言葉"
 
 #: ../../tribes/barbarians/battlearena/help.lua:16
 msgid "Trains soldiers in Evade up to level 2."
-msgstr ""
+msgstr "兵士の回避レベルを２まで訓練します。"
 
 #: ../../tribes/barbarians/battlearena/help.lua:17
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
 msgstr ""
+"「回避」は、兵士が敵に打たれないようにして、\n"
+"影響をまったく受けないようになる機会を\n"
+"増やします。"
 
 #: ../../tribes/barbarians/battlearena/help.lua:26
 msgid "Evade Training:"
-msgstr ""
+msgstr "回避訓練:"
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -1527,17 +1560,17 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:36
 #: ../../tribes/barbarians/warmill/help.lua:58
 msgid "%s and"
-msgstr ""
+msgstr "%sと"
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
 #: ../../tribes/barbarians/conf:92
 msgid "Strong Beer"
-msgstr "強いビール"
+msgstr "ストロングビール"
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/trainingcamp/help.lua:37
 msgid "%s or %s"
-msgstr ""
+msgstr "%s／%s"
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/conf:70
@@ -1558,7 +1591,7 @@ msgstr "肉"
 #: ../../tribes/barbarians/farm/help.lua:31
 #: ../../tribes/barbarians/trainingcamp/help.lua:40
 msgid "Big plot"
-msgstr ""
+msgstr "大区画"
 
 #: ../../tribes/barbarians/battlearena/help.lua:35
 #: ../../tribes/barbarians/battlearena/help.lua:41
@@ -1573,22 +1606,26 @@ msgstr[1] ""
 #: ../../tribes/barbarians/conf:132
 #: ../../tribes/barbarians/trainingcamp/help.lua:58
 msgid "Trainer"
-msgstr ""
+msgstr "教官"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 #: ../../tribes/barbarians/trainingcamp/help.lua:63
 msgid "%1$im%2$is"
-msgstr ""
+msgstr "%1$i分%2$i秒"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
-msgstr ""
+msgstr "回避"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid ""
 "If all needed wares are delivered in time, a Battle Arena can train %1$s for "
 "one soldier from 0 to the highest level in %2$s on average."
 msgstr ""
+"必要なすべてのアイテムが時間内に届いた場合、\n"
+"闘技場は一人の兵士の%1$sを\n"
+"レベル0から最高レベルにするために\n"
+"平均%2$sかかります。"
 
 #: ../../tribes/barbarians/battleax/conf:1
 msgid ""
@@ -1597,18 +1634,20 @@ msgid ""
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"これはバーバリアンが製造することができる危険な武器です。斧工房で製造されます。訓練された戦士だけが、そのような武器を扱うことができます。\n"
+"　訓練場で兵士を攻撃レベル３から４に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce "
 "snacks."
-msgstr ""
+msgstr "ビールはビール工房で製造され、軽食をつくるために食堂と大食堂で使用されます。"
 
 #: ../../tribes/barbarians/big_inn/conf:27
 #: ../../tribes/barbarians/inn/conf:27
 #: ../../tribes/barbarians/tavern/conf:28
 msgid "Produce ration"
-msgstr "糧食"
+msgstr "糧食の生産"
 
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
@@ -1617,18 +1656,20 @@ msgstr "軽食の生産"
 
 #: ../../tribes/barbarians/big_inn/conf:29
 msgid "Produce meal"
-msgstr "食料の生産"
+msgstr "食事の生産"
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "兵士のための武器と労働者のための道具を、つくります。"
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of logs in the wood hardener."
 msgstr ""
+"この火で硬化させた木材は、鉄と同じくらい硬く、そして複数の建物のために使用されます。\n"
+"　製材所で丸太を使用して製造されます。"
 
 #: ../../tribes/barbarians/bread_paddle/conf:1
 msgid ""
@@ -1637,12 +1678,16 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"パンパドルは、パン職人の道具であり、それぞれのパン職人が自分専用のものをもちます。\n"
+"　ほかのすべての道具と同様に、鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
+"戦士を訓練中に強く楽しくさせ続けるために、\n"
+"美味しい蒸留酒をつくります。"
 
 #: ../../tribes/barbarians/broadax/conf:1
 msgid ""
@@ -1650,6 +1695,8 @@ msgid ""
 "the training camp – together with food – to train warriors with a "
 "fundamental fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"ブロードアックスは斧工房と戦斧工房で製造されます。\n"
+"　訓練施設（訓練場と闘技場）で、戦士を基本的な戦いの知識（攻撃レベル１からレベル２に）で訓練するために――食物とともに――消費されます。"
 
 #: ../../tribes/barbarians/bronzeax/conf:1
 msgid ""
@@ -1657,26 +1704,28 @@ msgid ""
 "warriors can use it. It is produced at the war mill and used in the training "
 "camp (it trains – together with food – from attack level 2 to level 3)."
 msgstr ""
+"ブロンズアックスはもっとも取扱いが難しい武器だと言われています。熟練の戦士のみがこれを扱うことができます。\n"
+"　戦斧工房で製造され、（――食物とともに――攻撃レベル２から３に訓練する）訓練施設で使用されます。"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "新しい建物を立ち上げる建設地で働きます。"
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr "石炭を燃やす"
+msgstr "木炭を燃やします。"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
-msgstr ""
+msgstr "道路にそってアイテムを運びます。"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help with transporting wares."
-msgstr ""
+msgstr "アイテムの輸送を助ける、強い牛を育てます。"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
-msgstr ""
+msgstr "輸送網に加わる牛を育てます。"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:26
 #: ../../tribes/barbarians/conf:102
@@ -1686,26 +1735,30 @@ msgstr "牛"
 #: ../../tribes/barbarians/cattlefarm/help.lua:42
 #: ../../tribes/barbarians/conf:135
 msgid "Cattle Breeder"
-msgstr "牧畜家"
+msgstr "牛飼い"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:47
 msgid "an Ox"
-msgstr ""
+msgstr "牛"
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "石炭、鉄、金を得るために、地下の鉱山で働きます。"
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your citadel."
 msgstr ""
+"あなたの兵士が\n"
+"あなたの城塞を占拠しました。"
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
 msgstr ""
+"布はバーバリアンの船に必要です。\n"
+"　カヤを使用して製造されます。"
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -1714,6 +1767,8 @@ msgid ""
 "several buildings: lime kiln, smelting works, axfactory, war mill, and helm "
 "smithy."
 msgstr ""
+"バーバリアンの炉は、通常は石炭で供給されます。\n"
+"　炭鉱または炭焼小屋で丸太を消費して製造されます。消費するのは、石灰窯、製錬所、斧工房、戦斧工房、兜工房という複数の建物です。"
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
@@ -1724,6 +1779,13 @@ msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
 msgstr ""
+"とうの昔に、バーバリアンは、\n"
+"炉に供給するその黒い材料のために\n"
+"山腹を調べることを学びました。\n"
+"木は生活の火をとり暖をとるために\n"
+"役立つでしょう。\n"
+"しかし、鉄や金を取り扱うとなれば、\n"
+"手段は石炭のほかにありません。"
 
 #: ../../tribes/barbarians/coalmine/help.lua:18
 #: ../../tribes/barbarians/deep_coalmine/help.lua:18
@@ -1734,6 +1796,10 @@ msgid ""
 "A %1$s exploits only %2$s of the resource. From there on out, it will only "
 "have a 5%% chance of finding %3$s."
 msgstr ""
+"%1$sは、\n"
+"資源の%2$sのみを掘りおこします。\n"
+"<br>そのあとは、5%%のチャンスで\n"
+"%3$sを発見するだけです。"
 
 #: ../../tribes/barbarians/coalmine/help.lua:18
 #: ../../tribes/barbarians/deep_coalmine/help.lua:39
@@ -1750,14 +1816,14 @@ msgstr "炭鉱"
 #: ../../tribes/barbarians/goldmine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:18
 msgid "Dig %s out of the ground in mountain terrain."
-msgstr ""
+msgstr "山地の地面から%sを掘り出します。"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/goldmine/help.lua:25
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr ""
+msgstr "%s(酒場から)"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/coalmine/help.lua:28
@@ -1783,7 +1849,7 @@ msgstr "糧食"
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr ""
+msgstr "%s(食堂から)"
 
 #: ../../tribes/barbarians/coalmine/help.lua:29
 #: ../../tribes/barbarians/deep_coalmine/help.lua:28
@@ -1796,7 +1862,7 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr ""
+msgstr "%s(大食堂から)"
 
 #: ../../tribes/barbarians/coalmine/help.lua:32
 #: ../../tribes/barbarians/conf:189
@@ -1805,14 +1871,14 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:59
 #: ../../tribes/barbarians/warmill/help.lua:35
 msgid "Axfactory"
-msgstr ""
+msgstr "斧工房"
 
 #: ../../tribes/barbarians/coalmine/help.lua:34
 #: ../../tribes/barbarians/conf:194
 #: ../../tribes/barbarians/deep_coalmine/help.lua:33
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:32
 msgid "Helm Smithy"
-msgstr ""
+msgstr "兜工房"
 
 #: ../../tribes/barbarians/coalmine/help.lua:35
 #: ../../tribes/barbarians/conf:186
@@ -1854,7 +1920,7 @@ msgstr "石灰窯"
 #: ../../tribes/barbarians/granitemine/help.lua:34
 #: ../../tribes/barbarians/oremine/help.lua:34
 msgid "Mine plot"
-msgstr ""
+msgstr "鉱山区画"
 
 #: ../../tribes/barbarians/coalmine/help.lua:47
 #: ../../tribes/barbarians/conf:197
@@ -1901,7 +1967,7 @@ msgstr "鉱夫"
 #: ../../tribes/barbarians/oremine/help.lua:47
 #: ../../tribes/barbarians/quarry/help.lua:42
 msgid "Pick"
-msgstr "つるはし"
+msgstr "ツルハシ"
 
 #: ../../tribes/barbarians/coalmine/help.lua:54
 #: ../../tribes/barbarians/coalmine/help.lua:54
@@ -1931,7 +1997,7 @@ msgstr "つるはし"
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/oremine/help.lua:49
 msgid "Chief Miner"
-msgstr ""
+msgstr "鉱夫長"
 
 #: ../../tribes/barbarians/coalmine/help.lua:54
 #: ../../tribes/barbarians/conf:115
@@ -1948,7 +2014,7 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:49
 #: ../../tribes/barbarians/oremine/help.lua:49
 msgid "Master Miner"
-msgstr ""
+msgstr "鉱山師"
 
 #: ../../tribes/barbarians/coalmine/help.lua:57
 #: ../../tribes/barbarians/deep_coalmine/help.lua:60
@@ -1956,6 +2022,9 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce %1$s in %2$s on average."
 msgstr ""
+"食物供給が安定している場合、\n"
+"この鉱山は%1$sをつくるのに\n"
+"平均%2$sかかります。"
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
@@ -1967,11 +2036,11 @@ msgstr "バーバリアン"
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
-msgstr ""
+msgstr "東方の地の強大な部族です！"
 
 #: ../../tribes/barbarians/conf:31
 msgid "Ashes"
-msgstr "灰"
+msgstr "焼け跡"
 
 #: ../../tribes/barbarians/conf:32
 msgid "Destroyed building"
@@ -1979,83 +2048,83 @@ msgstr "破壊された建物"
 
 #: ../../tribes/barbarians/conf:33
 msgid "Field (medium)"
-msgstr ""
+msgstr "麦畑(中)"
 
 #: ../../tribes/barbarians/conf:34
 msgid "Field (small)"
-msgstr ""
+msgstr "麦畑(小)"
 
 #: ../../tribes/barbarians/conf:35
 msgid "Field (tiny)"
-msgstr ""
+msgstr "麦畑(幼)"
 
 #: ../../tribes/barbarians/conf:36
 msgid "Field (ripe)"
-msgstr ""
+msgstr "麦畑(成熟)"
 
 #: ../../tribes/barbarians/conf:37
 msgid "Field (harvested)"
-msgstr ""
+msgstr "麦畑(刈入)"
 
 #: ../../tribes/barbarians/conf:38
 msgid "Reed (medium)"
-msgstr ""
+msgstr "カヤ畑(中)"
 
 #: ../../tribes/barbarians/conf:39
 msgid "Reed (small)"
-msgstr ""
+msgstr "カヤ畑(小)"
 
 #: ../../tribes/barbarians/conf:40
 msgid "Reed (tiny)"
-msgstr ""
+msgstr "カヤ畑(幼)"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Reed (ripe)"
-msgstr ""
+msgstr "カヤ畑(成熟)"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "資源指標 石炭(少)"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "資源指標 石炭(多)"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "資源指標 金(少)"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "資源指標 金(多)"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "資源指標 花崗岩(少)"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "資源指標 花崗岩(多)"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "資源指標 鉄(少)"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "資源指標 鉄(多)"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "資源指標 資源なし"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "資源指標 水"
 
 #: ../../tribes/barbarians/conf:52
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "造船地"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Deer"
@@ -2063,15 +2132,15 @@ msgstr "鹿"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Wild Boar"
-msgstr ""
+msgstr "イノシシ"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "アックス"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Battle Ax"
-msgstr ""
+msgstr "バトルアックス"
 
 #: ../../tribes/barbarians/conf:62
 #: ../../tribes/barbarians/micro-brewery/help.lua:26
@@ -2081,24 +2150,24 @@ msgstr "ビール"
 
 #: ../../tribes/barbarians/conf:63
 msgid "Blackwood"
-msgstr "ブラックウッド"
+msgstr "黒材"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Broad Ax"
-msgstr ""
+msgstr "ブロードアックス"
 
 #: ../../tribes/barbarians/conf:65
 msgid "Bronze Ax"
-msgstr ""
+msgstr "ブロンズアックス"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Cloth"
-msgstr "生地"
+msgstr "布"
 
 #: ../../tribes/barbarians/conf:68
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
 msgid "Felling Ax"
-msgstr ""
+msgstr "伐採斧"
 
 #: ../../tribes/barbarians/conf:69
 msgid "Fire Tongs"
@@ -2107,7 +2176,7 @@ msgstr "火ばさみ"
 #: ../../tribes/barbarians/conf:71
 #: ../../tribes/barbarians/fishers_hut/help.lua:45
 msgid "Fishing Rod"
-msgstr "釣り竿"
+msgstr "釣竿"
 
 #: ../../tribes/barbarians/conf:72
 #: ../../tribes/barbarians/warmill/help.lua:25
@@ -2141,12 +2210,12 @@ msgstr "モルタル"
 
 #: ../../tribes/barbarians/conf:76
 msgid "Helmet"
-msgstr "兜"
+msgstr "ヘルム"
 
 #: ../../tribes/barbarians/conf:77
 #: ../../tribes/barbarians/hunters_hut/help.lua:47
 msgid "Hunting Spear"
-msgstr "狩り槍"
+msgstr "狩猟槍"
 
 #: ../../tribes/barbarians/conf:79
 #: ../../tribes/barbarians/deep_oremine/help.lua:16
@@ -2180,7 +2249,7 @@ msgstr "マスク"
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:25
 #: ../../tribes/barbarians/deeper_oremine/help.lua:25
 msgid "Meal"
-msgstr "食料"
+msgstr "食事"
 
 #: ../../tribes/barbarians/conf:87
 #: ../../tribes/barbarians/granitemine/help.lua:16
@@ -2190,7 +2259,7 @@ msgstr "食料"
 #: ../../tribes/barbarians/quarry/help.lua:17
 #: ../../tribes/barbarians/quarry/help.lua:26
 msgid "Raw Stone"
-msgstr ""
+msgstr "原石"
 
 #: ../../tribes/barbarians/conf:88
 #: ../../tribes/barbarians/farm/help.lua:46
@@ -2199,13 +2268,13 @@ msgstr "大鎌"
 
 #: ../../tribes/barbarians/conf:89
 msgid "Sharp Ax"
-msgstr ""
+msgstr "シャープアックス"
 
 #: ../../tribes/barbarians/conf:90
 #: ../../tribes/barbarians/rangers_hut/help.lua:39
 #: ../../tribes/barbarians/reed_yard/help.lua:43
 msgid "Shovel"
-msgstr "ショベル"
+msgstr "シャベル"
 
 #: ../../tribes/barbarians/conf:91
 #: ../../tribes/barbarians/deep_coalmine/help.lua:27
@@ -2220,21 +2289,21 @@ msgstr "軽食"
 #: ../../tribes/barbarians/conf:93
 #: ../../tribes/barbarians/reed_yard/help.lua:24
 msgid "Thatch Reed"
-msgstr "わら"
+msgstr "カヤ"
 
 #: ../../tribes/barbarians/conf:94
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:26
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "Log"
-msgstr ""
+msgstr "丸太"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Warhelm"
-msgstr ""
+msgstr "ウォーヘルム"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Warrior’s Ax"
-msgstr ""
+msgstr "ウォリアーズアックス"
 
 #: ../../tribes/barbarians/conf:97
 #: ../../tribes/barbarians/well/help.lua:24
@@ -2249,12 +2318,12 @@ msgstr "小麦"
 #: ../../tribes/barbarians/conf:101
 #: ../../tribes/barbarians/well/help.lua:43
 msgid "Carrier"
-msgstr "キャリア"
+msgstr "運搬人"
 
 #: ../../tribes/barbarians/conf:111
 #: ../../tribes/barbarians/micro-brewery/help.lua:50
 msgid "Master Brewer"
-msgstr ""
+msgstr "醸造師"
 
 #: ../../tribes/barbarians/conf:112
 #: ../../tribes/barbarians/micro-brewery/help.lua:47
@@ -2265,11 +2334,11 @@ msgstr "醸造職人"
 #: ../../tribes/barbarians/conf:113
 #: ../../tribes/barbarians/metalworks/help.lua:32
 msgid "Builder"
-msgstr "ビルダー"
+msgstr "建築人"
 
 #: ../../tribes/barbarians/conf:114
 msgid "Burner"
-msgstr ""
+msgstr "炭焼人"
 
 #: ../../tribes/barbarians/conf:117
 #: ../../tribes/barbarians/farm/help.lua:45
@@ -2281,7 +2350,7 @@ msgstr "農夫"
 #: ../../tribes/barbarians/metalworks/help.lua:42
 #: ../../tribes/barbarians/reed_yard/help.lua:42
 msgid "Gardener"
-msgstr ""
+msgstr "カヤ農夫"
 
 #: ../../tribes/barbarians/conf:119
 #: ../../tribes/barbarians/fishers_hut/help.lua:44
@@ -2292,7 +2361,7 @@ msgstr "漁師"
 #: ../../tribes/barbarians/conf:120
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:38
 msgid "Gamekeeper"
-msgstr "猟場管理人"
+msgstr "狩猟番"
 
 #: ../../tribes/barbarians/conf:121
 #: ../../tribes/barbarians/metalworks/help.lua:33
@@ -2302,7 +2371,7 @@ msgstr "地質学者"
 #: ../../tribes/barbarians/conf:122
 #: ../../tribes/barbarians/metalworks/help.lua:34
 msgid "Helmsmith"
-msgstr "兜鍛冶屋"
+msgstr "兜職人"
 
 #: ../../tribes/barbarians/conf:123
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
@@ -2313,12 +2382,12 @@ msgstr "狩人"
 #: ../../tribes/barbarians/conf:124
 #: ../../tribes/barbarians/metalworks/help.lua:37
 msgid "Innkeeper"
-msgstr ""
+msgstr "料理人"
 
 #: ../../tribes/barbarians/conf:125
 #: ../../tribes/barbarians/lime_kiln/help.lua:49
 msgid "Lime-Burner"
-msgstr "石窯焼き"
+msgstr "石焼人"
 
 #: ../../tribes/barbarians/conf:126
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:43
@@ -2330,16 +2399,16 @@ msgstr "木こり"
 #: ../../tribes/barbarians/metalworks/help.lua:41
 #: ../../tribes/barbarians/rangers_hut/help.lua:38
 msgid "Ranger"
-msgstr "森林保護官"
+msgstr "植樹番"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Shipwright"
-msgstr ""
+msgstr "船大工"
 
 #: ../../tribes/barbarians/conf:130
 #: ../../tribes/barbarians/metalworks/help.lua:30
 msgid "Smelter"
-msgstr "製錬工"
+msgstr "製錬人"
 
 #: ../../tribes/barbarians/conf:131
 #: ../../tribes/barbarians/metalworks/help.lua:39
@@ -2349,15 +2418,15 @@ msgstr "石工"
 
 #: ../../tribes/barbarians/conf:133
 msgid "Weaver"
-msgstr "機屋"
+msgstr "機織人"
 
 #: ../../tribes/barbarians/conf:134
 msgid "Scout"
-msgstr "斥候"
+msgstr "偵察兵"
 
 #: ../../tribes/barbarians/conf:138
 msgid "Ship"
-msgstr ""
+msgstr "船"
 
 #: ../../tribes/barbarians/conf:141
 #: ../../tribes/barbarians/granitemine/help.lua:30
@@ -2366,16 +2435,16 @@ msgstr ""
 #: ../../tribes/barbarians/quarry/help.lua:27
 #: ../../tribes/barbarians/reed_yard/help.lua:25
 msgid "Construction Site"
-msgstr "建設現場"
+msgstr "建設地"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Dismantle Site"
-msgstr ""
+msgstr "解体地"
 
 #: ../../tribes/barbarians/conf:147
 #: ../../tribes/barbarians/conf:156
 msgid "Castle"
-msgstr "城"
+msgstr "城郭"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Guardhall"
@@ -2387,30 +2456,30 @@ msgstr "警備小屋"
 
 #: ../../tribes/barbarians/conf:150
 msgid "High Tower"
-msgstr "高い塔"
+msgstr "高監視塔"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Small Tower"
-msgstr "小さい塔"
+msgstr "小監視塔"
 
 #: ../../tribes/barbarians/conf:152
 #: ../../tribes/barbarians/conf:159
 msgid "Tower"
-msgstr "塔"
+msgstr "監視塔"
 
 #: ../../tribes/barbarians/conf:153
 #: ../../tribes/barbarians/conf:208
 msgid "Sentry"
-msgstr "哨兵"
+msgstr "歩哨所"
 
 #: ../../tribes/barbarians/conf:154
 msgid "Barracks"
-msgstr ""
+msgstr "兵舎"
 
 #: ../../tribes/barbarians/conf:155
 #: ../../tribes/barbarians/conf:207
 msgid "Barrier"
-msgstr ""
+msgstr "関所"
 
 #: ../../tribes/barbarians/conf:157
 #: ../../tribes/barbarians/conf:210
@@ -2419,12 +2488,12 @@ msgstr "要塞"
 
 #: ../../tribes/barbarians/conf:158
 msgid "Outpost"
-msgstr "前哨"
+msgstr "前哨基地"
 
 #: ../../tribes/barbarians/conf:162
 #: ../../tribes/barbarians/conf:163
 msgid "Headquarters"
-msgstr "本部"
+msgstr "本拠地"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Warehouse"
@@ -2432,7 +2501,7 @@ msgstr "倉庫"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Port"
-msgstr ""
+msgstr "港"
 
 #: ../../tribes/barbarians/conf:168
 msgid "Quarry"
@@ -2440,79 +2509,79 @@ msgstr "採石場"
 
 #: ../../tribes/barbarians/conf:169
 msgid "Lumberjack’s Hut"
-msgstr ""
+msgstr "木こり小屋"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "植樹番小屋"
 
 #: ../../tribes/barbarians/conf:171
 msgid "Fisher’s Hut"
-msgstr ""
+msgstr "漁師小屋"
 
 #: ../../tribes/barbarians/conf:172
 msgid "Hunter’s Hut"
-msgstr ""
+msgstr "狩人小屋"
 
 #: ../../tribes/barbarians/conf:173
 msgid "Gamekeeper’s Hut"
-msgstr ""
+msgstr "狩猟番小屋"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Well"
-msgstr "鉱泉"
+msgstr "井戸"
 
 #: ../../tribes/barbarians/conf:175
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "偵察小屋"
 
 #: ../../tribes/barbarians/conf:176
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
 msgid "Wood Hardener"
-msgstr ""
+msgstr "製材所"
 
 #: ../../tribes/barbarians/conf:178
 msgid "Reed Yard"
-msgstr ""
+msgstr "カヤ畑"
 
 #: ../../tribes/barbarians/conf:179
 #: ../../tribes/barbarians/farm/help.lua:25
 #: ../../tribes/barbarians/well/help.lua:25
 msgid "Bakery"
-msgstr "パン屋"
+msgstr "パン工房"
 
 #: ../../tribes/barbarians/conf:180
 #: ../../tribes/barbarians/farm/help.lua:27
 #: ../../tribes/barbarians/micro-brewery/help.lua:43
 #: ../../tribes/barbarians/well/help.lua:27
 msgid "Brewery"
-msgstr "醸造所"
+msgstr "醸造工房"
 
 #: ../../tribes/barbarians/conf:181
 #: ../../tribes/barbarians/farm/help.lua:26
 #: ../../tribes/barbarians/well/help.lua:26
 msgid "Micro Brewery"
-msgstr "醸造所"
+msgstr "ビール工房"
 
 #: ../../tribes/barbarians/conf:185
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "炭焼小屋"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Shipyard"
-msgstr ""
+msgstr "造船所"
 
 #: ../../tribes/barbarians/conf:191
 #: ../../tribes/barbarians/farm/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:28
 msgid "Cattle Farm"
-msgstr "畜産農場"
+msgstr "牛牧場"
 
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/reed_yard/help.lua:27
-msgid "Weaving-Mill"
-msgstr ""
+msgid "Weaving Mill"
+msgstr "機織所"
 
 #: ../../tribes/barbarians/conf:193
 msgid "Farm"
@@ -2521,7 +2590,7 @@ msgstr "農場"
 #: ../../tribes/barbarians/conf:195
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "Granite Mine"
-msgstr "採石場"
+msgstr "花崗岩鉱山"
 
 #: ../../tribes/barbarians/conf:196
 #: ../../tribes/barbarians/deep_coalmine/help.lua:49
@@ -2531,7 +2600,7 @@ msgstr "より深い炭鉱"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Coal Mine"
-msgstr ""
+msgstr "炭鉱"
 
 #: ../../tribes/barbarians/conf:199
 #: ../../tribes/barbarians/deep_oremine/help.lua:44
@@ -2577,15 +2646,15 @@ msgstr "城塞"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Donjon"
-msgstr "ダンジョン"
+msgstr "物見塔"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Headquarters Medium"
-msgstr ""
+msgstr "中規模の本拠地"
 
 #: ../../tribes/barbarians/conf:219
 msgid "Citadel Village"
-msgstr ""
+msgstr "城塞都市"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:55
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
@@ -2596,7 +2665,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:60
 msgid "Workers use:"
-msgstr ""
+msgstr "作業道具:"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -2605,13 +2674,16 @@ msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...’"
 msgstr ""
+"「やわらかくしなやか\n"
+"　時にも気候にも色褪せない\n"
+"　永遠の太陽のしずく...」"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:13
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:13
 #: ../../tribes/barbarians/goldmine/help.lua:13
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr ""
+msgstr "バーバリアンの民謡「われらが地下宝物」より"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:30
 #: ../../tribes/barbarians/deep_oremine/help.lua:30
@@ -2620,7 +2692,7 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr ""
+msgstr "%sの出力先は常に%sです。ほかの用途はありません。"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:12
 #: ../../tribes/barbarians/deeper_oremine/help.lua:12
@@ -2629,12 +2701,16 @@ msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
 msgstr ""
+"「日々磨り減っていく\n"
+"　ツルハシを見ていると、\n"
+"　自分の仕事の大切さが\n"
+"　よくわかる」"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:13
 #: ../../tribes/barbarians/deeper_oremine/help.lua:13
 #: ../../tribes/barbarians/oremine/help.lua:13
 msgid "Quote from an anonymous miner."
-msgstr ""
+msgstr "匿名の鉱夫からの引用"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:55
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:60
@@ -2646,6 +2722,9 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce %s in %s on average."
 msgstr ""
+"食物供給が安定している場合、\n"
+"この鉱山は%1$sをつくるのに\n"
+"平均%2$sかかります。"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:18
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:16
@@ -2656,36 +2735,42 @@ msgid ""
 "after having done so, it will still have a %2$s chance of finding some more "
 "%3$s."
 msgstr ""
+"%1$sは、\n"
+"最深層の資源までをすべて掘りおこします。\n"
+"<br>そのあとも、%2$sのチャンスで\n"
+"もうすこし%3$sを発見します。"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:53
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:48
 #: ../../tribes/barbarians/deeper_oremine/help.lua:48
 msgid "%s or better and"
-msgstr ""
+msgstr "%s以上と"
 
 #: ../../tribes/barbarians/donjon/conf:7
 msgid "Your soldiers have occupied your donjon."
 msgstr ""
+"あなたの兵士が\n"
+"あなたの物見塔を占拠しました。"
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
-msgstr ""
+msgstr "小麦の種蒔き"
 
 #: ../../tribes/barbarians/farm/conf:22
 msgid "Harvest wheat"
-msgstr ""
+msgstr "小麦の収穫"
 
 #: ../../tribes/barbarians/farm/help.lua:16
 msgid "Sow and harvest wheat."
-msgstr ""
+msgstr "小麦の種を蒔き、収穫します。"
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
-msgstr ""
+msgstr "計算なし"
 
 #: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
-msgstr "畑をつくります。"
+msgstr "小麦を育てます。"
 
 #: ../../tribes/barbarians/felling_ax/conf:1
 msgid ""
@@ -2693,6 +2778,8 @@ msgid ""
 "produced in the metal workshop (but it ceases to be produced by the building "
 "if it is enhanced to an axfactory and war mill)."
 msgstr ""
+"伐採斧は、木を伐る木こりの道具です。\n"
+"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -2700,6 +2787,8 @@ msgid ""
 "Produced by the metal works (but they cease to be produced by the building "
 "if it is enhanced to an axfactory and war mill)."
 msgstr ""
+"火ばさみは、製錬所で作業する、製錬人の道具です。\n"
+"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -2707,22 +2796,28 @@ msgid ""
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
 msgstr ""
+"ピタパンと肉にならび、魚もバーバリアンのための食物です。\n"
+"　酒場、食堂、大食堂、訓練施設（訓練場と闘技場）で使用されます。"
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "海で魚を捕まえます。"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "‘What do you mean, my fish ain’t fresh?!’"
 msgstr ""
+"「なんだと！\n"
+"　俺の魚が腐ってるってか！？」"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
-msgstr ""
+msgstr "小屋のそばの岸辺で魚を釣ります。"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher’s Hut needs water full of fish in the vicinity."
 msgstr ""
+"漁師小屋は、\n"
+"周辺に魚が多く棲む水を必要とします。"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:34
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:26
@@ -2732,11 +2827,13 @@ msgstr ""
 #: ../../tribes/barbarians/rangers_hut/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Small plot"
-msgstr ""
+msgstr "小区画"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
 msgid "The fisher pauses 18s before going to work again."
 msgstr ""
+"漁師は作業を再開するまでに\n"
+"18秒間一時停止かかります。"
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid ""
@@ -2744,37 +2841,48 @@ msgid ""
 "the basic tools produced in a metal workshop (but they cease to be produced "
 "by the building if it is enhanced to an axfactory and war mill)."
 msgstr ""
+"釣竿は、釣りをするバーバリアンの漁師が必要とします。\n"
+"　鍛冶工房で製造される基本道具の一つです（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
 msgstr ""
+"あなたの兵士が\n"
+"あなたの要塞を占拠しました。"
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
-msgstr ""
+msgstr "狩猟番は、動物の自然な頭数があまり低い状態に陥らないように注意します。"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
 msgstr ""
+"「かれは動物を愛し　育ててふやす\n"
+"　あたしが動物を焼いて\n"
+"　　　食べることを愛するように」"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "バーバリアンの童謡"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
 msgstr ""
+"食肉生産を保つために、\n"
+"動物を野生にかえします。"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
 msgid "The gamekeeper pauses 52.5s before going to work again."
 msgstr ""
+"狩猟番は作業を再開するまでに\n"
+"52.5秒間一時停止します。"
 
 #: ../../tribes/barbarians/gardener/conf:1
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "カヤを育てます。"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -2787,6 +2895,8 @@ msgid ""
 "is used as a precious building material and to produce different axes (in "
 "the war mill) and different parts of armor (in the helm smithy)."
 msgstr ""
+"金は、すべての金属のなかで最も貴重です。非常に重要なものだけに、それがあしらわれます。それは、製錬所で金鉱石から得ることができます。\n"
+"　貴重な建築材料として、そして、（戦斧工房で）別々の斧を、（兜工房で）別々の鎧を製造するために使用されます。"
 
 #: ../../tribes/barbarians/goldore/conf:1
 msgid ""
@@ -2794,11 +2904,16 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"金鉱石は金鉱山で採掘されます。\n"
+"　製錬所で製錬されて金になります。金は、武器や鎧の製造や貴重な建築材料として使用されます。"
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
 msgid ""
 "‘I can handle tons of granite, man, but no more of your vain prattle.’"
 msgstr ""
+"「俺は石の舌を操るぜ、なあ？\n"
+"　だが、あんたの馬鹿げた話は\n"
+"　もううんざりだ」"
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
@@ -2808,20 +2923,28 @@ msgid ""
 "granite blocks ready only a week later, and they still fortify the city’s "
 "levee."
 msgstr ""
+"このフレーズは、リンバート\n"
+"――のちにリンバートは一匹狼として知られる――が、\n"
+"大洪水の年のストンフォード緊急会議にて\n"
+"座したまま頼まれたときの回答。\n"
+"<br>同じ男が、まだ市内の堤防を強化するために、\n"
+"その一週間後に244個の花崗岩のブロックすべてを準備した。"
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid " It cannot be upgraded."
-msgstr ""
+msgstr " 拡張できません。"
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "Carve %s out of the rock in mountain terrain."
-msgstr ""
+msgstr "山地の岩から%sを切り出します。"
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
+"原石は、硬い不燃性の建築材料であるモルタルに加工することができます。\n"
+"　モルタルは石灰釜で製造されます。"
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -2831,6 +2954,8 @@ msgid ""
 "to be produced by the building if it is enhanced to an axfactory and war "
 "mill)."
 msgstr ""
+"ハンマーは、必要不可欠の道具です。それは地質学者、建築人、鍛冶職人たち、兜職人が必要とします。常に予備をいくつか持つようにしてください！\n"
+"　鍛冶工房で製造される基本道具です（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -2838,14 +2963,16 @@ msgid ""
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
 msgstr ""
+"ヘルムは戦士を保護する基本道具です。\n"
+"　兜工房で製造され、訓練場で、兵士の体力レベル０から体力レベル１に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "兵士のために兜をつくります。"
 
 #: ../../tribes/barbarians/helmsmithy/conf:31
 msgid "Produce helm"
-msgstr "兜の生産"
+msgstr "ヘルムの生産"
 
 #: ../../tribes/barbarians/helmsmithy/conf:32
 msgid "Produce mask"
@@ -2853,33 +2980,41 @@ msgstr "マスクの生産"
 
 #: ../../tribes/barbarians/helmsmithy/conf:33
 msgid "Produce warhelm"
-msgstr ""
+msgstr "ウォーヘルムの生産"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "狩人は入植者においしい肉をもたらします。"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:12
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
 msgstr ""
+"「豹のように静かに\n"
+"　イタチのように巧みに\n"
+"　矢のように素早く\n"
+"　毒蛇のように死に至らしめる」"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "‘The Art of Hunting’"
-msgstr ""
+msgstr "「狩りの芸術」"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
-msgstr ""
+msgstr "肉をつくるために動物を狩ります。"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter’s Hut needs animals in the vicinity to hunt."
 msgstr ""
+"狩人小屋は、\n"
+"周辺に動物を必要とします。"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 msgid "The hunter pauses 35s before going to work again."
 msgstr ""
+"狩人は作業を再開するまでに\n"
+"35秒間一時停止かかります。"
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -2888,10 +3023,12 @@ msgid ""
 "ceases to be produced by the building if it is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"この槍は、投げるために丁度良い軽さで、しかも獣を一撃死させるには十分な重さです。狩人のみが使用します。\n"
+"　鍛冶工房で製造されます（ただし戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "鉱夫のために食物をつくります。"
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid ""
@@ -2899,12 +3036,16 @@ msgid ""
 "produce weapons and tools in the metal workshop, axfactory, war mill and in "
 "the helm smithy."
 msgstr ""
+"鉄は製錬所で鉄鉱石から得ることができます。\n"
+"　鍛冶工房、斧工房、戦斧工房、兜工房で、武器と道具を製造するために使用されます。"
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ore is mined in iron mines. It delivers iron when smelted in a smelting "
 "works."
 msgstr ""
+"鉄鉱石は鉄鉱山で採掘されます。\n"
+"　製錬所で製錬され、鉄をもたらします。"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -2913,36 +3054,50 @@ msgid ""
 "to be produced by the building if it is enhanced to an axfactory and war "
 "mill)."
 msgstr ""
+"料理道具がないならば、どうして食事、軽食、糧食をつくることができるでしょう？\n"
+"　この基本道具を製造するために、鍛冶工房をもつことを忘れないでください（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "石灰釜で石灰を燃やします。"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "‘Forming new stone from old with fire and water.’"
 msgstr ""
+"「火と水を使って、古い石を\n"
+"　新しい石にするんだ」"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His "
 "‘new stone’ now is an important building material."
 msgstr ""
+"石捨て場で何をしているのかという\n"
+"子供の問いに対するラグナルドの答え。\n"
+"彼の「新しい石」はいまや重要な建築材料です。"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:16
 msgid ""
 "The Lime Kiln processes Raw Stones to make ‘Grout’, a substance that "
 "solidifies and so reinforces masonry."
 msgstr ""
+"石灰窯は、\n"
+"石くずを固化してから強化した物質「モルタル」を\n"
+"つくるために、原石を処理します。"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:24
 msgid "Raw Stone from the Granite Mine or Quarry"
-msgstr ""
+msgstr "原石（花崗岩鉱山または採石場）"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:32
 msgid ""
 "The Lime Kiln’s output will only go to construction sites that need it. "
 "Those are predominantly houses that work with fire, and some military sites."
 msgstr ""
+"石灰釜の出力先は、\n"
+"それを必要とする建設地に供給されるだけです。\n"
+"それらは主に、\n"
+"火を扱う施設やいくつかの軍事施設です。"
 
 #: ../../tribes/barbarians/log/conf:1
 msgid ""
@@ -2952,6 +3107,8 @@ msgid ""
 "burner’s house in the production of coal. The wood hardener refines logs by "
 "hardening them in the fire which gives blackwood."
 msgstr ""
+"丸太はバーバリアンの主要建築材料です。木々を木こりが伐り倒し、植樹番が木の供給をケアをします。\n"
+"　鍛冶工房で基本道具をつくるためにも炭焼小屋で石炭をつくるためにも、使用されます。黒材をもたらす製材所は、丸太を火で硬くすることで、精錬します。"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
@@ -2963,24 +3120,33 @@ msgid ""
 "soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable "
 "lumberjack.’"
 msgstr ""
+"「木を伐るに二百かかるは赤んぼ。\n"
+"　百で兵士、五十が英雄。\n"
+"　二十で立派な木こりになる」"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat’Karuth"
-msgstr ""
+msgstr "チャ・カルーの大工、クルムタ"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into logs."
-msgstr ""
+msgstr "周辺で木を伐り、丸太に加工します。"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:23
 msgid "The Lumberjack’s Hut needs trees in the immediate vicinity to fell."
 msgstr ""
+"木こり小屋は、\n"
+"すぐそばに木を必要とします。"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:48
 msgid ""
 "The Lumberjack needs %s to fell a tree, not counting the time he needs to "
 "reach the destination and go home again."
 msgstr ""
+"木こり小屋は、\n"
+"目的地に到着してから再び戻る時間を\n"
+"カウントしなかった場合に、\n"
+"木を伐るために%sかかります。"
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -2988,12 +3154,15 @@ msgid ""
 "and used in the training camp – together with food – to train soldiers from "
 "health level 2 to level 3."
 msgstr ""
+"これはバーバリアンの最強化防具です。\n"
+"　兜工房で製造され、訓練場で兵士を体力レベル２から３に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"食事はピタパン、ストロングビール、魚／肉を使用して大食堂でつくられます。このたっぷりの食物は、より深い鉱山の鉱夫がまさに必要としているものです。"
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -3002,14 +3171,16 @@ msgid ""
 "miners. It is also consumed in the training sites (training camp and battle "
 "arena)."
 msgstr ""
+"肉にはたくさんのエネルギーが含まれます。\n"
+"　狩人によって生産され、鉱夫のための糧食、軽食、食事を用意するために、酒場、食堂、大食堂で使用されます。訓練施設（訓練場と闘技場）でも消費されます。"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce felling ax"
-msgstr ""
+msgstr "伐採斧の生産"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "パンパドルの生産"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce fire tongs"
@@ -3029,7 +3200,7 @@ msgstr "調理用具の生産"
 
 #: ../../tribes/barbarians/metalworks/conf:44
 msgid "Produce pick"
-msgstr ""
+msgstr "ツルハシの生産"
 
 #: ../../tribes/barbarians/metalworks/conf:45
 msgid "Produce scythe"
@@ -3037,21 +3208,24 @@ msgstr "大鎌の生産"
 
 #: ../../tribes/barbarians/metalworks/conf:46
 msgid "Produce shovel"
-msgstr "ショベルの生産"
+msgstr "シャベルの生産"
 
 #: ../../tribes/barbarians/metalworks/conf:47
 msgid "Produce hunting spear"
-msgstr "狩り槍の生産"
+msgstr "狩猟槍の生産"
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "‘We make it work!’"
-msgstr ""
+msgstr "「われらは作動させる！」"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
 msgstr ""
+"ハラルドシャインにある、\n"
+"いまや崩れた最古の工房、\n"
+"『古鍛冶炉』の戸口の碑文"
 
 #: ../../tribes/barbarians/metalworks/help.lua:16
 msgid ""
@@ -3059,30 +3233,41 @@ msgid ""
 "three buildings and creates all the tools that Barbarians need. The others "
 "are for weapons."
 msgstr ""
+"バーバリアンの鍛冶工房は、\n"
+"三つの建物のシリーズの基本生産施設であり、\n"
+"バーバリアンが必要とするすべての道具を\n"
+"つくります。\n"
+"他の施設は武器のためのものです。"
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
-"It can make Bread Paddles, Felling axs, Fire Tongs, Fishing Rods, Hammers, "
+"It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
+"パンパドル、伐採斧、火ばさみ、釣竿、\r\n"
+"ハンマー、狩猟槍、料理道具、ツルハシ、大鎌、\r\n"
+"シャベルをつくります。"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack’s hut"
-msgstr ""
+msgstr "%s(木こり小屋から)"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
-msgstr ""
+msgstr "なし"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:12
 msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
 msgstr ""
+"「一杯が飢えを癒やし\n"
+"　二杯にくつろぐ\n"
+"　三杯飲んだら次の交代時間！」"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
-msgstr ""
+msgstr "鉱夫のあいだで広まった乾杯"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:16
 msgid ""
@@ -3090,6 +3275,10 @@ msgid ""
 "component of the Snacks that Inns and Big Inns prepare for Miners in Deep "
 "Mines."
 msgstr ""
+"ビール工房は低級なビールをつくります。\n"
+"このビールは、深い鉱山の鉱夫のために\n"
+"食堂と大食堂で用意される軽食の\n"
+"重要な要素です。"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:53
 #: ../../tribes/barbarians/warmill/help.lua:65
@@ -3097,17 +3286,26 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "about %s on average."
 msgstr ""
+"必要なすべてのアイテムが時間内に届いた場合、\n"
+"この建物は%1$sを生産するために\n"
+"平均約%2$sかかります。"
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
 "An %1$s exploits only %2$s of the resource. From there on out, it will only "
 "have a 5%% chance of finding %3$s."
 msgstr ""
+"%s1$は、\n"
+"資源の%2$sのみを掘りおこします。\n"
+"<br>そのあとは、5%%のチャンスで\n"
+"%3$sを発見するだけです。"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
 msgstr ""
+"雄牛は、交通の激しい道路に沿ってアイテムを運ぶのを助けます。\n"
+"　牛牧場で育てられます。"
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -3115,6 +3313,8 @@ msgid ""
 "metal workshop (but it ceases to be produced by the building if it is "
 "enhanced to an axfactory and war mill)."
 msgstr ""
+"このツルハシは、石工と鉱夫が使用します。\n"
+"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""
@@ -3123,18 +3323,26 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
+"バーバリアンのパン職人はこの平たく美味しいピタパンをつくることに長けています。それは小麦と水を使用して、秘密のレシピに従ってつくられます。\n"
+"　ピタパンは、糧食、軽食、食事をつくるために酒場、食堂、大食堂で使用されます。訓練施設（訓練場と闘技場）でも消費されます。"
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carve %s out of stones lying near the hut."
 msgstr ""
+"小屋のそばに転がっている石から\n"
+"%sを切り出します。"
 
 #: ../../tribes/barbarians/quarry/help.lua:23
 msgid "The Quarry needs stones in the vicinity."
 msgstr ""
+"採石場は、\n"
+"周辺に石を必要とします。"
 
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "The stonemason pauses 25s before going to work again."
 msgstr ""
+"石工は作業を再開するまでに\n"
+"25秒間一時停止かかります。"
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -3145,26 +3353,35 @@ msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
 "most important general!’"
 msgstr ""
+"「普通は木の一本しか育たぬ土地に\n"
+"　二本を育てるものは、\n"
+"　大将軍にもまさるだろう！」"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "Chat’Karuth in a conversation with a Ranger"
-msgstr ""
+msgstr "チャ・カルーの植樹小屋との会話より"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:17
 msgid "Plant trees in the surrounding area."
-msgstr ""
+msgstr "周辺に木を植えます。"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:23
 msgid ""
 "The Ranger’s Hut needs free space in the immediate vicinity to plant the "
 "trees."
 msgstr ""
+"植樹番小屋は、\n"
+"すぐそばにフリースペースを必要とします。"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:43
 msgid ""
 "The Ranger needs %s to plant a tree, not counting the time he needs to reach "
 "the destination and go home again."
 msgstr ""
+"植樹番小屋は、\n"
+"目的地に到着してから再び戻る時間を\n"
+"カウントしなかった場合に、\n"
+"木を植えるために%sかかります。"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -3172,28 +3389,32 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
+"鉱夫が力強く働き続けるための小さなひとかじり。偵察兵も偵察の旅のために糧食を消費します。\n"
+"　糧食は、魚または肉、ピタパンを使用して、酒場、食堂、大食堂で生産されます。"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"原石はバーバリアンの基本建築材料です。\n"
+"　採石場と花崗岩鉱山で生産されます。"
 
 #: ../../tribes/barbarians/reed_yard/conf:19
 msgid "Plant reed"
-msgstr ""
+msgstr "カヤの種蒔き"
 
 #: ../../tribes/barbarians/reed_yard/conf:20
 msgid "Harvest reed"
-msgstr ""
+msgstr "カヤの収穫"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:12
 msgid "‘We grow roofs’"
-msgstr ""
+msgstr "「われわれは屋根を育てる」"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:13
 msgid "Slogan of the Guild of Gardeners"
-msgstr ""
+msgstr "カヤ農夫ギルドのスローガン"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:16
 msgid ""
@@ -3201,33 +3422,43 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ships’ sails."
 msgstr ""
+"カヤ園は\n"
+"バーバリアン部族の二つの異なる目的にかなう、\n"
+"カヤを栽培します。\n"
+"<br>それは伝統的な屋根葺き材料であり、\n"
+"また彼らが自分たちの船の帆に使う、\n"
+"とても永続的な布に織られます。"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:26
 msgid ""
 "The Reed Yard’s output will only go to construction sites that need it."
 msgstr ""
+"カヤ園の出力先は、\n"
+"それを必要とする建設地のみです。"
 
 #: ../../tribes/barbarians/reed_yard/help.lua:47
 msgid ""
 "A Reed Yard can produce a sheaf of Thatch Reed in about %s on average."
 msgstr ""
+"カヤ園は、一束のカヤを生産するために\n"
+"平均約%sかかります。"
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
+msgstr "スコット偵察風偵察兵、偵察服着て未偵察地を偵察する。"
 
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "中規模の本拠地"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
-msgstr ""
+msgstr "城塞都市"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
-msgstr "空きがありません"
+msgstr "スペース不足"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
@@ -3235,6 +3466,8 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"開始時のいくつかの建物は、十分なスペースがないために建設されませんでした。\n"
+"これによって不利な状態になります。公平な開始状態にするには、このマップの再スタートを検討してください。"
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -3242,10 +3475,14 @@ msgid ""
 "(but it ceases to be produced by the building if it is enhanced to an "
 "axfactory and war mill)."
 msgstr ""
+"大鎌は、農夫の道具です。\n"
+"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your sentry."
 msgstr ""
+"あなたの兵士が\n"
+"あなたの歩哨所を占拠しました。"
 
 #: ../../tribes/barbarians/sharpax/conf:1
 msgid ""
@@ -3254,6 +3491,8 @@ msgid ""
 "war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
+"若い戦士は、この強力な武器で戦いを学ぶことを誇りに思います。それは、普通の斧よりも重く、より鋭いです。\n"
+"　斧工房と戦斧工房で製造されます。訓練場で兵士を攻撃レベル０からレベル１まで訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
@@ -3261,11 +3500,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "新しい船を造り上げる造船所で働きます。"
 
 #: ../../tribes/barbarians/shipyard/conf:27
 msgid "Constructing ship"
-msgstr ""
+msgstr "建造中の船"
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -3274,6 +3513,8 @@ msgid ""
 "ceases to be produced by the building if it is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"シャベルは、植物の適切な取扱いに必要です。したがって、カヤ農夫と植樹番がそれを使用します。\n"
+"　鍛冶工房で製造されます（ただし斧工房や戦斧工房に拡張した場合は、製造されなくなります）。"
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
@@ -3291,7 +3532,7 @@ msgstr "金の製錬"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr ""
+msgstr "深い鉱山の鉱夫に用意するための、糧食よりも大きな食物です。魚／肉、ピタパン、ビールを消費して、食堂と大食堂で生産されます。"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -3299,7 +3540,7 @@ msgstr "守って攻めろ！"
 
 #: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr ""
+msgstr "岩から、花崗岩の原石を切り出します。"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -3308,68 +3549,82 @@ msgid ""
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
 msgstr ""
+"このビールは闘技場の戦士が受け取るだけです。この蒸留酒はバーバリアンの力の源だと言われています。\n"
+"　兵士の回避レベルを０から１また２に訓練するために役立ちます。ストロングビールは食事を用意するために大食堂でも使用されます。"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
-msgstr ""
+msgstr "カヤは、カヤ園で生産され、建物の屋根の防水のために使用されます。"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "兵士を訓練します。"
 
 #: ../../tribes/barbarians/trainingcamp/conf:44
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "攻撃訓練Lv0→1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:45
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "攻撃訓練Lv1→2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:46
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "攻撃訓練Lv2→3"
 
 #: ../../tribes/barbarians/trainingcamp/conf:47
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "攻撃訓練Lv3→4"
 
 #: ../../tribes/barbarians/trainingcamp/conf:48
 msgid "Upgrade soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "攻撃訓練Lv4→5"
 
 #: ../../tribes/barbarians/trainingcamp/conf:49
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "体力訓練Lv0→1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:50
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "体力訓練Lv1→2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:51
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "体力訓練Lv2→3"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:12
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
 msgstr ""
+"「強い者は\n"
+"許すことも\n"
+"忘れることも\n"
+"しない。\n"
+"だが、受けた\n"
+"不当には\n"
+"復讐をせよ\n"
+"――これまでと\n"
+"将来のために」"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:13
 msgid "Chief Chat’Karuth in a speech to his army."
-msgstr ""
+msgstr "長チャ・カルーの彼の軍隊への演説。"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:16
 msgid ""
 "Trains soldiers in Attack up to level 5, and in Health up to level "
 "3.<br>Equips the soldiers with all necessary weapons and armor parts."
 msgstr ""
+"兵士の攻撃レベルを５まで、\n"
+"また体力レベルを３まで訓練します。\n"
+"兵士に必要な武器と防具を装備させます。"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:17
 msgid "Note:"
-msgstr ""
+msgstr "注意:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:18
 msgid ""
@@ -3379,7 +3634,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:27
 msgid "Training Attack:"
-msgstr ""
+msgstr "攻撃訓練:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Provided by the Axfactory"
@@ -3391,7 +3646,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:32
 msgid "Training Health:"
-msgstr ""
+msgstr "体力訓練:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:34
 msgid "Provided by the Helm Smithy"
@@ -3399,21 +3654,25 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:35
 msgid "Training Both"
-msgstr ""
+msgstr "両方訓練"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:63
 msgid "Attack"
-msgstr ""
+msgstr "攻撃力"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:63
 msgid "Health"
-msgstr ""
+msgstr "体力"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:63
 msgid ""
 "If all needed wares are delivered in time, a Training Camp can train one new "
 "soldier in %1$s and %2$s to the final level in %3$s on average."
 msgstr ""
+"必要なすべてのアイテムが時間内に届いた場合、\n"
+"訓練場は一人の新兵の%1$sと%2$sを訓練して\n"
+"最大レベルにするために\n"
+"平均%3$sかかります。"
 
 #: ../../tribes/barbarians/warhelm/conf:1
 msgid ""
@@ -3421,34 +3680,43 @@ msgid ""
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
 msgstr ""
+"ウォーヘルムはバーバリアンの戦士の強化防具です。\n"
+"　兜工房で製造され、訓練場で、兵士の体力レベル１から体力レベル２に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/barbarians/warmill/conf:39
 msgid "Produce bronze ax"
-msgstr ""
+msgstr "ブロンズアックスの生産"
 
 #: ../../tribes/barbarians/warmill/conf:40
 msgid "Produce battle ax"
-msgstr ""
+msgstr "バトルアックスの生産"
 
 #: ../../tribes/barbarians/warmill/conf:41
 msgid "Produce warrior’s ax"
-msgstr ""
+msgstr "ウォリアーズアックスの生産"
 
 #: ../../tribes/barbarians/warmill/help.lua:16
 msgid ""
 "The Barbarian War Mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an Axfactory."
 msgstr ""
+"バーバリアンの戦斧工房は、\n"
+"武器のための最拡張した生産施設です。\n"
+"そのために、それは斧工房から拡張されます。"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner’s House"
-msgstr ""
+msgstr "石炭(炭鉱または炭焼小屋から)"
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"すべての武器は、\n"
+"つくるために同じ時間がかかりますが、\n"
+"原材料の消費はだんだん増加します。\n"
+"最後の二つの斧は金を必要とします。"
 
 #: ../../tribes/barbarians/warriorsax/conf:1
 msgid ""
@@ -3457,6 +3725,8 @@ msgid ""
 "produced in a war mill and used – together with food – in a training camp to "
 "train soldiers from attack level 4 to level 5."
 msgstr ""
+"ウォリアーズアックスは、バーバリアンのもっとも危険な武器です。限られた戦士のみがこの巨大で強い斧を扱うことができます。\n"
+"　戦斧工房で製造され、訓練場で兵士を攻撃レベル４からレベル５に訓練するために――食物とともに――使用されます。"
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -3464,30 +3734,40 @@ msgid ""
 "and the brewery. The lime kiln and the cattle farm also need to be supplied "
 "with water."
 msgstr ""
+"水は生命に不可欠です！\n"
+"　パン工房、ビール工房、醸造工房に使用されます。石灰釜と牛牧場にも水を供給する必要があります。"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "船と兵士のために布をつくります。"
 
 #: ../../tribes/barbarians/well/help.lua:12
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
 msgstr ""
+"「ああ生命の源のなんと甘いこと\n"
+"　空から降り注ぎ\n"
+"　大地を潤す」"
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""
 "Song written by Sigurd the Bard<br>when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
 msgstr ""
+"吟遊詩人シグルドが\n"
+"チャ・カルー治世21年の大干ばつ後にはじめての雨が降った時に\n"
+"書いた歌"
 
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Draw Water out of the deep."
-msgstr ""
+msgstr "地下水を汲み出します。"
 
 #: ../../tribes/barbarians/well/help.lua:48
 msgid "The Carrier needs %s to get one bucket full of water."
 msgstr ""
+"運搬人は、バケツ満杯の水を得るために\n"
+"%sかかります。"
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
@@ -3495,3 +3775,5 @@ msgid ""
 "bakeries, micro breweries and breweries. Also Cattle farms need to be "
 "supplied with wheat."
 msgstr ""
+"小麦は生存のために不可欠です。\n"
+"　農場で生産され、パン工房とビール工房と醸造工房で消費されます。牛牧場にも小麦を供給する必要があります。"

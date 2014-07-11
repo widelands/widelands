@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WORKER_H
-#define WORKER_H
+#ifndef WL_LOGIC_WORKER_H
+#define WL_LOGIC_WORKER_H
 
 #include "economy/idleworkersupply.h"
 #include "economy/portdock.h"
@@ -46,7 +46,7 @@ class Worker : public Bob {
 	friend struct WorkerProgram;
 	friend struct Map_Bobdata_Data_Packet;
 
-	MO_DESCR(Worker_Descr);
+	MO_DESCR(Worker_Descr)
 
 	struct Action {
 		typedef bool (Worker::*execute_t)(Game &, Bob::State &, const Action &);
@@ -89,7 +89,6 @@ public:
 	const Image* icon() const {return descr().icon();}
 	Ware_Index becomes() const {return descr().becomes();}
 	Ware_Index worker_index() const {return descr().worker_index();}
-	const Tribe_Descr * get_tribe() const {return descr().get_tribe();}
 	const Tribe_Descr & tribe() const {return descr().tribe();}
 	const std::string & descname() const {return descr().descname();}
 
@@ -305,4 +304,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_H

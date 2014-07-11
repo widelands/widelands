@@ -17,13 +17,14 @@
  *
  */
 
-#ifndef LOGIC_FINDBOB_H
-#define LOGIC_FINDBOB_H
+#ifndef WL_LOGIC_FINDBOB_H
+#define WL_LOGIC_FINDBOB_H
 
 #include "logic/map.h"
 
 namespace Widelands {
 
+class Player;
 
 struct FindBobAttribute : public FindBob {
 	FindBobAttribute(uint32_t const attrib) : m_attrib(attrib) {}
@@ -53,4 +54,4 @@ struct FindBobShip : FindBob {
 
 } // namespace Widelands
 
-#endif // LOGIC_FINDBOB_H
+#endif  // end of include guard: WL_LOGIC_FINDBOB_H

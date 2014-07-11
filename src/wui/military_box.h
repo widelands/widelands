@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _MILITARY_BOX_H_
-#define _MILITARY_BOX_H_
+#ifndef WL_WUI_MILITARY_BOX_H
+#define WL_WUI_MILITARY_BOX_H
 
 #include <list>
 
@@ -28,6 +28,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
+#include "wui/text_constants.h"
 
 /**
  * Military settings tab that is part of the \ref FieldActionWindow
@@ -73,10 +74,6 @@ struct MilitaryBox : public UI::Box {
 		Widelands::Map        * m_map;
 
 		bool                    m_allowed_change;
-
-		UI::Slider            * m_slider_retreat;
-		UI::Textarea          * m_text_retreat;
-
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_MILITARY_BOX_H

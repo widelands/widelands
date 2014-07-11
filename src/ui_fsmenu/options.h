@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_OPTIONS_H
-#define FULLSCREEN_MENU_OPTIONS_H
+#ifndef WL_UI_FSMENU_OPTIONS_H
+#define WL_UI_FSMENU_OPTIONS_H
 
 #include <cstring>
 #include <string>
@@ -32,7 +32,7 @@
 #include "ui_basic/textarea.h"
 
 class Fullscreen_Menu_Options;
-struct Section;
+class Section;
 
 class Options_Ctrl {
 public:
@@ -182,4 +182,4 @@ private:
 	Options_Ctrl::Options_Struct os;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

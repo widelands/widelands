@@ -31,7 +31,7 @@ static std::string Win32Path(std::string s)
 {
 	for (size_t i = 0; i < s.size(); i++)
 		if (s[i] == '/') s[i] = '\\';
-	if (s.size() > 0 && s[0] == '\\')
+	if (!s.empty() && s[0] == '\\')
 	{
 		// Insert drive letter part from current working directory
 		std::string cwd = RealFSImpl("").getWorkingDirectory();

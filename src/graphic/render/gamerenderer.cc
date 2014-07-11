@@ -19,11 +19,11 @@
 
 #include "graphic/render/gamerenderer.h"
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
-#include "upcast.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
 
@@ -133,7 +133,7 @@ void GameRenderer::draw_objects()
 
 			if (isborder[F]) {
 				const Player & owner = m_egbase->player(owner_number[F]);
-				uint32_t const anim_idx = owner.frontier_anim();
+				uint32_t const anim_idx = owner.tribe().frontier_animation();
 				if (vision[F])
 					m_dst->drawanim(pos[F], anim_idx, 0, &owner);
 				for (uint32_t d = 1; d < 4; ++d) {
@@ -221,7 +221,7 @@ void GameRenderer::draw_objects()
 					} else if (const uint32_t pic = map_object_descr->main_animation()) {
 						m_dst->drawanim(pos[F], pic, 0, owner);
 					} else if (map_object_descr == &Widelands::g_flag_descr) {
-						m_dst->drawanim(pos[F], owner->flag_anim(), 0, owner);
+						m_dst->drawanim(pos[F], owner->tribe().flag_animation(), 0, owner);
 					}
 				}
 			}

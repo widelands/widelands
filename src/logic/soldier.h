@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOLDIER_H
-#define SOLDIER_H
+#ifndef WL_LOGIC_SOLDIER_H
+#define WL_LOGIC_SOLDIER_H
 
 #include "logic/tattribute.h"
 #include "logic/worker.h"
@@ -148,30 +148,20 @@ enum CombatWalkingDir {
 };
 
 enum CombatFlags {
-	/**
-	 * CF_DEFEND_STAY_HOME
-	 *    Soldier will wait enemies at his building flag. Only for defenders.
-	 */
+	/// Soldier will wait enemies at his building flag. Only for defenders.
 	CF_DEFEND_STAYHOME = 1,
-	/**
-	 * CF_RETREAT_WHEN_INJURED
-	 *    When current hitpoints goes under arbitrary value, soldier will flee
-	 * and heal inside military building
-	 */
+	/// When current hitpoints goes under a fixed percentage, soldier will flee
+	/// and heal inside military building
 	CF_RETREAT_WHEN_INJURED = 2,
-	/**
-	 * CF_AVOID_COMBAT
-	 *    Attackers would try avoid entering combat with others soldiers but
-	 * 'flag deffenders'.
-	 */
+	/// Attackers would try avoid entering combat with others soldiers but 'flag
+	/// defenders'.
 	CF_AVOID_COMBAT = 4,
-
 };
 
 
 class Soldier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
-	MO_DESCR(Soldier_Descr);
+	MO_DESCR(Soldier_Descr)
 
 public:
 	Soldier(const Soldier_Descr &);
@@ -257,8 +247,8 @@ public:
 
 	void setBattle(Game &, Battle *);
 
-	void start_task_attack(Game & game, Building &, uint8_t retreat);
-	void start_task_defense(Game & game, bool stayhome, uint8_t retreat);
+	void start_task_attack(Game & game, Building &);
+	void start_task_defense(Game & game, bool stayhome);
 	void start_task_battle(Game &);
 	void start_task_move_in_battle(Game &, CombatWalkingDir);
 	void start_task_die(Game &);
@@ -338,4 +328,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_SOLDIER_H

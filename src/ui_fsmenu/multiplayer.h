@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_MULTIPLAYER_H
-#define FULLSCREEN_MENU_MULTIPLAYER_H
+#ifndef WL_UI_FSMENU_MULTIPLAYER_H
+#define WL_UI_FSMENU_MULTIPLAYER_H
 
 #include "ui_fsmenu/base.h"
 #include "network/internet_gaming.h"
@@ -59,4 +59,4 @@ private:
 	bool        m_auto_log;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYER_H

@@ -19,9 +19,9 @@
 
 #include "scripting/lua_map.h"
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/log.h"
 #include "economy/wares_queue.h"
-#include "log.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
@@ -32,6 +32,9 @@
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -107,8 +110,8 @@ typedef std::vector<Widelands::Soldier *> SoldiersList;
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
 	}
-GET_INDEX(ware);
-GET_INDEX(worker);
+GET_INDEX(ware)
+GET_INDEX(worker)
 #undef GET_INDEX
 
 #define PARSERS(type, btype) \
@@ -171,8 +174,8 @@ btype##sMap m_parse_set_##type##s_arguments \
 	} \
 	return rv; \
 }
-PARSERS(ware, Ware);
-PARSERS(worker, Worker);
+PARSERS(ware, Ware)
+PARSERS(worker, Worker)
 #undef PARSERS
 
 WaresMap count_wares_on_flag_(Flag& f, const Tribe_Descr & tribe) {
@@ -532,8 +535,10 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 			return CAST_TO_LUA(Worker);
 		case Bob::SHIP:
 			return CAST_TO_LUA(Ship);
+		default:
+			assert(false);  // Never here, hopefully.
+			return 0;
 	}
-	assert(false);  // Never here, hopefully.
 }
 
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
@@ -908,7 +913,7 @@ int L_Map::place_immovable(lua_State * const L) {
 			report_error(L, "Problem loading tribe <%s>. Maybe not existent?", from_where.c_str());
 		}
 	} else {
-		int32_t const imm_idx = egbase.map().world().get_immovable_index(objname);
+		int32_t const imm_idx = egbase.world().get_immovable_index(objname);
 		if (imm_idx < 0)
 			report_error(L, "Unknown immovable <%s>", objname);
 
@@ -946,7 +951,8 @@ int L_Map::get_field(lua_State * L) {
 */
 // TODO: do we really want this function?
 int L_Map::recalculate(lua_State * L) {
-	get_egbase(L).map().recalc_whole_map();
+	Editor_Game_Base & egbase = get_egbase(L);
+	egbase.map().recalc_whole_map(egbase.world());
 	return 0;
 }
 
@@ -970,6 +976,7 @@ MapObject
 const char L_MapObject::className[] = "MapObject";
 const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	METHOD(L_MapObject, remove),
+	METHOD(L_MapObject, destroy),
 	METHOD(L_MapObject, __eq),
 	METHOD(L_MapObject, has_attribute),
 	{nullptr, nullptr},
@@ -1097,12 +1104,28 @@ int L_MapObject::__eq(lua_State * L) {
 */
 int L_MapObject::remove(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object * o = get(L, egbase);
-
+	Map_Object* o = get(L, egbase);
 	if (!o)
 		return 0;
 
 	o->remove(egbase);
+	return 0;
+}
+
+/* RST
+	.. method:: destroy()
+
+		Removes this object immediately. Might do special actions (like leaving a
+		burning fire). If you want to remove an object without side effects, see
+		:func:`remove`.
+*/
+int L_MapObject::destroy(lua_State * L) {
+	Editor_Game_Base& egbase = get_egbase(L);
+	Map_Object* o = get(L, egbase);
+	if (!o)
+		return 0;
+
+	o->destroy(egbase);
 	return 0;
 }
 
@@ -1777,9 +1800,9 @@ int L_Warehouse::set_##type##s(lua_State * L) { \
 	return 0; \
 }
 // documented in parent class
-WH_SET(ware, Ware);
+WH_SET(ware, Ware)
 // documented in parent class
-WH_SET(worker, Worker);
+WH_SET(worker, Worker)
 #undef WH_SET
 
 #define WH_GET(type, btype) \
@@ -1803,9 +1826,9 @@ int L_Warehouse::get_##type##s(lua_State * L) { \
 	return 1; \
 }
 // documented in parent class
-WH_GET(ware, Ware);
+WH_GET(ware, Ware)
 // documented in parent class
-WH_GET(worker, Worker);
+WH_GET(worker, Worker)
 #undef GET
 
 // documented in parent class
@@ -2531,7 +2554,8 @@ int L_Field::set_height(lua_State * L) {
 	if (height > MAX_FIELD_HEIGHT)
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-	get_egbase(L).map().set_height(f, height);
+	Editor_Game_Base & egbase = get_egbase(L);
+	egbase.map().set_height(egbase.world(), f, height);
 
 	return 0;
 }
@@ -2594,14 +2618,14 @@ int L_Field::get_viewpoint_y(lua_State * L) {
 */
 int L_Field::get_resource(lua_State * L) {
 	lua_pushstring
-		(L, get_egbase(L).map().world().get_resource
+		(L, get_egbase(L).world().get_resource
 			 (fcoords(L).field->get_resources())->name().c_str());
 
 	return 1;
 }
 int L_Field::set_resource(lua_State * L) {
 	Field * field = fcoords(L).field;
-	int32_t res = get_egbase(L).map().world().get_resource
+	int32_t res = get_egbase(L).world().get_resource
 		(luaL_checkstring(L, -1));
 
 	if (res == -1)
@@ -2627,8 +2651,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 	Field * field = fcoords(L).field;
 	int32_t res = field->get_resources();
 	int32_t amount = luaL_checkint32(L, -1);
-	int32_t max_amount = get_egbase(L).map().world().get_resource
-		(res)->get_max_amount();
+	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
 
 	if (amount < 0 or amount > max_amount)
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
@@ -2684,44 +2707,44 @@ int L_Field::get_bobs(lua_State * L) {
 		valid name to these variables.
 */
 int L_Field::get_terr(lua_State * L) {
-	Terrain_Descr & td =
-		get_egbase(L).map().world().terrain_descr
+	TerrainDescription & td =
+		get_egbase(L).world().terrain_descr
 			(fcoords(L).field->terrain_r());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
-int L_Field::set_terr(lua_State * L) {
-	const char * name = luaL_checkstring(L, -1);
-	Map & map = get_egbase(L).map();
-	Terrain_Index td =
-		map.world().index_of_terrain(name);
+int L_Field::set_terr(lua_State* L) {
+	const char* name = luaL_checkstring(L, -1);
+	Editor_Game_Base& egbase = get_egbase(L);
+	const World& world = egbase.world();
+	const Terrain_Index td = world.terrains().get_index(name);
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	map.change_terrain(TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
-
+	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
 }
 
 int L_Field::get_terd(lua_State * L) {
-	Terrain_Descr & td =
-		get_egbase(L).map().world().terrain_descr
+	TerrainDescription & td =
+		get_egbase(L).world().terrain_descr
 			(fcoords(L).field->terrain_d());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
 int L_Field::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
-	Map & map = get_egbase(L).map();
-	Terrain_Index td =
-		map.world().index_of_terrain(name);
+	Editor_Game_Base& egbase = get_egbase(L);
+	const World& world = egbase.world();
+	const Terrain_Index td =
+		world.terrains().get_index(name);
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	map.change_terrain
-		(TCoords<FCoords> (fcoords(L), TCoords<FCoords>::D), td);
+	egbase.map().change_terrain
+		(world, TCoords<FCoords> (fcoords(L), TCoords<FCoords>::D), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -2752,12 +2775,12 @@ int L_Field::set_terd(lua_State * L) {
    to_lua<L_Field>(L, new L_Field(n.x, n.y)); \
 	return 1; \
 }
-GET_X_NEIGHBOUR(rn);
-GET_X_NEIGHBOUR(ln);
-GET_X_NEIGHBOUR(trn);
-GET_X_NEIGHBOUR(tln);
-GET_X_NEIGHBOUR(bln);
-GET_X_NEIGHBOUR(brn);
+GET_X_NEIGHBOUR(rn)
+GET_X_NEIGHBOUR(ln)
+GET_X_NEIGHBOUR(trn)
+GET_X_NEIGHBOUR(tln)
+GET_X_NEIGHBOUR(bln)
+GET_X_NEIGHBOUR(brn)
 
 /* RST
 	.. attribute:: owner
@@ -3156,4 +3179,4 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // Pop the meta table
 }
 
-};
+}

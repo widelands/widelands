@@ -21,15 +21,17 @@
 
 #include <cstdio>
 #include <cstring>
+#include <memory>
 #include <string>
 
 #include <boost/format.hpp>
 
-#include "constants.h"
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
@@ -42,8 +44,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include "upcast.h"
-#include "wexception.h"
 
 inline Editor_Interactive & Main_Menu_Save_Map::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
@@ -94,13 +94,6 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	new UI::Textarea
 		(this, posx, posy, 70, 20, _("Size:"), UI::Align_CenterLeft);
 	m_size =
-		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
-
-	new UI::Textarea
-		(this, posx, posy, 70, 20, _("World:"), UI::Align_CenterLeft);
-	m_world =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
@@ -236,7 +229,6 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 		m_name  ->set_text(map.get_name       ());
 		m_author->set_text(map.get_author     ());
 		m_descr ->set_text(map.get_description());
-		m_world ->set_text(map.get_world_name ());
 
 		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());
@@ -247,7 +239,6 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	} else {
 		m_name     ->set_text(FileSystem::FS_Filename(name));
 		m_author   ->set_text("");
-		m_world    ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
 		if (g_fs->IsDirectory(name)) {

@@ -19,16 +19,16 @@
 
 #include "logic/cmd_luacoroutine.h"
 
-#include "gamecontroller.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 namespace Widelands {
 

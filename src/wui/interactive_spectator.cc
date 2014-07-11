@@ -19,15 +19,15 @@
 
 #include "wui/interactive_spectator.h"
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "chat.h"
-#include "gamecontroller.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/game_controller.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
@@ -152,7 +152,7 @@ void Interactive_Spectator::start()
 	overlay_manager.show_buildhelp(false);
 
 	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map();
+	map.recalc_whole_map(game().world());
 }
 
 

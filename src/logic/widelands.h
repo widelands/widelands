@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_H
-#define WIDELANDS_H
+#ifndef WL_LOGIC_WIDELANDS_H
+#define WL_LOGIC_WIDELANDS_H
 
 #include <cassert>
 #include <cstddef>
@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-#include "port.h"
+#include "base/macros.h"
 
 namespace Widelands {
 
@@ -49,7 +49,7 @@ inline Player_Number Neutral() {return 0;}
  */
 typedef uint8_t TeamNumber;
 
-typedef uint8_t  Terrain_Index;   /// 4 bits used, so 0 .. 15.
+typedef uint8_t  Terrain_Index;
 typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.
 typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
 
@@ -91,4 +91,4 @@ struct Soldier_Strength {
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WIDELANDS_H

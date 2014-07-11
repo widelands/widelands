@@ -17,20 +17,25 @@
  *
  */
 
-#ifndef EDITOR_INFO_TOOL_H
-#define EDITOR_INFO_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_INFO_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_INFO_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 
 /// A simple tool to show information about the clicked node.
 struct Editor_Info_Tool : public Editor_Tool {
-	Editor_Info_Tool() : Editor_Tool(*this, *this, false) {}
+	Editor_Info_Tool() : Editor_Tool(*this, *this, false) {
+	}
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& parent,
+	                          Editor_Action_Args& args) override;
 
-	char const * get_sel_impl() const override {return "pics/fsel_editor_info.png";}
+	char const* get_sel_impl() const override {
+		return "pics/fsel_editor_info.png";
+	}
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_INFO_TOOL_H

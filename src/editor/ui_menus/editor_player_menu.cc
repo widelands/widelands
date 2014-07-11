@@ -21,10 +21,12 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/constants.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
@@ -32,7 +34,6 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
 #include "wui/overlay_manager.h"
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
@@ -354,9 +355,9 @@ void Editor_Player_Menu::set_starting_pos_clicked(uint8_t n) {
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
-	map.overlay_manager().register_overlay_callback_function
-		(boost::bind(&Editor_Tool_Set_Starting_Pos_Callback, _1, boost::ref(map)));
-	map.recalc_whole_map();
+	map.overlay_manager().register_overlay_callback_function(
+	   boost::bind(&Editor_Tool_Set_Starting_Pos_Callback, _1, boost::ref(map)));
+	map.recalc_whole_map(menu.egbase().world());
 	update();
 }
 
@@ -441,5 +442,5 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 	parent.tools.make_infrastructure.set_player(n);
 	overlay_manager.register_overlay_callback_function(
 	   boost::bind(&Editor_Make_Infrastructure_Tool_Callback, _1, boost::ref(egbase), n));
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase.world());
 }

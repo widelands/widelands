@@ -21,14 +21,12 @@
 
 #include <SDL_keysym.h>
 
-#include "constants.h"
+#include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "log.h"
-#include "text_layout.h"
-#include "wlapplication.h"
+#include "wui/text_layout.h"
 
 
 using namespace std;
