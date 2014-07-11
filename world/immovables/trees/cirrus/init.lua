@@ -9,7 +9,7 @@ terrain_affinity = {
 
 world:new_immovable_type{
    name = "cirrus_wasteland_sapling",
-   descname = _ " Cirrus Tree (Sapling)",
+   descname = _ "Cirrus Tree (Sapling)",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree_sapling" },
