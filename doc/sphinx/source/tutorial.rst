@@ -314,7 +314,7 @@ If you have multiple variables in your script that you wish to include dynamical
 Numbers in Placeholders
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Not all languages' number systems work the same as in English. So, mocking up an example with putting Gaelic grammar on an English word for illustration, we would have something like `0 boat`, `1 or 2 bhoat`, `3 boats`, `20 boat`... So, instead of using ``_`` to fetch the translation, any string containing a placeholder that is a number should be fetched with ``ngettext`` instead. First, you fetch the correct plural form, using the number variable and ``ngettext``:
+Not all languages' number systems work the same as in English. For example, the Gaelic word for "cat" conveniently is "cat", and this is how its plural works: `0 cat`, `1 or 2 chat`, `3 cait`, `11 or 12 chat`, `13 cait`, `20 cat`... So, instead of using ``_`` to fetch the translation, any string containing a placeholder that is a number should be fetched with ``ngettext`` instead. First, you fetch the correct plural form, using the number variable and ``ngettext``:
 
 .. code-block:: lua
 
