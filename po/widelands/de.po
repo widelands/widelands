@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-17 18:11+0200\n"
-"PO-Revision-Date: 2014-06-20 15:14+0000\n"
-"Last-Translator: David Allwicher <Unknown>\n"
+"PO-Revision-Date: 2014-07-10 18:09+0000\n"
+"Last-Translator: Ferdinand T. <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-21 05:29+0000\n"
-"X-Generator: Launchpad (build 17058)\n"
+"X-Launchpad-Export-Date: 2014-07-11 05:37+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
 "Language: de\n"
 
 #: ../../src/ai/defaultai.h:85
@@ -985,7 +985,7 @@ msgstr "%s ausgebildet"
 #: ../../src/logic/production_program.cc:1103
 #, c-format
 msgid "%1$s %2$s mine %3$s"
-msgstr ""
+msgstr "%1$s %2$s baut %3$s ab"
 
 #: ../../src/logic/production_program.cc:1214
 #, c-format
@@ -2774,6 +2774,9 @@ msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL"
 msgstr ""
+" --coredump=[yes|no] Erstellt einen Speicherauszug (core dump) bei "
+"Speicherzugriffsfehlers anstatt\n"
+"                      die SDL zu benutzen"
 
 #: ../../src/wlapplication.cc:1189
 msgid ""
@@ -2793,6 +2796,8 @@ msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
 msgstr ""
+" --remove_syncstreams=[true|false]\n"
+"                      Entfernt beim Starten syncstream Dateien"
 
 #: ../../src/wlapplication.cc:1194
 msgid ""

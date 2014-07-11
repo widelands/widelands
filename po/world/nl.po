@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-11 05:21+0000\n"
-"PO-Revision-Date: 2014-03-15 10:10+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"PO-Revision-Date: 2014-07-10 11:31+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:40+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-07-11 05:38+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
+"Language: nl\n"
 
 #: ../../world/critters/badger/init.lua:14
 msgid "Badger"
@@ -107,9 +107,8 @@ msgstr "Gras"
 #: ../../world/immovables/ruin3/init.lua:5
 #: ../../world/immovables/ruin4/init.lua:5
 #: ../../world/immovables/ruin5/init.lua:5
-#, fuzzy
 msgid "Ruin"
-msgstr "Ruïne"
+msgstr ""
 
 #: ../../world/immovables/manmade/debris00/init.lua:5
 #: ../../world/immovables/manmade/debris01/init.lua:5
@@ -164,101 +163,86 @@ msgstr "Skelet"
 #: ../../world/immovables/standing_stones/standing_stone5_winter/init.lua:5
 #: ../../world/immovables/standing_stones/standing_stone6/init.lua:5
 #: ../../world/immovables/standing_stones/standing_stone7/init.lua:5
-#, fuzzy
 msgid "Standing Stone"
-msgstr "Staande stenen"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones1/init.lua:12
 #: ../../world/immovables/stones/desert_stones1/init.lua:12
 #: ../../world/immovables/stones/greenland_stones1/init.lua:12
 #: ../../world/immovables/stones/winterland_stones1/init.lua:12
-#, fuzzy
 msgid "Stones 1"
-msgstr "Stenen"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones2/init.lua:12
 #: ../../world/immovables/stones/desert_stones2/init.lua:12
 #: ../../world/immovables/stones/greenland_stones2/init.lua:12
 #: ../../world/immovables/stones/winterland_stones2/init.lua:12
-#, fuzzy
 msgid "Stones 2"
-msgstr "Stenen"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones3/init.lua:12
 #: ../../world/immovables/stones/desert_stones3/init.lua:12
 #: ../../world/immovables/stones/greenland_stones3/init.lua:12
 #: ../../world/immovables/stones/winterland_stones3/init.lua:12
-#, fuzzy
 msgid "Stones 3"
-msgstr "Stenen"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones4/init.lua:12
 #: ../../world/immovables/stones/desert_stones4/init.lua:12
 #: ../../world/immovables/stones/greenland_stones4/init.lua:12
 #: ../../world/immovables/stones/winterland_stones4/init.lua:12
-#, fuzzy
 msgid "Stones 4"
-msgstr "Stenen"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones5/init.lua:12
 #: ../../world/immovables/stones/desert_stones5/init.lua:12
 #: ../../world/immovables/stones/greenland_stones5/init.lua:12
 #: ../../world/immovables/stones/winterland_stones5/init.lua:12
-#, fuzzy
 msgid "Stones 5"
-msgstr "Stenen"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones6/init.lua:12
 #: ../../world/immovables/stones/desert_stones6/init.lua:12
 #: ../../world/immovables/stones/greenland_stones6/init.lua:12
 #: ../../world/immovables/stones/winterland_stones6/init.lua:12
-#, fuzzy
 msgid "Stones 6"
-msgstr "Stenen"
+msgstr ""
 
 #: ../../world/immovables/track_winter/init.lua:5
 msgid "Track"
 msgstr ""
 
 #: ../../world/immovables/trees/alder_summer_mature/init.lua:5
-#, fuzzy
 msgid "Alder (Mature)"
-msgstr "Palm (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/alder_summer_old/init.lua:5
-#, fuzzy
 msgid "Alder (Old)"
-msgstr "Palm (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/alder_summer_pole/init.lua:5
-#, fuzzy
 msgid "Alder (Pole)"
-msgstr "Palm (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/alder_summer_sapling/init.lua:5
-#, fuzzy
 msgid "Alder (Sapling)"
-msgstr "Palm (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/aspen_summer_mature/init.lua:5
-#, fuzzy
 msgid "Aspen (Mature)"
-msgstr "Lijsterbes (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/aspen_summer_old/init.lua:5
-#, fuzzy
 msgid "Aspen (Old)"
-msgstr "Lijsterbes (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/aspen_summer_pole/init.lua:5
-#, fuzzy
 msgid "Aspen (Pole)"
-msgstr "Lijsterbes (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/aspen_summer_sapling/init.lua:5
-#, fuzzy
 msgid "Aspen (Sapling)"
-msgstr "Lijsterbes (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/beech_summer_mature/init.lua:5
 msgid "Beech (Mature)"
@@ -277,43 +261,36 @@ msgid "Beech (Sapling)"
 msgstr "Beuk (zaailing)"
 
 #: ../../world/immovables/trees/birch_summer_mature/init.lua:5
-#, fuzzy
 msgid "Birch (Mature)"
-msgstr "Lariks (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/birch_summer_old/init.lua:5
-#, fuzzy
 msgid "Birch (Old)"
-msgstr "Lariks (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/birch_summer_pole/init.lua:5
-#, fuzzy
 msgid "Birch (Pole)"
-msgstr "Lariks (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/birch_summer_sapling/init.lua:5
-#, fuzzy
 msgid "Birch (Sapling)"
-msgstr "Lariks (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/cirrus_wasteland_mature/init.lua:5
-#, fuzzy
 msgid "Cirrus Tree (Mature)"
-msgstr "Beuk (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/cirrus_wasteland_old/init.lua:5
 msgid "Cirrus Tree (Old)"
 msgstr ""
 
 #: ../../world/immovables/trees/cirrus_wasteland_pole/init.lua:5
-#, fuzzy
 msgid "Cirrus Tree (Pole)"
-msgstr "Beuk (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/cirrus_wasteland_sapling/init.lua:5
-#, fuzzy
 msgid " Cirrus Tree (Sapling)"
-msgstr "Beuk (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/deadtree1/init.lua:5
 #: ../../world/immovables/trees/deadtree2/init.lua:5
@@ -325,9 +302,8 @@ msgid "Dead Tree"
 msgstr "Dode boom"
 
 #: ../../world/immovables/trees/fallentree/init.lua:12
-#, fuzzy
 msgid "Fallen Tree"
-msgstr "Dode boom"
+msgstr ""
 
 #: ../../world/immovables/trees/larch_summer_mature/init.lua:5
 msgid "Larch (Mature)"
@@ -346,44 +322,36 @@ msgid "Larch (Sapling)"
 msgstr "Lariks (zaailing)"
 
 #: ../../world/immovables/trees/liana_wasteland_mature/init.lua:5
-#, fuzzy
 msgid "Liana Tree (Mature)"
-msgstr "Lariks (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/liana_wasteland_old/init.lua:5
-#, fuzzy
 msgid "Liana Tree (Old)"
-msgstr "Lariks (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/liana_wasteland_pole/init.lua:5
-#, fuzzy
 msgid "Liana Tree (Pole)"
-msgstr "Lariks (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/liana_wasteland_sapling/init.lua:5
-#, fuzzy
 msgid "Liana Tree (Sapling)"
-msgstr "Lariks (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/maple_winter_mature/init.lua:5
-#, fuzzy
 msgid "Maple (Mature)"
-msgstr "Palm (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/maple_winter_old/init.lua:5
-#, fuzzy
 msgid "Maple (Old)"
-msgstr "Palm (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/maple_winter_pole/init.lua:5
-#, fuzzy
 msgid "Maple (Pole)"
-msgstr "Palm (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/maple_winter_sapling/init.lua:5
-#, fuzzy
 msgid "Maple (Sapling)"
-msgstr "Palm (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/mushroom_dark_wasteland_mature/init.lua:5
 msgid "Dark Mushroom Tree (Mature)"
@@ -398,9 +366,8 @@ msgid "Dark Mushroom Tree (Pole)"
 msgstr ""
 
 #: ../../world/immovables/trees/mushroom_dark_wasteland_sapling/init.lua:5
-#, fuzzy
 msgid "Dark Mushroom Tree (Sapling)"
-msgstr "Lariks (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/mushroom_green_wasteland_mature/init.lua:5
 msgid "Green Mushroom Tree (Mature)"
@@ -435,109 +402,88 @@ msgid "Red Mushroom Tree (Sapling)"
 msgstr ""
 
 #: ../../world/immovables/trees/oak_summer_mature/init.lua:5
-#, fuzzy
 msgid "Oak (Mature)"
-msgstr "Palm (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/oak_summer_old/init.lua:5
-#, fuzzy
 msgid "Oak (Old)"
-msgstr "Palm (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/oak_summer_pole/init.lua:5
-#, fuzzy
 msgid "Oak (Pole)"
-msgstr "Palm (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/oak_summer_sapling/init.lua:5
-#, fuzzy
 msgid "Oak (Sapling)"
-msgstr "Palm (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_borassus_desert_mature/init.lua:5
-#, fuzzy
 msgid "Borassus Palm (Mature)"
-msgstr "Palm (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_borassus_desert_old/init.lua:5
-#, fuzzy
 msgid "Borassus Palm (Old)"
-msgstr "Palm (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_borassus_desert_pole/init.lua:5
-#, fuzzy
 msgid "Borassus Palm (Pole)"
-msgstr "Palm (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_borassus_desert_sapling/init.lua:5
-#, fuzzy
 msgid "Borassus Palm (Sapling)"
-msgstr "Palm (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_coconut_desert_mature/init.lua:5
-#, fuzzy
 msgid "Coconut Palm (Mature)"
-msgstr "Palm (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_coconut_desert_old/init.lua:5
-#, fuzzy
 msgid "Coconut Palm (Old)"
-msgstr "Palm (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_coconut_desert_pole/init.lua:5
-#, fuzzy
 msgid "Coconut Palm (Pole)"
-msgstr "Palm (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_coconut_desert_sapling/init.lua:5
-#, fuzzy
 msgid "Coconut Palm (Sapling)"
-msgstr "Palm (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_date_desert_mature/init.lua:5
-#, fuzzy
 msgid "Date Palm (Mature)"
-msgstr "Palm (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_date_desert_old/init.lua:5
-#, fuzzy
 msgid "Date Palm (Old)"
-msgstr "Palm (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_date_desert_pole/init.lua:5
-#, fuzzy
 msgid "Date Palm (Pole)"
-msgstr "Palm (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_date_desert_sapling/init.lua:5
-#, fuzzy
 msgid "Date Palm (Sapling)"
-msgstr "Palm (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_oil_desert_mature/init.lua:5
-#, fuzzy
 msgid "Oil Palm (Mature)"
-msgstr "Palm (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_oil_desert_old/init.lua:5
-#, fuzzy
 msgid "Oil Palm (Old)"
-msgstr "Palm (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_oil_desert_pole/init.lua:5
-#, fuzzy
 msgid "Oil Palm (Pole)"
-msgstr "Palm (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_oil_desert_sapling/init.lua:5
-#, fuzzy
 msgid "Oil Palm (Sapling)"
-msgstr "Palm (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_roystonea_desert_mature/init.lua:5
-#, fuzzy
 msgid "Roystonea regia Palm (Mature)"
-msgstr "Palm (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/palm_roystonea_desert_old/init.lua:5
 msgid "Roystonea regia Palm (Old)"
@@ -548,9 +494,8 @@ msgid "Roystonea regia Palm (Pole)"
 msgstr ""
 
 #: ../../world/immovables/trees/palm_roystonea_desert_sapling/init.lua:5
-#, fuzzy
 msgid "Roystonea regia Palm (Sapling)"
-msgstr "Palm (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/rowan_summer_mature/init.lua:5
 msgid "Rowan (Mature)"
@@ -569,43 +514,36 @@ msgid "Rowan (Sapling)"
 msgstr "Lijsterbes (zaailing)"
 
 #: ../../world/immovables/trees/spruce_summer_mature/init.lua:5
-#, fuzzy
 msgid "Spruce (Mature)"
-msgstr "Lariks (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/spruce_summer_old/init.lua:5
-#, fuzzy
 msgid "Spruce (Old)"
-msgstr "Lariks (oud)"
+msgstr ""
 
 #: ../../world/immovables/trees/spruce_summer_pole/init.lua:5
-#, fuzzy
 msgid "Spruce (Pole)"
-msgstr "Lariks (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/spruce_summer_sapling/init.lua:5
-#, fuzzy
 msgid "Spruce (Sapling)"
-msgstr "Lariks (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/twine_wasteland_mature/init.lua:5
-#, fuzzy
 msgid "Twine Tree (Mature)"
-msgstr "Beuk (volgroeid)"
+msgstr ""
 
 #: ../../world/immovables/trees/twine_wasteland_old/init.lua:5
 msgid "Twine Tree (Old)"
 msgstr ""
 
 #: ../../world/immovables/trees/twine_wasteland_pole/init.lua:5
-#, fuzzy
 msgid "Twine Tree (Pole)"
-msgstr "Beuk (opgroeiend)"
+msgstr ""
 
 #: ../../world/immovables/trees/twine_wasteland_sapling/init.lua:5
-#, fuzzy
 msgid "Twine Tree (Sapling)"
-msgstr "Beuk (zaailing)"
+msgstr ""
 
 #: ../../world/immovables/trees/umbrella_green_wasteland_mature/init.lua:5
 msgid "Green Umbrella Tree (Mature)"
@@ -660,24 +598,20 @@ msgid "Coniferous Trees"
 msgstr ""
 
 #: ../../world/init.lua:41
-#, fuzzy
 msgid "Dead Trees"
-msgstr "Dode boom"
+msgstr ""
 
 #: ../../world/init.lua:47
-#, fuzzy
 msgid "Deciduous Trees"
-msgstr "Dode boom"
+msgstr ""
 
 #: ../../world/init.lua:53
-#, fuzzy
 msgid "Palm Trees"
-msgstr "Dode boom"
+msgstr ""
 
 #: ../../world/init.lua:59
-#, fuzzy
 msgid "Wasteland Trees"
-msgstr "Dode boom"
+msgstr ""
 
 #: ../../world/resources/init.lua:5
 msgid "Coal"
@@ -695,7 +629,8 @@ msgstr "IJzer"
 msgid "Granite"
 msgstr "Graniet"
 
-#: ../../world/resources/init.lua:57 ../../world/terrains/init.lua:212
+#: ../../world/resources/init.lua:57
+#: ../../world/terrains/init.lua:212
 msgid "Water"
 msgstr "Water"
 
@@ -720,51 +655,50 @@ msgid "Desert"
 msgstr "Woestijn"
 
 #: ../../world/terrains/init.lua:30
-#, fuzzy
 msgid "Meadow 1"
-msgstr "Weide"
+msgstr ""
 
 #: ../../world/terrains/init.lua:42
-#, fuzzy
 msgid "Meadow 2"
-msgstr "Weide"
+msgstr ""
 
 #: ../../world/terrains/init.lua:54
-#, fuzzy
 msgid "Meadow 3"
-msgstr "Weide"
+msgstr ""
 
 #: ../../world/terrains/init.lua:66
-#, fuzzy
 msgid "Meadow 4"
-msgstr "Weide"
+msgstr ""
 
 #: ../../world/terrains/init.lua:78
 msgid "Steppe"
 msgstr "Steppe"
 
 #: ../../world/terrains/init.lua:90
-#, fuzzy
 msgid "Barren Steppe"
-msgstr "Steppe"
+msgstr ""
 
 #: ../../world/terrains/init.lua:102
 msgid "Mountain Meadow"
 msgstr "Bergweide"
 
-#: ../../world/terrains/init.lua:114 ../../world/terrains/init.lua:312
+#: ../../world/terrains/init.lua:114
+#: ../../world/terrains/init.lua:312
 msgid "Mountain 1"
 msgstr "Berg 1"
 
-#: ../../world/terrains/init.lua:126 ../../world/terrains/init.lua:324
+#: ../../world/terrains/init.lua:126
+#: ../../world/terrains/init.lua:324
 msgid "Mountain 2"
 msgstr "Berg 2"
 
-#: ../../world/terrains/init.lua:138 ../../world/terrains/init.lua:336
+#: ../../world/terrains/init.lua:138
+#: ../../world/terrains/init.lua:336
 msgid "Mountain 3"
 msgstr "Berg 3"
 
-#: ../../world/terrains/init.lua:150 ../../world/terrains/init.lua:348
+#: ../../world/terrains/init.lua:150
+#: ../../world/terrains/init.lua:348
 msgid "Mountain 4"
 msgstr "Berg 4"
 
@@ -776,7 +710,8 @@ msgstr ""
 msgid "Beach"
 msgstr "Strand"
 
-#: ../../world/terrains/init.lua:187 ../../world/terrains/init.lua:473
+#: ../../world/terrains/init.lua:187
+#: ../../world/terrains/init.lua:473
 msgid "Snow"
 msgstr ""
 
@@ -813,9 +748,8 @@ msgid "Igneous Rocks"
 msgstr ""
 
 #: ../../world/terrains/init.lua:360
-#, fuzzy
 msgid "Beach (Wasteland)"
-msgstr "Beuk (volgroeid)"
+msgstr ""
 
 #: ../../world/terrains/init.lua:372
 msgid "Lava Rocks 1"
@@ -850,33 +784,28 @@ msgid "Taiga"
 msgstr ""
 
 #: ../../world/terrains/init.lua:485
-#, fuzzy
 msgid "Mountain 1 (Winter)"
-msgstr "Berg 1"
+msgstr ""
 
 #: ../../world/terrains/init.lua:497
-#, fuzzy
 msgid "Mountain 2 (Winter)"
-msgstr "Berg 2"
+msgstr ""
 
 #: ../../world/terrains/init.lua:509
-#, fuzzy
 msgid "Mountain 3 (Winter)"
-msgstr "Berg 3"
+msgstr ""
 
 #: ../../world/terrains/init.lua:521
-#, fuzzy
 msgid "Mountain 4 (Winter)"
-msgstr "Berg 4"
+msgstr ""
 
 #: ../../world/terrains/init.lua:533
 msgid "Ice"
 msgstr ""
 
 #: ../../world/terrains/init.lua:545
-#, fuzzy
 msgid "Beach (Winter)"
-msgstr "Beuk (volgroeid)"
+msgstr ""
 
 #: ../../world/terrains/init.lua:557
 msgid "Ice Floes"
@@ -907,34 +836,28 @@ msgid "Meadow (Desert)"
 msgstr ""
 
 #: ../../world/terrains/init.lua:648
-#, fuzzy
 msgid "Mountain Meadow (Desert)"
-msgstr "Bergweide"
+msgstr ""
 
 #: ../../world/terrains/init.lua:660
-#, fuzzy
 msgid "High Mountain Meadow (Desert)"
-msgstr "Hoge bergweide"
+msgstr ""
 
 #: ../../world/terrains/init.lua:672
-#, fuzzy
 msgid "Mountain 1 (Desert)"
-msgstr "Berg 1"
+msgstr ""
 
 #: ../../world/terrains/init.lua:684
-#, fuzzy
 msgid "Mountain 2 (Desert)"
-msgstr "Berg 2"
+msgstr ""
 
 #: ../../world/terrains/init.lua:696
-#, fuzzy
 msgid "Mountain 3 (Desert)"
-msgstr "Berg 3"
+msgstr ""
 
 #: ../../world/terrains/init.lua:708
-#, fuzzy
 msgid "Mountain 4 (Desert)"
-msgstr "Berg 4"
+msgstr ""
 
 #: ../../world/terrains/init.lua:720
 msgid "Desert 1"
@@ -949,20 +872,9 @@ msgid "Desert 3"
 msgstr "Woestijn 3"
 
 #: ../../world/terrains/init.lua:756
-#, fuzzy
 msgid "Beach (Desert)"
-msgstr "Beuk (opgroeiend)"
+msgstr ""
 
 #: ../../world/terrains/init.lua:768
-#, fuzzy
 msgid "Water (Desert)"
-msgstr "Woestijn"
-
-#~ msgid "The Widelands Development Team"
-#~ msgstr "Het Widelands Ontwikkelteam"
-
-#~ msgid "This is the wide and sandy country of the bedouins"
-#~ msgstr "Dit zijn de eindeloze zandvlaktes van de bedouïnen"
-
-#~ msgid "Shell"
-#~ msgstr "Schelp"
+msgstr ""

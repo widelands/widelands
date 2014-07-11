@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-11 05:21+0000\n"
-"PO-Revision-Date: 2010-03-25 19:09+0000\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"PO-Revision-Date: 2014-07-10 11:31+0000\n"
 "Last-Translator: Samith Sandanayake <sam.the.devel@gmail.com>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:40+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-07-11 05:38+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
+"Language: \n"
 
 #: ../../world/critters/badger/init.lua:14
 msgid "Badger"
@@ -171,49 +171,43 @@ msgstr ""
 #: ../../world/immovables/stones/desert_stones1/init.lua:12
 #: ../../world/immovables/stones/greenland_stones1/init.lua:12
 #: ../../world/immovables/stones/winterland_stones1/init.lua:12
-#, fuzzy
 msgid "Stones 1"
-msgstr "ගල්"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones2/init.lua:12
 #: ../../world/immovables/stones/desert_stones2/init.lua:12
 #: ../../world/immovables/stones/greenland_stones2/init.lua:12
 #: ../../world/immovables/stones/winterland_stones2/init.lua:12
-#, fuzzy
 msgid "Stones 2"
-msgstr "ගල්"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones3/init.lua:12
 #: ../../world/immovables/stones/desert_stones3/init.lua:12
 #: ../../world/immovables/stones/greenland_stones3/init.lua:12
 #: ../../world/immovables/stones/winterland_stones3/init.lua:12
-#, fuzzy
 msgid "Stones 3"
-msgstr "ගල්"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones4/init.lua:12
 #: ../../world/immovables/stones/desert_stones4/init.lua:12
 #: ../../world/immovables/stones/greenland_stones4/init.lua:12
 #: ../../world/immovables/stones/winterland_stones4/init.lua:12
-#, fuzzy
 msgid "Stones 4"
-msgstr "ගල්"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones5/init.lua:12
 #: ../../world/immovables/stones/desert_stones5/init.lua:12
 #: ../../world/immovables/stones/greenland_stones5/init.lua:12
 #: ../../world/immovables/stones/winterland_stones5/init.lua:12
-#, fuzzy
 msgid "Stones 5"
-msgstr "ගල්"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones6/init.lua:12
 #: ../../world/immovables/stones/desert_stones6/init.lua:12
 #: ../../world/immovables/stones/greenland_stones6/init.lua:12
 #: ../../world/immovables/stones/winterland_stones6/init.lua:12
-#, fuzzy
 msgid "Stones 6"
-msgstr "ගල්"
+msgstr ""
 
 #: ../../world/immovables/track_winter/init.lua:5
 msgid "Track"
@@ -309,9 +303,8 @@ msgid "Dead Tree"
 msgstr "මළ ගස"
 
 #: ../../world/immovables/trees/fallentree/init.lua:12
-#, fuzzy
 msgid "Fallen Tree"
-msgstr "මළ ගස"
+msgstr ""
 
 #: ../../world/immovables/trees/larch_summer_mature/init.lua:5
 msgid "Larch (Mature)"
@@ -606,24 +599,20 @@ msgid "Coniferous Trees"
 msgstr ""
 
 #: ../../world/init.lua:41
-#, fuzzy
 msgid "Dead Trees"
-msgstr "මළ ගස"
+msgstr ""
 
 #: ../../world/init.lua:47
-#, fuzzy
 msgid "Deciduous Trees"
-msgstr "මළ ගස"
+msgstr ""
 
 #: ../../world/init.lua:53
-#, fuzzy
 msgid "Palm Trees"
-msgstr "මළ ගස"
+msgstr ""
 
 #: ../../world/init.lua:59
-#, fuzzy
 msgid "Wasteland Trees"
-msgstr "මළ ගස"
+msgstr ""
 
 #: ../../world/resources/init.lua:5
 msgid "Coal"
@@ -641,7 +630,8 @@ msgstr "යකඩ"
 msgid "Granite"
 msgstr ""
 
-#: ../../world/resources/init.lua:57 ../../world/terrains/init.lua:212
+#: ../../world/resources/init.lua:57
+#: ../../world/terrains/init.lua:212
 msgid "Water"
 msgstr "වතුර"
 
@@ -693,19 +683,23 @@ msgstr ""
 msgid "Mountain Meadow"
 msgstr ""
 
-#: ../../world/terrains/init.lua:114 ../../world/terrains/init.lua:312
+#: ../../world/terrains/init.lua:114
+#: ../../world/terrains/init.lua:312
 msgid "Mountain 1"
 msgstr ""
 
-#: ../../world/terrains/init.lua:126 ../../world/terrains/init.lua:324
+#: ../../world/terrains/init.lua:126
+#: ../../world/terrains/init.lua:324
 msgid "Mountain 2"
 msgstr ""
 
-#: ../../world/terrains/init.lua:138 ../../world/terrains/init.lua:336
+#: ../../world/terrains/init.lua:138
+#: ../../world/terrains/init.lua:336
 msgid "Mountain 3"
 msgstr ""
 
-#: ../../world/terrains/init.lua:150 ../../world/terrains/init.lua:348
+#: ../../world/terrains/init.lua:150
+#: ../../world/terrains/init.lua:348
 msgid "Mountain 4"
 msgstr ""
 
@@ -717,7 +711,8 @@ msgstr ""
 msgid "Beach"
 msgstr ""
 
-#: ../../world/terrains/init.lua:187 ../../world/terrains/init.lua:473
+#: ../../world/terrains/init.lua:187
+#: ../../world/terrains/init.lua:473
 msgid "Snow"
 msgstr ""
 
@@ -878,17 +873,9 @@ msgid "Desert 3"
 msgstr ""
 
 #: ../../world/terrains/init.lua:756
-#, fuzzy
 msgid "Beach (Desert)"
-msgstr "කාන්තාරය"
+msgstr ""
 
 #: ../../world/terrains/init.lua:768
-#, fuzzy
 msgid "Water (Desert)"
-msgstr "කාන්තාරය"
-
-#~ msgid "The Widelands Development Team"
-#~ msgstr "The Widelands නිෂ්පාදන කන්ඩායම"
-
-#~ msgid "Shell"
-#~ msgstr "කටුව"
+msgstr ""
