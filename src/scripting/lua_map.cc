@@ -1116,9 +1116,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	{nullptr, nullptr, nullptr},
 };
 
-// NOCOM(#gunchleoc): This is a sample of how it should work. It is
-// untested though. Could you duplicate this for WareDescription
-// and WorkerDescription and add tests to lua_persistence.wgf?
+
 void L_BuildingDescription::__persist(lua_State* L) {
 	const Building_Descr* descr = get();
 	PERS_STRING("tribe", descr->tribe().name());
@@ -1630,12 +1628,23 @@ const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] 
 	{nullptr, nullptr, nullptr},
 };
 
-// NOCOM(#gunchleoc): implement and test me
-void L_WareDescription::__persist(lua_State* /* L */) {
+
+void L_WareDescription::__persist(lua_State* L) {
+	const WareDescr* descr = get();
+	PERS_STRING("tribe", descr->tribe().name());
+	PERS_STRING("name", descr->name());
 }
 
-void L_WareDescription::__unpersist(lua_State* /* L */) {
+void L_WareDescription::__unpersist(lua_State* L) {
+	std::string name, tribe_name;
+	UNPERS_STRING("tribe", tribe_name);
+	UNPERS_STRING("name", name);
+	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
+	Ware_Index idx = tribe->safe_ware_index(name.c_str());
+	set_description_pointer(
+			tribe->get_ware_descr(idx));
 }
+
 
 /*
  ==========================================================
@@ -1780,11 +1789,21 @@ const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
-// NOCOM(#gunchleoc): implement and test me
-void L_WorkerDescription::__persist(lua_State* /* L */) {
+
+void L_WorkerDescription::__persist(lua_State* L) {
+	const Worker_Descr * descr = get();
+	PERS_STRING("tribe", descr->tribe().name());
+	PERS_STRING("name", descr->name());
 }
 
-void L_WorkerDescription::__unpersist(lua_State* /* L */) {
+void L_WorkerDescription::__unpersist(lua_State* L) {
+	std::string name, tribe_name;
+	UNPERS_STRING("tribe", tribe_name);
+	UNPERS_STRING("name", name);
+	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
+	Ware_Index idx = tribe->safe_worker_index(name.c_str());
+	set_description_pointer(
+			tribe->get_ware_descr(idx));
 }
 
 /*
