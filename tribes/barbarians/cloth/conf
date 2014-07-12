@@ -1,5 +1,6 @@
-# TODO: this is currently not shown in warehouses as it is not used.
 help=_Cloth is needed for barbarian ships. It is produced out of thatch reed.
+
+default_target_quantity=10
 
 [idle]
 pics=idle.png
