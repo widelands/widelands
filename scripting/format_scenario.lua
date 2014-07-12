@@ -48,6 +48,43 @@ end
 
 
 -- RST
+-- .. function:: listitem(symbol, text)
+--
+--    Adds the symbol in front of the text to create a list item and adds a paragraphdivider
+--
+--    :arg symbol: the item symbol for the list, e.g. "•" or "→"
+--    :arg text: the text of the list item
+--
+--    :returns: symbol .. " " .. text .. paragraphdivider()
+function listitem(symbol, text)
+   return symbol .. " " .. text .. paragraphdivider()
+end
+
+-- RST
+-- .. function:: listitem_bullet(text)
+--
+--    Creates a list item with an arrow
+--
+--    :arg text: the text of the list item
+--
+--    :returns: listitem("→", text)
+function listitem_arrow(text)
+   return listitem("→", text)
+end
+
+-- RST
+-- .. function:: listitem_bullet(text)
+--
+--    Creates a list item with a bullet point
+--
+--    :arg text: the text of the list item
+--
+--    :returns: listitem("•", text)
+function listitem_bullet(text)
+   return listitem("•", text)
+end
+
+-- RST
 -- .. function:: paragraphdivider()
 --
 --    Closes a paragraph and opens a new paragraph. Use this when you format a string with the speech function

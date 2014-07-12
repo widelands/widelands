@@ -28,7 +28,8 @@ obj_build_barracks = {
    title=_"Build a barracks",
    number = 1,
    body = objective_text(_"Barracks",
-[[• ]] .. _[[Build a barracks at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]]),
+      listitem_bullet(_[[Build a barracks at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]])
+   ),
 }
 
 obj_build_lumberjack = {
@@ -36,10 +37,9 @@ obj_build_lumberjack = {
    title=_"Build a lumberjack’s house",
    number = 1,
    body = objective_text(_"Lumberjack’s House",
-[[• ]] .. _[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]]
-.. paragraphdivider() ..
-[[→ ]] .. _([[Cutting down enough trees for more buildings will take a while. ]] ..
-[[You can speed the game up by using PAGE UP and slow it down again with PAGE DOWN.]])),
+      listitem_bullet(_[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]]) ..
+      listitem_arrow(_[[Cutting down enough trees for more buildings will take a while. You can speed the game up by using PAGE UP and slow it down again with PAGE DOWN.]])
+   ),
 }
 
 obj_build_sawmill_and_lumberjacks = {
@@ -47,7 +47,8 @@ obj_build_sawmill_and_lumberjacks = {
    title=_"Build 2 lumberjack’s houses and a sawmill",
    number = 3,
    body = objective_text(_"Two Lumberjack’s Houses and a Sawmill",
-[[• ]] .. _[[Build two more lumberjack’s houses and a sawmill as soon as there is enough space for them.]]),
+      listitem_bullet(_[[Build two more lumberjack’s houses and a sawmill as soon as there is enough space for them.]])
+   ),
 }
 
 obj_build_forester = {
@@ -55,7 +56,8 @@ obj_build_forester = {
    title=_"Build a forester’s house",
    number = 1,
    body = objective_text(_"Forester’s House",
-[[• ]] .. _[[Build a forester’s house to preserve the wood resources of this island.]]),
+      listitem_bullet(_[[Build a forester’s house to preserve the wood resources of this island.]])
+   ),
 }
 
 obj_build_quarry = {
@@ -63,9 +65,9 @@ obj_build_quarry = {
    title=_"Build a quarry",
    number = 5,
    body = objective_text(_"Quarry",
-[[• ]] .. _[[Build a quarry in the south to cut some stones and marble out of the rocks.]]
-.. paragraphdivider() ..
-[[→ ]] .. _[[These might be used for future buildings.]]),
+      listitem_bullet(_[[Build a quarry in the south to cut some stones and marble out of the rocks.]]) ..
+      listitem_arrow(_[[These might be used for future buildings.]])
+   ),
 }
 
 
