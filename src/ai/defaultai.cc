@@ -2210,8 +2210,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	BuildingObserver* bestbld = nullptr;
 
 	// Only enhance buildings that are allowed (scenario mode)
-	if (player->is_building_type_allowed(*enhancement.current)) {
-		const Building_Descr& bld = *tribe->get_building_descr(*enhancement.current);
+	if (player->is_building_type_allowed(enhancement)) {
+		const Building_Descr& bld = *tribe->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 		// do not build the same building so soon (kind of duplicity check)
@@ -2222,7 +2222,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			if (en_bo.cnt_under_construction_ + en_bo.unoccupied_ <= 0)
 				{
 				// don't upgrade without workers
-				if (productionsite->has_workers(*enhancement.current, game()))
+				if (productionsite->has_workers(enhancement, game()))
 					{
 					// forcing first upgrade
 					if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) == 0
@@ -2238,7 +2238,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 							productionsite->get_position().y,
 							(game().get_gametime() - productionsite_observer.built_time_) / 60000);
 
-						game().send_player_enhance_building(*productionsite, (*enhancement.current));
+						game().send_player_enhance_building(*productionsite, enhancement);
 						return true;
 					}
 				}
@@ -2278,7 +2278,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 			if (prio > maxprio) {
 				maxprio = prio;
-				enbld = (*enhancement.current);
+				enbld = enhancement;
 				bestbld = &en_bo;
 			}
 		}
@@ -2356,57 +2356,55 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	std::set<Building_Index> enhancements = mine->enhancements();
+	Building_Index enhancement = mine->enhancement();
 	int32_t maxprio = 0;
 	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
-	container_iterate_const(std::set<Building_Index>, enhancements, x) {
-		// Only enhance buildings that are allowed (scenario mode)
-		if (player->is_building_type_allowed(*x.current)) {
-			// first exclude possibility there are enhancements in construction or unoccupied_
-			const Building_Descr& bld = *tribe->get_building_descr(*x.current);
-			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+	// Only enhance buildings that are allowed (scenario mode)
+	if (player->is_building_type_allowed(enhancement)) {
+		// first exclude possibility there are enhancements in construction or unoccupied_
+		const Building_Descr& bld = *tribe->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-			if (kMinesUpdateDebug)
-				log(" MINES_UPDATE:   considering upgrade to %15s, count B:%1d(stat:%3d)  U:%1d  "
-				    "C:%1d\n",
-				    en_bo.name,
-				    en_bo.cnt_built_,
-				    en_bo.current_stats_,
-				    en_bo.unoccupied_,
-				    en_bo.cnt_under_construction_);
+		if (kMinesUpdateDebug)
+			log(" MINES_UPDATE:   considering upgrade to %15s, count B:%1d(stat:%3d)  U:%1d  "
+				"C:%1d\n",
+				en_bo.name,
+				en_bo.cnt_built_,
+				en_bo.current_stats_,
+				en_bo.unoccupied_,
+				en_bo.cnt_under_construction_);
 
-			if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ > 0)
-				continue;
-
+		if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ <= 0)
+			{
 			// do not upgrade target building are not working properly (probably do not have food)
-			if (en_bo.cnt_built_ > 0 and en_bo.current_stats_ < 60)
-				continue;
-
-			// do not build the same building so soon (kind of duplicity check)
-			if (gametime - en_bo.construction_decision_time_ < kBuildingMinInterval)
-				continue;
-
-			// Check if mine needs an enhancement to mine more resources
-			uint8_t const until = field->get_starting_res_amount() *
-			                      (100 - productionsite_observer.bo->mines_percent_) / 100;
-
-			if (kMinesUpdateDebug)
-				log(" MINES_UPDATE:    until:%3d ?>, current: %3d\n", until, current);
-
-			if (until >= current) {
-				// add some randomness - just for the case if more than one
-				// enhancement is available (not in any tribe yet)
-				int32_t const prio = time(nullptr) % 3 + 1;
-
-				if (prio > maxprio) {
-					maxprio = prio;
-					enbld = (*x.current);
-					bestbld = &en_bo;
+			if (en_bo.cnt_built_ > 0 and en_bo.current_stats_ >= 60)
+				{
+				// do not build the same building so soon (kind of duplicity check)
+				if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval)
+					{
+					// Check if mine needs an enhancement to mine more resources
+					uint8_t const until = field->get_starting_res_amount() *
+						(100 - productionsite_observer.bo->mines_percent_) / 100;
 
 					if (kMinesUpdateDebug)
-						log(" MINES_UPDATE:    ..is candidate\n");
+						log(" MINES_UPDATE:    until:%3d ?>, current: %3d\n", until, current);
+
+					if (until >= current) {
+						// add some randomness - just for the case if more than one
+						// enhancement is available (not in any tribe yet)
+						int32_t const prio = time(nullptr) % 3 + 1;
+
+						if (prio > maxprio) {
+							maxprio = prio;
+							enbld = enhancement;
+							bestbld = &en_bo;
+
+							if (kMinesUpdateDebug)
+								log(" MINES_UPDATE:    ..is candidate\n");
+						}
+					}
 				}
 			}
 		}

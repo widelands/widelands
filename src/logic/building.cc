@@ -109,10 +109,10 @@ Building_Descr::Building_Descr
 
 		//  Merge the enhancements workarea info into this building's
 		//  workarea info.
-		const Building_Descr & enhancement =
+		const Building_Descr & tmp_enhancement =
 			*tribe().get_building_descr(en_i);
 		container_iterate_const
-			(Workarea_Info, enhancement.m_workarea_info, j)
+			(Workarea_Info, tmp_enhancement.m_workarea_info, j)
 		{
 			std::set<std::string> & r = m_workarea_info[j.current->first];
 			container_iterate_const
@@ -345,7 +345,7 @@ uint32_t Building::get_playercaps() const {
 		if (d.is_buildable() or d.is_enhanced())
 			caps |= PCap_Dismantle;
 	}
-	if (d.enhancements().size())
+	if (d.enhancement() != INVALID_INDEX)
 		caps |= PCap_Enhancable;
 	return caps;
 }
