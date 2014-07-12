@@ -16,9 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
-/**
- * Default AI
- */
 
 #include "ai/defaultai.h"
 
@@ -47,11 +44,13 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 
+// NOCOM(#tiborb): Add a comment in which units these are.
 constexpr int kFieldUpdateInterval = 1000;
 constexpr int kIdleMineUpdateInterval = 22000;
 constexpr int kBusyMineUpdateInterval = 2000;
 // building of the same building can be started after 25s at earliest
 constexpr int kBuildingMinInterval = 25 * 1000;
+// NOCOM(#tiborb): use #define and #ifdefs or even better: remove the debug output and add it on a as needed basis.
 constexpr bool kMilitaryDebug = false;
 constexpr bool kMilDismDebug = false;
 constexpr bool kMilitScoreDebug = false;
@@ -303,6 +302,7 @@ void DefaultAI::late_initialization() {
 		}
 
 		// I just presume cut wood is named "log" in the game
+		// NOCOM(#tiborb): move this safe_ware_index() to the intitalization of the AI to blow up early.
 		if (tribe->safe_ware_index("log") == bo.production_hint_)
 			bo.plants_trees_ = true;
 		else
@@ -334,6 +334,7 @@ void DefaultAI::late_initialization() {
 			bo.prod_build_material_ = bh.prod_build_material();
 
 			// here we identify hunters
+			// NOCOM(#tiborb): move this safe_ware_index() to the intitalization of the AI to blow up early.
 			if (bo.outputs_.size() == 1 and tribe->safe_ware_index("meat") == bo.outputs_.at(0)) {
 				bo.is_hunter_ = true;
 			} else
@@ -562,7 +563,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// counting fields with critters (game)
-		// not doing this allways, this does not change fast
+		// not doing this always, this does not change fast
 		if (game().get_gametime() % 10 == 0) {
 			map.find_bobs(Area<FCoords>(field.coords, 6), &critters_list, FindBobCritter());
 			field.critters_nearby_ = critters_list.size();
@@ -2747,6 +2748,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
  * \returns the recalculated priority
  */
 int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t prio) {
+	// NOCOM(#tiborb): Do not leave comment lines in the code. They are only confusing for the next person reading the code. Remember: code is read at least 10 times as often as written.
 	// Prefer building space in the inner land.
 	// prio /= (1 + (bf.unowned_land_nearby_ / 4));
 

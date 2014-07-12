@@ -20,6 +20,7 @@
 #ifndef WL_AI_AI_HINTS_H
 #define WL_AI_AI_HINTS_H
 
+// NOCOM(#tiborb): do not use SDL_types.h, use stdint.h.
 #include <SDL_types.h>
 #include <boost/noncopyable.hpp>
 

@@ -57,6 +57,7 @@ struct CheckStepRoadAI {
 
 struct FindNodeEnemy {
 	bool accept(const Map&, const FCoords& fc) const {
+		// NOCOM(#tiborb): Put comments before the class.
 		// we are looking for fields we can walk on
 		// and owned by hostile player.
 		return (fc.field->nodecaps() & MOVECAPS_WALK) && fc.field->get_owned_by() != 0 &&

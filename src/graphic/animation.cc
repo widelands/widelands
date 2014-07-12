@@ -292,6 +292,7 @@ void NonPackedAnimation::load_graphics() {
 		//     opengl texture.
 		const Image* pc_image = g_gr->images().get(filename);
 		if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {
+			// NOCOM(#sirver): leave the wexception. Instead fix the crashing animation.
 			//there was throw wexeption, it crashes game. Consider it when commiting.
 			log("ANIMATION ERROR: playercolor mask has wrong size: (%s: %u, %u), should "
 				 "be (%u, %u) like the animation frame\n",
