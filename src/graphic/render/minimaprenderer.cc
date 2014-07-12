@@ -55,24 +55,20 @@ inline uint32_t blend_color
 // Returns the color to be used in the minimap for the given field.
 inline uint32_t calc_minimap_color
 	(const SDL_PixelFormat& format, const Widelands::Editor_Game_Base& egbase,
-	 const Widelands::FCoords& f, MiniMapLayers layers, Widelands::Player_Number owner,
+	 const Widelands::FCoords& f, MiniMapLayer layers, Widelands::Player_Number owner,
 	 bool see_details)
 {
 	uint32_t pixelcolor = 0;
 
-	if (layers & MiniMapLayers::Terrains) {
-		// We or with format.Amask here because the terrain map texture data is
-		// only RGB and not RGBA in SDL render mode. Or'ing with Amask guarantees
-		// that alpha is set to 255 for this color and is fast.
-		pixelcolor =
-			g_gr->
-			get_maptexture_data
-				(egbase.world()
-				 .terrain_descr(f.field->terrain_d()).get_texture())
-			->get_minimap_color(f.field->get_brightness()) | format.Amask;
+	if (layers & MiniMapLayer::Terrain) {
+		const RGBColor color =
+		   g_gr->get_maptexture_data(egbase.world().terrain_descr(f.field->terrain_d()).get_texture())
+		      ->get_minimap_color(f.field->get_brightness());
+
+		pixelcolor = SDL_MapRGBA(&format, color.r, color.g, color.b, 255);
 	}
 
-	if (layers & MiniMapLayers::Owners) {
+	if (layers & MiniMapLayer::Owner) {
 		if (0 < owner) { //  If owned, get the player's color...
 			const RGBColor & player_color = egbase.player(owner).get_playercolor();
 
@@ -91,14 +87,14 @@ inline uint32_t calc_minimap_color
 		// * winterland -> orange
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayers::Roads) and dynamic_cast<Road const *>(immovable)) {
+			if ((layers & MiniMapLayer::Road) and dynamic_cast<Road const *>(immovable)) {
 				pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
 			}
 
 			if
-				(((layers & MiniMapLayers::Flags) and dynamic_cast<Flag const *>(immovable))
+				(((layers & MiniMapLayer::Flag) and dynamic_cast<Flag const *>(immovable))
 				 or
-				 ((layers & MiniMapLayers::Buildings)
+				 ((layers & MiniMapLayer::Building)
 				  and
 				  dynamic_cast<Widelands::Building const *>(immovable)))
 			{
@@ -159,7 +155,7 @@ bool is_minimap_frameborder
 // Does the actual work of drawing the minimap.
 void draw_minimap_int
 	(Surface* surface, const Widelands::Editor_Game_Base& egbase,
-	 const Widelands::Player* player, const Point& viewpoint, MiniMapLayers layers)
+	 const Widelands::Player* player, const Point& viewpoint, MiniMapLayer layers)
 {
 	const Widelands::Map & map = egbase.map();
 
@@ -196,15 +192,15 @@ void draw_minimap_int
 			Uint8 * pix = pixels + y * pitch;
 			Widelands::FCoords f
 				(Widelands::Coords
-					(viewpoint.x, viewpoint.y + (layers & MiniMapLayers::Zoom2 ? y / 2 : y)));
+					(viewpoint.x, viewpoint.y + (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
 			map.normalize_coords(f);
 			f.field = &map[f];
 			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 			for (uint32_t x = 0; x < surface_w; ++x, pix += sizeof(Uint32)) {
-				if (x % 2 || !(layers & MiniMapLayers::Zoom2))
+				if (x % 2 || !(layers & MiniMapLayer::Zoom2))
 					move_r(mapwidth, f, i);
 
-				if ((layers & MiniMapLayers::ViewWindow) &&
+				if ((layers & MiniMapLayer::ViewWindow) &&
 				    is_minimap_frameborder(
 				       f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody)) {
 					*reinterpret_cast<Uint32 *>(pix) = static_cast<Uint32>
@@ -223,15 +219,15 @@ void draw_minimap_int
 			Widelands::FCoords f
 				(Widelands::Coords
 			 		(viewpoint.x, viewpoint.y +
-			 		 (layers & MiniMapLayers::Zoom2 ? y / 2 : y)));
+			 		 (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
 			map.normalize_coords(f);
 			f.field = &map[f];
 			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 			for (uint32_t x = 0; x < surface_w; ++x, pix += sizeof(Uint32)) {
-				if (x % 2 || !(layers & MiniMapLayers::Zoom2))
+				if (x % 2 || !(layers & MiniMapLayer::Zoom2))
 					move_r(mapwidth, f, i);
 
-				if ((layers & MiniMapLayers::ViewWindow) &&
+				if ((layers & MiniMapLayer::ViewWindow) &&
 				    is_minimap_frameborder(
 				       f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody)) {
 					*reinterpret_cast<Uint32 *>(pix) = static_cast<Uint32>
@@ -265,14 +261,14 @@ void draw_minimap_int
 std::unique_ptr<Surface> draw_minimap(const Editor_Game_Base& egbase,
                                       const Player* player,
                                       const Point& viewpoint,
-                                      MiniMapLayers layers) {
+                                      MiniMapLayer layers) {
 	// First create a temporary SDL Surface to draw the minimap.
 	// TODO: Currently the minimap is redrawn every frame. That is not really
 	//       necesary. The created surface could be cached and only redrawn two
 	//       or three times per second
 	const Map& map = egbase.map();
-	const int16_t map_w = (layers & MiniMapLayers::Zoom2) ? map.get_width() * 2 : map.get_width();
-	const int16_t map_h = (layers & MiniMapLayers::Zoom2) ? map.get_height() * 2 : map.get_height();
+	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();
+	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
 
 	Surface* surface = Surface::create(map_w, map_h);
 	assert(surface->format().BytesPerPixel == sizeof(Uint32));
@@ -288,7 +284,7 @@ std::unique_ptr<Surface> draw_minimap(const Editor_Game_Base& egbase,
 }
 
 void write_minimap_image
-	(const Editor_Game_Base& egbase, const Player* player, const Point& gviewpoint, MiniMapLayers layers,
+	(const Editor_Game_Base& egbase, const Player* player, const Point& gviewpoint, MiniMapLayer layers,
 	 ::StreamWrite* const streamwrite)
 {
 	assert(streamwrite != nullptr);

@@ -22,6 +22,7 @@
 #include <SDL.h>
 
 #include "base/log.h"
+#include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/render/minimaprenderer.h"
@@ -42,12 +43,16 @@ int main(int /* argc */, char ** argv)
 		SDL_Init(SDL_INIT_VIDEO);
 
 		g_fs = new LayeredFileSystem();
-		g_fs->AddFileSystem(&FileSystem::Create("/Users/sirver/Desktop/Programming/cpp/widelands/bzr_repo/"));
+		g_fs->AddFileSystem(&FileSystem::Create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
+
+#ifdef HAS_GETENV
+		char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
+		putenv(dummy_video_env);
+#endif
 
 		g_gr = new Graphic();
-		g_gr->initialize(640, 480, false, false);
+		g_gr->initialize(1, 1, false, false);
 
-		// NOCOM(#sirver): what
 		Editor_Game_Base egbase(nullptr);
 		Map* map = new Map();
 		egbase.set_map(map);
@@ -58,7 +63,7 @@ int main(int /* argc */, char ** argv)
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, true);
 
-		std::unique_ptr<Surface> minimap(draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayers::Terrains));
+		std::unique_ptr<Surface> minimap(draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
 
 		FileWrite fw;
 		save_surface_to_png(minimap.get(), &fw);

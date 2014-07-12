@@ -24,6 +24,7 @@
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/image_io.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -54,12 +55,8 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 			throw wexception("Could not find %s.", fname.c_str());
 		}
 
-		SDL_Surface * surf;
 		m_texture_image = fname;
-		FileRead fr;
-		fr.Open(*g_fs, fname);
-
-		surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+		SDL_Surface* surf = load_image_as_sdl_surface(fname, g_fs);
 		if (!surf) {
 			throw wexception("WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
 		}
@@ -71,37 +68,23 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 			                 TEXTURE_HEIGHT);
 		}
 
+		// calculate shades on the first frame
+		if (!m_nrframes) {
+			uint8_t top_left_pixel = static_cast<uint8_t*>(surf->pixels)[0];
+			SDL_Color top_left_pixel_color = surf->format->palette->colors[top_left_pixel];
+			for (int i = -128; i < 128; i++) {
+				const int shade = 128 + i;
+				int32_t r = std::min<int32_t>((top_left_pixel_color.r * shade) >> 7, 255);
+				int32_t g = std::min<int32_t>((top_left_pixel_color.g * shade) >> 7, 255);
+				int32_t b = std::min<int32_t>((top_left_pixel_color.b * shade) >> 7, 255);
+				m_mmap_color[shade] = RGBColor(r, g, b);
+			}
+		}
+
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
 			GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
 			m_glFrames.emplace_back(surface);
-
-			// calculate shades on the first frame
-			if (!m_nrframes) {
-				surface->lock(Surface::Lock_Normal);
-				uint32_t mmap_color_base = surface->get_pixel(0, 0);
-				surface->unlock(Surface::Unlock_NoChange);
-
-				int32_t i, shade, r, g, b, a;
-				for (i = -128; i < 128; i++) {
-					shade = 128 + i;
-
-					a = (mmap_color_base & 0xff000000) >> 24;
-					b = (mmap_color_base & 0x00ff0000) >> 16;
-					g = (mmap_color_base & 0x0000ff00) >> 8;
-					r = (mmap_color_base & 0x000000ff);
-
-					b = (b * shade) >> 7;
-					g = (g * shade) >> 7;
-					r = (r * shade) >> 7;
-
-					if (b > 255) b = 255;
-					if (g > 255) g = 255;
-					if (r > 255) r = 255;
-
-					m_mmap_color[shade] = (a << 24) | (b << 16) | (g << 8) | r;
-				}
-			}
 
 			++m_nrframes;
 			continue;
@@ -167,17 +150,8 @@ Texture::~Texture ()
 /**
  * Return the basic terrain colour to be used in the minimap.
 */
-Uint32 Texture::get_minimap_color(char shade) {
-	log("#sirver shade: %d\n", shade);
-	log("#sirver m_pixels: %x\n", m_pixels);
-	if (not m_pixels)
-		return m_mmap_color[128 + shade];
-
-	uint8_t clr = m_pixels[0]; // just use the top-left pixel
-	log("#sirver clr: %x\n", clr);
-
-	uint32_t table = static_cast<uint8_t>(shade);
-	return static_cast<const Uint32*>(m_colormap->get_colormap())[clr | (table << 8)];
+RGBColor Texture::get_minimap_color(int8_t shade) {
+	return m_mmap_color[128 + shade];
 }
 
 /**

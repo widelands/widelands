@@ -114,7 +114,7 @@ void Game_Preload_Data_Packet::Write
 		return;
 	}
 	if (ipl != nullptr) {
-		const MiniMapLayers flags = MiniMapLayers::Owners | MiniMapLayers::Buildings | MiniMapLayers::Terrains;
+		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		const Point& vp = ipl->get_viewpoint();
 		std::unique_ptr< ::StreamWrite> sw(fs.OpenStreamWrite(MINIMAP_FILENAME));
 		if (sw.get() != nullptr) {

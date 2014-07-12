@@ -21,7 +21,6 @@
 
 #include <SDL.h>
 
-#include "base/log.h" // NOCOM(#sirver): remove agai
 #include "graphic/render/gl_surface_texture.h"
 #include "graphic/render/sdl_helper.h"
 #include "graphic/render/sdl_surface.h"
@@ -34,7 +33,6 @@ bool s_is_diplay_format_defined = false;
 
 SDL_Surface* maybe_convert_to_diplay_format(SDL_Surface* surface) {
 	if (!s_is_diplay_format_defined) {
-		log("#sirver s_is_diplay_format_defined: %u\n", s_is_diplay_format_defined);
 		return surface;
 	}
 	SDL_Surface * converted = SDL_DisplayFormatAlpha(surface);

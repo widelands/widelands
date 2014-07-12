@@ -31,25 +31,26 @@ namespace Widelands {
 	class Editor_Game_Base;
 }
 
-// NOCOM(#sirver): rename everything in here
-enum class MiniMapLayers {
-	Terrains = 1,
-	Owners = 2,
-	Flags = 4,
-	Roads = 8,
-	Buildings = 16,
+// Layers for selecting what do display on the minimap.
+enum class MiniMapLayer {
+	Terrain = 1,
+	Owner = 2,
+	Flag = 4,
+	Road = 8,
+	Building = 16,
 	Zoom2 = 32,
 	ViewWindow = 64,
 };
 
-inline MiniMapLayers operator|(MiniMapLayers left, MiniMapLayers right) {
-	return MiniMapLayers(static_cast<int>(left) | static_cast<int>(right));
+// A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.
+inline MiniMapLayer operator|(MiniMapLayer left, MiniMapLayer right) {
+	return MiniMapLayer(static_cast<int>(left) | static_cast<int>(right));
 }
-inline int operator&(MiniMapLayers left, MiniMapLayers right) {
+inline int operator&(MiniMapLayer left, MiniMapLayer right) {
 	return static_cast<int>(left) & static_cast<int>(right);
 }
-inline MiniMapLayers operator ^ (MiniMapLayers left, MiniMapLayers right) {
-	return MiniMapLayers(static_cast<int>(left) ^ static_cast<int>(right));
+inline MiniMapLayer operator ^ (MiniMapLayer left, MiniMapLayer right) {
+	return MiniMapLayer(static_cast<int>(left) ^ static_cast<int>(right));
 }
 
 /// Render the minimap. If player is not nullptr, it renders from that player's
@@ -57,12 +58,12 @@ inline MiniMapLayers operator ^ (MiniMapLayers left, MiniMapLayers right) {
 /// \param viewpoint: top left corner in map coordinates
 std::unique_ptr<Surface> draw_minimap
 	(const Widelands::Editor_Game_Base& egbase, const Widelands::Player* player,
-	 const Point& viewpoint, MiniMapLayers layers);
+	 const Point& viewpoint, MiniMapLayer layers);
 
 /// Render the minimap to a file. 1 pixel will be used for each fields.
 /// \param viewpoint : The game point of view as returned by interactive_base.get_viewpoint();
 void write_minimap_image
 	(const Widelands::Editor_Game_Base& egbase, Widelands::Player const* player,
-	 const Point& viewpoint, MiniMapLayers layers, StreamWrite* const streamwrite);
+	 const Point& viewpoint, MiniMapLayer layers, StreamWrite* const streamwrite);
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_MINIMAPRENDERER_H

@@ -30,12 +30,12 @@ struct Interactive_Base;
 
 struct MiniMap : public UI::UniqueWindow {
 	struct Registry : public UI::UniqueWindow::Registry {
-		MiniMapLayers flags; /**< Combination of \ref MiniMapLayers flags */
+		MiniMapLayer flags; /**< Combination of \ref MiniMapLayer flags */
 
 		Registry()
-		   : flags(MiniMapLayers::Terrains | MiniMapLayers::Owners |
-		                           MiniMapLayers::Flags | MiniMapLayers::Roads |
-		                           MiniMapLayers::Buildings) {
+		   : flags(MiniMapLayer::Terrain | MiniMapLayer::Owner |
+		                           MiniMapLayer::Flag | MiniMapLayer::Road |
+		                           MiniMapLayer::Building) {
 		}
 	};
 
@@ -48,7 +48,7 @@ struct MiniMap : public UI::UniqueWindow {
 	}
 
 private:
-	void toggle(MiniMapLayers);
+	void toggle(MiniMapLayer);
 	void update_button_permpressed();
 	void resize();
 
@@ -63,7 +63,7 @@ private:
 	 */
 	struct View : public UI::Panel {
 		View
-			(UI::Panel & parent, MiniMapLayers * flags,
+			(UI::Panel & parent, MiniMapLayer * flags,
 			 int32_t x, int32_t y, uint32_t w, uint32_t h,
 			 Interactive_Base &);
 
@@ -82,7 +82,7 @@ private:
 		int32_t                m_viewx, m_viewy;
 		const Image* m_pic_map_spot;
 	public:
-		MiniMapLayers * m_flags;
+		MiniMapLayer * m_flags;
 	};
 
 	uint32_t number_of_buttons_per_row() const;
