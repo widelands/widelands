@@ -65,7 +65,7 @@ struct Texture {
 private:
 	std::unique_ptr<Colormap> m_colormap;
 	uint8_t   * m_pixels;
-	RGBColor    m_mmap_color[256];
+	RGBColor    m_minimap_colors[256];
 	uint8_t   * m_curframe;
 	int32_t     m_frame_num;
 	std::string m_texture_image;

@@ -77,7 +77,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 				int32_t r = std::min<int32_t>((top_left_pixel_color.r * shade) >> 7, 255);
 				int32_t g = std::min<int32_t>((top_left_pixel_color.g * shade) >> 7, 255);
 				int32_t b = std::min<int32_t>((top_left_pixel_color.b * shade) >> 7, 255);
-				m_mmap_color[shade] = RGBColor(r, g, b);
+				m_minimap_colors[shade] = RGBColor(r, g, b);
 			}
 		}
 
@@ -151,7 +151,7 @@ Texture::~Texture ()
  * Return the basic terrain colour to be used in the minimap.
 */
 RGBColor Texture::get_minimap_color(int8_t shade) {
-	return m_mmap_color[128 + shade];
+	return m_minimap_colors[128 + shade];
 }
 
 /**
