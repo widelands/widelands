@@ -1375,6 +1375,9 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 // NOCOM(#gunchleoc): should also push descriptions.
 // NOCOM(#gunchleoc): the documentation is not correct. this will push {miner,
 // miner, miner} for an atlantean mine.
+// NOCOM(#sirver): so, how's that not an "array with pairs of..."?
+// Access in Lua is:
+// for i, worker in ipairs(building_description.working_positions) do
 int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	const ProductionSite_Descr * descr = get();
