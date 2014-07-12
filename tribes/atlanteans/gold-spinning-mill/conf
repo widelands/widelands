@@ -30,9 +30,9 @@ animate=working 25000
 produce=goldyarn
 
 [idle]
-pics=goldweaver_i_??.png  # ???
+pics=gold-spinning-mill_i_??.png  # ???
 hotspot=33 64
 
 [working]
-pics=goldweaver_i_??.png  # ???
+pics=gold-spinning-mill_i_??.png  # ???
 hotspot=33 64

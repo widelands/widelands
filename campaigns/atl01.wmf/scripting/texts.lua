@@ -86,10 +86,10 @@ obj_spidercloth_production = {
 [[Spidercloth is needed for the construction of some buildings and clothing, ]] ..
 [[while tabards are the uniforms of soldiers. ]] ..
 [[The weaving mill needs gold yarn and spideryarn as raw material. ]] ..
-[[Spideryarn is produced by the spider farm, while gold yarn is produced by the gold weaver out of gold.]]) .. "<br>" ..
+[[Spideryarn is produced by the spider farm, while gold yarn is produced by the gold spinning works out of gold.]]) .. "<br>" ..
 [[• ]] .. _[[Build a weaving mill]] .. "<br>" ..
 [[• ]] .. _[[Build a spider farm]] .. "<br>" ..
-[[• ]] .. _[[Build a goldweaver]]
+[[• ]] .. _[[Build a gold spinning mill]]
  )
 }
 
@@ -337,7 +337,7 @@ spidercloth_messages = {
     body = jundlina(_ "Jundlina Replies", _(
 [[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand your urgency. ]] ..
 [[Your suggestion sounds fair to me, I will build your weaving mill and spider farm. ]] ..
-[[I will also build a goldweaver so that the golden tabards you make will not be golden by name alone.]]
+[[I will also build a gold spinning mill so that the golden tabards you make will not be golden by name alone.]]
     )) ..  new_objectives(obj_spidercloth_production)
  }
 }
@@ -347,7 +347,7 @@ spidercloth_story_ended_messages = {
       title = _ "Opol Seeks Out Jundlina",
       body = opol(_(
 [[May Satul warm you, Jundlina! ]] ..
-[[The weaving mill, goldweaver and spider farm buildings are complete ]] ..
+[[The weaving mill, gold spinning mill and spider farm buildings are complete ]] ..
 [[and are starting their work at this very moment. The weavers’ guild is very grateful for your support ]] ..
 [[and we will stand by our word and deliver the first tabard very soon.]]
       ))
