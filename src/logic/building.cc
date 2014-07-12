@@ -96,33 +96,36 @@ Building_Descr::Building_Descr
 	// Parse build options
 	m_buildable = global_s.get_bool("buildable", true);
 	m_destructible = global_s.get_bool("destructible", true);
-
 	m_enhancement = INVALID_INDEX;
-	std::string const target_name = global_s.get_next_val("enhancement")->get_string();
-	if (target_name == name())
-		throw wexception("enhancement to same type");
-	if (target_name == "constructionsite")
-		throw wexception("enhancement to special type constructionsite");
-	Building_Index const en_i = tribe().building_index(target_name);
-	if (en_i != INVALID_INDEX) {
-		m_enhancement = en_i;
 
-		//  Merge the enhancements workarea info into this building's
-		//  workarea info.
-		const Building_Descr & tmp_enhancement =
-			*tribe().get_building_descr(en_i);
-		container_iterate_const
-			(Workarea_Info, tmp_enhancement.m_workarea_info, j)
-		{
-			std::set<std::string> & r = m_workarea_info[j.current->first];
+	if(Section::Value const * const v = global_s.get_next_val("enhancement"))
+	{
+		std::string const target_name = v->get_string();
+		if (target_name == name())
+			throw wexception("enhancement to same type");
+		if (target_name == "constructionsite")
+			throw wexception("enhancement to special type constructionsite");
+		Building_Index const en_i = tribe().building_index(target_name);
+		if (en_i != INVALID_INDEX) {
+			m_enhancement = en_i;
+
+			//  Merge the enhancements workarea info into this building's
+			//  workarea info.
+			const Building_Descr & tmp_enhancement =
+				*tribe().get_building_descr(en_i);
 			container_iterate_const
-				(std::set<std::string>, j.current->second, i)
+				(Workarea_Info, tmp_enhancement.m_workarea_info, j)
+			{
+				std::set<std::string> & r = m_workarea_info[j.current->first];
+				container_iterate_const
+					(std::set<std::string>, j.current->second, i)
 					r.insert(*i.current);
-		}
-	} else
-		throw wexception
-			("\"%s\" has not been defined as a building type (wrong declaration order?)",
-			target_name.c_str());
+			}
+		} else
+			throw wexception
+				("\"%s\" has not been defined as a building type (wrong declaration order?)",
+				target_name.c_str());
+	}
 
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
 	m_global = directory.find("global/") < directory.size();
