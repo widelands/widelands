@@ -1269,7 +1269,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						// but I do not know how to identify such buildings
 						if (bo.cnt_built_ == 1
 						    and game().get_gametime() > 60 * 60 * 1000
-						    and !bo.desc->enhancements().empty()
+							and bo.desc->enhancement() != INVALID_INDEX
 						    and !mines_.empty()) {
 							prio = max_preciousness + bulgarian_constant;
 						}
@@ -2204,60 +2204,60 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
-	std::set<Building_Index> enhancements = productionsite->enhancements();
+	Building_Index enhancement = productionsite->enhancement();
 	int32_t maxprio = 0;
 	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
-	container_iterate_const(std::set<Building_Index>, enhancements, x) {
-		// Only enhance buildings that are allowed (scenario mode)
-		if (player->is_building_type_allowed(*x.current)) {
-			const Building_Descr& bld = *tribe->get_building_descr(*x.current);
-			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-			// do not build the same building so soon (kind of duplicity check)
-			if (gametime - en_bo.construction_decision_time_ < kBuildingMinInterval)
-				continue;
+	// Only enhance buildings that are allowed (scenario mode)
+	if (player->is_building_type_allowed(*enhancement.current)) {
+		const Building_Descr& bld = *tribe->get_building_descr(*enhancement.current);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
+		// do not build the same building so soon (kind of duplicity check)
+		if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval)
+			{
 			// Don't enhance this building, if there is already one of same type
 			// under construction or unoccupied_
-			if (en_bo.cnt_under_construction_ + en_bo.unoccupied_ > 0)
-				continue;
+			if (en_bo.cnt_under_construction_ + en_bo.unoccupied_ <= 0)
+				{
+				// don't upgrade without workers
+				if (productionsite->has_workers(*enhancement.current, game()))
+					{
+					// forcing first upgrade
+					if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) == 0
+						and (productionsite_observer.bo->cnt_built_ -
+						productionsite_observer.bo->unoccupied_) >= 1
+						and (game().get_gametime() - productionsite_observer.built_time_) > 30 * 60 * 1000
+						and !mines_.empty()) {
 
-			// don't upgrade without workers
-			if (!productionsite->has_workers(*x.current, game()))
-				continue;
+						if (kUpgradeDebug)
+							log(" UPGRADE: upgrading (forcing as first) %12s at %3d x %3d: age %d min.\n",
+							productionsite_observer.bo->name,
+							productionsite->get_position().x,
+							productionsite->get_position().y,
+							(game().get_gametime() - productionsite_observer.built_time_) / 60000);
 
-			// forcing first upgrade
-			if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) == 0
-			    and (productionsite_observer.bo->cnt_built_ -
-			          productionsite_observer.bo->unoccupied_) >= 1
-			    and (game().get_gametime() - productionsite_observer.built_time_) > 30 * 60 * 1000
-			    and !mines_.empty()) {
-				if (kUpgradeDebug)
-					log(" UPGRADE: upgrading (forcing as first) %12s at %3d x %3d: age %d min.\n",
-					    productionsite_observer.bo->name,
-					    productionsite->get_position().x,
-					    productionsite->get_position().y,
-					    (game().get_gametime() - productionsite_observer.built_time_) / 60000);
-
-				game().send_player_enhance_building(*productionsite, (*x.current));
-				return true;
+						game().send_player_enhance_building(*productionsite, (*enhancement.current));
+						return true;
+					}
+				}
 			}
+		}
 
-			// now, let consider normal upgrade
+		// now, let consider normal upgrade
 
-			if (kUpgradeDebug)
-				log(" UPGRADE: %1d: working enhanced buildings (%15s): %1d, statitistics: %2d\n",
-				    player_number(),
-				    en_bo.name,
-				    en_bo.cnt_built_ - en_bo.unoccupied_,
-				    en_bo.current_stats_);
+		if (kUpgradeDebug)
+			log(" UPGRADE: %1d: working enhanced buildings (%15s): %1d, statitistics: %2d\n",
+				player_number(),
+				en_bo.name,
+				en_bo.cnt_built_ - en_bo.unoccupied_,
+				en_bo.current_stats_);
 
-			// do not upgrade if candidate production % is too low
-			if ((en_bo.cnt_built_ - en_bo.unoccupied_) ==
-			    0 or(en_bo.cnt_under_construction_ + en_bo.unoccupied_) > 0 or en_bo.current_stats_ <
-			       50)
-				continue;
+		// do not upgrade if candidate production % is too low
+		if ((en_bo.cnt_built_ - en_bo.unoccupied_) !=
+			0 or(en_bo.cnt_under_construction_ + en_bo.unoccupied_) <= 0 or en_bo.current_stats_ >= 50)
+			{
 
 			int32_t prio = 0;
 
@@ -2278,7 +2278,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 			if (prio > maxprio) {
 				maxprio = prio;
-				enbld = (*x.current);
+				enbld = (*enhancement.current);
 				bestbld = &en_bo;
 			}
 		}

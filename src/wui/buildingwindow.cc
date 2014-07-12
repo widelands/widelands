@@ -222,13 +222,12 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
-			const std::set<Widelands::Building_Index> & enhancements =
-				m_building.enhancements();
+			const Widelands::Building_Index & enhancement =
+				m_building.enhancement();
 			const Widelands::Tribe_Descr & tribe  = owner.tribe();
-			container_iterate_const(std::set<Widelands::Building_Index>, enhancements, i)
-				if (owner.is_building_type_allowed(*i.current)) {
+			if (owner.is_building_type_allowed(enhancement)) {
 					const Widelands::Building_Descr & building_descr =
-						*tribe.get_building_descr(*i.current);
+						*tribe.get_building_descr(enhancement);
 					char buffer[128];
 					snprintf
 						(buffer, sizeof(buffer),
@@ -241,11 +240,9 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
 					//  button id = building id
-					enhancebtn->sigclicked.connect
-						(boost::bind
-							(&Building_Window::act_enhance,
-							 boost::ref(*this),
-							 boost::ref(*i.current)));
+					enhancebtn->sigclicked.connect([this, &enhancement] {
+					   this->act_enhance(enhancement);
+					});
 					capsbuttons->add
 						(enhancebtn,
 						 UI::Box::AlignCenter);

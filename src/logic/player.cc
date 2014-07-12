@@ -133,7 +133,7 @@ void find_former_buildings
 			 ++i)
 		{
 			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
-			if (ob->enhancements().count(oldest_idx)) {
+			if (ob->enhancement() == oldest_idx) {
 				former_buildings->insert(former_buildings->begin(), i);
 				break;
 			}
@@ -721,7 +721,7 @@ void Player::_enhance_or_dismantle
 {
 	if (&building->owner() ==
 	    this and(index_of_new_building == INVALID_INDEX ||
-	             building->descr().enhancements().count(index_of_new_building))) {
+			building->descr().enhancement() == index_of_new_building)) {
 		Building::FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 

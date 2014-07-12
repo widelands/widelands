@@ -58,7 +58,6 @@ class Building;
  * Common to all buildings!
  */
 struct Building_Descr : public Map_Object_Descr {
-	typedef std::set<Building_Index> Enhancements;
 	typedef std::vector<Building_Index> FormerBuildings;
 
 	Building_Descr
@@ -96,11 +95,7 @@ struct Building_Descr : public Map_Object_Descr {
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
-	const Enhancements & enhancements() const {return m_enhancements;}
-	void add_enhancement(const Building_Index & i) {
-		assert(not m_enhancements.count(i));
-		m_enhancements.insert(i);
-	}
+	const Building_Index & enhancement() const {return m_enhancement;}
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -147,7 +142,7 @@ private:
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;
-	Enhancements  m_enhancements;
+	Building_Index  m_enhancement;
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 	bool          m_global;            // whether this is a "global" building
@@ -233,15 +228,15 @@ public:
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
-	const std::set<Building_Index> & enhancements() const {
-		return descr().enhancements();
+	const Building_Index & enhancement() const {
+		return descr().enhancement();
 	}
 
 	/**
 	 * The former buildings vector keeps track of all former buildings
 	 * that have been enhanced up to the current one. The current building
 	 * index will be in the last position. For construction sites, it is
-	 * empty exceptenhancements. For a dismantle site, the last item will
+	 * empty except enhancements. For a dismantle site, the last item will
 	 * be the one being dismantled.
 	 */
 	const FormerBuildings get_former_buildings() {
