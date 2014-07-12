@@ -1330,6 +1330,7 @@ const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Pro
 		(RO) An array with pairs of int, ware_descr.name describing the input of the productionsite
 */
 // NOCOM(#gunchleoc): Why is this not pushing waredecsriptions direcly? more flexible.
+// NOCOM(#sirver): And how do I do that? I don't see a lua_pushobject in lua.h
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	const ProductionSite_Descr * descr = get();
