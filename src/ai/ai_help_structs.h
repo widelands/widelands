@@ -55,11 +55,10 @@ struct CheckStepRoadAI {
 	bool open_end_;
 };
 
+// We are looking for fields we can walk on
+// and owned by hostile player.
 struct FindNodeEnemy {
 	bool accept(const Map&, const FCoords& fc) const {
-		// NOCOM(#tiborb): Put comments before the class.
-		// we are looking for fields we can walk on
-		// and owned by hostile player.
 		return (fc.field->nodecaps() & MOVECAPS_WALK) && fc.field->get_owned_by() != 0 &&
 		       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 	}
@@ -71,10 +70,12 @@ struct FindNodeEnemy {
 	}
 };
 
+// We are looking for buildings owned by hostile player
+// (sometimes there is a enemy's teritorry without buildings, and
+// this confuses the AI)
+
 struct FindNodeEnemiesBuilding {
 	bool accept(const Map&, const FCoords& fc) const {
-		// we are looking for fields we can walk on
-		// and owned by hostile player.
 		return (fc.field->get_immovable()) && fc.field->get_owned_by() != 0 &&
 		       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 	}
@@ -86,11 +87,11 @@ struct FindNodeEnemiesBuilding {
 	}
 };
 
+// When looking for unowned terrain to acquire, we are actually
+// only interested in fields we can walk on.
+// Fields should either be completely unowned or owned by an opposing player_
 struct FindNodeUnowned {
 	bool accept(const Map&, const FCoords& fc) const {
-		// when looking for unowned terrain to acquire, we are actually
-		// only interested in fields we can walk on.
-		// Fields should either be completely unowned or owned by an opposing player_
 		return (fc.field->nodecaps() & MOVECAPS_WALK) &&
 		       ((fc.field->get_owned_by() == 0) ||
 		        player_->is_hostile(*game.get_player(fc.field->get_owned_by()))) &&
@@ -105,11 +106,12 @@ struct FindNodeUnowned {
 	}
 };
 
+// When looking for unowned terrain to acquire, we must
+// pay speciall attention to fields where mines can be built.
+// Fields should be completely unowned
 struct FindNodeUnownedMineable {
 	bool accept(const Map&, const FCoords& fc) const {
-		// when looking for unowned terrain to acquire, we are actually
-		// only interested in fields where mines can be built.
-		// Fields should be completely unowned
+
 		return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == 0);
 	}
 
@@ -120,6 +122,7 @@ struct FindNodeUnownedMineable {
 	}
 };
 
+// Fishers and fishbreeders must be built near water
 struct FindNodeWater {
 	FindNodeWater(const World& world) : world_(world) {
 	}

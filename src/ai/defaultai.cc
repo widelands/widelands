@@ -44,33 +44,12 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 
-// NOCOM(#tiborb): Add a comment in which units these are.
+// following is in miliseconds (widelands counts time in ms)
 constexpr int kFieldUpdateInterval = 1000;
 constexpr int kIdleMineUpdateInterval = 22000;
 constexpr int kBusyMineUpdateInterval = 2000;
 // building of the same building can be started after 25s at earliest
 constexpr int kBuildingMinInterval = 25 * 1000;
-// NOCOM(#tiborb): use #define and #ifdefs or even better: remove the debug output and add it on a as needed basis.
-constexpr bool kMilitaryDebug = false;
-constexpr bool kMilDismDebug = false;
-constexpr bool kMilitScoreDebug = false;
-constexpr bool kQuarryDismDebug = false;
-constexpr bool kProductionDebug = false;
-constexpr bool kHintDebug = false;
-constexpr bool kWinnerDebug = false;
-constexpr bool kNewBuildingDebug = false;
-constexpr bool kStandbyDebug = false;
-constexpr bool kMinesDebug = false;
-constexpr bool kUpgradeDebug = false;
-constexpr bool kStockDebug = false;
-constexpr bool kMinesUpdateDebug = false;
-constexpr bool kWoodDebug = false;
-constexpr bool kSpaceDebug = false;
-constexpr bool kStatDebug = false;
-constexpr bool kIdleDismantle = true;
-constexpr bool kWellDebug = false;
-constexpr bool kHuntFishDebug = false;
-constexpr bool kAttackDebug = false;
 constexpr int kBaseInfrastructureTime = 20 * 60 * 1000;
 // buildings marked as is_food_basic will be forced after 15 minutes, even though their outputs are
 // not needed yet
@@ -297,19 +276,13 @@ void DefaultAI::late_initialization() {
 		if (char const* const s = bh.get_renews_map_resource()) {
 			bo.production_hint_ = tribe->safe_ware_index(s);
 
-			if (kHintDebug)
-				log(" TDEBUG: %-20s get production hint: %d\n", bo.name, bo.production_hint_);
 		}
 
 		// I just presume cut wood is named "log" in the game
-		// NOCOM(#tiborb): move this safe_ware_index() to the intitalization of the AI to blow up early.
 		if (tribe->safe_ware_index("log") == bo.production_hint_)
 			bo.plants_trees_ = true;
 		else
 			bo.plants_trees_ = false;
-
-		if (kHintDebug)
-			log(" building %-15s: plants trees: %s\n", bo.name, bo.plants_trees_ ? "Y" : "N");
 
 		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSite_Descr)) {
@@ -334,7 +307,6 @@ void DefaultAI::late_initialization() {
 			bo.prod_build_material_ = bh.prod_build_material();
 
 			// here we identify hunters
-			// NOCOM(#tiborb): move this safe_ware_index() to the intitalization of the AI to blow up early.
 			if (bo.outputs_.size() == 1 and tribe->safe_ware_index("meat") == bo.outputs_.at(0)) {
 				bo.is_hunter_ = true;
 			} else
@@ -635,10 +607,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	}
 
 	// folowing is done allways (regardless of military or not)
-
-	if (kMilitScoreDebug)
-		log(" FIELD SCORE: central building: %3dx%3d\n", field.coords.x, field.coords.y);
-
 	field.military_stationed_ = 0;
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
@@ -667,16 +635,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					const int32_t v = radius - dist;
 
 					if (v > 0) {
-						if (kMilitScoreDebug)
-							log(" FIELD SCORE:  testing near military construction site at %3dx%3d, "
-							    "presumed capacity: %d, loneliness:%4f (%2d:%2d)\n",
-							    immovables.at(i).coords.x,
-							    immovables.at(i).coords.y,
-							    2,
-							    static_cast<double>(dist) / radius,
-							    dist,
-							    radius);
-
 						field.military_capacity_ += 2;
 						field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
 						field.military_in_constr_nearby_ += 1;
@@ -690,16 +648,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				const int32_t v = radius - dist;
 
 				if (v > 0 and dist > 0) {
-					if (kMilitScoreDebug)
-						log(" FIELD SCORE:  testing near military building at %3dx%3d, capacity: %d, "
-						    "loneliness:%3f (%2d:%2d), stationed: %1d\n",
-						    immovables.at(i).coords.x,
-						    immovables.at(i).coords.y,
-						    militarysite->maxSoldierCapacity(),
-						    static_cast<double>(dist) / radius,
-						    dist,
-						    radius,
-						    militarysite->stationedSoldiers().size());
 
 					field.military_capacity_ += militarysite->maxSoldierCapacity();
 					field.military_presence_ += militarysite->stationedSoldiers().size();
@@ -714,14 +662,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	if (kMilitScoreDebug)
-		log(" FIELD SCORE:  results: capacity: %d, presence: %d, loneliness: %4d, stationed: %1d\n",
-		    field.military_capacity_,
-		    field.military_presence_,
-		    field.military_loneliness_,
-		    field.military_stationed_);
-
-	//}
 }
 
 /// Updates one mineable field
@@ -777,14 +717,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 		// Add statistics value
 		productionsites.front().bo->current_stats_ +=
 		   productionsites.front().site->get_crude_statistics();
-		if (kStatDebug and abs(productionsites.front().site->get_crude_statistics() -
-		                       productionsites.front().site->get_statistics_percent()) > 50)
-			log(" STAT DEBUG: %15s (%3dx%3d): crude statistic: %3d vs official statistics: %3d\n",
-			    productionsites.front().site->name().c_str(),
-			    productionsites.front().site->get_position().x,
-			    productionsites.front().site->get_position().y,
-			    productionsites.front().site->get_crude_statistics(),
-			    productionsites.front().site->get_statistics_percent());
+
 		// Check whether this building is completely occupied
 		productionsites.front().bo->unoccupied_ |= !productionsites.front().site->can_start_working();
 
@@ -867,13 +800,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		new_buildings_stop_ = true;
 	}
 
-	if (kNewBuildingDebug)
-		log(" TDEBUG new buildings stop: %s; milit: %3d vs prod: %3d buildings, spots: %4d\n",
-		    new_buildings_stop_ ? "Y" : "N",
-		    militarysites.size(),
-		    productionsites.size(),
-		    spots);
-
 	// sometimes there is to many military buildings in construction, so we must
 	// prevent initialization of further buildings start
 	bool new_military_buildings_stop = false;
@@ -890,23 +816,11 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	if (unstationed_milit_buildings_ + military_under_constr_ / 3 > treshold) {
 		new_military_buildings_stop = true;
 
-		if (kMilitaryDebug)
-			log(" TDEBUG new military buildings stop ON, %d %d \n",
-			    unstationed_milit_buildings_,
-			    military_under_constr_);
-	} else if (kMilitaryDebug)
-		log(" TDEBUG new military buildings stop OFF, %d %d, bf: %2d\n",
-		    unstationed_milit_buildings_,
-		    military_under_constr_,
-		    buildable_fields.size());
+	}
 
 	if (unstationed_milit_buildings_ + military_under_constr_ / 3 > 2 * treshold) {
 		near_enemy_b_buildings_stop = true;
 
-		if (kMilitaryDebug)
-			log(" TDEBUG new military near-enemy buildings stop ON, %d %d \n",
-			    unstationed_milit_buildings_,
-			    military_under_constr_);
 	}
 
 	// here we deal with situation when for some time no new military building was built
@@ -915,9 +829,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		military_last_build_ = game().get_gametime();
 
 	if (military_last_build_ + 1 * 60 * 1000 < game().get_gametime()) {
-		if (kMilitaryDebug)
-			log(" TDEBUG: Boosting military building\n");
-
 		military_boost = 200;
 	}
 
@@ -1055,25 +966,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					}
 					if (bo.stocklevel_ > 50)
 						continue;
-					if (kWellDebug)
-						log(" kWellDebug: %-15s has %2d resources, stocklevel: %3d\n",
-						    bo.name,
-						    bf->ground_water_,
-						    bo.stocklevel_);
 					prio = bf->ground_water_ - 2;
 					prio = recalc_with_border_range(*bf, prio);
 
 				} else if (bo.need_trees_) {  // LUMBERJACS
-
-					if (kWoodDebug)
-						log(" TDEBUG: %1d: buildings count:%2d-%2d-%2d, trees nearby: %3d, "
-						    "build.stop: %s\n",
-						    player_number(),
-						    bo.cnt_built_,
-						    bo.cnt_under_construction_,
-						    bo.unoccupied_,
-						    bf->trees_nearby_,
-						    (new_buildings_stop_) ? "Y" : "N");
 
 					if (bo.cnt_built_ + bo.cnt_under_construction_ + bo.unoccupied_ <= 2)
 						prio = bulgarian_constant + 200 + bf->trees_nearby_;
@@ -1083,11 +979,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						   new_buildings_stop_ * 15;  //+ bf->producers_nearby_.at(bo.outputs_.at(0))*5;
 					}
 
-					if (kWoodDebug and prio > 0)
-						log(" TDEBUG: %1d: suggesting woodcutter with prio: %2d, total: %2d\n",
-						    player_number(),
-						    prio,
-						    bo.cnt_built_ + bo.cnt_under_construction_ + bo.unoccupied_);
 				} else if (bo.need_stones_) {
 
 					// quaries are generally to be built everywhere where stones are
@@ -1160,18 +1051,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						else if (bo.total_count() < bo.cnt_target_)
 							prio += 30 + bf->producers_nearby_.at(bo.production_hint_) * 5;
 
-						if (kWoodDebug)
-							log(" RANGERS BUILT debug: goal: %2d, existing: %2d, cutters nearby: %2d, "
-							    "trees around: %2d, stocklevel: %2d\n",
-							    bo.cnt_target_,
-							    bo.total_count(),
-							    bf->producers_nearby_.at(bo.production_hint_),
-							    bf->trees_nearby_,
-							    bo.stocklevel_);
-
-						if (kWoodDebug)
-							log(" RANGERS BUILT debug: score: %2d \n", prio);
-
 					} else if (gametime > kBaseInfrastructureTime and not
 					                         new_buildings_stop_) {  // gamekeepers or so
 						if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
@@ -1197,19 +1076,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						} else
 							continue;
 					}
-
-					if (kHintDebug or(kWoodDebug and bo.plants_trees_))
-						log(" TDEBUG: %1d: suggesting new %16s at %3dx%3d, current count: %2d, goal: "
-						    "%2d, stocklevel_:%3d, new build. stop: %s, prio: %d\n",
-						    player_number(),
-						    bo.name,
-						    bf->coords.x,
-						    bf->coords.y,
-						    bo.total_count(),
-						    bo.cnt_target_,
-						    bo.stocklevel_,
-						    new_buildings_stop_ ? "Y" : "N",
-						    prio);
 
 					if (prio <= 0)
 						continue;
@@ -1243,7 +1109,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					else if (bo.is_food_basic_ and game().get_gametime() >
 					            kPrimaryFoodStartTime and bo.total_count() ==
 					         0) {
-						// log (" %1d: Suggesting basic_food %12s\n",pn,bo.name);
 						prio = 40 + max_preciousness;
 					} else if (game().get_gametime() <
 					           kBaseInfrastructureTime or
@@ -1266,11 +1131,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 							bo.stocklevel_ = get_stocklevel(bo);
 							bo.stocklevel_time = game().get_gametime();
 						}
-						if (kSpaceDebug and bo.space_consumer_)
-							log(" TDEBUG: %1d: considering %-15s, stock: %3d\n",
-							    player_number(),
-							    bo.name,
-							    bo.stocklevel_);
 
 						if (bo.stocklevel_ < 50) {
 							prio = max_preciousness + bulgarian_constant;
@@ -1293,31 +1153,13 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 							// fisher
 							if (bo.need_water_) {
 								prio += bf->fish_nearby_ - 4;
-								if (kHuntFishDebug)
-									log(" Proposing %12s, fishes around: %2d\n", bo.name, bf->fish_nearby_);
 							}
 
 							// hunters
 							if (bo.is_hunter_) {
 								prio += (bf->critters_nearby_ * 2) - 8;
-								if (kHuntFishDebug)
-									log(" Proposing %12s, critters*2-8 around: %2d\n",
-									    bo.name,
-									    bf->critters_nearby_);
 							}
 
-							if (kProductionDebug or(kSpaceDebug and bo.space_consumer_))
-								log(" TDEBUG: %1d: proposing %-15s , stocklevel: %3d(<50), stat: %3d, "
-								    "count: %2d/T:%2d, setting priority: %2d, on %3d %3d\n",
-								    player_number(),
-								    bo.name,
-								    bo.stocklevel_,
-								    bo.current_stats_,
-								    bo.total_count(),
-								    bo.cnt_target_,
-								    prio,
-								    bf->coords.x,
-								    bf->coords.y);
 						}
 					} else if (!bo.inputs_.empty()) {
 						// to have two buildings from everything (intended for upgradeable buildings)
@@ -1332,27 +1174,9 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 							if (bo.cnt_built_ > 0 and bo.current_stats_ > 80) {
 								prio = max_preciousness + bulgarian_constant + 30;
 
-								if (kProductionDebug)
-									log(" TDEBUG: %2d/%-15s with inputs_: stats: %3d>90, setting "
-									    "priority: %2d, on %3d %3d\n",
-									    bo.id,
-									    bo.name,
-									    bo.current_stats_,
-									    prio,
-									    bf->coords.x,
-									    bf->coords.y);
 							} else if (bo.cnt_built_ > 0 and bo.current_stats_ > 55) {
 								prio = max_preciousness + bulgarian_constant;
 
-								if (kProductionDebug)
-									log(" TDEBUG: %2d/%-15s with inputs_: stats: %3d>60, setting "
-									    "priority: %2d, on %3d %3d\n",
-									    bo.id,
-									    bo.name,
-									    bo.current_stats_,
-									    prio,
-									    bf->coords.x,
-									    bf->coords.y);
 							}
 						}
 					}
@@ -1374,9 +1198,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				}
 			}  // production sites done
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
-
-				if (military_boost > 1 and kMilitaryDebug)
-					log(" TDEBUG: boosting: unowned land %d \n", bf->unowned_land_nearby_);
 
 				if (new_military_buildings_stop and not bf->enemy_nearby_)
 					continue;
@@ -1424,40 +1245,13 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				prio = (bf->unowned_land_nearby_ - 4 + mines_spots_score + bf->stones_nearby_ / 2 +
 				        bf->military_loneliness_ / 5 - 100 + military_boost);  // * (1 + type);
 
-				if (kMilitaryDebug)
-					log(" NEW MILITARY: %3dx%3d: unowned: %3d(%3d), mines_: %3d, lonel.: %4d (%4d), "
-					    "stones: %2d, boost: %3d,result: %3d, enemy:% 2d, cur stat: %2d/%2d/%2d, "
-					    "stops:%s %s\n",
-					    bf->coords.x,
-					    bf->coords.y,
-					    bf->unowned_land_nearby_ - 4,
-					    mines_spots_score,
-					    bf->unowned_mines_pots_nearby_,
-					    bf->military_loneliness_ / 5 - 100,
-					    bf->military_loneliness_,
-					    bf->stones_nearby_ / 2,
-					    military_boost,
-					    prio,
-					    bf->enemy_nearby_,
-					    bo.cnt_built_,
-					    unstationed_milit_buildings_,
-					    bo.cnt_under_construction_,
-					    new_military_buildings_stop ? "Y" : "N",
-					    near_enemy_b_buildings_stop ? "Y" : "N");
-
 				if (bo.desc->get_size() < maxsize)
 					prio = prio - 5;  // penalty
 
 				if (bf->enemy_nearby_ and bf->military_capacity_ < 12) {
-					if (kMilitaryDebug)
-						log(" NEW MILITARY: Military capacity: %2d, boosting priority by 100d\n",
-						    bf->military_capacity_);
-
 					prio += 100;
 				}
 
-				if (kMilitaryDebug and prio > 0)
-					log(" NEW MILITARY:  candidate's final priority: %d \n", prio);
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 
 				// exclude spots on border
@@ -1548,26 +1342,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					bo.stocklevel_time = game().get_gametime();
 				}
 
-				if (kMinesDebug)
-					log(" TDEBUG: %1d considering %12s/%1d: stat: %3d(<20), stocklevel_: %2d, count %2d "
-					    "/ %2d / %2d\n",
-					    player_number(),
-					    bo.name,
-					    bo.mines_,
-					    bo.current_stats_,
-					    bo.stocklevel_,
-					    bo.total_count(),
-					    bo.unoccupied_,
-					    bo.cnt_under_construction_);
-
 				// Only try to build mines_ that produce needed wares.
 				if (((bo.cnt_built_ - bo.unoccupied_) > 0 and bo.current_stats_ < 20)or bo.stocklevel_ >
 				    40 + static_cast<uint32_t>(bo.mines_marble_) * 30) {
-					if (kMinesDebug)
-						log("  No need to seek for this mine type: stat: %2d, stock :%2d/%2d\n",
-						    bo.current_stats_,
-						    bo.stocklevel_,
-						    40 + bo.mines_marble_ * 30);
+
 					continue;
 				}
 
@@ -1594,17 +1372,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					// applying nearnes penalty
 					prio = prio - (*j)->mines_nearby_ * nearness_penalty;
 
-					if (kMinesDebug)
-						log("  TDEBUG: priority of spot at %3d x %3d: %3d (%2d - %2d*%2d) , current "
-						    "best: %2d \n",
-						    (*j)->coords.x,
-						    (*j)->coords.y,
-						    prio,
-						    (*j)->coords.field->get_resources_amount(),
-						    (*j)->mines_nearby_,
-						    nearness_penalty,
-						    proposed_priority);
-
 					// Only build mines_ on locations where some material can be mined
 					if (prio < 2)
 						continue;
@@ -1621,8 +1388,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						}
 
 					if (blocked) {
-						if (kMinesDebug)
-							log("   spot blocked!\n");
+
 						continue;
 					}
 
@@ -1633,8 +1399,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						proposed_coords = (*j)->coords;
 						mine = true;
 
-						if (kMinesDebug)
-							log("   TDEBUG: using %-12s as a candidate\n", bo.name);
 					}
 				}  // end of evaluation of field
 			}
@@ -1645,8 +1409,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	// if there is no winner:
 	// if (proposed_building == INVALID_INDEX) {
 	if (best_building == nullptr) {
-		if (kWinnerDebug)
-			log(" TDEBUG:  no building picked up\n");
 
 		mine = false;
 		return false;
@@ -1675,31 +1437,11 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	else  // very ugly hack here
 		best_building->construction_decision_time_ = gametime - kBuildingMinInterval / 2;
 
-	if (kWinnerDebug)
-		log(" TDEBUG:  winning priority %4d, building %16s, coords: %3d x %3d, Mine: %s\n",
-		    proposed_priority,
-		    best_building->name,
-		    proposed_coords.x,
-		    proposed_coords.y,
-		    mine ? "Y" : "N");
-
 	// set the type of update that is needed
 	if (mine) {
 		next_mine_construction_due_ = gametime + kBusyMineUpdateInterval;
 
-		if (kMinesUpdateDebug)
-			log(" TDEBUG expanding mine update by: %d,building %2d, coords: %3d x %3d  \n",
-			    kBusyMineUpdateInterval,
-			    best_building->id,
-			    proposed_coords.x,
-			    proposed_coords.y);
-
-		if (kMinesUpdateDebug)
-			log("  new next_mine_construction_due_=%10d\n", next_mine_construction_due_);
-
-		// m_mineable_changed = true;
 	} else
-		// last_mine_constr_time=gametime;
 		m_buildable_changed = true;
 
 	return true;
@@ -2081,11 +1823,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			// is not done.
 			if (site.bo->cnt_built_ <=
 			    3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20) {
-				if (kWoodDebug)
-					log(" TDEBUG: %1d: cutter without trees, but not dismantling due to low numbers of "
-					    "cutters (%2d)\n",
-					    player_number(),
-					    site.bo->cnt_built_);
 
 				return false;
 			}
@@ -2099,11 +1836,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 				flags_to_be_removed.push_back(site.site->base_flag().get_position());
 				game().send_player_dismantle(*site.site);
 
-				if (kWoodDebug)
-					log(" TDEBUG %1d: cutter without trees, dismantling..., remaining cutters: %2d\n",
-					    player_number(),
-					    site.bo->cnt_built_);
-
 				return true;
 			}
 			return false;
@@ -2116,9 +1848,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		if (site.unoccupied_till_ + 6 * 60 * 1000 < game().get_gametime()
 		                                            and site.site->get_statistics_percent() ==
 		    0) {
-			if (kWellDebug)
-				log(" TDEBUG: dismantling Well, statistics: %3d,\n",
-				    site.site->get_statistics_percent());
 			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
@@ -2130,18 +1859,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Quarry handling
 	if (site.bo->need_stones_) {
-		if (kQuarryDismDebug) {
-			log(" QUARRY at %3d x %3d: statistics: %3d/%3d, age: %5d(>360s), stones:%3d\n",
-			    site.site->get_position().x,
-			    site.site->get_position().y,
-			    site.site->get_statistics_percent(),
-			    site.site->get_crude_statistics(),
-			    (gametime - site.unoccupied_till_) / 1000,
-			    map.find_immovables(
-			       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-			       nullptr,
-			       FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone"))));
-		}
 
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
@@ -2170,14 +1887,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	}
 
 	// All other SPACE_CONSUMERS without input and above target_count
-	if (kSpaceDebug and site.bo->space_consumer_ and not site.bo->plants_trees_)
-		log(" TDEBUG: space consumer here: %15s at %3d x %3d: statistics: %3d, age: %5d(>360s)\n",
-		    site.bo->name,
-		    site.site->get_position().x,
-		    site.site->get_position().y,
-		    site.site->get_statistics_percent(),
-		    (gametime - site.unoccupied_till_) / 1000);
-
 	if (site.bo->inputs_.empty()  // does not consume anything
 	    and site.bo->production_hint_ ==
 	    -1  // not a renewing building (forester...)
@@ -2194,14 +1903,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 				site.bo->stocklevel_time = game().get_gametime();
 			}
 
-			if (kSpaceDebug)
-				log(" TDEBUG: considering dismantle of space consumer: %15s, count %2d/T:%2d, stock "
-				    "level:%3d(>100)\n",
-				    site.bo->name,
-				    site.bo->cnt_built_,
-				    site.bo->cnt_target_,
-				    site.bo->stocklevel_);
-
 			if (site.site->get_statistics_percent()<
 			       30 and site.bo->stocklevel_> 100) {  // production stats == 0%
 				site.bo->last_dismantle_time_ = game().get_gametime();
@@ -2213,12 +1914,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 		// regardless of count of sites a building can be dismanteld if it performs too bad
 		if (site.site->get_statistics_percent() <= 10) {
-			if (kSpaceDebug)
-				log(" TDEBUG: dismantling: %15s at %3d x %3d: due to low performance: %2d\n",
-				    site.bo->name,
-				    site.site->get_position().x,
-				    site.site->get_position().y,
-				    site.site->get_statistics_percent());
 
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
@@ -2235,15 +1930,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	       site.bo->current_stats_<30 and  // overall statistics
 	                               (game().get_gametime() - site.unoccupied_till_)> 10 *
 	       60 * 1000) {
-		if (kIdleDismantle)
-			log(" kIdleDismantle: dismantling due to too many buildings: %15s at %3d x %3d, total "
-			    "count: %2d, stat: %2d/%3d\n",
-			    site.bo->name,
-			    site.site->get_position().x,
-			    site.site->get_position().y,
-			    site.bo->cnt_built_,
-			    site.site->get_statistics_percent(),
-			    site.bo->current_stats_);
+
 		site.bo->last_dismantle_time_ = game().get_gametime();
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
@@ -2253,33 +1940,13 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// remaining buildings without inputs and not supporting ones (fishers only left probably and
 	// huters)
 	// first if is only for log, second one is "executive"
-	if (kHuntFishDebug and site.bo->inputs_.size() ==
-	    0 and site.site->can_start_working() and not site.bo->space_consumer_ and
-	          site.bo->production_hint_ < 0 and site.site->get_statistics_percent() <
-	       50 and((game().get_gametime() - site.unoccupied_till_) > 5 * 60 * 1000)) {
-		if (kIdleDismantle)
-			log(" kIdleDismantle: Fisher+Hunters: considering dismantle due to too low "
-			    "utilization: %15s at %3d x %3d, total "
-			    " stat: %2d, age: %4d\n",
-			    site.bo->name,
-			    site.site->get_position().x,
-			    site.site->get_position().y,
-			    site.site->get_statistics_percent(),
-			    (game().get_gametime() - site.unoccupied_till_) / 1000 / 60);
-	}
+
 	if (site.bo->inputs_.size() ==
 	    0 and site.bo->production_hint_ <
 	       0 and site.site->can_start_working()
 	       and not site.bo->space_consumer_ and site.site->get_statistics_percent() <
 	       10 and((game().get_gametime() - site.built_time_) > 10 * 60 * 1000)) {
-		if (kIdleDismantle)
-			log(" kIdleDismantle: dismantling due to too low utilization: %15s at %3d x %3d, total "
-			    " stat: %2d, age: %4d\n",
-			    site.bo->name,
-			    site.site->get_position().x,
-			    site.site->get_position().y,
-			    site.site->get_statistics_percent(),
-			    (game().get_gametime() - site.built_time_) / 1000 / 60);
+
 		site.bo->last_dismantle_time_ = game().get_gametime();
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
@@ -2289,8 +1956,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// supporting productionsites (rangers)
 	// stop/start them based on stock avaiable
 	if (site.bo->production_hint_ >= 0) {
-		// if (kStandbyDebug) log ("  TDEBUG: check_productionsites(): testing building
-		// %s\n",site.bo->name);
+
 		if (site.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
 			site.bo->stocklevel_ = get_stocklevel_by_hint(site.bo->production_hint_);
 			site.bo->stocklevel_time = game().get_gametime();
@@ -2298,16 +1964,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 		uint16_t score = site.bo->stocklevel_;
 
-		if (kStandbyDebug)
-			log("  TDEBUG: standby review: %-16s(%dx):stock level: %3d, status: %s\n",
-			    site.bo->name,
-			    site.bo->cnt_built_,
-			    site.bo->stocklevel_,
-			    site.site->is_stopped() ? "stopped" : "running");
 
 		if (score > 150 and site.bo->cnt_built_ > site.bo->cnt_target_) {
-			if (kStandbyDebug)
-				log("   * dismantling the building\n");
 
 			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
@@ -2316,15 +1974,11 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		}
 
 		if (score > 70 and not site.site->is_stopped()) {
-			if (kStandbyDebug)
-				log("   * stopping building\n");
 
 			game().send_player_start_stop_building(*site.site);
 		}
 
 		if (score < 50 and site.site->is_stopped()) {
-			if (kStandbyDebug)
-				log("   * starting building\n");
 
 			game().send_player_start_stop_building(*site.site);
 		}
@@ -2369,25 +2023,12 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			    0 and(site.bo->cnt_built_ - site.bo->unoccupied_) >=
 			       1 and(game().get_gametime() - site.unoccupied_till_) >
 			       30 * 60 * 1000 and !mines_.empty()) {
-				if (kUpgradeDebug)
-					log(" UPGRADE: upgrading (forcing as first) %12s at %3d x %3d: age %d min.\n",
-					    site.bo->name,
-					    site.site->get_position().x,
-					    site.site->get_position().y,
-					    (game().get_gametime() - site.unoccupied_till_) / 60000);
 
 				game().send_player_enhance_building(*site.site, (*x.current));
 				return true;
 			}
 
 			// now, let consider normal upgrade
-
-			if (kUpgradeDebug)
-				log(" UPGRADE: %1d: working enhanced buildings (%15s): %1d, statitistics: %2d\n",
-				    player_number(),
-				    en_bo.name,
-				    en_bo.cnt_built_ - en_bo.unoccupied_,
-				    en_bo.current_stats_);
 
 			// do not upgrade if candidate production % is too low
 			if ((en_bo.cnt_built_ - en_bo.unoccupied_) ==
@@ -2401,14 +2042,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 				prio = en_bo.current_stats_ - site.bo->current_stats_;  // priority for enhancement
 				prio += en_bo.current_stats_ - 65;
 
-				if (kUpgradeDebug)
-					log(" UPGRADE:  proposing upgrade (non-first building) %12s at %3d x %3d: prio: "
-					    "%2d, target statistics: %2d\n",
-					    site.bo->name,
-					    site.site->get_position().x,
-					    site.site->get_position().y,
-					    prio,
-					    en_bo.current_stats_);
 			}
 
 			if (prio > maxprio) {
@@ -2422,9 +2055,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// Enhance if enhanced building is useful
 	// additional: we dont want to lose the old building
 	if (maxprio > 0) {
-		if (kUpgradeDebug)
-			log(" UPGRADE:   upgrading %15s(as non first)\n", bestbld->name);
-
 		game().send_player_enhance_building(*site.site, enbld);
 		bestbld->construction_decision_time_ = gametime;
 		changed = true;
@@ -2453,23 +2083,9 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	Map& map = game().map();
 	Field* field = map.get_fcoords(site.site->get_position()).field;
 
-	if (kMinesUpdateDebug)
-		log(" MINES_UPDATE: %1d: reviewing %-15s at %3dx%3d, statistics: %3d, left resources: %2d\n",
-		    player_number(),
-		    site.bo->name,
-		    site.site->get_position().x,
-		    site.site->get_position().y,
-		    site.site->get_statistics_percent(),
-		    field->get_resources_amount());
-
 	// first get rid of mines that are missing workers for some time (5 minutes)
 	// released worker (if any) can be usefull elsewhere !
 	if (site.built_time_ + 5 * 60 * 1000 < gametime and not site.site->can_start_working()) {
-		if (kMinesUpdateDebug)
-			log(" MINES_UPDATE: Dismantling due to missing workers: %12s at %3d %3d\n",
-			    site.bo->name,
-			    site.site->get_position().x,
-			    site.site->get_position().y);
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
 		return true;
@@ -2490,9 +2106,6 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
 
-		if (kMinesUpdateDebug)
-			log(" MINES_UPDATE: Dismantling...\n");
-
 		return true;
 	}
 
@@ -2509,15 +2122,6 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 			const Building_Descr& bld = *tribe->get_building_descr(*x.current);
 			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-			if (kMinesUpdateDebug)
-				log(" MINES_UPDATE:   considering upgrade to %15s, count B:%1d(stat:%3d)  U:%1d  "
-				    "C:%1d\n",
-				    en_bo.name,
-				    en_bo.cnt_built_,
-				    en_bo.current_stats_,
-				    en_bo.unoccupied_,
-				    en_bo.cnt_under_construction_);
-
 			if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ > 0)
 				continue;
 
@@ -2533,9 +2137,6 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 			uint8_t const until =
 			   field->get_starting_res_amount() * (100 - site.bo->mines_percent_) / 100;
 
-			if (kMinesUpdateDebug)
-				log(" MINES_UPDATE:    until:%3d ?>, current: %3d\n", until, current);
-
 			if (until >= current) {
 				// add some randomness - just for the case if more than one
 				// enhancement is available (not in any tribe yet)
@@ -2546,8 +2147,6 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 					enbld = (*x.current);
 					bestbld = &en_bo;
 
-					if (kMinesUpdateDebug)
-						log(" MINES_UPDATE:    ..is candidate\n");
 				}
 			}
 		}
@@ -2559,8 +2158,6 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 		bestbld->construction_decision_time_ = gametime;
 		changed = true;
 
-		if (kMinesUpdateDebug)
-			log(" MINES_UPDATE:    ..enhancing\n");
 	}
 
 	return changed;
@@ -2577,12 +2174,6 @@ uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 
 		count += (*l.current)->economy.stock_ware(wt);
 	}
-
-	if (kStockDebug)
-		log(" TDEBUG: stock : %3d for hint: %2d, time: %3d\n",
-		    count,
-		    hintoutput,
-		    game().get_gametime() / 1000);
 
 	return count;
 }
@@ -2603,12 +2194,6 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 			}
 		}
 	}
-
-	if (kStockDebug)
-		log(" TDEBUG: stock : %3d for building: %s, time: %3d\n",
-		    count,
-		    bo.name,
-		    game().get_gametime() / 1000);
 
 	return count;
 }
@@ -2684,24 +2269,8 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 				update_buildable_field(bf, vision, true);
 				const int32_t size_penalty = ms->get_size() - 1;
 
-				if (kMilDismDebug)
-					log(" DISMANTLE CHECK: testing finished building %3dx%3d, capacity: %2d(>9), "
-					    "presence: %2d(>3), loneliness: %4d(<160), stationed: %1d(>2+%d as size "
-					    "penalty)\n",
-					    f.x,
-					    f.y,
-					    bf.military_capacity_,
-					    bf.military_presence_,
-					    bf.military_loneliness_,
-					    bf.military_stationed_,
-					    size_penalty);
-
 				if (bf.military_capacity_ > 9 and bf.military_presence_ >
 				    3 and bf.military_loneliness_<160 and bf.military_stationed_>(2 + size_penalty)) {
-					if (kMilDismDebug)
-						log(" DISMANTLE CHECK:  * dismantling the building on %5d, last dismantle: %5d\n",
-						    game().get_gametime() / 1000,
-						    military_last_dismantle_ / 1000);
 
 					if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 						flags_to_be_removed.push_back(ms->base_flag().get_position());
@@ -2748,9 +2317,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
  * \returns the recalculated priority
  */
 int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t prio) {
-	// NOCOM(#tiborb): Do not leave comment lines in the code. They are only confusing for the next person reading the code. Remember: code is read at least 10 times as often as written.
 	// Prefer building space in the inner land.
-	// prio /= (1 + (bf.unowned_land_nearby_ / 4));
 
 	if (bf.unowned_land_nearby_ > 15)
 		prio -= (bf.unowned_land_nearby_ - 15);
@@ -2943,7 +2510,6 @@ void DefaultAI::lose_building(const Building& b) {
 	BuildingObserver& bo = get_building_observer(b.name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-		// log (" TDEBUG: We lost constructionsite\n");
 		BuildingObserver& target_bo = get_building_observer(
 		   ref_cast<ConstructionSite const, Building const>(b).building().name().c_str());
 		--target_bo.cnt_under_construction_;
@@ -2952,8 +2518,6 @@ void DefaultAI::lose_building(const Building& b) {
 		--bo.cnt_built_;
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
-
-			// log (" TDEBUG: We lost productionsite: %s\n",b.name().c_str());
 
 			for (std::list<ProductionSiteObserver>::iterator i = productionsites.begin();
 			     i != productionsites.end();
@@ -3071,18 +2635,10 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		} else {
 			player_attackable[j - 1] = false;
 		}
-		if (kAttackDebug)
-			log(" %2d: %s player %2d (strength: pl: %3d vs en: %3d))\n",
-			    pn,
-			    player_attackable[j - 1] ? "can attack" : "can not attack",
-			    j,
-			    genstats[pn - 1].miltary_strength.back(),
-			    genstats[j - 1].miltary_strength.back());
+
 	}
 
 	if (not any_attackable) {
-		if (kAttackDebug)
-			log("  %2d: No attackable enemy... returning...\n", pn);
 		next_attack_consideration_due_ = 120 * 1000 + (gametime % 30 + 2) * 1000 + gametime;
 		return false;
 	}
@@ -3095,13 +2651,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	uint16_t position = 0;
 	for (uint32_t i = 0; i < attempts && not any_attacked; ++i) {
 		position = (game().get_gametime() + (3 * i)) % militarysites.size();
-
-		if (kAttackDebug)
-			log("  %2d: Attack consideration #%1d: picking building: %2d/%2d\n",
-			    pn,
-			    i + 1,
-			    position,
-			    militarysites.size());
 
 		// picking random military sites
 		// using gametime as a random value, but it is constant so each next is on position +3
@@ -3124,12 +2673,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 		// skipping if based on  "enemies nearby" there are probably no enemies nearby
 		if (not mso->enemies_nearby and gametime % 8 > 0) {
-			if (kAttackDebug)
-				log("   %2d: Skipping consideration due to enemies_nearby set to false\n", pn);
 			continue;  // go on with next attempt
 		}
-		if (kAttackDebug)
-			log("   %2d: Scanning nearby buildings\n", pn);
 
 		// setting as default
 		mso->enemies_nearby = false;
@@ -3147,10 +2692,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 				mso->enemies_nearby = true;
 
 				if (not player_attackable[bld->owner().player_number() - 1]) {
-					if (kAttackDebug)
-						log("     %2d: building of player %2d, not attackable... \n",
-						    pn,
-						    bld->owner().player_number());
 					continue;
 				}
 
@@ -3177,10 +2718,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 						attackers = ta;
 						defenders = bld->presentSoldiers().size();
 					}
-				} else if (kAttackDebug)
-					log("     %2d: building of player %2d, considering for attack \n",
-					    pn,
-					    bld->owner().player_number());
+				}
 			} else if (upcast(Warehouse, wh, immovables.at(j).object)) {
 				if (!player->is_hostile(wh->owner()))
 					continue;
@@ -3218,29 +2756,12 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 				continue;
 			}
 
-			if (kAttackDebug)
-				log("   Player %1d attacking %3dx%3d, chance: %2d-%2d, attackers: %2d, "
-				    "station.defenders: %2d, "
-				    "nearby defenders: %2d, vision: %d \n",
-				    pn,
-				    target->base_flag().get_position().x,
-				    target->base_flag().get_position().y,
-				    chance,
-				    penalty / 100,
-				    attackers,
-				    defenders,
-				    defend_ready_enemies,
-				    vision);
-
 			game().send_player_enemyflagaction(target->base_flag(), pn, attackers);
 
 			any_attacked = true;
 			break;
 		}
 	}
-
-	if (kAttackDebug)
-		log("  %2d: Attacked any?: %s\n", pn, any_attacked ? "Y" : "N");
 
 	//  Do not attack again too soon - returning soldiers must get healed first.
 	if (any_attacked)

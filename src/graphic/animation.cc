@@ -292,22 +292,14 @@ void NonPackedAnimation::load_graphics() {
 		//     opengl texture.
 		const Image* pc_image = g_gr->images().get(filename);
 		if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {
-			// NOCOM(#sirver): leave the wexception. Instead fix the crashing animation.
-			//there was throw wexeption, it crashes game. Consider it when commiting.
-			log("ANIMATION ERROR: playercolor mask has wrong size: (%s: %u, %u), should "
-				 "be (%u, %u) like the animation frame\n",
-				 filename.c_str(), pc_image->width(), pc_image->height(),
-				 frames_[0]->width(), frames_[0]->height());
-				 hasplrclrs_ = false;
-				 break;
-			}
-			//throw wexception("playercolor mask has wrong size: (%u, %u), should "
-			                 //"be (%u, %u) like the animation frame",
-			                 //pc_image->width(),
-			                 //pc_image->height(),
-			                 //frames_[0]->width(),
-			                 //frames_[0]->height());
-		//}
+			// TODO: see bug #1324642
+			throw wexception("playercolor mask has wrong size: (%u, %u), should "
+			                 "be (%u, %u) like the animation frame",
+			                 pc_image->width(),
+			                 pc_image->height(),
+			                 frames_[0]->width(),
+			                 frames_[0]->height());
+		}
 		pcmasks_.push_back(pc_image);
 	}
 }
