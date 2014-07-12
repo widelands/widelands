@@ -77,13 +77,12 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 
 	buf += std::string("• ") + (boost::format(_("Caps:%s")) % temp).str() + "\n";
 
-	if(f.get_owned_by() > 0) {
+	if (f.get_owned_by() > 0) {
 		buf += std::string("• ");
 		char buf1[1024];
 		snprintf(buf1, sizeof(buf1), _("Owned by: %u"), f.get_owned_by());
 		buf += std::string(buf1) + "\n";
-	}
-	else {
+	} else {
 		buf += std::string("• ") + _("Owned by: —") + "\n";
 	}
 

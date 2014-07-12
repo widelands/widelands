@@ -155,7 +155,8 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_table.selected.connect(boost::bind(&Fullscreen_Menu_MapSelect::map_selected, this, _1));
 	m_table.double_clicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::double_clicked, this, _1));
 
-	UI::Box * vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
+	UI::Box* vbox = new UI::Box(
+	   this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
 	m_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
 	m_show_all_maps->set_state(true);
