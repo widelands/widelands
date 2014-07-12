@@ -1,5 +1,5 @@
 -- TODO Textdomain?
--- TODO: get images from C++, e.g. menu.png, resi_00.png for the small image, first idle picture for the big header images. soldiers, tools, wares etc. 
+-- TODO: get images from C++, e.g. menu.png, resi_00.png for the small image, first idle picture for the big header images. soldiers, tools, wares etc.
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -349,20 +349,20 @@ function building_help_general_string(tribename, building_description, resourcen
 
 	elseif(building_description.type == "trainingsite") then
 		result = result .. rt(h3(_"Training:"))
-		if(building_description.max_attack >= 0) then
+		if(building_description.max_attack and building_description.min_attack) then
 			-- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
 			result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
 				bformat(_"Attack", building_description.min_attack, building_description.max_attack+1)))
 		end
-		if(building_description.max_defense >= 0) then
+		if(building_description.max_defense and building_description.min_defense) then
 			result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
 				bformat(_"Defense", building_description.min_defense, building_description.max_defense+1)))
 		end
-		if(building_description.max_evade >= 0) then
+		if(building_description.max_evade and building_description.min_evade) then
 			result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
 				bformat(_"Evade", building_description.min_evade, building_description.max_evade+1)))
 		end
-		if(building_description.max_hp >= 0) then
+		if(building_description.max_hp and building_description.min_hp) then
 			result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
 				bformat(_"Health", building_description.min_hp, building_description.max_hp+1)))
 		end
@@ -514,7 +514,7 @@ end
 --    :arg enhanced_from: The building name that this building is usually enhanced from.
 --                        Leave blank if this is a basic building.
 --    :former_buildings:  A table of building names representing the chain of buildings that this
---                        building was enhanced from. This is used to calculate cumulative building 
+--                        building was enhanced from. This is used to calculate cumulative building
 --                        and dismantle costs.
 --    :returns: an rt string describing the building section
 --

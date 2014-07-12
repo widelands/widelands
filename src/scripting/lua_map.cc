@@ -1460,9 +1460,6 @@ const MethodType<L_TrainingSiteDescription> L_TrainingSiteDescription::Methods[]
 	{nullptr, nullptr},
 };
 const PropertyType<L_TrainingSiteDescription> L_TrainingSiteDescription::Properties[] = {
-	// NOCOM(#gunchleoc): I changed max_* to return 0 when the site does not
-	// provide the training, because the tests where written that way. On second
-	// thought though, returning nil is more natural.
 	PROP_RO(L_TrainingSiteDescription, max_attack),
 	PROP_RO(L_TrainingSiteDescription, max_defense),
 	PROP_RO(L_TrainingSiteDescription, max_evade),
@@ -1488,11 +1485,10 @@ const PropertyType<L_TrainingSiteDescription> L_TrainingSiteDescription::Propert
 */
 int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
 	const TrainingSite_Descr* descr = get();
-	if (descr->get_train_attack()) {
+	if (descr->get_train_attack())
 		lua_pushinteger(L, descr->get_max_level(atrAttack));
-	} else {
-		lua_pushinteger(L, 0);
-	}
+	else
+		lua_pushnil(L);
 	return 1;
 }
 
@@ -1503,11 +1499,10 @@ int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
 */
 int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
 	const TrainingSite_Descr* descr = get();
-	if (descr->get_train_defense()) {
+	if (descr->get_train_defense())
 		lua_pushinteger(L, descr->get_max_level(atrDefense));
-	} else {
-		lua_pushinteger(L, 0);
-	}
+	else
+		lua_pushnil(L);
 	return 1;
 }
 
@@ -1521,7 +1516,7 @@ int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
 	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_evade())
 		lua_pushinteger(L, descr->get_max_level(atrEvade));
-	else lua_pushinteger(L, 0);
+	else lua_pushnil(L);
 	return 1;
 }
 
@@ -1535,7 +1530,7 @@ int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
 	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_max_level(atrHP));
-	else lua_pushinteger(L, 0);
+	else lua_pushnil(L);
 	return 1;
 }
 
@@ -1561,7 +1556,7 @@ int L_TrainingSiteDescription::get_min_attack(lua_State * L) {
 	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_attack())
 		lua_pushinteger(L, descr->get_min_level(atrAttack));
-	else lua_pushinteger(L, 0);
+	else lua_pushnil(L);
 	return 1;
 }
 
@@ -1574,7 +1569,7 @@ int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
 	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_defense())
 		lua_pushinteger(L, descr->get_min_level(atrDefense));
-	else lua_pushinteger(L, 0);
+	else lua_pushnil(L);
 	return 1;
 }
 
@@ -1588,7 +1583,7 @@ int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
 	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_evade())
 		lua_pushinteger(L, descr->get_min_level(atrEvade));
-	else lua_pushinteger(L, 0);
+	else lua_pushnil(L);
 	return 1;
 }
 
@@ -1602,7 +1597,7 @@ int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
 	const TrainingSite_Descr * descr = get();
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_min_level(atrHP));
-	else lua_pushinteger(L, 0);
+	else lua_pushnil(L);
 	return 1;
 }
 

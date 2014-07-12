@@ -235,42 +235,44 @@ function test_descr:test_name()
 end
 
 function test_descr:test_max_attack()
-   assert_equal(0, egbase:get_building_description("barbarians","battlearena").max_attack)
+   assert_equal(nil, egbase:get_building_description("barbarians","battlearena").max_attack)
    assert_equal(4, egbase:get_building_description("barbarians","trainingcamp").max_attack)
 end
 
 function test_descr:test_max_defense()
-   assert_equal(0, egbase:get_building_description("barbarians","battlearena").max_defense)
-   assert_equal(0, egbase:get_building_description("barbarians","trainingcamp").max_defense)
+   assert_equal(nil, egbase:get_building_description("barbarians","battlearena").max_defense)
+   assert_equal(nil, egbase:get_building_description("barbarians","trainingcamp").max_defense)
+   assert_equal(1, egbase:get_building_description("atlanteans","labyrinth").max_defense)
 end
 
 function test_descr:test_max_evade()
    assert_equal(1, egbase:get_building_description("barbarians","battlearena").max_evade)
-   assert_equal(0, egbase:get_building_description("barbarians","trainingcamp").max_evade)
+   assert_equal(nil, egbase:get_building_description("barbarians","trainingcamp").max_evade)
 end
 
 function test_descr:test_max_hp()
-   assert_equal(0, egbase:get_building_description("barbarians","battlearena").max_hp)
+   assert_equal(nil, egbase:get_building_description("barbarians","battlearena").max_hp)
    assert_equal(2, egbase:get_building_description("barbarians","trainingcamp").max_hp)
 end
 
 function test_descr:test_min_attack()
-   assert_equal(0, egbase:get_building_description("barbarians","battlearena").min_attack)
+   assert_equal(nil, egbase:get_building_description("barbarians","battlearena").min_attack)
    assert_equal(0, egbase:get_building_description("barbarians","trainingcamp").min_attack)
 end
 
 function test_descr:test_min_defense()
-   assert_equal(0, egbase:get_building_description("barbarians","battlearena").min_defense)
-   assert_equal(0, egbase:get_building_description("barbarians","trainingcamp").min_defense)
+   assert_equal(nil, egbase:get_building_description("barbarians","battlearena").min_defense)
+   assert_equal(nil, egbase:get_building_description("barbarians","trainingcamp").min_defense)
+   assert_equal(0, egbase:get_building_description("atlanteans","labyrinth").min_defense)
 end
 
 function test_descr:test_min_evade()
    assert_equal(0, egbase:get_building_description("barbarians","battlearena").min_evade)
-   assert_equal(0, egbase:get_building_description("barbarians","trainingcamp").min_evade)
+   assert_equal(nil, egbase:get_building_description("barbarians","trainingcamp").min_evade)
 end
 
 function test_descr:test_min_hp()
-   assert_equal(0, egbase:get_building_description("barbarians","battlearena").min_hp)
+   assert_equal(nil, egbase:get_building_description("barbarians","battlearena").min_hp)
    assert_equal(0, egbase:get_building_description("barbarians","trainingcamp").min_hp)
 end
 
