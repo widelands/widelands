@@ -23,8 +23,7 @@
 #include <vector>
 #include <memory>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "economy/wares_queue.h"
 
 namespace Widelands {
@@ -43,7 +42,7 @@ class Worker;
 // Handles the mustering of workers and wares in a port for one Expedition. This
 // object is created in the port dock as soon as the start expedition button is
 // pressed. As soon as the ship is loaded, this object gets destroyed.
-class ExpeditionBootstrap : boost::noncopyable {
+class ExpeditionBootstrap {
 public:
 	ExpeditionBootstrap(PortDock* const portdock);
 	virtual ~ExpeditionBootstrap();
@@ -82,6 +81,7 @@ public:
 	void save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos);
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 	struct ExpeditionWorker;
 
 	// Handles arriving workers and wares.

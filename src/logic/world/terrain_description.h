@@ -22,8 +22,7 @@
 
 #include <string>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/widelands.h"
 #include "logic/world/resource_description.h"
 
@@ -34,7 +33,7 @@ namespace Widelands {
 class EditorCategory;
 class World;
 
-class TerrainDescription : boost::noncopyable {
+class TerrainDescription {
 public:
 	enum Type {
 		GREEN = 0,
@@ -94,6 +93,7 @@ public:
 	double fertility() const;
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 	const std::string name_;
 	const std::string descname_;
 	const EditorCategory* editor_category_;  ///< not owned.

@@ -1,0 +1,18 @@
+#!/usr/bin/python
+
+"""
+Prefer DEBUG.
+"""
+
+error_msg="Do not inherit from boost::noncopyable. Instead #include \"base/macros.h\" and add \"DISALLOW_COPY_AND_ASSIGN(<Objectname>);\" to the private section of the object or type."
+
+regexp=r"""(^#include.*boost.noncopyable\.hpp|noncopyable)"""
+
+forbidden = [
+    "#include <boost/noncopyable.hpp>",
+    "noncopyable"
+]
+
+allowed = [
+    "DISALLOW_COPY_AND_ASSIGN",
+]

@@ -20,8 +20,7 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/game.h"
 #include "logic/notification.h"
 
@@ -32,7 +31,6 @@
  * \ref Implementation interface.
  */
 struct Computer_Player :
-	boost::noncopyable,
 	Widelands::NoteReceiver<Widelands::NoteImmovable>,
 	Widelands::NoteReceiver<Widelands::NoteFieldPossession>
 {
@@ -72,6 +70,7 @@ struct Computer_Player :
 	static const Implementation * getImplementation(const std::string & name);
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(Computer_Player);
 	Widelands::Game & m_game;
 	Widelands::Player_Number const m_player_number;
 };

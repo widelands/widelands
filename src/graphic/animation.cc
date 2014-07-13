@@ -33,6 +33,7 @@
 #include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/diranimations.h"
 #include "graphic/graphic.h"
@@ -55,7 +56,7 @@ using namespace std;
 namespace  {
 
 /// A class that makes iteration over filename_?.png templates easy.
-class NumberGlob : boost::noncopyable {
+class NumberGlob {
 public:
 	typedef uint32_t type;
 	NumberGlob(const std::string& pictmp);
@@ -64,6 +65,7 @@ public:
 	bool next(std::string* s);
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
 	std::string templ_;
 	std::string fmtstr_;
 	std::string replstr_;

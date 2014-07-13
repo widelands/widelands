@@ -25,6 +25,7 @@
 
 #include <boost/utility.hpp>
 
+#include "base/macros.h"
 #include "graphic/image.h"
 
 class SurfaceCache;
@@ -36,7 +37,7 @@ class SurfaceCache;
 // its hash is not found. Other parts of Widelands will create images when they
 // do not exist in the cache yet and then put it into the cache and therefore
 // releasing their ownership.
-class ImageCache : boost::noncopyable {
+class ImageCache {
 public:
 	// Does not take ownership.
 	ImageCache(SurfaceCache* surface_cache);
@@ -56,6 +57,7 @@ public:
 	bool has(const std::string& hash) const;
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 	typedef std::map<std::string, const Image*> ImageMap;
 
 	ImageMap images_;  /// hash of cached filename/image pairs

@@ -25,8 +25,7 @@
 #include <string>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/map.h"
@@ -55,7 +54,6 @@ struct Flag;
 struct AttackController;
 
 class Editor_Game_Base :
-	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
@@ -171,6 +169,7 @@ public:
 	World* mutable_world();
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
 	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.
 	int32_t gametime_;
 	Object_Manager objects_;

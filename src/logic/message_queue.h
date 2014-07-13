@@ -23,14 +23,13 @@
 #include <cassert>
 #include <map>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/message.h"
 #include "logic/message_id.h"
 
 namespace Widelands {
 
-struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *> {
+struct MessageQueue : private std::map<Message_Id, Message *> {
 	friend class Map_Players_Messages_Data_Packet;
 	// Make typedefs public so that this looks like proper
 	// STL container to templated algorithms.
@@ -152,6 +151,8 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 	}
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
+
 	/// Only for working around bugs in map loading code. If something has
 	/// accidentally been added to the queue during load, it can be worked
 	/// around by clearing the queue before the saved messages are loaded into

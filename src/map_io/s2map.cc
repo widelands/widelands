@@ -229,7 +229,7 @@ std::string get_world_name(S2_Map_Loader::WorldType world) {
 /// Returns S2 terrain index into (pre one-world) terrain names. Those are then
 /// looked up in the legacy conversion code and this gives the Widelands
 /// terrain.
-class TerrainConverter : boost::noncopyable {
+class TerrainConverter {
 public:
 	TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table);
 	Widelands::Terrain_Index lookup(S2_Map_Loader::WorldType world, int8_t c) const;
@@ -238,6 +238,9 @@ protected:
 	const OneWorldLegacyLookupTable& one_world_legacy_lookup_table_;
 	const Widelands::World& world_;
 	const std::map<S2_Map_Loader::WorldType, std::vector<std::string>> table_;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(TerrainConverter);
 };
 
 TerrainConverter::TerrainConverter

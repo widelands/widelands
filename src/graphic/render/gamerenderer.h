@@ -22,6 +22,7 @@
 
 #include <boost/utility.hpp>
 
+#include "base/macros.h"
 #include "base/point.h"
 
 namespace Widelands {
@@ -41,7 +42,7 @@ class RenderTarget;
  * so that target-specific optimizations (such as caching data) can
  * be effective.
  */
-class GameRenderer : boost::noncopyable {
+class GameRenderer {
 public:
 	GameRenderer();
 	virtual ~GameRenderer();
@@ -93,6 +94,7 @@ protected:
 	/*@}*/
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 	void draw_wrapper();
 };
 

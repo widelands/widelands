@@ -24,6 +24,8 @@
 
 #include <boost/utility.hpp>
 
+#include "base/macros.h"
+
 class Surface;
 
 // Caches Surfaces. It contains surfaces which must not be deleted and
@@ -33,7 +35,7 @@ class Surface;
 // Nobody in Widelands should hold onto a Surface they get from this class,
 // instead, they should use it only temporarily and rerequest it whenever they
 // need it.
-class SurfaceCache : boost::noncopyable {
+class SurfaceCache {
 public:
 	SurfaceCache() {}
 	virtual ~SurfaceCache() {}
@@ -50,6 +52,8 @@ public:
 	// automatically - use this if surfaces are around for a long time and
 	// recreation is expensive (i.e. images loaded from disk).
 	virtual Surface* insert(const std::string& hash, Surface*, bool transient) = 0;
+private:
+	DISALLOW_COPY_AND_ASSIGN(SurfaceCache);
 };
 
 // Create a new Cache whichs combined pixels in all transient surfaces are

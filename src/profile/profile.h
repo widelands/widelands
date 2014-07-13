@@ -23,8 +23,6 @@
 #include <cstring>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
 #include "base/macros.h"
 #include "base/point.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -188,7 +186,7 @@ private:
  * Returns the next unused section of the given name, or 0 if all sections
  * have been used. name can be 0 to retrieve any remaining sections.
  */
-class Profile : boost::noncopyable {
+class Profile {
 public:
 	enum {
 		err_ignore = 0,
@@ -233,6 +231,7 @@ public:
 	Section & create_section_duplicate(char const * name);
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(Profile);
 	std::string m_filename;
 	typedef std::vector<Section> Section_list;
 	Section_list m_sections;

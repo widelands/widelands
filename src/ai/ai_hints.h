@@ -22,14 +22,14 @@
 
 #include <stdint.h>
 
-#include <boost/noncopyable.hpp>
+#include "base/macros.h"
 
 class Section;
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
-struct BuildingHints : boost::noncopyable {
+struct BuildingHints {
 	BuildingHints(Section*);
 	~BuildingHints();
 
@@ -82,6 +82,7 @@ struct BuildingHints : boost::noncopyable {
 	}
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 	char* renews_map_resource;
 	char* mines_;
 	bool basic_;

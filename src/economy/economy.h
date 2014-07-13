@@ -27,6 +27,7 @@
 #include <boost/function.hpp>
 #include <boost/utility.hpp>
 
+#include "base/macros.h"
 #include "logic/instances.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
@@ -71,7 +72,7 @@ struct Supply;
  * connected by roads or the seafaring network - though of course, most code operates
  * on the assumption that they are, with fallbacks for when they aren't.
  */
-class Economy : boost::noncopyable {
+class Economy {
 public:
 	friend class EconomyDataPacket;
 
@@ -183,6 +184,7 @@ public:
 	void rebalance_supply() {_start_request_timer();}
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(Economy);
 /*************/
 /* Functions */
 /*************/

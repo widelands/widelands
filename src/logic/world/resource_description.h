@@ -23,15 +23,14 @@
 #include <string>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/widelands.h"
 
 class LuaTable;
 
 namespace Widelands {
 
-class ResourceDescription : boost::noncopyable {
+class ResourceDescription {
 public:
 	struct EditorPicture {
 		std::string picname;
@@ -57,6 +56,7 @@ public:
 	const std::string& get_editor_pic(uint32_t amount) const;
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(ResourceDescription);
 	const std::string name_;
 	const std::string descname_;
 	const bool detectable_;

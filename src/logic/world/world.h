@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "logic/description_maintainer.h"
 
@@ -36,7 +37,7 @@ struct Immovable_Descr;
 
 /// This is the in memory descriptions of the world and provides access to
 /// terrains, immovables and resources.
-class World : boost::noncopyable {
+class World {
 public:
 	World();
 	~World();  // Defined in .cc because all forward declarations are known then.
@@ -83,6 +84,7 @@ public:
 	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(World);
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;
 	std::unique_ptr<DescriptionMaintainer<Immovable_Descr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
