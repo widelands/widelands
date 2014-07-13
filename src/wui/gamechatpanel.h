@@ -20,7 +20,9 @@
 #ifndef WL_WUI_GAMECHATPANEL_H
 #define WL_WUI_GAMECHATPANEL_H
 
-#include "chat.h"
+#include <memory>
+
+#include "chat/chat.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 
@@ -30,30 +32,23 @@ struct ChatProvider;
  * Provides a panel that contains chat message scrollbar and a chat message
  * entry field.
  */
-struct GameChatPanel :
-	public UI::Panel, public Widelands::NoteReceiver<ChatMessage>
-{
+struct GameChatPanel : public UI::Panel {
 	GameChatPanel
 		(UI::Panel    *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 ChatProvider &);
 
-	/**
-	 * Signal is called when a message has been sent by the user.
-	 */
+	// NOCOM(#sirver): Shoud this use the new notifications system?
+	// Signal is called when a message has been sent by the user.
 	boost::signals2::signal<void ()> sent;
 
-	/**
-	 * Signal is called when the user has aborted entering a message.
-	 */
+	// Signal is called when the user has aborted entering a message.
 	boost::signals2::signal<void ()> aborted;
 
 	const std::string & get_edit_text() const {return editbox.text();}
 	void set_edit_text(const std::string & text) {editbox.setText(text);}
 
 	void focusEdit();
-
-	void receive(const ChatMessage &) override;
 
 private:
 	void recalculate();
@@ -64,6 +59,7 @@ private:
 	UI::Multiline_Textarea chatbox;
 	UI::EditBox editbox;
 	uint32_t chat_message_counter;
+	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_GAMECHATPANEL_H

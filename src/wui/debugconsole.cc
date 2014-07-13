@@ -24,7 +24,7 @@
 #include <boost/bind.hpp>
 
 #include "base/log.h"
-#include "chat.h"
+#include "chat/chat.h"
 
 namespace DebugConsole {
 
@@ -105,7 +105,7 @@ struct Console : public ChatProvider, public Handler {
 		if (messages.size() > 1000)
 			messages.erase(messages.begin(), messages.begin() + 100);
 
-		ChatProvider::send(cm); // Notify listeners, i.e. the UI
+		Notifications::publish(cm); // Notify listeners, i.e. the UI
 	}
 };
 

@@ -57,7 +57,7 @@ public:
 	// Creates a subscriber for 'T' with the given 'callback' and returns it.
 	template <typename T>
 	std::unique_ptr<Subscriber<T>> subscribe(std::function<void(const T&)> callback) {
-		std::list<void*>& subscribers = note_id_to_subscribers_[T::kUniqueNoteId];
+		std::list<void*>& subscribers = note_id_to_subscribers_[T::note_id()];
 		auto new_subscriber =
 		   std::unique_ptr<Subscriber<T>>(new Subscriber<T>(next_subscriber_id_, callback));
 		subscribers.push_back(new_subscriber.get());
@@ -68,7 +68,7 @@ public:
 
 	// Publishes 'message' to all subscribers.
 	template <typename T> void publish(const T& message) {
-		for (void* p_subscriber : note_id_to_subscribers_[T::kUniqueNoteId]) {
+		for (void* p_subscriber : note_id_to_subscribers_[T::note_id()]) {
 			Subscriber<T>* subscriber = static_cast<Subscriber<T>*>(p_subscriber);
 			subscriber->callback_(message);
 		}
@@ -77,7 +77,7 @@ public:
 	// Unsubscribes 'subscriber'.
 	template <typename T>
 	void unsubscribe(Subscriber<T>* subscriber) {
-		std::list<void*>& subscribers = note_id_to_subscribers_.at(T::kUniqueNoteId);
+		std::list<void*>& subscribers = note_id_to_subscribers_.at(T::note_id());
 		auto subscribers_it =
 		   std::find_if(subscribers.begin(), subscribers.end(), [&subscriber](const void* p_subscriber) {
 			   return static_cast<const Subscriber<T>*>(p_subscriber)->id_ == subscriber->id_;

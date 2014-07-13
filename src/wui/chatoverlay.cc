@@ -19,12 +19,117 @@
 
 #include "wui/chatoverlay.h"
 
-#include "chat.h"
+#include <memory>
+
+#include "chat/chat.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/rt_errors.h"
 #include "profile/profile.h"
 #include "wui/logmessage.h"
+
+namespace  {
+
+// NOCOM(#sirver): move into a wui/chat_ui or something.
+
+// Returns a richtext string that can be displayed to the user.
+std::string format_as_richtext(const ChatMessage& chat_message) {
+	std::string message = "<p><font color=33ff33 size=9>";
+
+	// Escape richtext characters
+	// The goal of this code is two-fold:
+	//  1. Assuming an honest game host, we want to prevent the ability of
+	//     clients to use richtext.
+	//  2. Assuming a malicious host or meta server, we want to reduce the
+	//     likelihood that a bug in the richtext renderer can be exploited,
+	//     by restricting the set of allowed richtext commands.
+	//     Most notably, images are not allowed in richtext at all.
+	//
+	// Note that we do want host and meta server to send some richtext code,
+	// as the ability to send formatted commands is nice for the usability
+	// of meta server and dedicated servers, so we're treading a bit of a
+	// fine line here.
+	std::string sanitized;
+	for (std::string::size_type pos = 0; pos < chat_message.msg.size(); ++pos) {
+		if (chat_message.msg[pos] == '<') {
+			if (chat_message.playern < 0) {
+				static const std::string good1 = "</p><p";
+				static const std::string good2 = "<br>";
+				if (!chat_message.msg.compare(pos, good1.size(), good1)) {
+					std::string::size_type nextclose = chat_message.msg.find('>', pos + good1.size());
+					if
+						(nextclose != std::string::npos &&
+						(nextclose == pos + good1.size() || chat_message.msg[pos + good1.size()] == ' '))
+					{
+						sanitized += good1;
+						pos += good1.size() - 1;
+						continue;
+					}
+				} else if (!chat_message.msg.compare(pos, good2.size(), good2)) {
+					sanitized += good2;
+					pos += good2.size() - 1;
+					continue;
+				}
+			}
+
+			sanitized += "\\<";
+		} else {
+			sanitized += chat_message.msg[pos];
+		}
+	}
+
+	// time calculation
+	char ts[13];
+	strftime(ts, sizeof(ts), "[%H:%M] ", localtime(&chat_message.time));
+	message += ts;
+
+	message += "</font><font size=14 face=DejaVuSerif color=";
+	message += chat_message.color();
+
+	if (chat_message.recipient.size() && chat_message.sender.size()) {
+		// Personal message handling
+		if (sanitized.compare(0, 3, "/me")) {
+			message += " bold=1>";
+			message += chat_message.sender;
+			message += " @ ";
+			message += chat_message.recipient;
+			message += ":</font><font size=14 face=DejaVuSerif shadow=1 color=eeeeee> ";
+			message += sanitized;
+		} else {
+			message += ">@";
+			message += chat_message.recipient;
+			message += " \\> </font><font size=14";
+			message += " face=DejaVuSerif color=";
+			message += chat_message.color();
+			message += " italic=1 shadow=1> ";
+			message += chat_message.sender;
+			message += sanitized.substr(3);
+		}
+	} else {
+		// Normal messages handling
+		if (not sanitized.compare(0, 3, "/me")) {
+			message += " italic=1>-\\> ";
+			if (chat_message.sender.size())
+				message += chat_message.sender;
+			else
+				message += "***";
+			message += sanitized.substr(3);
+		} else if (chat_message.sender.size()) {
+			message += " bold=1>";
+			message += chat_message.sender;
+			message += ":</font><font size=14 face=DejaVuSerif shadow=1 color=eeeeee> ";
+			message += sanitized;
+		} else {
+			message += " bold=1>*** ";
+			message += sanitized;
+		}
+	}
+
+	// return the formated message
+	return message + "</font><br></p>";
+}
+
+}  // namespace
 
 /**
  * Time, in seconds, that chat messages are shown in the overlay.
@@ -32,8 +137,7 @@
 static const int32_t CHAT_DISPLAY_TIME = 10;
 static const uint32_t MARGIN = 2;
 
-struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage>,
-	Widelands::NoteReceiver<LogMessage> {
+struct ChatOverlay::Impl {
 	bool transparent_;
 	ChatProvider * chat_;
 	bool havemessages_;
@@ -47,11 +151,24 @@ struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage>,
 	/// Log messages
 	std::vector<LogMessage> log_messages_;
 
-	Impl() : transparent_(false), chat_(nullptr), havemessages_(false), oldest_(0) {}
+	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
+
+	Impl()
+	   : transparent_(false),
+	     chat_(nullptr),
+	     havemessages_(false),
+	     oldest_(0),
+	     chat_message_subscriber_(
+	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) {recompute();})),
+	     log_message_subscriber_(
+	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
+		        log_messages_.push_back(note);
+		        recompute();
+		     })) {
+	}
 
 	void recompute();
-	virtual void receive(const ChatMessage & note) override;
-	virtual void receive(const LogMessage & note) override;
 };
 
 ChatOverlay::ChatOverlay
@@ -72,19 +189,8 @@ ChatOverlay::~ChatOverlay()
 void ChatOverlay::setChatProvider(ChatProvider & chat)
 {
 	m->chat_ = &chat;
-	Widelands::NoteReceiver<ChatMessage>* cmr
-		= dynamic_cast<Widelands::NoteReceiver<ChatMessage>*>(m.get());
-	cmr->connect(chat);
 	m->recompute();
 }
-
-void ChatOverlay::setLogProvider(Widelands::NoteSender<LogMessage>& log_sender)
-{
-	Widelands::NoteReceiver<LogMessage>* lmr
-		= dynamic_cast<Widelands::NoteReceiver<LogMessage>*>(m.get());
-	lmr->connect(log_sender);
-}
-
 
 /**
  * Check for message expiry.
@@ -96,21 +202,6 @@ void ChatOverlay::think()
 			m->recompute();
 	}
 }
-
-/**
- * Callback that is run when a new chat message comes in.
- */
-void ChatOverlay::Impl::receive(const ChatMessage & /* note */)
-{
-	recompute();
-}
-
-void ChatOverlay::Impl::receive(const LogMessage& note)
-{
-	log_messages_.push_back(note);
-	recompute();
-}
-
 
 /**
  * Recompute the chat message display.
@@ -147,7 +238,7 @@ void ChatOverlay::Impl::recompute()
 			// Chat message is more recent
 			oldest_ = chat_->getMessages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = chat_->getMessages()[chat_idx].toPrintable()
+				richtext = format_as_richtext(chat_->getMessages()[chat_idx])
 					+ richtext;
 			}
 			chat_idx--;

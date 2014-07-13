@@ -265,7 +265,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Flag);
+	CASTED_GET(Flag)
 };
 
 class L_Road : public L_PlayerImmovable {
@@ -296,7 +296,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Road);
+	CASTED_GET(Road)
 	static int create_new_worker
 			(Widelands::PlayerImmovable &,
 			 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
@@ -326,7 +326,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(ConstructionSite);
+	CASTED_GET(ConstructionSite)
 };
 
 
@@ -359,7 +359,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Warehouse);
+	CASTED_GET(Warehouse)
 };
 
 
@@ -390,7 +390,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(ProductionSite);
+	CASTED_GET(ProductionSite)
 	static int create_new_worker
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
 		 const Widelands::Worker_Descr *);
@@ -420,7 +420,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(MilitarySite);
+	CASTED_GET(MilitarySite)
 };
 
 
@@ -448,7 +448,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(TrainingSite);
+	CASTED_GET(TrainingSite)
 };
 
 class L_Bob : public L_MapObject {
@@ -472,7 +472,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Bob);
+	CASTED_GET(Bob)
 };
 
 class L_Worker : public L_Bob {
@@ -497,7 +497,7 @@ public:
 	/*
 	 * C methods
 	 */
-	CASTED_GET(Worker);
+	CASTED_GET(Worker)
 };
 
 class L_Soldier : public L_Worker {
@@ -524,7 +524,7 @@ public:
 	/*
 	 * C methods
 	 */
-	CASTED_GET(Soldier);
+	CASTED_GET(Soldier)
 };
 
 class L_Ship : public L_Bob {
@@ -552,7 +552,7 @@ public:
 	/*
 	 * C methods
 	 */
-	CASTED_GET(Ship);
+	CASTED_GET(Ship)
 };
 #undef CASTED_GET
 

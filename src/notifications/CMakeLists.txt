@@ -5,6 +5,7 @@ wl_library(notifications
     notifications.cc
     notifications.h
     notifications_impl.h
+    note_ids.h
   DEPENDS
     base_log
 )

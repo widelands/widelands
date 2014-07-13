@@ -997,7 +997,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		if (packet.Unsigned8())
 			c.recipient = packet.String();
 		d->chatmessages.push_back(c);
-		ChatProvider::send(c); // NoteSender<ChatMessage>
+		Notifications::publish(c);
 		break;
 	}
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
@@ -1011,7 +1011,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		c.playern = UserSettings::none(); //  == System message
 		// c.sender remains empty to indicate a system message
 		d->chatmessages.push_back(c);
-		ChatProvider::send(c);
+		Notifications::publish(c);
 		break;
 	}
 	case NETCMD_DEDICATED_ACCESS: {

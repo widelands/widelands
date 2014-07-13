@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,32 +17,23 @@
  *
  */
 
-#ifndef WL_WUI_CHATOVERLAY_H
-#define WL_WUI_CHATOVERLAY_H
+#include "chat/chat.h"
 
-#include <memory>
+#include "logic/constants.h"
+#include "logic/player.h"
 
-#include "logic/notification.h"
-#include "ui_basic/panel.h"
+using namespace Widelands;
 
-struct ChatProvider;
+ChatProvider::~ChatProvider() {}
 
-/**
- * The overlay that displays all new chat messages for some timeout on the main window.
- *
- * \see GameChatPanel, GameChatMenu
- */
-struct ChatOverlay : public UI::Panel {
-	ChatOverlay(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
-	~ChatOverlay();
-
-	void setChatProvider(ChatProvider &);
-	virtual void draw(RenderTarget &) override;
-	virtual void think() override;
-
-private:
-	struct Impl;
-	std::unique_ptr<Impl> m;
-};
-
-#endif  // end of include guard: WL_WUI_CHATOVERLAY_H
+// NOCOM(#sirver): Who uses this?
+std::string ChatMessage::color() const
+{
+	if ((playern >= 0) && playern < MAX_PLAYERS) {
+		const RGBColor & clr = Player::Colors[playern];
+		char buf[sizeof("ffffff")];
+		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r, clr.g, clr.b);
+		return buf;
+	}
+	return "999999";
+}

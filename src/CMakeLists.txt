@@ -293,8 +293,8 @@ else()
 endif()
 
 add_subdirectory(ai)
-add_subdirectory(notifications)
 add_subdirectory(base)
+add_subdirectory(chat)
 add_subdirectory(economy)
 add_subdirectory(editor)
 add_subdirectory(game_io)
@@ -303,6 +303,7 @@ add_subdirectory(io)
 add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
+add_subdirectory(notifications)
 add_subdirectory(profile)
 add_subdirectory(random)
 add_subdirectory(scripting)
@@ -316,8 +317,6 @@ add_subdirectory(wui)
 # library.
 wl_library(widelands_ball_of_mud
   SRCS
-    chat.cc
-    chat.h
     interval.h
     machdep.h
     wlapplication.cc
@@ -339,7 +338,6 @@ wl_library(widelands_ball_of_mud
     logic
     logic_game_controller
     logic_game_settings
-    logic_notification
     map_io_map_loader
     network
     profile

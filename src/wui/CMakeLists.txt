@@ -7,6 +7,7 @@ wl_library(wui_text_layout
     graphic_color
 )
 
+# NOCOMMIT(#sirver): Add a chat_message_layout
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -120,6 +121,7 @@ wl_library(wui
     base_log
     base_macros
     base_time_string
+    chat
     economy
     game_io
     graphic
@@ -135,6 +137,7 @@ wl_library(wui
     logic_notification
     logic_widelands_geometry
     network
+    notifications
     profile
     scripting
     sound
