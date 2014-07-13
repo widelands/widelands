@@ -2,17 +2,11 @@ project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
 
+include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
+
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
 endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
-
-# Define the directory structure for installation - will be hardcoded in WL bin
-# (through config.h).
-macro(_set_if_unset VAR VALUE)
-  if (NOT ${VAR} OR ${VAR} STREQUAL "")
-	  set (${VAR} ${VALUE})
-  endif()
-endmacro(_set_if_unset)
 
 if(WIN32 OR APPLE OR WL_PORTABLE)
   _set_if_unset(WL_INSTALL_PREFIX ".")
@@ -96,15 +90,6 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
 else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
-
-
-function(add_flag VAR_NAME FLAG)
-  if (${VAR_NAME})
-    set(${VAR_NAME} "${${VAR_NAME}} ${FLAG}" PARENT_SCOPE)
-  else()
-    set(${VAR_NAME} "${FLAG}" PARENT_SCOPE)
-  endif()
-endfunction()
 
 add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
 
