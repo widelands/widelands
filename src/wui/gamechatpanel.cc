@@ -22,103 +22,7 @@
 #include <limits>
 #include <string>
 
-namespace  {
-
-std::string to_old_richtext(const ChatMessage& chat_message) {
-	std::string message = "<p font-color=#33ff33 font-size=9>";
-
-	// Escape richtext characters
-	// The goal of this code is two-fold:
-	//  1. Assuming an honest game host, we want to prevent the ability of
-	//     clients to use richtext.
-	//  2. Assuming a malicious host or meta server, we want to reduce the
-	//     likelihood that a bug in the richtext renderer can be exploited,
-	//     by restricting the set of allowed richtext commands.
-	//     Most notably, images are not allowed in richtext at all.
-	//
-	// Note that we do want host and meta server to send some richtext code,
-	// as the ability to send formatted commands is nice for the usability
-	// of meta server and dedicated servers, so we're treading a bit of a
-	// fine line here.
-	std::string sanitized;
-	for (std::string::size_type pos = 0; pos < chat_message.msg.size(); ++pos) {
-		if (chat_message.msg[pos] == '<') {
-			if (chat_message.playern < 0) {
-				static const std::string good1 = "</p><p";
-				static const std::string good2 = "<br>";
-				if (!chat_message.msg.compare(pos, good1.size(), good1)) {
-					std::string::size_type nextclose = chat_message.msg.find('>', pos + good1.size());
-					if (nextclose != std::string::npos &&
-					    (nextclose == pos + good1.size() || chat_message.msg[pos + good1.size()] == ' ')) {
-						sanitized += good1;
-						pos += good1.size() - 1;
-						continue;
-					}
-				} else if (!chat_message.msg.compare(pos, good2.size(), good2)) {
-					sanitized += good2;
-					pos += good2.size() - 1;
-					continue;
-				}
-			}
-
-			sanitized += "&lt;";
-		} else {
-			sanitized += chat_message.msg[pos];
-		}
-	}
-
-	// time calculation
-	char ts[13];
-	strftime(ts, sizeof(ts), "[%H:%M] </p>", localtime(&chat_message.time));
-	message += ts;
-
-	message += "<p font-size=14 font-face=DejaVuSerif font-color=#";
-	message += chat_message.color();
-
-	if (chat_message.recipient.size() && chat_message.sender.size()) {
-		// Personal message handling
-		if (sanitized.compare(0, 3, "/me")) {
-			message += " font-decoration=underline>";
-			message += chat_message.sender;
-			message += " @ ";
-			message += chat_message.recipient;
-			message += ":</p><p font-size=14 font-face=DejaVuSerif> ";
-			message += sanitized;
-		} else {
-			message += ">@";
-			message += chat_message.recipient;
-			message += " >> </p><p font-size=14";
-			message += " font-face=DejaVuSerif font-color=#";
-			message += chat_message.color();
-			message += " font-style=italic> ";
-			message += chat_message.sender;
-			message += sanitized.substr(3);
-		}
-	} else {
-		// Normal messages handling
-		if (not sanitized.compare(0, 3, "/me")) {
-			message += " font-style=italic>-> ";
-			if (chat_message.sender.size())
-				message += chat_message.sender;
-			else
-				message += "***";
-			message += sanitized.substr(3);
-		} else if (chat_message.sender.size()) {
-			message += " font-decoration=underline>";
-			message += chat_message.sender;
-			message += ":</p><p font-size=14 font-face=DejaVuSerif> ";
-			message += sanitized;
-		} else {
-			message += " font-weight=bold>*** ";
-			message += sanitized;
-		}
-	}
-
-	// return the formated message
-	return message + "<br></p>";
-}
-
-}  // namespace
+#include "wui/chat_msg_layout.h"
 
 /**
  * Create a game chat panel
@@ -157,8 +61,7 @@ void GameChatPanel::recalculate()
 
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs.size(); ++i) {
-		// FIXME use the method from chatoverlay.cc when old renderer is kicked out
-		str += to_old_richtext(msgs[i]);
+		str += format_as_old_richtext(msgs[i]);
 		str += '\n';
 	}
 	str += "</rt>";

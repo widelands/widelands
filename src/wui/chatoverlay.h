@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "logic/notification.h"
 #include "ui_basic/panel.h"
 
 struct ChatProvider;

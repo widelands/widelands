@@ -53,30 +53,27 @@ struct ChatMessage {
 
 	// The actual chat message
 	std::string msg;
-
-	// Returns the color of the sender.
-	std::string color() const;
 };
 
-// Sends chat messages and owns the list of received chat messages. Base
-// classes must broadcast a ChatMessage as notification when a new message is
-// received.
-// NOCOM(#sirver): Who uses this?
+// Sends chat messages and owns the list of received chat messages.
+// Base classes must broadcast a ChatMessage as notification when a
+// new message is received.
 struct ChatProvider {
 	virtual ~ChatProvider();
 
-	// Send the given chat message.
-	// The message may or may not appear in subsequent calls to \ref getMessages.
+	// Send the given chat message. The message may or may not
+	// appear in subsequent calls to \ref getMessages.
 	virtual void send(const std::string &) = 0;
 
-	// \return a (chronological) list of received chat messages. This list need
-	// not be stable or monotonic. In other words, subsequent calls to this
-	// functions may return a smaller or greater number of chat messages.
+	// \return a (chronological) list of received chat messages.
+	// This list need not be stable or monotonic. In other words,
+	// subsequent calls to this functions may return a smaller or
+	// greater number of chat messages.
 	virtual const std::vector<ChatMessage>& getMessages() const = 0;
 
 	// reimplemented e.g. in internet_gaming to silence the chat if in game.
-	// NOCOM(#sirver): this is out of place. The receiver of the notifications
-	// should deal with this.
+	// TODO(sirver): this does not belong here. The receiver of the
+	// notifications should deal with this.
 	virtual bool sound_off() {return false;}
 };
 

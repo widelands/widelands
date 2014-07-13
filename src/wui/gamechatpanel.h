@@ -38,7 +38,6 @@ struct GameChatPanel : public UI::Panel {
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 ChatProvider &);
 
-	// NOCOM(#sirver): Shoud this use the new notifications system?
 	// Signal is called when a message has been sent by the user.
 	boost::signals2::signal<void ()> sent;
 

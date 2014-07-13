@@ -7,7 +7,27 @@ wl_library(wui_text_layout
     graphic_color
 )
 
-# NOCOMMIT(#sirver): Add a chat_message_layout
+wl_library(wui_chat_ui
+  SRCS
+    chatoverlay.cc
+    chatoverlay.h
+    game_chat_menu.cc
+    game_chat_menu.h
+    gamechatpanel.cc
+    gamechatpanel.h
+    chat_msg_layout.h
+    chat_msg_layout.cc
+  DEPENDS
+    base_i18n
+    chat
+    graphic
+    graphic_text
+    logic
+    profile
+    ui_basic
+    wui
+)
+
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -19,8 +39,6 @@ wl_library(wui
     building_ui.cc
     buildingwindow.cc
     buildingwindow.h
-    chatoverlay.cc
-    chatoverlay.h
     constructionsitewindow.cc
     debugconsole.cc
     debugconsole.h
@@ -29,8 +47,6 @@ wl_library(wui
     encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
-    game_chat_menu.cc
-    game_chat_menu.h
     game_debug_ui.cc
     game_debug_ui.h
     game_main_menu.cc
@@ -49,8 +65,6 @@ wl_library(wui
     game_summary.h
     game_tips.cc
     game_tips.h
-    gamechatpanel.cc
-    gamechatpanel.h
     general_statistics_menu.cc
     general_statistics_menu.h
     interactive_base.cc
@@ -128,13 +142,11 @@ wl_library(wui
     graphic_color
     graphic_image
     graphic_surface
-    graphic_text
     io_fileread
     io_filesystem
     logic
     logic_game_controller
     logic_game_settings
-    logic_notification
     logic_widelands_geometry
     network
     notifications
@@ -144,5 +156,6 @@ wl_library(wui
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud
+    wui_chat_ui
     wui_text_layout
 )
