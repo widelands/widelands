@@ -887,7 +887,7 @@ std::string WLApplication::find_relative_locale_path(std::string localedir)
  * \return true if there were no fatal errors that prevent the game from running
  */
 bool WLApplication::init_hardware() {
-	Uint32 sdl_flags = 0;
+	uint8_t sdl_flags = 0;
 	Section & s = g_options.pull_section("global");
 
 	//Start the SDL core

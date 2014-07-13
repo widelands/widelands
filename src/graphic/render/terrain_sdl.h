@@ -160,7 +160,7 @@ template<typename T> static void render_edge_lists
 
 			T * scanline =
 				reinterpret_cast<T *>
-					(static_cast<Uint8 *>(dst.get_pixels()) + y * dst.get_pitch())
+					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 				+
 				leftx;
 
@@ -487,7 +487,7 @@ template<typename T> static void dither_edge_vert
 				 ++i, ++x, tx0 += dty, ty0 -= dtx, rnd0 >>= DITHER_RAND_SHIFT)
 				if ((rnd0 & DITHER_RAND_MASK) <= i && x >= 0 && x < dstw)
 					reinterpret_cast<T *>
-						(static_cast<Uint8 *>(dst.get_pixels())
+						(static_cast<uint8_t *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
 						[x]
@@ -509,7 +509,7 @@ template<typename T> static void dither_edge_vert
 					 &&
 					 x >= 0 && x < dstw)
 					reinterpret_cast<T *>
-						(static_cast<Uint8 *>(dst.get_pixels())
+						(static_cast<uint8_t *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
 						[x]

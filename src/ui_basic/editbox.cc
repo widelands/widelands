@@ -199,7 +199,7 @@ void EditBox::setAlign(Align _align)
 /**
  * The mouse was clicked on this editbox
 */
-bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
@@ -209,7 +209,7 @@ bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 
 	return false;
 }
-bool EditBox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
+bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT && get_can_focus();
 }

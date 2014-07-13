@@ -145,7 +145,7 @@ void Sound_Handler::shutdown()
 	Mix_HookMusicFinished(nullptr);
 
 	int numtimesopened, frequency, channels;
-	Uint16 format;
+	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 	log
 		("Sound_Handler closing times %i, freq %i, format %i, chan %i\n",

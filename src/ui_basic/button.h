@@ -71,9 +71,9 @@ struct Button : public NamedPanel {
 	void think() override;
 
 	void handle_mousein(bool inside) override;
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t) override;
+	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 	// Set the permanently pressed state of the button
 	void set_perm_pressed(bool state);
