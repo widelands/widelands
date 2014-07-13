@@ -70,8 +70,7 @@ macro(_common_compile_tasks)
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -w")
   else()
     foreach(SRC ${ARG_SRCS})
-      # NOCOMMIT(#sirver): bring back
-      # run_codecheck(${NAME} ${SRC})
+      run_codecheck(${NAME} ${SRC})
     endforeach(SRC)
 
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_COMPILE_DIAGNOSTICS}")

@@ -20,81 +20,31 @@
 #ifndef WL_NOTIFICATIONS_NOTIFICATIONS_H
 #define WL_NOTIFICATIONS_NOTIFICATIONS_H
 
-#include <stdint.h>
-
-// NOCOM(#sirver): cmake does not realize changes to this file.
-#include <algorithm>
-#include <cassert>
 #include <functional>
-#include <list>
-#include <map> // NOCOM(#sirver): probably unordered_map
+#include <memory>
 
-#include <boost/noncopyable.hpp>
+#include "notifications/notifications_impl.h"
 
-#include "base/log.h" // NOCOM(#sirver): remove again
+namespace Notifications {
 
-// NOCOM(#sirver): Subscriber helper class.
+// The Notification framework is build around a singleton that dispatches
+// 'Note'. A Note is any class that has a static uint32_t kUniqueNoteId member
+// that must be unique throughout the whole system.
+//
+// The only public interface for the framework are the two functions below.
 
-class Notifications : public boost::noncopyable {
-public:
-	static Notifications* get();
+// Subscribes to a Note of type 'T' with the given callback function. The
+// returned object is opaque, but will unsubscribe on destruction.
+template <typename T>
+std::unique_ptr<Subscriber<T>> subscribe(std::function<void(const T&)> callback) {
+	return NotificationsManager::get()->subscribe<T>(callback);
+}
 
-	// NOCOM(#sirver): return a id.
-	template <typename T> uint32_t subscribe(std::function<void(const T&)> callback) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		// NOCOM(#sirver): add constructor and emplace_back
-		Subscriber new_subscriber;
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		new_subscriber.id = next_subscriber_id_;
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		new_subscriber.callback = [&callback](const void* message) {callback(*static_cast<const T*>(message));};
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		++next_subscriber_id_;
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+// Publishes 'message' to all existing subscribers.
+template <typename T> void publish(const T& message) {
+	return NotificationsManager::get()->publish<T>(message);
+}
 
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		note_id_to_subscribers_[T::kUniqueNoteId].push_back(new_subscriber);
-
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return new_subscriber.id;
-	}
-
-
-
-	template <typename T> void send(const T& message) {
-		for (Subscriber& subscriber : note_id_to_subscribers_[T::kUniqueNoteId]) {
-			subscriber.callback(&message);
-		}
-	}
-
-	template <typename T>
-	void unsubscribe(uint32_t id) {
-		std::list<Subscriber>& subscribers = note_id_to_subscribers_.at(T::kUniqueNoteId);
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		auto subscribers_it = std::find_if(subscribers.begin(),
-		                       subscribers.end(),
-		                       [id](const Subscriber& subscriber) {return subscriber.id == id;});
-
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		assert (subscribers_it != subscribers.end());
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		subscribers.erase(subscribers_it);
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	}
-
-private:
-	struct Subscriber {
-		uint32_t id;
-		std::function<void (const void*)> callback;
-	};
-	uint32_t next_subscriber_id_;
-	// NOCOM(#sirver): multiple_subscribers
-	std::map<uint32_t, std::list<Subscriber>>  note_id_to_subscribers_;
-	// NOCOM(#sirver): second entry is really not nice.
-
-	Notifications();
-	~Notifications();
-};
-
+}  // namespace Notifications
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTIFICATIONS_H

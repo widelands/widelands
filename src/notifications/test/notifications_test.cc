@@ -17,6 +17,7 @@
  *
  */
 
+#include <memory>
 #include <string>
 
 #define BOOST_TEST_MODULE Notifications
@@ -36,20 +37,24 @@ BOOST_AUTO_TEST_SUITE(NotificationsTestSuite)
 
 
 BOOST_AUTO_TEST_CASE(SimpleTest) {
-	std::vector<SimpleNote> received;
-	uint32_t id = Notifications::get()->subscribe<SimpleNote>([&received](const SimpleNote& got) {
-		received.push_back(got);
-	});
+	std::vector<SimpleNote> received1;
+	auto subscriber1 = Notifications::subscribe<SimpleNote>(
+	   [&received1](const SimpleNote& got) {received1.push_back(got);});
 
-	// NOCOM(#sirver): send is not a good name
-	Notifications::get()->send(SimpleNote("Hello"));
-	Notifications::get()->send(SimpleNote("World"));
+	Notifications::publish(SimpleNote("Hello"));
 
-	BOOST_CHECK_EQUAL(received.size(), 2);
-	BOOST_CHECK_EQUAL("Hello", received[0].text);
-	BOOST_CHECK_EQUAL("World", received[1].text);
+	std::vector<SimpleNote> received2;
+	auto subscriber2 = Notifications::subscribe<SimpleNote>(
+	   [&received2](const SimpleNote& got) {received2.push_back(got);});
 
-	Notifications::get()->unsubscribe<SimpleNote>(id);
+	Notifications::publish(SimpleNote("World"));
+
+	BOOST_CHECK_EQUAL(received1.size(), 2);
+	BOOST_CHECK_EQUAL("Hello", received1[0].text);
+	BOOST_CHECK_EQUAL("World", received1[1].text);
+
+	BOOST_CHECK_EQUAL(received2.size(), 1);
+	BOOST_CHECK_EQUAL("World", received2[0].text);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

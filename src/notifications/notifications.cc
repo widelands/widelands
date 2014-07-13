@@ -19,13 +19,22 @@
 
 #include "notifications/notifications.h"
 
+#include "base/log.h"
 
-Notifications* Notifications::get() {
-	static Notifications instance;
+namespace Notifications {
+
+NotificationsManager* NotificationsManager::get() {
+	static NotificationsManager instance;
 	return &instance;
 }
 
-Notifications::Notifications() :
-	next_subscriber_id_(1) {}
+NotificationsManager::NotificationsManager() : next_subscriber_id_(1), num_subscribers_(0) {
+}
 
-Notifications::~Notifications() {}
+NotificationsManager::~NotificationsManager() {
+	if (num_subscribers_ != 0) {
+		log("ERROR: NotificationsManager is destroyed, but there are still subscribers.");
+	}
+}
+
+}  // namespace Notifications
