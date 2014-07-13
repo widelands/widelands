@@ -6,14 +6,17 @@ Prefer DEBUG.
 
 error_msg="Do not use SDL integer data types (Uint8, Sint32 etc.). Instead use C++11 stdint.h types (uint8_t, int32_t etc.)."
 
-regexp=r"""(^Uint[0-9]|Sint[0-9])"""
+regexp=r"""(^Uint[0-9]|Sint[0-9]|#include.*SDL_types\.h|#include.*SDL_stdinc\.h)"""
 
 forbidden = [
+    "#include <SDL_types.h>",
+    "#include <SDL_stdinc.h>",
     "Uint8",
     "Sint32"
 ]
 
 allowed = [
+    "#include <stdint.h>",
     "uint8_t",
     "int32_t"
 ]
