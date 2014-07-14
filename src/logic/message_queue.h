@@ -23,14 +23,13 @@
 #include <cassert>
 #include <map>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/message.h"
 #include "logic/message_id.h"
 
 namespace Widelands {
 
-struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *> {
+struct MessageQueue : private std::map<Message_Id, Message *> {
 	friend class Map_Players_Messages_Data_Packet;
 	// Make typedefs public so that this looks like proper
 	// STL container to templated algorithms.
@@ -181,6 +180,8 @@ private:
 			 m_counts[Message::Read] +
 			 m_counts[Message::Archived]);
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
 };
 
 }
