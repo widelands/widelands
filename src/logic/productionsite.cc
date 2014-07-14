@@ -241,7 +241,7 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 				if (!working_positions()[i].worker) {
 					return false; // no one is in this house
 				} else {
-					Ware_Index have = working_positions()[i].worker->worker_index();
+					Ware_Index have = working_positions()[i].worker->descr().worker_index();
 					if (tribe().get_worker_descr(have)->can_act_as(need)) {
 						return true; // he found a lead worker
 					}
@@ -451,7 +451,7 @@ int ProductionSite::warp_worker
  */
 void ProductionSite::remove_worker(Worker & w)
 {
-	molog("%s leaving\n", w.descname().c_str());
+	molog("%s leaving\n", w.descr().descname().c_str());
 	Working_Position * wp = m_working_positions;
 
 	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
@@ -509,7 +509,7 @@ void ProductionSite::request_worker_callback
 	// needs a worker like the one just arrived. That way it is of course still possible, that the worker is
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
-	Ware_Index     idx = w->worker_index();
+	Ware_Index     idx = w->descr().worker_index();
 	for (Working_Position * wp = psite.m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
