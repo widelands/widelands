@@ -25,8 +25,6 @@
 #include <limits>
 #include <string>
 
-#include <boost/noncopyable.hpp>
-
 #include "base/macros.h"
 #include "machdep.h"
 
@@ -40,7 +38,7 @@
  *
  * Convenience functions are provided for many data types.
  */
-class StreamWrite : boost::noncopyable {
+class StreamWrite {
 public:
 	explicit StreamWrite() {}
 	virtual ~StreamWrite();
@@ -90,6 +88,9 @@ public:
 	//  Write strings without null terminator.
 	void Text   (char        const * const x) {Data(x,         strlen(x));}
 	void Text   (const std::string &       x) {Data(x.c_str(), x.size());}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(StreamWrite);
 };
 
 #endif  // end of include guard: WL_IO_STREAMWRITE_H
