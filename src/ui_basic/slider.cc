@@ -247,7 +247,7 @@ void Slider::handle_mousein(bool inside)
  *
  * Update pressed status.
  */
-bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
+bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 	if (m_pressed) {
@@ -426,7 +426,7 @@ void HorizontalSlider::draw(RenderTarget & dst)
  * \param y The new Y position of mouse pointer.
  */
 bool HorizontalSlider::handle_mousemove
-	(Uint8, int32_t const x, int32_t const y, int32_t, int32_t)
+	(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t)
 {
 	cursor_moved(x, x, y);
 	return true;
@@ -441,7 +441,7 @@ bool HorizontalSlider::handle_mousemove
  * \param y The Y position of mouse pointer.
  */
 bool HorizontalSlider::handle_mousepress
-		(const Uint8 btn, int32_t x, int32_t y)
+		(const uint8_t btn, int32_t x, int32_t y)
 {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
@@ -510,7 +510,7 @@ void VerticalSlider::draw(RenderTarget & dst)
  * \param y The new Y position of mouse pointer.
  */
 bool VerticalSlider::handle_mousemove
-	(Uint8, int32_t const x, int32_t const y, int32_t, int32_t)
+	(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t)
 {
 	cursor_moved(y, x, y);
 	return true;
@@ -524,7 +524,7 @@ bool VerticalSlider::handle_mousemove
  * \param x The X position of mouse pointer.
  * \param y The Y position of mouse pointer.
  */
-bool VerticalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 

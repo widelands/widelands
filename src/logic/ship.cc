@@ -619,16 +619,16 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					state.ivar1 = 1;
 					start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
 					return;
-				} else { // coast reached
-					m_ship_state = EXP_WAITING;
-					start_task_idle(game, descr().main_animation(), 1500);
-					// Send a message to the player, that a new coast was reached
-					std::string msg_head = _("Coast Reached");
-					std::string msg_body =
-						_("An expedition ship reached a coast and is waiting for further commands.");
-					send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
-					return;
 				}
+				// coast reached
+				m_ship_state = EXP_WAITING;
+				start_task_idle(game, descr().main_animation(), 1500);
+				// Send a message to the player, that a new coast was reached
+				std::string msg_head = _("Coast Reached");
+				std::string msg_body =
+					_("An expedition ship reached a coast and is waiting for further commands.");
+				send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
+				return;
 			}
 			break;
 		}

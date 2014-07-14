@@ -55,10 +55,10 @@ struct CheckStepRoadAI {
 	bool open_end_;
 };
 
+// We are looking for fields we can walk on
+// and owned by hostile player.
 struct FindNodeEnemy {
 	bool accept(const Map&, const FCoords& fc) const {
-		// we are looking for fields we can walk on
-		// and owned by hostile player.
 		return (fc.field->nodecaps() & MOVECAPS_WALK) && fc.field->get_owned_by() != 0 &&
 		       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 	}
@@ -70,11 +70,28 @@ struct FindNodeEnemy {
 	}
 };
 
+// We are looking for buildings owned by hostile player
+// (sometimes there is a enemy's teritorry without buildings, and
+// this confuses the AI)
+
+struct FindNodeEnemiesBuilding {
+	bool accept(const Map&, const FCoords& fc) const {
+		return (fc.field->get_immovable()) && fc.field->get_owned_by() != 0 &&
+		       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
+	}
+
+	Player* player;
+	Game& game;
+
+	FindNodeEnemiesBuilding(Player* p, Game& g) : player(p), game(g) {
+	}
+};
+
+// When looking for unowned terrain to acquire, we are actually
+// only interested in fields we can walk on.
+// Fields should either be completely unowned or owned by an opposing player_
 struct FindNodeUnowned {
 	bool accept(const Map&, const FCoords& fc) const {
-		// when looking for unowned terrain to acquire, we are actually
-		// only interested in fields we can walk on.
-		// Fields should either be completely unowned or owned by an opposing player_
 		return (fc.field->nodecaps() & MOVECAPS_WALK) &&
 		       ((fc.field->get_owned_by() == 0) ||
 		        player_->is_hostile(*game.get_player(fc.field->get_owned_by()))) &&
@@ -89,11 +106,12 @@ struct FindNodeUnowned {
 	}
 };
 
+// When looking for unowned terrain to acquire, we must
+// pay speciall attention to fields where mines can be built.
+// Fields should be completely unowned
 struct FindNodeUnownedMineable {
 	bool accept(const Map&, const FCoords& fc) const {
-		// when looking for unowned terrain to acquire, we are actually
-		// only interested in fields where mines can be built.
-		// Fields should be completely unowned
+
 		return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == 0);
 	}
 
@@ -104,17 +122,21 @@ struct FindNodeUnownedMineable {
 	}
 };
 
+// Fishers and fishbreeders must be built near water
 struct FindNodeWater {
-	FindNodeWater(const World& world) : world_(world) {}
+	FindNodeWater(const World& world) : world_(world) {
+	}
 
 	bool accept(const Map& /* map */, const FCoords& coord) const {
-		return (world_.terrain_descr(coord.field->terrain_d()).get_is() & TerrainDescription::WATER) ||
+		return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
+		        TerrainDescription::WATER) ||
 		       (world_.terrain_descr(coord.field->terrain_r()).get_is() & TerrainDescription::WATER);
 	}
 
 private:
 	const World& world_;
 };
+
 
 struct FindNodeWithFlagOrRoad {
 	Economy* economy;
@@ -174,10 +196,14 @@ struct BuildableField {
 	bool enemy_nearby_;
 
 	uint8_t unowned_land_nearby_;
+	// to identify that field is too close to border and no production building should be built there
+	bool near_border_;
 	uint8_t unowned_mines_pots_nearby_;
 	uint8_t trees_nearby_;
 	uint8_t stones_nearby_;
 	int8_t water_nearby_;
+	int8_t fish_nearby_;
+	int8_t critters_nearby_;
 	int8_t ground_water_;  // used by wells
 	uint8_t space_consumers_nearby_;
 	// to manage the military better following variables exists:
@@ -205,6 +231,7 @@ struct BuildableField {
 	     preferred_(false),
 	     enemy_nearby_(0),
 	     unowned_land_nearby_(0),
+	     near_border_(false),
 	     trees_nearby_(0),
 	     // explanation of starting values
 	     // this is done to save some work for AI (CPU utilization)
@@ -215,6 +242,8 @@ struct BuildableField {
 	     // non-negative, water is not recaldulated
 	     stones_nearby_(1),
 	     water_nearby_(-1),
+	     fish_nearby_(-1),
+	     critters_nearby_(-1),
 	     ground_water_(1),
 	     space_consumers_nearby_(0),
 	     military_capacity_(0),
@@ -267,17 +296,22 @@ struct BuildingObserver {
 		MINE
 	} type;
 
-	bool is_basic_;  // is a "must" to have for the ai
+	bool is_basic_;       // is a "must" to have for the ai
+	bool is_food_basic_;  // few food producer to be built sooner
 	bool prod_build_material_;
 	bool plants_trees_;
 	bool recruitment_;  // is "producing" workers?
 	bool is_buildable_;
-	bool need_trees_;      // lumberjack = true
-	bool need_stones_;     // quarry = true
-	bool mines_marble_;    // need to distinquish mines_ that produce marbles
-	bool mines_water_;     // wells
-	bool need_water_;      // fisher, fish_breeder = true
-	bool space_consumer_;  // farm, vineyard... = true
+	bool need_trees_;          // lumberjack = true
+	bool need_stones_;         // quarry = true
+	bool mines_marble_;        // need to distinquish mines_ that produce marbles
+	bool mines_water_;         // wells
+	bool need_water_;          // fisher, fish_breeder = true
+	bool is_hunter_;           // need to identify hunters
+	bool space_consumer_;      // farm, vineyard... = true
+	bool expansion_type_;      // military building used that can be used to control area
+	bool fighting_type_;       // military building built near enemies
+	bool mountain_conqueror_;  // military building built near mountains
 
 	bool unoccupied_;  //
 
@@ -309,8 +343,9 @@ struct BuildingObserver {
 };
 
 struct ProductionSiteObserver {
-	Widelands::OPtr<Widelands::ProductionSite> site;
+	Widelands::ProductionSite* site;
 	int32_t built_time_;
+	int32_t unoccupied_till_;
 	uint8_t stats_zero_;
 	BuildingObserver* bo;
 };
@@ -319,6 +354,9 @@ struct MilitarySiteObserver {
 	Widelands::MilitarySite* site;
 	BuildingObserver* bo;
 	uint8_t checks;
+	// when considering attack most military sites are inside territory and should be skipped during
+	// evaluation
+	bool enemies_nearby;
 };
 
 struct WareObserver {

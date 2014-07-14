@@ -1,5 +1,5 @@
 help=_Horses help to carry items along busy roads. They are reared in a horse farm.
-default_target_quantity=5
+default_target_quantity=10
 ware_hotspot=-2 12
 
 [idle]

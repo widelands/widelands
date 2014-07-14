@@ -72,16 +72,16 @@ uint32_t SDLSurface::get_pixel(uint16_t x, uint16_t y) {
 	assert(m_surface);
 
 	// Locking not needed: reading only
-	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
-	Uint8 * const pix =
-		static_cast<Uint8 *>(m_surface->pixels) +
+	const uint8_t bytes_per_pixel = m_surface->format->BytesPerPixel;
+	uint8_t * const pix =
+		static_cast<uint8_t *>(m_surface->pixels) +
 		y * m_surface->pitch + x * bytes_per_pixel;
 
 	switch (bytes_per_pixel) {
 	case 1:
 		return *pix; //  Maybe needed for save_png.
 	case 2:
-		return *reinterpret_cast<const Uint16 *>(pix);
+		return *reinterpret_cast<const uint16_t *>(pix);
 	case 3: //Needed for save_png.
 		//  We can not dereference a pointer to a size 4 object in this case
 		//  since that would casue a read beyond the end of the block pointed to
@@ -98,7 +98,7 @@ uint32_t SDLSurface::get_pixel(uint16_t x, uint16_t y) {
 		//  shifting the values. It is alignment safe.
 		return pix[0] << 0x00 | pix[1] << 0x08 | pix[2] << 0x10;
 	case 4:
-		return *reinterpret_cast<const Uint32 *>(pix);
+		return *reinterpret_cast<const uint32_t *>(pix);
 	default:
 		assert(false);
 	}
@@ -106,7 +106,7 @@ uint32_t SDLSurface::get_pixel(uint16_t x, uint16_t y) {
 	return 0; // Should never be here
 }
 
-void SDLSurface::set_pixel(uint16_t x, uint16_t y, const Uint32 clr) {
+void SDLSurface::set_pixel(uint16_t x, uint16_t y, const uint32_t clr) {
 	x += m_offsx;
 	y += m_offsy;
 
@@ -117,13 +117,13 @@ void SDLSurface::set_pixel(uint16_t x, uint16_t y, const Uint32 clr) {
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_LockSurface(m_surface);
 
-	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
-	Uint8 * const pix =
-		static_cast<Uint8 *>(m_surface->pixels) +
+	const uint8_t bytes_per_pixel = m_surface->format->BytesPerPixel;
+	uint8_t * const pix =
+		static_cast<uint8_t *>(m_surface->pixels) +
 		y * m_surface->pitch + x * bytes_per_pixel;
 	switch (bytes_per_pixel) {
-	case 2: *reinterpret_cast<Uint16 *>(pix) = static_cast<Uint16>(clr); break;
-	case 4: *reinterpret_cast<Uint32 *>(pix) = clr;                      break;
+	case 2: *reinterpret_cast<uint16_t *>(pix) = static_cast<uint16_t>(clr); break;
+	case 4: *reinterpret_cast<uint32_t *>(pix) = clr;                      break;
 	default: break;
 	};
 
@@ -183,8 +183,8 @@ void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 	const uint32_t color = clr.map(format());
 
 	SDL_Rect r = {
-		static_cast<Sint16>(rc.x), static_cast<Sint16>(rc.y),
-		static_cast<Uint16>(rc.w), static_cast<Uint16>(rc.h)
+		static_cast<int16_t>(rc.x), static_cast<int16_t>(rc.y),
+		static_cast<uint16_t>(rc.w), static_cast<uint16_t>(rc.h)
 		};
 	SDL_FillRect(m_surface, &r, color);
 }
@@ -219,11 +219,11 @@ void SDLSurface::brighten_rect(const Rect& rc, const int32_t factor) {
 			for (int32_t x = rc.x; x < bl.x; ++x)
 		{
 
-			Uint8 * const pix =
-				static_cast<Uint8 *>(m_surface->pixels) +
+			uint8_t * const pix =
+				static_cast<uint8_t *>(m_surface->pixels) +
 				(y + m_offsy) * m_surface->pitch + (x + m_offsx) * 4;
 
-			uint32_t const clr = *reinterpret_cast<const Uint32 *>(pix);
+			uint32_t const clr = *reinterpret_cast<const uint32_t *>(pix);
 			uint8_t gr, gg, gb;
 			SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
 			int16_t r = gr + factor;
@@ -237,18 +237,18 @@ void SDLSurface::brighten_rect(const Rect& rc, const int32_t factor) {
 			if (r & 0xFF00)
 				r = ~r >> 24;
 
-			*reinterpret_cast<Uint32 *>(pix) =
+			*reinterpret_cast<uint32_t *>(pix) =
 				SDL_MapRGB(m_surface->format, r, g, b);
 		}
 	} else if (m_surface->format->BytesPerPixel == 2) {
 		for (int32_t y = rc.y; y < bl.y; ++y)
 			for (int32_t x = rc.x; x < bl.x; ++x)
 		{
-			Uint8 * const pix =
-				static_cast<Uint8 *>(m_surface->pixels) +
+			uint8_t * const pix =
+				static_cast<uint8_t *>(m_surface->pixels) +
 				(y + m_offsy) * m_surface->pitch + (x + m_offsx) * 2;
 
-			uint32_t const clr = *reinterpret_cast<const Uint16 *>(pix);
+			uint32_t const clr = *reinterpret_cast<const uint16_t *>(pix);
 			uint8_t gr, gg, gb;
 			SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
 			int16_t r = gr + factor;
@@ -262,7 +262,7 @@ void SDLSurface::brighten_rect(const Rect& rc, const int32_t factor) {
 			if (r & 0xFF00)
 				r = ~r >> 24;
 
-			*reinterpret_cast<Uint16 *>(pix) =
+			*reinterpret_cast<uint16_t *>(pix) =
 				SDL_MapRGB(m_surface->format, r, g, b);
 		}
 	}
@@ -327,11 +327,11 @@ void SDLSurface::blit
 {
 	SDL_Surface* sdlsurf = static_cast<const SDLSurface*>(src)->get_sdl_surface();
 	SDL_Rect srcrect = {
-		static_cast<Sint16>(srcrc.x), static_cast<Sint16>(srcrc.y),
-		static_cast<Uint16>(srcrc.w), static_cast<Uint16>(srcrc.h)
+		static_cast<int16_t>(srcrc.x), static_cast<int16_t>(srcrc.y),
+		static_cast<uint16_t>(srcrc.w), static_cast<uint16_t>(srcrc.h)
 		};
 	SDL_Rect dstrect = {
-		static_cast<Sint16>(dst.x), static_cast<Sint16>(dst.y),
+		static_cast<int16_t>(dst.x), static_cast<int16_t>(dst.y),
 		0, 0
 		};
 

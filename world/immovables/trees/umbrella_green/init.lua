@@ -9,6 +9,7 @@ terrain_affinity = {
 
 world:new_immovable_type{
    name = "umbrella_green_wasteland_sapling",
+   -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Umbrella Tree (Sapling)",
    editor_category = "trees_wasteland",
    size = "small",
@@ -32,6 +33,7 @@ world:new_immovable_type{
 
 world:new_immovable_type{
    name = "umbrella_green_wasteland_pole",
+   -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Umbrella Tree (Pole)",
    editor_category = "trees_wasteland",
    size = "small",
@@ -55,6 +57,7 @@ world:new_immovable_type{
 
 world:new_immovable_type{
    name = "umbrella_green_wasteland_mature",
+   -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Umbrella Tree (Mature)",
    editor_category = "trees_wasteland",
    size = "small",
@@ -78,6 +81,7 @@ world:new_immovable_type{
 
 world:new_immovable_type{
    name = "umbrella_green_wasteland_old",
+   -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Green Umbrella Tree (Old)",
    editor_category = "trees_wasteland",
    size = "small",
