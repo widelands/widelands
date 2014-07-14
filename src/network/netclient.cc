@@ -1076,8 +1076,9 @@ void NetClient::disconnect
 			s.Unsigned8(NETCMD_DISCONNECT);
 			s.Unsigned8(arg.size() < 1 ? 1 : 2);
 			s.String(reason);
-			if (arg.size() > 0)
+			if (!arg.empty()) {
 				s.String(arg);
+			}
 			s.send(d->sock);
 		}
 

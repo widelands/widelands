@@ -15,7 +15,6 @@ Contents:
    server
    geometry
    productionsite_program
-   manual_testing
    lua_index
 
 

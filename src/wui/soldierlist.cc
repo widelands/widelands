@@ -60,8 +60,8 @@ struct SoldierPanel : UI::Panel {
 
 protected:
 	virtual void handle_mousein(bool inside) override;
-	virtual bool handle_mousemove(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	virtual bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	virtual bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	virtual bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
 private:
 	Point calc_pos(uint32_t row, uint32_t col) const;
@@ -330,7 +330,7 @@ void SoldierPanel::handle_mousein(bool inside)
 }
 
 bool SoldierPanel::handle_mousemove
-	(Uint8 /* state */,
+	(uint8_t /* state */,
 	 int32_t x,
 	 int32_t y,
 	 int32_t /* xdiff */,
@@ -341,7 +341,7 @@ bool SoldierPanel::handle_mousemove
 	return true;
 }
 
-bool SoldierPanel::handle_mousepress(Uint8 btn, int32_t x, int32_t y)
+bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y)
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (m_click_fn) {

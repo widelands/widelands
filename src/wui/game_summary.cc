@@ -109,7 +109,7 @@ m_game(parent->game())
 	fill_data();
 }
 
-bool GameSummaryScreen::handle_mousepress(Uint8 btn, int32_t mx, int32_t my)
+bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my)
 {
 	// Prevent closing with right click
 	if (btn == SDL_BUTTON_RIGHT)
@@ -192,7 +192,7 @@ void GameSummaryScreen::fill_data()
 		}
 	}
 	m_players_table->update();
-	if (players_status.size() > 0) {
+	if (!players_status.empty()) {
 		m_players_table->select(players_status.at(0).player);
 	}
 	m_gametime_value->set_text(gametimestring(m_game.get_gametime()));

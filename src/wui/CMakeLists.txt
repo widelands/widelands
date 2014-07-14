@@ -70,8 +70,6 @@ wl_library(wui
     mapviewpixelconstants.h
     mapviewpixelfunctions.cc
     mapviewpixelfunctions.h
-    military_box.cc
-    military_box.h
     militarysitewindow.cc
     minimap.cc
     minimap.h
@@ -128,6 +126,7 @@ wl_library(wui
     graphic_color
     graphic_image
     graphic_surface
+    graphic_text
     io_fileread
     io_filesystem
     logic

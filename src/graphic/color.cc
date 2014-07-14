@@ -25,22 +25,24 @@ RGBColor::RGBColor() {
 RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) :
 	r(R), g(G), b(B) {}
 
-Uint32 RGBColor::map(const SDL_PixelFormat& fmt) const {
+uint32_t RGBColor::map(const SDL_PixelFormat& fmt) const {
 	return SDL_MapRGB(&const_cast<SDL_PixelFormat&>(fmt), r, g, b);
 }
 
-void RGBColor::set(SDL_PixelFormat* const fmt, Uint32 const clr) {
+void RGBColor::set(SDL_PixelFormat* const fmt, uint32_t const clr) {
 	SDL_GetRGB(clr, fmt, &r, &g, &b);
 }
 
 bool RGBColor::operator == (const RGBColor& other) const {
 	return r == other.r and g == other.g and b == other.b;
 }
+bool RGBColor::operator != (const RGBColor& other) const {
+	return !(*this == other);
+}
 
 RGBAColor::RGBAColor(uint8_t R, uint8_t G, uint8_t B, uint8_t A) : r(R), g(G), b(B), a(A) {
 }
 
-// Initializes the color to black.
 RGBAColor::RGBAColor() : RGBAColor(0, 0, 0, 0) {
 }
 
@@ -57,4 +59,11 @@ uint32_t RGBAColor::map(const SDL_PixelFormat& fmt) const {
 
 void RGBAColor::set(const SDL_PixelFormat& fmt, const uint32_t clr) {
 	SDL_GetRGBA(clr, const_cast<SDL_PixelFormat*>(&fmt), &r, &g, &b, &a);
+}
+
+bool RGBAColor::operator == (const RGBAColor& other) const {
+	return (r == other.r && g == other.g && b == other.b && a == other.a);
+}
+bool RGBAColor::operator != (const RGBAColor& other) const {
+	return !(*this == other);
 }

@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
 #define WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
 
+#include <boost/format.hpp>
+
 #include "graphic/text/rt_errors.h"
 
 namespace RT {
@@ -32,6 +34,7 @@ struct SyntaxError_Impl : public SyntaxError {
 			.str())
 	{}
 };
+
 }
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H

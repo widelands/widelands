@@ -1,24 +1,28 @@
+add_subdirectory(test)
+
 wl_library(graphic_text
   SRCS
+    font_io.cc
+    font_io.h
     rt_errors.h
     rt_errors_impl.h
     rt_parse.cc
     rt_parse.h
     rt_render.cc
     rt_render.h
+    sdl_ttf_font.cc
     sdl_ttf_font.h
-    sdl_ttf_font_impl.cc
-    sdl_ttf_font_impl.h
-    sdl_ttf_font_loader_from_file.cc
-    sdl_ttf_font_loader_from_filesystem.cc
     textstream.cc
     textstream.h
   USES_SDL
+  USES_SDL_TTF
   USES_SDL_GFX
   DEPENDS
+    base_exceptions
     base_geometry
     graphic_color
     graphic_image
+    graphic_image_io
     graphic_surface
     io_fileread
     io_filesystem

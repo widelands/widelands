@@ -124,11 +124,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		// on mac and windows, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
 		log("Adding executable directory to search path\n");
-		g_fs->AddFileSystem(FileSystem::Create(s));
+		g_fs->AddFileSystem(&FileSystem::Create(s));
 #else
 		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
 		g_fs->AddFileSystem //  see config.h
-			(FileSystem::Create
+			(&FileSystem::Create
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
@@ -144,7 +144,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 #ifdef __linux__
 		// if that fails, search in FHS standard location (obviously UNIX-only)
 		log ("Adding directory:/usr/share/games/widelands\n");
-		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
+		g_fs->AddFileSystem(&FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
 	catch (FileNotFound_error &) {}
@@ -162,7 +162,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		 * absolute fallback directory is the CWD
 		 */
 		log ("Adding directory:.\n");
-		g_fs->AddFileSystem(FileSystem::Create("."));
+		g_fs->AddFileSystem(&FileSystem::Create("."));
 #endif
 	}
 	catch (FileNotFound_error &) {}
@@ -189,7 +189,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		if (argv0 != ".") {
 			try {
 				log ("Adding directory: %s\n", argv0.c_str());
-				g_fs->AddFileSystem(FileSystem::Create(argv0));
+				g_fs->AddFileSystem(&FileSystem::Create(argv0));
 			}
 			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {
@@ -200,9 +200,8 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			}
 		}
 	}
-	//now make sure we always access the file with the right version first
-	g_fs->PutRightVersionOnTop();
 }
+
 void WLApplication::setup_homedir() {
 	//If we don't have a home directory don't do anything
 	if (m_homedir.size()) {
@@ -212,7 +211,7 @@ void WLApplication::setup_homedir() {
 
 			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
 			home->EnsureDirectoryExists(".");
-			g_fs->SetHomeFileSystem(*home.release());
+			g_fs->SetHomeFileSystem(home.release());
 		} catch (const std::exception & e) {
 			log("Failed to add home directory: %s\n", e.what());
 		}
@@ -306,7 +305,7 @@ m_redirected_stdio(false)
 				("True Type library did not initialize: %s\n", TTF_GetError());
 
 		UI::g_fh = new UI::Font_Handler();
-		UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
+		UI::g_fh1 = UI::create_fonthandler(g_gr);
 	} else
 		g_gr = nullptr;
 
@@ -888,7 +887,7 @@ std::string WLApplication::find_relative_locale_path(std::string localedir)
  * \return true if there were no fatal errors that prevent the game from running
  */
 bool WLApplication::init_hardware() {
-	Uint32 sdl_flags = 0;
+	uint8_t sdl_flags = 0;
 	Section & s = g_options.pull_section("global");
 
 	//Start the SDL core
@@ -1073,7 +1072,7 @@ void WLApplication::handle_commandline_parameters()
 
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
-		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
+		g_fs->AddFileSystem(&FileSystem::Create(m_commandline["datadir"]));
 		m_default_datadirs = false;
 		m_commandline.erase("datadir");
 	}

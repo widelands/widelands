@@ -280,14 +280,14 @@ void Editor_Interactive::map_clicked(bool should_draw) {
 	set_need_save(true);
 }
 
-bool Editor_Interactive::handle_mouserelease(Uint8 btn, int32_t x, int32_t y) {
+bool Editor_Interactive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		m_left_mouse_button_is_down = false;
 	}
 	return Interactive_Base::handle_mouserelease(btn, x, y);
 }
 
-bool Editor_Interactive::handle_mousepress(Uint8 btn, int32_t x, int32_t y) {
+bool Editor_Interactive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		m_left_mouse_button_is_down = true;
 	}

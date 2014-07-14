@@ -21,6 +21,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <cstdlib>
 
 #include "base/macros.h"
 #include "graphic/graphic.h"
@@ -138,9 +139,9 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	// (this is the source color) over the region
 	glBegin(GL_QUADS); {
 		glColor4f
-			((fabsf(factor) / 256.0f),
-			 (fabsf(factor) / 256.0f),
-			 (fabsf(factor) / 256.0f),
+			((std::abs(factor) / 256.0f),
+			 (std::abs(factor) / 256.0f),
+			 (std::abs(factor) / 256.0f),
 			 0);
 		glVertex2f(rc.x,        rc.y);
 		glVertex2f(rc.x + rc.w, rc.y);

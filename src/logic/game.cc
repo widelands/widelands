@@ -228,8 +228,9 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	loaderUI.step (_("Preloading a map"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
-	if (background.size() > 0)
+	if (!background.empty()) {
 		loaderUI.set_background(background);
+	}
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
@@ -263,8 +264,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		m_ctrl = nullptr;
 		throw;
 	}
-
-	return false;
 }
 
 
@@ -288,8 +287,9 @@ void Game::init_newgame
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
 	if (loaderUI) {
-		if (background.size() > 0)
+		if (!background.empty()) {
 			loaderUI->set_background(background);
+		}
 		loaderUI->step(_("Configuring players"));
 	}
 	std::vector<PlayerSettings> shared;
@@ -417,8 +417,6 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		m_ctrl = nullptr;
 		throw;
 	}
-
-	return false;
 }
 
 /**

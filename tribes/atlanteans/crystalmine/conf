@@ -32,8 +32,8 @@ work=_Work
 [mine_stone]
 return=skipped unless economy needs stone or not economy needs bread
 return=skipped unless economy needs stone or not economy needs smoked_fish
-consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
+consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=granite 4 100 5 2
 produce=stone:2
@@ -50,8 +50,8 @@ produce=quartz
 [mine_quartz]
 return=skipped unless economy needs quartz or not economy needs bread
 return=skipped unless economy needs quartz or not economy needs smoked_fish
-consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
+consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=granite 4 100 5 2
 produce=stone:2
@@ -65,8 +65,8 @@ produce=quartz:2
 [mine_diamond]
 return=skipped unless economy needs diamond or not economy needs bread
 return=skipped unless economy needs diamond or not economy needs smoked_fish
-consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
+consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=granite 4 100 5 2
 produce=diamond

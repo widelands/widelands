@@ -535,8 +535,10 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 			return CAST_TO_LUA(Worker);
 		case Bob::SHIP:
 			return CAST_TO_LUA(Ship);
+		default:
+			assert(false);  // Never here, hopefully.
+			return 0;
 	}
-	assert(false);  // Never here, hopefully.
 }
 
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
@@ -2884,11 +2886,10 @@ int L_Field::region(lua_State * L) {
 		uint32_t radius = luaL_checkuint32(L, -2);
 		uint32_t inner_radius = luaL_checkuint32(L, -1);
 		return m_hollow_region(L, radius, inner_radius);
-	} else {
-		uint32_t radius = luaL_checkuint32(L, -1);
-		return m_region(L, radius);
 	}
-	return 1;
+
+	uint32_t radius = luaL_checkuint32(L, -1);
+	return m_region(L, radius);
 }
 
 

@@ -20,112 +20,76 @@
 #include "graphic/text/rt_parse.h"
 
 #include <memory>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <SDL.h>
 #include <boost/format.hpp>
-#include <boost/unordered_map.hpp>
-#include <boost/unordered_set.hpp>
 
 #include "graphic/text/rt_errors_impl.h"
 #include "graphic/text/textstream.h"
 
-using namespace std;
-using namespace boost;
 
 namespace RT {
 
-struct TagConstraint {
-	unordered_set<string> allowed_attrs;
-	unordered_set<string> allowed_childs;
-	bool text_allowed;
-	bool has_closing_tag;
-};
-typedef unordered_map<string, TagConstraint> TagConstraints;
+Attr::Attr(const std::string& gname, const std::string& value) : m_name(gname), m_value(value) {
+}
 
-// Interface Stuff {{{
-class Attr : public IAttr {
-public:
-	Attr(string gname, string value) : m_name(gname), m_value(value) {}
-	virtual ~Attr() {}
-
-	virtual const string & name() const override {return m_name;}
-	virtual long get_int() const override;
-	virtual bool get_bool() const override;
-	virtual string get_string() const override;
-	virtual RGBColor get_color() const override;
-
-private:
-	string m_name, m_value;
-};
+const std::string& Attr::name() const {
+	return m_name;
+}
 
 long Attr::get_int() const {
 	long rv = strtol(m_value.c_str(), nullptr, 10);
 	return rv;
 }
-string Attr::get_string() const {
+
+std::string Attr::get_string() const {
 	return m_value;
 }
+
 bool Attr::get_bool() const {
 	if (m_value == "true" or m_value == "1" or m_value == "yes")
 		return true;
 	return false;
 }
+
 RGBColor Attr::get_color() const {
 	if (m_value.size() != 6)
-		throw InvalidColor((format("Could not parse '%s' as a color.") % m_value).str());
+		throw InvalidColor((boost::format("Could not parse '%s' as a color.") % m_value).str());
 
 	uint32_t clrn = strtol(m_value.c_str(), nullptr, 16);
 	return RGBColor((clrn >> 16) & 0xff, (clrn >> 8) & 0xff, clrn & 0xff);
 }
 
-// This is basically a map<string, Attr>, but because there is no
-// .at() in the STL, we need to define our own read only map
-class AttrMap : public IAttrMap {
-public:
-	void add_attribute(const string& name, Attr* a) {
-		m_attrs[name] = std::unique_ptr<Attr>(a);
+void AttrMap::add_attribute(const std::string& name, Attr* a) {
+	m_attrs[name] = std::unique_ptr<Attr>(a);
+}
+
+const Attr& AttrMap::operator[](const std::string& s) const {
+	const auto i = m_attrs.find(s);
+	if (i == m_attrs.end()) {
+		throw AttributeNotFound(s);
 	}
+	return *(i->second);
+}
 
-	const IAttr& operator[](const std::string& s) const override {
-		AttributesMap::const_iterator i = m_attrs.find(s);
-		if (i == m_attrs.end()) {
-			throw AttributeNotFound(s);
-		}
-		return *(i->second);
-	}
+bool AttrMap::has(const std::string& s) const {
+	return m_attrs.count(s);
+}
 
-	bool has(const std::string & s) const override {
-		return m_attrs.count(s);
-	}
+const std::string& Tag::name() const {
+	return m_name;
+}
 
+const AttrMap& Tag::attrs() const {
+	return m_am;
+}
 
-private:
-	typedef map<string, std::unique_ptr<Attr>> AttributesMap;
-	AttributesMap m_attrs;
-};
-
-class Tag : public ITag {
-public:
-	Tag();
-	virtual ~Tag();
-
-	virtual const string & name() const override {return m_name;}
-	virtual const AttrMap & attrs() const override {return m_am;}
-	virtual const ChildList & childs() const override {return m_childs;}
-	void parse(TextStream & ts, TagConstraints & tcs, const TagSet &);
-
-private:
-	void m_parse_opening_tag(TextStream & ts, TagConstraints & tcs);
-	void m_parse_closing_tag(TextStream & ts);
-	void m_parse_attribute(TextStream & ts, unordered_set<string> &);
-	void m_parse_content(TextStream & ts, TagConstraints & tc, const TagSet &);
-
-	string m_name;
-	AttrMap m_am;
-	ChildList m_childs;
-};
-Tag::Tag() {}
+const Tag::ChildList& Tag::childs() const {
+	return m_childs;
+}
 
 Tag::~Tag() {
 	while (m_childs.size()) {
@@ -153,8 +117,8 @@ void Tag::m_parse_closing_tag(TextStream & ts) {
 	ts.expect(">", false);
 }
 
-void Tag::m_parse_attribute(TextStream & ts, unordered_set<string> & allowed_attrs) {
-	string aname = ts.till_any("=");
+void Tag::m_parse_attribute(TextStream & ts, std::unordered_set<std::string> & allowed_attrs) {
+	std::string aname = ts.till_any("=");
 	if (!allowed_attrs.count(aname))
 		throw SyntaxError_Impl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
 
@@ -172,7 +136,7 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 			ts.skip_ws();
 
 		size_t line = ts.line(), col = ts.col();
-		string text = ts.till_any("<");
+		std::string text = ts.till_any("<");
 		if (text != "") {
 			if (not tc.text_allowed)
 				throw SyntaxError_Impl(line, col, "no text, as only tags are allowed here", text, ts.peek(100));
@@ -208,21 +172,7 @@ void Tag::parse(TextStream & ts, TagConstraints & tcs, const TagSet & allowed_ta
 /*
  * Class Parser
  */
-class Parser : public IParser {
-public:
-	Parser();
-	virtual ~Parser();
-	virtual ITag * parse(string text, const TagSet &) override;
-	virtual string remaining_text() override;
-
-private:
-	TagConstraints m_tcs;
-	TextStream * m_ts;
-};
-
-Parser::Parser() :
-	m_ts(nullptr)
-{
+Parser::Parser() {
 	{ // rt tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
@@ -331,16 +281,10 @@ Parser::Parser() :
 }
 
 Parser::~Parser() {
-	if (m_ts)
-		delete m_ts;
 }
 
-ITag * Parser::parse(string text, const TagSet & allowed_tags) {
-	if (m_ts) {
-		delete m_ts;
-		m_ts = nullptr;
-	}
-	m_ts = new TextStream(text);
+Tag * Parser::parse(std::string text, const TagSet & allowed_tags) {
+	m_ts.reset(new TextStream(text));
 
 	m_ts->skip_ws(); m_ts->rskip_ws();
 	Tag * rv = new Tag();
@@ -348,15 +292,10 @@ ITag * Parser::parse(string text, const TagSet & allowed_tags) {
 
 	return rv;
 }
-string Parser::remaining_text() {
-	if (!m_ts)
+std::string Parser::remaining_text() {
+	if (m_ts == nullptr)
 		return "";
 	return m_ts->remaining_text();
-}
-// End: Interface Stuff }}}
-
-IParser * setup_parser() {
-	return new Parser();
 }
 
 }

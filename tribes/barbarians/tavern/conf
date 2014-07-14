@@ -15,6 +15,7 @@ raw_stone=1
 
 [aihints]
 build_material=false
+is_food_basic=true
 
 [working positions]
 innkeeper=1
@@ -29,9 +30,9 @@ produce_ration=_Produce ration
 work=_Work
 
 [produce_ration]
+sleep=14000
 return=skipped unless economy needs ration
 consume=fish,pittabread,meat
-sleep=14000
 animate=working 19000
 produce=ration
 
