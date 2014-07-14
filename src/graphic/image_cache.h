@@ -57,11 +57,11 @@ public:
 	bool has(const std::string& hash) const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 	typedef std::map<std::string, const Image*> ImageMap;
 
 	ImageMap images_;  /// hash of cached filename/image pairs
 	SurfaceCache* const surface_cache_;  // Not owned.
+	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_CACHE_H

@@ -84,13 +84,14 @@ public:
 	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(World);
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;
 	std::unique_ptr<DescriptionMaintainer<Immovable_Descr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_immovable_categories_;
+
+	DISALLOW_COPY_AND_ASSIGN(World);
 };
 
 }  // namespace Widelands

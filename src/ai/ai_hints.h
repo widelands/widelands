@@ -82,7 +82,6 @@ struct BuildingHints {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 	char* renews_map_resource;
 	char* mines_;
 	bool basic_;
@@ -95,6 +94,7 @@ private:
 	bool recruitment_;  // whether building recruits special workers
 	bool space_consumer_;
 	uint8_t mines_percent_;
+	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };
 
 #endif  // end of include guard: WL_AI_AI_HINTS_H

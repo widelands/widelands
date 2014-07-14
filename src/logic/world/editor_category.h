@@ -45,10 +45,10 @@ public:
 	const Image* picture() const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(EditorCategory);
 	const std::string name_;
 	const std::string descname_;
 	const std::string image_file_;
+	DISALLOW_COPY_AND_ASSIGN(EditorCategory);
 };
 
 }  // namespace Widelands

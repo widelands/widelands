@@ -231,11 +231,12 @@ public:
 	Section & create_section_duplicate(char const * name);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Profile);
 	std::string m_filename;
 	typedef std::vector<Section> Section_list;
 	Section_list m_sections;
 	int32_t m_error_level;
+
+	DISALLOW_COPY_AND_ASSIGN(Profile);
 };
 
 #endif  // end of include guard: WL_PROFILE_PROFILE_H

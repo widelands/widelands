@@ -44,10 +44,11 @@ struct cookie_priority_queue_base {
 		bool is_active() const {return pos != bad_pos();}
 
 	private:
-		DISALLOW_COPY_AND_ASSIGN(cookie);
 		friend struct cookie_priority_queue_base<_Type>;
 
 		size_type pos;
+
+		DISALLOW_COPY_AND_ASSIGN(cookie);
 	};
 
 protected:

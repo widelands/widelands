@@ -93,7 +93,6 @@ public:
 	double fertility() const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 	const std::string name_;
 	const std::string descname_;
 	const EditorCategory* editor_category_;  ///< not owned.
@@ -107,6 +106,8 @@ private:
 	double temperature_;
 	double fertility_;
 	double humidity_;
+
+	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };
 
 }  // namespace Widelands

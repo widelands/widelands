@@ -55,11 +55,12 @@ public:
 	double pickiness() const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(TerrainAffinity);
 	double preferred_fertility_;
 	double preferred_humidity_;
 	double preferred_temperature_;
 	double pickiness_;
+
+	DISALLOW_COPY_AND_ASSIGN(TerrainAffinity);
 };
 
 // Returns a value in [0., 1.] that describes the suitability for the

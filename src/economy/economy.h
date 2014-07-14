@@ -183,7 +183,6 @@ public:
 
 	void rebalance_supply() {_start_request_timer();}
 
-private:
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 /*************/
 /* Functions */

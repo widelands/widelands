@@ -56,12 +56,13 @@ public:
 	const std::string& get_editor_pic(uint32_t amount) const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(ResourceDescription);
 	const std::string name_;
 	const std::string descname_;
 	const bool detectable_;
 	const int32_t max_amount_;
 	std::vector<EditorPicture> editor_pictures_;
+
+	DISALLOW_COPY_AND_ASSIGN(ResourceDescription);
 };
 
 }  // namespace Widelands

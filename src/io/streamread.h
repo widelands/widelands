@@ -77,7 +77,6 @@ public:
 	};
 #define data_error(...) _data_error(__VA_ARGS__)
 
-private:
 	DISALLOW_COPY_AND_ASSIGN(StreamRead);
 };
 

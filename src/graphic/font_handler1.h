@@ -23,10 +23,10 @@
 
 #include <string>
 
-#include <boost/noncopyable.hpp>
-
-#include "graphic/align.h"
+#include "base/macros.h"
 #include "base/point.h"
+#include "graphic/align.h"
+
 
 class FileSystem;
 class Image;
@@ -37,8 +37,9 @@ namespace UI {
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
-class IFont_Handler1 : boost::noncopyable {
+class IFont_Handler1 {
 public:
+	IFont_Handler1() = default;
 	virtual ~IFont_Handler1() {}
 
 	/*
@@ -46,6 +47,7 @@ public:
 	 * ownership remains with this class. Will throw on error.
 	 */
 	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
+	DISALLOW_COPY_AND_ASSIGN(IFont_Handler1);
 };
 
 // Create a new Font_Handler1. Ownership for the objects is not taken.

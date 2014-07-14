@@ -81,7 +81,6 @@ public:
 	void save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 	struct ExpeditionWorker;
 
 	// Handles arriving workers and wares.
@@ -97,6 +96,7 @@ private:
 
 	std::vector<std::unique_ptr<WaresQueue>> wares_;
 	std::vector<std::unique_ptr<ExpeditionWorker>> workers_;
+	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 };
 
 }  // namespace Widelands

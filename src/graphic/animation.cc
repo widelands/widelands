@@ -65,12 +65,12 @@ public:
 	bool next(std::string* s);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
 	std::string templ_;
 	std::string fmtstr_;
 	std::string replstr_;
 	uint32_t cur_;
 	uint32_t max_;
+	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
 };
 
 /**

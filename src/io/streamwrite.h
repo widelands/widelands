@@ -89,7 +89,6 @@ public:
 	void Text   (char        const * const x) {Data(x,         strlen(x));}
 	void Text   (const std::string &       x) {Data(x.c_str(), x.size());}
 
-private:
 	DISALLOW_COPY_AND_ASSIGN(StreamWrite);
 };
 

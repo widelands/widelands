@@ -352,8 +352,7 @@ public:
 		//  border_br
 		//  border_bl
 		//  <end>                           0x100         0x160
-		private:
-			DISALLOW_COPY_AND_ASSIGN(Field);
+		DISALLOW_COPY_AND_ASSIGN(Field);
 	};
 
 	const Field * fields() const {return m_fields;}
@@ -541,8 +540,6 @@ private:
 		(Building *, Building_Index const index_of_new_building);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Player);
-
 	MessageQueue           m_messages;
 
 	Editor_Game_Base     & m_egbase;
@@ -597,6 +594,8 @@ private:
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
 	BuildingStats m_building_stats;
+
+	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
 void find_former_buildings

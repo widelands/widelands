@@ -239,7 +239,6 @@ protected:
 	const Widelands::World& world_;
 	const std::map<S2_Map_Loader::WorldType, std::vector<std::string>> table_;
 
-private:
 	DISALLOW_COPY_AND_ASSIGN(TerrainConverter);
 };
 

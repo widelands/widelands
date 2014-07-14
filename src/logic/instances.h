@@ -90,7 +90,6 @@ protected:
 	void add_attribute(uint32_t attr);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Map_Object_Descr);
 	typedef std::map<std::string, uint32_t> Anims;
 	typedef std::map<std::string, uint32_t> AttribMap;
 	typedef std::vector<uint32_t>           Attributes;
@@ -102,6 +101,7 @@ private:
 	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
 	static AttribMap  s_dyn_attribs;
 
+	DISALLOW_COPY_AND_ASSIGN(Map_Object_Descr);
 };
 
 /**
@@ -327,7 +327,6 @@ protected:
 	Serial                   m_serial;
 	LogSink                * m_logsink;
 
-private:
 	DISALLOW_COPY_AND_ASSIGN(Map_Object);
 };
 
@@ -375,9 +374,10 @@ struct Object_Manager  {
 	std::vector<Serial> all_object_serials_ordered () const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Object_Manager);
 	Serial   m_lastserial;
 	objmap_t m_objects;
+
+	DISALLOW_COPY_AND_ASSIGN(Object_Manager);
 };
 
 /**

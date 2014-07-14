@@ -169,7 +169,6 @@ public:
 	World* mutable_world();
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
 	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.
 	int32_t gametime_;
 	Object_Manager objects_;
@@ -221,6 +220,7 @@ private:
 		 bool          neutral_when_competing_influence               = false,
 		 bool          conquer_guarded_location_by_superior_influence = false);
 	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
+	DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \

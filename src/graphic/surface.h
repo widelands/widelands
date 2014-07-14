@@ -20,8 +20,7 @@
 #ifndef WL_GRAPHIC_SURFACE_H
 #define WL_GRAPHIC_SURFACE_H
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/color.h"
 #include "graphic/compositemode.h"
@@ -30,7 +29,7 @@
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
  * It also allows low level pixel access.
  */
-class Surface : boost::noncopyable {
+class Surface  {
 public:
 	// Surfaces can either be converted to display format on creation or kept in
 	// the format they were created. The only reason not to convert to display
@@ -46,6 +45,7 @@ public:
 	// dimensions.
 	static Surface* create(uint16_t w, uint16_t h);
 
+	Surface() = default;
 	virtual ~Surface() {}
 
 	/// Dimensions.
@@ -135,6 +135,8 @@ public:
 	 * \warning May only be called inside lock/unlock pairs.
 	 */
 	virtual uint8_t * get_pixels() const = 0;
+
+	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H

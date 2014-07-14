@@ -173,7 +173,6 @@ struct Tribe_Descr {
 	void resize_ware_orders(size_t maxLength);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Tribe_Descr);
 	const std::string m_name;
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;
@@ -194,6 +193,8 @@ private:
 	std::vector<Ware_Index> m_worker_types_without_cost;
 
 	std::vector<Initialization> m_initializations;
+
+	DISALLOW_COPY_AND_ASSIGN(Tribe_Descr);
 };
 
 }

@@ -42,9 +42,10 @@ public:
 	uint32_t ms_since_last_query();
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(ScopedTimer);
 	std::string message_;
 	uint32_t startime_, lasttime_;
+
+	DISALLOW_COPY_AND_ASSIGN(ScopedTimer);
 };
 
 #endif  // end of include guard: WL_BASE_SCOPED_TIMER_H

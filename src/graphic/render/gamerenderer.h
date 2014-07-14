@@ -94,8 +94,8 @@ protected:
 	/*@}*/
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 	void draw_wrapper();
+	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_GAMERENDERER_H

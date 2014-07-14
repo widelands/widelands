@@ -151,8 +151,6 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
-
 	/// Only for working around bugs in map loading code. If something has
 	/// accidentally been added to the queue during load, it can be worked
 	/// around by clearing the queue before the saved messages are loaded into
@@ -182,6 +180,8 @@ private:
 			 m_counts[Message::Read] +
 			 m_counts[Message::Archived]);
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
 };
 
 }

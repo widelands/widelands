@@ -101,7 +101,7 @@ public:
 protected:
 	Editor_Tool & m_second, & m_third;
 	bool undoable;
-private:
+
 	DISALLOW_COPY_AND_ASSIGN(Editor_Tool);
 };
 

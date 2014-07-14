@@ -247,7 +247,6 @@ protected:
 	static bool draw_tooltip(RenderTarget &, const std::string & text);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Panel);
 	class CacheImage;
 	friend class CacheImage;
 
@@ -306,6 +305,8 @@ private:
 	static bool _g_allow_user_input;
 	static const Image* s_default_cursor;
 	static const Image* s_default_cursor_click;
+
+	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {

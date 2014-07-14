@@ -70,9 +70,9 @@ struct Computer_Player :
 	static const Implementation * getImplementation(const std::string & name);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Computer_Player);
 	Widelands::Game & m_game;
 	Widelands::Player_Number const m_player_number;
+	DISALLOW_COPY_AND_ASSIGN(Computer_Player);
 };
 
 #endif  // end of include guard: WL_AI_COMPUTER_PLAYER_H
