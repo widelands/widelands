@@ -148,7 +148,7 @@ ActionConfirm::ActionConfirm
 	new UI::Multiline_Textarea
 		(this,
 		 0, 0, 200, 74,
-		 (format(message) % building.descname()).str(),
+		 (format(message) % building.descr().descname()).str(),
 		 UI::Align_Center);
 
 	UI::Button * okbtn =

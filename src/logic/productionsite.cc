@@ -233,7 +233,7 @@ std::string ProductionSite::get_statistics_string()
 bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
-	if (upcast(ProductionSite_Descr const, bld, tribe().get_building_descr(targetSite))) {
+	if (upcast(ProductionSite_Descr const, bld, descr().tribe().get_building_descr(targetSite))) {
 		// if he has workers
 		if (bld->nr_working_positions()) {
 			Ware_Index need = bld->working_positions()[0].first;
@@ -242,7 +242,7 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 					return false; // no one is in this house
 				} else {
 					Ware_Index have = working_positions()[i].worker->worker_index();
-					if (tribe().get_worker_descr(have)->can_act_as(need)) {
+					if (descr().tribe().get_worker_descr(have)->can_act_as(need)) {
 						return true; // he found a lead worker
 					}
 				}
@@ -544,10 +544,10 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			Ware_Index nuwo    = psite.tribe().get_nrworkers();
+			Ware_Index nuwo    = psite.descr().tribe().get_nrworkers();
 			Ware_Index current = Ware_Index(static_cast<size_t>(0));
 			for (; current < nuwo; ++current) {
-				Worker_Descr const * worker = psite.tribe().get_worker_descr(current);
+				Worker_Descr const * worker = psite.descr().tribe().get_worker_descr(current);
 				if (worker->becomes() == idx) {
 					idx = current;
 					break;
@@ -720,7 +720,7 @@ bool ProductionSite::get_building_work
 		{
 			Ware_Index const ware_index = ware_type_with_count.first;
 			const WareDescr & ware_ware_descr =
-				*tribe().get_ware_descr(ware_type_with_count.first);
+				*descr().tribe().get_ware_descr(ware_type_with_count.first);
 			{
 				WareInstance & ware =
 					*new WareInstance(ware_index, &ware_ware_descr);
@@ -742,7 +742,7 @@ bool ProductionSite::get_building_work
 			*m_recruited_workers.rbegin();
 		{
 			const Worker_Descr & worker_descr =
-				*tribe().get_worker_descr(worker_type_with_count.first);
+				*descr().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker & recruit =
 					ref_cast<Worker, Bob>(worker_descr.create_object());
@@ -765,7 +765,7 @@ bool ProductionSite::get_building_work
 		WaresQueue * queue = *iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr & wd = *tribe().get_ware_descr(queue->get_ware());
+			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());
 			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);

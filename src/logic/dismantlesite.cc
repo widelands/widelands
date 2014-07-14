@@ -134,7 +134,7 @@ void DismantleSite::count_returned_wares
 {
 	for (Building_Index former_idx : building->get_former_buildings()) {
 		const std::map<Ware_Index, uint8_t> * return_wares;
-		const Building_Descr* former_descr = building->tribe().get_building_descr(former_idx);
+		const Building_Descr* former_descr = building->descr().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
 		} else {
@@ -196,7 +196,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			//update statistics
 			owner().ware_produced(wq.get_ware());
 
-			const WareDescr & wd = *tribe().get_ware_descr(wq.get_ware());
+			const WareDescr & wd = *descr().tribe().get_ware_descr(wq.get_ware());
 			WareInstance & ware = *new WareInstance(wq.get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);

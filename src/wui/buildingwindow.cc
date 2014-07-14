@@ -55,7 +55,7 @@ Building_Window::Building_Window
 	UI::Window
 		(&parent, "building_window",
 		 0, 0, Width, 0,
-		 b.descname()),
+		 b.descr().descname()),
 	m_registry(registry),
 	m_building       (b),
 	m_workarea_job_id(0),
@@ -223,7 +223,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
 			const std::set<Widelands::Building_Index> & enhancements =
-				m_building.enhancements();
+				m_building.descr().enhancements();
 			const Widelands::Tribe_Descr & tribe  = owner.tribe();
 			container_iterate_const(std::set<Widelands::Building_Index>, enhancements, i)
 				if (owner.is_building_type_allowed(*i.current)) {
@@ -359,7 +359,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			   igbase().unique_windows().get_registry(m_building.name() + "_help");
 			registry.open_window = [this, &registry] {
 				new UI::LuaTextHelpWindow(
-				   &igbase(), registry, m_building.descname(), m_building.descr().helptext_script());
+				   &igbase(), registry, m_building.descr().descname(), m_building.descr().helptext_script());
 			};
 
 			helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));

@@ -644,7 +644,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 			if (upcast(MilitarySite const, militarysite, building)) {
 				const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
-				const int32_t radius = militarysite->get_conquers() + 4;
+				const int32_t radius = militarysite->descr().get_conquers() + 4;
 				const int32_t v = radius - dist;
 
 				if (v > 0 and dist > 0) {
@@ -1995,7 +1995,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
-	std::set<Building_Index> enhancements = site.site->enhancements();
+	std::set<Building_Index> enhancements = site.site->descr().enhancements();
 	int32_t maxprio = 0;
 	Building_Index enbld = INVALID_INDEX;  // to get rid of this
 	BuildingObserver* bestbld = nullptr;
@@ -2110,7 +2110,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	std::set<Building_Index> enhancements = site.site->enhancements();
+	std::set<Building_Index> enhancements = site.site->descr().enhancements();
 	int32_t maxprio = 0;
 	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
@@ -2240,7 +2240,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	bool changed = false;
 	Map& map = game().map();
 	MilitarySite* ms = militarysites.front().site;
-	uint32_t const vision = ms->vision_range();
+	uint32_t const vision = ms->descr().vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 	// look if there is any enemy land nearby
 	// FindNodeEnemy find_enemy(player, game());
@@ -2662,7 +2662,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 		MilitarySite* ms = mso->site;
 		Building* target = ms;  // dummy initialisation to silence the compiler
-		uint32_t const vision = ms->vision_range();
+		uint32_t const vision = ms->descr().vision_range();
 		FCoords f = map.get_fcoords(ms->get_position());
 		int32_t chance = 0;
 		uint32_t attackers = 0;
