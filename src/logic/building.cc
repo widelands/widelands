@@ -98,9 +98,9 @@ Building_Descr::Building_Descr
 	m_destructible = global_s.get_bool("destructible", true);
 	m_enhancement = INVALID_INDEX;
 
-	if (Section::Value const * const v = global_s.get_next_val("enhancement"))
+	if (Section::Value const * const enVal = global_s.get_next_val("enhancement"))
 	{
-		std::string const target_name = v->get_string();
+		std::string const target_name = enVal->get_string();
 		if (target_name == name())
 			throw wexception("enhancement to same type");
 		Building_Index const en_i = tribe().building_index(target_name);
@@ -111,11 +111,11 @@ Building_Descr::Building_Descr
 			//  workarea info.
 			const Building_Descr * tmp_enhancement =
 				tribe().get_building_descr(en_i);
-			for (std::pair<uint32_t, std::set<std::string>> j : tmp_enhancement->m_workarea_info)
+			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
 			{
-				std::set<std::string> & r = m_workarea_info[j.first];
-				for (std::string i : j.second)
-					r.insert(i);
+				std::set<std::string> & strs = m_workarea_info[area.first];
+				for (std::string str : area.second)
+					strs.insert(str);
 			}
 		} else
 			throw wexception
@@ -338,13 +338,13 @@ Flag & Building::base_flag()
  */
 uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
-	const Building_Descr & d = descr();
-	if (d.is_destructible()) {
+	const Building_Descr & tmp_descr = descr();
+	if (tmp_descr.is_destructible()) {
 		caps |= PCap_Bulldoze;
-		if (d.is_buildable() or d.is_enhanced())
+		if (tmp_descr.is_buildable() or tmp_descr.is_enhanced())
 			caps |= PCap_Dismantle;
 	}
-	if (d.enhancement() != INVALID_INDEX)
+	if (tmp_descr.enhancement() != INVALID_INDEX)
 		caps |= PCap_Enhancable;
 	return caps;
 }
