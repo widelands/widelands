@@ -909,15 +909,15 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 			// Check if the produced wares are needed (if it is producing anything)
 			if (!bo.outputs_.empty()) {
-				for (EconomyObserver* l : economies) {
+				for (EconomyObserver* observer : economies) {
 					// Don't check if the economy has no warehouse.
-					if (l->economy.warehouses().empty())
+					if (observer->economy.warehouses().empty())
 						continue;
 
 					for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
 						Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
 
-						if (l->economy.needs_ware(wt)) {
+						if (observer->economy.needs_ware(wt)) {
 							output_is_needed = true;
 
 							if (wares.at(bo.outputs_.at(m)).preciousness_ > max_needed_preciousness)
@@ -2150,12 +2150,12 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 	uint32_t count = 0;
 	Ware_Index wt(hintoutput);
-	for (EconomyObserver* l : economies) {
+	for (EconomyObserver* observer : economies) {
 		// Don't check if the economy has no warehouse.
-		if (l->economy.warehouses().empty())
+		if (observer->economy.warehouses().empty())
 			continue;
 
-		count += l->economy.stock_ware(wt);
+		count += observer->economy.stock_ware(wt);
 	}
 
 	return count;
@@ -2166,14 +2166,14 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 	uint32_t count = 0;
 
 	if (!bo.outputs_.empty()) {
-		for (EconomyObserver* l : economies) {
+		for (EconomyObserver* observer : economies) {
 			// Don't check if the economy has no warehouse.
-			if (l->economy.warehouses().empty())
+			if (observer->economy.warehouses().empty())
 				continue;
 
 			for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
 				Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
-				count += l->economy.stock_ware(wt);
+				count += observer->economy.stock_ware(wt);
 			}
 		}
 	}
