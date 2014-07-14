@@ -22,3 +22,6 @@ stone=1
 [idle]
 pics=small_tower_i_??.png
 hotspot=42 65
+
+[aihints]
+fighting=true

@@ -81,7 +81,7 @@ void GameTips::load_tips(std::string name)
 }
 
 void GameTips::update(bool repaint) {
-	Uint32 ticks = SDL_GetTicks();
+	uint8_t ticks = SDL_GetTicks();
 	if (ticks >= (m_lastUpdated + m_updateAfter)) {
 		const uint32_t next = rand() % m_tips.size();
 		if (next == m_lastTip)

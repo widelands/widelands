@@ -89,7 +89,7 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 	temp = f.get_immovable() ? _("Has base immovable") : _("No base immovable");
 	buf += "• " + temp + "\n";
 
-	temp = f.get_first_bob() ? _("Has bobs") : _("No bobs");
+	temp = f.get_first_bob() ? _("Has animals") : _("No animals");
 	buf += "• " + temp + "\n";
 
 	// *** Terrain info

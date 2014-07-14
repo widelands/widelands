@@ -55,7 +55,7 @@ public:
 	virtual void lock(LockMode) override;
 	virtual void unlock(UnlockMode) override;
 	virtual uint32_t get_pixel(uint16_t x, uint16_t y) override;
-	virtual void set_pixel(uint16_t x, uint16_t y, Uint32 clr) override;
+	virtual void set_pixel(uint16_t x, uint16_t y, uint32_t clr) override;
 	virtual uint16_t get_pitch() const override {return m_surface->pitch;}
 	virtual uint8_t * get_pixels() const override;
 

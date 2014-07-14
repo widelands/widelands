@@ -35,7 +35,7 @@
 
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
-struct Interactive_Base;
+class Interactive_Base;
 class LuaInterface;
 
 namespace Widelands {
@@ -61,8 +61,8 @@ class Editor_Game_Base :
 	NoteReceiver<NoteFieldTransformed>
 {
 public:
-	friend struct ::Fullscreen_Menu_LaunchGame;
-	friend struct ::Interactive_Base;
+	friend class Interactive_Base;
+	friend struct Fullscreen_Menu_LaunchGame;
 	friend struct Game_Game_Class_Data_Packet;
 
 	Editor_Game_Base(LuaInterface * lua);

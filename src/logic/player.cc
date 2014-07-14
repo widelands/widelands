@@ -447,9 +447,6 @@ Road * Player::build_road(const Path & path) {
 
 				if (BaseImmovable * const imm = fc.field->get_immovable())
 					if (imm->get_size() >= BaseImmovable::SMALL) {
-						log
-							("%i: building road, immovable in the way, type=%d\n",
-							 player_number(), imm->get_type());
 						return nullptr;
 					}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {

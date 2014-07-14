@@ -376,7 +376,6 @@ inline static Map_Object_Data read_unseen_immovable
 			m.map_object_descr = &g_portdock_descr;                       break;
 		default:
 			throw game_data_error("Unknown immovable-kind type %d", immovable_kind);
-			break;
 		}
 	} catch (const _wexception & e) {
 		throw game_data_error("unseen immovable: %s", e.what());

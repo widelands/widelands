@@ -35,3 +35,6 @@ stone=1
 [idle]
 pics=barrier_i_??.png
 hotspot=49 77
+
+[aihints]
+fighting=true

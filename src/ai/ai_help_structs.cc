@@ -37,7 +37,7 @@ bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 // CheckStepRoadAI
 
 bool CheckStepRoadAI::allowed(Map& map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
-	const {
+   const {
 	uint8_t endcaps = player_->get_buildcaps(end);
 
 	// Calculate cost and passability

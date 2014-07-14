@@ -327,7 +327,7 @@ void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 			 _("Error!"),
 			 _
 			 	("Cannot remove player. It is referenced someplace. Remove all"
-			 	 " buildings and bobs that depend on this player and try again."),
+			 	 " buildings and animals that depend on this player and try again."),
 			 UI::WLMessageBox::OK);
 		mmb.run();
 	}

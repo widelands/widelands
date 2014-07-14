@@ -25,7 +25,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-struct Interactive_Base;
+class Interactive_Base;
 
 struct MiniMap : public UI::UniqueWindow {
 	struct Registry : public UI::UniqueWindow::Registry {
@@ -68,8 +68,8 @@ private:
 
 		void draw(RenderTarget &) override;
 
-		bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-		bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+		bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 		void set_zoom(int32_t z);
 
