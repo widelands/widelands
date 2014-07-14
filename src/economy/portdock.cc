@@ -158,12 +158,6 @@ void PortDock::draw
 	// do nothing
 }
 
-const std::string & PortDock::name() const
-{
-	static const std::string name_("portdock");
-	return name_;
-}
-
 void PortDock::init(Editor_Game_Base & egbase)
 {
 	PlayerImmovable::init(egbase);

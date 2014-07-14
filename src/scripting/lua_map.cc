@@ -544,7 +544,7 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 		case Bob::CRITTER:
 			return to_lua<L_Bob>(L, new L_Bob(*mo));
 		case Bob::WORKER:
-			if (mo->name() == "soldier")
+			if (mo->descr().name() == "soldier")
 				return CAST_TO_LUA(Soldier);
 			return CAST_TO_LUA(Worker);
 		case Bob::SHIP:

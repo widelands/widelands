@@ -355,10 +355,6 @@ uint32_t Building::get_playercaps() const {
 	return caps;
 }
 
-
-const std::string & Building::name() const {return descr().name();}
-
-
 void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
 {
 	m_anim = anim;
@@ -552,7 +548,7 @@ std::string Building::info_string(const std::string & format) {
 			FORMAT
 				('c', '(' << get_position().x << ", " << get_position().y << ')');
 			FORMAT('A', descr().descname());
-			FORMAT('a', name());
+			FORMAT('a', descr().name());
 			case 'N':
 				if (upcast(ConstructionSite const, constructionsite, this))
 					result << constructionsite->building().descname();
@@ -563,7 +559,7 @@ std::string Building::info_string(const std::string & format) {
 				if (upcast(ConstructionSite const, constructionsite, this))
 					result << constructionsite->building().name();
 				else
-					result << name();
+					result << descr().name();
 				break;
 			case 'r':
 				if (upcast(ProductionSite const, productionsite, this))
@@ -598,7 +594,7 @@ std::string Building::get_statistics_string()
 
 
 WaresQueue & Building::waresqueue(Ware_Index const wi) {
-	throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
+	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /*

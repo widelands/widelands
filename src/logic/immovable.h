@@ -76,7 +76,6 @@ struct BaseImmovable : public Map_Object {
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 		= 0;
-	virtual const std::string & name() const;
 
 protected:
 	void set_position(Editor_Game_Base &, Coords);
@@ -167,7 +166,6 @@ public:
 	char const * type_name() const override {return "immovable";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
-	const std::string & name() const override;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);
 
 	void program_step(Game & game, uint32_t const delay = 1) {

@@ -259,7 +259,7 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
 	container_iterate_const(Input_Queues, m_input_queues, i)
 		if ((*i.current)->get_ware() == wi)
 			return **i.current;
-	   throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
+	   throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /**

@@ -139,10 +139,6 @@ BaseImmovable::PositionList Road::get_positions
 	return rv;
 }
 
-static std::string const road_name = "road";
-const std::string & Road::name() const {return road_name;}
-
-
 Flag & Road::base_flag()
 {
 	return *m_flags[FlagStart];
