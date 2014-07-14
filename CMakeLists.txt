@@ -134,6 +134,8 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-covered-switch-default")
   add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
 
+  add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
+
   add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
 else()
   # Assuming GCC 4.7 or higher.
@@ -182,7 +184,6 @@ endif()
 # Turn some warnings into errors.
 add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
-add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
 
 IF (WIN32)
