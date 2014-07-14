@@ -51,6 +51,10 @@ struct FindBobShip : FindBob {
 	virtual bool accept(Bob * bob) const override;
 };
 
+struct FindBobCritter : FindBob {
+	virtual bool accept(Bob * bob) const override;
+};
+
 
 } // namespace Widelands
 

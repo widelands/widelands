@@ -30,22 +30,26 @@ BuildingHints::~BuildingHints() {
 }
 
 BuildingHints::BuildingHints(Section* const section)
-	: renews_map_resource(nullptr),
-	mines_(nullptr),
-	basic_(section ? section->get_bool("is_basic") : false),
-	build_material_(section ? section->get_bool("build_material") : true),
-	log_producer_(section ? section->get_bool("logproducer") : false),
-	stone_producer_(section ? section->get_bool("stoneproducer") : false),
-	marble_producer_(section ? section->get_bool("marbleproducer") : false),
-	needs_water_(section ? section->get_bool("needs_water") : false),
-	mines_water_(section ? section->get_bool("mines_water") : false),
-	recruitment_(section ? section->get_bool("recruitment") : false),
-	space_consumer_(section ? section->get_bool("space_consumer") : false),
-	mines_percent_(section ? section->get_int("mines_percent", 100) : 0) {
-		if (section) {
-			if (char const* const s = section->get_string("renews_map_resource"))
-				renews_map_resource = strdup(s);
-			if (char const* const s = section->get_string("mines"))
-				mines_ = strdup(s);
-		}
+   : renews_map_resource(nullptr),
+     mines_(nullptr),
+     basic_(section ? section->get_bool("is_basic") : false),
+     food_basic_(section ? section->get_bool("is_food_basic") : false),
+     build_material_(section ? section->get_bool("build_material") : true),
+     log_producer_(section ? section->get_bool("logproducer") : false),
+     stone_producer_(section ? section->get_bool("stoneproducer") : false),
+     marble_producer_(section ? section->get_bool("marbleproducer") : false),
+     needs_water_(section ? section->get_bool("needs_water") : false),
+     mines_water_(section ? section->get_bool("mines_water") : false),
+     recruitment_(section ? section->get_bool("recruitment") : false),
+     space_consumer_(section ? section->get_bool("space_consumer") : false),
+     expansion_(section ? section->get_bool("expansion") : false),
+     fighting_(section ? section->get_bool("fighting") : false),
+     mountain_conqueror_(section ? section->get_bool("mountain_conqueror") : false),
+     mines_percent_(section ? section->get_int("mines_percent", 100) : 0) {
+	if (section) {
+		if (char const* const s = section->get_string("renews_map_resource"))
+			renews_map_resource = strdup(s);
+		if (char const* const s = section->get_string("mines"))
+			mines_ = strdup(s);
 	}
+}

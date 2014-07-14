@@ -66,7 +66,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 	ADD_BUTTON("noise_height",     _("Noise height"));
 	ADD_BUTTON("set_terrain",      _("Terrain"));
 	ADD_BUTTON("place_immovable",  _("Immovables"));
-	ADD_BUTTON("place_bob",        _("Bobs"));
+	ADD_BUTTON("place_bob",        _("Animals"));
 	ADD_BUTTON("change_resources", _("Resources"));
 	ADD_BUTTON("set_port_space",   _("Set port space"));
 

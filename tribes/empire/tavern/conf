@@ -14,6 +14,7 @@ marble=1
 
 [aihints]
 build_material=false
+is_food_basic=true
 
 [working positions]
 innkeeper=1

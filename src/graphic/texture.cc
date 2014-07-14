@@ -180,14 +180,14 @@ Texture::~Texture ()
 /**
  * Return the basic terrain colour to be used in the minimap.
 */
-Uint32 Texture::get_minimap_color(char shade) {
+uint32_t Texture::get_minimap_color(char shade) {
 	if (not m_pixels)
 		return m_mmap_color[128 + shade];
 
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
 
 	uint32_t table = static_cast<uint8_t>(shade);
-	return static_cast<const Uint32*>(m_colormap->get_colormap())[clr | (table << 8)];
+	return static_cast<const uint32_t*>(m_colormap->get_colormap())[clr | (table << 8)];
 }
 
 /**

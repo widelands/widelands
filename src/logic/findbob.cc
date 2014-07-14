@@ -47,4 +47,10 @@ bool FindBobShip::accept(Bob * bob) const
 	return bob->get_bob_type() == Bob::SHIP;
 }
 
+bool FindBobCritter::accept(Bob * bob) const
+{
+	return bob->get_bob_type() == Bob::CRITTER;
+}
+
+
 } // namespace Widelands

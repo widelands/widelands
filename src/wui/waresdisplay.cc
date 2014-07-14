@@ -139,7 +139,7 @@ bool AbstractWaresDisplay::handle_mousepress
 	return UI::Panel::handle_mousepress(btn, x, y);
 }
 
-bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
+bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y)
 {
 	if (btn != SDL_BUTTON_LEFT || m_selection_anchor == Widelands::INVALID_INDEX) {
 		return UI::Panel::handle_mouserelease(btn, x, y);

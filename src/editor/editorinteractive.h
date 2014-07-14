@@ -67,8 +67,8 @@ public:
 
 	//  Handle UI elements.
 	bool handle_key(bool down, SDL_keysym) override;
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 	struct Tools {
 		Tools()

@@ -3,7 +3,7 @@
 
 import re
 
-__PRINTF = re.compile(r"\bf?printf\s+\(")
+__PRINTF = re.compile(r"\bf?printf\s*\(")
 def check_for_printf(lines, fn):
     errors = []
     for lineno, line in enumerate(lines, 1):
