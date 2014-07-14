@@ -1,6 +1,6 @@
 # Utilize cmake_parse_arguments standard function to parse for common arguments.
 include(CMakeParseArguments)
-macro(wl_parse_common_args ARGS)
+macro(_parse_common_args ARGS)
   set(OPTIONS
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
     C_LIBRARY # Pure C library. No CXX flags.
@@ -22,7 +22,7 @@ macro(wl_parse_common_args ARGS)
   cmake_parse_arguments(ARG "${OPTIONS}" "${ONE_VALUE_ARG}" "${MULTI_VALUE_ARGS}"
     ${ARGS}
   )
-endmacro(wl_parse_common_args)
+endmacro(_parse_common_args)
 
 # Set variable VAR to VALUE if it is not set or empty. Does nothing if already set.
 macro(wl_set_if_unset VAR VALUE)
@@ -45,7 +45,7 @@ endfunction(wl_include_system_directories TARGET_DIR)
 
 # Add common compile tasks, like includes and libraries to link against for third party
 # libraries, and codecheck hook for sources.
-macro(wl_common_compile_tasks)
+macro(_common_compile_tasks)
   if (NOT ARG_C_LIBRARY)
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_GENERIC_CXX_FLAGS}")
 
@@ -57,7 +57,7 @@ macro(wl_common_compile_tasks)
   set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_OPTIMIZE_FLAGS} ${WL_DEBUG_FLAGS}")
 
   if(ARG_THIRD_PARTY)
-    # Disable all warings for third_party.
+    # Disable all warnings for third_party.
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -w")
   else()
     foreach(SRC ${ARG_SRCS})
@@ -144,11 +144,11 @@ macro(wl_common_compile_tasks)
   foreach(DEPENDENCY ${ARG_DEPENDS})
     target_link_libraries(${NAME} ${DEPENDENCY})
   endforeach(DEPENDENCY)
-endmacro(wl_common_compile_tasks)
+endmacro(_common_compile_tasks)
 
 # Common library target definition.
 function(wl_library NAME)
-  wl_parse_common_args("${ARGN}")
+  _parse_common_args("${ARGN}")
 
   add_library(${NAME}
     STATIC
@@ -157,15 +157,15 @@ function(wl_library NAME)
   )
 
   # increase the tries for the linker searching for cyclic dependencies
-  # TODO remove this once cycling dependencies are history in widelands
+  # TODO(sirver): remove this once cycling dependencies are history in widelands
   set_target_properties(${NAME} PROPERTIES LINK_INTERFACE_MULTIPLICITY 5)
 
-  wl_common_compile_tasks()
+  _common_compile_tasks()
 endfunction()
 
 # Common test target definition.
 function(wl_test NAME)
-  wl_parse_common_args("${ARGN}")
+  _parse_common_args("${ARGN}")
 
   add_executable(${NAME} ${ARG_SRCS})
 
@@ -181,7 +181,7 @@ function(wl_test NAME)
   list(REMOVE_ITEM SDL_LIBRARY_TEMP ${SDLMAIN_LIBRARY})
   target_link_libraries(${NAME} ${SDL_LIBRARY_TEMP})
 
-  wl_common_compile_tasks()
+  _common_compile_tasks()
 
   add_test(${NAME} ${NAME})
   add_dependencies(wl_tests ${NAME})
@@ -240,7 +240,7 @@ endfunction()
 
 # Common binary target definition.
 function(wl_binary NAME)
-  wl_parse_common_args("${ARGN}")
+  _parse_common_args("${ARGN}")
 
   if (ARG_WIN32)
     add_executable(${NAME}
@@ -253,5 +253,5 @@ function(wl_binary NAME)
     )
   endif()
 
-  wl_common_compile_tasks()
+  _common_compile_tasks()
 endfunction()
