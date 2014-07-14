@@ -22,8 +22,6 @@
 
 #include <functional>
 
-#include "boost/noncopyable.hpp"
-
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
 

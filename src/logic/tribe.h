@@ -23,6 +23,7 @@
 #include <map>
 #include <vector>
 
+#include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/bob.h"
 #include "logic/building.h"
@@ -51,7 +52,7 @@ Every player chooses a tribe. A tribe has distinct properties such as the
 buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
-struct Tribe_Descr : boost::noncopyable {
+struct Tribe_Descr {
 	Tribe_Descr(const std::string & name, Editor_Game_Base &);
 
 	//  Static function to check for tribes.
@@ -192,6 +193,8 @@ private:
 	std::vector<Ware_Index> m_worker_types_without_cost;
 
 	std::vector<Initialization> m_initializations;
+
+	DISALLOW_COPY_AND_ASSIGN(Tribe_Descr);
 };
 
 }

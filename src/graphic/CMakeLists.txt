@@ -31,6 +31,7 @@ wl_library(graphic_image
   USES_SDL_IMAGE
   DEPENDS
     base_log
+    base_macros
     graphic_image_io
     graphic_surface
 )
