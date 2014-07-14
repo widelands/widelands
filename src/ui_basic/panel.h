@@ -27,9 +27,9 @@
 #include <string>
 
 #include <SDL_keyboard.h>
-#include <boost/noncopyable.hpp>
 #include <boost/signals2/trackable.hpp>
 
+#include "base/macros.h"
 #include "base/point.h"
 
 class RenderTarget;
@@ -57,7 +57,7 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : boost::signals2::trackable, boost::noncopyable {
+struct Panel : boost::signals2::trackable {
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run
@@ -305,6 +305,8 @@ private:
 	static bool _g_allow_user_input;
 	static const Image* s_default_cursor;
 	static const Image* s_default_cursor_click;
+
+	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {
