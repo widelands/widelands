@@ -74,7 +74,7 @@ protected:
 		(RenderTarget &, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	//  mouse events
-	bool handle_mouserelease(Uint8 btn, int32_t, int32_t) override;
+	bool handle_mouserelease(uint8_t btn, int32_t, int32_t) override;
 	void handle_mousein(bool inside) override;
 	void cursor_moved(int32_t pointer, int32_t x, int32_t y);
 	void cursor_pressed(int32_t pointer);
@@ -138,8 +138,8 @@ struct HorizontalSlider : public Slider {
 
 protected:
 	void draw(RenderTarget & dst) override;
-	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t) override;
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousemove (uint8_t btn, int32_t x, int32_t y, int32_t, int32_t) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	void layout() override;
 };
 
@@ -173,8 +173,8 @@ struct VerticalSlider : public Slider {
 
 protected:
 	void draw(RenderTarget & dst) override;
-	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t) override;
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousemove (uint8_t btn, int32_t x, int32_t y, int32_t, int32_t) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	void layout() override;
 };
 

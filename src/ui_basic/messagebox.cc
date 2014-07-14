@@ -116,7 +116,7 @@ WLMessageBox::~WLMessageBox()
  * Clicking the right mouse button inside the window acts like pressing
  * Ok or No, depending on the message box type.
  */
-bool WLMessageBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
@@ -128,7 +128,7 @@ bool WLMessageBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 	return true;
 }
 
-bool WLMessageBox::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t)
 {
 	return true;
 }

@@ -416,7 +416,7 @@ void BaseListselect::draw(RenderTarget & dst)
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
+bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y)
 {
 	switch (btn) {
 	case SDL_BUTTON_WHEELDOWN:
@@ -454,12 +454,12 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 	}
 }
 
-bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
+bool BaseListselect::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
 }
 
-bool BaseListselect::handle_mousemove(Uint8, int32_t, int32_t y, int32_t, int32_t) {
+bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int32_t) {
 	y = (y + m_scrollpos) / get_lineheight();
 	if (y < 0 or static_cast<int32_t>(m_entry_records.size()) <= y) {
 		set_tooltip("");
