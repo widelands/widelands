@@ -183,10 +183,6 @@ public:
 	bool construct_ware(Game & game, Ware_Index index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
-	Tribe_Descr const * get_owner_tribe() const {
-		return descr().get_owner_tribe();
-	}
-
 	bool is_reserved_by_worker() const;
 	void set_reserved_by_worker(bool reserve);
 

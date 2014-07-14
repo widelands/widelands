@@ -244,8 +244,6 @@ public:
 	const FCoords & get_position() const {return m_position;}
 	Bob * get_next_bob() const {return m_linknext;}
 
-	uint32_t vision_range() const {return descr().vision_range();}
-
 	/// Check whether this bob should be able to move onto the given node.
 	///
 	/// \param commit indicates whether this function is called from the
