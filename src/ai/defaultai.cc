@@ -909,15 +909,15 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 			// Check if the produced wares are needed (if it is producing anything)
 			if (!bo.outputs_.empty()) {
-				container_iterate(std::list<EconomyObserver*>, economies, l) {
+				for (EconomyObserver* l : economies) {
 					// Don't check if the economy has no warehouse.
-					if ((*l.current)->economy.warehouses().empty())
+					if (l->economy.warehouses().empty())
 						continue;
 
 					for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
 						Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
 
-						if ((*l.current)->economy.needs_ware(wt)) {
+						if (l->economy.needs_ware(wt)) {
 							output_is_needed = true;
 
 							if (wares.at(bo.outputs_.at(m)).preciousness_ > max_needed_preciousness)
@@ -1997,9 +1997,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
-	Building_Index enhancement = site.site->enhancement();
+	const Building_Index enhancement = site.site->enhancement();
 
-	int32_t maxprio = 0;
 	Building_Index enbld = INVALID_INDEX;  // to get rid of this
 	BuildingObserver* bestbld = nullptr;
 
@@ -2032,29 +2031,15 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		}
 
 		// now, let consider normal upgrade
-
-		if (kUpgradeDebug)
-			log(" UPGRADE: %1d: working enhanced buildings (%15s): %1d, statitistics: %2d\n",
-				player_number(),
-				en_bo.name,
-				en_bo.cnt_built_ - en_bo.unoccupied_,
-				en_bo.current_stats_);
-
 		// do not upgrade if candidate production % is too low
 		if ((en_bo.cnt_built_ - en_bo.unoccupied_) != 0
 			or(en_bo.cnt_under_construction_ + en_bo.unoccupied_) <= 0
 			or en_bo.current_stats_ >= 50) {
 
-			int32_t prio = 0;
-
-			if (en_bo.current_stats_ > 65) {
-				prio = en_bo.current_stats_ - site.bo->current_stats_;  // priority for enhancement
-				prio += en_bo.current_stats_ - 65;
-
-			}
-
-			if (prio > maxprio) {
-				maxprio = prio;
+			if (en_bo.current_stats_ > 65
+				and ((en_bo.current_stats_ - site.bo->current_stats_) + // priority for enhancement
+					(en_bo.current_stats_ - 65)) > 0)
+			{
 				enbld = enhancement;
 				bestbld = &en_bo;
 			}
@@ -2063,7 +2048,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Enhance if enhanced building is useful
 	// additional: we dont want to lose the old building
-	if (maxprio > 0) {
+	if (enbld != INVALID_INDEX) {
 		game().send_player_enhance_building(*site.site, enbld);
 		bestbld->construction_decision_time_ = gametime;
 		changed = true;
@@ -2119,8 +2104,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	Building_Index enhancement = site.site->enhancement();
-	int32_t maxprio = 0;
+	const Building_Index enhancement = site.site->enhancement();
 	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
@@ -2143,23 +2127,16 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 					field->get_starting_res_amount() * (100 - site.bo->mines_percent_) / 100;
 
 					if (until >= current) {
-						// add some randomness - just for the case if more than one
-						// enhancement is available (not in any tribe yet)
-						int32_t const prio = time(nullptr) % 3 + 1;
-
-						if (prio > maxprio) {
-							maxprio = prio;
 							enbld = enhancement;
 							bestbld = &en_bo;
-						}
 					}
 				}
 			}
 		}
 	}
 
-	// Enhance if enhanced building is useful
-	if (maxprio > 0) {
+	// Enhance if enhanced building is useful and possible
+	if (enbld != INVALID_INDEX) {
 		game().send_player_enhance_building(*site.site, enbld);
 		bestbld->construction_decision_time_ = gametime;
 		changed = true;
@@ -2173,12 +2150,12 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 	uint32_t count = 0;
 	Ware_Index wt(hintoutput);
-	container_iterate(std::list<EconomyObserver*>, economies, l) {
+	for (EconomyObserver* l : economies) {
 		// Don't check if the economy has no warehouse.
-		if ((*l.current)->economy.warehouses().empty())
+		if (l->economy.warehouses().empty())
 			continue;
 
-		count += (*l.current)->economy.stock_ware(wt);
+		count += l->economy.stock_ware(wt);
 	}
 
 	return count;
@@ -2189,14 +2166,14 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 	uint32_t count = 0;
 
 	if (!bo.outputs_.empty()) {
-		container_iterate(std::list<EconomyObserver*>, economies, l) {
+		for (EconomyObserver* l : economies) {
 			// Don't check if the economy has no warehouse.
-			if ((*l.current)->economy.warehouses().empty())
+			if (l->economy.warehouses().empty())
 				continue;
 
 			for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
 				Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
-				count += (*l.current)->economy.stock_ware(wt);
+				count += l->economy.stock_ware(wt);
 			}
 		}
 	}

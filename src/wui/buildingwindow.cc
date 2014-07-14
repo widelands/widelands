@@ -240,7 +240,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
 					//  button id = building id
-					enhancebtn->sigclicked.connect([this, &enhancement] {
+					enhancebtn->sigclicked.connect([this, enhancement] {
 					   this->act_enhance(enhancement);
 					});
 					capsbuttons->add
