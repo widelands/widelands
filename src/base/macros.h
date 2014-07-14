@@ -67,8 +67,9 @@
 
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-TypeName(const TypeName&);   \
-void operator=(const TypeName&)
+TypeName(const TypeName&) = delete; \
+void operator=(const TypeName&) = delete
+
 
 /// Wrapper macro around a dynamic_cast.
 #define upcast(type, identifier, source) type * const identifier = \
