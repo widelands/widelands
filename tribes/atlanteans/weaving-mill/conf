@@ -57,6 +57,10 @@ return=skipped
 pics=weaving_mill_i_??.png  # ???
 hotspot=65 69
 
+[aihints]
+is_basic=true
+
 [working]
 pics=weaving_mill_i_??.png # ???
 hotspot=65 69
+

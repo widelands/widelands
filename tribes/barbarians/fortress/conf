@@ -34,3 +34,8 @@ hotspot=103 80
 pics=fortress_i_??.png
 hotspot=103 80
 fps=10
+
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true
