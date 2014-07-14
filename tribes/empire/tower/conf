@@ -29,3 +29,6 @@ hotspot=53 81
 [build]
 pics=tower_b_??.png
 hotspot=53 81
+
+[aihints]
+mountain_conqueror=true

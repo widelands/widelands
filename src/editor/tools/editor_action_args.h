@@ -36,6 +36,16 @@ struct Editor_Tool_Action;
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
 struct Editor_Action_Args {
+	Editor_Action_Args(Editor_Interactive & base);
+
+	// TODO(sirver): This class does its own reference counting. This design is
+	// brittle and on a quick overview I have a feeling that it might not be
+	// correct.
+	Editor_Action_Args(const Editor_Action_Args&) = default;
+	Editor_Action_Args& operator = (const Editor_Action_Args&) = default;
+
+	~Editor_Action_Args();
+
 	uint32_t sel_radius;
 
 	int32_t change_by;                                              // resources, hight change tools
@@ -49,9 +59,6 @@ struct Editor_Action_Args {
 	std::list<Widelands::Terrain_Index> terrainType, origTerrainType; // set terrain tool
 
 	std::list<Editor_Tool_Action *> draw_actions;                   // draw tool
-
-	Editor_Action_Args(Editor_Interactive & base);
-	~Editor_Action_Args();
 
 	uint32_t refcount;
 };

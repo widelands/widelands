@@ -36,7 +36,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 	 UI::UniqueWindow::Registry  & registry)
 	:
 	Editor_Tool_Options_Menu
-		(parent, registry, 135, 135, _("Height Tools Options")),
+		(parent, registry, 250, 135, _("Height Tools Options")),
 	m_increase_tool(increase_tool),
 	m_change_by_label
 		(this,

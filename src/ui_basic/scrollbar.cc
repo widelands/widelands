@@ -391,7 +391,7 @@ void Scrollbar::think()
 }
 
 
-bool Scrollbar::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	bool result = false;
 
 	switch (btn) {
@@ -425,7 +425,7 @@ bool Scrollbar::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	update();
 	return result;
 }
-bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
+bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	bool result = false;
 
 	switch (btn) {
@@ -456,7 +456,7 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
  * Move the knob while pressed.
  */
 bool Scrollbar::handle_mousemove
-	(Uint8, int32_t const mx, int32_t const my, int32_t, int32_t)
+	(uint8_t, int32_t const mx, int32_t const my, int32_t, int32_t)
 {
 	if (m_pressed == Knob)
 		set_knob_pos((m_horizontal ? mx : my) - m_knob_grabdelta);

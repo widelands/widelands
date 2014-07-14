@@ -70,8 +70,6 @@ wl_library(wui
     mapviewpixelconstants.h
     mapviewpixelfunctions.cc
     mapviewpixelfunctions.h
-    military_box.cc
-    military_box.h
     militarysitewindow.cc
     minimap.cc
     minimap.h

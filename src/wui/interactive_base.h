@@ -45,8 +45,8 @@ class UniqueWindowHandler;
  * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-struct Interactive_Base : public Map_View, public DebugConsole::Handler {
-
+class Interactive_Base : public Map_View, public DebugConsole::Handler {
+public:
 	friend class Sound_Handler;
 
 	enum {
@@ -127,12 +127,36 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	void log_message(const char* message) const {
 		log_message(std::string(message));
 	}
+
+protected:
+	void toggle_minimap();
+	void hide_minimap();
+	UI::UniqueWindow::Registry & minimap_registry();
+
+	void mainview_move(int32_t x, int32_t y);
+	void minimap_warp(int32_t x, int32_t y);
+
+	virtual void draw_overlay(RenderTarget &) override;
+	bool handle_key(bool down, SDL_keysym) override;
+
+	void unset_sel_picture();
+	void set_sel_picture(const char * const);
+	void adjust_toolbar_position() {
+		m_toolbar.set_pos
+			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));
+	}
+
+	// TODO(sirver): why are these protected?
+	ChatOverlay     * m_chatOverlay;
+	UI::Box           m_toolbar;
+
 private:
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
+	void cmdMapObject(const std::vector<std::string> & args);
+	void cmdLua(const std::vector<std::string> & args);
+	void update_speedlabel();
 
-	std::unique_ptr<InteractiveBaseInternals> m;
-	Widelands::Editor_Game_Base & m_egbase;
 	struct Sel_Data {
 		Sel_Data
 			(const bool Freeze = false, const bool Triangles = false,
@@ -156,8 +180,9 @@ private:
 		OverlayManager::JobId jobid;
 	} m_sel;
 
+	std::unique_ptr<InteractiveBaseInternals> m;
+	Widelands::Editor_Game_Base & m_egbase;
 	uint32_t m_display_flags;
-
 	uint32_t          m_lastframe;         //  system time (milliseconds)
 	uint32_t          m_frametime;         //  in millseconds
 	uint32_t          m_avg_usframetime;   //  in microseconds!
@@ -166,33 +191,6 @@ private:
 	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
-	std::vector<const Image*> m_workarea_pics;
-
-protected:
-	void toggle_minimap();
-	void hide_minimap();
-	UI::UniqueWindow::Registry & minimap_registry();
-
-	void mainview_move(int32_t x, int32_t y);
-	void minimap_warp(int32_t x, int32_t y);
-
-	virtual void draw_overlay(RenderTarget &) override;
-	bool handle_key(bool down, SDL_keysym) override;
-
-	void unset_sel_picture();
-	void set_sel_picture(const char * const);
-	void adjust_toolbar_position() {
-		m_toolbar.set_pos
-			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));
-	}
-	ChatOverlay     * m_chatOverlay;
-	UI::Box           m_toolbar;
-
-
-private:
-	void cmdMapObject(const std::vector<std::string> & args);
-	void cmdLua(const std::vector<std::string> & args);
-	void update_speedlabel();
 
 	UI::Textarea m_label_speed_shadow;
 	UI::Textarea m_label_speed;
@@ -200,6 +198,7 @@ private:
 	UI::UniqueWindow::Registry m_debugconsole;
 	Widelands::NoteSender<LogMessage> m_log_sender;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
+	std::vector<const Image*> m_workarea_pics;
 };
 
 #define PIC2 g_gr->images().get("pics/but2.png")

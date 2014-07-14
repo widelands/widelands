@@ -29,7 +29,6 @@
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
 #include "logic/maphollowregion.h"
-#include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
@@ -44,7 +43,6 @@
 #include "wui/attack_box.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
-#include "wui/military_box.h"
 #include "wui/overlay_manager.h"
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
@@ -241,7 +239,6 @@ private:
 
 static const char * const pic_tab_buildroad  = "pics/menu_tab_buildroad.png";
 static const char * const pic_tab_watch      = "pics/menu_tab_watch.png";
-static const char * const pic_tab_military   = "pics/menu_tab_military.png";
 static const char * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
@@ -458,25 +455,12 @@ void FieldActionWindow::add_buttons_auto()
 			 &FieldActionWindow::act_debug,
 			 _("Debug window"));
 
-	MilitaryBox * militarybox =
-		m_plr ? new MilitaryBox(&m_tabpanel, m_plr, 0, 0) : nullptr;
-
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())
 		add_tab("roads", pic_tab_buildroad, buildbox, _("Build road"));
 
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
-	if (militarybox)
-	{
-		if (militarybox->allowed_change())
-		{
-			add_tab
-				("military", pic_tab_military,
-				 militarybox, _("Military settings"));
-		} else
-			delete militarybox;
-	}
 }
 
 void FieldActionWindow::add_buttons_attack ()

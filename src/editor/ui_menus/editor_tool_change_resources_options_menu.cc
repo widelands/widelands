@@ -43,7 +43,7 @@ Editor_Tool_Change_Resources_Options_Menu
 		 UI::UniqueWindow::Registry     & registry)
 	:
 	Editor_Tool_Options_Menu
-		(parent, registry, 164, 120, _("Resources")),
+		(parent, registry, 250, 120, _("Resources")),
 	m_change_by_label
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
