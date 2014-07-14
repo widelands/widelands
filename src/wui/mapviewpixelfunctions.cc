@@ -111,7 +111,8 @@ uint32_t MapviewPixelFunctions::calc_pix_distance
 {
 	normalize_pix(map, a);
 	normalize_pix(map, b);
-	uint32_t dx = abs(a.x - b.x), dy = abs(a.y - b.y);
+	uint32_t dx = std::abs(static_cast<double>(a.x - b.x));
+	uint32_t dy = std::abs(static_cast<double>(a.y - b.y));
 	{
 		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
 		if (dx > map_end_screen_x / 2)
