@@ -23,7 +23,7 @@
 #include <stdint.h>
 #include <boost/noncopyable.hpp>
 
-struct Section;
+class Section;
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the

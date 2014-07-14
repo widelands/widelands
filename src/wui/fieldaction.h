@@ -27,7 +27,7 @@ class Building;
 class Player;
 struct PlayerImmovable;
 }
-struct Interactive_Base;
+class Interactive_Base;
 class Interactive_Player;
 
 // fieldaction.cc

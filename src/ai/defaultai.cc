@@ -1997,7 +1997,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// buildings are needed. If yes consider an upgrade.
 	std::set<Building_Index> enhancements = site.site->enhancements();
 	int32_t maxprio = 0;
-	Building_Index enbld;  // to get rid of this
+	Building_Index enbld = INVALID_INDEX;  // to get rid of this
 	BuildingObserver* bestbld = nullptr;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
 		// Only enhance buildings that are allowed (scenario mode)
@@ -2112,7 +2112,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	// Check whether building is enhanceable. If yes consider an upgrade.
 	std::set<Building_Index> enhancements = site.site->enhancements();
 	int32_t maxprio = 0;
-	Building_Index enbld;
+	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
