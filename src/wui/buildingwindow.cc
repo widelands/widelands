@@ -55,7 +55,7 @@ Building_Window::Building_Window
 	UI::Window
 		(&parent, "building_window",
 		 0, 0, Width, 0,
-		 b.descname()),
+		 b.descr().descname()),
 	m_registry(registry),
 	m_building       (b),
 	m_workarea_job_id(0),

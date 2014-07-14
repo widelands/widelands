@@ -242,7 +242,7 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 			send_message
 				(*game,
 				 "site_occupied",
-				 descname(),
+				 descr().descname(),
 				 descr().m_occupied_str,
 				 true);
 		}

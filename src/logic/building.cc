@@ -551,13 +551,13 @@ std::string Building::info_string(const std::string & format) {
 			FORMAT('y', get_position().y);
 			FORMAT
 				('c', '(' << get_position().x << ", " << get_position().y << ')');
-			FORMAT('A', descname());
+			FORMAT('A', descr().descname());
 			FORMAT('a', name());
 			case 'N':
 				if (upcast(ConstructionSite const, constructionsite, this))
 					result << constructionsite->building().descname();
 				else
-					result << descname();
+					result << descr().descname();
 				break;
 			case 'n':
 				if (upcast(ConstructionSite const, constructionsite, this))

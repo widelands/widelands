@@ -200,7 +200,6 @@ public:
 	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
 	const std::string & name() const override;
-	const std::string & descname() const {return descr().descname();}
 
 	std::string info_string(const std::string & format);
 	virtual std::string get_statistics_string();

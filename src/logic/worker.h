@@ -90,7 +90,6 @@ public:
 	Ware_Index becomes() const {return descr().becomes();}
 	Ware_Index worker_index() const {return descr().worker_index();}
 	const Tribe_Descr & tribe() const {return descr().tribe();}
-	const std::string & descname() const {return descr().descname();}
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
 	PlayerImmovable * get_location(Editor_Game_Base & egbase) {

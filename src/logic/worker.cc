@@ -1874,7 +1874,7 @@ void Worker::return_update(Game & game, State & state)
 		snprintf
 			(buffer, sizeof(buffer),
 			 _ ("Your %s can't find a way home and will likely die."),
-			 descname().c_str());
+			 descr().descname().c_str());
 		owner().add_message
 			(game,
 			 *new Message
@@ -2180,7 +2180,7 @@ void Worker::start_task_releaserecruit(Game & game, Worker & recruit)
 	push_task(game, taskReleaserecruit);
 	molog
 		("Starting to release %s %u...\n",
-		 recruit.descname().c_str(), recruit.serial());
+		 recruit.descr().descname().c_str(), recruit.serial());
 	return schedule_act(game, 5000);
 }
 

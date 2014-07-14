@@ -104,7 +104,7 @@ void Map_Buildingdata_Data_Packet::Read
 								("WARNING: %s %s does not have animation \"%s\"; "
 								 "using animation \"idle\" instead\n",
 								 building.descr().tribe().name().c_str(),
-								 building.descname().c_str(),
+								 building.descr().descname().c_str(),
 								 animation_name);
 							building.m_anim = building.descr().get_animation("idle");
 						}
@@ -170,7 +170,7 @@ void Map_Buildingdata_Data_Packet::Read
 									("WARNING: Found a stopped %s at (%i, %i) in the "
 									 "savegame. Militarysites are not stoppable. "
 									 "Ignoring.",
-									 building.descname().c_str(),
+									 building.descr().descname().c_str(),
 									 building.get_position().x,
 									 building.get_position().y);
 							} else {
@@ -181,7 +181,7 @@ void Map_Buildingdata_Data_Packet::Read
 								("WARNING: Found a stopped %s at (%i, %i) in the "
 								 "savegame. Only productionsites are stoppable. "
 								 "Ignoring.",
-								 building.descname().c_str(),
+								 building.descr().descname().c_str(),
 								 building.get_position().x,
 								 building.get_position().y);
 					}
@@ -580,7 +580,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					log
 						("WARNING: %s %u has a next_spawn time for nonexistent "
 						 "worker type \"%s\" set to %u, ignoring\n",
-						 warehouse.descname().c_str(), warehouse.serial(),
+						 warehouse.descr().descname().c_str(), warehouse.serial(),
 						 "carrier", next_spawn);
 				} else if
 					(tribe.get_worker_descr(worker_index)->buildcost().size())
@@ -589,7 +589,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						("WARNING: %s %u has a next_spawn time for worker type "
 						 "\"%s\", that costs something to build, set to %u, "
 						 "ignoring\n",
-						 warehouse.descname().c_str(), warehouse.serial(),
+						 warehouse.descr().descname().c_str(), warehouse.serial(),
 						 "carrier", next_spawn);
 				} else
 					for (uint8_t i = 0;; ++i) {
@@ -626,7 +626,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						log
 							("WARNING: %s %u has a next_spawn time for nonexistent "
 							 "worker type \"%s\" set to %u, ignoring\n",
-							 warehouse.descname().c_str(), warehouse.serial(),
+							 warehouse.descr().descname().c_str(), warehouse.serial(),
 							 worker_typename, next_spawn);
 						continue;
 					}
@@ -635,7 +635,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							("WARNING: %s %u has a next_spawn time for worker type "
 							 "\"%s\", that costs something to build, set to %u, "
 							 "ignoring\n",
-							 warehouse.descname().c_str(), warehouse.serial(),
+							 warehouse.descr().descname().c_str(), warehouse.serial(),
 							 worker_typename, next_spawn);
 						continue;
 					}
@@ -651,7 +651,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 									 "%s %u has a next_spawn time for worker type "
 									 "\"%s\" set to %u, but it was previously set "
 									 "to %u\n",
-									 warehouse.descname().c_str(), warehouse.serial(),
+									 warehouse.descr().descname().c_str(), warehouse.serial(),
 									 worker_typename, next_spawn,
 									 warehouse.m_next_worker_without_cost_spawn[i]);
 							warehouse.m_next_worker_without_cost_spawn[i] =
@@ -1056,7 +1056,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 	} catch (const _wexception & e) {
 		throw game_data_error
 			("productionsite (%s): %s",
-			 productionsite.descname().c_str(), e.what());
+			 productionsite.descr().descname().c_str(), e.what());
 	}
 }
 

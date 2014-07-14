@@ -387,7 +387,7 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 				 "worker type; setting it to %u\n",
 				 owner().player_number(),
 				 tribe().get_worker_descr(worker_index)->descname().c_str(),
-				 descname().c_str(), serial(), get_position().x, get_position().y,
+				 descr().descname().c_str(), serial(), get_position().x, get_position().y,
 				 next_spawn);
 		}
 	}
@@ -455,11 +455,11 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	snprintf
 		(message, sizeof(message),
 		 _("A new %s was added to your economy."),
-		 descname().c_str());
+		 descr().descname().c_str());
 	send_message
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 "warehouse",
-		 descname(),
+		 descr().descname(),
 		 message,
 		 true);
 	}

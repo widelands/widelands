@@ -451,7 +451,7 @@ int ProductionSite::warp_worker
  */
 void ProductionSite::remove_worker(Worker & w)
 {
-	molog("%s leaving\n", w.descname().c_str());
+	molog("%s leaving\n", w.descr().descname().c_str());
 	Working_Position * wp = m_working_positions;
 
 	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {

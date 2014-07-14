@@ -163,7 +163,7 @@ void ProductionSite_Window::update_worker_table()
 			m_worker_table->get_record(i);
 
 		if (worker) {
-			er.set_picture(0, worker->icon(), worker->descname());
+			er.set_picture(0, worker->icon(), worker->descr().descname());
 
 			if
 				(worker->get_current_experience() != -1
