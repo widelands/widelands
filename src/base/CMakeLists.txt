@@ -61,6 +61,7 @@ wl_library(base_scoped_timer
   USES_SDL
   DEPENDS
     base_log
+    base_macros
 )
 
 wl_library(base_time_string
