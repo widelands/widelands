@@ -182,6 +182,8 @@ endif()
 # Turn some warnings into errors.
 add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
+add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
+
 
 IF (WIN32)
   set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
