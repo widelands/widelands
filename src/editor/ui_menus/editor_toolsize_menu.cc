@@ -38,18 +38,18 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
-		(&parent, "toolsize_menu", &registry, 160, 50, _("Tool Size")),
-	m_textarea(this, 5, 5, 150, 10, std::string(), UI::Align_HCenter),
+		(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
+	m_textarea(this, 5, 10, 240, 10, std::string(), UI::Align_BottomCenter),
 	m_increase
 		(this, "incr",
-		 80, 25, 20, 20,
+		 get_inner_w() / 2 - 10, 25, 20, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"),
 		 std::string(),
 		 parent.get_sel_radius() < MAX_TOOL_AREA),
 	m_decrease
 		(this, "decr",
-		 60, 25, 20, 20,
+		 get_inner_w() / 2 + 10, 25, 20, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"),
 		 std::string(),

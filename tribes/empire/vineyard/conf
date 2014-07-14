@@ -5,6 +5,7 @@ output=grape
 space_consumer=true
 is_basic=true
 build_material=false
+is_food_basic=true
 
 [buildcost]
 wood=2

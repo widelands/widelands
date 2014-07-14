@@ -25,3 +25,7 @@ stone=3
 [idle]
 pics=tower_i_??.png
 hotspot=55 60
+
+[aihints]
+expansion=true
+mountain_conqueror=true

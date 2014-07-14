@@ -152,7 +152,7 @@ void Map_View::stop_dragging() {
  * Left-press:    field action window
  */
 bool Map_View::handle_mousepress
-	(Uint8 const btn, int32_t const x, int32_t const y)
+	(uint8_t const btn, int32_t const x, int32_t const y)
 {
 	if (btn == SDL_BUTTON_LEFT)
 	{
@@ -167,7 +167,7 @@ bool Map_View::handle_mousepress
 	}
 	return true;
 }
-bool Map_View::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
+bool Map_View::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT and m_dragging)
 		stop_dragging();
@@ -181,7 +181,7 @@ Scroll the view according to mouse movement.
 ===============
 */
 bool Map_View::handle_mousemove
-	(Uint8 const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
+	(uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
 	if (m_dragging) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))

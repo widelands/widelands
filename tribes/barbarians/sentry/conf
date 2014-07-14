@@ -27,3 +27,8 @@ hotspot=39 40
 [unoccupied]
 pics=sentry_u_??.png
 hotspot=39 40
+
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true

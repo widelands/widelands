@@ -67,8 +67,8 @@ struct WLMessageBox : public Window {
 	boost::signals2::signal<void ()> yes;
 	boost::signals2::signal<void ()> no;
 
-	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my) override;
-	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my) override;
+	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
+	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_key(bool down, SDL_keysym code) override;
 
 protected:

@@ -33,3 +33,7 @@ hotspot=90 105
 pics=fortress_b_??.png
 hotspot=90 105
 
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true

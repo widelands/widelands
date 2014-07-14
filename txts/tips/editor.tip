@@ -3,11 +3,11 @@ text=_"You can find general help for the editor as well as a short tutorial on o
 sec=6
 
 [Tip 2]
-text=_"You can select multiple nature object (bob) types if you hold down CTRL during selection. If you then click on the map, an instance of one of the selected object types will be placed."
+text=_"You can select multiple animal types if you hold down CTRL during selection. If you then click on the map, an instance of one of the selected animal types will be placed."
 sec=7
 
 [Tip 3]
-text=_"Just like with natural objects (bobs), you can also select multiple animals or ground textures with CTRL + mouse click."
+text=_"Just like with animals, you can also select multiple immovables or ground textures with CTRL + mouse click."
 sec=6
 
 [Tip 4]
