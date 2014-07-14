@@ -27,6 +27,7 @@
 
 #include <boost/utility.hpp>
 
+#include "base/macros.h"
 #include "base/point.h"
 #include "base/rect.h"
 
@@ -48,7 +49,7 @@ constexpr int FRAME_LENGTH = 250;
  * The dimensions of an animation is constant and can not change from frame to
  * frame.
  */
-class Animation : boost::noncopyable {
+class Animation {
 public:
 	Animation() {}
 	virtual ~Animation() {}
@@ -87,6 +88,8 @@ public:
 
 	/// Play the sound effect associated with this animation at the given time.
 	virtual void trigger_soundfx(uint32_t time, uint32_t stereo_position) const = 0;
+
+	DISALLOW_COPY_AND_ASSIGN(Animation);
 };
 
 /**

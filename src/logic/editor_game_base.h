@@ -25,8 +25,7 @@
 #include <string>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/map.h"
@@ -55,7 +54,6 @@ struct Flag;
 struct AttackController;
 
 class Editor_Game_Base :
-	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
@@ -222,6 +220,7 @@ private:
 		 bool          neutral_when_competing_influence               = false,
 		 bool          conquer_guarded_location_by_superior_influence = false);
 	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
+	DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \

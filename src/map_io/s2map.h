@@ -22,6 +22,7 @@
 
 #include <string>
 
+#include "base/macros.h"
 #include "map_io/map_loader.h"
 
 class FileRead;

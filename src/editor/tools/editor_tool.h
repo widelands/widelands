@@ -22,8 +22,7 @@
 
 #define MAX_TOOL_AREA 9
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "editor/tools/editor_action_args.h"
 #include "logic/widelands_geometry.h"
 
@@ -39,7 +38,7 @@ class World;
  * one function (like delete_building, place building, modify building are 3
  * tools).
  */
-class Editor_Tool : boost::noncopyable {
+class Editor_Tool {
 public:
 	Editor_Tool(Editor_Tool & second, Editor_Tool & third, bool uda = true) :
 		m_second(second), m_third(third), undoable(uda)
@@ -102,6 +101,8 @@ public:
 protected:
 	Editor_Tool & m_second, & m_third;
 	bool undoable;
+
+	DISALLOW_COPY_AND_ASSIGN(Editor_Tool);
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_TOOL_H

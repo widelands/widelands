@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_PLAYER_H
 #define WL_LOGIC_PLAYER_H
 
+#include "base/macros.h"
 #include "graphic/color.h"
 #include "logic/building.h"
 #include "logic/constants.h"
@@ -54,7 +55,6 @@ struct AttackController;
  * properly.
  */
 class Player :
-	boost::noncopyable,
 	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
 	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
@@ -140,7 +140,7 @@ public:
 	};
 
 	/// Per-player field information.
-	struct Field : boost::noncopyable {
+	struct Field {
 		Field() :
 			military_influence(0),
 			vision            (0),
@@ -352,6 +352,7 @@ public:
 		//  border_br
 		//  border_bl
 		//  <end>                           0x100         0x160
+		DISALLOW_COPY_AND_ASSIGN(Field);
 	};
 
 	const Field * fields() const {return m_fields;}
@@ -593,6 +594,8 @@ private:
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
 	BuildingStats m_building_stats;
+
+	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
 void find_former_buildings

@@ -22,8 +22,9 @@
 
 #include <string>
 
-#include <boost/noncopyable.hpp>
 #include <stdint.h>
+
+#include "base/macros.h"
 
 /**
  * Interface to a bitmap that can act as the source of a rendering
@@ -31,8 +32,9 @@
  */
 class Surface;
 
-class Image : boost::noncopyable {
+class Image {
 public:
+	Image() = default;
 	virtual ~Image() {}
 
 	virtual uint16_t width() const = 0;
@@ -41,6 +43,7 @@ public:
 	// Internal functions needed for caching.
 	virtual Surface* surface() const = 0;
 	virtual const std::string& hash() const = 0;
+	DISALLOW_COPY_AND_ASSIGN(Image);
 };
 
 

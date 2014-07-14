@@ -23,7 +23,7 @@
 #include <cstring>
 #include <string>
 
-#include <boost/noncopyable.hpp>
+#include "base/macros.h"
 
 /*
  * Implementation is in immovable.cc
@@ -40,9 +40,12 @@ namespace Widelands {
 struct ImmovableProgram {
 
 	/// Can be executed on an Immovable.
-	struct Action : boost::noncopyable {
+	struct Action  {
+		Action() = default;
 		virtual ~Action();
 		virtual void execute(Game &, Immovable &) const = 0;
+
+		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
 
 	/// Runs an animation.
