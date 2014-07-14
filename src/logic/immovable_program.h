@@ -40,11 +40,12 @@ namespace Widelands {
 struct ImmovableProgram {
 
 	/// Can be executed on an Immovable.
-	struct Action  {
+	struct Action {
 		Action() = default;
 		virtual ~Action();
-		virtual void execute(Game &, Immovable &) const = 0;
+		virtual void execute(Game&, Immovable&) const = 0;
 
+	private:
 		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
 

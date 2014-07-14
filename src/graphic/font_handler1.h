@@ -47,6 +47,7 @@ public:
 	 * ownership remains with this class. Will throw on error.
 	 */
 	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
+
 	DISALLOW_COPY_AND_ASSIGN(IFont_Handler1);
 };
 

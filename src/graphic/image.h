@@ -43,6 +43,7 @@ public:
 	// Internal functions needed for caching.
 	virtual Surface* surface() const = 0;
 	virtual const std::string& hash() const = 0;
+
 	DISALLOW_COPY_AND_ASSIGN(Image);
 };
 

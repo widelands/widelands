@@ -95,6 +95,7 @@ protected:
 
 private:
 	void draw_wrapper();
+
 	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 };
 

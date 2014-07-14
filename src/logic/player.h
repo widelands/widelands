@@ -352,6 +352,8 @@ public:
 		//  border_br
 		//  border_bl
 		//  <end>                           0x100         0x160
+
+	private:
 		DISALLOW_COPY_AND_ASSIGN(Field);
 	};
 

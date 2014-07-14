@@ -72,6 +72,7 @@ struct Computer_Player :
 private:
 	Widelands::Game & m_game;
 	Widelands::Player_Number const m_player_number;
+
 	DISALLOW_COPY_AND_ASSIGN(Computer_Player);
 };
 

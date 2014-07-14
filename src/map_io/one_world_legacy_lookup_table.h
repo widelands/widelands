@@ -43,6 +43,7 @@ public:
 	/// Looks up the new name for the 'immovable'.
 	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
 
+private:
 	DISALLOW_COPY_AND_ASSIGN(OneWorldLegacyLookupTable);
 };
 

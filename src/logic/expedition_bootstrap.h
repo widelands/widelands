@@ -96,6 +96,7 @@ private:
 
 	std::vector<std::unique_ptr<WaresQueue>> wares_;
 	std::vector<std::unique_ptr<ExpeditionWorker>> workers_;
+
 	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 };
 

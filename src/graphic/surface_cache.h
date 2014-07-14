@@ -53,6 +53,7 @@ public:
 	// recreation is expensive (i.e. images loaded from disk).
 	virtual Surface* insert(const std::string& hash, Surface*, bool transient) = 0;
 
+private:
 	DISALLOW_COPY_AND_ASSIGN(SurfaceCache);
 };
 

@@ -70,6 +70,7 @@ private:
 	std::string replstr_;
 	uint32_t cur_;
 	uint32_t max_;
+
 	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
 };
 

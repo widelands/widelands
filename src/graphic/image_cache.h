@@ -61,6 +61,7 @@ private:
 
 	ImageMap images_;  /// hash of cached filename/image pairs
 	SurfaceCache* const surface_cache_;  // Not owned.
+
 	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 };
 

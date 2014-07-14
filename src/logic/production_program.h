@@ -72,6 +72,7 @@ struct ProductionProgram {
 		 */
 		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
 
+	private:
 		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
 

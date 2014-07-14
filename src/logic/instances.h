@@ -322,11 +322,11 @@ protected:
 	void molog(char const * fmt, ...) const
 		__attribute__((format(printf, 2, 3)));
 
-protected:
 	const Map_Object_Descr * m_descr;
 	Serial                   m_serial;
 	LogSink                * m_logsink;
 
+private:
 	DISALLOW_COPY_AND_ASSIGN(Map_Object);
 };
 

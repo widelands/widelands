@@ -136,6 +136,7 @@ public:
 	 */
 	virtual uint8_t * get_pixels() const = 0;
 
+private:
 	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
 

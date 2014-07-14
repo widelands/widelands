@@ -220,6 +220,7 @@ private:
 		 bool          neutral_when_competing_influence               = false,
 		 bool          conquer_guarded_location_by_superior_influence = false);
 	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
+
 	DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
 };
 
