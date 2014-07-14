@@ -19,7 +19,10 @@
 
 #include "base/i18n.h"
 
-#include <clocale>
+#ifdef __FreeBSD__
+#  include <clocale>
+#endif
+
 #include <cstdlib>
 #include <map>
 #include <utility>
