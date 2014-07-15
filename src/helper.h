@@ -17,154 +17,37 @@
  *
  */
 
-#ifndef HELPER_H
-#define HELPER_H
+#ifndef WL_HELPER_H
+#define WL_HELPER_H
 
 #include <cassert>
 #include <cstring>
-#include <sstream>
 #include <string>
 #include <vector>
 
 #include <SDL_keyboard.h>
 #include <boost/utility.hpp>
 
-#include "wexception.h"
-
-/// Matches the string that candidate points to against the string that
-/// template points to. Stops at when reaching a null character or the
-/// character terminator. If a match is found, candidate is moved beyond the
-/// matched part.
-///
-/// example:
-///    char const * candidate = "return   75";
-///    bool const result = match(candidate, "return");
-/// now candidate points to "   75" and result is true
-inline bool match(char * & candidate, char const * pattern) {
-	for (char * p = candidate;; ++p, ++pattern)
-		if (not *pattern) {
-			candidate = p;
-			return true;
-		} else if (*p != *pattern)
-			break;
-	return false;
-}
-
+#include "base/wexception.h"
 
 /// Returns the word starting at the character that p points to and ending
 /// before the first terminator character. Replaces the terminator with null.
-inline char * match
-	(char * & p, bool & reached_end, char const terminator = ' ')
-{
-	assert(terminator);
-	char * const result = p;
-	for (; *p != terminator; ++p)
-		if (*p == '\0') {
-			reached_end = true;
-			goto end;
-		}
-	reached_end = false;
-	*p = '\0'; //  terminate the word
-	++p; //  move past the terminator
-end:
-	if (result < p)
-		return result;
-	throw wexception("expected word");
-}
+// TODO(sirver): move into a logic/strings lib or so.
+char* next_word(char* & p, bool& reached_end, char terminator = ' ');
 
-
-/// Skips a sequence of consecutive characters with the value c, starting at p.
-/// Returns whether any characters were skipped.
-inline bool skip(char * & p, char const c = ' ') {
-	char * t = p;
-	while (*t == c)
-		++t;
-	if (p < t) {
-		p = t;
-		return true;
-	} else
-		return false;
-}
-
-
-/// Skips a sequence of consecutive characters with the value c, starting at p.
-/// Throws _wexception if no characters were skipped.
-inline void force_skip(char * & p, char const c = ' ') {
-	char * t = p;
-	while (*t == c)
-		++t;
-	if (p < t)
-		p = t;
-	else
-		throw wexception("expected '%c' but found \"%s\"", c, p);
-}
-
-/// Combines match and force_skip.
-///
-/// example:
-///    char const * candidate = "return   75";
-///    bool const result = match_force_skip(candidate, "return");
-/// now candidate points to "75" and result is true
-///
-/// example:
-///   char const * candidate = "return75";
-///    bool const result = match_force_skip(candidate, "return");
-/// throws _wexception
-inline bool match_force_skip(char * & candidate, char const * pattern) {
-	for (char * p = candidate;; ++p, ++pattern)
-		if (not *pattern) {
-			force_skip(p);
-			candidate = p;
-			return true;
-		} else if (*p != *pattern)
-			return false;
-
-	return false;
-}
-
-/**
- * Convert std::string to any sstream-compatible type
- *
- * \see http://www.experts-exchange.com/Programming/
- *    Programming_Languages/Cplusplus/Q_20670737.html
- * \author AssafLavie on http://www.experts-exchange.com
- */
-template<typename T> T stringTo(const std::string & s) {
-	std::istringstream iss(s);
-	T x;
-	iss >> x;
-	return x;
-}
-
+/// Split a string by separators.
+/// \note This ignores empty elements, so do not use this for example to split
+/// a string with newline characters into lines, because it would ignore empty
+/// lines.
 std::vector<std::string> split_string
 	(const std::string &, char const * separators);
-void remove_spaces(std::string &);
-void log(char * const fmt, ...);
-
-bool is_printable(SDL_keysym k);
-
-/// A class that makes iteration over filename_?.png templates easy.
-class NumberGlob : boost::noncopyable {
-public:
-	typedef uint32_t type;
-	NumberGlob(const std::string& pictmp);
-
-	/// If there is a next filename, puts it in 's' and returns true.
-	bool next(std::string* s);
-
-private:
-	std::string templ_;
-	std::string fmtstr_;
-	std::string replstr_;
-	uint32_t cur_;
-	uint32_t max_;
-};
 
 /// Generate a random string of given size out of the given alphabet.
+// TODO(sirver): consolidate with random.h/random.cc
 std::string random_string(const std::string& chars, int nlen);
 
-/// A functional container filtering (by copying the values). Returns a new
-//ContainerType that / contains all values where 'test' returned true.
+// A functional container filtering (by copying the values). Returns a new
+// ContainerType that  contains all values where 'test' returned true.
 template <typename ContainerType, class UnaryPredicate>
 ContainerType filter(const ContainerType& container, UnaryPredicate test) {
 	ContainerType filtered;
@@ -176,4 +59,4 @@ ContainerType filter(const ContainerType& container, UnaryPredicate test) {
 	}
 	return filtered;
 }
-#endif
+#endif  // end of include guard: WL_HELPER_H

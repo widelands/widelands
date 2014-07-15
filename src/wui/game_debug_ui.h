@@ -18,16 +18,16 @@
  */
 // UI classes for real-time game debugging
 
-#ifndef GAME_DEBUG_UI_H
-#define GAME_DEBUG_UI_H
+#ifndef WL_WUI_GAME_DEBUG_UI_H
+#define WL_WUI_GAME_DEBUG_UI_H
 
 #include "logic/widelands_geometry.h"
 
-struct Interactive_Base;
+class Interactive_Base;
 namespace Widelands {class Map_Object;}
 
 // Open debug window for the given coordinates
 void show_mapobject_debug(Interactive_Base & parent, Widelands::Map_Object &);
 void show_field_debug(Interactive_Base & parent, Widelands::Coords coords);
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_DEBUG_UI_H

@@ -17,13 +17,14 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_LOADGAME_H
-#define FULLSCREEN_MENU_LOADGAME_H
+#ifndef WL_UI_FSMENU_LOADGAME_H
+#define WL_UI_FSMENU_LOADGAME_H
 
 #include "ui_fsmenu/base.h"
 
+#include <memory>
+
 #include "graphic/image.h"
-#include "graphic/image_loader.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -32,13 +33,12 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-class IImageLoader;
 namespace Widelands {
 class Editor_Game_Base;
 class Game;
 class Map;
 class Map_Loader;
-};
+}
 class Image;
 class RenderTarget;
 class GameController;
@@ -91,9 +91,7 @@ private:
 	GameSettingsProvider                          * m_settings;
 	GameController                                * m_ctrl;
 	std::unique_ptr<const Image>                    m_minimap_image;
-	std::unique_ptr<const IImageLoader>             m_image_loader;
-
 };
 
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_LOADGAME_H

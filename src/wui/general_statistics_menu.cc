@@ -19,9 +19,12 @@
 
 #include "wui/general_statistics_menu.h"
 
+#include <memory>
+
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -74,6 +77,7 @@ m_selected_information(0)
 	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
 	std::string cs_name, cs_pic;
 	if (hook) {
+		hook->do_not_warn_about_unaccessed_keys();
 		cs_name = hook->get_string("name");
 		cs_pic = hook->get_string("pic");
 		m_ndatasets++;
@@ -327,4 +331,4 @@ void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 				(i * m_ndatasets + m_selected_information, false);
 		}
 	m_selected_information = id;
-};
+}

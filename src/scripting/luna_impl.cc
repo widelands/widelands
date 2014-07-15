@@ -21,7 +21,7 @@
 
 #include <string>
 
-#include "log.h"
+#include "base/log.h"
 #include "scripting/c_utils.h"
 #include "scripting/luna.h"
 

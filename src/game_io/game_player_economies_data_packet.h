@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_PLAYER_ECONOMIES_DATA_PACKET_H
-#define GAME_PLAYER_ECONOMIES_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_PLAYER_ECONOMIES_DATA_PACKET_H
+#define WL_GAME_IO_GAME_PLAYER_ECONOMIES_DATA_PACKET_H
 
 #include "game_io/game_data_packet.h"
 
@@ -34,4 +34,4 @@ struct Game_Player_Economies_Data_Packet : public Game_Data_Packet {
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_ECONOMIES_DATA_PACKET_H

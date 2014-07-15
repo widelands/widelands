@@ -17,24 +17,24 @@
  *
  */
 
-#ifndef INSTANCES_H
-#define INSTANCES_H
+#ifndef WL_LOGIC_INSTANCES_H
+#define WL_LOGIC_INSTANCES_H
 
 #include <cstring>
 #include <map>
+#include <set>
 #include <string>
 #include <vector>
 
 #include <boost/function.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
-#include "log.h"
+#include "base/deprecated.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "logic/cmd_queue.h"
-#include "port.h"
-#include "ref_cast.h"
-#include "widelands.h"
+#include "logic/widelands.h"
 
 class FileRead;
 class RenderTarget;
@@ -43,6 +43,7 @@ namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
 
+class EditorCategory;
 class Map_Map_Object_Loader;
 class Player;
 struct Path;
@@ -51,10 +52,10 @@ struct Path;
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
-struct Map_Object_Descr : boost::noncopyable {
-	Map_Object_Descr(char const * const _name, char const * const _descname)
-		: m_name(_name), m_descname(_descname)
-	{}
+struct Map_Object_Descr {
+	Map_Object_Descr(const std::string& init_name, const std::string& init_descname)
+	   : m_name(init_name), m_descname(init_descname) {
+	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
 	const std::string &     name() const {return m_name;}
@@ -83,8 +84,10 @@ struct Map_Object_Descr : boost::noncopyable {
 	void add_animation(const std::string & name, uint32_t anim);
 
 protected:
+	// Add all the special attributes to the attribute list. Only the 'allowed_special'
+	// attributes are allowed to appear - i.e. resi are fine for immovables.
+	void add_attributes(const std::vector<std::string>& attributes, const std::set<uint32_t>& allowed_special);
 	void add_attribute(uint32_t attr);
-
 
 private:
 	typedef std::map<std::string, uint32_t> Anims;
@@ -98,6 +101,7 @@ private:
 	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
 	static AttribMap  s_dyn_attribs;
 
+	DISALLOW_COPY_AND_ASSIGN(Map_Object_Descr);
 };
 
 /**
@@ -144,11 +148,11 @@ public: const type & descr() const { \
       return ref_cast<type const, Map_Object_Descr const>(*m_descr);          \
    }                                                                          \
 
-class Map_Object : boost::noncopyable {
+class Map_Object {
 	friend struct Object_Manager;
 	friend struct Object_Ptr;
 
-	MO_DESCR(Map_Object_Descr);
+	MO_DESCR(Map_Object_Descr)
 
 public:
 	enum {
@@ -318,10 +322,12 @@ protected:
 	void molog(char const * fmt, ...) const
 		__attribute__((format(printf, 2, 3)));
 
-protected:
 	const Map_Object_Descr * m_descr;
 	Serial                   m_serial;
 	LogSink                * m_logsink;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(Map_Object);
 };
 
 inline int32_t get_reverse_dir(int32_t const dir) {
@@ -333,7 +339,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  *
  * Keeps the list of all objects currently in the game.
  */
-struct Object_Manager : boost::noncopyable {
+struct Object_Manager  {
 	typedef boost::unordered_map<Serial, Map_Object *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
@@ -370,6 +376,8 @@ struct Object_Manager : boost::noncopyable {
 private:
 	Serial   m_lastserial;
 	objmap_t m_objects;
+
+	DISALLOW_COPY_AND_ASSIGN(Object_Manager);
 };
 
 /**
@@ -469,4 +477,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_INSTANCES_H

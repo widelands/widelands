@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SONGSET_H
-#define SONGSET_H
+#ifndef WL_SOUND_SONGSET_H
+#define WL_SOUND_SONGSET_H
 
 #include <cstring>
 #include <string>
@@ -46,33 +46,33 @@ struct Songset {
 
 	void add_song(const std::string & filename);
 	Mix_Music * get_song();
-	bool empty() {return m_songs.empty();}
+	bool empty() {return songs_.empty();}
 
 protected:
 	/// The filenames of all configured songs
-	std::vector < std::string > m_songs;
+	std::vector < std::string > songs_;
 
 	/** Pointer to the song that is currently playing (actually the one that
 	 * was last started); needed for linear playback
 	 */
-	std::vector < std::string >::iterator m_current_song;
+	std::vector < std::string >::iterator current_song_;
 
 	/// The current song
-	Mix_Music * m_m;
+	Mix_Music * m_;
 
 	/** File reader object to fetch songs from disk when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
-	 * \sa m_rwops
+	 * \sa rwops_
 	 * \sa get_song()
 	 */
-	FileRead m_fr;
+	FileRead fr_;
 
 	/** RWops object to fetch songs from disc when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
-	 * \sa m_fr
+	 * \sa fr_
 	 * \sa get_song()
 	 */
-	SDL_RWops * m_rwops;
+	SDL_RWops * rwops_;
 };
 
-#endif
+#endif  // end of include guard: WL_SOUND_SONGSET_H

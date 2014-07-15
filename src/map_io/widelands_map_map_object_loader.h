@@ -17,18 +17,18 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_MAP_OBJECT_LOADER_H
-#define WIDELANDS_MAP_MAP_OBJECT_LOADER_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_LOADER_H
+#define WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
 #include <map>
 #include <typeinfo>
 
 #include <stdint.h>
 
+#include "base/macros.h"
 #include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/widelands.h"
-#include "upcast.h"
 
 
 namespace Widelands {
@@ -105,4 +105,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_LOADER_H

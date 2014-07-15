@@ -17,20 +17,40 @@
  *
  */
 
-#ifndef SDL_TTF_FONT_H
-#define SDL_TTF_FONT_H
+#ifndef WL_GRAPHIC_TEXT_SDL_TTF_FONT_H
+#define WL_GRAPHIC_TEXT_SDL_TTF_FONT_H
 
+#include <memory>
 #include <string>
+
+#include <SDL_ttf.h>
 
 #include "graphic/text/rt_render.h"
 
-class FileSystem;
-
 namespace RT {
-RT::IFontLoader * ttf_fontloader_from_file(const std::string&);
-RT::IFontLoader * ttf_fontloader_from_filesystem(FileSystem*);
-}
 
+// Implementation of a Font object using SDL_ttf.
+class SDLTTF_Font : public IFont {
+public:
+	SDLTTF_Font
+		(TTF_Font* ttf, const std::string& face, int ptsize, std::string* ttf_memory_block);
+	virtual ~SDLTTF_Font();
 
-#endif /* end of include guard: SDL_TTF_FONT_H */
+	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h) override;
+	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) override;
+	uint16_t ascent(int) const override;
 
+private:
+	void m_set_style(int);
+
+	TTF_Font * font_;
+	int style_;
+	const std::string font_name_;
+	const int ptsize_;
+	// Old version of SDLTtf seem to need to keep this around.
+	std::unique_ptr<std::string> ttf_file_memory_block_;
+};
+
+}  // namespace RT
+
+#endif  // end of include guard:

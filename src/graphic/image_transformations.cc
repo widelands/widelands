@@ -25,12 +25,12 @@
 #include <SDL_rotozoom.h>
 #include <boost/format.hpp>
 
+#include "base/macros.h"
+#include "graphic/color.h"
 #include "graphic/graphic.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
-#include "rgbcolor.h"
-#include "upcast.h"
 
 using namespace std;
 
@@ -126,13 +126,13 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 			 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 		SDL_Rect srcrc =
 			{0, 0,
-			 static_cast<Uint16>(zoomed->w), static_cast<Uint16>(zoomed->h)
+			 static_cast<uint16_t>(zoomed->w), static_cast<uint16_t>(zoomed->h)
 			};  // For some reason SDL_Surface and SDL_Rect express w,h in different types
 		SDL_Rect dstrc = {0, 0, 0, 0};
 		SDL_SetAlpha(zoomed, 0, 0);
 		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc); // Updates dstrc
 
-		Uint32 fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
+		uint32_t fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
 
 		if (zoomed->w < placed->w) {
 			dstrc.x = zoomed->w;

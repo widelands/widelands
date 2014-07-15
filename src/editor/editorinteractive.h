@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITORINTERACTIVE_H
-#define EDITORINTERACTIVE_H
+#ifndef WL_EDITOR_EDITORINTERACTIVE_H
+#define WL_EDITOR_EDITORINTERACTIVE_H
 
 #include "editor/tools/editor_history.h"
 #include "editor/tools/editor_increase_height_tool.h"
@@ -67,8 +67,8 @@ public:
 
 	//  Handle UI elements.
 	bool handle_key(bool down, SDL_keysym) override;
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 	struct Tools {
 		Tools()
@@ -81,7 +81,6 @@ public:
 			place_bob(delete_bob),
 			increase_resources(decrease_resources, set_resources),
 			set_port_space(unset_port_space)
-
 		{}
 		Editor_Tool & current() const {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
@@ -120,10 +119,6 @@ public:
 	void unreference_player_tribe(Widelands::Player_Number, void const * const);
 	bool is_player_tribe_referenced(Widelands::Player_Number);
 	void set_need_save(bool const t) {m_need_save = t;}
-
-	/// Must be called when the world is changed. Takes care of closing the tool
-	/// menus that are showing elements from the old world.
-	void change_world();
 
 private:
 	void toggle_buildhelp();
@@ -167,4 +162,4 @@ private:
 	UI::Button m_redo;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

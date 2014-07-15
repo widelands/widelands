@@ -21,17 +21,18 @@
 
 #include <boost/bind.hpp>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "text_layout.h"
 #include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 
 namespace UI {
 
@@ -345,7 +346,7 @@ bool Table<void *>::handle_key(bool down, SDL_keysym code)
  * Handle mouse presses: select the appropriate entry
  */
 bool Table<void *>::handle_mousepress
-	(Uint8 const btn, int32_t x, int32_t const y)
+	(uint8_t const btn, int32_t x, int32_t const y)
 {
 	if (get_can_focus())
 		focus();
@@ -396,7 +397,7 @@ bool Table<void *>::handle_mousepress
 		return false;
 	}
 }
-bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
+bool Table<void *>::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
 }

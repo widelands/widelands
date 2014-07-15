@@ -22,7 +22,8 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/macros.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -34,7 +35,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"
@@ -60,8 +60,8 @@ struct SoldierPanel : UI::Panel {
 
 protected:
 	virtual void handle_mousein(bool inside) override;
-	virtual bool handle_mousemove(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	virtual bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	virtual bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	virtual bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
 private:
 	Point calc_pos(uint32_t row, uint32_t col) const;
@@ -114,7 +114,7 @@ m_egbase(gegbase),
 m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
 m_last_animate_time(0)
 {
-	Soldier::calc_info_icon_size(building.tribe(), m_icon_width, m_icon_height);
+	Soldier::calc_info_icon_size(building.descr().tribe(), m_icon_width, m_icon_height);
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 
@@ -255,9 +255,9 @@ void SoldierPanel::think()
 		// Check whether health and/or level of the soldier has changed
 		Soldier * soldier = icon.soldier.get(egbase());
 		uint32_t level = soldier->get_attack_level();
-		level = level * (soldier->get_max_defense_level() + 1) + soldier->get_defense_level();
-		level = level * (soldier->get_max_evade_level() + 1) + soldier->get_evade_level();
-		level = level * (soldier->get_max_hp_level() + 1) + soldier->get_hp_level();
+		level = level * (soldier->descr().get_max_defense_level() + 1) + soldier->get_defense_level();
+		level = level * (soldier->descr().get_max_evade_level() + 1) + soldier->get_evade_level();
+		level = level * (soldier->descr().get_max_hp_level() + 1) + soldier->get_hp_level();
 
 		uint32_t health = soldier->get_current_hitpoints();
 
@@ -330,7 +330,7 @@ void SoldierPanel::handle_mousein(bool inside)
 }
 
 bool SoldierPanel::handle_mousemove
-	(Uint8 /* state */,
+	(uint8_t /* state */,
 	 int32_t x,
 	 int32_t y,
 	 int32_t /* xdiff */,
@@ -341,7 +341,7 @@ bool SoldierPanel::handle_mousemove
 	return true;
 }
 
-bool SoldierPanel::handle_mousepress(Uint8 btn, int32_t x, int32_t y)
+bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y)
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (m_click_fn) {
@@ -476,10 +476,10 @@ void SoldierList::mouseover(const Soldier * soldier)
 
 	m_infotext.set_text(
 		(boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"))
-			% soldier->get_hp_level() % soldier->get_max_hp_level()
-			% soldier->get_attack_level() % soldier->get_max_attack_level()
-			% soldier->get_defense_level() % soldier->get_max_defense_level()
-			% soldier->get_evade_level() % soldier->get_max_evade_level()
+			% soldier->get_hp_level() % soldier->descr().get_max_hp_level()
+			% soldier->get_attack_level() % soldier->descr().get_max_attack_level()
+			% soldier->get_defense_level() % soldier->descr().get_max_defense_level()
+			% soldier->get_evade_level() % soldier->descr().get_max_evade_level()
 		).str()
 	);
 }

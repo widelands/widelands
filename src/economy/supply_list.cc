@@ -19,10 +19,10 @@
 
 #include "economy/supply_list.h"
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/wexception.h"
 #include "economy/request.h"
 #include "economy/supply.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -62,4 +62,3 @@ bool SupplyList::have_supplies(Game & game, const Request & req)
 }
 
 }
-

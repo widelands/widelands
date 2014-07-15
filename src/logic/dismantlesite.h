@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DISMANTLESITE_H
-#define DISMANTLESITE_H
+#ifndef WL_LOGIC_DISMANTLESITE_H
+#define WL_LOGIC_DISMANTLESITE_H
 
 #include "logic/building.h"
 #include "logic/partially_finished_building.h"
@@ -51,11 +51,11 @@ struct DismantleSite_Descr : public Building_Descr {
 };
 
 class DismantleSite : public Partially_Finished_Building {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 
 	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
 
-	MO_DESCR(DismantleSite_Descr);
+	MO_DESCR(DismantleSite_Descr)
 
 public:
 	DismantleSite(const DismantleSite_Descr & descr);
@@ -84,4 +84,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_DISMANTLESITE_H

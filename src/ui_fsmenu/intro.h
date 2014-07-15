@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_INTRO_H
-#define FULLSCREEN_MENU_INTRO_H
+#ifndef WL_UI_FSMENU_INTRO_H
+#define WL_UI_FSMENU_INTRO_H
 
 #include "ui_fsmenu/base.h"
 #include "ui_basic/textarea.h"
@@ -32,11 +32,11 @@ struct Fullscreen_Menu_Intro : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Intro();
 
 protected:
-	virtual bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-	virtual bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	virtual bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	virtual bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_keysym) override;
 private:
 	UI::Textarea m_message;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_INTRO_H

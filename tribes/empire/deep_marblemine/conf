@@ -17,7 +17,7 @@ master-miner=1
 miner=1
 
 [aihints]
-mines=granit
+mines=granite
 
 [inputs]
 meal=6
@@ -30,10 +30,10 @@ work=_Work
 sleep=43000
 consume=meal wine
 animate=working 18000
-mine=granit 2 100 5 2
+mine=granite 2 100 5 2
 produce=marble:2
 animate=working 18000
-mine=granit 2 100 5 2
+mine=granite 2 100 5 2
 produce=marble stone:2
 
 [idle]

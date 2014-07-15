@@ -19,11 +19,11 @@
 
 #include "logic/findnode.h"
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/wexception.h"
 #include "logic/field.h"
 #include "logic/immovable.h"
 #include "logic/map.h"
-#include "wexception.h"
 
 
 namespace Widelands {

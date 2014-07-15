@@ -18,8 +18,8 @@
  */
 
 
-#ifndef UI_TABLE_H
-#define UI_TABLE_H
+#ifndef WL_UI_BASIC_TABLE_H
+#define WL_UI_BASIC_TABLE_H
 
 #include <limits>
 #include <vector>
@@ -27,9 +27,9 @@
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 
-#include "align.h"
+#include "graphic/align.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 
 
 namespace UI {
@@ -91,7 +91,7 @@ public:
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () override {
+		char const * what() const noexcept override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
@@ -105,8 +105,8 @@ public:
 
 	// Drawing and event handling
 	void draw(RenderTarget &);
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y);
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_key(bool down, SDL_keysym code);
 };
 
@@ -219,7 +219,7 @@ public:
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () override {
+		char const * what() const noexcept override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
@@ -234,15 +234,15 @@ public:
 			throw No_Selection();
 		remove(m_selection);
 	}
-	void * get_selected() const {return get_selected_record().entry();};
+	void * get_selected() const {return get_selected_record().entry();}
 
 	uint32_t get_lineheight() const {return m_lineheight + 2;}
 	uint32_t get_eff_w     () const {return get_w();}
 
 	// Drawing and event handling
 	void draw(RenderTarget &) override;
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	virtual bool handle_key(bool down, SDL_keysym code) override;
 
 private:
@@ -445,4 +445,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_TABLE_H

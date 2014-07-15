@@ -17,25 +17,24 @@
  *
  */
 
-#ifndef EDITOR_GAME_BASE_H
-#define EDITOR_GAME_BASE_H
+#ifndef WL_LOGIC_EDITOR_GAME_BASE_H
+#define WL_LOGIC_EDITOR_GAME_BASE_H
 
 #include <cstring>
+#include <memory>
 #include <string>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "logic/building.h"
-#include "constants.h"
 #include "logic/map.h"
 #include "logic/notification.h"
 #include "logic/player_area.h"
 
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
-struct Interactive_Base;
+class Interactive_Base;
 class LuaInterface;
 
 namespace Widelands {
@@ -55,25 +54,24 @@ struct Flag;
 struct AttackController;
 
 class Editor_Game_Base :
-	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
 {
 public:
-	friend struct ::Fullscreen_Menu_LaunchGame;
-	friend struct ::Interactive_Base;
+	friend class Interactive_Base;
+	friend struct Fullscreen_Menu_LaunchGame;
 	friend struct Game_Game_Class_Data_Packet;
 
 	Editor_Game_Base(LuaInterface * lua);
 	virtual ~Editor_Game_Base();
 
 	void set_map(Map *);
-	Map & map() const {return *m_map;}
-	Map * get_map() {return m_map;}
-	Map & get_map() const {return *m_map;}
-	const Object_Manager & objects() const {return m_objects;}
-	Object_Manager       & objects()       {return m_objects;}
+	Map & map() const {return *map_;}
+	Map * get_map() {return map_;}
+	Map & get_map() const {return *map_;}
+	const Object_Manager & objects() const {return objects_;}
+	Object_Manager       & objects()       {return objects_;}
 
 	// logic handler func
 	virtual void think();
@@ -117,8 +115,8 @@ public:
 	Immovable & create_immovable
 		(Coords, const std::string & name, Tribe_Descr const *);
 
-	int32_t get_gametime() const {return m_gametime;}
-	Interactive_Base * get_ibase() const {return m_ibase;}
+	int32_t get_gametime() const {return gametime_;}
+	Interactive_Base * get_ibase() const {return ibase_;}
 
 	// safe system for storing pointers to non-Map_Object C++ objects
 	// unlike objects in the Object_Manager, these pointers need not be
@@ -132,11 +130,8 @@ public:
 	const Tribe_Descr & manually_load_tribe(Player_Number const p) {
 		return manually_load_tribe(map().get_scenario_player_tribe(p));
 	}
-	// Get a tribe from the loaded list, when available
-	Tribe_Descr const * get_tribe(const char * tribe) const;
-	Tribe_Descr const * get_tribe(const std::string & name) const {
-		return get_tribe(name.c_str());
-	}
+	// Get a tribe from the loaded list, when known or nullptr.
+	Tribe_Descr const * get_tribe(const std::string & name) const;
 
 	void inform_players_about_ownership(Map_Index, Player_Number);
 	void inform_players_about_immovable(Map_Index, Map_Object_Descr const *);
@@ -157,33 +152,40 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	int32_t & get_game_time_pointer() {return m_gametime;}
-	void set_ibase(Interactive_Base * const b) {m_ibase = b;}
+	int32_t & get_game_time_pointer() {return gametime_;}
+	void set_ibase(Interactive_Base * const b) {ibase_ = b;}
 
 	/// Lua frontend, used to run Lua scripts
-	LuaInterface & lua() {return *m_lua;}
+	LuaInterface & lua() {return *lua_;}
 
-	Players_Manager* player_manager() {return m_player_manager.get();}
+	Players_Manager* player_manager() {return player_manager_.get();}
 
 	Interactive_GameBase * get_igbase();
 
+	// Returns the world.
+	const World& world() const;
+
+	// Returns the world that can be modified. Prefer world() whenever possible.
+	World* mutable_world();
+
 private:
 	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.
-	int32_t m_gametime;
-	Object_Manager             m_objects;
+	int32_t gametime_;
+	Object_Manager objects_;
 
-	LuaInterface             * m_lua;
-	std::unique_ptr<Players_Manager> m_player_manager;
+	std::unique_ptr<LuaInterface> lua_;
+	std::unique_ptr<Players_Manager> player_manager_;
+
+	std::unique_ptr<World> world_;
+	Interactive_Base* ibase_;
+	Map* map_;
+
+	uint32_t lasttrackserial_;
+	std::map<uint32_t, void*> trackpointers_;
 
 protected:
-	typedef std::vector<Tribe_Descr *> Tribe_Vector;
-	Tribe_Vector           m_tribes;
-private:
-	Interactive_Base         * m_ibase;
-	Map                      * m_map;
-
-	uint32_t                       m_lasttrackserial;
-	std::map<uint32_t, void *>     m_trackpointers;
+	typedef std::vector<Tribe_Descr*> Tribe_Vector;
+	Tribe_Vector tribes_;
 
 private:
 	/// \param preferred_player
@@ -218,6 +220,8 @@ private:
 		 bool          neutral_when_competing_influence               = false,
 		 bool          conquer_guarded_location_by_superior_influence = false);
 	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
+
+	DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \
@@ -234,4 +238,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_EDITOR_GAME_BASE_H

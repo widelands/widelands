@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SDL_HELPER_H
-#define SDL_HELPER_H
+#ifndef WL_GRAPHIC_RENDER_SDL_HELPER_H
+#define WL_GRAPHIC_RENDER_SDL_HELPER_H
 
 #include <stdint.h>
 
@@ -26,6 +26,4 @@ struct SDL_Surface;
 
 SDL_Surface * empty_sdl_surface(int16_t w, int16_t h);
 
-#endif /* end of include guard: SDL_HELPER_H */
-
-
+#endif  // end of include guard: WL_GRAPHIC_RENDER_SDL_HELPER_H

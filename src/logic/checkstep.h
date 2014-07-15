@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CHECKSTEP_H
-#define CHECKSTEP_H
+#ifndef WL_LOGIC_CHECKSTEP_H
+#define WL_LOGIC_CHECKSTEP_H
 
 #include <set>
 #include <vector>
@@ -204,4 +204,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CHECKSTEP_H

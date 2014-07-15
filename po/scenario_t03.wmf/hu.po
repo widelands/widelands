@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: 2014-03-10 08:48+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:30+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:30+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: hu\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
@@ -624,7 +624,7 @@ msgstr ""
 "csak remélhetem, hogy elmenekültek erről a kegyetlen harcmezőről, és új "
 "életet kezdtek valahol máshol."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:374
+#: ../../campaigns/t03.wmf/scripting/texts.lua:375
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to ever see "
@@ -640,11 +640,11 @@ msgstr ""
 "régi város immár a kezemben van, és nem habozok újjáépíteni népem teljes "
 "erejéből. Alig várom, hogy újra régi fényében lássam."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:379
+#: ../../campaigns/t03.wmf/scripting/texts.lua:380
 msgid "Victory"
 msgstr "Győzelem"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:380
+#: ../../campaigns/t03.wmf/scripting/texts.lua:381
 msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
@@ -652,11 +652,11 @@ msgstr ""
 "Befejezted a barbárok oktató hadjáratának utolsó küldetését. Ha szeretnél, "
 "játszhatsz tovább, máskülönben folytasd a következő hadjárattal."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:386
+#: ../../campaigns/t03.wmf/scripting/texts.lua:387
 msgid "Military Assault"
 msgstr "Ostrom"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:388
+#: ../../campaigns/t03.wmf/scripting/texts.lua:389
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -666,7 +666,7 @@ msgstr ""
 "vezeti az első támadást. Vele tartok, hogy megszabadítsuk Al'thunrant ettől "
 "a háborútól és visszahozzuk a békét fővárosunkba."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:390
+#: ../../campaigns/t03.wmf/scripting/texts.lua:391
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -678,15 +678,15 @@ msgstr ""
 "újszülött bárányt áldozok apám tiszteletére, akinek szemei ma rám "
 "szegeződnek."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:394
+#: ../../campaigns/t03.wmf/scripting/texts.lua:395
 msgid "So be it!"
 msgstr "Úgy legyen!"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:399
+#: ../../campaigns/t03.wmf/scripting/texts.lua:400
 msgid "Khantrukh says:"
 msgstr "Khantrukh így szól:"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:401
+#: ../../campaigns/t03.wmf/scripting/texts.lua:402
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
@@ -700,7 +700,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "„%s”"
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

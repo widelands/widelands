@@ -31,7 +31,7 @@
 #include <direct.h>
 #include <io.h>
 #define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
-#endif // _MSC_VER
+#endif
 #else  // not _WIN32
 #include <fcntl.h>
 #include <glob.h>
@@ -40,13 +40,13 @@
 #include <sys/types.h>
 #endif
 
-#include "compile_diagnostics.h"
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "log.h"
-#include "wexception.h"
 
 struct FileSystemPath: public std::string
 {
@@ -343,19 +343,14 @@ void RealFSImpl::MakeDirectory(const std::string & dirname) {
  */
 void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	const std::string fullname = FS_CanonicalizeName(fname);
+	if (IsDirectory(fullname)) {
+		throw File_error("RealFSImpl::Load", fullname.c_str());
+	}
 
 	FILE * file = nullptr;
 	void * data = nullptr;
 
 	try {
-		//debug info
-		//printf("------------------------------------------\n");
-		//printf("RealFSImpl::Load():\n");
-		//printf("     fname       = %s\n", fname.c_str());
-		//printf("     m_directory = %s\n", m_directory.c_str());
-		//printf("     fullname    = %s\n", fullname.c_str());
-		//printf("------------------------------------------\n");
-
 		file = fopen(fullname.c_str(), "rb");
 		if (not file)
 			throw File_error("RealFSImpl::Load", fullname.c_str());
@@ -379,7 +374,6 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		data = malloc(size + 1); //  FIXME memory leak!
 		int result = fread(data, size, 1, file);
 		if (size and (result != 1)) {
-			assert(false);
 			throw wexception
 				("RealFSImpl::Load: read failed for %s (%s) with size %" PRIuS "",
 				 fname.c_str(), fullname.c_str(), size);
@@ -391,8 +385,9 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 
 		length = size;
 	} catch (...) {
-		if (file)
+		if (file) {
 			fclose(file);
+		}
 		free(data);
 		throw;
 	}
@@ -469,7 +464,7 @@ private:
 	FILE * m_file;
 };
 
-};
+}
 
 StreamRead * RealFSImpl::OpenStreamRead(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
@@ -515,7 +510,7 @@ private:
 	FILE * m_file;
 };
 
-};
+}
 
 StreamWrite * RealFSImpl::OpenStreamWrite(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);

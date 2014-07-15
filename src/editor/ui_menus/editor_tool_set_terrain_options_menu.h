@@ -17,36 +17,32 @@
  *
  */
 
-#ifndef EDITOR_TOOL_SET_TERRAIN_TOOL_H
-#define EDITOR_TOOL_SET_TERRAIN_TOOL_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOL_SET_TERRAIN_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOL_SET_TERRAIN_OPTIONS_MENU_H
 
+#include <map>
+#include <memory>
 #include <vector>
 
+#include "editor/ui_menus/categorized_item_selection_menu.h"
 #include "editor/ui_menus/editor_tool_options_menu.h"
+#include "logic/world/terrain_description.h"
 #include "ui_basic/textarea.h"
-
 
 struct Editor_Interactive;
 struct Editor_Set_Terrain_Tool;
-namespace UI {struct Checkbox;}
 
 struct Editor_Tool_Set_Terrain_Options_Menu : public Editor_Tool_Options_Menu {
-	Editor_Tool_Set_Terrain_Options_Menu
-		(Editor_Interactive         &,
-		 Editor_Set_Terrain_Tool    &,
-		 UI::UniqueWindow::Registry &);
+	Editor_Tool_Set_Terrain_Options_Menu(Editor_Interactive&,
+	                                     Editor_Set_Terrain_Tool&,
+	                                     UI::UniqueWindow::Registry&);
 	virtual ~Editor_Tool_Set_Terrain_Options_Menu();
 
 private:
-	// When we are using an offscreen surface, we have to delete it,
-	// when we are closed. So we keep a pointer around.
-	std::vector<const Image*>  offscreen_images_;
-	UI::Textarea                m_cur_selection;
-	Editor_Set_Terrain_Tool   & m_tool;
-	void selected(int32_t, bool);
-	std::vector<UI::Checkbox *> m_checkboxes;
-	bool m_select_recursion_protect;
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::TerrainDescription, Editor_Set_Terrain_Tool>>
+	multi_select_menu_;
+	std::vector<std::unique_ptr<const Image>>  offscreen_images_;
 };
 
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_SET_TERRAIN_OPTIONS_MENU_H

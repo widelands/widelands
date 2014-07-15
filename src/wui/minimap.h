@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef MINIMAP_H
-#define MINIMAP_H
+#ifndef WL_WUI_MINIMAP_H
+#define WL_WUI_MINIMAP_H
 
 #include <boost/signals2.hpp>
 
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-struct Interactive_Base;
+class Interactive_Base;
 
 struct MiniMap : public UI::UniqueWindow {
 	struct Registry : public UI::UniqueWindow::Registry {
@@ -68,8 +68,8 @@ private:
 
 		void draw(RenderTarget &) override;
 
-		bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-		bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+		bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 		void set_zoom(int32_t z);
 
@@ -96,4 +96,4 @@ private:
 	UI::Button button_zoom;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_MINIMAP_H

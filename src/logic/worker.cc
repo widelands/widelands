@@ -19,14 +19,19 @@
 
 #include "logic/worker.h"
 
+#include <iterator>
+#include <memory>
+#include <tuple>
+
 #include <boost/format.hpp>
 
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
-#include "gamecontroller.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
 #include "io/fileread.h"
@@ -40,20 +45,23 @@
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/mapfringeregion.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
+#include "logic/terrain_affinity.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker_program.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -75,7 +83,7 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	Player & player = *get_owner();
 	Ware_Index const wareid(action.iparam1);
 	WareInstance & ware =
-		*new WareInstance(wareid, tribe().get_ware_descr(wareid));
+		*new WareInstance(wareid, descr().tribe().get_ware_descr(wareid));
 	ware.init(game);
 
 	set_carried_ware(game, &ware);
@@ -106,7 +114,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
-		map.get_world()->get_resource(action.sparam1.c_str());
+		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
 		throw game_data_error
 			(_
@@ -211,7 +219,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
-		map.get_world()->get_resource(action.sparam1.c_str());
+		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
 		throw game_data_error
 			(_
@@ -344,7 +352,7 @@ bool Worker::run_setbobdescription
 
 	state.ivar2 =
 		state.svar1 == "world" ?
-		game.map().world().get_bob(bob.c_str())
+		game.world().get_bob(bob.c_str())
 		:
 		descr ().tribe().get_bob(bob.c_str());
 
@@ -540,7 +548,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 {
 	std::vector<Coords> list;
 	Map & map = game.map();
-	World * const w = &map.world();
+	const World& world = game.world();
 
 	CheckStepDefault cstep(descr().movecaps());
 
@@ -552,10 +560,10 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 		if (action.iparam4)
 			functor.add
 				(FindNodeResourceBreedable
-				 	(w->get_resource(action.sparam1.c_str())));
+				 	(world.get_resource(action.sparam1.c_str())));
 		else
 			functor.add
-				(FindNodeResource(w->get_resource(action.sparam1.c_str())));
+				(FindNodeResource(world.get_resource(action.sparam1.c_str())));
 	}
 
 	if (action.iparam5 > -1)
@@ -597,11 +605,15 @@ void Worker::informPlayer
 	if (building.name() == "fish_breeders_house")
 		return;
 
-	// TODO "stone" is defined as "granit" in the worlds
-	if (res_type == "stone") res_type = "granit";
+	// TODO "stone" is defined as "granite" in the world. But this code is
+	// erroneus anyways: it translates immovable attribute stone as resource
+	// granite. Instead, the immovable attributes should be made translatable in
+	// the world or the quarry should define its out of stone message in its
+	// configuartion.
+	if (res_type == "stone") res_type = "granite";
 
 	// Translate the Resource name (if it is defined by the world)
-	const World & world = game.map().world();
+	const World & world = game.world();
 	int32_t residx = world.get_resource(res_type.c_str());
 	if (residx != -1)
 		res_type = world.get_resource(residx)->descname();
@@ -797,73 +809,75 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 			return true;
 		}
 
-	std::vector<int32_t> best_fitting;
 	std::vector<bool> is_tribe_specific;
-	uint32_t terrain_suitability = 0;
-	for (uint8_t i = 0; i < action.sparamv.size(); ++i) {
-		std::vector<std::string> const list(split_string(action.sparamv[i], ":"));
-		std::string immovable;
 
-		if (list.size() == 1) {
-			state.svar1 = "world";
-			immovable = list[0];
-			state.ivar2 = map.world().get_immovable_index(immovable.c_str());
-			if (state.ivar2 > 0) {
-				Immovable_Descr const * imm =
-					map.world().get_immovable_descr(state.ivar2);
-				uint32_t suits = imm->terrain_suitability(fpos, map);
-				// Remove existing, if this immovable suits better
-				if (suits > terrain_suitability) {
-					best_fitting.clear();
-					is_tribe_specific.clear();
-				}
-				if (suits >= terrain_suitability) {
-					terrain_suitability = suits;
-					best_fitting.push_back(state.ivar2);
-					is_tribe_specific.push_back(false);
-				}
-				continue;
-			}
-		} else {
-			state.svar1 = "tribe";
-			immovable = list[1];
-			state.ivar2 = descr().tribe().get_immovable_index(immovable.c_str());
-			if (state.ivar2 > 0) {
-				Immovable_Descr const * imm =
-					descr().tribe().get_immovable_descr(state.ivar2);
-				uint32_t suits = imm->terrain_suitability(fpos, map);
-				// Remove existing, if this immovable suits better
-				if (suits > terrain_suitability) {
-					best_fitting.clear();
-					is_tribe_specific.clear();
-				}
-				if (suits >= terrain_suitability) {
-					terrain_suitability = suits;
-					best_fitting.push_back(state.ivar2);
-					is_tribe_specific.push_back(true);
-				}
-				continue;
-			}
+	// Figure the (at most) six best fitting immovables (as judged by terrain
+	// affinity). We will pick one of them at random later. The container is
+	// picked to be a stable sorting one, so that no deyncs happen in
+	// multiplayer.
+	std::set<std::tuple<double, uint32_t>> best_suited_immovables_index;
+
+	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume it
+	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
+	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
+	   const uint32_t index, const Immovable_Descr& immovable_description) {
+		double p = 1.;
+		if (immovable_description.has_terrain_affinity()) {
+			p = probability_to_grow(
+			   immovable_description.terrain_affinity(), fpos, map, game.world().terrains());
 		}
+		best_suited_immovables_index.insert(std::make_tuple(p, index));
+		if (best_suited_immovables_index.size() > 6) {
+			best_suited_immovables_index.erase(best_suited_immovables_index.begin());
+		}
+	};
 
-		// Only here if immovable was not found
-		molog("  WARNING: Unknown immovable %s\n", action.sparamv[i].c_str());
-		send_signal(game, "fail");
-		pop_task(game);
-		return true;
+	if (action.sparamv.size() != 1) {
+			throw game_data_error("plant takes only one argument.");
 	}
 
-	assert(best_fitting.size() == is_tribe_specific.size());
-	if (best_fitting.empty()) {
+	std::vector<std::string> const list(split_string(action.sparamv[0], ":"));
+
+	if (list.size() != 2) {
+		throw game_data_error("plant takes either tribe:<immovable> or attrib:<attribute>");
+	}
+
+	if (list[0] == "attrib") {
+		state.svar1 = "world";
+
+		const DescriptionMaintainer<Immovable_Descr>& immovables = game.world().immovables();
+
+		const uint32_t attribute_id = Immovable_Descr::get_attribute_id(list[1]);
+		for (uint32_t i = 0; i < immovables.get_nitems(); ++i) {
+			Immovable_Descr& immovable_descr = immovables.get_unmutable(i);
+			if (!immovable_descr.has_attribute(attribute_id)) {
+				continue;
+			}
+			test_suitability(i, immovable_descr);
+		}
+	} else {
+		state.svar1 = "tribe";
+		uint32_t immovable_index = descr().tribe().get_immovable_index(list[1]);
+
+		if (immovable_index > 0) {
+			const Immovable_Descr* imm = descr().tribe().get_immovable_descr(immovable_index);
+			test_suitability(immovable_index, *imm);
+		}
+	}
+
+	if (best_suited_immovables_index.empty()) {
 		molog("  WARNING: No suitable immovable found!");
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
 	}
-	uint32_t const idx = game.logic_rand() % best_fitting.size();
 
-	Immovable & newimm = game.create_immovable
-		(pos, best_fitting[idx], is_tribe_specific[idx] ? &descr().tribe() : nullptr);
+	// Randomly pick one of the immovables to be planted.
+	const uint32_t idx = game.logic_rand() % best_suited_immovables_index.size();
+	state.ivar2 = std::get<1>(*std::next(best_suited_immovables_index.begin(), idx));
+
+	Immovable& newimm =
+	   game.create_immovable(pos, state.ivar2, state.svar1 == "tribe" ? &descr().tribe() : nullptr);
 	newimm.set_owner(get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
@@ -882,7 +896,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
 	game.create_bob
-		(get_position(), state.ivar2, state.svar1 == "world" ? nullptr : &tribe());
+		(get_position(), state.ivar2, state.svar1 == "world" ? nullptr : &descr().tribe());
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -939,23 +953,25 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 	const Map & map = game.map();
 	const FCoords position = map.get_fcoords(get_position());
 	BaseImmovable const * const imm = position.field->get_immovable();
-	const World & world = map.world();
+	const World & world = game.world();
 
 	if (imm && imm->get_size() > BaseImmovable::NONE) {
 		//NoLog("  Field is no longer empty\n");
 	} else if
-		(const Resource_Descr * const rdescr =
+		(const ResourceDescription * const rdescr =
 		 	world.get_resource(position.field->get_resources()))
 	{
 		// Geologist also sends a message notifying the player
-		if (rdescr->is_detectable() && position.field->get_resources_amount()) {
+		if (rdescr->detectable() && position.field->get_resources_amount()) {
 			char message[1024];
-			snprintf
-				(message, sizeof(message),
-				 "<rt image=%sresources/%s_1f.png>"
-				 "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
-				 world.basedir().c_str(), rdescr->name().c_str(),
-				 _("A geologist found resources."));
+			// TODO(sirver): this is very wrong: It assumes a directory layout
+			// that might not be around forever.
+			snprintf(message,
+			         sizeof(message),
+			         "<rt image=world/resources/pics/%s4.png>"
+			         "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
+			         rdescr->name().c_str(),
+			         _("A geologist found resources."));
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -972,12 +988,12 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 300000, 8);
 		}
 
-		const Tribe_Descr & t = tribe();
+		const Tribe_Descr & t = descr().tribe();
 		game.create_immovable
 			(position,
 			 t.get_resource_indicator
 			 	(rdescr,
-			 	 rdescr->is_detectable() ?
+			 	 rdescr->detectable() ?
 			 	 position.field->get_resources_amount() : 0),
 			 &t);
 	}
@@ -1321,10 +1337,10 @@ Ware_Index Worker::level(Game & game) {
 	// This silently expects that the new worker is the same type as the old
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
-	assert(becomes());
-	const Tribe_Descr & t = tribe();
+	assert(descr().becomes());
+	const Tribe_Descr & t = descr().tribe();
 	Ware_Index const old_index = t.worker_index(descr().name());
-	Ware_Index const new_index = becomes();
+	Ware_Index const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
 	assert(new_index != INVALID_INDEX);
 
@@ -1858,7 +1874,7 @@ void Worker::return_update(Game & game, State & state)
 		snprintf
 			(buffer, sizeof(buffer),
 			 _ ("Your %s can't find a way home and will likely die."),
-			 descname().c_str());
+			 descr().descname().c_str());
 		owner().add_message
 			(game,
 			 *new Message
@@ -2164,7 +2180,7 @@ void Worker::start_task_releaserecruit(Game & game, Worker & recruit)
 	push_task(game, taskReleaserecruit);
 	molog
 		("Starting to release %s %u...\n",
-		 recruit.descname().c_str(), recruit.serial());
+		 recruit.descr().descname().c_str(), recruit.serial());
 	return schedule_act(game, 5000);
 }
 
@@ -2547,7 +2563,7 @@ void Worker::fugitive_update(Game & game, State & state)
 	// We always have a high probability to see flags within our vision range,
 	// but with some luck we see flags that are even further away.
 	std::vector<ImmovableFound> flags;
-	int32_t vision = vision_range();
+	int32_t vision = descr().vision_range();
 	int32_t maxdist = 4 * vision;
 	if
 		(map.find_immovables
@@ -2609,7 +2625,7 @@ void Worker::fugitive_update(Game & game, State & state)
 	if
 		(start_task_movepath
 		 	(game,
-		 	 game.random_location(get_position(), vision_range()),
+		 	 game.random_location(get_position(), descr().vision_range()),
 		 	 4,
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 		return;
@@ -2664,7 +2680,7 @@ void Worker::geologist_update(Game & game, State & state)
 
 	//
 	Map & map = game.map();
-	const World & world = map.world();
+	const World & world = game.world();
 	Area<FCoords> owner_area
 		(map.get_fcoords
 		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),
@@ -2701,11 +2717,11 @@ void Worker::geologist_update(Game & game, State & state)
 			bool is_center_mountain =
 				(world.terrain_descr(owner_area.field->terrain_d()).get_is()
 				 &
-				 TERRAIN_MOUNTAIN)
+				 TerrainDescription::MOUNTAIN)
 				|
 				(world.terrain_descr(owner_area.field->terrain_r()).get_is()
 				 &
-				 TERRAIN_MOUNTAIN);
+				 TerrainDescription::MOUNTAIN);
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2718,11 +2734,11 @@ void Worker::geologist_update(Game & game, State & state)
 				is_target_mountain =
 					(world.terrain_descr(target.field->terrain_d()).get_is()
 					 &
-					 TERRAIN_MOUNTAIN)
+					 TerrainDescription::MOUNTAIN)
 					|
 					(world.terrain_descr(target.field->terrain_r()).get_is()
 					 &
-					 TERRAIN_MOUNTAIN);
+					 TerrainDescription::MOUNTAIN);
 				if (i == 0)
 					i = list.size();
 				--i;
@@ -3086,7 +3102,7 @@ void Worker::save
 	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Worker);
-	fw.CString(tribe().name());
+	fw.CString(descr().tribe().name());
 	fw.CString(descr().name());
 
 	do_save(egbase, mos, fw);

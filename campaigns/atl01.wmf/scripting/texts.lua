@@ -32,11 +32,11 @@ obj_ensure_build_wares_production = {
    title = _ "Ensure the supply of building wares",
    number = 6,
    body = objective_text(_"Supply Building Wares", _
-[[Supply basic building material for your economy:]] .. "<br>" ..
-[[• ]] .. _[[Build a quarry]] .. "<br>" ..
-[[• ]] .. _[[Build two woodcutter’s houses]] .. "<br>" ..
-[[• ]] .. _[[Build two forester’s houses]] .. "<br>" ..
-[[• ]] .. _[[Build a sawmill]]
+[[Supply basic building material for your economy:]] .. paragraphdivider() ..
+      listitem_bullet(_[[Build a quarry]]) ..
+      listitem_bullet(_[[Build two woodcutter’s houses]]) ..
+      listitem_bullet(_[[Build two forester’s houses]]) ..
+      listitem_bullet(_[[Build a sawmill]])
    ),
 }
 
@@ -46,8 +46,8 @@ obj_expand = {
    number = 1,
    body = objective_text(_"Expand and Explore", _(
 [[The island is huge and as long as we are not sure that we are alone here, we cannot relax. ]] ..
-[[Explore and conquer it, this is the only way to protect us from threats on the island and from Atlantis.]]) .. [[<br>]] ..
-[[• ]] .. _[[Build military sites to expand your territory]]
+[[Explore and conquer it, this is the only way to protect us from threats on the island and from Atlantis.]]) .. paragraphdivider() ..
+      listitem_bullet(_[[Build military sites to expand your territory]])
    ),
 }
 
@@ -55,25 +55,16 @@ obj_make_food_infrastructure = {
    name = "obj_make_food_infrastructure",
    title = _ "Establish a solid food production",
    number = 10,
-   body = objective_text(_"Food Production", _(
-[[Food is very important for mines and military training areas. ]] ..
-[[Establish a well working food environment by building at least one farm, one blackroot farm and a mill. ]] ..
-[[The two kinds of flour together with water from a well will be baked into bread in a bakery, ]] ..
-[[so build a bakery and a well, too.]]) .. paragraphdivider() ..
-_([[The other two important food wares are smoked fish and smoked meat. ]] ..
-[[Raw meat is delivered from a hunter. ]] ..
-[[A fisher gets the fish out of the sea while a fish breeder makes sure that a school of fish does not go extinct ]] ..
-[[by breeding more. Make sure that there are always fish left, ]] ..
-[[otherwise the fish breeder won’t be able to breed new ones. ]] ..
-[[The smoking happens in a smokery, you will need at least two of those.]]) .. [[<br>]] ..
-[[• ]] .. _[[Build a farm and a blackroot farm]] .. "<br>" ..
-[[• ]] .. _[[Build a mill to make cornflour and blackroot flour]] .. "<br>" ..
-[[• ]] .. _[[Build a well]] .. "<br>" ..
-[[• ]] .. _[[Build a bakery to bake bread from cornflour, blackroot flour and water]] .. "<br>" ..
-[[• ]] .. _[[Build a hunter’s house to get raw meat]] .. "<br>" ..
-[[• ]] .. _[[Build a fisher’s house close to water to get raw fish]] .. "<br>" ..
-[[• ]] .. _[[Build a fish breeder’s house close to the fisher to make sure the fish do not die out]] .. "<br>" ..
-[[• ]] .. _[[Build two smokeries to smoke raw meat and fish]]
+   body = objective_text(_"Food Production", _[[Food is very important for mines and military training areas. Establish a well working food environment by building at least one farm, one blackroot farm and a mill. The two kinds of flour together with water from a well will be baked into bread in a bakery, so build a bakery and a well, too.]] .. paragraphdivider() ..
+      _[[The other two important food wares are smoked fish and smoked meat. Raw meat is delivered from a hunter. A fisher gets the fish out of the sea while a fish breeder makes sure that a school of fish does not go extinct by breeding more. Make sure that there are always fish left, otherwise the fish breeder won’t be able to breed new ones. The smoking happens in a smokery, you will need at least two of those.]] .. paragraphdivider() ..
+      listitem_bullet(_[[Build a farm and a blackroot farm]]) ..
+      listitem_bullet(_[[Build a mill to make cornflour and blackroot flour]]) ..
+      listitem_bullet(_[[Build a well]]) ..
+      listitem_bullet(_[[Build a bakery to bake bread from cornflour, blackroot flour and water]]) ..
+      listitem_bullet(_[[Build a hunter’s house to get raw meat]]) ..
+      listitem_bullet(_[[Build a fisher’s house close to water to get raw fish]]) ..
+      listitem_bullet(_[[Build a fish breeder’s house close to the fisher to make sure the fish do not die out]]) ..
+      listitem_bullet(_[[Build two smokeries to smoke raw meat and fish]])
    )
 }
 
@@ -81,15 +72,10 @@ obj_spidercloth_production = {
    name = "obj_spidercloth_production",
    title = _ "Build a spider farm and a weaving mill",
    number = 3,
-   body = objective_text(_"Spidercloth Production", _(
-[[The weavers produce spidercloth and tabards in the weaving mill. ]] ..
-[[Spidercloth is needed for the construction of some buildings and clothing, ]] ..
-[[while tabards are the uniforms of soldiers. ]] ..
-[[The weaving mill needs gold yarn and spideryarn as raw material. ]] ..
-[[Spideryarn is produced by the spider farm, while gold yarn is produced by the gold weaver out of gold.]]) .. "<br>" ..
-[[• ]] .. _[[Build a weaving mill]] .. "<br>" ..
-[[• ]] .. _[[Build a spider farm]] .. "<br>" ..
-[[• ]] .. _[[Build a goldweaver]]
+   body = objective_text(_"Spidercloth Production", _[[The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold yarn and spideryarn as raw material. Spideryarn is produced by the spider farm, while gold yarn is produced by the gold spinning mill out of gold.]] .. paragraphdivider() ..
+      listitem_bullet(_[[Build a weaving mill]]) ..
+      listitem_bullet(_[[Build a spider farm]]) ..
+      listitem_bullet(_[[Build a gold spinning mill]])
  )
 }
 
@@ -97,29 +83,21 @@ obj_make_heavy_industry_and_mining = {
    name = "obj_make_heavy_industry_and_mining",
    title = _ "Build industry and mines",
    number = 5,
-   body = objective_text(_"Industry and Mines", _(
-[[Iron ore, gold ore and coal are mined in the respective mines. ]] ..
-[[The crystal mine will dig for crystal, quartz and diamond – all of them are precious materials and ]] ..
-[[very rarely found. It will produce a lot of stone while searching for them.]]) .. "<br>" ..
-_([[The ores have to be smelted at a smelting works before they can be used. ]] ..
-[[The refined materials are then used in the weapon smithy, the armor smithy and the toolsmithy.]]) .. "<br>" ..
-[[• ]] .. _[[Build a mine of each type. Make sure to send geologists to the mountain first.]] .. "<br>" ..
-[[• ]] .. _[[Build a smelting works]] .. "<br>" ..
-[[• ]] .. _[[Build an armor smithy and a weapon smithy]] .. "<br>" ..
-[[• ]] .. _[[Build a toolsmithy]]
- )
+   body = objective_text(_"Industry and Mines", _[[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for crystal, quartz and diamond – all of them are precious materials and very rarely found. It will produce a lot of stone while searching for them.]] .. paragraphdivider() ..
+      listitem_bullet(_[[The ores have to be smelted at a smelting works before they can be used. The refined materials are then used in the weapon smithy, the armor smithy and the toolsmithy.]]) .. paragraphdivider() ..
+      listitem_bullet(_[[Build a mine of each type. Make sure to send geologists to the mountain first.]]) ..
+      listitem_bullet(_[[Build a smelting works]]) ..
+      listitem_bullet(_[[Build an armor smithy and a weapon smithy]]) ..
+      listitem_bullet(_[[Build a toolsmithy]])
+   )
 }
 
 obj_make_training_buildings = {
    name = "obj_make_training_buildings",
    title = _"Build training buildings for soldiers",
    number = 2,
-   body = objective_text(_"Soldier Training Buildings", _(
-[[Like all other tribes, the Atlanteans are also able to train soldiers: ]] ..
-[[the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains ]] ..
-[[evasion, health and defense. The items produced by the industry are used to train better soldiers ]] ..
-[[in the two training buildings.]]) .. "<br>" ..
-[[• ]] .. _[[Build a dungeon and a labyrinth]]
+   body = objective_text(_"Soldier Training Buildings", _[[Like all other tribes, the Atlanteans are also able to train soldiers: the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains evasion, health and defense. The items produced by the industry are used to train better soldiers in the two training buildings.]] .. paragraphdivider() ..
+      listitem_bullet(_[[Build a dungeon and a labyrinth]])
  )
 }
 
@@ -127,23 +105,18 @@ obj_horsefarm_and_warehouse = {
    name = "obj_horsefarm_and_warehouse",
    title = _"Build a warehouse and a horse farm",
    number = 2,
-   body = objective_text(_"Warehouse and Horse Farm", _(
-[[As your road network gets longer and more complicated, you should employ horses ]] ..
-[[to help out your carriers. Horses are bred at horse farms using water and corn. ]] ..
-[[A warehouse will also help to ensure that your transportation system does not collapse.]]) .. "<br>" ..
-[[• ]] .. _[[Build a warehouse]] .. "<br>" ..
-[[• ]] .. _[[Build a horse farm]])
+   body = objective_text(_"Warehouse and Horse Farm", _[[As your road network gets longer and more complicated, you should employ horses to help out your carriers. Horses are bred at horse farms using water and corn. A warehouse will also help to ensure that your transportation system does not collapse.]] .. paragraphdivider() ..
+      listitem_bullet(_[[Build a warehouse]]) ..
+      listitem_bullet(_[[Build a horse farm]])
+  )
 }
 
 obj_build_ships = {
    name = "obj_build_ships",
    title = _ "Build 3 ships to escape from the island",
    number = 1,
-   body = objective_text(_"Escape From the Island", _(
-[[There is a lake at the top of the island. ]] ..
-[[Build three ships in these waters and you might be able to rescue your people ]] ..
-[[before the island is swallowed completely by the ocean.]])  .. "<br>" ..
-[[• ]] .. _[[Build a shipyard close to the lake to start building ships]]
+   body = objective_text(_"Escape From the Island", _[[There is a lake at the top of the island. Build three ships in these waters and you might be able to rescue your people before the island is swallowed completely by the ocean.]]  .. paragraphdivider() ..
+      listitem_bullet(_[[Build a shipyard close to the lake to start building ships]])
    )
 }
 
@@ -337,7 +310,7 @@ spidercloth_messages = {
     body = jundlina(_ "Jundlina Replies", _(
 [[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand your urgency. ]] ..
 [[Your suggestion sounds fair to me, I will build your weaving mill and spider farm. ]] ..
-[[I will also build a goldweaver so that the golden tabards you make will not be golden by name alone.]]
+[[I will also build a gold spinning mill so that the golden tabards you make will not be golden by name alone.]]
     )) ..  new_objectives(obj_spidercloth_production)
  }
 }
@@ -347,7 +320,7 @@ spidercloth_story_ended_messages = {
       title = _ "Opol Seeks Out Jundlina",
       body = opol(_(
 [[May Satul warm you, Jundlina! ]] ..
-[[The weaving mill, goldweaver and spider farm buildings are complete ]] ..
+[[The weaving mill, gold spinning mill and spider farm buildings are complete ]] ..
 [[and are starting their work at this very moment. The weavers’ guild is very grateful for your support ]] ..
 [[and we will stand by our word and deliver the first tabard very soon.]]
       ))

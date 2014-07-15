@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__CMD_CALL_ECONOMY_BALANCE_H
-#define S__CMD_CALL_ECONOMY_BALANCE_H
+#ifndef WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H
+#define WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H

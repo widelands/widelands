@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ROAD_H
-#define ROAD_H
+#ifndef WL_ECONOMY_ROAD_H
+#define WL_ECONOMY_ROAD_H
 
 #include <vector>
 
@@ -46,8 +46,8 @@ class Request;
  * road.
  */
 struct Road : public PlayerImmovable {
-	friend struct Map_Roaddata_Data_Packet; // For saving
-	friend struct Map_Road_Data_Packet; // For init()
+	friend class Map_Roaddata_Data_Packet; // For saving
+	friend class Map_Road_Data_Packet; // For init()
 
 	static bool IsRoadDescr(Map_Object_Descr const *);
 
@@ -142,4 +142,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_ROAD_H

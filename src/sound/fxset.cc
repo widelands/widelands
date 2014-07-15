@@ -25,34 +25,34 @@
 
 #include "sound/sound_handler.h"
 
-/** Create an FXset and set it's \ref m_priority
+/** Create an FXset and set it's \ref priority_
  * \param[in] prio  The desired priority (optional)
  */
-FXset::FXset(uint8_t const priority) : m_last_used(0), m_priority(priority) {}
+FXset::FXset(uint8_t const priority) : last_used_(0), priority_(priority) {}
 
 /// Delete all fxs to avoid memory leaks. This also frees the audio data.
 FXset::~FXset()
 {
-	std::vector < Mix_Chunk * >::iterator i = m_fxs.begin();
+	std::vector < Mix_Chunk * >::iterator i = fxs_.begin();
 
-	while (i != m_fxs.end()) {
+	while (i != fxs_.end()) {
 		Mix_FreeChunk(*i);
 		++i;
 	}
 
-	m_fxs.clear();
+	fxs_.clear();
 }
 
 /** Append a sound effect to the end of the fxset
  * \param[in] fx    The sound fx to append
- * \param[in] prio  Set previous \ref m_priority to new value (optional)
+ * \param[in] prio  Set previous \ref priority_ to new value (optional)
  */
 void FXset::add_fx(Mix_Chunk * const fx, uint8_t const prio)
 {
 	assert(fx);
 
-	m_priority = prio;
-	m_fxs.push_back(fx);
+	priority_ = prio;
+	fxs_.push_back(fx);
 }
 
 /** Get a sound effect from the fxset. \e Which variant of the fx is actually
@@ -62,10 +62,10 @@ void FXset::add_fx(Mix_Chunk * const fx, uint8_t const prio)
  */
 Mix_Chunk * FXset::get_fx()
 {
-	if (g_sound_handler.get_disable_fx() || m_fxs.empty())
+	if (g_sound_handler.get_disable_fx() || fxs_.empty())
 		return nullptr;
 
-	m_last_used = SDL_GetTicks();
+	last_used_ = SDL_GetTicks();
 
-	return m_fxs.at(g_sound_handler.m_rng.rand() % m_fxs.size());
+	return fxs_.at(g_sound_handler.rng_.rand() % fxs_.size());
 }

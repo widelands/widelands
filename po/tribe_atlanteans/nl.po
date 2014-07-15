@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-04-02 09:50+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-04-18 16:39+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-03 05:27+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:31+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: nl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -954,7 +954,7 @@ msgid "Spider Farm"
 msgstr "Spinnenboerderij"
 
 #: ../../tribes/atlanteans/conf:186
-msgid "Weaving-Mill"
+msgid "Weaving Mill"
 msgstr "Weverij"
 
 #: ../../tribes/atlanteans/conf:187
@@ -1137,13 +1137,13 @@ msgstr ""
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
-"Golden tabards are produced in Atlantean weaving-mills out of gold yarn. "
+"Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
-"Gouden tabberds worden gemaakt van gouddraad in een Atlantische weverij. Ze "
-"worden gebruikt in het trainingskamp, samen met voedsel, om soldaten te "
-"trainen van levenspuntenniveau 0 naar niveau 1."
+"Gouden tabberds worden gemaakt van gouddraad in de Atlantische weverijen. Ze "
+"worden gebruikt in het labyrint - samen met voedsel - om soldaten te trainen "
+"van levenspuntenniveau 0 naar niveau 1."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -1158,10 +1158,10 @@ msgstr ""
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
-"golden tabard in the weaving-mill."
+"golden tabard in the weaving mill."
 msgstr ""
-"Dit draad, gemaakt van goud door de goudwever, wordt gebruikt voor het weven "
-"van de exclusiever gouden tabberd in de weverij."
+"Deze draad, gemaakt van goud door de goudwever, wordt gebruikt voor het "
+"weven van de exclusieve gouden tabberd in de weverij."
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your guardhall."
@@ -1482,20 +1482,20 @@ msgstr "Kweekt spinnen voor garen."
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
-"Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
+"Spidercloth is made out of spideryarn in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
-"Spinnendoek wordt gemaakt van spinnengaren in de weverij. Het wordt in de "
-"werktuigsmederij en de scheepswerf gebruikt. Ook sommige hoger ontwikkelde "
-"gebouwen hebben spinnendoek nodig om gebouwd te kunnen worden."
+"Spinnendoek wordt gemaakt van spinnendraad in een weverij. Het wordt gebruik "
+"in de werktuigsmederij en de scheepswerf. Ook sommige hoger ontwikkelde "
+"gebouwen hebben spinnendoek nodig voor hun constructie."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving-mill."
+"processed into spidercloth in a weaving mill."
 msgstr ""
-"Dit garen wordt geproduceerd door spinnen, die gefokt worden op "
+"Dit garen wordt geproduceerd door spinnen, die gefokt worden in "
 "spinnenboerderijen, Het wordt verwerkt tot spinnendoek in de weverij."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
@@ -1532,10 +1532,10 @@ msgstr "Hakt ruwe stukken graniet uit liggende stenen."
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
-"Tabards are produced in the weaving-mill."
+"Tabards are produced in the weaving mill."
 msgstr ""
 "Een tabberd en een lichte drietand vormen de basisuitrusting voor jonge "
-"soldaten. Tabberds worden geproduceerd in de weverij."
+"soldaten. Tabberds worden gemaakt in de weverij."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."

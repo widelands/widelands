@@ -17,10 +17,12 @@
  *
  */
 
-#ifndef MAP_LOADER_H
-#define MAP_LOADER_H
+#ifndef WL_MAP_IO_MAP_LOADER_H
+#define WL_MAP_IO_MAP_LOADER_H
 
 #include "logic/map.h"
+
+class LuaInterface;
 
 namespace Widelands {
 
@@ -36,10 +38,9 @@ class Map_Loader {
 public:
 	Map_Loader(char const * const filename, Map & M)
 		: m_map(M), m_s(STATE_INIT) {m_map.set_filename(filename);}
-	virtual ~Map_Loader() {};
+	virtual ~Map_Loader() {}
 
 	virtual int32_t preload_map(bool as_scenario) = 0;
-	virtual void load_world() = 0;
 	virtual int32_t load_map_complete(Editor_Game_Base &, bool as_scenario) = 0;
 
 	Map & map() {return m_map;}
@@ -48,7 +49,6 @@ protected:
 	enum State {
 		STATE_INIT,
 		STATE_PRELOADED,
-		STATE_WORLD_LOADED,
 		STATE_LOADED
 	};
 	void set_state(State const s) {m_s = s;}
@@ -61,4 +61,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_MAP_LOADER_H

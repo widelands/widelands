@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: 2011-05-27 21:30+0000\n"
 "Last-Translator: Joe Hansen <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:41+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:39+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 
 #: ../../campaigns/dummy.wmf/scripting/init.lua:10
 msgid "Not yet implemented"
@@ -30,7 +30,7 @@ msgstr "Beklager, dette kort er endnu ikke implementeret."
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

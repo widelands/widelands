@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PLAYERCOMMAND_H
-#define PLAYERCOMMAND_H
+#ifndef WL_LOGIC_PLAYERCOMMAND_H
+#define WL_LOGIC_PLAYERCOMMAND_H
 
 #include <memory>
 
@@ -656,15 +656,10 @@ private:
 
 /////////////TESTING STUFF
 struct Cmd_EnemyFlagAction : public PlayerCommand {
-	Cmd_EnemyFlagAction() : PlayerCommand(), serial(0), number(0), retreat(0) {} // For savegame loading
-	Cmd_EnemyFlagAction
-		(const int32_t      t,
-		 const int32_t      p,
-		 const Flag &       f,
-		 const uint32_t     num,
-		 const uint32_t     ret)
-		: PlayerCommand(t, p), serial(f.serial()), number(num), retreat(ret)
-	{}
+	Cmd_EnemyFlagAction() : PlayerCommand(), serial(0), number(0) {} // For savegame loading
+	Cmd_EnemyFlagAction(int32_t t, int32_t p, const Flag& f, uint32_t num)
+	   : PlayerCommand(t, p), serial(f.serial()), number(num) {
+	}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
@@ -680,35 +675,7 @@ struct Cmd_EnemyFlagAction : public PlayerCommand {
 private:
 	Serial        serial;
 	uint8_t       number;
-	uint8_t       retreat;
 };
-
-// This is at very early stage, more vars should be added
-struct Cmd_ChangeMilitaryConfig : public PlayerCommand {
-	Cmd_ChangeMilitaryConfig() : PlayerCommand(), retreat(0) {} // For savegame loading
-	Cmd_ChangeMilitaryConfig
-		(const int32_t      t,
-		 const int32_t      p,
-		 const uint32_t     ret)
-		: PlayerCommand(t, p), retreat(ret)
-	{}
-
-	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
-
-	virtual uint8_t id() const override {return QUEUE_CMD_CHANGEMILITARYCONFIG;}
-
-	Cmd_ChangeMilitaryConfig (StreamRead &);
-
-	virtual void execute (Game &) override;
-	virtual void serialize (StreamWrite &) override;
-
-private:
-	// By now only retreat info is stored
-	uint8_t       retreat;
-};
-
 
 /// Abstract base for commands about a message.
 struct PlayerMessageCommand : public PlayerCommand {
@@ -791,4 +758,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

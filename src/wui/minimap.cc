@@ -21,12 +21,12 @@
 
 #include <memory>
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/render/minimaprenderer.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -85,7 +85,7 @@ void MiniMap::View::draw(RenderTarget & dst)
 Left-press: warp the view point to the new position
 ===============
 */
-bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
@@ -105,7 +105,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	return true;
 }
-bool MiniMap::View::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
+bool MiniMap::View::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	return btn == SDL_BUTTON_LEFT;
 }
 

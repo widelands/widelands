@@ -17,25 +17,30 @@
  *
  */
 
-#ifndef IMMOVABLE_H
-#define IMMOVABLE_H
+#ifndef WL_LOGIC_IMMOVABLE_H
+#define WL_LOGIC_IMMOVABLE_H
+
+#include <memory>
 
 #include "graphic/animation.h"
 #include "logic/buildcost.h"
 #include "logic/instances.h"
 #include "logic/widelands_geometry.h"
 
-struct Profile;
+class LuaTable;
+class OneWorldLegacyLookupTable;
+class Profile;
 
 namespace Widelands {
 
 class Economy;
 class Map;
+class TerrainAffinity;
 class WareInstance;
 class Worker;
+class World;
 struct Flag;
 struct Tribe_Descr;
-struct World;
 
 /**
  * BaseImmovable is the base for all non-moving objects (immovables such as
@@ -48,7 +53,7 @@ struct World;
  * For more information, see the Map::recalc_* functions.
  */
 struct BaseImmovable : public Map_Object {
-	enum {
+	enum Size {
 		NONE = 0, ///< not robust (i.e. removable by building something over it)
 		SMALL,    ///< small building or robust map element, including trees
 		MEDIUM,   ///< medium size building
@@ -93,7 +98,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 	Immovable_Descr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const World & world, Tribe_Descr const * const);
+		 Tribe_Descr const * const);
+	Immovable_Descr(const LuaTable&, const World&);
+
 	~Immovable_Descr();
 
 	int32_t get_size() const {return m_size;}
@@ -103,10 +110,18 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	Tribe_Descr const * get_owner_tribe() const {return m_owner_tribe;}
 
-	/// How well the terrain around f suits an immovable of this type.
-	uint32_t terrain_suitability(FCoords, const Map &) const;
-
 	const Buildcost & buildcost() const {return m_buildcost;}
+
+	// Returns the editor category.
+	const EditorCategory& editor_category() const;
+
+	// Every immovable that can 'grow' needs to have terrain affinity defined,
+	// all others do not. Returns true if this one has it defined.
+	bool has_terrain_affinity() const;
+
+	// Returns the terrain affinity. If !has_terrain_affinity() this will return
+	// an undefined value.
+	const TerrainAffinity& terrain_affinity() const;
 
 protected:
 	int32_t     m_size;
@@ -121,7 +136,11 @@ protected:
 	Buildcost m_buildcost;
 
 private:
-	uint8_t m_terrain_affinity[16];
+	// Adds a default program if none was defined.
+	void make_sure_default_program_is_there();
+
+	EditorCategory* editor_category_;  // not owned.
+	std::unique_ptr<TerrainAffinity> terrain_affinity_;
 };
 
 class Immovable : public BaseImmovable {
@@ -129,7 +148,7 @@ class Immovable : public BaseImmovable {
 	friend struct ImmovableProgram;
 	friend class Map;
 
-	MO_DESCR(Immovable_Descr);
+	MO_DESCR(Immovable_Descr)
 
 public:
 	Immovable(const Immovable_Descr &);
@@ -164,10 +183,6 @@ public:
 	bool construct_ware(Game & game, Ware_Index index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
-	Tribe_Descr const * get_owner_tribe() const {
-		return descr().get_owner_tribe();
-	}
-
 	bool is_reserved_by_worker() const;
 	void set_reserved_by_worker(bool reserve);
 
@@ -176,7 +191,7 @@ public:
 	T * get_action_data() {
 		if (!m_action_data)
 			return nullptr;
-		if (T * data = dynamic_cast<T *>(m_action_data))
+		if (T * data = dynamic_cast<T *>(m_action_data.get()))
 			return data;
 		set_action_data(nullptr);
 		return nullptr;
@@ -217,7 +232,7 @@ protected:
 	 *
 	 * \warning Use get_action_data to access this.
 	 */
-	ImmovableActionData * m_action_data;
+	std::unique_ptr<ImmovableActionData> m_action_data;
 
 	/**
 	 * Immovables like trees are reserved by a worker that is walking
@@ -240,7 +255,8 @@ public:
 
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &,
+		 const OneWorldLegacyLookupTable& lookup_table);
 
 private:
 	void increment_program_pointer();
@@ -326,4 +342,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_IMMOVABLE_H

@@ -21,11 +21,12 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include "container_iterate.h"
-#include "log.h"
+#include "base/deprecated.h"
+#include "base/log.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "map_io/coords_profile.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -53,7 +54,7 @@ void Map_Port_Spaces_Data_Packet::Read
 			Section & s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {
 				snprintf(buf, sizeof(buf), "%u", i);
-				map.set_port_space(s2.get_safe_Coords(buf, ext), true);
+				map.set_port_space(get_safe_coords(buf, ext, &s2), true);
 			}
 		} else
 			throw game_data_error
@@ -84,7 +85,7 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	for (const Coords& c : map.get_port_spaces()) {
 		FCoords fc = map.get_fcoords(c);
 		if
-			((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
+			((map.get_max_nodecaps(egbase.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
 			 ||
 			 map.find_portdock(fc).empty())
 		{
@@ -101,7 +102,7 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	int i = 0;
 	for (const Coords& c : port_spaces) {
 		snprintf(buf, sizeof(buf), "%u", i++);
-		s2.set_Coords(buf, c);
+		set_coords(buf, c, &s2);
 	}
 	prof.write("port_spaces", false, fs);
 }

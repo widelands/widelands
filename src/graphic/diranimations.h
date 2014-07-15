@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DIRANIMATIONS_H
-#define DIRANIMATIONS_H
+#ifndef WL_GRAPHIC_DIRANIMATIONS_H
+#define WL_GRAPHIC_DIRANIMATIONS_H
 
 #include <string>
 
@@ -28,12 +28,12 @@
 
 namespace Widelands {struct Map_Object_Descr;}
 
-struct Profile;
-struct Section;
+class Profile;
+class Section;
 
 /// Manages a set of 6 animations, one for each possible direction.
 struct DirAnimations {
-	explicit DirAnimations
+	DirAnimations
 		(uint32_t dir1 = 0, uint32_t dir2 = 0, uint32_t dir3 = 0,
 		 uint32_t dir4 = 0, uint32_t dir5 = 0, uint32_t dir6 = 0);
 
@@ -48,6 +48,9 @@ struct DirAnimations {
 	uint32_t get_animation(Widelands::Direction const dir) const {
 		return m_animations[dir - 1];
 	}
+	void set_animation(const Widelands::Direction dir, const uint32_t anim) {
+		m_animations[dir - 1] = anim;
+	}
 
 	static DirAnimations Null() {
 		return DirAnimations(0); // Since real animation IDs are positive, this is safe
@@ -59,4 +62,4 @@ private:
 	uint32_t m_animations[6];
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_DIRANIMATIONS_H

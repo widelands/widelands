@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_transformations.h"
@@ -35,11 +36,10 @@
 #include "logic/warehouse.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
-#include "unique_window_handler.h"
-#include "upcast.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
+#include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
@@ -55,7 +55,7 @@ Building_Window::Building_Window
 	UI::Window
 		(&parent, "building_window",
 		 0, 0, Width, 0,
-		 b.descname()),
+		 b.descr().descname()),
 	m_registry(registry),
 	m_building       (b),
 	m_workarea_job_id(0),
@@ -222,13 +222,12 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
-			const std::set<Widelands::Building_Index> & enhancements =
-				m_building.enhancements();
+			const Widelands::Building_Index & enhancement =
+				m_building.descr().enhancement();
 			const Widelands::Tribe_Descr & tribe  = owner.tribe();
-			container_iterate_const(std::set<Widelands::Building_Index>, enhancements, i)
-				if (owner.is_building_type_allowed(*i.current)) {
+			if (owner.is_building_type_allowed(enhancement)) {
 					const Widelands::Building_Descr & building_descr =
-						*tribe.get_building_descr(*i.current);
+						*tribe.get_building_descr(enhancement);
 					char buffer[128];
 					snprintf
 						(buffer, sizeof(buffer),
@@ -241,11 +240,9 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
 					//  button id = building id
-					enhancebtn->sigclicked.connect
-						(boost::bind
-							(&Building_Window::act_enhance,
-							 boost::ref(*this),
-							 boost::ref(*i.current)));
+					enhancebtn->sigclicked.connect([this, enhancement] {
+					   this->act_enhance(enhancement);
+					});
 					capsbuttons->add
 						(enhancebtn,
 						 UI::Box::AlignCenter);
@@ -359,7 +356,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			   igbase().unique_windows().get_registry(m_building.name() + "_help");
 			registry.open_window = [this, &registry] {
 				new UI::LuaTextHelpWindow(
-				   &igbase(), registry, m_building.descname(), m_building.descr().helptext_script());
+				   &igbase(), registry, m_building.descr().descname(), m_building.descr().helptext_script());
 			};
 
 			helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));

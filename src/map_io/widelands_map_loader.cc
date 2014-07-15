@@ -19,12 +19,17 @@
 
 #include "map_io/widelands_map_loader.h"
 
-#include "log.h"
+#include <memory>
+
+#include "base/log.h"
+#include "base/scoped_timer.h"
+#include "base/warning.h"
+#include "io/filesystem/filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/world.h"
+#include "map_io/one_world_legacy_lookup_table.h"
 #include "map_io/widelands_map_allowed_building_types_data_packet.h"
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
 #include "map_io/widelands_map_building_data_packet.h"
@@ -50,20 +55,17 @@
 #include "map_io/widelands_map_scripting_data_packet.h"
 #include "map_io/widelands_map_terrain_data_packet.h"
 #include "map_io/widelands_map_version_data_packet.h"
-#include "scoped_timer.h"
-#include "warning.h"
 
 namespace Widelands {
 
 WL_Map_Loader::WL_Map_Loader(FileSystem* fs, Map * const m)
-	: Map_Loader("", *m), m_fs(fs), m_mol(nullptr)
+	: Map_Loader("", *m), m_fs(fs)
 {
 	m->filesystem_.reset(fs);
 }
 
 
 WL_Map_Loader::~WL_Map_Loader() {
-	delete m_mol;
 }
 
 /**
@@ -76,14 +78,6 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 	m_map.cleanup();
 
 	{Map_Elemental_Data_Packet mp; mp.Pre_Read(*m_fs, &m_map);}
-
-	if (not World::exists_world(m_map.get_world_name()))
-		throw warning
-			(_("Invalid World"),
-			 _
-			 	("The world \"%s\" set by the map does not exist on your "
-			 	 "filesystem."),
-			 m_map.get_world_name());
 
 	{
 		Map_Player_Names_And_Tribes_Data_Packet p;
@@ -102,14 +96,6 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 	return 0;
 }
 
-
-void WL_Map_Loader::load_world() {
-	assert(get_state() == STATE_PRELOADED);
-	m_map.load_world();
-	set_state(STATE_WORLD_LOADED);
-}
-
-
 /*
  * Load the complete map and make sure that it runs without problems
  */
@@ -118,23 +104,16 @@ int32_t WL_Map_Loader::load_map_complete
 {
 	ScopedTimer timer("WL_Map_Loader::load_map_complete() took %ums");
 
-	//  This is needed to ensure that world is loaded for multiplayer clients,
-	//  hosts do world loading while creating the game and the states are not
-	//  available outside this class to make a conditional load. If You know a
-	//  better way to fix this, DO IT! -- Alexia Death
-	if (get_state() == STATE_PRELOADED)
-		load_world();
-	assert(get_state() == STATE_WORLD_LOADED);
-
+	preload_map(scenario);
 	m_map.set_size(m_map.m_width, m_map.m_height);
-
-	delete m_mol;
-	m_mol = new Map_Map_Object_Loader;
+	m_mol.reset(new Map_Map_Object_Loader());
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
 	log("Reading Elemental Data ... ");
-	{Map_Elemental_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	Map_Elemental_Data_Packet elemental_data_packet;
+	elemental_data_packet.Read(*m_fs, egbase, !scenario, *m_mol);
+	const std::string old_world_name = elemental_data_packet.old_world_name();
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps(); //  Can do this now that map size is known.
@@ -157,19 +136,20 @@ int32_t WL_Map_Loader::load_map_complete
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
-
 	log("Reading Heights Data ... ");
 	{Map_Heights_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
+	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table
+		(create_one_world_legacy_lookup_table(old_world_name));
 	log("Reading Terrain Data ... ");
-	{Map_Terrain_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	Map_Object_Packet mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.Read(*m_fs, egbase, *m_mol);
+	mapobjects.Read(*m_fs, egbase, *m_mol, *lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
@@ -180,12 +160,12 @@ int32_t WL_Map_Loader::load_map_complete
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Resources Data ... ");
-	{Map_Resources_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{Map_Resources_Data_Packet      p; p.Read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Reading Map Extra Data ... ");
-	{Map_Extradata_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{Map_Extradata_Data_Packet      p; p.Read(*m_fs, !scenario);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Map Version Data ... ");
@@ -240,7 +220,6 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Roaddata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-
 	log("Reading Buildingdata Data ... ");
 	{Map_Buildingdata_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
@@ -291,7 +270,7 @@ int32_t WL_Map_Loader::load_map_complete
 			 "consider committing!\n",
 			 m_mol->get_nr_unloaded_objects());
 
-	m_map.recalc_whole_map();
+	m_map.recalc_whole_map(egbase.world());
 
 	set_state(STATE_LOADED);
 

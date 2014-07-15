@@ -19,7 +19,7 @@
 
 #include "logic/warelist.h"
 
-#include "log.h"
+#include "base/log.h"
 
 namespace Widelands {
 

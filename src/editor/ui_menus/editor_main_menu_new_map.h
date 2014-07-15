@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_NEW_MAP_H
-#define EDITOR_MAIN_MENU_NEW_MAP_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H
 
 #include <vector>
 
@@ -40,13 +40,10 @@ struct Main_Menu_New_Map : public UI::Window {
 
 private:
 	UI::Textarea * m_width, * m_height;
-	UI::Button * m_world;
 	int32_t m_w, m_h;
-	std::vector<std::string>::size_type m_currentworld;
-	std::vector<std::string> m_worlds;
 
 	void button_clicked(int32_t);
 	void clicked_create_map();
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H

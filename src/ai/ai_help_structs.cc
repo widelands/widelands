@@ -19,62 +19,52 @@
 
 #include "ai/ai_help_structs.h"
 
+#include "base/macros.h"
 #include "logic/player.h"
-#include "upcast.h"
-
 
 namespace Widelands {
 
 // FindNodeWithFlagOrRoad
 
-bool FindNodeWithFlagOrRoad::accept (const Map &, FCoords fc) const
-{
+bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
-		return
-			pimm->get_economy() != economy
-			and
-			(dynamic_cast<Flag const *>(pimm)
-			 or
-			 (dynamic_cast<Road const *>(pimm) &&
-			  (fc.field->nodecaps() & BUILDCAPS_FLAG)));
+		return pimm->get_economy() != economy and(dynamic_cast<Flag const*>(pimm)
+		                                          or(dynamic_cast<Road const*>(pimm) &&
+		                                             (fc.field->nodecaps() & BUILDCAPS_FLAG)));
 	return false;
 }
 
-
 // CheckStepRoadAI
 
-bool CheckStepRoadAI::allowed
-	(Map & map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
-	const
-{
-	uint8_t endcaps = player->get_buildcaps(end);
+bool CheckStepRoadAI::allowed(Map& map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
+   const {
+	uint8_t endcaps = player_->get_buildcaps(end);
 
 	// Calculate cost and passability
-	if (!(endcaps & movecaps))
+	if (!(endcaps & movecaps_))
 		return false;
 
 	// Check for blocking immovables
-	if (BaseImmovable const * const imm = map.get_immovable(end))
+	if (BaseImmovable const* const imm = map.get_immovable(end))
 		if (imm->get_size() >= BaseImmovable::SMALL) {
-			if (id != CheckStep::stepLast && !openend)
+			if (id != CheckStep::stepLast && !open_end_)
 				return false;
 
-			if (dynamic_cast<Flag const *>(imm))
+			if (dynamic_cast<Flag const*>(imm))
 				return true;
 
-			if (not dynamic_cast<Road const *>(imm) || !(endcaps & BUILDCAPS_FLAG))
+			if (not dynamic_cast<Road const*>(imm) || !(endcaps & BUILDCAPS_FLAG))
 				return false;
 		}
 
 	return true;
 }
 
-bool CheckStepRoadAI::reachabledest(Map & map, FCoords const dest) const
-{
+bool CheckStepRoadAI::reachabledest(Map& map, FCoords const dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if (!(caps & movecaps)) {
-		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+	if (!(caps & movecaps_)) {
+		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
 			return false;
 
 		if (!map.can_reach_by_water(dest))
@@ -83,5 +73,4 @@ bool CheckStepRoadAI::reachabledest(Map & map, FCoords const dest) const
 
 	return true;
 }
-
 }

@@ -17,19 +17,19 @@
  *
  */
 
-#ifndef BOB_H
-#define BOB_H
+#ifndef WL_LOGIC_BOB_H
+#define WL_LOGIC_BOB_H
 
+#include "base/macros.h"
+#include "base/point.h"
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "logic/instances.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "point.h"
-#include "port.h"
 
-struct Profile;
+class Profile;
 
 namespace Widelands {
 class Map;
@@ -55,21 +55,15 @@ class BobDescr : public Map_Object_Descr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
-	BobDescr(char const* name,
-	      char const* descname,
-	      const std::string& directory,
-	      Profile&,
-	      Section& global_s,
-	      Tribe_Descr const*);
+	BobDescr(const std::string& init_name,
+	         const std::string& init_descname,
+	         Tribe_Descr const* tribe);
 
-	virtual ~BobDescr() {};
+	virtual ~BobDescr() {}
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
-	bool is_world_bob() const {
-		return not m_owner_tribe;
-	}
 
 	Tribe_Descr const* get_owner_tribe() const {
-		return m_owner_tribe;
+		return owner_tribe_;
 	}
 
 	virtual uint32_t movecaps() const {
@@ -80,7 +74,8 @@ public:
 protected:
 	virtual Bob& create_object() const = 0;
 
-	const Tribe_Descr* const m_owner_tribe;  //  0 if world bob
+private:
+	const Tribe_Descr* const owner_tribe_;  //  nullptr if world bob
 };
 
 /**
@@ -226,7 +221,7 @@ public:
 		const BobProgramBase * program; ///< pointer to current program
 	};
 
-	MO_DESCR(BobDescr);
+	MO_DESCR(BobDescr)
 
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
@@ -248,9 +243,6 @@ public:
 	void set_position(Editor_Game_Base &, const Coords &);
 	const FCoords & get_position() const {return m_position;}
 	Bob * get_next_bob() const {return m_linknext;}
-	bool is_world_bob() const {return descr().is_world_bob();}
-
-	uint32_t vision_range() const {return descr().vision_range();}
 
 	/// Check whether this bob should be able to move onto the given node.
 	///
@@ -317,7 +309,7 @@ public:
 	void signal_handled();
 
 	/// Automatically select a task.
-	virtual void init_auto_task(Game &) {};
+	virtual void init_auto_task(Game &) {}
 
 	// low level animation and walking handling
 	void set_animation(Editor_Game_Base &, uint32_t anim);
@@ -423,4 +415,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BOB_H

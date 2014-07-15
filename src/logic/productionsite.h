@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PRODUCTIONSITE_H
-#define PRODUCTIONSITE_H
+#ifndef WL_LOGIC_PRODUCTIONSITE_H
+#define WL_LOGIC_PRODUCTIONSITE_H
 
 #include <cstring>
 #include <map>
@@ -94,7 +94,7 @@ private:
 };
 
 class ProductionSite : public Building {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::Workers_Need_Experience;
 	friend struct ProductionProgram::ActCall;
@@ -110,7 +110,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlayFX;
 	friend struct ProductionProgram::ActConstruct;
-	MO_DESCR(ProductionSite_Descr);
+	MO_DESCR(ProductionSite_Descr)
 
 public:
 	ProductionSite(const ProductionSite_Descr & descr);
@@ -136,6 +136,7 @@ public:
 	virtual std::string get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
+	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 	char const * result_string() const {return m_result_buffer;}
 
 	virtual WaresQueue & waresqueue(Ware_Index) override;
@@ -244,6 +245,7 @@ protected:  // TrainingSite must have access to this stuff
 	char                     m_statistics_buffer[128];
 	char                     m_result_buffer   [213];
 	uint8_t                  m_last_stat_percent;
+	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 };
@@ -269,4 +271,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PRODUCTIONSITE_H

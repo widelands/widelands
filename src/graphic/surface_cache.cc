@@ -134,4 +134,3 @@ void SurfaceCacheImpl::drop() {
 SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes) {
 	return new SurfaceCacheImpl(transient_memory_in_bytes);
 }
-

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SCRIPTING_H
-#define SCRIPTING_H
+#ifndef WL_SCRIPTING_SCRIPTING_H
+#define WL_SCRIPTING_SCRIPTING_H
 
 #include <map>
 #include <memory>
@@ -26,8 +26,8 @@
 
 #include <stdint.h>
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_errors.h"
+#include "third_party/eris/lua.hpp"
 
 class FileRead;
 class FileWrite;
@@ -89,4 +89,4 @@ private:
 	std::unique_ptr<GameFactory> m_factory;
 };
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_SCRIPTING_H

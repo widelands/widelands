@@ -25,14 +25,13 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include "constants.h"
+#include "base/i18n.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
-#include "text_layout.h"
 #include "ui_basic/panel.h"
+#include "wui/text_layout.h"
 
 using namespace std;
 using boost::format;
@@ -479,7 +478,7 @@ void WUIPlot_Area::set_plotcolor(uint32_t id, RGBColor color) {
 void WUIPlot_Area::show_plot(uint32_t const id, bool const t) {
 	assert(id < m_plotdata.size());
 	m_plotdata[id].showplot = t;
-};
+}
 
 /*
  * Set sample rate the data uses
@@ -627,4 +626,3 @@ void DifferentialPlot_Area::register_negative_plot_data
 
 	m_negative_plotdata[id].dataset   = data;
 }
-

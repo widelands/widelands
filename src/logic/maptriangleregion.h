@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAPTRIANGLEREGION_H
-#define MAPTRIANGLEREGION_H
+#ifndef WL_LOGIC_MAPTRIANGLEREGION_H
+#define WL_LOGIC_MAPTRIANGLEREGION_H
 
 #include "logic/map.h"
 
@@ -123,4 +123,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MAPTRIANGLEREGION_H

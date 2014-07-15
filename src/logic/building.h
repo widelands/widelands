@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BUILDING_H
-#define BUILDING_H
+#ifndef WL_LOGIC_BUILDING_H
+#define WL_LOGIC_BUILDING_H
 
 #include <cstring>
 #include <string>
@@ -33,12 +33,12 @@
 #include "logic/soldier_counts.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "workarea_info.h"
+#include "logic/workarea_info.h"
 
 namespace UI {class Window;}
 struct BuildingHints;
 class Interactive_GameBase;
-struct Profile;
+class Profile;
 class Image;
 
 namespace Widelands {
@@ -58,7 +58,6 @@ class Building;
  * Common to all buildings!
  */
 struct Building_Descr : public Map_Object_Descr {
-	typedef std::set<Building_Index> Enhancements;
 	typedef std::vector<Building_Index> FormerBuildings;
 
 	Building_Descr
@@ -96,11 +95,7 @@ struct Building_Descr : public Map_Object_Descr {
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
-	const Enhancements & enhancements() const {return m_enhancements;}
-	void add_enhancement(const Building_Index & i) {
-		assert(not m_enhancements.count(i));
-		m_enhancements.insert(i);
-	}
+	const Building_Index & enhancement() const {return m_enhancement;}
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -147,7 +142,7 @@ private:
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;
-	Enhancements  m_enhancements;
+	Building_Index  m_enhancement;
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 	bool          m_global;            // whether this is a "global" building
@@ -160,7 +155,7 @@ private:
 
 class Building : public PlayerImmovable {
 	friend struct Building_Descr;
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Building_Descr)
 
@@ -180,8 +175,6 @@ public:
 
 	void load_finish(Editor_Game_Base &) override;
 
-	const Tribe_Descr & tribe() const {return descr().tribe();}
-
 	virtual int32_t  get_type    () const override;
 	char const * type_name() const override {return "building";}
 	virtual int32_t  get_size    () const override;
@@ -195,7 +188,6 @@ public:
 	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
 	const std::string & name() const override;
-	const std::string & descname() const {return descr().descname();}
 
 	std::string info_string(const std::string & format);
 	virtual std::string get_statistics_string();
@@ -215,11 +207,6 @@ public:
 
 	bool leave_check_and_wait(Game &, Worker &);
 	void leave_skip(Game &, Worker &);
-	uint32_t get_conquers() const {return descr().get_conquers();}
-	virtual uint32_t vision_range() const {
-		return descr().vision_range();
-	}
-
 
 	// Get/Set the priority for this waretype for this building. 'type' defines
 	// if this is for a worker or a ware, 'index' is the type of worker or ware.
@@ -233,15 +220,11 @@ public:
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
-	const std::set<Building_Index> & enhancements() const {
-		return descr().enhancements();
-	}
-
 	/**
 	 * The former buildings vector keeps track of all former buildings
 	 * that have been enhanced up to the current one. The current building
 	 * index will be in the last position. For construction sites, it is
-	 * empty exceptenhancements. For a dismantle site, the last item will
+	 * empty except enhancements. For a dismantle site, the last item will
 	 * be the one being dismantled.
 	 */
 	const FormerBuildings get_former_buildings() {
@@ -251,8 +234,8 @@ public:
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	//  Use on training sites only.
-	virtual void change_train_priority(uint32_t, int32_t) {};
-	virtual void switch_train_mode () {};
+	virtual void change_train_priority(uint32_t, int32_t) {}
+	virtual void switch_train_mode () {}
 
 	///  Stores the Player_Number of the player who has defeated this building.
 	void set_defeating_player(Player_Number const player_number) {
@@ -317,4 +300,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BUILDING_H

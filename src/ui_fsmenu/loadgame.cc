@@ -20,25 +20,27 @@
 #include "ui_fsmenu/loadgame.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "gamecontroller.h"
-#include "gamesettings.h"
 #include "graphic/graphic.h"
-#include "graphic/image_loader_impl.h"
+#include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/game.h"
-#include "timestring.h"
+#include "logic/game_controller.h"
+#include "logic/game_settings.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
+#include "wui/text_constants.h"
 
 
 
@@ -109,8 +111,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		(this, get_w() * 71 / 100, get_h() * 10 / 20,
 		 m_minimap_max_size, m_minimap_max_size, nullptr),
 	m_settings(gsp),
-	m_ctrl(gc),
-	m_image_loader(new ImageLoaderImpl())
+	m_ctrl(gc)
 {
 	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::clicked_ok, boost::ref(*this)));
@@ -255,7 +256,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 	if (!minimap_path.empty()) {
 		try {
 			// Load the image
-			std::unique_ptr<Surface> surface(m_image_loader->load(
+			std::unique_ptr<Surface> surface(load_image(
 			   minimap_path, std::unique_ptr<FileSystem>(g_fs->MakeSubFileSystem(name)).get()));
 			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
 			// Scale it
@@ -303,8 +304,8 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		Widelands::Game_Preload_Data_Packet gpdp;
 
 		const filenameset_t & gamefiles = m_gamefiles;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
+		for (const std::string& gamefile : gamefiles) {
+			char const * const name = gamefile.c_str();
 
 			try {
 				Widelands::Game_Loader gl(name, m_game);

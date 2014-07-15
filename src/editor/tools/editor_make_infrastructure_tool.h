@@ -17,11 +17,15 @@
  *
  */
 
-#ifndef EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
-#define EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 #include "ui_basic/unique_window.h"
+
+namespace Widelands {
+class Editor_Game_Base;
+}  // namespace Widelands
 
 /**
  * This places immovables on the map
@@ -35,9 +39,11 @@ struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	Widelands::Player_Number get_player() const
 		{return m_player;}
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& parent,
+	                          Editor_Action_Args& args) override;
 
 	const char * get_sel_impl() const override
 		{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
@@ -51,4 +57,4 @@ int32_t Editor_Make_Infrastructure_Tool_Callback
 	(const Widelands::TCoords<Widelands::FCoords>& c,
 	 Widelands::Editor_Game_Base& egbase, int32_t const player);
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_MAKE_INFRASTRUCTURE_TOOL_H

@@ -19,14 +19,15 @@
 
 #include "ui_basic/button.h"
 
+#include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
-#include "log.h"
 #include "ui_basic/mouse_constants.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
 
 
 namespace UI {
@@ -303,7 +304,7 @@ void Button::handle_mousein(bool const inside)
 /**
  * Update the pressed status of the button
 */
-bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
+bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
@@ -320,7 +321,7 @@ bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
 
 	return true;
 }
-bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
+bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
@@ -340,7 +341,7 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	}
 	return true;
 }
-bool Button::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t) {
+bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return true; // We handle this always by lighting up
 }
 

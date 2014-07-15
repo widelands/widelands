@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_INCORPORATE_H
-#define CMD_INCORPORATE_H
+#ifndef WL_LOGIC_CMD_INCORPORATE_H
+#define WL_LOGIC_CMD_INCORPORATE_H
 
 #include "logic/cmd_queue.h"
 #include "logic/worker.h"
@@ -46,4 +46,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_INCORPORATE_H

@@ -17,18 +17,17 @@
  *
  */
 
-#ifndef FIELD_H
-#define FIELD_H
+#ifndef WL_LOGIC_FIELD_H
+#define WL_LOGIC_FIELD_H
 
 #include <cassert>
 #include <limits>
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/nodecaps.h"
 #include "logic/roadtype.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
-#include "logic/world.h"
 
 namespace Widelands {
 
@@ -48,8 +47,8 @@ namespace Widelands {
 // Making it a struct doesn't add anything. struct is used interchangeably with
 // class all around the code
 
-struct Terrain_Descr;
 class Bob;
+class TerrainDescription;
 struct BaseImmovable;
 
 // Field is used so often, make sure it is as small as possible.
@@ -74,8 +73,10 @@ struct Field {
 	typedef uint8_t Height;
 	typedef uint8_t Resource_Amount;
 
-	struct Terrains         {Terrain_Index   d : 4, r : 4;};
-	static_assert(sizeof(Terrains) == 1, "assert(sizeof(Terrains) == 1) failed.");
+	struct Terrains {
+		Terrain_Index d, r;
+	};
+	static_assert(sizeof(Terrains) == 2, "assert(sizeof(Terrains) == 2) failed.");
 	struct Resources        {Resource_Index  d : 4, r : 4;};
 	static_assert(sizeof(Resources) == 1, "assert(sizeof(Resources) == 1) failed.");
 	struct Resource_Amounts {Resource_Amount d : 4, r : 4;};
@@ -232,7 +233,11 @@ public:
 #pragma pack(pop)
 
 // Check that Field is tightly packed.
-static_assert(sizeof(Field) <= sizeof(void *) * 2 + 10, "Field is not tightly packed.");
+#ifndef WIN32
+static_assert(sizeof(Field) == sizeof(void *) * 2 + 10, "Field is not tightly packed.");
+#else
+static_assert(sizeof(Field) <= sizeof(void *) * 2 + 11, "Field is not tightly packed.");
+#endif
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_FIELD_H

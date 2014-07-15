@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/graphic.h"
 #include "logic/building.h"
@@ -28,7 +29,6 @@
 #include "logic/ship.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 
 using boost::format;
@@ -148,7 +148,7 @@ ActionConfirm::ActionConfirm
 	new UI::Multiline_Textarea
 		(this,
 		 0, 0, 200, 74,
-		 (format(message) % building.descname()).str(),
+		 (format(message) % building.descr().descname()).str(),
 		 UI::Align_Center);
 
 	UI::Button * okbtn =

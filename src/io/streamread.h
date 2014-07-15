@@ -17,16 +17,15 @@
  *
  */
 
-#ifndef STREAMREAD_H
-#define STREAMREAD_H
+#ifndef WL_IO_STREAMREAD_H
+#define WL_IO_STREAMREAD_H
 
 #include <cstring>
 #include <string>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "machdep.h"
-#include "wexception.h"
 
 
 /**
@@ -42,7 +41,7 @@
  *
  * Convenience functions are provided for many data types.
  */
-class StreamRead : boost::noncopyable {
+class StreamRead {
 public:
 	explicit StreamRead() {}
 	virtual ~StreamRead();
@@ -77,6 +76,9 @@ public:
 		_data_error(char const * const fmt, ...) PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) _data_error(__VA_ARGS__)
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(StreamRead);
 };
 
-#endif
+#endif  // end of include guard: WL_IO_STREAMREAD_H

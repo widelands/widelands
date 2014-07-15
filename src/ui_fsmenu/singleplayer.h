@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_SINGLEPLAYER_H
-#define FULLSCREEN_MENU_SINGLEPLAYER_H
+#ifndef WL_UI_FSMENU_SINGLEPLAYER_H
+#define WL_UI_FSMENU_SINGLEPLAYER_H
 
 #include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
@@ -46,4 +46,4 @@ private:
 	UI::Button                             back;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_SINGLEPLAYER_H

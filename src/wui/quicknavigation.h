@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef QUICKNAVIGATION_H
-#define QUICKNAVIGATION_H
+#ifndef WL_WUI_QUICKNAVIGATION_H
+#define WL_WUI_QUICKNAVIGATION_H
 
 #include <vector>
 
@@ -26,7 +26,7 @@
 #include <boost/function.hpp>
 #include <stdint.h>
 
-#include "point.h"
+#include "base/point.h"
 
 namespace Widelands {
 class Editor_Game_Base;
@@ -88,4 +88,4 @@ private:
 	Landmark m_landmarks[10];
 };
 
-#endif // QUICKNAVIGATION_H
+#endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H

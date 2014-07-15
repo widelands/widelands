@@ -19,6 +19,7 @@
 
 #include "logic/ship.h"
 
+#include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
 #include "graphic/graphic.h"
@@ -26,7 +27,6 @@
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "ui_basic/box.h"
-#include "upcast.h"
 #include "wui/actionconfirm.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
@@ -99,7 +99,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	m_display = new ItemWaresDisplay(vbox, *ship.get_owner());
-	m_display->set_capacity(ship.get_capacity());
+	m_display->set_capacity(ship.descr().get_capacity());
 	vbox->add(m_display, UI::Box::AlignCenter, false);
 
 	// Expedition buttons

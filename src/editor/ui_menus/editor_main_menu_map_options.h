@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_MAP_OPTIONS_H
-#define EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H
 
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -43,9 +43,9 @@ private:
 	void changed(int32_t);
 	void editbox_changed();
 	UI::Multiline_Editbox * m_descr;
-	UI::Textarea * m_world, * m_nrplayers, * m_size;
+	UI::Textarea * m_nrplayers, * m_size;
 	UI::EditBox * m_name, * m_author;
 	void update();
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_MAP_OPTIONS_H

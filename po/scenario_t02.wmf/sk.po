@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: 2014-03-11 10:14+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:30+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:30+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: czech republic\n"
 "Language: sk\n"
 "X-Poedit-Language: czech\n"
@@ -369,9 +369,9 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:249
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:267
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:285
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:311
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:340
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:312
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:341
 msgid "Your Loyal Companion"
 msgstr "Váš verný spoločník"
 
@@ -384,7 +384,7 @@ msgid ""
 "So you want to prepare us for a longer stay in these forests, Thron? Well, I "
 "see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the "
-"battlefield, and our axs and swords have turned rusty over time."
+"battlefield, and our axes and swords have turned rusty over time."
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:204
@@ -393,9 +393,9 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:257
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:276
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:321
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:350
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:362
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:322
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:351
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:363
 msgid "The Advisor"
 msgstr "Radca"
 
@@ -582,18 +582,18 @@ msgstr ""
 "piesne sa preháňali vzduchom do neskorej noci a povznesená nálada nechýbala "
 "ani na ďalší deň."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:306
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:307
 msgid ""
 "Maybe we actually are slowly creating a place here which we can... call home."
 msgstr ""
 "Možno tu naozaj pomaly začíname vytvárať miesto, ktoré možno... nazvať "
 "domovom."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:312
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:313
 msgid "Boldreth remarks..."
 msgstr "Boldreth poznamenáva..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:313
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:314
 msgid ""
 "So now that we have both the mines and the food to sustain them, we should "
 "bring what our brave miners gain for us into a more useful state. The iron "
@@ -605,12 +605,12 @@ msgstr ""
 "ruda sa musí roztaviť na železo, ktoré možno okovať na čokoľvek chceme. "
 "Potrebujeme tiež uhlie do pece taviča.\""
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:322
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:384
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:323
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:386
 msgid "Khantrukh speaks..."
 msgstr "Khantrukh hovorí..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:323
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:324
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
@@ -618,7 +618,7 @@ msgstr ""
 "Naši baníci dosahujú čoraz menšie hĺbky. Musíme ísť hlbšie, bližšie k jadru "
 "pohoria, ak chceme viac z jeho pokladov!"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:326
 msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
@@ -628,11 +628,11 @@ msgstr ""
 "dobrovoľne vstúpiť do týchto miest. Túto statočnosť by sme mali odmeniť "
 "väčším prídelom jedla. A krčah piva alebo dva na zlepšenie nálady."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid "Boldreth seems concerned..."
 msgstr "Zdá sa, že Boldreth má obavy..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:334
 msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as "
@@ -642,15 +642,15 @@ msgstr ""
 "dať do nejakých rozpadajúcich sa chatrčí, už vôbec nie v časoch takých "
 "nebezpečných, aké sú tie naše!"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:335
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:336
 msgid "We need a wood hardener, and we need one now!"
 msgstr "Potrebujeme sušiareň dreva a potrebujeme ju hneď!"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:341
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:342
 msgid "Boldreth smiles..."
 msgstr "Boldreth sa usmieva..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:342
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:343
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
@@ -659,7 +659,7 @@ msgstr ""
 "hneď pri prvom bojovom pokriku nepriateľov. Teraz nám nič nebráni v "
 "rozpínaní."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:344
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:345
 msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
@@ -668,11 +668,11 @@ msgstr ""
 "Ale aj tak by nebolo zlé zhromaždiť nejakú maltu pre budúce ťaženie. V čase "
 "núdze by sme tak mohli postaviť pevnosť, akú svet ešte nevidel!"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:351
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:352
 msgid "Khantrukh steps in..."
 msgstr "Khantrukh predstúpi..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:352
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:353
 msgid ""
 "Chieftain, this is a disgrace! It is well that we can produce grout for "
 "mighty fortifications and great buildings now – only this does not prevent "
@@ -685,15 +685,15 @@ msgstr ""
 "striech! Možno tí mladí dokážu tráviť noci v daždi, ale ja proste nedokážem "
 "zaspať, keď mi na tvár kvapká dážď."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:357
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:358
 msgid "Now this is a problem we should do something about!"
 msgstr "Toto je problém, s ktorým by sme mali niečo urobiť!"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:363
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:364
 msgid "Khantrukh seems relieved..."
 msgstr "Khantrukh vyzerá upokojene..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:364
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:365
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
@@ -701,11 +701,11 @@ msgstr ""
 "Skvelé! Z našich striech už viac nekvapká a máme všetok materiál potrebný "
 "pre, nuž, každú monumentálnu budovu, ktorú uznáme za vhodnú!"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:370
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:371
 msgid "Mission Complete"
 msgstr "Misia splnená."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:372
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:373
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
@@ -713,7 +713,7 @@ msgstr ""
 "Na ďalší deň ma Boldreth požiadal, aby som ho vyprevadil do nového hostinca. "
 "'Rozveselilo by ma to,' povedal."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:373
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:375
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them "
 "through these dark days. Yet before I could speak any words of gratitude or "
@@ -726,17 +726,17 @@ msgstr ""
 "vojakov vbehol do hostinca. Posledné dni trávil ďaleko v lese a bolo na ňom "
 "vidieť, aký bol ustatý."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:376
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:378
 msgid "The news he brought changed everything..."
 msgstr ""
 "<br>\n"
 "Novinky, ktoré priniesol, zmenili všetko..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:377
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:379
 msgid "Victory"
 msgstr "Víťazstvo"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:378
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:380
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
@@ -744,11 +744,11 @@ msgstr ""
 "Dokončili ste túto misiu. Ak chcete, môžete pokračovať v hraní. V opačnom "
 "prípade prejdite k ďalšej misii."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:383
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:385
 msgid "We Need Oxen!"
 msgstr "Potrebujeme voly!"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:385
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:387
 msgid ""
 "As our realm is getting bigger and bigger, the traffic on the roads is "
 "overwhelming. Our poor carriers are no longer able to transport the goods as "
@@ -759,7 +759,7 @@ msgstr ""
 "narastá. Naši úbohí nosiči už nie sú schopní prenášať tovar tak rýchlo, ako "
 "to od nich vyžadujeme. Navrhujem, že ich trochu podporíme chovom volov."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:388
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
@@ -769,16 +769,16 @@ msgstr ""
 "skromné: všetko, čo potrebujeme na ich chov, je pšenica a voda a ony "
 "vykonajú svoju prácu na cestách verne a spoľahlivo."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:394
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
 msgid "One Full Moon Night"
 msgstr "Jedna noc splnu Mesiaca"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:395
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:416
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:397
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:419
 msgid "Thron speaks..."
 msgstr "Thron hovorí..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
@@ -786,7 +786,7 @@ msgstr ""
 "Jednej noci, keď mesiac jasne svietil, vyšplhal som sa na vrchol hory "
 "Kal'mavrath."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:397
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:399
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war. "
@@ -798,15 +798,15 @@ msgstr ""
 "Bojím sa chvíle, keď opäť uvidím Al'thunran - keď sa tam dostaneme, bude tam "
 "niečo iné okrem popola a zrúcanín z nášho kedysi krásneho hlavného mesta?"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:407
 msgid "Another Cold Day"
 msgstr "Ďalší studený deň"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:406
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:408
 msgid "Thron looks worried..."
 msgstr "Thron má obavy..."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:407
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:409
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -815,7 +815,7 @@ msgstr ""
 "Zima je tu. Mnohí z nás sú nachladnutí, ale musíme vydržať. Deň návratu už "
 "nemôže byť ďaleko - už nesmie byť ďaleko."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:409
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:411
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
@@ -823,15 +823,15 @@ msgstr ""
 "Modlil som sa, aby sa znova oteplilo, ako aj aby sa už vojna konečne "
 "skončila."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:410
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "Zatiaľ to vyzerá tak, že sa nesplnila žiadna modlitba."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:415
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:418
 msgid "A friendly village has joined us!"
 msgstr "Priateľská osada sa k nám rozhodla pripojiť!"
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:417
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:420
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
@@ -839,7 +839,7 @@ msgstr ""
 "Našli sme dedinu s priateľským a tvorivým ľudom ohromeným naším majetkom, "
 "technológiou a silou."
 
-#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:418
+#: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:421
 msgid "They have decided to join us!"
 msgstr "Rozhodli sa k nám pripojiť!"
 
@@ -847,7 +847,7 @@ msgstr "Rozhodli sa k nám pripojiť!"
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

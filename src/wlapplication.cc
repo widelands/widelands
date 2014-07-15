@@ -27,45 +27,48 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
-#include <config.h>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #endif
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/time_string.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "build_info.h"
-#include "computer_player.h"
+#include "config.h"
 #include "editor/editorinteractive.h"
-#include "gamesettings.h"
+#include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/game_settings.h"
 #include "logic/map.h"
 #include "logic/replay.h"
+#include "logic/replay_game_controller.h"
+#include "logic/single_player_game_controller.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "logic/tribe.h"
 #include "map_io/map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "profile/profile.h"
-#include "replay_game_controller.h"
-#include "single_player_game_controller.h"
-#include "single_player_game_settings_provider.h"
 #include "sound/sound_handler.h"
-#include "timestring.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
@@ -74,7 +77,7 @@
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
-#include "ui_fsmenu/launchSPG.h"
+#include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
@@ -83,8 +86,6 @@
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "warning.h"
-#include "wexception.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -94,6 +95,22 @@
 
 //Always specifying namespaces is good, but let's not go too far ;-)
 using std::endl;
+
+namespace {
+
+/**
+ * Shut the hardware down: stop graphics mode, stop sound handler
+ */
+void terminate(int) {
+	log(_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
+	      " Update your sound driver and/or SDL to fix this problem\n"));
+#ifndef _WIN32
+	raise(SIGKILL);
+#endif
+}
+
+}  // namespace
+
 
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
@@ -107,11 +124,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		// on mac and windows, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
 		log("Adding executable directory to search path\n");
-		g_fs->AddFileSystem(FileSystem::Create(s));
+		g_fs->AddFileSystem(&FileSystem::Create(s));
 #else
 		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
 		g_fs->AddFileSystem //  see config.h
-			(FileSystem::Create
+			(&FileSystem::Create
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
@@ -127,7 +144,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 #ifdef __linux__
 		// if that fails, search in FHS standard location (obviously UNIX-only)
 		log ("Adding directory:/usr/share/games/widelands\n");
-		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
+		g_fs->AddFileSystem(&FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
 	catch (FileNotFound_error &) {}
@@ -145,7 +162,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		 * absolute fallback directory is the CWD
 		 */
 		log ("Adding directory:.\n");
-		g_fs->AddFileSystem(FileSystem::Create("."));
+		g_fs->AddFileSystem(&FileSystem::Create("."));
 #endif
 	}
 	catch (FileNotFound_error &) {}
@@ -172,7 +189,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		if (argv0 != ".") {
 			try {
 				log ("Adding directory: %s\n", argv0.c_str());
-				g_fs->AddFileSystem(FileSystem::Create(argv0));
+				g_fs->AddFileSystem(&FileSystem::Create(argv0));
 			}
 			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {
@@ -183,9 +200,8 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			}
 		}
 	}
-	//now make sure we always access the file with the right version first
-	g_fs->PutRightVersionOnTop();
 }
+
 void WLApplication::setup_homedir() {
 	//If we don't have a home directory don't do anything
 	if (m_homedir.size()) {
@@ -195,7 +211,7 @@ void WLApplication::setup_homedir() {
 
 			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
 			home->EnsureDirectoryExists(".");
-			g_fs->SetHomeFileSystem(*home.release());
+			g_fs->SetHomeFileSystem(home.release());
 		} catch (const std::exception & e) {
 			log("Failed to add home directory: %s\n", e.what());
 		}
@@ -289,7 +305,7 @@ m_redirected_stdio(false)
 				("True Type library did not initialize: %s\n", TTF_GetError());
 
 		UI::g_fh = new UI::Font_Handler();
-		UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
+		UI::g_fh1 = UI::create_fonthandler(g_gr);
 	} else
 		g_gr = nullptr;
 
@@ -381,7 +397,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			// disable sound completely
-			g_sound_handler.m_nosound = true;
+			g_sound_handler.nosound_ = true;
 
 			// setup some details of the dedicated server
 			Section & s = g_options.pull_section      ("global");
@@ -434,7 +450,6 @@ void WLApplication::run()
 				mapdata.name = map.get_name();
 				mapdata.author = map.get_author();
 				mapdata.description = map.get_description();
-				mapdata.world = map.get_world_name();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
 				mapdata.height = map.get_height();
@@ -636,6 +651,7 @@ void WLApplication::_handle_mousebutton
  * Return the current time, in milliseconds
  * \todo Use our internally defined time type
  */
+// TODO(sirver): get rid of this method and use SDL_GetTicks() directly.
 int32_t WLApplication::get_time() {
 	uint32_t time = SDL_GetTicks();
 
@@ -713,8 +729,8 @@ void WLApplication::refresh_graphics()
 
 	//  Switch to the new graphics system now, if necessary.
 	init_graphics
-		(s.get_int("xres", XRES),
-		 s.get_int("yres", YRES),
+		(s.get_int("xres", DEFAULT_RESOLUTION_W),
+		 s.get_int("yres", DEFAULT_RESOLUTION_H),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("opengl", true));
 }
@@ -817,12 +833,12 @@ std::string WLApplication::get_executable_path()
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
 	_NSGetExecutablePath(nullptr, &buffersize);
-	char buffer[buffersize];
-	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
+	std::unique_ptr<char []> buffer(new char[buffersize]);
+	int32_t check = _NSGetExecutablePath(buffer.get(), &buffersize);
 	if (check != 0) {
 		throw wexception (_("could not find the path of the main executable"));
 	}
-	executabledir = std::string(buffer);
+	executabledir = std::string(buffer.get());
 	executabledir.resize(executabledir.rfind('/') + 1);
 #endif
 #ifdef __linux__
@@ -871,7 +887,7 @@ std::string WLApplication::find_relative_locale_path(std::string localedir)
  * \return true if there were no fatal errors that prevent the game from running
  */
 bool WLApplication::init_hardware() {
-	Uint32 sdl_flags = 0;
+	uint8_t sdl_flags = 0;
 	Section & s = g_options.pull_section("global");
 
 	//Start the SDL core
@@ -931,7 +947,7 @@ bool WLApplication::init_hardware() {
 			 SDL_GetError());
 
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
+	SDL_EnableUNICODE(1);
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	refresh_graphics();
@@ -941,19 +957,6 @@ bool WLApplication::init_hardware() {
 	g_sound_handler.init(); //  FIXME memory leak!
 
 	return true;
-}
-
-/**
- * Shut the hardware down: stop graphics mode, stop sound handler
- */
-
-void terminate (int) {
-	 log
-		  (_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
-			  " Update your sound driver and/or SDL to fix this problem\n"));
-#ifndef _WIN32
-	raise(SIGKILL);
-#endif
 }
 
 void WLApplication::shutdown_hardware()
@@ -1048,7 +1051,7 @@ void WLApplication::handle_commandline_parameters()
 		m_commandline.erase("logfile");
 	}
 	if (m_commandline.count("nosound")) {
-		g_sound_handler.m_nosound = true;
+		g_sound_handler.nosound_ = true;
 		m_commandline.erase("nosound");
 	}
 	if (m_commandline.count("nozip")) {
@@ -1069,7 +1072,7 @@ void WLApplication::handle_commandline_parameters()
 
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
-		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
+		g_fs->AddFileSystem(&FileSystem::Create(m_commandline["datadir"]));
 		m_default_datadirs = false;
 		m_commandline.erase("datadir");
 	}

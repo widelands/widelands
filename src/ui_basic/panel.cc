@@ -19,7 +19,7 @@
 
 #include "ui_basic/panel.h"
 
-#include "constants.h"
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
@@ -27,11 +27,11 @@
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "helper.h"
-#include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 
 
 using namespace std;
@@ -165,6 +165,7 @@ void Panel::free_children() {while (_fchild) delete _fchild;}
  */
 int32_t Panel::run()
 {
+	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication * const app = WLApplication::get();
 	Panel * const prevmodal = _modal;
 	_modal = this;
@@ -642,7 +643,7 @@ void Panel::handle_mousein(bool)
  *
  * \return true if the mouseclick was processed, flase otherwise
  */
-bool Panel::handle_mousepress  (const Uint8, int32_t, int32_t)
+bool Panel::handle_mousepress  (const uint8_t, int32_t, int32_t)
 {
 	return false;
 }
@@ -654,7 +655,7 @@ bool Panel::handle_mousepress  (const Uint8, int32_t, int32_t)
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool Panel::handle_mouserelease(const uint8_t, int32_t, int32_t)
 {
 	return false;
 }
@@ -662,7 +663,7 @@ bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
 /**
  * Called when the mouse is moved while inside the panel
  */
-bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t)
+bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t)
 {
 	return !_tooltip.empty();
 }
@@ -985,7 +986,7 @@ void Panel::do_mousein(bool const inside)
  *
  * Returns whether the event was processed.
  */
-bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (not _g_allow_user_input) {
 		return true;
 	}
@@ -1019,7 +1020,7 @@ bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 			}
 	return handle_mousepress(btn, x, y);
 }
-bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
+bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
 	if (not _g_allow_user_input)
 		return true;
 
@@ -1036,7 +1037,7 @@ bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 }
 
 bool Panel::do_mousemove
-	(Uint8 const state,
+	(uint8_t const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
 	if (not _g_allow_user_input)
@@ -1140,14 +1141,14 @@ Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
 */
-void Panel::ui_mousepress(const Uint8 button, int32_t x, int32_t y) {
+void Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
 	if (not _g_allow_user_input)
 		return;
 
 	if (Panel * const p = ui_trackmouse(x, y))
 		p->do_mousepress(button, x, y);
 }
-void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
+void Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
 	if (not _g_allow_user_input)
 		return;
 
@@ -1160,7 +1161,7 @@ void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
  * panel.
 */
 void Panel::ui_mousemove
-	(Uint8 const state,
+	(uint8_t const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
 	if (not _g_allow_user_input)
@@ -1227,7 +1228,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r + Point(2, 2), rendered_text);
+	dst.blit(r.top_left() + Point(2, 2), rendered_text);
 	return true;
 }
 

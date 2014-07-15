@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef RICHTEXT_H
-#define RICHTEXT_H
+#ifndef WL_GRAPHIC_RICHTEXT_H
+#define WL_GRAPHIC_RICHTEXT_H
 
 #include <limits>
 #include <memory>
 #include <string>
 
-#include "point.h"
-#include "rgbcolor.h"
+#include "base/point.h"
+#include "graphic/color.h"
 
 
 class RenderTarget;
@@ -59,4 +59,4 @@ private:
 
 } // namespace UI
 
-#endif // RICHTEXT_H
+#endif  // end of include guard: WL_GRAPHIC_RICHTEXT_H

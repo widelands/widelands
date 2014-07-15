@@ -19,6 +19,8 @@
 
 #include "logic/cmd_queue.h"
 
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -28,8 +30,6 @@
 #include "logic/playercommand.h"
 #include "logic/worker.h"
 #include "machdep.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 

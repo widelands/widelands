@@ -19,6 +19,7 @@
 
 #include "logic/queue_cmd_factory.h"
 
+#include "base/wexception.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_incorporate.h"
@@ -27,7 +28,6 @@
 #include "logic/instances.h"
 #include "logic/playercommand.h"
 #include "logic/queue_cmd_ids.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -77,8 +77,6 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_SetWorkerTargetQuantity   ();
 	case QUEUE_CMD_RESETWORKERTARGETQUANTITY:
 		return *new Cmd_ResetWorkerTargetQuantity ();
-	case QUEUE_CMD_CHANGEMILITARYCONFIG:
-		return *new Cmd_ChangeMilitaryConfig      ();
 	case QUEUE_CMD_MESSAGESETSTATUSREAD:
 		return *new Cmd_MessageSetStatusRead      ();
 	case QUEUE_CMD_MESSAGESETSTATUSARCHIVED:

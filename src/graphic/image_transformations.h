@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef IMAGE_TRANSFORMATIONS_H
-#define IMAGE_TRANSFORMATIONS_H
+#ifndef WL_GRAPHIC_IMAGE_TRANSFORMATIONS_H
+#define WL_GRAPHIC_IMAGE_TRANSFORMATIONS_H
 
 #include <stdint.h>
 
@@ -55,5 +55,4 @@ const Image* player_colored(const RGBColor& clr, const Image* original, const Im
 }
 
 
-#endif /* end of include guard: IMAGE_TRANSFORMATIONS_H */
-
+#endif  // end of include guard: WL_GRAPHIC_IMAGE_TRANSFORMATIONS_H

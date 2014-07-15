@@ -19,14 +19,14 @@
 
 #include "graphic/rendertarget.h"
 
+#include "base/log.h"
+#include "base/macros.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/surface.h"
-#include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/overlay_manager.h"
 
@@ -99,7 +99,7 @@ bool RenderTarget::enter_window
 			*prevofs = m_offset;
 
 		// Apply the changes
-		m_offset = rc - (newrect - m_rect - m_offset);
+		m_offset = rc.top_left() - (newrect.top_left() - m_rect.top_left() - m_offset);
 		m_rect = newrect;
 
 		return true;
@@ -251,7 +251,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r + Point(tx, ty), image->surface(), srcrc, cm);
+				m_surface->blit(r.top_left() + Point(tx, ty), image->surface(), srcrc, cm);
 
 				tx += srcrc.w;
 
@@ -305,7 +305,7 @@ void RenderTarget::drawanimrect
 	const Animation& anim = g_gr->animations().get_animation(animation);
 
 	Point dstpt = dst - anim.hotspot();
-	dstpt += gsrcrc;
+	dstpt += gsrcrc.top_left();
 
 	Rect srcrc(gsrcrc);
 
@@ -334,7 +334,8 @@ void RenderTarget::reset()
  */
 bool RenderTarget::clip(Rect & r) const
 {
-	r += m_offset;
+	r.x += m_offset.x;
+	r.y += m_offset.y;
 
 	if (r.x < 0) {
 		if (r.w <= static_cast<uint32_t>(-r.x))
@@ -364,7 +365,8 @@ bool RenderTarget::clip(Rect & r) const
 		r.h = m_rect.h - r.y;
 	}
 
-	r += m_rect;
+	r.x += m_rect.x;
+	r.y += m_rect.y;
 
 	return r.w and r.h;
 }
@@ -408,6 +410,6 @@ bool RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 		srcrc->h = m_rect.h - dst->y;
 	}
 
-	*dst += m_rect;
+	*dst += m_rect.top_left();
 	return true;
 }

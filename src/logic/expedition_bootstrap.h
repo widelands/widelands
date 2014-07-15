@@ -17,14 +17,13 @@
  *
  */
 
-#ifndef EXPEDITION_BOOTSTRAP_H
-#define EXPEDITION_BOOTSTRAP_H
+#ifndef WL_LOGIC_EXPEDITION_BOOTSTRAP_H
+#define WL_LOGIC_EXPEDITION_BOOTSTRAP_H
 
 #include <vector>
 #include <memory>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "economy/wares_queue.h"
 
 namespace Widelands {
@@ -43,7 +42,7 @@ class Worker;
 // Handles the mustering of workers and wares in a port for one Expedition. This
 // object is created in the port dock as soon as the start expedition button is
 // pressed. As soon as the ship is loaded, this object gets destroyed.
-class ExpeditionBootstrap : boost::noncopyable {
+class ExpeditionBootstrap {
 public:
 	ExpeditionBootstrap(PortDock* const portdock);
 	virtual ~ExpeditionBootstrap();
@@ -97,8 +96,10 @@ private:
 
 	std::vector<std::unique_ptr<WaresQueue>> wares_;
 	std::vector<std::unique_ptr<ExpeditionWorker>> workers_;
+
+	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 };
 
 }  // namespace Widelands
 
-#endif /* end of include guard: EXPEDITION_BOOTSTRAP_H */
+#endif  // end of include guard: WL_LOGIC_EXPEDITION_BOOTSTRAP_H

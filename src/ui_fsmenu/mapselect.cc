@@ -19,22 +19,24 @@
 #include "ui_fsmenu/mapselect.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
-#include "gamecontroller.h"
-#include "gamesettings.h"
+#include "base/deprecated.h"
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/editor_game_base.h"
+#include "logic/game_controller.h"
+#include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "s2map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 
 using Widelands::WL_Map_Loader;
@@ -76,12 +78,6 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		 _("Size:"),
 		 UI::Align_Right),
 	m_size (this, get_w() * 71 / 100, get_h() * 41 / 100),
-	m_label_world
-		(this,
-		 get_w() * 7 / 10, get_h() * 89 / 200,
-		 _("World:"),
-		 UI::Align_Right),
-	m_world (this, get_w() * 71 / 100, get_h() * 89 / 200),
 	m_label_nr_players
 		(this,
 		 get_w() * 7 / 10, get_h() * 12 / 25,
@@ -134,8 +130,6 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_author                    .set_textstyle(ts_small());
 	m_label_size                .set_textstyle(ts_small());
 	m_size                      .set_textstyle(ts_small());
-	m_label_world               .set_textstyle(ts_small());
-	m_world                     .set_textstyle(ts_small());
 	m_label_nr_players          .set_textstyle(ts_small());
 	m_nr_players                .set_textstyle(ts_small());
 	m_label_descr               .set_textstyle(ts_small());
@@ -155,28 +149,30 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		 boost::bind
 		 (&Fullscreen_Menu_MapSelect::compare_maprows, this, _1, _2));
 	m_table.set_sort_column(0);
-
 	m_load_map_as_scenario.set_state(false);
 	m_load_map_as_scenario.set_enabled(false);
 
 	m_table.selected.connect(boost::bind(&Fullscreen_Menu_MapSelect::map_selected, this, _1));
 	m_table.double_clicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::double_clicked, this, _1));
 
-	UI::Box * vbox = new UI::Box
-		(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
+	UI::Box* vbox = new UI::Box(
+	   this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
 	m_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
 	m_show_all_maps->set_state(true);
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 90, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
 	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
 	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
@@ -256,15 +252,6 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 	if (map.width) {
 		char buf[256];
 
-		// get translated worldsname
-		std::string world(map.world);
-		if (map.height) { // if height == 0 : dedicated server map info without local map
-			std::string worldpath("worlds/" + map.world);
-			Profile prof((worldpath + "/conf").c_str(), nullptr, "world_" + map.world);
-			Section & global = prof.get_safe_section("world");
-			world = global.get_safe_string("name");
-		}
-
 		// Translate the map data
 		i18n::Textdomain td("maps");
 		m_name      .set_text(_(map.name));
@@ -274,7 +261,6 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		sprintf(buf, "%i", map.nrplayers);
 		m_nr_players.set_text(buf);
 		m_descr     .set_text(_(map.description) + (map.hint.empty() ? "" : (std::string("\n") + _(map.hint))));
-		m_world     .set_text(world);
 		m_load_map_as_scenario.set_enabled(map.scenario);
 	} else {
 		// Directory
@@ -283,7 +269,6 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		m_size      .set_text(std::string());
 		m_nr_players.set_text(std::string());
 		m_descr     .set_text(std::string());
-		m_world     .set_text(std::string());
 		m_load_map_as_scenario.set_enabled(false);
 	}
 	m_ok.set_enabled(true);
@@ -408,7 +393,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					mapdata.author      = map.get_author();
 					mapdata.description = map.get_description();
 					mapdata.hint        = map.get_hint();
-					mapdata.world       = map.get_world_name();
 					mapdata.nrplayers   = map.get_nrplayers();
 					mapdata.width       = map.get_width();
 					mapdata.height      = map.get_height();
@@ -469,7 +453,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.author      = map.get_author();
 				mapdata.description = map.get_description();
 				mapdata.hint        = map.get_hint();
-				mapdata.world       = map.get_world_name();
 				mapdata.nrplayers   = map.get_nrplayers();
 				mapdata.width       = map.get_width();
 				mapdata.height      = map.get_height();
@@ -502,7 +485,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.description = _("This map file is not present in your filesystem."
 							" The data shown here was sent by the server.");
 				mapdata.hint        = "";
-				mapdata.world       = _("unknown");
 				mapdata.nrplayers   = dmap.players;
 				mapdata.width       = 1;
 				mapdata.height      = 0;

@@ -21,14 +21,14 @@
 #include "logic/productionsite.h"
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
-#include "helper.h"
-#include "i18n.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -37,10 +37,9 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
-#include "upcast.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 namespace Widelands {
 
@@ -184,6 +183,7 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
 	m_statistics_changed(true),
 	m_last_stat_percent (0),
+	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle")
 {
@@ -233,7 +233,7 @@ std::string ProductionSite::get_statistics_string()
 bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
-	if (upcast(ProductionSite_Descr const, bld, tribe().get_building_descr(targetSite))) {
+	if (upcast(ProductionSite_Descr const, bld, descr().tribe().get_building_descr(targetSite))) {
 		// if he has workers
 		if (bld->nr_working_positions()) {
 			Ware_Index need = bld->working_positions()[0].first;
@@ -241,8 +241,8 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 				if (!working_positions()[i].worker) {
 					return false; // no one is in this house
 				} else {
-					Ware_Index have = working_positions()[i].worker->worker_index();
-					if (tribe().get_worker_descr(have)->can_act_as(need)) {
+					Ware_Index have = working_positions()[i].worker->descr().worker_index();
+					if (descr().tribe().get_worker_descr(have)->can_act_as(need)) {
 						return true; // he found a lead worker
 					}
 				}
@@ -283,7 +283,9 @@ void ProductionSite::calc_statistics()
 	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk < 33)
+	if (percOk > (m_crude_percent / 10000) and percOk - (m_crude_percent / 10000) > 50)
+		color = UI_FONT_CLR_IDLE_HEX;
+	else if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
 	else if (percOk < 66)
 		color = UI_FONT_CLR_OK_HEX;
@@ -449,7 +451,7 @@ int ProductionSite::warp_worker
  */
 void ProductionSite::remove_worker(Worker & w)
 {
-	molog("%s leaving\n", w.descname().c_str());
+	molog("%s leaving\n", w.descr().descname().c_str());
 	Working_Position * wp = m_working_positions;
 
 	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
@@ -507,7 +509,7 @@ void ProductionSite::request_worker_callback
 	// needs a worker like the one just arrived. That way it is of course still possible, that the worker is
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
-	Ware_Index     idx = w->worker_index();
+	Ware_Index     idx = w->descr().worker_index();
 	for (Working_Position * wp = psite.m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
@@ -542,10 +544,10 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			Ware_Index nuwo    = psite.tribe().get_nrworkers();
+			Ware_Index nuwo    = psite.descr().tribe().get_nrworkers();
 			Ware_Index current = Ware_Index(static_cast<size_t>(0));
 			for (; current < nuwo; ++current) {
-				Worker_Descr const * worker = psite.tribe().get_worker_descr(current);
+				Worker_Descr const * worker = psite.descr().tribe().get_worker_descr(current);
 				if (worker->becomes() == idx) {
 					idx = current;
 					break;
@@ -718,7 +720,7 @@ bool ProductionSite::get_building_work
 		{
 			Ware_Index const ware_index = ware_type_with_count.first;
 			const WareDescr & ware_ware_descr =
-				*tribe().get_ware_descr(ware_type_with_count.first);
+				*descr().tribe().get_ware_descr(ware_type_with_count.first);
 			{
 				WareInstance & ware =
 					*new WareInstance(ware_index, &ware_ware_descr);
@@ -740,7 +742,7 @@ bool ProductionSite::get_building_work
 			*m_recruited_workers.rbegin();
 		{
 			const Worker_Descr & worker_descr =
-				*tribe().get_worker_descr(worker_type_with_count.first);
+				*descr().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker & recruit =
 					ref_cast<Worker, Bob>(worker_descr.create_object());
@@ -763,7 +765,7 @@ bool ProductionSite::get_building_work
 		WaresQueue * queue = *iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr & wd = *tribe().get_ware_descr(queue->get_ware());
+			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());
 			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
@@ -849,19 +851,31 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 
 	switch (result) {
 	case Failed:
+		//changed by TB below
+		m_statistics_changed = true;
+		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
+		m_statistics.push_back(false);
+		calc_statistics();
+		m_crude_percent = m_crude_percent * 8 / 10;
+		break;
+		//end of changed by TB
 	case Completed:
 		m_skipped_programs.erase(program_name);
 		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
-		m_statistics.push_back(result == Completed);
-		if (result == Completed) {
+		m_statistics.push_back(true);
+		//if (result == Completed) {
 			train_workers(game);
-			m_result_buffer[0] = '\0';
-		}
+			//m_result_buffer[0] = '\0';  //changed by TB
+		//}
+		m_crude_percent = m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
 	case Skipped:
 		m_skipped_programs[program_name] = game.get_gametime();
+		//changed by TB below
+		m_crude_percent = m_crude_percent * 98 / 100;
+		//end of changed by TB
 		break;
 	case None:
 		break;

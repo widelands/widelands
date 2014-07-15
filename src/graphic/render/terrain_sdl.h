@@ -17,20 +17,19 @@
  *
  */
 
-#ifndef TERRAIN_SDL_H
-#define TERRAIN_SDL_H
+#ifndef WL_GRAPHIC_RENDER_TERRAIN_SDL_H
+#define WL_GRAPHIC_RENDER_TERRAIN_SDL_H
 
 #include <cassert>
 
-#include "constants.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
-#include "graphic/texture.h"
-#include "log.h"
-#include "logic/roadtype.h"
-#include "random.h"
 #include "graphic/render/sdl_surface.h"
-#include "upcast.h"
-#include "vertex.h"
+#include "graphic/render/vertex.h"
+#include "graphic/texture.h"
+#include "logic/roadtype.h"
+#include "random/random.h"
 #include "wui/mapviewpixelconstants.h"
 
 ///Must be a power of two
@@ -161,7 +160,7 @@ template<typename T> static void render_edge_lists
 
 			T * scanline =
 				reinterpret_cast<T *>
-					(static_cast<Uint8 *>(dst.get_pixels()) + y * dst.get_pitch())
+					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 				+
 				leftx;
 
@@ -488,7 +487,7 @@ template<typename T> static void dither_edge_vert
 				 ++i, ++x, tx0 += dty, ty0 -= dtx, rnd0 >>= DITHER_RAND_SHIFT)
 				if ((rnd0 & DITHER_RAND_MASK) <= i && x >= 0 && x < dstw)
 					reinterpret_cast<T *>
-						(static_cast<Uint8 *>(dst.get_pixels())
+						(static_cast<uint8_t *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
 						[x]
@@ -510,7 +509,7 @@ template<typename T> static void dither_edge_vert
 					 &&
 					 x >= 0 && x < dstw)
 					reinterpret_cast<T *>
-						(static_cast<Uint8 *>(dst.get_pixels())
+						(static_cast<uint8_t *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
 						[x]
@@ -668,4 +667,4 @@ template<typename T> static void draw_field_int
 	// FIXME: similar textures may not need dithering
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_TERRAIN_SDL_H

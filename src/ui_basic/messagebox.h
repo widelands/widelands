@@ -17,12 +17,14 @@
  *
  */
 
-#ifndef UI_MESSAGEBOX_H
-#define UI_MESSAGEBOX_H
+#ifndef WL_UI_BASIC_MESSAGEBOX_H
+#define WL_UI_BASIC_MESSAGEBOX_H
+
+#include <memory>
 
 #include <boost/signals2.hpp>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/window.h"
 
 namespace UI {
@@ -65,8 +67,8 @@ struct WLMessageBox : public Window {
 	boost::signals2::signal<void ()> yes;
 	boost::signals2::signal<void ()> no;
 
-	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my) override;
-	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my) override;
+	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
+	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_key(bool down, SDL_keysym code) override;
 
 protected:
@@ -80,4 +82,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_MESSAGEBOX_H

@@ -39,22 +39,18 @@ obj_forbidden_island = {
 obj_capture_ancient_castle = {
    name = "capture_ancient_castle",
    title = _"Capture the Ancient Castle",
-   body = [[• ]] .. _
-[[Defeat Lanissa and capture the ancient castle.]],
+   body = listitem_bullet(_[[Defeat Lanissa and capture the ancient castle.]]),
 }
 
 obj_defeat_erwyn = {
    name = "defeat_erwyn",
    title = _"Defeat Erwyn",
-   body = [[• ]] .. _
-[[Defeat Erwyn. He commands the strongest opposing military force left on this island.]],
+   body = listitem_bullet(_[[Defeat Erwyn. He commands the strongest opposing military force left on this island.]]),
 }
 obj_defeat_jomo = {
    name = "defeat_jomo",
-   title = _"Defeat Jomo",
-   body = [[• ]] .. _
-[[Defeat Jomo. He is taking care of the soldiers’ food supply.]]
-   ,
+   title =_ "Defeat Jomo",
+   body = listitem_bullet(_[[Defeat Jomo. He is taking care of the soldiers’ food supply.]]),
 }
 
 -- =====================

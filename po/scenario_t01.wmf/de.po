@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
 "PO-Revision-Date: 2014-03-14 02:00+0000\n"
 "Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:29+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:29+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: de\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
@@ -400,7 +400,7 @@ msgstr ""
 "unser Krieg, um unsere Heimat zurückzuerobern, eine lange Zeit in Anspruch "
 "nehmen, und es erscheint weise, Vorbereitungen zu treffen."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:133
+#: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
 "I would advise that we obtain stones for the future – who knows what "
 "fortifications we might be forced to build very soon. And – like a gift of "
@@ -411,7 +411,7 @@ msgstr ""
 "werden? Und – wie ein Geschenk des Schicksals – gibt es tatsächlich große "
 "Felsen ganz in der Nähe..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:136
+#: ../../campaigns/t01.wmf/scripting/texts.lua:137
 msgid ""
 "Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead."
@@ -420,11 +420,11 @@ msgstr ""
 "Winter die Stirn zu bieten und können uns auf die Kämpfe vorbereiten, die "
 "vor uns liegen."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:137
+#: ../../campaigns/t01.wmf/scripting/texts.lua:138
 msgid "Victory"
 msgstr "Sieg"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:138
+#: ../../campaigns/t01.wmf/scripting/texts.lua:139
 msgid ""
 "You may continue to play this map if you wish. Otherwise, move on to the "
 "next mission."
@@ -432,16 +432,16 @@ msgstr ""
 "Falls du möchtest, kannst auf dieser Karte weiterspielen. Ansonsten fahre "
 "mit der nächsten Mission fort."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:145
+#: ../../campaigns/t01.wmf/scripting/texts.lua:146
 msgid "In the Night"
 msgstr "In der Nacht"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:146
-#: ../../campaigns/t01.wmf/scripting/texts.lua:154
+#: ../../campaigns/t01.wmf/scripting/texts.lua:147
+#: ../../campaigns/t01.wmf/scripting/texts.lua:155
 msgid "Thron says..."
 msgstr "Thron spricht..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:147
+#: ../../campaigns/t01.wmf/scripting/texts.lua:148
 msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s "
@@ -451,7 +451,7 @@ msgstr ""
 "gegen Norden. Die Feuer brennen noch immer und stillen ihren Hunger an "
 "meines Vaters Erbe."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:148
+#: ../../campaigns/t01.wmf/scripting/texts.lua:149
 msgid ""
 "They are a constant reminder of why we have to hide here... and why we must "
 "return in the end!"
@@ -459,11 +459,11 @@ msgstr ""
 "Sie sind eine beständige Erinnerung, warum wir uns hier verstecken müssen... "
 "und warum wir schließlich zurückkehren müssen!"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:153
+#: ../../campaigns/t01.wmf/scripting/texts.lua:154
 msgid "At the Tomb"
 msgstr "Am Grab"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:155
+#: ../../campaigns/t01.wmf/scripting/texts.lua:156
 msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
@@ -474,7 +474,7 @@ msgstr ""
 "fühlte weder die Stunden, die vorbeizogen, noch den kalten Regen, der vom "
 "dunklen Himmel rieselte..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:156
+#: ../../campaigns/t01.wmf/scripting/texts.lua:157
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me..."
@@ -482,15 +482,15 @@ msgstr ""
 "Es fühlte sich beinahe wie ein Abschied an. Zum ersten Mal fragte ich mich, "
 "was wohl die Zukunft für mich bereithält..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:161
+#: ../../campaigns/t01.wmf/scripting/texts.lua:162
 msgid "The Other Day"
 msgstr "Am nächsten Tag"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:162
+#: ../../campaigns/t01.wmf/scripting/texts.lua:163
 msgid "Thron says thoughtfully..."
 msgstr "Thron sagt nachdenklich..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:163
+#: ../../campaigns/t01.wmf/scripting/texts.lua:164
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer "
 "to home – to strike at the first sign of my brothers’ forces wavering."
@@ -499,7 +499,7 @@ msgstr ""
 "Heimat gelegenen Ort zu ziehen – um beim ersten Anzeichen des Schwankens der "
 "Truppen meines Bruders, zuzuschlagen."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:164
+#: ../../campaigns/t01.wmf/scripting/texts.lua:165
 msgid ""
 "But when I look over the forests I can still see black smoke rising to the "
 "sky. I know – it is too early yet, and what he hopes for will not happen any "
@@ -512,15 +512,15 @@ msgstr ""
 "fürchte das Blutvergießen, das eine zu schnelle Rückkehr sowohl auf unserer "
 "als auch auf der anderen Seite verursachen würde..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:168
+#: ../../campaigns/t01.wmf/scripting/texts.lua:169
 msgid "The Oath"
 msgstr "Der Schwur"
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:169
+#: ../../campaigns/t01.wmf/scripting/texts.lua:170
 msgid "Thron looks furious..."
 msgstr "Thron sieht wütend aus..."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:170
+#: ../../campaigns/t01.wmf/scripting/texts.lua:171
 msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
@@ -530,7 +530,7 @@ msgstr ""
 "verwirrt durch den dunklen Wald lief. Wir hörten mit Schaudern zu, als er "
 "erzählte, welche Schandtaten in Al'thunran stattfinden."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:171
+#: ../../campaigns/t01.wmf/scripting/texts.lua:172
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr ""
 "Hiermit erneuere ich meinen Schwur – Ich werde diesen Wahnsinn beenden, was "
@@ -540,7 +540,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

@@ -21,9 +21,10 @@
 
 #include <cstdio>
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/request.h"
 #include "helper.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -32,7 +33,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 
 namespace Widelands {
@@ -289,7 +289,7 @@ void TrainingSite::update_soldier_request() {
 			m_soldier_request =
 				new Request
 					(*this,
-					 tribe().safe_worker_index("soldier"),
+					 descr().tribe().safe_worker_index("soldier"),
 					 TrainingSite::request_soldier_callback,
 					 wwWORKER);
 

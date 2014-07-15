@@ -19,6 +19,9 @@
 
 #include "logic/ship.h"
 
+#include <memory>
+
+#include "base/deprecated.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
@@ -41,7 +44,7 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "ref_cast.h"
+#include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -50,8 +53,12 @@ Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
-: BobDescr(given_name, gdescname, directory, prof, global_s, &gtribe)
+: BobDescr(given_name, gdescname, &gtribe)
 {
+	{ //  global options
+		Section & idle_s = prof.get_safe_section("idle");
+		add_animation("idle", g_gr->animations().load(directory, idle_s));
+	}
 	m_sail_anims.parse(*this, directory, prof, "sail");
 
 	Section * sinking_s = prof.get_section("sinking");
@@ -345,7 +352,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 	if (m_ship_state == EXP_SCOUTING) {
 		// Check surrounding fields for port buildspaces
 		std::unique_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
-		MapRegion<Area<Coords> > mr(map, Area<Coords>(position, vision_range()));
+		MapRegion<Area<Coords> > mr(map, Area<Coords>(position, descr().vision_range()));
 		bool new_port_space = false;
 		do {
 			if (map.is_port_space(mr.location())) {
@@ -354,7 +361,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// Check whether the maximum theoretical possible NodeCap of the field is of the size big
 				// and whether it can theoretically be a port space
 				if
-					((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
+					((map.get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
 					 ||
 					 map.find_portdock(fc).empty())
 				{
@@ -612,16 +619,16 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					state.ivar1 = 1;
 					start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
 					return;
-				} else { // coast reached
-					m_ship_state = EXP_WAITING;
-					start_task_idle(game, descr().main_animation(), 1500);
-					// Send a message to the player, that a new coast was reached
-					std::string msg_head = _("Coast Reached");
-					std::string msg_body =
-						_("An expedition ship reached a coast and is waiting for further commands.");
-					send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
-					return;
 				}
+				// coast reached
+				m_ship_state = EXP_WAITING;
+				start_task_idle(game, descr().main_animation(), 1500);
+				// Send a message to the player, that a new coast was reached
+				std::string msg_head = _("Coast Reached");
+				std::string msg_body =
+					_("An expedition ship reached a coast and is waiting for further commands.");
+				send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
+				return;
 			}
 			break;
 		}
@@ -652,7 +659,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
 					Partially_Finished_Building::request_builder_callback
-						(game, *cs->get_builder_request(), worker->worker_index(), worker, *cs);
+						(game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
 					m_items.resize(i);
 				}
 			}
@@ -701,7 +708,7 @@ void Ship::set_destination(Game & game, PortDock & pd) {
 }
 
 void Ship::add_item(Game & game, const ShippingItem & item) {
-	assert(m_items.size() < get_capacity());
+	assert(m_items.size() < descr().get_capacity());
 
 	m_items.push_back(item);
 	m_items.back().set_location(game, this);

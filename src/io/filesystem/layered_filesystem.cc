@@ -22,12 +22,11 @@
 #include <cstdio>
 #include <memory>
 
-#include "build_info.h"
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/streamread.h"
-#include "log.h"
-#include "wexception.h"
 
 LayeredFileSystem * g_fs;
 
@@ -36,13 +35,7 @@ LayeredFileSystem::LayeredFileSystem(): m_home(nullptr) {}
 /**
  * Free all sub-filesystems
  */
-LayeredFileSystem::~LayeredFileSystem()
-{
-	while (m_filesystems.size()) {
-		delete m_filesystems.back();
-		m_filesystems.pop_back();
-	}
-	delete m_home;
+LayeredFileSystem::~LayeredFileSystem() {
 }
 
 
@@ -54,38 +47,13 @@ bool LayeredFileSystem::IsWritable() const {
 	return true;
 }
 
-/**
- * Add a new filesystem to the top of the stack.
- * Take ownership of the given filesystem.
- * \todo throw on failure
- */
-void LayeredFileSystem::AddFileSystem(FileSystem & fs)
-{
-	//only add it to the stack if there isn't a conflicting version file in
-	//the directory
-	if (!FindConflictingVersionFile(fs)) {
-		m_filesystems.push_back(&fs);
-	} else {
-		delete &fs;
-		log("File system NOT added\n");
-	}
+void LayeredFileSystem::AddFileSystem(FileSystem* fs) {
+	m_filesystems.emplace_back(fs);
 }
 
-/**
- * Set the home filesystem (which is the preferred filesystem for writing
- * files). Take ownership of the given filesystem.
- */
-void LayeredFileSystem::SetHomeFileSystem(FileSystem & fs)
+void LayeredFileSystem::SetHomeFileSystem(FileSystem * fs)
 {
-	delete m_home;
-	m_home = nullptr;
-
-	if (!FindConflictingVersionFile(fs)) {
-		m_home = &fs;
-	} else {
-		delete &fs;
-		log("File system NOT added\n");
-	}
+	m_home.reset(fs);
 }
 
 /**
@@ -94,90 +62,11 @@ void LayeredFileSystem::SetHomeFileSystem(FileSystem & fs)
  */
 void LayeredFileSystem::RemoveFileSystem(const FileSystem & fs)
 {
-	if (m_filesystems.back() != &fs)
+	if (m_filesystems.back().get() != &fs)
 		throw std::logic_error
 			("LayeredFileSystem::RemoveFileSystem: interspersed add/remove "
 			 "detected!");
 	m_filesystems.pop_back();
-}
-
-bool LayeredFileSystem::m_read_version_from_version_file
-	(FileSystem & fs, std::string * rv)
-{
-	FileRead fr;
-	if (fr.TryOpen(fs, "VERSION")) {
-		if (!fr.EndOfFile()) {
-			std::string version = fr.CString();
-			// Truncate extra information like branch name , (debug)
-			version = version.substr(0, build_id().size());
-			*rv = version;
-		} else
-			*rv = std::string();
-		return true;
-	}
-	return false;
-}
-
-/**
- * Check if there is a 'version' file with a version lower than minimal version
- * number */
-bool LayeredFileSystem::FindConflictingVersionFile(FileSystem & fs) {
-	std::string version;
-
-	if (m_read_version_from_version_file(fs, &version)) {
-		log
-			("Version file found with id \"%s\" (real \"%s\" )\n",
-			 version.c_str(), build_id().c_str());
-		if (version != build_id()) {
-			log ("not equal strings\n");
-			return true;
-		}
-	}
-	log ("No version file found\n");
-	return false;
-}
-
-/**
- * Check if there is a  'version' file with a version number equal to our
- * current version */
-
-bool LayeredFileSystem::FindMatchingVersionFile(FileSystem & fs) {
-	std::string version;
-
-	if (m_read_version_from_version_file(fs, &version))
-		if (version == build_id())
-			return true;
-
-	return false;
-}
-
-/**
- * PutRightVersionOnTop
- *
- * Look through the stack and see if we have a directory with a right version
- * file. if so always put it on top of the stack
- */
-
-void LayeredFileSystem::PutRightVersionOnTop() {
-	for
-		(wl_range<std::vector<FileSystem *> >
-		 i(m_filesystems);
-		 i; ++i)
-	{
-		//check if we matching version file and it's not already on top of
-		//the stack
-		FileSystem & t = **i.current;
-		if (FindMatchingVersionFile(t)) {
-			//TODO: transform this to for loop with range (current, end()-1)
-			std::vector<FileSystem *>::iterator const last = i.get_end() - 1;
-			while (i.current < last) {
-				FileSystem * & target = *i.current;
-				target = *++i.current;
-			}
-			*last = &t;
-			break;
-		}
-	}
 }
 
 /**
@@ -201,19 +90,11 @@ std::set<std::string> LayeredFileSystem::ListDirectory(const std::string& path) 
 				results.insert(*fnit);
 	}
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
-	{
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it) {
 		files = (*it)->ListDirectory(path);
 
-		// need to workaround MSVC++6 issues
-		for
-			(filenameset_t::iterator fnit = files.begin();
-			 fnit != files.end();
-			 ++fnit)
-				results.insert(*fnit);
+		for (filenameset_t::iterator fnit = files.begin(); fnit != files.end(); ++fnit)
+			   results.insert(*fnit);
 	}
 	return results;
 }
@@ -224,10 +105,7 @@ std::set<std::string> LayeredFileSystem::ListDirectory(const std::string& path) 
 bool LayeredFileSystem::FileExists(const std::string & path) {
 	if (m_home and m_home->FileExists(path))
 		return true;
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->FileExists(path))
 			return true;
 
@@ -242,10 +120,7 @@ bool LayeredFileSystem::IsDirectory(const std::string & path) {
 	if (m_home and m_home->IsDirectory(path))
 		return true;
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsDirectory(path))
 			return true;
 
@@ -264,10 +139,7 @@ void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
 	if (m_home && m_home->FileExists(fname))
 		return m_home->Load(fname, length);
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->FileExists(fname))
 			return (*it)->Load(fname, length);
 
@@ -284,10 +156,7 @@ void LayeredFileSystem::Write
 	if (m_home and m_home->IsWritable())
 		return m_home->Write(fname, data, length);
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable())
 			return (*it)->Write(fname, data, length);
 
@@ -302,10 +171,7 @@ StreamRead  * LayeredFileSystem::OpenStreamRead (const std::string & fname) {
 	if (m_home && m_home->FileExists(fname))
 		return m_home->OpenStreamRead(fname);
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->FileExists(fname))
 			return (*it)->OpenStreamRead(fname);
 
@@ -319,10 +185,7 @@ StreamWrite * LayeredFileSystem::OpenStreamWrite(const std::string & fname) {
 	if (m_home && m_home->IsWritable())
 		return m_home->OpenStreamWrite(fname);
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable())
 			return (*it)->OpenStreamWrite(fname);
 
@@ -336,10 +199,7 @@ void LayeredFileSystem::MakeDirectory(const std::string & dirname) {
 	if (m_home && m_home->IsWritable())
 		return m_home->MakeDirectory(dirname);
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable())
 			return (*it)->MakeDirectory(dirname);
 
@@ -353,10 +213,7 @@ void LayeredFileSystem::EnsureDirectoryExists(const std::string & dirname) {
 	if (m_home && m_home->IsWritable())
 		return m_home->EnsureDirectoryExists(dirname);
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable())
 			return (*it)->EnsureDirectoryExists(dirname);
 
@@ -371,10 +228,7 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
 	if (m_home and m_home->IsWritable() and m_home->FileExists(dirname))
 		return m_home->MakeSubFileSystem(dirname);
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable() and (*it)->FileExists(dirname))
 			return (*it)->MakeSubFileSystem(dirname);
 
@@ -389,10 +243,7 @@ FileSystem * LayeredFileSystem::CreateSubFileSystem(const std::string & dirname,
 	if (m_home and m_home->IsWritable() and not m_home->FileExists(dirname))
 		return m_home->CreateSubFileSystem(dirname, type);
 
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable() and not (*it)->FileExists(dirname))
 			return (*it)->CreateSubFileSystem(dirname, type);
 
@@ -410,10 +261,7 @@ void LayeredFileSystem::Unlink(const std::string & file) {
 		m_home->Unlink(file);
 		return;
 	}
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable() and (*it)->FileExists(file)) {
 			(*it)->Unlink(file);
 			return;
@@ -429,10 +277,7 @@ void LayeredFileSystem::Rename
 		m_home->Rename(old_name, new_name);
 		return;
 	}
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable() and (*it)->FileExists(old_name)) {
 			(*it)->Rename(old_name, new_name);
 			return;
@@ -447,10 +292,7 @@ unsigned long long LayeredFileSystem::DiskSpace() {
 	if (m_home) {
 		return m_home->DiskSpace();
 	}
-	for
-		(FileSystem_rit it = m_filesystems.rbegin();
-		 it != m_filesystems.rend();
-		 ++it)
+	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if (*it)
 			return (*it)->DiskSpace();
 	return 0;

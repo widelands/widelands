@@ -206,7 +206,7 @@ function make_spidercloth_production()
    local o = add_obj(obj_spidercloth_production)
 
    while not check_for_buildings(p1, {
-      spiderfarm = 1, goldweaver = 1, ["weaving-mill"] = 1
+      spiderfarm = 1, ["gold-spinning-mill"] = 1, ["weaving-mill"] = 1
    }) do sleep(6273) end
    o.done = true
 

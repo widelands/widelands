@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_TABPANEL_H
-#define UI_TABPANEL_H
+#ifndef WL_UI_BASIC_TABPANEL_H
+#define WL_UI_BASIC_TABPANEL_H
 
 #include <vector>
 
@@ -96,10 +96,10 @@ private:
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove
-		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	void handle_mousein(bool inside) override;
 
 
@@ -109,6 +109,6 @@ private:
 
 	const Image* m_pic_background; ///< picture used to draw background
 };
-};
+}
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_TABPANEL_H

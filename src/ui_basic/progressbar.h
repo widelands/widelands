@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_PROGRESSBAR_H
-#define UI_PROGRESSBAR_H
+#ifndef WL_UI_BASIC_PROGRESSBAR_H
+#define WL_UI_BASIC_PROGRESSBAR_H
 
 #include "ui_basic/panel.h"
 
@@ -61,4 +61,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_PROGRESSBAR_H

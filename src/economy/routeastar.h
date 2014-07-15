@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef ECONOMY_ROUTEASTAR_H
-#define ECONOMY_ROUTEASTAR_H
+#ifndef WL_ECONOMY_ROUTEASTAR_H
+#define WL_ECONOMY_ROUTEASTAR_H
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
 #include "economy/itransport_cost_calculator.h"
 #include "economy/routing_node.h"
 
@@ -183,4 +183,4 @@ struct AStarZeroEstimator {
 
 } // namespace Widelands
 
-#endif // ECONOMY_ROUTEASTAR_H
+#endif  // end of include guard: WL_ECONOMY_ROUTEASTAR_H

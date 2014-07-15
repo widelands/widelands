@@ -13,7 +13,7 @@ raw_stone=1
 miner=1
 
 [aihints]
-mines=granit
+mines=granite
 
 [inputs]
 ration=8
@@ -22,10 +22,10 @@ ration=8
 work=_Work
 
 [work]
-consume=ration
 sleep=20000
+consume=ration
 animate=working 20000
-mine=granit 2 100 5 17
+mine=granite 2 100 5 17
 produce=raw_stone:2
 
 [idle]

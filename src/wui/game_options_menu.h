@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_OPTIONS_MENU_H
-#define GAME_OPTIONS_MENU_H
+#ifndef WL_WUI_GAME_OPTIONS_MENU_H
+#define WL_WUI_GAME_OPTIONS_MENU_H
 
 #include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
@@ -43,8 +43,8 @@ private:
 	UI::Button exit_game;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
-	uint32_t hspacing() const {return 5;};
-	uint32_t vspacing() const {return 5;};
+	uint32_t hspacing() const {return 5;}
+	uint32_t vspacing() const {return 5;}
 
 	/** Returns the horizontal/vertical margin between edge and buttons. */
 	uint32_t hmargin() const {return 2 * hspacing();}
@@ -69,4 +69,4 @@ private:
 	void clicked_exit_game();
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_OPTIONS_MENU_H

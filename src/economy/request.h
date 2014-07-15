@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef REQUEST_H
-#define REQUEST_H
+#ifndef WL_ECONOMY_REQUEST_H
+#define WL_ECONOMY_REQUEST_H
 
+#include "economy/trackptr.h"
 #include "logic/requirements.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "trackptr.h"
 
 class FileRead;
 class FileWrite;
@@ -143,4 +143,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_REQUEST_H

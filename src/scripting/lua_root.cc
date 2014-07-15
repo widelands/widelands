@@ -19,17 +19,21 @@
 
 #include "scripting/lua_root.h"
 
-#include "gamecontroller.h"
-#include "log.h"
+#include <boost/format.hpp>
+
 #include "logic/cmd_luacoroutine.h"
+#include "logic/critter_bob.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
+#include "logic/world/world.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
+#include "scripting/lua_table.h"
 
 using namespace Widelands;
 
@@ -277,6 +281,199 @@ void L_Editor::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 
+
+/* RST
+World
+-----
+
+.. class:: World
+
+	This offers access to the objects in a the widelands world and allows to add
+	new objects.
+*/
+
+const char L_World::className[] = "World";
+const MethodType<L_World> L_World::Methods[] = {
+	METHOD(L_World, new_critter_type),
+	METHOD(L_World, new_editor_immovable_category),
+	METHOD(L_World, new_editor_terrain_category),
+	METHOD(L_World, new_immovable_type),
+	METHOD(L_World, new_resource_type),
+	METHOD(L_World, new_terrain_type),
+	{0, 0},
+};
+const PropertyType<L_World> L_World::Properties[] = {
+	{0, 0, 0},
+};
+
+L_World::L_World(lua_State * /* L */) {
+	// Nothing to do.
+}
+
+void L_World::__persist(lua_State*) {
+	// Nothing to be done.
+}
+void L_World::__unpersist(lua_State*) {
+	// Nothing to be done.
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/* RST
+	.. method:: new_resource_type(table)
+
+		Adds a new resource type that can be in the different maps. Takes a
+		single argument, a table with the descriptions for the resource type. See the
+		files in world/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int L_World::new_resource_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_world()->add_resource_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+
+	return 0;
+}
+
+/* RST
+	.. method:: new_terrain_type(table)
+
+		Adds a new terrain type that can be used in maps. Takes a single
+		argument, a table with the descriptions for the terrain type. See the files in world/
+		for usage examples.
+
+		:returns: :const:`nil`
+*/
+int L_World::new_terrain_type(lua_State * L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_world()->add_terrain_type(table);
+	}
+	catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+
+	return 0;
+}
+
+/* RST
+	.. method:: new_critter_type(table)
+
+		Adds a new critter type that can be used in maps. Takes a single
+		argument, a table with the description. See the files in world/ for usage
+		examples.
+
+		:returns: :const:`nil`
+*/
+int L_World::new_critter_type(lua_State * L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	try {
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_critter_type(table);
+	}
+	catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_immovable_type(table)
+
+		Adds a new immovable type that can be used in maps. Takes a single
+		argument, a table with the description. See the files in world/ for usage
+		examples.
+
+		:returns: :const:`nil`
+*/
+int L_World::new_immovable_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	try {
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_immovable_type(table);
+	}
+	catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_editor_terrain_category(table)
+
+		Adds a new editor category that can be used to classify objects in the
+		world. This will be used to sort them into sub menus in the editor. See
+		usage examples in world/.
+
+		:returns: :const:`nil`
+*/
+int L_World::new_editor_terrain_category(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	try {
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_editor_terrain_category(table);
+	}
+	catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_editor_immovable_category(table)
+
+		Like :func:`new_editor_terrain_category`, but for immovables.
+
+		:returns: :const:`nil`
+*/
+int L_World::new_editor_immovable_category(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	try {
+		LuaTable table(L);
+		get_egbase(L).mutable_world()->add_editor_immovable_category(table);
+	}
+	catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
 const static struct luaL_Reg wlroot [] = {
 	{nullptr, nullptr}
 };
@@ -295,6 +492,7 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 		add_parent<L_Game, LuaBases::L_EditorGameBase>(L);
 		lua_pop(L, 1); // Pop the meta table
 	}
+	register_class<L_World>(L, "", false);
 }
 
-};
+}

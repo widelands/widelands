@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-09 20:14+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-04-16 03:37+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:28+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:28+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "Language: hu\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
@@ -477,8 +477,8 @@ msgid "Ice wars"
 msgstr "Jégháborúk"
 
 #: ../../maps/Ice wars.wmf/elemental:11
-msgid "Autumn follows winter. Some things are frozen, but not the war."
-msgstr "Az őszre tél következik. Van, ami befagy, de nem a háború."
+msgid "Autumn became winter. Some things are frozen, but not the war."
+msgstr ""
 
 #: ../../maps/Ice wars.wmf/elemental:12
 #: ../../maps/Sun of fire.wmf/elemental:12

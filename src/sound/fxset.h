@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FXSET_H
-#define FXSET_H
+#ifndef WL_SOUND_FXSET_H
+#define WL_SOUND_FXSET_H
 
 #include <vector>
 
@@ -47,18 +47,18 @@ struct FXset {
 	FXset(uint8_t priority = PRIO_MEDIUM);
 	~FXset();
 
-	void add_fx(Mix_Chunk * fx, Uint8 prio = PRIO_MEDIUM);
+	void add_fx(Mix_Chunk * fx, uint8_t prio = PRIO_MEDIUM);
 	Mix_Chunk * get_fx();
-	bool empty() {return m_fxs.empty();}
+	bool empty() {return fxs_.empty();}
 
 protected:
 	/// The collection of sound effects
-	std::vector<Mix_Chunk *> m_fxs;
+	std::vector<Mix_Chunk *> fxs_;
 
 	/** When the effect was played the last time (milliseconds since SDL
 	 * initialization). Set via SDL_GetTicks()
 	 */
-	Uint32 m_last_used;
+	uint32_t last_used_;
 
 	/** How important is it to play the effect even when others are running
 	 * already?
@@ -71,7 +71,7 @@ protected:
 	 *
 	 * Value 255: always play; unconditional
 	 */
-	uint8_t m_priority;
+	uint8_t priority_;
 };
 
-#endif
+#endif  // end of include guard: WL_SOUND_FXSET_H

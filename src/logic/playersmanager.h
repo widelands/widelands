@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef PLAYERSMANAGER_H
-#define PLAYERSMANAGER_H
+#ifndef WL_LOGIC_PLAYERSMANAGER_H
+#define WL_LOGIC_PLAYERSMANAGER_H
 
 #include <string>
 #include <vector>
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -102,4 +102,4 @@ private:
 };
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PLAYERSMANAGER_H

@@ -22,12 +22,11 @@
 #include <clocale>
 #include <cstdio>
 
-#include <libintl.h>
-
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "i18n.h"
-#include "log.h"
 #include "logic/battle.h"
 #include "logic/editor_game_base.h"
 #include "logic/findbob.h"
@@ -38,7 +37,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -195,7 +193,7 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), get_conquers())),
+			 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())),
 			 m_defeating_player);
 
 	ProductionSite::cleanup(egbase);
@@ -244,7 +242,7 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 			send_message
 				(*game,
 				 "site_occupied",
-				 descname(),
+				 descr().descname(),
 				 descr().m_occupied_str,
 				 true);
 		}
@@ -392,7 +390,7 @@ void MilitarySite::update_normal_soldier_request()
 			m_normal_soldier_request.reset
 				(new Request
 					(*this,
-					 tribe().safe_worker_index("soldier"),
+					 descr().tribe().safe_worker_index("soldier"),
 					 MilitarySite::request_soldier_callback,
 					 wwWORKER));
 			m_normal_soldier_request->set_requirements (m_soldier_requirements);
@@ -448,7 +446,7 @@ void MilitarySite::update_upgrade_soldier_request()
 		m_upgrade_soldier_request.reset
 				(new Request
 				(*this,
-				tribe().safe_worker_index("soldier"),
+				descr().tribe().safe_worker_index("soldier"),
 				MilitarySite::request_soldier_callback,
 				wwWORKER));
 
@@ -605,7 +603,7 @@ void MilitarySite::remove_worker(Worker & w)
 	ProductionSite::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w))
-		popSoldierJob(soldier, nullptr, nullptr);
+		popSoldierJob(soldier, nullptr);
 
 	update_soldier_request();
 }
@@ -625,20 +623,19 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 		}
 
 		bool stayhome;
-		uint8_t retreat;
 		if
 			(Map_Object * const enemy
 			 =
-			 popSoldierJob(soldier, &stayhome, &retreat))
+			 popSoldierJob(soldier, &stayhome))
 		{
 			if (upcast(Building, building, enemy)) {
 				soldier->start_task_attack
-					(game, *building, retreat);
+					(game, *building);
 				return true;
 			} else if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->getBattle()) {
 					soldier->start_task_defense
-						(game, stayhome, retreat);
+						(game, stayhome);
 					if (stayhome)
 						opponent->send_signal(game, "sleep");
 					return true;
@@ -737,7 +734,7 @@ void MilitarySite::conquer_area(Editor_Game_Base & egbase) {
 		(Player_Area<Area<FCoords> >
 		 	(owner().player_number(),
 		 	 Area<FCoords>
-		 	 	(egbase.map().get_fcoords(get_position()), get_conquers())));
+		 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())));
 	m_didconquer = true;
 }
 
@@ -754,7 +751,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 	if
 		(enemy.get_owner() == &owner() ||
 		 enemy.getBattle() ||
-		 get_conquers()
+		 descr().get_conquers()
 		 <=
 		 map.calc_distance(enemy.get_position(), get_position()))
 		return;
@@ -778,7 +775,6 @@ void MilitarySite::aggressor(Soldier & enemy)
 				sj.soldier  = *i.current;
 				sj.enemy = &enemy;
 				sj.stayhome = false;
-				sj.retreat = owner().get_retreat_percentage();
 				m_soldierjobs.push_back(sj);
 				(*i.current)->update_task_buildingwork(game);
 				return;
@@ -822,7 +818,6 @@ bool MilitarySite::attack(Soldier & enemy)
 		sj.soldier = defender;
 		sj.enemy = &enemy;
 		sj.stayhome = true;
-		sj.retreat = 0;         // Flag defenders could not retreat
 		m_soldierjobs.push_back(sj);
 
 		defender->update_task_buildingwork(game);
@@ -866,7 +861,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
 		for (Building_Index former_idx : m_old_buildings) {
-			const Building_Descr * old_descr = tribe().get_building_descr(former_idx);
+			const Building_Descr * old_descr = descr().tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
 			std::string::size_type const dot = bldname.rfind('.');
@@ -967,7 +962,7 @@ void MilitarySite::clear_requirements ()
 }
 
 void MilitarySite::sendAttacker
-	(Soldier & soldier, Building & target, uint8_t retreat)
+	(Soldier & soldier, Building & target)
 {
 	assert(isPresent(soldier));
 
@@ -978,7 +973,6 @@ void MilitarySite::sendAttacker
 	sj.soldier  = &soldier;
 	sj.enemy    = &target;
 	sj.stayhome = false;
-	sj.retreat  = retreat;
 	m_soldierjobs.push_back(sj);
 
 	soldier.update_task_buildingwork
@@ -1001,15 +995,13 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
  * to attack, and remove the job.
  */
 Map_Object * MilitarySite::popSoldierJob
-	(Soldier * const soldier, bool * const stayhome, uint8_t * const retreat)
+	(Soldier * const soldier, bool * const stayhome)
 {
 	container_iterate(std::vector<SoldierJob>, m_soldierjobs, i)
 		if (i.current->soldier == soldier) {
 			Map_Object * const enemy = i.current->enemy.get(owner().egbase());
 			if (stayhome)
 				*stayhome = i.current->stayhome;
-			if (retreat)
-				*retreat = i.current->retreat;
 			m_soldierjobs.erase(i.current);
 			return enemy;
 		}

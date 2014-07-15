@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef REPLAY_H
-#define REPLAY_H
+#ifndef WL_LOGIC_REPLAY_H
+#define WL_LOGIC_REPLAY_H
 
 /**
  * Allow players to watch previous game in a platform-independent way.
@@ -82,4 +82,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_REPLAY_H

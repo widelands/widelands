@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef LUA_ROOT_H
-#define LUA_ROOT_H
+#ifndef WL_SCRIPTING_LUA_ROOT_H
+#define WL_SCRIPTING_LUA_ROOT_H
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
+#include "third_party/eris/lua.hpp"
 
 namespace LuaRoot {
 
@@ -92,7 +92,37 @@ public:
 	 */
 };
 
+class L_World : public L_RootModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_World);
+	const char * get_modulename() override {return "";}
+
+	L_World() {}
+	L_World(lua_State * L);
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+	int new_critter_type(lua_State* L);
+	int new_editor_immovable_category(lua_State* L);
+	int new_editor_terrain_category(lua_State* L);
+	int new_immovable_type(lua_State* L);
+	int new_resource_type(lua_State* L);
+	int new_terrain_type(lua_State* L);
+
+	/*
+	 * C methods
+	 */
+};
+
 void luaopen_wlroot(lua_State *, bool in_editor);
 
-#endif
-};
+#endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
+}

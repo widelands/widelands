@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef WORKER_PROGRAM_H
-#define WORKER_PROGRAM_H
+#ifndef WL_LOGIC_WORKER_PROGRAM_H
+#define WL_LOGIC_WORKER_PROGRAM_H
 
 #include "logic/bob.h"
-#include "workarea_info.h"
+#include "logic/workarea_info.h"
 #include "logic/worker.h"
 
 namespace Widelands {
@@ -169,4 +169,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_PROGRAM_H

@@ -37,6 +37,7 @@ worker=harvest
 call=plant_corn
 call=harvest_corn
 playFX=../../../sound/farm/farm_animal 192
+return=skipped
 
 [idle]
 pics=farm_i_??.png  # ???

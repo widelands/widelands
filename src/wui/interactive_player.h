@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERACTIVE_PLAYER_H
-#define INTERACTIVE_PLAYER_H
+#ifndef WL_WUI_INTERACTIVE_PLAYER_H
+#define WL_WUI_INTERACTIVE_PLAYER_H
 
 #include <vector>
 
@@ -111,4 +111,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H

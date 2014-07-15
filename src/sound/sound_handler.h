@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOUND_HANDLER_H
-#define SOUND_HANDLER_H
+#ifndef WL_SOUND_SOUND_HANDLER_H
+#define WL_SOUND_SOUND_HANDLER_H
 
 #include <cstring>
 #include <map>
@@ -29,9 +29,9 @@
 #include <unistd.h>
 #endif
 
-#include "sound/fxset.h"
 #include "logic/widelands_geometry.h"
-#include "random.h"
+#include "random/random.h"
+#include "sound/fxset.h"
 
 namespace Widelands {class Editor_Game_Base;}
 struct Songset;
@@ -163,6 +163,10 @@ extern class Sound_Handler g_sound_handler;
  * \todo accommodate runtime changes of i18n language
  * \todo ? accommodate sound activation if it was disabled at the beginning
 */
+// This is used for SDL UserEvents to be handled in the main loop.
+enum {
+	CHANGE_MUSIC
+};
 class Sound_Handler
 {
 	friend struct Songset;
@@ -221,7 +225,7 @@ public:
 	/** The game logic where we can get a mapping from logical to screen
 	 * coordinates and vice vers
 	*/
-	Widelands::Editor_Game_Base * m_egbase;
+	Widelands::Editor_Game_Base * egbase_;
 
 	/** Only for buffering the command line option --nosound until real initialization is done.
 	 *  And disabling sound on dedicated servers
@@ -229,13 +233,13 @@ public:
 	 * \see Sound_Handler::init()
 	 * \todo This is ugly. Find a better way to do it
 	*/
-	bool m_nosound;
+	bool nosound_;
 
-	/** Can m_disable_music and m_disable_fx be changed?
+	/** Can disable_music_ and disable_fx_ be changed?
 	 * true = they mustn't be changed (e.g. because hardware is missing)
 	 * false = can be changed at user request
 	*/
-	bool m_lock_audio_disabling;
+	bool lock_audio_disabling_;
 
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead &);
@@ -247,46 +251,46 @@ protected:
 		 uint8_t             priority);
 
 	/// Whether to disable background music
-	bool m_disable_music;
+	bool disable_music_;
 	/// Whether to disable sound effects
-	bool m_disable_fx;
+	bool disable_fx_;
 	/// Volume of music (from 0 to get_max_volume())
-	int32_t m_music_volume;
+	int32_t music_volume_;
 	/// Volume of sound effects (from 0 to get_max_volume())
-	int32_t m_fx_volume;
+	int32_t fx_volume_;
 
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside
 	 * their FXset, of course.
 	*/
-	bool m_random_order;
+	bool random_order_;
 
 	/// A collection of songsets
 	typedef std::map<std::string, Songset *> Songset_map;
-	Songset_map m_songs;
+	Songset_map songs_;
 
 	/// A collection of effect sets
 	typedef std::map<std::string, FXset *> FXset_map;
-	FXset_map m_fxs;
+	FXset_map fxs_;
 
 	/// List of currently playing effects, and the channel each one is on
-	/// Access to this variable is protected through m_fx_lock mutex.
+	/// Access to this variable is protected through fx_lock_ mutex.
 	typedef std::map<uint32_t, std::string> Activefx_map;
-	Activefx_map m_active_fx;
+	Activefx_map active_fx_;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now.
 	*/
-	std::string m_current_songset;
+	std::string current_songset_;
 
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game
 	 * logic!
 	*/
-	RNG m_rng;
+	RNG rng_;
 
-	/// Protects access to m_active_fx between callbacks and main code.
-	SDL_mutex * m_fx_lock;
+	/// Protects access to active_fx_ between callbacks and main code.
+	SDL_mutex * fx_lock_;
 };
 
-#endif
+#endif  // end of include guard: WL_SOUND_SOUND_HANDLER_H

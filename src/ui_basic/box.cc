@@ -23,9 +23,9 @@
 
 #include <boost/bind.hpp>
 
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "ui_basic/scrollbar.h"
-#include "wexception.h"
 
 namespace UI {
 /**

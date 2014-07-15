@@ -17,14 +17,15 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_OBJECT_PACKET_H
-#define WIDELANDS_MAP_OBJECT_PACKET_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_OBJECT_PACKET_H
+#define WL_MAP_IO_WIDELANDS_MAP_OBJECT_PACKET_H
 
 #include <set>
 
 #include "logic/instances.h"
 
 class FileSystem;
+class OneWorldLegacyLookupTable;
 
 namespace Widelands {
 
@@ -53,7 +54,9 @@ struct Map_Object_Packet {
 
 	~Map_Object_Packet();
 
-	void Read (FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader &);
+	void Read
+		(FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader &,
+		 const OneWorldLegacyLookupTable& lookup_table);
 
 	void LoadFinish();
 
@@ -62,4 +65,4 @@ struct Map_Object_Packet {
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_OBJECT_PACKET_H

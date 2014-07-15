@@ -21,6 +21,7 @@
 
 #include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "map_io/coords_profile.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
@@ -149,7 +150,7 @@ void Map_Players_Messages_Data_Packet::Read
 						 	 duration,
 						 	 s->get_name       (),
 						 	 s->get_safe_string("body"),
-						 	 s->get_Coords     ("position", extent, Coords::Null()),
+							 get_coords("position", extent, Coords::Null(), s),
 							 serial,
 						 	 status));
 					//  Expiration is scheduled for all messages (with finite
@@ -222,7 +223,7 @@ void Map_Players_Messages_Data_Packet::Write
 			}
 			s.set_string   ("body",      message.body    ());
 			if (Coords const c =         message.position())
-				s.set_Coords("position",  c);
+				set_coords("position",  c, &s);
 			switch (message.status()) {
 			case Message::New:
 				s.set_string("status",    "new");

@@ -17,11 +17,24 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
-#define WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
+#define WL_MAP_IO_WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
 
-#include "map_io/widelands_map_data_packet.h"
+#include <string>
 
-MAP_DATA_PACKET(Map_Terrain_Data_Packet);
+class OneWorldLegacyLookupTable;
+class FileSystem;
 
-#endif
+namespace Widelands {
+
+class Editor_Game_Base;
+
+class Map_Terrain_Data_Packet {
+public:
+	void Read(FileSystem&, Editor_Game_Base&, const OneWorldLegacyLookupTable& lookup_table);
+	void Write(FileSystem&, Editor_Game_Base&);
+};
+
+}
+
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_TERRAIN_DATA_PACKET_H

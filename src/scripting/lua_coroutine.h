@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef LUA_COROUTINE_H
-#define LUA_COROUTINE_H
+#ifndef WL_SCRIPTING_LUA_COROUTINE_H
+#define WL_SCRIPTING_LUA_COROUTINE_H
 
 #include <stdint.h>
 
-#include "scripting/eris/lua.hpp"
+#include "third_party/eris/lua.hpp"
 
 class FileRead;
 class FileWrite;
@@ -74,4 +74,4 @@ private:
 	uint32_t m_nargs;
 };
 
-#endif /* end of include guard: LUA_COROUTINE_H */
+#endif  // end of include guard: WL_SCRIPTING_LUA_COROUTINE_H

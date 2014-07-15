@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-30 14:10+0000\n"
-"PO-Revision-Date: 2014-03-13 01:29+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"PO-Revision-Date: 2014-05-31 13:44+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-31 05:30+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-06-12 05:30+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -80,7 +80,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Postav důlní infrastrukturu"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:60
 msgid ""
@@ -103,7 +103,7 @@ msgstr "Postav pevnost na východ od hor."
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
 #: ../../campaigns/t03.wmf/scripting/texts.lua:76
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Postav tréningovou infrastrukturu"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:77
 #: ../../campaigns/t03.wmf/scripting/texts.lua:106
@@ -170,7 +170,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid "The attributes are: health points, attack, defense and evade."
-msgstr ""
+msgstr "Atributy jsou: zdraví, útok, obrana a vyhnutí se."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:116
 #: ../../campaigns/t03.wmf/scripting/texts.lua:118
@@ -616,7 +616,7 @@ msgstr ""
 "V ruinách jsem naštěstí nenašel žádné civilisty, ani muže ani ženy, a tak "
 "doufám, že se před bitvou všichni stihli přesunout někam do bezpečí."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:374
+#: ../../campaigns/t03.wmf/scripting/texts.lua:375
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to ever see "
@@ -633,11 +633,11 @@ msgstr ""
 "obnovou. Nemohu se dočkat, až jej opět uvidím v celé své kráse jako za "
 "starých časů."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:379
+#: ../../campaigns/t03.wmf/scripting/texts.lua:380
 msgid "Victory"
 msgstr "Vítězství"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:380
+#: ../../campaigns/t03.wmf/scripting/texts.lua:381
 msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
@@ -645,11 +645,11 @@ msgstr ""
 "Splnil jsi poslední misi barbarského tréninkového tažení. Pokud chceš, můžeš "
 "pokračovat ve hraní, jinak je čas posunout se do další kampaně."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:386
+#: ../../campaigns/t03.wmf/scripting/texts.lua:387
 msgid "Military Assault"
 msgstr "Vojenský útok"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:388
+#: ../../campaigns/t03.wmf/scripting/texts.lua:389
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -659,7 +659,7 @@ msgstr ""
 "první úderné skupiny. Pojedu po jeho boku a společně osvobodíme Al’thunran "
 "od války a přineseme do našeho města opět mír."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:390
+#: ../../campaigns/t03.wmf/scripting/texts.lua:391
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -670,15 +670,15 @@ msgstr ""
 "soumraku oslavím naše vítězství v dřevěných síních válečníků a obětuji "
 "novorozené jehně na počest svého otce, který mě dnes bude sledovat."
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:394
+#: ../../campaigns/t03.wmf/scripting/texts.lua:395
 msgid "So be it!"
 msgstr "Budiž tedy!"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:399
+#: ../../campaigns/t03.wmf/scripting/texts.lua:400
 msgid "Khantrukh says:"
 msgstr "Khantrukh hovoří:"
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:401
+#: ../../campaigns/t03.wmf/scripting/texts.lua:402
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
@@ -690,10 +690,11 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
-#: ../../scripting/format_scenario.lua:80
+#: ../../scripting/format_scenario.lua:92
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nový úkol"
+msgstr[1] "Nové úkoly"
+msgstr[2] "Nové úkoly"

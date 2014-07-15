@@ -21,9 +21,9 @@
 
 #include <boost/lexical_cast.hpp>
 
+#include "base/macros.h"
 #include "logic/building.h"
 #include "ui_basic/window.h"
-#include "upcast.h"
 
 using Widelands::Building;
 

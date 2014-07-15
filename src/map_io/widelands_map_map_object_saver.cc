@@ -19,7 +19,8 @@
 
 #include "map_io/widelands_map_map_object_saver.h"
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
 #include "economy/portdock.h"
@@ -29,7 +30,6 @@
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/ware_descr.h"
-#include "wexception.h"
 
 namespace Widelands {
 

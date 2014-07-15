@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_DECREASE_HEIGHT_TOOL_H
-#define EDITOR_DECREASE_HEIGHT_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_DECREASE_HEIGHT_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_DECREASE_HEIGHT_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 
@@ -27,11 +27,15 @@ struct Editor_Decrease_Height_Tool : public Editor_Tool {
 	Editor_Decrease_Height_Tool() : Editor_Tool(*this, *this), m_change_by(1) {}
 
 	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		(Widelands::Map & map,
+		 const Widelands::World& world,
+		 Widelands::Node_and_Triangle<> center,
 		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
 	int32_t handle_undo_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		(Widelands::Map & map,
+		 const Widelands::World& world,
+		 Widelands::Node_and_Triangle<> center,
 		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
@@ -47,4 +51,4 @@ private:
 	int32_t m_change_by;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_DECREASE_HEIGHT_TOOL_H

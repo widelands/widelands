@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SOLDIERCONTROL_H
-#define SOLDIERCONTROL_H
+#ifndef WL_LOGIC_SOLDIERCONTROL_H
+#define WL_LOGIC_SOLDIERCONTROL_H
 
 #include <vector>
 
@@ -116,4 +116,4 @@ protected:
 
 }
 
-#endif // SOLDIERCONTROL_H
+#endif  // end of include guard: WL_LOGIC_SOLDIERCONTROL_H

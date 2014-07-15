@@ -32,7 +32,6 @@
 #include <string>
 #include <vector>
 
-#include <config.h>
 #ifdef _WIN32
 #include <direct.h>
 #include <io.h>
@@ -44,11 +43,12 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "base/log.h"
+#include "config.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
-#include "log.h"
 
 #ifdef _WIN32
 #define stat _stat
@@ -178,13 +178,13 @@ std::string FileSystem::GetHomedir()
 #endif
 
 	if (homedir.empty()) {
-		printf
+		log
 			("\nWARNING: either we can not detect your home directory "
 			 "or you do not have one! Please contact the developers.\n\n");
 
 		//TODO: is it really a good idea to set homedir to "." then ??
 
-		printf("Instead of your home directory, '.' will be used.\n\n");
+		log("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
 	}
 

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_MAP_H
-#define LUA_MAP_H
+#ifndef WL_SCRIPTING_LUA_MAP_H
+#define WL_SCRIPTING_LUA_MAP_H
 
 #include <set>
 
@@ -34,8 +34,8 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
+#include "third_party/eris/lua.hpp"
 
 
 namespace Widelands {
@@ -129,6 +129,7 @@ public:
 	 */
 	int __eq(lua_State * L);
 	int remove(lua_State * L);
+	int destroy(lua_State * L);
 	int has_attribute(lua_State * L);
 
 	/*
@@ -162,7 +163,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(BaseImmovable);
+	CASTED_GET(BaseImmovable)
 };
 
 class L_PlayerImmovable : public L_BaseImmovable {
@@ -188,7 +189,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(PlayerImmovable);
+	CASTED_GET(PlayerImmovable)
 };
 
 class L_PortDock : public L_PlayerImmovable {
@@ -212,7 +213,7 @@ public:
 	/*
 	 * C methods
 	 */
-	CASTED_GET(PortDock);
+	CASTED_GET(PortDock)
 };
 
 class L_Building : public L_PlayerImmovable {
@@ -238,7 +239,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Building);
+	CASTED_GET(Building)
 };
 
 class L_Flag : public L_PlayerImmovable {
@@ -264,7 +265,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Flag);
+	CASTED_GET(Flag)
 };
 
 class L_Road : public L_PlayerImmovable {
@@ -295,7 +296,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Road);
+	CASTED_GET(Road)
 	static int create_new_worker
 			(Widelands::PlayerImmovable &,
 			 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
@@ -325,7 +326,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(ConstructionSite);
+	CASTED_GET(ConstructionSite)
 };
 
 
@@ -358,7 +359,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Warehouse);
+	CASTED_GET(Warehouse)
 };
 
 
@@ -389,7 +390,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(ProductionSite);
+	CASTED_GET(ProductionSite)
 	static int create_new_worker
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
 		 const Widelands::Worker_Descr *);
@@ -419,7 +420,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(MilitarySite);
+	CASTED_GET(MilitarySite)
 };
 
 
@@ -447,7 +448,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(TrainingSite);
+	CASTED_GET(TrainingSite)
 };
 
 class L_Bob : public L_MapObject {
@@ -471,7 +472,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Bob);
+	CASTED_GET(Bob)
 };
 
 class L_Worker : public L_Bob {
@@ -496,7 +497,7 @@ public:
 	/*
 	 * C methods
 	 */
-	CASTED_GET(Worker);
+	CASTED_GET(Worker)
 };
 
 class L_Soldier : public L_Worker {
@@ -523,7 +524,7 @@ public:
 	/*
 	 * C methods
 	 */
-	CASTED_GET(Soldier);
+	CASTED_GET(Soldier)
 };
 
 class L_Ship : public L_Bob {
@@ -551,7 +552,7 @@ public:
 	/*
 	 * C methods
 	 */
-	CASTED_GET(Ship);
+	CASTED_GET(Ship)
 };
 #undef CASTED_GET
 
@@ -661,4 +662,4 @@ void luaopen_wlmap(lua_State *);
 
 }  // namespace LuaMap
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_MAP_H

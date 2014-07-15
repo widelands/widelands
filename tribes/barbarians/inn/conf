@@ -30,15 +30,15 @@ work=_Work
 
 [produce_ration]
 return=skipped unless economy needs ration
-consume=fish,pittabread,meat
 sleep=14000
+consume=fish,pittabread,meat
 animate=working 19000
 produce=ration
 
 [produce_snack]
 return=skipped unless economy needs snack
-consume=pittabread fish,meat beer
 sleep=15000
+consume=pittabread fish,meat beer
 animate=working 20000
 produce=snack
 

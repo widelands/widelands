@@ -28,12 +28,13 @@
 #include <windows.h>
 #endif
 
+#include "base/deprecated.h"
+#include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "profile/profile.h"
@@ -58,16 +59,16 @@ Sound_Handler g_sound_handler;
  * \sa Sound_Handler::init()
 */
 Sound_Handler::Sound_Handler():
-	m_egbase              (nullptr),
-	m_nosound             (false),
-	m_lock_audio_disabling(false),
-	m_disable_music       (false),
-	m_disable_fx          (false),
-	m_music_volume        (MIX_MAX_VOLUME),
-	m_fx_volume           (MIX_MAX_VOLUME),
-	m_random_order        (true),
-	m_current_songset     (""),
-	m_fx_lock             (nullptr)
+	egbase_              (nullptr),
+	nosound_             (false),
+	lock_audio_disabling_(false),
+	disable_music_       (false),
+	disable_fx_          (false),
+	music_volume_        (MIX_MAX_VOLUME),
+	fx_volume_           (MIX_MAX_VOLUME),
+	random_order_        (true),
+	current_songset_     (""),
+	fx_lock_             (nullptr)
 {}
 
 /// Housekeeping: unset hooks. Audio data will be freed automagically by the
@@ -75,13 +76,13 @@ Sound_Handler::Sound_Handler():
 /// themselves.
 Sound_Handler::~Sound_Handler()
 {
-	container_iterate_const  (FXset_map, m_fxs,   i) delete i.current->second;
-	container_iterate_const(Songset_map, m_songs, i) delete i.current->second;
+	container_iterate_const  (FXset_map, fxs_,   i) delete i.current->second;
+	container_iterate_const(Songset_map, songs_, i) delete i.current->second;
 
-	if (m_fx_lock)
+	if (fx_lock_)
 	{
-		SDL_DestroyMutex(m_fx_lock);
-		m_fx_lock = nullptr;
+		SDL_DestroyMutex(fx_lock_);
+		fx_lock_ = nullptr;
 	}
 }
 
@@ -94,7 +95,7 @@ Sound_Handler::~Sound_Handler()
 void Sound_Handler::init()
 {
 	read_config();
-	m_rng.seed(SDL_GetTicks());
+	rng_.seed(SDL_GetTicks());
 	//this RNG will still be somewhat predictable, but it's just to avoid
 	//identical playback patterns
 
@@ -107,11 +108,11 @@ void Sound_Handler::init()
 	const uint16_t bufsize = 1024;
 #endif
 
-	if (m_nosound)
+	if (nosound_)
 	{
 		set_disable_music(true);
 		set_disable_fx(true);
-		m_lock_audio_disabling = true;
+		lock_audio_disabling_ = true;
 		return;
 	}
 
@@ -125,16 +126,16 @@ void Sound_Handler::init()
 
 		set_disable_music(true);
 		set_disable_fx(true);
-		m_lock_audio_disabling = true;
+		lock_audio_disabling_ = true;
 		return;
 	} else {
 		Mix_HookMusicFinished(Sound_Handler::music_finished_callback);
 		Mix_ChannelFinished(Sound_Handler::fx_finished_callback);
 		load_system_sounds();
-		Mix_VolumeMusic(m_music_volume); //  can not do this before InitSubSystem
+		Mix_VolumeMusic(music_volume_); //  can not do this before InitSubSystem
 
-		if (m_fx_lock == nullptr)
-			m_fx_lock = SDL_CreateMutex();
+		if (fx_lock_ == nullptr)
+			fx_lock_ = SDL_CreateMutex();
 	}
 }
 
@@ -144,7 +145,7 @@ void Sound_Handler::shutdown()
 	Mix_HookMusicFinished(nullptr);
 
 	int numtimesopened, frequency, channels;
-	Uint16 format;
+	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 	log
 		("Sound_Handler closing times %i, freq %i, format %i, chan %i\n",
@@ -172,10 +173,10 @@ void Sound_Handler::shutdown()
 	}
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
-	if (m_fx_lock)
+	if (fx_lock_)
 	{
-		SDL_DestroyMutex(m_fx_lock);
-		m_fx_lock = nullptr;
+		SDL_DestroyMutex(fx_lock_);
+		fx_lock_ = nullptr;
 	}
 
 }
@@ -188,17 +189,17 @@ void Sound_Handler::read_config()
 {
 	Section & s = g_options.pull_section("global");
 
-	if (m_nosound) {
+	if (nosound_) {
 		set_disable_music(true);
 		set_disable_fx(true);
 	} else {
 		set_disable_music(s.get_bool("disable_music",      false));
 		set_disable_fx   (s.get_bool("disable_fx",         false));
-		m_music_volume =  s.get_int ("music_volume",       DEFAULT_MUSIC_VOLUME);
-		m_fx_volume    =  s.get_int ("fx_volume",          DEFAULT_FX_VOLUME);
+		music_volume_ =  s.get_int ("music_volume",       DEFAULT_MUSIC_VOLUME);
+		fx_volume_    =  s.get_int ("fx_volume",          DEFAULT_FX_VOLUME);
 	}
 
-	m_random_order    =  s.get_bool("sound_random_order", true);
+	random_order_    =  s.get_bool("sound_random_order", true);
 
 	register_song("music", "intro");
 	register_song("music", "menu");
@@ -229,7 +230,6 @@ void Sound_Handler::load_system_sounds()
  * \param basename   Name from which filenames will be formed
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
- * \internal
 */
 void Sound_Handler::load_fx_if_needed
 	(const std::string & dir,
@@ -241,10 +241,10 @@ void Sound_Handler::load_fx_if_needed
 
 	assert(g_fs);
 
-	if (m_nosound || m_fxs.count(fx_name) > 0)
+	if (nosound_ || fxs_.count(fx_name) > 0)
 		return;
 
-	m_fxs[fx_name] = new FXset();
+	fxs_[fx_name] = new FXset();
 
 	// filename can be relative to dir.
 	const std::string full_path = dir + "/" + filename;
@@ -274,7 +274,7 @@ void Sound_Handler::load_one_fx
 {
 	FileRead fr;
 
-	if (m_nosound)
+	if (nosound_)
 		return;
 
 	if (not fr.TryOpen(*g_fs, path)) {
@@ -288,9 +288,9 @@ void Sound_Handler::load_one_fx
 	{
 		//make sure that requested FXset exists
 
-		assert(m_fxs.count(fx_name) > 0);
+		assert(fxs_.count(fx_name) > 0);
 
-		m_fxs[fx_name]->add_fx(m);
+		fxs_[fx_name]->add_fx(m);
 	} else
 		log
 			("Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" "
@@ -313,19 +313,19 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	//x, y resolutions of game window
 	Widelands::FCoords fposition;
 
-	if (m_nosound)
+	if (nosound_)
 		return -1;
 
-	assert(m_egbase);
+	assert(egbase_);
 	assert(position);
 
-	const Interactive_Base & ibase = *m_egbase->get_ibase();
+	const Interactive_Base & ibase = *egbase_->get_ibase();
 	Point const vp = ibase.get_viewpoint();
 
 	int32_t const xres = g_gr->get_xres();
 	int32_t const yres = g_gr->get_yres();
 
-	MapviewPixelFunctions::get_pix(m_egbase->map(), position, sx, sy);
+	MapviewPixelFunctions::get_pix(egbase_->map(), position, sx, sy);
 	sx -= vp.x;
 	sy -= vp.y;
 
@@ -350,7 +350,7 @@ bool Sound_Handler::play_or_not
 	float evaluation; //temporary to calculate single influences
 	float probability; //weighted total of all influences
 
-	if (m_nosound)
+	if (nosound_)
 		return false;
 
 	//probability that this fx gets played; initially set according to priority
@@ -377,17 +377,17 @@ bool Sound_Handler::play_or_not
 	//find out if an fx called fx_name is already running
 	bool already_running = false;
 
-	// Access to m_active_fx is protected because it can
+	// Access to active_fx_ is protected because it can
 	// be accessed from callback
-	if (m_fx_lock) SDL_LockMutex(m_fx_lock);
-	container_iterate_const(Activefx_map, m_active_fx, i)
+	if (fx_lock_) SDL_LockMutex(fx_lock_);
+	container_iterate_const(Activefx_map, active_fx_, i)
 	{
 		if (i->second == fx_name) {
 			already_running = true;
 			break;
 		}
 	}
-	if (m_fx_lock) SDL_UnlockMutex(m_fx_lock);
+	if (fx_lock_) SDL_UnlockMutex(fx_lock_);
 
 	if (!allow_multiple && already_running)
 		return false;
@@ -397,7 +397,7 @@ bool Sound_Handler::play_or_not
 	//TODO: deal with "coupled" effects like throw_net and retrieve_net
 
 	uint32_t const ticks_since_last_play =
-		SDL_GetTicks() - m_fxs[fx_name]->m_last_used;
+		SDL_GetTicks() - fxs_[fx_name]->last_used_;
 
 	//  reward an fx for being silent
 	if (ticks_since_last_play > SLIDING_WINDOW_SIZE) {
@@ -416,7 +416,7 @@ bool Sound_Handler::play_or_not
 
 	//finally: the decision
 	//  float division! not integer
-	return (m_rng.rand() % 255) / 255.0 <= probability;
+	return (rng_.rand() % 255) / 255.0 <= probability;
 }
 
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s)
@@ -424,14 +424,14 @@ bool Sound_Handler::play_or_not
  * \param fx_name  The identifying name of the sound effect, see \ref load_fx .
  * \param map_position  Map coordinates where the event takes place
  * \param priority      How important is it that this FX actually gets played?
- *         (see \ref FXset::m_priority)
+ *         (see \ref FXset::priority_)
 */
 void Sound_Handler::play_fx
 	(const std::string &       fx_name,
 	 Widelands::Coords   const map_position,
 	 uint8_t             const priority)
 {
-	if (m_nosound)
+	if (nosound_)
 		return;
 
 	play_fx(fx_name, stereo_position(map_position), priority);
@@ -442,14 +442,14 @@ void Sound_Handler::play_fx
  * \param stereo_position  position in widelands' game window, see
  *                         \ref stereo_position
  * \param priority         How important is it that this FX actually gets
- *                         played? (see \ref FXset::m_priority)
+ *                         played? (see \ref FXset::priority_)
 */
 void Sound_Handler::play_fx
 	(const std::string &       fx_name,
 	 int32_t             const stereo_pos,
 	 uint8_t             const priority)
 {
-	if (m_nosound)
+	if (nosound_)
 		return;
 
 	assert(stereo_pos >= -1);
@@ -458,7 +458,7 @@ void Sound_Handler::play_fx
 	if (get_disable_fx())
 		return;
 
-	if (m_fxs.count(fx_name) == 0) {
+	if (fxs_.count(fx_name) == 0) {
 		log
 			("Sound_Handler: sound effect \"%s\" does not exist!\n",
 			 fx_name.c_str());
@@ -470,7 +470,7 @@ void Sound_Handler::play_fx
 		return;
 
 	//  retrieve the fx and play it if it's valid
-	if (Mix_Chunk * const m = m_fxs[fx_name]->get_fx()) {
+	if (Mix_Chunk * const m = fxs_[fx_name]->get_fx()) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
 		if (chan == -1)
 			log("Sound_Handler: Mix_PlayChannel failed\n");
@@ -478,11 +478,11 @@ void Sound_Handler::play_fx
 			Mix_SetPanning(chan, 254 - stereo_pos, stereo_pos);
 			Mix_Volume(chan, get_fx_volume());
 
-			// Access to m_active_fx is protected
+			// Access to active_fx_ is protected
 			// because it can be accessed from callback
-			if (m_fx_lock) SDL_LockMutex(m_fx_lock);
-			m_active_fx[chan] = fx_name;
-			if (m_fx_lock) SDL_UnlockMutex(m_fx_lock);
+			if (fx_lock_) SDL_LockMutex(fx_lock_);
+			active_fx_[chan] = fx_name;
+			if (fx_lock_) SDL_UnlockMutex(fx_lock_);
 
 		}
 	} else
@@ -504,7 +504,7 @@ void Sound_Handler::play_fx
 void Sound_Handler::register_song
 	(const std::string & dir, const std::string & basename)
 {
-	if (m_nosound)
+	if (nosound_)
 		return;
 	assert(g_fs);
 
@@ -517,10 +517,10 @@ void Sound_Handler::register_song
 
 	for (const std::string& filename : files) {
 		assert(!g_fs->IsDirectory(filename));
-		if (m_songs.count(basename) == 0) {
-			m_songs[basename] = new Songset();
+		if (songs_.count(basename) == 0) {
+			songs_[basename] = new Songset();
 		}
-		m_songs[basename]->add_song(filename);
+		songs_[basename]->add_song(filename);
 	}
 }
 
@@ -535,7 +535,7 @@ void Sound_Handler::register_song
 void Sound_Handler::start_music
 	(const std::string & songset_name, int32_t fadein_ms)
 {
-	if (get_disable_music() or m_nosound)
+	if (get_disable_music() or nosound_)
 		return;
 
 	if (fadein_ms == 0) fadein_ms = 250; //  avoid clicks
@@ -543,20 +543,20 @@ void Sound_Handler::start_music
 	if (Mix_PlayingMusic())
 		change_music(songset_name, 0, fadein_ms);
 
-	if (m_songs.count(songset_name) == 0)
+	if (songs_.count(songset_name) == 0)
 		log
 			("Sound_Handler: songset \"%s\" does not exist!\n",
 			 songset_name.c_str());
 	else {
-		if (Mix_Music * const m = m_songs[songset_name]->get_song()) {
+		if (Mix_Music * const m = songs_[songset_name]->get_song()) {
 			Mix_FadeInMusic(m, 1, fadein_ms);
-			m_current_songset = songset_name;
+			current_songset_ = songset_name;
 		} else
 			log
 				("Sound_Handler: songset \"%s\" exists but contains no files!\n",
 				 songset_name.c_str());
 	}
-	Mix_VolumeMusic(m_music_volume);
+	Mix_VolumeMusic(music_volume_);
 }
 
 /** Stop playing a songset.
@@ -565,7 +565,7 @@ void Sound_Handler::start_music
 */
 void Sound_Handler::stop_music(int32_t fadeout_ms)
 {
-	if (get_disable_music() or m_nosound)
+	if (get_disable_music() or nosound_)
 		return;
 
 	if (fadeout_ms == 0) fadeout_ms = 250; //  avoid clicks
@@ -587,15 +587,15 @@ void Sound_Handler::change_music
 	(const std::string & songset_name,
 	 int32_t const fadeout_ms, int32_t const fadein_ms)
 {
-	if (m_nosound)
+	if (nosound_)
 		return;
 
 	std::string s = songset_name;
 
 	if (s == "")
-		s = m_current_songset;
+		s = current_songset_;
 	else
-		m_current_songset = s;
+		current_songset_ = s;
 
 	if (Mix_PlayingMusic())
 		stop_music(fadeout_ms);
@@ -604,15 +604,15 @@ void Sound_Handler::change_music
 }
 
 
-bool Sound_Handler::get_disable_music() const {return m_disable_music;}
-bool Sound_Handler::get_disable_fx   () const {return m_disable_fx;}
+bool Sound_Handler::get_disable_music() const {return disable_music_;}
+bool Sound_Handler::get_disable_fx   () const {return disable_fx_;}
 int32_t  Sound_Handler::get_music_volume() const
 {
-	return m_music_volume;
+	return music_volume_;
 }
 int32_t  Sound_Handler::get_fx_volume() const
 {
-	return m_fx_volume;
+	return fx_volume_;
 }
 
 
@@ -622,15 +622,15 @@ int32_t  Sound_Handler::get_fx_volume() const
  */
 void Sound_Handler::set_disable_music(bool const disable)
 {
-	if (m_lock_audio_disabling || m_disable_music == disable)
+	if (lock_audio_disabling_ || disable_music_ == disable)
 		return;
 
 	if (disable) {
 		stop_music();
-		m_disable_music = true;
+		disable_music_ = true;
 	} else {
-		m_disable_music = false;
-		start_music(m_current_songset);
+		disable_music_ = false;
+		start_music(current_songset_);
 	}
 
 	g_options.pull_section("global").set_bool("disable_music", disable);
@@ -642,10 +642,10 @@ void Sound_Handler::set_disable_music(bool const disable)
 */
 void Sound_Handler::set_disable_fx(bool const disable)
 {
-	if (m_lock_audio_disabling)
+	if (lock_audio_disabling_)
 		return;
 
-	m_disable_fx = disable;
+	disable_fx_ = disable;
 
 	g_options.pull_section("global").set_bool("disable_fx", disable);
 }
@@ -658,8 +658,8 @@ void Sound_Handler::set_disable_fx(bool const disable)
  * \param volume The new music volume.
  */
 void Sound_Handler::set_music_volume(int32_t volume) {
-	if (not m_lock_audio_disabling and not m_nosound) {
-		m_music_volume = volume;
+	if (not lock_audio_disabling_ and not nosound_) {
+		music_volume_ = volume;
 		Mix_VolumeMusic(volume);
 		g_options.pull_section("global").set_int("music_volume", volume);
 	}
@@ -673,8 +673,8 @@ void Sound_Handler::set_music_volume(int32_t volume) {
  * \param volume The new music volume.
  */
 void Sound_Handler::set_fx_volume(int32_t volume) {
-	if (not m_lock_audio_disabling and not m_nosound) {
-		m_fx_volume = volume;
+	if (not lock_audio_disabling_ and not nosound_) {
+		fx_volume_ = volume;
 		Mix_Volume(-1, volume);
 		g_options.pull_section("global").set_int("fx_volume", volume);
 	}
@@ -691,7 +691,7 @@ void Sound_Handler::music_finished_callback()
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
 	SDL_Event event;
-	if (g_sound_handler.m_current_songset == "intro") {
+	if (g_sound_handler.current_songset_ == "intro") {
 		//special case for splashscreen: there, only one song is ever played
 		event.type           = SDL_KEYDOWN;
 		event.key.state      = SDL_PRESSED;
@@ -721,9 +721,9 @@ void Sound_Handler::fx_finished_callback(int32_t const channel)
  */
 void Sound_Handler::handle_channel_finished(uint32_t channel)
 {
-	// Needs locking because m_active_fx may be accessed
+	// Needs locking because active_fx_ may be accessed
 	// from this callback or from main thread
-	if (m_fx_lock) SDL_LockMutex(m_fx_lock);
-	m_active_fx.erase(channel);
-	if (m_fx_lock) SDL_UnlockMutex(m_fx_lock);
+	if (fx_lock_) SDL_LockMutex(fx_lock_);
+	active_fx_.erase(channel);
+	if (fx_lock_) SDL_UnlockMutex(fx_lock_);
 }

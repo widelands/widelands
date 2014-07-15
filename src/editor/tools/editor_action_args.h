@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_ACTION_ARGS_H
-#define EDITOR_ACTION_ARGS_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H
+#define WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H
 
 #include <list>
 #include <string>
@@ -36,6 +36,16 @@ struct Editor_Tool_Action;
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
 struct Editor_Action_Args {
+	Editor_Action_Args(Editor_Interactive & base);
+
+	// TODO(sirver): This class does its own reference counting. This design is
+	// brittle and on a quick overview I have a feeling that it might not be
+	// correct.
+	Editor_Action_Args(const Editor_Action_Args&) = default;
+	Editor_Action_Args& operator = (const Editor_Action_Args&) = default;
+
+	~Editor_Action_Args();
+
 	uint32_t sel_radius;
 
 	int32_t change_by;                                              // resources, hight change tools
@@ -50,9 +60,7 @@ struct Editor_Action_Args {
 
 	std::list<Editor_Tool_Action *> draw_actions;                   // draw tool
 
-	Editor_Action_Args(Editor_Interactive & base);
-	~Editor_Action_Args();
 	uint32_t refcount;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H

@@ -46,9 +46,9 @@ Colormap::Colormap (const SDL_Color & pal, const SDL_PixelFormat & format) {
 			if (g > 255) g = 255;
 			if (b > 255) b = 255;
 
-			const Uint32 value =
+			const uint32_t value =
 				SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), r, g, b);
-			static_cast<Uint32 *>(colormap)[(j << 8) | i] = value;
+			static_cast<uint32_t *>(colormap)[(j << 8) | i] = value;
 		}
 }
 

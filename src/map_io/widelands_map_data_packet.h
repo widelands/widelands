@@ -17,10 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_DATA_PACKET_H
-#define WIDELANDS_MAP_DATA_PACKET_H
-
-#include "wexception.h"
+#ifndef WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H
+#define WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H
 
 class FileSystem;
 
@@ -30,32 +28,15 @@ class Editor_Game_Base;
 class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 
-/** This class represents a data packet in a widelands map file. it is an
- * abstract base class
-*/
-struct Map_Data_Packet {
-	virtual ~Map_Data_Packet() {}
-
-	virtual void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
-
-		= 0;
-	virtual void Write
-		(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
-
-		= 0;
-};
-
 }
 
-#define MAP_DATA_PACKET(name)                                                 \
-namespace Widelands {                                                         \
-struct name : public Map_Data_Packet {                                        \
-   virtual ~name() {}                                                         \
-   void Read                                                                  \
-      (FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &);      \
-   void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &);      \
-};                                                                            \
-}                                                                             \
+#define MAP_DATA_PACKET(name)                                                            \
+	namespace Widelands {                                                            \
+	class name {                                                                     \
+	public:                                                                          \
+		void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&); \
+		void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);       \
+	};                                                                               \
+	}
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H

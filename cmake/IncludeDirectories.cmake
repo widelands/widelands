@@ -1,0 +1,7 @@
+macro(_include_directories_internal TARGET DIR SYSTEM)
+  if (CMAKE_VERSION VERSION_LESS 2.8.12 OR "${SYSTEM}" STREQUAL "FALSE")
+    target_include_directories("${TARGET}" PUBLIC "${DIR}")
+  else ()
+    target_include_directories("${TARGET}" SYSTEM PUBLIC "${DIR}")
+  endif ()
+endmacro(_include_directories_internal TARGET DIR SYSTEM)

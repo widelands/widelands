@@ -21,10 +21,10 @@
 
 #include <boost/bind.hpp>
 
-#include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/richtext.h"
 #include "graphic/wordwrap.h"
+#include "wui/text_constants.h"
 
 namespace UI {
 
@@ -191,7 +191,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 }
 
 bool Multiline_Textarea::handle_mousepress
-	(Uint8 const btn, int32_t const x, int32_t const y)
+	(uint8_t const btn, int32_t const x, int32_t const y)
 {
 	return
 		btn == SDL_BUTTON_WHEELUP or btn == SDL_BUTTON_WHEELDOWN ?

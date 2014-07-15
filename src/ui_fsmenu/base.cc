@@ -21,16 +21,16 @@
 
 #include <cstdio>
 
-#include "constants.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
-#include "log.h"
 #include "profile/profile.h"
-#include "wexception.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
 
 /*
 ==============================================================================

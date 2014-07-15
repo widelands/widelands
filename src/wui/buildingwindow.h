@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _BUILDINGWINDOW_H_
-#define _BUILDINGWINDOW_H_
+#ifndef WL_WUI_BUILDINGWINDOW_H
+#define WL_WUI_BUILDINGWINDOW_H
 
 #include <cstdlib>
 
@@ -93,4 +93,4 @@ private:
 	bool m_avoid_fastclick;
 };
 
-#endif // _BUILDINGWINDOW_H_
+#endif  // end of include guard: WL_WUI_BUILDINGWINDOW_H

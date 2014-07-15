@@ -12,11 +12,9 @@ Contents:
    :maxdepth: 2
 
    development
-   hidden_features
    server
    geometry
    productionsite_program
-   manual_testing
    lua_index
 
 

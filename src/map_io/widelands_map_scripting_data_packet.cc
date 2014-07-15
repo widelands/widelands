@@ -23,6 +23,7 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/macros.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -30,14 +31,14 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 namespace Widelands {
 
 namespace {
-const int SCRIPTING_DATA_PACKET_VERSION = 1;
+const uint32_t SCRIPTING_DATA_PACKET_VERSION = 1;
 }  // namespace
 /*
  * ========================================================================

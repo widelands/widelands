@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_BOX_H
-#define UI_BOX_H
+#ifndef WL_UI_BASIC_BOX_H
+#define WL_UI_BASIC_BOX_H
 
 #include <vector>
 
@@ -114,4 +114,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_BOX_H

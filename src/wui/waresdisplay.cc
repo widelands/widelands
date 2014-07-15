@@ -23,18 +23,18 @@
 
 #include <boost/lexical_cast.hpp>
 
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "text_layout.h"
-#include "wexception.h"
+#include "wui/text_layout.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 
@@ -139,7 +139,7 @@ bool AbstractWaresDisplay::handle_mousepress
 	return UI::Panel::handle_mousepress(btn, x, y);
 }
 
-bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
+bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y)
 {
 	if (btn != SDL_BUTTON_LEFT || m_selection_anchor == Widelands::INVALID_INDEX) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
@@ -297,10 +297,8 @@ const Widelands::Tribe_Descr::WaresOrder & AbstractWaresDisplay::icons_order() c
 	switch (m_type) {
 	case Widelands::wwWARE:
 		return m_tribe.wares_order();
-		break;
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order();
-		break;
 	default:
 		throw wexception("Invalid m_type %d", m_type);
 	}
@@ -311,10 +309,8 @@ const Widelands::Tribe_Descr::WaresOrderCoords & AbstractWaresDisplay::icons_ord
 	switch (m_type) {
 	case Widelands::wwWARE:
 		return m_tribe.wares_order_coords();
-		break;
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order_coords();
-		break;
 	default:
 		throw wexception("Invalid m_type %d", m_type);
 	}

@@ -19,7 +19,10 @@
 
 #include "map_io/widelands_map_saver.h"
 
-#include "log.h"
+#include "base/log.h"
+#include "base/scoped_timer.h"
+#include "base/wexception.h"
+#include "io/filesystem/filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
@@ -49,8 +52,6 @@
 #include "map_io/widelands_map_scripting_data_packet.h"
 #include "map_io/widelands_map_terrain_data_packet.h"
 #include "map_io/widelands_map_version_data_packet.h"
-#include "scoped_timer.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -94,7 +95,7 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Terrain Data ... ");
-	{Map_Terrain_Data_Packet                 p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Terrain_Data_Packet                 p; p.Write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Player Start Position Data ... ");
@@ -109,18 +110,17 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Resources Data ... ");
-	{Map_Resources_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Resources_Data_Packet               p; p.Write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Writing Map Extra Data ... ");
-	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Version ... ");
 	{Map_Version_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
-
 
 
 	const Map & map = m_egbase.map();

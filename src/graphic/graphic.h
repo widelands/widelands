@@ -17,23 +17,21 @@
  *
  */
 
-#ifndef GRAPHIC_H
-#define GRAPHIC_H
+#ifndef WL_GRAPHIC_GRAPHIC_H
+#define WL_GRAPHIC_GRAPHIC_H
 
 #include <map>
 #include <memory>
 #include <vector>
 
 #include <SDL.h>
-#include <png.h>
 
+#include "base/rect.h"
 #include "graphic/image_cache.h"
-#include "rect.h"
 
 #define MAX_RECTS 20
 
 class AnimationManager;
-class ImageLoaderImpl;
 class RenderTarget;
 class Surface;
 class SurfaceCache;
@@ -109,15 +107,14 @@ public:
 
 	void save_png(const Image*, StreamWrite*) const;
 
-	void flush_maptextures();
-	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
+	// Creates a new Texture() with the given 'frametime' and using the given
+	// 'texture_files' as the images for it and returns it id.
+	uint32_t new_maptexture(const std::vector<std::string>& texture_files, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
-	void reset_texture_animation_reminder();
 
 	void screenshot(const std::string& fname) const;
 	Texture * get_maptexture_data(uint32_t id);
 
-	void set_world(std::string);
 	Surface& get_road_texture(int32_t roadtex);
 
 	const GraphicCaps& caps() const {return m_caps;}
@@ -126,18 +123,10 @@ public:
 
 private:
 	void cleanup();
-	void save_png_(Surface & surf, StreamWrite*) const;
 
 	bool m_fallback_settings_in_effect;
 
 protected:
-	// Static helper function for png writing
-	static void m_png_write_function
-		(png_structp png_ptr,
-		 png_bytep data,
-		 png_size_t length);
-	static void m_png_flush_function (png_structp png_ptr);
-
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
 	std::unique_ptr<Surface> screen_;
@@ -157,8 +146,6 @@ protected:
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 
-	/// The class that gets images from disk.
-	std::unique_ptr<ImageLoaderImpl> image_loader_;
 	/// Volatile cache of Hardware dependant surfaces.
 	std::unique_ptr<SurfaceCache> surface_cache_;
 	/// Non-volatile cache of hardware independent images. The use the
@@ -171,10 +158,10 @@ protected:
 	std::unique_ptr<Surface> pic_road_normal_;
 	std::unique_ptr<Surface> pic_road_busy_;
 
-	std::vector<Texture *> m_maptextures;
+	std::vector<std::unique_ptr<Texture>> m_maptextures;
 };
 
 extern Graphic * g_gr;
 extern bool g_opengl;
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_GRAPHIC_H

@@ -19,6 +19,7 @@
 
 #include "logic/partially_finished_building.h"
 
+#include "base/macros.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "logic/game.h"
@@ -26,7 +27,6 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -110,7 +110,7 @@ void Partially_Finished_Building::request_builder(Game &) {
 	m_builder_request =
 		new Request
 			(*this,
-			 tribe().safe_worker_index("builder"),
+			 descr().tribe().safe_worker_index("builder"),
 			 Partially_Finished_Building::request_builder_callback,
 			 wwWORKER);
 }

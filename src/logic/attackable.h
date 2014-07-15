@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ATTACKABLE_H
-#define ATTACKABLE_H
+#ifndef WL_LOGIC_ATTACKABLE_H
+#define WL_LOGIC_ATTACKABLE_H
 
 namespace Widelands {
 
@@ -81,4 +81,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_ATTACKABLE_H

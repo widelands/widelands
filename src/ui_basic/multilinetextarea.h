@@ -17,12 +17,14 @@
  *
  */
 
-#ifndef UI_MULTILINE_TEXTAREA_H
-#define UI_MULTILINE_TEXTAREA_H
+#ifndef WL_UI_BASIC_MULTILINETEXTAREA_H
+#define WL_UI_BASIC_MULTILINETEXTAREA_H
 
-#include "align.h"
+#include <memory>
+
+#include "graphic/align.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
@@ -62,7 +64,7 @@ struct Multiline_Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
 
 	const char *  get_font_name() {return m_fontname.c_str();}
 	int32_t       get_font_size() {return m_fontsize;}
@@ -91,4 +93,4 @@ protected:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

@@ -26,8 +26,9 @@
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "helper.h"
+#include "ui_basic/is_printable.h"
 #include "ui_basic/mouse_constants.h"
+#include "wui/text_constants.h"
 
 namespace UI {
 
@@ -198,7 +199,7 @@ void EditBox::setAlign(Align _align)
 /**
  * The mouse was clicked on this editbox
 */
-bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
@@ -208,7 +209,7 @@ bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 
 	return false;
 }
-bool EditBox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
+bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT && get_can_focus();
 }
@@ -236,7 +237,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_RETURN:
 			// Save history if active and text is not empty
 			if (m_history_active) {
-				if (m->text.size() > 0) {
+				if (!m->text.empty()) {
 					for (uint8_t i = CHAT_HISTORY_SIZE - 1; i > 0; --i)
 						m_history[i] = m_history[i - 1];
 					m_history[0] = m->text;

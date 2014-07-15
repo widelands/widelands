@@ -21,6 +21,7 @@
 
 #include <map>
 
+#include "base/macros.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "io/fileread.h"
@@ -32,7 +33,6 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {
@@ -173,7 +173,7 @@ void Map_Building_Data_Packet::write_priorities
 	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
 
-	const Tribe_Descr & tribe = building.tribe();
+	const Tribe_Descr & tribe = building.descr().tribe();
 	building.collect_priorities(type_to_priorities);
 	for (it = type_to_priorities.begin(); it != type_to_priorities.end(); ++it)
 	{
@@ -213,7 +213,7 @@ void Map_Building_Data_Packet::read_priorities
 {
 	fr.Unsigned32(); // unused, was base_priority which is unused. Remove after b20.
 
-	const Tribe_Descr & tribe = building.tribe();
+	const Tribe_Descr & tribe = building.descr().tribe();
 	int32_t ware_type = -1;
 	// read ware type
 	while (0xff != (ware_type = fr.Unsigned8())) {

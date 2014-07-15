@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_LUASCRIPT_H
-#define CMD_LUASCRIPT_H
+#ifndef WL_LOGIC_CMD_LUASCRIPT_H
+#define WL_LOGIC_CMD_LUASCRIPT_H
 
 #include <string>
 
@@ -46,4 +46,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_LUASCRIPT_H

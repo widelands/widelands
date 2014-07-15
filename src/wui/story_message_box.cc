@@ -19,7 +19,6 @@
 
 #include "wui/story_message_box.h"
 
-#include "constants.h"
 #include "graphic/graphic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -91,11 +90,10 @@ void Story_Message_Box::clicked_ok() {
  * Avoid being closed by right click
  */
 bool Story_Message_Box::handle_mousepress
-	(const Uint8 btn, int32_t mx, int32_t my)
+	(const uint8_t btn, int32_t mx, int32_t my)
 {
 	if (btn == SDL_BUTTON_RIGHT)
 		return true;
 
 	return UI::Window::handle_mousepress(btn, mx, my);
 }
-

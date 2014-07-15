@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WORKER_H
-#define WORKER_H
+#ifndef WL_LOGIC_WORKER_H
+#define WL_LOGIC_WORKER_H
 
 #include "economy/idleworkersupply.h"
 #include "economy/portdock.h"
@@ -46,7 +46,7 @@ class Worker : public Bob {
 	friend struct WorkerProgram;
 	friend struct Map_Bobdata_Data_Packet;
 
-	MO_DESCR(Worker_Descr);
+	MO_DESCR(Worker_Descr)
 
 	struct Action {
 		typedef bool (Worker::*execute_t)(Game &, Bob::State &, const Action &);
@@ -86,12 +86,6 @@ public:
 	uint32_t get_animation(char const * const str) const {
 		return descr().get_animation(str);
 	}
-	const Image* icon() const {return descr().icon();}
-	Ware_Index becomes() const {return descr().becomes();}
-	Ware_Index worker_index() const {return descr().worker_index();}
-	const Tribe_Descr * get_tribe() const {return descr().get_tribe();}
-	const Tribe_Descr & tribe() const {return descr().tribe();}
-	const std::string & descname() const {return descr().descname();}
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
 	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
@@ -305,4 +299,4 @@ public:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_H

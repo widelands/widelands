@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_SET_PORT_SPACE_TOOL_H
-#define EDITOR_SET_PORT_SPACE_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_SET_PORT_SPACE_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_SET_PORT_SPACE_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 #include "logic/widelands.h"
@@ -31,13 +31,17 @@ class Editor_Unset_Port_Space_Tool : public Editor_Tool {
 public:
 	Editor_Unset_Port_Space_Tool();
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& parent,
+	                          Editor_Action_Args& args) override;
 
-	int32_t handle_undo_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_undo_impl(Widelands::Map& map,
+	                         const Widelands::World& world,
+	                         Widelands::Node_and_Triangle<> center,
+	                         Editor_Interactive& parent,
+	                         Editor_Action_Args& args) override;
 
 	char const * get_sel_impl() const override {return FSEL_EUPS_FILENAME;}
 };
@@ -48,13 +52,17 @@ class Editor_Set_Port_Space_Tool : public Editor_Tool {
 public:
 	Editor_Set_Port_Space_Tool(Editor_Unset_Port_Space_Tool &);
 
-	int32_t handle_click_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_click_impl(Widelands::Map& map,
+	                          const Widelands::World& world,
+	                          Widelands::Node_and_Triangle<> center,
+	                          Editor_Interactive& parent,
+	                          Editor_Action_Args& args) override;
 
-	int32_t handle_undo_impl
-		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args) override;
+	int32_t handle_undo_impl(Widelands::Map& map,
+	                         const Widelands::World& world,
+	                         Widelands::Node_and_Triangle<> center,
+	                         Editor_Interactive& parent,
+	                         Editor_Action_Args& args) override;
 
 	char const * get_sel_impl() const override {return FSEL_ESPS_FILENAME;}
 };
@@ -62,4 +70,4 @@ public:
 int32_t Editor_Tool_Set_Port_Space_Callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map);
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_PORT_SPACE_TOOL_H

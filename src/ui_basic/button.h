@@ -17,16 +17,15 @@
  *
  */
 
-#ifndef UI_BUTTON_H
-#define UI_BUTTON_H
+#ifndef WL_UI_BASIC_BUTTON_H
+#define WL_UI_BASIC_BUTTON_H
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 
-#include "constants.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 
 namespace UI {
 
@@ -72,9 +71,9 @@ struct Button : public NamedPanel {
 	void think() override;
 
 	void handle_mousein(bool inside) override;
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t) override;
+	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 	// Set the permanently pressed state of the button
 	void set_perm_pressed(bool state);
@@ -115,4 +114,4 @@ protected:
 
 } // namespace UI
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_BUTTON_H

@@ -23,21 +23,20 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
-#include "i18n.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t Editor_Info_Tool::handle_click_impl
-	(Widelands::Map            &         map,
-	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         parent,
-	Editor_Action_Args         &         /* args */)
-{
-	const Widelands::World & world = map.world();
+int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
+					    const Widelands::World& world,
+					    Widelands::Node_and_Triangle<> center,
+					    Editor_Interactive& parent,
+					    Editor_Action_Args& /* args */) {
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,
@@ -49,15 +48,10 @@ int32_t Editor_Info_Tool::handle_click_impl
 	Widelands::Field & f = map[center.node];
 
 	// *** Node info
-	char buf1[1024];
 	std::string buf = _("Node:");
 	buf += "\n";
-	buf += std::string("• ") + (boost::format(_("Coordinates: (%1$i, %2$i)"))
+	buf += "• " + (boost::format(_("Coordinates: (%1$i, %2$i)"))
 					 % center.node.x % center.node.y).str() + "\n";
-
-	buf += std::string("• ");
-	buf += buf1;
-	buf += std::string("\n");
 
 	std::string temp = "";
 	Widelands::NodeCaps const caps = f.nodecaps();
@@ -83,26 +77,30 @@ int32_t Editor_Info_Tool::handle_click_impl
 
 	buf += std::string("• ") + (boost::format(_("Caps:%s")) % temp).str() + "\n";
 
-	buf += std::string("• ");
-	snprintf(buf1, sizeof(buf1), _("Owned by %i"), f.get_owned_by());
-	buf += std::string(buf1) + "\n";
+	if (f.get_owned_by() > 0) {
+		buf += std::string("• ");
+		char buf1[1024];
+		snprintf(buf1, sizeof(buf1), _("Owned by: %u"), f.get_owned_by());
+		buf += std::string(buf1) + "\n";
+	} else {
+		buf += std::string("• ") + _("Owned by: —") + "\n";
+	}
 
 	temp = f.get_immovable() ? _("Has base immovable") : _("No base immovable");
-	buf += std::string("• ") + temp + "\n";
+	buf += "• " + temp + "\n";
 
-	temp = f.get_first_bob() ? _("Has bobs") : _("No bobs");
-	buf += std::string("• ") + temp + "\n";
+	temp = f.get_first_bob() ? _("Has animals") : _("No animals");
+	buf += "• " + temp + "\n";
 
 	// *** Terrain info
 	buf += std::string("\n") + _("Terrain:") + "\n";
 
 	const Widelands::Field         & tf  = map[center.triangle];
-	const Widelands::Terrain_Descr & ter = world.terrain_descr
-	                                       (center.triangle.t == Widelands::TCoords<>::D ?
-	                                        tf.terrain_d() : tf.terrain_r());
+	const Widelands::TerrainDescription& ter = world.terrain_descr(
+	   center.triangle.t == Widelands::TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
 
-	buf += std::string("• ") + (boost::format(_("Name: %s")) % ter.descname()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Texture Number: %i")) % ter.get_texture()).str() + "\n";
+	buf += "• " + (boost::format(_("Name: %s")) % ter.descname()).str() + "\n";
+	buf += "• " + (boost::format(_("Texture Number: %i")) % ter.get_texture()).str() + "\n";
 
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";
@@ -111,34 +109,31 @@ int32_t Editor_Info_Tool::handle_click_impl
 	int ramount = f.get_resources_amount();
 
 	if (ramount > 0) {
-		buf += std::string("• ") + (boost::format(
+		buf += "• " + (boost::format(
 				_("Resource name: %s")) % world.get_resource(ridx)->name().c_str()
 			).str() + "\n";
-		buf += std::string("• ") + (boost::format(_("Resource amount: %i")) % ramount).str() + "\n";
+		buf += "• " + (boost::format(_("Resource amount: %i")) % ramount).str() + "\n";
 	}
-	else
-	{
-		buf += std::string("• ") + std::string(_("No resources")) + "\n";
+	else {
+		buf += "• " + std::string(_("No resources")) + "\n";
 	}
 
 	// *** Map info
 	buf += std::string("\n") + _("Map:") + "\n";
-	buf += std::string("• ") + (boost::format(_("Name: %s")) % map.get_name()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Size: %1$ix%2$i"))
+	buf += "• " + (boost::format(_("Name: %s")) % map.get_name()).str() + "\n";
+	buf += "• " + (boost::format(_("Size: %1$ix%2$i"))
 					 % map.get_width() % map.get_height()).str() + "\n";
 
-	buf += std::string("• ");
-	snprintf(buf1, sizeof(buf1), _("Players: %i"), map.get_nrplayers());
+	if (map.get_nrplayers() > 0) {
+		buf += "• " +
+		       (boost::format(_("Players: %d")) % static_cast<int>(map.get_nrplayers())).str() + "\n";
+	}
+	else {
+		buf += "• " + std::string(_("Players: -")) + "\n";
+	}
 
-	buf += std::string(buf1) + "\n";
-	buf += std::string("• ") + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Descr: %s")) % map.get_description()).str() + "\n";
-
-	// *** World info
-	buf += std::string("\n") + _("World:") + "\n";
-	buf += std::string("• ") + (boost::format(_("Name: %s")) % world.get_name()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Author: %s")) % world.get_author()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Descr: %s")) % world.get_descr()).str() + "\n";
+	buf += "• " + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
+	buf += "• " + (boost::format(_("Descr: %s")) % map.get_description()).str() + "\n";
 
 	multiline_textarea->set_text(buf.c_str());
 

@@ -17,18 +17,18 @@
  *
  */
 
-#ifndef WAREHOUSE_H
-#define WAREHOUSE_H
+#ifndef WL_LOGIC_WAREHOUSE_H
+#define WL_LOGIC_WAREHOUSE_H
 
+#include "base/wexception.h"
 #include "economy/request.h"
 #include "logic/attackable.h"
 #include "logic/building.h"
 #include "logic/soldiercontrol.h"
 #include "logic/wareworker.h"
-#include "wexception.h"
 
 class Interactive_Player;
-struct Profile;
+class Profile;
 
 namespace Widelands {
 
@@ -68,9 +68,9 @@ private:
 
 class Warehouse : public Building, public Attackable, public SoldierControl {
 	friend class PortDock;
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 
-	MO_DESCR(Warehouse_Descr);
+	MO_DESCR(Warehouse_Descr)
 
 public:
 	/**
@@ -274,4 +274,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WAREHOUSE_H

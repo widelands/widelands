@@ -23,9 +23,9 @@
 
 #include "graphic/wordwrap.h"
 
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "log.h"
 
 namespace UI {
 

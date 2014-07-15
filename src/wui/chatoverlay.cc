@@ -22,8 +22,9 @@
 #include "chat.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "logmessage.h"
+#include "graphic/text/rt_errors.h"
 #include "profile/profile.h"
+#include "wui/logmessage.h"
 
 /**
  * Time, in seconds, that chat messages are shown in the overlay.
@@ -176,18 +177,28 @@ void ChatOverlay::draw(RenderTarget & dst)
 	if (!m->havemessages_)
 		return;
 
-	const Image* im = UI::g_fh1->render(m->all_text_, get_w());
+	const Image* im = nullptr;
+	try {
+		im = UI::g_fh1->render(m->all_text_, get_w());
+	} catch (RT::WidthTooSmall&) {
+		// Oops, maybe one long word? We render again, not limiting the width, but
+	   // render everything in one single line.
+	   im = UI::g_fh1->render(m->all_text_, 0);
+	}
+	assert(im != nullptr);
+
 	// Background
-	int32_t height = im->height() > get_h() ? get_h() : im->height();
-	int32_t top = get_h() - height - 2 * MARGIN;
+	const int32_t height = im->height() > get_h() ? get_h() : im->height();
+	const int32_t top = get_h() - height - 2 * MARGIN;
+	const int width = std::min<int>(get_w(), im->width());
 
 	//FIXME: alpha channel not respected
 	if (!m->transparent_) {
-		Rect rect(0, top, im->width(), height);
+		Rect rect(0, top, width, height);
 		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128));
 	}
 	int32_t topcrop = im->height() - height;
-	Rect cropRect(0, topcrop, im->width(), height);
+	Rect cropRect(0, topcrop, width, height);
 
 	Point pt(0, top);
 	dst.blitrect(pt, im, cropRect);

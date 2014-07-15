@@ -30,83 +30,15 @@
 
 using namespace std;
 
-/// Split a string by separators.
-/// \note This ignores empty elements, so do not use this for example to split
-/// a string with newline characters into lines, because it would ignore empty
-/// lines.
-vector<string> split_string
-	(const string & s, char const * const separators)
-{
+vector<string> split_string(const string& s, const char* const separators) {
 	vector<string> result;
-	for
-		(string::size_type pos = 0, endpos;
-		 (pos = s.find_first_not_of(separators, pos)) != string::npos;
-		 pos = endpos)
-	{
+	for (string::size_type pos = 0, endpos;
+	     (pos = s.find_first_not_of(separators, pos)) != string::npos;
+	     pos = endpos) {
 		endpos = s.find_first_of(separators, pos);
 		result.push_back(s.substr(pos, endpos - pos));
 	}
 	return result;
-}
-
-/**
- * remove spaces at the beginning or the end of a string
- */
-void remove_spaces(string & s) {
-	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n') s.erase(0, 1);
-
-	while (*s.rbegin() == ' '  or *s.rbegin() == '\t' or *s.rbegin() == '\n')
-		s.erase(s.size() - 1, 1);
-}
-
-/**
- * Tell whether a SDL_Keysym is printable.
- *
- * \param k SDL_Keysym to be checked for printability
- *
- * \return True if k is a printable character
- *
- * \todo This is _by_far_ not complete enough
- * \todo Should be based on k.unicode (already enabled by
- * WLApplication::init_hardware()) instead of k.sym. Doing so needs to take the
- * current locale into account; perhaps there already is a fitting gettext
- * function?
- */
-bool is_printable(SDL_keysym k)
-{
-	return
-		(k.sym == SDLK_TAB)                                   ||
-		((k.sym >= SDLK_SPACE)   && (k.sym <= SDLK_z))        ||
-		((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
-		((k.sym >= SDLK_KP0)     && (k.sym <= SDLK_KP_EQUALS));
-}
-
-/**
- * Implemantation for NumberGlob.
- */
-NumberGlob::NumberGlob(const string& pictmp) : templ_(pictmp), cur_(0) {
-	int nchars = count(pictmp.begin(), pictmp.end(), '?');
-	fmtstr_ = "%0" + boost::lexical_cast<string>(nchars) + "i";
-
-	max_ = 1;
-	for (int i = 0; i < nchars; ++i) {
-		max_ *= 10;
-		replstr_ += "?";
-	}
-	max_ -= 1;
-}
-
-bool NumberGlob::next(string* s) {
-	if (cur_ > max_)
-		return false;
-
-	if (max_) {
-		*s = boost::replace_last_copy(templ_, replstr_, (boost::format(fmtstr_) % cur_).str());
-	} else {
-		*s = templ_;
-	}
-	++cur_;
-	return true;
 }
 
 static boost::mt19937 random_generator;
@@ -119,3 +51,19 @@ string random_string(const string& chars, int nlen) {
 	return string(buffer.get(), nlen);
 }
 
+char* next_word(char* & p, bool& reached_end, char const terminator) {
+	assert(terminator);
+	char* const result = p;
+	for (; *p != terminator; ++p)
+		if (*p == '\0') {
+			reached_end = true;
+			goto end;
+		}
+	reached_end = false;
+	*p = '\0';  //  terminate the word
+	++p;        //  move past the terminator
+end:
+	if (result < p)
+		return result;
+	throw wexception("expected word");
+}

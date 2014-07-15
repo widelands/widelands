@@ -21,19 +21,19 @@
 
 #include <SDL_keysym.h>
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_bob_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/critter_bob.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "upcast.h"
 #include "wlapplication.h"
 
 
@@ -42,14 +42,14 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 	 Editor_Place_Bob_Tool      & pit,
 	 UI::UniqueWindow::Registry & registry)
 :
-Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs")),
+Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Animals")),
 
 m_tabpanel          (this, 0, 0, g_gr->images().get("pics/but1.png")),
 m_pit               (pit),
 m_click_recursion_protect(false)
 {
 	int32_t const space  =  5;
-	const Widelands::World & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().world();
 	int32_t const nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
 		std::max

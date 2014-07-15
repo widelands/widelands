@@ -15,6 +15,7 @@ stone=3
 
 [aihints]
 build_material=false
+is_food_basic=true
 
 [working positions]
 smoker=1
@@ -31,15 +32,15 @@ work=_Work
 
 [smoke_meat]
 return=skipped unless economy needs smoked_meat or not economy needs log
-consume=meat:2 log
 sleep=30000
+consume=meat:2 log
 animate=working 30000
 produce=smoked_meat:2
 
 [smoke_fish]
 return=skipped unless economy needs smoked_fish or not economy needs log
-consume=fish:2 log
 sleep=30000
+consume=fish:2 log
 animate=working 30000
 produce=smoked_fish:2
 

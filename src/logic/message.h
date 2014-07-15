@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MESSAGE_H
-#define MESSAGE_H
+#ifndef WL_LOGIC_MESSAGE_H
+#define WL_LOGIC_MESSAGE_H
 
 #include <string>
 #include <boost/signals2.hpp>
@@ -86,4 +86,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MESSAGE_H

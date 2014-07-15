@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef NETWORK_LAN_PROMOTION_H
-#define NETWORK_LAN_PROMOTION_H
+#ifndef WL_NETWORK_NETWORK_LAN_PROMOTION_H
+#define WL_NETWORK_NETWORK_LAN_PROMOTION_H
 
 #include <list>
 
@@ -104,4 +104,4 @@ private:
 	void                     * userdata;
 };
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETWORK_LAN_PROMOTION_H

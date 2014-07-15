@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef NETCLIENT_H
-#define NETCLIENT_H
+#ifndef WL_NETWORK_NETCLIENT_H
+#define WL_NETWORK_NETCLIENT_H
 
 #include "chat.h"
-#include "gamecontroller.h"
-#include "gamesettings.h"
+#include "logic/game_controller.h"
+#include "logic/game_settings.h"
 #include "network/network.h"
 
 struct NetClientImpl;
@@ -121,4 +121,4 @@ private:
 	bool m_dedicated_temp_scenario;
 };
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETCLIENT_H

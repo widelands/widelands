@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PARTIALLY_FINISHED_BUILDING_H
-#define PARTIALLY_FINISHED_BUILDING_H
+#ifndef WL_LOGIC_PARTIALLY_FINISHED_BUILDING_H
+#define WL_LOGIC_PARTIALLY_FINISHED_BUILDING_H
 
 #include "logic/building.h"
 
@@ -35,7 +35,7 @@ This class is the base for constructionsites and
 dismantlesites.
 */
 class Partially_Finished_Building : public Building {
-	friend struct Map_Buildingdata_Data_Packet;
+	friend class Map_Buildingdata_Data_Packet;
 	friend struct Map_Building_Data_Packet;
 
 public:
@@ -83,4 +83,4 @@ protected:
 
 }
 
-#endif /* end of include guard: PARTIALLY_FINISHED_BUILDING_H */
+#endif  // end of include guard: WL_LOGIC_PARTIALLY_FINISHED_BUILDING_H

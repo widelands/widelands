@@ -21,10 +21,11 @@
 
 #include <cstring>
 
-#include "gamesettings.h"
+#include "base/wexception.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
+#include "logic/game_settings.h"
 #include "logic/player.h"
-#include "wexception.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {

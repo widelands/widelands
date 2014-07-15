@@ -17,13 +17,12 @@
  *
  */
 
-#ifndef PLAYERDESCRGROUP_H
-#define PLAYERDESCRGROUP_H
+#ifndef WL_WUI_PLAYERDESCRGROUP_H
+#define WL_WUI_PLAYERDESCRGROUP_H
 
 #include <map>
 #include <string>
 
-#include "constants.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -61,4 +60,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_PLAYERDESCRGROUP_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAPREGION_H
-#define MAPREGION_H
+#ifndef WL_LOGIC_MAPREGION_H
+#define WL_LOGIC_MAPREGION_H
 
 #include "logic/map.h"
 
@@ -73,4 +73,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MAPREGION_H

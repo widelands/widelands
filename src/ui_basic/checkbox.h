@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef UI_CHECKBOX_H
-#define UI_CHECKBOX_H
+#ifndef WL_UI_BASIC_CHECKBOX_H
+#define WL_UI_BASIC_CHECKBOX_H
 
 #include <boost/signals2.hpp>
 
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 
 #define STATEBOX_WIDTH 20
 #define STATEBOX_HEIGHT 20
@@ -60,9 +60,9 @@ struct Statebox : public Panel {
 	void draw(RenderTarget &) override;
 
 	void handle_mousein(bool inside) override;
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t) override;
+	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 private:
 	virtual void clicked() = 0;
@@ -105,4 +105,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_CHECKBOX_H
