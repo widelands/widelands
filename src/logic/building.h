@@ -179,7 +179,6 @@ public:
 	char const * type_name() const override {return "building";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
-	virtual uint32_t get_ui_anim () const;
 
 	virtual Flag & base_flag() override;
 	virtual uint32_t get_playercaps() const;
