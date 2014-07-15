@@ -1137,7 +1137,7 @@ void Worker::set_location(PlayerImmovable * const location)
 
 		// NOTE we have to explicitly check Worker_Descr::SOLDIER, as SOLDIER is
 		// NOTE as well defined in an enum in instances.h
-		if (!m_economy || (get_worker_type() == Worker_Descr::SOLDIER)) {
+		if (!m_economy || (descr().get_worker_type() == Worker_Descr::SOLDIER)) {
 			set_economy(eco);
 		} else if (m_economy != eco) {
 			throw wexception
@@ -1171,7 +1171,7 @@ void Worker::set_economy(Economy * const economy)
 
 	if (m_economy)
 		m_economy->remove_workers
-			(descr().tribe().worker_index(name().c_str()), 1);
+			(descr().tribe().worker_index(descr().name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1181,7 +1181,7 @@ void Worker::set_economy(Economy * const economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(descr().tribe().worker_index(name().c_str()), 1);
+		m_economy->add_workers(descr().tribe().worker_index(descr().name().c_str()), 1);
 }
 
 

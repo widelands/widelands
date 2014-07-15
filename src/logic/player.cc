@@ -853,7 +853,7 @@ Forces the drop of given soldier at given house
 void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 	if (&imm.owner() != this)
 		return;
-	if (soldier.get_worker_type() != Worker_Descr::SOLDIER)
+	if (soldier.descr().get_worker_type() != Worker_Descr::SOLDIER)
 		return;
 	if (upcast(SoldierControl, ctrl, &imm))
 		ctrl->dropSoldier(soldier);

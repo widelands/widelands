@@ -552,12 +552,12 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						Worker & worker = mol.get<Worker>(worker_serial);
 						if (1 == packet_version) {
 							char const * const name = fr.CString();
-							if (name != worker.name())
+							if (name != worker.descr().name())
 								throw game_data_error
 									("expected %s but found \"%s\"",
-									 worker.name().c_str(), name);
+									 worker.descr().name().c_str(), name);
 						}
-						Ware_Index worker_index = tribe.worker_index(worker.name().c_str());
+						Ware_Index worker_index = tribe.worker_index(worker.descr().name().c_str());
 						if (!warehouse.m_incorporated_workers.count(worker_index))
 							warehouse.m_incorporated_workers[worker_index] = std::vector<Worker *>();
 						warehouse.m_incorporated_workers[worker_index].push_back(&worker);

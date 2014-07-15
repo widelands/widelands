@@ -432,7 +432,7 @@ void FieldDebugWindow::think()
 	container_iterate_const(std::vector<Widelands::Bob *>, bobs, j) {
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%s (%u)", (*j.current)->name().c_str(), (*j.current)->serial());
+			 "%s (%u)", (*j.current)->descr().name().c_str(), (*j.current)->serial());
 		m_ui_bobs.add(buffer, (*j.current)->serial());
 	}
 }

@@ -77,9 +77,6 @@ public:
 	Worker(const Worker_Descr &);
 	virtual ~Worker();
 
-	virtual Worker_Descr::Worker_Type get_worker_type() const {
-		return descr().get_worker_type();
-	}
 	char const * type_name() const override {return "worker";}
 	virtual Bob::Type get_bob_type() const override {return Bob::WORKER;}
 
@@ -136,11 +133,8 @@ public:
 	void create_needed_experience(Game &);
 	Ware_Index level             (Game &);
 
-	int32_t get_needed_experience() const {
-		return descr().get_level_experience();
-	}
 	int32_t get_current_experience() const {return m_current_exp;}
-	bool needs_experience() const {return get_needed_experience() != -1;}
+	bool needs_experience() const {return descr().get_level_experience() != -1;}
 
 	// debug
 	virtual void log_general_info(const Editor_Game_Base &) override;

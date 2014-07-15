@@ -71,7 +71,6 @@ public:
 	virtual void init_auto_task(Game &) override;
 
 	void start_task_program(Game &, const std::string & name);
-	const std::string & descname() const {return descr().descname();}
 
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
