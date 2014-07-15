@@ -3,18 +3,30 @@
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 # Miroslav Remák <Unknown>, 2014.
 # Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
+# Miroslav Remák <Unknown>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-06-17 16:11+0000\n"
-"PO-Revision-Date: 2014-07-12 12:11+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-07-14 18:06+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-13 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-07-15 04:34+0000\n"
 "X-Generator: Launchpad (build 17111)\n"
 "Language: cs\n"
 
@@ -24,7 +36,7 @@ msgstr "Jazvec"
 
 #: ../../world/critters/brownbear/init.lua:14
 msgid "Brown bear"
-msgstr ""
+msgstr "Medveď hnedý"
 
 #: ../../world/critters/bunny/init.lua:13
 msgid "Bunny"
@@ -44,7 +56,7 @@ msgstr "Kačica"
 
 #: ../../world/critters/elk/init.lua:14
 msgid "Elk"
-msgstr ""
+msgstr "Los"
 
 #: ../../world/critters/fox/init.lua:14
 msgid "Fox"
@@ -52,7 +64,7 @@ msgstr "Líška"
 
 #: ../../world/critters/lynx/init.lua:14
 msgid "Lynx"
-msgstr ""
+msgstr "Rys"
 
 #: ../../world/critters/marten/init.lua:14
 msgid "Marten"
@@ -76,7 +88,7 @@ msgstr "Zubor"
 
 #: ../../world/critters/wolf/init.lua:14
 msgid "Wolf"
-msgstr ""
+msgstr "Vlk"
 
 #: ../../world/immovables/bush1/init.lua:5
 #: ../../world/immovables/bush2/init.lua:5
@@ -109,13 +121,13 @@ msgstr "Tráva"
 #: ../../world/immovables/ruin4/init.lua:5
 #: ../../world/immovables/ruin5/init.lua:5
 msgid "Ruin"
-msgstr ""
+msgstr "Zrúcanina"
 
 #: ../../world/immovables/manmade/debris00/init.lua:5
 #: ../../world/immovables/manmade/debris01/init.lua:5
 #: ../../world/immovables/manmade/debris02/init.lua:5
 msgid "Debris"
-msgstr ""
+msgstr "Trosky"
 
 #: ../../world/immovables/manmade/snowman/init.lua:5
 msgid "Snowman"
@@ -165,53 +177,53 @@ msgstr "Kostra"
 #: ../../world/immovables/standing_stones/standing_stone6/init.lua:5
 #: ../../world/immovables/standing_stones/standing_stone7/init.lua:5
 msgid "Standing Stone"
-msgstr ""
+msgstr "Stojaci kameň"
 
 #: ../../world/immovables/stones/blackland_stones1/init.lua:12
 #: ../../world/immovables/stones/desert_stones1/init.lua:12
 #: ../../world/immovables/stones/greenland_stones1/init.lua:12
 #: ../../world/immovables/stones/winterland_stones1/init.lua:12
 msgid "Stones 1"
-msgstr ""
+msgstr "Kamene 1"
 
 #: ../../world/immovables/stones/blackland_stones2/init.lua:12
 #: ../../world/immovables/stones/desert_stones2/init.lua:12
 #: ../../world/immovables/stones/greenland_stones2/init.lua:12
 #: ../../world/immovables/stones/winterland_stones2/init.lua:12
 msgid "Stones 2"
-msgstr ""
+msgstr "Kamene 2"
 
 #: ../../world/immovables/stones/blackland_stones3/init.lua:12
 #: ../../world/immovables/stones/desert_stones3/init.lua:12
 #: ../../world/immovables/stones/greenland_stones3/init.lua:12
 #: ../../world/immovables/stones/winterland_stones3/init.lua:12
 msgid "Stones 3"
-msgstr ""
+msgstr "Kamene 3"
 
 #: ../../world/immovables/stones/blackland_stones4/init.lua:12
 #: ../../world/immovables/stones/desert_stones4/init.lua:12
 #: ../../world/immovables/stones/greenland_stones4/init.lua:12
 #: ../../world/immovables/stones/winterland_stones4/init.lua:12
 msgid "Stones 4"
-msgstr ""
+msgstr "Kamene 4"
 
 #: ../../world/immovables/stones/blackland_stones5/init.lua:12
 #: ../../world/immovables/stones/desert_stones5/init.lua:12
 #: ../../world/immovables/stones/greenland_stones5/init.lua:12
 #: ../../world/immovables/stones/winterland_stones5/init.lua:12
 msgid "Stones 5"
-msgstr ""
+msgstr "Kamene 5"
 
 #: ../../world/immovables/stones/blackland_stones6/init.lua:12
 #: ../../world/immovables/stones/desert_stones6/init.lua:12
 #: ../../world/immovables/stones/greenland_stones6/init.lua:12
 #: ../../world/immovables/stones/winterland_stones6/init.lua:12
 msgid "Stones 6"
-msgstr ""
+msgstr "Kamene 6"
 
 #: ../../world/immovables/track_winter/init.lua:5
 msgid "Track"
-msgstr ""
+msgstr "Stopa"
 
 #: ../../world/immovables/trees/alder_summer_mature/init.lua:5
 msgid "Alder (Mature)"
@@ -300,7 +312,7 @@ msgstr ""
 #: ../../world/immovables/trees/deadtree5/init.lua:5
 #: ../../world/immovables/trees/deadtree6/init.lua:5
 msgid "Dead Tree"
-msgstr "Suchý strom"
+msgstr "Mŕtvy strom"
 
 #: ../../world/immovables/trees/fallentree/init.lua:12
 msgid "Fallen Tree"
@@ -324,19 +336,19 @@ msgstr "Smrekovec (mladý)"
 
 #: ../../world/immovables/trees/liana_wasteland_mature/init.lua:5
 msgid "Liana Tree (Mature)"
-msgstr ""
+msgstr "Lianovec (dospelý)"
 
 #: ../../world/immovables/trees/liana_wasteland_old/init.lua:5
 msgid "Liana Tree (Old)"
-msgstr ""
+msgstr "Lianovec (starý)"
 
 #: ../../world/immovables/trees/liana_wasteland_pole/init.lua:5
 msgid "Liana Tree (Pole)"
-msgstr ""
+msgstr "Lianovec (žrďovina)"
 
 #: ../../world/immovables/trees/liana_wasteland_sapling/init.lua:5
 msgid "Liana Tree (Sapling)"
-msgstr ""
+msgstr "Lianovec (mladý)"
 
 #: ../../world/immovables/trees/maple_winter_mature/init.lua:5
 msgid "Maple (Mature)"
@@ -436,67 +448,67 @@ msgstr ""
 
 #: ../../world/immovables/trees/palm_coconut_desert_mature/init.lua:5
 msgid "Coconut Palm (Mature)"
-msgstr ""
+msgstr "Kokosová palma (dospelá)"
 
 #: ../../world/immovables/trees/palm_coconut_desert_old/init.lua:5
 msgid "Coconut Palm (Old)"
-msgstr ""
+msgstr "Kokosová palma (stará)"
 
 #: ../../world/immovables/trees/palm_coconut_desert_pole/init.lua:5
 msgid "Coconut Palm (Pole)"
-msgstr ""
+msgstr "Kokosová palma (žrďovina)"
 
 #: ../../world/immovables/trees/palm_coconut_desert_sapling/init.lua:5
 msgid "Coconut Palm (Sapling)"
-msgstr ""
+msgstr "Kokosová palma (mladá)"
 
 #: ../../world/immovables/trees/palm_date_desert_mature/init.lua:5
 msgid "Date Palm (Mature)"
-msgstr ""
+msgstr "Datľovník (dospelý)"
 
 #: ../../world/immovables/trees/palm_date_desert_old/init.lua:5
 msgid "Date Palm (Old)"
-msgstr ""
+msgstr "Datľovník (starý)"
 
 #: ../../world/immovables/trees/palm_date_desert_pole/init.lua:5
 msgid "Date Palm (Pole)"
-msgstr ""
+msgstr "Datľovník (žrďovina)"
 
 #: ../../world/immovables/trees/palm_date_desert_sapling/init.lua:5
 msgid "Date Palm (Sapling)"
-msgstr ""
+msgstr "Datľovník (mladý)"
 
 #: ../../world/immovables/trees/palm_oil_desert_mature/init.lua:5
 msgid "Oil Palm (Mature)"
-msgstr ""
+msgstr "Olejová palma (dospelá)"
 
 #: ../../world/immovables/trees/palm_oil_desert_old/init.lua:5
 msgid "Oil Palm (Old)"
-msgstr ""
+msgstr "Olejová palma (stará)"
 
 #: ../../world/immovables/trees/palm_oil_desert_pole/init.lua:5
 msgid "Oil Palm (Pole)"
-msgstr ""
+msgstr "Olejová palma (žrďovina)"
 
 #: ../../world/immovables/trees/palm_oil_desert_sapling/init.lua:5
 msgid "Oil Palm (Sapling)"
-msgstr ""
+msgstr "Olejová palma (mladá)"
 
 #: ../../world/immovables/trees/palm_roystonea_desert_mature/init.lua:5
 msgid "Roystonea regia Palm (Mature)"
-msgstr ""
+msgstr "Palma kráľovská (dospelá)"
 
 #: ../../world/immovables/trees/palm_roystonea_desert_old/init.lua:5
 msgid "Roystonea regia Palm (Old)"
-msgstr ""
+msgstr "Palma kráľovská (stará)"
 
 #: ../../world/immovables/trees/palm_roystonea_desert_pole/init.lua:5
 msgid "Roystonea regia Palm (Pole)"
-msgstr ""
+msgstr "Palma kráľovská (žrďovina)"
 
 #: ../../world/immovables/trees/palm_roystonea_desert_sapling/init.lua:5
 msgid "Roystonea regia Palm (Sapling)"
-msgstr ""
+msgstr "Palma kráľovská (mladá)"
 
 #: ../../world/immovables/trees/rowan_summer_mature/init.lua:5
 msgid "Rowan (Mature)"
@@ -580,11 +592,11 @@ msgstr ""
 
 #: ../../world/init.lua:11
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Rôzne"
 
 #: ../../world/init.lua:17
 msgid "Plants"
-msgstr ""
+msgstr "Rastliny"
 
 #: ../../world/init.lua:23
 msgid "Standing Stones"
@@ -596,23 +608,23 @@ msgstr "Kamene"
 
 #: ../../world/init.lua:35
 msgid "Coniferous Trees"
-msgstr ""
+msgstr "Ihličnaté stromy"
 
 #: ../../world/init.lua:41
 msgid "Dead Trees"
-msgstr ""
+msgstr "Mŕtve stromy"
 
 #: ../../world/init.lua:47
 msgid "Deciduous Trees"
-msgstr ""
+msgstr "Listnaté stromy"
 
 #: ../../world/init.lua:53
 msgid "Palm Trees"
-msgstr ""
+msgstr "Palmy"
 
 #: ../../world/init.lua:59
 msgid "Wasteland Trees"
-msgstr ""
+msgstr "Stromy pustatiny"
 
 #: ../../world/resources/init.lua:5
 msgid "Coal"
@@ -641,15 +653,15 @@ msgstr "Ryby"
 
 #: ../../world/terrains/init.lua:4
 msgid "Summer"
-msgstr ""
+msgstr "Leto"
 
 #: ../../world/terrains/init.lua:9
 msgid "Wasteland"
-msgstr ""
+msgstr "Pustatina"
 
 #: ../../world/terrains/init.lua:14
 msgid "Winter"
-msgstr ""
+msgstr "Zima"
 
 #: ../../world/terrains/init.lua:19
 msgid "Desert"
@@ -750,7 +762,7 @@ msgstr "Vyvreté horniny"
 
 #: ../../world/terrains/init.lua:360
 msgid "Beach (Wasteland)"
-msgstr ""
+msgstr "Pláž (Pustatina)"
 
 #: ../../world/terrains/init.lua:372
 msgid "Lava Rocks 1"
@@ -762,7 +774,7 @@ msgstr "Tuhnúca láva 2"
 
 #: ../../world/terrains/init.lua:396
 msgid "Water (Wasteland)"
-msgstr ""
+msgstr "Voda (Pustatina)"
 
 #: ../../world/terrains/init.lua:413
 msgid "Tundra"
@@ -786,19 +798,19 @@ msgstr "Tajga"
 
 #: ../../world/terrains/init.lua:485
 msgid "Mountain 1 (Winter)"
-msgstr ""
+msgstr "Hora 1 (Zima)"
 
 #: ../../world/terrains/init.lua:497
 msgid "Mountain 2 (Winter)"
-msgstr ""
+msgstr "Hora 2 (Zima)"
 
 #: ../../world/terrains/init.lua:509
 msgid "Mountain 3 (Winter)"
-msgstr ""
+msgstr "Hora 3 (Zima)"
 
 #: ../../world/terrains/init.lua:521
 msgid "Mountain 4 (Winter)"
-msgstr ""
+msgstr "Hora 4 (Zima)"
 
 #: ../../world/terrains/init.lua:533
 msgid "Ice"
@@ -806,7 +818,7 @@ msgstr "Ľad"
 
 #: ../../world/terrains/init.lua:545
 msgid "Beach (Winter)"
-msgstr ""
+msgstr "Pláž (Zima)"
 
 #: ../../world/terrains/init.lua:557
 msgid "Ice Floes"
@@ -818,7 +830,7 @@ msgstr "Ľadové kryhy 2"
 
 #: ../../world/terrains/init.lua:583
 msgid "Water (Winter)"
-msgstr ""
+msgstr "Voda (Zima)"
 
 #: ../../world/terrains/init.lua:600
 msgid "Desert 4"
@@ -830,35 +842,35 @@ msgstr "Suchá pôda"
 
 #: ../../world/terrains/init.lua:624
 msgid "Steppe (Desert)"
-msgstr ""
+msgstr "Step (Púšť)"
 
 #: ../../world/terrains/init.lua:636
 msgid "Meadow (Desert)"
-msgstr ""
+msgstr "Lúka (Púšť)"
 
 #: ../../world/terrains/init.lua:648
 msgid "Mountain Meadow (Desert)"
-msgstr ""
+msgstr "Horská lúka (Púšť)"
 
 #: ../../world/terrains/init.lua:660
 msgid "High Mountain Meadow (Desert)"
-msgstr ""
+msgstr "Vysokohorská lúka (Púšť)"
 
 #: ../../world/terrains/init.lua:672
 msgid "Mountain 1 (Desert)"
-msgstr ""
+msgstr "Hora 1 (Púšť)"
 
 #: ../../world/terrains/init.lua:684
 msgid "Mountain 2 (Desert)"
-msgstr ""
+msgstr "Hora 2 (Púšť)"
 
 #: ../../world/terrains/init.lua:696
 msgid "Mountain 3 (Desert)"
-msgstr ""
+msgstr "Hora 3 (Púšť)"
 
 #: ../../world/terrains/init.lua:708
 msgid "Mountain 4 (Desert)"
-msgstr ""
+msgstr "Hora 4 (Púšť)"
 
 #: ../../world/terrains/init.lua:720
 msgid "Desert 1"
@@ -874,8 +886,8 @@ msgstr "Púšť 3"
 
 #: ../../world/terrains/init.lua:756
 msgid "Beach (Desert)"
-msgstr ""
+msgstr "Pláž (Púšť)"
 
 #: ../../world/terrains/init.lua:768
 msgid "Water (Desert)"
-msgstr ""
+msgstr "Voda (Púšť)"
