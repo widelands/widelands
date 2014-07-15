@@ -58,6 +58,7 @@ wl_library(ui_basic
     base_geometry
     base_i18n
     base_log
+    base_macros
     graphic
     graphic_color
     graphic_image

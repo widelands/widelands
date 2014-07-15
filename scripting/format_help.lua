@@ -669,12 +669,10 @@ function building_help_building_section(tribename, building_description, enhance
 		end
 
 		-- Can be enhanced to
-		if (building_description.enhancements[1]) then
-			for i, building in ipairs(building_description.enhancements) do
-				result = result .. text_line(_"Can be enhanced to:", building_description.enhancements[i].descname)
-				for ware, amount in pairs(building_description.enhancements[i].enhancement_cost) do
-					result = result .. building_help_building_line(tribename, ware, amount)
-				end
+		if (building_description.enhancement) then
+			result = result .. text_line(_"Can be enhanced to:", building_description.enhancement.descname)
+			for ware, amount in pairs(building_description.enhancement.enhancement_cost) do
+				result = result .. building_help_building_line(tribename, ware, amount)
 			end
 		end
 	end

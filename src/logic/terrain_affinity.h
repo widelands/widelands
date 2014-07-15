@@ -22,8 +22,7 @@
 
 #include <string>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/description_maintainer.h"
 
 class LuaTable;
@@ -38,7 +37,7 @@ struct FCoords;
 // Describes the parameters and the pickiness of Immovables towards terrain
 // parameters. Alls immovables that use 'grow' in any of their programs must
 // define this.
-class TerrainAffinity : boost::noncopyable {
+class TerrainAffinity {
 public:
 	explicit TerrainAffinity(const LuaTable& table, const std::string& immovable_name);
 
@@ -60,6 +59,8 @@ private:
 	double preferred_humidity_;
 	double preferred_temperature_;
 	double pickiness_;
+
+	DISALLOW_COPY_AND_ASSIGN(TerrainAffinity);
 };
 
 // Returns a value in [0., 1.] that describes the suitability for the

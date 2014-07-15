@@ -193,20 +193,6 @@ public:
 		(const Tribe_Descr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
 
-	//  Information function from description.
-	uint32_t get_max_hp_level     () const {
-		return descr().get_max_hp_level();
-	}
-	uint32_t get_max_attack_level () const {
-		return descr().get_max_attack_level();
-	}
-	uint32_t get_max_defense_level() const {
-		return descr().get_max_defense_level();
-	}
-	uint32_t get_max_evade_level  () const {
-		return descr().get_max_evade_level();
-	}
-
 	uint32_t get_current_hitpoints() const {return m_hp_current;}
 	uint32_t get_max_hitpoints() const;
 	uint32_t get_min_attack() const;

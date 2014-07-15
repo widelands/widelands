@@ -72,10 +72,10 @@ obj_spidercloth_production = {
    name = "obj_spidercloth_production",
    title = _ "Build a spider farm and a weaving mill",
    number = 3,
-   body = objective_text(_"Spidercloth Production", _[[The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold yarn and spideryarn as raw material. Spideryarn is produced by the spider farm, while gold yarn is produced by the gold weaver out of gold.]] .. paragraphdivider() ..
+   body = objective_text(_"Spidercloth Production", _[[The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold yarn and spideryarn as raw material. Spideryarn is produced by the spider farm, while gold yarn is produced by the gold spinning mill out of gold.]] .. paragraphdivider() ..
       listitem_bullet(_[[Build a weaving mill]]) ..
       listitem_bullet(_[[Build a spider farm]]) ..
-      listitem_bullet(_[[Build a goldweaver]])
+      listitem_bullet(_[[Build a gold spinning mill]])
  )
 }
 
@@ -310,7 +310,7 @@ spidercloth_messages = {
     body = jundlina(_ "Jundlina Replies", _(
 [[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand your urgency. ]] ..
 [[Your suggestion sounds fair to me, I will build your weaving mill and spider farm. ]] ..
-[[I will also build a goldweaver so that the golden tabards you make will not be golden by name alone.]]
+[[I will also build a gold spinning mill so that the golden tabards you make will not be golden by name alone.]]
     )) ..  new_objectives(obj_spidercloth_production)
  }
 }
@@ -320,7 +320,7 @@ spidercloth_story_ended_messages = {
       title = _ "Opol Seeks Out Jundlina",
       body = opol(_(
 [[May Satul warm you, Jundlina! ]] ..
-[[The weaving mill, goldweaver and spider farm buildings are complete ]] ..
+[[The weaving mill, gold spinning mill and spider farm buildings are complete ]] ..
 [[and are starting their work at this very moment. The weavers’ guild is very grateful for your support ]] ..
 [[and we will stand by our word and deliver the first tabard very soon.]]
       ))

@@ -281,7 +281,7 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 		}
 		for (Building_Index i = 0; i < t.get_nrbuildings(); ++i) {
 			Building_Descr const * ob = t.get_building_descr(i);
-			if (ob->enhancements().count(former_idx)) {
+			if (ob->enhancement() == former_idx) {
 				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
 				break;
 			}
@@ -299,7 +299,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PARTIALLYFB_PACKET_VERSION) {
-			const Tribe_Descr & tribe = pfb.tribe();
+			const Tribe_Descr & tribe = pfb.descr().tribe();
 			pfb.m_building =
 				tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 
@@ -365,7 +365,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 		if (packet_version >= 2) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
 
-			const Tribe_Descr & tribe = constructionsite.tribe();
+			const Tribe_Descr & tribe = constructionsite.descr().tribe();
 
 			container_iterate
 				(ConstructionSite::Wares, constructionsite.m_wares, cur)
@@ -394,7 +394,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 	 Game                  & game,
 	 Map_Map_Object_Loader & mol)
 {
-	const Tribe_Descr & tribe = constructionsite.tribe();
+	const Tribe_Descr & tribe = constructionsite.descr().tribe();
 	constructionsite.m_building =
 		tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 	if (fr.Unsigned8()) {
@@ -481,8 +481,8 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			(1 <= packet_version and
 			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
 		{
-			Ware_Index const nr_wares   = warehouse.tribe().get_nrwares  ();
-			Ware_Index const nr_tribe_workers = warehouse.tribe().get_nrworkers();
+			Ware_Index const nr_wares   = warehouse.descr().tribe().get_nrwares();
+			Ware_Index const nr_tribe_workers = warehouse.descr().tribe().get_nrworkers();
 			warehouse.m_supply->set_nrwares  (nr_wares);
 			warehouse.m_supply->set_nrworkers(nr_tribe_workers);
 			warehouse.m_ware_policy.resize(nr_wares, Warehouse::SP_Normal);
@@ -490,7 +490,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				(nr_tribe_workers, Warehouse::SP_Normal);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
-			const Tribe_Descr & tribe = warehouse.tribe();
+			const Tribe_Descr & tribe = warehouse.descr().tribe();
 			while (fr.Unsigned8()) {
 				Ware_Index const id = tribe.ware_index(fr.CString());
 				if (packet_version >= 5) {
@@ -708,7 +708,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				}
 			}
 
-			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
+			if (uint32_t const conquer_radius = warehouse.descr().get_conquers()) {
 				//  Add to map of military influence.
 				const Map & map = game.map();
 				Area<FCoords> a
@@ -726,7 +726,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			warehouse.owner().see_area
 				(Area<FCoords>
 				 (game.map().get_fcoords(warehouse.get_position()),
-				  warehouse.vision_range()));
+				  warehouse.descr().vision_range()));
 			warehouse.m_next_military_act = game.get_gametime();
 			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else
@@ -784,7 +784,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 				const Map & map = game.map();
 				Area<FCoords> a
 					(map.get_fcoords(militarysite.get_position()),
-					 militarysite.get_conquers());
+					 militarysite.descr().get_conquers());
 				const Field & first_map_field = map[0];
 				Player::Field * const player_fields =
 					militarysite.owner().m_fields;
@@ -882,7 +882,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						throw game_data_error
 							("site has request for %s, for which there is no working "
 							 "position",
-							 productionsite.tribe()
+							 productionsite.descr().tribe()
 							 .get_worker_descr(req.get_index())->name().c_str());
 					uint32_t count = j->second;
 					assert(count);
@@ -894,7 +894,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 								throw game_data_error
 									("request for %s does not match any free working "
 									 "position",
-									 productionsite.tribe()
+									 productionsite.descr().tribe()
 									 .get_worker_descr(req.get_index())->name().c_str
 									 	());
 						break;
@@ -1343,7 +1343,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
 	//  supply
-	const Tribe_Descr & tribe = warehouse.tribe();
+	const Tribe_Descr & tribe = warehouse.descr().tribe();
 	const WareList & wares = warehouse.m_supply->get_wares();
 	for (Ware_Index i = 0; i < wares.get_nrwareids  (); ++i) {
 		fw.Unsigned8(1);

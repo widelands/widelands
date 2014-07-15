@@ -343,8 +343,8 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 		}
 	}
 
-	if (ship.get_nritems() < ship.get_capacity() && !m_waiting.empty()) {
-		uint32_t nrload = std::min<uint32_t>(m_waiting.size(), ship.get_capacity() - ship.get_nritems());
+	if (ship.get_nritems() < ship.descr().get_capacity() && !m_waiting.empty()) {
+		uint32_t nrload = std::min<uint32_t>(m_waiting.size(), ship.descr().get_capacity() - ship.get_nritems());
 
 		while (nrload--) {
 			// Check if the item has still a valid destination
@@ -395,7 +395,7 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 		it.current->get(owner().egbase(), &ware, &worker);
 
 		if (waretype == wwWORKER) {
-			if (worker && worker->worker_index() == wareindex)
+			if (worker && worker->descr().worker_index() == wareindex)
 				count++;
 		} else {
 			if (ware && ware->descr_index() == wareindex)

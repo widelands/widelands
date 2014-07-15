@@ -1101,7 +1101,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, destructible),
 	PROP_RO(L_BuildingDescription, enhanced),
 	PROP_RO(L_BuildingDescription, enhancement_cost),
-	PROP_RO(L_BuildingDescription, enhancements),
+	PROP_RO(L_BuildingDescription, enhancement),
 	PROP_RO(L_BuildingDescription, is_mine),
 	PROP_RO(L_BuildingDescription, is_port),
 	PROP_RO(L_BuildingDescription, returned_wares),
@@ -1205,21 +1205,12 @@ int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: enhancements
+	.. attribute:: enhancement
 
-		(RO) a list of building descriptions that this building can enhance to.
+		(RO) a building description that this building can enhance to.
 */
-int L_BuildingDescription::get_enhancements(lua_State * L) {
-	const Tribe_Descr& tribe = get()->tribe();
-
-	lua_newtable(L);
-	int index = 1;
-	for (auto building_index : get()->enhancements()) {
-		lua_pushint32(L, index++);
-		upcasted_building_descr_to_lua(L, tribe.get_building_descr(building_index));
-		lua_rawset(L, -3);
-	}
-	return 1;
+int L_BuildingDescription::get_enhancement(lua_State * L) {
+	return upcasted_building_descr_to_lua(L, get()->tribe().get_building_descr(get()->enhancement()));
 }
 
 

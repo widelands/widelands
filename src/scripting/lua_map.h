@@ -166,7 +166,7 @@ public:
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
 	int get_enhancement_cost(lua_State *);
-	int get_enhancements(lua_State *);
+	int get_enhancement(lua_State *);
 	int get_is_mine(lua_State *);
 	int get_is_port(lua_State *);
 	int get_isproductionsite(lua_State *);
