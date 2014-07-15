@@ -97,8 +97,6 @@ struct Ship : Bob {
 
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
-	uint32_t get_capacity() const {return descr().get_capacity();}
-	virtual uint32_t vision_range() const {return descr().vision_range();}
 	uint32_t get_nritems() const {return m_items.size();}
 	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
 

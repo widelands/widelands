@@ -729,7 +729,7 @@ void Immovable::save
 	fw.Unsigned8(header_Immovable);
 	fw.Unsigned8(IMMOVABLE_SAVEGAME_VERSION);
 
-	if (const Tribe_Descr * const tribe = get_owner_tribe())
+	if (const Tribe_Descr * const tribe = descr().get_owner_tribe())
 		fw.String(tribe->name());
 	else
 		fw.CString("world");

@@ -936,12 +936,12 @@ bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
 void Bob::set_owner(Player * const player)
 {
 	if (m_owner && m_position.field)
-		m_owner->unsee_area(Area<FCoords>(get_position(), vision_range()));
+		m_owner->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 
 	m_owner = player;
 
 	if (m_owner != nullptr && m_position.field)
-		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
+		m_owner->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 }
 
 
@@ -970,10 +970,10 @@ void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 	*m_linkpprev = this;
 
 	if (m_owner != nullptr) {
-		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
+		m_owner->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 
 		if (oldposition.field)
-			m_owner->unsee_area(Area<FCoords>(oldposition, vision_range()));
+			m_owner->unsee_area(Area<FCoords>(oldposition, descr().vision_range()));
 	}
 
 	// Since pretty much everything in Widelands eventually results in the

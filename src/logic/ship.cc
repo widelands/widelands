@@ -352,7 +352,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 	if (m_ship_state == EXP_SCOUTING) {
 		// Check surrounding fields for port buildspaces
 		std::unique_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
-		MapRegion<Area<Coords> > mr(map, Area<Coords>(position, vision_range()));
+		MapRegion<Area<Coords> > mr(map, Area<Coords>(position, descr().vision_range()));
 		bool new_port_space = false;
 		do {
 			if (map.is_port_space(mr.location())) {

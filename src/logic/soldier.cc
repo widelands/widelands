@@ -926,7 +926,7 @@ void Soldier::attack_update(Game & game, State & state)
 				// Try to find our land
 				Map* map = game.get_map();
 				std::vector<Coords> coords;
-				uint32_t maxdist = vision_range() * 2;
+				uint32_t maxdist = descr().vision_range() * 2;
 				Area<FCoords> area(map->get_fcoords(get_position()), maxdist);
 				if
 					(map->find_reachable_fields
