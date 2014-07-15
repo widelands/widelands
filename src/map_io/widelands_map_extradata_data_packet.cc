@@ -22,7 +22,6 @@
 #include <SDL_image.h>
 
 #include "graphic/graphic.h"
-#include "base/log.h" // NOCOM(#sirver): remove again
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
 #include "io/fileread.h"
@@ -96,11 +95,10 @@ void Map_Extradata_Data_Packet::Write
 	if (map_fs && map_fs->FileExists("pics") && map_fs->IsDirectory("pics")) {
 		fs.EnsureDirectoryExists("pics");
 		for (const std::string& picture : map_fs->ListDirectory("pics")) {
-			log("#sirver picture: %s\n", picture.c_str());
-		size_t length;
-		void* input_data = map_fs->Load(picture, length);
-		fs.Write(picture, input_data, length);
-		free(input_data);
+			size_t length;
+			void* input_data = map_fs->Load(picture, length);
+			fs.Write(picture, input_data, length);
+			free(input_data);
 		}
 	}
 	prof.write("extra_data", false, fs);
