@@ -86,7 +86,8 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
      unstationed_milit_buildings_(0),
      military_under_constr_(0),
      military_last_dismantle_(0),
-     military_last_build_(0) {
+     military_last_build_(0),
+     spots_(0)  {
 }
 
 DefaultAI::~DefaultAI() {
@@ -607,7 +608,13 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	}
 
 	// folowing is done allways (regardless of military or not)
+
 	field.military_stationed_ = 0;
+	field.military_in_constr_nearby_ =0; 
+	field.military_capacity_ = 0;
+	field.military_loneliness_ =1000; 
+	field.military_presence_=0; 
+
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
@@ -655,6 +662,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 					if (!militarysite->stationedSoldiers().empty()) {
 						field.military_stationed_ += 1;
 					}
+					else
+						//the name does not match much
+						field.military_in_constr_nearby_ += 1;
 
 					field.military_loneliness_ *= static_cast<double_t>(dist) / radius;
 				}
@@ -770,7 +780,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	//  Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
 	bool field_blocked = false;
-	int32_t spots = 0;
 	uint32_t consumers_nearby_count = 0;
 	// this is to increase score so also building near borders can be built
 	int32_t bulgarian_constant = 12;
@@ -786,16 +795,16 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	     ++i)
 		++spots_avail.at((*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK);
 
-	spots = spots_avail.at(BUILDCAPS_SMALL);
-	spots += spots_avail.at(BUILDCAPS_MEDIUM);
-	spots += spots_avail.at(BUILDCAPS_BIG);
+	spots_ = spots_avail.at(BUILDCAPS_SMALL);
+	spots_ += spots_avail.at(BUILDCAPS_MEDIUM);
+	spots_ += spots_avail.at(BUILDCAPS_BIG);
 
 	// checking amount of free spots, if needed setting new building stop flag
 	new_buildings_stop_ = false;
 
 	if ((militarysites.size() * 2 + 20) <
 	    productionsites.size()
-	    or spots<(3 + (static_cast<int32_t>(productionsites.size()) / 5))or total_constructionsites>(
+	    or spots_<(3 + (static_cast<int32_t>(productionsites.size()) / 5))or total_constructionsites>(
 	       (militarysites.size() + productionsites.size()) / 2)) {
 		new_buildings_stop_ = true;
 	}
@@ -1420,14 +1429,25 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	   game().map().get_fcoords(proposed_coords), game().get_gametime() + 120000);  // two minutes
 	blocked_fields.push_back(blocked);
 
-	// if space consumer we block also nearby fields
-	if (best_building->space_consumer_ and not best_building->plants_trees_) {
+	// we block also nearby fields
+	//if farms and so on, for quite a long time
+	//if military sites only for short time for AI can update information on near buildable fields
+	if ( (best_building->space_consumer_ and not best_building->plants_trees_) or 
+		best_building->type == BuildingObserver::MILITARYSITE) {
+		uint32_t block_time=0;
+		uint32_t block_area=0;		
+		if (best_building->space_consumer_){
+			block_time=45 * 60 * 1000;
+			block_area=3;}
+		else {//militray buildings for a very short time
+			block_time=25 * 1000;
+			block_area=6;}
 		Map& map = game().map();
 
-		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(proposed_coords), 3));
+		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(proposed_coords), block_area));
 		do {
 			BlockedField blocked2(
-			   map.get_fcoords(*(mr.location().field)), game().get_gametime() + 45 * 60 * 1000);
+			   map.get_fcoords(*(mr.location().field)), game().get_gametime() + block_time);
 			blocked_fields.push_back(blocked2);
 		} while (mr.advance(map));
 	}
@@ -1536,9 +1556,8 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 	}
 
 	// force a split on roads that are longer than 3 parts
-	// actually we do not care for loss of building capabilities - normal maps
-	// should have enough space and the computer can expand it's territory.
-	if (!roads.empty()) {
+	// with exemption when there is too few building spots
+	if (spots_>20 and !roads.empty()) {
 		const Path& path = roads.front()->get_path();
 
 		if (path.get_nsteps() > 3) {
@@ -1585,12 +1604,12 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 			if (economies.size() > 1)
 				finish = connect_flag_to_another_economy(flag);
 
-			// try to improve the roads at this flag
-			//  TODO do this only on useful places - the attempt below
-			//  TODO  unfortunatey did not work as it should...
-			//  if the flag is full of wares or if it is not yet a fork.
-			if (!finish)  //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
-				finish = improve_transportation_ways(flag);
+			// try to improve the roads at this flag, effectively
+			// to build a 'shortcut' from the flag, if reasonable
+			//  second arguments means:
+			// 'FORCE a shortcut from here as the flag is full of wares'
+			if (!finish)  
+				finish = improve_transportation_ways(flag,!flag.has_capacity() );
 
 			// cycle through flags one at a time
 			eco->flags.push_back(eco->flags.front());
@@ -1657,7 +1676,8 @@ bool DefaultAI::connect_flag_to_another_economy(const Flag& flag) {
 }
 
 // adds alternative ways to already existing ones
-bool DefaultAI::improve_transportation_ways(const Flag& flag) {
+// (shortcuts if the road would be shortened significantly)
+bool DefaultAI::improve_transportation_ways(const Flag& flag, const bool force) {
 	// First of all try to remove old building flags to clean up the road web if possible
 	container_iterate(std::list<Widelands::Coords>, flags_to_be_removed, i) {
 		// Maybe the flag was already removed?
@@ -1679,7 +1699,9 @@ bool DefaultAI::improve_transportation_ways(const Flag& flag) {
 	std::vector<NearFlag> nearflags;
 	queue.push(NearFlag(flag, 0, 0));
 	Map& map = game().map();
-
+	//shortcut is made (attempted) if  (current_road/possible_shortcut)>mindiff
+	const uint16_t mindif=4; 
+	
 	while (!queue.empty()) {
 		std::vector<NearFlag>::iterator f =
 		   find(nearflags.begin(), nearflags.end(), queue.top().flag);
@@ -1706,26 +1728,41 @@ bool DefaultAI::improve_transportation_ways(const Flag& flag) {
 
 			int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
 
-			if (dist > 12)  //  out of range
+			if (dist > 13)  //  out of range
 				continue;
 
 			queue.push(NearFlag(*endflag, nf.cost_ + road->get_path().get_nsteps(), dist));
 		}
 	}
 
-	std::sort(nearflags.begin(), nearflags.end(), CompareDistance());
+	//usually we create consider shortest shortcut, but sometimes
+	//we seek biggest reduction
+	if (game().get_gametime()%5>0)
+		std::sort(nearflags.begin(), nearflags.end(), CompareDistance());
+	else
+		std::sort(nearflags.begin(), nearflags.end(), CompareShortening());
+		
 	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
 
-	for (uint32_t i = 1; i < nearflags.size(); ++i) {
+	//doing only 3 attempts we presume that if the first one fails, road is not buildable at all
+	for (uint32_t i = 1; i < nearflags.size() and i < 4; ++i) {
 		NearFlag& nf = nearflags.at(i);
 
-		if (2 * nf.distance_ + 2 < nf.cost_) {
+		//one of three condidtions must be met:
+		// mindif is excessed
+		// absolute difference (current_road-shortcut) >20
+		// or the shortcut is forced (due to wares on flag)
+		if ( (mindif*(nf.distance_ + 1) < nf.cost_) or  (nf.cost_-nf.distance_)>20  or force) { //was 2
+			
 			Path& path = *new Path();
 
 			if (map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check) >=
-			    0 and static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost_) {
-				game().send_player_build_road(player_number(), path);
-				return true;
+			    0 ){
+					if ( (!force and static_cast<int32_t>(mindif * (path.get_nsteps() + 1)) < nf.cost_) 
+					or (force)){
+						game().send_player_build_road(player_number(), path);
+						return true;
+				}
 			}
 
 			delete &path;
@@ -2248,7 +2285,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	FindNodeEnemiesBuilding find_enemy(player, game());
 
 	// first if there are enemies nearby, check for buildings not land
-	if (map.find_fields(Area<FCoords>(f, vision + 2), nullptr, find_enemy) == 0) {
+	if (map.find_fields(Area<FCoords>(f, vision + 4), nullptr, find_enemy) == 0) {
 		// If no enemy in sight - decrease the number of stationed soldiers
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
@@ -2269,8 +2306,13 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 				update_buildable_field(bf, vision, true);
 				const int32_t size_penalty = ms->get_size() - 1;
 
-				if (bf.military_capacity_ > 9 and bf.military_presence_ >
-				    3 and bf.military_loneliness_<160 and bf.military_stationed_>(2 + size_penalty)) {
+				int16_t score=0;  // <<=========
+				score+=(bf.military_capacity_ > 9);
+				score+=(bf.military_presence_ > 3);
+				score+=(bf.military_loneliness_ < 160);
+				score+=(bf.military_stationed_ > (2+size_penalty));	
+
+				if (score >=3) {
 
 					if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 						flags_to_be_removed.push_back(ms->base_flag().get_position());
@@ -2288,6 +2330,8 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 		// at maximum - set it to maximum.
 		uint32_t const j = ms->maxSoldierCapacity();
 		uint32_t const k = ms->soldierCapacity();
+
+		//TODO (tiborb): verify this part of code
 
 		if (j > k)
 			// game().send_player_change_soldier_capacity(*ms, j - k);

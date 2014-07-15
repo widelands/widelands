@@ -130,7 +130,7 @@ private:
 	bool construct_roads(int32_t);
 	bool improve_roads(int32_t);
 
-	bool improve_transportation_ways(const Widelands::Flag&);
+	bool improve_transportation_ways(const Widelands::Flag&,bool force);
 	bool connect_flag_to_another_economy(const Widelands::Flag&);
 
 	bool check_economies();
@@ -207,8 +207,9 @@ private:
 	                                        // is belogning to)
 	uint16_t military_under_constr_;
 	uint16_t military_last_dismantle_;
-	int32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
-	                               // building build
+	int32_t military_last_build_;   // sometimes expansions just stops, this is time of last military
+	                                // building build
+	int32_t spots_;					// sum of buildable fields
 };
 
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

@@ -166,6 +166,14 @@ struct CompareDistance {
 	}
 };
 
+//usually we order by shortest shortcut, but sometimes it makes sense to
+// make shortcut by biggest road reduction
+struct CompareShortening {
+	bool operator()(const NearFlag& a, const NearFlag& b) const {
+		return (a.cost_ - a.distance_) > (b.cost_ - b.distance_);
+	}
+};
+
 struct WalkableSpot {
 	Coords coords;
 	bool has_flag_;
