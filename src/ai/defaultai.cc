@@ -909,15 +909,15 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 			// Check if the produced wares are needed (if it is producing anything)
 			if (!bo.outputs_.empty()) {
-				container_iterate(std::list<EconomyObserver*>, economies, l) {
+				for (EconomyObserver* observer : economies) {
 					// Don't check if the economy has no warehouse.
-					if ((*l.current)->economy.warehouses().empty())
+					if (observer->economy.warehouses().empty())
 						continue;
 
 					for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
 						Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
 
-						if ((*l.current)->economy.needs_ware(wt)) {
+						if (observer->economy.needs_ware(wt)) {
 							output_is_needed = true;
 
 							if (wares.at(bo.outputs_.at(m)).preciousness_ > max_needed_preciousness)
@@ -1164,9 +1164,11 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					} else if (!bo.inputs_.empty()) {
 						// to have two buildings from everything (intended for upgradeable buildings)
 						// but I do not know how to identify such buildings
-						if (bo.cnt_built_ == 1 and game().get_gametime() >
-						                        60 * 60 * 1000 and bo.desc->enhancements().size() >
-						                        0 and !mines_.empty()) {
+						if (bo.cnt_built_ == 1
+						    and game().get_gametime() > 60 * 60 * 1000
+							and bo.desc->enhancement() != INVALID_INDEX
+							and !mines_.empty())
+						{
 							prio = max_preciousness + bulgarian_constant;
 						}
 						// if output is needed and there are no idle buildings
@@ -1995,58 +1997,50 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
-	std::set<Building_Index> enhancements = site.site->enhancements();
-	int32_t maxprio = 0;
+	const Building_Index enhancement = site.site->enhancement();
+
 	Building_Index enbld = INVALID_INDEX;  // to get rid of this
 	BuildingObserver* bestbld = nullptr;
-	container_iterate_const(std::set<Building_Index>, enhancements, x) {
-		// Only enhance buildings that are allowed (scenario mode)
-		if (player->is_building_type_allowed(*x.current)) {
-			const Building_Descr& bld = *tribe->get_building_descr(*x.current);
-			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-			// do not build the same building so soon (kind of duplicity check)
-			if (gametime - en_bo.construction_decision_time_ < kBuildingMinInterval)
-				continue;
+	// Only enhance buildings that are allowed (scenario mode)
+	if (player->is_building_type_allowed(enhancement)) {
+		const Building_Descr& bld = *tribe->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
+		// do not build the same building so soon (kind of duplicity check)
+		if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval)
+			{
 			// Don't enhance this building, if there is already one of same type
 			// under construction or unoccupied_
-			if (en_bo.cnt_under_construction_ + en_bo.unoccupied_ > 0)
-				continue;
-
-			// don't upgrade without workers
-			if (!site.site->has_workers(*x.current, game()))
-				continue;
-
-			// forcing first upgrade
-			if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) ==
-			    0 and(site.bo->cnt_built_ - site.bo->unoccupied_) >=
-			       1 and(game().get_gametime() - site.unoccupied_till_) >
-			       30 * 60 * 1000 and !mines_.empty()) {
-
-				game().send_player_enhance_building(*site.site, (*x.current));
-				return true;
+			if (en_bo.cnt_under_construction_ + en_bo.unoccupied_ <= 0)
+				{
+				// don't upgrade without workers
+				if (site.site->has_workers(enhancement, game()))
+					{
+					// forcing first upgrade
+					if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) == 0
+						and(site.bo->cnt_built_ - site.bo->unoccupied_) >= 1
+						and(game().get_gametime() - site.unoccupied_till_) > 30 * 60 * 1000
+						and !mines_.empty())
+					{
+						game().send_player_enhance_building(*site.site, enhancement);
+						return true;
+					}
+				}
 			}
+		}
 
-			// now, let consider normal upgrade
+		// now, let consider normal upgrade
+		// do not upgrade if candidate production % is too low
+		if ((en_bo.cnt_built_ - en_bo.unoccupied_) != 0
+			or(en_bo.cnt_under_construction_ + en_bo.unoccupied_) <= 0
+			or en_bo.current_stats_ >= 50) {
 
-			// do not upgrade if candidate production % is too low
-			if ((en_bo.cnt_built_ - en_bo.unoccupied_) ==
-			    0 or(en_bo.cnt_under_construction_ + en_bo.unoccupied_) > 0 or en_bo.current_stats_ <
-			       50)
-				continue;
-
-			int32_t prio = 0;
-
-			if (en_bo.current_stats_ > 65) {
-				prio = en_bo.current_stats_ - site.bo->current_stats_;  // priority for enhancement
-				prio += en_bo.current_stats_ - 65;
-
-			}
-
-			if (prio > maxprio) {
-				maxprio = prio;
-				enbld = (*x.current);
+			if (en_bo.current_stats_ > 65
+				and ((en_bo.current_stats_ - site.bo->current_stats_) + // priority for enhancement
+					(en_bo.current_stats_ - 65)) > 0)
+			{
+				enbld = enhancement;
 				bestbld = &en_bo;
 			}
 		}
@@ -2054,7 +2048,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Enhance if enhanced building is useful
 	// additional: we dont want to lose the old building
-	if (maxprio > 0) {
+	if (enbld != INVALID_INDEX) {
 		game().send_player_enhance_building(*site.site, enbld);
 		bestbld->construction_decision_time_ = gametime;
 		changed = true;
@@ -2110,50 +2104,39 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	std::set<Building_Index> enhancements = site.site->enhancements();
-	int32_t maxprio = 0;
+	const Building_Index enhancement = site.site->enhancement();
 	Building_Index enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
-	container_iterate_const(std::set<Building_Index>, enhancements, x) {
-		// Only enhance buildings that are allowed (scenario mode)
-		if (player->is_building_type_allowed(*x.current)) {
-			// first exclude possibility there are enhancements in construction or unoccupied_
-			const Building_Descr& bld = *tribe->get_building_descr(*x.current);
-			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+	// Only enhance buildings that are allowed (scenario mode)
+	if (player->is_building_type_allowed(enhancement)) {
+		// first exclude possibility there are enhancements in construction or unoccupied_
+		const Building_Descr& bld = *tribe->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-			if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ > 0)
-				continue;
+		if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ <= 0)
+		{
+		// do not upgrade target building are not working properly (probably do not have food)
+			if (en_bo.cnt_built_ <= 0 and en_bo.current_stats_ >= 60)
+			{
+				// do not build the same building so soon (kind of duplicity check)
+				if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval)
+				{
+					// Check if mine needs an enhancement to mine more resources
+					uint8_t const until =
+					field->get_starting_res_amount() * (100 - site.bo->mines_percent_) / 100;
 
-			// do not upgrade target building are not working properly (probably do not have food)
-			if (en_bo.cnt_built_ > 0 and en_bo.current_stats_ < 60)
-				continue;
-
-			// do not build the same building so soon (kind of duplicity check)
-			if (gametime - en_bo.construction_decision_time_ < kBuildingMinInterval)
-				continue;
-
-			// Check if mine needs an enhancement to mine more resources
-			uint8_t const until =
-			   field->get_starting_res_amount() * (100 - site.bo->mines_percent_) / 100;
-
-			if (until >= current) {
-				// add some randomness - just for the case if more than one
-				// enhancement is available (not in any tribe yet)
-				int32_t const prio = time(nullptr) % 3 + 1;
-
-				if (prio > maxprio) {
-					maxprio = prio;
-					enbld = (*x.current);
-					bestbld = &en_bo;
-
+					if (until >= current) {
+							enbld = enhancement;
+							bestbld = &en_bo;
+					}
 				}
 			}
 		}
 	}
 
-	// Enhance if enhanced building is useful
-	if (maxprio > 0) {
+	// Enhance if enhanced building is useful and possible
+	if (enbld != INVALID_INDEX) {
 		game().send_player_enhance_building(*site.site, enbld);
 		bestbld->construction_decision_time_ = gametime;
 		changed = true;
@@ -2167,12 +2150,12 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 	uint32_t count = 0;
 	Ware_Index wt(hintoutput);
-	container_iterate(std::list<EconomyObserver*>, economies, l) {
+	for (EconomyObserver* observer : economies) {
 		// Don't check if the economy has no warehouse.
-		if ((*l.current)->economy.warehouses().empty())
+		if (observer->economy.warehouses().empty())
 			continue;
 
-		count += (*l.current)->economy.stock_ware(wt);
+		count += observer->economy.stock_ware(wt);
 	}
 
 	return count;
@@ -2183,14 +2166,14 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 	uint32_t count = 0;
 
 	if (!bo.outputs_.empty()) {
-		container_iterate(std::list<EconomyObserver*>, economies, l) {
+		for (EconomyObserver* observer : economies) {
 			// Don't check if the economy has no warehouse.
-			if ((*l.current)->economy.warehouses().empty())
+			if (observer->economy.warehouses().empty())
 				continue;
 
 			for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
 				Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
-				count += (*l.current)->economy.stock_ware(wt);
+				count += observer->economy.stock_ware(wt);
 			}
 		}
 	}

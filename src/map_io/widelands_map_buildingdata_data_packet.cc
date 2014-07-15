@@ -281,7 +281,7 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 		}
 		for (Building_Index i = 0; i < t.get_nrbuildings(); ++i) {
 			Building_Descr const * ob = t.get_building_descr(i);
-			if (ob->enhancements().count(former_idx)) {
+			if (ob->enhancement() == former_idx) {
 				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
 				break;
 			}
