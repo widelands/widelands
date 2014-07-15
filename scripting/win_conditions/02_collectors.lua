@@ -115,6 +115,7 @@ return {
       return points, p(table.concat(descr, "\n"))
    end
 
+   local plrs = wl.Game().players
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs)
       set_textdomain("win_conditions")
