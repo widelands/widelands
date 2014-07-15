@@ -175,8 +175,6 @@ public:
 
 	void load_finish(Editor_Game_Base &) override;
 
-	const Tribe_Descr & tribe() const {return descr().tribe();}
-
 	virtual int32_t  get_type    () const override;
 	char const * type_name() const override {return "building";}
 	virtual int32_t  get_size    () const override;
@@ -190,7 +188,6 @@ public:
 	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
 	const std::string & name() const override;
-	const std::string & descname() const {return descr().descname();}
 
 	std::string info_string(const std::string & format);
 	virtual std::string get_statistics_string();
@@ -210,11 +207,6 @@ public:
 
 	bool leave_check_and_wait(Game &, Worker &);
 	void leave_skip(Game &, Worker &);
-	uint32_t get_conquers() const {return descr().get_conquers();}
-	virtual uint32_t vision_range() const {
-		return descr().vision_range();
-	}
-
 
 	// Get/Set the priority for this waretype for this building. 'type' defines
 	// if this is for a worker or a ware, 'index' is the type of worker or ware.
@@ -227,10 +219,6 @@ public:
 
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
-
-	const Building_Index & enhancement() const {
-		return descr().enhancement();
-	}
 
 	/**
 	 * The former buildings vector keeps track of all former buildings

@@ -499,7 +499,7 @@ void Building::destroy(Editor_Game_Base & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	const Tribe_Descr & t = tribe();
+	const Tribe_Descr & t     = descr().tribe();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -545,13 +545,13 @@ std::string Building::info_string(const std::string & format) {
 			FORMAT('y', get_position().y);
 			FORMAT
 				('c', '(' << get_position().x << ", " << get_position().y << ')');
-			FORMAT('A', descname());
+			FORMAT('A', descr().descname());
 			FORMAT('a', name());
 			case 'N':
 				if (upcast(ConstructionSite const, constructionsite, this))
 					result << constructionsite->building().descname();
 				else
-					result << descname();
+					result << descr().descname();
 				break;
 			case 'n':
 				if (upcast(ConstructionSite const, constructionsite, this))
@@ -881,10 +881,10 @@ void Building::set_seeing(bool see)
 
 	if (see)
 		player.see_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 	else
 		player.unsee_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
 	m_seeing = see;
 }

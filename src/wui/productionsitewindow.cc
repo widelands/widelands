@@ -191,7 +191,7 @@ void ProductionSite_Window::update_worker_table()
 			}
 		} else if (request) {
 			const Widelands::Worker_Descr * desc =
-				productionsite().tribe().get_worker_descr(request->get_index());
+				productionsite().descr().tribe().get_worker_descr(request->get_index());
 			er.set_picture
 				(0, desc->icon(),
 					request->is_open() ? _("(vacant)") : _("(coming)"));

@@ -708,7 +708,7 @@ void Ship::set_destination(Game & game, PortDock & pd) {
 }
 
 void Ship::add_item(Game & game, const ShippingItem & item) {
-	assert(m_items.size() < get_capacity());
+	assert(m_items.size() < descr().get_capacity());
 
 	m_items.push_back(item);
 	m_items.back().set_location(game, this);
