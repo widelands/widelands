@@ -1337,7 +1337,7 @@ Ware_Index Worker::level(Game & game) {
 	// This silently expects that the new worker is the same type as the old
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
-	assert(becomes());
+	assert(descr().becomes());
 	const Tribe_Descr & t = descr().tribe();
 	Ware_Index const old_index = t.worker_index(descr().name());
 	Ware_Index const new_index = descr().becomes();
