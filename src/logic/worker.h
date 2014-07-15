@@ -83,10 +83,6 @@ public:
 	char const * type_name() const override {return "worker";}
 	virtual Bob::Type get_bob_type() const override {return Bob::WORKER;}
 
-	uint32_t get_animation(char const * const str) const {
-		return descr().get_animation(str);
-	}
-
 	Player & owner() const {assert(get_owner()); return *get_owner();}
 	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
 		return m_location.get(egbase);

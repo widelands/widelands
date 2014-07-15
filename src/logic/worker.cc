@@ -1337,7 +1337,7 @@ Ware_Index Worker::level(Game & game) {
 	// This silently expects that the new worker is the same type as the old
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
-	assert(becomes());
+	assert(descr().becomes());
 	const Tribe_Descr & t = descr().tribe();
 	Ware_Index const old_index = t.worker_index(descr().name());
 	Ware_Index const new_index = descr().becomes();
@@ -1447,7 +1447,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 			molog("[transfer]: Blocked by a battle\n");
 
 			signal_handled();
-			return start_task_idle(game, get_animation("idle"), 500);
+			return start_task_idle(game, descr().get_animation("idle"), 500);
 		} else {
 			molog("[transfer]: Cancel due to signal '%s'\n", signal.c_str());
 			return pop_task(game);
@@ -2051,7 +2051,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
 
-	return start_task_idle(game, get_animation("idle"), 1000);
+	return start_task_idle(game, descr().get_animation("idle"), 1000);
 }
 
 void Worker::gowarehouse_signalimmediate

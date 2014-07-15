@@ -245,7 +245,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) < 0) {
 			worker.start_task_idle
 				(game,
-				 worker.get_animation("work"),
+				 worker.descr().get_animation("work"),
 				 m_work_steptime - game.get_gametime());
 			m_builder_idle = false;
 			return true;
@@ -301,14 +301,14 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
 			worker.start_task_idle
-				(game, worker.get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
+				(game, worker.descr().get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
 			m_builder_idle = false;
 			return true;
 		}
 	}
 	// The only work we have got for you, is to run around to look cute ;)
 	if (!m_builder_idle) {
-		worker.set_animation(game, worker.get_animation("idle"));
+		worker.set_animation(game, worker.descr().get_animation("idle"));
 		m_builder_idle = true;
 	}
 	worker.schedule_act(game, 2000);
