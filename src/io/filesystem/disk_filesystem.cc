@@ -23,7 +23,6 @@
 #include <cerrno>
 
 #include <sys/stat.h>
-#include <unistd.h>
 
 #ifdef _WIN32
 #include <dos.h>
@@ -39,6 +38,7 @@
 #include <sys/mman.h>
 #include <sys/statvfs.h>
 #include <sys/types.h>
+#include <unistd.h>
 #endif
 
 #include "base/log.h"
