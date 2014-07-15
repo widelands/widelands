@@ -659,7 +659,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
 					Partially_Finished_Building::request_builder_callback
-						(game, *cs->get_builder_request(), worker->worker_index(), worker, *cs);
+						(game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
 					m_items.resize(i);
 				}
 			}
