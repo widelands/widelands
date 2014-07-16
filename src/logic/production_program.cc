@@ -361,8 +361,6 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 	} catch (const _wexception & e) {
 		throw game_data_error("economy: %s", e.what());
 	}
-
-	return nullptr; // will never be reached
 }
 
 
@@ -379,8 +377,6 @@ ProductionProgram::ActReturn::Condition * create_site_condition
 	} catch (const _wexception & e) {
 		throw game_data_error("site: %s", e.what());
 	}
-
-	return nullptr; // will never be reached
 }
 
 
@@ -397,8 +393,6 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 	} catch (const _wexception & e) {
 		throw game_data_error("workers: %s", e.what());
 	}
-
-	return nullptr; // will never be reached
 }
 
 
@@ -422,8 +416,6 @@ ProductionProgram::ActReturn::create_condition
 	} catch (const _wexception & e) {
 		throw game_data_error("invalid condition: %s", e.what());
 	}
-
-	return nullptr; // will never be reached
 }
 
 

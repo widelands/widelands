@@ -29,7 +29,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
-#include "logic/notification.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
@@ -523,7 +522,7 @@ public:
 	}
 
 private:
-	void update_building_statistics(Building &, losegain_t);
+	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const std::string & sender);
 	void _enhance_or_dismantle

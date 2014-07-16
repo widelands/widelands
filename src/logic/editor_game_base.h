@@ -29,8 +29,8 @@
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/map.h"
-#include "logic/notification.h"
 #include "logic/player_area.h"
+#include "notifications/notifications.h"
 
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
@@ -52,6 +52,24 @@ struct PlayerImmovable;
 struct Tribe_Descr;
 struct Flag;
 struct AttackController;
+
+struct NoteFieldPossession {
+	CAN_BE_SEND_AS_NOTE(NoteId::FieldPossession)
+
+	// Has this been lost or gained?
+	enum class Ownership {LOST, GAINED};
+	Ownership ownership;
+
+	// The field that has been lost/gained.
+	FCoords fc;
+
+	// The player that has lost or gained this field.
+	Player * player;
+
+	NoteFieldPossession(const FCoords& init_fc, Ownership const init_ownership, Player* init_player)
+	   : ownership(init_ownership), fc(init_fc), player(init_player) {
+	}
+};
 
 class Editor_Game_Base {
 public:

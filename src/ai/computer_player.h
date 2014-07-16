@@ -20,7 +20,11 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
+#include <string>
+#include <vector>
+
 #include "base/macros.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 class Game;
@@ -34,6 +38,7 @@ class Game;
  */
 struct Computer_Player {
 	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
+	virtual ~Computer_Player();
 
 	virtual void think () = 0;
 

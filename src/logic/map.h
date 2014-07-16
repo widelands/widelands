@@ -32,10 +32,11 @@
 #include "interval.h"
 #include "logic/field.h"
 #include "logic/map_revision.h"
-#include "logic/notification.h"
 #include "logic/objective.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 #include "random/random.h"
 
 class FileSystem;
@@ -69,6 +70,16 @@ const uint16_t MAP_DIMENSIONS[] = {
 struct Path;
 class Immovable;
 
+struct NoteFieldTransformed {
+	CAN_BE_SEND_AS_NOTE(NoteId::FieldTransformed)
+
+	FCoords fc;
+	Map_Index map_index;
+
+	NoteFieldTransformed(const FCoords& init_fc, const Map_Index init_map_index)
+	   : fc(init_fc), map_index(init_map_index) {
+	}
+};
 
 struct ImmovableFound {
 	BaseImmovable * object;

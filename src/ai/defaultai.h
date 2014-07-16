@@ -26,6 +26,7 @@
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "logic/immovable.h"
 
 namespace Widelands {
 struct Road;
@@ -208,7 +209,8 @@ private:
 	int32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                               // building build
 
-	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>> field_possession_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
 };
 
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

@@ -26,6 +26,8 @@
 #include "logic/buildcost.h"
 #include "logic/instances.h"
 #include "logic/widelands_geometry.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 class LuaTable;
 class OneWorldLegacyLookupTable;
@@ -40,7 +42,21 @@ class WareInstance;
 class Worker;
 class World;
 struct Flag;
+struct PlayerImmovable;
 struct Tribe_Descr;
+
+struct NoteImmovable {
+	CAN_BE_SEND_AS_NOTE(NoteId::Immovable)
+
+	PlayerImmovable* pi;
+
+	enum class Ownership {LOST, GAINED};
+	Ownership ownership;
+
+	NoteImmovable(PlayerImmovable* const init_pi, Ownership const init_ownership)
+	   : pi(init_pi), ownership(init_ownership) {
+	}
+};
 
 /**
  * BaseImmovable is the base for all non-moving objects (immovables such as

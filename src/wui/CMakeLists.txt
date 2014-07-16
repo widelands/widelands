@@ -21,6 +21,7 @@ wl_library(wui_chat_ui
     base_i18n
     chat
     graphic
+    graphic_color
     graphic_text
     logic
     profile

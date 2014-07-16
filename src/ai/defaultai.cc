@@ -88,24 +88,23 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
      military_last_dismantle_(0),
      military_last_build_(0) {
 
-   // Subscribe to NoteImmovables.
-	immovable_subscriber_ =
-	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
-			if (note.lg == LOSE) {
-				lose_immovable(*note.pi);
-			} else {
-				gain_immovable(*note.pi);
-		   }
+	// Subscribe to NoteFieldPossession.
+	field_possession_subscriber_ =
+		Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
+			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+				unusable_fields.push_back(note.fc);
+			}
 		});
 
-	/// Subscribe to NoteFieldPossession.
-	// NOCOM(#sirver): do this.
-	// void DefaultAI::receive(const NoteFieldPossession& note) {
-		// if (note.lg == GAIN)
-			// unusable_fields.push_back(note.fc);
-}
-
-
+   // Subscribe to NoteImmovables.
+	immovable_subscriber_ =
+		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+			if (note.ownership == NoteImmovable::Ownership::GAINED) {
+				gain_immovable(*note.pi);
+			} else {
+				lose_immovable(*note.pi);
+			}
+		});
 }
 
 DefaultAI::~DefaultAI() {
@@ -225,8 +224,6 @@ void DefaultAI::think() {
  */
 void DefaultAI::late_initialization() {
 	player = game().get_player(player_number());
-	NoteReceiver<NoteImmovable>::connect(*player);
-	NoteReceiver<NoteFieldPossession>::connect(*player);
 	tribe = &player->tribe();
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type);
 	Ware_Index const nr_wares = tribe->get_nrwares();

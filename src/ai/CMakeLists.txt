@@ -15,5 +15,4 @@ wl_library(ai
     profile
     base_i18n
     logic
-    logic_notification
 )

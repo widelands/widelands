@@ -178,7 +178,7 @@ Player::Player
 		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
 			if (note.pi->owner().player_number() == player_number()) {
 				if (upcast(Building, building, note.pi))
-					update_building_statistics(*building, note.lg);
+					update_building_statistics(*building, note.ownership);
 			}
 		});
 
@@ -1247,7 +1247,7 @@ const std::vector<uint32_t> * Player::get_ware_stock_statistics
  * Only to be called by \ref receive
  */
 void Player::update_building_statistics
-	(Building & building, losegain_t const lg)
+	(Building & building, NoteImmovable::Ownership ownership)
 {
 	upcast(ConstructionSite const, constructionsite, &building);
 	const std::string & building_name =
@@ -1263,7 +1263,7 @@ void Player::update_building_statistics
 	std::vector<Building_Stats> & stat =
 		m_building_stats[tribe().building_index(building_name.c_str())];
 
-	if (lg == GAIN) {
+	if (ownership == NoteImmovable::Ownership::GAINED) {
 		Building_Stats new_building;
 		new_building.is_constructionsite = constructionsite;
 		new_building.pos = building.get_position();

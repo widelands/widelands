@@ -1393,7 +1393,7 @@ void PlayerImmovable::set_owner(Player * const new_owner) {
 
 	m_owner = new_owner;
 
-	Notifications::publish(NoteImmovable(this, GAIN));
+	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 }
 
 /**
@@ -1412,7 +1412,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 	while (!m_workers.empty())
 		m_workers[0]->set_location(nullptr);
 
-	Notifications::publish(NoteImmovable(this, LOSE));
+	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	BaseImmovable::cleanup(egbase);
 }

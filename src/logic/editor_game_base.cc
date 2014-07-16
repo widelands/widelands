@@ -629,7 +629,8 @@ void Editor_Game_Base::change_field_owner(const FCoords& fc, Player_Number const
 	}
 
 	if (old_owner) {
-		Notifications::publish(NoteFieldPossession(fc, LOSE, get_player(old_owner)));
+		Notifications::publish(
+		   NoteFieldPossession(fc, NoteFieldPossession::Ownership::LOST, get_player(old_owner)));
 	}
 
 	fc.field->set_owned_by(new_owner);
@@ -640,7 +641,8 @@ void Editor_Game_Base::change_field_owner(const FCoords& fc, Player_Number const
 	inform_players_about_ownership(fc.field - &first_field, new_owner);
 
 	if (new_owner) {
-		Notifications::publish(NoteFieldPossession(fc, GAIN, get_player(new_owner)));
+		Notifications::publish(
+		   NoteFieldPossession(fc, NoteFieldPossession::Ownership::GAINED, get_player(new_owner)));
 	}
 }
 
