@@ -80,7 +80,7 @@ public:
 	virtual Worker_Descr::Worker_Type get_worker_type() const {
 		return descr().get_worker_type();
 	}
-	char const * type_name() const override {return "worker";}
+
 	virtual Bob::Type get_bob_type() const override {return Bob::WORKER;}
 
 	uint32_t get_animation(char const * const str) const {

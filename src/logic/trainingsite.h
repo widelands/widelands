@@ -36,7 +36,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
 
-	std::string type() const override {return "trainingsite";}
+    char const * type_name() const override {return "trainingsite";}
 
 	virtual Building & create_object() const override;
 
@@ -121,7 +121,6 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(const TrainingSite_Descr &);
 
-	char const * type_name() const override {return "trainingsite";}
 	virtual std::string get_statistics_string() override;
 
 	virtual void init(Editor_Game_Base &) override;

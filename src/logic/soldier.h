@@ -49,7 +49,7 @@ struct Soldier_Descr : public Worker_Descr {
 	// NOTE as well defined in an enum in instances.h
 	virtual Worker_Type get_worker_type() const override {return Worker_Descr::SOLDIER;}
 
-	std::string type() const override {return "soldier";}
+    char const * type_name() const override {return "soldier";}
 
 	virtual void load_graphics() override;
 

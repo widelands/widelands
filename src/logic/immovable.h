@@ -102,7 +102,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	~Immovable_Descr();
 
-	std::string type() const override {return "immovable";}
+    char const * type_name() const override {return "immovable";}
 
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
@@ -163,7 +163,6 @@ public:
 	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
 	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "immovable";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);

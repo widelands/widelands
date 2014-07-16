@@ -24,6 +24,16 @@
 namespace Widelands {
 class Soldier;
 
+class Battle_Descr : public Map_Object_Descr
+{
+
+public:
+    Battle_Descr(char const * const name, char const * const descname);
+    virtual ~Battle_Descr();
+
+    char const * type_name() const override {return "battle";}
+};
+
 /**
  * Manages the battle between two opposing soldiers.
  *
@@ -34,14 +44,14 @@ class Soldier;
  */
 class Battle : public Map_Object {
 public:
-	typedef Map_Object_Descr Descr;
+
+    MO_DESCR(Battle_Descr);
 
 	Battle(); //  for loading an existing battle from a savegame
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	// Implements Map_Object.
 	virtual int32_t get_type() const override {return BATTLE;}
-	virtual char const * type_name() const override {return "battle";}
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;
 	virtual bool has_new_save_support() override {return true;}

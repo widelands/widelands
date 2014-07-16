@@ -55,7 +55,7 @@ public:
 		 const Tribe_Descr &);
 	virtual ~Worker_Descr();
 
-	std::string type() const override {return "worker";}
+    char const * type_name() const override {return "worker";}
 
 	virtual Bob & create_object() const override;
 

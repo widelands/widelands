@@ -30,6 +30,16 @@ namespace Widelands {
 struct Carrier;
 class Request;
 
+class Road_Descr : public Map_Object_Descr
+{
+
+public:
+    Road_Descr(char const * const name, char const * const descname);
+    virtual ~Road_Descr();
+
+    char const * type_name() const override {return "road";}
+};
+
 /**
  * Road is a special object which connects two flags.
  * The Road itself is never rendered; however, the appropriate Field::roads are
@@ -48,6 +58,8 @@ class Request;
 struct Road : public PlayerImmovable {
 	friend class Map_Roaddata_Data_Packet; // For saving
 	friend class Map_Road_Data_Packet; // For init()
+
+    MO_DESCR(Road_Descr);
 
 	static bool IsRoadDescr(Map_Object_Descr const *);
 
@@ -75,7 +87,6 @@ struct Road : public PlayerImmovable {
 
 	virtual int32_t  get_type    () const override;
 	uint8_t get_roadtype() const {return m_type;}
-	char const * type_name() const override {return "road";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 	virtual PositionList get_positions(const Editor_Game_Base &) const override;

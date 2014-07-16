@@ -52,7 +52,7 @@ struct WareDescr : public Map_Object_Descr {
 
 	virtual ~WareDescr() {}
 
-	std::string type() const override {return "ware";}
+    char const * type_name() const override {return "ware";}
 
 	const Tribe_Descr & tribe() const {return m_tribe;}
 

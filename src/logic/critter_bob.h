@@ -43,7 +43,7 @@ struct Critter_Bob_Descr : public BobDescr {
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const override;
-	std::string type() const override {return "critterbob";}
+    char const * type_name() const override {return "critterbob";}
 
 	bool is_swimming() const;
 	uint32_t movecaps() const override;
@@ -67,7 +67,6 @@ class Critter_Bob : public Bob {
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
 
-	char const * type_name() const override {return "critter";}
 	virtual Bob::Type get_bob_type() const override {return Bob::CRITTER;}
 
 	virtual void init_auto_task(Game &) override;

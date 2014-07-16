@@ -450,7 +450,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			schedule_act
 				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
-	log("Message: adding (wh) (%s) %i \n", type_name(), player.player_number());
+    log("Message: adding (wh) (%s) %i \n", descr().type_name(), player.player_number());
 	char message[2048];
 	snprintf
 		(message, sizeof(message),

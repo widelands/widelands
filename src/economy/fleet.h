@@ -32,6 +32,16 @@ class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
 
+class Fleet_Descr : public Map_Object_Descr
+{
+
+public:
+    Fleet_Descr(char const * const name, char const * const descname);
+    virtual ~Fleet_Descr();
+
+    char const * type_name() const override {return "fleet";}
+};
+
 /**
  * Manage all ships and ports of a player that are connected
  * by ocean.
@@ -58,6 +68,8 @@ struct Fleet : Map_Object {
 		PortPath() : cost(-1) {}
 	};
 
+    MO_DESCR(Fleet_Descr);
+
 	Fleet(Player & player);
 
 	Player * get_owner() const {return &m_owner;}
@@ -70,7 +82,6 @@ struct Fleet : Map_Object {
 	bool active() const;
 
 	virtual int32_t get_type() const override;
-	virtual char const * type_name() const override;
 
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;

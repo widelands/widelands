@@ -40,14 +40,11 @@
 
 namespace Widelands {
 
-namespace  {
-
 // Every Map_Object() needs to have a description. So we make a dummy one for
 // Fleet.
 Map_Object_Descr* fleet_description() {
 	static Map_Object_Descr fleet_descr("fleet", "Fleet");
 	return &fleet_descr;
-}
 
 }  // namespace
 
@@ -68,11 +65,6 @@ Fleet::Fleet(Player & player) :
 int32_t Fleet::get_type() const
 {
 	return FLEET;
-}
-
-char const * Fleet::type_name() const
-{
-	return "fleet";
 }
 
 /**

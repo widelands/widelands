@@ -56,7 +56,7 @@ struct ConstructionSite_Descr : public Building_Descr {
 		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const override;
-	std::string type() const override {return "constructionsite";}
+    char const * type_name() const override {return "constructionsite";}
 };
 
 class ConstructionSite : public Partially_Finished_Building {
@@ -69,7 +69,6 @@ class ConstructionSite : public Partially_Finished_Building {
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
 
-	char const * type_name() const override {return "constructionsite";}
 	virtual std::string get_statistics_string() override;
 
 	const Player::Constructionsite_Information & get_info() {return m_info;}

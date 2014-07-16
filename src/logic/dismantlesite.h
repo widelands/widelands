@@ -48,7 +48,7 @@ struct DismantleSite_Descr : public Building_Descr {
 		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const override;
-	std::string type() const override {return "dismantlesite";}
+    char const * type_name() const override {return "dismantlesite";}
 };
 
 class DismantleSite : public Partially_Finished_Building {
@@ -64,7 +64,6 @@ public:
 		(const DismantleSite_Descr & descr, Editor_Game_Base &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
-	char const * type_name() const override {return "dismantlesite";}
 	virtual std::string get_statistics_string() override;
 
 	virtual bool burn_on_destroy() override;

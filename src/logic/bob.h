@@ -55,7 +55,7 @@ class BobDescr : public Map_Object_Descr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
-	std::string type() const override {return "bob";}
+    char const * type_name() const override {return "bob";}
 
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
@@ -229,7 +229,6 @@ public:
 	int32_t get_animstart() const {return m_animstart;}
 
 	virtual int32_t get_type() const override {return BOB;}
-	virtual char const * type_name() const override {return "bob";}
 	virtual Type get_bob_type() const = 0;
 
 	virtual void init(Editor_Game_Base &) override;

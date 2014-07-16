@@ -44,7 +44,7 @@ struct Ship_Descr : BobDescr {
 
 	virtual Bob & create_object() const override;
 
-	std::string type() const override {
+    char const * type_name() const override {
 		return "ship";
 	}
 

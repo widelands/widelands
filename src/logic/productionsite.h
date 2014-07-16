@@ -62,7 +62,7 @@ struct ProductionSite_Descr : public Building_Descr {
 
 	virtual Building & create_object() const override;
 
-	virtual std::string type() const override {
+    char const * type_name() const override {
 		return "productionsite";
 	}
 
@@ -146,7 +146,6 @@ public:
 
 	virtual WaresQueue & waresqueue(Ware_Index) override;
 
-	char const * type_name() const override {return "productionsite";}
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;
 	virtual void act(Game &, uint32_t data) override;

@@ -58,7 +58,7 @@ struct Map_Object_Descr {
 	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-	virtual std::string type() const {
+    virtual char const * type_name() const {
 		return "mapobject";
 	}
 
@@ -201,7 +201,6 @@ protected:
 
 public:
 	virtual int32_t get_type() const = 0;
-	virtual char const * type_name() const {return "map object";}
 
 	Serial serial() const {return m_serial;}
 

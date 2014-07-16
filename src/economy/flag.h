@@ -33,6 +33,16 @@ struct Road;
 class WareInstance;
 
 
+class Flag_Descr : public Map_Object_Descr
+{
+
+public:
+    Flag_Descr(char const * const name, char const * const descname);
+    virtual ~Flag_Descr();
+
+    char const * type_name() const override {return "flag";}
+};
+
 
 /**
  * Flag represents a flag, obviously.
@@ -59,6 +69,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
 	friend struct Router;
 
+    MO_DESCR(Flag_Descr);
+
 	Flag(); /// empty flag for savegame loading
 	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
 	virtual ~Flag();
@@ -67,7 +79,6 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	virtual void destroy(Editor_Game_Base &) override;
 
 	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "flag";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 

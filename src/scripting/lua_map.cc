@@ -562,7 +562,7 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	switch  (mo->get_type()) {
 		case Map_Object::BUILDING:
 		{
-			const char * type_name = mo->type_name();
+            const char * type_name = mo->descr().type_name();
 			if (!strcmp(type_name, "constructionsite"))
 				return CAST_TO_LUA(ConstructionSite);
 			else if (!strcmp(type_name, "productionsite"))
@@ -1060,7 +1060,7 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 			(RO) the name of the building, e.g. building.
 */
 int L_MapObjectDescription::get_type(lua_State * L) {
-	lua_pushstring(L, get()->type());
+    lua_pushstring(L, get()->type_name());
 	return 1;
 }
 
@@ -1952,7 +1952,7 @@ int L_MapObject::get_serial(lua_State * L) {
 		immovable, flag, road, productionsite, warehouse, militarysite...
 */
 int L_MapObject::get_type(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->type_name());
+    lua_pushstring(L, get(L, get_egbase(L))->descr().type_name());
 	return 1;
 }
 

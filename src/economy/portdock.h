@@ -34,6 +34,16 @@ struct Ship;
 class Warehouse;
 class ExpeditionBootstrap;
 
+class PortDock_Descr : public Map_Object_Descr
+{
+
+public:
+    PortDock_Descr(char const * const name, char const * const descname);
+    virtual ~PortDock_Descr();
+
+    char const * type_name() const override {return "portdock";}
+};
+
 /**
  * The PortDock occupies the fields in the water at which ships
  * dock at a port. As such, this class cooperates closely with
@@ -62,6 +72,8 @@ class ExpeditionBootstrap;
  */
 class PortDock : public PlayerImmovable {
 public:
+    MO_DESCR(PortDock_Descr);
+
 	PortDock(Warehouse* warehouse);
 	virtual ~PortDock();
 
@@ -77,7 +89,6 @@ public:
 	virtual int32_t get_size() const override;
 	virtual bool get_passable() const override;
 	virtual int32_t get_type() const override;
-	virtual char const * type_name() const override;
 
 	virtual Flag & base_flag() override;
 	virtual PositionList get_positions

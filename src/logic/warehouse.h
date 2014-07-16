@@ -53,7 +53,7 @@ struct Warehouse_Descr : public Building_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 
-	std::string type() const override {return "warehouse";}
+    char const * type_name() const override {return "warehouse";}
 
 	virtual Building & create_object() const override;
 
@@ -114,8 +114,6 @@ public:
 	virtual ~Warehouse();
 
 	void load_finish(Editor_Game_Base &) override;
-
-	char const * type_name() const override {return "warehouse";}
 
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will

@@ -99,11 +99,6 @@ int32_t PortDock::get_type() const
 	return PORTDOCK;
 }
 
-char const * PortDock::type_name() const
-{
-	return "portdock";
-}
-
 PortDock::PositionList PortDock::get_positions
 	(const Editor_Game_Base &) const
 {

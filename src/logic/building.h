@@ -65,7 +65,7 @@ struct Building_Descr : public Map_Object_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 
-	std::string type() const override {
+    char const * type_name() const override {
 		return "building";
 	}
 
@@ -183,7 +183,6 @@ public:
 	void load_finish(Editor_Game_Base &) override;
 
 	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "building";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 	virtual uint32_t get_ui_anim () const;

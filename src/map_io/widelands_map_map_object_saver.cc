@@ -61,7 +61,7 @@ Map_Map_Object_Saver::get_object_record(const Map_Object & obj)
 
 	MapObjectRec rec;
 #ifndef NDEBUG
-	rec.description  = obj.type_name();
+    rec.description  = obj.descr().type_name();
 	rec.description += " (";
 	rec.description += obj.serial();
 	rec.description += ')';
