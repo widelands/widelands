@@ -172,6 +172,23 @@ Player::Player
 	m_ware_stocks  (tribe_descr.get_nrwares          ())
 {
 	set_name(name);
+
+	// Subscribe to NoteImmovables.
+	immovable_subscriber_ =
+		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+			if (note.pi->owner().player_number() == player_number()) {
+				if (upcast(Building, building, note.pi))
+					update_building_statistics(*building, note.lg);
+			}
+		});
+
+	// Subscribe to NoteFieldTransformed.
+	field_transformed_subscriber_ =
+		Notifications::subscribe<NoteFieldTransformed>([this](const NoteFieldTransformed& note) {
+			if (vision(note.map_index) > 1) {
+				rediscover_node(egbase().map(), egbase().map()[0], note.fc);
+			}
+		});
 }
 
 
@@ -1265,21 +1282,6 @@ void Player::update_building_statistics
 			 "removed at (%i, %i), but nothing is known about this building!",
 			 building_position.x, building_position.y);
 	}
-}
-
-
-void Player::receive(const NoteImmovable & note)
-{
-	if (upcast(Building, building, note.pi))
-		update_building_statistics(*building, note.lg);
-
-	NoteSender<NoteImmovable>::send(note);
-}
-
-
-void Player::receive(const NoteFieldPossession & note)
-{
-	NoteSender<NoteFieldPossession>::send(note);
 }
 
 void Player::setAI(const std::string & ai)

@@ -20,9 +20,17 @@
 #ifndef WL_NOTIFICATIONS_NOTE_IDS_H
 #define WL_NOTIFICATIONS_NOTE_IDS_H
 
-// List all note ids here. They must be unique in the running system, this is
-// easier to guarantee when they are all listed in one place.
-constexpr uint32_t kNoteChatMessage = 0;
-constexpr uint32_t kNoteLogMessage = 1;
+#include <stdint.h>
+
+// List all note ids here. They must be unique in the running
+// system, this is easier to guarantee when they are all listed in
+// one place.
+enum class NoteId : uint32_t {
+	ChatMessage,
+	LogMessage,
+	Immovable,
+	FieldPossession,
+	FieldTransformed,
+};
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

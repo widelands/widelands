@@ -53,98 +53,110 @@ struct Tribe_Descr;
 struct Flag;
 struct AttackController;
 
-class Editor_Game_Base :
-	NoteReceiver<NoteImmovable>,
-	NoteReceiver<NoteFieldPossession>,
-	NoteReceiver<NoteFieldTransformed>
-{
+class Editor_Game_Base {
 public:
 	friend class Interactive_Base;
 	friend struct Fullscreen_Menu_LaunchGame;
 	friend struct Game_Game_Class_Data_Packet;
 
-	Editor_Game_Base(LuaInterface * lua);
+	Editor_Game_Base(LuaInterface* lua);
 	virtual ~Editor_Game_Base();
 
-	void set_map(Map *);
-	Map & map() const {return *map_;}
-	Map * get_map() {return map_;}
-	Map & get_map() const {return *map_;}
-	const Object_Manager & objects() const {return objects_;}
-	Object_Manager       & objects()       {return objects_;}
+	void set_map(Map*);
+	// TODO(sirver): this should just be const Map& map() and Map* mutable_map().
+	Map& map() const {
+		return *map_;
+	}
+	Map* get_map() {
+		return map_;
+	}
+	Map& get_map() const {
+		return *map_;
+	}
+	const Object_Manager& objects() const {
+		return objects_;
+	}
+	Object_Manager& objects() {
+		return objects_;
+	}
 
 	// logic handler func
 	virtual void think();
 
 	// Player commands
 	void remove_player(Player_Number);
-	Player * add_player
-		(Player_Number,
-		 uint8_t             initialization_index,
-		 const std::string & tribe,
-		 const std::string & name,
-		 TeamNumber team = 0);
-	Player * get_player(int32_t n) const;
-	Player & player(int32_t n) const;
-	virtual Player * get_safe_player(Player_Number);
+	Player* add_player(Player_Number,
+	                   uint8_t initialization_index,
+	                   const std::string& tribe,
+	                   const std::string& name,
+	                   TeamNumber team = 0);
+	Player* get_player(int32_t n) const;
+	Player& player(int32_t n) const;
+	virtual Player* get_safe_player(Player_Number);
 
 	// loading stuff
 	void allocate_player_maps();
 	virtual void postload();
-	void load_graphics(UI::ProgressWindow & loader_ui);
+	void load_graphics(UI::ProgressWindow& loader_ui);
 	virtual void cleanup_for_load();
 
 	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building & warp_building
-		(Coords, Player_Number, Building_Index,
-		Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Building & warp_constructionsite
-		(Coords, Player_Number, Building_Index, bool loading = false,
-		 Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Building & warp_dismantlesite
-		(Coords, Player_Number, bool loading = false,
-		Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Bob & create_bob(Coords, const BobDescr &, Player * owner = nullptr);
-	Bob & create_bob
-		(Coords, int, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
-	Bob & create_bob
-		(Coords, const std::string & name, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
-	Immovable & create_immovable(Coords, uint32_t idx, Tribe_Descr const *);
-	Immovable & create_immovable
-		(Coords, const std::string & name, Tribe_Descr const *);
+	Building&
+	warp_building(Coords,
+	              Player_Number,
+	              Building_Index,
+	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	Building&
+	warp_constructionsite(Coords,
+	                      Player_Number,
+	                      Building_Index,
+	                      bool loading = false,
+	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	Building&
+	warp_dismantlesite(Coords,
+	                   Player_Number,
+	                   bool loading = false,
+	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
+	Bob& create_bob(Coords, int, Tribe_Descr const* const = nullptr, Player* owner = nullptr);
+	Bob& create_bob(Coords,
+	                const std::string& name,
+	                Tribe_Descr const* const = nullptr,
+	                Player* owner = nullptr);
+	Immovable& create_immovable(Coords, uint32_t idx, Tribe_Descr const*);
+	Immovable& create_immovable(Coords, const std::string& name, Tribe_Descr const*);
 
-	int32_t get_gametime() const {return gametime_;}
-	Interactive_Base * get_ibase() const {return ibase_;}
+	int32_t get_gametime() const {
+		return gametime_;
+	}
+	Interactive_Base* get_ibase() const {
+		return ibase_;
+	}
 
 	// safe system for storing pointers to non-Map_Object C++ objects
 	// unlike objects in the Object_Manager, these pointers need not be
 	// synchronized across the network, and they are not saved in savegames
-	uint32_t add_trackpointer(void *);
-	void * get_trackpointer(uint32_t serial);
+	uint32_t add_trackpointer(void*);
+	void* get_trackpointer(uint32_t serial);
 	void remove_trackpointer(uint32_t serial);
 
 	// Manually load a tribe into memory. Used by the editor
-	const Tribe_Descr & manually_load_tribe(const std::string & tribe);
-	const Tribe_Descr & manually_load_tribe(Player_Number const p) {
+	const Tribe_Descr& manually_load_tribe(const std::string& tribe);
+	const Tribe_Descr& manually_load_tribe(Player_Number const p) {
 		return manually_load_tribe(map().get_scenario_player_tribe(p));
 	}
 	// Get a tribe from the loaded list, when known or nullptr.
-	Tribe_Descr const * get_tribe(const std::string & name) const;
+	Tribe_Descr const* get_tribe(const std::string& name) const;
 
 	void inform_players_about_ownership(Map_Index, Player_Number);
-	void inform_players_about_immovable(Map_Index, Map_Object_Descr const *);
-	void inform_players_about_road     (FCoords,   Map_Object_Descr const *);
+	void inform_players_about_immovable(Map_Index, Map_Object_Descr const*);
+	void inform_players_about_road(FCoords, Map_Object_Descr const*);
 
-	void unconquer_area
-		(Player_Area<Area<FCoords> >, Player_Number destroying_player = 0);
-	void   conquer_area            (Player_Area<Area<FCoords> >);
-	void   conquer_area_no_building(Player_Area<Area<FCoords> > const);
-
-	void receive(const NoteImmovable &) override;
-	void receive(const NoteFieldPossession     &) override;
-	void receive(const NoteFieldTransformed    &) override;
+	void unconquer_area(Player_Area<Area<FCoords>>, Player_Number destroying_player = 0);
+	void conquer_area(Player_Area<Area<FCoords>>);
+	void conquer_area_no_building(Player_Area<Area<FCoords>> const);
 
 	void cleanup_objects() {
 		objects().cleanup(*this);
@@ -152,36 +164,29 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	int32_t & get_game_time_pointer() {return gametime_;}
-	void set_ibase(Interactive_Base * const b) {ibase_ = b;}
+	int32_t& get_game_time_pointer() {
+		return gametime_;
+	}
+	void set_ibase(Interactive_Base* const b) {
+		ibase_ = b;
+	}
 
 	/// Lua frontend, used to run Lua scripts
-	LuaInterface & lua() {return *lua_;}
+	LuaInterface& lua() {
+		return *lua_;
+	}
 
-	Players_Manager* player_manager() {return player_manager_.get();}
+	Players_Manager* player_manager() {
+		return player_manager_.get();
+	}
 
-	Interactive_GameBase * get_igbase();
+	Interactive_GameBase* get_igbase();
 
 	// Returns the world.
 	const World& world() const;
 
 	// Returns the world that can be modified. Prefer world() whenever possible.
 	World* mutable_world();
-
-private:
-	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.
-	int32_t gametime_;
-	Object_Manager objects_;
-
-	std::unique_ptr<LuaInterface> lua_;
-	std::unique_ptr<Players_Manager> player_manager_;
-
-	std::unique_ptr<World> world_;
-	Interactive_Base* ibase_;
-	Map* map_;
-
-	uint32_t lasttrackserial_;
-	std::map<uint32_t, void*> trackpointers_;
 
 protected:
 	typedef std::vector<Tribe_Descr*> Tribe_Vector;
@@ -212,30 +217,47 @@ private:
 	///  attacking) conquer a location even if another player already owns and
 	///  covers the location with a militarysite, if the conquering player's
 	///  influence becomes greater than the owner's influence.
-	virtual void do_conquer_area
-		(Player_Area<Area<FCoords> > player_area,
-		 bool          conquer,
-		 Player_Number preferred_player                               = 0,
-		 bool          neutral_when_no_influence                      = false,
-		 bool          neutral_when_competing_influence               = false,
-		 bool          conquer_guarded_location_by_superior_influence = false);
-	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
+	virtual void do_conquer_area(Player_Area<Area<FCoords>> player_area,
+	                             bool conquer,
+	                             Player_Number preferred_player = 0,
+	                             bool neutral_when_no_influence = false,
+	                             bool neutral_when_competing_influence = false,
+	                             bool conquer_guarded_location_by_superior_influence = false);
+	void cleanup_playerimmovables_area(Player_Area<Area<FCoords>>);
 
-	DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
-};
+	// Changes the owner of 'fc' from the current player to the new player and
+	// sends notifications about this.
+	void change_field_owner(const FCoords& fc, Player_Number new_owner);
 
-#define iterate_players_existing(p, nr_players, egbase, player)               \
-   iterate_player_numbers(p, nr_players)                                      \
-      if (Widelands::Player * const player = (egbase).get_player(p))          \
+	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to
+	// uint32.
+	int32_t gametime_;
+	Object_Manager objects_;
 
-#define iterate_players_existing_novar(p, nr_players, egbase)                 \
-   iterate_player_numbers(p, nr_players)                                      \
-      if ((egbase).get_player(p))                                             \
+	std::unique_ptr<LuaInterface> lua_;
+	std::unique_ptr<Players_Manager> player_manager_;
 
-#define iterate_players_existing_const(p, nr_players, egbase, player)         \
-   iterate_player_numbers(p, nr_players)                                      \
-      if (Widelands::Player const * const player = (egbase).get_player(p))    \
+	std::unique_ptr<World> world_;
+	Interactive_Base* ibase_;
+	Map* map_;
 
+	uint32_t lasttrackserial_;
+	std::map<uint32_t, void*> trackpointers_;
+
+
+		DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
+	};
+
+#define iterate_players_existing(p, nr_players, egbase, player)                                    \
+	iterate_player_numbers(                                                                         \
+	   p, nr_players) if (Widelands::Player* const player = (egbase).get_player(p))
+
+#define iterate_players_existing_novar(p, nr_players, egbase)                                      \
+	iterate_player_numbers(p, nr_players) if ((egbase).get_player(p))
+
+#define iterate_players_existing_const(p, nr_players, egbase, player)                              \
+	iterate_player_numbers(                                                                         \
+	   p, nr_players) if (Widelands::Player const* const player = (egbase).get_player(p))
 }
 
 #endif  // end of include guard: WL_LOGIC_EDITOR_GAME_BASE_H

@@ -24,10 +24,13 @@
 #include <vector>
 
 #include "logic/widelands_geometry.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 namespace Widelands {
 
 struct PlayerImmovable;
+class Player;
 
 /*
 
@@ -103,6 +106,8 @@ private:
 enum losegain_t {LOSE = 0, GAIN};
 
 struct NoteImmovable {
+	CAN_BE_SEND_AS_NOTE(NoteId::Immovable)
+
 	PlayerImmovable * pi;
 	losegain_t lg;
 
@@ -111,18 +116,31 @@ struct NoteImmovable {
 };
 
 struct NoteFieldPossession {
-	FCoords fc;
+	CAN_BE_SEND_AS_NOTE(NoteId::FieldPossession)
+
+	// Has this been lost of gained?
 	losegain_t lg;
 
-	NoteFieldPossession(const FCoords & _fc, losegain_t const _lg)
-		: fc(_fc), lg(_lg) {}
+	// The field that has been lost/gained.
+	FCoords fc;
+
+	// The player that has lost or gained this field.
+	Player * player;
+
+	NoteFieldPossession(const FCoords& init_fc, losegain_t const init_lg, Player* init_player)
+	   : lg(init_lg), fc(init_fc), player(init_player) {
+	}
 };
 
 struct NoteFieldTransformed {
-	FCoords fc;
+	CAN_BE_SEND_AS_NOTE(NoteId::FieldTransformed)
 
-	NoteFieldTransformed(const FCoords & _fc)
-		: fc(_fc) {}
+	FCoords fc;
+	Map_Index map_index;
+
+	NoteFieldTransformed(const FCoords& _fc, const Map_Index init_map_index)
+	   : fc(_fc), map_index(init_map_index) {
+	}
 };
 
 }

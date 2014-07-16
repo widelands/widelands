@@ -34,7 +34,10 @@ namespace Notifications {
 //
 // The only public interface for the framework are the two functions below.
 
-#define CAN_BE_SEND_AS_NOTE(id) static uint32_t note_id() { return id; }
+#define CAN_BE_SEND_AS_NOTE(id)                                                                    \
+	static uint32_t note_id() {                                                                     \
+		return static_cast<uint32_t>(id);                                                            \
+	}
 
 // Subscribes to a Note of type 'T' with the given callback function. The
 // returned object is opaque, but will unsubscribe on destruction.

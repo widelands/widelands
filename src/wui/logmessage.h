@@ -29,7 +29,7 @@
  * Represents one log message.
  */
 struct LogMessage {
-	CAN_BE_SEND_AS_NOTE(kNoteLogMessage)
+	CAN_BE_SEND_AS_NOTE(NoteId::LogMessage)
 
 	/**
 	 * The (real-)time at which the message was received.

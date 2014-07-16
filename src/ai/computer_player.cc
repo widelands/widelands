@@ -23,7 +23,8 @@
 
 Computer_Player::Computer_Player
 	(Widelands::Game & g, Widelands::Player_Number const pid)
-	: m_game(g), m_player_number(pid)
+	: m_game(g), m_player_number(pid),
+	immovable_subscriber_(Notifications::subscribe<Widelands::NoteImmovable>(
 {
 }
 

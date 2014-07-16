@@ -122,25 +122,6 @@ World* Editor_Game_Base::mutable_world() {
 	return world_.get();
 }
 
-void Editor_Game_Base::receive(const NoteImmovable & note)
-{
-	note.pi->owner().receive(note);
-}
-
-void Editor_Game_Base::receive(const NoteFieldPossession & note)
-{
-	get_player(note.fc.field->get_owned_by())->receive(note);
-}
-
-void Editor_Game_Base::receive(const NoteFieldTransformed & note)
-{
-	Widelands::Map_Index const i = note.fc.field - &(*map_)[0];
-
-	iterate_players_existing(p, map_->get_nrplayers(), *this, plr)
-		if (plr->vision(i) > 1) // player currently sees field?
-			plr->rediscover_node(*map_, (*map_)[0], note.fc);
-}
-
 Interactive_GameBase* Editor_Game_Base::get_igbase()
 {
 	return dynamic_cast<Interactive_GameBase *>(get_ibase());
@@ -237,8 +218,6 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 	delete map_;
 
 	map_ = new_map;
-
-	NoteReceiver<NoteFieldTransformed>::connect(*map_);
 }
 
 
@@ -269,7 +248,7 @@ void Editor_Game_Base::postload()
 
 		if
 			(pid <= MAX_PLAYERS
-			 or
+			 ||
 			 not dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
@@ -533,12 +512,12 @@ void Editor_Game_Base::set_road
 	assert(&first_field <= f.field);
 	assert                (f.field < &first_field + m.max_index());
 	assert
-		(direction == Road_SouthWest or
-		 direction == Road_SouthEast or
+		(direction == Road_SouthWest ||
+		 direction == Road_SouthEast ||
 		 direction == Road_East);
 	assert
-		(roadtype == Road_None or roadtype == Road_Normal or
-		 roadtype == Road_Busy or roadtype == Road_Water);
+		(roadtype == Road_None || roadtype == Road_Normal ||
+		 roadtype == Road_Busy || roadtype == Road_Water);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;
@@ -571,7 +550,7 @@ void Editor_Game_Base::set_road
 		Player::Field & player_field = (&first_player_field)[i];
 		if
 			(1 < player_field                      .vision
-				or
+				||
 				1 < (&first_player_field)[neighbour_i].vision)
 		{
 			player_field.roads &= ~mask;
@@ -641,6 +620,29 @@ void Editor_Game_Base::conquer_area(Player_Area<Area<FCoords> > player_area) {
 	cleanup_playerimmovables_area(player_area);
 }
 
+void Editor_Game_Base::change_field_owner(const FCoords& fc, Player_Number const new_owner) {
+	const Field & first_field = map()[0];
+
+	Player_Number const old_owner = fc.field->get_owned_by();
+	if (old_owner == new_owner) {
+		return;
+	}
+
+	if (old_owner) {
+		Notifications::publish(NoteFieldPossession(fc, LOSE, get_player(old_owner)));
+	}
+
+	fc.field->set_owned_by(new_owner);
+
+	// TODO: the player should do this when it gets the NoteFieldPossession.
+	// This means also sending a note when new_player = 0, i.e. the field is no
+	// longer owned.
+	inform_players_about_ownership(fc.field - &first_field, new_owner);
+
+	if (new_owner) {
+		Notifications::publish(NoteFieldPossession(fc, GAIN, get_player(new_owner)));
+	}
+}
 
 void Editor_Game_Base::conquer_area_no_building
 	(Player_Area<Area<FCoords> > player_area)
@@ -656,15 +658,7 @@ void Editor_Game_Base::conquer_area_no_building
 	assert    (player_area.player_number <= map().get_nrplayers());
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
-		Player_Number const owner = mr.location().field->get_owned_by();
-		if (owner != player_area.player_number) {
-			if (owner)
-				receive(NoteFieldPossession(mr.location(), LOSE));
-			mr.location().field->set_owned_by(player_area.player_number);
-			inform_players_about_ownership
-				(mr.location().field - &first_field, player_area.player_number);
-			receive (NoteFieldPossession(mr.location(), GAIN));
-		}
+		change_field_owner(mr.location(), player_area.player_number);
 	} while (mr.advance(map()));
 
 	//  This must reach one step beyond the conquered area to adjust the borders
@@ -699,7 +693,7 @@ void Editor_Game_Base::do_conquer_area
 	assert    (player_area.player_number <= map().get_nrplayers());
 	assert    (preferred_player          <= map().get_nrplayers());
 	assert(preferred_player != player_area.player_number);
-	assert(not conquer or not preferred_player);
+	assert(not conquer || not preferred_player);
 	Player & conquering_player = player(player_area.player_number);
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
@@ -711,33 +705,22 @@ void Editor_Game_Base::do_conquer_area
 		Player_Number const owner = mr.location().field->get_owned_by();
 		if (conquer) {
 			//  adds the influence
-			Military_Influence new_influence_modified =
-				conquering_player.military_influence(index) += influence;
-			if (owner and not conquer_guarded_location_by_superior_influence)
+			Military_Influence new_influence_modified = conquering_player.military_influence(index) +=
+			   influence;
+			if (owner && not conquer_guarded_location_by_superior_influence)
 				new_influence_modified = 1;
-			if
-				(not owner
-				 or
-				 player(owner).military_influence(index) < new_influence_modified)
-			{
-				if (owner)
-					receive(NoteFieldPossession(mr.location(), LOSE));
-				mr.location().field->set_owned_by(player_area.player_number);
-				inform_players_about_ownership(index, player_area.player_number);
-				receive (NoteFieldPossession(mr.location(), GAIN));
+			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
+				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if
-			(not (conquering_player.military_influence(index) -= influence)
-			 and
-			 owner == player_area.player_number)
-		{
+		} else if (not(conquering_player.military_influence(index) -= influence) &&
+		           owner == player_area.player_number) {
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if
 			//  so, transfer the ownership to that player.
 			Player_Number best_player;
 			if
 				(preferred_player
-				 and
+				 &&
 				 player(preferred_player).military_influence(index))
 				best_player = preferred_player;
 			else {
@@ -761,17 +744,13 @@ void Editor_Game_Base::do_conquer_area
 				}
 			}
 			if (best_player != player_area.player_number) {
-				receive (NoteFieldPossession(mr.location(), LOSE));
-				mr.location().field->set_owned_by (best_player);
-				inform_players_about_ownership(index, best_player);
-				if (best_player)
-					receive (NoteFieldPossession(mr.location(), GAIN));
+				change_field_owner(mr.location(), best_player);
 			}
 		}
 	} while (mr.advance(map()));
 
-	//  This must reach one step beyond the conquered area to adjust the borders
-	//  of neighbour players.
+	// This must reach one step beyond the conquered area to adjust the borders
+	// of neighbour players.
 	++player_area.radius;
 	map().recalc_for_field_area(world(), player_area);
 }

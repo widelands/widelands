@@ -87,6 +87,25 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
      military_under_constr_(0),
      military_last_dismantle_(0),
      military_last_build_(0) {
+
+   // Subscribe to NoteImmovables.
+	immovable_subscriber_ =
+	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+			if (note.lg == LOSE) {
+				lose_immovable(*note.pi);
+			} else {
+				gain_immovable(*note.pi);
+		   }
+		});
+
+	/// Subscribe to NoteFieldPossession.
+	// NOCOM(#sirver): do this.
+	// void DefaultAI::receive(const NoteFieldPossession& note) {
+		// if (note.lg == GAIN)
+			// unusable_fields.push_back(note.fc);
+}
+
+
 }
 
 DefaultAI::~DefaultAI() {
@@ -196,21 +215,6 @@ void DefaultAI::think() {
 		inhibit_road_building_ = gametime + 2500;
 		return;
 	}
-}
-
-/// called by Widelands game engine when an immovable changed
-void DefaultAI::receive(const NoteImmovable& note) {
-	if (note.lg == LOSE) {
-
-		lose_immovable(*note.pi);
-	} else
-		gain_immovable(*note.pi);
-}
-
-/// called by Widelands game engine when a field changed
-void DefaultAI::receive(const NoteFieldPossession& note) {
-	if (note.lg == GAIN)
-		unusable_fields.push_back(note.fc);
 }
 
 /**

@@ -117,10 +117,7 @@ struct FindBobAlwaysTrue : public FindBob {
  *
  * Warning: width and height must be even
  */
-class Map :
-	public ITransportCostCalculator,
-	public NoteSender<NoteFieldTransformed>
-{
+class Map : public ITransportCostCalculator {
 public:
 	friend class Editor;
 	friend class Editor_Game_Base;

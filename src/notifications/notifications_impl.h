@@ -20,6 +20,8 @@
 #ifndef WL_NOTIFICATIONS_NOTIFICATIONS_IMPL_H
 #define WL_NOTIFICATIONS_NOTIFICATIONS_IMPL_H
 
+#include "base/macros.h"
+
 #include <stdint.h>
 
 #include <algorithm>
@@ -28,12 +30,10 @@
 #include <memory>
 #include <unordered_map>
 
-#include <boost/noncopyable.hpp>
-
 namespace Notifications {
 
 // Subscribes to a notification type and unsubscribes on destruction.
-template <typename T> class Subscriber : public boost::noncopyable {
+template <typename T> class Subscriber {
 public:
 	Subscriber(uint32_t id, std::function<void(const T&)> callback) : id_(id), callback_(callback) {
 	}
@@ -45,11 +45,13 @@ private:
 
 	uint32_t id_;
 	std::function<void(const T&)> callback_;
+
+	DISALLOW_COPY_AND_ASSIGN(Subscriber);
 };
 
 // Singleton that dispatches notifications and keeps track of all subscribers.
 // Implementation detail. Instead use the functions from the public header.
-class NotificationsManager : public boost::noncopyable {
+class NotificationsManager {
 public:
 	// Returns the Singleton. Will create it if it does not yet exist.
 	static NotificationsManager* get();
@@ -104,6 +106,8 @@ private:
 	// since this framework should be as efficient as possible, I opted for
 	// using void* and casting instead.
 	std::unordered_map<uint32_t, std::list<void*>>  note_id_to_subscribers_;
+
+	DISALLOW_COPY_AND_ASSIGN(NotificationsManager);
 };
 
 template <typename T> Subscriber<T>::~Subscriber() {

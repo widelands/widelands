@@ -29,7 +29,7 @@
 
 // A chat message as received in game.
 struct ChatMessage {
-	CAN_BE_SEND_AS_NOTE(kNoteChatMessage)
+	CAN_BE_SEND_AS_NOTE(NoteId::ChatMessage)
 
 	// The (real-)time at which the message was received.
 	time_t time;
