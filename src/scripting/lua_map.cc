@@ -1210,7 +1210,11 @@ int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
 		(RO) a building description that this building can enhance to.
 */
 int L_BuildingDescription::get_enhancement(lua_State * L) {
-	return upcasted_building_descr_to_lua(L, get()->tribe().get_building_descr(get()->enhancement()));
+	const Building_Index enhancement = get()->enhancement();
+	if (enhancement == INVALID_INDEX) {
+		return 0;
+	}
+	return upcasted_building_descr_to_lua(L, get()->tribe().get_building_descr(enhancement));
 }
 
 

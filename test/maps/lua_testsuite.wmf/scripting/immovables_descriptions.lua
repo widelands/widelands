@@ -87,19 +87,19 @@ function test_descr:test_enhancement_cost()
    assert_equal(20, total_cost(egbase:get_building_description("barbarians","citadel").enhancement_cost))
 end
 
-function test_descr:test_enhancements()
-	assert_equal("inn", egbase:get_building_description("barbarians","tavern").enhancements[1].name)
-	assert_equal(nil, egbase:get_building_description("barbarians","lumberjacks_hut").enhancements[1])
+function test_descr:test_enhancement()
+	assert_equal("inn", egbase:get_building_description("barbarians","tavern").enhancement.name)
+	assert_equal(nil, egbase:get_building_description("barbarians","lumberjacks_hut").enhancement)
 end
 
 function test_descr:test_ismine()
-   assert_equal(false, egbase:get_building_description("barbarians","headquarters").ismine)
-   assert_equal(true, egbase:get_building_description("barbarians","oremine").ismine)
+   assert_equal(false, egbase:get_building_description("barbarians","headquarters").is_mine)
+   assert_equal(true, egbase:get_building_description("barbarians","oremine").is_mine)
 end
 
 function test_descr:test_isport()
-   assert_equal(false, egbase:get_building_description("barbarians","headquarters").isport)
-   assert_equal(true, egbase:get_building_description("barbarians","port").isport)
+   assert_equal(false, egbase:get_building_description("barbarians","headquarters").is_port)
+   assert_equal(true, egbase:get_building_description("barbarians","port").is_port)
 end
 
 function test_descr:test_returned_wares()
@@ -163,8 +163,8 @@ end
 
 function test_descr:test_inputs()
 	local building_description = wl.Game():get_building_description("barbarians","bakery")
-	assert_equal("wheat", building_description.inputs[1])
-	assert_equal("water", building_description.inputs[2])
+	assert_equal("wheat", building_description.inputs[1].name)
+	assert_equal("water", building_description.inputs[2].name)
 	building_description = wl.Game():get_building_description("barbarians","lumberjacks_hut")
 	assert_equal(nil, building_description.inputs[1])
 end
@@ -377,4 +377,3 @@ function test_descr:test_level_experience()
    assert_equal(19, egbase:get_worker_description("barbarians","miner").level_experience)
    assert_equal(28, egbase:get_worker_description("barbarians","chief-miner").level_experience)
 end
-

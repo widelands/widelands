@@ -45,6 +45,8 @@ if (WIN32)
       ${WIN32_ICON_O}
     USES_SDL
     DEPENDS
+      base_log
+      base_exceptions
       widelands_ball_of_mud
       build_info
   )
@@ -54,6 +56,7 @@ else()
       main.cc
     USES_SDL
     DEPENDS
+      base_log
       base_exceptions
       widelands_ball_of_mud
       build_info

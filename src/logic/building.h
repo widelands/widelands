@@ -100,6 +100,8 @@ struct Building_Descr : public Map_Object_Descr {
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
+	// Returns the enhancement this building can become or
+	// INVALID_INDEX if it cannot be enhanced.
 	const Building_Index & enhancement() const {return m_enhancement;}
 
 	/// Create a building of this type in the game. Calls init, which does
