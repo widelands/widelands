@@ -1320,8 +1320,6 @@ const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Pro
 	.. attribute:: inputs
 		(RO) An array with pairs of int, ware_descr.name describing the input of the productionsite
 */
-// NOCOM(#gunchleoc): Why is this not pushing waredecsriptions direcly? more flexible.
-// NOCOM(#sirver): And how do I do that? I don't see a lua_pushobject in lua.h
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	const ProductionSite_Descr * descr = get();
@@ -1330,7 +1328,7 @@ int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	int index = 1;
 	for (const WareAmount& ware_amount : descr->inputs()) {
 		lua_pushint32(L, index++);
-		lua_pushstring(L, tribe.get_ware_descr(ware_amount.first)->name());
+		to_lua<L_WareDescription>(L, new L_WareDescription(tribe.get_ware_descr(ware_amount.first)));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1361,14 +1359,10 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 
 /* RST
 	.. attribute:: working_positions
-		(RO) An array with pairs of int, worker_descr.name describing the worker positions of the productionsite
+		(RO) An array with :class:`WorkerDescription` containing the workers that
+		can work here with their multiplicity, i.e. for a atlantean mine this
+		would be { miner, miner, miner }.
 */
-// NOCOM(#gunchleoc): should also push descriptions.
-// NOCOM(#gunchleoc): the documentation is not correct. this will push {miner,
-// miner, miner} for an atlantean mine.
-// NOCOM(#sirver): so, how's that not an "array with pairs of..."?
-// Access in Lua is:
-// for i, worker in ipairs(building_description.working_positions) do
 int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
 	const ProductionSite_Descr * descr = get();
@@ -1380,7 +1374,8 @@ int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 		while (amount > 0)
 		{
 			lua_pushint32(L, index++);
-			lua_pushstring(L, tribe.get_worker_descr(positions_pair.first)->name());
+			to_lua<L_WorkerDescription>(
+			   L, new L_WorkerDescription(tribe.get_worker_descr(positions_pair.first)));
 			lua_settable(L, -3);
 			--amount;
 		}
