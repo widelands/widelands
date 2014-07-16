@@ -431,9 +431,9 @@ void WareInstance::enter_building(Game & game, Building & building)
 				("MO(%u): ware(%s): do not know how to move from building %u (%s at (%u,%u)) "
 				 "to %u (%s) -> not a warehouse!",
 				 serial(), m_descr->name().c_str(), building.serial(),
-				 building.name().c_str(), building.get_position().x,
+				 building.descr().name().c_str(), building.get_position().x,
 				 building.get_position().y, nextstep->serial(),
-				 nextstep->name().c_str());
+				 nextstep->descr().name().c_str());
 		} else {
 			Transfer * t = m_transfer;
 

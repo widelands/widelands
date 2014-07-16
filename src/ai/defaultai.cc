@@ -574,12 +574,12 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 						consider_productionsite_influence(
 						   field,
 						   immovables.at(i).coords,
-						   get_building_observer(constructionsite->name().c_str()));
+						   get_building_observer(constructionsite->descr().name().c_str()));
 				}
 
 				if (dynamic_cast<const ProductionSite*>(building))
 					consider_productionsite_influence(
-					   field, immovables.at(i).coords, get_building_observer(building->name().c_str()));
+					   field, immovables.at(i).coords, get_building_observer(building->descr().name().c_str()));
 			}
 
 			if (immovables.at(i).object->has_attribute(tree_attr))
@@ -1505,7 +1505,7 @@ bool DefaultAI::construct_roads(int32_t gametime) {
 		Building* bld = eo_to_connect->flags.front()->get_building();
 
 		if (bld) {
-			BuildingObserver& bo = get_building_observer(bld->name().c_str());
+			BuildingObserver& bo = get_building_observer(bld->descr().name().c_str());
 
 			if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 				game().send_player_bulldoze(*const_cast<Flag*>(eo_to_connect->flags.front()));
@@ -2440,7 +2440,7 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 
 // this is called whenever we gain a new building
 void DefaultAI::gain_building(Building& b) {
-	BuildingObserver& bo = get_building_observer(b.name().c_str());
+	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver& target_bo =
@@ -2489,7 +2489,7 @@ void DefaultAI::gain_building(Building& b) {
 
 // this is called whenever we lose a building
 void DefaultAI::lose_building(const Building& b) {
-	BuildingObserver& bo = get_building_observer(b.name().c_str());
+	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver& target_bo = get_building_observer(

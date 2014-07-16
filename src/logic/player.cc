@@ -1235,7 +1235,7 @@ void Player::update_building_statistics
 	upcast(ConstructionSite const, constructionsite, &building);
 	const std::string & building_name =
 		constructionsite ?
-		constructionsite->building().name() : building.name();
+		constructionsite->building().name() : building.descr().name();
 
 	Building_Index const nr_buildings = tribe().get_nrbuildings();
 

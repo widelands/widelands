@@ -24,5 +24,5 @@ sleep=30000 # Barbarian lumberjack sleeps 25000
 worker=harvest
 
 [idle]
-pics=woodcutter_i_??.png
+pics=woodcutters_house_i_??.png
 hotspot=37 44

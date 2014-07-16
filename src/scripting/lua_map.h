@@ -40,6 +40,9 @@
 
 namespace Widelands {
 	struct Soldier_Descr;
+	struct Building_Descr;
+	struct WareDescr;
+	class Worker_Descr;
 	class Bob;
 }
 
@@ -88,6 +91,312 @@ public:
 private:
 };
 
+
+class L_MapObjectDescription : public L_MapModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_MapObjectDescription);
+
+	virtual ~L_MapObjectDescription() {}
+
+	L_MapObjectDescription() : mapobjectdescr_(nullptr) {}
+	L_MapObjectDescription(const Widelands::Map_Object_Descr* const mapobjectdescr)
+		: mapobjectdescr_(mapobjectdescr) {}
+	L_MapObjectDescription(lua_State* L) : mapobjectdescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'MapObjectDescription' directly!");
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+	int get_type(lua_State *);
+	int get_descname(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+protected:
+	const Widelands::Map_Object_Descr* get() const {
+		assert(mapobjectdescr_ != nullptr);
+		return mapobjectdescr_;
+	}
+	// For persistence.
+	void set_description_pointer(const Widelands::Map_Object_Descr* pointer) {
+		mapobjectdescr_ = pointer;
+	}
+
+private:
+	const Widelands::Map_Object_Descr* mapobjectdescr_;
+};
+
+#define CASTED_GET_DESCRIPTION(klass)                                                              \
+	const Widelands::klass* get() const {                                                           \
+		return static_cast<const Widelands::klass*>(L_MapObjectDescription::get());                  \
+	}
+
+class L_BuildingDescription : public L_MapObjectDescription {
+public:
+	LUNA_CLASS_HEAD(L_BuildingDescription);
+
+	virtual ~L_BuildingDescription() {}
+
+	L_BuildingDescription() {}
+	L_BuildingDescription(const Widelands::Building_Descr* const buildingdescr)
+	   : L_MapObjectDescription(buildingdescr) {
+	}
+	L_BuildingDescription(lua_State* L) : L_MapObjectDescription(L) {
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_build_cost(lua_State *);
+	int get_buildable(lua_State *);
+	int get_conquers(lua_State *);
+	int get_destructible(lua_State *);
+	int get_enhanced(lua_State *);
+	int get_enhancement_cost(lua_State *);
+	int get_enhancement(lua_State *);
+	int get_is_mine(lua_State *);
+	int get_is_port(lua_State *);
+	int get_isproductionsite(lua_State *);
+	int get_returned_wares(lua_State *);
+	int get_returned_wares_enhanced(lua_State *);
+	int get_size(lua_State *);
+	int get_vision_range(lua_State *);
+	int get_workarea_radius(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(Building_Descr);
+};
+
+
+class L_ProductionSiteDescription : public L_BuildingDescription {
+public:
+	LUNA_CLASS_HEAD(L_ProductionSiteDescription);
+
+	virtual ~L_ProductionSiteDescription() {}
+
+	L_ProductionSiteDescription() {}
+	L_ProductionSiteDescription(const Widelands::ProductionSite_Descr* const productionsitedescr)
+	   : L_BuildingDescription(productionsitedescr) {
+	}
+	L_ProductionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_inputs(lua_State *);
+	int get_output_ware_types(lua_State *);
+	int get_working_positions(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(ProductionSite_Descr);
+};
+
+
+class L_MilitarySiteDescription : public L_ProductionSiteDescription {
+public:
+	LUNA_CLASS_HEAD(L_MilitarySiteDescription);
+
+	virtual ~L_MilitarySiteDescription() {}
+
+	L_MilitarySiteDescription() {}
+	L_MilitarySiteDescription(const Widelands::ProductionSite_Descr* const militarysitedescr)
+	   : L_ProductionSiteDescription(militarysitedescr) {
+	}
+	L_MilitarySiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_heal_per_second(lua_State *);
+	int get_max_number_of_soldiers(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(MilitarySite_Descr);
+};
+
+
+class L_TrainingSiteDescription : public L_ProductionSiteDescription {
+public:
+	LUNA_CLASS_HEAD(L_TrainingSiteDescription);
+
+	virtual ~L_TrainingSiteDescription() {}
+
+	L_TrainingSiteDescription() {}
+	L_TrainingSiteDescription(const Widelands::ProductionSite_Descr* const trainingsitedescr)
+	   : L_ProductionSiteDescription(trainingsitedescr) {
+	}
+	L_TrainingSiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_max_attack(lua_State *);
+	int get_max_defense(lua_State *);
+	int get_max_evade(lua_State *);
+	int get_max_hp(lua_State *);
+	int get_max_number_of_soldiers(lua_State *);
+	int get_min_attack(lua_State *);
+	int get_min_defense(lua_State *);
+	int get_min_evade(lua_State *);
+	int get_min_hp(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(TrainingSite_Descr);
+};
+
+
+
+class L_WarehouseDescription : public L_BuildingDescription {
+public:
+	LUNA_CLASS_HEAD(L_WarehouseDescription);
+
+	virtual ~L_WarehouseDescription() {}
+
+	L_WarehouseDescription() {}
+	L_WarehouseDescription(const Widelands::Warehouse_Descr* const warehousedescr)
+	   : L_BuildingDescription(warehousedescr) {
+	}
+	L_WarehouseDescription(lua_State* L) : L_BuildingDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_heal_per_second(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(Warehouse_Descr);
+};
+
+
+
+class L_WareDescription : public L_MapObjectDescription {
+public:
+	LUNA_CLASS_HEAD(L_WareDescription);
+
+	virtual ~L_WareDescription() {}
+
+	L_WareDescription()  {}
+	L_WareDescription(const Widelands::WareDescr* const waredescr)
+		: L_MapObjectDescription(waredescr) {}
+	L_WareDescription(lua_State* L) : L_MapObjectDescription(L) {
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_producers(lua_State *);
+	int get_consumers(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(WareDescr);
+};
+
+
+class L_WorkerDescription : public L_MapObjectDescription {
+public:
+	LUNA_CLASS_HEAD(L_WorkerDescription);
+
+	virtual ~L_WorkerDescription() {}
+
+	L_WorkerDescription() {}
+	L_WorkerDescription(const Widelands::Worker_Descr* const workerdescr)
+	   : L_MapObjectDescription(workerdescr) {
+	}
+	L_WorkerDescription(lua_State* L) : L_MapObjectDescription(L) {
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_becomes(lua_State*);
+	int get_level_experience(lua_State*);
+	int get_buildable(lua_State*);
+	int get_buildcost(lua_State*);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(Worker_Descr);
+};
+
+#undef CASTED_GET_DESCRIPTION
 
 #define CASTED_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
@@ -229,7 +538,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_building_type(lua_State* L);
 	int get_flag(lua_State* L);
 
 	/*
@@ -655,6 +963,7 @@ public:
 	 */
 };
 
+int upcasted_building_descr_to_lua(lua_State* L, const Widelands::Building_Descr* descr);
 int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
 int upcasted_bob_to_lua(lua_State * L, Widelands::Bob * mo);
 

@@ -1024,7 +1024,8 @@ void Game::sample_statistics()
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
 			cr->push_arg(plr);
-			cr->resume(&custom_statistic[p - 1]);
+			cr->resume();
+			custom_statistic[p - 1] = cr->pop_uint32();
 		}
 	}
 

@@ -602,7 +602,7 @@ void Worker::informPlayer
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
 	// NOTE  AND fish_breeders
-	if (building.name() == "fish_breeders_house")
+	if (building.descr().name() == "fish_breeders_house")
 		return;
 
 	// TODO "stone" is defined as "granite" in the world. But this code is
@@ -1171,7 +1171,7 @@ void Worker::set_economy(Economy * const economy)
 
 	if (m_economy)
 		m_economy->remove_workers
-			(descr().tribe().worker_index(name().c_str()), 1);
+			(descr().tribe().worker_index(descr().name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1181,7 +1181,7 @@ void Worker::set_economy(Economy * const economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(descr().tribe().worker_index(name().c_str()), 1);
+		m_economy->add_workers(descr().tribe().worker_index(descr().name().c_str()), 1);
 }
 
 

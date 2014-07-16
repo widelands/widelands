@@ -836,7 +836,8 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker* w)
 	if (WareInstance* ware = w->fetch_carried_ware(egbase))
 		incorporate_ware(egbase, ware);
 
-	Ware_Index worker_index = descr().tribe().worker_index(w->name().c_str());
+	Ware_Index worker_index = descr().tribe().worker_index(w->descr().name().c_str());
+
 	m_supply->add_workers(worker_index, 1);
 
 	//  We remove carriers, but we keep other workers around.
