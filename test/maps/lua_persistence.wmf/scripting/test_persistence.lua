@@ -30,7 +30,7 @@ function save_coroutine()
    removed_tree:remove()
 
    building_descr = game:get_building_description("barbarians", "lumberjacks_hut")
-   ware_descr = game:get_ware_description("barbarians","axe")
+   ware_descr = game:get_ware_description("barbarians", "ax")
    worker_descr = game:get_worker_description("barbarians", "lumberjack")
 
    corout = coroutine.create(function()
@@ -96,9 +96,9 @@ function check_coroutine()
    assert_equal(34, field.y)
    assert_equal(tree, field.immovable)
 
-   assert_equal("lumberjacks_hut",building_descr.descname)
-   assert_equal("axe",ware_descr.descname)
-   assert_equal("lumberjack",worker_descr.descname)
+   assert_equal("lumberjacks_hut", building_descr.name)
+   assert_equal("ax", ware_descr.name)
+   assert_equal("lumberjack", worker_descr.name)
 
    assert_equal(global_value_1, false)
    assert_thread(corout)

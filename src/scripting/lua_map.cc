@@ -1630,8 +1630,7 @@ void L_WareDescription::__unpersist(lua_State* L) {
 	UNPERS_STRING("name", name);
 	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
 	Ware_Index idx = tribe->safe_ware_index(name.c_str());
-	set_description_pointer(
-			tribe->get_ware_descr(idx));
+	set_description_pointer(tribe->get_ware_descr(idx));
 }
 
 
@@ -1791,8 +1790,7 @@ void L_WorkerDescription::__unpersist(lua_State* L) {
 	UNPERS_STRING("name", name);
 	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
 	Ware_Index idx = tribe->safe_worker_index(name.c_str());
-	set_description_pointer(
-			tribe->get_ware_descr(idx));
+	set_description_pointer(tribe->get_worker_descr(idx));
 }
 
 /*

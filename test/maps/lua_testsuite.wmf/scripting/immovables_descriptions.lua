@@ -162,17 +162,17 @@ function test_descr:test_name()
 end
 
 function test_descr:test_inputs()
-	local building_description = wl.Game():get_building_description("barbarians","bakery")
+	local building_description = egbase:get_building_description("barbarians","bakery")
 	assert_equal("wheat", building_description.inputs[1].name)
 	assert_equal("water", building_description.inputs[2].name)
-	building_description = wl.Game():get_building_description("barbarians","lumberjacks_hut")
+	building_description = egbase:get_building_description("barbarians","lumberjacks_hut")
 	assert_equal(nil, building_description.inputs[1])
 end
 
 function test_descr:test_output_ware_types()
-	local building_description = wl.Game():get_building_description("barbarians","bakery")
+	local building_description = egbase:get_building_description("barbarians","bakery")
 	assert_equal("pittabread", building_description.output_ware_types[1])
-	building_description = wl.Game():get_building_description("barbarians","gamekeepers_hut")
+	building_description = egbase:get_building_description("barbarians","gamekeepers_hut")
 	assert_equal(nil, building_description.output_ware_types[1])
 end
 
@@ -181,13 +181,13 @@ function test_descr:test_type()
 end
 
 function test_descr:test_working_positions()
-	local building_description = wl.Game():get_building_description("barbarians","deeper_coalmine")
-	assert_equal("master-miner", building_description.working_positions[1])
-	assert_equal("chief-miner", building_description.working_positions[2])
-	assert_equal("miner", building_description.working_positions[3])
-	building_description = wl.Game():get_building_description("barbarians","big_inn")
-	assert_equal("innkeeper", building_description.working_positions[1])
-	assert_equal("innkeeper", building_description.working_positions[2])
+	local building_description = egbase:get_building_description("barbarians","deeper_coalmine")
+	assert_equal("master-miner", building_description.working_positions[1].name)
+	assert_equal("chief-miner", building_description.working_positions[2].name)
+	assert_equal("miner", building_description.working_positions[3].name)
+	building_description = egbase:get_building_description("barbarians","big_inn")
+	assert_equal("innkeeper", building_description.working_positions[1].name)
+	assert_equal("innkeeper", building_description.working_positions[2].name)
 end
 
 
@@ -327,7 +327,7 @@ function test_descr:test_name()
 end
 
 function test_descr:test_consumers()
-	local ware_description = wl.Game():get_ware_description("barbarians","coal")
+	local ware_description = egbase:get_ware_description("barbarians","coal")
    assert_equal("lime_kiln", ware_description.consumers[1].name)
    assert_equal("smelting_works", ware_description.consumers[2].name)
    assert_equal("warmill", ware_description.consumers[3].name)
@@ -336,7 +336,7 @@ function test_descr:test_consumers()
 end
 
 function test_descr:test_producers()
-	local ware_description = wl.Game():get_ware_description("barbarians","coal")
+	local ware_description = egbase:get_ware_description("barbarians","coal")
 	assert_equal("burners_house", ware_description.producers[1].name)
 	assert_equal("deeper_coalmine", ware_description.producers[2].name)
 	assert_equal("deep_coalmine", ware_description.producers[3].name)
