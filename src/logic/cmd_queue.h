@@ -22,6 +22,7 @@
 
 #include <memory>
 #include <queue>
+#include <stdint.h>
 
 #include <stdint.h>
 
