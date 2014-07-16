@@ -3,6 +3,7 @@ output=wine
 
 [aihints]
 build_material=false
+is_food_basic=true
 
 [buildcost]
 wood=1
@@ -32,9 +33,9 @@ animate=working 30000
 produce=wine
 
 [idle]
-pics=vintagery_i_??.png  # ???
+pics=winery_i_??.png  # ???
 hotspot=39 62
 
 [working]
-pics=vintagery_i_??.png  # ???
+pics=winery_i_??.png  # ???
 hotspot=39 62

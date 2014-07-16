@@ -79,7 +79,7 @@ bool IdleWorkerSupply::has_storage() const
 void IdleWorkerSupply::get_ware_type(WareWorker & type, Ware_Index & ware) const
 {
 	type = wwWORKER;
-	ware = m_worker.worker_index();
+	ware = m_worker.descr().worker_index();
 }
 
 /**

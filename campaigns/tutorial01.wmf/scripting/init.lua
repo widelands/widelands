@@ -15,6 +15,7 @@ init.func(plr) -- defined in sc00_headquarters_medium
 set_textdomain("scenario_tutorial01.wmf")
 
 include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
 include "scripting/ui.lua"
 include "scripting/table.lua"
 
@@ -310,7 +311,7 @@ function register_immovable_as_allowed(i)
    end
 
     -- buildings and constructionsite have a flag
-   if i.building_type or i.type == "constructionsite" then
+   if is_building(i) or i.type == "constructionsite" then
       registered_player_immovables[_fmt(i.fields[1].brn)] = true
    end
 end

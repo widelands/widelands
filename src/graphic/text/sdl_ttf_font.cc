@@ -86,13 +86,13 @@ const Surface& SDLTTF_Font::render
 		SDL_SetAlpha(shadow, 0, SDL_ALPHA_OPAQUE);
 		SDL_BlitSurface(shadow, nullptr, text_surface, &dstrct1);
 
-		Uint32* spix = static_cast<Uint32*>(tsurf->pixels);
-		Uint32* dpix = static_cast<Uint32*>(text_surface->pixels);
+		uint32_t* spix = static_cast<uint32_t*>(tsurf->pixels);
+		uint32_t* dpix = static_cast<uint32_t*>(text_surface->pixels);
 
 		// Alpha Blend the Text onto the Shadow. This is really slow, but it is
 		// the only compatible way to do it using SDL 1.2. SDL 2.0 offers more
 		// functionality but is not yet released.
-		Uint8 sr, sg, sb, sa, dr, dg, db, da, outa, outr = 0, outg = 0, outb = 0;
+		uint8_t sr, sg, sb, sa, dr, dg, db, da, outa, outr = 0, outg = 0, outb = 0;
 		for (int y = 0; y < tsurf->h; ++y) {
 			for (int x = 0; x < tsurf->w; ++x) {
 				size_t sidx = (y * tsurf->pitch + 4 * x) / 4;

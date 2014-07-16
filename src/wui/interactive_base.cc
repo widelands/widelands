@@ -84,7 +84,10 @@ Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global
               global_s.get_int("xres", DEFAULT_RESOLUTION_W),
               global_s.get_int("yres", DEFAULT_RESOLUTION_H),
               *this),
+     // Initialize chatoveraly before the toolbar so it is below
      m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
+     m_chatOverlay(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
+     m_toolbar(this, 0, 0, UI::Box::Horizontal),
      m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
      m_egbase(the_egbase),
 #ifndef NDEBUG //  not in releases
@@ -99,9 +102,6 @@ Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global
      m_road_buildhelp_overlay_jobid(0),
      m_buildroad(nullptr),
      m_road_build_player(0),
-     // Initialize chatoveraly before the toolbar so it is below
-     m_chatOverlay(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-     m_toolbar(this, 0, 0, UI::Box::Horizontal),
      m_label_speed_shadow(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
      m_label_speed(this, get_w(), 1, std::string(), UI::Align_TopRight),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none

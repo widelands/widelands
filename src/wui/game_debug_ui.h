@@ -23,7 +23,7 @@
 
 #include "logic/widelands_geometry.h"
 
-struct Interactive_Base;
+class Interactive_Base;
 namespace Widelands {class Map_Object;}
 
 // Open debug window for the given coordinates

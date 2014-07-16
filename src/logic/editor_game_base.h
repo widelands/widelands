@@ -25,8 +25,7 @@
 #include <string>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/map.h"
@@ -35,7 +34,7 @@
 
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
-struct Interactive_Base;
+class Interactive_Base;
 class LuaInterface;
 
 namespace Widelands {
@@ -55,14 +54,13 @@ struct Flag;
 struct AttackController;
 
 class Editor_Game_Base :
-	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
 {
 public:
-	friend struct ::Fullscreen_Menu_LaunchGame;
-	friend struct ::Interactive_Base;
+	friend class Interactive_Base;
+	friend struct Fullscreen_Menu_LaunchGame;
 	friend struct Game_Game_Class_Data_Packet;
 
 	Editor_Game_Base(LuaInterface * lua);
@@ -222,6 +220,8 @@ private:
 		 bool          neutral_when_competing_influence               = false,
 		 bool          conquer_guarded_location_by_superior_influence = false);
 	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
+
+	DISALLOW_COPY_AND_ASSIGN(Editor_Game_Base);
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \

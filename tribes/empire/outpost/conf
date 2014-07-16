@@ -24,3 +24,6 @@ marble=1
 [idle]
 pics=outpost_i_??.png
 hotspot=57 77
+
+[aihints]
+expansion=true

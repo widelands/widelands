@@ -7,23 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-11 05:21+0000\n"
-"PO-Revision-Date: 2010-08-30 23:24+0000\n"
-"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"PO-Revision-Date: 2014-07-12 11:16+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
-"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:40+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-07-13 05:36+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
 "X-Poedit-Country: SPAIN\n"
+"Language: gl\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../world/critters/badger/init.lua:14
 msgid "Badger"
-msgstr ""
+msgstr "Teixo"
 
 #: ../../world/critters/brownbear/init.lua:14
 msgid "Brown bear"
@@ -35,7 +35,7 @@ msgstr "Coello"
 
 #: ../../world/critters/chamois/init.lua:14
 msgid "Chamois"
-msgstr ""
+msgstr "Rebezo"
 
 #: ../../world/critters/deer/init.lua:14
 msgid "Deer"
@@ -47,7 +47,7 @@ msgstr "Parrulo"
 
 #: ../../world/critters/elk/init.lua:14
 msgid "Elk"
-msgstr ""
+msgstr "Cervo canadense"
 
 #: ../../world/critters/fox/init.lua:14
 msgid "Fox"
@@ -55,15 +55,15 @@ msgstr "Raposo"
 
 #: ../../world/critters/lynx/init.lua:14
 msgid "Lynx"
-msgstr ""
+msgstr "Lince"
 
 #: ../../world/critters/marten/init.lua:14
 msgid "Marten"
-msgstr ""
+msgstr "Marta"
 
 #: ../../world/critters/reindeer/init.lua:14
 msgid "Reindeer"
-msgstr ""
+msgstr "Reno"
 
 #: ../../world/critters/sheep/init.lua:18
 msgid "Sheep"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: ../../world/critters/wisent/init.lua:14
 msgid "Wisent"
-msgstr ""
+msgstr "Bisonte"
 
 #: ../../world/critters/wolf/init.lua:14
 msgid "Wolf"
@@ -122,7 +122,7 @@ msgstr ""
 
 #: ../../world/immovables/manmade/snowman/init.lua:5
 msgid "Snowman"
-msgstr ""
+msgstr "Boneco de neve"
 
 #: ../../world/immovables/mushroom1/init.lua:5
 #: ../../world/immovables/mushroom2/init.lua:5
@@ -167,57 +167,50 @@ msgstr "Esqueleto"
 #: ../../world/immovables/standing_stones/standing_stone5_winter/init.lua:5
 #: ../../world/immovables/standing_stones/standing_stone6/init.lua:5
 #: ../../world/immovables/standing_stones/standing_stone7/init.lua:5
-#, fuzzy
 msgid "Standing Stone"
-msgstr "Monolito"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones1/init.lua:12
 #: ../../world/immovables/stones/desert_stones1/init.lua:12
 #: ../../world/immovables/stones/greenland_stones1/init.lua:12
 #: ../../world/immovables/stones/winterland_stones1/init.lua:12
-#, fuzzy
 msgid "Stones 1"
-msgstr "Pedras"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones2/init.lua:12
 #: ../../world/immovables/stones/desert_stones2/init.lua:12
 #: ../../world/immovables/stones/greenland_stones2/init.lua:12
 #: ../../world/immovables/stones/winterland_stones2/init.lua:12
-#, fuzzy
 msgid "Stones 2"
-msgstr "Pedras"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones3/init.lua:12
 #: ../../world/immovables/stones/desert_stones3/init.lua:12
 #: ../../world/immovables/stones/greenland_stones3/init.lua:12
 #: ../../world/immovables/stones/winterland_stones3/init.lua:12
-#, fuzzy
 msgid "Stones 3"
-msgstr "Pedras"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones4/init.lua:12
 #: ../../world/immovables/stones/desert_stones4/init.lua:12
 #: ../../world/immovables/stones/greenland_stones4/init.lua:12
 #: ../../world/immovables/stones/winterland_stones4/init.lua:12
-#, fuzzy
 msgid "Stones 4"
-msgstr "Pedras"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones5/init.lua:12
 #: ../../world/immovables/stones/desert_stones5/init.lua:12
 #: ../../world/immovables/stones/greenland_stones5/init.lua:12
 #: ../../world/immovables/stones/winterland_stones5/init.lua:12
-#, fuzzy
 msgid "Stones 5"
-msgstr "Pedras"
+msgstr ""
 
 #: ../../world/immovables/stones/blackland_stones6/init.lua:12
 #: ../../world/immovables/stones/desert_stones6/init.lua:12
 #: ../../world/immovables/stones/greenland_stones6/init.lua:12
 #: ../../world/immovables/stones/winterland_stones6/init.lua:12
-#, fuzzy
 msgid "Stones 6"
-msgstr "Pedras"
+msgstr ""
 
 #: ../../world/immovables/track_winter/init.lua:5
 msgid "Track"
@@ -313,9 +306,8 @@ msgid "Dead Tree"
 msgstr "Árbore morta"
 
 #: ../../world/immovables/trees/fallentree/init.lua:12
-#, fuzzy
 msgid "Fallen Tree"
-msgstr "Árbore morta"
+msgstr "Árbore caída"
 
 #: ../../world/immovables/trees/larch_summer_mature/init.lua:5
 msgid "Larch (Mature)"
@@ -610,24 +602,20 @@ msgid "Coniferous Trees"
 msgstr ""
 
 #: ../../world/init.lua:41
-#, fuzzy
 msgid "Dead Trees"
-msgstr "Árbore morta"
+msgstr ""
 
 #: ../../world/init.lua:47
-#, fuzzy
 msgid "Deciduous Trees"
-msgstr "Árbore morta"
+msgstr ""
 
 #: ../../world/init.lua:53
-#, fuzzy
 msgid "Palm Trees"
-msgstr "Árbore morta"
+msgstr ""
 
 #: ../../world/init.lua:59
-#, fuzzy
 msgid "Wasteland Trees"
-msgstr "Árbore morta"
+msgstr ""
 
 #: ../../world/resources/init.lua:5
 msgid "Coal"
@@ -645,7 +633,8 @@ msgstr "Ferro"
 msgid "Granite"
 msgstr "Granito"
 
-#: ../../world/resources/init.lua:57 ../../world/terrains/init.lua:212
+#: ../../world/resources/init.lua:57
+#: ../../world/terrains/init.lua:212
 msgid "Water"
 msgstr "Auga"
 
@@ -697,19 +686,23 @@ msgstr ""
 msgid "Mountain Meadow"
 msgstr ""
 
-#: ../../world/terrains/init.lua:114 ../../world/terrains/init.lua:312
+#: ../../world/terrains/init.lua:114
+#: ../../world/terrains/init.lua:312
 msgid "Mountain 1"
 msgstr ""
 
-#: ../../world/terrains/init.lua:126 ../../world/terrains/init.lua:324
+#: ../../world/terrains/init.lua:126
+#: ../../world/terrains/init.lua:324
 msgid "Mountain 2"
 msgstr ""
 
-#: ../../world/terrains/init.lua:138 ../../world/terrains/init.lua:336
+#: ../../world/terrains/init.lua:138
+#: ../../world/terrains/init.lua:336
 msgid "Mountain 3"
 msgstr ""
 
-#: ../../world/terrains/init.lua:150 ../../world/terrains/init.lua:348
+#: ../../world/terrains/init.lua:150
+#: ../../world/terrains/init.lua:348
 msgid "Mountain 4"
 msgstr ""
 
@@ -721,7 +714,8 @@ msgstr ""
 msgid "Beach"
 msgstr ""
 
-#: ../../world/terrains/init.lua:187 ../../world/terrains/init.lua:473
+#: ../../world/terrains/init.lua:187
+#: ../../world/terrains/init.lua:473
 msgid "Snow"
 msgstr ""
 
@@ -882,20 +876,9 @@ msgid "Desert 3"
 msgstr ""
 
 #: ../../world/terrains/init.lua:756
-#, fuzzy
 msgid "Beach (Desert)"
-msgstr "Deserto"
+msgstr ""
 
 #: ../../world/terrains/init.lua:768
-#, fuzzy
 msgid "Water (Desert)"
-msgstr "Deserto"
-
-#~ msgid "The Widelands Development Team"
-#~ msgstr "O equipo de desenvolvemento do Widelands"
-
-#~ msgid "This is the wide and sandy country of the bedouins"
-#~ msgstr "Este é o amplo e areoso país dos beduíns"
-
-#~ msgid "Shell"
-#~ msgstr "Cuncha"
+msgstr ""

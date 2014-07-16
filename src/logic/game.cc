@@ -264,8 +264,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		m_ctrl = nullptr;
 		throw;
 	}
-
-	return false;
 }
 
 
@@ -419,8 +417,6 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		m_ctrl = nullptr;
 		throw;
 	}
-
-	return false;
 }
 
 /**
@@ -1028,7 +1024,8 @@ void Game::sample_statistics()
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
 			cr->push_arg(plr);
-			cr->resume(&custom_statistic[p - 1]);
+			cr->resume();
+			custom_statistic[p - 1] = cr->pop_uint32();
 		}
 	}
 

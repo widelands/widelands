@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-11 05:12+0000\n"
-"PO-Revision-Date: 2014-05-28 17:50+0000\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"PO-Revision-Date: 2014-06-20 15:14+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-12 05:33+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
+"X-Launchpad-Export-Date: 2014-06-21 05:29+0000\n"
+"X-Generator: Launchpad (build 17058)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -330,7 +330,7 @@ msgstr "Schmiedet eine Breitaxt"
 #: ../../tribes/barbarians/tavern/conf:29
 #: ../../tribes/barbarians/warmill/conf:42
 #: ../../tribes/barbarians/weaving-mill/conf:23
-#: ../../tribes/barbarians/well/conf:17
+#: ../../tribes/barbarians/well/conf:18
 msgid "Work"
 msgstr "Arbeit"
 
@@ -628,7 +628,7 @@ msgstr "Eisen"
 #: ../../tribes/barbarians/axfactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner’s House"
-msgstr "%s von der Kohlenmine oder der Köhlerei"
+msgstr "%s von der Kohlemine oder der Köhlerei"
 
 #: ../../tribes/barbarians/axfactory/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:18
@@ -1767,8 +1767,7 @@ msgid ""
 msgstr ""
 "Kohle dient bei den Barbaren gewöhnlich zum Feuern in Hochöfen, "
 "Axtmanufakturen, Waffenschmieden, Helmschmieden und Kalkbrennereien. Kohle "
-"wird in Kohlenminen gefördert oder in der Köhlerei aus Baumstämmen "
-"produziert."
+"wird in Kohleminen gefördert oder in der Köhlerei aus Baumstämmen produziert."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
@@ -1799,7 +1798,7 @@ msgstr ""
 #: ../../tribes/barbarians/coalmine/help.lua:18
 #: ../../tribes/barbarians/deep_coalmine/help.lua:39
 msgid "Coal mine"
-msgstr "Kohlenmine"
+msgstr "Kohlemine"
 
 #: ../../tribes/barbarians/coalmine/help.lua:20
 #: ../../tribes/barbarians/deep_coalmine/help.lua:20
@@ -1922,7 +1921,7 @@ msgstr "Grundstück für ein Bergwerk"
 #: ../../tribes/barbarians/deep_coalmine/help.lua:18
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:38
 msgid "Deep Coal Mine"
-msgstr "Tiefe Kohlenmine"
+msgstr "Tiefe Kohlemine"
 
 #: ../../tribes/barbarians/coalmine/help.lua:51
 #: ../../tribes/barbarians/coalmine/help.lua:54
@@ -2487,7 +2486,7 @@ msgstr "Hauptquartier"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Warehouse"
-msgstr "Warenlager"
+msgstr "Lagerhaus"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Port"
@@ -2586,30 +2585,30 @@ msgstr "Granitmine"
 #: ../../tribes/barbarians/deep_coalmine/help.lua:49
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:18
 msgid "Deeper Coal Mine"
-msgstr "Tiefste Kohlenmine"
+msgstr "Tiefste Kohlemine"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Coal Mine"
-msgstr "Kohlenmine"
+msgstr "Kohlemine"
 
 #: ../../tribes/barbarians/conf:199
 #: ../../tribes/barbarians/deep_oremine/help.lua:44
 #: ../../tribes/barbarians/deeper_oremine/help.lua:16
 msgid "Deeper Iron Ore Mine"
-msgstr "Tiefste Eisenmine"
+msgstr "Tiefste Eisenerzmine"
 
 #: ../../tribes/barbarians/conf:200
 #: ../../tribes/barbarians/deep_oremine/help.lua:16
 #: ../../tribes/barbarians/deeper_oremine/help.lua:33
 #: ../../tribes/barbarians/oremine/help.lua:42
 msgid "Deep Iron Ore Mine"
-msgstr "Tiefe Eisenmine"
+msgstr "Tiefe Eisenerzmine"
 
 #: ../../tribes/barbarians/conf:201
 #: ../../tribes/barbarians/deep_oremine/help.lua:34
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid "Iron Ore Mine"
-msgstr "Eisenmine"
+msgstr "Eisenerzmine"
 
 #: ../../tribes/barbarians/conf:202
 #: ../../tribes/barbarians/deep_goldmine/help.lua:44
@@ -2883,7 +2882,7 @@ msgid ""
 "and armor."
 msgstr ""
 "Golderz wird in Goldminen abgebaut. Im Hochofen wird es zu Gold verhüttet, "
-"welches für einige grosse Gebäude und zur Herstellung von Waffen und "
+"welches für einige große Gebäude und zur Herstellung von Waffen und "
 "Rüstungen benötigt wird."
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
@@ -3026,7 +3025,8 @@ msgid ""
 "Iron ore is mined in iron mines. It delivers iron when smelted in a smelting "
 "works."
 msgstr ""
-"Eisenerz wird in Eisenminen gefördert. Im Hochofen wird daraus später Eisen."
+"Eisenerz wird in Eisenerzminen gefördert. Im Hochofen wird daraus später "
+"Eisen."
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -3684,7 +3684,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner’s House"
-msgstr "Kohle aus einer Kohlenmine oder einer Köhlerei"
+msgstr "Kohle aus einer Kohlemine oder einer Köhlerei"
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""

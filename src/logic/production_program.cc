@@ -1566,7 +1566,7 @@ ProductionProgram::ActConstruct::ActConstruct(
 const Immovable_Descr & ProductionProgram::ActConstruct::get_construction_descr
 	(ProductionSite & psite) const
 {
-	const Immovable_Descr * descr = psite.tribe().get_immovable_descr(objectname);
+	const Immovable_Descr * descr = psite.descr().tribe().get_immovable_descr(objectname);
 	if (!descr)
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
 
@@ -1667,7 +1667,8 @@ bool ProductionProgram::ActConstruct::get_building_work
 	}
 
 	// Second step: give ware to worker
-	WareInstance * ware = new WareInstance(wq->get_ware(), psite.tribe().get_ware_descr(wq->get_ware()));
+	WareInstance* ware =
+	   new WareInstance(wq->get_ware(), psite.descr().tribe().get_ware_descr(wq->get_ware()));
 	ware->init(game);
 	worker.set_carried_ware(game, ware);
 	wq->set_filled(wq->get_filled() - 1);

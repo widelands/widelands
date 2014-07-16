@@ -383,7 +383,7 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "wasteland/hardground4_00.png" },
    dither_layer = 30,
-   temperature = 310,5,
+   temperature = 310.5,
    humidity = 0.225,
    fertility = 0.85,
 }

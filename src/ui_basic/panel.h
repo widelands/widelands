@@ -27,9 +27,9 @@
 #include <string>
 
 #include <SDL_keyboard.h>
-#include <boost/noncopyable.hpp>
 #include <boost/signals2/trackable.hpp>
 
+#include "base/macros.h"
 #include "base/point.h"
 
 class RenderTarget;
@@ -57,7 +57,7 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : boost::signals2::trackable, boost::noncopyable {
+struct Panel : boost::signals2::trackable {
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run
@@ -182,10 +182,10 @@ struct Panel : boost::signals2::trackable, boost::noncopyable {
 	void center_mouse();
 
 	virtual void handle_mousein(bool inside);
-	virtual bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	virtual bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y);
+	virtual bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove
-		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
 	virtual bool handle_alt_drag(int32_t x, int32_t y);
 	virtual bool handle_tooltip();
@@ -259,18 +259,18 @@ private:
 	Panel * child_at_mouse_cursor
 		(int32_t mouse_x, int32_t mouse_y, Panel * child);
 	void do_mousein(bool inside);
-	bool do_mousepress  (const Uint8 btn, int32_t x, int32_t y);
-	bool do_mouserelease(const Uint8 btn, int32_t x, int32_t y);
+	bool do_mousepress  (const uint8_t btn, int32_t x, int32_t y);
+	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mousemove
-		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_key(bool down, SDL_keysym code);
 	bool do_tooltip();
 
 	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
-	static void ui_mousepress  (const Uint8 button, int32_t x, int32_t y);
-	static void ui_mouserelease(const Uint8 button, int32_t x, int32_t y);
+	static void ui_mousepress  (const uint8_t button, int32_t x, int32_t y);
+	static void ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
 	static void ui_mousemove
-		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	static void ui_key(bool down, SDL_keysym code);
 
 
@@ -305,6 +305,8 @@ private:
 	static bool _g_allow_user_input;
 	static const Image* s_default_cursor;
 	static const Image* s_default_cursor_click;
+
+	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {

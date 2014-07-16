@@ -96,39 +96,33 @@ Building_Descr::Building_Descr
 	// Parse build options
 	m_buildable = global_s.get_bool("buildable", true);
 	m_destructible = global_s.get_bool("destructible", true);
-	while
-		(Section::Value const * const v = global_s.get_next_val("enhancement"))
-		try {
-			std::string const target_name = v->get_string();
-			if (target_name == name())
-				throw wexception("enhancement to same type");
-			if (target_name == "constructionsite")
-				throw wexception("enhancement to special type constructionsite");
-			Building_Index const en_i = tribe().building_index(target_name);
-			if (en_i != INVALID_INDEX) {
-				if (enhancements().count(en_i))
-					throw wexception("this has already been declared");
-				m_enhancements.insert(en_i);
+	m_enhancement = INVALID_INDEX;
 
-				//  Merge the enhancements workarea info into this building's
-				//  workarea info.
-				const Building_Descr & enhancement =
-					*tribe().get_building_descr(en_i);
-				container_iterate_const
-					(Workarea_Info, enhancement.m_workarea_info, j)
-				{
-					std::set<std::string> & r = m_workarea_info[j.current->first];
-					container_iterate_const
-						(std::set<std::string>, j.current->second, i)
-						r.insert(*i.current);
-				}
-			} else
-				throw wexception
-					("\"%s\" has not been defined as a building type (wrong declaration order?)",
-					 target_name.c_str());
-		} catch (const _wexception & e) {
-			throw wexception("\"enhancements=%s\": %s", v->get_string(), e.what());
-		}
+	if (Section::Value const * const enVal = global_s.get_next_val("enhancement"))
+	{
+		std::string const target_name = enVal->get_string();
+		if (target_name == name())
+			throw wexception("enhancement to same type");
+		Building_Index const en_i = tribe().building_index(target_name);
+		if (en_i != INVALID_INDEX) {
+			m_enhancement = en_i;
+
+			//  Merge the enhancements workarea info into this building's
+			//  workarea info.
+			const Building_Descr * tmp_enhancement =
+				tribe().get_building_descr(en_i);
+			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
+			{
+				std::set<std::string> & strs = m_workarea_info[area.first];
+				for (std::string str : area.second)
+					strs.insert(str);
+			}
+		} else
+			throw wexception
+				("\"%s\" has not been defined as a building type (wrong declaration order?)",
+				target_name.c_str());
+	}
+
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
 	m_global = directory.find("global/") < directory.size();
 	if (m_buildable || m_enhanced_building) {
@@ -344,20 +338,16 @@ Flag & Building::base_flag()
  */
 uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
-	const Building_Descr & d = descr();
-	if (d.is_destructible()) {
+	const Building_Descr & tmp_descr = descr();
+	if (tmp_descr.is_destructible()) {
 		caps |= PCap_Bulldoze;
-		if (d.is_buildable() or d.is_enhanced())
+		if (tmp_descr.is_buildable() or tmp_descr.is_enhanced())
 			caps |= PCap_Dismantle;
 	}
-	if (d.enhancements().size())
+	if (tmp_descr.enhancement() != INVALID_INDEX)
 		caps |= PCap_Enhancable;
 	return caps;
 }
-
-
-const std::string & Building::name() const {return descr().name();}
-
 
 void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
 {
@@ -505,7 +495,7 @@ void Building::destroy(Editor_Game_Base & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	const Tribe_Descr & t = tribe();
+	const Tribe_Descr & t     = descr().tribe();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -551,19 +541,19 @@ std::string Building::info_string(const std::string & format) {
 			FORMAT('y', get_position().y);
 			FORMAT
 				('c', '(' << get_position().x << ", " << get_position().y << ')');
-			FORMAT('A', descname());
-			FORMAT('a', name());
+			FORMAT('A', descr().descname());
+			FORMAT('a', descr().name());
 			case 'N':
 				if (upcast(ConstructionSite const, constructionsite, this))
 					result << constructionsite->building().descname();
 				else
-					result << descname();
+					result << descr().descname();
 				break;
 			case 'n':
 				if (upcast(ConstructionSite const, constructionsite, this))
 					result << constructionsite->building().name();
 				else
-					result << name();
+					result << descr().name();
 				break;
 			case 'r':
 				if (upcast(ProductionSite const, productionsite, this))
@@ -598,7 +588,7 @@ std::string Building::get_statistics_string()
 
 
 WaresQueue & Building::waresqueue(Ware_Index const wi) {
-	throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
+	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /*
@@ -887,10 +877,10 @@ void Building::set_seeing(bool see)
 
 	if (see)
 		player.see_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 	else
 		player.unsee_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
 	m_seeing = see;
 }

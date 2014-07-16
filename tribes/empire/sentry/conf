@@ -30,3 +30,8 @@ stone=1
 [idle]
 pics=sentry_i_??.png
 hotspot=37 60
+
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true

@@ -352,7 +352,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 	if (m_ship_state == EXP_SCOUTING) {
 		// Check surrounding fields for port buildspaces
 		std::unique_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
-		MapRegion<Area<Coords> > mr(map, Area<Coords>(position, vision_range()));
+		MapRegion<Area<Coords> > mr(map, Area<Coords>(position, descr().vision_range()));
 		bool new_port_space = false;
 		do {
 			if (map.is_port_space(mr.location())) {
@@ -619,16 +619,16 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					state.ivar1 = 1;
 					start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
 					return;
-				} else { // coast reached
-					m_ship_state = EXP_WAITING;
-					start_task_idle(game, descr().main_animation(), 1500);
-					// Send a message to the player, that a new coast was reached
-					std::string msg_head = _("Coast Reached");
-					std::string msg_body =
-						_("An expedition ship reached a coast and is waiting for further commands.");
-					send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
-					return;
 				}
+				// coast reached
+				m_ship_state = EXP_WAITING;
+				start_task_idle(game, descr().main_animation(), 1500);
+				// Send a message to the player, that a new coast was reached
+				std::string msg_head = _("Coast Reached");
+				std::string msg_body =
+					_("An expedition ship reached a coast and is waiting for further commands.");
+				send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
+				return;
 			}
 			break;
 		}
@@ -659,7 +659,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
 					Partially_Finished_Building::request_builder_callback
-						(game, *cs->get_builder_request(), worker->worker_index(), worker, *cs);
+						(game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
 					m_items.resize(i);
 				}
 			}
@@ -708,7 +708,7 @@ void Ship::set_destination(Game & game, PortDock & pd) {
 }
 
 void Ship::add_item(Game & game, const ShippingItem & item) {
-	assert(m_items.size() < get_capacity());
+	assert(m_items.size() < descr().get_capacity());
 
 	m_items.push_back(item);
 	m_items.back().set_location(game, this);

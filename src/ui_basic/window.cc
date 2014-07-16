@@ -430,7 +430,7 @@ void Window::think() {if (not is_minimal()) Panel::think();}
  * Left-click: drag the window
  * Right-click: close the window
  */
-bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my)
+bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
 {
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
@@ -456,7 +456,7 @@ bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my)
 
 	return true;
 }
-bool Window::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
+bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT) {
 		grab_mouse(false);
 		_dragging = false;
@@ -527,7 +527,7 @@ void Window::minimize() {
  * Ensure that the window isn't fully dragged out of the screen.
  */
 bool Window::handle_mousemove
-		(const Uint8, int32_t mx, int32_t my, int32_t, int32_t)
+		(const uint8_t, int32_t mx, int32_t my, int32_t, int32_t)
 {
 	if (_dragging) {
 		const int32_t mouse_x = get_x() + get_lborder() + mx;

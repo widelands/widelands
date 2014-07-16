@@ -926,7 +926,7 @@ void Soldier::attack_update(Game & game, State & state)
 				// Try to find our land
 				Map* map = game.get_map();
 				std::vector<Coords> coords;
-				uint32_t maxdist = vision_range() * 2;
+				uint32_t maxdist = descr().vision_range() * 2;
 				Area<FCoords> area(map->get_fcoords(get_position()), maxdist);
 				if
 					(map->find_reachable_fields
@@ -975,7 +975,7 @@ void Soldier::attack_update(Game & game, State & state)
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
 			defenders = wh->count_workers
-				(game, wh->tribe().worker_index("soldier"), noreq);
+				(game, wh->descr().tribe().worker_index("soldier"), noreq);
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob *> soldiers;
@@ -1555,16 +1555,16 @@ void Soldier::battle_update(Game & game, State &)
 							"happen. No solution for this problem has been "
 							"implemented yet. (bug #536066) (The game has been "
 							"paused.)",
-						 descname().c_str(), serial(), owner().player_number(),
+						 descr().descname().c_str(), serial(), owner().player_number(),
 						 get_position().x, get_position().y,
 						 immovable_position ?
 						 immovable_position->descr().descname().c_str() : ("no"),
-						 opponent.descname().c_str(), opponent.serial(),
+						 opponent.descr().descname().c_str(), opponent.serial(),
 						 opponent.owner().player_number(),
 						 dest.x, dest.y,
 						 immovable_dest ?
 						 immovable_dest->descr().descname().c_str() : ("no"),
-						 descname().c_str());
+						 descr().descname().c_str());
 					owner().add_message
 						(game,
 						 *new Message

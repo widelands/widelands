@@ -32,7 +32,6 @@
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
-#include <SDL_types.h>
 
 #include "base/point.h"
 
@@ -50,13 +49,13 @@ struct Parameter_error : public std::runtime_error {
 // input
 struct InputCallback {
 	void (*mouse_press)
-	(const Uint8 button, // Button number as #defined in SDL_mouse.h.
+	(const uint8_t button, // Button number as #defined in SDL_mouse.h.
 	 int32_t x, int32_t y);      // The coordinates of the mouse at press time.
 	void (*mouse_release)
-	(const Uint8 button, // Button number as #defined in SDL_mouse.h.
+	(const uint8_t button, // Button number as #defined in SDL_mouse.h.
 	 int32_t x, int32_t y);      // The coordinates of the mouse at release time.
 	void (*mouse_move)
-	(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	void (*key)        (bool down, SDL_keysym code);
 };
 

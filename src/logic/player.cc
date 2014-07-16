@@ -133,7 +133,7 @@ void find_former_buildings
 			 ++i)
 		{
 			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
-			if (ob->enhancements().count(oldest_idx)) {
+			if (ob->enhancement() == oldest_idx) {
 				former_buildings->insert(former_buildings->begin(), i);
 				break;
 			}
@@ -447,9 +447,6 @@ Road * Player::build_road(const Path & path) {
 
 				if (BaseImmovable * const imm = fc.field->get_immovable())
 					if (imm->get_size() >= BaseImmovable::SMALL) {
-						log
-							("%i: building road, immovable in the way, type=%d\n",
-							 player_number(), imm->get_type());
 						return nullptr;
 					}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
@@ -721,7 +718,7 @@ void Player::_enhance_or_dismantle
 {
 	if (&building->owner() ==
 	    this and(index_of_new_building == INVALID_INDEX ||
-	             building->descr().enhancements().count(index_of_new_building))) {
+			building->descr().enhancement() == index_of_new_building)) {
 		Building::FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
@@ -1238,7 +1235,7 @@ void Player::update_building_statistics
 	upcast(ConstructionSite const, constructionsite, &building);
 	const std::string & building_name =
 		constructionsite ?
-		constructionsite->building().name() : building.name();
+		constructionsite->building().name() : building.descr().name();
 
 	Building_Index const nr_buildings = tribe().get_nrbuildings();
 

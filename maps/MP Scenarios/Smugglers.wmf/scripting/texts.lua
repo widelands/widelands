@@ -53,6 +53,3 @@ game_over = rt(
 [[Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to collect %5$s.]]
 )
 )
-
-
-

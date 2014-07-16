@@ -76,7 +76,6 @@ struct BaseImmovable : public Map_Object {
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 		= 0;
-	virtual const std::string & name() const;
 
 protected:
 	void set_position(Editor_Game_Base &, Coords);
@@ -103,6 +102,8 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	~Immovable_Descr();
 
+	std::string type() const override {return "immovable";}
+
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
 
@@ -111,6 +112,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 	Tribe_Descr const * get_owner_tribe() const {return m_owner_tribe;}
 
 	const Buildcost & buildcost() const {return m_buildcost;}
+
 
 	// Returns the editor category.
 	const EditorCategory& editor_category() const;
@@ -164,7 +166,6 @@ public:
 	char const * type_name() const override {return "immovable";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
-	const std::string & name() const override;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);
 
 	void program_step(Game & game, uint32_t const delay = 1) {
@@ -182,10 +183,6 @@ public:
 	void switch_program(Game & game, const std::string & programname);
 	bool construct_ware(Game & game, Ware_Index index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
-
-	Tribe_Descr const * get_owner_tribe() const {
-		return descr().get_owner_tribe();
-	}
 
 	bool is_reserved_by_worker() const;
 	void set_reserved_by_worker(bool reserve);

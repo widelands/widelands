@@ -33,6 +33,7 @@
 #include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/diranimations.h"
 #include "graphic/graphic.h"
@@ -55,7 +56,7 @@ using namespace std;
 namespace  {
 
 /// A class that makes iteration over filename_?.png templates easy.
-class NumberGlob : boost::noncopyable {
+class NumberGlob {
 public:
 	typedef uint32_t type;
 	NumberGlob(const std::string& pictmp);
@@ -69,6 +70,8 @@ private:
 	std::string replstr_;
 	uint32_t cur_;
 	uint32_t max_;
+
+	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
 };
 
 /**
@@ -292,6 +295,7 @@ void NonPackedAnimation::load_graphics() {
 		//     opengl texture.
 		const Image* pc_image = g_gr->images().get(filename);
 		if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {
+			// TODO: see bug #1324642
 			throw wexception("playercolor mask has wrong size: (%u, %u), should "
 			                 "be (%u, %u) like the animation frame",
 			                 pc_image->width(),

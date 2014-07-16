@@ -28,6 +28,7 @@
 #endif
 #include <unistd.h>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
@@ -90,7 +91,7 @@ int main(int argc, char * argv[])
 			// from now on, it's a daemon
 			openlog("FREELINE", LOG_PID, LOG_DAEMON);
 		} else {
-			printf("Child has PID %i.\n", pid);
+			log("Child has PID %i.\n", pid);
 			return 0;
 		}
 	}

@@ -83,7 +83,7 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	Player & player = *get_owner();
 	Ware_Index const wareid(action.iparam1);
 	WareInstance & ware =
-		*new WareInstance(wareid, tribe().get_ware_descr(wareid));
+		*new WareInstance(wareid, descr().tribe().get_ware_descr(wareid));
 	ware.init(game);
 
 	set_carried_ware(game, &ware);
@@ -602,7 +602,7 @@ void Worker::informPlayer
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
 	// NOTE  AND fish_breeders
-	if (building.name() == "fish_breeders_house")
+	if (building.descr().name() == "fish_breeders_house")
 		return;
 
 	// TODO "stone" is defined as "granite" in the world. But this code is
@@ -896,7 +896,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
 	game.create_bob
-		(get_position(), state.ivar2, state.svar1 == "world" ? nullptr : &tribe());
+		(get_position(), state.ivar2, state.svar1 == "world" ? nullptr : &descr().tribe());
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -988,7 +988,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 300000, 8);
 		}
 
-		const Tribe_Descr & t = tribe();
+		const Tribe_Descr & t = descr().tribe();
 		game.create_immovable
 			(position,
 			 t.get_resource_indicator
@@ -1171,7 +1171,7 @@ void Worker::set_economy(Economy * const economy)
 
 	if (m_economy)
 		m_economy->remove_workers
-			(descr().tribe().worker_index(name().c_str()), 1);
+			(descr().tribe().worker_index(descr().name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1181,7 +1181,7 @@ void Worker::set_economy(Economy * const economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(descr().tribe().worker_index(name().c_str()), 1);
+		m_economy->add_workers(descr().tribe().worker_index(descr().name().c_str()), 1);
 }
 
 
@@ -1337,10 +1337,10 @@ Ware_Index Worker::level(Game & game) {
 	// This silently expects that the new worker is the same type as the old
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
-	assert(becomes());
-	const Tribe_Descr & t = tribe();
+	assert(descr().becomes());
+	const Tribe_Descr & t = descr().tribe();
 	Ware_Index const old_index = t.worker_index(descr().name());
-	Ware_Index const new_index = becomes();
+	Ware_Index const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
 	assert(new_index != INVALID_INDEX);
 
@@ -1874,7 +1874,7 @@ void Worker::return_update(Game & game, State & state)
 		snprintf
 			(buffer, sizeof(buffer),
 			 _ ("Your %s can't find a way home and will likely die."),
-			 descname().c_str());
+			 descr().descname().c_str());
 		owner().add_message
 			(game,
 			 *new Message
@@ -2180,7 +2180,7 @@ void Worker::start_task_releaserecruit(Game & game, Worker & recruit)
 	push_task(game, taskReleaserecruit);
 	molog
 		("Starting to release %s %u...\n",
-		 recruit.descname().c_str(), recruit.serial());
+		 recruit.descr().descname().c_str(), recruit.serial());
 	return schedule_act(game, 5000);
 }
 
@@ -2563,7 +2563,7 @@ void Worker::fugitive_update(Game & game, State & state)
 	// We always have a high probability to see flags within our vision range,
 	// but with some luck we see flags that are even further away.
 	std::vector<ImmovableFound> flags;
-	int32_t vision = vision_range();
+	int32_t vision = descr().vision_range();
 	int32_t maxdist = 4 * vision;
 	if
 		(map.find_immovables
@@ -2625,7 +2625,7 @@ void Worker::fugitive_update(Game & game, State & state)
 	if
 		(start_task_movepath
 		 	(game,
-		 	 game.random_location(get_position(), vision_range()),
+		 	 game.random_location(get_position(), descr().vision_range()),
 		 	 4,
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 		return;
@@ -3102,7 +3102,7 @@ void Worker::save
 	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Worker);
-	fw.CString(tribe().name());
+	fw.CString(descr().tribe().name());
 	fw.CString(descr().name());
 
 	do_save(egbase, mos, fw);

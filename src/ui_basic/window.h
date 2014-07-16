@@ -82,10 +82,10 @@ public:
 
 	void think() override;
 
-	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my) override;
-	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my) override;
+	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
+	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mousemove
-		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
+		(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 	bool handle_alt_drag (int32_t mx, int32_t my) override;
 	bool handle_tooltip() override;
 

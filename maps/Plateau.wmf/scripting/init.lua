@@ -22,6 +22,7 @@ function mission_thread()
    sleep(300)
 
    send_msg(briefing_1_the_forbidden_island)
+   local o = add_obj(obj_forbidden_island)
 
    local map = wl.Game().map
    while not p1:seen_field(map:get_field(5,8)) do sleep(2345) end
@@ -47,7 +48,8 @@ function mission_thread()
    scroll_smoothly_to(castle)
 
    send_msg(briefing_2_found_ancient_castle)
-   local o = add_obj(obj_capture_ancient_castle)
+   o.done = true
+   o = add_obj(obj_capture_ancient_castle)
 
    -- Wait till we conquered the castle
    while #p1:get_buildings"castle.atlanteans" < 1 do sleep(2345) end
