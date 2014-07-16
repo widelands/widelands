@@ -158,12 +158,6 @@ void PortDock::draw
 	// do nothing
 }
 
-const std::string & PortDock::name() const
-{
-	static const std::string name_("portdock");
-	return name_;
-}
-
 void PortDock::init(Editor_Game_Base & egbase)
 {
 	PlayerImmovable::init(egbase);
@@ -350,7 +344,8 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 	}
 
 	if (ship.get_nritems() < ship.descr().get_capacity() && !m_waiting.empty()) {
-		uint32_t nrload = std::min<uint32_t>(m_waiting.size(), ship.descr().get_capacity() - ship.get_nritems());
+		uint32_t nrload =
+		   std::min<uint32_t>(m_waiting.size(), ship.descr().get_capacity() - ship.get_nritems());
 
 		while (nrload--) {
 			// Check if the item has still a valid destination

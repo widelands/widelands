@@ -602,7 +602,7 @@ void Worker::informPlayer
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
 	// NOTE  AND fish_breeders
-	if (building.name() == "fish_breeders_house")
+	if (building.descr().name() == "fish_breeders_house")
 		return;
 
 	// TODO "stone" is defined as "granite" in the world. But this code is

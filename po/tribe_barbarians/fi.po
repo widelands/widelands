@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-11 05:12+0000\n"
-"PO-Revision-Date: 2014-04-16 03:32+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"PO-Revision-Date: 2014-07-15 05:12+0000\n"
+"Last-Translator: Teppo Mäenpää <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-12 05:33+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
+"X-Launchpad-Export-Date: 2014-07-16 05:44+0000\n"
+"X-Generator: Launchpad (build 17112)\n"
 "X-Poedit-Country: FINLAND\n"
 "Language: fi\n"
 "X-Poedit-Language: Finnish\n"
@@ -24,251 +24,251 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr ""
+msgstr "Hyökkääjiä rajalinnasi luona"
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "Rajalinnasi kimppuun hyökätään"
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "Tappio rajalinnalla."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "Voitto rajalinnalla."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Rajalinnoituksesi havaitsee vihollisen."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Rajalinnoituksesi hyökkäysaallon alla."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Raskas tappio rajalinnoituksella."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Sotilaasi voittivat taistelun rajalinnoituksella."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "Linnasi luona vihollistoimintaa."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Linnaasi hyökätään"
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "Nöyryyttävä tappio linnallasi"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "Sankarillinen voitto linnalla."
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 #: ../../tribes/barbarians/citadel/conf:9
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "Linnakompleksin lähitienoilla vihollisia"
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "Linnakompleksiisi hyökätään."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "Tappio linnakompleksilla."
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 #: ../../tribes/barbarians/citadel/conf:12
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "Voitto linnakompleksilla."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your donjon discovered an aggressor."
-msgstr ""
+msgstr "Vihollisia linnatornisi lähellä."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr ""
+msgstr "Linnatorniisi hyökätään."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr ""
+msgstr "Tappio linnatornilla."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr ""
+msgstr "Voitto linnatornilla."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 #: ../../tribes/barbarians/fortress/conf:8
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Vihollisia linnoituksesi mailla."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/barbarians/fortress/conf:9
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Linnoitukseesi hyökätään."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 #: ../../tribes/barbarians/fortress/conf:10
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "Tappio linnoituksella."
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 #: ../../tribes/barbarians/fortress/conf:11
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Voitto linnoituksella."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Linnakkeesi havaitsi vihollisia."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Linnakkeeseesi hyökätään."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "Tappio linnakkeella."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Voitto linnakkeella."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Vartiotupasi havainnyt vihollisia."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Vartitupaasi hyökätään."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "Tappio vartiotuvalla."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "Voitto vartiotuvalla."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "Suurtornisi näkee vihollisia."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "Suurtoirniisi hyökätään."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "Tappio suurtornilla."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "Voitto suurtornilla"
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "Vihollissotilaita nähty etuvartiosi lähellä."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Etuvartioosi hyökätään."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Tappio etuvartiolla."
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "Voitto etuvartiolla."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Vartiomökkisi on löytänyt vihollisia."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Vartiomökkiisi hyökätään."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Tappio vartiomökillä."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "Voitto vartiomökillä."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "Vihollinen nähty pikkutornin luona."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "Pikkutornistasi taistellaan."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "Tappio pikkutornilla."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "Voitto pikkutornilla."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Vihollisia tornisi luona."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Torniisi hyökätään."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Tappio tornilla."
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Voitto tornilla."
 
 #: ../../tribes/barbarians/ax/conf:1
 msgid ""
@@ -328,9 +328,9 @@ msgstr "Valmista leveä kirves"
 #: ../../tribes/barbarians/tavern/conf:29
 #: ../../tribes/barbarians/warmill/conf:42
 #: ../../tribes/barbarians/weaving-mill/conf:23
-#: ../../tribes/barbarians/well/conf:17
+#: ../../tribes/barbarians/well/conf:18
 msgid "Work"
-msgstr "Työskentele (pääohjelna)"
+msgstr "Työskentelee"
 
 #: ../../tribes/barbarians/axfactory/help.lua:10
 #: ../../tribes/barbarians/bakery/help.lua:10
@@ -641,7 +641,7 @@ msgstr "%s hiilikaivoksesta tai hiilenpolttajalta."
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:60
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "Coal"
-msgstr "Hiili"
+msgstr "Hiiltä"
 
 #: ../../tribes/barbarians/axfactory/help.lua:27
 #: ../../tribes/barbarians/bakery/help.lua:25
@@ -827,8 +827,8 @@ msgstr "Päivitystarvikkeet:"
 #: ../../tribes/barbarians/warmill/help.lua:49
 msgid "%i Blackwood"
 msgid_plural "%i Blackwood"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i lämpöpuu"
+msgstr[1] "%i lämpöpuuta"
 
 #: ../../tribes/barbarians/axfactory/help.lua:36
 #: ../../tribes/barbarians/axfactory/help.lua:42
@@ -848,8 +848,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/warmill/help.lua:50
 msgid "%i Thatch Reed"
 msgid_plural "%i Thatch Reeds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i kaislalyhde"
+msgstr[1] "%i kaislalyhdettä"
 
 #: ../../tribes/barbarians/axfactory/help.lua:37
 #: ../../tribes/barbarians/axfactory/help.lua:43
@@ -865,8 +865,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/warmill/help.lua:51
 msgid "%i Grout"
 msgid_plural "%i Grout"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i laasti"
+msgstr[1] "%i laastia"
 
 #: ../../tribes/barbarians/axfactory/help.lua:38
 #: ../../tribes/barbarians/axfactory/help.lua:44
@@ -924,8 +924,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/warmill/help.lua:52
 msgid "%i Raw Stone"
 msgid_plural "%i Raw Stones"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i kivi"
+msgstr[1] "%i kiveä"
 
 #: ../../tribes/barbarians/axfactory/help.lua:39
 #: ../../tribes/barbarians/axfactory/help.lua:45
@@ -992,8 +992,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/well/help.lua:38
 msgid "%i Log"
 msgid_plural "%i Logs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i tukki"
+msgstr[1] "%i tukkia"
 
 #: ../../tribes/barbarians/axfactory/help.lua:40
 #: ../../tribes/barbarians/deep_coalmine/help.lua:43
@@ -1339,7 +1339,7 @@ msgstr "Tehokkuus:"
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr "jokainen esine"
+msgstr "kukin esine"
 
 #: ../../tribes/barbarians/axfactory/help.lua:64
 msgid ""
@@ -1396,7 +1396,7 @@ msgstr "Pitaleipä"
 #: ../../tribes/barbarians/fishers_hut/help.lua:29
 #: ../../tribes/barbarians/hunters_hut/help.lua:29
 msgid "Tavern"
-msgstr "Krouvi"
+msgstr "Kestikievari"
 
 #: ../../tribes/barbarians/bakery/help.lua:28
 #: ../../tribes/barbarians/conf:183
@@ -1404,7 +1404,7 @@ msgstr "Krouvi"
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 #: ../../tribes/barbarians/micro-brewery/help.lua:27
 msgid "Inn"
-msgstr "Majatalo"
+msgstr "Krouvi"
 
 #: ../../tribes/barbarians/bakery/help.lua:29
 #: ../../tribes/barbarians/conf:182
@@ -1412,7 +1412,7 @@ msgstr "Majatalo"
 #: ../../tribes/barbarians/hunters_hut/help.lua:31
 #: ../../tribes/barbarians/micro-brewery/help.lua:28
 msgid "Big Inn"
-msgstr "Suuri majatalo"
+msgstr "Majatalo"
 
 #: ../../tribes/barbarians/bakery/help.lua:30
 #: ../../tribes/barbarians/conf:214
@@ -1464,11 +1464,11 @@ msgstr "Jos tarvikkeista ei ole pulaa, rakennus voi tuottaa %1$s %2$s:ssä."
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 msgid "a Pitta Bread"
-msgstr ""
+msgstr "pitaleipä"
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Sotilaasi asuttivat rajalinnakkeesi."
 
 #: ../../tribes/barbarians/barrier/help.lua:8
 #: ../../tribes/barbarians/big_inn/help.lua:8
@@ -1500,11 +1500,11 @@ msgstr "Lepää"
 
 #: ../../tribes/barbarians/battlearena/conf:34
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Sotilaan väistökoulutus 0 -> 1"
 
 #: ../../tribes/barbarians/battlearena/conf:35
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Sotilaan väistökoulutus 1 -> 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -1578,8 +1578,8 @@ msgstr "Suuri alue"
 #: ../../tribes/barbarians/trainingcamp/help.lua:49
 msgid "%i Gold"
 msgid_plural "%i Gold"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i kultapala"
+msgstr[1] "%i kultapalaa"
 
 #: ../../tribes/barbarians/battlearena/help.lua:50
 #: ../../tribes/barbarians/conf:132
@@ -1601,6 +1601,8 @@ msgid ""
 "If all needed wares are delivered in time, a Battle Arena can train %1$s for "
 "one soldier from 0 to the highest level in %2$s on average."
 msgstr ""
+"Taistelluareenalla sotilaiden %1s paranee kohti tasoa %s$s, kunhan tarjoilut "
+"pelaavat."
 
 #: ../../tribes/barbarians/battleax/conf:1
 msgid ""
@@ -1626,16 +1628,16 @@ msgstr ""
 #: ../../tribes/barbarians/inn/conf:27
 #: ../../tribes/barbarians/tavern/conf:28
 msgid "Produce ration"
-msgstr "Valmista ruoka-annos"
+msgstr "Valmistaa ruoka-annosta"
 
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
 msgid "Produce snack"
-msgstr "Valmista välipala"
+msgstr "Valmistaa välipalaa"
 
 #: ../../tribes/barbarians/big_inn/conf:29
 msgid "Produce meal"
-msgstr "Valmista ateria"
+msgstr "Valmistaa ateriaa"
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
@@ -1647,6 +1649,8 @@ msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of logs in the wood hardener."
 msgstr ""
+"Lämmittämällä kovetettua puuta käytetään useissa rakennuksissa. Lämpöpuuta "
+"valmistetaan tukeista."
 
 #: ../../tribes/barbarians/bread_paddle/conf:1
 msgid ""
@@ -1718,7 +1722,7 @@ msgstr "Karjankasvattaja"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:47
 msgid "an Ox"
-msgstr ""
+msgstr "härkä"
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -1729,7 +1733,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your citadel."
-msgstr ""
+msgstr "Sotilaasi ovat saapuneet kastelliisi."
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
@@ -1789,7 +1793,7 @@ msgstr "Kaivaa vuorilta %smalmia"
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr "%s krouvista"
+msgstr "%s kestikievarista"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/coalmine/help.lua:28
@@ -1815,7 +1819,7 @@ msgstr "Ruoka-annos"
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr "%s majatalosta"
+msgstr "%s krouvista"
 
 #: ../../tribes/barbarians/coalmine/help.lua:29
 #: ../../tribes/barbarians/deep_coalmine/help.lua:28
@@ -1828,7 +1832,7 @@ msgstr "%s majatalosta"
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr "%s suuresta majatalosta"
+msgstr "%s majatalosta"
 
 #: ../../tribes/barbarians/coalmine/help.lua:32
 #: ../../tribes/barbarians/conf:189
@@ -2099,7 +2103,7 @@ msgstr "Villisika"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "Kirves"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Battle Ax"
@@ -2113,7 +2117,7 @@ msgstr "Olut"
 
 #: ../../tribes/barbarians/conf:63
 msgid "Blackwood"
-msgstr "Mustapuu"
+msgstr "Lämpöpuu"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Broad Ax"
@@ -2258,11 +2262,11 @@ msgstr "Kaislanolki"
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:26
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "Log"
-msgstr ""
+msgstr "Tukki"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Warhelm"
-msgstr ""
+msgstr "Sotakypärä"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Warrior’s Ax"
@@ -2346,7 +2350,7 @@ msgstr "Metsästäjä"
 #: ../../tribes/barbarians/conf:124
 #: ../../tribes/barbarians/metalworks/help.lua:37
 msgid "Innkeeper"
-msgstr "Majatalonpitäjä"
+msgstr "Kievarinpitäjä"
 
 #: ../../tribes/barbarians/conf:125
 #: ../../tribes/barbarians/lime_kiln/help.lua:49
@@ -2378,7 +2382,7 @@ msgstr "Sulattaja"
 #: ../../tribes/barbarians/metalworks/help.lua:39
 #: ../../tribes/barbarians/quarry/help.lua:41
 msgid "Stonemason"
-msgstr "Kivenhakkaaja"
+msgstr "Kivenlouhijia"
 
 #: ../../tribes/barbarians/conf:133
 msgid "Weaver"
@@ -2545,7 +2549,7 @@ msgstr "Karjatila"
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/reed_yard/help.lua:27
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Kutomo"
 
 #: ../../tribes/barbarians/conf:193
 msgid "Farm"
@@ -2701,11 +2705,11 @@ msgstr "%s tai parempi, sekä"
 
 #: ../../tribes/barbarians/donjon/conf:7
 msgid "Your soldiers have occupied your donjon."
-msgstr ""
+msgstr "Sotilaasi saapuvat keskustorniisi."
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
-msgstr "Istuta vehnää"
+msgstr "Kylvää vehnää"
 
 #: ../../tribes/barbarians/farm/conf:22
 msgid "Harvest wheat"
@@ -2754,7 +2758,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Kalastaa merellä."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "‘What do you mean, my fish ain’t fresh?!’"
@@ -2794,7 +2798,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Sotilaasi saapuvat linnoitukseesi."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -2910,15 +2914,15 @@ msgstr "Sulattaa kypäriä sotilaille"
 
 #: ../../tribes/barbarians/helmsmithy/conf:31
 msgid "Produce helm"
-msgstr "Valmista kypärä"
+msgstr "Valmistaa kypärän"
 
 #: ../../tribes/barbarians/helmsmithy/conf:32
 msgid "Produce mask"
-msgstr "Valmista naamio"
+msgstr "Valmistaa maskin"
 
 #: ../../tribes/barbarians/helmsmithy/conf:33
 msgid "Produce warhelm"
-msgstr "Valmista sotakypärä"
+msgstr "Valmistaa sotakypärän"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -3098,43 +3102,43 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce felling ax"
-msgstr "Tuota hakkuukirves"
+msgstr "Valmistaa hakkuukirveen"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "Valmistaa leipälastan"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce fire tongs"
-msgstr "Valmista pihdit"
+msgstr "Valmistaa pihdit"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce fishing rod"
-msgstr "Valmista onki"
+msgstr "Valmistaa ongen"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hammer"
-msgstr "Valmista vasara"
+msgstr "Valmistaa vasaran"
 
 #: ../../tribes/barbarians/metalworks/conf:43
 msgid "Produce kitchen tools"
-msgstr "Valmista keittiövälineet"
+msgstr "Valmistaa keittiövälineet"
 
 #: ../../tribes/barbarians/metalworks/conf:44
 msgid "Produce pick"
-msgstr "Valmista hakku"
+msgstr "Valmistaa hakun"
 
 #: ../../tribes/barbarians/metalworks/conf:45
 msgid "Produce scythe"
-msgstr "Valmista viikate"
+msgstr "Valmistaa viikatteen"
 
 #: ../../tribes/barbarians/metalworks/conf:46
 msgid "Produce shovel"
-msgstr "Valmista lapio"
+msgstr "Valmistaa lapion"
 
 #: ../../tribes/barbarians/metalworks/conf:47
 msgid "Produce hunting spear"
-msgstr "Valmista metsästyskeihäs"
+msgstr "Valmistaa metsästyskeihään"
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "‘We make it work!’"
@@ -3178,7 +3182,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
-msgstr ""
+msgstr "Saa kaivosmiehet kippaamaan"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:16
 msgid ""
@@ -3208,6 +3212,7 @@ msgstr ""
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
 msgstr ""
+"Härät kantavat tavaroita ruuhkaisilla teillä. Niitä kasvatetaan karjatilalla."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -3298,7 +3303,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/reed_yard/conf:19
 msgid "Plant reed"
-msgstr "Istuta kaislaa"
+msgstr "Istuttaa kaislaa"
 
 #: ../../tribes/barbarians/reed_yard/conf:20
 msgid "Harvest reed"
@@ -3369,7 +3374,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "Sotilaasi saapuivat vartiomökkiisi"
 
 #: ../../tribes/barbarians/sharpax/conf:1
 msgid ""
@@ -3456,35 +3461,35 @@ msgstr "Kouluttaa sotilaita."
 
 #: ../../tribes/barbarians/trainingcamp/conf:44
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Sotilaan taistelukoulutus 0 -> 1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:45
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Sotilaan taistelukoulutus 1 -> 2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:46
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Sotilaan taistelukoulutus 2 -> 3"
 
 #: ../../tribes/barbarians/trainingcamp/conf:47
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Sotilaan taistelukoulutus 3 -> 4"
 
 #: ../../tribes/barbarians/trainingcamp/conf:48
 msgid "Upgrade soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "Sotilaan taistelukoulutus 4 -> 5"
 
 #: ../../tribes/barbarians/trainingcamp/conf:49
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Sotilaan kestävyyskoulutus 0 -> 1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:50
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Sotilaan kestävyyskoulutus 1 -> 2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:51
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Sotilaan kestävyyskoulutus 2 -> 3"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:12
 msgid ""
@@ -3506,7 +3511,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:17
 msgid "Note:"
-msgstr ""
+msgstr "Huomaa:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:18
 msgid ""
@@ -3516,7 +3521,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:27
 msgid "Training Attack:"
-msgstr ""
+msgstr "Kouluttaa hyökkäystaitoa:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Provided by the Axfactory"
@@ -3528,7 +3533,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:32
 msgid "Training Health:"
-msgstr ""
+msgstr "Kouluttaa kestävyyttä:"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:34
 msgid "Provided by the Helm Smithy"

@@ -240,10 +240,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
 					//  button id = building id
-					enhancebtn->sigclicked.connect([this, enhancement] {
-					   this->act_enhance(enhancement);
-					});
-					capsbuttons->add
+				   enhancebtn->sigclicked.connect([this, enhancement] {act_enhance(enhancement);});
+				   capsbuttons->add
 						(enhancebtn,
 						 UI::Box::AlignCenter);
 					requires_destruction_separator = true;
@@ -353,10 +351,10 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					 _("Help"));
 
 			UI::UniqueWindow::Registry& registry =
-			   igbase().unique_windows().get_registry(m_building.name() + "_help");
+			   igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
 			registry.open_window = [this, &registry] {
 				new UI::LuaTextHelpWindow(
-				   &igbase(), registry, m_building.descr().descname(), m_building.descr().helptext_script());
+				   &igbase(), registry, m_building.descr(), &igbase().egbase().lua());
 			};
 
 			helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));

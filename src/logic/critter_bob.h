@@ -43,12 +43,14 @@ struct Critter_Bob_Descr : public BobDescr {
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const override;
+	std::string type() const override {return "critterbob";}
 
 	bool is_swimming() const;
 	uint32_t movecaps() const override;
 	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 
 	Critter_BobProgram const * get_program(const std::string &) const;
+
 
 private:
 	DirAnimations m_walk_anims;

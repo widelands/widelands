@@ -52,6 +52,8 @@ struct WareDescr : public Map_Object_Descr {
 
 	virtual ~WareDescr() {}
 
+	std::string type() const override {return "ware";}
+
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack

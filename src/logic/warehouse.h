@@ -53,6 +53,8 @@ struct Warehouse_Descr : public Building_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 
+	std::string type() const override {return "warehouse";}
+
 	virtual Building & create_object() const override;
 
 	virtual uint32_t get_conquers() const override {return m_conquers;}
@@ -60,6 +62,7 @@ struct Warehouse_Descr : public Building_Descr {
 	uint32_t get_heal_per_second        () const {
 		return m_heal_per_second;
 	}
+
 private:
 	int32_t m_conquers;
 	uint32_t m_heal_per_second;

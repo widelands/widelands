@@ -58,6 +58,10 @@ struct Map_Object_Descr {
 	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
+	virtual std::string type() const {
+		return "mapobject";
+	}
+
 	const std::string &     name() const {return m_name;}
 	const std::string & descname() const {return m_descname;}
 	struct Animation_Nonexistent {};

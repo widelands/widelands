@@ -55,6 +55,8 @@ class BobDescr : public Map_Object_Descr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
+	std::string type() const override {return "bob";}
+
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);

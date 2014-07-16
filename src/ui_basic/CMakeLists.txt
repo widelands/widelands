@@ -65,6 +65,8 @@ wl_library(ui_basic
     graphic_surface
     helper
     io_filesystem
+    # TODO(sirver): should not depend on logic
+    logic
     profile
     scripting
     sound

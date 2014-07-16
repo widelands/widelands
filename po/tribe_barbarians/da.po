@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-11 05:12+0000\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
 "PO-Revision-Date: 2014-04-16 03:42+0000\n"
 "Last-Translator: Daniel Ejsing-Duun <daniel@zilvador.dk>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-12 05:32+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
+"X-Launchpad-Export-Date: 2014-06-18 05:36+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -322,7 +322,7 @@ msgstr ""
 #: ../../tribes/barbarians/tavern/conf:29
 #: ../../tribes/barbarians/warmill/conf:42
 #: ../../tribes/barbarians/weaving-mill/conf:23
-#: ../../tribes/barbarians/well/conf:17
+#: ../../tribes/barbarians/well/conf:18
 msgid "Work"
 msgstr "Arbejde"
 

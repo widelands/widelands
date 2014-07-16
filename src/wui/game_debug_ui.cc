@@ -391,7 +391,7 @@ void FieldDebugWindow::think()
 	{
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%s (%u)", imm->name().c_str(), imm->serial());
+			 "%s (%u)", imm->descr().name().c_str(), imm->serial());
 		m_ui_immovable.set_title(buffer);
 		m_ui_immovable.set_enabled(true);
 	} else {
