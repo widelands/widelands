@@ -606,6 +606,9 @@ int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const des
 	else if (is_a(ProductionSite_Descr, desc)) {
 		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
 	}
+	else if (is_a(ConstructionSite_Descr, desc)) {
+		return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
+	}
 	else if (is_a(Warehouse_Descr, desc)) {
 		return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
 	}
@@ -1023,7 +1026,7 @@ const MethodType<L_MapObjectDescription> L_MapObjectDescription::Methods[] = {
 const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] = {
 	PROP_RO(L_MapObjectDescription, descname),
 	PROP_RO(L_MapObjectDescription, name),
-	PROP_RO(L_MapObjectDescription, type),
+	PROP_RO(L_MapObjectDescription, type_name),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1059,7 +1062,7 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 
 			(RO) the name of the building, e.g. building.
 */
-int L_MapObjectDescription::get_type(lua_State * L) {
+int L_MapObjectDescription::get_type_name(lua_State * L) {
     lua_pushstring(L, get()->type_name());
 	return 1;
 }
@@ -1288,6 +1291,24 @@ int L_BuildingDescription::get_workarea_radius(lua_State * L) {
 	lua_pushinteger(L, get()->m_workarea_info.begin()->first);
 	return 1;
 }
+
+/* RST
+ConstructionSiteDescription
+----------
+
+.. class:: ConstructionSiteDescription
+
+    A static description of a tribe's constructionsite, so it can be used in help files
+    without having to access an actual building on the map.
+    See also class BuildingDescription and class MapObjectDescription for more properties.
+*/
+const char L_ConstructionSiteDescription::className[] = "ConstructionSiteDescription";
+const MethodType<L_ConstructionSiteDescription> L_ConstructionSiteDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_ConstructionSiteDescription> L_ConstructionSiteDescription::Properties[] = {
+	{nullptr, nullptr, nullptr},
+};
 
 
 /* RST
@@ -1706,7 +1727,7 @@ int L_WareDescription::get_producers(lua_State * L) {
 				if (std::string(get()->name()) ==
 					std::string(tribe.get_ware_descr(ware_index)->name())) {
 					lua_pushint32(L, index++);
-					upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
+						upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
 					lua_rawset(L, -3);
 				}
 			}
@@ -1745,7 +1766,7 @@ int L_WareDescription::get_consumers(lua_State * L) {
 				if (std::string(get()->name()) ==
 					std::string(tribe.get_ware_descr(ware_amount.first)->name())) {
 					lua_pushint32(L, index++);
-					upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
+						upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
 					lua_rawset(L, -3);
 				}
 			}
@@ -1892,10 +1913,9 @@ const MethodType<L_MapObject> L_MapObject::Methods[] = {
 };
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, __hash),
-	PROP_RO(L_MapObject, serial),
-	PROP_RO(L_MapObject, type),
+	PROP_RO(L_MapObject, descr),
 	PROP_RO(L_MapObject, name),
-	PROP_RO(L_MapObject, descname),
+	PROP_RO(L_MapObject, serial),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1944,17 +1964,6 @@ int L_MapObject::get_serial(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: type
-
-		(RO) the type name of this map object. You can determine with what kind
-		of object you cope by looking at this attribute. Some example types:
-		immovable, flag, road, productionsite, warehouse, militarysite...
-*/
-int L_MapObject::get_type(lua_State * L) {
-    lua_pushstring(L, get(L, get_egbase(L))->descr().type_name());
-	return 1;
-}
 
 /* RST
 	.. attribute:: name
@@ -1967,19 +1976,43 @@ int L_MapObject::get_name(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: descname
+// use the dynamic type of BuildingDescription
+#define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
+	(L, new lua_klass(static_cast<const klass *>(desc)))
 
-		(RO) The descriptive (and translated) name of this Map Object. Use this
-		in messages to the player instead of name.
+/* RST
+    .. attribute:: descr
+
+        (RO) The description object for this immovable, e.g. BuildingDescription.
 */
-int L_MapObject::get_descname(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->descr().descname().c_str());
-	return 1;
+int L_MapObject::get_descr(lua_State * L) {
+	//TODO(GunChleoc) Flag_Descr would be nice for getting the type of immovables,
+	// at the moment the type for these can be faked by using their name instead
+	const Map_Object_Descr* desc = &get(L, get_egbase(L))->descr();
+	assert(desc != nullptr);
+
+	if (is_a(MilitarySite_Descr, desc)) {
+		return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
+	}
+	else if (is_a(TrainingSite_Descr, desc)) {
+		return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
+	}
+	else if (is_a(ProductionSite_Descr, desc)) {
+		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
+	}
+	else if (is_a(Warehouse_Descr, desc)) {
+		return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
+	}
+	else if (is_a(ConstructionSite_Descr, desc)) {
+		return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
+	}
+	else if (is_a(Building_Descr, desc)) {
+		return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
+	}
+	return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
 }
 
-
-
+#undef CAST_TO_LUA
 
 /*
  ==========================================================
@@ -3981,6 +4014,11 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_BuildingDescription>(L, "map", true);
 	add_parent<L_BuildingDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_ConstructionSiteDescription>(L, "map", true);
+	add_parent<L_ConstructionSiteDescription, L_BuildingDescription>(L);
+	add_parent<L_ConstructionSiteDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_ProductionSiteDescription>(L, "map", true);

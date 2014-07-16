@@ -331,23 +331,23 @@ function building_help_general_string(tribename, building_description, resourcen
 		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
 	if (note) then	result = result .. rt(h3(_"Note:")) .. rt(p(note)) end
 
-	if(building_description.type == "productionsite") then
+	if(building_description.type_name == "productionsite") then
 		if(building_description.workarea_radius and building_description.workarea_radius > 0) then
 			result = result .. text_line(_"Working radius:", building_description.workarea_radius)
 		end
 
-	elseif(building_description.type == "warehouse") then
+	elseif(building_description.type_name == "warehouse") then
 		result = result .. rt(h3(_"Healing:")
 			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.heal_per_second)))
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
 
-	elseif(building_description.type == "militarysite") then
+	elseif(building_description.type_name == "militarysite") then
 		result = result .. rt(h3(_"Healing:")
 			.. p(_"Garrisoned soldiers heal %s per second":bformat(building_description.heal_per_second)))
 		result = result .. text_line(_"Capacity:", building_description.max_number_of_soldiers)
 		result = result .. text_line(_"Conquer range:", building_description.conquers)
 
-	elseif(building_description.type == "trainingsite") then
+	elseif(building_description.type_name == "trainingsite") then
 		result = result .. rt(h3(_"Training:"))
 		if(building_description.max_attack and building_description.min_attack) then
 			-- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
@@ -695,7 +695,7 @@ function building_help_crew_string(tribename, building_description)
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 	local result = ""
 
-	if(building_description.type == "productionsite" or building_description.type == "trainingsite") then
+	if(building_description.type_name == "productionsite" or building_description.type_name == "trainingsite") then
 
 		result = result .. rt(h2(_"Workers")) .. rt(h3(_"Crew required:"))
 

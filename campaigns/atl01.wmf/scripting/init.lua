@@ -324,7 +324,7 @@ function water_rising()
       if not f.immovable then return end
 
       -- Flags are not so interesting
-      if f.immovable.type == "flag" and
+      if f.immovable.name == "flag" and
          (f.tln.immovable and is_building(f.tln.immovable)) then
          f = f.tln
       end
