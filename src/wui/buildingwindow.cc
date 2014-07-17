@@ -115,7 +115,7 @@ void Building_Window::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
-	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
+	const Animation& anim = g_gr->animations().get_animation(building().descr().get_ui_anim());
 
 	const Image* dark_frame = ImageTransformations::change_luminosity
 		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
@@ -351,10 +351,10 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					 _("Help"));
 
 			UI::UniqueWindow::Registry& registry =
-			   igbase().unique_windows().get_registry(m_building.name() + "_help");
+			   igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
 			registry.open_window = [this, &registry] {
 				new UI::LuaTextHelpWindow(
-				   &igbase(), registry, m_building.descr().descname(), m_building.descr().helptext_script());
+				   &igbase(), registry, m_building.descr(), &igbase().egbase().lua());
 			};
 
 			helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));

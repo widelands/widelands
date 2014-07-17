@@ -64,14 +64,16 @@ DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
    : Computer_Player(ggame, pid),
-     type(t),
+     type_(t),
      m_buildable_changed(true),
      m_mineable_changed(true),
-     player(nullptr),
-     tribe(nullptr),
-     total_constructionsites(0),
+
+     player_(nullptr),
+     tribe_(nullptr),
+     num_constructionsites_(0),
      total_milit_constructionsites(0),
      total_prod_constructionsites(0),
+
      next_road_due_(2000),
      next_stats_update_due_(30000),
      next_construction_due_(1000),
@@ -89,7 +91,31 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
      military_under_constr_(0),
      military_last_dismantle_(0),
      military_last_build_(0),
-     spots_(0) {
+     spots_(0)  {
+
+	// Subscribe to NoteFieldPossession.
+	field_possession_subscriber_ =
+		Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
+			if (note.player != player_) {
+				return;
+			}
+			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+				unusable_fields.push_back(note.fc);
+			}
+		});
+
+	// Subscribe to NoteImmovables.
+	immovable_subscriber_ =
+		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+			if (note.pi->owner().player_number() != player_->player_number()) {
+				return;
+			}
+			if (note.ownership == NoteImmovable::Ownership::GAINED) {
+				gain_immovable(*note.pi);
+			} else {
+				lose_immovable(*note.pi);
+			}
+		});
 }
 
 DefaultAI::~DefaultAI() {
@@ -116,7 +142,7 @@ DefaultAI::~DefaultAI() {
  */
 void DefaultAI::think() {
 
-	if (tribe == nullptr)
+	if (tribe_ == nullptr)
 		late_initialization();
 
 	const int32_t gametime = game().get_gametime();
@@ -201,21 +227,6 @@ void DefaultAI::think() {
 	}
 }
 
-/// called by Widelands game engine when an immovable changed
-void DefaultAI::receive(const NoteImmovable& note) {
-	if (note.lg == LOSE) {
-
-		lose_immovable(*note.pi);
-	} else
-		gain_immovable(*note.pi);
-}
-
-/// called by Widelands game engine when a field changed
-void DefaultAI::receive(const NoteFieldPossession& note) {
-	if (note.lg == GAIN)
-		unusable_fields.push_back(note.fc);
-}
-
 /**
  * Cares for all variables not initialised during construction
  *
@@ -223,30 +234,28 @@ void DefaultAI::receive(const NoteFieldPossession& note) {
  * world), so this is done after complete loading of the map.
  */
 void DefaultAI::late_initialization() {
-	player = game().get_player(player_number());
-	NoteReceiver<NoteImmovable>::connect(*player);
-	NoteReceiver<NoteFieldPossession>::connect(*player);
-	tribe = &player->tribe();
-	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type);
-	Ware_Index const nr_wares = tribe->get_nrwares();
+	player_ = game().get_player(player_number());
+	tribe_ = &player_->tribe();
+	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
+	Ware_Index const nr_wares = tribe_->get_nrwares();
 	wares.resize(nr_wares);
 
 	for (Ware_Index i = 0; i < nr_wares; ++i) {
 		wares.at(i).producers_ = 0;
 		wares.at(i).consumers_ = 0;
-		wares.at(i).preciousness_ = tribe->get_ware_descr(i)->preciousness();
+		wares.at(i).preciousness_ = tribe_->get_ware_descr(i)->preciousness();
 	}
 
 	// collect information about the different buildings our tribe can construct
-	Building_Index const nr_buildings = tribe->get_nrbuildings();
+	Building_Index const nr_buildings = tribe_->get_nrbuildings();
 	const World& world = game().world();
 
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
-		const Building_Descr& bld = *tribe->get_building_descr(i);
+		const Building_Descr& bld = *tribe_->get_building_descr(i);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
-		buildings.resize(buildings.size() + 1);
-		BuildingObserver& bo = buildings.back();
+		buildings_.resize(buildings_.size() + 1);
+		BuildingObserver& bo = buildings_.back();
 		bo.name = building_name.c_str();
 		bo.id = i;
 		bo.desc = &bld;
@@ -278,11 +287,11 @@ void DefaultAI::late_initialization() {
 		bo.mountain_conqueror_ = bh.is_mountain_conqueror();
 		bo.prohibited_till_ = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		if (char const* const s = bh.get_renews_map_resource()) {
-			bo.production_hint_ = tribe->safe_ware_index(s);
+			bo.production_hint_ = tribe_->safe_ware_index(s);
 		}
 
 		// I just presume cut wood is named "log" in the game
-		if (tribe->safe_ware_index("log") == bo.production_hint_)
+		if (tribe_->safe_ware_index("log") == bo.production_hint_)
 			bo.plants_trees_ = true;
 		else
 			bo.plants_trees_ = false;
@@ -310,7 +319,7 @@ void DefaultAI::late_initialization() {
 			bo.prod_build_material_ = bh.prod_build_material();
 
 			// here we identify hunters
-			if (bo.outputs_.size() == 1 and tribe->safe_ware_index("meat") == bo.outputs_.at(0)) {
+			if (bo.outputs_.size() == 1 and tribe_->safe_ware_index("meat") == bo.outputs_.at(0)) {
 				bo.is_hunter_ = true;
 			} else
 				bo.is_hunter_ = false;
@@ -339,7 +348,7 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
-	total_constructionsites = 0;
+	num_constructionsites_ = 0;
 	total_milit_constructionsites = 0;
 	total_prod_constructionsites = 0;
 	next_construction_due_ = 0;
@@ -362,7 +371,7 @@ void DefaultAI::late_initialization() {
 			if (upcast(PlayerImmovable, imm, f.field->get_immovable()))
 
 				//  Guard by a set - immovables might be on several nodes at once.
-				if (&imm->owner() == player and not found_immovables.count(imm)) {
+				if (&imm->owner() == player_ and not found_immovables.count(imm)) {
 					found_immovables.insert(imm);
 					gain_immovable(*imm);
 				}
@@ -388,7 +397,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
 		}
 
 		//  check whether we can still construct regular buildings on the node
-		if ((player->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
+		if ((player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
 			unusable_fields.push_back(bf.coords);
 			delete &bf;
 			buildable_fields.pop_front();
@@ -420,7 +429,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime) {
 		}
 
 		//  check whether we can still construct regular buildings on the node
-		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE) == 0) {
+		if ((player_->get_buildcaps(mf->coords) & BUILDCAPS_MINE) == 0) {
 			unusable_fields.push_back(mf->coords);
 			delete mf;
 			mineable_fields.pop_front();
@@ -454,14 +463,14 @@ void DefaultAI::update_all_not_buildable_fields() {
 		}
 
 		// check whether building capabilities have improved
-		if (player->get_buildcaps(unusable_fields.front()) & BUILDCAPS_SIZEMASK) {
+		if (player_->get_buildcaps(unusable_fields.front()) & BUILDCAPS_SIZEMASK) {
 			buildable_fields.push_back(new BuildableField(unusable_fields.front()));
 			unusable_fields.pop_front();
 			update_buildable_field(*buildable_fields.back());
 			continue;
 		}
 
-		if (player->get_buildcaps(unusable_fields.front()) & BUILDCAPS_MINE) {
+		if (player_->get_buildcaps(unusable_fields.front()) & BUILDCAPS_MINE) {
 			mineable_fields.push_back(new MineableField(unusable_fields.front()));
 			unusable_fields.pop_front();
 			update_mineable_field(*mineable_fields.back());
@@ -477,9 +486,9 @@ void DefaultAI::update_all_not_buildable_fields() {
 void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bool military) {
 	// look if there is any unowned land nearby
 	Map& map = game().map();
-	FindNodeUnowned find_unowned(player, game());
-	FindNodeUnownedMineable find_unowned_mines_pots(player, game());
-	Player_Number const pn = player->player_number();
+	FindNodeUnowned find_unowned(player_, game());
+	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
+	Player_Number const pn = player_->player_number();
 	const World& world = game().world();
 	field.unowned_land_nearby_ =
 	   map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned);
@@ -565,7 +574,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				//// TODO  Only continue; if this is an opposing site
 				//// TODO  allied sites should be counted for military influence
 				if (player_immovable->owner().player_number() != pn) {
-					if (player->is_hostile(player_immovable->owner()))
+					if (player_->is_hostile(player_immovable->owner()))
 						field.enemy_nearby_ = true;
 
 					continue;
@@ -579,12 +588,12 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 						consider_productionsite_influence(
 						   field,
 						   immovables.at(i).coords,
-						   get_building_observer(constructionsite->name().c_str()));
+						   get_building_observer(constructionsite->descr().name().c_str()));
 				}
 
 				if (dynamic_cast<const ProductionSite*>(building))
 					consider_productionsite_influence(
-					   field, immovables.at(i).coords, get_building_observer(building->name().c_str()));
+					   field, immovables.at(i).coords, get_building_observer(building->descr().name().c_str()));
 			}
 
 			if (immovables.at(i).object->has_attribute(tree_attr))
@@ -629,7 +638,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			// TODO  Only continue; if this is an opposing site
 			// TODO  allied sites should be counted for military influence
 			if (player_immovable->owner().player_number() != pn) {
-				if (player->is_hostile(player_immovable->owner()))
+				if (player_->is_hostile(player_immovable->owner()))
 					field.enemy_nearby_ = true;
 
 				continue;
@@ -712,14 +721,14 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 	next_stats_update_due_ = gametime + 10000;
 
 	// Reset statistics for all buildings
-	for (uint32_t i = 0; i < buildings.size(); ++i) {
-		if (buildings.at(i).cnt_built_ > 0)
-			buildings.at(i).current_stats_ = 0;
+	for (uint32_t i = 0; i < buildings_.size(); ++i) {
+		if (buildings_.at(i).cnt_built_ > 0)
+			buildings_.at(i).current_stats_ = 0;
 		// If there are no buildings of that type set the current_stats_ to 100
 		else
-			buildings.at(i).current_stats_ = 0;  // there was 100, this confuses algorithm
+			buildings_.at(i).current_stats_ = 0;  // there was 100, this confuses algorithm
 
-		buildings.at(i).unoccupied_ = false;
+		buildings_.at(i).unoccupied_ = false;
 	}
 
 	// Check all available productionsites
@@ -751,9 +760,9 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 	}
 
 	// Scale statistics down
-	for (uint32_t i = 0; i < buildings.size(); ++i) {
-		if (buildings.at(i).cnt_built_ > 0)
-			buildings.at(i).current_stats_ /= buildings.at(i).cnt_built_;
+	for (uint32_t i = 0; i < buildings_.size(); ++i) {
+		if (buildings_.at(i).cnt_built_ > 0)
+			buildings_.at(i).current_stats_ /= buildings_.at(i).cnt_built_;
 	}
 }
 
@@ -884,14 +893,14 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		if (field_blocked)
 			continue;
 
-		assert(player);
-		int32_t const maxsize = player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
+		assert(player_);
+		int32_t const maxsize = player_->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
 
 		// For every field test all buildings
-		for (uint32_t j = 0; j < buildings.size(); ++j) {
-			BuildingObserver& bo = buildings.at(j);
+		for (uint32_t j = 0; j < buildings_.size(); ++j) {
+			BuildingObserver& bo = buildings_.at(j);
 
-			if (!bo.buildable(*player))
+			if (!bo.buildable(*player_))
 				continue;
 
 			if (bo.prohibited_till_ > gametime) {
@@ -1331,14 +1340,14 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 		if (!mineable_fields.empty()) {
 
-			for (uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i) {
-				BuildingObserver& bo = buildings.at(i);
+			for (uint32_t i = 0; i < buildings_.size() && productionsites.size() > 8; ++i) {
+				BuildingObserver& bo = buildings_.at(i);
 
 				if (not bo.mines_marble_ and gametime <
 				    kBaseInfrastructureTime)  // allow only stone mines_ in early stages of game
 					continue;
 
-				if (!bo.buildable(*player) || bo.type != BuildingObserver::MINE)
+				if (!bo.buildable(*player_) || bo.type != BuildingObserver::MINE)
 					continue;
 
 				if (gametime - bo.construction_decision_time_ < kBuildingMinInterval)
@@ -1527,7 +1536,7 @@ bool DefaultAI::construct_roads(int32_t gametime) {
 		Building* bld = eo_to_connect->flags.front()->get_building();
 
 		if (bld) {
-			BuildingObserver& bo = get_building_observer(bld->name().c_str());
+			BuildingObserver& bo = get_building_observer(bld->descr().name().c_str());
 
 			if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 				game().send_player_bulldoze(*const_cast<Flag*>(eo_to_connect->flags.front()));
@@ -1633,7 +1642,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 // connects a specific flag to another economy
 bool DefaultAI::connect_flag_to_another_economy(const Flag& flag) {
 	FindNodeWithFlagOrRoad functor;
-	CheckStepRoadAI check(player, MOVECAPS_WALK, true);
+	CheckStepRoadAI check(player_, MOVECAPS_WALK, true);
 	std::vector<Coords> reachable;
 	// first look for possible destinations
 	functor.economy = flag.get_economy();
@@ -1763,7 +1772,7 @@ bool DefaultAI::improve_transportation_ways(const Flag& flag, const bool force) 
 	// we seek biggest reduction
 	std::sort(nearflags.begin(), nearflags.end(), CompareShortening());
 
-	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
+	CheckStepRoadAI check(player_, MOVECAPS_WALK, false);
 
 	// testing only first 10 nearfields that meet the condition
 	for (uint32_t i = 1; i < nearflags.size() and i < 10; ++i) {
@@ -2052,8 +2061,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	BuildingObserver* bestbld = nullptr;
 
 	// Only enhance buildings that are allowed (scenario mode)
-	if (player->is_building_type_allowed(enhancement)) {
-		const Building_Descr& bld = *tribe->get_building_descr(enhancement);
+	if (player_->is_building_type_allowed(enhancement)) {
+		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 		// do not build the same building so soon (kind of duplicity check)
@@ -2153,9 +2162,9 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
 	// Only enhance buildings that are allowed (scenario mode)
-	if (player->is_building_type_allowed(enhancement)) {
+	if (player_->is_building_type_allowed(enhancement)) {
 		// first exclude possibility there are enhancements in construction or unoccupied_
-		const Building_Descr& bld = *tribe->get_building_descr(enhancement);
+		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 		if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ <= 0) {
@@ -2248,8 +2257,8 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	// count militarysites in construction
 	military_under_constr_ = 0;
 
-	for (uint32_t j = 0; j < buildings.size(); ++j) {
-		BuildingObserver& bo = buildings.at(j);
+	for (uint32_t j = 0; j < buildings_.size(); ++j) {
+		BuildingObserver& bo = buildings_.at(j);
 
 		if (bo.type == BuildingObserver::MILITARYSITE)
 			military_under_constr_ += bo.cnt_under_construction_;
@@ -2268,7 +2277,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	// look if there is any enemy land nearby
 	// FindNodeEnemy find_enemy(player, game());
 	// look if there is any enemies building
-	FindNodeEnemiesBuilding find_enemy(player, game());
+	FindNodeEnemiesBuilding find_enemy(player_, game());
 
 	// first if there are enemies nearby, check for buildings not land
 	if (map.find_fields(Area<FCoords>(f, vision + 4), nullptr, find_enemy) == 0) {
@@ -2371,7 +2380,7 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 	//  NOTE aggressive a computer player_ is, the more important is
 	//  NOTE this check. So we add \var type as bonus.
 	if (bf.enemy_nearby_ and prio > 0)
-		prio /= (3 + type);
+		prio /= (3 + type_);
 
 	return prio;
 }
@@ -2457,12 +2466,12 @@ EconomyObserver* DefaultAI::get_economy_observer(Economy& economy) {
 
 // \returns the building observer
 BuildingObserver& DefaultAI::get_building_observer(char const* const name) {
-	if (tribe == nullptr)
+	if (tribe_ == nullptr)
 		late_initialization();
 
-	for (uint32_t i = 0; i < buildings.size(); ++i)
-		if (!strcmp(buildings.at(i).name, name))
-			return buildings.at(i);
+	for (uint32_t i = 0; i < buildings_.size(); ++i)
+		if (!strcmp(buildings_.at(i).name, name))
+			return buildings_.at(i);
 
 	throw wexception("Help: I do not know what to do with a %s", name);
 }
@@ -2502,17 +2511,18 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 
 // this is called whenever we gain a new building
 void DefaultAI::gain_building(Building& b) {
-	BuildingObserver& bo = get_building_observer(b.name().c_str());
+	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver& target_bo =
 		   get_building_observer(ref_cast<ConstructionSite, Building>(b).building().name().c_str());
 		++target_bo.cnt_under_construction_;
-		++total_constructionsites;
+		++num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE)
 			++total_prod_constructionsites;
 		if (target_bo.type == BuildingObserver::MILITARYSITE)
 			++total_milit_constructionsites;
+
 		// Let defaultAI try to directly connect the constructionsite
 		next_road_due_ = game().get_gametime();
 	} else {
@@ -2556,17 +2566,18 @@ void DefaultAI::gain_building(Building& b) {
 
 // this is called whenever we lose a building
 void DefaultAI::lose_building(const Building& b) {
-	BuildingObserver& bo = get_building_observer(b.name().c_str());
+	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver& target_bo = get_building_observer(
 		   ref_cast<ConstructionSite const, Building const>(b).building().name().c_str());
 		--target_bo.cnt_under_construction_;
-		--total_constructionsites;
+		--num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE)
 			--total_prod_constructionsites;
 		if (target_bo.type == BuildingObserver::MILITARYSITE)
 			--total_milit_constructionsites;
+
 	} else {
 		--bo.cnt_built_;
 
@@ -2625,7 +2636,7 @@ void DefaultAI::lose_building(const Building& b) {
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;
 	container_iterate_const(std::vector<int16_t>, bo.inputs_, i)
-	container_iterate_const(std::vector<BuildingObserver>, buildings, j)
+	container_iterate_const(std::vector<BuildingObserver>, buildings_, j)
 
 	if (j.current->cnt_built_ &&
 	    std::find(j.current->outputs_.begin(), j.current->outputs_.end(), *i.current) !=
@@ -2663,9 +2674,9 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	// defining treshold ratio of own_strenght/enemy's_strength
 	uint32_t treshold_ratio = 100;
-	if (type == AGGRESSIVE)
+	if (type_ == AGGRESSIVE)
 		treshold_ratio = 80;
-	if (type == DEFENSIVE)
+	if (type_ == DEFENSIVE)
 		treshold_ratio = 120;
 
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
@@ -2739,7 +2750,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite, bld, immovables.at(j).object)) {
-				if (!player->is_hostile(bld->owner()))
+				if (!player_->is_hostile(bld->owner()))
 					continue;
 
 				mso->enemies_nearby = true;
@@ -2752,9 +2763,9 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 					// any_attackable_building=true;
 
-					int32_t ta = player->findAttackSoldiers(bld->base_flag());
+					int32_t ta = player_->findAttackSoldiers(bld->base_flag());
 
-					if (type == NORMAL)
+					if (type_ == NORMAL)
 						ta = ta * 2 / 3;
 
 					if (ta < 1)
@@ -2773,11 +2784,11 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 					}
 				}
 			} else if (upcast(Warehouse, wh, immovables.at(j).object)) {
-				if (!player->is_hostile(wh->owner()))
+				if (!player_->is_hostile(wh->owner()))
 					continue;
 
 				if (wh->canAttack()) {
-					int32_t ta = player->findAttackSoldiers(wh->base_flag());
+					int32_t ta = player_->findAttackSoldiers(wh->base_flag());
 
 					if (ta < 1)
 						continue;

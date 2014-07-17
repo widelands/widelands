@@ -30,6 +30,7 @@ wl_library(network
     base_macros
     base_md5
     build_info
+    chat
     game_io
     helper
     io_dedicated_log

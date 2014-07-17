@@ -20,36 +20,50 @@
 #ifndef WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
 #define WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
 
-#include "graphic/rendertarget.h"
 #include <memory>
 
+#include "graphic/rendertarget.h"
+
 class StreamWrite;
+
 namespace Widelands {
 	class Player;
 	class Editor_Game_Base;
 }
 
-/**
- * This class renders the minimap.
- */
-class MiniMapRenderer
-{
-public:
-	MiniMapRenderer() {}
-	virtual ~MiniMapRenderer() {}
-
-	/// Render the minimap. If player is not 0, it renders from that player's
-	/// point of view. The caller must dispose of the returned surface properly.
-	/// \param viewpoint: top left corner in map coordinates
-	Surface* get_minimap_image
-		(const Widelands::Editor_Game_Base& egbase, const Widelands::Player* player,
-		 const Point& viewpoint, uint32_t flags);
-
-	/// Render the minimap to a file. 1 pixel will be used for each fields.
-	/// \param viewpoint : The game point of view as returned by interactive_base.get_viewpoint();
-	void write_minimap_image
-		(const Widelands::Editor_Game_Base& egbase, Widelands::Player const* player,
-		 const Point& viewpoint, uint32_t flags, StreamWrite* const streamwrite);
+// Layers for selecting what do display on the minimap.
+enum class MiniMapLayer {
+	Terrain = 1,
+	Owner = 2,
+	Flag = 4,
+	Road = 8,
+	Building = 16,
+	Zoom2 = 32,
+	ViewWindow = 64,
 };
+
+// A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.
+inline MiniMapLayer operator|(MiniMapLayer left, MiniMapLayer right) {
+	return MiniMapLayer(static_cast<int>(left) | static_cast<int>(right));
+}
+inline int operator&(MiniMapLayer left, MiniMapLayer right) {
+	return static_cast<int>(left) & static_cast<int>(right);
+}
+inline MiniMapLayer operator ^ (MiniMapLayer left, MiniMapLayer right) {
+	return MiniMapLayer(static_cast<int>(left) ^ static_cast<int>(right));
+}
+
+/// Render the minimap. If player is not nullptr, it renders from that player's
+/// point of view.
+/// \param viewpoint: top left corner in map coordinates
+std::unique_ptr<Surface> draw_minimap
+	(const Widelands::Editor_Game_Base& egbase, const Widelands::Player* player,
+	 const Point& viewpoint, MiniMapLayer layers);
+
+/// Render the minimap to a file. 1 pixel will be used for each fields.
+/// \param viewpoint : The game point of view as returned by interactive_base.get_viewpoint();
+void write_minimap_image
+	(const Widelands::Editor_Game_Base& egbase, Widelands::Player const* player,
+	 const Point& viewpoint, MiniMapLayer layers, StreamWrite* const streamwrite);
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_MINIMAPRENDERER_H

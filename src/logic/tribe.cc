@@ -474,14 +474,11 @@ const Ware_Index result = worker_index(workername);
 /*
  * Return the given building or die trying
  */
-Building_Index Tribe_Descr::safe_building_index
-	(char const * const buildingname) const
-{
+Building_Index Tribe_Descr::safe_building_index(char const* const buildingname) const {
 	const Building_Index result = building_index(buildingname);
 	if (result == INVALID_INDEX) {
-		throw game_data_error
-			("tribe %s does not define building type \"%s\"",
-			 name().c_str(), buildingname);
+		throw game_data_error(
+		   "tribe %s does not define building type \"%s\"", name().c_str(), buildingname);
 	}
 	return result;
 }

@@ -630,7 +630,6 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
 				return;
 			}
-			break;
 		}
 		case EXP_COLONIZING: {
 			assert(m_expedition->seen_port_buildspaces && !m_expedition->seen_port_buildspaces->empty());

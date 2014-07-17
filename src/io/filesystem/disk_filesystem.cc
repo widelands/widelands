@@ -38,6 +38,7 @@
 #include <sys/mman.h>
 #include <sys/statvfs.h>
 #include <sys/types.h>
+#include <unistd.h>
 #endif
 
 #include "base/log.h"

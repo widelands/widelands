@@ -2,7 +2,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/paths.h.cmake ${CMAKE_CURRENT_BINARY_
 
 # Simple binary that renders a text into an image for manual
 # testing/experimenting with the rich text renderer.
-wl_binary(render_richtext
+wl_binary(wl_render_richtext
   SRCS
     render_richtext.cc
   DEPENDS

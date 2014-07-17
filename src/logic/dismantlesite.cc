@@ -220,7 +220,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 	} else if (not m_working) {
 		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle
-			(game, worker.get_animation("work"), DISMANTLESITE_STEP_TIME);
+			(game, worker.descr().get_animation("work"), DISMANTLESITE_STEP_TIME);
 
 		m_working = true;
 	}

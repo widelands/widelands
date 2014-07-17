@@ -602,7 +602,7 @@ void Worker::informPlayer
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
 	// NOTE  AND fish_breeders
-	if (building.name() == "fish_breeders_house")
+	if (building.descr().name() == "fish_breeders_house")
 		return;
 
 	// TODO "stone" is defined as "granite" in the world. But this code is
@@ -1137,7 +1137,7 @@ void Worker::set_location(PlayerImmovable * const location)
 
 		// NOTE we have to explicitly check Worker_Descr::SOLDIER, as SOLDIER is
 		// NOTE as well defined in an enum in instances.h
-		if (!m_economy || (get_worker_type() == Worker_Descr::SOLDIER)) {
+		if (!m_economy || (descr().get_worker_type() == Worker_Descr::SOLDIER)) {
 			set_economy(eco);
 		} else if (m_economy != eco) {
 			throw wexception
@@ -1171,7 +1171,7 @@ void Worker::set_economy(Economy * const economy)
 
 	if (m_economy)
 		m_economy->remove_workers
-			(descr().tribe().worker_index(name().c_str()), 1);
+			(descr().tribe().worker_index(descr().name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1181,7 +1181,7 @@ void Worker::set_economy(Economy * const economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(descr().tribe().worker_index(name().c_str()), 1);
+		m_economy->add_workers(descr().tribe().worker_index(descr().name().c_str()), 1);
 }
 
 
@@ -1447,7 +1447,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 			molog("[transfer]: Blocked by a battle\n");
 
 			signal_handled();
-			return start_task_idle(game, get_animation("idle"), 500);
+			return start_task_idle(game, descr().get_animation("idle"), 500);
 		} else {
 			molog("[transfer]: Cancel due to signal '%s'\n", signal.c_str());
 			return pop_task(game);
@@ -2051,7 +2051,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
 
-	return start_task_idle(game, get_animation("idle"), 1000);
+	return start_task_idle(game, descr().get_animation("idle"), 1000);
 }
 
 void Worker::gowarehouse_signalimmediate
@@ -3089,8 +3089,6 @@ Map_Object::Loader * Worker::load
 	} catch (const std::exception & e) {
 		throw wexception("loading worker: %s", e.what());
 	}
-
-	return nullptr; // Should not be reached
 }
 
 /**

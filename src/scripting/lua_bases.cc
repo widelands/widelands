@@ -23,6 +23,8 @@
 #include "logic/checkstep.h"
 #include "logic/constants.h"
 #include "logic/player.h"
+#include "logic/tribe.h"
+#include "logic/ware_descr.h"
 #include "scripting/lua_map.h"
 
 
@@ -71,6 +73,9 @@ EditorGameBase
 
 const char L_EditorGameBase::className[] = "EditorGameBase";
 const MethodType<L_EditorGameBase> L_EditorGameBase::Methods[] = {
+	METHOD(L_EditorGameBase, get_building_description),
+	METHOD(L_EditorGameBase, get_ware_description),
+	METHOD(L_EditorGameBase, get_worker_description),
 	{nullptr, nullptr},
 };
 const PropertyType<L_EditorGameBase> L_EditorGameBase::Properties[] = {
@@ -137,6 +142,93 @@ int L_EditorGameBase::get_players(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+	.. function:: get_building_description(tribename, building_description.name)
+
+		:arg tribe_name: the name of the tribe that this building belongs to
+		:arg building_name: the name of the building
+
+		Registers a building description so Lua can reference it from the game.
+
+		(RO) The :class:`~wl.Game.Building_description`.
+*/
+int L_EditorGameBase::get_building_description(lua_State* L) {
+	if (lua_gettop(L) != 3) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string tribe_name = luaL_checkstring(L, 2);
+	const std::string building_name = luaL_checkstring(L, 3);
+	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
+	if (!tribe_description) {
+		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
+	}
+	const Building_Index building_index = tribe_description->building_index(building_name);
+	if (building_index == INVALID_INDEX) {
+		report_error(L, "Building %s does not exist", building_name.c_str());
+	}
+	const Building_Descr* building_description = tribe_description->get_building_descr(building_index);
+
+	return LuaMap::upcasted_building_descr_to_lua(L, building_description);
+}
+
+
+/* RST
+	.. function:: get_ware_description(tribename, ware_description.name)
+
+		:arg tribe_name: the name of the tribe that this building belongs to
+		:arg ware_name: the name of the ware
+
+		Registers a ware description so Lua can reference it from the game.
+
+		(RO) The :class:`~wl.Game.Ware_description`.
+*/
+int L_EditorGameBase::get_ware_description(lua_State* L) {
+	if (lua_gettop(L) != 3) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string tribe_name = luaL_checkstring(L, 2);
+	const std::string ware_name = luaL_checkstring(L, 3);
+	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
+	if (!tribe_description) {
+		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
+	}
+	Ware_Index ware_index = tribe_description->ware_index(ware_name);
+	if (ware_index == INVALID_INDEX) {
+		report_error(L, "Ware %s does not exist", ware_name.c_str());
+	}
+	const WareDescr* ware_description = tribe_description->get_ware_descr(ware_index);
+	return to_lua<LuaMap::L_WareDescription>(L, new LuaMap::L_WareDescription(ware_description));
+}
+
+
+/* RST
+	.. function:: get_worker_description(tribename, worker_description.name)
+
+		:arg tribe_name: the name of the tribe that this building belongs to
+		:arg worker_name: the name of the worker
+
+		Registers a worker description so Lua can reference it from the game.
+
+		(RO) The :class:`~wl.Game.Worker_description`.
+*/
+int L_EditorGameBase::get_worker_description(lua_State* L) {
+	if (lua_gettop(L) != 3) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string tribe_name = luaL_checkstring(L, 2);
+	const std::string worker_name = luaL_checkstring(L, 3);
+	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
+	if (!tribe_description) {
+		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
+	}
+	const Ware_Index worker_index = tribe_description->worker_index(worker_name);
+	if (worker_index == INVALID_INDEX) {
+		report_error(L, "Worker %s does not exist", worker_name.c_str());
+	}
+	const Worker_Descr* worker_description = tribe_description->get_worker_descr(worker_index);
+	return to_lua<LuaMap::L_WorkerDescription>(L, new LuaMap::L_WorkerDescription(worker_description));
+}
 
 /*
  ==========================================================

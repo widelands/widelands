@@ -79,7 +79,6 @@ struct Road : public PlayerImmovable {
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 	virtual PositionList get_positions(const Editor_Game_Base &) const override;
-	const std::string & name() const override;
 
 	virtual Flag & base_flag() override;
 

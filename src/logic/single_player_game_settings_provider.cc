@@ -94,6 +94,9 @@ void SinglePlayerGameSettingsProvider::setMap (const std::string & mapname, cons
 				player.ai = impls.at(0)->name;
 				player.random_ai = false;
 			}
+			//If AI player then set tribe to random
+			if (!s.scenario)
+				setPlayerTribe(oldplayers, "", true);
 		}
 		++oldplayers;
 	}
@@ -162,25 +165,29 @@ void SinglePlayerGameSettingsProvider::setPlayerTribe(uint8_t const number, cons
 		actual_tribe = s.tribes.at(random).name;
 	}
 
-	container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)
-		if (i.current->name == player.tribe) {
+	for (const TribeBasicInfo tmp_tribe : s.tribes)
+	{
+		if (tmp_tribe.name == player.tribe) {
 			s.players[number].tribe = actual_tribe;
-			if (i.current->initializations.size() <= player.initialization_index) {
+			if (tmp_tribe.initializations.size() <= player.initialization_index) {
 				player.initialization_index = 0;
 			}
 		}
+	}
 }
 
 void SinglePlayerGameSettingsProvider::setPlayerInit(uint8_t const number, uint8_t const index) {
 	if (number >= s.players.size())
 		return;
 
-	container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)
-		if (i.current->name == s.players[number].tribe) {
-			if (index < i.current->initializations.size())
+	for (const TribeBasicInfo tmp_tribe : s.tribes)
+	{
+		if (tmp_tribe.name == s.players[number].tribe) {
+			if (index < tmp_tribe.initializations.size())
 				s.players[number].initialization_index = index;
 			return;
 		}
+	}
 	assert(false);
 }
 

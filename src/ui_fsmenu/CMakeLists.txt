@@ -61,5 +61,6 @@ wl_library(ui_fsmenu
     ui_basic
     widelands_ball_of_mud
     wui
+    wui_chat_ui
     wui_text_layout
 )

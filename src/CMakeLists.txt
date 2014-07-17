@@ -45,6 +45,8 @@ if (WIN32)
       ${WIN32_ICON_O}
     USES_SDL
     DEPENDS
+      base_log
+      base_exceptions
       widelands_ball_of_mud
       build_info
   )
@@ -54,6 +56,7 @@ else()
       main.cc
     USES_SDL
     DEPENDS
+      base_log
       base_exceptions
       widelands_ball_of_mud
       build_info
@@ -62,6 +65,7 @@ endif()
 
 add_subdirectory(ai)
 add_subdirectory(base)
+add_subdirectory(chat)
 add_subdirectory(economy)
 add_subdirectory(editor)
 add_subdirectory(game_io)
@@ -70,6 +74,7 @@ add_subdirectory(io)
 add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
+add_subdirectory(notifications)
 add_subdirectory(profile)
 add_subdirectory(random)
 add_subdirectory(scripting)
@@ -83,8 +88,6 @@ add_subdirectory(wui)
 # library.
 wl_library(widelands_ball_of_mud
   SRCS
-    chat.cc
-    chat.h
     interval.h
     machdep.h
     wlapplication.cc
@@ -106,7 +109,6 @@ wl_library(widelands_ball_of_mud
     logic
     logic_game_controller
     logic_game_settings
-    logic_notification
     map_io_map_loader
     network
     profile
@@ -135,5 +137,3 @@ endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD
 if (WIN32)
   target_link_libraries(widelands_ball_of_mud wsock32)
 endif (WIN32)
-
-install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

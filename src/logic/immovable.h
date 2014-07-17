@@ -26,6 +26,8 @@
 #include "logic/buildcost.h"
 #include "logic/instances.h"
 #include "logic/widelands_geometry.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 class LuaTable;
 class OneWorldLegacyLookupTable;
@@ -40,7 +42,21 @@ class WareInstance;
 class Worker;
 class World;
 struct Flag;
+struct PlayerImmovable;
 struct Tribe_Descr;
+
+struct NoteImmovable {
+	CAN_BE_SEND_AS_NOTE(NoteId::Immovable)
+
+	PlayerImmovable* pi;
+
+	enum class Ownership {LOST, GAINED};
+	Ownership ownership;
+
+	NoteImmovable(PlayerImmovable* const init_pi, Ownership const init_ownership)
+	   : pi(init_pi), ownership(init_ownership) {
+	}
+};
 
 /**
  * BaseImmovable is the base for all non-moving objects (immovables such as
@@ -76,7 +92,6 @@ struct BaseImmovable : public Map_Object {
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 		= 0;
-	virtual const std::string & name() const;
 
 protected:
 	void set_position(Editor_Game_Base &, Coords);
@@ -103,6 +118,8 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	~Immovable_Descr();
 
+	std::string type() const override {return "immovable";}
+
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
 
@@ -111,6 +128,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 	Tribe_Descr const * get_owner_tribe() const {return m_owner_tribe;}
 
 	const Buildcost & buildcost() const {return m_buildcost;}
+
 
 	// Returns the editor category.
 	const EditorCategory& editor_category() const;
@@ -164,7 +182,6 @@ public:
 	char const * type_name() const override {return "immovable";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
-	const std::string & name() const override;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);
 
 	void program_step(Game & game, uint32_t const delay = 1) {

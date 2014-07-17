@@ -88,8 +88,8 @@ function initialize()
    p1:forbid_buildings{"shipyard"}
 
    -- A default headquarters
-   include "tribes/atlanteans/scripting/sc00_headquarters_medium.lua"
-   init.func(p1) -- defined in sc00_headquarters_medium
+   include "tribes/atlanteans/scripting/sc00_headquarters.lua"
+   init.func(p1) -- defined in sc00_headquarters
    set_textdomain("scenario_atl01.wmf")
    local hq = wl.Game().map.player_slots[1].starting_field.immovable
    hq:set_workers{shipwright=1}
@@ -325,10 +325,10 @@ function water_rising()
 
       -- Flags are not so interesting
       if f.immovable.type == "flag" and
-         (f.tln.immovable and f.tln.immovable.building_type) then
+         (f.tln.immovable and is_building(f.tln.immovable)) then
          f = f.tln
       end
-      if f.immovable.building_type then
+      if is_building(f.immovable) then
          send_building_lost_message(f)
       end
    end

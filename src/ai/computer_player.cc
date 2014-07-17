@@ -25,6 +25,8 @@ Computer_Player::Computer_Player(Widelands::Game& g, Widelands::Player_Number co
    : m_game(g), m_player_number(pid) {
 }
 
+Computer_Player::~Computer_Player() {}
+
 struct EmptyAI : Computer_Player {
 	EmptyAI(Widelands::Game& g, const Widelands::Player_Number pid) : Computer_Player(g, pid) {
 	}
