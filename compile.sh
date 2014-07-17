@@ -67,7 +67,7 @@ echo " "
     #is present. Also, someone should do some research how available it is on various other platforms.
     #And I really really want a check here saying; "hey, I couldn't find ninja, either install it or use make"
     #but I'm not quite sure what/how to check this.
-    cmake -G ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
+    cmake -G Ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
     #TODO(code review): Do we need to pass in makeopts, is it likely that people running this script will
     #have makeopts set? Also, I assume ninja will be able to deal with this, if it is a drop-in replacement
     ninja ${MAKEOPTS}
