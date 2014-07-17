@@ -95,10 +95,10 @@ void Map_Extradata_Data_Packet::Write
 	if (map_fs && map_fs->FileExists("pics") && map_fs->IsDirectory("pics")) {
 		fs.EnsureDirectoryExists("pics");
 		for (const std::string& picture : map_fs->ListDirectory("pics")) {
-		size_t length;
-		void* input_data = map_fs->Load(picture, length);
-		fs.Write(picture, input_data, length);
-		free(input_data);
+			size_t length;
+			void* input_data = map_fs->Load(picture, length);
+			fs.Write(picture, input_data, length);
+			free(input_data);
 		}
 	}
 	prof.write("extra_data", false, fs);

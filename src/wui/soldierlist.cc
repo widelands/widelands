@@ -114,7 +114,7 @@ m_egbase(gegbase),
 m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
 m_last_animate_time(0)
 {
-	Soldier::calc_info_icon_size(building.tribe(), m_icon_width, m_icon_height);
+	Soldier::calc_info_icon_size(building.descr().tribe(), m_icon_width, m_icon_height);
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 
@@ -255,9 +255,9 @@ void SoldierPanel::think()
 		// Check whether health and/or level of the soldier has changed
 		Soldier * soldier = icon.soldier.get(egbase());
 		uint32_t level = soldier->get_attack_level();
-		level = level * (soldier->get_max_defense_level() + 1) + soldier->get_defense_level();
-		level = level * (soldier->get_max_evade_level() + 1) + soldier->get_evade_level();
-		level = level * (soldier->get_max_hp_level() + 1) + soldier->get_hp_level();
+		level = level * (soldier->descr().get_max_defense_level() + 1) + soldier->get_defense_level();
+		level = level * (soldier->descr().get_max_evade_level() + 1) + soldier->get_evade_level();
+		level = level * (soldier->descr().get_max_hp_level() + 1) + soldier->get_hp_level();
 
 		uint32_t health = soldier->get_current_hitpoints();
 
@@ -476,10 +476,10 @@ void SoldierList::mouseover(const Soldier * soldier)
 
 	m_infotext.set_text(
 		(boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"))
-			% soldier->get_hp_level() % soldier->get_max_hp_level()
-			% soldier->get_attack_level() % soldier->get_max_attack_level()
-			% soldier->get_defense_level() % soldier->get_max_defense_level()
-			% soldier->get_evade_level() % soldier->get_max_evade_level()
+			% soldier->get_hp_level() % soldier->descr().get_max_hp_level()
+			% soldier->get_attack_level() % soldier->descr().get_max_attack_level()
+			% soldier->get_defense_level() % soldier->descr().get_max_defense_level()
+			% soldier->get_evade_level() % soldier->descr().get_max_evade_level()
 		).str()
 	);
 }

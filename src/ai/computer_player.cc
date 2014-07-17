@@ -21,24 +21,23 @@
 
 #include "ai/defaultai.h"
 
-Computer_Player::Computer_Player
-	(Widelands::Game & g, Widelands::Player_Number const pid)
-	: m_game(g), m_player_number(pid)
-{
+Computer_Player::Computer_Player(Widelands::Game& g, Widelands::Player_Number const pid)
+   : m_game(g), m_player_number(pid) {
 }
 
-
 struct EmptyAI : Computer_Player {
-	EmptyAI(Widelands::Game & g, const Widelands::Player_Number pid)
-	: Computer_Player(g, pid) {}
+	EmptyAI(Widelands::Game& g, const Widelands::Player_Number pid) : Computer_Player(g, pid) {
+	}
 
-	void think() override {}
+	void think() override {
+	}
 
 	struct EmptyAIImpl : Implementation {
-		EmptyAIImpl() {name = _("None");}
-		Computer_Player * instantiate
-			(Widelands::Game & g, Widelands::Player_Number const pid) const override
-		{
+		EmptyAIImpl() {
+			name = _("None");
+		}
+		Computer_Player* instantiate(Widelands::Game& g,
+		                             Widelands::Player_Number const pid) const override {
 			return new EmptyAI(g, pid);
 		}
 	};
@@ -48,10 +47,8 @@ struct EmptyAI : Computer_Player {
 
 EmptyAI::EmptyAIImpl EmptyAI::implementation;
 
-const Computer_Player::ImplementationVector &
-Computer_Player::getImplementations()
-{
-	static std::vector<Computer_Player::Implementation const *> impls;
+const Computer_Player::ImplementationVector& Computer_Player::getImplementations() {
+	static std::vector<Computer_Player::Implementation const*> impls;
 
 	if (impls.empty()) {
 		impls.push_back(&DefaultAI::aggressiveImpl);
@@ -63,14 +60,12 @@ Computer_Player::getImplementations()
 	return impls;
 }
 
-const Computer_Player::Implementation * Computer_Player::getImplementation
-	(const std::string & name)
-{
-	const ImplementationVector & vec = getImplementations();
+const Computer_Player::Implementation* Computer_Player::getImplementation(const std::string& name) {
+	const ImplementationVector& vec = getImplementations();
 
 	container_iterate_const(ImplementationVector, vec, i)
-		if ((*i.current)->name == name)
-			return *i.current;
+	if ((*i.current)->name == name)
+		return *i.current;
 
 	return vec[0];
 }

@@ -29,3 +29,4 @@ hotspot=55 60
 [aihints]
 expansion=true
 mountain_conqueror=true
+prohibited_till=600

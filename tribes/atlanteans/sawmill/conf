@@ -3,6 +3,7 @@ output=planks
 
 [aihints]
 is_basic=true
+prohibited_till=30
 
 [buildcost]
 log=2

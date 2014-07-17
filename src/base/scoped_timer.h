@@ -23,13 +23,13 @@
 #include <string>
 #include <stdint.h>
 
-#include <boost/noncopyable.hpp>
+#include "base/macros.h"
 
 /**
  * A cheap timer class that can be queried for timings and will print out
  * it's total time in existence on destruction.
  */
-class ScopedTimer : boost::noncopyable {
+class ScopedTimer {
 public:
 	// Takes the output message that will be boost::format() with the total time
 	// this object existed (in ms, use %u).
@@ -44,6 +44,8 @@ public:
 private:
 	std::string message_;
 	uint32_t startime_, lasttime_;
+
+	DISALLOW_COPY_AND_ASSIGN(ScopedTimer);
 };
 
 #endif  // end of include guard: WL_BASE_SCOPED_TIMER_H

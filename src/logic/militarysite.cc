@@ -193,7 +193,7 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), get_conquers())),
+			 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())),
 			 m_defeating_player);
 
 	ProductionSite::cleanup(egbase);
@@ -242,7 +242,7 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 			send_message
 				(*game,
 				 "site_occupied",
-				 descname(),
+				 descr().descname(),
 				 descr().m_occupied_str,
 				 true);
 		}
@@ -390,7 +390,7 @@ void MilitarySite::update_normal_soldier_request()
 			m_normal_soldier_request.reset
 				(new Request
 					(*this,
-					 tribe().safe_worker_index("soldier"),
+					 descr().tribe().safe_worker_index("soldier"),
 					 MilitarySite::request_soldier_callback,
 					 wwWORKER));
 			m_normal_soldier_request->set_requirements (m_soldier_requirements);
@@ -446,7 +446,7 @@ void MilitarySite::update_upgrade_soldier_request()
 		m_upgrade_soldier_request.reset
 				(new Request
 				(*this,
-				tribe().safe_worker_index("soldier"),
+				descr().tribe().safe_worker_index("soldier"),
 				MilitarySite::request_soldier_callback,
 				wwWORKER));
 
@@ -734,7 +734,7 @@ void MilitarySite::conquer_area(Editor_Game_Base & egbase) {
 		(Player_Area<Area<FCoords> >
 		 	(owner().player_number(),
 		 	 Area<FCoords>
-		 	 	(egbase.map().get_fcoords(get_position()), get_conquers())));
+		 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())));
 	m_didconquer = true;
 }
 
@@ -751,7 +751,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 	if
 		(enemy.get_owner() == &owner() ||
 		 enemy.getBattle() ||
-		 get_conquers()
+		 descr().get_conquers()
 		 <=
 		 map.calc_distance(enemy.get_position(), get_position()))
 		return;
@@ -861,7 +861,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
 		for (Building_Index former_idx : m_old_buildings) {
-			const Building_Descr * old_descr = tribe().get_building_descr(former_idx);
+			const Building_Descr * old_descr = descr().tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
 			std::string::size_type const dot = bldname.rfind('.');

@@ -25,6 +25,7 @@ planks=1
 [aihints]
 build_material=false
 is_basic=true
+prohibited_till=300
 
 [working positions]
 toolsmith=1

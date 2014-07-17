@@ -26,11 +26,11 @@
 #include <string>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
 #include <stdint.h>
 
 #include "base/deprecated.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/program_result.h"
 #include "logic/tattribute.h"
@@ -52,7 +52,8 @@ class World;
 struct ProductionProgram {
 
 	/// Can be executed on a ProductionSite.
-	struct Action : boost::noncopyable {
+	struct Action {
+		Action() = default;
 		virtual ~Action();
 		virtual void execute(Game &, ProductionSite &) const = 0;
 
@@ -70,6 +71,9 @@ struct ProductionProgram {
 		 * a failed status.
 		 */
 		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
+
+	private:
+		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
 
 	/// A group of ware types with a count.

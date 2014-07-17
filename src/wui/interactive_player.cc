@@ -158,10 +158,7 @@ m_toggle_help
 	}
 
 	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
-	if (not scenario)
-		m_toggle_objectives.set_visible(false);
-	else
-		m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
 
 	set_player_number(plyn);

@@ -24,10 +24,11 @@
 #include <memory>
 #include <string>
 
-#include <boost/noncopyable.hpp>
+#include "base/macros.h"
 
-class OneWorldLegacyLookupTable : boost::noncopyable {
+class OneWorldLegacyLookupTable {
 public:
+	OneWorldLegacyLookupTable() = default;
 	virtual ~OneWorldLegacyLookupTable();
 
 	/// Looks up the new name for the 'resource'.
@@ -41,6 +42,9 @@ public:
 
 	/// Looks up the new name for the 'immovable'.
 	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(OneWorldLegacyLookupTable);
 };
 
 std::unique_ptr<OneWorldLegacyLookupTable>

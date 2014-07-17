@@ -99,7 +99,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	m_display = new ItemWaresDisplay(vbox, *ship.get_owner());
-	m_display->set_capacity(ship.get_capacity());
+	m_display->set_capacity(ship.descr().get_capacity());
 	vbox->add(m_display, UI::Box::AlignCenter, false);
 
 	// Expedition buttons

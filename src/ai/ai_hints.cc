@@ -45,6 +45,7 @@ BuildingHints::BuildingHints(Section* const section)
      expansion_(section ? section->get_bool("expansion") : false),
      fighting_(section ? section->get_bool("fighting") : false),
      mountain_conqueror_(section ? section->get_bool("mountain_conqueror") : false),
+     prohibited_till_(section ? section->get_int("prohibited_till", 0) : 0),
      mines_percent_(section ? section->get_int("mines_percent", 100) : 0) {
 	if (section) {
 		if (char const* const s = section->get_string("renews_map_resource"))

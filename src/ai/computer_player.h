@@ -20,8 +20,7 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/game.h"
 #include "logic/notification.h"
 
@@ -31,20 +30,23 @@
  * Instances of actual AI implementation can be created via the
  * \ref Implementation interface.
  */
-struct Computer_Player :
-	boost::noncopyable,
-	Widelands::NoteReceiver<Widelands::NoteImmovable>,
-	Widelands::NoteReceiver<Widelands::NoteFieldPossession>
-{
-	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
+struct Computer_Player : Widelands::NoteReceiver<Widelands::NoteImmovable>,
+                         Widelands::NoteReceiver<Widelands::NoteFieldPossession> {
+	Computer_Player(Widelands::Game&, const Widelands::Player_Number);
 
-	virtual void think () = 0;
+	virtual void think() = 0;
 
-	virtual void receive(const Widelands::NoteImmovable &) override {}
-	virtual void receive(const Widelands::NoteFieldPossession     &) override {}
+	virtual void receive(const Widelands::NoteImmovable&) override {
+	}
+	virtual void receive(const Widelands::NoteFieldPossession&) override {
+	}
 
-	Widelands::Game & game() const {return m_game;}
-	Widelands::Player_Number player_number() {return m_player_number;}
+	Widelands::Game& game() const {
+		return m_game;
+	}
+	Widelands::Player_Number player_number() {
+		return m_player_number;
+	}
 
 	/**
 	 * Interface to a concrete implementation, used to instantiate AIs.
@@ -53,27 +55,27 @@ struct Computer_Player :
 	 */
 	struct Implementation {
 		std::string name;
-		virtual ~Implementation() {}
-		virtual Computer_Player * instantiate
-			(Widelands::Game &, Widelands::Player_Number) const = 0;
+		virtual ~Implementation() {
+		}
+		virtual Computer_Player* instantiate(Widelands::Game&, Widelands::Player_Number) const = 0;
 	};
-	typedef
-		std::vector<Computer_Player::Implementation const *>
-		ImplementationVector;
+	typedef std::vector<Computer_Player::Implementation const*> ImplementationVector;
 
 	/**
 	 * Get a list of available AI implementations.
 	 */
-	static const ImplementationVector & getImplementations();
+	static const ImplementationVector& getImplementations();
 
 	/**
 	 * Get the best matching implementation for this name.
 	 */
-	static const Implementation * getImplementation(const std::string & name);
+	static const Implementation* getImplementation(const std::string& name);
 
 private:
-	Widelands::Game & m_game;
+	Widelands::Game& m_game;
 	Widelands::Player_Number const m_player_number;
+
+	DISALLOW_COPY_AND_ASSIGN(Computer_Player);
 };
 
 #endif  // end of include guard: WL_AI_COMPUTER_PLAYER_H

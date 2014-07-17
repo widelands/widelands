@@ -37,3 +37,4 @@ hotspot=48 84
 expansion=true
 fighting=true
 mountain_conqueror=true
+prohibited_till=600

@@ -1859,7 +1859,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 				return;
 			}
 
-			const Tribe_Descr & tribe = warehouse->tribe();
+			const Tribe_Descr & tribe = warehouse->descr().tribe();
 			if (m_isworker) {
 				if (!(m_ware < tribe.get_nrworkers())) {
 					log

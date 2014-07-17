@@ -136,7 +136,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	if (!m_old_buildings.empty()) {
 		// Enhancement
 		Building_Index was_index = m_old_buildings.back();
-		const Building_Descr* was_descr = tribe().get_building_descr(was_index);
+		const Building_Descr* was_descr = descr().tribe().get_building_descr(was_index);
 		m_info.was = was_descr;
 		buildcost = &m_building->enhancement_cost();
 	} else {
@@ -174,7 +174,7 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		Building_Index becomes_idx = tribe().building_index(m_building->name());
+		Building_Index becomes_idx = descr().tribe().building_index(m_building->name());
 		m_old_buildings.push_back(becomes_idx);
 		Building & b =
 			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
@@ -274,7 +274,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		WaresQueue * queue = *iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr & wd = *tribe().get_ware_descr(queue->get_ware());
+			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());
 			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
@@ -395,7 +395,7 @@ void ConstructionSite::draw
 		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (!m_old_buildings.empty()) {
 		Building_Index prev_idx = m_old_buildings.back();
-		const Building_Descr* prev_building = tribe().get_building_descr(prev_idx);
+		const Building_Descr* prev_building = descr().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		uint32_t prev_building_anim_idx;

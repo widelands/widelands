@@ -3,6 +3,7 @@ output=thatchreed
 
 [aihints]
 space_consumer=true
+is_basic=true
 
 [buildcost]
 log=5

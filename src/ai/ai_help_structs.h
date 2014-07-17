@@ -137,7 +137,6 @@ private:
 	const World& world_;
 };
 
-
 struct FindNodeWithFlagOrRoad {
 	Economy* economy;
 	bool accept(const Map&, FCoords) const;
@@ -155,7 +154,7 @@ struct NearFlag {
 		return cost_ > f.cost_;
 	}
 
-	bool operator == (Flag const* const f) const {
+	bool operator==(Flag const* const f) const {
 		return flag == f;
 	}
 };
@@ -166,7 +165,7 @@ struct CompareDistance {
 	}
 };
 
-//usually we order by shortest shortcut, but sometimes it makes sense to
+// usually we order by shortest shortcut, but sometimes it makes sense to
 // make shortcut by biggest road reduction
 struct CompareShortening {
 	bool operator()(const NearFlag& a, const NearFlag& b) const {
@@ -228,6 +227,8 @@ struct BuildableField {
 	int16_t military_presence_;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed_;
+	// some buildings must be postponed bit
+	int32_t prohibited_till_;
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -320,6 +321,7 @@ struct BuildingObserver {
 	bool expansion_type_;      // military building used that can be used to control area
 	bool fighting_type_;       // military building built near enemies
 	bool mountain_conqueror_;  // military building built near mountains
+	int32_t prohibited_till_;  // do not build before (ms)
 
 	bool unoccupied_;  //
 
