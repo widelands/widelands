@@ -80,6 +80,7 @@ echo " "
     # First check if this is an bzr checkout at all - only in that case,
     # creation of a script makes any sense.
     if ! [ -f .bzr/branch-format ] ; then
+      echo "You don't appear to be using Bazaar. An update script will not be created"
       return 0
     fi
         rm -f update.sh || true
