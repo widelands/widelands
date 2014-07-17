@@ -26,14 +26,8 @@ echo " "
 # TODO  user interaction and functions for installation including a check
 # TODO  whether the selected directories are writeable and a password check
 # TODO  to become root / Administrator if the dirs are not writeable.
+# TODO(code review): probably no longer needed?
 
-
-
-######################################
-# Definition of some local variables #
-######################################
-var_build=0 # 0 == debug(default), 1 == release
-######################################
 
 
 ######################################
@@ -50,26 +44,6 @@ var_build=0 # 0 == debug(default), 1 == release
     return 0
   }
 
-  # Ask the user what parts and how Widelands should be build.
-  # And save the values
-  user_interaction () {
-    local_var_ready=0
-    while [ $local_var_ready -eq 0 ]
-    do
-      echo " "
-      echo "  Should Widelands be build in [r]elease or [d]ebug mode?"
-      echo " "
-      read local_var_choice
-      echo " "
-      case $local_var_choice in
-        r) echo "  -> Release mode selected" ; var_build=1 ; local_var_ready=1 ;;
-        d) echo "  -> Debug mode selected" ; var_build=0 ; local_var_ready=1 ;;
-        *) echo "  -> Bad choice. Please try again!" ;;
-      esac
-    done
-    return 0
-  }
-
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
     test -d build || mkdir -p build
@@ -83,15 +57,10 @@ var_build=0 # 0 == debug(default), 1 == release
 
   # Compile Widelands
   compile_widelands () {
-    var_build_type=""
-    if [ $var_build -eq 0 ] ; then
-      var_build_type="Debug"
-    else
-      var_build_type="Release"
-    fi
-
-    echo " "
-    cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="${var_build_type}"
+    echo "Builds a debug build by default. If you want a Release build, "
+    echo "you will need to build it manually passing the"
+    echo "option -DCMAKE_BUILD_TYPE=\"Release\" to cmake"
+    cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
     make ${MAKEOPTS}
     make lang
     return 0
@@ -157,7 +126,6 @@ var_build=0 # 0 == debug(default), 1 == release
 ######################################
 set -e
 basic_check
-user_interaction
 prepare_directories_and_links
 compile_widelands
 move_built_files
