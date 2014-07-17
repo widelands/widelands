@@ -71,7 +71,10 @@ int main(int argc, char ** argv)
 	try {
 		initialize();
 
-		const std::string map_dir = FileSystem::FS_Dirname(map_path);
+		std::string map_dir = FileSystem::FS_Dirname(map_path);
+		if (map_dir.empty()) {
+			map_dir = ".";
+		}
 		const std::string map_file = FileSystem::FS_Filename(map_path.c_str());
 		FileSystem* in_out_filesystem = &FileSystem::Create(map_dir);
 		g_fs->AddFileSystem(in_out_filesystem);
