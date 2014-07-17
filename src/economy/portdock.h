@@ -84,7 +84,6 @@ public:
 		(const Editor_Game_Base &) const override;
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
-	virtual const std::string & name() const override;
 
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;

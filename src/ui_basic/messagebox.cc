@@ -153,7 +153,6 @@ bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 			return false;
 	}
 
-	return UI::Panel::handle_key(down, code);
 }
 
 void WLMessageBox::pressedOk()

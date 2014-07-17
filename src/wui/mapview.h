@@ -29,7 +29,7 @@
 #include "ui_basic/panel.h"
 
 class GameRenderer;
-struct Interactive_Base;
+class Interactive_Base;
 
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.

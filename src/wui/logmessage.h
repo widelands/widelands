@@ -22,11 +22,15 @@
 
 #include <string>
 
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 /**
  * Represents one log message.
  */
 struct LogMessage {
+	CAN_BE_SEND_AS_NOTE(NoteId::LogMessage)
+
 	/**
 	 * The (real-)time at which the message was received.
 	 */

@@ -22,11 +22,9 @@
 
 #include <memory>
 
-#include "logic/notification.h"
 #include "ui_basic/panel.h"
 
 struct ChatProvider;
-struct LogMessage;
 
 /**
  * The overlay that displays all new chat messages for some timeout on the main window.
@@ -38,7 +36,6 @@ struct ChatOverlay : public UI::Panel {
 	~ChatOverlay();
 
 	void setChatProvider(ChatProvider &);
-	void setLogProvider(Widelands::NoteSender<LogMessage> &);
 	virtual void draw(RenderTarget &) override;
 	virtual void think() override;
 

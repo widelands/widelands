@@ -36,6 +36,8 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
 
+	std::string type() const override {return "trainingsite";}
+
 	virtual Building & create_object() const override;
 
 	uint32_t get_max_number_of_soldiers() const {
@@ -49,6 +51,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_min_level(tAttribute) const;
 	int32_t get_max_level(tAttribute) const;
 	int32_t get_max_stall() const;
+
 private:
 	//  FIXME These variables should be per soldier type. They should be in a
 	//  FIXME struct and there should be a vector, indexed by Soldier_Index,

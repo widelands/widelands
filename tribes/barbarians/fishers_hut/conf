@@ -22,5 +22,5 @@ sleep=18000
 worker=fish
 
 [idle]
-pics=fisher_i_??.png  # ???
+pics=fishers_hut_i_??.png  # ???
 hotspot=39 40

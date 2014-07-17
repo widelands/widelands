@@ -163,14 +163,14 @@ void ProductionSite_Window::update_worker_table()
 			m_worker_table->get_record(i);
 
 		if (worker) {
-			er.set_picture(0, worker->icon(), worker->descname());
+			er.set_picture(0, worker->descr().icon(), worker->descr().descname());
 
 			if
 				(worker->get_current_experience() != -1
 					and
-					worker->get_needed_experience () != -1)
+					worker->descr().get_level_experience () != -1)
 			{
-				assert(worker->becomes() != Widelands::INVALID_INDEX);
+				assert(worker->descr().becomes() != Widelands::INVALID_INDEX);
 
 				// Fill upgrade status
 				char buffer[7];
@@ -178,12 +178,12 @@ void ProductionSite_Window::update_worker_table()
 					(buffer, sizeof(buffer),
 						"%i/%i",
 						worker->get_current_experience(),
-						worker->get_needed_experience());
+						worker->descr().get_level_experience());
 
 				er.set_string(1, buffer);
 				er.set_string
-					(2, worker->tribe().get_worker_descr
-						(worker->becomes())->descname());
+					(2, worker->descr().tribe().get_worker_descr
+						(worker->descr().becomes())->descname());
 			} else {
 				// Worker is not upgradeable
 				er.set_string(1, "---");
@@ -191,7 +191,7 @@ void ProductionSite_Window::update_worker_table()
 			}
 		} else if (request) {
 			const Widelands::Worker_Descr * desc =
-				productionsite().tribe().get_worker_descr(request->get_index());
+				productionsite().descr().tribe().get_worker_descr(request->get_index());
 			er.set_picture
 				(0, desc->icon(),
 					request->is_open() ? _("(vacant)") : _("(coming)"));

@@ -43,12 +43,14 @@ struct Critter_Bob_Descr : public BobDescr {
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const override;
+	std::string type() const override {return "critterbob";}
 
 	bool is_swimming() const;
 	uint32_t movecaps() const override;
 	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 
 	Critter_BobProgram const * get_program(const std::string &) const;
+
 
 private:
 	DirAnimations m_walk_anims;
@@ -71,7 +73,6 @@ public:
 	virtual void init_auto_task(Game &) override;
 
 	void start_task_program(Game &, const std::string & name);
-	const std::string & descname() const {return descr().descname();}
 
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 

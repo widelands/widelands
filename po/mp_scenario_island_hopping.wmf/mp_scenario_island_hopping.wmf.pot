@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -104,14 +104,15 @@ msgid ""
 "%1$i %2$s"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
-msgid ""
-"Welcome to Island Hopping"
-msgstr ""
-
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:244
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid ""
 "Rules"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
+msgid ""
+"Welcome to Island Hopping"
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8

@@ -20,7 +20,7 @@
 #ifndef WL_NETWORK_NETCLIENT_H
 #define WL_NETWORK_NETCLIENT_H
 
-#include "chat.h"
+#include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "network/network.h"

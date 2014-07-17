@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
+#include "logic/tribe.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -45,7 +46,6 @@ WareDescr::WareDescr
 	m_preciousness =
 		static_cast<uint8_t>(global_s.get_natural("preciousness", 0));
 }
-
 
 /**
  * Load all static graphics

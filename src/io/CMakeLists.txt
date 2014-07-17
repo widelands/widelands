@@ -54,7 +54,7 @@ wl_library(io_dedicated_log
   DEPENDS
     base_i18n
     base_log
+    chat
     io_fileread
     io_filesystem
-    widelands_ball_of_mud
 )

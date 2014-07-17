@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include <boost/noncopyable.hpp>
+#include "base/macros.h"
 
 class Image;
 class LuaTable;
@@ -31,7 +31,7 @@ namespace Widelands {
 
 /// Represents a category for grouping items in the Editor, so purely a UI
 /// distinction and not a logical one.
-class EditorCategory : boost::noncopyable {
+class EditorCategory {
 public:
 	EditorCategory(const LuaTable& table);
 
@@ -48,6 +48,7 @@ private:
 	const std::string name_;
 	const std::string descname_;
 	const std::string image_file_;
+	DISALLOW_COPY_AND_ASSIGN(EditorCategory);
 };
 
 }  // namespace Widelands

@@ -58,12 +58,15 @@ wl_library(ui_basic
     base_geometry
     base_i18n
     base_log
+    base_macros
     graphic
     graphic_color
     graphic_image
     graphic_surface
     helper
     io_filesystem
+    # TODO(sirver): should not depend on logic
+    logic
     profile
     scripting
     sound

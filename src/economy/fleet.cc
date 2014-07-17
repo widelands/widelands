@@ -661,7 +661,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 				// Check if ship has currently a different destination
 				if (dst && dst != &pd)
 					continue;
-				if (ship.get_nritems() >= ship.get_capacity())
+				if (ship.get_nritems() >= ship.descr().get_capacity())
 					continue;
 
 				molog("... ship %u takes care of it\n", ship.serial());

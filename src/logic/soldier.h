@@ -49,6 +49,8 @@ struct Soldier_Descr : public Worker_Descr {
 	// NOTE as well defined in an enum in instances.h
 	virtual Worker_Type get_worker_type() const override {return Worker_Descr::SOLDIER;}
 
+	std::string type() const override {return "soldier";}
+
 	virtual void load_graphics() override;
 
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
@@ -79,8 +81,6 @@ struct Soldier_Descr : public Worker_Descr {
 	const Image* get_evade_level_pic  (uint32_t const level) const {
 		assert(level <= m_max_evade_level);   return m_evade_pics  [level];
 	}
-
-
 
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
 
@@ -192,20 +192,6 @@ public:
 	static void calc_info_icon_size
 		(const Tribe_Descr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
-
-	//  Information function from description.
-	uint32_t get_max_hp_level     () const {
-		return descr().get_max_hp_level();
-	}
-	uint32_t get_max_attack_level () const {
-		return descr().get_max_attack_level();
-	}
-	uint32_t get_max_defense_level() const {
-		return descr().get_max_defense_level();
-	}
-	uint32_t get_max_evade_level  () const {
-		return descr().get_max_evade_level();
-	}
 
 	uint32_t get_current_hitpoints() const {return m_hp_current;}
 	uint32_t get_max_hitpoints() const;

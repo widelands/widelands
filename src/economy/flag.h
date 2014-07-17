@@ -70,7 +70,6 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	char const * type_name() const override {return "flag";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
-	const std::string & name() const override;
 
 	virtual Flag & base_flag() override;
 

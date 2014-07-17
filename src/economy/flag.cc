@@ -161,11 +161,6 @@ bool Flag::get_passable() const
 	return true;
 }
 
-
-static std::string const flag_name = "flag";
-const std::string & Flag::name() const {return flag_name;}
-
-
 Flag & Flag::base_flag()
 {
 	return *this;

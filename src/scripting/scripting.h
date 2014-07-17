@@ -37,7 +37,6 @@ namespace Widelands {
 	class Game;
 	class Map_Map_Object_Loader;
 	struct Map_Map_Object_Saver;
-	class Player;
 }
 
 class EditorFactory;
@@ -88,5 +87,4 @@ public:
 private:
 	std::unique_ptr<GameFactory> m_factory;
 };
-
 #endif  // end of include guard: WL_SCRIPTING_SCRIPTING_H

@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-11 05:12+0000\n"
-"PO-Revision-Date: 2014-04-21 10:49+0000\n"
+"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"PO-Revision-Date: 2014-06-20 15:16+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-12 05:30+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
+"X-Launchpad-Export-Date: 2014-06-21 05:29+0000\n"
+"X-Generator: Launchpad (build 17058)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
 #: ../../campaigns/t03.wmf/scripting/texts.lua:23
@@ -137,11 +137,11 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:90
 #: ../../campaigns/t03.wmf/scripting/texts.lua:92
 msgid "Build a warehouse"
-msgstr "Baue ein Warenlager"
+msgstr "Baue ein Lagerhaus"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid "Build a warehouse to the west of the mountains."
-msgstr "Baue ein Warenlager westlich der Berge."
+msgstr "Baue ein Lagerhaus westlich der Berge."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:95
 msgid ""
@@ -150,9 +150,9 @@ msgid ""
 "your territory is growing and the paths to your headquarters get longer and "
 "longer."
 msgstr ""
-"Warenlager sind deinem Hauptquartier ähnlich; der einzige Unterschied "
+"Lagerhäuser sind deinem Hauptquartier ähnlich; der einzige Unterschied "
 "besteht darin, dass sie nicht von Soldaten verteidigt werden. Es ist oftmals "
-"sinnvoll, ein Warenlager zu bauen, wenn dein Territorium wächst und die Wege "
+"sinnvoll, ein Lagerhaus zu bauen, wenn dein Territorium wächst und die Wege "
 "zu deinem Hauptquartier immer länger werden."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103

@@ -26,10 +26,8 @@
 
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/notification.h"
 #include "wui/chatoverlay.h"
 #include "wui/debugconsole.h"
-#include "wui/logmessage.h"
 #include "wui/mapview.h"
 #include "wui/overlay_manager.h"
 #include "ui_basic/box.h"
@@ -45,7 +43,8 @@ class UniqueWindowHandler;
  * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-struct Interactive_Base : public Map_View, public DebugConsole::Handler {
+class Interactive_Base : public Map_View, public DebugConsole::Handler {
+public:
 	friend class Sound_Handler;
 
 	enum {
@@ -64,7 +63,6 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
 	virtual void reference_player_tribe(Widelands::Player_Number, const void * const) {}
 
-	// TODO(sirver): Public member variables and prefixed with m_. Jeesus.
 	bool m_show_workarea_preview;
 	OverlayManager::JobId show_work_area(const Workarea_Info & workarea_info, Widelands::Coords coords);
 	void hide_work_area(OverlayManager::JobId job_id);
@@ -145,10 +143,18 @@ protected:
 		m_toolbar.set_pos
 			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));
 	}
+
+	// TODO(sirver): why are these protected?
 	ChatOverlay     * m_chatOverlay;
 	UI::Box           m_toolbar;
 
 private:
+	void roadb_add_overlay   ();
+	void roadb_remove_overlay();
+	void cmdMapObject(const std::vector<std::string> & args);
+	void cmdLua(const std::vector<std::string> & args);
+	void update_speedlabel();
+
 	struct Sel_Data {
 		Sel_Data
 			(const bool Freeze = false, const bool Triangles = false,
@@ -172,17 +178,9 @@ private:
 		OverlayManager::JobId jobid;
 	} m_sel;
 
-	void roadb_add_overlay   ();
-	void roadb_remove_overlay();
-	void cmdMapObject(const std::vector<std::string> & args);
-	void cmdLua(const std::vector<std::string> & args);
-	void update_speedlabel();
-
 	std::unique_ptr<InteractiveBaseInternals> m;
 	Widelands::Editor_Game_Base & m_egbase;
-
 	uint32_t m_display_flags;
-
 	uint32_t          m_lastframe;         //  system time (milliseconds)
 	uint32_t          m_frametime;         //  in millseconds
 	uint32_t          m_avg_usframetime;   //  in microseconds!
@@ -191,14 +189,13 @@ private:
 	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
-	std::vector<const Image*> m_workarea_pics;
 
 	UI::Textarea m_label_speed_shadow;
 	UI::Textarea m_label_speed;
 
 	UI::UniqueWindow::Registry m_debugconsole;
-	Widelands::NoteSender<LogMessage> m_log_sender;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
+	std::vector<const Image*> m_workarea_pics;
 };
 
 #define PIC2 g_gr->images().get("pics/but2.png")

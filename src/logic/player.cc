@@ -133,7 +133,7 @@ void find_former_buildings
 			 ++i)
 		{
 			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
-			if (ob->enhancements().count(oldest_idx)) {
+			if (ob->enhancement() == oldest_idx) {
 				former_buildings->insert(former_buildings->begin(), i);
 				break;
 			}
@@ -172,6 +172,23 @@ Player::Player
 	m_ware_stocks  (tribe_descr.get_nrwares          ())
 {
 	set_name(name);
+
+	// Subscribe to NoteImmovables.
+	immovable_subscriber_ =
+		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+			if (note.pi->owner().player_number() == player_number()) {
+				if (upcast(Building, building, note.pi))
+					update_building_statistics(*building, note.ownership);
+			}
+		});
+
+	// Subscribe to NoteFieldTransformed.
+	field_transformed_subscriber_ =
+		Notifications::subscribe<NoteFieldTransformed>([this](const NoteFieldTransformed& note) {
+			if (vision(note.map_index) > 1) {
+				rediscover_node(egbase().map(), egbase().map()[0], note.fc);
+			}
+		});
 }
 
 
@@ -718,7 +735,7 @@ void Player::_enhance_or_dismantle
 {
 	if (&building->owner() ==
 	    this and(index_of_new_building == INVALID_INDEX ||
-	             building->descr().enhancements().count(index_of_new_building))) {
+			building->descr().enhancement() == index_of_new_building)) {
 		Building::FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
@@ -853,7 +870,7 @@ Forces the drop of given soldier at given house
 void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 	if (&imm.owner() != this)
 		return;
-	if (soldier.get_worker_type() != Worker_Descr::SOLDIER)
+	if (soldier.descr().get_worker_type() != Worker_Descr::SOLDIER)
 		return;
 	if (upcast(SoldierControl, ctrl, &imm))
 		ctrl->dropSoldier(soldier);
@@ -1230,12 +1247,12 @@ const std::vector<uint32_t> * Player::get_ware_stock_statistics
  * Only to be called by \ref receive
  */
 void Player::update_building_statistics
-	(Building & building, losegain_t const lg)
+	(Building & building, NoteImmovable::Ownership ownership)
 {
 	upcast(ConstructionSite const, constructionsite, &building);
 	const std::string & building_name =
 		constructionsite ?
-		constructionsite->building().name() : building.name();
+		constructionsite->building().name() : building.descr().name();
 
 	Building_Index const nr_buildings = tribe().get_nrbuildings();
 
@@ -1246,7 +1263,7 @@ void Player::update_building_statistics
 	std::vector<Building_Stats> & stat =
 		m_building_stats[tribe().building_index(building_name.c_str())];
 
-	if (lg == GAIN) {
+	if (ownership == NoteImmovable::Ownership::GAINED) {
 		Building_Stats new_building;
 		new_building.is_constructionsite = constructionsite;
 		new_building.pos = building.get_position();
@@ -1265,21 +1282,6 @@ void Player::update_building_statistics
 			 "removed at (%i, %i), but nothing is known about this building!",
 			 building_position.x, building_position.y);
 	}
-}
-
-
-void Player::receive(const NoteImmovable & note)
-{
-	if (upcast(Building, building, note.pi))
-		update_building_statistics(*building, note.lg);
-
-	NoteSender<NoteImmovable>::send(note);
-}
-
-
-void Player::receive(const NoteFieldPossession & note)
-{
-	NoteSender<NoteFieldPossession>::send(note);
 }
 
 void Player::setAI(const std::string & ai)

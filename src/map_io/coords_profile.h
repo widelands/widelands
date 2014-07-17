@@ -24,8 +24,7 @@
 
 #include "logic/widelands_geometry.h"
 
-struct Profile;
-struct Section;
+class Section;
 
 namespace Widelands {
 

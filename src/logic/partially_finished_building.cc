@@ -110,7 +110,7 @@ void Partially_Finished_Building::request_builder(Game &) {
 	m_builder_request =
 		new Request
 			(*this,
-			 tribe().safe_worker_index("builder"),
+			 descr().tribe().safe_worker_index("builder"),
 			 Partially_Finished_Building::request_builder_callback,
 			 wwWORKER);
 }
@@ -138,19 +138,6 @@ uint32_t Partially_Finished_Building::get_playercaps() const {
 
 	return caps;
 }
-
-
-/*
-===============
-Return the animation for the building that is in construction, as this
-should be more useful to the player.
-===============
-*/
-uint32_t Partially_Finished_Building::get_ui_anim() const
-{
-	return m_building->get_animation("idle");
-}
-
 
 
 /*

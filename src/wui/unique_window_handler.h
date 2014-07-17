@@ -22,8 +22,7 @@
 
 #include <functional>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "ui_basic/unique_window.h"
 
 // Handles unique windows that should not close when their parents close. They
@@ -31,13 +30,17 @@
 // TODO(sirver): Eventually all unique windows should live here. A new button
 // class could integrate with this code to get rid of all the ugly explicit
 // handling of pressed button state when a Window is open.
-class UniqueWindowHandler : boost::noncopyable {
+class UniqueWindowHandler {
 public:
+	UniqueWindowHandler() = default;
+
 	// Returns the registry for 'name'.
 	UI::UniqueWindow::Registry& get_registry(const std::string& name);
 
 private:
 	std::map<std::string, UI::UniqueWindow::Registry> registries_;
+
+	DISALLOW_COPY_AND_ASSIGN(UniqueWindowHandler);
 };
 
 #endif  // end of include guard: WL_WUI_UNIQUE_WINDOW_HANDLER_H

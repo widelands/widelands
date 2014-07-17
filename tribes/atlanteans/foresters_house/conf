@@ -24,5 +24,5 @@ sleep=11000
 worker=plant
 
 [idle]
-pics=forester_i_??.png  # ???
+pics=foresters_house_i_??.png  # ???
 hotspot=37 44

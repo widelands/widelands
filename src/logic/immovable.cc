@@ -50,6 +50,7 @@
 #include "logic/worker.h"
 #include "logic/world/world.h"
 #include "map_io/one_world_legacy_lookup_table.h"
+#include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -82,9 +83,6 @@ Map_Object(&mo_descr)
 
 
 static std::string const base_immovable_name = "unknown";
-const std::string & BaseImmovable::name() const {
-	return base_immovable_name;
-}
 
 /**
  * Associate the given field with this immovable. Recalculate if necessary.
@@ -436,9 +434,6 @@ bool Immovable::get_passable() const
 	return descr().get_size() < BIG;
 }
 
-
-const std::string & Immovable::name() const {return descr().name();}
-
 void Immovable::set_owner(Player * player)
 {
 	m_owner = player;
@@ -649,7 +644,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 		imm.m_anim = imm.descr().main_animation();
 		log
 			("Warning: (%s) Animation \"%s\" not found, using animation %s).\n",
-			 imm.name().c_str(), animname, imm.descr().get_animation_name(imm.m_anim).c_str());
+			 imm.descr().name().c_str(), animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.Signed32();
 	if (version >= 4) {
@@ -729,12 +724,12 @@ void Immovable::save
 	fw.Unsigned8(header_Immovable);
 	fw.Unsigned8(IMMOVABLE_SAVEGAME_VERSION);
 
-	if (const Tribe_Descr * const tribe = get_owner_tribe())
+	if (const Tribe_Descr * const tribe = descr().get_owner_tribe())
 		fw.String(tribe->name());
 	else
 		fw.CString("world");
 
-	fw.String(name());
+	fw.String(descr().name());
 
 	// The main loading data follows
 	BaseImmovable::save(egbase, mos, fw);
@@ -1394,9 +1389,11 @@ void PlayerImmovable::remove_worker(Worker & w)
  * Set the immovable's owner. Currently, it can only be set once.
 */
 void PlayerImmovable::set_owner(Player * const new_owner) {
+	assert(m_owner == nullptr);
+
 	m_owner = new_owner;
 
-	m_owner->egbase().receive(NoteImmovable(this, GAIN));
+	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 }
 
 /**
@@ -1415,8 +1412,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 	while (!m_workers.empty())
 		m_workers[0]->set_location(nullptr);
 
-	if (m_owner)
-		m_owner->egbase().receive(NoteImmovable(this, LOSE));
+	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	BaseImmovable::cleanup(egbase);
 }
