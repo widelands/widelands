@@ -503,17 +503,6 @@ void Building::destroy(Editor_Game_Base & egbase)
 }
 
 
-/*
-===============
-Building::get_ui_anim [virtual]
-
-Return the animation ID that is used for the building in UI items
-(the building UI, messages, etc..)
-===============
-*/
-uint32_t Building::get_ui_anim() const {return descr().get_ui_anim();}
-
-
 #define FORMAT(key, value) case key: result << value; break
 std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
