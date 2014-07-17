@@ -49,7 +49,6 @@ echo " "
 
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
-    test -d build || mkdir -p build
     test -d build/locale || mkdir -p build/locale
     test -e locale || ln -s build/locale
 
