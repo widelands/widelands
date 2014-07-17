@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_PLAYER_H
 #define WL_LOGIC_PLAYER_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "logic/building.h"
@@ -27,7 +29,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
-#include "logic/notification.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
@@ -54,10 +55,7 @@ struct AttackController;
  * \ref GameController and friends, so that replays and network games function
  * properly.
  */
-class Player :
-	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
-	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
-{
+class Player {
 public:
 	// hard-coded playercolors
 	static const RGBColor Colors[MAX_PLAYERS];
@@ -364,13 +362,6 @@ public:
 		// Node visible if > 1
 		return (m_see_all ? 2 : 0) + m_fields[i].vision;
 	}
-	/**
-	 * Called when a node becomes seen or has changed.  Discovers the node and
-	 * those of the 6 surrounding edges/triangles that are not seen from another
-	 * node.
-	 */
-	void rediscover_node(const Map &, const Widelands::Field &, FCoords)
-	;
 
 	bool has_view_changed() {
 		bool t = m_view_changed;
@@ -521,10 +512,6 @@ public:
 	void ware_consumed(Ware_Index, uint8_t);
 	void next_ware_production_period();
 
-	void receive(const NoteImmovable &) override;
-	void receive(const NoteFieldPossession     &) override;
-	void receive(const NoteFieldTransformed     &);
-
 	void setAI(const std::string &);
 	const std::string & getAI() const;
 
@@ -535,13 +522,20 @@ public:
 	}
 
 private:
-	void update_building_statistics(Building &, losegain_t);
+	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const std::string & sender);
 	void _enhance_or_dismantle
 		(Building *, Building_Index const index_of_new_building);
 
-private:
+	// Called when a node becomes seen or has changed.  Discovers the node and
+	// those of the 6 surrounding edges/triangles that are not seen from another
+	// node.
+	void rediscover_node(const Map&, const Widelands::Field&, FCoords);
+
+	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<NoteFieldTransformed>> field_transformed_subscriber_;
+
 	MessageQueue           m_messages;
 
 	Editor_Game_Base     & m_egbase;

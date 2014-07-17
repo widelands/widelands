@@ -21,7 +21,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
-#include "chat.h"
+#include "chat/chat.h"
 #include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "ui_basic/editbox.h"

@@ -34,7 +34,7 @@
 #include "base/md5.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "chat.h"
+#include "chat/chat.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "helper.h"
@@ -514,7 +514,7 @@ struct HostChatProvider : public ChatProvider {
 
 	void receive(const ChatMessage & msg) {
 		messages.push_back(msg);
-		ChatProvider::send(msg);
+		Notifications::publish(msg);
 	}
 
 private:
@@ -1022,8 +1022,6 @@ void NetHost::send(ChatMessage msg)
 		broadcast(s);
 
 		d->chat.receive(msg);
-
-		dedicatedlog("[Host]: chat: %s\n", msg.toPlainString().c_str());
 	} else { //  personal messages
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);

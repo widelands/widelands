@@ -27,8 +27,8 @@
 #include "logic/wareworker.h"
 
 namespace Widelands {
+class ITransportCostCalculator;
 struct IRoute;
-struct ITransportCostCalculator;
 struct RoutingNode;
 
 /**

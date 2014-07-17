@@ -185,7 +185,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Building_Descr);
+	CASTED_GET_DESCRIPTION(Building_Descr)
 };
 
 
@@ -218,7 +218,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(ProductionSite_Descr);
+	CASTED_GET_DESCRIPTION(ProductionSite_Descr)
 };
 
 
@@ -250,7 +250,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(MilitarySite_Descr);
+	CASTED_GET_DESCRIPTION(MilitarySite_Descr)
 };
 
 
@@ -289,7 +289,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(TrainingSite_Descr);
+	CASTED_GET_DESCRIPTION(TrainingSite_Descr)
 };
 
 
@@ -321,7 +321,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Warehouse_Descr);
+	CASTED_GET_DESCRIPTION(Warehouse_Descr)
 };
 
 
@@ -356,7 +356,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(WareDescr);
+	CASTED_GET_DESCRIPTION(WareDescr)
 };
 
 
@@ -393,7 +393,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Worker_Descr);
+	CASTED_GET_DESCRIPTION(Worker_Descr)
 };
 
 #undef CASTED_GET_DESCRIPTION

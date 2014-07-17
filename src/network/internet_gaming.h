@@ -29,7 +29,7 @@
 #endif
 
 #include "build_info.h"
-#include "chat.h"
+#include "chat/chat.h"
 #include "network/internet_gaming_protocol.h"
 #include "network/network.h"
 #include "network/network_lan_promotion.h"
@@ -114,7 +114,10 @@ struct InternetGaming : public ChatProvider {
 	void send(const std::string &) override;
 
 	/// ChatProvider: adds the message to the message list and calls parent.
-	void receive(const ChatMessage & msg) {messages.push_back(msg); ChatProvider::send(msg);}
+	void receive(const ChatMessage & msg) {
+		messages.push_back(msg);
+		Notifications::publish(msg);
+	}
 
 	/// ChatProvider: returns the list of chatmessages.
 	const std::vector<ChatMessage> & getMessages() const override {return messages;}

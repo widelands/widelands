@@ -20,6 +20,9 @@
 #include "wui/gamechatpanel.h"
 
 #include <limits>
+#include <string>
+
+#include "wui/chat_msg_layout.h"
 
 /**
  * Create a game chat panel
@@ -44,7 +47,8 @@ GameChatPanel::GameChatPanel
 	set_handle_mouse(true);
 	set_can_focus(true);
 
-	connect(m_chat);
+	chat_message_subscriber_ =
+	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) {recalculate();});
 	recalculate();
 }
 
@@ -57,8 +61,7 @@ void GameChatPanel::recalculate()
 
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs.size(); ++i) {
-		// FIXME use toPrintable() when old renderer is kicked out
-		str += msgs[i].toOldRichText();
+		str += format_as_old_richtext(msgs[i]);
 		str += '\n';
 	}
 	str += "</rt>";
@@ -94,11 +97,6 @@ void GameChatPanel::recalculate()
 void GameChatPanel::focusEdit()
 {
 	editbox.focus();
-}
-
-void GameChatPanel::receive(const ChatMessage &)
-{
-	recalculate();
 }
 
 void GameChatPanel::keyEnter()

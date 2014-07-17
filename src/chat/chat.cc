@@ -17,29 +17,6 @@
  *
  */
 
-#ifndef WL_WUI_LOGMESSAGE_H
-#define WL_WUI_LOGMESSAGE_H
+#include "chat/chat.h"
 
-#include <string>
-
-#include "notifications/note_ids.h"
-#include "notifications/notifications.h"
-
-/**
- * Represents one log message.
- */
-struct LogMessage {
-	CAN_BE_SEND_AS_NOTE(NoteId::LogMessage)
-
-	/**
-	 * The (real-)time at which the message was received.
-	 */
-	time_t time;
-
-	/**
-	 * The actual chat message
-	 */
-	std::string msg;
-};
-
-#endif  // end of include guard: WL_WUI_LOGMESSAGE_H
+ChatProvider::~ChatProvider() {}
