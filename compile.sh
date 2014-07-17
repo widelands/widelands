@@ -89,7 +89,7 @@ buildtool="ninja" #Use ninja by default, fall back to make if that is not availa
       #TODO(code review): Do we need to pass in makeopts, is it likely that people running this script will
       #have makeopts set? Also, I assume ninja will be able to deal with this, if it is a drop-in replacement
       $buildtool ${MAKEOPTS}
-      #TODO(code review): Ideally lang is always run as just another part of lang
+      #TODO(code review): Ideally lang is always run as just another part of the line above
       $buildtool lang
     return 0
   }
