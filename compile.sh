@@ -64,10 +64,16 @@ echo " "
     echo "you will need to build it manually passing the"
     echo "option -DCMAKE_BUILD_TYPE=\"Release\" to cmake"
     #TODO(code review): WL_PORTABLE might be going away, see https://bugs.launchpad.net/widelands/+bug/1342228
-    cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
-    make ${MAKEOPTS}
+    #TODO(hjd): Remember to upgrade list of build dependencies for various platforms to make sure ninja
+    #is present. Also, someone should do some research how available it is on various other platforms.
+    #And I really really want a check here saying; "hey, I couldn't find ninja, either install it or use make"
+    #but I'm not quite sure what/how to check this.
+    cmake -G ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
+    #TODO(code review): Do we need to pass in makeopts, is it likely that people running this script will
+    #have makeopts set? Also, I assume ninja will be able to deal with this, if it is a drop-in replacement
+    ninja ${MAKEOPTS}
     #TODO(code review): Ideally lang is always run as just another part of lang
-    make lang
+    ninja lang
     return 0
   }
 
@@ -106,8 +112,8 @@ echo " "
             echo "bzr pull"
             echo "cd build"
             echo "cmake .."
-            echo "make ${MAKEOPTS}"
-            echo "make lang"
+            echo "ninja ${MAKEOPTS}"
+            echo "ninja lang"
             echo "rm  ../VERSION || true"
             echo "rm  ../widelands || true"
             echo "mv VERSION ../VERSION"
