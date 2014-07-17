@@ -20,6 +20,9 @@
 #include <memory>
 
 #include <SDL.h>
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include "base/log.h"
 #include "config.h"
@@ -37,38 +40,102 @@
 
 using namespace Widelands;
 
-int main(int /* argc */, char ** argv)
-{
-	try {
-		SDL_Init(SDL_INIT_VIDEO);
+namespace  {
 
-		g_fs = new LayeredFileSystem();
-		g_fs->AddFileSystem(&FileSystem::Create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
+// Setup the static objects Widelands needs to operate and initializes systems.
+void initialize() {
+	SDL_Init(SDL_INIT_VIDEO);
+
+	g_fs = new LayeredFileSystem();
+	g_fs->AddFileSystem(&FileSystem::Create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
 
 #ifdef HAS_GETENV
-		char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
-		putenv(dummy_video_env);
+	char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
+	putenv(dummy_video_env);
 #endif
 
-		g_gr = new Graphic();
-		g_gr->initialize(1, 1, false, false);
+	g_gr = new Graphic();
+	g_gr->initialize(1, 1, false, false);
+}
 
-		Editor_Game_Base egbase(nullptr);
+}  // namespace
+int main(int argc, char ** argv)
+{
+	if (argc != 2) {
+		log("Need exactly one map file.\n");
+		return 1;
+	}
+
+	const std::string map_path = argv[1];
+
+	try {
+		initialize();
+
+		const std::string map_dir = FileSystem::FS_Dirname(map_path);
+		const std::string map_file = FileSystem::FS_Filename(map_path.c_str());
+		FileSystem* in_out_filesystem = &FileSystem::Create(map_dir);
+		g_fs->AddFileSystem(in_out_filesystem);
+
 		Map* map = new Map();
+		Editor_Game_Base egbase(nullptr);
 		egbase.set_map(map);
-
-		std::unique_ptr<Widelands::Map_Loader> ml(map->get_correct_loader(argv[1]));
-		assert(ml != nullptr);
+		std::unique_ptr<Widelands::Map_Loader> ml(map->get_correct_loader(map_file));
 
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, true);
 
 		std::unique_ptr<Surface> minimap(draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
 
-		FileWrite fw;
-		save_surface_to_png(minimap.get(), &fw);
-		std::unique_ptr<FileSystem> fs(&FileSystem::Create("."));
-		fw.Write(*fs, "minimap.png");
+		// Write minimap
+		{
+			FileWrite fw;
+			save_surface_to_png(minimap.get(), &fw);
+			fw.Write(*in_out_filesystem, (map_file + ".png").c_str());
+		}
+
+		// Write JSON.
+		{
+			FileWrite fw;
+
+			const auto write_string = [&fw] (const std::string& s) {
+				fw.Data(s.c_str(), s.size());
+			};
+			const auto write_key_value =
+			   [&write_string](const std::string& key, const std::string& quoted_value) {
+				write_string((boost::format("\"%s\": %s") % key % quoted_value).str());
+			};
+			const auto write_key_value_string =
+			   [&write_key_value](const std::string& key, const std::string& value) {
+				std::string quoted_value = value;
+				boost::replace_all(quoted_value, "\"", "\\\"");
+				write_key_value(key, "\"" + value + "\"");
+			};
+			const auto write_key_value_int = [&write_key_value] (const std::string& key, const int value) {
+				write_key_value(key, boost::lexical_cast<std::string>(value));
+			};
+			write_string("{\n");
+			write_key_value_string("name", map->get_name());
+			write_string(",\n  ");
+			write_key_value_string("author", map->get_author());
+			write_string(",\n  ");
+			write_key_value_string("description", map->get_description());
+			write_string(",\n  ");
+			write_key_value_int("width", map->get_width());
+			write_string(",\n  ");
+			write_key_value_int("height", map->get_height());
+			write_string(",\n  ");
+			write_key_value_int("nr_players", map->get_nrplayers());
+			write_string(",\n  ");
+
+			const std::string world_name = static_cast<Widelands::WL_Map_Loader*>(ml.get())->old_world_name();
+			write_key_value_string("world_name", world_name);
+			write_string(",\n  ");
+			write_key_value_string("minimap", map_path + ".png");
+			write_string("\n  ");
+
+			write_string("}\n");
+			fw.Write(*in_out_filesystem, (map_file + ".json").c_str());
+		}
 	}
 	catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
