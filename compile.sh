@@ -72,32 +72,6 @@ var_build=0 # 0 == debug(default), 1 == release
 
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
-    # remove build/compile directory (this is the old location)
-    if [ -e build/compile ] ; then
-      echo " "
-      echo "  The build directory has changed"
-      echo "  from ./build/compile to ./build."
-      echo "  The old directory ./build/compile can be removed."
-      echo "  Please backup any files you might not want to lose."
-      echo "  Most users can safely say yes here."
-      echo "  Do you want to remove the directory ./build/compile? [y]es/[n]o"
-      echo " "
-      read local_var_choice
-      echo " "
-      case $local_var_choice in
-        y) echo "  -> Removing directory ./build/compile. This may take a while..."
-	   rm locale
-	   rm -r build/compile || true
-	   if [ -e build/compile ] ; then
-             echo "  -> Directory could not be removed. This is not fatal, continuing."
-	   else
-             echo "  -> Directory removed."
-	   fi ;;
-        n) echo "  -> Left the directory untouched." ;;
-        *) echo "  -> Bad choice. Please try again!" ;;
-      esac
-    fi
-
     test -d build || mkdir -p build
     test -d build/locale || mkdir -p build/locale
     test -e locale || ln -s build/locale
