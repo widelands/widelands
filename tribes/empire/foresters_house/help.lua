@@ -27,6 +27,6 @@ return {
 	building_help_building_section("empire", building_description) ..
 
 	--Production Section
-	building_help_production_section(_[[Calculaiton needed]])
+	building_help_production_section(_[[Calculation needed]])
    end
 }
