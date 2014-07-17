@@ -31,6 +31,13 @@ echo " "
 
 
 ######################################
+# Definition of some local variables #
+######################################
+buildtool="ninja" #Use ninja by default, fall back to make if that is not available.
+######################################
+
+
+######################################
 #    Definition of some functions    #
 ######################################
   # Check basic stuff
@@ -62,17 +69,28 @@ echo " "
     echo "Builds a debug build by default. If you want a Release build, "
     echo "you will need to build it manually passing the"
     echo "option -DCMAKE_BUILD_TYPE=\"Release\" to cmake"
+
     #TODO(code review): WL_PORTABLE might be going away, see https://bugs.launchpad.net/widelands/+bug/1342228
     #TODO(hjd): Remember to upgrade list of build dependencies for various platforms to make sure ninja
     #is present. Also, someone should do some research how available it is on various other platforms.
     #And I really really want a check here saying; "hey, I couldn't find ninja, either install it or use make"
     #but I'm not quite sure what/how to check this.
-    cmake -G Ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
-    #TODO(code review): Do we need to pass in makeopts, is it likely that people running this script will
-    #have makeopts set? Also, I assume ninja will be able to deal with this, if it is a drop-in replacement
-    ninja ${MAKEOPTS}
-    #TODO(code review): Ideally lang is always run as just another part of lang
-    ninja lang
+
+    #TODO(code review): hopefully ninja has the same executable name across the board...
+    #TODO(hjd): Would be nicer to have $buildtool initialized at the start.
+    #The only place where anything really differs is the cmake call. I'll likely do 
+    #this once I figure out how to compare strings in shell ;).
+    if [ -e `command -v ninja` ] ; then
+      cmake -G Ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
+    else
+      cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
+      buildtool="make"
+    fi
+      #TODO(code review): Do we need to pass in makeopts, is it likely that people running this script will
+      #have makeopts set? Also, I assume ninja will be able to deal with this, if it is a drop-in replacement
+      $buildtool ${MAKEOPTS}
+      #TODO(code review): Ideally lang is always run as just another part of lang
+      $buildtool lang
     return 0
   }
 
@@ -111,8 +129,8 @@ echo " "
             echo "bzr pull"
             echo "cd build"
             echo "cmake .."
-            echo "ninja ${MAKEOPTS}"
-            echo "ninja lang"
+            echo "$buildtool ${MAKEOPTS}"
+            echo "$buildtool lang"
             echo "rm  ../VERSION || true"
             echo "rm  ../widelands || true"
             echo "mv VERSION ../VERSION"
