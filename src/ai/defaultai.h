@@ -21,10 +21,12 @@
 #define WL_AI_DEFAULTAI_H
 
 #include <map>
+#include <memory>
 
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "logic/immovable.h"
 
 namespace Widelands {
 struct Road;
@@ -69,9 +71,6 @@ struct DefaultAI : Computer_Player {
 	DefaultAI(Widelands::Game&, const Widelands::Player_Number, uint8_t);
 	~DefaultAI();
 	virtual void think() override;
-
-	virtual void receive(const Widelands::NoteImmovable&) override;
-	virtual void receive(const Widelands::NoteFieldPossession&) override;
 
 	enum {
 		AGGRESSIVE = 2,
@@ -209,6 +208,9 @@ private:
 	uint16_t military_last_dismantle_;
 	int32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                               // building build
+
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>> field_possession_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
 };
 
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

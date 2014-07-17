@@ -21,7 +21,7 @@
 #define WL_IO_DEDICATED_LOG_H
 
 #include "base/log.h"
-#include "chat.h"
+#include "chat/chat.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filewrite.h"
 

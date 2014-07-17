@@ -2154,7 +2154,6 @@ int L_BaseImmovable::get_size(lua_State * L) {
 		case BaseImmovable::BIG: lua_pushstring(L, "big"); break;
 		default:
 		   report_error(L, "Unknown size in L_BaseImmovable::get_size: %i", o->get_size());
-		   break;
 	}
 	return 1;
 }

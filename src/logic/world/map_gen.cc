@@ -51,7 +51,6 @@ MapGenLandResource::getBobCategory(MapGenAreaInfo::MapGenTerrainType terrType) c
 	default:
 		return nullptr;
 	};
-	return nullptr;
 }
 
 MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo) {
