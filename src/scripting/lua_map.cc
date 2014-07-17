@@ -1004,7 +1004,7 @@ int L_Map::recalculate(lua_State * L) {
 
 /* RST
 MapObjectDescription
-----------
+--------------------
 
 .. class:: MapObjectDescription
 
@@ -1045,7 +1045,7 @@ void L_MapObjectDescription::__unpersist(lua_State*) {
 /* RST
 	.. attribute:: name
 
-			(RO) a :string:`name` with the map object's internal name
+			(RO) a :class:`string` with the map object's internal name
 */
 
 int L_MapObjectDescription::get_name(lua_State * L) {
@@ -1068,7 +1068,7 @@ int L_MapObjectDescription::get_type(lua_State * L) {
 /* RST
 	.. attribute:: name
 
-			(RO) a :string:`descname` with the map object's localized name
+			(RO) a :class:`string` with the map object's localized name
 */
 
 int L_MapObjectDescription::get_descname(lua_State * L) {
@@ -1080,7 +1080,7 @@ int L_MapObjectDescription::get_descname(lua_State * L) {
 
 /* RST
 BuildingDescription
-----------
+-------------------
 
 .. class:: BuildingDescription
 
@@ -1292,7 +1292,7 @@ int L_BuildingDescription::get_workarea_radius(lua_State * L) {
 
 /* RST
 ProductionSiteDescription
-----------
+-------------------------
 
 .. class:: ProductionSiteDescription
 
@@ -1390,7 +1390,7 @@ int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 
 /* RST
 MilitarySiteDescription
-----------
+-----------------------
 
 .. class:: MilitarySiteDescription
 
@@ -1440,7 +1440,7 @@ int L_MilitarySiteDescription::get_max_number_of_soldiers(lua_State * L) {
 
 /* RST
 TrainingSiteDescription
-----------
+-----------------------
 
 .. class:: TrainingSiteDescription
 
@@ -1598,7 +1598,7 @@ int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
 
 /* RST
 WarehouseDescription
-----------
+--------------------
 
 .. class:: WarehouseDescription
 
@@ -1654,7 +1654,7 @@ int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
 
 /* RST
 WareDescription
-----------
+---------------
 
 .. class:: WareDescription
 
@@ -1757,7 +1757,7 @@ int L_WareDescription::get_consumers(lua_State * L) {
 
 /* RST
 WorkerDescription
-----------
+-----------------
 
 .. class:: WorkerDescription
 
@@ -1874,7 +1874,7 @@ int L_WorkerDescription::get_buildcost(lua_State * L) {
 
 /* RST
 MapObject
-----------
+---------
 
 .. class:: MapObject
 
@@ -2349,7 +2349,7 @@ int L_Flag::get_wares(lua_State * L) {
 
 /* RST
 Road
---------
+----
 
 .. class:: Road
 
