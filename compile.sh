@@ -68,22 +68,6 @@ var_build_lang=0 # 0 = false
         *) echo "  -> Bad choice. Please try again!" ;;
       esac
     done
-    local_var_ready=0
-    if [ $var_build -eq 0 ] ; then
-      while [ $local_var_ready -eq 0 ]
-      do
-        echo " "
-        echo "  Should translations be build [y]/[n]?"
-        echo " "
-        read local_var_choice
-        echo " "
-        case $local_var_choice in
-          y) echo "  -> Translations will be build" ; var_build_lang=1 ; local_var_ready=1 ;;
-          n) echo "  -> Translations will not be build" ; var_build_lang=0 ; local_var_ready=1 ;;
-          *) echo "  -> Bad choice. Please try again!" ;;
-        esac
-      done
-    fi
     return 0
   }
 
@@ -136,6 +120,7 @@ var_build_lang=0 # 0 = false
     echo " "
     cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="${var_build_type}"
     make ${MAKEOPTS}
+    make lang
     return 0
   }
 
@@ -174,9 +159,7 @@ var_build_lang=0 # 0 = false
             echo "touch CMakeLists.txt"
             echo "cd build"
             echo "make ${MAKEOPTS}"
-            if [ $var_build_lang -eq 1 ] ; then
-              echo "make lang"
-            fi
+            echo "make lang"
             echo "rm  ../VERSION || true"
             echo "rm  ../widelands || true"
             echo "mv VERSION ../VERSION"
@@ -204,9 +187,6 @@ basic_check
 user_interaction
 prepare_directories_and_links
 compile_widelands
-if [ $var_build_lang -eq 1 ] ; then
-  make lang
-fi
 move_built_files
 cd ..
 create_update_script
