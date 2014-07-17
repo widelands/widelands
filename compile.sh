@@ -34,7 +34,6 @@ echo " "
 ######################################
 var_build=0 # 0 == debug(default), 1 == release
 var_build_lang=0 # 0 = false 
-var_updater=0 # 0 = false
 ######################################
 
 
@@ -150,22 +149,13 @@ var_updater=0 # 0 = false
     return 0
   }
 
-  # Ask the user whether an update script should be created and if yes, create it.
-  update_script () {
+  create_update_script () {
     # First check if this is an bzr checkout at all - only in that case,
     # creation of a script makes any sense.
     if ! [ -f .bzr/branch-format ] ; then
       return 0
     fi
-    while :
-    do
-      echo " "
-      echo "  Should I create an update script? [y]es/[n]o"
-      echo " "
-      read local_var_choice
-      echo " "
-      case $local_var_choice in
-        y) rm -f update.sh || true
+        rm -f update.sh || true
            (echo "#!/bin/sh"
             echo "echo \" \""
             echo "echo \"################################################\""
@@ -201,11 +191,6 @@ var_updater=0 # 0 = false
            ) > update.sh
            chmod +x ./update.sh
            echo "  -> The update script has successfully been created."
-           var_updater=1 ; return 0 ;;
-        n) echo "  -> No update script has been created." ; return 0 ;;
-        *) echo "  -> Bad choice. Please try again!" ;;
-      esac
-    done
   }
 ######################################
 
@@ -224,16 +209,14 @@ if [ $var_build_lang -eq 1 ] ; then
 fi
 move_built_files
 cd ..
-update_script
+create_update_script
 echo " "
 echo "#####################################################"
 echo "# Congratulations Widelands was successfully build. #"
 echo "# You should now be able to run Widelands via       #"
 echo "# typing ./widelands + ENTER in your terminal       #"
-if [ $var_updater -eq 1 ] ; then
-  echo "#                                                   #"
-  echo "# You can update Widelands via running ./update.sh  #"
-  echo "# in the same directory you ran this script in.     #"
-fi
+echo "#                                                   #"
+echo "# You can update Widelands via running ./update.sh  #"
+echo "# in the same directory you ran this script in.     #"
 echo "#####################################################"
 ######################################
