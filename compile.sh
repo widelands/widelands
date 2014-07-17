@@ -41,6 +41,9 @@ echo " "
       echo "  source code."
       exit 1
     fi
+    #TODO(code review): Are these returns in various methods necessary?
+    #It doesn't seem like anything ever checks the return, and in case
+    #of something bad, it just calls exit anyways (see above)
     return 0
   }
 
@@ -60,8 +63,10 @@ echo " "
     echo "Builds a debug build by default. If you want a Release build, "
     echo "you will need to build it manually passing the"
     echo "option -DCMAKE_BUILD_TYPE=\"Release\" to cmake"
+    #TODO(code review): WL_PORTABLE might be going away, see https://bugs.launchpad.net/widelands/+bug/1342228
     cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
     make ${MAKEOPTS}
+    #TODO(code review): Ideally lang is always run as just another part of lang
     make lang
     return 0
   }
