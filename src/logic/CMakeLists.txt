@@ -1,4 +1,4 @@
-wl_binary(map_info
+wl_binary(wl_map_info
   SRCS
     map_info.cc
   DEPENDS
