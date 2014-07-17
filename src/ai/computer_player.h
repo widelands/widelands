@@ -20,9 +20,15 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
+#include <string>
+#include <vector>
+
 #include "base/macros.h"
-#include "logic/game.h"
-#include "logic/notification.h"
+#include "logic/widelands.h"
+
+namespace Widelands {
+class Game;
+}  // namespace Widelands
 
 /**
  * The generic interface to AI instances, or "computer players".
@@ -30,16 +36,11 @@
  * Instances of actual AI implementation can be created via the
  * \ref Implementation interface.
  */
-struct Computer_Player :
-	Widelands::NoteReceiver<Widelands::NoteImmovable>,
-	Widelands::NoteReceiver<Widelands::NoteFieldPossession>
-{
+struct Computer_Player {
 	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
+	virtual ~Computer_Player();
 
 	virtual void think () = 0;
-
-	virtual void receive(const Widelands::NoteImmovable &) override {}
-	virtual void receive(const Widelands::NoteFieldPossession     &) override {}
 
 	Widelands::Game & game() const {return m_game;}
 	Widelands::Player_Number player_number() {return m_player_number;}

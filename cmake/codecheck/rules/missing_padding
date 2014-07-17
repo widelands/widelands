@@ -369,7 +369,6 @@ allowed = [
     "b > a",
     "AreaWatcher(const Player_Area<>);",
     "void func (Player_Area<Area>);",
-    "friend class NoteReceiver<T>;",
 
     'a %= a;',
 

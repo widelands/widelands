@@ -1,12 +1,3 @@
-wl_library(logic_notification
-  SRCS
-    notification.h
-    notification.cc
-  DEPENDS
-    logic_widelands_geometry
-)
-
-
 wl_library(logic_widelands_geometry
   SRCS
     widelands_geometry.cc
@@ -229,11 +220,11 @@ wl_library(logic
     io_stream
     logic_game_controller
     logic_game_settings
-    logic_notification
     logic_widelands_geometry
     map_io
     map_io_map_loader
     network
+    notifications
     profile
     random
     scripting

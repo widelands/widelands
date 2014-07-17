@@ -26,10 +26,8 @@
 
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/notification.h"
 #include "wui/chatoverlay.h"
 #include "wui/debugconsole.h"
-#include "wui/logmessage.h"
 #include "wui/mapview.h"
 #include "wui/overlay_manager.h"
 #include "ui_basic/box.h"
@@ -196,7 +194,6 @@ private:
 	UI::Textarea m_label_speed;
 
 	UI::UniqueWindow::Registry m_debugconsole;
-	Widelands::NoteSender<LogMessage> m_log_sender;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	std::vector<const Image*> m_workarea_pics;
 };

@@ -46,6 +46,7 @@
 #include "logic/world/world.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
+#include "notifications/notifications.h"
 #include "wui/overlay_manager.h"
 
 namespace Widelands {
@@ -1846,7 +1847,7 @@ int32_t Map::change_terrain
 {
 	c.field->set_terrain(c.t, terrain);
 
-	NoteSender<NoteFieldTransformed>::send(NoteFieldTransformed(c));
+	Notifications::publish(NoteFieldTransformed(c, c.field - &m_fields[0]));
 
 	recalc_for_field_area(world, Area<FCoords>(c, 2));
 

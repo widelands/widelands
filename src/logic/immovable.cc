@@ -50,6 +50,7 @@
 #include "logic/worker.h"
 #include "logic/world/world.h"
 #include "map_io/one_world_legacy_lookup_table.h"
+#include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -1388,9 +1389,11 @@ void PlayerImmovable::remove_worker(Worker & w)
  * Set the immovable's owner. Currently, it can only be set once.
 */
 void PlayerImmovable::set_owner(Player * const new_owner) {
+	assert(m_owner == nullptr);
+
 	m_owner = new_owner;
 
-	m_owner->egbase().receive(NoteImmovable(this, GAIN));
+	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 }
 
 /**
@@ -1409,8 +1412,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 	while (!m_workers.empty())
 		m_workers[0]->set_location(nullptr);
 
-	if (m_owner)
-		m_owner->egbase().receive(NoteImmovable(this, LOSE));
+	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	BaseImmovable::cleanup(egbase);
 }
