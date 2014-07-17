@@ -33,7 +33,6 @@ echo " "
 # Definition of some local variables #
 ######################################
 var_build=0 # 0 == debug(default), 1 == release
-var_build_lang=0 # 0 = false 
 ######################################
 
 
