@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-03-13 14:07+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:33+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:41+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: pt_BR\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
@@ -169,14 +169,7 @@ msgstr ""
 "seu povo caminhar sobre ela (e sua mercadoria será transportada de forma "
 "mais lenta)."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:41
-msgid "Build a road to the lumberjack’s hut"
-msgstr ""
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:43
-msgid "Road to the lumberjack’ hut"
-msgstr ""
-
+#: ../../campaigns/t01.wmf/scripting/texts.lua:25
 #: ../../campaigns/t01.wmf/scripting/texts.lua:47
 msgid ""
 "You can click on any of the symbols to build the first part of the road "
@@ -190,6 +183,14 @@ msgstr ""
 "da estrada pode ir, e assim por diante. No entanto, você também pode clicar "
 "mais longe da bandeira para construir várias etapas de uma só vez. Clique na "
 "bandeira da sede para terminar a estrada."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:41
+msgid "Build a road to the lumberjack’s hut"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:43
+msgid "Road to the lumberjack’ hut"
+msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
 #: ../../campaigns/t01.wmf/scripting/texts.lua:55
@@ -278,14 +279,10 @@ msgstr "Khantrukh continua..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:107
 msgid ""
-"None but the gods know how long we have to remain hidden here. The warriors "
-"hope we may march back gloriously any day now, but I strongly doubt that "
-"will happen soon. And the days are already getting shorter and colder..."
+"Only the gods know how long we have to remain hidden here. The warriors hope "
+"we may march back gloriously any day now, but I strongly doubt that will "
+"happen soon. And the days are already getting shorter and colder..."
 msgstr ""
-"Ninguém além dos Deuses sabem quanto tempo nós teremos que permanecer "
-"escondidos aqui. Os guerreiros esperam que possamos marchar de volta "
-"gloriosamente a qualquer momento, mas eu duvido que isso vá acontecer em "
-"breve. E os dias já estão ficando mais curtos e mais frios ..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
 msgid ""
@@ -533,7 +530,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo Objetivo"

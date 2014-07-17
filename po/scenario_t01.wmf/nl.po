@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
-"PO-Revision-Date: 2014-04-11 10:33+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
+"PO-Revision-Date: 2014-07-17 05:16+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:33+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:40+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: nl\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
@@ -165,14 +165,7 @@ msgstr ""
 "Hoe steiler de weg is, hoe moeilijker het voor je mensen is om er op te "
 "lopen (en je goederen zullen trager vervoerd worden)."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:41
-msgid "Build a road to the lumberjack’s hut"
-msgstr "Bouw een weg naar de houthakkershut"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:43
-msgid "Road to the lumberjack’ hut"
-msgstr "Weg naar de houthakkershut"
-
+#: ../../campaigns/t01.wmf/scripting/texts.lua:25
 #: ../../campaigns/t01.wmf/scripting/texts.lua:47
 msgid ""
 "You can click on any of the symbols to build the first part of the road "
@@ -186,6 +179,14 @@ msgstr ""
 "volgende deel van de weg heen kan gaan, enzovoort. Daarentegen kan je ook "
 "verder van de vlag klikken om enkele stappen tegelijk te bouwen. Klik op de "
 "vlag bij het hoofdkwartier om de weg te voltooien."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:41
+msgid "Build a road to the lumberjack’s hut"
+msgstr "Bouw een weg naar de houthakkershut"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:43
+msgid "Road to the lumberjack’ hut"
+msgstr "Weg naar de houthakkershut"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
 #: ../../campaigns/t01.wmf/scripting/texts.lua:55
@@ -273,14 +274,10 @@ msgstr "Khantrukh gaat verder..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:107
 msgid ""
-"None but the gods know how long we have to remain hidden here. The warriors "
-"hope we may march back gloriously any day now, but I strongly doubt that "
-"will happen soon. And the days are already getting shorter and colder..."
+"Only the gods know how long we have to remain hidden here. The warriors hope "
+"we may march back gloriously any day now, but I strongly doubt that will "
+"happen soon. And the days are already getting shorter and colder..."
 msgstr ""
-"Niemand op de goden na weten hoe lang we hier verscholen moeten blijven. De "
-"krijgers hopen dat we binnenkort glorieus terug kunnen marcheren, maar ik "
-"betwijfel of dat binnenkort zou gebeuren. En de dagen worden korter en "
-"kouder..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
 msgid ""
@@ -532,8 +529,18 @@ msgstr ""
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nieuwe opdracht"
 msgstr[1] "Nieuwe opdrachten"
+
+#~ msgid ""
+#~ "None but the gods know how long we have to remain hidden here. The warriors "
+#~ "hope we may march back gloriously any day now, but I strongly doubt that "
+#~ "will happen soon. And the days are already getting shorter and colder..."
+#~ msgstr ""
+#~ "Niemand op de goden na weten hoe lang we hier verscholen moeten blijven. De "
+#~ "krijgers hopen dat we binnenkort glorieus terug kunnen marcheren, maar ik "
+#~ "betwijfel of dat binnenkort zou gebeuren. En de dagen worden korter en "
+#~ "kouder..."

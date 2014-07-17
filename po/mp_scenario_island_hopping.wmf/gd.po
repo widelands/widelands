@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-03-08 07:15+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:43+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:51+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: gd\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
@@ -105,13 +105,14 @@ msgstr[3] "%s clach-òir"
 msgid "%1$i %2$s"
 msgstr "%1$i %2$s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
-msgid "Welcome to Island Hopping"
-msgstr "Fàilte gu starraineachd nan eilean"
-
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:244
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Na riaghailtean"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
+msgid "Welcome to Island Hopping"
+msgstr "Fàilte gu starraineachd nan eilean"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""

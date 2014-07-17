@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2010-02-10 20:30+0000\n"
 "Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:33+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:40+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
 msgid "The Story Begins"
@@ -132,14 +132,7 @@ msgid ""
 "(and your wares will be transported more slowly)."
 msgstr ""
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:41
-msgid "Build a road to the lumberjack’s hut"
-msgstr ""
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:43
-msgid "Road to the lumberjack’ hut"
-msgstr ""
-
+#: ../../campaigns/t01.wmf/scripting/texts.lua:25
 #: ../../campaigns/t01.wmf/scripting/texts.lua:47
 msgid ""
 "You can click on any of the symbols to build the first part of the road "
@@ -147,6 +140,14 @@ msgid ""
 "can go, and so on. However, you can also click farther away from the flag to "
 "build several steps at once. Click on the flag at the headquarters to finish "
 "the road."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:41
+msgid "Build a road to the lumberjack’s hut"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:43
+msgid "Road to the lumberjack’ hut"
 msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
@@ -220,9 +221,9 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:107
 msgid ""
-"None but the gods know how long we have to remain hidden here. The warriors "
-"hope we may march back gloriously any day now, but I strongly doubt that "
-"will happen soon. And the days are already getting shorter and colder..."
+"Only the gods know how long we have to remain hidden here. The warriors hope "
+"we may march back gloriously any day now, but I strongly doubt that will "
+"happen soon. And the days are already getting shorter and colder..."
 msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
@@ -417,7 +418,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
