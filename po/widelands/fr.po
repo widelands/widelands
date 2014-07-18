@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:47+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:37+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -3987,37 +3987,3 @@ msgstr "Suivre"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Centrer la vue principale sur ceci"
-
-#~ msgid "Owned by %i"
-#~ msgstr "Possédé par %i"
-
-#~ msgid "Has bobs"
-#~ msgstr "A des bobs"
-
-#~ msgid "No bobs"
-#~ msgstr "Pas des bobs"
-
-#~ msgid "Players: %i"
-#~ msgstr "Joueurs: %i"
-
-#~ msgid ""
-#~ "Cannot remove player. It is referenced someplace. Remove all buildings and "
-#~ "bobs that depend on this player and try again."
-#~ msgstr ""
-#~ "Ne peut supprimer un joueur. Il est référencé quelque part. Enlevez les "
-#~ "bâtiments et bobs qui dépendent de ce joueur et essayez à nouveau."
-
-#~ msgid "Bobs"
-#~ msgstr "Bobs"
-
-#~ msgid "Retreat: Never!"
-#~ msgstr "Retraite: Jamais !"
-
-#~ msgid "Supported damage before retreat"
-#~ msgstr "Dommages encaissés avant la retraite"
-
-#~ msgid "Once injured"
-#~ msgstr "une fois blessé"
-
-#~ msgid "Military settings"
-#~ msgstr "Options militaires"

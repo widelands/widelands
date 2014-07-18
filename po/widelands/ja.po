@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:38+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: ../../src/ai/computer_player.cc:38
@@ -3889,27 +3889,3 @@ msgstr "追跡"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "ここに視点移動"
-
-#~ msgid "Owned by %i"
-#~ msgstr "所有 %i"
-
-#~ msgid "Has bobs"
-#~ msgstr "生物あり"
-
-#~ msgid "No bobs"
-#~ msgstr "生物なし"
-
-#~ msgid "Players: %i"
-#~ msgstr "人数 %i"
-
-#~ msgid ""
-#~ "Cannot remove player. It is referenced someplace. Remove all buildings and "
-#~ "bobs that depend on this player and try again."
-#~ msgstr ""
-#~ "プレイヤーを削除できません。プレイヤーは複数の場所で参照されています。このプレイヤーに依存する建物やオブジェをすべて削除してからやり直してください。"
-
-#~ msgid "Bobs"
-#~ msgstr "生物"
-
-#~ msgid "Military settings"
-#~ msgstr "軍事設定"

@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:47+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:37+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: de\n"
 
@@ -3999,37 +3999,3 @@ msgstr "Folge"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Zentriere die Ansicht hierauf"
-
-#~ msgid "Owned by %i"
-#~ msgstr "Im Besitz von %i"
-
-#~ msgid "Has bobs"
-#~ msgstr "Hat Bobs"
-
-#~ msgid "No bobs"
-#~ msgstr "Keine Bobs"
-
-#~ msgid "Players: %i"
-#~ msgstr "Spieler: %i"
-
-#~ msgid ""
-#~ "Cannot remove player. It is referenced someplace. Remove all buildings and "
-#~ "bobs that depend on this player and try again."
-#~ msgstr ""
-#~ "Kann den Spieler nicht entfernen. Irgendwo wird darauf Bezug genommen. "
-#~ "Entferne alle Gebäude und Objekte des Spielers und versuche es noch einmal."
-
-#~ msgid "Bobs"
-#~ msgstr "Bobs"
-
-#~ msgid "Retreat: Never!"
-#~ msgstr "Rückzug: Nie!"
-
-#~ msgid "Supported damage before retreat"
-#~ msgstr "Ausgehaltener Schaden vor dem Rückzug"
-
-#~ msgid "Once injured"
-#~ msgstr "sobald verwundet"
-
-#~ msgid "Military settings"
-#~ msgstr "Militär-Einstellungen"

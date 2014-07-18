@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:38+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: ../../src/ai/computer_player.cc:38
@@ -3878,31 +3878,3 @@ msgstr "Følg"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Owned by %i"
-#~ msgstr "Eid av %i"
-
-#~ msgid "Has bobs"
-#~ msgstr "Har objekter"
-
-#~ msgid "No bobs"
-#~ msgstr "Ingen objekter"
-
-#~ msgid "Players: %i"
-#~ msgstr "Spillere: %i"
-
-#~ msgid ""
-#~ "Cannot remove player. It is referenced someplace. Remove all buildings and "
-#~ "bobs that depend on this player and try again."
-#~ msgstr ""
-#~ "Kan ikke fjerne spiller. Spilleren er fortsatt referert til et sted. Fjern "
-#~ "alle bygninger og objekter som tilhører denne spilleren og prøv på nytt."
-
-#~ msgid "Bobs"
-#~ msgstr "Objekter"
-
-#~ msgid "Retreat: Never!"
-#~ msgstr "Retrett: Aldri!"
-
-#~ msgid "Military settings"
-#~ msgstr "Militære innstillinger"

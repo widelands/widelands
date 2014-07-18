@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:36+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -1853,14 +1853,3 @@ msgstr ""
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:17
 msgid "The woodcutter's house needs trees to fell within the working radius."
 msgstr ""
-
-#~ msgid "Goldweaver"
-#~ msgstr "Gullvever"
-
-#~ msgid ""
-#~ "Gold is one of the most valuable materials. It is produced out of gold ore "
-#~ "in the smelting works. Gold is used by the armor smithy, the weapon smithy "
-#~ "and the goldweaver."
-#~ msgstr ""
-#~ "Gull er et av de mest verdifulle metallene. Det blir produsert av gullmalm i "
-#~ "smelteverket. Gull brukes i rustningssmien, våpensmien og gullveveriet."

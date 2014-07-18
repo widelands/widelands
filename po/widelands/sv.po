@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:38+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: sv\n"
 
@@ -3871,25 +3871,3 @@ msgstr "Följ"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Centrera huvudanblicken på detta"
-
-#~ msgid "Players: %i"
-#~ msgstr "Spelare: %i"
-
-#~ msgid ""
-#~ "Cannot remove player. It is referenced someplace. Remove all buildings and "
-#~ "bobs that depend on this player and try again."
-#~ msgstr ""
-#~ "Kan inte ta bort spelare. Det hänvisas till någonstans. Ta bort alla "
-#~ "byggnader och grunkor som är kopplade till spelaren och försök igen."
-
-#~ msgid "Retreat: Never!"
-#~ msgstr "Reträtt: Aldrig!"
-
-#~ msgid "Supported damage before retreat"
-#~ msgstr "Tillåten skada innan reträtt."
-
-#~ msgid "Once injured"
-#~ msgstr "När skadad"
-
-#~ msgid "Military settings"
-#~ msgstr "Militärinställningar"

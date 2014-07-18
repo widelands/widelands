@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:44+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:36+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: nds\n"
 
@@ -2256,18 +2256,3 @@ msgid ""
 "bakeries, micro breweries and breweries. Also Cattle farms need to be "
 "supplied with wheat."
 msgstr ""
-
-#~ msgid "Dependencies"
-#~ msgstr "Afhangigkeiten"
-
-#~ msgid "Workers"
-#~ msgstr "Arbeiders"
-
-#~ msgid "Water from the Well"
-#~ msgstr "Water vun de Soot"
-
-#~ msgid "%s from the Lumberjack’s hut"
-#~ msgstr "%s vun de Boomschlegers Kaat"
-
-#~ msgid "Attack"
-#~ msgstr "Angreep"

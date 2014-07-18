@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:46+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:37+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -3961,37 +3961,3 @@ msgstr "Volg"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Beeld centreren"
-
-#~ msgid "Owned by %i"
-#~ msgstr "Eigendom van %i"
-
-#~ msgid "Has bobs"
-#~ msgstr "Heeft bobs"
-
-#~ msgid "No bobs"
-#~ msgstr "Geen bobs"
-
-#~ msgid "Players: %i"
-#~ msgstr "Spelers: %i"
-
-#~ msgid ""
-#~ "Cannot remove player. It is referenced someplace. Remove all buildings and "
-#~ "bobs that depend on this player and try again."
-#~ msgstr ""
-#~ "Kan speler niet verwijderen. Er wordt ergens naar verwezen. Verwijder alle "
-#~ "gebouwen en bobs die afhankelijk zijn van deze speler en probeer opnieuw."
-
-#~ msgid "Bobs"
-#~ msgstr "Bobs"
-
-#~ msgid "Retreat: Never!"
-#~ msgstr "Terugtrekken: Nooit!"
-
-#~ msgid "Supported damage before retreat"
-#~ msgstr "Ontvangen schade voor terugtrekken"
-
-#~ msgid "Once injured"
-#~ msgstr "Wanneer gewond"
-
-#~ msgid "Military settings"
-#~ msgstr "Militaire instellingen"

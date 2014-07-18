@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:38+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: sk\n"
 
@@ -3954,28 +3954,3 @@ msgstr "Nasledovať"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Vycentrovať pohľad na túto pozíciu"
-
-#~ msgid "Players: %i"
-#~ msgstr "Hráči: %i"
-
-#~ msgid ""
-#~ "Cannot remove player. It is referenced someplace. Remove all buildings and "
-#~ "bobs that depend on this player and try again."
-#~ msgstr ""
-#~ "Nemožno odstrániť hráča. Niečo naňho odkazuje. Odstráňte všetky budovy a "
-#~ "boby, ktoré závisia na hráčovi a skúste to znovu."
-
-#~ msgid "Bobs"
-#~ msgstr "Pohyblivé objekty"
-
-#~ msgid "Retreat: Never!"
-#~ msgstr "Ústup: nikdy!"
-
-#~ msgid "Supported damage before retreat"
-#~ msgstr "Znesiteľná škoda pred ústupom"
-
-#~ msgid "Once injured"
-#~ msgstr "Hneď po zranení"
-
-#~ msgid "Military settings"
-#~ msgstr "Nastavenia armády"

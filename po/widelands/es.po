@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:38+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: es_ES\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3823,15 +3823,3 @@ msgstr "Seguir"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Retreat: Never!"
-#~ msgstr "Retirada: ¡Nunca!"
-
-#~ msgid "Supported damage before retreat"
-#~ msgstr "Daño soportado antes de retirarse"
-
-#~ msgid "Once injured"
-#~ msgstr "Herido"
-
-#~ msgid "Military settings"
-#~ msgstr "Ajustes militares"

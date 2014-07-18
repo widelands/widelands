@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:38+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: ../../src/ai/computer_player.cc:38
@@ -3809,15 +3809,3 @@ msgstr "Follow"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Retreat: Never!"
-#~ msgstr "Retreat: Never!"
-
-#~ msgid "Supported damage before retreat"
-#~ msgstr "Supported damage before retreat"
-
-#~ msgid "Once injured"
-#~ msgstr "Once injured"
-
-#~ msgid "Military settings"
-#~ msgstr "Military settings"

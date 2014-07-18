@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:45+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:37+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -2005,11 +2005,3 @@ msgstr ""
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "羊毛は、羊の体毛です。機織所が布を生産するために使用します。"
-
-#~ msgid ""
-#~ "The hammer is an essential tool. It is needed by the geologist, the builder, "
-#~ "the armor and the weapon smith. Make sure you always have some in reserve! "
-#~ "It is produced by the toolsmith."
-#~ msgstr ""
-#~ "ハンマーは、必要不可欠の道具です。それは地質学者、建築人、防具職人、武器職人が必要とします。常に予備をいくつか持つようにしてください！\n"
-#~ "　道具工房で製造されます。"
