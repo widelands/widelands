@@ -599,24 +599,21 @@ void Worker::informPlayer
 {
 	// NOTE this is just an ugly hack for now, to avoid getting messages
 	// NOTE for farms, reed yards, vineyards, etc.
-	if ((res_type != "fish") && (res_type != "stone"))
+	if ((res_type != "fish") && (res_type != "granite"))
 		return;
 	// NOTE  AND fish_breeders
 	if (building.descr().name() == "fish_breeders_house")
 		return;
 
-	// TODO "stone" is defined as "granite" in the world. But this code is
-	// erroneus anyways: it translates immovable attribute stone as resource
-	// granite. Instead, the immovable attributes should be made translatable in
-	// the world or the quarry should define its out of stone message in its
-	// configuartion.
-	if (res_type == "stone") res_type = "granite";
-
 	// Translate the Resource name (if it is defined by the world)
 	const World & world = game.world();
 	int32_t residx = world.get_resource(res_type.c_str());
 	if (residx != -1)
+	{
 		res_type = world.get_resource(residx)->descname();
+		std::cout << res_type;
+		std::cout << "\n";
+	}
 
 	building.send_message
 		(game,

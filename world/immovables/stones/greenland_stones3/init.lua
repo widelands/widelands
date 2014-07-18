@@ -12,7 +12,7 @@ world:new_immovable_type{
    descname = _ "Stones 3",
    editor_category = "stones",
    size = "big",
-   attributes = { "stone" },
+   attributes = { "granite" },
    programs = {
       shrink = {
          "transform=greenland_stones2"
