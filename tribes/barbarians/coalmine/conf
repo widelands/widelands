@@ -16,6 +16,7 @@ miner=1
 [aihints]
 mines=coal
 mines_percent=30
+prohibited_till=1200
 
 [inputs]
 ration=6

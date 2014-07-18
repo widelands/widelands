@@ -16,6 +16,7 @@ miner=3
 [aihints]
 build_material=false
 mines=gold
+prohibited_till=1200
 
 [inputs]
 bread=10

@@ -313,7 +313,6 @@ struct BuildingObserver {
 	bool is_buildable_;
 	bool need_trees_;          // lumberjack = true
 	bool need_stones_;         // quarry = true
-	bool mines_marble_;        // need to distinquish mines_ that produce marbles
 	bool mines_water_;         // wells
 	bool need_water_;          // fisher, fish_breeder = true
 	bool is_hunter_;           // need to identify hunters

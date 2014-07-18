@@ -17,7 +17,7 @@ miner=1
 [aihints]
 mines=granite
 mines_percent=50
-marbleproducer=true
+prohibited_till=300
 
 [inputs]
 ration=6

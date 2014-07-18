@@ -32,3 +32,4 @@ hotspot=53 81
 
 [aihints]
 mountain_conqueror=true
+prohibited_till=300

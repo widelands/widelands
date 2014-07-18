@@ -171,8 +171,8 @@ private:
 
 	std::vector<BuildingObserver> buildings_;
 	uint32_t num_constructionsites_;
-	uint32_t total_milit_constructionsites;
-	uint32_t total_prod_constructionsites;
+	uint32_t num_milit_constructionsites;
+	uint32_t num_prod_constructionsites;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
@@ -212,7 +212,8 @@ private:
 	                               // building build
 	int32_t spots_;                // sum of buildable fields
 
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>> field_possession_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
+	field_possession_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
 };
 

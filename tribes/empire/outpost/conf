@@ -27,3 +27,4 @@ hotspot=57 77
 
 [aihints]
 expansion=true
+prohibited_till=600

@@ -15,6 +15,7 @@ miner=3
 
 [aihints]
 mines=coal
+prohibited_till=1200
 
 [inputs]
 bread=10

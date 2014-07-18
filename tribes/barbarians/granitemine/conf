@@ -14,6 +14,7 @@ miner=1
 
 [aihints]
 mines=granite
+prohibited_till=900
 
 [inputs]
 ration=8

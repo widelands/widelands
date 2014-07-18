@@ -61,10 +61,6 @@ struct BuildingHints {
 		return stone_producer_;
 	}
 
-	bool is_marbleproducer() const {
-		return marble_producer_;
-	}
-
 	bool mines_water() const {
 		return mines_water_;
 	}
@@ -106,7 +102,6 @@ private:
 	bool build_material_;  // whether the building produces build material
 	bool log_producer_;
 	bool stone_producer_;
-	bool marble_producer_;
 	bool needs_water_;
 	bool mines_water_;
 	bool recruitment_;  // whether building recruits special workers

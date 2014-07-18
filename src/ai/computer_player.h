@@ -38,13 +38,17 @@ class Game;
  */
 
 struct Computer_Player {
-	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
+	Computer_Player(Widelands::Game&, const Widelands::Player_Number);
 	virtual ~Computer_Player();
 
-	virtual void think () = 0;
+	virtual void think() = 0;
 
-	Widelands::Game & game() const {return m_game;}
-	Widelands::Player_Number player_number() {return m_player_number;}
+	Widelands::Game& game() const {
+		return m_game;
+	}
+	Widelands::Player_Number player_number() {
+		return m_player_number;
+	}
 
 	/**
 	 * Interface to a concrete implementation, used to instantiate AIs.

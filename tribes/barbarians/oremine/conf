@@ -17,6 +17,7 @@ miner=1
 build_material=false
 mines=iron
 mines_percent=30
+prohibited_till=1200
 
 [inputs]
 ration=6
