@@ -22,11 +22,11 @@ mine_marble=_Mine marble
 work=_Work
 
 [mine_stone]
-worker=cut_stone  # This order is on purpose so that the productivity 
+worker=cut_stone  # This order is on purpose so that the productivity
 sleep=25000       # drops fast once all stones are gone.
 
 [mine_marble]
-worker=cut_marble  # This order is on purpose so that the productivity 
+worker=cut_marble  # This order is on purpose so that the productivity
 sleep=25000        # drops fast once all stones are gone.
 
 [work]
@@ -38,6 +38,11 @@ call=mine_stone
 call=mine_stone
 call=mine_marble # 2 of 7 times it finds marble
 return=skipped
+
+[resources]
+needs_resource_title=_Out of rocks.
+needs_resource_message=_The stonemason working at this quarry can’t find any rocks in his working radius.
+
 
 [idle]
 pics=quarry_i_??.png  # ???

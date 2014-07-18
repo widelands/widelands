@@ -89,6 +89,9 @@ struct ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
+	std::string m_needs_resource_title;
+	std::string m_needs_resource_message;
+
 
 private:
 	BillOfMaterials m_working_positions;

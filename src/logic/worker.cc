@@ -23,8 +23,6 @@
 #include <memory>
 #include <tuple>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -597,31 +595,27 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 void Worker::informPlayer
 	(Game & game, Building & building, std::string res_type) const
 {
-	// NOTE this is just an ugly hack for now, to avoid getting messages
-	// NOTE for farms, reed yards, vineyards, etc.
-	if ((res_type != "fish") && (res_type != "granite"))
-		return;
-	// NOTE  AND fish_breeders
-	if (building.descr().name() == "fish_breeders_house")
-		return;
-
-	// Translate the Resource name (if it is defined by the world)
-	const World & world = game.world();
-	int32_t residx = world.get_resource(res_type.c_str());
-	if (residx != -1)
+	if(is_a(ProductionSite, &building))
 	{
-		res_type = world.get_resource(residx)->descname();
-		std::cout << res_type;
-		std::cout << "\n";
-	}
+		const ProductionSite_Descr& prod_descr =
+					dynamic_cast<const ProductionSite_Descr&>(building.descr());
 
-	building.send_message
-		(game,
-		 "mine",
-		 (boost::format(_("Out of %s")) % res_type).str(),
-		 (boost::format(_("The worker of this building cannot find any more %s.")) % res_type).str(),
-		 true,
-		 1800000, 0);
+		if(strcmp(prod_descr.m_needs_resource_title.c_str(), "") != 0)
+		{
+			std::cout << prod_descr.m_needs_resource_title;
+			std::cout << "\n";
+			std::cout << prod_descr.m_needs_resource_message;
+			std::cout << "\n";
+			assert(strcmp(prod_descr.m_needs_resource_message.c_str(), "") != 0);
+			building.send_message
+				(game,
+				 "mine",
+				 prod_descr.m_needs_resource_title,
+				 prod_descr.m_needs_resource_message,
+				 true,
+				 1800000, 0);
+		}
+	}
 }
 
 

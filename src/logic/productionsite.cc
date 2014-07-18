@@ -60,6 +60,17 @@ ProductionSite_Descr::ProductionSite_Descr
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
+	Section * const section = prof.get_section("resources");
+	if (section != nullptr)
+	{
+		m_needs_resource_title = section->get_string("needs_resource_title", "");
+		m_needs_resource_message = section->get_string("needs_resource_message", "");
+	}
+	else
+	{
+		m_needs_resource_title = "";
+		m_needs_resource_message = "";
+	}
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
