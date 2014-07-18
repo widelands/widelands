@@ -56,7 +56,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   set_buildtool () {
     #If ninja is not found, use make instead
-    if [ -e `command -v ninja` ] ; then
+    if [ `command -v ninja` ] ; then
       buildtool="ninja"
     #TODO(code review): hopefully ninja has the same executable name across the board...
     #I'll doublecheck this, but the ninja binary might be called ninja-build on some systems
