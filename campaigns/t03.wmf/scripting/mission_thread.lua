@@ -85,7 +85,8 @@ function foottracks()
    while not check_for_buildings(p1, {donjon=1}) do sleep(2341) end
    o.done = true
    send_msg(order_msg_3_explore_further)
-   o = add_obj(obj_explore_further)
+   -- "explore further" is active untill "Boldreth shout out", so the player always has one open objectve.
+   obexp = add_obj(obj_explore_further)
 
    p1:allow_buildings{"sentry", "barrier"}
 
@@ -99,7 +100,6 @@ function foottracks()
 
       sleep(3244)
    end
-   o.done = true
 end
 
 function mining_and_trainingsites()
@@ -243,6 +243,8 @@ function kalitath()
       p1:seen_field(map:get_field( 96,  30))
       )
    do sleep(7834) end
+   -- "explore further" is done
+   obexp.done = true
 
    send_msg(order_msg_7_destroy_kalitaths_army)
    local o = add_obj(obj_destroy_kalitaths_army)
