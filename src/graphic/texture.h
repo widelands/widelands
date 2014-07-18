@@ -56,7 +56,7 @@ struct Texture {
 	uint8_t * get_curpixels() const {return m_curframe;}
 	void    * get_colormap () const {return m_colormap->get_colormap();}
 
-	uint32_t get_minimap_color(char shade);
+	RGBColor get_minimap_color(int8_t shade);
 
 	void animate(uint32_t time);
 	uint32_t getTexture() const
@@ -65,7 +65,7 @@ struct Texture {
 private:
 	std::unique_ptr<Colormap> m_colormap;
 	uint8_t   * m_pixels;
-	uint32_t    m_mmap_color[256];
+	RGBColor    m_minimap_colors[256];
 	uint8_t   * m_curframe;
 	int32_t     m_frame_num;
 	std::string m_texture_image;

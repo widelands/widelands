@@ -49,10 +49,16 @@ struct WL_Map_Loader : public Map_Loader {
 		return !strcasecmp(&filename.c_str()[filename.size() - 4], WLMF_SUFFIX);
 	}
 
+	// If this was made pre one-world, the name of the world.
+	const std::string& old_world_name() const {
+		return m_old_world_name;
+	}
+
 private:
 	FileSystem* m_fs;  // not owned (owned by Map).
 	std::string m_filename;
 	std::unique_ptr<Map_Map_Object_Loader> m_mol;
+	std::string m_old_world_name;
 };
 
 }

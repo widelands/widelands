@@ -1124,7 +1124,7 @@ void Worker::set_location(PlayerImmovable * const location)
 
 		// NOTE we have to explicitly check Worker_Descr::SOLDIER, as SOLDIER is
 		// NOTE as well defined in an enum in instances.h
-		if (!m_economy || (get_worker_type() == Worker_Descr::SOLDIER)) {
+		if (!m_economy || (descr().get_worker_type() == Worker_Descr::SOLDIER)) {
 			set_economy(eco);
 		} else if (m_economy != eco) {
 			throw wexception
@@ -1434,7 +1434,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 			molog("[transfer]: Blocked by a battle\n");
 
 			signal_handled();
-			return start_task_idle(game, get_animation("idle"), 500);
+			return start_task_idle(game, descr().get_animation("idle"), 500);
 		} else {
 			molog("[transfer]: Cancel due to signal '%s'\n", signal.c_str());
 			return pop_task(game);
@@ -2038,7 +2038,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
 
-	return start_task_idle(game, get_animation("idle"), 1000);
+	return start_task_idle(game, descr().get_animation("idle"), 1000);
 }
 
 void Worker::gowarehouse_signalimmediate

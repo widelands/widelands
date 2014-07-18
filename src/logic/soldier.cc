@@ -856,7 +856,7 @@ void Soldier::attack_update(Game & game, State & state)
 	//  We are at enemy building flag, and a defender is coming, sleep until he
 	// "wake up"s me
 	if (signal == "sleep") {
-		return start_task_idle(game, get_animation("idle"), -1);
+		return start_task_idle(game, descr().get_animation("idle"), -1);
 	}
 
 	upcast(Building, location, get_location(game));
@@ -964,7 +964,7 @@ void Soldier::attack_update(Game & game, State & state)
 		// we check for a battle
 		// Note that we *should* be woken via sendSpaceSignals,
 		// so the timeout is just an additional safety net.
-		return start_task_idle(game, get_animation("idle"), 5000);
+		return start_task_idle(game, descr().get_animation("idle"), 5000);
 	}
 
 	// Count remaining defenders
@@ -1182,7 +1182,7 @@ void Soldier::defense_update(Game & game, State & state)
 		// we check for a battle
 		// Note that we *should* be woken via sendSpaceSignals,
 		// so the timeout is just an additional safety net.
-		return start_task_idle(game, get_animation("idle"), 5000);
+		return start_task_idle(game, descr().get_animation("idle"), 5000);
 
 	// If we only are defending our home ...
 	if (state.ivar1 & CF_DEFEND_STAYHOME) {
@@ -1335,7 +1335,7 @@ void Soldier::defense_update(Game & game, State & state)
 		}
 	}
 	// If the enemy is not in our land, wait
-	return start_task_idle(game, get_animation("idle"), 250);
+	return start_task_idle(game, descr().get_animation("idle"), 250);
 }
 
 void Soldier::defense_pop(Game & game, State &)
@@ -1454,7 +1454,7 @@ void Soldier::battle_update(Game & game, State &)
 	if (signal.size()) {
 		if (signal == "blocked") {
 			signal_handled();
-			return start_task_idle(game, get_animation("idle"), 5000);
+			return start_task_idle(game, descr().get_animation("idle"), 5000);
 		} else if
 			(signal == "location" || signal == "battle" || signal == "wakeup")
 			signal_handled();

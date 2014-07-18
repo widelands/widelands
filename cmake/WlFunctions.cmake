@@ -254,4 +254,6 @@ function(wl_binary NAME)
   endif()
 
   _common_compile_tasks()
+
+  install(TARGETS ${NAME} DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)
 endfunction()

@@ -33,7 +33,7 @@
 
 
 MiniMap::View::View
-	(UI::Panel & parent, int8_t * flags,
+	(UI::Panel & parent, MiniMapLayer * flags,
 	 int32_t const x, int32_t const y, uint32_t const, uint32_t const,
 	 Interactive_Base & ibase)
 :
@@ -63,16 +63,13 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 
 void MiniMap::View::draw(RenderTarget & dst)
 {
-	MiniMapRenderer mmr;
-
-	std::unique_ptr<Surface> surface
-		(mmr.get_minimap_image
-			(m_ibase.egbase(),
-			m_ibase.get_player(),
-			(*m_flags) & (MiniMap::Zoom2) ?
-				Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)):
-				Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
-			*m_flags));
+	std::unique_ptr<Surface> surface(
+	   draw_minimap(m_ibase.egbase(),
+	                m_ibase.get_player(),
+	                (*m_flags) & (MiniMapLayer::Zoom2) ?
+	                   Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)) :
+	                   Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
+	                *m_flags | MiniMapLayer::ViewWindow));
 	// Give ownership of the surface to the new image
 	std::unique_ptr<const Image> im(new_in_memory_image("minimap", surface.release()));
 	dst.blit(Point(), im.get());
@@ -91,7 +88,7 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 	//  calculates the coordinates corresponding to the mouse position
 	Widelands::Coords c;
-	if (*m_flags & MiniMap::Zoom2)
+	if (*m_flags & MiniMapLayer::Zoom2)
 		c = Widelands::Coords
 			(m_viewx + 1 - (get_w() / 2 - x) / 2,
 			 m_viewy + 1 - (get_h() / 2 - y) / 2);
@@ -182,12 +179,13 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 		 g_gr->images().get("pics/button_zoom.png"),
 		 _("Zoom"))
 {
-	button_terrn.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Terrn));
-	button_owner.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Owner));
-	button_flags.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Flags));
-	button_roads.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Roads));
-	button_bldns.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Bldns));
-	button_zoom.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Zoom2));
+	button_terrn.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Terrain));
+	button_owner.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Owner));
+	button_flags.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Flag));
+	button_roads.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Road));
+	button_bldns.sigclicked.connect(
+	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Building));
+	button_zoom.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Zoom2));
 
 	set_cache(false);
 
@@ -200,15 +198,15 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 }
 
 
-void MiniMap::toggle(Layers const button) {
-	*m_view.m_flags ^= button;
-	if (button == Zoom2)
+void MiniMap::toggle(MiniMapLayer const button) {
+	*m_view.m_flags = MiniMapLayer(*m_view.m_flags ^ button);
+	if (button == MiniMapLayer::Zoom2)
 		resize();
 	update_button_permpressed();
 }
 
 void MiniMap::resize() {
-	m_view.set_zoom(*m_view.m_flags & Zoom2 ? 2 : 1);
+	m_view.set_zoom(*m_view.m_flags & MiniMapLayer::Zoom2 ? 2 : 1);
 	set_inner_size
 		(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());
 	button_terrn.set_pos(Point(but_w() * 0, m_view.get_h() + but_h() * 0));
@@ -228,10 +226,10 @@ void MiniMap::resize() {
 
 // Makes the buttons reflect the selected layers
 void MiniMap::update_button_permpressed() {
-	button_terrn.set_perm_pressed(*m_view.m_flags & Terrn);
-	button_owner.set_perm_pressed(*m_view.m_flags & Owner);
-	button_flags.set_perm_pressed(*m_view.m_flags & Flags);
-	button_roads.set_perm_pressed(*m_view.m_flags & Roads);
-	button_bldns.set_perm_pressed(*m_view.m_flags & Bldns);
-	button_zoom .set_perm_pressed(*m_view.m_flags & Zoom2);
+	button_terrn.set_perm_pressed(*m_view.m_flags & MiniMapLayer::Terrain);
+	button_owner.set_perm_pressed(*m_view.m_flags & MiniMapLayer::Owner);
+	button_flags.set_perm_pressed(*m_view.m_flags & MiniMapLayer::Flag);
+	button_roads.set_perm_pressed(*m_view.m_flags & MiniMapLayer::Road);
+	button_bldns.set_perm_pressed(*m_view.m_flags & MiniMapLayer::Building);
+	button_zoom .set_perm_pressed(*m_view.m_flags & MiniMapLayer::Zoom2);
 }

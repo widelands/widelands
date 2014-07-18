@@ -161,16 +161,16 @@ private:
 
 private:
 	// Variables of default AI
-	uint8_t type;
+	uint8_t type_;
 
 	bool m_buildable_changed;
 	bool m_mineable_changed;
 
-	Widelands::Player* player;
-	Widelands::Tribe_Descr const* tribe;
+	Widelands::Player* player_;
+	Widelands::Tribe_Descr const* tribe_;
 
-	std::vector<BuildingObserver> buildings;
-	uint32_t total_constructionsites;
+	std::vector<BuildingObserver> buildings_;
+	uint32_t num_constructionsites_;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
