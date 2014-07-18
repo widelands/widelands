@@ -600,9 +600,9 @@ void Worker::informPlayer
 		const ProductionSite_Descr& prod_descr =
 					dynamic_cast<const ProductionSite_Descr&>(building.descr());
 
-		if(strcmp(prod_descr.m_needs_resource_title.c_str(), "") != 0)
+		if(prod_descr.m_needs_resource_title != "")
 		{
-			assert(strcmp(prod_descr.m_needs_resource_message.c_str(), "") != 0);
+			assert(prod_descr.m_needs_resource_message != "");
 			building.send_message
 				(game,
 				 "mine",

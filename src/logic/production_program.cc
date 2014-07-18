@@ -1306,14 +1306,13 @@ void ProductionProgram::ActMine::execute
 	return ps.program_step(game);
 }
 
-/// Copied from militarysite.cc, MilitarySite::informPlayer
 /// Informs the player about a mine that has run empty, if the mine has not
 /// sent this message within the last 60 minutes.
 void ProductionProgram::ActMine::informPlayer
 	(Game & game, ProductionSite & ps) const
 {
-	assert(strcmp(ps.descr().m_needs_resource_title.c_str(), "") != 0);
-	assert(strcmp(ps.descr().m_needs_resource_message.c_str(), "") != 0);
+	assert(ps.descr().m_needs_resource_title != "");
+	assert(ps.descr().m_needs_resource_message != "");
 	ps.send_message
 		(game,
 		 "mine",
