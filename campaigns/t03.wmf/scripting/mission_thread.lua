@@ -11,7 +11,7 @@ fr3 = wl.Game().map:get_field(85,11)
 function check_conquered_footprints()
     if p1:seen_field(wl.Game().map:get_field(65, 28))
     then
-        sleep(1000)
+        sleep(2134)
         if p1:sees_field(wl.Game().map:get_field(65, 28))
         then return true end
     end
@@ -48,6 +48,7 @@ function initial_message_and_small_food_economy()
       "bakery",
       "sentry",
    }
+
    local o = add_obj(obj_build_small_food_economy)
    while not check_for_buildings(p1, {
          fishers_hut = 1,
@@ -137,6 +138,7 @@ function mining_and_trainingsites()
       "smelting_works",
       "metalworks",
       "burners_house",
+      "micro-brewery",
    }
 
    timed_scroll(array_reverse(pts), 10)
@@ -175,7 +177,6 @@ function mining_and_trainingsites()
       "deeper_goldmine",
       "deeper_oremine",
       "warehouse",
-      "micro-brewery",
       "brewery",
    }
    run(check_warehouse_obj, add_obj(obj_build_a_warehouse))
@@ -251,6 +252,10 @@ function check_player_completly_defeated(dp)
     if #dp:get_buildings("barrier")   > 0 then return false end
     if #dp:get_buildings("sentry")    > 0 then return false end
     if #dp:get_buildings("warehouse") > 0 then return false end
+    print("Besiegt: BAR:")
+    print(#dp:get_buildings("donjon"))
+    print("SEN:")
+    print(#dp:get_buildings("sentry"))
     return true
 end
 
