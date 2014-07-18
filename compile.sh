@@ -33,7 +33,7 @@ echo " "
 ######################################
 # Definition of some local variables #
 ######################################
-buildtool="ninja" #Use ninja by default, fall back to make if that is not available.
+buildtool="" #Use ninja by default, fall back to make if that is not available.
 ######################################
 
 
@@ -56,8 +56,12 @@ buildtool="ninja" #Use ninja by default, fall back to make if that is not availa
 
   set_buildtool () {
     #If ninja is not found, use make instead
+    if [ -e `command -v ninja` ] ; then
+      buildtool="ninja"
     #TODO(code review): hopefully ninja has the same executable name across the board...
-    if [ ! -e `command -v ninja` ] ; then
+    #I'll doublecheck this, but the ninja binary might be called ninja-build on some systems
+    #so will need to check for and use that.
+    else
       buildtool="make"
     fi
   }
