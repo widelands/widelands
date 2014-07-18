@@ -83,6 +83,10 @@ call=mine_quartz
 call=mine_diamond
 return=skipped
 
+[resources]
+needs_resource_title=_Main Crystal Vein Exhausted.
+needs_resource_message=_This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it.
+
 [idle]
 pics=crystalmine_i_??.png
 hotspot=50 56

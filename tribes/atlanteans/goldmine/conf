@@ -40,6 +40,10 @@ animate=working 20000
 mine=gold 4 100 5 2
 produce=goldore
 
+[resources]
+needs_resource_title=_Main Gold Vein Exhausted.
+needs_resource_message=_This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it.
+
 [idle]
 pics=goldmine_i_??.png
 hotspot=50 56

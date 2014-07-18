@@ -60,11 +60,18 @@ ProductionSite_Descr::ProductionSite_Descr
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
+	std::cout << "XXXXXXXXXXXXXX ";
+	std::cout << _name;
+	std::cout << "\n";
 	Section * const section = prof.get_section("resources");
 	if (section != nullptr)
 	{
 		m_needs_resource_title = section->get_string("needs_resource_title", "");
 		m_needs_resource_message = section->get_string("needs_resource_message", "");
+		std::cout << m_needs_resource_title;
+		std::cout << "\n";
+		std::cout << m_needs_resource_message;
+		std::cout << "\n";
 	}
 	else
 	{

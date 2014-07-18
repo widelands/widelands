@@ -602,10 +602,6 @@ void Worker::informPlayer
 
 		if(strcmp(prod_descr.m_needs_resource_title.c_str(), "") != 0)
 		{
-			std::cout << prod_descr.m_needs_resource_title;
-			std::cout << "\n";
-			std::cout << prod_descr.m_needs_resource_message;
-			std::cout << "\n";
 			assert(strcmp(prod_descr.m_needs_resource_message.c_str(), "") != 0);
 			building.send_message
 				(game,

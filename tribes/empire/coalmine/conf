@@ -36,6 +36,10 @@ animate=working 20000
 mine=coal 2 50 5 17
 produce=coal
 
+[resources]
+needs_resource_title=_Main Coal Vein Exhausted
+needs_resource_message=_This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
+
 [idle]
 pics=coalmine_i_??.png
 hotspot=49 49

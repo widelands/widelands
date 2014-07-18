@@ -1312,13 +1312,13 @@ void ProductionProgram::ActMine::execute
 void ProductionProgram::ActMine::informPlayer
 	(Game & game, ProductionSite & ps) const
 {
+	assert(strcmp(ps.descr().m_needs_resource_title.c_str(), "") != 0);
+	assert(strcmp(ps.descr().m_needs_resource_message.c_str(), "") != 0);
 	ps.send_message
 		(game,
 		 "mine",
-		 _("Main Vein Exhausted"),
-		 _
-		 ("This mine’s main vein is exhausted. Expect strongly diminished returns on investment. "
-		  "You should consider enhancing, dismantling or destroying it."),
+		 ps.descr().m_needs_resource_title,
+		 ps.descr().m_needs_resource_message,
 		 true,
 		 60 * 60 * 1000,
 		 0);
