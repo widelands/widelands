@@ -22,6 +22,10 @@ work=_Work
 sleep=16000
 worker=fish
 
+[resources]
+needs_resource_title=_Out of Fish
+needs_resource_message=_The fisher working in this fisher’s house can’t find any fish in his working radius.
+
 [idle]
 pics=fishers_house_i_??.png  # ???
 hotspot=34 42

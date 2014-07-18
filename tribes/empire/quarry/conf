@@ -40,7 +40,7 @@ call=mine_marble # 2 of 7 times it finds marble
 return=skipped
 
 [resources]
-needs_resource_title=_Out of rocks.
+needs_resource_title=_Out of Rocks
 needs_resource_message=_The stonemason working at this quarry can’t find any rocks in his working radius.
 
 

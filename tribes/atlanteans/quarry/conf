@@ -19,8 +19,12 @@ stoneproducer=true
 work=_Work
 
 [work]
-worker=cut_stone  # This order is on purpose so that the productivity 
-sleep=25000       # drops fast once all stones are gone.     
+worker=cut_stone  # This order is on purpose so that the productivity
+sleep=25000       # drops fast once all stones are gone.
+
+[resources]
+needs_resource_title=_Out of Rocks
+needs_resource_message=_The stonecutter working at this quarry can’t find any rocks in his working radius.
 
 [idle]
 pics=quarry_i_??.png  # ???
