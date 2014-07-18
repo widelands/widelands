@@ -8,6 +8,16 @@ fr1 = wl.Game().map:get_field(81,108)
 fr2 = wl.Game().map:get_field(85,1)
 fr3 = wl.Game().map:get_field(85,11)
 
+function check_conquered_footprints()
+    if p1:seen_field(wl.Game().map:get_field(65, 28))
+    then
+        sleep(1000)
+        if p1:sees_field(wl.Game().map:get_field(65, 28))
+        then return true end
+    end
+    return false
+end
+
 function remember_cattlefarm()
    sleep(100)
 
@@ -36,6 +46,7 @@ function initial_message_and_small_food_economy()
       "farm",
       "well",
       "bakery",
+      "sentry",
    }
    local o = add_obj(obj_build_small_food_economy)
    while not check_for_buildings(p1, {
@@ -56,8 +67,9 @@ function foottracks()
    -- Hunter build and some time passed or expanded east
    local game = wl.Game()
    while true do
-      if (game.time > 900000 and #p1:get_buildings("hunters_hut") > 0)
-         or p1:seen_field(wl.Game().map:get_field(65, 28))
+      if game.time > 900000 and #p1:get_buildings("hunters_hut") > 0
+      then break end
+      if check_conquered_footprints()
       then break end
       sleep(4239)
    end
