@@ -49,10 +49,6 @@ resi_none=_Resource indicator: No resource
 resi_water1=_Resource indicator: Water
 shipconstruction=_Ship Construction Site
 
-#[critter bob types]
-#deer=_Deer
-#wildboar=_Wild Boar
-
 [ware types]
 ax=_Ax
 bread_paddle=_Bread Paddle
