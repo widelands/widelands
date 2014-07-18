@@ -243,6 +243,17 @@ function expansion()
    send_msg(story_msg_6)
 end
 
+-- checks if not only defeated (no warehouses), but also checks if all millitary buildings are destroyed
+function check_player_completly_defeated(dp)
+    if #dp:get_buildings("fortress")  > 0 then return false end
+    if #dp:get_buildings("citadel")   > 0 then return false end
+    if #dp:get_buildings("donjon")    > 0 then return false end
+    if #dp:get_buildings("barrier")   > 0 then return false end
+    if #dp:get_buildings("sentry")    > 0 then return false end
+    if #dp:get_buildings("warehouse") > 0 then return false end
+    return true
+end
+
 function kalitath()
    -- While no contact with kalithat
    local map = wl.Game().map
@@ -261,7 +272,7 @@ function kalitath()
    send_msg(order_msg_7_destroy_kalitaths_army)
    local o = add_obj(obj_destroy_kalitaths_army)
 
-   while not p2.defeated do sleep(7837) end
+   while not check_player_completly_defeated(p2) do sleep(7837) end
    o.done = true
 end
 
@@ -301,7 +312,7 @@ function renegade_fortresses()
    timed_scroll(array_reverse(pts))
    sleep(500)
 
-   while not (p3.defeated and p4.defeated) do
+   while not (check_player_completly_defeated(p3) and check_player_completly_defeated(p4)) do
       sleep(6734)
    end
 
