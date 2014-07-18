@@ -24,7 +24,7 @@ worker=fish
 
 [resources]
 needs_resource_title=_Out of Fish
-needs_resource_message=_The fisher working in this fisher’s house can’t find any fish in his working radius.
+needs_resource_message=_The fisher working out of this fisher’s house can’t find any fish in his working radius. Remember that you can increase the number of existing fish by building a fishbreeder’s house.
 
 [idle]
 pics=fishers_house_i_??.png  # ???

@@ -22,6 +22,11 @@ work=_Work
 sleep=35000
 worker=hunt
 
+[resources]
+# TRANSLATORS: "Game" means animals that you can hunt
+needs_resource_title=_Out of Game
+needs_resource_message=_The hunter working out of this hunter’s house can’t find any game in his working radius. Remember that you can increase the number of existing fish by building a fishbreeder’s house.
+
 [idle]
 pics=hunters_house_i_??.png
 hotspot=36 44

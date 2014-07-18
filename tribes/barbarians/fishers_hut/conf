@@ -23,7 +23,7 @@ worker=fish
 
 [resources]
 needs_resource_title=_Out of Fish
-needs_resource_message=_The fisher working in this fisher’s hut can’t find any fish in his working radius.
+needs_resource_message=_The fisher working out of this fisher’s hut can’t find any fish in his working radius.
 
 [idle]
 pics=fishers_hut_i_??.png  # ???
