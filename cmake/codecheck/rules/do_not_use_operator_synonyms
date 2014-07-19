@@ -3,7 +3,9 @@
 
 error_msg = "Do not use operator synonyms, e.g. use \"&&\" rather than \"and\"."
 
-# this rule does not protect string literals, e.g. _(" or ") or // inline comments added after code
+# NOCOM(#GunChleoc) this rule does not exclude string literals, e.g. _(" or ")
+# NOCOM(#GunChleoc) this rule does not exclude RST comments or // inline comments added after code
+# NOCOM(#GunChleoc) this rule is always triggered twice
 regexp = (
 		r"""("""
 		r"""^(?!((\s*[*])|(\s*/))).+\Wand(\W|$)"""
