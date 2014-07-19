@@ -6,12 +6,12 @@ error_msg = "Do not use operator synonyms, e.g. use \"&&\" rather than \"and\"."
 # this rule does not protect string literals, e.g. _(" or ") or // inline comments added after code
 regexp = (
 		r"""("""
-		r"""^(?!((\s*[*])|(\s*/))).+[\s\W]and([\s\W]|$)"""
-		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]bitand([\s\W]|$)"""
-		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]or([\s\W]|$)"""
-		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]xor([\s\W]|$)"""
-		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]not([\s\W]|$)"""
-		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]compl([\s\W]|$)"""
+		r"""^(?!((\s*[*])|(\s*/))).+\Wand(\W|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+\Wbitand(\W|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+\Wor(\W|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+\Wxor(\W|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+\Wnot(\W|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+\Wcompl(\W|$)"""
 		r""")"""
 	)
 
