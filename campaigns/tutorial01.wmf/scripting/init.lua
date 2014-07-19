@@ -9,8 +9,8 @@ plr = wl.Game().players[1]
 plr:allow_buildings("all")
 
 -- A default headquarters
-include "tribes/barbarians/scripting/sc00_headquarters_medium.lua"
-init.func(plr) -- defined in sc00_headquarters_medium
+include "tribes/barbarians/scripting/sc00_headquarters.lua"
+init.func(plr) -- defined in sc00_headquarters
 
 set_textdomain("scenario_tutorial01.wmf")
 

@@ -137,5 +137,3 @@ endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD
 if (WIN32)
   target_link_libraries(widelands_ball_of_mud wsock32)
 endif (WIN32)
-
-install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

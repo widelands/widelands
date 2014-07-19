@@ -77,7 +77,11 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 
 	m_map.cleanup();
 
-	{Map_Elemental_Data_Packet mp; mp.Pre_Read(*m_fs, &m_map);}
+	{
+		Map_Elemental_Data_Packet mp;
+		mp.Pre_Read(*m_fs, &m_map);
+		m_old_world_name = mp.old_world_name();
+	}
 
 	{
 		Map_Player_Names_And_Tribes_Data_Packet p;
@@ -113,7 +117,6 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Reading Elemental Data ... ");
 	Map_Elemental_Data_Packet elemental_data_packet;
 	elemental_data_packet.Read(*m_fs, egbase, !scenario, *m_mol);
-	const std::string old_world_name = elemental_data_packet.old_world_name();
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps(); //  Can do this now that map size is known.
@@ -141,7 +144,7 @@ int32_t WL_Map_Loader::load_map_complete
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table
-		(create_one_world_legacy_lookup_table(old_world_name));
+		(create_one_world_legacy_lookup_table(m_old_world_name));
 	log("Reading Terrain Data ... ");
 	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());

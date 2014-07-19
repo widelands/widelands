@@ -80,13 +80,12 @@ Graphic::Graphic()
 {
 	ImageTransformations::initialize();
 
-	FileRead fr;
 #ifndef _WIN32
-	fr.Open(*g_fs, "pics/wl-ico-128.png");
+	const std::string icon_name = "pics/wl-ico-128.png";
 #else
-	fr.Open(*g_fs, "pics/wl-ico-32.png");
+	const std::string icon_name = "pics/wl-ico-32.png";
 #endif
-	SDL_Surface * s = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
 	SDL_WM_SetIcon(s, nullptr);
 	SDL_FreeSurface(s);
 }

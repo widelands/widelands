@@ -48,7 +48,6 @@ public:
 
 	virtual int32_t get_size() const override;
 	virtual uint32_t get_playercaps() const override;
-	virtual uint32_t get_ui_anim() const override;
 
 	virtual void set_economy(Economy *) override;
 

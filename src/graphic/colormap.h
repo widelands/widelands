@@ -22,10 +22,23 @@
 
 #include <SDL_video.h>
 
+#include "graphic/color.h"
+
 /**
  * Colormap contains a palette and lookup table for use with ground textures.
 */
 class Colormap {
+public:
+	Colormap (const SDL_Color &, const SDL_PixelFormat & fmt);
+	~Colormap ();
+
+	// Returns the palette of this colormap (256 entries of RGB Colors);
+	SDL_Color * get_palette() {return palette;}
+
+	// Returns the internally calculated colormap used in the renderer.
+	void * get_colormap () const {return colormap;}
+
+private:
 	SDL_Color palette[256];
 
 	/// maps 8 bit color and brightness value to the shaded color.
@@ -33,14 +46,6 @@ class Colormap {
 	/// less shades would greatly reduce the size of this table, and thus
 	/// improve memory cache impact inside the renderer.
 	void * colormap;
-
-public:
-	Colormap (const SDL_Color &, const SDL_PixelFormat & fmt);
-	~Colormap ();
-
-	SDL_Color * get_palette() {return palette;}
-
-	void * get_colormap () const {return colormap;}
 };
 
 #endif  // end of include guard: WL_GRAPHIC_COLORMAP_H

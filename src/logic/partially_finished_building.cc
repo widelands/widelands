@@ -142,19 +142,6 @@ uint32_t Partially_Finished_Building::get_playercaps() const {
 
 /*
 ===============
-Return the animation for the building that is in construction, as this
-should be more useful to the player.
-===============
-*/
-uint32_t Partially_Finished_Building::get_ui_anim() const
-{
-	return m_building->get_animation("idle");
-}
-
-
-
-/*
-===============
 Return the completion "percentage", where 2^16 = completely built,
 0 = nothing built.
 ===============
