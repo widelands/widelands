@@ -1,0 +1,47 @@
+#!/usr/bin/python
+
+
+error_msg = "Do not use operator synonyms, e.g. use \"&&\" rather than \"and\"."
+
+# this rule does not protect string literals, e.g. _(" or ")
+regexp = (
+		r"""("""
+		r"""^(?!((\s*[*])|(\s*/))).+[\s\W]and(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]bitand(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]and_eq(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]or(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]or_eq(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]xor(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]xor_eq(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]not(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]not_eq(\s|$)"""
+		r"""|^(?!((\s*[*])|(\s*/))).+[\s\W]compl(\s|$)"""
+		r""")"""
+	)
+
+forbidden = [
+    "and",
+    "bitand",
+    "and_eq",
+    "or",
+    "or_eq",
+    "xor",
+    "xor_eq",
+    "not",
+    "not_eq",
+    "compl"
+]
+
+allowed = [
+    "&&",
+    "&",
+    "&=",
+    "||",
+    "|=",
+    "^",
+    "^=",
+    "!",
+    "!=",
+    "~"
+]
+
