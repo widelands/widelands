@@ -55,12 +55,12 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   }
 
   set_buildtool () {
-    #If ninja is not found, use make instead
+    #Defaults to ninja, but if that is not found, we use make instead
     if [ `command -v ninja` ] ; then
       buildtool="ninja"
-    #TODO(code review): hopefully ninja has the same executable name across the board...
-    #I'll doublecheck this, but the ninja binary might be called ninja-build on some systems
-    #so will need to check for and use that.
+    #On some systems (most notably Fedora), the binary is called ninja-build
+    elif [ `command -v ninja-build` ] ; then
+      buildtool="ninja-build"
     else
       buildtool="make"
     fi
@@ -82,7 +82,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
     #TODO(code review): WL_PORTABLE might be going away, see https://bugs.launchpad.net/widelands/+bug/1342228
 
-    if [ $buildtool = "ninja" ] ; then
+    if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
       cmake -G Ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
     else
       cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
