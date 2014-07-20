@@ -54,6 +54,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     #On some systems (most notably Fedora), the binary is called ninja-build
     elif [ `command -v ninja-build` ] ; then
       buildtool="ninja-build"
+    #... and some systems refer to GNU make as gmake
+    elif [ `command -v gmake` ] ; then
+      buildtool="gmake"
     else
       buildtool="make"
     fi
