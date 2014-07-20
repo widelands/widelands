@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-04-16 17:59+0000\n"
+"PO-Revision-Date: 2014-07-19 22:23+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:43+0000\n"
+"X-Launchpad-Export-Date: 2014-07-20 05:47+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: fr\n"
 
@@ -347,7 +347,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/axfactory/help.lua:17
 msgid "Produces axes, sharp axes and broad axes."
-msgstr ""
+msgstr "Produit des haches, des haches pointues et des grandes haches."
 
 #: ../../tribes/barbarians/axfactory/help.lua:18
 msgid ""
@@ -361,6 +361,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce each "
 "type of ax in about %s on average."
 msgstr ""
+"Si tout les matériaux sont livré à temps, cette construction peut produire "
+"chaque type de hache en à peu près"
 
 #: ../../tribes/barbarians/axfactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:31

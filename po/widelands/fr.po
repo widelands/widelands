@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-07-16 08:11+0200\n"
-"PO-Revision-Date: 2014-07-17 05:25+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-07-19 22:07+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:37+0000\n"
+"X-Launchpad-Export-Date: 2014-07-20 05:48+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -186,11 +186,11 @@ msgstr "Limites:%s"
 #: ../../src/editor/tools/editor_info_tool.cc:83
 #, c-format
 msgid "Owned by: %u"
-msgstr ""
+msgstr "Possédé par : %u"
 
 #: ../../src/editor/tools/editor_info_tool.cc:86
 msgid "Owned by: —"
-msgstr ""
+msgstr "Possédé par : —"
 
 #: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "Has base immovable"
@@ -202,11 +202,11 @@ msgstr "Pas de base immobile"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "Has animals"
-msgstr ""
+msgstr "Il y a des animaux"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "No animals"
-msgstr ""
+msgstr "Pas d'animaux"
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
@@ -254,11 +254,11 @@ msgstr "Taille: %1$ix%2$i"
 #: ../../src/editor/tools/editor_info_tool.cc:129
 #, c-format
 msgid "Players: %d"
-msgstr ""
+msgstr "Joueurs : %d"
 
 #: ../../src/editor/tools/editor_info_tool.cc:132
 msgid "Players: -"
-msgstr ""
+msgstr "Joueurs : -"
 
 #: ../../src/editor/tools/editor_info_tool.cc:135
 #, c-format
@@ -586,6 +586,8 @@ msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
 msgstr ""
+"Ne peut enlever le joueur. Il est référencé quelque part. Enlevez les "
+"constructions et les animaux qui dépendent de ce jouer et ré-essayez."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
@@ -650,7 +652,7 @@ msgstr "Immobiles"
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Animals"
-msgstr ""
+msgstr "Animaux"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
