@@ -92,6 +92,10 @@ function test_descr:test_enhancement()
 	assert_equal(nil, egbase:get_building_description("barbarians","lumberjacks_hut").enhancement)
 end
 
+function test_descr:test_icon_name()
+   assert_equal("tribes/barbarians/headquarters/menu.png", egbase:get_building_description("barbarians","headquarters").icon_name)
+end
+
 function test_descr:test_ismine()
    assert_equal(false, egbase:get_building_description("barbarians","headquarters").is_mine)
    assert_equal(true, egbase:get_building_description("barbarians","oremine").is_mine)
@@ -335,6 +339,10 @@ function test_descr:test_consumers()
    assert_equal("helmsmithy", ware_description.consumers[5].name)
 end
 
+function test_descr:test_icon_name()
+   assert_equal("tribes/barbarians/coal/menu.png", egbase:get_ware_description("barbarians","coal").icon_name)
+end
+
 function test_descr:test_producers()
 	local ware_description = egbase:get_ware_description("barbarians","coal")
 	assert_equal("burners_house", ware_description.producers[1].name)
@@ -371,6 +379,10 @@ function test_descr:test_becomes()
    assert_equal("master-miner", worker_descr.name)
 	worker_descr = egbase:get_worker_description("barbarians","master-miner").becomes
    assert_equal(nil, worker_descr)
+end
+
+function test_descr:test_icon_name()
+   assert_equal("tribes/barbarians/miner/menu.png", egbase:get_worker_description("barbarians","miner").icon_name)
 end
 
 function test_descr:test_level_experience()
