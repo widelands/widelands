@@ -227,7 +227,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	Widelands::Player_Number const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
 
-	if (not menu.is_player_tribe_referenced(old_nr_players)) {
+	if (!menu.is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
@@ -309,7 +309,7 @@ called when a button is clicked
 void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
-	if (not menu.is_player_tribe_referenced(n + 1)) {
+	if (!menu.is_player_tribe_referenced(n + 1)) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
 		if (!Widelands::Tribe_Descr::exists_tribe(t))
 			throw wexception
@@ -412,7 +412,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 	const Widelands::Player_Number player_number = p->player_number();
 	const Widelands::Coords starting_pos = map.get_starting_pos(player_number);
 	Widelands::BaseImmovable * const imm = map[starting_pos].get_immovable();
-	if (not imm) {
+	if (!imm) {
       // place HQ
 		const Widelands::Tribe_Descr & tribe = p->tribe();
 		const Widelands::Building_Index idx =

@@ -31,7 +31,7 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl(Widelands::Map& map,
                                                    Editor_Interactive& /* parent */,
                                                    Editor_Action_Args& args) {
 	assert
-	(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
+	(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
 	uint16_t const radius = args.sel_radius;
 	int32_t max = 0;
 
@@ -50,7 +50,7 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl(Widelands::Map& map,
 		} while (mr.advance(map));
 	}
 
-	if (not args.terrainType.empty()) {
+	if (!args.terrainType.empty()) {
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords> > mr
 		(map, Widelands::Area<TCoords<Widelands::FCoords> >
 		 (TCoords<Widelands::FCoords>
@@ -74,9 +74,9 @@ Editor_Set_Terrain_Tool::handle_undo_impl(Widelands::Map& map,
                                           Editor_Interactive& /* parent */,
                                           Editor_Action_Args& args) {
 	assert
-	(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
+	(center.triangle.t == TCoords<>::D || center.triangle.t == TCoords<>::R);
 	uint16_t const radius = args.sel_radius;
-	if (not args.terrainType.empty()) {
+	if (!args.terrainType.empty()) {
 		int32_t max = 0;
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords> > mr
 		(map,
