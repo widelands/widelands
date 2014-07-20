@@ -92,6 +92,7 @@ public:
 	}
 
 	const Image* icon() const {return m_icon;}
+	std::string icon_name() const {return m_icon_fname;}
 	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 	const DirAnimations & get_right_walk_anims(bool const carries_ware) const {
 		return carries_ware ? m_walkload_anims : m_walk_anims;

@@ -100,18 +100,18 @@ end
 --
 --    Creates a dependencies line of any length.
 --
---    :arg tribename: name of the tribe.
---    :arg items: ware and/or building names in the correct order from left to right as table (set in {}).
+--    :arg items: ware, worker and/or building descriptions in the correct order
+--                from left to right as table (set in {}).
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies(tribename, items, text)
+function dependencies(items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/menu.png"
+	string = "image=" .. items[1].icon_name
 	for k,v in ipairs({table.unpack(items,2)}) do
-		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
+		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
 	end
 	return rt(string, p(text))
 end
@@ -143,61 +143,9 @@ end
 --  *************** Dependencies functions ****************
 --  =======================================================
 
--- RST
--- .. function:: building_help_depencencies_ware(tribename, items, ware)
---
---    Formats a chain of ware dependencies for the help window
---
---    :arg tribename: e.g. "barbarians".
---    :arg items: an array with ware and building names,
---                            e.g. {"constructionsite", "trunk"}
---    :arg warename: the internal name of the ware to use as a title.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_dependencies_ware(tribename, items, warename)
-	local ware_description = wl.Game():get_ware_description(tribename, warename)
-	return dependencies(tribename, items, ware_description.descname)
-end
-
 
 -- RST
--- .. function:: building_help_depencencies_building(tribename, items, building)
---
---    Formats a chain of ware dependencies for the help window
---
---    :arg tribename: e.g. "barbarians".
---    :arg items: an array with ware and building names,
---                            e.g. {"constructionsite", "trunk"}
---    :arg buildingname: the internal name of the building to use as a title.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_dependencies_building(tribename, items, buildingname)
-	local building_description = wl.Game():get_building_description(tribename,buildingname)
-	return dependencies(tribename, items, building_description.descname)
-end
-
-
-
--- RST
--- .. function:: building_help_depencencies_building(tribename, items, building)
---
---    Formats a chain of ware dependencies for the help window
---
---    :arg tribename: e.g. "barbarians".
---    :arg items: an array with ware and building names,
---                            e.g. {"constructionsite", "trunk"}
---    :arg ware_description: the description of the ware to use in the title.
---    :arg building: the internal name of the building to use in the title.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_dependencies_ware_building(tribename, items, ware_description, building_description)
-	return dependencies(tribename, items,
-		_"%1$s from: %2$s":bformat(ware_description.descname, building_description.descname))
-end
-
-
--- RST
--- .. function:: building_help_depencencies_ware(tribename, items, ware)
+-- .. function:: building_help_dependencies_resi(tribename, items, ware)
 --
 --    Formats a chain of ware dependencies for the help window. First item is a mining resource.
 --
@@ -228,11 +176,11 @@ function dependencies_training(tribename, building_description, interim1, interi
 		rt(h2(_"Dependencies")) .. rt(h3(_"Soldiers:")) ..
 		dependencies_basic({
 			"tribes/" .. tribename .. "/soldier/untrained.png",
-			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
+			building_description.icon_name,
 			"tribes/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
 		dependencies_basic({
 			"tribes/" .. tribename .. "/soldier/" .. interim2 .. ".png",
-			"tribes/" .. tribename .. "/" .. building_description.name  .. "/menu.png",
+			building_description.icon_name,
 			"tribes/" .. tribename .. "/soldier/fulltrained.png"})
 end
 
@@ -260,7 +208,7 @@ function dependencies_training_food(tribename, foods)
 			else
 				text = ware_description.descname
 			end
-			images = images .. "tribes/" .. tribename .. "/" .. ware_description.name .. "/menu.png"
+			images = ware_description.icon_name
 		end
 		if(countlist > 1) then
 			text = _"%s and":bformat(text)
@@ -290,7 +238,8 @@ function dependencies_training_weapons(tribename, building_description, and_or, 
 		if(count > 1) then
 			weaponsstring = weaponsstring .. ";"
 		end
-		weaponsstring = weaponsstring .. "tribes/" .. tribename .. "/" .. weapon .. "/menu.png"
+		local weapon_description = wl.Game():get_ware_description(tribename, weapon)
+		weaponsstring = weaponsstring .. weapon_description.icon_name
 	end
 	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
 	local equipmentstring = _"Equipment from"
@@ -300,7 +249,7 @@ function dependencies_training_weapons(tribename, building_description, and_or, 
 	elseif (and_or == "or" ) then equipmentstring = _"or equipment from" end
 	return rt(p(equipmentstring)) ..
 		dependencies_basic({
-			"tribes/" .. tribename .. "/" .. manufacturer_description.name  .. "/menu.png",
+			manufacturer_description.icon_name,
 			weaponsstring,
 		}, rt(p(manufacturer_description.descname)))
 end
@@ -325,6 +274,7 @@ end
 function building_help_general_string(tribename, building_description, resourcename, purpose, note)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
+
 	local result = rt(h2(_"General"))
 	result = result .. rt(h3(_"Purpose:")) ..
 		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
@@ -410,8 +360,9 @@ function building_help_dependencies_production(tribename, building_description, 
 	for i, ware_description in ipairs(building_description.inputs) do
 	 hasinput = true
 		for j, producer in ipairs(ware_description.producers) do
-			result = result .. building_help_dependencies_ware_building(
-				tribename, {producer.name, ware_description.name}, ware_description, producer
+			result = result .. dependencies(
+				{producer, ware_description},
+				_"%1$s from: %2$s":bformat(ware_description.descname, producer.descname)
 			)
 		end
 	end
@@ -422,8 +373,9 @@ function building_help_dependencies_production(tribename, building_description, 
 	if ((not hasinput) and building_description.output_ware_types[1]) then
 		result = result .. rt(h3(_"Collects:"))
 		for i, ware in ipairs(building_description.output_ware_types) do
+			local temp_ware_description = wl.Game():get_ware_description(tribename, ware)
 			result = result ..
-				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
+				dependencies({building_description, temp_ware_description}, temp_ware_description.descname)
 		end
 
 	elseif (building_description.ismine) then
@@ -447,8 +399,9 @@ function building_help_dependencies_production(tribename, building_description, 
 	else
 		for i, ware in ipairs(building_description.output_ware_types) do
 			if(i == 1) then result = result .. rt(h3(_"Produces:")) end
+			local temp_ware_description = wl.Game():get_ware_description(tribename, ware)
 			result = result ..
-				building_help_dependencies_ware(tribename, {building_description.name, ware}, ware)
+				dependencies({building_description, temp_ware_description}, temp_ware_description.descname)
 		end
 	end
 
@@ -458,13 +411,13 @@ function building_help_dependencies_production(tribename, building_description, 
 
 		-- constructionsite isn't listed with the consumers, and needs special treatment because it isn't a building
 		if (add_constructionsite) then
-			outgoing = outgoing .. dependencies(tribename, {ware, "constructionsite"}, _"Construction Site")
+			local constructionsite_description = wl.Game():get_building_description(tribename, "constructionsite")
+			outgoing = outgoing .. dependencies({ware_description, constructionsite_description},
+															 constructionsite_description.descname)
 		end
 
 		for j, consumer in ipairs(ware_description.consumers) do
-			outgoing = outgoing .. building_help_dependencies_building(
-				tribename, {ware, consumer.name}, consumer.name
-			)
+			outgoing = outgoing .. dependencies({ware_description, consumer}, consumer.descname)
 		end
 
 		-- soldiers aren't listed with the consumers
@@ -472,7 +425,8 @@ function building_help_dependencies_production(tribename, building_description, 
 		local addsoldier = false
 		for j, buildcost in ipairs(soldier.buildcost) do
 			if(buildcost == ware) then
-			outgoing = outgoing .. dependencies(tribename, {ware, "headquarters", soldier.name}, soldier.descname)
+			local headquarters_description = wl.Game():get_building_description(tribename, "headquarters")
+			outgoing = outgoing .. dependencies({ware, headquarters_description, soldier}, soldier.descname)
 			end
 		end
 	end
@@ -484,10 +438,9 @@ end
 
 
 -- Helper function for building_help_building_section
-function building_help_building_line(tribename, ware, amount)
-	local ware_description = wl.Game():get_ware_description(tribename, ware)
+function building_help_building_line(ware_description, amount)
 	amount = tonumber(amount)
-	local image = "tribes/" .. tribename .. "/" .. ware  .. "/menu.png"
+	local image = ware_description.icon_name
 	local result = ""
 	local imgperline = 6
 	local temp_amount = amount
@@ -553,7 +506,8 @@ function building_help_building_section(tribename, building_description, enhance
 				result = result .. rt(h3(_"Build cost:"))
 			end
 			for ware, amount in pairs(building_description.build_cost) do
-				result = result .. building_help_building_line(tribename, ware, amount)
+				local ware_description = wl.Game():get_ware_description(tribename, ware)
+				result = result .. building_help_building_line(ware_description, amount)
 			end
 		end
 		if (building_description.enhanced) then
@@ -570,7 +524,8 @@ function building_help_building_section(tribename, building_description, enhance
 			end
 
 			for ware, amount in pairs(building_description.enhancement_cost) do
-				result = result .. building_help_building_line(tribename, ware, amount)
+				local ware_description = wl.Game():get_ware_description(tribename, ware)
+				result = result .. building_help_building_line(ware_description, amount)
 			end
 
 			-- Cumulative cost
@@ -606,7 +561,8 @@ function building_help_building_section(tribename, building_description, enhance
 			end
 			if (warescost ~= {}) then
 				for ware, amount in pairs(warescost) do
-					result = result .. building_help_building_line(tribename, ware, amount)
+					local ware_description = wl.Game():get_ware_description(tribename, ware)
+					result = result .. building_help_building_line(ware_description, amount)
 				end
 			else
 				result = result .. rt(p(_"Unknown"))
@@ -616,7 +572,8 @@ function building_help_building_section(tribename, building_description, enhance
 			if (building_description.buildable) then
 				result = result .. rt(h3(_"If built directly, dismantle yields:"))
 				for ware, amount in pairs(building_description.returned_wares) do
-					result = result .. building_help_building_line(tribename, ware, amount)
+					local ware_description = wl.Game():get_ware_description(tribename, ware)
+					result = result .. building_help_building_line(ware_description, amount)
 				end
 				result = result .. rt(h3(_"If enhanced, dismantle yields:"))
 			else
@@ -652,7 +609,8 @@ function building_help_building_section(tribename, building_description, enhance
 			end
 			if (warescost ~= {}) then
 				for ware, amount in pairs(warescost) do
-					result = result .. building_help_building_line(tribename, ware, amount)
+					local ware_description = wl.Game():get_ware_description(tribename, ware)
+					result = result .. building_help_building_line(ware_description, amount)
 				end
 			else
 				result = result .. rt(p(_"Unknown"))
@@ -662,7 +620,8 @@ function building_help_building_section(tribename, building_description, enhance
 			-- Dismantle yields
 			result = result .. rt(h3(_"Dismantle yields:"))
 			for ware, amount in pairs(building_description.returned_wares) do
-				result = result .. building_help_building_line(tribename, ware, amount)
+				local ware_description = wl.Game():get_ware_description(tribename, ware)
+				result = result .. building_help_building_line(ware_description, amount)
 			end
 		end
 
@@ -670,7 +629,8 @@ function building_help_building_section(tribename, building_description, enhance
 		if (building_description.enhancement) then
 			result = result .. text_line(_"Can be enhanced to:", building_description.enhancement.descname)
 			for ware, amount in pairs(building_description.enhancement.enhancement_cost) do
-				result = result .. building_help_building_line(tribename, ware, amount)
+				local ware_description = wl.Game():get_ware_description(tribename, ware)
+				result = result .. building_help_building_line(ware_description, amount)
 			end
 		end
 	end
@@ -717,10 +677,10 @@ function building_help_crew_string(tribename, building_description)
 			number_of_workers = number_of_workers + 1
 
 			if(becomes_description) then
-				result = result .. image_line("tribes/" .. tribename .. "/" .. worker_description.name  .. "/menu.png", 1,
+				result = result .. image_line(worker_description.icon_name, 1,
 					p(_"%s or better":bformat(worker_description.descname)))
 			else
-				result = result .. image_line("tribes/" .. tribename .. "/" .. worker_description.name  .. "/menu.png", 1,
+				result = result .. image_line(worker_description.icon_name, 1,
 					p(worker_description.descname))
 			end
 		end
@@ -764,9 +724,9 @@ end
 --    :returns: text_line for the tool
 --
 function building_help_tool_string(tribename, toolname, no_of_workers)
-	local ware_description = wl.Game():get_ware_description(tribename,toolname)
+	local ware_description = wl.Game():get_ware_description(tribename, toolname)
 	return text_line((ngettext("Worker uses:","Workers use:", no_of_workers)),
-		ware_description.descname, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
+		ware_description.descname, ware_description.icon_name)
 end
 
 -- RST
