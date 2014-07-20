@@ -76,8 +76,6 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     echo "you will need to build it manually passing the"
     echo "option -DCMAKE_BUILD_TYPE=\"Release\" to cmake"
 
-    #TODO(code review): WL_PORTABLE might be going away, see https://bugs.launchpad.net/widelands/+bug/1342228
-
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
       cmake -G Ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
     else
