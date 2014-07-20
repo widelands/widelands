@@ -23,13 +23,6 @@ echo " "
 
 
 
-# TODO  user interaction and functions for installation including a check
-# TODO  whether the selected directories are writeable and a password check
-# TODO  to become root / Administrator if the dirs are not writeable.
-# TODO(code review): probably no longer needed?
-
-
-
 ######################################
 # Definition of some local variables #
 ######################################
