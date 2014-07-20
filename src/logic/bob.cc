@@ -260,7 +260,7 @@ void Bob::skip_act()
  */
 void Bob::push_task(Game & game, const Task & task, uint32_t const tdelta)
 {
-	assert(not task.unique or not get_state(task));
+	assert(!task.unique || !get_state(task));
 	assert(m_in_act || m_stack.empty());
 
 	m_stack.push_back(State(&task));
@@ -707,7 +707,7 @@ void Bob::movepath_update(Game & game, State & state)
 
 	if
 		(state.ivar2
-		 and
+		 &&
 		 static_cast<Path::Step_Vector::size_type>(state.ivar1) + 1
 		 ==
 		 path->get_nsteps())
@@ -891,7 +891,7 @@ int32_t Bob::start_walk
 
 	//  Always call checkNodeBlocked, because it might communicate with other
 	//  bobs (as is the case for soldiers on the battlefield).
-	if (checkNodeBlocked(game, newnode, true) and !force)
+	if (checkNodeBlocked(game, newnode, true) && !force)
 		return -2;
 
 	// Move is go

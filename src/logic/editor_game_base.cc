@@ -70,7 +70,7 @@ ibase_             (nullptr),
 map_               (nullptr),
 lasttrackserial_   (0)
 {
-	if (not lua_) // TODO SirVer: this is sooo ugly, I can't say
+	if (!lua_) // TODO SirVer: this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 
 	g_sound_handler.egbase_ = this;
@@ -198,7 +198,7 @@ void Editor_Game_Base::inform_players_about_ownership
 void Editor_Game_Base::inform_players_about_immovable
 	(Map_Index const i, Map_Object_Descr const * const descr)
 {
-	if (not Road::IsRoadDescr(descr))
+	if (!Road::IsRoadDescr(descr))
 		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
 			Player::Field & player_field = p->m_fields[i];
 			if (1 < player_field.vision) {
@@ -249,7 +249,7 @@ void Editor_Game_Base::postload()
 		if
 			(pid <= MAX_PLAYERS
 			 ||
-			 not dynamic_cast<const Game *>(this))
+			 !dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
 			tribes_[id]->postload(*this);
@@ -695,7 +695,7 @@ void Editor_Game_Base::do_conquer_area
 	assert    (player_area.player_number <= map().get_nrplayers());
 	assert    (preferred_player          <= map().get_nrplayers());
 	assert(preferred_player != player_area.player_number);
-	assert(not conquer || not preferred_player);
+	assert(!conquer || !preferred_player);
 	Player & conquering_player = player(player_area.player_number);
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
@@ -709,12 +709,12 @@ void Editor_Game_Base::do_conquer_area
 			//  adds the influence
 			Military_Influence new_influence_modified = conquering_player.military_influence(index) +=
 			   influence;
-			if (owner && not conquer_guarded_location_by_superior_influence)
+			if (owner && !conquer_guarded_location_by_superior_influence)
 				new_influence_modified = 1;
 			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if (not(conquering_player.military_influence(index) -= influence) &&
+		} else if (!(conquering_player.military_influence(index) -= influence) &&
 		           owner == player_area.player_number) {
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if
@@ -772,7 +772,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 		PlayerImmovable & imm =
 			ref_cast<PlayerImmovable, BaseImmovable>(*i.current->object);
 		if
-			(not
+			(!
 			 m[i.current->coords].is_interior(imm.owner().player_number()))
 			if
 				(std::find(burnlist.begin(), burnlist.end(), &imm)

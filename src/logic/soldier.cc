@@ -60,10 +60,10 @@ namespace  {
  * remove spaces at the beginning or the end of a string
  */
 void remove_spaces(std::string& s) {
-	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n')
+	while (s[0] == ' ' || s[0] == '\t' || s[0] == '\n')
 		s.erase(0, 1);
 
-	while (*s.rbegin() == ' ' or * s.rbegin() == '\t' or * s.rbegin() == '\n')
+	while (*s.rbegin() == ' ' || * s.rbegin() == '\t' || * s.rbegin() == '\n')
 		s.erase(s.size() - 1, 1);
 }
 
@@ -91,12 +91,12 @@ Soldier_Descr::Soldier_Descr
 			remove_spaces(*i.current);
 		char * endp;
 		m_min_attack = strtol(list[0].c_str(), &endp, 0);
-		if (*endp or 0 == m_min_attack)
+		if (*endp || 0 == m_min_attack)
 			throw game_data_error
 				("expected %s but found \"%s\"",
 				 "positive integer", list[0].c_str());
 		m_max_attack = strtol(list[1].c_str(), &endp, 0);
-		if (*endp or m_max_attack < m_min_attack)
+		if (*endp || m_max_attack < m_min_attack)
 			throw game_data_error
 				("expected positive integer >= %u but found \"%s\"",
 				 m_min_attack, list[1].c_str());
@@ -988,13 +988,13 @@ void Soldier::attack_update(Game & game, State & state)
 	}
 
 	if
-		(!enemy or
-		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) and
-		  state.ui32var3 > get_current_hitpoints() and
+		(!enemy ||
+		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) &&
+		  state.ui32var3 > get_current_hitpoints() &&
 		  defenders > 0))
 	{
 		// Injured soldiers will try to return to safe site at home.
-		if (state.ui32var3 > get_current_hitpoints() and defenders) {
+		if (state.ui32var3 > get_current_hitpoints() && defenders) {
 			state.coords = Coords::Null();
 			state.objvar1 = nullptr;
 		}
@@ -1004,12 +1004,12 @@ void Soldier::attack_update(Game & game, State & state)
 		if (state.coords) {
 			BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
 			upcast(MilitarySite, newsite, newimm);
-			if (newsite and (&newsite->owner() == &owner())) {
+			if (newsite && (&newsite->owner() == &owner())) {
 				if (upcast(SoldierControl, ctrl, newsite)) {
 					state.objvar1 = nullptr;
 					// We may also have our location destroyed in between
 					if
-						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
+						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() &&
 						(!location || location->base_flag().get_position()
 						              !=
 						              newsite ->base_flag().get_position()))
@@ -1078,8 +1078,8 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
 	{
 		if (upcast(Soldier, soldier, bob)) {
 			return
-				soldier->get_current_hitpoints() and
-				soldier->is_attacking_player(game, player) and
+				soldier->get_current_hitpoints() &&
+				soldier->is_attacking_player(game, player) &&
 				soldier->owner().is_hostile(player);
 		}
 		return false;
@@ -1169,7 +1169,7 @@ void Soldier::defense_update(Game & game, State & state)
 	 * Attempt to fix a crash when player bulldozes a building being defended
 	 * by soldiers.
 	 */
-	if (not location)
+	if (!location)
 		return pop_task(game);
 
 	Flag & baseflag = location->base_flag();
@@ -1186,7 +1186,7 @@ void Soldier::defense_update(Game & game, State & state)
 
 	// If we only are defending our home ...
 	if (state.ivar1 & CF_DEFEND_STAYHOME) {
-		if (position == location and state.ivar2 == 1) {
+		if (position == location && state.ivar2 == 1) {
 			molog("[defense] stayhome: returned home\n");
 			return pop_task_or_fight(game);
 		}
@@ -1233,8 +1233,8 @@ void Soldier::defense_update(Game & game, State & state)
 		 FindBobSoldierAttackingPlayer(game, *get_owner()));
 
 	if
-		(soldiers.empty() or
-		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) and
+		(soldiers.empty() ||
+		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) &&
 		  get_current_hitpoints() < state.ui32var3))
 	{
 
@@ -1290,7 +1290,7 @@ void Soldier::defense_update(Game & game, State & state)
 			//  Check soldier, be sure that we can fight against soldier.
 			// Soldiers can not go over enemy land when defending.
 			if
-				((soldier->canBeChallenged()) and
+				((soldier->canBeChallenged()) &&
 				 (f.get_owned_by() == get_owner()->player_number()))
 			{
 				uint32_t thisDist = game.map().calc_distance
@@ -1510,7 +1510,7 @@ void Soldier::battle_update(Game & game, State &)
 			}
 		}
 	} else {
-		if (opponent.stayHome() and (this == m_battle->second())) {
+		if (opponent.stayHome() && (this == m_battle->second())) {
 			// Wait until correct roles are assigned
 			new Battle(game, *m_battle->second(), *m_battle->first());
 			return schedule_act(game, 10);
@@ -1682,7 +1682,7 @@ struct FindBobSoldierOnBattlefield : public FindBob {
 	{
 		if (upcast(Soldier, soldier, bob))
 			return
-				soldier->isOnBattlefield() and
+				soldier->isOnBattlefield() &&
 				soldier->get_current_hitpoints();
 		return false;
 	}
@@ -1703,7 +1703,7 @@ bool Soldier::checkNodeBlocked
 
 	if
 		(!attackdefense ||
-		 ((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) and
+		 ((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) &&
 		  attackdefense->ui32var3 > get_current_hitpoints()))
 	{
 		// Retreating or non-combatant soldiers act like normal bobs

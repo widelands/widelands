@@ -192,7 +192,7 @@ void Game::set_write_replay(bool const wr)
 	//  this is to ensure we do not crash because of diskspace
 	//  still this is only possibe to go from true->false
 	//  still probally should not do this with an assert but with better checks
-	assert(m_state == gs_notrunning || not wr);
+	assert(m_state == gs_notrunning || !wr);
 
 	m_writereplay = wr;
 }
@@ -478,7 +478,7 @@ bool Game::run
 		} else {
 			// Is a scenario!
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (not map().get_starting_pos(p))
+				if (!map().get_starting_pos(p))
 				throw warning
 					(_("Missing starting position"),
 					 _
@@ -540,7 +540,7 @@ bool Game::run
 		if (m_writereplay) {
 			log("Starting replay writer\n");
 
-			assert(not m_replaywriter);
+			assert(!m_replaywriter);
 			m_replaywriter = new ReplayWriter(*this, fname);
 
 			log("Replay writer has started\n");
@@ -626,7 +626,7 @@ void Game::think()
 
 /// (Only) called by the dedicated server, to end a game once all players left
 void Game::end_dedicated_game() {
-	assert(not g_gr);
+	assert(!g_gr);
 	m_state = gs_notrunning;
 }
 
@@ -995,7 +995,7 @@ void Game::sample_statistics()
 				 workerid < tribe_workers;
 				 ++workerid)
 				if
-					(not
+					(!
 					 dynamic_cast<Carrier::Descr const *>
 					 	(tribe.get_worker_descr(workerid)))
 					wostock += eco->stock_worker(workerid);

@@ -156,10 +156,10 @@ void PlayerCommand::Read
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
-		if (2 <= packet_version and packet_version <= PLAYER_COMMAND_VERSION) {
+		if (2 <= packet_version && packet_version <= PLAYER_COMMAND_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 			m_sender    = fr.Unsigned8 ();
-			if (not egbase.get_player(m_sender))
+			if (!egbase.get_player(m_sender))
 				throw game_data_error("player %u does not exist", m_sender);
 			m_cmdserial = fr.Unsigned32();
 		} else
@@ -198,7 +198,7 @@ void Cmd_Bulldoze::Read
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
 		if
-			(1 <= packet_version and
+			(1 <= packet_version &&
 			 packet_version <= PLAYER_CMD_BULLDOZE_VERSION)
 		{
 			PlayerCommand::Read(fr, egbase, mol);
@@ -1251,7 +1251,7 @@ void Cmd_SetWareTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	if
-		(economy  () < player.get_nr_economies() and
+		(economy  () < player.get_nr_economies() &&
 		 ware_type() < player.tribe().get_nrwares())
 		player.get_economy_by_number(economy())->set_ware_target_quantity
 			(ware_type(),  m_permanent, duetime());
@@ -1314,7 +1314,7 @@ void Cmd_ResetWareTargetQuantity::execute(Game & game)
 	Player & player = game.player(sender());
 	const Tribe_Descr & tribe = player.tribe();
 	if
-		(economy  () < player.get_nr_economies() and
+		(economy  () < player.get_nr_economies() &&
 		 ware_type() < tribe.get_nrwares())
 	{
 		const int32_t count =
@@ -1373,7 +1373,7 @@ void Cmd_SetWorkerTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	if
-		(economy  () < player.get_nr_economies() and
+		(economy  () < player.get_nr_economies() &&
 		 ware_type() < player.tribe().get_nrwares())
 		player.get_economy_by_number(economy())->set_worker_target_quantity
 			(ware_type(),  m_permanent, duetime());
@@ -1436,7 +1436,7 @@ void Cmd_ResetWorkerTargetQuantity::execute(Game & game)
 	Player & player = game.player(sender());
 	const Tribe_Descr & tribe = player.tribe();
 	if
-		(economy  () < player.get_nr_economies() and
+		(economy  () < player.get_nr_economies() &&
 		 ware_type() < tribe.get_nrwares())
 	{
 		const int32_t count =
@@ -1682,7 +1682,7 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 		if (const Building * const building = flag->get_building()) {
 			if
 				(player.is_hostile(flag->owner())
-				 and
+				 &&
 				 1
 				 <
 				 player.vision
@@ -1759,7 +1759,7 @@ void PlayerMessageCommand::Read
 		if (packet_version == PLAYER_MESSAGE_CMD_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
 			m_message_id = Message_Id(fr.Unsigned32());
-			if (not m_message_id)
+			if (!m_message_id)
 				throw game_data_error
 					("(player %u): message id is null", sender());
 		} else

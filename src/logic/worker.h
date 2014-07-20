@@ -92,7 +92,7 @@ public:
 	/// should be there already). The worker must already be in the same economy
 	/// as the location.
 	void set_location_initially(PlayerImmovable & location) {
-		assert(not m_location.is_set());
+		assert(!m_location.is_set());
 		assert(location.serial());
 		assert(m_economy);
 		assert(m_economy == location.get_economy());

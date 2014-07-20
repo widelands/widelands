@@ -72,19 +72,19 @@ struct Soldier_Strength {
 	uint8_t hp, attack, defense, evade;
 	bool operator== (const Soldier_Strength & other) const {
 		return
-			hp      == other.hp      and
-			attack  == other.attack  and
-			defense == other.defense and
+			hp      == other.hp      &&
+			attack  == other.attack  &&
+			defense == other.defense &&
 			evade   == other.evade;
 	}
 	bool operator<  (const Soldier_Strength & other) const {
 		return
-			hp      <  other.hp or
-			(hp      == other.hp and
-			 (attack  <  other.attack or
-			  (attack  == other.attack and
-			   (defense <  other.defense or
-			    (defense == other.defense and
+			hp      <  other.hp ||
+			(hp      == other.hp &&
+			 (attack  <  other.attack ||
+			  (attack  == other.attack &&
+			   (defense <  other.defense ||
+			    (defense == other.defense &&
 			     evade    <  other.evade)))));
 	}
 };

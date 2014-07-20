@@ -220,8 +220,8 @@ void SinglePlayerGameSettingsProvider::setPlayerNumber(uint8_t const number) {
 	PlayerSettings const position = settings().players.at(number);
 	PlayerSettings const player = settings().players.at(settings().playernum);
 	if
-		(number < settings().players.size() and
-		 (position.state == PlayerSettings::stateOpen or
+		(number < settings().players.size() &&
+		 (position.state == PlayerSettings::stateOpen ||
 		  position.state == PlayerSettings::stateComputer))
 	{
 		setPlayer(number, player);

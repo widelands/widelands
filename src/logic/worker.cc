@@ -688,7 +688,7 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 
 	// Walk towards it
 	if
-		(not
+		(!
 		 start_task_movepath
 		 	(game,
 		 	 dest,
@@ -1114,7 +1114,7 @@ void Worker::log_general_info(const Editor_Game_Base & egbase)
  */
 void Worker::set_location(PlayerImmovable * const location)
 {
-	assert(not location or Object_Ptr(location).get(owner().egbase()));
+	assert(!location || Object_Ptr(location).get(owner().egbase()));
 
 	PlayerImmovable * const oldlocation = get_location(owner().egbase());
 	if (oldlocation == location)
@@ -1528,7 +1528,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 		} else if (upcast(Road,    road,      nextstep)) { //  Flag to Road
 			if
 				(&road->get_flag(Road::FlagStart) != location
-				 and
+				 &&
 				 &road->get_flag(Road::FlagEnd)   != location)
 				throw wexception
 					("MO(%u): [transfer]: nextstep is road, but we are nowhere near",
@@ -1738,7 +1738,7 @@ void Worker::buildingwork_update(Game & game, State & state)
 	// state pointer might become invalid
 	state.ivar1 = 1;
 
-	if (not building->get_building_work(game, *this, success)) {
+	if (!building->get_building_work(game, *this, success)) {
 		set_animation(game, 0);
 		return skip_act();
 	}
@@ -1862,7 +1862,7 @@ void Worker::return_update(Game & game, State & state)
 	// Determine the building's flag and move to it
 
 	if
-		(not
+		(!
 		 start_task_movepath
 		 	(game,
 		 	 location->base_flag().get_position(),
@@ -2227,7 +2227,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 
 		state.ivar1 = 1; //  force return to building
 
-		if (not location) {
+		if (!location) {
 			// this can happen if the flag (and the building) is destroyed while
 			// the worker leaves the building.
 			molog
@@ -2258,7 +2258,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 				 descr().get_right_walk_anims(does_carry_ware()), true);
 	}
 
-	if (not dynamic_cast<Building const *>(location)) {
+	if (!dynamic_cast<Building const *>(location)) {
 		// This can happen "naturally" if the building gets destroyed, but the
 		// flag is still there and the worker tries to enter from that flag.
 		// E.g. the player destroyed the building, it is destroyed, through an
@@ -2552,7 +2552,7 @@ void Worker::fugitive_update(Game & game, State & state)
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (&flag->owner() == &owner() and flag->economy().warehouses().size()) {
+		if (&flag->owner() == &owner() && flag->economy().warehouses().size()) {
 			set_location(flag);
 			return pop_task(game);
 		}
@@ -2692,11 +2692,11 @@ void Worker::geologist_update(Game & game, State & state)
 		BaseImmovable * const imm = map.get_immovable(get_position());
 
 		if
-			(not imm
-			 or
+			(!imm
+			 ||
 			 (imm->get_size() == BaseImmovable::NONE
-			  and
-			  not imm->has_attribute(RESI)))
+			  &&
+			  !imm->has_attribute(RESI)))
 		{
 			--state.ivar1;
 			return start_task_program(game, state.svar1);
@@ -2774,7 +2774,7 @@ void Worker::geologist_update(Game & game, State & state)
 		return pop_task(game);
 
 	if
-		(not
+		(!
 		 start_task_movepath
 		 	(game, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
 	{
@@ -2896,7 +2896,7 @@ void Worker::scout_update(Game & game, State & state)
 
 				if
 					(dist > oldest_distance
-					 || (dist == oldest_distance and time < oldest_time))
+					 || (dist == oldest_distance && time < oldest_time))
 				{
 					oldest_distance = dist;
 					oldest_time = time;

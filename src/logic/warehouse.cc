@@ -372,7 +372,7 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 	for (uint8_t i = worker_types_without_cost.size(); i;) {
 		Ware_Index const worker_index = worker_types_without_cost.at(--i);
 		if
-			(owner().is_worker_type_allowed(worker_index) and
+			(owner().is_worker_type_allowed(worker_index) &&
 			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(Never()))
 		{
 			if (next_spawn == static_cast<uint32_t>(Never()))
@@ -610,7 +610,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 				Soldier * soldier = static_cast<Soldier *>(*it);
 
 				//  Soldier dead ...
-				if (not soldier or soldier->get_current_hitpoints() == 0) {
+				if (!soldier || soldier->get_current_hitpoints() == 0) {
 					it = soldiers.erase(it);
 					m_supply->remove_workers(ware, 1);
 					continue;
@@ -950,14 +950,14 @@ Building & Warehouse_Descr::create_object() const {
 
 
 bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
-	if (not (worker < m_supply->get_workers().get_nrwareids()))
+	if (!(worker < m_supply->get_workers().get_nrwareids()))
 		throw wexception
 			("worker type %d does not exists (max is %d)",
 			 worker, m_supply->get_workers().get_nrwareids());
 
 	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(worker);
 	assert(&w_desc);
-	if (not w_desc.is_buildable())
+	if (!w_desc.is_buildable())
 		return false;
 
 	//  see if we have the resources
