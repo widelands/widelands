@@ -174,7 +174,7 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 	//  register sel overlay position
 	if (m_sel.triangles) {
 		assert
-			(center.triangle.t == TCoords<>::D or
+			(center.triangle.t == TCoords<>::D ||
 			 center.triangle.t == TCoords<>::R);
 		Widelands::MapTriangleRegion<> mr
 			(map, Area<TCoords<> >(center.triangle, m_sel.radius));
@@ -198,14 +198,14 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				if (upcast(Interactive_Player const, iplayer, igbase)) {
 					const Widelands::Player & player = iplayer->player();
 					if
-						(not player.see_all()
-						 and
+						(!player.see_all()
+						 &&
 						  (1
 						   >=
 						   player.vision
 							   (Widelands::Map::get_index
 								   (center.node, map.get_width()))
-						   or
+						   ||
 						   player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip("");
 				}
@@ -402,7 +402,7 @@ Draw debug overlay when appropriate.
 */
 void Interactive_Base::draw_overlay(RenderTarget& dst) {
 	// Blit node information when in debug mode.
-	if (get_display_flag(dfDebug) or not dynamic_cast<const Game*>(&egbase())) {
+	if (get_display_flag(dfDebug) || !dynamic_cast<const Game*>(&egbase())) {
 		static format node_format("%3i %3i");
 		const std::string node_text = as_uifont
 			((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_BIG);
@@ -593,7 +593,7 @@ void Interactive_Base::start_build_road
 	(Coords _start, Widelands::Player_Number const player)
 {
 	// create an empty path
-	assert(not m_buildroad);
+	assert(!m_buildroad);
 	m_buildroad = new CoordPath(_start);
 
 	m_road_build_player = player;
@@ -646,8 +646,8 @@ void Interactive_Base::finish_build_road()
 				(*new Widelands::Path(*m_buildroad));
 
 		if
-			(allow_user_input() and
-			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
+			(allow_user_input() &&
+			 (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)))
 		{
 			//  place flags
 			const Map & map = egbase().map();
@@ -788,7 +788,7 @@ void Interactive_Base::roadb_add_overlay()
 	OverlayManager & overlay_manager = map.overlay_manager();
 
 	// preview of the road
-	assert(not m_jobid);
+	assert(!m_jobid);
 	m_jobid = overlay_manager.get_a_job_id();
 	const CoordPath::Step_Vector::size_type nr_steps = m_buildroad->get_nsteps();
 	for (CoordPath::Step_Vector::size_type idx = 0; idx < nr_steps; ++idx) {
@@ -810,7 +810,7 @@ void Interactive_Base::roadb_add_overlay()
 	// build hints
 	Widelands::FCoords endpos = map.get_fcoords(m_buildroad->get_end());
 
-	assert(not m_road_buildhelp_overlay_jobid);
+	assert(!m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Widelands::FCoords neighb;
@@ -826,12 +826,15 @@ void Interactive_Base::roadb_add_overlay()
 		Widelands::BaseImmovable * const imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if
-				(not
-				 (dynamic_cast<const Widelands::Flag *>(imm)
-				  or
-				  (dynamic_cast<const Widelands::Road *>(imm)
-				   and
-				   (caps & Widelands::BUILDCAPS_FLAG))))
+				(!(
+					dynamic_cast<const Widelands::Flag *>(imm)
+					||
+					(
+						dynamic_cast<const Widelands::Road *>(imm)
+						&&
+						(caps & Widelands::BUILDCAPS_FLAG)
+					)
+				))
 				continue;
 		}
 

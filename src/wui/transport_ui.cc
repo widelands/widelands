@@ -89,14 +89,14 @@ private:
 			if (type == Widelands::wwWORKER) {
 				Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
 				for (Ware_Index i = 0; i < nr_wares; ++i) {
-					if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
+					if (!m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
 				}
 			} else {
 				Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
 				for (Ware_Index i = 0; i < nr_wares; ++i) {
-					if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
+					if (!m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
 				}

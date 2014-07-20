@@ -121,8 +121,8 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 		if (upcast(ProductionSite_Descr const, de, &descr)) {
 
 			if
-				((descr.is_buildable() or descr.is_enhanced())
-				 and
+				((descr.is_buildable() || descr.is_enhanced())
+				 &&
 				 de->output_ware_types().count(wares.get_selected()))
 			{
 				prodSites.add(de->descname().c_str(), i, de->get_buildicon());

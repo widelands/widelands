@@ -167,7 +167,7 @@ void ProductionSite_Window::update_worker_table()
 
 			if
 				(worker->get_current_experience() != -1
-					and
+					&&
 					worker->descr().get_level_experience () != -1)
 			{
 				assert(worker->descr().becomes() != Widelands::INVALID_INDEX);
