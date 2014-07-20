@@ -60,6 +60,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
+	// NOCOM(#sirver): Debug cruft? Prefer log("#GunChleoc: ) (base/log.h) for debug messages, you will find them then by grepping.
+	// Like so: log("#sirver a: %s,b: %s,c: %s\n", a, b, c);
 	std::cout << "XXXXXXXXXXXXXX ";
 	std::cout << _name;
 	std::cout << "\n";

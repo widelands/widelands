@@ -89,6 +89,10 @@ struct ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
+	// NOCOM(#sirver): Never make data members public. Make these private and add getters like so:
+	const std::string& needs_resource_title() const {
+		return m_needs_resource_title;
+	}
 	std::string m_needs_resource_title;
 	std::string m_needs_resource_message;
 

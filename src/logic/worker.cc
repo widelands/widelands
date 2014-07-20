@@ -592,14 +592,17 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 }
 
 // Informs the player about a building that cannot find resources any more,
+// NOCOM(#sirver): While you are around this code, feel free to fix style errors like this. The method should be called inform_player. Or rather notify_player?
 void Worker::informPlayer
 	(Game & game, Building & building, std::string res_type) const
 {
+	// NOCOM(#sirver): use upcast() if you want use the upcasted type anyways.
 	if(is_a(ProductionSite, &building))
 	{
 		const ProductionSite_Descr& prod_descr =
 					dynamic_cast<const ProductionSite_Descr&>(building.descr());
 
+		// NOCOM(#sirver): do not compare to the empty string, intead use .empty() as for other containers.
 		if(prod_descr.m_needs_resource_title != "")
 		{
 			assert(prod_descr.m_needs_resource_message != "");
