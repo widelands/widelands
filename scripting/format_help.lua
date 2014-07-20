@@ -118,22 +118,23 @@ end
 
 
 -- RST
--- .. function:: dependencies_resi(tribename, items[, text = nil])
+-- .. function:: dependencies_resi(tribename, resource, items[, text = nil])
 --
 --    Creates a dependencies line of any length for resources (that don't have menu.png files).
 --
 --    :arg tribename: name of the tribe.
---    :arg items: resource names in the correct order from left to right as table (set in {}).
+--    :arg resource: name of the geological resource.
+--    :arg items: ware/building descriptions in the correct order from left to right as table (set in {}).
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies_resi(tribename, items, text)
+function dependencies_resi(tribename, resource, items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/resi_00.png"
-	for k,v in ipairs({table.unpack(items,2)}) do
-		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
+	string = "image=tribes/" .. tribename .. "/" .. resource  .. "/resi_00.png"
+	for k,v in ipairs({table.unpack(items)}) do
+		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
 	end
 	return rt(string, p(text))
 end
@@ -142,23 +143,6 @@ end
 --  =======================================================
 --  *************** Dependencies functions ****************
 --  =======================================================
-
-
--- RST
--- .. function:: building_help_dependencies_resi(tribename, items, ware)
---
---    Formats a chain of ware dependencies for the help window. First item is a mining resource.
---
---    :arg tribename: e.g. "barbarians".
---    :arg items: an array with ware and building names,
---                            e.g. {"constructionsite", "trunk"}
---    :arg warename: the internal name of the ware to use in the title.
---    :returns: an rt string with images describing a chain of ware/building dependencies
---
-function building_help_dependencies_resi(tribename, items, warename)
-	local ware_description = wl.Game():get_ware_description(tribename, warename)
-	return dependencies_resi(tribename, items, ware_description.descname)
-end
 
 -- RST
 -- .. function:: dependencies_training(tribename, building_description, interim1, interim2)
@@ -281,7 +265,7 @@ function building_help_general_string(tribename, building_description, purpose, 
 		representative_resource = building_description.output_ware_types[1]
 -- TODO(GunChleoc) need a bob_descr for the ship -> port and shipyard
 -- TODO(GunChleoc) create descr objects for flag, portdock, ...
-	elseif(building_description.name == "port" or building_description.name == "shipyard") then
+	elseif(building_description.is_port or building_description.name == "shipyard") then
 		representative_resource = nil
 	elseif(building_description.type == "warehouse") then
 		representative_resource = wl.Game():get_ware_description(tribename, "log")
@@ -395,22 +379,26 @@ function building_help_dependencies_production(tribename, building_description, 
 				dependencies({building_description, ware_description}, ware_description.descname)
 		end
 
-	elseif (building_description.ismine) then
+	elseif (building_description.is_mine) then
 		-- TRANSLATORS: This is a verb (The miner mines)
 		result = result .. rt(h3(_"Mines:"))
 		for i, ware_description in ipairs(building_description.output_ware_types) do
-			-- Need to hack this because of inconsistency in the naming system.
-			-- Can't rename the files, because geologist won't work.
+
+			-- Need to hack this, because resource != produced ware.
 			local resi_name = ware_description.name
 			if(resi_name == "ironore") then resi_name = "iron"
-			elseif(resi_name == "raw_stone") then resi_name = "granit"
-			elseif(resi_name == "stone") then resi_name = "granit"
-			elseif(resi_name == "diamond") then resi_name = "granit"
-			elseif(resi_name == "quartz") then resi_name = "granit"
-			elseif(resi_name == "marble") then resi_name = "granit"
+			elseif(resi_name == "raw_stone") then resi_name = "granite"
+			elseif(resi_name == "stone") then resi_name = "granite"
+			elseif(resi_name == "diamond") then resi_name = "granite"
+			elseif(resi_name == "quartz") then resi_name = "granite"
+			elseif(resi_name == "marble") then resi_name = "granite"
 			elseif(resi_name == "goldore") then resi_name = "gold" end
-			result = result ..
-				building_help_dependencies_resi(tribename, {"resi_"..resi_name.."2", building_description.name, ware}, ware)
+			result = result .. dependencies_resi(
+				tribename,
+				"resi_"..resi_name.."2",
+				{building_description, ware_description},
+				ware_description.descname
+			)
 		end
 
 	else
@@ -488,10 +476,9 @@ function building_help_building_section(tribename, building_description, enhance
 	local result = rt(h2(_"Building"))
 
 	-- Space required
-	if (building_description.ismine) then
+	if (building_description.is_mine) then
 		result = result .. text_line(_"Space required:",_"Mine plot","pics/mine.png")
-	-- TODO(GunChleoc) isport doesn't work
-	elseif (building_description.isport) then
+	elseif (building_description.is_port) then
 		result = result .. text_line(_"Space required:",_"Port plot","pics/port.png")
 	else
 		if (building_description.size == 1) then
