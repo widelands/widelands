@@ -209,6 +209,7 @@ public:
 	 */
 	int get_inputs(lua_State *);
 	int get_output_ware_types(lua_State *);
+	int get_output_worker_types(lua_State *);
 	int get_working_positions(lua_State *);
 
 	/*

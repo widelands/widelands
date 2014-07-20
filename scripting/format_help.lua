@@ -1,5 +1,5 @@
 -- TODO(GunChleoc) Textdomain?
--- TODO(GunChleoc): get images from C++, e.g. menu.png, resi_00.png for the small image, first idle picture for the big header images. soldiers, tools, wares etc.
+-- TODO(GunChleoc): get resi_00.png from C++
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -250,6 +250,9 @@ function building_help_general_string(tribename, building_description, purpose, 
 	local representative_resource = nil
 	if(building_description.type == "productionsite") then
 		representative_resource = building_description.output_ware_types[1]
+		if(not representative_resource) then
+			representative_resource = building_description.output_worker_types[1]
+		end
 -- TODO(GunChleoc) need a bob_descr for the ship -> port and shipyard
 -- TODO(GunChleoc) create descr objects for flag, portdock, ...
 	elseif(building_description.is_port or building_description.name == "shipyard") then
@@ -365,6 +368,10 @@ function building_help_dependencies_production(tribename, building_description, 
 			result = result ..
 				dependencies({building_description, ware_description}, ware_description.descname)
 		end
+		for i, worker_description in ipairs(building_description.output_worker_types) do
+			result = result ..
+				dependencies({building_description, worker_description}, worker_description.descname)
+		end
 
 	elseif (building_description.is_mine) then
 		-- TRANSLATORS: This is a verb (The miner mines)
@@ -389,10 +396,16 @@ function building_help_dependencies_production(tribename, building_description, 
 		end
 
 	else
+		if(building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
+			result = result .. rt(h3(_"Produces:"))
+		end
 		for i, ware_description in ipairs(building_description.output_ware_types) do
-			if(i == 1) then result = result .. rt(h3(_"Produces:")) end
 			result = result ..
 				dependencies({building_description, ware_description}, ware_description.descname)
+		end
+		for i, worker_description in ipairs(building_description.output_worker_types) do
+			result = result ..
+				dependencies({building_description, worker_description}, worker_description.descname)
 		end
 	end
 

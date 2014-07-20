@@ -1337,6 +1337,7 @@ const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Metho
 const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Properties[] = {
 	PROP_RO(L_ProductionSiteDescription, inputs),
 	PROP_RO(L_ProductionSiteDescription, output_ware_types),
+	PROP_RO(L_ProductionSiteDescription, output_worker_types),
 	PROP_RO(L_ProductionSiteDescription, working_positions),
 	{nullptr, nullptr, nullptr},
 };
@@ -1381,6 +1382,26 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	for (auto ware_index : descr->output_ware_types()) {
 		lua_pushint32(L, index++);
 		to_lua<L_WareDescription>(L, new L_WareDescription(tribe.get_ware_descr(ware_index)));
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
+
+/* RST
+	.. attribute:: output_worker_types
+		(RO) An array with :class:`L_WorkerDescription` containing the workers that
+		the productionsite can produce.
+*/
+int L_ProductionSiteDescription::get_output_worker_types(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+	const ProductionSite_Descr * descr = get();
+
+	lua_newtable(L);
+	int index = 1;
+	for (auto worker_index : descr->output_worker_types()) {
+		lua_pushint32(L, index++);
+		to_lua<L_WorkerDescription>(L, new L_WorkerDescription(tribe.get_worker_descr(worker_index)));
 		lua_rawset(L, -3);
 	}
 

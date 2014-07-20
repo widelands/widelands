@@ -180,6 +180,13 @@ function test_descr:test_output_ware_types()
 	assert_equal(nil, building_description.output_ware_types[1])
 end
 
+function test_descr:test_output_worker_types()
+	local building_description = egbase:get_building_description("barbarians","cattlefarm")
+	assert_equal("ox", building_description.output_worker_types[1].name)
+	building_description = egbase:get_building_description("barbarians","gamekeepers_hut")
+	assert_equal(nil, building_description.output_ware_types[1])
+end
+
 function test_descr:test_type()
    assert_equal("productionsite", egbase:get_building_description("barbarians","coalmine").type)
 end
