@@ -101,40 +101,40 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
       echo "You don't appear to be using Bazaar. An update script will not be created"
       return 0
     fi
-        rm -f update.sh || true
-           (echo "#!/bin/sh"
-            echo "echo \" \""
-            echo "echo \"################################################\""
-            echo "echo \"#            Widelands update script.          #\""
-            echo "echo \"################################################\""
-            echo "echo \" \""
-            echo " "
-            echo "set -e"
-            echo "if ! [ -f src/wlapplication.cc ] ; then"
-            echo "  echo \"  This script must be run from the main directory of the widelands\""
-            echo "  echo \"  source code.\""
-            echo "  exit 1"
-            echo "fi"
-            echo " "
-            echo "bzr pull"
-            echo "cd build"
-            echo "cmake .."
-            echo "$buildtool"
-            echo "$buildtool lang"
-            echo "rm  ../VERSION || true"
-            echo "rm  ../widelands || true"
-            echo "mv VERSION ../VERSION"
-            echo "mv src/widelands ../widelands"
-            echo "cd .."
-            echo " "
-            echo "echo \" \""
-            echo "echo \"################################################\""
-            echo "echo \"#      Widelands was updated successfully.     #\""
-            echo "echo \"# You should be able to run it via ./widelands #\""
-            echo "echo \"################################################\""
-           ) > update.sh
-           chmod +x ./update.sh
-           echo "  -> The update script has successfully been created."
+      rm -f update.sh || true
+      cat > update.sh << END_SCRIPT
+#!/bin/sh
+echo "################################################"
+echo "#            Widelands update script.          #"
+echo "################################################"
+echo " "
+
+set -e
+if ! [ -f src/wlapplication.cc ] ; then
+  echo "  This script must be run from the main directory of the widelands"
+  echo "  source code."
+  exit 1
+fi
+
+bzr pull
+cd build
+cmake ..
+$buildtool
+$buildtool lang
+rm  ../VERSION || true
+rm  ../widelands || true
+mv VERSION ../VERSION
+mv src/widelands ../widelands
+cd ..
+
+echo " "
+echo "################################################"
+echo "#      Widelands was updated successfully.     #"
+echo "# You should be able to run it via ./widelands #"
+echo "################################################"
+END_SCRIPT
+      chmod +x ./update.sh
+      echo "  -> The update script has successfully been created."
   }
 ######################################
 
