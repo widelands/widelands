@@ -10,8 +10,7 @@ return {
 	return
 
 	--Lore Section
--- TODO crashes because of missing image
-	--building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
+	building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
 	building_help_general_string("empire", building_description, "shipwright",

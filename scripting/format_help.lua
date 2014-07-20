@@ -385,7 +385,7 @@ end
 --
 function building_help_lore_string(tribename, building_description, flavourtext, author)
 	local result = rt(h2(_"Lore")) ..
-		rt("image=tribes/" .. tribename .. "/" .. building_description.name  .. "/" .. building_description.name .. "_i_00.png", p(flavourtext))
+		rt("image=" .. building_description.representative_image, p(flavourtext))
 		if author then
 			result = result .. rt("text-align=right",p("font-size=10 font-style=italic", author))
 		end

@@ -111,9 +111,10 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
-	int get_type(lua_State *);
 	int get_descname(lua_State *);
+	int get_name(lua_State *);
+	int get_representative_image(lua_State *);
+	int get_type(lua_State *);
 
 	/*
 	 * Lua methods

@@ -22,6 +22,7 @@
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "economy/wares_queue.h"
+#include "graphic/graphic.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
@@ -1023,6 +1024,7 @@ const MethodType<L_MapObjectDescription> L_MapObjectDescription::Methods[] = {
 const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] = {
 	PROP_RO(L_MapObjectDescription, descname),
 	PROP_RO(L_MapObjectDescription, name),
+	PROP_RO(L_MapObjectDescription, representative_image),
 	PROP_RO(L_MapObjectDescription, type),
 	{nullptr, nullptr, nullptr},
 };
@@ -1042,6 +1044,19 @@ void L_MapObjectDescription::__unpersist(lua_State*) {
  ==========================================================
  */
 
+
+/* RST
+	.. attribute:: descname
+
+			(RO) a :class:`string` with the map object's localized name
+*/
+
+int L_MapObjectDescription::get_descname(lua_State * L) {
+	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
+
 /* RST
 	.. attribute:: name
 
@@ -1055,6 +1070,22 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 
 
 /* RST
+	.. attribute:: representative_image
+
+			(RO) a :class:`string` with the file path to the representative image
+			of the map object's idle animation
+*/
+int L_MapObjectDescription::get_representative_image(lua_State * L) {
+
+	const std::string& filepath = g_gr->animations().get_animation
+		(get()->get_animation("idle")).representative_image_from_disk().hash();
+
+	lua_pushstring(L, filepath);
+	return 1;
+}
+
+
+/* RST
 	.. attribute:: type
 
 			(RO) the name of the building, e.g. building.
@@ -1063,20 +1094,6 @@ int L_MapObjectDescription::get_type(lua_State * L) {
 	lua_pushstring(L, get()->type());
 	return 1;
 }
-
-
-/* RST
-	.. attribute:: name
-
-			(RO) a :class:`string` with the map object's localized name
-*/
-
-int L_MapObjectDescription::get_descname(lua_State * L) {
-	lua_pushstring(L, get()->descname());
-	return 1;
-}
-
-
 
 /* RST
 BuildingDescription
@@ -1419,7 +1436,7 @@ const PropertyType<L_MilitarySiteDescription> L_MilitarySiteDescription::Propert
 /* RST
 	.. attribute:: heal_per_second
 
-		(RO) The number of health healed ber second by the militarysite
+		(RO) The number of health healed per second by the militarysite
 */
 int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
 	const MilitarySite_Descr * descr = get();
