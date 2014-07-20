@@ -41,7 +41,7 @@ namespace {
 
 std::string read_stdin() {
 	std::string txt;
-	while (not std::cin.eof()) {
+	while (!std::cin.eof()) {
 		std::string line;
 		getline(std::cin, line);
 		txt += line + "\n";

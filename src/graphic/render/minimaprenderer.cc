@@ -87,15 +87,15 @@ inline uint32_t calc_minimap_color
 		// * winterland -> orange
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayer::Road) and dynamic_cast<Road const *>(immovable)) {
+			if ((layers & MiniMapLayer::Road) && dynamic_cast<Road const *>(immovable)) {
 				pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
 			}
 
 			if
-				(((layers & MiniMapLayer::Flag) and dynamic_cast<Flag const *>(immovable))
-				 or
+				(((layers & MiniMapLayer::Flag) && dynamic_cast<Flag const *>(immovable))
+				 ||
 				 ((layers & MiniMapLayer::Building)
-				  and
+				  &&
 				  dynamic_cast<Widelands::Building const *>(immovable)))
 			{
 				pixelcolor = SDL_MapRGB(&const_cast<SDL_PixelFormat&>(format), 255, 255, 255);
@@ -187,7 +187,7 @@ void draw_minimap_int
 	uint32_t modx = pbottomright.x % 2;
 	uint32_t mody = pbottomright.y % 2;
 
-	if (not player or player->see_all()) {
+	if (!player || player->see_all()) {
 			for (uint32_t y = 0; y < surface_h; ++y) {
 			uint8_t * pix = pixels + y * pitch;
 			Widelands::FCoords f
