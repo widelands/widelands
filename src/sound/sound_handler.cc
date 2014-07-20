@@ -118,7 +118,7 @@ void Sound_Handler::init()
 
 	if
 		(SDL_InitSubSystem(SDL_INIT_AUDIO) == -1
-		 or
+		 ||
 		 Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) == -1)
 	{
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
@@ -277,7 +277,7 @@ void Sound_Handler::load_one_fx
 	if (nosound_)
 		return;
 
-	if (not fr.TryOpen(*g_fs, path)) {
+	if (!fr.TryOpen(*g_fs, path)) {
 		log("WARNING: Could not open %s for reading!\n", path);
 		return;
 	}
@@ -535,7 +535,7 @@ void Sound_Handler::register_song
 void Sound_Handler::start_music
 	(const std::string & songset_name, int32_t fadein_ms)
 {
-	if (get_disable_music() or nosound_)
+	if (get_disable_music() || nosound_)
 		return;
 
 	if (fadein_ms == 0) fadein_ms = 250; //  avoid clicks
@@ -565,7 +565,7 @@ void Sound_Handler::start_music
 */
 void Sound_Handler::stop_music(int32_t fadeout_ms)
 {
-	if (get_disable_music() or nosound_)
+	if (get_disable_music() || nosound_)
 		return;
 
 	if (fadeout_ms == 0) fadeout_ms = 250; //  avoid clicks
@@ -658,7 +658,7 @@ void Sound_Handler::set_disable_fx(bool const disable)
  * \param volume The new music volume.
  */
 void Sound_Handler::set_music_volume(int32_t volume) {
-	if (not lock_audio_disabling_ and not nosound_) {
+	if (!lock_audio_disabling_ && !nosound_) {
 		music_volume_ = volume;
 		Mix_VolumeMusic(volume);
 		g_options.pull_section("global").set_int("music_volume", volume);
@@ -673,7 +673,7 @@ void Sound_Handler::set_music_volume(int32_t volume) {
  * \param volume The new music volume.
  */
 void Sound_Handler::set_fx_volume(int32_t volume) {
-	if (not lock_audio_disabling_ and not nosound_) {
+	if (!lock_audio_disabling_ && !nosound_) {
 		fx_volume_ = volume;
 		Mix_Volume(-1, volume);
 		g_options.pull_section("global").set_int("fx_volume", volume);

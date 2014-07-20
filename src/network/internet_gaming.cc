@@ -97,7 +97,7 @@ static InternetGaming * ig = nullptr;
 
 /// \returns the one and only InternetGaming instance.
 InternetGaming & InternetGaming::ref() {
-	if (not ig)
+	if (!ig)
 		ig = new InternetGaming();
 	return * ig;
 }
