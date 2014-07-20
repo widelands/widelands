@@ -48,19 +48,6 @@ function text_line(t1, t2, imgstr)
 	end
 end
 
--- Tabs für die Hilfe, weiß aber nicht, ob das wirklich so funktionieren kann,
--- oder wie ich das eigentlich anwenden muss… Oder was ich falsch mache…
-function make_tabs_array(t1, t2)
-  return { {
-        text = t1,
-        tab_picture = "pics/small.png", -- Graphic for the tab button
-     },
-     {
-        text = t2,
-        tab_picture = "pics/medium.png",
-     }
-  }
-end
 
 --  =======================================================
 --  ********** Helper functions for dependencies **********
@@ -232,10 +219,10 @@ function dependencies_training_weapons(tribename, building_description, and_or, 
 	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
 	elseif (and_or == "or" ) then equipmentstring = _"or equipment from" end
 	return rt(p(equipmentstring)) ..
-		dependencies_basic({
-			manufacturer_description.icon_name,
-			weaponsstring,
-		}, rt(p(manufacturer_description.descname)))
+		dependencies_basic(
+			{manufacturer_description.icon_name, weaponsstring},
+			rt(p(manufacturer_description.descname))
+		)
 end
 
 
