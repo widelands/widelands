@@ -103,7 +103,7 @@ std::set<std::string> LayeredFileSystem::ListDirectory(const std::string& path) 
  * Returns true if the file can be found in at least one of the sub-filesystems
  */
 bool LayeredFileSystem::FileExists(const std::string & path) {
-	if (m_home and m_home->FileExists(path))
+	if (m_home && m_home->FileExists(path))
 		return true;
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->FileExists(path))
@@ -117,7 +117,7 @@ bool LayeredFileSystem::FileExists(const std::string & path) {
  * \todo What if it's a file in some and a dir in others?????
  */
 bool LayeredFileSystem::IsDirectory(const std::string & path) {
-	if (m_home and m_home->IsDirectory(path))
+	if (m_home && m_home->IsDirectory(path))
 		return true;
 
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
@@ -153,7 +153,7 @@ void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
 void LayeredFileSystem::Write
 	(const std::string & fname, void const * const data, int32_t const length)
 {
-	if (m_home and m_home->IsWritable())
+	if (m_home && m_home->IsWritable())
 		return m_home->Write(fname, data, length);
 
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
@@ -225,11 +225,11 @@ void LayeredFileSystem::EnsureDirectoryExists(const std::string & dirname) {
  */
 FileSystem * LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
 {
-	if (m_home and m_home->IsWritable() and m_home->FileExists(dirname))
+	if (m_home && m_home->IsWritable() && m_home->FileExists(dirname))
 		return m_home->MakeSubFileSystem(dirname);
 
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
-		if ((*it)->IsWritable() and (*it)->FileExists(dirname))
+		if ((*it)->IsWritable() && (*it)->FileExists(dirname))
 			return (*it)->MakeSubFileSystem(dirname);
 
 	throw wexception("LayeredFileSystem: unable to create sub filesystem");
@@ -240,11 +240,11 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
  */
 FileSystem * LayeredFileSystem::CreateSubFileSystem(const std::string & dirname, Type const type)
 {
-	if (m_home and m_home->IsWritable() and not m_home->FileExists(dirname))
+	if (m_home && m_home->IsWritable() && !m_home->FileExists(dirname))
 		return m_home->CreateSubFileSystem(dirname, type);
 
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
-		if ((*it)->IsWritable() and not (*it)->FileExists(dirname))
+		if ((*it)->IsWritable() && !(*it)->FileExists(dirname))
 			return (*it)->CreateSubFileSystem(dirname, type);
 
 	throw wexception("LayeredFileSystem: unable to create sub filesystem");
@@ -257,12 +257,12 @@ void LayeredFileSystem::Unlink(const std::string & file) {
 	if (!FileExists(file))
 		return;
 
-	if (m_home and m_home->IsWritable() and m_home->FileExists(file)) {
+	if (m_home && m_home->IsWritable() && m_home->FileExists(file)) {
 		m_home->Unlink(file);
 		return;
 	}
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
-		if ((*it)->IsWritable() and (*it)->FileExists(file)) {
+		if ((*it)->IsWritable() && (*it)->FileExists(file)) {
 			(*it)->Unlink(file);
 			return;
 		}
@@ -273,12 +273,12 @@ void LayeredFileSystem::Rename
 {
 	if (!FileExists(old_name))
 		return;
-	if (m_home and m_home->IsWritable() and m_home->FileExists(old_name)) {
+	if (m_home && m_home->IsWritable() && m_home->FileExists(old_name)) {
 		m_home->Rename(old_name, new_name);
 		return;
 	}
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
-		if ((*it)->IsWritable() and (*it)->FileExists(old_name)) {
+		if ((*it)->IsWritable() && (*it)->FileExists(old_name)) {
 			(*it)->Rename(old_name, new_name);
 			return;
 		}

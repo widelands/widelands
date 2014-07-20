@@ -161,7 +161,7 @@ std::string FileSystem::GetHomedir()
 	// their own "standards"?
 #define TRY_USE_AS_HOMEDIR(name)                                              \
    homedir = getenv(name);                                                    \
-   if (homedir.size() and check_writeable_for_data(homedir.c_str()))          \
+   if (homedir.size() && check_writeable_for_data(homedir.c_str()))           \
       return homedir;                                                         \
 
 	TRY_USE_AS_HOMEDIR("USERPROFILE");

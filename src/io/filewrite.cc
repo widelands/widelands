@@ -55,7 +55,7 @@ void FileWrite::SetPos(const Pos pos) {
 }
 
 void FileWrite::Data(const void* const src, const size_t size, Pos const pos = Pos::Null()) {
-	assert(data_ or not length_);
+	assert(data_ || !length_);
 
 	Pos i = pos;
 	if (pos.isNull()) {

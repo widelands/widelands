@@ -47,7 +47,7 @@ void Game_Interactive_Player_Data_Packet::Read
 				throw game_data_error("Invalid player number: %i.", player_number);
 			}
 
-			if (not game.get_player(player_number)) {
+			if (!game.get_player(player_number)) {
 				// This happens if the player, that saved the game, was a spectator
 				// and the slot for player 1 was not used in the game.
 				// So now we try to create an InteractivePlayer object for another

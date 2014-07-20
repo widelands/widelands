@@ -174,11 +174,11 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	std::unique_ptr<uint8_t[]> section;
 	memcpy(buffer, fr.Data(6), 6);
 	if
-		(buffer[0] != 0x10 or
-		 buffer[1] != 0x27 or
-		 buffer[2] != 0x00 or
-		 buffer[3] != 0x00 or
-		 buffer[4] != 0x00 or
+		(buffer[0] != 0x10 ||
+		 buffer[1] != 0x27 ||
+		 buffer[2] != 0x00 ||
+		 buffer[3] != 0x00 ||
+		 buffer[4] != 0x00 ||
 		 buffer[5] != 0x00)
 	{
 		cerr << "Section marker not found" << endl;
