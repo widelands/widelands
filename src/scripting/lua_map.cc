@@ -1350,7 +1350,8 @@ const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Pro
 
 /* RST
 	.. attribute:: inputs
-		(RO) An array with pairs of int, ware_descr.name describing the input of the productionsite
+		(RO) An array with :class:`L_WareDescription` containing the wares that
+		the productionsite needs for its production.
 */
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
@@ -1366,11 +1367,10 @@ int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	return 1;
 }
 
-
 /* RST
 	.. attribute:: output_ware_types
-
-		(RO) An array with pairs of int, ware_descr.name describing the output of the productionsite
+		(RO) An array with :class:`L_WareDescription` containing the wares that
+		the productionsite can produce.
 */
 int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
@@ -1380,14 +1380,12 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	int index = 1;
 	for (auto ware_index : descr->output_ware_types()) {
 		lua_pushint32(L, index++);
-		lua_pushstring(L, tribe.get_ware_descr(ware_index)->name());
+		to_lua<L_WareDescription>(L, new L_WareDescription(tribe.get_ware_descr(ware_index)));
 		lua_rawset(L, -3);
 	}
+
 	return 1;
-
-
 }
-
 
 /* RST
 	.. attribute:: working_positions
@@ -1712,8 +1710,8 @@ void L_WareDescription::__unpersist(lua_State* L) {
 
 /* RST
 	.. attribute:: consumers
-
-		(RO) a list of building descriptions that can consume this ware.
+		(RO) An array with :class:`L_BuildingDescription` with buildings that
+		need this ware for their production.
 */
 // TODO(GunChleoc): move the calculation somewhere else.
 // You get the (mutable) wares_description container from the tribe_description
@@ -1761,8 +1759,8 @@ int L_WareDescription::get_icon_name(lua_State * L) {
 
 /* RST
 	.. attribute:: producers
-
-		(RO) a list of building descriptions that can procude this ware.
+		(RO) An array with :class:`L_BuildingDescription` with buildings that
+		can procude this ware.
 */
 // TODO(GunChleoc): move the calculation somewhere else.
 // You get the (mutable) wares_description container from the tribe_description

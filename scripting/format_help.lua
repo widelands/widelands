@@ -266,7 +266,7 @@ end
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building's building description from C++
---    :arg resourcename: The name of a representative resource that this building produces
+--    :arg resourcename: TODO obsolete, remove this
 --    :arg purpose: A string explaining the purpose of the building
 --    :arg purpose: A string with a note about the building. Drop this argument if you don't want to add a note.
 --    :returns: rt of the formatted text
@@ -275,9 +275,24 @@ function building_help_general_string(tribename, building_description, resourcen
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 
+	local representative_resource = nil
+	if(building_description.type == "productionsite") then
+		representative_resource = building_description.output_ware_types[1]
+	elseif(building_description.type == "warehouse") then
+		representative_resource = wl.Game():get_ware_description(tribename, "log")
+	elseif(building_description.type == "militarysite" or building_description.type == "trainingsite") then
+		representative_resource = wl.Game():get_worker_description(tribename, "soldier")
+	end
+
+	--local icon_name = string.gsub(representative_resource.icon_name, "//", "/")
+
 	local result = rt(h2(_"General"))
-	result = result .. rt(h3(_"Purpose:")) ..
-		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose))
+	result = result .. rt(h3(_"Purpose:"))
+	if(representative_resource) then
+		result = result .. image_line(representative_resource.icon_name, 1, p(purpose))
+	else
+		result = result .. rt(p(purpose))
+	end
 	if (note) then	result = result .. rt(h3(_"Note:")) .. rt(p(note)) end
 
 	if(building_description.type == "productionsite") then
@@ -372,19 +387,18 @@ function building_help_dependencies_production(tribename, building_description, 
 
 	if ((not hasinput) and building_description.output_ware_types[1]) then
 		result = result .. rt(h3(_"Collects:"))
-		for i, ware in ipairs(building_description.output_ware_types) do
-			local temp_ware_description = wl.Game():get_ware_description(tribename, ware)
+		for i, ware_description in ipairs(building_description.output_ware_types) do
 			result = result ..
-				dependencies({building_description, temp_ware_description}, temp_ware_description.descname)
+				dependencies({building_description, ware_description}, ware_description.descname)
 		end
 
 	elseif (building_description.ismine) then
 		-- TRANSLATORS: This is a verb (The miner mines)
 		result = result .. rt(h3(_"Mines:"))
-		for i, ware in ipairs(building_description.output_ware_types) do
+		for i, ware_description in ipairs(building_description.output_ware_types) do
 			-- Need to hack this because of inconsistency in the naming system.
 			-- Can't rename the files, because geologist won't work.
-			local resi_name = ware
+			local resi_name = ware_description.name
 			if(resi_name == "ironore") then resi_name = "iron"
 			elseif(resi_name == "raw_stone") then resi_name = "granit"
 			elseif(resi_name == "stone") then resi_name = "granit"
@@ -397,19 +411,16 @@ function building_help_dependencies_production(tribename, building_description, 
 		end
 
 	else
-		for i, ware in ipairs(building_description.output_ware_types) do
+		for i, ware_description in ipairs(building_description.output_ware_types) do
 			if(i == 1) then result = result .. rt(h3(_"Produces:")) end
-			local temp_ware_description = wl.Game():get_ware_description(tribename, ware)
 			result = result ..
-				dependencies({building_description, temp_ware_description}, temp_ware_description.descname)
+				dependencies({building_description, ware_description}, ware_description.descname)
 		end
 	end
 
 	local outgoing = ""
-	for i, ware in ipairs(building_description.output_ware_types) do
-		local ware_description = wl.Game():get_ware_description(tribename, ware)
-
-		-- constructionsite isn't listed with the consumers, and needs special treatment because it isn't a building
+	for i, ware_description in ipairs(building_description.output_ware_types) do
+		-- constructionsite isn't listed with the consumers, so we need a special switch
 		if (add_constructionsite) then
 			local constructionsite_description = wl.Game():get_building_description(tribename, "constructionsite")
 			outgoing = outgoing .. dependencies({ware_description, constructionsite_description},
