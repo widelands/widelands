@@ -258,7 +258,7 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {
-		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION or packet_version == 1) {
+		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION || packet_version == 1) {
 			delete m_request;
 			m_ware             = owner().tribe().ware_index(fr.CString  ());
 			m_max_size         =                            fr.Unsigned32();

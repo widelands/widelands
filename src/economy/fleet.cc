@@ -204,7 +204,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
  */
 void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
 {
-	if (m_ports.empty() and not other->m_ports.empty()) {
+	if (m_ports.empty() && !other->m_ports.empty()) {
 		other->merge(egbase, this);
 		return;
 	}

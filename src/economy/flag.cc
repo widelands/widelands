@@ -80,7 +80,7 @@ void Flag::load_finish(Editor_Game_Base & egbase) {
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& r) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
-		if (not state) {
+		if (!state) {
 			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
 			    "does not have a waitforcapacity task! Removing from queue.\n",
 			    worker.serial(),
@@ -138,7 +138,7 @@ Flag::Flag
 
 	init(egbase);
 
-	if (road and game)
+	if (road && game)
 			road->postsplit(*game, *this);
 }
 
@@ -498,7 +498,7 @@ void Flag::wake_up_capacity_queue(Game & game)
 	while (!m_capacity_wait.empty()) {
 		Worker * const w = m_capacity_wait[0].get(game);
 		m_capacity_wait.erase(m_capacity_wait.begin());
-		if (w and w->wakeup_flag_capacity(game, *this))
+		if (w && w->wakeup_flag_capacity(game, *this))
 			break;
 	}
 }
