@@ -247,7 +247,7 @@ private:
 
 	// Displays a message to the player if a find... program can't be
 	// executed
-	void informPlayer(Game &, Building &, std::string) const;
+	void notify_player(Game &, Building &, std::string) const;
 
 	OPtr<PlayerImmovable> m_location; ///< meta location of the worker
 	Economy          * m_economy;      ///< economy this worker is registered in

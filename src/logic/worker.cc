@@ -401,7 +401,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
 				if (!found_reserved)
-					informPlayer
+					notify_player
 						(game,
 						 ref_cast<Building, PlayerImmovable>(*get_location(game)),
 						 Map_Object_Descr::get_attribute_name(action.iparam2));
@@ -444,7 +444,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
-				informPlayer
+				notify_player
 					(game,
 					 ref_cast<Building, PlayerImmovable>(*get_location(game)),
 					 Map_Object_Descr::get_attribute_name(action.iparam2));
@@ -573,7 +573,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
 		molog("  no space found\n");
 
-		informPlayer
+		notify_player
 			(game,
 			 ref_cast<Building, PlayerImmovable>(*get_location(game)),
 			 action.sparam1);
@@ -592,25 +592,19 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 }
 
 // Informs the player about a building that cannot find resources any more,
-// NOCOM(#sirver): While you are around this code, feel free to fix style errors like this. The method should be called inform_player. Or rather notify_player?
-void Worker::informPlayer
+void Worker::notify_player
 	(Game & game, Building & building, std::string res_type) const
 {
-	// NOCOM(#sirver): use upcast() if you want use the upcasted type anyways.
-	if(is_a(ProductionSite, &building))
+	if (upcast(ProductionSite, productionsite, &building))
 	{
-		const ProductionSite_Descr& prod_descr =
-					dynamic_cast<const ProductionSite_Descr&>(building.descr());
-
-		// NOCOM(#sirver): do not compare to the empty string, intead use .empty() as for other containers.
-		if(prod_descr.m_needs_resource_title != "")
+		if(!productionsite->descr().out_of_resource_title().empty())
 		{
-			assert(prod_descr.m_needs_resource_message != "");
+			assert(!productionsite->descr().out_of_resource_message().empty());
 			building.send_message
 				(game,
 				 "mine",
-				 prod_descr.m_needs_resource_title,
-				 prod_descr.m_needs_resource_message,
+				 productionsite->descr().out_of_resource_title(),
+				 productionsite->descr().out_of_resource_message(),
 				 true,
 				 1800000, 0);
 		}

@@ -23,9 +23,10 @@ work=_Work
 sleep=30000 # Barbarian lumberjack sleeps 25000
 worker=chop
 
-[resources]
-needs_resource_title=_Out of Trees
-needs_resource_message=_The lumberjack working at this lumberjack’s house can’t find any trees in his working radius. You should consider dismantling or destroying the building or building a forester’s house.
+[out_of_resource_notification]
+title=_Out of Trees
+message=_The lumberjack working at this lumberjack’s house can’t find any trees in his working radius. You should consider dismantling or destroying the building or building a forester’s house.
+delay_attempts=10
 
 [idle]
 pics=lumberjacks_house_i_??.png

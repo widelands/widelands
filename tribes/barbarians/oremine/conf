@@ -31,9 +31,10 @@ animate=working 20000
 mine=iron 2 33 5 17
 produce=ironore
 
-[resources]
-needs_resource_title=_Main Iron Vein Exhausted
-needs_resource_message=_This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
+[out_of_resource_notification]
+title=_Main Iron Vein Exhausted
+message=_This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
+delay_attempts=0
 
 [idle]
 pics=oremine_i_??.png

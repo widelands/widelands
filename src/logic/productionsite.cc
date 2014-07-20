@@ -60,25 +60,18 @@ ProductionSite_Descr::ProductionSite_Descr
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
-	// NOCOM(#sirver): Debug cruft? Prefer log("#GunChleoc: ) (base/log.h) for debug messages, you will find them then by grepping.
-	// Like so: log("#sirver a: %s,b: %s,c: %s\n", a, b, c);
-	std::cout << "XXXXXXXXXXXXXX ";
-	std::cout << _name;
-	std::cout << "\n";
-	Section * const section = prof.get_section("resources");
+	Section * const section = prof.get_section("out_of_resource_notification");
 	if (section != nullptr)
 	{
-		m_needs_resource_title = section->get_string("needs_resource_title", "");
-		m_needs_resource_message = section->get_string("needs_resource_message", "");
-		std::cout << m_needs_resource_title;
-		std::cout << "\n";
-		std::cout << m_needs_resource_message;
-		std::cout << "\n";
+		m_out_of_resource_title = section->get_string("title", "");
+		m_out_of_resource_message = section->get_string("message", "");
+		m_out_of_resource_delay_attempts = section->get_natural("delay_attempts");
 	}
 	else
 	{
-		m_needs_resource_title = "";
-		m_needs_resource_message = "";
+		m_out_of_resource_title = "";
+		m_out_of_resource_message = "";
+		m_out_of_resource_delay_attempts = 0;
 	}
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))

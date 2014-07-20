@@ -36,10 +36,10 @@ animate=working 20000
 mine=coal 2 50 5 17
 produce=coal
 
-# NOCOM(#sirver): [out_of_resource_notification] ? fits better. Then you could only use 'title' and 'message'. You can also add a parameter here that defines when this message is send - you could put it to 10000 for wells (so no message gets send) and 10 for lumberjacks or so. You can also do this in a followup merge request if you want to.
-[resources]
-needs_resource_title=_Main Coal Vein Exhausted
-needs_resource_message=_This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
+[out_of_resource_notification]
+title=_Main Coal Vein Exhausted
+message=_This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
+delay_attempts=0
 
 [idle]
 pics=coalmine_i_??.png

@@ -48,9 +48,10 @@ animate=working 20000
 mine=granite 2 50 5 17
 produce=stone:2
 
-[resources]
-needs_resource_title=_Main Marble Vein Exhausted
-needs_resource_message=_This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
+[out_of_resource_notification]
+title=_Main Marble Vein Exhausted
+message=_This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
+delay_attempts=0
 
 [work]
 call=mine_marble
