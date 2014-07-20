@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘We grow roofs’]],_[[Slogan of the Guild of Gardeners]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "thatchreed",
+	building_help_general_string("barbarians", building_description,
 		_"The Reed Yard cultivates reed that serves two different purposes for the Barbarian tribe.",
 		"Thatch reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.") ..
 

@@ -15,7 +15,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘No better friend you have in battle than the enemy’s blow that misses.’]], _[[Said to originate from Neidhardt, the famous trainer.]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "soldier",
+	building_help_general_string("barbarians", building_description,
 		_"Trains soldiers in ‘Evade’." .. " " .. _"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.",
 		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.") ..
 

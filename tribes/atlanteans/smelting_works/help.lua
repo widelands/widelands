@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("atlanteans", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("atlanteans", building_description, "iron",
+	building_help_general_string("atlanteans", building_description,
 		_"Smelts iron ore into iron and gold ore into gold.") ..
 
 	--Dependencies

@@ -15,17 +15,17 @@ return {
 	building_help_lore_string("atlanteans", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("atlanteans", building_description, "soldier",
+	building_help_general_string("atlanteans", building_description,
 		_"Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."
 			.. " " .."Equips the soldiers with all necessary weapons and armor parts.") ..
 
 	--Dependencies
 	-- We would need to parse the production programs to automate the parameters here; so we do it manually
-	-- TODO make pictures dependencies_training("atlanteans", building_description, "fulltrained-evade", "untrained+evade") ..
+	-- TODO(GunChleoc) make pictures dependencies_training("atlanteans", building_description, "fulltrained-evade", "untrained+evade") ..
 
 	rt(h3(_"Defense Training:")) ..
 	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread"}}) ..
-	dependencies_training_weapons("atlanteans", building_description, "and", 
+	dependencies_training_weapons("atlanteans", building_description, "and",
 		{"steel_shield", "advanced_shield"}, "armorsmithy") ..
 
 	rt(h3(_"Evade Training:")) ..
@@ -33,7 +33,7 @@ return {
 
 	rt(h3(_"Health Training:")) ..
 	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread"}}) ..
-	dependencies_training_weapons("atlanteans", building_description, "and", 
+	dependencies_training_weapons("atlanteans", building_description, "and",
 		{"golden_tabard"}, "weaving-mill") ..
 
 	--Workers Section

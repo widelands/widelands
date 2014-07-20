@@ -12,7 +12,7 @@ return {
 	--Lore Section
 	building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
 	--General Section
-	building_help_general_string("empire", building_description, "carrier",
+	building_help_general_string("empire", building_description,
 		_"Although this ship ran aground, it still serves as accomodation for your people. It also stores your wares and tools.",
 		_"The headquarters shipwreck is your main building." .. "<br>" .. _[[Text needed]]) ..
 

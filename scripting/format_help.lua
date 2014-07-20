@@ -1,5 +1,5 @@
--- TODO Textdomain?
--- TODO: get images from C++, e.g. menu.png, resi_00.png for the small image, first idle picture for the big header images. soldiers, tools, wares etc.
+-- TODO(GunChleoc) Textdomain?
+-- TODO(GunChleoc): get images from C++, e.g. menu.png, resi_00.png for the small image, first idle picture for the big header images. soldiers, tools, wares etc.
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -266,25 +266,28 @@ end
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building's building description from C++
---    :arg resourcename: TODO obsolete, remove this
 --    :arg purpose: A string explaining the purpose of the building
 --    :arg purpose: A string with a note about the building. Drop this argument if you don't want to add a note.
 --    :returns: rt of the formatted text
 --
-function building_help_general_string(tribename, building_description, resourcename, purpose, note)
+function building_help_general_string(tribename, building_description, purpose, note)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(tribename, building_description.name)
 
+-- TODO(GunChleoc) "carrier" for headquarters, "ship" for ports, "scout" for scouts_hut, "shipwright" for shipyard?
+-- TODO(GunChleoc) use aihints for gamekeeper, forester?
 	local representative_resource = nil
 	if(building_description.type == "productionsite") then
 		representative_resource = building_description.output_ware_types[1]
+-- TODO(GunChleoc) need a bob_descr for the ship -> port and shipyard
+-- TODO(GunChleoc) create descr objects for flag, portdock, ...
+	elseif(building_description.name == "port" or building_description.name == "shipyard") then
+		representative_resource = nil
 	elseif(building_description.type == "warehouse") then
 		representative_resource = wl.Game():get_ware_description(tribename, "log")
 	elseif(building_description.type == "militarysite" or building_description.type == "trainingsite") then
 		representative_resource = wl.Game():get_worker_description(tribename, "soldier")
 	end
-
-	--local icon_name = string.gsub(representative_resource.icon_name, "//", "/")
 
 	local result = rt(h2(_"General"))
 	result = result .. rt(h3(_"Purpose:"))
@@ -487,6 +490,7 @@ function building_help_building_section(tribename, building_description, enhance
 	-- Space required
 	if (building_description.ismine) then
 		result = result .. text_line(_"Space required:",_"Mine plot","pics/mine.png")
+	-- TODO(GunChleoc) isport doesn't work
 	elseif (building_description.isport) then
 		result = result .. text_line(_"Space required:",_"Port plot","pics/port.png")
 	else

@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("empire", building_description, "fish",
+	building_help_general_string("empire", building_description,
 		_"Fishes on the coast near the house.",
 		_"The fisher’s house needs water full of fish within the working radius.") ..
 

@@ -15,7 +15,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘He who is strong shall neither forgive nor forget, but revenge injustice suffered – in the past and for all future.’]], _[[Chief Chat’Karuth in a speech to his army.]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "soldier",
+	building_help_general_string("barbarians", building_description,
 		_"Trains soldiers in ‘Attack’ and in ‘Health’."
 			.. " " .."Equips the soldiers with all necessary weapons and armor parts.",
 		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.") ..
@@ -27,7 +27,7 @@ return {
 	rt(h3(_"Attack Training:")) ..
 	dependencies_training_food("barbarians", { {"fish", "meat"}, {"pittabread"}}) ..
 	dependencies_training_weapons("barbarians", building_description, "and", {"sharpax", "broadax"}, "axfactory") ..
-	dependencies_training_weapons("barbarians", building_description, "or", 
+	dependencies_training_weapons("barbarians", building_description, "or",
 		{"sharpax", "broadax", "bronzeax", "battleax", "warriorsax"}, "warmill") ..
 
 	rt(h3(_"Health Training:")) ..

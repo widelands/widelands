@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	-- Keeping the parameters here hardcoded for the moment, too hard to get from C++.
-	building_help_general_string("empire", building_description, "coal",
+	building_help_general_string("empire", building_description,
 		_"Digs coal out of the ground in mountain terrain.") ..
 
 	--Dependencies

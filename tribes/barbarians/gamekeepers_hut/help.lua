@@ -10,11 +10,13 @@ return {
 	return
 
 	--Lore Section
---	building_help_lore_string("barbarians", building_description, _[[‘He loves the animals and to breed them<br>
---as we love to cook and eat them.’]],_[[Barbarian nursery rhyme]]) ..
+	building_help_lore_string("barbarians", building_description,
+		_[[‘He loves the animals and to breed them<br>
+			as we love to cook and eat them.’]],
+		_[[Barbarian nursery rhyme]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "meat",
+	building_help_general_string("barbarians", building_description,
 		_"Releases animals into the wild to steady the meat production.") ..
 
 	--Dependencies

@@ -15,13 +15,13 @@ return {
 	building_help_lore_string("empire", building_description, _[[Text needed]]) ..
 
 	--General Section
-	building_help_general_string("empire", building_description, "soldier",
+	building_help_general_string("empire", building_description,
 		_"Trains soldiers in ‘Evade’." .. " " .. _"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.",
 		_"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.") ..
 
 	--Dependencies
 	-- We would need to parse the production programs to automate the parameters here; so we do it manually
-	-- TODO create images for this
+	-- TODO(GunChleoc) create images for this
 	-- dependencies_training("empire", building_description, "untrained+evade", "fulltrained-evade") ..
 
 	rt(h3(_"Evade Training:")) ..

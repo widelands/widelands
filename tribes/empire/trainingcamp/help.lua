@@ -15,23 +15,23 @@ return {
 	building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("empire", building_description, "soldier",
+	building_help_general_string("empire", building_description,
 		_"Trains soldiers in ‘Attack’ and in ‘Health’."
 			.. " " .."Equips the soldiers with all necessary weapons and armor parts.",
 		_"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.") ..
 
 	--Dependencies
 	-- We would need to parse the production programs to automate the parameters here; so we do it manually
-	-- TODO make pictures dependencies_training("empire", building_description, "fulltrained-evade", "untrained+evade") ..
+	-- TODO(GunChleoc) make pictures dependencies_training("empire", building_description, "fulltrained-evade", "untrained+evade") ..
 
 	rt(h3(_"Attack Training:")) ..
 	dependencies_training_food("empire", { {"fish", "meat"}, {"bread"}}) ..
-	dependencies_training_weapons("empire", building_description, "and", 
+	dependencies_training_weapons("empire", building_description, "and",
 		{"lance", "advanced_lance", "heavy_lance", "war_lance"}, "weaponsmithy") ..
 
 	rt(h3(_"Health Training:")) ..
 	dependencies_training_food("empire", { {"fish", "meat"}, {"bread"}}) ..
-	dependencies_training_weapons("empire", building_description, "and", 
+	dependencies_training_weapons("empire", building_description, "and",
 		{"helm", "armor", "chain_armor", "plate_armor"}, "armorsmithy") ..
 
 	--Workers Section

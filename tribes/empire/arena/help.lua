@@ -21,7 +21,7 @@ return {
 
 	--Dependencies
 	-- We would need to parse the production programs to automate the parameters here; so we do it manually
-	-- TODO create images for this
+	-- TODO(GunChleoc) create images for this
 	-- dependencies_training("empire", building_description, "untrained+evade", "fulltrained-evade") ..
 
 	rt(h3(_"Evade Training:")) ..
