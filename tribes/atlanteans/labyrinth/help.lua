@@ -21,7 +21,9 @@ return {
 
 	--Dependencies
 	-- We would need to parse the production programs to automate the parameters here; so we do it manually
-	-- TODO(GunChleoc) make pictures dependencies_training("atlanteans", building_description, "fulltrained-evade", "untrained+evade") ..
+	dependencies_training("atlanteans", building_description,
+		"untrained", "fulltrained-attack",
+		"untrained+attack", "fulltrained") ..
 
 	rt(h3(_"Defense Training:")) ..
 	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread"}}) ..

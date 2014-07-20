@@ -138,21 +138,23 @@ end
 --
 --    :arg tribename: name of the tribe.
 --    :arg building_description: the trainingsite's building description from C++
+--    :arg untrained: the soldier level trained from in the first line, e.g. "untrained".
 --    :arg interim1: the soldier level trained to in the first line, e.g. "untrained+evade".
 --    :arg interim1: the soldier level trained from in the second line, e.g. "fulltrained-evade".
+--    :arg fulltrained: the soldier level trained to in the second line, e.g. "fulltrained".
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies_training(tribename, building_description, interim1, interim2)
+function dependencies_training(tribename, building_description, untrained, interim1, interim2, fulltrained)
 	return
 		rt(h2(_"Dependencies")) .. rt(h3(_"Soldiers:")) ..
 		dependencies_basic({
-			"tribes/" .. tribename .. "/soldier/untrained.png",
+			"tribes/" .. tribename .. "/soldier/" .. untrained .. ".png",
 			building_description.icon_name,
 			"tribes/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
 		dependencies_basic({
 			"tribes/" .. tribename .. "/soldier/" .. interim2 .. ".png",
 			building_description.icon_name,
-			"tribes/" .. tribename .. "/soldier/fulltrained.png"})
+			"tribes/" .. tribename .. "/soldier/" .. fulltrained .. ".png"})
 end
 
 

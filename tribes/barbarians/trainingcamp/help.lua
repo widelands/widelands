@@ -21,8 +21,10 @@ return {
 		_"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.") ..
 
 	--Dependencies
-	-- We would need to parse the production programs to autpmate the parameters here; so we do it manually
-	dependencies_training("barbarians", building_description, "fulltrained-evade", "untrained+evade") ..
+	-- We would need to parse the production programs to automate the parameters here; so we do it manually
+	dependencies_training("barbarians", building_description,
+		"untrained", "fulltrained-evade",
+		"untrained+evade", "fulltrained") ..
 
 	rt(h3(_"Attack Training:")) ..
 	dependencies_training_food("barbarians", { {"fish", "meat"}, {"pittabread"}}) ..

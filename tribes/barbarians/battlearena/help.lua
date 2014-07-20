@@ -21,7 +21,9 @@ return {
 
 	--Dependencies
 	-- We would need to parse the production programs to automate the parameters here; so we do it manually
-	dependencies_training("barbarians", building_description, "untrained+evade", "fulltrained-evade") ..
+	dependencies_training("barbarians", building_description,
+		"untrained", "untrained+evade",
+		"fulltrained-evade", "fulltrained") ..
 
 	rt(h3(_"Evade Training:")) ..
 	dependencies_training_food("barbarians", { {"fish", "meat"}, {"strongbeer"}, {"pittabread"}}) ..
