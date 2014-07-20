@@ -41,9 +41,6 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
       echo "  source code."
       exit 1
     fi
-    #TODO(code review): Are these returns in various methods necessary?
-    #It doesn't seem like anything ever checks the return, and in case
-    #of something bad, it just calls exit anyways (see above)
     return 0
   }
 
