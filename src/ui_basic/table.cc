@@ -124,7 +124,7 @@ void Table<void *>::add_column
 
 		m_columns.push_back(c);
 	}
-	if (not m_scrollbar) {
+	if (!m_scrollbar) {
 		m_scrollbar =
 			new Scrollbar
 				(get_parent(),
@@ -215,7 +215,7 @@ Table<void *>::Entry_Record * Table<void *>::find
 void Table<void *>::header_button_clicked(Columns::size_type const n) {
 	assert(m_columns.at(n).btn);
 	if (get_sort_colum() == n) {
-		set_sort_descending(not get_sort_descending()); //  change sort direction
+		set_sort_descending(!get_sort_descending()); //  change sort direction
 		sort();
 		return;
 	}
@@ -386,9 +386,9 @@ bool Table<void *>::handle_mousepress
 
 		if //  check if doubleclicked
 			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
-			 and
+			 &&
 			 m_last_selection == m_selection
-			 and m_selection != no_selection_index())
+			 && m_selection != no_selection_index())
 			double_clicked(m_selection);
 
 		return true;

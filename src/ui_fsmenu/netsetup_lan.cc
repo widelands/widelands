@@ -150,7 +150,7 @@ bool Fullscreen_Menu_NetSetupLAN::get_host_address
 	for (uint32_t i = 0; i < opengames_size; ++i) {
 		const Net_Open_Game & game = *opengames[i];
 
-		if (not strcmp(game.info.hostname, host.c_str())) {
+		if (!strcmp(game.info.hostname, host.c_str())) {
 			addr = game.address;
 			port = game.port;
 			return true;

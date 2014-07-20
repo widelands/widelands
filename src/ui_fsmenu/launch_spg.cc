@@ -312,7 +312,7 @@ void Fullscreen_Menu_LaunchSPG::refresh()
 		m_pos[i]->set_visible(true);
 		const PlayerSettings & player = settings.players[i];
 		if
-			(player.state == PlayerSettings::stateOpen or
+			(player.state == PlayerSettings::stateOpen ||
 			 player.state == PlayerSettings::stateComputer)
 			m_pos[i]->set_enabled(true);
 		else
@@ -400,7 +400,7 @@ void Fullscreen_Menu_LaunchSPG::safe_place_for_host
 	// Check whether the host would still keep a valid position and return if
 	// yes.
 	if
-		(settings.playernum == UserSettings::none() or
+		(settings.playernum == UserSettings::none() ||
 		 settings.playernum < newplayernumber)
 		return;
 

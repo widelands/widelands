@@ -150,7 +150,7 @@ void Window::update_desired_size()
  */
 void Window::layout()
 {
-	if (m_center_panel && not _is_minimal) {
+	if (m_center_panel && !_is_minimal) {
 		m_center_panel->set_pos(Point(0, 0));
 		m_center_panel->set_size(get_inner_w(), get_inner_h());
 	}
@@ -164,9 +164,9 @@ void Window::move_out_of_the_way() {
 
 	const Point mouse = get_mouse_position();
 	if
-		(0 <= mouse.x and mouse.x < get_w()
-		 and
-		 0 <= mouse.y and mouse.y < get_h())
+		(0 <= mouse.x && mouse.x < get_w()
+		 &&
+		 0 <= mouse.y && mouse.y < get_h())
 		{
 			set_pos
 				(Point(get_x(), get_y())
@@ -205,22 +205,22 @@ void Window::move_inside_parent() {
 		int32_t px = get_x();
 		int32_t py = get_y();
 		if
-			((parent->get_inner_w() < static_cast<uint32_t>(get_w())) and
-			(px + get_w() <= static_cast<int32_t>(parent->get_inner_w()) or px >= 0))
+			((parent->get_inner_w() < static_cast<uint32_t>(get_w())) &&
+			(px + get_w() <= static_cast<int32_t>(parent->get_inner_w()) || px >= 0))
 			px = (static_cast<int32_t>(parent->get_inner_w()) - get_w()) / 2;
 		if
-			((parent->get_inner_h() < static_cast<uint32_t>(get_h())) and
-			(py + get_h() < static_cast<int32_t>(parent->get_inner_h()) or py > 0))
+			((parent->get_inner_h() < static_cast<uint32_t>(get_h())) &&
+			(py + get_h() < static_cast<int32_t>(parent->get_inner_h()) || py > 0))
 				py = 0;
 
 		if (parent->get_inner_w() >= static_cast<uint32_t>(get_w())) {
 			if (px < 0) {
 				px = 0;
-				if (parent->get_dock_windows_to_edges() and not _docked_left)
+				if (parent->get_dock_windows_to_edges() && !_docked_left)
 					_docked_left =  true;
 			} else if (px + static_cast<uint32_t>(get_w()) >= parent->get_inner_w()) {
 				px = static_cast<int32_t>(parent->get_inner_w()) - get_w();
-				if (parent->get_dock_windows_to_edges() and not _docked_right)
+				if (parent->get_dock_windows_to_edges() && !_docked_right)
 					_docked_right = true;
 			}
 			if (_docked_left)
@@ -234,9 +234,9 @@ void Window::move_inside_parent() {
 			else if (py + static_cast<uint32_t>(get_h()) > parent->get_inner_h()) {
 				py = static_cast<int32_t>(parent->get_inner_h()) - get_h();
 				if
-					(not _is_minimal
-					and
-					parent->get_dock_windows_to_edges() and not _docked_bottom)
+					(!_is_minimal
+					&&
+					parent->get_dock_windows_to_edges() && !_docked_bottom)
 					_docked_bottom = true;
 			}
 			if (_docked_bottom)
@@ -325,7 +325,7 @@ void Window::draw_border(RenderTarget & dst)
 				Align_Center);
 	}
 
-	if (not _is_minimal) {
+	if (!_is_minimal) {
 		const int32_t vt_bar_end = get_h() -
 			(_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
 		const int32_t vt_bar_end_minus_middle =
@@ -423,7 +423,7 @@ void Window::draw_border(RenderTarget & dst)
 }
 
 
-void Window::think() {if (not is_minimal()) Panel::think();}
+void Window::think() {if (!is_minimal()) Panel::think();}
 
 
 /**
@@ -437,9 +437,9 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
 	//  FIXME usage comment for get_key_state.
 	if
 		(((get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
-		  and
+		  &&
 		  btn == SDL_BUTTON_LEFT)
-		 or
+		 ||
 		 btn == SDL_BUTTON_MIDDLE)
 		is_minimal() ? restore() : minimize();
 	else if (btn == SDL_BUTTON_LEFT) {
@@ -508,7 +508,7 @@ void Window::restore() {
 	move_inside_parent();
 }
 void Window::minimize() {
-	assert(not _is_minimal);
+	assert(!_is_minimal);
 	int32_t y = get_y(), x = get_x();
 	if (_docked_bottom) {
 		y -= BT_B_PIXMAP_THICKNESS; //  Minimal can not be bottom-docked.
@@ -606,21 +606,21 @@ bool Window::handle_mousemove
 					 snap_target;
 					 snap_target = snap_target->get_next_sibling())
 				{
-					if (snap_target != this and snap_target->is_snap_target()) {
+					if (snap_target != this && snap_target->is_snap_target()) {
 						int32_t const other_left  = snap_target->get_x();
 						int32_t const other_top   = snap_target->get_y();
 						int32_t const other_right = other_left + snap_target->get_w();
 						int32_t const other_bot   = other_top  + snap_target->get_h();
 
 						if (other_top <= bot && other_bot >= top) {
-							if (not SOWO || left <= other_right) {
+							if (!SOWO || left <= other_right) {
 								const int32_t distance = abs(left - other_right);
 								if (distance < nearest_snap_distance_x) {
 									nearest_snap_distance_x = distance;
 									new_left = other_right;
 								}
 							}
-							if (not SOWO || right >= other_left) {
+							if (!SOWO || right >= other_left) {
 								const int32_t distance = abs(right - other_left);
 								if (distance < nearest_snap_distance_x) {
 									nearest_snap_distance_x = distance;
@@ -629,14 +629,14 @@ bool Window::handle_mousemove
 							}
 						}
 						if (other_left <= right && other_right >= left) {
-							if (not SOWO || top <= other_bot) {
+							if (!SOWO || top <= other_bot) {
 								const int32_t distance = abs(top - other_bot);
 								if (distance < nearest_snap_distance_y) {
 									nearest_snap_distance_y = distance;
 									new_top = other_bot;
 								}
 							}
-							if (not SOWO || bot >= other_top) {
+							if (!SOWO || bot >= other_top) {
 								const int32_t distance = abs(bot - other_top);
 								if (distance < nearest_snap_distance_y) {
 									nearest_snap_distance_y = distance;
@@ -649,20 +649,20 @@ bool Window::handle_mousemove
 			}
 
 			if (parent->get_dock_windows_to_edges()) {
-				if (new_left <= 0 and new_left >= -VT_B_PIXMAP_THICKNESS) {
+				if (new_left <= 0 && new_left >= -VT_B_PIXMAP_THICKNESS) {
 						new_left = -VT_B_PIXMAP_THICKNESS;
 						_docked_left = true;
 				} else if (_docked_left) {
 					_docked_left = false;
 				}
-				if (new_left >= (max_x - w) and new_left <= (max_x - w) + VT_B_PIXMAP_THICKNESS) {
+				if (new_left >= (max_x - w) && new_left <= (max_x - w) + VT_B_PIXMAP_THICKNESS) {
 					new_left = (max_x - w) + VT_B_PIXMAP_THICKNESS;
 						_docked_right = true;
 				} else if (_docked_right) {
 					_docked_right = false;
 				}
-				if (not _is_minimal) { //  minimal windows can not be bottom-docked
-					if (new_top >= (max_y - h) and new_top <= (max_y - h) + BT_B_PIXMAP_THICKNESS) {
+				if (!_is_minimal) { //  minimal windows can not be bottom-docked
+					if (new_top >= (max_y - h) && new_top <= (max_y - h) + BT_B_PIXMAP_THICKNESS) {
 						new_top = (max_y - h) + BT_B_PIXMAP_THICKNESS;
 							_docked_bottom = true;
 					} else if (_docked_bottom) {

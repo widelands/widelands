@@ -64,15 +64,15 @@ Statebox::~Statebox()
  */
 void Statebox::set_enabled(bool const enabled)
 {
-	if (((m_flags & Is_Enabled) > 1) and enabled)
+	if (((m_flags & Is_Enabled) > 1) && enabled)
 		return;
 
 	set_flags(Is_Enabled, enabled);
 
-	if (not (m_flags & Has_Custom_Picture)) {
+	if (!(m_flags & Has_Custom_Picture)) {
 		m_pic_graphics = g_gr->images().get(enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
 		set_flags
-			(Is_Highlighted, (m_flags & Is_Highlighted) and (m_flags & Is_Enabled));
+			(Is_Highlighted, (m_flags & Is_Highlighted) && (m_flags & Is_Enabled));
 	}
 
 	update();
@@ -85,7 +85,7 @@ void Statebox::set_enabled(bool const enabled)
  * Args: on  true if the checkbox should be checked
  */
 void Statebox::set_state(bool const on) {
-	if (on xor ((m_flags & Is_Checked) > 1)) {
+	if (on ^ ((m_flags & Is_Checked) > 1)) {
 		set_flags(Is_Checked, on);
 		changed();
 		changedto(on);
@@ -136,7 +136,7 @@ void Statebox::draw(RenderTarget & dst)
  */
 void Statebox::handle_mousein(bool const inside) {
 	bool oldhl = m_flags & Is_Highlighted;
-	set_flags(Is_Highlighted, inside and (m_flags & Is_Enabled));
+	set_flags(Is_Highlighted, inside && (m_flags & Is_Enabled));
 
 	if (oldhl != (m_flags & Is_Highlighted))
 		update();
@@ -147,7 +147,7 @@ void Statebox::handle_mousein(bool const inside) {
  * Left-click: Toggle checkbox state
  */
 bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_LEFT and (m_flags & Is_Enabled)) {
+	if (btn == SDL_BUTTON_LEFT && (m_flags & Is_Enabled)) {
 		clicked();
 		return true;
 	} else
