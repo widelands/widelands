@@ -60,7 +60,7 @@ struct Road : public PlayerImmovable {
 	friend class Map_Roaddata_Data_Packet; // For saving
 	friend class Map_Road_Data_Packet; // For init()
 
-	MO_DESCR(Road_Descr);
+	MO_DESCR(Road_Descr)
 
 	static bool IsRoadDescr(Map_Object_Descr const *);
 

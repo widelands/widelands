@@ -117,7 +117,7 @@ Tribe_Descr::Tribe_Descr
                m_worker_types_without_cost.push_back(worker_idx);             \
          PARSE_MAP_OBJECT_TYPES_END;
 
-			PARSE_WORKER_TYPES("carrier", Carrier::Descr);
+			PARSE_WORKER_TYPES("carrier", Carrier_Descr);
 			PARSE_WORKER_TYPES("soldier", Soldier_Descr);
 			PARSE_WORKER_TYPES("worker",  Worker_Descr);
 

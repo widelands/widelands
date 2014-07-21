@@ -67,7 +67,10 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
 	friend struct Router;
 
-	MO_DESCR(Flag_Descr);
+	// NOCOM(#codereview): MO_DESCR() will not work here. It returns a casted
+	// version of m_descr, which is not defined in Flag (or Road). Instead, it
+	// should look something like this. (implementation should be in .cc file).
+	// const Flag_Descr& descr() const { return g_flag_descr; }
 
 	Flag(); /// empty flag for savegame loading
 	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
