@@ -39,7 +39,6 @@ produce=coal
 [out_of_resource_notification]
 title=_Main Coal Vein Exhausted
 message=_This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
-delay_attempts=0
 
 [idle]
 pics=coalmine_i_??.png

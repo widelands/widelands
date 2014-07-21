@@ -31,7 +31,6 @@ produce=raw_stone:2
 [out_of_resource_notification]
 title=_Main Granite Vein Exhausted
 message=_This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it.
-delay_attempts=0
 
 [idle]
 pics=granitemine_i_??.png

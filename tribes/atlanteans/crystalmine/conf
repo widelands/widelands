@@ -86,7 +86,6 @@ return=skipped
 [out_of_resource_notification]
 title=_Main Crystal Vein Exhausted.
 message=_This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it.
-delay_attempts=0
 
 [idle]
 pics=crystalmine_i_??.png
