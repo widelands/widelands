@@ -2,17 +2,18 @@
 --                          Various mission threads
 -- =======================================================================
 
+game = wl.Game()
 -- Mountain and frontier fields
-mountain = wl.Game().map:get_field(71,14)
-fr1 = wl.Game().map:get_field(81,108)
-fr2 = wl.Game().map:get_field(85,1)
-fr3 = wl.Game().map:get_field(85,11)
+mountain = game.map:get_field(71,14)
+fr1 = game.map:get_field(81,108)
+fr2 = game.map:get_field(85,1)
+fr3 = game.map:get_field(85,11)
 
 function check_conquered_footprints()
-    if p1:seen_field(wl.Game().map:get_field(65, 28))
+    if p1:seen_field(game.map:get_field(65, 28))
     then
-        sleep(2134)
-        if p1:sees_field(wl.Game().map:get_field(65, 28))
+        sleep(2129)
+        if p1:sees_field(game.map:get_field(65, 28))
         then return true end
     end
     return false
@@ -26,7 +27,7 @@ function remember_cattlefarm()
    p1:allow_buildings{"cattlefarm"}
    local o = add_obj(obj_build_cattlefarm)
    while not check_for_buildings(p1, {cattlefarm = 1}) do
-      sleep(1234) end
+      sleep(1223) end
    o.done = true
 
 end
@@ -66,7 +67,6 @@ end
 
 function foottracks()
    -- Hunter build and some time passed or expanded east
-   local game = wl.Game()
    while true do
       if game.time > 900000 and #p1:get_buildings("hunters_hut") > 0
       then break end
@@ -76,13 +76,13 @@ function foottracks()
    end
 
    local fields = array_combine(
-      wl.Game().map:get_field(67, 19):region(2),
-      wl.Game().map:get_field(65, 19):region(2),
-      wl.Game().map:get_field(69, 18):region(2)
+      game.map:get_field(67, 19):region(2),
+      game.map:get_field(65, 19):region(2),
+      game.map:get_field(69, 18):region(2)
    )
    p1:reveal_fields(fields)
 
-   local pts = scroll_smoothly_to(wl.Game().map:get_field(67,19))
+   local pts = scroll_smoothly_to(game.map:get_field(67,19))
 
    send_msg(order_msg_2_build_a_donjon)
    local o = add_obj(obj_build_a_donjon)
@@ -92,14 +92,14 @@ function foottracks()
    timed_scroll(array_reverse(pts), 10)
 
    -- Hide the tracks again
-   sleep(5000)
+   sleep(5003)
    p1:hide_fields(fields)
 
    while not check_for_buildings(p1, {donjon=1}) do sleep(2341) end
    o.done = true
    send_msg(order_msg_3_explore_further)
    -- "explore further" is active untill "Boldreth shout out", so the player always has one open objectve.
-   obexp = add_obj(obj_explore_further)
+   exploration_objective = add_obj(obj_explore_further)
 
    p1:allow_buildings{"sentry", "barrier"}
 
@@ -120,12 +120,12 @@ function mining_and_trainingsites()
 
    -- Show the other mountains permanently
    p1:reveal_fields(array_combine(
-      wl.Game().map:get_field(77, 98):region(7),
-      wl.Game().map:get_field(79, 6):region(5),
-      wl.Game().map:get_field(82, 20):region(6))
+      game.map:get_field(77, 98):region(7),
+      game.map:get_field(79, 6):region(5),
+      game.map:get_field(82, 20):region(6))
    )
 
-   local pts = scroll_smoothly_to(wl.Game().map:get_field(82,20))
+   local pts = scroll_smoothly_to(game.map:get_field(82,20))
 
    send_msg(order_msg_4_build_mining_economy)
    local o = add_obj(obj_build_mining_economy)
@@ -228,10 +228,10 @@ end
 function expansion()
    -- While enemy has not been seen
    while not (
-      p1:seen_field(wl.Game().map:get_field(95, 91)) or
-      p1:seen_field(wl.Game().map:get_field(96, 107)) or
-      p1:seen_field(wl.Game().map:get_field(96, 8)) or
-      p1:seen_field(wl.Game().map:get_field(96, 19))
+      p1:seen_field(game.map:get_field(95, 91)) or
+      p1:seen_field(game.map:get_field(96, 107)) or
+      p1:seen_field(game.map:get_field(96, 8)) or
+      p1:seen_field(game.map:get_field(96, 19))
       )
    do sleep(8374) end
 
@@ -244,7 +244,7 @@ function expansion()
    send_msg(story_msg_6)
 end
 
--- checks if not only defeated (no warehouses), but also checks if all millitary buildings are destroyed
+-- checks if all military buildings are drestroyed (the build-in function "defeated" only checks if all warehouses are destroyed)
 function check_player_completly_defeated(dp)
     if #dp:get_buildings("fortress")  > 0 then return false end
     if #dp:get_buildings("citadel")   > 0 then return false end
@@ -257,7 +257,7 @@ end
 
 function kalitath()
    -- While no contact with kalithat
-   local map = wl.Game().map
+   local map = game.map
    while not (
       p1:seen_field(map:get_field( 92,  91)) or
       p1:seen_field(map:get_field(102, 103)) or
@@ -268,7 +268,7 @@ function kalitath()
       )
    do sleep(7834) end
    -- "explore further" is done
-   obexp.done = true
+   exploration_objective.done = true
 
    send_msg(order_msg_7_destroy_kalitaths_army)
    local o = add_obj(obj_destroy_kalitaths_army)
@@ -281,7 +281,7 @@ end
 
 function renegade_fortresses()
    -- Wait till we see the fortresses
-   local map = wl.Game().map
+   local map = game.map
    while not (
       p1:seen_field(map:get_field(111, 88 )) or
       p1:seen_field(map:get_field(110, 97 )) or
@@ -316,14 +316,14 @@ function renegade_fortresses()
    sleep(500)
 
    while not (check_player_completly_defeated(p3) and check_player_completly_defeated(p4)) do
-      sleep(6734)
+      sleep(6733)
    end
 
    o.done = true
 end
 
 function mission_complete()
-   local map = wl.Game().map
+   local map = game.map
    while not (
       check_player_completly_defeated(p2) and
       check_player_completly_defeated(p3) and
