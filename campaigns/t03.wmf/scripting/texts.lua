@@ -35,8 +35,8 @@ obj_build_cattlefarm = {
    title = _ "Build a cattle farm",
    number = 1,
    body = objective_text(_"Remember to build a cattle farm",
-      _"As your roads grow longer and your economy bigger, you should make good use of your oxen to help transport wares more quickly.)" ..
-      listitem_bullet(_"Remember to build a cattle farm!")
+      _"As your roads grow longer and your economy bigger, you should make good use of your oxen to help transport wares more quickly." ..
+      listitem_bullet(_"Remember to build a cattle farm")
    ),
 }
 
