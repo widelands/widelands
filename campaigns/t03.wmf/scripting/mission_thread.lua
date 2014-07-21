@@ -57,7 +57,7 @@ function initial_message_and_small_food_economy()
          well = 1,
          farm = 1,
          bakery = 1,
-      }) do sleep(3412) end
+      }) do sleep(3413) end
    o.done = true
    send_msg(story_note_1)
 
@@ -245,7 +245,7 @@ function expansion()
 end
 
 -- checks if all military buildings are drestroyed (the build-in function "defeated" only checks if all warehouses are destroyed)
-function check_player_completly_defeated(dp)
+function check_player_completely_defeated(dp)
     if #dp:get_buildings("fortress")  > 0 then return false end
     if #dp:get_buildings("citadel")   > 0 then return false end
     if #dp:get_buildings("donjon")    > 0 then return false end
@@ -266,14 +266,14 @@ function kalitath()
       p1:seen_field(map:get_field(103,  17)) or
       p1:seen_field(map:get_field( 96,  30))
       )
-   do sleep(7834) end
+   do sleep(7829) end
    -- "explore further" is done
    exploration_objective.done = true
 
    send_msg(order_msg_7_destroy_kalitaths_army)
    local o = add_obj(obj_destroy_kalitaths_army)
 
-   while not check_player_completly_defeated(p2) do
+   while not check_player_completely_defeated(p2) do
         sleep(7837)
    end
    o.done = true
@@ -290,7 +290,7 @@ function renegade_fortresses()
       p1:seen_field(map:get_field(114, 14 )) or
       p1:seen_field(map:get_field(116, 21 ))
       )
-   do sleep(6834) end
+   do sleep(6833) end
 
    prefilled_buildings(p1,
       {"barrier", 118, 100, soldiers =
@@ -313,9 +313,9 @@ function renegade_fortresses()
    local o = add_obj(obj_military_assault_on_althunran)
 
    timed_scroll(array_reverse(pts))
-   sleep(500)
+   sleep(503)
 
-   while not (check_player_completly_defeated(p3) and check_player_completly_defeated(p4)) do
+   while not (check_player_completely_defeated(p3) and check_player_completely_defeated(p4)) do
       sleep(6733)
    end
 
@@ -325,9 +325,9 @@ end
 function mission_complete()
    local map = game.map
    while not (
-      check_player_completly_defeated(p2) and
-      check_player_completly_defeated(p3) and
-      check_player_completly_defeated(p4)) do
+      check_player_completely_defeated(p2) and
+      check_player_completely_defeated(p3) and
+      check_player_completely_defeated(p4)) do
       sleep(8923)
    end
 
