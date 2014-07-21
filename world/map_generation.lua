@@ -78,17 +78,17 @@ greenland = {
             "alder_summer_old", "birch_summer_old", "beech_summer_old",
             "larch_summer_old", "rowan_summer_old"
          },
-         critters = { "brownbear", "chamois", "stag", "elk", "lynx", "reindeer", "wolf" },
+         critters = { "brownbear", "chamois", "elk", "lynx", "reindeer", "stag", "wildboar", "wolf" },
       },
       {
          name = "bushes",
          immovables = { "bush1", "bush2", "bush3", "bush4", "bush5" },
-         critters = { "wisent", "wolf", "bunny", "elk", "fox", "lynx", "wolf", "marten", "sheep", "sheep" },
+         critters = { "bunny", "elk", "fox", "lynx", "marten", "sheep", "sheep", "wildboar", "wisent", "wolf", "wolf" },
       },
       {
          name = "grasses",
          immovables = { "grass1", "grass2", "grass3" },
-         critters = { "bunny", "elk", "fox", "lynx", "wolf", "marten", "sheep", "sheep" },
+         critters = { "bunny", "elk", "fox", "lynx", "marten", "sheep", "sheep", "wolf" },
       },
       {
          name = "standing_stones",
@@ -264,12 +264,12 @@ blackland = {
             "mushroom_green_wasteland_old", "cirrus_wasteland_old",
             "liana_wasteland_old"
          },
-         critters = { "deer", "reindeer" },
+         critters = { "deer", "reindeer", "wildboar" },
       },
       {
          name = "bushes",
          immovables = { "bush1", "bush2", "bush3", "bush4", "bush5" },
-         critters = { "bunny", "fox", "sheep" },
+         critters = { "bunny", "fox", "sheep", "wildboar" },
       },
       {
          name = "grasses",
