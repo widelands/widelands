@@ -381,7 +381,7 @@ warfare_and_training_01 = {
       p(_[[A soldier is created like any normal worker: a carrier grabs a tool in a warehouse as soon as a request for a certain profession is not fulfilled. The tool to create a barbarian soldier is an ax. Newly created soldiers are of level 0. To make soldiers better in any of the four categories, training is needed.]]) ..
       p(_[[Training happens in training sites like the training camp or the battle arena: soldiers go there (as our little fellows are currently doing), consume some wares and advance a level in one category. If a barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual statistics have the following meaning:]]) ..
       h2(_"Health:") ..
-      p(_[[The total life of a soldier. A barbarian soldier starts with ~130 health points, and with each health level he gains 28 health points.]]) ..
+      p(_[[The total life of a soldier. A barbarian soldier starts with ~130 health, and with each health level he gains 28 health.]]) ..
       h2(_"Attack:") ..
       p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]]) ..
       h2(_"Defense:") ..

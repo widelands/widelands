@@ -106,7 +106,7 @@ obj_build_trainingssites = {
       listitem_bullet(_"Build a battle arena and a training camp to the west of the mountains.") ..
       listitem_arrow(_"Training sites like a training camp or a battle arena are used for training soldiers in their different attributes. These attributes are important in fights and the better a soldier is, the higher is the chance to win a fight." ..
          "<br>" ..
-         _"The attributes are: health points, attack, defense and evade.")
+         _"The attributes are: health, attack, defense and evade.")
    ),
 }
 
