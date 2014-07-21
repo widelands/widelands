@@ -63,7 +63,7 @@ obj_build_mining_economy = {
    title=_"Build a mining infrastructure",
    number = 6,
    body = objective_text(_"Build a mining infrastructure",
-      listitem_bullet(_"Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metalworks.")
+      listitem_bullet(_"Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metal workshop.")
    ),
 }
 
