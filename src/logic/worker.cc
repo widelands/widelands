@@ -597,7 +597,10 @@ void Worker::notify_player
 {
 	if (upcast(ProductionSite, productionsite, &building))
 	{
-		if(!productionsite->descr().out_of_resource_title().empty())
+		if(!productionsite->descr().out_of_resource_title().empty() &&
+			productionsite->get_out_of_resource_delay_counter() >=
+				productionsite->descr().out_of_resource_delay_attempts()
+			)
 		{
 			assert(!productionsite->descr().out_of_resource_message().empty());
 			building.send_message
@@ -608,6 +611,7 @@ void Worker::notify_player
 				 true,
 				 1800000, 0);
 		}
+		productionsite->update_out_of_resource_delay_counter();
 	}
 }
 

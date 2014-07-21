@@ -180,6 +180,12 @@ public:
 
 	void set_default_anim(std::string);
 
+	uint32_t get_out_of_resource_delay_counter() const {
+		return m_out_of_resource_delay_counter;
+	}
+
+	void update_out_of_resource_delay_counter();
+
 protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
@@ -266,6 +272,8 @@ protected:  // TrainingSite must have access to this stuff
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
+private:
+	uint32_t m_out_of_resource_delay_counter;
 };
 
 /**

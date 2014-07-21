@@ -65,7 +65,7 @@ ProductionSite_Descr::ProductionSite_Descr
 	{
 		m_out_of_resource_title = section->get_string("title", "");
 		m_out_of_resource_message = section->get_string("message", "");
-		m_out_of_resource_delay_attempts = section->get_natural("delay_attempts");
+		m_out_of_resource_delay_attempts = section->get_natural("delay_attempts", 0);
 	}
 	else
 	{
@@ -202,6 +202,7 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 {
 	m_statistics_buffer[0] = '\0';
 	m_result_buffer[0] = '\0';
+	m_out_of_resource_delay_counter = 0;
 }
 
 ProductionSite::~ProductionSite() {
@@ -918,6 +919,17 @@ void ProductionSite::set_default_anim(std::string anim)
 		return;
 
 	m_default_anim = anim;
+}
+
+/// Increments the counter that delays the "out of resources" messages.
+/// Resets to 0 if counter >= descr().out_of_resource_delay_attempts()
+void ProductionSite::update_out_of_resource_delay_counter() {
+	if(m_out_of_resource_delay_counter++ >=
+			descr().out_of_resource_delay_attempts()
+		)
+	{
+		m_out_of_resource_delay_counter = 0;
+	}
 }
 
 }
