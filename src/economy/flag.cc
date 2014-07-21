@@ -38,7 +38,7 @@
 
 namespace Widelands {
 
-Map_Object_Descr g_flag_descr("flag", "Flag");
+Flag_Descr g_flag_descr("flag", "Flag");
 
 /**
  * Create the flag. Initially, it doesn't have any attachments.

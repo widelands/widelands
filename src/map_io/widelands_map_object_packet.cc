@@ -111,8 +111,9 @@ void Map_Object_Packet::LoadFinish() {
 	container_iterate_const(LoaderSet, loaders, i) {
 		try {
 			(*i.current)->load_pointers();
-		} catch (const std::exception & e) {
-            throw wexception("load_pointers for %s: %s", (*i.current)->get_object()->descr().type_name(), e.what());
+		} catch (const std::exception& e) {
+			throw wexception(
+			   "load_pointers for %s: %s", (*i.current)->get_object()->descr().type_name(), e.what());
 		}
 	}
 
@@ -120,8 +121,9 @@ void Map_Object_Packet::LoadFinish() {
 	container_iterate_const(LoaderSet, loaders, i) {
 		try {
 			(*i.current)->load_finish();
-		} catch (const std::exception & e) {
-            throw wexception("load_finish for %s: %s", (*i.current)->get_object()->descr().type_name(), e.what());
+		} catch (const std::exception& e) {
+			throw wexception(
+			   "load_finish for %s: %s", (*i.current)->get_object()->descr().type_name(), e.what());
 		}
 		(*i.current)->mol().mark_object_as_loaded(*(*i.current)->get_object());
 	}

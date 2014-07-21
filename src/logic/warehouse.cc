@@ -450,19 +450,19 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			schedule_act
 				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
-    log("Message: adding (wh) (%s) %i \n", descr().type_name(), player.player_number());
-	char message[2048];
-	snprintf
-		(message, sizeof(message),
-		 _("A new %s was added to your economy."),
-		 descr().descname().c_str());
-	send_message
-		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 "warehouse",
-		 descr().descname(),
-		 message,
-		 true);
-	}
+		log("Message: adding (wh) (%s) %i \n", descr().type_name(), player.player_number());
+		char message[2048];
+		snprintf
+			(message, sizeof(message),
+			 _("A new %s was added to your economy."),
+			 descr().descname().c_str());
+		send_message
+			(ref_cast<Game, Editor_Game_Base>(egbase),
+			 "warehouse",
+			 descr().descname(),
+			 message,
+			 true);
+		}
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
 		egbase.conquer_area

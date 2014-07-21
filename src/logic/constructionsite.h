@@ -56,7 +56,9 @@ struct ConstructionSite_Descr : public Building_Descr {
 		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const override;
-    char const * type_name() const override {return "constructionsite";}
+	char const* type_name() const override {
+		return "constructionsite";
+	}
 };
 
 class ConstructionSite : public Partially_Finished_Building {

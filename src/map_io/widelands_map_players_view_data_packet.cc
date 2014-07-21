@@ -29,8 +29,8 @@
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
+#include "logic/flag.h"
 #include "logic/game_data_error.h"
-#include "logic/instances.h" //for g_flag_descr
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"

@@ -53,7 +53,9 @@ struct Warehouse_Descr : public Building_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 
-    char const * type_name() const override {return "warehouse";}
+	char const* type_name() const override {
+		return "warehouse";
+	}
 
 	virtual Building & create_object() const override;
 

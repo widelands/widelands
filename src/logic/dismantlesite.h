@@ -42,13 +42,17 @@ the destructed building.
 class DismantleSite;
 
 struct DismantleSite_Descr : public Building_Descr {
-	DismantleSite_Descr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr & tribe);
+	DismantleSite_Descr(char const* name,
+	                    char const* descname,
+	                    const std::string& directory,
+	                    Profile&,
+	                    Section& global_s,
+	                    const Tribe_Descr& tribe);
 
-	virtual Building & create_object() const override;
-    char const * type_name() const override {return "dismantlesite";}
+	virtual Building& create_object() const override;
+	char const* type_name() const override {
+		return "dismantlesite";
+	}
 };
 
 class DismantleSite : public Partially_Finished_Building {

@@ -96,8 +96,6 @@ void terraform_for_building
 
 namespace Widelands {
 
-extern const Map_Object_Descr g_road_descr;
-
 const RGBColor Player::Colors[MAX_PLAYERS] = {
 	RGBColor(2,     2, 198),  // blue
 	RGBColor(255,  41,   0),  // red

@@ -36,7 +36,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
 
-    char const * type_name() const override {return "trainingsite";}
+	char const* type_name() const override {
+		return "trainingsite";
+	}
 
 	virtual Building & create_object() const override;
 

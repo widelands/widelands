@@ -559,32 +559,31 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	if (!mo)
 		return 0;
 
-	switch  (mo->get_type()) {
-		case Map_Object::BUILDING:
-		{
-            const char * type_name = mo->descr().type_name();
-			if (!strcmp(type_name, "constructionsite"))
-				return CAST_TO_LUA(ConstructionSite);
-			else if (!strcmp(type_name, "productionsite"))
-				return CAST_TO_LUA(ProductionSite);
-			else if (!strcmp(type_name, "militarysite"))
-				return CAST_TO_LUA(MilitarySite);
-			else if (!strcmp(type_name, "warehouse"))
-				return CAST_TO_LUA(Warehouse);
-			else if (!strcmp(type_name, "trainingsite"))
-				return CAST_TO_LUA(TrainingSite);
-			else
-				return CAST_TO_LUA(Building);
-		}
+	switch (mo->get_type()) {
+	case Map_Object::BUILDING: {
+		const char* type_name = mo->descr().type_name();
+		if (!strcmp(type_name, "constructionsite"))
+			return CAST_TO_LUA(ConstructionSite);
+		else if (!strcmp(type_name, "productionsite"))
+			return CAST_TO_LUA(ProductionSite);
+		else if (!strcmp(type_name, "militarysite"))
+			return CAST_TO_LUA(MilitarySite);
+		else if (!strcmp(type_name, "warehouse"))
+			return CAST_TO_LUA(Warehouse);
+		else if (!strcmp(type_name, "trainingsite"))
+			return CAST_TO_LUA(TrainingSite);
+		else
+			return CAST_TO_LUA(Building);
+	}
 
-		case Map_Object::FLAG:
-			return CAST_TO_LUA(Flag);
-		case Map_Object::ROAD:
-			return CAST_TO_LUA(Road);
-		case Map_Object::PORTDOCK:
-			return CAST_TO_LUA(PortDock);
-		default:
-			break;
+	case Map_Object::FLAG:
+		return CAST_TO_LUA(Flag);
+	case Map_Object::ROAD:
+		return CAST_TO_LUA(Road);
+	case Map_Object::PORTDOCK:
+		return CAST_TO_LUA(PortDock);
+	default:
+		break;
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
@@ -1063,7 +1062,7 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 			(RO) the name of the building, e.g. building.
 */
 int L_MapObjectDescription::get_type_name(lua_State * L) {
-    lua_pushstring(L, get()->type_name());
+	lua_pushstring(L, get()->type_name());
 	return 1;
 }
 

@@ -43,7 +43,9 @@ struct Critter_Bob_Descr : public BobDescr {
 	virtual ~Critter_Bob_Descr();
 
 	Bob & create_object() const override;
-    char const * type_name() const override {return "critterbob";}
+	char const* type_name() const override {
+		return "critterbob";
+	}
 
 	bool is_swimming() const;
 	uint32_t movecaps() const override;

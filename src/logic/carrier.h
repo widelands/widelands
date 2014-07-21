@@ -24,33 +24,37 @@
 
 namespace Widelands {
 
+struct Carrier_Descr : public Worker_Descr {
+	Carrier_Descr(char const* const _name,
+	              char const* const _descname,
+	              const std::string& directory,
+	              Profile& prof,
+	              Section& global_s,
+	              const Tribe_Descr& _tribe)
+	   : Worker_Descr(_name, _descname, directory, prof, global_s, _tribe) {
+	}
+
+	virtual Worker_Type get_worker_type() const override {
+		return CARRIER;
+	}
+	// class type needed for Lua stuffl TODO: redundant with get_worker_type()?
+	char const* type_name() const override {
+		return "carrier";
+	}
+
+protected:
+	virtual Bob& create_object() const override {
+		return *new Carrier(*this);
+	}
+};
+
 /**
  * Carrier is a worker who is employed by a Road.
  */
 struct Carrier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
 
-	struct Descr : public Worker_Descr {
-		Descr
-			(char const * const _name, char const * const _descname,
-			 const std::string & directory, Profile & prof, Section & global_s,
-			 const Tribe_Descr & _tribe)
-			:
-				Worker_Descr
-					(_name, _descname, directory,
-					 prof, global_s, _tribe)
-		{}
-
-		virtual Worker_Type get_worker_type() const override {return CARRIER;}
-		// class type needed for Lua stuffl TODO: redundant with get_worker_type()?
-        char const * type_name() const override {return "carrier";}
-
-	protected:
-		virtual Bob & create_object() const override {return *new Carrier(*this);}
-	};
-
-
-	Carrier(const Descr & carrier_descr)
+	Carrier(const Carrier_Descr & carrier_descr)
 		: Worker(carrier_descr), m_promised_pickup_to(-1)
 	{}
 	virtual ~Carrier() {}
@@ -65,7 +69,7 @@ struct Carrier : public Worker {
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
 private:
-	MO_DESCR(Descr)
+	MO_DESCR(Carrier_Descr)
 
 	void find_pending_ware(Game &);
 	int32_t find_closest_flag(Game &);

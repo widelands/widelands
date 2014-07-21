@@ -118,7 +118,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 
 	~Immovable_Descr();
 
-    char const * type_name() const override {return "immovable";}
+	char const* type_name() const override {
+		return "immovable";
+	}
 
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;

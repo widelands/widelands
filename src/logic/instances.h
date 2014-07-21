@@ -58,7 +58,8 @@ struct Map_Object_Descr {
 	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-    virtual char const * type_name() const {
+	// NOCOM(#codereview): This should return const std::string&. Also declare the derived methods as 'override' if you have not already.
+	virtual char const* type_name() const {
 		return "mapobject";
 	}
 
@@ -107,13 +108,6 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(Map_Object_Descr);
 };
-
-/**
- * dummy instance because Map_Object needs a description
- * \todo move this to another header??
- */
-extern Map_Object_Descr g_flag_descr;
-extern Map_Object_Descr g_portdock_descr;
 
 /**
  * \par Notes on Map_Object
