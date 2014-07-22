@@ -55,7 +55,7 @@ struct ConstructionSite_Descr : public Building_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe);
-	virtual ~ConstructionSite_Descr() override {};
+	virtual ~ConstructionSite_Descr() override {}
 	const std::string& type_name() const override {return m_typename;}
 	virtual Building & create_object() const override;
 

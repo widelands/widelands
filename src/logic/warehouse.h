@@ -53,7 +53,7 @@ struct Warehouse_Descr : public Building_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	virtual ~Warehouse_Descr() override {};
+	virtual ~Warehouse_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

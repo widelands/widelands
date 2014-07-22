@@ -38,7 +38,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
-	virtual ~MilitarySite_Descr() override {};
+	virtual ~MilitarySite_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

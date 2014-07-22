@@ -58,7 +58,7 @@ public:
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
 				Tribe_Descr const* tribe);
-	virtual ~BobDescr() override {};
+	virtual ~BobDescr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

@@ -40,7 +40,7 @@ public:
 	Map_Object_Descr(_name, _descname),
 	m_typename      ("flag")
 	{}
-	virtual ~Flag_Descr() override {};
+	virtual ~Flag_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

@@ -38,7 +38,7 @@ class ExpeditionBootstrap;
 class PortDock_Descr : public Map_Object_Descr {
 public:
 	PortDock_Descr(char const* const _name, char const* const _descname);
-	virtual ~PortDock_Descr() override {};
+	virtual ~PortDock_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

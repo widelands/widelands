@@ -32,7 +32,7 @@ public:
 		m_typename      ("battle")
 	{
 	}
-	virtual ~Battle_Descr() override {};
+	virtual ~Battle_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

@@ -39,7 +39,7 @@ public:
 		Map_Object_Descr(_name, _descname),
 		m_typename      ("road")
 	{}
-	virtual ~Road_Descr() override {};
+	virtual ~Road_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

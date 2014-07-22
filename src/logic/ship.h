@@ -42,7 +42,7 @@ struct Ship_Descr : BobDescr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	virtual ~Ship_Descr() override {};
+	virtual ~Ship_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

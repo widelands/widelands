@@ -45,7 +45,7 @@ struct Soldier_Descr : public Worker_Descr {
 		(char const * const _name, char const * const _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	virtual ~Soldier_Descr() override {};
+	virtual ~Soldier_Descr() override {}
 
 	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
 	// NOTE as well defined in an enum in instances.h

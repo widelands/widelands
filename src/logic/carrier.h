@@ -37,7 +37,7 @@ struct Carrier_Descr : public Worker_Descr {
 		m_typename  ("carrier")
 	{
 	}
-	virtual ~Carrier_Descr() override {};
+	virtual ~Carrier_Descr() override {}
 
 	virtual Worker_Type get_worker_type() const override {return Worker_Descr::CARRIER;}
 

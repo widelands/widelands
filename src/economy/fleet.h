@@ -40,7 +40,7 @@ public:
 		Map_Object_Descr(_name, _descname),
 		m_typename      ("fleet")
 	{}
-	virtual ~Fleet_Descr() override {};
+	virtual ~Fleet_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

@@ -65,7 +65,7 @@ struct Building_Descr : public Map_Object_Descr {
 		(char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	virtual ~Building_Descr() override {};
+	virtual ~Building_Descr() override {}
 
 	const std::string& type_name() const override {return m_typename;}
 

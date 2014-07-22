@@ -49,7 +49,7 @@ struct DismantleSite_Descr : public Building_Descr {
 	                    Profile&,
 	                    Section& global_s,
 							  const Tribe_Descr& tribe);
-	virtual ~DismantleSite_Descr() override {};
+	virtual ~DismantleSite_Descr() override {}
 	const std::string& type_name() const override {return m_typename;}
 	virtual Building& create_object() const override;
 
