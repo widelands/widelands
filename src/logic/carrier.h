@@ -71,8 +71,6 @@ struct Carrier : public Worker {
 
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
-	// NOCOM(GunChleoc) I had to change this from private to public
-	// to make the compiler happy - it's used in road.cc
 	static Task const taskRoad;
 
 private:
