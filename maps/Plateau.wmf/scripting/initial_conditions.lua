@@ -134,7 +134,7 @@ prefilled_buildings(p2,
 p3:forbid_buildings("all")
 p3:allow_buildings{
    "lumberjacks_hut",
-   "burners_house",
+   "charcoal_furnace",
    "quarry",
    "rangers_hut",
    "hardener",
