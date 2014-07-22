@@ -1629,6 +1629,23 @@ const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] 
 	{nullptr, nullptr, nullptr},
 };
 
+
+void L_WareDescription::__persist(lua_State* L) {
+	const WareDescr* descr = get();
+	PERS_STRING("tribe", descr->tribe().name());
+	PERS_STRING("name", descr->name());
+}
+
+void L_WareDescription::__unpersist(lua_State* L) {
+	std::string name, tribe_name;
+	UNPERS_STRING("tribe", tribe_name);
+	UNPERS_STRING("name", name);
+	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
+	Ware_Index idx = tribe->safe_ware_index(name.c_str());
+	set_description_pointer(tribe->get_ware_descr(idx));
+}
+
+
 /*
  ==========================================================
  PROPERTIES
@@ -1646,40 +1663,6 @@ int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
 	lua_pushinteger(L, descr->get_heal_per_second());
 	return 1;
 }
-
-/* RST
-ImmovableDescription
----------------
-
-.. class:: ImmovableDescription
-
-	A static description of a tribe's immovable, so it can be used in scripts
-	without having to access an actual instance of the immovable on the map.
-	See also class MapObjectDescription for more properties.
-*/
-const char L_ImmovableDescription::className[] = "ImmovableDescription";
-const MethodType<L_ImmovableDescription> L_ImmovableDescription::Methods[] = {
-	{nullptr, nullptr},
-};
-const PropertyType<L_ImmovableDescription> L_ImmovableDescription::Properties[] = {
-	{nullptr, nullptr, nullptr},
-};
-
-
-void L_ImmovableDescription::__persist(lua_State* /* L */) {
-}
-
-void L_ImmovableDescription::__unpersist(lua_State*  /* L */) {
-}
-
-
-/*
- ==========================================================
- PROPERTIES
- ==========================================================
- */
-
-
 
 /* RST
 WareDescription
@@ -1700,23 +1683,6 @@ const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
 	PROP_RO(L_WareDescription, consumers),
 	{nullptr, nullptr, nullptr},
 };
-
-
-void L_WareDescription::__persist(lua_State* L) {
-	const WareDescr* descr = get();
-	PERS_STRING("tribe", descr->tribe().name());
-	PERS_STRING("name", descr->name());
-}
-
-void L_WareDescription::__unpersist(lua_State* L) {
-	std::string name, tribe_name;
-	UNPERS_STRING("tribe", tribe_name);
-	UNPERS_STRING("name", name);
-	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
-	Ware_Index idx = tribe->safe_ware_index(name.c_str());
-	set_description_pointer(tribe->get_ware_descr(idx));
-}
-
 
 /*
  ==========================================================
@@ -4065,10 +4031,6 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_WarehouseDescription>(L, "map", true);
 	add_parent<L_WarehouseDescription, L_BuildingDescription>(L);
 	add_parent<L_WarehouseDescription, L_MapObjectDescription>(L);
-	lua_pop(L, 1); // Pop the meta table
-
-	register_class<L_ImmovableDescription>(L, "map", true);
-	add_parent<L_ImmovableDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_WareDescription>(L, "map", true);

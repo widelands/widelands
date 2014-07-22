@@ -174,39 +174,9 @@ int L_EditorGameBase::get_building_description(lua_State* L) {
 
 
 /* RST
-	.. function:: get_immovable_description(tribename, immovable_description.name)
-
-		:arg tribe_name: the name of the tribe that this immovable belongs to
-		:arg immovable_name: the name of the immovable
-
-		Registers an immovable description so Lua can reference it from the game.
-
-		(RO) The :class:`~wl.Game.Ware_description`.
-*/
-int L_EditorGameBase::get_immovable_description(lua_State* L) {
-	if (lua_gettop(L) != 3) {
-		report_error(L, "Wrong number of arguments");
-	}
-	const std::string tribe_name = luaL_checkstring(L, 2);
-	const std::string immovable_name = luaL_checkstring(L, 3);
-	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
-	if (!tribe_description) {
-		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
-	}
-	int32_t immovable_index = tribe_description->get_immovable_index(immovable_name);
-	if (immovable_index == INVALID_INDEX) {
-		report_error(L, "Immovable %s does not exist", immovable_name.c_str());
-	}
-	const Immovable_Descr* immovable_description = tribe_description->get_immovable_descr(immovable_index);
-	return to_lua<LuaMap::L_ImmovableDescription>(L, new LuaMap::L_ImmovableDescription(immovable_description));
-}
-
-
-
-/* RST
 	.. function:: get_ware_description(tribename, ware_description.name)
 
-		:arg tribe_name: the name of the tribe that this ware belongs to
+		:arg tribe_name: the name of the tribe that this building belongs to
 		:arg ware_name: the name of the ware
 
 		Registers a ware description so Lua can reference it from the game.
@@ -235,7 +205,7 @@ int L_EditorGameBase::get_ware_description(lua_State* L) {
 /* RST
 	.. function:: get_worker_description(tribename, worker_description.name)
 
-		:arg tribe_name: the name of the tribe that this worker belongs to
+		:arg tribe_name: the name of the tribe that this building belongs to
 		:arg worker_name: the name of the worker
 
 		Registers a worker description so Lua can reference it from the game.

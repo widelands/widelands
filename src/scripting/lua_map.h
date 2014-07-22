@@ -356,39 +356,6 @@ private:
 
 
 
-class L_ImmovableDescription : public L_MapObjectDescription {
-public:
-	LUNA_CLASS_HEAD(L_ImmovableDescription);
-
-	virtual ~L_ImmovableDescription() {}
-
-	L_ImmovableDescription()  {}
-	L_ImmovableDescription(const Widelands::Immovable_Descr* const immovabledescr)
-		: L_MapObjectDescription(immovabledescr) {}
-	L_ImmovableDescription(lua_State* L) : L_MapObjectDescription(L) {
-	}
-
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
-
-	/*
-	 * Properties
-	 */
-
-	/*
-	 * Lua methods
-	 */
-
-	/*
-	 * C methods
-	 */
-
-private:
-	CASTED_GET_DESCRIPTION(Immovable_Descr)
-};
-
-
-
 class L_WareDescription : public L_MapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(L_WareDescription);
