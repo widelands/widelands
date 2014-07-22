@@ -592,6 +592,15 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 }
 
 // Informs the player about a building that cannot find resources any more,
+// NOCOM(#codereview): It now becomes apparent that this method does not really
+// belong to the worker anymore: it does not use any data of the worker (so it
+// should be a stand alone method in an anonymous namespace, not in the class).
+// But it has to query the productionsite for a lot of its data. I suggest:
+// make notify_player() a function in the anonymous namespace and add a
+// ProductionSite::worker_failed_to_find_resource() or similar method that
+// sends the message and handles the counter. You can get rid of the getters
+// for most of the new properties then and the productionsite does not need to
+// show so much implementation to the world.
 void Worker::notify_player
 	(Game & game, Building & building, std::string res_type) const
 {

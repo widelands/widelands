@@ -921,8 +921,6 @@ void ProductionSite::set_default_anim(std::string anim)
 	m_default_anim = anim;
 }
 
-/// Increments the counter that delays the "out of resources" messages.
-/// Resets to 0 if counter >= descr().out_of_resource_delay_attempts()
 void ProductionSite::update_out_of_resource_delay_counter() {
 	if(m_out_of_resource_delay_counter++ >=
 			descr().out_of_resource_delay_attempts()

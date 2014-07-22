@@ -26,6 +26,7 @@
 #include <string>
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/building.h"
 #include "logic/production_program.h"
@@ -184,6 +185,8 @@ public:
 		return m_out_of_resource_delay_counter;
 	}
 
+	/// Increments the counter that delays the "out of resources" messages.
+	/// Resets to 0 if counter >= descr().out_of_resource_delay_attempts()
 	void update_out_of_resource_delay_counter();
 
 protected:
@@ -272,8 +275,11 @@ protected:  // TrainingSite must have access to this stuff
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
+
 private:
 	uint32_t m_out_of_resource_delay_counter;
+
+	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
 
 /**
