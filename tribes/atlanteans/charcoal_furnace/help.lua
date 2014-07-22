@@ -1,4 +1,4 @@
--- The Atlantean Charcoal Burner's House
+-- The Atlantean Charcoal Furnace
 
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"

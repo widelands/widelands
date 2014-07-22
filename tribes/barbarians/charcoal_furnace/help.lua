@@ -1,4 +1,4 @@
--- The Barbarian Charcoal Burner's House
+-- The Barbarian Charcoal Furnace
 
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"

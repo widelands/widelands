@@ -1,4 +1,4 @@
--- The Imperial Charcoal Burner's House
+-- The Imperial Charcoal Furnace
 
 include "scripting/formatting.lua"
 include "scripting/format_help.lua"
