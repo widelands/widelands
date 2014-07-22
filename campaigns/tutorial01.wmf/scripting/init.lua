@@ -356,7 +356,7 @@ function allow_constructionsite(i, buildings)
          if i.building == n then return i end
       end
       return false
-   elseif i.name == "flag" then
+   elseif i.descr.type_name == "flag" then
       local tr = i.fields[1].tln.immovable
       if tr and tr.descr.type_name == "constructionsite" then
          return allow_constructionsite(tr, buildings)
@@ -506,7 +506,7 @@ function build_a_quarry()
 
    local function _rip_road()
       for idx,f in ipairs(cs.fields[1].brn:region(2)) do
-         if f.immovable and f.immovable.name == "road" then
+         if f.immovable and f.immovable.descr.type_name == "road" then
             click_on_field(f)
             click_on_panel(wl.ui.MapView().windows.
                field_action.buttons.destroy_road, 300)
