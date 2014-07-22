@@ -411,10 +411,6 @@ Immovable::~Immovable()
 {
 }
 
-int32_t Immovable::get_type() const
-{
-	return IMMOVABLE;
-}
 
 BaseImmovable::PositionList Immovable::get_positions
 	(const Editor_Game_Base &) const

@@ -74,8 +74,6 @@ class Critter_Bob : public Bob {
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
 
-	virtual Bob::Type get_bob_type() const override {return Bob::CRITTER;}
-
 	virtual void init_auto_task(Game &) override;
 
 	void start_task_program(Game &, const std::string & name);

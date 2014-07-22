@@ -444,7 +444,7 @@ struct Cmd_SetWarePriority : public PlayerCommand {
 
 private:
 	Serial m_serial;
-	int32_t m_type; ///< this is always WARE right now
+	int32_t m_type; ///< this is always 0 right now
 	Ware_Index m_index;
 	int32_t m_priority;
 };

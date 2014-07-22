@@ -85,10 +85,6 @@ struct Ship : Bob {
 	// the last visited was removed.
 	PortDock* get_lastdock(Editor_Game_Base& egbase) const;
 
-
-
-	virtual Type get_bob_type() const override;
-
 	Economy * get_economy() const {return m_economy;}
 	void set_economy(Game &, Economy * e);
 	void set_destination(Game &, PortDock &);

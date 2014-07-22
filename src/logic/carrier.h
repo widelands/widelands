@@ -39,9 +39,6 @@ struct Carrier_Descr : public Worker_Descr {
 	}
 	virtual ~Carrier_Descr() override {}
 
-	virtual Worker_Type get_worker_type() const override {return Worker_Descr::CARRIER;}
-
-	// class type needed for Lua stuffl TODO NOCOM: redundant with get_worker_type()?
 	const std::string& type_name() const override {return m_typename;}
 
 protected:

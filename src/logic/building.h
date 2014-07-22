@@ -183,7 +183,6 @@ public:
 
 	void load_finish(Editor_Game_Base &) override;
 
-	virtual int32_t  get_type    () const override;
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 

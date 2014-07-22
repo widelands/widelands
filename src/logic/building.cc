@@ -318,8 +318,6 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 	   m_leave_queue.end());
 }
 
-int32_t Building::get_type() const {return BUILDING;}
-
 int32_t Building::get_size() const {return descr().get_size();}
 
 bool Building::get_passable() const {return false;}
