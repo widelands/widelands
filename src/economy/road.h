@@ -93,6 +93,7 @@ struct Road : public PlayerImmovable {
 
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
 
+	virtual int32_t  get_type    () const override;
 	uint8_t get_roadtype() const {return m_type;}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;

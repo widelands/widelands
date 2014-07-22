@@ -21,7 +21,6 @@
 #define WL_LOGIC_FINDIMMOVABLE_H
 
 #include <stdint.h>
-#include <string>
 
 namespace Widelands {
 
@@ -92,14 +91,13 @@ struct FindImmovableSize {
 private:
 	int32_t m_min, m_max;
 };
-
 struct FindImmovableType {
-	FindImmovableType(char * _typename) : m_typename(_typename) {}
+	FindImmovableType(int32_t const type) : m_type(type) {}
 
 	bool accept(const BaseImmovable &) const;
 
 private:
-	std::string const m_typename;
+	int32_t m_type;
 };
 struct FindImmovableAttribute {
 	FindImmovableAttribute(uint32_t const attrib) : m_attrib(attrib) {}

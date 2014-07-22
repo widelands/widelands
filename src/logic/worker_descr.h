@@ -44,6 +44,12 @@ class Worker_Descr : public BobDescr
 public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
+	enum Worker_Type {
+		NORMAL = 0,
+		CARRIER,
+		SOLDIER,
+	};
+
 	Worker_Descr
 		(char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
@@ -92,6 +98,8 @@ public:
 		return carries_ware ? m_walkload_anims : m_walk_anims;
 	}
 	WorkerProgram const * get_program(const std::string &) const;
+
+	virtual Worker_Type get_worker_type() const {return NORMAL;}
 
 	// For leveling
 	int32_t get_level_experience() const {return m_level_experience;}

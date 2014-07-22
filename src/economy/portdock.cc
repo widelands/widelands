@@ -106,6 +106,11 @@ bool PortDock::get_passable() const
 	return true;
 }
 
+int32_t PortDock::get_type() const
+{
+	return PORTDOCK;
+}
+
 PortDock::PositionList PortDock::get_positions
 	(const Editor_Game_Base &) const
 {

@@ -93,6 +93,10 @@ Ship::~Ship() {
 	close_window();
 }
 
+Bob::Type Ship::get_bob_type() const {
+	return SHIP;
+}
+
 PortDock* Ship::get_destination(Editor_Game_Base& egbase) const {
 	return m_destination.get(egbase);
 }

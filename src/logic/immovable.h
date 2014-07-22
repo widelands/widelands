@@ -181,6 +181,7 @@ public:
 	Coords get_position() const {return m_position;}
 	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
+	virtual int32_t  get_type    () const override;
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);

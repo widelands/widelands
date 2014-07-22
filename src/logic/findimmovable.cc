@@ -43,7 +43,7 @@ bool FindImmovableSize              ::accept(const BaseImmovable & imm) const {
 }
 
 bool FindImmovableType              ::accept(const BaseImmovable & imm) const {
-	return m_typename == imm.descr().type_name();
+	return m_type == imm.get_type();
 }
 
 bool FindImmovableAttribute         ::accept(const BaseImmovable & imm) const {

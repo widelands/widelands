@@ -64,6 +64,11 @@ Fleet::Fleet(Player & player) :
 {
 }
 
+int32_t Fleet::get_type() const
+{
+	return FLEET;
+}
+
 /**
  * Whether the fleet is in fact useful for transporting goods.
  */
@@ -160,7 +165,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (BaseImmovable * imm = cur.field->get_immovable()) {
-			if (imm->descr().type_name() == "portdock") {
+			if (imm->get_type() == PORTDOCK) {
 				if (upcast(PortDock, dock, imm)) {
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 						dock->get_fleet()->merge(egbase, this);
@@ -171,7 +176,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 		}
 
 		for (Bob * bob = cur.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
-			if (bob->descr().type_name() == "ship")
+			if (bob->get_bob_type() != Bob::SHIP)
 				continue;
 
 			if (upcast(Ship, ship, bob)) {
@@ -464,7 +469,7 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 	FCoords cur;
 	while (!se.targets.empty() && astar.step(cur, cost)) {
 		BaseImmovable * imm = cur.field->get_immovable();
-		if (!imm || imm->descr().type_name() != "portdock")
+		if (!imm || imm->get_type() != PORTDOCK)
 			continue;
 
 		if (upcast(PortDock, pd, imm)) {

@@ -49,17 +49,20 @@ void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** wor
 	}
 
 	if (Map_Object* obj = m_object.get(game)) {
-		const std::string& type_name = obj->descr().type_name();
-		if (type_name == "ware") {
-			if (ware)
+		switch (obj->get_type()) {
+		case Map_Object::WARE:
+			if (ware) {
 				*ware = dynamic_cast<WareInstance*>(obj);
-		}
-		else if (type_name == "worker") {
-			if (worker)
+			}
+			break;
+		case Map_Object::BOB:
+			if (worker) {
 				*worker = dynamic_cast<Worker*>(obj);
-		}
-		else {
+			}
+			break;
+		default:
 			assert(false);  // never here or unknown map object being shipped.
+			break;
 		}
 	}
 }

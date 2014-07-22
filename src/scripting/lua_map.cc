@@ -540,18 +540,18 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 	if (!mo)
 		return 0;
 
-	const std::string& type_name = mo->descr().type_name();
-	if (type_name == "critterbob")
-		return to_lua<L_Bob>(L, new L_Bob(*mo));
-	else if (type_name == "ship")
-		return CAST_TO_LUA(Ship);
-	else if (type_name == "soldier")
-		return CAST_TO_LUA(Soldier);
-	else if (type_name == "worker")
-		return CAST_TO_LUA(Worker);
-	else {
-		assert(false);  // Never here, hopefully.
-		return 0;
+	switch (mo->get_bob_type()) {
+		case Bob::CRITTER:
+			return to_lua<L_Bob>(L, new L_Bob(*mo));
+		case Bob::WORKER:
+			if (mo->descr().name() == "soldier")
+				return CAST_TO_LUA(Soldier);
+			return CAST_TO_LUA(Worker);
+		case Bob::SHIP:
+			return CAST_TO_LUA(Ship);
+		default:
+			assert(false);  // Never here, hopefully.
+			return 0;
 	}
 }
 
@@ -588,18 +588,21 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const desc) {
 	assert(desc != nullptr);
 
-	const std::string& type_name = desc->type_name();
-	if (type_name == "militarysite")
+	if (is_a(MilitarySite_Descr, desc)) {
 		return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
-	else if (type_name == "trainingsite")
+	}
+	else if (is_a(TrainingSite_Descr, desc)) {
 		return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
-	else if (type_name == "productionsite")
+	}
+	else if (is_a(ProductionSite_Descr, desc)) {
 		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
-	else if (type_name ==  "constructionsite")
+	}
+	else if (is_a(ConstructionSite_Descr, desc)) {
 		return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
-	else if (type_name == "warehouse")
+	}
+	else if (is_a(Warehouse_Descr, desc)) {
 		return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
-
+	}
 	return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
 }
 #undef CAST_TO_LUA
@@ -1974,6 +1977,8 @@ int L_MapObject::get_name(lua_State * L) {
         (RO) The description object for this immovable, e.g. BuildingDescription.
 */
 int L_MapObject::get_descr(lua_State * L) {
+	//TODO(GunChleoc) Flag_Descr would be nice for getting the type of immovables,
+	// at the moment the type for these can be faked by using their name instead
 	const Map_Object_Descr* desc = &get(L, get_egbase(L))->descr();
 	assert(desc != nullptr);
 

@@ -57,6 +57,7 @@ public:
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	// Implements Map_Object.
+	virtual int32_t get_type() const override {return BATTLE;}
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;
 	virtual bool has_new_save_support() override {return true;}

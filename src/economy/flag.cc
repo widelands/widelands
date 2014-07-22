@@ -150,6 +150,11 @@ void Flag::set_flag_position(Coords coords) {
 	m_position = coords;
 }
 
+int32_t Flag::get_type() const
+{
+	return FLAG;
+}
+
 int32_t Flag::get_size() const
 {
 	return SMALL;

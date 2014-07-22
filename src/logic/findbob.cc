@@ -44,12 +44,12 @@ bool FindBobEnemySoldier::accept(Bob * const imm) const
 
 bool FindBobShip::accept(Bob * bob) const
 {
-	return bob->descr().type_name() == "ship";
+	return bob->get_bob_type() == Bob::SHIP;
 }
 
 bool FindBobCritter::accept(Bob * bob) const
 {
-	return bob->descr().type_name() == "critterbob";
+	return bob->get_bob_type() == Bob::CRITTER;
 }
 
 

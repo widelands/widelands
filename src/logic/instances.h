@@ -151,6 +151,23 @@ class Map_Object {
 	MO_DESCR(Map_Object_Descr)
 
 public:
+	enum {
+		AREAWATCHER,
+		BOB,  //  class Bob
+
+		WARE, //  class WareInstance
+		BATTLE,
+		FLEET,
+
+		// everything below is at least a BaseImmovable
+		IMMOVABLE,
+
+		// everything below is at least a PlayerImmovable
+		BUILDING,
+		FLAG,
+		ROAD,
+		PORTDOCK
+	};
 	/// Some default, globally valid, attributes.
 	/// Other attributes (such as "harvestable corn") could be
 	/// allocated dynamically (?)
@@ -175,6 +192,9 @@ protected:
 	virtual ~Map_Object() {}
 
 public:
+	// NOCOM(GunChleoc) remove this?
+	virtual int32_t get_type() const = 0;
+
 	Serial serial() const {return m_serial;}
 
 	/**

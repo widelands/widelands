@@ -88,6 +88,8 @@ struct Fleet : Map_Object {
 
 	bool active() const;
 
+	virtual int32_t get_type() const override;
+
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;
 	void update(Editor_Game_Base &);

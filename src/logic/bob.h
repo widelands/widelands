@@ -161,6 +161,7 @@ public:
 	struct State;
 	typedef void (Bob::*Ptr)(Game &, State &);
 	typedef void (Bob::*PtrSignal)(Game &, State &, const std::string &);
+	enum Type {CRITTER, WORKER, SHIP};
 
 	/// \see struct Bob for in-depth explanation
 	struct Task {
@@ -228,6 +229,9 @@ public:
 
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
+
+	virtual int32_t get_type() const override {return BOB;}
+	virtual Type get_bob_type() const = 0;
 
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;
