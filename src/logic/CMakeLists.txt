@@ -1,6 +1,7 @@
 wl_binary(wl_map_info
   SRCS
     map_info.cc
+  USES_SDL
   DEPENDS
     base_log
     graphic
