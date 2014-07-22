@@ -115,7 +115,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
 		game.world().get_resource(action.sparam1.c_str());
-	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
+	if (static_cast<int8_t>(res) == -1) //  TODO(unknown) ARGH!!
 		throw game_data_error
 			(_
 			 	("should mine resource %s, which does not exist in world; tribe "
@@ -206,7 +206,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
  * \param action Which resource to breed (action.sparam1) and where to put
  * it (in a radius of action.iparam1 around current location)
  *
- * FIXME: in FindNodeResourceBreedable, the node (or neighbors) is accepted if it is breedable.
+ * TODO(unknown) in FindNodeResourceBreedable, the node (or neighbors) is accepted if it is breedable.
  * In here, breeding may happen on a node emptied of resource.
  * \todo Lots of magic numbers in here
  * \todo Document parameters g and state
@@ -220,7 +220,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
 		game.world().get_resource(action.sparam1.c_str());
-	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
+	if (static_cast<int8_t>(res) == -1) //  TODO(unknown) ARGH!!
 		throw game_data_error
 			(_
 			 	("should breed resource type %s, which does not exist in world; "
@@ -496,23 +496,24 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
  * Find only nodes that are walkable such that all neighbours
  * are also walkable (an exception is made if one of the neighbouring
  * fields is owned by this worker's location).
- * FIXME This is an embarrasingly ugly hack to make bug #1796611 happen less
- * FIXME often. But it gives no passability guarantee (that workers will not
- * FIXME get locked in). For example one farmer may call findspace and then,
- * FIXME before he plants anything, another farmer may call findspace, which
- * FIXME may find a space without considering that the first farmer will plant
- * FIXME something. Together they can cause a passability problem. This code
- * FIXME will also allow blocking the shoreline if it is next to the worker's
- * FIXME location. Also, the gap of 2 nodes between 2 farms will be blocked,
- * FIXME because both are next to their farm. The only real solution that I can
- * FIXME think of for this kind of bugs is to only allow unpassable objects to
- * FIXME be placed on a node if ALL neighbouring nodes are passable. This must
- * FIXME of course be checked at the moment when the object is placed and not,
- * FIXME as in this case, only before a worker starts walking there to place an
- * FIXME object. But that would make it very difficult to find space for things
- * FIXME like farm fileds. So our only option seems to be to keep all farm
- * FIXME fields, trees, stones and such on triangles and keep the nodes
- * FIXME passable. See code structure issue #1096824.
+ *
+ * TODO(unknown) This is an embarrasingly ugly hack to make bug #1796611 happen less
+ * often. But it gives no passability guarantee (that workers will not
+ * get locked in). For example one farmer may call findspace and then,
+ * before he plants anything, another farmer may call findspace, which
+ * may find a space without considering that the first farmer will plant
+ * something. Together they can cause a passability problem. This code
+ * will also allow blocking the shoreline if it is next to the worker's
+ * location. Also, the gap of 2 nodes between 2 farms will be blocked,
+ * because both are next to their farm. The only real solution that I can
+ * think of for this kind of bugs is to only allow unpassable objects to
+ * be placed on a node if ALL neighbouring nodes are passable. This must
+ * of course be checked at the moment when the object is placed and not,
+ * as in this case, only before a worker starts walking there to place an
+ * object. But that would make it very difficult to find space for things
+ * like farm fileds. So our only option seems to be to keep all farm
+ * fields, trees, stones and such on triangles and keep the nodes
+ * passable. See code structure issue #1096824.
  *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
@@ -605,7 +606,7 @@ void Worker::informPlayer
 	if (building.descr().name() == "fish_breeders_house")
 		return;
 
-	// TODO "stone" is defined as "granite" in the world. But this code is
+	// TODO(unknown) "stone" is defined as "granite" in the world. But this code is
 	// erroneus anyways: it translates immovable attribute stone as resource
 	// granite. Instead, the immovable attributes should be made translatable in
 	// the world or the quarry should define its out of stone message in its
@@ -759,10 +760,10 @@ bool Worker::run_object(Game & game, State & state, const Action & action)
 		immovable->switch_program(game, action.sparam1);
 	else if (upcast(Bob,       bob,       obj)) {
 		if        (upcast(Critter_Bob, crit, bob)) {
-			crit->reset_tasks(game); //  TODO ask the critter more nicely
+			crit->reset_tasks(game); //  TODO(unknown) ask the critter more nicely
 			crit->start_task_program(game, action.sparam1);
 		} else if (upcast(Worker,      w,    bob)) {
-			w   ->reset_tasks(game); //  TODO  ask the worker more nicely
+			w   ->reset_tasks(game); //  TODO(unknown) ask the worker more nicely
 			w   ->start_task_program(game, action.sparam1);
 		} else
 			throw wexception
@@ -2759,7 +2760,7 @@ void Worker::geologist_update(Game & game, State & state)
 					 	 descr().get_right_walk_anims(does_carry_ware())))
 				{
 
-					molog("[geologist]: BUG: could not find path\n");
+					molog("[geologist]: BUG(unknown): could not find path\n");
 					send_signal(game, "fail");
 					return pop_task(game);
 				}

@@ -137,7 +137,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
 	catch (FileType_error &) {
-		//TODO: handle me
+		//TODO(unknown): handle me
 	}
 
 	try {
@@ -152,7 +152,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
 	catch (FileType_error &) {
-		//TODO: handle me
+		//TODO(unknown): handle me
 	}
 
 	try {
@@ -170,10 +170,10 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
 	catch (FileType_error &) {
-		//TODO: handle me
+		//TODO(unknown): handle me
 	}
 
-	//TODO: what if all the searching failed? Bail out!
+	//TODO(unknown): what if all the searching failed? Bail out!
 
 	// the directory the executable is in is the default game data directory
 	std::string::size_type slash = argv0.rfind('/');
@@ -196,7 +196,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
 			catch (FileType_error &) {
-				//TODO: handle me
+				//TODO(unknown): handle me
 			}
 		}
 	}
@@ -216,7 +216,7 @@ void WLApplication::setup_homedir() {
 			log("Failed to add home directory: %s\n", e.what());
 		}
 	} else {
-		//TODO: complain
+		//TODO(unknown): complain
 	}
 }
 
@@ -340,7 +340,7 @@ WLApplication::~WLApplication()
 
 	SDLNet_Quit();
 
-	TTF_Quit(); // TODO not here
+	TTF_Quit(); // TODO(unknown) not here
 
 	assert(g_fs);
 	delete g_fs;
@@ -692,7 +692,7 @@ void WLApplication::set_input_grab(bool grab)
 		SDL_WM_GrabInput(SDL_GRAB_ON);
 	} else {
 		SDL_WM_GrabInput(SDL_GRAB_OFF);
-		warp_mouse(m_mouse_position); //TODO: is this redundant?
+		warp_mouse(m_mouse_position); //TODO(unknown): is this redundant?
 	}
 }
 
@@ -954,7 +954,7 @@ bool WLApplication::init_hardware() {
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
-	g_sound_handler.init(); //  FIXME memory leak!
+	g_sound_handler.init(); //  TODO(unknown) memory leak!
 
 	return true;
 }
@@ -996,7 +996,7 @@ void WLApplication::shutdown_hardware()
 void WLApplication::parse_commandline
 	(int const argc, char const * const * const argv)
 {
-	//TODO: EXENAME gets written out on windows!
+	//TODO(unknown): EXENAME gets written out on windows!
 	m_commandline["EXENAME"] = argv[0];
 
 	for (int i = 1; i < argc; ++i) {
@@ -1042,7 +1042,7 @@ void WLApplication::handle_commandline_parameters()
 		m_logfile = m_commandline["logfile"];
 		std::cerr << "Redirecting log target to: " <<  m_logfile << std::endl;
 		if (m_logfile.size() != 0) {
-			//FIXME (very small) memory leak of 1 ofstream;
+			//TODO(unknown) (very small) memory leak of 1 ofstream;
 			//swaw the buffers (internally) of the file and wout
 			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
 			std::streambuf * logbuf = widelands_out->rdbuf();
@@ -1157,8 +1157,8 @@ void WLApplication::handle_commandline_parameters()
 		 it != commandline_end;
 		 ++it)
 	{
-		//TODO: barf here on unknown option; the list of known options
-		//TODO: needs to be centralized
+		// TODO(unknown): barf here on unknown option; the list of known options
+		// needs to be centralized
 
 		g_options.pull_section("global").create_val
 			(it->first.c_str(), it->second.c_str());

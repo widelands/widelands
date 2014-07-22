@@ -46,7 +46,7 @@ m_zipfilename(zipfile),
 m_basenamezip(FS_Filename(zipfile.c_str())),
 m_basename   ()
 {
-	// TODO: check OS permissions on whether the file is writable
+	// TODO(unknown): check OS permissions on whether the file is writable
 }
 
 /**
@@ -100,9 +100,9 @@ std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
 			complete_filename.substr
 				(0, complete_filename.size() - filename.size());
 
-		//  FIXME Something strange is going on with regard to the leading slash!
-		//  FIXME This is just an ugly workaround and does not solve the real
-		//  FIXME problem (which remains undiscovered)
+		//  TODO(unknown) Something strange is going on with regard to the leading slash!
+		//  This is just an ugly workaround and does not solve the real
+		//  problem (which remains undiscovered)
 		if
 			(('/' + path == filepath || path == filepath || path.length() == 1)
 			 && filename.size())
@@ -120,7 +120,7 @@ std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
  */
 bool ZipFilesystem::FileExists(const std::string & path) {
 	try {
-		m_OpenUnzip(); //  FIXME check return value
+		m_OpenUnzip(); //  TODO(unknown) check return value
 	} catch (...) {
 		return false;
 	}
@@ -559,7 +559,7 @@ void ZipFilesystem::Rename(const std::string &, const std::string &) {
 }
 
 unsigned long long ZipFilesystem::DiskSpace() {
-	return 0; //  FIXME
+	return 0; //  TODO(unknown)
 }
 
 std::string ZipFilesystem::strip_basename(std::string filename)

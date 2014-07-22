@@ -703,7 +703,7 @@ otherwise.
 */
 bool Building::fetch_from_flag(Game &)
 {
-	molog("TODO: Implement Building::fetch_from_flag\n");
+	molog("TODO(unknown): Implement Building::fetch_from_flag\n");
 
 	return false;
 }

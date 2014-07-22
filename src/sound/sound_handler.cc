@@ -358,16 +358,16 @@ bool Sound_Handler::play_or_not
 	//  float division! not integer
 	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0;
 
-	//TODO: what to do with fx that happen offscreen?
-	//TODO: reduce volume? reduce priority? other?
+	//TODO(unknown): what to do with fx that happen offscreen?
+	//TODO(unknown): reduce volume? reduce priority? other?
 	if (stereo_pos == -1) {
 		return false;
 	}
 
-	//TODO: check for a free channel
+	//TODO(unknown): check for a free channel
 
 	if (priority == PRIO_ALWAYS_PLAY) {
-		//TODO: if there is no free channel, kill a running fx and complain
+		//TODO(unknown): if there is no free channel, kill a running fx and complain
 		return true;
 	}
 
@@ -392,9 +392,9 @@ bool Sound_Handler::play_or_not
 	if (!allow_multiple && already_running)
 		return false;
 
-	//TODO: long time since any play increases weighted_priority
-	//TODO: high general frequency reduces weighted priority
-	//TODO: deal with "coupled" effects like throw_net and retrieve_net
+	//TODO(unknown): long time since any play increases weighted_priority
+	//TODO(unknown): high general frequency reduces weighted priority
+	//TODO(unknown): deal with "coupled" effects like throw_net and retrieve_net
 
 	uint32_t const ticks_since_last_play =
 		SDL_GetTicks() - fxs_[fx_name]->last_used_;

@@ -801,7 +801,7 @@ static void
 u_string(Info *info) {                                                 /* ... */
   eris_checkstack(info->L, 2);
   {
-    /* TODO Can we avoid this copy somehow? (Without it getting too nasty) */
+	 /* TODO(unknown) Can we avoid this copy somehow? (Without it getting too nasty) */
     const size_t length = READ_VALUE(size_t);
     char *value = lua_newuserdata(info->L, length * sizeof(char)); /* ... tmp */
     READ_RAW(value, length);
@@ -1647,7 +1647,7 @@ p_thread(Info *info) {                                          /* ... thread */
   WRITE_VALUE(thread->hookcount, int); */
 
   if (thread->hook) {
-    /* TODO Warn that hooks are not persisted? */
+	 /* TODO(unknown) Warn that hooks are not persisted? */
   }
 
   /* Write call information (stack frames). In 5.2 CallInfo is stored in a
@@ -1694,7 +1694,7 @@ p_thread(Info *info) {                                          /* ... thread */
       WRITE_VALUE(ci->u.c.old_errfunc, ptrdiff_t);
       WRITE_VALUE(ci->u.c.old_allowhook, uint8_t); */
 
-      /* TODO Is this really right? Hooks may be a problem? */
+		/* TODO(unknown) Is this really right? Hooks may be a problem? */
       if (ci->callstatus & (CIST_YPCALL | CIST_YIELDED)) {
         WRITE_VALUE(ci->u.c.ctx, int);
         eris_assert(ci->u.c.k);
@@ -1867,7 +1867,7 @@ u_thread(Info *info) {                                                 /* ... */
       thread->ci->u.c.old_errfunc = 0;
       thread->ci->u.c.old_allowhook = 0;
 
-      /* TODO Is this really right? */
+		/* TODO(unknown) Is this really right? */
       if (thread->ci->callstatus & (CIST_YPCALL | CIST_YIELDED)) {
         thread->ci->u.c.ctx = READ_VALUE(int);
         LOCK(thread);

@@ -42,7 +42,7 @@ struct Carrier : public Worker {
 		{}
 
 		virtual Worker_Type get_worker_type() const override {return CARRIER;}
-		// class type needed for Lua stuffl TODO: redundant with get_worker_type()?
+		// class type needed for Lua stuff TODO(GunChleoc): redundant with get_worker_type()?
 		std::string type() const override {return "carrier";}
 
 	protected:

@@ -182,7 +182,7 @@ std::string FileSystem::GetHomedir()
 			("\nWARNING: either we can not detect your home directory "
 			 "or you do not have one! Please contact the developers.\n\n");
 
-		//TODO: is it really a good idea to set homedir to "." then ??
+		//TODO(unknown): is it really a good idea to set homedir to "." then ??
 
 		log("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
@@ -385,7 +385,7 @@ FileSystem & FileSystem::Create(const std::string & root)
 	if (S_ISDIR(statinfo.st_mode)) {
 		return *new RealFSImpl(root);
 	}
-	if (S_ISREG(statinfo.st_mode)) { //TODO: ensure root is a zipfile
+	if (S_ISREG(statinfo.st_mode)) { //TODO(unknown): ensure root is a zipfile
 		return *new ZipFilesystem(root);
 	}
 

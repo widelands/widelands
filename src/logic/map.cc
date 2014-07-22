@@ -1636,7 +1636,7 @@ std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename)
 			result.reset(new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file.
-			//  TODO: catchall hides real errors! Replace with more specific code
+			//  TODO(unknown): catchall hides real errors! Replace with more specific code
 		}
 	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
 	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {

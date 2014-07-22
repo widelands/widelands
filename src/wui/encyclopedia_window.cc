@@ -145,12 +145,12 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 			(*tribe.get_building_descr(prodSites.get_selected()))
 		.programs();
 
-	//  FIXME This needs reworking. A program can indeed produce iron even if
-	//  FIXME the program name is not any of produce_iron, smelt_iron, prog_iron
-	//  FIXME or work. What matters is whether the program has a statement such
-	//  FIXME as "produce iron" or "createware iron". The program name is not
-	//  FIXME supposed to have any meaning to the game logic except to uniquely
-	//  FIXME identify the program.
+	//  TODO(unknown) This needs reworking. A program can indeed produce iron even if
+	//  the program name is not any of produce_iron, smelt_iron, prog_iron
+	//  or work. What matters is whether the program has a statement such
+	//  as "produce iron" or "createware iron". The program name is not
+	//  supposed to have any meaning to the game logic except to uniquely
+	//  identify the program.
 	//  Only shows information from the first program that has a name indicating
 	//  that it produces the considered ware type.
 	std::map<std::string, ProductionProgram *>::const_iterator programIt =

@@ -44,7 +44,7 @@ class StreamWrite;
  */
 class FileSystem {
 public:
-	//  TODO This should be unnecessary. Make it so.
+	//  TODO(unknown) This should be unnecessary. Make it so.
 	enum Type {
 		DIR,
 		ZIP
@@ -65,7 +65,7 @@ public:
 		(const std::string & fname, void const * data, int32_t length)
 		= 0;
 	virtual void EnsureDirectoryExists(const std::string & dirname) = 0;
-	//TODO: use this only from inside EnsureDirectoryExists()
+	//TODO(unknown): use this only from inside EnsureDirectoryExists()
 	virtual void MakeDirectory(const std::string & dirname) = 0;
 
 	/**

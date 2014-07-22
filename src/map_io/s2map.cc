@@ -59,7 +59,7 @@ struct S2MapDescrHeader {
 	char    bulk[2290]; // unknown
 } /* size 2352 */;
 
-// TODO: the following bob types appear in S2 maps but are unknown
+// TODO(unknown): the following bob types appear in S2 maps but are unknown
 //  Somebody who can run Settlers II please check them out
 //  11 (0x0B)
 //  40 (0x28)

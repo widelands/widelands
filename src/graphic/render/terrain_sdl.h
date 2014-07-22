@@ -363,7 +363,7 @@ template<typename T> static void dither_edge_horiz
 	dty = (ITOFIX(end.ty) - ty) / (end.x - start.x + 1);
 	db  = (ITOFIX(end.b)  - b)  / (end.x - start.x + 1);
 
-	// TODO: seed this depending on field coordinates
+	// TODO(unknown): seed this depending on field coordinates
 	uint32_t rnd = 0;
 
 	const int32_t dstw = dst.width();
@@ -460,7 +460,7 @@ template<typename T> static void dither_edge_vert
 	dty = (ITOFIX(end.ty) - ty) / (end.y - start.y + 1);
 	db  = (ITOFIX(end.b)  - b)  / (end.y - start.y + 1);
 
-	// TODO: seed this depending on field coordinates
+	// TODO(unknown): seed this depending on field coordinates
 	uint32_t rnd = 0;
 
 	const int32_t dstw = dst.width();
@@ -664,7 +664,7 @@ template<typename T> static void draw_field_int
 
 	dst.unlock(Surface::Unlock_Update);
 
-	// FIXME: similar textures may not need dithering
+	// TODO(unknown) similar textures may not need dithering
 }
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_TERRAIN_SDL_H

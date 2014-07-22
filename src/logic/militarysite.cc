@@ -547,7 +547,7 @@ Advance the program state if applicable.
 */
 void MilitarySite::act(Game & game, uint32_t const data)
 {
-	// TODO: do all kinds of stuff, but if you do nothing, let
+	// TODO(unknown): do all kinds of stuff, but if you do nothing, let
 	// ProductionSite::act() handle all this. Also note, that some ProductionSite
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
@@ -565,7 +565,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
 	// to keep the game lightweight.
 
-	//TODO: I would need two new callbacks, to get rid ot this polling.
+	//TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > m_next_swap_soldiers_time)
 		{
 			m_next_swap_soldiers_time = timeofgame + (m_soldier_upgrade_try ? 20000 : 100000);
