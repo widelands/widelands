@@ -12,7 +12,6 @@ stone=1
 marble=1
 
 [aihints]
-build_material=false
 
 [working positions]
 pig-breeder=1

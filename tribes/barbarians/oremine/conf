@@ -14,7 +14,6 @@ raw_stone=1
 miner=1
 
 [aihints]
-build_material=false
 mines=iron
 mines_percent=30
 prohibited_till=1200

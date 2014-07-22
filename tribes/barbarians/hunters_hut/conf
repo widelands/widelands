@@ -10,7 +10,7 @@ log=1
 raw_stone=1
 
 [aihints]
-build_material=false
+prohibited_till=300
 
 [working positions]
 hunter=1

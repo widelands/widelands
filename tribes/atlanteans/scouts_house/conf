@@ -15,7 +15,6 @@ smoked_fish=2
 bread=2
 
 [aihints]
-build_material=false
 
 [programs]
 work=_Work

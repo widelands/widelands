@@ -12,7 +12,6 @@ raw_stone=1
 ration=2
 
 [aihints]
-build_material=false
 
 [working positions]
 scout=1

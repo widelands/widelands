@@ -14,7 +14,6 @@ planks=2
 miner=3
 
 [aihints]
-build_material=false
 mines=iron
 prohibited_till=1200
 

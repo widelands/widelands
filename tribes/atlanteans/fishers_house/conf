@@ -12,8 +12,8 @@ planks=1
 fisher=1
 
 [aihints]
-build_material=false
 needs_water=true
+prohibited_till=180
 
 [programs]
 work=_Work

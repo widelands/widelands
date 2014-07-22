@@ -12,8 +12,8 @@ stone=2
 log=1
 
 [aihints]
+prohibited_till=60
 space_consumer=true
-build_material=false
 
 [working positions]
 blackroot_farmer=1

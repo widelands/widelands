@@ -8,7 +8,6 @@ stone=1
 log=1
 
 [aihints]
-build_material=false
 
 [working positions]
 scout=1

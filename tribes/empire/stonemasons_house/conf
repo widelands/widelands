@@ -2,7 +2,8 @@ size=medium
 output=marblecolumn
 
 [aihints]
-is_basic=true
+forced_after=300
+prohibited_till=120
 
 [buildcost]
 log=1

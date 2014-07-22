@@ -8,7 +8,6 @@ log=4
 log=2
 
 [aihints]
-build_material=false
 mines_water=true
 
 [working positions]

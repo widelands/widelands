@@ -12,7 +12,7 @@ spidercloth=1
 stone=3
 
 [aihints]
-build_material=false
+prohibited_till=600
 
 [working positions]
 smelter=1

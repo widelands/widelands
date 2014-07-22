@@ -14,8 +14,7 @@ blackwood=1
 raw_stone=1
 
 [aihints]
-build_material=false
-is_food_basic=true
+forced_after=900
 
 [working positions]
 innkeeper=1

@@ -3,7 +3,7 @@ output=wheat
 
 [aihints]
 space_consumer=true
-is_food_basic=true
+forced_after=900
 
 [buildcost]
 wood=2

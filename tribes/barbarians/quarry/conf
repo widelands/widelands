@@ -11,7 +11,7 @@ log=2
 stonemason=1
 
 [aihints]
-is_basic=true
+forced_after=0
 stoneproducer=true
 
 [programs]

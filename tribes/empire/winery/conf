@@ -2,8 +2,8 @@ size=medium
 output=wine
 
 [aihints]
-build_material=false
-is_food_basic=true
+forced_after=900
+prohibited_till=60
 
 [buildcost]
 wood=1

@@ -31,8 +31,7 @@ iron=8
 log=8
 
 [aihints]
-build_material=false
-is_basic=true
+forced_after=0
 
 [programs]
 produce_felling_ax=_Produce felling ax

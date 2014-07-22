@@ -122,3 +122,6 @@ hotspot=110 75
 pics=trainingcamp_i_??.png  # ???
 hotspot=110 75
 fps=10
+
+[aihints]
+prohibited_till=2700

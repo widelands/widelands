@@ -11,8 +11,8 @@ log=2
 fisher=1
 
 [aihints]
-build_material=false
 needs_water=true
+prohibited_till=900
 
 [programs]
 work=_Work

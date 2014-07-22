@@ -41,18 +41,6 @@ struct BuildingHints {
 		return mines_;
 	}
 
-	bool is_basic() const {
-		return basic_;
-	}
-
-	bool is_food_basic() const {
-		return food_basic_;
-	}
-
-	bool prod_build_material() const {
-		return build_material_;
-	}
-
 	bool is_logproducer() const {
 		return log_producer_;
 	}
@@ -90,6 +78,10 @@ struct BuildingHints {
 		return prohibited_till_;
 	}
 
+	int32_t get_forced_after() const {
+		return forced_after_;
+	}
+
 	uint8_t get_mines_percent() const {
 		return mines_percent_;
 	}
@@ -97,9 +89,6 @@ struct BuildingHints {
 private:
 	char* renews_map_resource;
 	char* mines_;
-	bool basic_;
-	bool food_basic_;
-	bool build_material_;  // whether the building produces build material
 	bool log_producer_;
 	bool stone_producer_;
 	bool needs_water_;
@@ -110,6 +99,7 @@ private:
 	bool fighting_;
 	bool mountain_conqueror_;
 	int32_t prohibited_till_;
+	int32_t forced_after_;
 	uint8_t mines_percent_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);

@@ -12,7 +12,7 @@ stone=2
 marble=1
 
 [aihints]
-build_material=false
+prohibited_till=180
 
 [working positions]
 miller=1

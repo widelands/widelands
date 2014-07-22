@@ -13,7 +13,7 @@ planks=1
 woodcutter=1
 
 [aihints]
-is_basic=true
+forced_after=0
 logproducer=true
 
 [programs]

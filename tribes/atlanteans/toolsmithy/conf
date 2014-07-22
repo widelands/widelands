@@ -23,9 +23,8 @@ stone=1
 planks=1
 
 [aihints]
-build_material=false
-is_basic=true
-prohibited_till=300
+forced_after=900
+prohibited_till=450
 
 [working positions]
 toolsmith=1

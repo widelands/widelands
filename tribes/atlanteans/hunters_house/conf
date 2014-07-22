@@ -10,7 +10,7 @@ stone=1
 stone=1
 
 [aihints]
-build_material=false
+prohibited_till=60
 
 [working positions]
 hunter=1

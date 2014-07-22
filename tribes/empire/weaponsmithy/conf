@@ -6,7 +6,6 @@ output=heavy_lance
 output=war_lance
 
 [aihints]
-build_material=false
 
 [buildcost]
 log=2

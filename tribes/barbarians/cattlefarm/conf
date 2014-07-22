@@ -2,7 +2,6 @@ size=big
 output=ox
 
 [aihints]
-build_material=false
 recruitment=true
 
 [buildcost]

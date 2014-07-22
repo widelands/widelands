@@ -2,7 +2,7 @@ size=medium
 output=blackwood
 
 [aihints]
-is_basic=true
+forced_after=0
 
 [buildcost]
 log=3

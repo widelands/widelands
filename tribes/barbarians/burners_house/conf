@@ -2,7 +2,6 @@ size=medium
 output=coal
 
 [aihints]
-build_material=false
 
 [buildcost]
 log=3

@@ -229,6 +229,8 @@ struct BuildableField {
 	int16_t military_stationed_;
 	// some buildings must be postponed bit
 	int32_t prohibited_till_;
+	// and then some must be forced
+	int32_t forced_after_;
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -305,8 +307,6 @@ struct BuildingObserver {
 		MINE
 	} type;
 
-	bool is_basic_;       // is a "must" to have for the ai
-	bool is_food_basic_;  // few food producer to be built sooner
 	bool prod_build_material_;
 	bool plants_trees_;
 	bool recruitment_;  // is "producing" workers?
@@ -316,11 +316,13 @@ struct BuildingObserver {
 	bool mines_water_;         // wells
 	bool need_water_;          // fisher, fish_breeder = true
 	bool is_hunter_;           // need to identify hunters
+	bool is_fisher_;           // need to identify hunters
 	bool space_consumer_;      // farm, vineyard... = true
 	bool expansion_type_;      // military building used that can be used to control area
 	bool fighting_type_;       // military building built near enemies
 	bool mountain_conqueror_;  // military building built near mountains
 	int32_t prohibited_till_;  // do not build before (ms)
+	int32_t forced_after_;  // do not wait until ware is needed
 
 	bool unoccupied_;  //
 

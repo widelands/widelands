@@ -32,9 +32,6 @@ BuildingHints::~BuildingHints() {
 BuildingHints::BuildingHints(Section* const section)
    : renews_map_resource(nullptr),
      mines_(nullptr),
-     basic_(section ? section->get_bool("is_basic") : false),
-     food_basic_(section ? section->get_bool("is_food_basic") : false),
-     build_material_(section ? section->get_bool("build_material") : true),
      log_producer_(section ? section->get_bool("logproducer") : false),
      stone_producer_(section ? section->get_bool("stoneproducer") : false),
      needs_water_(section ? section->get_bool("needs_water") : false),
@@ -45,6 +42,7 @@ BuildingHints::BuildingHints(Section* const section)
      fighting_(section ? section->get_bool("fighting") : false),
      mountain_conqueror_(section ? section->get_bool("mountain_conqueror") : false),
      prohibited_till_(section ? section->get_int("prohibited_till", 0) : 0),
+     forced_after_(section ? section->get_int("forced_after", 864000) : 0),  // 10 days default
      mines_percent_(section ? section->get_int("mines_percent", 100) : 0) {
 	if (section) {
 		if (char const* const s = section->get_string("renews_map_resource"))

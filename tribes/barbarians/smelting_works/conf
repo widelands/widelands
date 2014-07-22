@@ -3,7 +3,7 @@ output=iron
 output=gold
 
 [aihints]
-build_material=false
+prohibited_till=300
 
 [buildcost]
 log=3

@@ -4,7 +4,6 @@ output=mask
 output=warhelm
 
 [aihints]
-build_material=false
 
 [buildcost]
 log=3

@@ -2,8 +2,8 @@ size=medium
 output=bread
 
 [aihints]
-build_material=false
-is_food_basic=true
+forced_after=1200
+prohibited_till=900
 
 [buildcost]
 log=2

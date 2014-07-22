@@ -13,7 +13,7 @@ wood=1
 lumberjack=1
 
 [aihints]
-is_basic=true
+forced_after=0
 logproducer=true
 
 [programs]

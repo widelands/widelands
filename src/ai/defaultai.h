@@ -159,6 +159,8 @@ private:
 
 	bool consider_attack(int32_t);
 
+	void print_land_stats();
+
 private:
 	// Variables of default AI
 	uint8_t type_;
