@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+error_msg ="Please use the format \"TODO(<username>) ...\" for your TODO comments"
+
+regexp = r"""(FIXME|(\s|/|[*])BUG|TODO(?![(]))"""
+
+forbidden = [
+    "// FIXME this is a todo comment",
+    "// BUG this is a todo comment",
+    "// TODO this is a todo comment"
+    "// TODO: This is a todo comment"
+]
+
+allowed = [
+    "// TODO(<username>) this is a todo comment",
+    "// TODO(<username>): This is a todo comment"
+]
