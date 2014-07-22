@@ -911,7 +911,7 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::worker_failed_to_find_resource(Game & game)
 {
-	if(!descr().out_of_resource_title().empty() &&
+	if (!descr().out_of_resource_title().empty() &&
 		m_out_of_resource_delay_counter >=
 			descr().out_of_resource_delay_attempts()
 		)
@@ -925,7 +925,7 @@ void ProductionSite::worker_failed_to_find_resource(Game & game)
 			 true,
 			 1800000, 0);
 	}
-	if(m_out_of_resource_delay_counter++ >=
+	if (m_out_of_resource_delay_counter++ >=
 			descr().out_of_resource_delay_attempts()
 		)
 	{

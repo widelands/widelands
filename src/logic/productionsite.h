@@ -109,7 +109,7 @@ private:
 	Programs m_programs;
 	std::string m_out_of_resource_title;
 	std::string m_out_of_resource_message;
-	uint32_t 	m_out_of_resource_delay_attempts;
+	uint32_t    m_out_of_resource_delay_attempts;
 };
 
 class ProductionSite : public Building {
