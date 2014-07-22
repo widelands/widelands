@@ -909,6 +909,31 @@ void ProductionSite::train_workers(Game & game)
 }
 
 
+void ProductionSite::worker_failed_to_find_resource(Game & game)
+{
+	if(!descr().out_of_resource_title().empty() &&
+		m_out_of_resource_delay_counter >=
+			descr().out_of_resource_delay_attempts()
+		)
+	{
+		assert(!descr().out_of_resource_message().empty());
+		send_message
+			(game,
+			 "produce",
+			 descr().out_of_resource_title(),
+			 descr().out_of_resource_message(),
+			 true,
+			 1800000, 0);
+	}
+	if(m_out_of_resource_delay_counter++ >=
+			descr().out_of_resource_delay_attempts()
+		)
+	{
+		m_out_of_resource_delay_counter = 0;
+	}
+}
+
+
 /// Changes the default anim string to \li anim
 void ProductionSite::set_default_anim(std::string anim)
 {
@@ -921,13 +946,5 @@ void ProductionSite::set_default_anim(std::string anim)
 	m_default_anim = anim;
 }
 
-void ProductionSite::update_out_of_resource_delay_counter() {
-	if(m_out_of_resource_delay_counter++ >=
-			descr().out_of_resource_delay_attempts()
-		)
-	{
-		m_out_of_resource_delay_counter = 0;
-	}
-}
 
 }

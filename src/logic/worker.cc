@@ -401,10 +401,10 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
 				if (!found_reserved)
-					notify_player
-						(game,
-						 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-						 Map_Object_Descr::get_attribute_name(action.iparam2));
+				{
+					if (upcast(ProductionSite, productionsite, get_location(game)))
+						productionsite->worker_failed_to_find_resource(game);
+				}
 				return true;
 			}
 			std::vector<ImmovableFound> list;
@@ -444,10 +444,8 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
-				notify_player
-					(game,
-					 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-					 Map_Object_Descr::get_attribute_name(action.iparam2));
+				if (upcast(ProductionSite, productionsite, get_location(game)))
+					productionsite->worker_failed_to_find_resource(game);
 				return true;
 			}
 			std::vector<Bob *> list;
@@ -573,10 +571,8 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
 		molog("  no space found\n");
 
-		notify_player
-			(game,
-			 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-			 action.sparam1);
+		if (upcast(ProductionSite, productionsite, get_location(game)))
+			productionsite->worker_failed_to_find_resource(game);
 
 		send_signal(game, "fail");
 		pop_task(game);
@@ -590,41 +586,6 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 	schedule_act(game, 10);
 	return true;
 }
-
-// Informs the player about a building that cannot find resources any more,
-// NOCOM(#codereview): It now becomes apparent that this method does not really
-// belong to the worker anymore: it does not use any data of the worker (so it
-// should be a stand alone method in an anonymous namespace, not in the class).
-// But it has to query the productionsite for a lot of its data. I suggest:
-// make notify_player() a function in the anonymous namespace and add a
-// ProductionSite::worker_failed_to_find_resource() or similar method that
-// sends the message and handles the counter. You can get rid of the getters
-// for most of the new properties then and the productionsite does not need to
-// show so much implementation to the world.
-void Worker::notify_player
-	(Game & game, Building & building, std::string res_type) const
-{
-	if (upcast(ProductionSite, productionsite, &building))
-	{
-		if(!productionsite->descr().out_of_resource_title().empty() &&
-			productionsite->get_out_of_resource_delay_counter() >=
-				productionsite->descr().out_of_resource_delay_attempts()
-			)
-		{
-			assert(!productionsite->descr().out_of_resource_message().empty());
-			building.send_message
-				(game,
-				 "mine",
-				 productionsite->descr().out_of_resource_title(),
-				 productionsite->descr().out_of_resource_message(),
-				 true,
-				 1800000, 0);
-		}
-		productionsite->update_out_of_resource_delay_counter();
-	}
-}
-
-
 
 /**
  * walk \<where\>

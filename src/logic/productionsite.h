@@ -179,15 +179,10 @@ public:
 
 	bool can_start_working() const;
 
+	/// sends a message to the player if the building's resource can't be found
+	void worker_failed_to_find_resource(Game & game);
+
 	void set_default_anim(std::string);
-
-	uint32_t get_out_of_resource_delay_counter() const {
-		return m_out_of_resource_delay_counter;
-	}
-
-	/// Increments the counter that delays the "out of resources" messages.
-	/// Resets to 0 if counter >= descr().out_of_resource_delay_attempts()
-	void update_out_of_resource_delay_counter();
 
 protected:
 	virtual void create_options_window
