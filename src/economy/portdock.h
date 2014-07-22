@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "logic/immovable.h"
 #include "logic/wareworker.h"
 #include "economy/shippingitem.h"
@@ -36,13 +37,14 @@ class ExpeditionBootstrap;
 
 class PortDock_Descr : public Map_Object_Descr {
 public:
-	PortDock_Descr(char const* const name, char const* const descname);
-	// NOCOM(#codereview): add override whenever you can.
-	virtual ~PortDock_Descr() override;
+	PortDock_Descr(char const* const _name, char const* const _descname);
+	virtual ~PortDock_Descr() override {};
 
-	char const* type_name() const override {
-		return "portdock";
-	}
+	const std::string& type_name() const override {return m_typename;}
+
+private:
+	std::string const m_typename;
+	DISALLOW_COPY_AND_ASSIGN(PortDock_Descr);
 };
 
 /**
@@ -73,7 +75,8 @@ public:
  */
 class PortDock : public PlayerImmovable {
 public:
-	MO_DESCR(PortDock_Descr)
+
+	const PortDock_Descr& descr() const;
 
 	PortDock(Warehouse* warehouse);
 	virtual ~PortDock();

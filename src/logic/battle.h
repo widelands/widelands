@@ -26,12 +26,19 @@ class Soldier;
 
 class Battle_Descr : public Map_Object_Descr {
 public:
-	Battle_Descr(char const* const name, char const* const descname);
-	virtual ~Battle_Descr();
-
-	char const* type_name() const override {
-		return "battle";
+	Battle_Descr(char const* const _name, char const* const _descname)
+		:
+		Map_Object_Descr(_name, _descname),
+		m_typename      ("battle")
+	{
 	}
+	virtual ~Battle_Descr() override {};
+
+	const std::string& type_name() const override {return m_typename;}
+
+private:
+	std::string const m_typename;
+	DISALLOW_COPY_AND_ASSIGN(Battle_Descr);
 };
 
 /**
@@ -44,7 +51,7 @@ public:
  */
 class Battle : public Map_Object {
 public:
-	MO_DESCR(Battle_Descr);
+	const Battle_Descr& descr() const;
 
 	Battle(); //  for loading an existing battle from a savegame
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game

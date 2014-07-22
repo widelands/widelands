@@ -75,7 +75,9 @@ Soldier_Descr::Soldier_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
-	: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe)
+	:
+	Worker_Descr(_name, _descname, directory, prof, global_s, _tribe),
+	m_typename  ("soldier")
 {
 	add_attribute(Map_Object::SOLDIER);
 

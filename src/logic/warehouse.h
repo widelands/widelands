@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_WAREHOUSE_H
 #define WL_LOGIC_WAREHOUSE_H
 
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/request.h"
 #include "logic/attackable.h"
@@ -52,10 +53,9 @@ struct Warehouse_Descr : public Building_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
+	virtual ~Warehouse_Descr() override {};
 
-	char const* type_name() const override {
-		return "warehouse";
-	}
+	const std::string& type_name() const override {return m_typename;}
 
 	virtual Building & create_object() const override;
 
@@ -66,8 +66,10 @@ struct Warehouse_Descr : public Building_Descr {
 	}
 
 private:
+	std::string const m_typename;
 	int32_t m_conquers;
 	uint32_t m_heal_per_second;
+	DISALLOW_COPY_AND_ASSIGN(Warehouse_Descr);
 };
 
 

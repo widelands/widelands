@@ -22,6 +22,7 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "base/macros.h"
 #include "logic/instances.h"
 
 namespace Widelands {
@@ -34,12 +35,18 @@ struct Ship;
 
 class Fleet_Descr : public Map_Object_Descr {
 public:
-	Fleet_Descr(char const* const name, char const* const descname);
-	virtual ~Fleet_Descr();
+	Fleet_Descr(char const* const _name, char const* const _descname)
+		:
+		Map_Object_Descr(_name, _descname),
+		m_typename      ("fleet")
+	{}
+	virtual ~Fleet_Descr() override {};
 
-	char const* type_name() const override {
-		return "fleet";
-	}
+	const std::string& type_name() const override {return m_typename;}
+
+private:
+	std::string const m_typename;
+	DISALLOW_COPY_AND_ASSIGN(Fleet_Descr);
 };
 
 /**
@@ -68,7 +75,7 @@ struct Fleet : Map_Object {
 		PortPath() : cost(-1) {}
 	};
 
-	MO_DESCR(Fleet_Descr);
+	const Fleet_Descr& descr() const;
 
 	Fleet(Player & player);
 

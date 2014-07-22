@@ -54,14 +54,11 @@ struct Path;
  */
 struct Map_Object_Descr {
 	Map_Object_Descr(const std::string& init_name, const std::string& init_descname)
-	   : m_name(init_name), m_descname(init_descname) {
-	}
+			: m_name(init_name), m_descname(init_descname), m_typename("mapobject") {
+		}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-	// NOCOM(#codereview): This should return const std::string&. Also declare the derived methods as 'override' if you have not already.
-	virtual char const* type_name() const {
-		return "mapobject";
-	}
+	virtual const std::string& type_name() const {return m_typename;}
 
 	const std::string &     name() const {return m_name;}
 	const std::string & descname() const {return m_descname;}
@@ -101,6 +98,7 @@ private:
 
 	std::string const m_name;
 	std::string const m_descname;       ///< Descriptive name
+	std::string const m_typename;
 	Attributes        m_attributes;
 	Anims             m_anims;
 	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
@@ -194,6 +192,7 @@ protected:
 	virtual ~Map_Object() {}
 
 public:
+	// NOCOM(GunChleoc) remove this?
 	virtual int32_t get_type() const = 0;
 
 	Serial serial() const {return m_serial;}

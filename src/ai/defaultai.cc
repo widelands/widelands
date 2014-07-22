@@ -294,7 +294,7 @@ void DefaultAI::late_initialization() {
 		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSite_Descr)) {
 			const ProductionSite_Descr& prod =
-			   ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
+				ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 			container_iterate_const(BillOfMaterials, prod.inputs(), j)
 			bo.inputs_.push_back(j.current->first);

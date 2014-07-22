@@ -46,24 +46,24 @@ TrainingSite_Descr::TrainingSite_Descr
 	:
 	ProductionSite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe, world),
-
+	m_typename          ("trainingsite"),
 	//  FIXME This is currently hardcoded for "soldier" but should allow any
 	//  FIXME soldier type name.
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
-	m_max_stall (global_s.get_safe_int("trainer_patience")),
+	m_max_stall         (global_s.get_safe_int("trainer_patience")),
 
-m_train_hp          (false),
-m_train_attack      (false),
-m_train_defense     (false),
-m_train_evade       (false),
-m_min_hp            (0),
-m_min_attack        (0),
-m_min_defense       (0),
-m_min_evade         (0),
-m_max_hp            (0),
-m_max_attack        (0),
-m_max_defense       (0),
-m_max_evade         (0)
+	m_train_hp          (false),
+	m_train_attack      (false),
+	m_train_defense     (false),
+	m_train_evade       (false),
+	m_min_hp            (0),
+	m_min_attack        (0),
+	m_min_defense       (0),
+	m_min_evade         (0),
+	m_max_hp            (0),
+	m_max_attack        (0),
+	m_max_defense       (0),
+	m_max_evade         (0)
 {
 	// Read the range of levels that can update this building
 	//  FIXME This is currently hardcoded to "soldier" but it should search for

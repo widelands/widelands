@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/immovable.h"
 #include "logic/path.h"
 #include "logic/roadtype.h"
@@ -33,12 +34,18 @@ class Request;
 class Road_Descr : public Map_Object_Descr {
 
 public:
-	Road_Descr(char const* const name, char const* const descname);
-	virtual ~Road_Descr();
+	Road_Descr(char const* const _name, char const* const _descname)
+		:
+		Map_Object_Descr(_name, _descname),
+		m_typename      ("road")
+	{}
+	virtual ~Road_Descr() override {};
 
-	char const* type_name() const override {
-		return "road";
-	}
+	const std::string& type_name() const override {return m_typename;}
+
+private:
+	std::string const m_typename;
+	DISALLOW_COPY_AND_ASSIGN(Road_Descr);
 };
 
 /**
@@ -60,7 +67,7 @@ struct Road : public PlayerImmovable {
 	friend class Map_Roaddata_Data_Packet; // For saving
 	friend class Map_Road_Data_Packet; // For init()
 
-	MO_DESCR(Road_Descr)
+	const Road_Descr& descr() const;
 
 	static bool IsRoadDescr(Map_Object_Descr const *);
 

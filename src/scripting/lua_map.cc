@@ -558,33 +558,25 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	if (!mo)
 		return 0;
-
-	switch (mo->get_type()) {
-	case Map_Object::BUILDING: {
-		const char* type_name = mo->descr().type_name();
-		if (!strcmp(type_name, "constructionsite"))
-			return CAST_TO_LUA(ConstructionSite);
-		else if (!strcmp(type_name, "productionsite"))
-			return CAST_TO_LUA(ProductionSite);
-		else if (!strcmp(type_name, "militarysite"))
-			return CAST_TO_LUA(MilitarySite);
-		else if (!strcmp(type_name, "warehouse"))
-			return CAST_TO_LUA(Warehouse);
-		else if (!strcmp(type_name, "trainingsite"))
-			return CAST_TO_LUA(TrainingSite);
-		else
-			return CAST_TO_LUA(Building);
-	}
-
-	case Map_Object::FLAG:
-		return CAST_TO_LUA(Flag);
-	case Map_Object::ROAD:
+	const std::string& type_name = mo->descr().type_name();
+	if (type_name == "constructionsite")
+		return CAST_TO_LUA(ConstructionSite);
+	else if (type_name == "productionsite")
+		return CAST_TO_LUA(ProductionSite);
+	else if (type_name == "militarysite")
+		return CAST_TO_LUA(MilitarySite);
+	else if (type_name ==  "warehouse")
+		return CAST_TO_LUA(Warehouse);
+	else if (type_name == "trainingsite")
+		return CAST_TO_LUA(TrainingSite);
+	else if (type_name == "building")
+		return CAST_TO_LUA(Building);
+	else if (type_name == "flag")
+			return CAST_TO_LUA(Flag);
+	else if (type_name == "road")
 		return CAST_TO_LUA(Road);
-	case Map_Object::PORTDOCK:
+	else if (type_name == "portdock")
 		return CAST_TO_LUA(PortDock);
-	default:
-		break;
-	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
 #undef CAST_TO_LUA

@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_WORKER_DESCR_H
 #define WL_LOGIC_WORKER_DESCR_H
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 #include "logic/immovable.h"
@@ -53,11 +54,9 @@ public:
 		(char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr &);
-	virtual ~Worker_Descr();
+	virtual ~Worker_Descr() override;
 
-	char const* type_name() const override {
-		return "worker";
-	}
+	const std::string& type_name() const override {return m_typename;}
 
 	virtual Bob & create_object() const override;
 
@@ -140,6 +139,10 @@ protected:
 	 */
 	Ware_Index  m_becomes;
 	Programs    m_programs;
+private:
+	std::string const m_typename;
+
+	DISALLOW_COPY_AND_ASSIGN(Worker_Descr);
 };
 
 }

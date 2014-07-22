@@ -58,7 +58,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe, const World& world)
 	:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
+	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
+	m_typename    ("productionsite")
 {
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))

@@ -136,8 +136,11 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
                                      const std::string& directory,
                                      Profile& prof,
                                      Section& global_s,
-                                     Tribe_Descr const* const _tribe)
-   : BobDescr(_name, _descname, _tribe) {
+												 Tribe_Descr & _tribe)
+	:
+	BobDescr(_name, _descname, &_tribe),
+	m_typename("critterbob")
+{
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 		add_animation("idle", g_gr->animations().load(directory, idle_s));

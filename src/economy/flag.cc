@@ -40,6 +40,10 @@ namespace Widelands {
 
 Flag_Descr g_flag_descr("flag", "Flag");
 
+const Flag_Descr& Flag::descr() const {
+	return g_flag_descr;
+}
+
 /**
  * Create the flag. Initially, it doesn't have any attachments.
 */

@@ -23,6 +23,7 @@
 #include <list>
 #include <memory>
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
@@ -41,12 +42,11 @@ struct Ship_Descr : BobDescr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
+	virtual ~Ship_Descr() override {};
+
+	const std::string& type_name() const override {return m_typename;}
 
 	virtual Bob & create_object() const override;
-
-    char const * type_name() const override {
-		return "ship";
-	}
 
 	virtual uint32_t movecaps() const override;
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
@@ -56,9 +56,11 @@ struct Ship_Descr : BobDescr {
 
 
 private:
+	std::string const m_typename;
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
 	uint32_t m_vision_range;
+	DISALLOW_COPY_AND_ASSIGN(Ship_Descr);
 };
 
 /**

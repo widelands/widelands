@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_CRITTER_BOB_H
 #define WL_LOGIC_CRITTER_BOB_H
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 
@@ -34,18 +35,20 @@ struct Critter_BobProgram;
 //
 // Description
 //
-struct Critter_Bob_Descr : public BobDescr {
+struct Critter_Bob_Descr : BobDescr {
 	Critter_Bob_Descr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr *);
+		(char const* const _name,
+		 char const* const _descname,
+		 const std::string& directory,
+		 Profile& prof,
+		 Section& global_s,
+		 Tribe_Descr & _tribe);
 	Critter_Bob_Descr(const LuaTable&);
-	virtual ~Critter_Bob_Descr();
+	virtual ~Critter_Bob_Descr() override;
+
+	const std::string& type_name() const override {return m_typename;}
 
 	Bob & create_object() const override;
-	char const* type_name() const override {
-		return "critterbob";
-	}
 
 	bool is_swimming() const;
 	uint32_t movecaps() const override;
@@ -55,9 +58,11 @@ struct Critter_Bob_Descr : public BobDescr {
 
 
 private:
+	std::string const m_typename;
 	DirAnimations m_walk_anims;
 	typedef std::map<std::string, Critter_BobProgram *> Programs;
 	Programs      m_programs;
+	DISALLOW_COPY_AND_ASSIGN(Critter_Bob_Descr);
 };
 
 class Critter_Bob : public Bob {

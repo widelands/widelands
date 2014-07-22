@@ -23,6 +23,7 @@
 #include <list>
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/immovable.h"
 #include "economy/routing_node.h"
 
@@ -34,12 +35,18 @@ class WareInstance;
 
 class Flag_Descr : public Map_Object_Descr {
 public:
-	Flag_Descr(char const* const name, char const* const descname);
-	virtual ~Flag_Descr();
+	Flag_Descr(char const* const _name, char const* const _descname)
+	:
+	Map_Object_Descr(_name, _descname),
+	m_typename      ("flag")
+	{}
+	virtual ~Flag_Descr() override {};
 
-	char const* type_name() const override {
-		return "flag";
-	}
+	const std::string& type_name() const override {return m_typename;}
+
+private:
+	std::string const m_typename;
+	DISALLOW_COPY_AND_ASSIGN(Flag_Descr);
 };
 
 /**
@@ -67,10 +74,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
 	friend struct Router;
 
-	// NOCOM(#codereview): MO_DESCR() will not work here. It returns a casted
-	// version of m_descr, which is not defined in Flag (or Road). Instead, it
-	// should look something like this. (implementation should be in .cc file).
-	// const Flag_Descr& descr() const { return g_flag_descr; }
+	const Flag_Descr& descr() const;
 
 	Flag(); /// empty flag for savegame loading
 	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
@@ -178,7 +182,6 @@ private:
 };
 
 extern Flag_Descr g_flag_descr;
-
 }
 
 #endif  // end of include guard: WL_ECONOMY_FLAG_H

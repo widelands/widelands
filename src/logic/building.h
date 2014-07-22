@@ -27,6 +27,7 @@
 #include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
+#include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
@@ -64,11 +65,9 @@ struct Building_Descr : public Map_Object_Descr {
 		(char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
+	virtual ~Building_Descr() override {};
 
-    char const * type_name() const override {
-		return "building";
-	}
-
+	const std::string& type_name() const override {return m_typename;}
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
@@ -137,6 +136,7 @@ protected:
 	Building & create_constructionsite() const;
 
 private:
+	std::string const m_typename;
 	const Tribe_Descr & m_tribe;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
@@ -157,6 +157,7 @@ private:
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
+	DISALLOW_COPY_AND_ASSIGN(Building_Descr);
 };
 
 

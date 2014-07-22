@@ -220,7 +220,7 @@ void GameRenderer::draw_objects()
 						m_dst->drawanim(pos[F], pic, 0, owner);
 					} else if (const uint32_t pic = map_object_descr->main_animation()) {
 						m_dst->drawanim(pos[F], pic, 0, owner);
-					} else if (map_object_descr == &Widelands::g_flag_descr) {
+					} else if (map_object_descr->type_name() == "flag") {
 						m_dst->drawanim(pos[F], owner->tribe().flag_animation(), 0, owner);
 					}
 				}

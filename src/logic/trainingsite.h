@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_TRAININGSITE_H
 #define WL_LOGIC_TRAININGSITE_H
 
+#include "base/macros.h"
 #include "logic/productionsite.h"
 #include "logic/soldiercontrol.h"
 #include "logic/tattribute.h"
@@ -35,10 +36,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
+	virtual ~TrainingSite_Descr() override {};
 
-	char const* type_name() const override {
-		return "trainingsite";
-	}
+	const std::string& type_name() const override {return m_typename;}
 
 	virtual Building & create_object() const override;
 
@@ -55,6 +55,8 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_max_stall() const;
 
 private:
+	std::string const m_typename;
+
 	//  FIXME These variables should be per soldier type. They should be in a
 	//  FIXME struct and there should be a vector, indexed by Soldier_Index,
 	//  FIXME with that struct structs as element type.
@@ -92,6 +94,7 @@ private:
 
 	// Re-use of m_inputs to get the resources
 	// TrainingMap m_programs;
+	DISALLOW_COPY_AND_ASSIGN(TrainingSite_Descr);
 };
 
 /**

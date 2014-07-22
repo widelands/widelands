@@ -228,6 +228,7 @@ Immovable_Descr::Immovable_Descr
 	 Tribe_Descr const * const owner_tribe)
 :
 	Map_Object_Descr(_name, _descname),
+	m_typename      ("immovable"),
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {

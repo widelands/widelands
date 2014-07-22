@@ -55,15 +55,13 @@ class BobDescr : public Map_Object_Descr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
-	char const* type_name() const override {
-		return "bob";
-	}
-
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
-	         Tribe_Descr const* tribe);
+				Tribe_Descr const* tribe);
+	virtual ~BobDescr() override {};
 
-	virtual ~BobDescr() {}
+	const std::string& type_name() const override {return m_typename;}
+
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
 
 	Tribe_Descr const* get_owner_tribe() const {
@@ -79,7 +77,9 @@ protected:
 	virtual Bob& create_object() const = 0;
 
 private:
+	std::string const m_typename;
 	const Tribe_Descr* const owner_tribe_;  //  nullptr if world bob
+	DISALLOW_COPY_AND_ASSIGN(BobDescr);
 };
 
 /**

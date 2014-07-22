@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_CARRIER_H
 #define WL_LOGIC_CARRIER_H
 
+#include "base/macros.h"
 #include "logic/worker.h"
 
 namespace Widelands {
@@ -31,21 +32,24 @@ struct Carrier_Descr : public Worker_Descr {
 	              Profile& prof,
 	              Section& global_s,
 	              const Tribe_Descr& _tribe)
-	   : Worker_Descr(_name, _descname, directory, prof, global_s, _tribe) {
+		:
+		Worker_Descr(_name, _descname, directory, prof, global_s, _tribe),
+		m_typename  ("carrier")
+	{
 	}
+	virtual ~Carrier_Descr() override {};
 
-	virtual Worker_Type get_worker_type() const override {
-		return CARRIER;
-	}
-	// class type needed for Lua stuffl TODO: redundant with get_worker_type()?
-	char const* type_name() const override {
-		return "carrier";
-	}
+	virtual Worker_Type get_worker_type() const override {return Worker_Descr::CARRIER;}
+
+	// class type needed for Lua stuffl TODO NOCOM: redundant with get_worker_type()?
+	const std::string& type_name() const override {return m_typename;}
 
 protected:
-	virtual Bob& create_object() const override {
-		return *new Carrier(*this);
-	}
+	virtual Bob & create_object() const override;
+
+private:
+	std::string const m_typename;
+	DISALLOW_COPY_AND_ASSIGN(Carrier_Descr);
 };
 
 /**
@@ -53,6 +57,8 @@ protected:
  */
 struct Carrier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
+
+	MO_DESCR(Carrier_Descr)
 
 	Carrier(const Carrier_Descr & carrier_descr)
 		: Worker(carrier_descr), m_promised_pickup_to(-1)
@@ -68,8 +74,11 @@ struct Carrier : public Worker {
 
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
+	// NOCOM(GunChleoc) I had to change this from private to public
+	// to make the compiler happy - it's used in road.cc
+	static Task const taskRoad;
+
 private:
-	MO_DESCR(Carrier_Descr)
 
 	void find_pending_ware(Game &);
 	int32_t find_closest_flag(Game &);
@@ -79,7 +88,6 @@ private:
 	void road_pop           (Game &, State &);
 	void transport_update   (Game &, State &);
 
-	static Task const taskRoad;
 	static Task const taskTransport;
 
 	void deliver_to_building(Game &, State &);

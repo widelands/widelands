@@ -82,7 +82,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
 				m_bobs.add
 					(new Critter_Bob_Descr
-					 	(_name, _descname, path, prof, global_s,  this));
+						(_name, _descname, path, prof, global_s,  *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ship")

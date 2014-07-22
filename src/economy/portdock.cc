@@ -42,12 +42,17 @@ namespace Widelands {
 
 PortDock_Descr g_portdock_descr("portdock", "Port Dock");
 
-// NOCOM(#codereview): You need to provide implementation for the methods you declare in the header.
-PortDock_Descr::PortDock_Descr(char const* const name, char const* const descname) :
-	Map_Object_Descr(name, descname) {
+const PortDock_Descr& PortDock::descr() const {
+	return g_portdock_descr;
 }
 
-PortDock::~PortDock_Descr() {}
+
+PortDock_Descr::PortDock_Descr(char const* const _name, char const* const _descname)
+	:
+	Map_Object_Descr(_name, _descname),
+	m_typename      ("portdock")
+{
+}
 
 PortDock::PortDock(Warehouse* wh) :
 	PlayerImmovable(g_portdock_descr),

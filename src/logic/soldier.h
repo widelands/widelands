@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_SOLDIER_H
 #define WL_LOGIC_SOLDIER_H
 
+#include "base/macros.h"
 #include "logic/tattribute.h"
 #include "logic/worker.h"
 
@@ -44,14 +45,13 @@ struct Soldier_Descr : public Worker_Descr {
 		(char const * const _name, char const * const _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
+	virtual ~Soldier_Descr() override {};
 
 	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
 	// NOTE as well defined in an enum in instances.h
 	virtual Worker_Type get_worker_type() const override {return Worker_Descr::SOLDIER;}
 
-	char const* type_name() const override {
-		return "soldier";
-	}
+	const std::string& type_name() const override {return m_typename;}
 
 	virtual void load_graphics() override;
 
@@ -135,6 +135,9 @@ protected:
 			(const std::string & directory, Profile & prof, Section & global_s,
 			 const char * anim_name);
 
+private:
+	std::string const m_typename;
+	DISALLOW_COPY_AND_ASSIGN(Soldier_Descr);
 };
 
 class Building;

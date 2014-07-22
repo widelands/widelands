@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/buildcost.h"
 #include "logic/instances.h"
@@ -115,12 +116,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 Tribe_Descr const * const);
 	Immovable_Descr(const LuaTable&, const World&);
+	~Immovable_Descr() override;
 
-	~Immovable_Descr();
-
-	char const* type_name() const override {
-		return "immovable";
-	}
+	const std::string& type_name() const override {return m_typename;}
 
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
@@ -156,11 +154,14 @@ protected:
 	Buildcost m_buildcost;
 
 private:
+	std::string const m_typename;
+
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 
 	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
+	DISALLOW_COPY_AND_ASSIGN(Immovable_Descr);
 };
 
 class Immovable : public BaseImmovable {

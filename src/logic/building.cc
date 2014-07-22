@@ -57,6 +57,7 @@ Building_Descr::Building_Descr
 	 const Tribe_Descr & _descr)
 	:
 	Map_Object_Descr(_name, _descname),
+	m_typename      ("building"),
 	m_tribe         (_descr),
 	m_buildable     (true),
 	m_buildicon     (nullptr),

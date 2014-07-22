@@ -26,6 +26,7 @@
 #include <string>
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/building.h"
 #include "logic/production_program.h"
@@ -58,13 +59,11 @@ struct ProductionSite_Descr : public Building_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &, const World&);
-	virtual ~ProductionSite_Descr();
+	virtual ~ProductionSite_Descr() override;
+
+	const std::string& type_name() const override {return m_typename;}
 
 	virtual Building & create_object() const override;
-
-    char const * type_name() const override {
-		return "productionsite";
-	}
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
@@ -91,11 +90,13 @@ struct ProductionSite_Descr : public Building_Descr {
 
 
 private:
+	std::string const m_typename;
 	BillOfMaterials m_working_positions;
 	BillOfMaterials m_inputs;
 	Output   m_output_ware_types;
 	Output   m_output_worker_types;
 	Programs m_programs;
+	DISALLOW_COPY_AND_ASSIGN(ProductionSite_Descr);
 };
 
 class ProductionSite : public Building {
