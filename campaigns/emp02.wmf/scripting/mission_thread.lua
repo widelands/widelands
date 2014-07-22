@@ -129,7 +129,7 @@ function mining_infrastructure()
       "armorsmithy",
       "weaponsmithy",
       "smelting_works",
-      "burners_house",
+      "charcoal_furnace",
    }
 
    local o = add_obj(obj_build_mining_infrastructure)
@@ -145,14 +145,14 @@ function mining_infrastructure()
          "armorsmithy",
          "weaponsmithy",
          "smelting_works",
-         "burners_house",
+         "charcoal_furnace",
       }
       if #rv.stonemasons_house > 0 and
          #rv.toolsmithy > 0 and
          #rv.armorsmithy > 0 and
          #rv.smelting_works > 0 and
          (#rv.oremine + #rv.deep_oremine > 0) and
-         (#rv.coalmine + #rv.deep_coalmine + #rv.burners_house > 0) and
+         (#rv.coalmine + #rv.deep_coalmine + #rv.charcoal_furnace > 0) and
          #rv.weaponsmithy > 0 then break end
       sleep(4948)
    end
@@ -203,11 +203,11 @@ function barbarians_thread()
    while true do
       local rv = p1:get_buildings{
          "marblemine", "deep_marblemine", "oremine", "deep_oremine",
-         "coalmine", "deep_coalmine", "burners_house"
+         "coalmine", "deep_coalmine", "charcoal_furnace"
       }
       local mm = #rv.marblemine + #rv.deep_marblemine
       local ore = #rv.oremine + #rv.deep_oremine
-      local coal = #rv.coalmine + #rv.deep_coalmine + #rv.burners_house
+      local coal = #rv.coalmine + #rv.deep_coalmine + #rv.charcoal_furnace
 
       if mm > 0 and ore > 0 and coal > 0 then break end
       sleep(6674)

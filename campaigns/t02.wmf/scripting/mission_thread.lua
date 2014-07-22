@@ -199,14 +199,16 @@ function build_materials_thread()
    o.done = true
 
    send_msg(order_msg_17_grindstone)
-   plr:allow_buildings{"lime_kiln", "well", "burners_house"}
+   plr:allow_buildings{"lime_kiln", "well", "charcoal_furnace"}
    o = add_obj(obj_better_material_2)
    -- Wait for the buildings to be build
    while true do
       local rv = plr:get_buildings{"lime_kiln", "well",
-         "coalmine", "deep_coalmine", "burners_house"}
+         "coalmine", "deep_coalmine", "charcoal_furnace"}
       if (#rv.lime_kiln > 0 and #rv.well > 0) and
-         (#rv.coalmine + #rv.deep_coalmine + #rv.burners_house > 0) then
+         (#rv.coalmine + #rv.deep_coalmine + #rv.charcoal_furnace > 0) then
+         -- TODO(codereview): This is dynamic enough that since I've passed in the building name as a parameter (building to look up),
+         -- I get that as member of the object returned to look up things? Otherwise I would need some pointers on how to create this method.
          break
       end
       sleep(5421)
