@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:11+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-07-21 18:51+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:36+0000\n"
+"X-Launchpad-Export-Date: 2014-07-22 05:43+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
@@ -1683,7 +1683,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/granitemine/help.lua:17
 msgid "Carve raw stone out of the rock in mountain terrain."
-msgstr ""
+msgstr "Schneidet Felsen aus dem Berggestein."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "It cannot be upgraded."
@@ -2064,6 +2064,9 @@ msgid ""
 "component of the snacks that inns and big inns prepare for miners in deep "
 "mines."
 msgstr ""
+"Die Kleinbrauerei produziert Bier einfacher Qualität. Dieses Bier ist eine "
+"entscheidende Komponente der Snacks, die Wirtshäuser und Gaststätten für "
+"Bergleute in tiefen Minen zubereiten."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:29
 msgid ""
@@ -2105,7 +2108,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carves raw stone out of rocks in the vicinity."
-msgstr ""
+msgstr "Schneidet Felsen aus den Steinen in der Umgebung."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."

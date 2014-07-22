@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:12+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"PO-Revision-Date: 2014-07-21 13:45+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:35+0000\n"
+"X-Launchpad-Export-Date: 2014-07-22 05:42+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: gd\n"
 
@@ -33,10 +33,12 @@ msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
 msgstr ""
+"Tog togalaichean an airm (can freiceadain no taighean-faire) gus do ranntair "
+"a leudachadh."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:27
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Ruig na creagan gu ear-thuath 's tog coireall ann."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:33
 msgid "Start building mines on the mountain"
@@ -48,7 +50,7 @@ msgstr "Tog mèinnean guail is iarainn"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:36
 msgid "Build a coal mine and an iron ore mine."
-msgstr ""
+msgstr "Tog mèinn guail 's mèinn iarainn."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:37
 msgid ""
@@ -59,6 +61,12 @@ msgid ""
 "mine for both kinds of resources that he will find, choosing the mine to be "
 "built appropriately:"
 msgstr ""
+"Gus seo a dhèanamh, tog bratach air sliabh na beinne gu ear (air cruth-tìre "
+"beinne seach air a' chluain). Nuair a nì thu briogadh air a' bhratach ùr, 's "
+"urrainn dhut clach-eòlaichean a ghairm thuice. Bidh na clach-eòlaichean a' "
+"sireadh clachan-mèinneir on a tha iad air a' bheinn; mura robh, bhiodh iad "
+"a' sireadh uisge. An uairsin, tog mèinn airson an dà sheòrsa stòrais a lorg "
+"iad, a' taghadh na mèinne mar bu chòir:"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:38
 msgid "Black – coal"
@@ -159,16 +167,18 @@ msgstr "Leasaich togalaichean is tog taigh-grùide beag"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:82
 msgid "Enhance the coal mine and the tavern, and build a micro brewery."
 msgstr ""
+"Leasaich a' mhèinn guail 's an taigh-tàirn agus tog taigh-grùide beag."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid ""
 "Enhance the coal mine and the tavern to the better versions of their "
 "buildings respectively."
 msgstr ""
+"Leasaich a' mhèinn guail 's an taigh-tàirn gu tionndadh as fheàrr dhiubh."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Tog taigh-grùide beag cuideachd."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
@@ -201,6 +211,11 @@ msgid ""
 "have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
 msgstr ""
+"Tha barrachd feumalachdan air togalaichean mar sin na tha aig an togalach "
+"bhunasach mar as àbhaist – mar eisimpleir, iarraidh mèinnean domhain lòin "
+"seach greimeagan. Feumaidh tu an taigh-tàirn agad a leasachadh gu taigh-òil "
+"ach an urrainn dhut lòin a dhèanamh is 's ann gun dèan thu seo dhe dh'aran "
+"tur agus seòrsa eile de bhiadh (feòil no iasg) agus leann."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:88
 msgid ""
@@ -208,6 +223,10 @@ msgid ""
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
 msgstr ""
+"'S dòcha gum b' fhearr leat a h-uile mèinn a leasachadh gu mèinn dhomhain ma "
+"tha an luchd-obrach agad – obraichidh mèinnean nas motha nas luaithe ach "
+"bidh am biadh a dh'fheumas na mèinnean beaga nas saoire. Tha e suas riut "
+"fhèin dè an ro-innleachd as fhearr leat."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:96
@@ -223,6 +242,12 @@ msgid ""
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
 msgstr ""
+"Tha togalaichean nas fhearr 's nas motha  – a' gabhail a-steach a h-uile "
+"togalach an airm – feumach air stuthan togail nas fhearr. cha ghabh an "
+"togail a-mach à fiodh simplidh  –  feumaidh cruadhaichear fiodha am fiodh a "
+"leasachadh gu fiodh an toiseach. Cuimhnich gun tog thu cruadhaichear fiodha "
+"mus ruith thu a-mach à fiodh cruaidh oir chan urrainn dhut do ranntair a "
+"leudachadh às aonais."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -231,7 +256,7 @@ msgstr "Tog àth-aoil is eaconamaidh guail"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:114
 msgid "Build a lime kiln, a well and a charcoal burner, or a coal mine"
-msgstr ""
+msgstr "Togh àth-aoil, tobar is loisgeadair fiodha no mèinn guail"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -239,6 +264,9 @@ msgid ""
 "blackwood. One of these is grout, which is produced out of raw stone, water "
 "and coal by a lime-burner."
 msgstr ""
+"Tha togalaichean nas fhearr feumach air stuthan togail leasaichte eile seach "
+"fiodh cruaidh a-mhàin. Is aol-tàthaidh aonan dhiubh a nì loisgeadair aoil a-"
+"mach à clachan, uisge 's gual."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:111
 msgid ""
@@ -246,6 +274,9 @@ msgid ""
 "geologists can discover when you send them to any flag that is not on a "
 "mountain. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr ""
+"Tog tobair ann an àite far a bheil uisge san talamh. Lorgaidh clach-eòlaiche "
+"uisge dhut nuair a chuireas tu gu bratach nach eil air beinn e. Tog sloc "
+"gual-fhiodha no mèinn guail gus gual fhaighinn."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:122
@@ -259,6 +290,10 @@ msgid ""
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
 msgstr ""
+"'S e feur tughaidh a th' anns an treas stuth togail a dh'fheumas tu airson "
+"togalaichean leasaichte 's còmhdaichidh e na mullaichean. Cuiridh "
+"gàirnealair feur tughaidh timcheall an togalaich aige agus 's e seo am feur-"
+"lios."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:133
@@ -273,10 +308,15 @@ msgid ""
 "roads therefore employ a second carrier: An ox that helps to carry the "
 "wares. This doubles the transport capacity."
 msgstr ""
+"Nuair a bhios eallach mòr ri ghiùlain a' feitheamh air na rathaidean, chan "
+"fhoghainn giùlanair a-mhàin gus an toirt on dàrna bhratach gun bhratach eile "
+"gu luath. Mar sin, thig stad air an trafaig agad. 'S urrainn do dhàrna "
+"giùlanair obair air rathad mar seo: damh a chuidicheas leat gus am bathar a "
+"ghiùlan. 'S urrainn dhut an dà chuid de bhathar a ghluasad mar sin."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:137
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "Togaidh tu daimh ann an tuathanas crodh le cruithneachd 's uisge."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:147
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:159

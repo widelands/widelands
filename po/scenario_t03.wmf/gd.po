@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-03-06 11:10+0000\n"
+"PO-Revision-Date: 2014-07-21 14:12+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-07-22 05:42+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: gd\n"
 
@@ -27,27 +27,27 @@ msgstr "Tog eaconamaidh bìdh beag"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:24
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Tog eaconamaidh bìdh bunasach gus biadh a thoirt dhan mhuinntir."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:25
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Tog bothan-iasgair"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:26
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Tog bothan-sealgair"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:27
 msgid "Build a well"
-msgstr ""
+msgstr "Tog tobar"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:28
 msgid "Build a farm"
-msgstr ""
+msgstr "Tog tuathanas"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:29
 msgid "Build a bakery"
-msgstr ""
+msgstr "Tog taigh-fuine"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
@@ -62,10 +62,12 @@ msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly.)"
 msgstr ""
+"Fhad 's a tha na rathaidean agad a' fàs nas fhaide 's an eaconamaidh agad "
+"nas motha, cuir na daimh agad gu feum gus am bathar a ghluasad gu luath."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:39
 msgid "Remember to build a cattle farm!"
-msgstr ""
+msgstr "Cuimhnich gun tog thu tuathanas crodh!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:45
 #: ../../campaigns/t03.wmf/scripting/texts.lua:47
@@ -77,6 +79,8 @@ msgid ""
 "Build a donjon at the north-east of your territory to get greater visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"Tog tùr-faire gu ear-thuath air do ranntair gus cur ris an astar lèirsinne "
+"agad agus gus do mhuinntir a dhìon o dh'ionnsaighean obann an nàmhad."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:54
 #: ../../campaigns/t03.wmf/scripting/texts.lua:56
@@ -88,11 +92,13 @@ msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"Tog barrachd togalaichean an airm gus an tìr timcheall air a' phrìomh-àras a "
+"rùrachadh 's do mhuinntir a chumail sàbhailte."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:63
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Tog bun-structar mèinnearachd"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:66
 msgid ""
@@ -100,6 +106,9 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"Leudaich do ranntair dha na beanntan, cuir clach-eòlaichean gus lorg airson "
+"clach-mhèinneir 's guail agus tog eaconamaidh mèinnearachd le mèinnean, "
+"taighean-tàirn, ceàrdaich leaghadair 'S ceàrdach meatailt."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:72
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
@@ -108,18 +117,18 @@ msgstr "Tog dùn"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Tog dùn gu ear air na beanntan."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:81
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Tog bun-structar trèanaidh"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:84
 #: ../../campaigns/t03.wmf/scripting/texts.lua:106
 msgid ""
 "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Tog raon catha 's campa trèanaidh gu siar air na beanntan."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:85
 #: ../../campaigns/t03.wmf/scripting/texts.lua:118
@@ -129,6 +138,11 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "the axfactory to a war mill, which will produce additional weapons."
 msgstr ""
+"Leasaich an ceàrdach meatailt agad gu factaraidh thuaghan ach an dèan thu "
+"airm agus tog ceàrdach meatailt eile gus an dèan thu acainnean fhathast. "
+"Nuair a ruigeas an gobha-dubh agad ath-leibheil (sàr-ghobha-dubh), 's "
+"urrainn dhut fiù 's ceàrdach-cogaidh a dhèanamh dhen fhactaraidh thuaghan a "
+"bheir barrachd arm dhut."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:86
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
@@ -136,6 +150,8 @@ msgid ""
 "Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"Tog ceàrdach chlogaidean gu ear air na beanntan gus armachd as fhearr a "
+"thoirt dha na saighdearan agad."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 #: ../../campaigns/t03.wmf/scripting/texts.lua:95
@@ -144,7 +160,7 @@ msgstr "Tog taigh-stòrais"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:96
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Tog taigh-stòrais gu siar air na beanntan."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:97
 msgid ""
@@ -153,6 +169,10 @@ msgid ""
 "your territory is growing and the paths to your headquarters get longer and "
 "longer."
 msgstr ""
+"Tha taighean-stòrais coltach ris a' phrìomh-àras agad ach cha dìon na "
+"saighdearan iad. Bidh e glic gu tric taigh-stòrais a thogail nuair a bhios "
+"do ranntair air fhàs agus na rathaidean dhan phrìomh-àras agad air fàs ro "
+"fhada."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 #: ../../campaigns/t03.wmf/scripting/texts.lua:105
@@ -165,10 +185,14 @@ msgid ""
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
 msgstr ""
+"Cleachdaidh tu togalaichean trèanaidh mar an cama trèanaidh 's an raon catha "
+"gus buadhan nan saighdearan agad a thrèanadh. Bidh na buadhan seo cudromach "
+"air a bhlàr agus mar as fhearr a tha saighdear 's ann as motha a bhios an "
+"seans gum buannaich e cath."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "The attributes are: health points, attack, defense and evade."
-msgstr ""
+msgstr "Seo na buadhan: slàinte, ionnsaigh, dìon 's teàrnadh."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:115
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117
@@ -187,7 +211,7 @@ msgstr "Mill feachd Khalitath"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:136
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Mill feachd Khalitath 's leudaich do ranntair gu ear."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 msgid ""
@@ -196,6 +220,10 @@ msgid ""
 "that should attack. When you are ready with setting the number, click on the "
 "cross (‘Start Attack’)."
 msgstr ""
+"Feumaidh tu briogadh air doras togalach an airm gus ionnsaigh a thoirt air "
+"an nàmhaid. Nochdaidh clàr-taice a leigeas leat uiread nan saighdearan a "
+"thaghadh a nì ionnsaigh. Nuair a bhios tu ullamh le suidheachadh na h-"
+"àireimh, briog air a' chrois (\"Tòisich air ionnsaigh\")."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:143
 #: ../../campaigns/t03.wmf/scripting/texts.lua:145
@@ -206,6 +234,7 @@ msgstr "Ionnsaigh an airm air Al’thunran"
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
 msgstr ""
+"Mill feachdan dà bhràthair Troin gu lèir gus cearcall na cathrach a shaoradh."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:155
 msgid "Close to Home"

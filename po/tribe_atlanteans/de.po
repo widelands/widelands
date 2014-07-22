@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-16 14:24+0000\n"
+"PO-Revision-Date: 2014-07-21 18:57+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-07-22 05:42+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -1199,7 +1199,7 @@ msgstr "Diamantenabbau"
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
-msgstr ""
+msgstr "Schneidet Steine aus den Granitvorkommen in den Bergen."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -1613,7 +1613,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "Carves stones out of rocks in the vicinity."
-msgstr ""
+msgstr "Schneidet Steine aus den Felsen in der Umgebung."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
