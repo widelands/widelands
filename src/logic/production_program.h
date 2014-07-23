@@ -428,7 +428,7 @@ struct ProductionProgram {
 		        const std::string& production_program_name,
 		        ProductionSite_Descr*);
 		virtual void execute(Game &, ProductionSite &) const override;
-		virtual void informPlayer(Game &, ProductionSite &) const;
+		virtual void notify_player(Game &, ProductionSite &) const;
 	private:
 		Resource_Index m_resource;
 		uint8_t        m_distance; // width/radius of mine

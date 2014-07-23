@@ -782,7 +782,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 
 	// Inform the player, that we are under attack by adding a new entry to the
 	// message queue - a sound will automatically be played.
-	informPlayer(game, true);
+	notify_player(game, true);
 }
 
 bool MilitarySite::attack(Soldier & enemy)
@@ -824,7 +824,7 @@ bool MilitarySite::attack(Soldier & enemy)
 
 		// Inform the player, that we are under attack by adding a new entry to
 		// the message queue - a sound will automatically be played.
-		informPlayer(game);
+		notify_player(game);
 
 		return true;
 	} else {
@@ -931,7 +931,7 @@ bool MilitarySite::military_presence_kept(Game & game)
 }
 
 /// Informs the player about an attack of his opponent.
-void MilitarySite::informPlayer(Game & game, bool const discovered)
+void MilitarySite::notify_player(Game & game, bool const discovered)
 {
 	// Add a message as long as no previous message was send from a point with
 	// radius <= 5 near the current location in the last 60 seconds
