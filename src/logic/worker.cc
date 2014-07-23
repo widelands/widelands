@@ -105,9 +105,8 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
  * \param state
  * \param action Which resource to mine (action.sparam1) and where to look for
  * it (in a radius of action.iparam1 around current location)
- *
- * \todo Lots of magic numbers in here
  */
+// TODO(unknown): Lots of magic numbers in here
 bool Worker::run_mine(Game & game, State & state, const Action & action)
 {
 	Map & map = game.map();
@@ -205,12 +204,12 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
  * \param state
  * \param action Which resource to breed (action.sparam1) and where to put
  * it (in a radius of action.iparam1 around current location)
- *
- * TODO(unknown) in FindNodeResourceBreedable, the node (or neighbors) is accepted if it is breedable.
- * In here, breeding may happen on a node emptied of resource.
- * \todo Lots of magic numbers in here
- * \todo Document parameters g and state
  */
+
+// TODO(unknown): in FindNodeResourceBreedable, the node (or neighbors) is accepted if it is breedable.
+// In here, breeding may happen on a node emptied of resource.
+// TODO(unknown): Lots of magic numbers in here
+// TODO(unknown): Document parameters g and state
 bool Worker::run_breed(Game & game, State & state, const Action & action)
 {
 	molog(" Breed(%s, %i)\n", action.sparam1.c_str(), action.iparam1);
@@ -497,23 +496,6 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
  * are also walkable (an exception is made if one of the neighbouring
  * fields is owned by this worker's location).
  *
- * TODO(unknown) This is an embarrasingly ugly hack to make bug #1796611 happen less
- * often. But it gives no passability guarantee (that workers will not
- * get locked in). For example one farmer may call findspace and then,
- * before he plants anything, another farmer may call findspace, which
- * may find a space without considering that the first farmer will plant
- * something. Together they can cause a passability problem. This code
- * will also allow blocking the shoreline if it is next to the worker's
- * location. Also, the gap of 2 nodes between 2 farms will be blocked,
- * because both are next to their farm. The only real solution that I can
- * think of for this kind of bugs is to only allow unpassable objects to
- * be placed on a node if ALL neighbouring nodes are passable. This must
- * of course be checked at the moment when the object is placed and not,
- * as in this case, only before a worker starts walking there to place an
- * object. But that would make it very difficult to find space for things
- * like farm fileds. So our only option seems to be to keep all farm
- * fields, trees, stones and such on triangles and keep the nodes
- * passable. See code structure issue #1096824.
  *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
@@ -521,6 +503,23 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
  * iparam4 = whether the "breed" flag is set
  * sparam1 = Resource
  */
+// TODO(unknown) This is an embarrasingly ugly hack to make bug #1796611 happen less
+// often. But it gives no passability guarantee (that workers will not
+// get locked in). For example one farmer may call findspace and then,
+// before he plants anything, another farmer may call findspace, which
+// may find a space without considering that the first farmer will plant
+// something. Together they can cause a passability problem. This code
+// will also allow blocking the shoreline if it is next to the worker's
+// location. Also, the gap of 2 nodes between 2 farms will be blocked,
+// because both are next to their farm. The only real solution that I can
+// think of for this kind of bugs is to only allow unpassable objects to
+// be placed on a node if ALL neighbouring nodes are passable. This must
+// of course be checked at the moment when the object is placed and not,
+// as in this case, only before a worker starts walking there to place an
+// object. But that would make it very difficult to find space for things
+// like farm fileds. So our only option seems to be to keep all farm
+// fields, trees, stones and such on triangles and keep the nodes
+// passable. See code structure issue #1096824.
 struct FindNodeSpace {
 	FindNodeSpace(BaseImmovable * const ignoreimm)
 		: ignoreimmovable(ignoreimm) {}
@@ -2760,7 +2759,7 @@ void Worker::geologist_update(Game & game, State & state)
 					 	 descr().get_right_walk_anims(does_carry_ware())))
 				{
 
-					molog("[geologist]: BUG(unknown): could not find path\n");
+					molog("[geologist]: Bug: could not find path\n");
 					send_signal(game, "fail");
 					return pop_task(game);
 				}

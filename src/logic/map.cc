@@ -1668,9 +1668,8 @@ std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename)
  *
  * \return the cost of the path (in milliseconds of normal walking
  * speed) or -1 if no path has been found.
- *
- * \todo Document parameters instart, inend, path, flags
  */
+// TODO(unknown): Document parameters instart, inend, path, flags
 int32_t Map::findpath
 	(Coords                  instart,
 	 Coords                  inend,

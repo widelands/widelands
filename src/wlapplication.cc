@@ -114,9 +114,9 @@ void terminate(int) {
 
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
- * \todo Handle exception FileType_error
- * \todo Handle case when \e no data can be found
  */
+// TODO(unknown): Handle exception FileType_error
+// TODO(unknown): Handle case when \e no data can be found
 void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
@@ -235,9 +235,8 @@ WLApplication * WLApplication::the_singleton = nullptr;
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  * \return An (always valid!) pointer to the WLApplication singleton
- *
- * \todo Return a reference - the return value is always valid anyway
  */
+// TODO(unknown): Return a reference - the return value is always valid anyway
 WLApplication * WLApplication::get(int const argc, char const * * argv) {
 	if (the_singleton == nullptr)
 		the_singleton = new WLApplication(argc, argv);
@@ -321,8 +320,8 @@ m_redirected_stdio(false)
 
 /**
  * Shut down all subsystems in an orderly manner
- * \todo Handle errors that happen here!
  */
+// TODO(unknown): Handle errors that happen here!
 WLApplication::~WLApplication()
 {
 	//Do use the opposite order of WLApplication::init()
@@ -359,11 +358,10 @@ WLApplication::~WLApplication()
 
 /**
  * The main loop. Plain and Simple.
- *
- * \todo Refactor the whole mainloop out of class \ref UI::Panel into here.
- * In the future: push the first event on the event queue, then keep
- * dispatching events until it is time to quit.
  */
+// TODO(unknown): Refactor the whole mainloop out of class \ref UI::Panel into here.
+// In the future: push the first event on the event queue, then keep
+// dispatching events until it is time to quit.
 void WLApplication::run()
 {
 	if (m_game_type == EDITOR) {
@@ -649,8 +647,8 @@ void WLApplication::_handle_mousebutton
 
 /**
  * Return the current time, in milliseconds
- * \todo Use our internally defined time type
  */
+// TODO(unknown): Use our internally defined time type
 // TODO(sirver): get rid of this method and use SDL_GetTicks() directly.
 int32_t WLApplication::get_time() {
 	uint32_t time = SDL_GetTicks();

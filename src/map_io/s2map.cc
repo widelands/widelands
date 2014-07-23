@@ -387,7 +387,7 @@ void S2_Map_Loader::load_s2mf_header(FileRead& fr)
 
 	//  Header must be swapped for big-endian Systems, works at the moment only
 	//  for PowerPC architecture
-	//  \todo: Generalize this
+	//  TODO(unknown): Generalize this
 #if defined(__ppc__)
 	header.w = Swap16(header.w);
 	header.h = Swap16(header.h);

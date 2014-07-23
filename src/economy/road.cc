@@ -53,10 +53,8 @@ Road::Road() :
 	m_flags[0] = m_flags[1] = nullptr;
 	m_flagidx[0] = m_flagidx[1] = -1;
 
-	/*
-	 * Initialize the worker slots for the road
-	 * TODO(unknown): make this configurable
-	 */
+// Initialize the worker slots for the road
+// TODO(unknown): make this configurable
 	CarrierSlot slot;
 	m_carrier_slots.push_back(slot);
 	m_carrier_slots.push_back(slot);

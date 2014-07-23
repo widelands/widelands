@@ -24,12 +24,9 @@
 #include "editor/tools/editor_history.h"
 
 
-/**
- * \TODO Saving every action in a list isn't very efficient.
- * A long list can take several seconds to undo/redo every action.
- * If someone has a better idea how to do this, implement it!
- */
-
+// TODO(unknown): Saving every action in a list isn't very efficient.
+// A long list can take several seconds to undo/redo every action.
+// If someone has a better idea how to do this, implement it!
 void Editor_Draw_Tool::add_action
 (Editor_Tool_Action ac, Editor_Action_Args & args)
 {

@@ -80,13 +80,12 @@ UI::Box * create_portdock_expedition_display(UI::Panel * parent, Warehouse & wh,
 		box.add(new WaresQueueDisplay(&box, 0, 0, igb, wh, wq, true), UI::Box::AlignLeft);
 	}
 
-/* TODO(unknown) Implement UI for Builder + Soldiers
-	UI::Box & workers = *new UI::Box(&box, 0, 0, UI::Box::Horizontal);
-	box.add(&workers, UI::Box::AlignLeft);
+// TODO(unknown): Implement UI for Builder + Soldiers
+// UI::Box & workers = *new UI::Box(&box, 0, 0, UI::Box::Horizontal);
+// box.add(&workers, UI::Box::AlignLeft);
 
-	//for (uint32_t i = 0; i < wh.get_expedition_workers().size(); ++i)
-		//workers.add(icon of worker, UI::Box::AlignLeft);
-*/
+// for (uint32_t i = 0; i < wh.get_expedition_workers().size(); ++i)
+// workers.add(icon of worker, UI::Box::AlignLeft);
 
 	return &box;
 }

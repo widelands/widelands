@@ -38,9 +38,7 @@
 #define DITHER_RAND_MASK (DITHER_WIDTH * 2 - 1)
 #define DITHER_RAND_SHIFT (16 / DITHER_WIDTH)
 
-/**
- * \todo Dangerous: casting, assumptions for sizeof(X), bitshifting
- */
+// TODO(unknown): Dangerous: casting, assumptions for sizeof(X), bitshifting
 #define FTOFIX(f) (static_cast<int32_t>((f) * 0x10000))
 #define ITOFIX(i) ((i)<<16)
 #define FIXTOI(f) ((f)>>16)

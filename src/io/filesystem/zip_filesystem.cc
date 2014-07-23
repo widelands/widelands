@@ -198,9 +198,10 @@ FileSystem * ZipFilesystem::MakeSubFileSystem(const std::string & path) {
 
 /**
  * Make a new Subfilesystem in this
- * \todo type should be recognized automatically, \see Filesystem::Create
  * \throw ZipOperation_error
  */
+// TODO(unknown): type should be recognized automatically,
+// see Filesystem::Create
 FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type const type)
 {
 	assert(!FileExists(path));

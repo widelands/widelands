@@ -339,8 +339,8 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 
 /** Find out whether to actually play a certain effect right now or rather not
  * (to avoid "sonic overload").
- * \todo What is the selection algorithm? cf class documentation
-*/
+ */
+// TODO(unknown): What is the selection algorithm? cf class documentation
 bool Sound_Handler::play_or_not
 	(const std::string &       fx_name,
 	 int32_t             const stereo_pos,

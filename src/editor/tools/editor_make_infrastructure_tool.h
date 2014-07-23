@@ -29,8 +29,8 @@ class Editor_Game_Base;
 
 /**
  * This places immovables on the map
- * \TODO Implement undo for this tool
-*/
+ */
+// TODO(unknown):  Implement undo for this tool
 struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false), m_player(0) {}
 

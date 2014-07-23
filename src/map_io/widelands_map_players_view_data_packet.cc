@@ -1047,7 +1047,7 @@ void Map_Players_View_Data_Packet::Write
 	const Map & map = egbase.map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
-	// \todo make first_field const when FCoords has been templatized so it can
+	// TODO(unknown): make first_field const when FCoords has been templatized so it can
 	// have "const Field * field;"
 	Field & first_field = map[0];
 	const Player_Number nr_players = map.get_nrplayers();

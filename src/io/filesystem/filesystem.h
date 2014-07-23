@@ -40,8 +40,8 @@ class StreamWrite;
 /**
  * FileSystem is an abstract base class representing certain filesystem
  * operations.
- * \todo const correctness
  */
+// TODO(unknown): const correctness
 class FileSystem {
 public:
 	//  TODO(unknown) This should be unnecessary. Make it so.

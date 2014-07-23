@@ -633,9 +633,9 @@ void Game::end_dedicated_game() {
 /**
  * Cleanup for load
  * \deprecated
- * \todo Get rid of this. Prefer to delete and recreate Game-style objects
- * Note that this needs fixes in the editor.
  */
+// TODO(unknown): Get rid of this. Prefer to delete and recreate Game-style objects
+// Note that this needs fixes in the editor.
 void Game::cleanup_for_load()
 {
 	m_state = gs_notrunning;
