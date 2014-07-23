@@ -56,11 +56,15 @@ struct ConstructionSite_Descr : public Building_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe);
 	virtual ~ConstructionSite_Descr() override {}
-	const std::string& type_name() const override {return m_typename;}
+
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
+
 	virtual Building & create_object() const override;
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSite_Descr);
 };
 

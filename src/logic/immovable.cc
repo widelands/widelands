@@ -228,7 +228,7 @@ Immovable_Descr::Immovable_Descr
 	 Tribe_Descr const * const owner_tribe)
 :
 	Map_Object_Descr(_name, _descname),
-	m_typename      ("immovable"),
+	m_type          (Map_Object_Type::IMMOVABLE),
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
@@ -254,7 +254,7 @@ Immovable_Descr::Immovable_Descr
 		while (Section::Value const * const v = global_s.get_next_val("attrib")) {
 			attributes.emplace_back(v->get_string());
 		}
-		add_attributes(attributes, {Map_Object::RESI});
+		add_attributes(attributes, {Map_Object::Attribute::RESI});
 	}
 
 	//  parse the programs
@@ -290,7 +290,7 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world)
      m_owner_tribe(nullptr)  // Can only parse world immovables for now.
 {
 	m_size = string_to_size(table.get_string("size"));
-	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {Map_Object::RESI});
+	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {Map_Object::Attribute::RESI});
 
 	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 	for (const std::string& animation : anims->keys<std::string>()) {
@@ -409,11 +409,6 @@ m_reserved_by_worker(false)
 
 Immovable::~Immovable()
 {
-}
-
-int32_t Immovable::get_type() const
-{
-	return IMMOVABLE;
 }
 
 BaseImmovable::PositionList Immovable::get_positions

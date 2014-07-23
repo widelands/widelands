@@ -42,9 +42,9 @@ DismantleSite_Descr::DismantleSite_Descr
 	 const Tribe_Descr & _tribe)
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	m_typename    ("dismantlesite")
+	m_type        (Map_Object_Type::DISMANTLESITE)
 {
-	add_attribute(Map_Object::CONSTRUCTIONSITE); // Yep, this is correct.
+	add_attribute(Map_Object::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }
 
 Building & DismantleSite_Descr::create_object() const {

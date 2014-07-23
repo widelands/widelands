@@ -49,19 +49,61 @@ class Player;
 struct Path;
 
 /**
+  * This enum lists the available classes of Map Objects
+  * Use it to compare return types of Map_Object_Descr.type()
+  * Whenever you add a new type, make sure you give it a string
+  * representation in Map_Object_Descr::type_name() as well.
+  */
+enum class Map_Object_Type : uint8_t {
+	MAPOBJECT,       // Root superclass
+
+	WARE,            //  class WareInstance
+	BATTLE,
+	FLEET,
+
+	BOB,             // Bob
+	CRITTER,         // Bob -- CritterBob
+	SHIP,            // Bob -- Ship
+	WORKER,          // Bob -- Worker
+	CARRIER,         // Bob -- Worker -- Carrier
+	SOLDIER,         // Bob -- Worker -- Soldier
+
+	// everything below is at least a BaseImmovable
+	IMMOVABLE,
+
+	// everything below is at least a PlayerImmovable
+	FLAG,
+	ROAD,
+	PORTDOCK,
+
+	// everything below is at least a Building
+	BUILDING,         // Building
+	CONSTRUCTIONSITE, // Building -- Constructionsite
+	DISMANTLESITE,    // Building -- Dismantlesite
+	WAREHOUSE,        // Building -- Warehouse
+	PRODUCTIONSITE,   // Building -- Productionsite
+	MILITARYSITE,     // Building -- Productionsite -- Militarysite
+	TRAININGSITE      // Building -- Productionsite -- Trainingsite
+};
+
+
+/**
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
 struct Map_Object_Descr {
+
 	Map_Object_Descr(const std::string& init_name, const std::string& init_descname)
-			: m_name(init_name), m_descname(init_descname), m_typename("mapobject") {
+			: m_name(init_name), m_descname(init_descname), m_type(Map_Object_Type::MAPOBJECT) {
 		}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-	virtual const std::string& type_name() const {return m_typename;}
-
 	const std::string &     name() const {return m_name;}
-	const std::string & descname() const {return m_descname;}
+	const std::string &     descname() const {return m_descname;}
+	virtual Map_Object_Type type() const {return m_type;}
+	// A string representation of the type used in Lua and log messages
+	const char* type_name() const;
+
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
@@ -96,9 +138,9 @@ private:
 	typedef std::map<std::string, uint32_t> AttribMap;
 	typedef std::vector<uint32_t>           Attributes;
 
-	std::string const m_name;
-	std::string const m_descname;       ///< Descriptive name
-	std::string const m_typename;
+	std::string const m_name;           /// The name for internal reference
+	std::string const m_descname;       /// A localized Descriptive name
+	Map_Object_Type   m_type;           /// Subclasses pick from the enum above
 	Attributes        m_attributes;
 	Anims             m_anims;
 	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
@@ -151,23 +193,6 @@ class Map_Object {
 	MO_DESCR(Map_Object_Descr)
 
 public:
-	enum {
-		AREAWATCHER,
-		BOB,  //  class Bob
-
-		WARE, //  class WareInstance
-		BATTLE,
-		FLEET,
-
-		// everything below is at least a BaseImmovable
-		IMMOVABLE,
-
-		// everything below is at least a PlayerImmovable
-		BUILDING,
-		FLAG,
-		ROAD,
-		PORTDOCK
-	};
 	/// Some default, globally valid, attributes.
 	/// Other attributes (such as "harvestable corn") could be
 	/// allocated dynamically (?)
@@ -192,9 +217,6 @@ protected:
 	virtual ~Map_Object() {}
 
 public:
-	// NOCOM(GunChleoc) remove this?
-	virtual int32_t get_type() const = 0;
-
 	Serial serial() const {return m_serial;}
 
 	/**

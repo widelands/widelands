@@ -77,9 +77,9 @@ Soldier_Descr::Soldier_Descr
 	 const Tribe_Descr & _tribe)
 	:
 	Worker_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	m_typename  ("soldier")
+	m_type      (Map_Object_Type::SOLDIER)
 {
-	add_attribute(Map_Object::SOLDIER);
+	add_attribute(Map_Object::Attribute::SOLDIER);
 
 	m_base_hp = global_s.get_safe_positive("hp");
 

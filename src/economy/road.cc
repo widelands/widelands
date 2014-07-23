@@ -111,11 +111,6 @@ Road & Road::create
 	return road;
 }
 
-int32_t Road::get_type() const
-{
-	return ROAD;
-}
-
 int32_t Road::get_size() const
 {
 	return SMALL;

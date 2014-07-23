@@ -38,7 +38,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		 const Tribe_Descr & tribe, const World& world);
 	virtual ~TrainingSite_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	virtual Building & create_object() const override;
 
@@ -55,7 +57,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_max_stall() const;
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 
 	//  FIXME These variables should be per soldier type. They should be in a
 	//  FIXME struct and there should be a vector, indexed by Soldier_Index,

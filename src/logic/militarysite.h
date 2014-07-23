@@ -40,7 +40,9 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		 const Tribe_Descr & tribe, const World& world);
 	virtual ~MilitarySite_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	virtual Building & create_object() const override;
 
@@ -61,7 +63,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
 	uint32_t m_heal_per_second;

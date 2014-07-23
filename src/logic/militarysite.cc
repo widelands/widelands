@@ -49,7 +49,7 @@ MilitarySite_Descr::MilitarySite_Descr
 	:
 	ProductionSite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe, world),
-	m_typename           ("militarysite"),
+	m_type               (Map_Object_Type::MILITARYSITE),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
 	m_heal_per_second    (0)

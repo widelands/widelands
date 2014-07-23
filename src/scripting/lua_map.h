@@ -992,9 +992,8 @@ public:
 	 */
 };
 
-int upcasted_building_descr_to_lua(lua_State* L, const Widelands::Building_Descr* descr);
-int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
-int upcasted_bob_to_lua(lua_State * L, Widelands::Bob * mo);
+int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::Map_Object_Descr* descr);
+int upcasted_map_object_to_lua(lua_State * L, Widelands::Map_Object * mo);
 
 void luaopen_wlmap(lua_State *);
 

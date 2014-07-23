@@ -169,7 +169,7 @@ int L_EditorGameBase::get_building_description(lua_State* L) {
 	}
 	const Building_Descr* building_description = tribe_description->get_building_descr(building_index);
 
-	return LuaMap::upcasted_building_descr_to_lua(L, building_description);
+	return LuaMap::upcasted_map_object_descr_to_lua(L, building_description);
 }
 
 
@@ -198,7 +198,7 @@ int L_EditorGameBase::get_ware_description(lua_State* L) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
 	const WareDescr* ware_description = tribe_description->get_ware_descr(ware_index);
-	return to_lua<LuaMap::L_WareDescription>(L, new LuaMap::L_WareDescription(ware_description));
+	return LuaMap::upcasted_map_object_descr_to_lua(L, ware_description);
 }
 
 
@@ -227,7 +227,7 @@ int L_EditorGameBase::get_worker_description(lua_State* L) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
 	const Worker_Descr* worker_description = tribe_description->get_worker_descr(worker_index);
-	return to_lua<LuaMap::L_WorkerDescription>(L, new LuaMap::L_WorkerDescription(worker_description));
+	return LuaMap::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 
 /*
@@ -438,7 +438,7 @@ int L_PlayerBase::place_road(lua_State * L) {
 		r = &get(L, egbase).force_road(path);
 	} else {
 		BaseImmovable * bi = map.get_immovable(current);
-		if (!bi or bi->get_type() != Map_Object::FLAG) {
+		if (!bi or bi->descr().type() != Map_Object_Type::FLAG) {
 			if (!get(L, egbase).build_flag(current))
 				report_error(L, "Could not place end flag!");
 		}
@@ -511,7 +511,7 @@ int L_PlayerBase::place_building(lua_State * L) {
 	if (not b)
 		report_error(L, "Couldn't place building!");
 
-	LuaMap::upcasted_immovable_to_lua(L, b);
+	LuaMap::upcasted_map_object_to_lua(L, b);
 	return 1;
 }
 
@@ -543,7 +543,7 @@ int L_PlayerBase::place_bob(lua_State * L) {
 	Player& player = get(L, egbase);
 	Bob& bob = egbase.create_bob(c->coords(), name, &player.tribe(), &player);
 
-	LuaMap::upcasted_bob_to_lua(L, &bob);
+	LuaMap::upcasted_map_object_to_lua(L, &bob);
 
 	return 1;
 }

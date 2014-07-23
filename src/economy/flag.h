@@ -38,14 +38,16 @@ public:
 	Flag_Descr(char const* const _name, char const* const _descname)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_typename      ("flag")
+	m_type      (Map_Object_Type::FLAG)
 	{}
 	virtual ~Flag_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Flag_Descr);
 };
 
@@ -83,7 +85,6 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void load_finish(Editor_Game_Base &) override;
 	virtual void destroy(Editor_Game_Base &) override;
 
-	virtual int32_t  get_type    () const override;
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 

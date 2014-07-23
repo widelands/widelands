@@ -50,7 +50,7 @@ const PortDock_Descr& PortDock::descr() const {
 PortDock_Descr::PortDock_Descr(char const* const _name, char const* const _descname)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_typename      ("portdock")
+	m_type          (Map_Object_Type::PORTDOCK)
 {
 }
 
@@ -104,11 +104,6 @@ int32_t PortDock::get_size() const
 bool PortDock::get_passable() const
 {
 	return true;
-}
-
-int32_t PortDock::get_type() const
-{
-	return PORTDOCK;
 }
 
 PortDock::PositionList PortDock::get_positions

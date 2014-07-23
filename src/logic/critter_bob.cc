@@ -139,7 +139,7 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
 												 Tribe_Descr & _tribe)
 	:
 	BobDescr(_name, _descname, &_tribe),
-	m_typename("critterbob")
+	m_type  (Map_Object_Type::CRITTER)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");

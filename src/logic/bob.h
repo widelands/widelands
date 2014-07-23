@@ -60,7 +60,9 @@ public:
 				Tribe_Descr const* tribe);
 	virtual ~BobDescr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
 
@@ -77,7 +79,7 @@ protected:
 	virtual Bob& create_object() const = 0;
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	const Tribe_Descr* const owner_tribe_;  //  nullptr if world bob
 	DISALLOW_COPY_AND_ASSIGN(BobDescr);
 };
@@ -161,7 +163,6 @@ public:
 	struct State;
 	typedef void (Bob::*Ptr)(Game &, State &);
 	typedef void (Bob::*PtrSignal)(Game &, State &, const std::string &);
-	enum Type {CRITTER, WORKER, SHIP};
 
 	/// \see struct Bob for in-depth explanation
 	struct Task {
@@ -229,9 +230,6 @@ public:
 
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
-
-	virtual int32_t get_type() const override {return BOB;}
-	virtual Type get_bob_type() const = 0;
 
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;

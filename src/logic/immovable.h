@@ -118,7 +118,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 	Immovable_Descr(const LuaTable&, const World&);
 	~Immovable_Descr() override;
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
@@ -154,7 +156,7 @@ protected:
 	Buildcost m_buildcost;
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
@@ -181,7 +183,6 @@ public:
 	Coords get_position() const {return m_position;}
 	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
-	virtual int32_t  get_type    () const override;
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);

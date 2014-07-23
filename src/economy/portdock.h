@@ -40,10 +40,12 @@ public:
 	PortDock_Descr(char const* const _name, char const* const _descname);
 	virtual ~PortDock_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(PortDock_Descr);
 };
 
@@ -92,7 +94,6 @@ public:
 
 	virtual int32_t get_size() const override;
 	virtual bool get_passable() const override;
-	virtual int32_t get_type() const override;
 
 	virtual Flag & base_flag() override;
 	virtual PositionList get_positions

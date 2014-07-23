@@ -55,7 +55,7 @@ Ship_Descr::Ship_Descr
 	 const Tribe_Descr & gtribe)
 	:
 	BobDescr(given_name, gdescname, &gtribe),
-	m_typename("ship")
+	m_type  (Map_Object_Type::SHIP)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
@@ -91,10 +91,6 @@ Ship::Ship(const Ship_Descr & gdescr) :
 
 Ship::~Ship() {
 	close_window();
-}
-
-Bob::Type Ship::get_bob_type() const {
-	return SHIP;
 }
 
 PortDock* Ship::get_destination(Editor_Game_Base& egbase) const {

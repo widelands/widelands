@@ -44,7 +44,9 @@ struct Ship_Descr : BobDescr {
 		 const Tribe_Descr &);
 	virtual ~Ship_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	virtual Bob & create_object() const override;
 
@@ -56,7 +58,7 @@ struct Ship_Descr : BobDescr {
 
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
 	uint32_t m_vision_range;
@@ -84,10 +86,6 @@ struct Ship : Bob {
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
 	PortDock* get_lastdock(Editor_Game_Base& egbase) const;
-
-
-
-	virtual Type get_bob_type() const override;
 
 	Economy * get_economy() const {return m_economy;}
 	void set_economy(Game &, Economy * e);

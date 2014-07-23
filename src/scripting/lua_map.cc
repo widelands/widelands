@@ -530,80 +530,99 @@ int do_set_soldiers
 
 
 /*
- * Upcast the given base immovable to a higher type and hand this to
+ * Upcast the given map object description to a higher type and hand this
+ * to Lua. We use this so that scripters always work with the highest class
+ * object available.
+ */
+#define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
+	(L, new lua_klass(static_cast<const klass *>(descr)))
+int upcasted_map_object_descr_to_lua(lua_State* L, const Map_Object_Descr* const descr) {
+	assert(descr != nullptr);
+
+	if (descr->type() >= Map_Object_Type::BUILDING)
+	{
+		switch (descr->type()) {
+			case Map_Object_Type::CONSTRUCTIONSITE:
+				return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
+			case Map_Object_Type::PRODUCTIONSITE:
+				return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
+			case Map_Object_Type::MILITARYSITE:
+				return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
+			case Map_Object_Type::WAREHOUSE:
+				return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
+			case Map_Object_Type::TRAININGSITE:
+				return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
+			default:
+				return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
+		}
+	}
+	else {
+		switch (descr->type()) {
+			case Map_Object_Type::WARE:
+				return CAST_TO_LUA(WareDescr, L_WareDescription);
+			case Map_Object_Type::WORKER:
+				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
+			case Map_Object_Type::CARRIER:
+				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
+			case Map_Object_Type::SOLDIER:
+				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
+			default:
+				return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
+		}
+	}
+}
+#undef CAST_TO_LUA
+
+/*
+ * Upcast the given map object to a higher type and hand this to
  * Lua. We use this so that scripters always work with the highest class
  * object available.
  */
 #define CAST_TO_LUA(k) to_lua<L_ ##k> \
-   (L, new L_ ##k(*static_cast<k *>(mo)))
-int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
+	(L, new L_ ##k(*static_cast<k *>(mo)))
+int upcasted_map_object_to_lua(lua_State * L, Map_Object * mo) {
 	if (!mo)
 		return 0;
 
-	switch (mo->get_bob_type()) {
-		case Bob::CRITTER:
-			return to_lua<L_Bob>(L, new L_Bob(*mo));
-		case Bob::WORKER:
-			if (mo->descr().name() == "soldier")
+	if (mo->descr().type() >= Map_Object_Type::IMMOVABLE) {
+		switch (mo->descr().type()) {
+			case Map_Object_Type::CONSTRUCTIONSITE:
+				return CAST_TO_LUA(ConstructionSite);
+			case Map_Object_Type::PRODUCTIONSITE:
+				return CAST_TO_LUA(ProductionSite);
+			case Map_Object_Type::MILITARYSITE:
+				return CAST_TO_LUA(MilitarySite);
+			case Map_Object_Type::WAREHOUSE:
+				return CAST_TO_LUA(Warehouse);
+			case Map_Object_Type::TRAININGSITE:
+				return CAST_TO_LUA(TrainingSite);
+			case Map_Object_Type::BUILDING:
+				return CAST_TO_LUA(Building);
+			case Map_Object_Type::FLAG:
+				return CAST_TO_LUA(Flag);
+			case Map_Object_Type::ROAD:
+				return CAST_TO_LUA(Road);
+			case Map_Object_Type::PORTDOCK:
+				return CAST_TO_LUA(PortDock);
+			default:
+				return CAST_TO_LUA(BaseImmovable);
+		}
+	}
+	else {
+		switch (mo->descr().type()) {
+			case Map_Object_Type::CRITTER:
+				return CAST_TO_LUA(Bob);
+			case Map_Object_Type::SOLDIER:
 				return CAST_TO_LUA(Soldier);
-			return CAST_TO_LUA(Worker);
-		case Bob::SHIP:
-			return CAST_TO_LUA(Ship);
-		default:
-			assert(false);  // Never here, hopefully.
-			return 0;
+			case Map_Object_Type::WORKER:
+				return CAST_TO_LUA(Worker);
+			case Map_Object_Type::SHIP:
+				return CAST_TO_LUA(Ship);
+			default:
+				assert(false);  // Never here, hopefully.
+				return 0;
+		}
 	}
-}
-
-int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
-	if (!mo)
-		return 0;
-	const std::string& type_name = mo->descr().type_name();
-	if (type_name == "constructionsite")
-		return CAST_TO_LUA(ConstructionSite);
-	else if (type_name == "productionsite")
-		return CAST_TO_LUA(ProductionSite);
-	else if (type_name == "militarysite")
-		return CAST_TO_LUA(MilitarySite);
-	else if (type_name ==  "warehouse")
-		return CAST_TO_LUA(Warehouse);
-	else if (type_name == "trainingsite")
-		return CAST_TO_LUA(TrainingSite);
-	else if (type_name == "building")
-		return CAST_TO_LUA(Building);
-	else if (type_name == "flag")
-			return CAST_TO_LUA(Flag);
-	else if (type_name == "road")
-		return CAST_TO_LUA(Road);
-	else if (type_name == "portdock")
-		return CAST_TO_LUA(PortDock);
-	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
-}
-#undef CAST_TO_LUA
-
-// use the dynamic type of BuildingDescription
-#define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
-   (L, new lua_klass(static_cast<const klass *>(desc)))
-
-int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const desc) {
-	assert(desc != nullptr);
-
-	if (is_a(MilitarySite_Descr, desc)) {
-		return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
-	}
-	else if (is_a(TrainingSite_Descr, desc)) {
-		return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
-	}
-	else if (is_a(ProductionSite_Descr, desc)) {
-		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
-	}
-	else if (is_a(ConstructionSite_Descr, desc)) {
-		return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
-	}
-	else if (is_a(Warehouse_Descr, desc)) {
-		return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
-	}
-	return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
 }
 #undef CAST_TO_LUA
 
@@ -952,7 +971,7 @@ int L_Map::place_immovable(lua_State * const L) {
 		m = &egbase.create_immovable(c->coords(), imm_idx, nullptr);
 	}
 
-	return LuaMap::upcasted_immovable_to_lua(L, m);
+	return LuaMap::upcasted_map_object_to_lua(L, m);
 }
 
 /* RST
@@ -1208,7 +1227,7 @@ int L_BuildingDescription::get_enhancement(lua_State * L) {
 	if (enhancement == INVALID_INDEX) {
 		return 0;
 	}
-	return upcasted_building_descr_to_lua(L, get()->tribe().get_building_descr(enhancement));
+	return upcasted_map_object_descr_to_lua(L, get()->tribe().get_building_descr(enhancement));
 }
 
 
@@ -1718,7 +1737,7 @@ int L_WareDescription::get_producers(lua_State * L) {
 				if (std::string(get()->name()) ==
 					std::string(tribe.get_ware_descr(ware_index)->name())) {
 					lua_pushint32(L, index++);
-						upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
+						upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(i));
 					lua_rawset(L, -3);
 				}
 			}
@@ -1757,7 +1776,7 @@ int L_WareDescription::get_consumers(lua_State * L) {
 				if (std::string(get()->name()) ==
 					std::string(tribe.get_ware_descr(ware_amount.first)->name())) {
 					lua_pushint32(L, index++);
-						upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
+						upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(i));
 					lua_rawset(L, -3);
 				}
 			}
@@ -2584,7 +2603,7 @@ const PropertyType<L_Building> L_Building::Properties[] = {
 */
 // UNTESTED
 int L_Building::get_flag(lua_State * L) {
-	return upcasted_immovable_to_lua(L, &get(L, get_egbase(L))->base_flag());
+	return upcasted_map_object_to_lua(L, &get(L, get_egbase(L))->base_flag());
 }
 
 
@@ -2689,7 +2708,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 		:class:`PortDock` attached to it, otherwise nil.
 */
 int L_Warehouse::get_portdock(lua_State * L) {
-	return upcasted_immovable_to_lua(L, get(L, get_egbase(L))->get_portdock());
+	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_portdock());
 }
 
 
@@ -3132,7 +3151,7 @@ int L_Ship::get_debug_economy(lua_State* L) {
 // UNTESTED
 int L_Ship::get_destination(lua_State* L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	return upcasted_immovable_to_lua(L, get(L, egbase)->get_destination(egbase));
+	return upcasted_map_object_to_lua(L, get(L, egbase)->get_destination(egbase));
 }
 
 /* RST
@@ -3144,7 +3163,7 @@ int L_Ship::get_destination(lua_State* L) {
 // UNTESTED
 int L_Ship::get_last_portdock(lua_State* L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	return upcasted_immovable_to_lua(L, get(L, egbase)->get_lastdock(egbase));
+	return upcasted_map_object_to_lua(L, get(L, egbase)->get_lastdock(egbase));
 }
 
 /*
@@ -3264,7 +3283,7 @@ int L_Worker::get_owner(lua_State * L) {
 int L_Worker::get_location(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	return
-		upcasted_immovable_to_lua
+		upcasted_map_object_to_lua
 			(L, static_cast<BaseImmovable *>
 			 	(get(L, egbase)->get_location(egbase)));
 }
@@ -3589,7 +3608,7 @@ int L_Field::get_immovable(lua_State * L) {
 	if (!bi)
 		return 0;
 	else
-		upcasted_immovable_to_lua(L, bi);
+		upcasted_map_object_to_lua(L, bi);
 	return 1;
 }
 
@@ -3607,7 +3626,7 @@ int L_Field::get_bobs(lua_State * L) {
 	uint32_t cidx = 1;
 	while (b) {
 		lua_pushuint32(L, cidx++);
-		upcasted_bob_to_lua(L, b);
+		upcasted_map_object_to_lua(L, b);
 		lua_rawset(L, -3);
 		b = b->get_next_bob();
 	}

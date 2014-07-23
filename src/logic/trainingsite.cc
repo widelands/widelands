@@ -46,7 +46,7 @@ TrainingSite_Descr::TrainingSite_Descr
 	:
 	ProductionSite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe, world),
-	m_typename          ("trainingsite"),
+	m_type              (Map_Object_Type::TRAININGSITE),
 	//  FIXME This is currently hardcoded for "soldier" but should allow any
 	//  FIXME soldier type name.
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),

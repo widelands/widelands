@@ -29,15 +29,17 @@ public:
 	Battle_Descr(char const* const _name, char const* const _descname)
 		:
 		Map_Object_Descr(_name, _descname),
-		m_typename      ("battle")
+		m_type          (Map_Object_Type::BATTLE)
 	{
 	}
 	virtual ~Battle_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Battle_Descr);
 };
 
@@ -57,7 +59,6 @@ public:
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	// Implements Map_Object.
-	virtual int32_t get_type() const override {return BATTLE;}
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;
 	virtual bool has_new_save_support() override {return true;}

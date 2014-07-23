@@ -61,8 +61,6 @@ public:
 	WareInstance(Ware_Index, const WareDescr* const);
 	~WareInstance();
 
-	virtual int32_t get_type() const override;
-
 	Map_Object* get_location(Editor_Game_Base& egbase) {
 		return m_location.get(egbase);
 	}

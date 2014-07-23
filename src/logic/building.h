@@ -67,7 +67,9 @@ struct Building_Descr : public Map_Object_Descr {
 		 const Tribe_Descr &);
 	virtual ~Building_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
@@ -136,7 +138,7 @@ protected:
 	Building & create_constructionsite() const;
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	const Tribe_Descr & m_tribe;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
@@ -183,7 +185,6 @@ public:
 
 	void load_finish(Editor_Game_Base &) override;
 
-	virtual int32_t  get_type    () const override;
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 

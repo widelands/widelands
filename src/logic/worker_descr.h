@@ -44,19 +44,15 @@ class Worker_Descr : public BobDescr
 public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
-	enum Worker_Type {
-		NORMAL = 0,
-		CARRIER,
-		SOLDIER,
-	};
-
 	Worker_Descr
 		(char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr &);
 	virtual ~Worker_Descr() override;
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	virtual Bob & create_object() const override;
 
@@ -99,8 +95,6 @@ public:
 	}
 	WorkerProgram const * get_program(const std::string &) const;
 
-	virtual Worker_Type get_worker_type() const {return NORMAL;}
-
 	// For leveling
 	int32_t get_level_experience() const {return m_level_experience;}
 	Ware_Index becomes() const {return m_becomes;}
@@ -140,7 +134,7 @@ protected:
 	Ware_Index  m_becomes;
 	Programs    m_programs;
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 
 	DISALLOW_COPY_AND_ASSIGN(Worker_Descr);
 };

@@ -61,7 +61,9 @@ struct ProductionSite_Descr : public Building_Descr {
 		 const Tribe_Descr &, const World&);
 	virtual ~ProductionSite_Descr() override;
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	virtual Building & create_object() const override;
 
@@ -90,7 +92,7 @@ struct ProductionSite_Descr : public Building_Descr {
 
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	BillOfMaterials m_working_positions;
 	BillOfMaterials m_inputs;
 	Output   m_output_ware_types;

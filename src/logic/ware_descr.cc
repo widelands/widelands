@@ -33,7 +33,7 @@ WareDescr::WareDescr
 	 const std::string & directory, Profile & prof, Section & global_s)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_typename      ("ware"),
+	m_type          (Map_Object_Type::WARE),
 	m_tribe         (gtribe),
 	m_helptext      (global_s.get_string("help", "")),
 	m_icon_fname    (directory + "/menu.png"),

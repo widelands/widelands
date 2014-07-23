@@ -55,7 +55,9 @@ struct Warehouse_Descr : public Building_Descr {
 		 const Tribe_Descr &);
 	virtual ~Warehouse_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	virtual Building & create_object() const override;
 
@@ -66,7 +68,7 @@ struct Warehouse_Descr : public Building_Descr {
 	}
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	int32_t m_conquers;
 	uint32_t m_heal_per_second;
 	DISALLOW_COPY_AND_ASSIGN(Warehouse_Descr);

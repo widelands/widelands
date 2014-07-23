@@ -47,11 +47,9 @@ struct Soldier_Descr : public Worker_Descr {
 		 const Tribe_Descr &);
 	virtual ~Soldier_Descr() override {}
 
-	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
-	// NOTE as well defined in an enum in instances.h
-	virtual Worker_Type get_worker_type() const override {return Worker_Descr::SOLDIER;}
-
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	virtual void load_graphics() override;
 
@@ -136,7 +134,7 @@ protected:
 			 const char * anim_name);
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Soldier_Descr);
 };
 

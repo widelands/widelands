@@ -48,14 +48,14 @@ Worker_Descr::Worker_Descr
 	m_buildable         (false),
 	m_level_experience  (-1),
 	m_becomes           (INVALID_INDEX),
-	m_typename          ("worker")
+	m_type              (Map_Object_Type::WORKER)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 		add_animation("idle", g_gr->animations().load(directory, idle_s));
 	}
 
-	add_attribute(Map_Object::WORKER);
+	add_attribute(Map_Object::Attribute::WORKER);
 
 	m_default_target_quantity =
 		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());

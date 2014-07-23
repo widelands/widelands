@@ -46,7 +46,9 @@ struct Critter_Bob_Descr : BobDescr {
 	Critter_Bob_Descr(const LuaTable&);
 	virtual ~Critter_Bob_Descr() override;
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 	Bob & create_object() const override;
 
@@ -58,7 +60,7 @@ struct Critter_Bob_Descr : BobDescr {
 
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	DirAnimations m_walk_anims;
 	typedef std::map<std::string, Critter_BobProgram *> Programs;
 	Programs      m_programs;
@@ -73,8 +75,6 @@ class Critter_Bob : public Bob {
 
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
-
-	virtual Bob::Type get_bob_type() const override {return Bob::CRITTER;}
 
 	virtual void init_auto_task(Game &) override;
 

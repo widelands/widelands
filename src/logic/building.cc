@@ -57,7 +57,7 @@ Building_Descr::Building_Descr
 	 const Tribe_Descr & _descr)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_typename      ("building"),
+	m_type          (Map_Object_Type::BUILDING),
 	m_tribe         (_descr),
 	m_buildable     (true),
 	m_buildicon     (nullptr),
@@ -317,8 +317,6 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 	   std::remove_if(m_leave_queue.begin(), m_leave_queue.end(), should_be_deleted),
 	   m_leave_queue.end());
 }
-
-int32_t Building::get_type() const {return BUILDING;}
 
 int32_t Building::get_size() const {return descr().get_size();}
 

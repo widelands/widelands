@@ -48,7 +48,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 	 const Tribe_Descr & _tribe)
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	m_typename    ("constructionsite")
+	m_type        (Map_Object_Type::CONSTRUCTIONSITE)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
 

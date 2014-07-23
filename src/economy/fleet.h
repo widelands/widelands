@@ -38,14 +38,16 @@ public:
 	Fleet_Descr(char const* const _name, char const* const _descname)
 		:
 		Map_Object_Descr(_name, _descname),
-		m_typename      ("fleet")
+		m_type          (Map_Object_Type::FLEET)
 	{}
 	virtual ~Fleet_Descr() override {}
 
-	const std::string& type_name() const override {return m_typename;}
+	virtual Map_Object_Type type() const override {
+		return m_type;
+	}
 
 private:
-	std::string const m_typename;
+	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Fleet_Descr);
 };
 
@@ -87,8 +89,6 @@ struct Fleet : Map_Object {
 	void set_economy(Economy * e);
 
 	bool active() const;
-
-	virtual int32_t get_type() const override;
 
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;

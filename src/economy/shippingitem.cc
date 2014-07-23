@@ -49,13 +49,13 @@ void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** wor
 	}
 
 	if (Map_Object* obj = m_object.get(game)) {
-		switch (obj->get_type()) {
-		case Map_Object::WARE:
+		switch (obj->descr().type()) {
+		case Map_Object_Type::WARE:
 			if (ware) {
 				*ware = dynamic_cast<WareInstance*>(obj);
 			}
 			break;
-		case Map_Object::BOB:
+		case Map_Object_Type::BOB:
 			if (worker) {
 				*worker = dynamic_cast<Worker*>(obj);
 			}
