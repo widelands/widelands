@@ -198,13 +198,12 @@ void PlayerDescriptionGroup::refresh()
 
 			{
 				i18n::Textdomain td(tribepath); // for translated initialisation
-				container_iterate_const
-					 (std::vector<TribeBasicInfo>, settings.tribes, i)
+				for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 				{
-					if (i.current->name == player.tribe) {
+					if (tribeinfo.name == player.tribe) {
 						d->btnPlayerInit->set_title
 							(_
-								(i.current->initializations.at
+								(tribeinfo.initializations.at
 									(player.initialization_index)
 								 .second));
 						break;

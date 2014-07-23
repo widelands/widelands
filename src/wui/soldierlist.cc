@@ -132,12 +132,11 @@ m_last_animate_time(0)
 	set_think(true);
 
 	// Initialize the icons
-	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
 	uint32_t row = 0;
 	uint32_t col = 0;
-	container_iterate_const(std::vector<Soldier *>, soldierlist, sit) {
+	for (const Soldier * soldier : m_soldiers.presentSoldiers()) {
 		Icon icon;
-		icon.soldier = *sit.current;
+		icon.soldier = soldier;
 		icon.row = row;
 		icon.col = col;
 		icon.pos = calc_pos(row, col);
@@ -239,8 +238,7 @@ void SoldierPanel::think()
 	int32_t maxdist = dt * AnimateSpeed / 1000;
 	m_last_animate_time = curtime;
 
-	container_iterate(std::vector<Icon>, m_icons, icon_it) {
-		Icon & icon = *icon_it.current;
+	for (const Icon& icon : m_icons) {
 		Point goal = calc_pos(icon.row, icon.col);
 		Point dp = goal - icon.pos;
 
@@ -294,8 +292,7 @@ void SoldierPanel::draw(RenderTarget & dst)
 			 RGBAColor(0, 0, 0, 0));
 
 	// Draw icons
-	container_iterate_const(std::vector<Icon>, m_icons, icon_it) {
-		const Icon & icon = *icon_it.current;
+	for (const Icon& icon : m_icons) {
 		const Soldier * soldier = icon.soldier.get(egbase());
 		if (!soldier)
 			continue;
@@ -314,10 +311,11 @@ Point SoldierPanel::calc_pos(uint32_t row, uint32_t col) const
  */
 const Soldier * SoldierPanel::find_soldier(int32_t x, int32_t y) const
 {
-	container_iterate_const(std::vector<Icon>, m_icons, icon_it) {
-		Rect r(icon_it.current->pos, m_icon_width, m_icon_height);
-		if (r.contains(Point(x, y)))
-			return icon_it.current->soldier.get(egbase());
+	for (const Icon& icon : m_icons) {
+		Rect r(icon.pos, m_icon_width, m_icon_height);
+		if (r.contains(Point(x, y))) {
+			return icon.soldier.get(egbase());
+		}
 	}
 
 	return nullptr;

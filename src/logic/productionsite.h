@@ -68,8 +68,9 @@ struct ProductionSite_Descr : public Building_Descr {
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
-		container_iterate_const(BillOfMaterials, working_positions(), i)
-			result += i.current->second;
+		for (const WareAmount& working_pos : working_positions()) {
+			result += working_pos.second;
+		}
 		return result;
 	}
 	const BillOfMaterials & working_positions() const {

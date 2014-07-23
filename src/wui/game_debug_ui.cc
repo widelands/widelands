@@ -21,6 +21,7 @@
 #include "wui/game_debug_ui.h"
 
 #include <cstdio>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
@@ -429,11 +430,12 @@ void FieldDebugWindow::think()
 		idx--; //reiter the same index
 	}
 	// Add remaining
-	container_iterate_const(std::vector<Widelands::Bob *>, bobs, j) {
-		snprintf
-			(buffer, sizeof(buffer),
-			 "%s (%u)", (*j.current)->descr().name().c_str(), (*j.current)->serial());
-		m_ui_bobs.add(buffer, (*j.current)->serial());
+	for (const Widelands::Bob * temp_bob : bobs) {
+		m_ui_bobs.add(
+			(boost::format("%s (%u)")
+				% temp_bob->descr().name()
+				% temp_bob->serial()),
+			temp_bob->serial());
 	}
 }
 

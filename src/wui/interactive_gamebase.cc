@@ -85,8 +85,8 @@ bool Interactive_GameBase::try_show_ship_window()
 	if (!map.find_bobs(area, &ships, Widelands::FindBobShip()))
 		return false;
 
-	container_iterate_const(std::vector<Widelands::Bob *>, ships, it) {
-		if (upcast(Widelands::Ship, ship, *it.current)) {
+	for (const Widelands::Bob * temp_ship : ships) {
+		if (upcast(Widelands::Ship, ship, *temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
 				ship->show_window(*this);
 				return true;
