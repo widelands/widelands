@@ -697,7 +697,7 @@ function building_help_crew_string(tribename, building_description)
 			local exp_string = _"%s to %s (%s EP)":format(
 					worker_description.descname,
 					becomes_description.descname,
-					worker_description.level_experience
+					worker_description.needed_experience
 				)
 
 			worker_description = becomes_description
@@ -706,7 +706,7 @@ function building_help_crew_string(tribename, building_description)
 				exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
 						worker_description.descname,
 						becomes_description.descname,
-						worker_description.level_experience
+						worker_description.needed_experience
 					)
 			end
 			result = result ..  rt("text-align=right", p(exp_string))

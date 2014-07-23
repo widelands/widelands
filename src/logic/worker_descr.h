@@ -102,7 +102,7 @@ public:
 	virtual Worker_Type get_worker_type() const {return NORMAL;}
 
 	// For leveling
-	int32_t get_level_experience() const {return m_level_experience;}
+	int32_t get_needed_experience() const {return m_needed_experience;}
 	Ware_Index becomes() const {return m_becomes;}
 	Ware_Index worker_index() const;
 	bool can_act_as(Ware_Index) const;
@@ -132,7 +132,7 @@ protected:
 	 * Number of experience points required for leveling up,
 	 * or -1 if the worker cannot level up.
 	 */
-	int32_t m_level_experience;
+	int32_t m_needed_experience;
 
 	/**
 	 * Type that this worker can become, i.e. level up to (or Null).

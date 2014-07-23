@@ -1100,7 +1100,7 @@ void Worker::log_general_info(const Editor_Game_Base & egbase)
 
 	molog
 		("m_current_exp: %i / %i\n",
-		 m_current_exp, descr().get_level_experience());
+		 m_current_exp, descr().get_needed_experience());
 
 	molog("m_supply: %p\n", m_supply);
 }
@@ -1302,7 +1302,7 @@ void Worker::incorporate(Game & game)
  */
 void Worker::create_needed_experience(Game & /* game */)
 {
-	if (descr().get_level_experience() == -1) {
+	if (descr().get_needed_experience() == -1) {
 		m_current_exp = -1;
 		return;
 	}
@@ -1319,7 +1319,7 @@ void Worker::create_needed_experience(Game & /* game */)
  * needed_experience he levels
  */
 Ware_Index Worker::gain_experience(Game & game) {
-	return descr().get_level_experience() == -1 || ++m_current_exp < descr().get_level_experience() ?
+	return descr().get_needed_experience() == -1 || ++m_current_exp < descr().get_needed_experience() ?
 	          INVALID_INDEX :
 	          level(game);
 }

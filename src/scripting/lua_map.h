@@ -387,7 +387,7 @@ public:
 	int get_buildable(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_icon_name(lua_State*);
-	int get_level_experience(lua_State*);
+	int get_needed_experience(lua_State*);
 
 	/*
 	 * Lua methods

@@ -168,7 +168,7 @@ void ProductionSite_Window::update_worker_table()
 			if
 				(worker->get_current_experience() != -1
 					and
-					worker->descr().get_level_experience () != -1)
+					worker->descr().get_needed_experience () != -1)
 			{
 				assert(worker->descr().becomes() != Widelands::INVALID_INDEX);
 
@@ -178,7 +178,7 @@ void ProductionSite_Window::update_worker_table()
 					(buffer, sizeof(buffer),
 						"%i/%i",
 						worker->get_current_experience(),
-						worker->descr().get_level_experience());
+						worker->descr().get_needed_experience());
 
 				er.set_string(1, buffer);
 				er.set_string

@@ -392,7 +392,7 @@ function test_descr:test_icon_name()
    assert_equal("tribes/barbarians/miner/menu.png", egbase:get_worker_description("barbarians","miner").icon_name)
 end
 
-function test_descr:test_level_experience()
-   assert_equal(19, egbase:get_worker_description("barbarians","miner").level_experience)
-   assert_equal(28, egbase:get_worker_description("barbarians","chief-miner").level_experience)
+function test_descr:test_needed_experience()
+   assert_equal(19, egbase:get_worker_description("barbarians","miner").needed_experience)
+   assert_equal(28, egbase:get_worker_description("barbarians","chief-miner").needed_experience)
 end
