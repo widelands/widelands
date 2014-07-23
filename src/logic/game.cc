@@ -641,8 +641,11 @@ void Game::cleanup_for_load()
 	m_state = gs_notrunning;
 
 	Editor_Game_Base::cleanup_for_load();
-	container_iterate_const(std::vector<Tribe_Descr *>, tribes_, i)
-		delete *i.current;
+
+	for (Tribe_Descr* tribe : tribes_) {
+		delete tribe;
+	}
+
 	tribes_.clear();
 	cmdqueue().flush();
 

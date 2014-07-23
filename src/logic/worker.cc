@@ -2574,15 +2574,15 @@ void Worker::fugitive_update(Game & game, State & state)
 		Flag *  best     =  nullptr;
 
 		molog("[fugitive]: found a flag connected to warehouse(s)\n");
+		for (const ImmovableFound& tmp_flag : flags) {
 
-		container_iterate_const(std::vector<ImmovableFound>, flags, i) {
-			Flag & flag = ref_cast<Flag, BaseImmovable>(*i.current->object);
+			Flag & flag = ref_cast<Flag, BaseImmovable>(*tmp_flag.object);
 
 			if (game.logic_rand() % 2 == 0)
 				continue;
 
 			int32_t const dist =
-				map.calc_distance(get_position(), i.current->coords);
+				map.calc_distance(get_position(), tmp_flag.coords);
 
 			if (!best || bestdist > dist) {
 				best = &flag;
