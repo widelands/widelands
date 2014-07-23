@@ -434,7 +434,7 @@ void FieldDebugWindow::think()
 		m_ui_bobs.add(
 			(boost::format("%s (%u)")
 				% temp_bob->descr().name()
-				% temp_bob->serial()),
+				% temp_bob->serial()).str().c_str(),
 			temp_bob->serial());
 	}
 }

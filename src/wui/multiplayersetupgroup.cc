@@ -360,10 +360,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		else {
 			std::string tribepath("tribes/" + player_setting.tribe);
 			i18n::Textdomain td(tribepath); // for translated initialisation
-			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+			container_iterate_const
+				 (std::vector<TribeBasicInfo>, settings.tribes, i)
 			{
-				if (tribeinfo.namename == player_setting.tribe) {
-					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).second));
+				if (i.current->name == player_setting.tribe) {
+					init->set_title(_(i.current->initializations.at(player_setting.initialization_index).second));
 					break;
 				}
 			}

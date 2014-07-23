@@ -173,12 +173,11 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 			programIt->second->actions();
 
 		for (const ProductionProgram::Action * temp_action : actions) {
-			if (upcast(ProductionProgram::ActConsume const, action, *temp_action)) {
+			if (upcast(ProductionProgram::ActConsume const, action, temp_action)) {
 				const ProductionProgram::ActConsume::Groups & groups =
 					action->groups();
 
 				for (const ProductionProgram::Ware_Type_Group& temp_group : groups) {
-				{
 					const std::set<Ware_Index> & ware_types = temp_group.first;
 					assert(ware_types.size());
 					std::string ware_type_names;
@@ -196,9 +195,9 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.
-					static_assert(sizeof(j.current->second) == 1, "Number is too big for 3 char string.");
+					static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
 					char amount_string[4]; //  Space for 3 digits + terminator.
-					sprintf(amount_string, "%u", j.current->second);
+					sprintf(amount_string, "%u", temp_group.second);
 
 					//  picture only of first ware type in group
 					UI::Table<uintptr_t>::Entry_Record & tableEntry =
@@ -210,5 +209,6 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					condTable.sort();
 				}
 			}
+		}
 	}
 }
