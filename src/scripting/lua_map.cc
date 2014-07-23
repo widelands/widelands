@@ -1075,8 +1075,11 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 			(RO) a :class:`string` with the file path to the representative image
 			of the map object's idle animation
 */
+// NOCOM(#codereview): this assumes that images are always accesible through
+// the filesystem. This will not be true should we ever get around to
+// implementing spritemaps. I think this implementation is fine for now, it
+// will be tricky to update it though in the future. No real idea yet.
 int L_MapObjectDescription::get_representative_image(lua_State * L) {
-
 	const std::string& filepath = g_gr->animations().get_animation
 		(get()->get_animation("idle")).representative_image_from_disk().hash();
 
@@ -1924,6 +1927,7 @@ int L_WorkerDescription::get_icon_name(lua_State * L) {
 
 			(RO) the experience the worker needs to reach this level.
 */
+// NOCOM(#codereview): needed_experience(_points?)? level_experience sounds strange.
 int L_WorkerDescription::get_level_experience(lua_State * L) {
 	lua_pushinteger(L, get()->get_level_experience());
 	return 1;
@@ -2047,6 +2051,7 @@ int L_MapObject::get_name(lua_State * L) {
 		(RO) The descriptive (and translated) name of this Map Object. Use this
 		in messages to the player instead of name.
 */
+// NOCOM(#codereview): this can go away no since it is on the description too, right?
 int L_MapObject::get_descname(lua_State * L) {
 	lua_pushstring(L, get(L, get_egbase(L))->descr().descname().c_str());
 	return 1;
