@@ -13,7 +13,7 @@ fisher=1
 
 [aihints]
 needs_water=true
-prohibited_till=180
+prohibited_till=600
 
 [programs]
 work=_Work

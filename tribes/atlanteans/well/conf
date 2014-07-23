@@ -32,5 +32,5 @@ hotspot=31 32
 
 [aihints]
 mines_water=true
-forced_after=180
-prohibited_till=60
+forced_after=600
+prohibited_till=300

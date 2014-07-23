@@ -31,7 +31,8 @@ iron=8
 log=8
 
 [aihints]
-forced_after=0
+forced_after=300
+prohibited_till=120
 
 [programs]
 produce_felling_ax=_Produce felling ax

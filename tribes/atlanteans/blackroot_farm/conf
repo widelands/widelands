@@ -12,7 +12,7 @@ stone=2
 log=1
 
 [aihints]
-prohibited_till=60
+prohibited_till=600
 space_consumer=true
 
 [working positions]

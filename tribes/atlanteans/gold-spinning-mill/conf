@@ -2,6 +2,7 @@ size=small
 output=goldyarn
 
 [aihints]
+prohibited_till=600
 
 [buildcost]
 log=2

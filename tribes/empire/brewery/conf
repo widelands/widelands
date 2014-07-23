@@ -3,7 +3,7 @@ output=beer
 
 [aihints]
 forced_after=900
-prohibited_till=300
+prohibited_till=600
 
 [buildcost]
 log=1

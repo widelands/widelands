@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("atlanteans", building_description, _[[Text needed]], _[[Source needed]]) ..
 	--General Section
 	building_help_general_string("atlanteans", building_description, "carrier",
-		_"Accomodation for your people. Also stores your wares and tools.",
+		_"Accommodation for your people. Also stores your wares and tools.",
 		_"The headquarters is your main building." .. "<br>" .. _[[Text needed]]) ..
 
 	--Building Section

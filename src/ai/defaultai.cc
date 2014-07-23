@@ -855,6 +855,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	// sometimes current teritory is too crowded, so we check free spots
 	if (spots_ + 5 < static_cast<int32_t>(productionsites.size()))
 		new_buildings_stop_ = true;
+	else if (num_prod_constructionsites > ((productionsites.size() / 7) + 4))
+		new_buildings_stop_ = true;
 
 	// if (new_buildings_stop_ or expansion_mode > FREE_EXPANSION)
 	// printf(" %d, new_buildings_stop_: %s, new_military_buildings_stop: %1d\n",
@@ -927,7 +929,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			if (bo.type == BuildingObserver::MINE)
 				continue;
 
-			if (gametime - bo.construction_decision_time_ < kBuildingMinInterval)
+			// here we do an exemption for lumberjacs, mainly in early stages of game
+			// sometimes the first one is not built and AI waits too long for second attempt
+			if (gametime - bo.construction_decision_time_ <
+			    kBuildingMinInterval and not bo.need_trees_)
 				continue;
 
 			if (bo.unoccupied_)
@@ -960,14 +965,14 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 							if (wares.at(bo.outputs_.at(m)).preciousness_ > max_needed_preciousness)
 								max_needed_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
-
-							max_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
-						} else {
-							if (wares.at(bo.outputs_.at(m)).preciousness_ > max_preciousness)
-								max_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
 						}
+
+						if (wares.at(bo.outputs_.at(m)).preciousness_ > max_preciousness)
+							max_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
 					}
 				}
+				// printf ("building: %20s: preciousness: %3d /
+				// %3d\n",bo.name,max_preciousness,max_needed_preciousness);
 			}
 
 			int32_t prio = 0;  // score of a bulding on a field
@@ -1009,6 +1014,9 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					if (bo.total_count() == 0)
 						prio = 400 + bf->trees_nearby_;
 
+					else if (bo.total_count() == 1)
+						prio = 200 + bf->trees_nearby_;
+
 					else if (bf->trees_nearby_ < 2)
 						continue;
 
@@ -1017,7 +1025,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						   2 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
 
 						if (bo.total_count() < bo.cnt_target_)
-							prio = 50;
+							prio = 75;
 						else
 							prio = 0;
 
@@ -1124,7 +1132,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 							prio = 200;
 						if (bo.total_count() > 2 * bo.cnt_target_)
 							continue;
-						else if (bo.total_count() > bo.cnt_target_ and bo.stocklevel_ < 40)
+						// we can go above target if there is shortage of logs on stock
+						else if (bo.total_count() > bo.cnt_target_ and bo.stocklevel_ > 40)
 							continue;
 
 						// considering near trees and producers
@@ -1432,10 +1441,15 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		return false;
 	}
 
-	printf(" Winning building is: %-20s, prio: %3d (time: %12d sec)\n",
+	printf(" %1d: Winning building is: %-20s, prio: %3d (time: %4d:%2d, Mil. mode: %1d, Prod.stop: "
+	       "%s)\n",
+	       player_number(),
 	       best_building->name,
 	       proposed_priority,
-	       gametime / 1000);
+	       gametime / 60 / 1000,
+	       (gametime / 1000) % 60,
+	       expansion_mode,
+	       new_buildings_stop_ ? "Y" : "N");
 
 	// send the command to construct a new building
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
@@ -2846,10 +2860,22 @@ void DefaultAI::print_land_stats(void) {
 	// this will just print statistics of land size
 	// intended for AI development only
 	uint32_t plr_in_game = 0;
+	uint32_t sum_l = 0;
+	uint32_t count_l = 0;
+	uint32_t sum_m = 0;
+	uint32_t count_m = 0;
 	Player_Number const nr_players = game().map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 	const Game::General_Stats_vector& genstats = game().get_general_statistics();
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		printf(" player: %1d, landsize: %5d\n", j, genstats[j - 1].land_size.back());
+		printf(" player: %1d, landsize: %5d, military strength: %3d\n",
+		       j,
+		       genstats[j - 1].land_size.back(),
+		       genstats[j - 1].miltary_strength.back());
+		sum_l += genstats[j - 1].land_size.back();
+		count_l += 1;
+		sum_m += genstats[j - 1].miltary_strength.back();
+		count_m += 1;
 	}
+	printf(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
 }

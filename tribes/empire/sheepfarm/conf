@@ -2,6 +2,7 @@ size=big
 output=wool
 
 [aihints]
+prohibited_till=600
 
 [buildcost]
 log=2
@@ -37,3 +38,4 @@ hotspot=73 60
 [working]
 pics=sheepfarm_i_??.png  # ???
 hotspot=73 60
+

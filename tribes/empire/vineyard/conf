@@ -3,7 +3,7 @@ output=grape
 
 [aihints]
 space_consumer=true
-forced_after=0
+forced_after=120
 
 [buildcost]
 wood=2

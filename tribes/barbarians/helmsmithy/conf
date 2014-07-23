@@ -4,6 +4,7 @@ output=mask
 output=warhelm
 
 [aihints]
+prohibited_till=1200
 
 [buildcost]
 log=3

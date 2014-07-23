@@ -2,6 +2,7 @@ size=medium
 output=coal
 
 [aihints]
+prohibited_till=900
 
 [buildcost]
 log=3

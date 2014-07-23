@@ -17,6 +17,7 @@ miner=3
 
 [aihints]
 mines=granite
+prohibited_till=600
 
 [inputs]
 bread=10

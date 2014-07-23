@@ -13,6 +13,7 @@ gamekeeper=1
 
 [aihints]
 renews_map_resource=meat
+prohibited_till=900
 
 [programs]
 work=_Work

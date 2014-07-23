@@ -3,7 +3,7 @@ output=beer
 enhancement=brewery
 
 [aihints]
-prohibited_till=300
+prohibited_till=600
 
 [buildcost]
 log=3
