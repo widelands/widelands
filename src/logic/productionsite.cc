@@ -198,11 +198,11 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_last_stat_percent (0),
 	m_crude_percent     (0),
 	m_is_stopped        (false),
-	m_default_anim      ("idle")
+	m_default_anim      ("idle"),
+	m_out_of_resource_delay_counter(0)
 {
 	m_statistics_buffer[0] = '\0';
 	m_result_buffer[0] = '\0';
-	m_out_of_resource_delay_counter = 0;
 }
 
 ProductionSite::~ProductionSite() {
