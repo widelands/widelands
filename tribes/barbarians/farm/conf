@@ -36,6 +36,11 @@ call=harvest_wheat
 playFX=../../../sound/farm/farm_animal 192
 return=skipped
 
+[out_of_resource_notification]
+title=_Out of Fields
+message=_The farmer working at this farm has no cleared soil to plant his seeds.
+delay_attempts=10
+
 [idle]
 pics=farm_i_??.png  # ???
 hotspot=72 73

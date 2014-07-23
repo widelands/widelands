@@ -23,6 +23,11 @@ animate=working 20000
 mine=water 1 100 65 2
 produce=water
 
+[out_of_resource_notification]
+title=_Out of Water
+message=_The carrier working at this well can’t find any water in his working radius.
+delay_attempts=50
+
 [idle]
 pics=well_i_??.png
 hotspot=19 33
