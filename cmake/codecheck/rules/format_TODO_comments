@@ -1,14 +1,18 @@
 #!/usr/bin/python
 
-error_msg ="Please use the format \"TODO(<username>) ...\" for your TODO comments"
+error_msg ="Please use the format \"TODO(<username>): ...\" for your TODO comments, and don't put them in the doygen comments"
 
-regexp = r"""(FIXME|(\s|/|[*])BUG|TODO(?![(]))"""
+regexp = r"""(FIXME|(\s|/|[*])BUG|TODO(?![(])|\Wtodo(?![(])|[*]\s*TODO|///\s*TODO)"""
 
 forbidden = [
     "// FIXME this is a todo comment",
     "// BUG this is a todo comment",
-    "// TODO this is a todo comment"
-    "// TODO: This is a todo comment"
+    "// TODO this is a todo comment",
+    "// TODO: This is a todo comment",
+    "* TODO: This is a todo comment",
+    "/// TODO: This is a todo comment",
+    "\TODO: This is a todo comment",
+    "\\\todo: This is a todo comment"
 ]
 
 allowed = [
