@@ -23,8 +23,6 @@
 #include <memory>
 #include <tuple>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -402,10 +400,10 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
 				if (!found_reserved)
-					informPlayer
-						(game,
-						 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-						 Map_Object_Descr::get_attribute_name(action.iparam2));
+				{
+					if (upcast(ProductionSite, productionsite, get_location(game)))
+						productionsite->worker_failed_to_find_resource(game);
+				}
 				return true;
 			}
 			std::vector<ImmovableFound> list;
@@ -445,10 +443,8 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
-				informPlayer
-					(game,
-					 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-					 Map_Object_Descr::get_attribute_name(action.iparam2));
+				if (upcast(ProductionSite, productionsite, get_location(game)))
+					productionsite->worker_failed_to_find_resource(game);
 				return true;
 			}
 			std::vector<Bob *> list;
@@ -575,10 +571,8 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
 		molog("  no space found\n");
 
-		informPlayer
-			(game,
-			 ref_cast<Building, PlayerImmovable>(*get_location(game)),
-			 action.sparam1);
+		if (upcast(ProductionSite, productionsite, get_location(game)))
+			productionsite->worker_failed_to_find_resource(game);
 
 		send_signal(game, "fail");
 		pop_task(game);
@@ -592,42 +586,6 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 	schedule_act(game, 10);
 	return true;
 }
-
-// Informs the player about a building that cannot find resources any more,
-void Worker::informPlayer
-	(Game & game, Building & building, std::string res_type) const
-{
-	// NOTE this is just an ugly hack for now, to avoid getting messages
-	// NOTE for farms, reed yards, vineyards, etc.
-	if ((res_type != "fish") && (res_type != "stone"))
-		return;
-	// NOTE  AND fish_breeders
-	if (building.descr().name() == "fish_breeders_house")
-		return;
-
-	// TODO(unknown) "stone" is defined as "granite" in the world. But this code is
-	// erroneus anyways: it translates immovable attribute stone as resource
-	// granite. Instead, the immovable attributes should be made translatable in
-	// the world or the quarry should define its out of stone message in its
-	// configuartion.
-	if (res_type == "stone") res_type = "granite";
-
-	// Translate the Resource name (if it is defined by the world)
-	const World & world = game.world();
-	int32_t residx = world.get_resource(res_type.c_str());
-	if (residx != -1)
-		res_type = world.get_resource(residx)->descname();
-
-	building.send_message
-		(game,
-		 "mine",
-		 (boost::format(_("Out of %s")) % res_type).str(),
-		 (boost::format(_("The worker of this building cannot find any more %s.")) % res_type).str(),
-		 true,
-		 1800000, 0);
-}
-
-
 
 /**
  * walk \<where\>

@@ -1279,7 +1279,7 @@ void ProductionProgram::ActMine::execute
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
 		if (m_chance <= 20) {
-			informPlayer(game, ps);
+			notify_player(game, ps);
 			// and change the default animation
 			ps.set_default_anim("empty");
 		}
@@ -1306,19 +1306,18 @@ void ProductionProgram::ActMine::execute
 	return ps.program_step(game);
 }
 
-/// Copied from militarysite.cc, MilitarySite::informPlayer
 /// Informs the player about a mine that has run empty, if the mine has not
 /// sent this message within the last 60 minutes.
-void ProductionProgram::ActMine::informPlayer
+void ProductionProgram::ActMine::notify_player
 	(Game & game, ProductionSite & ps) const
 {
+	assert(!ps.descr().out_of_resource_title().empty());
+	assert(!ps.descr().out_of_resource_message().empty());
 	ps.send_message
 		(game,
 		 "mine",
-		 _("Main Vein Exhausted"),
-		 _
-		 ("This mine’s main vein is exhausted. Expect strongly diminished returns on investment. "
-		  "You should consider enhancing, dismantling or destroying it."),
+		 ps.descr().out_of_resource_title(),
+		 ps.descr().out_of_resource_message(),
 		 true,
 		 60 * 60 * 1000,
 		 0);
