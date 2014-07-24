@@ -1075,13 +1075,6 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 			(RO) a :class:`string` with the file path to the representative image
 			of the map object's idle animation
 */
-// TODO(SirVer): this assumes that images are always accesible through
-// the filesystem. This will not be true should we ever get around to
-// implementing spritemaps. I think this implementation is fine for now, it
-// will be tricky to update it though in the future. No real idea yet.
-// TODO(GunChleoc): With sprite maps, we will probably need something like
-// sprite= in addition to image= in the rich text renderer
-// - scenarios also use image= for portraits.
 int L_MapObjectDescription::get_representative_image(lua_State * L) {
 	const std::string& filepath = g_gr->animations().get_animation
 		(get()->get_animation("idle")).representative_image_from_disk().hash();
