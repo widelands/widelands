@@ -113,7 +113,7 @@ void Map_Object_Packet::LoadFinish() {
 			(*i.current)->load_pointers();
 		} catch (const std::exception& e) {
 			throw wexception(
-				"load_pointers for %s: %s", (*i.current)->get_object()->descr().c_str(), e.what());
+				"load_pointers for %s: %s", (*i.current)->get_object()->descr().type_name(), e.what());
 		}
 	}
 
