@@ -15,6 +15,7 @@ forester=1
 [aihints]
 space_consumer=true
 renews_map_resource=log
+prohibited_till=50
 
 [programs]
 work=_Work

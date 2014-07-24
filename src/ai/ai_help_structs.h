@@ -322,7 +322,7 @@ struct BuildingObserver {
 	bool fighting_type_;       // military building built near enemies
 	bool mountain_conqueror_;  // military building built near mountains
 	int32_t prohibited_till_;  // do not build before (ms)
-	int32_t forced_after_;  // do not wait until ware is needed
+	int32_t forced_after_;     // do not wait until ware is needed
 
 	bool unoccupied_;  //
 

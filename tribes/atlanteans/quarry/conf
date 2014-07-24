@@ -12,7 +12,7 @@ log=1
 stonecutter=1
 
 [aihints]
-forced_after=0
+forced_after=60
 stoneproducer=true
 
 [programs]

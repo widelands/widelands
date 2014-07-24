@@ -980,7 +980,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 
 				// exclude spots on border
-				if (bf->near_border_ and not bo.need_trees_ and not bo.need_stones_)
+				if (bf->near_border_ and not bo.need_trees_ and not bo.need_stones_ and not
+				       bo.is_fisher_)
 					continue;
 
 				// this can be only a well (as by now)
@@ -1012,10 +1013,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				} else if (bo.need_trees_) {  // LUMBERJACS
 
 					if (bo.total_count() == 0)
-						prio = 400 + bf->trees_nearby_;
+						prio = 500 + bf->trees_nearby_;
 
 					else if (bo.total_count() == 1)
-						prio = 200 + bf->trees_nearby_;
+						prio = 400 + bf->trees_nearby_;
 
 					else if (bf->trees_nearby_ < 2)
 						continue;
@@ -1190,9 +1191,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						prio = 0;
 
 					if (bo.cnt_built_ ==
-					    1 and game().get_gametime() > 45 * 60 * 1000 and bo.desc->enhancement() !=
+					    1 and game().get_gametime() > 40 * 60 * 1000 and bo.desc->enhancement() !=
 					    INVALID_INDEX and !mines_.empty()) {
 						prio += max_preciousness + bulgarian_constant;
+						// printf ("   proposing %20s as a second upgradable building\n",bo.name);
 					} else if (!output_is_needed)
 						continue;
 					else if (bo.inputs_.size() == 0) {
@@ -1201,6 +1203,13 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 						if (bo.space_consumer_)  // need to consider trees nearby
 							prio += 20 - (bf->trees_nearby_ / 3);
+
+						if (bo.space_consumer_ and not bf->water_nearby_)  // not close to water
+							prio += 1;
+
+						if (bo.space_consumer_ and not
+						       bf->unowned_mines_pots_nearby_)  // not close to mountains
+							prio += 1;
 
 						if (not bo.space_consumer_)
 							prio -= bf->producers_nearby_.at(bo.outputs_.at(0)) *
@@ -1318,7 +1327,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				if (static_cast<int32_t>((productionsites.size() + 30) / 50) >
 				       bo.total_count() and bo.cnt_under_construction_ ==
 				    0)
-					prio = 4;
+					prio = 4 + bulgarian_constant;
 
 				// take care about borders and enemies
 				prio = recalc_with_border_range(*bf, prio);
@@ -1441,10 +1450,12 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		return false;
 	}
 
-	printf(" %1d: Winning building is: %-20s, prio: %3d (time: %4d:%2d, Mil. mode: %1d, Prod.stop: "
+	printf(" %1d: Winning building is: %-20s (cur.count: %2d), prio: %3d (time: %4d:%02d, Mil. "
+	       "mode: %1d, Prod.stop: "
 	       "%s)\n",
 	       player_number(),
 	       best_building->name,
+	       best_building->total_count(),
 	       proposed_priority,
 	       gametime / 60 / 1000,
 	       (gametime / 1000) % 60,
@@ -1874,6 +1885,11 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		site.unoccupied_till_ = game().get_gametime();
 	}
 
+	// do not dismantle or upgrade the same type of building too soon - to give some time to update
+	// statistics
+	if (site.bo->last_dismantle_time_ > game().get_gametime() - 30 * 1000)
+		return false;
+
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
 	const Workarea_Info& workarea_info = site.bo->desc->m_workarea_info;
@@ -1884,10 +1900,85 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	Map& map = game().map();
 
-	// do not dismantle same type of building too soon - to give some time to update statistics
-	// yes it interferes with building updates, but not big problem here
-	if (site.bo->last_dismantle_time_ > game().get_gametime() - 30 * 1000)
-		return false;
+	// first we try to upgrade
+	// Upgrading policy
+	// a) if there are two buildings and none enhanced and there are workers
+	// avaiable, one is enhanced
+	// b) if there are two buildings
+	// statistics percents are decisive
+	const Building_Index enhancement = site.site->descr().enhancement();
+	if (enhancement != INVALID_INDEX and(site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
+
+		Building_Index enbld = INVALID_INDEX;  // to get rid of this
+		BuildingObserver* bestbld = nullptr;
+
+		// Only enhance buildings that are allowed (scenario mode)
+		// do not do decisions to fast
+		if (player_->is_building_type_allowed(enhancement)) {
+
+			const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
+			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+
+			if (gametime - en_bo.construction_decision_time_ >=
+			       kBuildingMinInterval and(en_bo.cnt_under_construction_ + en_bo.unoccupied_) ==
+			    0) {
+
+				// don't upgrade without workers
+				if (site.site->has_workers(enhancement, game())) {
+
+					printf(" %1d: Considering upgrade %20s -> %20s, count: %2d / %2d (%2d), "
+					       "performance: %3d / %3d\n",
+					       player_number(),
+					       site.bo->name,
+					       en_bo.name,
+					       site.bo->total_count(),
+					       en_bo.total_count(),
+					       en_bo.cnt_under_construction_ + en_bo.unoccupied_,
+					       site.bo->current_stats_,
+					       en_bo.current_stats_);
+
+					// forcing first upgrade
+					if (en_bo.cnt_built_ == 0 and !mines_.empty()) {
+						printf("  forcing as first upgrade\n");
+						// game().send_player_enhance_building(*site.site, enhancement);
+						// return true;
+						enbld = enhancement;
+						bestbld = &en_bo;
+					}
+
+					// if the decision was not made yet, consider normal upgrade
+					if (enbld == INVALID_INDEX) {
+						// compare the performance %
+						if (static_cast<int32_t>(en_bo.current_stats_) -
+						       static_cast<int32_t>(site.bo->current_stats_) >
+						    20) {
+
+							enbld = enhancement;
+							bestbld = &en_bo;
+							printf("  upgrading due to stat difference: %2d vs %2d\n",
+							       site.bo->current_stats_,
+							       en_bo.current_stats_);
+						}
+					}
+				}
+			}
+
+			// Enhance if enhanced building is useful
+			// additional: we dont want to lose the old building
+			if (enbld != INVALID_INDEX) {
+				game().send_player_enhance_building(*site.site, enbld);
+				bestbld->construction_decision_time_ = gametime;
+
+				printf(" %1d: Upgrading to: %-20s (time: %4d:%02d)\n",
+				       player_number(),
+				       bestbld->name,
+				       gametime / 60 / 1000,
+				       (gametime / 1000) % 60);
+
+				return true;
+			}
+		}
+	}
 
 	// Lumberjack / Woodcutter handling
 	if (site.bo->need_trees_) {
@@ -1990,8 +2081,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			}
 		}
 
-		// regardless of count of sites a building can be dismanteld if it performs too bad
-		if (site.site->get_statistics_percent() <= 10) {
+		// a building can be dismanteld if it performs too bad, if it is not the last one
+		if (site.site->get_statistics_percent() <= 10 and site.bo->total_count() > 1) {
 
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
@@ -2060,73 +2151,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		}
 	}
 
-	// Upgrading policy
-	// a) if there are two buildings and none enhanced, one is enhanced
-	// b) if there are two buildings and at least one functional
-	// statistics percents are decisive
-
-	// do not upgrade if current building is only one in operation
-	if ((site.bo->cnt_built_ - site.bo->unoccupied_) <= 1)
-		return false;
-
-	// Check whether building is enhanceable and if wares of the enhanced
-	// buildings are needed. If yes consider an upgrade.
-	const Building_Index enhancement = site.site->descr().enhancement();
-
-	// if no enhancement is possible
-	if (enhancement == INVALID_INDEX)
-		return false;
-
-	Building_Index enbld = INVALID_INDEX;  // to get rid of this
-	BuildingObserver* bestbld = nullptr;
-
-	// Only enhance buildings that are allowed (scenario mode)
-	if (player_->is_building_type_allowed(enhancement)) {
-		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
-		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
-
-		// do not build the same building so soon (kind of duplicity check)
-		if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval) {
-			// Don't enhance this building, if there is already one of same type
-			// under construction or unoccupied_
-			if (en_bo.cnt_under_construction_ + en_bo.unoccupied_ <= 0) {
-				// don't upgrade without workers
-				if (site.site->has_workers(enhancement, game())) {
-					// forcing first upgrade
-					if ((en_bo.cnt_under_construction_ + en_bo.cnt_built_ + en_bo.unoccupied_) ==
-					    0 and(site.bo->cnt_built_ - site.bo->unoccupied_) >=
-					       1 and(game().get_gametime() - site.unoccupied_till_) >
-					       30 * 60 * 1000 and !mines_.empty()) {
-						game().send_player_enhance_building(*site.site, enhancement);
-						return true;
-					}
-				}
-			}
-		}
-
-		// now, let consider normal upgrade
-		// do not upgrade if candidate production % is too low
-		if ((en_bo.cnt_built_ - en_bo.unoccupied_) !=
-		    0 or(en_bo.cnt_under_construction_ + en_bo.unoccupied_) <= 0 or en_bo.current_stats_ >=
-		       50) {
-
-			if (en_bo.current_stats_ >
-			    65 and((en_bo.current_stats_ - site.bo->current_stats_) +  // priority for enhancement
-			           (en_bo.current_stats_ - 65)) > 0) {
-				enbld = enhancement;
-				bestbld = &en_bo;
-			}
-		}
-	}
-
-	// Enhance if enhanced building is useful
-	// additional: we dont want to lose the old building
-	if (enbld != INVALID_INDEX) {
-		game().send_player_enhance_building(*site.site, enbld);
-		bestbld->construction_decision_time_ = gametime;
-		changed = true;
-	}
-
 	return changed;
 }
 
@@ -2192,9 +2216,9 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-		if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ <= 0) {
+		if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ == 0) {
 			// do not upgrade target building are not working properly (probably do not have food)
-			if (en_bo.cnt_built_ <= 0 and en_bo.current_stats_ >= 60) {
+			if (en_bo.cnt_built_ == 0 or en_bo.current_stats_ >= 60) {
 				// do not build the same building so soon (kind of duplicity check)
 				if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval) {
 					// Check if mine needs an enhancement to mine more resources
