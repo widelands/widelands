@@ -76,8 +76,9 @@ Road::CarrierSlot::CarrierSlot() :
  */
 Road::~Road()
 {
-	container_iterate_const(SlotVector, m_carrier_slots, i)
-		delete i.current->carrier_request;
+	for (CarrierSlot& slot: m_carrier_slots) {
+		delete slot.carrier_request;
+	}
 }
 
 /**
@@ -337,9 +338,11 @@ void Road::set_economy(Economy * const e)
 {
 	PlayerImmovable::set_economy(e);
 
-	container_iterate_const(SlotVector, m_carrier_slots, i)
-		if (i.current->carrier_request)
-			i.current->carrier_request->set_economy(e);
+	for (CarrierSlot& slot: m_carrier_slots) {
+		if (slot.carrier_request) {
+			slot.carrier_request->set_economy(e);
+		}
+	}
 }
 
 /**
@@ -478,11 +481,13 @@ void Road::postsplit(Game & game, Flag & flag)
 	secondpath.starttrim(index);
 
 	molog("splitting road: first part:\n");
-	container_iterate_const(std::vector<Coords>, path.get_coords(), i)
-		molog("* (%i, %i)\n", i.current->x, i.current->y);
+	for (const Coords& coords : path.get_coords()) {
+		molog("* (%i, %i)\n", coords.x, coords.y);
+	}
 	molog("                second part:\n");
-	container_iterate_const(std::vector<Coords>, secondpath.get_coords(), i)
-		molog("* (%i, %i)\n", i.current->x, i.current->y);
+	for (const Coords& coords : secondpath.get_coords()) {
+		molog("* (%i, %i)\n", coords.x, coords.y);
+	}
 
 	// change road size and reattach
 	m_flags[FlagEnd] = &flag;
@@ -508,12 +513,10 @@ void Road::postsplit(Game & game, Flag & flag)
 	// the worker around; there's obviously nothing wrong with that.
 
 	std::vector<Worker *> const workers = get_workers();
-
 	std::vector<Worker *> reassigned_workers;
 
-	container_iterate_const(std::vector<Worker *>, workers, i) {
-		Worker & w = **i.current;
-		int32_t idx = path.get_index(w.get_position());
+	for (Worker * w : workers) {
+		int32_t idx = path.get_index(w->get_position());
 
 		// Careful! If the worker is currently inside the building at our
 		// starting flag, we *must not* reassign him.
@@ -522,42 +525,44 @@ void Road::postsplit(Game & game, Flag & flag)
 		if (idx < 0) {
 			if
 				(dynamic_cast<Building const *>
-				 	(map.get_immovable(w.get_position())))
+					(map.get_immovable(w->get_position())))
 			{
 				Coords pos;
-				map.get_brn(w.get_position(), &pos);
+				map.get_brn(w->get_position(), &pos);
 				if (pos == path.get_start())
 					idx = 0;
 			}
 		}
 
 		if (idx < 0) {
-			reassigned_workers.push_back(&w);
+			reassigned_workers.push_back(w);
 
 			/*
 			 * The current worker is not on this road. Search him
 			 * in this road and remove him. Than add him to the new road
 			 */
-			container_iterate(SlotVector, m_carrier_slots, j) {
-				Carrier const * const carrier = j.current->carrier.get(game);
+			for (CarrierSlot& old_slot : m_carrier_slots) {
+				Carrier const * const carrier = old_slot.carrier.get(game);
 
-				if (carrier == &w) {
-					j.current->carrier = nullptr;
-					container_iterate(SlotVector, newroad.m_carrier_slots, k)
+				if (carrier == w) {
+					old_slot.carrier = nullptr;
+					for (CarrierSlot& new_slot : newroad.m_carrier_slots) {
 						if
-							(not k.current->carrier.get(game) and
-							 not k.current->carrier_request and
-							 k.current->carrier_type == j.current->carrier_type)
+							(!new_slot.carrier.get(game) &&
+							 !new_slot.carrier_request &&
+							 new_slot.carrier_type == old_slot.carrier_type)
 						{
-							k.current->carrier = &ref_cast<Carrier, Worker> (w);
+							upcast(Carrier, new_carrier, w);
+							new_slot.carrier =  new_carrier;
 							break;
 						}
+					}
 				}
 			}
 		}
 
 		// Cause a worker update in any case
-		w.send_signal(game, "road");
+		w->send_signal(game, "road");
 	}
 
 	// Initialize the new road
@@ -565,8 +570,9 @@ void Road::postsplit(Game & game, Flag & flag)
 
 	// Actually reassign workers after the new road has initialized,
 	// so that the reassignment is safe
-	container_iterate_const(std::vector<Worker *>, reassigned_workers, i)
-		(*i.current)->set_location(&newroad);
+	for (Worker *& w : reassigned_workers) {
+		w->set_location(&newroad);
+	}
 
 	//  Request a new carrier for this road if necessary. This must be done
 	//  _after_ the new road initializes, otherwise request routing might not

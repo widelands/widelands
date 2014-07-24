@@ -184,8 +184,9 @@ void Flag::set_economy(Economy * const e)
 	if (m_building)
 		m_building->set_economy(e);
 
-	container_iterate_const(FlagJobs, m_flag_jobs, i)
-		i.current->request->set_economy(e);
+	for (const FlagJob& temp_job : m_flag_jobs) {
+		temp_job.request->set_economy(e);
+	}
 
 	for (int8_t i = 0; i < 6; ++i) {
 		if (m_roads[i])

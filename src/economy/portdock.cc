@@ -162,8 +162,8 @@ void PortDock::init(Editor_Game_Base & egbase)
 {
 	PlayerImmovable::init(egbase);
 
-	container_iterate_const(PositionList, m_dockpoints, it) {
-		set_position(egbase, *it.current);
+	for (const Coords& coords: m_dockpoints) {
+		set_position(egbase, coords);
 	}
 
 	init_fleet(egbase);
@@ -211,8 +211,8 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 	if (m_fleet)
 		m_fleet->remove_port(egbase, this);
 
-	container_iterate_const(PositionList, m_dockpoints, it) {
-		unset_position(egbase, *it.current);
+	for (const Coords& coords: m_dockpoints) {
+		unset_position(egbase, coords);
 	}
 
 	if (m_expedition_bootstrap) {
@@ -560,8 +560,8 @@ void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileW
 
 	fw.Unsigned32(mos.get_object_file_index(*m_warehouse));
 	fw.Unsigned16(m_dockpoints.size());
-	container_iterate_const(PositionList, m_dockpoints, it) {
-		WriteCoords32(&fw, *it);
+	for (const Coords& coords: m_dockpoints) {
+		WriteCoords32(&fw, coords);
 	}
 
 	fw.Unsigned8(m_need_ship);
