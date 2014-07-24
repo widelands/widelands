@@ -263,7 +263,7 @@ std::unique_ptr<Surface> draw_minimap(const Editor_Game_Base& egbase,
                                       const Point& viewpoint,
                                       MiniMapLayer layers) {
 	// First create a temporary SDL Surface to draw the minimap.
-	// TODO: Currently the minimap is redrawn every frame. That is not really
+	// TODO(unknown): Currently the minimap is redrawn every frame. That is not really
 	//       necesary. The created surface could be cached and only redrawn two
 	//       or three times per second
 	const Map& map = egbase.map();

@@ -84,7 +84,7 @@ add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
 
-# TODO: Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
+# TODO(unknown): Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
 # library.
 wl_library(widelands_ball_of_mud
   SRCS

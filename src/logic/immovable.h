@@ -267,7 +267,7 @@ protected:
 	};
 
 public:
-	/// \todo Remove as soon as we fully support the new system
+	// TODO(unknown): Remove as soon as we fully support the new system
 	virtual bool has_new_save_support() override {return true;}
 
 	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;

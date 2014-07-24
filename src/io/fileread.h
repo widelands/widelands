@@ -79,7 +79,8 @@ public:
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
 	/// so that text files can be handled like a null-terminated string.
 	/// \throws an exception if the file couldn't be loaded for whatever reason.
-	/// \todo error handling
+
+	// TODO(unknown): error handling
 	void Open(FileSystem& fs, const std::string& filename);
 
 	/// Works just like Open, but returns false when the load fails.

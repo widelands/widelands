@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’]], _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "ax",
+	building_help_general_string("barbarians", building_description,
 		_"The war mill produces all the axes that the barbarians use for warfare.",
 		_"The barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an axfactory.") ..
 

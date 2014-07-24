@@ -575,8 +575,8 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 			if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 
-				//// TODO  Only continue; if this is an opposing site
-				//// TODO  allied sites should be counted for military influence
+				// TODO(unknown) Only continue; if this is an opposing site
+				// allied sites should be counted for military influence
 				if (player_immovable->owner().player_number() != pn) {
 					if (player_->is_hostile(player_immovable->owner()))
 						field.enemy_nearby_ = true;
@@ -609,7 +609,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		// stones are not renewable, we will count them only if previous state si nonzero
 		if (field.stones_nearby_ > 0) {
 
-			int32_t const stone_attr = Map_Object_Descr::get_attribute_id("stone");
+			int32_t const stone_attr = Map_Object_Descr::get_attribute_id("granite");
 			field.stones_nearby_ = 0;
 
 			for (uint32_t j = 0; j < immovables.size(); ++j) {
@@ -638,11 +638,11 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
 
 		// testing if it is enemy-owned field
-		// TODO count such fields...
+		// TODO(unknown) count such fields...
 		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 
-			// TODO  Only continue; if this is an opposing site
-			// TODO  allied sites should be counted for military influence
+			// TODO(unknown) Only continue; if this is an opposing site
+			// allied sites should be counted for military influence
 			if (player_immovable->owner().player_number() != pn) {
 				if (player_->is_hostile(player_immovable->owner()))
 					field.enemy_nearby_ = true;
@@ -1314,7 +1314,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				// take care about borders and enemies
 				prio = recalc_with_border_range(*bf, prio);
 
-				// TODO:
+				// TODO(unknown):
 				// introduce check that there is no warehouse nearby to prevent to close placing
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
@@ -1644,12 +1644,21 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 			if (economies.size() > 1)
 				finish = connect_flag_to_another_economy(flag);
 
+//<<<<<<< TREE
 			// try to improve the roads at this flag, effectively
 			// to build a 'shortcut' from the flag, if reasonable
 			//  second arguments means:
 			// 'FORCE a shortcut from here as the flag is full of wares'
 			if (!finish)
 				finish = improve_transportation_ways(flag, !flag.has_capacity());
+//=======
+			//// try to improve the roads at this flag
+			////  TODO(unknown) do this only on useful places - the attempt below
+			////  unfortunatey did not work as it should...
+			////  if the flag is full of wares or if it is not yet a fork.
+			//if (!finish)  //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
+				//finish = improve_transportation_ways(flag);
+//>>>>>>> MERGE-SOURCE
 
 			// cycle through flags one at a time
 			eco->flags.push_back(eco->flags.front());
@@ -2032,7 +2041,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		       nullptr,
-		       FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone"))) == 0) {
+				 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("granite"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -2669,8 +2678,8 @@ void DefaultAI::lose_building(const Building& b) {
 
 // Checks that supply line exists for given building.
 // Recurcsively verify that all inputs_ have a producer.
-// TODO: this function leads to periodic freezes of ~1 second on big games on my system.
-// TODO: It needs profiling and optimization.
+// TODO(unknown): this function leads to periodic freezes of ~1 second on big games on my system.
+// TODO(unknown): It needs profiling and optimization.
 // NOTE: This is not needed anymore and it seems it is not missed neither
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;

@@ -362,7 +362,7 @@ struct ProductionProgram {
 	///
 	/// \note It is not possible to reorder ware types within a group. "a,b" is
 	/// equivalent to "b,a" because in the internal representation the ware
-	/// types of a group are sorted. FIXME change this!
+	/// types of a group are sorted. TODO(unknown) change this!
 	struct ActConsume : public Action {
 		ActConsume(char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const override;
@@ -428,7 +428,7 @@ struct ProductionProgram {
 		        const std::string& production_program_name,
 		        ProductionSite_Descr*);
 		virtual void execute(Game &, ProductionSite &) const override;
-		virtual void informPlayer(Game &, ProductionSite &) const;
+		virtual void notify_player(Game &, ProductionSite &) const;
 	private:
 		Resource_Index m_resource;
 		uint8_t        m_distance; // width/radius of mine

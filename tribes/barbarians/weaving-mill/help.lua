@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "cloth",
+	building_help_general_string("barbarians", building_description,
 		_"Weaves cloth out of thatch reed.") ..
 
 	--Dependencies

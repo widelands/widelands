@@ -59,7 +59,7 @@ struct S2MapDescrHeader {
 	char    bulk[2290]; // unknown
 } /* size 2352 */;
 
-// TODO: the following bob types appear in S2 maps but are unknown
+// TODO(unknown): the following bob types appear in S2 maps but are unknown
 //  Somebody who can run Settlers II please check them out
 //  11 (0x0B)
 //  40 (0x28)
@@ -387,7 +387,7 @@ void S2_Map_Loader::load_s2mf_header(FileRead& fr)
 
 	//  Header must be swapped for big-endian Systems, works at the moment only
 	//  for PowerPC architecture
-	//  \todo: Generalize this
+	//  TODO(unknown): Generalize this
 #if defined(__ppc__)
 	header.w = Swap16(header.w);
 	header.h = Swap16(header.h);

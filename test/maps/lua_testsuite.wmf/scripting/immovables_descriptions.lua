@@ -92,6 +92,10 @@ function test_descr:test_enhancement()
 	assert_equal(nil, egbase:get_building_description("barbarians","lumberjacks_hut").enhancement)
 end
 
+function test_descr:test_icon_name()
+   assert_equal("tribes/barbarians/headquarters/menu.png", egbase:get_building_description("barbarians","headquarters").icon_name)
+end
+
 function test_descr:test_ismine()
    assert_equal(false, egbase:get_building_description("barbarians","headquarters").is_mine)
    assert_equal(true, egbase:get_building_description("barbarians","oremine").is_mine)
@@ -171,7 +175,14 @@ end
 
 function test_descr:test_output_ware_types()
 	local building_description = egbase:get_building_description("barbarians","bakery")
-	assert_equal("pittabread", building_description.output_ware_types[1])
+	assert_equal("pittabread", building_description.output_ware_types[1].name)
+	building_description = egbase:get_building_description("barbarians","gamekeepers_hut")
+	assert_equal(nil, building_description.output_ware_types[1])
+end
+
+function test_descr:test_output_worker_types()
+	local building_description = egbase:get_building_description("barbarians","cattlefarm")
+	assert_equal("ox", building_description.output_worker_types[1].name)
 	building_description = egbase:get_building_description("barbarians","gamekeepers_hut")
 	assert_equal(nil, building_description.output_ware_types[1])
 end
@@ -335,6 +346,10 @@ function test_descr:test_consumers()
    assert_equal("helmsmithy", ware_description.consumers[5].name)
 end
 
+function test_descr:test_icon_name()
+   assert_equal("tribes/barbarians/coal/menu.png", egbase:get_ware_description("barbarians","coal").icon_name)
+end
+
 function test_descr:test_producers()
 	local ware_description = egbase:get_ware_description("barbarians","coal")
 	assert_equal("burners_house", ware_description.producers[1].name)
@@ -373,7 +388,11 @@ function test_descr:test_becomes()
    assert_equal(nil, worker_descr)
 end
 
-function test_descr:test_level_experience()
-   assert_equal(19, egbase:get_worker_description("barbarians","miner").level_experience)
-   assert_equal(28, egbase:get_worker_description("barbarians","chief-miner").level_experience)
+function test_descr:test_icon_name()
+   assert_equal("tribes/barbarians/miner/menu.png", egbase:get_worker_description("barbarians","miner").icon_name)
+end
+
+function test_descr:test_needed_experience()
+   assert_equal(19, egbase:get_worker_description("barbarians","miner").needed_experience)
+   assert_equal(28, egbase:get_worker_description("barbarians","chief-miner").needed_experience)
 end

@@ -52,21 +52,19 @@ struct Flag;
  *   only the host is running the computer player code and sends it's player
  *   commands to all other players. If this network behaviour is changed,
  *   remember to change some time() in network save random functions.
- *
- * \TODO Improvements:
- * - Improve different initialization types (Aggressive, Normal, Defensive)
- * - Improve update code - currently the whole buildable area owned by defaultAI
- *   is rechecked after construction of a building or a road. Instead it would
- *   be better to write down the changed coordinates and only check those and
- *   surrounding ones. Same applies for other parts of the code:
- *   e.g. check_militarysite checks the whole visible area for enemy area, but
- *   it would already be enough, if it checks the outer circle ring.
- * - improvements and speedups in the whole defaultAI code.
- * - handling of trainingsites (if supply line is broken - send some soldiers
- *   out, to have some more forces. Reincrease the number of soldiers that
- *   should be trained if inputs_ get filled again.).
- *
  */
+// TODO(unknown): Improvements:
+// - Improve different initialization types (Aggressive, Normal, Defensive)
+// - Improve update code - currently the whole buildable area owned by defaultAI
+//   is rechecked after construction of a building or a road. Instead it would
+//   be better to write down the changed coordinates and only check those and
+//   surrounding ones. Same applies for other parts of the code:
+//   e.g. check_militarysite checks the whole visible area for enemy area, but
+//   it would already be enough, if it checks the outer circle ring.
+// - improvements and speedups in the whole defaultAI code.
+// - handling of trainingsites (if supply line is broken - send some soldiers
+//   out, to have some more forces. Reincrease the number of soldiers that
+//   should be trained if inputs_ get filled again.).
 struct DefaultAI : Computer_Player {
 	DefaultAI(Widelands::Game&, const Widelands::Player_Number, uint8_t);
 	~DefaultAI();
