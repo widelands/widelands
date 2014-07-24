@@ -769,8 +769,9 @@ void Player::_enhance_or_dismantle
 		// However, they are no longer associated with the building as
 		// workers of that buiding, which is why they will leave for a
 		// warehouse.
-		container_iterate_const(std::vector<Worker *>, workers, i)
-			(*i.current)->set_location(building);
+		for (Worker * temp_worker : workers) {
+			temp_worker->set_location(building);
+		}
 	}
 }
 
@@ -826,9 +827,11 @@ void Player::remove_economy(Economy & economy) {
 }
 
 bool Player::has_economy(Economy & economy) const {
-	container_iterate_const(Economies, m_economies, i)
-		if (*i.current == &economy)
+	for (Economy * temp_economy : m_economies) {
+		if (temp_economy == &economy) {
 			return true;
+		}
+	}
 	return false;
 }
 
@@ -911,9 +914,9 @@ uint32_t Player::findAttackSoldiers
 	if (flags.empty())
 		return 0;
 
-	container_iterate_const(std::vector<BaseImmovable *>, flags, i) {
-		const Flag * attackerflag = static_cast<Flag *>(*i.current);
-		const MilitarySite * ms = static_cast<MilitarySite *>(attackerflag->get_building());
+	for (BaseImmovable * temp_flag : flags) {
+		upcast(Flag, attackerflag, temp_flag);
+		upcast(MilitarySite, ms, attackerflag->get_building());
 		std::vector<Soldier *> const present = ms->presentSoldiers();
 		uint32_t const nr_staying = ms->minSoldierCapacity();
 		uint32_t const nr_present = present.size();
@@ -948,19 +951,22 @@ void Player::enemyflagaction
 			 attacker, player_number());
 	else if (count == 0)
 		log("enemyflagaction: count is 0\n");
-	else if (is_hostile(flag.owner()))
-		if (Building * const building = flag.get_building())
-			if (upcast(Attackable, attackable, building))
+	else if (is_hostile(flag.owner())) {
+		if (Building * const building = flag.get_building()) {
+			if (upcast(Attackable, attackable, building)) {
 				if (attackable->canAttack()) {
 					std::vector<Soldier *> attackers;
 					findAttackSoldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
 
-					container_iterate_const(std::vector<Soldier *>, attackers, i)
-						ref_cast<MilitarySite, PlayerImmovable>
-							(*(*i.current)->get_location(egbase()))
-						.sendAttacker(**i.current, *building);
+					for (Soldier * temp_attacker : attackers) {
+						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
+						ms->sendAttacker(*temp_attacker, *building);
+					}
 				}
+			}
+		}
+	}
 }
 
 

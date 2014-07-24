@@ -1334,8 +1334,9 @@ std::vector<Soldier *> Warehouse::presentSoldiers() const
 	if (sidx != m_incorporated_workers.end()) {
 		const WorkerList & soldiers = sidx->second;
 
-		container_iterate_const(WorkerList, soldiers, i)
-			rv.push_back(static_cast<Soldier *>(*i));
+		for (Worker * temp_soldier: soldiers) {
+			rv.push_back(static_cast<Soldier *>(temp_soldier));
+		}
 	}
 
 	return rv;
