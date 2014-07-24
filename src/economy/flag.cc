@@ -796,7 +796,7 @@ void Flag::flag_job_request_callback
 
 	assert(w);
 
-	container_iterate(FlagJobs, flag.m_flag_jobs, i)
+	container_iterate(FlagJobs, flag.m_flag_jobs, i) {
 		if (i.current->request == &rq) {
 			delete &rq;
 
@@ -805,6 +805,7 @@ void Flag::flag_job_request_callback
 			flag.m_flag_jobs.erase(i.current);
 			return;
 		}
+	}
 
 	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }

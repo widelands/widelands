@@ -115,7 +115,7 @@ void Map_Buildingdata_Data_Packet::Read
 					{
 						Building::Leave_Queue & leave_queue = building.m_leave_queue;
 						leave_queue.resize(fr.Unsigned16());
-						container_iterate(Building::Leave_Queue, leave_queue, i)
+						container_iterate(Building::Leave_Queue, leave_queue, i) {
 							if (uint32_t const leaver_serial = fr.Unsigned32())
 								try {
 									//  The check that this worker actually has a
@@ -128,11 +128,12 @@ void Map_Buildingdata_Data_Packet::Read
 									throw game_data_error
 										("leave queue item #%lu (%u): %s",
 										 static_cast<long int>
-										 	(i.current - leave_queue.begin()),
+											(i.current - leave_queue.begin()),
 										 leaver_serial, e.what());
 								}
 							else
 								*i.current = nullptr;
+						}
 					}
 
 					building.m_leave_time = fr.Unsigned32();

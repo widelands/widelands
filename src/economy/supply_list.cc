@@ -39,12 +39,12 @@ void SupplyList::add_supply(Supply & supp)
 */
 void SupplyList::remove_supply(Supply & supp)
 {
-	container_iterate(Supplies, m_supplies, i)
+	container_iterate(Supplies, m_supplies, i) {
 		if (*i.current == &supp) {
 			*i.current = *(i.get_end() - 1);
 			return m_supplies.pop_back();
 		}
-
+	}
 	throw wexception("SupplyList::remove: not in list");
 }
 

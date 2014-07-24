@@ -270,8 +270,8 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	container_iterate(Wares, m_wares, iqueue) {
-		WaresQueue * queue = *iqueue;
+	for (WaresQueue * iqueue: m_wares) {
+		WaresQueue * queue = iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
 			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());

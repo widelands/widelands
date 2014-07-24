@@ -503,9 +503,9 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 			if (reverse)
 				ppath.path->reverse();
 
-			container_iterate(std::vector<StepEvalFindPorts::Target>, se.targets, it) {
-				if (it.current->idx == otheridx) {
-					*it.current = se.targets.back();
+			for (StepEvalFindPorts::Target& temp_target : se.targets) {
+				if (temp_target.idx == otheridx) {
+					temp_target = se.targets.back();
 					se.targets.pop_back();
 					break;
 				}
@@ -627,8 +627,8 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		if (ship.get_nritems() > 0 && !ship.get_destination(game)) {
 			molog("Ship %u has items\n", ship.serial());
 			bool found_dst = false;
-			container_iterate(std::vector<ShippingItem>, ship.m_items, it) {
-				PortDock * dst = it->get_destination(game);
+			for (ShippingItem& temp_item : ship.m_items) {
+				PortDock * dst = temp_item.get_destination(game);
 				if (dst) {
 					molog("... sending to portdock %u\n", dst->serial());
 					ship.set_destination(game, *dst);

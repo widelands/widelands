@@ -494,8 +494,9 @@ struct ComplexRouterFixture {
 	 */
 	void  reset()
 	{
-		container_iterate(Nodes, nodes, i)
-			(*i.current)->reset_path_finding_cycle();
+		for (RoutingNode * node : nodes) {
+			node->reset_path_finding_cycle();
+		}
 	}
 	TestingRoutingNode * d0;
 	Nodes nodes;

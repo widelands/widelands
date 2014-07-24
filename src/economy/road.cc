@@ -285,17 +285,19 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	 * If a carrier is set assign it to this road, else
 	 * request a new carrier
 	 */
-	if (upcast(Game, game, &egbase))
-	container_iterate(SlotVector, m_carrier_slots, i) {
-		if (Carrier * const carrier = i.current->carrier.get(*game)) {
-			//  This happens after a road split. Tell the carrier what's going on.
-			carrier->set_location    (this);
-			carrier->update_task_road(*game);
-		} else if
-			(not i.current->carrier_request and
-			 (i.current->carrier_type == 1 or
-			  m_type == Road_Busy))
-			_request_carrier(*i.current);
+	if (upcast(Game, game, &egbase)) {
+		for (CarrierSlot& slot : m_carrier_slots) {
+			if (Carrier * const carrier = slot.carrier.get(*game)) {
+				//  This happens after a road split. Tell the carrier what's going on.
+				carrier->set_location    (this);
+				carrier->update_task_road(*game);
+			} else if
+				(!slot.carrier_request &&
+				 (slot.carrier_type == 1 ||
+				  m_type == Road_Busy)) {
+				_request_carrier(slot);
+			}
+		}
 	}
 }
 
@@ -305,12 +307,12 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 void Road::cleanup(Editor_Game_Base & egbase)
 {
 
-	container_iterate(SlotVector, m_carrier_slots, i) {
-		delete i.current->carrier_request;
-		i.current->carrier_request = nullptr;
+	for (CarrierSlot& slot : m_carrier_slots) {
+		delete slot.carrier_request;
+		slot.carrier_request = nullptr;
 
 		// carrier will be released via PlayerImmovable::cleanup
-		i.current->carrier = nullptr;
+		slot.carrier = nullptr;
 	}
 
 	// Unmark Fields
@@ -383,16 +385,17 @@ void Road::_request_carrier_callback
 
 	Road    & road    = ref_cast<Road,    PlayerImmovable>(target);
 
-	container_iterate(SlotVector, road.m_carrier_slots, i)
-		if (i.current->carrier_request == &rq) {
+	for (CarrierSlot& slot : road.m_carrier_slots) {
+		if (slot.carrier_request == &rq) {
 			Carrier & carrier = ref_cast<Carrier, Worker> (*w);
-			i.current->carrier_request = nullptr;
-			i.current->carrier = &carrier;
+			slot.carrier_request = nullptr;
+			slot.carrier = &carrier;
 
 			carrier.start_task_road(game);
 			delete &rq;
 			return;
 		}
+	}
 
 	/*
 	 * Oops! We got a request_callback but don't have the request.
@@ -412,13 +415,13 @@ void Road::remove_worker(Worker & w)
 {
 	Editor_Game_Base & egbase = owner().egbase();
 
-	container_iterate(SlotVector, m_carrier_slots, i) {
-		Carrier const * carrier = i.current->carrier.get(egbase);
+	for (CarrierSlot& slot : m_carrier_slots) {
+		Carrier const * carrier = slot.carrier.get(egbase);
 
 		if (carrier == &w) {
-			i.current->carrier = nullptr;
+			slot.carrier = nullptr;
 			carrier            = nullptr;
-			_request_carrier(*i.current);
+			_request_carrier(slot);
 		}
 	}
 
@@ -577,13 +580,15 @@ void Road::postsplit(Game & game, Flag & flag)
 	//  Request a new carrier for this road if necessary. This must be done
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
-	container_iterate(SlotVector, m_carrier_slots, i)
+	for (CarrierSlot& slot : m_carrier_slots) {
 		if
-			(not i.current->carrier.get(game) and
-			 not i.current->carrier_request and
-			 (i.current->carrier_type == 1 or
-			  m_type == Road_Busy))
-			_request_carrier(*i.current);
+			(!slot.carrier.get(game) &&
+			 !slot.carrier_request &&
+			 (slot.carrier_type == 1 ||
+			  m_type == Road_Busy)) {
+			_request_carrier(slot);
+		}
+	}
 
 	//  Make sure wares waiting on the original endpoint flags are dealt with.
 	m_flags[FlagStart]->update_wares(game, &oldend);
@@ -601,8 +606,8 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 	uint32_t const tdelta = gametime - m_busyness_last_update;
 
 	//  Iterate over all carriers and try to find one which takes the ware.
-	container_iterate(SlotVector, m_carrier_slots, i)
-		if (Carrier * const carrier = i.current->carrier.get(game))
+	for (CarrierSlot& slot : m_carrier_slots) {
+		if (Carrier * const carrier = slot.carrier.get(game))
 			if (carrier->notify_ware(game, flagid)) {
 				//  notify_ware returns false if the carrier currently can not take
 				//  the ware. If we get here, the carrier took the ware. So we
@@ -636,6 +641,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 				}
 				return true;
 			}
+	}
 
 	//  If we get here, no carrier took the ware. So we check if we should
 	//  increment the usage counter. m_busyness_last_update prevents that the
@@ -645,12 +651,14 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 		if (500 < (m_busyness += 10)) {
 			m_type = Road_Busy;
 			_mark_map(game);
-			container_iterate(SlotVector, m_carrier_slots, i)
+			for (CarrierSlot& slot : m_carrier_slots) {
 				if
-					(not i.current->carrier.get(game) and
-					 not i.current->carrier_request and
-					 i.current->carrier_type != 1)
-				_request_carrier(*i.current);
+					(!slot.carrier.get(game) &&
+					 !slot.carrier_request &&
+					 slot.carrier_type != 1) {
+				_request_carrier(slot);
+				}
+			}
 		}
 	}
 	return false;

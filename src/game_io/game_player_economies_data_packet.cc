@@ -52,11 +52,11 @@ void Game_Player_Economies_Data_Packet::Read
 					Player::Economies & economies = player->m_economies;
 					uint16_t const nr_economies = economies.size();
 					Player::Economies ecos(nr_economies);
-					container_iterate(Player::Economies, ecos, i) {
+					for (Economy * temp_eco : ecos) {
 						uint32_t value = fr.Unsigned32();
 						if (value < 0xffffffff) {
 							if (upcast(Flag const, flag, map[value].get_immovable())) {
-								*i.current = flag->get_economy();
+								temp_eco = flag->get_economy();
 								EconomyDataPacket d(flag->get_economy());
 								d.Read(fr);
 							} else {

@@ -1537,13 +1537,15 @@ bool DefaultAI::construct_roads(int32_t gametime) {
 // improves current road system
 bool DefaultAI::improve_roads(int32_t gametime) {
 	// Remove flags of dead end roads, as long as no more wares are stored on them
-	container_iterate(std::list<EconomyObserver*>, economies, i)
-	container_iterate(std::list<Flag const*>, (*i.current)->flags, j)
+	for (EconomyObserver* eco_obs : economies) {
+		container_iterate(std::list<Flag const*>, eco_obs->flags, j) {
 
-	if ((*j.current)->is_dead_end() && (*j.current)->current_wares() == 0) {
-		game().send_player_bulldoze(*const_cast<Flag*>((*j.current)));
-		j.current = (*i.current)->flags.erase(j.current);
-		return true;
+			if ((*j.current)->is_dead_end() && (*j.current)->current_wares() == 0) {
+				game().send_player_bulldoze(*const_cast<Flag*>((*j.current)));
+				j.current = eco_obs->flags.erase(j.current);
+				return true;
+			}
+		}
 	}
 
 	// force a split on roads that are longer than 3 parts

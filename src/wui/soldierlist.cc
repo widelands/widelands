@@ -238,8 +238,7 @@ void SoldierPanel::think()
 	int32_t maxdist = dt * AnimateSpeed / 1000;
 	m_last_animate_time = curtime;
 
-	container_iterate(std::vector<Icon>, m_icons, icon_it) {
-		Icon & icon = *icon_it.current;
+	for (Icon& icon : m_icons) {
 		Point goal = calc_pos(icon.row, icon.col);
 		Point dp = goal - icon.pos;
 

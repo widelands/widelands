@@ -246,11 +246,12 @@ bool Section::has_val(char const * const name) const
  */
 Section::Value * Section::get_val(char const * const name)
 {
-	container_iterate(Value_list, m_values, i)
-		if (!strcasecmp(i.current->get_name(), name)) {
-			i.current->mark_used();
-			return &*i.current;
+	for (Value& value : m_values) {
+		if (!strcasecmp(value.get_name(), name)) {
+			value.mark_used();
+			return &value;
 		}
+	}
 	return nullptr;
 }
 
@@ -263,24 +264,26 @@ Section::Value * Section::get_val(char const * const name)
  */
 Section::Value * Section::get_next_val(char const * const name)
 {
-	container_iterate(Value_list, m_values, i)
-		if (not i.current->is_used())
-			if (!name || !strcasecmp(i.current->get_name(), name)) {
-				i.current->mark_used();
-				return &*i.current;
+	for (Value& value : m_values) {
+		if (!value.is_used()) {
+			if (!name || !strcasecmp(value.get_name(), name)) {
+				value.mark_used();
+				return &value;
 			}
-
+		}
+	}
 	return nullptr;
 }
 
 Section::Value & Section::create_val
 	(char const * const name, char const * const value)
 {
-	container_iterate(Value_list, m_values, i)
-		if (!strcasecmp(i.current->get_name(), name)) {
-			i.current->set_string(value);
-			return *i.current;
+	for (Value& temp_value : m_values) {
+		if (!strcasecmp(temp_value.get_name(), name)) {
+			temp_value.set_string(value);
+			return temp_value;
 		}
+	}
 	return create_val_duplicate(name, value);
 }
 
@@ -640,22 +643,25 @@ Section & Profile::pull_section(char const * const name)
  */
 Section * Profile::get_next_section(char const * const name)
 {
-	container_iterate(Section_list, m_sections, i)
-		if (not i.current->is_used())
-			if (!name || !strcasecmp(i.current->get_name(), name)) {
-				i.current->mark_used();
-				return &*i.current;
+	for (Section& section : m_sections) {
+		if (!section.is_used()) {
+			if (!name || !strcasecmp(section.get_name(), name)) {
+				section.mark_used();
+				return &section;
 			}
-
+		}
+	}
 	return nullptr;
 }
 
 
 Section & Profile::create_section          (char const * const name)
 {
-	container_iterate(Section_list, m_sections, i)
-		if (!strcasecmp(i.current->get_name(), name))
-			return *i.current;
+	for (Section& section : m_sections) {
+		if (!strcasecmp(section.get_name(), name)) {
+			return section;
+		}
+	}
 	return create_section_duplicate(name);
 }
 

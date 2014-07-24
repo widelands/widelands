@@ -1000,9 +1000,9 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	// may have been called directly by the Economy.
 	// Do not update anything else about PlannedWorkers here, because this
 	// function is called by _update_planned_workers, so avoid recursion
-	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, pw_it) {
-		if (pw_it.current->index == worker && pw_it.current->amount)
-			pw_it.current->amount--;
+	for (PlannedWorkers& planned_worker : m_planned_workers) {
+		if (planned_worker.index == worker && planned_worker.amount)
+			planned_worker.amount--;
 	}
 }
 
@@ -1066,9 +1066,9 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 {
 	PlannedWorkers * pw = nullptr;
 
-	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, i) {
-		if (i.current->index == index) {
-			pw = &*i.current;
+	for (PlannedWorkers& planned_worker : m_planned_workers) {
+		if (planned_worker.index == index) {
+			pw = &planned_worker;
 			break;
 		}
 	}

@@ -299,11 +299,12 @@ void Economy::_remove_flag(Flag & flag)
 	flag.set_economy(nullptr);
 
 	// fast remove
-	container_iterate(Flags, m_flags, i)
+	container_iterate(Flags, m_flags, i) {
 		if (*i.current == &flag) {
 			*i.current = *(i.get_end() - 1);
 			return m_flags.pop_back();
 		}
+	}
 	throw wexception("trying to remove nonexistent flag");
 }
 
@@ -313,8 +314,9 @@ void Economy::_remove_flag(Flag & flag)
  */
 void Economy::_reset_all_pathfinding_cycles()
 {
-	container_iterate(Flags, m_flags, i)
-		(*i.current)->reset_path_finding_cycle();
+	for (Flag * flag : m_flags) {
+		flag->reset_path_finding_cycle();
+	}
 }
 
 /**
