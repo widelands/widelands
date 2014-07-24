@@ -205,7 +205,7 @@ Table<void *>::Entry_Record * Table<void *>::find
 
 {
 	for (Entry_Record * temp_entry : m_entry_records) {
-		if (temp_entry == entry) {
+		if (temp_entry->entry() == entry) {
 			return temp_entry;
 		}
 	}
@@ -233,6 +233,8 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 */
 void Table<void *>::clear()
 {
+//	container_iterate_const(Entry_Record_vector, m_entry_records, i) {
+	//	delete *i.current;
 	for (const Entry_Record * entry : m_entry_records) {
 		delete entry ;
 	}
