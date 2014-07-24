@@ -233,8 +233,6 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 */
 void Table<void *>::clear()
 {
-//	container_iterate_const(Entry_Record_vector, m_entry_records, i) {
-	//	delete *i.current;
 	for (const Entry_Record * entry : m_entry_records) {
 		delete entry ;
 	}

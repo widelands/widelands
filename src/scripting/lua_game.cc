@@ -202,12 +202,12 @@ int L_Player::get_inbox(lua_State * L) {
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
-	container_iterate_const(MessageQueue, p.messages(), m) {
-		if (m.current->second->status() == Message::Archived)
+	for (const std::pair<Message_Id, Message *>& temp_message : p.messages()) {
+		if (temp_message.second->status() == Message::Archived)
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<L_Message>(L, new L_Message(player_number(), m.current->first));
+		to_lua<L_Message>(L, new L_Message(player_number(), temp_message.first));
 		lua_rawset(L, -3);
 	}
 

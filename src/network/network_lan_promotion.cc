@@ -137,10 +137,10 @@ void LAN_Base::send
 void LAN_Base::broadcast
 	(void const * const buf, size_t const len, uint16_t const port)
 {
-	container_iterate_const(std::list<in_addr_t>, broadcast_addresses, i) {
+	for (const in_addr_t& temp_address : broadcast_addresses) {
 		sockaddr_in addr;
 		addr.sin_family      = AF_INET;
-		addr.sin_addr.s_addr = *i.current;
+		addr.sin_addr.s_addr = temp_address;
 DIAG_OFF("-Wold-style-cast")
 		addr.sin_port        = htons(port);
 DIAG_ON("-Wold-style-cast")

@@ -170,9 +170,9 @@ void GameMessageMenu::think()
 	}
 
 	// Add new messages to the list
-	container_iterate_const(MessageQueue, mq, i) {
-		Message_Id      const id      =  i.current->first;
-		const Message &       message = *i.current->second;
+	for (const std::pair<Message_Id, Message *>& temp_message : mq) {
+		Message_Id      const id      =  temp_message.first;
+		const Message &       message = *temp_message.second;
 		Message::Status const status  = message.status();
 		if ((mode == Archive) != (status == Message::Archived))
 			continue;
