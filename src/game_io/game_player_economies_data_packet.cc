@@ -106,13 +106,13 @@ void Game_Player_Economies_Data_Packet::Write
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
 		const Player::Economies & economies = player->m_economies;
-		container_iterate_const(Player::Economies, economies, i) {
+		for (Economy * temp_economy : economies) {
 			bool wrote_this_economy = false;
 
 			// Walk the map so that we find a representative Flag.
 			for (Field const * field = &field_0; field < &map[map.max_index()]; ++field) {
 				if (upcast(Flag const, flag, field->get_immovable())) {
-					if (flag->get_economy() == *i.current) {
+					if (flag->get_economy() == temp_economy) {
 						fw.Unsigned32(field - &field_0);
 
 						EconomyDataPacket d(flag->get_economy());
@@ -132,7 +132,7 @@ void Game_Player_Economies_Data_Packet::Write
 					Bob* bob = field->get_first_bob();
 					while (bob) {
 						if (upcast(Ship const, ship, bob)) {
-							if (ship->get_economy() == *i.current) {
+							if (ship->get_economy() == temp_economy) {
 								// TODO(sirver): the 0xffffffff is ugly and fragile.
 								fw.Unsigned32(0xffffffff); // Sentinel value.
 								fw.Unsigned32(field - &field_0);

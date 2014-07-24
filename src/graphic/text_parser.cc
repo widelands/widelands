@@ -117,8 +117,8 @@ bool Text_Parser::parse_textblock
 	split_words(block_text, &unwrapped_words);
 
 	//Handle user defined line breaks, and save them
-	container_iterate_const(std::vector<std::string>, unwrapped_words, i)
-		for (std::string line = *i.current;;) {
+	for (const std::string& temp_words : unwrapped_words) {
+		for (std::string line = temp_words;;) {
 			std::string::size_type next_break = line.find("<br>");
 
 			// Replace &lt; with <
@@ -140,6 +140,7 @@ bool Text_Parser::parse_textblock
 			line_breaks.push_back(words.size());
 			line.erase(0, next_break + 4);
 		}
+	}
 	return extract_more;
 }
 
