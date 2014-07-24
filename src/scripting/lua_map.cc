@@ -104,6 +104,7 @@ struct SoldierDescr {
 };
 
 typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
+typedef std::pair<Widelands::Ware_Index, uint32_t> WaresPair;
 typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
 typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
 typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
@@ -194,9 +195,9 @@ PARSERS(worker, Worker)
 
 WaresMap count_wares_on_flag_(Flag& f, const Tribe_Descr & tribe) {
 	WaresMap rv;
-	Flag::Wares current_wares = f.get_wares();
-	container_iterate_const(Flag::Wares, current_wares, w) {
-		Ware_Index i = tribe.ware_index((*w.current)->descr().name());
+
+	for (const WareInstance * ware : f.get_wares()) {
+		Ware_Index i = tribe.ware_index(ware->descr().name());
 		if (!rv.count(i))
 			rv.insert(Widelands::WareAmount(i, 1));
 		else
@@ -2139,9 +2140,9 @@ int L_BaseImmovable::get_fields(lua_State * L) {
 
 	lua_createtable(L, pl.size(), 0);
 	uint32_t idx = 1;
-	container_iterate_const(BaseImmovable::PositionList, pl, f) {
+	for (const Coords& coords : pl) {
 		lua_pushuint32(L, idx++);
-		to_lua<L_Field>(L, new L_Field(f->x, f->y));
+		to_lua<L_Field>(L, new L_Field(coords.x, coords.y));
 		lua_rawset(L, -3);
 	}
 	return 1;
@@ -2260,21 +2261,22 @@ int L_Flag::set_wares(lua_State * L)
 	WaresMap c_wares = count_wares_on_flag_(*f, tribe);
 
 	uint32_t nwares = 0;
-	container_iterate_const(WaresMap, c_wares, c) {
+
+	for (const WaresPair& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
-		if (!setpoints.count(c->first))
-			setpoints.insert(Widelands::WareAmount(c->first, 0));
-		nwares += c->second;
+		if (!setpoints.count(ware.first))
+			setpoints.insert(Widelands::WareAmount(ware.first, 0));
+		nwares += ware.second;
 	}
 
 	// The idea is to change as little as possible on this flag
-	container_iterate_const(WaresMap, setpoints, sp) {
+	for (const WaresPair& sp : setpoints) {
 		uint32_t cur = 0;
-		WaresMap::iterator i = c_wares.find(sp->first);
+		WaresMap::iterator i = c_wares.find(sp.first);
 		if (i != c_wares.end())
 			cur = i->second;
 
-		int d = sp->second - cur;
+		int d = sp.second - cur;
 		nwares += d;
 
 		if (f->total_capacity() < nwares)
@@ -2282,10 +2284,9 @@ int L_Flag::set_wares(lua_State * L)
 
 		if (d < 0) {
 			while (d) {
-				Flag::Wares current_wares = f->get_wares();
-				container_iterate_const(Flag::Wares, current_wares, w) {
-					if (tribe.ware_index((*w.current)->descr().name()) == sp->first) {
-						const_cast<WareInstance *>(*w.current)->remove(egbase);
+				for (const WareInstance * ware : f->get_wares()) {
+					if (tribe.ware_index(ware->descr().name()) == sp.first) {
+						const_cast<WareInstance *>(ware)->remove(egbase);
 						++d;
 						break;
 					}
@@ -2293,9 +2294,9 @@ int L_Flag::set_wares(lua_State * L)
 			}
 		} else if (d > 0) {
 			// add wares
-			const WareDescr & wd = *tribe.get_ware_descr(sp->first);
+			const WareDescr & wd = *tribe.get_ware_descr(sp.first);
 			for (int32_t j = 0; j < d; j++) {
-				WareInstance & ware = *new WareInstance(sp->first, &wd);
+				WareInstance & ware = *new WareInstance(sp.first, &wd);
 				ware.init(egbase);
 				f->add_ware(egbase, ware);
 			}
@@ -2316,23 +2317,25 @@ int L_Flag::get_wares(lua_State * L) {
 
 	if (wares_set.size() == tribe.get_nrwares()) { // Want all returned
 		wares_set.clear();
-		container_iterate_const(WaresMap, wares, w)
-			wares_set.insert(w->first);
+
+		for (const WaresPair& ware : wares) {
+			wares_set.insert(ware.first);
+		}
 	}
 
 	if (!return_number)
 		lua_newtable(L);
 
-	container_iterate_const(WaresSet, wares_set, w) {
+	for (const Widelands::Ware_Index& ware : wares_set) {
 		uint32_t count = 0;
-		if (wares.count(*w))
-			count = wares[*w];
+		if (wares.count(ware))
+			count = wares[ware];
 
 		if (return_number) {
 			lua_pushuint32(L, count);
 			break;
 		} else {
-		   lua_pushstring(L, tribe.get_ware_descr(*w)->name());
+			lua_pushstring(L, tribe.get_ware_descr(ware)->name());
 			lua_pushuint32(L, count);
 			lua_rawset(L, -3);
 		}
@@ -2777,9 +2780,9 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
 	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	lua_newtable(L);
-	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i) {
-		lua_pushstring(L, tribe.get_ware_descr(i.current->first)->name());
-		lua_pushuint32(L, i.current->second);
+	for (const WareAmount& input_ware : ps->descr().inputs()) {
+		lua_pushstring(L, tribe.get_ware_descr((input_ware.first))->name());
+		lua_pushuint32(L, input_ware.second);
 		lua_rawset(L, -3);
 	}
 	return 1;
@@ -2805,20 +2808,20 @@ int L_ProductionSite::set_wares(lua_State * L) {
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 
 	WaresSet valid_wares;
-	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i)
-		valid_wares.insert(i->first);
-
-	container_iterate_const(WaresMap, setpoints, i) {
-		if (!valid_wares.count(i->first))
+	for (const WareAmount& input_ware : ps->descr().inputs()) {
+		valid_wares.insert(input_ware.first);
+	}
+	for (const WaresPair& sp : setpoints) {
+		if (!valid_wares.count(sp.first)) {
 			report_error(
-			   L, "<%s> can't be stored here!", tribe.get_ware_descr(i->first)->name().c_str());
-
-		WaresQueue & wq = ps->waresqueue(i->first);
-		if (i->second > wq.get_max_size())
+				L, "<%s> can't be stored here!", tribe.get_ware_descr(sp.first)->name().c_str());
+		}
+		WaresQueue & wq = ps->waresqueue(sp.first);
+		if (sp.second > wq.get_max_size()) {
 			report_error(
-			   L, "Not enough space for %u items, only for %i", i->second, wq.get_max_size());
-
-		wq.set_filled(i->second);
+				L, "Not enough space for %u items, only for %i", sp.second, wq.get_max_size());
+		}
+		wq.set_filled(sp.second);
 	}
 
 	return 0;
@@ -2833,8 +2836,9 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresSet valid_wares;
-	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i)
-		valid_wares.insert(i.current->first);
+	for (const WareAmount& input_ware : ps->descr().inputs()) {
+		valid_wares.insert(input_ware.first);
+	}
 
 	if (wares_set.size() == tribe.get_nrwares()) // Want all returned
 		wares_set = valid_wares;
@@ -2842,16 +2846,16 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	if (!return_number)
 		lua_newtable(L);
 
-	container_iterate_const(WaresSet, wares_set, i) {
+	for (const Widelands::Ware_Index& ware : wares_set) {
 		uint32_t cnt = 0;
-		if (valid_wares.count(*i.current))
-			cnt = ps->waresqueue(*i.current).get_filled();
+		if (valid_wares.count(ware))
+			cnt = ps->waresqueue(ware).get_filled();
 
 		if (return_number) { // this is the only thing the customer wants to know
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			lua_pushstring(L, tribe.get_ware_descr(*i.current)->name());
+			lua_pushstring(L, tribe.get_ware_descr(ware)->name());
 			lua_pushuint32(L, cnt);
 			lua_rawset(L, -3);
 		}
@@ -3719,11 +3723,11 @@ int L_Field::get_claimers(lua_State * L) {
 
 	// Push the players with military influence
 	uint32_t cidx = 1;
-	container_iterate_const (std::vector<PlrInfluence>, claimers, i) {
-		if (i.current->second <= 0)
+	for (const PlrInfluence& claimer : claimers) {
+		if (claimer.second <= 0)
 			continue;
 		lua_pushuint32(L, cidx ++);
-		get_factory(L).push_player(L, i.current->first);
+		get_factory(L).push_player(L, claimer.first);
 		lua_rawset(L, -3);
 	}
 

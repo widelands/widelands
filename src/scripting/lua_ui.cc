@@ -145,9 +145,9 @@ static void _put_all_tabs_into_table
 		_put_all_tabs_into_table(L, f);
 
 		if (upcast(UI::Tab_Panel, t, f))
-			container_iterate_const(UI::Tab_Panel::TabList, t->tabs(), tab) {
-				lua_pushstring(L, (*tab)->get_name());
-				to_lua<L_Tab>(L, new L_Tab(*tab));
+			for (UI::Tab* tab : t->tabs()) {
+				lua_pushstring(L, tab->get_name());
+				to_lua<L_Tab>(L, new L_Tab(tab));
 				lua_rawset(L, -3);
 			}
 	}
