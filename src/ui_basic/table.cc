@@ -234,7 +234,7 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 void Table<void *>::clear()
 {
 	for (const Entry_Record * entry : m_entry_records) {
-		delete entry ;
+		delete entry;
 	}
 	m_entry_records.clear();
 

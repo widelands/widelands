@@ -33,7 +33,7 @@ echo " "
 # Definition of some local variables #
 ######################################
 var_build=0 # 0 == debug(default), 1 == release
-var_build_lang=0 # 0 = false
+var_build_lang=0 # 0 = false 
 var_updater=0 # 0 = false
 ######################################
 
@@ -135,8 +135,7 @@ var_updater=0 # 0 = false
     fi
 
     echo " "
-#    cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="${var_build_type}"
-cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="${var_build_type}" .. -DCMAKE_CXX_COMPILER=/usr/bin/g++-4.7 -DCMAKE_C_COMPILER=/usr/bin/gcc-4.7
+    cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="${var_build_type}"
     make ${MAKEOPTS}
     return 0
   }
@@ -217,7 +216,7 @@ cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="${var_build_type}" .. -DCMAKE_CX
 ######################################
 set -e
 basic_check
-#user_interaction
+user_interaction
 prepare_directories_and_links
 compile_widelands
 if [ $var_build_lang -eq 1 ] ; then
@@ -225,7 +224,7 @@ if [ $var_build_lang -eq 1 ] ; then
 fi
 move_built_files
 cd ..
-#update_script
+update_script
 echo " "
 echo "#####################################################"
 echo "# Congratulations Widelands was successfully build. #"
