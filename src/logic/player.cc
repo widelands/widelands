@@ -346,15 +346,16 @@ Message_Id Player::add_message_with_timeout
 	const Map &       map      = game.map         ();
 	uint32_t    const gametime = game.get_gametime();
 	Coords      const position = m   .position    ();
-	container_iterate_const(MessageQueue, messages(), i)
+	for (std::pair<Message_Id, Message *>  tmp_message : messages()) {
 		if
-			(i.current->second->sender() == m.sender()                      and
-			 gametime < i.current->second->sent() + timeout                 and
-			 map.calc_distance(i.current->second->position(), position) <= radius)
+			(tmp_message.second->sender() == m.sender()                      and
+			 gametime < tmp_message.second->sent() + timeout                 and
+			 map.calc_distance(tmp_message.second->position(), position) <= radius)
 		{
 			delete &m;
 			return Message_Id::Null();
 		}
+	}
 	return add_message(game, m);
 }
 

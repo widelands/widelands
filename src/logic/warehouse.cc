@@ -687,8 +687,7 @@ PlayerImmovable::Workers Warehouse::get_incorporated_workers()
 {
 	PlayerImmovable::Workers all_workers;
 
-	typedef std::pair<Ware_Index, WorkerList> IncorporatedWorkersPair;
-	for (const IncorporatedWorkersPair& worker_pair : m_incorporated_workers) {
+	for (const std::pair<Ware_Index, WorkerList>& worker_pair : m_incorporated_workers) {
 		for (Worker * worker : worker_pair.second) {
 			all_workers.push_back(worker);
 		}
@@ -959,7 +958,7 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 		return false;
 
 	//  see if we have the resources
-	for (const Worker_Descr::BuildcostPair& buildcost : w_desc.buildcost()) {
+	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 		const std::string & input_name = buildcost.first;
 		Ware_Index id_w = descr().tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
@@ -984,7 +983,7 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 
 	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(worker);
 
-	for (const Worker_Descr::BuildcostPair& buildcost : w_desc.buildcost()) {
+	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 		const std::string & input = buildcost.first;
 		Ware_Index const id_ware = descr().tribe().ware_index(input);
 		if (id_ware != INVALID_INDEX) {
@@ -1032,7 +1031,7 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(index);
 	std::vector<uint32_t> available;
 
-	for (const Worker_Descr::BuildcostPair& buildcost : w_desc.buildcost()) {
+	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 		const std::string & input_name = buildcost.first;
 		Ware_Index id_w = descr().tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
@@ -1084,7 +1083,7 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 		pw->amount = 0;
 
 		const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(pw->index);
-		for (const Worker_Descr::BuildcostPair& buildcost : w_desc.buildcost()) {
+		for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 			const std::string & input_name = buildcost.first;
 
 			Ware_Index id_w = descr().tribe().ware_index(input_name);
@@ -1120,7 +1119,7 @@ void Warehouse::_update_planned_workers
 	}
 
 	uint32_t idx = 0;
-	for (const Worker_Descr::BuildcostPair& buildcost : w_desc.buildcost()) {
+	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 
 		const std::string & input_name = buildcost.first;
 		uint32_t supply;

@@ -41,7 +41,6 @@ class Worker_Descr : public BobDescr
 	friend struct WorkerProgram;
 
 public:
-	typedef std::pair<std::string, uint8_t> BuildcostPair;
 	typedef std::map<std::string, uint8_t> Buildcost;
 
 	enum Worker_Type {

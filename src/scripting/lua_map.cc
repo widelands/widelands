@@ -104,7 +104,6 @@ struct SoldierDescr {
 };
 
 typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
-typedef std::pair<Widelands::Ware_Index, uint32_t> WaresPair;
 typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
 typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
 typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
@@ -2262,7 +2261,7 @@ int L_Flag::set_wares(lua_State * L)
 
 	uint32_t nwares = 0;
 
-	for (const WaresPair& ware : c_wares) {
+	for (const std::pair<Widelands::Ware_Index, uint32_t>& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
 		if (!setpoints.count(ware.first))
 			setpoints.insert(Widelands::WareAmount(ware.first, 0));
@@ -2270,7 +2269,7 @@ int L_Flag::set_wares(lua_State * L)
 	}
 
 	// The idea is to change as little as possible on this flag
-	for (const WaresPair& sp : setpoints) {
+	for (const std::pair<Widelands::Ware_Index, uint32_t>& sp : setpoints) {
 		uint32_t cur = 0;
 		WaresMap::iterator i = c_wares.find(sp.first);
 		if (i != c_wares.end())
@@ -2318,7 +2317,7 @@ int L_Flag::get_wares(lua_State * L) {
 	if (wares_set.size() == tribe.get_nrwares()) { // Want all returned
 		wares_set.clear();
 
-		for (const WaresPair& ware : wares) {
+		for (const std::pair<Widelands::Ware_Index, uint32_t>& ware : wares) {
 			wares_set.insert(ware.first);
 		}
 	}
@@ -2811,7 +2810,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
 		valid_wares.insert(input_ware.first);
 	}
-	for (const WaresPair& sp : setpoints) {
+	for (const std::pair<Widelands::Ware_Index, uint32_t>& sp : setpoints) {
 		if (!valid_wares.count(sp.first)) {
 			report_error(
 				L, "<%s> can't be stored here!", tribe.get_ware_descr(sp.first)->name().c_str());

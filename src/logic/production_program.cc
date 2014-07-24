@@ -281,23 +281,24 @@ bool ProductionProgram::ActReturn::Site_Has::evaluate
 	(const ProductionSite & ps) const
 {
 	uint8_t count = group.second;
-	container_iterate_const(ProductionSite::Input_Queues, ps.warequeues(), i)
-		if (group.first.count((*i.current)->get_ware())) {
-			uint8_t const filled = (*i.current)->get_filled();
+	for (WaresQueue * ip_queue : ps.warequeues()) {
+		if (group.first.count(ip_queue->get_ware())) {
+			uint8_t const filled = ip_queue->get_filled();
 			if (count <= filled)
 				return true;
 			count -= filled;
 		}
+	}
 	return false;
 }
 std::string ProductionProgram::ActReturn::Site_Has::description
 	(const Tribe_Descr & tribe) const
 {
 	std::string condition = "";
-	container_iterate_const(std::set<Ware_Index>, group.first, i) {
+	for (const Ware_Index& temp_ware : group.first) {
 		condition =
 		/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
-			(boost::format(_("%1$s %2$s")) % condition % tribe.get_ware_descr(*i.current)->descname())
+			(boost::format(_("%1$s %2$s")) % condition % tribe.get_ware_descr(temp_ware)->descname())
 			 .str();
 		/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
 		condition = (boost::format(_("%s,")) % condition).str();
@@ -476,8 +477,9 @@ ProductionProgram::ActReturn::ActReturn
 }
 
 ProductionProgram::ActReturn::~ActReturn() {
-	container_iterate_const(Conditions, m_conditions, i)
-		delete *i.current;
+	for (Condition * condition : m_conditions) {
+		delete condition;
+	}
 }
 
 void ProductionProgram::ActReturn::execute
@@ -669,18 +671,19 @@ ProductionProgram::ActWorker::ActWorker(
 		//  name, so it also validates the parameter.
 		const Workarea_Info & worker_workarea_info =
 			main_worker_descr.get_program(m_program)->get_workarea_info();
-		Workarea_Info & building_workarea_info = descr->m_workarea_info;
-		container_iterate_const(Workarea_Info, worker_workarea_info, i) {
+
+		// local typedef for iterator
+		for (const std::pair<uint32_t, std::set<std::string> >& area_info : worker_workarea_info) {
 			std::set<std::string> & building_radius_infos =
-				building_workarea_info[i.current->first];
-			const std::set<std::string> & descriptions = i.current->second;
-			container_iterate_const(std::set<std::string>, descriptions, de) {
+				descr->m_workarea_info[area_info.first];
+
+			for (const std::string& worker_descname : area_info.second) {
 				std::string description = descr->descname();
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
 				description += main_worker_descr.name();
-				description += *de.current;
+				description += worker_descname;
 				building_radius_infos.insert(description);
 			}
 		}
