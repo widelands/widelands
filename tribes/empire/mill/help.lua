@@ -10,10 +10,10 @@ return {
 	return
 
 	--Lore Section
-	-- TODO rename images building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
+	building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("empire", building_description, "flour",
+	building_help_general_string("empire", building_description,
 		_[[Text needed]]) ..
 
 	--Dependencies

@@ -6,7 +6,7 @@ pick=1
 carrier=1
 
 [cut]
-0=findobject attrib:stone radius:6
+0=findobject attrib:granite radius:6
 1=walk object
 2=playFX ../../../sound/stonecutting/stonecutter 192
 3=animation hacking 10000

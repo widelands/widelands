@@ -25,7 +25,7 @@
 
 #include "io/filesystem/filesystem.h"
 
-/// \todo const correctness
+// TODO(unknown): const correctness
 class RealFSImpl : public FileSystem {
 public:
 	RealFSImpl(const std::string & Directory);

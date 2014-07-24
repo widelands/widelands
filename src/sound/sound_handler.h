@@ -155,14 +155,14 @@ extern class Sound_Handler g_sound_handler;
  * but also in start_music(), which causes the seemingly recursive call to
  * change_music() from inside start_music(). It really is not recursive, trust
  * me :-)
- *
- * \todo DOC: priorities
- * \todo DOC: play-or-not algorithm
- * \todo Environmental sound effects (e.g. wind)
- * \todo repair and reenable animation sound effects for 1-pic-animations
- * \todo accommodate runtime changes of i18n language
- * \todo ? accommodate sound activation if it was disabled at the beginning
-*/
+ */
+// TODO(unknown): DOC: priorities
+// TODO(unknown): DOC: play-or-not algorithm
+// TODO(unknown): Environmental sound effects (e.g. wind)
+// TODO(unknown): repair and reenable animation sound effects for 1-pic-animations
+// TODO(unknown): accommodate runtime changes of i18n language
+// TODO(unknown): accommodate sound activation if it was disabled at the beginning
+
 // This is used for SDL UserEvents to be handled in the main loop.
 enum {
 	CHANGE_MUSIC
@@ -231,8 +231,8 @@ public:
 	 *  And disabling sound on dedicated servers
 	 * \see Sound_Handler::Sound_Handler()
 	 * \see Sound_Handler::init()
-	 * \todo This is ugly. Find a better way to do it
-	*/
+	 */
+	// TODO(unknown): This is ugly. Find a better way to do it
 	bool nosound_;
 
 	/** Can disable_music_ and disable_fx_ be changed?

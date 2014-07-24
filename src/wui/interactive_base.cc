@@ -406,7 +406,12 @@ void Interactive_Base::draw_overlay(RenderTarget& dst) {
 		static format node_format("(%i, %i)");
 		const std::string node_text = as_uifont
 			((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_SMALL);
-		dst.blit(Point(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text), CM_Normal, UI::Align_BottomRight);
+		dst.blit(
+			Point(get_w() - 5, get_h() - 5),
+			UI::g_fh1->render(node_text),
+			CM_Normal,
+			UI::Align_BottomRight
+		);
 	}
 
 	// Blit FPS when in debug mode.

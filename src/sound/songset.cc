@@ -27,9 +27,11 @@
 #include "sound/sound_handler.h"
 
 namespace {
-	// The behaviour of whether SDL_Mixer frees the RW it uses was changed with SDL_Mixer version 1.2.12, this
+	// The behaviour of whether SDL_Mixer frees the RW it uses was
+	// changed with SDL_Mixer version 1.2.12, this
 	// check is so that we don't have a memory leak in the new version.
-	// TODO: Once we can demand that everyone use SDL_Mixer version >= 1.2.12, this function should be removed,
+	// TODO(unknown): Once we can demand that everyone use
+	// SDL_Mixer version >= 1.2.12, this function should be removed,
 	// and all usages replaced supposing it's true.
 	bool have_to_free_rw() {
 		return

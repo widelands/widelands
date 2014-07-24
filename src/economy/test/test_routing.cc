@@ -17,8 +17,8 @@
  *
  */
 
-//  FIXME remove this pragma when boost-1.40 is required (when it has been
-//  FIXME accepted by distributions)
+//  TODO(unknown) remove this pragma when boost-1.40 is required (when it has been
+//  accepted by distributions)
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 
 #include <exception>

@@ -186,8 +186,8 @@ void GameMessageMenu::think()
 	if (list->size()) {
 		if (not list->has_selection())
 			list->select(0);
-			// FIXME Workaround for bug #691928: There should
-			// FIXME be a solution without this extra update().
+			// TODO(unknown) Workaround for bug #691928: There should
+			// be a solution without this extra update().
 			list->update();
 	} else {
 		m_centerviewbtn->set_enabled(false);

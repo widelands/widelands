@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘What do you mean, my fish ain’t fresh?!’]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "fish",
+	building_help_general_string("barbarians", building_description,
 		_"Fishes on the coast near the hut.",
 		_"The fisher’s hut needs water full of fish within the working radius.") ..
 

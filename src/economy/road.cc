@@ -53,10 +53,8 @@ Road::Road() :
 	m_flags[0] = m_flags[1] = nullptr;
 	m_flagidx[0] = m_flagidx[1] = -1;
 
-	/*
-	 * Initialize the worker slots for the road
-	 * TODO: make this configurable
-	 */
+// Initialize the worker slots for the road
+// TODO(unknown): make this configurable
 	CarrierSlot slot;
 	m_carrier_slots.push_back(slot);
 	m_carrier_slots.push_back(slot);
@@ -463,7 +461,7 @@ void Road::presplit(Game & game, Coords) {_unmark_map(game);}
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
 */
-// TODO SirVer: This need to take an Editor_Game_Base as well.
+// TODO(SirVer): This need to take an Editor_Game_Base as well.
 void Road::postsplit(Game & game, Flag & flag)
 {
 	Flag & oldend = *m_flags[FlagEnd];

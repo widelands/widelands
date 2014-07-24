@@ -47,8 +47,8 @@ TrainingSite_Descr::TrainingSite_Descr
 	ProductionSite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe, world),
 
-	//  FIXME This is currently hardcoded for "soldier" but should allow any
-	//  FIXME soldier type name.
+	//  TODO(unknown) This is currently hardcoded for "soldier" but should allow any
+	//  soldier type name.
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
 	m_max_stall (global_s.get_safe_int("trainer_patience")),
 
@@ -66,10 +66,10 @@ m_max_defense       (0),
 m_max_evade         (0)
 {
 	// Read the range of levels that can update this building
-	//  FIXME This is currently hardcoded to "soldier" but it should search for
-	//  FIXME sections starting with the name of each soldier type.
-	//  FIXME These sections also seem redundant. Eliminate them (having the
-	//  FIXME programs should be enough).
+	//  TODO(unknown) This is currently hardcoded to "soldier" but it should search for
+	//  sections starting with the name of each soldier type.
+	//  These sections also seem redundant. Eliminate them (having the
+	//  programs should be enough).
 	if (Section * const s = prof.get_section("soldier hp")) {
 		m_train_hp      = true;
 		m_min_hp        = s->get_safe_int("min_level");
@@ -737,8 +737,8 @@ void TrainingSite::add_upgrade
 void TrainingSite::calc_upgrades() {
 	assert(m_upgrades.empty());
 
-	//  FIXME This is currently hardcoded for "soldier" but it should allow any
-	//  FIXME soldier type name.
+	//  TODO(unknown) This is currently hardcoded for "soldier" but it should allow any
+	//  soldier type name.
 	if (descr().get_train_hp())
 		add_upgrade(atrHP, "upgrade_soldier_hp_");
 	if (descr().get_train_attack())
