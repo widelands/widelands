@@ -113,7 +113,7 @@ void Map_Version_Data_Packet::Write
 	//
 	// For now, these are meaningless. Let's hope it will not stay that way!
 
-	// FIXME -- we could store the unix time in uint32, as a partial fix to 2038 problem.
+	// TODO(unknown) -- we could store the unix time in uint32, as a partial fix to 2038 problem.
 	// There seems to be a get_safe_natural method, but not corresponding setter.
 
 	Map & map = egbase.map();

@@ -582,7 +582,7 @@ bool Game::run
 		m_state = gs_running;
 		//handle network
 		while (m_state == gs_running) {
-			// TODO this should be improved.
+			// TODO(unknown) this should be improved.
 #ifndef _WIN32
 			if (usleep(100) == -1)
 				break;
@@ -633,9 +633,9 @@ void Game::end_dedicated_game() {
 /**
  * Cleanup for load
  * \deprecated
- * \todo Get rid of this. Prefer to delete and recreate Game-style objects
- * Note that this needs fixes in the editor.
  */
+// TODO(unknown): Get rid of this. Prefer to delete and recreate Game-style objects
+// Note that this needs fixes in the editor.
 void Game::cleanup_for_load()
 {
 	m_state = gs_notrunning;

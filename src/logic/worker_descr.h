@@ -28,8 +28,8 @@ class Image;
 
 namespace Widelands {
 
-/// \todo (Antonio Trueba#1#): Get rid of forward class declaration
-/// (chicked-and-egg problem)
+// TODO(Antonio Trueba#1#): Get rid of forward class declaration
+// (chicked-and-egg problem)
 class Worker;
 struct WorkerProgram;
 

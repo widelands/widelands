@@ -298,8 +298,8 @@ General_Statistics_Menu::~General_Statistics_Menu() {
 
 /**
  * called when the help button was clicked
- * \todo Implement help
-*/
+ */
+// TODO(unknown): Implement help
 void General_Statistics_Menu::clicked_help() {}
 
 

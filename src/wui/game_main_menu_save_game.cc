@@ -134,7 +134,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		m_gametime.set_text(gametimestring(gametime));
 
 		int player_nr = parent.game().player_manager()->get_number_of_players();
-		// TODO: This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
+		// TODO(GunChleoc): This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
 		/** TRANSLATORS: This is preceded by a number */
 		m_players_label.set_text(
 		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
@@ -174,7 +174,8 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		char buf[200];
 		sprintf
 			(buf, "%i %s", gpdp.get_number_of_players(),
-			// TODO: This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
+			// TODO(GunChleoc): This should be ngettext(" %i player" etc.
+			// with boost::format, but it refuses to work
 			/** TRANSLATORS: This is preceded by a number */
 			ngettext("player", "players", gpdp.get_number_of_players()));
 			m_players_label.set_text(buf);

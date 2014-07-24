@@ -241,8 +241,8 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	m_remove_last_player.set_enabled(1 < nr_players);
 
 	update();
-	// SirVer TODO: Take steps when the player is referenced someplace. Not
-	// SirVer TODO: currently possible in the editor though.
+	// TODO(SirVer): Take steps when the player is referenced someplace. Not
+	// TODO(SirVer): currently possible in the editor though.
 }
 
 /*
@@ -271,12 +271,12 @@ called when a button is clicked
 //
 //                 map.set_nrplayers(nr_players);
 //                 map.set_scenario_player_name(nr_players, name);   //  ???
-//                 // SirVer TODO: next lines were commented without a clue
+//                 // TODO(SirVer): next lines were commented without a clue
 //                 // map.set_scenario_player_tribe(nr_players, tribe); //  ???
 //                 // menu.set_need_save(true);
 //                 m_add_player        .set_enabled(true);
 //                 m_remove_last_player.set_enabled(1 < nr_players);
-//                 // SirVer TODO: next lines were commented without a clue
+//                 // TODO(SirVer): next lines were commented without a clue
 //                 // if
 //                 //         (&menu.tools.current() == &menu.tools.set_starting_pos
 //                 //          and
@@ -290,7 +290,7 @@ called when a button is clicked
 //                 // else
 //                         update();
 //         } else {
-//                 // SirVer, TODO: this error was commented without a clue
+//                 // TODO(SirVer): this error was commented without a clue
 //                 // UI::WLMessageBox mmb
 //                 //         (&menu,
 //                 //          _("Error!"),
@@ -399,7 +399,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 		// place a hq and reference the tribe
 		// so that this tribe can not be changed
 		egbase.add_player
-			(n, 0, // SirVer, TODO: initialization index makes no sense here
+			(n, 0, // TODO(SirVer): initialization index makes no sense here
 			 m_plr_set_tribes_buts[n - 1]->get_title(),
 			 m_plr_names[n - 1]->text());
 

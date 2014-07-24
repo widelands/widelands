@@ -247,7 +247,7 @@ private:
 	// sends notifications about this.
 	void change_field_owner(const FCoords& fc, Player_Number new_owner);
 
-	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to
+	// TODO(unknown) -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to
 	// uint32.
 	int32_t gametime_;
 	Object_Manager objects_;

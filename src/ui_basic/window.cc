@@ -432,9 +432,9 @@ void Window::think() {if (not is_minimal()) Panel::think();}
  */
 bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
 {
-	//  FIXME This code is erroneous. It checks the current key state. What it
-	//  FIXME needs is the key state at the time the mouse was clicked. See the
-	//  FIXME usage comment for get_key_state.
+	//  TODO(unknown) This code is erroneous. It checks the current key state. What it
+	//  needs is the key state at the time the mouse was clicked. See the
+	//  usage comment for get_key_state.
 	if
 		(((get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
 		  and

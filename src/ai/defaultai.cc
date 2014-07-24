@@ -564,8 +564,8 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 			if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 
-				//// TODO  Only continue; if this is an opposing site
-				//// TODO  allied sites should be counted for military influence
+				// TODO(unknown) Only continue; if this is an opposing site
+				// allied sites should be counted for military influence
 				if (player_immovable->owner().player_number() != pn) {
 					if (player_->is_hostile(player_immovable->owner()))
 						field.enemy_nearby_ = true;
@@ -620,11 +620,11 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
 
 		// testing if it is enemy-owned field
-		// TODO count such fields...
+		// TODO(unknown) count such fields...
 		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 
-			// TODO  Only continue; if this is an opposing site
-			// TODO  allied sites should be counted for military influence
+			// TODO(unknown) Only continue; if this is an opposing site
+			// allied sites should be counted for military influence
 			if (player_immovable->owner().player_number() != pn) {
 				if (player_->is_hostile(player_immovable->owner()))
 					field.enemy_nearby_ = true;
@@ -1279,7 +1279,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				// take care about borders and enemies
 				prio = recalc_with_border_range(*bf, prio);
 
-				// TODO:
+				// TODO(unknown):
 				// introduce check that there is no warehouse nearby to prevent to close placing
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
@@ -1595,8 +1595,8 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 				finish = connect_flag_to_another_economy(flag);
 
 			// try to improve the roads at this flag
-			//  TODO do this only on useful places - the attempt below
-			//  TODO  unfortunatey did not work as it should...
+			//  TODO(unknown) do this only on useful places - the attempt below
+			//  unfortunatey did not work as it should...
 			//  if the flag is full of wares or if it is not yet a fork.
 			if (!finish)  //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
 				finish = improve_transportation_ways(flag);
@@ -2554,8 +2554,8 @@ void DefaultAI::lose_building(const Building& b) {
 
 // Checks that supply line exists for given building.
 // Recurcsively verify that all inputs_ have a producer.
-// TODO: this function leads to periodic freezes of ~1 second on big games on my system.
-// TODO: It needs profiling and optimization.
+// TODO(unknown): this function leads to periodic freezes of ~1 second on big games on my system.
+// TODO(unknown): It needs profiling and optimization.
 // NOTE: This is not needed anymore and it seems it is not missed neither
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;

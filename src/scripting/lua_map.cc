@@ -988,7 +988,7 @@ int L_Map::get_field(lua_State * L) {
 		and so on. You only need to call this function if you changed
 		Field.raw_height in any way.
 */
-// TODO: do we really want this function?
+// TODO(unknown): do we really want this function?
 int L_Map::recalculate(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	egbase.map().recalc_whole_map(egbase.world());
@@ -1123,7 +1123,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, is_port),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
-	// TODO size should be similar to
+	// TODO(SirVer) size should be similar to
 	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
