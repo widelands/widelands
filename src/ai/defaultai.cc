@@ -296,10 +296,12 @@ void DefaultAI::late_initialization() {
 			const ProductionSite_Descr& prod =
 			   ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
-			container_iterate_const(BillOfMaterials, prod.inputs(), j)
-			bo.inputs_.push_back(j.current->first);
-			container_iterate_const(ProductionSite_Descr::Output, prod.output_ware_types(), j)
-			bo.outputs_.push_back(*j.current);
+			for (const WareAmount& temp_input : prod.inputs()) {
+				bo.inputs_.push_back(temp_input.first);
+			}
+			for (const Ware_Index& temp_output : prod.output_ware_types()) {
+				bo.outputs_.push_back(temp_output);
+			}
 
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
@@ -688,10 +690,10 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 		    or(dynamic_cast<Road const*>(imm) && (fse.field->nodecaps() & BUILDCAPS_FLAG)))
 			field.preferred_ = true;
 
-	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
-		if (dynamic_cast<Flag const*>(i.current->object))
+	for (const ImmovableFound& temp_immovable : immovables) {
+		if (dynamic_cast<Flag const*>(temp_immovable.object))
 			field.reachable = true;
-		else if (upcast(Building const, bld, i.current->object)) {
+		else if (upcast(Building const, bld, temp_immovable.object)) {
 			if (bld->descr().get_ismine()) {
 				++field.mines_nearby_;
 			} else if (upcast(ConstructionSite const, cs, bld)) {
@@ -1635,15 +1637,15 @@ bool DefaultAI::connect_flag_to_another_economy(const Flag& flag) {
 	bool found = false;
 	check.set_openend(false);
 	Coords closest;
-	container_iterate_const(std::vector<Coords>, reachable, i) {
+	for (const Coords& reachable_coords : reachable) {
 		Path* path2 = new Path();
 
-		if (map.findpath(flag.get_position(), *i.current, 0, *path2, check) >= 0) {
+		if (map.findpath(flag.get_position(), reachable_coords, 0, *path2, check) >= 0) {
 			if (!found || path->get_nsteps() > path2->get_nsteps()) {
 				delete path;
 				path = path2;
 				path2 = nullptr;
-				closest = *i.current;
+				closest = reachable_coords;
 				found = true;
 			}
 		}
@@ -1808,10 +1810,11 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
 	const Workarea_Info& workarea_info = site.bo->desc->m_workarea_info;
-	container_iterate_const(Workarea_Info, workarea_info, i)
-
-	if (radius < i.current->first)
-		radius = i.current->first;
+	for (const std::pair<uint32_t, std::set<std::string> > & temp_info : workarea_info) {
+		if (radius < temp_info.first) {
+			radius = temp_info.first;
+		}
+	}
 
 	Map& map = game().map();
 
@@ -2427,19 +2430,19 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 	if (upcast(Building const, building, &pi))
 		lose_building(*building);
 	else if (upcast(Flag const, flag, &pi)) {
-		container_iterate_const(std::list<EconomyObserver*>, economies, i)
-		container_iterate(std::list<Flag const*>, (*i.current)->flags, j)
-
-		if (*j.current == flag) {
-			(*i.current)->flags.erase(j.current);
-			return;
+		for (EconomyObserver* temp_observer : economies) {
+			container_iterate(std::list<Flag const*>, temp_observer->flags, j) {
+				if (*j.current == flag) {
+					temp_observer->flags.erase(j.current);
+					return;
+				}
+			}
 		}
-
-		container_iterate(std::list<Flag const*>, new_flags, i)
-
-		if (*i.current == flag) {
-			new_flags.erase(i.current);
-			return;
+		container_iterate(std::list<Flag const*>, new_flags, i) {
+			if (*i.current == flag) {
+				new_flags.erase(i.current);
+				return;
+			}
 		}
 	} else if (upcast(Road const, road, &pi))
 		roads.remove(road);
@@ -2559,15 +2562,16 @@ void DefaultAI::lose_building(const Building& b) {
 // NOTE: This is not needed anymore and it seems it is not missed neither
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;
-	container_iterate_const(std::vector<int16_t>, bo.inputs_, i)
-	container_iterate_const(std::vector<BuildingObserver>, buildings_, j)
-
-	if (j.current->cnt_built_ &&
-	    std::find(j.current->outputs_.begin(), j.current->outputs_.end(), *i.current) !=
-	       j.current->outputs_.end() &&
-	    check_supply(*j.current)) {
-		++supplied;
-		break;
+	for (const int16_t& temp_inputs : bo.inputs_) {
+		for (const BuildingObserver& temp_building : buildings_) {
+			if (temp_building.cnt_built_ &&
+				 std::find(temp_building.outputs_.begin(), temp_building.outputs_.end(), temp_inputs) !=
+					 temp_building.outputs_.end() &&
+				 check_supply(temp_building)) {
+				++supplied;
+				break;
+			}
+		}
 	}
 
 	return supplied == bo.inputs_.size();
