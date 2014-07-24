@@ -98,8 +98,9 @@ BaseListselect::~BaseListselect()
  * Remove all entries from the listselect
 */
 void BaseListselect::clear() {
-	container_iterate_const(Entry_Record_deque, m_entry_records, i)
-		delete *i.current;
+	for (Entry_Record * entry : m_entry_records) {
+		delete entry;
+	}
 	m_entry_records.clear();
 
 	m_scrollbar.set_steps(1);
@@ -165,8 +166,9 @@ void BaseListselect::add_front
 	Entry_Record * er = new Entry_Record();
 
 	er->m_entry = 0;
-	container_iterate_const(Entry_Record_deque, m_entry_records, i)
-		++(*i.current)->m_entry;
+	for (Entry_Record * temp_entry : m_entry_records) {
+		++(temp_entry)->m_entry;
+	}
 
 	er->pic   = pic;
 	er->use_clr = false;

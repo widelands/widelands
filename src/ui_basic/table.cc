@@ -72,8 +72,9 @@ Table<void *>::Table
 */
 Table<void *>::~Table()
 {
-	container_iterate_const(Entry_Record_vector, m_entry_records, i)
-		delete *i.current;
+	for (const Entry_Record * entry : m_entry_records) {
+		delete entry;
+	}
 }
 
 /// Add a new column to this table.
@@ -88,8 +89,9 @@ void Table<void *>::add_column
 	assert(size() == 0);
 
 	uint32_t complete_width = 0;
-	container_iterate_const(Columns, m_columns, i)
-		complete_width += i.current->width;
+	for (const Column& col : m_columns) {
+		complete_width += col.width;
+	}
 
 	m_total_width += width;
 	set_desired_size(m_total_width, get_h());
@@ -202,10 +204,11 @@ Table<void *>::Entry_Record * Table<void *>::find
 	(const void * const entry) const
 
 {
-	container_iterate_const(Entry_Record_vector, m_entry_records, i)
-		if ((*i.current)->entry() == entry)
-			return *i.current;
-
+	for (Entry_Record * temp_entry : m_entry_records) {
+		if (temp_entry == entry) {
+			return temp_entry;
+		}
+	}
 	return nullptr;
 }
 
@@ -230,8 +233,9 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 */
 void Table<void *>::clear()
 {
-	container_iterate_const(Entry_Record_vector, m_entry_records, i)
-		delete *i.current;
+	for (const Entry_Record * entry : m_entry_records) {
+		delete entry ;
+	}
 	m_entry_records.clear();
 
 	if (m_scrollbar)

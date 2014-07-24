@@ -134,7 +134,7 @@ m_last_animate_time(0)
 	// Initialize the icons
 	uint32_t row = 0;
 	uint32_t col = 0;
-	for (const Soldier * soldier : m_soldiers.presentSoldiers()) {
+	for (Soldier * soldier : m_soldiers.presentSoldiers()) {
 		Icon icon;
 		icon.soldier = soldier;
 		icon.row = row;
@@ -238,7 +238,8 @@ void SoldierPanel::think()
 	int32_t maxdist = dt * AnimateSpeed / 1000;
 	m_last_animate_time = curtime;
 
-	for (const Icon& icon : m_icons) {
+	container_iterate(std::vector<Icon>, m_icons, icon_it) {
+		Icon & icon = *icon_it.current;
 		Point goal = calc_pos(icon.row, icon.col);
 		Point dp = goal - icon.pos;
 
