@@ -179,9 +179,9 @@ void Map_Players_Messages_Data_Packet::Write
 			("packet_version", CURRENT_PACKET_VERSION);
 		const MessageQueue & messages = player->messages();
 		Map_Message_Saver & message_saver = mos.message_savers[p - 1];
-		container_iterate_const(MessageQueue, messages, i) {
-			message_saver.add         (i.current->first);
-			const Message & message = *i.current->second;
+		for (const std::pair<Message_Id, Message *>& temp_message : messages) {
+			message_saver.add         (temp_message.first);
+			const Message & message = *temp_message.second;
 			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));
 			assert
 				(message.duration() == Forever() or

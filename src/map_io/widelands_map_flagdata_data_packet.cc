@@ -282,8 +282,8 @@ void Map_Flagdata_Data_Packet::Write
 			const Flag::CapacityWaitQueue & capacity_wait =
 				flag->m_capacity_wait;
 			fw.Unsigned16(capacity_wait.size());
-			container_iterate_const(Flag::CapacityWaitQueue, capacity_wait, i) {
-				Worker const * const obj = i.current->get(egbase);
+			for (const OPtr<Worker >&  temp_worker : capacity_wait) {
+				Worker const * const obj = temp_worker.get(egbase);
 				assert
 					(obj);
 				assert
@@ -297,16 +297,16 @@ void Map_Flagdata_Data_Packet::Write
 			}
 			const Flag::FlagJobs & flag_jobs = flag->m_flag_jobs;
 			fw.Unsigned16(flag_jobs.size());
-			container_iterate_const(Flag::FlagJobs, flag_jobs, i) {
-				if (i.current->request) {
+
+			for (const Flag::FlagJob& temp_job : flag_jobs) {
+				if (temp_job.request) {
 					fw.Unsigned8(1);
-					i.current->request->Write
+					temp_job.request->Write
 						(fw, ref_cast<Game, Editor_Game_Base>(egbase), mos);
 				} else
 					fw.Unsigned8(0);
 
-
-				fw.String(i.current->program);
+				fw.String(temp_job.program);
 			}
 
 			mos.mark_object_as_saved(*flag);

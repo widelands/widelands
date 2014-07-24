@@ -1190,10 +1190,10 @@ void Map_Buildingdata_Data_Packet::Write
 			{
 				const Building::Leave_Queue & leave_queue = building->m_leave_queue;
 				fw.Unsigned16(leave_queue.size());
-				container_iterate_const(Building::Leave_Queue, leave_queue, j) {
-					assert(mos.is_object_known(*j.current->get(egbase)));
+				for (const OPtr<Worker >& temp_queue: leave_queue) {
+					assert(mos.is_object_known(*temp_queue.get(egbase)));
 					fw.Unsigned32
-						(mos.get_object_file_index(*j.current->get(egbase)));
+						(mos.get_object_file_index(*temp_queue.get(egbase)));
 				}
 			}
 			fw.Unsigned32(building->m_leave_time);
@@ -1363,15 +1363,16 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 
 	//  Incorporated workers, write sorted after file-serial.
 	uint32_t nworkers = 0;
-	container_iterate_const(Warehouse::IncorporatedWorkers, warehouse.m_incorporated_workers, cwt)
-		nworkers += cwt->second.size();
+	for (const std::pair<Ware_Index, Warehouse::WorkerList>& cwt: warehouse.m_incorporated_workers) {
+		nworkers += cwt.second.size();
+	}
 
 	fw.Unsigned16(nworkers);
 	typedef std::map<uint32_t, const Worker *> TWorkerMap;
 	TWorkerMap workermap;
-	container_iterate_const(Warehouse::IncorporatedWorkers, warehouse.m_incorporated_workers, cwt) {
-		container_iterate_const(Warehouse::WorkerList, cwt->second, i) {
-			const Worker & w = *(*i);
+	for (const std::pair<Ware_Index, Warehouse::WorkerList>& cwt : warehouse.m_incorporated_workers) {
+		for (Worker * temp_worker : cwt.second) {
+			const Worker & w = *temp_worker;
 			assert(mos.is_object_known(w));
 			workermap.insert
 				(std::pair<uint32_t, const Worker *>
@@ -1379,9 +1380,8 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		}
 	}
 
-	container_iterate_const(TWorkerMap, workermap, i)
-	{
-		const Worker & obj = *i.current->second;
+	for (const std::pair<uint32_t, const Worker *>& temp_worker : workermap) {
+		const Worker & obj = *temp_worker.second;
 		assert(mos.is_object_known(obj));
 		fw.Unsigned32(mos.get_object_file_index(obj));
 	}
@@ -1403,17 +1403,15 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	fw.Unsigned8(0); //  terminator for spawn times
 
 	fw.Unsigned32(warehouse.m_planned_workers.size());
-	container_iterate_const
-		(std::vector<Warehouse::PlannedWorkers>,
-		 warehouse.m_planned_workers, pw_it)
-	{
-		fw.CString(tribe.get_worker_descr(pw_it.current->index)->name());
-		fw.Unsigned32(pw_it.current->amount);
+	for (const Warehouse::PlannedWorkers& temp_worker : warehouse.m_planned_workers) {
+		fw.CString(tribe.get_worker_descr(temp_worker.index)->name());
+		fw.Unsigned32(temp_worker.amount);
 
-		fw.Unsigned32(pw_it.current->requests.size());
-		container_iterate_const
-			(std::vector<Request *>, pw_it.current->requests, req_it)
-			(*req_it.current)->Write(fw, game, mos);
+		fw.Unsigned32(temp_worker.requests.size());
+
+		for (Request * temp_request : temp_worker.requests) {
+			temp_request->Write(fw, game, mos);
+		}
 	}
 
 	fw.Unsigned32(warehouse.m_next_stock_remove_act);
@@ -1517,11 +1515,10 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		 <=
 		 std::numeric_limits<uint8_t>::max());
 	fw.Unsigned8(productionsite.m_skipped_programs.size());
-	container_iterate_const
-		(ProductionSite::Skipped_Programs, productionsite.m_skipped_programs, i)
-	{
-		fw.String    (i.current->first);
-		fw.Unsigned32(i.current->second);
+
+	for (const std::pair<std::string, Time>& temp_program : productionsite.m_skipped_programs) {
+		fw.String    (temp_program.first);
+		fw.Unsigned32(temp_program.second);
 	}
 
 	//  state

@@ -263,28 +263,24 @@ void Map_Roaddata_Data_Packet::Write
 
 				fw.Unsigned32(r->m_carrier_slots.size());
 
-				container_iterate_const
-					(std::vector<Road::CarrierSlot>, r->m_carrier_slots, iter)
-				{
-
+				for (const Road::CarrierSlot& temp_slot : r->m_carrier_slots) {
 					if
 						(Carrier const * const carrier =
-						 iter.current->carrier.get(egbase))
-					{
+						 temp_slot.carrier.get(egbase)) {
 						assert(mos.is_object_known(*carrier));
 						fw.Unsigned32(mos.get_object_file_index(*carrier));
 					} else {
 						fw.Unsigned32(0);
 					}
 
-					if (iter.current->carrier_request) {
+					if (temp_slot.carrier_request) {
 						fw.Unsigned8(1);
-						iter.current->carrier_request->Write
+						temp_slot.carrier_request->Write
 							(fw, ref_cast<Game, Editor_Game_Base>(egbase), mos);
 					} else {
 						fw.Unsigned8(0);
 					}
-					fw.Unsigned32(iter.current->carrier_type);
+					fw.Unsigned32(temp_slot.carrier_type);
 				}
 				mos.mark_object_as_saved(*r);
 			}
