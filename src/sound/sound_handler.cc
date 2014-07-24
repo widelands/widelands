@@ -76,8 +76,16 @@ Sound_Handler::Sound_Handler():
 /// themselves.
 Sound_Handler::~Sound_Handler()
 {
-	container_iterate_const  (FXset_map, fxs_,   i) delete i.current->second;
-	container_iterate_const(Songset_map, songs_, i) delete i.current->second;
+	typedef std::pair<std::string, FXset *> FXset_pair;
+	typedef std::pair<std::string, Songset *> Songset_pair;
+
+	for (const FXset_pair fx_pair : fxs_) {
+		delete fx_pair.second;
+	}
+
+	for (const Songset_pair song_pair : songs_) {
+		delete song_pair.second;
+	}
 
 	if (fx_lock_)
 	{
@@ -380,13 +388,18 @@ bool Sound_Handler::play_or_not
 	// Access to active_fx_ is protected because it can
 	// be accessed from callback
 	if (fx_lock_) SDL_LockMutex(fx_lock_);
-	container_iterate_const(Activefx_map, active_fx_, i)
+
+	// starting a block, so I can define a local type for iterating
 	{
-		if (i->second == fx_name) {
-			already_running = true;
-			break;
+		typedef std::pair<uint32_t, std::string> Activefx_pair;
+		for (const Activefx_pair fx_pair : active_fx_) {
+			if (fx_pair.second == fx_name) {
+				already_running = true;
+				break;
+			}
 		}
 	}
+
 	if (fx_lock_) SDL_UnlockMutex(fx_lock_);
 
 	if (!allow_multiple && already_running)
