@@ -101,9 +101,9 @@ Access to the wares queues by id
 =======
 */
 WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
-	container_iterate_const(Wares, m_wares, i) {
-		if ((*i.current)->get_ware() == wi) {
-			return **i.current;
+	for (WaresQueue * ware : m_wares) {
+		if (ware->get_ware() == wi) {
+			return *ware;
 		}
 	}
 	throw wexception

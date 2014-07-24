@@ -650,8 +650,9 @@ bool Bob::start_task_movepath
 		molog
 			("ERROR: (%i, %i) is not on the given path:\n",
 			 get_position().x, get_position().y);
-		container_iterate_const(std::vector<Coords>, path.get_coords(), i)
-			molog("* (%i, %i)\n", i.current->x, i.current->y);
+		for (const Coords& coords : path.get_coords()) {
+			molog("* (%i, %i)\n", coords.x, coords.y);
+		}
 		log_general_info(game);
 		log("%s", get_backtrace().c_str());
 		throw wexception

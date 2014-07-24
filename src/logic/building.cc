@@ -506,7 +506,7 @@ void Building::destroy(Editor_Game_Base & egbase)
 #define FORMAT(key, value) case key: result << value; break
 std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
-	container_iterate_const(std::string, format, i)
+	container_iterate_const(std::string, format, i) {
 		if (*i.current == '%') {
 			if (i.advance().empty()) { //  unterminated format sequence
 				result << '%';
@@ -554,6 +554,7 @@ std::string Building::info_string(const std::string & format) {
 			}
 		} else
 			result << *i.current;
+	}
 	const std::string result_str = result.str();
 	return result_str.empty() ? result_str : as_uifont(result_str);
 }

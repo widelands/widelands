@@ -147,14 +147,14 @@ void MilitarySite::init(Editor_Game_Base & egbase)
 
 	upcast(Game, game, &egbase);
 
-	const std::vector<Worker*>& ws = get_workers();
-	container_iterate_const(std::vector<Worker *>, ws, i)
-		if (upcast(Soldier, soldier, *i.current)) {
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
 			soldier->set_location_initially(*this);
 			assert(!soldier->get_state()); //  Should be newly created.
 			if (game)
 				soldier->start_task_buildingwork(*game);
 		}
+	}
 	update_soldier_request();
 
 	//  schedule the first healing
@@ -665,12 +665,13 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
-	const std::vector<Worker *>& w = get_workers();
-	container_iterate_const(std::vector<Worker *>, w, i)
-		if (upcast(Soldier, soldier, *i.current))
-			if (isPresent(*soldier))
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
+			if (isPresent(*soldier)) {
 				soldiers.push_back(soldier);
-
+			}
+		}
+	}
 	return soldiers;
 }
 
@@ -679,11 +680,11 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
-	const std::vector<Worker *>& w = get_workers();
-	container_iterate_const(std::vector<Worker *>, w, i)
-		if (upcast(Soldier, soldier, *i.current))
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
 			soldiers.push_back(soldier);
-
+		}
+	}
 	return soldiers;
 }
 
@@ -768,17 +769,19 @@ void MilitarySite::aggressor(Soldier & enemy)
 	// policy as to how many soldiers are allowed to leave as defenders
 	std::vector<Soldier *> present = presentSoldiers();
 
-	if (1 < present.size())
-		container_iterate_const(std::vector<Soldier *>, present, i)
-			if (!haveSoldierJob(**i.current)) {
+	if (1 < present.size()) {
+		for (Soldier * temp_soldier : present) {
+			if (!haveSoldierJob(*temp_soldier)) {
 				SoldierJob sj;
-				sj.soldier  = *i.current;
+				sj.soldier  = temp_soldier;
 				sj.enemy = &enemy;
 				sj.stayhome = false;
 				m_soldierjobs.push_back(sj);
-				(*i.current)->update_task_buildingwork(game);
+				temp_soldier->update_task_buildingwork(game);
 				return;
 			}
+		}
+	}
 
 	// Inform the player, that we are under attack by adding a new entry to the
 	// message queue - a sound will automatically be played.
@@ -795,20 +798,22 @@ bool MilitarySite::attack(Soldier & enemy)
 	if (!present.empty()) {
 		// Find soldier with greatest hitpoints
 		uint32_t current_max = 0;
-		container_iterate_const(std::vector<Soldier *>, present, i)
-			if ((*i.current)->get_current_hitpoints() > current_max) {
-				defender = *i.current;
+		for (Soldier * temp_soldier : present) {
+			if (temp_soldier->get_current_hitpoints() > current_max) {
+				defender = temp_soldier;
 				current_max = defender->get_current_hitpoints();
 			}
+		}
 	} else {
 		// If one of our stationed soldiers is currently walking into the
 		// building, give us another chance.
 		std::vector<Soldier *> stationed = stationedSoldiers();
-		container_iterate_const(std::vector<Soldier *>, stationed, i)
-			if ((*i.current)->get_position() == get_position()) {
-				defender = *i.current;
+		for (Soldier * temp_soldier : stationed) {
+			if (temp_soldier->get_position() == get_position()) {
+				defender = temp_soldier;
 				break;
 			}
+		}
 	}
 
 	if (defender) {
@@ -986,10 +991,11 @@ void MilitarySite::sendAttacker
 
 bool MilitarySite::haveSoldierJob(Soldier & soldier)
 {
-	container_iterate_const(std::vector<SoldierJob>, m_soldierjobs, i)
-		if (i.current->soldier == &soldier)
+	for (const SoldierJob& temp_job : m_soldierjobs) {
+		if (temp_job.soldier == &soldier) {
 			return true;
-
+		}
+	}
 	return false;
 }
 

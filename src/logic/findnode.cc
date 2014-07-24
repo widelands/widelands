@@ -39,10 +39,11 @@ void FindNodeAnd::add(const FindNode & findfield, bool const negate)
 }
 
 bool FindNodeAnd::accept(const Map & map, const FCoords & coord) const {
-	container_iterate_const(std::vector<Subfunctor>, m_subfunctors, i)
-		if (i.current->findfield.accept(map, coord) == i.current->negate)
+	for (const Subfunctor& subfunctor : m_subfunctors) {
+		if (subfunctor.findfield.accept(map, coord) == subfunctor.negate) {
 			return false;
-
+		}
+	}
 	return true;
 }
 
