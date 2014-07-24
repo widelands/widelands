@@ -59,7 +59,7 @@ Building_Descr::Building_Descr
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
-	m_buildicon     (nullptr),
+	m_icon     (nullptr),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
@@ -127,8 +127,8 @@ Building_Descr::Building_Descr
 	m_global = directory.find("global/") < directory.size();
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
-		m_buildicon_fname  = directory;
-		m_buildicon_fname += "/menu.png";
+		m_icon_fname  = directory;
+		m_icon_fname += "/menu.png";
 
 		//  build animation
 		if (Section * const build_s = prof.get_section("build")) {
@@ -154,8 +154,8 @@ Building_Descr::Building_Descr
 		}
 	} else if (m_global) {
 		//  get build icon for global buildings (for statistics window)
-		m_buildicon_fname  = directory;
-		m_buildicon_fname += "/menu.png";
+		m_icon_fname  = directory;
+		m_icon_fname += "/menu.png";
 	}
 
 	{ //  parse basic animation data
@@ -230,8 +230,8 @@ Called whenever building graphics need to be loaded.
 */
 void Building_Descr::load_graphics()
 {
-	if (m_buildicon_fname.size())
-		m_buildicon = g_gr->images().get(m_buildicon_fname);
+	if (m_icon_fname.size())
+		m_icon = g_gr->images().get(m_icon_fname);
 }
 
 /*

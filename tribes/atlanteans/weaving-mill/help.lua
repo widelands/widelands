@@ -10,10 +10,10 @@ return {
 	return
 
 	--Lore Section
-	-- TODO rename pictures building_help_lore_string("atlanteans", building_description, _[[Text needed]], _[[Source needed]]) ..
+	building_help_lore_string("atlanteans", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("atlanteans", building_description, "spidercloth",
+	building_help_general_string("atlanteans", building_description,
 		_[[Text needed]]) ..
 
 	--Dependencies

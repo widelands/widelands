@@ -13,11 +13,10 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "ox",
+	building_help_general_string("barbarians", building_description,
 		_"Breeds oxen for adding them to the transportation system.") ..
 
 	--Dependencies
-	-- TODO: why is "Produces" empty?
 	building_help_dependencies_production("barbarians", building_description) ..
 
 	--Workers Section

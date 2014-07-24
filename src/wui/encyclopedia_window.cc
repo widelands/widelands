@@ -125,7 +125,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 				 and
 				 de->output_ware_types().count(wares.get_selected()))
 			{
-				prodSites.add(de->descname().c_str(), i, de->get_buildicon());
+				prodSites.add(de->descname().c_str(), i, de->get_icon());
 				found = true;
 			}
 		}
