@@ -350,8 +350,9 @@ std::vector<std::string> Tribe_Descr::get_all_tribenames() {
 	}
 
 	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
-	container_iterate_const(std::vector<TribeBasicInfo>, tribes, i)
-		tribenames.push_back(i.current->name);
+	for (const TribeBasicInfo& tribe : tribes) {
+		tribenames.push_back(tribe.name);
+	}
 	return tribenames;
 }
 

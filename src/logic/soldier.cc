@@ -87,8 +87,9 @@ Soldier_Descr::Soldier_Descr
 		if (list.size() != 2)
 			throw game_data_error
 				("expected %s but found \"%s\"", "\"min-max\"", attack);
-		container_iterate(std::vector<std::string>, list, i)
-			remove_spaces(*i.current);
+		for (std::string& temp_str : list) {
+			remove_spaces(temp_str);
+		}
 		char * endp;
 		m_min_attack = strtol(list[0].c_str(), &endp, 0);
 		if (*endp or 0 == m_min_attack)
@@ -205,15 +206,15 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 				 "\"anim_name[,another_anim,...]\"", anim_string);
 
 		// Sanitation
-		container_iterate(std::vector<std::string>, list, i) {
-			remove_spaces(*i.current);
+		for (std::string& temp_str : list) {
+			remove_spaces(temp_str);
 
 			// Check that section exists
 			Section &
-				anim_s = prof.get_safe_section((*i.current).c_str());
+				anim_s = prof.get_safe_section(temp_str.c_str());
 
 			add_animation
-				((*i.current).c_str(), g_gr->animations().load(directory, anim_s));
+				(temp_str.c_str(), g_gr->animations().load(directory, anim_s));
 		}
 	} catch (const _wexception & e) {
 		throw game_data_error("%s : %s", anim_name, e.what());
@@ -1205,10 +1206,10 @@ void Soldier::defense_update(Game & game, State & state)
 				 &soldiers,
 				 FindBobEnemySoldier(get_owner()));
 
-			container_iterate_const(std::vector<Bob *>, soldiers, i) {
-				if (upcast(Soldier, soldier, *i.current)) {
-					if (soldier->canBeChallenged()) {
-						new Battle(game, *this, *soldier);
+			for (Bob * temp_bob : soldiers) {
+				if (upcast(Soldier, temp_soldier, temp_bob)) {
+					if (temp_soldier->canBeChallenged()) {
+						new Battle(game, *this, *temp_soldier);
 						return start_task_battle(game);
 					}
 				}
@@ -1280,10 +1281,10 @@ void Soldier::defense_update(Game & game, State & state)
 
 	// Go through soldiers
 	std::vector<SoldierDistance> targets;
-	container_iterate_const(std::vector<Bob *>, soldiers, i) {
+	for (Bob * temp_bob : soldiers) {
 
 		// If enemy is in our land, then go after it!
-		if (upcast(Soldier, soldier, *i.current)) {
+		if (upcast(Soldier, soldier, temp_bob)) {
 			assert(soldier != this);
 			Field const f = game.map().operator[](soldier->get_position());
 
@@ -1782,10 +1783,13 @@ void Soldier::sendSpaceSignals(Game & game)
 		 &soldiers,
 		 FindBobSoldierOnBattlefield());
 
-	container_iterate_const(std::vector<Bob *>, soldiers, i)
-		if (upcast(Soldier, soldier, *i.current))
-			if (soldier != this)
+	for (Bob * temp_soldier : soldiers) {
+		if (upcast(Soldier, soldier, temp_soldier)) {
+			if (soldier != this) {
 				soldier->send_signal(game, "wakeup");
+			}
+		}
+	}
 
 	Player_Number const land_owner = get_position().field->get_owned_by();
 	if (land_owner != owner().player_number()) {
@@ -1796,13 +1800,15 @@ void Soldier::sendSpaceSignals(Game & game)
 			 CheckStepWalkOn(descr().movecaps(), false),
 			 FindImmovableAttackable());
 
-		container_iterate_const(std::vector<BaseImmovable *>, attackables, i)
+		for (BaseImmovable * temp_attackable : attackables) {
 			if
-				(ref_cast<PlayerImmovable const, BaseImmovable const>(**i.current)
+				(ref_cast<PlayerImmovable const, BaseImmovable const>(*temp_attackable)
 				 .get_owner()->player_number()
 				 ==
-				 land_owner)
-				dynamic_cast<Attackable &>(**i.current).aggressor(*this);
+				 land_owner) {
+				dynamic_cast<Attackable &>(*temp_attackable).aggressor(*this);
+			}
+		}
 	}
 }
 
