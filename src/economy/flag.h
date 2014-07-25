@@ -86,8 +86,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool has_road() const {
 		return
-			m_roads[0] or m_roads[1] or m_roads[2] or
-			m_roads[3] or m_roads[4] or m_roads[5];
+			m_roads[0] || m_roads[1] || m_roads[2] ||
+			m_roads[3] || m_roads[4] || m_roads[5];
 	}
 	Road * get_road(uint8_t const dir) const {return m_roads[dir - 1];}
 	uint8_t nr_of_roads() const;

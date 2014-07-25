@@ -205,7 +205,7 @@ void NetClient::run ()
 			igb =
 				new Interactive_Player
 					(game, g_options.pull_section("global"),
-					 pn, d->settings.scenario, true);
+					 pn, true);
 		else
 			igb =
 				new Interactive_Spectator

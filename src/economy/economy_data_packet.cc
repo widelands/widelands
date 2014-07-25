@@ -36,7 +36,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 	uint16_t const version = fr.Unsigned16();
 
 	try {
-		if (1 <= version and version <= CURRENT_ECONOMY_VERSION) {
+		if (1 <= version && version <= CURRENT_ECONOMY_VERSION) {
 			if (2 <= version)
 				try {
 					const Tribe_Descr & tribe = m_eco->owner().tribe();

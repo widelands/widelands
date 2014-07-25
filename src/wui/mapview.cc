@@ -59,7 +59,7 @@ void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
 
 	//  If the user has scrolled the node outside the viewable area, he most
 	//  surely doesn't want to jump there.
-	if (p.x < get_w() and p.y < get_h()) {
+	if (p.x < get_w() && p.y < get_h()) {
 		if      (p.x <= 0)
 			warp_mouse_to_node(Widelands::Coords(c.x + map.get_width (), c.y));
 		else if (p.y <= 0)
@@ -169,7 +169,7 @@ bool Map_View::handle_mousepress
 }
 bool Map_View::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
-	if (btn == SDL_BUTTON_RIGHT and m_dragging)
+	if (btn == SDL_BUTTON_RIGHT && m_dragging)
 		stop_dragging();
 	return true;
 }
@@ -189,7 +189,7 @@ bool Map_View::handle_mousemove
 		else stop_dragging();
 	}
 
-	if (not intbase().get_sel_freeze())
+	if (!intbase().get_sel_freeze())
 		track_sel(Point(x, y));
 
 	g_gr->update_fullscreen();

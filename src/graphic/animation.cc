@@ -114,41 +114,6 @@ void get_point(const LuaTable& table, Point* p) {
 }
 
 /**
- * An Image Implementation that draws a static animation into a surface.
- */
-class AnimationImage : public Image {
-public:
-	AnimationImage
-		(const string& ghash, const Animation* anim, const RGBColor& clr)
-		: hash_(ghash), anim_(anim), clr_(clr) {}
-	virtual ~AnimationImage() {}
-
-	// Implements Image.
-	virtual uint16_t width() const {return anim_->width();}
-	virtual uint16_t height() const {return anim_->height();}
-	virtual const string& hash() const {return hash_;}
-	virtual Surface* surface() const {
-		SurfaceCache& surface_cache = g_gr->surfaces();
-		Surface* surf = surface_cache.get(hash_);
-		if (surf)
-			return surf;
-
-		// Blit the animation on a freshly wiped surface.
-		surf = Surface::create(width(), height());
-		surf->fill_rect(Rect(0, 0, surf->width(), surf->height()), RGBAColor(255, 255, 255, 0));
-		anim_->blit(0, Point(0, 0), Rect(0, 0, width(), height()), &clr_, surf);
-		surface_cache.insert(hash_, surf, true);
-
-		return surf;
-	}
-
-private:
-	const string hash_;
-	const Animation* const anim_;   // Not owned.
-	const RGBColor clr_;
-};
-
-/**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.
  */
@@ -272,7 +237,7 @@ void NonPackedAnimation::load_graphics() {
 	if (image_files_.empty())
 		throw wexception("animation without pictures.");
 
-	if (pc_mask_image_files_.size() and pc_mask_image_files_.size() != image_files_.size())
+	if (pc_mask_image_files_.size() && pc_mask_image_files_.size() != image_files_.size())
 		throw wexception
 			("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
 			 image_files_.size(), pc_mask_image_files_.size());
@@ -280,7 +245,7 @@ void NonPackedAnimation::load_graphics() {
 	for (const std::string& filename : image_files_) {
 		const Image* image = g_gr->images().get(filename);
 		if (frames_.size() &&
-		    (frames_[0]->width() != image->width() or frames_[0]->height() != image->height())) {
+		    (frames_[0]->width() != image->width() || frames_[0]->height() != image->height())) {
 			throw wexception("wrong size: (%u, %u), should be (%u, %u) like the first frame",
 			                 image->width(),
 			                 image->height(),
@@ -294,7 +259,7 @@ void NonPackedAnimation::load_graphics() {
 		// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
 		//     opengl texture.
 		const Image* pc_image = g_gr->images().get(filename);
-		if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {
+		if (frames_[0]->width() != pc_image->width() || frames_[0]->height() != pc_image->height()) {
 			// TODO(unknown): see bug #1324642
 			throw wexception("playercolor mask has wrong size: (%u, %u), should "
 			                 "be (%u, %u) like the animation frame",

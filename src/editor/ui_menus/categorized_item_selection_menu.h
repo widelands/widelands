@@ -145,10 +145,10 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
 	const bool multiselect = get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
-	if (not t and(not multiselect or tool_->get_nr_enabled() == 1))
+	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
 		checkboxes_[n]->set_state(true);
 	else {
-		if (not multiselect) {
+		if (!multiselect) {
 			for (uint32_t i = 0; tool_->get_nr_enabled(); ++i)
 				tool_->enable(i, false);
 			//  disable all checkboxes

@@ -260,7 +260,7 @@ void Bob::skip_act()
  */
 void Bob::push_task(Game & game, const Task & task, uint32_t const tdelta)
 {
-	assert(not task.unique or not get_state(task));
+	assert(!task.unique || !get_state(task));
 	assert(m_in_act || m_stack.empty());
 
 	m_stack.push_back(State(&task));
@@ -650,8 +650,9 @@ bool Bob::start_task_movepath
 		molog
 			("ERROR: (%i, %i) is not on the given path:\n",
 			 get_position().x, get_position().y);
-		container_iterate_const(std::vector<Coords>, path.get_coords(), i)
-			molog("* (%i, %i)\n", i.current->x, i.current->y);
+		for (const Coords& coords : path.get_coords()) {
+			molog("* (%i, %i)\n", coords.x, coords.y);
+		}
 		log_general_info(game);
 		log("%s", get_backtrace().c_str());
 		throw wexception
@@ -707,7 +708,7 @@ void Bob::movepath_update(Game & game, State & state)
 
 	if
 		(state.ivar2
-		 and
+		 &&
 		 static_cast<Path::Step_Vector::size_type>(state.ivar1) + 1
 		 ==
 		 path->get_nsteps())
@@ -891,7 +892,7 @@ int32_t Bob::start_walk
 
 	//  Always call checkNodeBlocked, because it might communicate with other
 	//  bobs (as is the case for soldiers on the battlefield).
-	if (checkNodeBlocked(game, newnode, true) and !force)
+	if (checkNodeBlocked(game, newnode, true) && !force)
 		return -2;
 
 	// Move is go
@@ -917,9 +918,9 @@ bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
 		(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
 	if (!soldiers.empty()) {
-		container_iterate(std::vector<Bob *>, soldiers, i) {
-			Soldier & soldier = ref_cast<Soldier, Bob>(**i.current);
-			if (soldier.getBattle())
+		for (Bob * temp_bob : soldiers) {
+			upcast(Soldier, soldier, temp_bob);
+			if (soldier->getBattle())
 				return true;
 		}
 	}

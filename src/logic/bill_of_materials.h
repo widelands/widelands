@@ -37,7 +37,7 @@ struct ware_range
 		++i; ++current; return *this;
 	}
 	bool empty() const {return current == end;}
-	operator bool() const {return not empty();}
+	operator bool() const {return !empty();}
 
 	uint8_t i;
 	BillOfMaterials::const_iterator current;

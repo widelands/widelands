@@ -59,7 +59,7 @@ struct WareList {
 	}
 
 	bool operator== (const WareList &)    const;
-	bool operator!= (const WareList & wl) const {return not (*this == wl);}
+	bool operator!= (const WareList & wl) const {return !(*this == wl);}
 
 	mutable boost::signals2::signal<void ()> changed;
 
