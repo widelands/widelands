@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <boost/algorithm/string/join.hpp>
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
@@ -958,18 +959,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 
 void Interactive_Base::cmdLua(const std::vector<std::string> & args)
 {
-	std::string cmd;
-
-	// Drop lua, start with the second word
-	for
-		(wl_const_range<std::vector<std::string> >
-		 i(args.begin(), args.end());;)
-	{
-		cmd += i.front();
-		if (i.advance().empty())
-			break;
-		cmd += ' ';
-	}
+	const std::string cmd = boost::algorithm::join(args, " ");
 
 	DebugConsole::write("Starting Lua interpretation!");
 	try {

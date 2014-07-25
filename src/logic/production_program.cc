@@ -139,6 +139,34 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 	return false;
 }
 
+// Helper structure for representing an iterator range in
+// for loops with constant iterators.
+// DEPRECATED!! do not use.
+// NOCOM(#sirver): kill.
+template<typename C>
+struct wl_const_range
+{
+	wl_const_range
+		(const typename  C::const_iterator & first,
+		 const typename C::const_iterator & last)
+		: current(first), end(last) {}
+	wl_const_range(const C & container) : current(container.begin()), end(container.end()) {}
+	wl_const_range(const wl_const_range & r) : current(r.current), end(r.end) {}
+	typename C::const_iterator current;
+	wl_const_range & operator++() {++current; return *this;}
+	wl_const_range<C> & advance() {++current; return *this;}
+	bool empty() const {return current == end;}
+	operator bool() const {return empty() ? false: true;}
+	typename C::const_reference front() const {return *current;}
+	typename C::const_reference operator*() const {return *current;}
+	typename C::const_pointer operator->() const {return (&**this);}
+	typename C::const_iterator get_end() {return end;}
+private:
+	typename C::const_iterator end;
+};
+
+
+
 }  // namespace
 
 ProductionProgram::Action::~Action() {}

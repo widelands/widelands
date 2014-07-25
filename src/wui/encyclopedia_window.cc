@@ -27,6 +27,8 @@
 #include <typeinfo>
 #include <vector>
 
+#include <boost/algorithm/string/join.hpp>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -180,18 +182,13 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 				for (const ProductionProgram::Ware_Type_Group& temp_group : groups) {
 					const std::set<Ware_Index> & ware_types = temp_group.first;
 					assert(ware_types.size());
-					std::string ware_type_names;
-					for
-						(wl_const_range<std::set<Ware_Index> >
-						 k(ware_types);;)
-					{
-						ware_type_names +=
-							tribe.get_ware_descr(*k)->descname();
-						if (k.advance().empty())
-							break;
-						/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
-						ware_type_names += _(" or ");
+					std::vector<std::string> ware_type_descnames;
+					for (const Ware_Index& ware_index : ware_types) {
+						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
+					/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
+					const std::string ware_type_names =
+					   boost::algorithm::join(ware_type_descnames, _(" or "));
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.

@@ -881,34 +881,35 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 
 				//  Find a working position that matches this request.
 				ProductionSite::Working_Position * wp = &wp_begin;
-				for
-					(wl_const_range<BillOfMaterials>
-					 j(working_positions);;
-					 ++j)
-				{
-					if (j.empty())
-						throw game_data_error
-							("site has request for %s, for which there is no working "
-							 "position",
-							 productionsite.descr().tribe()
-							 .get_worker_descr(req.get_index())->name().c_str());
-					uint32_t count = j->second;
+				bool found_working_position = false;
+				for (const WareAmount& working_position : working_positions) {
+					uint32_t count = working_position.second;
 					assert(count);
-					if (worker_index == j->first) {
-						while (wp->worker_request)
-							if (--count)
+					if (worker_index == working_position.first) {
+						while (wp->worker_request) {
+							if (--count) {
 								++wp;
-							else
+							} else {
 								throw game_data_error
 									("request for %s does not match any free working "
 									 "position",
 									 productionsite.descr().tribe()
 									 .get_worker_descr(req.get_index())->name().c_str
 									 	());
+							}
+						}
+						found_working_position = true;
 						break;
 					} else
 						wp += count;
 				}
+
+				if (!found_working_position)
+					throw game_data_error(
+					   "site has request for %s, for which there is no working "
+					   "position",
+					   productionsite.descr().tribe().get_worker_descr(req.get_index())->name().c_str());
+
 				wp->worker_request = &req;
 			}
 
@@ -919,28 +920,28 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this worker.
 				const Worker_Descr & worker_descr = worker->descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
-				for
-					(wl_const_range<BillOfMaterials> j(working_positions);;
-					 ++j)
-				{
-					if (j.empty())
-						throw game_data_error
-							("site has %s, for which there is no free working "
-							 "position",
-							 worker_descr.name().c_str());
-					uint32_t count = j->second;
+				bool found_working_position = false;
+				for (const WareAmount& working_position : working_positions) {
+					uint32_t count = working_position.second;
 					assert(count);
-					if (worker_descr.can_act_as(j->first)) {
+					if (worker_descr.can_act_as(working_position.first)) {
 						while (wp->worker or wp->worker_request) {
 							++wp;
 							if (not --count)
 								goto end_working_position;
 						}
+						found_working_position = true;
 						break;
 					} else
 						wp += count;
 				end_working_position:;
 				}
+
+				if (!found_working_position)
+					throw game_data_error
+						("site has %s, for which there is no free working "
+						 "position",
+						 worker_descr.name().c_str());
 				wp->worker = worker;
 			}
 
