@@ -8,6 +8,7 @@ def evaluate_matches(lines, fn):
    for lineno, line in enumerate(lines):
       errorfound = False
 
+      # Allow only "TODO" as keyword
       if line.count("FIXME"):
          errorfound = True
          errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"FIXME\"."))
@@ -20,6 +21,7 @@ def evaluate_matches(lines, fn):
          errorfound = True
          errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"BUG\" or put TODOs in Doxygen comments."))
 
+      # No dogygen
       elif line.count("\TODO"):
          errorfound = True
          errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
@@ -40,6 +42,7 @@ def evaluate_matches(lines, fn):
          errorfound = True
          errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
 
+      # Proper formatting of TODO = TODO(username): <msg>
       if not errorfound:
          finderror = line.rsplit("TODO")
          if len(finderror) > 1:
@@ -50,12 +53,16 @@ def evaluate_matches(lines, fn):
                     errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\"."))
                  else:
                     findend = temp.split("):")
-                    if not findend[0][1:].isalnum:
+                    if len(findend) < 2:
                        errorfound = True
                        errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\"."))
-
+                    # Prevent empty messages
+                    elif len(findend) == 2 and not findend[1].lstrip():
+                       errorfound = True
+                       errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not add empty TODO comments."))
+   # /end for
    return errors
-
+# /end evaluate_matches
 
 forbidden = [
     "// FIXME this is a todo comment",
