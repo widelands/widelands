@@ -38,7 +38,7 @@ Editor_Action_Args::Editor_Action_Args(Editor_Interactive & base):
 
 Editor_Action_Args::~Editor_Action_Args()
 {
-	while (not draw_actions.empty()) {
+	while (!draw_actions.empty()) {
 		delete draw_actions.back();
 		draw_actions.pop_back();
 	}
@@ -105,7 +105,7 @@ uint32_t Editor_History::do_action(Editor_Tool& tool,
 		 map, center, parent, tool.format_args(ind, parent));
 	if (draw && tool.is_unduable()) {
 		if
-			(undo_stack.empty() or
+			(undo_stack.empty() ||
 			 undo_stack.front().tool.get_sel_impl() != std::string(m_draw_tool.get_sel_impl()))
 		{
 			Editor_Tool_Action da
@@ -113,7 +113,7 @@ uint32_t Editor_History::do_action(Editor_Tool& tool,
 				 map, center, parent,
 				 m_draw_tool.format_args(Editor_Tool::First, parent));
 
-			if (not undo_stack.empty()) {
+			if (!undo_stack.empty()) {
 				m_draw_tool.add_action(undo_stack.front(), *da.args);
 				undo_stack.pop_front();
 			}

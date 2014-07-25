@@ -58,9 +58,9 @@ void Partially_Finished_Building::cleanup(Editor_Game_Base & egbase) {
 		m_builder_request = nullptr;
 	}
 
-	container_iterate_const(Wares, m_wares, i) {
-		(*i.current)->cleanup();
-		delete *i.current;
+	for (WaresQueue * temp_ware : m_wares) {
+		temp_ware->cleanup();
+		delete temp_ware;
 	}
 	m_wares.clear();
 
@@ -84,17 +84,19 @@ Note that the workers are dealt with in the PlayerImmovable code.
 */
 void Partially_Finished_Building::set_economy(Economy * const e)
 {
-	if (Economy * const old = get_economy())
-		container_iterate_const(Wares, m_wares, i)
-			(*i.current)->remove_from_economy(*old);
-
+	if (Economy * const old = get_economy()) {
+		for (WaresQueue * temp_ware : m_wares) {
+			temp_ware->remove_from_economy(*old);
+		}
+	}
 	Building::set_economy(e);
 	if (m_builder_request)
 		m_builder_request->set_economy(e);
 
 	if (e)
-		container_iterate_const(Wares, m_wares, i)
-			(*i.current)->add_to_economy(*e);
+		for (WaresQueue * temp_ware : m_wares) {
+			temp_ware->add_to_economy(*e);
+		}
 }
 
 

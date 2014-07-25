@@ -113,7 +113,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 		}
 	} else {
 		// Normal messages handling
-		if (not sanitized.compare(0, 3, "/me")) {
+		if (!sanitized.compare(0, 3, "/me")) {
 			message += " font-style=italic>-> ";
 			if (chat_message.sender.size())
 				message += chat_message.sender;
@@ -210,7 +210,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 		}
 	} else {
 		// Normal messages handling
-		if (not sanitized.compare(0, 3, "/me")) {
+		if (!sanitized.compare(0, 3, "/me")) {
 			message += " italic=1>-\\> ";
 			if (chat_message.sender.size())
 				message += chat_message.sender;

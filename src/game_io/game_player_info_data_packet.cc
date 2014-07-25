@@ -40,7 +40,7 @@ void Game_Player_Info_Data_Packet::Read
 		FileRead fr;
 		fr.Open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.Unsigned16();
-		if (5 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (5 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			uint32_t const max_players = fr.Unsigned16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
@@ -48,7 +48,7 @@ void Game_Player_Info_Data_Packet::Read
 					bool const see_all = fr.Unsigned8();
 
 					int32_t const plnum = fr.Unsigned8();
-					if (plnum < 1 or MAX_PLAYERS < plnum)
+					if (plnum < 1 || MAX_PLAYERS < plnum)
 						throw game_data_error
 							("player number (%i) is out of range (1 .. %u)",
 							 plnum, MAX_PLAYERS);

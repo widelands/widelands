@@ -195,8 +195,9 @@ struct ImmovableProgram {
 		 Immovable_Descr      &);
 
 	~ImmovableProgram() {
-		container_iterate_const(Actions, m_actions, i)
-			delete *i.current;
+		for (Action * action : m_actions) {
+			delete action;
+		}
 	}
 
 	const std::string & name() const {return m_name;}

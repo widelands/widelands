@@ -42,7 +42,7 @@ uint8_t OverlayManager::get_overlays
 
 	const Registered_Overlays_Map & overlay_map = m_overlays[Widelands::TCoords<>::None];
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
-	while (it != overlay_map.end() and it->first == c and it->second.level <= MAX_OVERLAYS_PER_NODE)
+	while (it != overlay_map.end() && it->first == c && it->second.level <= MAX_OVERLAYS_PER_NODE)
 	{
 		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
@@ -59,7 +59,7 @@ uint8_t OverlayManager::get_overlays
 				goto end;
 		}
 	}
-	while (it != overlay_map.end() and it->first == c) {
+	while (it != overlay_map.end() && it->first == c) {
 		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
 		if (++num_ret == MAX_OVERLAYS_PER_NODE)
@@ -77,7 +77,7 @@ uint8_t OverlayManager::get_overlays
 	(Widelands::TCoords<> const c, Overlay_Info * const overlays) const
 {
 	assert(m_are_graphics_loaded);
-	assert(c.t == Widelands::TCoords<>::D or c.t == Widelands::TCoords<>::R);
+	assert(c.t == Widelands::TCoords<>::D || c.t == Widelands::TCoords<>::R);
 
 	uint8_t num_ret = 0;
 
@@ -85,9 +85,9 @@ uint8_t OverlayManager::get_overlays
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
 	while
 		(it != overlay_map.end()
-		 and
+		 &&
 		 it->first == c
-		 and
+		 &&
 		 num_ret < MAX_OVERLAYS_PER_TRIANGLE)
 	{
 		overlays[num_ret].pic = it->second.pic;
@@ -141,13 +141,13 @@ void OverlayManager::register_overlay
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
 	for
 		(Registered_Overlays_Map::iterator it = overlay_map.find(c);
-		 it != overlay_map.end() and it->first == c;
+		 it != overlay_map.end() && it->first == c;
 		 ++it)
 		if
 			(it->second.pic   == pic
-			 and
+			 &&
 			 it->second.hotspot == hotspot
-			 and
+			 &&
 			 it->second.level   == level)
 		{
 			it->second.jobids.insert(jobid);
@@ -193,13 +193,13 @@ void OverlayManager::remove_overlay
 	if (overlay_map.count(c)) {
 		Registered_Overlays_Map::iterator it = overlay_map.lower_bound(c);
 		do {
-			if (pic and it->second.pic == pic) {
+			if (pic && it->second.pic == pic) {
 				overlay_map.erase(it);
 				it = overlay_map.lower_bound(c);
 			} else {
 				++it;
 			}
-		} while (it != overlay_map.end() and it->first == c);
+		} while (it != overlay_map.end() && it->first == c);
 	}
 }
 

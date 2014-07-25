@@ -101,9 +101,9 @@ Access to the wares queues by id
 =======
 */
 WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
-	container_iterate_const(Wares, m_wares, i) {
-		if ((*i.current)->get_ware() == wi) {
-			return **i.current;
+	for (WaresQueue * ware : m_wares) {
+		if (ware->get_ware() == wi) {
+			return *ware;
 		}
 	}
 	throw wexception
@@ -204,7 +204,7 @@ bool ConstructionSite::burn_on_destroy()
 	if (m_work_completed >= m_work_steps)
 		return false; // completed, so don't burn
 
-	return m_work_completed or !m_old_buildings.empty();
+	return m_work_completed || !m_old_buildings.empty();
 }
 
 /*
@@ -237,7 +237,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
-	if (not m_work_steps) //  Happens for building without buildcost.
+	if (!m_work_steps) //  Happens for building without buildcost.
 		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed
@@ -270,8 +270,8 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	container_iterate(Wares, m_wares, iqueue) {
-		WaresQueue * queue = *iqueue;
+	for (WaresQueue * iqueue: m_wares) {
+		WaresQueue * queue = iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
 			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());

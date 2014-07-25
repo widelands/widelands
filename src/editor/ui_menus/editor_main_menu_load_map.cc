@@ -220,10 +220,10 @@ void Main_Menu_Load_Map::fill_list() {
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    and
-			 strcmp(FileSystem::FS_Filename(name), "..")   and
-			 g_fs->IsDirectory(name)                       and
-			 not WL_Map_Loader::is_widelands_map(name))
+			(strcmp(FileSystem::FS_Filename(name), ".")    &&
+			 strcmp(FileSystem::FS_Filename(name), "..")   &&
+			 g_fs->IsDirectory(name)                       &&
+			 !WL_Map_Loader::is_widelands_map(name))
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),

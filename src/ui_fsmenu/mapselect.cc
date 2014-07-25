@@ -205,11 +205,11 @@ bool Fullscreen_Menu_MapSelect::compare_maprows
 	const MapData & r1 = m_maps_data[m_table[rowa]];
 	const MapData & r2 = m_maps_data[m_table[rowb]];
 
-	if (!r1.width and !r2.width) {
+	if (!r1.width && !r2.width) {
 		return r1.name < r2.name;
-	} else if (!r1.width and r2.width) {
+	} else if (!r1.width && r2.width) {
 		return true;
-	} else if (r1.width and !r2.width) {
+	} else if (r1.width && !r2.width) {
 		return false;
 	}
 	return r1.name < r2.name;
@@ -222,7 +222,7 @@ bool Fullscreen_Menu_MapSelect::is_scenario()
 
 MapData const * Fullscreen_Menu_MapSelect::get_map() const
 {
-	if (not m_table.has_selection())
+	if (!m_table.has_selection())
 		return nullptr;
 	return &m_maps_data[m_table.get_selected()];
 }
@@ -405,7 +405,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					bool has_all_tags = true;
 					for (std::set<uint32_t>::const_iterator it = m_req_tags.begin(); it != m_req_tags.end(); ++it)
 						has_all_tags &= mapdata.tags.count(m_tags_ordered[*it]);
-					if (not has_all_tags)
+					if (!has_all_tags)
 						continue;
 
 
@@ -539,8 +539,9 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 void Fullscreen_Menu_MapSelect::_tagbox_changed(int32_t id, bool to) {
 	if (id == 0) { // Show all maps checbox
 		if (to) {
-			container_iterate(std::vector<UI::Checkbox *>, m_tags_checkboxes, it)
-				(*it)->set_state(false);
+			for (UI::Checkbox * checkbox : m_tags_checkboxes) {
+				checkbox->set_state(false);
+			}
 		}
 	} else { // Any tag
 		if (to)

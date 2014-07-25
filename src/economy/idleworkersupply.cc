@@ -94,7 +94,7 @@ PlayerImmovable * IdleWorkerSupply::get_position(Game & game)
 uint32_t IdleWorkerSupply::nr_supplies(const Game &, const Request & req) const
 {
 	assert
-		(req.get_type() != wwWORKER or
+		(req.get_type() != wwWORKER ||
 		 req.get_index() < m_worker.descr().tribe().get_nrworkers());
 	if
 		(req.get_type() == wwWORKER &&

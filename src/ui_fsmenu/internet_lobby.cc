@@ -414,7 +414,7 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 
 		//  convert IPv6 addresses returned by the metaserver to IPv4 addresses.
 		//  At the moment SDL_net does not support IPv6 anyways.
-		if (not ip.compare(0, 7, "::ffff:")) {
+		if (!ip.compare(0, 7, "::ffff:")) {
 			ip = ip.substr(7);
 			log("InternetGaming: cut IPv6 address: %s\n", ip.c_str());
 		}

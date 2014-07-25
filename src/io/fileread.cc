@@ -71,7 +71,7 @@ FileRead::Pos FileRead::GetPos() const {
 size_t FileRead::Data(void* dst, size_t bufsize) {
 	assert(data_);
 	size_t read = 0;
-	for (; read < bufsize and filepos_ < length_; ++read, ++filepos_) {
+	for (; read < bufsize && filepos_ < length_; ++read, ++filepos_) {
 		static_cast<char*>(dst)[read] = data_[filepos_];
 	}
 	return read;
@@ -114,7 +114,7 @@ char* FileRead::ReadLine() {
 	if (EndOfFile())
 		return nullptr;
 	char* result = data_ + filepos_;
-	for (; data_[filepos_] and data_[filepos_] != '\n'; ++filepos_)
+	for (; data_[filepos_] && data_[filepos_] != '\n'; ++filepos_)
 		if (data_[filepos_] == '\r') {
 			data_[filepos_] = '\0';
 			++filepos_;

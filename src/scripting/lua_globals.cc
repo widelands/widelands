@@ -149,7 +149,7 @@ static int L_set_textdomain(lua_State * L) {
 static int L__(lua_State * L) {
 	lua_getglobal(L, "__TEXTDOMAIN");
 
-	if (not lua_isnil(L, -1)) {
+	if (!lua_isnil(L, -1)) {
 		i18n::Textdomain dom(luaL_checkstring(L, -1));
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	} else {
@@ -181,7 +181,7 @@ static int L_ngettext(lua_State * L) {
 	const uint32_t n = luaL_checkuint32(L, 3);
 
 	lua_getglobal(L, "__TEXTDOMAIN");
-	if (not lua_isnil(L, -1)) {
+	if (!lua_isnil(L, -1)) {
 		i18n::Textdomain dom(luaL_checkstring(L, -1));
 		lua_pushstring(L, ngettext(msgid.c_str(), msgid_plural.c_str(), n));
 	} else {
