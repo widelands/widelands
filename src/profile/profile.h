@@ -26,7 +26,8 @@
 #include "base/macros.h"
 #include "base/point.h"
 #include "io/filesystem/layered_filesystem.h"
-//TODO: as soon as g_fs is not needed anymore, include "filesystem.h" instead of layered_filesystem.h.
+// TODO(unknown): as soon as g_fs is not needed anymore,
+// include "filesystem.h" instead of layered_filesystem.h.
 
 extern class Profile g_options;
 class FileSystem;

@@ -33,7 +33,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
 #include "logic/constructionsite.h"
-#include "logic/critter_bob.h"
 #include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -78,12 +77,6 @@ Tribe_Descr::Tribe_Descr
 
 		{
 			std::set<std::string> names; //  To enforce name uniqueness.
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
-				m_bobs.add
-					(new Critter_Bob_Descr
-						(_name, _descname, path, prof, global_s,  *this));
-			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ship")
 				m_bobs.add
@@ -268,7 +261,7 @@ Load all logic data
 ===============
 */
 void Tribe_Descr::postload(Editor_Game_Base &) {
-	// TODO: move more loads to postload
+	// TODO(unknown): move more loads to postload
 }
 
 /*

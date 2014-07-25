@@ -370,7 +370,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// NOTE There is a simple check for the current land owner to avoid placement of ports into enemy
 				// NOTE territory, as "clearing" is not yet implemented.
 				// NOTE further it checks, whether there is a Player_immovable on one of the fields.
-				// FIXME handle this more gracefully concering opposing players
+				// TODO(unknown) handle this more gracefully concering opposing players
 				Player_Number pn = get_owner()->player_number();
 				FCoords coord = fc;
 				bool invalid = false;

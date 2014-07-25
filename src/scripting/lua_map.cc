@@ -22,6 +22,7 @@
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "economy/wares_queue.h"
+#include "graphic/graphic.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
@@ -1000,7 +1001,7 @@ int L_Map::get_field(lua_State * L) {
 		and so on. You only need to call this function if you changed
 		Field.raw_height in any way.
 */
-// TODO: do we really want this function?
+// TODO(unknown): do we really want this function?
 int L_Map::recalculate(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	egbase.map().recalc_whole_map(egbase.world());
@@ -1037,6 +1038,7 @@ const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] 
 	PROP_RO(L_MapObjectDescription, descname),
 	PROP_RO(L_MapObjectDescription, name),
 	PROP_RO(L_MapObjectDescription, type_name),
+	PROP_RO(L_MapObjectDescription, representative_image),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1055,6 +1057,19 @@ void L_MapObjectDescription::__unpersist(lua_State*) {
  ==========================================================
  */
 
+
+/* RST
+	.. attribute:: descname
+
+			(RO) a :class:`string` with the map object's localized name
+*/
+
+int L_MapObjectDescription::get_descname(lua_State * L) {
+	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
+
 /* RST
 	.. attribute:: name
 
@@ -1068,6 +1083,21 @@ int L_MapObjectDescription::get_name(lua_State * L) {
 
 
 /* RST
+	.. attribute:: representative_image
+
+			(RO) a :class:`string` with the file path to the representative image
+			of the map object's idle animation
+*/
+int L_MapObjectDescription::get_representative_image(lua_State * L) {
+	const std::string& filepath = g_gr->animations().get_animation
+		(get()->get_animation("idle")).representative_image_from_disk().hash();
+
+	lua_pushstring(L, filepath);
+	return 1;
+}
+
+
+/* RST
 	.. attribute:: type
 
 			(RO) the name of the building, e.g. building.
@@ -1076,20 +1106,6 @@ int L_MapObjectDescription::get_type_name(lua_State * L) {
 	lua_pushstring(L, get()->type_name());
 	return 1;
 }
-
-
-/* RST
-	.. attribute:: name
-
-			(RO) a :class:`string` with the map object's localized name
-*/
-
-int L_MapObjectDescription::get_descname(lua_State * L) {
-	lua_pushstring(L, get()->descname());
-	return 1;
-}
-
-
 
 /* RST
 BuildingDescription
@@ -1115,11 +1131,12 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, enhanced),
 	PROP_RO(L_BuildingDescription, enhancement_cost),
 	PROP_RO(L_BuildingDescription, enhancement),
+	PROP_RO(L_BuildingDescription, icon_name),
 	PROP_RO(L_BuildingDescription, is_mine),
 	PROP_RO(L_BuildingDescription, is_port),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
-	// TODO size should be similar to
+	// TODO(SirVer) size should be similar to
 	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
@@ -1228,6 +1245,16 @@ int L_BuildingDescription::get_enhancement(lua_State * L) {
 		return 0;
 	}
 	return upcasted_map_object_descr_to_lua(L, get()->tribe().get_building_descr(enhancement));
+}
+
+/* RST
+	.. attribute:: icon_name
+
+			(RO) the filename for the menu icon.
+*/
+int L_BuildingDescription::get_icon_name(lua_State * L) {
+	lua_pushstring(L, get()->icon_name());
+	return 1;
 }
 
 
@@ -1340,6 +1367,7 @@ const MethodType<L_ProductionSiteDescription> L_ProductionSiteDescription::Metho
 const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Properties[] = {
 	PROP_RO(L_ProductionSiteDescription, inputs),
 	PROP_RO(L_ProductionSiteDescription, output_ware_types),
+	PROP_RO(L_ProductionSiteDescription, output_worker_types),
 	PROP_RO(L_ProductionSiteDescription, working_positions),
 	{nullptr, nullptr, nullptr},
 };
@@ -1353,7 +1381,8 @@ const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Pro
 
 /* RST
 	.. attribute:: inputs
-		(RO) An array with pairs of int, ware_descr.name describing the input of the productionsite
+		(RO) An array with :class:`L_WareDescription` containing the wares that
+		the productionsite needs for its production.
 */
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
@@ -1369,11 +1398,10 @@ int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	return 1;
 }
 
-
 /* RST
 	.. attribute:: output_ware_types
-
-		(RO) An array with pairs of int, ware_descr.name describing the output of the productionsite
+		(RO) An array with :class:`L_WareDescription` containing the wares that
+		the productionsite can produce.
 */
 int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
@@ -1383,14 +1411,32 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	int index = 1;
 	for (auto ware_index : descr->output_ware_types()) {
 		lua_pushint32(L, index++);
-		lua_pushstring(L, tribe.get_ware_descr(ware_index)->name());
+		to_lua<L_WareDescription>(L, new L_WareDescription(tribe.get_ware_descr(ware_index)));
 		lua_rawset(L, -3);
 	}
+
 	return 1;
-
-
 }
 
+/* RST
+	.. attribute:: output_worker_types
+		(RO) An array with :class:`L_WorkerDescription` containing the workers that
+		the productionsite can produce.
+*/
+int L_ProductionSiteDescription::get_output_worker_types(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+	const ProductionSite_Descr * descr = get();
+
+	lua_newtable(L);
+	int index = 1;
+	for (auto worker_index : descr->output_worker_types()) {
+		lua_pushint32(L, index++);
+		to_lua<L_WorkerDescription>(L, new L_WorkerDescription(tribe.get_worker_descr(worker_index)));
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
 
 /* RST
 	.. attribute:: working_positions
@@ -1450,7 +1496,7 @@ const PropertyType<L_MilitarySiteDescription> L_MilitarySiteDescription::Propert
 /* RST
 	.. attribute:: heal_per_second
 
-		(RO) The number of health healed ber second by the militarysite
+		(RO) The number of health healed per second by the militarysite
 */
 int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
 	const MilitarySite_Descr * descr = get();
@@ -1649,22 +1695,6 @@ const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] 
 };
 
 
-void L_WareDescription::__persist(lua_State* L) {
-	const WareDescr* descr = get();
-	PERS_STRING("tribe", descr->tribe().name());
-	PERS_STRING("name", descr->name());
-}
-
-void L_WareDescription::__unpersist(lua_State* L) {
-	std::string name, tribe_name;
-	UNPERS_STRING("tribe", tribe_name);
-	UNPERS_STRING("name", name);
-	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
-	Ware_Index idx = tribe->safe_ware_index(name.c_str());
-	set_description_pointer(tribe->get_ware_descr(idx));
-}
-
-
 /*
  ==========================================================
  PROPERTIES
@@ -1698,10 +1728,28 @@ const MethodType<L_WareDescription> L_WareDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
-	PROP_RO(L_WareDescription, producers),
 	PROP_RO(L_WareDescription, consumers),
+	PROP_RO(L_WareDescription, icon_name),
+	PROP_RO(L_WareDescription, producers),
 	{nullptr, nullptr, nullptr},
 };
+
+
+void L_WareDescription::__persist(lua_State* L) {
+	const WareDescr* descr = get();
+	PERS_STRING("tribe", descr->tribe().name());
+	PERS_STRING("name", descr->name());
+}
+
+void L_WareDescription::__unpersist(lua_State* L) {
+	std::string name, tribe_name;
+	UNPERS_STRING("tribe", tribe_name);
+	UNPERS_STRING("name", name);
+	const Tribe_Descr* tribe = get_egbase(L).get_tribe(tribe_name);
+	Ware_Index idx = tribe->safe_ware_index(name.c_str());
+	set_description_pointer(tribe->get_ware_descr(idx));
+}
+
 
 /*
  ==========================================================
@@ -1711,47 +1759,9 @@ const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
 
 
 /* RST
-	.. attribute:: producers
-
-		(RO) a list of building descriptions that can procude this ware.
-*/
-// TODO(GunChleoc): move the calculation somewhere else.
-// You get the (mutable) wares_description container from the tribe_description
-// into the building constructor and add a member (mutable_ware_description(), either in Tribe_Descr
-// or if there is a container with every ware in there than there).
-// So you can get something like this in the buildingdesc constructor:
-// tribe.mutable_ware_description("log")->add_producer(*this);
-int L_WareDescription::get_producers(lua_State * L) {
-	const Tribe_Descr& tribe = get()->tribe();
-	Building_Index const nr_buildings = tribe.get_nrbuildings();
-
-	lua_newtable(L);
-	int index = 1;
-
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
-
-		const Building_Descr & descr = *tribe.get_building_descr(i);
-
-		if (upcast(ProductionSite_Descr const, de, &descr)) {
-			for (auto ware_index : de->output_ware_types()) {
-				if (std::string(get()->name()) ==
-					std::string(tribe.get_ware_descr(ware_index)->name())) {
-					lua_pushint32(L, index++);
-						upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(i));
-					lua_rawset(L, -3);
-				}
-			}
-		}
-	}
-	return 1;
-}
-
-
-
-/* RST
 	.. attribute:: consumers
-
-		(RO) a list of building descriptions that can consume this ware.
+		(RO) An array with :class:`L_BuildingDescription` with buildings that
+		need this ware for their production.
 */
 // TODO(GunChleoc): move the calculation somewhere else.
 // You get the (mutable) wares_description container from the tribe_description
@@ -1787,6 +1797,55 @@ int L_WareDescription::get_consumers(lua_State * L) {
 
 
 /* RST
+	.. attribute:: icon_name
+
+			(RO) the filename for the menu icon.
+*/
+int L_WareDescription::get_icon_name(lua_State * L) {
+	lua_pushstring(L, get()->icon_name());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: producers
+		(RO) An array with :class:`L_BuildingDescription` with buildings that
+		can procude this ware.
+*/
+// TODO(GunChleoc): move the calculation somewhere else.
+// You get the (mutable) wares_description container from the tribe_description
+// into the building constructor and add a member (mutable_ware_description(), either in Tribe_Descr
+// or if there is a container with every ware in there than there).
+// So you can get something like this in the buildingdesc constructor:
+// tribe.mutable_ware_description("log")->add_producer(*this);
+int L_WareDescription::get_producers(lua_State * L) {
+	const Tribe_Descr& tribe = get()->tribe();
+	Building_Index const nr_buildings = tribe.get_nrbuildings();
+
+	lua_newtable(L);
+	int index = 1;
+
+	for (Building_Index i = 0; i < nr_buildings; ++i) {
+
+		const Building_Descr & descr = *tribe.get_building_descr(i);
+
+		if (upcast(ProductionSite_Descr const, de, &descr)) {
+			for (auto ware_index : de->output_ware_types()) {
+				if (std::string(get()->name()) ==
+					std::string(tribe.get_ware_descr(ware_index)->name())) {
+					lua_pushint32(L, index++);
+					upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(i));
+					lua_rawset(L, -3);
+				}
+			}
+		}
+	}
+	return 1;
+}
+
+
+
+/* RST
 WorkerDescription
 -----------------
 
@@ -1802,9 +1861,10 @@ const MethodType<L_WorkerDescription> L_WorkerDescription::Methods[] = {
 };
 const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 	PROP_RO(L_WorkerDescription, becomes),
-	PROP_RO(L_WorkerDescription, level_experience),
 	PROP_RO(L_WorkerDescription, buildable),
 	PROP_RO(L_WorkerDescription, buildcost),
+	PROP_RO(L_WorkerDescription, icon_name),
+	PROP_RO(L_WorkerDescription, needed_experience),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1849,16 +1909,6 @@ int L_WorkerDescription::get_becomes(lua_State * L) {
 
 
 /* RST
-	.. attribute:: level_experience
-
-			(RO) the experience the worker needs to reach this level.
-*/
-int L_WorkerDescription::get_level_experience(lua_State * L) {
-	lua_pushinteger(L, get()->get_level_experience());
-	return 1;
-}
-
-/* RST
 	.. attribute:: buildable
 
 			(RO) `true` if the worker is buildable.
@@ -1883,6 +1933,28 @@ int L_WorkerDescription::get_buildcost(lua_State * L) {
 		lua_pushstring(L, buildcost_pair.first);
 		lua_settable(L, -3);
 	}
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: icon_name
+
+			(RO) the filename for the menu icon.
+*/
+int L_WorkerDescription::get_icon_name(lua_State * L) {
+	lua_pushstring(L, get()->icon_name());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: needed_experience
+
+			(RO) the experience the worker needs to reach this level.
+*/
+int L_WorkerDescription::get_needed_experience(lua_State * L) {
+	lua_pushinteger(L, get()->get_needed_experience());
 	return 1;
 }
 
@@ -1990,6 +2062,7 @@ int L_MapObject::get_name(lua_State * L) {
 #define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
 	(L, new lua_klass(static_cast<const klass *>(desc)))
 
+
 /* RST
     .. attribute:: descr
 
@@ -2023,6 +2096,7 @@ int L_MapObject::get_descr(lua_State * L) {
 }
 
 #undef CAST_TO_LUA
+
 
 /*
  ==========================================================

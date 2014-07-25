@@ -30,13 +30,12 @@ namespace UI {
  * \param k SDL_Keysym to be checked for printability
  *
  * \return True if k is a printable character
- *
- * \todo This is _by_far_ not complete enough
- * \todo Should be based on k.unicode (already enabled by
- * WLApplication::init_hardware()) instead of k.sym. Doing so needs to take the
- * current locale into account; perhaps there already is a fitting gettext
- * function?
  */
+// TODO(unknown): This is _by_far_ not complete enough
+// TODO(unknown): Should be based on k.unicode (already enabled by
+// WLApplication::init_hardware()) instead of k.sym. Doing so needs to take the
+// current locale into account; perhaps there already is a fitting gettext
+// function?
 bool is_printable(SDL_keysym k);
 
 }  // namespace UI

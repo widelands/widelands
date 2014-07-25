@@ -90,6 +90,16 @@ struct ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
+	const std::string& out_of_resource_title() const {
+		return m_out_of_resource_title;
+	}
+
+	const std::string& out_of_resource_message() const {
+		return m_out_of_resource_message;
+	}
+	uint32_t out_of_resource_delay_attempts() const {
+		return m_out_of_resource_delay_attempts;
+	}
 
 private:
 	Map_Object_Type m_type;
@@ -98,6 +108,9 @@ private:
 	Output   m_output_ware_types;
 	Output   m_output_worker_types;
 	Programs m_programs;
+	std::string m_out_of_resource_title;
+	std::string m_out_of_resource_message;
+	uint32_t    m_out_of_resource_delay_attempts;
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite_Descr);
 };
 
@@ -166,6 +179,9 @@ public:
 	const std::vector<Worker *>& workers() const;
 
 	bool can_start_working() const;
+
+	/// sends a message to the player if the building's resource can't be found
+	void worker_failed_to_find_resource(Game & game);
 
 	void set_default_anim(std::string);
 
@@ -255,6 +271,11 @@ protected:  // TrainingSite must have access to this stuff
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
+
+private:
+	uint32_t m_out_of_resource_delay_counter;
+
+	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
 
 /**

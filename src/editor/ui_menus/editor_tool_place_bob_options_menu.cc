@@ -120,9 +120,9 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked
 	if (m_click_recursion_protect)
 		return;
 
-	//  FIXME This code is erroneous. It checks the current key state. What it
-	//  FIXME needs is the key state at the time the mouse was clicked. See the
-	//  FIXME usage comment for get_key_state.
+	//  TODO(unknown) This code is erroneous. It checks the current key state. What it
+	//  TODO(unknown) needs is the key state at the time the mouse was clicked. See the
+	//  TODO(unknown) usage comment for get_key_state.
 	const bool multiselect =
 		get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
 	if (not t and (not multiselect or m_pit.get_nr_enabled() == 1)) {

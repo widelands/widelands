@@ -150,7 +150,7 @@ private:
 		(Soldier *, bool * stayhome = nullptr);
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);
-	void informPlayer(Game &, bool discovered = false);
+	void notify_player(Game &, bool discovered = false);
 	bool update_upgrade_requirements();
 	void update_normal_soldier_request();
 	void update_upgrade_soldier_request();

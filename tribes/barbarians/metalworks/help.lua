@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘We make it work!’]], _[[Inscription on the threshold of the now ruined Olde Forge at Harradsheim, the eldest known smithy.]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "hammer",
+	building_help_general_string("barbarians", building_description,
 		_"The barbarian metal workshop can make bread paddles, felling axes, fire tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes and shovels.",
 		_"The barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that barbarians need. The others are for weapons.") ..
 

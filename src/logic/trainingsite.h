@@ -59,9 +59,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 private:
 	Map_Object_Type m_type;
 
-	//  FIXME These variables should be per soldier type. They should be in a
-	//  FIXME struct and there should be a vector, indexed by Soldier_Index,
-	//  FIXME with that struct structs as element type.
+	//  TODO(unknown) These variables should be per soldier type. They should be in a
+	//  struct and there should be a vector, indexed by Soldier_Index,
+	//  with that struct structs as element type.
 
 	/** Maximum number of soldiers for a training site*/
 	uint32_t m_num_soldiers;

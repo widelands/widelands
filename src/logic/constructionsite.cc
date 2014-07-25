@@ -145,7 +145,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 		buildcost = &m_building->buildcost();
 	}
 
-	//  TODO figure out whether planing is necessary
+	//  TODO(unknown) figure out whether planing is necessary
 
 	//  initialize the wares queues
 	size_t const buildcost_size = buildcost->size();

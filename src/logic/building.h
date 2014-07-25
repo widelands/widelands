@@ -95,7 +95,8 @@ struct Building_Descr : public Map_Object_Descr {
 	 * The returned wares for a enhaced building
 	 */
 	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
-	const Image* get_buildicon() const {return m_buildicon;}
+	const Image* get_icon() const {return m_icon;}
+	std::string icon_name() const {return m_icon_fname;}
 	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
@@ -146,8 +147,8 @@ private:
 	Buildcost     m_return_dismantle; // Returned wares on dismantle
 	Buildcost     m_enhance_cost;     // cost for enhancing
 	Buildcost     m_return_enhanced;   // Returned ware for dismantling an enhanced building
-	const Image*     m_buildicon;       // if buildable: picture in the build dialog
-	std::string   m_buildicon_fname; // filename for this icon
+	const Image*     m_icon;       // if buildable: picture in the build dialog
+	std::string   m_icon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;

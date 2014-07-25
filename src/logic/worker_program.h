@@ -26,8 +26,8 @@
 
 namespace Widelands {
 
-/// \todo (Antonio Trueba#1#): Get rid of forward class
-/// declaration (Chicken-and-egg problem)
+// TODO(Antonio Trueba#1#): Get rid of forward class
+// declaration (Chicken-and-egg problem)
 class Worker_Descr;
 
 struct WorkerProgram : public BobProgramBase {

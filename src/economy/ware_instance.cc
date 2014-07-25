@@ -44,9 +44,8 @@ namespace Widelands {
 
 /**
  * Whenever a WareInstance is idle, it issues an IdleWareSupply.
- *
- * \todo This maybe shouldn't be here.
-*/
+ */
+// TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
 	IdleWareSupply(WareInstance &);
 	virtual ~IdleWareSupply();

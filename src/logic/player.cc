@@ -885,9 +885,8 @@ void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
  *
  * The default attack should just take the first N soldiers of the
  * returned array.
- *
- * \todo Perform a meaningful sort on the soldiers array.
  */
+// TODO(unknown): Perform a meaningful sort on the soldiers array.
 uint32_t Player::findAttackSoldiers
 	(Flag & flag, std::vector<Soldier *> * soldiers, uint32_t nr_wanted)
 {
@@ -932,10 +931,8 @@ uint32_t Player::findAttackSoldiers
 }
 
 
-/**
- * \todo Clean this mess up. The only action we really have right now is
- * to attack, so pretending we have more types is pointless.
- */
+// TODO(unknown): Clean this mess up. The only action we really have right now is
+// to attack, so pretending we have more types is pointless.
 void Player::enemyflagaction
 	(Flag & flag, Player_Number const attacker, uint32_t const count)
 {

@@ -290,7 +290,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_autosave                 .set_textstyle(ts_small());
 	m_label_remove_replays           .set_textstyle(ts_small());
 
-	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
+	//  GRAPHIC_TODO(unknown): this shouldn't be here List all resolutions
 	// take a copy to not change real video info structure
 	SDL_PixelFormat fmt = *SDL_GetVideoInfo()->vfmt;
 	fmt.BitsPerPixel = 32;

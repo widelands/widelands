@@ -131,7 +131,7 @@ public:
 	Ware_Index level             (Game &);
 
 	int32_t get_current_experience() const {return m_current_exp;}
-	bool needs_experience() const {return descr().get_level_experience() != -1;}
+	bool needs_experience() const {return descr().get_needed_experience() != -1;}
 
 	// debug
 	virtual void log_general_info(const Editor_Game_Base &) override;
@@ -241,10 +241,6 @@ private:
 	bool run_scout            (Game &, State &, const Action &);
 	bool run_playFX           (Game &, State &, const Action &);
 	bool run_construct        (Game &, State &, const Action &);
-
-	// Displays a message to the player if a find... program can't be
-	// executed
-	void informPlayer(Game &, Building &, std::string) const;
 
 	OPtr<PlayerImmovable> m_location; ///< meta location of the worker
 	Economy          * m_economy;      ///< economy this worker is registered in

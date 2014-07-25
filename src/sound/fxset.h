@@ -29,7 +29,9 @@ class Sound_Handler;
 
 /// Predefined priorities for easy reading
 /// \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
-/// \todo These values should not have any meaning beyond just being numbers.
+
+// TODO(unknown): These values should not have any meaning beyond just being numbers.
+
 #define PRIO_ALWAYS_PLAY 255
 #define PRIO_ALLOW_MULTIPLE 128
 #define PRIO_MEDIUM 63

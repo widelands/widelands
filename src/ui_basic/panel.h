@@ -74,7 +74,7 @@ struct Panel : boost::signals2::trackable {
 		pf_layout_toplevel = 512,
 		/// whether widget panels should be cached when possible
 		pf_cache = 1024,
-	}; ///<\todo Turn this into separate bool flags
+	}; // TODO(unknown): Turn this into separate bool flags
 
 	Panel
 		(Panel * const nparent,

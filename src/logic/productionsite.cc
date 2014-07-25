@@ -61,6 +61,19 @@ ProductionSite_Descr::ProductionSite_Descr
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
 	m_type        (Map_Object_Type::PRODUCTIONSITE)
 {
+	Section * const section = prof.get_section("out_of_resource_notification");
+	if (section != nullptr)
+	{
+		m_out_of_resource_title = section->get_string("title", "");
+		m_out_of_resource_message = section->get_string("message", "");
+		m_out_of_resource_delay_attempts = section->get_natural("delay_attempts", 0);
+	}
+	else
+	{
+		m_out_of_resource_title = "";
+		m_out_of_resource_message = "";
+		m_out_of_resource_delay_attempts = 0;
+	}
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
@@ -186,7 +199,8 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_last_stat_percent (0),
 	m_crude_percent     (0),
 	m_is_stopped        (false),
-	m_default_anim      ("idle")
+	m_default_anim      ("idle"),
+	m_out_of_resource_delay_counter(0)
 {
 	m_statistics_buffer[0] = '\0';
 	m_result_buffer[0] = '\0';
@@ -896,6 +910,31 @@ void ProductionSite::train_workers(Game & game)
 }
 
 
+void ProductionSite::worker_failed_to_find_resource(Game & game)
+{
+	if (!descr().out_of_resource_title().empty() &&
+		m_out_of_resource_delay_counter >=
+			descr().out_of_resource_delay_attempts()
+		)
+	{
+		assert(!descr().out_of_resource_message().empty());
+		send_message
+			(game,
+			 "produce",
+			 descr().out_of_resource_title(),
+			 descr().out_of_resource_message(),
+			 true,
+			 1800000, 0);
+	}
+	if (m_out_of_resource_delay_counter++ >=
+			descr().out_of_resource_delay_attempts()
+		)
+	{
+		m_out_of_resource_delay_counter = 0;
+	}
+}
+
+
 /// Changes the default anim string to \li anim
 void ProductionSite::set_default_anim(std::string anim)
 {
@@ -907,5 +946,6 @@ void ProductionSite::set_default_anim(std::string anim)
 
 	m_default_anim = anim;
 }
+
 
 }
