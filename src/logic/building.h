@@ -188,6 +188,10 @@ public:
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 
+	//Return the animation ID that is used for the building in UI items
+	//(the building UI, messages, etc..)
+	virtual uint32_t get_ui_anim() const {return descr().get_ui_anim();}
+
 	virtual Flag & base_flag() override;
 	virtual uint32_t get_playercaps() const;
 
