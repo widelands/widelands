@@ -6,6 +6,10 @@ error_msg = "Do not use operator synonyms, e.g. use \"&&\" rather than \"and\"."
 # NOCOM(#GunChleoc) this rule does not exclude string literals, e.g. _(" or ")
 # NOCOM(#GunChleoc) this rule does not exclude RST comments or // inline comments added after code
 # NOCOM(#GunChleoc) this rule is always triggered twice
+
+# NOCOM(#GunChleoc) New branch, this needs a complete overhaul,
+# c.f. https://code.launchpad.net/~widelands-dev/widelands/bug-1343302/+merge/227432
+
 regexp = (
 		r"""("""
 		r"""^(?!((\s*[*])|(\s*/))).+\Wand(\W|$)"""
