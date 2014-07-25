@@ -21,6 +21,7 @@
 
 #include <sstream>
 
+#include <boost/algorithm/string/join.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -1026,29 +1027,28 @@ void ProductionProgram::ActProduce::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
-	std::string result_string = "";
 	assert(m_items.size());
 
-	for (wl_const_range<Items> i(m_items); i;)
-	{
-		{
-			uint8_t const count = i.current->second;
-			if (1 < count) {
-				char buffer[5];
-				/** TRANSLATORS: Number used in list of wares */
-				sprintf(buffer, _("%u "), count);
-				result_string += buffer;
-			}
+	std::vector<std::string> ware_descnames;
+	for (const auto& item_pair : m_items) {
+		uint8_t const count = item_pair.second;
+		std::string ware_descname;
+		// TODO(sirver): needs boost::format and probably ngettext.
+		if (1 < count) {
+			char buffer[5];
+			/** TRANSLATORS: Number used in list of wares */
+			sprintf(buffer, _("%u "), count);
+			ware_descname += buffer;
 		}
-		result_string += tribe.get_ware_descr(i.current->first)->descname();
-		if (i.advance().empty())
-			break;
-		/** TRANSLATORS: Separator for list of wares */
-		result_string += _(", ");
+		ware_descname += tribe.get_ware_descr(item_pair.first)->descname();
+		ware_descnames.push_back(ware_descname);
 	}
+	/** TRANSLATORS: Separator for list of wares */
+	const std::string ware_list = boost::algorithm::join(ware_descnames,  _(", "));
+
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
-	result_string = str(format(_("Produced %s")) % result_string);
+	const std::string result_string = str(format(_("Produced %s")) % ware_list);
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 		 "%s", result_string.c_str());
@@ -1126,25 +1126,24 @@ void ProductionProgram::ActRecruit::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
-	std::string unit_string = ("");
 	assert(m_items.size());
-	for (wl_const_range<Items> i(m_items); i;)
-	{
-		{
-			uint8_t const count = i.current->second;
-			if (1 < count) {
-				char buffer[5];
-				/** TRANSLATORS: Number used in list of workers */
-				sprintf(buffer, _("%u "), count);
-				unit_string += buffer;
-			}
+	std::vector<std::string> worker_descnames;
+	for (const auto& item_pair : m_items) {
+		uint8_t const count = item_pair.second;
+		std::string worker_descname;
+		// TODO(sirver): needs boost::format and probably ngettext.
+		if (1 < count) {
+			char buffer[5];
+			/** TRANSLATORS: Number used in list of workers */
+			sprintf(buffer, _("%u "), count);
+			worker_descname += buffer;
 		}
-		unit_string += tribe.get_worker_descr(i.current->first)->descname();
-		if (i.advance().empty())
-			break;
-		/** TRANSLATORS: Separator for list of workers */
-		unit_string += _(", ");
+		worker_descname += tribe.get_worker_descr(item_pair.first)->descname();
+		worker_descnames.push_back(worker_descname);
 	}
+	/** TRANSLATORS: Separator for list of workers */
+	const std::string unit_string = boost::algorithm::join(worker_descnames,  _(", "));
+
 	/** TRANSLATORS: %s is a lost of workers */
 	std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
 	snprintf
