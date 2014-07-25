@@ -336,7 +336,7 @@ bool Graphic::check_fallback_settings_in_effect()
 void Graphic::cleanup() {
 	m_maptextures.clear();
 	surface_cache_->flush();
-	// TODO: this should really not be needed, but currently is :(
+	// TODO(unknown): this should really not be needed, but currently is :(
 	if (UI::g_fh)
 		UI::g_fh->flush();
 
@@ -386,7 +386,7 @@ RenderTarget * Graphic::get_render_target()
 void Graphic::toggle_fullscreen()
 {
 	log("Try SDL_WM_ToggleFullScreen...\n");
-	// TODO: implement proper fullscreening here. The way it can work is to
+	// TODO(unknown): implement proper fullscreening here. The way it can work is to
 	// recreate SurfaceCache but keeping ImageCache around. Then exiting and
 	// reinitalizing the SDL Video Mode should just work: all surface are
 	// recreated dynamically and correctly.

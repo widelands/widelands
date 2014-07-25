@@ -104,7 +104,7 @@ bool AbstractWaresDisplay::handle_mousemove
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
 		if (state ^ SDL_BUTTON_LMASK) {
-			// FIXME: We should call another function that will not pass that events
+			// TODO(unknown) We should call another function that will not pass that events
 			// to our Panel superclass
 			handle_mouserelease(SDL_BUTTON_LEFT, x, y);
 			return true;
@@ -351,7 +351,7 @@ void AbstractWaresDisplay::draw_ware
 	if (m_selection_anchor != Widelands::INVALID_INDEX) {
 		// Draw the temporary selected wares as if they were
 		// selected.
-		// TODO: Use another pic for the temporary selection
+		// TODO(unknown): Use another pic for the temporary selection
 		if (!ware_selected(m_selection_anchor)) {
 			draw_selected |= m_in_selection[id];
 		} else {

@@ -313,12 +313,10 @@ private:
 };
 
 
-/**
- * \todo: Neither this function nor the UI Registry should be part
- * of Economy. Economy should be made an observerable class where
- * users can register for change updates. The registry should be
- * moved to InteractivePlayer or some other UI component.
- */
+// TODO(unknown): Neither this function nor the UI Registry should be part
+// of Economy. Economy should be made an observerable class where
+// users can register for change updates. The registry should be
+// moved to InteractivePlayer or some other UI component.
 void Economy::show_options_window() {
 	if (m_optionswindow_registry.window)
 		m_optionswindow_registry.window->move_to_top();

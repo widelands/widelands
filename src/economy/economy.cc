@@ -359,7 +359,7 @@ void Economy::add_wares(Ware_Index const id, uint32_t const count)
 	m_wares.add(id, count);
 	_start_request_timer();
 
-	// TODO: add to global player inventory?
+	// TODO(unknown): add to global player inventory?
 }
 void Economy::add_workers(Ware_Index const id, uint32_t const count)
 {
@@ -368,7 +368,7 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
 	m_workers.add(id, count);
 	_start_request_timer();
 
-	// TODO: add to global player inventory?
+	// TODO(unknown): add to global player inventory?
 }
 
 /**
@@ -384,7 +384,7 @@ void Economy::remove_wares(Ware_Index const id, uint32_t const count)
 
 	m_wares.remove(id, count);
 
-	// TODO: remove from global player inventory?
+	// TODO(unknown): remove from global player inventory?
 }
 
 /**
@@ -398,7 +398,7 @@ void Economy::remove_workers(Ware_Index const id, uint32_t const count)
 
 	m_workers.remove(id, count);
 
-	// TODO: remove from global player inventory?
+	// TODO(unknown): remove from global player inventory?
 }
 
 /**

@@ -43,10 +43,10 @@ Worker_Descr::Worker_Descr
 	BobDescr(_name, _descname, &_tribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_ware_hotspot(global_s.get_Point("ware_hotspot", Point(0, 15))),
-	m_icon_fname(directory + "/menu.png"),
+	m_icon_fname(directory + "menu.png"),
 	m_icon(nullptr),
 	m_buildable     (false),
-	m_level_experience(-1),
+	m_needed_experience(-1),
 	m_becomes (INVALID_INDEX)
 {
 	{ //  global options
@@ -96,7 +96,7 @@ Worker_Descr::Worker_Descr
 	// Read the becomes and experience
 	if (char const * const becomes_name = global_s.get_string("becomes")) {
 		m_becomes = tribe().safe_worker_index(becomes_name);
-		m_level_experience = global_s.get_safe_positive("experience");
+		m_needed_experience = global_s.get_safe_positive("experience");
 	}
 
 	// Read programs

@@ -70,7 +70,7 @@ ibase_             (nullptr),
 map_               (nullptr),
 lasttrackserial_   (0)
 {
-	if (!lua_) // TODO SirVer: this is sooo ugly, I can't say
+	if (!lua_) // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 
 	g_sound_handler.egbase_ = this;
@@ -93,7 +93,7 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 void Editor_Game_Base::think()
 {
-	//TODO: Get rid of this; replace by a function that just advances gametime
+	//TODO(unknown): Get rid of this; replace by a function that just advances gametime
 	// by a given number of milliseconds
 }
 
@@ -260,7 +260,7 @@ void Editor_Game_Base::postload()
 		}
 	}
 
-	// TODO: postload players? (maybe)
+	// TODO(unknown): postload players? (maybe)
 }
 
 
@@ -278,7 +278,7 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 		(*i.current)->load_graphics();
 	}
 
-	// TODO: load player graphics? (maybe)
+	// TODO(unknown): load player graphics? (maybe)
 }
 
 /**
@@ -589,7 +589,7 @@ void Editor_Game_Base::unconquer_area
 	//  Therefore the area must be enlarged before calling
 	//  cleanup_playerimmovables_area, so that those new border locations are
 	//  covered.
-	// SirVer, TODO: In the editor, no buildings should burn down when a military
+	// TODO(SirVer): In the editor, no buildings should burn down when a military
 	// building is removed. Check this again though
 	if (is_a(Game, this)) {
 		++player_area.radius;
@@ -635,7 +635,7 @@ void Editor_Game_Base::change_field_owner(const FCoords& fc, Player_Number const
 
 	fc.field->set_owned_by(new_owner);
 
-	// TODO: the player should do this when it gets the NoteFieldPossession.
+	// TODO(unknown): the player should do this when it gets the NoteFieldPossession.
 	// This means also sending a note when new_player = 0, i.e. the field is no
 	// longer owned.
 	inform_players_about_ownership(fc.field - &first_field, new_owner);
@@ -672,7 +672,7 @@ void Editor_Game_Base::conquer_area_no_building
 
 /// Conquers the given area for that player; does the actual work.
 /// Additionally, it updates the visible area for that player.
-// TODO: this needs a more fine grained refactoring
+// TODO(unknown): this needs a more fine grained refactoring
 // for example scripts will want to (un)conquer area of non oval shape
 // or give area back to the neutral player (this is very important for the Lua
 // testsuite).

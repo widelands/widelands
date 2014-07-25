@@ -547,7 +547,7 @@ Advance the program state if applicable.
 */
 void MilitarySite::act(Game & game, uint32_t const data)
 {
-	// TODO: do all kinds of stuff, but if you do nothing, let
+	// TODO(unknown): do all kinds of stuff, but if you do nothing, let
 	// ProductionSite::act() handle all this. Also note, that some ProductionSite
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
@@ -565,7 +565,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
 	// to keep the game lightweight.
 
-	//TODO: I would need two new callbacks, to get rid ot this polling.
+	//TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > m_next_swap_soldiers_time)
 		{
 			m_next_swap_soldiers_time = timeofgame + (m_soldier_upgrade_try ? 20000 : 100000);
@@ -782,7 +782,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 
 	// Inform the player, that we are under attack by adding a new entry to the
 	// message queue - a sound will automatically be played.
-	informPlayer(game, true);
+	notify_player(game, true);
 }
 
 bool MilitarySite::attack(Soldier & enemy)
@@ -824,7 +824,7 @@ bool MilitarySite::attack(Soldier & enemy)
 
 		// Inform the player, that we are under attack by adding a new entry to
 		// the message queue - a sound will automatically be played.
-		informPlayer(game);
+		notify_player(game);
 
 		return true;
 	} else {
@@ -931,7 +931,7 @@ bool MilitarySite::military_presence_kept(Game & game)
 }
 
 /// Informs the player about an attack of his opponent.
-void MilitarySite::informPlayer(Game & game, bool const discovered)
+void MilitarySite::notify_player(Game & game, bool const discovered)
 {
 	// Add a message as long as no previous message was send from a point with
 	// radius <= 5 near the current location in the last 60 seconds

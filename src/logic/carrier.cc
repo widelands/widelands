@@ -113,7 +113,7 @@ void Carrier::road_update(Game & game, State & state)
 		return;
 
 	// Be bored. There's nothing good on TV, either.
-	// TODO: idle animations
+	// TODO(unknown): idle animations
 	set_animation(game, descr().get_animation("idle"));
 	state.ivar1 = 1; //  we are available immediately after an idle phase
 	return skip_act(); //  wait until signal
@@ -216,10 +216,9 @@ void Carrier::transport_update(Game & game, State & state)
  * Deliver all wares addressed to the building the carrier is already into
  *
  * \param state UNDOCUMENTED
- *
- * \todo Upgrade this function to really support many-wares-at-a-time
- * \todo Document parameter state
  */
+// TODO(unknown):  Upgrade this function to really support many-wares-at-a-time
+// TODO(unknown):  Document parameter state
 void Carrier::deliver_to_building(Game & game, State & state)
 {
 	BaseImmovable * const pos = game.map()[get_position()].get_immovable();

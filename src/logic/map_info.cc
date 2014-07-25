@@ -84,6 +84,11 @@ int main(int argc, char ** argv)
 		egbase.set_map(map);
 		std::unique_ptr<Widelands::Map_Loader> ml(map->get_correct_loader(map_file));
 
+		if (!ml) {
+			log("Cannot load map file.\n");
+			return 1;
+		}
+
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, true);
 
@@ -116,7 +121,7 @@ int main(int argc, char ** argv)
 			const auto write_key_value_int = [&write_key_value] (const std::string& key, const int value) {
 				write_key_value(key, boost::lexical_cast<std::string>(value));
 			};
-			write_string("{\n");
+			write_string("{\n  ");
 			write_key_value_string("name", map->get_name());
 			write_string(",\n  ");
 			write_key_value_string("author", map->get_author());
@@ -134,7 +139,7 @@ int main(int argc, char ** argv)
 			write_key_value_string("world_name", world_name);
 			write_string(",\n  ");
 			write_key_value_string("minimap", map_path + ".png");
-			write_string("\n  ");
+			write_string("\n");
 
 			write_string("}\n");
 			fw.Write(*in_out_filesystem, (map_file + ".json").c_str());

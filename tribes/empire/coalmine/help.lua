@@ -13,9 +13,9 @@ return {
 	building_help_lore_string("empire", building_description, _[[Text needed]]) ..
 
 	--General Section
-	building_help_general_string("empire", building_description, "coal",
+	building_help_general_string("empire", building_description,
 		_"Digs coal out of the ground in mountain terrain.") ..
--- TODO  calculate "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal.":bformat("1/3"))
+-- TODO(GunChleoc)  calculation needed "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal.":bformat("1/3"))
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description) ..

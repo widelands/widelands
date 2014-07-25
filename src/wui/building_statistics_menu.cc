@@ -438,7 +438,7 @@ void Building_Statistics_Menu::update() {
 		//  add new Table Entry
 		char buffer[100];
 		te->set_picture
-			(Columns::Name, building.get_buildicon(), building.descname());
+			(Columns::Name, building.get_icon(), building.descname());
 
 		{
 			char const * pic = "pics/novalue.png";

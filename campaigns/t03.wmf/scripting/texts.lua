@@ -35,8 +35,8 @@ obj_build_cattlefarm = {
    title = _ "Build a cattle farm",
    number = 1,
    body = objective_text(_"Remember to build a cattle farm",
-      _"As your roads grow longer and your economy bigger, you should make good use of your oxen to help transport wares more quickly.)" ..
-      listitem_bullet(_"Remember to build a cattle farm!")
+      _"As your roads grow longer and your economy bigger, you should make good use of your oxen to help transport wares more quickly." ..
+      listitem_bullet(_"Remember to build a cattle farm")
    ),
 }
 
@@ -63,7 +63,7 @@ obj_build_mining_economy = {
    title=_"Build a mining infrastructure",
    number = 6,
    body = objective_text(_"Build a mining infrastructure",
-      listitem_bullet(_"Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metalworks.")
+      listitem_bullet(_"Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metal workshop.")
    ),
 }
 
@@ -106,7 +106,7 @@ obj_build_trainingssites = {
       listitem_bullet(_"Build a battle arena and a training camp to the west of the mountains.") ..
       listitem_arrow(_"Training sites like a training camp or a battle arena are used for training soldiers in their different attributes. These attributes are important in fights and the better a soldier is, the higher is the chance to win a fight." ..
          "<br>" ..
-         _"The attributes are: health points, attack, defense and evade.")
+         _"The attributes are: health, attack, defense and evade.")
    ),
 }
 

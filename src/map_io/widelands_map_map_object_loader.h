@@ -51,13 +51,13 @@ public:
 	/// \throws _wexception if there is already an object registered with the
 	/// same serial. (not implemented: In that case, the object is deleted.)
 	///
-	/// \todo Currently the object must be passed as a parameter to this
-	/// function. This should be changed so that the object is allocated here.
-	/// The parameter object should then be removed and the function renamed to
-	/// create_object. Then there will no longer be necessary to delete the
-	/// object in case the serial number is alrealy known, since the object will
-	/// never even be allocated then. But this change can only be done when all
-	/// kinds of map objects have suitable default constructors.
+	// TODO(unknown): Currently the object must be passed as a parameter to this
+	// function. This should be changed so that the object is allocated here.
+	// The parameter object should then be removed and the function renamed to
+	// create_object. Then there will no longer be necessary to delete the
+	// object in case the serial number is alrealy known, since the object will
+	// never even be allocated then. But this change can only be done when all
+	// kinds of map objects have suitable default constructors.
 	template<typename T> T & register_object(Serial const n, T & object) {
 		Reverse_Map_Object_Map::const_iterator const existing =
 			m_objects.find(n);

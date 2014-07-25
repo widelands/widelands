@@ -236,7 +236,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->images().get("pics/but4.png"),
-							 building_descr.get_buildicon(),
+							 building_descr.get_icon(),
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
 					//  button id = building id

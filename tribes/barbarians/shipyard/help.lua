@@ -10,11 +10,10 @@ return {
 	return
 
 	--Lore Section
--- TODO crashes because of missing image
-	--building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
+	building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "shipwright",
+	building_help_general_string("barbarians", building_description,
 		_[[Text needed]]) ..
 
 	--Dependencies

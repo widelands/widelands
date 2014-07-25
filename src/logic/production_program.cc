@@ -303,7 +303,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description
 		condition = (boost::format(_("%s,")) % condition).str();
 	}
 	if (1 < group.second) {
-		// TODO this should be done with ngettext
+		// TODO(unknown) this should be done with ngettext
 		condition =
 			(boost::format(_("%1$s (%2$i)")) % condition % static_cast<unsigned int>(group.second)).str();
 	}
@@ -503,7 +503,7 @@ void ProductionProgram::ActReturn::execute
 				condition_string += i.front()->description(ps.owner().tribe());
 				if (i.advance().empty())
 					break;
-				// TODO  Would prefer "%1$s and %2$s" but getting segfaults, so leaving this for now
+				// TODO(unknown)  Would prefer "%1$s and %2$s" but getting segfaults, so leaving this for now
 				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
 				condition_string = (boost::format(_("%s and ")) % condition_string).str();
 			}
@@ -520,7 +520,7 @@ void ProductionProgram::ActReturn::execute
 				condition_string += i.front()->description(ps.owner().tribe());
 				if (i.advance().empty())
 					break;
-				// TODO  Would prefer '%1$s or %2$s' but getting segfaults, so leaving this for now
+				// TODO(unknown)  Would prefer '%1$s or %2$s' but getting segfaults, so leaving this for now
 				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
 				condition_string = (boost::format(_("%s or ")) % condition_string).str();
 			}
@@ -894,7 +894,7 @@ void ProductionProgram::ActConsume::execute
 			{
 				uint8_t const count = i.current->second;
 				if (1 < count) {
-					// TODO this should be done with ngettext
+					// TODO(unknown) this should be done with ngettext
 					result_string =
 						/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
 						(boost::format(_("%1$s (%2$i)")) % result_string
@@ -1279,7 +1279,7 @@ void ProductionProgram::ActMine::execute
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
 		if (m_chance <= 20) {
-			informPlayer(game, ps);
+			notify_player(game, ps);
 			// and change the default animation
 			ps.set_default_anim("empty");
 		}
@@ -1300,33 +1300,32 @@ void ProductionProgram::ActMine::execute
 	}
 
 	//  done successful
-	//  FIXME Should pass the time it takes to mine in the phase parameter of
-	//  FIXME ProductionSite::program_step so that the following sleep/animate
-	//  FIXME command knows how long it should last.
+	//  TODO(unknown) Should pass the time it takes to mine in the phase parameter of
+	//  ProductionSite::program_step so that the following sleep/animate
+	//  command knows how long it should last.
 	return ps.program_step(game);
 }
 
-/// Copied from militarysite.cc, MilitarySite::informPlayer
 /// Informs the player about a mine that has run empty, if the mine has not
 /// sent this message within the last 60 minutes.
-void ProductionProgram::ActMine::informPlayer
+void ProductionProgram::ActMine::notify_player
 	(Game & game, ProductionSite & ps) const
 {
+	assert(!ps.descr().out_of_resource_title().empty());
+	assert(!ps.descr().out_of_resource_message().empty());
 	ps.send_message
 		(game,
 		 "mine",
-		 _("Main Vein Exhausted"),
-		 _
-		 ("This mine’s main vein is exhausted. Expect strongly diminished returns on investment. "
-		  "You should consider enhancing, dismantling or destroying it."),
+		 ps.descr().out_of_resource_title(),
+		 ps.descr().out_of_resource_message(),
 		 true,
 		 60 * 60 * 1000,
 		 0);
 }
 
 ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
-	//  FIXME This is currently hardcoded for "soldier", but should allow any
-	//  FIXME soldier type name.
+	//  TODO(unknown) This is currently hardcoded for "soldier", but should allow any
+	//  soldier type name.
 	if (!match_force_skip(parameters, "soldier"))
 		throw game_data_error
 			("expected %s but found \"%s\"", "soldier type", parameters);
@@ -1401,8 +1400,8 @@ void ProductionProgram::ActCheck_Soldier::execute
 }
 
 ProductionProgram::ActTrain::ActTrain(char* parameters) {
-	//  FIXME This is currently hardcoded for "soldier", but should allow any
-	//  FIXME soldier type name.
+	//  TODO(unknown) This is currently hardcoded for "soldier", but should allow any
+	//  soldier type name.
 	if (!match_force_skip(parameters, "soldier"))
 		throw game_data_error
 			("expected %s but found \"%s\"", "soldier type", parameters);

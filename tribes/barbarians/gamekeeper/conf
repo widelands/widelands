@@ -5,7 +5,7 @@ program=release
 carrier=1
 
 [release]
-0=setbobdescription tribe:wildboar tribe:deer sheep
+0=setbobdescription wildboar stag sheep
 1=findspace size:any radius:3
 2=walk coords
 3=animation releasein 2000 # Play a releasing animation

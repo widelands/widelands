@@ -123,7 +123,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
                                       uint32_t const* const random4,
                                       FCoords const fc) {
 	// We'll take the "D" terrain at first...
-	// TODO: Check how the editor handles this...
+	// TODO(unknown): Check how the editor handles this...
 
 	const World& world = egbase_.world();
 	Terrain_Index const tix = fc.field->get_terrains().d;
@@ -566,8 +566,8 @@ Terrain_Index MapGenerator::figure_out_terrain
 		uint32_t const shelf_h   = map_gen_info_->getWaterShelfHeight();
 		uint32_t const shallow_h = map_gen_info_->getWaterShallowHeight();
 
-		//  TODO: The heights can not be lower than water-Shallow --
-		//  TODO: there will never be an ocean yet
+		//  TODO(unknown): The heights can not be lower than water-Shallow --
+		//  there will never be an ocean yet
 
 		if        (h1 <= ocean_h   && h2 <= ocean_h   && h3 <= ocean_h)   {
 			atp = MapGenAreaInfo::atWater;
@@ -847,7 +847,7 @@ void MapGenerator::create_random_map()
 		}
 
 		if (coords.empty()) {
-			// TODO inform players via popup
+			// TODO(unknown) inform players via popup
 			log("WARNING: Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;
@@ -1159,12 +1159,12 @@ uint16_t Widelands::UniqueRandomMapInfo::generateWorldNameHash
 	return hash;
 }
 
-// TODO: Also take mountain and water areas into bob generation
+// TODO(unknown): Also take mountain and water areas into bob generation
 // (we have ducks and chamois)
-// TODO: Define the "none"-bob to weigh other bobs lower within BobCategory...
-// TODO: MapGen: Bob generation, configurable in mapgenconf
-// TODO: MapGen: Resource generation, configurable in mapgenconf
-// TODO: MapGen: Check out sample map
-// TODO: MapGen: How to handle height profile in make_blah...
+// TODO(unknown): Define the "none"-bob to weigh other bobs lower within BobCategory...
+// TODO(unknown): MapGen: Bob generation, configurable in mapgenconf
+// TODO(unknown): MapGen: Resource generation, configurable in mapgenconf
+// TODO(unknown): MapGen: Check out sample map
+// TODO(unknown): MapGen: How to handle height profile in make_blah...
 
 }

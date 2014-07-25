@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,<br> as deadly as a viper.’]], _[[‘The Art of Hunting’]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "meat",
+	building_help_general_string("barbarians", building_description,
 		_"Hunts animals to produce meat.",
 		_"The hunter’s hut needs animals to hunt within the working radius.") ..
 

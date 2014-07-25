@@ -291,11 +291,11 @@ void NonPackedAnimation::load_graphics() {
 	}
 
 	for (const std::string& filename : pc_mask_image_files_) {
-		// TODO Do not load playercolor mask as opengl texture or use it as
+		// TODO(unknown) Do not load playercolor mask as opengl texture or use it as
 		//     opengl texture.
 		const Image* pc_image = g_gr->images().get(filename);
 		if (frames_[0]->width() != pc_image->width() || frames_[0]->height() != pc_image->height()) {
-			// TODO: see bug #1324642
+			// TODO(unknown): see bug #1324642
 			throw wexception("playercolor mask has wrong size: (%u, %u), should "
 			                 "be (%u, %u) like the animation frame",
 			                 pc_image->width(),
