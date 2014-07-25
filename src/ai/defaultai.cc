@@ -148,8 +148,8 @@ void DefaultAI::think() {
 	// this is using for testing
 	if (gametime > 150 * 60 * 1000) {
 		;
-		//print_land_stats();
-		//exit(1);
+		// print_land_stats();
+		// exit(1);
 	}
 
 	if (m_buildable_changed) {
@@ -1142,6 +1142,9 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						        bf->producers_nearby_.at(bo.production_hint_) * 5 -
 						        new_buildings_stop_ * 15;
 
+						// considering space consumers nearby
+						prio -= bf->space_consumers_nearby_ * 5;
+
 					} else if (not new_buildings_stop_) {  // gamekeepers or so
 						if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
 							bo.stocklevel_ =
@@ -1203,6 +1206,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 						if (bo.space_consumer_)  // need to consider trees nearby
 							prio += 20 - (bf->trees_nearby_ / 3);
+
+						// we attempt to cluster space consumers together
+						if (bo.space_consumer_)  // need to consider trees nearby
+							prio += bf->space_consumers_nearby_ * 2;
 
 						if (bo.space_consumer_ and not bf->water_nearby_)  // not close to water
 							prio += 1;
@@ -1386,6 +1393,14 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					bo.stocklevel_time = game().get_gametime();
 				}
 
+				// if we have enough mined resources, do not consider a mine here
+				if (bo.stocklevel_ > 100)
+					continue;
+
+				// if current ones are performing badly
+				if (bo.total_count() >= 2 and bo.current_stats_ < 50)
+					continue;
+
 				// this is penalty if there are existing mines too close
 				// it is treated as multiplicator for count of near mines
 				uint32_t nearness_penalty = 0;
@@ -1450,17 +1465,17 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		return false;
 	}
 
-	printf(" %1d: Winning building is: %-20s (cur.count: %2d), prio: %3d (time: %4d:%02d, Mil. "
-	       "mode: %1d, Prod.stop: "
-	       "%s)\n",
-	       player_number(),
-	       best_building->name,
-	       best_building->total_count(),
-	       proposed_priority,
-	       gametime / 60 / 1000,
-	       (gametime / 1000) % 60,
-	       expansion_mode,
-	       new_buildings_stop_ ? "Y" : "N");
+	// printf(" %1d: Winning building is: %-20s (cur.count: %2d), prio: %3d (time: %4d:%02d, Mil. "
+	//"mode: %1d, Prod.stop: "
+	//"%s)\n",
+	// player_number(),
+	// best_building->name,
+	// best_building->total_count(),
+	// proposed_priority,
+	// gametime / 60 / 1000,
+	//(gametime / 1000) % 60,
+	// expansion_mode,
+	// new_buildings_stop_ ? "Y" : "N");
 
 	// send the command to construct a new building
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
@@ -1644,21 +1659,21 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 			if (economies.size() > 1)
 				finish = connect_flag_to_another_economy(flag);
 
-//<<<<<<< TREE
+			//<<<<<<< TREE
 			// try to improve the roads at this flag, effectively
 			// to build a 'shortcut' from the flag, if reasonable
 			//  second arguments means:
 			// 'FORCE a shortcut from here as the flag is full of wares'
 			if (!finish)
 				finish = improve_transportation_ways(flag, !flag.has_capacity());
-//=======
+			//=======
 			//// try to improve the roads at this flag
 			////  TODO(unknown) do this only on useful places - the attempt below
 			////  unfortunatey did not work as it should...
 			////  if the flag is full of wares or if it is not yet a fork.
-			//if (!finish)  //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
-				//finish = improve_transportation_ways(flag);
-//>>>>>>> MERGE-SOURCE
+			// if (!finish)  //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))
+			// finish = improve_transportation_ways(flag);
+			//>>>>>>> MERGE-SOURCE
 
 			// cycle through flags one at a time
 			eco->flags.push_back(eco->flags.front());
@@ -1935,21 +1950,20 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 				// don't upgrade without workers
 				if (site.site->has_workers(enhancement, game())) {
 
-					printf(" %1d: Considering upgrade %20s -> %20s, count: %2d / %2d (%2d), "
-					       "performance: %3d / %3d\n",
-					       player_number(),
-					       site.bo->name,
-					       en_bo.name,
-					       site.bo->total_count(),
-					       en_bo.total_count(),
-					       en_bo.cnt_under_construction_ + en_bo.unoccupied_,
-					       site.bo->current_stats_,
-					       en_bo.current_stats_);
+					// printf(" %1d: Considering upgrade %20s -> %20s, count: %2d / %2d (%2d), "
+					//"performance: %3d / %3d\n",
+					// player_number(),
+					// site.bo->name,
+					// en_bo.name,
+					// site.bo->total_count(),
+					// en_bo.total_count(),
+					// en_bo.cnt_under_construction_ + en_bo.unoccupied_,
+					// site.bo->current_stats_,
+					// en_bo.current_stats_);
 
 					// forcing first upgrade
 					if (en_bo.cnt_built_ == 0 and !mines_.empty()) {
-						printf("  forcing as first upgrade\n");
-						// game().send_player_enhance_building(*site.site, enhancement);
+						// printf("  forcing as first upgrade\n");
 						// return true;
 						enbld = enhancement;
 						bestbld = &en_bo;
@@ -1964,9 +1978,9 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 							enbld = enhancement;
 							bestbld = &en_bo;
-							printf("  upgrading due to stat difference: %2d vs %2d\n",
-							       site.bo->current_stats_,
-							       en_bo.current_stats_);
+							// printf("  upgrading due to stat difference: %2d vs %2d\n",
+							// site.bo->current_stats_,
+							// en_bo.current_stats_);
 						}
 					}
 				}
@@ -1978,11 +1992,11 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 				game().send_player_enhance_building(*site.site, enbld);
 				bestbld->construction_decision_time_ = gametime;
 
-				printf(" %1d: Upgrading to: %-20s (time: %4d:%02d)\n",
-				       player_number(),
-				       bestbld->name,
-				       gametime / 60 / 1000,
-				       (gametime / 1000) % 60);
+				// printf(" %1d: Upgrading to: %-20s (time: %4d:%02d)\n",
+				// player_number(),
+				// bestbld->name,
+				// gametime / 60 / 1000,
+				//(gametime / 1000) % 60);
 
 				return true;
 			}
@@ -2041,7 +2055,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		       nullptr,
-				 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("granite"))) == 0) {
+		       FindImmovableAttribute(Map_Object_Descr::get_attribute_id("granite"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -2191,18 +2205,68 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 		return true;
 	}
 
+	// dont check the performance too soon
+	if (site.built_time_ + 5 * 60 * 1000 > gametime)
+		return false;
+
 	// It takes some time till performance gets to 0
 	// so I use 40% as a limit to check if there are some resources left
 	if (site.site->get_statistics_percent() > 40)
 		return false;
 
-	// Check if mine ran out of resources
-	uint8_t current = field->get_resources_amount();
+	// printf (" %1d: Investigating  %-15s, with low statistics: %3d\n",
+	// player_number(),
+	// site.bo->name,site.site->get_statistics_percent());
 
-	if (current < 1) {
-		// destruct the building and it's flag (via flag destruction)
-		// the destruction of the flag avoids that defaultAI will have too many
-		// unused roads - if needed the road will be rebuild directly.
+	// Check if mine stil can mine resources
+	uint32_t starting_resources = 0;
+	uint32_t remaining_resources = 0;
+	const uint8_t mined_resource = field->get_resources();
+
+	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(site.site->get_position()), 6));
+	do {
+		uint8_t fres = mr.location().field->get_resources();
+		uint32_t amount = mr.location().field->get_resources_amount();
+		uint32_t start_amount = mr.location().field->get_starting_res_amount();
+
+		if (fres != mined_resource) {
+			amount = 0;
+			start_amount = 0;
+		}
+
+		remaining_resources += amount;
+		starting_resources += start_amount;
+	} while (mr.advance(map));
+
+	// printf (" Mine resources: %3d / %3d, can mine:
+	// %3d\n",remaining_resources,starting_resources,site.bo->mines_percent_ );
+	bool mine_can_mine = true;
+	if (((starting_resources - remaining_resources) * 100 / starting_resources) + 4 >
+	    site.bo->mines_percent_) {
+		mine_can_mine = false;
+		printf("  %-15s cannot mine anymore: %3d / %3d = %3d, mines percent: %3d\n",
+		       site.bo->name,
+		       starting_resources - remaining_resources,
+		       starting_resources,
+		       (starting_resources - remaining_resources) * 100 / starting_resources,
+		       site.bo->mines_percent_);
+	}
+
+	// if mine can mine - probably food is missing
+	if (mine_can_mine)
+		return false;
+
+	if (site.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
+		site.bo->stocklevel_ = get_stocklevel_by_hint(site.bo->production_hint_);
+		site.bo->stocklevel_time = game().get_gametime();
+	}
+
+	// if mine can not mine anymore, but we have enough stock
+	if (!mine_can_mine and site.bo->stocklevel_ > 100) {
+		// dismantle mine
+		printf(" dismantling %20s due to high stock of material: %3d\n",
+		       site.bo->name,
+		       site.bo->stocklevel_);
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
 
@@ -2213,45 +2277,99 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	const Building_Index enhancement = site.site->descr().enhancement();
 
 	// if no enhancement is possible
-	if (enhancement == INVALID_INDEX)
+	if (enhancement == INVALID_INDEX) {
+		printf("  cannot upgrade anymore,dismantling\n");
+		flags_to_be_removed.push_back(site.site->base_flag().get_position());
+		game().send_player_dismantle(*site.site);
+		site.bo->construction_decision_time_ = gametime;
 		return false;
+	}
 
-	Building_Index enbld = INVALID_INDEX;
-	BuildingObserver* bestbld = nullptr;
+	// Building_Index enbld = INVALID_INDEX;
+	// BuildingObserver* bestbld = nullptr;
 	bool changed = false;
-	// Only enhance buildings that are allowed (scenario mode)
 	if (player_->is_building_type_allowed(enhancement)) {
 		// first exclude possibility there are enhancements in construction or unoccupied_
 		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-		if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ == 0) {
-			// do not upgrade target building are not working properly (probably do not have food)
-			if (en_bo.cnt_built_ == 0 or en_bo.current_stats_ >= 60) {
-				// do not build the same building so soon (kind of duplicity check)
-				if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval) {
-					// Check if mine needs an enhancement to mine more resources
-					uint8_t const until =
-					   field->get_starting_res_amount() * (100 - site.bo->mines_percent_) / 100;
+		// if it is too soon for enhancement and making sure there are no unoccupied mines
+		if (gametime - en_bo.construction_decision_time_ >=
+		       kBuildingMinInterval and en_bo.unoccupied_ + en_bo.cnt_under_construction_ ==
+		    0) {
 
-					if (until >= current) {
-						enbld = enhancement;
-						bestbld = &en_bo;
-					}
-				}
-			}
+			// now verify that there are enough workers
+			if (site.site->has_workers(enhancement, game())) {
+
+				printf("   upgrading %20s -> %20s\n", site.bo->name, en_bo.name);
+				game().send_player_enhance_building(*site.site, enhancement);
+				en_bo.construction_decision_time_ = gametime;
+				changed = true;
+			} else
+				printf("   Dont have workers for upgrade\n");
 		}
-	}
-
-	// Enhance if enhanced building is useful and possible
-	if (enbld != INVALID_INDEX) {
-		game().send_player_enhance_building(*site.site, enbld);
-		bestbld->construction_decision_time_ = gametime;
-		changed = true;
 	}
 
 	return changed;
 }
+
+// site.site->has_workers(enhancement, game())
+
+// uint8_t current = field->get_resources_amount();
+
+// if (current < 1) {
+//// destruct the building and it's flag (via flag destruction)
+//// the destruction of the flag avoids that defaultAI will have too many
+//// unused roads - if needed the road will be rebuild directly.
+// flags_to_be_removed.push_back(site.site->base_flag().get_position());
+// game().send_player_dismantle(*site.site);
+
+// return true;
+//}
+
+//// Check whether building is enhanceable. If yes consider an upgrade.
+// const Building_Index enhancement = site.site->descr().enhancement();
+
+//// if no enhancement is possible
+// if (enhancement == INVALID_INDEX)
+// return false;
+
+// Building_Index enbld = INVALID_INDEX;
+// BuildingObserver* bestbld = nullptr;
+// bool changed = false;
+//// Only enhance buildings that are allowed (scenario mode)
+// if (player_->is_building_type_allowed(enhancement)) {
+//// first exclude possibility there are enhancements in construction or unoccupied_
+// const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
+// BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+
+// if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ == 0) {
+//// do not upgrade target building are not working properly (probably do not have food)
+// if (en_bo.cnt_built_ == 0 or en_bo.current_stats_ >= 60) {
+//// do not build the same building so soon (kind of duplicity check)
+// if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval) {
+//// Check if mine needs an enhancement to mine more resources
+// uint8_t const until =
+// field->get_starting_res_amount() * (100 - site.bo->mines_percent_) / 100;
+
+// if (until >= current) {
+// enbld = enhancement;
+// bestbld = &en_bo;
+//}
+//}
+//}
+//}
+//}
+
+//// Enhance if enhanced building is useful and possible
+// if (enbld != INVALID_INDEX) {
+// game().send_player_enhance_building(*site.site, enbld);
+// bestbld->construction_decision_time_ = gametime;
+// changed = true;
+//}
+
+// return changed;
+//}
 
 // this count ware as hints
 uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
@@ -2492,7 +2610,8 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver& bo, int32_t prio) {
 void DefaultAI::consider_productionsite_influence(BuildableField& field,
                                                   Coords coords,
                                                   const BuildingObserver& bo) {
-	if (bo.space_consumer_ and game().map().calc_distance(coords, field.coords) < 4)
+	if (bo.space_consumer_ and not bo.plants_trees_ and game().map().calc_distance(
+	       coords, field.coords) < 8)
 		++field.space_consumers_nearby_;
 
 	for (size_t i = 0; i < bo.inputs_.size(); ++i)
