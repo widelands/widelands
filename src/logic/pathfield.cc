@@ -42,13 +42,13 @@ void PathfieldManager::setSize(uint32_t const nrfields)
 
 boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 {
-	container_iterate_const(List, m_list, i) {
-		if (i.current->use_count() == 1) {
-			++(*i.current)->cycle;
-			if (!(*i.current)->cycle) {
-				clear(*i.current);
+	for (boost::shared_ptr<Pathfields>& pathfield : m_list) {
+		if (pathfield.use_count() == 1) {
+			++pathfield->cycle;
+			if (!pathfield->cycle) {
+				clear(pathfield);
 			}
-			return *i.current;
+			return pathfield;
 		}
 	}
 

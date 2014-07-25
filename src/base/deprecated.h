@@ -55,9 +55,6 @@ private:
 };
 
 
-// DEPRECATED: use for (blah : container) syntax.
-#define container_iterate_const(type, container, i) for (wl_const_range<type> i(container); i; ++i)
-
 // DEPRECATED: leads to unsafe code. Instead use upcast() or is_a() to check at
 // runtime for the type you are expecting.
 template<typename Derived, typename Base> Derived & ref_cast(Base & base) {
