@@ -5,18 +5,7 @@ error_msg = "Do not use operator synonyms, e.g. use \"&&\" rather than \"and\"."
 
 strip_comments_and_strings = True
 
-regexp = (
-		r"""(\Wand(\W|$)"""
-		r"""|\Wand_eq(\W|$)"""
-		r"""|\Wbitand(\W|$)"""
-		r"""|\Wor(\W|$)"""
-		r"""|\Wor_eq(\W|$)"""
-		r"""|\Wxor(\W|$)"""
-		r"""|\Wxor_eq(\W|$)"""
-		r"""|\Wnot(\W|$)"""
-		r"""|\Wnot_eq(\W|$)"""
-		r"""|\Wcompl(\W|$))"""
-	)
+regexp = r"""(\b(and|and_eq|bitand|or|or_eq|xor|xor_eq|not|not_eq|compl)\b)"""
 
 forbidden = [
     "if (foo == 0 and bar > 1)",
