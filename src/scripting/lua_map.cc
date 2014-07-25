@@ -2756,13 +2756,13 @@ int L_Warehouse::set_##type##s(lua_State * L) { \
 	const Tribe_Descr & tribe = wh->owner().tribe(); \
 	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
-	container_iterate_const(btype##sMap, setpoints, i) { \
-		int32_t d = i.current->second - \
-			wh->get_##type##s().stock(i.current->first); \
+	for (btype##sMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) { \
+		int32_t d = i->second - \
+			wh->get_##type##s().stock(i->first); \
 		if (d < 0) \
-			wh->remove_##type##s(i.current->first, -d); \
+			wh->remove_##type##s(i->first, -d); \
 		else if (d > 0) \
-			wh->insert_##type##s(i.current->first, d); \
+			wh->insert_##type##s(i->first, d); \
 	} \
 	return 0; \
 }
@@ -2784,9 +2784,9 @@ int L_Warehouse::get_##type##s(lua_State * L) { \
 		lua_pushuint32(L, wh->get_##type##s().stock(*set.begin())); \
 	else { \
 		lua_newtable(L); \
-		container_iterate_const(btype##sSet, set, i) { \
-			lua_pushstring(L, tribe.get_##type##_descr(*i.current)->name()); \
-			lua_pushuint32(L, wh->get_##type##s().stock(*i.current)); \
+		for (btype##sSet::iterator i = set.begin(); i != set.end(); ++i) { \
+			lua_pushstring(L, tribe.get_##type##_descr(*i)->name()); \
+			lua_pushuint32(L, wh->get_##type##s().stock(*i)); \
 			lua_rawset(L, -3); \
 		} \
 	} \
