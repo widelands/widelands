@@ -507,19 +507,13 @@ void Building::destroy(Editor_Game_Base & egbase)
 std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
 
-	std::string formatme = std::string(format);
-	for (std::string::iterator format_iter = formatme.begin(); format_iter != formatme.end();++format_iter) {
+	for (std::string::const_iterator format_iter = format.begin(); format_iter != format.end();++format_iter) {
 
 		if (*format_iter == '%') {
-
-			// /begin unterminated format sequence
-			++(*format_iter);
-			if (format_iter == formatme.end()) {
+			if (++format_iter == format.end()) { // unterminated format sequence
 				result << '%';
 				break;
 			}
-			--(*format_iter);
-			// /end unterminated format sequence
 
 			switch (*format_iter) {
 			FORMAT('%', '%');
