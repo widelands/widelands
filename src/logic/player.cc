@@ -348,8 +348,8 @@ Message_Id Player::add_message_with_timeout
 	Coords      const position = m   .position    ();
 	container_iterate_const(MessageQueue, messages(), i)
 		if
-			(i.current->second->sender() == m.sender()		&&
-			 gametime < i.current->second->sent() + timeout	&&
+			(i.current->second->sender() == m.sender()      &&
+			 gametime < i.current->second->sent() + timeout &&
 			 map.calc_distance(i.current->second->position(), position) <= radius)
 		{
 			delete &m;
@@ -734,7 +734,7 @@ void Player::_enhance_or_dismantle
 	(Building * building, Building_Index const index_of_new_building)
 {
 	if (&building->owner() ==
-	    this &&(index_of_new_building == INVALID_INDEX ||
+	    this && (index_of_new_building == INVALID_INDEX ||
 			building->descr().enhancement() == index_of_new_building)) {
 		Building::FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();

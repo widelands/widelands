@@ -207,7 +207,7 @@ void Button::draw(RenderTarget & dst)
 	RGBAColor black(0, 0, 0, 255);
 
 	// m_permpressed is true, we invert the behaviour on m_pressed
-	bool draw_pressed = m_permpressed ? 	!(m_pressed && m_highlighted)
+	bool draw_pressed = m_permpressed ?    !(m_pressed && m_highlighted)
 	                                  :     (m_pressed && m_highlighted);
 
 	if (!m_flat) {

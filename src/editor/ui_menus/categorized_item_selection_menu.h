@@ -145,7 +145,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
 	//  FIXME usage comment for get_key_state.
 	const bool multiselect = get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
-	if (!t and(!multiselect || tool_->get_nr_enabled() == 1))
+	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
 		checkboxes_[n]->set_state(true);
 	else {
 		if (!multiselect) {

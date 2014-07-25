@@ -1463,7 +1463,7 @@ void WLApplication::mainmenu_multiplayer()
 				case Fullscreen_Menu_NetSetupLAN::JOINGAME: {
 					IPaddress peer;
 
-					if (not host_address)
+					if (!host_address)
 						throw warning
 							("Invalid Address", "%s",
 							 _("The address of the game server is invalid"));
