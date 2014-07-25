@@ -598,7 +598,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 			WorkerList & soldiers = m_incorporated_workers[ware];
 
 			uint32_t total_heal = descr().get_heal_per_second();
-			// Do not use container_iterate, as we plan to erase some
+			// Using an explicit iterator, as we plan to erase some
 			// of those guys
 			for
 				(WorkerList::iterator it = soldiers.begin();

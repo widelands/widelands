@@ -1538,11 +1538,12 @@ bool DefaultAI::construct_roads(int32_t gametime) {
 bool DefaultAI::improve_roads(int32_t gametime) {
 	// Remove flags of dead end roads, as long as no more wares are stored on them
 	for (EconomyObserver* eco_obs : economies) {
-		container_iterate(std::list<Flag const*>, eco_obs->flags, j) {
-
-			if ((*j.current)->is_dead_end() && (*j.current)->current_wares() == 0) {
-				game().send_player_bulldoze(*const_cast<Flag*>((*j.current)));
-				j.current = eco_obs->flags.erase(j.current);
+		for (std::list<Flag const*>::iterator flag_iter = eco_obs->flags.begin();
+			  flag_iter != eco_obs->flags.end();
+			  ++flag_iter) {
+			if ((*flag_iter)->is_dead_end() && (*flag_iter)->current_wares() == 0) {
+				game().send_player_bulldoze(*const_cast<Flag*>(*flag_iter));
+				flag_iter = eco_obs->flags.erase(flag_iter);
 				return true;
 			}
 		}
@@ -1672,19 +1673,21 @@ bool DefaultAI::connect_flag_to_another_economy(const Flag& flag) {
 // adds alternative ways to already existing ones
 bool DefaultAI::improve_transportation_ways(const Flag& flag) {
 	// First of all try to remove old building flags to clean up the road web if possible
-	container_iterate(std::list<Widelands::Coords>, flags_to_be_removed, i) {
+	for (std::list<Widelands::Coords>::iterator coords_iter = flags_to_be_removed.begin();
+		  coords_iter != flags_to_be_removed.end();
+		  ++coords_iter) {
 		// Maybe the flag was already removed?
-		FCoords f = game().map().get_fcoords(*(i.current));
+		FCoords f = game().map().get_fcoords(*(coords_iter));
 
 		if (upcast(Flag, other_flag, f.field->get_immovable())) {
 			// Check if building is dismantled, but don't waste precious wares
 			if (!other_flag->get_building() && other_flag->current_wares() == 0) {
 				game().send_player_bulldoze(*other_flag);
-				flags_to_be_removed.erase(i.current);
+				flags_to_be_removed.erase(coords_iter);
 				break;
 			}
 		} else {
-			flags_to_be_removed.erase(i.current);
+			flags_to_be_removed.erase(coords_iter);
 			break;
 		}
 	}
@@ -1761,12 +1764,14 @@ bool DefaultAI::check_economies() {
 		get_economy_observer(flag.economy())->flags.push_back(&flag);
 	}
 
-	container_iterate(std::list<EconomyObserver*>, economies, i) {
+	for (std::list<EconomyObserver*>::iterator obs_iter = economies.begin();
+		  obs_iter != economies.end();
+		  ++obs_iter) {
 		// check if any flag has changed its economy
-		std::list<Flag const*>& fl = (*i.current)->flags;
+		std::list<Flag const*>& fl = (*obs_iter)->flags;
 
 		for (std::list<Flag const*>::iterator j = fl.begin(); j != fl.end();) {
-			if (&(*i.current)->economy != &(*j)->economy()) {
+			if (&(*obs_iter)->economy != &(*j)->economy()) {
 				get_economy_observer((*j)->economy())->flags.push_back(*j);
 				j = fl.erase(j);
 			} else
@@ -1775,9 +1780,9 @@ bool DefaultAI::check_economies() {
 
 		// if there are no more flags in this economy,
 		// we no longer need it's observer
-		if ((*i.current)->flags.empty()) {
-			delete *i.current;
-			economies.erase(i.current);
+		if ((*obs_iter)->flags.empty()) {
+			delete *obs_iter;
+			economies.erase(obs_iter);
 			return true;
 		}
 	}
@@ -2432,17 +2437,21 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 	if (upcast(Building const, building, &pi))
 		lose_building(*building);
 	else if (upcast(Flag const, flag, &pi)) {
-		for (EconomyObserver* temp_observer : economies) {
-			container_iterate(std::list<Flag const*>, temp_observer->flags, j) {
-				if (*j.current == flag) {
-					temp_observer->flags.erase(j.current);
+		for (EconomyObserver* eco_obs : economies) {
+			for (std::list<Flag const*>::iterator flag_iter = eco_obs->flags.begin();
+				  flag_iter != eco_obs->flags.end();
+				  ++flag_iter) {
+				if (*flag_iter == flag) {
+					eco_obs->flags.erase(flag_iter);
 					return;
 				}
 			}
 		}
-		container_iterate(std::list<Flag const*>, new_flags, i) {
-			if (*i.current == flag) {
-				new_flags.erase(i.current);
+		for (std::list<Flag const*>::iterator flag_iter = new_flags.begin();
+			  flag_iter != new_flags.end();
+			  ++flag_iter) {
+			if (*flag_iter == flag) {
+				new_flags.erase(flag_iter);
 				return;
 			}
 		}
