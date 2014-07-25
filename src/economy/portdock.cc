@@ -248,9 +248,12 @@ void PortDock::add_shippingitem(Game & game, WareInstance & ware)
  */
 void PortDock::update_shippingitem(Game & game, WareInstance & ware)
 {
-	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
-		if (it.current->m_object.serial() == ware.serial()) {
-			_update_shippingitem(game, it.current);
+	for (std::vector<ShippingItem>::iterator item_iter = m_waiting.begin();
+		  item_iter != m_waiting.end();
+		  ++item_iter) {
+
+		if (item_iter->m_object.serial() == ware.serial()) {
+			_update_shippingitem(game, item_iter);
 				return;
 		}
 	}
@@ -272,9 +275,12 @@ void PortDock::add_shippingitem(Game & game, Worker & worker)
  */
 void PortDock::update_shippingitem(Game & game, Worker & worker)
 {
-	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
-		if (it.current->m_object.serial() == worker.serial()) {
-			_update_shippingitem(game, it.current);
+	for (std::vector<ShippingItem>::iterator item_iter = m_waiting.begin();
+		  item_iter != m_waiting.end();
+		  ++item_iter) {
+
+		if (item_iter->m_object.serial() == worker.serial()) {
+			_update_shippingitem(game, item_iter);
 				return;
 		}
 	}

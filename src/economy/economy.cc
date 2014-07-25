@@ -299,9 +299,9 @@ void Economy::_remove_flag(Flag & flag)
 	flag.set_economy(nullptr);
 
 	// fast remove
-	container_iterate(Flags, m_flags, i) {
-		if (*i.current == &flag) {
-			*i.current = *(i.get_end() - 1);
+	for (Flags::iterator flag_iter = m_flags.begin(); flag_iter != m_flags.end(); ++flag_iter) {
+		if (*flag_iter == &flag) {
+			*flag_iter = *(m_flags.end() - 1);
 			return m_flags.pop_back();
 		}
 	}

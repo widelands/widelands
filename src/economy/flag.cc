@@ -796,13 +796,15 @@ void Flag::flag_job_request_callback
 
 	assert(w);
 
-	container_iterate(FlagJobs, flag.m_flag_jobs, i) {
-		if (i.current->request == &rq) {
+	for (FlagJobs::iterator flag_iter = flag.m_flag_jobs.begin();
+		  flag_iter != flag.m_flag_jobs.end();
+		  ++flag_iter) {
+		if (flag_iter->request == &rq) {
 			delete &rq;
 
-			w->start_task_program(game, i.current->program);
+			w->start_task_program(game, flag_iter->program);
 
-			flag.m_flag_jobs.erase(i.current);
+			flag.m_flag_jobs.erase(flag_iter);
 			return;
 		}
 	}

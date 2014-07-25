@@ -158,9 +158,13 @@ void ProgressWindow::add_visualization(IProgressVisualization * const instance)
 
 void ProgressWindow::remove_visualization(IProgressVisualization * instance) {
 	VisualizationArray & visualizations = m_visualizations;
-	container_iterate(VisualizationArray, visualizations, i) {
-		if (*i.current == instance) {
-			m_visualizations.erase (i.current);
+
+	for (VisualizationArray::iterator vis_iter = visualizations.begin();
+		  vis_iter != visualizations.end();
+		  ++vis_iter) {
+
+		if (*vis_iter == instance) {
+			m_visualizations.erase (vis_iter);
 			break;
 		}
 	}

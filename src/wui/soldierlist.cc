@@ -218,11 +218,15 @@ void SoldierPanel::think()
 		icon.pos.x = get_w();
 
 		std::vector<Icon>::iterator insertpos = m_icons.begin();
-		container_iterate(std::vector<Icon>, m_icons, icon_it) {
-			if (icon_it.current->row <= icon.row)
-				insertpos = icon_it.current + 1;
 
-			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_it.current->pos.x + m_icon_width);
+		for (std::vector<Icon>::iterator icon_iter = m_icons.begin();
+			  icon_iter != m_icons.end();
+			  ++icon_iter) {
+
+			if (icon_iter->row <= icon.row)
+				insertpos = icon_iter + 1;
+
+			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_iter->pos.x + m_icon_width);
 		}
 
 		icon.cache_health = 0;

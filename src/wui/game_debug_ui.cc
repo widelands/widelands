@@ -412,12 +412,16 @@ void FieldDebugWindow::think()
 		bool toremove = false;
 		std::vector<Widelands::Bob *>::iterator removeIt;
 		// Nested loop :(
-		container_iterate(std::vector<Widelands::Bob *>, bobs, j) {
-			if ((*j.current) && mo && (*j.current)->serial() == mo->serial()) {
+
+		for (std::vector<Widelands::Bob *>::iterator bob_iter = bobs.begin();
+			  bob_iter != bobs.end();
+			  ++bob_iter) {
+
+			if ((*bob_iter) && mo && (*bob_iter)->serial() == mo->serial()) {
 				// Remove from the bob list if we already
 				// have it in our list
 				toremove = true;
-				removeIt = j.current;
+				removeIt = bob_iter;
 				break;
 			}
 		}

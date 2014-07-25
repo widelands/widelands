@@ -115,7 +115,11 @@ void Map_Buildingdata_Data_Packet::Read
 					{
 						Building::Leave_Queue & leave_queue = building.m_leave_queue;
 						leave_queue.resize(fr.Unsigned16());
-						container_iterate(Building::Leave_Queue, leave_queue, i) {
+
+						for (Building::Leave_Queue::iterator queue_iter = leave_queue.begin();
+							  queue_iter != leave_queue.end();
+							  ++queue_iter) {
+
 							if (uint32_t const leaver_serial = fr.Unsigned32())
 								try {
 									//  The check that this worker actually has a
@@ -123,16 +127,16 @@ void Map_Buildingdata_Data_Packet::Read
 									//  Building::load_finish, which is called after the
 									//  worker (with his stack of tasks) has been fully
 									//  loaded.
-									*i.current = &mol.get<Worker>(leaver_serial);
+									*queue_iter = &mol.get<Worker>(leaver_serial);
 								} catch (const _wexception & e) {
 									throw game_data_error
 										("leave queue item #%lu (%u): %s",
 										 static_cast<long int>
-											(i.current - leave_queue.begin()),
+											(queue_iter - leave_queue.begin()),
 										 leaver_serial, e.what());
 								}
 							else
-								*i.current = nullptr;
+								*queue_iter = nullptr;
 						}
 					}
 
@@ -368,10 +372,13 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 
 			const Tribe_Descr & tribe = constructionsite.descr().tribe();
 
-			container_iterate
-				(ConstructionSite::Wares, constructionsite.m_wares, cur)
-					(*cur)->set_callback
+			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.m_wares.begin();
+				  wares_iter != constructionsite.m_wares.end();
+				  ++wares_iter) {
+
+					(*wares_iter)->set_callback
 						(ConstructionSite::wares_queue_callback, &constructionsite);
+			}
 
 			if (packet_version <= 2) {
 				if (fr.Unsigned8()) {
