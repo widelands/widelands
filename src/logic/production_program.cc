@@ -1687,7 +1687,7 @@ ProductionProgram::ProductionProgram(
 	Section& program_s = prof.get_safe_section(_name.c_str());
 	while (Section::Value* const v = program_s.get_next_val()) {
 		ProductionProgram::Action* action;
-		if (not strcmp(v->get_name(), "return"))
+		if (!strcmp(v->get_name(), "return"))
 			action = new ActReturn(v->get_string(), *building);
 		else if (!strcmp(v->get_name(), "call"))
 			action = new ActCall(v->get_string(), *building);
