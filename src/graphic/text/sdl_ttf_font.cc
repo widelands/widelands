@@ -115,7 +115,7 @@ const Surface& SDLTTF_Font::render
 	} else
 		text_surface = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 
-	if (not text_surface)
+	if (!text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
 	return *surface_cache->insert(hash, Surface::create(text_surface), true);

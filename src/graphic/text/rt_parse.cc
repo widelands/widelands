@@ -50,7 +50,7 @@ std::string Attr::get_string() const {
 }
 
 bool Attr::get_bool() const {
-	if (m_value == "true" or m_value == "1" or m_value == "yes")
+	if (m_value == "true" || m_value == "1" || m_value == "yes")
 		return true;
 	return false;
 }
@@ -132,13 +132,13 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 	TagConstraint tc = tcs[m_name];
 
 	for (;;) {
-		if (not tc.text_allowed)
+		if (!tc.text_allowed)
 			ts.skip_ws();
 
 		size_t line = ts.line(), col = ts.col();
 		std::string text = ts.till_any("<");
 		if (text != "") {
-			if (not tc.text_allowed)
+			if (!tc.text_allowed)
 				throw SyntaxError_Impl(line, col, "no text, as only tags are allowed here", text, ts.peek(100));
 			m_childs.push_back(new Child(text));
 		}
@@ -151,7 +151,7 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 		child->parse(ts, tcs, allowed_tags);
 		if (!tc.allowed_childs.count(child->name()))
 			throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
-		if (!allowed_tags.empty() and !allowed_tags.count(child->name()))
+		if (!allowed_tags.empty() && !allowed_tags.count(child->name()))
 			throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 
 		m_childs.push_back(new Child(child));

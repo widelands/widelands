@@ -106,14 +106,16 @@ void NetworkPlayerSettingsBackend::toggle_init(uint8_t id) {
 		return;
 
 	const PlayerSettings & player = settings.players[id];
-	container_iterate_const(std::vector<TribeBasicInfo>, settings.tribes, j)
-		if (j.current->name == player.tribe)
+	for (const TribeBasicInfo& temp_tribeinfo : settings.tribes) {
+		if (temp_tribeinfo.name == player.tribe) {
 			return
 				s->setPlayerInit
 					(id,
 					 (player.initialization_index + 1)
 					 %
-					 j.current->initializations.size());
+					 temp_tribeinfo.initializations.size());
+		}
+	}
 	assert(false);
 }
 

@@ -66,7 +66,7 @@ void GameObjectivesMenu::think() {
 	//  Adjust the list according to the game state.
 	for (const auto& pair : iplayer().game().map().objectives()) {
 		const Objective& obj = *(pair.second);
-		bool should_show = obj.visible() and not obj.done();
+		bool should_show = obj.visible() && !obj.done();
 		uint32_t const list_size = list.size();
 		for (uint32_t j = 0;; ++j)
 			if (j == list_size) {  //  the objective is not in our list
@@ -74,7 +74,7 @@ void GameObjectivesMenu::think() {
 					list.add(obj.descname().c_str(), obj);
 				break;
 			} else if (&list[j] == &obj) {  //  the objective is in our list
-				if (not should_show)
+				if (!should_show)
 					list.remove(j);
 				else if (list[j].descname() != obj.descname() || list[j].descr() != obj.descr()) {
 					// Update
@@ -85,7 +85,7 @@ void GameObjectivesMenu::think() {
 			}
 	}
 	list.sort();
-	if (list.size() and not list.has_selection())
+	if (list.size() && !list.has_selection())
 		list.select(0);
 }
 

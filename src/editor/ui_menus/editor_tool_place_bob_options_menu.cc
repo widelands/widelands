@@ -125,12 +125,12 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked
 	//  TODO(unknown) usage comment for get_key_state.
 	const bool multiselect =
 		get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
-	if (not t and (not multiselect or m_pit.get_nr_enabled() == 1)) {
+	if (!t && (!multiselect || m_pit.get_nr_enabled() == 1)) {
 		m_checkboxes[n]->set_state(true);
 		return;
 	}
 
-	if (not multiselect) {
+	if (!multiselect) {
 		for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
 
 		//  disable all checkboxes

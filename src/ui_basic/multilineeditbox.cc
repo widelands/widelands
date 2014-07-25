@@ -436,7 +436,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			// example ~ + o results in a o with a tilde over it. The ~ is reported
 			// as a 0 on keystroke, the o then as the unicode character. We simply
 			// ignore the 0.
-			if (is_printable(code) and code.unicode) {
+			if (is_printable(code) && code.unicode) {
 				insert(code);
 			}
 			break;

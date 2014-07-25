@@ -207,8 +207,9 @@ Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
 }
 
 Critter_Bob_Descr::~Critter_Bob_Descr() {
-	container_iterate_const(Programs, m_programs, i)
-		delete i.current->second;
+	for (std::pair<std::string, Critter_BobProgram *> program : m_programs) {
+		delete program.second;
+	}
 }
 
 bool Critter_Bob_Descr::is_swimming() const {

@@ -85,9 +85,9 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 	uint8_t bpp = surface->format->BytesPerPixel;
 
 	if
-		(surface->format->palette or (surface->format->colorkey > 0) or
-		 m_tex_w != static_cast<uint32_t>(surface->w) or
-		 m_tex_h != static_cast<uint32_t>(surface->h) or
+		(surface->format->palette || (surface->format->colorkey > 0) ||
+		 m_tex_w != static_cast<uint32_t>(surface->w) ||
+		 m_tex_h != static_cast<uint32_t>(surface->h) ||
 		 (bpp != 3 && bpp != 4))
 	{
 		SDL_Surface * converted = SDL_CreateRGBSurface
@@ -109,7 +109,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 
 	if (bpp == 4) {
 		if
-			(fmt.Rmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
+			(fmt.Rmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
 			 fmt.Bmask == 0x00ff0000)
 		{
 			if (fmt.Amask == 0xff000000) {
@@ -121,7 +121,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
 			}
 		} else if
-			(fmt.Bmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
+			(fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
 			 fmt.Rmask == 0x00ff0000)
 		{
 			if (fmt.Amask == 0xff000000) {
@@ -136,12 +136,12 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 			throw wexception("OpenGL: Unknown pixel format");
 	} else  if (bpp == 3) {
 		if
-			(fmt.Rmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
+			(fmt.Rmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
 			 fmt.Bmask == 0x00ff0000)
 		{
 			pixels_format = GL_RGB;
 		} else if
-			(fmt.Bmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
+			(fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
 			 fmt.Rmask == 0x00ff0000)
 		{
 			pixels_format = GL_BGR;

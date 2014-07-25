@@ -281,7 +281,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual void setPlayerNumber(uint8_t const number) override {
 		if
-			(number == UserSettings::none() or
+			(number == UserSettings::none() ||
 			 number < h->settings().players.size())
 			h->setPlayerNumber(number);
 	}
@@ -765,7 +765,7 @@ void NetHost::run(bool const autorun)
 		// Setup by the users
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
 
-		while (not d->dedicated_start) {
+		while (!d->dedicated_start) {
 			handle_network();
 			// TODO(unknown) this should be improved.
 #ifndef _WIN32
@@ -866,7 +866,7 @@ void NetHost::run(bool const autorun)
 				igb =
 					new Interactive_Player
 						(game, g_options.pull_section("global"),
-						pn, d->settings.scenario, true);
+						pn, true);
 			} else
 				igb =
 					new Interactive_Spectator
@@ -1303,7 +1303,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 }
 
 void NetHost::dserver_send_maps_and_saves(Client & client) {
-	assert (not d->game);
+	assert (!d->game);
 
 	if (d->settings.maps.empty()) {
 		// Read in maps
@@ -1314,8 +1314,8 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
 			const filenameset_t & gamefiles = files;
-			container_iterate_const(filenameset_t, gamefiles, i) {
-				char const * const name = i.current->c_str();
+			for (const std::string& temp_filenames : gamefiles) {
+				char const * const name = temp_filenames.c_str();
 				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 				if (ml) {
 					map.set_filename(name);
@@ -1346,8 +1346,8 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		Widelands::Game game;
 		Widelands::Game_Preload_Data_Packet gpdp;
 		const filenameset_t & gamefiles = files;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
+		for (const std::string& temp_filenames : gamefiles) {
+			char const * const name = temp_filenames.c_str();
 			try {
 				Widelands::Game_Loader gl(name, game);
 				gl.preload_game(gpdp);
@@ -1646,10 +1646,10 @@ void NetHost::setPlayerTribe(uint8_t const number, const std::string & tribe, bo
 		actual_tribe = d->settings.tribes.at(random).name;
 	}
 
-	container_iterate_const(std::vector<TribeBasicInfo>, d->settings.tribes, i)
-		if (i.current->name == player.tribe) {
+	for (const TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
+		if (temp_tribeinfo.name == player.tribe) {
 			player.tribe = actual_tribe;
-			if (i.current->initializations.size() <= player.initialization_index)
+			if (temp_tribeinfo.initializations.size() <= player.initialization_index)
 				player.initialization_index = 0;
 
 			//  broadcast changes
@@ -1660,6 +1660,7 @@ void NetHost::setPlayerTribe(uint8_t const number, const std::string & tribe, bo
 			broadcast(s);
 			return;
 		}
+	}
 	log
 		("Player %u attempted to change to tribe %s; not a valid tribe\n",
 		 number, tribe.c_str());
@@ -1675,9 +1676,9 @@ void NetHost::setPlayerInit(uint8_t const number, uint8_t const index)
 	if (player.initialization_index == index)
 		return;
 
-	container_iterate_const(std::vector<TribeBasicInfo>, d->settings.tribes, i)
-		if (i.current->name == player.tribe) {
-			if (index < i.current->initializations.size()) {
+	for (const TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
+		if (temp_tribeinfo.name == player.tribe) {
+			if (index < temp_tribeinfo.initializations.size()) {
 				player.initialization_index = index;
 
 				//  broadcast changes
@@ -1693,6 +1694,7 @@ void NetHost::setPlayerInit(uint8_t const number, uint8_t const index)
 					 "for player %u.\n", index, number);
 			return;
 		}
+	}
 	assert(false);
 }
 
@@ -1918,9 +1920,11 @@ void NetHost::setPaused(bool /* paused */)
 // Send the packet to all properly connected clients
 void NetHost::broadcast(SendPacket & packet)
 {
-	container_iterate_const(std::vector<Client>, d->clients, i)
-		if (i.current->playernum != UserSettings::notConnected())
-			packet.send(i.current->sock);
+	for (const Client& client : d->clients) {
+		if (client.playernum != UserSettings::notConnected()) {
+			packet.send(client.sock);
+		}
+	}
 }
 
 void NetHost::writeSettingMap(SendPacket & packet)
@@ -2014,7 +2018,7 @@ std::string NetHost::getComputerPlayerName(uint8_t const playernum)
  */
 bool NetHost::haveUserName(const std::string & name, uint8_t ignoreplayer) {
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
-		if (i != ignoreplayer and d->settings.users.at(i).name == name)
+		if (i != ignoreplayer && d->settings.users.at(i).name == name)
 			return true;
 
 	// Computer players are not handled like human users,
@@ -2022,7 +2026,7 @@ bool NetHost::haveUserName(const std::string & name, uint8_t ignoreplayer) {
 	if (ignoreplayer < d->settings.users.size())
 		ignoreplayer = d->settings.users.at(ignoreplayer).position;
 	for (uint32_t i = 0; i < d->settings.players.size(); ++i)
-		if (i != ignoreplayer and d->settings.players.at(i).name == name)
+		if (i != ignoreplayer && d->settings.players.at(i).name == name)
 			return true;
 
 	return false;

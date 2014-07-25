@@ -167,7 +167,7 @@ public:
 			lua_xmove(t, L_, 1);
 		}
 
-		if (not lua_isthread(L_, -1)) {
+		if (!lua_isthread(L_, -1)) {
 			lua_pop(L_, 1);
 			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a function value.");
 		}

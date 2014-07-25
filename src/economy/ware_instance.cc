@@ -230,7 +230,7 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 */
 void WareInstance::set_economy(Economy * const e)
 {
-	if (m_descr_index == INVALID_INDEX or m_economy == e)
+	if (m_descr_index == INVALID_INDEX || m_economy == e)
 		return;
 
 	if (m_economy)

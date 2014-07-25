@@ -47,7 +47,6 @@ public:
 		(Widelands::Game &,
 		 Section         & global_s,
 		 Widelands::Player_Number,
-		 bool              scenario,
 		 bool              multiplayer);
 
 	~Interactive_Player();

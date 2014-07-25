@@ -162,7 +162,7 @@ namespace {
 	}
 
 #define CHECK_TRAILING_BYTES(file, filename)                                                       \
-	if (not(file).EndOfFile())                                                                      \
+	if (!(file).EndOfFile())                                                                      \
 		throw game_data_error("Map_Players_View_Data_Packet::Read: player %u:"                       \
 		                      "Found %lu trailing bytes in \"%s\"",                                  \
 		                      plnum,                                                                 \
@@ -171,7 +171,7 @@ namespace {
 
 // TODO(unknown) Legacy code deprecated since build18
 template <uint8_t const Size> struct BitInBuffer {
-	static_assert(Size == 1 or Size == 2 or Size == 4, "Unexpected Size.");
+	static_assert(Size == 1 || Size == 2 || Size == 4, "Unexpected Size.");
 	BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {
 		m_fr = fr;
 	}
@@ -991,10 +991,10 @@ inline static void write_unseen_immovable
 {
 	Map_Object_Descr const * const map_object_descr = map_object_data->map_object_descr;
 	const Player::Constructionsite_Information & csi = map_object_data->csi;
-	assert(not Road::IsRoadDescr(map_object_descr));
+	assert(!Road::IsRoadDescr(map_object_descr));
 	uint8_t immovable_kind = 255;
 
-	if (not map_object_descr)
+	if (!map_object_descr)
 		immovable_kind = 0;
 	else if (upcast(Immovable_Descr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
@@ -1094,7 +1094,7 @@ void Map_Players_View_Data_Packet::Write
 
 					vision_file.Unsigned32(f_player_field.vision);
 
-					if (not f_seen) {
+					if (!f_seen) {
 
 						if (f_everseen) { //  node
 							unseen_times_file.Unsigned32
@@ -1119,7 +1119,7 @@ void Map_Players_View_Data_Packet::Write
 						if
 							//  the player does not see the D triangle now but has
 							//  seen it
-							(not bl_seen & not br_seen &
+							(!bl_seen & !br_seen &
 							 (f_everseen | bl_everseen | br_everseen))
 						{
 							terrains_file.Unsigned8(f_player_field.terrains.d);
@@ -1130,7 +1130,7 @@ void Map_Players_View_Data_Packet::Write
 						if
 							//  the player does not see the R triangle now but has
 							//  seen it
-							(not br_seen & not  r_seen &
+							(!br_seen & !r_seen &
 							 (f_everseen | br_everseen |  r_everseen))
 						{
 							terrains_file.Unsigned8(f_player_field.terrains.r);
@@ -1140,11 +1140,11 @@ void Map_Players_View_Data_Packet::Write
 						}
 
 						//  edges
-						if (not bl_seen & (f_everseen | bl_everseen))
+						if (!bl_seen & (f_everseen | bl_everseen))
 							roads_file.Unsigned8(f_player_field.road_sw());
-						if (not br_seen & (f_everseen | br_everseen))
+						if (!br_seen & (f_everseen | br_everseen))
 							roads_file.Unsigned8(f_player_field.road_se());
-						if (not  r_seen & (f_everseen |  r_everseen))
+						if (!r_seen & (f_everseen |  r_everseen))
 							roads_file.Unsigned8(f_player_field.road_e ());
 					}
 
