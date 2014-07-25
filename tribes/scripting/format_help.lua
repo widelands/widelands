@@ -454,6 +454,7 @@ function building_help_building_line(ware_description, amount)
 		result = result .. image_line(image, imgperline)
 		temp_amount = temp_amount - imgperline
 	end
+	-- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 	result = image_line(image, temp_amount, p(_"%1$dx %2$s":bformat(amount, ware_description.descname))) .. result
 	return result
 
