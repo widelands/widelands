@@ -281,7 +281,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				while ((m->text[--m->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m->caret;; m->caret = new_caret)
-						if (0 == new_caret or isspace(m->text[--new_caret]))
+						if (0 == new_caret || isspace(m->text[--new_caret]))
 							break;
 
 				check_caret();
@@ -303,7 +303,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					for (uint32_t new_caret = m->caret;; ++new_caret)
 						if
 							(new_caret == m->text.size()
-							 or
+							 ||
 							 isspace(m->text[new_caret - 1]))
 						{
 							m->caret = new_caret;
@@ -390,7 +390,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			// example ~ + o results in a o with a tilde over it. The ~ is reported
 			// as a 0 on keystroke, the o then as the unicode character. We simply
 			// ignore the 0.
-			if (is_printable(code) and code.unicode) {
+			if (is_printable(code) && code.unicode) {
 				insert(code);
 				return true;
 			}

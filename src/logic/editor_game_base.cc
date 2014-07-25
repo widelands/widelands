@@ -70,7 +70,7 @@ ibase_             (nullptr),
 map_               (nullptr),
 lasttrackserial_   (0)
 {
-	if (not lua_) // TODO(SirVer): this is sooo ugly, I can't say
+	if (!lua_) // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 
 	g_sound_handler.egbase_ = this;
@@ -82,9 +82,9 @@ Editor_Game_Base::~Editor_Game_Base() {
 	delete map_;
 	delete player_manager_.release();
 
-	container_iterate_const(Tribe_Vector, tribes_, i)
-		delete *i.current;
-
+	for (Tribe_Descr* tribe_descr : tribes_) {
+		delete tribe_descr;
+	}
 	if (g_gr) { // dedicated does not use the sound_handler
 		assert(this == g_sound_handler.egbase_);
 		g_sound_handler.egbase_ = nullptr;
@@ -150,9 +150,11 @@ Player * Editor_Game_Base::add_player
 const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 	(const std::string & tribe)
 {
-	container_iterate_const(Tribe_Vector, tribes_, i)
-		if ((*i.current)->name() == tribe)
-			return **i.current;
+	for (const Tribe_Descr* tribe_descr : tribes_) {
+		if (tribe_descr->name() == tribe) {
+			return *tribe_descr;
+		}
+	}
 
 	Tribe_Descr & result = *new Tribe_Descr(tribe, *this);
 	//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
@@ -198,7 +200,7 @@ void Editor_Game_Base::inform_players_about_ownership
 void Editor_Game_Base::inform_players_about_immovable
 	(Map_Index const i, Map_Object_Descr const * const descr)
 {
-	if (not Road::IsRoadDescr(descr))
+	if (!Road::IsRoadDescr(descr))
 		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
 			Player::Field & player_field = p->m_fields[i];
 			if (1 < player_field.vision) {
@@ -249,7 +251,7 @@ void Editor_Game_Base::postload()
 		if
 			(pid <= MAX_PLAYERS
 			 ||
-			 not dynamic_cast<const Game *>(this))
+			 !dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
 			tribes_[id]->postload(*this);
@@ -273,9 +275,9 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 {
 	loader_ui.step(_("Loading world data"));
 
-	container_iterate_const(Tribe_Vector, tribes_, i) {
+	for (Tribe_Descr* tribe_descr : tribes_) {
 		loader_ui.stepf(_("Loading tribes"));
-		(*i.current)->load_graphics();
+		tribe_descr->load_graphics();
 	}
 
 	// TODO(unknown): load player graphics? (maybe)
@@ -695,7 +697,7 @@ void Editor_Game_Base::do_conquer_area
 	assert    (player_area.player_number <= map().get_nrplayers());
 	assert    (preferred_player          <= map().get_nrplayers());
 	assert(preferred_player != player_area.player_number);
-	assert(not conquer || not preferred_player);
+	assert(!conquer || !preferred_player);
 	Player & conquering_player = player(player_area.player_number);
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
@@ -709,12 +711,12 @@ void Editor_Game_Base::do_conquer_area
 			//  adds the influence
 			Military_Influence new_influence_modified = conquering_player.military_influence(index) +=
 			   influence;
-			if (owner && not conquer_guarded_location_by_superior_influence)
+			if (owner && !conquer_guarded_location_by_superior_influence)
 				new_influence_modified = 1;
 			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if (not(conquering_player.military_influence(index) -= influence) &&
+		} else if (!(conquering_player.military_influence(index) -= influence) &&
 		           owner == player_area.player_number) {
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if
@@ -768,31 +770,31 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 	//  find all immovables that need fixing
 	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
 
-	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
-		PlayerImmovable & imm =
-			ref_cast<PlayerImmovable, BaseImmovable>(*i.current->object);
+	for (const ImmovableFound& temp_imm : immovables) {
+		upcast(PlayerImmovable, imm, temp_imm.object);
 		if
-			(not
-			 m[i.current->coords].is_interior(imm.owner().player_number()))
+			(!m[temp_imm.coords].is_interior(imm->owner().player_number())) {
 			if
-				(std::find(burnlist.begin(), burnlist.end(), &imm)
+				(std::find(burnlist.begin(), burnlist.end(), imm)
 				 ==
-				 burnlist.end())
-				burnlist.push_back(&imm);
+				 burnlist.end()) {
+				burnlist.push_back(imm);
+			}
+		}
 	}
 
 	//  fix all immovables
 	upcast(Game, game, this);
-	container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i) {
-		if (upcast(Building, building, *i.current))
+	for (PlayerImmovable * temp_imm : burnlist) {
+		if (upcast(Building, building, temp_imm))
 			building->set_defeating_player(area.player_number);
-		else if (upcast(Flag,     flag,     *i.current))
+		else if (upcast(Flag, flag, temp_imm))
 			if (Building * const flag_building = flag->get_building())
 				flag_building->set_defeating_player(area.player_number);
 		if (game)
-			(*i.current)->schedule_destroy(*game);
+			temp_imm->schedule_destroy(*game);
 		else
-			(*i.current)->remove(*this);
+			temp_imm->remove(*this);
 	}
 }
 

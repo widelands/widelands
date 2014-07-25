@@ -136,7 +136,7 @@ void Map_Saver::save() {
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
 		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
 		for (Building_Index i = 0; i < nr_buildings; ++i)
-			if (not player->is_building_type_allowed(i)) {
+			if (!player->is_building_type_allowed(i)) {
 				log("Writing Allowed Building Types Data ... ");
 				Map_Allowed_Building_Types_Data_Packet p;
 				p                                  .Write(m_fs, m_egbase, *m_mos);

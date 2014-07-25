@@ -79,7 +79,6 @@ Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
 	 Widelands::Player_Number const plyn,
-	 bool                     const scenario,
 	 bool                     const multiplayer)
 	:
 	Interactive_GameBase (_game, global_s, NONE, multiplayer, multiplayer),
@@ -229,7 +228,7 @@ void Interactive_Player::think()
 	if (m_flag_to_connect) {
 		Widelands::Field & field = egbase().map()[m_flag_to_connect];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-			if (not flag->has_road() and not is_building_road())
+			if (!flag->has_road() && !is_building_road())
 				if (m_auto_roadbuild_mode) {
 					//  There might be a fieldaction window open, showing a button
 					//  for roadbuilding. If that dialog remains open so that the
@@ -322,7 +321,7 @@ void Interactive_Player::toggle_chat() {
 
 bool Interactive_Player::can_see(Widelands::Player_Number const p) const
 {
-	return p == player_number() or player().see_all();
+	return p == player_number() || player().see_all();
 }
 bool Interactive_Player::can_act(Widelands::Player_Number const p) const
 {

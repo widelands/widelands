@@ -108,24 +108,24 @@ void Map_Object_Packet::Read
 
 void Map_Object_Packet::LoadFinish() {
 	// load_pointer stage
-	container_iterate_const(LoaderSet, loaders, i) {
+	for (Map_Object::Loader* temp_loader : loaders) {
 		try {
-			(*i.current)->load_pointers();
-		} catch (const std::exception& e) {
-			throw wexception(
-				"load_pointers for %s: %s", (*i.current)->get_object()->descr().type_name(), e.what());
+			temp_loader->load_pointers();
+		} catch (const std::exception & e) {
+			throw wexception("load_pointers for %s: %s",
+				temp_loader->get_object()->descr().type_name(),
+				e.what());
 		}
 	}
 
 	// load_finish stage
-	container_iterate_const(LoaderSet, loaders, i) {
+	for (Map_Object::Loader* temp_loader : loaders) {
 		try {
-			(*i.current)->load_finish();
-		} catch (const std::exception& e) {
-			throw wexception(
-				"load_finish for %s: %s", (*i.current)->get_object()->descr().type_name(), e.what());
+			temp_loader->load_finish();
+		} catch (const std::exception & e) {
+			throw wexception("load_finish for %s: %s", temp_loader->get_object()->descr().type_name(), e.what());
 		}
-		(*i.current)->mol().mark_object_as_loaded(*(*i.current)->get_object());
+		temp_loader->mol().mark_object_as_loaded(*temp_loader->get_object());
 	}
 }
 

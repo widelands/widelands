@@ -91,7 +91,7 @@ Building_Descr::Building_Descr
 	}
 
 	m_helptext_script = directory + "/help.lua";
-	if (not g_fs->FileExists(m_helptext_script))
+	if (!g_fs->FileExists(m_helptext_script))
 		m_helptext_script = "";
 
 	// Parse build options
@@ -294,7 +294,7 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 		}
 
 		Bob::State const* const state = worker.get_state(Worker::taskLeavebuilding);
-		if (not state) {
+		if (!state) {
 			log
 				("WARNING: worker %u is in the leave queue of building %u but "
 				 "does not have a leavebuilding task! Removing from queue.\n",
@@ -340,7 +340,7 @@ uint32_t Building::get_playercaps() const {
 	const Building_Descr & tmp_descr = descr();
 	if (tmp_descr.is_destructible()) {
 		caps |= PCap_Bulldoze;
-		if (tmp_descr.is_buildable() or tmp_descr.is_enhanced())
+		if (tmp_descr.is_buildable() || tmp_descr.is_enhanced())
 			caps |= PCap_Dismantle;
 	}
 	if (tmp_descr.enhancement() != INVALID_INDEX)
@@ -387,7 +387,7 @@ void Building::init(Editor_Game_Base & egbase)
 	map.get_brn(m_position, &neighb);
 	{
 		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
-		if (not flag)
+		if (!flag)
 			flag =
 				new Flag (egbase, owner(), neighb);
 		m_flag = flag;
@@ -505,13 +505,18 @@ void Building::destroy(Editor_Game_Base & egbase)
 #define FORMAT(key, value) case key: result << value; break
 std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
-	container_iterate_const(std::string, format, i)
-		if (*i.current == '%') {
-			if (i.advance().empty()) { //  unterminated format sequence
+
+	for (std::string::const_iterator format_iter = format.begin();
+		  format_iter != format.end();
+		  ++format_iter) {
+
+		if (*format_iter == '%') {
+			if (++format_iter == format.end()) { // unterminated format sequence
 				result << '%';
 				break;
 			}
-			switch (*i.current) {
+
+			switch (*format_iter) {
 			FORMAT('%', '%');
 			FORMAT('i', serial());
 			FORMAT('t', get_statistics_string());
@@ -548,11 +553,12 @@ std::string Building::info_string(const std::string & format) {
 					result << productionsite->result_string();
 				break;
 			default: //  invalid format sequence
-				result << '%' << *i.current;
+				result << '%' << *format_iter;
 				break;
 			}
 		} else
-			result << *i.current;
+			result << *format_iter;
+	}
 	const std::string result_str = result.str();
 	return result_str.empty() ? result_str : as_uifont(result_str);
 }
@@ -833,7 +839,7 @@ void Building::log_general_info(const Editor_Game_Base & egbase) {
 
 
 void Building::add_worker(Worker & worker) {
-	if (not get_workers().size()) {
+	if (!get_workers().size()) {
 		if (worker.descr().name() != "builder")
 			set_seeing(true);
 	}
@@ -844,7 +850,7 @@ void Building::add_worker(Worker & worker) {
 
 void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (not get_workers().size())
+	if (!get_workers().size())
 		set_seeing(false);
 	workers_changed();
 }
@@ -913,8 +919,8 @@ void Building::send_message
 	rt_description += img;
 	{
 		std::string::iterator it = rt_description.end() - 1;
-		for (; it != rt_description.begin() and *it != '?'; --it) {}
-		for (;                                  *it == '?'; --it)
+		for (; it != rt_description.begin() && *it != '?'; --it) {}
+		for (;                                 *it == '?'; --it)
 			*it = '0';
 	}
 	rt_description += "><p font-size=14 font-face=DejaVuSerif>";

@@ -195,7 +195,7 @@ bool Deserializer::read(TCPsocket sock)
 
 	queue.insert(queue.end(), &buffer[0], &buffer[bytes]);
 
-	return queue.size() < 2 or 2 <= (queue[0] << 8 | queue[1]);
+	return queue.size() < 2 || 2 <= (queue[0] << 8 | queue[1]);
 }
 
 /**

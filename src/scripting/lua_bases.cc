@@ -127,7 +127,7 @@ int L_EditorGameBase::get_players(lua_State * L) {
 	uint32_t idx = 1;
 	for (Player_Number i = 1; i <= MAX_PLAYERS; i++) {
 		Player * rv = egbase.get_player(i);
-		if (not rv)
+		if (!rv)
 			continue;
 
 		lua_pushuint32(L, idx++);
@@ -349,7 +349,7 @@ int L_PlayerBase::place_flag(lua_State * L) {
 		force = luaL_checkboolean(L, 3);
 
 	Flag * f;
-	if (not force) {
+	if (!force) {
 		f = get(L, get_egbase(L)).build_flag(c->fcoords(L));
 		if (!f)
 			report_error(L, "Couldn't build flag!");
@@ -398,22 +398,22 @@ int L_PlayerBase::place_road(lua_State * L) {
 	for (int32_t i = 3; i <= lua_gettop(L); i++) {
 		std::string d = luaL_checkstring(L, i);
 
-		if (d == "ne" or d == "tr") {
+		if (d == "ne" || d == "tr") {
 			path.append(map, 1);
 			map.get_trn(current, &current);
-		} else if (d == "e" or d == "r") {
+		} else if (d == "e" || d == "r") {
 			path.append(map, 2);
 			map.get_rn(current, &current);
-		} else if (d == "se" or d == "br") {
+		} else if (d == "se" || d == "br") {
 			path.append(map, 3);
 			map.get_brn(current, &current);
-		} else if (d == "sw" or d == "bl") {
+		} else if (d == "sw" || d == "bl") {
 			path.append(map, 4);
 			map.get_bln(current, &current);
-		} else if (d == "w" or d == "l") {
+		} else if (d == "w" || d == "l") {
 			path.append(map, 5);
 			map.get_ln(current, &current);
-		} else if (d == "nw" or d == "tl") {
+		} else if (d == "nw" || d == "tl") {
 			path.append(map, 6);
 			map.get_tln(current, &current);
 		} else
@@ -438,11 +438,11 @@ int L_PlayerBase::place_road(lua_State * L) {
 		r = &get(L, egbase).force_road(path);
 	} else {
 		BaseImmovable * bi = map.get_immovable(current);
-		if (!bi or bi->descr().type() != Map_Object_Type::FLAG) {
+		if (!bi || bi->descr().type() != Map_Object_Type::FLAG) {
 			if (!get(L, egbase).build_flag(current))
 				report_error(L, "Could not place end flag!");
 		}
-		if (bi and bi == starting_flag)
+		if (bi && bi == starting_flag)
 		  report_error(L, "Cannot build a closed loop!");
 
 		r = get(L, egbase).build_road(path);
@@ -508,7 +508,7 @@ int L_PlayerBase::place_building(lua_State * L) {
 		b = get(L, get_egbase(L)).build
 			(c->coords(), i, constructionsite, former_buildings);
 	}
-	if (not b)
+	if (!b)
 		report_error(L, "Couldn't place building!");
 
 	LuaMap::upcasted_map_object_to_lua(L, b);

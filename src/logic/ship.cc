@@ -688,8 +688,8 @@ void Ship::set_economy(Game & game, Economy * e) {
 	// we rely that wares really get reassigned our economy.
 
 	m_economy = e;
-	container_iterate(std::vector<ShippingItem>, m_items, it) {
-		it->set_economy(game, e);
+	for (ShippingItem& shipping_item : m_items) {
+		shipping_item.set_economy(game, e);
 	}
 }
 
@@ -880,11 +880,11 @@ void Ship::log_general_info(const Editor_Game_Base & egbase)
 		 m_destination.serial(), m_lastdock.serial(),
 		 m_items.size());
 
-	container_iterate(std::vector<ShippingItem>, m_items, it) {
+	for (const ShippingItem& shipping_item : m_items) {
 		molog
 			("  IT %u, destination %u\n",
-			 it.current->m_object.serial(),
-			 it.current->m_destination_dock.serial());
+			 shipping_item.m_object.serial(),
+			 shipping_item.m_destination_dock.serial());
 	}
 }
 
@@ -988,8 +988,8 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 		m_destination = fr.Unsigned32();
 
 		m_items.resize(fr.Unsigned32());
-		container_iterate(std::vector<ShippingItem::Loader>, m_items, it) {
-			it->load(fr);
+		for (ShippingItem::Loader& item_loader : m_items) {
+			item_loader.load(fr);
 		}
 	}
 }
@@ -1115,8 +1115,8 @@ void Ship::save
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 
 	fw.Unsigned32(m_items.size());
-	container_iterate(std::vector<ShippingItem>, m_items, it) {
-		it->save(egbase, mos, fw);
+	for (ShippingItem& shipping_item : m_items) {
+		shipping_item.save(egbase, mos, fw);
 	}
 }
 

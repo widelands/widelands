@@ -123,9 +123,9 @@ void Map_Players_Messages_Data_Packet::Read
 					Message::Status status = Message::Archived; //  default status
 					if (char const * const status_string = s->get_string("status")) {
 						try {
-							if      (not strcmp(status_string, "new"))
+							if      (!strcmp(status_string, "new"))
 								status = Message::New;
-							else if (not strcmp(status_string, "read"))
+							else if (!strcmp(status_string, "read"))
 								status = Message::Read;
 							else
 								throw game_data_error
@@ -179,15 +179,15 @@ void Map_Players_Messages_Data_Packet::Write
 			("packet_version", CURRENT_PACKET_VERSION);
 		const MessageQueue & messages = player->messages();
 		Map_Message_Saver & message_saver = mos.message_savers[p - 1];
-		container_iterate_const(MessageQueue, messages, i) {
-			message_saver.add         (i.current->first);
-			const Message & message = *i.current->second;
+		for (const std::pair<Message_Id, Message *>& temp_message : messages) {
+			message_saver.add         (temp_message.first);
+			const Message & message = *temp_message.second;
 			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));
 			assert
-				(message.duration() == Forever() or
+				(message.duration() == Forever() ||
 				 message.sent() < message.sent() + message.duration());
 			if
-				(message.duration() != Forever() and
+				(message.duration() != Forever() &&
 				 message.sent() + message.duration()
 				 <
 				 static_cast<uint32_t>(egbase.get_gametime()))
@@ -208,7 +208,7 @@ void Map_Players_Messages_Data_Packet::Write
 					 message.status() == Message::Read     ? "read"     :
 					 message.status() == Message::Archived ? "archived" : "ERROR");
 			assert
-				(message.duration() == Forever() or
+				(message.duration() == Forever() ||
 				 static_cast<uint32_t>(egbase.get_gametime())
 				 <=
 				 message.sent() + message.duration());

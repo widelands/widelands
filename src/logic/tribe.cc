@@ -105,7 +105,7 @@ Tribe_Descr::Tribe_Descr
                   (_name, _descname, path, prof, global_s, *this);            \
             Ware_Index const worker_idx = m_workers.add(&worker_descr);       \
             if                                                                \
-               (worker_descr.is_buildable() and                               \
+               (worker_descr.is_buildable() &&                                \
                 worker_descr.buildcost().empty())                             \
                m_worker_types_without_cost.push_back(worker_idx);             \
          PARSE_MAP_OBJECT_TYPES_END;
@@ -350,8 +350,9 @@ std::vector<std::string> Tribe_Descr::get_all_tribenames() {
 	}
 
 	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
-	container_iterate_const(std::vector<TribeBasicInfo>, tribes, i)
-		tribenames.push_back(i.current->name);
+	for (const TribeBasicInfo& tribe : tribes) {
+		tribenames.push_back(tribe.name);
+	}
 	return tribenames;
 }
 
@@ -384,7 +385,7 @@ Find the best matching indicator for the given amount.
 uint32_t Tribe_Descr::get_resource_indicator
 	(ResourceDescription const * const res, uint32_t const amount) const
 {
-	if (not res or not amount) {
+	if (!res || !amount) {
 		int32_t idx = get_immovable_index("resi_none");
 		if (idx == -1)
 			throw game_data_error
@@ -405,7 +406,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 		++num_indicators;
 	}
 
-	if (not num_indicators)
+	if (!num_indicators)
 		throw game_data_error
 			("tribe %s does not declare a resource indicator for resource %s",
 			 name().c_str(),

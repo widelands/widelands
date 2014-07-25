@@ -108,8 +108,8 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
 		if
-		((res == args.cur_res or not mr.location().field->get_resources_amount())
-		        and
+		((res == args.cur_res || !mr.location().field->get_resources_amount())
+		        &&
 		        Editor_Change_Resource_Tool_Callback(mr.location(), map, world, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
@@ -119,7 +119,7 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
 			     (mr.location().field->get_resources_amount()));
 			overlay_manager.remove_overlay(mr.location(), pic);
 
-			if (not amount) {
+			if (!amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_starting_res_amount(0);
 			} else {

@@ -94,8 +94,8 @@ void WriteDirection8_allow_null(StreamWrite* wr, Direction const d) {
 }
 
 void WriteCoords32(StreamWrite* wr, const Coords& c) {
-	assert(static_cast<uint16_t>(c.x) < 0x8000 or c.x == -1);
-	assert(static_cast<uint16_t>(c.y) < 0x8000 or c.y == -1);
+	assert(static_cast<uint16_t>(c.x) < 0x8000 || c.x == -1);
+	assert(static_cast<uint16_t>(c.y) < 0x8000 || c.y == -1);
 	{
 		uint16_t const x = Little16(c.x);
 		wr->Data(&x, 2);

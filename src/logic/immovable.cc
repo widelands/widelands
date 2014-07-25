@@ -142,7 +142,7 @@ ImmovableProgram::ImmovableProgram(const std::string& directory,
 	Section& program_s = prof.get_safe_section(_name.c_str());
 	while (Section::Value* const v = program_s.get_next_val()) {
 		Action* action;
-		if (not strcmp(v->get_name(), "animate")) {
+		if (!strcmp(v->get_name(), "animate")) {
 			// Copying, as next_word() modifies the string..... Awful design.
 			std::unique_ptr<char []> arguments(new char[strlen(v->get_string()) + 1]);
 			strncpy(arguments.get(), v->get_string(), strlen(v->get_string()) + 1);
@@ -156,17 +156,17 @@ ImmovableProgram::ImmovableProgram(const std::string& directory,
 				   g_gr->animations().load(directory, prof.get_safe_section(animation_name)));
 			}
 			action = new ActAnimate(v->get_string(), immovable);
-		} else if (not strcmp(v->get_name(), "transform")) {
+		} else if (!strcmp(v->get_name(), "transform")) {
 			action = new ActTransform(v->get_string(), immovable);
-		} else if (not strcmp(v->get_name(), "grow")) {
+		} else if (!strcmp(v->get_name(), "grow")) {
 			action = new ActGrow(v->get_string(), immovable);
-		} else if (not strcmp(v->get_name(), "remove")) {
+		} else if (!strcmp(v->get_name(), "remove")) {
 			action = new ActRemove(v->get_string(), immovable);
-		} else if (not strcmp(v->get_name(), "seed")) {
+		} else if (!strcmp(v->get_name(), "seed")) {
 			action = new ActSeed(v->get_string(), immovable);
-		} else if (not strcmp(v->get_name(), "playFX")) {
+		} else if (!strcmp(v->get_name(), "playFX")) {
 			action = new ActPlayFX(directory, v->get_string(), immovable);
-		} else if (not strcmp(v->get_name(), "construction")) {
+		} else if (!strcmp(v->get_name(), "construction")) {
 			action = new ActConstruction(v->get_string(), immovable, directory, prof);
 		} else {
 			throw game_data_error("unknown command type \"%s\"", v->get_name());
@@ -765,7 +765,7 @@ Map_Object::Loader * Immovable::load
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const version = fr.Unsigned8();
-		if (1 <= version and version <= IMMOVABLE_SAVEGAME_VERSION) {
+		if (1 <= version && version <= IMMOVABLE_SAVEGAME_VERSION) {
 
 			const std::string owner_name = fr.CString();
 			const std::string old_name = fr.CString();
@@ -818,10 +818,10 @@ ImmovableProgram::ActAnimate::ActAnimate(char* parameters, Immovable_Descr& desc
 		}
 		m_id = descr.get_animation(animation_name);
 
-		if (not reached_end) { //  The next parameter is the duration.
+		if (!reached_end) { //  The next parameter is the duration.
 			char * endp;
 			long int const value = strtol(parameters, &endp, 0);
-			if (*endp or value <= 0)
+			if (*endp || value <= 0)
 				throw game_data_error("expected %s but found \"%s\"", "duration in ms", parameters);
 			m_duration = value;
 		} else {
@@ -852,11 +852,11 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 		std::string filename = next_word(parameters, reached_end);
 		name = directory + "/" + filename;
 
-		if (not reached_end) {
+		if (!reached_end) {
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			priority = value;
-			if (*endp or priority != value)
+			if (*endp || priority != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "priority", parameters);
 		} else
@@ -895,7 +895,7 @@ ImmovableProgram::ActTransform::ActTransform
 				bob = false;
 			else if (params[i][0] >= '0' && params[i][0] <= '9') {
 				long int const value = atoi(params[i].c_str());
-				if (value < 1 or 254 < value)
+				if (value < 1 || 254 < value)
 					throw game_data_error
 						("expected %s but found \"%s\"", "probability in range [1, 254]",
 						 params[i].c_str());
@@ -935,7 +935,7 @@ ImmovableProgram::ActTransform::ActTransform
 void ImmovableProgram::ActTransform::execute
 	(Game & game, Immovable & immovable) const
 {
-	if (probability == 0 or game.logic_rand() % 256 < probability) {
+	if (probability == 0 || game.logic_rand() % 256 < probability) {
 		Player * player = immovable.get_owner();
 		Coords const c = immovable.get_position();
 		Tribe_Descr const * const owner_tribe =
@@ -970,7 +970,7 @@ ImmovableProgram::ActGrow::ActGrow
 				*p = '\0';
 				++p;
 				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
-				if (not owner_tribe)
+				if (!owner_tribe)
 					throw game_data_error
 						(
 						 "immovable type not in tribe but target type has scope "
@@ -1023,7 +1023,7 @@ ImmovableProgram::ActRemove::ActRemove(char * parameters, Immovable_Descr &)
 		if (*parameters) {
 			char * endp;
 			long int const value = strtol(parameters, &endp, 0);
-			if (*endp or value < 1 or 254 < value)
+			if (*endp || value < 1 || 254 < value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "probability in range [1, 254]", parameters);
@@ -1038,7 +1038,7 @@ ImmovableProgram::ActRemove::ActRemove(char * parameters, Immovable_Descr &)
 void ImmovableProgram::ActRemove::execute
 	(Game & game, Immovable & immovable) const
 {
-	if (probability == 0 or game.logic_rand() % 256 < probability)
+	if (probability == 0 || game.logic_rand() % 256 < probability)
 		immovable.remove(game); //  Now immovable is a dangling reference!
 	else
 		immovable.program_step(game);
@@ -1055,7 +1055,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				*p = '\0';
 				++p;
 				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
-				if (not owner_tribe)
+				if (!owner_tribe)
 					throw game_data_error
 						(
 						 "immovable type not in tribe but target type has scope "
@@ -1076,7 +1076,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				++p;
 				char * endp;
 				long int const value = strtol(p, &endp, 0);
-				if (*endp or value < 1 or 254 < value)
+				if (*endp || value < 1 || 254 < value)
 					throw game_data_error
 						("expected %s but found \"%s\"", "probability in range [1, 254]",
 						 p);
@@ -1371,9 +1371,9 @@ void PlayerImmovable::add_worker(Worker & w)
 */
 void PlayerImmovable::remove_worker(Worker & w)
 {
-	container_iterate(Workers, m_workers, i)
-		if (*i.current == &w) {
-			*i.current = *(i.get_end() - 1);
+	for (Workers::iterator worker_iter = m_workers.begin(); worker_iter != m_workers.end(); ++worker_iter)
+		if (*worker_iter == &w) {
+				*worker_iter = *(m_workers.end() - 1);
 			return m_workers.pop_back();
 		}
 

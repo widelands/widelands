@@ -97,11 +97,13 @@ ProductionSite_Descr::ProductionSite_Descr
 			try {
 				Ware_Index const idx = tribe().ware_index(val->get_name());
 				if (idx != INVALID_INDEX) {
-					container_iterate_const(BillOfMaterials, inputs(), i)
-						if (i.current->first == idx)
+					for (const WareAmount& temp_inputs : inputs()) {
+						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
+						}
+					}
 					int32_t const value = val->get_int();
-					if (value < 1 or 255 < value)
+					if (value < 1 || 255 < value)
 						throw wexception("count is out of range 1 .. 255");
 					m_inputs.push_back(std::pair<Ware_Index, uint8_t>(idx, value));
 				} else
@@ -118,16 +120,18 @@ ProductionSite_Descr::ProductionSite_Descr
 			try {
 				Ware_Index const woi = tribe().worker_index(v->get_name());
 				if (woi != INVALID_INDEX) {
-					container_iterate_const(BillOfMaterials, working_positions(), i)
-						if (i.current->first == woi)
+					for (const WareAmount& wp : working_positions()) {
+						if (wp.first == woi) {
 							throw wexception("duplicated");
+						}
+					}
 					m_working_positions.push_back(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
 				} else
 					throw wexception("invalid");
 			} catch (const _wexception & e) {
 				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
-	if (working_positions().empty() and not global_s.has_val("max_soldiers"))
+	if (working_positions().empty() && !global_s.has_val("max_soldiers"))
 		throw wexception("no working/soldier positions");
 
 	// Get programs
@@ -271,10 +275,12 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 
 
 WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
-	container_iterate_const(Input_Queues, m_input_queues, i)
-		if ((*i.current)->get_ware() == wi)
-			return **i.current;
-	   throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
+	for (WaresQueue * ip_queue : m_input_queues) {
+		if (ip_queue->get_ware() == wi) {
+			return *ip_queue;
+		}
+	}
+	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /**
@@ -298,7 +304,7 @@ void ProductionSite::calc_statistics()
 	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk > (m_crude_percent / 10000) and percOk - (m_crude_percent / 10000) > 50)
+	if (percOk > (m_crude_percent / 10000) && percOk - (m_crude_percent / 10000) > 50)
 		color = UI_FONT_CLR_IDLE_HEX;
 	else if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
@@ -323,7 +329,7 @@ void ProductionSite::calc_statistics()
 	const std::string trend_str =
 		(boost::format("<font color=%s>%s</font>") % color % trend).str();
 
-	if (0 < percOk and percOk < 100) {
+	if (0 < percOk && percOk < 100) {
 		snprintf
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%s %s", perc_str.c_str(), trend_str.c_str());
@@ -356,9 +362,9 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 
 	//  Request missing workers.
 	Working_Position * wp = m_working_positions;
-	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
-		Ware_Index const worker_index = i.current->first;
-		for (uint32_t j = i.current->second; j; --j, ++wp)
+	for (const WareAmount& temp_wp : descr().working_positions()) {
+		Ware_Index const worker_index = temp_wp.first;
+		for (uint32_t j =  temp_wp.second; j; --j, ++wp)
 			if (Worker * const worker = wp->worker)
 				worker->set_location(this);
 			else
@@ -376,18 +382,22 @@ void ProductionSite::init(Editor_Game_Base & egbase)
  */
 void ProductionSite::set_economy(Economy * const e)
 {
-	if (Economy * const old = get_economy())
-		container_iterate_const(Input_Queues, m_input_queues, i)
-			(*i.current)->remove_from_economy(*old);
+	if (Economy * const old = get_economy()) {
+		for (WaresQueue * ip_queue : m_input_queues) {
+			ip_queue->remove_from_economy(*old);
+		}
+	}
 
 	Building::set_economy(e);
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		if (Request * const r = m_working_positions[--i].worker_request)
 			r->set_economy(e);
 
-	if (e)
-		container_iterate_const(Input_Queues, m_input_queues, i)
-			(*i.current)->add_to_economy(*e);
+	if (e) {
+		for (WaresQueue * ip_queue : m_input_queues) {
+			ip_queue->add_to_economy(*e);
+		}
+	}
 }
 
 /**
@@ -453,7 +463,7 @@ int ProductionSite::warp_worker
 		assigned = true;
 		break;
 	}
-	if (not assigned)
+	if (!assigned)
 		return -1;
 
 	if (upcast(Game, game, &egbase))
@@ -469,9 +479,9 @@ void ProductionSite::remove_worker(Worker & w)
 	molog("%s leaving\n", w.descr().descname().c_str());
 	Working_Position * wp = m_working_positions;
 
-	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
-		Ware_Index const worker_index = i.current->first;
-		for (uint32_t j = i.current->second; j; --j, ++wp) {
+	for (const WareAmount& temp_wp : descr().working_positions()) {
+		Ware_Index const worker_index = temp_wp.first;
+		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
 			Worker * const worker = wp->worker;
 			if (worker && worker == &w) {
 				// do not request the type of worker that is currently assigned - maybe a trained worker was
@@ -596,7 +606,7 @@ void ProductionSite::act(Game & game, uint32_t const data)
 
 	if
 		(m_program_timer
-		 and
+		 &&
 		 static_cast<int32_t>(game.get_gametime() - m_program_time) >= 0)
 	{
 		m_program_timer = false;
@@ -690,7 +700,7 @@ bool ProductionSite::can_start_working() const
 
 
 void ProductionSite::try_start_working(Game & game) {
-	if (can_start_working() and descr().working_positions().size()) {
+	if (can_start_working() && descr().working_positions().size()) {
 		Worker & main_worker = *m_working_positions[0].worker;
 		main_worker.reset_tasks(game);
 		main_worker.start_task_buildingwork(game);
@@ -776,8 +786,7 @@ bool ProductionSite::get_building_work
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	container_iterate(Input_Queues, m_input_queues, iqueue) {
-		WaresQueue * queue = *iqueue;
+	for (WaresQueue * queue : m_input_queues) {
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
 			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());

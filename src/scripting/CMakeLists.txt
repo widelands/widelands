@@ -45,6 +45,7 @@ wl_library(scripting
     base_macros
     build_info
     economy
+    graphic
     helper
     io_fileread
     io_filesystem
