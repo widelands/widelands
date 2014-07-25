@@ -143,7 +143,6 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 // Helper structure for representing an iterator range in
 // for loops with constant iterators.
 // DEPRECATED!! do not use.
-// NOCOM(#sirver): kill.
 template<typename C>
 struct wl_const_range
 {
