@@ -130,7 +130,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 
 	Economy * e = f1.get_economy();
 	// No economy in the editor.
-	if (not e)
+	if (!e)
 		return;
 
 	e->m_split_checks.push_back(std::make_pair(OPtr<Flag>(&f1), OPtr<Flag>(&f2)));
@@ -549,8 +549,8 @@ void Economy::_merge(Economy & e)
 	//  window for *this where the options window for e is, to give the user
 	//  some continuity.
 	if
-		(e.m_optionswindow_registry.window and
-		 not m_optionswindow_registry.window)
+		(e.m_optionswindow_registry.window &&
+		 !m_optionswindow_registry.window)
 	{
 		m_optionswindow_registry.x = e.m_optionswindow_registry.x;
 		m_optionswindow_registry.y = e.m_optionswindow_registry.y;
@@ -841,7 +841,7 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		// Requests for heroes should not trigger the creation of more rookies
 		if (soldier_level_check)
 		{
-			if (not (req.get_requirements().check(*m_soldier_prototype)))
+			if (!(req.get_requirements().check(*m_soldier_prototype)))
 				continue;
 		}
 

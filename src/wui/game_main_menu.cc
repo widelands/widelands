@@ -74,8 +74,8 @@ stock
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.stock)));
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
- assert (not registry.on_create);                                             \
- assert (not registry.on_delete);                                             \
+ assert (!registry.on_create);                                             \
+ assert (!registry.on_delete);                                             \
  registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
  registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \

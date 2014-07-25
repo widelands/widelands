@@ -32,7 +32,7 @@ UniqueWindow IMPLEMENTATION
  * Creates the window, if it does not exist.
 */
 void UniqueWindow::Registry::create() {
-	if (not window) {
+	if (!window) {
 		open_window();
 	}
 }

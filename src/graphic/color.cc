@@ -34,7 +34,7 @@ void RGBColor::set(SDL_PixelFormat* const fmt, uint32_t const clr) {
 }
 
 bool RGBColor::operator == (const RGBColor& other) const {
-	return r == other.r and g == other.g and b == other.b;
+	return r == other.r && g == other.g && b == other.b;
 }
 bool RGBColor::operator != (const RGBColor& other) const {
 	return !(*this == other);

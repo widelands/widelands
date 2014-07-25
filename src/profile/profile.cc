@@ -109,7 +109,7 @@ uint32_t Section::Value::get_natural() const
 {
 	char * endp;
 	long long int i = strtoll(m_value, &endp, 0);
-	if (*endp or i < 0)
+	if (*endp || i < 0)
 		throw wexception("%s: '%s' is not natural", get_name(), m_value);
 	return i;
 }
@@ -119,7 +119,7 @@ uint32_t Section::Value::get_positive() const
 {
 	char * endp;
 	long long int i = strtoll(m_value, &endp, 0);
-	if (*endp or i < 1)
+	if (*endp || i < 1)
 		throw wexception("%s: '%s' is not positive", get_name(), m_value);
 	return i;
 }
@@ -217,7 +217,7 @@ void Section::mark_used()
 void Section::check_used() const
 {
 	container_iterate_const(Value_list, m_values, i)
-		if (not i.current->is_used())
+		if (!i.current->is_used())
 			m_profile->error
 				("Section [%s], key '%s' not used (did you spell the name "
 				 "correctly?)",
@@ -228,7 +228,7 @@ void Section::check_used() const
 bool Section::has_val(char const * const name) const
 {
 	container_iterate_const(Value_list, m_values, i)
-		if (not strcasecmp(i.current->get_name(), name))
+		if (!strcasecmp(i.current->get_name(), name))
 			return true;
 	return false;
 }
@@ -260,7 +260,7 @@ Section::Value * Section::get_val(char const * const name)
 Section::Value * Section::get_next_val(char const * const name)
 {
 	container_iterate(Value_list, m_values, i)
-		if (not i.current->is_used())
+		if (!i.current->is_used())
 			if (!name || !strcasecmp(i.current->get_name(), name)) {
 				i.current->mark_used();
 				return &*i.current;
@@ -634,7 +634,7 @@ Section & Profile::pull_section(char const * const name)
 Section * Profile::get_next_section(char const * const name)
 {
 	container_iterate(Section_list, m_sections, i)
-		if (not i.current->is_used())
+		if (!i.current->is_used())
 			if (!name || !strcasecmp(i.current->get_name(), name)) {
 				i.current->mark_used();
 				return &*i.current;
@@ -769,9 +769,9 @@ void Profile::read
 
 					// first, check for multiline string
 					if
-						((tail[0] == '\'' or tail[0] == '"')
-						 and
-						 (tail[1] == '\'' or tail[1] == '"'))
+						((tail[0] == '\'' || tail[0] == '"')
+						 &&
+						 (tail[1] == '\'' || tail[1] == '"'))
 					{
 						reading_multiline = true;
 						tail += 2;
@@ -826,7 +826,7 @@ void Profile::read
 	}
 
 	//  Make sure that the requested global section exists, even if it is empty.
-	if (global_section and not get_section(global_section))
+	if (global_section && !get_section(global_section))
 		create_section_duplicate(global_section);
 }
 

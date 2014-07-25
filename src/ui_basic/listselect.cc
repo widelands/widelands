@@ -374,7 +374,7 @@ void BaseListselect::draw(RenderTarget & dst)
 			}
 			assert(2 <= get_eff_w());
 			// Make the area a bit more white and more transparent
-			if (r.w > 0 and r.h > 0)
+			if (r.w > 0 && r.h > 0)
 			{
 				dst.brighten_rect(r, - ms_darken_value * 2);
 			}
@@ -433,7 +433,7 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y)
 		m_last_click_time = time;
 
 		y = (y + m_scrollpos) / get_lineheight();
-		if (y < 0 or static_cast<int32_t>(m_entry_records.size()) <= y)
+		if (y < 0 || static_cast<int32_t>(m_entry_records.size()) <= y)
 			return false;
 		play_click();
 		select(y);
@@ -441,9 +441,9 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y)
 
 		if //  check if doubleclicked
 			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
-			 and
+			 &&
 			 m_last_selection == m_selection
-			 and
+			 &&
 			 m_selection != no_selection_index())
 			double_clicked(m_selection);
 
@@ -461,7 +461,7 @@ bool BaseListselect::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 
 bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int32_t) {
 	y = (y + m_scrollpos) / get_lineheight();
-	if (y < 0 or static_cast<int32_t>(m_entry_records.size()) <= y) {
+	if (y < 0 || static_cast<int32_t>(m_entry_records.size()) <= y) {
 		set_tooltip("");
 		return false;
 	}

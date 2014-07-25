@@ -44,7 +44,7 @@ template <> bool MapHollowRegion<Area<> >::advance(const Map & map) {
 	++m_rowpos;
 	if (m_rowpos < m_rowwidth) {
 		map.get_rn(m_hollow_area, &m_hollow_area);
-		if ((m_phase & (Upper|Lower)) and m_rowpos == m_delta_radius) {
+		if ((m_phase & (Upper|Lower)) && m_rowpos == m_delta_radius) {
 			//  Jump over the hole.
 			const uint32_t holewidth = m_rowwidth - 2 * m_delta_radius;
 			for (uint32_t i = 0; i < holewidth; ++i)
@@ -53,13 +53,13 @@ template <> bool MapHollowRegion<Area<> >::advance(const Map & map) {
 		}
 	} else {
 		++m_row;
-		if (m_phase == Top and m_row == m_delta_radius)
+		if (m_phase == Top && m_row == m_delta_radius)
 			m_phase = Upper;
 
 		// If we completed the widest, center line, switch into lower mode
 		// There are m_radius+1 lines in the upper "half", because the upper
 		// half includes the center line.
-		else if (m_phase == Upper and m_row > m_hollow_area.radius) {
+		else if (m_phase == Upper && m_row > m_hollow_area.radius) {
 			m_row = 1;
 			m_phase = Lower;
 		}
@@ -72,7 +72,7 @@ template <> bool MapHollowRegion<Area<> >::advance(const Map & map) {
 			if (m_row > m_hollow_area.radius) {
 				m_phase = None;
 				return true; // early out
-			} else if (m_phase == Lower and m_row > m_hollow_area.hole_radius)
+			} else if (m_phase == Lower && m_row > m_hollow_area.hole_radius)
 				m_phase = Bottom;
 
 			map.get_brn(m_left, &m_hollow_area);

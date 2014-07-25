@@ -100,7 +100,7 @@ ProductionSite_Descr::ProductionSite_Descr
 						if (i.current->first == idx)
 							throw wexception("duplicated");
 					int32_t const value = val->get_int();
-					if (value < 1 or 255 < value)
+					if (value < 1 || 255 < value)
 						throw wexception("count is out of range 1 .. 255");
 					m_inputs.push_back(std::pair<Ware_Index, uint8_t>(idx, value));
 				} else
@@ -126,7 +126,7 @@ ProductionSite_Descr::ProductionSite_Descr
 			} catch (const _wexception & e) {
 				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
-	if (working_positions().empty() and not global_s.has_val("max_soldiers"))
+	if (working_positions().empty() && !global_s.has_val("max_soldiers"))
 		throw wexception("no working/soldier positions");
 
 	// Get programs
@@ -297,7 +297,7 @@ void ProductionSite::calc_statistics()
 	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk > (m_crude_percent / 10000) and percOk - (m_crude_percent / 10000) > 50)
+	if (percOk > (m_crude_percent / 10000) && percOk - (m_crude_percent / 10000) > 50)
 		color = UI_FONT_CLR_IDLE_HEX;
 	else if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
@@ -322,7 +322,7 @@ void ProductionSite::calc_statistics()
 	const std::string trend_str =
 		(boost::format("<font color=%s>%s</font>") % color % trend).str();
 
-	if (0 < percOk and percOk < 100) {
+	if (0 < percOk && percOk < 100) {
 		snprintf
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%s %s", perc_str.c_str(), trend_str.c_str());
@@ -452,7 +452,7 @@ int ProductionSite::warp_worker
 		assigned = true;
 		break;
 	}
-	if (not assigned)
+	if (!assigned)
 		return -1;
 
 	if (upcast(Game, game, &egbase))
@@ -595,7 +595,7 @@ void ProductionSite::act(Game & game, uint32_t const data)
 
 	if
 		(m_program_timer
-		 and
+		 &&
 		 static_cast<int32_t>(game.get_gametime() - m_program_time) >= 0)
 	{
 		m_program_timer = false;
@@ -689,7 +689,7 @@ bool ProductionSite::can_start_working() const
 
 
 void ProductionSite::try_start_working(Game & game) {
-	if (can_start_working() and descr().working_positions().size()) {
+	if (can_start_working() && descr().working_positions().size()) {
 		Worker & main_worker = *m_working_positions[0].worker;
 		main_worker.reset_tasks(game);
 		main_worker.start_task_buildingwork(game);

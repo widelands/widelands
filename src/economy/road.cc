@@ -289,8 +289,8 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 			carrier->set_location    (this);
 			carrier->update_task_road(*game);
 		} else if
-			(not i.current->carrier_request and
-			 (i.current->carrier_type == 1 or
+			(!i.current->carrier_request &&
+			 (i.current->carrier_type == 1 ||
 			  m_type == Road_Busy))
 			_request_carrier(*i.current);
 	}
@@ -543,8 +543,8 @@ void Road::postsplit(Game & game, Flag & flag)
 					j.current->carrier = nullptr;
 					container_iterate(SlotVector, newroad.m_carrier_slots, k)
 						if
-							(not k.current->carrier.get(game) and
-							 not k.current->carrier_request and
+							(!k.current->carrier.get(game) &&
+							 !k.current->carrier_request &&
 							 k.current->carrier_type == j.current->carrier_type)
 						{
 							k.current->carrier = &ref_cast<Carrier, Worker> (w);
@@ -571,9 +571,9 @@ void Road::postsplit(Game & game, Flag & flag)
 	//  work correctly
 	container_iterate(SlotVector, m_carrier_slots, i)
 		if
-			(not i.current->carrier.get(game) and
-			 not i.current->carrier_request and
-			 (i.current->carrier_type == 1 or
+			(!i.current->carrier.get(game) &&
+			 !i.current->carrier_request &&
+			 (i.current->carrier_type == 1 ||
 			  m_type == Road_Busy))
 			_request_carrier(*i.current);
 
@@ -639,8 +639,8 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 			_mark_map(game);
 			container_iterate(SlotVector, m_carrier_slots, i)
 				if
-					(not i.current->carrier.get(game) and
-					 not i.current->carrier_request and
+					(!i.current->carrier.get(game) &&
+					 !i.current->carrier_request &&
 					 i.current->carrier_type != 1)
 				_request_carrier(*i.current);
 		}

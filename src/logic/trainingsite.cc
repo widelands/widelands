@@ -208,7 +208,7 @@ void TrainingSite::init(Editor_Game_Base & egbase)
 
 	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
 		(*i.current)->set_location_initially(*this);
-		assert(not (*i.current)->get_state()); //  Should be newly created.
+		assert(!(*i.current)->get_state()); //  Should be newly created.
 
 		if (game)
 			(*i.current)->start_task_idle(*game, 0, -1);

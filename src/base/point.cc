@@ -30,10 +30,10 @@ Point Point::invalid() {
 }
 
 bool Point::operator == (const Point& other) const {
-	return x == other.x and y == other.y;
+	return x == other.x && y == other.y;
 }
 bool Point::operator != (const Point& other) const {
-	return not(*this == other);
+	return !(*this == other);
 }
 
 Point Point::operator +(const Point& other) const {

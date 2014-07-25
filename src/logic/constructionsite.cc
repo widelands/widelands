@@ -204,7 +204,7 @@ bool ConstructionSite::burn_on_destroy()
 	if (m_work_completed >= m_work_steps)
 		return false; // completed, so don't burn
 
-	return m_work_completed or !m_old_buildings.empty();
+	return m_work_completed || !m_old_buildings.empty();
 }
 
 /*
@@ -237,7 +237,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
-	if (not m_work_steps) //  Happens for building without buildcost.
+	if (!m_work_steps) //  Happens for building without buildcost.
 		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed

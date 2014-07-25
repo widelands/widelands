@@ -305,17 +305,17 @@ int L_Player::send_message(lua_State * L) {
 	if (n == 4) {
 		// Optional arguments
 		lua_getfield(L, 4, "duration");
-		if (not lua_isnil(L, -1))
+		if (!lua_isnil(L, -1))
 			d = luaL_checkuint32(L, -1);
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "field");
-		if (not lua_isnil(L, -1))
+		if (!lua_isnil(L, -1))
 			c = (*get_user_class<L_Field>(L, -1))->coords();
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "status");
-		if (not lua_isnil(L, -1)) {
+		if (!lua_isnil(L, -1)) {
 			std::string s = luaL_checkstring(L, -1);
 			if (s == "new") st = Message::New;
 			else if (s == "read") st = Message::Read;
@@ -325,12 +325,12 @@ int L_Player::send_message(lua_State * L) {
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "sender");
-		if (not lua_isnil(L, -1))
+		if (!lua_isnil(L, -1))
 			sender = luaL_checkstring(L, -1);
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "popup");
-		if (not lua_isnil(L, -1))
+		if (!lua_isnil(L, -1))
 			popup = luaL_checkboolean(L, -1);
 		lua_pop(L, 1);
 	}
@@ -406,7 +406,7 @@ int L_Player::message_box(lua_State * L) {
 
 #define CHECK_ARG(var, type) \
 	lua_getfield(L, -1, #var); \
-	if (not lua_isnil(L, -1)) var = luaL_check ## type(L, -1); \
+	if (!lua_isnil(L, -1)) var = luaL_check ## type(L, -1); \
 	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
@@ -418,7 +418,7 @@ int L_Player::message_box(lua_State * L) {
 
 		// This must be done manually
 		lua_getfield(L, 4, "field");
-		if (not lua_isnil(L, -1)) {
+		if (!lua_isnil(L, -1)) {
 			Coords c = (*get_user_class<L_Field>(L, -1))->coords();
 			game.get_ipl()->move_view_to(c);
 		}
@@ -774,7 +774,7 @@ int L_Player::allow_workers(lua_State * L) {
 
 	for (Ware_Index i = 0; i < tribe.get_nrworkers(); ++i) {
 		const Worker_Descr & worker_descr = *tribe.get_worker_descr(i);
-		if (not worker_descr.is_buildable())
+		if (!worker_descr.is_buildable())
 			continue;
 
 		player.allow_worker_type(i, true);

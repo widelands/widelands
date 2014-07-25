@@ -348,8 +348,8 @@ Message_Id Player::add_message_with_timeout
 	Coords      const position = m   .position    ();
 	container_iterate_const(MessageQueue, messages(), i)
 		if
-			(i.current->second->sender() == m.sender()                      and
-			 gametime < i.current->second->sent() + timeout                 and
+			(i.current->second->sender() == m.sender()		&&
+			 gametime < i.current->second->sent() + timeout	&&
 			 map.calc_distance(i.current->second->position(), position) <= radius)
 		{
 			delete &m;
@@ -382,25 +382,25 @@ NodeCaps Player::get_buildcaps(FCoords const fc) const {
 	const Map & map = egbase().map();
 	uint8_t buildcaps = fc.field->nodecaps();
 
-	if (not fc.field->is_interior(m_plnum))
+	if (!fc.field->is_interior(m_plnum))
 		buildcaps = 0;
 
 	// Check if a building's flag can't be build due to ownership
 	else if (buildcaps & BUILDCAPS_BUILDINGMASK) {
 		FCoords flagcoords;
 		map.get_brn(fc, &flagcoords);
-		if (not flagcoords.field->is_interior(m_plnum))
+		if (!flagcoords.field->is_interior(m_plnum))
 			buildcaps &= ~BUILDCAPS_BUILDINGMASK;
 
 		//  Prevent big buildings that would swell over borders.
 		if
 			((buildcaps & BUILDCAPS_BIG) == BUILDCAPS_BIG
-			 and
-			 (not map.tr_n(fc).field->is_interior(m_plnum)
-			  or
-			  not map.tl_n(fc).field->is_interior(m_plnum)
-			  or
-			  not map. l_n(fc).field->is_interior(m_plnum)))
+			 &&
+			 (!map.tr_n(fc).field->is_interior(m_plnum)
+			  ||
+			  !map.tl_n(fc).field->is_interior(m_plnum)
+			  ||
+			  !map. l_n(fc).field->is_interior(m_plnum)))
 			buildcaps &= ~BUILDCAPS_SMALL;
 	}
 
@@ -428,7 +428,7 @@ Flag & Player::force_flag(FCoords const c) {
 		if (upcast(Flag, existing_flag, immovable)) {
 			if (&existing_flag->owner() == this)
 				return *existing_flag;
-		} else if (not dynamic_cast<Road const *>(immovable)) //  A road is OK.
+		} else if (!dynamic_cast<Road const *>(immovable)) //  A road is OK.
 			immovable->remove(egbase()); //  Make room for the flag.
 	}
 	MapRegion<Area<FCoords> > mr(map, Area<FCoords>(c, 1));
@@ -734,7 +734,7 @@ void Player::_enhance_or_dismantle
 	(Building * building, Building_Index const index_of_new_building)
 {
 	if (&building->owner() ==
-	    this and(index_of_new_building == INVALID_INDEX ||
+	    this &&(index_of_new_building == INVALID_INDEX ||
 			building->descr().enhancement() == index_of_new_building)) {
 		Building::FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
@@ -791,7 +791,7 @@ void Player::flagaction(Flag & flag)
 
 void Player::allow_worker_type(Ware_Index const i, bool const allow) {
 	assert(i < m_allowed_worker_types.size());
-	assert(not allow or tribe().get_worker_descr(i)->is_buildable());
+	assert(!allow || tribe().get_worker_descr(i)->is_buildable());
 	m_allowed_worker_types[i] = allow;
 }
 
@@ -811,7 +811,7 @@ void Player::allow_building_type(Building_Index const i, bool const allow) {
  */
 void Player::add_economy(Economy & economy)
 {
-	if (not has_economy(economy))
+	if (!has_economy(economy))
 		m_economies.push_back(&economy);
 }
 
@@ -924,7 +924,7 @@ uint32_t Player::findAttackSoldiers
 					 present.begin(), present.begin() + nr_taken);
 			count     += nr_taken;
 			nr_wanted -= nr_taken;
-			if (not nr_wanted)
+			if (!nr_wanted)
 				break;
 		}
 	}
@@ -1014,17 +1014,17 @@ void Player::rediscover_node
 
 		field.border    = f.field->is_border();
 		field.border_r  =
-			((1 |  r_vision) and (r_owner_number  == field.owner)
-			and
-			((tr_owner_number == field.owner) xor (br_owner_number == field.owner)));
+			((1 |  r_vision) && (r_owner_number  == field.owner)
+			&&
+			((tr_owner_number == field.owner) ^ (br_owner_number == field.owner)));
 		field.border_br =
-			((1 | bl_vision) and (bl_owner_number == field.owner)
-			and
-			((l_owner_number  == field.owner) xor (br_owner_number == field.owner)));
+			((1 | bl_vision) && (bl_owner_number == field.owner)
+			&&
+			((l_owner_number  == field.owner) ^ (br_owner_number == field.owner)));
 		field.border_bl =
-			((1 | br_vision) and (br_owner_number == field.owner)
-			and
-			((r_owner_number  == field.owner) xor (bl_owner_number == field.owner)));
+			((1 | br_vision) && (br_owner_number == field.owner)
+			&&
+			((r_owner_number  == field.owner) ^ (bl_owner_number == field.owner)));
 
 		{ //  map_object_descr[TCoords::None]
 

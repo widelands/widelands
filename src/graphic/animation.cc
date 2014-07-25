@@ -272,7 +272,7 @@ void NonPackedAnimation::load_graphics() {
 	if (image_files_.empty())
 		throw wexception("animation without pictures.");
 
-	if (pc_mask_image_files_.size() and pc_mask_image_files_.size() != image_files_.size())
+	if (pc_mask_image_files_.size() && pc_mask_image_files_.size() != image_files_.size())
 		throw wexception
 			("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
 			 image_files_.size(), pc_mask_image_files_.size());
@@ -280,7 +280,7 @@ void NonPackedAnimation::load_graphics() {
 	for (const std::string& filename : image_files_) {
 		const Image* image = g_gr->images().get(filename);
 		if (frames_.size() &&
-		    (frames_[0]->width() != image->width() or frames_[0]->height() != image->height())) {
+		    (frames_[0]->width() != image->width() || frames_[0]->height() != image->height())) {
 			throw wexception("wrong size: (%u, %u), should be (%u, %u) like the first frame",
 			                 image->width(),
 			                 image->height(),
@@ -294,7 +294,7 @@ void NonPackedAnimation::load_graphics() {
 		// TODO(unknown) Do not load playercolor mask as opengl texture or use it as
 		//     opengl texture.
 		const Image* pc_image = g_gr->images().get(filename);
-		if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {
+		if (frames_[0]->width() != pc_image->width() || frames_[0]->height() != pc_image->height()) {
 			// TODO(unknown): see bug #1324642
 			throw wexception("playercolor mask has wrong size: (%u, %u), should "
 			                 "be (%u, %u) like the animation frame",

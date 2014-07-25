@@ -66,8 +66,8 @@ ingame_sound_volume
 	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_fx_volume(),
 	 g_gr->images().get("pics/but1.png"))
 {
-	ingame_music.set_state(not g_sound_handler.get_disable_music());
-	ingame_sound.set_state(not g_sound_handler.get_disable_fx   ());
+	ingame_music.set_state(!g_sound_handler.get_disable_music());
+	ingame_sound.set_state(!g_sound_handler.get_disable_fx   ());
 
 	if (g_sound_handler.lock_audio_disabling_) { //  disabling sound options
 		ingame_music       .set_enabled(false);
@@ -75,10 +75,10 @@ ingame_sound_volume
 		ingame_music_volume.set_enabled(false);
 		ingame_sound_volume.set_enabled(false);
 	} else { // initial widget states
-		ingame_music.set_state         (not g_sound_handler.get_disable_music());
-		ingame_sound.set_state         (not g_sound_handler.get_disable_fx   ());
-		ingame_music_volume.set_enabled(not g_sound_handler.get_disable_music());
-		ingame_sound_volume.set_enabled(not g_sound_handler.get_disable_fx   ());
+		ingame_music.set_state         (!g_sound_handler.get_disable_music());
+		ingame_sound.set_state         (!g_sound_handler.get_disable_fx   ());
+		ingame_music_volume.set_enabled(!g_sound_handler.get_disable_music());
+		ingame_sound_volume.set_enabled(!g_sound_handler.get_disable_fx   ());
 	}
 
 	//  ready signals
