@@ -841,13 +841,13 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker* w)
 	m_supply->add_workers(worker_index, 1);
 
 	//  We remove carriers, but we keep other workers around.
-	//  FIXME Remove all workers that do not have properties such as experience.
-	//  FIXME And even such workers should be removed and only a small record
-	//  FIXME with the experience (and possibly other data that must survive)
-	//  FIXME may be kept.
-	//  FIXME When this is done, the get_incorporated_workers method above must
-	//  FIXME be reworked so that workers are recreated, and rescheduled for
-	//  FIXME incorporation.
+	//  TODO(unknown) Remove all workers that do not have properties such as experience.
+	//  And even such workers should be removed and only a small record
+	//  with the experience (and possibly other data that must survive)
+	//  may be kept.
+	//  When this is done, the get_incorporated_workers method above must
+	//  be reworked so that workers are recreated, and rescheduled for
+	//  incorporation.
 	if (upcast(Carrier, carrier, w)) {
 		carrier->remove(egbase);
 		return;

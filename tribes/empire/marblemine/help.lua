@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("empire", building_description, "marble",
+	building_help_general_string("empire", building_description,
 		_"Carve marble and stones out of the rock in mountain terrain.") ..
 
 	--Dependencies

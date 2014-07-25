@@ -12,7 +12,7 @@ return {
 	--Lore Section
 	building_help_lore_string("empire", building_description, _[[Text needed]],_[[Source needed]]) ..
 	--General Section
-	building_help_general_string("empire", building_description, "log",
+	building_help_general_string("empire", building_description,
 		_"Fell trees in the surrounding area and process them into logs.",
 		_"The lumberjack's house needs trees to fell within the working radius.") ..
 

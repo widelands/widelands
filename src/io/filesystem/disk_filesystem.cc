@@ -70,7 +70,7 @@ struct FileSystemPath: public std::string
 RealFSImpl::RealFSImpl(const std::string & Directory)
 : m_directory(Directory)
 {
-	// TODO: check OS permissions on whether the directory is writable!
+	// TODO(unknown): check OS permissions on whether the directory is writable!
 	m_root = FS_CanonicalizeName(Directory);
 }
 
@@ -169,8 +169,8 @@ std::set<std::string> RealFSImpl::ListDirectory(const std::string & path)
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid (obviously, because the file
  * \e can't exist then)
- * \todo Can this be rewritten to just using exceptions? Should it?
  */
+// TODO(unknown): Can this be rewritten to just using exceptions? Should it?
 bool RealFSImpl::FileExists(const std::string & path) {
 	return FileSystemPath(FS_CanonicalizeName(path)).m_exists;
 }
@@ -189,7 +189,7 @@ bool RealFSImpl::IsDirectory(const std::string & path) {
  */
 FileSystem * RealFSImpl::MakeSubFileSystem(const std::string & path) {
 	FileSystemPath fspath(FS_CanonicalizeName(path));
-	assert(fspath.m_exists); //TODO: throw an exception instead
+	assert(fspath.m_exists); //TODO(unknown): throw an exception instead
 
 	if (fspath.m_isDirectory)
 		return new RealFSImpl   (fspath);
@@ -234,8 +234,8 @@ void RealFSImpl::Unlink(const std::string & file) {
  */
 void RealFSImpl::m_unlink_file(const std::string & file) {
 	FileSystemPath fspath(FS_CanonicalizeName(file));
-	assert(fspath.m_exists);  //TODO: throw an exception instead
-	assert(!fspath.m_isDirectory); //TODO: throw an exception instead
+	assert(fspath.m_exists);  //TODO(unknown): throw an exception instead
+	assert(!fspath.m_isDirectory); //TODO(unknown): throw an exception instead
 
 #ifndef _WIN32
 	unlink(fspath.c_str());
@@ -249,8 +249,8 @@ void RealFSImpl::m_unlink_file(const std::string & file) {
  */
 void RealFSImpl::m_unlink_directory(const std::string & file) {
 	FileSystemPath fspath(FS_CanonicalizeName(file));
-	assert(fspath.m_exists);  //TODO: throw an exception instead
-	assert(fspath.m_isDirectory);  //TODO: throw an exception instead
+	assert(fspath.m_exists);  //TODO(unknown): throw an exception instead
+	assert(fspath.m_isDirectory);  //TODO(unknown): throw an exception instead
 
 	filenameset_t files = ListDirectory(file);
 	for
@@ -372,7 +372,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		fseek(file, 0, SEEK_SET);
 
 		// allocate a buffer and read the entire file into it
-		data = malloc(size + 1); //  FIXME memory leak!
+		data = malloc(size + 1); //  TODO(unknown) memory leak!
 		int result = fread(data, size, 1, file);
 		if (size and (result != 1)) {
 			throw wexception

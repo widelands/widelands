@@ -63,8 +63,8 @@ std::string localedir;
 
 /**
  * Translate a string with gettext
- * \todo Implement a workaround if gettext was not found
  */
+// TODO(unknown): Implement a workaround if gettext was not found
 char const * translate(char const * const str) {
 	return gettext(str);
 }

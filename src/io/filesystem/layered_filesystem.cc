@@ -41,8 +41,8 @@ LayeredFileSystem::~LayeredFileSystem() {
 
 /**
  * Just assume that at least one of our child FSs is writable
- * \todo Implement me
  */
+// TODO(unknown): Implement me
 bool LayeredFileSystem::IsWritable() const {
 	return true;
 }
@@ -114,8 +114,8 @@ bool LayeredFileSystem::FileExists(const std::string & path) {
 
 /**
  * Returns true if path is a directory in at least one of the directories
- * \todo What if it's a file in some and a dir in others?????
  */
+// TODO(unknown): What if it's a file in some and a dir in others?????
 bool LayeredFileSystem::IsDirectory(const std::string & path) {
 	if (m_home and m_home->IsDirectory(path))
 		return true;
