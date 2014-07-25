@@ -1,5 +1,6 @@
--- TODO(GunChleoc) Textdomain?
 -- TODO(GunChleoc): get resi_00.png from C++
+
+set_textdomain("tribes")
 
 --  =======================================================
 --  *************** Basic helper functions ****************
