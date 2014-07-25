@@ -104,13 +104,12 @@ Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global
      m_road_build_player(0),
      m_label_speed_shadow(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
      m_label_speed(this, get_w(), 1, std::string(), UI::Align_TopRight),
+     unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
 		m_workarea_pics
 		{g_gr->images().get("pics/workarea123.png"), g_gr->images().get("pics/workarea23.png"),
-			g_gr->images().get("pics/workarea3.png"), g_gr->images().get("pics/workarea12.png"),
-			g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")},
-     unique_window_handler_(new UniqueWindowHandler())
-{
+		g_gr->images().get("pics/workarea3.png"), g_gr->images().get("pics/workarea12.png"),
+		g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")} {
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
 		(boost::bind(&Map_View::set_viewpoint, this, _1, true));

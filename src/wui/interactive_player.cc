@@ -79,7 +79,6 @@ Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
 	 Widelands::Player_Number const plyn,
-	 bool                     const scenario,
 	 bool                     const multiplayer)
 	:
 	Interactive_GameBase (_game, global_s, NONE, multiplayer, multiplayer),

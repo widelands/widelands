@@ -247,7 +247,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 
 	set_ibase
 		(new Interactive_Player
-		 	(*this, g_options.pull_section("global"), 1, true, false));
+		 	(*this, g_options.pull_section("global"), 1, false));
 
 	loaderUI.step (_("Loading a map"));
 	maploader->load_map_complete(*this, true);
@@ -397,7 +397,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		player_nr = gpdp.get_player_nr();
 		set_ibase
 			(new Interactive_Player
-			 	(*this, g_options.pull_section("global"), player_nr, true, false));
+			 	(*this, g_options.pull_section("global"), player_nr, false));
 
 		loaderUI.step(_("Loading..."));
 		gl.load_game();

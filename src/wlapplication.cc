@@ -1549,7 +1549,7 @@ bool WLApplication::new_game()
 			// the chat
 			game.set_ibase
 				(new Interactive_Player
-					(game, g_options.pull_section("global"), pn, false, false));
+					(game, g_options.pull_section("global"), pn, false));
 			std::unique_ptr<GameController> ctrl
 				(new SinglePlayerGameController(game, true, pn));
 			UI::ProgressWindow loaderUI;
