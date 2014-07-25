@@ -114,41 +114,6 @@ void get_point(const LuaTable& table, Point* p) {
 }
 
 /**
- * An Image Implementation that draws a static animation into a surface.
- */
-class AnimationImage : public Image {
-public:
-	AnimationImage
-		(const string& ghash, const Animation* anim, const RGBColor& clr)
-		: hash_(ghash), anim_(anim), clr_(clr) {}
-	virtual ~AnimationImage() {}
-
-	// Implements Image.
-	virtual uint16_t width() const {return anim_->width();}
-	virtual uint16_t height() const {return anim_->height();}
-	virtual const string& hash() const {return hash_;}
-	virtual Surface* surface() const {
-		SurfaceCache& surface_cache = g_gr->surfaces();
-		Surface* surf = surface_cache.get(hash_);
-		if (surf)
-			return surf;
-
-		// Blit the animation on a freshly wiped surface.
-		surf = Surface::create(width(), height());
-		surf->fill_rect(Rect(0, 0, surf->width(), surf->height()), RGBAColor(255, 255, 255, 0));
-		anim_->blit(0, Point(0, 0), Rect(0, 0, width(), height()), &clr_, surf);
-		surface_cache.insert(hash_, surf, true);
-
-		return surf;
-	}
-
-private:
-	const string hash_;
-	const Animation* const anim_;   // Not owned.
-	const RGBColor clr_;
-};
-
-/**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.
  */
