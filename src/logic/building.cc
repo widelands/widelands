@@ -507,7 +507,9 @@ void Building::destroy(Editor_Game_Base & egbase)
 std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
 
-	for (std::string::const_iterator format_iter = format.begin(); format_iter != format.end();++format_iter) {
+	for (std::string::const_iterator format_iter = format.begin();
+		  format_iter != format.end();
+		  ++format_iter) {
 
 		if (*format_iter == '%') {
 			if (++format_iter == format.end()) { // unterminated format sequence
