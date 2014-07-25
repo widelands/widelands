@@ -786,14 +786,16 @@ Worker & Warehouse::launch_worker
 				remove_no_longer_existing_workers(game, &m_incorporated_workers[ware]);
 				WorkerList& incorporated_workers = m_incorporated_workers[ware];
 
-				container_iterate (WorkerList, incorporated_workers, i) {
-					Worker* worker = *i.current;
+				for (std::vector<Worker *>::iterator worker_iter = incorporated_workers.begin();
+					 worker_iter != incorporated_workers.end(); ++worker_iter)
+				{
+					Worker* worker = *worker_iter;
 					--unincorporated;
 
 					if (req.check(*worker)) {
 						worker->reset_tasks(game);  //  forget everything you did
 						worker->set_location(this); //  back in a economy
-						incorporated_workers.erase(i.current);
+						incorporated_workers.erase(worker_iter);
 
 						m_supply->remove_workers(ware, 1);
 						return *worker;

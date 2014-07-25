@@ -1007,14 +1007,17 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
 Map_Object * MilitarySite::popSoldierJob
 	(Soldier * const soldier, bool * const stayhome)
 {
-	container_iterate(std::vector<SoldierJob>, m_soldierjobs, i)
-		if (i.current->soldier == soldier) {
-			Map_Object * const enemy = i.current->enemy.get(owner().egbase());
+	for (std::vector<SoldierJob>::iterator job_iter = m_soldierjobs.begin();
+		 job_iter != m_soldierjobs.end(); ++job_iter)
+	{
+		if (job_iter->soldier == soldier) {
+			Map_Object * const enemy = job_iter->enemy.get(owner().egbase());
 			if (stayhome)
-				*stayhome = i.current->stayhome;
-			m_soldierjobs.erase(i.current);
+				*stayhome = job_iter->stayhome;
+			m_soldierjobs.erase(job_iter);
 			return enemy;
 		}
+	}
 	return nullptr;
 }
 

@@ -819,9 +819,10 @@ void Player::add_economy(Economy & economy)
 
 
 void Player::remove_economy(Economy & economy) {
-	container_iterate(Economies, m_economies, i)
-		if (*i.current == &economy) {
-			m_economies.erase(i.current);
+	for (std::vector<Economy *>::iterator economy_iter = m_economies.begin();
+		 economy_iter != m_economies.end(); ++economy_iter)
+		if (*economy_iter == &economy) {
+			m_economies.erase(economy_iter);
 			return;
 		}
 }
