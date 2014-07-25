@@ -186,8 +186,9 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					for (const Ware_Index& ware_index : ware_types) {
 						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
-					/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
+
 					const std::string ware_type_names =
+					/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
 					   boost::algorithm::join(ware_type_descnames, _(" or "));
 
 					//  Make sure to detect if someone changes the type so that it
