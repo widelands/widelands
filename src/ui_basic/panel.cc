@@ -998,7 +998,7 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (_flags & pf_top_on_click)
 		move_to_top();
 
-	//  TODO(unknown) This code is erroneous. It checks the current key state. What it
+	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
 	//  Some window managers use alt-drag, so we can't only use the alt keys

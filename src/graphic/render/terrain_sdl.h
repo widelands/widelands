@@ -662,7 +662,7 @@ template<typename T> static void draw_field_int
 
 	dst.unlock(Surface::Unlock_Update);
 
-	// TODO(unknown) similar textures may not need dithering
+	// TODO(unknown): similar textures may not need dithering
 }
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_TERRAIN_SDL_H

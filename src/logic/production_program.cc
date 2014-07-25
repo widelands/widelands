@@ -303,7 +303,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description
 		condition = (boost::format(_("%s,")) % condition).str();
 	}
 	if (1 < group.second) {
-		// TODO(unknown) this should be done with ngettext
+		// TODO(GunChleoc): this should be done with ngettext
 		condition =
 			(boost::format(_("%1$s (%2$i)")) % condition % static_cast<unsigned int>(group.second)).str();
 	}
@@ -503,7 +503,7 @@ void ProductionProgram::ActReturn::execute
 				condition_string += i.front()->description(ps.owner().tribe());
 				if (i.advance().empty())
 					break;
-				// TODO(unknown)  Would prefer "%1$s and %2$s" but getting segfaults, so leaving this for now
+				// TODO(GunChleoc):  Would prefer "%1$s and %2$s" but getting segfaults, so leaving this for now
 				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
 				condition_string = (boost::format(_("%s and ")) % condition_string).str();
 			}
@@ -520,7 +520,7 @@ void ProductionProgram::ActReturn::execute
 				condition_string += i.front()->description(ps.owner().tribe());
 				if (i.advance().empty())
 					break;
-				// TODO(unknown)  Would prefer '%1$s or %2$s' but getting segfaults, so leaving this for now
+				// TODO(GunChleoc):  Would prefer '%1$s or %2$s' but getting segfaults, so leaving this for now
 				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
 				condition_string = (boost::format(_("%s or ")) % condition_string).str();
 			}
@@ -894,7 +894,7 @@ void ProductionProgram::ActConsume::execute
 			{
 				uint8_t const count = i.current->second;
 				if (1 < count) {
-					// TODO(unknown) this should be done with ngettext
+					// TODO(GunChleoc): this should be done with ngettext
 					result_string =
 						/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
 						(boost::format(_("%1$s (%2$i)")) % result_string
@@ -1300,7 +1300,7 @@ void ProductionProgram::ActMine::execute
 	}
 
 	//  done successful
-	//  TODO(unknown) Should pass the time it takes to mine in the phase parameter of
+	//  TODO(unknown): Should pass the time it takes to mine in the phase parameter of
 	//  ProductionSite::program_step so that the following sleep/animate
 	//  command knows how long it should last.
 	return ps.program_step(game);
@@ -1324,7 +1324,7 @@ void ProductionProgram::ActMine::notify_player
 }
 
 ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
-	//  TODO(unknown) This is currently hardcoded for "soldier", but should allow any
+	//  TODO(unknown): This is currently hardcoded for "soldier", but should allow any
 	//  soldier type name.
 	if (not match_force_skip(parameters, "soldier"))
 		throw game_data_error
@@ -1400,7 +1400,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 }
 
 ProductionProgram::ActTrain::ActTrain(char* parameters) {
-	//  TODO(unknown) This is currently hardcoded for "soldier", but should allow any
+	//  TODO(unknown): This is currently hardcoded for "soldier", but should allow any
 	//  soldier type name.
 	if (not match_force_skip(parameters, "soldier"))
 		throw game_data_error

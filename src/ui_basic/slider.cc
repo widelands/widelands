@@ -202,7 +202,7 @@ void Slider::send_value_changed()
  */
 void Slider::set_enabled(const bool enabled)
 {
-	// TODO(unknown) disabled should look different...
+	// TODO(unknown): disabled should look different...
 	if (m_enabled == enabled)
 		return;
 

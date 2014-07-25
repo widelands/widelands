@@ -291,7 +291,7 @@ void NonPackedAnimation::load_graphics() {
 	}
 
 	for (const std::string& filename : pc_mask_image_files_) {
-		// TODO(unknown) Do not load playercolor mask as opengl texture or use it as
+		// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
 		//     opengl texture.
 		const Image* pc_image = g_gr->images().get(filename);
 		if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {

@@ -138,7 +138,7 @@ Soldier * Battle::opponent(Soldier& soldier)
 	return other_soldier;
 }
 
-//  TODO(unknown) Couldn't this code be simplified tremendously by doing all scheduling
+//  TODO(unknown): Couldn't this code be simplified tremendously by doing all scheduling
 //  for one soldier and letting the other sleep until the battle is over?
 //  Could be, but we need to be able change the animations of the soldiers
 //  easily without unneeded hacks, and this code is not so difficult, only it

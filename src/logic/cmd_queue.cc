@@ -51,7 +51,7 @@ Cmd_Queue::~Cmd_Queue()
  * flushs all commands from the queue. Needed for
  * game loading (while in game)
  */
-// TODO(unknown) ...but game loading while in game is not possible!
+// TODO(unknown): ...but game loading while in game is not possible!
 // Note: Order of destruction of Items is not guaranteed
 void Cmd_Queue::flush() {
 	uint32_t cbucket = 0;

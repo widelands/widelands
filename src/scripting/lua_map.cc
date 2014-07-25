@@ -1123,7 +1123,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, is_port),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
-	// TODO(SirVer) size should be similar to
+	// TODO(SirVer): size should be similar to
 	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.

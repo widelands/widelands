@@ -432,7 +432,7 @@ void Window::think() {if (not is_minimal()) Panel::think();}
  */
 bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
 {
-	//  TODO(unknown) This code is erroneous. It checks the current key state. What it
+	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
 	if

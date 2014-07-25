@@ -169,7 +169,7 @@ namespace {
 		                      static_cast<long unsigned int>((file).GetSize() - (file).GetPos()),    \
 		                      filename);
 
-// TODO(unknown) Legacy code deprecated since build18
+// TODO(unknown): Legacy code deprecated since build18
 template <uint8_t const Size> struct BitInBuffer {
 	static_assert(Size == 1 or Size == 2 or Size == 4, "Unexpected Size.");
 	BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {
@@ -458,7 +458,7 @@ void Map_Players_View_Data_Packet::Read
 								map_object_descr = nullptr;
 							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
-									//  TODO(unknown) This is not the building's main position
+									//  TODO(unknown): This is not the building's main position
 									//  so we can not see it. But it should be
 									//  possible to see it from a distance somehow.
 									map_object_descr = nullptr;
@@ -601,7 +601,7 @@ void Map_Players_View_Data_Packet::Read
 			BORDER_FILENAME_TEMPLATE,
 			BORDER_CURRENT_PACKET_VERSION);
 
-		// TODO(unknown) Legacy code deprecated since build18
+		// TODO(unknown): Legacy code deprecated since build18
 		BitInBuffer<2> legacy_node_immovable_kinds_bitbuffer(&node_immovable_kinds_file);
 		BitInBuffer<2> legacy_road_bitbuffer(&roads_file);
 		BitInBuffer<4> legacy_terrains_bitbuffer(&terrains_file);
@@ -735,7 +735,7 @@ void Map_Players_View_Data_Packet::Read
 							map_object_descr = nullptr;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
-								//  TODO(unknown) This is not the building's main position so
+								//  TODO(unknown): This is not the building's main position so
 								//  we can not see it. But it should be possible
 								//  to see it from a distance somehow.
 								map_object_descr = nullptr;

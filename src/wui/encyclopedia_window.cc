@@ -145,7 +145,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 			(*tribe.get_building_descr(prodSites.get_selected()))
 		.programs();
 
-	//  TODO(unknown) This needs reworking. A program can indeed produce iron even if
+	//  TODO(unknown): This needs reworking. A program can indeed produce iron even if
 	//  the program name is not any of produce_iron, smelt_iron, prog_iron
 	//  or work. What matters is whether the program has a statement such
 	//  as "produce iron" or "createware iron". The program name is not
