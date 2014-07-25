@@ -206,12 +206,13 @@ void TrainingSite::init(Editor_Game_Base & egbase)
 
 	upcast(Game, game, &egbase);
 
-	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
-		(*i.current)->set_location_initially(*this);
-		assert(!(*i.current)->get_state()); //  Should be newly created.
+	for (Soldier * soldier : m_soldiers) {
+		soldier->set_location_initially(*this);
+		assert(!soldier->get_state()); //  Should be newly created.
 
-		if (game)
-			(*i.current)->start_task_idle(*game, 0, -1);
+		if (game) {
+			soldier->start_task_idle(*game, 0, -1);
+		}
 	}
 	update_soldier_request();
 }
@@ -465,8 +466,9 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
 
 	// Drop soldiers only now, so that changes in the soldiers array don't
 	// mess things up
-	container_iterate_const(std::vector<Soldier *>, droplist, i)
-		dropSoldier(**i.current);
+	for (Soldier * soldier : droplist) {
+		dropSoldier(*soldier);
+	}
 }
 
 /**
@@ -590,16 +592,16 @@ void TrainingSite::find_and_start_next_program(Game & game)
 		uint32_t maxprio = 0;
 		uint32_t maxcredit = 0;
 
-		container_iterate(std::vector<Upgrade>, m_upgrades, i) {
-			if (i.current->credit >= 10) {
-				i.current->credit -= 10;
-				return start_upgrade(game, *i.current);
+		for (Upgrade& upgrade : m_upgrades) {
+			if (upgrade.credit >= 10) {
+				upgrade.credit -= 10;
+				return start_upgrade(game, upgrade);
 			}
 
-			if (maxprio   < i.current->prio)
-				maxprio    = i.current->prio;
-			if (maxcredit < i.current->credit)
-				maxcredit  = i.current->credit;
+			if (maxprio   < upgrade.prio)
+				maxprio    = upgrade.prio;
+			if (maxcredit < upgrade.credit)
+				maxcredit  = upgrade.credit;
 		}
 
 		if (maxprio == 0)
@@ -607,8 +609,9 @@ void TrainingSite::find_and_start_next_program(Game & game)
 
 		uint32_t const multiplier = 1 + (10 - maxcredit) / maxprio;
 
-		container_iterate(std::vector<Upgrade>, m_upgrades, i)
-			i.current->credit += multiplier * i.current->prio;
+		for (Upgrade& upgrade : m_upgrades) {
+			upgrade.credit += multiplier * upgrade.prio;
+		}
 	}
 }
 
@@ -622,8 +625,8 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	int32_t minlevel = upgrade.max;
 	int32_t maxlevel = upgrade.min;
 
-	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
-		int32_t const level = (*i.current)->get_level(upgrade.attribute);
+	for (Soldier * soldier : m_soldiers) {
+		int32_t const level = soldier->get_level(upgrade.attribute);
 
 		if (level > upgrade.max || level < upgrade.min)
 			continue;
@@ -671,10 +674,11 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 
 TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
 {
-	container_iterate(std::vector<Upgrade>, m_upgrades, i)
-		if (i.current->attribute == atr)
-			return &*i.current;
-
+	for (Upgrade& upgrade : m_upgrades) {
+		if (upgrade.attribute == atr) {
+			return &upgrade;
+		}
+	}
 	return nullptr;
 }
 
@@ -684,10 +688,11 @@ TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
  */
 int32_t TrainingSite::get_pri(tAttribute atr)
 {
-	container_iterate_const(std::vector<Upgrade>, m_upgrades, i)
-		if (i.current->attribute == atr)
-			return i.current->prio;
-
+	for (const Upgrade& upgrade : m_upgrades) {
+		if (upgrade.attribute == atr) {
+			return upgrade.prio;
+		}
+	}
 	return 0;
 }
 
@@ -699,11 +704,12 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
 	if (prio < 0)
 		prio = 0;
 
-	container_iterate(std::vector<Upgrade>, m_upgrades, i)
-		if (i.current->attribute == atr) {
-			i.current->prio = prio;
+	for (Upgrade& upgrade : m_upgrades) {
+		if (upgrade.attribute == atr) {
+			upgrade.prio = prio;
 			return;
 		}
+	}
 }
 
 /**

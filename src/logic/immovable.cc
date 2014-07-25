@@ -1375,9 +1375,9 @@ void PlayerImmovable::add_worker(Worker & w)
 */
 void PlayerImmovable::remove_worker(Worker & w)
 {
-	container_iterate(Workers, m_workers, i)
-		if (*i.current == &w) {
-			*i.current = *(i.get_end() - 1);
+	for (Workers::iterator worker_iter = m_workers.begin(); worker_iter != m_workers.end(); ++worker_iter)
+		if (*worker_iter == &w) {
+				*worker_iter = *(m_workers.end() - 1);
 			return m_workers.pop_back();
 		}
 

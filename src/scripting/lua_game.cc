@@ -202,12 +202,12 @@ int L_Player::get_inbox(lua_State * L) {
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
-	container_iterate_const(MessageQueue, p.messages(), m) {
-		if (m.current->second->status() == Message::Archived)
+	for (const std::pair<Message_Id, Message *>& temp_message : p.messages()) {
+		if (temp_message.second->status() == Message::Archived)
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<L_Message>(L, new L_Message(player_number(), m.current->first));
+		to_lua<L_Message>(L, new L_Message(player_number(), temp_message.first));
 		lua_rawset(L, -3);
 	}
 
@@ -694,12 +694,12 @@ int L_Player::get_buildings(lua_State * L) {
 	lua_newtable(L);
 
 	uint32_t cidx = 1;
-	container_iterate_const(std::vector<Building_Index>, houses, i) {
+	for (const Building_Index& house : houses) {
 		const std::vector<Widelands::Player::Building_Stats> & vec =
-			p.get_building_statistics(*i.current);
+			p.get_building_statistics(house);
 
 		if (return_array) {
-			lua_pushstring(L, p.tribe().get_building_descr(*i.current)->name());
+			lua_pushstring(L, p.tribe().get_building_descr(house)->name());
 			lua_newtable(L);
 			cidx = 1;
 		}
@@ -794,10 +794,11 @@ int L_Player::allow_workers(lua_State * L) {
 			}
 			for (uint32_t j = player.get_nr_economies(); j;) {
 				Economy & economy = *player.get_economy_by_number(--j);
-				container_iterate_const
-					(std::vector<Warehouse *>, economy.warehouses(), k)
-					(*k.current)->enable_spawn
+
+				for (Warehouse * warehouse : economy.warehouses()) {
+					warehouse->enable_spawn
 						(game, worker_types_without_cost_index);
+				}
 			}
 		}
 	}
@@ -864,9 +865,9 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 	std::vector<Building_Index> houses;
 	m_parse_building_list(L, p.tribe(), houses);
 
-	container_iterate_const(std::vector<Building_Index>, houses, i)
-		p.allow_building_type(*i.current, allow);
-
+	for (const Building_Index& house : houses) {
+		p.allow_building_type(house, allow);
+	}
 	return 0;
 }
 

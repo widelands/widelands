@@ -296,10 +296,12 @@ void DefaultAI::late_initialization() {
 			const ProductionSite_Descr& prod =
 			   ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
-			container_iterate_const(BillOfMaterials, prod.inputs(), j)
-			bo.inputs_.push_back(j.current->first);
-			container_iterate_const(ProductionSite_Descr::Output, prod.output_ware_types(), j)
-			bo.outputs_.push_back(*j.current);
+			for (const WareAmount& temp_input : prod.inputs()) {
+				bo.inputs_.push_back(temp_input.first);
+			}
+			for (const Ware_Index& temp_output : prod.output_ware_types()) {
+				bo.outputs_.push_back(temp_output);
+			}
 
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
@@ -688,10 +690,10 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 		    || (dynamic_cast<Road const*>(imm) && (fse.field->nodecaps() & BUILDCAPS_FLAG)))
 			field.preferred_ = true;
 
-	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
-		if (dynamic_cast<Flag const*>(i.current->object))
+	for (const ImmovableFound& temp_immovable : immovables) {
+		if (dynamic_cast<Flag const*>(temp_immovable.object))
 			field.reachable = true;
-		else if (upcast(Building const, bld, i.current->object)) {
+		else if (upcast(Building const, bld, temp_immovable.object)) {
 			if (bld->descr().get_ismine()) {
 				++field.mines_nearby_;
 			} else if (upcast(ConstructionSite const, cs, bld)) {
@@ -1536,13 +1538,16 @@ bool DefaultAI::construct_roads(int32_t gametime) {
 // improves current road system
 bool DefaultAI::improve_roads(int32_t gametime) {
 	// Remove flags of dead end roads, as long as no more wares are stored on them
-	container_iterate(std::list<EconomyObserver*>, economies, i)
-	container_iterate(std::list<Flag const*>, (*i.current)->flags, j)
-
-	if ((*j.current)->is_dead_end() && (*j.current)->current_wares() == 0) {
-		game().send_player_bulldoze(*const_cast<Flag*>((*j.current)));
-		j.current = (*i.current)->flags.erase(j.current);
-		return true;
+	for (EconomyObserver* eco_obs : economies) {
+		for (std::list<Flag const*>::iterator flag_iter = eco_obs->flags.begin();
+			  flag_iter != eco_obs->flags.end();
+			  ++flag_iter) {
+			if ((*flag_iter)->is_dead_end() && (*flag_iter)->current_wares() == 0) {
+				game().send_player_bulldoze(*const_cast<Flag*>(*flag_iter));
+				flag_iter = eco_obs->flags.erase(flag_iter);
+				return true;
+			}
+		}
 	}
 
 	// force a split on roads that are longer than 3 parts
@@ -1636,15 +1641,15 @@ bool DefaultAI::connect_flag_to_another_economy(const Flag& flag) {
 	bool found = false;
 	check.set_openend(false);
 	Coords closest;
-	container_iterate_const(std::vector<Coords>, reachable, i) {
+	for (const Coords& reachable_coords : reachable) {
 		Path* path2 = new Path();
 
-		if (map.findpath(flag.get_position(), *i.current, 0, *path2, check) >= 0) {
+		if (map.findpath(flag.get_position(), reachable_coords, 0, *path2, check) >= 0) {
 			if (!found || path->get_nsteps() > path2->get_nsteps()) {
 				delete path;
 				path = path2;
 				path2 = nullptr;
-				closest = *i.current;
+				closest = reachable_coords;
 				found = true;
 			}
 		}
@@ -1669,19 +1674,21 @@ bool DefaultAI::connect_flag_to_another_economy(const Flag& flag) {
 // adds alternative ways to already existing ones
 bool DefaultAI::improve_transportation_ways(const Flag& flag) {
 	// First of all try to remove old building flags to clean up the road web if possible
-	container_iterate(std::list<Widelands::Coords>, flags_to_be_removed, i) {
+	for (std::list<Widelands::Coords>::iterator coords_iter = flags_to_be_removed.begin();
+		  coords_iter != flags_to_be_removed.end();
+		  ++coords_iter) {
 		// Maybe the flag was already removed?
-		FCoords f = game().map().get_fcoords(*(i.current));
+		FCoords f = game().map().get_fcoords(*(coords_iter));
 
 		if (upcast(Flag, other_flag, f.field->get_immovable())) {
 			// Check if building is dismantled, but don't waste precious wares
 			if (!other_flag->get_building() && other_flag->current_wares() == 0) {
 				game().send_player_bulldoze(*other_flag);
-				flags_to_be_removed.erase(i.current);
+				flags_to_be_removed.erase(coords_iter);
 				break;
 			}
 		} else {
-			flags_to_be_removed.erase(i.current);
+			flags_to_be_removed.erase(coords_iter);
 			break;
 		}
 	}
@@ -1758,12 +1765,14 @@ bool DefaultAI::check_economies() {
 		get_economy_observer(flag.economy())->flags.push_back(&flag);
 	}
 
-	container_iterate(std::list<EconomyObserver*>, economies, i) {
+	for (std::list<EconomyObserver*>::iterator obs_iter = economies.begin();
+		  obs_iter != economies.end();
+		  ++obs_iter) {
 		// check if any flag has changed its economy
-		std::list<Flag const*>& fl = (*i.current)->flags;
+		std::list<Flag const*>& fl = (*obs_iter)->flags;
 
 		for (std::list<Flag const*>::iterator j = fl.begin(); j != fl.end();) {
-			if (&(*i.current)->economy != &(*j)->economy()) {
+			if (&(*obs_iter)->economy != &(*j)->economy()) {
 				get_economy_observer((*j)->economy())->flags.push_back(*j);
 				j = fl.erase(j);
 			} else
@@ -1772,9 +1781,9 @@ bool DefaultAI::check_economies() {
 
 		// if there are no more flags in this economy,
 		// we no longer need it's observer
-		if ((*i.current)->flags.empty()) {
-			delete *i.current;
-			economies.erase(i.current);
+		if ((*obs_iter)->flags.empty()) {
+			delete *obs_iter;
+			economies.erase(obs_iter);
 			return true;
 		}
 	}
@@ -1809,10 +1818,11 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
 	const Workarea_Info& workarea_info = site.bo->desc->m_workarea_info;
-	container_iterate_const(Workarea_Info, workarea_info, i)
-
-	if (radius < i.current->first)
-		radius = i.current->first;
+	for (const std::pair<uint32_t, std::set<std::string> > & temp_info : workarea_info) {
+		if (radius < temp_info.first) {
+			radius = temp_info.first;
+		}
+	}
 
 	Map& map = game().map();
 
@@ -2428,19 +2438,23 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 	if (upcast(Building const, building, &pi))
 		lose_building(*building);
 	else if (upcast(Flag const, flag, &pi)) {
-		container_iterate_const(std::list<EconomyObserver*>, economies, i)
-		container_iterate(std::list<Flag const*>, (*i.current)->flags, j)
-
-		if (*j.current == flag) {
-			(*i.current)->flags.erase(j.current);
-			return;
+		for (EconomyObserver* eco_obs : economies) {
+			for (std::list<Flag const*>::iterator flag_iter = eco_obs->flags.begin();
+				  flag_iter != eco_obs->flags.end();
+				  ++flag_iter) {
+				if (*flag_iter == flag) {
+					eco_obs->flags.erase(flag_iter);
+					return;
+				}
+			}
 		}
-
-		container_iterate(std::list<Flag const*>, new_flags, i)
-
-		if (*i.current == flag) {
-			new_flags.erase(i.current);
-			return;
+		for (std::list<Flag const*>::iterator flag_iter = new_flags.begin();
+			  flag_iter != new_flags.end();
+			  ++flag_iter) {
+			if (*flag_iter == flag) {
+				new_flags.erase(flag_iter);
+				return;
+			}
 		}
 	} else if (upcast(Road const, road, &pi))
 		roads.remove(road);
@@ -2560,15 +2574,16 @@ void DefaultAI::lose_building(const Building& b) {
 // NOTE: This is not needed anymore and it seems it is not missed neither
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;
-	container_iterate_const(std::vector<int16_t>, bo.inputs_, i)
-	container_iterate_const(std::vector<BuildingObserver>, buildings_, j)
-
-	if (j.current->cnt_built_ &&
-	    std::find(j.current->outputs_.begin(), j.current->outputs_.end(), *i.current) !=
-	       j.current->outputs_.end() &&
-	    check_supply(*j.current)) {
-		++supplied;
-		break;
+	for (const int16_t& temp_inputs : bo.inputs_) {
+		for (const BuildingObserver& temp_building : buildings_) {
+			if (temp_building.cnt_built_ &&
+				 std::find(temp_building.outputs_.begin(), temp_building.outputs_.end(), temp_inputs) !=
+					 temp_building.outputs_.end() &&
+				 check_supply(temp_building)) {
+				++supplied;
+				break;
+			}
+		}
 	}
 
 	return supplied == bo.inputs_.size();

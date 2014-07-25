@@ -74,8 +74,9 @@ Road::CarrierSlot::CarrierSlot() :
  */
 Road::~Road()
 {
-	container_iterate_const(SlotVector, m_carrier_slots, i)
-		delete i.current->carrier_request;
+	for (CarrierSlot& slot: m_carrier_slots) {
+		delete slot.carrier_request;
+	}
 }
 
 /**
@@ -282,17 +283,19 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	 * If a carrier is set assign it to this road, else
 	 * request a new carrier
 	 */
-	if (upcast(Game, game, &egbase))
-	container_iterate(SlotVector, m_carrier_slots, i) {
-		if (Carrier * const carrier = i.current->carrier.get(*game)) {
-			//  This happens after a road split. Tell the carrier what's going on.
-			carrier->set_location    (this);
-			carrier->update_task_road(*game);
-		} else if
-			(!i.current->carrier_request &&
-			 (i.current->carrier_type == 1 ||
-			  m_type == Road_Busy))
-			_request_carrier(*i.current);
+	if (upcast(Game, game, &egbase)) {
+		for (CarrierSlot& slot : m_carrier_slots) {
+			if (Carrier * const carrier = slot.carrier.get(*game)) {
+				//  This happens after a road split. Tell the carrier what's going on.
+				carrier->set_location    (this);
+				carrier->update_task_road(*game);
+			} else if
+				(!slot.carrier_request &&
+				 (slot.carrier_type == 1 ||
+				  m_type == Road_Busy)) {
+				_request_carrier(slot);
+			}
+		}
 	}
 }
 
@@ -302,12 +305,12 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 void Road::cleanup(Editor_Game_Base & egbase)
 {
 
-	container_iterate(SlotVector, m_carrier_slots, i) {
-		delete i.current->carrier_request;
-		i.current->carrier_request = nullptr;
+	for (CarrierSlot& slot : m_carrier_slots) {
+		delete slot.carrier_request;
+		slot.carrier_request = nullptr;
 
 		// carrier will be released via PlayerImmovable::cleanup
-		i.current->carrier = nullptr;
+		slot.carrier = nullptr;
 	}
 
 	// Unmark Fields
@@ -335,9 +338,11 @@ void Road::set_economy(Economy * const e)
 {
 	PlayerImmovable::set_economy(e);
 
-	container_iterate_const(SlotVector, m_carrier_slots, i)
-		if (i.current->carrier_request)
-			i.current->carrier_request->set_economy(e);
+	for (CarrierSlot& slot: m_carrier_slots) {
+		if (slot.carrier_request) {
+			slot.carrier_request->set_economy(e);
+		}
+	}
 }
 
 /**
@@ -378,16 +383,17 @@ void Road::_request_carrier_callback
 
 	Road    & road    = ref_cast<Road,    PlayerImmovable>(target);
 
-	container_iterate(SlotVector, road.m_carrier_slots, i)
-		if (i.current->carrier_request == &rq) {
+	for (CarrierSlot& slot : road.m_carrier_slots) {
+		if (slot.carrier_request == &rq) {
 			Carrier & carrier = ref_cast<Carrier, Worker> (*w);
-			i.current->carrier_request = nullptr;
-			i.current->carrier = &carrier;
+			slot.carrier_request = nullptr;
+			slot.carrier = &carrier;
 
 			carrier.start_task_road(game);
 			delete &rq;
 			return;
 		}
+	}
 
 	/*
 	 * Oops! We got a request_callback but don't have the request.
@@ -407,13 +413,13 @@ void Road::remove_worker(Worker & w)
 {
 	Editor_Game_Base & egbase = owner().egbase();
 
-	container_iterate(SlotVector, m_carrier_slots, i) {
-		Carrier const * carrier = i.current->carrier.get(egbase);
+	for (CarrierSlot& slot : m_carrier_slots) {
+		Carrier const * carrier = slot.carrier.get(egbase);
 
 		if (carrier == &w) {
-			i.current->carrier = nullptr;
+			slot.carrier = nullptr;
 			carrier            = nullptr;
-			_request_carrier(*i.current);
+			_request_carrier(slot);
 		}
 	}
 
@@ -476,11 +482,13 @@ void Road::postsplit(Game & game, Flag & flag)
 	secondpath.starttrim(index);
 
 	molog("splitting road: first part:\n");
-	container_iterate_const(std::vector<Coords>, path.get_coords(), i)
-		molog("* (%i, %i)\n", i.current->x, i.current->y);
+	for (const Coords& coords : path.get_coords()) {
+		molog("* (%i, %i)\n", coords.x, coords.y);
+	}
 	molog("                second part:\n");
-	container_iterate_const(std::vector<Coords>, secondpath.get_coords(), i)
-		molog("* (%i, %i)\n", i.current->x, i.current->y);
+	for (const Coords& coords : secondpath.get_coords()) {
+		molog("* (%i, %i)\n", coords.x, coords.y);
+	}
 
 	// change road size and reattach
 	m_flags[FlagEnd] = &flag;
@@ -506,12 +514,10 @@ void Road::postsplit(Game & game, Flag & flag)
 	// the worker around; there's obviously nothing wrong with that.
 
 	std::vector<Worker *> const workers = get_workers();
-
 	std::vector<Worker *> reassigned_workers;
 
-	container_iterate_const(std::vector<Worker *>, workers, i) {
-		Worker & w = **i.current;
-		int32_t idx = path.get_index(w.get_position());
+	for (Worker * w : workers) {
+		int32_t idx = path.get_index(w->get_position());
 
 		// Careful! If the worker is currently inside the building at our
 		// starting flag, we *must not* reassign him.
@@ -520,42 +526,44 @@ void Road::postsplit(Game & game, Flag & flag)
 		if (idx < 0) {
 			if
 				(dynamic_cast<Building const *>
-				 	(map.get_immovable(w.get_position())))
+					(map.get_immovable(w->get_position())))
 			{
 				Coords pos;
-				map.get_brn(w.get_position(), &pos);
+				map.get_brn(w->get_position(), &pos);
 				if (pos == path.get_start())
 					idx = 0;
 			}
 		}
 
 		if (idx < 0) {
-			reassigned_workers.push_back(&w);
+			reassigned_workers.push_back(w);
 
 			/*
 			 * The current worker is not on this road. Search him
 			 * in this road and remove him. Than add him to the new road
 			 */
-			container_iterate(SlotVector, m_carrier_slots, j) {
-				Carrier const * const carrier = j.current->carrier.get(game);
+			for (CarrierSlot& old_slot : m_carrier_slots) {
+				Carrier const * const carrier = old_slot.carrier.get(game);
 
-				if (carrier == &w) {
-					j.current->carrier = nullptr;
-					container_iterate(SlotVector, newroad.m_carrier_slots, k)
+				if (carrier == w) {
+					old_slot.carrier = nullptr;
+					for (CarrierSlot& new_slot : newroad.m_carrier_slots) {
 						if
-							(!k.current->carrier.get(game) &&
-							 !k.current->carrier_request &&
-							 k.current->carrier_type == j.current->carrier_type)
+							(!new_slot.carrier.get(game) &&
+							 !new_slot.carrier_request &&
+							 new_slot.carrier_type == old_slot.carrier_type)
 						{
-							k.current->carrier = &ref_cast<Carrier, Worker> (w);
+							upcast(Carrier, new_carrier, w);
+							new_slot.carrier =  new_carrier;
 							break;
 						}
+					}
 				}
 			}
 		}
 
 		// Cause a worker update in any case
-		w.send_signal(game, "road");
+		w->send_signal(game, "road");
 	}
 
 	// Initialize the new road
@@ -563,19 +571,22 @@ void Road::postsplit(Game & game, Flag & flag)
 
 	// Actually reassign workers after the new road has initialized,
 	// so that the reassignment is safe
-	container_iterate_const(std::vector<Worker *>, reassigned_workers, i)
-		(*i.current)->set_location(&newroad);
+	for (Worker *& w : reassigned_workers) {
+		w->set_location(&newroad);
+	}
 
 	//  Request a new carrier for this road if necessary. This must be done
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
-	container_iterate(SlotVector, m_carrier_slots, i)
+	for (CarrierSlot& slot : m_carrier_slots) {
 		if
-			(!i.current->carrier.get(game) &&
-			 !i.current->carrier_request &&
-			 (i.current->carrier_type == 1 ||
-			  m_type == Road_Busy))
-			_request_carrier(*i.current);
+			(!slot.carrier.get(game) &&
+			 !slot.carrier_request &&
+			 (slot.carrier_type == 1 ||
+			  m_type == Road_Busy)) {
+			_request_carrier(slot);
+		}
+	}
 
 	//  Make sure wares waiting on the original endpoint flags are dealt with.
 	m_flags[FlagStart]->update_wares(game, &oldend);
@@ -593,8 +604,8 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 	uint32_t const tdelta = gametime - m_busyness_last_update;
 
 	//  Iterate over all carriers and try to find one which takes the ware.
-	container_iterate(SlotVector, m_carrier_slots, i)
-		if (Carrier * const carrier = i.current->carrier.get(game))
+	for (CarrierSlot& slot : m_carrier_slots) {
+		if (Carrier * const carrier = slot.carrier.get(game))
 			if (carrier->notify_ware(game, flagid)) {
 				//  notify_ware returns false if the carrier currently can not take
 				//  the ware. If we get here, the carrier took the ware. So we
@@ -628,6 +639,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 				}
 				return true;
 			}
+	}
 
 	//  If we get here, no carrier took the ware. So we check if we should
 	//  increment the usage counter. m_busyness_last_update prevents that the
@@ -637,12 +649,14 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 		if (500 < (m_busyness += 10)) {
 			m_type = Road_Busy;
 			_mark_map(game);
-			container_iterate(SlotVector, m_carrier_slots, i)
+			for (CarrierSlot& slot : m_carrier_slots) {
 				if
-					(!i.current->carrier.get(game) &&
-					 !i.current->carrier_request &&
-					 i.current->carrier_type != 1)
-				_request_carrier(*i.current);
+					(!slot.carrier.get(game) &&
+					 !slot.carrier_request &&
+					 slot.carrier_type != 1) {
+				_request_carrier(slot);
+				}
+			}
 		}
 	}
 	return false;

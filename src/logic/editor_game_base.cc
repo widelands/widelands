@@ -82,9 +82,9 @@ Editor_Game_Base::~Editor_Game_Base() {
 	delete map_;
 	delete player_manager_.release();
 
-	container_iterate_const(Tribe_Vector, tribes_, i)
-		delete *i.current;
-
+	for (Tribe_Descr* tribe_descr : tribes_) {
+		delete tribe_descr;
+	}
 	if (g_gr) { // dedicated does not use the sound_handler
 		assert(this == g_sound_handler.egbase_);
 		g_sound_handler.egbase_ = nullptr;
@@ -150,9 +150,11 @@ Player * Editor_Game_Base::add_player
 const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 	(const std::string & tribe)
 {
-	container_iterate_const(Tribe_Vector, tribes_, i)
-		if ((*i.current)->name() == tribe)
-			return **i.current;
+	for (const Tribe_Descr* tribe_descr : tribes_) {
+		if (tribe_descr->name() == tribe) {
+			return *tribe_descr;
+		}
+	}
 
 	Tribe_Descr & result = *new Tribe_Descr(tribe, *this);
 	//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
@@ -273,9 +275,9 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 {
 	loader_ui.step(_("Loading world data"));
 
-	container_iterate_const(Tribe_Vector, tribes_, i) {
+	for (Tribe_Descr* tribe_descr : tribes_) {
 		loader_ui.stepf(_("Loading tribes"));
-		(*i.current)->load_graphics();
+		tribe_descr->load_graphics();
 	}
 
 	// TODO(unknown): load player graphics? (maybe)
@@ -768,31 +770,31 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 	//  find all immovables that need fixing
 	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
 
-	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
-		PlayerImmovable & imm =
-			ref_cast<PlayerImmovable, BaseImmovable>(*i.current->object);
+	for (const ImmovableFound& temp_imm : immovables) {
+		upcast(PlayerImmovable, imm, temp_imm.object);
 		if
-			(!
-			 m[i.current->coords].is_interior(imm.owner().player_number()))
+			(!m[temp_imm.coords].is_interior(imm->owner().player_number())) {
 			if
-				(std::find(burnlist.begin(), burnlist.end(), &imm)
+				(std::find(burnlist.begin(), burnlist.end(), imm)
 				 ==
-				 burnlist.end())
-				burnlist.push_back(&imm);
+				 burnlist.end()) {
+				burnlist.push_back(imm);
+			}
+		}
 	}
 
 	//  fix all immovables
 	upcast(Game, game, this);
-	container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i) {
-		if (upcast(Building, building, *i.current))
+	for (PlayerImmovable * temp_imm : burnlist) {
+		if (upcast(Building, building, temp_imm))
 			building->set_defeating_player(area.player_number);
-		else if (upcast(Flag,     flag,     *i.current))
+		else if (upcast(Flag, flag, temp_imm))
 			if (Building * const flag_building = flag->get_building())
 				flag_building->set_defeating_player(area.player_number);
 		if (game)
-			(*i.current)->schedule_destroy(*game);
+			temp_imm->schedule_destroy(*game);
 		else
-			(*i.current)->remove(*this);
+			temp_imm->remove(*this);
 	}
 }
 

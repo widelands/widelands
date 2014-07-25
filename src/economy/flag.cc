@@ -184,8 +184,9 @@ void Flag::set_economy(Economy * const e)
 	if (m_building)
 		m_building->set_economy(e);
 
-	container_iterate_const(FlagJobs, m_flag_jobs, i)
-		i.current->request->set_economy(e);
+	for (const FlagJob& temp_job : m_flag_jobs) {
+		temp_job.request->set_economy(e);
+	}
 
 	for (int8_t i = 0; i < 6; ++i) {
 		if (m_roads[i])
@@ -795,15 +796,18 @@ void Flag::flag_job_request_callback
 
 	assert(w);
 
-	container_iterate(FlagJobs, flag.m_flag_jobs, i)
-		if (i.current->request == &rq) {
+	for (FlagJobs::iterator flag_iter = flag.m_flag_jobs.begin();
+		  flag_iter != flag.m_flag_jobs.end();
+		  ++flag_iter) {
+		if (flag_iter->request == &rq) {
 			delete &rq;
 
-			w->start_task_program(game, i.current->program);
+			w->start_task_program(game, flag_iter->program);
 
-			flag.m_flag_jobs.erase(i.current);
+			flag.m_flag_jobs.erase(flag_iter);
 			return;
 		}
+	}
 
 	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }

@@ -650,8 +650,9 @@ bool Bob::start_task_movepath
 		molog
 			("ERROR: (%i, %i) is not on the given path:\n",
 			 get_position().x, get_position().y);
-		container_iterate_const(std::vector<Coords>, path.get_coords(), i)
-			molog("* (%i, %i)\n", i.current->x, i.current->y);
+		for (const Coords& coords : path.get_coords()) {
+			molog("* (%i, %i)\n", coords.x, coords.y);
+		}
 		log_general_info(game);
 		log("%s", get_backtrace().c_str());
 		throw wexception
@@ -917,9 +918,9 @@ bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
 		(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
 	if (!soldiers.empty()) {
-		container_iterate(std::vector<Bob *>, soldiers, i) {
-			Soldier & soldier = ref_cast<Soldier, Bob>(**i.current);
-			if (soldier.getBattle())
+		for (Bob * temp_bob : soldiers) {
+			upcast(Soldier, soldier, temp_bob);
+			if (soldier->getBattle())
 				return true;
 		}
 	}

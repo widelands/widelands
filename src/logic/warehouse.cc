@@ -495,8 +495,8 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 	m_portdock = new PortDock(this);
 	m_portdock->set_owner(get_owner());
 	m_portdock->set_economy(get_economy());
-	container_iterate_const(std::vector<Coords>, dock, it) {
-		m_portdock->add_position(*it.current);
+	for (const Coords& coords : dock) {
+		m_portdock->add_position(coords);
 	}
 	m_portdock->init(egbase);
 
@@ -598,7 +598,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 			WorkerList & soldiers = m_incorporated_workers[ware];
 
 			uint32_t total_heal = descr().get_heal_per_second();
-			// Do not use container_iterate, as we plan to erase some
+			// Using an explicit iterator, as we plan to erase some
 			// of those guys
 			for
 				(WorkerList::iterator it = soldiers.begin();
@@ -658,12 +658,10 @@ void Warehouse::set_economy(Economy * const e)
 	m_supply->set_economy(e);
 	Building::set_economy(e);
 
-	container_iterate_const
-		(std::vector<PlannedWorkers>, m_planned_workers, pw_it)
-	{
-		container_iterate_const
-			(std::vector<Request *>, pw_it.current->requests, req_it)
-			(*req_it.current)->set_economy(e);
+	for (const PlannedWorkers& pw : m_planned_workers) {
+		for (Request * req : pw.requests) {
+			req->set_economy(e);
+		}
 	}
 
 	if (m_portdock)
@@ -688,10 +686,10 @@ const WareList & Warehouse::get_workers() const
 PlayerImmovable::Workers Warehouse::get_incorporated_workers()
 {
 	PlayerImmovable::Workers all_workers;
-	container_iterate(IncorporatedWorkers, m_incorporated_workers, cpair) {
-		WorkerList & clist = cpair->second;
-		container_iterate(WorkerList, clist, w) {
-			all_workers.push_back(*w.current);
+
+	for (const std::pair<Ware_Index, WorkerList>& worker_pair : m_incorporated_workers) {
+		for (Worker * worker : worker_pair.second) {
+			all_workers.push_back(worker);
 		}
 	}
 	return all_workers;
@@ -756,14 +754,13 @@ uint32_t Warehouse::count_workers
 
 		// NOTE: This code lies about the tAttributes of non-instantiated workers.
 		if (m_incorporated_workers.count(ware)) {
-			WorkerList & incorporated_workers = m_incorporated_workers[ware];
-
-			container_iterate_const(WorkerList, incorporated_workers, cworker)
-				if (!req.check(**cworker)) {
+			for (Worker * worker : m_incorporated_workers[ware]) {
+				if (!req.check(*worker)) {
 					//  This is one of the workers in our sum.
 					//  But he is too stupid for this job
 					--sum;
 				}
+			}
 		}
 
 		ware = descr().tribe().get_worker_descr(ware)->becomes();
@@ -789,14 +786,16 @@ Worker & Warehouse::launch_worker
 				remove_no_longer_existing_workers(game, &m_incorporated_workers[ware]);
 				WorkerList& incorporated_workers = m_incorporated_workers[ware];
 
-				container_iterate (WorkerList, incorporated_workers, i) {
-					Worker* worker = *i.current;
+				for (std::vector<Worker *>::iterator worker_iter = incorporated_workers.begin();
+					 worker_iter != incorporated_workers.end(); ++worker_iter)
+				{
+					Worker* worker = *worker_iter;
 					--unincorporated;
 
 					if (req.check(*worker)) {
 						worker->reset_tasks(game);  //  forget everything you did
 						worker->set_location(this); //  back in a economy
-						incorporated_workers.erase(i.current);
+						incorporated_workers.erase(worker_iter);
 
 						m_supply->remove_workers(ware, 1);
 						return *worker;
@@ -961,15 +960,14 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 		return false;
 
 	//  see if we have the resources
-	const Worker_Descr::Buildcost & buildcost = w_desc.buildcost();
-	container_iterate_const(Worker_Descr::Buildcost, buildcost, it) {
-		const std::string & input_name = it.current->first;
+	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+		const std::string & input_name = buildcost.first;
 		Ware_Index id_w = descr().tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
-			if (m_supply->stock_wares(id_w) < it.current->second)
+			if (m_supply->stock_wares(id_w) < buildcost.second)
 				return false;
 		} else if ((id_w = descr().tribe().worker_index(input_name)) != INVALID_INDEX) {
-			if (m_supply->stock_workers(id_w) < it.current->second)
+			if (m_supply->stock_workers(id_w) < buildcost.second)
 				return false;
 		} else
 			throw wexception
@@ -986,16 +984,16 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	assert(can_create_worker (game, worker));
 
 	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(worker);
-	const Worker_Descr::Buildcost & buildcost = w_desc.buildcost();
-	container_iterate_const(Worker_Descr::Buildcost, buildcost, i) {
-		const std::string & input = i.current->first;
+
+	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+		const std::string & input = buildcost.first;
 		Ware_Index const id_ware = descr().tribe().ware_index(input);
 		if (id_ware != INVALID_INDEX) {
-			remove_wares  (id_ware,                        i.current->second);
+			remove_wares  (id_ware,                        buildcost.second);
 			//update statistic accordingly
-			owner().ware_consumed(id_ware, i.current->second);
+			owner().ware_consumed(id_ware, buildcost.second);
 		} else
-			remove_workers(descr().tribe().safe_worker_index(input), i.current->second);
+			remove_workers(descr().tribe().safe_worker_index(input), buildcost.second);
 	}
 
 	incorporate_worker(game, &w_desc.create(game, owner(), this, m_position));
@@ -1004,9 +1002,9 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	// may have been called directly by the Economy.
 	// Do not update anything else about PlannedWorkers here, because this
 	// function is called by _update_planned_workers, so avoid recursion
-	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, pw_it) {
-		if (pw_it.current->index == worker && pw_it.current->amount)
-			pw_it.current->amount--;
+	for (PlannedWorkers& planned_worker : m_planned_workers) {
+		if (planned_worker.index == worker && planned_worker.amount)
+			planned_worker.amount--;
 	}
 }
 
@@ -1016,11 +1014,10 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
  */
 uint32_t Warehouse::get_planned_workers(Game & /* game */, Ware_Index index) const
 {
-	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, i) {
-		if (i.current->index == index)
-			return i.current->amount;
+	for (const PlannedWorkers& pw : m_planned_workers) {
+		if (pw.index == index)
+			return pw.amount;
 	}
-
 	return 0;
 }
 
@@ -1034,11 +1031,10 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 	(Game & /* game */, Ware_Index index) const
 {
 	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(index);
-	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 	std::vector<uint32_t> available;
 
-	container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
-		const std::string & input_name = bc.current->first;
+	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+		const std::string & input_name = buildcost.first;
 		Ware_Index id_w = descr().tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
 			available.push_back(get_wares().stock(id_w));
@@ -1050,12 +1046,13 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 				 input_name.c_str());
 	}
 
-	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, i) {
-		if (i.current->index == index) {
-			assert(available.size() == i.current->requests.size());
+	for (const PlannedWorkers& pw : m_planned_workers) {
+		if (pw.index == index) {
+			assert(available.size() == pw.requests.size());
 
-			for (uint32_t idx = 0; idx < available.size(); ++idx)
-				available[idx] += i.current->requests[idx]->get_num_transfers();
+			for (uint32_t idx = 0; idx < available.size(); ++idx) {
+				available[idx] += pw.requests[idx]->get_num_transfers();
+			}
 		}
 	}
 
@@ -1071,9 +1068,9 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 {
 	PlannedWorkers * pw = nullptr;
 
-	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, i) {
-		if (i.current->index == index) {
-			pw = &*i.current;
+	for (PlannedWorkers& planned_worker : m_planned_workers) {
+		if (planned_worker.index == index) {
+			pw = &planned_worker;
 			break;
 		}
 	}
@@ -1088,9 +1085,8 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 		pw->amount = 0;
 
 		const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(pw->index);
-		const Worker_Descr::Buildcost & cost = w_desc.buildcost();
-		container_iterate_const(Worker_Descr::Buildcost, cost, cost_it) {
-			const std::string & input_name = cost_it.current->first;
+		for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+			const std::string & input_name = buildcost.first;
 
 			Ware_Index id_w = descr().tribe().ware_index(input_name);
 			if (id_w != INVALID_INDEX) {
@@ -1119,14 +1115,15 @@ void Warehouse::_update_planned_workers
 	(Game & game, Warehouse::PlannedWorkers & pw)
 {
 	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(pw.index);
-	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 
-	while (pw.amount && can_create_worker(game, pw.index))
+	while (pw.amount && can_create_worker(game, pw.index)) {
 		create_worker(game, pw.index);
+	}
 
 	uint32_t idx = 0;
-	container_iterate_const(Worker_Descr::Buildcost, cost, cost_it) {
-		const std::string & input_name = cost_it.current->first;
+	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+
+		const std::string & input_name = buildcost.first;
 		uint32_t supply;
 
 		Ware_Index id_w = descr().tribe().ware_index(input_name);
@@ -1138,11 +1135,11 @@ void Warehouse::_update_planned_workers
 			throw wexception
 				("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
 
-		if (supply >= pw.amount * cost_it.current->second)
+		if (supply >= pw.amount * buildcost.second)
 			pw.requests[idx]->set_count(0);
 		else
 			pw.requests[idx]->set_count
-				(pw.amount * cost_it.current->second - supply);
+				(pw.amount * buildcost.second - supply);
 		++idx;
 	}
 
@@ -1339,8 +1336,9 @@ std::vector<Soldier *> Warehouse::presentSoldiers() const
 	if (sidx != m_incorporated_workers.end()) {
 		const WorkerList & soldiers = sidx->second;
 
-		container_iterate_const(WorkerList, soldiers, i)
-			rv.push_back(static_cast<Soldier *>(*i));
+		for (Worker * temp_soldier: soldiers) {
+			rv.push_back(static_cast<Soldier *>(temp_soldier));
+		}
 	}
 
 	return rv;

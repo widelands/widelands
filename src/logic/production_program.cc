@@ -21,6 +21,7 @@
 
 #include <sstream>
 
+#include <boost/algorithm/string/join.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -138,6 +139,34 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 
 	return false;
 }
+
+// Helper structure for representing an iterator range in
+// for loops with constant iterators.
+// DEPRECATED!! do not use.
+// TODO(sirver): Replace the use of this with boost::algorithm::join() below.
+template<typename C>
+struct wl_const_range
+{
+	wl_const_range
+		(const typename  C::const_iterator & first,
+		 const typename C::const_iterator & last)
+		: current(first), end(last) {}
+	wl_const_range(const C & container) : current(container.begin()), end(container.end()) {}
+	wl_const_range(const wl_const_range & r) : current(r.current), end(r.end) {}
+	typename C::const_iterator current;
+	wl_const_range & operator++() {++current; return *this;}
+	wl_const_range<C> & advance() {++current; return *this;}
+	bool empty() const {return current == end;}
+	operator bool() const {return empty() ? false: true;}
+	typename C::const_reference front() const {return *current;}
+	typename C::const_reference operator*() const {return *current;}
+	typename C::const_pointer operator->() const {return (&**this);}
+	typename C::const_iterator get_end() {return end;}
+private:
+	typename C::const_iterator end;
+};
+
+
 
 }  // namespace
 
@@ -281,23 +310,24 @@ bool ProductionProgram::ActReturn::Site_Has::evaluate
 	(const ProductionSite & ps) const
 {
 	uint8_t count = group.second;
-	container_iterate_const(ProductionSite::Input_Queues, ps.warequeues(), i)
-		if (group.first.count((*i.current)->get_ware())) {
-			uint8_t const filled = (*i.current)->get_filled();
+	for (WaresQueue * ip_queue : ps.warequeues()) {
+		if (group.first.count(ip_queue->get_ware())) {
+			uint8_t const filled = ip_queue->get_filled();
 			if (count <= filled)
 				return true;
 			count -= filled;
 		}
+	}
 	return false;
 }
 std::string ProductionProgram::ActReturn::Site_Has::description
 	(const Tribe_Descr & tribe) const
 {
 	std::string condition = "";
-	container_iterate_const(std::set<Ware_Index>, group.first, i) {
+	for (const Ware_Index& temp_ware : group.first) {
 		condition =
 		/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
-			(boost::format(_("%1$s %2$s")) % condition % tribe.get_ware_descr(*i.current)->descname())
+			(boost::format(_("%1$s %2$s")) % condition % tribe.get_ware_descr(temp_ware)->descname())
 			 .str();
 		/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
 		condition = (boost::format(_("%s,")) % condition).str();
@@ -476,8 +506,9 @@ ProductionProgram::ActReturn::ActReturn
 }
 
 ProductionProgram::ActReturn::~ActReturn() {
-	container_iterate_const(Conditions, m_conditions, i)
-		delete *i.current;
+	for (Condition * condition : m_conditions) {
+		delete condition;
+	}
 }
 
 void ProductionProgram::ActReturn::execute
@@ -669,18 +700,19 @@ ProductionProgram::ActWorker::ActWorker(
 		//  name, so it also validates the parameter.
 		const Workarea_Info & worker_workarea_info =
 			main_worker_descr.get_program(m_program)->get_workarea_info();
-		Workarea_Info & building_workarea_info = descr->m_workarea_info;
-		container_iterate_const(Workarea_Info, worker_workarea_info, i) {
+
+		// local typedef for iterator
+		for (const std::pair<uint32_t, std::set<std::string> >& area_info : worker_workarea_info) {
 			std::set<std::string> & building_radius_infos =
-				building_workarea_info[i.current->first];
-			const std::set<std::string> & descriptions = i.current->second;
-			container_iterate_const(std::set<std::string>, descriptions, de) {
+				descr->m_workarea_info[area_info.first];
+
+			for (const std::string& worker_descname : area_info.second) {
 				std::string description = descr->descname();
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
 				description += main_worker_descr.name();
-				description += *de.current;
+				description += worker_descname;
 				building_radius_infos.insert(description);
 			}
 		}
@@ -995,29 +1027,28 @@ void ProductionProgram::ActProduce::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
-	std::string result_string = "";
 	assert(m_items.size());
 
-	for (wl_const_range<Items> i(m_items); i;)
-	{
-		{
-			uint8_t const count = i.current->second;
-			if (1 < count) {
-				char buffer[5];
-				/** TRANSLATORS: Number used in list of wares */
-				sprintf(buffer, _("%u "), count);
-				result_string += buffer;
-			}
+	std::vector<std::string> ware_descnames;
+	for (const auto& item_pair : m_items) {
+		uint8_t const count = item_pair.second;
+		std::string ware_descname;
+		// TODO(sirver): needs boost::format and probably ngettext.
+		if (1 < count) {
+			char buffer[5];
+			/** TRANSLATORS: Number used in list of wares */
+			sprintf(buffer, _("%u "), count);
+			ware_descname += buffer;
 		}
-		result_string += tribe.get_ware_descr(i.current->first)->descname();
-		if (i.advance().empty())
-			break;
-		/** TRANSLATORS: Separator for list of wares */
-		result_string += _(", ");
+		ware_descname += tribe.get_ware_descr(item_pair.first)->descname();
+		ware_descnames.push_back(ware_descname);
 	}
+	/** TRANSLATORS: Separator for list of wares */
+	const std::string ware_list = boost::algorithm::join(ware_descnames,  _(", "));
+
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
-	result_string = str(format(_("Produced %s")) % result_string);
+	const std::string result_string = str(format(_("Produced %s")) % ware_list);
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 		 "%s", result_string.c_str());
@@ -1095,25 +1126,24 @@ void ProductionProgram::ActRecruit::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
-	std::string unit_string = ("");
 	assert(m_items.size());
-	for (wl_const_range<Items> i(m_items); i;)
-	{
-		{
-			uint8_t const count = i.current->second;
-			if (1 < count) {
-				char buffer[5];
-				/** TRANSLATORS: Number used in list of workers */
-				sprintf(buffer, _("%u "), count);
-				unit_string += buffer;
-			}
+	std::vector<std::string> worker_descnames;
+	for (const auto& item_pair : m_items) {
+		uint8_t const count = item_pair.second;
+		std::string worker_descname;
+		// TODO(sirver): needs boost::format and probably ngettext.
+		if (1 < count) {
+			char buffer[5];
+			/** TRANSLATORS: Number used in list of workers */
+			sprintf(buffer, _("%u "), count);
+			worker_descname += buffer;
 		}
-		unit_string += tribe.get_worker_descr(i.current->first)->descname();
-		if (i.advance().empty())
-			break;
-		/** TRANSLATORS: Separator for list of workers */
-		unit_string += _(", ");
+		worker_descname += tribe.get_worker_descr(item_pair.first)->descname();
+		worker_descnames.push_back(worker_descname);
 	}
+	/** TRANSLATORS: Separator for list of workers */
+	const std::string unit_string = boost::algorithm::join(worker_descnames,  _(", "));
+
 	/** TRANSLATORS: %s is a lost of workers */
 	std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
 	snprintf

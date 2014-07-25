@@ -847,11 +847,13 @@ uint32_t Map::find_reachable_immovables_unique
 
 	find_reachable(area, checkstep, cb);
 
-	container_iterate_const(std::vector<ImmovableFound>, duplist, i) {
-		BaseImmovable & obj = *i.current->object;
-		if (std::find(list.begin(), list.end(), &obj) == list.end())
-			if (functor.accept(obj))
+	for (ImmovableFound& imm_found : duplist) {
+		BaseImmovable & obj = *imm_found.object;
+		if (std::find(list.begin(), list.end(), &obj) == list.end()) {
+			if (functor.accept(obj)) {
 				list.push_back(&obj);
+			}
+		}
 	}
 
 	return list.size();

@@ -216,20 +216,24 @@ void Section::mark_used()
  */
 void Section::check_used() const
 {
-	container_iterate_const(Value_list, m_values, i)
-		if (!i.current->is_used())
+	for (const Value& temp_value : m_values) {
+		if (!temp_value.is_used()) {
 			m_profile->error
 				("Section [%s], key '%s' not used (did you spell the name "
 				 "correctly?)",
-				 get_name(), i.current->get_name());
+				 get_name(), temp_value.get_name());
+		}
+	}
 }
 
 
 bool Section::has_val(char const * const name) const
 {
-	container_iterate_const(Value_list, m_values, i)
-		if (!strcasecmp(i.current->get_name(), name))
+	for (const Value& temp_value : m_values) {
+		if (!strcasecmp(temp_value.get_name(), name)) {
 			return true;
+		}
+	}
 	return false;
 }
 
@@ -242,11 +246,12 @@ bool Section::has_val(char const * const name) const
  */
 Section::Value * Section::get_val(char const * const name)
 {
-	container_iterate(Value_list, m_values, i)
-		if (!strcasecmp(i.current->get_name(), name)) {
-			i.current->mark_used();
-			return &*i.current;
+	for (Value& value : m_values) {
+		if (!strcasecmp(value.get_name(), name)) {
+			value.mark_used();
+			return &value;
 		}
+	}
 	return nullptr;
 }
 
@@ -259,24 +264,26 @@ Section::Value * Section::get_val(char const * const name)
  */
 Section::Value * Section::get_next_val(char const * const name)
 {
-	container_iterate(Value_list, m_values, i)
-		if (!i.current->is_used())
-			if (!name || !strcasecmp(i.current->get_name(), name)) {
-				i.current->mark_used();
-				return &*i.current;
+	for (Value& value : m_values) {
+		if (!value.is_used()) {
+			if (!name || !strcasecmp(value.get_name(), name)) {
+				value.mark_used();
+				return &value;
 			}
-
+		}
+	}
 	return nullptr;
 }
 
 Section::Value & Section::create_val
 	(char const * const name, char const * const value)
 {
-	container_iterate(Value_list, m_values, i)
-		if (!strcasecmp(i.current->get_name(), name)) {
-			i.current->set_string(value);
-			return *i.current;
+	for (Value& temp_value : m_values) {
+		if (!strcasecmp(temp_value.get_name(), name)) {
+			temp_value.set_string(value);
+			return temp_value;
 		}
+	}
 	return create_val_duplicate(name, value);
 }
 
@@ -572,13 +579,16 @@ void Profile::error(char const * const fmt, ...) const
  */
 void Profile::check_used() const
 {
-	container_iterate_const(Section_list, m_sections, i)
-		if (!i.current->is_used())
+	for (const Section& temp_section : m_sections) {
+		if (!temp_section.is_used()) {
 			error
 				("Section [%s] not used (did you spell the name correctly?)",
-				 i.current->get_name());
-		else
-			i.current->check_used();
+				 temp_section.get_name());
+		}
+		else {
+			temp_section.check_used();
+		}
+	}
 }
 
 /**
@@ -590,12 +600,12 @@ void Profile::check_used() const
  */
 Section * Profile::get_section(const std::string & name)
 {
-	container_iterate(Section_list, m_sections, i)
-		if (!strcasecmp(i.current->get_name(), name.c_str())) {
-			i.current->mark_used();
-			return &*i.current;
+	for (Section& temp_section : m_sections) {
+		if (!strcasecmp(temp_section.get_name(), name.c_str())) {
+			temp_section.mark_used();
+			return &temp_section;
 		}
-
+	}
 	return nullptr;
 }
 
@@ -633,22 +643,25 @@ Section & Profile::pull_section(char const * const name)
  */
 Section * Profile::get_next_section(char const * const name)
 {
-	container_iterate(Section_list, m_sections, i)
-		if (!i.current->is_used())
-			if (!name || !strcasecmp(i.current->get_name(), name)) {
-				i.current->mark_used();
-				return &*i.current;
+	for (Section& section : m_sections) {
+		if (!section.is_used()) {
+			if (!name || !strcasecmp(section.get_name(), name)) {
+				section.mark_used();
+				return &section;
 			}
-
+		}
+	}
 	return nullptr;
 }
 
 
 Section & Profile::create_section          (char const * const name)
 {
-	container_iterate(Section_list, m_sections, i)
-		if (!strcasecmp(i.current->get_name(), name))
-			return *i.current;
+	for (Section& section : m_sections) {
+		if (!strcasecmp(section.get_name(), name)) {
+			return section;
+		}
+	}
 	return create_section_duplicate(name);
 }
 
@@ -843,20 +856,20 @@ void Profile::write
 		("# Automatically created by Widelands %s (%s)\n",
 		 build_id().c_str(), build_type().c_str());
 
-	container_iterate_const(Section_list, m_sections, s) {
-		if (used_only && !s.current->is_used())
+	for (const Section& temp_section : m_sections) {
+		if (used_only && !temp_section.is_used())
 			continue;
 
-		fw.Printf("\n[%s]\n", s.current->get_name());
+		fw.Printf("\n[%s]\n", temp_section.get_name());
 
-		container_iterate_const(Section::Value_list, s.current->m_values, v) {
-			if (used_only && !v.current->is_used())
+		for (const Section::Value& temp_value : temp_section.m_values) {
+			if (used_only && !temp_value.is_used())
 				continue;
 
-			char const * const str = v.current->get_string();
+			char const * const str = temp_value.get_string();
 
 			if (*str) {
-				uint32_t spaces = strlen(v.current->get_name());
+				uint32_t spaces = strlen(temp_value.get_name());
 				bool multiline = false;
 
 				for (uint32_t i = 0; i < strlen(str); ++i) {
@@ -895,9 +908,9 @@ void Profile::write
 					// End of multilined text.
 					tempstr += '"';
 
-				fw.Printf("%s=\"%s\"\n", v.current->get_name(), tempstr.c_str());
+				fw.Printf("%s=\"%s\"\n", temp_value.get_name(), tempstr.c_str());
 			} else
-				fw.Printf("%s=\n", v.current->get_name());
+				fw.Printf("%s=\n", temp_value.get_name());
 		}
 	}
 
