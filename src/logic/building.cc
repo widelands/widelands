@@ -507,13 +507,21 @@ void Building::destroy(Editor_Game_Base & egbase)
 std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
 
-	container_iterate_const(std::string, format, i) {
-		if (*i.current == '%') {
-			if (i.advance().empty()) { //  unterminated format sequence
+	std::string formatme = std::string(format);
+	for (std::string::iterator format_iter = formatme.begin(); format_iter != formatme.end();++format_iter) {
+
+		if (*format_iter == '%') {
+
+			// /begin unterminated format sequence
+			++(*format_iter);
+			if (format_iter == formatme.end()) {
 				result << '%';
 				break;
 			}
-			switch (*i.current) {
+			--(*format_iter);
+			// /end unterminated format sequence
+
+			switch (*format_iter) {
 			FORMAT('%', '%');
 			FORMAT('i', serial());
 			FORMAT('t', get_statistics_string());
@@ -550,11 +558,11 @@ std::string Building::info_string(const std::string & format) {
 					result << productionsite->result_string();
 				break;
 			default: //  invalid format sequence
-				result << '%' << *i.current;
+				result << '%' << *format_iter;
 				break;
 			}
 		} else
-			result << *i.current;
+			result << *format_iter;
 	}
 	const std::string result_str = result.str();
 	return result_str.empty() ? result_str : as_uifont(result_str);
