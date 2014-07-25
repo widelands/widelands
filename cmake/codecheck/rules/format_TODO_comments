@@ -1,8 +1,61 @@
 #!/usr/bin/python
 
-error_msg ="Please use the format \"TODO(<username>): ...\" for your TODO comments, and don't put them in the doygen comments"
+import re
 
-regexp = r"""(FIXME|(\s|/|[*])BUG|TODO(?![(])|\Wtodo(?![(])|[*]\s*TODO|///\s*TODO)"""
+def evaluate_matches(lines, fn):
+   errors = []
+
+   for lineno, line in enumerate(lines):
+      errorfound = False
+
+      if line.count("FIXME"):
+         errorfound = True
+         errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"FIXME\"."))
+
+      elif re.compile("/\s*BUG").search(line):
+         errorfound = True
+         errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"BUG\"."))
+
+      elif re.compile("[*]\s*BUG").search(line):
+         errorfound = True
+         errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"BUG\" or put TODOs in Doxygen comments."))
+
+      elif line.count("\TODO"):
+         errorfound = True
+         errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
+
+      elif line.count("\todo"):
+         errorfound = True
+         errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
+
+      elif re.compile("[*]\s*TODO").search(line):
+         errorfound = True
+         errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
+
+      elif re.compile("///\s*TODO").search(line):
+         errorfound = True
+         errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
+
+      elif re.compile("//!\s*TODO").search(line):
+         errorfound = True
+         errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
+
+      if not errorfound:
+         finderror = line.rsplit("TODO")
+         if len(finderror) > 1:
+            for (counter, temp) in enumerate(finderror):
+               if counter > 0:
+                 if not temp.startswith("("):
+                    errorfound = True
+                    errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\"."))
+                 else:
+                    findend = temp.split("):")
+                    if not findend[0][1:].isalnum:
+                       errorfound = True
+                       errors.append((fn, lineno+1, "Use \"TODO(username): <msg>\"."))
+
+   return errors
+
 
 forbidden = [
     "// FIXME this is a todo comment",
@@ -11,11 +64,11 @@ forbidden = [
     "// TODO: This is a todo comment",
     "* TODO: This is a todo comment",
     "/// TODO: This is a todo comment",
+    "//! TODO: This is a todo comment",
     "\TODO: This is a todo comment",
     "\\\todo: This is a todo comment"
 ]
 
 allowed = [
-    "// TODO(<username>) this is a todo comment",
     "// TODO(<username>): This is a todo comment"
 ]
