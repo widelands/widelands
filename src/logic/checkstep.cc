@@ -170,11 +170,11 @@ bool CheckStepRoad::allowed
 
 	// Calculate cost and passability
 	if
-		(not (endcaps & m_movecaps)
-		 and
-		 not
+		(!(endcaps & m_movecaps)
+		 &&
+		 !
 		 ((endcaps & MOVECAPS_WALK)
-		  and
+		  &&
 		  (m_player.get_buildcaps(start) & m_movecaps & MOVECAPS_SWIM)))
 		return false;
 
@@ -186,8 +186,8 @@ bool CheckStepRoad::allowed
 
 			return
 				dynamic_cast<Flag const *>(imm)
-				or
-				(dynamic_cast<Road const *>(imm) and (endcaps & BUILDCAPS_FLAG));
+				||
+				(dynamic_cast<Road const *>(imm) && (endcaps & BUILDCAPS_FLAG));
 		}
 
 	return true;

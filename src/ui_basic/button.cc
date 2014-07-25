@@ -164,13 +164,13 @@ void Button::set_enabled(bool const on)
 void Button::draw(RenderTarget & dst)
 {
 	// Draw the background
-	if (not m_flat or m_draw_flat_background) {
+	if (!m_flat || m_draw_flat_background) {
 		assert(m_pic_background);
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 		dst.tile(Rect(Point(0, 0), get_w(), get_h()), m_pic_background, Point(get_x(), get_y()));
 	}
 
-	if (m_enabled and m_highlighted and not m_flat)
+	if (m_enabled && m_highlighted && !m_flat)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
@@ -207,14 +207,14 @@ void Button::draw(RenderTarget & dst)
 	RGBAColor black(0, 0, 0, 255);
 
 	// m_permpressed is true, we invert the behaviour on m_pressed
-	bool draw_pressed = m_permpressed ? not (m_pressed and m_highlighted)
-	                                  :     (m_pressed and m_highlighted);
+	bool draw_pressed = m_permpressed ?    !(m_pressed && m_highlighted)
+	                                  :     (m_pressed && m_highlighted);
 
-	if (not m_flat) {
+	if (!m_flat) {
 		assert(2 <= get_w());
 		assert(2 <= get_h());
 		//  button is a normal one, not flat
-		if (not draw_pressed) {
+		if (!draw_pressed) {
 			//  top edge
 			dst.brighten_rect
 				(Rect(Point(0, 0), get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
@@ -246,7 +246,7 @@ void Button::draw(RenderTarget & dst)
 	} else {
 		//  Button is flat, do not draw borders, instead, if it is pressed, draw
 		//  a box around it.
-		if (m_enabled and m_highlighted)
+		if (m_enabled && m_highlighted)
 		{
 			RGBAColor shade(100, 100, 100, 80);
 			dst.fill_rect(Rect(Point(0, 0), get_w(), 2), shade);

@@ -107,7 +107,7 @@ const MethodType<L_Panel> L_Panel::Methods[] = {
 static void _put_all_visible_buttons_into_table
 	(lua_State * L, UI::Panel * g)
 {
-	if (not g) return;
+	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
@@ -138,7 +138,7 @@ int L_Panel::get_buttons(lua_State * L) {
 static void _put_all_tabs_into_table
 	(lua_State * L, UI::Panel * g)
 {
-	if (not g) return;
+	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
@@ -171,7 +171,7 @@ int L_Panel::get_tabs(lua_State * L) {
 static void _put_all_visible_windows_into_table
 	(lua_State * L, UI::Panel * g)
 {
-	if (not g) return;
+	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{

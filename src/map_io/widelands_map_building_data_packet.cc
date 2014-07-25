@@ -131,7 +131,7 @@ void Map_Building_Data_Packet::Write
 	Extent const extent = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		upcast(Building const, building, fc.field->get_immovable());
-		if (building and building->get_position() == fc) {
+		if (building && building->get_position() == fc) {
 			//  We only write Buildings.
 			//  Buildings can life on only one main position.
 			assert(!mos.is_object_known(*building));

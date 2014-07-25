@@ -166,7 +166,7 @@ btype##sMap m_parse_set_##type##s_arguments \
 	(lua_State * L, const Tribe_Descr & tribe) \
 { \
 	int32_t nargs = lua_gettop(L); \
-	if (nargs != 2 and nargs != 3) \
+	if (nargs != 2 && nargs != 3) \
 		report_error(L, "Wrong number of arguments to set_" #type "!"); \
    btype##sMap rv; \
 	if (nargs == 3) { \
@@ -2069,7 +2069,7 @@ int L_MapObject::__eq(lua_State * L) {
 
 	// Both objects are destroyed: they are equal
 	if (me == you) lua_pushboolean(L, true);
-	else if (!me or !you) // One of the objects is destroyed: they are distinct
+	else if (!me || !you) // One of the objects is destroyed: they are distinct
 		lua_pushboolean(L, false);
 	else // Compare them
 		lua_pushboolean
@@ -3622,7 +3622,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 	int32_t amount = luaL_checkint32(L, -1);
 	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
 
-	if (amount < 0 or amount > max_amount)
+	if (amount < 0 || amount > max_amount)
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);

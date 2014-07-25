@@ -187,7 +187,7 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 	}
 	if (i < icons_order().size() && j < icons_order()[i].size()) {
 		Widelands::Ware_Index ware = icons_order()[i][j];
-		if (not m_hidden[ware]) {
+		if (!m_hidden[ware]) {
 			return ware;
 		}
 	}

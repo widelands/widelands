@@ -148,7 +148,7 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing)
 		dst.blit(point, m_icon_grey);
 
-	if (not m_show_only) {
+	if (!m_show_only) {
 		uint16_t pw = m_max_fill_indicator->width();
 		point.y = Border;
 		point.x = Border + CellWidth + CellSpacing +
@@ -162,7 +162,7 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
  */
 void WaresQueueDisplay::update_priority_buttons()
 {
-	if (m_cache_size <= 0 or m_show_only) {
+	if (m_cache_size <= 0 || m_show_only) {
 		delete m_priority_radiogroup;
 		m_priority_radiogroup = nullptr;
 	}
@@ -209,7 +209,7 @@ void WaresQueueDisplay::update_priority_buttons()
 		(boost::bind(&WaresQueueDisplay::radiogroup_changed, this, _1));
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	if (not can_act)
+	if (!can_act)
 		m_priority_radiogroup->set_enabled(false);
 }
 
@@ -222,7 +222,7 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	m_increase_max_fill = nullptr;
 	m_decrease_max_fill = nullptr;
 
-	if (m_cache_size <= 0 or m_show_only)
+	if (m_cache_size <= 0 || m_show_only)
 		return;
 
 	uint32_t x = Border;
@@ -303,7 +303,7 @@ void WaresQueueDisplay::compute_max_fill_buttons_enabled_state()
 
 	// Disable those buttons for replay watchers
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	if (not can_act) {
+	if (!can_act) {
 		if (m_increase_max_fill) m_increase_max_fill->set_enabled(false);
 		if (m_decrease_max_fill) m_decrease_max_fill->set_enabled(false);
 	} else {

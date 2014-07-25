@@ -523,10 +523,10 @@ void MilitarySite::update_soldier_request(bool incd)
 	}
 	else // not doing upgrade request
 	{
-		if ((capacity != stationed) or (m_normal_soldier_request))
+		if ((capacity != stationed) || (m_normal_soldier_request))
 			update_normal_soldier_request();
 
-		if ((capacity == stationed) and (! m_normal_soldier_request))
+		if ((capacity == stationed) && (! m_normal_soldier_request))
 		{
 			if (presentSoldiers().size() == capacity)
 			{
@@ -927,9 +927,9 @@ bool MilitarySite::military_presence_kept(Game & game)
 	for (uint32_t i = 0; i < immovables.size(); ++i)
 		if (upcast(MilitarySite const, militarysite, immovables[i].object))
 			if
-				(this       !=  militarysite          and
-				 &owner  () == &militarysite->owner() and
-				 get_size() <=  militarysite->get_size() and
+				(this       !=  militarysite          &&
+				 &owner  () == &militarysite->owner() &&
+				 get_size() <=  militarysite->get_size() &&
 				 militarysite->m_didconquer)
 				return true;
 	return false;
@@ -1069,7 +1069,7 @@ MilitarySite::update_upgrade_requirements()
 	bool maxchanged = reqmax != soldier_upgrade_required_max;
 	bool minchanged = reqmin != soldier_upgrade_required_min;
 
-	if (maxchanged or minchanged)
+	if (maxchanged || minchanged)
 	{
 		if (m_upgrade_soldier_request && (m_upgrade_soldier_request->is_open()))
 		{

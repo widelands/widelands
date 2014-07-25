@@ -54,15 +54,15 @@ void Map_Flagdata_Data_Packet::Read
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			const Map  & map    = egbase.map();
 			Extent const extent = map.extent();
 			for (;;) {
-				if (2 <= packet_version and fr.EndOfFile())
+				if (2 <= packet_version && fr.EndOfFile())
 					break;
 				Serial const serial = fr.Unsigned32();
-				if (packet_version < 2 and serial == 0xffffffff) {
-					if (not fr.EndOfFile())
+				if (packet_version < 2 && serial == 0xffffffff) {
+					if (!fr.EndOfFile())
 						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;

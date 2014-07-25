@@ -46,7 +46,7 @@ void Game_Player_Economies_Data_Packet::Read
 		FileRead fr;
 		fr.Open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.Unsigned16();
-		if (3 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (3 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;

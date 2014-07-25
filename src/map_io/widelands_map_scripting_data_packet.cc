@@ -56,7 +56,7 @@ void Map_Scripting_Data_Packet::Read
 	// wise this makes no sense.
 	upcast(Game, g, &egbase);
 	FileRead fr;
-	if (g and fr.TryOpen(fs, "scripting/globals.dump"))
+	if (g && fr.TryOpen(fs, "scripting/globals.dump"))
 	{
 		const uint32_t sentinel = fr.Unsigned32();
 		const uint32_t packet_version = fr.Unsigned32();

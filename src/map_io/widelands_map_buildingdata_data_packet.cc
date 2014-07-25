@@ -80,13 +80,13 @@ void Map_Buildingdata_Data_Packet::Read
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			for (;;) {
-				if (2 <= packet_version and fr.EndOfFile())
+				if (2 <= packet_version && fr.EndOfFile())
 					break;
 				Serial const serial = fr.Unsigned32();
-				if (packet_version < 2 and serial == 0xffffffff) {
-					if (not fr.EndOfFile())
+				if (packet_version < 2 && serial == 0xffffffff) {
+					if (!fr.EndOfFile())
 						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
@@ -486,7 +486,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if
-			(1 <= packet_version and
+			(1 <= packet_version &&
 			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
 		{
 			Ware_Index const nr_wares   = warehouse.descr().tribe().get_nrwares();
@@ -625,7 +625,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			} else
 				for (;;) {
 					char const * const worker_typename = fr.CString   ();
-					if (not *worker_typename) //  encountered the terminator ("")
+					if (!*worker_typename) //  encountered the terminator ("")
 						break;
 					uint32_t     const next_spawn      = fr.Unsigned32();
 					Ware_Index   const worker_index    =
@@ -860,7 +860,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if
-			(1 <= packet_version and
+			(1 <= packet_version &&
 			 packet_version <= CURRENT_PRODUCTIONSITE_PACKET_VERSION)
 		{
 			ProductionSite::Working_Position & wp_begin =
@@ -924,10 +924,11 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				for (const WareAmount& working_position : working_positions) {
 					uint32_t count = working_position.second;
 					assert(count);
+
 					if (worker_descr.can_act_as(working_position.first)) {
-						while (wp->worker or wp->worker_request) {
+						while (wp->worker || wp->worker_request) {
 							++wp;
-							if (not --count)
+							if (!--count)
 								goto end_working_position;
 						}
 						found_working_position = true;
@@ -1511,7 +1512,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	fw.Unsigned16(nr_workers);
 	for (ProductionSite::Working_Position const * i = &begin; i < &end; ++i)
 		if (Worker const * const w = i->worker) {
-			assert(not i->worker_request);
+			assert(!i->worker_request);
 			assert(mos.is_object_known(*w));
 			fw.Unsigned32(mos.get_object_file_index(*w));
 		}

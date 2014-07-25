@@ -109,7 +109,7 @@ uint32_t Section::Value::get_natural() const
 {
 	char * endp;
 	long long int i = strtoll(m_value, &endp, 0);
-	if (*endp or i < 0)
+	if (*endp || i < 0)
 		throw wexception("%s: '%s' is not natural", get_name(), m_value);
 	return i;
 }
@@ -119,7 +119,7 @@ uint32_t Section::Value::get_positive() const
 {
 	char * endp;
 	long long int i = strtoll(m_value, &endp, 0);
-	if (*endp or i < 1)
+	if (*endp || i < 1)
 		throw wexception("%s: '%s' is not positive", get_name(), m_value);
 	return i;
 }
@@ -782,9 +782,9 @@ void Profile::read
 
 					// first, check for multiline string
 					if
-						((tail[0] == '\'' or tail[0] == '"')
-						 and
-						 (tail[1] == '\'' or tail[1] == '"'))
+						((tail[0] == '\'' || tail[0] == '"')
+						 &&
+						 (tail[1] == '\'' || tail[1] == '"'))
 					{
 						reading_multiline = true;
 						tail += 2;
@@ -839,7 +839,7 @@ void Profile::read
 	}
 
 	//  Make sure that the requested global section exists, even if it is empty.
-	if (global_section and not get_section(global_section))
+	if (global_section && !get_section(global_section))
 		create_section_duplicate(global_section);
 }
 

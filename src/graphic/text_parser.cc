@@ -182,7 +182,7 @@ bool Text_Parser::extract_format_block
 	}
 
 	block.erase(0, block_start.size());
-	if (block.size() and *block.begin() == ' ')
+	if (block.size() && *block.begin() == ' ')
 		block.erase(0, 1);
 
 	const std::string::size_type format_end_pos = block.find(format_end);

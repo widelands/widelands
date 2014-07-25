@@ -53,11 +53,11 @@ void TextStream::m_consume(size_t cnt) {
  * r* means skip_ws starting from the back of the string
  */
 void TextStream::skip_ws() {
-	while (m_i < m_end and isspace(m_t[m_i]))
+	while (m_i < m_end && isspace(m_t[m_i]))
 		m_consume(1);
 }
 void TextStream::rskip_ws() {
-	while (m_i < m_end and isspace(m_t[m_end - 1]))
+	while (m_i < m_end && isspace(m_t[m_end - 1]))
 		--m_end;
 }
 
@@ -133,7 +133,7 @@ string TextStream::till_any_or_end(string chars) {
  */
 string TextStream::parse_string() {
 	string delim = peek(1);
-	if (delim == "'" or delim == "\"") {
+	if (delim == "'" || delim == "\"") {
 		m_consume(1);
 		string rv = till_any(delim);
 		m_consume(1);

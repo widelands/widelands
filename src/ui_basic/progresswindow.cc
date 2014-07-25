@@ -64,7 +64,7 @@ void ProgressWindow::draw_background
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	if (!m_background_pic or xres != m_xres or yres != m_yres) {
+	if (!m_background_pic || xres != m_xres || yres != m_yres) {
 		// (Re-)Load background graphics
 		m_background_pic = ImageTransformations::resize(g_gr->images().get(m_background), xres, yres);
 

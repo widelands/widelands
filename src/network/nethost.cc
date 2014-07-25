@@ -281,7 +281,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual void setPlayerNumber(uint8_t const number) override {
 		if
-			(number == UserSettings::none() or
+			(number == UserSettings::none() ||
 			 number < h->settings().players.size())
 			h->setPlayerNumber(number);
 	}
@@ -765,7 +765,7 @@ void NetHost::run(bool const autorun)
 		// Setup by the users
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
 
-		while (not d->dedicated_start) {
+		while (!d->dedicated_start) {
 			handle_network();
 			// TODO(unknown) this should be improved.
 #ifndef _WIN32
@@ -1303,7 +1303,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 }
 
 void NetHost::dserver_send_maps_and_saves(Client & client) {
-	assert (not d->game);
+	assert (!d->game);
 
 	if (d->settings.maps.empty()) {
 		// Read in maps
@@ -2018,7 +2018,7 @@ std::string NetHost::getComputerPlayerName(uint8_t const playernum)
  */
 bool NetHost::haveUserName(const std::string & name, uint8_t ignoreplayer) {
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
-		if (i != ignoreplayer and d->settings.users.at(i).name == name)
+		if (i != ignoreplayer && d->settings.users.at(i).name == name)
 			return true;
 
 	// Computer players are not handled like human users,
@@ -2026,7 +2026,7 @@ bool NetHost::haveUserName(const std::string & name, uint8_t ignoreplayer) {
 	if (ignoreplayer < d->settings.users.size())
 		ignoreplayer = d->settings.users.at(ignoreplayer).position;
 	for (uint32_t i = 0; i < d->settings.players.size(); ++i)
-		if (i != ignoreplayer and d->settings.players.at(i).name == name)
+		if (i != ignoreplayer && d->settings.players.at(i).name == name)
 			return true;
 
 	return false;

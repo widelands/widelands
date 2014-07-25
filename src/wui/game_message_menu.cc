@@ -142,7 +142,7 @@ void GameMessageMenu::show_new_message
 	(Message_Id const id, const Widelands::Message & message)
 {
 	assert(iplayer().player().messages()[id] == &message);
-	assert(not list->find(id.value()));
+	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
 	if ((mode == Archive) != (status == Message::Archived))
 		toggle_mode();
@@ -184,7 +184,7 @@ void GameMessageMenu::think()
 	}
 
 	if (list->size()) {
-		if (not list->has_selection())
+		if (!list->has_selection())
 			list->select(0);
 			// TODO(unknown) Workaround for bug #691928: There should
 			// be a solution without this extra update().

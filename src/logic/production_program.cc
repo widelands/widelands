@@ -84,7 +84,7 @@ template <typename T> T string_to_type(const std::string& s) {
 /// now candidate points to "   75" and result is true
 bool match(char* & candidate, const char* pattern) {
 	for (char* p = candidate;; ++p, ++pattern)
-		if (not * pattern) {
+		if (!*pattern) {
 			candidate = p;
 			return true;
 		} else if (*p != *pattern)
@@ -130,7 +130,7 @@ bool skip(char* & p, char const c = ' ') {
 /// throws _wexception
 bool match_force_skip(char* & candidate, const char* pattern) {
 	for (char* p = candidate;; ++p, ++pattern)
-		if (not * pattern) {
+		if (!*pattern) {
 			force_skip(p);
 			candidate = p;
 			return true;
@@ -193,8 +193,8 @@ void ProductionProgram::parse_ware_type_group
 	for (;;) {
 		char const * ware = parameters;
 		while
-			(*parameters        and *parameters != ',' and
-			 *parameters != ':' and *parameters != ' ')
+			(*parameters        && *parameters != ',' &&
+			 *parameters != ':' && *parameters != ' ')
 			++parameters;
 		char const terminator = *parameters;
 		*parameters = '\0';
@@ -210,7 +210,7 @@ void ProductionProgram::parse_ware_type_group
 				count_max += i.front().second;
 				break;
 			}
-		if (group.first.size() and ware_index <= *group.first.begin())
+		if (group.first.size() && ware_index <= *group.first.begin())
 			throw game_data_error
 				(
 				 "wrong order of ware types within group: ware type %s appears "
@@ -225,7 +225,7 @@ void ProductionProgram::parse_ware_type_group
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			count = value;
-			if ((*endp and *endp != ' ') or value < 1 or count != value)
+			if ((*endp && *endp != ' ') || value < 1 || count != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "count", parameters);
 			parameters = endp;
@@ -262,7 +262,7 @@ ProductionProgram::ActReturn::Negation::~Negation() {
 bool ProductionProgram::ActReturn::Negation::evaluate
 	(const ProductionSite & ps) const
 {
-	return not operand->evaluate(ps);
+	return !operand->evaluate(ps);
 }
 std::string ProductionProgram::ActReturn::Negation::description
 	(const Tribe_Descr & tribe) const
@@ -468,7 +468,7 @@ ProductionProgram::ActReturn::ActReturn
 					m_conditions.push_back(create_condition(parameters, descr));
 					if (*parameters) {
 						skip(parameters);
-						if (not match_force_skip(parameters, "and"))
+						if (!match_force_skip(parameters, "and"))
 							throw game_data_error
 								("expected \"%s\" or end of input", "and");
 					} else
@@ -477,13 +477,13 @@ ProductionProgram::ActReturn::ActReturn
 			} else if (match_force_skip(parameters, "unless")) {
 				m_is_when = false;
 				for (;;) {
-					if (not *parameters)
+					if (!*parameters)
 						throw game_data_error
 							("expected condition at end of input");
 					m_conditions.push_back(create_condition(parameters, descr));
 					if (*parameters) {
 						skip(parameters);
-						if (not match_force_skip(parameters, "or"))
+						if (!match_force_skip(parameters, "or"))
 							throw game_data_error
 								("expected \"%s\" or end of input", "or");
 					} else
@@ -528,7 +528,7 @@ void ProductionProgram::ActReturn::execute
 			std::string condition_string = "";
 			for (wl_const_range<Conditions> i(m_conditions); i;)
 			{
-				if (not (i.front()->evaluate(ps))) //  A condition is false,
+				if (!(i.front()->evaluate(ps))) //  A condition is false,
 					return ps.program_step(game); //  continue program.
 
 				condition_string += i.front()->description(ps.owner().tribe());
@@ -604,7 +604,7 @@ ProductionProgram::ActCall::ActCall
 		}
 
 		//  Override with specified handling methods.
-		while (not reached_end) {
+		while (!reached_end) {
 			skip(parameters);
 			match_force_skip(parameters, "on");
 			log("found \"on \": parameters = \"%s\"\n", parameters);
@@ -645,7 +645,7 @@ ProductionProgram::ActCall::ActCall
 					 "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}",
 					 parameters);
 			m_handling_methods[result_to_set_method_for - 1] = handling_method;
-			reached_end = not *parameters;
+			reached_end = !*parameters;
 			log
 				("read handling method for result %u: %u, parameters = \"%s\", "
 				 "reached_end = %u\n",
@@ -754,7 +754,7 @@ ProductionProgram::ActSleep::ActSleep(char* parameters) {
 			char * endp;
 			long long int const value = strtoll(parameters, &endp, 0);
 			m_duration = value;
-			if (*endp or value <= 0 or m_duration != value)
+			if (*endp || value <= 0 || m_duration != value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "duration in ms", parameters);
@@ -809,7 +809,7 @@ ProductionProgram::ActAnimate::ActAnimate(
 	try {
 		bool reached_end;
 		char * const animation_name = next_word(parameters, reached_end);
-		if (not strcmp(animation_name, "idle"))
+		if (!strcmp(animation_name, "idle"))
 			throw game_data_error
 				("idle animation is default; calling is not allowed");
 		if (descr->is_animation_known(animation_name))
@@ -818,11 +818,11 @@ ProductionProgram::ActAnimate::ActAnimate(
 			m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
 			descr->add_animation(animation_name, m_id);
 		}
-		if (not reached_end) { //  The next parameter is the duration.
+		if (!reached_end) { //  The next parameter is the duration.
 			char * endp;
 			long long int const value = strtoll(parameters, &endp, 0);
 			m_duration = value;
-			if (*endp or value <= 0 or m_duration != value)
+			if (*endp || value <= 0 || m_duration != value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "duration in ms", parameters);
@@ -851,7 +851,7 @@ ProductionProgram::ActConsume::ActConsume
 			m_groups.resize(m_groups.size() + 1);
 			parse_ware_type_group
 				(parameters, *m_groups.rbegin(), tribe, descr.inputs());
-			if (not *parameters)
+			if (!*parameters)
 				break;
 			force_skip(parameters);
 		}
@@ -989,9 +989,9 @@ ProductionProgram::ActProduce::ActProduce
 						strtoull(parameters, &endp, 0);
 					item.second = value;
 					if
-						((*endp and *endp != ' ')
-						 or
-						 value < 1 or item.second != value)
+						((*endp && *endp != ' ')
+						 ||
+						 value < 1 || item.second != value)
 						throw game_data_error
 							("expected %s but found \"%s\"",
 							 "count", parameters);
@@ -1004,7 +1004,7 @@ ProductionProgram::ActProduce::ActProduce
 			more = *parameters != '\0';
 			*parameters = '\0';
 			if
-				(not
+				(!
 				 descr.is_output_ware_type
 				 	(item.first = tribe.safe_ware_index(ware)))
 				throw game_data_error
@@ -1089,9 +1089,9 @@ ProductionProgram::ActRecruit::ActRecruit
 						strtoull(parameters, &endp, 0);
 					item.second = value;
 					if
-						((*endp and *endp != ' ')
-						 or
-						 value < 1 or item.second != value)
+						((*endp && *endp != ' ')
+						 ||
+						 value < 1 || item.second != value)
 						throw game_data_error
 							("expected %s but found \"%s\"",
 							 "count", parameters);
@@ -1104,7 +1104,7 @@ ProductionProgram::ActRecruit::ActRecruit
 			more = *parameters != '\0';
 			*parameters = '\0';
 			if
-				(not
+				(!
 				 descr.is_output_worker_type
 				 	(item.first = tribe.safe_worker_index(worker)))
 				throw game_data_error
@@ -1171,7 +1171,7 @@ ProductionProgram::ActMine::ActMine(
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_distance = value;
-			if (*endp != ' ' or m_distance != value)
+			if (*endp != ' ' || m_distance != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "distance", parameters);
 			parameters = endp;
@@ -1181,7 +1181,7 @@ ProductionProgram::ActMine::ActMine(
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_max = value;
-			if (*endp != ' ' or value < 1 or 100 < value)
+			if (*endp != ' ' || value < 1 || 100 < value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "percentage", parameters);
@@ -1192,7 +1192,7 @@ ProductionProgram::ActMine::ActMine(
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_chance = value;
-			if (*endp != ' ' or value < 1 or 100 < value)
+			if (*endp != ' ' || value < 1 || 100 < value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "percentage", parameters);
@@ -1202,7 +1202,7 @@ ProductionProgram::ActMine::ActMine(
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_training = value;
-			if (*endp or value < 1 or 100 < value)
+			if (*endp || value < 1 || 100 < value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "percentage", parameters);
@@ -1265,7 +1265,7 @@ void ProductionProgram::ActMine::execute
 	int32_t digged_percentage = 100;
 	if (totalstart)
 		digged_percentage = 100 - totalres * 100 / totalstart;
-	if (not totalres)
+	if (!totalres)
 		digged_percentage = 100;
 
 	if (digged_percentage < m_max) {
@@ -1356,7 +1356,7 @@ void ProductionProgram::ActMine::notify_player
 ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
 	//  TODO(unknown) This is currently hardcoded for "soldier", but should allow any
 	//  soldier type name.
-	if (not match_force_skip(parameters, "soldier"))
+	if (!match_force_skip(parameters, "soldier"))
 		throw game_data_error
 			("expected %s but found \"%s\"", "soldier type", parameters);
 	try {
@@ -1376,7 +1376,7 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
 		char * endp;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
 		level = value;
-		if (*endp or level != value)
+		if (*endp || level != value)
 			throw game_data_error
 				("expected %s but found \"%s\"", "level", parameters);
 	} catch (const _wexception & e) {
@@ -1432,7 +1432,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 ProductionProgram::ActTrain::ActTrain(char* parameters) {
 	//  TODO(unknown) This is currently hardcoded for "soldier", but should allow any
 	//  soldier type name.
-	if (not match_force_skip(parameters, "soldier"))
+	if (!match_force_skip(parameters, "soldier"))
 		throw game_data_error
 			("expected %s but found \"%s\"", "soldier type", parameters);
 	try {
@@ -1453,7 +1453,7 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			level = value;
-			if (*endp != ' ' or level != value)
+			if (*endp != ' ' || level != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "level", parameters);
 			parameters = endp;
@@ -1463,7 +1463,7 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			target_level = value;
-			if (*endp or target_level != value or target_level <= level)
+			if (*endp || target_level != value || target_level <= level)
 				throw game_data_error
 					("expected level > %u but found \"%s\"", level, parameters);
 		}
@@ -1539,11 +1539,11 @@ ProductionProgram::ActPlayFX::ActPlayFX
 		std::string filename = next_word(parameters, reached_end);
 		name = directory + "/" + filename;
 
-		if (not reached_end) {
+		if (!reached_end) {
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			priority = value;
-			if (*endp or priority != value)
+			if (*endp || priority != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "priority", parameters);
 		} else
@@ -1717,33 +1717,33 @@ ProductionProgram::ProductionProgram(
 	Section& program_s = prof.get_safe_section(_name.c_str());
 	while (Section::Value* const v = program_s.get_next_val()) {
 		ProductionProgram::Action* action;
-		if (not strcmp(v->get_name(), "return"))
+		if (!strcmp(v->get_name(), "return"))
 			action = new ActReturn(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "call"))
+		else if (!strcmp(v->get_name(), "call"))
 			action = new ActCall(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "sleep"))
+		else if (!strcmp(v->get_name(), "sleep"))
 			action = new ActSleep(v->get_string());
-		else if (not strcmp(v->get_name(), "animate"))
+		else if (!strcmp(v->get_name(), "animate"))
 			action = new ActAnimate(v->get_string(), directory, prof, building);
-		else if (not strcmp(v->get_name(), "consume"))
+		else if (!strcmp(v->get_name(), "consume"))
 			action = new ActConsume(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "produce"))
+		else if (!strcmp(v->get_name(), "produce"))
 			action = new ActProduce(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "recruit"))
+		else if (!strcmp(v->get_name(), "recruit"))
 			action = new ActRecruit(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "worker"))
+		else if (!strcmp(v->get_name(), "worker"))
 			action = new ActWorker(v->get_string(), _name, building);
-		else if (not strcmp(v->get_name(), "mine"))
+		else if (!strcmp(v->get_name(), "mine"))
 			action = new ActMine(v->get_string(), world, _name, building);
-		else if (not strcmp(v->get_name(), "check_soldier"))
+		else if (!strcmp(v->get_name(), "check_soldier"))
 			action = new ActCheck_Soldier(v->get_string());
-		else if (not strcmp(v->get_name(), "train"))
+		else if (!strcmp(v->get_name(), "train"))
 			action = new ActTrain(v->get_string());
-		else if (not strcmp(v->get_name(), "playFX"))
+		else if (!strcmp(v->get_name(), "playFX"))
 			action = new ActPlayFX(directory, v->get_string());
-		else if (not strcmp(v->get_name(), "construct"))
+		else if (!strcmp(v->get_name(), "construct"))
 			action = new ActConstruct(v->get_string(), _name, building);
-		else if (not strcmp(v->get_name(), "check_map"))
+		else if (!strcmp(v->get_name(), "check_map"))
 			action = new ActCheck_Map(v->get_string());
 		else
 			throw game_data_error("unknown command type \"%s\"", v->get_name());

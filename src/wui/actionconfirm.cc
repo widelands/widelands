@@ -241,11 +241,11 @@ void BulldozeConfirm::think()
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if
-		(not todestroy ||
-		 not building ||
-		 not iaplayer().can_act(building->owner().player_number())
-		 or not
-		 (building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
+		(!todestroy ||
+		 !building ||
+		 !iaplayer().can_act(building->owner().player_number())
+		 ||
+		 !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
 		die();
 }
 
@@ -262,11 +262,11 @@ void BulldozeConfirm::ok()
 	if
 		(todestroy &&
 		 building &&
-		 iaplayer().can_act(building->owner().player_number()) and
+		 iaplayer().can_act(building->owner().player_number()) &&
 		 (building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
 	{
 		game.send_player_bulldoze
-			(*todestroy, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
+			(*todestroy, get_key_state(SDLK_LCTRL) << get_key_state(SDLK_RCTRL));
 		iaplayer().need_complete_redraw();
 	}
 
@@ -304,10 +304,10 @@ void DismantleConfirm::think()
 	upcast(Widelands::Building, building, m_object.get(egbase));
 
 	if
-		(not building ||
-		 not iaplayer().can_act(building->owner().player_number())
-		 or not
-		 (building->get_playercaps() & Widelands::Building::PCap_Dismantle))
+		(!building ||
+		 !iaplayer().can_act(building->owner().player_number())
+		 ||
+		 !(building->get_playercaps() & Widelands::Building::PCap_Dismantle))
 		die();
 }
 
@@ -323,7 +323,7 @@ void DismantleConfirm::ok()
 
 	if
 		(building &&
-		 iaplayer().can_act(building->owner().player_number()) and
+		 iaplayer().can_act(building->owner().player_number()) &&
 		 (building->get_playercaps() & Widelands::Building::PCap_Dismantle))
 	{
 		game.send_player_dismantle(*todismantle);
@@ -366,10 +366,10 @@ void EnhanceConfirm::think()
 	upcast(Widelands::Building, building, m_object.get(egbase));
 
 	if
-		(not building ||
-		 not iaplayer().can_act(building->owner().player_number())
-		 or not
-		 (building->get_playercaps() & Widelands::Building::PCap_Enhancable))
+		(!building ||
+		 !iaplayer().can_act(building->owner().player_number())
+		 ||
+		 !(building->get_playercaps() & Widelands::Building::PCap_Enhancable))
 		die();
 }
 
@@ -384,7 +384,7 @@ void EnhanceConfirm::ok()
 
 	if
 		(building &&
-		 iaplayer().can_act(building->owner().player_number()) and
+		 iaplayer().can_act(building->owner().player_number()) &&
 		 (building->get_playercaps() & Widelands::Building::PCap_Enhancable))
 	{
 		game.send_player_enhance_building(*building, m_id);

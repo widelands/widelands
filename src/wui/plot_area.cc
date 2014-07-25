@@ -425,7 +425,7 @@ void WUIPlot_Area::draw_plot_line
 		ly -= static_cast<int32_t>(scale_value(yline_length, highest_scale, value));
 	}
 
-	for (int32_t i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
+	for (int32_t i = dataset->size() - 1; i > 0 && posx > spacing; --i) {
 		int32_t const curx = static_cast<int32_t>(posx);
 		int32_t       cury = yoffset;
 
