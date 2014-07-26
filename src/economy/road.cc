@@ -33,7 +33,13 @@
 namespace Widelands {
 
 // dummy instance because Map_Object needs a description
-const Map_Object_Descr g_road_descr("road", "Road");
+namespace {
+const Road_Descr g_road_descr("road", "Road");
+}
+
+const Road_Descr& Road::descr() const {
+	return g_road_descr;
+}
 
 bool Road::IsRoadDescr(Map_Object_Descr const * const descr)
 {
@@ -102,11 +108,6 @@ Road & Road::create
 	road.init(egbase);
 
 	return road;
-}
-
-int32_t Road::get_type() const
-{
-	return ROAD;
 }
 
 int32_t Road::get_size() const

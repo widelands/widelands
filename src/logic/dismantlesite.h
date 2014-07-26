@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_DISMANTLESITE_H
 #define WL_LOGIC_DISMANTLESITE_H
 
+#include "base/macros.h"
 #include "logic/building.h"
 #include "logic/partially_finished_building.h"
 #include "logic/player.h"
@@ -42,13 +43,18 @@ the destructed building.
 class DismantleSite;
 
 struct DismantleSite_Descr : public Building_Descr {
-	DismantleSite_Descr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr & tribe);
+	DismantleSite_Descr(char const* name,
+	                    char const* descname,
+	                    const std::string& directory,
+	                    Profile&,
+	                    Section& global_s,
+							  const Tribe_Descr& tribe);
+	virtual ~DismantleSite_Descr() override {}
 
-	virtual Building & create_object() const override;
-	std::string type() const override {return "dismantlesite";}
+	virtual Building& create_object() const override;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(DismantleSite_Descr);
 };
 
 class DismantleSite : public Partially_Finished_Building {
@@ -64,7 +70,6 @@ public:
 		(const DismantleSite_Descr & descr, Editor_Game_Base &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
-	char const * type_name() const override {return "dismantlesite";}
 	virtual std::string get_statistics_string() override;
 
 	virtual bool burn_on_destroy() override;

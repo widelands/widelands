@@ -77,9 +77,6 @@ public:
 	Worker(const Worker_Descr &);
 	virtual ~Worker();
 
-	char const * type_name() const override {return "worker";}
-	virtual Bob::Type get_bob_type() const override {return Bob::WORKER;}
-
 	Player & owner() const {assert(get_owner()); return *get_owner();}
 	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
 		return m_location.get(egbase);

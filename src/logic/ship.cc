@@ -53,7 +53,8 @@ Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
-: BobDescr(given_name, gdescname, &gtribe)
+	:
+	BobDescr(Map_Object_Type::SHIP, given_name, gdescname, &gtribe)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
@@ -89,10 +90,6 @@ Ship::Ship(const Ship_Descr & gdescr) :
 
 Ship::~Ship() {
 	close_window();
-}
-
-Bob::Type Ship::get_bob_type() const {
-	return SHIP;
 }
 
 PortDock* Ship::get_destination(Editor_Game_Base& egbase) const {

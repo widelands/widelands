@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_TRAININGSITE_H
 #define WL_LOGIC_TRAININGSITE_H
 
+#include "base/macros.h"
 #include "logic/productionsite.h"
 #include "logic/soldiercontrol.h"
 #include "logic/tattribute.h"
@@ -35,8 +36,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
-
-	std::string type() const override {return "trainingsite";}
+	virtual ~TrainingSite_Descr() override {}
 
 	virtual Building & create_object() const override;
 
@@ -90,6 +90,7 @@ private:
 
 	// Re-use of m_inputs to get the resources
 	// TrainingMap m_programs;
+	DISALLOW_COPY_AND_ASSIGN(TrainingSite_Descr);
 };
 
 /**
@@ -121,7 +122,6 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(const TrainingSite_Descr &);
 
-	char const * type_name() const override {return "trainingsite";}
 	virtual std::string get_statistics_string() override;
 
 	virtual void init(Editor_Game_Base &) override;

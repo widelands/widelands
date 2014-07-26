@@ -52,11 +52,11 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 
 Building_Descr::Building_Descr
-	(char const * const _name, char const * const _descname,
+	(const Map_Object_Type type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _descr)
 	:
-	Map_Object_Descr(_name, _descname),
+	Map_Object_Descr(type, _name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
 	m_icon     (nullptr),
@@ -230,7 +230,7 @@ Called whenever building graphics need to be loaded.
 */
 void Building_Descr::load_graphics()
 {
-	if (m_icon_fname.size())
+	if (!m_icon_fname.empty())
 		m_icon = g_gr->images().get(m_icon_fname);
 }
 
@@ -316,8 +316,6 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 	   std::remove_if(m_leave_queue.begin(), m_leave_queue.end(), should_be_deleted),
 	   m_leave_queue.end());
 }
-
-int32_t Building::get_type() const {return BUILDING;}
 
 int32_t Building::get_size() const {return descr().get_size();}
 

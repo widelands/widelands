@@ -75,9 +75,10 @@ Soldier_Descr::Soldier_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
-	: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe)
+	:
+	Worker_Descr(Map_Object_Type::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
 {
-	add_attribute(Map_Object::SOLDIER);
+	add_attribute(Map_Object::Attribute::SOLDIER);
 
 	m_base_hp = global_s.get_safe_positive("hp");
 

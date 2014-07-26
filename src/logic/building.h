@@ -27,6 +27,7 @@
 #include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
+#include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
@@ -61,14 +62,10 @@ struct Building_Descr : public Map_Object_Descr {
 	typedef std::vector<Building_Index> FormerBuildings;
 
 	Building_Descr
-		(char const * _name, char const * _descname,
+		(Map_Object_Type type, char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-
-	std::string type() const override {
-		return "building";
-	}
-
+	virtual ~Building_Descr() override {}
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
@@ -158,6 +155,7 @@ private:
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
+	DISALLOW_COPY_AND_ASSIGN(Building_Descr);
 };
 
 
@@ -183,8 +181,6 @@ public:
 
 	void load_finish(Editor_Game_Base &) override;
 
-	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "building";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 

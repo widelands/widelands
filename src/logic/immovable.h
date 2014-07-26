@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/buildcost.h"
 #include "logic/instances.h"
@@ -115,10 +116,7 @@ struct Immovable_Descr : public Map_Object_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 Tribe_Descr const * const);
 	Immovable_Descr(const LuaTable&, const World&);
-
-	~Immovable_Descr();
-
-	std::string type() const override {return "immovable";}
+	~Immovable_Descr() override;
 
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
@@ -159,6 +157,7 @@ private:
 
 	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
+	DISALLOW_COPY_AND_ASSIGN(Immovable_Descr);
 };
 
 class Immovable : public BaseImmovable {
@@ -178,8 +177,6 @@ public:
 	Coords get_position() const {return m_position;}
 	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
-	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "immovable";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);

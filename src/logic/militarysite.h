@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "logic/attackable.h"
 #include "logic/productionsite.h"
 #include "logic/requirements.h"
@@ -37,11 +38,9 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
+	virtual ~MilitarySite_Descr() override {}
 
 	virtual Building & create_object() const override;
-	virtual std::string type() const override {
-		return "militarysite";
-	}
 
 	virtual uint32_t get_conquers() const override {return m_conquer_radius;}
 	uint32_t get_max_number_of_soldiers () const {
@@ -63,6 +62,7 @@ private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
 	uint32_t m_heal_per_second;
+	DISALLOW_COPY_AND_ASSIGN(MilitarySite_Descr);
 };
 
 class MilitarySite :
@@ -82,7 +82,6 @@ public:
 	MilitarySite(const MilitarySite_Descr &);
 	virtual ~MilitarySite();
 
-	char const * type_name() const override {return "militarysite";}
 	virtual std::string get_statistics_string() override;
 
 	virtual void init(Editor_Game_Base &) override;

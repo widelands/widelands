@@ -20,9 +20,30 @@
 #ifndef WL_LOGIC_CARRIER_H
 #define WL_LOGIC_CARRIER_H
 
+#include "base/macros.h"
 #include "logic/worker.h"
 
 namespace Widelands {
+
+struct Carrier_Descr : public Worker_Descr {
+	Carrier_Descr(char const* const _name,
+	              char const* const _descname,
+	              const std::string& directory,
+	              Profile& prof,
+	              Section& global_s,
+	              const Tribe_Descr& _tribe)
+		:
+		Worker_Descr(Map_Object_Type::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
+	{
+	}
+	virtual ~Carrier_Descr() override {}
+
+protected:
+	virtual Bob & create_object() const override;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(Carrier_Descr);
+};
 
 /**
  * Carrier is a worker who is employed by a Road.
@@ -30,27 +51,9 @@ namespace Widelands {
 struct Carrier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
 
-	struct Descr : public Worker_Descr {
-		Descr
-			(char const * const _name, char const * const _descname,
-			 const std::string & directory, Profile & prof, Section & global_s,
-			 const Tribe_Descr & _tribe)
-			:
-				Worker_Descr
-					(_name, _descname, directory,
-					 prof, global_s, _tribe)
-		{}
+	MO_DESCR(Carrier_Descr)
 
-		virtual Worker_Type get_worker_type() const override {return CARRIER;}
-		// class type needed for Lua stuff TODO(GunChleoc): redundant with get_worker_type()?
-		std::string type() const override {return "carrier";}
-
-	protected:
-		virtual Bob & create_object() const override {return *new Carrier(*this);}
-	};
-
-
-	Carrier(const Descr & carrier_descr)
+	Carrier(const Carrier_Descr & carrier_descr)
 		: Worker(carrier_descr), m_promised_pickup_to(-1)
 	{}
 	virtual ~Carrier() {}
@@ -64,8 +67,9 @@ struct Carrier : public Worker {
 
 	virtual void log_general_info(const Editor_Game_Base &) override;
 
+	static Task const taskRoad;
+
 private:
-	MO_DESCR(Descr)
 
 	void find_pending_ware(Game &);
 	int32_t find_closest_flag(Game &);
@@ -75,7 +79,6 @@ private:
 	void road_pop           (Game &, State &);
 	void transport_update   (Game &, State &);
 
-	static Task const taskRoad;
 	static Task const taskTransport;
 
 	void deliver_to_building(Game &, State &);

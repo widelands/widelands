@@ -23,6 +23,7 @@
 #include <list>
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/immovable.h"
 #include "economy/routing_node.h"
 
@@ -32,7 +33,17 @@ class Request;
 struct Road;
 class WareInstance;
 
+class Flag_Descr : public Map_Object_Descr {
+public:
+	Flag_Descr(char const* const _name, char const* const _descname)
+	   : Map_Object_Descr(Map_Object_Type::FLAG, _name, _descname) {
+	}
+	virtual ~Flag_Descr() override {
+	}
 
+private:
+	DISALLOW_COPY_AND_ASSIGN(Flag_Descr);
+};
 
 /**
  * Flag represents a flag, obviously.
@@ -59,6 +70,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
 	friend struct Router;
 
+	const Flag_Descr& descr() const;
+
 	Flag(); /// empty flag for savegame loading
 	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
 	virtual ~Flag();
@@ -66,8 +79,6 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void load_finish(Editor_Game_Base &) override;
 	virtual void destroy(Editor_Game_Base &) override;
 
-	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "flag";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 
@@ -165,6 +176,7 @@ private:
 	FlagJobs m_flag_jobs;
 };
 
+extern Flag_Descr g_flag_descr;
 }
 
 #endif  // end of include guard: WL_ECONOMY_FLAG_H

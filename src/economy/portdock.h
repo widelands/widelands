@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "logic/immovable.h"
 #include "logic/wareworker.h"
 #include "economy/shippingitem.h"
@@ -33,6 +34,16 @@ struct RoutingNodeNeighbour;
 struct Ship;
 class Warehouse;
 class ExpeditionBootstrap;
+
+class PortDock_Descr : public Map_Object_Descr {
+public:
+	PortDock_Descr(char const* const _name, char const* const _descname);
+	virtual ~PortDock_Descr() override {
+	}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(PortDock_Descr);
+};
 
 /**
  * The PortDock occupies the fields in the water at which ships
@@ -62,6 +73,9 @@ class ExpeditionBootstrap;
  */
 class PortDock : public PlayerImmovable {
 public:
+
+	const PortDock_Descr& descr() const;
+
 	PortDock(Warehouse* warehouse);
 	virtual ~PortDock();
 
@@ -76,8 +90,6 @@ public:
 
 	virtual int32_t get_size() const override;
 	virtual bool get_passable() const override;
-	virtual int32_t get_type() const override;
-	virtual char const * type_name() const override;
 
 	virtual Flag & base_flag() override;
 	virtual PositionList get_positions
@@ -155,6 +167,8 @@ public:
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
+
+extern PortDock_Descr g_portdock_descr;
 
 } // namespace Widelands
 

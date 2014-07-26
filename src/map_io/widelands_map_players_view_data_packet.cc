@@ -24,13 +24,13 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "economy/flag.h"
 #include "economy/road.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
-#include "logic/instances.h" //for g_flag_descr
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"
@@ -999,7 +999,7 @@ inline static void write_unseen_immovable
 	else if (upcast(Immovable_Descr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
 		WriteImmovable_Type(&immovables_file, *immovable_descr);
-	} else if (map_object_descr == &g_flag_descr)
+	} else if (map_object_descr->type() == Map_Object_Type::FLAG)
 		immovable_kind = 2;
 	else if (upcast(Building_Descr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
@@ -1020,7 +1020,7 @@ inline static void write_unseen_immovable
 			immovables_file.Unsigned32(csi.totaltime);
 			immovables_file.Unsigned32(csi.completedtime);
 		}
-	} else if (map_object_descr == &g_portdock_descr)
+	} else if (map_object_descr->type() == Map_Object_Type::PORTDOCK)
 		immovable_kind = 4;
 	else
 	{

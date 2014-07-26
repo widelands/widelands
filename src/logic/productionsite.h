@@ -56,16 +56,12 @@ struct ProductionSite_Descr : public Building_Descr {
 	friend struct ProductionProgram; // To add animations
 
 	ProductionSite_Descr
-		(char const * name, char const * descname,
+		(Map_Object_Type type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &, const World&);
-	virtual ~ProductionSite_Descr();
+	virtual ~ProductionSite_Descr() override;
 
 	virtual Building & create_object() const override;
-
-	virtual std::string type() const override {
-		return "productionsite";
-	}
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
@@ -111,6 +107,8 @@ private:
 	std::string m_out_of_resource_title;
 	std::string m_out_of_resource_message;
 	uint32_t    m_out_of_resource_delay_attempts;
+
+	DISALLOW_COPY_AND_ASSIGN(ProductionSite_Descr);
 };
 
 class ProductionSite : public Building {
@@ -161,7 +159,6 @@ public:
 
 	virtual WaresQueue & waresqueue(Ware_Index) override;
 
-	char const * type_name() const override {return "productionsite";}
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;
 	virtual void act(Game &, uint32_t data) override;

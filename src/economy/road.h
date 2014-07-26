@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/immovable.h"
 #include "logic/path.h"
 #include "logic/roadtype.h"
@@ -29,6 +30,17 @@
 namespace Widelands {
 struct Carrier;
 class Request;
+
+class Road_Descr : public Map_Object_Descr {
+public:
+	Road_Descr(char const* const _name, char const* const _descname)
+	   : Map_Object_Descr(Map_Object_Type::ROAD, _name, _descname) {
+	}
+	virtual ~Road_Descr() override {}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(Road_Descr);
+};
 
 /**
  * Road is a special object which connects two flags.
@@ -48,6 +60,8 @@ class Request;
 struct Road : public PlayerImmovable {
 	friend class Map_Roaddata_Data_Packet; // For saving
 	friend class Map_Road_Data_Packet; // For init()
+
+	const Road_Descr& descr() const;
 
 	static bool IsRoadDescr(Map_Object_Descr const *);
 
@@ -73,9 +87,7 @@ struct Road : public PlayerImmovable {
 
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
 
-	virtual int32_t  get_type    () const override;
 	uint8_t get_roadtype() const {return m_type;}
-	char const * type_name() const override {return "road";}
 	virtual int32_t  get_size    () const override;
 	virtual bool get_passable() const override;
 	virtual PositionList get_positions(const Editor_Game_Base &) const override;

@@ -25,6 +25,7 @@
 
 #include <stdint.h>
 
+#include "base/macros.h"
 #include "logic/instances.h"
 
 class Profile;
@@ -49,10 +50,7 @@ struct WareDescr : public Map_Object_Descr {
 		(const Tribe_Descr & tribe, char const * const name,
 		 char const * const descname, const std::string & directory,
 		 Profile &, Section & global_s);
-
-	virtual ~WareDescr() {}
-
-	std::string type() const override {return "ware";}
+	virtual ~WareDescr() override {}
 
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
@@ -93,6 +91,7 @@ private:
 	std::string m_icon_fname; ///< Filename of ware's main picture
 	const Image* m_icon;       ///< Index of ware's picture in picture stack
 	uint8_t     m_preciousness;
+	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };
 
 }

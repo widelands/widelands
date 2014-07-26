@@ -200,11 +200,6 @@ WareInstance::~WareInstance()
 	}
 }
 
-int32_t WareInstance::get_type() const
-{
-	return WARE;
-}
-
 void WareInstance::init(Editor_Game_Base & egbase)
 {
 	Map_Object::init(egbase);

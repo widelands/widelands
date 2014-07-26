@@ -113,8 +113,8 @@ public:
 	 */
 	int get_descname(lua_State *);
 	int get_name(lua_State *);
+	int get_type_name(lua_State *);
 	int get_representative_image(lua_State *);
-	int get_type(lua_State *);
 
 	/*
 	 * Lua methods
@@ -188,6 +188,36 @@ public:
 
 private:
 	CASTED_GET_DESCRIPTION(Building_Descr)
+};
+
+
+class L_ConstructionSiteDescription : public L_BuildingDescription {
+public:
+	LUNA_CLASS_HEAD(L_ConstructionSiteDescription);
+
+	virtual ~L_ConstructionSiteDescription() {}
+
+	L_ConstructionSiteDescription() {}
+	L_ConstructionSiteDescription(const Widelands::ConstructionSite_Descr* const constructionsitedescr)
+		: L_BuildingDescription(constructionsitedescr) {
+	}
+	L_ConstructionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(ConstructionSite_Descr)
 };
 
 
@@ -433,10 +463,9 @@ public:
 	 * attributes
 	 */
 	int get___hash(lua_State *);
-	int get_serial(lua_State *);
-	int get_type(lua_State *);
+	int get_descr(lua_State *);
 	int get_name(lua_State *);
-	int get_descname(lua_State *);
+	int get_serial(lua_State *);
 
 	/*
 	 * Lua Methods
@@ -968,9 +997,8 @@ public:
 	 */
 };
 
-int upcasted_building_descr_to_lua(lua_State* L, const Widelands::Building_Descr* descr);
-int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
-int upcasted_bob_to_lua(lua_State * L, Widelands::Bob * mo);
+int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::Map_Object_Descr* descr);
+int upcasted_map_object_to_lua(lua_State * L, Widelands::Map_Object * mo);
 
 void luaopen_wlmap(lua_State *);
 

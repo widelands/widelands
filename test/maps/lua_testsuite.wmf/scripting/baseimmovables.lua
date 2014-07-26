@@ -146,20 +146,20 @@ function immovable_property_tests:test_name_fortress()
 end
 
 function immovable_property_tests:test_type_pebble()
-   assert_equal("immovable", self.none.type)
+   assert_equal("immovable", self.none.descr.type_name)
 end
 function immovable_property_tests:test_type_tree()
-   assert_equal("immovable", self.small.type)
+   assert_equal("immovable", self.small.descr.type_name)
 end
 function immovable_property_tests:test_type_charcoal_burner()
-   assert_equal("productionsite", self.medium.type)
+   assert_equal("productionsite", self.medium.descr.type_name)
    assert_equal("burners_house", self.medium.name)
 end
 function immovable_property_tests:test_type_stone()
-   assert_equal("immovable", self.big.type)
+   assert_equal("immovable", self.big.descr.type_name)
 end
 function immovable_property_tests:test_type_fortress()
-   assert_equal("militarysite", self.big_building.type)
+   assert_equal("militarysite", self.big_building.descr.type_name)
    assert_equal("fortress", self.big_building.name)
 end
 

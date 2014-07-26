@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+#include "logic/instances.h"
+
 namespace Widelands {
 
 struct BaseImmovable;
@@ -92,12 +94,12 @@ private:
 	int32_t m_min, m_max;
 };
 struct FindImmovableType {
-	FindImmovableType(int32_t const type) : m_type(type) {}
+	FindImmovableType(Map_Object_Type const type) : m_type(type) {}
 
 	bool accept(const BaseImmovable &) const;
 
 private:
-	int32_t m_type;
+	Map_Object_Type m_type;
 };
 struct FindImmovableAttribute {
 	FindImmovableAttribute(uint32_t const attrib) : m_attrib(attrib) {}

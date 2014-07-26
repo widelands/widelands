@@ -999,7 +999,7 @@ void Game::sample_statistics()
 				 ++workerid)
 				if
 					(!
-					 dynamic_cast<Carrier::Descr const *>
+					 dynamic_cast<Carrier_Descr const *>
 					 	(tribe.get_worker_descr(workerid)))
 					wostock += eco->stock_worker(workerid);
 		}

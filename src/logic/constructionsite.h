@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/partially_finished_building.h"
 #include "logic/player.h"
 
@@ -54,9 +55,12 @@ struct ConstructionSite_Descr : public Building_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe);
+	virtual ~ConstructionSite_Descr() override {}
 
 	virtual Building & create_object() const override;
-	std::string type() const override {return "constructionsite";}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(ConstructionSite_Descr);
 };
 
 class ConstructionSite : public Partially_Finished_Building {
@@ -69,7 +73,6 @@ class ConstructionSite : public Partially_Finished_Building {
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
 
-	char const * type_name() const override {return "constructionsite";}
 	virtual std::string get_statistics_string() override;
 
 	const Player::Constructionsite_Information & get_info() {return m_info;}

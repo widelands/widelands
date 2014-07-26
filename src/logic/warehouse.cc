@@ -255,9 +255,9 @@ Warehouse Building
 Warehouse_Descr::Warehouse_Descr
 	(char const* const _name, char const* const _descname,
 	 const std::string& directory, Profile& prof, Section& global_s, const Tribe_Descr& _tribe)
-	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	  m_conquers(0),
-	  m_heal_per_second(0)
+	: Building_Descr(Map_Object_Type::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
+	  m_conquers         (0),
+	  m_heal_per_second  (0)
 {
 	m_heal_per_second = global_s.get_safe_int("heal_per_second");
 	if ((m_conquers = prof.get_safe_section("global").get_positive("conquers", 0)))
@@ -450,19 +450,19 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			schedule_act
 				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
-	log("Message: adding (wh) (%s) %i \n", type_name(), player.player_number());
-	char message[2048];
-	snprintf
-		(message, sizeof(message),
-		 _("A new %s was added to your economy."),
-		 descr().descname().c_str());
-	send_message
-		(ref_cast<Game, Editor_Game_Base>(egbase),
-		 "warehouse",
-		 descr().descname(),
-		 message,
-		 true);
-	}
+		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
+		char message[2048];
+		snprintf
+			(message, sizeof(message),
+			 _("A new %s was added to your economy."),
+			 descr().descname().c_str());
+		send_message
+			(ref_cast<Game, Editor_Game_Base>(egbase),
+			 "warehouse",
+			 descr().descname(),
+			 message,
+			 true);
+		}
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
 		egbase.conquer_area

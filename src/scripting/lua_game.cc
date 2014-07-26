@@ -709,7 +709,7 @@ int L_Player::get_buildings(lua_State * L) {
 				continue;
 
 			lua_pushuint32(L, cidx++);
-			upcasted_immovable_to_lua(L, (*map)[vec[l].pos].get_immovable());
+			upcasted_map_object_to_lua(L, (*map)[vec[l].pos].get_immovable());
 			lua_rawset(L, -3);
 		}
 

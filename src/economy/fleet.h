@@ -22,6 +22,7 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "base/macros.h"
 #include "logic/instances.h"
 
 namespace Widelands {
@@ -31,6 +32,18 @@ struct Flag;
 class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
+
+class Fleet_Descr : public Map_Object_Descr {
+public:
+	Fleet_Descr(char const* const _name, char const* const _descname)
+	   : Map_Object_Descr(Map_Object_Type::FLEET, _name, _descname) {
+	}
+	virtual ~Fleet_Descr() override {
+	}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(Fleet_Descr);
+};
 
 /**
  * Manage all ships and ports of a player that are connected
@@ -58,6 +71,8 @@ struct Fleet : Map_Object {
 		PortPath() : cost(-1) {}
 	};
 
+	const Fleet_Descr& descr() const;
+
 	Fleet(Player & player);
 
 	Player * get_owner() const {return &m_owner;}
@@ -68,9 +83,6 @@ struct Fleet : Map_Object {
 	void set_economy(Economy * e);
 
 	bool active() const;
-
-	virtual int32_t get_type() const override;
-	virtual char const * type_name() const override;
 
 	virtual void init(Editor_Game_Base &) override;
 	virtual void cleanup(Editor_Game_Base &) override;
