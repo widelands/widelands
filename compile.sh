@@ -63,7 +63,6 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   prepare_directories_and_links () {
     test -d build/locale || mkdir -p build/locale
     test -e locale || ln -s build/locale
-
     return 0
   }
 
@@ -147,6 +146,7 @@ set -e
 basic_check
 set_buildtool
 prepare_directories_and_links
+mkdir -p build
 cd build
 compile_widelands
 move_built_files
