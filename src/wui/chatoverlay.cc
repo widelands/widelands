@@ -181,7 +181,7 @@ void ChatOverlay::draw(RenderTarget & dst)
 	const int32_t top = get_h() - height - 2 * MARGIN;
 	const int width = std::min<int>(get_w(), im->width());
 
-	//FIXME: alpha channel not respected
+	// TODO(unknown): alpha channel not respected
 	if (!m->transparent_) {
 		Rect rect(0, top, width, height);
 		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128));

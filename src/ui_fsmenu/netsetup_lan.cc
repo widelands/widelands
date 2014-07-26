@@ -28,7 +28,7 @@
 #include "wui/text_constants.h"
 
 Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
-	Fullscreen_Menu_Base("singleplmenu.jpg"), //  FIXME change this
+	Fullscreen_Menu_Base("singleplmenu.jpg"), //  TODO(unknown): change this
 
 // Values for alignment and size
 	m_butx (get_w() * 13 / 40),
@@ -150,7 +150,7 @@ bool Fullscreen_Menu_NetSetupLAN::get_host_address
 	for (uint32_t i = 0; i < opengames_size; ++i) {
 		const Net_Open_Game & game = *opengames[i];
 
-		if (not strcmp(game.info.hostname, host.c_str())) {
+		if (!strcmp(game.info.hostname, host.c_str())) {
 			addr = game.address;
 			port = game.port;
 			return true;

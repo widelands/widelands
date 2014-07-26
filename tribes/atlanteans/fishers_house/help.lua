@@ -1,7 +1,7 @@
 -- The Atlantean Fisher's House
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_atlanteans")
 
@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("atlanteans", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("atlanteans", building_description, "fish",
+	building_help_general_string("atlanteans", building_description,
 		_"Fishes on the coast near the house.",
 		_"The fisher’s house needs water full of fish within the working radius." .. " " .. _"Build a fisher breeder’s house close to the fisher’s house to make sure that you don’t run out of fish." ) ..
 

@@ -188,8 +188,9 @@ void Object_Manager::remove(Map_Object & obj)
 std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
-	container_iterate_const(objmap_t, m_objects, o)
-		rv.push_back(o->first);
+	for (const std::pair<Serial, Map_Object *>& o : m_objects) {
+		rv.push_back(o.first);
+	}
 
 	std::sort(rv.begin(), rv.end());
 
@@ -233,9 +234,11 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
  * Add this animation for this map object under this name
  */
 bool Map_Object_Descr::is_animation_known(const std::string & animname) const {
-	container_iterate_const(Anims, m_anims, i)
-		if (i.current->first == animname)
+	for (const std::pair<std::string, uint32_t>& anim : m_anims) {
+		if (anim.first == animname) {
 			return true;
+		}
+	}
 	return false;
 }
 
@@ -243,19 +246,23 @@ void Map_Object_Descr::add_animation
 	(const std::string & animname, uint32_t const anim)
 {
 #ifndef NDEBUG
-	container_iterate_const(Anims, m_anims, i)
-		if (i.current->first == animname)
+	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
+		if (temp_anim.first == animname) {
 			throw wexception
 				("adding already existing animation \"%s\"", animname.c_str());
+		}
+	}
 #endif
 	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }
 
-
 std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
-	container_iterate_const(Anims, m_anims, i)
-		if (i.current->second == anim)
-			return i.current->first;
+
+	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
+		if (temp_anim.second == anim) {
+			return temp_anim.first;
+		}
+	}
 
 	// Never here
 	assert(false);
@@ -267,9 +274,11 @@ std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
  * Search for the attribute in the attribute list
  */
 bool Map_Object_Descr::has_attribute(uint32_t const attr) const {
-	container_iterate_const(Attributes, m_attributes, i)
-		if (*i.current == attr)
+	for (const uint32_t& attrib : m_attributes) {
+		if (attrib == attr) {
 			return true;
+		}
+	}
 	return false;
 }
 
@@ -542,6 +551,53 @@ void Map_Object::save
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
 
 	fw.Unsigned32(mos.get_object_file_index(*this));
+}
+
+std::string to_string(const Map_Object_Type type) {
+	switch (type) {
+	case Map_Object_Type::BOB:
+		return "bob";
+	case Map_Object_Type::CRITTER:
+		return "critter";
+	case Map_Object_Type::SHIP:
+		return "ship";
+	case Map_Object_Type::WORKER:
+		return "worker";
+	case Map_Object_Type::CARRIER:
+		return "carrier";
+	case Map_Object_Type::SOLDIER:
+		return "soldier";
+	case Map_Object_Type::WARE:
+		return "ware";
+	case Map_Object_Type::BATTLE:
+		return "battle";
+	case Map_Object_Type::FLEET:
+		return "fleet";
+	case Map_Object_Type::IMMOVABLE:
+		return "immovable";
+	case Map_Object_Type::FLAG:
+		return "flag";
+	case Map_Object_Type::ROAD:
+		return "road";
+	case Map_Object_Type::PORTDOCK:
+		return "portdock";
+	case Map_Object_Type::BUILDING:
+		return "building";
+	case Map_Object_Type::CONSTRUCTIONSITE:
+		return "constructionsite";
+	case Map_Object_Type::DISMANTLESITE:
+		return "dismantlesite";
+	case Map_Object_Type::WAREHOUSE:
+		return "warehouse";
+	case Map_Object_Type::PRODUCTIONSITE:
+		return "productionsite";
+	case Map_Object_Type::MILITARYSITE:
+		return "militarysite";
+	case Map_Object_Type::TRAININGSITE:
+		return "trainingsite";
+	default:
+		throw wexception("Unknown Map_Object_Type %d.", static_cast<int>(type));
+	}
 }
 
 }

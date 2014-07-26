@@ -27,6 +27,8 @@
 #include <typeinfo>
 #include <vector>
 
+#include <boost/algorithm/string/join.hpp>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -121,11 +123,11 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 		if (upcast(ProductionSite_Descr const, de, &descr)) {
 
 			if
-				((descr.is_buildable() or descr.is_enhanced())
-				 and
+				((descr.is_buildable() || descr.is_enhanced())
+				 &&
 				 de->output_ware_types().count(wares.get_selected()))
 			{
-				prodSites.add(de->descname().c_str(), i, de->get_buildicon());
+				prodSites.add(de->descname().c_str(), i, de->get_icon());
 				found = true;
 			}
 		}
@@ -145,12 +147,12 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 			(*tribe.get_building_descr(prodSites.get_selected()))
 		.programs();
 
-	//  FIXME This needs reworking. A program can indeed produce iron even if
-	//  FIXME the program name is not any of produce_iron, smelt_iron, prog_iron
-	//  FIXME or work. What matters is whether the program has a statement such
-	//  FIXME as "produce iron" or "createware iron". The program name is not
-	//  FIXME supposed to have any meaning to the game logic except to uniquely
-	//  FIXME identify the program.
+	//  TODO(unknown): This needs reworking. A program can indeed produce iron even if
+	//  the program name is not any of produce_iron, smelt_iron, prog_iron
+	//  or work. What matters is whether the program has a statement such
+	//  as "produce iron" or "createware iron". The program name is not
+	//  supposed to have any meaning to the game logic except to uniquely
+	//  identify the program.
 	//  Only shows information from the first program that has a name indicating
 	//  that it produces the considered ware type.
 	std::map<std::string, ProductionProgram *>::const_iterator programIt =
@@ -172,33 +174,28 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 		const ProductionProgram::Actions & actions =
 			programIt->second->actions();
 
-		container_iterate_const(ProductionProgram::Actions, actions, i)
-			if (upcast(ProductionProgram::ActConsume const, action, *i.current)) {
+		for (const ProductionProgram::Action * temp_action : actions) {
+			if (upcast(ProductionProgram::ActConsume const, action, temp_action)) {
 				const ProductionProgram::ActConsume::Groups & groups =
 					action->groups();
-				container_iterate_const
-					(ProductionProgram::ActConsume::Groups, groups, j)
-				{
-					const std::set<Ware_Index> & ware_types = j.current->first;
+
+				for (const ProductionProgram::Ware_Type_Group& temp_group : groups) {
+					const std::set<Ware_Index> & ware_types = temp_group.first;
 					assert(ware_types.size());
-					std::string ware_type_names;
-					for
-						(wl_const_range<std::set<Ware_Index> >
-						 k(ware_types);;)
-					{
-						ware_type_names +=
-							tribe.get_ware_descr(*k)->descname();
-						if (k.advance().empty())
-							break;
-						/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
-						ware_type_names += _(" or ");
+					std::vector<std::string> ware_type_descnames;
+					for (const Ware_Index& ware_index : ware_types) {
+						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
+
+					const std::string ware_type_names =
+					/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
+					   boost::algorithm::join(ware_type_descnames, _(" or "));
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.
-					static_assert(sizeof(j.current->second) == 1, "Number is too big for 3 char string.");
+					static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
 					char amount_string[4]; //  Space for 3 digits + terminator.
-					sprintf(amount_string, "%u", j.current->second);
+					sprintf(amount_string, "%u", temp_group.second);
 
 					//  picture only of first ware type in group
 					UI::Table<uintptr_t>::Entry_Record & tableEntry =
@@ -210,5 +207,6 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					condTable.sort();
 				}
 			}
+		}
 	}
 }

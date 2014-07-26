@@ -298,8 +298,8 @@ General_Statistics_Menu::~General_Statistics_Menu() {
 
 /**
  * called when the help button was clicked
- * \todo Implement help
-*/
+ */
+// TODO(unknown): Implement help
 void General_Statistics_Menu::clicked_help() {}
 
 
@@ -309,7 +309,7 @@ void General_Statistics_Menu::clicked_help() {}
 void General_Statistics_Menu::cb_changed_to(int32_t const id)
 {
 	// This represents our player number
-	m_cbs[id - 1]->set_perm_pressed(not m_cbs[id - 1]->get_perm_pressed());
+	m_cbs[id - 1]->set_perm_pressed(!m_cbs[id - 1]->get_perm_pressed());
 
 	m_plot.show_plot
 		((id - 1) * m_ndatasets + m_selected_information,

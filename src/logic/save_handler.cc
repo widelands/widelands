@@ -72,7 +72,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
 	}
 
-	// TODO: defer saving to next tick so that this message is shown
+	// TODO(unknown): defer saving to next tick so that this message is shown
 	// before the actual save, or put the saving logic in another thread
 	game.get_ibase()->log_message(_("Saving game..."));
 

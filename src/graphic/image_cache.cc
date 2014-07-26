@@ -44,10 +44,10 @@ public:
 	virtual ~FromDiskImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const override {return w_; }
-	virtual uint16_t height() const override {return h_;}
-	virtual const std::string& hash() const override {return filename_;}
-	virtual Surface* surface() const override {
+	uint16_t width() const override {return w_; }
+	uint16_t height() const override {return h_;}
+	const std::string& hash() const override {return filename_;}
+	Surface* surface() const override {
 		Surface* surf = surface_cache_->get(filename_);
 		if (surf)
 			return surf;

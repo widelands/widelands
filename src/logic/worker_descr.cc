@@ -36,25 +36,25 @@
 namespace Widelands {
 
 Worker_Descr::Worker_Descr
-	(char const * const _name, char const * const _descname,
+	(const Map_Object_Type type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	BobDescr(_name, _descname, &_tribe),
-	m_helptext(global_s.get_string("help", "")),
-	m_ware_hotspot(global_s.get_Point("ware_hotspot", Point(0, 15))),
-	m_icon_fname(directory + "/menu.png"),
-	m_icon(nullptr),
-	m_buildable     (false),
-	m_level_experience(-1),
-	m_becomes (INVALID_INDEX)
+	BobDescr(type, _name, _descname, &_tribe),
+	m_helptext          (global_s.get_string("help", "")),
+	m_ware_hotspot      (global_s.get_Point("ware_hotspot", Point(0, 15))),
+	m_icon_fname        (directory + "/menu.png"),
+	m_icon              (nullptr),
+	m_buildable         (false),
+	m_needed_experience  (-1),
+	m_becomes           (INVALID_INDEX)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 		add_animation("idle", g_gr->animations().load(directory, idle_s));
 	}
 
-	add_attribute(Map_Object::WORKER);
+	add_attribute(Map_Object::Attribute::WORKER);
 
 	m_default_target_quantity =
 		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
@@ -96,7 +96,7 @@ Worker_Descr::Worker_Descr
 	// Read the becomes and experience
 	if (char const * const becomes_name = global_s.get_string("becomes")) {
 		m_becomes = tribe().safe_worker_index(becomes_name);
-		m_level_experience = global_s.get_safe_positive("experience");
+		m_needed_experience = global_s.get_safe_positive("experience");
 	}
 
 	// Read programs

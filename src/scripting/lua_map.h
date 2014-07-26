@@ -68,8 +68,8 @@ public:
 		report_error(L, "Cannot instantiate a 'Map' directly!");
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -105,15 +105,16 @@ public:
 		report_error(L, "Cannot instantiate a 'MapObjectDescription' directly!");
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
-	int get_type(lua_State *);
 	int get_descname(lua_State *);
+	int get_name(lua_State *);
+	int get_type_name(lua_State *);
+	int get_representative_image(lua_State *);
 
 	/*
 	 * Lua methods
@@ -154,8 +155,8 @@ public:
 	L_BuildingDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -167,6 +168,7 @@ public:
 	int get_enhanced(lua_State *);
 	int get_enhancement_cost(lua_State *);
 	int get_enhancement(lua_State *);
+	int get_icon_name(lua_State*);
 	int get_is_mine(lua_State *);
 	int get_is_port(lua_State *);
 	int get_isproductionsite(lua_State *);
@@ -189,6 +191,36 @@ private:
 };
 
 
+class L_ConstructionSiteDescription : public L_BuildingDescription {
+public:
+	LUNA_CLASS_HEAD(L_ConstructionSiteDescription);
+
+	virtual ~L_ConstructionSiteDescription() {}
+
+	L_ConstructionSiteDescription() {}
+	L_ConstructionSiteDescription(const Widelands::ConstructionSite_Descr* const constructionsitedescr)
+		: L_BuildingDescription(constructionsitedescr) {
+	}
+	L_ConstructionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(ConstructionSite_Descr)
+};
+
+
 class L_ProductionSiteDescription : public L_BuildingDescription {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSiteDescription);
@@ -207,6 +239,7 @@ public:
 	 */
 	int get_inputs(lua_State *);
 	int get_output_ware_types(lua_State *);
+	int get_output_worker_types(lua_State *);
 	int get_working_positions(lua_State *);
 
 	/*
@@ -338,14 +371,15 @@ public:
 	L_WareDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
 	 */
-	int get_producers(lua_State *);
 	int get_consumers(lua_State *);
+	int get_icon_name(lua_State*);
+	int get_producers(lua_State *);
 
 	/*
 	 * Lua methods
@@ -373,16 +407,17 @@ public:
 	L_WorkerDescription(lua_State* L) : L_MapObjectDescription(L) {
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
 	 */
 	int get_becomes(lua_State*);
-	int get_level_experience(lua_State*);
 	int get_buildable(lua_State*);
 	int get_buildcost(lua_State*);
+	int get_icon_name(lua_State*);
+	int get_needed_experience(lua_State*);
 
 	/*
 	 * Lua methods
@@ -421,17 +456,16 @@ public:
 		m_ptr = nullptr;
 	}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * attributes
 	 */
 	int get___hash(lua_State *);
-	int get_serial(lua_State *);
-	int get_type(lua_State *);
+	int get_descr(lua_State *);
 	int get_name(lua_State *);
-	int get_descname(lua_State *);
+	int get_serial(lua_State *);
 
 	/*
 	 * Lua Methods
@@ -878,8 +912,8 @@ public:
 	}
 	virtual ~L_Field() {}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -944,8 +978,8 @@ public:
 	}
 	virtual ~L_PlayerSlot() {}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -963,9 +997,8 @@ public:
 	 */
 };
 
-int upcasted_building_descr_to_lua(lua_State* L, const Widelands::Building_Descr* descr);
-int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
-int upcasted_bob_to_lua(lua_State * L, Widelands::Bob * mo);
+int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::Map_Object_Descr* descr);
+int upcasted_map_object_to_lua(lua_State * L, Widelands::Map_Object * mo);
 
 void luaopen_wlmap(lua_State *);
 

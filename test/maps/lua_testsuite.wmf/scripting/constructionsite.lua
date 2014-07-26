@@ -1,5 +1,5 @@
 -- =========================
--- Constructionsite Functionality 
+-- Constructionsite Functionality
 -- =========================
 constructionsite_tests = lunit.TestCase("constructionsite tests")
 function constructionsite_tests:setup()
@@ -31,8 +31,8 @@ function constructionsite_tests:test_name()
    assert_equal("constructionsite", self.f.name)
 end
 function constructionsite_tests:test_type()
-   assert_equal("constructionsite", self.l.type)
-   assert_equal("constructionsite", self.f.type)
+   assert_equal("constructionsite", self.l.descr.type_name)
+   assert_equal("constructionsite", self.f.descr.type_name)
 end
 
 function constructionsite_tests:test_size()
@@ -44,4 +44,3 @@ function constructionsite_tests:test_building()
    assert_equal("lumberjacks_hut", self.l.building)
    assert_equal("fortress", self.f.building)
 end
-

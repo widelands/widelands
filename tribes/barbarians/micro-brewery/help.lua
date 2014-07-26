@@ -1,7 +1,7 @@
 -- The Barbarian Micro Brewery
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘Let the first one drive away the hunger, the second one put you at ease; when you have swallowed up your third one, it’s time for the next shift!’]], _[[Widespread toast among Miners]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "beer",
+	building_help_general_string("barbarians", building_description,
 		_"The micro brewery produces Beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.") ..
 
 	--Dependencies

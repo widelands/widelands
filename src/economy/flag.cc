@@ -38,7 +38,11 @@
 
 namespace Widelands {
 
-Map_Object_Descr g_flag_descr("flag", "Flag");
+Flag_Descr g_flag_descr("flag", "Flag");
+
+const Flag_Descr& Flag::descr() const {
+	return g_flag_descr;
+}
 
 /**
  * Create the flag. Initially, it doesn't have any attachments.
@@ -80,7 +84,7 @@ void Flag::load_finish(Editor_Game_Base & egbase) {
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& r) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
-		if (not state) {
+		if (!state) {
 			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
 			    "does not have a waitforcapacity task! Removing from queue.\n",
 			    worker.serial(),
@@ -138,17 +142,12 @@ Flag::Flag
 
 	init(egbase);
 
-	if (road and game)
+	if (road && game)
 			road->postsplit(*game, *this);
 }
 
 void Flag::set_flag_position(Coords coords) {
 	m_position = coords;
-}
-
-int32_t Flag::get_type() const
-{
-	return FLAG;
 }
 
 int32_t Flag::get_size() const
@@ -184,8 +183,9 @@ void Flag::set_economy(Economy * const e)
 	if (m_building)
 		m_building->set_economy(e);
 
-	container_iterate_const(FlagJobs, m_flag_jobs, i)
-		i.current->request->set_economy(e);
+	for (const FlagJob& temp_job : m_flag_jobs) {
+		temp_job.request->set_economy(e);
+	}
 
 	for (int8_t i = 0; i < 6; ++i) {
 		if (m_roads[i])
@@ -498,7 +498,7 @@ void Flag::wake_up_capacity_queue(Game & game)
 	while (!m_capacity_wait.empty()) {
 		Worker * const w = m_capacity_wait[0].get(game);
 		m_capacity_wait.erase(m_capacity_wait.begin());
-		if (w and w->wakeup_flag_capacity(game, *this))
+		if (w && w->wakeup_flag_capacity(game, *this))
 			break;
 	}
 }
@@ -795,15 +795,18 @@ void Flag::flag_job_request_callback
 
 	assert(w);
 
-	container_iterate(FlagJobs, flag.m_flag_jobs, i)
-		if (i.current->request == &rq) {
+	for (FlagJobs::iterator flag_iter = flag.m_flag_jobs.begin();
+		  flag_iter != flag.m_flag_jobs.end();
+		  ++flag_iter) {
+		if (flag_iter->request == &rq) {
 			delete &rq;
 
-			w->start_task_program(game, i.current->program);
+			w->start_task_program(game, flag_iter->program);
 
-			flag.m_flag_jobs.erase(i.current);
+			flag.m_flag_jobs.erase(flag_iter);
 			return;
 		}
+	}
 
 	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }

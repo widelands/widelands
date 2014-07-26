@@ -77,9 +77,6 @@ public:
 	Worker(const Worker_Descr &);
 	virtual ~Worker();
 
-	char const * type_name() const override {return "worker";}
-	virtual Bob::Type get_bob_type() const override {return Bob::WORKER;}
-
 	Player & owner() const {assert(get_owner()); return *get_owner();}
 	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
 		return m_location.get(egbase);
@@ -92,7 +89,7 @@ public:
 	/// should be there already). The worker must already be in the same economy
 	/// as the location.
 	void set_location_initially(PlayerImmovable & location) {
-		assert(not m_location.is_set());
+		assert(!m_location.is_set());
 		assert(location.serial());
 		assert(m_economy);
 		assert(m_economy == location.get_economy());
@@ -115,8 +112,8 @@ public:
 	void schedule_incorporate(Game &);
 	void incorporate(Game &);
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
 	bool wakeup_flag_capacity(Game &, Flag &);
 	bool wakeup_leave_building(Game &, Building &);
@@ -134,10 +131,10 @@ public:
 	Ware_Index level             (Game &);
 
 	int32_t get_current_experience() const {return m_current_exp;}
-	bool needs_experience() const {return descr().get_level_experience() != -1;}
+	bool needs_experience() const {return descr().get_needed_experience() != -1;}
 
 	// debug
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game &, Transfer *);
@@ -174,8 +171,8 @@ public:
 protected:
 	virtual bool is_evict_allowed();
 	void draw_inner(const Editor_Game_Base &, RenderTarget &, const Point&) const;
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const Point&) const override;
-	virtual void init_auto_task(Game &) override;
+	void draw(const Editor_Game_Base &, RenderTarget &, const Point&) const override;
+	void init_auto_task(Game &) override;
 
 	bool does_carry_ware() {return m_carried_ware.is_set();}
 
@@ -245,10 +242,6 @@ private:
 	bool run_playFX           (Game &, State &, const Action &);
 	bool run_construct        (Game &, State &, const Action &);
 
-	// Displays a message to the player if a find... program can't be
-	// executed
-	void informPlayer(Game &, Building &, std::string) const;
-
 	OPtr<PlayerImmovable> m_location; ///< meta location of the worker
 	Economy          * m_economy;      ///< economy this worker is registered in
 	OPtr<WareInstance>    m_carried_ware; ///< ware we are carrying
@@ -263,12 +256,12 @@ protected:
 		Loader();
 
 		virtual void load(FileRead &);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	protected:
-		virtual const Task * get_task(const std::string & name) override;
-		virtual const BobProgramBase * get_program(const std::string & name) override;
+		const Task * get_task(const std::string & name) override;
+		const BobProgramBase * get_program(const std::string & name) override;
 
 	private:
 		uint32_t m_location;
@@ -279,7 +272,7 @@ protected:
 	virtual Loader * create_loader();
 
 public:
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	virtual void do_save
 		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 

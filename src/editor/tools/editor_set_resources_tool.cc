@@ -61,7 +61,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl(Widelands::Map& map,
 				(world.get_resource(res)->get_editor_pic (mr.location().field->get_resources_amount()));
 			overlay_manager.remove_overlay(mr.location(), pic);
 
-			if (not amount) {
+			if (!amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_starting_res_amount(0);
 			} else {
@@ -105,7 +105,7 @@ Editor_Set_Resources_Tool::handle_undo_impl(Widelands::Map& map,
 		    (world.get_resource(res)->get_editor_pic(mr.location().field->get_resources_amount()));
 		overlay_manager.remove_overlay(mr.location(), pic);
 
-		if (not amount) {
+		if (!amount) {
 			mr.location().field->set_resources(0, 0);
 			mr.location().field->set_starting_res_amount(0);
 		} else {

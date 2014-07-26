@@ -115,7 +115,7 @@ void Building_Window::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
-	const Animation& anim = g_gr->animations().get_animation(building().descr().get_ui_anim());
+	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
 
 	const Image* dark_frame = ImageTransformations::change_luminosity
 		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
@@ -129,14 +129,14 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 */
 void Building_Window::think()
 {
-	if (not igbase().can_see(building().owner().player_number()))
+	if (!igbase().can_see(building().owner().player_number()))
 		die();
 
 	if
-		(! m_caps_setup
-		 or
+		(!m_caps_setup
+		 ||
 		 m_capscache_player_number != igbase().player_number()
-		 or
+		 ||
 		 building().get_playercaps() != m_capscache)
 	{
 		m_capsbuttons->free_children();
@@ -236,7 +236,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->images().get("pics/but4.png"),
-							 building_descr.get_buildicon(),
+							 building_descr.get_icon(),
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
 					//  button id = building id
@@ -282,7 +282,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			requires_destruction_separator = true;
 		}
 
-		if (requires_destruction_separator and can_see) {
+		if (requires_destruction_separator && can_see) {
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
 			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
@@ -337,7 +337,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			 UI::Box::AlignCenter);
 
 		if (m_building.descr().has_help_text()) {
-			if (not requires_destruction_separator) {
+			if (!requires_destruction_separator) {
 				// When there was no separation of destruction buttons put
 				// the infinite space here (e.g. Warehouses)
 				capsbuttons->add_inf_space();
@@ -370,7 +370,7 @@ Callback for bulldozing request
 */
 void Building_Window::act_bulldoze()
 {
-	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Bulldoze)
 			igbase().game().send_player_bulldoze(m_building);
 	}
@@ -386,7 +386,7 @@ Callback for dismantling request
 */
 void Building_Window::act_dismantle()
 {
-	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
 			igbase().game().send_player_dismantle(m_building);
 	}
@@ -429,7 +429,7 @@ Callback for enhancement request
 */
 void Building_Window::act_enhance(Widelands::Building_Index id)
 {
-	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
 			igbase().game().send_player_enhance_building(m_building, id);
 	}

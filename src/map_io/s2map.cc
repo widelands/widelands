@@ -59,7 +59,7 @@ struct S2MapDescrHeader {
 	char    bulk[2290]; // unknown
 } /* size 2352 */;
 
-// TODO: the following bob types appear in S2 maps but are unknown
+// TODO(unknown): the following bob types appear in S2 maps but are unknown
 //  Somebody who can run Settlers II please check them out
 //  11 (0x0B)
 //  40 (0x28)
@@ -174,11 +174,11 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	std::unique_ptr<uint8_t[]> section;
 	memcpy(buffer, fr.Data(6), 6);
 	if
-		(buffer[0] != 0x10 or
-		 buffer[1] != 0x27 or
-		 buffer[2] != 0x00 or
-		 buffer[3] != 0x00 or
-		 buffer[4] != 0x00 or
+		(buffer[0] != 0x10 ||
+		 buffer[1] != 0x27 ||
+		 buffer[2] != 0x00 ||
+		 buffer[3] != 0x00 ||
+		 buffer[4] != 0x00 ||
 		 buffer[5] != 0x00)
 	{
 		cerr << "Section marker not found" << endl;
@@ -387,7 +387,7 @@ void S2_Map_Loader::load_s2mf_header(FileRead& fr)
 
 	//  Header must be swapped for big-endian Systems, works at the moment only
 	//  for PowerPC architecture
-	//  \todo: Generalize this
+	//  TODO(unknown): Generalize this
 #if defined(__ppc__)
 	header.w = Swap16(header.w);
 	header.h = Swap16(header.h);

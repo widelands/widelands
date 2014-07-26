@@ -42,8 +42,8 @@ public:
 	L_Game() {}
 	L_Game(lua_State * L);
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -76,8 +76,8 @@ public:
 	L_Editor(lua_State * L);
 	virtual ~L_Editor() {}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -100,8 +100,8 @@ public:
 	L_World() {}
 	L_World(lua_State * L);
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties

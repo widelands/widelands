@@ -69,8 +69,8 @@ public:
 		prop = lua_tointeger(L, -1);
 		return 0;
 	}
-	virtual void __persist(lua_State * /* L */) override {}
-	virtual void __unpersist(lua_State * /* L */) override {}
+	void __persist(lua_State * /* L */) override {}
+	void __unpersist(lua_State * /* L */) override {}
 };
 const char L_Class::className[] = "Class";
 const MethodType<L_Class> L_Class::Methods[] = {
@@ -94,8 +94,8 @@ public:
 		lua_pushuint32(L, y);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) override {}
-	virtual void __unpersist(lua_State * /* L */) override {}
+	void __persist(lua_State * /* L */) override {}
+	void __unpersist(lua_State * /* L */) override {}
 };
 const char L_SubClass::className[] = "SubClass";
 const MethodType<L_SubClass> L_SubClass::Methods[] = {
@@ -117,8 +117,8 @@ public:
 		lua_pushuint32(L, z);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) override {}
-	virtual void __unpersist(lua_State * /* L */) override {}
+	void __persist(lua_State * /* L */) override {}
+	void __unpersist(lua_State * /* L */) override {}
 };
 const char L_VirtualClass::className[] = "VirtualClass";
 const MethodType<L_VirtualClass> L_VirtualClass::Methods[] = {
@@ -153,8 +153,8 @@ public:
 		lua_pushuint32(L, z);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) override {}
-	virtual void __unpersist(lua_State * /* L */) override {}
+	void __persist(lua_State * /* L */) override {}
+	void __unpersist(lua_State * /* L */) override {}
 };
 const char L_MultiClass::className[] = "MultiClass";
 const MethodType<L_MultiClass> L_MultiClass::Methods[] = {

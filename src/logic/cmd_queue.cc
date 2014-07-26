@@ -50,12 +50,12 @@ Cmd_Queue::~Cmd_Queue()
 /*
  * flushs all commands from the queue. Needed for
  * game loading (while in game)
- * FIXME ...but game loading while in game is not possible!
- * Note: Order of destruction of Items is not guaranteed
  */
+// TODO(unknown): ...but game loading while in game is not possible!
+// Note: Order of destruction of Items is not guaranteed
 void Cmd_Queue::flush() {
 	uint32_t cbucket = 0;
-	while (m_ncmds and cbucket < CMD_QUEUE_BUCKET_SIZE) {
+	while (m_ncmds && cbucket < CMD_QUEUE_BUCKET_SIZE) {
 		std::priority_queue<cmditem> & current_cmds = m_cmds[cbucket];
 
 		while (!current_cmds.empty()) {

@@ -274,11 +274,10 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
  * \param time the time, in milliseconds, in the animation
  * \param player the player this object belongs to, for player colour
  * purposes. May be 0 (for example, for world objects).
- *
- * \todo Correctly calculate the stereo position for sound effects
- * \todo The chosen semantics of animation sound effects is problematic:
- * What if the game runs very slowly or very quickly?
  */
+// TODO(unknown): Correctly calculate the stereo position for sound effects
+// TODO(unknown): The chosen semantics of animation sound effects is problematic:
+// What if the game runs very slowly or very quickly?
 void RenderTarget::drawanim
 	(const Point& dst, uint32_t animation, uint32_t time, const Player* player)
 {
@@ -368,7 +367,7 @@ bool RenderTarget::clip(Rect & r) const
 	r.x += m_rect.x;
 	r.y += m_rect.y;
 
-	return r.w and r.h;
+	return r.w && r.h;
 }
 
 /**

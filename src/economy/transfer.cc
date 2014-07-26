@@ -224,7 +224,7 @@ PlayerImmovable * Transfer::get_next_step
 		assert(&m_route.get_flag(m_game, 0) == location);
 
 		// special rule to get wares into buildings
-		if (m_ware and m_route.get_nrsteps() == 1)
+		if (m_ware && m_route.get_nrsteps() == 1)
 			if (dynamic_cast<Building const *>(destination)) {
 				assert(&m_route.get_flag(m_game, 1) == &destflag);
 

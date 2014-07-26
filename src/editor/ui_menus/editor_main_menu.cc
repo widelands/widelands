@@ -28,7 +28,7 @@
 #include "editor/ui_menus/editor_main_menu_save_map.h"
 #include "ui_fsmenu/fileview.h"
 
-//TODO: these should be defined globally for the whole UI
+//TODO(unknown): these should be defined globally for the whole UI
 #define width 200
 #define height 20
 #define margin 15

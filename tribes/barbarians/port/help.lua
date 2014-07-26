@@ -1,7 +1,7 @@
 -- The Barbarian Port
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -13,12 +13,11 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	-- TODO this building acts like a warehouse
-	building_help_general_string("barbarians", building_description, "ship",
+	building_help_general_string("barbarians", building_description,
 		_[[Text needed]]) ..
 
 	--Dependencies
-	-- TODO expedition costs here?
+	-- TODO(GunChleoc) expedition costs here?
 
 	--Building Section
 	building_help_building_section("barbarians", building_description) ..

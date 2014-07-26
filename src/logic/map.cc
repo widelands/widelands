@@ -270,7 +270,7 @@ void Map::recalc_default_resources(const World& world) {
 			}
 			amount /= 6;
 
-			if (res == -1 or not amount) {
+			if (res == -1 || !amount) {
 				f.field->set_resources(0, 0);
 				f.field->set_starting_res_amount(0);
 			} else {
@@ -631,10 +631,10 @@ void Map::find_reachable
 				(pathfields->fields[neighb.field - m_fields.get()].cycle
 				 !=
 				 pathfields->cycle
-				 and
+				 &&
 				 //  node within the radius?
 				 calc_distance(area, neighb) <= area.radius
-				 and
+				 &&
 				 //  allowed to move onto this node?
 				 checkstep.allowed
 				 	(*this,
@@ -847,11 +847,13 @@ uint32_t Map::find_reachable_immovables_unique
 
 	find_reachable(area, checkstep, cb);
 
-	container_iterate_const(std::vector<ImmovableFound>, duplist, i) {
-		BaseImmovable & obj = *i.current->object;
-		if (std::find(list.begin(), list.end(), &obj) == list.end())
-			if (functor.accept(obj))
+	for (ImmovableFound& imm_found : duplist) {
+		BaseImmovable & obj = *imm_found.object;
+		if (std::find(list.begin(), list.end(), &obj) == list.end()) {
+			if (functor.accept(obj)) {
 				list.push_back(&obj);
+			}
+		}
 	}
 
 	return list.size();
@@ -1084,7 +1086,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 		//  we cannot build anything on it. Exception: we can build flags on roads.
 		if (BaseImmovable * const imm = get_immovable(f))
 			if
-				(not dynamic_cast<Road const *>(imm)
+				(!dynamic_cast<Road const *>(imm)
 				&&
 				imm->get_size() >= BaseImmovable::SMALL)
 			{
@@ -1100,7 +1102,11 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(Map_Object::FLAG)))
+		if (consider_mobs &&
+			 find_immovables(
+				Area<FCoords>(f, 1),
+				nullptr,
+				FindImmovableType(Map_Object_Type::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1134,7 +1140,7 @@ NodeCaps Map::_calc_nodecaps_pass2
 		if
 			(!(br.field->caps & BUILDCAPS_FLAG)
 			&&
-			(!br.field->get_immovable() || br.field->get_immovable()->get_type() != Map_Object::FLAG))
+			(!br.field->get_immovable() || br.field->get_immovable()->descr().type() != Map_Object_Type::FLAG))
 			return static_cast<NodeCaps>(caps);
 	} else {
 		if (!(_calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
@@ -1286,7 +1292,7 @@ int Map::calc_buildsize
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE)
 				continue;
-			if (avoidnature && obj->get_type() == Map_Object::IMMOVABLE)
+			if (avoidnature && obj->descr().type() == Map_Object_Type::IMMOVABLE)
 				objsize += 1;
 			if (objsize + buildsize > BaseImmovable::BIG)
 				buildsize = BaseImmovable::BIG - objsize + 1;
@@ -1636,7 +1642,7 @@ std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename)
 			result.reset(new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file.
-			//  TODO: catchall hides real errors! Replace with more specific code
+			//  TODO(unknown): catchall hides real errors! Replace with more specific code
 		}
 	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
 	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
@@ -1668,9 +1674,8 @@ std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename)
  *
  * \return the cost of the path (in milliseconds of normal walking
  * speed) or -1 if no path has been found.
- *
- * \todo Document parameters instart, inend, path, flags
  */
+// TODO(unknown): Document parameters instart, inend, path, flags
 int32_t Map::findpath
 	(Coords                  instart,
 	 Coords                  inend,
@@ -1699,7 +1704,7 @@ int32_t Map::findpath
 		return 0; // duh...
 	}
 
-	if (not checkstep.reachabledest(*this, end))
+	if (!checkstep.reachabledest(*this, end))
 		return -1;
 
 	if (!persist)
@@ -1756,7 +1761,7 @@ int32_t Map::findpath
 
 			// Check passability
 			if
-				(not
+				(!
 				 checkstep.allowed
 				 	(*this,
 				 	 cur,
@@ -1871,7 +1876,7 @@ uint32_t Map::change_height(const World& world, Area<FCoords> area, int16_t cons
 		do {
 			if
 				(difference < 0
-				 and
+				 &&
 				 mr.location().field->height
 				 <
 				 static_cast<uint8_t>(-difference))

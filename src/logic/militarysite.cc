@@ -46,12 +46,12 @@ MilitarySite_Descr::MilitarySite_Descr
 	 const std::string & directory, Profile & prof,  Section & global_s,
 	 const Tribe_Descr & _tribe,
 	 const World& world)
-:
+	:
 	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe, world),
-m_conquer_radius     (0),
-m_num_soldiers       (0),
-m_heal_per_second    (0)
+		(Map_Object_Type::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
+	m_conquer_radius     (0),
+	m_num_soldiers       (0),
+	m_heal_per_second    (0)
 {
 	m_conquer_radius      = global_s.get_safe_int("conquers");
 	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
@@ -147,14 +147,14 @@ void MilitarySite::init(Editor_Game_Base & egbase)
 
 	upcast(Game, game, &egbase);
 
-	const std::vector<Worker*>& ws = get_workers();
-	container_iterate_const(std::vector<Worker *>, ws, i)
-		if (upcast(Soldier, soldier, *i.current)) {
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
 			soldier->set_location_initially(*this);
 			assert(!soldier->get_state()); //  Should be newly created.
 			if (game)
 				soldier->start_task_buildingwork(*game);
 		}
+	}
 	update_soldier_request();
 
 	//  schedule the first healing
@@ -523,10 +523,10 @@ void MilitarySite::update_soldier_request(bool incd)
 	}
 	else // not doing upgrade request
 	{
-		if ((capacity != stationed) or (m_normal_soldier_request))
+		if ((capacity != stationed) || (m_normal_soldier_request))
 			update_normal_soldier_request();
 
-		if ((capacity == stationed) and (! m_normal_soldier_request))
+		if ((capacity == stationed) && (! m_normal_soldier_request))
 		{
 			if (presentSoldiers().size() == capacity)
 			{
@@ -547,7 +547,7 @@ Advance the program state if applicable.
 */
 void MilitarySite::act(Game & game, uint32_t const data)
 {
-	// TODO: do all kinds of stuff, but if you do nothing, let
+	// TODO(unknown): do all kinds of stuff, but if you do nothing, let
 	// ProductionSite::act() handle all this. Also note, that some ProductionSite
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
@@ -565,7 +565,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
 	// to keep the game lightweight.
 
-	//TODO: I would need two new callbacks, to get rid ot this polling.
+	//TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > m_next_swap_soldiers_time)
 		{
 			m_next_swap_soldiers_time = timeofgame + (m_soldier_upgrade_try ? 20000 : 100000);
@@ -665,12 +665,13 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
-	const std::vector<Worker *>& w = get_workers();
-	container_iterate_const(std::vector<Worker *>, w, i)
-		if (upcast(Soldier, soldier, *i.current))
-			if (isPresent(*soldier))
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
+			if (isPresent(*soldier)) {
 				soldiers.push_back(soldier);
-
+			}
+		}
+	}
 	return soldiers;
 }
 
@@ -679,11 +680,11 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
-	const std::vector<Worker *>& w = get_workers();
-	container_iterate_const(std::vector<Worker *>, w, i)
-		if (upcast(Soldier, soldier, *i.current))
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
 			soldiers.push_back(soldier);
-
+		}
+	}
 	return soldiers;
 }
 
@@ -768,21 +769,23 @@ void MilitarySite::aggressor(Soldier & enemy)
 	// policy as to how many soldiers are allowed to leave as defenders
 	std::vector<Soldier *> present = presentSoldiers();
 
-	if (1 < present.size())
-		container_iterate_const(std::vector<Soldier *>, present, i)
-			if (!haveSoldierJob(**i.current)) {
+	if (1 < present.size()) {
+		for (Soldier * temp_soldier : present) {
+			if (!haveSoldierJob(*temp_soldier)) {
 				SoldierJob sj;
-				sj.soldier  = *i.current;
+				sj.soldier  = temp_soldier;
 				sj.enemy = &enemy;
 				sj.stayhome = false;
 				m_soldierjobs.push_back(sj);
-				(*i.current)->update_task_buildingwork(game);
+				temp_soldier->update_task_buildingwork(game);
 				return;
 			}
+		}
+	}
 
 	// Inform the player, that we are under attack by adding a new entry to the
 	// message queue - a sound will automatically be played.
-	informPlayer(game, true);
+	notify_player(game, true);
 }
 
 bool MilitarySite::attack(Soldier & enemy)
@@ -795,20 +798,22 @@ bool MilitarySite::attack(Soldier & enemy)
 	if (!present.empty()) {
 		// Find soldier with greatest hitpoints
 		uint32_t current_max = 0;
-		container_iterate_const(std::vector<Soldier *>, present, i)
-			if ((*i.current)->get_current_hitpoints() > current_max) {
-				defender = *i.current;
+		for (Soldier * temp_soldier : present) {
+			if (temp_soldier->get_current_hitpoints() > current_max) {
+				defender = temp_soldier;
 				current_max = defender->get_current_hitpoints();
 			}
+		}
 	} else {
 		// If one of our stationed soldiers is currently walking into the
 		// building, give us another chance.
 		std::vector<Soldier *> stationed = stationedSoldiers();
-		container_iterate_const(std::vector<Soldier *>, stationed, i)
-			if ((*i.current)->get_position() == get_position()) {
-				defender = *i.current;
+		for (Soldier * temp_soldier : stationed) {
+			if (temp_soldier->get_position() == get_position()) {
+				defender = temp_soldier;
 				break;
 			}
+		}
 	}
 
 	if (defender) {
@@ -824,7 +829,7 @@ bool MilitarySite::attack(Soldier & enemy)
 
 		// Inform the player, that we are under attack by adding a new entry to
 		// the message queue - a sound will automatically be played.
-		informPlayer(game);
+		notify_player(game);
 
 		return true;
 	} else {
@@ -922,16 +927,16 @@ bool MilitarySite::military_presence_kept(Game & game)
 	for (uint32_t i = 0; i < immovables.size(); ++i)
 		if (upcast(MilitarySite const, militarysite, immovables[i].object))
 			if
-				(this       !=  militarysite          and
-				 &owner  () == &militarysite->owner() and
-				 get_size() <=  militarysite->get_size() and
+				(this       !=  militarysite          &&
+				 &owner  () == &militarysite->owner() &&
+				 get_size() <=  militarysite->get_size() &&
 				 militarysite->m_didconquer)
 				return true;
 	return false;
 }
 
 /// Informs the player about an attack of his opponent.
-void MilitarySite::informPlayer(Game & game, bool const discovered)
+void MilitarySite::notify_player(Game & game, bool const discovered)
 {
 	// Add a message as long as no previous message was send from a point with
 	// radius <= 5 near the current location in the last 60 seconds
@@ -986,10 +991,11 @@ void MilitarySite::sendAttacker
 
 bool MilitarySite::haveSoldierJob(Soldier & soldier)
 {
-	container_iterate_const(std::vector<SoldierJob>, m_soldierjobs, i)
-		if (i.current->soldier == &soldier)
+	for (const SoldierJob& temp_job : m_soldierjobs) {
+		if (temp_job.soldier == &soldier) {
 			return true;
-
+		}
+	}
 	return false;
 }
 
@@ -1001,14 +1007,17 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
 Map_Object * MilitarySite::popSoldierJob
 	(Soldier * const soldier, bool * const stayhome)
 {
-	container_iterate(std::vector<SoldierJob>, m_soldierjobs, i)
-		if (i.current->soldier == soldier) {
-			Map_Object * const enemy = i.current->enemy.get(owner().egbase());
+	for (std::vector<SoldierJob>::iterator job_iter = m_soldierjobs.begin();
+		 job_iter != m_soldierjobs.end(); ++job_iter)
+	{
+		if (job_iter->soldier == soldier) {
+			Map_Object * const enemy = job_iter->enemy.get(owner().egbase());
 			if (stayhome)
-				*stayhome = i.current->stayhome;
-			m_soldierjobs.erase(i.current);
+				*stayhome = job_iter->stayhome;
+			m_soldierjobs.erase(job_iter);
 			return enemy;
 		}
+	}
 	return nullptr;
 }
 
@@ -1060,7 +1069,7 @@ MilitarySite::update_upgrade_requirements()
 	bool maxchanged = reqmax != soldier_upgrade_required_max;
 	bool minchanged = reqmin != soldier_upgrade_required_min;
 
-	if (maxchanged or minchanged)
+	if (maxchanged || minchanged)
 	{
 		if (m_upgrade_soldier_request && (m_upgrade_soldier_request->is_open()))
 		{

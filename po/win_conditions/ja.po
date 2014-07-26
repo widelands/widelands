@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-04-21 01:54+0000\n"
 "Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:42+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:51+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
@@ -97,31 +97,31 @@ msgstr ""
 msgid "Points"
 msgstr "ポイント"
 
-#: ../../scripting/win_conditions/02_collectors.lua:96
+#: ../../scripting/win_conditions/02_collectors.lua:99
 msgid "Status for %s"
 msgstr "%sの状況"
 
 #: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/02_collectors.lua:106
+#: ../../scripting/win_conditions/02_collectors.lua:109
 msgid "  %1$s (%2$i P) x %3$i = %4$i P"
 msgstr "  %1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../scripting/win_conditions/02_collectors.lua:110
+#: ../../scripting/win_conditions/02_collectors.lua:113
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "合計: %i point"
 
 #: TRANSLATORS: Context: 'The game will end in %s.'
-#: ../../scripting/win_conditions/02_collectors.lua:123
+#: ../../scripting/win_conditions/02_collectors.lua:127
 msgid "%1$ih%2$02im"
 msgstr "%1$i時間%2$02i分"
 
-#: ../../scripting/win_conditions/02_collectors.lua:125
+#: ../../scripting/win_conditions/02_collectors.lua:129
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i 分"
 
-#: ../../scripting/win_conditions/02_collectors.lua:127
+#: ../../scripting/win_conditions/02_collectors.lua:131
 msgid "The game will end in %s."
 msgstr "ゲームは経過時間%sに終了します。"
 
@@ -141,31 +141,31 @@ msgstr ""
 "少なくとも20分間その面積を維持した\n"
 "プレイヤー（チーム）です。"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:153
+#: ../../scripting/win_conditions/03_territorial_lord.lua:151
 #: ../../scripting/win_conditions/03_territorial_time.lua:23
 msgid "Team %i"
 msgstr "チーム%i"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:155
-#: ../../scripting/win_conditions/03_territorial_time.lua:199
+#: ../../scripting/win_conditions/03_territorial_lord.lua:153
+#: ../../scripting/win_conditions/03_territorial_time.lua:197
 msgid "%s owns more than half of the map’s area."
 msgstr "%sはマップ面積の半分以上を所有しています。"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:157
-#: ../../scripting/win_conditions/03_territorial_time.lua:201
+#: ../../scripting/win_conditions/03_territorial_lord.lua:155
+#: ../../scripting/win_conditions/03_territorial_time.lua:199
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] ""
 "相手の勝利を防ぐために、\n"
 "まだ%i分の猶予があります。"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:162
-#: ../../scripting/win_conditions/03_territorial_time.lua:206
+#: ../../scripting/win_conditions/03_territorial_lord.lua:160
+#: ../../scripting/win_conditions/03_territorial_time.lua:204
 msgid "You own more than half of the map’s area."
 msgstr "あなたはマップ面積の半分以上を所有しています。"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:164
-#: ../../scripting/win_conditions/03_territorial_time.lua:208
+#: ../../scripting/win_conditions/03_territorial_lord.lua:162
+#: ../../scripting/win_conditions/03_territorial_time.lua:206
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "ゲームに勝利するには%i分以上維持してください。"
@@ -197,12 +197,12 @@ msgstr "%1sは土地の/n%2$3.0f%%です。(%3$i of %4$i)"
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr "%1sは土地の/n%2$3.0f%%でした。(%3$i of %4$i)"
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:222
+#: ../../scripting/win_conditions/03_territorial_time.lua:220
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "そうでない場合、ゲームは%i分に終了します。"
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:227
+#: ../../scripting/win_conditions/03_territorial_time.lua:225
 #: ../../scripting/win_conditions/04_wood_gnome.lua:83
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."

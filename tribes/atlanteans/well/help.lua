@@ -1,7 +1,7 @@
 -- The Atlantean Well
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_atlanteans")
 
@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	--General Section
-	building_help_general_string("atlanteans", building_description, "water",
+	building_help_general_string("atlanteans", building_description,
 		_"Draws water out of the deep.") ..
 
 	--Dependencies

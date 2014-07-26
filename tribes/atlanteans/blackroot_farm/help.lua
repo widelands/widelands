@@ -1,7 +1,7 @@
 -- The Atlantean Blackroot Farm
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_atlanteans")
 
@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("atlanteans", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("atlanteans", building_description, "blackroot",
+	building_help_general_string("atlanteans", building_description,
 		_"Sow and harvest blackroot.") ..
 
 	--Dependencies

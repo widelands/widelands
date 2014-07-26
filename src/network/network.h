@@ -47,9 +47,9 @@ struct SyncCallback {
 struct Cmd_NetCheckSync : public Widelands::Command {
 	Cmd_NetCheckSync (int32_t dt, SyncCallback *);
 
-	virtual void execute (Widelands::Game &) override;
+	void execute (Widelands::Game &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_NETCHECKSYNC;}
+	uint8_t id() const override {return QUEUE_CMD_NETCHECKSYNC;}
 
 private:
 	SyncCallback * m_callback;
@@ -165,7 +165,7 @@ struct DisconnectException : public std::exception {
 		(const char * fmt, ...)
 	 PRINTF_FORMAT(2, 3);
 
-	virtual const char * what() const noexcept override;
+	const char * what() const noexcept override;
 
 private:
 	std::string m_what;
@@ -180,7 +180,7 @@ struct ProtocolException : public std::exception {
 
 	/// do NOT use!!! This exception shall only return the command number of the received message
 	/// via \ref ProtocolException:number()
-	virtual const char * what() const noexcept override {assert(false); return "dummy";}
+	const char * what() const noexcept override {assert(false); return "dummy";}
 
 	/// \returns the command number of the received message
 	virtual int          number() const {return m_what;}

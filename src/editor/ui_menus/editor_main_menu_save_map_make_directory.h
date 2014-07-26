@@ -34,8 +34,8 @@ struct Button;
  * Show a small modal dialog allowing the user to enter
  * a directory name to be created
  *
- * \todo This should be moved to src/ui, it's not specific to the editor
  */
+// TODO(unknown): This should be moved to src/ui, it's not specific to the editor
 struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 	Main_Menu_Save_Map_Make_Directory(UI::Panel *, char const *);
 

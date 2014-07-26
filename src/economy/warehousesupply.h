@@ -53,15 +53,15 @@ struct WarehouseSupply : public Supply {
 	void remove_workers(Ware_Index, uint32_t count);
 
 	// Supply implementation
-	virtual PlayerImmovable * get_position(Game &) override;
-	virtual bool is_active() const override;
-	virtual bool has_storage() const override;
-	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
+	PlayerImmovable * get_position(Game &) override;
+	bool is_active() const override;
+	bool has_storage() const override;
+	void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
 
-	virtual void send_to_storage(Game &, Warehouse * wh) override;
-	virtual uint32_t nr_supplies(const Game &, const Request &) const override;
-	virtual WareInstance & launch_ware(Game &, const Request &) override;
-	virtual Worker & launch_worker(Game &, const Request &) override;
+	void send_to_storage(Game &, Warehouse * wh) override;
+	uint32_t nr_supplies(const Game &, const Request &) const override;
+	WareInstance & launch_ware(Game &, const Request &) override;
+	Worker & launch_worker(Game &, const Request &) override;
 
 private:
 	Economy   * m_economy;

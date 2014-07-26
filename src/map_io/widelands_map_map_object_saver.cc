@@ -61,7 +61,7 @@ Map_Map_Object_Saver::get_object_record(const Map_Object & obj)
 
 	MapObjectRec rec;
 #ifndef NDEBUG
-	rec.description  = obj.type_name();
+	rec.description = to_string(obj.descr().type());
 	rec.description += " (";
 	rec.description += obj.serial();
 	rec.description += ')';
@@ -153,10 +153,10 @@ void Map_Map_Object_Saver::mark_object_as_saved(const Map_Object & obj) {
  * Return the number of unsaved objects
  */
 void Map_Map_Object_Saver::detect_unsaved_objects() const {
-	container_iterate_const(Map_Object_Map, m_objects, i) {
-		if (!i.current->second.saved) {
+	for (const std::pair<const Map_Object *, MapObjectRec>& temp_map : m_objects) {
+		if (!temp_map.second.saved) {
 			throw wexception
-				("%s has not been saved", i.current->second.description.c_str());
+				("%s has not been saved", temp_map.second.description.c_str());
 		}
 	}
 }

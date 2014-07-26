@@ -1,7 +1,7 @@
 -- The Barbarian Coal Mine
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -14,7 +14,7 @@ return {
 Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "coal",
+	building_help_general_string("barbarians", building_description,
 		_"Digs coal out of the ground in mountain terrain.",
 		_"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal.":bformat("1/3")) ..
 

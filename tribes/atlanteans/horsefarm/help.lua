@@ -1,7 +1,7 @@
 -- The Atlantean Horse Farm
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_atlanteans")
 
@@ -13,11 +13,10 @@ return {
 	building_help_lore_string("atlanteans", building_description, _[[Text needed]], _[[Source needed]]) ..
 
 	--General Section
-	building_help_general_string("atlanteans", building_description, "horse",
+	building_help_general_string("atlanteans", building_description,
 		_"Breeds horses for adding them to the transportation system.") ..
 
 	--Dependencies
-	-- TODO: why is "Produces" empty?
 	building_help_dependencies_production("atlanteans", building_description) ..
 
 	--Workers Section

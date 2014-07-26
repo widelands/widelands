@@ -1,7 +1,7 @@
 -- The Barbarian Axfactory
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’]], _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "ax",
+	building_help_general_string("barbarians", building_description,
 		_"Produces axes, sharp axes and broad axes.",
 		_"The barbarian axfactory is the intermediate production site in a series of three buildings. It is an upgrade from the metal workshop but doesn’t require additional qualification for the worker.") ..
 

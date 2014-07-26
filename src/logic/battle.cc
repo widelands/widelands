@@ -34,10 +34,13 @@
 
 namespace Widelands {
 
-namespace  {
-Battle::Descr g_Battle_Descr("battle", "Battle");
-}  // namespace
+namespace {
+Battle_Descr g_Battle_Descr("battle", "Battle");
+}
 
+const Battle_Descr& Battle::descr() const {
+	return g_Battle_Descr;
+}
 
 Battle::Battle ()
 	:
@@ -68,7 +71,7 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	}
 
 	// Ensures only live soldiers eganges in a battle
-	assert(First.get_current_hitpoints() and Second.get_current_hitpoints());
+	assert(First.get_current_hitpoints() && Second.get_current_hitpoints());
 
 	init(game);
 }
@@ -133,13 +136,13 @@ bool Battle::locked(Game & game)
 
 Soldier * Battle::opponent(Soldier& soldier)
 {
-	assert(m_first == &soldier or m_second == &soldier);
+	assert(m_first == &soldier || m_second == &soldier);
 	Soldier* other_soldier = m_first == &soldier ? m_second : m_first;
 	return other_soldier;
 }
 
-//  FIXME Couldn't this code be simplified tremendously by doing all scheduling
-//  FIXME for one soldier and letting the other sleep until the battle is over?
+//  TODO(unknown): Couldn't this code be simplified tremendously by doing all scheduling
+//  for one soldier and letting the other sleep until the battle is over?
 //  Could be, but we need to be able change the animations of the soldiers
 //  easily without unneeded hacks, and this code is not so difficult, only it
 //  had some translations errors
@@ -148,7 +151,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	// Identify what soldier is calling the routine
 	uint8_t const this_soldier_is = &soldier == m_first ? 1 : 2;
 
-	assert(m_first->getBattle() == this or m_second->getBattle() == this);
+	assert(m_first->getBattle() == this || m_second->getBattle() == this);
 
 	//  Created this three 'states' of the battle:
 	// *First time entered, one enters :
@@ -159,12 +162,12 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	//    roundFighted, reset m_readyflags
 	bool const oneReadyToFight  = (m_readyflags == 0);
 	bool const roundFighted     = (m_readyflags == 3);
-	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) and
+	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) &&
 		(!roundFighted);
 	std::string what_anim;
 
 	// Apply pending damage
-	if (m_damage and oneReadyToFight) {
+	if (m_damage && oneReadyToFight) {
 		// Current attacker is last defender, so damage goes to current attacker
 		if (m_first_strikes)
 			m_first ->damage(m_damage);
@@ -183,7 +186,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		return schedule_destroy(game);
 	}
 
-	if (!m_first or !m_second)
+	if (!m_first || !m_second)
 		return soldier.skip_act();
 
 	// So both soldiers are alive; are we ready to trade the next blow?
@@ -216,8 +219,8 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		// Time for one of us to hurt the other. Which one is on turn is decided
 		// by calculateRound.
 		assert
-			((m_readyflags == 1 and this_soldier_is == 2) or
-			 (m_readyflags == 2 and this_soldier_is == 1));
+			((m_readyflags == 1 && this_soldier_is == 2) ||
+			 (m_readyflags == 2 && this_soldier_is == 1));
 
 		// Both are now ready, mark flags, so our opponent can get new animation
 		m_readyflags = 3;

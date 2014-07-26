@@ -192,7 +192,7 @@ void Game::set_write_replay(bool const wr)
 	//  this is to ensure we do not crash because of diskspace
 	//  still this is only possibe to go from true->false
 	//  still probally should not do this with an assert but with better checks
-	assert(m_state == gs_notrunning || not wr);
+	assert(m_state == gs_notrunning || !wr);
 
 	m_writereplay = wr;
 }
@@ -247,7 +247,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 
 	set_ibase
 		(new Interactive_Player
-		 	(*this, g_options.pull_section("global"), 1, true, false));
+		 	(*this, g_options.pull_section("global"), 1, false));
 
 	loaderUI.step (_("Loading a map"));
 	maploader->load_map_complete(*this, true);
@@ -397,7 +397,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		player_nr = gpdp.get_player_nr();
 		set_ibase
 			(new Interactive_Player
-			 	(*this, g_options.pull_section("global"), player_nr, true, false));
+			 	(*this, g_options.pull_section("global"), player_nr, false));
 
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
@@ -478,7 +478,7 @@ bool Game::run
 		} else {
 			// Is a scenario!
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (not map().get_starting_pos(p))
+				if (!map().get_starting_pos(p))
 				throw warning
 					(_("Missing starting position"),
 					 _
@@ -540,7 +540,7 @@ bool Game::run
 		if (m_writereplay) {
 			log("Starting replay writer\n");
 
-			assert(not m_replaywriter);
+			assert(!m_replaywriter);
 			m_replaywriter = new ReplayWriter(*this, fname);
 
 			log("Replay writer has started\n");
@@ -582,7 +582,7 @@ bool Game::run
 		m_state = gs_running;
 		//handle network
 		while (m_state == gs_running) {
-			// TODO this should be improved.
+			// TODO(unknown): this should be improved.
 #ifndef _WIN32
 			if (usleep(100) == -1)
 				break;
@@ -626,23 +626,26 @@ void Game::think()
 
 /// (Only) called by the dedicated server, to end a game once all players left
 void Game::end_dedicated_game() {
-	assert(not g_gr);
+	assert(!g_gr);
 	m_state = gs_notrunning;
 }
 
 /**
  * Cleanup for load
  * \deprecated
- * \todo Get rid of this. Prefer to delete and recreate Game-style objects
- * Note that this needs fixes in the editor.
  */
+// TODO(unknown): Get rid of this. Prefer to delete and recreate Game-style objects
+// Note that this needs fixes in the editor.
 void Game::cleanup_for_load()
 {
 	m_state = gs_notrunning;
 
 	Editor_Game_Base::cleanup_for_load();
-	container_iterate_const(std::vector<Tribe_Descr *>, tribes_, i)
-		delete *i.current;
+
+	for (Tribe_Descr* tribe : tribes_) {
+		delete tribe;
+	}
+
 	tribes_.clear();
 	cmdqueue().flush();
 
@@ -995,8 +998,8 @@ void Game::sample_statistics()
 				 workerid < tribe_workers;
 				 ++workerid)
 				if
-					(not
-					 dynamic_cast<Carrier::Descr const *>
+					(!
+					 dynamic_cast<Carrier_Descr const *>
 					 	(tribe.get_worker_descr(workerid)))
 					wostock += eco->stock_worker(workerid);
 		}

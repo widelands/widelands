@@ -1,7 +1,7 @@
 -- The Atlantean Lumberjack's House
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_atlanteans")
 
@@ -12,7 +12,7 @@ return {
 	--Lore Section
 	building_help_lore_string("atlanteans", building_description, _[[Text needed]],_[[Source needed]]) ..
 	--General Section
-	building_help_general_string("atlanteans", building_description, "log",
+	building_help_general_string("atlanteans", building_description,
 		_"Fell trees in the surrounding area and process them into logs.",
 		_"The woodcutter's house needs trees to fell within the working radius.") ..
 

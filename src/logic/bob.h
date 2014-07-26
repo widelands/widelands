@@ -55,13 +55,12 @@ class BobDescr : public Map_Object_Descr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
-	std::string type() const override {return "bob";}
-
-	BobDescr(const std::string& init_name,
+	BobDescr(Map_Object_Type type,
+	         const std::string& init_name,
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);
+	~BobDescr() override {}
 
-	virtual ~BobDescr() {}
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
 
 	Tribe_Descr const* get_owner_tribe() const {
@@ -78,6 +77,7 @@ protected:
 
 private:
 	const Tribe_Descr* const owner_tribe_;  //  nullptr if world bob
+	DISALLOW_COPY_AND_ASSIGN(BobDescr);
 };
 
 /**
@@ -159,7 +159,6 @@ public:
 	struct State;
 	typedef void (Bob::*Ptr)(Game &, State &);
 	typedef void (Bob::*PtrSignal)(Game &, State &, const std::string &);
-	enum Type {CRITTER, WORKER, SHIP};
 
 	/// \see struct Bob for in-depth explanation
 	struct Task {
@@ -228,13 +227,9 @@ public:
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
 
-	virtual int32_t get_type() const override {return BOB;}
-	virtual char const * type_name() const override {return "bob";}
-	virtual Type get_bob_type() const = 0;
-
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 	void schedule_destroy(Game &);
 	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
@@ -256,7 +251,7 @@ public:
 		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 
 	// For debug
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	// default tasks
 	void reset_tasks(Game &);
@@ -391,8 +386,8 @@ protected:
 		Loader();
 
 		void load(FileRead &);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	protected:
 		virtual const Task * get_task(const std::string & name);
@@ -408,9 +403,9 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() override {return true;}
+	bool has_new_save_support() override {return true;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	// Pure Bobs cannot be loaded
 };
 

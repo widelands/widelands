@@ -46,7 +46,7 @@ m_zipfilename(zipfile),
 m_basenamezip(FS_Filename(zipfile.c_str())),
 m_basename   ()
 {
-	// TODO: check OS permissions on whether the file is writable
+	// TODO(unknown): check OS permissions on whether the file is writable
 }
 
 /**
@@ -100,9 +100,9 @@ std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
 			complete_filename.substr
 				(0, complete_filename.size() - filename.size());
 
-		//  FIXME Something strange is going on with regard to the leading slash!
-		//  FIXME This is just an ugly workaround and does not solve the real
-		//  FIXME problem (which remains undiscovered)
+		//  TODO(unknown): Something strange is going on with regard to the leading slash!
+		//  This is just an ugly workaround and does not solve the real
+		//  problem (which remains undiscovered)
 		if
 			(('/' + path == filepath || path == filepath || path.length() == 1)
 			 && filename.size())
@@ -120,7 +120,7 @@ std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
  */
 bool ZipFilesystem::FileExists(const std::string & path) {
 	try {
-		m_OpenUnzip(); //  FIXME check return value
+		m_OpenUnzip(); //  TODO(unknown): check return value
 	} catch (...) {
 		return false;
 	}
@@ -198,9 +198,10 @@ FileSystem * ZipFilesystem::MakeSubFileSystem(const std::string & path) {
 
 /**
  * Make a new Subfilesystem in this
- * \todo type should be recognized automatically, \see Filesystem::Create
  * \throw ZipOperation_error
  */
+// TODO(unknown): type should be recognized automatically,
+// see Filesystem::Create
 FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type const type)
 {
 	assert(!FileExists(path));
@@ -340,7 +341,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	unzCloseCurrentFile(m_unzipfile);
 
 	void * const result = malloc(totallen + 1);
-	if (not result)
+	if (!result)
 		throw std::bad_alloc();
 	unzOpenCurrentFile(m_unzipfile);
 	unzReadCurrentFile(m_unzipfile, result, totallen);
@@ -559,7 +560,7 @@ void ZipFilesystem::Rename(const std::string &, const std::string &) {
 }
 
 unsigned long long ZipFilesystem::DiskSpace() {
-	return 0; //  FIXME
+	return 0;
 }
 
 std::string ZipFilesystem::strip_basename(std::string filename)

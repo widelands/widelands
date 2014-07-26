@@ -43,9 +43,8 @@
  * received. In case of a login or reconnect, this is the time to wait for the metaservers answer.
  *
  * value is in milliseconds
- *
- * \todo Should this be resetable by the user?
  */
+// TODO(unknown): Should this be resettable by the user?
 #define INTERNET_GAMING_TIMEOUT 10 // 10 seconds
 
 /**
@@ -54,17 +53,15 @@
  * received. In case of a login or reconnect, this is the time to wait for the metaservers answer.
  *
  * value is in milliseconds
- *
- * \todo Should this be resetable by the user?
  */
+// TODO(unknown): Should this be resettable by the user?
 #define INTERNET_GAMING_CLIENT_TIMEOUT 60 // 60 seconds - some time to reconnect
 
 /**
  * The default number of retries after a timeout after which the client finally closes the
  * connection to the metaserver.
- *
- * \todo Should this be resetable by the user?
  */
+// TODO(unknown): Should this be resettable by the user?
 #define INTERNET_GAMING_RETRIES 3
 
 

@@ -7,24 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
-"PO-Revision-Date: 2014-03-07 08:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
+"PO-Revision-Date: 2014-07-21 13:21+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:42+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-22 05:43+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: gd\n"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:15
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
 msgstr "B' fheairrde iad gabhail air an socair"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:17
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:18
 msgid ""
 "I am sorry, but will I have to tear this down again. We might need the space "
 "here later on. If I am too slow for you, you might want to play a real game "
@@ -37,15 +37,15 @@ msgstr ""
 "fhèin. Mura b' fhearr, air do shocair o chionn 's nach eil mi cho òg 's "
 "luath mar a bha."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:24
 msgid "Welcome to the Widelands Tutorial!"
 msgstr "Fàilte dhan oideachadh aig Widelands!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:28
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
 msgid "Welcome to Widelands!"
 msgstr "Fàilte do Widelands!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:30
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:27
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction, not destruction. This tutorial will guide you through the "
@@ -54,21 +54,21 @@ msgstr ""
 "'S e geama ro-innleachd mhall a th' ann am Widelands le cuideam air togail "
 "seach milleadh. Seallaidh an t-oideachadh seo dhut na tha bunasach sa gheama."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:32
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:28
 msgid "Dismiss this box by left-clicking on the button below."
 msgstr ""
 "'S urrainn dhut am bogsa seo a leigeil seachad le briogadh clì air a' phutan "
 "gu h-ìosal."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:37
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:32
 msgid "Diving In"
 msgstr "A' tòiseachadh"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:36
 msgid "Let’s dive right in!"
 msgstr "Nach tòisich sinn sa bhad!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:37
 msgid ""
 "There are three different tribes in Widelands: the Barbarians, the Empire "
 "and the Atlanteans. All tribes have a different economy, strength and "
@@ -80,7 +80,7 @@ msgstr ""
 "aig gach treubh, ach cluichidh tu an geama san aon dòigh le gach tè dhiubh. "
 "Bidh sinn 'nar tùsanaich an-dràsta."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:47
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:38
 msgid ""
 "You will usually start the game with one headquarters. This is the big "
 "building with the blue flag in front of it. The headquarters is a warehouse "
@@ -101,7 +101,7 @@ msgstr ""
 "Dèanamaid cinnteach nach ruith am fiodh oirnn. Bidh feum againn air "
 "coilltear agus air bothan sa ghabhas e còmhnaidh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:39
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
@@ -116,21 +116,21 @@ msgstr ""
 "putan on taobh chlì. Air an dòigh eile, brùth air an iuchair SPACE gus a "
 "thoglachadh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:60
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:40
 msgid "Left-click the ‘OK’ button to close this box and then try it."
 msgstr ""
 "Dèan briogadh clì air a' phutan \"Ceart ma-thà\" gus am bogsa seo a dhùnadh "
 "is feuch e an uairsin."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
 msgid "Enable the showing of building spaces"
 msgstr "Nochd na h-ionadan togail"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:65
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:45
 msgid "Show Building Spaces"
 msgstr "Nochd na h-ionadan togail"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:67
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:46
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
@@ -138,7 +138,7 @@ msgstr ""
 "Tha e nas fhasa tuigsinn na dh'fhaodas tu togail air gach raon ma bhios "
 "samhlaidhean nan ionadan togail an comas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:47
 msgid ""
 "Do so now either by pressing SPACE or by clicking the fourth button from the "
 "left at the very bottom of the screen. Right-click on this window and then "
@@ -147,11 +147,11 @@ msgstr ""
 "Dèan seo a-nis is brùth air SPACE no briog air a' cheathramh putan on taobh "
 "chlì aig bonn na sgrìn. Dèan briogadh deas air an uinneag seo is feuch e."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:77
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:52
 msgid "Lumberjack’s Spot"
 msgstr "Àite airson bothan coillteir"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:81
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
 msgid ""
 "There you go. I will explain about all those symbols in a minute. First, let "
 "me show you how to make a lumberjack’s hut and how to connect it with a "
@@ -165,11 +165,11 @@ msgstr ""
 "craobhan ud. Mìnichidh mi na ceuman a ghabhas mi is an uairsin iarraidh mi "
 "ort gum briog thu air a' phutan \"Ceart ma-thà\" ach an seall mi seo dhut."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:90
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:61
 msgid "Building the Lumberjack"
 msgstr "A' togail bothan coillteir"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be "
 "built. A window will appear where I can choose between buildings. Because "
@@ -186,7 +186,7 @@ msgstr ""
 "a' bhothan choillteir is mar sin taghaidh mi taba nan togalaichean beaga. "
 "Taghaidh mi am bothan coillteir an uairsin."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:100
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:65
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
@@ -195,11 +195,11 @@ msgstr ""
 "shlaodach e. Briogaidh mi – taghaidh mi an taba an uairsin – is taghaidh mi "
 "an togalach aig an deireadh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:107
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
 msgid "Building a Connecting Road"
 msgstr "A' togail rathad a cheanglas"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:110
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:73
 msgid ""
 "That won’t do yet. I still need to connect the lumberjack’s hut to the rest "
 "of my road network. After ordering the construction site, I was "
@@ -212,11 +212,11 @@ msgstr ""
 "mar sin cha leig mi leas ach briogadh air a' bhratach ghorm air beulaibh a' "
 "phrìomh-àrais agam."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:78
 msgid "Waiting for the Lumberjack to Go Up"
 msgstr "A' feitheamh gus am bith am bothan coillteir air a thogail"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:81
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
@@ -226,11 +226,11 @@ msgstr ""
 "làrach-togail. Cuideachd, thig giùlanair a sheasamh eadar an dà bhratach "
 "ghorm is giùlainidh e bathar on dàrna bhratach ghorm gun tè eile."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:128
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:86
 msgid "Placing Another Flag"
 msgstr "A' togail bratach eile"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:131
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:89
 msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) when we "
@@ -240,7 +240,7 @@ msgstr ""
 "ghiùlanair bhochd. Nì sinn cùisean nas fhasa dha (is nas èifeachdaiche "
 "dhuinne) ma chuireas sinn bratach ghorm eile air an rathad."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:90
 msgid ""
 "You try it this time: click on the yellow flag symbol in between the two "
 "blue flags we just placed and then click on the"
@@ -248,19 +248,19 @@ msgstr ""
 "Feuch thusa ris an turas seo: briog air an t-samhla brataich buidhe eadar an "
 "dà bhratach ghorm a tha sinn air a thogail is briog air"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:135
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 msgid "build flag symbol."
 msgstr "an t-samhla \"Tog bratach\"."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:138
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:95
 msgid "Build a flag to divide the road to the lumberjack"
 msgstr "Roinn an rathad le bratach"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:139
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:97
 msgid "Build a Flag on the Road"
 msgstr "Tog bratach air an rathad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:140
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:98
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
@@ -270,7 +270,7 @@ msgstr ""
 "agad a ghiùlan. Bu chòir dhut dèanamh cinnteach gu bheil an uiread a ghabhas "
 "de bhrataich air na rathaidean agad air sàilleibh seo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:143
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:99
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
@@ -278,16 +278,16 @@ msgstr ""
 "Tog bratach ghorm a-nis ann am meadhan an rathaid a cheanglas am prìomh-àras "
 "ris a' bhothan choillteir agad."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:148
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:104
 msgid "Waiting For the Hut to be Finished"
 msgstr "A' feitheamh gus am bith am bothan deiseil"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:151
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:107
 msgid "Well done! Let’s wait till the hut is finished."
 msgstr ""
 "Sin thu fhèin! Fuirich ort fhad 's a thèid am bothan a chrìochnachadh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:153
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:108
 msgid ""
 "If you want things to go faster, simply use the PAGE UP key on your keyboard "
 "to increase the game speed. You can use PAGE DOWN to make the game slower "
@@ -298,11 +298,11 @@ msgstr ""
 "mheudachadh. Cleachd an iuchair PAGE DOWN gus maille a chur air a' gheama a-"
 "rithist."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:113
 msgid "Lumberjack is Done"
 msgstr "Tha am bothan coillteir deiseil."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:163
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:116
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our logs income is secured for now. Now on to "
@@ -312,15 +312,15 @@ msgstr ""
 "nis is tòisichidh e air craobhan a leagail. Mar sin, tha teachd a-steach an "
 "fhiodha agad cinnteach aig an àm seo. Nise, dhan chlach."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:171
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
 msgid "Some Stones Were Found"
 msgstr "Chaidh clachan a lorg"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:172
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:122
 msgid "Getting a Quarry Up."
 msgstr "A' togail coireall."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:174
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:124
 msgid ""
 "Stones can be mined in granite mines, but the easier way is to build a "
 "quarry next to some stones lying around. As it happens, there is a pile of "
@@ -332,7 +332,7 @@ msgstr ""
 "tòrr dhiubh dìreach gu siar (gu clì) air a' phrìomh-àras agad. Innsidh mi "
 "dhut mar a ghluaiseas tu an sealladh agad ann."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:178
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:125
 msgid ""
 "There are two ways to move your view. The first one is using the cursor keys "
 "on your keyboard. Go ahead and try this out."
@@ -341,21 +341,21 @@ msgstr ""
 "chleachd thu na h-iuchraichean saighde air a' mheur-chlàr agad. Siuthad is "
 "feuch e an-dràsta."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:181
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:126
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
 msgstr ""
 "Briog air a' phutan \"Ceart ma-thà\" is an uairsin gluais an sealladh leis "
 "na h-iuchraichean saighde."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:185
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:129
 msgid "Move your view with the cursor keys"
 msgstr "Gluais an sealladh leis na h-iuchraichean saighde"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:186
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:131
 msgid "Moving Your View"
 msgstr "Gluais an sealladh agad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:187
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:132
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are two ways to move your view in Widelands."
@@ -364,13 +364,13 @@ msgstr ""
 "slàn air an eaconamaidh agad. Tha dà dhòigh ann gus an sealladh agad a "
 "ghluasad ann am Widelands."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:189
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:133
 msgid "The first one is to use the cursor keys on your keyboard."
 msgstr ""
 "Is gun cleachd thu na h-iuchraichean saighde air a' mheur-chlàr an dàrna "
 "dòigh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see "
@@ -380,18 +380,18 @@ msgstr ""
 "deas na luchaige àite sam bith air a' mhapa. An uairsin, gluais an luchag "
 "agad mu thimcheall is chì thu gun sgrolaich an sealladh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:198
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:139
 msgid "Other Ways to Move the View"
 msgstr "Dòighean eile gus an sealladh a ghluasad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:141
 msgid ""
 "Excellent. Now there is a faster way to move, using the mouse instead:"
 msgstr ""
 "Taghta. Nise, tha dòigh as luaithe ann airson gluasad 's tu a' cleachdadh na "
 "luchaige:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:142
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
@@ -399,30 +399,30 @@ msgstr ""
 "Dèan briogadh deas is cum sìos àite sam bith air a' mhapa is slaod an luchag "
 "mu thimcheall. Le sin, gluaisidh an sealladh an àite a' chùrsair. Feuch e."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:207
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:145
 msgid "Move your view with the mouse"
 msgstr "Gluais an sealladh agad leis an luchag"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:212
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:150
 msgid "Onward to the Quarry"
 msgstr "Air adhart dhan choireall"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:151
 msgid "Great. Now about that quarry..."
 msgstr "Taghta. Nise, mu dhèidhinn a' choirill ud..."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:222
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "How to Build a Quarry"
 msgstr "Mar a thogas tu coireall"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:224
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:159
 msgid ""
 "Build a quarry next to those stones here. Remember how I did it earlier?"
 msgstr ""
 "Tog coireall faisg air na clachan an-seo. A bheil chuimhne agad air mar a "
 "rinn mi seo roimhe?"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:226
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space were you want the building to be, choose it from the window that "
@@ -434,7 +434,7 @@ msgstr ""
 "nochdas e is thèid a chur ann. Dh'fhaoidte gur e deagh àm a th' ann gus "
 "mìneachadh mu na samhlaidhean ionad togail a ghnìomhaich sinn roimhe."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:230
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:161
 msgid ""
 "You can build four things on fields in Widelands: Flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
@@ -445,28 +445,28 @@ msgstr ""
 "eil rum anns gach raon airson gach seòrsa dhiubh. Cuidichidh na samhlaidhean "
 "togail ach an aithnich thu na raointean:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:163
 msgid "Everything can be built on the green house symbol."
 msgstr "Gabhaidh rud sam bith a thogail air samhla taighe uaine."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:235
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
 msgstr ""
 "Gabhaidh rud sam bith ach togalaichean mòra a thogail air samhla taighe "
 "buidhe."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:237
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:165
 msgid "Red building symbols can only hold small buildings and flags."
 msgstr ""
 "Chan urrainn dhut ach togalach beag no bratach a thogail air samhla taighe "
 "dearg."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:239
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:166
 msgid "And finally the yellow flag symbol only allows for flags."
 msgstr "Cha cheadaich samhla brataich buidhe ach gun tog thu bratach ann."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:241
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
@@ -475,7 +475,7 @@ msgstr ""
 "na raointean timcheall air tuilleadh gus togalaichean a chur ann. Mar sin, "
 "bi glic mu thaghadh nan raointean agad."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:244
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:171
 msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
@@ -486,22 +486,22 @@ msgstr ""
 "togalaichean beaga a thaghadh an toiseach gus a lorg. Siuthad, thoir sùil "
 "air!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:250
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:174
 msgid "Build a quarry next to the stones"
 msgstr "Tog coireall ri taobh nan clach"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:251
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:176
 msgid "Build a Quarry"
 msgstr "Tog coireall"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:252
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:177
 msgid ""
 "There are some stones to the west of your headquarters. Build a quarry right "
 "next to them."
 msgstr ""
 "Tha clachan gu siar air a' phrìomh-àras agad. Tog coireall ris an taobh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:253
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:178
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
@@ -512,7 +512,7 @@ msgstr ""
 "dearg, buidhe no uaine nuair a bhios na h-ionadan togail 'gan nochdadh "
 "(brùth air SPACE gus an nochdadh)."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:257
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:179
 msgid ""
 "Just click on any house symbol next to the stones, select the small "
 "buildings tab in the window that opens up, then click on the quarry symbol."
@@ -521,13 +521,13 @@ msgstr ""
 "togalaichean beaga san uinneag a nochdas is an uairsin briog air samhla a' "
 "choirill."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:288
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:296
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:186
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:208
 msgid "Road Building"
 msgstr "A' togail rathad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
@@ -540,11 +540,11 @@ msgstr ""
 "airson brataich sam bith 's tu a' briogadh leis a' phutan clì air a' "
 "bhratach is a' taghadh"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:272
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:190
 msgid "the road building symbol."
 msgstr "an t-samhla \"Tog rathaidean\"."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:274
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:192
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting"
@@ -553,11 +553,11 @@ msgstr ""
 "thogail an rathaid 's tu a' briogadh air bratach tòiseachaidh an rathaid 's "
 "a' taghadh"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:193
 msgid "the abort symbol."
 msgstr "an t-samhla \"Sguir dheth\"."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:279
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:195
 msgid ""
 "Now, about this road. Remember: we are already in road building mode since "
 "you just ordered the quarry. You can either make it longer by one field at a "
@@ -570,14 +570,14 @@ msgstr ""
 "turas air raointean nàbaidh airson smachd mhionaidich air far an tèid an "
 "rathad. Seallaidh mi seo dhut a-nis:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:290
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:203
 msgid ""
 "Or, you can directly click the flag where the road should end like so:"
 msgstr ""
 "No briog dìreach air a' bhratach far am bu chòir an rathad a chrìochnachadh "
 "mar a nì mi a-nis:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:298
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:210
 msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
@@ -585,12 +585,12 @@ msgstr ""
 "Aon rud eile: chì thu caochladh de chomharran mun raon far an "
 "crìochnaicheadh an rathad agad. Seo nas ciall dhaibh:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:212
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr "Tha an tìr rèidh an-seo. Bidh na giùlanairean glè luath air."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:303
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
@@ -598,7 +598,7 @@ msgstr ""
 "Tha sliabh bheag ri dìreadh ann gus an raon seo a ruigsinn. Is ciall dha seo "
 "gun gluais na h-obraichean agad nas luaithe a' teàrnadh na a' dìreadh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
@@ -607,7 +607,7 @@ msgstr ""
 "air an dàrna comhair ach thèid maille mhòr a chur ort air a' chomhair eile "
 "cuideachd."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:309
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:216
 msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as "
@@ -618,7 +618,7 @@ msgstr ""
 "ghabhas is cuimhnich gun tog thu an uiread de bhrataich a ghabhas air "
 "roinnean an rathaid gus an eallach a sgaoileadh nas fhearr."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:313
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:217
 msgid ""
 "Now please rebuild the road between your quarry and your headquarters. We’ll "
 "wait until the quarry is completed."
@@ -626,15 +626,15 @@ msgstr ""
 "Nise, tog an rathad eadar an coireall is am prìomh-àras agad a-rithist. "
 "Fuirichidh sinn gus am bith an coireall deiseil."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:317
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:220
 msgid "Connect the quarry to the headquarters"
 msgstr "Ceangail an coireall ris a' phrìomh-àras"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:222
 msgid "Connect Your Construction Site"
 msgstr "Ceangail an làrach togail agad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:319
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:223
 msgid ""
 "Connect your quarry construction site to your headquarters with a road. You "
 "would have been put directly into road building mode after ordering a new "
@@ -644,7 +644,7 @@ msgstr ""
 "thu ann am modh togail rathaidean sa bhad nan robh thu dìreach air làrach ùr "
 "òrdachadh. Ach chan eil thu an-dràsta."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:322
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:224
 msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
@@ -655,12 +655,12 @@ msgstr ""
 "rathaid is air a' bhratach air beulaibh a' phrìomh-àrais agad. Fuirich ort "
 "an uairsin gus am bi an coireall deiseil."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:330
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:349
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:229
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Census and Statistics"
 msgstr "Cunntas-sluaigh is stadastaireachd"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:332
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:231
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. All "
 "construction sites look the same, and some buildings look alike. It is "
@@ -676,7 +676,7 @@ msgstr ""
 "iuchair \"c\" e no leis a' phutan air an taba \"Cum sùil ar\" aig raon sam "
 "bith."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:337
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:232
 msgid ""
 "Similar to this are the building statistics, which are also toggled via a "
 "button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This will "
@@ -688,7 +688,7 @@ msgstr ""
 "son. Seallaidh seo fiosrachadh mu shaothrachadh nan togalach is adhartas nan "
 "làraichean-togail."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:341
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid ""
 "Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the keys. "
 "Alternatively, you can click on any field without a building on it, select "
@@ -699,21 +699,21 @@ msgstr ""
 "bith air nach eil togalach, an taba \"Cum sùil air\" a thaghadh is an "
 "uairsin briogadh air na putanan iomchaidh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:351
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:239
 msgid "Now we know what’s going on. Let’s wait for this quarry to finish."
 msgstr ""
 "Tha fios againn a-nis air na tha a' tachairt. Fuirich ort a-nis gus am bi an "
 "coireall deiseil."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:244
 msgid "Introducing Messages"
 msgstr "Seo teachdaireachd"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:359
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:246
 msgid "Messages"
 msgstr "Teachdaireachdan"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:361
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:247
 msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
@@ -724,7 +724,7 @@ msgstr ""
 "cudromach: mèinn fhalamh, ionnsaigh air an treubh agad, togalach an airm a "
 "chaill no cheannsaich thu, stòras air a lorg, ..."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:365
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid ""
 "The message window can be toggled by the button on the very right at the "
 "bottom of the screen. This button will also change appearance whenever new "
@@ -736,7 +736,7 @@ msgstr ""
 "nuair a bhios teachdaireachd ùr ri làimh, ach cluinnidh tu clag cuideachd "
 "gach turas a thig teachdaireachd ùr a-steach."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:369
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:249
 msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
@@ -750,13 +750,13 @@ msgstr ""
 "tasglann: 's urrainn dhut cromag a chur sa bhogsa air a beulaibh. An "
 "uairsin, 's urrainn dhut briogadh air"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:375
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:251
 msgid "archive message button to move them into your archive."
 msgstr ""
 "a' phutan \"Cuir na teachdaireachdan a thagh thu san tasglann\" gus an cur "
 "san tasglann agad."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:377
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:253
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
@@ -764,15 +764,15 @@ msgstr ""
 "Cuir na h-uile teachdaireachd sa bhogsa a-steach agad dhan tasglann, a' "
 "gabhail a-steach an tè seo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:256
 msgid "Archive all messages in your inbox"
 msgstr "Cuir na h-uile teachdaireachd dhan tasglann"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:382
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:258
 msgid "Archive Your Inbox Messages"
 msgstr "Cuir na teachdaireachdan sa bhogsa a-steach agad dhan tasglann"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:383
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:259
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
@@ -783,11 +783,11 @@ msgstr ""
 "àbhaistich. Bu choir dhut am bogsa a-steach a chumail glan ach an dèan thu "
 "bun no barr dheth. "
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:387
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Archive all your messages in your inbox now."
 msgstr "Cuir na h-uile teachdaireachd agad san tasglann a-nis."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:261
 msgid ""
 "To do so, open the message window by pressing ‘n’ or clicking the rightmost "
 "button at the very bottom of the screen. Then mark all messages by checking "
@@ -799,12 +799,12 @@ msgstr ""
 "beulaibh. An uairsin, briog air a' phutan \"Cuir na teachdaireachdan a thagh "
 "thu san tasglann.\""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:398
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:420
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:285
 msgid "Closing Windows"
 msgstr "A' dùnadh uinneagan"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:270
 msgid ""
 "Excellent. By the way: closing windows in Widelands is as easy as right-"
 "clicking on them. This will work with all windows except for story message "
@@ -814,7 +814,7 @@ msgstr ""
 "ri briogadh oirre leis a' phutan deas. Obraichidh seo leis a h-uile uinneag "
 "ach uinneagan sgeulachd a leithid an tè seo. Siuthad is feuch e."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:403
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:271
 msgid ""
 "First, close this window by pressing the button below, then right-click into "
 "the messages window to close it."
@@ -822,15 +822,15 @@ msgstr ""
 "Dùin an uinneag seo leis a' phutan gu h-ìosal an toiseach is dèan briogadh "
 "deas air uinneag nan teachdaireachd an uairsin gus a dùnadh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:274
 msgid "Close the messages window"
 msgstr "Dùin uinneag nan teachdaireachd"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:408
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:276
 msgid "Close the Messages Window"
 msgstr "Dùin uinneag nan teachdaireachd"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:409
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons at the very bottom of the "
@@ -840,13 +840,13 @@ msgstr ""
 "briogadh deas air. Gabhaidh cuid a dh'uinneagan a thoglachadh leis na "
 "putanan aig bonn na sgrìn cuideachd."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Close the messages window now by right-clicking into it."
 msgstr ""
 "Dùin uinneag nan teachdaireachd a-nis 's tu a' briogadh air leis a' phutan "
 "deas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:422
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:287
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all stones away from the poor stonemason in the quarry. He will "
@@ -859,11 +859,11 @@ msgstr ""
 "dha clach sam bith a lorg san roinn obrach aige tuilleadh an ath thuras a "
 "dh'fheuchas e ri obair a dhèanamh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:431
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:293
 msgid "Message Arrived!"
 msgstr "Thàinig teachdaireachd a-steach!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:433
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:295
 msgid ""
 "A message has been sent to you. See how the button at the bottom of the "
 "screen has changed appearance? You can burn this quarry down now as it is no "
@@ -873,15 +873,15 @@ msgstr ""
 "a' phutain aig bonn na sgrìn? 'S urrainn dhut an coireall a mhilleadh a-nis "
 "oir chan eil e gu feum tuilleadh is tha e san rathad."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:296
 msgid "To do that, click on the quarry and select the destroy button."
 msgstr "Briog air a' choireall is tagh am putan millidh gus seo a dhèanamh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:441
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
 msgid "Expanding Your Territory!"
 msgstr "A' meudachadh na tìre agad!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:443
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:303
 msgid ""
 "There is one more thing I’d like to teach you now: Expanding your territory. "
 "The place that we started with around our headquarters is barely enough for "
@@ -894,7 +894,7 @@ msgstr ""
 "cha ruig sinn na beanntan a dh'fheumas sinn airson mhèinnearach is guail. "
 "Seo as adhbhar gum feum sinn an roinn a th' againn a mheudachadh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:447
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The barbarians have a selection of different military buildings: "
@@ -912,7 +912,7 @@ msgstr ""
 "còmhnaidh ann. Tha astar lèirsinne eadar-dhealaichte aig gach togalach "
 "cuideachd: chì togalaichean aig a bheil tùr nas fhaide na càch."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:454
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:305
 msgid ""
 "As soon as a military building is manned, it will extend your land. You can "
 "then burn it down again if you need the space. But note that your land is "
@@ -927,7 +927,7 @@ msgstr ""
 "nàmhaid an tìr a cheannsachadh. Mar sin, bidh feum agad air togalaichean an "
 "airm gus buaidh an airm air an tìr agad a chumail."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:459
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
 "Let’s try it out now: build a few military buildings on your south-western "
 "border."
@@ -935,7 +935,7 @@ msgstr ""
 "Feuchamaid ris an-dràsta: tog togalach an airm no dhà aig a' chrìoch taobh "
 "iar-dheas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:461
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:307
 msgid ""
 "We want to capture some of this mountain so we can search for resources "
 "there. Bigger buildings will conquer more land, which can be beneficial "
@@ -946,15 +946,15 @@ msgstr ""
 "dh'fhaodas a bhith 'na bhuannachd dhut on nach urrainn dhut taighean a "
 "thogail air na beanntan."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:467
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:310
 msgid "Conquer an area were we can build mines"
 msgstr "Ceannsaich roinn gus mèinnean a thogail"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:468
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:312
 msgid "Conquer the Mountain to the South-West"
 msgstr "Ceannsaich a' bheinn gu iar-dheas"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:469
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:313
 msgid ""
 "For a full-fledged economy, we need coal, iron and gold. These can be found "
 "in mountains. Conquer some area on the mountains to the south-west of your "
@@ -965,7 +965,7 @@ msgstr ""
 "phrìomh-àras agad 's tu a' togail togalach an airm no dhà faisg air a' "
 "chrìoch agad."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:473
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:314
 msgid ""
 "You can choose from the following military buildings: sentry, donjon, "
 "barrier and fortress. The bigger the building, the more expensive it is to "
@@ -979,11 +979,11 @@ msgstr ""
 "aig amannan gun tog thu togalach an airm mòr faisg air beinn ach an ruig thu "
 "na raointean as àirde."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:483
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:320
 msgid "Searching for Resources"
 msgstr "A' rùrachadh airson stòrasan"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:485
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:322
 msgid ""
 "Okay, now we own some of the area on this mountain. Mountains are very "
 "important, because they contain resources: coal, iron ore, gold ore and "
@@ -995,7 +995,7 @@ msgstr ""
 "graineal. Cleachdaidh gach treubh na stòrasan ann an dòigh dhiofraichte, ach "
 "tha iad uile feumach air mèinnean gus stòras fhaighinn às an talamh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:323
 msgid ""
 "Let’s search for resources in this mountain. First, we’ll build a road onto "
 "the mountain and place a flag. Then, we will click on the flag and call a "
@@ -1006,11 +1006,11 @@ msgstr ""
 "briogaidh sinn air a' bhratach gus clach-eòlaiche a ghairm thuice. Seallaidh "
 "mi dhut mar a nì thu seo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:329
 msgid "Waiting for the Geologist"
 msgstr "A' feitheamh air a' chlach-eòlaiche"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:499
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:331
 msgid ""
 "The geologist will arrive at the flag shortly and start investigating the "
 "area in his surroundings. He will place the following markers for the "
@@ -1020,55 +1020,55 @@ msgstr ""
 "an roinn timcheall oirre a rùrachadh. Seo na comharran a chuireas e ann "
 "airson gach stòrais:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:502
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:333
 msgid "a bit of coal"
 msgstr "beagan guail"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:503
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:334
 msgid "a lot of coal"
 msgstr "mòran guail"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:504
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:335
 msgid "a bit of iron"
 msgstr "beagan iarainn"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:505
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:336
 msgid "a lot of iron"
 msgstr "mòran iarainn"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:506
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:337
 msgid "a bit of gold"
 msgstr "beagan òir"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:507
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid "a lot of gold"
 msgstr "mòran òir"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:509
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:339
 msgid "a bit of granite"
 msgstr "beagan graineil"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:511
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:340
 msgid "a lot of granite"
 msgstr "mòran graineil"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:512
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:341
 msgid "water"
 msgstr "uisge"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:514
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:342
 msgid "nothing was found here"
 msgstr "cha deach dad a lorg an-seo"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:516
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:343
 msgid "Let’s wait and see what the geologist finds on the mountain."
 msgstr "Fuirich ort is chì sinn na lorgas an clach-eòlaiche air a' bheinn."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:523
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:348
 msgid "Mining Conclusion"
 msgstr "Co-dhùnadh mun mhèinnearachd"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:525
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:350
 msgid ""
 "So our geologist found a lot of coal on this mountain. You should therefore "
 "build a coal mine here. Building a mine is like building a house. The "
@@ -1078,11 +1078,11 @@ msgstr ""
 "chòir dhut mèinn guail a thogail ann. Togaidh tu mèinn mar a thogas tu "
 "taigh. Seo samhla nan ionadan togail airson mèinnean:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:528
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:352
 msgid "this one."
 msgstr "am fear seo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:530
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:354
 msgid ""
 "Note that a mine needs rations to work. Rations are produced in taverns, and "
 "taverns need meat, pitta bread, and fish to produce them. You will need a "
@@ -1097,15 +1097,15 @@ msgstr ""
 "diofraichte do gach treubh. Gheibh thu mìneachaidhean orra sna h-iomairtean "
 "bunasach airson nan trì treubhan."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:359
 msgid "Warfare and Training"
 msgstr "An cogadh is trèanadh"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:541
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:361
 msgid "Soldiers and Warfare"
 msgstr "Saighdearan is an cogadh"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:542
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:362
 msgid ""
 "On to the last topic now. We are going to talk about soldiers, their "
 "training and their profession: warfare. As I mentioned, Widelands is about "
@@ -1117,17 +1117,17 @@ msgstr ""
 "seach milleadh an cuspair aig Widelands; mar sin is an eaconamaidh seach "
 "innleachdan an airm na tha cudromach airson a' chogaidh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:546
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:363
 msgid ""
 "Nevertheless, warfare offers one way of challenging other players, and it "
 "has some game mechanics that deserve explanation. The economies of the "
-"tribes are explained in their individual tutorial campaigns. "
+"tribes are explained in their individual tutorial campaigns."
 msgstr ""
 "Co-dhiù no co-dheth, 's e dòigh a tha sa chogadh gus dùbhlan a thoirt air na "
 "cluicheadairean eile agus tha mar a dh'obraicheas e airidh air mìneachadh. "
-"Mìnichidh sinn an eaconamaidh aig gach treubh sna h-iomairtean oideachaidh. "
+"Mìnichidh sinn an eaconamaidh aig gach treubh sna h-iomairtean oideachaidh."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:550
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:364
 msgid ""
 "Ok, I am going to create a little training ground for us with a training "
 "camp and a warehouse to the north east of here."
@@ -1135,7 +1135,7 @@ msgstr ""
 "Ceart ma-thà, cruthaichidh mi aonad trèanaidh beag dhuinn a-nis le campa "
 "trèanaidh is taigh-stòrais gu ear-thuath."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:552
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:365
 msgid ""
 "If you want to come back to this south-western part of your realm, just "
 "scroll here via right-button scrolling or open the minimap by clicking on the"
@@ -1144,16 +1144,16 @@ msgstr ""
 "cha leig thu leas ach sgroladh leis a' phutan deas no am meanbh-mhapa "
 "fhosgladh 's tu a' briogadh air"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:555
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:367
 msgid "minimap button at the bottom of the screen."
 msgstr "putan a' mheanbh-mhapa aig bonn na sgrìn."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:557
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:368
 msgid "Alternatively, you could also press ‘m’ on your keyboard."
 msgstr ""
 "Mar roghainn eile, 's urrainn dhut \"m\" a bhrùthadh air a' mheur-chlàr agad."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:559
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
@@ -1164,7 +1164,7 @@ msgstr ""
 "chlì. 'S urrainn dhut togalaichean, rathaidean, brataich is taisbeanairean "
 "nan chluicheadairean am broinn a' mheanbh-mhapa a thoglachadh cuideachd."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:562
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:372
 msgid ""
 "But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted to "
 "build a small training scenario for you. Let’s do that now."
@@ -1173,11 +1173,11 @@ msgstr ""
 "Seadh, bha mi airson cnàmh-sgeul trèanaidh beag a thogail dhut. Dèanamaid "
 "seo a-nis."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:571
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:378
 msgid "Trainings Camp and Soldier Stats"
 msgstr "An campa trèanaidh is luachan nan saighdearan"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:573
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:380
 msgid ""
 "Here we go. Take a look at the soldiers that are on their way into our "
 "training camp. They look different from normal workers: they have a health "
@@ -1191,7 +1191,7 @@ msgstr ""
 "samhlaidhean ann a riochdaicheas na leibheilean sna ceithir roinnean-seòrsa "
 "– slàinte, ionnsaigh, dìon is teàrnadh – a tha aig gach saighdear."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:579
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid ""
 "A soldier is created like any normal worker: a carrier grabs a tool in a "
 "warehouse as soon as a request for a certain profession is not fulfilled. "
@@ -1206,7 +1206,7 @@ msgstr ""
 "aig gach saighdear air ùr-chruthachadh. Bidh feum air trèanadh gus an "
 "saighdear a dhèanamh nas fearr ann an gin dhe na ceithir roinnean-seòrsa."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:584
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:382
 msgid ""
 "Training happens in training sites like the training camp or the battle "
 "arena: soldiers go there (as our little fellows are currently doing), "
@@ -1223,11 +1223,11 @@ msgstr ""
 "teàrnadh leibheil 2 aige. Seo gaisgeach eagalach dhut! Seo nas ciall dha "
 "gach luach:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:589
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:383
 msgid "Health:"
 msgstr "Slàinte:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:590
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:384
 msgid ""
 "The total life of a soldier. A barbarian soldier starts with ~130 health "
 "points, and with each health level he gains 28 health points."
@@ -1236,11 +1236,11 @@ msgstr ""
 "puingean-slàinte is buannaichidh e 28 puing-shlàinte le gach leibheil puinge-"
 "slàinte."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:592
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:385
 msgid "Attack:"
 msgstr "Ionnsaigh:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:593
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:386
 msgid ""
 "The amount of damage a soldier will inflict on the enemy when an attack is "
 "successful. A barbarian soldier with attack level 0 inflicts ~14 points of "
@@ -1252,11 +1252,11 @@ msgstr ""
 "air slàinte de mu 14 puingean nuair a bhuaileas e a air an nàmhaid gu "
 "soirbheachail. Buannaichidh e dochann de 7 le gach leibheil ionnsaighe."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:596
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:387
 msgid "Defense:"
 msgstr "Dìon:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:597
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid ""
 "Defense is the value that is subtracted from the attack value. The "
 "barbarians cannot train in this skill and therefore have always defense "
@@ -1273,11 +1273,11 @@ msgstr ""
 "caillidh an Tùsanach 15 - 3 = 12 de shlàinte. Thèid 3 puingean a thoirt air "
 "falbh on dochann air sàilleibh a' chomais dìona."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid "Evade:"
 msgstr "Teàrnadh:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:603
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:390
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. It is 25% "
 "for a level 0 evade barbarian and increases in steps of 15% for each level."
@@ -1286,15 +1286,15 @@ msgstr ""
 "teàrnadh. 'S e 25% a th' ann airson Tùsanaich le teàrnadh leibheil 0 is "
 "gheibh e 15% a bharrachd airson gach leibheil."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:611
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:396
 msgid "Enhance This Fortress"
 msgstr "Leasaich an dùn seo"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:612
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:398
 msgid "Enhancing Buildings"
 msgstr "A' leasachadh togalach"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:613
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:399
 msgid ""
 "I will create an enemy for you soon, but first let’s make sure you are "
 "prepared. This fortress is already quite strong and conquers a lot of space. "
@@ -1305,7 +1305,7 @@ msgstr ""
 "ceannsaichidh e mòran tìre. Ach tha togalach fiù 's nas motha ann is seo a' "
 "chathair."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:617
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
 "Citadels cannot be built directly. Instead, you will have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
@@ -1323,11 +1323,11 @@ msgstr ""
 "togalach an airm faisg air, dh'fhaoidte gun rachadh an làrach togail agad a "
 "mhilleadh. Na gabh dragh, cha tachair seo an-dràsta."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:624
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:401
 msgid "Enhance your fortress to a citadel now."
 msgstr "Leasaich an dùn agad gu cathair a-nis."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:626
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:402
 msgid ""
 "Remember that you can speed time up by using PAGE_UP. Building a citadel "
 "takes a while."
@@ -1335,19 +1335,19 @@ msgstr ""
 "Cuimhnich gum falbh an ùine nas luaithe le PAGE UP on a bheir togail "
 "cathrach greis mhath."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:631
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "Enhance your fortress to a citadel"
 msgstr "Leasaich an dùn agad gu cathair"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:632
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
 msgid "Enhance Your Fortress"
 msgstr "Leasaich an dùn agad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:633
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:408
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "Leasaich an dùn agad gu cathair neartmhor."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:409
 msgid ""
 "The citadel can house 12 soldiers and is the biggest military building the "
 "barbarians can build. It also costs a lot of resources and takes a long time "
@@ -1359,15 +1359,15 @@ msgstr ""
 "cuideachd is bheir e ùine mhòr gus tè a thogail. Tha i nas fhearr gus "
 "ionadan cudromach a dhìon a leithid àiteachan caola no beanntan."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:415
 msgid "Defeat your enemy"
 msgstr "Cuir ruaig air an nàmhaid agad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:417
 msgid "Defeat the Enemy"
 msgstr "Cuir ruaig air an nàmhaid"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:646
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:418
 msgid ""
 "I have created a sparring partner for you: It is an empire tribe close to "
 "your citadel. To attack its buildings, click on the door of a target "
@@ -1383,7 +1383,7 @@ msgstr ""
 "fagas. Air an aon dòigh, thig luchd-dìona o gach togalach airm an nàmhad am "
 "fagas gus bacadh a chur air an fheachd agad."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:652
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:419
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
@@ -1391,19 +1391,19 @@ msgstr ""
 "Thoir ionnsaigh air is ceannsaich na h-uile togalach an airm aig an nàmhaid "
 "is mill am prìomh-àras aige."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:656
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:422
 msgid "Defeat the enemy tribe"
 msgstr "Cuir ruaig air an treubh nàmhad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:424
 msgid "Defeat Your Enemy"
 msgstr "Cuir ruaig air an nàmhaid agad"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:658
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:425
 msgid "Defeat the nearby enemy."
 msgstr "Cuir ruaig air an nàmhaid am fagas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:660
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:426
 msgid ""
 "To attack a building, click on its doors, choose the number of attacking "
 "soldiers, then send them via the ‘Attack’ button."
@@ -1412,12 +1412,12 @@ msgstr ""
 "shaighdearan a bu chòir ionnsaigh a thoirt is cuir iad leis a' phutain "
 "ionnsaighe."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:667
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:668
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:431
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:433
 msgid "Conclusion"
 msgstr "Co-dhùnadh"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:670
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:434
 msgid ""
 "This concludes the tutorial. There is some stuff we have not covered here – "
 "we have not even built a single production building even though producing "
@@ -1429,7 +1429,7 @@ msgstr ""
 "bathair an rud as cudromaiche ann am Widelands – ach dh'ionnsaich thu na tha "
 "bunasach."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:435
 msgid ""
 "You can learn about the remaining stuff while you go through the individual "
 "tribes’ introduction campaigns. Each consists of some scenarios explaining "
@@ -1441,7 +1441,7 @@ msgstr ""
 "is an eaconamaidh aca is a bheir eòlas air seanchas Widelands dhut aig an "
 "aon àm. Gabh tlachd às a' cluiche!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:678
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 msgid ""
 "You can continue playing this map or you can end this game whenever you "
 "like. To leave this game and return to the main menu, click on the"
@@ -1450,7 +1450,7 @@ msgstr ""
 "chur air a' gheama uair sam bith a thogras tu. Gus an geama fhàgail is "
 "tilleadh dhan phrìomh chlàr-taice, briog air"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:681
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:438
 msgid ""
 "‘Options’ menu button on the very left at the bottom of the screen. Then "
 "click the"
@@ -1458,11 +1458,11 @@ msgstr ""
 "a' phutan clàr-taice \"Roghainnean\" taobh clì aig bonn na sgrìn. An "
 "uairsin, briog air"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:684
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:439
 msgid "‘Exit Game’ button."
 msgstr "a' phutan \"Fàg an geama\"."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:686
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:440
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at"
 msgstr ""
@@ -1473,7 +1473,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

@@ -55,7 +55,7 @@ struct ShipWindow : UI::Window {
 	ShipWindow(Interactive_GameBase & igb, Ship & ship);
 	virtual ~ShipWindow();
 
-	virtual void think() override;
+	void think() override;
 
 	UI::Button * make_button
 		(UI::Panel * parent,
@@ -291,7 +291,7 @@ void ShipWindow::act_destination()
 /// Sink the ship if confirmed
 void ShipWindow::act_sink()
 {
-	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		m_igbase.game().send_player_sink_ship(m_ship);
 	}
 	else {
@@ -302,7 +302,7 @@ void ShipWindow::act_sink()
 /// Cancel expedition if confirmed
 void ShipWindow::act_cancel_expedition()
 {
-	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		m_igbase.game().send_player_cancel_expedition_ship(m_ship);
 	}
 	else {

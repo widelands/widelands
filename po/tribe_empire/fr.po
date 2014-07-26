@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-04-16 18:49+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:37+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:45+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -294,6 +294,141 @@ msgstr "Dormir"
 msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr "Améliore l'esquive  des soldats du niveau 0 au niveau 1"
 
+#: ../../tribes/empire/arena/help.lua:15
+#: ../../tribes/empire/armorsmithy/help.lua:17
+#: ../../tribes/empire/bakery/help.lua:13
+#: ../../tribes/empire/bakery/help.lua:17
+#: ../../tribes/empire/barracks/help.lua:13
+#: ../../tribes/empire/barrier/help.lua:13
+#: ../../tribes/empire/brewery/help.lua:13
+#: ../../tribes/empire/brewery/help.lua:17
+#: ../../tribes/empire/burners_house/help.lua:13
+#: ../../tribes/empire/burners_house/help.lua:17
+#: ../../tribes/empire/castle/help.lua:13
+#: ../../tribes/empire/coalmine/help.lua:13
+#: ../../tribes/empire/colosseum/help.lua:15
+#: ../../tribes/empire/deep_coalmine/help.lua:13
+#: ../../tribes/empire/deep_goldmine/help.lua:13
+#: ../../tribes/empire/deep_goldmine/help.lua:13
+#: ../../tribes/empire/deep_marblemine/help.lua:13
+#: ../../tribes/empire/deep_marblemine/help.lua:13
+#: ../../tribes/empire/deep_oremine/help.lua:13
+#: ../../tribes/empire/deep_oremine/help.lua:13
+#: ../../tribes/empire/donkeyfarm/help.lua:13
+#: ../../tribes/empire/farm/help.lua:13
+#: ../../tribes/empire/fishers_house/help.lua:13
+#: ../../tribes/empire/foresters_house/help.lua:13
+#: ../../tribes/empire/fortress/help.lua:13
+#: ../../tribes/empire/goldmine/help.lua:13
+#: ../../tribes/empire/headquarters/help.lua:13
+#: ../../tribes/empire/headquarters/help.lua:17
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:13
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
+#: ../../tribes/empire/hunters_house/help.lua:13
+#: ../../tribes/empire/inn/help.lua:13
+#: ../../tribes/empire/inn/help.lua:17
+#: ../../tribes/empire/lumberjacks_house/help.lua:13
+#: ../../tribes/empire/marblemine/help.lua:13
+#: ../../tribes/empire/mill/help.lua:17
+#: ../../tribes/empire/oremine/help.lua:13
+#: ../../tribes/empire/outpost/help.lua:13
+#: ../../tribes/empire/piggery/help.lua:13
+#: ../../tribes/empire/piggery/help.lua:17
+#: ../../tribes/empire/port/help.lua:13
+#: ../../tribes/empire/port/help.lua:18
+#: ../../tribes/empire/quarry/help.lua:13
+#: ../../tribes/empire/sawmill/help.lua:13
+#: ../../tribes/empire/sawmill/help.lua:17
+#: ../../tribes/empire/scouts_house/help.lua:13
+#: ../../tribes/empire/scouts_house/help.lua:17
+#: ../../tribes/empire/sentry/help.lua:13
+#: ../../tribes/empire/sheepfarm/help.lua:13
+#: ../../tribes/empire/sheepfarm/help.lua:17
+#: ../../tribes/empire/shipyard/help.lua:18
+#: ../../tribes/empire/smelting_works/help.lua:13
+#: ../../tribes/empire/stonemasons_house/help.lua:13
+#: ../../tribes/empire/stonemasons_house/help.lua:17
+#: ../../tribes/empire/tavern/help.lua:13
+#: ../../tribes/empire/tavern/help.lua:17
+#: ../../tribes/empire/toolsmithy/help.lua:13
+#: ../../tribes/empire/toolsmithy/help.lua:17
+#: ../../tribes/empire/tower/help.lua:13
+#: ../../tribes/empire/trainingcamp/help.lua:15
+#: ../../tribes/empire/vineyard/help.lua:13
+#: ../../tribes/empire/warehouse/help.lua:13
+#: ../../tribes/empire/weaponsmithy/help.lua:17
+#: ../../tribes/empire/well/help.lua:13
+#: ../../tribes/empire/winery/help.lua:13
+#: ../../tribes/empire/winery/help.lua:17
+msgid "Text needed"
+msgstr ""
+
+#: ../../tribes/empire/arena/help.lua:19
+#: ../../tribes/empire/colosseum/help.lua:19
+msgid "Trains soldiers in ‘Evade’."
+msgstr ""
+
+#: ../../tribes/empire/arena/help.lua:19
+#: ../../tribes/empire/colosseum/help.lua:19
+msgid ""
+"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
+"remain totally unaffected."
+msgstr ""
+
+#: ../../tribes/empire/arena/help.lua:20
+#: ../../tribes/empire/colosseum/help.lua:20
+#: ../../tribes/empire/trainingcamp/help.lua:21
+msgid ""
+"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
+"level with which they came."
+msgstr ""
+
+#: ../../tribes/empire/arena/help.lua:27
+#: ../../tribes/empire/colosseum/help.lua:27
+msgid "Evade Training:"
+msgstr ""
+
+#: ../../tribes/empire/arena/help.lua:37
+#: ../../tribes/empire/armorsmithy/help.lua:29
+#: ../../tribes/empire/bakery/help.lua:30
+#: ../../tribes/empire/brewery/help.lua:29
+#: ../../tribes/empire/burners_house/help.lua:29
+#: ../../tribes/empire/coalmine/help.lua:30
+#: ../../tribes/empire/colosseum/help.lua:37
+#: ../../tribes/empire/deep_coalmine/help.lua:30
+#: ../../tribes/empire/deep_goldmine/help.lua:29
+#: ../../tribes/empire/deep_marblemine/help.lua:29
+#: ../../tribes/empire/deep_oremine/help.lua:29
+#: ../../tribes/empire/donkeyfarm/help.lua:30
+#: ../../tribes/empire/farm/help.lua:29
+#: ../../tribes/empire/fishers_house/help.lua:30
+#: ../../tribes/empire/goldmine/help.lua:30
+#: ../../tribes/empire/hunters_house/help.lua:30
+#: ../../tribes/empire/inn/help.lua:29
+#: ../../tribes/empire/lumberjacks_house/help.lua:29
+#: ../../tribes/empire/marblemine/help.lua:29
+#: ../../tribes/empire/mill/help.lua:30
+#: ../../tribes/empire/oremine/help.lua:30
+#: ../../tribes/empire/piggery/help.lua:29
+#: ../../tribes/empire/port/help.lua:27
+#: ../../tribes/empire/quarry/help.lua:29
+#: ../../tribes/empire/sawmill/help.lua:29
+#: ../../tribes/empire/scouts_house/help.lua:29
+#: ../../tribes/empire/sheepfarm/help.lua:29
+#: ../../tribes/empire/shipyard/help.lua:30
+#: ../../tribes/empire/smelting_works/help.lua:29
+#: ../../tribes/empire/stonemasons_house/help.lua:29
+#: ../../tribes/empire/tavern/help.lua:29
+#: ../../tribes/empire/toolsmithy/help.lua:29
+#: ../../tribes/empire/trainingcamp/help.lua:44
+#: ../../tribes/empire/vineyard/help.lua:29
+#: ../../tribes/empire/weaponsmithy/help.lua:29
+#: ../../tribes/empire/weaving-mill/help.lua:29
+#: ../../tribes/empire/well/help.lua:30
+#: ../../tribes/empire/winery/help.lua:29
+msgid "Calculation needed"
+msgstr ""
+
 #: ../../tribes/empire/armor/conf:1
 msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used "
@@ -326,7 +461,7 @@ msgstr "Produit des armures de plaques"
 
 #: ../../tribes/empire/armorsmithy/conf:35
 #: ../../tribes/empire/bakery/conf:24
-#: ../../tribes/empire/brewery/conf:24
+#: ../../tribes/empire/brewery/conf:25
 #: ../../tribes/empire/burners_house/conf:24
 #: ../../tribes/empire/coalmine/conf:25
 #: ../../tribes/empire/deep_coalmine/conf:26
@@ -334,7 +469,7 @@ msgstr "Produit des armures de plaques"
 #: ../../tribes/empire/deep_marblemine/conf:27
 #: ../../tribes/empire/deep_oremine/conf:26
 #: ../../tribes/empire/donkeyfarm/conf:25
-#: ../../tribes/empire/farm/conf:25
+#: ../../tribes/empire/farm/conf:26
 #: ../../tribes/empire/fishers_house/conf:20
 #: ../../tribes/empire/foresters_house/conf:20
 #: ../../tribes/empire/goldmine/conf:26
@@ -352,13 +487,13 @@ msgstr "Produit des armures de plaques"
 #: ../../tribes/empire/shipyard/conf:28
 #: ../../tribes/empire/smelting_works/conf:28
 #: ../../tribes/empire/stonemasons_house/conf:24
-#: ../../tribes/empire/tavern/conf:27
+#: ../../tribes/empire/tavern/conf:28
 #: ../../tribes/empire/toolsmithy/conf:49
-#: ../../tribes/empire/vineyard/conf:25
+#: ../../tribes/empire/vineyard/conf:26
 #: ../../tribes/empire/weaponsmithy/conf:38
 #: ../../tribes/empire/weaving-mill/conf:20
 #: ../../tribes/empire/well/conf:21
-#: ../../tribes/empire/winery/conf:25
+#: ../../tribes/empire/winery/conf:26
 msgid "Work"
 msgstr "Travaille"
 
@@ -372,9 +507,72 @@ msgstr ""
 msgid "Bakes bread for workers."
 msgstr "Cuit du pain pour les ouvriers"
 
+#: ../../tribes/empire/bakery/help.lua:13
+#: ../../tribes/empire/barracks/help.lua:13
+#: ../../tribes/empire/barrier/help.lua:13
+#: ../../tribes/empire/brewery/help.lua:13
+#: ../../tribes/empire/burners_house/help.lua:13
+#: ../../tribes/empire/castle/help.lua:13
+#: ../../tribes/empire/donkeyfarm/help.lua:13
+#: ../../tribes/empire/farm/help.lua:13
+#: ../../tribes/empire/fishers_house/help.lua:13
+#: ../../tribes/empire/foresters_house/help.lua:13
+#: ../../tribes/empire/fortress/help.lua:13
+#: ../../tribes/empire/goldmine/help.lua:13
+#: ../../tribes/empire/headquarters/help.lua:13
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:13
+#: ../../tribes/empire/hunters_house/help.lua:13
+#: ../../tribes/empire/inn/help.lua:13
+#: ../../tribes/empire/lumberjacks_house/help.lua:13
+#: ../../tribes/empire/marblemine/help.lua:13
+#: ../../tribes/empire/oremine/help.lua:13
+#: ../../tribes/empire/outpost/help.lua:13
+#: ../../tribes/empire/piggery/help.lua:13
+#: ../../tribes/empire/port/help.lua:13
+#: ../../tribes/empire/quarry/help.lua:13
+#: ../../tribes/empire/sawmill/help.lua:13
+#: ../../tribes/empire/scouts_house/help.lua:13
+#: ../../tribes/empire/sentry/help.lua:13
+#: ../../tribes/empire/sheepfarm/help.lua:13
+#: ../../tribes/empire/smelting_works/help.lua:13
+#: ../../tribes/empire/stonemasons_house/help.lua:13
+#: ../../tribes/empire/tavern/help.lua:13
+#: ../../tribes/empire/toolsmithy/help.lua:13
+#: ../../tribes/empire/tower/help.lua:13
+#: ../../tribes/empire/trainingcamp/help.lua:15
+#: ../../tribes/empire/vineyard/help.lua:13
+#: ../../tribes/empire/warehouse/help.lua:13
+#: ../../tribes/empire/well/help.lua:13
+#: ../../tribes/empire/winery/help.lua:13
+msgid "Source needed"
+msgstr ""
+
 #: ../../tribes/empire/barracks/conf:7
 msgid "Your soldiers have occupied your barracks."
 msgstr "Vos soldats ont occupé votre caserne."
+
+#: ../../tribes/empire/barracks/help.lua:16
+#: ../../tribes/empire/barrier/help.lua:16
+#: ../../tribes/empire/castle/help.lua:16
+#: ../../tribes/empire/fortress/help.lua:16
+#: ../../tribes/empire/outpost/help.lua:16
+#: ../../tribes/empire/sentry/help.lua:16
+#: ../../tribes/empire/tower/help.lua:16
+msgid "Garrisons soldiers to expand your territory."
+msgstr ""
+
+#: ../../tribes/empire/barracks/help.lua:17
+#: ../../tribes/empire/barrier/help.lua:17
+#: ../../tribes/empire/castle/help.lua:17
+#: ../../tribes/empire/fortress/help.lua:17
+#: ../../tribes/empire/outpost/help.lua:17
+#: ../../tribes/empire/sentry/help.lua:17
+#: ../../tribes/empire/tower/help.lua:17
+msgid ""
+"If you’re low on soldiers to occupy new military sites, use the downward "
+"arrow button to decrease the capacity. You can also click on a soldier to "
+"send him away."
+msgstr ""
 
 #: ../../tribes/empire/barrier/conf:7
 msgid "Your soldiers have occupied your barrier."
@@ -468,6 +666,11 @@ msgstr ""
 "habituellement nourries de charbon. Il est extrait des mines de charbon ou "
 "est produit à la maison du charbonnier à partir de troncs."
 
+#: ../../tribes/empire/coalmine/help.lua:17
+#: ../../tribes/empire/deep_coalmine/help.lua:18
+msgid "Digs coal out of the ground in mountain terrain."
+msgstr ""
+
 #: ../../tribes/empire/colosseum/conf:37
 msgid "Upgrade soldier evade from level 1 to level 2"
 msgstr "Améliore l'esquive  des soldats du niveau 1 au niveau 2"
@@ -484,638 +687,652 @@ msgstr "L'Empire"
 msgid "This is the culture of the Roman Empire."
 msgstr "Voici la culture de l'Empire Romain."
 
-#: ../../tribes/empire/conf:31
+#: ../../tribes/empire/conf:29
 msgid "Ashes"
 msgstr "Cendres"
 
-#: ../../tribes/empire/conf:32
+#: ../../tribes/empire/conf:30
 msgid "Field (medium)"
 msgstr "Champ moyen"
 
-#: ../../tribes/empire/conf:33
+#: ../../tribes/empire/conf:31
 msgid "Field (small)"
 msgstr "Petit champ"
 
-#: ../../tribes/empire/conf:34
+#: ../../tribes/empire/conf:32
 msgid "Field (tiny)"
 msgstr "Champ minuscule"
 
-#: ../../tribes/empire/conf:35
+#: ../../tribes/empire/conf:33
 msgid "Field (ripe)"
 msgstr "Champ mûr"
 
-#: ../../tribes/empire/conf:36
+#: ../../tribes/empire/conf:34
 msgid "Field (harvested)"
 msgstr "Champ moissoné"
 
-#: ../../tribes/empire/conf:37
+#: ../../tribes/empire/conf:35
 msgid "Destroyed Building"
 msgstr "Bâtiment détruit"
 
-#: ../../tribes/empire/conf:38
+#: ../../tribes/empire/conf:36
 msgid "Resource indicator: Coal (little)"
 msgstr "Indicateur de ressource : peu de charbon"
 
-#: ../../tribes/empire/conf:39
+#: ../../tribes/empire/conf:37
 msgid "Resource indicator: Coal (much)"
 msgstr "Indicateur de ressource : beaucoup de charbon"
 
-#: ../../tribes/empire/conf:40
+#: ../../tribes/empire/conf:38
 msgid "Resource indicator: Gold (little)"
 msgstr "Indicateur de ressource : peu d'or"
 
-#: ../../tribes/empire/conf:41
+#: ../../tribes/empire/conf:39
 msgid "Resource indicator: Gold (much)"
 msgstr "Indicateur de ressource : beaucoup d'or"
 
-#: ../../tribes/empire/conf:42
+#: ../../tribes/empire/conf:40
 msgid "Resource indicator: Granite (little)"
 msgstr "Indicateur de ressource : un peu de granit"
 
-#: ../../tribes/empire/conf:43
+#: ../../tribes/empire/conf:41
 msgid "Resource indicator: Granite (much)"
 msgstr "Indicateur de ressource : beaucoup de granit"
 
-#: ../../tribes/empire/conf:44
+#: ../../tribes/empire/conf:42
 msgid "Resource indicator: Iron (little)"
 msgstr "Indicateur de ressource : un peu de fer"
 
-#: ../../tribes/empire/conf:45
+#: ../../tribes/empire/conf:43
 msgid "Resource indicator: Iron (much)"
 msgstr "Indicateur de ressource : beaucoup de fer"
 
-#: ../../tribes/empire/conf:46
+#: ../../tribes/empire/conf:44
 msgid "Resource indicator: No resource"
 msgstr "Indicateur de ressource : rien"
 
-#: ../../tribes/empire/conf:47
+#: ../../tribes/empire/conf:45
 msgid "Resource indicator: Water"
 msgstr "Indicateur de ressource : eau"
 
-#: ../../tribes/empire/conf:48
+#: ../../tribes/empire/conf:46
 msgid "Vine (medium)"
 msgstr "Vigne moyenne"
 
-#: ../../tribes/empire/conf:49
+#: ../../tribes/empire/conf:47
 msgid "Vine (small)"
 msgstr "Petite vigne"
 
-#: ../../tribes/empire/conf:50
+#: ../../tribes/empire/conf:48
 msgid "Vine (tiny)"
 msgstr "Vigne minuscule"
 
-#: ../../tribes/empire/conf:51
+#: ../../tribes/empire/conf:49
 msgid "Vine (ripe)"
 msgstr "vigne mûre"
 
-#: ../../tribes/empire/conf:52
+#: ../../tribes/empire/conf:50
 msgid "Ship Construction Site"
 msgstr "Site de construction navale"
 
-#: ../../tribes/empire/conf:55
+#: ../../tribes/empire/conf:53
 msgid "Advanced Lance"
 msgstr "Lance avancée"
 
-#: ../../tribes/empire/conf:56
+#: ../../tribes/empire/conf:54
 msgid "Armor"
 msgstr "Armure"
 
-#: ../../tribes/empire/conf:57
+#: ../../tribes/empire/conf:55
 msgid "Ax"
 msgstr "Hache"
 
-#: ../../tribes/empire/conf:58
+#: ../../tribes/empire/conf:56
 msgid "Bread Paddle"
 msgstr "Planche à Pain"
 
-#: ../../tribes/empire/conf:59
+#: ../../tribes/empire/conf:57
 msgid "Basket"
 msgstr "Panier"
 
-#: ../../tribes/empire/conf:60
+#: ../../tribes/empire/conf:58
 msgid "Beer"
 msgstr "Bière"
 
-#: ../../tribes/empire/conf:61
+#: ../../tribes/empire/conf:59
 msgid "Bread"
 msgstr "Pain"
 
-#: ../../tribes/empire/conf:62
+#: ../../tribes/empire/conf:60
 msgid "Chain Armor"
 msgstr "Cotte de maille"
 
-#: ../../tribes/empire/conf:63
+#: ../../tribes/empire/conf:61
 msgid "Cloth"
 msgstr "Tissu"
 
-#: ../../tribes/empire/conf:64
+#: ../../tribes/empire/conf:62
 msgid "Coal"
 msgstr "Charbon"
 
-#: ../../tribes/empire/conf:65
+#: ../../tribes/empire/conf:63
 msgid "Fire Tongs"
 msgstr "Tenailles"
 
-#: ../../tribes/empire/conf:66
+#: ../../tribes/empire/conf:64
 msgid "Fish"
 msgstr "Poisson"
 
-#: ../../tribes/empire/conf:67
+#: ../../tribes/empire/conf:65
 msgid "Fishing Rod"
 msgstr "Canne à pêche"
 
-#: ../../tribes/empire/conf:68
+#: ../../tribes/empire/conf:66
 msgid "Flour"
 msgstr "Farine"
 
-#: ../../tribes/empire/conf:69
+#: ../../tribes/empire/conf:67
 msgid "Gold"
 msgstr "Or"
 
-#: ../../tribes/empire/conf:70
+#: ../../tribes/empire/conf:68
 msgid "Gold Ore"
 msgstr "Minerai d'or"
 
-#: ../../tribes/empire/conf:71
+#: ../../tribes/empire/conf:69
 msgid "Grape"
 msgstr "Raisin"
 
-#: ../../tribes/empire/conf:72
+#: ../../tribes/empire/conf:70
 msgid "Hammer"
 msgstr "Marteau"
 
-#: ../../tribes/empire/conf:73
+#: ../../tribes/empire/conf:71
 msgid "Heavy Lance"
 msgstr "Pilum"
 
-#: ../../tribes/empire/conf:74
+#: ../../tribes/empire/conf:72
 msgid "Helmet"
 msgstr "Casque"
 
-#: ../../tribes/empire/conf:75
+#: ../../tribes/empire/conf:73
 msgid "Hunting Spear"
 msgstr "Lance de Chasse"
 
-#: ../../tribes/empire/conf:76
+#: ../../tribes/empire/conf:74
 msgid "Iron"
 msgstr "Fer"
 
-#: ../../tribes/empire/conf:77
+#: ../../tribes/empire/conf:75
 msgid "Iron Ore"
 msgstr "Minerai de fer"
 
-#: ../../tribes/empire/conf:78
+#: ../../tribes/empire/conf:76
 msgid "Kitchen Tools"
 msgstr "Ustensiles de Cuisine"
 
-#: ../../tribes/empire/conf:79
+#: ../../tribes/empire/conf:77
 msgid "Lance"
 msgstr "Lance"
 
-#: ../../tribes/empire/conf:80
+#: ../../tribes/empire/conf:78
 msgid "Marble Column"
 msgstr "Colonne de marbre"
 
-#: ../../tribes/empire/conf:81
+#: ../../tribes/empire/conf:79
 msgid "Marble"
 msgstr "Marbre"
 
-#: ../../tribes/empire/conf:82
+#: ../../tribes/empire/conf:80
 msgid "Meal"
 msgstr "Repas"
 
-#: ../../tribes/empire/conf:83
+#: ../../tribes/empire/conf:81
 msgid "Meat"
 msgstr "Viande"
 
-#: ../../tribes/empire/conf:84
+#: ../../tribes/empire/conf:82
 msgid "Pick"
 msgstr "Pioche"
 
-#: ../../tribes/empire/conf:85
+#: ../../tribes/empire/conf:83
 msgid "Plate Armor"
 msgstr "Armure de Plaques"
 
-#: ../../tribes/empire/conf:86
+#: ../../tribes/empire/conf:84
 msgid "Ration"
 msgstr "Ration"
 
-#: ../../tribes/empire/conf:87
+#: ../../tribes/empire/conf:85
 msgid "Saw"
 msgstr "Scie"
 
-#: ../../tribes/empire/conf:88
+#: ../../tribes/empire/conf:86
 msgid "Scythe"
 msgstr "Faux"
 
-#: ../../tribes/empire/conf:89
+#: ../../tribes/empire/conf:87
 msgid "Shovel"
 msgstr "Pelle"
 
-#: ../../tribes/empire/conf:90
+#: ../../tribes/empire/conf:88
 msgid "Stones"
 msgstr "Pierres"
 
-#: ../../tribes/empire/conf:91
+#: ../../tribes/empire/conf:89
 msgid "Log"
 msgstr "Tronc"
 
-#: ../../tribes/empire/conf:92
+#: ../../tribes/empire/conf:90
 msgid "War-Lance"
 msgstr "Lance de Guerre"
 
-#: ../../tribes/empire/conf:93
+#: ../../tribes/empire/conf:91
 msgid "Water"
 msgstr "Eau"
 
-#: ../../tribes/empire/conf:94
+#: ../../tribes/empire/conf:92
 msgid "Wheat"
 msgstr "Blé"
 
-#: ../../tribes/empire/conf:95
+#: ../../tribes/empire/conf:93
 msgid "Wine"
 msgstr "Vin"
 
-#: ../../tribes/empire/conf:96
+#: ../../tribes/empire/conf:94
 msgid "Wood"
 msgstr "Bois"
 
-#: ../../tribes/empire/conf:97
+#: ../../tribes/empire/conf:95
 msgid "Wood Lance"
 msgstr "Lance en bois"
 
-#: ../../tribes/empire/conf:98
+#: ../../tribes/empire/conf:96
 msgid "Wool"
 msgstr "Laine"
 
-#: ../../tribes/empire/conf:101
+#: ../../tribes/empire/conf:99
 msgid "Carrier"
 msgstr "Porteur"
 
-#: ../../tribes/empire/conf:102
+#: ../../tribes/empire/conf:100
 msgid "Donkey"
 msgstr "Âne"
 
-#: ../../tribes/empire/conf:105
+#: ../../tribes/empire/conf:103
 msgid "Soldier"
 msgstr "Soldat"
 
-#: ../../tribes/empire/conf:108
+#: ../../tribes/empire/conf:106
 msgid "Armorsmith"
 msgstr "Forgeron d'armures"
 
-#: ../../tribes/empire/conf:109
+#: ../../tribes/empire/conf:107
 msgid "Baker"
 msgstr "Boulanger"
 
-#: ../../tribes/empire/conf:110
+#: ../../tribes/empire/conf:108
 msgid "Brewer"
 msgstr "Brasseur"
 
-#: ../../tribes/empire/conf:111
+#: ../../tribes/empire/conf:109
 msgid "Builder"
 msgstr "Bâtisseur"
 
-#: ../../tribes/empire/conf:112
+#: ../../tribes/empire/conf:110
 msgid "Burner"
 msgstr "Brûleur"
 
-#: ../../tribes/empire/conf:113
+#: ../../tribes/empire/conf:111
 msgid "Carpenter"
 msgstr "Charpentier"
 
-#: ../../tribes/empire/conf:114
+#: ../../tribes/empire/conf:112
 msgid "Farmer"
 msgstr "Fermier"
 
-#: ../../tribes/empire/conf:115
+#: ../../tribes/empire/conf:113
 msgid "Fisher"
 msgstr "Pêcheur"
 
-#: ../../tribes/empire/conf:116
+#: ../../tribes/empire/conf:114
 msgid "Forester"
 msgstr "Garde forestier"
 
-#: ../../tribes/empire/conf:117
+#: ../../tribes/empire/conf:115
 msgid "Geologist"
 msgstr "Géologue"
 
-#: ../../tribes/empire/conf:118
+#: ../../tribes/empire/conf:116
 msgid "Hunter"
 msgstr "Chasseur"
 
-#: ../../tribes/empire/conf:119
+#: ../../tribes/empire/conf:117
 msgid "Innkeeper"
 msgstr "Aubergiste"
 
-#: ../../tribes/empire/conf:120
+#: ../../tribes/empire/conf:118
 msgid "Lumberjack"
 msgstr "Bûcheron"
 
-#: ../../tribes/empire/conf:121
+#: ../../tribes/empire/conf:119
 msgid "Master Miner"
 msgstr "Maître Mineur"
 
-#: ../../tribes/empire/conf:122
+#: ../../tribes/empire/conf:120
 msgid "Miller"
 msgstr "Meunier"
 
-#: ../../tribes/empire/conf:123
+#: ../../tribes/empire/conf:121
 msgid "Miner"
 msgstr "Mineur"
 
-#: ../../tribes/empire/conf:124
+#: ../../tribes/empire/conf:122
 msgid "Pig Breeder"
 msgstr "Éleveur de cochons"
 
-#: ../../tribes/empire/conf:125
+#: ../../tribes/empire/conf:123
 msgid "Shepherd"
 msgstr "Berger"
 
-#: ../../tribes/empire/conf:126
+#: ../../tribes/empire/conf:124
 msgid "Shipwright"
 msgstr "Constructeur de navires"
 
-#: ../../tribes/empire/conf:127
+#: ../../tribes/empire/conf:125
 msgid "Smelter"
 msgstr "Fondeur"
 
-#: ../../tribes/empire/conf:128
+#: ../../tribes/empire/conf:126
 msgid "Stonemason"
 msgstr "Tailleur de pierre"
 
-#: ../../tribes/empire/conf:129
+#: ../../tribes/empire/conf:127
 msgid "Toolsmith"
 msgstr "Forgeron d'outils"
 
-#: ../../tribes/empire/conf:130
+#: ../../tribes/empire/conf:128
 msgid "Trainer"
 msgstr "Entraîneur"
 
-#: ../../tribes/empire/conf:131
+#: ../../tribes/empire/conf:129
 msgid "Weaponsmith"
 msgstr "Forgeron d'armes"
 
-#: ../../tribes/empire/conf:132
+#: ../../tribes/empire/conf:130
 msgid "Weaver"
 msgstr "Tisserand"
 
-#: ../../tribes/empire/conf:133
+#: ../../tribes/empire/conf:131
 msgid "Vine Farmer"
 msgstr "Vigneron"
 
-#: ../../tribes/empire/conf:134
+#: ../../tribes/empire/conf:132
 msgid "Scout"
 msgstr "Éclaireur"
 
-#: ../../tribes/empire/conf:135
+#: ../../tribes/empire/conf:133
 msgid "Donkey Breeder"
 msgstr "Eleveur d'ânes"
 
-#: ../../tribes/empire/conf:138
+#: ../../tribes/empire/conf:136
 msgid "Ship"
 msgstr "Navire"
 
-#: ../../tribes/empire/conf:141
+#: ../../tribes/empire/conf:139
 msgid "Construction Site"
 msgstr "Site de Construction"
 
-#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:142
 msgid "Dismantle Site"
 msgstr "Démanteler le site"
 
-#: ../../tribes/empire/conf:147
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:207
 msgid "Castle"
 msgstr "Château"
 
-#: ../../tribes/empire/conf:148
+#: ../../tribes/empire/conf:146
 msgid "Guardhall"
 msgstr "Salle des gardes"
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:147
 msgid "Guardhouse"
 msgstr "Poste de garde"
 
-#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:148
 msgid "High Tower"
 msgstr "Haute tour"
 
-#: ../../tribes/empire/conf:151
+#: ../../tribes/empire/conf:149
 msgid "Small Tower"
 msgstr "Petite tour"
 
-#: ../../tribes/empire/conf:152
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:206
 msgid "Tower"
 msgstr "Tour"
 
-#: ../../tribes/empire/conf:153
-#: ../../tribes/empire/conf:206
+#: ../../tribes/empire/conf:151
+#: ../../tribes/empire/conf:204
 msgid "Barrier"
 msgstr "Barricade"
 
-#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:152
 msgid "Citadel"
 msgstr "Citadelle"
 
-#: ../../tribes/empire/conf:155
+#: ../../tribes/empire/conf:153
 msgid "Donjon"
 msgstr "Donjon"
 
-#: ../../tribes/empire/conf:156
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:208
 msgid "Fortress"
 msgstr "Forteresse"
 
-#: ../../tribes/empire/conf:157
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:155
+#: ../../tribes/empire/conf:202
 msgid "Sentry"
 msgstr "Sentinelle"
 
-#: ../../tribes/empire/conf:160
+#: ../../tribes/empire/conf:158
 msgid "Headquarters"
 msgstr "Quartier Général"
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:159
 msgid "Headquarters Shipwreck"
 msgstr "Quartier Général épave du navire"
 
-#: ../../tribes/empire/conf:162
+#: ../../tribes/empire/conf:160
 msgid "Warehouse"
 msgstr "Entrepôt"
 
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:161
 msgid "Port"
 msgstr "Port"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:164
 msgid "Quarry"
 msgstr "Carrière"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:165
 msgid "Lumberjack’s House"
 msgstr "Maison de bûcheron"
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:166
 msgid "Forester’s House"
 msgstr "Maison de garde forestier"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:167
 msgid "Fisher’s House"
 msgstr "Cabane de pêcheur"
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:168
 msgid "Hunter’s House"
 msgstr "Cabane de chasseur"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:169
 msgid "Well"
 msgstr "Puit"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:170
 msgid "Scout’s House"
 msgstr "Maison d'éclaireurs"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:171
 msgid "Stonemason’s House"
 msgstr "Marbrerie"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:172
 msgid "Sawmill"
 msgstr "Scierie"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:173
 msgid "Mill"
 msgstr "Moulin"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:174
 msgid "Bakery"
 msgstr "Boulangerie"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:175
 msgid "Brewery"
 msgstr "Brasserie"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:176
 msgid "Vineyard"
 msgstr "Vignoble"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:177
 msgid "Winery"
 msgstr "Pressoir"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:178
 msgid "Inn"
 msgstr "Auberge"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:179
 msgid "Tavern"
 msgstr "Taverne"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:180
 msgid "Charcoal Burner"
 msgstr "Charbonnier"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:181
 msgid "Smelting Works"
 msgstr "Fonderie"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:182
 msgid "Shipyard"
 msgstr "Chantier naval"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:183
 msgid "Toolsmithy"
 msgstr "Fabrique d'outils"
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:184
 msgid "Armor Smithy"
 msgstr "Forgeron d'armures"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:185
 msgid "Donkey Farm"
 msgstr "Elevage d'âne"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:186
 msgid "Sheep Farm"
 msgstr "Bergerie"
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:187
 msgid "Weaving Mill"
 msgstr "Atelier de tissage"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:188
 msgid "Piggery"
 msgstr "Porcherie"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:189
 msgid "Farm"
 msgstr "Ferme"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:190
 msgid "Weapon Smithy"
 msgstr "Fabrique d'armes"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:191
 msgid "Deep Marble Mine"
 msgstr "Mine de Marbre Profonde"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:192
 msgid "Marble Mine"
 msgstr "Mine de Marbre"
 
-#: ../../tribes/empire/conf:195
+#: ../../tribes/empire/conf:193
 msgid "Deep Coal Mine"
 msgstr "Mine de Charbon Profonde"
 
-#: ../../tribes/empire/conf:196
+#: ../../tribes/empire/conf:194
 msgid "Coal Mine"
 msgstr "Mine de charbon"
 
-#: ../../tribes/empire/conf:197
+#: ../../tribes/empire/conf:195
 msgid "Deep Iron Ore Mine"
 msgstr "Mine de Fer Profonde"
 
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:196
 msgid "Iron Ore Mine"
 msgstr "Mine de Fer"
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:197
 msgid "Deep Gold Mine"
 msgstr "Mine d'Or Profonde"
 
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:198
 msgid "Gold Mine"
 msgstr "Mine d'or"
 
-#: ../../tribes/empire/conf:205
+#: ../../tribes/empire/conf:203
 msgid "Barracks"
 msgstr "Caserne"
 
-#: ../../tribes/empire/conf:207
+#: ../../tribes/empire/conf:205
 msgid "Outpost"
 msgstr "Poste avancé"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:212
 msgid "Colosseum"
 msgstr "Colisée"
 
-#: ../../tribes/empire/conf:215
+#: ../../tribes/empire/conf:213
 msgid "Arena"
 msgstr "Arène"
 
-#: ../../tribes/empire/conf:216
+#: ../../tribes/empire/conf:214
 msgid "Training Camp"
 msgstr "Camp d'entraînement"
 
-#: ../../tribes/empire/conf:219
+#: ../../tribes/empire/conf:217
 msgid "Headquarters Medium"
 msgstr "Quartier Général Moyen"
 
-#: ../../tribes/empire/conf:220
+#: ../../tribes/empire/conf:218
 msgid "Castle Village"
 msgstr "Village fortifié"
+
+#: ../../tribes/empire/deep_goldmine/help.lua:17
+#: ../../tribes/empire/goldmine/help.lua:17
+msgid "Digs gold ore out of the ground in mountain terrain."
+msgstr ""
+
+#: ../../tribes/empire/deep_marblemine/help.lua:17
+msgid "Digs marble and stones out of the ground in mountain terrain."
+msgstr ""
+
+#: ../../tribes/empire/deep_oremine/help.lua:17
+#: ../../tribes/empire/oremine/help.lua:17
+msgid "Digs iron ore out of the ground in mountain terrain."
+msgstr ""
 
 #: ../../tribes/empire/donkey/conf:1
 msgid ""
@@ -1129,13 +1346,22 @@ msgstr ""
 msgid "Breeds cute and helpful donkeys"
 msgstr "Elève des ânes mignons et utiles"
 
-#: ../../tribes/empire/farm/conf:23
+#: ../../tribes/empire/donkeyfarm/help.lua:17
+msgid "Breeds donkeys for adding them to the transportation system."
+msgstr ""
+
+#: ../../tribes/empire/farm/conf:24
 msgid "Plant wheat"
 msgstr "Sème du blé"
 
-#: ../../tribes/empire/farm/conf:24
+#: ../../tribes/empire/farm/conf:25
 msgid "Harvest wheat"
 msgstr "Moissonne le blé"
+
+#: ../../tribes/empire/farm/help.lua:17
+#: ../../tribes/empire/vineyard/help.lua:17
+msgid "Sow and harvest wheat."
+msgstr ""
 
 #: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
@@ -1162,6 +1388,15 @@ msgstr ""
 msgid "Catches fish in the sea."
 msgstr "La pêche en mer."
 
+#: ../../tribes/empire/fishers_house/help.lua:17
+msgid "Fishes on the coast near the house."
+msgstr ""
+
+#: ../../tribes/empire/fishers_house/help.lua:18
+msgid ""
+"The fisher’s house needs water full of fish within the working radius."
+msgstr ""
+
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
@@ -1180,6 +1415,20 @@ msgstr ""
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
 msgstr "Plante des arbres."
+
+#: ../../tribes/empire/foresters_house/help.lua:17
+msgid "Plants trees in the surrounding area."
+msgstr ""
+
+#: ../../tribes/empire/foresters_house/help.lua:18
+msgid ""
+"The foresters’s house needs free space within the working radius to plant "
+"the trees."
+msgstr ""
+
+#: ../../tribes/empire/foresters_house/help.lua:30
+msgid "Calculaiton needed"
+msgstr ""
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1219,13 +1468,28 @@ msgstr ""
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder, "
-"the armor and the weapon smith. Make sure you always have some in reserve! "
-"It is produced by the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"Le marteau est un outil essentiel. Il est nécessaire au géologue, au "
-"bâtisseur, aux forgerons d'armures et d'armes. Assurez vous de toujours en "
-"avoir en réserve! Il est produit par le forgeron d'outils."
+
+#: ../../tribes/empire/headquarters/help.lua:16
+msgid "Accomodation for your people. Also stores your wares and tools."
+msgstr ""
+
+#: ../../tribes/empire/headquarters/help.lua:17
+msgid "The headquarters is your main building."
+msgstr ""
+
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:16
+msgid ""
+"Although this ship ran aground, it still serves as accomodation for your "
+"people. It also stores your wares and tools."
+msgstr ""
+
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
+msgid "The headquarters shipwreck is your main building."
+msgstr ""
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -1254,6 +1518,14 @@ msgstr ""
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Le chasseur apporte de la bonne viande aux colons."
+
+#: ../../tribes/empire/hunters_house/help.lua:17
+msgid "Hunts animals to produce meat."
+msgstr ""
+
+#: ../../tribes/empire/hunters_house/help.lua:18
+msgid "The hunter’s house needs animals to hunt within the working radius."
+msgstr ""
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1325,6 +1597,14 @@ msgstr ""
 msgid "Fells trees."
 msgstr "Abat des arbres."
 
+#: ../../tribes/empire/lumberjacks_house/help.lua:16
+msgid "Fell trees in the surrounding area and process them into logs."
+msgstr ""
+
+#: ../../tribes/empire/lumberjacks_house/help.lua:17
+msgid "The lumberjack's house needs trees to fell within the working radius."
+msgstr ""
+
 #: ../../tribes/empire/marble/conf:1
 msgid ""
 "Marble is the beautiful stone which is cut out of the mountains or produced "
@@ -1354,6 +1634,10 @@ msgstr "Mine de marbre"
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine stone"
 msgstr "Mine de pierre"
+
+#: ../../tribes/empire/marblemine/help.lua:17
+msgid "Carve marble and stones out of the rock in mountain terrain."
+msgstr ""
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
@@ -1413,6 +1697,14 @@ msgstr ""
 "soldat de l'Empire. Elle est fabriquée par le forgeron d'armures et utilisée "
 "au champ d'entraînement - avec de la nourriture - pour entrainer la santé "
 "des soldats du niveau 3 au niveau 4."
+
+#: ../../tribes/empire/quarry/help.lua:17
+msgid "Carves marble and stone out of rocks in the vicinity."
+msgstr ""
+
+#: ../../tribes/empire/quarry/help.lua:17
+msgid "The quarry needs stones to cut within the working radius."
+msgstr ""
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -1505,6 +1797,10 @@ msgstr "Fait fondre du fer"
 #: ../../tribes/empire/smelting_works/conf:27
 msgid "Smelt gold"
 msgstr "Fait fondre de l'or"
+
+#: ../../tribes/empire/smelting_works/help.lua:17
+msgid "Smelts iron ore into iron and gold ore into gold."
+msgstr ""
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -1615,15 +1911,27 @@ msgstr "Améliore la santé des soldats du niveau 2 au niveau 3"
 msgid "Upgrade soldier health from level 3 to level 4"
 msgstr "Améliore la santé des soldats du niveau 3 au niveau 4"
 
+#: ../../tribes/empire/trainingcamp/help.lua:19
+msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/help.lua:27
+msgid "Attack Training:"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/help.lua:32
+msgid "Health Training:"
+msgstr ""
+
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
 msgstr "Cultive la vigne."
 
-#: ../../tribes/empire/vineyard/conf:23
+#: ../../tribes/empire/vineyard/conf:24
 msgid "Plant vine"
 msgstr "Plante de la vigne"
 
-#: ../../tribes/empire/vineyard/conf:24
+#: ../../tribes/empire/vineyard/conf:25
 msgid "Harvest vine"
 msgstr "Vendange la vigne"
 
@@ -1637,6 +1945,10 @@ msgstr ""
 "l'Empire aient créé pour les guerriers. Elle est utilisée dans les camps "
 "d'entraînement - avec de la nourriture - pour entraîner les soldats en "
 "attaque du niveau 3 au niveau 4."
+
+#: ../../tribes/empire/warehouse/help.lua:16
+msgid "Warehouses store soldiers, wares and tools."
+msgstr ""
 
 #: ../../tribes/empire/water/conf:1
 msgid ""
@@ -1675,6 +1987,14 @@ msgstr "Produit des lances de guerre"
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
 msgstr "Produit du tissu pour les bateaux et les soldats."
+
+#: ../../tribes/empire/weaving-mill/help.lua:17
+msgid "Weaves cloth out of wool."
+msgstr ""
+
+#: ../../tribes/empire/well/help.lua:18
+msgid "Draws water out of the deep."
+msgstr ""
 
 #: ../../tribes/empire/wheat/conf:1
 msgid ""

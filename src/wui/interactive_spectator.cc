@@ -77,7 +77,7 @@ Interactive_Spectator::Interactive_Spectator
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 
-	// TODO : instead of making unneeded buttons invisible after generation,
+	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	if (is_multiplayer()) {
 		m_exit.set_visible(false);

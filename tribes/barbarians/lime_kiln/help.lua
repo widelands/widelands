@@ -1,7 +1,7 @@
 -- The Barbarian Lime Kiln
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘Forming new stone from old with fire and water.’]], _[[Ragnald the Child’s answer to the question, what he’s doing in the dirt. His ‘new stone’ now is an important building material.]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "grout",
+	building_help_general_string("barbarians", building_description,
 		_[[The Lime Kiln processes Raw Stones to make ‘Grout’, a substance that solidifies and so reinforces masonry.]],
 		_"The Lime Kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites.") ..
 

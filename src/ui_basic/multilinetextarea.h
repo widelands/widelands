@@ -83,7 +83,7 @@ private:
 	ScrollMode  m_scrollmode;
 
 protected:
-	virtual void layout() override;
+	void layout() override;
 
 	Align        m_align;
 	std::string  m_fontname;

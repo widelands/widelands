@@ -114,9 +114,9 @@ void terminate(int) {
 
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
- * \todo Handle exception FileType_error
- * \todo Handle case when \e no data can be found
  */
+// TODO(unknown): Handle exception FileType_error
+// TODO(unknown): Handle case when \e no data can be found
 void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
@@ -137,7 +137,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
 	catch (FileType_error &) {
-		//TODO: handle me
+		//TODO(unknown): handle me
 	}
 
 	try {
@@ -152,7 +152,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
 	catch (FileType_error &) {
-		//TODO: handle me
+		//TODO(unknown): handle me
 	}
 
 	try {
@@ -170,10 +170,10 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
 	catch (FileType_error &) {
-		//TODO: handle me
+		//TODO(unknown): handle me
 	}
 
-	//TODO: what if all the searching failed? Bail out!
+	//TODO(unknown): what if all the searching failed? Bail out!
 
 	// the directory the executable is in is the default game data directory
 	std::string::size_type slash = argv0.rfind('/');
@@ -196,7 +196,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
 			catch (FileType_error &) {
-				//TODO: handle me
+				//TODO(unknown): handle me
 			}
 		}
 	}
@@ -216,7 +216,7 @@ void WLApplication::setup_homedir() {
 			log("Failed to add home directory: %s\n", e.what());
 		}
 	} else {
-		//TODO: complain
+		//TODO(unknown): complain
 	}
 }
 
@@ -235,9 +235,8 @@ WLApplication * WLApplication::the_singleton = nullptr;
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  * \return An (always valid!) pointer to the WLApplication singleton
- *
- * \todo Return a reference - the return value is always valid anyway
  */
+// TODO(unknown): Return a reference - the return value is always valid anyway
 WLApplication * WLApplication::get(int const argc, char const * * argv) {
 	if (the_singleton == nullptr)
 		the_singleton = new WLApplication(argc, argv);
@@ -321,8 +320,8 @@ m_redirected_stdio(false)
 
 /**
  * Shut down all subsystems in an orderly manner
- * \todo Handle errors that happen here!
  */
+// TODO(unknown): Handle errors that happen here!
 WLApplication::~WLApplication()
 {
 	//Do use the opposite order of WLApplication::init()
@@ -340,7 +339,7 @@ WLApplication::~WLApplication()
 
 	SDLNet_Quit();
 
-	TTF_Quit(); // TODO not here
+	TTF_Quit(); // TODO(unknown): not here
 
 	assert(g_fs);
 	delete g_fs;
@@ -359,11 +358,10 @@ WLApplication::~WLApplication()
 
 /**
  * The main loop. Plain and Simple.
- *
- * \todo Refactor the whole mainloop out of class \ref UI::Panel into here.
- * In the future: push the first event on the event queue, then keep
- * dispatching events until it is time to quit.
  */
+// TODO(unknown): Refactor the whole mainloop out of class \ref UI::Panel into here.
+// In the future: push the first event on the event queue, then keep
+// dispatching events until it is time to quit.
 void WLApplication::run()
 {
 	if (m_game_type == EDITOR) {
@@ -415,14 +413,14 @@ void WLApplication::run()
 				}
 				std::string realservername(server);
 				bool name_valid = false;
-				while (not name_valid) {
+				while (!name_valid) {
 					name_valid = true;
 					const std::vector<INet_Game> & hosts = InternetGaming::ref().games();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
 						if (hosts.at(i).name == realservername)
 							name_valid = false;
 					}
-					if (not name_valid)
+					if (!name_valid)
 						realservername += "*";
 				}
 
@@ -585,7 +583,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_MOUSEMOTION:
 			m_mouse_position = Point(ev.motion.x, ev.motion.y);
 
-			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
+			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move)
 				cb->mouse_move
 					(ev.motion.state,
 					 ev.motion.x,    ev.motion.y,
@@ -626,7 +624,7 @@ void WLApplication::_handle_mousebutton
 		//  check if any ALT Key is pressed and if, treat it like a left
 		//  mouse button.
 		if
-			(ev.button.button == SDL_BUTTON_MIDDLE and
+			(ev.button.button == SDL_BUTTON_MIDDLE &&
 			 (get_key_state(SDLK_LALT) || get_key_state(SDLK_RALT)))
 		{
 			ev.button.button = SDL_BUTTON_LEFT;
@@ -634,11 +632,11 @@ void WLApplication::_handle_mousebutton
 		}
 #endif
 
-		if (ev.type == SDL_MOUSEBUTTONDOWN && cb and cb->mouse_press)
+		if (ev.type == SDL_MOUSEBUTTONDOWN && cb && cb->mouse_press)
 			cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
 		else if (ev.type == SDL_MOUSEBUTTONUP) {
-			if (cb and cb->mouse_release) {
-				if (ev.button.button == SDL_BUTTON_MIDDLE and m_faking_middle_mouse_button) {
+			if (cb && cb->mouse_release) {
+				if (ev.button.button == SDL_BUTTON_MIDDLE && m_faking_middle_mouse_button) {
 					cb->mouse_release(SDL_BUTTON_LEFT, ev.button.x, ev.button.y);
 					m_faking_middle_mouse_button = false;
 				}
@@ -649,8 +647,8 @@ void WLApplication::_handle_mousebutton
 
 /**
  * Return the current time, in milliseconds
- * \todo Use our internally defined time type
  */
+// TODO(unknown): Use our internally defined time type
 // TODO(sirver): get rid of this method and use SDL_GetTicks() directly.
 int32_t WLApplication::get_time() {
 	uint32_t time = SDL_GetTicks();
@@ -692,7 +690,7 @@ void WLApplication::set_input_grab(bool grab)
 		SDL_WM_GrabInput(SDL_GRAB_ON);
 	} else {
 		SDL_WM_GrabInput(SDL_GRAB_OFF);
-		warp_mouse(m_mouse_position); //TODO: is this redundant?
+		warp_mouse(m_mouse_position); //TODO(unknown): is this redundant?
 	}
 }
 
@@ -954,7 +952,7 @@ bool WLApplication::init_hardware() {
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
-	g_sound_handler.init(); //  FIXME memory leak!
+	g_sound_handler.init(); //  TODO(unknown): memory leak!
 
 	return true;
 }
@@ -996,7 +994,7 @@ void WLApplication::shutdown_hardware()
 void WLApplication::parse_commandline
 	(int const argc, char const * const * const argv)
 {
-	//TODO: EXENAME gets written out on windows!
+	//TODO(unknown): EXENAME gets written out on windows!
 	m_commandline["EXENAME"] = argv[0];
 
 	for (int i = 1; i < argc; ++i) {
@@ -1042,7 +1040,7 @@ void WLApplication::handle_commandline_parameters()
 		m_logfile = m_commandline["logfile"];
 		std::cerr << "Redirecting log target to: " <<  m_logfile << std::endl;
 		if (m_logfile.size() != 0) {
-			//FIXME (very small) memory leak of 1 ofstream;
+			//TODO(unknown): (very small) memory leak of 1 ofstream;
 			//swaw the buffers (internally) of the file and wout
 			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
 			std::streambuf * logbuf = widelands_out->rdbuf();
@@ -1085,7 +1083,7 @@ void WLApplication::handle_commandline_parameters()
 
 	if (m_commandline.count("editor")) {
 		m_filename = m_commandline["editor"];
-		if (m_filename.size() and *m_filename.rbegin() == '/')
+		if (m_filename.size() && *m_filename.rbegin() == '/')
 			m_filename.erase(m_filename.size() - 1);
 		m_game_type = EDITOR;
 		m_commandline.erase("editor");
@@ -1095,7 +1093,7 @@ void WLApplication::handle_commandline_parameters()
 		if (m_game_type != NONE)
 			throw wexception("replay can not be combined with other actions");
 		m_filename = m_commandline["replay"];
-		if (m_filename.size() and *m_filename.rbegin() == '/')
+		if (m_filename.size() && *m_filename.rbegin() == '/')
 			m_filename.erase(m_filename.size() - 1);
 		m_game_type = REPLAY;
 		m_commandline.erase("replay");
@@ -1157,8 +1155,8 @@ void WLApplication::handle_commandline_parameters()
 		 it != commandline_end;
 		 ++it)
 	{
-		//TODO: barf here on unknown option; the list of known options
-		//TODO: needs to be centralized
+		// TODO(unknown): barf here on unknown option; the list of known options
+		// needs to be centralized
 
 		g_options.pull_section("global").create_val
 			(it->first.c_str(), it->second.c_str());
@@ -1463,7 +1461,7 @@ void WLApplication::mainmenu_multiplayer()
 				case Fullscreen_Menu_NetSetupLAN::JOINGAME: {
 					IPaddress peer;
 
-					if (not host_address)
+					if (!host_address)
 						throw warning
 							("Invalid Address", "%s",
 							 _("The address of the game server is invalid"));
@@ -1551,7 +1549,7 @@ bool WLApplication::new_game()
 			// the chat
 			game.set_ibase
 				(new Interactive_Player
-					(game, g_options.pull_section("global"), pn, false, false));
+					(game, g_options.pull_section("global"), pn, false));
 			std::unique_ptr<GameController> ctrl
 				(new SinglePlayerGameController(game, true, pn));
 			UI::ProgressWindow loaderUI;

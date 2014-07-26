@@ -45,7 +45,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 
 	enum Mode {Inbox, Archive};
 	void think() override;
-	virtual bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};

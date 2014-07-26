@@ -85,7 +85,7 @@ void Map_Road_Data_Packet::Write
 	for (; field < fields_end; ++field)
 		if (upcast(Road const, road, field->get_immovable())) // only roads
 			//  Roads can life on multiple positions.
-			if (not mos.is_object_known(*road))
+			if (!mos.is_object_known(*road))
 				fw.Unsigned32(mos.register_object(*road));
 	fw.Unsigned32(0xffffffff);
 

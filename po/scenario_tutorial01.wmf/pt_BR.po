@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-03-13 14:08+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:42+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:51+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: pt_BR\n"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:15
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
 msgstr "Movimentos mais suaves produzem melhores resultados"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:17
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:18
 msgid ""
 "I am sorry, but will I have to tear this down again. We might need the space "
 "here later on. If I am too slow for you, you might want to play a real game "
@@ -31,15 +31,15 @@ msgid ""
 "am not the youngest and quickest anymore."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:24
 msgid "Welcome to the Widelands Tutorial!"
 msgstr "Bem vindo ao tutorial do Widelands!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:28
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:26
 msgid "Welcome to Widelands!"
 msgstr "Bem vindo ao Widelands!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:30
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:27
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction, not destruction. This tutorial will guide you through the "
@@ -49,20 +49,20 @@ msgstr ""
 "na construção e não na destruição. Este tutorial irá lhe dar as bases para "
 "poder desfrutar melhor este jogo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:32
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:28
 msgid "Dismiss this box by left-clicking on the button below."
 msgstr ""
 "Pode fechar esta caixa ao clicar com o botão esquerdo no botão abaixo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:37
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:32
 msgid "Diving In"
 msgstr "Vamos a isso !"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:36
 msgid "Let’s dive right in!"
 msgstr "Mãos à obra !"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:37
 msgid ""
 "There are three different tribes in Widelands: the Barbarians, the Empire "
 "and the Atlanteans. All tribes have a different economy, strength and "
@@ -74,7 +74,7 @@ msgstr ""
 "fortes, mas de forma geral o modo de jogar é o mesmo. Por agora jogaremos "
 "com os Bárbaros."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:47
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:38
 msgid ""
 "You will usually start the game with one headquarters. This is the big "
 "building with the blue flag in front of it. The headquarters is a warehouse "
@@ -96,7 +96,7 @@ msgstr ""
 "esgotar o estoque de troncos. Para isto precisamos de um Lenhador e duma "
 "Cabana para ele morar."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:39
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
@@ -105,38 +105,38 @@ msgid ""
 "to toggle it."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:60
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:40
 msgid "Left-click the ‘OK’ button to close this box and then try it."
 msgstr ""
 "Clique em \"OK\" com o botão esquerdo do mouse para fechar a janela e então "
 "tente."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
 msgid "Enable the showing of building spaces"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:65
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:45
 msgid "Show Building Spaces"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:67
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:46
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:47
 msgid ""
 "Do so now either by pressing SPACE or by clicking the fourth button from the "
 "left at the very bottom of the screen. Right-click on this window and then "
 "give it a try."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:77
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:52
 msgid "Lumberjack’s Spot"
 msgstr "Local para o lenhador"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:81
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
 msgid ""
 "There you go. I will explain about all those symbols in a minute. First, let "
 "me show you how to make a lumberjack’s hut and how to connect it with a "
@@ -150,11 +150,11 @@ msgstr ""
 "Vou-lhe descrever os passos que tem que fazer e pedir-lhe que clique no "
 "botão \"OK\" para que eu lhe possa demonstrar."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:90
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:61
 msgid "Building the Lumberjack"
 msgstr "Construindo o lenhador"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be "
 "built. A window will appear where I can choose between buildings. Because "
@@ -171,7 +171,7 @@ msgstr ""
 "pequenos terei que selecionar a aba da esquerda. Nesse separador já posso "
 "selecionar a cabana do lenhador."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:100
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:65
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
@@ -179,11 +179,11 @@ msgstr ""
 "Clique no botão \"OK\" para você me ver. Vou fazer isto muito devagar: Vou "
 "clicar, selecionar a aba e finalmente irei escolher o edifício."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:107
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
 msgid "Building a Connecting Road"
 msgstr "Construindo uma estrada de ligação"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:110
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:73
 msgid ""
 "That won’t do yet. I still need to connect the lumberjack’s hut to the rest "
 "of my road network. After ordering the construction site, I was "
@@ -195,11 +195,11 @@ msgstr ""
 "automaticamente em modo de construir estradas por isso agora só tenho que "
 "clicar na bandeira azul em frente ao meu Quartel-general."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:78
 msgid "Waiting for the Lumberjack to Go Up"
 msgstr "Esperando o Lenhador começar a trabalhar"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:81
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
@@ -209,11 +209,11 @@ msgstr ""
 "local de construção. Também o carregador irá tomar posição entre as duas "
 "bandeiras azuis e transportar as mercadorias pela estrada entre as bandeiras."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:128
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:86
 msgid "Placing Another Flag"
 msgstr "Fincando outra bandeira"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:131
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:89
 msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) when we "
@@ -223,7 +223,7 @@ msgstr ""
 "caminho para percorrer. Podemos facilitar a vida para ele (e sermos mais "
 "eficientes) se colocarmos mais uma bandeira nessa estrada."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:90
 msgid ""
 "You try it this time: click on the yellow flag symbol in between the two "
 "blue flags we just placed and then click on the"
@@ -231,19 +231,19 @@ msgstr ""
 "Tente você agora: clique um símbolo amarelo de bandeira situado entre as "
 "duas bandeiras já existentes e sobre a estrada e clique no"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:135
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 msgid "build flag symbol."
 msgstr "símbolo de construção de bandeira"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:138
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:95
 msgid "Build a flag to divide the road to the lumberjack"
 msgstr "Construa uma bandeira para dividir a estrada para o lenhador"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:139
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:97
 msgid "Build a Flag on the Road"
 msgstr "Construa uma bandeira na estrada"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:140
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:98
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
@@ -253,7 +253,7 @@ msgstr ""
 "mercadorias. Por isso deve se certificar que as estradas têm o maior número "
 "de bandeiras possível."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:143
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:99
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
@@ -261,15 +261,15 @@ msgstr ""
 "Coloque agora um bandeira azul no meio da estrada que liga seu "
 "Quartel.general com a Cabana do Lenhador."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:148
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:104
 msgid "Waiting For the Hut to be Finished"
 msgstr "Esperando a cabana ser concluida"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:151
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:107
 msgid "Well done! Let’s wait till the hut is finished."
 msgstr "Muito bem! Vamos esperar até a cabana terminar."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:153
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:108
 msgid ""
 "If you want things to go faster, simply use the PAGE UP key on your keyboard "
 "to increase the game speed. You can use PAGE DOWN to make the game slower "
@@ -279,11 +279,11 @@ msgstr ""
 "para aumentar a velocidade do jogo. Você pode usar Page DOWN para diminuir a "
 "velocidade."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:113
 msgid "Lumberjack is Done"
 msgstr "Lenhador está pronto"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:163
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:116
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our logs income is secured for now. Now on to "
@@ -293,15 +293,15 @@ msgstr ""
 "começará a derrubar árvores para que a produção de troncos fique assegurada "
 "por agora. Vamos agora ver a pedra bruta."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:171
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
 msgid "Some Stones Were Found"
 msgstr "Algumas pedras foram encontradas"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:172
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:122
 msgid "Getting a Quarry Up."
 msgstr "Construindo uma Pedreira"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:174
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:124
 msgid ""
 "Stones can be mined in granite mines, but the easier way is to build a "
 "quarry next to some stones lying around. As it happens, there is a pile of "
@@ -313,7 +313,7 @@ msgstr ""
 "rochedo a Oeste (à esquerda) do Quartel-general. Vou lhe ensinar como mover "
 "a vista da tela para esse local."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:178
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:125
 msgid ""
 "There are two ways to move your view. The first one is using the cursor keys "
 "on your keyboard. Go ahead and try this out."
@@ -321,21 +321,21 @@ msgstr ""
 "Existem duas maneiras de mover a visão da tela do Widelands. A primeira é "
 "usando as teclas de cursor (as das setas) de seu teclado."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:181
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:126
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
 msgstr ""
 "Para experimentar por si, clique no botão \"OK\" e depois use as teclas do "
 "cursor para mover a vista."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:185
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:129
 msgid "Move your view with the cursor keys"
 msgstr "Mexa sua visão com os cursores"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:186
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:131
 msgid "Moving Your View"
 msgstr "Mexendo sua visão"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:187
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:132
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are two ways to move your view in Widelands."
@@ -344,12 +344,12 @@ msgstr ""
 "completa de sua economia. Existem duas maneiras de você mover a visão do "
 "tela do Widelands."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:189
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:133
 msgid "The first one is to use the cursor keys on your keyboard."
 msgstr ""
 "A primeira é usando as teclas de cursor (as das setas) de seu teclado."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see "
@@ -358,18 +358,18 @@ msgstr ""
 "A segunda forma é a mais comum e rápida: clique e prenda o botão direito do "
 "mouse algures no mapa e depois mova o rato para mover a tela."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:198
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:139
 msgid "Other Ways to Move the View"
 msgstr "Outros jeitos de mover a vista"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:141
 msgid ""
 "Excellent. Now there is a faster way to move, using the mouse instead:"
 msgstr ""
 "Excelente. Agora há uma forma mais rápida de se mover, dessa vez utilizando "
 "o mouse:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:142
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
@@ -378,30 +378,30 @@ msgstr ""
 "mapa, então arraste o mouse e, ao invés do cursor, a visão da tela se "
 "moverá. Faça um teste."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:207
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:145
 msgid "Move your view with the mouse"
 msgstr "Mexa sua visão com o mouse"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:212
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:150
 msgid "Onward to the Quarry"
 msgstr "Eu vou, eu vou ... para a pedreira"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:151
 msgid "Great. Now about that quarry..."
 msgstr "Ótimo. Agora, sobre aquela pedreira..."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:222
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "How to Build a Quarry"
 msgstr "Como construir uma pedreira"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:224
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:159
 msgid ""
 "Build a quarry next to those stones here. Remember how I did it earlier?"
 msgstr ""
 "Construa uma pedreira próximo dessas pedras aqui. Lembra-se de como eu fiz "
 "antes?"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:226
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space were you want the building to be, choose it from the window that "
@@ -414,35 +414,35 @@ msgstr ""
 "para explicar todos esses símbolos de ajuda para  construir que ativamos "
 "anteriormente."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:230
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:161
 msgid ""
 "You can build four things on fields in Widelands: Flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:163
 msgid "Everything can be built on the green house symbol."
 msgstr "Tudo pode ser construido no simbolo da casa verde."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:235
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
 msgstr ""
 "Tudo, exceto grandes construções, podem ser construídos no símbolo da casa "
 "amarela."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:237
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:165
 msgid "Red building symbols can only hold small buildings and flags."
 msgstr ""
 "Símbolos de edifícios vermelhos podem apenas permitir a construção de "
 "pequenas edificações e bandeiras."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:239
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:166
 msgid "And finally the yellow flag symbol only allows for flags."
 msgstr "E, finalmente, o símbolo de bandeira amarela só permite bandeiras."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:241
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
@@ -450,7 +450,7 @@ msgstr ""
 "Se você colocar qualquer coisa em um campo, os campos em volta dela terão "
 "menos espaço para outros edifícios, então escolha seus campo com sabedoria."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:244
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:171
 msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
@@ -460,15 +460,15 @@ msgstr ""
 "num simbolo de construção grande ou pequena, você deverá escolher as "
 "construções pequenas primeiro para achá-la. Continue e veja!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:250
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:174
 msgid "Build a quarry next to the stones"
 msgstr "Construa uma pedreira perto das pedras"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:251
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:176
 msgid "Build a Quarry"
 msgstr "Construa uma pedreira"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:252
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:177
 msgid ""
 "There are some stones to the west of your headquarters. Build a quarry right "
 "next to them."
@@ -476,7 +476,7 @@ msgstr ""
 "Existem alguns rochedos a Oeste de seu Quartel-general. Construa uma "
 "Pedreira ao pé deles."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:253
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:178
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
@@ -487,7 +487,7 @@ msgstr ""
 "vermelho,amarelo ou verde quando a Ajuda na Construção estiver ligada "
 "(pressione a barra de espaços para ligar/desligar essa ajuda)."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:257
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:179
 msgid ""
 "Just click on any house symbol next to the stones, select the small "
 "buildings tab in the window that opens up, then click on the quarry symbol."
@@ -495,13 +495,13 @@ msgstr ""
 "Clique num símbolo de casa junto às pedras, selecione a aba dos edifícios "
 "menores na janela que se abrir e depois clique na imagem da Pedreira."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:288
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:296
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:186
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:208
 msgid "Road Building"
 msgstr "Construindo estrada"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
@@ -514,11 +514,11 @@ msgstr ""
 "estradas para qualquer bandeira clicando com o botão esquerdo do mouse na "
 "bandeira e selecionando"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:272
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:190
 msgid "the road building symbol."
 msgstr "o símbolo de construção de estradas"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:274
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:192
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting"
@@ -527,11 +527,11 @@ msgstr ""
 "cancelar a construção clicando na bandeira do início da estrada e "
 "selecionando"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:193
 msgid "the abort symbol."
 msgstr "símbolo cancelar"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:279
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:195
 msgid ""
 "Now, about this road. Remember: we are already in road building mode since "
 "you just ordered the quarry. You can either make it longer by one field at a "
@@ -543,14 +543,14 @@ msgstr ""
 "passo fazendo clique esquerdo no passo seguinte para você ter o controle "
 "total da rota que a estrada segue, dessa maneira:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:290
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:203
 msgid ""
 "Or, you can directly click the flag where the road should end like so:"
 msgstr ""
 "Outra forma de fazer isso é clicar diretamente na bandeira onde você deseja "
 "que o caminho termine."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:298
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:210
 msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
@@ -558,14 +558,14 @@ msgstr ""
 "Outra coisa: à volta do campo onde a sua estrada devia terminar pode ver "
 "diferentes marcadores. Eles têm os seguintes significados:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:212
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr ""
 "O terreno é plano aqui. Os seus carragadores serão bastante velozes neste "
 "terreno."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:303
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
@@ -573,7 +573,7 @@ msgstr ""
 "Há uma pequena subida para alcançar este terreno. Isto significa que seus "
 "trabalhadores serão mais rápidos descendo do que subindo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
@@ -581,7 +581,7 @@ msgstr ""
 "A ligação entre os terrenos é demasiado inclinada. O aumento de velocidade a "
 "descer é enorme e a subir a desaceleração também é substancial."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:309
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:216
 msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as "
@@ -592,7 +592,7 @@ msgstr ""
 "bandeiras para dividir a estrada no maior número de segmentos possíveis para "
 "distribuir as tarefas de transporte."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:313
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:217
 msgid ""
 "Now please rebuild the road between your quarry and your headquarters. We’ll "
 "wait until the quarry is completed."
@@ -600,15 +600,15 @@ msgstr ""
 "Agora reconstrua a estrada entre sua pedreira e seu quartel. Nós iremos "
 "esperar até a pedreira estar completa."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:317
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:220
 msgid "Connect the quarry to the headquarters"
 msgstr "Conecte a pedreira com o quartel-general"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:222
 msgid "Connect Your Construction Site"
 msgstr "Conecte seu canteiro de obras"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:319
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:223
 msgid ""
 "Connect your quarry construction site to your headquarters with a road. You "
 "would have been put directly into road building mode after ordering a new "
@@ -618,7 +618,7 @@ msgstr ""
 "estrada. Tu estás diretamente no modo construção de estradas quando ordenas "
 "uma nova obra. Mas agora tu não estás."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:322
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:224
 msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
@@ -629,12 +629,12 @@ msgstr ""
 "em frente ao quartel-general. Aguarde o término da construção da casa do "
 "pedreiro."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:330
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:349
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:229
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Census and Statistics"
 msgstr "Censo e estatisticas"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:332
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:231
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. All "
 "construction sites look the same, and some buildings look alike. It is "
@@ -649,7 +649,7 @@ msgstr ""
 "isso os Censos que podem ser ligados/desligados através da tecla 'c' ou "
 "através de um botão no separador Vigiar quando se clica no terreno."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:337
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:232
 msgid ""
 "Similar to this are the building statistics, which are also toggled via a "
 "button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This will "
@@ -661,7 +661,7 @@ msgstr ""
 "atalho é 's'. Esta opção irá apresentar uma linha de informação sobre a "
 "produtividade do edifício ou o progresso da construção de uma obra."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:341
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid ""
 "Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the keys. "
 "Alternatively, you can click on any field without a building on it, select "
@@ -672,21 +672,21 @@ msgstr ""
 "um edifício, selecionar o separador Vigiar e depois clicar nos botões "
 "correspondentes."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:351
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:239
 msgid "Now we know what’s going on. Let’s wait for this quarry to finish."
 msgstr ""
 "Agora já sabemos o que está se passando. Vamos esperar que a construção da "
 "Pedreira termine."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:244
 msgid "Introducing Messages"
 msgstr "Introduzindo mensagens"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:359
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:246
 msgid "Messages"
 msgstr "Mensagens"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:361
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:247
 msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
@@ -697,7 +697,7 @@ msgstr ""
 "minas vazias, ataques na sua tribo, ganho ou perda de construções militares, "
 "recursos achados..."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:365
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid ""
 "The message window can be toggled by the button on the very right at the "
 "bottom of the screen. This button will also change appearance whenever new "
@@ -709,7 +709,7 @@ msgstr ""
 "houver uma nova mensagem, mas soará também uma campainha assim que for "
 "recebida a nova mensagem."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:369
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:249
 msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
@@ -723,11 +723,11 @@ msgstr ""
 "entrada,  ativando a caixa de seleção na frente delas. Então, você pode "
 "clicar no"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:375
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:251
 msgid "archive message button to move them into your archive."
 msgstr "botão Arquivar mensagens Seleccionadas para movê-las para o Arquivo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:377
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:253
 msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
@@ -735,15 +735,15 @@ msgstr ""
 "Arquivar todas as mensagens, incluindo esta, que você tem atualmente em sua  "
 "caixa de entrada."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:256
 msgid "Archive all messages in your inbox"
 msgstr "Arquivar todas as mensagens em sua caixa de entrada"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:382
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:258
 msgid "Archive Your Inbox Messages"
 msgstr "Arquivar nossas mensagens da caixa de entrada"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:383
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:259
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
@@ -753,11 +753,11 @@ msgstr ""
 "sua tribo. Mas você recebe muitas mensagens num jogo real. Para não ficar "
 "baralhado tente manter a sua caixa de correio vazia. "
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:387
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Archive all your messages in your inbox now."
 msgstr "Vamos arquivar agora suas mensagens da caixa de entrada."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:261
 msgid ""
 "To do so, open the message window by pressing ‘n’ or clicking the rightmost "
 "button at the very bottom of the screen. Then mark all messages by checking "
@@ -767,12 +767,12 @@ msgstr ""
 "tela. Depois selecione todas as mensagens marcando a caixa de verificação em "
 "frente delas. No fim clica no botão 'Arquivar mensagens Selecionadas'."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:398
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:420
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:285
 msgid "Closing Windows"
 msgstr "Fechando janelas"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:270
 msgid ""
 "Excellent. By the way: closing windows in Widelands is as easy as right-"
 "clicking on them. This will work with all windows except for story message "
@@ -782,7 +782,7 @@ msgstr ""
 "clicar com o botão direito do mouse nelas. Isso funciona com todas as "
 "janelas, exceto janelas de história, como essa aqui. Vá em frente e tente."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:403
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:271
 msgid ""
 "First, close this window by pressing the button below, then right-click into "
 "the messages window to close it."
@@ -790,15 +790,15 @@ msgstr ""
 "Primeiro, feche essa janela apertando o botão abaixo, então clique com o "
 "botão direito na janela de mensagens para fechá-la."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:274
 msgid "Close the messages window"
 msgstr "Fechar a janela de mensagens"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:408
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:276
 msgid "Close the Messages Window"
 msgstr "Fechar a janela de mensagens"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:409
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons at the very bottom of the "
@@ -808,12 +808,12 @@ msgstr ""
 "direito do mouse nelas. Algumas  janelas também podem ser alternadas usando "
 "os botões situados na parte inferior da tela."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Close the messages window now by right-clicking into it."
 msgstr ""
 "Feche a janela de mensagens agora clicando nela com o botão direito do mouse."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:422
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:287
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all stones away from the poor stonemason in the quarry. He will "
@@ -825,11 +825,11 @@ msgstr ""
 "então enviar uma mensagem dizendo que não achou nada em sua area de trabalho "
 "na proxima vez que ele tentar trabalhar."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:431
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:293
 msgid "Message Arrived!"
 msgstr "Chegou uma mensagem!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:433
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:295
 msgid ""
 "A message has been sent to you. See how the button at the bottom of the "
 "screen has changed appearance? You can burn this quarry down now as it is no "
@@ -839,15 +839,15 @@ msgstr ""
 "tela mudou de aparência? Você pode agora derrubar esta pedreira já que ela "
 "não possui mais nenhuma utilidade e está apenas ocupando espaço."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:296
 msgid "To do that, click on the quarry and select the destroy button."
 msgstr "Para fazer isto, clique na pedreira e selecione o botão destruir."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:441
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
 msgid "Expanding Your Territory!"
 msgstr "Expandindo seu território!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:443
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:303
 msgid ""
 "There is one more thing I’d like to teach you now: Expanding your territory. "
 "The place that we started with around our headquarters is barely enough for "
@@ -860,7 +860,7 @@ msgstr ""
 "montanha, a qual precisamos para minerar os recursos necessários. Por isso "
 "temos de expandir o nosso território."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:447
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The barbarians have a selection of different military buildings: "
@@ -877,7 +877,7 @@ msgstr ""
 "soldados podem ficar estacionados lá. O campo de visão das construções "
 "também varia: construções com torres enxergam mais longe que outras."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:454
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:305
 msgid ""
 "As soon as a military building is manned, it will extend your land. You can "
 "then burn it down again if you need the space. But note that your land is "
@@ -891,7 +891,7 @@ msgstr ""
 "pode conquistar a terra. Você  portanto, precisa de instalações militares "
 "para manter sua influência militar sobre essa terra."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:459
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
 "Let’s try it out now: build a few military buildings on your south-western "
 "border."
@@ -899,7 +899,7 @@ msgstr ""
 "Vamos tentar isto agora: Construa alguns edifícios militares junto à "
 "fronteira Sudoeste."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:461
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:307
 msgid ""
 "We want to capture some of this mountain so we can search for resources "
 "there. Bigger buildings will conquer more land, which can be beneficial "
@@ -909,15 +909,15 @@ msgstr ""
 "Edifícios maiores conquistarão mais território o que é benéfico quando se "
 "constrói junto às montanhas pois não se pode construí-los nas montanhas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:467
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:310
 msgid "Conquer an area were we can build mines"
 msgstr "Conquiste uma área em que podemos construir minas"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:468
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:312
 msgid "Conquer the Mountain to the South-West"
 msgstr "Conquiste a montanha no sudoeste"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:469
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:313
 msgid ""
 "For a full-fledged economy, we need coal, iron and gold. These can be found "
 "in mountains. Conquer some area on the mountains to the south-west of your "
@@ -928,7 +928,7 @@ msgstr ""
 "junto às montanhas, a Sudoeste do seu Quartel-general, construindo alguns "
 "edifícios militares junto à fronteira."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:473
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:314
 msgid ""
 "You can choose from the following military buildings: sentry, donjon, "
 "barrier and fortress. The bigger the building, the more expensive it is to "
@@ -942,11 +942,11 @@ msgstr ""
 "construções militares grandes são uteis perto de montanhas para que você "
 "alcance áreas mais acima."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:483
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:320
 msgid "Searching for Resources"
 msgstr "Procurando por recursos"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:485
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:322
 msgid ""
 "Okay, now we own some of the area on this mountain. Mountains are very "
 "important, because they contain resources: coal, iron ore, gold ore and "
@@ -958,7 +958,7 @@ msgstr ""
 "granito. Cada tribo usa estes recursos à sua maneira, mas todos necessitam "
 "minas para retirá-los da terra."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:323
 msgid ""
 "Let’s search for resources in this mountain. First, we’ll build a road onto "
 "the mountain and place a flag. Then, we will click on the flag and call a "
@@ -969,11 +969,11 @@ msgstr ""
 "clicamos na bandeira e chamamos um geólogo clicando no botão do Geólogo. Vou-"
 "lhe mostrar como se faz."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:329
 msgid "Waiting for the Geologist"
 msgstr "Esperando pelo geólogo"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:499
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:331
 msgid ""
 "The geologist will arrive at the flag shortly and start investigating the "
 "area in his surroundings. He will place the following markers for the "
@@ -983,66 +983,66 @@ msgstr ""
 "volta dela. Ele irá colocar os seguintes marcadores para os vários tipos de "
 "recursos:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:502
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:333
 msgid "a bit of coal"
 msgstr "Um pouco de carvão"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:503
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:334
 msgid "a lot of coal"
 msgstr "Muito carvão"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:504
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:335
 msgid "a bit of iron"
 msgstr "Um pouco de ferro"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:505
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:336
 msgid "a lot of iron"
 msgstr "Muito ferro"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:506
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:337
 msgid "a bit of gold"
 msgstr "Um pouco de ouro"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:507
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid "a lot of gold"
 msgstr "Muito ouro"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:509
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:339
 msgid "a bit of granite"
 msgstr "Um pouco de granito"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:511
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:340
 msgid "a lot of granite"
 msgstr "Muito granito"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:512
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:341
 msgid "water"
 msgstr "água"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:514
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:342
 msgid "nothing was found here"
 msgstr "Nada foi encontrado por aqui"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:516
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:343
 msgid "Let’s wait and see what the geologist finds on the mountain."
 msgstr "Vamos esperar e ver o que o geólogo acha na montanha."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:523
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:348
 msgid "Mining Conclusion"
 msgstr "Conclusão da mineração"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:525
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:350
 msgid ""
 "So our geologist found a lot of coal on this mountain. You should therefore "
 "build a coal mine here. Building a mine is like building a house. The "
 "building space symbol for where a mine can be built is"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:528
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:352
 msgid "this one."
 msgstr "Esse aqui"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:530
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:354
 msgid ""
 "Note that a mine needs rations to work. Rations are produced in taverns, and "
 "taverns need meat, pitta bread, and fish to produce them. You will need a "
@@ -1056,15 +1056,15 @@ msgstr ""
 "Essa infraestrutura tambem varia de tribo para tribo. Voce pode pegá-los "
 "explicados na campanha de introdução das três tribos."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:359
 msgid "Warfare and Training"
 msgstr "A guerra e a recruta militar"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:541
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:361
 msgid "Soldiers and Warfare"
 msgstr "Soldados e Guerra"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:542
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:362
 msgid ""
 "On to the last topic now. We are going to talk about soldiers, their "
 "training and their profession: warfare. As I mentioned, Widelands is about "
@@ -1076,17 +1076,14 @@ msgstr ""
 "isso fazer a guerra aqui é mais uma questão econômica do que estratégia "
 "militar."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:546
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:363
 msgid ""
 "Nevertheless, warfare offers one way of challenging other players, and it "
 "has some game mechanics that deserve explanation. The economies of the "
-"tribes are explained in their individual tutorial campaigns. "
+"tribes are explained in their individual tutorial campaigns."
 msgstr ""
-"Contudo, fazer a guerra é mais uma das formas de desafiar os adversários e "
-"tem uma mecânica que merece uma explicação mais detalhada. As economias das "
-"tribos estão explicadas em cada um dos tutoriais tribais. "
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:550
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:364
 msgid ""
 "Ok, I am going to create a little training ground for us with a training "
 "camp and a warehouse to the north east of here."
@@ -1094,7 +1091,7 @@ msgstr ""
 "Por isso agora vamos iniciar o recrutamento no Campo de treinos que vou "
 "construir a Nordeste do Quartel-general."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:552
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:365
 msgid ""
 "If you want to come back to this south-western part of your realm, just "
 "scroll here via right-button scrolling or open the minimap by clicking on the"
@@ -1102,15 +1099,15 @@ msgstr ""
 "Se você quer voltar a esta parte sudoeste do seu reino, basta rolar aqui via "
 "rolagem com botão direito ou abrindo o minimapa clicando no"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:555
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:367
 msgid "minimap button at the bottom of the screen."
 msgstr "botão do mini-mapa no menu na parte de baixo da tela."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:557
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:368
 msgid "Alternatively, you could also press ‘m’ on your keyboard."
 msgstr "Como alternativa você pode usar a tecla 'm' de seu teclado."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:559
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
@@ -1120,7 +1117,7 @@ msgstr ""
 "qualquer local clicando nele. Tu podes também ativar ou desativar os "
 "indicadores de casas, estradas, bandeiras e jogadores no minimapa."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:562
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:372
 msgid ""
 "But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted to "
 "build a small training scenario for you. Let’s do that now."
@@ -1129,11 +1126,11 @@ msgstr ""
 "fazer mesmo?  Ah, sim, eu queria construir um pequeno cenário de treinamento "
 "para você. Vamos fazer isso agora."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:571
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:378
 msgid "Trainings Camp and Soldier Stats"
 msgstr "Campos de treinamento e status do soldado"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:573
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:380
 msgid ""
 "Here we go. Take a look at the soldiers that are on their way into our "
 "training camp. They look different from normal workers: they have a health "
@@ -1142,7 +1139,7 @@ msgid ""
 "different categories health, attack, defense and evade."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:579
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid ""
 "A soldier is created like any normal worker: a carrier grabs a tool in a "
 "warehouse as soon as a request for a certain profession is not fulfilled. "
@@ -1156,7 +1153,7 @@ msgstr ""
 "machado. O soldado recém-criado é de nível 0. Para fazer com que o soldado "
 "melhore em qualquer das quatro categorias, é necessário treinamento."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:584
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:382
 msgid ""
 "Training happens in training sites like the training camp or the battle "
 "arena: soldiers go there (as our little fellows are currently doing), "
@@ -1166,21 +1163,21 @@ msgid ""
 "statistics have the following meaning:"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:589
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:383
 msgid "Health:"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:590
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:384
 msgid ""
 "The total life of a soldier. A barbarian soldier starts with ~130 health "
 "points, and with each health level he gains 28 health points."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:592
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:385
 msgid "Attack:"
 msgstr "Ataque:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:593
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:386
 msgid ""
 "The amount of damage a soldier will inflict on the enemy when an attack is "
 "successful. A barbarian soldier with attack level 0 inflicts ~14 points of "
@@ -1188,11 +1185,11 @@ msgid ""
 "he gains 7 damage points."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:596
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:387
 msgid "Defense:"
 msgstr "Defesa:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:597
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid ""
 "Defense is the value that is subtracted from the attack value. The "
 "barbarians cannot train in this skill and therefore have always defense "
@@ -1202,11 +1199,11 @@ msgid ""
 "are subtracted because of the defense ability."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid "Evade:"
 msgstr "Evasão:"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:603
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:390
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. It is 25% "
 "for a level 0 evade barbarian and increases in steps of 15% for each level."
@@ -1214,15 +1211,15 @@ msgstr ""
 "Evasão é a chance que o soldado tem de se esquivar de um ataque. É de 25% "
 "para um bárbaro com nível 0 de evasão e aumenta em 15% a cada nível."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:611
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:396
 msgid "Enhance This Fortress"
 msgstr "Melhore esta fortaleza"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:612
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:398
 msgid "Enhancing Buildings"
 msgstr "Evoluindo construções"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:613
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:399
 msgid ""
 "I will create an enemy for you soon, but first let’s make sure you are "
 "prepared. This fortress is already quite strong and conquers a lot of space. "
@@ -1232,7 +1229,7 @@ msgstr ""
 "preparado. Essa fortaleza já está forte e conquistou muito espaço. Mas tem "
 "uma construção ainda maior: a citadela."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:617
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
 "Citadels cannot be built directly. Instead, you will have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
@@ -1251,11 +1248,11 @@ msgstr ""
 "local da sua construção poderá  ser incendiado. Mas não se preocupe, isso "
 "não irá acontecer aqui."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:624
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:401
 msgid "Enhance your fortress to a citadel now."
 msgstr "Evolua sua fortaleza para uma cidadela agora."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:626
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:402
 msgid ""
 "Remember that you can speed time up by using PAGE_UP. Building a citadel "
 "takes a while."
@@ -1263,19 +1260,19 @@ msgstr ""
 "Lembre-se que você pode acelerar o  jogo usando a tecla PAGE_UP, construir "
 "uma cidadela demora um pouco."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:631
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "Enhance your fortress to a citadel"
 msgstr "Melhore sua fortaleza para uma citadela"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:632
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
 msgid "Enhance Your Fortress"
 msgstr "Melhore sua fortaleza"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:633
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:408
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "Evolua sua fortaleza para uma poderosa cidadela."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:409
 msgid ""
 "The citadel can house 12 soldiers and is the biggest military building the "
 "barbarians can build. It also costs a lot of resources and takes a long time "
@@ -1287,15 +1284,15 @@ msgstr ""
 "para ser construída. É mais adequada para guardar pontos estratégicos "
 "importantes como pontos estreitos ou montanhas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:415
 msgid "Defeat your enemy"
 msgstr "Derrote seu inimigo"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:417
 msgid "Defeat the Enemy"
 msgstr "Derrote o inimigo"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:646
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:418
 msgid ""
 "I have created a sparring partner for you: It is an empire tribe close to "
 "your citadel. To attack its buildings, click on the door of a target "
@@ -1311,7 +1308,7 @@ msgstr ""
 "redondezas. Da mesma forma, os defensores também sairão dos aquartelamentos "
 "mais próximo e interceptar as suas forças."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:652
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:419
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
@@ -1319,19 +1316,19 @@ msgstr ""
 "Ataque e conquiste todos os edifícios militares do inimigo e destrua o  "
 "quartel-general deles."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:656
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:422
 msgid "Defeat the enemy tribe"
 msgstr "Derrote a tribo inimiga"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:424
 msgid "Defeat Your Enemy"
 msgstr "Derrote seu inimigo"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:658
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:425
 msgid "Defeat the nearby enemy."
 msgstr "Derrote os inimigos próximos."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:660
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:426
 msgid ""
 "To attack a building, click on its doors, choose the number of attacking "
 "soldiers, then send them via the ‘Attack’ button."
@@ -1339,12 +1336,12 @@ msgstr ""
 "Para atacar uma construção, clique nas portas,  escolha o número de soldados "
 "para atacar, então mande-os via o botão de ataque."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:667
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:668
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:431
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:433
 msgid "Conclusion"
 msgstr "Conclusão"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:670
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:434
 msgid ""
 "This concludes the tutorial. There is some stuff we have not covered here – "
 "we have not even built a single production building even though producing "
@@ -1356,7 +1353,7 @@ msgstr ""
 "mercadorias apesar de estas serem a coisa mais importante no Widelands... "
 "mas pelo menos aprendemos o básico."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:435
 msgid ""
 "You can learn about the remaining stuff while you go through the individual "
 "tribes’ introduction campaigns. Each consists of some scenarios explaining "
@@ -1368,7 +1365,7 @@ msgstr ""
 "explicam as tribos, as suas diferentes economias ao mesmo tempo que "
 "introduzem a história de fundo do Widelands. Divirta-se jogando!"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:678
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 msgid ""
 "You can continue playing this map or you can end this game whenever you "
 "like. To leave this game and return to the main menu, click on the"
@@ -1376,17 +1373,17 @@ msgstr ""
 "Você pode continuar a jogar este mapa ou pode terminar de jogar a qualquer "
 "altura. Para sair do jogo e voltar ao Menu Principal clique em"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:681
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:438
 msgid ""
 "‘Options’ menu button on the very left at the bottom of the screen. Then "
 "click the"
 msgstr "botão do Menu Opções que é o mais à esquerda. Depois clique em"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:684
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:439
 msgid "‘Exit Game’ button."
 msgstr "sair do jogo."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:686
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:440
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at"
 msgstr ""
@@ -1397,7 +1394,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo Objetivo"

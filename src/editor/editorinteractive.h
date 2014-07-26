@@ -62,7 +62,7 @@ public:
 	void think() override;
 
 	void map_clicked(bool draw = false);
-	virtual void set_sel_pos(Widelands::Node_and_Triangle<>) override;
+	void set_sel_pos(Widelands::Node_and_Triangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 
 	//  Handle UI elements.

@@ -1,7 +1,7 @@
 -- =======================================================================
---                          ProductionSite Testings                         
+--                          ProductionSite Testings
 -- =======================================================================
-   
+
 function _cnt(i)
    local rv = 0
    for name,cnt in pairs(i) do rv = rv + cnt end
@@ -9,7 +9,7 @@ function _cnt(i)
 end
 
 -- ================
--- Worker creation 
+-- Worker creation
 -- ================
 productionsite_tests = lunit.TestCase("Productionsite Tests")
 function productionsite_tests:setup()
@@ -41,9 +41,9 @@ function productionsite_tests:test_name()
    assert_equal("lumberjacks_hut", self.lumberjack.name)
 end
 function productionsite_tests:test_type()
-   assert_equal("productionsite", self.inn.type)
-   assert_equal("productionsite", self.warmill.type)
-   assert_equal("productionsite", self.lumberjack.type)
+   assert_equal("productionsite", self.inn.descr.type_name)
+   assert_equal("productionsite", self.warmill.descr.type_name)
+   assert_equal("productionsite", self.lumberjack.descr.type_name)
 end
 function productionsite_tests:test_no_workers_initially()
    assert_equal(0, _cnt(self.inn:get_workers("all")))
@@ -236,4 +236,3 @@ function productionsite_tests:test_get_wares_non_existant_name()
       self.inn:get_wares{"meat", "balloon"}
    end)
 end
-

@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_CRITTER_BOB_H
 #define WL_LOGIC_CRITTER_BOB_H
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 
@@ -34,16 +35,18 @@ struct Critter_BobProgram;
 //
 // Description
 //
-struct Critter_Bob_Descr : public BobDescr {
+struct Critter_Bob_Descr : BobDescr {
 	Critter_Bob_Descr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr *);
+		(char const* const _name,
+		 char const* const _descname,
+		 const std::string& directory,
+		 Profile& prof,
+		 Section& global_s,
+		 Tribe_Descr & _tribe);
 	Critter_Bob_Descr(const LuaTable&);
-	virtual ~Critter_Bob_Descr();
+	~Critter_Bob_Descr() override;
 
 	Bob & create_object() const override;
-	std::string type() const override {return "critterbob";}
 
 	bool is_swimming() const;
 	uint32_t movecaps() const override;
@@ -56,6 +59,7 @@ private:
 	DirAnimations m_walk_anims;
 	typedef std::map<std::string, Critter_BobProgram *> Programs;
 	Programs      m_programs;
+	DISALLOW_COPY_AND_ASSIGN(Critter_Bob_Descr);
 };
 
 class Critter_Bob : public Bob {
@@ -67,14 +71,11 @@ class Critter_Bob : public Bob {
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
 
-	char const * type_name() const override {return "critter";}
-	virtual Bob::Type get_bob_type() const override {return Bob::CRITTER;}
-
-	virtual void init_auto_task(Game &) override;
+	void init_auto_task(Game &) override;
 
 	void start_task_program(Game &, const std::string & name);
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader*
 	load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
@@ -83,8 +84,8 @@ protected:
 	struct Loader : Bob::Loader {
 		Loader();
 
-		virtual const Task * get_task(const std::string & name) override;
-		virtual const BobProgramBase * get_program(const std::string & name) override;
+		const Task * get_task(const std::string & name) override;
+		const BobProgramBase * get_program(const std::string & name) override;
 	};
 
 private:

@@ -30,7 +30,7 @@ namespace Widelands {
 
 bool Requirements::check(const Map_Object & obj) const
 {
-	return !m or m->check(obj);
+	return !m || m->check(obj);
 }
 
 #define REQUIREMENTS_VERSION 3
@@ -116,9 +116,11 @@ void RequireOr::add(const Requirements & req)
 
 bool RequireOr::check(const Map_Object & obj) const
 {
-	container_iterate_const(std::vector<Requirements>, m, i)
-		if (i.current->check(obj))
+	for (const Requirements& req : m) {
+		if (req.check(obj)) {
 			return true;
+		}
+	}
 
 	return false;
 }
@@ -130,8 +132,9 @@ void RequireOr::write
 	assert(m.size() == static_cast<uint16_t>(m.size()));
 	fw.Unsigned16(m.size());
 
-	container_iterate_const(std::vector<Requirements>, m, i)
-		i.current->Write(fw, egbase, mos);
+	for (const Requirements& req : m) {
+		req.Write(fw, egbase, mos);
+	}
 }
 
 static Requirements readOr
@@ -159,10 +162,11 @@ void RequireAnd::add(const Requirements & req)
 
 bool RequireAnd::check(const Map_Object & obj) const
 {
-	container_iterate_const(std::vector<Requirements>, m, i)
-		if (!i.current->check(obj))
+	for (const Requirements& req : m) {
+		if (!req.check(obj)) {
 			return false;
-
+		}
+	}
 	return true;
 }
 
@@ -173,8 +177,9 @@ void RequireAnd::write
 	assert(m.size() == static_cast<uint16_t>(m.size()));
 	fw.Unsigned16(m.size());
 
-	container_iterate_const(std::vector<Requirements>, m, i)
-		i.current->Write(fw, egbase, mos);
+	for (const Requirements& req : m) {
+		req.Write(fw, egbase, mos);
+	}
 }
 
 static Requirements readAnd
@@ -227,8 +232,8 @@ static Requirements readAttribute
 {
 	tAttribute const at  = static_cast<tAttribute>(fr.Unsigned32());
 	if
-		(at != atrHP and at != atrAttack and at != atrDefense and at != atrEvade
-		 and
+		(at != atrHP && at != atrAttack && at != atrDefense && at != atrEvade
+		 &&
 		 at != atrTotal)
 		throw game_data_error
 			(

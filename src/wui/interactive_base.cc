@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <boost/algorithm/string/join.hpp>
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
@@ -104,13 +105,12 @@ Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global
      m_road_build_player(0),
      m_label_speed_shadow(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
      m_label_speed(this, get_w(), 1, std::string(), UI::Align_TopRight),
+     unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
 		m_workarea_pics
 		{g_gr->images().get("pics/workarea123.png"), g_gr->images().get("pics/workarea23.png"),
-			g_gr->images().get("pics/workarea3.png"), g_gr->images().get("pics/workarea12.png"),
-			g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")},
-     unique_window_handler_(new UniqueWindowHandler())
-{
+		g_gr->images().get("pics/workarea3.png"), g_gr->images().get("pics/workarea12.png"),
+		g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")} {
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
 		(boost::bind(&Map_View::set_viewpoint, this, _1, true));
@@ -174,7 +174,7 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 	//  register sel overlay position
 	if (m_sel.triangles) {
 		assert
-			(center.triangle.t == TCoords<>::D or
+			(center.triangle.t == TCoords<>::D ||
 			 center.triangle.t == TCoords<>::R);
 		Widelands::MapTriangleRegion<> mr
 			(map, Area<TCoords<> >(center.triangle, m_sel.radius));
@@ -198,14 +198,14 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				if (upcast(Interactive_Player const, iplayer, igbase)) {
 					const Widelands::Player & player = iplayer->player();
 					if
-						(not player.see_all()
-						 and
+						(!player.see_all()
+						 &&
 						  (1
 						   >=
 						   player.vision
 							   (Widelands::Map::get_index
 								   (center.node, map.get_width()))
-						   or
+						   ||
 						   player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip("");
 				}
@@ -401,12 +401,19 @@ Draw debug overlay when appropriate.
 ===============
 */
 void Interactive_Base::draw_overlay(RenderTarget& dst) {
-	// Blit node information when in debug mode or if the chat window is on.
+
+	// Blit node information when in debug mode.
 	if (get_display_flag(dfDebug) || !dynamic_cast<const Game*>(&egbase())) {
 		static format node_format("(%i, %i)");
+
 		const std::string node_text = as_uifont
 			((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_SMALL);
-		dst.blit(Point(get_w() - 5, get_h() - 5), UI::g_fh1->render(node_text), CM_Normal, UI::Align_BottomRight);
+		dst.blit(
+			Point(get_w() - 5, get_h() - 5),
+			UI::g_fh1->render(node_text),
+			CM_Normal,
+			UI::Align_BottomRight
+		);
 	}
 
 	// Blit FPS when in debug mode.
@@ -593,7 +600,7 @@ void Interactive_Base::start_build_road
 	(Coords _start, Widelands::Player_Number const player)
 {
 	// create an empty path
-	assert(not m_buildroad);
+	assert(!m_buildroad);
 	m_buildroad = new CoordPath(_start);
 
 	m_road_build_player = player;
@@ -646,8 +653,8 @@ void Interactive_Base::finish_build_road()
 				(*new Widelands::Path(*m_buildroad));
 
 		if
-			(allow_user_input() and
-			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
+			(allow_user_input() &&
+			 (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)))
 		{
 			//  place flags
 			const Map & map = egbase().map();
@@ -722,9 +729,9 @@ bool Interactive_Base::append_build_road(Coords const field) {
 		{
 			Widelands::CheckStepLimited cstep;
 			{
-				const std::vector<Coords> & road_cp = m_buildroad->get_coords();
-				container_iterate_const(std::vector<Coords>, road_cp, i)
-					cstep.add_allowed_location(*i.current);
+				for (const Coords& coord : m_buildroad->get_coords()) {
+					cstep.add_allowed_location(coord);
+				}
 			}
 			map.findpath
 				(m_buildroad->get_start(), field, 0, path, cstep, Map::fpBidiCost);
@@ -788,7 +795,7 @@ void Interactive_Base::roadb_add_overlay()
 	OverlayManager & overlay_manager = map.overlay_manager();
 
 	// preview of the road
-	assert(not m_jobid);
+	assert(!m_jobid);
 	m_jobid = overlay_manager.get_a_job_id();
 	const CoordPath::Step_Vector::size_type nr_steps = m_buildroad->get_nsteps();
 	for (CoordPath::Step_Vector::size_type idx = 0; idx < nr_steps; ++idx) {
@@ -810,7 +817,7 @@ void Interactive_Base::roadb_add_overlay()
 	// build hints
 	Widelands::FCoords endpos = map.get_fcoords(m_buildroad->get_end());
 
-	assert(not m_road_buildhelp_overlay_jobid);
+	assert(!m_road_buildhelp_overlay_jobid);
 	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Widelands::FCoords neighb;
@@ -826,12 +833,15 @@ void Interactive_Base::roadb_add_overlay()
 		Widelands::BaseImmovable * const imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if
-				(not
-				 (dynamic_cast<const Widelands::Flag *>(imm)
-				  or
-				  (dynamic_cast<const Widelands::Road *>(imm)
-				   and
-				   (caps & Widelands::BUILDCAPS_FLAG))))
+				(!(
+					dynamic_cast<const Widelands::Flag *>(imm)
+					||
+					(
+						dynamic_cast<const Widelands::Road *>(imm)
+						&&
+						(caps & Widelands::BUILDCAPS_FLAG)
+					)
+				))
 				continue;
 		}
 
@@ -953,18 +963,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 
 void Interactive_Base::cmdLua(const std::vector<std::string> & args)
 {
-	std::string cmd;
-
-	// Drop lua, start with the second word
-	for
-		(wl_const_range<std::vector<std::string> >
-		 i(args.begin(), args.end());;)
-	{
-		cmd += i.front();
-		if (i.advance().empty())
-			break;
-		cmd += ' ';
-	}
+	const std::string cmd = boost::algorithm::join(args, " ");
 
 	DebugConsole::write("Starting Lua interpretation!");
 	try {

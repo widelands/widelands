@@ -1,7 +1,7 @@
 -- "The Barbarian Gold Mine"
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 
@@ -13,7 +13,7 @@ return {
 	building_help_lore_string("barbarians", building_description, _[[‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ...’]], _[[Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.]]) ..
 
 	--General Section
-	building_help_general_string("barbarians", building_description, "goldore",
+	building_help_general_string("barbarians", building_description,
 		_"Digs gold ore out of the ground in mountain terrain.",
 		_"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore.":bformat("1/3")) ..
 

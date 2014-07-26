@@ -52,10 +52,10 @@ private:
 	void toggle_statistics();
 	void exit_btn();
 	void save_btn();
-	virtual bool can_see(Widelands::Player_Number) const override;
-	virtual bool can_act(Widelands::Player_Number) const override;
-	virtual Widelands::Player_Number player_number() const override;
-	virtual void node_action() override;
+	bool can_see(Widelands::Player_Number) const override;
+	bool can_act(Widelands::Player_Number) const override;
+	Widelands::Player_Number player_number() const override;
+	void node_action() override;
 
 private:
 	UI::Button m_toggle_chat;

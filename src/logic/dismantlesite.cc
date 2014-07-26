@@ -40,9 +40,10 @@ DismantleSite_Descr::DismantleSite_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
-: Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
+	:
+	Building_Descr(Map_Object_Type::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
 {
-	add_attribute(Map_Object::CONSTRUCTIONSITE); // Yep, this is correct.
+	add_attribute(Map_Object::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }
 
 Building & DismantleSite_Descr::create_object() const {
@@ -177,11 +178,11 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
-	if (not m_work_steps) //  Happens for building without buildcost.
+	if (!m_work_steps) //  Happens for building without buildcost.
 		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed
-	if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) >= 0 and m_working) {
+	if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) >= 0 && m_working) {
 		++m_work_completed;
 
 		for (uint32_t i = 0; i < m_wares.size(); ++i) {
@@ -217,7 +218,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 				 worker.descr().get_right_walk_anims(false),
 				 true);
 		worker.set_location(nullptr);
-	} else if (not m_working) {
+	} else if (!m_working) {
 		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle
 			(game, worker.descr().get_animation("work"), DISMANTLESITE_STEP_TIME);

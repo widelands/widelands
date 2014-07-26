@@ -114,7 +114,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
 
 	// If we tried opengl and it was not successful try without opengl
-	if (!sdlsurface and opengl)
+	if (!sdlsurface && opengl)
 	{
 		log("Graphics: Could not set videomode: %s, trying without opengl\n", SDL_GetError());
 		flags &= ~SDL_OPENGL;
@@ -138,7 +138,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	// setting the videomode was successful. Print some information now
 	log("Graphics: Setting video mode was successful\n");
 
-	if (opengl and 0 != (sdlsurface->flags & SDL_GL_DOUBLEBUFFER))
+	if (opengl && 0 != (sdlsurface->flags & SDL_GL_DOUBLEBUFFER))
 		log("Graphics: OPENGL DOUBLE BUFFERING ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
@@ -220,7 +220,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 
 		// extensions will be valid if we ever succeeded in runnning glewInit.
 		m_caps.gl.tex_power_of_two =
-			(m_caps.gl.major_version < 2) and
+			(m_caps.gl.major_version < 2) &&
 			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == nullptr);
 		log("Graphics: OpenGL: Textures ");
 		log
@@ -228,7 +228,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 			 "may have any size\n");
 
 		m_caps.gl.multitexture =
-			 ((strstr(extensions, "GL_ARB_multitexture") != nullptr) and
+			 ((strstr(extensions, "GL_ARB_multitexture") != nullptr) &&
 			  (strstr(extensions, "GL_ARB_texture_env_combine") != nullptr));
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
@@ -336,7 +336,7 @@ bool Graphic::check_fallback_settings_in_effect()
 void Graphic::cleanup() {
 	m_maptextures.clear();
 	surface_cache_->flush();
-	// TODO: this should really not be needed, but currently is :(
+	// TODO(unknown): this should really not be needed, but currently is :(
 	if (UI::g_fh)
 		UI::g_fh->flush();
 
@@ -386,7 +386,7 @@ RenderTarget * Graphic::get_render_target()
 void Graphic::toggle_fullscreen()
 {
 	log("Try SDL_WM_ToggleFullScreen...\n");
-	// TODO: implement proper fullscreening here. The way it can work is to
+	// TODO(unknown): implement proper fullscreening here. The way it can work is to
 	// recreate SurfaceCache but keeping ImageCache around. Then exiting and
 	// reinitalizing the SDL Video Mode should just work: all surface are
 	// recreated dynamically and correctly.
@@ -443,7 +443,7 @@ void Graphic::refresh(bool force)
 		return;
 	}
 
-	if (force or m_update_fullscreen) {
+	if (force || m_update_fullscreen) {
 		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 		SDL_Flip(m_sdl_screen);
 	} else

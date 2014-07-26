@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_TRAININGSITE_H
 #define WL_LOGIC_TRAININGSITE_H
 
+#include "base/macros.h"
 #include "logic/productionsite.h"
 #include "logic/soldiercontrol.h"
 #include "logic/tattribute.h"
@@ -35,10 +36,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
+	~TrainingSite_Descr() override {}
 
-	std::string type() const override {return "trainingsite";}
-
-	virtual Building & create_object() const override;
+	Building & create_object() const override;
 
 	uint32_t get_max_number_of_soldiers() const {
 		return m_num_soldiers;
@@ -53,9 +53,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_max_stall() const;
 
 private:
-	//  FIXME These variables should be per soldier type. They should be in a
-	//  FIXME struct and there should be a vector, indexed by Soldier_Index,
-	//  FIXME with that struct structs as element type.
+	//  TODO(unknown): These variables should be per soldier type. They should be in a
+	//  struct and there should be a vector, indexed by Soldier_Index,
+	//  with that struct structs as element type.
 
 	/** Maximum number of soldiers for a training site*/
 	uint32_t m_num_soldiers;
@@ -90,6 +90,7 @@ private:
 
 	// Re-use of m_inputs to get the resources
 	// TrainingMap m_programs;
+	DISALLOW_COPY_AND_ASSIGN(TrainingSite_Descr);
 };
 
 /**
@@ -121,15 +122,14 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(const TrainingSite_Descr &);
 
-	char const * type_name() const override {return "trainingsite";}
-	virtual std::string get_statistics_string() override;
+	std::string get_statistics_string() override;
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 
-	virtual void add_worker   (Worker &) override;
-	virtual void remove_worker(Worker &) override;
+	void add_worker   (Worker &) override;
+	void remove_worker(Worker &) override;
 
 	bool get_build_heroes() {
 		return m_build_heroes;
@@ -142,16 +142,16 @@ public:
 		molog("BUILD_HEROES: %s", m_build_heroes ? "TRUE" : "FALSE");
 	}
 
-	virtual void set_economy(Economy * e) override;
+	void set_economy(Economy * e) override;
 
 	// Begin implementation of SoldierControl
-	virtual std::vector<Soldier *> presentSoldiers() const override;
-	virtual std::vector<Soldier *> stationedSoldiers() const override;
-	virtual uint32_t minSoldierCapacity() const override;
-	virtual uint32_t maxSoldierCapacity() const override;
-	virtual uint32_t soldierCapacity() const override;
-	virtual void setSoldierCapacity(uint32_t capacity) override;
-	virtual void dropSoldier(Soldier &) override;
+	std::vector<Soldier *> presentSoldiers() const override;
+	std::vector<Soldier *> stationedSoldiers() const override;
+	uint32_t minSoldierCapacity() const override;
+	uint32_t maxSoldierCapacity() const override;
+	uint32_t soldierCapacity() const override;
+	void setSoldierCapacity(uint32_t capacity) override;
+	void dropSoldier(Soldier &) override;
 	int incorporateSoldier(Editor_Game_Base &, Soldier &) override;
 	// End implementation of SoldierControl
 
@@ -167,7 +167,7 @@ public:
 protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
-	virtual void program_end(Game &, Program_Result) override;
+	void program_end(Game &, Program_Result) override;
 
 private:
 	void update_soldier_request();
