@@ -14,7 +14,7 @@ log=2
 grout=1
 
 [working positions]
-burner=1
+charcoal_burner=1
 
 [inputs]
 log=8

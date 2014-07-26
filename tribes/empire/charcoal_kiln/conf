@@ -15,7 +15,7 @@ stone=1
 marble=1
 
 [working positions]
-burner=1
+charcoal_burner=1
 
 [inputs]
 log=8

@@ -12,7 +12,7 @@ icon=pics/icon.png
 # Entries in the columns separated by ,
 wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldore, gold;    pick, ax, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armor, chain_armor, plate_armor
 
-workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
+workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
@@ -107,7 +107,7 @@ armorsmith=_Armorsmith
 baker=_Baker
 brewer=_Brewer
 builder=_Builder
-burner=_Burner
+charcoal_burner=_Charcoal Burner
 carpenter=_Carpenter
 farmer=_Farmer
 fisher=_Fisher

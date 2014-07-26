@@ -57,8 +57,8 @@ return {
          workers = {
             brewer = 1,
             builder = 10,
-            burner = 1,
             carrier = 39,
+            charcoal_burner = 1,
             geologist = 4,
             lumberjack = 3,
             miner = 4,
