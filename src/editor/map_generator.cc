@@ -847,7 +847,7 @@ void MapGenerator::create_random_map()
 		}
 
 		if (coords.empty()) {
-			// TODO(unknown) inform players via popup
+			// TODO(unknown): inform players via popup
 			log("WARNING: Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;

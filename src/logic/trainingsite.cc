@@ -47,7 +47,7 @@ TrainingSite_Descr::TrainingSite_Descr
 	ProductionSite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe, world),
 
-	//  TODO(unknown) This is currently hardcoded for "soldier" but should allow any
+	//  TODO(unknown): This is currently hardcoded for "soldier" but should allow any
 	//  soldier type name.
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
 	m_max_stall (global_s.get_safe_int("trainer_patience")),
@@ -66,7 +66,7 @@ m_max_defense       (0),
 m_max_evade         (0)
 {
 	// Read the range of levels that can update this building
-	//  TODO(unknown) This is currently hardcoded to "soldier" but it should search for
+	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for
 	//  sections starting with the name of each soldier type.
 	//  These sections also seem redundant. Eliminate them (having the
 	//  programs should be enough).
@@ -737,7 +737,7 @@ void TrainingSite::add_upgrade
 void TrainingSite::calc_upgrades() {
 	assert(m_upgrades.empty());
 
-	//  TODO(unknown) This is currently hardcoded for "soldier" but it should allow any
+	//  TODO(unknown): This is currently hardcoded for "soldier" but it should allow any
 	//  soldier type name.
 	if (descr().get_train_hp())
 		add_upgrade(atrHP, "upgrade_soldier_hp_");

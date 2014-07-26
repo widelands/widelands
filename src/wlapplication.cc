@@ -339,7 +339,7 @@ WLApplication::~WLApplication()
 
 	SDLNet_Quit();
 
-	TTF_Quit(); // TODO(unknown) not here
+	TTF_Quit(); // TODO(unknown): not here
 
 	assert(g_fs);
 	delete g_fs;
@@ -952,7 +952,7 @@ bool WLApplication::init_hardware() {
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
-	g_sound_handler.init(); //  TODO(unknown) memory leak!
+	g_sound_handler.init(); //  TODO(unknown): memory leak!
 
 	return true;
 }
@@ -1040,7 +1040,7 @@ void WLApplication::handle_commandline_parameters()
 		m_logfile = m_commandline["logfile"];
 		std::cerr << "Redirecting log target to: " <<  m_logfile << std::endl;
 		if (m_logfile.size() != 0) {
-			//TODO(unknown) (very small) memory leak of 1 ofstream;
+			//TODO(unknown): (very small) memory leak of 1 ofstream;
 			//swaw the buffers (internally) of the file and wout
 			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
 			std::streambuf * logbuf = widelands_out->rdbuf();

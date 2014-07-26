@@ -767,7 +767,7 @@ void NetHost::run(bool const autorun)
 
 		while (!d->dedicated_start) {
 			handle_network();
-			// TODO(unknown) this should be improved.
+			// TODO(unknown): this should be improved.
 #ifndef _WIN32
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
@@ -1533,7 +1533,7 @@ void NetHost::setMap
 	broadcast(s);
 
 	// If possible, offer the map / saved game as transfer
-	// TODO(unknown) not yet able to handle directory type maps / savegames
+	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (!g_fs->IsDirectory(mapfilename)) {
 		// Read in the file
 		FileRead fr;
@@ -1977,7 +1977,7 @@ void NetHost::writeSettingAllUsers(SendPacket & packet)
 * \returns true if the data was written, else false
 */
 bool NetHost::writeMapTransferInfo(SendPacket & s, std::string mapfilename) {
-	// TODO(unknown) not yet able to handle directory type maps / savegames
+	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (g_fs->IsDirectory(mapfilename)) {
 		dedicatedlog("Map/Save is a directory! No way for making it available a.t.m.!\n");
 		return false;
