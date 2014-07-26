@@ -69,9 +69,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Compile Widelands
   compile_widelands () {
-    echo "Builds a debug build by default. If you want a Release build, "
-    echo "you will need to build it manually passing the"
-    echo "option -DCMAKE_BUILD_TYPE=\"Release\" to cmake"
+    echo "This script produces a Debug build by default. If you want a Release build, "
+    echo "please take a look at https://wl.widelands.org/wiki/BuildingWidelands/ "
+    echo "for instructions on how to adjust options and build with CMake."
 
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
       cmake -G Ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
