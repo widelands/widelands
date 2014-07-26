@@ -115,7 +115,7 @@ void Building_Window::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
-	const Animation& anim = g_gr->animations().get_animation(building().descr().get_ui_anim());
+	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
 
 	const Image* dark_frame = ImageTransformations::change_luminosity
 		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);

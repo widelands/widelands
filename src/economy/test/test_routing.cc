@@ -56,7 +56,7 @@ public:
 		return _neighbours[idx];
 	}
 
-	virtual Flag & base_flag() override {return _flag;}
+	Flag & base_flag() override {return _flag;}
 	void set_waitcost(int32_t const wc) {_waitcost = wc;}
 	int32_t get_waitcost() const {return _waitcost;}
 	const Coords & get_position() const override {return _position;}
