@@ -256,54 +256,6 @@ void Map_Object_Descr::add_animation
 	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }
 
-const char* Map_Object_Descr::type_name() const {
-
-	switch (type()) {
-		case Map_Object_Type::BOB:
-			return "bob";
-		case Map_Object_Type::CRITTER:
-			return "critter";
-		case Map_Object_Type::SHIP:
-			return "ship";
-		case Map_Object_Type::WORKER:
-			return "worker";
-		case Map_Object_Type::CARRIER:
-			return "carrier";
-		case Map_Object_Type::SOLDIER:
-			return "soldier";
-		case Map_Object_Type::WARE:
-			return "ware";
-		case Map_Object_Type::BATTLE:
-			return "battle";
-		case Map_Object_Type::FLEET:
-			return "fleet";
-		case Map_Object_Type::IMMOVABLE:
-			return "immovable";
-		case Map_Object_Type::FLAG:
-			return "flag";
-		case Map_Object_Type::ROAD:
-			return "road";
-		case Map_Object_Type::PORTDOCK:
-			return "portdock";
-		case Map_Object_Type::BUILDING:
-			return "building";
-		case Map_Object_Type::CONSTRUCTIONSITE:
-			return "constructionsite";
-		case Map_Object_Type::DISMANTLESITE:
-			return "dismantlesite";
-		case Map_Object_Type::WAREHOUSE:
-			return "warehouse";
-		case Map_Object_Type::PRODUCTIONSITE:
-			return "productionsite";
-		case Map_Object_Type::MILITARYSITE:
-			return "militarysite";
-		case Map_Object_Type::TRAININGSITE:
-			return "trainingsite";
-		default:
-			return "mapobject";
-	}
-}
-
 std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
 
 	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
@@ -599,6 +551,53 @@ void Map_Object::save
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
 
 	fw.Unsigned32(mos.get_object_file_index(*this));
+}
+
+std::string to_string(const Map_Object_Type type) {
+	switch (type) {
+	case Map_Object_Type::BOB:
+		return "bob";
+	case Map_Object_Type::CRITTER:
+		return "critter";
+	case Map_Object_Type::SHIP:
+		return "ship";
+	case Map_Object_Type::WORKER:
+		return "worker";
+	case Map_Object_Type::CARRIER:
+		return "carrier";
+	case Map_Object_Type::SOLDIER:
+		return "soldier";
+	case Map_Object_Type::WARE:
+		return "ware";
+	case Map_Object_Type::BATTLE:
+		return "battle";
+	case Map_Object_Type::FLEET:
+		return "fleet";
+	case Map_Object_Type::IMMOVABLE:
+		return "immovable";
+	case Map_Object_Type::FLAG:
+		return "flag";
+	case Map_Object_Type::ROAD:
+		return "road";
+	case Map_Object_Type::PORTDOCK:
+		return "portdock";
+	case Map_Object_Type::BUILDING:
+		return "building";
+	case Map_Object_Type::CONSTRUCTIONSITE:
+		return "constructionsite";
+	case Map_Object_Type::DISMANTLESITE:
+		return "dismantlesite";
+	case Map_Object_Type::WAREHOUSE:
+		return "warehouse";
+	case Map_Object_Type::PRODUCTIONSITE:
+		return "productionsite";
+	case Map_Object_Type::MILITARYSITE:
+		return "militarysite";
+	case Map_Object_Type::TRAININGSITE:
+		return "trainingsite";
+	default:
+		throw wexception("Unknown Map_Object_Type %d.", static_cast<int>(type));
+	}
 }
 
 }

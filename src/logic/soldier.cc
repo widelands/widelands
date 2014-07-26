@@ -76,8 +76,7 @@ Soldier_Descr::Soldier_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Worker_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	m_type      (Map_Object_Type::SOLDIER)
+	Worker_Descr(Map_Object_Type::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::Attribute::SOLDIER);
 

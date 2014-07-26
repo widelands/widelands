@@ -19,6 +19,8 @@
 
 #include "scripting/lua_map.h"
 
+#include <boost/format.hpp>
+
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "economy/wares_queue.h"
@@ -37,6 +39,7 @@
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "scripting/c_utils.h"
+#include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -585,44 +588,48 @@ int upcasted_map_object_to_lua(lua_State * L, Map_Object * mo) {
 	if (!mo)
 		return 0;
 
-	if (mo->descr().type() >= Map_Object_Type::IMMOVABLE) {
-		switch (mo->descr().type()) {
-			case Map_Object_Type::CONSTRUCTIONSITE:
-				return CAST_TO_LUA(ConstructionSite);
-			case Map_Object_Type::PRODUCTIONSITE:
-				return CAST_TO_LUA(ProductionSite);
-			case Map_Object_Type::MILITARYSITE:
-				return CAST_TO_LUA(MilitarySite);
-			case Map_Object_Type::WAREHOUSE:
-				return CAST_TO_LUA(Warehouse);
-			case Map_Object_Type::TRAININGSITE:
-				return CAST_TO_LUA(TrainingSite);
-			case Map_Object_Type::BUILDING:
-				return CAST_TO_LUA(Building);
-			case Map_Object_Type::FLAG:
-				return CAST_TO_LUA(Flag);
-			case Map_Object_Type::ROAD:
-				return CAST_TO_LUA(Road);
-			case Map_Object_Type::PORTDOCK:
-				return CAST_TO_LUA(PortDock);
-			default:
-				return CAST_TO_LUA(BaseImmovable);
-		}
-	}
-	else {
-		switch (mo->descr().type()) {
-			case Map_Object_Type::CRITTER:
-				return CAST_TO_LUA(Bob);
-			case Map_Object_Type::SOLDIER:
-				return CAST_TO_LUA(Soldier);
-			case Map_Object_Type::WORKER:
-				return CAST_TO_LUA(Worker);
-			case Map_Object_Type::SHIP:
-				return CAST_TO_LUA(Ship);
-			default:
-				assert(false);  // Never here, hopefully.
-				return 0;
-		}
+	switch (mo->descr().type()) {
+	case Map_Object_Type::CRITTER:
+		return CAST_TO_LUA(Bob);
+	case Map_Object_Type::SHIP:
+		return CAST_TO_LUA(Ship);
+	case Map_Object_Type::WORKER:
+		return CAST_TO_LUA(Worker);
+	case Map_Object_Type::CARRIER:
+		// TODO(sirver): not yet implemented
+		return CAST_TO_LUA(Worker);
+	case Map_Object_Type::SOLDIER:
+		return CAST_TO_LUA(Soldier);
+
+	case Map_Object_Type::IMMOVABLE:
+		return CAST_TO_LUA(BaseImmovable);
+
+	case Map_Object_Type::FLAG:
+		return CAST_TO_LUA(Flag);
+	case Map_Object_Type::ROAD:
+		return CAST_TO_LUA(Road);
+	case Map_Object_Type::PORTDOCK:
+		return CAST_TO_LUA(PortDock);
+
+	case Map_Object_Type::BUILDING:
+		return CAST_TO_LUA(Building);
+	case Map_Object_Type::CONSTRUCTIONSITE:
+		return CAST_TO_LUA(ConstructionSite);
+	case Map_Object_Type::DISMANTLESITE:
+		// TODO(sirver): not yet implemented.
+		return CAST_TO_LUA(Building);
+	case Map_Object_Type::WAREHOUSE:
+		return CAST_TO_LUA(Warehouse);
+	case Map_Object_Type::PRODUCTIONSITE:
+		return CAST_TO_LUA(ProductionSite);
+	case Map_Object_Type::MILITARYSITE:
+		return CAST_TO_LUA(MilitarySite);
+	case Map_Object_Type::TRAININGSITE:
+		return CAST_TO_LUA(TrainingSite);
+
+	default:
+		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
+		                static_cast<int>(mo->descr().type())).str());
 	}
 }
 #undef CAST_TO_LUA
@@ -1103,7 +1110,7 @@ int L_MapObjectDescription::get_representative_image(lua_State * L) {
 			(RO) the name of the building, e.g. building.
 */
 int L_MapObjectDescription::get_type_name(lua_State * L) {
-	lua_pushstring(L, get()->type_name());
+	lua_pushstring(L, to_string(get()->type()));
 	return 1;
 }
 

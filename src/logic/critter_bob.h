@@ -46,10 +46,6 @@ struct Critter_Bob_Descr : BobDescr {
 	Critter_Bob_Descr(const LuaTable&);
 	virtual ~Critter_Bob_Descr() override;
 
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
-
 	Bob & create_object() const override;
 
 	bool is_swimming() const;
@@ -60,7 +56,6 @@ struct Critter_Bob_Descr : BobDescr {
 
 
 private:
-	Map_Object_Type m_type;
 	DirAnimations m_walk_anims;
 	typedef std::map<std::string, Critter_BobProgram *> Programs;
 	Programs      m_programs;

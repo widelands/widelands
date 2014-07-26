@@ -62,14 +62,10 @@ struct Building_Descr : public Map_Object_Descr {
 	typedef std::vector<Building_Index> FormerBuildings;
 
 	Building_Descr
-		(char const * _name, char const * _descname,
+		(Map_Object_Type type, char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 	virtual ~Building_Descr() override {}
-
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
@@ -139,7 +135,6 @@ protected:
 	Building & create_constructionsite() const;
 
 private:
-	Map_Object_Type m_type;
 	const Tribe_Descr & m_tribe;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself

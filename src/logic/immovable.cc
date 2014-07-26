@@ -227,8 +227,7 @@ Immovable_Descr::Immovable_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const * const owner_tribe)
 :
-	Map_Object_Descr(_name, _descname),
-	m_type          (Map_Object_Type::IMMOVABLE),
+	Map_Object_Descr(Map_Object_Type::IMMOVABLE, _name, _descname),
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
@@ -284,10 +283,11 @@ Immovable_Descr::Immovable_Descr
 	}
 }
 
-Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world)
-   : Map_Object_Descr(table.get_string("name"), table.get_string("descname")),
-     m_size(BaseImmovable::NONE),
-     m_owner_tribe(nullptr)  // Can only parse world immovables for now.
+Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world) :
+	Map_Object_Descr(
+	Map_Object_Type::IMMOVABLE, table.get_string("name"), table.get_string("descname")),
+	m_size(BaseImmovable::NONE),
+	m_owner_tribe(nullptr)  // Can only parse world immovables for now.
 {
 	m_size = string_to_size(table.get_string("size"));
 	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {Map_Object::Attribute::RESI});

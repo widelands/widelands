@@ -48,8 +48,7 @@ MilitarySite_Descr::MilitarySite_Descr
 	 const World& world)
 	:
 	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe, world),
-	m_type               (Map_Object_Type::MILITARYSITE),
+		(Map_Object_Type::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
 	m_heal_per_second    (0)

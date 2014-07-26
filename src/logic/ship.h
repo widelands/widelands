@@ -44,10 +44,6 @@ struct Ship_Descr : BobDescr {
 		 const Tribe_Descr &);
 	virtual ~Ship_Descr() override {}
 
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
-
 	virtual Bob & create_object() const override;
 
 	virtual uint32_t movecaps() const override;
@@ -58,7 +54,6 @@ struct Ship_Descr : BobDescr {
 
 
 private:
-	Map_Object_Type m_type;
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
 	uint32_t m_vision_range;

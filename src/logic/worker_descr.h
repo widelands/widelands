@@ -45,14 +45,10 @@ public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
 	Worker_Descr
-		(char const * const name, char const * const descname,
+		(Map_Object_Type type, char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr &);
 	virtual ~Worker_Descr() override;
-
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
 
 	virtual Bob & create_object() const override;
 
@@ -135,8 +131,6 @@ protected:
 	Ware_Index  m_becomes;
 	Programs    m_programs;
 private:
-	Map_Object_Type m_type;
-
 	DISALLOW_COPY_AND_ASSIGN(Worker_Descr);
 };
 

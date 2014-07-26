@@ -118,10 +118,6 @@ struct Immovable_Descr : public Map_Object_Descr {
 	Immovable_Descr(const LuaTable&, const World&);
 	~Immovable_Descr() override;
 
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
-
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
 
@@ -156,8 +152,6 @@ protected:
 	Buildcost m_buildcost;
 
 private:
-	Map_Object_Type m_type;
-
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 

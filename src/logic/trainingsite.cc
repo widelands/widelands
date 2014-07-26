@@ -45,8 +45,7 @@ TrainingSite_Descr::TrainingSite_Descr
 	 const Tribe_Descr & _tribe, const World& world)
 	:
 	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe, world),
-	m_type              (Map_Object_Type::TRAININGSITE),
+		(Map_Object_Type::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
 	//  TODO(unknown) This is currently hardcoded for "soldier" but should allow any
 	//  soldier type name.
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),

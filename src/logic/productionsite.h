@@ -56,14 +56,10 @@ struct ProductionSite_Descr : public Building_Descr {
 	friend struct ProductionProgram; // To add animations
 
 	ProductionSite_Descr
-		(char const * name, char const * descname,
+		(Map_Object_Type type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &, const World&);
 	virtual ~ProductionSite_Descr() override;
-
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
 
 	virtual Building & create_object() const override;
 
@@ -103,7 +99,6 @@ struct ProductionSite_Descr : public Building_Descr {
 	}
 
 private:
-	Map_Object_Type m_type;
 	BillOfMaterials m_working_positions;
 	BillOfMaterials m_inputs;
 	Output   m_output_ware_types;
@@ -112,6 +107,7 @@ private:
 	std::string m_out_of_resource_title;
 	std::string m_out_of_resource_message;
 	uint32_t    m_out_of_resource_delay_attempts;
+
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite_Descr);
 };
 

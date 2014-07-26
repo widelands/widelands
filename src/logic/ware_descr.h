@@ -52,10 +52,6 @@ struct WareDescr : public Map_Object_Descr {
 		 Profile &, Section & global_s);
 	virtual ~WareDescr() override {}
 
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
-
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack
@@ -89,7 +85,6 @@ struct WareDescr : public Map_Object_Descr {
 	uint8_t preciousness() const {return m_preciousness;}
 
 private:
-	Map_Object_Type m_type;
 	const Tribe_Descr & m_tribe;
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;

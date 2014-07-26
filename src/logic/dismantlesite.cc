@@ -41,8 +41,7 @@ DismantleSite_Descr::DismantleSite_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	m_type        (Map_Object_Type::DISMANTLESITE)
+	Building_Descr(Map_Object_Type::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }

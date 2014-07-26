@@ -255,8 +255,7 @@ Warehouse Building
 Warehouse_Descr::Warehouse_Descr
 	(char const* const _name, char const* const _descname,
 	 const std::string& directory, Profile& prof, Section& global_s, const Tribe_Descr& _tribe)
-	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	  m_type             (Map_Object_Type::WAREHOUSE),
+	: Building_Descr(Map_Object_Type::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
 	  m_conquers         (0),
 	  m_heal_per_second  (0)
 {
@@ -451,7 +450,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			schedule_act
 				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
-		log("Message: adding (wh) (%s) %i \n", descr().type_name(), player.player_number());
+		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
 		char message[2048];
 		snprintf
 			(message, sizeof(message),

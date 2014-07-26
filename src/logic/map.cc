@@ -1292,7 +1292,6 @@ int Map::calc_buildsize
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE)
 				continue;
-			// NOCOM(GunChleoc): does this need to be >= now?
 			if (avoidnature && obj->descr().type() == Map_Object_Type::IMMOVABLE)
 				objsize += 1;
 			if (objsize + buildsize > BaseImmovable::BIG)

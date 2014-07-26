@@ -32,21 +32,13 @@ struct Carrier;
 class Request;
 
 class Road_Descr : public Map_Object_Descr {
-
 public:
 	Road_Descr(char const* const _name, char const* const _descname)
-		:
-		Map_Object_Descr(_name, _descname),
-		m_type          (Map_Object_Type::ROAD)
-	{}
+	   : Map_Object_Descr(Map_Object_Type::ROAD, _name, _descname) {
+	}
 	virtual ~Road_Descr() override {}
 
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
-
 private:
-	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Road_Descr);
 };
 

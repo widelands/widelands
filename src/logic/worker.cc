@@ -620,8 +620,8 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 				dest = immovable->get_position();
 			else
 				throw wexception
-					("MO(%u): [actWalk]: bad object type = %i, %s",
-					serial(), obj->descr().type(), obj->descr().type_name());
+					("MO(%u): [actWalk]: bad object type %s",
+					serial(), to_string(obj->descr().type()).c_str());
 
 			//  Only take one step, then rethink (object may have moved)
 			max_steps = 1;
@@ -724,12 +724,12 @@ bool Worker::run_object(Game & game, State & state, const Action & action)
 			w   ->start_task_program(game, action.sparam1);
 		} else
 			throw wexception
-				("MO(%i): [actObject]: bad bob type = %i, %s",
-				 serial(), bob->descr().type(), bob->descr().type_name());
+				("MO(%i): [actObject]: bad bob type %s",
+				 serial(), to_string(bob->descr().type()).c_str());
 	} else
 		throw wexception
-			("MO(%u): [actObject]: bad object type = %i, %s",
-			 serial(),  obj->descr().type(), obj->descr().type_name());
+			("MO(%u): [actObject]: bad object type %s",
+			 serial(),  to_string(obj->descr().type()).c_str());
 
 	++state.ivar1;
 	schedule_act(game, 10);

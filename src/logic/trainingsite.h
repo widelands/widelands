@@ -38,10 +38,6 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		 const Tribe_Descr & tribe, const World& world);
 	virtual ~TrainingSite_Descr() override {}
 
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
-
 	virtual Building & create_object() const override;
 
 	uint32_t get_max_number_of_soldiers() const {
@@ -57,8 +53,6 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_max_stall() const;
 
 private:
-	Map_Object_Type m_type;
-
 	//  TODO(unknown) These variables should be per soldier type. They should be in a
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.

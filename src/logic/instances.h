@@ -48,44 +48,41 @@ class Map_Map_Object_Loader;
 class Player;
 struct Path;
 
-/**
-  * This enum lists the available classes of Map Objects
-  * Use it to compare return types of Map_Object_Descr.type()
-  * Whenever you add a new type, make sure you give it a string
-  * representation in Map_Object_Descr::type_name() as well.
-  */
+// This enum lists the available classes of Map Objects.
 enum class Map_Object_Type : uint8_t {
-	MAPOBJECT,       // Root superclass
+	MAPOBJECT = 0,  // Root superclass
 
-	WARE,            //  class WareInstance
+	WARE,  //  class WareInstance
 	BATTLE,
 	FLEET,
 
-	BOB,             // Bob
-	CRITTER,         // Bob -- CritterBob
-	SHIP,            // Bob -- Ship
-	WORKER,          // Bob -- Worker
-	CARRIER,         // Bob -- Worker -- Carrier
-	SOLDIER,         // Bob -- Worker -- Soldier
+	BOB = 10,  // Bob
+	CRITTER,   // Bob -- CritterBob
+	SHIP,      // Bob -- Ship
+	WORKER,    // Bob -- Worker
+	CARRIER,   // Bob -- Worker -- Carrier
+	SOLDIER,   // Bob -- Worker -- Soldier
 
 	// everything below is at least a BaseImmovable
-	IMMOVABLE,
+	IMMOVABLE = 30,
 
 	// everything below is at least a PlayerImmovable
-	FLAG,
+	FLAG = 40,
 	ROAD,
 	PORTDOCK,
 
 	// everything below is at least a Building
-	BUILDING,         // Building
-	CONSTRUCTIONSITE, // Building -- Constructionsite
-	DISMANTLESITE,    // Building -- Dismantlesite
-	WAREHOUSE,        // Building -- Warehouse
-	PRODUCTIONSITE,   // Building -- Productionsite
-	MILITARYSITE,     // Building -- Productionsite -- Militarysite
-	TRAININGSITE      // Building -- Productionsite -- Trainingsite
+	BUILDING = 100,    // Building
+	CONSTRUCTIONSITE,  // Building -- Constructionsite
+	DISMANTLESITE,     // Building -- Dismantlesite
+	WAREHOUSE,         // Building -- Warehouse
+	PRODUCTIONSITE,    // Building -- Productionsite
+	MILITARYSITE,      // Building -- Productionsite -- Militarysite
+	TRAININGSITE       // Building -- Productionsite -- Trainingsite
 };
 
+// Returns a string representation for 'type'.
+std::string to_string(Map_Object_Type type);
 
 /**
  * Base class for descriptions of worker, files and so on. This must just
@@ -93,16 +90,18 @@ enum class Map_Object_Type : uint8_t {
  */
 struct Map_Object_Descr {
 
-	Map_Object_Descr(const std::string& init_name, const std::string& init_descname)
-			: m_name(init_name), m_descname(init_descname), m_type(Map_Object_Type::MAPOBJECT) {
-		}
+	Map_Object_Descr(const Map_Object_Type type,
+	                 const std::string& init_name,
+	                 const std::string& init_descname)
+	   : m_type(type), m_name(init_name), m_descname(init_descname) {
+	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
 	const std::string &     name() const {return m_name;}
 	const std::string &     descname() const {return m_descname;}
-	virtual Map_Object_Type type() const {return m_type;}
-	// A string representation of the type used in Lua and log messages
-	const char* type_name() const;
+
+	// Type of the Map_Object_Descr.
+	Map_Object_Type type() const {return m_type;}
 
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
@@ -138,9 +137,9 @@ private:
 	typedef std::map<std::string, uint32_t> AttribMap;
 	typedef std::vector<uint32_t>           Attributes;
 
+	const Map_Object_Type   m_type;           /// Subclasses pick from the enum above
 	std::string const m_name;           /// The name for internal reference
 	std::string const m_descname;       /// A localized Descriptive name
-	Map_Object_Type   m_type;           /// Subclasses pick from the enum above
 	Attributes        m_attributes;
 	Anims             m_anims;
 	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used

@@ -999,7 +999,7 @@ inline static void write_unseen_immovable
 	else if (upcast(Immovable_Descr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
 		WriteImmovable_Type(&immovables_file, *immovable_descr);
-	} else if (map_object_descr->type_name() == "flag")
+	} else if (map_object_descr->type() == Map_Object_Type::FLAG)
 		immovable_kind = 2;
 	else if (upcast(Building_Descr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
@@ -1020,7 +1020,7 @@ inline static void write_unseen_immovable
 			immovables_file.Unsigned32(csi.totaltime);
 			immovables_file.Unsigned32(csi.completedtime);
 		}
-	} else if (map_object_descr->type_name() == "portdock")
+	} else if (map_object_descr->type() == Map_Object_Type::PORTDOCK)
 		immovable_kind = 4;
 	else
 	{

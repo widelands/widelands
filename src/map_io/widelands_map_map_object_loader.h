@@ -63,7 +63,7 @@ public:
 			m_objects.find(n);
 		if (existing != m_objects.end()) {
 			//delete &object; can not do this
-			throw game_data_error("already loaded (%s)", existing->second->descr().type_name());
+			throw game_data_error("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
 		m_objects.insert(std::pair<Serial, Map_Object *>(n, &object));
 		m_loaded_obj[&object] = false;
@@ -77,8 +77,9 @@ public:
 		else if (upcast(T, result, it->second))
 			return *result;
 		else
-			throw game_data_error(
-				"is a %s, expected a %s", it->second->descr().type_name(), typeid(T).name());
+			throw game_data_error("is a %s, expected a %s",
+			                      to_string(it->second->descr().type()).c_str(),
+			                      typeid(T).name());
 	}
 
 	int32_t get_nr_unloaded_objects();

@@ -138,8 +138,7 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
                                      Section& global_s,
 												 Tribe_Descr & _tribe)
 	:
-	BobDescr(_name, _descname, &_tribe),
-	m_type  (Map_Object_Type::CRITTER)
+	BobDescr(Map_Object_Type::CRITTER, _name, _descname, &_tribe)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
@@ -182,7 +181,7 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
 }
 
 Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
-   : BobDescr(table.get_string("name"),
+   : BobDescr(Map_Object_Type::CRITTER, table.get_string("name"),
               table.get_string("descname"),
               nullptr)  // Can only handle world critters.
 {

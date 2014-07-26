@@ -98,21 +98,27 @@ Tribe_Descr::Tribe_Descr
 					 	(_name, _descname, path, prof, global_s, this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
-#define PARSE_WORKER_TYPES(name, descr_type)                                  \
-         PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                   \
-            descr_type & worker_descr =                                       \
-               *new descr_type                                                \
-                  (_name, _descname, path, prof, global_s, *this);            \
-            Ware_Index const worker_idx = m_workers.add(&worker_descr);       \
-            if                                                                \
-               (worker_descr.is_buildable() &&                                \
-                worker_descr.buildcost().empty())                             \
-               m_worker_types_without_cost.push_back(worker_idx);             \
-         PARSE_MAP_OBJECT_TYPES_END;
+#define PARSE_SPECIAL_WORKER_TYPES(name, descr_type)                                               \
+	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
+	auto& worker_descr = *new descr_type(_name, _descname, path, prof, global_s, *this);      \
+	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
+	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
+		m_worker_types_without_cost.push_back(worker_idx);                                           \
+	PARSE_MAP_OBJECT_TYPES_END;
 
-			PARSE_WORKER_TYPES("carrier", Carrier_Descr);
-			PARSE_WORKER_TYPES("soldier", Soldier_Descr);
-			PARSE_WORKER_TYPES("worker",  Worker_Descr);
+			PARSE_SPECIAL_WORKER_TYPES("carrier", Carrier_Descr);
+			PARSE_SPECIAL_WORKER_TYPES("soldier", Soldier_Descr);
+
+#define PARSE_WORKER_TYPES(name)                                                                   \
+	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
+	auto& worker_descr =                                                                      \
+	   *new Worker_Descr(Map_Object_Type::WORKER, _name, _descname, path, prof, global_s, *this);   \
+	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
+	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
+		m_worker_types_without_cost.push_back(worker_idx);                                           \
+	PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_WORKER_TYPES("worker");
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("constructionsite")
 				m_buildings.add
@@ -136,7 +142,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
 				m_buildings.add(new ProductionSite_Descr(
-					_name, _descname, path, prof, global_s, *this, world));
+					Map_Object_Type::PRODUCTIONSITE, _name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")

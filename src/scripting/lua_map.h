@@ -217,7 +217,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(ConstructionSite_Descr);
+	CASTED_GET_DESCRIPTION(ConstructionSite_Descr)
 };
 
 

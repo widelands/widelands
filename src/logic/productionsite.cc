@@ -54,12 +54,11 @@ ProductionSite BUILDING
 */
 
 ProductionSite_Descr::ProductionSite_Descr
-	(char const * const _name, char const * const _descname,
+	(Map_Object_Type type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe, const World& world)
 	:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	m_type        (Map_Object_Type::PRODUCTIONSITE)
+	Building_Descr(type, _name, _descname, directory, prof, global_s, _tribe)
 {
 	Section * const section = prof.get_section("out_of_resource_notification");
 	if (section != nullptr)

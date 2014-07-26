@@ -27,19 +27,12 @@ class Soldier;
 class Battle_Descr : public Map_Object_Descr {
 public:
 	Battle_Descr(char const* const _name, char const* const _descname)
-		:
-		Map_Object_Descr(_name, _descname),
-		m_type          (Map_Object_Type::BATTLE)
-	{
+	   : Map_Object_Descr(Map_Object_Type::BATTLE, _name, _descname) {
 	}
-	virtual ~Battle_Descr() override {}
-
-	virtual Map_Object_Type type() const override {
-		return m_type;
+	virtual ~Battle_Descr() override {
 	}
 
 private:
-	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Battle_Descr);
 };
 

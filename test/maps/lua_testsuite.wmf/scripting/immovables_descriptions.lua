@@ -140,7 +140,7 @@ function test_descr:test_size()
 end
 
 function test_descr:test_type()
-   assert_equal("militarysite", egbase:get_building_description("barbarians","sentry").type)
+   assert_equal("militarysite", egbase:get_building_description("barbarians","sentry").descr.type_name)
 end
 
 function test_descr:test_vision_range()
@@ -188,7 +188,7 @@ function test_descr:test_output_worker_types()
 end
 
 function test_descr:test_type()
-   assert_equal("productionsite", egbase:get_building_description("barbarians","coalmine").type)
+   assert_equal("productionsite", egbase:get_building_description("barbarians","coalmine").descr.type_name)
 end
 
 function test_descr:test_working_positions()
@@ -227,7 +227,7 @@ function test_descr:test_max_number_of_soldiers()
 end
 
 function test_descr:test_type()
-   assert_equal("militarysite", egbase:get_building_description("barbarians","sentry").type)
+   assert_equal("militarysite", egbase:get_building_description("barbarians","sentry").descr.type_name)
 end
 
 
@@ -288,7 +288,7 @@ function test_descr:test_min_hp()
 end
 
 function test_descr:test_type()
-   assert_equal("trainingsite", egbase:get_building_description("barbarians","battlearena").type)
+   assert_equal("trainingsite", egbase:get_building_description("barbarians","battlearena").descr.type_name)
 end
 
 
@@ -312,7 +312,7 @@ function test_descr:test_heal_per_second()
 end
 
 function test_descr:test_type()
-   assert_equal("warehouse", egbase:get_building_description("barbarians","warehouse").type)
+   assert_equal("warehouse", egbase:get_building_description("barbarians","warehouse").type_name)
 end
 
 
@@ -389,7 +389,7 @@ function test_descr:test_becomes()
 end
 
 function test_descr:test_icon_name()
-   assert_equal("tribes/barbarians/miner/menu.png", egbase:get_worker_description("barbarians","miner").icon_name)
+   assert_equal("tribes/barbarians/miner//menu.png", egbase:get_worker_description("barbarians","miner").icon_name)
 end
 
 function test_descr:test_needed_experience()

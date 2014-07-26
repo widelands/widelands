@@ -47,10 +47,6 @@ struct Soldier_Descr : public Worker_Descr {
 		 const Tribe_Descr &);
 	virtual ~Soldier_Descr() override {}
 
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
-
 	virtual void load_graphics() override;
 
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
@@ -134,7 +130,6 @@ protected:
 			 const char * anim_name);
 
 private:
-	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Soldier_Descr);
 };
 

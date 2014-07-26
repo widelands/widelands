@@ -113,7 +113,7 @@ void Map_Object_Packet::LoadFinish() {
 			temp_loader->load_pointers();
 		} catch (const std::exception & e) {
 			throw wexception("load_pointers for %s: %s",
-				temp_loader->get_object()->descr().type_name(),
+				to_string(temp_loader->get_object()->descr().type()).c_str(),
 				e.what());
 		}
 	}
@@ -123,7 +123,9 @@ void Map_Object_Packet::LoadFinish() {
 		try {
 			temp_loader->load_finish();
 		} catch (const std::exception & e) {
-			throw wexception("load_finish for %s: %s", temp_loader->get_object()->descr().type_name(), e.what());
+			throw wexception("load_finish for %s: %s",
+			                 to_string(temp_loader->get_object()->descr().type()).c_str(),
+			                 e.what());
 		}
 		temp_loader->mol().mark_object_as_loaded(*temp_loader->get_object());
 	}

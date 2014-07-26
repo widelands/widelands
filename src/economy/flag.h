@@ -36,18 +36,12 @@ class WareInstance;
 class Flag_Descr : public Map_Object_Descr {
 public:
 	Flag_Descr(char const* const _name, char const* const _descname)
-	:
-	Map_Object_Descr(_name, _descname),
-	m_type      (Map_Object_Type::FLAG)
-	{}
-	virtual ~Flag_Descr() override {}
-
-	virtual Map_Object_Type type() const override {
-		return m_type;
+	   : Map_Object_Descr(Map_Object_Type::FLAG, _name, _descname) {
+	}
+	virtual ~Flag_Descr() override {
 	}
 
 private:
-	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Flag_Descr);
 };
 

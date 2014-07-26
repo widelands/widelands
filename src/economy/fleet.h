@@ -36,18 +36,12 @@ struct Ship;
 class Fleet_Descr : public Map_Object_Descr {
 public:
 	Fleet_Descr(char const* const _name, char const* const _descname)
-		:
-		Map_Object_Descr(_name, _descname),
-		m_type          (Map_Object_Type::FLEET)
-	{}
-	virtual ~Fleet_Descr() override {}
-
-	virtual Map_Object_Type type() const override {
-		return m_type;
+	   : Map_Object_Descr(Map_Object_Type::FLEET, _name, _descname) {
+	}
+	virtual ~Fleet_Descr() override {
 	}
 
 private:
-	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Fleet_Descr);
 };
 

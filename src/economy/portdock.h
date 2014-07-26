@@ -38,14 +38,10 @@ class ExpeditionBootstrap;
 class PortDock_Descr : public Map_Object_Descr {
 public:
 	PortDock_Descr(char const* const _name, char const* const _descname);
-	virtual ~PortDock_Descr() override {}
-
-	virtual Map_Object_Type type() const override {
-		return m_type;
+	virtual ~PortDock_Descr() override {
 	}
 
 private:
-	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(PortDock_Descr);
 };
 

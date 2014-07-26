@@ -33,21 +33,15 @@ struct Carrier_Descr : public Worker_Descr {
 	              Section& global_s,
 	              const Tribe_Descr& _tribe)
 		:
-		Worker_Descr(_name, _descname, directory, prof, global_s, _tribe),
-		m_type      (Map_Object_Type::CARRIER)
+		Worker_Descr(Map_Object_Type::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
 	{
 	}
 	virtual ~Carrier_Descr() override {}
-
-	virtual Map_Object_Type type() const override {
-		return m_type;
-	}
 
 protected:
 	virtual Bob & create_object() const override;
 
 private:
-	Map_Object_Type m_type;
 	DISALLOW_COPY_AND_ASSIGN(Carrier_Descr);
 };
 
