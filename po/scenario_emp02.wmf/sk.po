@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-04-16 03:12+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:33+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:40+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: sk\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
@@ -30,66 +30,66 @@ msgstr ""
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
 msgstr "Postavte tri drevorubačské domy, horáreň a pílu."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:36
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
 msgstr "Postavte kameňolom"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:38
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Quarry"
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:39
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
 msgstr "Postavte kameňolom južne od základne."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:44
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
 msgstr "Ochráňte svoju osadu"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:46
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:48
 msgid "Protect Your Colony"
 msgstr "Ochráňte svoju osadu"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:47
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:49
 msgid "Build some barracks and sentries around the colony."
 msgstr "Postavte kasárne a strážnice okolo osady."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:52
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Start mining marble"
 msgstr "Začnite ťažiť mramor"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:54
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:57
 msgid "Marble"
 msgstr "Mramor"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:55
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Expand to the east, to start mining marble from the mountain."
 msgstr "Rozšírte svoje územie na východ a začnite ťažiť mramor z hory."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:60
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:64
 msgid "Build a stonemason and mining infrastructure"
 msgstr "Postavte kamenársky dom a banícku infraštruktúru"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:62
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:66
 msgid "Stonemason and Mining Infrastructure"
 msgstr "Postavte kamenársky dom a banícku infraštruktúru"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:63
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
 "Build a stonemason and then a complete mining and production infrastructure "
 "(coal mine and / or charcoal burner, iron ore mine, toolsmithy, weapon "
 "smithy, armor smithy and smelting works)."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:68
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Provide your miners with food"
 msgstr "Poskytnite baníkom jedlo"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:70
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Food For Your Miners"
 msgstr "Jedlo pre baníkov"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:71
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
 "To supply them with some good and strong drinks, we could build up a brewery "
@@ -99,21 +99,21 @@ msgstr ""
 "Aby sme ich zásobovali dobrými a silnými nápojmi, mohli by sme postaviť "
 "pivovar a vináreň."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:73
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
 "Of course this means we will need more resources for preparing this food – "
 "like fish, meat or bread. To provide these foodstuffs, you would have to "
 "build a fisher’s house, a farm, a mill and a bakery."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:74
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
 "wells."
 msgstr ""
 "Možno budete potrebovať aj lovecký dom, chliev, vinohrad a nejaké studne."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:75
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:79
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least "
@@ -123,15 +123,15 @@ msgstr ""
 "potrebujú pivo, mramorový lom a zlaté bane víno a každá baňa potrebuje "
 "prinajmenšom prídely, ktoré sa vyrábajú z chleba ALEBO mäsa ALEBO rýb."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:81
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
 msgstr "Ochráňte svoju východnú hranicu"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:83
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:87
 msgid "Protect Your Eastern Frontier"
 msgstr "Ochráňte svoju východnú hranicu"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:84
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:88
 msgid ""
 "Build up stronger military buildings, such as an outpost, a barrier or a "
 "tower, on the eastern frontier."
@@ -139,19 +139,19 @@ msgstr ""
 "Postavte silnejšie vojenské budovy, ako napríklad pozorovateľnu, hradbu "
 "alebo vežu, na východnej hranici."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:86
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
 msgstr "Na pohľad do hĺbky nepriateľského územia postavte vežu."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:91
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the barbarian tribe"
 msgstr "Zničte barbarský kmeň"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:93
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Destroy the Barbarian Tribe"
 msgstr "Zničte barbarský kmeň"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:94
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "barbarian buildings."
@@ -159,7 +159,7 @@ msgstr ""
 "Akonáhle budete mať dostatok vojakov, zaútočte a úplne zničte barbarské "
 "budovy."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:95
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "Finally, build up a fortress on the peninsula (near where the barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that "
@@ -169,22 +169,22 @@ msgstr ""
 "barbarská základňa), aby ste v tejto oblasti zabránili vzniku osád iných "
 "kmeňov."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:103
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
 msgstr "Nový ostrov"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:105
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:116
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:129
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:140
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:148
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:207
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:224
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:251
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:109
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:120
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:133
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:144
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:152
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:211
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:228
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:255
 msgid "Diary of Lutius"
 msgstr "Denník Lucia"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:106
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:110
 msgid ""
 "Finally! This island appears to have been made for us, it is a gift from the "
 "Gods to my people and myself. Until now, we have only seen a small part of "
@@ -196,7 +196,7 @@ msgstr ""
 "prináša svetlejšie myšlienky. Mám pocit, že sme našli vzácny poklad, zem ako "
 "raj."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:109
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:113
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
@@ -205,11 +205,11 @@ msgstr ""
 "Na tomto ostrove začneme nový život. Vybudujeme tu osadu vo vyhnanstve, "
 "ktorá sa možno stane novým domovom pre každého z nás."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:114
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:118
 msgid "The Green Forests"
 msgstr "Zelené lesy"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:117
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
@@ -219,7 +219,7 @@ msgstr ""
 "naša budúcnosť práve začala. Táto krajina je taká pokojná, dobrá a nádherná, "
 "že by som tu mohol zostať do konca svojho života."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:119
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
 "But until that day, may many years pass! For now, we must concentrate on the "
 "present, and build a few lumberjack’s houses and a sawmill to produce some "
@@ -229,7 +229,7 @@ msgstr ""
 "prítomnosť a postaviť zopár drevorubačských domov a pílu na produkciu "
 "základných stavebných materiálov."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:121
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:125
 msgid ""
 "But we shouldn’t forget to preserve this natural bounty. These forests "
 "should last forever, so we really should build a forester’s house too."
@@ -237,11 +237,11 @@ msgstr ""
 "Ale nemali by sme zabúdať tento dar prírody chrániť. Tieto lesy by mali "
 "zostať na večnosť, takže by sme skutočne mali postaviť aj horáreň."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:127
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:131
 msgid "The Rocks"
 msgstr "Skaly"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:130
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:134
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some hard stone for our larger buildings."
@@ -249,7 +249,7 @@ msgstr ""
 "Neskôr som zostúpil ku skalám na juhu a hľadal miesto, kde môžeme postaviť "
 "kameňolom na ťažbu tvrdého kameňa pre väčšie budovy."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:132
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:136
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
@@ -259,11 +259,11 @@ msgstr ""
 "podobné mramoru. Zdá sa, že čoskoro budeme môcť stavať silné, prepychové "
 "budovy ako tie, na ktoré sme boli zvyknutí vo Fremile."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:138
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:142
 msgid "Wood for the Colony"
 msgstr "Drevo pre osadu"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:141
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
@@ -271,11 +271,11 @@ msgstr ""
 "Dobrá správa! Dnes sa dokončilo naše lesné hospodárstvo. Teraz máme isto "
 "dostatok dreva pre naše budúce stavebné projekty."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:146
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:150
 msgid "Stone for the Colony"
 msgstr "Kameň pre osadu"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:149
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:153
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stone to construct larger buildings."
@@ -283,15 +283,15 @@ msgstr ""
 "Výborne! Dnes sa dokončila stavba kameňolomu. Teraz dostávame dostatok "
 "kameňa na stavbu väčších budov."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:153
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid "Dangerous Ship Parts"
 msgstr "Nebezpečné časti lode"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:155
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:159
 msgid "Saledus looks unhappy"
 msgstr "Saledus vyzerá nešťastne"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:156
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:160
 msgid ""
 "Greetings Lutius, I don’t want to start a panic, but I found something which "
 "gives me a sinking feeling in my stomach and spreads waves of fear in my "
@@ -304,7 +304,7 @@ msgstr ""
 "južnému brehu, našiel som zbytky inej lode. Neviem, či tie časti sú všetko, "
 "čo z nej zostalo. V každom prípade nevyzerajú staro."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:161
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:165
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
@@ -312,29 +312,29 @@ msgstr ""
 "Možno ľudia na palube tej lode boli zastihnutí rovnakou búrkou, ktorá nás "
 "dostala do Malac' Mor-u, a priniesla ich na tento ostrov."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:163
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:167
 msgid ""
 "I beg you to be cautious and to build some barracks or sentries around our "
 "colony."
 msgstr ""
 "Prosím vás, buďte opatrný a postavte okolo nás kasárne alebo strážnice."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:168
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:172
 msgid "Marble on the Mountain"
 msgstr "Mramor v horách"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:169
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:173
 msgid "Saledus smiles"
 msgstr "Saledus sa usmieva"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:170
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:174
 msgid ""
 "Lutius, I’ve got good news for you: As I walked to the east, I found a "
 "larger mountain. I am not absolutely sure – a geologist should check if I am "
 "right – but I believe we could mine marble from some places on the mountain."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:172
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
@@ -344,19 +344,19 @@ msgstr ""
 "tie chudobné množstvá, ktoré získavame z kameňolomov. Možno ste mali pravdu "
 "v tom, že tento ostrov je ako raj."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:175
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid "Let us expand to that mountain and start mining marble."
 msgstr "Rozšírme si územie až k tej hore a začnime ťažiť mramor."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:180
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:184
 msgid "Further Mountains"
 msgstr "Ďalšie hory"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:181
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:185
 msgid "Saledus is amazed"
 msgstr "Saledus je ohromený"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:182
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:186
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
@@ -369,7 +369,7 @@ msgstr ""
 "by sme okamžite začať stavať železnorudné a uhoľné bane (alebo aspoň "
 "uhliarne), taviarne, dielne nástrojov, vyhne na zbroje a zbrane."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:186
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So, let’s build a stonemason, who will cut columns from "
@@ -378,19 +378,19 @@ msgstr ""
 "Avšak: pre všetky väčšie budovy potrebujeme lepšie a elegantnejšie stavebné "
 "materiály. Budeme teda potrebovať kamenára, ktorý vysekáva stĺpy z mramoru."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:188
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:192
 msgid "After everything, we can now begin to live like we did in Fremil."
 msgstr "Koniec-koncov, teraz môžeme začať žiť tak ako vo Fremile."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:193
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid "Food for the Miners"
 msgstr "Jedlo pre baníkov"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:194
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:198
 msgid "Amalea comes in..."
 msgstr "Amalea prichádza..."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:195
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
 "Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
 "forgot something."
@@ -398,7 +398,7 @@ msgstr ""
 "Ahoj, Lutius. Dúfam, že mi odpustíš moju kritiku, ale zdá sa mi, že si na "
 "niečo zabudol."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:196
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:200
 msgid ""
 "It’s nice, and of course a good idea, to build up mines, which will give us "
 "a more comfortable life, but the people working in the mines are unhappy "
@@ -409,7 +409,7 @@ msgstr ""
 "pohodlnejší život, ale ľudia pracujúci v nich sú nešťastní s momentálnou "
 "situáciou. Musia tvrdo pracovať a nemajú čas na prípravu vlastného jedla."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:199
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:203
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly... but here are my recommendations:"
@@ -417,11 +417,11 @@ msgstr ""
 "Čo si myslíš o tom, že im pomôžeme? Neviem ti povedať, čo všetko "
 "potrebujeme, ale tu sú moje odporúčania:"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:205
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:209
 msgid "The Barbarians"
 msgstr "Barbari"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:208
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:212
 msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a "
 "test – and it seems as if Saledus was right with his fear concerning the "
@@ -430,7 +430,7 @@ msgstr ""
 "Pri všetkých bohoch! Toto je naozaj hrozné. Vyzerá to tak, akoby nás čakal "
 "test a akoby Saledove obavy ohľadom vraku, ktorý našiel, boli opodstatnené."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:210
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, barbarian tribes with whom we have had so many "
@@ -440,7 +440,7 @@ msgstr ""
 "jeden z tých nenávidených zlých barbarských kmeňov, s ktorými sme v "
 "minulosti mali tak veľa problémov."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:213
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:217
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
@@ -452,16 +452,16 @@ msgstr ""
 "som dokázal utiecť a skryť sa. Pod rúškom tmy som sa vrátil späť do našej "
 "osady."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:217
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:221
 msgid ""
 "Anyway, we must build up stronger military buildings as soon as possible."
 msgstr "Každopádne musíme čo najskôr postaviť silnejšie vojenské budovy."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:222
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:226
 msgid "Command to Attack"
 msgstr "Príkaz na útok"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:225
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:229
 msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
@@ -470,42 +470,42 @@ msgstr ""
 "To je dobre. Prvá veľká vojenská budova je hotová a banícka infraštruktúra "
 "sa stále zlepšuje. Teraz by sme mali myslieť na prípravu na vojnu."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:231
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:236
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:240
 msgid "Victory"
 msgstr "Víťazstvo"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:234
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:238
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
 msgstr "Dnes je hrdý deň. Bojovali sme za náš nový domov a zvíťazili."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:239
 msgid ""
 "There are still a few barbarians hiding on our island, but I am sure that we "
 "will find them soon. Every barbarian who doesn’t attack us will be put in a "
 "boat with the other peaceful ones, and sent back to their country."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:237
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:241
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
 "barbarians from the island."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:242
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:246
 msgid "As Time is Running By"
 msgstr "Ako uteká čas"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:245
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:249
 msgid "7 days later..."
 msgstr "O 7 dní neskôr..."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:249
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:253
 msgid "A Message"
 msgstr "Správa"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:252
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:256
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
@@ -513,7 +513,7 @@ msgstr ""
 "Dnes na náš ostrov priletel holub. Niesol správu, ktorá ma zapĺňa temnými "
 "myšlienkami a opäť vo mne vzbudzuje strach."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:254
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:258
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -521,7 +521,7 @@ msgid ""
 "must do..."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:255
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:259
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
@@ -529,15 +529,15 @@ msgstr ""
 "Prešli ste túto misiu. Ak chcete, môžete pokračovať v hraní. V opačnom "
 "prípade prejdite na ďalšiu misiu."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:259
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:263
 msgid "Our New Tavern"
 msgstr "Naša nová krčma"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:260
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:264
 msgid "Amalea smiles"
 msgstr "Amalea sa usmieva"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:261
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:265
 msgid ""
 "Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer "
 "they serve is really tasty. You really should have a drink there, too."
@@ -545,7 +545,7 @@ msgstr ""
 "Zdravím, priateľ môj. Práve som navštívila našu novú krčmu 'Pri palmách'. "
 "Pivo, ktoré ponúkajú, je naozaj chutné. Aj ty by si si tam mal vypiť."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:263
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:267
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
@@ -557,7 +557,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
