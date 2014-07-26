@@ -105,13 +105,13 @@ obj_better_material_2 = {
    name="mission grindstone",
    title=_"Build a lime kiln and coal economy",
    number = 3,
-   body=objective_text(_"Build a lime kiln, a well and a charcoal furnace, or a coal mine", _(
+   body=objective_text(_"Build a lime kiln, a well and a charcoal kiln, or a coal mine", _(
 [[Better buildings may also require other improved materials besides blackwood. ]] ..
 [[One of these is grout, which is produced out of raw stone, water and coal by a lime-burner.]]) .. paragraphdivider() ..
 _([[You can obtain water by building a well upon a water source, ]] ..
 [[which your geologists can discover when you send them to any flag that is not on a mountain. ]] ..
-[[Coal can be obtained by building a charcoal furnace or a coal mine.]] ..
-      listitem_bullet(_"Build a lime kiln, a well and a charcoal furnace, or a coal mine")
+[[Coal can be obtained by building a charcoal kiln or a coal mine.]] ..
+      listitem_bullet(_"Build a lime kiln, a well and a charcoal kiln, or a coal mine")
    ))
 }
 

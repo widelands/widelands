@@ -1,4 +1,4 @@
--- The Atlantean Charcoal Furnace
+-- The Atlantean Charcoal Kiln
 
 include "scripting/formatting.lua"
 include "tribes/scripting/format_help.lua"

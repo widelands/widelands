@@ -64,7 +64,7 @@ obj_build_mining_infrastructure = {
    title =_"Build a stonemason and mining infrastructure",
    number = 7,
    body = objective_text(_"Stonemason and Mining Infrastructure",
-      listitem_bullet(_[[Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal furnace, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
+      listitem_bullet(_[[Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
    ),
 }
 
@@ -185,7 +185,7 @@ saledus_3 = {
    body= saledus(_"Saledus is amazed",
 _([[By the Gods, this is an unbelievable stroke of fortune! ]] ..
 [[There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. ]] ..
-[[We should immediately start to build iron ore and coal mines (or at least charcoal furnaces), ]] ..
+[[We should immediately start to build iron ore and coal mines (or at least charcoal kilns), ]] ..
 [[smelting works, toolsmithies, armor and weapon smithies.]]) .. paragraphdivider() ..
 _([[However: for all these bigger buildings, we need better and more elegant building materials. ]] ..
 [[So, let’s build a stonemason, who will cut columns from marble.]]) .. paragraphdivider() ..

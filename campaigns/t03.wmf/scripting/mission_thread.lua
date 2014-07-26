@@ -137,7 +137,7 @@ function mining_and_trainingsites()
       "granitemine",
       "smelting_works",
       "metalworks",
-      "charcoal_furnace",
+      "charcoal_kiln",
       "micro-brewery",
    }
 
@@ -145,10 +145,10 @@ function mining_and_trainingsites()
    sleep(500)
 
    while true do
-      local h = p1:get_buildings{"coalmine","charcoal_furnace", "oremine",
+      local h = p1:get_buildings{"coalmine","charcoal_kiln", "oremine",
          "tavern", "smelting_works", "metalworks"}
 
-      if (#h.coalmine + #h.charcoal_furnace > 0) and
+      if (#h.coalmine + #h.charcoal_kiln > 0) and
          #h.oremine > 0 and #h.tavern > 0 and #h.smelting_works > 0 and
          #h.metalworks > 0
       then

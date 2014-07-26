@@ -5,13 +5,13 @@ output=coal
 build_material=false
 
 [buildcost]
-log=3
-grout=2
-thatchreed=2
+log=2
+stone=3
+planks=1
 
 [return_on_dismantle]
 log=2
-grout=1
+stone=2
 
 [working positions]
 burner=1
@@ -30,9 +30,9 @@ animate=working 90000 # charcoal fires are burning some days in real life
 produce=coal
 
 [idle]
-pics=charcoal_furnace_i_??.png  # ???
-hotspot=47 54
+pics=charcoal_kiln_i_??.png
+hotspot=47 57
 
 [working]
-pics=charcoal_furnace_i_??.png  # ???
-hotspot=47 54
+pics=charcoal_kiln_b_??.png
+hotspot=47 60
