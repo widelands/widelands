@@ -29,7 +29,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/worker.h"
-#include "machdep.h"
+#include "io/machdep.h"
 
 namespace Widelands {
 

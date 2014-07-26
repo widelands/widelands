@@ -89,7 +89,6 @@ add_subdirectory(wui)
 wl_library(widelands_ball_of_mud
   SRCS
     interval.h
-    machdep.h
     wlapplication.cc
     wlapplication.h
   USES_SDL
@@ -98,7 +97,6 @@ wl_library(widelands_ball_of_mud
     base_geometry
     base_i18n
     base_log
-    base_macros
     base_time_string
     build_info
     editor
