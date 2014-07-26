@@ -625,4 +625,9 @@ void Carrier::do_save
 	fw.Signed32(m_promised_pickup_to);
 }
 
+/**
+ * Create a new carrier
+ */
+Bob & Carrier_Descr::create_object() const {return *new Carrier(*this);}
+
 }

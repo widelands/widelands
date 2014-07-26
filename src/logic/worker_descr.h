@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_WORKER_DESCR_H
 #define WL_LOGIC_WORKER_DESCR_H
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 #include "logic/immovable.h"
@@ -43,21 +44,13 @@ class Worker_Descr : public BobDescr
 public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
-	enum Worker_Type {
-		NORMAL = 0,
-		CARRIER,
-		SOLDIER,
-	};
-
 	Worker_Descr
-		(char const * const name, char const * const descname,
+		(Map_Object_Type type, char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr &);
-	virtual ~Worker_Descr();
+	~Worker_Descr() override;
 
-	std::string type() const override {return "worker";}
-
-	virtual Bob & create_object() const override;
+	Bob & create_object() const override;
 
 	virtual void load_graphics();
 
@@ -99,8 +92,6 @@ public:
 	}
 	WorkerProgram const * get_program(const std::string &) const;
 
-	virtual Worker_Type get_worker_type() const {return NORMAL;}
-
 	// For leveling
 	int32_t get_needed_experience() const {return m_needed_experience;}
 	Ware_Index becomes() const {return m_becomes;}
@@ -111,7 +102,7 @@ public:
 		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
 
 	typedef std::map<Worker_Descr const *, std::string> becomes_map_t;
-	virtual uint32_t movecaps() const override;
+	uint32_t movecaps() const override;
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
@@ -139,6 +130,8 @@ protected:
 	 */
 	Ware_Index  m_becomes;
 	Programs    m_programs;
+private:
+	DISALLOW_COPY_AND_ASSIGN(Worker_Descr);
 };
 
 }

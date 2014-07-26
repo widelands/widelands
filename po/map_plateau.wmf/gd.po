@@ -7,58 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-04-16 12:50+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:42+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:50+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: gd\n"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:28
-msgid "Capture the Ancient Castle"
-msgstr "Gabh an caisteal àrsaidh"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:30
-msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "Cuir ruaig air Lanasa agus gabh an caisteal àrsaidh."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:35
-msgid "Defeat Erwyn"
-msgstr "Cuir ruaig air Erwyn"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:37
-msgid ""
-"Defeat Erwyn. He commands the strongest opposing military force left on this "
-"island."
-msgstr ""
-"Cuir ruaig air Erwyn. Tha am feachd as treasa fo a smachd a tha air fhàgail "
-"air an eilean seo."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:41
-msgid "Defeat Jomo"
-msgstr "Cuir ruaig air Iòmo"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:43
-msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
-msgstr "Cuir ruaig air Iòmo. Tha e a' saothrachadh biadh dha na saighdearan."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:57
-msgid "New Objective"
-msgstr "Amas ùr"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:72
-msgid "First Briefing"
-msgstr "A' chiad bhrath-ullachaidh"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:76
+#: ../../maps/Plateau.wmf/scripting/texts.lua:85
 msgid "The Forbidden Island"
 msgstr "An t-eilean toirmisgte"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:77
+#: ../../maps/Plateau.wmf/scripting/texts.lua:30
+#: ../../maps/Plateau.wmf/scripting/texts.lua:86
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -74,16 +40,52 @@ msgstr ""
 "structar againn a thogail. Chan fhada gus am bi sinn làidir gu leòr gus "
 "creach a thogail bhuapa."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:85
-#: ../../maps/Plateau.wmf/scripting/texts.lua:100
+#: ../../maps/Plateau.wmf/scripting/texts.lua:41
+msgid "Capture the Ancient Castle"
+msgstr "Gabh an caisteal àrsaidh"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:42
+msgid "Defeat Lanissa and capture the ancient castle."
+msgstr "Cuir ruaig air Lanasa agus gabh an caisteal àrsaidh."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:47
+msgid "Defeat Erwyn"
+msgstr "Cuir ruaig air Erwyn"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:48
+msgid ""
+"Defeat Erwyn. He commands the strongest opposing military force left on this "
+"island."
+msgstr ""
+"Cuir ruaig air Erwyn. Tha am feachd as treasa fo a smachd a tha air fhàgail "
+"air an eilean seo."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:52
+msgid "Defeat Jomo"
+msgstr "Cuir ruaig air Iòmo"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:53
+msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
+msgstr "Cuir ruaig air Iòmo. Tha e a' saothrachadh biadh dha na saighdearan."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:66
+msgid "New Objective"
+msgstr "Amas ùr"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:81
+msgid "First Briefing"
+msgstr "A' chiad bhrath-ullachaidh"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:94
+#: ../../maps/Plateau.wmf/scripting/texts.lua:109
 msgid "Second Briefing"
 msgstr "An dàrna brath-ullachaidh"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:89
+#: ../../maps/Plateau.wmf/scripting/texts.lua:98
 msgid "An Ancient Castle"
 msgstr "Caisteal àrsaidh"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:90
+#: ../../maps/Plateau.wmf/scripting/texts.lua:99
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -95,7 +97,7 @@ msgstr ""
 "rìribh 's tha coltais na stoidhle cèine air. Tha e follaiseach nach e ceàrd "
 "nan tùsanach a thog e."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:93
+#: ../../maps/Plateau.wmf/scripting/texts.lua:102
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -107,11 +109,11 @@ msgstr ""
 "leinn an togalach mòr ud a ghabhail gun strì ro mhòr! Co-dhiù no co-dheth, "
 "tha e riatanach gun gabh sinn e. Seo na bheir smachd air an eilean dhuinn!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:104
+#: ../../maps/Plateau.wmf/scripting/texts.lua:113
 msgid "Ancient Castle Captured"
 msgstr "Ghabh thu an caisteal àrsaidh"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:105
+#: ../../maps/Plateau.wmf/scripting/texts.lua:114
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
@@ -119,7 +121,7 @@ msgstr ""
 "Mìorbhaileach! Chuir am feachd againn ruaig air Lanasa 's a cuid "
 "shaighdearan. 'S ann againne a tha an caisteal àrsaidh a-nis!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:106
+#: ../../maps/Plateau.wmf/scripting/texts.lua:115
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -142,16 +144,16 @@ msgstr ""
 "tighearna-cogaidh òg – gu deas agus bu chòir dhuinn an gabhail ach nach "
 "faigh ar nàmhaid biadh bhuaithe tuilleadh."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:117
 #: ../../maps/Plateau.wmf/scripting/texts.lua:126
+#: ../../maps/Plateau.wmf/scripting/texts.lua:135
 msgid "Another Briefing"
 msgstr "Brath-ullachaidh eile"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:121
+#: ../../maps/Plateau.wmf/scripting/texts.lua:130
 msgid "Erwyn Defeated"
 msgstr "Chuir thu ruaig air Erwyn"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:122
+#: ../../maps/Plateau.wmf/scripting/texts.lua:131
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one "
 "less strong warlord on this island!"
@@ -159,11 +161,11 @@ msgstr ""
 "Taghta! Ghèill Erwyn nuair a chunnaic e na togalaichean mu dheireadh aire "
 "'nan teine. Fhuair sinn cuidhteas de thighearna-cogaidh làidir eile!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:130
+#: ../../maps/Plateau.wmf/scripting/texts.lua:139
 msgid "Jomo Defeated"
 msgstr "Chuir thu ruaig air Iòmo"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:131
+#: ../../maps/Plateau.wmf/scripting/texts.lua:140
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
@@ -171,15 +173,15 @@ msgstr ""
 "Taghta! Ghèill Iòmo nuair a chunnaic e na togalaichean mu dheireadh aire "
 "'nan teine. Fhuair sinn cuidhteas de thighearna-cogaidh eile!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:135
+#: ../../maps/Plateau.wmf/scripting/texts.lua:144
 msgid "Last Briefing"
 msgstr "Am brath-ullachaidh mu dheireadh"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:139
+#: ../../maps/Plateau.wmf/scripting/texts.lua:148
 msgid "Victory!"
 msgstr "Buaidh!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+#: ../../maps/Plateau.wmf/scripting/texts.lua:149
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better "
 "than the warlords did."
@@ -187,7 +189,7 @@ msgstr ""
 "Mu dheireadh thall! 'S an leinne a tha an t-eilean air fad. Feumaidh sinn a "
 "nas fhearr air a dhìon na bha na tighearnan-cogaidh."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:141
+#: ../../maps/Plateau.wmf/scripting/texts.lua:150
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

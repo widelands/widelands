@@ -180,7 +180,7 @@ public:
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think() override;
+	void think() override;
 
 	void init();
 	void add_buttons_auto();

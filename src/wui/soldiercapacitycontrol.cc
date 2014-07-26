@@ -38,7 +38,7 @@ struct SoldierCapacityControl : UI::Box {
 		 Widelands::Building & building);
 
 protected:
-	virtual void think() override;
+	void think() override;
 
 private:
 	void change_soldier_capacity(int delta);

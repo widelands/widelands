@@ -39,7 +39,7 @@ struct Fullscreen_Menu_Base : public UI::Panel {
 	Fullscreen_Menu_Base(char const * bgpic);
 	~Fullscreen_Menu_Base();
 
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 
 public:
 	///\return the size for texts fitting to current resolution

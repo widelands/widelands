@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-05-31 21:00+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:33+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:40+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -165,14 +165,7 @@ msgstr ""
 "cesta, tím náročnější bude pro lidi po ní chodit (a zboží tak bude "
 "přepravováno pomaleji)."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:41
-msgid "Build a road to the lumberjack’s hut"
-msgstr "Postav cestu k dřevorubci."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:43
-msgid "Road to the lumberjack’ hut"
-msgstr "Cesta k dřevorubci"
-
+#: ../../campaigns/t01.wmf/scripting/texts.lua:25
 #: ../../campaigns/t01.wmf/scripting/texts.lua:47
 msgid ""
 "You can click on any of the symbols to build the first part of the road "
@@ -186,6 +179,14 @@ msgstr ""
 "které určují, kudy cesta může pokračovat, a tak dále. Nebo můžeš kliknout "
 "dál od vlajky a postavit tak několik částí cesty najednou. Kliknutím na "
 "vlajku u základny cestu dokončíš."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:41
+msgid "Build a road to the lumberjack’s hut"
+msgstr "Postav cestu k dřevorubci."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:43
+msgid "Road to the lumberjack’ hut"
+msgstr "Cesta k dřevorubci"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
 #: ../../campaigns/t01.wmf/scripting/texts.lua:55
@@ -270,13 +271,10 @@ msgstr "Khantrukh pokračuje..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:107
 msgid ""
-"None but the gods know how long we have to remain hidden here. The warriors "
-"hope we may march back gloriously any day now, but I strongly doubt that "
-"will happen soon. And the days are already getting shorter and colder..."
+"Only the gods know how long we have to remain hidden here. The warriors hope "
+"we may march back gloriously any day now, but I strongly doubt that will "
+"happen soon. And the days are already getting shorter and colder..."
 msgstr ""
-"Pouze bohové samotní vědí, jak dlouho zde zůstaneme skryti. Válečníci "
-"doufají, že se každým dnem vydáme na pochod zpět, ale já o tom silně "
-"pochybuji. A dny jsou zatím stále chladnější a kratší..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
 msgid ""
@@ -519,7 +517,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"

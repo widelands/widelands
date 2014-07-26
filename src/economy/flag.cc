@@ -38,7 +38,11 @@
 
 namespace Widelands {
 
-Map_Object_Descr g_flag_descr("flag", "Flag");
+Flag_Descr g_flag_descr("flag", "Flag");
+
+const Flag_Descr& Flag::descr() const {
+	return g_flag_descr;
+}
 
 /**
  * Create the flag. Initially, it doesn't have any attachments.
@@ -144,11 +148,6 @@ Flag::Flag
 
 void Flag::set_flag_position(Coords coords) {
 	m_position = coords;
-}
-
-int32_t Flag::get_type() const
-{
-	return FLAG;
 }
 
 int32_t Flag::get_size() const

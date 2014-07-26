@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_DISMANTLESITE_H
 #define WL_LOGIC_DISMANTLESITE_H
 
+#include "base/macros.h"
 #include "logic/building.h"
 #include "logic/partially_finished_building.h"
 #include "logic/player.h"
@@ -42,13 +43,18 @@ the destructed building.
 class DismantleSite;
 
 struct DismantleSite_Descr : public Building_Descr {
-	DismantleSite_Descr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr & tribe);
+	DismantleSite_Descr(char const* name,
+	                    char const* descname,
+	                    const std::string& directory,
+	                    Profile&,
+	                    Section& global_s,
+							  const Tribe_Descr& tribe);
+	~DismantleSite_Descr() override {}
 
-	virtual Building & create_object() const override;
-	std::string type() const override {return "dismantlesite";}
+	Building& create_object() const override;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(DismantleSite_Descr);
 };
 
 class DismantleSite : public Partially_Finished_Building {
@@ -64,23 +70,22 @@ public:
 		(const DismantleSite_Descr & descr, Editor_Game_Base &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
-	char const * type_name() const override {return "dismantlesite";}
-	virtual std::string get_statistics_string() override;
+	std::string get_statistics_string() override;
 
-	virtual bool burn_on_destroy() override;
-	virtual void init   (Editor_Game_Base &) override;
+	bool burn_on_destroy() override;
+	void init   (Editor_Game_Base &) override;
 
-	virtual bool get_building_work(Game &, Worker &, bool success) override;
+	bool get_building_work(Game &, Worker &, bool success) override;
 
 	static void count_returned_wares(Building* building, std::map<Ware_Index, uint8_t> & res);
 
 protected:
-	virtual uint32_t build_step_time() const override {return DISMANTLESITE_STEP_TIME;}
+	uint32_t build_step_time() const override {return DISMANTLESITE_STEP_TIME;}
 
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 };
 
 }

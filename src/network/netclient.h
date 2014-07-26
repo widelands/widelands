@@ -62,38 +62,38 @@ struct NetClient :
 	// End GameController interface
 
 	// GameSettingsProvider interface
-	virtual const GameSettings & settings() override;
+	const GameSettings & settings() override;
 
-	virtual void setScenario(bool) override;
-	virtual bool canChangeMap() override;
-	virtual bool canChangePlayerState(uint8_t number) override;
-	virtual bool canChangePlayerTribe(uint8_t number) override;
-	virtual bool canChangePlayerInit (uint8_t number) override;
-	virtual bool canChangePlayerTeam (uint8_t number) override;
+	void setScenario(bool) override;
+	bool canChangeMap() override;
+	bool canChangePlayerState(uint8_t number) override;
+	bool canChangePlayerTribe(uint8_t number) override;
+	bool canChangePlayerInit (uint8_t number) override;
+	bool canChangePlayerTeam (uint8_t number) override;
 
-	virtual bool canLaunch() override;
+	bool canLaunch() override;
 
 	virtual void setMap
 		(const std::string & mapname,
 		 const std::string & mapfilename,
 		 uint32_t maxplayers,
 		 bool savegame = false) override;
-	virtual void setPlayerState    (uint8_t number, PlayerSettings::State state) override;
+	void setPlayerState    (uint8_t number, PlayerSettings::State state) override;
 	virtual void setPlayerAI
 		(uint8_t number, const std::string & ai, bool const random_ai = false) override;
-	virtual void nextPlayerState   (uint8_t number) override;
+	void nextPlayerState   (uint8_t number) override;
 	virtual void setPlayerTribe
 		(uint8_t number, const std::string & tribe, bool const random_tribe = false) override;
-	virtual void setPlayerInit     (uint8_t number, uint8_t index) override;
-	virtual void setPlayerName     (uint8_t number, const std::string & name) override;
-	virtual void setPlayer         (uint8_t number, PlayerSettings ps) override;
-	virtual void setPlayerNumber   (uint8_t number) override;
-	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) override;
-	virtual void setPlayerCloseable(uint8_t number, bool closeable) override;
-	virtual void setPlayerShared   (uint8_t number, uint8_t shared) override;
-	virtual void setWinConditionScript   (std::string) override;
-	virtual void nextWinCondition  () override;
-	virtual std::string getWinConditionScript() override;
+	void setPlayerInit     (uint8_t number, uint8_t index) override;
+	void setPlayerName     (uint8_t number, const std::string & name) override;
+	void setPlayer         (uint8_t number, PlayerSettings ps) override;
+	void setPlayerNumber   (uint8_t number) override;
+	void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) override;
+	void setPlayerCloseable(uint8_t number, bool closeable) override;
+	void setPlayerShared   (uint8_t number, uint8_t shared) override;
+	void setWinConditionScript   (std::string) override;
+	void nextWinCondition  () override;
+	std::string getWinConditionScript() override;
 
 	// ChatProvider interface
 	void send(const std::string & msg) override;

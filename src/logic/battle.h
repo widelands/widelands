@@ -24,6 +24,18 @@
 namespace Widelands {
 class Soldier;
 
+class Battle_Descr : public Map_Object_Descr {
+public:
+	Battle_Descr(char const* const _name, char const* const _descname)
+	   : Map_Object_Descr(Map_Object_Type::BATTLE, _name, _descname) {
+	}
+	~Battle_Descr() override {
+	}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(Battle_Descr);
+};
+
 /**
  * Manages the battle between two opposing soldiers.
  *
@@ -34,18 +46,16 @@ class Soldier;
  */
 class Battle : public Map_Object {
 public:
-	typedef Map_Object_Descr Descr;
+	const Battle_Descr& descr() const;
 
 	Battle(); //  for loading an existing battle from a savegame
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	// Implements Map_Object.
-	virtual int32_t get_type() const override {return BATTLE;}
-	virtual char const * type_name() const override {return "battle";}
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual bool has_new_save_support() override {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	bool has_new_save_support() override {return true;}
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 
@@ -71,7 +81,7 @@ public:
 private:
 	struct Loader : public Map_Object::Loader {
 		virtual void load(FileRead &, uint8_t version);
-		virtual void load_pointers() override;
+		void load_pointers() override;
 
 		Serial m_first;
 		Serial m_second;

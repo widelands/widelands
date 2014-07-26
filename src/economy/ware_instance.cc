@@ -53,15 +53,15 @@ struct IdleWareSupply : public Supply {
 	void set_economy(Economy *);
 
 	//  implementation of Supply
-	virtual PlayerImmovable * get_position(Game &) override;
-	virtual bool is_active() const override;
-	virtual bool has_storage() const override;
-	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
-	virtual void send_to_storage(Game &, Warehouse * wh) override;
+	PlayerImmovable * get_position(Game &) override;
+	bool is_active() const override;
+	bool has_storage() const override;
+	void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
+	void send_to_storage(Game &, Warehouse * wh) override;
 
-	virtual uint32_t nr_supplies(const Game &, const Request &) const override;
-	virtual WareInstance & launch_ware(Game &, const Request &) override;
-	virtual Worker & launch_worker(Game &, const Request &) override;
+	uint32_t nr_supplies(const Game &, const Request &) const override;
+	WareInstance & launch_ware(Game &, const Request &) override;
+	Worker & launch_worker(Game &, const Request &) override;
 
 private:
 	WareInstance & m_ware;
@@ -198,11 +198,6 @@ WareInstance::~WareInstance()
 		molog("Ware %u still has supply %p\n", m_descr_index, m_supply);
 		delete m_supply;
 	}
-}
-
-int32_t WareInstance::get_type() const
-{
-	return WARE;
 }
 
 void WareInstance::init(Editor_Game_Base & egbase)

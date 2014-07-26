@@ -40,16 +40,15 @@
 
 namespace Widelands {
 
-namespace  {
-
+namespace {
 // Every Map_Object() needs to have a description. So we make a dummy one for
 // Fleet.
-Map_Object_Descr* fleet_description() {
-	static Map_Object_Descr fleet_descr("fleet", "Fleet");
-	return &fleet_descr;
-}
-
+Fleet_Descr g_fleet_descr("fleet", "Fleet");
 }  // namespace
+
+const Fleet_Descr& Fleet::descr() const {
+	return g_fleet_descr;
+}
 
 /**
  * Fleets are initialized empty.
@@ -59,21 +58,12 @@ Map_Object_Descr* fleet_description() {
  * The Fleet takes care of merging with existing fleets, if any.
  */
 Fleet::Fleet(Player & player) :
-	Map_Object(fleet_description()),
+	Map_Object(&g_fleet_descr),
 	m_owner(player),
 	m_act_pending(false)
 {
 }
 
-int32_t Fleet::get_type() const
-{
-	return FLEET;
-}
-
-char const * Fleet::type_name() const
-{
-	return "fleet";
-}
 
 /**
  * Whether the fleet is in fact useful for transporting goods.
@@ -171,7 +161,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (BaseImmovable * imm = cur.field->get_immovable()) {
-			if (imm->get_type() == PORTDOCK) {
+			if (imm->descr().type() == Map_Object_Type::PORTDOCK) {
 				if (upcast(PortDock, dock, imm)) {
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 						dock->get_fleet()->merge(egbase, this);
@@ -182,7 +172,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 		}
 
 		for (Bob * bob = cur.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
-			if (bob->get_bob_type() != Bob::SHIP)
+			if (bob->descr().type() != Map_Object_Type::SHIP)
 				continue;
 
 			if (upcast(Ship, ship, bob)) {
@@ -475,7 +465,7 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 	FCoords cur;
 	while (!se.targets.empty() && astar.step(cur, cost)) {
 		BaseImmovable * imm = cur.field->get_immovable();
-		if (!imm || imm->get_type() != PORTDOCK)
+		if (!imm || imm->descr().type() != Map_Object_Type::PORTDOCK)
 			continue;
 
 		if (upcast(PortDock, pd, imm)) {

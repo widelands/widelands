@@ -74,12 +74,12 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		m_lua = nullptr;
 	}
 
-	virtual void setScenario(bool is_scenario) override {h->setScenario(is_scenario);}
+	void setScenario(bool is_scenario) override {h->setScenario(is_scenario);}
 
-	virtual const GameSettings & settings() override {return h->settings();}
+	const GameSettings & settings() override {return h->settings();}
 
-	virtual bool canChangeMap() override {return true;}
-	virtual bool canChangePlayerState(uint8_t const number) override {
+	bool canChangeMap() override {return true;}
+	bool canChangePlayerState(uint8_t const number) override {
 		if (settings().savegame)
 			return settings().players.at(number).state != PlayerSettings::stateClosed;
 		else if (settings().scenario)
@@ -93,15 +93,15 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				settings().players.at(number).state == PlayerSettings::stateClosed;
 		return true;
 	}
-	virtual bool canChangePlayerTribe(uint8_t const number) override {
+	bool canChangePlayerTribe(uint8_t const number) override {
 		return canChangePlayerTeam(number);
 	}
-	virtual bool canChangePlayerInit(uint8_t const number) override {
+	bool canChangePlayerInit(uint8_t const number) override {
 		if (settings().scenario || settings().savegame)
 			return false;
 		return number < settings().players.size();
 	}
-	virtual bool canChangePlayerTeam(uint8_t number) override {
+	bool canChangePlayerTeam(uint8_t number) override {
 		if (settings().scenario || settings().savegame)
 			return false;
 		if (number >= settings().players.size())
@@ -112,7 +112,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			settings().players.at(number).state == PlayerSettings::stateComputer;
 	}
 
-	virtual bool canLaunch() override {return h->canLaunch();}
+	bool canLaunch() override {return h->canLaunch();}
 
 	virtual void setMap
 		(const std::string &       mapname,
@@ -130,7 +130,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 		h->setPlayerState(number, state);
 	}
-	virtual void nextPlayerState(uint8_t const number) override {
+	void nextPlayerState(uint8_t const number) override {
 		if (number > settings().players.size())
 			return;
 
@@ -233,7 +233,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTribe(number, tribe, random_tribe);
 	}
 
-	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) override
+	void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) override
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -244,57 +244,57 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTeam(number, team);
 	}
 
-	virtual void setPlayerCloseable(uint8_t number, bool closeable) override {
+	void setPlayerCloseable(uint8_t number, bool closeable) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerCloseable(number, closeable);
 	}
 
-	virtual void setPlayerShared(uint8_t number, uint8_t shared) override {
+	void setPlayerShared(uint8_t number, uint8_t shared) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerShared(number, shared);
 	}
 
-	virtual void setPlayerInit(uint8_t const number, uint8_t const index) override {
+	void setPlayerInit(uint8_t const number, uint8_t const index) override {
 		if (number >= h->settings().players.size())
 			return;
 
 		h->setPlayerInit(number, index);
 	}
 
-	virtual void setPlayerAI(uint8_t number, const std::string & name, bool const random_ai = false) override {
+	void setPlayerAI(uint8_t number, const std::string & name, bool const random_ai = false) override {
 		h->setPlayerAI(number, name, random_ai);
 	}
 
-	virtual void setPlayerName(uint8_t const number, const std::string & name) override {
+	void setPlayerName(uint8_t const number, const std::string & name) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerName(number, name);
 	}
 
-	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) override {
+	void setPlayer(uint8_t const number, PlayerSettings const ps) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayer(number, ps);
 	}
 
-	virtual void setPlayerNumber(uint8_t const number) override {
+	void setPlayerNumber(uint8_t const number) override {
 		if
 			(number == UserSettings::none() ||
 			 number < h->settings().players.size())
 			h->setPlayerNumber(number);
 	}
 
-	virtual std::string getWinConditionScript() override {
+	std::string getWinConditionScript() override {
 		return h->settings().win_condition_script;
 	}
 
-	virtual void setWinConditionScript(std::string wc) override {
+	void setWinConditionScript(std::string wc) override {
 		h->setWinConditionScript(wc);
 	}
 
-	virtual void nextWinCondition() override {
+	void nextWinCondition() override {
 		if (m_win_condition_scripts.size() < 1) {
 			if (!m_lua)
 				m_lua = new LuaInterface();

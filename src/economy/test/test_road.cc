@@ -46,7 +46,7 @@ struct TestingFlag : public Flag {
 struct TestingMap : public Map {
 	TestingMap(int const w, int const h) : Map() {set_size(w, h);}
 
-	virtual void recalc_for_field_area(const World&, Area<FCoords>) override {}
+	void recalc_for_field_area(const World&, Area<FCoords>) override {}
 
 };
 

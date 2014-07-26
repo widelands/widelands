@@ -7,57 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-04-16 03:38+0000\n"
 "Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:42+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:50+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: de\n"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:28
-msgid "Capture the Ancient Castle"
-msgstr "Erobere die historische Burg"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:30
-msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "Besiege Lanissa und erobere die historische Burg."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:35
-msgid "Defeat Erwyn"
-msgstr "Besiege Erwyn"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:37
-msgid ""
-"Defeat Erwyn. He commands the strongest opposing military force left on this "
-"island."
-msgstr "Besiege Erwyn. Er kommandiert die stärksten Soldaten dieser Insel."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:41
-msgid "Defeat Jomo"
-msgstr "Besiege Jomo"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:43
-msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
-msgstr ""
-"Besiege Jomo. Er kümmert sich um die Nahrungsversorgung der Soldaten."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:57
-msgid "New Objective"
-msgstr "Neues Ziel"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:72
-msgid "First Briefing"
-msgstr "Erste Besprechung"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:76
+#: ../../maps/Plateau.wmf/scripting/texts.lua:85
 msgid "The Forbidden Island"
 msgstr "Die verbotene Insel"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:77
+#: ../../maps/Plateau.wmf/scripting/texts.lua:30
+#: ../../maps/Plateau.wmf/scripting/texts.lua:86
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -72,16 +39,51 @@ msgstr ""
 "ruhig verhalten und unsere Infrastruktur aufbauen. Bald werden wir stark "
 "genug sein, ihre Stellungen anzugreifen."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:85
-#: ../../maps/Plateau.wmf/scripting/texts.lua:100
+#: ../../maps/Plateau.wmf/scripting/texts.lua:41
+msgid "Capture the Ancient Castle"
+msgstr "Erobere die historische Burg"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:42
+msgid "Defeat Lanissa and capture the ancient castle."
+msgstr "Besiege Lanissa und erobere die historische Burg."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:47
+msgid "Defeat Erwyn"
+msgstr "Besiege Erwyn"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:48
+msgid ""
+"Defeat Erwyn. He commands the strongest opposing military force left on this "
+"island."
+msgstr "Besiege Erwyn. Er kommandiert die stärksten Soldaten dieser Insel."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:52
+msgid "Defeat Jomo"
+msgstr "Besiege Jomo"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:53
+msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
+msgstr ""
+"Besiege Jomo. Er kümmert sich um die Nahrungsversorgung der Soldaten."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:66
+msgid "New Objective"
+msgstr "Neues Ziel"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:81
+msgid "First Briefing"
+msgstr "Erste Besprechung"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:94
+#: ../../maps/Plateau.wmf/scripting/texts.lua:109
 msgid "Second Briefing"
 msgstr "Zweite Besprechung"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:89
+#: ../../maps/Plateau.wmf/scripting/texts.lua:98
 msgid "An Ancient Castle"
 msgstr "Eine historische Burg"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:90
+#: ../../maps/Plateau.wmf/scripting/texts.lua:99
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -93,7 +95,7 @@ msgstr ""
 "sei sie in einem fremden Stil errichtet. Es ist sicher, dass dies nicht von "
 "Barbarenhand geschah."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:93
+#: ../../maps/Plateau.wmf/scripting/texts.lua:102
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -105,11 +107,11 @@ msgstr ""
 "einen größeren Kampf zu erobern! Trotz allem, es ist höchst wichtig, dass "
 "wir sie bekommen. Sie wird der Schlüssel zur Macht dieser Insel sein!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:104
+#: ../../maps/Plateau.wmf/scripting/texts.lua:113
 msgid "Ancient Castle Captured"
 msgstr "Die historische Burg wurde eingenommen"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:105
+#: ../../maps/Plateau.wmf/scripting/texts.lua:114
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
@@ -117,7 +119,7 @@ msgstr ""
 "Wunderbar! Unsere Truppen haben endlich Lanissa und ihre Soldaten besiegt. "
 "Die uralte Burg ist unser!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:106
+#: ../../maps/Plateau.wmf/scripting/texts.lua:115
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -141,16 +143,16 @@ msgstr ""
 "uns um diese Infrastrukturen kümmern, um so die Nahrungsversorgung unserer "
 "Feinde abzuschneiden."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:117
 #: ../../maps/Plateau.wmf/scripting/texts.lua:126
+#: ../../maps/Plateau.wmf/scripting/texts.lua:135
 msgid "Another Briefing"
 msgstr "Eine weitere Besprechung"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:121
+#: ../../maps/Plateau.wmf/scripting/texts.lua:130
 msgid "Erwyn Defeated"
 msgstr "Erwyn wurde besiegt"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:122
+#: ../../maps/Plateau.wmf/scripting/texts.lua:131
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one "
 "less strong warlord on this island!"
@@ -158,11 +160,11 @@ msgstr ""
 "Großartig! Jomo hat sich ergeben, als er sein letztes Gebäude niederbrennen "
 "sah. Ein starker Kriegsherr weniger auf dieser Insel!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:130
+#: ../../maps/Plateau.wmf/scripting/texts.lua:139
 msgid "Jomo Defeated"
 msgstr "Jomo wurde besiegt"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:131
+#: ../../maps/Plateau.wmf/scripting/texts.lua:140
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
@@ -170,15 +172,15 @@ msgstr ""
 "Großartig! Jomo hat sich ergeben, als er sein letztes Gebäude niederbrennen "
 "sah. Ein starker Kriegsherr weniger auf dieser Insel!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:135
+#: ../../maps/Plateau.wmf/scripting/texts.lua:144
 msgid "Last Briefing"
 msgstr "Die letzte Besprechung"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:139
+#: ../../maps/Plateau.wmf/scripting/texts.lua:148
 msgid "Victory!"
 msgstr "Sieg!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+#: ../../maps/Plateau.wmf/scripting/texts.lua:149
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better "
 "than the warlords did."
@@ -186,7 +188,7 @@ msgstr ""
 "Endlich! Die Insel gehört nun ganz uns. Jetzt müssen wir sie nur besser "
 "schützen als es die Kriegsherren taten."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:141
+#: ../../maps/Plateau.wmf/scripting/texts.lua:150
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

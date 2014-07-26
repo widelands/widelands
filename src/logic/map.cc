@@ -1102,7 +1102,11 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(Map_Object::FLAG)))
+		if (consider_mobs &&
+			 find_immovables(
+				Area<FCoords>(f, 1),
+				nullptr,
+				FindImmovableType(Map_Object_Type::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1136,7 +1140,7 @@ NodeCaps Map::_calc_nodecaps_pass2
 		if
 			(!(br.field->caps & BUILDCAPS_FLAG)
 			&&
-			(!br.field->get_immovable() || br.field->get_immovable()->get_type() != Map_Object::FLAG))
+			(!br.field->get_immovable() || br.field->get_immovable()->descr().type() != Map_Object_Type::FLAG))
 			return static_cast<NodeCaps>(caps);
 	} else {
 		if (!(_calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
@@ -1288,7 +1292,7 @@ int Map::calc_buildsize
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE)
 				continue;
-			if (avoidnature && obj->get_type() == Map_Object::IMMOVABLE)
+			if (avoidnature && obj->descr().type() == Map_Object_Type::IMMOVABLE)
 				objsize += 1;
 			if (objsize + buildsize > BaseImmovable::BIG)
 				buildsize = BaseImmovable::BIG - objsize + 1;

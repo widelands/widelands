@@ -96,8 +96,6 @@ void terraform_for_building
 
 namespace Widelands {
 
-extern const Map_Object_Descr g_road_descr;
-
 const RGBColor Player::Colors[MAX_PLAYERS] = {
 	RGBColor(2,     2, 198),  // blue
 	RGBColor(255,  41,   0),  // red
@@ -875,7 +873,7 @@ Forces the drop of given soldier at given house
 void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 	if (&imm.owner() != this)
 		return;
-	if (soldier.descr().get_worker_type() != Worker_Descr::SOLDIER)
+	if (soldier.descr().type() != Map_Object_Type::SOLDIER)
 		return;
 	if (upcast(SoldierControl, ctrl, &imm))
 		ctrl->dropSoldier(soldier);

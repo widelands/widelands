@@ -54,7 +54,7 @@ struct ImageElement : Element {
 	ImageElement(const Rect & _bbox, const Image* _image)
 		: Element(_bbox), image(_image) {}
 
-	virtual void draw(RenderTarget & dst) override
+	void draw(RenderTarget & dst) override
 	{
 		dst.blit(Point(0, 0), image);
 	}
@@ -69,7 +69,7 @@ struct TextlineElement : Element {
 		 std::vector<std::string>::const_iterator words_end)
 		: Element(_bbox), style(_style), words(words_begin, words_end) {}
 
-	virtual void draw(RenderTarget & dst) override
+	void draw(RenderTarget & dst) override
 	{
 		assert(words.size());
 		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), words[0]);

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2012-03-05 18:38+0000\n"
 "Last-Translator: Michael Moroni <michael.moroni@mailoo.org>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:42+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:51+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: ../../campaigns/dummy.wmf/scripting/init.lua:10
 msgid "Not yet implemented"
@@ -30,7 +30,7 @@ msgstr "Pardonu, ĉi tiu mapo ne ankoraŭ estas realigita."
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

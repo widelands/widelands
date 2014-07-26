@@ -40,7 +40,18 @@
 
 namespace Widelands {
 
-Map_Object_Descr g_portdock_descr("portdock", "Port Dock");
+PortDock_Descr g_portdock_descr("portdock", "Port Dock");
+
+const PortDock_Descr& PortDock::descr() const {
+	return g_portdock_descr;
+}
+
+
+PortDock_Descr::PortDock_Descr(char const* const _name, char const* const _descname)
+	:
+	Map_Object_Descr(Map_Object_Type::PORTDOCK, _name, _descname)
+{
+}
 
 PortDock::PortDock(Warehouse* wh) :
 	PlayerImmovable(g_portdock_descr),
@@ -92,16 +103,6 @@ int32_t PortDock::get_size() const
 bool PortDock::get_passable() const
 {
 	return true;
-}
-
-int32_t PortDock::get_type() const
-{
-	return PORTDOCK;
-}
-
-char const * PortDock::type_name() const
-{
-	return "portdock";
 }
 
 PortDock::PositionList PortDock::get_positions

@@ -56,16 +56,12 @@ struct ProductionSite_Descr : public Building_Descr {
 	friend struct ProductionProgram; // To add animations
 
 	ProductionSite_Descr
-		(char const * name, char const * descname,
+		(Map_Object_Type type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &, const World&);
-	virtual ~ProductionSite_Descr();
+	~ProductionSite_Descr() override;
 
-	virtual Building & create_object() const override;
-
-	virtual std::string type() const override {
-		return "productionsite";
-	}
+	Building & create_object() const override;
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
@@ -111,6 +107,8 @@ private:
 	std::string m_out_of_resource_title;
 	std::string m_out_of_resource_message;
 	uint32_t    m_out_of_resource_delay_attempts;
+
+	DISALLOW_COPY_AND_ASSIGN(ProductionSite_Descr);
 };
 
 class ProductionSite : public Building {
@@ -153,26 +151,25 @@ public:
 		return m_working_positions;
 	}
 
-	virtual std::string get_statistics_string() override;
+	std::string get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 	char const * result_string() const {return m_result_buffer;}
 
-	virtual WaresQueue & waresqueue(Ware_Index) override;
+	WaresQueue & waresqueue(Ware_Index) override;
 
-	char const * type_name() const override {return "productionsite";}
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 
-	virtual void remove_worker(Worker &) override;
+	void remove_worker(Worker &) override;
 	int warp_worker(Editor_Game_Base &, const Worker_Descr & wd);
 
-	virtual bool fetch_from_flag(Game &) override;
-	virtual bool get_building_work(Game &, Worker &, bool success) override;
+	bool fetch_from_flag(Game &) override;
+	bool get_building_work(Game &, Worker &, bool success) override;
 
-	virtual void set_economy(Economy *) override;
+	void set_economy(Economy *) override;
 
 	typedef std::vector<WaresQueue *> Input_Queues;
 	const Input_Queues & warequeues() const {return m_input_queues;}

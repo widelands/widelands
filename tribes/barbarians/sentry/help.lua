@@ -1,7 +1,7 @@
 -- The Barbarian Sentry
 
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
+include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")
 

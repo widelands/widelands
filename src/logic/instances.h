@@ -48,22 +48,61 @@ class Map_Map_Object_Loader;
 class Player;
 struct Path;
 
+// This enum lists the available classes of Map Objects.
+enum class Map_Object_Type : uint8_t {
+	MAPOBJECT = 0,  // Root superclass
+
+	WARE,  //  class WareInstance
+	BATTLE,
+	FLEET,
+
+	BOB = 10,  // Bob
+	CRITTER,   // Bob -- CritterBob
+	SHIP,      // Bob -- Ship
+	WORKER,    // Bob -- Worker
+	CARRIER,   // Bob -- Worker -- Carrier
+	SOLDIER,   // Bob -- Worker -- Soldier
+
+	// everything below is at least a BaseImmovable
+	IMMOVABLE = 30,
+
+	// everything below is at least a PlayerImmovable
+	FLAG = 40,
+	ROAD,
+	PORTDOCK,
+
+	// everything below is at least a Building
+	BUILDING = 100,    // Building
+	CONSTRUCTIONSITE,  // Building -- Constructionsite
+	DISMANTLESITE,     // Building -- Dismantlesite
+	WAREHOUSE,         // Building -- Warehouse
+	PRODUCTIONSITE,    // Building -- Productionsite
+	MILITARYSITE,      // Building -- Productionsite -- Militarysite
+	TRAININGSITE       // Building -- Productionsite -- Trainingsite
+};
+
+// Returns a string representation for 'type'.
+std::string to_string(Map_Object_Type type);
+
 /**
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
 struct Map_Object_Descr {
-	Map_Object_Descr(const std::string& init_name, const std::string& init_descname)
-	   : m_name(init_name), m_descname(init_descname) {
+
+	Map_Object_Descr(const Map_Object_Type type,
+	                 const std::string& init_name,
+	                 const std::string& init_descname)
+	   : m_type(type), m_name(init_name), m_descname(init_descname) {
 	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-	virtual std::string type() const {
-		return "mapobject";
-	}
-
 	const std::string &     name() const {return m_name;}
-	const std::string & descname() const {return m_descname;}
+	const std::string &     descname() const {return m_descname;}
+
+	// Type of the Map_Object_Descr.
+	Map_Object_Type type() const {return m_type;}
+
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
@@ -98,8 +137,9 @@ private:
 	typedef std::map<std::string, uint32_t> AttribMap;
 	typedef std::vector<uint32_t>           Attributes;
 
-	std::string const m_name;
-	std::string const m_descname;       ///< Descriptive name
+	const Map_Object_Type   m_type;           /// Subclasses pick from the enum above
+	std::string const m_name;           /// The name for internal reference
+	std::string const m_descname;       /// A localized Descriptive name
 	Attributes        m_attributes;
 	Anims             m_anims;
 	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
@@ -108,12 +148,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Map_Object_Descr);
 };
 
-/**
- * dummy instance because Map_Object needs a description
- */
-// TODO(unknown): move this to another header??
-extern Map_Object_Descr g_flag_descr;
-extern Map_Object_Descr g_portdock_descr;
 
 /**
  * \par Notes on Map_Object
@@ -159,23 +193,6 @@ class Map_Object {
 	MO_DESCR(Map_Object_Descr)
 
 public:
-	enum {
-		AREAWATCHER,
-		BOB,  //  class Bob
-
-		WARE, //  class WareInstance
-		BATTLE,
-		FLEET,
-
-		// everything below is at least a BaseImmovable
-		IMMOVABLE,
-
-		// everything below is at least a PlayerImmovable
-		BUILDING,
-		FLAG,
-		ROAD,
-		PORTDOCK
-	};
 	/// Some default, globally valid, attributes.
 	/// Other attributes (such as "harvestable corn") could be
 	/// allocated dynamically (?)
@@ -200,9 +217,6 @@ protected:
 	virtual ~Map_Object() {}
 
 public:
-	virtual int32_t get_type() const = 0;
-	virtual char const * type_name() const {return "map object";}
-
 	Serial serial() const {return m_serial;}
 
 	/**
@@ -452,12 +466,12 @@ private:
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object &);
-	virtual void execute (Game &) override;
+	void execute (Game &) override;
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
+	uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
 private:
 	Serial obj_serial;
@@ -467,12 +481,12 @@ struct Cmd_Act : public GameLogicCommand {
 	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
 	Cmd_Act (int32_t t, Map_Object &, int32_t a);
 
-	virtual void execute (Game &) override;
+	void execute (Game &) override;
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_ACT;}
+	uint8_t id() const override {return QUEUE_CMD_ACT;}
 
 private:
 	Serial obj_serial;

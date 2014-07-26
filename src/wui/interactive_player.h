@@ -55,11 +55,11 @@ public:
 
 	void toggle_chat        ();
 
-	virtual bool can_see(Widelands::Player_Number) const override;
-	virtual bool can_act(Widelands::Player_Number) const override;
-	virtual Widelands::Player_Number player_number() const override;
+	bool can_see(Widelands::Player_Number) const override;
+	bool can_act(Widelands::Player_Number) const override;
+	Widelands::Player_Number player_number() const override;
 
-	virtual void node_action() override;
+	void node_action() override;
 
 	bool handle_key(bool down, SDL_keysym) override;
 
@@ -75,7 +75,7 @@ public:
 	void set_player_number(uint32_t plrn);
 
 	// For load
-	virtual void cleanup_for_load() override;
+	void cleanup_for_load() override;
 	void think() override;
 	void postload() override;
 

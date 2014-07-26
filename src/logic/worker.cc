@@ -620,8 +620,8 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 				dest = immovable->get_position();
 			else
 				throw wexception
-					("MO(%u): [actWalk]: bad object type = %i",
-					serial(), obj->get_type());
+					("MO(%u): [actWalk]: bad object type %s",
+					serial(), to_string(obj->descr().type()).c_str());
 
 			//  Only take one step, then rethink (object may have moved)
 			max_steps = 1;
@@ -724,12 +724,12 @@ bool Worker::run_object(Game & game, State & state, const Action & action)
 			w   ->start_task_program(game, action.sparam1);
 		} else
 			throw wexception
-				("MO(%i): [actObject]: bab bob type = %i",
-				 serial(), bob->get_bob_type());
+				("MO(%i): [actObject]: bad bob type %s",
+				 serial(), to_string(bob->descr().type()).c_str());
 	} else
 		throw wexception
-			("MO(%u): [actObject]: bad object type = %i",
-			 serial(), obj->get_type());
+			("MO(%u): [actObject]: bad object type %s",
+			 serial(),  to_string(obj->descr().type()).c_str());
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -1093,9 +1093,7 @@ void Worker::set_location(PlayerImmovable * const location)
 	if (location) {
 		Economy * const eco = location->get_economy();
 
-		// NOTE we have to explicitly check Worker_Descr::SOLDIER, as SOLDIER is
-		// NOTE as well defined in an enum in instances.h
-		if (!m_economy || (descr().get_worker_type() == Worker_Descr::SOLDIER)) {
+		if (!m_economy || (descr().type() == Map_Object_Type::SOLDIER)) {
 			set_economy(eco);
 		} else if (m_economy != eco) {
 			throw wexception
@@ -1317,7 +1315,7 @@ void Worker::init_auto_task(Game & game) {
 	if (PlayerImmovable * location = get_location(game)) {
 		if
 			(get_economy()->warehouses().size() ||
-			 location->get_type() == BUILDING)
+			 location->descr().type() >= Map_Object_Type::BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(nullptr);
@@ -1502,7 +1500,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				 serial(), nextstep->serial());
 	} else if (upcast(Road,     road,     location)) {
 		// Road to Flag
-		if (nextstep->get_type() == FLAG) {
+		if (nextstep->descr().type() == Map_Object_Type::FLAG) {
 			const Path & path = road->get_path();
 			int32_t const index =
 				nextstep == &road->get_flag(Road::FlagStart) ? 0                 :
@@ -1751,7 +1749,7 @@ void Worker::start_task_return(Game & game, bool const dropware)
 {
 	PlayerImmovable * const location = get_location(game);
 
-	if (!location || location->get_type() != BUILDING)
+	if (!location || location->descr().type() < Map_Object_Type::BUILDING)
 		throw wexception
 			("MO(%u): start_task_return(): not owned by building", serial());
 
@@ -1993,7 +1991,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 
 	// Always leave buildings in an orderly manner,
 	// even when no warehouses are left to return to
-	if (location->get_type() == BUILDING)
+	if (location->descr().type() >= Map_Object_Type::BUILDING)
 		return start_task_leavebuilding(game, true);
 
 	if (!get_economy()->warehouses().size()) {
@@ -2110,7 +2108,7 @@ void Worker::dropoff_update(Game & game, State &)
 	}
 
 	// We don't have the ware any more, return home
-	if (location->get_type() == Map_Object::FLAG)
+	if (location->descr().type() == Map_Object_Type::FLAG)
 		return
 			start_task_move
 				(game,
@@ -2118,7 +2116,7 @@ void Worker::dropoff_update(Game & game, State &)
 				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 
-	if (location->get_type() != Map_Object::BUILDING)
+	if (location->descr().type() < Map_Object_Type::BUILDING)
 		throw wexception
 			("MO(%u): [dropoff]: not on building on return", serial());
 

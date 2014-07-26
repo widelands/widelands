@@ -34,10 +34,13 @@
 
 namespace Widelands {
 
-namespace  {
-Battle::Descr g_Battle_Descr("battle", "Battle");
-}  // namespace
+namespace {
+Battle_Descr g_Battle_Descr("battle", "Battle");
+}
 
+const Battle_Descr& Battle::descr() const {
+	return g_Battle_Descr;
+}
 
 Battle::Battle ()
 	:
