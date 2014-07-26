@@ -43,13 +43,13 @@ public:
 
 	virtual void set_building         (const Building_Descr &);
 
-	virtual void init   (Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init   (Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
-	virtual int32_t get_size() const override;
-	virtual uint32_t get_playercaps() const override;
+	int32_t get_size() const override;
+	uint32_t get_playercaps() const override;
 
-	virtual void set_economy(Economy *) override;
+	void set_economy(Economy *) override;
 
 	uint32_t get_nrwaresqueues() {return m_wares.size();}
 	WaresQueue * get_waresqueue(uint32_t const idx) {return m_wares[idx];}

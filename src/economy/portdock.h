@@ -38,7 +38,7 @@ class ExpeditionBootstrap;
 class PortDock_Descr : public Map_Object_Descr {
 public:
 	PortDock_Descr(char const* const _name, char const* const _descname);
-	virtual ~PortDock_Descr() override {
+	~PortDock_Descr() override {
 	}
 
 private:
@@ -77,7 +77,7 @@ public:
 	const PortDock_Descr& descr() const;
 
 	PortDock(Warehouse* warehouse);
-	virtual ~PortDock();
+	~PortDock() override;
 
 	void add_position(Widelands::Coords where);
 	Warehouse * get_warehouse() const;
@@ -86,19 +86,19 @@ public:
 	PortDock * get_dock(Flag & flag) const;
 	bool get_need_ship() const {return m_need_ship || m_expedition_ready;}
 
-	virtual void set_economy(Economy *) override;
+	void set_economy(Economy *) override;
 
-	virtual int32_t get_size() const override;
-	virtual bool get_passable() const override;
+	int32_t get_size() const override;
+	bool get_passable() const override;
 
-	virtual Flag & base_flag() override;
-	virtual PositionList get_positions
+	Flag & base_flag() override;
+	PositionList get_positions
 		(const Editor_Game_Base &) const override;
-	virtual void draw
+	void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
 	void add_neighbours(std::vector<RoutingNodeNeighbour> & neighbours);
 
@@ -110,7 +110,7 @@ public:
 
 	void ship_arrived(Game &, Ship &);
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
 
@@ -152,8 +152,8 @@ protected:
 		Loader();
 
 		void load(FileRead &, uint8_t version);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	private:
 		uint32_t m_warehouse;
@@ -161,8 +161,8 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() override {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	bool has_new_save_support() override {return true;}
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);

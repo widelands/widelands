@@ -89,8 +89,8 @@ struct Tab_Panel : public Panel {
 	uint32_t active() {return m_active;}
 
 protected:
-	virtual void layout() override;
-	virtual void update_desired_size() override;
+	void layout() override;
+	void update_desired_size() override;
 
 private:
 	// Drawing and event handlers

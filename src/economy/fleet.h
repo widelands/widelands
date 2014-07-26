@@ -38,7 +38,7 @@ public:
 	Fleet_Descr(char const* const _name, char const* const _descname)
 	   : Map_Object_Descr(Map_Object_Type::FLEET, _name, _descname) {
 	}
-	virtual ~Fleet_Descr() override {
+	~Fleet_Descr() override {
 	}
 
 private:
@@ -84,8 +84,8 @@ struct Fleet : Map_Object {
 
 	bool active() const;
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 	void update(Editor_Game_Base &);
 
 	void add_ship(Ship * ship);
@@ -93,13 +93,13 @@ struct Fleet : Map_Object {
 	void add_port(Editor_Game_Base & egbase, PortDock * port);
 	void remove_port(Editor_Game_Base & egbase, PortDock * port);
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	bool get_path(PortDock & start, PortDock & end, Path & path);
 	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
 
 protected:
-	virtual void act(Game &, uint32_t data) override;
+	void act(Game &, uint32_t data) override;
 
 private:
 	void find_other_fleet(Editor_Game_Base & egbase);
@@ -132,8 +132,8 @@ protected:
 		Loader();
 
 		void load(FileRead &, uint8_t version);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	private:
 		std::vector<uint32_t> m_ships;
@@ -141,8 +141,8 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() override {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	bool has_new_save_support() override {return true;}
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);

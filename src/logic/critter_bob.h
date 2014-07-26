@@ -44,7 +44,7 @@ struct Critter_Bob_Descr : BobDescr {
 		 Section& global_s,
 		 Tribe_Descr & _tribe);
 	Critter_Bob_Descr(const LuaTable&);
-	virtual ~Critter_Bob_Descr() override;
+	~Critter_Bob_Descr() override;
 
 	Bob & create_object() const override;
 
@@ -71,11 +71,11 @@ class Critter_Bob : public Bob {
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
 
-	virtual void init_auto_task(Game &) override;
+	void init_auto_task(Game &) override;
 
 	void start_task_program(Game &, const std::string & name);
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader*
 	load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
@@ -84,8 +84,8 @@ protected:
 	struct Loader : Bob::Loader {
 		Loader();
 
-		virtual const Task * get_task(const std::string & name) override;
-		virtual const BobProgramBase * get_program(const std::string & name) override;
+		const Task * get_task(const std::string & name) override;
+		const BobProgramBase * get_program(const std::string & name) override;
 	};
 
 private:

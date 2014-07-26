@@ -49,10 +49,10 @@ public:
 	virtual ~CacheImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const override {return width_;}
-	virtual uint16_t height() const override {return height_;}
-	virtual const string& hash() const override {return hash_;}
-	virtual Surface* surface() const override {
+	uint16_t width() const override {return width_;}
+	uint16_t height() const override {return height_;}
+	const string& hash() const override {return hash_;}
+	Surface* surface() const override {
 		Surface* rv = g_gr->surfaces().get(hash_);
 		if (rv)
 			return rv;

@@ -77,8 +77,8 @@ struct BulldozeConfirm : public ActionConfirm {
 		 Widelands::Building & building,
 		 Widelands::PlayerImmovable * todestroy = nullptr);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 
 private:
 	Widelands::Object_Ptr m_todestroy;
@@ -92,8 +92,8 @@ struct DismantleConfirm : public ActionConfirm {
 		(Interactive_Player & parent,
 		 Widelands::Building & building);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 };
 
 /**
@@ -105,8 +105,8 @@ struct EnhanceConfirm : public ActionConfirm {
 		 Widelands::Building & building,
 		 const Widelands::Building_Index & id);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 
 private:
     // Do not make this a reference - it is a stack variable in the caller
@@ -120,8 +120,8 @@ private:
 struct ShipSinkConfirm : public ActionConfirm {
 	ShipSinkConfirm(Interactive_Player & parent, Widelands::Ship & ship);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 };
 
 /**
@@ -130,8 +130,8 @@ struct ShipSinkConfirm : public ActionConfirm {
 struct ShipCancelExpeditionConfirm : public ActionConfirm {
 	ShipCancelExpeditionConfirm(Interactive_Player & parent, Widelands::Ship & ship);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 };
 
 

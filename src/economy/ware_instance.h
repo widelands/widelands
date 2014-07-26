@@ -92,7 +92,7 @@ public:
 		return m_transfer;
 	}
 
-	virtual void log_general_info(const Editor_Game_Base& egbase) override;
+	void log_general_info(const Editor_Game_Base& egbase) override;
 
 private:
 	Object_Ptr m_location;
@@ -109,8 +109,8 @@ protected:
 		Loader();
 
 		void load(FileRead&);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	private:
 		uint32_t m_location;
@@ -119,11 +119,11 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() override {
+	bool has_new_save_support() override {
 		return true;
 	}
 
-	virtual void save(Editor_Game_Base&, Map_Map_Object_Saver&, FileWrite&) override;
+	void save(Editor_Game_Base&, Map_Map_Object_Saver&, FileWrite&) override;
 	static Map_Object::Loader* load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&);
 };
 }

@@ -466,12 +466,12 @@ private:
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object &);
-	virtual void execute (Game &) override;
+	void execute (Game &) override;
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
+	uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
 private:
 	Serial obj_serial;
@@ -481,12 +481,12 @@ struct Cmd_Act : public GameLogicCommand {
 	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
 	Cmd_Act (int32_t t, Map_Object &, int32_t a);
 
-	virtual void execute (Game &) override;
+	void execute (Game &) override;
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_ACT;}
+	uint8_t id() const override {return QUEUE_CMD_ACT;}
 
 private:
 	Serial obj_serial;

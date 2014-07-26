@@ -50,7 +50,7 @@ struct WareDescr : public Map_Object_Descr {
 		(const Tribe_Descr & tribe, char const * const name,
 		 char const * const descname, const std::string & directory,
 		 Profile &, Section & global_s);
-	virtual ~WareDescr() override {}
+	~WareDescr() override {}
 
 	const Tribe_Descr & tribe() const {return m_tribe;}
 

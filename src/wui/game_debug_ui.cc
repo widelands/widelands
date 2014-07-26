@@ -51,7 +51,7 @@ struct MapObjectDebugPanel
 		 Widelands::Map_Object       &);
 	~MapObjectDebugPanel();
 
-	virtual void log(std::string str) override;
+	void log(std::string str) override;
 
 private:
 	const Widelands::Editor_Game_Base & m_egbase;
@@ -135,7 +135,7 @@ struct MapObjectDebugWindow : public UI::Window {
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think() override;
+	void think() override;
 
 private:
 	bool                  m_log_general_info;
@@ -220,7 +220,7 @@ struct FieldDebugWindow : public UI::Window {
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think() override;
+	void think() override;
 
 	void open_immovable();
 	void open_bob(uint32_t);

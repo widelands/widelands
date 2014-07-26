@@ -134,7 +134,7 @@ protected:
 	void mainview_move(int32_t x, int32_t y);
 	void minimap_warp(int32_t x, int32_t y);
 
-	virtual void draw_overlay(RenderTarget &) override;
+	void draw_overlay(RenderTarget &) override;
 	bool handle_key(bool down, SDL_keysym) override;
 
 	void unset_sel_picture();

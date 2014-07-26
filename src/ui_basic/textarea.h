@@ -81,7 +81,7 @@ struct Textarea : public Panel {
 	void set_font(const std::string & name, int size, RGBColor clr);
 
 protected:
-	virtual void update_desired_size() override;
+	void update_desired_size() override;
 
 private:
 	enum LayoutMode {

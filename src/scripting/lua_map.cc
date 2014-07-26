@@ -2076,7 +2076,7 @@ int L_MapObject::get_name(lua_State * L) {
         (RO) The description object for this immovable, e.g. BuildingDescription.
 */
 int L_MapObject::get_descr(lua_State * L) {
-	//TODO(GunChleoc) Flag_Descr would be nice for getting the type of immovables,
+	//TODO(GunChleoc): Flag_Descr would be nice for getting the type of immovables,
 	// at the moment the type for these can be faked by using their name instead
 	const Map_Object_Descr* desc = &get(L, get_egbase(L))->descr();
 	assert(desc != nullptr);

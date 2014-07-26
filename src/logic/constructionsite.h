@@ -55,9 +55,9 @@ struct ConstructionSite_Descr : public Building_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe);
-	virtual ~ConstructionSite_Descr() override {}
+	~ConstructionSite_Descr() override {}
 
-	virtual Building & create_object() const override;
+	Building & create_object() const override;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSite_Descr);
@@ -73,32 +73,32 @@ class ConstructionSite : public Partially_Finished_Building {
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
 
-	virtual std::string get_statistics_string() override;
+	std::string get_statistics_string() override;
 
 	const Player::Constructionsite_Information & get_info() {return m_info;}
 
-	virtual WaresQueue & waresqueue(Ware_Index) override;
+	WaresQueue & waresqueue(Ware_Index) override;
 
-	virtual void set_building(const Building_Descr &) override;
+	void set_building(const Building_Descr &) override;
 	const Building_Descr & building() const {return *m_building;}
 
-	virtual void init   (Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init   (Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
-	virtual bool burn_on_destroy() override;
+	bool burn_on_destroy() override;
 
-	virtual bool fetch_from_flag(Game &) override;
-	virtual bool get_building_work(Game &, Worker &, bool success) override;
+	bool fetch_from_flag(Game &) override;
+	bool get_building_work(Game &, Worker &, bool success) override;
 
 protected:
-	virtual uint32_t build_step_time() const override {return CONSTRUCTIONSITE_STEP_TIME;}
+	uint32_t build_step_time() const override {return CONSTRUCTIONSITE_STEP_TIME;}
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
 
 	static void wares_queue_callback
 		(Game &, WaresQueue *, Ware_Index, void * data);
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 
 private:
 	int32_t  m_fetchfromflag;  // # of wares to fetch from flag

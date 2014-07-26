@@ -69,7 +69,7 @@ struct WatchWindow : public UI::Window {
 	void toggle_buttons();
 
 protected:
-	virtual void think() override;
+	void think() override;
 	void stop_tracking_by_drag(int32_t x, int32_t y);
 
 private:

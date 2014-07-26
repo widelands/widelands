@@ -560,7 +560,7 @@ void ZipFilesystem::Rename(const std::string &, const std::string &) {
 }
 
 unsigned long long ZipFilesystem::DiskSpace() {
-	return 0; //  TODO(unknown):
+	return 0;
 }
 
 std::string ZipFilesystem::strip_basename(std::string filename)

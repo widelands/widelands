@@ -29,7 +29,7 @@ public:
 	Battle_Descr(char const* const _name, char const* const _descname)
 	   : Map_Object_Descr(Map_Object_Type::BATTLE, _name, _descname) {
 	}
-	virtual ~Battle_Descr() override {
+	~Battle_Descr() override {
 	}
 
 private:
@@ -52,10 +52,10 @@ public:
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	// Implements Map_Object.
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual bool has_new_save_support() override {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	bool has_new_save_support() override {return true;}
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 
@@ -81,7 +81,7 @@ public:
 private:
 	struct Loader : public Map_Object::Loader {
 		virtual void load(FileRead &, uint8_t version);
-		virtual void load_pointers() override;
+		void load_pointers() override;
 
 		Serial m_first;
 		Serial m_second;

@@ -66,7 +66,7 @@ public:
 
 	void set_center_panel(Panel * panel);
 	void move_out_of_the_way();
-	virtual void move_inside_parent() override;
+	void move_inside_parent() override;
 	void center_to_parent();
 	void warp_mouse_to_fastclick_panel();
 	void set_fastclick_panel(Panel * p) {m_fastclick_panel = p;}
@@ -77,7 +77,7 @@ public:
 	bool is_snap_target() const override {return true;}
 
 	// Drawing and event handlers
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 	void draw_border(RenderTarget &) override;
 
 	void think() override;
@@ -90,9 +90,9 @@ public:
 	bool handle_tooltip() override;
 
 protected:
-	virtual void die() override;
-	virtual void layout() override;
-	virtual void update_desired_size() override;
+	void die() override;
+	void layout() override;
+	void update_desired_size() override;
 
 private:
 	bool _is_minimal;

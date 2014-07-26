@@ -36,10 +36,10 @@ struct Carrier_Descr : public Worker_Descr {
 		Worker_Descr(Map_Object_Type::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
 	{
 	}
-	virtual ~Carrier_Descr() override {}
+	~Carrier_Descr() override {}
 
 protected:
-	virtual Bob & create_object() const override;
+	Bob & create_object() const override;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Carrier_Descr);
@@ -65,7 +65,7 @@ struct Carrier : public Worker {
 	void start_task_transport(Game &, int32_t fromflag);
 	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	static Task const taskRoad;
 
@@ -100,13 +100,13 @@ protected:
 	public:
 		Loader();
 
-		virtual void load(FileRead &) override;
+		void load(FileRead &) override;
 
 	protected:
-		virtual const Task * get_task(const std::string & name) override;
+		const Task * get_task(const std::string & name) override;
 	};
 
-	virtual Loader * create_loader() override;
+	Loader * create_loader() override;
 
 public:
 	virtual void do_save

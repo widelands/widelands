@@ -124,16 +124,16 @@ public:
 	NonPackedAnimation(const LuaTable& table);
 
 	// Implements Animation.
-	virtual uint16_t width() const override;
-	virtual uint16_t height() const override;
-	virtual uint16_t nr_frames() const override;
-	virtual uint32_t frametime() const override;
-	virtual const Point& hotspot() const override;
-	virtual const Image& representative_image(const RGBColor& clr) const override;
-	virtual const Image& representative_image_from_disk() const override;
+	uint16_t width() const override;
+	uint16_t height() const override;
+	uint16_t nr_frames() const override;
+	uint32_t frametime() const override;
+	const Point& hotspot() const override;
+	const Image& representative_image(const RGBColor& clr) const override;
+	const Image& representative_image_from_disk() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
-	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
+	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
 
 
 private:

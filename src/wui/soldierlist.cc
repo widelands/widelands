@@ -52,16 +52,16 @@ struct SoldierPanel : UI::Panel {
 
 	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
 
-	virtual void think() override;
-	virtual void draw(RenderTarget &) override;
+	void think() override;
+	void draw(RenderTarget &) override;
 
 	void set_mouseover(const SoldierFn & fn);
 	void set_click(const SoldierFn & fn);
 
 protected:
-	virtual void handle_mousein(bool inside) override;
-	virtual bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	virtual bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	void handle_mousein(bool inside) override;
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
 private:
 	Point calc_pos(uint32_t row, uint32_t col) const;

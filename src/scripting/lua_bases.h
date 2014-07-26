@@ -44,8 +44,8 @@ public:
 	}
 	virtual ~L_EditorGameBase() {}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -83,8 +83,8 @@ public:
 	}
 	virtual ~L_PlayerBase() {}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties

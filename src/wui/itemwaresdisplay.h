@@ -47,7 +47,7 @@ struct ItemWaresDisplay : UI::Panel {
 	void clear();
 	void add(bool worker, Widelands::Ware_Index index);
 
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 
 private:
 	struct Item {

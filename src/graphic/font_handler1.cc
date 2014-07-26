@@ -55,10 +55,10 @@ public:
 	virtual ~RTImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const override {return surface()->width();}
-	virtual uint16_t height() const override {return surface()->height();}
-	virtual const string& hash() const override {return hash_;}
-	virtual Surface* surface() const override {
+	uint16_t width() const override {return surface()->width();}
+	uint16_t height() const override {return surface()->height();}
+	const string& hash() const override {return hash_;}
+	Surface* surface() const override {
 		Surface* surf = surface_cache_->get(hash_);
 		if (surf)
 			return surf;

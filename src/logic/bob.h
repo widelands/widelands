@@ -59,7 +59,7 @@ public:
 	         const std::string& init_name,
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);
-	virtual ~BobDescr() override {}
+	~BobDescr() override {}
 
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
 
@@ -227,9 +227,9 @@ public:
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 	void schedule_destroy(Game &);
 	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
@@ -251,7 +251,7 @@ public:
 		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 
 	// For debug
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	// default tasks
 	void reset_tasks(Game &);
@@ -386,8 +386,8 @@ protected:
 		Loader();
 
 		void load(FileRead &);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	protected:
 		virtual const Task * get_task(const std::string & name);
@@ -403,9 +403,9 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() override {return true;}
+	bool has_new_save_support() override {return true;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	// Pure Bobs cannot be loaded
 };
 

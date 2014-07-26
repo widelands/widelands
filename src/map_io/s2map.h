@@ -36,7 +36,7 @@ struct S2_Map_Loader : public Widelands::Map_Loader {
 
 	S2_Map_Loader(const char *, Widelands::Map &);
 
-	virtual int32_t preload_map(bool) override;
+	int32_t preload_map(bool) override;
 	virtual int32_t load_map_complete
 		(Widelands::Editor_Game_Base &, bool scenario) override;
 

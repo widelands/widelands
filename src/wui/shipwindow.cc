@@ -55,7 +55,7 @@ struct ShipWindow : UI::Window {
 	ShipWindow(Interactive_GameBase & igb, Ship & ship);
 	virtual ~ShipWindow();
 
-	virtual void think() override;
+	void think() override;
 
 	UI::Button * make_button
 		(UI::Panel * parent,

@@ -175,10 +175,10 @@ public:
 	void set_owner(Player * player);
 
 	Coords get_position() const {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const override;
+	PositionList get_positions (const Editor_Game_Base &) const override;
 
-	virtual int32_t  get_size    () const override;
-	virtual bool get_passable() const override;
+	int32_t  get_size    () const override;
+	bool get_passable() const override;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);
 
 	void program_step(Game & game, uint32_t const delay = 1) {
@@ -191,7 +191,7 @@ public:
 	void cleanup(Editor_Game_Base &) override;
 	void act(Game &, uint32_t data) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 
 	void switch_program(Game & game, const std::string & programname);
 	bool construct_ware(Game & game, Ware_Index index);
@@ -259,15 +259,15 @@ protected:
 protected:
 	struct Loader : public BaseImmovable::Loader {
 		void load(FileRead &, uint8_t version);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 	};
 
 public:
 	// TODO(unknown): Remove as soon as we fully support the new system
-	virtual bool has_new_save_support() override {return true;}
+	bool has_new_save_support() override {return true;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &,
 		 const OneWorldLegacyLookupTable& lookup_table);
@@ -313,7 +313,7 @@ struct PlayerImmovable : public BaseImmovable {
 	 */
 	const Workers & get_workers() const {return m_workers;}
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	/**
 	 * These functions are called when a ware or worker arrives at
@@ -333,8 +333,8 @@ struct PlayerImmovable : public BaseImmovable {
 	void set_owner(Player *);
 
 protected:
-	virtual void init   (Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init   (Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
 private:
 	Player              * m_owner;
@@ -351,7 +351,7 @@ protected:
 	};
 
 public:
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 };
 
 }

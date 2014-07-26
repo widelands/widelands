@@ -36,9 +36,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
-	virtual ~TrainingSite_Descr() override {}
+	~TrainingSite_Descr() override {}
 
-	virtual Building & create_object() const override;
+	Building & create_object() const override;
 
 	uint32_t get_max_number_of_soldiers() const {
 		return m_num_soldiers;
@@ -122,14 +122,14 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(const TrainingSite_Descr &);
 
-	virtual std::string get_statistics_string() override;
+	std::string get_statistics_string() override;
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 
-	virtual void add_worker   (Worker &) override;
-	virtual void remove_worker(Worker &) override;
+	void add_worker   (Worker &) override;
+	void remove_worker(Worker &) override;
 
 	bool get_build_heroes() {
 		return m_build_heroes;
@@ -142,16 +142,16 @@ public:
 		molog("BUILD_HEROES: %s", m_build_heroes ? "TRUE" : "FALSE");
 	}
 
-	virtual void set_economy(Economy * e) override;
+	void set_economy(Economy * e) override;
 
 	// Begin implementation of SoldierControl
-	virtual std::vector<Soldier *> presentSoldiers() const override;
-	virtual std::vector<Soldier *> stationedSoldiers() const override;
-	virtual uint32_t minSoldierCapacity() const override;
-	virtual uint32_t maxSoldierCapacity() const override;
-	virtual uint32_t soldierCapacity() const override;
-	virtual void setSoldierCapacity(uint32_t capacity) override;
-	virtual void dropSoldier(Soldier &) override;
+	std::vector<Soldier *> presentSoldiers() const override;
+	std::vector<Soldier *> stationedSoldiers() const override;
+	uint32_t minSoldierCapacity() const override;
+	uint32_t maxSoldierCapacity() const override;
+	uint32_t soldierCapacity() const override;
+	void setSoldierCapacity(uint32_t capacity) override;
+	void dropSoldier(Soldier &) override;
 	int incorporateSoldier(Editor_Game_Base &, Soldier &) override;
 	// End implementation of SoldierControl
 
@@ -167,7 +167,7 @@ public:
 protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
-	virtual void program_end(Game &, Program_Result) override;
+	void program_end(Game &, Program_Result) override;
 
 private:
 	void update_soldier_request();
