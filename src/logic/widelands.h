@@ -55,7 +55,7 @@ typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
 
 typedef uint16_t Vision;
 
-typedef int32_t Time; // TODO(unknown) should be unsigned
+typedef int32_t Time; // TODO(unknown): should be unsigned
 inline Time Never() {return 0xffffffff;}
 
 typedef uint32_t Duration;

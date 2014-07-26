@@ -372,7 +372,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		fseek(file, 0, SEEK_SET);
 
 		// allocate a buffer and read the entire file into it
-		data = malloc(size + 1); //  TODO(unknown) memory leak!
+		data = malloc(size + 1); //  TODO(unknown): memory leak!
 		int result = fread(data, size, 1, file);
 		if (size && (result != 1)) {
 			throw wexception

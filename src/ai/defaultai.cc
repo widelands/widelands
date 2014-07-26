@@ -566,7 +566,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 			if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 
-				// TODO(unknown) Only continue; if this is an opposing site
+				// TODO(unknown): Only continue; if this is an opposing site
 				// allied sites should be counted for military influence
 				if (player_immovable->owner().player_number() != pn) {
 					if (player_->is_hostile(player_immovable->owner()))
@@ -622,10 +622,10 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
 
 		// testing if it is enemy-owned field
-		// TODO(unknown) count such fields...
+		// TODO(unknown): count such fields...
 		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 
-			// TODO(unknown) Only continue; if this is an opposing site
+			// TODO(unknown): Only continue; if this is an opposing site
 			// allied sites should be counted for military influence
 			if (player_immovable->owner().player_number() != pn) {
 				if (player_->is_hostile(player_immovable->owner()))
@@ -1282,8 +1282,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				// take care about borders and enemies
 				prio = recalc_with_border_range(*bf, prio);
 
-				// TODO(unknown):
-				// introduce check that there is no warehouse nearby to prevent to close placing
+				// TODO(unknown): introduce check that there is no warehouse nearby
+				// to prevent too close placing
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
 
@@ -1601,7 +1601,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 				finish = connect_flag_to_another_economy(flag);
 
 			// try to improve the roads at this flag
-			//  TODO(unknown) do this only on useful places - the attempt below
+			//  TODO(unknown): do this only on useful places - the attempt below
 			//  unfortunatey did not work as it should...
 			//  if the flag is full of wares or if it is not yet a fork.
 			if (!finish)  //&& (!flag.has_capacity() || flag.nr_of_roads() < 3))

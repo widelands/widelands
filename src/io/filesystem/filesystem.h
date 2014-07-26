@@ -44,7 +44,7 @@ class StreamWrite;
 // TODO(unknown): const correctness
 class FileSystem {
 public:
-	//  TODO(unknown) This should be unnecessary. Make it so.
+	//  TODO(unknown): This should be unnecessary. Make it so.
 	enum Type {
 		DIR,
 		ZIP

@@ -202,7 +202,7 @@ void Editor_Interactive::load(const std::string & filename) {
 
 	load_all_tribes(&egbase(), &loader_ui);
 
-	// Create the players. TODO(SirVer) this must be managed better
+	// Create the players. TODO(SirVer): this must be managed better
 	loader_ui.step(_("Creating players"));
 	iterate_player_numbers(p, map.get_nrplayers()) {
 		egbase().add_player(p, 0, map.get_scenario_player_tribe(p), map.get_scenario_player_name(p));
@@ -576,7 +576,7 @@ bool Editor_Interactive::is_player_tribe_referenced
 void Editor_Interactive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::Editor_Game_Base editor(nullptr);
 	Editor_Interactive eia(editor);
-	editor.set_ibase(&eia); // TODO(unknown) get rid of this
+	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
 		UI::ProgressWindow loader_ui("pics/editor.jpg");
 		std::vector<std::string> tipstext;
