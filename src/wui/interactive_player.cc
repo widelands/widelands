@@ -144,7 +144,7 @@ m_toggle_help
 	m_toggle_help.sigclicked.connect
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_encyclopedia)));
 
-	// TODO(unknown) : instead of making unneeded buttons invisible after generation,
+	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);

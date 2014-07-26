@@ -53,7 +53,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_max_stall() const;
 
 private:
-	//  TODO(unknown) These variables should be per soldier type. They should be in a
+	//  TODO(unknown): These variables should be per soldier type. They should be in a
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.
 

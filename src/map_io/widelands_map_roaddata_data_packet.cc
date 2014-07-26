@@ -258,7 +258,7 @@ void Map_Roaddata_Data_Packet::Write
 				for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
 					fw.Unsigned8(path[i]);
 
-				fw.Unsigned32(r->m_idle_index); //  TODO(unknown) do not save this
+				fw.Unsigned32(r->m_idle_index); //  TODO(unknown): do not save this
 
 
 				fw.Unsigned32(r->m_carrier_slots.size());

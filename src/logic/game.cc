@@ -582,7 +582,7 @@ bool Game::run
 		m_state = gs_running;
 		//handle network
 		while (m_state == gs_running) {
-			// TODO(unknown) this should be improved.
+			// TODO(unknown): this should be improved.
 #ifndef _WIN32
 			if (usleep(100) == -1)
 				break;

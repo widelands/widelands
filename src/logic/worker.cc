@@ -112,7 +112,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
 		game.world().get_resource(action.sparam1.c_str());
-	if (static_cast<int8_t>(res) == -1) //  TODO(unknown) ARGH!!
+	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
 		throw game_data_error
 			(_
 			 	("should mine resource %s, which does not exist in world; tribe "
@@ -217,7 +217,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
 		game.world().get_resource(action.sparam1.c_str());
-	if (static_cast<int8_t>(res) == -1) //  TODO(unknown) ARGH!!
+	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
 		throw game_data_error
 			(_
 			 	("should breed resource type %s, which does not exist in world; "
@@ -499,7 +499,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
  * iparam4 = whether the "breed" flag is set
  * sparam1 = Resource
  */
-// TODO(unknown) This is an embarrasingly ugly hack to make bug #1796611 happen less
+// TODO(unknown): This is an embarrasingly ugly hack to make bug #1796611 happen less
 // often. But it gives no passability guarantee (that workers will not
 // get locked in). For example one farmer may call findspace and then,
 // before he plants anything, another farmer may call findspace, which
@@ -717,10 +717,10 @@ bool Worker::run_object(Game & game, State & state, const Action & action)
 		immovable->switch_program(game, action.sparam1);
 	else if (upcast(Bob,       bob,       obj)) {
 		if        (upcast(Critter_Bob, crit, bob)) {
-			crit->reset_tasks(game); //  TODO(unknown) ask the critter more nicely
+			crit->reset_tasks(game); //  TODO(unknown): ask the critter more nicely
 			crit->start_task_program(game, action.sparam1);
 		} else if (upcast(Worker,      w,    bob)) {
-			w   ->reset_tasks(game); //  TODO(unknown) ask the worker more nicely
+			w   ->reset_tasks(game); //  TODO(unknown): ask the worker more nicely
 			w   ->start_task_program(game, action.sparam1);
 		} else
 			throw wexception
