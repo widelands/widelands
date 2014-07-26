@@ -21,7 +21,7 @@
 #define WL_EDITOR_TOOLS_EDITOR_SET_HEIGHT_TOOL_H
 
 #include "editor/tools/editor_tool.h"
-#include "interval.h"
+#include "logic/widelands_geometry.h"
 #include "logic/field.h"
 
 ///  Ensures that the height of a node is within an interval.
@@ -48,15 +48,15 @@ struct Editor_Set_Height_Tool : public Editor_Tool {
 		return "pics/fsel_editor_set_height.png";
 	}
 
-	interval<Widelands::Field::Height> get_interval() const {
+	Widelands::HeightInterval get_interval() const {
 		return m_interval;
 	}
-	void set_interval(interval<Widelands::Field::Height> const i) {
+	void set_interval(Widelands::HeightInterval const i) {
 		m_interval = i;
 	}
 
 private:
-	interval<Widelands::Field::Height> m_interval;
+	Widelands::HeightInterval m_interval;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_HEIGHT_TOOL_H

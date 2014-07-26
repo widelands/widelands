@@ -88,7 +88,6 @@ add_subdirectory(wui)
 # library.
 wl_library(widelands_ball_of_mud
   SRCS
-    interval.h
     wlapplication.cc
     wlapplication.h
   USES_SDL

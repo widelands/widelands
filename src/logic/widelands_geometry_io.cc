@@ -96,8 +96,8 @@ void WriteDirection8_allow_null(StreamWrite* wr, Direction const d) {
 void WriteCoords32(StreamWrite* wr, const Coords& c) {
 	assert(static_cast<uint16_t>(c.x) < 0x8000 || c.x == -1);
 	assert(static_cast<uint16_t>(c.y) < 0x8000 || c.y == -1);
-	wr->Unsigned16(c.x, 2);
-	wr->Unsigned(c.y, 2);
+	wr->Unsigned16(c.x);
+	wr->Unsigned16(c.y);
 }
 
 void WriteArea48(StreamWrite* wr, Area<Coords, uint16_t> const area) {

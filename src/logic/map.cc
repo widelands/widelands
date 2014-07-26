@@ -1902,7 +1902,7 @@ uint32_t Map::change_height(const World& world, Area<FCoords> area, int16_t cons
 }
 
 uint32_t Map::set_height
-	(const World& world, Area<FCoords> area, interval<Field::Height> height_interval)
+	(const World& world, Area<FCoords> area, HeightInterval height_interval)
 {
 	assert(height_interval.valid());
 	assert(height_interval.max <= MAX_FIELD_HEIGHT);

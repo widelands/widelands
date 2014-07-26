@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MACHDEP_H
-#define WL_MACHDEP_H
+#ifndef WL_IO_MACHDEP_H
+#define WL_IO_MACHDEP_H
 
 #include <cstring>
 #include <string>
@@ -99,4 +99,4 @@ inline float DerefFloat(const void * const ptr) {
 	return r;
 }
 
-#endif  // end of include guard: WL_MACHDEP_H
+#endif  // end of include guard:

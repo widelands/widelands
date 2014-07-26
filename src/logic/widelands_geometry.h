@@ -165,6 +165,16 @@ struct Node_and_Triangle {
 	TCoords<Triangle_Coords_type> triangle;
 };
 
+// A height interval.
+struct HeightInterval {
+	HeightInterval(const uint8_t Min, const uint8_t Max) : min(Min), max(Max) {
+	}
+	bool valid() const {
+		return min <= max;
+	}
+
+	uint8_t min, max;
+};
 }
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H

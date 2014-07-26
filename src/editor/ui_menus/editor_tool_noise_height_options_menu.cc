@@ -27,6 +27,7 @@
 #include "editor/tools/editor_increase_height_tool.h"
 #include "editor/tools/editor_noise_height_tool.h"
 #include "graphic/graphic.h"
+#include "logic/widelands_geometry.h"
 
 
 using Widelands::Field;
@@ -141,7 +142,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 */
 void Editor_Tool_Noise_Height_Options_Menu::update() {
 	char buffer[200];
-	const interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	const Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 	snprintf(buffer, sizeof(buffer), _("Minimum: %u"), height_interval.min);
 	m_lower_label.set_text(buffer);
 	snprintf(buffer, sizeof(buffer), _("Maximum: %u"), height_interval.max);
@@ -157,7 +158,7 @@ void Editor_Tool_Noise_Height_Options_Menu::update() {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease() {
-	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
 	assert(0 < height_interval.min);
@@ -174,7 +175,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease() {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase() {
-	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
 	assert(height_interval.min < MAX_FIELD_HEIGHT);
@@ -195,7 +196,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase() {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease() {
-	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
 	assert(0 < m_noise_tool.get_interval().max);
@@ -215,7 +216,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease() {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase() {
-	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(m_noise_tool.get_interval().valid());
 	assert(m_noise_tool.get_interval().max < MAX_FIELD_HEIGHT);
@@ -240,7 +241,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease() {
 
 	--h;
 
-	set_tool.set_interval(interval<Field::Height>(h, h));
+	set_tool.set_interval(Widelands::HeightInterval(h, h));
 	m_setto_decrease.set_enabled(0 < h);
 	m_setto_increase.set_enabled(true);
 	update();
@@ -256,7 +257,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase() {
 
 	++h;
 
-	set_tool.set_interval(interval<Field::Height>(h, h));
+	set_tool.set_interval(Widelands::HeightInterval(h, h));
 	m_setto_decrease.set_enabled(true);
 	m_setto_increase.set_enabled(h < MAX_FIELD_HEIGHT);
 	update();

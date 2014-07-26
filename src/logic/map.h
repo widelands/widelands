@@ -29,7 +29,6 @@
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
-#include "interval.h"
 #include "logic/field.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
@@ -358,7 +357,7 @@ public:
 	 * the area, because this adjusts the surrounding nodes only once, after all
 	 * nodes in the area had their new height set.
 	 */
-	uint32_t set_height(const World& world, Area<FCoords>, interval<Field::Height> height_interval);
+	uint32_t set_height(const World& world, Area<FCoords>, HeightInterval height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
 	int32_t change_terrain(const World& world, TCoords<FCoords>, Terrain_Index);
