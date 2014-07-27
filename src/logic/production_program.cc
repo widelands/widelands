@@ -140,33 +140,6 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 	return false;
 }
 
-// Helper structure for representing an iterator range in
-// for loops with constant iterators.
-// DEPRECATED!! do not use.
-// TODO(sirver): Replace the use of this with boost::algorithm::join() below.
-template<typename C>
-struct wl_const_range
-{
-	wl_const_range
-		(const typename  C::const_iterator & first,
-		 const typename C::const_iterator & last)
-		: current(first), end(last) {}
-	wl_const_range(const C & container) : current(container.begin()), end(container.end()) {}
-	wl_const_range(const wl_const_range & r) : current(r.current), end(r.end) {}
-	typename C::const_iterator current;
-	wl_const_range & operator++() {++current; return *this;}
-	wl_const_range<C> & advance() {++current; return *this;}
-	bool empty() const {return current == end;}
-	operator bool() const {return empty() ? false: true;}
-	typename C::const_reference front() const {return *current;}
-	typename C::const_reference operator*() const {return *current;}
-	typename C::const_pointer operator->() const {return (&**this);}
-	typename C::const_iterator get_end() {return end;}
-private:
-	typename C::const_iterator end;
-};
-
-
 
 }  // namespace
 
@@ -520,8 +493,8 @@ void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
 	std::string statistics_string =
-		/** TRANSLATORS: 'Failed %s because (not): %s {and/or %s}' */
-		m_result == Failed    ? (boost::format(_("Failed %s")) % ps.top_state().program->descname()).str() :
+		/** TRANSLATORS: 'Failed to %s because (not): %s {and/or %s}' */
+		m_result == Failed    ? (boost::format(_("Failed to %s")) % ps.top_state().program->descname()).str() :
 		/** TRANSLATORS: 'Completed %s because (not): %s {and/or %s}' */
 		m_result == Completed ? (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str() :
 		/** TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}' */
@@ -530,36 +503,26 @@ void ProductionProgram::ActReturn::execute
 	if (!m_conditions.empty()) {
 		std::string result_string = statistics_string;
 		if (m_is_when) { //  'when a and b and ...' (all conditions must be true)
-			std::string condition_string = "";
-			for (wl_const_range<Conditions> i(m_conditions); i;)
-			{
-				if (!(i.front()->evaluate(ps))) //  A condition is false,
+			std::vector<std::string> condition_list;
+			for (const Condition * condition : m_conditions) {
+				if (!condition->evaluate(ps)) //  A condition is false,
 					return ps.program_step(game); //  continue program.
 
-				condition_string += i.front()->description(ps.owner().tribe());
-				if (i.advance().empty())
-					break;
-				// TODO(GunChleoc):  Would prefer "%1$s and %2$s" but getting segfaults, so leaving this for now
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
-				condition_string = (boost::format(_("%s and ")) % condition_string).str();
+				condition_list.push_back(condition->description(ps.owner().tribe()));
 			}
+			std::string condition_string = i18n::localize_item_list(condition_list, true);
 			result_string =
 				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
 				(boost::format(_("%1$s because: %2$s")) % statistics_string % condition_string).str();
 		} else { //  "unless a or b or ..." (all conditions must be false)
-			std::string condition_string = "";
-			for (wl_const_range<Conditions> i(m_conditions); i;)
-			{
-				if ((*i.current)->evaluate(ps)) //  A condition is true,
+			std::vector<std::string> condition_list;
+			for (const Condition * condition : m_conditions) {
+				if (condition->evaluate(ps)) //  A condition is true,
 					return ps.program_step(game); //  continue program.
 
-				condition_string += i.front()->description(ps.owner().tribe());
-				if (i.advance().empty())
-					break;
-				// TODO(GunChleoc):  Would prefer '%1$s or %2$s' but getting segfaults, so leaving this for now
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
-				condition_string = (boost::format(_("%s or ")) % condition_string).str();
+				condition_list.push_back(condition->description(ps.owner().tribe()));
 			}
+			std::string condition_string = i18n::localize_item_list(condition_list, false);
 			result_string =
 				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
 				(boost::format(_("%1$s because not: %2$s")) % statistics_string % condition_string).str();
