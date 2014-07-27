@@ -21,6 +21,7 @@
 
 #include <sstream>
 
+#include <boost/algorithm/string/join.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -906,46 +907,45 @@ void ProductionProgram::ActConsume::execute
 				++it;
 	}
 
+	// "Failed work because .... is/are missing"
 	if (uint8_t const nr_missing_groups = l_groups.size()) {
 		const Tribe_Descr & tribe = ps.owner().tribe();
-		std::string result_string =
-			/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
-			(boost::format(_("Failed %s because:")) % ps.top_state().program->descname()).str();
 
-		for (wl_const_range<Groups> i(l_groups); i;)
-		{
-			assert(i.current->first.size());
-			for (wl_const_range<std::set<Ware_Index> > j(i.current->first); j;)
-			{
-				result_string =
-					/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
-					(boost::format(_("%1$s %2$s")) % result_string
-					 % tribe.get_ware_descr(j.front())->descname())
+		std::vector<std::string> group_list;
+		for (const Ware_Type_Group& group : l_groups) {
+			assert(group.first.size());
+
+			std::vector<std::string> ware_list;
+			for (const Ware_Index& ware : group.first) {
+				ware_list.push_back(tribe.get_ware_descr(ware)->descname());
+			}
+			std::string ware_string = i18n::localize_item_list(ware_list, false);
+
+			uint8_t const count = group.second;
+			if (1 < count) {
+				ware_string =
+					/** TRANSLATORS: e.g. 'Failed to work because: 3x water and 3x wheat are missing' */
+					/** TRANSLATORS: For this example, this is what's in the place holders: */
+					/** TRANSLATORS:    %1$s = "3" */
+					/** TRANSLATORS:    %2$i = "water" */
+					(boost::format(_("%1$ix %2$s")) 
+					 % static_cast<unsigned int>(count)
+					 % ware_string)
 					 .str();
-				if (j.advance().empty())
-					break;
-				/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
-				result_string = (boost::format(_("%s,")) % result_string).str();
 			}
-			{
-				uint8_t const count = i.current->second;
-				if (1 < count) {
-					// TODO(GunChleoc): this should be done with ngettext
-					result_string =
-						/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
-						(boost::format(_("%1$s (%2$i)")) % result_string
-						 % static_cast<unsigned int>(count))
-						 .str();
-				}
-			}
-			if (i.advance().empty())
-				break;
-			result_string = (boost::format(_("%s and")) % result_string).str();
+			group_list.push_back(ware_string);
 		}
-		result_string =
-			/** TRANSLATORS: e.g. %1$s = 'Failed work because: water, wheat (2)' %2$s = 'are missing' */
-			(boost::format(_("%1$s %2$s")) % result_string
-			/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
+
+		std::string result_string =
+			/** TRANSLATORS: e.g. 'Failed to work because: 3x water and 3x wheat are missing' */
+			/** TRANSLATORS: For this example, this is what's in the place holders: */
+			/** TRANSLATORS:    %1$s = "work" */
+			/** TRANSLATORS:    %2$s = "water and wheat (2) " */
+			/** TRANSLATORS:    %3$s = "are missing" */
+			(boost::format(_("Failed to %1$s because %2$s %3$s"))
+			 % ps.top_state().program->descname()
+			 % i18n::localize_item_list(group_list, true)
+			/** TRANSLATORS: e.g. 'Failed to work because: 3x water and 3x wheat are missing' */
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
 
