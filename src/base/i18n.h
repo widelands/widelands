@@ -52,6 +52,10 @@ void set_locale(std::string);
 const std::string & get_locale();
 
 void set_localedir(std::string);
+
+// localize a list of items. If is_concatenation, use "and", else use "or".
+std::string localize_item_list(std::vector<std::string> items, bool is_concatenation);
+
 }
 
 #endif  // end of include guard: WL_BASE_I18N_H

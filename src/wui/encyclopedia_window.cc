@@ -27,8 +27,6 @@
 #include <typeinfo>
 #include <vector>
 
-#include <boost/algorithm/string/join.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -187,9 +185,8 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
 
-					const std::string ware_type_names =
-					/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
-					   boost::algorithm::join(ware_type_descnames, _(" or "));
+					// NOCOM use localise_item_list from production_program
+					std::string ware_type_names = i18n::localize_item_list(ware_type_descnames, false);
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.

@@ -27,6 +27,8 @@
 #include <map>
 #include <utility>
 
+#include <boost/format.hpp>
+
 #include "base/log.h"
 #include "config.h"
 
@@ -314,5 +316,40 @@ void set_locale(std::string name) {
 }
 
 const std::string & get_locale() {return locale;}
+
+
+/***********
+
+  Locale-dependent string functions
+
+***************/
+
+std::string localize_item_list(std::vector<std::string> items, bool is_concatenation) {
+	std::string result = "";
+	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
+		if (it == items.begin()) {
+			result = *it;
+		}
+		else if (it == --items.end()) {
+			if (is_concatenation) {
+				/** TRANSLATORS: Concatenate the last 2 items on a list. */
+				/** TRANSLATORS: RTL languages might want to change the word order here. */
+				result = (boost::format(_("%1$s and %2$s")) % result % (*it)).str();
+			}
+			else {
+				/** TRANSLATORS: Join the last 2 items on a list with "or". */
+				/** TRANSLATORS: RTL languages might want to change the word order here. */
+				result = (boost::format(_("%1$s or %2$s")) % result % (*it)).str();
+			}
+		}
+		else {
+			/** TRANSLATORS: Concatenate 2 items at in the middle of a list. */
+			/** TRANSLATORS: RTL languages might want to change the word order here. */
+			result = (boost::format(_("%1$s, %2$s")) % result % (*it)).str();
+		}
+	}
+	return result;
+}
+
 
 }
