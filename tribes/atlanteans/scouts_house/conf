@@ -18,7 +18,8 @@ bread=2
 build_material=false
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start scouting because ...
+work=_scouting
 
 [work]
 sleep=30000

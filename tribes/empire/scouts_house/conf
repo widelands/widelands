@@ -17,7 +17,8 @@ scout=1
 ration=2
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start scouting because ...
+work=_scouting
 
 [work]
 sleep=30000

@@ -21,7 +21,8 @@ flour=6
 water=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=15000

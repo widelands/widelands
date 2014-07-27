@@ -21,7 +21,8 @@ wheat=7
 water=7
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start breeding sheep because ...
+work=_breeding sheep
 
 [work]
 sleep=25000

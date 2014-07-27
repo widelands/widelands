@@ -15,7 +15,8 @@ is_basic=true
 stoneproducer=true
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 worker=cut   # This order is on purpose so that the productivity

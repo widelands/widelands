@@ -15,7 +15,8 @@ build_material=false
 needs_water=true
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start fishing because ...
+work=_fishing
 
 [work]
 sleep=18000

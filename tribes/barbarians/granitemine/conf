@@ -19,7 +19,8 @@ mines=granite
 ration=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining because ...
+work=_mining
 
 [work]
 sleep=20000

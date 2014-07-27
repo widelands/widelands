@@ -17,9 +17,12 @@ is_basic=true
 stoneproducer=true
 
 [programs]
-mine_stone=_Mine stone
-mine_marble=_Mine marble
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start quarrying stone because ...
+mine_stone=_quarrying stone
+# TRANSLATORS: "Completed/Skipped/Did not start quarrying marble because ...
+mine_marble=_quarrying marble
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [mine_stone]
 worker=cut_stone  # This order is on purpose so that the productivity

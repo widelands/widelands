@@ -16,7 +16,8 @@ build_material=false
 renews_map_resource=meat
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=52500

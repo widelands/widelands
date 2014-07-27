@@ -21,7 +21,8 @@ water=8
 wheat=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start brewing because ...
+work=_brewing
 
 [work]
 sleep=30000

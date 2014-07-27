@@ -28,10 +28,14 @@ gold=8
 coal=8
 
 [programs]
-produce_helm=_Produce helm
-produce_mask=_Produce mask
-produce_warhelm=_Produce warhelm
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start forging a helm because ...
+produce_helm=_forging a helm
+# TRANSLATORS: "Completed/Skipped/Did not start forging a mask because ...
+produce_mask=_forging a mask
+# TRANSLATORS: "Completed/Skipped/Did not start forging a warhelm because ...
+produce_warhelm=_forging a warhelm
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_helm]
 return=skipped unless economy needs helm

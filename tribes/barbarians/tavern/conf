@@ -26,8 +26,10 @@ pittabread=4
 meat=4
 
 [programs]
-produce_ration=_Produce ration
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start preparing a ration because ...
+produce_ration=_preparing a ration
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_ration]
 sleep=14000

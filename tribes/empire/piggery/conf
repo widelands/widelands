@@ -22,7 +22,8 @@ wheat=7
 water=7
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start raising pigs because ...
+work=_raising pigs
 
 [work]
 sleep=25000
