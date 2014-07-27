@@ -198,18 +198,23 @@ void ProductionProgram::parse_ware_type_group
 			++parameters;
 		char const terminator = *parameters;
 		*parameters = '\0';
+
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
-		for (wl_const_range<BillOfMaterials> i(inputs);; ++i)
-			if (i.empty())
+
+		for (BillOfMaterials::const_iterator input_it = inputs.begin(); input_it != inputs.end(); ++input_it) {
+			if (input_it == inputs.end()) {
 				throw game_data_error
 					(
 					 "%s is not declared as an input (\"%s=<count>\" was not "
 					 "found in the [inputs] section)",
 					 ware, ware);
-			else if (i->first == ware_index) {
-				count_max += i.front().second;
+			}
+			else if (input_it->first == ware_index) {
+				count_max += input_it->second;
 				break;
 			}
+		}
+
 		if (group.first.size() && ware_index <= *group.first.begin())
 			throw game_data_error
 				(
