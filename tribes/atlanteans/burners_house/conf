@@ -20,7 +20,8 @@ burner=1
 log=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=30000

@@ -22,7 +22,8 @@ corn=8
 water=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start breeding horses because ...
+work=_breeding horses
 
 [work]
 sleep=15000

@@ -19,9 +19,12 @@ build_material=false
 blackroot_farmer=1
 
 [programs]
-plant_blackroot=_Plant blackroot
-harvest_blackroot=_Harvest blackroot
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start planting blackroot because ...
+plant_blackroot=_planting blackroot
+# TRANSLATORS: "Completed/Skipped/Did not start harvesting blackroot because ...
+harvest_blackroot=_harvesting blackroot
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [plant_blackroot]
 sleep=20000
