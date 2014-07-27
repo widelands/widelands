@@ -241,13 +241,19 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 {
 	return !operand->evaluate(ps);
 }
+
+// Just a dummy to satisfy the superclass interface. Do not use.
 std::string ProductionProgram::ActReturn::Negation::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: This is a fallback string, usually "the economy doesn’t need the ware '%s'" etc. */
-	/** TRANSLATORS: should be called. */
-	/** TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s' */
-	return (boost::format(_("not %s")) % operand->description(tribe)).str();
+	return (boost::format(("not %s")) % operand->description(tribe)).str();
+}
+
+// Just a dummy to satisfy the superclass interface. Do not use.
+std::string ProductionProgram::ActReturn::Negation::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	return operand->description(tribe);
 }
 
 

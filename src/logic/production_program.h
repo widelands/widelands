@@ -155,7 +155,9 @@ struct ProductionProgram {
 			{}
 			virtual ~Negation();
 			bool evaluate(const ProductionSite &) const override;
+			// Just a dummy to satisfy the superclass interface. Do not use.
 			std::string description(const Tribe_Descr &) const override;
+			// Just a dummy to satisfy the superclass interface. Do not use.
 			std::string description_negation(const Tribe_Descr &) const override;
 		private:
 			Condition * const operand;
