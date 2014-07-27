@@ -267,14 +267,14 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 {
 	// TODO(GunChleoc): We can make this more elegant if we add another definition to the conf files,
 	// so for "Log"; we will also have "logs" (numberless plural)
-	/** TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s' */
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’*/
 	return (boost::format(_("the economy needs the ware ‘%s’"))
 			  % tribe.get_ware_descr(ware_type)->descname()).str();
 }
 std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description_negation
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s' */
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’*/
 	return (boost::format(_("the economy doesn’t need the ware ‘%s’"))
 			  % tribe.get_ware_descr(ware_type)->descname()).str();
 }
@@ -287,7 +287,7 @@ bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s' */
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
 	return (boost::format(_("the economy needs the worker ‘%s’"))
 			  % tribe.get_ware_descr(worker_type)->descname()).str();
 }
@@ -295,7 +295,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_negation
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s' */
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the worker ‘%s’*/
 	return (boost::format(_("the economy doesn’t need the worker ‘%s’"))
 			  % tribe.get_ware_descr(worker_type)->descname()).str();
 }
@@ -384,15 +384,15 @@ bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 std::string ProductionProgram::ActReturn::Workers_Need_Experience::description
 	(const Tribe_Descr &) const
 {
-	/** TRANSLATORS: 'Failed/Skipped ... because: workers need experience'. */
-	return _("workers need experience");
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'. */
+	return _("a worker needs experience");
 }
 
 std::string ProductionProgram::ActReturn::Workers_Need_Experience::description_negation
 	(const Tribe_Descr &) const
 {
-	/** TRANSLATORS: 'Failed/Skipped ... because: workers need experience'. */
-	return _("workers need no experience");
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
+	return _("the workers need no experience");
 }
 
 
@@ -572,21 +572,21 @@ void ProductionProgram::ActReturn::execute
 
 		std::string result_string = "";
 		if (m_result == Failed) {
-			/** TRANSLATORS: "Failed to work because the economy needs the ware ‘%s’" */
-			result_string =  (boost::format(_("Failed to %1$s because %2$s"))
+			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Did not start %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
 								  .str();
 		}
 		else if (m_result == Completed) {
-			/** TRANSLATORS: "Completed work because the economy needs the ware ‘%s’" */
+			/** TRANSLATORS: "Completed working because the economy needs the ware ‘%s’" */
 			result_string =  (boost::format(_("Completed %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
 								  .str();
 		}
 		else {
-			/** TRANSLATORS: "Skipped work because the economy needs the ware ‘%s’" */
+			/** TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’" */
 			result_string =  (boost::format(_("Skipped %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
@@ -924,7 +924,7 @@ void ProductionProgram::ActConsume::execute
 				++it;
 	}
 
-	// "Failed work because .... is/are missing"
+	// "Did not start working because .... is/are missing"
 	if (uint8_t const nr_missing_groups = l_groups.size()) {
 		const Tribe_Descr & tribe = ps.owner().tribe();
 
@@ -941,7 +941,7 @@ void ProductionProgram::ActConsume::execute
 			uint8_t const count = group.second;
 			if (1 < count) {
 				ware_string =
-					/** TRANSLATORS: e.g. 'Failed to work because: 3x water and 3x wheat are missing' */
+					/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 					/** TRANSLATORS: For this example, this is what's in the place holders: */
 					/** TRANSLATORS:    %1$s = "3" */
 					/** TRANSLATORS:    %2$i = "water" */
@@ -954,15 +954,15 @@ void ProductionProgram::ActConsume::execute
 		}
 
 		std::string result_string =
-			/** TRANSLATORS: e.g. 'Failed to work because: 3x water and 3x wheat are missing' */
+			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 			/** TRANSLATORS: For this example, this is what's in the place holders: */
 			/** TRANSLATORS:    %1$s = "work" */
 			/** TRANSLATORS:    %2$s = "water and wheat (2) " */
 			/** TRANSLATORS:    %3$s = "are missing" */
-			(boost::format(_("Failed to %1$s because %2$s %3$s"))
+			(boost::format(_("Did not start %1$s because %2$s %3$s"))
 			 % ps.top_state().program->descname()
 			 % i18n::localize_item_list(group_list, true)
-			/** TRANSLATORS: e.g. 'Failed to work because: 3x water and 3x wheat are missing' */
+			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
 
