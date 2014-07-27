@@ -540,7 +540,7 @@ template<typename T> static void render_road_horiz
 			continue;
 
 		for (int32_t i = 0, y = (centery >> 16) - 2; i < 5; ++i, ++y)
-			if (0 < y and y < dsth)
+			if (0 < y && y < dsth)
 				reinterpret_cast<T *>
 					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 					[x]
@@ -567,7 +567,7 @@ template<typename T> static void render_road_vert
 			continue;
 
 		for (int32_t i = 0, x = (centerx >> 16) - 2; i < 5; ++i, ++x)
-			if (0 < x and x < dstw)
+			if (0 < x && x < dstw)
 				reinterpret_cast<T *>
 					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 					[x]
@@ -604,7 +604,7 @@ template<typename T> static void draw_field_int
 	uint8_t road;
 
 	road = (roads >> Widelands::Road_East) & Widelands::Road_Mask;
-	if (-128 < f_vert.b or -128 < r_vert.b) {
+	if (-128 < f_vert.b || -128 < r_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -623,7 +623,7 @@ template<typename T> static void draw_field_int
 	}
 
 	road = (roads >> Widelands::Road_SouthEast) & Widelands::Road_Mask;
-	if (-128 < f_vert.b or -128 < br_vert.b) {
+	if (-128 < f_vert.b || -128 < br_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -642,7 +642,7 @@ template<typename T> static void draw_field_int
 	}
 
 	road = (roads >> Widelands::Road_SouthWest) & Widelands::Road_Mask;
-	if (-128 < f_vert.b or -128 < bl_vert.b) {
+	if (-128 < f_vert.b || -128 < bl_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -662,7 +662,7 @@ template<typename T> static void draw_field_int
 
 	dst.unlock(Surface::Unlock_Update);
 
-	// TODO(unknown) similar textures may not need dithering
+	// TODO(unknown): similar textures may not need dithering
 }
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_TERRAIN_SDL_H

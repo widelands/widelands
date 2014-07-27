@@ -80,7 +80,7 @@ public:
 	 * Toggle pause state (convenience function)
 	 */
 	void togglePaused() {
-		setPaused(not isPaused());
+		setPaused(!isPaused());
 	}
 
 	/**

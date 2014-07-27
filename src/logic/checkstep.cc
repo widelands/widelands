@@ -63,19 +63,21 @@ bool CheckStepAnd::allowed
 	 CheckStep::StepId const id)
 	const
 {
-	container_iterate_const(std::vector<CheckStep>, subs, i)
-		if (!i.current->allowed(map, start, end, dir, id))
+	for (const CheckStep& checkstep : subs) {
+		if (!checkstep.allowed(map, start, end, dir, id)) {
 			return false;
-
+		}
+	}
 	return true;
 }
 
 bool CheckStepAnd::reachabledest(Map & map, FCoords const dest) const
 {
-	container_iterate_const(std::vector<CheckStep>, subs, i)
-		if (!i.current->reachabledest(map, dest))
+	for (const CheckStep& checkstep : subs) {
+		if (!checkstep.reachabledest(map, dest)) {
 			return false;
-
+		}
+	}
 	return true;
 }
 
@@ -168,11 +170,11 @@ bool CheckStepRoad::allowed
 
 	// Calculate cost and passability
 	if
-		(not (endcaps & m_movecaps)
-		 and
-		 not
+		(!(endcaps & m_movecaps)
+		 &&
+		 !
 		 ((endcaps & MOVECAPS_WALK)
-		  and
+		  &&
 		  (m_player.get_buildcaps(start) & m_movecaps & MOVECAPS_SWIM)))
 		return false;
 
@@ -184,8 +186,8 @@ bool CheckStepRoad::allowed
 
 			return
 				dynamic_cast<Flag const *>(imm)
-				or
-				(dynamic_cast<Road const *>(imm) and (endcaps & BUILDCAPS_FLAG));
+				||
+				(dynamic_cast<Road const *>(imm) && (endcaps & BUILDCAPS_FLAG));
 		}
 
 	return true;

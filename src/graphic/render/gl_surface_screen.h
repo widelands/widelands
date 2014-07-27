@@ -30,10 +30,10 @@ public:
 	virtual ~GLSurfaceScreen() {}
 
 	/// Interface implementations
-	virtual void lock(LockMode) override;
-	virtual void unlock(UnlockMode) override;
-	virtual uint16_t get_pitch() const override;
-	virtual const SDL_PixelFormat & format() const override;
+	void lock(LockMode) override;
+	void unlock(UnlockMode) override;
+	uint16_t get_pitch() const override;
+	const SDL_PixelFormat & format() const override;
 
 private:
 	void swap_rows();

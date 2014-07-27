@@ -53,15 +53,15 @@ struct IdleWareSupply : public Supply {
 	void set_economy(Economy *);
 
 	//  implementation of Supply
-	virtual PlayerImmovable * get_position(Game &) override;
-	virtual bool is_active() const override;
-	virtual bool has_storage() const override;
-	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
-	virtual void send_to_storage(Game &, Warehouse * wh) override;
+	PlayerImmovable * get_position(Game &) override;
+	bool is_active() const override;
+	bool has_storage() const override;
+	void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
+	void send_to_storage(Game &, Warehouse * wh) override;
 
-	virtual uint32_t nr_supplies(const Game &, const Request &) const override;
-	virtual WareInstance & launch_ware(Game &, const Request &) override;
-	virtual Worker & launch_worker(Game &, const Request &) override;
+	uint32_t nr_supplies(const Game &, const Request &) const override;
+	WareInstance & launch_ware(Game &, const Request &) override;
+	Worker & launch_worker(Game &, const Request &) override;
 
 private:
 	WareInstance & m_ware;
@@ -200,11 +200,6 @@ WareInstance::~WareInstance()
 	}
 }
 
-int32_t WareInstance::get_type() const
-{
-	return WARE;
-}
-
 void WareInstance::init(Editor_Game_Base & egbase)
 {
 	Map_Object::init(egbase);
@@ -230,7 +225,7 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 */
 void WareInstance::set_economy(Economy * const e)
 {
-	if (m_descr_index == INVALID_INDEX or m_economy == e)
+	if (m_descr_index == INVALID_INDEX || m_economy == e)
 		return;
 
 	if (m_economy)

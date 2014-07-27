@@ -104,7 +104,7 @@ bool AbstractWaresDisplay::handle_mousemove
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
 		if (state ^ SDL_BUTTON_LMASK) {
-			// TODO(unknown) We should call another function that will not pass that events
+			// TODO(unknown): We should call another function that will not pass that events
 			// to our Panel superclass
 			handle_mouserelease(SDL_BUTTON_LEFT, x, y);
 			return true;
@@ -187,7 +187,7 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 	}
 	if (i < icons_order().size() && j < icons_order()[i].size()) {
 		Widelands::Ware_Index ware = icons_order()[i][j];
-		if (not m_hidden[ware]) {
+		if (!m_hidden[ware]) {
 			return ware;
 		}
 	}

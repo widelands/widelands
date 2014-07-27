@@ -185,7 +185,7 @@ void Editor_Interactive::load(const std::string & filename) {
 	m_history.reset();
 
 	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(filename));
-	if (not ml.get())
+	if (!ml.get())
 		throw warning
 			(_("Unsupported format"),
 			 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
@@ -202,7 +202,7 @@ void Editor_Interactive::load(const std::string & filename) {
 
 	load_all_tribes(&egbase(), &loader_ui);
 
-	// Create the players. TODO(SirVer) this must be managed better
+	// Create the players. TODO(SirVer): this must be managed better
 	loader_ui.step(_("Creating players"));
 	iterate_player_numbers(p, map.get_nrplayers()) {
 		egbase().add_player(p, 0, map.get_scenario_player_tribe(p), map.get_scenario_player_name(p));
@@ -300,7 +300,7 @@ void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel) {
 	    tools.current().operates_on_triangles() ?
 	    sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	Interactive_Base::set_sel_pos(sel);
-	if (target_changed and m_left_mouse_button_is_down)
+	if (target_changed && m_left_mouse_button_is_down)
 		map_clicked(true);
 }
 
@@ -500,7 +500,7 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 
 void Editor_Interactive::select_tool
 (Editor_Tool & primary, Editor_Tool::Tool_Index const which) {
-	if (which == Editor_Tool::First and & primary != tools.current_pointer) {
+	if (which == Editor_Tool::First && & primary != tools.current_pointer) {
 		if (primary.has_size_one())
 			set_sel_radius_and_update_menu(0);
 		Widelands::Map & map = egbase().map();
@@ -548,7 +548,7 @@ void Editor_Interactive::unreference_player_tribe
 	    references.end();
 	if (player) {
 		for (; it < references_end; ++it)
-			if (it->player == player and it->object == data) {
+			if (it->player == player && it->object == data) {
 				references.erase(it);
 				break;
 			}
@@ -576,7 +576,7 @@ bool Editor_Interactive::is_player_tribe_referenced
 void Editor_Interactive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::Editor_Game_Base editor(nullptr);
 	Editor_Interactive eia(editor);
-	editor.set_ibase(&eia); // TODO(unknown) get rid of this
+	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
 		UI::ProgressWindow loader_ui("pics/editor.jpg");
 		std::vector<std::string> tipstext;

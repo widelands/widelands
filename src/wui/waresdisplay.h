@@ -72,7 +72,7 @@ public:
 	Widelands::WareWorker get_type() const {return m_type;}
 
 protected:
-	virtual void layout() override;
+	void layout() override;
 
 	virtual std::string info_for_ware(Widelands::Ware_Index) = 0;
 
@@ -81,7 +81,7 @@ protected:
 	const Widelands::Tribe_Descr::WaresOrder & icons_order() const;
 	const Widelands::Tribe_Descr::WaresOrderCoords & icons_order_coords() const;
 	virtual Point ware_position(Widelands::Ware_Index) const;
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 	virtual void draw_ware
 		(RenderTarget &,
 		 Widelands::Ware_Index);
@@ -138,7 +138,7 @@ public:
 	void remove_all_warelists();
 
 protected:
-	virtual std::string info_for_ware(Widelands::Ware_Index) override;
+	std::string info_for_ware(Widelands::Ware_Index) override;
 
 private:
 	typedef std::vector<const Widelands::WareList *> vector_type;

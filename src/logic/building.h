@@ -27,6 +27,7 @@
 #include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
+#include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
@@ -61,14 +62,10 @@ struct Building_Descr : public Map_Object_Descr {
 	typedef std::vector<Building_Index> FormerBuildings;
 
 	Building_Descr
-		(char const * _name, char const * _descname,
+		(Map_Object_Type type, char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-
-	std::string type() const override {
-		return "building";
-	}
-
+	~Building_Descr() override {}
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
@@ -158,6 +155,7 @@ private:
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
+	DISALLOW_COPY_AND_ASSIGN(Building_Descr);
 };
 
 
@@ -183,16 +181,18 @@ public:
 
 	void load_finish(Editor_Game_Base &) override;
 
-	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "building";}
-	virtual int32_t  get_size    () const override;
-	virtual bool get_passable() const override;
+	int32_t  get_size    () const override;
+	bool get_passable() const override;
 
-	virtual Flag & base_flag() override;
+	//Return the animation ID that is used for the building in UI items
+	//(the building UI, messages, etc..)
+	virtual uint32_t get_ui_anim() const {return descr().get_ui_anim();}
+
+	Flag & base_flag() override;
 	virtual uint32_t get_playercaps() const;
 
 	virtual Coords get_position() const {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const override;
+	PositionList get_positions (const Editor_Game_Base &) const override;
 
 	std::string info_string(const std::string & format);
 	virtual std::string get_statistics_string();
@@ -201,7 +201,7 @@ public:
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual bool burn_on_destroy();
-	virtual void destroy(Editor_Game_Base &) override;
+	void destroy(Editor_Game_Base &) override;
 
 	void show_options(Interactive_GameBase &, bool avoid_fastclick = false, Point pos = Point(- 1, - 1));
 	void hide_options();
@@ -236,7 +236,7 @@ public:
 		return m_old_buildings;
 	}
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {}
@@ -262,11 +262,11 @@ public:
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 	void draw_help(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	virtual void create_options_window

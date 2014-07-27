@@ -40,7 +40,18 @@
 
 namespace Widelands {
 
-Map_Object_Descr g_portdock_descr("portdock", "Port Dock");
+PortDock_Descr g_portdock_descr("portdock", "Port Dock");
+
+const PortDock_Descr& PortDock::descr() const {
+	return g_portdock_descr;
+}
+
+
+PortDock_Descr::PortDock_Descr(char const* const _name, char const* const _descname)
+	:
+	Map_Object_Descr(Map_Object_Type::PORTDOCK, _name, _descname)
+{
+}
 
 PortDock::PortDock(Warehouse* wh) :
 	PlayerImmovable(g_portdock_descr),
@@ -94,16 +105,6 @@ bool PortDock::get_passable() const
 	return true;
 }
 
-int32_t PortDock::get_type() const
-{
-	return PORTDOCK;
-}
-
-char const * PortDock::type_name() const
-{
-	return "portdock";
-}
-
 PortDock::PositionList PortDock::get_positions
 	(const Editor_Game_Base &) const
 {
@@ -142,8 +143,8 @@ void PortDock::set_economy(Economy * e)
 		m_fleet->set_economy(e);
 
 	if (upcast(Game, game, &owner().egbase())) {
-		container_iterate(std::vector<ShippingItem>, m_waiting, it) {
-			it->set_economy(*game, e);
+		for (ShippingItem& shipping_item : m_waiting) {
+			shipping_item.set_economy(*game, e);
 		}
 	}
 
@@ -162,8 +163,8 @@ void PortDock::init(Editor_Game_Base & egbase)
 {
 	PlayerImmovable::init(egbase);
 
-	container_iterate_const(PositionList, m_dockpoints, it) {
-		set_position(egbase, *it.current);
+	for (const Coords& coords: m_dockpoints) {
+		set_position(egbase, coords);
 	}
 
 	init_fleet(egbase);
@@ -203,16 +204,16 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		container_iterate(std::vector<ShippingItem>, m_waiting, it) {
-			it.current->remove(*game);
+		for (ShippingItem& shipping_item : m_waiting) {
+			shipping_item.remove(*game);
 		}
 	}
 
 	if (m_fleet)
 		m_fleet->remove_port(egbase, this);
 
-	container_iterate_const(PositionList, m_dockpoints, it) {
-		unset_position(egbase, *it.current);
+	for (const Coords& coords: m_dockpoints) {
+		unset_position(egbase, coords);
 	}
 
 	if (m_expedition_bootstrap) {
@@ -248,10 +249,13 @@ void PortDock::add_shippingitem(Game & game, WareInstance & ware)
  */
 void PortDock::update_shippingitem(Game & game, WareInstance & ware)
 {
-	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
-		if (it.current->m_object.serial() == ware.serial()) {
-			_update_shippingitem(game, it.current);
-			return;
+	for (std::vector<ShippingItem>::iterator item_iter = m_waiting.begin();
+		  item_iter != m_waiting.end();
+		  ++item_iter) {
+
+		if (item_iter->m_object.serial() == ware.serial()) {
+			_update_shippingitem(game, item_iter);
+				return;
 		}
 	}
 }
@@ -272,10 +276,13 @@ void PortDock::add_shippingitem(Game & game, Worker & worker)
  */
 void PortDock::update_shippingitem(Game & game, Worker & worker)
 {
-	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
-		if (it.current->m_object.serial() == worker.serial()) {
-			_update_shippingitem(game, it.current);
-			return;
+	for (std::vector<ShippingItem>::iterator item_iter = m_waiting.begin();
+		  item_iter != m_waiting.end();
+		  ++item_iter) {
+
+		if (item_iter->m_object.serial() == worker.serial()) {
+			_update_shippingitem(game, item_iter);
+				return;
 		}
 	}
 }
@@ -310,9 +317,9 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 	std::vector<ShippingItem> items_brought_by_ship;
 	ship.withdraw_items(game, *this, items_brought_by_ship);
 
-	container_iterate(std::vector<ShippingItem>, items_brought_by_ship, it) {
-		it->set_location(game, m_warehouse);
-		it->end_shipping(game);
+	for (ShippingItem& shipping_item : items_brought_by_ship) {
+		shipping_item.set_location(game, m_warehouse);
+		shipping_item.end_shipping(game);
 	}
 
 	if (m_expedition_ready) {
@@ -390,10 +397,10 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 {
 	uint32_t count = 0;
 
-	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+	for (ShippingItem& shipping_item : m_waiting) {
 		WareInstance * ware;
 		Worker * worker;
-		it.current->get(owner().egbase(), &ware, &worker);
+		shipping_item.get(owner().egbase(), &ware, &worker);
 
 		if (waretype == wwWORKER) {
 			if (worker && worker->descr().worker_index() == wareindex)
@@ -451,11 +458,11 @@ void PortDock::log_general_info(const Editor_Game_Base & egbase)
 		 m_need_ship ? "true" : "false",
 		 m_waiting.size());
 
-	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+	for (ShippingItem& shipping_item : m_waiting) {
 		molog
 			("  IT %u, destination %u\n",
-			 it.current->m_object.serial(),
-			 it.current->m_destination_dock.serial());
+			 shipping_item.m_object.serial(),
+			 shipping_item.m_destination_dock.serial());
 	}
 }
 
@@ -484,8 +491,8 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 		pd.m_need_ship = fr.Unsigned8();
 
 		m_waiting.resize(fr.Unsigned32());
-		container_iterate(std::vector<ShippingItem::Loader>, m_waiting, it) {
-			it->load(fr);
+		for (ShippingItem::Loader& shipping_loader : m_waiting) {
+			shipping_loader.load(fr);
 		}
 
 		if (version >= 3) {
@@ -560,15 +567,15 @@ void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileW
 
 	fw.Unsigned32(mos.get_object_file_index(*m_warehouse));
 	fw.Unsigned16(m_dockpoints.size());
-	container_iterate_const(PositionList, m_dockpoints, it) {
-		WriteCoords32(&fw, *it);
+	for (const Coords& coords: m_dockpoints) {
+		WriteCoords32(&fw, coords);
 	}
 
 	fw.Unsigned8(m_need_ship);
 
 	fw.Unsigned32(m_waiting.size());
-	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
-		it->save(egbase, mos, fw);
+	for (ShippingItem& shipping_item : m_waiting) {
+		shipping_item.save(egbase, mos, fw);
 	}
 
 	// Expedition specific stuff

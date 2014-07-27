@@ -52,11 +52,11 @@ public:
 	}
 	virtual ~L_Panel() {}
 
-	virtual void __persist(lua_State * L) override {
+	void __persist(lua_State * L) override {
 		report_error
 			(L, "Trying to persist a User Interface Panel which is no supported!");
 	}
-	virtual void __unpersist(lua_State * L) override {
+	void __unpersist(lua_State * L) override {
 		report_error
 			(L, "Trying to unpersist a User Interface Panel which is "
 			 "not supported!");
@@ -178,8 +178,8 @@ public:
 	L_MapView(lua_State * L);
 	virtual ~L_MapView() {}
 
-	virtual void __persist(lua_State *) override {}
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State *) override {}
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties

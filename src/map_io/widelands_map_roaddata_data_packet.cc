@@ -55,15 +55,15 @@ void Map_Roaddata_Data_Packet::Read
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			const Map   &       map        = egbase.map();
 			Player_Number const nr_players = map.get_nrplayers();
 			for (;;) {
-				if (2 <= packet_version and fr.EndOfFile())
+				if (2 <= packet_version && fr.EndOfFile())
 					break;
 				Serial const serial = fr.Unsigned32();
-				if (packet_version < 2 and serial == 0xffffffff) {
-					if (not fr.EndOfFile())
+				if (packet_version < 2 && serial == 0xffffffff) {
+					if (!fr.EndOfFile())
 						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
@@ -108,7 +108,7 @@ void Map_Roaddata_Data_Packet::Read
 					road.m_cost[0] = fr.Unsigned32();
 					road.m_cost[1] = fr.Unsigned32();
 					Path::Step_Vector::size_type const nr_steps = fr.Unsigned16();
-					if (not nr_steps)
+					if (!nr_steps)
 						throw game_data_error("nr_steps = 0");
 					Path p(road.m_flags[0]->get_position());
 					for (Path::Step_Vector::size_type i = nr_steps; i; --i)
@@ -129,9 +129,9 @@ void Map_Roaddata_Data_Packet::Read
 					road.m_idle_index      = fr.Unsigned32();
 
 					uint32_t const count = fr.Unsigned32();
-					if (not count)
+					if (!count)
 						throw game_data_error("no carrier slot");
-					if (packet_version <= 2 and 1 < count)
+					if (packet_version <= 2 && 1 < count)
 						throw game_data_error
 							(
 						 	 "expected 1 but found %u carrier slots in road saved "
@@ -176,13 +176,13 @@ void Map_Roaddata_Data_Packet::Read
 							packet_version < 3 ? 1 : fr.Unsigned32();
 
 						if
-							(i < road.m_carrier_slots.size() and
+							(i < road.m_carrier_slots.size() &&
 							 road.m_carrier_slots[i].carrier_type == carrier_type)
 						{
 							assert(!road.m_carrier_slots[i].carrier.get(egbase));
 
 							road.m_carrier_slots[i].carrier = carrier;
-							if (carrier or carrier_request) {
+							if (carrier || carrier_request) {
 								delete road.m_carrier_slots[i].carrier_request;
 								road.m_carrier_slots[i].carrier_request =
 									carrier_request;
@@ -226,7 +226,7 @@ void Map_Roaddata_Data_Packet::Write
 	const Field & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Road const, r, field->get_immovable()))
-			if (not mos.is_object_saved(*r)) {
+			if (!mos.is_object_saved(*r)) {
 				assert(mos.is_object_known(*r));
 
 				fw.Unsigned32(mos.get_object_file_index(*r));
@@ -258,33 +258,29 @@ void Map_Roaddata_Data_Packet::Write
 				for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
 					fw.Unsigned8(path[i]);
 
-				fw.Unsigned32(r->m_idle_index); //  TODO(unknown) do not save this
+				fw.Unsigned32(r->m_idle_index); //  TODO(unknown): do not save this
 
 
 				fw.Unsigned32(r->m_carrier_slots.size());
 
-				container_iterate_const
-					(std::vector<Road::CarrierSlot>, r->m_carrier_slots, iter)
-				{
-
+				for (const Road::CarrierSlot& temp_slot : r->m_carrier_slots) {
 					if
 						(Carrier const * const carrier =
-						 iter.current->carrier.get(egbase))
-					{
+						 temp_slot.carrier.get(egbase)) {
 						assert(mos.is_object_known(*carrier));
 						fw.Unsigned32(mos.get_object_file_index(*carrier));
 					} else {
 						fw.Unsigned32(0);
 					}
 
-					if (iter.current->carrier_request) {
+					if (temp_slot.carrier_request) {
 						fw.Unsigned8(1);
-						iter.current->carrier_request->Write
+						temp_slot.carrier_request->Write
 							(fw, ref_cast<Game, Editor_Game_Base>(egbase), mos);
 					} else {
 						fw.Unsigned8(0);
 					}
-					fw.Unsigned32(iter.current->carrier_type);
+					fw.Unsigned32(temp_slot.carrier_type);
 				}
 				mos.mark_object_as_saved(*r);
 			}

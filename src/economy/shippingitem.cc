@@ -48,22 +48,20 @@ void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** wor
 		*worker = nullptr;
 	}
 
-	if (Map_Object* obj = m_object.get(game)) {
-		switch (obj->get_type()) {
-		case Map_Object::WARE:
-			if (ware) {
-				*ware = dynamic_cast<WareInstance*>(obj);
-			}
-			break;
-		case Map_Object::BOB:
-			if (worker) {
-				*worker = dynamic_cast<Worker*>(obj);
-			}
-			break;
-		default:
-			assert(false);  // never here or unknown map object being shipped.
-			break;
+	Map_Object* obj = m_object.get(game);
+	if (!obj) {
+		return;
+	}
+
+	if (obj->descr().type() == Map_Object_Type::WARE) {
+		if (ware) {
+			*ware = dynamic_cast<WareInstance*>(obj);
 		}
+		return;
+	}
+
+	if (worker) {
+		*worker = dynamic_cast<Worker*>(obj);
 	}
 }
 

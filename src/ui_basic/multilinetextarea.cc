@@ -194,7 +194,7 @@ bool Multiline_Textarea::handle_mousepress
 	(uint8_t const btn, int32_t const x, int32_t const y)
 {
 	return
-		btn == SDL_BUTTON_WHEELUP or btn == SDL_BUTTON_WHEELDOWN ?
+		btn == SDL_BUTTON_WHEELUP || btn == SDL_BUTTON_WHEELDOWN ?
 		m_scrollbar.handle_mousepress(btn, x, y) : false;
 }
 

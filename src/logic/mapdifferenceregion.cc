@@ -30,9 +30,9 @@ template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
 		--m_remaining_in_edge;
 		return true;
 	} else {
-		if (not m_passed_corner) {
+		if (!m_passed_corner) {
 			m_passed_corner = true;
-			--m_direction; if (not m_direction) m_direction = 6;
+			--m_direction; if (!m_direction) m_direction = 6;
 			m_remaining_in_edge = m_area.radius;
 			return advance(map);
 		}
@@ -46,7 +46,7 @@ void MapDifferenceRegion<Area<FCoords> >::move_to_other_side(const Map & map)
 	assert(1 <= m_direction);
 	assert     (m_direction <= 6);
 	assert(m_passed_corner);
-	--m_direction; if (not m_direction) m_direction = 6;
+	--m_direction; if (!m_direction) m_direction = 6;
 	Area<FCoords>::Radius_type steps_left = m_area.radius + 1;
 	switch (m_direction) {
 #define DIRECTION_CASE(dir, neighbour_function)                               \
@@ -63,7 +63,7 @@ void MapDifferenceRegion<Area<FCoords> >::move_to_other_side(const Map & map)
 	DIRECTION_CASE(WALK_W,  get_ln);
 	default: assert(false);
 	}
-	--m_direction; if (not m_direction) m_direction = 6;
+	--m_direction; if (!m_direction) m_direction = 6;
 	m_remaining_in_edge = m_area.radius;
 	m_passed_corner     = false;
 }

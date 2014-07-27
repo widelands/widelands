@@ -42,7 +42,7 @@ struct Cmd_ExpireMessage : public Command {
 	{}
 
 	void execute (Game & game) override;
-	virtual uint8_t id() const override {return QUEUE_CMD_EXPIREMESSAGE;}
+	uint8_t id() const override {return QUEUE_CMD_EXPIREMESSAGE;}
 
 private:
 	Player_Number player;

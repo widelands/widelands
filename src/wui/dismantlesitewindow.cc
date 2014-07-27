@@ -35,7 +35,7 @@ struct DismantleSite_Window : public Building_Window {
 		 Widelands::DismantleSite &,
 		 UI::Window *                & registry);
 
-	virtual void think() override;
+	void think() override;
 
 private:
 	UI::Progress_Bar * m_progress;

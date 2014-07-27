@@ -35,7 +35,7 @@ struct ProductionSite_Window : public Building_Window {
 	}
 	void update_worker_table();
 protected:
-	virtual void think() override;
+	void think() override;
 	void evict_worker();
 
 private:

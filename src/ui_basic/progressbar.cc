@@ -104,7 +104,7 @@ void Progress_Bar::draw(RenderTarget & dst)
 	}
 
 	// Print the state in percent
-	// TODO(unknown) use UI_FNT_COLOR_BRIGHT when merged
+	// TODO(unknown): use UI_FNT_COLOR_BRIGHT when merged
 	uint32_t percent = static_cast<uint32_t>(fraction * 100);
 	const std::string progress_text =
 		(boost::format("<font color=%1$s>%2$i%%</font>") % "ffffff" % percent).str();

@@ -23,8 +23,8 @@
 #include <list>
 #include <string>
 
-#include "interval.h"
 #include "logic/field.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 class BobDescr;
@@ -55,7 +55,7 @@ struct Editor_Action_Args {
 	std::list<const Widelands::BobDescr *> obob_type, nbob_type;  // bob change tools
 	std::list<std::string> oimmov_types;                            // immovable change tools
 	std::list<int32_t> nimmov_types;                                // immovable change tools
-	interval<Widelands::Field::Height> m_interval;                  // noise hight tool
+	Widelands::HeightInterval m_interval;                  // noise hight tool
 	std::list<Widelands::Terrain_Index> terrainType, origTerrainType; // set terrain tool
 
 	std::list<Editor_Tool_Action *> draw_actions;                   // draw tool

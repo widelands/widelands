@@ -339,7 +339,7 @@ WLApplication::~WLApplication()
 
 	SDLNet_Quit();
 
-	TTF_Quit(); // TODO(unknown) not here
+	TTF_Quit(); // TODO(unknown): not here
 
 	assert(g_fs);
 	delete g_fs;
@@ -413,14 +413,14 @@ void WLApplication::run()
 				}
 				std::string realservername(server);
 				bool name_valid = false;
-				while (not name_valid) {
+				while (!name_valid) {
 					name_valid = true;
 					const std::vector<INet_Game> & hosts = InternetGaming::ref().games();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
 						if (hosts.at(i).name == realservername)
 							name_valid = false;
 					}
-					if (not name_valid)
+					if (!name_valid)
 						realservername += "*";
 				}
 
@@ -583,7 +583,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_MOUSEMOTION:
 			m_mouse_position = Point(ev.motion.x, ev.motion.y);
 
-			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
+			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move)
 				cb->mouse_move
 					(ev.motion.state,
 					 ev.motion.x,    ev.motion.y,
@@ -624,7 +624,7 @@ void WLApplication::_handle_mousebutton
 		//  check if any ALT Key is pressed and if, treat it like a left
 		//  mouse button.
 		if
-			(ev.button.button == SDL_BUTTON_MIDDLE and
+			(ev.button.button == SDL_BUTTON_MIDDLE &&
 			 (get_key_state(SDLK_LALT) || get_key_state(SDLK_RALT)))
 		{
 			ev.button.button = SDL_BUTTON_LEFT;
@@ -632,11 +632,11 @@ void WLApplication::_handle_mousebutton
 		}
 #endif
 
-		if (ev.type == SDL_MOUSEBUTTONDOWN && cb and cb->mouse_press)
+		if (ev.type == SDL_MOUSEBUTTONDOWN && cb && cb->mouse_press)
 			cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
 		else if (ev.type == SDL_MOUSEBUTTONUP) {
-			if (cb and cb->mouse_release) {
-				if (ev.button.button == SDL_BUTTON_MIDDLE and m_faking_middle_mouse_button) {
+			if (cb && cb->mouse_release) {
+				if (ev.button.button == SDL_BUTTON_MIDDLE && m_faking_middle_mouse_button) {
 					cb->mouse_release(SDL_BUTTON_LEFT, ev.button.x, ev.button.y);
 					m_faking_middle_mouse_button = false;
 				}
@@ -952,7 +952,7 @@ bool WLApplication::init_hardware() {
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
-	g_sound_handler.init(); //  TODO(unknown) memory leak!
+	g_sound_handler.init(); //  TODO(unknown): memory leak!
 
 	return true;
 }
@@ -1040,7 +1040,7 @@ void WLApplication::handle_commandline_parameters()
 		m_logfile = m_commandline["logfile"];
 		std::cerr << "Redirecting log target to: " <<  m_logfile << std::endl;
 		if (m_logfile.size() != 0) {
-			//TODO(unknown) (very small) memory leak of 1 ofstream;
+			//TODO(unknown): (very small) memory leak of 1 ofstream;
 			//swaw the buffers (internally) of the file and wout
 			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
 			std::streambuf * logbuf = widelands_out->rdbuf();
@@ -1083,7 +1083,7 @@ void WLApplication::handle_commandline_parameters()
 
 	if (m_commandline.count("editor")) {
 		m_filename = m_commandline["editor"];
-		if (m_filename.size() and *m_filename.rbegin() == '/')
+		if (m_filename.size() && *m_filename.rbegin() == '/')
 			m_filename.erase(m_filename.size() - 1);
 		m_game_type = EDITOR;
 		m_commandline.erase("editor");
@@ -1093,7 +1093,7 @@ void WLApplication::handle_commandline_parameters()
 		if (m_game_type != NONE)
 			throw wexception("replay can not be combined with other actions");
 		m_filename = m_commandline["replay"];
-		if (m_filename.size() and *m_filename.rbegin() == '/')
+		if (m_filename.size() && *m_filename.rbegin() == '/')
 			m_filename.erase(m_filename.size() - 1);
 		m_game_type = REPLAY;
 		m_commandline.erase("replay");
@@ -1461,7 +1461,7 @@ void WLApplication::mainmenu_multiplayer()
 				case Fullscreen_Menu_NetSetupLAN::JOINGAME: {
 					IPaddress peer;
 
-					if (not host_address)
+					if (!host_address)
 						throw warning
 							("Invalid Address", "%s",
 							 _("The address of the game server is invalid"));
@@ -1549,7 +1549,7 @@ bool WLApplication::new_game()
 			// the chat
 			game.set_ibase
 				(new Interactive_Player
-					(game, g_options.pull_section("global"), pn, false, false));
+					(game, g_options.pull_section("global"), pn, false));
 			std::unique_ptr<GameController> ctrl
 				(new SinglePlayerGameController(game, true, pn));
 			UI::ProgressWindow loaderUI;

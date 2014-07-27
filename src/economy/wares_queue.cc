@@ -258,7 +258,7 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {
-		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION or packet_version == 1) {
+		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION || packet_version == 1) {
 			delete m_request;
 			m_ware             = owner().tribe().ware_index(fr.CString  ());
 			m_max_size         =                            fr.Unsigned32();
@@ -269,13 +269,13 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 			m_filled           =                            fr.Unsigned32();
 			m_consume_interval =                            fr.Unsigned32();
 			if                                             (fr.Unsigned8 ()) {
-				m_request =                          //  TODO(unknown) Change Request::Read
-					new Request                       //  TODO(unknown) to a constructor.
-						(m_owner,                      //  TODO(unknown)
-						 0,          //  TODO(unknown)
-						 WaresQueue::request_callback, //  TODO(unknown)
-						 wwWORKER);             //  TODO(unknown)
-				m_request->Read(fr, game, mol);      //  TODO(unknown)
+				m_request =                          //  TODO(unknown): Change Request::Read
+					new Request                       //  to a constructor.
+						(m_owner,
+						 0,
+						 WaresQueue::request_callback,
+						 wwWORKER);
+				m_request->Read(fr, game, mol);
 			} else
 				m_request = nullptr;
 

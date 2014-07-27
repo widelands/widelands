@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-07-16 06:11+0000\n"
 "PO-Revision-Date: 2014-03-13 13:25+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-18 05:33+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:41+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "Language: ru\n"
 "X-Poedit-Language: Russian\n"
@@ -169,14 +169,7 @@ msgstr ""
 "крутых участков. Чем круче дорога, тем тяжелее будет Вашим носильщикам "
 "двигаться по ней (и тем медленнее будут транспортироваться Ваши товары)."
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:41
-msgid "Build a road to the lumberjack’s hut"
-msgstr "Постройте дорогу к хижине дровосека"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:43
-msgid "Road to the lumberjack’ hut"
-msgstr "Дорога к хижине дровосека"
-
+#: ../../campaigns/t01.wmf/scripting/texts.lua:25
 #: ../../campaigns/t01.wmf/scripting/texts.lua:47
 msgid ""
 "You can click on any of the symbols to build the first part of the road "
@@ -190,6 +183,14 @@ msgstr ""
 "следующий участок дороги, и так далее. В тоже время, Вы можете щёлкнуть и "
 "дальше от флага, построив таким образом сразу несколько участков за раз. "
 "Щелчок по флажку штаба закончит постройку дороги."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:41
+msgid "Build a road to the lumberjack’s hut"
+msgstr "Постройте дорогу к хижине дровосека"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:43
+msgid "Road to the lumberjack’ hut"
+msgstr "Дорога к хижине дровосека"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
 #: ../../campaigns/t01.wmf/scripting/texts.lua:55
@@ -276,13 +277,10 @@ msgstr "Хантрух продолжил..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:107
 msgid ""
-"None but the gods know how long we have to remain hidden here. The warriors "
-"hope we may march back gloriously any day now, but I strongly doubt that "
-"will happen soon. And the days are already getting shorter and colder..."
+"Only the gods know how long we have to remain hidden here. The warriors hope "
+"we may march back gloriously any day now, but I strongly doubt that will "
+"happen soon. And the days are already getting shorter and colder..."
 msgstr ""
-"Только боги знают как долго мы будем скрываться здесь. Воины надеются что мы "
-"двинемся назад в ближайшие дни, но я сильно сомневаюсь что это произойдёт. А "
-"дни становятся всё короче и холоднее..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
 msgid ""
@@ -528,7 +526,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новое задание"

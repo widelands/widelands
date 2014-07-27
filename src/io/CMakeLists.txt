@@ -2,14 +2,15 @@ add_subdirectory(filesystem)
 
 wl_library(io_stream
   SRCS
+    machdep.h
     streamread.cc
     streamread.h
     streamwrite.cc
     streamwrite.h
+  USES_SDL
   DEPENDS
     base_exceptions
     base_macros
-    widelands_ball_of_mud
 )
 
 wl_library(io_fileread
@@ -21,7 +22,6 @@ wl_library(io_fileread
   DEPENDS
     io_filesystem
     io_stream
-    widelands_ball_of_mud
 )
 
 wl_library(io_filesystem

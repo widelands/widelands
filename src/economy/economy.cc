@@ -130,7 +130,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 
 	Economy * e = f1.get_economy();
 	// No economy in the editor.
-	if (not e)
+	if (!e)
 		return;
 
 	e->m_split_checks.push_back(std::make_pair(OPtr<Flag>(&f1), OPtr<Flag>(&f2)));
@@ -299,11 +299,12 @@ void Economy::_remove_flag(Flag & flag)
 	flag.set_economy(nullptr);
 
 	// fast remove
-	container_iterate(Flags, m_flags, i)
-		if (*i.current == &flag) {
-			*i.current = *(i.get_end() - 1);
+	for (Flags::iterator flag_iter = m_flags.begin(); flag_iter != m_flags.end(); ++flag_iter) {
+		if (*flag_iter == &flag) {
+			*flag_iter = *(m_flags.end() - 1);
 			return m_flags.pop_back();
 		}
+	}
 	throw wexception("trying to remove nonexistent flag");
 }
 
@@ -313,8 +314,9 @@ void Economy::_remove_flag(Flag & flag)
  */
 void Economy::_reset_all_pathfinding_cycles()
 {
-	container_iterate(Flags, m_flags, i)
-		(*i.current)->reset_path_finding_cycle();
+	for (Flag * flag : m_flags) {
+		flag->reset_path_finding_cycle();
+	}
 }
 
 /**
@@ -500,8 +502,8 @@ void Economy::remove_supply(Supply & supply)
 bool Economy::needs_ware(Ware_Index const ware_type) const {
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
 	uint32_t quantity = 0;
-	container_iterate_const(std::vector<Warehouse *>, m_warehouses, wh) {
-		quantity += (*wh)->get_wares().stock(ware_type);
+	for (const Warehouse * wh : m_warehouses) {
+		quantity += wh->get_wares().stock(ware_type);
 		if (t <= quantity)
 			return false;
 	}
@@ -512,8 +514,8 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
 bool Economy::needs_worker(Ware_Index const worker_type) const {
 	uint32_t const t = worker_target_quantity(worker_type).permanent;
 	uint32_t quantity = 0;
-	container_iterate_const(std::vector<Warehouse *>, m_warehouses, wh) {
-		quantity += (*wh)->get_workers().stock(worker_type);
+	for (const Warehouse * wh : m_warehouses) {
+		quantity += wh->get_workers().stock(worker_type);
 		if (t <= quantity)
 			return false;
 	}
@@ -549,8 +551,8 @@ void Economy::_merge(Economy & e)
 	//  window for *this where the options window for e is, to give the user
 	//  some continuity.
 	if
-		(e.m_optionswindow_registry.window and
-		 not m_optionswindow_registry.window)
+		(e.m_optionswindow_registry.window &&
+		 !m_optionswindow_registry.window)
 	{
 		m_optionswindow_registry.x = e.m_optionswindow_registry.x;
 		m_optionswindow_registry.y = e.m_optionswindow_registry.y;
@@ -591,8 +593,8 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
 	}
 
-	container_iterate_const(std::set<OPtr<Flag> >, flags, it) {
-		Flag & flag = *it.current->get(owner().egbase());
+	for (const OPtr<Flag> temp_flag : flags) {
+		Flag & flag = *temp_flag.get(owner().egbase());
 		assert(m_flags.size() > 1);  // We will not be deleted in remove_flag, right?
 		remove_flag(flag);
 		e.add_flag(flag);
@@ -712,8 +714,8 @@ struct RSPairStruct {
 */
 void Economy::_process_requests(Game & game, RSPairStruct & s)
 {
-	container_iterate_const(RequestList, m_requests, i) {
-		Request & req = **i.current;
+	for (Request * temp_req : m_requests) {
+		Request & req = *temp_req;
 
 		// We somehow get desynced request lists that don't trigger desync
 		// alerts, so add info to the sync stream here.
@@ -827,8 +829,8 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	}
 
 
-	container_iterate_const(RequestList, m_requests, j) {
-		const Request & req = **j.current;
+	for (const Request * temp_req : m_requests) {
+		const Request & req = *temp_req;
 
 		if (req.get_type() != wwWORKER || req.get_index() != index)
 			continue;
@@ -841,7 +843,7 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		// Requests for heroes should not trigger the creation of more rookies
 		if (soldier_level_check)
 		{
-			if (not (req.get_requirements().check(*m_soldier_prototype)))
+			if (!(req.get_requirements().check(*m_soldier_prototype)))
 				continue;
 		}
 
@@ -886,8 +888,8 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	uint32_t can_create = std::numeric_limits<uint32_t>::max();
 	uint32_t idx = 0;
 	uint32_t scarcest_idx = 0;
-	container_iterate_const(Worker_Descr::Buildcost, cost, bc) {
-		uint32_t cc = total_available[idx] / bc.current->second;
+	for (const std::pair<std::string, uint8_t>& bc : cost) {
+		uint32_t cc = total_available[idx] / bc.second;
 		if (cc <= can_create) {
 			scarcest_idx = idx;
 			can_create = cc;
@@ -1021,11 +1023,11 @@ void Economy::_handle_active_supplies(Game & game)
 	ss.Unsigned32(0x02decafa); // appears as facade02 in sync stream
 	ss.Unsigned32(assignments.size());
 
-	container_iterate_const(Assignments, assignments, it) {
-		ss.Unsigned32(it.current->first->get_position(game)->serial());
-		ss.Unsigned32(it.current->second->serial());
+	for (const std::pair<Supply *, Warehouse *>& temp_assignment : assignments) {
+		ss.Unsigned32(temp_assignment.first->get_position(game)->serial());
+		ss.Unsigned32(temp_assignment.second->serial());
 
-		it.current->first->send_to_storage(game, it.current->second);
+		temp_assignment.first->send_to_storage(game, temp_assignment.second);
 	}
 }
 

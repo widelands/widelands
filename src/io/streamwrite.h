@@ -26,7 +26,7 @@
 #include <string>
 
 #include "base/macros.h"
-#include "machdep.h"
+#include "io/machdep.h"
 
 /**
  * Abstract base class for stream-like data sinks.

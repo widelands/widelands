@@ -17,7 +17,7 @@
  *
  */
 
-//  TODO(unknown) remove this pragma when boost-1.40 is required (when it has been
+//  TODO(unknown): remove this pragma when boost-1.40 is required (when it has been
 //  accepted by distributions)
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 
@@ -56,7 +56,7 @@ public:
 		return _neighbours[idx];
 	}
 
-	virtual Flag & base_flag() override {return _flag;}
+	Flag & base_flag() override {return _flag;}
 	void set_waitcost(int32_t const wc) {_waitcost = wc;}
 	int32_t get_waitcost() const {return _waitcost;}
 	const Coords & get_position() const override {return _position;}
@@ -75,10 +75,11 @@ private:
 	Flag _flag;
 };
 void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours & n) {
-	container_iterate_const(Neigbours, _neighbours, i)
+	for (TestingRoutingNode * nb : _neighbours) {
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n.push_back(RoutingNodeNeighbour(*i.current, 1000 * ((type == wwWARE)?1 + _waitcost:1)));
+		n.push_back(RoutingNodeNeighbour(nb, 1000 * ((type == wwWARE)?1 + _waitcost:1)));
+	}
 }
 bool TestingRoutingNode::all_members_zeroed() {
 	bool integers_zero =
@@ -111,9 +112,11 @@ public:
 	int32_t get_length() {return nodes.size();}
 
 	bool has_node(RoutingNode * const n) {
-		container_iterate_const(Nodes, nodes, i)
-			if (*i.current == n)
+		for (RoutingNode * temp_node : nodes) {
+			if (temp_node == n) {
 				return true;
+			}
+		}
 		return false;
 	}
 	bool has_chain(Nodes & n) {
@@ -491,8 +494,9 @@ struct ComplexRouterFixture {
 	 */
 	void  reset()
 	{
-		container_iterate(Nodes, nodes, i)
-			(*i.current)->reset_path_finding_cycle();
+		for (RoutingNode * node : nodes) {
+			node->reset_path_finding_cycle();
+		}
 	}
 	TestingRoutingNode * d0;
 	Nodes nodes;

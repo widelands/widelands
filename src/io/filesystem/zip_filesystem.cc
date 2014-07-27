@@ -100,7 +100,7 @@ std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
 			complete_filename.substr
 				(0, complete_filename.size() - filename.size());
 
-		//  TODO(unknown) Something strange is going on with regard to the leading slash!
+		//  TODO(unknown): Something strange is going on with regard to the leading slash!
 		//  This is just an ugly workaround and does not solve the real
 		//  problem (which remains undiscovered)
 		if
@@ -120,7 +120,7 @@ std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
  */
 bool ZipFilesystem::FileExists(const std::string & path) {
 	try {
-		m_OpenUnzip(); //  TODO(unknown) check return value
+		m_OpenUnzip(); //  TODO(unknown): check return value
 	} catch (...) {
 		return false;
 	}
@@ -341,7 +341,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	unzCloseCurrentFile(m_unzipfile);
 
 	void * const result = malloc(totallen + 1);
-	if (not result)
+	if (!result)
 		throw std::bad_alloc();
 	unzOpenCurrentFile(m_unzipfile);
 	unzReadCurrentFile(m_unzipfile, result, totallen);
@@ -560,7 +560,7 @@ void ZipFilesystem::Rename(const std::string &, const std::string &) {
 }
 
 unsigned long long ZipFilesystem::DiskSpace() {
-	return 0; //  TODO(unknown)
+	return 0;
 }
 
 std::string ZipFilesystem::strip_basename(std::string filename)

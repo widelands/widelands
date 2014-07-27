@@ -25,7 +25,7 @@ template <> MapTriangleRegion<>::MapTriangleRegion
 	(const Map & map, Area<TCoords<> > area)
 : m_radius_is_odd(area.radius & 1)
 {
-	assert(area.t == TCoords<>::R or area.t == TCoords<>::D);
+	assert(area.t == TCoords<>::R || area.t == TCoords<>::D);
 	const uint16_t radius_plus_1 = area.radius + 1;
 	const uint16_t half_radius_rounded_down = area.radius / 2;
 	m_row_length = radius_plus_1;
@@ -151,7 +151,7 @@ template <> MapTriangleRegion<TCoords<FCoords> >::MapTriangleRegion
 	(const Map & map, Area<TCoords<FCoords> > area)
 : m_radius_is_odd(area.radius & 1)
 {
-	assert(area.t == TCoords<FCoords>::R or area.t == TCoords<FCoords>::D);
+	assert(area.t == TCoords<FCoords>::R || area.t == TCoords<FCoords>::D);
 	const uint16_t radius_plus_1 = area.radius + 1;
 	const uint16_t half_radius_rounded_down = area.radius / 2;
 	m_row_length = radius_plus_1;

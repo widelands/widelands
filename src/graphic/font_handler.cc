@@ -180,7 +180,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 	// Work around an Issue in SDL_TTF that dies when the surface
 	// has zero width
 	int width = 0;
-	if (TTF_SizeUTF8(font, lce.text.c_str(), &width, nullptr) < 0 or !width) {
+	if (TTF_SizeUTF8(font, lce.text.c_str(), &width, nullptr) < 0 || !width) {
 		lce.width = 0;
 		lce.height = TTF_FontHeight(font);
 		return;

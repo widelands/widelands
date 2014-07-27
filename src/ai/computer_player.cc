@@ -66,9 +66,10 @@ const Computer_Player::ImplementationVector& Computer_Player::getImplementations
 const Computer_Player::Implementation* Computer_Player::getImplementation(const std::string& name) {
 	const ImplementationVector& vec = getImplementations();
 
-	container_iterate_const(ImplementationVector, vec, i)
-	if ((*i.current)->name == name)
-		return *i.current;
-
+	for (const Computer_Player::Implementation* implementation : vec) {
+		if (implementation->name == name) {
+			return implementation;
+		}
+	}
 	return vec[0];
 }

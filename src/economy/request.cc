@@ -68,13 +68,13 @@ Request::Request
 	m_required_interval(0),
 	m_last_request_time(m_required_time)
 {
-	assert(m_type == wwWARE or m_type == wwWORKER);
-	if (w == wwWARE and _target.owner().tribe().get_nrwares() <= index)
+	assert(m_type == wwWARE || m_type == wwWORKER);
+	if (w == wwWARE && _target.owner().tribe().get_nrwares() <= index)
 		throw wexception
 			("creating ware request with index %u, but tribe has only %u "
 			 "ware types",
 			 index, _target.owner().tribe().get_nrwares  ());
-	if (w == wwWORKER and _target.owner().tribe().get_nrworkers() <= index)
+	if (w == wwWORKER && _target.owner().tribe().get_nrworkers() <= index)
 		throw wexception
 			("creating worker request with index %u, but tribe has only %u "
 			 "worker types",
@@ -86,7 +86,7 @@ Request::Request
 Request::~Request()
 {
 	// Remove from the economy
-	if (is_open() and m_economy)
+	if (is_open() && m_economy)
 		m_economy->remove_request(*this);
 
 	// Cancel all ongoing transfers
@@ -184,10 +184,10 @@ void Request::Write
 
 	//  Target and econmy should be set. Same is true for callback stuff.
 
-	assert(m_type == wwWARE or m_type == wwWORKER);
+	assert(m_type == wwWARE || m_type == wwWORKER);
 	const Tribe_Descr & tribe = m_target.owner().tribe();
-	assert(m_type != wwWARE   or m_index < tribe.get_nrwares  ());
-	assert(m_type != wwWORKER or m_index < tribe.get_nrworkers());
+	assert(m_type != wwWARE   || m_index < tribe.get_nrwares  ());
+	assert(m_type != wwWORKER || m_index < tribe.get_nrworkers());
 	fw.CString
 		(m_type == wwWARE                        ?
 		 tribe.get_ware_descr  (m_index)->name() :
@@ -230,7 +230,7 @@ int32_t Request::get_base_required_time
 	(Editor_Game_Base & egbase, uint32_t const nr) const
 {
 	if (m_count <= nr) {
-		if (not(m_count == 1 and nr == 1)) {
+		if (!(m_count == 1 && nr == 1)) {
 			log
 				("Request::get_base_required_time: WARNING nr = %u but count is %u, "
 				"which is not allowed according to the comment for this function\n",

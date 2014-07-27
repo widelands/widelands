@@ -142,7 +142,7 @@ void GameMessageMenu::show_new_message
 	(Message_Id const id, const Widelands::Message & message)
 {
 	assert(iplayer().player().messages()[id] == &message);
-	assert(not list->find(id.value()));
+	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
 	if ((mode == Archive) != (status == Message::Archived))
 		toggle_mode();
@@ -170,9 +170,9 @@ void GameMessageMenu::think()
 	}
 
 	// Add new messages to the list
-	container_iterate_const(MessageQueue, mq, i) {
-		Message_Id      const id      =  i.current->first;
-		const Message &       message = *i.current->second;
+	for (const std::pair<Message_Id, Message *>& temp_message : mq) {
+		Message_Id      const id      =  temp_message.first;
+		const Message &       message = *temp_message.second;
 		Message::Status const status  = message.status();
 		if ((mode == Archive) != (status == Message::Archived))
 			continue;
@@ -184,9 +184,9 @@ void GameMessageMenu::think()
 	}
 
 	if (list->size()) {
-		if (not list->has_selection())
+		if (!list->has_selection())
 			list->select(0);
-			// TODO(unknown) Workaround for bug #691928: There should
+			// TODO(unknown): Workaround for bug #691928: There should
 			// be a solution without this extra update().
 			list->update();
 	} else {

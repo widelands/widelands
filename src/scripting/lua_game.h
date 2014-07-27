@@ -113,8 +113,8 @@ public:
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
-	virtual void __persist(lua_State *) override;
-	virtual void __unpersist(lua_State *) override;
+	void __persist(lua_State *) override;
+	void __unpersist(lua_State *) override;
 
 	/*
 	 * Properties
@@ -155,8 +155,8 @@ public:
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
-	virtual void __persist(lua_State *) override;
-	virtual void __unpersist(lua_State *) override;
+	void __persist(lua_State *) override;
+	void __unpersist(lua_State *) override;
 
 	/*
 	 * Properties

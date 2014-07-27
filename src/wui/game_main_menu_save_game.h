@@ -40,7 +40,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 	void fill_list();
 	void select_by_name(std::string name);
 protected:
-	virtual void die() override;
+	void die() override;
 private:
 	Interactive_GameBase & igbase();
 	void selected      (uint32_t);

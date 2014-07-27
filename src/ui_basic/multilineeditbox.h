@@ -47,7 +47,7 @@ struct Multiline_Editbox : public Panel {
 	void set_maximum_bytes(uint32_t n);
 	uint32_t get_maximum_bytes() const;
 
-	virtual void focus() override;
+	void focus() override;
 
 protected:
 	void draw(RenderTarget &) override;

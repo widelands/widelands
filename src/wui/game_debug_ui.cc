@@ -22,6 +22,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "logic/bob.h"
@@ -49,7 +51,7 @@ struct MapObjectDebugPanel
 		 Widelands::Map_Object       &);
 	~MapObjectDebugPanel();
 
-	virtual void log(std::string str) override;
+	void log(std::string str) override;
 
 private:
 	const Widelands::Editor_Game_Base & m_egbase;
@@ -133,7 +135,7 @@ struct MapObjectDebugWindow : public UI::Window {
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think() override;
+	void think() override;
 
 private:
 	bool                  m_log_general_info;
@@ -218,7 +220,7 @@ struct FieldDebugWindow : public UI::Window {
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think() override;
+	void think() override;
 
 	void open_immovable();
 	void open_bob(uint32_t);
@@ -410,12 +412,16 @@ void FieldDebugWindow::think()
 		bool toremove = false;
 		std::vector<Widelands::Bob *>::iterator removeIt;
 		// Nested loop :(
-		container_iterate(std::vector<Widelands::Bob *>, bobs, j) {
-			if ((*j.current) && mo && (*j.current)->serial() == mo->serial()) {
+
+		for (std::vector<Widelands::Bob *>::iterator bob_iter = bobs.begin();
+			  bob_iter != bobs.end();
+			  ++bob_iter) {
+
+			if ((*bob_iter) && mo && (*bob_iter)->serial() == mo->serial()) {
 				// Remove from the bob list if we already
 				// have it in our list
 				toremove = true;
-				removeIt = j.current;
+				removeIt = bob_iter;
 				break;
 			}
 		}
@@ -429,11 +435,12 @@ void FieldDebugWindow::think()
 		idx--; //reiter the same index
 	}
 	// Add remaining
-	container_iterate_const(std::vector<Widelands::Bob *>, bobs, j) {
-		snprintf
-			(buffer, sizeof(buffer),
-			 "%s (%u)", (*j.current)->descr().name().c_str(), (*j.current)->serial());
-		m_ui_bobs.add(buffer, (*j.current)->serial());
+	for (const Widelands::Bob * temp_bob : bobs) {
+		m_ui_bobs.add(
+			(boost::format("%s (%u)")
+				% temp_bob->descr().name()
+				% temp_bob->serial()).str().c_str(),
+			temp_bob->serial());
 	}
 }
 

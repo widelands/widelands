@@ -40,16 +40,15 @@
 
 namespace Widelands {
 
-namespace  {
-
+namespace {
 // Every Map_Object() needs to have a description. So we make a dummy one for
 // Fleet.
-Map_Object_Descr* fleet_description() {
-	static Map_Object_Descr fleet_descr("fleet", "Fleet");
-	return &fleet_descr;
-}
-
+Fleet_Descr g_fleet_descr("fleet", "Fleet");
 }  // namespace
+
+const Fleet_Descr& Fleet::descr() const {
+	return g_fleet_descr;
+}
 
 /**
  * Fleets are initialized empty.
@@ -59,21 +58,12 @@ Map_Object_Descr* fleet_description() {
  * The Fleet takes care of merging with existing fleets, if any.
  */
 Fleet::Fleet(Player & player) :
-	Map_Object(fleet_description()),
+	Map_Object(&g_fleet_descr),
 	m_owner(player),
 	m_act_pending(false)
 {
 }
 
-int32_t Fleet::get_type() const
-{
-	return FLEET;
-}
-
-char const * Fleet::type_name() const
-{
-	return "fleet";
-}
 
 /**
  * Whether the fleet is in fact useful for transporting goods.
@@ -100,8 +90,8 @@ void Fleet::set_economy(Economy * e)
 #endif
 
 		if (upcast(Game, game, &owner().egbase())) {
-			container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
-				(*shipit.current)->set_economy(*game, e);
+			for (Ship * temp_ship : m_ships) {
+				temp_ship->set_economy(*game, e);
 			}
 		}
 	}
@@ -155,15 +145,15 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 	Map & map = egbase.map();
 	MapAStar<StepEvalFindFleet> astar(map, StepEvalFindFleet());
 
-	container_iterate_const(std::vector<Ship *>, m_ships, it) {
-		astar.push((*it.current)->get_position());
+	for (const Ship * temp_ship : m_ships) {
+		astar.push(temp_ship->get_position());
 	}
 
-	container_iterate_const(std::vector<PortDock *>, m_ports, it) {
-		BaseImmovable::PositionList pos = (*it.current)->get_positions(egbase);
+	for (const PortDock * temp_port : m_ports) {
+		BaseImmovable::PositionList pos = temp_port->get_positions(egbase);
 
-		container_iterate_const(BaseImmovable::PositionList, pos, posit) {
-			astar.push(*posit.current);
+		for (const Coords& temp_pos : pos) {
+			astar.push(temp_pos);
 		}
 	}
 
@@ -171,7 +161,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (BaseImmovable * imm = cur.field->get_immovable()) {
-			if (imm->get_type() == PORTDOCK) {
+			if (imm->descr().type() == Map_Object_Type::PORTDOCK) {
 				if (upcast(PortDock, dock, imm)) {
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 						dock->get_fleet()->merge(egbase, this);
@@ -182,7 +172,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 		}
 
 		for (Bob * bob = cur.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
-			if (bob->get_bob_type() != Bob::SHIP)
+			if (bob->descr().type() != Map_Object_Type::SHIP)
 				continue;
 
 			if (upcast(Ship, ship, bob)) {
@@ -204,7 +194,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
  */
 void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
 {
-	if (m_ports.empty() and not other->m_ports.empty()) {
+	if (m_ports.empty() && !other->m_ports.empty()) {
 		other->merge(egbase, this);
 		return;
 	}
@@ -421,8 +411,8 @@ struct StepEvalFindPorts {
 	int32_t estimate(Map & map, FCoords pos) const
 	{
 		int32_t est = std::numeric_limits<int32_t>::max();
-		container_iterate_const(std::vector<Target>, targets, it) {
-			est = std::min(est, map.calc_cost_estimate(pos, it.current->pos));
+		for (const Target& temp_target : targets) {
+			est = std::min(est, map.calc_cost_estimate(pos, temp_target.pos));
 		}
 		return std::max(0, est - 5 * map.calc_cost(0));
 	}
@@ -467,15 +457,15 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 	MapAStar<StepEvalFindPorts> astar(map, se);
 
 	BaseImmovable::PositionList src(m_ports[idx]->get_positions(egbase));
-	container_iterate_const(BaseImmovable::PositionList, src, it) {
-		astar.push(*it.current);
+	for (const Coords& temp_pos : src) {
+		astar.push(temp_pos);
 	}
 
 	int32_t cost;
 	FCoords cur;
 	while (!se.targets.empty() && astar.step(cur, cost)) {
 		BaseImmovable * imm = cur.field->get_immovable();
-		if (!imm || imm->get_type() != PORTDOCK)
+		if (!imm || imm->descr().type() != Map_Object_Type::PORTDOCK)
 			continue;
 
 		if (upcast(PortDock, pd, imm)) {
@@ -503,9 +493,9 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 			if (reverse)
 				ppath.path->reverse();
 
-			container_iterate(std::vector<StepEvalFindPorts::Target>, se.targets, it) {
-				if (it.current->idx == otheridx) {
-					*it.current = se.targets.back();
+			for (StepEvalFindPorts::Target& temp_target : se.targets) {
+				if (temp_target.idx == otheridx) {
+					temp_target = se.targets.back();
 					se.targets.pop_back();
 					break;
 				}
@@ -571,9 +561,9 @@ void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
  */
 PortDock * Fleet::get_dock(Flag & flag) const
 {
-	container_iterate_const(std::vector<PortDock *>, m_ports, portit) {
-		if (&(*portit.current)->base_flag() == &flag)
-			return *portit.current;
+	for (PortDock * temp_port : m_ports) {
+		if (&temp_port->base_flag() == &flag)
+			return temp_port;
 	}
 
 	return nullptr;
@@ -622,13 +612,13 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 	molog("Fleet::act\n");
 
-	container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
-		Ship & ship = **shipit.current;
+	for (Ship * temp_ship : m_ships) {
+		Ship & ship = *temp_ship;
 		if (ship.get_nritems() > 0 && !ship.get_destination(game)) {
 			molog("Ship %u has items\n", ship.serial());
 			bool found_dst = false;
-			container_iterate(std::vector<ShippingItem>, ship.m_items, it) {
-				PortDock * dst = it->get_destination(game);
+			for (ShippingItem& temp_item : ship.m_items) {
+				PortDock * dst = temp_item.get_destination(game);
 				if (dst) {
 					molog("... sending to portdock %u\n", dst->serial());
 					ship.set_destination(game, *dst);
@@ -651,8 +641,8 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			molog("Port %u needs ship\n", pd.serial());
 
 			bool success = false;
-			container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
-				Ship & ship = **shipit.current;
+			for (Ship * temp_ship : m_ships) {
+				Ship & ship = *temp_ship;
 				// Check whether ship is in TRANSPORT state
 				if (ship.get_ship_state() != Ship::TRANSPORT)
 					continue;
@@ -731,12 +721,12 @@ void Fleet::Loader::load_pointers()
 	// changes to the pending state.
 	bool save_act_pending = fleet.m_act_pending;
 
-	container_iterate_const(std::vector<uint32_t>, m_ships, it) {
-		fleet.m_ships.push_back(&mol().get<Ship>(*it));
+	for (const uint32_t& temp_ship : m_ships) {
+		fleet.m_ships.push_back(&mol().get<Ship>(temp_ship));
 		fleet.m_ships.back()->set_fleet(&fleet);
 	}
-	container_iterate_const(std::vector<uint32_t>, m_ports, it) {
-		fleet.m_ports.push_back(&mol().get<PortDock>(*it));
+	for (const uint32_t& temp_port: m_ports) {
+		fleet.m_ports.push_back(&mol().get<PortDock>(temp_port));
 		fleet.m_ports.back()->set_fleet(&fleet);
 	}
 
@@ -799,12 +789,12 @@ void Fleet::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrit
 	Map_Object::save(egbase, mos, fw);
 
 	fw.Unsigned32(m_ships.size());
-	container_iterate_const(std::vector<Ship *>, m_ships, it) {
-		fw.Unsigned32(mos.get_object_file_index(**it));
+	for (const Ship * temp_ship : m_ships) {
+		fw.Unsigned32(mos.get_object_file_index(*temp_ship));
 	}
 	fw.Unsigned32(m_ports.size());
-	container_iterate_const(std::vector<PortDock *>, m_ports, it) {
-		fw.Unsigned32(mos.get_object_file_index(**it));
+	for (const PortDock * temp_port : m_ports) {
+		fw.Unsigned32(mos.get_object_file_index(*temp_port));
 	}
 
 	fw.Unsigned8(m_act_pending);

@@ -265,10 +265,10 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_inputgrab       .set_state(opt.inputgrab);
 	m_label_music     .set_textstyle(ts_small());
 	m_music           .set_state(opt.music);
-	m_music           .set_enabled(not g_sound_handler.lock_audio_disabling_);
+	m_music           .set_enabled(!g_sound_handler.lock_audio_disabling_);
 	m_label_fx        .set_textstyle(ts_small());
 	m_fx              .set_state(opt.fx);
-	m_fx              .set_enabled(not g_sound_handler.lock_audio_disabling_);
+	m_fx              .set_enabled(!g_sound_handler.lock_audio_disabling_);
 	m_label_maxfps    .set_textstyle(ts_small());
 	m_label_resolution.set_textstyle(ts_small());
 	m_reslist         .set_font(ui_fn(), fs_small());
@@ -300,7 +300,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		 ++modes)
 	{
 		const SDL_Rect & mode = **modes;
-		if (800 <= mode.w and 600 <= mode.h)
+		if (800 <= mode.w && 600 <= mode.h)
 		{
 			const ScreenResolution this_res = {mode.w, mode.h};
 			if
@@ -320,12 +320,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		sprintf(buf, _("%1$i x %2$i"), m_resolutions[i].xres, m_resolutions[i].yres);
 		const bool selected =
-			m_resolutions[i].xres  == opt.xres and
+			m_resolutions[i].xres  == opt.xres &&
 			m_resolutions[i].yres  == opt.yres;
 		did_select_a_res |= selected;
 		m_reslist.add(buf, nullptr, nullptr, selected);
 	}
-	if (not did_select_a_res) {
+	if (!did_select_a_res) {
 		char buf[32];
 		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		sprintf(buf, "%1$i x %2$i", opt.xres, opt.yres);

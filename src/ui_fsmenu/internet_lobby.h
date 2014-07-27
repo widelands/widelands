@@ -39,7 +39,7 @@ struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
 
 	Fullscreen_Menu_Internet_Lobby (const char *, const char *, bool);
 
-	virtual void think() override;
+	void think() override;
 
 	/// \returns the maximum number of clients that may connect
 	int32_t get_maxclients() {

@@ -79,10 +79,10 @@ struct Area : public _Coords_type
 	{}
 
 	bool operator== (const Area& other) const {
-		return Coords_type::operator== (other) and radius == other.radius;
+		return Coords_type::operator== (other) && radius == other.radius;
 	}
 	bool operator!= (const Area& other) const {
-		return Coords_type::operator!= (other) or  radius != other.radius;
+		return Coords_type::operator!= (other) ||  radius != other.radius;
 	}
 
 	Radius_type radius;
@@ -96,10 +96,10 @@ template <typename Area_type = Area<> > struct HollowArea : public Area_type {
 
 	bool operator== (const HollowArea& other) const {
 		return
-			Area_type::operator== (other) and hole_radius == other.hole_radius;
+			Area_type::operator== (other) && hole_radius == other.hole_radius;
 	}
 	bool operator!= (const HollowArea& other) const {
-		return not (*this == other);
+		return !(*this == other);
 	}
 
 	typename Area_type::Radius_type hole_radius;
@@ -133,10 +133,10 @@ template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 	{}
 
 	bool operator== (const TCoords& other) const {
-		return Coords_type::operator== (other) and t == other.t;
+		return Coords_type::operator== (other) && t == other.t;
 	}
 	bool operator!= (const TCoords& other) const {
-		return Coords_type::operator!= (other) or  t != other.t;
+		return Coords_type::operator!= (other) ||  t != other.t;
 	}
 
 	TriangleIndex t;
@@ -155,16 +155,26 @@ struct Node_and_Triangle {
 	{}
 
 	bool operator== (Node_and_Triangle<> const other) const {
-		return node == other.node and triangle == other.triangle;
+		return node == other.node && triangle == other.triangle;
 	}
 	bool operator!= (Node_and_Triangle<> const other) const {
-		return not (*this == other);
+		return !(*this == other);
 	}
 
 	Node_Coords_type              node;
 	TCoords<Triangle_Coords_type> triangle;
 };
 
+// A height interval.
+struct HeightInterval {
+	HeightInterval(const uint8_t Min, const uint8_t Max) : min(Min), max(Max) {
+	}
+	bool valid() const {
+		return min <= max;
+	}
+
+	uint8_t min, max;
+};
 }
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H

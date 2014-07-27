@@ -180,7 +180,7 @@ public:
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think() override;
+	void think() override;
 
 	void init();
 	void add_buttons_auto();
@@ -310,8 +310,8 @@ FieldActionWindow::~FieldActionWindow()
 
 void FieldActionWindow::think() {
 	if
-		(m_plr and m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
-		 and not m_plr->see_all())
+		(m_plr && m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
+		 && !m_plr->see_all())
 		die();
 }
 
@@ -352,7 +352,7 @@ void FieldActionWindow::add_buttons_auto()
 
 	const Widelands::Player_Number owner = m_node.field->get_owned_by();
 
-	if (not igbase or igbase->can_see(owner)) {
+	if (!igbase || igbase->can_see(owner)) {
 		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_node);
 		const bool can_act = igbase ? igbase->can_act(owner) : true;
 
@@ -420,7 +420,7 @@ void FieldActionWindow::add_buttons_auto()
 					 _("Destroy a road"));
 		}
 	} else if
-		(m_plr and
+		(m_plr &&
 		 1
 		 <
 		 m_plr->vision
@@ -499,7 +499,7 @@ Add buttons for house building.
 */
 void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& player_color)
 {
-	if (not m_plr)
+	if (!m_plr)
 		return;
 	BuildGrid * bbg_house[4] = {nullptr, nullptr, nullptr, nullptr};
 	BuildGrid * bbg_mine = nullptr;
@@ -737,9 +737,9 @@ void FieldActionWindow::act_ripflag()
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
-				if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+				if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 					ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
-						(*flag, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
+						(*flag, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
 				}
 				else {
 					show_bulldoze_confirm
@@ -750,7 +750,7 @@ void FieldActionWindow::act_ripflag()
 			}
 		} else {
 			ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
-					(*flag, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
+					(*flag, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
 			ibase().need_complete_redraw();
 		}
 	}
@@ -795,7 +795,7 @@ void FieldActionWindow::act_removeroad()
 	Widelands::Editor_Game_Base & egbase = ibase().egbase();
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_node)))
 		ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
-			(*road, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
+			(*road, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
 	ibase().need_complete_redraw();
 	okdialog();
 }
@@ -834,7 +834,7 @@ void FieldActionWindow::building_icon_mouse_out
 void FieldActionWindow::building_icon_mouse_in
 	(const Widelands::Building_Index idx)
 {
-	if (ibase().m_show_workarea_preview and not m_workarea_preview_job_id) {
+	if (ibase().m_show_workarea_preview && !m_workarea_preview_job_id) {
 		const Workarea_Info & workarea_info =
 			m_plr->tribe().get_building_descr(Widelands::Building_Index(idx))
 			->m_workarea_info;
@@ -913,7 +913,7 @@ void show_field_action
 		FieldActionWindow & w = *new FieldActionWindow(ibase, player, registry);
 		w.add_buttons_road
 			(target != ibase->get_build_road_start()
-			 and
+			 &&
 			 (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 		return w.init();
 	}

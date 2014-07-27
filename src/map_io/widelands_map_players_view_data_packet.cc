@@ -24,13 +24,13 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "economy/flag.h"
 #include "economy/road.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
-#include "logic/instances.h" //for g_flag_descr
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"
@@ -162,16 +162,16 @@ namespace {
 	}
 
 #define CHECK_TRAILING_BYTES(file, filename)                                                       \
-	if (not(file).EndOfFile())                                                                      \
+	if (!(file).EndOfFile())                                                                      \
 		throw game_data_error("Map_Players_View_Data_Packet::Read: player %u:"                       \
 		                      "Found %lu trailing bytes in \"%s\"",                                  \
 		                      plnum,                                                                 \
 		                      static_cast<long unsigned int>((file).GetSize() - (file).GetPos()),    \
 		                      filename);
 
-// TODO(unknown) Legacy code deprecated since build18
+// TODO(unknown): Legacy code deprecated since build18
 template <uint8_t const Size> struct BitInBuffer {
-	static_assert(Size == 1 or Size == 2 or Size == 4, "Unexpected Size.");
+	static_assert(Size == 1 || Size == 2 || Size == 4, "Unexpected Size.");
 	BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {
 		m_fr = fr;
 	}
@@ -458,7 +458,7 @@ void Map_Players_View_Data_Packet::Read
 								map_object_descr = nullptr;
 							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
-									//  TODO(unknown) This is not the building's main position
+									//  TODO(unknown): This is not the building's main position
 									//  so we can not see it. But it should be
 									//  possible to see it from a distance somehow.
 									map_object_descr = nullptr;
@@ -601,7 +601,7 @@ void Map_Players_View_Data_Packet::Read
 			BORDER_FILENAME_TEMPLATE,
 			BORDER_CURRENT_PACKET_VERSION);
 
-		// TODO(unknown) Legacy code deprecated since build18
+		// TODO(unknown): Legacy code deprecated since build18
 		BitInBuffer<2> legacy_node_immovable_kinds_bitbuffer(&node_immovable_kinds_file);
 		BitInBuffer<2> legacy_road_bitbuffer(&roads_file);
 		BitInBuffer<4> legacy_terrains_bitbuffer(&terrains_file);
@@ -735,7 +735,7 @@ void Map_Players_View_Data_Packet::Read
 							map_object_descr = nullptr;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
-								//  TODO(unknown) This is not the building's main position so
+								//  TODO(unknown): This is not the building's main position so
 								//  we can not see it. But it should be possible
 								//  to see it from a distance somehow.
 								map_object_descr = nullptr;
@@ -991,15 +991,15 @@ inline static void write_unseen_immovable
 {
 	Map_Object_Descr const * const map_object_descr = map_object_data->map_object_descr;
 	const Player::Constructionsite_Information & csi = map_object_data->csi;
-	assert(not Road::IsRoadDescr(map_object_descr));
+	assert(!Road::IsRoadDescr(map_object_descr));
 	uint8_t immovable_kind = 255;
 
-	if (not map_object_descr)
+	if (!map_object_descr)
 		immovable_kind = 0;
 	else if (upcast(Immovable_Descr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
 		WriteImmovable_Type(&immovables_file, *immovable_descr);
-	} else if (map_object_descr == &g_flag_descr)
+	} else if (map_object_descr->type() == Map_Object_Type::FLAG)
 		immovable_kind = 2;
 	else if (upcast(Building_Descr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
@@ -1020,7 +1020,7 @@ inline static void write_unseen_immovable
 			immovables_file.Unsigned32(csi.totaltime);
 			immovables_file.Unsigned32(csi.completedtime);
 		}
-	} else if (map_object_descr == &g_portdock_descr)
+	} else if (map_object_descr->type() == Map_Object_Type::PORTDOCK)
 		immovable_kind = 4;
 	else
 	{
@@ -1094,7 +1094,7 @@ void Map_Players_View_Data_Packet::Write
 
 					vision_file.Unsigned32(f_player_field.vision);
 
-					if (not f_seen) {
+					if (!f_seen) {
 
 						if (f_everseen) { //  node
 							unseen_times_file.Unsigned32
@@ -1119,7 +1119,7 @@ void Map_Players_View_Data_Packet::Write
 						if
 							//  the player does not see the D triangle now but has
 							//  seen it
-							(not bl_seen & not br_seen &
+							(!bl_seen & !br_seen &
 							 (f_everseen | bl_everseen | br_everseen))
 						{
 							terrains_file.Unsigned8(f_player_field.terrains.d);
@@ -1130,7 +1130,7 @@ void Map_Players_View_Data_Packet::Write
 						if
 							//  the player does not see the R triangle now but has
 							//  seen it
-							(not br_seen & not  r_seen &
+							(!br_seen & !r_seen &
 							 (f_everseen | br_everseen |  r_everseen))
 						{
 							terrains_file.Unsigned8(f_player_field.terrains.r);
@@ -1140,11 +1140,11 @@ void Map_Players_View_Data_Packet::Write
 						}
 
 						//  edges
-						if (not bl_seen & (f_everseen | bl_everseen))
+						if (!bl_seen & (f_everseen | bl_everseen))
 							roads_file.Unsigned8(f_player_field.road_sw());
-						if (not br_seen & (f_everseen | br_everseen))
+						if (!br_seen & (f_everseen | br_everseen))
 							roads_file.Unsigned8(f_player_field.road_se());
-						if (not  r_seen & (f_everseen |  r_everseen))
+						if (!r_seen & (f_everseen |  r_everseen))
 							roads_file.Unsigned8(f_player_field.road_e ());
 					}
 

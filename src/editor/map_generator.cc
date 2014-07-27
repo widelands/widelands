@@ -80,7 +80,7 @@ void MapGenerator::generate_bobs
 
 	const MapGenBobCategory * bobCategory = landResource.getBobCategory(terrType);
 
-	if (not bobCategory) //  no bobs defined here...
+	if (!bobCategory) //  no bobs defined here...
 		return;
 
 	uint32_t immovDens = landResource.getImmovableDensity();
@@ -100,14 +100,14 @@ void MapGenerator::generate_bobs
 
 	// Set bob according to bob area
 
-	if (set_immovable and (num = bobCategory->num_immovables()))
+	if (set_immovable && (num = bobCategory->num_immovables()))
 		egbase_.create_immovable
 			(fc,
 			 bobCategory->get_immovable
 			 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
 			 nullptr);
 
-	if (set_moveable and (num = bobCategory->num_critters()))
+	if (set_moveable && (num = bobCategory->num_critters()))
 		egbase_.create_bob
 			(fc,
 			 egbase_.world().get_bob
@@ -286,7 +286,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		for (uint32_t x = 0; x < w; x += 16)
 			for (uint32_t y = 0; y < h; y += 16) {
 				values[x + y * w] = rng.rand();
-				if (x % 32 or y % 32) {
+				if (x % 32 || y % 32) {
 					values[x + y * w] += kAverageElevation;
 					values[x + y * w] /= 2;
 				}
@@ -847,7 +847,7 @@ void MapGenerator::create_random_map()
 		}
 
 		if (coords.empty()) {
-			// TODO(unknown) inform players via popup
+			// TODO(unknown): inform players via popup
 			log("WARNING: Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;

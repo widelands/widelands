@@ -141,14 +141,14 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 	if (protect_against_recursive_select_)
 		return;
 
-	//  TODO(unknown) This code is erroneous. It checks the current key state. What it
+	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
 	const bool multiselect = get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
-	if (not t and(not multiselect or tool_->get_nr_enabled() == 1))
+	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
 		checkboxes_[n]->set_state(true);
 	else {
-		if (not multiselect) {
+		if (!multiselect) {
 			for (uint32_t i = 0; tool_->get_nr_enabled(); ++i)
 				tool_->enable(i, false);
 			//  disable all checkboxes

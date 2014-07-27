@@ -367,7 +367,7 @@ bool RenderTarget::clip(Rect & r) const
 	r.x += m_rect.x;
 	r.y += m_rect.y;
 
-	return r.w and r.h;
+	return r.w && r.h;
 }
 
 /**

@@ -19,6 +19,8 @@
 
 #include "scripting/lua_map.h"
 
+#include <boost/format.hpp>
+
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "economy/wares_queue.h"
@@ -37,6 +39,7 @@
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "scripting/c_utils.h"
+#include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -166,7 +169,7 @@ btype##sMap m_parse_set_##type##s_arguments \
 	(lua_State * L, const Tribe_Descr & tribe) \
 { \
 	int32_t nargs = lua_gettop(L); \
-	if (nargs != 2 and nargs != 3) \
+	if (nargs != 2 && nargs != 3) \
 		report_error(L, "Wrong number of arguments to set_" #type "!"); \
    btype##sMap rv; \
 	if (nargs == 3) { \
@@ -195,9 +198,9 @@ PARSERS(worker, Worker)
 
 WaresMap count_wares_on_flag_(Flag& f, const Tribe_Descr & tribe) {
 	WaresMap rv;
-	Flag::Wares current_wares = f.get_wares();
-	container_iterate_const(Flag::Wares, current_wares, w) {
-		Ware_Index i = tribe.ware_index((*w.current)->descr().name());
+
+	for (const WareInstance * ware : f.get_wares()) {
+		Ware_Index i = tribe.ware_index(ware->descr().name());
 		if (!rv.count(i))
 			rv.insert(Widelands::WareAmount(i, 1));
 		else
@@ -531,86 +534,103 @@ int do_set_soldiers
 
 
 /*
- * Upcast the given base immovable to a higher type and hand this to
+ * Upcast the given map object description to a higher type and hand this
+ * to Lua. We use this so that scripters always work with the highest class
+ * object available.
+ */
+#define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
+	(L, new lua_klass(static_cast<const klass *>(descr)))
+int upcasted_map_object_descr_to_lua(lua_State* L, const Map_Object_Descr* const descr) {
+	assert(descr != nullptr);
+
+	if (descr->type() >= Map_Object_Type::BUILDING)
+	{
+		switch (descr->type()) {
+			case Map_Object_Type::CONSTRUCTIONSITE:
+				return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
+			case Map_Object_Type::PRODUCTIONSITE:
+				return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
+			case Map_Object_Type::MILITARYSITE:
+				return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
+			case Map_Object_Type::WAREHOUSE:
+				return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
+			case Map_Object_Type::TRAININGSITE:
+				return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
+			default:
+				return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
+		}
+	}
+	else {
+		switch (descr->type()) {
+			case Map_Object_Type::WARE:
+				return CAST_TO_LUA(WareDescr, L_WareDescription);
+			case Map_Object_Type::WORKER:
+				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
+			case Map_Object_Type::CARRIER:
+				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
+			case Map_Object_Type::SOLDIER:
+				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
+			default:
+				return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
+		}
+	}
+}
+#undef CAST_TO_LUA
+
+/*
+ * Upcast the given map object to a higher type and hand this to
  * Lua. We use this so that scripters always work with the highest class
  * object available.
  */
 #define CAST_TO_LUA(k) to_lua<L_ ##k> \
-   (L, new L_ ##k(*static_cast<k *>(mo)))
-int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
+	(L, new L_ ##k(*static_cast<k *>(mo)))
+int upcasted_map_object_to_lua(lua_State * L, Map_Object * mo) {
 	if (!mo)
 		return 0;
 
-	switch (mo->get_bob_type()) {
-		case Bob::CRITTER:
-			return to_lua<L_Bob>(L, new L_Bob(*mo));
-		case Bob::WORKER:
-			if (mo->descr().name() == "soldier")
-				return CAST_TO_LUA(Soldier);
-			return CAST_TO_LUA(Worker);
-		case Bob::SHIP:
-			return CAST_TO_LUA(Ship);
-		default:
-			assert(false);  // Never here, hopefully.
-			return 0;
-	}
-}
+	switch (mo->descr().type()) {
+	case Map_Object_Type::CRITTER:
+		return CAST_TO_LUA(Bob);
+	case Map_Object_Type::SHIP:
+		return CAST_TO_LUA(Ship);
+	case Map_Object_Type::WORKER:
+		return CAST_TO_LUA(Worker);
+	case Map_Object_Type::CARRIER:
+		// TODO(sirver): not yet implemented
+		return CAST_TO_LUA(Worker);
+	case Map_Object_Type::SOLDIER:
+		return CAST_TO_LUA(Soldier);
 
-int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
-	if (!mo)
-		return 0;
+	case Map_Object_Type::IMMOVABLE:
+		return CAST_TO_LUA(BaseImmovable);
 
-	switch  (mo->get_type()) {
-		case Map_Object::BUILDING:
-		{
-			const char * type_name = mo->type_name();
-			if (!strcmp(type_name, "constructionsite"))
-				return CAST_TO_LUA(ConstructionSite);
-			else if (!strcmp(type_name, "productionsite"))
-				return CAST_TO_LUA(ProductionSite);
-			else if (!strcmp(type_name, "militarysite"))
-				return CAST_TO_LUA(MilitarySite);
-			else if (!strcmp(type_name, "warehouse"))
-				return CAST_TO_LUA(Warehouse);
-			else if (!strcmp(type_name, "trainingsite"))
-				return CAST_TO_LUA(TrainingSite);
-			else
-				return CAST_TO_LUA(Building);
-		}
+	case Map_Object_Type::FLAG:
+		return CAST_TO_LUA(Flag);
+	case Map_Object_Type::ROAD:
+		return CAST_TO_LUA(Road);
+	case Map_Object_Type::PORTDOCK:
+		return CAST_TO_LUA(PortDock);
 
-		case Map_Object::FLAG:
-			return CAST_TO_LUA(Flag);
-		case Map_Object::ROAD:
-			return CAST_TO_LUA(Road);
-		case Map_Object::PORTDOCK:
-			return CAST_TO_LUA(PortDock);
-		default:
-			break;
-	}
-	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
-}
-#undef CAST_TO_LUA
+	case Map_Object_Type::BUILDING:
+		return CAST_TO_LUA(Building);
+	case Map_Object_Type::CONSTRUCTIONSITE:
+		return CAST_TO_LUA(ConstructionSite);
+	case Map_Object_Type::DISMANTLESITE:
+		// TODO(sirver): not yet implemented.
+		return CAST_TO_LUA(Building);
+	case Map_Object_Type::WAREHOUSE:
+		return CAST_TO_LUA(Warehouse);
+	case Map_Object_Type::PRODUCTIONSITE:
+		return CAST_TO_LUA(ProductionSite);
+	case Map_Object_Type::MILITARYSITE:
+		return CAST_TO_LUA(MilitarySite);
+	case Map_Object_Type::TRAININGSITE:
+		return CAST_TO_LUA(TrainingSite);
 
-// use the dynamic type of BuildingDescription
-#define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
-   (L, new lua_klass(static_cast<const klass *>(desc)))
-
-int upcasted_building_descr_to_lua(lua_State* L, const Building_Descr* const desc) {
-	assert(desc != nullptr);
-
-	if (is_a(MilitarySite_Descr, desc)) {
-		return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
+	default:
+		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
+		                static_cast<int>(mo->descr().type())).str());
 	}
-	else if (is_a(TrainingSite_Descr, desc)) {
-		return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
-	}
-	else if (is_a(ProductionSite_Descr, desc)) {
-		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
-	}
-	else if (is_a(Warehouse_Descr, desc)) {
-		return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
-	}
-	return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
 }
 #undef CAST_TO_LUA
 
@@ -959,7 +979,7 @@ int L_Map::place_immovable(lua_State * const L) {
 		m = &egbase.create_immovable(c->coords(), imm_idx, nullptr);
 	}
 
-	return LuaMap::upcasted_immovable_to_lua(L, m);
+	return LuaMap::upcasted_map_object_to_lua(L, m);
 }
 
 /* RST
@@ -1024,8 +1044,8 @@ const MethodType<L_MapObjectDescription> L_MapObjectDescription::Methods[] = {
 const PropertyType<L_MapObjectDescription> L_MapObjectDescription::Properties[] = {
 	PROP_RO(L_MapObjectDescription, descname),
 	PROP_RO(L_MapObjectDescription, name),
+	PROP_RO(L_MapObjectDescription, type_name),
 	PROP_RO(L_MapObjectDescription, representative_image),
-	PROP_RO(L_MapObjectDescription, type),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1089,8 +1109,8 @@ int L_MapObjectDescription::get_representative_image(lua_State * L) {
 
 			(RO) the name of the building, e.g. building.
 */
-int L_MapObjectDescription::get_type(lua_State * L) {
-	lua_pushstring(L, get()->type());
+int L_MapObjectDescription::get_type_name(lua_State * L) {
+	lua_pushstring(L, to_string(get()->type()));
 	return 1;
 }
 
@@ -1123,7 +1143,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, is_port),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
-	// TODO(SirVer) size should be similar to
+	// TODO(SirVer): size should be similar to
 	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
@@ -1231,7 +1251,7 @@ int L_BuildingDescription::get_enhancement(lua_State * L) {
 	if (enhancement == INVALID_INDEX) {
 		return 0;
 	}
-	return upcasted_building_descr_to_lua(L, get()->tribe().get_building_descr(enhancement));
+	return upcasted_map_object_descr_to_lua(L, get()->tribe().get_building_descr(enhancement));
 }
 
 /* RST
@@ -1315,6 +1335,24 @@ int L_BuildingDescription::get_workarea_radius(lua_State * L) {
 	lua_pushinteger(L, get()->m_workarea_info.begin()->first);
 	return 1;
 }
+
+/* RST
+ConstructionSiteDescription
+----------
+
+.. class:: ConstructionSiteDescription
+
+    A static description of a tribe's constructionsite, so it can be used in help files
+    without having to access an actual building on the map.
+    See also class BuildingDescription and class MapObjectDescription for more properties.
+*/
+const char L_ConstructionSiteDescription::className[] = "ConstructionSiteDescription";
+const MethodType<L_ConstructionSiteDescription> L_ConstructionSiteDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_ConstructionSiteDescription> L_ConstructionSiteDescription::Properties[] = {
+	{nullptr, nullptr, nullptr},
+};
 
 
 /* RST
@@ -1727,7 +1765,6 @@ void L_WareDescription::__unpersist(lua_State* L) {
  */
 
 
-
 /* RST
 	.. attribute:: consumers
 		(RO) An array with :class:`L_BuildingDescription` with buildings that
@@ -1756,7 +1793,7 @@ int L_WareDescription::get_consumers(lua_State * L) {
 				if (std::string(get()->name()) ==
 					std::string(tribe.get_ware_descr(ware_amount.first)->name())) {
 					lua_pushint32(L, index++);
-					upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
+						upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(i));
 					lua_rawset(L, -3);
 				}
 			}
@@ -1804,7 +1841,7 @@ int L_WareDescription::get_producers(lua_State * L) {
 				if (std::string(get()->name()) ==
 					std::string(tribe.get_ware_descr(ware_index)->name())) {
 					lua_pushint32(L, index++);
-					upcasted_building_descr_to_lua(L, tribe.get_building_descr(i));
+					upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(i));
 					lua_rawset(L, -3);
 				}
 			}
@@ -1965,10 +2002,9 @@ const MethodType<L_MapObject> L_MapObject::Methods[] = {
 };
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, __hash),
-	PROP_RO(L_MapObject, serial),
-	PROP_RO(L_MapObject, type),
+	PROP_RO(L_MapObject, descr),
 	PROP_RO(L_MapObject, name),
-	PROP_RO(L_MapObject, descname),
+	PROP_RO(L_MapObject, serial),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2017,17 +2053,6 @@ int L_MapObject::get_serial(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: type
-
-		(RO) the type name of this map object. You can determine with what kind
-		of object you cope by looking at this attribute. Some example types:
-		immovable, flag, road, productionsite, warehouse, militarysite...
-*/
-int L_MapObject::get_type(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->type_name());
-	return 1;
-}
 
 /* RST
 	.. attribute:: name
@@ -2040,19 +2065,44 @@ int L_MapObject::get_name(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: descname
+// use the dynamic type of BuildingDescription
+#define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
+	(L, new lua_klass(static_cast<const klass *>(desc)))
 
-		(RO) The descriptive (and translated) name of this Map Object. Use this
-		in messages to the player instead of name.
+
+/* RST
+    .. attribute:: descr
+
+        (RO) The description object for this immovable, e.g. BuildingDescription.
 */
-// TODO(GunChleoc): add a descr property to MapObject, so we can get rid of these wrappers
-int L_MapObject::get_descname(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->descr().descname().c_str());
-	return 1;
+int L_MapObject::get_descr(lua_State * L) {
+	//TODO(GunChleoc): Flag_Descr would be nice for getting the type of immovables,
+	// at the moment the type for these can be faked by using their name instead
+	const Map_Object_Descr* desc = &get(L, get_egbase(L))->descr();
+	assert(desc != nullptr);
+
+	if (is_a(MilitarySite_Descr, desc)) {
+		return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
+	}
+	else if (is_a(TrainingSite_Descr, desc)) {
+		return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
+	}
+	else if (is_a(ProductionSite_Descr, desc)) {
+		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
+	}
+	else if (is_a(Warehouse_Descr, desc)) {
+		return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
+	}
+	else if (is_a(ConstructionSite_Descr, desc)) {
+		return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
+	}
+	else if (is_a(Building_Descr, desc)) {
+		return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
+	}
+	return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
 }
 
-
+#undef CAST_TO_LUA
 
 
 /*
@@ -2069,7 +2119,7 @@ int L_MapObject::__eq(lua_State * L) {
 
 	// Both objects are destroyed: they are equal
 	if (me == you) lua_pushboolean(L, true);
-	else if (!me or !you) // One of the objects is destroyed: they are distinct
+	else if (!me || !you) // One of the objects is destroyed: they are distinct
 		lua_pushboolean(L, false);
 	else // Compare them
 		lua_pushboolean
@@ -2213,9 +2263,9 @@ int L_BaseImmovable::get_fields(lua_State * L) {
 
 	lua_createtable(L, pl.size(), 0);
 	uint32_t idx = 1;
-	container_iterate_const(BaseImmovable::PositionList, pl, f) {
+	for (const Coords& coords : pl) {
 		lua_pushuint32(L, idx++);
-		to_lua<L_Field>(L, new L_Field(f->x, f->y));
+		to_lua<L_Field>(L, new L_Field(coords.x, coords.y));
 		lua_rawset(L, -3);
 	}
 	return 1;
@@ -2334,21 +2384,22 @@ int L_Flag::set_wares(lua_State * L)
 	WaresMap c_wares = count_wares_on_flag_(*f, tribe);
 
 	uint32_t nwares = 0;
-	container_iterate_const(WaresMap, c_wares, c) {
+
+	for (const std::pair<Widelands::Ware_Index, uint32_t>& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
-		if (!setpoints.count(c->first))
-			setpoints.insert(Widelands::WareAmount(c->first, 0));
-		nwares += c->second;
+		if (!setpoints.count(ware.first))
+			setpoints.insert(Widelands::WareAmount(ware.first, 0));
+		nwares += ware.second;
 	}
 
 	// The idea is to change as little as possible on this flag
-	container_iterate_const(WaresMap, setpoints, sp) {
+	for (const std::pair<Widelands::Ware_Index, uint32_t>& sp : setpoints) {
 		uint32_t cur = 0;
-		WaresMap::iterator i = c_wares.find(sp->first);
+		WaresMap::iterator i = c_wares.find(sp.first);
 		if (i != c_wares.end())
 			cur = i->second;
 
-		int d = sp->second - cur;
+		int d = sp.second - cur;
 		nwares += d;
 
 		if (f->total_capacity() < nwares)
@@ -2356,10 +2407,9 @@ int L_Flag::set_wares(lua_State * L)
 
 		if (d < 0) {
 			while (d) {
-				Flag::Wares current_wares = f->get_wares();
-				container_iterate_const(Flag::Wares, current_wares, w) {
-					if (tribe.ware_index((*w.current)->descr().name()) == sp->first) {
-						const_cast<WareInstance *>(*w.current)->remove(egbase);
+				for (const WareInstance * ware : f->get_wares()) {
+					if (tribe.ware_index(ware->descr().name()) == sp.first) {
+						const_cast<WareInstance *>(ware)->remove(egbase);
 						++d;
 						break;
 					}
@@ -2367,9 +2417,9 @@ int L_Flag::set_wares(lua_State * L)
 			}
 		} else if (d > 0) {
 			// add wares
-			const WareDescr & wd = *tribe.get_ware_descr(sp->first);
+			const WareDescr & wd = *tribe.get_ware_descr(sp.first);
 			for (int32_t j = 0; j < d; j++) {
-				WareInstance & ware = *new WareInstance(sp->first, &wd);
+				WareInstance & ware = *new WareInstance(sp.first, &wd);
 				ware.init(egbase);
 				f->add_ware(egbase, ware);
 			}
@@ -2390,23 +2440,25 @@ int L_Flag::get_wares(lua_State * L) {
 
 	if (wares_set.size() == tribe.get_nrwares()) { // Want all returned
 		wares_set.clear();
-		container_iterate_const(WaresMap, wares, w)
-			wares_set.insert(w->first);
+
+		for (const std::pair<Widelands::Ware_Index, uint32_t>& ware : wares) {
+			wares_set.insert(ware.first);
+		}
 	}
 
 	if (!return_number)
 		lua_newtable(L);
 
-	container_iterate_const(WaresSet, wares_set, w) {
+	for (const Widelands::Ware_Index& ware : wares_set) {
 		uint32_t count = 0;
-		if (wares.count(*w))
-			count = wares[*w];
+		if (wares.count(ware))
+			count = wares[ware];
 
 		if (return_number) {
 			lua_pushuint32(L, count);
 			break;
 		} else {
-		   lua_pushstring(L, tribe.get_ware_descr(*w)->name());
+			lua_pushstring(L, tribe.get_ware_descr(ware)->name());
 			lua_pushuint32(L, count);
 			lua_rawset(L, -3);
 		}
@@ -2634,7 +2686,7 @@ const PropertyType<L_Building> L_Building::Properties[] = {
 */
 // UNTESTED
 int L_Building::get_flag(lua_State * L) {
-	return upcasted_immovable_to_lua(L, &get(L, get_egbase(L))->base_flag());
+	return upcasted_map_object_to_lua(L, &get(L, get_egbase(L))->base_flag());
 }
 
 
@@ -2739,7 +2791,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 		:class:`PortDock` attached to it, otherwise nil.
 */
 int L_Warehouse::get_portdock(lua_State * L) {
-	return upcasted_immovable_to_lua(L, get(L, get_egbase(L))->get_portdock());
+	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_portdock());
 }
 
 
@@ -2754,13 +2806,13 @@ int L_Warehouse::set_##type##s(lua_State * L) { \
 	const Tribe_Descr & tribe = wh->owner().tribe(); \
 	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
-	container_iterate_const(btype##sMap, setpoints, i) { \
-		int32_t d = i.current->second - \
-			wh->get_##type##s().stock(i.current->first); \
+	for (btype##sMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) { \
+		int32_t d = i->second - \
+			wh->get_##type##s().stock(i->first); \
 		if (d < 0) \
-			wh->remove_##type##s(i.current->first, -d); \
+			wh->remove_##type##s(i->first, -d); \
 		else if (d > 0) \
-			wh->insert_##type##s(i.current->first, d); \
+			wh->insert_##type##s(i->first, d); \
 	} \
 	return 0; \
 }
@@ -2782,9 +2834,9 @@ int L_Warehouse::get_##type##s(lua_State * L) { \
 		lua_pushuint32(L, wh->get_##type##s().stock(*set.begin())); \
 	else { \
 		lua_newtable(L); \
-		container_iterate_const(btype##sSet, set, i) { \
-			lua_pushstring(L, tribe.get_##type##_descr(*i.current)->name()); \
-			lua_pushuint32(L, wh->get_##type##s().stock(*i.current)); \
+		for (btype##sSet::iterator i = set.begin(); i != set.end(); ++i) { \
+			lua_pushstring(L, tribe.get_##type##_descr(*i)->name()); \
+			lua_pushuint32(L, wh->get_##type##s().stock(*i)); \
 			lua_rawset(L, -3); \
 		} \
 	} \
@@ -2851,9 +2903,9 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
 	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	lua_newtable(L);
-	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i) {
-		lua_pushstring(L, tribe.get_ware_descr(i.current->first)->name());
-		lua_pushuint32(L, i.current->second);
+	for (const WareAmount& input_ware : ps->descr().inputs()) {
+		lua_pushstring(L, tribe.get_ware_descr((input_ware.first))->name());
+		lua_pushuint32(L, input_ware.second);
 		lua_rawset(L, -3);
 	}
 	return 1;
@@ -2879,20 +2931,20 @@ int L_ProductionSite::set_wares(lua_State * L) {
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 
 	WaresSet valid_wares;
-	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i)
-		valid_wares.insert(i->first);
-
-	container_iterate_const(WaresMap, setpoints, i) {
-		if (!valid_wares.count(i->first))
+	for (const WareAmount& input_ware : ps->descr().inputs()) {
+		valid_wares.insert(input_ware.first);
+	}
+	for (const std::pair<Widelands::Ware_Index, uint32_t>& sp : setpoints) {
+		if (!valid_wares.count(sp.first)) {
 			report_error(
-			   L, "<%s> can't be stored here!", tribe.get_ware_descr(i->first)->name().c_str());
-
-		WaresQueue & wq = ps->waresqueue(i->first);
-		if (i->second > wq.get_max_size())
+				L, "<%s> can't be stored here!", tribe.get_ware_descr(sp.first)->name().c_str());
+		}
+		WaresQueue & wq = ps->waresqueue(sp.first);
+		if (sp.second > wq.get_max_size()) {
 			report_error(
-			   L, "Not enough space for %u items, only for %i", i->second, wq.get_max_size());
-
-		wq.set_filled(i->second);
+				L, "Not enough space for %u items, only for %i", sp.second, wq.get_max_size());
+		}
+		wq.set_filled(sp.second);
 	}
 
 	return 0;
@@ -2907,8 +2959,9 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresSet valid_wares;
-	container_iterate_const(BillOfMaterials, ps->descr().inputs(), i)
-		valid_wares.insert(i.current->first);
+	for (const WareAmount& input_ware : ps->descr().inputs()) {
+		valid_wares.insert(input_ware.first);
+	}
 
 	if (wares_set.size() == tribe.get_nrwares()) // Want all returned
 		wares_set = valid_wares;
@@ -2916,16 +2969,16 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	if (!return_number)
 		lua_newtable(L);
 
-	container_iterate_const(WaresSet, wares_set, i) {
+	for (const Widelands::Ware_Index& ware : wares_set) {
 		uint32_t cnt = 0;
-		if (valid_wares.count(*i.current))
-			cnt = ps->waresqueue(*i.current).get_filled();
+		if (valid_wares.count(ware))
+			cnt = ps->waresqueue(ware).get_filled();
 
 		if (return_number) { // this is the only thing the customer wants to know
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			lua_pushstring(L, tribe.get_ware_descr(*i.current)->name());
+			lua_pushstring(L, tribe.get_ware_descr(ware)->name());
 			lua_pushuint32(L, cnt);
 			lua_rawset(L, -3);
 		}
@@ -3182,7 +3235,7 @@ int L_Ship::get_debug_economy(lua_State* L) {
 // UNTESTED
 int L_Ship::get_destination(lua_State* L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	return upcasted_immovable_to_lua(L, get(L, egbase)->get_destination(egbase));
+	return upcasted_map_object_to_lua(L, get(L, egbase)->get_destination(egbase));
 }
 
 /* RST
@@ -3194,7 +3247,7 @@ int L_Ship::get_destination(lua_State* L) {
 // UNTESTED
 int L_Ship::get_last_portdock(lua_State* L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	return upcasted_immovable_to_lua(L, get(L, egbase)->get_lastdock(egbase));
+	return upcasted_map_object_to_lua(L, get(L, egbase)->get_lastdock(egbase));
 }
 
 /*
@@ -3314,7 +3367,7 @@ int L_Worker::get_owner(lua_State * L) {
 int L_Worker::get_location(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	return
-		upcasted_immovable_to_lua
+		upcasted_map_object_to_lua
 			(L, static_cast<BaseImmovable *>
 			 	(get(L, egbase)->get_location(egbase)));
 }
@@ -3619,7 +3672,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 	int32_t amount = luaL_checkint32(L, -1);
 	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
 
-	if (amount < 0 or amount > max_amount)
+	if (amount < 0 || amount > max_amount)
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
@@ -3639,7 +3692,7 @@ int L_Field::get_immovable(lua_State * L) {
 	if (!bi)
 		return 0;
 	else
-		upcasted_immovable_to_lua(L, bi);
+		upcasted_map_object_to_lua(L, bi);
 	return 1;
 }
 
@@ -3657,7 +3710,7 @@ int L_Field::get_bobs(lua_State * L) {
 	uint32_t cidx = 1;
 	while (b) {
 		lua_pushuint32(L, cidx++);
-		upcasted_bob_to_lua(L, b);
+		upcasted_map_object_to_lua(L, b);
 		lua_rawset(L, -3);
 		b = b->get_next_bob();
 	}
@@ -3793,11 +3846,11 @@ int L_Field::get_claimers(lua_State * L) {
 
 	// Push the players with military influence
 	uint32_t cidx = 1;
-	container_iterate_const (std::vector<PlrInfluence>, claimers, i) {
-		if (i.current->second <= 0)
+	for (const PlrInfluence& claimer : claimers) {
+		if (claimer.second <= 0)
 			continue;
 		lua_pushuint32(L, cidx ++);
-		get_factory(L).push_player(L, i.current->first);
+		get_factory(L).push_player(L, claimer.first);
 		lua_rawset(L, -3);
 	}
 
@@ -4054,6 +4107,11 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_BuildingDescription>(L, "map", true);
 	add_parent<L_BuildingDescription, L_MapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_ConstructionSiteDescription>(L, "map", true);
+	add_parent<L_ConstructionSiteDescription, L_BuildingDescription>(L);
+	add_parent<L_ConstructionSiteDescription, L_MapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_ProductionSiteDescription>(L, "map", true);

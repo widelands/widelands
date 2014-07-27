@@ -47,7 +47,7 @@ void Map_Extradata_Data_Packet::Read(FileSystem& fs, bool const skip) {
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			// Read all pics.
-			if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
+			if (fs.FileExists("pics") && fs.IsDirectory("pics")) {
 				filenameset_t pictures = fs.ListDirectory("pics");
 				for
 					(filenameset_t::iterator pname = pictures.begin();

@@ -174,8 +174,12 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
 
 
 IF (WIN32)
-  set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-  message (STATUS "Enabled large address awareness on mingw32")
+  if (CMAKE_SIZEOF_VOID_P EQUAL 4)
+    set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+    message (STATUS "Enabled large address awareness on mingw32")
+  else (CMAKE_SIZEOF_VOID_P EQUAL 4)
+    message (STATUS "Detected mingw32-w64")
+  endif (CMAKE_SIZEOF_VOID_P EQUAL 4)
 endif (WIN32)
 
 # on BSD this must be explicitly linked

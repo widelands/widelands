@@ -60,7 +60,7 @@ struct FileSystemPath: public std::string
 		struct stat st;
 
 		m_exists = (stat(c_str(), &st) != -1);
-		m_isDirectory = m_exists and S_ISDIR(st.st_mode);
+		m_isDirectory = m_exists && S_ISDIR(st.st_mode);
 	}
 };
 
@@ -291,7 +291,7 @@ void RealFSImpl::EnsureDirectoryExists(const std::string & dirname)
 			it = dirname.find(m_filesep, it);
 
 			FileSystemPath fspath(FS_CanonicalizeName(dirname.substr(0, it)));
-			if (fspath.m_exists and !fspath.m_isDirectory)
+			if (fspath.m_exists && !fspath.m_isDirectory)
 				throw wexception
 					("%s exists and is not a directory",
 					 dirname.substr(0, it).c_str());
@@ -353,7 +353,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 
 	try {
 		file = fopen(fullname.c_str(), "rb");
-		if (not file)
+		if (!file)
 			throw File_error("RealFSImpl::Load", fullname.c_str());
 
 		// determine the size of the file (rather quirky, but it doesn't require
@@ -372,9 +372,9 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		fseek(file, 0, SEEK_SET);
 
 		// allocate a buffer and read the entire file into it
-		data = malloc(size + 1); //  TODO(unknown) memory leak!
+		data = malloc(size + 1); //  TODO(unknown): memory leak!
 		int result = fread(data, size, 1, file);
-		if (size and (result != 1)) {
+		if (size && (result != 1)) {
 			throw wexception
 				("RealFSImpl::Load: read failed for %s (%s) with size %" PRIuS "",
 				 fname.c_str(), fullname.c_str(), size);
@@ -416,7 +416,7 @@ void RealFSImpl::Write(const std::string & fname, void const * const data, int32
 	size_t const c = fwrite(data, length, 1, f);
 	fclose(f);
 
-	if (length and c != 1) // data might be 0 blocks long
+	if (length && c != 1) // data might be 0 blocks long
 		throw wexception
 			("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 }
