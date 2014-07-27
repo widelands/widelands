@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MACHDEP_H
-#define WL_MACHDEP_H
+#ifndef WL_IO_MACHDEP_H
+#define WL_IO_MACHDEP_H
 
 #include <cstring>
 #include <string>
@@ -35,16 +35,10 @@ CLANG_DIAG_OFF("-Wself-assign")
 #define Little16(x)    (x)
 #define Little32(x)    (x)
 #define LittleFloat(x) (x)
-#define Big16(x)       Swap16(x)
-#define Big32(x)       Swap32(x)
-#define BigFloat(x)    SwapFloat(x)
 #else
 #define Little16(x)    Swap16(x)
 #define Little32(x)    Swap32(x)
 #define LittleFloat(x) SwapFloat(x)
-#define Big16(x)       (x)
-#define Big32(x)       (x)
-#define BigFloat(x)    (x)
 #endif
 
 inline uint16_t Swap16(const uint16_t x) {
@@ -105,4 +99,4 @@ inline float DerefFloat(const void * const ptr) {
 	return r;
 }
 
-#endif  // end of include guard: WL_MACHDEP_H
+#endif  // end of include guard:
