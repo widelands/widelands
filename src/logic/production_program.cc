@@ -289,7 +289,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
 	return (boost::format(_("the economy needs the worker ‘%s’"))
-			  % tribe.get_ware_descr(worker_type)->descname()).str();
+			  % tribe.get_worker_descr(worker_type)->descname()).str();
 }
 
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_negation
@@ -297,7 +297,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_nega
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the worker ‘%s’*/
 	return (boost::format(_("the economy doesn’t need the worker ‘%s’"))
-			  % tribe.get_ware_descr(worker_type)->descname()).str();
+			  % tribe.get_worker_descr(worker_type)->descname()).str();
 }
 
 
