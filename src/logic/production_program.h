@@ -143,8 +143,8 @@ struct ProductionProgram {
 		struct Condition {
 			virtual ~Condition();
 			virtual bool evaluate(const ProductionSite &) const = 0;
-			virtual std::string description(const Tribe_Descr &) const
-				= 0;
+			virtual std::string description(const Tribe_Descr &) const = 0;
+			virtual std::string description_negation(const Tribe_Descr &) const = 0;
 		};
 		static Condition * create_condition
 			(char * & parameters, const ProductionSite_Descr &);
@@ -156,6 +156,7 @@ struct ProductionProgram {
 			virtual ~Negation();
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribe_Descr &) const override;
+			std::string description_negation(const Tribe_Descr &) const override;
 		private:
 			Condition * const operand;
 		};
@@ -165,6 +166,7 @@ struct ProductionProgram {
 			Economy_Needs_Ware(const Ware_Index& i) : ware_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribe_Descr &) const override;
+			std::string description_negation(const Tribe_Descr &) const override;
 		private:
 			Ware_Index ware_type;
 		};
@@ -174,6 +176,7 @@ struct ProductionProgram {
 			Economy_Needs_Worker(const Ware_Index& i) : worker_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribe_Descr &) const override;
+			std::string description_negation(const Tribe_Descr &) const override;
 		private:
 			Ware_Index worker_type;
 		};
@@ -185,6 +188,7 @@ struct ProductionProgram {
 			Site_Has(char * & parameters, const ProductionSite_Descr &);
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribe_Descr &) const override;
+			std::string description_negation(const Tribe_Descr &) const override;
 		private:
 			Ware_Type_Group group;
 		};
@@ -194,6 +198,7 @@ struct ProductionProgram {
 		struct Workers_Need_Experience : public Condition {
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribe_Descr &) const override;
+			std::string description_negation(const Tribe_Descr &) const override;
 		};
 
 		typedef std::vector<Condition *> Conditions;

@@ -21,7 +21,6 @@
 
 #include <sstream>
 
-#include <boost/algorithm/string/join.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -245,6 +244,8 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 std::string ProductionProgram::ActReturn::Negation::description
 	(const Tribe_Descr & tribe) const
 {
+	/** TRANSLATORS: This is a fallback string, usually "the economy doesn’t need the ware '%s'" etc. */
+	/** TRANSLATORS: should be called. */
 	/** TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s' */
 	return (boost::format(_("not %s")) % operand->description(tribe)).str();
 }
@@ -258,8 +259,18 @@ bool ProductionProgram::ActReturn::Economy_Needs_Ware::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 	(const Tribe_Descr & tribe) const
 {
+	// TODO(GunChleoc): We can make this more elegant if we add another definition to the conf files,
+	// so for "Log"; we will also have "logs" (numberless plural)
 	/** TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s' */
-	return (boost::format(_("economy needs %s")) % tribe.get_ware_descr(ware_type)->descname()).str();
+	return (boost::format(_("the economy needs the ware ‘%s’"))
+			  % tribe.get_ware_descr(ware_type)->descname()).str();
+}
+std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	/** TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s' */
+	return (boost::format(_("the economy doesn’t need the ware ‘%s’"))
+			  % tribe.get_ware_descr(ware_type)->descname()).str();
 }
 
 bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
@@ -271,8 +282,18 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 	(const Tribe_Descr & tribe) const
 {
 	/** TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s' */
-	return (boost::format(_("economy needs %s")) % tribe.get_ware_descr(worker_type)->descname()).str();
+	return (boost::format(_("the economy needs the worker ‘%s’"))
+			  % tribe.get_ware_descr(worker_type)->descname()).str();
 }
+
+std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	/** TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s' */
+	return (boost::format(_("the economy doesn’t need the worker ‘%s’"))
+			  % tribe.get_ware_descr(worker_type)->descname()).str();
+}
+
 
 ProductionProgram::ActReturn::Site_Has::Site_Has
 	(char * & parameters, const ProductionSite_Descr & descr)
@@ -298,25 +319,50 @@ bool ProductionProgram::ActReturn::Site_Has::evaluate
 	}
 	return false;
 }
+
+// NOCOM rework this
 std::string ProductionProgram::ActReturn::Site_Has::description
 	(const Tribe_Descr & tribe) const
 {
-	std::string condition = "";
+	std::vector<std::string> condition_list;
 	for (const Ware_Index& temp_ware : group.first) {
-		condition =
-		/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
-			(boost::format(_("%1$s %2$s")) % condition % tribe.get_ware_descr(temp_ware)->descname())
-			 .str();
-		/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
-		condition = (boost::format(_("%s,")) % condition).str();
+		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
+	std::string condition = i18n::localize_item_list(condition_list, true);
 	if (1 < group.second) {
-		// TODO(GunChleoc): this should be done with ngettext
-		condition =
-			(boost::format(_("%1$s (%2$i)")) % condition % static_cast<unsigned int>(group.second)).str();
+		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
+		/** TRANSLATORS:    %1$s = "3" */
+		/** TRANSLATORS:    %2$i = "water" */
+		condition = (boost::format(_("%1$ix %2$s"))
+						 % static_cast<unsigned int>(group.second)
+						 % condition).str();
 	}
+
 	/** TRANSLATORS: %s is a list of wares*/
-	std::string result = (boost::format(_("site has%s")) % condition).str();
+	std::string result = (boost::format(_("the building has the following wares: %s")) % condition).str();
+	return result;
+}
+
+std::string ProductionProgram::ActReturn::Site_Has::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	std::vector<std::string> condition_list;
+	for (const Ware_Index& temp_ware : group.first) {
+		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
+	}
+	std::string condition = i18n::localize_item_list(condition_list, true);
+	if (1 < group.second) {
+		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
+		/** TRANSLATORS:    %1$s = "3" */
+		/** TRANSLATORS:    %2$i = "water" */
+		condition = (boost::format(_("%1$ix %2$s"))
+						 % static_cast<unsigned int>(group.second)
+						 % condition).str();
+	}
+
+	/** TRANSLATORS: %s is a list of wares*/
+	std::string result = (boost::format(_("the building doesn’t have the following wares: %s"))
+								 % condition).str();
 	return result;
 }
 
@@ -334,6 +380,13 @@ std::string ProductionProgram::ActReturn::Workers_Need_Experience::description
 {
 	/** TRANSLATORS: 'Failed/Skipped ... because: workers need experience'. */
 	return _("workers need experience");
+}
+
+std::string ProductionProgram::ActReturn::Workers_Need_Experience::description_negation
+	(const Tribe_Descr &) const
+{
+	/** TRANSLATORS: 'Failed/Skipped ... because: workers need experience'. */
+	return _("workers need no experience");
 }
 
 
@@ -492,57 +545,52 @@ ProductionProgram::ActReturn::~ActReturn() {
 void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
-	std::string statistics_string =
-		/** TRANSLATORS: 'Failed to %s because (not): %s {and/or %s}' */
-		m_result == Failed    ? (boost::format(_("Failed to %s")) % ps.top_state().program->descname()).str() :
-		/** TRANSLATORS: 'Completed %s because (not): %s {and/or %s}' */
-		m_result == Completed ? (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str() :
-		/** TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}' */
-					(boost::format(_("Skipped %s")) % ps.top_state().program->descname()).str();
-
 	if (!m_conditions.empty()) {
-		std::string result_string = statistics_string;
+		std::vector<std::string> condition_list;
 		if (m_is_when) { //  'when a and b and ...' (all conditions must be true)
-			std::vector<std::string> condition_list;
 			for (const Condition * condition : m_conditions) {
-				if (!condition->evaluate(ps)) //  A condition is false,
+				if (!condition->evaluate(ps)) { //  A condition is false,
 					return ps.program_step(game); //  continue program.
-
+				}
 				condition_list.push_back(condition->description(ps.owner().tribe()));
 			}
-			std::string condition_string = i18n::localize_item_list(condition_list, true);
-			result_string =
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
-				(boost::format(_("%1$s because: %2$s")) % statistics_string % condition_string).str();
 		} else { //  "unless a or b or ..." (all conditions must be false)
-			std::vector<std::string> condition_list;
 			for (const Condition * condition : m_conditions) {
-				if (condition->evaluate(ps)) //  A condition is true,
+				if (condition->evaluate(ps)) { //  A condition is true,
 					return ps.program_step(game); //  continue program.
-
-				condition_list.push_back(condition->description(ps.owner().tribe()));
+				}
+				condition_list.push_back(condition->description_negation(ps.owner().tribe()));
 			}
-			std::string condition_string = i18n::localize_item_list(condition_list, false);
-			result_string =
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
-				(boost::format(_("%1$s because not: %2$s")) % statistics_string % condition_string).str();
 		}
+		std::string condition_string = i18n::localize_item_list(condition_list, true);
+
+		std::string result_string = "";
+		if (m_result == Failed) {
+			/** TRANSLATORS: "Failed to work because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Failed to %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+		else if (m_result == Completed) {
+			/** TRANSLATORS: "Completed work because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Completed %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+		else {
+			/** TRANSLATORS: "Skipped work because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Skipped %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+
 		snprintf
 			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 			 "%s", result_string.c_str());
 	}
-	// Commented out, as the information is already given in the hover text and
-	// should *not* be shown in general statistics string, as:
-	// 1) the strings are that long, that they clutter the screen (especially
-	//    if you build up an "industry park" ;)
-	// 2) in many cases the "real" statistics (in percent) are nearly no more
-	//    shown, so the user has no idea if "skipped because .. is missing" is
-	//    an exception or the normal case at the moment.
-	/*
-	snprintf
-		(ps.m_statistics_buffer, sizeof(ps.m_statistics_buffer),
-		 "%s", statistics_string.c_str());
-	*/
 	return ps.program_end(game, m_result);
 }
 
@@ -891,7 +939,7 @@ void ProductionProgram::ActConsume::execute
 					/** TRANSLATORS: For this example, this is what's in the place holders: */
 					/** TRANSLATORS:    %1$s = "3" */
 					/** TRANSLATORS:    %2$i = "water" */
-					(boost::format(_("%1$ix %2$s")) 
+					(boost::format(_("%1$ix %2$s"))
 					 % static_cast<unsigned int>(count)
 					 % ware_string)
 					 .str();
