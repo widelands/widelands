@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
+"POT-Creation-Date: 2014-07-26 13:10+0000\n"
 "PO-Revision-Date: 2014-04-16 03:34+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:43+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-07-27 05:49+0000\n"
+"X-Generator: Launchpad (build 17131)\n"
 "Language: it\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -364,8 +364,8 @@ msgstr ""
 
 #: ../../tribes/barbarians/axfactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:31
-#: ../../tribes/barbarians/battlearena/help.lua:38
-#: ../../tribes/barbarians/cattlefarm/help.lua:31
+#: ../../tribes/barbarians/battlearena/help.lua:40
+#: ../../tribes/barbarians/cattlefarm/help.lua:30
 #: ../../tribes/barbarians/coalmine/help.lua:32
 #: ../../tribes/barbarians/deep_coalmine/help.lua:34
 #: ../../tribes/barbarians/deep_goldmine/help.lua:32
@@ -374,7 +374,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:32
 #: ../../tribes/barbarians/deeper_oremine/help.lua:32
 #: ../../tribes/barbarians/fishers_hut/help.lua:31
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:31
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:33
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/granitemine/help.lua:31
 #: ../../tribes/barbarians/hunters_hut/help.lua:31
@@ -386,7 +386,7 @@ msgstr ""
 #: ../../tribes/barbarians/quarry/help.lua:30
 #: ../../tribes/barbarians/rangers_hut/help.lua:32
 #: ../../tribes/barbarians/reed_yard/help.lua:31
-#: ../../tribes/barbarians/trainingcamp/help.lua:46
+#: ../../tribes/barbarians/trainingcamp/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:31
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "%d second"
@@ -426,6 +426,7 @@ msgstr "Cuoce al forno pane per i lavoratori."
 #: ../../tribes/barbarians/quarry/help.lua:13
 #: ../../tribes/barbarians/scouts_hut/help.lua:13
 #: ../../tribes/barbarians/sentry/help.lua:13
+#: ../../tribes/barbarians/shipyard/help.lua:13
 #: ../../tribes/barbarians/smelting_works/help.lua:13
 #: ../../tribes/barbarians/tavern/help.lua:13
 #: ../../tribes/barbarians/warehouse/help.lua:13
@@ -449,20 +450,21 @@ msgstr "Fonte necessaria"
 #: ../../tribes/barbarians/hardener/help.lua:13
 #: ../../tribes/barbarians/hardener/help.lua:17
 #: ../../tribes/barbarians/headquarters/help.lua:13
-#: ../../tribes/barbarians/headquarters/help.lua:17
+#: ../../tribes/barbarians/headquarters/help.lua:18
 #: ../../tribes/barbarians/headquarters_interim/help.lua:13
-#: ../../tribes/barbarians/headquarters_interim/help.lua:17
+#: ../../tribes/barbarians/headquarters_interim/help.lua:18
 #: ../../tribes/barbarians/helmsmithy/help.lua:13
 #: ../../tribes/barbarians/helmsmithy/help.lua:17
 #: ../../tribes/barbarians/inn/help.lua:13
 #: ../../tribes/barbarians/inn/help.lua:17
 #: ../../tribes/barbarians/port/help.lua:13
-#: ../../tribes/barbarians/port/help.lua:18
+#: ../../tribes/barbarians/port/help.lua:17
 #: ../../tribes/barbarians/quarry/help.lua:13
 #: ../../tribes/barbarians/scouts_hut/help.lua:13
 #: ../../tribes/barbarians/scouts_hut/help.lua:17
 #: ../../tribes/barbarians/sentry/help.lua:13
-#: ../../tribes/barbarians/shipyard/help.lua:18
+#: ../../tribes/barbarians/shipyard/help.lua:13
+#: ../../tribes/barbarians/shipyard/help.lua:17
 #: ../../tribes/barbarians/smelting_works/help.lua:13
 #: ../../tribes/barbarians/tavern/help.lua:13
 #: ../../tribes/barbarians/tavern/help.lua:17
@@ -542,18 +544,18 @@ msgid ""
 "level with which they came."
 msgstr ""
 
-#: ../../tribes/barbarians/battlearena/help.lua:26
+#: ../../tribes/barbarians/battlearena/help.lua:28
 msgid "Evade Training:"
 msgstr "Addestramento d'evasione"
 
-#: ../../tribes/barbarians/battlearena/help.lua:36
+#: ../../tribes/barbarians/battlearena/help.lua:38
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
 "for one soldier from 0 to the highest level in %1$s and %2$s on average."
 msgstr ""
 
-#: ../../tribes/barbarians/battlearena/help.lua:37
-#: ../../tribes/barbarians/trainingcamp/help.lua:45
+#: ../../tribes/barbarians/battlearena/help.lua:39
+#: ../../tribes/barbarians/trainingcamp/help.lua:47
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
@@ -597,9 +599,9 @@ msgstr "Produci un pasto"
 #: ../../tribes/barbarians/hardener/help.lua:29
 #: ../../tribes/barbarians/helmsmithy/help.lua:29
 #: ../../tribes/barbarians/inn/help.lua:29
-#: ../../tribes/barbarians/port/help.lua:27
+#: ../../tribes/barbarians/port/help.lua:26
 #: ../../tribes/barbarians/scouts_hut/help.lua:29
-#: ../../tribes/barbarians/shipyard/help.lua:30
+#: ../../tribes/barbarians/shipyard/help.lua:29
 #: ../../tribes/barbarians/smelting_works/help.lua:29
 #: ../../tribes/barbarians/tavern/help.lua:29
 #: ../../tribes/barbarians/weaving-mill/help.lua:29
@@ -667,7 +669,7 @@ msgstr ""
 msgid "Breeds oxen for adding them to the transportation system."
 msgstr ""
 
-#: ../../tribes/barbarians/cattlefarm/help.lua:30
+#: ../../tribes/barbarians/cattlefarm/help.lua:29
 msgid ""
 "If all needed wares are delivered in time, this building can produce an ox "
 "in %s on average."
@@ -697,6 +699,19 @@ msgid ""
 "coal mines or out of logs in a charcoal burner’s house. Consumers are "
 "several buildings: lime kiln, smelting works, axfactory, war mill, and helm "
 "smithy."
+msgstr ""
+
+#: ../../tribes/barbarians/coalmine/conf:34
+#: ../../tribes/barbarians/deep_coalmine/conf:40
+#: ../../tribes/barbarians/deeper_coalmine/conf:39
+msgid "Main Coal Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/barbarians/coalmine/conf:35
+#: ../../tribes/barbarians/deep_coalmine/conf:41
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
 
 #: ../../tribes/barbarians/coalmine/help.lua:13
@@ -830,542 +845,540 @@ msgid "Ship Construction Site"
 msgstr "Sito per la costruzione navale"
 
 #: ../../tribes/barbarians/conf:53
-msgid "Deer"
-msgstr "Cervo"
-
-#: ../../tribes/barbarians/conf:54
-msgid "Wild Boar"
-msgstr "Cinghiale selvatico"
-
-#: ../../tribes/barbarians/conf:57
 msgid "Ax"
 msgstr "Ascia"
 
-#: ../../tribes/barbarians/conf:58
+#: ../../tribes/barbarians/conf:54
 msgid "Bread Paddle"
 msgstr "Pala per il pane"
 
-#: ../../tribes/barbarians/conf:59
+#: ../../tribes/barbarians/conf:55
 msgid "Battle Ax"
 msgstr "Ascia da battaglia"
 
-#: ../../tribes/barbarians/conf:60
+#: ../../tribes/barbarians/conf:56
 msgid "Beer"
 msgstr "Birra"
 
-#: ../../tribes/barbarians/conf:61
+#: ../../tribes/barbarians/conf:57
 msgid "Blackwood"
 msgstr "Legno trattato"
 
-#: ../../tribes/barbarians/conf:62
+#: ../../tribes/barbarians/conf:58
 msgid "Broad Ax"
 msgstr "Ascia grande"
 
-#: ../../tribes/barbarians/conf:63
+#: ../../tribes/barbarians/conf:59
 msgid "Bronze Ax"
 msgstr "Ascia di bronzo"
 
-#: ../../tribes/barbarians/conf:64
+#: ../../tribes/barbarians/conf:60
 msgid "Cloth"
 msgstr "Stoffa"
 
-#: ../../tribes/barbarians/conf:65
+#: ../../tribes/barbarians/conf:61
 msgid "Coal"
 msgstr "Carbone"
 
-#: ../../tribes/barbarians/conf:66
+#: ../../tribes/barbarians/conf:62
 msgid "Felling Ax"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:67
+#: ../../tribes/barbarians/conf:63
 msgid "Fire Tongs"
 msgstr "Pinze per il fuoco"
 
-#: ../../tribes/barbarians/conf:68
+#: ../../tribes/barbarians/conf:64
 msgid "Fish"
 msgstr "Pesce"
 
-#: ../../tribes/barbarians/conf:69
+#: ../../tribes/barbarians/conf:65
 msgid "Fishing Rod"
 msgstr "Canna da pesca"
 
-#: ../../tribes/barbarians/conf:70
+#: ../../tribes/barbarians/conf:66
 msgid "Gold"
 msgstr "Oro"
 
-#: ../../tribes/barbarians/conf:71
+#: ../../tribes/barbarians/conf:67
 msgid "Gold Ore"
 msgstr "Le pietre d'oro"
 
-#: ../../tribes/barbarians/conf:72
+#: ../../tribes/barbarians/conf:68
 msgid "Grout"
 msgstr "Calce"
 
-#: ../../tribes/barbarians/conf:73
+#: ../../tribes/barbarians/conf:69
 msgid "Hammer"
 msgstr "Martello"
 
-#: ../../tribes/barbarians/conf:74
+#: ../../tribes/barbarians/conf:70
 msgid "Helmet"
 msgstr "Elmo"
 
-#: ../../tribes/barbarians/conf:75
+#: ../../tribes/barbarians/conf:71
 msgid "Hunting Spear"
 msgstr "Lancia da caccia"
 
-#: ../../tribes/barbarians/conf:76
+#: ../../tribes/barbarians/conf:72
 msgid "Iron"
 msgstr "Ferro"
 
-#: ../../tribes/barbarians/conf:77
+#: ../../tribes/barbarians/conf:73
 msgid "Iron Ore"
 msgstr "Ferro grezzo"
 
-#: ../../tribes/barbarians/conf:78
+#: ../../tribes/barbarians/conf:74
 msgid "Kitchen Tools"
 msgstr "Strumenti da cucina"
 
-#: ../../tribes/barbarians/conf:79
+#: ../../tribes/barbarians/conf:75
 msgid "Mask"
 msgstr "Maschera"
 
-#: ../../tribes/barbarians/conf:80
+#: ../../tribes/barbarians/conf:76
 msgid "Meal"
 msgstr "Pasto"
 
-#: ../../tribes/barbarians/conf:81
+#: ../../tribes/barbarians/conf:77
 msgid "Meat"
 msgstr "Carne"
 
-#: ../../tribes/barbarians/conf:82
+#: ../../tribes/barbarians/conf:78
 msgid "Pick"
 msgstr "Piccone"
 
-#: ../../tribes/barbarians/conf:83
+#: ../../tribes/barbarians/conf:79
 msgid "Pitta Bread"
 msgstr "Pita"
 
-#: ../../tribes/barbarians/conf:84
+#: ../../tribes/barbarians/conf:80
 msgid "Ration"
 msgstr "Razione"
 
-#: ../../tribes/barbarians/conf:85
+#: ../../tribes/barbarians/conf:81
 msgid "Raw Stone"
 msgstr "Pietra grezza"
 
-#: ../../tribes/barbarians/conf:86
+#: ../../tribes/barbarians/conf:82
 msgid "Scythe"
 msgstr "Falce"
 
-#: ../../tribes/barbarians/conf:87
+#: ../../tribes/barbarians/conf:83
 msgid "Sharp Ax"
 msgstr "Ascia di bronzo"
 
-#: ../../tribes/barbarians/conf:88
+#: ../../tribes/barbarians/conf:84
 msgid "Shovel"
 msgstr "Pala"
 
-#: ../../tribes/barbarians/conf:89
+#: ../../tribes/barbarians/conf:85
 msgid "Snack"
 msgstr "Spuntino"
 
-#: ../../tribes/barbarians/conf:90
+#: ../../tribes/barbarians/conf:86
 msgid "Strong Beer"
 msgstr "Birra forte"
 
-#: ../../tribes/barbarians/conf:91
+#: ../../tribes/barbarians/conf:87
 msgid "Thatch Reed"
 msgstr "Paglia di canne"
 
-#: ../../tribes/barbarians/conf:92
+#: ../../tribes/barbarians/conf:88
 msgid "Log"
 msgstr "Tronco"
 
-#: ../../tribes/barbarians/conf:93
+#: ../../tribes/barbarians/conf:89
 msgid "Warhelm"
 msgstr "Elmo da guerra"
 
-#: ../../tribes/barbarians/conf:94
+#: ../../tribes/barbarians/conf:90
 msgid "Warrior’s Ax"
 msgstr "Ascia del guerriero"
 
-#: ../../tribes/barbarians/conf:95
+#: ../../tribes/barbarians/conf:91
 msgid "Water"
 msgstr "Acqua"
 
-#: ../../tribes/barbarians/conf:96
+#: ../../tribes/barbarians/conf:92
 msgid "Wheat"
 msgstr "Grano"
 
-#: ../../tribes/barbarians/conf:99
+#: ../../tribes/barbarians/conf:95
 msgid "Carrier"
 msgstr "Trasportatore"
 
-#: ../../tribes/barbarians/conf:100
+#: ../../tribes/barbarians/conf:96
 msgid "Ox"
 msgstr "Bue"
 
-#: ../../tribes/barbarians/conf:103
+#: ../../tribes/barbarians/conf:99
 msgid "Soldier"
 msgstr "Soldato"
 
-#: ../../tribes/barbarians/conf:106
+#: ../../tribes/barbarians/conf:102
 msgid "Baker"
 msgstr "Fornaio"
 
-#: ../../tribes/barbarians/conf:107
+#: ../../tribes/barbarians/conf:103
 msgid "Master Blacksmith"
 msgstr "Mastro fabbro ferraio"
 
-#: ../../tribes/barbarians/conf:108
+#: ../../tribes/barbarians/conf:104
 msgid "Blacksmith"
 msgstr "Fabbro ferraio"
 
-#: ../../tribes/barbarians/conf:109
+#: ../../tribes/barbarians/conf:105
 msgid "Master Brewer"
 msgstr "Mastro birraio"
 
-#: ../../tribes/barbarians/conf:110
+#: ../../tribes/barbarians/conf:106
 msgid "Brewer"
 msgstr "Birraio"
 
-#: ../../tribes/barbarians/conf:111
+#: ../../tribes/barbarians/conf:107
 msgid "Builder"
 msgstr "Costruttore"
 
-#: ../../tribes/barbarians/conf:112
+#: ../../tribes/barbarians/conf:108
 msgid "Burner"
 msgstr "Bruciatore"
 
-#: ../../tribes/barbarians/conf:113
+#: ../../tribes/barbarians/conf:109
 msgid "Master Miner"
 msgstr "Mastro minatore"
 
-#: ../../tribes/barbarians/conf:114
+#: ../../tribes/barbarians/conf:110
 msgid "Chief Miner"
 msgstr "Capo minatore"
 
-#: ../../tribes/barbarians/conf:115
+#: ../../tribes/barbarians/conf:111
 msgid "Farmer"
 msgstr "Contadino"
 
-#: ../../tribes/barbarians/conf:116
+#: ../../tribes/barbarians/conf:112
 msgid "Gardener"
 msgstr "Giardiniere"
 
-#: ../../tribes/barbarians/conf:117
+#: ../../tribes/barbarians/conf:113
 msgid "Fisher"
 msgstr "Pescatore"
 
-#: ../../tribes/barbarians/conf:118
+#: ../../tribes/barbarians/conf:114
 msgid "Gamekeeper"
 msgstr "Guardiacaccia"
 
-#: ../../tribes/barbarians/conf:119
+#: ../../tribes/barbarians/conf:115
 msgid "Geologist"
 msgstr "Geologo"
 
-#: ../../tribes/barbarians/conf:120
+#: ../../tribes/barbarians/conf:116
 msgid "Helmsmith"
 msgstr "Fabbro d'elmi"
 
-#: ../../tribes/barbarians/conf:121
+#: ../../tribes/barbarians/conf:117
 msgid "Hunter"
 msgstr "Cacciatore"
 
-#: ../../tribes/barbarians/conf:122
+#: ../../tribes/barbarians/conf:118
 msgid "Innkeeper"
 msgstr "Locandiere"
 
-#: ../../tribes/barbarians/conf:123
+#: ../../tribes/barbarians/conf:119
 msgid "Lime-Burner"
 msgstr "Operaio della calchera"
 
-#: ../../tribes/barbarians/conf:124
+#: ../../tribes/barbarians/conf:120
 msgid "Lumberjack"
 msgstr "Taglialegna"
 
-#: ../../tribes/barbarians/conf:125
+#: ../../tribes/barbarians/conf:121
 msgid "Miner"
 msgstr "Minatore"
 
-#: ../../tribes/barbarians/conf:126
+#: ../../tribes/barbarians/conf:122
 msgid "Ranger"
 msgstr "Guardia forestale"
 
-#: ../../tribes/barbarians/conf:127
+#: ../../tribes/barbarians/conf:123
 msgid "Shipwright"
 msgstr "Maestro d'ascia"
 
-#: ../../tribes/barbarians/conf:128
+#: ../../tribes/barbarians/conf:124
 msgid "Smelter"
 msgstr "Fonditore"
 
-#: ../../tribes/barbarians/conf:129
+#: ../../tribes/barbarians/conf:125
 msgid "Stonemason"
 msgstr "Tagliapietre"
 
-#: ../../tribes/barbarians/conf:130
+#: ../../tribes/barbarians/conf:126
 msgid "Trainer"
 msgstr "Istruttore"
 
-#: ../../tribes/barbarians/conf:131
+#: ../../tribes/barbarians/conf:127
 msgid "Weaver"
 msgstr "Tessitore"
 
-#: ../../tribes/barbarians/conf:132
+#: ../../tribes/barbarians/conf:128
 msgid "Scout"
 msgstr "Esploratore"
 
-#: ../../tribes/barbarians/conf:133
+#: ../../tribes/barbarians/conf:129
 msgid "Cattle Breeder"
 msgstr "Allevatore di bovini"
 
-#: ../../tribes/barbarians/conf:136
+#: ../../tribes/barbarians/conf:132
 msgid "Ship"
 msgstr "Nave"
 
-#: ../../tribes/barbarians/conf:139
+#: ../../tribes/barbarians/conf:135
 msgid "Construction Site"
 msgstr "Cantiere"
 
-#: ../../tribes/barbarians/conf:142
+#: ../../tribes/barbarians/conf:138
 msgid "Dismantle Site"
 msgstr "Smantella il sito"
 
-#: ../../tribes/barbarians/conf:145
-#: ../../tribes/barbarians/conf:154
+#: ../../tribes/barbarians/conf:141
+#: ../../tribes/barbarians/conf:150
 msgid "Castle"
 msgstr "Castello"
 
-#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/conf:142
 msgid "Guardhall"
 msgstr "Guardia ingresso"
 
-#: ../../tribes/barbarians/conf:147
+#: ../../tribes/barbarians/conf:143
 msgid "Guardhouse"
 msgstr "Posto di guardia"
 
-#: ../../tribes/barbarians/conf:148
+#: ../../tribes/barbarians/conf:144
 msgid "High Tower"
 msgstr "Torre alta"
 
-#: ../../tribes/barbarians/conf:149
+#: ../../tribes/barbarians/conf:145
 msgid "Small Tower"
 msgstr "Torre piccola"
 
-#: ../../tribes/barbarians/conf:150
-#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/conf:153
 msgid "Tower"
 msgstr "Torre"
 
-#: ../../tribes/barbarians/conf:151
-#: ../../tribes/barbarians/conf:206
+#: ../../tribes/barbarians/conf:147
+#: ../../tribes/barbarians/conf:202
 msgid "Sentry"
 msgstr "Guardiola"
 
-#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:148
 msgid "Barracks"
 msgstr "Caserma"
 
-#: ../../tribes/barbarians/conf:153
-#: ../../tribes/barbarians/conf:205
+#: ../../tribes/barbarians/conf:149
+#: ../../tribes/barbarians/conf:201
 msgid "Barrier"
 msgstr "Fortino"
 
-#: ../../tribes/barbarians/conf:155
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:204
 msgid "Fortress"
 msgstr "Fortezza"
 
-#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:152
 msgid "Outpost"
 msgstr "Avamposto"
 
-#: ../../tribes/barbarians/conf:160
-#: ../../tribes/barbarians/conf:161
+#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Quartier generale"
 
-#: ../../tribes/barbarians/conf:162
+#: ../../tribes/barbarians/conf:158
 msgid "Warehouse"
 msgstr "Magazzino"
 
-#: ../../tribes/barbarians/conf:163
+#: ../../tribes/barbarians/conf:159
 msgid "Port"
 msgstr "Porto"
 
-#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:162
 msgid "Quarry"
 msgstr "Cava"
 
-#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:163
 msgid "Lumberjack’s Hut"
 msgstr "Capanna del taglialegna"
 
-#: ../../tribes/barbarians/conf:168
+#: ../../tribes/barbarians/conf:164
 msgid "Ranger’s Hut"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:169
+#: ../../tribes/barbarians/conf:165
 msgid "Fisher’s Hut"
 msgstr "Capanna del pescatore"
 
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:166
 msgid "Hunter’s Hut"
 msgstr "Capanna del cacciatore"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:167
 msgid "Gamekeeper’s Hut"
 msgstr "Capanna del guardiacaccia"
 
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:168
 msgid "Well"
 msgstr "Pozzo"
 
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:169
 msgid "Scout’s Hut"
 msgstr "Capanna dell'esploratore"
 
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:170
 msgid "Wood Hardener"
 msgstr "Trattamento del legno"
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:171
 msgid "Lime Kiln"
 msgstr "Calchera"
 
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:172
 msgid "Reed Yard"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:177
+#: ../../tribes/barbarians/conf:173
 msgid "Bakery"
 msgstr "Forno"
 
-#: ../../tribes/barbarians/conf:178
+#: ../../tribes/barbarians/conf:174
 msgid "Brewery"
 msgstr "Birreria"
 
-#: ../../tribes/barbarians/conf:179
+#: ../../tribes/barbarians/conf:175
 msgid "Micro Brewery"
 msgstr "Piccola birreria"
 
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:176
 msgid "Big Inn"
 msgstr "Grande locanda"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:177
 msgid "Inn"
 msgstr "Locanda"
 
-#: ../../tribes/barbarians/conf:182
+#: ../../tribes/barbarians/conf:178
 msgid "Tavern"
 msgstr "Taverna"
 
-#: ../../tribes/barbarians/conf:183
+#: ../../tribes/barbarians/conf:179
 msgid "Charcoal Burner’s House"
 msgstr "Casa del carbonaio"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:180
 msgid "Smelting Works"
 msgstr "Fonderia"
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:181
 msgid "Shipyard"
 msgstr "Cantiere navale"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:182
 msgid "War Mill"
 msgstr "Fucina da guerra"
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:183
 msgid "Axfactory"
 msgstr "Fabbrica di asce"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:184
 msgid "Metal Workshop"
 msgstr "Officina siderurgica"
 
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:185
 msgid "Cattle Farm"
 msgstr "Allevamento di bovini"
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:186
 msgid "Weaving Mill"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:187
 msgid "Farm"
 msgstr "Fattoria"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:188
 msgid "Helm Smithy"
 msgstr "Fucina di elmi"
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:189
 msgid "Granite Mine"
 msgstr "Miniera di granito"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:190
 msgid "Deeper Coal Mine"
 msgstr "Miniera di carbone molto profonda"
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:191
 msgid "Deep Coal Mine"
 msgstr "Miniera di carbone profonda"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:192
 msgid "Coal Mine"
 msgstr "Miniera di carbone"
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:193
 msgid "Deeper Iron Ore Mine"
 msgstr "Miniera di ferro molto profonda"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:194
 msgid "Deep Iron Ore Mine"
 msgstr "Miniera di ferro profonda"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:195
 msgid "Iron Ore Mine"
 msgstr "Miniera di ferro"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:196
 msgid "Deeper Gold Mine"
 msgstr "Miniera d'oro molto profonda"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:197
 msgid "Deep Gold Mine"
 msgstr "Miniera d'oro profonda"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:198
 msgid "Gold Mine"
 msgstr "Miniera d'oro"
 
-#: ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:203
 msgid "Citadel"
 msgstr "Cittadella"
 
-#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:205
 msgid "Donjon"
 msgstr "Dongione"
 
-#: ../../tribes/barbarians/conf:212
+#: ../../tribes/barbarians/conf:208
 msgid "Battle Arena"
 msgstr "Arena di battaglia"
 
-#: ../../tribes/barbarians/conf:213
+#: ../../tribes/barbarians/conf:209
 msgid "Training Camp"
 msgstr "Campo di addestramento"
 
-#: ../../tribes/barbarians/conf:216
-msgid "Headquarters Medium"
-msgstr "Quartier generale medio"
+#: ../../tribes/barbarians/deep_goldmine/conf:40
+#: ../../tribes/barbarians/deeper_goldmine/conf:39
+#: ../../tribes/barbarians/goldmine/conf:35
+msgid "Main Gold Vein Exhausted"
+msgstr ""
 
-#: ../../tribes/barbarians/conf:217
-msgid "Citadel Village"
-msgstr "Villaggio della roccaforte"
+#: ../../tribes/barbarians/deep_goldmine/conf:41
+#: ../../tribes/barbarians/goldmine/conf:36
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:14
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:14
@@ -1403,6 +1416,19 @@ msgid ""
 "average."
 msgstr ""
 
+#: ../../tribes/barbarians/deep_oremine/conf:40
+#: ../../tribes/barbarians/deeper_oremine/conf:42
+#: ../../tribes/barbarians/oremine/conf:35
+msgid "Main Iron Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/barbarians/deep_oremine/conf:41
+#: ../../tribes/barbarians/oremine/conf:36
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+
 #: ../../tribes/barbarians/deep_oremine/help.lua:14
 #: ../../tribes/barbarians/deeper_oremine/help.lua:14
 #: ../../tribes/barbarians/oremine/help.lua:13
@@ -1438,6 +1464,13 @@ msgid ""
 "average."
 msgstr ""
 
+#: ../../tribes/barbarians/deeper_coalmine/conf:40
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:20
 msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
@@ -1445,11 +1478,25 @@ msgid ""
 "coal."
 msgstr ""
 
+#: ../../tribes/barbarians/deeper_goldmine/conf:40
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:19
 msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
+msgstr ""
+
+#: ../../tribes/barbarians/deeper_oremine/conf:43
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
 msgstr ""
 
 #: ../../tribes/barbarians/deeper_oremine/help.lua:19
@@ -1470,6 +1517,16 @@ msgstr "Pianta il grano"
 #: ../../tribes/barbarians/farm/conf:22
 msgid "Harvest wheat"
 msgstr "Raccogli il grano"
+
+#: ../../tribes/barbarians/farm/conf:40
+#: ../../tribes/barbarians/reed_yard/conf:37
+msgid "Out of Fields"
+msgstr ""
+
+#: ../../tribes/barbarians/farm/conf:41
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
 
 #: ../../tribes/barbarians/farm/help.lua:17
 msgid "Sow and harvest wheat."
@@ -1503,6 +1560,16 @@ msgstr ""
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
 msgstr "Pesca dei pesci nel mare."
+
+#: ../../tribes/barbarians/fishers_hut/conf:25
+msgid "Out of Fish"
+msgstr ""
+
+#: ../../tribes/barbarians/fishers_hut/conf:26
+msgid ""
+"The fisher working out of this fisher’s hut can’t find any fish in his "
+"working radius."
+msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 msgid "‘What do you mean, my fish ain’t fresh?!’"
@@ -1539,11 +1606,21 @@ msgstr ""
 "Il guardiacaccia si assicura che la popolazione naturale di animali non "
 "scenda mai troppo."
 
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:18
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:14
+msgid ""
+"‘He loves the animals and to breed them<br>\n"
+"\t\t\tas we love to cook and eat them.’"
+msgstr ""
+
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
+msgid "Barbarian nursery rhyme"
+msgstr ""
+
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:20
 msgid "Releases animals into the wild to steady the meat production."
 msgstr "Rilascia animali in libertà per sostenere la produzione di carne."
 
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:30
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:32
 msgid "The gamekeeper pauses %s before going to work again."
 msgstr ""
 
@@ -1568,6 +1645,17 @@ msgid ""
 "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
+msgstr ""
+
+#: ../../tribes/barbarians/granitemine/conf:32
+msgid "Main Granite Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/barbarians/granitemine/conf:33
+msgid ""
+"This granite mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
 msgstr ""
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
@@ -1622,13 +1710,13 @@ msgid ""
 "mill)."
 msgstr ""
 
-#: ../../tribes/barbarians/headquarters/help.lua:16
-#: ../../tribes/barbarians/headquarters_interim/help.lua:16
-msgid "Accomodation for your people. Also stores your wares and tools."
-msgstr ""
-
 #: ../../tribes/barbarians/headquarters/help.lua:17
 #: ../../tribes/barbarians/headquarters_interim/help.lua:17
+msgid "Accommodation for your people. Also stores your wares and tools."
+msgstr ""
+
+#: ../../tribes/barbarians/headquarters/help.lua:18
+#: ../../tribes/barbarians/headquarters_interim/help.lua:18
 msgid "The headquarters is your main building."
 msgstr ""
 
@@ -1658,6 +1746,17 @@ msgstr "Produci un elmo da guerra"
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Il cacciatore porta buona carne ai coloni."
+
+#: ../../tribes/barbarians/hunters_hut/conf:27
+msgid "Out of Game"
+msgstr ""
+
+#: ../../tribes/barbarians/hunters_hut/conf:28
+msgid ""
+"The hunter working out of this hunter’s hut can’t find any game in his "
+"working radius. Remember that you can build a gamekeeper’s hut to release "
+"more game into the wild."
+msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid ""
@@ -1758,6 +1857,17 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
 msgstr "Abbatte alberi."
+
+#: ../../tribes/barbarians/lumberjacks_hut/conf:25
+msgid "Out of Trees"
+msgstr ""
+
+#: ../../tribes/barbarians/lumberjacks_hut/conf:26
+msgid ""
+"The lumberjack working at this lumberjack’s hut can’t find any trees in his "
+"working radius. You should consider dismantling or destroying the building "
+"or building a rangers’s hut."
+msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid ""
@@ -1920,6 +2030,16 @@ msgid ""
 "It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
 
+#: ../../tribes/barbarians/quarry/conf:25
+msgid "Out of Rocks"
+msgstr ""
+
+#: ../../tribes/barbarians/quarry/conf:26
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his working "
+"radius."
+msgstr ""
+
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carves raw stone out of rocks in the vicinity."
 msgstr ""
@@ -1989,6 +2109,12 @@ msgstr "Pianta canne"
 msgid "Harvest reed"
 msgstr "Raccoglie le canne"
 
+#: ../../tribes/barbarians/reed_yard/conf:38
+msgid ""
+"The gardener working at this reed yard has no cleared soil to plant his "
+"seeds."
+msgstr ""
+
 #: ../../tribes/barbarians/reed_yard/help.lua:13
 msgid "Slogan of the Guild of Gardeners"
 msgstr "Slogan della Gilda dei giardinieri"
@@ -2003,6 +2129,12 @@ msgid ""
 "Barbarian tribe."
 msgstr ""
 
+#: ../../tribes/barbarians/reed_yard/help.lua:18
+msgid ""
+"Thatch reed is the traditional material for roofing, and it is woven into "
+"the extremely durable cloth that they use for their ships’ sails."
+msgstr ""
+
 #: ../../tribes/barbarians/reed_yard/help.lua:30
 msgid ""
 "A reed yard can produce a sheaf of thatch reed in about %s on average."
@@ -2015,19 +2147,15 @@ msgstr ""
 "Esploratori come Scotty l'esploratore esplorano le aree non esplorate alla "
 "maniera degli esploratori."
 
-#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
-msgid "Headquarters medium"
-msgstr "Quartier generale medio"
+#: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:10
+msgid "Fortified Village"
+msgstr ""
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
-msgid "Citadel village"
-msgstr "Roccaforte del villaggio"
-
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
+#: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:94
 msgid "Not enough space"
 msgstr "Non c'è abbastanza spazio"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
+#: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:95
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
@@ -2176,15 +2304,15 @@ msgid ""
 "initial level."
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/help.lua:27
+#: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/help.lua:33
+#: ../../tribes/barbarians/trainingcamp/help.lua:35
 msgid "Health Training:"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/help.lua:44
+#: ../../tribes/barbarians/trainingcamp/help.lua:46
 msgid ""
 "If all needed wares are delivered in time, a training camp can train one new "
 "soldier in attack and health to the final level in %1$s and %2$s on average."
@@ -2260,6 +2388,15 @@ msgstr "Produce stoffa per navi e soldati."
 
 #: ../../tribes/barbarians/weaving-mill/help.lua:17
 msgid "Weaves cloth out of thatch reed."
+msgstr ""
+
+#: ../../tribes/barbarians/well/conf:27
+msgid "Out of Water"
+msgstr ""
+
+#: ../../tribes/barbarians/well/conf:28
+msgid ""
+"The carrier working at this well can’t find any water in his working radius."
 msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:13

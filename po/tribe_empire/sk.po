@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
+"POT-Creation-Date: 2014-07-26 13:10+0000\n"
 "PO-Revision-Date: 2014-04-01 13:56+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:45+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-07-27 05:51+0000\n"
+"X-Generator: Launchpad (build 17131)\n"
 "X-Poedit-Country: Czech Republic\n"
 "Language: sk\n"
 "X-Poedit-Language: czech\n"
@@ -298,6 +298,7 @@ msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr "Vylepšiť uhýbanie vojakov z úrovne 0 na úroveň 1"
 
 #: ../../tribes/empire/arena/help.lua:15
+#: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/armorsmithy/help.lua:17
 #: ../../tribes/empire/bakery/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:17
@@ -324,21 +325,22 @@ msgstr "Vylepšiť uhýbanie vojakov z úrovne 0 na úroveň 1"
 #: ../../tribes/empire/fortress/help.lua:13
 #: ../../tribes/empire/goldmine/help.lua:13
 #: ../../tribes/empire/headquarters/help.lua:13
-#: ../../tribes/empire/headquarters/help.lua:17
+#: ../../tribes/empire/headquarters/help.lua:18
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:13
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 #: ../../tribes/empire/hunters_house/help.lua:13
 #: ../../tribes/empire/inn/help.lua:13
 #: ../../tribes/empire/inn/help.lua:17
 #: ../../tribes/empire/lumberjacks_house/help.lua:13
 #: ../../tribes/empire/marblemine/help.lua:13
+#: ../../tribes/empire/mill/help.lua:13
 #: ../../tribes/empire/mill/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:17
 #: ../../tribes/empire/port/help.lua:13
-#: ../../tribes/empire/port/help.lua:18
+#: ../../tribes/empire/port/help.lua:17
 #: ../../tribes/empire/quarry/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:17
@@ -347,7 +349,8 @@ msgstr "Vylepšiť uhýbanie vojakov z úrovne 0 na úroveň 1"
 #: ../../tribes/empire/sentry/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:17
-#: ../../tribes/empire/shipyard/help.lua:18
+#: ../../tribes/empire/shipyard/help.lua:13
+#: ../../tribes/empire/shipyard/help.lua:17
 #: ../../tribes/empire/smelting_works/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:17
@@ -359,7 +362,9 @@ msgstr "Vylepšiť uhýbanie vojakov z úrovne 0 na úroveň 1"
 #: ../../tribes/empire/trainingcamp/help.lua:15
 #: ../../tribes/empire/vineyard/help.lua:13
 #: ../../tribes/empire/warehouse/help.lua:13
+#: ../../tribes/empire/weaponsmithy/help.lua:13
 #: ../../tribes/empire/weaponsmithy/help.lua:17
+#: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13
 #: ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
@@ -386,25 +391,26 @@ msgid ""
 "level with which they came."
 msgstr ""
 
-#: ../../tribes/empire/arena/help.lua:27
-#: ../../tribes/empire/colosseum/help.lua:27
+#: ../../tribes/empire/arena/help.lua:28
+#: ../../tribes/empire/colosseum/help.lua:28
 msgid "Evade Training:"
 msgstr ""
 
-#: ../../tribes/empire/arena/help.lua:37
+#: ../../tribes/empire/arena/help.lua:38
 #: ../../tribes/empire/armorsmithy/help.lua:29
 #: ../../tribes/empire/bakery/help.lua:30
 #: ../../tribes/empire/brewery/help.lua:29
 #: ../../tribes/empire/burners_house/help.lua:29
 #: ../../tribes/empire/coalmine/help.lua:30
-#: ../../tribes/empire/colosseum/help.lua:37
+#: ../../tribes/empire/colosseum/help.lua:38
 #: ../../tribes/empire/deep_coalmine/help.lua:30
 #: ../../tribes/empire/deep_goldmine/help.lua:29
 #: ../../tribes/empire/deep_marblemine/help.lua:29
 #: ../../tribes/empire/deep_oremine/help.lua:29
-#: ../../tribes/empire/donkeyfarm/help.lua:30
+#: ../../tribes/empire/donkeyfarm/help.lua:29
 #: ../../tribes/empire/farm/help.lua:29
 #: ../../tribes/empire/fishers_house/help.lua:30
+#: ../../tribes/empire/foresters_house/help.lua:30
 #: ../../tribes/empire/goldmine/help.lua:30
 #: ../../tribes/empire/hunters_house/help.lua:30
 #: ../../tribes/empire/inn/help.lua:29
@@ -413,17 +419,17 @@ msgstr ""
 #: ../../tribes/empire/mill/help.lua:30
 #: ../../tribes/empire/oremine/help.lua:30
 #: ../../tribes/empire/piggery/help.lua:29
-#: ../../tribes/empire/port/help.lua:27
+#: ../../tribes/empire/port/help.lua:26
 #: ../../tribes/empire/quarry/help.lua:29
 #: ../../tribes/empire/sawmill/help.lua:29
 #: ../../tribes/empire/scouts_house/help.lua:29
 #: ../../tribes/empire/sheepfarm/help.lua:29
-#: ../../tribes/empire/shipyard/help.lua:30
+#: ../../tribes/empire/shipyard/help.lua:29
 #: ../../tribes/empire/smelting_works/help.lua:29
 #: ../../tribes/empire/stonemasons_house/help.lua:29
 #: ../../tribes/empire/tavern/help.lua:29
 #: ../../tribes/empire/toolsmithy/help.lua:29
-#: ../../tribes/empire/trainingcamp/help.lua:44
+#: ../../tribes/empire/trainingcamp/help.lua:46
 #: ../../tribes/empire/vineyard/help.lua:29
 #: ../../tribes/empire/weaponsmithy/help.lua:29
 #: ../../tribes/empire/weaving-mill/help.lua:29
@@ -500,15 +506,7 @@ msgstr "Vyrobiť plechovú zbroj"
 msgid "Work"
 msgstr "Práca"
 
-#: ../../tribes/empire/ax/conf:1
-msgid ""
-"The ax is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "Sekera je nástroj drevorubača. Vyrába ju kováč nástrojov."
-
-#: ../../tribes/empire/baker/conf:1
-msgid "Bakes bread for workers."
-msgstr "Pečie chlieb pracovníkom."
-
+#: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
 #: ../../tribes/empire/barracks/help.lua:13
 #: ../../tribes/empire/barrier/help.lua:13
@@ -527,6 +525,7 @@ msgstr "Pečie chlieb pracovníkom."
 #: ../../tribes/empire/inn/help.lua:13
 #: ../../tribes/empire/lumberjacks_house/help.lua:13
 #: ../../tribes/empire/marblemine/help.lua:13
+#: ../../tribes/empire/mill/help.lua:13
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
@@ -536,6 +535,7 @@ msgstr "Pečie chlieb pracovníkom."
 #: ../../tribes/empire/scouts_house/help.lua:13
 #: ../../tribes/empire/sentry/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:13
+#: ../../tribes/empire/shipyard/help.lua:13
 #: ../../tribes/empire/smelting_works/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:13
 #: ../../tribes/empire/tavern/help.lua:13
@@ -544,10 +544,21 @@ msgstr "Pečie chlieb pracovníkom."
 #: ../../tribes/empire/trainingcamp/help.lua:15
 #: ../../tribes/empire/vineyard/help.lua:13
 #: ../../tribes/empire/warehouse/help.lua:13
+#: ../../tribes/empire/weaponsmithy/help.lua:13
+#: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13
 #: ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
 msgstr ""
+
+#: ../../tribes/empire/ax/conf:1
+msgid ""
+"The ax is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr "Sekera je nástroj drevorubača. Vyrába ju kováč nástrojov."
+
+#: ../../tribes/empire/baker/conf:1
+msgid "Bakes bread for workers."
+msgstr "Pečie chlieb pracovníkom."
 
 #: ../../tribes/empire/barracks/conf:7
 msgid "Your soldiers have occupied your barracks."
@@ -664,6 +675,17 @@ msgstr ""
 "Do ohňov v imperiálnych taviarňach, vyhniach na zbroje a vyhniach na zbrane "
 "sa zvyčajne prikladá uhlie. Ťaží sa v uhoľných baniach alebo sa vyrába v "
 "uhliarni z kmeňov stromov."
+
+#: ../../tribes/empire/coalmine/conf:40
+#: ../../tribes/empire/deep_coalmine/conf:41
+msgid "Main Coal Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/empire/coalmine/conf:41
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
@@ -1136,6 +1158,7 @@ msgid "Sentry"
 msgstr "Strážnica"
 
 #: ../../tribes/empire/conf:158
+#: ../../tribes/empire/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Základňa"
 
@@ -1311,21 +1334,56 @@ msgstr "Aréna"
 msgid "Training Camp"
 msgstr "Výcvikový tábor"
 
-#: ../../tribes/empire/conf:217
-msgid "Headquarters Medium"
-msgstr "Stredná základňa"
+#: ../../tribes/empire/deep_coalmine/conf:42
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
 
-#: ../../tribes/empire/conf:218
-msgid "Castle Village"
-msgstr "Dedina s hradom"
+#: ../../tribes/empire/deep_goldmine/conf:41
+#: ../../tribes/empire/goldmine/conf:41
+msgid "Main Gold Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/empire/deep_goldmine/conf:42
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
 msgstr ""
 
+#: ../../tribes/empire/deep_marblemine/conf:40
+#: ../../tribes/empire/marblemine/conf:52
+msgid "Main Marble Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/empire/deep_marblemine/conf:41
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr ""
+
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
+msgstr ""
+
+#: ../../tribes/empire/deep_oremine/conf:41
+#: ../../tribes/empire/oremine/conf:41
+msgid "Main Iron Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/empire/deep_oremine/conf:42
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
 msgstr ""
 
 #: ../../tribes/empire/deep_oremine/help.lua:17
@@ -1356,6 +1414,16 @@ msgstr "Sadiť pšenicu"
 msgid "Harvest wheat"
 msgstr "Zberať pšenicu"
 
+#: ../../tribes/empire/farm/conf:43
+#: ../../tribes/empire/vineyard/conf:42
+msgid "Out of Fields"
+msgstr ""
+
+#: ../../tribes/empire/farm/conf:44
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+
 #: ../../tribes/empire/farm/help.lua:17
 #: ../../tribes/empire/vineyard/help.lua:17
 msgid "Sow and harvest wheat."
@@ -1385,6 +1453,16 @@ msgstr ""
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
 msgstr "Chytá ryby z mora."
+
+#: ../../tribes/empire/fishers_house/conf:27
+msgid "Out of Fish"
+msgstr ""
+
+#: ../../tribes/empire/fishers_house/conf:28
+msgid ""
+"The fisher working in this fisher’s house can’t find any fish in his working "
+"radius."
+msgstr ""
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1422,10 +1500,6 @@ msgid ""
 "the trees."
 msgstr ""
 
-#: ../../tribes/empire/foresters_house/help.lua:30
-msgid "Calculaiton needed"
-msgstr ""
-
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
 msgstr "Vaši vojaci obsadili vašu pevnosť."
@@ -1443,6 +1517,12 @@ msgstr ""
 "Zlato je najhodnotnejšie zo všetkých kovov; ozdobujú sa ním zbroje a zbrane. "
 "Vyrába sa v taviarni zo zlatej rudy a spracováva sa vo vyhni na zbroje a "
 "vyhni na zbrane."
+
+#: ../../tribes/empire/goldmine/conf:42
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/empire/goldore/conf:1
 msgid ""
@@ -1469,21 +1549,21 @@ msgid ""
 "is produced by the toolsmith."
 msgstr ""
 
-#: ../../tribes/empire/headquarters/help.lua:16
-msgid "Accomodation for your people. Also stores your wares and tools."
+#: ../../tribes/empire/headquarters/help.lua:17
+msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
 
-#: ../../tribes/empire/headquarters/help.lua:17
+#: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
 msgstr ""
 
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:16
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
 msgid ""
-"Although this ship ran aground, it still serves as accomodation for your "
+"Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
 msgstr ""
 
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
 msgstr ""
 
@@ -1512,6 +1592,16 @@ msgstr ""
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Lovec prináša osadníkom dobré mäso."
+
+#: ../../tribes/empire/hunters_house/conf:27
+msgid "Out of Game"
+msgstr ""
+
+#: ../../tribes/empire/hunters_house/conf:28
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"working radius."
+msgstr ""
 
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1588,6 +1678,17 @@ msgstr ""
 msgid "Fells trees."
 msgstr "Rúbe stromy."
 
+#: ../../tribes/empire/lumberjacks_house/conf:27
+msgid "Out of Trees"
+msgstr ""
+
+#: ../../tribes/empire/lumberjacks_house/conf:28
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his working radius. You should consider dismantling or destroying the "
+"building or building a forester’s house."
+msgstr ""
+
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
 msgstr ""
@@ -1625,6 +1726,13 @@ msgstr "Ťažiť mramor"
 msgid "Mine stone"
 msgstr "Ťažiť kameň"
 
+#: ../../tribes/empire/marblemine/conf:53
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider enhancing, dismantling or "
+"destroying it."
+msgstr ""
+
 #: ../../tribes/empire/marblemine/help.lua:17
 msgid "Carve marble and stones out of the rock in mountain terrain."
 msgstr ""
@@ -1658,6 +1766,12 @@ msgstr ""
 msgid "Mills the wheat to produce flour."
 msgstr "Mlie pšenicu na výrobu múky."
 
+#: ../../tribes/empire/oremine/conf:42
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your outpost."
 msgstr "Vaši vojaci obsadili vašu pozorovateľňu."
@@ -1681,6 +1795,16 @@ msgstr ""
 "Plechová zbroj je najsilnejším brnením, aké môže vojak impéria mať. Vyrába "
 "sa vo vyhni na zbroje a používa sa vo výcvikovom tábore – spolu s jedlom – "
 "na trénovanie zdravia vojakov z úrovne 3 na úroveň 4."
+
+#: ../../tribes/empire/quarry/conf:43
+msgid "Out of Rocks"
+msgstr ""
+
+#: ../../tribes/empire/quarry/conf:44
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his working "
+"radius."
+msgstr ""
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
@@ -1711,19 +1835,15 @@ msgstr ""
 "Prieskumníci ako prieskumník Priemyslav preskúmali oblasť v prieskumníckom "
 "štýle."
 
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
-msgid "Headquarters medium"
-msgstr "Stredná základňa"
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:10
+msgid "Fortified Village"
+msgstr ""
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
-msgid "Castle village"
-msgstr "Dedina s hradom"
-
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:119
 msgid "Not enough space"
 msgstr "Nedostatok miesta"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:120
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
@@ -1894,11 +2014,11 @@ msgstr "Vylepšiť zdravie vojakov z úrovne 3 na úroveň 4"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr ""
 
-#: ../../tribes/empire/trainingcamp/help.lua:27
+#: ../../tribes/empire/trainingcamp/help.lua:29
 msgid "Attack Training:"
 msgstr ""
 
-#: ../../tribes/empire/trainingcamp/help.lua:32
+#: ../../tribes/empire/trainingcamp/help.lua:34
 msgid "Health Training:"
 msgstr ""
 
@@ -1913,6 +2033,11 @@ msgstr "Zasadiť vinič"
 #: ../../tribes/empire/vineyard/conf:25
 msgid "Harvest vine"
 msgstr "Zberať vinič"
+
+#: ../../tribes/empire/vineyard/conf:43
+msgid ""
+"The farmer working at this vineyard has no cleared soil to plant his seeds."
+msgstr ""
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -1967,6 +2092,15 @@ msgstr "Vyrába látku pre lode a vojakov."
 
 #: ../../tribes/empire/weaving-mill/help.lua:17
 msgid "Weaves cloth out of wool."
+msgstr ""
+
+#: ../../tribes/empire/well/conf:30
+msgid "Out of Water"
+msgstr ""
+
+#: ../../tribes/empire/well/conf:31
+msgid ""
+"The carrier working at this well can’t find any water in his working radius."
 msgstr ""
 
 #: ../../tribes/empire/well/help.lua:18
