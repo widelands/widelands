@@ -21,7 +21,6 @@
 
 #include <sstream>
 
-#include <boost/algorithm/string/join.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -1048,8 +1047,7 @@ void ProductionProgram::ActProduce::execute
 		ware_descname += tribe.get_ware_descr(item_pair.first)->descname();
 		ware_descnames.push_back(ware_descname);
 	}
-	/** TRANSLATORS: Separator for list of wares */
-	const std::string ware_list = boost::algorithm::join(ware_descnames,  _(", "));
+	std::string ware_list = i18n::localize_item_list(ware_descnames, true);
 
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
@@ -1137,6 +1135,7 @@ void ProductionProgram::ActRecruit::execute
 		uint8_t const count = item_pair.second;
 		std::string worker_descname;
 		// TODO(sirver): needs boost::format and probably ngettext.
+		// TODO(GunChleoc): use ngettext when we have one_tribe.
 		if (1 < count) {
 			char buffer[5];
 			/** TRANSLATORS: Number used in list of workers */
@@ -1146,10 +1145,9 @@ void ProductionProgram::ActRecruit::execute
 		worker_descname += tribe.get_worker_descr(item_pair.first)->descname();
 		worker_descnames.push_back(worker_descname);
 	}
-	/** TRANSLATORS: Separator for list of workers */
-	const std::string unit_string = boost::algorithm::join(worker_descnames,  _(", "));
+	std::string unit_string = i18n::localize_item_list(worker_descnames, true);
 
-	/** TRANSLATORS: %s is a lost of workers */
+	/** TRANSLATORS: %s is a list of workers */
 	std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
