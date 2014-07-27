@@ -90,10 +90,10 @@ std::string to_string(Map_Object_Type type);
  */
 struct Map_Object_Descr {
 
-	Map_Object_Descr(const Map_Object_Type type,
+	Map_Object_Descr(const Map_Object_Type init_type,
 	                 const std::string& init_name,
 	                 const std::string& init_descname)
-	   : m_type(type), m_name(init_name), m_descname(init_descname) {
+		: m_type(init_type), m_name(init_name), m_descname(init_descname) {
 	}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
