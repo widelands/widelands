@@ -37,12 +37,12 @@
 
 namespace Widelands {
 
-Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object
+CmdDestroyMapObject::CmdDestroyMapObject
 	(int32_t const t, MapObject & o)
 	: GameLogicCommand(t), obj_serial(o.serial())
 {}
 
-void Cmd_Destroy_Map_Object::execute(Game & game)
+void CmdDestroyMapObject::execute(Game & game)
 {
 	game.syncstream().Unsigned32(obj_serial);
 
@@ -51,7 +51,7 @@ void Cmd_Destroy_Map_Object::execute(Game & game)
 }
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
-void Cmd_Destroy_Map_Object::Read
+void CmdDestroyMapObject::Read
 	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
@@ -73,7 +73,7 @@ void Cmd_Destroy_Map_Object::Read
 		throw game_data_error("destroy map object: %s", e.what());
 	}
 }
-void Cmd_Destroy_Map_Object::Write
+void CmdDestroyMapObject::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
@@ -393,7 +393,7 @@ void MapObject::destroy(Editor_Game_Base & egbase)
 void MapObject::schedule_destroy(Game & game)
 {
 	game.cmdqueue().enqueue
-		(new Cmd_Destroy_Map_Object(game.get_gametime(), *this));
+		(new CmdDestroyMapObject(game.get_gametime(), *this));
 }
 
 /**

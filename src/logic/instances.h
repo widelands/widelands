@@ -463,9 +463,9 @@ private:
 	Object_Ptr m;
 };
 
-struct Cmd_Destroy_Map_Object : public GameLogicCommand {
-	Cmd_Destroy_Map_Object() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
-	Cmd_Destroy_Map_Object (int32_t t, MapObject &);
+struct CmdDestroyMapObject : public GameLogicCommand {
+	CmdDestroyMapObject() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
+	CmdDestroyMapObject (int32_t t, MapObject &);
 	void execute (Game &) override;
 
 	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
