@@ -33,7 +33,7 @@ struct Cmd_LuaScript : public GameLogicCommand {
 		GameLogicCommand(_duetime), script_(script) {}
 
 	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
 	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_LUASCRIPT;}

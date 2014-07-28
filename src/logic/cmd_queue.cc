@@ -153,7 +153,7 @@ void GameLogicCommand::Write
 #else
 	 Editor_Game_Base &,
 #endif
-	 Map_Map_Object_Saver &)
+	 MapMapObjectSaver &)
 {
 	// First version
 	fw.Unsigned16(BASE_CMD_VERSION);

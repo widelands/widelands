@@ -36,7 +36,7 @@ namespace Widelands {
 class MapObject;
 class Editor_Game_Base;
 class MapMapObjectLoader;
-struct Map_Map_Object_Saver;
+struct MapMapObjectSaver;
 
 struct RequirementsStorage;
 
@@ -53,7 +53,7 @@ private:
 
 		virtual bool check(const MapObject &) const = 0;
 		virtual void write
-			(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver &) const
+			(FileWrite &, Editor_Game_Base &, MapMapObjectSaver &) const
 			= 0;
 		virtual const RequirementsStorage & storage() const = 0;
 	};
@@ -67,7 +67,7 @@ private:
 		void write
 			(FileWrite            & fw,
 			 Editor_Game_Base     & egbase,
-			 Map_Map_Object_Saver & mos)
+			 MapMapObjectSaver & mos)
 			const override
 		{
 			m.write(fw, egbase, mos);
@@ -90,7 +90,7 @@ public:
 
 	// For Save/Load Games
 	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &);
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) const;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) const;
 
 private:
 	boost::shared_ptr<BaseCapsule> m;
@@ -141,7 +141,7 @@ struct RequireOr {
 
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
+		(FileWrite &, Editor_Game_Base & egbase, MapMapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 
@@ -159,7 +159,7 @@ struct RequireAnd {
 
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
+		(FileWrite &, Editor_Game_Base & egbase, MapMapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 
@@ -179,7 +179,7 @@ struct RequireAttribute {
 	RequireAttribute() : at(atrTotal), min(SHRT_MIN), max(SHRT_MAX) {}
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
+		(FileWrite &, Editor_Game_Base & egbase, MapMapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 

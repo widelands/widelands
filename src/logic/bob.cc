@@ -1194,7 +1194,7 @@ const BobProgramBase * Bob::Loader::get_program(const std::string & name)
 }
 
 void Bob::save
-	(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & eg, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	MapObject::save(eg, mos, fw);
 

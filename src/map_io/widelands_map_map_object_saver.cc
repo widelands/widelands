@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-Map_Map_Object_Saver::Map_Map_Object_Saver() :
+MapMapObjectSaver::MapMapObjectSaver() :
 m_nr_roads     (0),
 m_nr_flags     (0),
 m_nr_buildings (0),
@@ -51,8 +51,8 @@ m_lastserial   (0)
  * Return a pointer to the record for the given object.
  * Create a record if that hasn't been done yet.
  */
-Map_Map_Object_Saver::MapObjectRec &
-Map_Map_Object_Saver::get_object_record(const MapObject & obj)
+MapMapObjectSaver::MapObjectRec &
+MapMapObjectSaver::get_object_record(const MapObject & obj)
 {
 	Map_Object_Map::iterator it = m_objects.find(&obj);
 
@@ -79,7 +79,7 @@ Map_Map_Object_Saver::get_object_record(const MapObject & obj)
  * Returns true if this object has already been registered.
  * \deprecated since get_object_file_index supports unregistered objects now
  */
-bool Map_Map_Object_Saver::is_object_known(const MapObject & obj) const
+bool MapMapObjectSaver::is_object_known(const MapObject & obj) const
 {
 	Map_Object_Map::const_iterator it = m_objects.find(&obj);
 
@@ -89,7 +89,7 @@ bool Map_Map_Object_Saver::is_object_known(const MapObject & obj) const
 	return it->second.registered;
 }
 
-bool Map_Map_Object_Saver::is_object_saved(const MapObject & obj)
+bool MapMapObjectSaver::is_object_saved(const MapObject & obj)
 {
 	return get_object_record(obj).saved;
 }
@@ -98,7 +98,7 @@ bool Map_Map_Object_Saver::is_object_saved(const MapObject & obj)
 /*
  * Registers this object as a new one
  */
-Serial Map_Map_Object_Saver::register_object(const MapObject & obj) {
+Serial MapMapObjectSaver::register_object(const MapObject & obj) {
 	MapObjectRec & rec = get_object_record(obj);
 
 	assert(!rec.registered);
@@ -113,7 +113,7 @@ Serial Map_Map_Object_Saver::register_object(const MapObject & obj) {
 	else if (dynamic_cast<Fleet        const *>(&obj)) ++m_nr_fleets;
 	else if (dynamic_cast<PortDock     const *>(&obj)) ++m_nr_portdocks;
 	else
-		throw wexception("Map_Map_Object_Saver: Unknown MapObject type");
+		throw wexception("MapMapObjectSaver: Unknown MapObject type");
 
 	rec.registered = true;
 	return rec.fileserial;
@@ -123,7 +123,7 @@ Serial Map_Map_Object_Saver::register_object(const MapObject & obj) {
  * Returns the file index for this map object. This is used on load
  * to regenerate the dependencies between the objects.
  */
-uint32_t Map_Map_Object_Saver::get_object_file_index(const MapObject & obj)
+uint32_t MapMapObjectSaver::get_object_file_index(const MapObject & obj)
 {
 	return get_object_record(obj).fileserial;
 }
@@ -131,7 +131,7 @@ uint32_t Map_Map_Object_Saver::get_object_file_index(const MapObject & obj)
 /**
  * Returns the file index of the given object, or zero for null pointers.
  */
-uint32_t Map_Map_Object_Saver::get_object_file_index_or_zero
+uint32_t MapMapObjectSaver::get_object_file_index_or_zero
 	(const MapObject * obj)
 {
 	if (obj)
@@ -142,7 +142,7 @@ uint32_t Map_Map_Object_Saver::get_object_file_index_or_zero
 /*
  * mark this object as saved
  */
-void Map_Map_Object_Saver::mark_object_as_saved(const MapObject & obj) {
+void MapMapObjectSaver::mark_object_as_saved(const MapObject & obj) {
 	MapObjectRec & rec = get_object_record(obj);
 	assert(rec.registered);
 	rec.saved = true;
@@ -152,7 +152,7 @@ void Map_Map_Object_Saver::mark_object_as_saved(const MapObject & obj) {
 /*
  * Return the number of unsaved objects
  */
-void Map_Map_Object_Saver::detect_unsaved_objects() const {
+void MapMapObjectSaver::detect_unsaved_objects() const {
 	for (const std::pair<const MapObject *, MapObjectRec>& temp_map : m_objects) {
 		if (!temp_map.second.saved) {
 			throw wexception

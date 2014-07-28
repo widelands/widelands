@@ -36,8 +36,8 @@ class MapObject;
  *   - keep track of map objects on the map
  *   - translate Map_Object* Pointer into the index used in the saved file
  */
-struct Map_Map_Object_Saver {
-	Map_Map_Object_Saver();
+struct MapMapObjectSaver {
+	MapMapObjectSaver();
 
 	bool is_object_known(const MapObject &) const;
 	Serial register_object(const MapObject &);

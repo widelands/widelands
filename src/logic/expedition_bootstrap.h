@@ -78,7 +78,7 @@ public:
 	void load
 		(uint32_t warehouse_packet_version, Warehouse& warehouse,
 		 FileRead& fr, Game& game, MapMapObjectLoader& mol);
-	void save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos);
+	void save(FileWrite& fw, Game& game, MapMapObjectSaver& mos);
 
 private:
 	struct ExpeditionWorker;

@@ -79,7 +79,7 @@ void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObject
 	}
 }
 void Cmd_LuaCoroutine::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_LUACOROUTINE_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);

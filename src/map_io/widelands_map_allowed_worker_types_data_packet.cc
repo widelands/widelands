@@ -83,7 +83,7 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 
 
 void Map_Allowed_Worker_Types_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 	Profile prof;
 	prof.create_section("global").set_int

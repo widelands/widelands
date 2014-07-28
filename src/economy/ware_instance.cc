@@ -596,7 +596,7 @@ void WareInstance::Loader::load_finish()
 
 
 void WareInstance::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_WareInstance);
 	fw.Unsigned8(WAREINSTANCE_SAVEGAME_VERSION);

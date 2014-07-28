@@ -50,7 +50,7 @@ void Cmd_CalculateStatistics::Read
 	}
 }
 void Cmd_CalculateStatistics::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_CALCULATE_STATISTICS_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);

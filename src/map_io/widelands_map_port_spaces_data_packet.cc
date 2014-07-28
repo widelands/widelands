@@ -65,7 +65,7 @@ void Map_Port_Spaces_Data_Packet::Read
 }
 
 
-void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 
 {
 	Profile prof;

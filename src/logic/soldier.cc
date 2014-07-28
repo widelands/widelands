@@ -1910,7 +1910,7 @@ Soldier::Loader * Soldier::create_loader()
 }
 
 void Soldier::do_save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 

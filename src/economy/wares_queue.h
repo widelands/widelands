@@ -29,7 +29,7 @@ class Economy;
 class Editor_Game_Base;
 class Game;
 class MapMapObjectLoader;
-struct Map_Map_Object_Saver;
+struct MapMapObjectSaver;
 class Player;
 class Request;
 class Worker;
@@ -68,7 +68,7 @@ public:
 	Player & owner() const {return m_owner.owner();}
 
 	void Read (FileRead  &, Game &, MapMapObjectLoader &);
-	void Write(FileWrite &, Game &, Map_Map_Object_Saver  &);
+	void Write(FileWrite &, Game &, MapMapObjectSaver  &);
 
 private:
 	static void request_callback

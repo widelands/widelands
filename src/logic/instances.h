@@ -326,7 +326,7 @@ public:
 	/// to the new Map_Object saving system
 	virtual bool has_new_save_support() {return false;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &);
 	// Pure Map_Objects cannot be loaded
 
 protected:
@@ -468,7 +468,7 @@ struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object (int32_t t, MapObject &);
 	void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
 	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
@@ -483,7 +483,7 @@ struct Cmd_Act : public GameLogicCommand {
 
 	void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
 	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_ACT;}

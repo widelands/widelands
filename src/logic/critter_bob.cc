@@ -442,7 +442,7 @@ MapObject::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
 }
 
 void Critter_Bob::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Critter);
 	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);

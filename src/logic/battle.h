@@ -55,7 +55,7 @@ public:
 	void init(Editor_Game_Base &) override;
 	void cleanup(Editor_Game_Base &) override;
 	bool has_new_save_support() override {return true;}
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 	static MapObject::Loader * load
 		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 

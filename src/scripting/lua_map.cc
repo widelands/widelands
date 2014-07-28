@@ -2009,7 +2009,7 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 };
 
 void L_MapObject::__persist(lua_State * L) {
-	Map_Map_Object_Saver & mos = *get_mos(L);
+	MapMapObjectSaver & mos = *get_mos(L);
 	Game & game = get_game(L);
 
 	uint32_t idx = 0;

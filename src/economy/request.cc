@@ -178,7 +178,7 @@ void Request::Read
  * Write this request to a file
  */
 void Request::Write
-	(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos) const
+	(FileWrite & fw, Game & game, MapMapObjectSaver & mos) const
 {
 	fw.Unsigned16(REQUEST_VERSION);
 

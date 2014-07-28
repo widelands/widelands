@@ -240,7 +240,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 	cleanup(game);
 }
 
-void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos) {
+void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapMapObjectSaver& mos) {
 	// Expedition workers
 	fw.Unsigned8(workers_.size());
 	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {

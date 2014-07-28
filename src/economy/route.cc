@@ -118,7 +118,7 @@ void Route::load_pointers(const LoadData & data, MapMapObjectLoader & mol) {
  * Save the route to the given file.
  */
 void Route::save
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());

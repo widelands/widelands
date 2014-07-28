@@ -307,7 +307,7 @@ protected:
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 };
 
 }

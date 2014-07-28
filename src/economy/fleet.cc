@@ -779,7 +779,7 @@ MapObject::Loader * Fleet::load
 	return loader.release();
 }
 
-void Fleet::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+void Fleet::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Fleet);
 	fw.Unsigned8(FLEET_SAVEGAME_VERSION);

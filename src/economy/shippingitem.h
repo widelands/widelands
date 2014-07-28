@@ -31,7 +31,7 @@ namespace Widelands {
 class Economy;
 class Game;
 class MapMapObjectLoader;
-struct Map_Map_Object_Saver;
+struct MapMapObjectSaver;
 class MapObject;
 class PortDock;
 class WareInstance;
@@ -65,7 +65,7 @@ struct ShippingItem {
 		uint32_t m_serial;
 	};
 
-	void save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw);
+	void save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw);
 
 private:
 	friend class PortDock;

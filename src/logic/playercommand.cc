@@ -140,7 +140,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
  */
 #define PLAYER_COMMAND_VERSION 2
 void PlayerCommand::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_COMMAND_VERSION);
@@ -212,7 +212,7 @@ void Cmd_Bulldoze::Read
 	}
 }
 void Cmd_Bulldoze::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BULLDOZE_VERSION);
@@ -264,7 +264,7 @@ void Cmd_Build::Read
 }
 
 void Cmd_Build::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILD_VERSION);
@@ -311,7 +311,7 @@ void Cmd_BuildFlag::Read
 	}
 }
 void Cmd_BuildFlag::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
@@ -398,7 +398,7 @@ void Cmd_BuildRoad::Read
 	}
 }
 void Cmd_BuildRoad::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
@@ -453,7 +453,7 @@ void Cmd_FlagAction::Read
 	}
 }
 void Cmd_FlagAction::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_FLAGACTION_VERSION);
@@ -503,7 +503,7 @@ void Cmd_StartStopBuilding::Read
 	}
 }
 void Cmd_StartStopBuilding::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_STOPBUILDING_VERSION);
@@ -539,7 +539,7 @@ void Cmd_MilitarySiteSetSoldierPreference::execute (Game & game)
 
 #define PLAYER_CMD_SOLDIERPREFERENCE_VERSION 1
 void Cmd_MilitarySiteSetSoldierPreference::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SOLDIERPREFERENCE_VERSION);
@@ -608,7 +608,7 @@ void Cmd_StartOrCancelExpedition::Read
 	}
 }
 void Cmd_StartOrCancelExpedition::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_EXPEDITION_VERSION);
@@ -660,7 +660,7 @@ void Cmd_EnhanceBuilding::Read
 	}
 }
 void Cmd_EnhanceBuilding::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_ENHANCEBUILDING_VERSION);
@@ -711,7 +711,7 @@ void Cmd_DismantleBuilding::Read
 	}
 }
 void Cmd_DismantleBuilding::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_DISMANTLEBUILDING_VERSION);
@@ -760,7 +760,7 @@ void Cmd_EvictWorker::Read
 	}
 }
 void Cmd_EvictWorker::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_EVICTWORKER_VERSION);
@@ -814,7 +814,7 @@ void Cmd_ShipScoutDirection::Read
 	}
 }
 void Cmd_ShipScoutDirection::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_SCOUT_DIRECTION_VERSION);
@@ -871,7 +871,7 @@ void Cmd_ShipConstructPort::Read
 	}
 }
 void Cmd_ShipConstructPort::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_CONSTRUCT_PORT_VERSION);
@@ -927,7 +927,7 @@ void Cmd_ShipExploreIsland::Read
 	}
 }
 void Cmd_ShipExploreIsland::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION);
@@ -980,7 +980,7 @@ void Cmd_ShipSink::Read
 	}
 }
 void Cmd_ShipSink::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_SINK_VERSION);
@@ -1030,7 +1030,7 @@ void Cmd_ShipCancelExpedition::Read
 	}
 }
 void Cmd_ShipCancelExpedition::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION);
@@ -1070,7 +1070,7 @@ void Cmd_SetWarePriority::execute(Game & game)
 #define PLAYER_CMD_SETWAREPRIORITY_VERSION 1
 
 void Cmd_SetWarePriority::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWAREPRIORITY_VERSION);
 
@@ -1146,7 +1146,7 @@ void Cmd_SetWareMaxFill::execute(Game & game)
 #define PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION 1
 
 void Cmd_SetWareMaxFill::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION);
 
@@ -1201,7 +1201,7 @@ Cmd_ChangeTargetQuantity::Cmd_ChangeTargetQuantity
 {}
 
 void Cmd_ChangeTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	PlayerCommand::Write(fw, egbase, mos);
 	fw.Unsigned32(economy());
@@ -1260,7 +1260,7 @@ void Cmd_SetWareTargetQuantity::execute(Game & game)
 #define PLAYER_CMD_SETWARETARGETQUANTITY_VERSION 2
 
 void Cmd_SetWareTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWARETARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
@@ -1327,7 +1327,7 @@ void Cmd_ResetWareTargetQuantity::execute(Game & game)
 #define PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION 1
 
 void Cmd_ResetWareTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
@@ -1382,7 +1382,7 @@ void Cmd_SetWorkerTargetQuantity::execute(Game & game)
 #define PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION 2
 
 void Cmd_SetWorkerTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
@@ -1449,7 +1449,7 @@ void Cmd_ResetWorkerTargetQuantity::execute(Game & game)
 #define PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION 1
 
 void Cmd_ResetWorkerTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
@@ -1527,7 +1527,7 @@ void Cmd_ChangeTrainingOptions::Read
 }
 
 void Cmd_ChangeTrainingOptions::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION);
@@ -1584,7 +1584,7 @@ void Cmd_DropSoldier::Read
 }
 
 void Cmd_DropSoldier::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_DROPSOLDIER_VERSION);
@@ -1643,7 +1643,7 @@ void Cmd_ChangeSoldierCapacity::Read
 }
 
 void Cmd_ChangeSoldierCapacity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION);
@@ -1727,7 +1727,7 @@ void Cmd_EnemyFlagAction::Read
 }
 
 void Cmd_EnemyFlagAction::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_ENEMYFLAGACTION_VERSION);
@@ -1771,7 +1771,7 @@ void PlayerMessageCommand::Read
 }
 
 void PlayerMessageCommand::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_MESSAGE_CMD_VERSION);
 	PlayerCommand::Write(fw, egbase, mos);
@@ -1919,7 +1919,7 @@ void Cmd_SetStockPolicy::Read
 }
 
 void Cmd_SetStockPolicy::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned8(PLAYER_CMD_SETSTOCKPOLICY_VERSION);
 	PlayerCommand::Write(fw, egbase, mos);

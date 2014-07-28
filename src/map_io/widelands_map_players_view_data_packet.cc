@@ -1041,7 +1041,7 @@ inline static void write_unseen_immovable
    (file).Write(fs, filename);                                                \
 
 void Map_Players_View_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 	fs.EnsureDirectoryExists("player");
 	const Map & map = egbase.map();

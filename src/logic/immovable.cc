@@ -713,7 +713,7 @@ void Immovable::Loader::load_finish()
 }
 
 void Immovable::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
@@ -1484,7 +1484,7 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 	}
 }
 
-void PlayerImmovable::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+void PlayerImmovable::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	BaseImmovable::save(egbase, mos, fw);
 

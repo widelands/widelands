@@ -30,7 +30,7 @@ namespace Widelands {
  */
 struct Game_Interactive_Player_Data_Packet : public Game_Data_Packet {
 	void Read (FileSystem &, Game &, MapMapObjectLoader * = nullptr) override;
-	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = nullptr) override;
+	void Write(FileSystem &, Game &, MapMapObjectSaver  * = nullptr) override;
 };
 
 }

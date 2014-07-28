@@ -3053,7 +3053,7 @@ MapObject::Loader * Worker::load
  * \warning Do not override this function, override \ref do_save instead.
  */
 void Worker::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Worker);
 	fw.CString(descr().tribe().name());
@@ -3070,7 +3070,7 @@ void Worker::save
  * Override this function in derived classes.
  */
 void Worker::do_save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	Bob::save(egbase, mos, fw);
 

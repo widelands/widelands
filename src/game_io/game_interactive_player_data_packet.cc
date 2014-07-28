@@ -89,7 +89,7 @@ void Game_Interactive_Player_Data_Packet::Read
  * Write Function
  */
 void Game_Interactive_Player_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, MapMapObjectSaver * const)
 {
 	FileWrite fw;
 

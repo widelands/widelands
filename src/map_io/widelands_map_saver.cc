@@ -67,7 +67,7 @@ void Map_Saver::save() {
 	ScopedTimer timer("Map_Saver::save() took %ums");
 
 	delete m_mos;
-	m_mos = new Map_Map_Object_Saver();
+	m_mos = new MapMapObjectSaver();
 
 	// The binary data is saved in an own directory
 	// to keep it hidden from the poor debuggers

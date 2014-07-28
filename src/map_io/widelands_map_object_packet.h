@@ -31,7 +31,7 @@ namespace Widelands {
 
 class Editor_Game_Base;
 class MapMapObjectLoader;
-struct Map_Map_Object_Saver;
+struct MapMapObjectSaver;
 
 /**
  * This data packet contains all \ref Map_Object and derived instances.
@@ -60,7 +60,7 @@ struct Map_Object_Packet {
 
 	void LoadFinish();
 
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Write(FileSystem &, Editor_Game_Base &, MapMapObjectSaver  &);
 };
 
 }

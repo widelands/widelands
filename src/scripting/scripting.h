@@ -36,7 +36,7 @@ namespace Widelands {
 	class Editor_Game_Base;
 	class Game;
 	class MapMapObjectLoader;
-	struct Map_Map_Object_Saver;
+	struct MapMapObjectSaver;
 }
 
 class EditorFactory;
@@ -82,7 +82,7 @@ public:
 	void read_global_env
 		(FileRead &, Widelands::MapMapObjectLoader &, uint32_t);
 	uint32_t write_global_env
-		(FileWrite &, Widelands::Map_Map_Object_Saver &);
+		(FileWrite &, Widelands::MapMapObjectSaver &);
 
 private:
 	std::unique_ptr<GameFactory> m_factory;

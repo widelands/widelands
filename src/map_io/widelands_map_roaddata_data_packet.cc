@@ -216,7 +216,7 @@ void Map_Roaddata_Data_Packet::Read
 
 
 void Map_Roaddata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	FileWrite fw;
 

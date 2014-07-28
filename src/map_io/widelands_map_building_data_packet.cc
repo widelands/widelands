@@ -118,7 +118,7 @@ void Map_Building_Data_Packet::Read
  * Write Function
  */
 void Map_Building_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	FileWrite fw;
 

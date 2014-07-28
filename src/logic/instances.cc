@@ -74,7 +74,7 @@ void Cmd_Destroy_Map_Object::Read
 	}
 }
 void Cmd_Destroy_Map_Object::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
@@ -126,7 +126,7 @@ void Cmd_Act::Read
 	}
 }
 void Cmd_Act::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
@@ -545,7 +545,7 @@ void MapObject::Loader::load_finish()
  * Save the Map_Object to the given file.
  */
 void MapObject::save
-	(Editor_Game_Base &, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base &, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Map_Object);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);

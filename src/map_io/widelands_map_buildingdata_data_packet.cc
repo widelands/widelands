@@ -1166,7 +1166,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 
 
 void Map_Buildingdata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	FileWrite fw;
 
@@ -1283,7 +1283,7 @@ void Map_Buildingdata_Data_Packet::write_partially_finished_building
 	(const Partially_Finished_Building & pfb,
 	 FileWrite              & fw,
 	 Game                   & game,
-	 Map_Map_Object_Saver   & mos)
+	 MapMapObjectSaver   & mos)
 {
 	fw.Unsigned16(CURRENT_PARTIALLYFB_PACKET_VERSION);
 
@@ -1319,7 +1319,7 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 	(const ConstructionSite & constructionsite,
 	 FileWrite              & fw,
 	 Game                   & game,
-	 Map_Map_Object_Saver   & mos)
+	 MapMapObjectSaver   & mos)
 {
 
 	fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
@@ -1333,7 +1333,7 @@ void Map_Buildingdata_Data_Packet::write_dismantlesite
 	(const DismantleSite & dms,
 	 FileWrite              & fw,
 	 Game                   & game,
-	 Map_Map_Object_Saver   & mos)
+	 MapMapObjectSaver   & mos)
 {
 
 	fw.Unsigned16(CURRENT_DISMANTLESITE_PACKET_VERSION);
@@ -1348,7 +1348,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	(const Warehouse      & warehouse,
 	 FileWrite            & fw,
 	 Game                 & game,
-	 Map_Map_Object_Saver & mos)
+	 MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
@@ -1441,7 +1441,7 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	(const MilitarySite   & militarysite,
 	 FileWrite            & fw,
 	 Game                 & game,
-	 Map_Map_Object_Saver & mos)
+	 MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
 	write_productionsite(militarysite, fw, game, mos);
@@ -1488,7 +1488,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	(const ProductionSite & productionsite,
 	 FileWrite            & fw,
 	 Game                 & game,
-	 Map_Map_Object_Saver & mos)
+	 MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_PRODUCTIONSITE_PACKET_VERSION);
 
@@ -1566,7 +1566,7 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	(const TrainingSite   & trainingsite,
 	 FileWrite            & fw,
 	 Game                 & game,
-	 Map_Map_Object_Saver & mos)
+	 MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_TRAININGSITE_PACKET_VERSION);
 

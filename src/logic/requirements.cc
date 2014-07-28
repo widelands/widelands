@@ -54,7 +54,7 @@ void Requirements::Read
 }
 
 void Requirements::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 	const
 {
 	fw.Unsigned16(REQUIREMENTS_VERSION);
@@ -126,7 +126,7 @@ bool RequireOr::check(const MapObject & obj) const
 }
 
 void RequireOr::write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
@@ -171,7 +171,7 @@ bool RequireAnd::check(const MapObject & obj) const
 }
 
 void RequireAnd::write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
@@ -220,7 +220,7 @@ bool RequireAttribute::check(const MapObject & obj) const
 }
 
 void RequireAttribute::write
-	(FileWrite & fw, Editor_Game_Base &, Map_Map_Object_Saver &) const
+	(FileWrite & fw, Editor_Game_Base &, MapMapObjectSaver &) const
 {
 	fw.Unsigned32(at);
 	fw.Signed32(min);

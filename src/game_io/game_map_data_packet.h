@@ -40,13 +40,13 @@ struct Game_Map_Data_Packet : public Game_Data_Packet {
 
 	void Read_Complete(Game &); ///  Loads the rest of the map.
 
-	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = nullptr) override;
+	void Write(FileSystem &, Game &, MapMapObjectSaver  * = nullptr) override;
 
-	Map_Map_Object_Saver  * get_map_object_saver () {return m_mos;}
+	MapMapObjectSaver  * get_map_object_saver () {return m_mos;}
 	MapMapObjectLoader * get_map_object_loader() {return m_mol;}
 
 private:
-	Map_Map_Object_Saver  * m_mos;
+	MapMapObjectSaver  * m_mos;
 	MapMapObjectLoader * m_mol;
 	Map_Saver             * m_wms;
 	WL_Map_Loader         * m_wml;

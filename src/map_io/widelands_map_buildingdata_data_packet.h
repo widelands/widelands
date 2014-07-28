@@ -43,7 +43,7 @@ class Building;
 class Map_Buildingdata_Data_Packet {
 public:
 	void Read(FileSystem&, Editor_Game_Base&, bool, MapMapObjectLoader&);
-	void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);
+	void Write(FileSystem&, Editor_Game_Base&, MapMapObjectSaver&);
 
 private:
 	void read_constructionsite
@@ -66,19 +66,19 @@ private:
 		(Building               &, FileRead  &, Game &, MapMapObjectLoader &);
 
 	void write_constructionsite
-		(const ConstructionSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const ConstructionSite &, FileWrite &, Game &, MapMapObjectSaver  &);
 	void write_dismantlesite
-		(const DismantleSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const DismantleSite &, FileWrite &, Game &, MapMapObjectSaver  &);
 	void write_partially_finished_building
-		(const Partially_Finished_Building &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const Partially_Finished_Building &, FileWrite &, Game &, MapMapObjectSaver  &);
 	void write_warehouse
-		(const Warehouse        &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const Warehouse        &, FileWrite &, Game &, MapMapObjectSaver  &);
 	void write_militarysite
-		(const MilitarySite     &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const MilitarySite     &, FileWrite &, Game &, MapMapObjectSaver  &);
 	void write_trainingsite
-		(const TrainingSite     &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const TrainingSite     &, FileWrite &, Game &, MapMapObjectSaver  &);
 	void write_productionsite
-		(const ProductionSite   &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const ProductionSite   &, FileWrite &, Game &, MapMapObjectSaver  &);
 };
 
 }

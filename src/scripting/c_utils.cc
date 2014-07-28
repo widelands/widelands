@@ -80,12 +80,12 @@ Widelands::MapMapObjectLoader * get_mol(lua_State * const L) {
 	return mol;
 }
 
-Widelands::Map_Map_Object_Saver * get_mos(lua_State * const L) {
+Widelands::MapMapObjectSaver * get_mos(lua_State * const L) {
 	lua_pushstring(L, "mos");
 	lua_gettable(L, LUA_REGISTRYINDEX);
 
-	Widelands::Map_Map_Object_Saver * mos =
-		static_cast<Widelands::Map_Map_Object_Saver *>(lua_touserdata(L, -1));
+	Widelands::MapMapObjectSaver * mos =
+		static_cast<Widelands::MapMapObjectSaver *>(lua_touserdata(L, -1));
 
 	lua_pop(L, 1); // pop this userdata
 
