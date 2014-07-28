@@ -11,7 +11,7 @@ function warehouse_tests:teardown()
 end
 
 function warehouse_tests:test_name()
-   assert_equal("warehouse", self.w.name)
+   assert_equal("warehouse", self.w.descr.name)
 end
 function warehouse_tests:test_type()
    assert_equal("warehouse", self.w.descr.type_name)
