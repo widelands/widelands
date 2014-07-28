@@ -59,7 +59,7 @@ public:
 	// never even be allocated then. But this change can only be done when all
 	// kinds of map objects have suitable default constructors.
 	template<typename T> T & register_object(Serial const n, T & object) {
-		Reverse_Map_Object_Map::const_iterator const existing =
+		ReverseMapObjectMap::const_iterator const existing =
 			m_objects.find(n);
 		if (existing != m_objects.end()) {
 			//delete &object; can not do this
@@ -71,7 +71,7 @@ public:
 	}
 
 	template<typename T> T & get(Serial const serial) {
-		Reverse_Map_Object_Map::iterator const it = m_objects.find(serial);
+		ReverseMapObjectMap::iterator const it = m_objects.find(serial);
 		if (it == m_objects.end())
 			throw game_data_error("not found");
 		else if (upcast(T, result, it->second))
@@ -93,10 +93,10 @@ public:
 	void load_finish_game(Game & g);
 
 private:
-	typedef std::map<Serial, MapObject *> Reverse_Map_Object_Map;
+	typedef std::map<Serial, MapObject *> ReverseMapObjectMap;
 
 	std::map<MapObject *, bool> m_loaded_obj;
-	Reverse_Map_Object_Map m_objects;
+	ReverseMapObjectMap m_objects;
 
 	std::vector<MapObject *> m_schedule_destroy;
 	std::vector<Bob *> m_schedule_act;
