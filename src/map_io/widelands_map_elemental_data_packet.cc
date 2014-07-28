@@ -71,7 +71,7 @@ void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 
 
 void Map_Elemental_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapMapObjectLoader &)
 {
 	Pre_Read(fs, &egbase.map());
 }

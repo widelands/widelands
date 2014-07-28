@@ -34,7 +34,7 @@ namespace Widelands {
 #define FILENAME_SIZE 19
 
 void Map_Players_Messages_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader & mol)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapMapObjectLoader & mol)
 
 {
 	uint32_t      const gametime   = egbase.get_gametime ();

@@ -42,28 +42,28 @@ class Building;
  */
 class Map_Buildingdata_Data_Packet {
 public:
-	void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&);
+	void Read(FileSystem&, Editor_Game_Base&, bool, MapMapObjectLoader&);
 	void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);
 
 private:
 	void read_constructionsite
-		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(ConstructionSite       &, FileRead  &, Game &, MapMapObjectLoader &);
 	void read_dismantlesite
-		(DismantleSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(DismantleSite       &, FileRead  &, Game &, MapMapObjectLoader &);
 	void read_partially_finished_building
-		(Partially_Finished_Building   &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(Partially_Finished_Building   &, FileRead  &, Game &, MapMapObjectLoader &);
 	void read_constructionsite_v1
-		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(ConstructionSite       &, FileRead  &, Game &, MapMapObjectLoader &);
 	void read_warehouse
-		(Warehouse              &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(Warehouse              &, FileRead  &, Game &, MapMapObjectLoader &);
 	void read_militarysite
-		(MilitarySite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(MilitarySite           &, FileRead  &, Game &, MapMapObjectLoader &);
 	void read_trainingsite
-		(TrainingSite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(TrainingSite           &, FileRead  &, Game &, MapMapObjectLoader &);
 	void read_productionsite
-		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(ProductionSite         &, FileRead  &, Game &, MapMapObjectLoader &);
 	void read_formerbuildings_v2
-		(Building               &, FileRead  &, Game &, Map_Map_Object_Loader &);
+		(Building               &, FileRead  &, Game &, MapMapObjectLoader &);
 
 	void write_constructionsite
 		(const ConstructionSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);

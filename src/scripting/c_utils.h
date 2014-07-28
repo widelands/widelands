@@ -30,7 +30,7 @@
 Factory & get_factory(lua_State *);
 Widelands::Game & get_game(lua_State *);
 Widelands::Editor_Game_Base & get_egbase(lua_State *);
-Widelands::Map_Map_Object_Loader * get_mol(lua_State *);
+Widelands::MapMapObjectLoader * get_mol(lua_State *);
 Widelands::Map_Map_Object_Saver * get_mos(lua_State *);
 
 #ifdef __GNUC__

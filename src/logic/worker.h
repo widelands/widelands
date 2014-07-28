@@ -277,7 +277,7 @@ public:
 		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 };
 
 }

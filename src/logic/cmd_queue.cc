@@ -169,7 +169,7 @@ void GameLogicCommand::Write
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader &)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader &)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

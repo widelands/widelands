@@ -174,7 +174,7 @@ void ShippingItem::Loader::load(FileRead & fr)
 		throw game_data_error("unknown ShippingItem version %u", version);
 }
 
-ShippingItem ShippingItem::Loader::get(Map_Map_Object_Loader & mol)
+ShippingItem ShippingItem::Loader::get(MapMapObjectLoader & mol)
 {
 	ShippingItem it;
 	if (m_serial != 0)

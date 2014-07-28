@@ -57,7 +57,7 @@ public:
 
 	// Call these from child classes
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 private:
 	Player_Number m_sender;
@@ -76,7 +76,7 @@ struct Cmd_Bulldoze:public PlayerCommand {
 	Cmd_Bulldoze (StreamRead &);
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_BULLDOZE;}
 
@@ -101,7 +101,7 @@ struct Cmd_Build:public PlayerCommand {
 	Cmd_Build (StreamRead &);
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_BUILD;}
 
@@ -122,7 +122,7 @@ struct Cmd_BuildFlag:public PlayerCommand {
 	Cmd_BuildFlag (StreamRead &);
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_FLAG;}
 
@@ -142,7 +142,7 @@ struct Cmd_BuildRoad:public PlayerCommand {
 	virtual ~Cmd_BuildRoad ();
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_BUILDROAD;}
 
@@ -163,7 +163,7 @@ struct Cmd_FlagAction : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_FLAGACTION;}
 
@@ -184,7 +184,7 @@ struct Cmd_StartStopBuilding : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_STOPBUILDING;}
 
@@ -204,7 +204,7 @@ struct Cmd_MilitarySiteSetSoldierPreference : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_MILITARYSITESETSOLDIERPREFERENCE;}
 
@@ -224,7 +224,7 @@ struct Cmd_StartOrCancelExpedition : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_PORT_START_EXPEDITION;}
 
@@ -249,7 +249,7 @@ struct Cmd_EnhanceBuilding:public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_ENHANCEBUILDING;}
 
@@ -273,7 +273,7 @@ struct Cmd_DismantleBuilding:public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_DISMANTLEBUILDING;}
 
@@ -296,7 +296,7 @@ struct Cmd_EvictWorker : public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_EVICTWORKER;}
 
@@ -317,7 +317,7 @@ struct Cmd_ShipScoutDirection : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SHIP_SCOUT;}
 
@@ -339,7 +339,7 @@ struct Cmd_ShipConstructPort : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SHIP_CONSTRUCT_PORT;}
 
@@ -361,7 +361,7 @@ struct Cmd_ShipExploreIsland : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SHIP_EXPLORE;}
 
@@ -383,7 +383,7 @@ struct Cmd_ShipSink : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SHIP_SINK;}
 
@@ -404,7 +404,7 @@ struct Cmd_ShipCancelExpedition : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SHIP_CANCELEXPEDITION;}
 
@@ -433,7 +433,7 @@ struct Cmd_SetWarePriority : public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SETWAREPRIORITY;}
 
@@ -458,7 +458,7 @@ struct Cmd_SetWareMaxFill : public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SETWAREMAXFILL;}
 
@@ -481,7 +481,7 @@ struct Cmd_ChangeTargetQuantity : public PlayerCommand {
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	Cmd_ChangeTargetQuantity(StreamRead &);
 
@@ -506,7 +506,7 @@ struct Cmd_SetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SETWARETARGETQUANTITY;}
 
@@ -527,7 +527,7 @@ struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_RESETWARETARGETQUANTITY;}
 
@@ -546,7 +546,7 @@ struct Cmd_SetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_SETWORKERTARGETQUANTITY;}
 
@@ -567,7 +567,7 @@ struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_RESETWORKERTARGETQUANTITY;}
 
@@ -590,7 +590,7 @@ struct Cmd_ChangeTrainingOptions : public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_CHANGETRAININGOPTIONS;}
 
@@ -617,7 +617,7 @@ struct Cmd_DropSoldier : public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_DROPSOLDIER;}
 
@@ -640,7 +640,7 @@ struct Cmd_ChangeSoldierCapacity : public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_CHANGESOLDIERCAPACITY;}
 
@@ -663,7 +663,7 @@ struct Cmd_EnemyFlagAction : public PlayerCommand {
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_ENEMYFLAGACTION;}
 
@@ -686,7 +686,7 @@ struct PlayerMessageCommand : public PlayerCommand {
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	PlayerMessageCommand(StreamRead &);
 
@@ -747,7 +747,7 @@ struct Cmd_SetStockPolicy : PlayerCommand {
 	// Savegame functions
 	Cmd_SetStockPolicy();
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 private:
 	Serial m_warehouse;

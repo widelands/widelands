@@ -52,7 +52,7 @@ void Cmd_Destroy_Map_Object::execute(Game & game)
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
 void Cmd_Destroy_Map_Object::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -102,7 +102,7 @@ void Cmd_Act::execute(Game & game)
 
 #define CMD_ACT_VERSION 1
 void Cmd_Act::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

@@ -2025,7 +2025,7 @@ void L_MapObject::__unpersist(lua_State* L) {
 	if (!idx)
 		m_ptr = nullptr;
 	else {
-		Map_Map_Object_Loader& mol = *get_mol(L);
+		MapMapObjectLoader& mol = *get_mol(L);
 		m_ptr = &mol.get<Map_Object>(idx);
 	}
 }

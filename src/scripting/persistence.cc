@@ -223,7 +223,7 @@ uint32_t persist_object
 
 void unpersist_object
 	(lua_State * L,
-	 FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	 FileRead & fr, Widelands::MapMapObjectLoader & mol,
 	 uint32_t size)
 {
 	assert(lua_gettop(L) == 0); // S:

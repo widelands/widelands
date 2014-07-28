@@ -617,7 +617,7 @@ void WareInstance::save
 }
 
 MapObject::Loader * WareInstance::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	try {
 		uint8_t version = fr.Unsigned8();

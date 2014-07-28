@@ -31,7 +31,7 @@ namespace Widelands {
 class Economy;
 class Editor_Game_Base;
 class Game;
-class Map_Map_Object_Loader;
+class MapMapObjectLoader;
 class PortDock;
 class Request;
 class WareInstance;
@@ -77,7 +77,7 @@ public:
 	// packet, and there in the warehouse data packet.
 	void load
 		(uint32_t warehouse_packet_version, Warehouse& warehouse,
-		 FileRead& fr, Game& game, Map_Map_Object_Loader& mol);
+		 FileRead& fr, Game& game, MapMapObjectLoader& mol);
 	void save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos);
 
 private:

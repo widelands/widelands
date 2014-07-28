@@ -324,7 +324,7 @@ void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 }
 
 void Transfer::read_pointers
-	(Map_Map_Object_Loader & mol, const Widelands::Transfer::ReadData & rd)
+	(MapMapObjectLoader & mol, const Widelands::Transfer::ReadData & rd)
 {
 	if (rd.destination)
 		m_destination = &mol.get<PlayerImmovable>(rd.destination);

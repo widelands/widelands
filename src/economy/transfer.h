@@ -27,7 +27,7 @@ class Game;
 struct PlayerImmovable;
 class Request;
 class WareInstance;
-class Map_Map_Object_Loader;
+class MapMapObjectLoader;
 struct Map_Map_Object_Saver;
 class Worker;
 
@@ -70,7 +70,7 @@ struct Transfer {
 	};
 
 	void read(FileRead & fr, ReadData & rd);
-	void read_pointers(Map_Map_Object_Loader & mol, const ReadData & rd);
+	void read_pointers(MapMapObjectLoader & mol, const ReadData & rd);
 	void write(Map_Map_Object_Saver & mos, FileWrite & fw);
 
 private:

@@ -254,7 +254,7 @@ void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos)
 }
 
 
-void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
+void WaresQueue::Read(FileRead & fr, Game & game, MapMapObjectLoader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {

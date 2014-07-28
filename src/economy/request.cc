@@ -106,7 +106,7 @@ Request::~Request()
  * them through the data in the file
  */
 void Request::Read
-	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Game & game, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const version = fr.Unsigned16();

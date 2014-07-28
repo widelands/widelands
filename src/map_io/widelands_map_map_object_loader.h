@@ -41,7 +41,7 @@ class Editor_Game_Base;
  *   - keep track of map objects on the map (to be loaded)
  *   - translate file index pointers into Map_Objects
  */
-class Map_Map_Object_Loader {
+class MapMapObjectLoader {
 public:
 	bool is_object_known(uint32_t);
 

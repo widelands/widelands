@@ -46,7 +46,7 @@ void Cmd_LuaScript::execute (Game & game) {
 
 #define CMD_LUASCRIPT_VERSION 1
 void Cmd_LuaScript::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

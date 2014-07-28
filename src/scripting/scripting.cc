@@ -336,7 +336,7 @@ void LuaGameInterface::write_coroutine(FileWrite& fw, LuaCoroutine* cr) {
 
 
 void LuaGameInterface::read_global_env
-	(FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	(FileRead & fr, Widelands::MapMapObjectLoader & mol,
 	 uint32_t size)
 {
 	// Clean out the garbage before loading.

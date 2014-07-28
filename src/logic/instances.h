@@ -44,7 +44,7 @@ namespace UI {struct Tab_Panel;}
 namespace Widelands {
 
 class EditorCategory;
-class Map_Map_Object_Loader;
+class MapMapObjectLoader;
 class Player;
 struct Path;
 
@@ -290,7 +290,7 @@ public:
 	 */
 	struct Loader {
 		Editor_Game_Base      * m_egbase;
-		Map_Map_Object_Loader * m_mol;
+		MapMapObjectLoader * m_mol;
 		MapObject            * m_object;
 
 	protected:
@@ -300,7 +300,7 @@ public:
 		virtual ~Loader() {}
 
 		void init
-			(Editor_Game_Base & e, Map_Map_Object_Loader & m, MapObject & object)
+			(Editor_Game_Base & e, MapMapObjectLoader & m, MapObject & object)
 		{
 			m_egbase = &e;
 			m_mol    = &m;
@@ -308,7 +308,7 @@ public:
 		}
 
 		Editor_Game_Base      & egbase    () {return *m_egbase;}
-		Map_Map_Object_Loader & mol   () {return *m_mol;}
+		MapMapObjectLoader & mol   () {return *m_mol;}
 		MapObject            * get_object() {return m_object;}
 		template<typename T> T & get() {
 			return ref_cast<T, MapObject>(*m_object);
@@ -469,7 +469,7 @@ struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	void execute (Game &) override;
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
@@ -484,7 +484,7 @@ struct Cmd_Act : public GameLogicCommand {
 	void execute (Game &) override;
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_ACT;}
 

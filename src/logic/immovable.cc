@@ -757,7 +757,7 @@ void Immovable::save
 }
 
 MapObject::Loader * Immovable::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol,
+	(Editor_Game_Base & egbase, MapMapObjectLoader & mol,
 	 FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
 {
 	std::unique_ptr<Loader> loader(new Loader);

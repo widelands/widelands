@@ -34,7 +34,7 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &)
+	 MapMapObjectLoader &)
 {
 	if (skip)
 		return;

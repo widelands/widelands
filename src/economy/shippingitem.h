@@ -30,7 +30,7 @@ namespace Widelands {
 
 class Economy;
 class Game;
-class Map_Map_Object_Loader;
+class MapMapObjectLoader;
 struct Map_Map_Object_Saver;
 class MapObject;
 class PortDock;
@@ -59,7 +59,7 @@ struct ShippingItem {
 
 	struct Loader {
 		void load(FileRead & fr);
-		ShippingItem get(Map_Map_Object_Loader & mol);
+		ShippingItem get(MapMapObjectLoader & mol);
 
 	private:
 		uint32_t m_serial;

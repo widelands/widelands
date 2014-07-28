@@ -34,7 +34,7 @@ namespace Widelands {
 
 
 void Game_Player_Info_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
+	(FileSystem & fs, Game & game, MapMapObjectLoader *)
 {
 	try {
 		FileRead fr;

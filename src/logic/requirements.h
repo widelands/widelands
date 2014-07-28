@@ -35,7 +35,7 @@ namespace Widelands {
 
 class MapObject;
 class Editor_Game_Base;
-class Map_Map_Object_Loader;
+class MapMapObjectLoader;
 struct Map_Map_Object_Saver;
 
 struct RequirementsStorage;
@@ -89,7 +89,7 @@ public:
 	bool check(const MapObject &) const;
 
 	// For Save/Load Games
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &);
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) const;
 
 private:
@@ -114,13 +114,13 @@ enum {
 struct RequirementsStorage {
 	typedef
 		Requirements (*Reader)
-			(FileRead &, Editor_Game_Base &, Map_Map_Object_Loader &);
+			(FileRead &, Editor_Game_Base &, MapMapObjectLoader &);
 
 	RequirementsStorage(uint32_t _id, Reader reader);
 	uint32_t id() const;
 
 	static Requirements read
-		(FileRead &, Editor_Game_Base &, Map_Map_Object_Loader &);
+		(FileRead &, Editor_Game_Base &, MapMapObjectLoader &);
 
 private:
 	typedef std::map<uint32_t, RequirementsStorage *> StorageMap;

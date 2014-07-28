@@ -35,7 +35,7 @@ Game_Map_Data_Packet::~Game_Map_Data_Packet() {
 }
 
 void Game_Map_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, MapMapObjectLoader * const)
 {
 	if (!fs.FileExists("map") || !fs.IsDirectory("map"))
 		throw game_data_error("no map");

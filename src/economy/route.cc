@@ -102,7 +102,7 @@ void Route::load(LoadData & data, FileRead & fr)
  * load_pointers phase of loading: This is responsible for filling
  * in the \ref Flag pointers. Must be called after \ref load.
  */
-void Route::load_pointers(const LoadData & data, Map_Map_Object_Loader & mol) {
+void Route::load_pointers(const LoadData & data, MapMapObjectLoader & mol) {
 	for (uint32_t i = 0; i < data.flags.size(); ++i) {
 		uint32_t const flag_serial = data.flags.size();
 		try {

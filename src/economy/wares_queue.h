@@ -28,7 +28,7 @@ namespace Widelands {
 class Economy;
 class Editor_Game_Base;
 class Game;
-class Map_Map_Object_Loader;
+class MapMapObjectLoader;
 struct Map_Map_Object_Saver;
 class Player;
 class Request;
@@ -67,7 +67,7 @@ public:
 
 	Player & owner() const {return m_owner.owner();}
 
-	void Read (FileRead  &, Game &, Map_Map_Object_Loader &);
+	void Read (FileRead  &, Game &, MapMapObjectLoader &);
 	void Write(FileWrite &, Game &, Map_Map_Object_Saver  &);
 
 private:

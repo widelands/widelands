@@ -400,7 +400,7 @@ const BobProgramBase * Critter_Bob::Loader::get_program
 }
 
 MapObject::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
-                                      Map_Map_Object_Loader& mol,
+												  MapMapObjectLoader& mol,
                                       FileRead& fr,
                                       const OneWorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);

@@ -3021,7 +3021,7 @@ Worker::Loader * Worker::create_loader()
  * the appropriate actual load functions are called.
  */
 MapObject::Loader * Worker::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	try {
 		// header has already been read by caller

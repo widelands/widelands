@@ -33,7 +33,7 @@ namespace Widelands {
 
 
 void Game_Cmd_Queue_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const ol)
+	(FileSystem & fs, Game & game, MapMapObjectLoader * const ol)
 {
 	try {
 		FileRead fr;

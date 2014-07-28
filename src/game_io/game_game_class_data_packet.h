@@ -29,7 +29,7 @@ namespace Widelands {
  * a game for a user (for example in a listbox)
  */
 struct Game_Game_Class_Data_Packet : public Game_Data_Packet {
-	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = nullptr) override;
+	void Read (FileSystem &, Game &, MapMapObjectLoader * = nullptr) override;
 	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = nullptr) override;
 };
 

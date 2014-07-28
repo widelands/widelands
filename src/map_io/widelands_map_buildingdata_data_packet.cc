@@ -70,7 +70,7 @@ void Map_Buildingdata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &       mol)
+	 MapMapObjectLoader &       mol)
 {
 	if (skip)
 		return;
@@ -256,7 +256,7 @@ void Map_Buildingdata_Data_Packet::Read
 }
 
 void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
-	(Building& b, FileRead&, Game&, Map_Map_Object_Loader&)
+	(Building& b, FileRead&, Game&, MapMapObjectLoader&)
 {
 	const Tribe_Descr & t = b.descr().tribe();
 	Building_Index b_idx = t.building_index(b.descr().name());
@@ -299,7 +299,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 	(Partially_Finished_Building  & pfb,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -360,7 +360,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 	(ConstructionSite      & constructionsite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -400,7 +400,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 	(ConstructionSite      & constructionsite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	const Tribe_Descr & tribe = constructionsite.descr().tribe();
 	constructionsite.m_building =
@@ -460,7 +460,7 @@ void Map_Buildingdata_Data_Packet::read_dismantlesite
 	(DismantleSite         & dms,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -481,7 +481,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 	(Warehouse             & warehouse,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -750,7 +750,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 	(MilitarySite          & militarysite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -855,7 +855,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 	(ProductionSite        & productionsite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -1075,7 +1075,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 	(TrainingSite          & trainingsite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();

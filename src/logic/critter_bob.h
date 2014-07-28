@@ -78,7 +78,7 @@ public:
 	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static MapObject::Loader*
-	load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
+	load(Editor_Game_Base&, MapMapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
 
 protected:
 	struct Loader : Bob::Loader {

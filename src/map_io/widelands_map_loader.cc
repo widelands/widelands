@@ -110,7 +110,7 @@ int32_t WL_Map_Loader::load_map_complete
 
 	preload_map(scenario);
 	m_map.set_size(m_map.m_width, m_map.m_height);
-	m_mol.reset(new Map_Map_Object_Loader());
+	m_mol.reset(new MapMapObjectLoader());
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN

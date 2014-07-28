@@ -48,7 +48,7 @@ Map_Object_Packet::~Map_Object_Packet() {
 
 
 void Map_Object_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol,
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectLoader & mol,
 	 const OneWorldLegacyLookupTable& lookup_table)
 {
 	try {

@@ -36,7 +36,7 @@ void Cmd_CalculateStatistics::execute (Game & game) {
 
 #define CMD_CALCULATE_STATISTICS_VERSION 1
 void Cmd_CalculateStatistics::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

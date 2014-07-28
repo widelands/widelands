@@ -750,7 +750,7 @@ void Fleet::Loader::load_finish()
 }
 
 MapObject::Loader * Fleet::load
-		(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+		(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
