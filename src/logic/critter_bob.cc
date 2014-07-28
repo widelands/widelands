@@ -63,7 +63,7 @@ std::vector<std::string> section_to_strings(Section* section) {
 
 // Sets the dir animations in 'anims' with the animations
 // '<prefix>_(ne|e|se|sw|w|nw)' which must be defined in 'mo'.
-void assign_diranimation(DirAnimations* anims, Map_Object_Descr& mo, const std::string& prefix) {
+void assign_diranimation(DirAnimations* anims, MapObjectDescr& mo, const std::string& prefix) {
 	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir - 1]));

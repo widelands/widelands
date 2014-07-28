@@ -77,7 +77,7 @@ BaseImmovable::Size string_to_size(const std::string& size) {
 }  // namespace
 
 
-BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
+BaseImmovable::BaseImmovable(const MapObjectDescr & mo_descr) :
 Map_Object(&mo_descr)
 {}
 
@@ -227,7 +227,7 @@ Immovable_Descr::Immovable_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const * const owner_tribe)
 :
-	Map_Object_Descr(MapObjectType::IMMOVABLE, _name, _descname),
+	MapObjectDescr(MapObjectType::IMMOVABLE, _name, _descname),
 	m_size          (BaseImmovable::NONE),
 	m_owner_tribe   (owner_tribe)
 {
@@ -284,7 +284,7 @@ Immovable_Descr::Immovable_Descr
 }
 
 Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world) :
-	Map_Object_Descr(
+	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), table.get_string("descname")),
 	m_size(BaseImmovable::NONE),
 	m_owner_tribe(nullptr)  // Can only parse world immovables for now.
@@ -636,7 +636,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	char const * const animname = fr.CString();
 	try {
 		imm.m_anim = imm.descr().get_animation(animname);
-	} catch (const Map_Object_Descr::Animation_Nonexistent &) {
+	} catch (const MapObjectDescr::Animation_Nonexistent &) {
 		imm.m_anim = imm.descr().main_animation();
 		log
 			("Warning: (%s) Animation \"%s\" not found, using animation %s).\n",
@@ -1323,7 +1323,7 @@ PlayerImmovable IMPLEMENTATION
 /**
  * Zero-initialize
 */
-PlayerImmovable::PlayerImmovable(const Map_Object_Descr & mo_descr) :
+PlayerImmovable::PlayerImmovable(const MapObjectDescr & mo_descr) :
 	BaseImmovable(mo_descr), m_owner(nullptr), m_economy(nullptr)
 {}
 

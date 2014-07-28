@@ -159,7 +159,7 @@ void GameRenderer::draw_objects()
 				const Player::Field & f_pl = m_player->fields()[map.get_index(coords[F], map.get_width())];
 				const Player * owner = owner_number[F] ? m_egbase->get_player(owner_number[F]) : nullptr;
 				if
-					(const Map_Object_Descr * const map_object_descr =
+					(const MapObjectDescr * const map_object_descr =
 						f_pl.map_object_descr[TCoords<>::None])
 				{
 					if
@@ -170,10 +170,10 @@ void GameRenderer::draw_objects()
 						uint32_t anim_idx;
 						try {
 							anim_idx = csinf.becomes->get_animation("build");
-						} catch (Map_Object_Descr::Animation_Nonexistent &) {
+						} catch (MapObjectDescr::Animation_Nonexistent &) {
 							try {
 								anim_idx = csinf.becomes->get_animation("unoccupied");
-							} catch (Map_Object_Descr::Animation_Nonexistent) {
+							} catch (MapObjectDescr::Animation_Nonexistent) {
 								anim_idx = csinf.becomes->get_animation("idle");
 							}
 						}
@@ -201,7 +201,7 @@ void GameRenderer::draw_objects()
 							uint32_t a;
 							try {
 								a = csinf.was->get_animation("unoccupied");
-							} catch (Map_Object_Descr::Animation_Nonexistent &) {
+							} catch (MapObjectDescr::Animation_Nonexistent &) {
 								a = csinf.was->get_animation("idle");
 							}
 							m_dst->drawanimrect
@@ -214,7 +214,7 @@ void GameRenderer::draw_objects()
 						uint32_t pic;
 						try {
 							pic = building->get_animation("unoccupied");
-						} catch (Map_Object_Descr::Animation_Nonexistent &) {
+						} catch (MapObjectDescr::Animation_Nonexistent &) {
 							pic = building->get_animation("idle");
 						}
 						m_dst->drawanim(pos[F], pic, 0, owner);

@@ -51,7 +51,7 @@ struct BobProgramBase {
 class Bob;
 
 // Description for the Bob class.
-class BobDescr : public Map_Object_Descr {
+class BobDescr : public MapObjectDescr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 

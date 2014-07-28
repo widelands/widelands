@@ -104,7 +104,7 @@ namespace Widelands {
 
 struct Map_Object_Data {
 	Map_Object_Data() : map_object_descr(nullptr) {}
-	const Map_Object_Descr                     * map_object_descr;
+	const MapObjectDescr                     * map_object_descr;
 	Player::Constructionsite_Information         csi;
 };
 
@@ -451,7 +451,7 @@ void Map_Players_View_Data_Packet::Read
 						assert(f_player_field.owner < 0x20);
 
 						//  map_object_descr
-						const Map_Object_Descr * map_object_descr;
+						const MapObjectDescr * map_object_descr;
 						if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 							map_object_descr = &base_immovable->descr();
 							if (Road::IsRoadDescr(map_object_descr))
@@ -728,7 +728,7 @@ void Map_Players_View_Data_Packet::Read
 					assert(owner <= nr_players);
 
 					//  map_object_descr
-					const Map_Object_Descr * map_object_descr;
+					const MapObjectDescr * map_object_descr;
 					if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
 						if (Road::IsRoadDescr(map_object_descr))
@@ -989,7 +989,7 @@ inline static void write_unseen_immovable
 	(Map_Object_Data const * map_object_data,
 	 FileWrite & immovable_kinds_file, FileWrite & immovables_file)
 {
-	Map_Object_Descr const * const map_object_descr = map_object_data->map_object_descr;
+	MapObjectDescr const * const map_object_descr = map_object_data->map_object_descr;
 	const Player::Constructionsite_Information & csi = map_object_data->csi;
 	assert(!Road::IsRoadDescr(map_object_descr));
 	uint8_t immovable_kind = 255;

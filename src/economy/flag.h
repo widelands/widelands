@@ -33,10 +33,10 @@ class Request;
 struct Road;
 class WareInstance;
 
-class Flag_Descr : public Map_Object_Descr {
+class Flag_Descr : public MapObjectDescr {
 public:
 	Flag_Descr(char const* const _name, char const* const _descname)
-		: Map_Object_Descr(MapObjectType::FLAG, _name, _descname) {
+		: MapObjectDescr(MapObjectType::FLAG, _name, _descname) {
 	}
 	~Flag_Descr() override {
 	}

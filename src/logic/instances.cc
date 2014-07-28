@@ -226,14 +226,14 @@ Map_Object_Descr IMPLEMENTATION
 ==============================================================================
 */
 
-uint32_t Map_Object_Descr::s_dyn_attribhigh =
+uint32_t MapObjectDescr::s_dyn_attribhigh =
 	Map_Object::HIGHEST_FIXED_ATTRIBUTE;
-Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
+MapObjectDescr::AttribMap MapObjectDescr::s_dyn_attribs;
 
 /**
  * Add this animation for this map object under this name
  */
-bool Map_Object_Descr::is_animation_known(const std::string & animname) const {
+bool MapObjectDescr::is_animation_known(const std::string & animname) const {
 	for (const std::pair<std::string, uint32_t>& anim : m_anims) {
 		if (anim.first == animname) {
 			return true;
@@ -242,7 +242,7 @@ bool Map_Object_Descr::is_animation_known(const std::string & animname) const {
 	return false;
 }
 
-void Map_Object_Descr::add_animation
+void MapObjectDescr::add_animation
 	(const std::string & animname, uint32_t const anim)
 {
 #ifndef NDEBUG
@@ -256,7 +256,7 @@ void Map_Object_Descr::add_animation
 	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }
 
-std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
+std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
 	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
 		if (temp_anim.second == anim) {
@@ -273,7 +273,7 @@ std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
 /**
  * Search for the attribute in the attribute list
  */
-bool Map_Object_Descr::has_attribute(uint32_t const attr) const {
+bool MapObjectDescr::has_attribute(uint32_t const attr) const {
 	for (const uint32_t& attrib : m_attributes) {
 		if (attrib == attr) {
 			return true;
@@ -286,13 +286,13 @@ bool Map_Object_Descr::has_attribute(uint32_t const attr) const {
 /**
  * Add an attribute to the attribute list if it's not already there
  */
-void Map_Object_Descr::add_attribute(uint32_t const attr)
+void MapObjectDescr::add_attribute(uint32_t const attr)
 {
 	if (!has_attribute(attr))
 		m_attributes.push_back(attr);
 }
 
-void Map_Object_Descr::add_attributes(const std::vector<std::string>& attributes,
+void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
                                       const std::set<uint32_t>& allowed_special) {
 	for (const std::string& attribute : attributes) {
 		uint32_t const attrib = get_attribute_id(attribute);
@@ -309,7 +309,7 @@ void Map_Object_Descr::add_attributes(const std::vector<std::string>& attributes
  * Lookup an attribute by name. If the attribute name hasn't been encountered
  * before, we add it to the map.
  */
-uint32_t Map_Object_Descr::get_attribute_id(const std::string & name) {
+uint32_t MapObjectDescr::get_attribute_id(const std::string & name) {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
 	if (it != s_dyn_attribs.end())
@@ -332,7 +332,7 @@ uint32_t Map_Object_Descr::get_attribute_id(const std::string & name) {
  * Lookup an attribute by id. If the attribute isn't found,
  * returns an emtpy string.
  */
-std::string Map_Object_Descr::get_attribute_name(uint32_t id) {
+std::string MapObjectDescr::get_attribute_name(uint32_t id) {
 	for
 		(AttribMap::iterator iter = s_dyn_attribs.begin();
 		 iter != s_dyn_attribs.end(); ++iter)
@@ -354,7 +354,7 @@ Map_Object IMPLEMENTATION
 /**
  * Zero-initialize a map object
  */
-Map_Object::Map_Object(const Map_Object_Descr * const the_descr) :
+Map_Object::Map_Object(const MapObjectDescr * const the_descr) :
 m_descr(the_descr), m_serial(0), m_logsink(nullptr)
 {}
 

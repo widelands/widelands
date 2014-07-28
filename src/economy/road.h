@@ -31,10 +31,10 @@ namespace Widelands {
 struct Carrier;
 class Request;
 
-class Road_Descr : public Map_Object_Descr {
+class Road_Descr : public MapObjectDescr {
 public:
 	Road_Descr(char const* const _name, char const* const _descname)
-		: Map_Object_Descr(MapObjectType::ROAD, _name, _descname) {
+		: MapObjectDescr(MapObjectType::ROAD, _name, _descname) {
 	}
 	~Road_Descr() override {}
 
@@ -63,7 +63,7 @@ struct Road : public PlayerImmovable {
 
 	const Road_Descr& descr() const;
 
-	static bool IsRoadDescr(Map_Object_Descr const *);
+	static bool IsRoadDescr(MapObjectDescr const *);
 
 	enum FlagId {
 		FlagStart = 0,

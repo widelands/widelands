@@ -33,10 +33,10 @@ class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
 
-class Fleet_Descr : public Map_Object_Descr {
+class Fleet_Descr : public MapObjectDescr {
 public:
 	Fleet_Descr(char const* const _name, char const* const _descname)
-		: Map_Object_Descr(MapObjectType::FLEET, _name, _descname) {
+		: MapObjectDescr(MapObjectType::FLEET, _name, _descname) {
 	}
 	~Fleet_Descr() override {
 	}

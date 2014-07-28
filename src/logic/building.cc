@@ -56,7 +56,7 @@ Building_Descr::Building_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _descr)
 	:
-	Map_Object_Descr(type, _name, _descname),
+	MapObjectDescr(type, _name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
 	m_icon     (nullptr),

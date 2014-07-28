@@ -257,7 +257,7 @@ void DismantleSite::draw
 	uint32_t anim_idx;
 	try {
 		anim_idx = m_building->get_animation("unoccupied");
-	} catch (Map_Object_Descr::Animation_Nonexistent &) {
+	} catch (MapObjectDescr::Animation_Nonexistent &) {
 		anim_idx = m_building->get_animation("idle");
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);

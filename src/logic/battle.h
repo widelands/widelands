@@ -24,10 +24,10 @@
 namespace Widelands {
 class Soldier;
 
-class Battle_Descr : public Map_Object_Descr {
+class Battle_Descr : public MapObjectDescr {
 public:
 	Battle_Descr(char const* const _name, char const* const _descname)
-		: Map_Object_Descr(MapObjectType::BATTLE, _name, _descname) {
+		: MapObjectDescr(MapObjectType::BATTLE, _name, _descname) {
 	}
 	~Battle_Descr() override {
 	}

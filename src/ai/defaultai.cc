@@ -511,7 +511,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	// Is this a general update or just for military consideration
 	// (second is used in check_militarysites)
 	if (!military) {
-		int32_t const tree_attr = Map_Object_Descr::get_attribute_id("tree");
+		int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
 		field.reachable = false;
 		field.preferred_ = false;
 		field.enemy_nearby_ = false;
@@ -598,7 +598,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		// stones are not renewable, we will count them only if previous state si nonzero
 		if (field.stones_nearby_ > 0) {
 
-			int32_t const stone_attr = Map_Object_Descr::get_attribute_id("granite");
+			int32_t const stone_attr = MapObjectDescr::get_attribute_id("granite");
 			field.stones_nearby_ = 0;
 
 			for (uint32_t j = 0; j < immovables.size(); ++j) {
@@ -1835,7 +1835,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	if (site.bo->need_trees_) {
 		if (map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		                        nullptr,
-		                        FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree"))) <
+										FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree"))) <
 		    6) {
 			// Do not destruct the last lumberjack - perhaps some small trees are
 			// near, a forester will plant some trees or some new trees will seed
@@ -1883,7 +1883,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		       nullptr,
-				 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("granite"))) == 0) {
+				 FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.

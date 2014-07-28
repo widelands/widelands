@@ -88,14 +88,14 @@ std::string to_string(MapObjectType type);
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
-struct Map_Object_Descr {
+struct MapObjectDescr {
 
-	Map_Object_Descr(const MapObjectType type,
+	MapObjectDescr(const MapObjectType type,
 	                 const std::string& init_name,
 	                 const std::string& init_descname)
 	   : m_type(type), m_name(init_name), m_descname(init_descname) {
 	}
-	virtual ~Map_Object_Descr() {m_anims.clear();}
+	virtual ~MapObjectDescr() {m_anims.clear();}
 
 	const std::string &     name() const {return m_name;}
 	const std::string &     descname() const {return m_descname;}
@@ -145,7 +145,7 @@ private:
 	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
 	static AttribMap  s_dyn_attribs;
 
-	DISALLOW_COPY_AND_ASSIGN(Map_Object_Descr);
+	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };
 
 
@@ -213,7 +213,7 @@ public:
 	virtual void load_finish(Editor_Game_Base &) {}
 
 protected:
-	Map_Object(Map_Object_Descr const * descr);
+	Map_Object(MapObjectDescr const * descr);
 	virtual ~Map_Object() {}
 
 public:
@@ -340,7 +340,7 @@ protected:
 	void molog(char const * fmt, ...) const
 		__attribute__((format(printf, 2, 3)));
 
-	const Map_Object_Descr * m_descr;
+	const MapObjectDescr * m_descr;
 	Serial                   m_serial;
 	LogSink                * m_logsink;
 

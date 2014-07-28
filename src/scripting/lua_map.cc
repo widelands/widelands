@@ -540,7 +540,7 @@ int do_set_soldiers
  */
 #define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
 	(L, new lua_klass(static_cast<const klass *>(descr)))
-int upcasted_map_object_descr_to_lua(lua_State* L, const Map_Object_Descr* const descr) {
+int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const descr) {
 	assert(descr != nullptr);
 
 	if (descr->type() >= MapObjectType::BUILDING)
@@ -571,7 +571,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Map_Object_Descr* const
 			case MapObjectType::SOLDIER:
 				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
 			default:
-				return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
+				return CAST_TO_LUA(MapObjectDescr, L_MapObjectDescription);
 		}
 	}
 }
@@ -2078,7 +2078,7 @@ int L_MapObject::get_name(lua_State * L) {
 int L_MapObject::get_descr(lua_State * L) {
 	//TODO(GunChleoc): Flag_Descr would be nice for getting the type of immovables,
 	// at the moment the type for these can be faked by using their name instead
-	const Map_Object_Descr* desc = &get(L, get_egbase(L))->descr();
+	const MapObjectDescr* desc = &get(L, get_egbase(L))->descr();
 	assert(desc != nullptr);
 
 	if (is_a(MilitarySite_Descr, desc)) {
@@ -2099,7 +2099,7 @@ int L_MapObject::get_descr(lua_State * L) {
 	else if (is_a(Building_Descr, desc)) {
 		return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
 	}
-	return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
+	return CAST_TO_LUA(MapObjectDescr, L_MapObjectDescription);
 }
 
 #undef CAST_TO_LUA
@@ -2176,7 +2176,7 @@ int L_MapObject::has_attribute(lua_State * L) {
 
 	// Check if object has the attribute
 	std::string attrib = luaL_checkstring(L, 2);
-	if (obj->has_attribute(Map_Object_Descr::get_attribute_id(attrib)))
+	if (obj->has_attribute(MapObjectDescr::get_attribute_id(attrib)))
 		lua_pushboolean(L, true);
 	else
 		lua_pushboolean(L, false);

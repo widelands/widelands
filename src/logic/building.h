@@ -58,7 +58,7 @@ class Building;
 /*
  * Common to all buildings!
  */
-struct Building_Descr : public Map_Object_Descr {
+struct Building_Descr : public MapObjectDescr {
 	typedef std::vector<Building_Index> FormerBuildings;
 
 	Building_Descr

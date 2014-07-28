@@ -1034,7 +1034,7 @@ void Player::rediscover_node
 
 		{ //  map_object_descr[TCoords::None]
 
-			const Map_Object_Descr * map_object_descr;
+			const MapObjectDescr * map_object_descr;
 			field.constructionsite.becomes = nullptr;
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();

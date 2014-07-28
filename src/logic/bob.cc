@@ -54,7 +54,7 @@ BobDescr::BobDescr(MapObjectType type, const std::string& init_name,
                   const std::string& init_descname,
                   Tribe_Descr const* tribe)
 	:
-	Map_Object_Descr(type, init_name, init_descname),
+	MapObjectDescr(type, init_name, init_descname),
 	owner_tribe_    (tribe)
 {
 }
