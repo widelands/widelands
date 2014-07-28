@@ -1,8 +1,7 @@
 help=_Blackroots are a special kind of root produced in blackroot farms and processed in mills. The Atlanteans like their strong taste and use their flour for making bread.
 
+default_target_quantity=20 # currently not used
 preciousness=10
-
-# No description yet
 
 [idle]
 pics=idle.png

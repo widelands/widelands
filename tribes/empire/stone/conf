@@ -1,6 +1,6 @@
 help=_Stones are a basic building material of the Empire. They are produced in quarries and marble mines.
 
-preciousness=10
+preciousness=30
 
 # The roman workers know how to work on stones.
 # These stones will last for long time.
