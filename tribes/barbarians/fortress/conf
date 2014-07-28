@@ -10,6 +10,11 @@ attack_string=_Your fortress is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the fortress.
 defeated_you_string=_Your soldiers defeated the enemy at the fortress.
 
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true
+
 [buildcost]
 blackwood=9
 log=5
@@ -22,6 +27,11 @@ log=2
 raw_stone=2
 grout=1
 
+[idle]
+pics=fortress_i_??.png
+hotspot=103 80
+fps=10
+
 [build]
 pics=fortress_b_??.png
 hotspot=103 80
@@ -29,13 +39,3 @@ hotspot=103 80
 [unoccupied]
 pics=fortress_u_??.png
 hotspot=103 80
-
-[idle]
-pics=fortress_i_??.png
-hotspot=103 80
-fps=10
-
-[aihints]
-expansion=true
-fighting=true
-mountain_conqueror=true

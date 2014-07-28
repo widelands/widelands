@@ -10,6 +10,9 @@ attack_string=_Your small tower is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the small tower.
 defeated_you_string=_Your soldiers defeated the enemy at the small tower.
 
+[aihints]
+fighting=true
+
 [buildcost]
 log=1
 planks=2
@@ -22,6 +25,3 @@ stone=1
 [idle]
 pics=small_tower_i_??.png
 hotspot=42 65
-
-[aihints]
-fighting=true

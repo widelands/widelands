@@ -26,16 +26,16 @@ consume=wool
 animate=working 15000 # unsure of balancing CW
 produce=cloth
 
+[idle]
+pics=weaving_mill_i_??.png  # ???
+hotspot=65 62
+
 [build]
 pics=weaving_mill_b_??.png  # ???
 hotspot=65 62
 
 [unoccupied]
 pics=weaving_mill_u_??.png  # ???
-hotspot=65 62
-
-[idle]
-pics=weaving_mill_i_??.png  # ???
 hotspot=65 62
 
 [working]

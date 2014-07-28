@@ -11,7 +11,6 @@ attack_string=_Your castle is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the castle.
 defeated_you_string=_Your soldiers defeated the enemy at the castle.
 
-
 [enhancement_cost]
 wood=5
 marblecolumn=4
