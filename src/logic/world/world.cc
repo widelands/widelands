@@ -30,7 +30,7 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
 #include "logic/parse_map_object_types.h"

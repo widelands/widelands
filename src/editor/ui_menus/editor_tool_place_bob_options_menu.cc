@@ -26,7 +26,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_bob_tool.h"
 #include "graphic/graphic.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
 #include "ui_basic/box.h"

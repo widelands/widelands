@@ -25,7 +25,7 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/battle.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/editor_game_base.h"
 #include "logic/immovable.h"
 #include "logic/map.h"

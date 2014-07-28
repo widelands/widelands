@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 
 #include <cstdio>
 #include <memory>
@@ -29,7 +29,7 @@
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/critter_bob_program.h"
+#include "logic/critter_program.h"
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -256,8 +256,8 @@ class Critter
 // wait up to 12 seconds between moves
 #define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000
 
-Critter::Critter(const CritterDescr & critter_bob_descr) :
-Bob(critter_bob_descr)
+Critter::Critter(const CritterDescr & critter_descr) :
+Bob(critter_descr)
 {}
 
 

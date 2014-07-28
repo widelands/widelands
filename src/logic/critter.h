@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_CRITTER_BOB_H
-#define WL_LOGIC_CRITTER_BOB_H
+#ifndef WL_LOGIC_CRITTER_H
+#define WL_LOGIC_CRITTER_H
 
 #include "base/macros.h"
 #include "logic/bob.h"
@@ -101,4 +101,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_LOGIC_CRITTER_BOB_H
+#endif  // end of include guard: WL_LOGIC_CRITTER_H

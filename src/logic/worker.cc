@@ -37,7 +37,7 @@
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_incorporate.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/dismantlesite.h"
 #include "logic/findbob.h"
 #include "logic/findimmovable.h"

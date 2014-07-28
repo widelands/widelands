@@ -32,7 +32,7 @@
 #include "io/filewrite.h"
 #include "logic/backtrace.h"
 #include "logic/checkstep.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
