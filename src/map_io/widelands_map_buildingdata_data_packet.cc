@@ -145,7 +145,7 @@ void Map_Buildingdata_Data_Packet::Read
 					if (uint32_t const leaver_serial = fr.Unsigned32())
 						try {
 							building.m_leave_allow =
-								&mol.get<Map_Object>(leaver_serial);
+								&mol.get<MapObject>(leaver_serial);
 						} catch (const _wexception & e) {
 							throw game_data_error
 								("leave allow item (%u): %s", leaver_serial, e.what());
@@ -994,7 +994,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				if (packet_version >= 5) {
 					uint32_t serial = fr.Unsigned32();
 					if (serial)
-						productionsite.m_stack[i].objvar = &mol.get<Map_Object>(serial);
+						productionsite.m_stack[i].objvar = &mol.get<MapObject>(serial);
 					productionsite.m_stack[i].coord = ReadCoords32_allow_null(&fr, game.map().extent());
 				}
 			}

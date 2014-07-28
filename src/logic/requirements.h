@@ -43,7 +43,7 @@ struct RequirementsStorage;
 /**
  * Requirements can be attached to Requests.
  *
- * Requirements are matched to a \ref Map_Object 's \ref tAttribute as
+ * Requirements are matched to a \ref MapObject 's \ref tAttribute as
  * returned by \ref get_tattribute .
  */
 struct Requirements {

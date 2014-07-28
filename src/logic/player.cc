@@ -318,7 +318,7 @@ Message_Id Player::add_message
 			 	(game.get_gametime() + duration, player_number(), id));
 	}
 
-	// Map_Object connection
+	// MapObject connection
 	if (message.serial() > 0) {
 		MapObject* mo = egbase().objects().get_object(message.serial());
 		mo->removed.connect

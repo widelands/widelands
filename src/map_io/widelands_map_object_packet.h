@@ -34,9 +34,9 @@ class MapMapObjectLoader;
 struct MapMapObjectSaver;
 
 /**
- * This data packet contains all \ref Map_Object and derived instances.
+ * This data packet contains all \ref MapObject and derived instances.
  *
- * \note Right now, only those Map_Objects not covered by other objects
+ * \note Right now, only those MapObjects not covered by other objects
  * are in this packet.
  */
 struct Map_Object_Packet {

@@ -120,7 +120,7 @@ Bob::~Bob()
 {
 	if (m_position.field) {
 		molog
-			("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not "
+			("MapObject::~MapObject: m_pos.field != 0, cleanup() not "
 			 "called!\n");
 		abort();
 	}
@@ -1156,7 +1156,7 @@ void Bob::Loader::load_pointers()
 		LoadState & loadstate = states[i];
 
 		if (loadstate.objvar1)
-			state.objvar1 = &mol().get<Map_Object>(loadstate.objvar1);
+			state.objvar1 = &mol().get<MapObject>(loadstate.objvar1);
 
 		if (state.route)
 			state.route->load_pointers(loadstate.route, mol());

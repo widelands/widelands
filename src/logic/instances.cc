@@ -60,7 +60,7 @@ void Cmd_Destroy_Map_Object::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			if (Serial const serial = fr.Unsigned32())
 				try {
-					obj_serial = mol.get<Map_Object>(serial).serial();
+					obj_serial = mol.get<MapObject>(serial).serial();
 				} catch (const _wexception & e) {
 					throw game_data_error("%u: %s", serial, e.what());
 				}
@@ -110,7 +110,7 @@ void Cmd_Act::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			if (Serial const object_serial = fr.Unsigned32())
 				try {
-					obj_serial = mol.get<Map_Object>(object_serial).serial();
+					obj_serial = mol.get<MapObject>(object_serial).serial();
 				} catch (const _wexception & e) {
 					throw game_data_error
 						("object %u: %s", object_serial, e.what());
@@ -164,7 +164,7 @@ void Object_Manager::cleanup(Editor_Game_Base & egbase)
 }
 
 /**
- * Insert the given Map_Object into the object manager
+ * Insert the given MapObject into the object manager
  */
 void Object_Manager::insert(MapObject * obj)
 {
@@ -175,7 +175,7 @@ void Object_Manager::insert(MapObject * obj)
 }
 
 /**
- * Remove the Map_Object from the manager
+ * Remove the MapObject from the manager
  */
 void Object_Manager::remove(MapObject & obj)
 {
@@ -346,7 +346,7 @@ std::string MapObjectDescr::get_attribute_name(uint32_t id) {
 /*
 ==============================================================================
 
-Map_Object IMPLEMENTATION
+MapObject IMPLEMENTATION
 
 ==============================================================================
 */
@@ -485,7 +485,7 @@ void MapObject::molog(char const * fmt, ...) const
 
 /**
  * Load the entire data package from the given file.
- * This will be called from the Map_Object's derived class static load function.
+ * This will be called from the MapObject's derived class static load function.
  *
  * Derived functions must read all data into member variables, even if
  * it is used only later in \ref load_pointers or \ref load_finish .
@@ -506,7 +506,7 @@ void MapObject::Loader::load(FileRead & fr)
 
 		Serial const serial = fr.Unsigned32();
 		try {
-			mol().register_object<Map_Object>(serial, *get_object());
+			mol().register_object<MapObject>(serial, *get_object());
 		} catch (const _wexception & e) {
 			throw wexception("%u: %s", serial, e.what());
 		}
@@ -542,7 +542,7 @@ void MapObject::Loader::load_finish()
 }
 
 /**
- * Save the Map_Object to the given file.
+ * Save the MapObject to the given file.
  */
 void MapObject::save
 	(Editor_Game_Base &, MapMapObjectSaver & mos, FileWrite & fw)

@@ -41,7 +41,7 @@
 namespace Widelands {
 
 namespace {
-// Every Map_Object() needs to have a description. So we make a dummy one for
+// Every MapObject() needs to have a description. So we make a dummy one for
 // Fleet.
 Fleet_Descr g_fleet_descr("fleet", "Fleet");
 }  // namespace

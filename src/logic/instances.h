@@ -150,13 +150,13 @@ private:
 
 
 /**
- * \par Notes on Map_Object
+ * \par Notes on MapObject
  *
- * Map_Object is the base class for everything that can be on the map:
+ * MapObject is the base class for everything that can be on the map:
  * buildings, animals, decorations, etc... most of the time, however, you'll
  * deal with one of the derived classes, BaseImmovable or Bob.
  *
- * Every Map_Object has a unique serial number. This serial number is used as
+ * Every MapObject has a unique serial number. This serial number is used as
  * key in the Object_Manager map, and in the safe Object_Ptr.
  *
  * Unless you're perfectly sure about when an object can be destroyed you
@@ -164,10 +164,10 @@ private:
  * This is not necessary when the relationship and lifetime between objects
  * is well-defined, such as in the relationship between Building and Flag.
  *
- * Map_Objects can also have attributes. They are mainly useful for finding
+ * MapObjects can also have attributes. They are mainly useful for finding
  * objects of a given type (e.g. trees) within a certain radius.
  *
- * \warning DO NOT allocate/free Map_Objects directly. Use the appropriate
+ * \warning DO NOT allocate/free MapObjects directly. Use the appropriate
  * type-dependent create() function for creation, and call die() for removal.
  *
  * \note Convenient creation functions are defined in class Game.
@@ -263,7 +263,7 @@ public:
 	virtual void log_general_info(const Editor_Game_Base &);
 
 	// Header bytes to distinguish between data packages for the different
-	// Map_Object classes. Be careful in changing those, since they are written
+	// MapObject classes. Be careful in changing those, since they are written
 	// to files.
 	enum {
 		header_Map_Object = 1,
@@ -323,11 +323,11 @@ public:
 	};
 
 	/// This is just a fail-safe guard for the time until we fully transition
-	/// to the new Map_Object saving system
+	/// to the new MapObject saving system
 	virtual bool has_new_save_support() {return false;}
 
 	virtual void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &);
-	// Pure Map_Objects cannot be loaded
+	// Pure MapObjects cannot be loaded
 
 protected:
 	/// Called only when the oject is logically created in the simulation. If
@@ -399,7 +399,7 @@ private:
 };
 
 /**
- * Provides a safe pointer to a Map_Object
+ * Provides a safe pointer to a MapObject
  */
 struct Object_Ptr {
 	// Provide default constructor to shut up cppcheck.
@@ -415,7 +415,7 @@ struct Object_Ptr {
 	bool is_set() const {return m_serial;}
 
 	// dammit... without a Editor_Game_Base object, we can't implement a
-	// Map_Object* operator (would be _really_ nice)
+	// MapObject* operator (would be _really_ nice)
 	MapObject * get(const Editor_Game_Base &);
 	MapObject * get(const Editor_Game_Base & egbase) const;
 

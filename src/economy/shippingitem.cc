@@ -178,7 +178,7 @@ ShippingItem ShippingItem::Loader::get(MapMapObjectLoader & mol)
 {
 	ShippingItem it;
 	if (m_serial != 0)
-		it.m_object = &mol.get<Map_Object>(m_serial);
+		it.m_object = &mol.get<MapObject>(m_serial);
 	return it;
 }
 

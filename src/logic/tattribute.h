@@ -23,7 +23,7 @@
 namespace Widelands {
 
 /**
- * Indices for specific, individual attributes that \ref Map_Object instances
+ * Indices for specific, individual attributes that \ref MapObject instances
  * may have. Used in conjunction with \ref Requirements.
  */
 enum tAttribute {

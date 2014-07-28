@@ -110,7 +110,7 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 					(new Cmd_ExpireMessage
 					 	(m->sent() + duration, p, m_id));
 			}
-			// Renew Map_Object connections
+			// Renew MapObject connections
 			if (m->serial() > 0) {
 				MapObject* mo = m_game.objects().get_object(m->serial());
 				mo->removed.connect

@@ -34,7 +34,7 @@ class MapObject;
 /*
  * This class helps to
  *   - keep track of map objects on the map
- *   - translate Map_Object* Pointer into the index used in the saved file
+ *   - translate MapObject* Pointer into the index used in the saved file
  */
 struct MapMapObjectSaver {
 	MapMapObjectSaver();

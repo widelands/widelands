@@ -150,7 +150,7 @@ void Map_Object_Packet::Write
 		MapObject & obj = *pobj;
 
 		// These checks can be eliminated and the object saver simplified
-		// once all Map_Objects are saved using the new system
+		// once all MapObjects are saved using the new system
 		if (mos.is_object_known(obj))
 			continue;
 

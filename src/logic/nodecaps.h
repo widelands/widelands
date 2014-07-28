@@ -47,7 +47,7 @@ enum NodeCaps {
 	/** can we build any building on this field?*/
 	BUILDCAPS_BUILDINGMASK = BUILDCAPS_SIZEMASK|BUILDCAPS_MINE|BUILDCAPS_PORT,
 
-	/// Can Map_Objects walk or swim here? Also used for
+	/// Can MapObjects walk or swim here? Also used for
 	/// MapObjectDescr::movecaps. If MOVECAPS_WALK, any walking being can walk
 	/// to this field.
 	MOVECAPS_WALK = 32,

@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-// dummy instance because Map_Object needs a description
+// dummy instance because MapObject needs a description
 namespace {
 const Road_Descr g_road_descr("road", "Road");
 }

@@ -195,7 +195,7 @@ void MapObjectDebugWindow::think()
 ===============
 show_mapobject_debug
 
-Show debug window for a Map_Object
+Show debug window for a MapObject
 ===============
 */
 void show_mapobject_debug

@@ -51,7 +51,7 @@ public:
 	Battle(); //  for loading an existing battle from a savegame
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
-	// Implements Map_Object.
+	// Implements MapObject.
 	void init(Editor_Game_Base &) override;
 	void cleanup(Editor_Game_Base &) override;
 	bool has_new_save_support() override {return true;}

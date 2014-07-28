@@ -576,9 +576,9 @@ void WareInstance::Loader::load_pointers()
 	// for removal via the update callback, but the game is saved just before the
 	// removal. This is why we allow a null location on load.
 	if (m_location)
-		ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
+		ware.set_location(egbase(), &mol().get<MapObject>(m_location));
 	if (m_transfer_nextstep)
-		ware.m_transfer_nextstep = &mol().get<Map_Object>(m_transfer_nextstep);
+		ware.m_transfer_nextstep = &mol().get<MapObject>(m_transfer_nextstep);
 	if (ware.m_transfer)
 		ware.m_transfer->read_pointers(mol(), m_transfer);
 }

@@ -138,7 +138,7 @@ void Map_Players_Messages_Data_Packet::Read
 					Serial serial = s->get_int("serial", 0);
 					if (serial > 0) {
 						assert(mol.is_object_known(serial));
-						MapObject & mo = mol.get<Map_Object>(serial);
+						MapObject & mo = mol.get<MapObject>(serial);
 						assert(mol.is_object_loaded(mo));
 						serial = mo.serial();
 					}

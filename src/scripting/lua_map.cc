@@ -591,40 +591,40 @@ int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 	switch (mo->descr().type()) {
 	case MapObjectType::CRITTER:
 		return CAST_TO_LUA(Bob);
-	case Map_Object_Type::SHIP:
+	case MapObjectType::SHIP:
 		return CAST_TO_LUA(Ship);
-	case Map_Object_Type::WORKER:
+	case MapObjectType::WORKER:
 		return CAST_TO_LUA(Worker);
-	case Map_Object_Type::CARRIER:
+	case MapObjectType::CARRIER:
 		// TODO(sirver): not yet implemented
 		return CAST_TO_LUA(Worker);
-	case Map_Object_Type::SOLDIER:
+	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Soldier);
 
-	case Map_Object_Type::IMMOVABLE:
+	case MapObjectType::IMMOVABLE:
 		return CAST_TO_LUA(BaseImmovable);
 
-	case Map_Object_Type::FLAG:
+	case MapObjectType::FLAG:
 		return CAST_TO_LUA(Flag);
-	case Map_Object_Type::ROAD:
+	case MapObjectType::ROAD:
 		return CAST_TO_LUA(Road);
-	case Map_Object_Type::PORTDOCK:
+	case MapObjectType::PORTDOCK:
 		return CAST_TO_LUA(PortDock);
 
-	case Map_Object_Type::BUILDING:
+	case MapObjectType::BUILDING:
 		return CAST_TO_LUA(Building);
-	case Map_Object_Type::CONSTRUCTIONSITE:
+	case MapObjectType::CONSTRUCTIONSITE:
 		return CAST_TO_LUA(ConstructionSite);
-	case Map_Object_Type::DISMANTLESITE:
+	case MapObjectType::DISMANTLESITE:
 		// TODO(sirver): not yet implemented.
 		return CAST_TO_LUA(Building);
-	case Map_Object_Type::WAREHOUSE:
+	case MapObjectType::WAREHOUSE:
 		return CAST_TO_LUA(Warehouse);
-	case Map_Object_Type::PRODUCTIONSITE:
+	case MapObjectType::PRODUCTIONSITE:
 		return CAST_TO_LUA(ProductionSite);
-	case Map_Object_Type::MILITARYSITE:
+	case MapObjectType::MILITARYSITE:
 		return CAST_TO_LUA(MilitarySite);
-	case Map_Object_Type::TRAININGSITE:
+	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
 
 	default:
@@ -2026,7 +2026,7 @@ void L_MapObject::__unpersist(lua_State* L) {
 		m_ptr = nullptr;
 	else {
 		MapMapObjectLoader& mol = *get_mol(L);
-		m_ptr = &mol.get<Map_Object>(idx);
+		m_ptr = &mol.get<MapObject>(idx);
 	}
 }
 

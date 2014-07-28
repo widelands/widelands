@@ -39,7 +39,7 @@ class Editor_Game_Base;
 /*
  * This class helps to
  *   - keep track of map objects on the map (to be loaded)
- *   - translate file index pointers into Map_Objects
+ *   - translate file index pointers into MapObjects
  */
 class MapMapObjectLoader {
 public:

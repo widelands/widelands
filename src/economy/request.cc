@@ -137,7 +137,7 @@ void Request::Read
 			uint16_t const nr_transfers = fr.Unsigned16();
 			for (uint16_t i = 0; i < nr_transfers; ++i)
 				try {
-					MapObject* obj = &mol.get<Map_Object>(fr.Unsigned32());
+					MapObject* obj = &mol.get<MapObject>(fr.Unsigned32());
 					Transfer* transfer;
 
 					if (upcast(Worker, worker, obj)) {

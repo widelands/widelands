@@ -153,7 +153,7 @@ public:
 		return ibase_;
 	}
 
-	// safe system for storing pointers to non-Map_Object C++ objects
+	// safe system for storing pointers to non-MapObject C++ objects
 	// unlike objects in the Object_Manager, these pointers need not be
 	// synchronized across the network, and they are not saved in savegames
 	uint32_t add_trackpointer(void*);

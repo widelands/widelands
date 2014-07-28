@@ -990,7 +990,7 @@ void Interactive_Base::cmdMapObject(const std::vector<std::string>& args)
 
 	if (!obj) {
 		DebugConsole::write
-			(str(format("No Map_Object with serial number %1%") % serial));
+			(str(format("No MapObject with serial number %1%") % serial));
 		return;
 	}
 
