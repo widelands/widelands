@@ -2003,7 +2003,6 @@ const MethodType<L_MapObject> L_MapObject::Methods[] = {
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, __hash),
 	PROP_RO(L_MapObject, descr),
-	PROP_RO(L_MapObject, name),
 	PROP_RO(L_MapObject, serial),
 	{nullptr, nullptr, nullptr},
 };
@@ -2053,17 +2052,6 @@ int L_MapObject::get_serial(lua_State * L) {
 	return 1;
 }
 
-
-/* RST
-	.. attribute:: name
-
-		(RO) The internal name of this immovable. This is the same as the
-		directory name of this immovable in the tribe or world directory.
-*/
-int L_MapObject::get_name(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->descr().name().c_str());
-	return 1;
-}
 
 // use the dynamic type of BuildingDescription
 #define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
@@ -2214,7 +2202,6 @@ const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
 };
 const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, size),
-	PROP_RO(L_BaseImmovable, name),
 	PROP_RO(L_BaseImmovable, fields),
 	{nullptr, nullptr, nullptr},
 };

@@ -464,7 +464,6 @@ public:
 	 */
 	int get___hash(lua_State *);
 	int get_descr(lua_State *);
-	int get_name(lua_State *);
 	int get_serial(lua_State *);
 
 	/*

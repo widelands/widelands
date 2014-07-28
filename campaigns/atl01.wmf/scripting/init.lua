@@ -74,7 +74,7 @@ end
 function send_building_lost_message(f)
 -- TODO: replace menu.png with representative_image as soon as this has been wrapped
    p1:send_message(_"Building lost!",
-      rt("image=tribes/atlanteans/".. f.immovable.name .."/menu.png",
+      rt("image=tribes/atlanteans/".. f.immovable.descr.name .."/menu.png",
          p(_"We lost a building to the ocean!")
       ), { field = f, popup = true }
    )
@@ -283,7 +283,7 @@ function check_for_ships()
          local bobs = f.bobs
          if #bobs then
             for idx, b in ipairs(bobs) do
-               if b.name == "ship" then
+               if b.descr.type_name == "ship" then
                   nships = nships + 1
                end
             end

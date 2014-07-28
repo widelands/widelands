@@ -280,7 +280,7 @@ function remove_all_stones(fields, g_sleeptime)
       local remove_field = true
 
       if f.immovable then
-         local n = f.immovable.name:match("greenland_stones(%d*)")
+         local n = f.immovable.descr.name:match("greenland_stones(%d*)")
          if n then
             n = tonumber(n)
             f.immovable:remove()
@@ -442,7 +442,7 @@ function build_lumberjack()
    blocker:lift_blocks()
 
    -- Wait for flag
-   while not (f.immovable and f.immovable.name == "flag") do sleep(300) end
+   while not (f.immovable and f.immovable.descr.type_name == "flag") do sleep(300) end
    o.done = true
 
    sleep(300)
@@ -671,7 +671,7 @@ function mining()
    local function _find_nearby_flag()
       for i=2,8 do
          for idx, f in ipairs(conquer_field:region(i)) do
-            if f.immovable and f.immovable.name == "flag" then
+            if f.immovable and f.immovable.descr.type_name == "flag" then
                return f
             end
          end
@@ -701,7 +701,7 @@ function mining()
       while 1 do
          local cnt = 0
          for idx, f in ipairs(dest:region(6)) do
-            if f.immovable and f.immovable.name:sub(1,4) == "resi" then
+            if f.immovable and f.immovable.descr.name:sub(1,4) == "resi" then
                cnt = cnt + 1
                if cnt >= wanted then return end
             end
@@ -736,7 +736,7 @@ function training()
 
    local o = msg_box(enhance_fortress)
    while not (citadel_field.immovable and
-      citadel_field.immovable.name == "citadel") do sleep(800) end
+      citadel_field.immovable.descr.name == "citadel") do sleep(800) end
    o.done = true
 
    -- Wait for soldiers to move in
