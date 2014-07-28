@@ -39,7 +39,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-Map_Object_Packet::~Map_Object_Packet() {
+MapObjectPacket::~MapObjectPacket() {
 	while (loaders.size()) {
 		delete *loaders.begin();
 		loaders.erase(loaders.begin());
@@ -47,7 +47,7 @@ Map_Object_Packet::~Map_Object_Packet() {
 }
 
 
-void Map_Object_Packet::Read
+void MapObjectPacket::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectLoader & mol,
 	 const OneWorldLegacyLookupTable& lookup_table)
 {
@@ -106,7 +106,7 @@ void Map_Object_Packet::Read
 }
 
 
-void Map_Object_Packet::LoadFinish() {
+void MapObjectPacket::LoadFinish() {
 	// load_pointer stage
 	for (MapObject::Loader* temp_loader : loaders) {
 		try {
@@ -132,7 +132,7 @@ void Map_Object_Packet::LoadFinish() {
 }
 
 
-void Map_Object_Packet::Write
+void MapObjectPacket::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	FileWrite fw;

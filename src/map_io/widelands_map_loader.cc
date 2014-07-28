@@ -149,7 +149,7 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	Map_Object_Packet mapobjects;
+	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
 	mapobjects.Read(*m_fs, egbase, *m_mol, *lookup_table);

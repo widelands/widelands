@@ -39,7 +39,7 @@ struct MapMapObjectSaver;
  * \note Right now, only those MapObjects not covered by other objects
  * are in this packet.
  */
-struct Map_Object_Packet {
+struct MapObjectPacket {
 	struct loader_sorter {
 		bool operator()
 			(MapObject::Loader * const a, MapObject::Loader * const b) const
@@ -52,7 +52,7 @@ struct Map_Object_Packet {
 	typedef std::set<MapObject::Loader *, loader_sorter> LoaderSet;
 	LoaderSet loaders;
 
-	~Map_Object_Packet();
+	~MapObjectPacket();
 
 	void Read
 		(FileSystem &, Editor_Game_Base &, MapMapObjectLoader &,

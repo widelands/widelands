@@ -162,7 +162,7 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Objects ... ");
-	{Map_Object_Packet                      p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapObjectPacket                      p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// DATA PACKETS
