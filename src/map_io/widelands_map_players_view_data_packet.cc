@@ -102,8 +102,8 @@ namespace Widelands {
 //                /     \ /
 //              bl------br
 
-struct Map_Object_Data {
-	Map_Object_Data() : map_object_descr(nullptr) {}
+struct MapObjectData {
+	MapObjectData() : map_object_descr(nullptr) {}
 	const MapObjectDescr                     * map_object_descr;
 	Player::Constructionsite_Information         csi;
 };
@@ -343,14 +343,14 @@ void WriteBuilding_Type(StreamWrite* wr, const Building_Descr& building) {
 
 }  // namespace
 
-inline static Map_Object_Data read_unseen_immovable
+inline static MapObjectData read_unseen_immovable
 	(const Editor_Game_Base & egbase,
 	 uint8_t                & immovable_kind,
 	 FileRead               & immovables_file,
 	 uint8_t                & version
 	)
 {
-	Map_Object_Data m;
+	MapObjectData m;
 	try {
 		switch (immovable_kind) {
 		case 0:  //  The player sees no immovable.
@@ -693,7 +693,7 @@ void Map_Players_View_Data_Packet::Read
 					} else {
 						imm_kind = node_immovable_kinds_file.Unsigned8();
 					}
-					Map_Object_Data mod =
+					MapObjectData mod =
 						read_unseen_immovable
 							(egbase, imm_kind, node_immovables_file, node_immovables_file_version);
 					f_player_field.map_object_descr[TCoords<>::None] = mod.map_object_descr;
@@ -772,7 +772,7 @@ void Map_Players_View_Data_Packet::Read
 					} else {
 						im_kind = triangle_immovable_kinds_file.Unsigned8();
 					}
-					Map_Object_Data mod =
+					MapObjectData mod =
 						read_unseen_immovable
 							(egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
 					f_player_field.map_object_descr[TCoords<>::D] = mod.map_object_descr;
@@ -805,7 +805,7 @@ void Map_Players_View_Data_Packet::Read
 					} else {
 						im_kind = triangle_immovable_kinds_file.Unsigned8();
 					}
-					Map_Object_Data mod =
+					MapObjectData mod =
 						read_unseen_immovable
 							(egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
 					f_player_field.map_object_descr[TCoords<>::R] = mod.map_object_descr;
@@ -986,7 +986,7 @@ void Map_Players_View_Data_Packet::Read
 
 
 inline static void write_unseen_immovable
-	(Map_Object_Data const * map_object_data,
+	(MapObjectData const * map_object_data,
 	 FileWrite & immovable_kinds_file, FileWrite & immovables_file)
 {
 	MapObjectDescr const * const map_object_descr = map_object_data->map_object_descr;
@@ -1101,7 +1101,7 @@ void Map_Players_View_Data_Packet::Write
 								(f_player_field.time_node_last_unseen);
 							assert(f_player_field.owner < 0x20);
 							owners_file.Unsigned8(f_player_field.owner);
-							Map_Object_Data mod;
+							MapObjectData mod;
 							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::None];
 							mod.csi              = f_player_field.constructionsite;
 							write_unseen_immovable(&mod, node_immovable_kinds_file, node_immovables_file);
@@ -1123,7 +1123,7 @@ void Map_Players_View_Data_Packet::Write
 							 (f_everseen | bl_everseen | br_everseen))
 						{
 							terrains_file.Unsigned8(f_player_field.terrains.d);
-							Map_Object_Data mod;
+							MapObjectData mod;
 							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::D];
 							write_unseen_immovable(&mod, triangle_immovable_kinds_file, triangle_immovables_file);
 						}
@@ -1134,7 +1134,7 @@ void Map_Players_View_Data_Packet::Write
 							 (f_everseen | br_everseen |  r_everseen))
 						{
 							terrains_file.Unsigned8(f_player_field.terrains.r);
-							Map_Object_Data mod;
+							MapObjectData mod;
 							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::R];
 							write_unseen_immovable(&mod, triangle_immovable_kinds_file, triangle_immovables_file);
 						}
