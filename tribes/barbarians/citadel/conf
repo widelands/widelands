@@ -11,7 +11,6 @@ attack_string=_Your citadel is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the citadel.
 defeated_you_string=_Your soldiers defeated the enemy at the citadel.
 
-
 [enhancement_cost]
 blackwood=9
 log=5
@@ -24,6 +23,11 @@ log=2
 raw_stone=3
 grout=1
 
+[idle]
+pics=citadel_i_??.png
+hotspot=102 102
+fps=10
+
 [build]
 pics=citadel_b_??.png
 hotspot=102 102
@@ -31,8 +35,3 @@ hotspot=102 102
 [unoccupied]
 pics=citadel_u_??.png
 hotspot=102 102
-
-[idle]
-pics=citadel_i_??.png
-hotspot=102 102
-fps=10

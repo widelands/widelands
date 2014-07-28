@@ -1,6 +1,9 @@
 size=small
 output=meat
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=1
 wood=1
@@ -8,9 +11,6 @@ stone=1
 
 [return_on_dismantle]
 stone=1
-
-[aihints]
-build_material=false
 
 [working positions]
 hunter=1

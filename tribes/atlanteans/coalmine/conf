@@ -1,6 +1,9 @@
 size=mine
 output=coal
 
+[aihints]
+mines=coal
+
 [buildcost]
 log=7
 planks=4
@@ -13,9 +16,6 @@ planks=2
 [working positions]
 miner=3
 
-[aihints]
-mines=coal
-
 [inputs]
 bread=10
 smoked_fish=10
@@ -26,8 +26,7 @@ work=_Work
 
 [work]
 sleep=45000
-return=skipped unless economy needs coal or not economy needs bread
-return=skipped unless economy needs coal or not economy needs smoked_fish
+return=skipped unless economy needs coal
 consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=coal 4 100 5 2

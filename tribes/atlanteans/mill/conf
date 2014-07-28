@@ -2,6 +2,9 @@ size=medium
 output=cornflour
 output=blackrootflour
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=3
 stone=3
@@ -11,9 +14,6 @@ planks=2
 log=1
 stone=2
 planks=1
-
-[aihints]
-build_material=false
 
 [working positions]
 miller=1
@@ -29,7 +29,7 @@ work=_Work
 
 [produce_cornflour]
 return=skipped when site has blackroot and economy needs blackrootflour and not economy needs cornflour
-return=skipped unless economy needs cornflour or not economy needs corn
+return=skipped unless economy needs cornflour
 sleep=3500
 consume=corn
 animate=working 15000
@@ -37,6 +37,7 @@ produce=cornflour
 
 [produce_blackrootflour]
 return=skipped when site has corn and economy needs cornflour and not economy needs blackrootflour
+# No check whether we need blackrootflour because blackroots cannot be used for anything else.
 sleep=3500
 consume=blackroot
 animate=working 15000

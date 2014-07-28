@@ -3,6 +3,9 @@ buildable=no
 enhanced_building=yes
 output=goldore
 
+[aihints]
+mines=gold
+
 [enhancement_cost]
 log=4
 raw_stone=2
@@ -16,9 +19,6 @@ master-miner=1
 chief-miner=1
 miner=1
 
-[aihints]
-mines=gold
-
 [inputs]
 meal=6
 
@@ -27,6 +27,7 @@ work=_Work
 
 [work]
 sleep=40000
+return=skipped unless economy needs goldore
 consume=meal
 animate=working 16000
 mine=gold 2 100 10 2

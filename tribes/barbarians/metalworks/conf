@@ -1,15 +1,19 @@
 size=medium
-output=felling_ax
 output=bread_paddle
+output=felling_ax
 output=fire_tongs
 output=fishing_rod
 output=hammer
+output=hunting_spear
 output=kitchen_tools
 output=pick
 output=scythe
 output=shovel
-output=hunting_spear
 enhancement=axfactory
+
+[aihints]
+build_material=false
+is_basic=true
 
 [buildcost]
 log=1
@@ -30,30 +34,18 @@ blacksmith=1
 iron=8
 log=8
 
-[aihints]
-build_material=false
-is_basic=true
-
 [programs]
-produce_felling_ax=_Produce felling ax
 produce_bread_paddle=_Produce bread paddle
+produce_felling_ax=_Produce felling ax
 produce_fire_tongs=_Produce fire tongs
 produce_fishing_rod=_Produce fishing rod
 produce_hammer=_Produce hammer
+produce_hunting_spear=_Produce hunting spear
 produce_kitchen_tools=_Produce kitchen tools
 produce_pick=_Produce pick
 produce_scythe=_Produce scythe
 produce_shovel=_Produce shovel
-produce_hunting_spear=_Produce hunting spear
 work=_Work
-
-[produce_felling_ax]
-return=skipped unless economy needs felling_ax
-sleep=32000
-consume=iron log
-playFX=../../../sound/smiths/toolsmith 192
-animate=working 35000
-produce=felling_ax
 
 [produce_bread_paddle]
 return=skipped unless economy needs bread_paddle
@@ -62,6 +54,14 @@ consume=iron log
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=bread_paddle
+
+[produce_felling_ax]
+return=skipped unless economy needs felling_ax
+sleep=32000
+consume=iron log
+playFX=../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=felling_ax
 
 [produce_fire_tongs]
 return=skipped unless economy needs fire_tongs
@@ -86,6 +86,14 @@ consume=iron log
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=hammer
+
+[produce_hunting_spear]
+return=skipped unless economy needs hunting_spear
+sleep=32000
+consume=iron log
+playFX=../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=hunting_spear
 
 [produce_kitchen_tools]
 return=skipped unless economy needs kitchen_tools
@@ -119,26 +127,22 @@ playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=shovel
 
-[produce_hunting_spear]
-return=skipped unless economy needs hunting_spear
-sleep=32000
-consume=iron log
-playFX=../../../sound/smiths/toolsmith 192
-animate=working 35000
-produce=hunting_spear
-
 [work]
 call=produce_bread_paddle
+call=produce_felling_ax
 call=produce_fire_tongs
 call=produce_fishing_rod
 call=produce_hammer
+call=produce_hunting_spear
 call=produce_kitchen_tools
 call=produce_pick
 call=produce_scythe
 call=produce_shovel
-call=produce_hunting_spear
-call=produce_felling_ax
 return=skipped
+
+[idle]
+pics=metalworks_i_??.png
+hotspot=57 76
 
 [build]
 pics=metalworks_b_??.png
@@ -146,10 +150,6 @@ hotspot=57 76
 
 [unoccupied]
 pics=metalworks_u_??.png
-hotspot=57 76
-
-[idle]
-pics=metalworks_i_??.png
 hotspot=57 76
 
 [working]

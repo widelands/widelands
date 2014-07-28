@@ -1,6 +1,10 @@
 size=small
 output=log
 
+[aihints]
+is_basic=true
+logproducer=true
+
 [buildcost]
 log=2
 planks=1
@@ -11,10 +15,6 @@ planks=1
 
 [working positions]
 woodcutter=1
-
-[aihints]
-is_basic=true
-logproducer=true
 
 [programs]
 work=_Work

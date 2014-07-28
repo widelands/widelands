@@ -1,7 +1,7 @@
 help=_Water is the essence of life! It is used in the bakery and the brewery. The donkey farm, the sheep farm and the piggery also need to be supplied with water.
 
+default_target_quantity=25 # currently not used
 preciousness=7
-default_target_quantity=25
 
 [idle]
 pics=water_idle.png

@@ -110,6 +110,11 @@ check_soldier=soldier hp 2
 consume=warhelm fish,meat:2 pittabread
 train=soldier hp 2 3
 
+[idle]
+pics=trainingcamp_i_??.png  # ???
+hotspot=110 75
+fps=10
+
 [build]
 pics=trainingcamp_b_??.png  # ???
 hotspot=110 77
@@ -117,8 +122,3 @@ hotspot=110 77
 [unoccupied]
 pics=trainingcamp_u_??.png  # ???
 hotspot=110 75
-
-[idle]
-pics=trainingcamp_i_??.png  # ???
-hotspot=110 75
-fps=10

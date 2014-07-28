@@ -4,6 +4,10 @@ enhanced_building=yes
 output=coal
 enhancement=deeper_coalmine
 
+[aihints]
+mines=coal
+mines_percent=60
+
 [enhancement_cost]
 log=4
 raw_stone=2
@@ -16,10 +20,6 @@ raw_stone=1
 chief-miner=1
 miner=1
 
-[aihints]
-mines=coal
-mines_percent=60
-
 [inputs]
 snack=6
 
@@ -28,6 +28,7 @@ work=_Work
 
 [work]
 sleep=42000
+return=skipped unless economy needs coal
 consume=snack
 animate=working 18000
 mine=coal 2 66 5 17

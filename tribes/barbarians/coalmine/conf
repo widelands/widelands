@@ -2,6 +2,10 @@ size=mine
 output=coal
 enhancement=deep_coalmine
 
+[aihints]
+mines=coal
+mines_percent=30
+
 [buildcost]
 log=4
 raw_stone=2
@@ -13,10 +17,6 @@ raw_stone=1
 [working positions]
 miner=1
 
-[aihints]
-mines=coal
-mines_percent=30
-
 [inputs]
 ration=6
 
@@ -25,6 +25,7 @@ work=_Work
 
 [work]
 sleep=45000
+return=skipped unless economy needs coal
 consume=ration
 animate=working 20000
 mine=coal 2 33 5 17

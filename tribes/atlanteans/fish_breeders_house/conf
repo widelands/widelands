@@ -1,5 +1,10 @@
 size=small
 
+[aihints]
+build_material=false
+needs_water=true
+renews_map_resource=fish
+
 [buildcost]
 log=1
 planks=1
@@ -10,11 +15,6 @@ stone=1
 
 [working positions]
 fish_breeder=1
-
-[aihints]
-build_material=false
-needs_water=true
-renews_map_resource=fish
 
 [programs]
 work=_Work

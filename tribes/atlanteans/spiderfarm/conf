@@ -22,8 +22,7 @@ work=_Work
 
 [work]
 sleep=25000
-return=skipped unless economy needs spideryarn or not economy needs corn
-return=skipped unless economy needs spideryarn or not economy needs water
+return=skipped unless economy needs spideryarn
 consume=corn water
 animate=working 30000
 produce=spideryarn

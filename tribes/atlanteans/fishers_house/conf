@@ -1,6 +1,10 @@
 size=small
 output=fish
 
+[aihints]
+build_material=false
+needs_water=true
+
 [buildcost]
 log=1
 planks=2
@@ -10,10 +14,6 @@ planks=1
 
 [working positions]
 fisher=1
-
-[aihints]
-build_material=false
-needs_water=true
 
 [programs]
 work=_Work

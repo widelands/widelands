@@ -1,9 +1,7 @@
 help=_Only this beer is acceptable for the warriors in a battle arena. Some say that the whole power of the barbarians lies in this ale. It helps to train the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big inns to prepare meals.
 
-
-
+default_target_quantity=15
 preciousness=2
-default_target_quantity=10
 
 [idle]
 pics=idle.png

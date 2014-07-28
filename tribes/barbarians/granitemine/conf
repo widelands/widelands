@@ -1,6 +1,9 @@
 size=mine
 output=raw_stone
 
+[aihints]
+mines=granite
+
 [buildcost]
 log=4
 raw_stone=2
@@ -12,9 +15,6 @@ raw_stone=1
 [working positions]
 miner=1
 
-[aihints]
-mines=granite
-
 [inputs]
 ration=8
 
@@ -23,6 +23,7 @@ work=_Work
 
 [work]
 sleep=20000
+return=skipped unless economy needs raw_stone
 consume=ration
 animate=working 20000
 mine=granite 2 100 5 17
