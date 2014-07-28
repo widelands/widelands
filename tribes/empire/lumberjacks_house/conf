@@ -1,6 +1,10 @@
 size=small
 output=log
 
+[aihints]
+is_basic=true
+logproducer=true
+
 [buildcost]
 log=2
 wood=1
@@ -11,10 +15,6 @@ wood=1
 
 [working positions]
 lumberjack=1
-
-[aihints]
-is_basic=true
-logproducer=true
 
 [programs]
 work=_Work

@@ -3,6 +3,9 @@ output=spidercloth
 output=tabard
 output=golden_tabard
 
+[aihints]
+is_basic=true
+
 [buildcost]
 log=3
 stone=4
@@ -56,9 +59,6 @@ return=skipped
 [idle]
 pics=weaving_mill_i_??.png  # ???
 hotspot=65 69
-
-[aihints]
-is_basic=true
 
 [working]
 pics=weaving_mill_i_??.png # ???

@@ -1,6 +1,11 @@
 size=big
 output=corn
 
+[aihints]
+space_consumer=true
+is_basic=true # farm needs spidercloth to be build and spidercloth needs
+              # corn for production -> farm should be build ASAP!
+
 [buildcost]
 log=3
 stone=2
@@ -14,11 +19,6 @@ planks=1
 
 [working positions]
 farmer=1
-
-[aihints]
-space_consumer=true
-is_basic=true # farm needs spidercloth to be build and spidercloth needs
-              # corn for production -> farm should be build ASAP!
 
 [programs]
 plant_corn=_Plant corn

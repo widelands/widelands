@@ -1,15 +1,15 @@
 size=small
 output=water
 
+[aihints]
+build_material=false
+mines_water=true
+
 [buildcost]
 log=4
 
 [return_on_dismantle]
 log=2
-
-[aihints]
-build_material=false
-mines_water=true
 
 [working positions]
 carrier=1

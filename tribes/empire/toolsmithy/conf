@@ -12,6 +12,10 @@ output=hunting_spear
 output=basket
 output=saw
 
+[aihints]
+build_material=false
+is_basic=true
+
 [buildcost]
 log=1
 stone=2
@@ -21,10 +25,6 @@ marblecolumn=1
 [return_on_dismantle]
 stone=1
 marble=2
-
-[aihints]
-build_material=false
-is_basic=true
 
 [working positions]
 toolsmith=1

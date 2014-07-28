@@ -2,6 +2,10 @@ size=small
 output=stone
 output=marble
 
+[aihints]
+is_basic=true
+stoneproducer=true
+
 [buildcost]
 log=2
 wood=1
@@ -11,10 +15,6 @@ log=1
 
 [working positions]
 stonemason=1
-
-[aihints]
-is_basic=true
-stoneproducer=true
 
 [programs]
 mine_stone=_Mine stone

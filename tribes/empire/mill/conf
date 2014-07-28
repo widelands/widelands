@@ -1,6 +1,9 @@
 size=medium
 output=flour
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=3
 stone=3
@@ -10,9 +13,6 @@ marble=1
 log=1
 stone=2
 marble=1
-
-[aihints]
-build_material=false
 
 [working positions]
 miller=1
@@ -25,7 +25,7 @@ work=_Work
 
 [work]
 sleep=5000
-return=skipped unless economy needs flour or not economy needs wheat
+return=skipped unless economy needs flour
 consume=wheat
 playFX=../../../sound/mill/mill_turning 240
 animate=working 10000

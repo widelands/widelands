@@ -1,6 +1,10 @@
 size=mine
 output=goldore
 
+[aihints]
+build_material=false
+mines=gold
+
 [buildcost]
 log=7
 planks=4
@@ -13,10 +17,6 @@ planks=2
 [working positions]
 miner=3
 
-[aihints]
-build_material=false
-mines=gold
-
 [inputs]
 bread=10
 smoked_fish=10
@@ -27,8 +27,7 @@ work=_Work
 
 [work]
 sleep=45000
-return=skipped unless economy needs goldore or not economy needs bread
-return=skipped unless economy needs goldore or not economy needs smoked_fish
+return=skipped unless economy needs goldore
 consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=gold 4 100 5 2
@@ -41,7 +40,7 @@ mine=gold 4 100 5 2
 produce=goldore
 
 [out_of_resource_notification]
-title=_Main Gold Vein Exhausted.
+title=_Main Gold Vein Exhausted
 message=_This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it.
 
 [idle]

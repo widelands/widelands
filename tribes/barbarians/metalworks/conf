@@ -11,6 +11,10 @@ output=shovel
 output=hunting_spear
 enhancement=axfactory
 
+[aihints]
+build_material=false
+is_basic=true
+
 [buildcost]
 log=1
 blackwood=1
@@ -29,10 +33,6 @@ blacksmith=1
 [inputs]
 iron=8
 log=8
-
-[aihints]
-build_material=false
-is_basic=true
 
 [programs]
 produce_felling_ax=_Produce felling ax

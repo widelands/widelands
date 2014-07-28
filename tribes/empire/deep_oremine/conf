@@ -3,6 +3,9 @@ buildable=no
 enhanced_building=yes
 output=ironore
 
+[aihints]
+mines=iron
+
 [enhancement_cost]
 log=4
 wood=2
@@ -15,9 +18,6 @@ wood=1
 master-miner=1
 miner=1
 
-[aihints]
-mines=iron
-
 [inputs]
 meal=6
 beer=6
@@ -27,8 +27,7 @@ work=_Work
 
 [work]
 sleep=43000
-return=skipped unless economy needs ironore or not economy needs meal
-return=skipped unless economy needs ironore or not economy needs beer
+return=skipped unless economy needs ironore
 consume=meal beer
 animate=working 18000
 mine=iron 2 100 5 2

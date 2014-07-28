@@ -2,6 +2,9 @@ size=medium
 output=iron
 output=gold
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=1
 stone=4
@@ -10,9 +13,6 @@ spidercloth=1
 
 [return_on_dismantle]
 stone=3
-
-[aihints]
-build_material=false
 
 [working positions]
 smelter=1
