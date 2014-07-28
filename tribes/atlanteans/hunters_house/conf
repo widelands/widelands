@@ -25,7 +25,7 @@ worker=hunt
 [out_of_resource_notification]
 # TRANSLATORS: "Game" means animals that you can hunt
 title=_Out of Game
-message=_The hunter working out of this hunter’s house can’t find any game in his working radius. Remember that you can increase the number of existing fish by building a fishbreeder’s house.
+message=_The hunter working out of this hunter’s house can’t find any game in his working radius.
 delay_attempts=10
 
 [idle]
