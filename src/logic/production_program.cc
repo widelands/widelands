@@ -243,6 +243,7 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 }
 
 // Just a dummy to satisfy the superclass interface. Do not use.
+// NOCOM(#sirver): When this is meant to be never called, throw wexception("Not implemented.") instead.
 std::string ProductionProgram::ActReturn::Negation::description
 	(const Tribe_Descr & tribe) const
 {
@@ -250,6 +251,7 @@ std::string ProductionProgram::ActReturn::Negation::description
 }
 
 // Just a dummy to satisfy the superclass interface. Do not use.
+// NOCOM(#sirver): When this is meant to be never called, throw wexception("Not implemented.") instead.
 std::string ProductionProgram::ActReturn::Negation::description_negation
 	(const Tribe_Descr & tribe) const
 {
@@ -327,6 +329,7 @@ bool ProductionProgram::ActReturn::Site_Has::evaluate
 }
 
 // NOCOM rework this
+// NOCOM(#codereview): fix this NOCOM?
 std::string ProductionProgram::ActReturn::Site_Has::description
 	(const Tribe_Descr & tribe) const
 {
