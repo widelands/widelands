@@ -781,7 +781,7 @@ MapObject::Loader * Fleet::load
 
 void Fleet::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Fleet);
+	fw.Unsigned8(HeaderFleet);
 	fw.Unsigned8(FLEET_SAVEGAME_VERSION);
 
 	fw.Unsigned8(m_owner.player_number());

@@ -3055,7 +3055,7 @@ MapObject::Loader * Worker::load
 void Worker::save
 	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Worker);
+	fw.Unsigned8(HeaderWorker);
 	fw.CString(descr().tribe().name());
 	fw.CString(descr().name());
 

@@ -1074,7 +1074,7 @@ MapObject::Loader * Ship::load
 void Ship::save
 	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Ship);
+	fw.Unsigned8(HeaderShip);
 	fw.Unsigned8(SHIP_SAVEGAME_VERSION);
 
 	fw.CString(descr().get_owner_tribe()->name());

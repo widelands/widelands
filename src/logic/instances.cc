@@ -496,9 +496,9 @@ void MapObject::Loader::load(FileRead & fr)
 {
 	try {
 		uint8_t const header = fr.Unsigned8();
-		if (header != header_Map_Object)
+		if (header != HeaderMapObject)
 			throw wexception
-				("header is %u, expected %u", header, header_Map_Object);
+				("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != CURRENT_SAVEGAME_VERSION)
@@ -547,7 +547,7 @@ void MapObject::Loader::load_finish()
 void MapObject::save
 	(Editor_Game_Base &, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Map_Object);
+	fw.Unsigned8(HeaderMapObject);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
 
 	fw.Unsigned32(mos.get_object_file_index(*this));

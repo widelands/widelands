@@ -444,7 +444,7 @@ MapObject::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
 void Critter_Bob::save
 	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Critter);
+	fw.Unsigned8(HeaderCritter);
 	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);
 
 	std::string owner =

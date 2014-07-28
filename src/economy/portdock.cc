@@ -560,7 +560,7 @@ MapObject::Loader * PortDock::load
 
 void PortDock::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_PortDock);
+	fw.Unsigned8(HeaderPortDock);
 	fw.Unsigned8(PORTDOCK_SAVEGAME_VERSION);
 
 	PlayerImmovable::save(egbase, mos, fw);

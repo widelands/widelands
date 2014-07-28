@@ -65,35 +65,35 @@ void Map_Object_Packet::Read
 			switch (uint8_t const header = fr.Unsigned8()) {
 			case 0:
 				return;
-			case MapObject::header_Immovable:
+			case MapObject::HeaderImmovable:
 				loaders.insert(Immovable::load(egbase, mol, fr, lookup_table));
 				break;
 
-			case MapObject::header_Battle:
+			case MapObject::HeaderBattle:
 				loaders.insert(Battle::load(egbase, mol, fr));
 				break;
 
-			case MapObject::header_Critter:
+			case MapObject::HeaderCritter:
 				loaders.insert(Critter_Bob::load(egbase, mol, fr, lookup_table));
 				break;
 
-			case MapObject::header_Worker:
+			case MapObject::HeaderWorker:
 				loaders.insert(Worker::load(egbase, mol, fr));
 				break;
 
-			case MapObject::header_WareInstance:
+			case MapObject::HeaderWareInstance:
 				loaders.insert(WareInstance::load(egbase, mol, fr));
 				break;
 
-			case MapObject::header_Ship:
+			case MapObject::HeaderShip:
 				loaders.insert(Ship::load(egbase, mol, fr));
 				break;
 
-			case MapObject::header_PortDock:
+			case MapObject::HeaderPortDock:
 				loaders.insert(PortDock::load(egbase, mol, fr));
 				break;
 
-			case MapObject::header_Fleet:
+			case MapObject::HeaderFleet:
 				loaders.insert(Fleet::load(egbase, mol, fr));
 				break;
 

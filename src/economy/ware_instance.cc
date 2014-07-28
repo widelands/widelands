@@ -598,7 +598,7 @@ void WareInstance::Loader::load_finish()
 void WareInstance::save
 	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_WareInstance);
+	fw.Unsigned8(HeaderWareInstance);
 	fw.Unsigned8(WAREINSTANCE_SAVEGAME_VERSION);
 	fw.CString(descr().tribe().name());
 	fw.CString(descr().name());

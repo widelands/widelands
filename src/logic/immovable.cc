@@ -717,7 +717,7 @@ void Immovable::save
 {
 	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
-	fw.Unsigned8(header_Immovable);
+	fw.Unsigned8(HeaderImmovable);
 	fw.Unsigned8(IMMOVABLE_SAVEGAME_VERSION);
 
 	if (const Tribe_Descr * const tribe = descr().get_owner_tribe())

@@ -382,7 +382,7 @@ void Battle::Loader::load_pointers()
 void Battle::save
 	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Battle);
+	fw.Unsigned8(HeaderBattle);
 	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
 
 	MapObject::save(egbase, mos, fw);

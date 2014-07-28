@@ -266,17 +266,17 @@ public:
 	// MapObject classes. Be careful in changing those, since they are written
 	// to files.
 	enum {
-		header_Map_Object = 1,
-		header_Immovable = 2,
+		HeaderMapObject = 1,
+		HeaderImmovable = 2,
 		// 3 was battle object.
 		// 4 was attack controller.
-		header_Battle = 5,
-		header_Critter = 6,
-		header_Worker = 7,
-		header_WareInstance = 8,
-		header_Ship = 9,
-		header_PortDock = 10,
-		header_Fleet = 11,
+		HeaderBattle = 5,
+		HeaderCritter = 6,
+		HeaderWorker = 7,
+		HeaderWareInstance = 8,
+		HeaderShip = 9,
+		HeaderPortDock = 10,
+		HeaderFleet = 11,
 	};
 
 	/**
