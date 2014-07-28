@@ -260,7 +260,7 @@ int32_t WL_Map_Loader::load_map_complete
 
 	//  Objectives
 	log("Reading Objective Data ... ");
-	{Map_Objective_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapObjectiveDataPacket      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Scripting Data ... ");

@@ -22,6 +22,6 @@
 
 #include "map_io/widelands_map_data_packet.h"
 
-MAP_DATA_PACKET(Map_Objective_Data_Packet)
+MAP_DATA_PACKET(MapObjectiveDataPacket)
 
 #endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_OBJECTIVE_DATA_PACKET_H

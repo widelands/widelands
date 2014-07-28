@@ -201,7 +201,7 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Objective Data ... ");
-	{Map_Objective_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapObjectiveDataPacket              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 #ifndef NDEBUG
