@@ -100,7 +100,7 @@ struct MapObjectDescr {
 	const std::string &     name() const {return m_name;}
 	const std::string &     descname() const {return m_descname;}
 
-	// Type of the Map_Object_Descr.
+	// Type of the MapObjectDescr.
 	MapObjectType type() const {return m_type;}
 
 	struct Animation_Nonexistent {};
@@ -183,14 +183,14 @@ private:
 /// or additional member variable, go ahead
 #define MO_DESCR(type) \
 public: const type & descr() const { \
-      return ref_cast<type const, Map_Object_Descr const>(*m_descr);          \
+		return ref_cast<type const, MapObjectDescr const>(*m_descr);          \
    }                                                                          \
 
 class MapObject {
 	friend struct Object_Manager;
 	friend struct Object_Ptr;
 
-	MO_DESCR(Map_Object_Descr)
+	MO_DESCR(MapObjectDescr)
 
 public:
 	/// Some default, globally valid, attributes.

@@ -221,7 +221,7 @@ MapObject * Object_Ptr::get(const Editor_Game_Base & egbase) const {
 /*
 ==============================================================================
 
-Map_Object_Descr IMPLEMENTATION
+MapObjectDescr IMPLEMENTATION
 
 ==============================================================================
 */
