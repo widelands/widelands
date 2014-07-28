@@ -2,20 +2,20 @@
 -- objective_utils.lua
 -- ---------------------
 --
--- This script contains utility functions for typical tasks that need to 
+-- This script contains utility functions for typical tasks that need to
 -- be checked for objectives.
 
 -- =======================================================================
---                             PRIVATE FUNCTIONS                            
+--                             PRIVATE FUNCTIONS
 -- =======================================================================
 function _check_for_region(plr, which, region)
    local carr = {}
    for idx,f in ipairs(region) do
       if f.immovable and f.immovable.owner == plr then
-         if carr[f.immovable.name] == nil then
-            carr[f.immovable.name] = 1
+         if carr[f.immovable.descr.name] == nil then
+            carr[f.immovable.descr.name] = 1
          else
-            carr[f.immovable.name] = carr[f.immovable.name] + 1
+            carr[f.immovable.descr.name] = carr[f.immovable.descr.name] + 1
          end
       end
    end
