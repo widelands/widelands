@@ -90,9 +90,9 @@ wl_library(logic
     constructionsite.cc
     constructionsite.h
     cookie_priority_queue.h
-    critter_bob.cc
-    critter_bob.h
-    critter_bob_program.h
+	 critter.cc
+	 critter.h
+	 critter_program.h
     description_maintainer.h
     dismantlesite.cc
     dismantlesite.h

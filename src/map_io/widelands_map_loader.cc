@@ -110,7 +110,7 @@ int32_t WL_Map_Loader::load_map_complete
 
 	preload_map(scenario);
 	m_map.set_size(m_map.m_width, m_map.m_height);
-	m_mol.reset(new Map_Map_Object_Loader());
+	m_mol.reset(new MapMapObjectLoader());
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
@@ -149,7 +149,7 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	Map_Object_Packet mapobjects;
+	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
 	mapobjects.Read(*m_fs, egbase, *m_mol, *lookup_table);
@@ -260,7 +260,7 @@ int32_t WL_Map_Loader::load_map_complete
 
 	//  Objectives
 	log("Reading Objective Data ... ");
-	{Map_Objective_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapObjectiveDataPacket      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Scripting Data ... ");

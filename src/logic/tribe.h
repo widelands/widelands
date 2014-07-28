@@ -38,9 +38,9 @@ namespace Widelands {
 class Editor_Game_Base;
 class ResourceDescription;
 class Warehouse;
-class Worker_Descr;
+class WorkerDescr;
 class World;
-struct Building_Descr;
+struct BuildingDescr;
 struct Event;
 struct WareDescr;
 
@@ -65,7 +65,7 @@ struct Tribe_Descr {
 	const std::string & name() const {return m_name;}
 
 	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
-	Worker_Descr const * get_worker_descr(const Ware_Index& index) const {
+	WorkerDescr const * get_worker_descr(const Ware_Index& index) const {
 		return m_workers.get(index);
 	}
 	Ware_Index worker_index(const std::string & workername) const {
@@ -96,7 +96,7 @@ struct Tribe_Descr {
 		return m_buildings.get_nitems();
 	}
 	Building_Index safe_building_index(char const * name) const;
-	Building_Descr const * get_building_descr(const Building_Index& index) const
+	BuildingDescr const * get_building_descr(const Building_Index& index) const
 	{
 		return m_buildings.get(index);
 	}
@@ -113,10 +113,10 @@ struct Tribe_Descr {
 		return m_immovables.get_index(l);
 	}
 	int32_t get_nr_immovables() {return m_immovables.get_nitems();}
-	Immovable_Descr const * get_immovable_descr(int32_t const index) const {
+	ImmovableDescr const * get_immovable_descr(int32_t const index) const {
 		return m_immovables.get(index);
 	}
-	Immovable_Descr const * get_immovable_descr(const std::string & imm_name) const {
+	ImmovableDescr const * get_immovable_descr(const std::string & imm_name) const {
 		return m_immovables.get(get_immovable_index(imm_name.c_str()));
 	}
 	int32_t get_bob(char const * const l) const {return m_bobs.get_index(l);}
@@ -178,10 +178,10 @@ private:
 	uint32_t m_flag_animation_id;
 	uint32_t m_bob_vision_range;
 
-	DescriptionMaintainer<Worker_Descr> m_workers;
-	DescriptionMaintainer<Building_Descr> m_buildings;
+	DescriptionMaintainer<WorkerDescr> m_workers;
+	DescriptionMaintainer<BuildingDescr> m_buildings;
 	DescriptionMaintainer<WareDescr> m_wares;
-	DescriptionMaintainer<Immovable_Descr> m_immovables;  // The player immovables
+	DescriptionMaintainer<ImmovableDescr> m_immovables;  // The player immovables
 	DescriptionMaintainer<BobDescr> m_bobs;
 	std::string                       m_carrier2;
 	// Order and positioning of wares in the warehouse display

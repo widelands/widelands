@@ -40,16 +40,16 @@
 
 namespace Widelands {
 
-PortDock_Descr g_portdock_descr("portdock", "Port Dock");
+PortdockDescr g_portdock_descr("portdock", "Port Dock");
 
-const PortDock_Descr& PortDock::descr() const {
+const PortdockDescr& PortDock::descr() const {
 	return g_portdock_descr;
 }
 
 
-PortDock_Descr::PortDock_Descr(char const* const _name, char const* const _descname)
+PortdockDescr::PortdockDescr(char const* const _name, char const* const _descname)
 	:
-	Map_Object_Descr(Map_Object_Type::PORTDOCK, _name, _descname)
+	MapObjectDescr(MapObjectType::PORTDOCK, _name, _descname)
 {
 }
 
@@ -537,8 +537,8 @@ void PortDock::Loader::load_finish()
 		pd.init_fleet(egbase());
 }
 
-Map_Object::Loader * PortDock::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+MapObject::Loader * PortDock::load
+	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -558,9 +558,9 @@ Map_Object::Loader * PortDock::load
 	return loader.release();
 }
 
-void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+void PortDock::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_PortDock);
+	fw.Unsigned8(HeaderPortDock);
 	fw.Unsigned8(PORTDOCK_SAVEGAME_VERSION);
 
 	PlayerImmovable::save(egbase, mos, fw);

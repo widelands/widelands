@@ -30,7 +30,7 @@
 class LuaInterface;
 
 namespace Widelands {
-struct Building_Descr;
+struct BuildingDescr;
 }
 
 namespace UI {
@@ -89,7 +89,7 @@ private:
 struct LuaTextHelpWindow : public UI::UniqueWindow {
 	LuaTextHelpWindow
 		(Panel * parent, UI::UniqueWindow::Registry& reg,
-		 const Widelands::Building_Descr& building_description,
+		 const Widelands::BuildingDescr& building_description,
 		 LuaInterface * const lua,
 		 uint32_t width = 300, uint32_t height = 400);
 	~LuaTextHelpWindow();

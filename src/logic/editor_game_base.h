@@ -43,7 +43,7 @@ class Players_Manager;
 
 class Battle;
 class Bob;
-struct Building_Descr;
+struct BuildingDescr;
 class Immovable;
 class Map;
 struct Object_Manager;
@@ -153,7 +153,7 @@ public:
 		return ibase_;
 	}
 
-	// safe system for storing pointers to non-Map_Object C++ objects
+	// safe system for storing pointers to non-MapObject C++ objects
 	// unlike objects in the Object_Manager, these pointers need not be
 	// synchronized across the network, and they are not saved in savegames
 	uint32_t add_trackpointer(void*);
@@ -169,8 +169,8 @@ public:
 	Tribe_Descr const* get_tribe(const std::string& name) const;
 
 	void inform_players_about_ownership(Map_Index, Player_Number);
-	void inform_players_about_immovable(Map_Index, Map_Object_Descr const*);
-	void inform_players_about_road(FCoords, Map_Object_Descr const*);
+	void inform_players_about_immovable(Map_Index, MapObjectDescr const*);
+	void inform_players_about_road(FCoords, MapObjectDescr const*);
 
 	void unconquer_area(Player_Area<Area<FCoords>>, Player_Number destroying_player = 0);
 	void conquer_area(Player_Area<Area<FCoords>>);

@@ -126,7 +126,7 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 		iterator const it = find(id);
 		if (it == end()) {
 			// Messages can be expired when the timeout runs out, or when the linked
-			// Map_Object is removed, or both. In this later case, two expire commands
+			// MapObject is removed, or both. In this later case, two expire commands
 			// will be executed, and the message will not be present for the second one.
 			// So we assume here that the message was removed from an earlier expire cmd.
 			return;

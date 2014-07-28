@@ -44,7 +44,7 @@ void Map_Player_Names_And_Tribes_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &)
+	 MapMapObjectLoader &)
 {
 	Pre_Read(fs, egbase.get_map(), skip);
 }
@@ -83,7 +83,7 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 
 
 void Map_Player_Names_And_Tribes_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 	Profile prof;
 

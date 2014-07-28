@@ -813,12 +813,12 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 
 	bool soldier_level_check;
 	const Tribe_Descr & tribe = owner().tribe();
-	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
+	const WorkerDescr & w_desc = *tribe.get_worker_descr(index);
 
 	// Make a dummy soldier, which should never be assigned to any economy
 	// Minimal invasive fix of bug 1236538: never create a rookie for a request
 	// that required a hero.
-	if (upcast(const Soldier_Descr, s_desc, &w_desc)) {
+	if (upcast(const SoldierDescr, s_desc, &w_desc)) {
 		if (!m_soldier_prototype) {
 			Soldier* test_rookie = static_cast<Soldier*> (&(s_desc->create_object()));
 			m_soldier_prototype.reset(test_rookie);
@@ -856,7 +856,7 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	// We have worker demand that is not fulfilled by supplies
 	// Find warehouses where we can create the required workers,
 	// and collect stats about existing build prerequisites
-	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
+	const WorkerDescr::Buildcost & cost = w_desc.buildcost();
 	std::vector<uint32_t> total_available;
 	uint32_t total_planned = 0;
 

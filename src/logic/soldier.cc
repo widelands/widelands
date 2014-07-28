@@ -71,14 +71,14 @@ void remove_spaces(std::string& s) {
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
-Soldier_Descr::Soldier_Descr
+SoldierDescr::SoldierDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Worker_Descr(Map_Object_Type::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
+	WorkerDescr(MapObjectType::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
 {
-	add_attribute(Map_Object::Attribute::SOLDIER);
+	add_attribute(MapObject::Attribute::SOLDIER);
 
 	m_base_hp = global_s.get_safe_positive("hp");
 
@@ -193,7 +193,7 @@ Soldier_Descr::Soldier_Descr
 
 }
 
-std::vector<std::string> Soldier_Descr::load_animations_from_string
+std::vector<std::string> SoldierDescr::load_animations_from_string
 	(const std::string & directory, Profile & prof,
 	 Section & global_s, const char * anim_name)
 {
@@ -227,7 +227,7 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 /**
  * Load the graphics
  */
-void Soldier_Descr::load_graphics() {
+void SoldierDescr::load_graphics() {
 	m_hp_pics     .resize(m_max_hp_level      + 1);
 	m_attack_pics .resize(m_max_attack_level  + 1);
 	m_defense_pics.resize(m_max_defense_level + 1);
@@ -243,14 +243,14 @@ void Soldier_Descr::load_graphics() {
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i)
 		m_evade_pics[i] =
 			g_gr->images().get(m_evade_pics_fn[i]);
-	Worker_Descr::load_graphics();
+	WorkerDescr::load_graphics();
 }
 
 
 /**
  * Get random animation of specified type
  */
-uint32_t Soldier_Descr::get_rand_anim
+uint32_t SoldierDescr::get_rand_anim
 	(Game & game, const char * const animation_name) const
 {
 	std::string run = animation_name;
@@ -320,7 +320,7 @@ uint32_t Soldier_Descr::get_rand_anim
 /**
  * Create a new soldier
  */
-Bob & Soldier_Descr::create_object() const {return *new Soldier(*this);}
+Bob & SoldierDescr::create_object() const {return *new Soldier(*this);}
 
 /*
 ==============================
@@ -331,7 +331,7 @@ IMPLEMENTATION
 */
 
 /// all done through init
-Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr)
+Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 {
 	m_battle = nullptr;
 	m_hp_level      = 0;
@@ -657,7 +657,7 @@ void Soldier::draw_info_icon
 void Soldier::calc_info_icon_size
 	(const Tribe_Descr & tribe, uint32_t & w, uint32_t & h)
 {
-	const Soldier_Descr * soldierdesc = static_cast<const Soldier_Descr *>
+	const SoldierDescr * soldierdesc = static_cast<const SoldierDescr *>
 		(tribe.get_worker_descr(tribe.worker_index("soldier")));
 	const Image* hppic = soldierdesc->get_hp_level_pic(0);
 	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
@@ -1910,7 +1910,7 @@ Soldier::Loader * Soldier::create_loader()
 }
 
 void Soldier::do_save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 

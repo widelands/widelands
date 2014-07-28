@@ -35,8 +35,8 @@
 
 namespace Widelands {
 
-Worker_Descr::Worker_Descr
-	(const Map_Object_Type type, char const * const _name, char const * const _descname,
+WorkerDescr::WorkerDescr
+	(const MapObjectType type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
@@ -54,7 +54,7 @@ Worker_Descr::Worker_Descr
 		add_animation("idle", g_gr->animations().load(directory, idle_s));
 	}
 
-	add_attribute(Map_Object::Attribute::WORKER);
+	add_attribute(MapObject::Attribute::WORKER);
 
 	m_default_target_quantity =
 		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
@@ -129,7 +129,7 @@ Worker_Descr::Worker_Descr
 }
 
 
-Worker_Descr::~Worker_Descr()
+WorkerDescr::~WorkerDescr()
 {
 	while (m_programs.size()) {
 		delete m_programs.begin()->second;
@@ -137,7 +137,7 @@ Worker_Descr::~Worker_Descr()
 	}
 }
 
-const Tribe_Descr& Worker_Descr::tribe() const {
+const Tribe_Descr& WorkerDescr::tribe() const {
 	const Tribe_Descr* owner_tribe = get_owner_tribe();
 	assert(owner_tribe != nullptr);
 	return *owner_tribe;
@@ -146,7 +146,7 @@ const Tribe_Descr& Worker_Descr::tribe() const {
 /**
  * Load graphics (other than animations).
  */
-void Worker_Descr::load_graphics()
+void WorkerDescr::load_graphics()
 {
 	m_icon = g_gr->images().get(m_icon_fname);
 }
@@ -155,7 +155,7 @@ void Worker_Descr::load_graphics()
 /**
  * Get a program from the workers description.
  */
-WorkerProgram const * Worker_Descr::get_program
+WorkerProgram const * WorkerDescr::get_program
 	(const std::string & programname) const
 {
 	Programs::const_iterator it = m_programs.find(programname);
@@ -170,14 +170,14 @@ WorkerProgram const * Worker_Descr::get_program
 /**
  * Custom creation routing that accounts for the location.
  */
-Worker & Worker_Descr::create
+Worker & WorkerDescr::create
 	(Editor_Game_Base &       egbase,
 	 Player           &       owner,
 	 PlayerImmovable  * const location,
 	 Coords             const coords)
 const
 {
-	Worker & worker = ref_cast<Worker, Map_Object>(create_object());
+	Worker & worker = ref_cast<Worker, MapObject>(create_object());
 	worker.set_owner(&owner);
 	worker.set_location(location);
 	worker.set_position(egbase, coords);
@@ -186,13 +186,13 @@ const
 }
 
 
-uint32_t Worker_Descr::movecaps() const {return MOVECAPS_WALK;}
+uint32_t WorkerDescr::movecaps() const {return MOVECAPS_WALK;}
 
 
 /**
  * Create a generic worker of this type.
  */
-Bob & Worker_Descr::create_object() const
+Bob & WorkerDescr::create_object() const
 {
 	return *new Worker(*this);
 }
@@ -201,18 +201,18 @@ Bob & Worker_Descr::create_object() const
 /**
 * check if worker can be substitute for a requested worker type
  */
-bool Worker_Descr::can_act_as(Ware_Index const index) const {
+bool WorkerDescr::can_act_as(Ware_Index const index) const {
 	assert(index < tribe().get_nrworkers());
 	if (index == worker_index())
 		return true;
 
 	// if requested worker type can be promoted, compare with that type
-	const Worker_Descr & descr = *tribe().get_worker_descr(index);
+	const WorkerDescr & descr = *tribe().get_worker_descr(index);
 	Ware_Index const becomes_index = descr.becomes();
 	return becomes_index != INVALID_INDEX ? can_act_as(becomes_index) : false;
 }
 
-Ware_Index Worker_Descr::worker_index() const {
+Ware_Index WorkerDescr::worker_index() const {
 	return tribe().worker_index(name());
 }
 

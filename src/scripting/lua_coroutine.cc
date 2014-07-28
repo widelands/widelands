@@ -102,7 +102,7 @@ void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
 	++m_ninput_args;
 }
 
-void LuaCoroutine::push_arg(const Widelands::Building_Descr* building_descr) {
+void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
 	assert(building_descr != nullptr);
 	to_lua<LuaMap::L_BuildingDescription>(m_L, new LuaMap::L_BuildingDescription(building_descr));
 	++m_ninput_args;

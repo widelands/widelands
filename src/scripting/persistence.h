@@ -28,8 +28,8 @@ class FileRead;
 class FileWrite;
 
 namespace Widelands {
-	class Map_Map_Object_Loader;
-	struct Map_Map_Object_Saver;
+	class MapMapObjectLoader;
+	struct MapMapObjectSaver;
 	class Editor_Game_Base;
 	class Game;
 }
@@ -42,13 +42,13 @@ namespace Widelands {
  */
 uint32_t persist_object
 	(lua_State * L,
-	 FileWrite &, Widelands::Map_Map_Object_Saver &);
+	 FileWrite &, Widelands::MapMapObjectSaver &);
 
 // Does all the unpersisting work. The unpersisted object is at the top of the
 // stack after the function returns.
 void unpersist_object
 	(lua_State * L,
-	 FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	 FileRead & fr, Widelands::MapMapObjectLoader & mol,
 	 uint32_t size);
 
 #endif  // end of include guard: WL_SCRIPTING_PERSISTENCE_H

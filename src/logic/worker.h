@@ -46,7 +46,7 @@ class Worker : public Bob {
 	friend struct WorkerProgram;
 	friend struct Map_Bobdata_Data_Packet;
 
-	MO_DESCR(Worker_Descr)
+	MO_DESCR(WorkerDescr)
 
 	struct Action {
 		typedef bool (Worker::*execute_t)(Game &, Bob::State &, const Action &);
@@ -74,7 +74,7 @@ class Worker : public Bob {
 
 
 public:
-	Worker(const Worker_Descr &);
+	Worker(const WorkerDescr &);
 	virtual ~Worker();
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
@@ -176,7 +176,7 @@ protected:
 
 	bool does_carry_ware() {return m_carried_ware.is_set();}
 
-	void set_program_objvar(Game &, State &, Map_Object * obj);
+	void set_program_objvar(Game &, State &, MapObject * obj);
 
 public:
 	static const Task taskTransfer;
@@ -272,12 +272,12 @@ protected:
 	virtual Loader * create_loader();
 
 public:
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 	virtual void do_save
-		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &);
 
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 };
 
 }

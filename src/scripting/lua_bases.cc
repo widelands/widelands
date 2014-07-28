@@ -167,7 +167,7 @@ int L_EditorGameBase::get_building_description(lua_State* L) {
 	if (building_index == INVALID_INDEX) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
-	const Building_Descr* building_description = tribe_description->get_building_descr(building_index);
+	const BuildingDescr* building_description = tribe_description->get_building_descr(building_index);
 
 	return LuaMap::upcasted_map_object_descr_to_lua(L, building_description);
 }
@@ -226,7 +226,7 @@ int L_EditorGameBase::get_worker_description(lua_State* L) {
 	if (worker_index == INVALID_INDEX) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
-	const Worker_Descr* worker_description = tribe_description->get_worker_descr(worker_index);
+	const WorkerDescr* worker_description = tribe_description->get_worker_descr(worker_index);
 	return LuaMap::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 
@@ -438,7 +438,7 @@ int L_PlayerBase::place_road(lua_State * L) {
 		r = &get(L, egbase).force_road(path);
 	} else {
 		BaseImmovable * bi = map.get_immovable(current);
-		if (!bi || bi->descr().type() != Map_Object_Type::FLAG) {
+		if (!bi || bi->descr().type() != MapObjectType::FLAG) {
 			if (!get(L, egbase).build_flag(current))
 				report_error(L, "Could not place end flag!");
 		}
@@ -489,7 +489,7 @@ int L_PlayerBase::place_building(lua_State * L) {
 	if (i == INVALID_INDEX)
 		report_error(L, "Unknown Building: '%s'", name);
 
-	Building_Descr::FormerBuildings former_buildings;
+	BuildingDescr::FormerBuildings former_buildings;
 	find_former_buildings(td, i, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();

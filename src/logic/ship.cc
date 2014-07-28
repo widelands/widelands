@@ -49,12 +49,12 @@
 
 namespace Widelands {
 
-Ship_Descr::Ship_Descr
+ShipDescr::ShipDescr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
 	:
-	BobDescr(Map_Object_Type::SHIP, given_name, gdescname, &gtribe)
+	BobDescr(MapObjectType::SHIP, given_name, gdescname, &gtribe)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
@@ -70,16 +70,16 @@ Ship_Descr::Ship_Descr
 	m_vision_range = global_s.get_natural("vision_range", 7);
 }
 
-uint32_t Ship_Descr::movecaps() const {
+uint32_t ShipDescr::movecaps() const {
 	return MOVECAPS_SWIM;
 }
 
-Bob & Ship_Descr::create_object() const {
+Bob & ShipDescr::create_object() const {
 	return *new Ship(*this);
 }
 
 
-Ship::Ship(const Ship_Descr & gdescr) :
+Ship::Ship(const ShipDescr & gdescr) :
 	Bob(gdescr),
 	m_window(nullptr),
 	m_fleet(nullptr),
@@ -1036,8 +1036,8 @@ void Ship::Loader::load_finish()
 }
 
 
-Map_Object::Loader * Ship::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+MapObject::Loader * Ship::load
+	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -1048,12 +1048,12 @@ Map_Object::Loader * Ship::load
 		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
 			std::string owner = fr.CString();
 			std::string name = fr.CString();
-			const Ship_Descr * descr = nullptr;
+			const ShipDescr * descr = nullptr;
 
 			egbase.manually_load_tribe(owner);
 
 			if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
-				descr = dynamic_cast<const Ship_Descr *>
+				descr = dynamic_cast<const ShipDescr *>
 					(tribe->get_bob_descr(name));
 
 			if (!descr)
@@ -1072,9 +1072,9 @@ Map_Object::Loader * Ship::load
 }
 
 void Ship::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Ship);
+	fw.Unsigned8(HeaderShip);
 	fw.Unsigned8(SHIP_SAVEGAME_VERSION);
 
 	fw.CString(descr().get_owner_tribe()->name());

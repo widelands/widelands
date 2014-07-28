@@ -46,7 +46,7 @@ namespace Widelands {
 
 
 void Game_Preload_Data_Packet::Read
-	(FileSystem & fs, Game &, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game &, MapMapObjectLoader * const)
 {
 	try {
 		Profile prof;
@@ -76,7 +76,7 @@ void Game_Preload_Data_Packet::Read
 
 
 void Game_Preload_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, MapMapObjectSaver * const)
 {
 
 	Profile prof;

@@ -39,10 +39,10 @@
 
 
 namespace Widelands {
-	struct Soldier_Descr;
-	struct Building_Descr;
+	struct SoldierDescr;
+	struct BuildingDescr;
 	struct WareDescr;
-	class Worker_Descr;
+	class WorkerDescr;
 	class Bob;
 }
 
@@ -99,7 +99,7 @@ public:
 	virtual ~L_MapObjectDescription() {}
 
 	L_MapObjectDescription() : mapobjectdescr_(nullptr) {}
-	L_MapObjectDescription(const Widelands::Map_Object_Descr* const mapobjectdescr)
+	L_MapObjectDescription(const Widelands::MapObjectDescr* const mapobjectdescr)
 		: mapobjectdescr_(mapobjectdescr) {}
 	L_MapObjectDescription(lua_State* L) : mapobjectdescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'MapObjectDescription' directly!");
@@ -124,17 +124,17 @@ public:
 	 * C methods
 	 */
 protected:
-	const Widelands::Map_Object_Descr* get() const {
+	const Widelands::MapObjectDescr* get() const {
 		assert(mapobjectdescr_ != nullptr);
 		return mapobjectdescr_;
 	}
 	// For persistence.
-	void set_description_pointer(const Widelands::Map_Object_Descr* pointer) {
+	void set_description_pointer(const Widelands::MapObjectDescr* pointer) {
 		mapobjectdescr_ = pointer;
 	}
 
 private:
-	const Widelands::Map_Object_Descr* mapobjectdescr_;
+	const Widelands::MapObjectDescr* mapobjectdescr_;
 };
 
 #define CASTED_GET_DESCRIPTION(klass)                                                              \
@@ -149,7 +149,7 @@ public:
 	virtual ~L_BuildingDescription() {}
 
 	L_BuildingDescription() {}
-	L_BuildingDescription(const Widelands::Building_Descr* const buildingdescr)
+	L_BuildingDescription(const Widelands::BuildingDescr* const buildingdescr)
 	   : L_MapObjectDescription(buildingdescr) {
 	}
 	L_BuildingDescription(lua_State* L) : L_MapObjectDescription(L) {
@@ -187,7 +187,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Building_Descr)
+	CASTED_GET_DESCRIPTION(BuildingDescr)
 };
 
 
@@ -198,7 +198,7 @@ public:
 	virtual ~L_ConstructionSiteDescription() {}
 
 	L_ConstructionSiteDescription() {}
-	L_ConstructionSiteDescription(const Widelands::ConstructionSite_Descr* const constructionsitedescr)
+	L_ConstructionSiteDescription(const Widelands::ConstructionSiteDescr* const constructionsitedescr)
 		: L_BuildingDescription(constructionsitedescr) {
 	}
 	L_ConstructionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
@@ -217,7 +217,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(ConstructionSite_Descr)
+	CASTED_GET_DESCRIPTION(ConstructionSiteDescr)
 };
 
 
@@ -228,7 +228,7 @@ public:
 	virtual ~L_ProductionSiteDescription() {}
 
 	L_ProductionSiteDescription() {}
-	L_ProductionSiteDescription(const Widelands::ProductionSite_Descr* const productionsitedescr)
+	L_ProductionSiteDescription(const Widelands::ProductionSiteDescr* const productionsitedescr)
 	   : L_BuildingDescription(productionsitedescr) {
 	}
 	L_ProductionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
@@ -251,7 +251,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(ProductionSite_Descr)
+	CASTED_GET_DESCRIPTION(ProductionSiteDescr)
 };
 
 
@@ -262,7 +262,7 @@ public:
 	virtual ~L_MilitarySiteDescription() {}
 
 	L_MilitarySiteDescription() {}
-	L_MilitarySiteDescription(const Widelands::ProductionSite_Descr* const militarysitedescr)
+	L_MilitarySiteDescription(const Widelands::ProductionSiteDescr* const militarysitedescr)
 	   : L_ProductionSiteDescription(militarysitedescr) {
 	}
 	L_MilitarySiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
@@ -283,7 +283,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(MilitarySite_Descr)
+	CASTED_GET_DESCRIPTION(MilitarySiteDescr)
 };
 
 
@@ -294,7 +294,7 @@ public:
 	virtual ~L_TrainingSiteDescription() {}
 
 	L_TrainingSiteDescription() {}
-	L_TrainingSiteDescription(const Widelands::ProductionSite_Descr* const trainingsitedescr)
+	L_TrainingSiteDescription(const Widelands::ProductionSiteDescr* const trainingsitedescr)
 	   : L_ProductionSiteDescription(trainingsitedescr) {
 	}
 	L_TrainingSiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
@@ -322,7 +322,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(TrainingSite_Descr)
+	CASTED_GET_DESCRIPTION(TrainingSiteDescr)
 };
 
 
@@ -334,7 +334,7 @@ public:
 	virtual ~L_WarehouseDescription() {}
 
 	L_WarehouseDescription() {}
-	L_WarehouseDescription(const Widelands::Warehouse_Descr* const warehousedescr)
+	L_WarehouseDescription(const Widelands::WarehouseDescr* const warehousedescr)
 	   : L_BuildingDescription(warehousedescr) {
 	}
 	L_WarehouseDescription(lua_State* L) : L_BuildingDescription(L) {
@@ -354,7 +354,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Warehouse_Descr)
+	CASTED_GET_DESCRIPTION(WarehouseDescr)
 };
 
 
@@ -401,7 +401,7 @@ public:
 	virtual ~L_WorkerDescription() {}
 
 	L_WorkerDescription() {}
-	L_WorkerDescription(const Widelands::Worker_Descr* const workerdescr)
+	L_WorkerDescription(const Widelands::WorkerDescr* const workerdescr)
 	   : L_MapObjectDescription(workerdescr) {
 	}
 	L_WorkerDescription(lua_State* L) : L_MapObjectDescription(L) {
@@ -428,7 +428,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Worker_Descr)
+	CASTED_GET_DESCRIPTION(WorkerDescr)
 };
 
 #undef CASTED_GET_DESCRIPTION
@@ -446,7 +446,7 @@ public:
 	LUNA_CLASS_HEAD(L_MapObject);
 
 	L_MapObject() : m_ptr(nullptr) {}
-	L_MapObject(Widelands::Map_Object & mo) {
+	L_MapObject(Widelands::MapObject & mo) {
 		m_ptr = &mo;
 	}
 	L_MapObject(lua_State * L) : m_ptr(nullptr) {
@@ -477,9 +477,9 @@ public:
 	/*
 	 * C Methods
 	 */
-	Widelands::Map_Object * get
+	Widelands::MapObject * get
 		(lua_State *, Widelands::Editor_Game_Base &, std::string = "MapObject");
-	Widelands::Map_Object * m_get_or_zero(Widelands::Editor_Game_Base &);
+	Widelands::MapObject * m_get_or_zero(Widelands::Editor_Game_Base &);
 };
 
 
@@ -640,7 +640,7 @@ public:
 	CASTED_GET(Road)
 	static int create_new_worker
 			(Widelands::PlayerImmovable &,
-			 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
+			 Widelands::Editor_Game_Base &, const Widelands::WorkerDescr *);
 };
 
 
@@ -734,7 +734,7 @@ public:
 	CASTED_GET(ProductionSite)
 	static int create_new_worker
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
-		 const Widelands::Worker_Descr *);
+		 const Widelands::WorkerDescr *);
 };
 
 class L_MilitarySite : public L_Building {
@@ -996,8 +996,8 @@ public:
 	 */
 };
 
-int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::Map_Object_Descr* descr);
-int upcasted_map_object_to_lua(lua_State * L, Widelands::Map_Object * mo);
+int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDescr* descr);
+int upcasted_map_object_to_lua(lua_State * L, Widelands::MapObject * mo);
 
 void luaopen_wlmap(lua_State *);
 

@@ -324,13 +324,13 @@ void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 }
 
 void Transfer::read_pointers
-	(Map_Map_Object_Loader & mol, const Widelands::Transfer::ReadData & rd)
+	(MapMapObjectLoader & mol, const Widelands::Transfer::ReadData & rd)
 {
 	if (rd.destination)
 		m_destination = &mol.get<PlayerImmovable>(rd.destination);
 }
 
-void Transfer::write(Map_Map_Object_Saver & mos, FileWrite & fw)
+void Transfer::write(MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(TRANSFER_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));

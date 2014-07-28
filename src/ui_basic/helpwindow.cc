@@ -185,7 +185,7 @@ LuaTextHelpWindow
 LuaTextHelpWindow::LuaTextHelpWindow
 	(Panel * const parent,
 	 UI::UniqueWindow::Registry & reg,
-	 const Widelands::Building_Descr& building_description,
+	 const Widelands::BuildingDescr& building_description,
 	 LuaInterface * const lua,
 	 uint32_t width, uint32_t height)
 	:

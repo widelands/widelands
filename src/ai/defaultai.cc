@@ -246,7 +246,7 @@ void DefaultAI::late_initialization() {
 	const World& world = game().world();
 
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
-		const Building_Descr& bld = *tribe_->get_building_descr(i);
+		const BuildingDescr& bld = *tribe_->get_building_descr(i);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
@@ -292,9 +292,9 @@ void DefaultAI::late_initialization() {
 			bo.plants_trees_ = false;
 
 		// Read all interesting data from ware producing buildings
-		if (typeid(bld) == typeid(ProductionSite_Descr)) {
-			const ProductionSite_Descr& prod =
-				ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
+		if (typeid(bld) == typeid(ProductionSiteDescr)) {
+			const ProductionSiteDescr& prod =
+				ref_cast<ProductionSiteDescr const, BuildingDescr const>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
@@ -324,22 +324,22 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 
-		if (typeid(bld) == typeid(MilitarySite_Descr)) {
+		if (typeid(bld) == typeid(MilitarySiteDescr)) {
 			bo.type = BuildingObserver::MILITARYSITE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(Warehouse_Descr)) {
+		if (typeid(bld) == typeid(WarehouseDescr)) {
 			bo.type = BuildingObserver::WAREHOUSE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(TrainingSite_Descr)) {
+		if (typeid(bld) == typeid(TrainingSiteDescr)) {
 			bo.type = BuildingObserver::TRAININGSITE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
+		if (typeid(bld) == typeid(ConstructionSiteDescr)) {
 			bo.type = BuildingObserver::CONSTRUCTIONSITE;
 			continue;
 		}
@@ -511,7 +511,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	// Is this a general update or just for military consideration
 	// (second is used in check_militarysites)
 	if (!military) {
-		int32_t const tree_attr = Map_Object_Descr::get_attribute_id("tree");
+		int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
 		field.reachable = false;
 		field.preferred_ = false;
 		field.enemy_nearby_ = false;
@@ -577,9 +577,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 			if (upcast(Building const, building, &base_immovable)) {
 				if (upcast(ConstructionSite const, constructionsite, building)) {
-					const Building_Descr& target_descr = constructionsite->building();
+					const BuildingDescr& target_descr = constructionsite->building();
 
-					if (dynamic_cast<ProductionSite_Descr const*>(&target_descr))
+					if (dynamic_cast<ProductionSiteDescr const*>(&target_descr))
 						consider_productionsite_influence(
 						   field,
 						   immovables.at(i).coords,
@@ -598,7 +598,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		// stones are not renewable, we will count them only if previous state si nonzero
 		if (field.stones_nearby_ > 0) {
 
-			int32_t const stone_attr = Map_Object_Descr::get_attribute_id("granite");
+			int32_t const stone_attr = MapObjectDescr::get_attribute_id("granite");
 			field.stones_nearby_ = 0;
 
 			for (uint32_t j = 0; j < immovables.size(); ++j) {
@@ -636,9 +636,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 		if (upcast(Building const, building, &base_immovable)) {
 			if (upcast(ConstructionSite const, constructionsite, building)) {
-				const Building_Descr& target_descr = constructionsite->building();
+				const BuildingDescr& target_descr = constructionsite->building();
 
-				if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr)) {
+				if (upcast(MilitarySiteDescr const, target_ms_d, &target_descr)) {
 					const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
 					const int32_t radius = target_ms_d->get_conquers() + 4;
 					const int32_t v = radius - dist;
@@ -1835,7 +1835,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	if (site.bo->need_trees_) {
 		if (map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		                        nullptr,
-		                        FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree"))) <
+										FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree"))) <
 		    6) {
 			// Do not destruct the last lumberjack - perhaps some small trees are
 			// near, a forester will plant some trees or some new trees will seed
@@ -1883,7 +1883,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		       nullptr,
-				 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("granite"))) == 0) {
+				 FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -2021,7 +2021,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Only enhance buildings that are allowed (scenario mode)
 	if (player_->is_building_type_allowed(enhancement)) {
-		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 		// do not build the same building so soon (kind of duplicity check)
@@ -2128,7 +2128,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	// Only enhance buildings that are allowed (scenario mode)
 	if (player_->is_building_type_allowed(enhancement)) {
 		// first exclude possibility there are enhancements in construction or unoccupied_
-		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 		if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ <= 0)
