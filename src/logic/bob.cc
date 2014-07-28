@@ -70,7 +70,7 @@ BobDescr::BobDescr(MapObjectType type, const std::string& init_name,
 uint32_t BobDescr::vision_range() const
 {
 	if (owner_tribe_) {
-		if (upcast(const Ship_Descr, ship, this))
+		if (upcast(const ShipDescr, ship, this))
 			return ship->vision_range();
 		return owner_tribe_->get_bob_vision_range();
 	}

@@ -234,7 +234,7 @@ struct building_nonexistent : public FileRead::_data_error {
 //
 // \throws Immovable_Nonexistent if there is no imovable type with that
 // name in the tribe.
-const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const Tribe_Descr& tribe) {
+const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const Tribe_Descr& tribe) {
 	std::string name = fr->CString();
 	int32_t const index = tribe.get_immovable_index(name);
 	if (index == -1)
@@ -279,7 +279,7 @@ Tribe_Descr const* ReadTribe_allow_null(StreamRead* fr, const Editor_Game_Base& 
 //
 // \throws Immovable_Nonexistent if there is no imovable type with that
 // name in the World.
-const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const World& world) {
+const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const World& world) {
 	char const* const name = fr->CString();
 	int32_t const index = world.get_immovable_index(name);
 	if (index == -1)
@@ -291,7 +291,7 @@ const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const World& world) {
 // Immovable_Type(const Tribe_Descr &) is called with that tribe and the
 // result is returned. Otherwise Immovable_Type(const World &) is called
 // and the result is returned.
-const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
+const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
 	if (Tribe_Descr const* const tribe = ReadTribe_allow_null(fr, egbase))
 		return ReadImmovable_Type(fr, *tribe);
 	else
@@ -303,7 +303,7 @@ const Immovable_Descr& ReadImmovable_Type(StreamRead* fr, const Editor_Game_Base
 // \returns a reference to the building type description.
 //
 // \throws Building_Nonexistent if there is no building type with that
-const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe) {
+const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe) {
 	char const* const name = fr->CString();
 	Building_Index const index = tribe.building_index(name);
 	if (index == INVALID_INDEX)
@@ -315,7 +315,7 @@ const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe
 // CString and interprets it as the name of a building type in that tribe.
 //
 // \returns a reference to the building type description.
-const Building_Descr& ReadBuilding_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
+const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
 	return ReadBuilding_Type(fr, ReadTribe(fr, egbase));
 }
 
@@ -330,13 +330,13 @@ void WriteTribe(StreamWrite* wr, Tribe_Descr const* tribe) {
 }
 
 // Encode a Immovable_Type into 'wr'.
-void WriteImmovable_Type(StreamWrite* wr, const Immovable_Descr& immovable) {
+void WriteImmovable_Type(StreamWrite* wr, const ImmovableDescr& immovable) {
 	WriteTribe(wr, immovable.get_owner_tribe());
 	wr->String(immovable.name());
 }
 
 // Encode a Building_Type into 'wr'.
-void WriteBuilding_Type(StreamWrite* wr, const Building_Descr& building) {
+void WriteBuilding_Type(StreamWrite* wr, const BuildingDescr& building) {
 	WriteTribe(wr, building.tribe());
 	wr->String(building.name());
 }
@@ -996,12 +996,12 @@ inline static void write_unseen_immovable
 
 	if (!map_object_descr)
 		immovable_kind = 0;
-	else if (upcast(Immovable_Descr const, immovable_descr, map_object_descr)) {
+	else if (upcast(ImmovableDescr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
 		WriteImmovable_Type(&immovables_file, *immovable_descr);
 	} else if (map_object_descr->type() == MapObjectType::FLAG)
 		immovable_kind = 2;
-	else if (upcast(Building_Descr const, building_descr, map_object_descr)) {
+	else if (upcast(BuildingDescr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
 		WriteBuilding_Type(&immovables_file, *building_descr);
 		if (!csi.becomes)

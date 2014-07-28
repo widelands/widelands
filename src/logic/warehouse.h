@@ -48,12 +48,12 @@ Warehouse
 */
 struct WarehouseSupply;
 
-struct Warehouse_Descr : public Building_Descr {
-	Warehouse_Descr
+struct WarehouseDescr : public BuildingDescr {
+	WarehouseDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	~Warehouse_Descr() override {}
+	~WarehouseDescr() override {}
 
 	Building & create_object() const override;
 
@@ -66,7 +66,7 @@ struct Warehouse_Descr : public Building_Descr {
 private:
 	int32_t m_conquers;
 	uint32_t m_heal_per_second;
-	DISALLOW_COPY_AND_ASSIGN(Warehouse_Descr);
+	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
 
@@ -74,7 +74,7 @@ class Warehouse : public Building, public Attackable, public SoldierControl {
 	friend class PortDock;
 	friend class Map_Buildingdata_Data_Packet;
 
-	MO_DESCR(Warehouse_Descr)
+	MO_DESCR(WarehouseDescr)
 
 public:
 	/**
@@ -111,7 +111,7 @@ public:
 		SP_Remove = 3,
 	};
 
-	Warehouse(const Warehouse_Descr &);
+	Warehouse(const WarehouseDescr &);
 	virtual ~Warehouse();
 
 	void load_finish(Editor_Game_Base &) override;

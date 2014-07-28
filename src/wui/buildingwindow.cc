@@ -103,7 +103,7 @@ Building_Window::~Building_Window()
 	m_registry = nullptr;
 }
 
-namespace Widelands {struct Building_Descr;}
+namespace Widelands {struct BuildingDescr;}
 using Widelands::Building;
 
 /*
@@ -226,7 +226,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				m_building.descr().enhancement();
 			const Widelands::Tribe_Descr & tribe  = owner.tribe();
 			if (owner.is_building_type_allowed(enhancement)) {
-					const Widelands::Building_Descr & building_descr =
+					const Widelands::BuildingDescr & building_descr =
 						*tribe.get_building_descr(enhancement);
 					char buffer[128];
 					snprintf

@@ -332,11 +332,11 @@ Building & Editor_Game_Base::warp_dismantlesite
 	Player            & plr   = player(owner);
 	const Tribe_Descr & tribe = plr.tribe();
 
-	Building_Descr const * const descr =
+	BuildingDescr const * const descr =
 		tribe.get_building_descr
 			(tribe.safe_building_index("dismantlesite"));
 
-	upcast(const DismantleSite_Descr, ds_descr, descr);
+	upcast(const DismantlesiteDescr, ds_descr, descr);
 
 	return
 		*new DismantleSite
@@ -398,7 +398,7 @@ Does not perform any placability checks.
 Immovable & Editor_Game_Base::create_immovable
 	(Coords const c, uint32_t const idx, Tribe_Descr const * const tribe)
 {
-	const Immovable_Descr & descr =
+	const ImmovableDescr & descr =
 		*
 		(tribe ?
 		 tribe->get_immovable_descr(idx)

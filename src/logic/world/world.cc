@@ -44,7 +44,7 @@ namespace Widelands {
 
 World::World()
    : bobs_(new DescriptionMaintainer<BobDescr>()),
-     immovables_(new DescriptionMaintainer<Immovable_Descr>()),
+     immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
      resources_(new DescriptionMaintainer<ResourceDescription>()),
      editor_terrain_categories_(new DescriptionMaintainer<EditorCategory>()),
@@ -67,15 +67,15 @@ void World::add_terrain_type(const LuaTable& table) {
 }
 
 void World::add_critter_type(const LuaTable& table) {
-	bobs_->add(new Critter_Bob_Descr(table));
+	bobs_->add(new CritterDescr(table));
 }
 
-const DescriptionMaintainer<Immovable_Descr>& World::immovables() const {
+const DescriptionMaintainer<ImmovableDescr>& World::immovables() const {
 	return *immovables_;
 }
 
 void World::add_immovable_type(const LuaTable& table) {
-	immovables_->add(new Immovable_Descr(table, *this));
+	immovables_->add(new ImmovableDescr(table, *this));
 }
 
 void World::add_editor_terrain_category(const LuaTable& table) {
@@ -135,7 +135,7 @@ int32_t World::get_nr_immovables() const {
 	return immovables_->get_nitems();
 }
 
-Immovable_Descr const* World::get_immovable_descr(int32_t const index) const {
+ImmovableDescr const* World::get_immovable_descr(int32_t const index) const {
 	return immovables_->get(index);
 }
 

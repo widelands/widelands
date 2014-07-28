@@ -74,7 +74,7 @@ void MapObjectPacket::Read
 				break;
 
 			case MapObject::HeaderCritter:
-				loaders.insert(Critter_Bob::load(egbase, mol, fr, lookup_table));
+				loaders.insert(Critter::load(egbase, mol, fr, lookup_table));
 				break;
 
 			case MapObject::HeaderWorker:

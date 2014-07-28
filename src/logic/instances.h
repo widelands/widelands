@@ -57,7 +57,7 @@ enum class MapObjectType : uint8_t {
 	FLEET,
 
 	BOB = 10,  // Bob
-	CRITTER,   // Bob -- CritterBob
+	CRITTER,   // Bob -- Critter
 	SHIP,      // Bob -- Ship
 	WORKER,    // Bob -- Worker
 	CARRIER,   // Bob -- Worker -- Carrier

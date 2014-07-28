@@ -209,7 +209,7 @@ void GameRenderer::draw_objects()
 						}
 						assert(lines <= h);
 						m_dst->drawanimrect(pos[F], anim_idx, tanim, owner, Rect(Point(0, h - lines), w, lines));
-					} else if (upcast(const Building_Descr, building, map_object_descr)) {
+					} else if (upcast(const BuildingDescr, building, map_object_descr)) {
 						// this is a building therefore we either draw unoccupied or idle animation
 						uint32_t pic;
 						try {

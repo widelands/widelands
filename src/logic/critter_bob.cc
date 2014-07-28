@@ -72,18 +72,18 @@ void assign_diranimation(DirAnimations* anims, MapObjectDescr& mo, const std::st
 
 }  // namespace
 
-void Critter_BobProgram::parse(const std::vector<std::string>& lines) {
+void CritterProgram::parse(const std::vector<std::string>& lines) {
 	for (const std::string& line : lines) {
 		try {
 			const std::vector<std::string> cmd(split_string(line, " \t\r\n"));
 			if (cmd.empty())
 				continue;
 
-			Critter_BobAction act;
+			CritterAction act;
 			if (cmd[0] == "remove") {
 				if (cmd.size() != 1)
 					throw wexception("Usage: remove");
-				act.function = &Critter_Bob::run_remove;
+				act.function = &Critter::run_remove;
 			} else {
 				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
 			}
@@ -113,8 +113,8 @@ Remove this critter
 
 ==============================
 */
-bool Critter_Bob::run_remove
-	(Game & game, State & state, const Critter_BobAction &)
+bool Critter::run_remove
+	(Game & game, State & state, const CritterAction &)
 {
 	++state.ivar1;
 	// Bye, bye cruel world
@@ -131,7 +131,7 @@ bool Critter_Bob::run_remove
 ===========================================================================
 */
 
-Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
+CritterDescr::CritterDescr(char const* const _name,
                                      char const* const _descname,
                                      const std::string& directory,
                                      Profile& prof,
@@ -163,12 +163,12 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
 		std::transform
 			(program_name.begin(), program_name.end(), program_name.begin(),
 			 tolower);
-		Critter_BobProgram * prog = nullptr;
+		CritterProgram * prog = nullptr;
 		try {
 			if (m_programs.count(program_name))
 				throw wexception("this program has already been declared");
 
-			prog = new Critter_BobProgram(v->get_string());
+			prog = new CritterProgram(v->get_string());
 			std::vector<std::string> lines(section_to_strings(&prof.get_safe_section(program_name)));
 			prog->parse(lines);
 			m_programs[program_name] = prog;
@@ -180,7 +180,7 @@ Critter_Bob_Descr::Critter_Bob_Descr(char const* const _name,
 	}
 }
 
-Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
+CritterDescr::CritterDescr(const LuaTable& table)
 	: BobDescr(MapObjectType::CRITTER, table.get_string("name"),
               table.get_string("descname"),
               nullptr)  // Can only handle world critters.
@@ -199,7 +199,7 @@ Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
-			std::unique_ptr<Critter_BobProgram> prog(new Critter_BobProgram(program_name));
+			std::unique_ptr<CritterProgram> prog(new CritterProgram(program_name));
 			prog->parse(programs->get_table(program_name)->array_entries<std::string>());
 			m_programs[program_name] = prog.release();
 		} catch (const std::exception& e) {
@@ -208,13 +208,13 @@ Critter_Bob_Descr::Critter_Bob_Descr(const LuaTable& table)
 	}
 }
 
-Critter_Bob_Descr::~Critter_Bob_Descr() {
-	for (std::pair<std::string, Critter_BobProgram *> program : m_programs) {
+CritterDescr::~CritterDescr() {
+	for (std::pair<std::string, CritterProgram *> program : m_programs) {
 		delete program.second;
 	}
 }
 
-bool Critter_Bob_Descr::is_swimming() const {
+bool CritterDescr::is_swimming() const {
 	const static uint32_t swimming_attribute = get_attribute_id("swimming");
 	return has_attribute(swimming_attribute);
 }
@@ -225,7 +225,7 @@ bool Critter_Bob_Descr::is_swimming() const {
 Get a program from the workers description.
 ===============
 */
-Critter_BobProgram const * Critter_Bob_Descr::get_program
+CritterProgram const * CritterDescr::get_program
 	(const std::string & programname) const
 {
 	Programs::const_iterator const it = m_programs.find(programname);
@@ -236,7 +236,7 @@ Critter_BobProgram const * Critter_Bob_Descr::get_program
 }
 
 
-uint32_t Critter_Bob_Descr::movecaps() const {
+uint32_t CritterDescr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
 }
 
@@ -244,7 +244,7 @@ uint32_t Critter_Bob_Descr::movecaps() const {
 /*
 ==============================================================================
 
-class Critter_Bob
+class Critter
 
 ==============================================================================
 */
@@ -256,7 +256,7 @@ class Critter_Bob
 // wait up to 12 seconds between moves
 #define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000
 
-Critter_Bob::Critter_Bob(const Critter_Bob_Descr & critter_bob_descr) :
+Critter::Critter(const CritterDescr & critter_bob_descr) :
 Bob(critter_bob_descr)
 {}
 
@@ -275,16 +275,16 @@ coords is used to store target coordinates found by findspace
 ==============================
 */
 
-Bob::Task const Critter_Bob::taskProgram = {
+Bob::Task const Critter::taskProgram = {
 	"program",
-	static_cast<Bob::Ptr>(&Critter_Bob::program_update),
+	static_cast<Bob::Ptr>(&Critter::program_update),
 	nullptr,
 	nullptr,
 	true
 };
 
 
-void Critter_Bob::start_task_program
+void Critter::start_task_program
 	(Game & game, const std::string & programname)
 {
 	push_task(game, taskProgram);
@@ -294,7 +294,7 @@ void Critter_Bob::start_task_program
 }
 
 
-void Critter_Bob::program_update(Game & game, State & state)
+void Critter::program_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
 		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
@@ -302,14 +302,14 @@ void Critter_Bob::program_update(Game & game, State & state)
 	}
 
 	for (;;) {
-		const Critter_BobProgram & program =
-			ref_cast<Critter_BobProgram const, BobProgramBase const>
+		const CritterProgram & program =
+			ref_cast<CritterProgram const, BobProgramBase const>
 				(*state.program);
 
 		if (state.ivar1 >= program.get_size())
 			return pop_task(game);
 
-		const Critter_BobAction & action = program[state.ivar1];
+		const CritterAction & action = program[state.ivar1];
 
 		if ((this->*(action.function))(game, state, action))
 			return;
@@ -327,15 +327,15 @@ Simply roam the map
 ==============================
 */
 
-Bob::Task const Critter_Bob::taskRoam = {
+Bob::Task const Critter::taskRoam = {
 	"roam",
-	static_cast<Bob::Ptr>(&Critter_Bob::roam_update),
+	static_cast<Bob::Ptr>(&Critter::roam_update),
 	nullptr,
 	nullptr,
 	true
 };
 
-void Critter_Bob::roam_update(Game & game, State & state)
+void Critter::roam_update(Game & game, State & state)
 {
 	if (get_signal().size())
 		return pop_task(game);
@@ -362,13 +362,13 @@ void Critter_Bob::roam_update(Game & game, State & state)
 			 idle_time_min + game.logic_rand() % idle_time_rnd);
 }
 
-void Critter_Bob::init_auto_task(Game & game) {
+void Critter::init_auto_task(Game & game) {
 	push_task(game, taskRoam);
 	top_state().ivar1 = 0;
 }
 
-Bob & Critter_Bob_Descr::create_object() const {
-	return *new Critter_Bob(*this);
+Bob & CritterDescr::create_object() const {
+	return *new Critter(*this);
 }
 
 /*
@@ -381,25 +381,25 @@ Load / Save implementation
 
 #define CRITTER_SAVEGAME_VERSION 1
 
-Critter_Bob::Loader::Loader()
+Critter::Loader::Loader()
 {
 }
 
-const Bob::Task * Critter_Bob::Loader::get_task(const std::string & name)
+const Bob::Task * Critter::Loader::get_task(const std::string & name)
 {
 	if (name == "roam") return &taskRoam;
 	if (name == "program") return &taskProgram;
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase * Critter_Bob::Loader::get_program
+const BobProgramBase * Critter::Loader::get_program
 	(const std::string & name)
 {
-	Critter_Bob & critter = get<Critter_Bob>();
+	Critter & critter = get<Critter>();
 	return critter.descr().get_program(name);
 }
 
-MapObject::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
+MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 												  MapMapObjectLoader& mol,
                                       FileRead& fr,
                                       const OneWorldLegacyLookupTable& lookup_table) {
@@ -412,17 +412,17 @@ MapObject::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
 		if (1 <= version && version <= CRITTER_SAVEGAME_VERSION) {
 			const std::string owner = fr.CString();
 			std::string critter_name = fr.CString();
-			const Critter_Bob_Descr * descr = nullptr;
+			const CritterDescr * descr = nullptr;
 
 			if (owner == "world") {
 				critter_name = lookup_table.lookup_critter(critter_name);
 				descr =
-				   dynamic_cast<const Critter_Bob_Descr*>(egbase.world().get_bob_descr(critter_name));
+					dynamic_cast<const CritterDescr*>(egbase.world().get_bob_descr(critter_name));
 			} else {
 				egbase.manually_load_tribe(owner);
 
 				if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
-					descr = dynamic_cast<const Critter_Bob_Descr *>
+					descr = dynamic_cast<const CritterDescr *>
 						(tribe->get_bob_descr(critter_name));
 			}
 
@@ -441,7 +441,7 @@ MapObject::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
 	return loader.release();
 }
 
-void Critter_Bob::save
+void Critter::save
 	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderCritter);

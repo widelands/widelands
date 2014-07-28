@@ -190,7 +190,7 @@ void ProductionSite_Window::update_worker_table()
 				er.set_string(2, "---");
 			}
 		} else if (request) {
-			const Widelands::Worker_Descr * desc =
+			const Widelands::WorkerDescr * desc =
 				productionsite().descr().tribe().get_worker_descr(request->get_index());
 			er.set_picture
 				(0, desc->icon(),

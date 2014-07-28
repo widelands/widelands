@@ -53,12 +53,12 @@ ProductionSite BUILDING
 ==============================================================================
 */
 
-ProductionSite_Descr::ProductionSite_Descr
+ProductionsiteDescr::ProductionsiteDescr
 	(MapObjectType type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe, const World& world)
 	:
-	Building_Descr(type, _name, _descname, directory, prof, global_s, _tribe)
+	BuildingDescr(type, _name, _descname, directory, prof, global_s, _tribe)
 {
 	Section * const section = prof.get_section("out_of_resource_notification");
 	if (section != nullptr)
@@ -152,7 +152,7 @@ ProductionSite_Descr::ProductionSite_Descr
 	}
 }
 
-ProductionSite_Descr::~ProductionSite_Descr()
+ProductionsiteDescr::~ProductionsiteDescr()
 {
 	while (m_programs.size()) {
 		delete m_programs.begin()->second;
@@ -164,7 +164,7 @@ ProductionSite_Descr::~ProductionSite_Descr()
 /**
  * Get the program of the given name.
  */
-const ProductionProgram * ProductionSite_Descr::get_program
+const ProductionProgram * ProductionsiteDescr::get_program
 	(const std::string & program_name) const
 {
 	Programs::const_iterator const it = programs().find(program_name);
@@ -177,7 +177,7 @@ const ProductionProgram * ProductionSite_Descr::get_program
 /**
  * Create a new building of this type
  */
-Building & ProductionSite_Descr::create_object() const {
+Building & ProductionsiteDescr::create_object() const {
 	return *new ProductionSite(*this);
 }
 
@@ -190,7 +190,7 @@ IMPLEMENTATION
 ==============================
 */
 
-ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
+ProductionSite::ProductionSite(const ProductionsiteDescr & ps_descr) :
 	Building            (ps_descr),
 	m_working_positions (new Working_Position[ps_descr.nr_working_positions()]),
 	m_fetchfromflag     (0),
@@ -251,7 +251,7 @@ std::string ProductionSite::get_statistics_string()
 bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
-	if (upcast(ProductionSite_Descr const, bld, descr().tribe().get_building_descr(targetSite))) {
+	if (upcast(ProductionsiteDescr const, bld, descr().tribe().get_building_descr(targetSite))) {
 		// if he has workers
 		if (bld->nr_working_positions()) {
 			Ware_Index need = bld->working_positions()[0].first;
@@ -435,7 +435,7 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
  * returns 0 on success -1 if there is no room for this worker
  */
 int ProductionSite::warp_worker
-	(Editor_Game_Base & egbase, const Worker_Descr & wdes)
+	(Editor_Game_Base & egbase, const WorkerDescr & wdes)
 {
 	bool assigned = false;
 	Working_Position * current = m_working_positions;
@@ -571,7 +571,7 @@ void ProductionSite::request_worker_callback
 			Ware_Index nuwo    = psite.descr().tribe().get_nrworkers();
 			Ware_Index current = Ware_Index(static_cast<size_t>(0));
 			for (; current < nuwo; ++current) {
-				Worker_Descr const * worker = psite.descr().tribe().get_worker_descr(current);
+				WorkerDescr const * worker = psite.descr().tribe().get_worker_descr(current);
 				if (worker->becomes() == idx) {
 					idx = current;
 					break;
@@ -765,7 +765,7 @@ bool ProductionSite::get_building_work
 		std::pair<Ware_Index, uint8_t> & worker_type_with_count =
 			*m_recruited_workers.rbegin();
 		{
-			const Worker_Descr & worker_descr =
+			const WorkerDescr & worker_descr =
 				*descr().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker & recruit =

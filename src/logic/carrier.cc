@@ -628,6 +628,6 @@ void Carrier::do_save
 /**
  * Create a new carrier
  */
-Bob & Carrier_Descr::create_object() const {return *new Carrier(*this);}
+Bob & CarrierDescr::create_object() const {return *new Carrier(*this);}
 
 }

@@ -108,15 +108,15 @@ struct ImmovableActionData;
 /**
  * Immovable represents a standard immovable such as trees or stones.
  */
-struct Immovable_Descr : public MapObjectDescr {
+struct ImmovableDescr : public MapObjectDescr {
 	typedef std::map<std::string, ImmovableProgram *> Programs;
 
-	Immovable_Descr
+	ImmovableDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 Tribe_Descr const * const);
-	Immovable_Descr(const LuaTable&, const World&);
-	~Immovable_Descr() override;
+	ImmovableDescr(const LuaTable&, const World&);
+	~ImmovableDescr() override;
 
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
@@ -143,7 +143,7 @@ protected:
 	int32_t     m_size;
 	Programs    m_programs;
 
-	/// The tribe to which this Immovable_Descr belongs or 0 if it is a
+	/// The tribe to which this ImmovableDescr belongs or 0 if it is a
 	/// world immovable
 	const Tribe_Descr * const m_owner_tribe;
 
@@ -157,18 +157,18 @@ private:
 
 	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
-	DISALLOW_COPY_AND_ASSIGN(Immovable_Descr);
+	DISALLOW_COPY_AND_ASSIGN(ImmovableDescr);
 };
 
 class Immovable : public BaseImmovable {
-	friend struct Immovable_Descr;
+	friend struct ImmovableDescr;
 	friend struct ImmovableProgram;
 	friend class Map;
 
-	MO_DESCR(Immovable_Descr)
+	MO_DESCR(ImmovableDescr)
 
 public:
-	Immovable(const Immovable_Descr &);
+	Immovable(const ImmovableDescr &);
 	~Immovable();
 
 	Player * get_owner() const {return m_owner;}

@@ -33,16 +33,16 @@ class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
 
-class Fleet_Descr : public MapObjectDescr {
+class FleetDescr : public MapObjectDescr {
 public:
-	Fleet_Descr(char const* const _name, char const* const _descname)
+	FleetDescr(char const* const _name, char const* const _descname)
 		: MapObjectDescr(MapObjectType::FLEET, _name, _descname) {
 	}
-	~Fleet_Descr() override {
+	~FleetDescr() override {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Fleet_Descr);
+	DISALLOW_COPY_AND_ASSIGN(FleetDescr);
 };
 
 /**
@@ -71,7 +71,7 @@ struct Fleet : MapObject {
 		PortPath() : cost(-1) {}
 	};
 
-	const Fleet_Descr& descr() const;
+	const FleetDescr& descr() const;
 
 	Fleet(Player & player);
 

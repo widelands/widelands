@@ -58,14 +58,14 @@ class Building;
 /*
  * Common to all buildings!
  */
-struct Building_Descr : public MapObjectDescr {
+struct BuildingDescr : public MapObjectDescr {
 	typedef std::vector<Building_Index> FormerBuildings;
 
-	Building_Descr
+	BuildingDescr
 		(MapObjectType type, char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	~Building_Descr() override {}
+	~BuildingDescr() override {}
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
@@ -155,15 +155,15 @@ private:
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
-	DISALLOW_COPY_AND_ASSIGN(Building_Descr);
+	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
 
 class Building : public PlayerImmovable {
-	friend struct Building_Descr;
+	friend struct BuildingDescr;
 	friend class Map_Buildingdata_Data_Packet;
 
-	MO_DESCR(Building_Descr)
+	MO_DESCR(BuildingDescr)
 
 public:
 	// Player capabilities: which commands can a player issue for this building?
@@ -176,7 +176,7 @@ public:
 	typedef std::vector<Building_Index> FormerBuildings;
 
 public:
-	Building(const Building_Descr &);
+	Building(const BuildingDescr &);
 	virtual ~Building();
 
 	void load_finish(Editor_Game_Base &) override;

@@ -43,10 +43,10 @@ namespace Widelands {
 namespace {
 // Every MapObject() needs to have a description. So we make a dummy one for
 // Fleet.
-Fleet_Descr g_fleet_descr("fleet", "Fleet");
+FleetDescr g_fleet_descr("fleet", "Fleet");
 }  // namespace
 
-const Fleet_Descr& Fleet::descr() const {
+const FleetDescr& Fleet::descr() const {
 	return g_fleet_descr;
 }
 

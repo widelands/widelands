@@ -137,7 +137,7 @@ ImmovableProgram IMPLEMENTATION
 ImmovableProgram::ImmovableProgram(const std::string& directory,
                                    Profile& prof,
                                    const std::string& _name,
-                                   Immovable_Descr& immovable)
+											  ImmovableDescr& immovable)
    : m_name(_name) {
 	Section& program_s = prof.get_safe_section(_name.c_str());
 	while (Section::Value* const v = program_s.get_next_val()) {
@@ -179,7 +179,7 @@ ImmovableProgram::ImmovableProgram(const std::string& directory,
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
-											  Immovable_Descr* immovable)
+											  ImmovableDescr* immovable)
    : m_name(init_name) {
 	for (const std::string& line : lines) {
 		std::vector<std::string> parts;
@@ -214,7 +214,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 /*
 ==============================================================================
 
-Immovable_Descr IMPLEMENTATION
+ImmovableDescr IMPLEMENTATION
 
 ==============================================================================
 */
@@ -222,7 +222,7 @@ Immovable_Descr IMPLEMENTATION
 /**
  * Parse an immovable from its conf file.
  */
-Immovable_Descr::Immovable_Descr
+ImmovableDescr::ImmovableDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const * const owner_tribe)
@@ -283,7 +283,7 @@ Immovable_Descr::Immovable_Descr
 	}
 }
 
-Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world) :
+ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
 	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), table.get_string("descname")),
 	m_size(BaseImmovable::NONE),
@@ -322,19 +322,19 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world) :
 	make_sure_default_program_is_there();
 }
 
-const EditorCategory& Immovable_Descr::editor_category() const {
+const EditorCategory& ImmovableDescr::editor_category() const {
 	return *editor_category_;
 }
 
-bool Immovable_Descr::has_terrain_affinity() const {
+bool ImmovableDescr::has_terrain_affinity() const {
 	return terrain_affinity_.get() != nullptr;
 }
 
-const TerrainAffinity& Immovable_Descr::terrain_affinity() const {
+const TerrainAffinity& ImmovableDescr::terrain_affinity() const {
 	return *terrain_affinity_;
 }
 
-void Immovable_Descr::make_sure_default_program_is_there() {
+void ImmovableDescr::make_sure_default_program_is_there() {
 	if (!m_programs.count("program")) {  //  default program
 		assert(is_animation_known("idle"));
 		char parameters[] = "idle";
@@ -346,7 +346,7 @@ void Immovable_Descr::make_sure_default_program_is_there() {
 /**
  * Cleanup
 */
-Immovable_Descr::~Immovable_Descr()
+ImmovableDescr::~ImmovableDescr()
 {
 	while (m_programs.size()) {
 		delete m_programs.begin()->second;
@@ -358,7 +358,7 @@ Immovable_Descr::~Immovable_Descr()
 /**
  * Find the program of the given name.
 */
-ImmovableProgram const * Immovable_Descr::get_program
+ImmovableProgram const * ImmovableDescr::get_program
 	(const std::string & program_name) const
 {
 	Programs::const_iterator const it = m_programs.find(program_name);
@@ -375,7 +375,7 @@ ImmovableProgram const * Immovable_Descr::get_program
 /**
  * Create an immovable of this type
 */
-Immovable & Immovable_Descr::create
+Immovable & ImmovableDescr::create
 	(Editor_Game_Base & egbase, Coords const coords) const
 {
 	assert(this);
@@ -394,7 +394,7 @@ IMPLEMENTATION
 ==============================
 */
 
-Immovable::Immovable(const Immovable_Descr & imm_descr) :
+Immovable::Immovable(const ImmovableDescr & imm_descr) :
 BaseImmovable (imm_descr),
 m_owner(nullptr),
 m_anim        (0),
@@ -809,7 +809,7 @@ MapObject::Loader * Immovable::load
 
 ImmovableProgram::Action::~Action() {}
 
-ImmovableProgram::ActAnimate::ActAnimate(char* parameters, Immovable_Descr& descr) {
+ImmovableProgram::ActAnimate::ActAnimate(char* parameters, ImmovableDescr& descr) {
 	try {
 		bool reached_end;
 		char * const animation_name = next_word(parameters, reached_end);
@@ -845,7 +845,7 @@ void ImmovableProgram::ActAnimate::execute
 
 
 ImmovableProgram::ActPlayFX::ActPlayFX
-	(const std::string & directory, char * parameters, const Immovable_Descr &)
+	(const std::string & directory, char * parameters, const ImmovableDescr &)
 {
 	try {
 		bool reached_end;
@@ -880,7 +880,7 @@ void ImmovableProgram::ActPlayFX::execute
 
 
 ImmovableProgram::ActTransform::ActTransform
-	(char * parameters, Immovable_Descr & descr)
+	(char * parameters, ImmovableDescr & descr)
 {
 	try {
 		tribe = true;
@@ -955,7 +955,7 @@ void ImmovableProgram::ActTransform::execute
 
 
 ImmovableProgram::ActGrow::ActGrow
-	(char * parameters, Immovable_Descr & descr)
+	(char * parameters, ImmovableDescr & descr)
 {
 	if (!descr.has_terrain_affinity()) {
 		throw game_data_error(
@@ -1002,7 +1002,7 @@ ImmovableProgram::ActGrow::ActGrow
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
 	const Map& map = game.map();
 	FCoords const f = map.get_fcoords(immovable.get_position());
-	const Immovable_Descr& descr = immovable.descr();
+	const ImmovableDescr& descr = immovable.descr();
 
 	if (logic_rand_as_double(&game) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
@@ -1017,7 +1017,7 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 /**
  * remove
 */
-ImmovableProgram::ActRemove::ActRemove(char * parameters, Immovable_Descr &)
+ImmovableProgram::ActRemove::ActRemove(char * parameters, ImmovableDescr &)
 {
 	try {
 		if (*parameters) {
@@ -1044,7 +1044,7 @@ void ImmovableProgram::ActRemove::execute
 		immovable.program_step(game);
 }
 
-ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
+ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 {
 	try {
 		tribe = true;
@@ -1102,7 +1102,7 @@ void ImmovableProgram::ActSeed::execute
 {
 	const Map& map = game.map();
 	FCoords const f = map.get_fcoords(immovable.get_position());
-	const Immovable_Descr& descr = immovable.descr();
+	const ImmovableDescr& descr = immovable.descr();
 
 	if (logic_rand_as_double(&game) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
@@ -1133,7 +1133,7 @@ void ImmovableProgram::ActSeed::execute
 }
 
 ImmovableProgram::ActConstruction::ActConstruction
-	(char * parameters, Immovable_Descr & descr, const std::string & directory, Profile & prof)
+	(char * parameters, ImmovableDescr & descr, const std::string & directory, Profile & prof)
 {
 	try {
 		if (!descr.get_owner_tribe())

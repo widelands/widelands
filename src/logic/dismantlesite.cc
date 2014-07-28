@@ -36,17 +36,17 @@
 
 namespace Widelands {
 
-DismantleSite_Descr::DismantleSite_Descr
+DismantlesiteDescr::DismantlesiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Building_Descr(MapObjectType::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
+	BuildingDescr(MapObjectType::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }
 
-Building & DismantleSite_Descr::create_object() const {
+Building & DismantlesiteDescr::create_object() const {
 	return *new DismantleSite(*this);
 }
 
@@ -59,12 +59,12 @@ IMPLEMENTATION
 */
 
 
-DismantleSite::DismantleSite(const DismantleSite_Descr & gdescr) :
+DismantleSite::DismantleSite(const DismantlesiteDescr & gdescr) :
 Partially_Finished_Building(gdescr)
 {}
 
 DismantleSite::DismantleSite
-	(const DismantleSite_Descr & gdescr, Editor_Game_Base & egbase, Coords const c,
+	(const DismantlesiteDescr & gdescr, Editor_Game_Base & egbase, Coords const c,
 	 Player & plr, bool loading, Building::FormerBuildings & former_buildings)
 :
 Partially_Finished_Building(gdescr)
@@ -76,7 +76,7 @@ Partially_Finished_Building(gdescr)
 	for (Building_Index former_idx : former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
-	const Building_Descr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
+	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
 	set_building(*cur_descr);
 
 	if (loading) {
@@ -135,7 +135,7 @@ void DismantleSite::count_returned_wares
 {
 	for (Building_Index former_idx : building->get_former_buildings()) {
 		const std::map<Ware_Index, uint8_t> * return_wares;
-		const Building_Descr* former_descr = building->descr().tribe().get_building_descr(former_idx);
+		const BuildingDescr* former_descr = building->descr().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
 		} else {

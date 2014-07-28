@@ -24,16 +24,16 @@
 namespace Widelands {
 class Soldier;
 
-class Battle_Descr : public MapObjectDescr {
+class BattleDescr : public MapObjectDescr {
 public:
-	Battle_Descr(char const* const _name, char const* const _descname)
+	BattleDescr(char const* const _name, char const* const _descname)
 		: MapObjectDescr(MapObjectType::BATTLE, _name, _descname) {
 	}
-	~Battle_Descr() override {
+	~BattleDescr() override {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Battle_Descr);
+	DISALLOW_COPY_AND_ASSIGN(BattleDescr);
 };
 
 /**
@@ -46,7 +46,7 @@ private:
  */
 class Battle : public MapObject {
 public:
-	const Battle_Descr& descr() const;
+	const BattleDescr& descr() const;
 
 	Battle(); //  for loading an existing battle from a savegame
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game

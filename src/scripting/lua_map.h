@@ -39,10 +39,10 @@
 
 
 namespace Widelands {
-	struct Soldier_Descr;
-	struct Building_Descr;
+	struct SoldierDescr;
+	struct BuildingDescr;
 	struct WareDescr;
-	class Worker_Descr;
+	class WorkerDescr;
 	class Bob;
 }
 
@@ -149,7 +149,7 @@ public:
 	virtual ~L_BuildingDescription() {}
 
 	L_BuildingDescription() {}
-	L_BuildingDescription(const Widelands::Building_Descr* const buildingdescr)
+	L_BuildingDescription(const Widelands::BuildingDescr* const buildingdescr)
 	   : L_MapObjectDescription(buildingdescr) {
 	}
 	L_BuildingDescription(lua_State* L) : L_MapObjectDescription(L) {
@@ -187,7 +187,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Building_Descr)
+	CASTED_GET_DESCRIPTION(BuildingDescr)
 };
 
 
@@ -198,7 +198,7 @@ public:
 	virtual ~L_ConstructionSiteDescription() {}
 
 	L_ConstructionSiteDescription() {}
-	L_ConstructionSiteDescription(const Widelands::ConstructionSite_Descr* const constructionsitedescr)
+	L_ConstructionSiteDescription(const Widelands::ConstructionsiteDescr* const constructionsitedescr)
 		: L_BuildingDescription(constructionsitedescr) {
 	}
 	L_ConstructionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
@@ -217,7 +217,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(ConstructionSite_Descr)
+	CASTED_GET_DESCRIPTION(ConstructionSiteDescr)
 };
 
 
@@ -228,7 +228,7 @@ public:
 	virtual ~L_ProductionSiteDescription() {}
 
 	L_ProductionSiteDescription() {}
-	L_ProductionSiteDescription(const Widelands::ProductionSite_Descr* const productionsitedescr)
+	L_ProductionSiteDescription(const Widelands::ProductionsiteDescr* const productionsitedescr)
 	   : L_BuildingDescription(productionsitedescr) {
 	}
 	L_ProductionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
@@ -251,7 +251,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(ProductionSite_Descr)
+	CASTED_GET_DESCRIPTION(ProductionSiteDescr)
 };
 
 
@@ -262,7 +262,7 @@ public:
 	virtual ~L_MilitarySiteDescription() {}
 
 	L_MilitarySiteDescription() {}
-	L_MilitarySiteDescription(const Widelands::ProductionSite_Descr* const militarysitedescr)
+	L_MilitarySiteDescription(const Widelands::ProductionsiteDescr* const militarysitedescr)
 	   : L_ProductionSiteDescription(militarysitedescr) {
 	}
 	L_MilitarySiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
@@ -283,7 +283,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(MilitarySite_Descr)
+	CASTED_GET_DESCRIPTION(MilitarySiteDescr)
 };
 
 
@@ -294,7 +294,7 @@ public:
 	virtual ~L_TrainingSiteDescription() {}
 
 	L_TrainingSiteDescription() {}
-	L_TrainingSiteDescription(const Widelands::ProductionSite_Descr* const trainingsitedescr)
+	L_TrainingSiteDescription(const Widelands::ProductionsiteDescr* const trainingsitedescr)
 	   : L_ProductionSiteDescription(trainingsitedescr) {
 	}
 	L_TrainingSiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
@@ -322,7 +322,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(TrainingSite_Descr)
+	CASTED_GET_DESCRIPTION(TrainingSiteDescr)
 };
 
 
@@ -334,7 +334,7 @@ public:
 	virtual ~L_WarehouseDescription() {}
 
 	L_WarehouseDescription() {}
-	L_WarehouseDescription(const Widelands::Warehouse_Descr* const warehousedescr)
+	L_WarehouseDescription(const Widelands::WarehouseDescr* const warehousedescr)
 	   : L_BuildingDescription(warehousedescr) {
 	}
 	L_WarehouseDescription(lua_State* L) : L_BuildingDescription(L) {
@@ -354,7 +354,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Warehouse_Descr)
+	CASTED_GET_DESCRIPTION(WarehouseDescr)
 };
 
 
@@ -401,7 +401,7 @@ public:
 	virtual ~L_WorkerDescription() {}
 
 	L_WorkerDescription() {}
-	L_WorkerDescription(const Widelands::Worker_Descr* const workerdescr)
+	L_WorkerDescription(const Widelands::WorkerDescr* const workerdescr)
 	   : L_MapObjectDescription(workerdescr) {
 	}
 	L_WorkerDescription(lua_State* L) : L_MapObjectDescription(L) {
@@ -428,7 +428,7 @@ public:
 	 */
 
 private:
-	CASTED_GET_DESCRIPTION(Worker_Descr)
+	CASTED_GET_DESCRIPTION(WorkerDescr)
 };
 
 #undef CASTED_GET_DESCRIPTION
@@ -641,7 +641,7 @@ public:
 	CASTED_GET(Road)
 	static int create_new_worker
 			(Widelands::PlayerImmovable &,
-			 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
+			 Widelands::Editor_Game_Base &, const Widelands::WorkerDescr *);
 };
 
 
@@ -735,7 +735,7 @@ public:
 	CASTED_GET(ProductionSite)
 	static int create_new_worker
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
-		 const Widelands::Worker_Descr *);
+		 const Widelands::WorkerDescr *);
 };
 
 class L_MilitarySite : public L_Building {

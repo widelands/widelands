@@ -35,16 +35,16 @@
 namespace Widelands {
 
 namespace {
-Battle_Descr g_Battle_Descr("battle", "Battle");
+BattleDescr g_battle_descr("battle", "Battle");
 }
 
-const Battle_Descr& Battle::descr() const {
-	return g_Battle_Descr;
+const BattleDescr& Battle::descr() const {
+	return g_battle_descr;
 }
 
 Battle::Battle ()
 	:
-	MapObject(&g_Battle_Descr),
+	MapObject(&g_battle_descr),
 	m_first(nullptr),
 	m_second(nullptr),
 	m_creationtime(0),
@@ -55,7 +55,7 @@ Battle::Battle ()
 {}
 
 Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
-	MapObject     (&g_Battle_Descr),
+	MapObject     (&g_battle_descr),
 	m_first        (&First),
 	m_second       (&Second),
 	m_readyflags   (0),

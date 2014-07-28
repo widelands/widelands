@@ -65,7 +65,7 @@ struct ImmovableProgram {
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
 	struct ActAnimate : public Action {
-		ActAnimate(char * parameters, Immovable_Descr &);
+		ActAnimate(char * parameters, ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 		uint32_t animation() const {return m_id;}
 	private:
@@ -91,7 +91,7 @@ struct ImmovableProgram {
 	///       name of the replacement object
 	struct ActTransform : public Action {
 		ActTransform
-			(char * parameters, Immovable_Descr &);
+			(char * parameters, ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
@@ -103,7 +103,7 @@ struct ImmovableProgram {
 	/// Like ActTransform but the probability is determined by the suitability.
 	struct ActGrow : public Action {
 		ActGrow
-			(char * parameters, Immovable_Descr &);
+			(char * parameters, ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
@@ -111,14 +111,14 @@ struct ImmovableProgram {
 	};
 
 	struct ActRemove : public Action {
-		ActRemove(char * parameters, Immovable_Descr &);
+		ActRemove(char * parameters, ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 	private:
 		uint8_t probability;
 	};
 
 	struct ActSeed : public Action {
-		ActSeed(char * parameters, Immovable_Descr &);
+		ActSeed(char * parameters, ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
@@ -142,7 +142,7 @@ struct ImmovableProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(const std::string & directory, char * parameters, const Immovable_Descr &);
+		ActPlayFX(const std::string & directory, char * parameters, const ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string name;
@@ -163,7 +163,7 @@ struct ImmovableProgram {
 	 *       Time until construction decays one step if no progress has been made.
 	 */
 	struct ActConstruction : public Action {
-		ActConstruction(char * parameters, Immovable_Descr &, const std::string & directory, Profile &);
+		ActConstruction(char * parameters, ImmovableDescr &, const std::string & directory, Profile &);
 		void execute(Game &, Immovable &) const override;
 
 		Duration buildtime() const {return m_buildtime;}
@@ -185,14 +185,14 @@ struct ImmovableProgram {
 	// Create an immovable program from a number of lines.
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
-	                 Immovable_Descr* immovable);
+	                 ImmovableDescr* immovable);
 
 	/// Create a program by parsing a conf-file section.
 	ImmovableProgram
 		(const std::string    & directory,
 		 Profile              &,
 		 const std::string    & name,
-		 Immovable_Descr      &);
+		 ImmovableDescr      &);
 
 	~ImmovableProgram() {
 		for (Action * action : m_actions) {

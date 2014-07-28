@@ -46,7 +46,7 @@ class Worker : public Bob {
 	friend struct WorkerProgram;
 	friend struct Map_Bobdata_Data_Packet;
 
-	MO_DESCR(Worker_Descr)
+	MO_DESCR(WorkerDescr)
 
 	struct Action {
 		typedef bool (Worker::*execute_t)(Game &, Bob::State &, const Action &);
@@ -74,7 +74,7 @@ class Worker : public Bob {
 
 
 public:
-	Worker(const Worker_Descr &);
+	Worker(const WorkerDescr &);
 	virtual ~Worker();
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}

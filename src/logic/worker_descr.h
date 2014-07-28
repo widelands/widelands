@@ -35,7 +35,7 @@ class Worker;
 struct WorkerProgram;
 
 
-class Worker_Descr : public BobDescr
+class WorkerDescr : public BobDescr
 {
 	friend struct Tribe_Descr;
 	friend class Warehouse;
@@ -44,11 +44,11 @@ class Worker_Descr : public BobDescr
 public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
-	Worker_Descr
+	WorkerDescr
 		(MapObjectType type, char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr &);
-	~Worker_Descr() override;
+	~WorkerDescr() override;
 
 	Bob & create_object() const override;
 
@@ -101,7 +101,7 @@ public:
 	Worker & create
 		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
 
-	typedef std::map<Worker_Descr const *, std::string> becomes_map_t;
+	typedef std::map<WorkerDescr const *, std::string> becomes_map_t;
 	uint32_t movecaps() const override;
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
@@ -131,7 +131,7 @@ protected:
 	Ware_Index  m_becomes;
 	Programs    m_programs;
 private:
-	DISALLOW_COPY_AND_ASSIGN(Worker_Descr);
+	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
 
 }

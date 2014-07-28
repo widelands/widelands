@@ -39,7 +39,7 @@ struct ProductionProgram;
 class Soldier;
 class Request;
 class WaresQueue;
-class Worker_Descr;
+class WorkerDescr;
 
 
 /**
@@ -52,14 +52,14 @@ class Worker_Descr;
  * A production site can have one (or more) input wares types. Every input
  * wares type has an associated store.
  */
-struct ProductionSite_Descr : public Building_Descr {
+struct ProductionsiteDescr : public BuildingDescr {
 	friend struct ProductionProgram; // To add animations
 
-	ProductionSite_Descr
+	ProductionsiteDescr
 		(MapObjectType type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &, const World&);
-	~ProductionSite_Descr() override;
+	~ProductionsiteDescr() override;
 
 	Building & create_object() const override;
 
@@ -108,7 +108,7 @@ private:
 	std::string m_out_of_resource_message;
 	uint32_t    m_out_of_resource_delay_attempts;
 
-	DISALLOW_COPY_AND_ASSIGN(ProductionSite_Descr);
+	DISALLOW_COPY_AND_ASSIGN(ProductionsiteDescr);
 };
 
 class ProductionSite : public Building {
@@ -128,10 +128,10 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlayFX;
 	friend struct ProductionProgram::ActConstruct;
-	MO_DESCR(ProductionSite_Descr)
+	MO_DESCR(ProductionSiteDescr)
 
 public:
-	ProductionSite(const ProductionSite_Descr & descr);
+	ProductionSite(const ProductionsiteDescr & descr);
 	virtual ~ProductionSite();
 
 	void log_general_info(const Editor_Game_Base &) override;
@@ -164,7 +164,7 @@ public:
 	void act(Game &, uint32_t data) override;
 
 	void remove_worker(Worker &) override;
-	int warp_worker(Editor_Game_Base &, const Worker_Descr & wd);
+	int warp_worker(Editor_Game_Base &, const WorkerDescr & wd);
 
 	bool fetch_from_flag(Game &) override;
 	bool get_building_work(Game &, Worker &, bool success) override;

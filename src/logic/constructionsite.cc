@@ -42,12 +42,12 @@
 
 namespace Widelands {
 
-ConstructionSite_Descr::ConstructionSite_Descr
+ConstructionsiteDescr::ConstructionsiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Building_Descr(MapObjectType::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
+	BuildingDescr(MapObjectType::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
 
@@ -60,7 +60,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 }
 
 
-Building & ConstructionSite_Descr::create_object() const {
+Building & ConstructionsiteDescr::create_object() const {
 	return *new ConstructionSite(*this);
 }
 
@@ -74,7 +74,7 @@ IMPLEMENTATION
 */
 
 
-ConstructionSite::ConstructionSite(const ConstructionSite_Descr & cs_descr) :
+ConstructionSite::ConstructionSite(const ConstructionsiteDescr & cs_descr) :
 Partially_Finished_Building (cs_descr),
 m_fetchfromflag  (0),
 m_builder_idle   (false)
@@ -118,7 +118,7 @@ WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
 Set the type of building we're going to build
 ===============
 */
-void ConstructionSite::set_building(const Building_Descr & building_descr) {
+void ConstructionSite::set_building(const BuildingDescr & building_descr) {
 	Partially_Finished_Building::set_building(building_descr);
 
 	m_info.becomes = &building_descr;
@@ -137,7 +137,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	if (!m_old_buildings.empty()) {
 		// Enhancement
 		Building_Index was_index = m_old_buildings.back();
-		const Building_Descr* was_descr = descr().tribe().get_building_descr(was_index);
+		const BuildingDescr* was_descr = descr().tribe().get_building_descr(was_index);
 		m_info.was = was_descr;
 		buildcost = &m_building->enhancement_cost();
 	} else {
@@ -396,7 +396,7 @@ void ConstructionSite::draw
 		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (!m_old_buildings.empty()) {
 		Building_Index prev_idx = m_old_buildings.back();
-		const Building_Descr* prev_building = descr().tribe().get_building_descr(prev_idx);
+		const BuildingDescr* prev_building = descr().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		uint32_t prev_building_anim_idx;

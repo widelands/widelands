@@ -61,7 +61,7 @@ namespace {
 
 void terraform_for_building
 	(Widelands::Editor_Game_Base& egbase, const Widelands::Player_Number player_number,
-	 const Widelands::Coords location, const Widelands::Building_Descr* descr)
+	 const Widelands::Coords location, const Widelands::BuildingDescr* descr)
 {
 	Widelands::Map & map = egbase.map();
 	Widelands::FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -110,7 +110,7 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
 /**
  * Find the longest possible enhancement chain leading to the given
  * building descr. The FormerBuildings given in reference must be empty and will be
- * filled with the Building_Descr.
+ * filled with the BuildingDescr.
  */
 void find_former_buildings
 	(const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi,
@@ -121,7 +121,7 @@ void find_former_buildings
 
 	for (;;) {
 		Widelands::Building_Index oldest_idx = former_buildings->front();
-		const Widelands::Building_Descr * oldest = tribe_descr.get_building_descr(oldest_idx);
+		const Widelands::BuildingDescr * oldest = tribe_descr.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
@@ -130,7 +130,7 @@ void find_former_buildings
 			 i < tribe_descr.get_nrbuildings();
 			 ++i)
 		{
-			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
+			const Widelands::BuildingDescr* ob = tribe_descr.get_building_descr(i);
 			if (ob->enhancement() == oldest_idx) {
 				former_buildings->insert(former_buildings->begin(), i);
 				break;
@@ -506,11 +506,11 @@ Road & Player::force_road(const Path & path) {
 
 Building & Player::force_building
 	(Coords                const location,
-	 const Building_Descr::FormerBuildings & former_buildings)
+	 const BuildingDescr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
 	Building_Index idx = former_buildings.back();
-	const Building_Descr* descr = tribe().get_building_descr(idx);
+	const BuildingDescr* descr = tribe().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
@@ -523,12 +523,12 @@ Building & Player::force_building
 
 Building& Player::force_csite
 	(Coords const location, Building_Index b_idx,
-	 const Building_Descr::FormerBuildings & former_buildings)
+	 const BuildingDescr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
 	if (!former_buildings.empty()) {
 		Building_Index idx = former_buildings.back();
-		const Building_Descr * descr = tribe().get_building_descr(idx);
+		const BuildingDescr * descr = tribe().get_building_descr(idx);
 		terraform_for_building(egbase(), player_number(), location, descr);
 	}
 	FCoords flag_loc;
@@ -549,14 +549,14 @@ Place a construction site or building, checking that it's legal to do so.
 */
 Building * Player::build
 	(Coords c, Building_Index const idx, bool constructionsite,
-	 Building_Descr::FormerBuildings & former_buildings)
+	 BuildingDescr::FormerBuildings & former_buildings)
 {
 	int32_t buildcaps;
 
 	// Validate building type
 	if (idx >= tribe().get_nrbuildings())
 		return nullptr;
-	const Building_Descr & descr = *tribe().get_building_descr(idx);
+	const BuildingDescr & descr = *tribe().get_building_descr(idx);
 
 	if (!descr.is_buildable())
 		return nullptr;

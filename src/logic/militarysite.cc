@@ -40,14 +40,14 @@
 
 namespace Widelands {
 
-MilitarySite_Descr::MilitarySite_Descr
+MilitarysiteDescr::MilitarysiteDescr
 	(char        const * const _name,
 	 char        const * const _descname,
 	 const std::string & directory, Profile & prof,  Section & global_s,
 	 const Tribe_Descr & _tribe,
 	 const World& world)
 	:
-	ProductionSite_Descr
+	ProductionsiteDescr
 		(MapObjectType::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
@@ -72,7 +72,7 @@ MilitarySite_Descr::MilitarySite_Descr
 Create a new building of this type
 ===============
 */
-Building & MilitarySite_Descr::create_object() const {
+Building & MilitarysiteDescr::create_object() const {
 	return *new MilitarySite(*this);
 }
 
@@ -85,7 +85,7 @@ class MilitarySite
 =============================
 */
 
-MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
+MilitarySite::MilitarySite(const MilitarysiteDescr & ms_descr) :
 ProductionSite(ms_descr),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
@@ -866,7 +866,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
 		for (Building_Index former_idx : m_old_buildings) {
-			const Building_Descr * old_descr = descr().tribe().get_building_descr(former_idx);
+			const BuildingDescr * old_descr = descr().tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
 			std::string::size_type const dot = bldname.rfind('.');

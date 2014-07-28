@@ -246,7 +246,7 @@ void DefaultAI::late_initialization() {
 	const World& world = game().world();
 
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
-		const Building_Descr& bld = *tribe_->get_building_descr(i);
+		const BuildingDescr& bld = *tribe_->get_building_descr(i);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
@@ -292,9 +292,9 @@ void DefaultAI::late_initialization() {
 			bo.plants_trees_ = false;
 
 		// Read all interesting data from ware producing buildings
-		if (typeid(bld) == typeid(ProductionSite_Descr)) {
-			const ProductionSite_Descr& prod =
-				ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
+		if (typeid(bld) == typeid(ProductionsiteDescr)) {
+			const ProductionsiteDescr& prod =
+				ref_cast<ProductionsiteDescr const, BuildingDescr const>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
@@ -324,22 +324,22 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 
-		if (typeid(bld) == typeid(MilitarySite_Descr)) {
+		if (typeid(bld) == typeid(MilitarysiteDescr)) {
 			bo.type = BuildingObserver::MILITARYSITE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(Warehouse_Descr)) {
+		if (typeid(bld) == typeid(WarehouseDescr)) {
 			bo.type = BuildingObserver::WAREHOUSE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(TrainingSite_Descr)) {
+		if (typeid(bld) == typeid(TrainingsiteDescr)) {
 			bo.type = BuildingObserver::TRAININGSITE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
+		if (typeid(bld) == typeid(ConstructionsiteDescr)) {
 			bo.type = BuildingObserver::CONSTRUCTIONSITE;
 			continue;
 		}
@@ -577,9 +577,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 			if (upcast(Building const, building, &base_immovable)) {
 				if (upcast(ConstructionSite const, constructionsite, building)) {
-					const Building_Descr& target_descr = constructionsite->building();
+					const BuildingDescr& target_descr = constructionsite->building();
 
-					if (dynamic_cast<ProductionSite_Descr const*>(&target_descr))
+					if (dynamic_cast<ProductionsiteDescr const*>(&target_descr))
 						consider_productionsite_influence(
 						   field,
 						   immovables.at(i).coords,
@@ -636,9 +636,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 		if (upcast(Building const, building, &base_immovable)) {
 			if (upcast(ConstructionSite const, constructionsite, building)) {
-				const Building_Descr& target_descr = constructionsite->building();
+				const BuildingDescr& target_descr = constructionsite->building();
 
-				if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr)) {
+				if (upcast(MilitarysiteDescr const, target_ms_d, &target_descr)) {
 					const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
 					const int32_t radius = target_ms_d->get_conquers() + 4;
 					const int32_t v = radius - dist;
@@ -2021,7 +2021,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Only enhance buildings that are allowed (scenario mode)
 	if (player_->is_building_type_allowed(enhancement)) {
-		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 		// do not build the same building so soon (kind of duplicity check)
@@ -2128,7 +2128,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	// Only enhance buildings that are allowed (scenario mode)
 	if (player_->is_building_type_allowed(enhancement)) {
 		// first exclude possibility there are enhancements in construction or unoccupied_
-		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 		if (en_bo.unoccupied_ + en_bo.cnt_under_construction_ <= 0)

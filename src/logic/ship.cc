@@ -49,7 +49,7 @@
 
 namespace Widelands {
 
-Ship_Descr::Ship_Descr
+ShipDescr::ShipDescr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
@@ -70,16 +70,16 @@ Ship_Descr::Ship_Descr
 	m_vision_range = global_s.get_natural("vision_range", 7);
 }
 
-uint32_t Ship_Descr::movecaps() const {
+uint32_t ShipDescr::movecaps() const {
 	return MOVECAPS_SWIM;
 }
 
-Bob & Ship_Descr::create_object() const {
+Bob & ShipDescr::create_object() const {
 	return *new Ship(*this);
 }
 
 
-Ship::Ship(const Ship_Descr & gdescr) :
+Ship::Ship(const ShipDescr & gdescr) :
 	Bob(gdescr),
 	m_window(nullptr),
 	m_fleet(nullptr),
@@ -1048,12 +1048,12 @@ MapObject::Loader * Ship::load
 		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
 			std::string owner = fr.CString();
 			std::string name = fr.CString();
-			const Ship_Descr * descr = nullptr;
+			const ShipDescr * descr = nullptr;
 
 			egbase.manually_load_tribe(owner);
 
 			if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
-				descr = dynamic_cast<const Ship_Descr *>
+				descr = dynamic_cast<const ShipDescr *>
 					(tribe->get_bob_descr(name));
 
 			if (!descr)

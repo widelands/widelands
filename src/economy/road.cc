@@ -34,10 +34,10 @@ namespace Widelands {
 
 // dummy instance because MapObject needs a description
 namespace {
-const Road_Descr g_road_descr("road", "Road");
+const RoadDescr g_road_descr("road", "Road");
 }
 
-const Road_Descr& Road::descr() const {
+const RoadDescr& Road::descr() const {
 	return g_road_descr;
 }
 

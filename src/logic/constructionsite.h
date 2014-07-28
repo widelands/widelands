@@ -43,24 +43,24 @@ A construction site can have a worker.
 A construction site has one (or more) input wares types, each with an
   associated store.
 
-Note that the ConstructionSite_Descr class is mostly a dummy class.
+Note that the ConstructionSiteDescr class is mostly a dummy class.
 The ConstructionSite is derived from Building so that it fits in more cleanly
 with the transport and Flag code.
 
-Every tribe has exactly one ConstructionSite_Descr.
+Every tribe has exactly one ConstructionSiteDescr.
 The ConstructionSite's idling animation is the basic construction site marker.
 */
-struct ConstructionSite_Descr : public Building_Descr {
-	ConstructionSite_Descr
+struct ConstructionsiteDescr : public BuildingDescr {
+	ConstructionsiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe);
-	~ConstructionSite_Descr() override {}
+	~ConstructionsiteDescr() override {}
 
 	Building & create_object() const override;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(ConstructionSite_Descr);
+	DISALLOW_COPY_AND_ASSIGN(ConstructionsiteDescr);
 };
 
 class ConstructionSite : public Partially_Finished_Building {
@@ -68,10 +68,10 @@ class ConstructionSite : public Partially_Finished_Building {
 
 	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
 
-	MO_DESCR(ConstructionSite_Descr)
+	MO_DESCR(ConstructionSiteDescr)
 
 public:
-	ConstructionSite(const ConstructionSite_Descr & descr);
+	ConstructionSite(const ConstructionsiteDescr & descr);
 
 	std::string get_statistics_string() override;
 
@@ -79,8 +79,8 @@ public:
 
 	WaresQueue & waresqueue(Ware_Index) override;
 
-	void set_building(const Building_Descr &) override;
-	const Building_Descr & building() const {return *m_building;}
+	void set_building(const BuildingDescr &) override;
+	const BuildingDescr & building() const {return *m_building;}
 
 	void init   (Editor_Game_Base &) override;
 	void cleanup(Editor_Game_Base &) override;

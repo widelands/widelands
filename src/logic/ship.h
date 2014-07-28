@@ -37,12 +37,12 @@ class Economy;
 struct Fleet;
 class PortDock;
 
-struct Ship_Descr : BobDescr {
-	Ship_Descr
+struct ShipDescr : BobDescr {
+	ShipDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	~Ship_Descr() override {}
+	~ShipDescr() override {}
 
 	Bob & create_object() const override;
 
@@ -57,7 +57,7 @@ private:
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
 	uint32_t m_vision_range;
-	DISALLOW_COPY_AND_ASSIGN(Ship_Descr);
+	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
 /**
@@ -66,9 +66,9 @@ private:
  * are an economy of their own and are not part of a Fleet.
  */
 struct Ship : Bob {
-	MO_DESCR(Ship_Descr)
+	MO_DESCR(ShipDescr)
 
-	Ship(const Ship_Descr & descr);
+	Ship(const ShipDescr & descr);
 	virtual ~Ship();
 
 	// Returns the fleet the ship is a part of.

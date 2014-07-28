@@ -42,19 +42,19 @@ the destructed building.
 */
 class DismantleSite;
 
-struct DismantleSite_Descr : public Building_Descr {
-	DismantleSite_Descr(char const* name,
+struct DismantlesiteDescr : public BuildingDescr {
+	DismantlesiteDescr(char const* name,
 	                    char const* descname,
 	                    const std::string& directory,
 	                    Profile&,
 	                    Section& global_s,
 							  const Tribe_Descr& tribe);
-	~DismantleSite_Descr() override {}
+	~DismantlesiteDescr() override {}
 
 	Building& create_object() const override;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(DismantleSite_Descr);
+	DISALLOW_COPY_AND_ASSIGN(DismantlesiteDescr);
 };
 
 class DismantleSite : public Partially_Finished_Building {
@@ -65,9 +65,9 @@ class DismantleSite : public Partially_Finished_Building {
 	MO_DESCR(DismantleSite_Descr)
 
 public:
-	DismantleSite(const DismantleSite_Descr & descr);
+	DismantleSite(const DismantlesiteDescr & descr);
 	DismantleSite
-		(const DismantleSite_Descr & descr, Editor_Game_Base &,
+		(const DismantlesiteDescr & descr, Editor_Game_Base &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
 	std::string get_statistics_string() override;

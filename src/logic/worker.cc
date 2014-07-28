@@ -716,7 +716,7 @@ bool Worker::run_object(Game & game, State & state, const Action & action)
 	if      (upcast(Immovable, immovable, obj))
 		immovable->switch_program(game, action.sparam1);
 	else if (upcast(Bob,       bob,       obj)) {
-		if        (upcast(Critter_Bob, crit, bob)) {
+		if        (upcast(Critter, crit, bob)) {
 			crit->reset_tasks(game); //  TODO(unknown): ask the critter more nicely
 			crit->start_task_program(game, action.sparam1);
 		} else if (upcast(Worker,      w,    bob)) {
@@ -778,7 +778,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume it
 	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	   const uint32_t index, const Immovable_Descr& immovable_description) {
+		const uint32_t index, const ImmovableDescr& immovable_description) {
 		double p = 1.;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
@@ -803,11 +803,11 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	if (list[0] == "attrib") {
 		state.svar1 = "world";
 
-		const DescriptionMaintainer<Immovable_Descr>& immovables = game.world().immovables();
+		const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
 
-		const uint32_t attribute_id = Immovable_Descr::get_attribute_id(list[1]);
+		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(list[1]);
 		for (uint32_t i = 0; i < immovables.get_nitems(); ++i) {
-			Immovable_Descr& immovable_descr = immovables.get_unmutable(i);
+			ImmovableDescr& immovable_descr = immovables.get_unmutable(i);
 			if (!immovable_descr.has_attribute(attribute_id)) {
 				continue;
 			}
@@ -818,7 +818,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		uint32_t immovable_index = descr().tribe().get_immovable_index(list[1]);
 
 		if (immovable_index > 0) {
-			const Immovable_Descr* imm = descr().tribe().get_immovable_descr(immovable_index);
+			const ImmovableDescr* imm = descr().tribe().get_immovable_descr(immovable_index);
 			test_suitability(immovable_index, *imm);
 		}
 	}
@@ -1016,7 +1016,7 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 }
 
 
-Worker::Worker(const Worker_Descr & worker_descr)
+Worker::Worker(const WorkerDescr & worker_descr)
 	:
 	Bob          (worker_descr),
 	m_economy    (nullptr),
@@ -3034,7 +3034,7 @@ MapObject::Loader * Worker::load
 		if (!tribe)
 			throw game_data_error("unknown tribe '%s'", tribename.c_str());
 
-		const Worker_Descr * descr =
+		const WorkerDescr * descr =
 			tribe->get_worker_descr(tribe->safe_worker_index(name));
 
 		Worker * worker = static_cast<Worker *>(&descr->create_object());

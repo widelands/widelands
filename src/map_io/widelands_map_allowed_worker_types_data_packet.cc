@@ -63,7 +63,7 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 						continue;
 
 					for (Ware_Index w = 0; w < tribe.get_nrworkers(); ++w) {
-						const Worker_Descr & w_descr = *tribe.get_worker_descr(w);
+						const WorkerDescr & w_descr = *tribe.get_worker_descr(w);
 						if (w_descr.is_buildable())
 							player->allow_worker_type
 								(w, s->get_bool(w_descr.name().c_str(), true));

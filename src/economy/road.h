@@ -31,15 +31,15 @@ namespace Widelands {
 struct Carrier;
 class Request;
 
-class Road_Descr : public MapObjectDescr {
+class RoadDescr : public MapObjectDescr {
 public:
-	Road_Descr(char const* const _name, char const* const _descname)
+	RoadDescr(char const* const _name, char const* const _descname)
 		: MapObjectDescr(MapObjectType::ROAD, _name, _descname) {
 	}
-	~Road_Descr() override {}
+	~RoadDescr() override {}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Road_Descr);
+	DISALLOW_COPY_AND_ASSIGN(RoadDescr);
 };
 
 /**
@@ -61,7 +61,7 @@ struct Road : public PlayerImmovable {
 	friend class Map_Roaddata_Data_Packet; // For saving
 	friend class Map_Road_Data_Packet; // For init()
 
-	const Road_Descr& descr() const;
+	const RoadDescr& descr() const;
 
 	static bool IsRoadDescr(MapObjectDescr const *);
 

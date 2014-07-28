@@ -280,12 +280,12 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	// iterate through all buildings to find first predecessor
 	for (;;) {
 		Building_Index former_idx = b.m_old_buildings.front();
-		const Building_Descr * oldest = t.get_building_descr(former_idx);
+		const BuildingDescr * oldest = t.get_building_descr(former_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
 		for (Building_Index i = 0; i < t.get_nrbuildings(); ++i) {
-			Building_Descr const * ob = t.get_building_descr(i);
+			BuildingDescr const * ob = t.get_building_descr(i);
 			if (ob->enhancement() == former_idx) {
 				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
 				break;
@@ -865,7 +865,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 		{
 			ProductionSite::Working_Position & wp_begin =
 				*productionsite.m_working_positions;
-			const ProductionSite_Descr & pr_descr = productionsite.descr();
+			const ProductionsiteDescr & pr_descr = productionsite.descr();
 			const BillOfMaterials & working_positions = pr_descr.working_positions();
 
 			uint16_t nr_worker_requests = fr.Unsigned16();
@@ -918,7 +918,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				Worker * worker = &mol.get<Worker>(fr.Unsigned32());
 
 				//  Find a working position that matches this worker.
-				const Worker_Descr & worker_descr = worker->descr();
+				const WorkerDescr & worker_descr = worker->descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
 				bool found_working_position = false;
 				for (const WareAmount& working_position : working_positions) {
@@ -1217,7 +1217,7 @@ void Map_Buildingdata_Data_Packet::Write
 			{
 				const Tribe_Descr& td = building->descr().tribe();
 				for (Building_Index b_idx : building->m_old_buildings) {
-					const Building_Descr* b_descr = td.get_building_descr(b_idx);
+					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
 					fw.Unsigned8(1);
 					fw.String(b_descr->name());
 				}

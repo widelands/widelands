@@ -40,14 +40,14 @@
 
 namespace Widelands {
 
-PortDock_Descr g_portdock_descr("portdock", "Port Dock");
+PortdockDescr g_portdock_descr("portdock", "Port Dock");
 
-const PortDock_Descr& PortDock::descr() const {
+const PortdockDescr& PortDock::descr() const {
 	return g_portdock_descr;
 }
 
 
-PortDock_Descr::PortDock_Descr(char const* const _name, char const* const _descname)
+PortdockDescr::PortdockDescr(char const* const _name, char const* const _descname)
 	:
 	MapObjectDescr(MapObjectType::PORTDOCK, _name, _descname)
 {

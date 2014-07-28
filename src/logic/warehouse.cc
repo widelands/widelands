@@ -252,10 +252,10 @@ Warehouse Building
 
 
 /// Warehouse Descr
-Warehouse_Descr::Warehouse_Descr
+WarehouseDescr::WarehouseDescr
 	(char const* const _name, char const* const _descname,
 	 const std::string& directory, Profile& prof, Section& global_s, const Tribe_Descr& _tribe)
-	: Building_Descr(MapObjectType::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
+	: BuildingDescr(MapObjectType::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
 	  m_conquers         (0),
 	  m_heal_per_second  (0)
 {
@@ -270,7 +270,7 @@ IMPLEMENTATION
 ==============================
 */
 
-Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
+Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
 	Building(warehouse_descr),
 	m_supply(new WarehouseSupply(this)),
 	m_next_military_act(0),
@@ -302,15 +302,15 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 	if (pw.index == INVALID_INDEX || !(pw.index < m_supply->get_workers().get_nrwareids()))
 		return false;
 
-	const Worker_Descr * w_desc = descr().tribe().get_worker_descr(pw.index);
+	const WorkerDescr * w_desc = descr().tribe().get_worker_descr(pw.index);
 	if (!w_desc || !w_desc->is_buildable())
 		return false;
 
-	const Worker_Descr::Buildcost & cost = w_desc->buildcost();
+	const WorkerDescr::Buildcost & cost = w_desc->buildcost();
 	uint32_t idx = 0;
 
 	for
-		(Worker_Descr::Buildcost::const_iterator cost_it = cost.begin();
+		(WorkerDescr::Buildcost::const_iterator cost_it = cost.begin();
 		 cost_it != cost.end(); ++cost_it, ++idx)
 	{
 		WareWorker type;
@@ -809,7 +809,7 @@ Worker & Warehouse::launch_worker
 				// Create a new one
 				// NOTE: This code lies about the tAttributes of the new worker
 				m_supply->remove_workers(ware, 1);
-				const Worker_Descr & workerdescr = *descr().tribe().get_worker_descr(ware);
+				const WorkerDescr & workerdescr = *descr().tribe().get_worker_descr(ware);
 				return workerdescr.create(game, owner(), this, m_position);
 			}
 		}
@@ -885,7 +885,7 @@ void Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 {
 	// Create a carrier
 	Ware_Index const carrierid = descr().tribe().worker_index("carrier");
-	const Worker_Descr & workerdescr = *descr().tribe().get_worker_descr(carrierid);
+	const WorkerDescr & workerdescr = *descr().tribe().get_worker_descr(carrierid);
 
 	Worker & worker = workerdescr.create(game, owner(), this, m_position);
 
@@ -943,7 +943,7 @@ void Warehouse::receive_worker(Game & game, Worker & worker)
 	worker.schedule_incorporate(game);
 }
 
-Building & Warehouse_Descr::create_object() const {
+Building & WarehouseDescr::create_object() const {
 	return *new Warehouse(*this);
 }
 
@@ -954,7 +954,7 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 			("worker type %d does not exists (max is %d)",
 			 worker, m_supply->get_workers().get_nrwareids());
 
-	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(worker);
+	const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(worker);
 	assert(&w_desc);
 	if (!w_desc.is_buildable())
 		return false;
@@ -983,7 +983,7 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	assert(can_create_worker (game, worker));
 
-	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(worker);
+	const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(worker);
 
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 		const std::string & input = buildcost.first;
@@ -1030,7 +1030,7 @@ uint32_t Warehouse::get_planned_workers(Game & /* game */, Ware_Index index) con
 std::vector<uint32_t> Warehouse::calc_available_for_worker
 	(Game & /* game */, Ware_Index index) const
 {
-	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(index);
+	const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(index);
 	std::vector<uint32_t> available;
 
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
@@ -1084,7 +1084,7 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 		pw->index = index;
 		pw->amount = 0;
 
-		const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(pw->index);
+		const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(pw->index);
 		for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 			const std::string & input_name = buildcost.first;
 
@@ -1114,7 +1114,7 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 void Warehouse::_update_planned_workers
 	(Game & game, Warehouse::PlannedWorkers & pw)
 {
-	const Worker_Descr & w_desc = *descr().tribe().get_worker_descr(pw.index);
+	const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(pw.index);
 
 	while (pw.amount && can_create_worker(game, pw.index)) {
 		create_worker(game, pw.index);

@@ -43,7 +43,7 @@ class Players_Manager;
 
 class Battle;
 class Bob;
-struct Building_Descr;
+struct BuildingDescr;
 class Immovable;
 class Map;
 struct Object_Manager;
