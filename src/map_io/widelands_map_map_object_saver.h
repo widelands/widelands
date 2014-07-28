@@ -73,11 +73,11 @@ private:
 		bool registered;
 		bool saved;
 	};
-	typedef std::map<const MapObject *, MapObjectRec> Map_Object_Map;
+	typedef std::map<const MapObject *, MapObjectRec> MapObjectMap;
 
 	MapObjectRec & get_object_record(const MapObject &);
 
-	Map_Object_Map m_objects;
+	MapObjectMap m_objects;
 	uint32_t m_nr_roads;
 	uint32_t m_nr_flags;
 	uint32_t m_nr_buildings;
