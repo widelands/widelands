@@ -47,7 +47,7 @@ return {
             hunting_bow = 1,
             milking_tongs = 2,
             hook_pole = 2,
-            pick = 12,
+            pick = 8,
             saw = 9,
             scythe = 4,
             shovel = 9,

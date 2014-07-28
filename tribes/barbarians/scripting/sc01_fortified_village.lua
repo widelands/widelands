@@ -38,7 +38,7 @@ return {
             ironore = 5,
             kitchen_tools = 4,
             meal = 4,
-            pick = 14,
+            pick = 8,
             ration = 12,
             raw_stone = 34,
             scythe = 6,
