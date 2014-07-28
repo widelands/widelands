@@ -32,7 +32,7 @@ class Economy;
 class Game;
 class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
-class Map_Object;
+class MapObject;
 class PortDock;
 class WareInstance;
 class Worker;
@@ -75,7 +75,7 @@ private:
 	void end_shipping(Game &);
 
 	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
-	void set_location(Game&, Map_Object* obj);
+	void set_location(Game&, MapObject* obj);
 
 	// Updates m_destination_dock.
 	void update_destination(Game &, PortDock &);

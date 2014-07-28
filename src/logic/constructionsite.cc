@@ -49,7 +49,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 	:
 	Building_Descr(MapObjectType::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
 {
-	add_attribute(Map_Object::CONSTRUCTIONSITE);
+	add_attribute(MapObject::CONSTRUCTIONSITE);
 
 	{ // animation when a worker entered the site
 		Section & sec = prof.get_safe_section("idle_with_worker");

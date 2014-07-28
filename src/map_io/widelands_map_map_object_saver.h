@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-class Map_Object;
+class MapObject;
 
 /*
  * This class helps to
@@ -39,13 +39,13 @@ class Map_Object;
 struct Map_Map_Object_Saver {
 	Map_Map_Object_Saver();
 
-	bool is_object_known(const Map_Object &) const;
-	Serial register_object(const Map_Object &);
+	bool is_object_known(const MapObject &) const;
+	Serial register_object(const MapObject &);
 
-	uint32_t get_object_file_index(const Map_Object &);
-	uint32_t get_object_file_index_or_zero(Map_Object const *);
+	uint32_t get_object_file_index(const MapObject &);
+	uint32_t get_object_file_index_or_zero(MapObject const *);
 
-	void mark_object_as_saved(const Map_Object &);
+	void mark_object_as_saved(const MapObject &);
 
 	// Information functions
 #ifndef NDEBUG
@@ -59,7 +59,7 @@ struct Map_Map_Object_Saver {
 	uint32_t get_nr_immovables     () const {return m_nr_immovables;}
 	uint32_t get_nr_battles        () const {return m_nr_battles;}
 
-	bool is_object_saved(const Map_Object &);
+	bool is_object_saved(const MapObject &);
 
 	/// \note Indexed by player number - 1.
 	Map_Message_Saver message_savers[MAX_PLAYERS];
@@ -73,9 +73,9 @@ private:
 		bool registered;
 		bool saved;
 	};
-	typedef std::map<const Map_Object *, MapObjectRec> Map_Object_Map;
+	typedef std::map<const MapObject *, MapObjectRec> Map_Object_Map;
 
-	MapObjectRec & get_object_record(const Map_Object &);
+	MapObjectRec & get_object_record(const MapObject &);
 
 	Map_Object_Map m_objects;
 	uint32_t m_nr_roads;

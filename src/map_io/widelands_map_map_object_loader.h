@@ -33,7 +33,7 @@
 
 namespace Widelands {
 class Bob;
-class Map_Object;
+class MapObject;
 class Editor_Game_Base;
 
 /*
@@ -65,7 +65,7 @@ public:
 			//delete &object; can not do this
 			throw game_data_error("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
-		m_objects.insert(std::pair<Serial, Map_Object *>(n, &object));
+		m_objects.insert(std::pair<Serial, MapObject *>(n, &object));
 		m_loaded_obj[&object] = false;
 		return object;
 	}
@@ -83,22 +83,22 @@ public:
 	}
 
 	int32_t get_nr_unloaded_objects();
-	bool is_object_loaded(Map_Object & obj) {return m_loaded_obj[&obj];}
+	bool is_object_loaded(MapObject & obj) {return m_loaded_obj[&obj];}
 
-	void mark_object_as_loaded(Map_Object &);
+	void mark_object_as_loaded(MapObject &);
 
-	void schedule_destroy(Map_Object &);
+	void schedule_destroy(MapObject &);
 	void schedule_act(Bob &);
 
 	void load_finish_game(Game & g);
 
 private:
-	typedef std::map<Serial, Map_Object *> Reverse_Map_Object_Map;
+	typedef std::map<Serial, MapObject *> Reverse_Map_Object_Map;
 
-	std::map<Map_Object *, bool> m_loaded_obj;
+	std::map<MapObject *, bool> m_loaded_obj;
 	Reverse_Map_Object_Map m_objects;
 
-	std::vector<Map_Object *> m_schedule_destroy;
+	std::vector<MapObject *> m_schedule_destroy;
 	std::vector<Bob *> m_schedule_act;
 };
 

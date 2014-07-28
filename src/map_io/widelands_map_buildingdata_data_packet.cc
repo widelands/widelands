@@ -1207,7 +1207,7 @@ void Map_Buildingdata_Data_Packet::Write
 				}
 			}
 			fw.Unsigned32(building->m_leave_time);
-			if (Map_Object const * const o = building->m_leave_allow.get(egbase))
+			if (MapObject const * const o = building->m_leave_allow.get(egbase))
 			{
 				assert(mos.is_object_known(*o));
 				fw.Unsigned32(mos.get_object_file_index(*o));

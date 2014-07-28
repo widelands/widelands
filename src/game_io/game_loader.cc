@@ -112,7 +112,7 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 			}
 			// Renew Map_Object connections
 			if (m->serial() > 0) {
-				Map_Object* mo = m_game.objects().get_object(m->serial());
+				MapObject* mo = m_game.objects().get_object(m->serial());
 				mo->removed.connect
 					(boost::bind(&Player::message_object_removed, player, m_id));
 			}

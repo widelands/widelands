@@ -65,35 +65,35 @@ void Map_Object_Packet::Read
 			switch (uint8_t const header = fr.Unsigned8()) {
 			case 0:
 				return;
-			case Map_Object::header_Immovable:
+			case MapObject::header_Immovable:
 				loaders.insert(Immovable::load(egbase, mol, fr, lookup_table));
 				break;
 
-			case Map_Object::header_Battle:
+			case MapObject::header_Battle:
 				loaders.insert(Battle::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_Critter:
+			case MapObject::header_Critter:
 				loaders.insert(Critter_Bob::load(egbase, mol, fr, lookup_table));
 				break;
 
-			case Map_Object::header_Worker:
+			case MapObject::header_Worker:
 				loaders.insert(Worker::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_WareInstance:
+			case MapObject::header_WareInstance:
 				loaders.insert(WareInstance::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_Ship:
+			case MapObject::header_Ship:
 				loaders.insert(Ship::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_PortDock:
+			case MapObject::header_PortDock:
 				loaders.insert(PortDock::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_Fleet:
+			case MapObject::header_Fleet:
 				loaders.insert(Fleet::load(egbase, mol, fr));
 				break;
 
@@ -108,7 +108,7 @@ void Map_Object_Packet::Read
 
 void Map_Object_Packet::LoadFinish() {
 	// load_pointer stage
-	for (Map_Object::Loader* temp_loader : loaders) {
+	for (MapObject::Loader* temp_loader : loaders) {
 		try {
 			temp_loader->load_pointers();
 		} catch (const std::exception & e) {
@@ -119,7 +119,7 @@ void Map_Object_Packet::LoadFinish() {
 	}
 
 	// load_finish stage
-	for (Map_Object::Loader* temp_loader : loaders) {
+	for (MapObject::Loader* temp_loader : loaders) {
 		try {
 			temp_loader->load_finish();
 		} catch (const std::exception & e) {
@@ -145,9 +145,9 @@ void Map_Object_Packet::Write
 		 cit != obj_serials.end();
 		 ++cit)
 	{
-		Map_Object * pobj = egbase.objects().get_object(*cit);
+		MapObject * pobj = egbase.objects().get_object(*cit);
 		assert(pobj);
-		Map_Object & obj = *pobj;
+		MapObject & obj = *pobj;
 
 		// These checks can be eliminated and the object saver simplified
 		// once all Map_Objects are saved using the new system

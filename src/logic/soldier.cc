@@ -78,7 +78,7 @@ Soldier_Descr::Soldier_Descr
 	:
 	Worker_Descr(MapObjectType::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
 {
-	add_attribute(Map_Object::Attribute::SOLDIER);
+	add_attribute(MapObject::Attribute::SOLDIER);
 
 	m_base_hp = global_s.get_safe_positive("hp");
 

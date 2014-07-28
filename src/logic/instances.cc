@@ -38,7 +38,7 @@
 namespace Widelands {
 
 Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object
-	(int32_t const t, Map_Object & o)
+	(int32_t const t, MapObject & o)
 	: GameLogicCommand(t), obj_serial(o.serial())
 {}
 
@@ -46,7 +46,7 @@ void Cmd_Destroy_Map_Object::execute(Game & game)
 {
 	game.syncstream().Unsigned32(obj_serial);
 
-	if (Map_Object * obj = game.objects().get_object(obj_serial))
+	if (MapObject * obj = game.objects().get_object(obj_serial))
 		obj->destroy (game);
 }
 
@@ -86,7 +86,7 @@ void Cmd_Destroy_Map_Object::Write
 	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
-Cmd_Act::Cmd_Act(int32_t const t, Map_Object & o, int32_t const a) :
+Cmd_Act::Cmd_Act(int32_t const t, MapObject & o, int32_t const a) :
 	GameLogicCommand(t), obj_serial(o.serial()), arg(a)
 {}
 
@@ -95,7 +95,7 @@ void Cmd_Act::execute(Game & game)
 {
 	game.syncstream().Unsigned32(obj_serial);
 
-	if (Map_Object * const obj = game.objects().get_object(obj_serial))
+	if (MapObject * const obj = game.objects().get_object(obj_serial))
 		obj->act(game, arg);
 	// the object must queue the next CMD_ACT itself if necessary
 }
@@ -166,7 +166,7 @@ void Object_Manager::cleanup(Editor_Game_Base & egbase)
 /**
  * Insert the given Map_Object into the object manager
  */
-void Object_Manager::insert(Map_Object * obj)
+void Object_Manager::insert(MapObject * obj)
 {
 	++m_lastserial;
 	assert(m_lastserial);
@@ -177,7 +177,7 @@ void Object_Manager::insert(Map_Object * obj)
 /**
  * Remove the Map_Object from the manager
  */
-void Object_Manager::remove(Map_Object & obj)
+void Object_Manager::remove(MapObject & obj)
 {
 	m_objects.erase(obj.m_serial);
 }
@@ -188,7 +188,7 @@ void Object_Manager::remove(Map_Object & obj)
 std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
-	for (const std::pair<Serial, Map_Object *>& o : m_objects) {
+	for (const std::pair<Serial, MapObject *>& o : m_objects) {
 		rv.push_back(o.first);
 	}
 
@@ -197,11 +197,11 @@ std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 	return rv;
 }
 
-Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
+MapObject * Object_Ptr::get(const Editor_Game_Base & egbase)
 {
 	if (!m_serial)
 		return nullptr;
-	Map_Object * const obj = egbase.objects().get_object(m_serial);
+	MapObject * const obj = egbase.objects().get_object(m_serial);
 	if (!obj)
 		m_serial = 0;
 	return obj;
@@ -211,7 +211,7 @@ Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
 // because it is logically the pointer that is const, not the object
 // that is pointed to.
 // That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
-Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase) const {
+MapObject * Object_Ptr::get(const Editor_Game_Base & egbase) const {
 	return m_serial ? egbase.objects().get_object(m_serial) : nullptr;
 }
 
@@ -227,7 +227,7 @@ Map_Object_Descr IMPLEMENTATION
 */
 
 uint32_t MapObjectDescr::s_dyn_attribhigh =
-	Map_Object::HIGHEST_FIXED_ATTRIBUTE;
+	MapObject::HIGHEST_FIXED_ATTRIBUTE;
 MapObjectDescr::AttribMap MapObjectDescr::s_dyn_attribs;
 
 /**
@@ -296,7 +296,7 @@ void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
                                       const std::set<uint32_t>& allowed_special) {
 	for (const std::string& attribute : attributes) {
 		uint32_t const attrib = get_attribute_id(attribute);
-		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE) {
+		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
 			if (!allowed_special.count(attrib)) {
 				throw game_data_error("bad attribute \"%s\"", attribute.c_str());
 			}
@@ -316,9 +316,9 @@ uint32_t MapObjectDescr::get_attribute_id(const std::string & name) {
 		return it->second;
 
 	if      (name == "worker")
-		return Map_Object::WORKER;
+		return MapObject::WORKER;
 	else if (name == "resi")
-		return Map_Object::RESI;
+		return MapObject::RESI;
 
 	++s_dyn_attribhigh;
 	s_dyn_attribs[name] = s_dyn_attribhigh;
@@ -354,7 +354,7 @@ Map_Object IMPLEMENTATION
 /**
  * Zero-initialize a map object
  */
-Map_Object::Map_Object(const MapObjectDescr * const the_descr) :
+MapObject::MapObject(const MapObjectDescr * const the_descr) :
 m_descr(the_descr), m_serial(0), m_logsink(nullptr)
 {}
 
@@ -363,7 +363,7 @@ m_descr(the_descr), m_serial(0), m_logsink(nullptr)
  * Call this function if you want to remove the object immediately, without
  * any effects.
  */
-void Map_Object::remove(Editor_Game_Base & egbase)
+void MapObject::remove(Editor_Game_Base & egbase)
 {
 	removed(m_serial); // Signal call
 	cleanup(egbase);
@@ -381,7 +381,7 @@ void Map_Object::remove(Editor_Game_Base & egbase)
  * the object. Therefore, it may be safer to call schedule_destroy()
  * instead.
  */
-void Map_Object::destroy(Editor_Game_Base & egbase)
+void MapObject::destroy(Editor_Game_Base & egbase)
 {
 	remove(egbase);
 }
@@ -390,7 +390,7 @@ void Map_Object::destroy(Editor_Game_Base & egbase)
  * Schedule the object for immediate destruction.
  * This can be used to safely destroy the object from within an act function.
  */
-void Map_Object::schedule_destroy(Game & game)
+void MapObject::schedule_destroy(Game & game)
 {
 	game.cmdqueue().enqueue
 		(new Cmd_Destroy_Map_Object(game.get_gametime(), *this));
@@ -401,7 +401,7 @@ void Map_Object::schedule_destroy(Game & game)
  *
  * \warning Make sure you call this from derived classes!
  */
-void Map_Object::init(Editor_Game_Base & egbase)
+void MapObject::init(Editor_Game_Base & egbase)
 {
 	egbase.objects().insert(this);
 }
@@ -409,7 +409,7 @@ void Map_Object::init(Editor_Game_Base & egbase)
 /**
  * \warning Make sure you call this from derived classes!
  */
-void Map_Object::cleanup(Editor_Game_Base & egbase)
+void MapObject::cleanup(Editor_Game_Base & egbase)
 {
 	egbase.objects().remove(*this);
 }
@@ -417,7 +417,7 @@ void Map_Object::cleanup(Editor_Game_Base & egbase)
 /**
  * Default implementation
  */
-int32_t Map_Object::get_tattribute(uint32_t) const
+int32_t MapObject::get_tattribute(uint32_t) const
 {
 	return -1;
 }
@@ -428,7 +428,7 @@ int32_t Map_Object::get_tattribute(uint32_t) const
  *
  * \return The absolute gametime at which the CMD_ACT will occur.
  */
-uint32_t Map_Object::schedule_act
+uint32_t MapObject::schedule_act
 	(Game & game, uint32_t const tdelta, uint32_t const data)
 {
 	if (tdelta < Forever()) {
@@ -445,24 +445,24 @@ uint32_t Map_Object::schedule_act
 /**
  * Called when a CMD_ACT triggers.
  */
-void Map_Object::act(Game &, uint32_t) {}
+void MapObject::act(Game &, uint32_t) {}
 
 
 /**
  * Set the logsink. This should only be used by the debugging facilities.
  */
-void Map_Object::set_logsink(LogSink * const sink)
+void MapObject::set_logsink(LogSink * const sink)
 {
 	m_logsink = sink;
 }
 
 
-void Map_Object::log_general_info(const Editor_Game_Base &) {}
+void MapObject::log_general_info(const Editor_Game_Base &) {}
 
 /**
  * Prints a log message prepended by the object's serial number.
  */
-void Map_Object::molog(char const * fmt, ...) const
+void MapObject::molog(char const * fmt, ...) const
 {
 	if (!g_verbose && !m_logsink)
 		return;
@@ -492,7 +492,7 @@ void Map_Object::molog(char const * fmt, ...) const
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load(FileRead & fr)
+void MapObject::Loader::load(FileRead & fr)
 {
 	try {
 		uint8_t const header = fr.Unsigned8();
@@ -526,7 +526,7 @@ void Map_Object::Loader::load(FileRead & fr)
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load_pointers() {}
+void MapObject::Loader::load_pointers() {}
 
 
 /**
@@ -537,14 +537,14 @@ void Map_Object::Loader::load_pointers() {}
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load_finish()
+void MapObject::Loader::load_finish()
 {
 }
 
 /**
  * Save the Map_Object to the given file.
  */
-void Map_Object::save
+void MapObject::save
 	(Editor_Game_Base &, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Map_Object);

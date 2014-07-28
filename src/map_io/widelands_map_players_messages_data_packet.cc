@@ -138,7 +138,7 @@ void Map_Players_Messages_Data_Packet::Read
 					Serial serial = s->get_int("serial", 0);
 					if (serial > 0) {
 						assert(mol.is_object_known(serial));
-						Map_Object & mo = mol.get<Map_Object>(serial);
+						MapObject & mo = mol.get<Map_Object>(serial);
 						assert(mol.is_object_loaded(mo));
 						serial = mo.serial();
 					}
@@ -237,7 +237,7 @@ void Map_Players_Messages_Data_Packet::Write
 				assert(false);
 			}
 			if (message.serial()) {
-				const Map_Object* mo = egbase.objects().get_object(message.serial());
+				const MapObject* mo = egbase.objects().get_object(message.serial());
 				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
 				s.set_int       ("serial",    fileindex);
 			}

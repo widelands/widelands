@@ -399,7 +399,7 @@ const BobProgramBase * Critter_Bob::Loader::get_program
 	return critter.descr().get_program(name);
 }
 
-Map_Object::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
+MapObject::Loader* Critter_Bob::load(Editor_Game_Base& egbase,
                                       Map_Map_Object_Loader& mol,
                                       FileRead& fr,
                                       const OneWorldLegacyLookupTable& lookup_table) {

@@ -186,7 +186,7 @@ public: const type & descr() const { \
       return ref_cast<type const, Map_Object_Descr const>(*m_descr);          \
    }                                                                          \
 
-class Map_Object {
+class MapObject {
 	friend struct Object_Manager;
 	friend struct Object_Ptr;
 
@@ -213,8 +213,8 @@ public:
 	virtual void load_finish(Editor_Game_Base &) {}
 
 protected:
-	Map_Object(MapObjectDescr const * descr);
-	virtual ~Map_Object() {}
+	MapObject(MapObjectDescr const * descr);
+	virtual ~MapObject() {}
 
 public:
 	Serial serial() const {return m_serial;}
@@ -291,7 +291,7 @@ public:
 	struct Loader {
 		Editor_Game_Base      * m_egbase;
 		Map_Map_Object_Loader * m_mol;
-		Map_Object            * m_object;
+		MapObject            * m_object;
 
 	protected:
 		Loader() : m_egbase(nullptr), m_mol(nullptr), m_object(nullptr) {}
@@ -300,7 +300,7 @@ public:
 		virtual ~Loader() {}
 
 		void init
-			(Editor_Game_Base & e, Map_Map_Object_Loader & m, Map_Object & object)
+			(Editor_Game_Base & e, Map_Map_Object_Loader & m, MapObject & object)
 		{
 			m_egbase = &e;
 			m_mol    = &m;
@@ -309,9 +309,9 @@ public:
 
 		Editor_Game_Base      & egbase    () {return *m_egbase;}
 		Map_Map_Object_Loader & mol   () {return *m_mol;}
-		Map_Object            * get_object() {return m_object;}
+		MapObject            * get_object() {return m_object;}
 		template<typename T> T & get() {
-			return ref_cast<T, Map_Object>(*m_object);
+			return ref_cast<T, MapObject>(*m_object);
 		}
 
 	protected:
@@ -345,7 +345,7 @@ protected:
 	LogSink                * m_logsink;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Map_Object);
+	DISALLOW_COPY_AND_ASSIGN(MapObject);
 };
 
 inline int32_t get_reverse_dir(int32_t const dir) {
@@ -358,22 +358,22 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  * Keeps the list of all objects currently in the game.
  */
 struct Object_Manager  {
-	typedef boost::unordered_map<Serial, Map_Object *> objmap_t;
+	typedef boost::unordered_map<Serial, MapObject *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();
 
 	void cleanup(Editor_Game_Base &);
 
-	Map_Object * get_object(Serial const serial) const {
+	MapObject * get_object(Serial const serial) const {
 		const objmap_t::const_iterator it = m_objects.find(serial);
 		return it != m_objects.end() ? it->second : nullptr;
 	}
 
-	void insert(Map_Object *);
-	void remove(Map_Object &);
+	void insert(MapObject *);
+	void remove(MapObject &);
 
-	bool object_still_available(const Map_Object * const t) const {
+	bool object_still_available(const MapObject * const t) const {
 		if (!t)
 			return false;
 		objmap_t::const_iterator it = m_objects.begin();
@@ -404,10 +404,10 @@ private:
 struct Object_Ptr {
 	// Provide default constructor to shut up cppcheck.
 	Object_Ptr() {m_serial = 0;}
-	Object_Ptr(Map_Object * const obj) {m_serial = obj ? obj->m_serial : 0;}
+	Object_Ptr(MapObject * const obj) {m_serial = obj ? obj->m_serial : 0;}
 	// can use standard copy constructor and assignment operator
 
-	Object_Ptr & operator= (Map_Object * const obj) {
+	Object_Ptr & operator= (MapObject * const obj) {
 		m_serial = obj ? obj->m_serial : 0;
 		return *this;
 	}
@@ -416,8 +416,8 @@ struct Object_Ptr {
 
 	// dammit... without a Editor_Game_Base object, we can't implement a
 	// Map_Object* operator (would be _really_ nice)
-	Map_Object * get(const Editor_Game_Base &);
-	Map_Object * get(const Editor_Game_Base & egbase) const;
+	MapObject * get(const Editor_Game_Base &);
+	MapObject * get(const Editor_Game_Base & egbase) const;
 
 	bool operator<  (const Object_Ptr & other) const {
 		return m_serial < other.m_serial;
@@ -465,7 +465,7 @@ private:
 
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
-	Cmd_Destroy_Map_Object (int32_t t, Map_Object &);
+	Cmd_Destroy_Map_Object (int32_t t, MapObject &);
 	void execute (Game &) override;
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
@@ -479,7 +479,7 @@ private:
 
 struct Cmd_Act : public GameLogicCommand {
 	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
-	Cmd_Act (int32_t t, Map_Object &, int32_t a);
+	Cmd_Act (int32_t t, MapObject &, int32_t a);
 
 	void execute (Game &) override;
 

@@ -141,7 +141,7 @@ private:
 	static void request_soldier_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
-	Map_Object * popSoldierJob
+	MapObject * popSoldierJob
 		(Soldier *, bool * stayhome = nullptr);
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);

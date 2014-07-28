@@ -176,7 +176,7 @@ protected:
 
 	bool does_carry_ware() {return m_carried_ware.is_set();}
 
-	void set_program_objvar(Game &, State &, Map_Object * obj);
+	void set_program_objvar(Game &, State &, MapObject * obj);
 
 public:
 	static const Task taskTransfer;
@@ -276,7 +276,7 @@ public:
 	virtual void do_save
 		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 
-	static Map_Object::Loader * load
+	static MapObject::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 

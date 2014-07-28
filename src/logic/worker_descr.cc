@@ -54,7 +54,7 @@ Worker_Descr::Worker_Descr
 		add_animation("idle", g_gr->animations().load(directory, idle_s));
 	}
 
-	add_attribute(Map_Object::Attribute::WORKER);
+	add_attribute(MapObject::Attribute::WORKER);
 
 	m_default_target_quantity =
 		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
@@ -177,7 +177,7 @@ Worker & Worker_Descr::create
 	 Coords             const coords)
 const
 {
-	Worker & worker = ref_cast<Worker, Map_Object>(create_object());
+	Worker & worker = ref_cast<Worker, MapObject>(create_object());
 	worker.set_owner(&owner);
 	worker.set_location(location);
 	worker.set_position(egbase, coords);

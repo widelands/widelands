@@ -63,7 +63,7 @@ using Widelands::Coords;
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
 using Widelands::Map;
-using Widelands::Map_Object;
+using Widelands::MapObject;
 using Widelands::TCoords;
 
 struct InteractiveBaseInternals {
@@ -986,7 +986,7 @@ void Interactive_Base::cmdMapObject(const std::vector<std::string>& args)
 	}
 
 	uint32_t serial = atoi(args[1].c_str());
-	Map_Object * obj = egbase().objects().get_object(serial);
+	MapObject * obj = egbase().objects().get_object(serial);
 
 	if (!obj) {
 		DebugConsole::write

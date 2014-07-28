@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-bool Requirements::check(const Map_Object & obj) const
+bool Requirements::check(const MapObject & obj) const
 {
 	return !m || m->check(obj);
 }
@@ -114,7 +114,7 @@ void RequireOr::add(const Requirements & req)
 	m.push_back(req);
 }
 
-bool RequireOr::check(const Map_Object & obj) const
+bool RequireOr::check(const MapObject & obj) const
 {
 	for (const Requirements& req : m) {
 		if (req.check(obj)) {
@@ -160,7 +160,7 @@ void RequireAnd::add(const Requirements & req)
 	m.push_back(req);
 }
 
-bool RequireAnd::check(const Map_Object & obj) const
+bool RequireAnd::check(const MapObject & obj) const
 {
 	for (const Requirements& req : m) {
 		if (!req.check(obj)) {
@@ -200,7 +200,7 @@ static Requirements readAnd
 const RequirementsStorage RequireAnd::storage(requirementIdAnd, readAnd);
 
 
-bool RequireAttribute::check(const Map_Object & obj) const
+bool RequireAttribute::check(const MapObject & obj) const
 {
 	if (atrTotal != at)
 	{

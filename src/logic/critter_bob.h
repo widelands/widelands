@@ -77,7 +77,7 @@ public:
 
 	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
-	static Map_Object::Loader*
+	static MapObject::Loader*
 	load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
 
 protected:

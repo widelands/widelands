@@ -537,7 +537,7 @@ void PortDock::Loader::load_finish()
 		pd.init_fleet(egbase());
 }
 
-Map_Object::Loader * PortDock::load
+MapObject::Loader * PortDock::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);

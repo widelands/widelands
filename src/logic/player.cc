@@ -320,7 +320,7 @@ Message_Id Player::add_message
 
 	// Map_Object connection
 	if (message.serial() > 0) {
-		Map_Object* mo = egbase().objects().get_object(message.serial());
+		MapObject* mo = egbase().objects().get_object(message.serial());
 		mo->removed.connect
 		 (boost::bind(&Player::message_object_removed, this, id));
 	}

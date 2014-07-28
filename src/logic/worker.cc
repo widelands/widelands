@@ -611,7 +611,7 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 
 	// Determine the coords we need to walk towards
 	if (action.iparam1 & Action::walkObject) {
-		Map_Object * const obj = state.objvar1.get(game);
+		MapObject * const obj = state.objvar1.get(game);
 
 		if (obj) {
 			if      (upcast(Bob       const, bob,       obj))
@@ -705,7 +705,7 @@ bool Worker::run_return(Game & game, State & state, const Action & action)
  */
 bool Worker::run_object(Game & game, State & state, const Action & action)
 {
-	Map_Object * const obj = state.objvar1.get(game);
+	MapObject * const obj = state.objvar1.get(game);
 
 	if (!obj) {
 		send_signal(game, "fail");
@@ -866,7 +866,7 @@ bool Worker::run_create_bob(Game & game, State & state, const Action &)
  */
 bool Worker::run_removeobject(Game & game, State & state, const Action &)
 {
-	if (Map_Object * const obj = state.objvar1.get(game)) {
+	if (MapObject * const obj = state.objvar1.get(game)) {
 		obj->remove(game);
 		state.objvar1 = nullptr;
 	}
@@ -1908,7 +1908,7 @@ void Worker::program_pop(Game & game, State & state)
 	set_program_objvar(game, state, nullptr);
 }
 
-void Worker::set_program_objvar(Game & game, State & state, Map_Object * obj)
+void Worker::set_program_objvar(Game & game, State & state, MapObject * obj)
 {
 	assert(state.task == &taskProgram);
 
@@ -2425,8 +2425,8 @@ void Worker::leavebuilding_pop(Game & game, State & state)
 	//  The if-statement is needed because this is (unfortunately) also called
 	//  when the Worker is deallocated when shutting down the simulation. Then
 	//  the building might not exist any more.
-	if (Map_Object * const building = state.objvar1.get(game))
-		ref_cast<Building, Map_Object>(*building).leave_skip(game, *this);
+	if (MapObject * const building = state.objvar1.get(game))
+		ref_cast<Building, MapObject>(*building).leave_skip(game, *this);
 }
 
 
@@ -3020,7 +3020,7 @@ Worker::Loader * Worker::create_loader()
  * Derived classes must override \ref create_loader to make sure
  * the appropriate actual load functions are called.
  */
-Map_Object::Loader * Worker::load
+MapObject::Loader * Worker::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	try {

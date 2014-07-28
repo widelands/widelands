@@ -33,7 +33,7 @@ class FileWrite;
 
 namespace Widelands {
 
-class Map_Object;
+class MapObject;
 class Editor_Game_Base;
 class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
@@ -51,7 +51,7 @@ private:
 	struct BaseCapsule {
 		virtual ~BaseCapsule() {}
 
-		virtual bool check(const Map_Object &) const = 0;
+		virtual bool check(const MapObject &) const = 0;
 		virtual void write
 			(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver &) const
 			= 0;
@@ -62,7 +62,7 @@ private:
 	struct Capsule : public BaseCapsule {
 		Capsule(const T & _m) : m(_m) {}
 
-		bool check(const Map_Object & obj) const override {return m.check(obj);}
+		bool check(const MapObject & obj) const override {return m.check(obj);}
 
 		void write
 			(FileWrite            & fw,
@@ -86,7 +86,7 @@ public:
 	/**
 	 * \return \c true if the object satisfies the requirements.
 	 */
-	bool check(const Map_Object &) const;
+	bool check(const MapObject &) const;
 
 	// For Save/Load Games
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
@@ -139,7 +139,7 @@ private:
 struct RequireOr {
 	void add(const Requirements &);
 
-	bool check(const Map_Object &) const;
+	bool check(const MapObject &) const;
 	void write
 		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
 
@@ -157,7 +157,7 @@ private:
 struct RequireAnd {
 	void add(const Requirements &);
 
-	bool check(const Map_Object &) const;
+	bool check(const MapObject &) const;
 	void write
 		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
 
@@ -177,7 +177,7 @@ struct RequireAttribute {
 		: at(_at), min(_min), max(_max) {}
 
 	RequireAttribute() : at(atrTotal), min(SHRT_MIN), max(SHRT_MAX) {}
-	bool check(const Map_Object &) const;
+	bool check(const MapObject &) const;
 	void write
 		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
 

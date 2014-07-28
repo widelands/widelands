@@ -150,7 +150,7 @@ private:
  * To this end, a task may have a \ref Task::pop method. If this method
  * exists, it is always called just before the task is popped from the stack.
  */
-class Bob : public Map_Object {
+class Bob : public MapObject {
 public:
 	friend class Map;
 	friend struct Map_Bobdata_Data_Packet;
@@ -381,7 +381,7 @@ private:
 
 	// saving and loading
 protected:
-	struct Loader : public Map_Object::Loader {
+	struct Loader : public MapObject::Loader {
 	public:
 		Loader();
 

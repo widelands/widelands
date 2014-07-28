@@ -103,7 +103,7 @@ void IdleWareSupply::set_economy(Economy * const e)
  */
 PlayerImmovable * IdleWareSupply::get_position(Game & game)
 {
-	Map_Object * const loc = m_ware.get_location(game);
+	MapObject * const loc = m_ware.get_location(game);
 
 	if (upcast(PlayerImmovable, playerimmovable, loc))
 		return playerimmovable;
@@ -185,7 +185,7 @@ void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
 WareInstance::WareInstance
 	(Ware_Index const i, const WareDescr * const ware_descr)
 :
-Map_Object   (ware_descr),
+MapObject   (ware_descr),
 m_economy    (nullptr),
 m_descr_index(i),
 m_supply     (nullptr),
@@ -202,7 +202,7 @@ WareInstance::~WareInstance()
 
 void WareInstance::init(Editor_Game_Base & egbase)
 {
-	Map_Object::init(egbase);
+	MapObject::init(egbase);
 }
 
 void WareInstance::cleanup(Editor_Game_Base & egbase)
@@ -217,7 +217,7 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 	cancel_moving();
 	set_location(egbase, nullptr);
 
-	Map_Object::cleanup(egbase);
+	MapObject::cleanup(egbase);
 }
 
 /**
@@ -244,9 +244,9 @@ void WareInstance::set_economy(Economy * const e)
  * Once you've assigned a ware to its new location, you usually have to call
  * \ref update() as well.
 */
-void WareInstance::set_location(Editor_Game_Base & egbase, Map_Object * const location)
+void WareInstance::set_location(Editor_Game_Base & egbase, MapObject * const location)
 {
-	Map_Object * const oldlocation = m_location.get(egbase);
+	MapObject * const oldlocation = m_location.get(egbase);
 
 	if (oldlocation == location)
 		return;
@@ -303,7 +303,7 @@ void WareInstance::update(Game & game)
 	if (!m_descr) // Upsy, we're not even initialized. Happens on load
 		return;
 
-	Map_Object * const loc = m_location.get(game);
+	MapObject * const loc = m_location.get(game);
 
 	// Reset our state if we're not on location or outside an economy
 	if (!get_economy()) {
@@ -529,7 +529,7 @@ PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 
 void WareInstance::log_general_info(const Editor_Game_Base & egbase)
 {
-	Map_Object::log_general_info(egbase);
+	MapObject::log_general_info(egbase);
 
 	molog("Ware: %s\n", descr().name().c_str());
 	molog("Location: %u\n", m_location.serial());
@@ -554,7 +554,7 @@ WareInstance::Loader::Loader() :
 
 void WareInstance::Loader::load(FileRead & fr)
 {
-	Map_Object::Loader::load(fr);
+	MapObject::Loader::load(fr);
 
 	WareInstance & ware = get<WareInstance>();
 	m_location = fr.Unsigned32();
@@ -568,7 +568,7 @@ void WareInstance::Loader::load(FileRead & fr)
 
 void WareInstance::Loader::load_pointers()
 {
-	Map_Object::Loader::load_pointers();
+	MapObject::Loader::load_pointers();
 
 	WareInstance & ware = get<WareInstance>();
 
@@ -585,7 +585,7 @@ void WareInstance::Loader::load_pointers()
 
 void WareInstance::Loader::load_finish()
 {
-	Map_Object::Loader::load_finish();
+	MapObject::Loader::load_finish();
 
 	WareInstance & ware = get<WareInstance>();
 	if (!ware.m_transfer || !ware.m_transfer->get_request()) {
@@ -603,7 +603,7 @@ void WareInstance::save
 	fw.CString(descr().tribe().name());
 	fw.CString(descr().name());
 
-	Map_Object::save(egbase, mos, fw);
+	MapObject::save(egbase, mos, fw);
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
 	fw.Unsigned32
@@ -616,7 +616,7 @@ void WareInstance::save
 	}
 }
 
-Map_Object::Loader * WareInstance::load
+MapObject::Loader * WareInstance::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	try {

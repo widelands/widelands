@@ -245,7 +245,7 @@ Building & Building_Descr::create_constructionsite() const
 		m_tribe.get_building_descr
 			(m_tribe.safe_building_index("constructionsite"));
 	ConstructionSite & csite =
-		ref_cast<ConstructionSite, Map_Object>(descr->create_object());
+		ref_cast<ConstructionSite, MapObject>(descr->create_object());
 	csite.set_building(*this);
 
 	return csite;

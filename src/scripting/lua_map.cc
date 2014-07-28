@@ -584,7 +584,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
  */
 #define CAST_TO_LUA(k) to_lua<L_ ##k> \
 	(L, new L_ ##k(*static_cast<k *>(mo)))
-int upcasted_map_object_to_lua(lua_State * L, Map_Object * mo) {
+int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 	if (!mo)
 		return 0;
 
@@ -2013,7 +2013,7 @@ void L_MapObject::__persist(lua_State * L) {
 	Game & game = get_game(L);
 
 	uint32_t idx = 0;
-	if (Map_Object* obj = m_ptr.get(game))
+	if (MapObject* obj = m_ptr.get(game))
 		idx = mos.get_object_file_index(*obj);
 
 	PERS_UINT32("file_index", idx);
@@ -2114,8 +2114,8 @@ int L_MapObject::__eq(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	L_MapObject * other = *get_base_user_class<L_MapObject>(L, -1);
 
-	Map_Object * me = m_get_or_zero(egbase);
-	Map_Object * you = other->m_get_or_zero(egbase);
+	MapObject * me = m_get_or_zero(egbase);
+	MapObject * you = other->m_get_or_zero(egbase);
 
 	// Both objects are destroyed: they are equal
 	if (me == you) lua_pushboolean(L, true);
@@ -2136,7 +2136,7 @@ int L_MapObject::__eq(lua_State * L) {
 */
 int L_MapObject::remove(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object* o = get(L, egbase);
+	MapObject* o = get(L, egbase);
 	if (!o)
 		return 0;
 
@@ -2153,7 +2153,7 @@ int L_MapObject::remove(lua_State * L) {
 */
 int L_MapObject::destroy(lua_State * L) {
 	Editor_Game_Base& egbase = get_egbase(L);
-	Map_Object* o = get(L, egbase);
+	MapObject* o = get(L, egbase);
 	if (!o)
 		return 0;
 
@@ -2168,7 +2168,7 @@ int L_MapObject::destroy(lua_State * L) {
 */
 int L_MapObject::has_attribute(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object * obj = m_get_or_zero(egbase);
+	MapObject * obj = m_get_or_zero(egbase);
 	if (!obj) {
 		lua_pushboolean(L, false);
 		return 1;
@@ -2188,13 +2188,13 @@ int L_MapObject::has_attribute(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Map_Object* L_MapObject::get(lua_State* L, Editor_Game_Base& egbase, std::string name) {
-	Map_Object* o = m_get_or_zero(egbase);
+MapObject* L_MapObject::get(lua_State* L, Editor_Game_Base& egbase, std::string name) {
+	MapObject* o = m_get_or_zero(egbase);
 	if (!o)
 		report_error(L, "%s no longer exists!", name.c_str());
 	return o;
 }
-Map_Object* L_MapObject::m_get_or_zero(Editor_Game_Base& egbase) {
+MapObject* L_MapObject::m_get_or_zero(Editor_Game_Base& egbase) {
 	return m_ptr.get(egbase);
 }
 

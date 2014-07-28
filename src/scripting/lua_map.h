@@ -446,7 +446,7 @@ public:
 	LUNA_CLASS_HEAD(L_MapObject);
 
 	L_MapObject() : m_ptr(nullptr) {}
-	L_MapObject(Widelands::Map_Object & mo) {
+	L_MapObject(Widelands::MapObject & mo) {
 		m_ptr = &mo;
 	}
 	L_MapObject(lua_State * L) : m_ptr(nullptr) {
@@ -478,9 +478,9 @@ public:
 	/*
 	 * C Methods
 	 */
-	Widelands::Map_Object * get
+	Widelands::MapObject * get
 		(lua_State *, Widelands::Editor_Game_Base &, std::string = "MapObject");
-	Widelands::Map_Object * m_get_or_zero(Widelands::Editor_Game_Base &);
+	Widelands::MapObject * m_get_or_zero(Widelands::Editor_Game_Base &);
 };
 
 
@@ -998,7 +998,7 @@ public:
 };
 
 int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDescr* descr);
-int upcasted_map_object_to_lua(lua_State * L, Widelands::Map_Object * mo);
+int upcasted_map_object_to_lua(lua_State * L, Widelands::MapObject * mo);
 
 void luaopen_wlmap(lua_State *);
 

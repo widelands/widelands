@@ -58,7 +58,7 @@ const Fleet_Descr& Fleet::descr() const {
  * The Fleet takes care of merging with existing fleets, if any.
  */
 Fleet::Fleet(Player & player) :
-	Map_Object(&g_fleet_descr),
+	MapObject(&g_fleet_descr),
 	m_owner(player),
 	m_act_pending(false)
 {
@@ -103,7 +103,7 @@ void Fleet::set_economy(Economy * e)
  */
 void Fleet::init(Editor_Game_Base & egbase)
 {
-	Map_Object::init(egbase);
+	MapObject::init(egbase);
 
 	if (m_ships.empty() && m_ports.empty()) {
 		molog("Empty fleet initialized; disband immediately\n");
@@ -265,7 +265,7 @@ void Fleet::cleanup(Editor_Game_Base & egbase)
 		m_ships.pop_back();
 	}
 
-	Map_Object::cleanup(egbase);
+	MapObject::cleanup(egbase);
 }
 
 Fleet::PortPath & Fleet::portpath(uint32_t i, uint32_t j)
@@ -674,7 +674,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 void Fleet::log_general_info(const Editor_Game_Base & egbase)
 {
-	Map_Object::log_general_info(egbase);
+	MapObject::log_general_info(egbase);
 
 	molog
 		("%" PRIuS " ships and %" PRIuS " ports\n",  m_ships.size(), m_ports.size());
@@ -688,7 +688,7 @@ Fleet::Loader::Loader()
 
 void Fleet::Loader::load(FileRead & fr, uint8_t version)
 {
-	Map_Object::Loader::load(fr);
+	MapObject::Loader::load(fr);
 
 	Fleet & fleet = get<Fleet>();
 
@@ -713,7 +713,7 @@ void Fleet::Loader::load(FileRead & fr, uint8_t version)
 
 void Fleet::Loader::load_pointers()
 {
-	Map_Object::Loader::load_pointers();
+	MapObject::Loader::load_pointers();
 
 	Fleet & fleet = get<Fleet>();
 
@@ -737,7 +737,7 @@ void Fleet::Loader::load_pointers()
 
 void Fleet::Loader::load_finish()
 {
-	Map_Object::Loader::load_finish();
+	MapObject::Loader::load_finish();
 
 	Fleet & fleet = get<Fleet>();
 
@@ -749,7 +749,7 @@ void Fleet::Loader::load_finish()
 	}
 }
 
-Map_Object::Loader * Fleet::load
+MapObject::Loader * Fleet::load
 		(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
@@ -786,7 +786,7 @@ void Fleet::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrit
 
 	fw.Unsigned8(m_owner.player_number());
 
-	Map_Object::save(egbase, mos, fw);
+	MapObject::save(egbase, mos, fw);
 
 	fw.Unsigned32(m_ships.size());
 	for (const Ship * temp_ship : m_ships) {

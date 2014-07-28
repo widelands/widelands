@@ -624,7 +624,7 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 
 		bool stayhome;
 		if
-			(Map_Object * const enemy
+			(MapObject * const enemy
 			 =
 			 popSoldierJob(soldier, &stayhome))
 		{
@@ -1004,14 +1004,14 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
  * \return the enemy, if any, that the given soldier was scheduled
  * to attack, and remove the job.
  */
-Map_Object * MilitarySite::popSoldierJob
+MapObject * MilitarySite::popSoldierJob
 	(Soldier * const soldier, bool * const stayhome)
 {
 	for (std::vector<SoldierJob>::iterator job_iter = m_soldierjobs.begin();
 		 job_iter != m_soldierjobs.end(); ++job_iter)
 	{
 		if (job_iter->soldier == soldier) {
-			Map_Object * const enemy = job_iter->enemy.get(owner().egbase());
+			MapObject * const enemy = job_iter->enemy.get(owner().egbase());
 			if (stayhome)
 				*stayhome = job_iter->stayhome;
 			m_soldierjobs.erase(job_iter);

@@ -63,7 +63,7 @@ private:
  * again in reaction to changes in the map. However, this may not work
  * properly at the moment.
  */
-struct Fleet : Map_Object {
+struct Fleet : MapObject {
 	struct PortPath {
 		int32_t cost;
 		boost::shared_ptr<Path> path;
@@ -128,7 +128,7 @@ private:
 
 	// saving and loading
 protected:
-	struct Loader : Map_Object::Loader {
+	struct Loader : MapObject::Loader {
 		Loader();
 
 		void load(FileRead &, uint8_t version);
@@ -144,7 +144,7 @@ public:
 	bool has_new_save_support() override {return true;}
 	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
-	static Map_Object::Loader * load
+	static MapObject::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 

@@ -164,7 +164,7 @@ public:
 	bool has_new_save_support() override {return true;}
 	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
-	static Map_Object::Loader * load
+	static MapObject::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 

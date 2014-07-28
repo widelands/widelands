@@ -78,7 +78,7 @@ BaseImmovable::Size string_to_size(const std::string& size) {
 
 
 BaseImmovable::BaseImmovable(const MapObjectDescr & mo_descr) :
-Map_Object(&mo_descr)
+MapObject(&mo_descr)
 {}
 
 
@@ -253,7 +253,7 @@ Immovable_Descr::Immovable_Descr
 		while (Section::Value const * const v = global_s.get_next_val("attrib")) {
 			attributes.emplace_back(v->get_string());
 		}
-		add_attributes(attributes, {Map_Object::Attribute::RESI});
+		add_attributes(attributes, {MapObject::Attribute::RESI});
 	}
 
 	//  parse the programs
@@ -290,7 +290,7 @@ Immovable_Descr::Immovable_Descr(const LuaTable& table, const World& world) :
 	m_owner_tribe(nullptr)  // Can only parse world immovables for now.
 {
 	m_size = string_to_size(table.get_string("size"));
-	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {Map_Object::Attribute::RESI});
+	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {MapObject::Attribute::RESI});
 
 	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 	for (const std::string& animation : anims->keys<std::string>()) {
@@ -616,7 +616,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
 	BaseImmovable::Loader::load(fr);
 
-	Immovable & imm = ref_cast<Immovable, Map_Object>(*get_object());
+	Immovable & imm = ref_cast<Immovable, MapObject>(*get_object());
 
 	if (version >= 5) {
 		Player_Number pn = fr.Unsigned8();
@@ -756,7 +756,7 @@ void Immovable::save
 	}
 }
 
-Map_Object::Loader * Immovable::load
+MapObject::Loader * Immovable::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol,
 	 FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
 {

@@ -44,7 +44,7 @@ const Battle_Descr& Battle::descr() const {
 
 Battle::Battle ()
 	:
-	Map_Object(&g_Battle_Descr),
+	MapObject(&g_Battle_Descr),
 	m_first(nullptr),
 	m_second(nullptr),
 	m_creationtime(0),
@@ -55,7 +55,7 @@ Battle::Battle ()
 {}
 
 Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
-	Map_Object     (&g_Battle_Descr),
+	MapObject     (&g_Battle_Descr),
 	m_first        (&First),
 	m_second       (&Second),
 	m_readyflags   (0),
@@ -79,7 +79,7 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 
 void Battle::init (Editor_Game_Base & egbase)
 {
-	Map_Object::init(egbase);
+	MapObject::init(egbase);
 
 	m_creationtime = egbase.get_gametime();
 
@@ -103,7 +103,7 @@ void Battle::cleanup (Editor_Game_Base & egbase)
 		m_second = nullptr;
 	}
 
-	Map_Object::cleanup(egbase);
+	MapObject::cleanup(egbase);
 }
 
 
@@ -342,7 +342,7 @@ Load/Save support
 
 void Battle::Loader::load(FileRead & fr, uint8_t const version)
 {
-	Map_Object::Loader::load(fr);
+	MapObject::Loader::load(fr);
 
 	Battle & battle = get<Battle>();
 
@@ -361,7 +361,7 @@ void Battle::Loader::load_pointers()
 {
 	Battle & battle = get<Battle>();
 	try {
-		Map_Object::Loader::load_pointers();
+		MapObject::Loader::load_pointers();
 		if (m_first)
 			try {
 				battle.m_first = &mol().get<Soldier>(m_first);
@@ -385,7 +385,7 @@ void Battle::save
 	fw.Unsigned8(header_Battle);
 	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
 
-	Map_Object::save(egbase, mos, fw);
+	MapObject::save(egbase, mos, fw);
 
 	fw.Signed32(m_creationtime);
 	fw.Unsigned8(m_readyflags);
@@ -398,7 +398,7 @@ void Battle::save
 }
 
 
-Map_Object::Loader * Battle::load
+MapObject::Loader * Battle::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);

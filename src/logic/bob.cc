@@ -97,7 +97,7 @@ Bob & BobDescr::create
 
 
 Bob::Bob(const BobDescr & _descr) :
-Map_Object       (&_descr),
+MapObject       (&_descr),
 m_owner          (nullptr),
 m_position       (FCoords(Coords(0, 0), nullptr)), // not linked anywhere
 m_linknext       (nullptr),
@@ -134,7 +134,7 @@ Bob::~Bob()
  */
 void Bob::init(Editor_Game_Base & egbase)
 {
-	Map_Object::init(egbase);
+	MapObject::init(egbase);
 
 	if (upcast(Game, game, &egbase))
 		schedule_act(*game, 1);
@@ -161,7 +161,7 @@ void Bob::cleanup(Editor_Game_Base & egbase)
 			m_linknext->m_linkpprev = m_linkpprev;
 	}
 
-	Map_Object::cleanup(egbase);
+	MapObject::cleanup(egbase);
 }
 
 
@@ -227,7 +227,7 @@ void Bob::do_act(Game & game)
  */
 void Bob::schedule_destroy(Game & game)
 {
-	Map_Object::schedule_destroy(game);
+	MapObject::schedule_destroy(game);
 	++m_actid; // to skip over any updates that may be scheduled
 	m_actscheduled = true;
 }
@@ -239,7 +239,7 @@ void Bob::schedule_destroy(Game & game)
  */
 void Bob::schedule_act(Game & game, uint32_t tdelta)
 {
-	Map_Object::schedule_act(game, tdelta, m_actid);
+	MapObject::schedule_act(game, tdelta, m_actid);
 	m_actscheduled = true;
 }
 
@@ -1073,7 +1073,7 @@ Bob::Loader::Loader()
 
 void Bob::Loader::load(FileRead & fr)
 {
-	Map_Object::Loader::load(fr);
+	MapObject::Loader::load(fr);
 
 	uint8_t version = fr.Unsigned8();
 	if (version != BOB_SAVEGAME_VERSION)
@@ -1148,7 +1148,7 @@ void Bob::Loader::load(FileRead & fr)
 
 void Bob::Loader::load_pointers()
 {
-	Map_Object::Loader::load_pointers();
+	MapObject::Loader::load_pointers();
 
 	Bob & bob = get<Bob>();
 	for (uint32_t i = 0; i < bob.m_stack.size(); ++i) {
@@ -1165,7 +1165,7 @@ void Bob::Loader::load_pointers()
 
 void Bob::Loader::load_finish()
 {
-	Map_Object::Loader::load_finish();
+	MapObject::Loader::load_finish();
 
 	// Care about new mapobject saving / loading - map objects don't get a task,
 	// if created in the editor, so we give them one here.
@@ -1196,7 +1196,7 @@ const BobProgramBase * Bob::Loader::get_program(const std::string & name)
 void Bob::save
 	(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
-	Map_Object::save(eg, mos, fw);
+	MapObject::save(eg, mos, fw);
 
 	fw.Unsigned8(BOB_SAVEGAME_VERSION);
 
@@ -1224,7 +1224,7 @@ void Bob::save
 		fw.Signed32(state.ivar1);
 		fw.Signed32(state.ivar2);
 		fw.Signed32(state.ivar3);
-		if (const Map_Object * obj = state.objvar1.get(eg)) {
+		if (const MapObject * obj = state.objvar1.get(eg)) {
 			fw.Unsigned32(mos.get_object_file_index(*obj));
 		} else {
 			fw.Unsigned32(0);
