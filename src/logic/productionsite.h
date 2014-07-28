@@ -56,7 +56,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	friend struct ProductionProgram; // To add animations
 
 	ProductionSite_Descr
-		(Map_Object_Type type, char const * name, char const * descname,
+		(MapObjectType type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &, const World&);
 	~ProductionSite_Descr() override;

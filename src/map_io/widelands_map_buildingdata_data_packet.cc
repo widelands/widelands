@@ -99,7 +99,7 @@ void Map_Buildingdata_Data_Packet::Read
 						try {
 							building.m_anim =
 								building.descr().get_animation(animation_name);
-						} catch (const Map_Object_Descr::Animation_Nonexistent &) {
+						} catch (const MapObjectDescr::Animation_Nonexistent &) {
 							log
 								("WARNING: %s %s does not have animation \"%s\"; "
 								 "using animation \"idle\" instead\n",

@@ -55,7 +55,7 @@ class BobDescr : public Map_Object_Descr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
-	BobDescr(Map_Object_Type type,
+	BobDescr(MapObjectType type,
 	         const std::string& init_name,
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);

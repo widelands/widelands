@@ -112,7 +112,7 @@ Tribe_Descr::Tribe_Descr
 #define PARSE_WORKER_TYPES(name)                                                                   \
 	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
 	auto& worker_descr =                                                                      \
-	   *new Worker_Descr(Map_Object_Type::WORKER, _name, _descname, path, prof, global_s, *this);   \
+		*new Worker_Descr(MapObjectType::WORKER, _name, _descname, path, prof, global_s, *this);   \
 	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
 	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
 		m_worker_types_without_cost.push_back(worker_idx);                                           \
@@ -142,7 +142,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
 				m_buildings.add(new ProductionSite_Descr(
-					Map_Object_Type::PRODUCTIONSITE, _name, _descname, path, prof, global_s, *this, world));
+					MapObjectType::PRODUCTIONSITE, _name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")

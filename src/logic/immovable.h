@@ -77,7 +77,7 @@ struct BaseImmovable : public Map_Object {
 		BIG       ///< big building
 	};
 
-	BaseImmovable(const Map_Object_Descr &);
+	BaseImmovable(const MapObjectDescr &);
 
 	virtual int32_t  get_size    () const = 0;
 	virtual bool get_passable() const = 0;
@@ -108,7 +108,7 @@ struct ImmovableActionData;
 /**
  * Immovable represents a standard immovable such as trees or stones.
  */
-struct Immovable_Descr : public Map_Object_Descr {
+struct Immovable_Descr : public MapObjectDescr {
 	typedef std::map<std::string, ImmovableProgram *> Programs;
 
 	Immovable_Descr
@@ -289,7 +289,7 @@ private:
  * also adjusted automatically.
  */
 struct PlayerImmovable : public BaseImmovable {
-	PlayerImmovable(const Map_Object_Descr &);
+	PlayerImmovable(const MapObjectDescr &);
 	virtual ~PlayerImmovable();
 
 	Player * get_owner() const {return m_owner;}

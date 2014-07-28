@@ -52,7 +52,7 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 
 Building_Descr::Building_Descr
-	(const Map_Object_Type type, char const * const _name, char const * const _descname,
+	(const MapObjectType type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _descr)
 	:

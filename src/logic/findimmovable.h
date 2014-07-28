@@ -94,12 +94,12 @@ private:
 	int32_t m_min, m_max;
 };
 struct FindImmovableType {
-	FindImmovableType(Map_Object_Type const type) : m_type(type) {}
+	FindImmovableType(MapObjectType const type) : m_type(type) {}
 
 	bool accept(const BaseImmovable &) const;
 
 private:
-	Map_Object_Type m_type;
+	MapObjectType m_type;
 };
 struct FindImmovableAttribute {
 	FindImmovableAttribute(uint32_t const attrib) : m_attrib(attrib) {}

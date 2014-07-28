@@ -27,7 +27,7 @@ class Soldier;
 class Battle_Descr : public Map_Object_Descr {
 public:
 	Battle_Descr(char const* const _name, char const* const _descname)
-	   : Map_Object_Descr(Map_Object_Type::BATTLE, _name, _descname) {
+		: Map_Object_Descr(MapObjectType::BATTLE, _name, _descname) {
 	}
 	~Battle_Descr() override {
 	}

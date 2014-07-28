@@ -49,7 +49,7 @@ const PortDock_Descr& PortDock::descr() const {
 
 PortDock_Descr::PortDock_Descr(char const* const _name, char const* const _descname)
 	:
-	Map_Object_Descr(Map_Object_Type::PORTDOCK, _name, _descname)
+	Map_Object_Descr(MapObjectType::PORTDOCK, _name, _descname)
 {
 }
 

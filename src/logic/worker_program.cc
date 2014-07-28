@@ -264,7 +264,7 @@ void WorkerProgram::parse_findobject
 				throw wexception("Bad findobject radius '%s'", value.c_str());
 
 		} else if (key == "attrib") {
-			act->iparam2 = Map_Object_Descr::get_attribute_id(value);
+			act->iparam2 = MapObjectDescr::get_attribute_id(value);
 		} else if (key == "type") {
 			act->sparam1 = value;
 		} else
@@ -377,7 +377,7 @@ void WorkerProgram::parse_findspace
 		} else if (key == "space") {
 			act->iparam3 = 1;
 		} else if (key == "avoid") {
-			act->iparam5 = Map_Object_Descr::get_attribute_id(value);
+			act->iparam5 = MapObjectDescr::get_attribute_id(value);
 		} else
 			throw wexception
 				("Bad findspace predicate %s:%s", key.c_str(), value.c_str());

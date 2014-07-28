@@ -198,7 +198,7 @@ void Editor_Game_Base::inform_players_about_ownership
 	}
 }
 void Editor_Game_Base::inform_players_about_immovable
-	(Map_Index const i, Map_Object_Descr const * const descr)
+	(Map_Index const i, MapObjectDescr const * const descr)
 {
 	if (!Road::IsRoadDescr(descr))
 		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {

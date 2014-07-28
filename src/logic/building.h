@@ -62,7 +62,7 @@ struct Building_Descr : public Map_Object_Descr {
 	typedef std::vector<Building_Index> FormerBuildings;
 
 	Building_Descr
-		(Map_Object_Type type, char const * _name, char const * _descname,
+		(MapObjectType type, char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 	~Building_Descr() override {}

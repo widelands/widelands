@@ -47,7 +47,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Building_Descr(Map_Object_Type::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
+	Building_Descr(MapObjectType::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
 

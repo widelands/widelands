@@ -45,7 +45,7 @@ TrainingSite_Descr::TrainingSite_Descr
 	 const Tribe_Descr & _tribe, const World& world)
 	:
 	ProductionSite_Descr
-		(Map_Object_Type::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
+		(MapObjectType::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
 	m_max_stall         (global_s.get_safe_int("trainer_patience")),
 

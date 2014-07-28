@@ -45,7 +45,7 @@ struct Tribe_Descr;
  * Wares can be stored in warehouses. They can be transferred across an
  * Economy. They can be traded.
 */
-struct WareDescr : public Map_Object_Descr {
+struct WareDescr : public MapObjectDescr {
 	WareDescr
 		(const Tribe_Descr & tribe, char const * const name,
 		 char const * const descname, const std::string & directory,

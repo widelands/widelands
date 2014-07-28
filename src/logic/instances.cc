@@ -553,50 +553,50 @@ void Map_Object::save
 	fw.Unsigned32(mos.get_object_file_index(*this));
 }
 
-std::string to_string(const Map_Object_Type type) {
+std::string to_string(const MapObjectType type) {
 	switch (type) {
-	case Map_Object_Type::BOB:
+	case MapObjectType::BOB:
 		return "bob";
-	case Map_Object_Type::CRITTER:
+	case MapObjectType::CRITTER:
 		return "critter";
-	case Map_Object_Type::SHIP:
+	case MapObjectType::SHIP:
 		return "ship";
-	case Map_Object_Type::WORKER:
+	case MapObjectType::WORKER:
 		return "worker";
-	case Map_Object_Type::CARRIER:
+	case MapObjectType::CARRIER:
 		return "carrier";
-	case Map_Object_Type::SOLDIER:
+	case MapObjectType::SOLDIER:
 		return "soldier";
-	case Map_Object_Type::WARE:
+	case MapObjectType::WARE:
 		return "ware";
-	case Map_Object_Type::BATTLE:
+	case MapObjectType::BATTLE:
 		return "battle";
-	case Map_Object_Type::FLEET:
+	case MapObjectType::FLEET:
 		return "fleet";
-	case Map_Object_Type::IMMOVABLE:
+	case MapObjectType::IMMOVABLE:
 		return "immovable";
-	case Map_Object_Type::FLAG:
+	case MapObjectType::FLAG:
 		return "flag";
-	case Map_Object_Type::ROAD:
+	case MapObjectType::ROAD:
 		return "road";
-	case Map_Object_Type::PORTDOCK:
+	case MapObjectType::PORTDOCK:
 		return "portdock";
-	case Map_Object_Type::BUILDING:
+	case MapObjectType::BUILDING:
 		return "building";
-	case Map_Object_Type::CONSTRUCTIONSITE:
+	case MapObjectType::CONSTRUCTIONSITE:
 		return "constructionsite";
-	case Map_Object_Type::DISMANTLESITE:
+	case MapObjectType::DISMANTLESITE:
 		return "dismantlesite";
-	case Map_Object_Type::WAREHOUSE:
+	case MapObjectType::WAREHOUSE:
 		return "warehouse";
-	case Map_Object_Type::PRODUCTIONSITE:
+	case MapObjectType::PRODUCTIONSITE:
 		return "productionsite";
-	case Map_Object_Type::MILITARYSITE:
+	case MapObjectType::MILITARYSITE:
 		return "militarysite";
-	case Map_Object_Type::TRAININGSITE:
+	case MapObjectType::TRAININGSITE:
 		return "trainingsite";
 	default:
-		throw wexception("Unknown Map_Object_Type %d.", static_cast<int>(type));
+		throw wexception("Unknown MapObjectType %d.", static_cast<int>(type));
 	}
 }
 

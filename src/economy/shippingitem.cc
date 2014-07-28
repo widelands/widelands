@@ -53,7 +53,7 @@ void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** wor
 		return;
 	}
 
-	if (obj->descr().type() == Map_Object_Type::WARE) {
+	if (obj->descr().type() == MapObjectType::WARE) {
 		if (ware) {
 			*ware = dynamic_cast<WareInstance*>(obj);
 		}

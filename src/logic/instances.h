@@ -49,7 +49,7 @@ class Player;
 struct Path;
 
 // This enum lists the available classes of Map Objects.
-enum class Map_Object_Type : uint8_t {
+enum class MapObjectType : uint8_t {
 	MAPOBJECT = 0,  // Root superclass
 
 	WARE,  //  class WareInstance
@@ -82,7 +82,7 @@ enum class Map_Object_Type : uint8_t {
 };
 
 // Returns a string representation for 'type'.
-std::string to_string(Map_Object_Type type);
+std::string to_string(MapObjectType type);
 
 /**
  * Base class for descriptions of worker, files and so on. This must just
@@ -90,7 +90,7 @@ std::string to_string(Map_Object_Type type);
  */
 struct Map_Object_Descr {
 
-	Map_Object_Descr(const Map_Object_Type type,
+	Map_Object_Descr(const MapObjectType type,
 	                 const std::string& init_name,
 	                 const std::string& init_descname)
 	   : m_type(type), m_name(init_name), m_descname(init_descname) {
@@ -101,7 +101,7 @@ struct Map_Object_Descr {
 	const std::string &     descname() const {return m_descname;}
 
 	// Type of the Map_Object_Descr.
-	Map_Object_Type type() const {return m_type;}
+	MapObjectType type() const {return m_type;}
 
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
@@ -137,7 +137,7 @@ private:
 	typedef std::map<std::string, uint32_t> AttribMap;
 	typedef std::vector<uint32_t>           Attributes;
 
-	const Map_Object_Type   m_type;           /// Subclasses pick from the enum above
+	const MapObjectType   m_type;           /// Subclasses pick from the enum above
 	std::string const m_name;           /// The name for internal reference
 	std::string const m_descname;       /// A localized Descriptive name
 	Attributes        m_attributes;

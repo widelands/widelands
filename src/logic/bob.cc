@@ -50,7 +50,7 @@
 
 namespace Widelands {
 
-BobDescr::BobDescr(Map_Object_Type type, const std::string& init_name,
+BobDescr::BobDescr(MapObjectType type, const std::string& init_name,
                   const std::string& init_descname,
                   Tribe_Descr const* tribe)
 	:

@@ -255,7 +255,7 @@ Warehouse Building
 Warehouse_Descr::Warehouse_Descr
 	(char const* const _name, char const* const _descname,
 	 const std::string& directory, Profile& prof, Section& global_s, const Tribe_Descr& _tribe)
-	: Building_Descr(Map_Object_Type::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
+	: Building_Descr(MapObjectType::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
 	  m_conquers         (0),
 	  m_heal_per_second  (0)
 {

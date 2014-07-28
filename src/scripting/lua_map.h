@@ -99,7 +99,7 @@ public:
 	virtual ~L_MapObjectDescription() {}
 
 	L_MapObjectDescription() : mapobjectdescr_(nullptr) {}
-	L_MapObjectDescription(const Widelands::Map_Object_Descr* const mapobjectdescr)
+	L_MapObjectDescription(const Widelands::MapObjectDescr* const mapobjectdescr)
 		: mapobjectdescr_(mapobjectdescr) {}
 	L_MapObjectDescription(lua_State* L) : mapobjectdescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'MapObjectDescription' directly!");
@@ -124,17 +124,17 @@ public:
 	 * C methods
 	 */
 protected:
-	const Widelands::Map_Object_Descr* get() const {
+	const Widelands::MapObjectDescr* get() const {
 		assert(mapobjectdescr_ != nullptr);
 		return mapobjectdescr_;
 	}
 	// For persistence.
-	void set_description_pointer(const Widelands::Map_Object_Descr* pointer) {
+	void set_description_pointer(const Widelands::MapObjectDescr* pointer) {
 		mapobjectdescr_ = pointer;
 	}
 
 private:
-	const Widelands::Map_Object_Descr* mapobjectdescr_;
+	const Widelands::MapObjectDescr* mapobjectdescr_;
 };
 
 #define CASTED_GET_DESCRIPTION(klass)                                                              \
@@ -997,7 +997,7 @@ public:
 	 */
 };
 
-int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::Map_Object_Descr* descr);
+int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDescr* descr);
 int upcasted_map_object_to_lua(lua_State * L, Widelands::Map_Object * mo);
 
 void luaopen_wlmap(lua_State *);

@@ -313,7 +313,7 @@ public:
 		 * Only valid when the player has seen this node (or maybe a nearby node
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
-		const Map_Object_Descr             * map_object_descr[3];
+		const MapObjectDescr             * map_object_descr[3];
 
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node

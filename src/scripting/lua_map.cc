@@ -543,18 +543,18 @@ int do_set_soldiers
 int upcasted_map_object_descr_to_lua(lua_State* L, const Map_Object_Descr* const descr) {
 	assert(descr != nullptr);
 
-	if (descr->type() >= Map_Object_Type::BUILDING)
+	if (descr->type() >= MapObjectType::BUILDING)
 	{
 		switch (descr->type()) {
-			case Map_Object_Type::CONSTRUCTIONSITE:
+			case MapObjectType::CONSTRUCTIONSITE:
 				return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
-			case Map_Object_Type::PRODUCTIONSITE:
+			case MapObjectType::PRODUCTIONSITE:
 				return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
-			case Map_Object_Type::MILITARYSITE:
+			case MapObjectType::MILITARYSITE:
 				return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
-			case Map_Object_Type::WAREHOUSE:
+			case MapObjectType::WAREHOUSE:
 				return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
-			case Map_Object_Type::TRAININGSITE:
+			case MapObjectType::TRAININGSITE:
 				return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
 			default:
 				return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
@@ -562,13 +562,13 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Map_Object_Descr* const
 	}
 	else {
 		switch (descr->type()) {
-			case Map_Object_Type::WARE:
+			case MapObjectType::WARE:
 				return CAST_TO_LUA(WareDescr, L_WareDescription);
-			case Map_Object_Type::WORKER:
+			case MapObjectType::WORKER:
 				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
-			case Map_Object_Type::CARRIER:
+			case MapObjectType::CARRIER:
 				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
-			case Map_Object_Type::SOLDIER:
+			case MapObjectType::SOLDIER:
 				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
 			default:
 				return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
@@ -589,7 +589,7 @@ int upcasted_map_object_to_lua(lua_State * L, Map_Object * mo) {
 		return 0;
 
 	switch (mo->descr().type()) {
-	case Map_Object_Type::CRITTER:
+	case MapObjectType::CRITTER:
 		return CAST_TO_LUA(Bob);
 	case Map_Object_Type::SHIP:
 		return CAST_TO_LUA(Ship);

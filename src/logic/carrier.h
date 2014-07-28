@@ -33,7 +33,7 @@ struct Carrier_Descr : public Worker_Descr {
 	              Section& global_s,
 	              const Tribe_Descr& _tribe)
 		:
-		Worker_Descr(Map_Object_Type::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
+		Worker_Descr(MapObjectType::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
 	{
 	}
 	~Carrier_Descr() override {}

@@ -41,7 +41,7 @@ const Road_Descr& Road::descr() const {
 	return g_road_descr;
 }
 
-bool Road::IsRoadDescr(Map_Object_Descr const * const descr)
+bool Road::IsRoadDescr(MapObjectDescr const * const descr)
 {
 	return descr == &g_road_descr;
 }

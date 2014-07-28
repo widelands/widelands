@@ -169,8 +169,8 @@ public:
 	Tribe_Descr const* get_tribe(const std::string& name) const;
 
 	void inform_players_about_ownership(Map_Index, Player_Number);
-	void inform_players_about_immovable(Map_Index, Map_Object_Descr const*);
-	void inform_players_about_road(FCoords, Map_Object_Descr const*);
+	void inform_players_about_immovable(Map_Index, MapObjectDescr const*);
+	void inform_players_about_road(FCoords, MapObjectDescr const*);
 
 	void unconquer_area(Player_Area<Area<FCoords>>, Player_Number destroying_player = 0);
 	void conquer_area(Player_Area<Area<FCoords>>);

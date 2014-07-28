@@ -45,7 +45,7 @@ public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
 	Worker_Descr
-		(Map_Object_Type type, char const * const name, char const * const descname,
+		(MapObjectType type, char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr &);
 	~Worker_Descr() override;

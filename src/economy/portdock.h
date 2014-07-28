@@ -35,7 +35,7 @@ struct Ship;
 class Warehouse;
 class ExpeditionBootstrap;
 
-class PortDock_Descr : public Map_Object_Descr {
+class PortDock_Descr : public MapObjectDescr {
 public:
 	PortDock_Descr(char const* const _name, char const* const _descname);
 	~PortDock_Descr() override {

@@ -54,7 +54,7 @@ Ship_Descr::Ship_Descr
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
 	:
-	BobDescr(Map_Object_Type::SHIP, given_name, gdescname, &gtribe)
+	BobDescr(MapObjectType::SHIP, given_name, gdescname, &gtribe)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");

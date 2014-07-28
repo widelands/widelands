@@ -438,7 +438,7 @@ int L_PlayerBase::place_road(lua_State * L) {
 		r = &get(L, egbase).force_road(path);
 	} else {
 		BaseImmovable * bi = map.get_immovable(current);
-		if (!bi || bi->descr().type() != Map_Object_Type::FLAG) {
+		if (!bi || bi->descr().type() != MapObjectType::FLAG) {
 			if (!get(L, egbase).build_flag(current))
 				report_error(L, "Could not place end flag!");
 		}

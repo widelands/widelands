@@ -1093,7 +1093,7 @@ void Worker::set_location(PlayerImmovable * const location)
 	if (location) {
 		Economy * const eco = location->get_economy();
 
-		if (!m_economy || (descr().type() == Map_Object_Type::SOLDIER)) {
+		if (!m_economy || (descr().type() == MapObjectType::SOLDIER)) {
 			set_economy(eco);
 		} else if (m_economy != eco) {
 			throw wexception
@@ -1315,7 +1315,7 @@ void Worker::init_auto_task(Game & game) {
 	if (PlayerImmovable * location = get_location(game)) {
 		if
 			(get_economy()->warehouses().size() ||
-			 location->descr().type() >= Map_Object_Type::BUILDING)
+			 location->descr().type() >= MapObjectType::BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(nullptr);
@@ -1500,7 +1500,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				 serial(), nextstep->serial());
 	} else if (upcast(Road,     road,     location)) {
 		// Road to Flag
-		if (nextstep->descr().type() == Map_Object_Type::FLAG) {
+		if (nextstep->descr().type() == MapObjectType::FLAG) {
 			const Path & path = road->get_path();
 			int32_t const index =
 				nextstep == &road->get_flag(Road::FlagStart) ? 0                 :
@@ -1749,7 +1749,7 @@ void Worker::start_task_return(Game & game, bool const dropware)
 {
 	PlayerImmovable * const location = get_location(game);
 
-	if (!location || location->descr().type() < Map_Object_Type::BUILDING)
+	if (!location || location->descr().type() < MapObjectType::BUILDING)
 		throw wexception
 			("MO(%u): start_task_return(): not owned by building", serial());
 
@@ -1991,7 +1991,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 
 	// Always leave buildings in an orderly manner,
 	// even when no warehouses are left to return to
-	if (location->descr().type() >= Map_Object_Type::BUILDING)
+	if (location->descr().type() >= MapObjectType::BUILDING)
 		return start_task_leavebuilding(game, true);
 
 	if (!get_economy()->warehouses().size()) {
@@ -2108,7 +2108,7 @@ void Worker::dropoff_update(Game & game, State &)
 	}
 
 	// We don't have the ware any more, return home
-	if (location->descr().type() == Map_Object_Type::FLAG)
+	if (location->descr().type() == MapObjectType::FLAG)
 		return
 			start_task_move
 				(game,
@@ -2116,7 +2116,7 @@ void Worker::dropoff_update(Game & game, State &)
 				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 
-	if (location->descr().type() < Map_Object_Type::BUILDING)
+	if (location->descr().type() < MapObjectType::BUILDING)
 		throw wexception
 			("MO(%u): [dropoff]: not on building on return", serial());
 
