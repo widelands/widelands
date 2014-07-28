@@ -40,14 +40,14 @@
 
 namespace Widelands {
 
-MilitarysiteDescr::MilitarysiteDescr
+MilitarySiteDescr::MilitarySiteDescr
 	(char        const * const _name,
 	 char        const * const _descname,
 	 const std::string & directory, Profile & prof,  Section & global_s,
 	 const Tribe_Descr & _tribe,
 	 const World& world)
 	:
-	ProductionsiteDescr
+	ProductionSiteDescr
 		(MapObjectType::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
@@ -72,7 +72,7 @@ MilitarysiteDescr::MilitarysiteDescr
 Create a new building of this type
 ===============
 */
-Building & MilitarysiteDescr::create_object() const {
+Building & MilitarySiteDescr::create_object() const {
 	return *new MilitarySite(*this);
 }
 
@@ -85,7 +85,7 @@ class MilitarySite
 =============================
 */
 
-MilitarySite::MilitarySite(const MilitarysiteDescr & ms_descr) :
+MilitarySite::MilitarySite(const MilitarySiteDescr & ms_descr) :
 ProductionSite(ms_descr),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),

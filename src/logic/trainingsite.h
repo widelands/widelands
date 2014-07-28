@@ -31,12 +31,12 @@ namespace Widelands {
 
 class World;
 
-struct TrainingsiteDescr : public ProductionsiteDescr {
-	TrainingsiteDescr
+struct TrainingSiteDescr : public ProductionSiteDescr {
+	TrainingSiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
-	~TrainingsiteDescr() override {}
+	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;
 
@@ -90,7 +90,7 @@ private:
 
 	// Re-use of m_inputs to get the resources
 	// TrainingMap m_programs;
-	DISALLOW_COPY_AND_ASSIGN(TrainingsiteDescr);
+	DISALLOW_COPY_AND_ASSIGN(TrainingSiteDescr);
 };
 
 /**
@@ -120,7 +120,7 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 	};
 
 public:
-	TrainingSite(const TrainingsiteDescr &);
+	TrainingSite(const TrainingSiteDescr &);
 
 	std::string get_statistics_string() override;
 
@@ -215,7 +215,7 @@ private:
 	typedef std::map<TypeAndLevel_t, FailAndPresence_t> TrainFailCount_t;
 	TrainFailCount_t training_failure_count;
 	uint32_t max_stall_val;
-	void init_kick_state(const tAttribute&, const TrainingsiteDescr&);
+	void init_kick_state(const tAttribute&, const TrainingSiteDescr&);
 
 
 };

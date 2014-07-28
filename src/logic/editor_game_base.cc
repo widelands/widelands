@@ -336,7 +336,7 @@ Building & Editor_Game_Base::warp_dismantlesite
 		tribe.get_building_descr
 			(tribe.safe_building_index("dismantlesite"));
 
-	upcast(const DismantlesiteDescr, ds_descr, descr);
+	upcast(const DismantleSiteDescr, ds_descr, descr);
 
 	return
 		*new DismantleSite

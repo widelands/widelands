@@ -53,7 +53,7 @@ ProductionSite BUILDING
 ==============================================================================
 */
 
-ProductionsiteDescr::ProductionsiteDescr
+ProductionSiteDescr::ProductionSiteDescr
 	(MapObjectType type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe, const World& world)
@@ -152,7 +152,7 @@ ProductionsiteDescr::ProductionsiteDescr
 	}
 }
 
-ProductionsiteDescr::~ProductionsiteDescr()
+ProductionSiteDescr::~ProductionSiteDescr()
 {
 	while (m_programs.size()) {
 		delete m_programs.begin()->second;
@@ -164,7 +164,7 @@ ProductionsiteDescr::~ProductionsiteDescr()
 /**
  * Get the program of the given name.
  */
-const ProductionProgram * ProductionsiteDescr::get_program
+const ProductionProgram * ProductionSiteDescr::get_program
 	(const std::string & program_name) const
 {
 	Programs::const_iterator const it = programs().find(program_name);
@@ -177,7 +177,7 @@ const ProductionProgram * ProductionsiteDescr::get_program
 /**
  * Create a new building of this type
  */
-Building & ProductionsiteDescr::create_object() const {
+Building & ProductionSiteDescr::create_object() const {
 	return *new ProductionSite(*this);
 }
 
@@ -190,7 +190,7 @@ IMPLEMENTATION
 ==============================
 */
 
-ProductionSite::ProductionSite(const ProductionsiteDescr & ps_descr) :
+ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	Building            (ps_descr),
 	m_working_positions (new Working_Position[ps_descr.nr_working_positions()]),
 	m_fetchfromflag     (0),
@@ -251,7 +251,7 @@ std::string ProductionSite::get_statistics_string()
 bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
-	if (upcast(ProductionsiteDescr const, bld, descr().tribe().get_building_descr(targetSite))) {
+	if (upcast(ProductionSiteDescr const, bld, descr().tribe().get_building_descr(targetSite))) {
 		// if he has workers
 		if (bld->nr_working_positions()) {
 			Ware_Index need = bld->working_positions()[0].first;

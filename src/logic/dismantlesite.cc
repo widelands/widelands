@@ -36,7 +36,7 @@
 
 namespace Widelands {
 
-DismantlesiteDescr::DismantlesiteDescr
+DismantleSiteDescr::DismantleSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
@@ -46,7 +46,7 @@ DismantlesiteDescr::DismantlesiteDescr
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }
 
-Building & DismantlesiteDescr::create_object() const {
+Building & DismantleSiteDescr::create_object() const {
 	return *new DismantleSite(*this);
 }
 
@@ -59,12 +59,12 @@ IMPLEMENTATION
 */
 
 
-DismantleSite::DismantleSite(const DismantlesiteDescr & gdescr) :
+DismantleSite::DismantleSite(const DismantleSiteDescr & gdescr) :
 Partially_Finished_Building(gdescr)
 {}
 
 DismantleSite::DismantleSite
-	(const DismantlesiteDescr & gdescr, Editor_Game_Base & egbase, Coords const c,
+	(const DismantleSiteDescr & gdescr, Editor_Game_Base & egbase, Coords const c,
 	 Player & plr, bool loading, Building::FormerBuildings & former_buildings)
 :
 Partially_Finished_Building(gdescr)

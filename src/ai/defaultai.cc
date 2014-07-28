@@ -292,9 +292,9 @@ void DefaultAI::late_initialization() {
 			bo.plants_trees_ = false;
 
 		// Read all interesting data from ware producing buildings
-		if (typeid(bld) == typeid(ProductionsiteDescr)) {
-			const ProductionsiteDescr& prod =
-				ref_cast<ProductionsiteDescr const, BuildingDescr const>(bld);
+		if (typeid(bld) == typeid(ProductionSiteDescr)) {
+			const ProductionSiteDescr& prod =
+				ref_cast<ProductionSiteDescr const, BuildingDescr const>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
@@ -324,7 +324,7 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 
-		if (typeid(bld) == typeid(MilitarysiteDescr)) {
+		if (typeid(bld) == typeid(MilitarySiteDescr)) {
 			bo.type = BuildingObserver::MILITARYSITE;
 			continue;
 		}
@@ -334,12 +334,12 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 
-		if (typeid(bld) == typeid(TrainingsiteDescr)) {
+		if (typeid(bld) == typeid(TrainingSiteDescr)) {
 			bo.type = BuildingObserver::TRAININGSITE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(ConstructionsiteDescr)) {
+		if (typeid(bld) == typeid(ConstructionSiteDescr)) {
 			bo.type = BuildingObserver::CONSTRUCTIONSITE;
 			continue;
 		}
@@ -579,7 +579,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				if (upcast(ConstructionSite const, constructionsite, building)) {
 					const BuildingDescr& target_descr = constructionsite->building();
 
-					if (dynamic_cast<ProductionsiteDescr const*>(&target_descr))
+					if (dynamic_cast<ProductionSiteDescr const*>(&target_descr))
 						consider_productionsite_influence(
 						   field,
 						   immovables.at(i).coords,
@@ -638,7 +638,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			if (upcast(ConstructionSite const, constructionsite, building)) {
 				const BuildingDescr& target_descr = constructionsite->building();
 
-				if (upcast(MilitarysiteDescr const, target_ms_d, &target_descr)) {
+				if (upcast(MilitarySiteDescr const, target_ms_d, &target_descr)) {
 					const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
 					const int32_t radius = target_ms_d->get_conquers() + 4;
 					const int32_t v = radius - dist;

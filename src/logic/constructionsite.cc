@@ -42,7 +42,7 @@
 
 namespace Widelands {
 
-ConstructionsiteDescr::ConstructionsiteDescr
+ConstructionSiteDescr::ConstructionSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
@@ -60,7 +60,7 @@ ConstructionsiteDescr::ConstructionsiteDescr
 }
 
 
-Building & ConstructionsiteDescr::create_object() const {
+Building & ConstructionSiteDescr::create_object() const {
 	return *new ConstructionSite(*this);
 }
 
@@ -74,7 +74,7 @@ IMPLEMENTATION
 */
 
 
-ConstructionSite::ConstructionSite(const ConstructionsiteDescr & cs_descr) :
+ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
 Partially_Finished_Building (cs_descr),
 m_fetchfromflag  (0),
 m_builder_idle   (false)

@@ -52,14 +52,14 @@ class WorkerDescr;
  * A production site can have one (or more) input wares types. Every input
  * wares type has an associated store.
  */
-struct ProductionsiteDescr : public BuildingDescr {
+struct ProductionSiteDescr : public BuildingDescr {
 	friend struct ProductionProgram; // To add animations
 
-	ProductionsiteDescr
+	ProductionSiteDescr
 		(MapObjectType type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &, const World&);
-	~ProductionsiteDescr() override;
+	~ProductionSiteDescr() override;
 
 	Building & create_object() const override;
 
@@ -108,7 +108,7 @@ private:
 	std::string m_out_of_resource_message;
 	uint32_t    m_out_of_resource_delay_attempts;
 
-	DISALLOW_COPY_AND_ASSIGN(ProductionsiteDescr);
+	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
 
 class ProductionSite : public Building {
@@ -131,7 +131,7 @@ class ProductionSite : public Building {
 	MO_DESCR(ProductionSiteDescr)
 
 public:
-	ProductionSite(const ProductionsiteDescr & descr);
+	ProductionSite(const ProductionSiteDescr & descr);
 	virtual ~ProductionSite();
 
 	void log_general_info(const Editor_Game_Base &) override;

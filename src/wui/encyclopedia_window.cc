@@ -120,7 +120,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr & descr = *tribe.get_building_descr(i);
-		if (upcast(ProductionsiteDescr const, de, &descr)) {
+		if (upcast(ProductionSiteDescr const, de, &descr)) {
 
 			if
 				((descr.is_buildable() || descr.is_enhanced())
@@ -142,8 +142,8 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	condTable.clear();
 	const Tribe_Descr & tribe = iaplayer().player().tribe();
 
-	const ProductionsiteDescr::Programs & programs =
-		ref_cast<ProductionsiteDescr const, BuildingDescr const>
+	const ProductionSiteDescr::Programs & programs =
+		ref_cast<ProductionSiteDescr const, BuildingDescr const>
 			(*tribe.get_building_descr(prodSites.get_selected()))
 		.programs();
 

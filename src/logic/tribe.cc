@@ -129,7 +129,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
 				m_buildings.add
-					(new DismantleSite_Descr
+					(new DismantleSiteDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 			safe_building_index("dismantlesite"); // Check that it is defined.

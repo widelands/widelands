@@ -297,7 +297,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 }
 
 ProductionProgram::ActReturn::Site_Has::Site_Has
-	(char * & parameters, const ProductionsiteDescr & descr)
+	(char * & parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		parse_ware_type_group(parameters, group, descr.tribe(), descr.inputs());
@@ -395,7 +395,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 
 
 ProductionProgram::ActReturn::Condition * create_site_condition
-	(char * & parameters, const ProductionsiteDescr & descr)
+	(char * & parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		if (match_force_skip(parameters, "has"))
@@ -428,7 +428,7 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 
 ProductionProgram::ActReturn::Condition *
 ProductionProgram::ActReturn::create_condition
-	(char * & parameters, const ProductionsiteDescr & descr)
+	(char * & parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		if      (match_force_skip(parameters, "not"))
@@ -450,7 +450,7 @@ ProductionProgram::ActReturn::create_condition
 
 
 ProductionProgram::ActReturn::ActReturn
-	(char * parameters, const ProductionsiteDescr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		if      (match(parameters, "failed"))    m_result = Failed;
@@ -580,7 +580,7 @@ void ProductionProgram::ActReturn::execute
 
 
 ProductionProgram::ActCall::ActCall
-	(char * parameters, const ProductionsiteDescr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	//  Initialize with default handling methods.
 	m_handling_methods[Failed    - 1] = Continue;
@@ -591,8 +591,8 @@ ProductionProgram::ActCall::ActCall
 		bool reached_end;
 		{
 			char const * const program_name = next_word(parameters, reached_end);
-			const ProductionsiteDescr::Programs & programs = descr.programs();
-			ProductionsiteDescr::Programs::const_iterator const it =
+			const ProductionSiteDescr::Programs & programs = descr.programs();
+			ProductionSiteDescr::Programs::const_iterator const it =
 				programs.find(program_name);
 			if (it == programs.end())
 				throw game_data_error
@@ -686,7 +686,7 @@ void ProductionProgram::ActCall::execute
 }
 
 ProductionProgram::ActWorker::ActWorker(
-		char* parameters, const std::string& production_program_name, ProductionsiteDescr* descr)
+		char* parameters, const std::string& production_program_name, ProductionSiteDescr* descr)
 {
 	try {
 		m_program = parameters;
@@ -805,7 +805,7 @@ void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) 
 }
 
 ProductionProgram::ActAnimate::ActAnimate(
-	char* parameters, const std::string& directory, Profile& prof, ProductionsiteDescr* descr) {
+	char* parameters, const std::string& directory, Profile& prof, ProductionSiteDescr* descr) {
 	try {
 		bool reached_end;
 		char * const animation_name = next_word(parameters, reached_end);
@@ -843,7 +843,7 @@ void ProductionProgram::ActAnimate::execute
 
 
 ProductionProgram::ActConsume::ActConsume
-	(char * parameters, const ProductionsiteDescr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		const Tribe_Descr & tribe = descr.tribe();
@@ -964,7 +964,7 @@ void ProductionProgram::ActConsume::execute
 
 
 ProductionProgram::ActProduce::ActProduce
-	(char * parameters, const ProductionsiteDescr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		const Tribe_Descr & tribe = descr.tribe();
@@ -1064,7 +1064,7 @@ bool ProductionProgram::ActProduce::get_building_work
 
 
 ProductionProgram::ActRecruit::ActRecruit
-	(char * parameters, const ProductionsiteDescr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		const Tribe_Descr & tribe = descr.tribe();
@@ -1161,7 +1161,7 @@ bool ProductionProgram::ActRecruit::get_building_work
 
 ProductionProgram::ActMine::ActMine(
 		char* parameters, const World& world, const std::string& production_program_name,
-		ProductionsiteDescr* descr)
+		ProductionSiteDescr* descr)
 {
 	try {
 		bool reached_end;
@@ -1563,7 +1563,7 @@ void ProductionProgram::ActPlayFX::execute
 }
 
 ProductionProgram::ActConstruct::ActConstruct(
-		char* parameters, const std::string& production_program_name, ProductionsiteDescr* descr) {
+		char* parameters, const std::string& production_program_name, ProductionSiteDescr* descr) {
 	try {
 		std::vector<std::string> params = split_string(parameters, " ");
 
@@ -1712,7 +1712,7 @@ void ProductionProgram::ActConstruct::building_work_failed
 ProductionProgram::ProductionProgram(
 		const std::string& directory, Profile& prof, const std::string& _name,
 		const std::string& _descname, const World& world,
-		ProductionsiteDescr* building)
+		ProductionSiteDescr* building)
 	: m_name(_name), m_descname(_descname) {
 	Section& program_s = prof.get_safe_section(_name.c_str());
 	while (Section::Value* const v = program_s.get_next_val()) {

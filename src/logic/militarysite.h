@@ -33,12 +33,12 @@ namespace Widelands {
 class Soldier;
 class World;
 
-struct MilitarysiteDescr : public ProductionsiteDescr {
-	MilitarysiteDescr
+struct MilitarySiteDescr : public ProductionSiteDescr {
+	MilitarySiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
-	~MilitarysiteDescr() override {}
+	~MilitarySiteDescr() override {}
 
 	Building & create_object() const override;
 
@@ -62,7 +62,7 @@ private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
 	uint32_t m_heal_per_second;
-	DISALLOW_COPY_AND_ASSIGN(MilitarysiteDescr);
+	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
 class MilitarySite :
@@ -79,7 +79,7 @@ public:
 		kPrefersHeroes,
 	};
 
-	MilitarySite(const MilitarysiteDescr &);
+	MilitarySite(const MilitarySiteDescr &);
 	virtual ~MilitarySite();
 
 	std::string get_statistics_string() override;

@@ -198,7 +198,7 @@ public:
 	virtual ~L_ConstructionSiteDescription() {}
 
 	L_ConstructionSiteDescription() {}
-	L_ConstructionSiteDescription(const Widelands::ConstructionsiteDescr* const constructionsitedescr)
+	L_ConstructionSiteDescription(const Widelands::ConstructionSiteDescr* const constructionsitedescr)
 		: L_BuildingDescription(constructionsitedescr) {
 	}
 	L_ConstructionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
@@ -228,7 +228,7 @@ public:
 	virtual ~L_ProductionSiteDescription() {}
 
 	L_ProductionSiteDescription() {}
-	L_ProductionSiteDescription(const Widelands::ProductionsiteDescr* const productionsitedescr)
+	L_ProductionSiteDescription(const Widelands::ProductionSiteDescr* const productionsitedescr)
 	   : L_BuildingDescription(productionsitedescr) {
 	}
 	L_ProductionSiteDescription(lua_State* L) : L_BuildingDescription(L) {
@@ -262,7 +262,7 @@ public:
 	virtual ~L_MilitarySiteDescription() {}
 
 	L_MilitarySiteDescription() {}
-	L_MilitarySiteDescription(const Widelands::ProductionsiteDescr* const militarysitedescr)
+	L_MilitarySiteDescription(const Widelands::ProductionSiteDescr* const militarysitedescr)
 	   : L_ProductionSiteDescription(militarysitedescr) {
 	}
 	L_MilitarySiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {
@@ -294,7 +294,7 @@ public:
 	virtual ~L_TrainingSiteDescription() {}
 
 	L_TrainingSiteDescription() {}
-	L_TrainingSiteDescription(const Widelands::ProductionsiteDescr* const trainingsitedescr)
+	L_TrainingSiteDescription(const Widelands::ProductionSiteDescr* const trainingsitedescr)
 	   : L_ProductionSiteDescription(trainingsitedescr) {
 	}
 	L_TrainingSiteDescription(lua_State* L) : L_ProductionSiteDescription(L) {

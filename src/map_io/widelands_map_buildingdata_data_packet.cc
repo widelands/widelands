@@ -865,7 +865,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 		{
 			ProductionSite::Working_Position & wp_begin =
 				*productionsite.m_working_positions;
-			const ProductionsiteDescr & pr_descr = productionsite.descr();
+			const ProductionSiteDescr & pr_descr = productionsite.descr();
 			const BillOfMaterials & working_positions = pr_descr.working_positions();
 
 			uint16_t nr_worker_requests = fr.Unsigned16();

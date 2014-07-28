@@ -50,17 +50,17 @@ with the transport and Flag code.
 Every tribe has exactly one ConstructionSiteDescr.
 The ConstructionSite's idling animation is the basic construction site marker.
 */
-struct ConstructionsiteDescr : public BuildingDescr {
-	ConstructionsiteDescr
+struct ConstructionSiteDescr : public BuildingDescr {
+	ConstructionSiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe);
-	~ConstructionsiteDescr() override {}
+	~ConstructionSiteDescr() override {}
 
 	Building & create_object() const override;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(ConstructionsiteDescr);
+	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteDescr);
 };
 
 class ConstructionSite : public Partially_Finished_Building {
@@ -71,7 +71,7 @@ class ConstructionSite : public Partially_Finished_Building {
 	MO_DESCR(ConstructionSiteDescr)
 
 public:
-	ConstructionSite(const ConstructionsiteDescr & descr);
+	ConstructionSite(const ConstructionSiteDescr & descr);
 
 	std::string get_statistics_string() override;
 

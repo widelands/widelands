@@ -410,7 +410,7 @@ void Building_Statistics_Menu::update() {
 		uint32_t nr_owned   = 0;
 		uint32_t nr_build   = 0;
 		uint32_t total_prod = 0;
-		upcast(Widelands::ProductionsiteDescr const, productionsite, &building);
+		upcast(Widelands::ProductionSiteDescr const, productionsite, &building);
 		for (uint32_t l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite)
 				++nr_build;
