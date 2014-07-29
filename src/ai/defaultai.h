@@ -199,7 +199,7 @@ private:
 	int32_t next_helpersites_check_due_;
 	int32_t inhibit_road_building_;
 	int32_t time_of_last_construction_;
-	int32_t next_wood_cutting_check_due_;
+	int32_t enemy_last_seen_;
 
 	uint16_t numof_warehouses_;
 
