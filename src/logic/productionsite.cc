@@ -918,15 +918,15 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t minutes)
 {
-	if (descr().out_of_resource_title().empty())
-	{
-		set_result_string(_("Can’t find any more resources!"));
-	}
-	else {
-		set_result_string(descr().out_of_resource_title().c_str());
+	if (m_out_of_resource_delay_counter >=
+		 descr().out_of_resource_delay_attempts()) {
+		if (descr().out_of_resource_title().empty())
+		{
+			set_result_string(_("Can’t find any more resources!"));
+		}
+		else {
+			set_result_string(descr().out_of_resource_title().c_str());
 
-		if (m_out_of_resource_delay_counter >=
-			 descr().out_of_resource_delay_attempts()) {
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
