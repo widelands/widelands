@@ -1041,23 +1041,16 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 							 sizeof(productionsite.m_statistics_buffer) - 1,
 							 statistics_string, statistics_string_length);
 				}
-				if (4 <= packet_version) {
+				{
 					char const * const result_string        = fr.CString();
-					size_t       const result_string_length =
-						snprintf
-							(productionsite.m_result_buffer,
-							 sizeof(productionsite.m_result_buffer),
-							 "%s", result_string);
-					if
-						(sizeof(productionsite.m_result_buffer)
-						 <=
-						 result_string_length)
+					size_t       const result_string_length = productionsite.production_result().size();
+					if (sizeof(result_string) <= result_string_length)
 						log
 							("WARNING: productionsite result string can be at "
 							 "most %" PRIuS " characters but a loaded building has the "
 							 "string \"%s\" of length %" PRIuS "\n",
-							 sizeof(productionsite.m_result_buffer) - 1,
-							 result_string, result_string_length);
+							 sizeof(result_string) - 1,
+							 productionsite.production_result().c_str(), result_string_length);
 				}
 			}
 		} else
@@ -1556,7 +1549,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		fw.Unsigned8(productionsite.m_statistics[i]);
 	fw.Unsigned8(productionsite.m_statistics_changed);
 	fw.String(productionsite.m_statistics_buffer);
-	fw.String(productionsite.m_result_buffer);
+	fw.String(productionsite.production_result());
 }
 
 /*

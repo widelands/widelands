@@ -549,7 +549,7 @@ std::string Building::info_string(const std::string & format) {
 				break;
 			case 'r':
 				if (upcast(ProductionSite const, productionsite, this))
-					result << productionsite->result_string();
+					result << productionsite->production_result();
 				break;
 			default: //  invalid format sequence
 				result << '%' << *format_iter;

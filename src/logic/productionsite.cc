@@ -203,10 +203,10 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle"),
+	m_production_result (""),
 	m_out_of_resource_delay_counter(0)
 {
 	m_statistics_buffer[0] = '\0';
-	m_result_buffer[0] = '\0';
 }
 
 ProductionSite::~ProductionSite() {
@@ -885,10 +885,7 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(true);
-		//if (result == Completed) {
-			train_workers(game);
-			//m_result_buffer[0] = '\0';  //changed by TB
-		//}
+		train_workers(game);
 		m_crude_percent = m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
@@ -922,10 +919,10 @@ void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t m
 		 descr().out_of_resource_delay_attempts()) {
 		if (descr().out_of_resource_title().empty())
 		{
-			set_result_string(_("Can’t find any more resources!"));
+			set_production_result(_("Can’t find any more resources!"));
 		}
 		else {
-			set_result_string(descr().out_of_resource_title().c_str());
+			set_production_result(descr().out_of_resource_title());
 
 			assert(!descr().out_of_resource_message().empty());
 			send_message
