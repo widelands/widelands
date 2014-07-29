@@ -61,7 +61,7 @@ inline Time Never() {return 0xffffffff;}
 typedef uint32_t Duration;
 inline Duration Forever() {return 0xffffffff;}
 
-typedef uint32_t Serial; /// Serial number for Map_Object.
+typedef uint32_t Serial; /// Serial number for MapObject.
 
 constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 typedef uint8_t Ware_Index;

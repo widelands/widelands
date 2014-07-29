@@ -154,7 +154,7 @@ struct NearFlag {
 		return cost_ > f.cost_;
 	}
 
-	bool operator==(Flag const* const f) const {
+	bool operator == (Flag const* const f) const {
 		return flag == f;
 	}
 };
@@ -295,7 +295,7 @@ struct EconomyObserver {
 struct BuildingObserver {
 	char const* name;
 	Widelands::Building_Index id;
-	Widelands::Building_Descr const* desc;
+	Widelands::BuildingDescr const* desc;
 
 	enum {
 		BORING,

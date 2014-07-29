@@ -1,15 +1,15 @@
 size=small
 output=water
 
+[aihints]
+mines_water=true
+prohibited_till=600
+
 [buildcost]
 log=4
 
 [return_on_dismantle]
 log=2
-
-[aihints]
-mines_water=true
-prohibited_till=600
 
 [working positions]
 carrier=1

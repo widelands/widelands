@@ -12,6 +12,10 @@ output=saw
 output=scythe
 output=shovel
 
+[aihints]
+forced_after=900
+prohibited_till=450
+
 [buildcost]
 log=1
 stone=2
@@ -21,10 +25,6 @@ spidercloth=1
 [return_on_dismantle]
 stone=1
 planks=1
-
-[aihints]
-forced_after=900
-prohibited_till=450
 
 [working positions]
 toolsmith=1

@@ -25,24 +25,24 @@
 
 namespace Widelands {
 
-struct Carrier_Descr : public Worker_Descr {
-	Carrier_Descr(char const* const _name,
+struct CarrierDescr : public WorkerDescr {
+	CarrierDescr(char const* const _name,
 	              char const* const _descname,
 	              const std::string& directory,
 	              Profile& prof,
 	              Section& global_s,
 	              const Tribe_Descr& _tribe)
 		:
-		Worker_Descr(Map_Object_Type::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
+		WorkerDescr(MapObjectType::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
 	{
 	}
-	~Carrier_Descr() override {}
+	~CarrierDescr() override {}
 
 protected:
 	Bob & create_object() const override;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Carrier_Descr);
+	DISALLOW_COPY_AND_ASSIGN(CarrierDescr);
 };
 
 /**
@@ -51,9 +51,9 @@ private:
 struct Carrier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
 
-	MO_DESCR(Carrier_Descr)
+	MO_DESCR(CarrierDescr)
 
-	Carrier(const Carrier_Descr & carrier_descr)
+	Carrier(const CarrierDescr & carrier_descr)
 		: Worker(carrier_descr), m_promised_pickup_to(-1)
 	{}
 	virtual ~Carrier() {}
@@ -110,7 +110,7 @@ protected:
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 };
 
 }

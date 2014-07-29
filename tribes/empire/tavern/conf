@@ -2,6 +2,10 @@ size=medium
 output=ration
 enhancement=inn
 
+[aihints]
+forced_after=900
+prohibited_till=300
+
 [buildcost]
 wood=2
 stone=2
@@ -11,10 +15,6 @@ marble=1
 wood=1
 stone=1
 marble=1
-
-[aihints]
-forced_after=900
-prohibited_till=300
 
 [working positions]
 innkeeper=1

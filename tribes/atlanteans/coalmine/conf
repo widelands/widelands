@@ -1,6 +1,10 @@
 size=mine
 output=coal
 
+[aihints]
+mines=coal
+prohibited_till=1200
+
 [buildcost]
 log=7
 planks=4
@@ -13,10 +17,6 @@ planks=2
 [working positions]
 miner=3
 
-[aihints]
-mines=coal
-prohibited_till=1200
-
 [inputs]
 bread=10
 smoked_fish=10
@@ -27,8 +27,7 @@ work=_Work
 
 [work]
 sleep=45000
-return=skipped unless economy needs coal or not economy needs bread
-return=skipped unless economy needs coal or not economy needs smoked_fish
+return=skipped unless economy needs coal
 consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=coal 4 100 5 2
@@ -41,7 +40,7 @@ mine=coal 4 100 5 2
 produce=coal:3
 
 [out_of_resource_notification]
-title=_Main Coal Vein Exhausted.
+title=_Main Coal Vein Exhausted
 message=_This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it.
 
 [idle]

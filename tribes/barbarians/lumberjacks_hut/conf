@@ -1,6 +1,10 @@
 size=small
 output=log
 
+[aihints]
+forced_after=0
+logproducer=true
+
 [buildcost]
 log=3
 
@@ -9,10 +13,6 @@ log=2
 
 [working positions]
 lumberjack=1
-
-[aihints]
-forced_after=0
-logproducer=true
 
 [programs]
 work=_Work

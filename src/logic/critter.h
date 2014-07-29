@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_CRITTER_BOB_H
-#define WL_LOGIC_CRITTER_BOB_H
+#ifndef WL_LOGIC_CRITTER_H
+#define WL_LOGIC_CRITTER_H
 
 #include "base/macros.h"
 #include "logic/bob.h"
@@ -29,22 +29,22 @@ class OneWorldLegacyLookupTable;
 
 namespace Widelands {
 
-struct Critter_BobAction;
-struct Critter_BobProgram;
+struct CritterAction;
+struct CritterProgram;
 
 //
 // Description
 //
-struct Critter_Bob_Descr : BobDescr {
-	Critter_Bob_Descr
+struct CritterDescr : BobDescr {
+	CritterDescr
 		(char const* const _name,
 		 char const* const _descname,
 		 const std::string& directory,
 		 Profile& prof,
 		 Section& global_s,
 		 Tribe_Descr & _tribe);
-	Critter_Bob_Descr(const LuaTable&);
-	~Critter_Bob_Descr() override;
+	CritterDescr(const LuaTable&);
+	~CritterDescr() override;
 
 	Bob & create_object() const override;
 
@@ -52,33 +52,33 @@ struct Critter_Bob_Descr : BobDescr {
 	uint32_t movecaps() const override;
 	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 
-	Critter_BobProgram const * get_program(const std::string &) const;
+	CritterProgram const * get_program(const std::string &) const;
 
 
 private:
 	DirAnimations m_walk_anims;
-	typedef std::map<std::string, Critter_BobProgram *> Programs;
+	typedef std::map<std::string, CritterProgram *> Programs;
 	Programs      m_programs;
-	DISALLOW_COPY_AND_ASSIGN(Critter_Bob_Descr);
+	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
 };
 
-class Critter_Bob : public Bob {
+class Critter : public Bob {
 	friend struct Map_Bobdata_Data_Packet;
-	friend struct Critter_BobProgram;
+	friend struct CritterProgram;
 
-	MO_DESCR(Critter_Bob_Descr)
+	MO_DESCR(CritterDescr)
 
 public:
-	Critter_Bob(const Critter_Bob_Descr &);
+	Critter(const CritterDescr &);
 
 	void init_auto_task(Game &) override;
 
 	void start_task_program(Game &, const std::string & name);
 
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 
-	static Map_Object::Loader*
-	load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
+	static MapObject::Loader*
+	load(Editor_Game_Base&, MapMapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
 
 protected:
 	struct Loader : Bob::Loader {
@@ -92,7 +92,7 @@ private:
 	void roam_update   (Game &, State &);
 	void program_update(Game &, State &);
 
-	bool run_remove(Game &, State &, const Critter_BobAction &);
+	bool run_remove(Game &, State &, const CritterAction &);
 
 	static Task const taskRoam;
 	static Task const taskProgram;
@@ -101,4 +101,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_LOGIC_CRITTER_BOB_H
+#endif  // end of include guard: WL_LOGIC_CRITTER_H

@@ -67,7 +67,7 @@ void Map_Saver::save() {
 	ScopedTimer timer("Map_Saver::save() took %ums");
 
 	delete m_mos;
-	m_mos = new Map_Map_Object_Saver();
+	m_mos = new MapMapObjectSaver();
 
 	// The binary data is saved in an own directory
 	// to keep it hidden from the poor debuggers
@@ -162,7 +162,7 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Objects ... ");
-	{Map_Object_Packet                      p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapObjectPacket                      p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// DATA PACKETS
@@ -201,7 +201,7 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Objective Data ... ");
-	{Map_Objective_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapObjectiveDataPacket              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 #ifndef NDEBUG

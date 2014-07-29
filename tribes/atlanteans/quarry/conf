@@ -1,6 +1,10 @@
 size=small
 output=stone
 
+[aihints]
+forced_after=60
+stoneproducer=true
+
 [buildcost]
 log=2
 planks=1
@@ -10,10 +14,6 @@ log=1
 
 [working positions]
 stonecutter=1
-
-[aihints]
-forced_after=60
-stoneproducer=true
 
 [programs]
 work=_Work

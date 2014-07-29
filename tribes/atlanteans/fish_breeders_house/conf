@@ -1,5 +1,10 @@
 size=small
 
+[aihints]
+needs_water=true
+renews_map_resource=fish
+prohibited_till=900
+
 [buildcost]
 log=1
 planks=1
@@ -10,11 +15,6 @@ stone=1
 
 [working positions]
 fish_breeder=1
-
-[aihints]
-needs_water=true
-renews_map_resource=fish
-prohibited_till=900
 
 [programs]
 work=_Work

@@ -1,5 +1,6 @@
 help=_Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor.
 
+default_target_quantity=15
 preciousness=2
 
 [idle]

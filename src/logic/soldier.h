@@ -39,13 +39,13 @@ class Battle;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
-struct Soldier_Descr : public Worker_Descr {
+struct SoldierDescr : public WorkerDescr {
 	friend class Economy;
-	Soldier_Descr
+	SoldierDescr
 		(char const * const _name, char const * const _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	~Soldier_Descr() override {}
+	~SoldierDescr() override {}
 
 	void load_graphics() override;
 
@@ -130,7 +130,7 @@ protected:
 			 const char * anim_name);
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Soldier_Descr);
+	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
 
 class Building;
@@ -159,10 +159,10 @@ enum CombatFlags {
 
 class Soldier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
-	MO_DESCR(Soldier_Descr)
+	MO_DESCR(SoldierDescr)
 
 public:
-	Soldier(const Soldier_Descr &);
+	Soldier(const SoldierDescr &);
 
 	void init(Editor_Game_Base &) override;
 	void cleanup(Editor_Game_Base &) override;
@@ -307,7 +307,7 @@ protected:
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 };
 
 }

@@ -96,10 +96,10 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
 	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
-		   if (note.player != player_) {
+			if (note.player != player_) {
 			   return;
 		   }
-		   if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
 		   }
 		});
@@ -107,10 +107,10 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
-		   if (note.pi->owner().player_number() != player_->player_number()) {
+			if (note.pi->owner().player_number() != player_->player_number()) {
 			   return;
 		   }
-		   if (note.ownership == NoteImmovable::Ownership::GAINED) {
+			if (note.ownership == NoteImmovable::Ownership::GAINED) {
 			   gain_immovable(*note.pi);
 		   } else {
 			   lose_immovable(*note.pi);
@@ -249,7 +249,7 @@ void DefaultAI::late_initialization() {
 	const World& world = game().world();
 
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
-		const Building_Descr& bld = *tribe_->get_building_descr(i);
+		const BuildingDescr& bld = *tribe_->get_building_descr(i);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
@@ -293,9 +293,9 @@ void DefaultAI::late_initialization() {
 			bo.plants_trees_ = false;
 
 		// Read all interesting data from ware producing buildings
-		if (typeid(bld) == typeid(ProductionSite_Descr)) {
-			const ProductionSite_Descr& prod =
-			   ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
+		if (typeid(bld) == typeid(ProductionSiteDescr)) {
+			const ProductionSiteDescr& prod =
+				ref_cast<ProductionSiteDescr const, BuildingDescr const>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
@@ -319,29 +319,29 @@ void DefaultAI::late_initialization() {
 				bo.is_hunter_ = false;
 
 			// and fishers
-			if (bo.outputs_.size() == 1 and tribe_->safe_ware_index("fish") == bo.outputs_.at(0)) {
+			if (bo.outputs_.size() == 1 && tribe_->safe_ware_index("fish") == bo.outputs_.at(0)) {
 				bo.is_fisher_ = true;
 			} else
 				bo.is_fisher_ = false;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(MilitarySite_Descr)) {
+		if (typeid(bld) == typeid(MilitarySiteDescr)) {
 			bo.type = BuildingObserver::MILITARYSITE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(Warehouse_Descr)) {
+		if (typeid(bld) == typeid(WarehouseDescr)) {
 			bo.type = BuildingObserver::WAREHOUSE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(TrainingSite_Descr)) {
+		if (typeid(bld) == typeid(TrainingSiteDescr)) {
 			bo.type = BuildingObserver::TRAININGSITE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
+		if (typeid(bld) == typeid(ConstructionSiteDescr)) {
 			bo.type = BuildingObserver::CONSTRUCTIONSITE;
 			continue;
 		}
@@ -515,7 +515,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	// Is this a general update or just for military consideration
 	// (second is used in check_militarysites)
 	if (!military) {
-		int32_t const tree_attr = Map_Object_Descr::get_attribute_id("tree");
+		int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
 		field.reachable = false;
 		field.preferred_ = false;
 		field.enemy_nearby_ = false;
@@ -582,9 +582,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 			if (upcast(Building const, building, &base_immovable)) {
 				if (upcast(ConstructionSite const, constructionsite, building)) {
-					const Building_Descr& target_descr = constructionsite->building();
+					const BuildingDescr& target_descr = constructionsite->building();
 
-					if (dynamic_cast<ProductionSite_Descr const*>(&target_descr))
+					if (dynamic_cast<ProductionSiteDescr const*>(&target_descr))
 						consider_productionsite_influence(
 						   field,
 						   immovables.at(i).coords,
@@ -605,7 +605,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		// stones are not renewable, we will count them only if previous state si nonzero
 		if (field.stones_nearby_ > 0) {
 
-			int32_t const stone_attr = Map_Object_Descr::get_attribute_id("granite");
+			int32_t const stone_attr = MapObjectDescr::get_attribute_id("granite");
 			field.stones_nearby_ = 0;
 
 			for (uint32_t j = 0; j < immovables.size(); ++j) {
@@ -648,9 +648,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 		if (upcast(Building const, building, &base_immovable)) {
 			if (upcast(ConstructionSite const, constructionsite, building)) {
-				const Building_Descr& target_descr = constructionsite->building();
+				const BuildingDescr& target_descr = constructionsite->building();
 
-				if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr)) {
+				if (upcast(MilitarySiteDescr const, target_ms_d, &target_descr)) {
 					const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
 					const int32_t radius = target_ms_d->get_conquers() + 4;
 					const int32_t v = radius - dist;
@@ -908,7 +908,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			if (bo.desc->get_size() > maxsize)
 				continue;
 
-			if (time(nullptr) % 3 == 0 and bo.total_count() > 0)
+			if (time(nullptr) % 3 == 0 && bo.total_count() > 0)
 				continue;  // add randomnes and ease AI
 
 			if (bo.type == BuildingObserver::MINE)
@@ -917,7 +917,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			// here we do an exemption for lumberjacs, mainly in early stages of game
 			// sometimes the first one is not built and AI waits too long for second attempt
 			if (gametime - bo.construction_decision_time_ <
-			    kBuildingMinInterval and not bo.need_trees_)
+			    kBuildingMinInterval && !bo.need_trees_)
 				continue;
 
 			if (bo.unoccupied_)
@@ -963,8 +963,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 
 				// exclude spots on border
-				if (bf->near_border_ and not bo.need_trees_ and not bo.need_stones_ and not
-				       bo.is_fisher_)
+				if (bf->near_border_ && !bo.need_trees_ && !bo.need_stones_ &&
+				       !bo.is_fisher_)
 					continue;
 
 				// this can be only a well (as by now)
@@ -977,7 +977,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 					prio = 0;
 					// one well has an axemption from the stop - if forced
-					if (bo.forced_after_ < gametime and bo.total_count() == 0)
+					if (bo.forced_after_ < gametime && bo.total_count() == 0)
 						prio = 200;  // boost for first/only well
 					else if (new_buildings_stop_)
 						continue;
@@ -1071,7 +1071,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						bo.stocklevel_time = game().get_gametime();
 					}
 
-					if (bo.stocklevel_ > 50 and !output_is_needed)
+					if (bo.stocklevel_ > 50 && !output_is_needed)
 						continue;
 
 					if (bf->producers_nearby_.at(bo.outputs_.at(0)) >= 1)
@@ -1099,7 +1099,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					if (bo.plants_trees_) {  // RANGERS
 
 						// if there are too many trees nearby
-						if (bf->trees_nearby_ > 25 and bo.total_count() >= 1)
+						if (bf->trees_nearby_ > 25 && bo.total_count() >= 1)
 							continue;
 
 						// sometimes all area is blocked by trees so this is to prevent this
@@ -1117,7 +1117,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						if (bo.total_count() > 2 * bo.cnt_target_)
 							continue;
 						// we can go above target if there is shortage of logs on stock
-						else if (bo.total_count() > bo.cnt_target_ and bo.stocklevel_ > 40)
+						else if (bo.total_count() > bo.cnt_target_ && bo.stocklevel_ > 40)
 							continue;
 
 						// considering near trees and producers
@@ -1139,7 +1139,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 							continue;
 
 						// especially for fish breeders
-						if (bo.need_water_ and bf->water_nearby_ < 5)
+						if (bo.need_water_ && bf->water_nearby_ < 5)
 							continue;
 						prio = bf->water_nearby_;
 
@@ -1152,7 +1152,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 					if (prio <= 0)
 						continue;
-				} else if (bo.recruitment_ and not new_buildings_stop_) {
+				} else if (bo.recruitment_ && !new_buildings_stop_) {
 					// this will depend on number of mines_ and productionsites
 					if (static_cast<int32_t>((productionsites.size() + mines_.size()) / 30) >
 					       bo.total_count() &&
@@ -1165,7 +1165,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0)
 						continue;
 
-					if (bo.forced_after_ < gametime and bo.total_count() == 0) {
+					if (bo.forced_after_ < gametime && bo.total_count() == 0) {
 						prio = 150 + max_preciousness;
 					} else if (new_buildings_stop_)
 						continue;
@@ -1177,8 +1177,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						prio = 0;
 
 					if (bo.cnt_built_ ==
-					    1 and game().get_gametime() > 40 * 60 * 1000 and bo.desc->enhancement() !=
-					    INVALID_INDEX and !mines_.empty()) {
+					    1 && game().get_gametime() > 40 * 60 * 1000 && bo.desc->enhancement() !=
+					    INVALID_INDEX && !mines_.empty()) {
 						prio += max_preciousness + bulgarian_constant;
 						// printf ("   proposing %20s as a second upgradable building\n",bo.name);
 					} else if (!output_is_needed)
@@ -1194,11 +1194,11 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						if (bo.space_consumer_)  // need to consider trees nearby
 							prio += bf->space_consumers_nearby_ * 2;
 
-						if (bo.space_consumer_ and not bf->water_nearby_)  // not close to water
+						if (bo.space_consumer_ && !bf->water_nearby_)  // not close to water
 							prio += 1;
 
-						if (bo.space_consumer_ and not
-						       bf->unowned_mines_pots_nearby_)  // not close to mountains
+						if (bo.space_consumer_ &&
+						       !bf->unowned_mines_pots_nearby_)  // not close to mountains
 							prio += 1;
 
 						if (!bo.space_consumer_)
@@ -1210,7 +1210,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					} else if (!bo.inputs_.empty()) {
 						if (bo.total_count() == 0)
 							prio += max_needed_preciousness + bulgarian_constant;
-						if (bo.cnt_built_ > 0 and bo.current_stats_ > 70) {
+						if (bo.cnt_built_ > 0 && bo.current_stats_ > 70) {
 							prio = max_needed_preciousness + bulgarian_constant;
 						}
 					}
@@ -1237,8 +1237,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					continue;
 
 				if (expansion_mode ==
-				    kResourcesOrDefense and
-				       not(bf->enemy_nearby_ or bf->unowned_mines_pots_nearby_ or bf->stones_nearby_))
+				    kResourcesOrDefense &&
+				       !(bf->enemy_nearby_ || bf->unowned_mines_pots_nearby_ || bf->stones_nearby_))
 					continue;
 
 				if (bf->enemy_nearby_ && bo.fighting_type_)
@@ -1247,7 +1247,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				         (bo.mountain_conqueror_ || bo.expansion_type_))
 					;  // it is ok, go on
 				else if (bf->unowned_land_nearby_ &&
-				         bo.expansion_type_ and num_milit_constructionsites <= 1) {
+				         bo.expansion_type_ && num_milit_constructionsites <= 1) {
 					;  // we allow big buildings now
 				} else if (bf->unowned_land_nearby_ &&
 				           bo.expansion_type_) {  // decreasing probability for big buidlings
@@ -1451,12 +1451,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		return false;
 	}
 
-	if (best_building->type == BuildingObserver::TRAININGSITE)
-		printf(" %d: Building a training site: %s, time%d min\n",
-		       player_number(),
-		       best_building->name,
-		       game().get_gametime() / 60000);
-
 	// send the command to construct a new building
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
 	BlockedField blocked(
@@ -1466,7 +1460,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	// we block also nearby fields
 	// if farms and so on, for quite a long time
 	// if military sites only for short time for AI can update information on near buildable fields
-	if ((best_building->space_consumer_ && !best_building->plants_trees_)or best_building->type ==
+	if ((best_building->space_consumer_ && !best_building->plants_trees_) || best_building->type ==
 	    BuildingObserver::MILITARYSITE) {
 		uint32_t block_time = 0;
 		uint32_t block_area = 0;
@@ -1906,7 +1900,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// b) if there are two buildings
 	// statistics percents are decisive
 	const Building_Index enhancement = site.site->descr().enhancement();
-	if (enhancement != INVALID_INDEX and(site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
+	if (enhancement != INVALID_INDEX && (site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
 
 		Building_Index enbld = INVALID_INDEX;  // to get rid of this
 		BuildingObserver* bestbld = nullptr;
@@ -1915,11 +1909,11 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		// do not do decisions to fast
 		if (player_->is_building_type_allowed(enhancement)) {
 
-			const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
+			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 			if (gametime - en_bo.construction_decision_time_ >=
-			       kBuildingMinInterval and(en_bo.cnt_under_construction_ + en_bo.unoccupied_) ==
+			       kBuildingMinInterval && (en_bo.cnt_under_construction_ + en_bo.unoccupied_) ==
 			    0) {
 
 				// don't upgrade without workers
@@ -1927,8 +1921,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 					// forcing first upgrade
 					if (en_bo.cnt_built_ == 0 && !mines_.empty()) {
-						// printf("  forcing as first upgrade\n");
-						// return true;
 						enbld = enhancement;
 						bestbld = &en_bo;
 					}
@@ -1962,7 +1954,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	if (site.bo->need_trees_) {
 		if (map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		                        nullptr,
-		                        FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree"))) <
+										FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree"))) <
 		    6) {
 			// Do not destruct the last lumberjack - perhaps some small trees are
 			// near, a forester will plant some trees or some new trees will seed
@@ -2009,7 +2001,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		if (map.find_immovables(
 		       Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		       nullptr,
-		       FindImmovableAttribute(Map_Object_Descr::get_attribute_id("granite"))) == 0) {
+
+				 FindImmovableAttribute(MapObjectDescr::get_attribute_id("granite"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -2186,18 +2179,10 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 		starting_resources += start_amount;
 	} while (mr.advance(map));
 
-	// printf (" Mine resources: %3d / %3d, can mine:
-	// %3d\n",remaining_resources,starting_resources,site.bo->mines_percent_ );
 	bool mine_can_mine = true;
 	if (((starting_resources - remaining_resources) * 100 / starting_resources) + 4 >
 	    site.bo->mines_percent_) {
 		mine_can_mine = false;
-		printf("  %-15s cannot mine anymore: %3d / %3d = %3d, mines percent: %3d\n",
-		       site.bo->name,
-		       starting_resources - remaining_resources,
-		       starting_resources,
-		       (starting_resources - remaining_resources) * 100 / starting_resources,
-		       site.bo->mines_percent_);
 	}
 
 	// if mine can mine - probably food is missing
@@ -2234,7 +2219,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	bool changed = false;
 	if (player_->is_building_type_allowed(enhancement)) {
 		// first exclude possibility there are enhancements in construction or unoccupied_
-		const Building_Descr& bld = *tribe_->get_building_descr(enhancement);
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 		// if it is too soon for enhancement and making sure there are no unoccupied mines
@@ -2884,7 +2869,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 }
 
 // This is used for profiling, so usually this is not used :)
-void DefaultAI::print_land_stats(void) {
+void DefaultAI::print_land_stats() {
 	// this will just print statistics of land size
 	// intended for AI development only
 	uint32_t plr_in_game = 0;
@@ -2896,7 +2881,7 @@ void DefaultAI::print_land_stats(void) {
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 	const Game::General_Stats_vector& genstats = game().get_general_statistics();
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		printf(" player: %1d, landsize: %5d, military strength: %3d\n",
+		log(" player: %1d, landsize: %5d, military strength: %3d\n",
 		       j,
 		       genstats[j - 1].land_size.back(),
 		       genstats[j - 1].miltary_strength.back());
@@ -2905,5 +2890,5 @@ void DefaultAI::print_land_stats(void) {
 		sum_m += genstats[j - 1].miltary_strength.back();
 		count_m += 1;
 	}
-	printf(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
+	log(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
 }

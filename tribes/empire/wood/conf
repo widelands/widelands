@@ -3,9 +3,6 @@ help=_Wood is a basic building material of the Empire. It is also used by the we
 default_target_quantity=40
 preciousness=7
 
-# These are planks created out of logs.
-# The roman sawmiller know exactly, howto cut the logs.
-
 [idle]
 pics=idle.png
 hotspot=10 12

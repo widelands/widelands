@@ -3,6 +3,10 @@ output=spidercloth
 output=tabard
 output=golden_tabard
 
+[aihints]
+forced_after=60
+prohibited_till=60
+
 [buildcost]
 log=3
 stone=4
@@ -56,10 +60,6 @@ return=skipped
 [idle]
 pics=weaving_mill_i_??.png  # ???
 hotspot=65 69
-
-[aihints]
-forced_after=60
-prohibited_till=60
 
 [working]
 pics=weaving_mill_i_??.png # ???

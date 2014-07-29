@@ -33,16 +33,16 @@ class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
 
-class Fleet_Descr : public Map_Object_Descr {
+class FleetDescr : public MapObjectDescr {
 public:
-	Fleet_Descr(char const* const _name, char const* const _descname)
-	   : Map_Object_Descr(Map_Object_Type::FLEET, _name, _descname) {
+	FleetDescr(char const* const _name, char const* const _descname)
+		: MapObjectDescr(MapObjectType::FLEET, _name, _descname) {
 	}
-	~Fleet_Descr() override {
+	~FleetDescr() override {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Fleet_Descr);
+	DISALLOW_COPY_AND_ASSIGN(FleetDescr);
 };
 
 /**
@@ -63,7 +63,7 @@ private:
  * again in reaction to changes in the map. However, this may not work
  * properly at the moment.
  */
-struct Fleet : Map_Object {
+struct Fleet : MapObject {
 	struct PortPath {
 		int32_t cost;
 		boost::shared_ptr<Path> path;
@@ -71,7 +71,7 @@ struct Fleet : Map_Object {
 		PortPath() : cost(-1) {}
 	};
 
-	const Fleet_Descr& descr() const;
+	const FleetDescr& descr() const;
 
 	Fleet(Player & player);
 
@@ -128,7 +128,7 @@ private:
 
 	// saving and loading
 protected:
-	struct Loader : Map_Object::Loader {
+	struct Loader : MapObject::Loader {
 		Loader();
 
 		void load(FileRead &, uint8_t version);
@@ -142,10 +142,10 @@ protected:
 
 public:
 	bool has_new_save_support() override {return true;}
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 };
 
 } // namespace Widelands

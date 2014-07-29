@@ -36,17 +36,17 @@
 
 namespace Widelands {
 
-DismantleSite_Descr::DismantleSite_Descr
+DismantleSiteDescr::DismantleSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Building_Descr(Map_Object_Type::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
+	BuildingDescr(MapObjectType::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
 {
-	add_attribute(Map_Object::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
+	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }
 
-Building & DismantleSite_Descr::create_object() const {
+Building & DismantleSiteDescr::create_object() const {
 	return *new DismantleSite(*this);
 }
 
@@ -59,12 +59,12 @@ IMPLEMENTATION
 */
 
 
-DismantleSite::DismantleSite(const DismantleSite_Descr & gdescr) :
+DismantleSite::DismantleSite(const DismantleSiteDescr & gdescr) :
 Partially_Finished_Building(gdescr)
 {}
 
 DismantleSite::DismantleSite
-	(const DismantleSite_Descr & gdescr, Editor_Game_Base & egbase, Coords const c,
+	(const DismantleSiteDescr & gdescr, Editor_Game_Base & egbase, Coords const c,
 	 Player & plr, bool loading, Building::FormerBuildings & former_buildings)
 :
 Partially_Finished_Building(gdescr)
@@ -76,7 +76,7 @@ Partially_Finished_Building(gdescr)
 	for (Building_Index former_idx : former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
-	const Building_Descr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
+	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
 	set_building(*cur_descr);
 
 	if (loading) {
@@ -135,7 +135,7 @@ void DismantleSite::count_returned_wares
 {
 	for (Building_Index former_idx : building->get_former_buildings()) {
 		const std::map<Ware_Index, uint8_t> * return_wares;
-		const Building_Descr* former_descr = building->descr().tribe().get_building_descr(former_idx);
+		const BuildingDescr* former_descr = building->descr().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
 		} else {
@@ -257,7 +257,7 @@ void DismantleSite::draw
 	uint32_t anim_idx;
 	try {
 		anim_idx = m_building->get_animation("unoccupied");
-	} catch (Map_Object_Descr::Animation_Nonexistent &) {
+	} catch (MapObjectDescr::Animation_Nonexistent &) {
 		anim_idx = m_building->get_animation("idle");
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);

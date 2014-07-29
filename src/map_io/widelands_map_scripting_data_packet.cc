@@ -49,7 +49,7 @@ void Map_Scripting_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool,
-	 Map_Map_Object_Loader &       mol)
+	 MapMapObjectLoader &       mol)
 {
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
@@ -71,7 +71,7 @@ void Map_Scripting_Data_Packet::Read
 
 
 void Map_Scripting_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fs.EnsureDirectoryExists("scripting");
 

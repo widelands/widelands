@@ -1,5 +1,7 @@
 help=_Big buckets for the fish breeder – produced by the toolsmith.
 
+default_target_quantity=2
+
 # Two big buckets
 [idle]
 pics=idle.png

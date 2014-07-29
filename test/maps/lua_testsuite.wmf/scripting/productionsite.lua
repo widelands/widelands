@@ -36,9 +36,9 @@ function productionsite_tests:teardown()
    end)
 end
 function productionsite_tests:test_name()
-   assert_equal("big_inn", self.inn.name)
-   assert_equal("warmill", self.warmill.name)
-   assert_equal("lumberjacks_hut", self.lumberjack.name)
+   assert_equal("big_inn", self.inn.descr.name)
+   assert_equal("warmill", self.warmill.descr.name)
+   assert_equal("lumberjacks_hut", self.lumberjack.descr.name)
 end
 function productionsite_tests:test_type()
    assert_equal("productionsite", self.inn.descr.type_name)
@@ -75,7 +75,7 @@ function productionsite_tests:test_worker_name()
    end
    self.inn:set_workers("innkeeper", 1) -- Innkeeper will be created as an instance.
    assert_equal(1, #f.bobs)
-   assert_equal(f.bobs[1].name, "innkeeper")
+   assert_equal(f.bobs[1].descr.name, "innkeeper")
 end
 function productionsite_tests:test_set_workers_warmill()
    self.warmill:set_workers("master-blacksmith",1)

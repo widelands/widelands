@@ -36,18 +36,18 @@ struct Game_Map_Data_Packet : public Game_Data_Packet {
 
 
 	/// Ensures that the world gets loaded but does not much more.
-	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = nullptr) override;
+	void Read (FileSystem &, Game &, MapMapObjectLoader * = nullptr) override;
 
 	void Read_Complete(Game &); ///  Loads the rest of the map.
 
-	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = nullptr) override;
+	void Write(FileSystem &, Game &, MapMapObjectSaver  * = nullptr) override;
 
-	Map_Map_Object_Saver  * get_map_object_saver () {return m_mos;}
-	Map_Map_Object_Loader * get_map_object_loader() {return m_mol;}
+	MapMapObjectSaver  * get_map_object_saver () {return m_mos;}
+	MapMapObjectLoader * get_map_object_loader() {return m_mol;}
 
 private:
-	Map_Map_Object_Saver  * m_mos;
-	Map_Map_Object_Loader * m_mol;
+	MapMapObjectSaver  * m_mos;
+	MapMapObjectLoader * m_mol;
 	Map_Saver             * m_wms;
 	WL_Map_Loader         * m_wml;
 };

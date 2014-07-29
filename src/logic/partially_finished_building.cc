@@ -31,7 +31,7 @@
 namespace Widelands {
 
 Partially_Finished_Building::Partially_Finished_Building
-	(const Building_Descr & gdescr) :
+	(const BuildingDescr & gdescr) :
 Building         (gdescr),
 m_building       (nullptr),
 m_builder_request(nullptr),
@@ -46,7 +46,7 @@ m_work_steps     (0)
 Set the type of building we're going to build
 ===============
 */
-void Partially_Finished_Building::set_building(const Building_Descr & building_descr) {
+void Partially_Finished_Building::set_building(const BuildingDescr & building_descr) {
 	assert(!m_building);
 
 	m_building = &building_descr;

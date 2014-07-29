@@ -106,7 +106,7 @@ Request::~Request()
  * them through the data in the file
  */
 void Request::Read
-	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Game & game, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const version = fr.Unsigned16();
@@ -137,7 +137,7 @@ void Request::Read
 			uint16_t const nr_transfers = fr.Unsigned16();
 			for (uint16_t i = 0; i < nr_transfers; ++i)
 				try {
-					Map_Object* obj = &mol.get<Map_Object>(fr.Unsigned32());
+					MapObject* obj = &mol.get<MapObject>(fr.Unsigned32());
 					Transfer* transfer;
 
 					if (upcast(Worker, worker, obj)) {
@@ -178,7 +178,7 @@ void Request::Read
  * Write this request to a file
  */
 void Request::Write
-	(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos) const
+	(FileWrite & fw, Game & game, MapMapObjectSaver & mos) const
 {
 	fw.Unsigned16(REQUEST_VERSION);
 

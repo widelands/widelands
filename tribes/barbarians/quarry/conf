@@ -1,6 +1,10 @@
 size=small
 output=raw_stone
 
+[aihints]
+forced_after=0
+stoneproducer=true
+
 [buildcost]
 log=4
 
@@ -9,10 +13,6 @@ log=2
 
 [working positions]
 stonemason=1
-
-[aihints]
-forced_after=0
-stoneproducer=true
 
 [programs]
 work=_Work

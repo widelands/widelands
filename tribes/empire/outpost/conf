@@ -10,6 +10,9 @@ attack_string=_Your outpost is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the outpost.
 defeated_you_string=_Your soldiers defeated the enemy at the outpost.
 
+[aihints]
+expansion=true
+prohibited_till=600
 
 [buildcost]
 log=1
@@ -24,7 +27,3 @@ marble=1
 [idle]
 pics=outpost_i_??.png
 hotspot=57 77
-
-[aihints]
-expansion=true
-prohibited_till=600

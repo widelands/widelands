@@ -37,17 +37,17 @@ animate=working 35000
 return=completed
 
 [idle]
-pics=work_??.png
+pics=shipyard_i_??.png
 hotspot=62 48
 
 [build]
-pics=build_??.png
+pics=shipyard_b_??.png
 hotspot=62 48
 
 [working]
-pics=work_??.png
+pics=shipyard_w_??.png
 hotspot=62 48
 
 [unoccupied]
-pics=vacant_??.png
+pics=shipyard_u_??.png
 hotspot=62 48

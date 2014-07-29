@@ -18,11 +18,11 @@ stone=2
 spidercloth=1
 gold=1
 
-[build]
-pics=port_b_??.png  # 4 frames
-hotspot=74 70
-
 [idle]
 pics=port_i_??.png  # 20 frames
 hotspot=74 70
 fps=10
+
+[build]
+pics=port_b_??.png  # 4 frames
+hotspot=74 70

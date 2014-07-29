@@ -73,7 +73,7 @@ function immovable_tests:test_serial_is_readonly()
 end
 function immovable_tests:test_field_access()
    f = map:get_field(9,10)
-   assert_equal("aspen_summer_old", f.immovable.name)
+   assert_equal("aspen_summer_old", f.immovable.descr.name)
 end
 function immovable_tests:test_map_object_equality()
    f = map:get_field(9,10)
@@ -130,19 +130,19 @@ function immovable_property_tests:test_size_fortress()
    assert_equal("big", self.big_building.size)
 end
 function immovable_property_tests:test_name_pebble()
-   assert_equal("pebble1", self.none.name)
+   assert_equal("pebble1", self.none.descr.name)
 end
 function immovable_property_tests:test_name_tree()
-   assert_equal("aspen_summer_old", self.small.name)
+   assert_equal("aspen_summer_old", self.small.descr.name)
 end
 function immovable_property_tests:test_name_charcoal_burner()
-   assert_equal("burners_house", self.medium.name)
+   assert_equal("burners_house", self.medium.descr.name)
 end
 function immovable_property_tests:test_name_stone()
-   assert_equal("greenland_stones4", self.big.name)
+   assert_equal("greenland_stones4", self.big.descr.name)
 end
 function immovable_property_tests:test_name_fortress()
-   assert_equal("fortress", self.big_building.name)
+   assert_equal("fortress", self.big_building.descr.name)
 end
 
 function immovable_property_tests:test_type_pebble()
@@ -153,14 +153,14 @@ function immovable_property_tests:test_type_tree()
 end
 function immovable_property_tests:test_type_charcoal_burner()
    assert_equal("productionsite", self.medium.descr.type_name)
-   assert_equal("burners_house", self.medium.name)
+   assert_equal("burners_house", self.medium.descr.name)
 end
 function immovable_property_tests:test_type_stone()
    assert_equal("immovable", self.big.descr.type_name)
 end
 function immovable_property_tests:test_type_fortress()
    assert_equal("militarysite", self.big_building.descr.type_name)
-   assert_equal("fortress", self.big_building.name)
+   assert_equal("fortress", self.big_building.descr.name)
 end
 
 function immovable_property_tests:test_fields_pebble()

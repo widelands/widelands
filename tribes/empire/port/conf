@@ -19,11 +19,11 @@ marble=2
 cloth=1
 gold=1
 
-[build]
-pics=port_b_??.png  # 4 frames
-hotspot=74 96
-
 [idle]
 pics=port_i_??.png  # 20 frames
 hotspot=74 96
 fps=10
+
+[build]
+pics=port_b_??.png  # 4 frames
+hotspot=74 96

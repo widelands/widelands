@@ -35,14 +35,14 @@ struct Ship;
 class Warehouse;
 class ExpeditionBootstrap;
 
-class PortDock_Descr : public Map_Object_Descr {
+class PortdockDescr : public MapObjectDescr {
 public:
-	PortDock_Descr(char const* const _name, char const* const _descname);
-	~PortDock_Descr() override {
+	PortdockDescr(char const* const _name, char const* const _descname);
+	~PortdockDescr() override {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(PortDock_Descr);
+	DISALLOW_COPY_AND_ASSIGN(PortdockDescr);
 };
 
 /**
@@ -74,7 +74,7 @@ private:
 class PortDock : public PlayerImmovable {
 public:
 
-	const PortDock_Descr& descr() const;
+	const PortdockDescr& descr() const;
 
 	PortDock(Warehouse* warehouse);
 	~PortDock() override;
@@ -162,13 +162,13 @@ protected:
 
 public:
 	bool has_new_save_support() override {return true;}
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 };
 
-extern PortDock_Descr g_portdock_descr;
+extern PortdockDescr g_portdock_descr;
 
 } // namespace Widelands
 

@@ -41,12 +41,12 @@
 namespace Widelands {
 
 namespace {
-// Every Map_Object() needs to have a description. So we make a dummy one for
+// Every MapObject() needs to have a description. So we make a dummy one for
 // Fleet.
-Fleet_Descr g_fleet_descr("fleet", "Fleet");
+FleetDescr g_fleet_descr("fleet", "Fleet");
 }  // namespace
 
-const Fleet_Descr& Fleet::descr() const {
+const FleetDescr& Fleet::descr() const {
 	return g_fleet_descr;
 }
 
@@ -58,7 +58,7 @@ const Fleet_Descr& Fleet::descr() const {
  * The Fleet takes care of merging with existing fleets, if any.
  */
 Fleet::Fleet(Player & player) :
-	Map_Object(&g_fleet_descr),
+	MapObject(&g_fleet_descr),
 	m_owner(player),
 	m_act_pending(false)
 {
@@ -103,7 +103,7 @@ void Fleet::set_economy(Economy * e)
  */
 void Fleet::init(Editor_Game_Base & egbase)
 {
-	Map_Object::init(egbase);
+	MapObject::init(egbase);
 
 	if (m_ships.empty() && m_ports.empty()) {
 		molog("Empty fleet initialized; disband immediately\n");
@@ -161,7 +161,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (BaseImmovable * imm = cur.field->get_immovable()) {
-			if (imm->descr().type() == Map_Object_Type::PORTDOCK) {
+			if (imm->descr().type() == MapObjectType::PORTDOCK) {
 				if (upcast(PortDock, dock, imm)) {
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 						dock->get_fleet()->merge(egbase, this);
@@ -172,7 +172,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 		}
 
 		for (Bob * bob = cur.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
-			if (bob->descr().type() != Map_Object_Type::SHIP)
+			if (bob->descr().type() != MapObjectType::SHIP)
 				continue;
 
 			if (upcast(Ship, ship, bob)) {
@@ -265,7 +265,7 @@ void Fleet::cleanup(Editor_Game_Base & egbase)
 		m_ships.pop_back();
 	}
 
-	Map_Object::cleanup(egbase);
+	MapObject::cleanup(egbase);
 }
 
 Fleet::PortPath & Fleet::portpath(uint32_t i, uint32_t j)
@@ -465,7 +465,7 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 	FCoords cur;
 	while (!se.targets.empty() && astar.step(cur, cost)) {
 		BaseImmovable * imm = cur.field->get_immovable();
-		if (!imm || imm->descr().type() != Map_Object_Type::PORTDOCK)
+		if (!imm || imm->descr().type() != MapObjectType::PORTDOCK)
 			continue;
 
 		if (upcast(PortDock, pd, imm)) {
@@ -674,7 +674,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 void Fleet::log_general_info(const Editor_Game_Base & egbase)
 {
-	Map_Object::log_general_info(egbase);
+	MapObject::log_general_info(egbase);
 
 	molog
 		("%" PRIuS " ships and %" PRIuS " ports\n",  m_ships.size(), m_ports.size());
@@ -688,7 +688,7 @@ Fleet::Loader::Loader()
 
 void Fleet::Loader::load(FileRead & fr, uint8_t version)
 {
-	Map_Object::Loader::load(fr);
+	MapObject::Loader::load(fr);
 
 	Fleet & fleet = get<Fleet>();
 
@@ -713,7 +713,7 @@ void Fleet::Loader::load(FileRead & fr, uint8_t version)
 
 void Fleet::Loader::load_pointers()
 {
-	Map_Object::Loader::load_pointers();
+	MapObject::Loader::load_pointers();
 
 	Fleet & fleet = get<Fleet>();
 
@@ -737,7 +737,7 @@ void Fleet::Loader::load_pointers()
 
 void Fleet::Loader::load_finish()
 {
-	Map_Object::Loader::load_finish();
+	MapObject::Loader::load_finish();
 
 	Fleet & fleet = get<Fleet>();
 
@@ -749,8 +749,8 @@ void Fleet::Loader::load_finish()
 	}
 }
 
-Map_Object::Loader * Fleet::load
-		(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+MapObject::Loader * Fleet::load
+		(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -779,14 +779,14 @@ Map_Object::Loader * Fleet::load
 	return loader.release();
 }
 
-void Fleet::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+void Fleet::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Fleet);
+	fw.Unsigned8(HeaderFleet);
 	fw.Unsigned8(FLEET_SAVEGAME_VERSION);
 
 	fw.Unsigned8(m_owner.player_number());
 
-	Map_Object::save(egbase, mos, fw);
+	MapObject::save(egbase, mos, fw);
 
 	fw.Unsigned32(m_ships.size());
 	for (const Ship * temp_ship : m_ships) {

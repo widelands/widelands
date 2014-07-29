@@ -10,6 +10,10 @@ attack_string=_Your sentry is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the sentry.
 defeated_you_string=_Your soldiers defeated the enemy at the sentry.
 
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true
 
 [buildcost]
 wood=1
@@ -30,8 +34,3 @@ stone=1
 [idle]
 pics=sentry_i_??.png
 hotspot=37 60
-
-[aihints]
-expansion=true
-fighting=true
-mountain_conqueror=true

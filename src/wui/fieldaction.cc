@@ -47,7 +47,7 @@
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
-namespace Widelands {struct Building_Descr;}
+namespace Widelands {struct BuildingDescr;}
 using Widelands::Building;
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
@@ -102,7 +102,7 @@ Add a new building to the list of buildable buildings
 */
 void BuildGrid::add(Widelands::Building_Index id)
 {
-	const Widelands::Building_Descr & descr =
+	const Widelands::BuildingDescr & descr =
 		*tribe_.get_building_descr(Widelands::Building_Index(id));
 	const Image& anim_frame = g_gr->animations().get_animation(descr.get_animation("idle"))
 		.representative_image(player_color_);
@@ -514,7 +514,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& pla
 		 id < nr_buildings;
 		 ++id)
 	{
-		const Widelands::Building_Descr & descr = *tribe.get_building_descr(id);
+		const Widelands::BuildingDescr & descr = *tribe.get_building_descr(id);
 		BuildGrid * * ppgrid;
 
 		//  Some building types cannot be built (i.e. construction site) and not

@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-bool Requirements::check(const Map_Object & obj) const
+bool Requirements::check(const MapObject & obj) const
 {
 	return !m || m->check(obj);
 }
@@ -39,7 +39,7 @@ bool Requirements::check(const Map_Object & obj) const
  * Read this requirement from a file
  */
 void Requirements::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -54,7 +54,7 @@ void Requirements::Read
 }
 
 void Requirements::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 	const
 {
 	fw.Unsigned16(REQUIREMENTS_VERSION);
@@ -86,7 +86,7 @@ uint32_t RequirementsStorage::id() const
 }
 
 Requirements RequirementsStorage::read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	uint32_t const id = fr.Unsigned16();
 
@@ -114,7 +114,7 @@ void RequireOr::add(const Requirements & req)
 	m.push_back(req);
 }
 
-bool RequireOr::check(const Map_Object & obj) const
+bool RequireOr::check(const MapObject & obj) const
 {
 	for (const Requirements& req : m) {
 		if (req.check(obj)) {
@@ -126,7 +126,7 @@ bool RequireOr::check(const Map_Object & obj) const
 }
 
 void RequireOr::write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
@@ -138,7 +138,7 @@ void RequireOr::write
 }
 
 static Requirements readOr
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	uint32_t const count = fr.Unsigned16();
 	RequireOr req;
@@ -160,7 +160,7 @@ void RequireAnd::add(const Requirements & req)
 	m.push_back(req);
 }
 
-bool RequireAnd::check(const Map_Object & obj) const
+bool RequireAnd::check(const MapObject & obj) const
 {
 	for (const Requirements& req : m) {
 		if (!req.check(obj)) {
@@ -171,7 +171,7 @@ bool RequireAnd::check(const Map_Object & obj) const
 }
 
 void RequireAnd::write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
@@ -183,7 +183,7 @@ void RequireAnd::write
 }
 
 static Requirements readAnd
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	uint32_t const count = fr.Unsigned16();
 	RequireAnd req;
@@ -200,7 +200,7 @@ static Requirements readAnd
 const RequirementsStorage RequireAnd::storage(requirementIdAnd, readAnd);
 
 
-bool RequireAttribute::check(const Map_Object & obj) const
+bool RequireAttribute::check(const MapObject & obj) const
 {
 	if (atrTotal != at)
 	{
@@ -220,7 +220,7 @@ bool RequireAttribute::check(const Map_Object & obj) const
 }
 
 void RequireAttribute::write
-	(FileWrite & fw, Editor_Game_Base &, Map_Map_Object_Saver &) const
+	(FileWrite & fw, Editor_Game_Base &, MapMapObjectSaver &) const
 {
 	fw.Unsigned32(at);
 	fw.Signed32(min);
@@ -228,7 +228,7 @@ void RequireAttribute::write
 }
 
 static Requirements readAttribute
-	(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader &)
+	(FileRead & fr, Editor_Game_Base &, MapMapObjectLoader &)
 {
 	tAttribute const at  = static_cast<tAttribute>(fr.Unsigned32());
 	if

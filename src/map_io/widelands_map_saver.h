@@ -27,7 +27,7 @@ class FileSystem;
 namespace Widelands {
 
 class Editor_Game_Base;
-struct Map_Map_Object_Saver;
+struct MapMapObjectSaver;
 
 /*
 ===========================
@@ -46,12 +46,12 @@ struct Map_Saver {
 	~Map_Saver();
 
 	void save();
-	Map_Map_Object_Saver * get_map_object_saver() {return m_mos;}
+	MapMapObjectSaver * get_map_object_saver() {return m_mos;}
 
 private:
 	Editor_Game_Base     & m_egbase;
 	FileSystem & m_fs;
-	Map_Map_Object_Saver * m_mos;
+	MapMapObjectSaver * m_mos;
 };
 
 }

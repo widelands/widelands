@@ -34,7 +34,7 @@ namespace Widelands {
 #define FILENAME_SIZE 19
 
 void Map_Players_Messages_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader & mol)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapMapObjectLoader & mol)
 
 {
 	uint32_t      const gametime   = egbase.get_gametime ();
@@ -138,7 +138,7 @@ void Map_Players_Messages_Data_Packet::Read
 					Serial serial = s->get_int("serial", 0);
 					if (serial > 0) {
 						assert(mol.is_object_known(serial));
-						Map_Object & mo = mol.get<Map_Object>(serial);
+						MapObject & mo = mol.get<MapObject>(serial);
 						assert(mol.is_object_loaded(mo));
 						serial = mo.serial();
 					}
@@ -169,7 +169,7 @@ void Map_Players_Messages_Data_Packet::Read
 }
 
 void Map_Players_Messages_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fs.EnsureDirectoryExists("player");
 	Player_Number const nr_players = egbase.map().get_nrplayers();
@@ -237,7 +237,7 @@ void Map_Players_Messages_Data_Packet::Write
 				assert(false);
 			}
 			if (message.serial()) {
-				const Map_Object* mo = egbase.objects().get_object(message.serial());
+				const MapObject* mo = egbase.objects().get_object(message.serial());
 				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
 				s.set_int       ("serial",    fileindex);
 			}

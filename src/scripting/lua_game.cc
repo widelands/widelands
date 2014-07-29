@@ -773,7 +773,7 @@ int L_Player::allow_workers(lua_State * L) {
 		tribe.worker_types_without_cost();
 
 	for (Ware_Index i = 0; i < tribe.get_nrworkers(); ++i) {
-		const Worker_Descr & worker_descr = *tribe.get_worker_descr(i);
+		const WorkerDescr & worker_descr = *tribe.get_worker_descr(i);
 		if (!worker_descr.is_buildable())
 			continue;
 

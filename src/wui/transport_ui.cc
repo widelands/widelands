@@ -38,7 +38,7 @@ using Widelands::Editor_Game_Base;
 using Widelands::Game;
 using Widelands::WareDescr;
 using Widelands::Ware_Index;
-using Widelands::Worker_Descr;
+using Widelands::WorkerDescr;
 
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";

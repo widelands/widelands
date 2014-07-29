@@ -31,7 +31,7 @@ namespace Widelands {
 
 
 void Map_Player_Position_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapMapObjectLoader &)
 {
 	Profile prof;
 	prof.read("player_position", nullptr, fs);
@@ -65,7 +65,7 @@ void Map_Player_Position_Data_Packet::Read
 
 
 void Map_Player_Position_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 	Profile prof;
 	Section & s = prof.create_section("global");

@@ -33,12 +33,12 @@ namespace Widelands {
 class Soldier;
 class World;
 
-struct MilitarySite_Descr : public ProductionSite_Descr {
-	MilitarySite_Descr
+struct MilitarySiteDescr : public ProductionSiteDescr {
+	MilitarySiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
-	~MilitarySite_Descr() override {}
+	~MilitarySiteDescr() override {}
 
 	Building & create_object() const override;
 
@@ -62,14 +62,14 @@ private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
 	uint32_t m_heal_per_second;
-	DISALLOW_COPY_AND_ASSIGN(MilitarySite_Descr);
+	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
 class MilitarySite :
 	public ProductionSite, public SoldierControl, public Attackable
 {
 	friend class Map_Buildingdata_Data_Packet;
-	MO_DESCR(MilitarySite_Descr)
+	MO_DESCR(MilitarySiteDescr)
 
 public:
 	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
@@ -79,7 +79,7 @@ public:
 		kPrefersHeroes,
 	};
 
-	MilitarySite(const MilitarySite_Descr &);
+	MilitarySite(const MilitarySiteDescr &);
 	virtual ~MilitarySite();
 
 	std::string get_statistics_string() override;
@@ -141,7 +141,7 @@ private:
 	static void request_soldier_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
-	Map_Object * popSoldierJob
+	MapObject * popSoldierJob
 		(Soldier *, bool * stayhome = nullptr);
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);

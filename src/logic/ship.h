@@ -37,12 +37,12 @@ class Economy;
 struct Fleet;
 class PortDock;
 
-struct Ship_Descr : BobDescr {
-	Ship_Descr
+struct ShipDescr : BobDescr {
+	ShipDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
-	~Ship_Descr() override {}
+	~ShipDescr() override {}
 
 	Bob & create_object() const override;
 
@@ -57,7 +57,7 @@ private:
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
 	uint32_t m_vision_range;
-	DISALLOW_COPY_AND_ASSIGN(Ship_Descr);
+	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
 /**
@@ -66,9 +66,9 @@ private:
  * are an economy of their own and are not part of a Fleet.
  */
 struct Ship : Bob {
-	MO_DESCR(Ship_Descr)
+	MO_DESCR(ShipDescr)
 
-	Ship(const Ship_Descr & descr);
+	Ship(const ShipDescr & descr);
 	virtual ~Ship();
 
 	// Returns the fleet the ship is a part of.
@@ -251,10 +251,10 @@ protected:
 	};
 
 public:
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 };
 
 } // namespace Widelands

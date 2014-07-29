@@ -1,6 +1,10 @@
 size=small
 output=fish
 
+[aihints]
+needs_water=true
+prohibited_till=900
+
 [buildcost]
 log=4
 
@@ -9,10 +13,6 @@ log=2
 
 [working positions]
 fisher=1
-
-[aihints]
-needs_water=true
-prohibited_till=900
 
 [programs]
 work=_Work

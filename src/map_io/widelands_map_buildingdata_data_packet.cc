@@ -70,7 +70,7 @@ void Map_Buildingdata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &       mol)
+	 MapMapObjectLoader &       mol)
 {
 	if (skip)
 		return;
@@ -99,7 +99,7 @@ void Map_Buildingdata_Data_Packet::Read
 						try {
 							building.m_anim =
 								building.descr().get_animation(animation_name);
-						} catch (const Map_Object_Descr::Animation_Nonexistent &) {
+						} catch (const MapObjectDescr::Animation_Nonexistent &) {
 							log
 								("WARNING: %s %s does not have animation \"%s\"; "
 								 "using animation \"idle\" instead\n",
@@ -145,7 +145,7 @@ void Map_Buildingdata_Data_Packet::Read
 					if (uint32_t const leaver_serial = fr.Unsigned32())
 						try {
 							building.m_leave_allow =
-								&mol.get<Map_Object>(leaver_serial);
+								&mol.get<MapObject>(leaver_serial);
 						} catch (const _wexception & e) {
 							throw game_data_error
 								("leave allow item (%u): %s", leaver_serial, e.what());
@@ -256,7 +256,7 @@ void Map_Buildingdata_Data_Packet::Read
 }
 
 void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
-	(Building& b, FileRead&, Game&, Map_Map_Object_Loader&)
+	(Building& b, FileRead&, Game&, MapMapObjectLoader&)
 {
 	const Tribe_Descr & t = b.descr().tribe();
 	Building_Index b_idx = t.building_index(b.descr().name());
@@ -280,12 +280,12 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	// iterate through all buildings to find first predecessor
 	for (;;) {
 		Building_Index former_idx = b.m_old_buildings.front();
-		const Building_Descr * oldest = t.get_building_descr(former_idx);
+		const BuildingDescr * oldest = t.get_building_descr(former_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
 		for (Building_Index i = 0; i < t.get_nrbuildings(); ++i) {
-			Building_Descr const * ob = t.get_building_descr(i);
+			BuildingDescr const * ob = t.get_building_descr(i);
 			if (ob->enhancement() == former_idx) {
 				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
 				break;
@@ -299,7 +299,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 	(Partially_Finished_Building  & pfb,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -360,7 +360,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 	(ConstructionSite      & constructionsite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -400,7 +400,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 	(ConstructionSite      & constructionsite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	const Tribe_Descr & tribe = constructionsite.descr().tribe();
 	constructionsite.m_building =
@@ -460,7 +460,7 @@ void Map_Buildingdata_Data_Packet::read_dismantlesite
 	(DismantleSite         & dms,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -481,7 +481,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 	(Warehouse             & warehouse,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -750,7 +750,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 	(MilitarySite          & militarysite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -855,7 +855,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 	(ProductionSite        & productionsite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -865,7 +865,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 		{
 			ProductionSite::Working_Position & wp_begin =
 				*productionsite.m_working_positions;
-			const ProductionSite_Descr & pr_descr = productionsite.descr();
+			const ProductionSiteDescr & pr_descr = productionsite.descr();
 			const BillOfMaterials & working_positions = pr_descr.working_positions();
 
 			uint16_t nr_worker_requests = fr.Unsigned16();
@@ -918,7 +918,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				Worker * worker = &mol.get<Worker>(fr.Unsigned32());
 
 				//  Find a working position that matches this worker.
-				const Worker_Descr & worker_descr = worker->descr();
+				const WorkerDescr & worker_descr = worker->descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
 				bool found_working_position = false;
 				for (const WareAmount& working_position : working_positions) {
@@ -994,7 +994,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				if (packet_version >= 5) {
 					uint32_t serial = fr.Unsigned32();
 					if (serial)
-						productionsite.m_stack[i].objvar = &mol.get<Map_Object>(serial);
+						productionsite.m_stack[i].objvar = &mol.get<MapObject>(serial);
 					productionsite.m_stack[i].coord = ReadCoords32_allow_null(&fr, game.map().extent());
 				}
 			}
@@ -1075,7 +1075,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 	(TrainingSite          & trainingsite,
 	 FileRead              & fr,
 	 Game                  & game,
-	 Map_Map_Object_Loader & mol)
+	 MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
@@ -1166,7 +1166,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 
 
 void Map_Buildingdata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	FileWrite fw;
 
@@ -1207,7 +1207,7 @@ void Map_Buildingdata_Data_Packet::Write
 				}
 			}
 			fw.Unsigned32(building->m_leave_time);
-			if (Map_Object const * const o = building->m_leave_allow.get(egbase))
+			if (MapObject const * const o = building->m_leave_allow.get(egbase))
 			{
 				assert(mos.is_object_known(*o));
 				fw.Unsigned32(mos.get_object_file_index(*o));
@@ -1217,7 +1217,7 @@ void Map_Buildingdata_Data_Packet::Write
 			{
 				const Tribe_Descr& td = building->descr().tribe();
 				for (Building_Index b_idx : building->m_old_buildings) {
-					const Building_Descr* b_descr = td.get_building_descr(b_idx);
+					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
 					fw.Unsigned8(1);
 					fw.String(b_descr->name());
 				}
@@ -1283,7 +1283,7 @@ void Map_Buildingdata_Data_Packet::write_partially_finished_building
 	(const Partially_Finished_Building & pfb,
 	 FileWrite              & fw,
 	 Game                   & game,
-	 Map_Map_Object_Saver   & mos)
+	 MapMapObjectSaver   & mos)
 {
 	fw.Unsigned16(CURRENT_PARTIALLYFB_PACKET_VERSION);
 
@@ -1319,7 +1319,7 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 	(const ConstructionSite & constructionsite,
 	 FileWrite              & fw,
 	 Game                   & game,
-	 Map_Map_Object_Saver   & mos)
+	 MapMapObjectSaver   & mos)
 {
 
 	fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
@@ -1333,7 +1333,7 @@ void Map_Buildingdata_Data_Packet::write_dismantlesite
 	(const DismantleSite & dms,
 	 FileWrite              & fw,
 	 Game                   & game,
-	 Map_Map_Object_Saver   & mos)
+	 MapMapObjectSaver   & mos)
 {
 
 	fw.Unsigned16(CURRENT_DISMANTLESITE_PACKET_VERSION);
@@ -1348,7 +1348,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	(const Warehouse      & warehouse,
 	 FileWrite            & fw,
 	 Game                 & game,
-	 Map_Map_Object_Saver & mos)
+	 MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
@@ -1441,7 +1441,7 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	(const MilitarySite   & militarysite,
 	 FileWrite            & fw,
 	 Game                 & game,
-	 Map_Map_Object_Saver & mos)
+	 MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
 	write_productionsite(militarysite, fw, game, mos);
@@ -1488,7 +1488,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	(const ProductionSite & productionsite,
 	 FileWrite            & fw,
 	 Game                 & game,
-	 Map_Map_Object_Saver & mos)
+	 MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_PRODUCTIONSITE_PACKET_VERSION);
 
@@ -1566,7 +1566,7 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	(const TrainingSite   & trainingsite,
 	 FileWrite            & fw,
 	 Game                 & game,
-	 Map_Map_Object_Saver & mos)
+	 MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_TRAININGSITE_PACKET_VERSION);
 

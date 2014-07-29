@@ -69,7 +69,7 @@ struct NoteImmovable {
  *
  * For more information, see the Map::recalc_* functions.
  */
-struct BaseImmovable : public Map_Object {
+struct BaseImmovable : public MapObject {
 	enum Size {
 		NONE = 0, ///< not robust (i.e. removable by building something over it)
 		SMALL,    ///< small building or robust map element, including trees
@@ -77,7 +77,7 @@ struct BaseImmovable : public Map_Object {
 		BIG       ///< big building
 	};
 
-	BaseImmovable(const Map_Object_Descr &);
+	BaseImmovable(const MapObjectDescr &);
 
 	virtual int32_t  get_size    () const = 0;
 	virtual bool get_passable() const = 0;
@@ -108,15 +108,15 @@ struct ImmovableActionData;
 /**
  * Immovable represents a standard immovable such as trees or stones.
  */
-struct Immovable_Descr : public Map_Object_Descr {
+struct ImmovableDescr : public MapObjectDescr {
 	typedef std::map<std::string, ImmovableProgram *> Programs;
 
-	Immovable_Descr
+	ImmovableDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 Tribe_Descr const * const);
-	Immovable_Descr(const LuaTable&, const World&);
-	~Immovable_Descr() override;
+	ImmovableDescr(const LuaTable&, const World&);
+	~ImmovableDescr() override;
 
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
@@ -143,7 +143,7 @@ protected:
 	int32_t     m_size;
 	Programs    m_programs;
 
-	/// The tribe to which this Immovable_Descr belongs or 0 if it is a
+	/// The tribe to which this ImmovableDescr belongs or 0 if it is a
 	/// world immovable
 	const Tribe_Descr * const m_owner_tribe;
 
@@ -157,18 +157,18 @@ private:
 
 	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
-	DISALLOW_COPY_AND_ASSIGN(Immovable_Descr);
+	DISALLOW_COPY_AND_ASSIGN(ImmovableDescr);
 };
 
 class Immovable : public BaseImmovable {
-	friend struct Immovable_Descr;
+	friend struct ImmovableDescr;
 	friend struct ImmovableProgram;
 	friend class Map;
 
-	MO_DESCR(Immovable_Descr)
+	MO_DESCR(ImmovableDescr)
 
 public:
-	Immovable(const Immovable_Descr &);
+	Immovable(const ImmovableDescr &);
 	~Immovable();
 
 	Player * get_owner() const {return m_owner;}
@@ -267,9 +267,9 @@ public:
 	// TODO(unknown): Remove as soon as we fully support the new system
 	bool has_new_save_support() override {return true;}
 
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &,
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &,
 		 const OneWorldLegacyLookupTable& lookup_table);
 
 private:
@@ -289,7 +289,7 @@ private:
  * also adjusted automatically.
  */
 struct PlayerImmovable : public BaseImmovable {
-	PlayerImmovable(const Map_Object_Descr &);
+	PlayerImmovable(const MapObjectDescr &);
 	virtual ~PlayerImmovable();
 
 	Player * get_owner() const {return m_owner;}
@@ -351,7 +351,7 @@ protected:
 	};
 
 public:
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 };
 
 }

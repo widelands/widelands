@@ -3,6 +3,9 @@ buildable=no
 enhanced_building=yes
 output=ironore
 
+[aihints]
+mines=iron
+
 [enhancement_cost]
 log=4
 raw_stone=2
@@ -16,9 +19,6 @@ master-miner=1
 chief-miner=1
 miner=1
 
-[aihints]
-mines=iron
-
 [inputs]
 meal=6
 
@@ -27,6 +27,7 @@ work=_Work
 
 [work]
 sleep=40000
+return=skipped unless economy needs ironore
 consume=meal
 animate=working 16000
 mine=iron 2 100 10 2

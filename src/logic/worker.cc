@@ -37,7 +37,7 @@
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_incorporate.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/dismantlesite.h"
 #include "logic/findbob.h"
 #include "logic/findimmovable.h"
@@ -611,7 +611,7 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 
 	// Determine the coords we need to walk towards
 	if (action.iparam1 & Action::walkObject) {
-		Map_Object * const obj = state.objvar1.get(game);
+		MapObject * const obj = state.objvar1.get(game);
 
 		if (obj) {
 			if      (upcast(Bob       const, bob,       obj))
@@ -705,7 +705,7 @@ bool Worker::run_return(Game & game, State & state, const Action & action)
  */
 bool Worker::run_object(Game & game, State & state, const Action & action)
 {
-	Map_Object * const obj = state.objvar1.get(game);
+	MapObject * const obj = state.objvar1.get(game);
 
 	if (!obj) {
 		send_signal(game, "fail");
@@ -716,7 +716,7 @@ bool Worker::run_object(Game & game, State & state, const Action & action)
 	if      (upcast(Immovable, immovable, obj))
 		immovable->switch_program(game, action.sparam1);
 	else if (upcast(Bob,       bob,       obj)) {
-		if        (upcast(Critter_Bob, crit, bob)) {
+		if        (upcast(Critter, crit, bob)) {
 			crit->reset_tasks(game); //  TODO(unknown): ask the critter more nicely
 			crit->start_task_program(game, action.sparam1);
 		} else if (upcast(Worker,      w,    bob)) {
@@ -778,7 +778,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume it
 	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	   const uint32_t index, const Immovable_Descr& immovable_description) {
+		const uint32_t index, const ImmovableDescr& immovable_description) {
 		double p = 1.;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
@@ -803,11 +803,11 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	if (list[0] == "attrib") {
 		state.svar1 = "world";
 
-		const DescriptionMaintainer<Immovable_Descr>& immovables = game.world().immovables();
+		const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
 
-		const uint32_t attribute_id = Immovable_Descr::get_attribute_id(list[1]);
+		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(list[1]);
 		for (uint32_t i = 0; i < immovables.get_nitems(); ++i) {
-			Immovable_Descr& immovable_descr = immovables.get_unmutable(i);
+			ImmovableDescr& immovable_descr = immovables.get_unmutable(i);
 			if (!immovable_descr.has_attribute(attribute_id)) {
 				continue;
 			}
@@ -818,7 +818,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		uint32_t immovable_index = descr().tribe().get_immovable_index(list[1]);
 
 		if (immovable_index > 0) {
-			const Immovable_Descr* imm = descr().tribe().get_immovable_descr(immovable_index);
+			const ImmovableDescr* imm = descr().tribe().get_immovable_descr(immovable_index);
 			test_suitability(immovable_index, *imm);
 		}
 	}
@@ -866,7 +866,7 @@ bool Worker::run_create_bob(Game & game, State & state, const Action &)
  */
 bool Worker::run_removeobject(Game & game, State & state, const Action &)
 {
-	if (Map_Object * const obj = state.objvar1.get(game)) {
+	if (MapObject * const obj = state.objvar1.get(game)) {
 		obj->remove(game);
 		state.objvar1 = nullptr;
 	}
@@ -1016,7 +1016,7 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 }
 
 
-Worker::Worker(const Worker_Descr & worker_descr)
+Worker::Worker(const WorkerDescr & worker_descr)
 	:
 	Bob          (worker_descr),
 	m_economy    (nullptr),
@@ -1093,7 +1093,7 @@ void Worker::set_location(PlayerImmovable * const location)
 	if (location) {
 		Economy * const eco = location->get_economy();
 
-		if (!m_economy || (descr().type() == Map_Object_Type::SOLDIER)) {
+		if (!m_economy || (descr().type() == MapObjectType::SOLDIER)) {
 			set_economy(eco);
 		} else if (m_economy != eco) {
 			throw wexception
@@ -1315,7 +1315,7 @@ void Worker::init_auto_task(Game & game) {
 	if (PlayerImmovable * location = get_location(game)) {
 		if
 			(get_economy()->warehouses().size() ||
-			 location->descr().type() >= Map_Object_Type::BUILDING)
+			 location->descr().type() >= MapObjectType::BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(nullptr);
@@ -1500,7 +1500,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				 serial(), nextstep->serial());
 	} else if (upcast(Road,     road,     location)) {
 		// Road to Flag
-		if (nextstep->descr().type() == Map_Object_Type::FLAG) {
+		if (nextstep->descr().type() == MapObjectType::FLAG) {
 			const Path & path = road->get_path();
 			int32_t const index =
 				nextstep == &road->get_flag(Road::FlagStart) ? 0                 :
@@ -1749,7 +1749,7 @@ void Worker::start_task_return(Game & game, bool const dropware)
 {
 	PlayerImmovable * const location = get_location(game);
 
-	if (!location || location->descr().type() < Map_Object_Type::BUILDING)
+	if (!location || location->descr().type() < MapObjectType::BUILDING)
 		throw wexception
 			("MO(%u): start_task_return(): not owned by building", serial());
 
@@ -1908,7 +1908,7 @@ void Worker::program_pop(Game & game, State & state)
 	set_program_objvar(game, state, nullptr);
 }
 
-void Worker::set_program_objvar(Game & game, State & state, Map_Object * obj)
+void Worker::set_program_objvar(Game & game, State & state, MapObject * obj)
 {
 	assert(state.task == &taskProgram);
 
@@ -1991,7 +1991,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 
 	// Always leave buildings in an orderly manner,
 	// even when no warehouses are left to return to
-	if (location->descr().type() >= Map_Object_Type::BUILDING)
+	if (location->descr().type() >= MapObjectType::BUILDING)
 		return start_task_leavebuilding(game, true);
 
 	if (!get_economy()->warehouses().size()) {
@@ -2108,7 +2108,7 @@ void Worker::dropoff_update(Game & game, State &)
 	}
 
 	// We don't have the ware any more, return home
-	if (location->descr().type() == Map_Object_Type::FLAG)
+	if (location->descr().type() == MapObjectType::FLAG)
 		return
 			start_task_move
 				(game,
@@ -2116,7 +2116,7 @@ void Worker::dropoff_update(Game & game, State &)
 				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 
-	if (location->descr().type() < Map_Object_Type::BUILDING)
+	if (location->descr().type() < MapObjectType::BUILDING)
 		throw wexception
 			("MO(%u): [dropoff]: not on building on return", serial());
 
@@ -2425,8 +2425,8 @@ void Worker::leavebuilding_pop(Game & game, State & state)
 	//  The if-statement is needed because this is (unfortunately) also called
 	//  when the Worker is deallocated when shutting down the simulation. Then
 	//  the building might not exist any more.
-	if (Map_Object * const building = state.objvar1.get(game))
-		ref_cast<Building, Map_Object>(*building).leave_skip(game, *this);
+	if (MapObject * const building = state.objvar1.get(game))
+		ref_cast<Building, MapObject>(*building).leave_skip(game, *this);
 }
 
 
@@ -3020,8 +3020,8 @@ Worker::Loader * Worker::create_loader()
  * Derived classes must override \ref create_loader to make sure
  * the appropriate actual load functions are called.
  */
-Map_Object::Loader * Worker::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+MapObject::Loader * Worker::load
+	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	try {
 		// header has already been read by caller
@@ -3034,7 +3034,7 @@ Map_Object::Loader * Worker::load
 		if (!tribe)
 			throw game_data_error("unknown tribe '%s'", tribename.c_str());
 
-		const Worker_Descr * descr =
+		const WorkerDescr * descr =
 			tribe->get_worker_descr(tribe->safe_worker_index(name));
 
 		Worker * worker = static_cast<Worker *>(&descr->create_object());
@@ -3053,9 +3053,9 @@ Map_Object::Loader * Worker::load
  * \warning Do not override this function, override \ref do_save instead.
  */
 void Worker::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Worker);
+	fw.Unsigned8(HeaderWorker);
 	fw.CString(descr().tribe().name());
 	fw.CString(descr().name());
 
@@ -3070,7 +3070,7 @@ void Worker::save
  * Override this function in derived classes.
  */
 void Worker::do_save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	Bob::save(egbase, mos, fw);
 

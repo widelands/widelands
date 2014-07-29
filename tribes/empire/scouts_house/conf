@@ -1,13 +1,13 @@
 size=small
 
+[aihints]
+
 [buildcost]
 log=2
 stone=1
 
 [return_on_dismantle]
 log=1
-
-[aihints]
 
 [working positions]
 scout=1

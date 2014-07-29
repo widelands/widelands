@@ -26,7 +26,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_bob_tool.h"
 #include "graphic/graphic.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
 #include "ui_basic/box.h"
@@ -88,7 +88,7 @@ m_click_recursion_protect(false)
 		}
 
 		const Widelands::BobDescr & descr = *world.get_bob_descr(i);
-		upcast(Widelands::Critter_Bob_Descr const, critter_descr, &descr);
+		upcast(Widelands::CritterDescr const, critter_descr, &descr);
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,
 			 pos,

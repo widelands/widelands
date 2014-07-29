@@ -1,6 +1,9 @@
 size=small
 output=meat
 
+[aihints]
+prohibited_till=300
+
 [buildcost]
 log=4
 raw_stone=1
@@ -8,9 +11,6 @@ raw_stone=1
 [return_on_dismantle]
 log=1
 raw_stone=1
-
-[aihints]
-prohibited_till=300
 
 [working positions]
 hunter=1

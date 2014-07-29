@@ -1,8 +1,10 @@
-#help: Will smoke food unless the economy has less logs than the target quantity and at least the target quantity of the smoked food.
-
 size=medium
 output=smoked_meat
 output=smoked_fish
+
+[aihints]
+forced_after=900
+prohibited_till=60
 
 [buildcost]
 log=1
@@ -12,10 +14,6 @@ spidercloth=1
 
 [return_on_dismantle]
 stone=3
-
-[aihints]
-forced_after=900
-prohibited_till=60
 
 [working positions]
 smoker=1
@@ -31,14 +29,16 @@ smoke_fish=_Smoke fish
 work=_Work
 
 [smoke_meat]
-return=skipped unless economy needs smoked_meat or not economy needs log
+return=skipped when site has fish and economy needs smoked_fish and not economy needs smoked_meat
+return=skipped unless economy needs smoked_meat
 sleep=30000
 consume=meat:2 log
 animate=working 30000
 produce=smoked_meat:2
 
 [smoke_fish]
-return=skipped unless economy needs smoked_fish or not economy needs log
+return=skipped when site has meat and economy needs smoked_meat and not economy needs smoked_fish
+return=skipped unless economy needs smoked_fish
 sleep=30000
 consume=fish:2 log
 animate=working 30000

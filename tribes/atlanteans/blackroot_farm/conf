@@ -1,6 +1,10 @@
 size=big
 output=blackroot
 
+[aihints]
+prohibited_till=600
+space_consumer=true
+
 [buildcost]
 planks=3
 stone=2
@@ -10,10 +14,6 @@ log=4
 planks=1
 stone=2
 log=1
-
-[aihints]
-prohibited_till=600
-space_consumer=true
 
 [working positions]
 blackroot_farmer=1

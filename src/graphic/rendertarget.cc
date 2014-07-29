@@ -34,7 +34,7 @@ using Widelands::BaseImmovable;
 using Widelands::Coords;
 using Widelands::FCoords;
 using Widelands::Map;
-using Widelands::Map_Object_Descr;
+using Widelands::MapObjectDescr;
 using Widelands::Player;
 using Widelands::TCoords;
 

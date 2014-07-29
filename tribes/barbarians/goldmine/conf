@@ -2,6 +2,11 @@ size=mine
 output=goldore
 enhancement=deep_goldmine
 
+[aihints]
+mines=gold
+mines_percent=30
+prohibited_till=1200
+
 [buildcost]
 log=4
 raw_stone=2
@@ -13,11 +18,6 @@ raw_stone=1
 [working positions]
 miner=1
 
-[aihints]
-mines=gold
-mines_percent=30
-prohibited_till=1200
-
 [inputs]
 ration=6
 
@@ -26,6 +26,7 @@ work=_Work
 
 [work]
 sleep=45000
+return=skipped unless economy needs goldore
 consume=ration
 animate=working 20000
 mine=gold 2 33 5 17

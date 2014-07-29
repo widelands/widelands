@@ -384,7 +384,7 @@ DirAnimations::DirAnimations
  * @param optional No error if animations do not exist
  */
 void DirAnimations::parse
-	(Widelands::Map_Object_Descr & b,
+	(Widelands::MapObjectDescr & b,
 	 const string & directory,
 	 Profile & prof,
 	 const string & name,

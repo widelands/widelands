@@ -39,9 +39,9 @@ class Partially_Finished_Building : public Building {
 	friend struct Map_Building_Data_Packet;
 
 public:
-	Partially_Finished_Building(const Building_Descr & building_descr);
+	Partially_Finished_Building(const BuildingDescr & building_descr);
 
-	virtual void set_building         (const Building_Descr &);
+	virtual void set_building         (const BuildingDescr &);
 
 	int32_t get_size() const override;
 	uint32_t get_playercaps() const override;
@@ -64,7 +64,7 @@ private:
 	virtual uint32_t build_step_time() const = 0;
 
 protected:
-	const Building_Descr * m_building; // type of building that was or will become
+	const BuildingDescr * m_building; // type of building that was or will become
 
 	Request * m_builder_request;
 	OPtr<Worker> m_builder;

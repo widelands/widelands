@@ -30,37 +30,37 @@ class OneWorldLegacyLookupTable;
 namespace Widelands {
 
 class Editor_Game_Base;
-class Map_Map_Object_Loader;
-struct Map_Map_Object_Saver;
+class MapMapObjectLoader;
+struct MapMapObjectSaver;
 
 /**
- * This data packet contains all \ref Map_Object and derived instances.
+ * This data packet contains all \ref MapObject and derived instances.
  *
- * \note Right now, only those Map_Objects not covered by other objects
+ * \note Right now, only those MapObjects not covered by other objects
  * are in this packet.
  */
-struct Map_Object_Packet {
+struct MapObjectPacket {
 	struct loader_sorter {
 		bool operator()
-			(Map_Object::Loader * const a, Map_Object::Loader * const b) const
+			(MapObject::Loader * const a, MapObject::Loader * const b) const
 		{
 			assert(a->get_object()->serial() != b->get_object()->serial());
 			return a->get_object()->serial() < b->get_object()->serial();
 		}
 	};
 
-	typedef std::set<Map_Object::Loader *, loader_sorter> LoaderSet;
+	typedef std::set<MapObject::Loader *, loader_sorter> LoaderSet;
 	LoaderSet loaders;
 
-	~Map_Object_Packet();
+	~MapObjectPacket();
 
 	void Read
-		(FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader &,
+		(FileSystem &, Editor_Game_Base &, MapMapObjectLoader &,
 		 const OneWorldLegacyLookupTable& lookup_table);
 
 	void LoadFinish();
 
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Write(FileSystem &, Editor_Game_Base &, MapMapObjectSaver  &);
 };
 
 }

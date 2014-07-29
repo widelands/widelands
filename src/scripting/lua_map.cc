@@ -76,11 +76,11 @@ int wares_map_to_lua(lua_State* L, const Buildcost& wares_map, const Tribe_Descr
 }
 
 
-struct SoldierDescr {
-	SoldierDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev)
+struct SoldierMapDescr {
+	SoldierMapDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev)
 	   : hp(ghp), at(gat), de(gde), ev(gev) {
 	}
-	SoldierDescr() : hp(0), at(0), de(0), ev(0) {
+	SoldierMapDescr() : hp(0), at(0), de(0), ev(0) {
 	}
 
 	uint8_t hp;
@@ -88,7 +88,7 @@ struct SoldierDescr {
 	uint8_t de;
 	uint8_t ev;
 
-	bool operator<(const SoldierDescr& ot) const {
+	bool operator<(const SoldierMapDescr& ot) const {
 		bool hp_eq = hp == ot.hp;
 		bool at_eq = at == ot.at;
 		bool de_eq = de == ot.de;
@@ -100,17 +100,17 @@ struct SoldierDescr {
 			return at < ot.at;
 		return hp < ot.hp;
 	}
-	bool operator == (const SoldierDescr& ot) const {
+	bool operator == (const SoldierMapDescr& ot) const {
 		if (hp == ot.hp && at == ot.at && de == ot.de && ev == ot.ev)
 			return true;
 		return false;
 	}
 };
 
-typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
+typedef std::map<SoldierMapDescr, uint32_t> SoldiersMap;
 typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
 typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
-typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
+typedef std::pair<SoldierMapDescr, uint32_t> SoldierAmount;
 typedef std::pair<Widelands::Ware_Index, uint32_t> WorkerAmount;
 typedef std::pair<uint8_t, uint32_t> PlrInfluence;
 typedef std::set<Widelands::Ware_Index> WaresSet;
@@ -311,7 +311,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	// The idea is to change as little as possible
 	Editor_Game_Base& egbase = get_egbase(L);
 	for (const WorkersMap::value_type sp : setpoints) {
-		const Worker_Descr* wdes = tribe.get_worker_descr(sp.first);
+		const WorkerDescr* wdes = tribe.get_worker_descr(sp.first);
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
 
@@ -341,9 +341,9 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 }
 
 // Unpacks the Lua table of the form {hp, at, de, ev} at the stack index
-// 'table_index' into a SoldierDescr struct.
-SoldierDescr unbox_lua_soldier_description(lua_State* L, int table_index, const Soldier_Descr& sd) {
-	SoldierDescr soldier_descr;
+// 'table_index' into a SoldierMapDescr struct.
+SoldierMapDescr unbox_lua_soldier_description(lua_State* L, int table_index, const SoldierDescr& sd) {
+	SoldierMapDescr soldier_descr;
 
 	lua_pushuint32(L, 1);
 	lua_rawget(L, table_index);
@@ -383,17 +383,17 @@ SoldierDescr unbox_lua_soldier_description(lua_State* L, int table_index, const 
 
 // Parser the arguments of set_soldiers() into a setpoint. See the
 // documentation in HasSoldiers to understand the valid arguments.
-SoldiersMap m_parse_set_soldiers_arguments(lua_State* L, const Soldier_Descr& soldier_descr) {
+SoldiersMap m_parse_set_soldiers_arguments(lua_State* L, const SoldierDescr& soldier_descr) {
 	SoldiersMap rv;
 	if (lua_gettop(L) > 2) {
 		// STACK: cls, descr, count
 		const uint32_t count = luaL_checkuint32(L, 3);
-		const SoldierDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
+		const SoldierMapDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
 		rv.insert(SoldierAmount(d, count));
 	} else {
 		lua_pushnil(L);
 		while (lua_next(L, 2) != 0) {
-			const SoldierDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
+			const SoldierMapDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
 			const uint32_t count = luaL_checkuint32(L, -1);
 			rv.insert(SoldierAmount(d, count));
 			lua_pop(L, 1);
@@ -415,7 +415,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 		// Return All Soldiers
 		SoldiersMap hist;
 		for (const Soldier* s : soldiers) {
-			SoldierDescr sd
+			SoldierMapDescr sd
 				(s->get_hp_level(), s->get_attack_level(),
 				 s->get_defense_level(), s->get_evade_level());
 
@@ -444,14 +444,14 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 			lua_rawset(L, -3);
 		}
 	} else {
-		const Soldier_Descr& soldier_descr = ref_cast<Soldier_Descr const, Worker_Descr const>
+		const SoldierDescr& soldier_descr = ref_cast<SoldierDescr const, WorkerDescr const>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
 		// Only return the number of those requested
-		const SoldierDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
+		const SoldierMapDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
 		uint32_t rv = 0;
 		for (const Soldier* s : soldiers) {
-			SoldierDescr sd
+			SoldierMapDescr sd
 				(s->get_hp_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level());
 			if (sd == wanted)
 				++rv;
@@ -469,8 +469,8 @@ int do_set_soldiers
 	assert(owner != nullptr);
 
 	const Tribe_Descr& tribe = owner->tribe();
-	const Soldier_Descr& soldier_descr =  //  soldiers
-	   ref_cast<Soldier_Descr const, Worker_Descr const>
+	const SoldierDescr& soldier_descr =  //  soldiers
+		ref_cast<SoldierDescr const, WorkerDescr const>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
@@ -478,7 +478,7 @@ int do_set_soldiers
 	const std::vector<Soldier*> curs = sc->stationedSoldiers();
 	SoldiersMap hist;
 	for (const Soldier* s : curs) {
-		SoldierDescr sd
+		SoldierMapDescr sd
 			(s->get_hp_level(), s->get_attack_level(),
 			 s->get_defense_level(), s->get_evade_level());
 
@@ -503,7 +503,7 @@ int do_set_soldiers
 		if (d < 0) {
 			while (d) {
 				for (Soldier* s : sc->stationedSoldiers()) {
-					SoldierDescr is
+					SoldierMapDescr is
 						(s->get_hp_level(), s->get_attack_level(),
 						 s->get_defense_level(), s->get_evade_level());
 
@@ -540,38 +540,38 @@ int do_set_soldiers
  */
 #define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
 	(L, new lua_klass(static_cast<const klass *>(descr)))
-int upcasted_map_object_descr_to_lua(lua_State* L, const Map_Object_Descr* const descr) {
+int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const descr) {
 	assert(descr != nullptr);
 
-	if (descr->type() >= Map_Object_Type::BUILDING)
+	if (descr->type() >= MapObjectType::BUILDING)
 	{
 		switch (descr->type()) {
-			case Map_Object_Type::CONSTRUCTIONSITE:
-				return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
-			case Map_Object_Type::PRODUCTIONSITE:
-				return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
-			case Map_Object_Type::MILITARYSITE:
-				return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
-			case Map_Object_Type::WAREHOUSE:
-				return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
-			case Map_Object_Type::TRAININGSITE:
-				return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
+			case MapObjectType::CONSTRUCTIONSITE:
+				return CAST_TO_LUA(ConstructionSiteDescr, L_ConstructionSiteDescription);
+			case MapObjectType::PRODUCTIONSITE:
+				return CAST_TO_LUA(ProductionSiteDescr, L_ProductionSiteDescription);
+			case MapObjectType::MILITARYSITE:
+				return CAST_TO_LUA(MilitarySiteDescr, L_MilitarySiteDescription);
+			case MapObjectType::WAREHOUSE:
+				return CAST_TO_LUA(WarehouseDescr, L_WarehouseDescription);
+			case MapObjectType::TRAININGSITE:
+				return CAST_TO_LUA(TrainingSiteDescr, L_TrainingSiteDescription);
 			default:
-				return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
+				return CAST_TO_LUA(BuildingDescr, L_BuildingDescription);
 		}
 	}
 	else {
 		switch (descr->type()) {
-			case Map_Object_Type::WARE:
+			case MapObjectType::WARE:
 				return CAST_TO_LUA(WareDescr, L_WareDescription);
-			case Map_Object_Type::WORKER:
-				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
-			case Map_Object_Type::CARRIER:
-				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
-			case Map_Object_Type::SOLDIER:
-				return CAST_TO_LUA(Worker_Descr, L_WorkerDescription);
+			case MapObjectType::WORKER:
+				return CAST_TO_LUA(WorkerDescr, L_WorkerDescription);
+			case MapObjectType::CARRIER:
+				return CAST_TO_LUA(WorkerDescr, L_WorkerDescription);
+			case MapObjectType::SOLDIER:
+				return CAST_TO_LUA(WorkerDescr, L_WorkerDescription);
 			default:
-				return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
+				return CAST_TO_LUA(MapObjectDescr, L_MapObjectDescription);
 		}
 	}
 }
@@ -584,47 +584,47 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Map_Object_Descr* const
  */
 #define CAST_TO_LUA(k) to_lua<L_ ##k> \
 	(L, new L_ ##k(*static_cast<k *>(mo)))
-int upcasted_map_object_to_lua(lua_State * L, Map_Object * mo) {
+int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 	if (!mo)
 		return 0;
 
 	switch (mo->descr().type()) {
-	case Map_Object_Type::CRITTER:
+	case MapObjectType::CRITTER:
 		return CAST_TO_LUA(Bob);
-	case Map_Object_Type::SHIP:
+	case MapObjectType::SHIP:
 		return CAST_TO_LUA(Ship);
-	case Map_Object_Type::WORKER:
+	case MapObjectType::WORKER:
 		return CAST_TO_LUA(Worker);
-	case Map_Object_Type::CARRIER:
+	case MapObjectType::CARRIER:
 		// TODO(sirver): not yet implemented
 		return CAST_TO_LUA(Worker);
-	case Map_Object_Type::SOLDIER:
+	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Soldier);
 
-	case Map_Object_Type::IMMOVABLE:
+	case MapObjectType::IMMOVABLE:
 		return CAST_TO_LUA(BaseImmovable);
 
-	case Map_Object_Type::FLAG:
+	case MapObjectType::FLAG:
 		return CAST_TO_LUA(Flag);
-	case Map_Object_Type::ROAD:
+	case MapObjectType::ROAD:
 		return CAST_TO_LUA(Road);
-	case Map_Object_Type::PORTDOCK:
+	case MapObjectType::PORTDOCK:
 		return CAST_TO_LUA(PortDock);
 
-	case Map_Object_Type::BUILDING:
+	case MapObjectType::BUILDING:
 		return CAST_TO_LUA(Building);
-	case Map_Object_Type::CONSTRUCTIONSITE:
+	case MapObjectType::CONSTRUCTIONSITE:
 		return CAST_TO_LUA(ConstructionSite);
-	case Map_Object_Type::DISMANTLESITE:
+	case MapObjectType::DISMANTLESITE:
 		// TODO(sirver): not yet implemented.
 		return CAST_TO_LUA(Building);
-	case Map_Object_Type::WAREHOUSE:
+	case MapObjectType::WAREHOUSE:
 		return CAST_TO_LUA(Warehouse);
-	case Map_Object_Type::PRODUCTIONSITE:
+	case MapObjectType::PRODUCTIONSITE:
 		return CAST_TO_LUA(ProductionSite);
-	case Map_Object_Type::MILITARYSITE:
+	case MapObjectType::MILITARYSITE:
 		return CAST_TO_LUA(MilitarySite);
-	case Map_Object_Type::TRAININGSITE:
+	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
 
 	default:
@@ -1155,7 +1155,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 
 
 void L_BuildingDescription::__persist(lua_State* L) {
-	const Building_Descr* descr = get();
+	const BuildingDescr* descr = get();
 	PERS_STRING("tribe", descr->tribe().name());
 	PERS_STRING("name", descr->name());
 }
@@ -1393,7 +1393,7 @@ const PropertyType<L_ProductionSiteDescription> L_ProductionSiteDescription::Pro
 */
 int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
-	const ProductionSite_Descr * descr = get();
+	const ProductionSiteDescr * descr = get();
 
 	lua_newtable(L);
 	int index = 1;
@@ -1412,7 +1412,7 @@ int L_ProductionSiteDescription::get_inputs(lua_State * L) {
 */
 int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
-	const ProductionSite_Descr * descr = get();
+	const ProductionSiteDescr * descr = get();
 
 	lua_newtable(L);
 	int index = 1;
@@ -1432,7 +1432,7 @@ int L_ProductionSiteDescription::get_output_ware_types(lua_State * L) {
 */
 int L_ProductionSiteDescription::get_output_worker_types(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
-	const ProductionSite_Descr * descr = get();
+	const ProductionSiteDescr * descr = get();
 
 	lua_newtable(L);
 	int index = 1;
@@ -1453,7 +1453,7 @@ int L_ProductionSiteDescription::get_output_worker_types(lua_State * L) {
 */
 int L_ProductionSiteDescription::get_working_positions(lua_State * L) {
 	const Tribe_Descr& tribe = get()->tribe();
-	const ProductionSite_Descr * descr = get();
+	const ProductionSiteDescr * descr = get();
 
 	lua_newtable(L);
 	int index = 1;
@@ -1506,7 +1506,7 @@ const PropertyType<L_MilitarySiteDescription> L_MilitarySiteDescription::Propert
 		(RO) The number of health healed per second by the militarysite
 */
 int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
-	const MilitarySite_Descr * descr = get();
+	const MilitarySiteDescr * descr = get();
 	lua_pushinteger(L, descr->get_heal_per_second());
 	return 1;
 }
@@ -1517,7 +1517,7 @@ int L_MilitarySiteDescription::get_heal_per_second(lua_State * L) {
 		(RO) The number of soldiers that can be garrisoned at the militarysite
 */
 int L_MilitarySiteDescription::get_max_number_of_soldiers(lua_State * L) {
-	const MilitarySite_Descr * descr = get();
+	const MilitarySiteDescr * descr = get();
 	lua_pushinteger(L, descr->get_max_number_of_soldiers());
 	return 1;
 }
@@ -1562,7 +1562,7 @@ const PropertyType<L_TrainingSiteDescription> L_TrainingSiteDescription::Propert
 		(RO) The number of attack points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
-	const TrainingSite_Descr* descr = get();
+	const TrainingSiteDescr* descr = get();
 	if (descr->get_train_attack())
 		lua_pushinteger(L, descr->get_max_level(atrAttack));
 	else
@@ -1576,7 +1576,7 @@ int L_TrainingSiteDescription::get_max_attack(lua_State * L) {
 		(RO) The number of defense points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
-	const TrainingSite_Descr* descr = get();
+	const TrainingSiteDescr* descr = get();
 	if (descr->get_train_defense())
 		lua_pushinteger(L, descr->get_max_level(atrDefense));
 	else
@@ -1591,7 +1591,7 @@ int L_TrainingSiteDescription::get_max_defense(lua_State * L) {
 		(RO) The number of evade points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
-	const TrainingSite_Descr * descr = get();
+	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_evade())
 		lua_pushinteger(L, descr->get_max_level(atrEvade));
 	else lua_pushnil(L);
@@ -1605,7 +1605,7 @@ int L_TrainingSiteDescription::get_max_evade(lua_State * L) {
 		(RO) The number of health points that a soldier can train
 */
 int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
-	const TrainingSite_Descr * descr = get();
+	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_max_level(atrHP));
 	else lua_pushnil(L);
@@ -1619,7 +1619,7 @@ int L_TrainingSiteDescription::get_max_hp(lua_State * L) {
 		(RO) The number of soldiers that can be garrisoned at the trainingsite
 */
 int L_TrainingSiteDescription::get_max_number_of_soldiers(lua_State * L) {
-	const TrainingSite_Descr * descr = get();
+	const TrainingSiteDescr * descr = get();
 	lua_pushinteger(L, descr->get_max_number_of_soldiers());
 	return 1;
 }
@@ -1631,7 +1631,7 @@ int L_TrainingSiteDescription::get_max_number_of_soldiers(lua_State * L) {
 		(RO) The number of attack points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_attack(lua_State * L) {
-	const TrainingSite_Descr * descr = get();
+	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_attack())
 		lua_pushinteger(L, descr->get_min_level(atrAttack));
 	else lua_pushnil(L);
@@ -1644,7 +1644,7 @@ int L_TrainingSiteDescription::get_min_attack(lua_State * L) {
 		(RO) The number of defense points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
-	const TrainingSite_Descr * descr = get();
+	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_defense())
 		lua_pushinteger(L, descr->get_min_level(atrDefense));
 	else lua_pushnil(L);
@@ -1658,7 +1658,7 @@ int L_TrainingSiteDescription::get_min_defense(lua_State * L) {
 		(RO) The number of evade points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
-	const TrainingSite_Descr * descr = get();
+	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_evade())
 		lua_pushinteger(L, descr->get_min_level(atrEvade));
 	else lua_pushnil(L);
@@ -1672,7 +1672,7 @@ int L_TrainingSiteDescription::get_min_evade(lua_State * L) {
 		(RO) The number of health points that a soldier starts training with
 */
 int L_TrainingSiteDescription::get_min_hp(lua_State * L) {
-	const TrainingSite_Descr * descr = get();
+	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_min_level(atrHP));
 	else lua_pushnil(L);
@@ -1715,7 +1715,7 @@ const PropertyType<L_WarehouseDescription> L_WarehouseDescription::Properties[] 
 		(RO) The number of health healed per second by the warehouse
 */
 int L_WarehouseDescription::get_heal_per_second(lua_State * L) {
-	const Warehouse_Descr * descr = get();
+	const WarehouseDescr * descr = get();
 	lua_pushinteger(L, descr->get_heal_per_second());
 	return 1;
 }
@@ -1785,9 +1785,9 @@ int L_WareDescription::get_consumers(lua_State * L) {
 
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
 
-		const Building_Descr & descr = *tribe.get_building_descr(i);
+		const BuildingDescr & descr = *tribe.get_building_descr(i);
 
-		if (upcast(ProductionSite_Descr const, de, &descr)) {
+		if (upcast(ProductionSiteDescr const, de, &descr)) {
 			// inputs() returns type WareAmount = std::pair<Ware_Index, uint32_t>
 			for (auto ware_amount : de->inputs()) {
 				if (std::string(get()->name()) ==
@@ -1834,9 +1834,9 @@ int L_WareDescription::get_producers(lua_State * L) {
 
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
 
-		const Building_Descr & descr = *tribe.get_building_descr(i);
+		const BuildingDescr & descr = *tribe.get_building_descr(i);
 
-		if (upcast(ProductionSite_Descr const, de, &descr)) {
+		if (upcast(ProductionSiteDescr const, de, &descr)) {
 			for (auto ware_index : de->output_ware_types()) {
 				if (std::string(get()->name()) ==
 					std::string(tribe.get_ware_descr(ware_index)->name())) {
@@ -1877,7 +1877,7 @@ const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
 
 
 void L_WorkerDescription::__persist(lua_State* L) {
-	const Worker_Descr * descr = get();
+	const WorkerDescr * descr = get();
 	PERS_STRING("tribe", descr->tribe().name());
 	PERS_STRING("name", descr->name());
 }
@@ -2003,17 +2003,16 @@ const MethodType<L_MapObject> L_MapObject::Methods[] = {
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, __hash),
 	PROP_RO(L_MapObject, descr),
-	PROP_RO(L_MapObject, name),
 	PROP_RO(L_MapObject, serial),
 	{nullptr, nullptr, nullptr},
 };
 
 void L_MapObject::__persist(lua_State * L) {
-	Map_Map_Object_Saver & mos = *get_mos(L);
+	MapMapObjectSaver & mos = *get_mos(L);
 	Game & game = get_game(L);
 
 	uint32_t idx = 0;
-	if (Map_Object* obj = m_ptr.get(game))
+	if (MapObject* obj = m_ptr.get(game))
 		idx = mos.get_object_file_index(*obj);
 
 	PERS_UINT32("file_index", idx);
@@ -2025,8 +2024,8 @@ void L_MapObject::__unpersist(lua_State* L) {
 	if (!idx)
 		m_ptr = nullptr;
 	else {
-		Map_Map_Object_Loader& mol = *get_mol(L);
-		m_ptr = &mol.get<Map_Object>(idx);
+		MapMapObjectLoader& mol = *get_mol(L);
+		m_ptr = &mol.get<MapObject>(idx);
 	}
 }
 
@@ -2054,17 +2053,6 @@ int L_MapObject::get_serial(lua_State * L) {
 }
 
 
-/* RST
-	.. attribute:: name
-
-		(RO) The internal name of this immovable. This is the same as the
-		directory name of this immovable in the tribe or world directory.
-*/
-int L_MapObject::get_name(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->descr().name().c_str());
-	return 1;
-}
-
 // use the dynamic type of BuildingDescription
 #define CAST_TO_LUA(klass, lua_klass) to_lua<lua_klass> \
 	(L, new lua_klass(static_cast<const klass *>(desc)))
@@ -2076,30 +2064,28 @@ int L_MapObject::get_name(lua_State * L) {
         (RO) The description object for this immovable, e.g. BuildingDescription.
 */
 int L_MapObject::get_descr(lua_State * L) {
-	//TODO(GunChleoc): Flag_Descr would be nice for getting the type of immovables,
-	// at the moment the type for these can be faked by using their name instead
-	const Map_Object_Descr* desc = &get(L, get_egbase(L))->descr();
+	const MapObjectDescr* desc = &get(L, get_egbase(L))->descr();
 	assert(desc != nullptr);
 
-	if (is_a(MilitarySite_Descr, desc)) {
-		return CAST_TO_LUA(MilitarySite_Descr, L_MilitarySiteDescription);
+	if (is_a(MilitarySiteDescr, desc)) {
+		return CAST_TO_LUA(MilitarySiteDescr, L_MilitarySiteDescription);
 	}
-	else if (is_a(TrainingSite_Descr, desc)) {
-		return CAST_TO_LUA(TrainingSite_Descr, L_TrainingSiteDescription);
+	else if (is_a(TrainingSiteDescr, desc)) {
+		return CAST_TO_LUA(TrainingSiteDescr, L_TrainingSiteDescription);
 	}
-	else if (is_a(ProductionSite_Descr, desc)) {
-		return CAST_TO_LUA(ProductionSite_Descr, L_ProductionSiteDescription);
+	else if (is_a(ProductionSiteDescr, desc)) {
+		return CAST_TO_LUA(ProductionSiteDescr, L_ProductionSiteDescription);
 	}
-	else if (is_a(Warehouse_Descr, desc)) {
-		return CAST_TO_LUA(Warehouse_Descr, L_WarehouseDescription);
+	else if (is_a(WarehouseDescr, desc)) {
+		return CAST_TO_LUA(WarehouseDescr, L_WarehouseDescription);
 	}
-	else if (is_a(ConstructionSite_Descr, desc)) {
-		return CAST_TO_LUA(ConstructionSite_Descr, L_ConstructionSiteDescription);
+	else if (is_a(ConstructionSiteDescr, desc)) {
+		return CAST_TO_LUA(ConstructionSiteDescr, L_ConstructionSiteDescription);
 	}
-	else if (is_a(Building_Descr, desc)) {
-		return CAST_TO_LUA(Building_Descr, L_BuildingDescription);
+	else if (is_a(BuildingDescr, desc)) {
+		return CAST_TO_LUA(BuildingDescr, L_BuildingDescription);
 	}
-	return CAST_TO_LUA(Map_Object_Descr, L_MapObjectDescription);
+	return CAST_TO_LUA(MapObjectDescr, L_MapObjectDescription);
 }
 
 #undef CAST_TO_LUA
@@ -2114,8 +2100,8 @@ int L_MapObject::__eq(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	L_MapObject * other = *get_base_user_class<L_MapObject>(L, -1);
 
-	Map_Object * me = m_get_or_zero(egbase);
-	Map_Object * you = other->m_get_or_zero(egbase);
+	MapObject * me = m_get_or_zero(egbase);
+	MapObject * you = other->m_get_or_zero(egbase);
 
 	// Both objects are destroyed: they are equal
 	if (me == you) lua_pushboolean(L, true);
@@ -2136,7 +2122,7 @@ int L_MapObject::__eq(lua_State * L) {
 */
 int L_MapObject::remove(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object* o = get(L, egbase);
+	MapObject* o = get(L, egbase);
 	if (!o)
 		return 0;
 
@@ -2153,7 +2139,7 @@ int L_MapObject::remove(lua_State * L) {
 */
 int L_MapObject::destroy(lua_State * L) {
 	Editor_Game_Base& egbase = get_egbase(L);
-	Map_Object* o = get(L, egbase);
+	MapObject* o = get(L, egbase);
 	if (!o)
 		return 0;
 
@@ -2168,7 +2154,7 @@ int L_MapObject::destroy(lua_State * L) {
 */
 int L_MapObject::has_attribute(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	Map_Object * obj = m_get_or_zero(egbase);
+	MapObject * obj = m_get_or_zero(egbase);
 	if (!obj) {
 		lua_pushboolean(L, false);
 		return 1;
@@ -2176,7 +2162,7 @@ int L_MapObject::has_attribute(lua_State * L) {
 
 	// Check if object has the attribute
 	std::string attrib = luaL_checkstring(L, 2);
-	if (obj->has_attribute(Map_Object_Descr::get_attribute_id(attrib)))
+	if (obj->has_attribute(MapObjectDescr::get_attribute_id(attrib)))
 		lua_pushboolean(L, true);
 	else
 		lua_pushboolean(L, false);
@@ -2188,13 +2174,13 @@ int L_MapObject::has_attribute(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Map_Object* L_MapObject::get(lua_State* L, Editor_Game_Base& egbase, std::string name) {
-	Map_Object* o = m_get_or_zero(egbase);
+MapObject* L_MapObject::get(lua_State* L, Editor_Game_Base& egbase, std::string name) {
+	MapObject* o = m_get_or_zero(egbase);
 	if (!o)
 		report_error(L, "%s no longer exists!", name.c_str());
 	return o;
 }
-Map_Object* L_MapObject::m_get_or_zero(Editor_Game_Base& egbase) {
+MapObject* L_MapObject::m_get_or_zero(Editor_Game_Base& egbase) {
 	return m_ptr.get(egbase);
 }
 
@@ -2214,7 +2200,6 @@ const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
 };
 const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, size),
-	PROP_RO(L_BaseImmovable, name),
 	PROP_RO(L_BaseImmovable, fields),
 	{nullptr, nullptr, nullptr},
 };
@@ -2586,7 +2571,7 @@ int L_Road::set_workers(lua_State* L) {
  */
 
 int L_Road::create_new_worker
-	(PlayerImmovable & pi, Editor_Game_Base & egbase, const Worker_Descr * wdes)
+	(PlayerImmovable & pi, Editor_Game_Base & egbase, const WorkerDescr * wdes)
 {
 	Road & r = static_cast<Road &>(pi);
 
@@ -3005,7 +2990,7 @@ int L_ProductionSite::set_workers(lua_State* L) {
  */
 
 int L_ProductionSite::create_new_worker
-	(PlayerImmovable & pi, Editor_Game_Base & egbase, const Worker_Descr * wdes)
+	(PlayerImmovable & pi, Editor_Game_Base & egbase, const WorkerDescr * wdes)
 {
 	ProductionSite & ps = static_cast<ProductionSite &>(pi);
 	return ps.warp_worker(egbase, *wdes);

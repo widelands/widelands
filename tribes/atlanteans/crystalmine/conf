@@ -3,6 +3,10 @@ output=diamond
 output=quartz
 output=stone
 
+[aihints]
+mines=granite
+prohibited_till=600
+
 [buildcost]
 log=7
 planks=4
@@ -14,10 +18,6 @@ planks=2
 
 [working positions]
 miner=3
-
-[aihints]
-mines=granite
-prohibited_till=600
 
 [inputs]
 bread=10
@@ -31,8 +31,7 @@ mine_diamond=_Mine diamond
 work=_Work
 
 [mine_stone]
-return=skipped unless economy needs stone or not economy needs bread
-return=skipped unless economy needs stone or not economy needs smoked_fish
+return=skipped unless economy needs stone or economy needs quartz or economy needs diamond
 sleep=45000
 consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
@@ -49,8 +48,7 @@ mine=granite 4 100 5 2
 produce=quartz
 
 [mine_quartz]
-return=skipped unless economy needs quartz or not economy needs bread
-return=skipped unless economy needs quartz or not economy needs smoked_fish
+return=skipped unless economy needs stone or economy needs quartz or economy needs diamond
 sleep=45000
 consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
@@ -64,8 +62,7 @@ mine=granite 4 100 5 2
 produce=quartz:2
 
 [mine_diamond]
-return=skipped unless economy needs diamond or not economy needs bread
-return=skipped unless economy needs diamond or not economy needs smoked_fish
+return=skipped unless economy needs stone or economy needs quartz or economy needs diamond
 sleep=45000
 consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
@@ -85,7 +82,7 @@ call=mine_diamond
 return=skipped
 
 [out_of_resource_notification]
-title=_Main Crystal Vein Exhausted.
+title=_Main Crystal Vein Exhausted
 message=_This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it.
 
 [idle]

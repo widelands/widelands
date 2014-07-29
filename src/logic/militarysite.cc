@@ -40,15 +40,15 @@
 
 namespace Widelands {
 
-MilitarySite_Descr::MilitarySite_Descr
+MilitarySiteDescr::MilitarySiteDescr
 	(char        const * const _name,
 	 char        const * const _descname,
 	 const std::string & directory, Profile & prof,  Section & global_s,
 	 const Tribe_Descr & _tribe,
 	 const World& world)
 	:
-	ProductionSite_Descr
-		(Map_Object_Type::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
+	ProductionSiteDescr
+		(MapObjectType::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
 	m_heal_per_second    (0)
@@ -72,7 +72,7 @@ MilitarySite_Descr::MilitarySite_Descr
 Create a new building of this type
 ===============
 */
-Building & MilitarySite_Descr::create_object() const {
+Building & MilitarySiteDescr::create_object() const {
 	return *new MilitarySite(*this);
 }
 
@@ -85,7 +85,7 @@ class MilitarySite
 =============================
 */
 
-MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
+MilitarySite::MilitarySite(const MilitarySiteDescr & ms_descr) :
 ProductionSite(ms_descr),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
@@ -624,7 +624,7 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 
 		bool stayhome;
 		if
-			(Map_Object * const enemy
+			(MapObject * const enemy
 			 =
 			 popSoldierJob(soldier, &stayhome))
 		{
@@ -866,7 +866,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
 		for (Building_Index former_idx : m_old_buildings) {
-			const Building_Descr * old_descr = descr().tribe().get_building_descr(former_idx);
+			const BuildingDescr * old_descr = descr().tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
 			std::string::size_type const dot = bldname.rfind('.');
@@ -1004,14 +1004,14 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
  * \return the enemy, if any, that the given soldier was scheduled
  * to attack, and remove the job.
  */
-Map_Object * MilitarySite::popSoldierJob
+MapObject * MilitarySite::popSoldierJob
 	(Soldier * const soldier, bool * const stayhome)
 {
 	for (std::vector<SoldierJob>::iterator job_iter = m_soldierjobs.begin();
 		 job_iter != m_soldierjobs.end(); ++job_iter)
 	{
 		if (job_iter->soldier == soldier) {
-			Map_Object * const enemy = job_iter->enemy.get(owner().egbase());
+			MapObject * const enemy = job_iter->enemy.get(owner().egbase());
 			if (stayhome)
 				*stayhome = job_iter->stayhome;
 			m_soldierjobs.erase(job_iter);

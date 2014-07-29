@@ -10,6 +10,9 @@ attack_string=_Your tower is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the tower.
 defeated_you_string=_Your soldiers defeated the enemy at the tower.
 
+[aihints]
+mountain_conqueror=true
+prohibited_till=300
 
 [buildcost]
 log=2
@@ -29,7 +32,3 @@ hotspot=53 81
 [build]
 pics=tower_b_??.png
 hotspot=53 81
-
-[aihints]
-mountain_conqueror=true
-prohibited_till=300
