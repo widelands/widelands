@@ -921,14 +921,10 @@ void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t m
 {
 	if (descr().out_of_resource_title().empty())
 	{
-		snprintf
-			(m_result_buffer, sizeof(m_result_buffer),
-			 _("Can’t find any more resources!"));
+		set_result_string(_("Can’t find any more resources!"));
 	}
 	else {
-		snprintf
-			(m_result_buffer, sizeof(m_result_buffer),
-			 descr().out_of_resource_title().c_str());
+		set_result_string(descr().out_of_resource_title().c_str());
 
 		if(m_out_of_resource_delay_counter >=
 			descr().out_of_resource_delay_attempts())	{

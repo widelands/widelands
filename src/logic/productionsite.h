@@ -157,6 +157,10 @@ public:
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 	char const * result_string() const {return m_result_buffer;}
 
+	void set_result_string(char const * text) {
+		snprintf(m_result_buffer, sizeof(m_result_buffer), "%s", text);
+	}
+
 	WaresQueue & waresqueue(Ware_Index) override;
 
 	void init(Editor_Game_Base &) override;

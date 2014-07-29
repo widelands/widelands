@@ -595,10 +595,7 @@ void ProductionProgram::ActReturn::execute
 									% condition_string)
 								  .str();
 		}
-
-		snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 "%s", result_string.c_str());
+		ps.set_result_string(result_string.c_str());
 	}
 	return ps.program_end(game, m_result);
 }
@@ -819,7 +816,7 @@ void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) 
 			if (game.map().get_port_spaces().size() > 1) // we need at least two port build spaces
 				return ps.program_step(game, 0);
 			else {
-				snprintf(ps.m_result_buffer, sizeof(ps.m_result_buffer), "No use for ships on this map!");
+				ps.set_result_string("No use for ships on this map!");
 				return ps.program_end(game, None);
 			}
 		}
@@ -974,9 +971,7 @@ void ProductionProgram::ActConsume::execute
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
 
-		snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 "%s", result_string.c_str());
+		ps.set_result_string(result_string.c_str());
 		return ps.program_end(game, Failed);
 	} else { //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < nr_warequeues; ++i)
@@ -1077,9 +1072,7 @@ void ProductionProgram::ActProduce::execute
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
 	const std::string result_string = str(format(_("Produced %s")) % ware_list);
-	snprintf
-		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-		 "%s", result_string.c_str());
+	ps.set_result_string(result_string.c_str());
 }
 
 bool ProductionProgram::ActProduce::get_building_work
@@ -1174,9 +1167,7 @@ void ProductionProgram::ActRecruit::execute
 
 	/** TRANSLATORS: %s is a list of workers */
 	std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
-	snprintf
-		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-		 "%s", result_string.c_str());
+	ps.set_result_string(result_string.c_str());
 }
 
 bool ProductionProgram::ActRecruit::get_building_work
@@ -1399,9 +1390,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
 	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
 	if (soldiers.empty()) {
-		snprintf
-			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-			 _("No soldier to train!"));
+		ps.set_result_string(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);
 	}
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
@@ -1409,9 +1398,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
 		if (it == soldiers_end) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier found for this training level!"));
+			ps.set_result_string(_("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
@@ -1496,9 +1483,7 @@ void ProductionProgram::ActTrain::execute
 
 	for (;; ++it) {
 		if (it == soldiers_end) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier found for this training level!"));
+			ps.set_result_string(_("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
