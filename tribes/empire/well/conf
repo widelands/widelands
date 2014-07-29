@@ -1,6 +1,10 @@
 size=small
 output=water
 
+[aihints]
+build_material=false
+mines_water=true
+
 [buildcost]
 log=2
 stone=1
@@ -9,10 +13,6 @@ marble=1
 [return_on_dismantle]
 log=1
 marble=1
-
-[aihints]
-build_material=false
-mines_water=true
 
 [working positions]
 carrier=1

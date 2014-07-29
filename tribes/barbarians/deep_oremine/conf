@@ -4,6 +4,10 @@ enhanced_building=yes
 output=ironore
 enhancement=deeper_oremine
 
+[aihints]
+mines=iron
+mines_percent=60
+
 [enhancement_cost]
 log=4
 raw_stone=2
@@ -16,10 +20,6 @@ raw_stone=1
 chief-miner=1
 miner=1
 
-[aihints]
-mines=iron
-mines_percent=60
-
 [inputs]
 snack=6
 
@@ -30,6 +30,7 @@ work=_mining
 
 [work]
 sleep=43000
+return=skipped unless economy needs ironore
 consume=snack
 animate=working 18000
 mine=iron 2 66 5 17
@@ -42,12 +43,12 @@ produce=ironore:1
 title=_Main Iron Vein Exhausted
 message=_This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
 
-[build]
-pics=deep_oremine_b_??.png
-hotspot=21 37
-
 [idle]
 pics=deep_oremine_i_??.png
+hotspot=21 37
+
+[build]
+pics=deep_oremine_b_??.png
 hotspot=21 37
 
 [working]

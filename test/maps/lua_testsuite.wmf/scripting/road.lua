@@ -45,7 +45,7 @@ function road_tests:test_type()
    assert_equal("road", self.r.descr.type_name)
 end
 function road_tests:test_name()
-   assert_equal("road", self.r.name)
+   assert_equal("road", self.r.descr.name)
 end
 
 function road_tests:test_deletion_of_flag()

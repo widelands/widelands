@@ -57,6 +57,11 @@ consume=pittabread:2 fish,meat strongbeer
 animate=working 15000
 train=soldier evade 1 2
 
+[idle]
+pics=battlearena_i_??.png  # ???
+hotspot=110 72
+fps=10
+
 [build]
 pics=battlearena_b_??.png
 hotspot=110 72
@@ -64,11 +69,6 @@ hotspot=110 72
 [unoccupied]
 pics=battlearena_u_??.png
 hotspot=110 72
-
-[idle]
-pics=battlearena_i_??.png  # ???
-hotspot=110 72
-fps=10
 
 [working]
 pics=battlearena_w_??.png  # ???

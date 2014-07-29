@@ -1,7 +1,7 @@
 help=_This yarn, made of gold by the gold spinning mill, is used for weaving the exclusive golden tabard in the weaving mill.
 
-preciousness=2
 default_target_quantity=5
+preciousness=2
 
 # Goldyarn
 [idle]

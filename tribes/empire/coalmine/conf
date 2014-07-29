@@ -2,6 +2,10 @@ size=mine
 output=coal
 enhancement=deep_coalmine
 
+[aihints]
+mines=coal
+mines_percent=50
+
 [buildcost]
 log=4
 wood=2
@@ -13,10 +17,6 @@ wood=1
 [working positions]
 miner=1
 
-[aihints]
-mines=coal
-mines_percent=50
-
 [inputs]
 ration=6
 beer=6
@@ -27,8 +27,7 @@ work=_mining
 
 [work]
 sleep=45000
-return=skipped unless economy needs coal or not economy needs ration
-return=skipped unless economy needs coal or not economy needs beer
+return=skipped unless economy needs coal
 consume=beer ration
 animate=working 20000
 mine=coal 2 50 5 17

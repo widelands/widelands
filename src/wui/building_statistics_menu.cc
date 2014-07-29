@@ -344,8 +344,8 @@ bool Building_Statistics_Menu::compare_building_size
 	const Widelands::Tribe_Descr & tribe = iplayer().player().tribe();
 	Widelands::Building_Index a = Widelands::Building_Index(m_table[rowa]);
 	Widelands::Building_Index b = Widelands::Building_Index(m_table[rowb]);
-	const Widelands::Building_Descr * descra = tribe.get_building_descr(a);
-	const Widelands::Building_Descr * descrb = tribe.get_building_descr(b);
+	const Widelands::BuildingDescr * descra = tribe.get_building_descr(a);
+	const Widelands::BuildingDescr * descrb = tribe.get_building_descr(b);
 
 	if (!descra || !descrb)
 		return false; // shouldn't happen, but be defensive
@@ -378,7 +378,7 @@ void Building_Statistics_Menu::update() {
 		 i < nr_buildings;
 		 ++i)
 	{
-		const Widelands::Building_Descr & building =
+		const Widelands::BuildingDescr & building =
 			*tribe.get_building_descr(i);
 		if
 			(!(building.is_buildable()
@@ -410,7 +410,7 @@ void Building_Statistics_Menu::update() {
 		uint32_t nr_owned   = 0;
 		uint32_t nr_build   = 0;
 		uint32_t total_prod = 0;
-		upcast(Widelands::ProductionSite_Descr const, productionsite, &building);
+		upcast(Widelands::ProductionSiteDescr const, productionsite, &building);
 		for (uint32_t l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite)
 				++nr_build;

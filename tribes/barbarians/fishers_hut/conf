@@ -1,6 +1,10 @@
 size=small
 output=fish
 
+[aihints]
+build_material=false
+needs_water=true
+
 [buildcost]
 log=4
 
@@ -9,10 +13,6 @@ log=2
 
 [working positions]
 fisher=1
-
-[aihints]
-build_material=false
-needs_water=true
 
 [programs]
 # TRANSLATORS: "Completed/Skipped/Did not start fishing because ...

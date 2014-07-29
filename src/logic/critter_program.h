@@ -17,17 +17,17 @@
  *
  */
 
-#ifndef WL_LOGIC_CRITTER_BOB_PROGRAM_H
-#define WL_LOGIC_CRITTER_BOB_PROGRAM_H
+#ifndef WL_LOGIC_CRITTER_PROGRAM_H
+#define WL_LOGIC_CRITTER_PROGRAM_H
 
 #include "logic/bob.h"
 
 namespace Widelands {
 
-struct Critter_BobAction {
+struct CritterAction {
 	typedef
-		bool (Critter_Bob::*execute_t)
-			(Game &, Bob::State &, const Critter_BobAction &);
+		bool (Critter::*execute_t)
+			(Game &, Bob::State &, const CritterAction &);
 
 	enum {
 		walkObject, //  walk to objvar1
@@ -42,13 +42,13 @@ struct Critter_BobAction {
 	std::vector<std::string> sparamv;
 };
 
-struct Critter_BobProgram : public BobProgramBase {
-	Critter_BobProgram(const std::string & name) : m_name(name) {}
-	virtual ~Critter_BobProgram() {}
+struct CritterProgram : public BobProgramBase {
+	CritterProgram(const std::string & name) : m_name(name) {}
+	virtual ~CritterProgram() {}
 
 	std::string get_name() const override {return m_name;}
 	int32_t get_size() const {return m_actions.size();}
-	const Critter_BobAction & operator[] (size_t const idx) const {
+	const CritterAction & operator[] (size_t const idx) const {
 		assert(idx < m_actions.size());
 		return m_actions[idx];
 	}
@@ -57,9 +57,9 @@ struct Critter_BobProgram : public BobProgramBase {
 
 private:
 	std::string                    m_name;
-	std::vector<Critter_BobAction> m_actions;
+	std::vector<CritterAction> m_actions;
 };
 
 }
 
-#endif  // end of include guard: WL_LOGIC_CRITTER_BOB_PROGRAM_H
+#endif  // end of include guard: WL_LOGIC_CRITTER_PROGRAM_H

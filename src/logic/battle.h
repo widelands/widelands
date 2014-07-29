@@ -24,16 +24,16 @@
 namespace Widelands {
 class Soldier;
 
-class Battle_Descr : public Map_Object_Descr {
+class BattleDescr : public MapObjectDescr {
 public:
-	Battle_Descr(char const* const _name, char const* const _descname)
-	   : Map_Object_Descr(Map_Object_Type::BATTLE, _name, _descname) {
+	BattleDescr(char const* const _name, char const* const _descname)
+		: MapObjectDescr(MapObjectType::BATTLE, _name, _descname) {
 	}
-	~Battle_Descr() override {
+	~BattleDescr() override {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Battle_Descr);
+	DISALLOW_COPY_AND_ASSIGN(BattleDescr);
 };
 
 /**
@@ -44,20 +44,20 @@ private:
  * Soldiers defined, the battle object must be destroyed as soon as there is no
  * other Soldier to battle anymore.
  */
-class Battle : public Map_Object {
+class Battle : public MapObject {
 public:
-	const Battle_Descr& descr() const;
+	const BattleDescr& descr() const;
 
 	Battle(); //  for loading an existing battle from a savegame
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
-	// Implements Map_Object.
+	// Implements MapObject.
 	void init(Editor_Game_Base &) override;
 	void cleanup(Editor_Game_Base &) override;
 	bool has_new_save_support() override {return true;}
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 
 	// Cancel this battle immediately and schedule destruction.
 	void cancel(Game &, Soldier &);
@@ -79,7 +79,7 @@ public:
 	void getBattleWork(Game &, Soldier &);
 
 private:
-	struct Loader : public Map_Object::Loader {
+	struct Loader : public MapObject::Loader {
 		virtual void load(FileRead &, uint8_t version);
 		void load_pointers() override;
 

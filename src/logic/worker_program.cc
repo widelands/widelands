@@ -58,7 +58,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
  * Parse a program
  */
 void WorkerProgram::parse
-	(Worker_Descr * descr, Parser * parser, char const * const name)
+	(WorkerDescr * descr, Parser * parser, char const * const name)
 {
 	Section & program_s = parser->prof->get_safe_section(name);
 
@@ -109,7 +109,7 @@ void WorkerProgram::parse
  * iparam1 = ware index
  */
 void WorkerProgram::parse_createware
-	(Worker_Descr                   * descr,
+	(WorkerDescr                   * descr,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -131,7 +131,7 @@ void WorkerProgram::parse_createware
  * sparam1 = resource
  */
 void WorkerProgram::parse_mine
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -158,7 +158,7 @@ void WorkerProgram::parse_mine
  * sparam1 = resource
  */
 void WorkerProgram::parse_breed
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -185,7 +185,7 @@ void WorkerProgram::parse_breed
  * sparamv = possible bobs
  */
 void WorkerProgram::parse_setdescription
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 *,
 	 Parser                         *,
 	 const std::vector<std::string> &)
@@ -202,7 +202,7 @@ void WorkerProgram::parse_setdescription
  * sparamv = possible bobs
  */
 void WorkerProgram::parse_setbobdescription
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -238,7 +238,7 @@ void WorkerProgram::parse_setbobdescription
  * sparam1 = type
  */
 void WorkerProgram::parse_findobject
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -264,7 +264,7 @@ void WorkerProgram::parse_findobject
 				throw wexception("Bad findobject radius '%s'", value.c_str());
 
 		} else if (key == "attrib") {
-			act->iparam2 = Map_Object_Descr::get_attribute_id(value);
+			act->iparam2 = MapObjectDescr::get_attribute_id(value);
 		} else if (key == "type") {
 			act->sparam1 = value;
 		} else
@@ -317,7 +317,7 @@ void WorkerProgram::parse_findobject
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -377,7 +377,7 @@ void WorkerProgram::parse_findspace
 		} else if (key == "space") {
 			act->iparam3 = 1;
 		} else if (key == "avoid") {
-			act->iparam5 = Map_Object_Descr::get_attribute_id(value);
+			act->iparam5 = MapObjectDescr::get_attribute_id(value);
 		} else
 			throw wexception
 				("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
@@ -402,7 +402,7 @@ void WorkerProgram::parse_findspace
  * iparam1 = walkXXX
  */
 void WorkerProgram::parse_walk
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -432,7 +432,7 @@ void WorkerProgram::parse_walk
  *
  */
 void WorkerProgram::parse_animation
-	(Worker_Descr                   * descr,
+	(WorkerDescr                   * descr,
 	 Worker::Action                 * act,
 	 Parser                         * parser,
 	 const std::vector<std::string> & cmd)
@@ -468,7 +468,7 @@ void WorkerProgram::parse_animation
  * iparam1 = 0: don't drop ware on flag, 1: do drop ware on flag
  */
 void WorkerProgram::parse_return
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> &)
@@ -486,7 +486,7 @@ void WorkerProgram::parse_return
  * sparam1 = object command name
  */
 void WorkerProgram::parse_object
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -509,7 +509,7 @@ void WorkerProgram::parse_object
  * iparam1  one of plantXXX
  */
 void WorkerProgram::parse_plant
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -541,7 +541,7 @@ void WorkerProgram::parse_plant
  * type must have been selected by a previous command (i.e. setbobdescription).
  */
 void WorkerProgram::parse_create_bob
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> &)
@@ -554,7 +554,7 @@ void WorkerProgram::parse_create_bob
  * Simply remove the currently selected object - make no fuss about it.
  */
 void WorkerProgram::parse_removeobject
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> &)
@@ -574,7 +574,7 @@ void WorkerProgram::parse_removeobject
  * sparam1 = subcommand
  */
 void WorkerProgram::parse_geologist
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -603,7 +603,7 @@ void WorkerProgram::parse_geologist
  * when possible.
  */
 void WorkerProgram::parse_geologist_find
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -623,7 +623,7 @@ void WorkerProgram::parse_geologist_find
  * iparam2 = time
  */
 void WorkerProgram::parse_scout
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)
@@ -637,7 +637,7 @@ void WorkerProgram::parse_scout
 }
 
 void WorkerProgram::parse_playFX
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         * parser,
 	 const std::vector<std::string> & cmd)
@@ -663,7 +663,7 @@ void WorkerProgram::parse_playFX
  * for construction. This is used in ship building.
  */
 void WorkerProgram::parse_construct
-	(Worker_Descr                   *,
+	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 const std::vector<std::string> & cmd)

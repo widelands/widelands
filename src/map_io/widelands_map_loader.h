@@ -32,7 +32,7 @@ class LuaInterface;
 namespace Widelands {
 
 class Editor_Game_Base;
-class Map_Map_Object_Loader;
+class MapMapObjectLoader;
 
 /// Takes ownership of the filesystem that is passed to it.
 struct WL_Map_Loader : public Map_Loader {
@@ -43,7 +43,7 @@ struct WL_Map_Loader : public Map_Loader {
 	int32_t preload_map(bool) override;
 	int32_t load_map_complete(Editor_Game_Base &, bool) override;
 
-	Map_Map_Object_Loader * get_map_object_loader() {return m_mol.get();}
+	MapMapObjectLoader * get_map_object_loader() {return m_mol.get();}
 
 	static bool is_widelands_map(const std::string & filename) {
 		return !strcasecmp(&filename.c_str()[filename.size() - 4], WLMF_SUFFIX);
@@ -57,7 +57,7 @@ struct WL_Map_Loader : public Map_Loader {
 private:
 	FileSystem* m_fs;  // not owned (owned by Map).
 	std::string m_filename;
-	std::unique_ptr<Map_Map_Object_Loader> m_mol;
+	std::unique_ptr<MapMapObjectLoader> m_mol;
 	std::string m_old_world_name;
 };
 

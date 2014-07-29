@@ -26,7 +26,7 @@ function _remove_content(old)
 
    -- salvage soldiers
    for descr, count in pairs(old:get_soldiers("all")) do
-      local sdescr = ("%i:%i:%i:%i"):format(unpack(descr))
+      local sdescr = ("%i:%i:%i:%i"):format(table.unpack(descr))
       if not soldiers[sdescr] then soldiers[sdescr] = 0 end
       soldiers[sdescr] = soldiers[sdescr] + count
    end
@@ -74,5 +74,3 @@ function hop_to_next_island(plr, island_idx)
 
    return new_hq
 end
-
-

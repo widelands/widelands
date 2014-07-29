@@ -101,7 +101,7 @@ void Map::recalc_border(const FCoords fc) {
 ===============
 Call this function whenever the field at fx/fy has changed in one of the ways:
  - height has changed
- - robust Map_Object has been added or removed
+ - robust MapObject has been added or removed
 
 This performs the steps outlined in the comment above Map::recalc_brightness()
 and recalcs the interactive player's overlay.
@@ -941,8 +941,8 @@ Some events can change the map in a way that run-time calculated attributes
 These events include:
 - change of height (e.g. by planing)
 - change of terrain (in the editor)
-- insertion of a "robust" Map_Object
-- removal of a "robust" Map_Object
+- insertion of a "robust" MapObject
+- removal of a "robust" MapObject
 
 All these events can change the passability, buildability, etc. of fields
 with a radius of two fields. This means that you must build a list of the
@@ -1082,7 +1082,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 
 	// if we are interested in the maximum theoretically available NodeCaps, this is not run
 	if (consider_mobs) {
-		//  3) General buildability check: if a "robust" Map_Object is on this node
+		//  3) General buildability check: if a "robust" MapObject is on this node
 		//  we cannot build anything on it. Exception: we can build flags on roads.
 		if (BaseImmovable * const imm = get_immovable(f))
 			if
@@ -1090,7 +1090,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 				&&
 				imm->get_size() >= BaseImmovable::SMALL)
 			{
-				// 3b) [OVERRIDE] check for "unpassable" Map_Objects
+				// 3b) [OVERRIDE] check for "unpassable" MapObjects
 				if (!imm->get_passable())
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 				return static_cast<NodeCaps>(caps);
@@ -1106,7 +1106,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 			 find_immovables(
 				Area<FCoords>(f, 1),
 				nullptr,
-				FindImmovableType(Map_Object_Type::FLAG)))
+				FindImmovableType(MapObjectType::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1140,7 +1140,7 @@ NodeCaps Map::_calc_nodecaps_pass2
 		if
 			(!(br.field->caps & BUILDCAPS_FLAG)
 			&&
-			(!br.field->get_immovable() || br.field->get_immovable()->descr().type() != Map_Object_Type::FLAG))
+			(!br.field->get_immovable() || br.field->get_immovable()->descr().type() != MapObjectType::FLAG))
 			return static_cast<NodeCaps>(caps);
 	} else {
 		if (!(_calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
@@ -1292,7 +1292,7 @@ int Map::calc_buildsize
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE)
 				continue;
-			if (avoidnature && obj->descr().type() == Map_Object_Type::IMMOVABLE)
+			if (avoidnature && obj->descr().type() == MapObjectType::IMMOVABLE)
 				objsize += 1;
 			if (objsize + buildsize > BaseImmovable::BIG)
 				buildsize = BaseImmovable::BIG - objsize + 1;
@@ -1652,9 +1652,9 @@ std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename)
 }
 
 /**
- * Finds a path from start to end for a Map_Object with the given movecaps.
+ * Finds a path from start to end for a MapObject with the given movecaps.
  *
- * The path is stored in \p path, as a series of Map_Object::WalkingDir entries.
+ * The path is stored in \p path, as a series of MapObject::WalkingDir entries.
  *
  * \param persist tells the function how hard it should try to find a path:
  * If \p persist is \c 0, the function will never give up early. Otherwise, the

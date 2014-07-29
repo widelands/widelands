@@ -82,7 +82,7 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 	case QUEUE_CMD_MESSAGESETSTATUSARCHIVED:
 		return *new Cmd_MessageSetStatusArchived  ();
 	case QUEUE_CMD_DESTROY_MAPOBJECT:
-		return *new Cmd_Destroy_Map_Object        ();
+		return *new CmdDestroyMapObject        ();
 	case QUEUE_CMD_ACT:
 		return *new Cmd_Act                       ();
 	case QUEUE_CMD_INCORPORATE:

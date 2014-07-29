@@ -80,7 +80,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ship")
 				m_bobs.add
-					(new Ship_Descr
+					(new ShipDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -94,7 +94,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
 				m_immovables.add
-					(new Immovable_Descr
+					(new ImmovableDescr
 					 	(_name, _descname, path, prof, global_s, this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -106,13 +106,13 @@ Tribe_Descr::Tribe_Descr
 		m_worker_types_without_cost.push_back(worker_idx);                                           \
 	PARSE_MAP_OBJECT_TYPES_END;
 
-			PARSE_SPECIAL_WORKER_TYPES("carrier", Carrier_Descr);
-			PARSE_SPECIAL_WORKER_TYPES("soldier", Soldier_Descr);
+			PARSE_SPECIAL_WORKER_TYPES("carrier", CarrierDescr);
+			PARSE_SPECIAL_WORKER_TYPES("soldier", SoldierDescr);
 
 #define PARSE_WORKER_TYPES(name)                                                                   \
 	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
 	auto& worker_descr =                                                                      \
-	   *new Worker_Descr(Map_Object_Type::WORKER, _name, _descname, path, prof, global_s, *this);   \
+		*new WorkerDescr(MapObjectType::WORKER, _name, _descname, path, prof, global_s, *this);   \
 	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
 	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
 		m_worker_types_without_cost.push_back(worker_idx);                                           \
@@ -122,32 +122,32 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("constructionsite")
 				m_buildings.add
-					(new ConstructionSite_Descr
+					(new ConstructionSiteDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 			safe_building_index("constructionsite"); // Check that it is defined.
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
 				m_buildings.add
-					(new DismantleSite_Descr
+					(new DismantleSiteDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 			safe_building_index("dismantlesite"); // Check that it is defined.
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
-					(new Warehouse_Descr
+					(new WarehouseDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
-				m_buildings.add(new ProductionSite_Descr(
-					Map_Object_Type::PRODUCTIONSITE, _name, _descname, path, prof, global_s, *this, world));
+				m_buildings.add(new ProductionSiteDescr(
+					MapObjectType::PRODUCTIONSITE, _name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
 				m_buildings.add
-					(new MilitarySite_Descr
+					(new MilitarySiteDescr
 					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -160,7 +160,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
 				m_buildings.add
-					(new MilitarySite_Descr
+					(new MilitarySiteDescr
 					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -171,7 +171,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("trainingsite")
 				m_buildings.add
-					(new TrainingSite_Descr
+					(new TrainingSiteDescr
 					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 

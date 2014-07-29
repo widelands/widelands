@@ -64,12 +64,12 @@ Widelands::Editor_Game_Base & get_egbase(lua_State * const L) {
 	return *g;
 }
 
-Widelands::Map_Map_Object_Loader * get_mol(lua_State * const L) {
+Widelands::MapMapObjectLoader * get_mol(lua_State * const L) {
 	lua_pushstring(L, "mol");
 	lua_gettable(L, LUA_REGISTRYINDEX);
 
-	Widelands::Map_Map_Object_Loader * mol =
-		static_cast<Widelands::Map_Map_Object_Loader *>(lua_touserdata(L, -1));
+	Widelands::MapMapObjectLoader * mol =
+		static_cast<Widelands::MapMapObjectLoader *>(lua_touserdata(L, -1));
 
 	lua_pop(L, 1); // pop this userdata
 
@@ -80,12 +80,12 @@ Widelands::Map_Map_Object_Loader * get_mol(lua_State * const L) {
 	return mol;
 }
 
-Widelands::Map_Map_Object_Saver * get_mos(lua_State * const L) {
+Widelands::MapMapObjectSaver * get_mos(lua_State * const L) {
 	lua_pushstring(L, "mos");
 	lua_gettable(L, LUA_REGISTRYINDEX);
 
-	Widelands::Map_Map_Object_Saver * mos =
-		static_cast<Widelands::Map_Map_Object_Saver *>(lua_touserdata(L, -1));
+	Widelands::MapMapObjectSaver * mos =
+		static_cast<Widelands::MapMapObjectSaver *>(lua_touserdata(L, -1));
 
 	lua_pop(L, 1); // pop this userdata
 

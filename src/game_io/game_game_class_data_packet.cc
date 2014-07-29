@@ -30,7 +30,7 @@ namespace Widelands {
 
 
 void Game_Game_Class_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
+	(FileSystem & fs, Game & game, MapMapObjectLoader *)
 {
 	try {
 		FileRead fr;
@@ -51,7 +51,7 @@ void Game_Game_Class_Data_Packet::Read
  * Write Function
  */
 void Game_Game_Class_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, MapMapObjectSaver * const)
 {
 	FileWrite fw;
 

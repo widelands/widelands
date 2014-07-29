@@ -10,13 +10,13 @@ fishing_rod=1
 1=walk coords
 2=playFX ../../../sound/fisher/fisher_throw_net 192
 3=mine fish 1
-4=animation idle 3000 # Play a fishing animation
+4=animation fishing 3000 # Play a fishing animation
 5=playFX ../../../sound/fisher/fisher_pull_net 192
 6=createware fish
 7=return
 
 [idle]
-pics=fishing_??.png
+pics=idle_??.png
 hotspot=9 39
 fps=10
 
@@ -28,4 +28,9 @@ fps=10
 [walkload]
 dirpics=walk_!!_??.png
 hotspot=10 38
+fps=10
+
+[fishing]
+pics=fishing_??.png
+hotspot=9 39
 fps=10

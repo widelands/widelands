@@ -41,7 +41,7 @@ return {
             marble = 25,
             marblecolumn = 6,
             meal = 4,
-            pick = 14,
+            pick = 8,
             ration = 12,
             saw = 2,
             scythe = 5,

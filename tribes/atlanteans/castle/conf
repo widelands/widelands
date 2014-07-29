@@ -9,6 +9,11 @@ attack_string=_Your castle is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the castle.
 defeated_you_string=_Your soldiers defeated the enemy at the castle.
 
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true
+
 [buildcost]
 planks=4
 stone=7
@@ -25,9 +30,3 @@ log=2
 [idle]
 pics=castle_i_??.png
 hotspot=91 91
-
-[aihints]
-expansion=true
-fighting=true
-mountain_conqueror=true
-

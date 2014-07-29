@@ -240,7 +240,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 	cleanup(game);
 }
 
-void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos) {
+void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapMapObjectSaver& mos) {
 	// Expedition workers
 	fw.Unsigned8(workers_.size());
 	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
@@ -262,7 +262,7 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& 
 
 void ExpeditionBootstrap::load
 	(uint32_t warehouse_packet_version, Warehouse& warehouse, FileRead& fr,
-	 Game& game, Map_Map_Object_Loader& mol)
+	 Game& game, MapMapObjectLoader& mol)
 {
 	assert(warehouse_packet_version >= 6);
 

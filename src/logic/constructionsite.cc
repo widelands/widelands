@@ -42,14 +42,14 @@
 
 namespace Widelands {
 
-ConstructionSite_Descr::ConstructionSite_Descr
+ConstructionSiteDescr::ConstructionSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
 	:
-	Building_Descr(Map_Object_Type::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
+	BuildingDescr(MapObjectType::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
 {
-	add_attribute(Map_Object::CONSTRUCTIONSITE);
+	add_attribute(MapObject::CONSTRUCTIONSITE);
 
 	{ // animation when a worker entered the site
 		Section & sec = prof.get_safe_section("idle_with_worker");
@@ -60,7 +60,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 }
 
 
-Building & ConstructionSite_Descr::create_object() const {
+Building & ConstructionSiteDescr::create_object() const {
 	return *new ConstructionSite(*this);
 }
 
@@ -74,7 +74,7 @@ IMPLEMENTATION
 */
 
 
-ConstructionSite::ConstructionSite(const ConstructionSite_Descr & cs_descr) :
+ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
 Partially_Finished_Building (cs_descr),
 m_fetchfromflag  (0),
 m_builder_idle   (false)
@@ -118,7 +118,7 @@ WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
 Set the type of building we're going to build
 ===============
 */
-void ConstructionSite::set_building(const Building_Descr & building_descr) {
+void ConstructionSite::set_building(const BuildingDescr & building_descr) {
 	Partially_Finished_Building::set_building(building_descr);
 
 	m_info.becomes = &building_descr;
@@ -137,7 +137,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	if (!m_old_buildings.empty()) {
 		// Enhancement
 		Building_Index was_index = m_old_buildings.back();
-		const Building_Descr* was_descr = descr().tribe().get_building_descr(was_index);
+		const BuildingDescr* was_descr = descr().tribe().get_building_descr(was_index);
 		m_info.was = was_descr;
 		buildcost = &m_building->enhancement_cost();
 	} else {
@@ -369,10 +369,10 @@ void ConstructionSite::draw
 	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
-	} catch (Map_Object_Descr::Animation_Nonexistent&) {
+	} catch (MapObjectDescr::Animation_Nonexistent&) {
 		try {
 			anim_idx = building().get_animation("unoccupied");
-		} catch (Map_Object_Descr::Animation_Nonexistent) {
+		} catch (MapObjectDescr::Animation_Nonexistent) {
 			anim_idx = building().get_animation("idle");
 		}
 	}
@@ -396,13 +396,13 @@ void ConstructionSite::draw
 		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (!m_old_buildings.empty()) {
 		Building_Index prev_idx = m_old_buildings.back();
-		const Building_Descr* prev_building = descr().tribe().get_building_descr(prev_idx);
+		const BuildingDescr* prev_building = descr().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		uint32_t prev_building_anim_idx;
 		try {
 			prev_building_anim_idx = prev_building->get_animation("unoccupied");
-		} catch (Map_Object_Descr::Animation_Nonexistent &) {
+		} catch (MapObjectDescr::Animation_Nonexistent &) {
 			prev_building_anim_idx = prev_building->get_animation("idle");
 		}
 		const Animation& prev_building_anim = g_gr->animations().get_animation(prev_building_anim_idx);

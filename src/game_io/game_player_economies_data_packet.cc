@@ -36,7 +36,7 @@ namespace Widelands {
 
 
 void Game_Player_Economies_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
+	(FileSystem & fs, Game & game, MapMapObjectLoader *)
 {
 	try {
 		const Map   &       map        = game.map();
@@ -95,7 +95,7 @@ void Game_Player_Economies_Data_Packet::Read
  * Write Function
  */
 void Game_Player_Economies_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, MapMapObjectSaver * const)
 {
 	FileWrite fw;
 

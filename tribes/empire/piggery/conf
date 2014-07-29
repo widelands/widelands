@@ -1,6 +1,9 @@
 size=big
 output=meat
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=2
 stone=2
@@ -10,9 +13,6 @@ marblecolumn=2
 log=1
 stone=1
 marble=1
-
-[aihints]
-build_material=false
 
 [working positions]
 pig-breeder=1
@@ -27,8 +27,7 @@ work=_raising pigs
 
 [work]
 sleep=25000
-return=skipped unless economy needs meat or not economy needs water
-return=skipped unless economy needs meat or not economy needs wheat
+return=skipped unless economy needs meat
 consume=water wheat
 playFX=../../../sound/farm/farm_animal 180
 animate=working 30000

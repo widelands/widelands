@@ -25,7 +25,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-namespace Widelands {struct Building_Descr;}
+namespace Widelands {struct BuildingDescr;}
 class Interactive_Player;
 namespace UI {
 struct Button;

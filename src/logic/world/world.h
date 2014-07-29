@@ -32,8 +32,8 @@ class EditorCategory;
 class Editor_Game_Base;
 class ResourceDescription;
 class TerrainDescription;
-struct Critter_Bob_Descr;
-struct Immovable_Descr;
+struct CritterDescr;
+struct ImmovableDescr;
 
 /// This is the in memory descriptions of the world and provides access to
 /// terrains, immovables and resources.
@@ -53,10 +53,10 @@ public:
 	BobDescr const* get_bob_descr(const std::string& name) const;
 	int32_t get_nr_bobs() const;
 
-	const DescriptionMaintainer<Immovable_Descr>& immovables() const;
+	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
 	int32_t get_immovable_index(char const* const l) const;
 	int32_t get_nr_immovables() const;
-	Immovable_Descr const* get_immovable_descr(int32_t index) const;
+	ImmovableDescr const* get_immovable_descr(int32_t index) const;
 
 	int32_t get_resource(const char* const name) const;
 	ResourceDescription const* get_resource(Resource_Index res) const;
@@ -85,7 +85,7 @@ public:
 
 private:
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;
-	std::unique_ptr<DescriptionMaintainer<Immovable_Descr>> immovables_;
+	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;

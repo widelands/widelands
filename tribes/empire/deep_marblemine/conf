@@ -4,6 +4,9 @@ enhanced_building=yes
 output=marble
 output=stone
 
+[aihints]
+mines=granite
+
 [enhancement_cost]
 log=4
 wood=2
@@ -16,9 +19,6 @@ wood=1
 master-miner=1
 miner=1
 
-[aihints]
-mines=granite
-
 [inputs]
 meal=6
 wine=6
@@ -29,6 +29,7 @@ work=_mining
 
 [work]
 sleep=43000
+return=skipped unless economy needs marble or economy needs stone
 consume=meal wine
 animate=working 18000
 mine=granite 2 100 5 2

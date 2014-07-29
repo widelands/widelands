@@ -2,6 +2,10 @@ size=medium
 output=ration
 enhancement=inn
 
+[aihints]
+build_material=false
+is_food_basic=true
+
 [buildcost]
 wood=2
 stone=2
@@ -11,10 +15,6 @@ marble=1
 wood=1
 stone=1
 marble=1
-
-[aihints]
-build_material=false
-is_food_basic=true
 
 [working positions]
 innkeeper=1

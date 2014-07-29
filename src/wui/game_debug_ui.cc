@@ -43,12 +43,12 @@
 #include "wui/interactive_base.h"
 
 struct MapObjectDebugPanel
-: public UI::Panel, public Widelands::Map_Object::LogSink
+: public UI::Panel, public Widelands::MapObject::LogSink
 {
 	MapObjectDebugPanel
 		(UI::Panel                   & parent,
 		 const Widelands::Editor_Game_Base &,
-		 Widelands::Map_Object       &);
+		 Widelands::MapObject       &);
 	~MapObjectDebugPanel();
 
 	void log(std::string str) override;
@@ -64,7 +64,7 @@ private:
 MapObjectDebugPanel::MapObjectDebugPanel
 	(UI::Panel                   & parent,
 	 const Widelands::Editor_Game_Base & egbase,
-	 Widelands::Map_Object       & obj)
+	 Widelands::MapObject       & obj)
 :
 UI::Panel(&parent, 0, 0, 350, 200),
 m_egbase (egbase),
@@ -78,7 +78,7 @@ m_log    (this, 0, 0, 350, 200, "")
 
 MapObjectDebugPanel::~MapObjectDebugPanel()
 {
-	if (Widelands::Map_Object * const obj = m_object.get(m_egbase))
+	if (Widelands::MapObject * const obj = m_object.get(m_egbase))
 		if (obj->get_logsink() == this)
 			obj->set_logsink(nullptr);
 }
@@ -104,7 +104,7 @@ UI headers in the game logic code (same reason why we have a separate
 building_ui.cc).
 ===============
 */
-void Widelands::Map_Object::create_debug_panels
+void Widelands::MapObject::create_debug_panels
 	(const Widelands::Editor_Game_Base & egbase, UI::Tab_Panel & tabs)
 {
 	tabs.add
@@ -129,7 +129,7 @@ that are provided by the map object itself via the virtual function
 collect_debug_tabs().
 */
 struct MapObjectDebugWindow : public UI::Window {
-	MapObjectDebugWindow(Interactive_Base & parent, Widelands::Map_Object &);
+	MapObjectDebugWindow(Interactive_Base & parent, Widelands::MapObject &);
 
 	Interactive_Base & ibase() {
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
@@ -146,7 +146,7 @@ private:
 
 
 MapObjectDebugWindow::MapObjectDebugWindow
-	(Interactive_Base & parent, Widelands::Map_Object & obj)
+	(Interactive_Base & parent, Widelands::MapObject & obj)
 	:
 	UI::Window        (&parent, "map_object_debug", 0, 0, 100, 100, ""),
 	m_log_general_info(true),
@@ -175,7 +175,7 @@ Remove self when the object disappears.
 void MapObjectDebugWindow::think()
 {
 	Widelands::Editor_Game_Base & egbase = ibase().egbase();
-	if (Widelands::Map_Object * const obj = m_object.get(egbase)) {
+	if (Widelands::MapObject * const obj = m_object.get(egbase)) {
 		if (m_log_general_info)  {
 			obj->log_general_info(egbase);
 			m_log_general_info = false;
@@ -195,11 +195,11 @@ void MapObjectDebugWindow::think()
 ===============
 show_mapobject_debug
 
-Show debug window for a Map_Object
+Show debug window for a MapObject
 ===============
 */
 void show_mapobject_debug
-	(Interactive_Base & parent, Widelands::Map_Object & obj)
+	(Interactive_Base & parent, Widelands::MapObject & obj)
 {
 	new MapObjectDebugWindow(parent, obj);
 }
@@ -407,7 +407,7 @@ void FieldDebugWindow::think()
 
 	// Do not clear the list. Instead parse all bobs and sync lists
 	for (uint32_t idx = 0; idx < m_ui_bobs.size(); idx++) {
-		Widelands::Map_Object* mo =
+		Widelands::MapObject* mo =
 			ibase().egbase().objects().get_object(m_ui_bobs[idx]);
 		bool toremove = false;
 		std::vector<Widelands::Bob *>::iterator removeIt;
@@ -465,7 +465,7 @@ Open the bob debug window for the bob of the given index in the list
 void FieldDebugWindow::open_bob(const uint32_t index) {
 	if (index != UI::Listselect<intptr_t>::no_selection_index())
 		if
-			(Widelands::Map_Object * const object =
+			(Widelands::MapObject * const object =
 			 	ibase().egbase().objects().get_object(m_ui_bobs.get_selected()))
 			show_mapobject_debug(ibase(), *object);
 }

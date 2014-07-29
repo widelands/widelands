@@ -16,7 +16,7 @@ function flag_tests:teardown()
 end
 
 function flag_tests:test_name()
-   assert_equal("flag", self.f.name)
+   assert_equal("flag", self.f.descr.name)
 end
 function flag_tests:test_type()
    assert_equal("flag", self.f.descr.type_name)

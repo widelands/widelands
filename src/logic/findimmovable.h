@@ -27,7 +27,7 @@
 namespace Widelands {
 
 struct BaseImmovable;
-struct Immovable_Descr;
+struct ImmovableDescr;
 class Player;
 
 struct FindImmovable {
@@ -94,12 +94,12 @@ private:
 	int32_t m_min, m_max;
 };
 struct FindImmovableType {
-	FindImmovableType(Map_Object_Type const type) : m_type(type) {}
+	FindImmovableType(MapObjectType const type) : m_type(type) {}
 
 	bool accept(const BaseImmovable &) const;
 
 private:
-	Map_Object_Type m_type;
+	MapObjectType m_type;
 };
 struct FindImmovableAttribute {
 	FindImmovableAttribute(uint32_t const attrib) : m_attrib(attrib) {}
@@ -127,11 +127,11 @@ struct FindImmovableAttackable {
 	bool accept(const BaseImmovable &) const;
 };
 struct FindImmovableByDescr {
-	FindImmovableByDescr(const Immovable_Descr & _descr) : descr(_descr) {}
+	FindImmovableByDescr(const ImmovableDescr & _descr) : descr(_descr) {}
 
 	bool accept(const BaseImmovable &) const;
 
-	const Immovable_Descr & descr;
+	const ImmovableDescr & descr;
 };
 struct FindFlagOf {
 	FindFlagOf(const FindImmovable & finder) : finder_(finder) {}

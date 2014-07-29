@@ -2,6 +2,11 @@ size=mine
 output=ironore
 enhancement=deep_oremine
 
+[aihints]
+build_material=false
+mines=iron
+mines_percent=30
+
 [buildcost]
 log=4
 raw_stone=2
@@ -13,11 +18,6 @@ raw_stone=1
 [working positions]
 miner=1
 
-[aihints]
-build_material=false
-mines=iron
-mines_percent=30
-
 [inputs]
 ration=6
 
@@ -27,6 +27,7 @@ work=_mining
 
 [work]
 sleep=45000
+return=skipped unless economy needs ironore
 consume=ration
 animate=working 20000
 mine=iron 2 33 5 17

@@ -3,6 +3,9 @@ buildable=no
 enhanced_building=yes
 output=coal
 
+[aihints]
+mines=coal
+
 [enhancement_cost]
 log=4
 wood=2
@@ -15,9 +18,6 @@ wood=1
 master-miner=1
 miner=1
 
-[aihints]
-mines=coal
-
 [inputs]
 meal=6
 beer=6
@@ -28,8 +28,7 @@ work=_mining
 
 [work]
 sleep=42000
-return=skipped unless economy needs coal or not economy needs meal
-return=skipped unless economy needs coal or not economy needs beer
+return=skipped unless economy needs coal
 consume=beer meal
 animate=working 18000
 mine=coal 2 100 5 2

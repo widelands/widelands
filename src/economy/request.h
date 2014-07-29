@@ -34,8 +34,8 @@ class Economy;
 class Editor_Game_Base;
 struct Flag;
 class Game;
-class Map_Map_Object_Loader;
-struct Map_Map_Object_Saver;
+class MapMapObjectLoader;
+struct MapMapObjectSaver;
 struct PlayerImmovable;
 class RequestList;
 struct Requirements;
@@ -93,8 +93,8 @@ public:
 
 	void start_transfer(Game &, Supply &);
 
-	void Read (FileRead  &, Game &, Map_Map_Object_Loader &);
-	void Write(FileWrite &, Game &, Map_Map_Object_Saver  &) const;
+	void Read (FileRead  &, Game &, MapMapObjectLoader &);
+	void Write(FileWrite &, Game &, MapMapObjectSaver  &) const;
 	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code

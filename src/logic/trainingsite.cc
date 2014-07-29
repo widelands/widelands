@@ -39,13 +39,13 @@ namespace Widelands {
 
 const uint32_t TrainingSite::training_state_multiplier = 12;
 
-TrainingSite_Descr::TrainingSite_Descr
+TrainingSiteDescr::TrainingSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe, const World& world)
 	:
-	ProductionSite_Descr
-		(Map_Object_Type::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
+	ProductionSiteDescr
+		(MapObjectType::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
 	m_max_stall         (global_s.get_safe_int("trainer_patience")),
 
@@ -93,7 +93,7 @@ TrainingSite_Descr::TrainingSite_Descr
  * Create a new training site
  * \return  the new training site
  */
-Building & TrainingSite_Descr::create_object() const {
+Building & TrainingSiteDescr::create_object() const {
 	return *new TrainingSite(*this);
 }
 
@@ -102,7 +102,7 @@ Building & TrainingSite_Descr::create_object() const {
  * \return  the minimum level to which this building can downgrade a
  * specified attribute
  */
-int32_t TrainingSite_Descr::get_min_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_min_level(const tAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_min_hp;
@@ -123,7 +123,7 @@ int32_t TrainingSite_Descr::get_min_level(const tAttribute at) const {
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
-int32_t TrainingSite_Descr::get_max_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_max_level(const tAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_max_hp;
@@ -139,7 +139,7 @@ int32_t TrainingSite_Descr::get_max_level(const tAttribute at) const {
 }
 
 int32_t
-TrainingSite_Descr::get_max_stall() const
+TrainingSiteDescr::get_max_stall() const
 {
 	return m_max_stall;
 }
@@ -152,7 +152,7 @@ class TrainingSite
 =============================
 */
 
-TrainingSite::TrainingSite(const TrainingSite_Descr & d) :
+TrainingSite::TrainingSite(const TrainingSiteDescr & d) :
 ProductionSite   (d),
 m_soldier_request(nullptr),
 m_capacity       (descr().get_max_number_of_soldiers()),
@@ -177,7 +177,7 @@ m_result         (Failed)
 		init_kick_state(atrEvade, d);
 }
 void
-TrainingSite::init_kick_state(const tAttribute & art, const TrainingSite_Descr & d)
+TrainingSite::init_kick_state(const tAttribute & art, const TrainingSiteDescr & d)
 {
 		// Now with kick-out state saving implemented, initializing is an overkill
 		for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)

@@ -54,7 +54,7 @@ void Cmd_Call_Economy_Balance::execute(Game & game)
  * Read and write
  */
 void Cmd_Call_Economy_Balance::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -91,7 +91,7 @@ void Cmd_Call_Economy_Balance::Read
 	}
 }
 void Cmd_Call_Economy_Balance::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 

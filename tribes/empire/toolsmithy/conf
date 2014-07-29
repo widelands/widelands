@@ -12,6 +12,10 @@ output=hunting_spear
 output=basket
 output=saw
 
+[aihints]
+build_material=false
+is_basic=true
+
 [buildcost]
 log=1
 stone=2
@@ -22,10 +26,6 @@ marblecolumn=1
 stone=1
 marble=2
 
-[aihints]
-build_material=false
-is_basic=true
-
 [working positions]
 toolsmith=1
 
@@ -34,6 +34,10 @@ iron=8
 log=8
 
 [programs]
+# TRANSLATORS: "Completed/Skipped/Did not start making an ax because ...
+produce_ax=_making an ax
+# TRANSLATORS: "Completed/Skipped/Did not start making a basket because ...
+produce_basket=_making a basket
 # TRANSLATORS: "Completed/Skipped/Did not start making a bread paddle because ...
 produce_bread_paddle=_making a bread paddle
 # TRANSLATORS: "Completed/Skipped/Did not start making fire tongs because ...
@@ -42,24 +46,36 @@ produce_fire_tongs=_making fire tongs
 produce_fishing_rod=_making a fishing rod
 # TRANSLATORS: "Completed/Skipped/Did not start making a hammer because ...
 produce_hammer=_making a hammer
+# TRANSLATORS: "Completed/Skipped/Did not start making a hunting spear because ...
+produce_hunting_spear=_making a hunting spear
 # TRANSLATORS: "Completed/Skipped/Did not start making kitchen tools because ...
 produce_kitchen_tools=_making kitchen tools
 # TRANSLATORS: "Completed/Skipped/Did not start making a pick because ...
 produce_pick=_making a pick
+# TRANSLATORS: "Completed/Skipped/Did not start making a saw because ...
+produce_saw=_making a saw
 # TRANSLATORS: "Completed/Skipped/Did not start making a scythe because ...
 produce_scythe=_making a scythe
 # TRANSLATORS: "Completed/Skipped/Did not start making a shovel because ...
 produce_shovel=_making a shovel
-# TRANSLATORS: "Completed/Skipped/Did not start making a hunting spear because ...
-produce_hunting_spear=_making a hunting spear
-# TRANSLATORS: "Completed/Skipped/Did not start making a basket because ...
-produce_basket=_making a basket
-# TRANSLATORS: "Completed/Skipped/Did not start making a saw because ...
-produce_saw=_making a saw
-# TRANSLATORS: "Completed/Skipped/Did not start making an ax because ...
-produce_ax=_making an ax
 # TRANSLATORS: "Completed/Skipped/Did not start working because ...
 work=_working
+
+[produce_ax]
+return=skipped unless economy needs ax
+sleep=32000
+consume=iron log
+playFX=../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=ax
+
+[produce_basket]
+return=skipped unless economy needs basket
+sleep=32000
+consume=iron log
+playFX=../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=basket
 
 [produce_bread_paddle]
 return=skipped unless economy needs bread_paddle
@@ -93,6 +109,14 @@ playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=hammer
 
+[produce_hunting_spear]
+return=skipped unless economy needs hunting_spear
+sleep=32000
+consume=iron log
+playFX=../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=hunting_spear
+
 [produce_kitchen_tools]
 return=skipped unless economy needs kitchen_tools
 sleep=32000
@@ -108,6 +132,14 @@ consume=iron log
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=pick
+
+[produce_saw]
+return=skipped unless economy needs saw
+sleep=32000
+consume=iron log
+playFX=../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=saw
 
 [produce_scythe]
 return=skipped unless economy needs scythe
@@ -125,51 +157,19 @@ playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=shovel
 
-[produce_hunting_spear]
-return=skipped unless economy needs hunting_spear
-sleep=32000
-consume=iron log
-playFX=../../../sound/smiths/toolsmith 192
-animate=working 35000
-produce=hunting_spear
-
-[produce_basket]
-return=skipped unless economy needs basket
-sleep=32000
-consume=iron log
-playFX=../../../sound/smiths/toolsmith 192
-animate=working 35000
-produce=basket
-
-[produce_saw]
-return=skipped unless economy needs saw
-sleep=32000
-consume=iron log
-playFX=../../../sound/smiths/toolsmith 192
-animate=working 35000
-produce=saw
-
-[produce_ax]
-return=skipped unless economy needs ax
-sleep=32000
-consume=iron log
-playFX=../../../sound/smiths/toolsmith 192
-animate=working 35000
-produce=ax
-
 [work]
+call=produce_ax
+call=produce_basket
 call=produce_bread_paddle
 call=produce_fire_tongs
 call=produce_fishing_rod
 call=produce_hammer
+call=produce_hunting_spear
 call=produce_kitchen_tools
 call=produce_pick
+call=produce_saw
 call=produce_scythe
 call=produce_shovel
-call=produce_hunting_spear
-call=produce_basket
-call=produce_saw
-call=produce_ax
 return=skipped
 
 [idle]

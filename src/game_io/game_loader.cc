@@ -84,7 +84,7 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 	M.Read_Complete(m_game);
 	log("Game: Read_Complete took: %ums\n", timer.ms_since_last_query());
 
-	Map_Map_Object_Loader * const mol = M.get_map_object_loader();
+	MapMapObjectLoader * const mol = M.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
 	{Game_Player_Economies_Data_Packet            p; p.Read(m_fs, m_game, mol);}
@@ -110,9 +110,9 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 					(new Cmd_ExpireMessage
 					 	(m->sent() + duration, p, m_id));
 			}
-			// Renew Map_Object connections
+			// Renew MapObject connections
 			if (m->serial() > 0) {
-				Map_Object* mo = m_game.objects().get_object(m->serial());
+				MapObject* mo = m_game.objects().get_object(m->serial());
 				mo->removed.connect
 					(boost::bind(&Player::message_object_removed, player, m_id));
 			}

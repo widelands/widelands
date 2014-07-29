@@ -1,15 +1,19 @@
 size=medium
-output=felling_ax
 output=bread_paddle
+output=felling_ax
 output=fire_tongs
 output=fishing_rod
 output=hammer
+output=hunting_spear
 output=kitchen_tools
 output=pick
 output=scythe
 output=shovel
-output=hunting_spear
 enhancement=axfactory
+
+[aihints]
+build_material=false
+is_basic=true
 
 [buildcost]
 log=1
@@ -30,21 +34,19 @@ blacksmith=1
 iron=8
 log=8
 
-[aihints]
-build_material=false
-is_basic=true
-
 [programs]
-# TRANSLATORS: "Completed/Skipped/Did not start making a felling ax because ...
-produce_felling_ax=_making a felling ax
 # TRANSLATORS: "Completed/Skipped/Did not start making a bread paddle because ...
 produce_bread_paddle=_making a bread paddle
+# TRANSLATORS: "Completed/Skipped/Did not start making a felling ax because ...
+produce_felling_ax=_making a felling ax
 # TRANSLATORS: "Completed/Skipped/Did not start making fire tongs because ...
 produce_fire_tongs=_making fire tongs
 # TRANSLATORS: "Completed/Skipped/Did not start making a fishing rod because ...
 produce_fishing_rod=_making a fishing rod
 # TRANSLATORS: "Completed/Skipped/Did not start making a hammer because ...
 produce_hammer=_making a hammer
+# TRANSLATORS: "Completed/Skipped/Did not start making a hunting spear because ...
+produce_hunting_spear=_making a hunting spear
 # TRANSLATORS: "Completed/Skipped/Did not start making kitchen tools because ...
 produce_kitchen_tools=_making kitchen tools
 # TRANSLATORS: "Completed/Skipped/Did not start making a pick because ...
@@ -53,18 +55,8 @@ produce_pick=_making a pick
 produce_scythe=_making a scythe
 # TRANSLATORS: "Completed/Skipped/Did not start making a shovel because ...
 produce_shovel=_making a shovel
-# TRANSLATORS: "Completed/Skipped/Did not start making a hunting spear because ...
-produce_hunting_spear=_making a hunting spear
 # TRANSLATORS: "Completed/Skipped/Did not start working because ...
 work=_working
-
-[produce_felling_ax]
-return=skipped unless economy needs felling_ax
-sleep=32000
-consume=iron log
-playFX=../../../sound/smiths/toolsmith 192
-animate=working 35000
-produce=felling_ax
 
 [produce_bread_paddle]
 return=skipped unless economy needs bread_paddle
@@ -73,6 +65,14 @@ consume=iron log
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=bread_paddle
+
+[produce_felling_ax]
+return=skipped unless economy needs felling_ax
+sleep=32000
+consume=iron log
+playFX=../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=felling_ax
 
 [produce_fire_tongs]
 return=skipped unless economy needs fire_tongs
@@ -97,6 +97,14 @@ consume=iron log
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=hammer
+
+[produce_hunting_spear]
+return=skipped unless economy needs hunting_spear
+sleep=32000
+consume=iron log
+playFX=../../../sound/smiths/toolsmith 192
+animate=working 35000
+produce=hunting_spear
 
 [produce_kitchen_tools]
 return=skipped unless economy needs kitchen_tools
@@ -130,26 +138,22 @@ playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=shovel
 
-[produce_hunting_spear]
-return=skipped unless economy needs hunting_spear
-sleep=32000
-consume=iron log
-playFX=../../../sound/smiths/toolsmith 192
-animate=working 35000
-produce=hunting_spear
-
 [work]
 call=produce_bread_paddle
+call=produce_felling_ax
 call=produce_fire_tongs
 call=produce_fishing_rod
 call=produce_hammer
+call=produce_hunting_spear
 call=produce_kitchen_tools
 call=produce_pick
 call=produce_scythe
 call=produce_shovel
-call=produce_hunting_spear
-call=produce_felling_ax
 return=skipped
+
+[idle]
+pics=metalworks_i_??.png
+hotspot=57 76
 
 [build]
 pics=metalworks_b_??.png
@@ -157,10 +161,6 @@ hotspot=57 76
 
 [unoccupied]
 pics=metalworks_u_??.png
-hotspot=57 76
-
-[idle]
-pics=metalworks_i_??.png
 hotspot=57 76
 
 [working]

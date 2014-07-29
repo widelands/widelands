@@ -1,6 +1,6 @@
 help=_This tasty wine is drunk by the miners working the marble and gold mines. It is produced in a winery. 
 
-default_target_quantity=10
+default_target_quantity=20 # currently not used
 preciousness=2
 
 [idle]

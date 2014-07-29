@@ -51,11 +51,11 @@ struct BobProgramBase {
 class Bob;
 
 // Description for the Bob class.
-class BobDescr : public Map_Object_Descr {
+class BobDescr : public MapObjectDescr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
-	BobDescr(Map_Object_Type type,
+	BobDescr(MapObjectType type,
 	         const std::string& init_name,
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);
@@ -150,7 +150,7 @@ private:
  * To this end, a task may have a \ref Task::pop method. If this method
  * exists, it is always called just before the task is popped from the stack.
  */
-class Bob : public Map_Object {
+class Bob : public MapObject {
 public:
 	friend class Map;
 	friend struct Map_Bobdata_Data_Packet;
@@ -381,7 +381,7 @@ private:
 
 	// saving and loading
 protected:
-	struct Loader : public Map_Object::Loader {
+	struct Loader : public MapObject::Loader {
 	public:
 		Loader();
 
@@ -405,7 +405,7 @@ protected:
 public:
 	bool has_new_save_support() override {return true;}
 
-	void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 	// Pure Bobs cannot be loaded
 };
 

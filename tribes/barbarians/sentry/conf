@@ -9,6 +9,11 @@ attack_string=_Your sentry is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the sentry.
 defeated_you_string=_Your soldiers defeated the enemy at the sentry.
 
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true
+
 [buildcost]
 blackwood=2
 
@@ -27,8 +32,3 @@ hotspot=39 40
 [unoccupied]
 pics=sentry_u_??.png
 hotspot=39 40
-
-[aihints]
-expansion=true
-fighting=true
-mountain_conqueror=true

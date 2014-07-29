@@ -10,6 +10,10 @@ attack_string=_Your donjon is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the donjon.
 defeated_you_string=_Your soldiers defeated the enemy at the donjon.
 
+[aihints]
+expansion=true
+fighting=true
+mountain_conqueror=true
 
 [buildcost]
 blackwood=7
@@ -20,20 +24,15 @@ raw_stone=4
 blackwood=3
 raw_stone=3
 
-[build]
-pics=donjon_b_??.png
-hotspot=48 84
-
 [idle]
 pics=donjon_i_??.png
 hotspot=48 84
 fps=10
 
+[build]
+pics=donjon_b_??.png
+hotspot=48 84
+
 [unoccupied]
 pics=donjon_u_??.png
 hotspot=48 84
-
-[aihints]
-expansion=true
-fighting=true
-mountain_conqueror=true

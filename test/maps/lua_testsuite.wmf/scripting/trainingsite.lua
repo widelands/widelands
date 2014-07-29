@@ -24,7 +24,7 @@ function trainingsite_tests:teardown()
 end
 
 function trainingsite_tests:test_name()
-   assert_equal("trainingcamp", self.camp.name)
+   assert_equal("trainingcamp", self.camp.descr.name)
 end
 function trainingsite_tests:test_type()
    assert_equal("trainingsite", self.camp.descr.type_name)

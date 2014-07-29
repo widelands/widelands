@@ -33,16 +33,16 @@ class Request;
 struct Road;
 class WareInstance;
 
-class Flag_Descr : public Map_Object_Descr {
+class FlagDescr : public MapObjectDescr {
 public:
-	Flag_Descr(char const* const _name, char const* const _descname)
-	   : Map_Object_Descr(Map_Object_Type::FLAG, _name, _descname) {
+	FlagDescr(char const* const _name, char const* const _descname)
+		: MapObjectDescr(MapObjectType::FLAG, _name, _descname) {
 	}
-	~Flag_Descr() override {
+	~FlagDescr() override {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(Flag_Descr);
+	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
 };
 
 /**
@@ -70,7 +70,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
 	friend struct Router;
 
-	const Flag_Descr& descr() const;
+	const FlagDescr& descr() const;
 
 	Flag(); /// empty flag for savegame loading
 	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
@@ -176,7 +176,7 @@ private:
 	FlagJobs m_flag_jobs;
 };
 
-extern Flag_Descr g_flag_descr;
+extern FlagDescr g_flag_descr;
 }
 
 #endif  // end of include guard: WL_ECONOMY_FLAG_H

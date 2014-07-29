@@ -40,7 +40,7 @@ void Map_Road_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &       mol)
+	 MapMapObjectLoader &       mol)
 {
 	if (skip)
 		return;
@@ -71,7 +71,7 @@ void Map_Road_Data_Packet::Read
 
 
 void Map_Road_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	FileWrite fw;
 

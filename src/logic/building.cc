@@ -51,12 +51,12 @@ namespace Widelands {
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 
-Building_Descr::Building_Descr
-	(const Map_Object_Type type, char const * const _name, char const * const _descname,
+BuildingDescr::BuildingDescr
+	(const MapObjectType type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _descr)
 	:
-	Map_Object_Descr(type, _name, _descname),
+	MapObjectDescr(type, _name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
 	m_icon     (nullptr),
@@ -109,7 +109,7 @@ Building_Descr::Building_Descr
 
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
-			const Building_Descr * tmp_enhancement =
+			const BuildingDescr * tmp_enhancement =
 				tribe().get_building_descr(en_i);
 			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
 			{
@@ -174,7 +174,7 @@ Building_Descr::Building_Descr
 }
 
 
-Building & Building_Descr::create
+Building & BuildingDescr::create
 	(Editor_Game_Base     &       egbase,
 	 Player               &       owner,
 	 Coords                 const pos,
@@ -198,7 +198,7 @@ Building & Building_Descr::create
 }
 
 
-int32_t Building_Descr::suitability(const Map &, FCoords const fc) const {
+int32_t BuildingDescr::suitability(const Map &, FCoords const fc) const {
 	return m_size <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
@@ -207,7 +207,7 @@ int32_t Building_Descr::suitability(const Map &, FCoords const fc) const {
  *
  * \return the radius of the conquered area.
  */
-uint32_t Building_Descr::get_conquers() const
+uint32_t BuildingDescr::get_conquers() const
 {
 	return 0;
 }
@@ -217,7 +217,7 @@ uint32_t Building_Descr::get_conquers() const
  * \return the radius (in number of fields) of the area seen by this
  * building.
  */
-uint32_t Building_Descr::vision_range() const
+uint32_t BuildingDescr::vision_range() const
 {
 	return m_vision_range ? m_vision_range : get_conquers() + 4;
 }
@@ -228,7 +228,7 @@ uint32_t Building_Descr::vision_range() const
 Called whenever building graphics need to be loaded.
 ===============
 */
-void Building_Descr::load_graphics()
+void BuildingDescr::load_graphics()
 {
 	if (!m_icon_fname.empty())
 		m_icon = g_gr->images().get(m_icon_fname);
@@ -239,13 +239,13 @@ void Building_Descr::load_graphics()
 Create a construction site for this type of building
 ===============
 */
-Building & Building_Descr::create_constructionsite() const
+Building & BuildingDescr::create_constructionsite() const
 {
-	Building_Descr const * const descr =
+	BuildingDescr const * const descr =
 		m_tribe.get_building_descr
 			(m_tribe.safe_building_index("constructionsite"));
 	ConstructionSite & csite =
-		ref_cast<ConstructionSite, Map_Object>(descr->create_object());
+		ref_cast<ConstructionSite, MapObject>(descr->create_object());
 	csite.set_building(*this);
 
 	return csite;
@@ -260,7 +260,7 @@ Implementation
 ==============================
 */
 
-Building::Building(const Building_Descr & building_descr) :
+Building::Building(const BuildingDescr & building_descr) :
 PlayerImmovable(building_descr),
 m_optionswindow(nullptr),
 m_flag         (nullptr),
@@ -336,7 +336,7 @@ Flag & Building::base_flag()
  */
 uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
-	const Building_Descr & tmp_descr = descr();
+	const BuildingDescr & tmp_descr = descr();
 	if (tmp_descr.is_destructible()) {
 		caps |= PCap_Bulldoze;
 		if (tmp_descr.is_buildable() || tmp_descr.is_enhanced())
