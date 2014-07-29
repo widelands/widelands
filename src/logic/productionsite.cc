@@ -272,7 +272,6 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 }
 
 
-
 WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
 	for (WaresQueue * ip_queue : m_input_queues) {
 		if (ip_queue->get_ware() == wi) {
@@ -918,7 +917,7 @@ void ProductionSite::train_workers(Game & game)
 }
 
 
-void ProductionSite::worker_failed_to_find_resource(Game & game)
+void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t minutes)
 {
 	if (descr().out_of_resource_title().empty())
 	{
@@ -932,22 +931,19 @@ void ProductionSite::worker_failed_to_find_resource(Game & game)
 			 descr().out_of_resource_title().c_str());
 
 		if(m_out_of_resource_delay_counter >=
-			descr().out_of_resource_delay_attempts()
-		)	{
+			descr().out_of_resource_delay_attempts())	{
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
-				 "produce",
+				 sender,
 				 descr().out_of_resource_title(),
 				 descr().out_of_resource_message(),
 				 true,
-				 1800000, 0);
+				 minutes * 60000, 0);
 		}
 	}
 	if (m_out_of_resource_delay_counter++ >=
-			descr().out_of_resource_delay_attempts()
-		)
-	{
+			descr().out_of_resource_delay_attempts())	{
 		m_out_of_resource_delay_counter = 0;
 	}
 }

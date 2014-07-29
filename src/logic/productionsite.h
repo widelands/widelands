@@ -177,8 +177,8 @@ public:
 
 	bool can_start_working() const;
 
-	/// sends a message to the player if the building's resource can't be found
-	void worker_failed_to_find_resource(Game & game);
+	/// sends a message to the player e.g. if the building's resource can't be found
+	void out_of_resources(Game & game, std::string sender, uint8_t minutes);
 
 	void set_default_anim(std::string);
 
@@ -270,7 +270,7 @@ protected:  // TrainingSite must have access to this stuff
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 
 private:
-	uint32_t m_out_of_resource_delay_counter;
+	uint32_t                 m_out_of_resource_delay_counter;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };

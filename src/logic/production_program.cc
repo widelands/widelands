@@ -597,8 +597,8 @@ void ProductionProgram::ActReturn::execute
 		}
 
 		snprintf
-			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-			 "%s", result_string.c_str());
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 "%s", result_string.c_str());
 	}
 	return ps.program_end(game, m_result);
 }
@@ -975,8 +975,8 @@ void ProductionProgram::ActConsume::execute
 			 .str();
 
 		snprintf
-			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-			 "%s", result_string.c_str());
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 "%s", result_string.c_str());
 		return ps.program_end(game, Failed);
 	} else { //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < nr_warequeues; ++i)
@@ -1337,7 +1337,7 @@ void ProductionProgram::ActMine::execute
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
 		if (m_chance <= 20) {
-			notify_player(game, ps);
+			ps.out_of_resources(game, "mine", 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
 		}
@@ -1346,18 +1346,6 @@ void ProductionProgram::ActMine::execute
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
 		if (m_chance <= game.logic_rand() % 100) {
-
-			if (ps.descr().out_of_resource_title().empty())
-			{
-				snprintf
-					(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-					 _("Can’t find any more resources!"));
-			}
-			else {
-				snprintf
-					(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-					 ps.descr().out_of_resource_title().c_str());
-			}
 
 			// Gain experience
 			if (m_training >= game.logic_rand() % 100) {
@@ -1372,23 +1360,6 @@ void ProductionProgram::ActMine::execute
 	//  ProductionSite::program_step so that the following sleep/animate
 	//  command knows how long it should last.
 	return ps.program_step(game);
-}
-
-/// Informs the player about a mine that has run empty, if the mine has not
-/// sent this message within the last 60 minutes.
-void ProductionProgram::ActMine::notify_player
-	(Game & game, ProductionSite & ps) const
-{
-	assert(!ps.descr().out_of_resource_title().empty());
-	assert(!ps.descr().out_of_resource_message().empty());
-	ps.send_message
-		(game,
-		 "mine",
-		 ps.descr().out_of_resource_title(),
-		 ps.descr().out_of_resource_message(),
-		 true,
-		 60 * 60 * 1000,
-		 0);
 }
 
 ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
@@ -1428,9 +1399,9 @@ void ProductionProgram::ActCheck_Soldier::execute
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
 	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
 	if (soldiers.empty()) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier to train!"));
+		snprintf
+			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+			 _("No soldier to train!"));
 		return ps.program_end(game, Skipped);
 	}
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);

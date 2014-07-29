@@ -402,7 +402,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				if (!found_reserved)
 				{
 					if (upcast(ProductionSite, productionsite, get_location(game)))
-						productionsite->worker_failed_to_find_resource(game);
+						productionsite->out_of_resources(game, "produce", 30);
 				}
 				return true;
 			}
@@ -444,7 +444,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
 				if (upcast(ProductionSite, productionsite, get_location(game)))
-					productionsite->worker_failed_to_find_resource(game);
+					productionsite->out_of_resources(game, "produce", 30);
 				return true;
 			}
 			std::vector<Bob *> list;
@@ -572,7 +572,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 		molog("  no space found\n");
 
 		if (upcast(ProductionSite, productionsite, get_location(game)))
-			productionsite->worker_failed_to_find_resource(game);
+			productionsite->out_of_resources(game, "produce", 30);
 
 		send_signal(game, "fail");
 		pop_task(game);
