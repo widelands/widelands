@@ -185,8 +185,8 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
 
-					// NOCOM use localise_item_list from production_program
-					std::string ware_type_names = i18n::localize_item_list(ware_type_descnames, i18n::ItemListType::OR);
+					std::string ware_type_names =
+							i18n::localize_item_list(ware_type_descnames, i18n::ItemListType::OR);
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.

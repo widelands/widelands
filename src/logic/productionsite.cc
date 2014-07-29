@@ -337,7 +337,6 @@ void ProductionSite::calc_statistics()
 			 "%s", perc_str.c_str());
 	}
 	m_last_stat_percent = percOk;
-
 	m_statistics_changed = false;
 }
 
@@ -926,8 +925,8 @@ void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t m
 	else {
 		set_result_string(descr().out_of_resource_title().c_str());
 
-		if(m_out_of_resource_delay_counter >=
-			descr().out_of_resource_delay_attempts())	{
+		if (m_out_of_resource_delay_counter >=
+			 descr().out_of_resource_delay_attempts()) {
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
@@ -939,7 +938,7 @@ void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t m
 		}
 	}
 	if (m_out_of_resource_delay_counter++ >=
-			descr().out_of_resource_delay_attempts())	{
+		 descr().out_of_resource_delay_attempts()) {
 		m_out_of_resource_delay_counter = 0;
 	}
 }

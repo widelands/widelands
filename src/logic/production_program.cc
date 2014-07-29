@@ -297,7 +297,8 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_negation
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the worker ‘%s’*/
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
+	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
 	return (boost::format(_("the economy doesn’t need the worker ‘%s’"))
 			  % tribe.get_worker_descr(worker_type)->descname()).str();
 }
