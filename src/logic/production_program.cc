@@ -337,7 +337,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description
 	for (const Ware_Index& temp_ware : group.first) {
 		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
-	std::string condition = i18n::localize_item_list(condition_list, true);
+	std::string condition = i18n::localize_item_list(condition_list, i18n::ItemListType::AND);
 	if (1 < group.second) {
 		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
 		/** TRANSLATORS:    %1$s = "3" */
@@ -359,7 +359,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description_negation
 	for (const Ware_Index& temp_ware : group.first) {
 		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
-	std::string condition = i18n::localize_item_list(condition_list, true);
+	std::string condition = i18n::localize_item_list(condition_list, i18n::ItemListType::AND);
 	if (1 < group.second) {
 		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
 		/** TRANSLATORS:    %1$s = "3" */
@@ -571,7 +571,7 @@ void ProductionProgram::ActReturn::execute
 				condition_list.push_back(condition->description_negation(ps.owner().tribe()));
 			}
 		}
-		std::string condition_string = i18n::localize_item_list(condition_list, true);
+		std::string condition_string = i18n::localize_item_list(condition_list, i18n::ItemListType::AND);
 
 		std::string result_string = "";
 		if (m_result == Failed) {
@@ -939,7 +939,7 @@ void ProductionProgram::ActConsume::execute
 			for (const Ware_Index& ware : group.first) {
 				ware_list.push_back(tribe.get_ware_descr(ware)->descname());
 			}
-			std::string ware_string = i18n::localize_item_list(ware_list, false);
+			std::string ware_string = i18n::localize_item_list(ware_list, i18n::ItemListType::OR);
 
 			uint8_t const count = group.second;
 			if (1 < count) {
@@ -964,7 +964,7 @@ void ProductionProgram::ActConsume::execute
 			/** TRANSLATORS:    %3$s = "are missing" */
 			(boost::format(_("Did not start %1$s because %2$s %3$s"))
 			 % ps.top_state().program->descname()
-			 % i18n::localize_item_list(group_list, true)
+			 % i18n::localize_item_list(group_list, i18n::ItemListType::AND)
 			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
@@ -1067,7 +1067,7 @@ void ProductionProgram::ActProduce::execute
 		ware_descname += tribe.get_ware_descr(item_pair.first)->descname();
 		ware_descnames.push_back(ware_descname);
 	}
-	std::string ware_list = i18n::localize_item_list(ware_descnames, true);
+	std::string ware_list = i18n::localize_item_list(ware_descnames, i18n::ItemListType::AND);
 
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
@@ -1165,7 +1165,7 @@ void ProductionProgram::ActRecruit::execute
 		worker_descname += tribe.get_worker_descr(item_pair.first)->descname();
 		worker_descnames.push_back(worker_descname);
 	}
-	std::string unit_string = i18n::localize_item_list(worker_descnames, true);
+	std::string unit_string = i18n::localize_item_list(worker_descnames, i18n::ItemListType::AND);
 
 	/** TRANSLATORS: %s is a list of workers */
 	std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();

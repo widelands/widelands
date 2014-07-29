@@ -318,31 +318,14 @@ void set_locale(std::string name) {
 const std::string & get_locale() {return locale;}
 
 
-// NOCOM(#codereview): such comments tend to be wrong very quickly as the code change and do not really
-// add anything to the documentation in the header. I usually delete them on sight. Your call.
-/***********
-
-  Locale-dependent string functions
-
-***************/
-
-// NOCOM(#codereview): 'items' is copied here, that means each string in the vector is copied over into a new vector. that
-// can easily be a few kilobytes. Instead take const std::vector<std::string>& items which will reuse the already allocated
-// vector at the callsite but cannot modify it. this only costs an 8 byte copy - much cheaper.
-// NOCOM(#codereview): avoid bool in APIs. Instead use an
-// enum class CombineWith { AND, OR }.
-// There are two reasons for this: 1) It reads better at the callsite: localize_item_list(..., CombineWith::AND) is more
-// understandable then localize_item_list(..., true). For the boolean I need to look up the API in the header/docs.
-// 2) should your binary case turn into a ternary case, a boolean will bite you. This happened with UI::Box::add() which now takes
-// two booleans that cannot both be true (iirc).
-std::string localize_item_list(std::vector<std::string> items, bool is_concatenation) {
+std::string localize_item_list(const std::vector<std::string>& items, ItemListType listtype) {
 	std::string result = "";
 	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
 		if (it == items.begin()) {
 			result = *it;
 		}
 		else if (it == --items.end()) {
-			if (is_concatenation) {
+			if (listtype == ItemListType::AND) {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
 				result = (boost::format(_("%1$s and %2$s")) % result % (*it)).str();

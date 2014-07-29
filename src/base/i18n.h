@@ -53,8 +53,19 @@ const std::string & get_locale();
 
 void set_localedir(std::string);
 
-// localize a list of items. If is_concatenation, use "and", else use "or".
-std::string localize_item_list(std::vector<std::string> items, bool is_concatenation);
+
+// This enum lists the available types of enumeration for localize_item_list
+enum class ItemListType : uint8_t {
+	AND, //  concatenate with "and"
+	OR   //  concatenate with "or"
+};
+
+
+/*
+ * Localize a list of items. The last 2 items are concatenated with "and" or "or",
+ * depending on the ItemListType.
+ */
+std::string localize_item_list(const std::vector<std::string>& items, ItemListType);
 
 }
 
