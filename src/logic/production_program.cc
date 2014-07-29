@@ -966,6 +966,11 @@ void ProductionProgram::ActConsume::execute
 			 % ps.top_state().program->descname()
 			 % i18n::localize_item_list(group_list, i18n::ItemListType::AND)
 			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+			/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
+			 /** TRANSLATORS: */
+			/** TRANSLATORS: This appears in the hover text on buildings. Please test these in context*/
+			/** TRANSLATORS: on a development build if you can, and let us know if there are any issues */
+			/** TRANSLATORS: we need to address for your language. */
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
 
