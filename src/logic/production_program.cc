@@ -1341,9 +1341,19 @@ void ProductionProgram::ActMine::execute
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
 		if (m_chance <= game.logic_rand() % 100) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("Can’t find any more resources!"));
+
+			if (ps.descr().out_of_resource_title().empty())
+			{
+				snprintf
+					(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+					 _("Can’t find any more resources!"));
+			}
+			else {
+				snprintf
+					(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+					 ps.descr().out_of_resource_title().c_str());
+			}
+
 			// Gain experience
 			if (m_training >= game.logic_rand() % 100) {
 			  ps.train_workers(game);

@@ -920,19 +920,29 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::worker_failed_to_find_resource(Game & game)
 {
-	if (!descr().out_of_resource_title().empty() &&
-		m_out_of_resource_delay_counter >=
-			descr().out_of_resource_delay_attempts()
-		)
+	if (descr().out_of_resource_title().empty())
 	{
-		assert(!descr().out_of_resource_message().empty());
-		send_message
-			(game,
-			 "produce",
-			 descr().out_of_resource_title(),
-			 descr().out_of_resource_message(),
-			 true,
-			 1800000, 0);
+		snprintf
+			(m_result_buffer, sizeof(m_result_buffer),
+			 _("Can’t find any more resources!"));
+	}
+	else {
+		snprintf
+			(m_result_buffer, sizeof(m_result_buffer),
+			 descr().out_of_resource_title().c_str());
+
+		if(m_out_of_resource_delay_counter >=
+			descr().out_of_resource_delay_attempts()
+		)	{
+			assert(!descr().out_of_resource_message().empty());
+			send_message
+				(game,
+				 "produce",
+				 descr().out_of_resource_title(),
+				 descr().out_of_resource_message(),
+				 true,
+				 1800000, 0);
+		}
 	}
 	if (m_out_of_resource_delay_counter++ >=
 			descr().out_of_resource_delay_attempts()
