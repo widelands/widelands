@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 13:10+0000\n"
-"PO-Revision-Date: 2014-07-27 17:03+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-07-28 08:14+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-07-28 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-07-29 05:40+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 "Language: gd\n"
 
@@ -754,7 +754,7 @@ msgstr ""
 #: ../../tribes/barbarians/deep_coalmine/conf:40
 #: ../../tribes/barbarians/deeper_coalmine/conf:39
 msgid "Main Coal Vein Exhausted"
-msgstr ""
+msgstr "Tha prìomh-chuisle guail air a caitheamh"
 
 #: ../../tribes/barbarians/coalmine/conf:35
 #: ../../tribes/barbarians/deep_coalmine/conf:41
@@ -762,6 +762,9 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às "
+"a chèile no a mhilleadh."
 
 #: ../../tribes/barbarians/coalmine/help.lua:13
 #: ../../tribes/barbarians/deep_coalmine/help.lua:14
@@ -1428,7 +1431,7 @@ msgstr "Campa trèanaidh"
 #: ../../tribes/barbarians/deeper_goldmine/conf:39
 #: ../../tribes/barbarians/goldmine/conf:35
 msgid "Main Gold Vein Exhausted"
-msgstr ""
+msgstr "Tha prìomh-chuisle òir air a caitheamh"
 
 #: ../../tribes/barbarians/deep_goldmine/conf:41
 #: ../../tribes/barbarians/goldmine/conf:36
@@ -1436,6 +1439,9 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran "
+"nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a "
+"chèile no a mhilleadh."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:14
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:14
@@ -1484,7 +1490,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_oremine/conf:42
 #: ../../tribes/barbarians/oremine/conf:35
 msgid "Main Iron Vein Exhausted"
-msgstr ""
+msgstr "Tha prìomh-chuisle iarainn air a caitheamh"
 
 #: ../../tribes/barbarians/deep_oremine/conf:41
 #: ../../tribes/barbarians/oremine/conf:36
@@ -1492,6 +1498,9 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às "
+"a chèile no a mhilleadh."
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:14
 #: ../../tribes/barbarians/deeper_oremine/help.lua:14
@@ -1540,6 +1549,9 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh "
+"thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, "
+"mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:20
 msgid ""
@@ -1557,6 +1569,9 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh "
+"thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, "
+"mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:19
 msgid ""
@@ -1574,6 +1589,9 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum "
+"faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh "
+"tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/barbarians/deeper_oremine/help.lua:19
 msgid ""
@@ -1600,12 +1618,14 @@ msgstr "Buain cruithneachd"
 #: ../../tribes/barbarians/farm/conf:40
 #: ../../tribes/barbarians/reed_yard/conf:37
 msgid "Out of Fields"
-msgstr ""
+msgstr "Chan eil achadh ann"
 
 #: ../../tribes/barbarians/farm/conf:41
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair ag "
+"an tuathanas seo sìol."
 
 #: ../../tribes/barbarians/farm/help.lua:17
 msgid "Sow and harvest wheat."
@@ -1653,13 +1673,15 @@ msgstr "Togaidh e iasg on mhuir."
 
 #: ../../tribes/barbarians/fishers_hut/conf:25
 msgid "Out of Fish"
-msgstr ""
+msgstr "Chan eil iasg ann"
 
 #: ../../tribes/barbarians/fishers_hut/conf:26
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his "
 "working radius."
 msgstr ""
+"Cha do lorg an t-iasgair a tha ag obair aig a’ bhothan-iasgair seo iasg sam "
+"bith taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 msgid "‘What do you mean, my fish ain’t fresh?!’"
@@ -1706,11 +1728,11 @@ msgstr ""
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "\t\t\tas we love to cook and eat them.’"
-msgstr ""
+msgstr "\"Is esan a bhrideas<br>is sinne a dh'itheas.\""
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Rann cloinne nan tùsanach"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:20
 msgid "Releases animals into the wild to steady the meat production."
@@ -1755,7 +1777,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/granitemine/conf:32
 msgid "Main Granite Vein Exhausted"
-msgstr ""
+msgstr "Tha prìomh-chuisle gràineil air a caitheamh"
 
 #: ../../tribes/barbarians/granitemine/conf:33
 msgid ""
@@ -1763,6 +1785,9 @@ msgid ""
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne gràineil seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar "
+"sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
@@ -1838,6 +1863,8 @@ msgstr ""
 #: ../../tribes/barbarians/headquarters_interim/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
+"Seo àite-fuirich do mhuinntir. Cumaidh tu am bathar 's na acainnean agad ann "
+"cuideachd."
 
 #: ../../tribes/barbarians/headquarters/help.lua:18
 #: ../../tribes/barbarians/headquarters_interim/help.lua:18
@@ -1877,7 +1904,7 @@ msgstr "Bheir an sealgair feòil mhath dha na tuinichean."
 
 #: ../../tribes/barbarians/hunters_hut/conf:27
 msgid "Out of Game"
-msgstr ""
+msgstr "Chan eil sitheann ann"
 
 #: ../../tribes/barbarians/hunters_hut/conf:28
 msgid ""
@@ -1885,6 +1912,9 @@ msgid ""
 "working radius. Remember that you can build a gamekeeper’s hut to release "
 "more game into the wild."
 msgstr ""
+"Cha do lorg an sealgair a tha a' fuireach sa bhothan-sealgair seo sitheann "
+"taobh a-staigh a raoin-obrach. Thoir an aire gur urrainn dhut bothan-geamair "
+"a thogail gus barrachd bheathaichean a leigeil fa sgaoil."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid ""
@@ -2023,7 +2053,7 @@ msgstr "Leagaidh e craobhan."
 
 #: ../../tribes/barbarians/lumberjacks_hut/conf:25
 msgid "Out of Trees"
-msgstr ""
+msgstr "Chan eil craobhan ann"
 
 #: ../../tribes/barbarians/lumberjacks_hut/conf:26
 msgid ""
@@ -2031,6 +2061,9 @@ msgid ""
 "working radius. You should consider dismantling or destroying the building "
 "or building a rangers’s hut."
 msgstr ""
+"Cha do lorg an coilltear a tha ag obair aig a' bhothan coillteir seo craobh "
+"taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a "
+"chèile no a mhilleadh no bothan maoir-choille a thogail."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid ""
@@ -2237,13 +2270,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/conf:25
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Chan eil creagan ann"
 
 #: ../../tribes/barbarians/quarry/conf:26
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
 msgstr ""
+"Chan urrainn dhan chlachair a tha ag obair aig a' choireall seo creag a lorg "
+"taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carves raw stone out of rocks in the vicinity."
@@ -2328,6 +2363,8 @@ msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
 msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an gàirnealair a tha ag obair san "
+"fheur-lios seo sìol."
 
 #: ../../tribes/barbarians/reed_yard/help.lua:13
 msgid "Slogan of the Guild of Gardeners"
@@ -2350,6 +2387,9 @@ msgid ""
 "Thatch reed is the traditional material for roofing, and it is woven into "
 "the extremely durable cloth that they use for their ships’ sails."
 msgstr ""
+"'S e an stuth tradaiseanta gus mullaichean a thogail a th' anns an fheur "
+"tughaidh agus thèid an clò buan a dhèanamh dheth a chleachdar gus siùil nan "
+"longan a dhèanamh."
 
 #: ../../tribes/barbarians/reed_yard/help.lua:30
 msgid ""
@@ -2365,7 +2405,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
-msgstr ""
+msgstr "Baile daingnichte"
 
 #: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:94
 msgid "Not enough space"
@@ -2657,12 +2697,14 @@ msgstr "Fighidh e clò de dh'fheur tughaidh."
 
 #: ../../tribes/barbarians/well/conf:27
 msgid "Out of Water"
-msgstr ""
+msgstr "Chan eil uisge ann"
 
 #: ../../tribes/barbarians/well/conf:28
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
 msgstr ""
+"Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg "
+"taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""

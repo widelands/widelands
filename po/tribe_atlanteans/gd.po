@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 13:10+0000\n"
-"PO-Revision-Date: 2014-07-27 16:51+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-07-28 08:33+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-28 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-07-29 05:40+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 "Language: gd\n"
 
@@ -481,13 +481,15 @@ msgstr "Buain freumhagan"
 #: ../../tribes/atlanteans/blackroot_farm/conf:40
 #: ../../tribes/atlanteans/farm/conf:43
 msgid "Out of Fields"
-msgstr ""
+msgstr "Chan eil achadh ann"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:41
 msgid ""
 "The farmer working at this blackroot farm has no cleared soil to plant his "
 "seeds."
 msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig "
+"an tuathanas fhreumhagan seo sìol."
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
 msgid "Sow and harvest blackroot."
@@ -583,13 +585,16 @@ msgstr ""
 
 #: ../../tribes/atlanteans/coalmine/conf:43
 msgid "Main Coal Vein Exhausted."
-msgstr ""
+msgstr "Tha prìomh-chuisle guail air a caitheamh"
 
 #: ../../tribes/atlanteans/coalmine/conf:44
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a "
+"mhilleadh."
 
 #: ../../tribes/atlanteans/coalmine/help.lua:17
 msgid "Digs coal out of the ground in mountain terrain."
@@ -1228,13 +1233,16 @@ msgstr "Tochail daoimeanan"
 
 #: ../../tribes/atlanteans/crystalmine/conf:87
 msgid "Main Crystal Vein Exhausted."
-msgstr ""
+msgstr "Tha prìomh-chuisle criostail air a caitheamh"
 
 #: ../../tribes/atlanteans/crystalmine/conf:88
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne criostail seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a "
+"mhilleadh."
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
@@ -1299,6 +1307,8 @@ msgstr "Buain coirce"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha aig obair ag "
+"an tuathanas seo sìol."
 
 #: ../../tribes/atlanteans/farm/help.lua:17
 msgid "Sow and harvest corn."
@@ -1337,7 +1347,7 @@ msgstr "Iasgaichidh an t-iasgair iasg gu h-èasgaidh."
 
 #: ../../tribes/atlanteans/fishers_house/conf:26
 msgid "Out of Fish"
-msgstr ""
+msgstr "Chan eil iasg ann"
 
 #: ../../tribes/atlanteans/fishers_house/conf:27
 msgid ""
@@ -1345,6 +1355,9 @@ msgid ""
 "working radius. Remember that you can increase the number of existing fish "
 "by building a fishbreeder’s house."
 msgstr ""
+"Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam "
+"bith taobh a-staigh an raoin-obrach tuilleadh. Thoir an aire gur urrainn "
+"dhut cur ris na tha ann de dh'èisg ma thogas tu taigh tàrmachair iasg."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1416,13 +1429,16 @@ msgstr ""
 
 #: ../../tribes/atlanteans/goldmine/conf:44
 msgid "Main Gold Vein Exhausted."
-msgstr ""
+msgstr "Tha prìomh-chuisle òir air a caitheamh"
 
 #: ../../tribes/atlanteans/goldmine/conf:45
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran "
+"nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a "
+"mhilleadh."
 
 #: ../../tribes/atlanteans/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
@@ -1467,6 +1483,8 @@ msgstr ""
 #: ../../tribes/atlanteans/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
+"Seo àite-fuirich do mhuinntir. Cumaidh tu am bathar 's na h-acainnean agad "
+"ann cuideachd."
 
 #: ../../tribes/atlanteans/headquarters/help.lua:18
 msgid "The headquarters is your main building."
@@ -1517,7 +1535,7 @@ msgstr "Bheir an sealgair sitheann amh ùr dha na h-Atlantaich."
 
 #: ../../tribes/atlanteans/hunters_house/conf:27
 msgid "Out of Game"
-msgstr ""
+msgstr "Chan eil sitheann ann"
 
 #: ../../tribes/atlanteans/hunters_house/conf:28
 msgid ""
@@ -1553,13 +1571,16 @@ msgstr ""
 
 #: ../../tribes/atlanteans/ironmine/conf:44
 msgid "Main Iron Vein Exhausted."
-msgstr ""
+msgstr "Tha prìomh-chuisle iarainn air a caitheamh"
 
 #: ../../tribes/atlanteans/ironmine/conf:45
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a "
+"mhilleadh."
 
 #: ../../tribes/atlanteans/ironmine/help.lua:17
 msgid "Digs iron ore out of the ground in mountain terrain."
@@ -1701,13 +1722,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/quarry/conf:26
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Chan eil creagan ann"
 
 #: ../../tribes/atlanteans/quarry/conf:27
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his working "
 "radius."
 msgstr ""
+"Chan urrainn dhan tochailtear a tha ag obair aig a' choireall seo creag a "
+"lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "Carves stones out of rocks in the vicinity."
@@ -1748,7 +1771,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
-msgstr ""
+msgstr "Baile daingnichte"
 
 #: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:101
 msgid "Not enough space"
@@ -2021,12 +2044,14 @@ msgstr "dèanamh lèine òir"
 
 #: ../../tribes/atlanteans/well/conf:26
 msgid "Out of Water"
-msgstr ""
+msgstr "Chan eil uisge ann"
 
 #: ../../tribes/atlanteans/well/conf:27
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
 msgstr ""
+"Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg "
+"taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/atlanteans/well/help.lua:18
 msgid "Draws water out of the deep."
@@ -2038,7 +2063,7 @@ msgstr "Leagaidh e craobhan."
 
 #: ../../tribes/atlanteans/woodcutters_house/conf:27
 msgid "Out of Trees"
-msgstr ""
+msgstr "Chan eil craobhan ann"
 
 #: ../../tribes/atlanteans/woodcutters_house/conf:28
 msgid ""
@@ -2046,6 +2071,9 @@ msgid ""
 "his working radius. You should consider dismantling or destroying the "
 "building or building a forester’s house."
 msgstr ""
+"Cha do lorg am buaineadair-fiodha a tha ag obair aig an taigh buaineadair-"
+"fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach "
+"a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."

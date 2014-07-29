@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 13:10+0000\n"
-"PO-Revision-Date: 2014-07-27 17:13+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-07-28 08:33+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-28 05:51+0000\n"
+"X-Launchpad-Export-Date: 2014-07-29 05:40+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 "Language: gd\n"
 
@@ -688,13 +688,16 @@ msgstr ""
 #: ../../tribes/empire/coalmine/conf:40
 #: ../../tribes/empire/deep_coalmine/conf:41
 msgid "Main Coal Vein Exhausted"
-msgstr ""
+msgstr "Tha prìomh-chuisle guail air a caitheamh"
 
 #: ../../tribes/empire/coalmine/conf:41
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às "
+"a chèile no a mhilleadh."
 
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
@@ -1349,11 +1352,14 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh "
+"thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, "
+"mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/empire/deep_goldmine/conf:41
 #: ../../tribes/empire/goldmine/conf:41
 msgid "Main Gold Vein Exhausted"
-msgstr ""
+msgstr "Tha prìomh-chuisle òir air a caitheamh"
 
 #: ../../tribes/empire/deep_goldmine/conf:42
 msgid ""
@@ -1361,6 +1367,9 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh "
+"thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, "
+"mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
@@ -1370,7 +1379,7 @@ msgstr "Tochlaidh i clach-òir às na beanntan."
 #: ../../tribes/empire/deep_marblemine/conf:40
 #: ../../tribes/empire/marblemine/conf:52
 msgid "Main Marble Vein Exhausted"
-msgstr ""
+msgstr "Tha prìomh-chuisle marmoir air a caitheamh"
 
 #: ../../tribes/empire/deep_marblemine/conf:41
 msgid ""
@@ -1378,6 +1387,9 @@ msgid ""
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
 msgstr ""
+"Tha prìomh-chuisle na mèinne marmoir seo air a caitheamh. Bi an dùil gum "
+"faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh "
+"tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
@@ -1386,7 +1398,7 @@ msgstr "Tochlaidh i clachan 's marmor às na beanntan."
 #: ../../tribes/empire/deep_oremine/conf:41
 #: ../../tribes/empire/oremine/conf:41
 msgid "Main Iron Vein Exhausted"
-msgstr ""
+msgstr "Tha prìomh-chuisle iarainn air a caitheamh"
 
 #: ../../tribes/empire/deep_oremine/conf:42
 msgid ""
@@ -1394,6 +1406,9 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum "
+"faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh "
+"tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/empire/deep_oremine/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:17
@@ -1427,12 +1442,14 @@ msgstr "Buain cruithneachd"
 #: ../../tribes/empire/farm/conf:43
 #: ../../tribes/empire/vineyard/conf:42
 msgid "Out of Fields"
-msgstr ""
+msgstr "Chan eil achadh ann"
 
 #: ../../tribes/empire/farm/conf:44
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig "
+"an tuathanas seo sìol."
 
 #: ../../tribes/empire/farm/help.lua:17
 #: ../../tribes/empire/vineyard/help.lua:17
@@ -1467,13 +1484,15 @@ msgstr "Togaidh e iasg on mhuir."
 
 #: ../../tribes/empire/fishers_house/conf:27
 msgid "Out of Fish"
-msgstr ""
+msgstr "Chan eil iasg ann"
 
 #: ../../tribes/empire/fishers_house/conf:28
 msgid ""
 "The fisher working in this fisher’s house can’t find any fish in his working "
 "radius."
 msgstr ""
+"Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam "
+"bith taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1540,6 +1559,9 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran "
+"nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a "
+"chèile no a mhilleadh."
 
 #: ../../tribes/empire/goldore/conf:1
 msgid ""
@@ -1572,6 +1594,8 @@ msgstr ""
 #: ../../tribes/empire/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
+"Seo àite-fuirich do mhuinntir. Cumaidh tu am bathar 's na acainnean agad ann "
+"cuideachd."
 
 #: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
@@ -1582,6 +1606,8 @@ msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
 msgstr ""
+"Ged a bhuail an long seo ri tìr, 's urrainn do mhuinntir fuireach ann "
+"fhathast. Cumaidh tu am bathar 's na h-acainnean agad ann cuideachd."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
@@ -1616,13 +1642,15 @@ msgstr "Bheir an sealgair feòil mhath dha na tuinichean."
 
 #: ../../tribes/empire/hunters_house/conf:27
 msgid "Out of Game"
-msgstr ""
+msgstr "Chan eil sitheann ann"
 
 #: ../../tribes/empire/hunters_house/conf:28
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "working radius."
 msgstr ""
+"Cha do lorg an sealgair a tha a' fuireach san taigh-sealgair seo sitheann "
+"taobh a-staigh a raoin-obrach tuilleadh."
 
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1707,7 +1735,7 @@ msgstr "Leagaidh e craobhan."
 
 #: ../../tribes/empire/lumberjacks_house/conf:27
 msgid "Out of Trees"
-msgstr ""
+msgstr "Chan eil craobhan ann"
 
 #: ../../tribes/empire/lumberjacks_house/conf:28
 msgid ""
@@ -1715,6 +1743,9 @@ msgid ""
 "his working radius. You should consider dismantling or destroying the "
 "building or building a forester’s house."
 msgstr ""
+"Cha do lorg an coilltear a tha ag obair aig an taigh coillteir seo craobh "
+"taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a "
+"chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -1762,6 +1793,9 @@ msgid ""
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
 msgstr ""
+"Tha cuisle na mèinne marmoir seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às "
+"a chèile no a mhilleadh."
 
 #: ../../tribes/empire/marblemine/help.lua:17
 msgid "Carve marble and stones out of the rock in mountain terrain."
@@ -1802,6 +1836,9 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às "
+"a chèile no a mhilleadh."
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your outpost."
@@ -1832,13 +1869,15 @@ msgstr ""
 
 #: ../../tribes/empire/quarry/conf:43
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Chan eil creagan ann"
 
 #: ../../tribes/empire/quarry/conf:44
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
 msgstr ""
+"Chan urrainn dhan chlachair a tha ag obair aig a' choireall seo creag a lorg "
+"taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
@@ -1873,7 +1912,7 @@ msgstr ""
 
 #: ../../tribes/empire/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
-msgstr ""
+msgstr "Baile daingnichte"
 
 #: ../../tribes/empire/scripting/sc01_fortified_village.lua:119
 msgid "Not enough space"
@@ -2077,6 +2116,8 @@ msgstr "Buain fìonan"
 msgid ""
 "The farmer working at this vineyard has no cleared soil to plant his seeds."
 msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig "
+"an fhìon-lios seo sìol."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -2136,12 +2177,14 @@ msgstr "Fighidh e clò de chlòimh."
 
 #: ../../tribes/empire/well/conf:30
 msgid "Out of Water"
-msgstr ""
+msgstr "Chan eil uisge ann"
 
 #: ../../tribes/empire/well/conf:31
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
 msgstr ""
+"Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg "
+"taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/empire/well/help.lua:18
 msgid "Draws water out of the deep."
