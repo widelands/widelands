@@ -143,7 +143,7 @@ const std::string& MilitarySite::update_statistics_string()
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% are currently open soldier slots in the building */
 			m_statistics_string += (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
-					% stationed % present % (stationed - present)).str();
+					% stationed % present).str();
 		}
 	}
 	return m_statistics_string;
