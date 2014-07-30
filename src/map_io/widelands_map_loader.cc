@@ -32,6 +32,7 @@
 #include "map_io/one_world_legacy_lookup_table.h"
 #include "map_io/widelands_map_allowed_building_types_data_packet.h"
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
+#include "map_io/widelands_map_bob_data_packet.h"
 #include "map_io/widelands_map_building_data_packet.h"
 #include "map_io/widelands_map_buildingdata_data_packet.h"
 #include "map_io/widelands_map_elemental_data_packet.h"
@@ -161,6 +162,18 @@ int32_t WL_Map_Loader::load_map_complete
 		p.Read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
+
+	// This call must stay around forever since this was the way critters have
+	// been saved into the map before 2010. Most of the maps we ship are still
+	// old in that sense and most maps on the homepage too.
+	if (m_fs->FileExists("binary/bob")) {
+		log("Reading (legacy) Bob Data ... ");
+		{
+			Map_Bob_Data_Packet p;
+			p.Read(*m_fs, egbase, *m_mol, *lookup_table);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+	}
 
 	log("Reading Resources Data ... ");
 	{Map_Resources_Data_Packet      p; p.Read(*m_fs, egbase, *lookup_table);}
