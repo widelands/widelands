@@ -167,10 +167,12 @@ public:
 	 * state of the production. This string is shown as a tooltip
 	 * when the mouse hovers over the building.
 	 */
+	// NOCOM(#sirver): take const std::string&
 	void set_production_result(char const * text) {
 		m_production_result.assign(text);
 	}
 
+	// NOCOM(#sirver): take const std::string&
 	void set_production_result(std::string text) {
 		m_production_result = text;
 	}
@@ -197,6 +199,11 @@ public:
 	bool can_start_working() const;
 
 	/// sends a message to the player e.g. if the building's resource can't be found
+	// NOCOM(#codereview): const std::string& sender. There is never a reason to not take a big object as const ref.
+	// It would be even cooler if the productionsite just notifications::notify() that it ran out of resources and
+	// somewhere in wui (probably interactive_player) would actually send the message. This needs some more thought though -
+	// this would imply that messages should be completely in the UI and not in the logic, which would make trouble with scenario
+	// messages I guess.
 	void out_of_resources(Game & game, std::string sender, uint8_t minutes);
 
 	void set_default_anim(std::string);

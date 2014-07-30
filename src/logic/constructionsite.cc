@@ -78,6 +78,7 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
 Partially_Finished_Building (cs_descr),
 m_fetchfromflag     (0),
 m_builder_idle      (false),
+	// NOCOM(#codereview): std::string starts out empty. No need to explicitly initialize it to that.
 m_statistics_string ("")
 {}
 

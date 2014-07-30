@@ -1021,6 +1021,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			productionsite.m_statistics_changed = fr.Unsigned8();
 			{
 				char const * const statistics_string        = fr.CString();
+				// NOCOM(#codereview): this is broken and I do not understand why you still bother with this check anyways.
+				// You turned the strings into std::string, so they do not have a
+				// size limitation anymore. But sizeof(const char*) == 8 on 64 bit
+				// machines always. This is different to sizeof(char buffer[128]) == 128 (only true for constant buffer sizes).
 				size_t       const statistics_string_length = productionsite.get_statistics_string().size();
 				if (sizeof(statistics_string) <= statistics_string_length)
 					log
@@ -1033,6 +1037,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			{
 				char const * const result_string        = fr.CString();
 				size_t       const result_string_length = productionsite.production_result().size();
+				// NOCOM(#codereview): same comment
 				if (sizeof(result_string) <= result_string_length)
 					log
 						("WARNING: productionsite result string can be at "

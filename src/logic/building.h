@@ -203,6 +203,24 @@ public:
 	 * By default, the string is empty. Production buildings will want to override
 	 * this with a percentage indicating how well the building works, etc.
 	 */
+	// NOCOM(#codereview): keeping a class member around that you will never touch just so that you can
+	// return a reference to it is quite confusing for readers of your class. I would either opt to returning a string
+	// here (and accept the copy). Or even better would be to employ http://en.wikipedia.org/wiki/Non-virtual_interface_pattern .
+	// This would look like this:
+	// const string& get_and_update_statistics_string() {  // this could be two methods too.
+	// 	update_statistics_string(&m_statistics_string); // Note: passing as pointer signals the string is changed
+	// 	return m_statistics_string;
+	// }
+	//
+	// protected: // Note: the virtual method is protected, so it cannot be called from our client, but can be overridden by childs.
+	// virtual update_statistics_string(string* stast_string) {
+	// 	// Does nothing in Bulding, but will do something in child classes.
+	//	}
+	//
+	//	Now the childs do not need a statistics string anymore. Of course this
+	//	only works if you can always want to update the statistics (and can do
+	//	it) when you call get_and_update_statistics_string(). Otherwise, just
+	//	return a string.
 	virtual const std::string& update_statistics_string() {
 		return m_statistics_string;
 	}

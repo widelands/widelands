@@ -54,18 +54,12 @@ const std::string & get_locale();
 void set_localedir(std::string);
 
 
-// This enum lists the available types of enumeration for localize_item_list
-enum class ItemListType : uint8_t {
-	AND, //  concatenate with "and"
-	OR   //  concatenate with "or"
-};
-
-
-/*
- * Localize a list of items. The last 2 items are concatenated with "and" or "or",
- * depending on the ItemListType.
- */
-std::string localize_item_list(const std::vector<std::string>& items, ItemListType);
+// Localize a list of 'items'. The last 2 items are concatenated with "and" or
+// "or", depending on 'concatenate_with'.
+// NOCOM(#codereview): I moved this down, as it is only meant to be used with this method. I find this form of
+// odcumentation easier to read as it is more compact. For the same reason, I prefer // to /* */ (less lines).
+enum class ConcatenateWith { AND, OR };
+std::string localize_item_list(const std::vector<std::string>& items, ConcatenateWith concatenate_with);
 
 }
 

@@ -268,8 +268,7 @@ m_anim(0),
 m_animstart(0),
 m_leave_time(0),
 m_defeating_player(0),
-m_seeing(false),
-m_statistics_string("")
+m_seeing(false)
 {}
 
 Building::~Building()
