@@ -268,7 +268,8 @@ m_anim(0),
 m_animstart(0),
 m_leave_time(0),
 m_defeating_player(0),
-m_seeing(false)
+m_seeing(false),
+m_statistics_string("")
 {}
 
 Building::~Building()
@@ -518,7 +519,7 @@ std::string Building::info_string(const std::string & format) {
 			switch (*format_iter) {
 			FORMAT('%', '%');
 			FORMAT('i', serial());
-			FORMAT('t', get_statistics_string());
+			FORMAT('t', update_statistics_string());
 			FORMAT
 				('s',
 				 (descr().get_ismine()                  ? _("mine")   :
@@ -560,23 +561,6 @@ std::string Building::info_string(const std::string & format) {
 	}
 	const std::string result_str = result.str();
 	return result_str.empty() ? result_str : as_uifont(result_str);
-}
-
-
-/*
-===============
-Building::get_statistics_string [virtual]
-
-Return the overlay string that is displayed on the map view when enabled
-by the player.
-
-By default, there is no such string. Production buildings will want to
-override this with a percentage indicating how well the building works, etc.
-===============
-*/
-std::string Building::get_statistics_string()
-{
-	return "";
 }
 
 

@@ -151,7 +151,11 @@ public:
 		return m_working_positions;
 	}
 
-	std::string get_statistics_string() override;
+	// A const getter for map_io. Normally, we will want the updated string.
+	virtual const std::string& get_statistics_string() const {
+		return m_statistics_string;
+	}
+	const std::string& update_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
@@ -277,13 +281,13 @@ protected:  // TrainingSite must have access to this stuff
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
-	char                     m_statistics_buffer[128];
 	uint8_t                  m_last_stat_percent;
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 
 private:
+	std::string              m_statistics_string;
 	std::string              m_production_result; // hover tooltip text
 	uint32_t                 m_out_of_resource_delay_counter;
 

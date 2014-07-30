@@ -195,7 +195,17 @@ public:
 	PositionList get_positions (const Editor_Game_Base &) const override;
 
 	std::string info_string(const std::string & format);
-	virtual std::string get_statistics_string();
+
+	/*
+	 * Return the overlay string that is displayed on the map view when enabled
+	 * by the player.
+	 *
+	 * By default, the string is empty. Production buildings will want to override
+	 * this with a percentage indicating how well the building works, etc.
+	 */
+	virtual const std::string& update_statistics_string() {
+		return m_statistics_string;
+	}
 
 	/// \returns the queue for a ware type or \throws _wexception.
 	virtual WaresQueue & waresqueue(Ware_Index);
@@ -301,6 +311,8 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings m_old_buildings;
+private:
+	std::string             m_statistics_string;
 };
 
 }

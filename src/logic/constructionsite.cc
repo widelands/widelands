@@ -76,8 +76,9 @@ IMPLEMENTATION
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
 Partially_Finished_Building (cs_descr),
-m_fetchfromflag  (0),
-m_builder_idle   (false)
+m_fetchfromflag     (0),
+m_builder_idle      (false),
+m_statistics_string ("")
 {}
 
 
@@ -86,14 +87,14 @@ m_builder_idle   (false)
 Print completion percentage.
 ===============
 */
-std::string ConstructionSite::get_statistics_string()
+const std::string& ConstructionSite::update_statistics_string()
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	std::string perc_s =
+	m_statistics_string =
 		(boost::format("<font color=%s>%s</font>")
 		 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
 		 .str();
-	return perc_s;
+	return m_statistics_string;
 }
 
 /*

@@ -1019,39 +1019,27 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			for (uint32_t i = 0; i < productionsite.m_statistics.size(); ++i)
 				productionsite.m_statistics[i] = fr.Unsigned8();
 			productionsite.m_statistics_changed = fr.Unsigned8();
-			if (packet_version == 1) {
-				memcpy(productionsite.m_statistics_buffer, fr.Data(40), 40);
-				productionsite.m_statistics_buffer[39] = '\0';
-			} else {
-				{
-					char const * const statistics_string        = fr.CString();
-					size_t       const statistics_string_length =
-						snprintf
-							(productionsite.m_statistics_buffer,
-							 sizeof(productionsite.m_statistics_buffer),
-							 "%s", statistics_string);
-					if
-						(sizeof(productionsite.m_statistics_buffer)
-						 <=
-						 statistics_string_length)
-						log
-							("WARNING: productionsite statistics string can be at "
-							 "most %" PRIuS " characters but a loaded building has the "
-							 "string \"%s\" of length %" PRIuS "\n",
-							 sizeof(productionsite.m_statistics_buffer) - 1,
-							 statistics_string, statistics_string_length);
-				}
-				{
-					char const * const result_string        = fr.CString();
-					size_t       const result_string_length = productionsite.production_result().size();
-					if (sizeof(result_string) <= result_string_length)
-						log
-							("WARNING: productionsite result string can be at "
-							 "most %" PRIuS " characters but a loaded building has the "
-							 "string \"%s\" of length %" PRIuS "\n",
-							 sizeof(result_string) - 1,
-							 productionsite.production_result().c_str(), result_string_length);
-				}
+			{
+				char const * const statistics_string        = fr.CString();
+				size_t       const statistics_string_length = productionsite.get_statistics_string().size();
+				if (sizeof(statistics_string) <= statistics_string_length)
+					log
+						("WARNING: productionsite statistics string can be at "
+						 "most %" PRIuS " characters but a loaded building has the "
+						 "string \"%s\" of length %" PRIuS "\n",
+						 sizeof(statistics_string) - 1,
+						 productionsite.get_statistics_string().c_str(), statistics_string_length);
+			}
+			{
+				char const * const result_string        = fr.CString();
+				size_t       const result_string_length = productionsite.production_result().size();
+				if (sizeof(result_string) <= result_string_length)
+					log
+						("WARNING: productionsite result string can be at "
+						 "most %" PRIuS " characters but a loaded building has the "
+						 "string \"%s\" of length %" PRIuS "\n",
+						 sizeof(result_string) - 1,
+						 productionsite.production_result().c_str(), result_string_length);
 			}
 		} else
 			throw game_data_error
@@ -1548,7 +1536,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		fw.Unsigned8(productionsite.m_statistics[i]);
 	fw.Unsigned8(productionsite.m_statistics_changed);
-	fw.String(productionsite.m_statistics_buffer);
+	fw.String(productionsite.get_statistics_string());
 	fw.String(productionsite.production_result());
 }
 

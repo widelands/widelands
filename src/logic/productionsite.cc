@@ -203,10 +203,10 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle"),
+	m_statistics_string (""),
 	m_production_result (""),
 	m_out_of_resource_delay_counter(0)
 {
-	m_statistics_buffer[0] = '\0';
 }
 
 ProductionSite::~ProductionSite() {
@@ -217,31 +217,28 @@ ProductionSite::~ProductionSite() {
 /**
  * Display whether we're occupied.
  */
-std::string ProductionSite::get_statistics_string()
+const std::string& ProductionSite::update_statistics_string()
 {
 	uint32_t const nr_working_positions = descr().nr_working_positions();
 	uint32_t       nr_workers           = 0;
 	for (uint32_t i = nr_working_positions; i;)
 		nr_workers += m_working_positions[--i].worker ? 1 : 0;
 	if (!nr_workers) {
-		 return
+		 m_statistics_string =
 			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)")).str();
 	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		return
+		m_statistics_string =
 			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
 				ngettext("Worker missing", "Workers missing", nr_requests))
 			.str();
-	}
-
-	if (m_statistics_changed) {
+	} else if (m_is_stopped) {
+		m_statistics_string =
+			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)")).str();
+	} else if (m_statistics_changed) {
 		calc_statistics();
 	}
 
-	if (m_is_stopped) {
-		return (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)")).str();
-	}
-
-	return m_statistics_buffer;
+	return m_statistics_string;
 }
 
 /**
@@ -311,7 +308,7 @@ void ProductionSite::calc_statistics()
 	else
 		color = UI_FONT_CLR_GOOD_HEX;
 	const std::string perc_str =
-		(boost::format("<font color=%1$s>%2$i%%</font>") % color % percOk).str();
+		(boost::format("<font color=%s>%i%%</font>") % color % percOk).str();
 
 	std::string trend;
 	if (lastPercOk > percOk) {
@@ -328,13 +325,10 @@ void ProductionSite::calc_statistics()
 		(boost::format("<font color=%s>%s</font>") % color % trend).str();
 
 	if (0 < percOk && percOk < 100) {
-		snprintf
-			(m_statistics_buffer, sizeof(m_statistics_buffer),
-			 "%s %s", perc_str.c_str(), trend_str.c_str());
+		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
+		m_statistics_string = (boost::format("%s %s") % perc_str % trend_str).str();
 	} else {
-		snprintf
-			(m_statistics_buffer, sizeof(m_statistics_buffer),
-			 "%s", perc_str.c_str());
+		m_statistics_string = perc_str;
 	}
 	m_last_stat_percent = percOk;
 	m_statistics_changed = false;

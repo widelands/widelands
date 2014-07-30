@@ -82,7 +82,7 @@ public:
 	MilitarySite(const MilitarySiteDescr &);
 	virtual ~MilitarySite();
 
-	std::string get_statistics_string() override;
+	const std::string& update_statistics_string() override;
 
 	void init(Editor_Game_Base &) override;
 	void cleanup(Editor_Game_Base &) override;
@@ -177,6 +177,7 @@ private:
 	int32_t m_next_swap_soldiers_time;
 	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
 	bool m_doing_upgrade_request;
+	std::string m_statistics_string;
 };
 
 }

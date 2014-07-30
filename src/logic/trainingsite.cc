@@ -186,15 +186,6 @@ TrainingSite::init_kick_state(const tAttribute & art, const TrainingSiteDescr & 
 
 
 /**
- * Retrieve the training program that is currently running.
- * \return  the name of the current program
- */
-std::string TrainingSite::get_statistics_string()
-{
-	return ProductionSite::get_statistics_string();
-}
-
-/**
  * Setup the building and request soldiers
  */
 void TrainingSite::init(Editor_Game_Base & egbase)
