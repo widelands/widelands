@@ -237,7 +237,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			gl.preload_game(gpdp);
 
 			m_list.add
-				(FileSystem::FS_FilenameWoExt(pname->c_str()).c_str(), *pname);
+				(format_timestring(FileSystem::FS_FilenameWoExt(pname->c_str())).c_str(), *pname);
 		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 

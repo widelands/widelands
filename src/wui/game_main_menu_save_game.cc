@@ -134,8 +134,6 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		m_gametime.set_text(gametimestring(gametime));
 
 		int player_nr = parent.game().player_manager()->get_number_of_players();
-		// TODO(GunChleoc): This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
-		/** TRANSLATORS: This is preceded by a number */
 		m_players_label.set_text(
 		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
 		m_win_condition.set_text(parent.game().get_win_condition_displayname());
@@ -157,7 +155,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	gl.preload_game(gpdp); //  This has worked before, no problem
 
 	{
-		m_editbox->setText(FileSystem::FS_FilenameWoExt(name.c_str()));
+		m_editbox->setText(format_timestring(FileSystem::FS_FilenameWoExt(name.c_str())));
 	}
 	m_button_ok->set_enabled(true);
 
@@ -215,7 +213,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 		try {
 			Widelands::Game_Loader gl(name, igbase().game());
 			gl.preload_game(gpdp);
-			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
+			m_ls.add(format_timestring(FileSystem::FS_FilenameWoExt(name).c_str()).c_str(), name);
 		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 }

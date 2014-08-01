@@ -19,10 +19,15 @@
 
 #include "base/time_string.h"
 
+#include <algorithm>
 #include <cassert>
 #include <ctime>
+#include <string>
 
+#include <boost/format.hpp>
 #include <stdint.h>
+
+#include "base/i18n.h"
 
 namespace  {
 char timestring_buffer[] = "YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character for FAT FS
@@ -82,7 +87,104 @@ char * timestring() {
 	return timestring_buffer;
 }
 
-char * gametimestring(uint32_t gametime)
+namespace  {
+std::string localize_month(int8_t month) {
+	std::string fallback = std::to_string(month);
+	switch (month) {
+		case 1:
+			/** TRANSLATORS: January */
+			return _("Jan");
+		case 2:
+			/** TRANSLATORS: February */
+			return _("Feb");
+		case 3:
+			/** TRANSLATORS: March */
+			return _("Mar");
+		case 4:
+			/** TRANSLATORS: April */
+			return _("Apr");
+		case 5:
+			/** TRANSLATORS: May */
+			return _("May");
+		case 6:
+			/** TRANSLATORS: June */
+			return _("Jun");
+		case 7:
+			/** TRANSLATORS: July */
+			return _("Jul");
+		case 8:
+			/** TRANSLATORS: August */
+			return _("Aug");
+		case 9:
+			/** TRANSLATORS: September */
+			return _("Sep");
+		case 10:
+			/** TRANSLATORS: October */
+			return _("Oct");
+		case 11:
+			/** TRANSLATORS: November */
+			return _("Nov");
+		case 12:
+			/** TRANSLATORS: December */
+			return _("Dec");
+		default:
+			return fallback;
+	}
+}
+}
+
+
+// Locale-dependent formatting for datetime-based filenames.
+std::string format_timestring(std::string timestring) {
+
+	std::string result = "";
+
+	// Do some formatting if this is a string of the type "YYYY-MM-DDThh.mm.ss"
+	// check separators
+	if (timestring.length() >= sizeof(timestring_buffer) - 1 &&
+		 timestring.compare(4, 1, "-") == 0 &&
+		 timestring.compare(7, 1, "-") == 0 &&
+		 timestring.compare(10, 1, "T") == 0 &&
+		 timestring.compare(13, 1, ".") == 0 &&
+		 timestring.compare(16, 1, ".") == 0) {
+
+		std::string year = timestring.substr(0, 4);
+		std::string month = timestring.substr(5, 2);
+		std::string day = timestring.substr(8, 2);
+		std::string hour = timestring.substr(11, 2);
+		std::string minute = timestring.substr(14, 2);
+		std::string second = timestring.substr(17, 2);
+
+		// check digits
+		if (std::all_of(year.begin(), year.end(), ::isdigit) &&
+			 std::all_of(month.begin(), month.end(), ::isdigit) &&
+			 std::all_of(day.begin(), day.end(), ::isdigit) &&
+			 std::all_of(hour.begin(), hour.end(), ::isdigit) &&
+			 std::all_of(minute.begin(), minute.end(), ::isdigit) &&
+			 std::all_of(second.begin(), second.end(), ::isdigit)) {
+
+			month = localize_month(stoi(month));
+
+			/** TRANSLATORS: Date format for filenames on load game screens. YYYY Mon DD hh:mm:ss */
+			result = (boost::format(_("%1% %2% %3% %4%:%5%:%6%"))
+						 % day % month % year
+						 % hour % minute % second).str();
+
+			if (timestring.length() > sizeof(timestring_buffer) - 1) {
+				result.append(timestring.substr(19));
+			}
+
+		} else {
+				result = timestring;
+		}
+	} else {
+		result = timestring;
+	}
+	return result;
+}
+
+
+char * gametimestring_leading_zeros(uint32_t gametime)
 {
 	uint32_t time = gametime / 1000;
 	gamestringbuffer[8] = '0' +  time        % 10;
@@ -93,4 +195,26 @@ char * gametimestring(uint32_t gametime)
 	gamestringbuffer[1] = '0' + (time /= 10) % 10;
 	gamestringbuffer[0] = '0' + (time /= 10);
 	return gamestringbuffer;
+}
+
+char * gametimestring(uint32_t gametime)
+{
+	// update buffer
+	gametimestring_leading_zeros(gametime);
+
+	// remove leading 0s
+	int8_t returnindex = 0;
+	if (gamestringbuffer[0] == '0')
+	{
+		returnindex++;
+		if (gamestringbuffer[1] == '0')
+		{
+			returnindex++;
+			if (gamestringbuffer[2] == '0')
+			{
+				returnindex = returnindex + 2;
+			}
+		}
+	}
+	return &gamestringbuffer[returnindex];
 }
