@@ -518,7 +518,7 @@ std::string Building::info_string(const std::string & format) {
 			switch (*format_iter) {
 			FORMAT('%', '%');
 			FORMAT('i', serial());
-			FORMAT('t', update_statistics_string());
+			FORMAT('t', update_and_get_statistics_string());
 			FORMAT
 				('s',
 				 (descr().get_ismine()                  ? _("mine")   :

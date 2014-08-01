@@ -1021,10 +1021,24 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			productionsite.m_statistics_changed = fr.Unsigned8();
 			{
 				char const * const statistics_string        = fr.CString();
-				// NOCOM(#codereview): this is broken and I do not understand why you still bother with this check anyways.
+				// NOCOM(#codereview): this is broken and I do not understand why you still bother with this check
+				// anyways.
 				// You turned the strings into std::string, so they do not have a
 				// size limitation anymore. But sizeof(const char*) == 8 on 64 bit
-				// machines always. This is different to sizeof(char buffer[128]) == 128 (only true for constant buffer sizes).
+				// machines always. This is different to sizeof(char buffer[128]) == 128 (only true for constant
+				// buffer sizes).
+
+				// NOCOM(GunChleoc): The reason I still bother is because if I delete this, I can't load any
+				// savegames
+				// - don't ask me why, I have no idea, since I expect this to do nothing.
+				//WL_Map_Loader::load_map_complete() took 64ms
+				//Game_Loader::load() took 1375ms
+				//Fata exception: buildingdata: building 3211520: not found
+				//Object_Manager: ouch! remaining objects
+				//lastserial: 582
+				//Mearachd le dàta a' gheama
+				//buildingdata: building 3211520: not found
+
 				size_t       const statistics_string_length = productionsite.get_statistics_string().size();
 				if (sizeof(statistics_string) <= statistics_string_length)
 					log

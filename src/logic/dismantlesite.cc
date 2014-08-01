@@ -62,8 +62,7 @@ IMPLEMENTATION
 
 
 DismantleSite::DismantleSite(const DismantleSiteDescr & gdescr) :
-Partially_Finished_Building(gdescr),
-m_statistics_string ("")
+Partially_Finished_Building(gdescr)
 {}
 
 DismantleSite::DismantleSite
@@ -94,11 +93,10 @@ Partially_Finished_Building(gdescr)
 Print completion percentage.
 ===============
 */
-const std::string& DismantleSite::update_statistics_string()
+std::string DismantleSite::update_and_get_statistics_string()
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	m_statistics_string = (boost::format(_("%u%% dismantled")) % percent).str();
-	return m_statistics_string;
+	return (boost::format(_("%u%% dismantled")) % percent).str();
 }
 
 /*

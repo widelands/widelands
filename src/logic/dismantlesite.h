@@ -70,7 +70,7 @@ public:
 		(const DismantleSiteDescr & descr, Editor_Game_Base &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
-	const std::string& update_statistics_string() override;
+	std::string update_and_get_statistics_string() override;
 
 	bool burn_on_destroy() override;
 	void init   (Editor_Game_Base &) override;
@@ -86,8 +86,6 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry) override;
 
 	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
-private:
-	std::string m_statistics_string;
 };
 
 }

@@ -221,8 +221,13 @@ public:
 	//	only works if you can always want to update the statistics (and can do
 	//	it) when you call get_and_update_statistics_string(). Otherwise, just
 	//	return a string.
-	virtual const std::string& update_statistics_string() {
-		return m_statistics_string;
+	 // NOCOM(GunChleoc): We need to offer a get_and_update here for the game (which gets overwritten by subclasses if needed),
+	 // and a const get for the map_io.
+	 // What would the public update_statistics_string(&m_statistics_string) be for?
+	 // The class member is needed for map_io only, but if >I want to save this correctly, it needs to be there
+	 //- for productionsite and subclasses only though, because militarysite doesn't need past data.
+	virtual std::string update_and_get_statistics_string() {
+		return "";
 	}
 
 	/// \returns the queue for a ware type or \throws _wexception.
@@ -329,8 +334,6 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings m_old_buildings;
-private:
-	std::string             m_statistics_string;
 };
 
 }

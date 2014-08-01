@@ -73,7 +73,7 @@ class ConstructionSite : public Partially_Finished_Building {
 public:
 	ConstructionSite(const ConstructionSiteDescr & descr);
 
-	const std::string& update_statistics_string() override;
+	std::string update_and_get_statistics_string() override;
 
 	const Player::Constructionsite_Information & get_info() {return m_info;}
 
@@ -105,7 +105,6 @@ private:
 
 	bool        m_builder_idle;   // used to determine whether the builder is idle
 	Player::Constructionsite_Information m_info; // asked for by player point of view for the gameview
-	std::string m_statistics_string;
 };
 
 }

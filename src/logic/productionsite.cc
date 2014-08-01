@@ -203,7 +203,6 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle"),
-	m_statistics_string (""),
 	m_production_result (""),
 	m_out_of_resource_delay_counter(0)
 {
@@ -217,7 +216,7 @@ ProductionSite::~ProductionSite() {
 /**
  * Display whether we're occupied.
  */
-const std::string& ProductionSite::update_statistics_string()
+std::string ProductionSite::update_and_get_statistics_string()
 {
 	uint32_t const nr_working_positions = descr().nr_working_positions();
 	uint32_t       nr_workers           = 0;
@@ -237,7 +236,6 @@ const std::string& ProductionSite::update_statistics_string()
 	} else if (m_statistics_changed) {
 		calc_statistics();
 	}
-
 	return m_statistics_string;
 }
 
@@ -907,7 +905,7 @@ void ProductionSite::train_workers(Game & game)
 }
 
 
-void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t minutes)
+void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
 	if (m_out_of_resource_delay_counter >=
 		 descr().out_of_resource_delay_attempts()) {
@@ -921,7 +919,7 @@ void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t m
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
-				 sender,
+					  "produce",
 				 descr().out_of_resource_title(),
 				 descr().out_of_resource_message(),
 				 true,
@@ -932,6 +930,10 @@ void ProductionSite::out_of_resources(Game & game, std::string sender, uint8_t m
 		 descr().out_of_resource_delay_attempts()) {
 		m_out_of_resource_delay_counter = 0;
 	}
+}
+
+void ProductionSite::unnotify_player() {
+	 set_production_result("");
 }
 
 

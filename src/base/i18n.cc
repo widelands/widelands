@@ -318,14 +318,14 @@ void set_locale(std::string name) {
 const std::string & get_locale() {return locale;}
 
 
-std::string localize_item_list(const std::vector<std::string>& items, ItemListType listtype) {
+std::string localize_item_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
 	std::string result = "";
 	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
 		if (it == items.begin()) {
 			result = *it;
 		}
 		else if (it == --items.end()) {
-			if (listtype == ItemListType::AND) {
+			if (listtype == ConcatenateWith::AND) {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
 				result = (boost::format(_("%1$s and %2$s")) % result % (*it)).str();

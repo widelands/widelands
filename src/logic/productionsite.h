@@ -155,28 +155,19 @@ public:
 	virtual const std::string& get_statistics_string() const {
 		return m_statistics_string;
 	}
-	const std::string& update_statistics_string() override;
+	std::string update_and_get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 
 	const std::string& production_result() const {return m_production_result;}
 
-	/*
-	 * Production and worker programs set this to explain the current
-	 * state of the production. This string is shown as a tooltip
-	 * when the mouse hovers over the building.
-	 */
-	// NOCOM(#sirver): take const std::string&
-	void set_production_result(char const * text) {
-		m_production_result.assign(text);
-	}
-
-	// NOCOM(#sirver): take const std::string&
-	void set_production_result(std::string text) {
+	 // Production and worker programs set this to explain the current
+	 // state of the production. This string is shown as a tooltip
+	 // when the mouse hovers over the building.
+	 void set_production_result(const std::string& text) {
 		m_production_result = text;
 	}
-
 
 	WaresQueue & waresqueue(Ware_Index) override;
 
@@ -199,12 +190,14 @@ public:
 	bool can_start_working() const;
 
 	/// sends a message to the player e.g. if the building's resource can't be found
-	// NOCOM(#codereview): const std::string& sender. There is never a reason to not take a big object as const ref.
+	 // NOCOM(#codereview):
 	// It would be even cooler if the productionsite just notifications::notify() that it ran out of resources and
 	// somewhere in wui (probably interactive_player) would actually send the message. This needs some more thought though -
 	// this would imply that messages should be completely in the UI and not in the logic, which would make trouble with scenario
 	// messages I guess.
-	void out_of_resources(Game & game, std::string sender, uint8_t minutes);
+	 // NOCOM(GunChleoc): send_message traces to player.cc, so I expect we have quite a lot of stuff in the logic about messages.
+	 void notify_player(Game & game, uint8_t minutes);
+	 void unnotify_player();
 
 	void set_default_anim(std::string);
 

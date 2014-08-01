@@ -335,7 +335,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description
 	for (const Ware_Index& temp_ware : group.first) {
 		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
-	std::string condition = i18n::localize_item_list(condition_list, i18n::ItemListType::AND);
+	std::string condition = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
 		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
 		/** TRANSLATORS:    %1$s = "3" */
@@ -357,11 +357,11 @@ std::string ProductionProgram::ActReturn::Site_Has::description_negation
 	for (const Ware_Index& temp_ware : group.first) {
 		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
-	std::string condition = i18n::localize_item_list(condition_list, i18n::ItemListType::AND);
+	std::string condition = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
 		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
-		/** TRANSLATORS:    %1$s = "3" */
-		/** TRANSLATORS:    %2$i = "water" */
+		/** TRANSLATORS:    %1$i = "3" */
+		/** TRANSLATORS:    %2$s = "water" */
 		condition = (boost::format(_("%1$ix %2$s"))
 						 % static_cast<unsigned int>(group.second)
 						 % condition).str();
@@ -569,7 +569,7 @@ void ProductionProgram::ActReturn::execute
 				condition_list.push_back(condition->description_negation(ps.owner().tribe()));
 			}
 		}
-		std::string condition_string = i18n::localize_item_list(condition_list, i18n::ItemListType::AND);
+		std::string condition_string = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
 
 		std::string result_string = "";
 		if (m_result == Failed) {
@@ -934,15 +934,15 @@ void ProductionProgram::ActConsume::execute
 			for (const Ware_Index& ware : group.first) {
 				ware_list.push_back(tribe.get_ware_descr(ware)->descname());
 			}
-			std::string ware_string = i18n::localize_item_list(ware_list, i18n::ItemListType::OR);
+			std::string ware_string = i18n::localize_item_list(ware_list, i18n::ConcatenateWith::OR);
 
 			uint8_t const count = group.second;
 			if (1 < count) {
 				ware_string =
 					/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 					/** TRANSLATORS: For this example, this is what's in the place holders: */
-					/** TRANSLATORS:    %1$s = "3" */
-					/** TRANSLATORS:    %2$i = "water" */
+					/** TRANSLATORS:    %1$i = "3" */
+					/** TRANSLATORS:    %2$s = "water" */
 					(boost::format(_("%1$ix %2$s"))
 					 % static_cast<unsigned int>(count)
 					 % ware_string)
@@ -959,7 +959,7 @@ void ProductionProgram::ActConsume::execute
 			/** TRANSLATORS:    %3$s = "are missing" */
 			(boost::format(_("Did not start %1$s because %2$s %3$s"))
 			 % ps.top_state().program->descname()
-			 % i18n::localize_item_list(group_list, i18n::ItemListType::AND)
+			 % i18n::localize_item_list(group_list, i18n::ConcatenateWith::AND)
 			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 			/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
 			 /** TRANSLATORS: */
@@ -1054,18 +1054,19 @@ void ProductionProgram::ActProduce::execute
 	std::vector<std::string> ware_descnames;
 	for (const auto& item_pair : m_items) {
 		uint8_t const count = item_pair.second;
-		std::string ware_descname;
-		// TODO(sirver): needs boost::format and probably ngettext.
+		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
+		// TODO(GunChleoc): needs ngettext when we have one_tribe.
 		if (1 < count) {
-			char buffer[5];
-			/** TRANSLATORS: Number used in list of wares */
-			sprintf(buffer, _("%u "), count);
-			ware_descname += buffer;
+			/** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
+			/** TRANSLATORS:    %%1$i = "2" */
+			/** TRANSLATORS:    %2$s = "Coal" */
+			ware_descname = (boost::format(_("%1$ix %2$s"))
+								  % static_cast<unsigned int>(count)
+								  % ware_descname).str();
 		}
-		ware_descname += tribe.get_ware_descr(item_pair.first)->descname();
 		ware_descnames.push_back(ware_descname);
 	}
-	std::string ware_list = i18n::localize_item_list(ware_descnames, i18n::ItemListType::AND);
+	std::string ware_list = i18n::localize_item_list(ware_descnames, i18n::ConcatenateWith::AND);
 
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
@@ -1148,19 +1149,19 @@ void ProductionProgram::ActRecruit::execute
 	std::vector<std::string> worker_descnames;
 	for (const auto& item_pair : m_items) {
 		uint8_t const count = item_pair.second;
-		std::string worker_descname;
-		// TODO(sirver): needs boost::format and probably ngettext.
-		// TODO(GunChleoc): use ngettext when we have one_tribe.
+		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
+		// TODO(GunChleoc): needs ngettext when we have one_tribe.
 		if (1 < count) {
-			char buffer[5];
-			/** TRANSLATORS: Number used in list of workers */
-			sprintf(buffer, _("%u "), count);
-			worker_descname += buffer;
+			/** TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox": */
+			/** TRANSLATORS:    %1$i = "2" */
+			/** TRANSLATORS:    %2$s = "Ox" */
+			worker_descname = (boost::format(_("%1$ix %2$s"))
+									 % static_cast<unsigned int>(count)
+									 % worker_descname).str();
 		}
-		worker_descname += tribe.get_worker_descr(item_pair.first)->descname();
 		worker_descnames.push_back(worker_descname);
 	}
-	std::string unit_string = i18n::localize_item_list(worker_descnames, i18n::ItemListType::AND);
+	std::string unit_string = i18n::localize_item_list(worker_descnames, i18n::ConcatenateWith::AND);
 
 	/** TRANSLATORS: %s is a list of workers */
 	ps.set_production_result((boost::format(_("Recruited %s")) % unit_string).str());
@@ -1324,7 +1325,7 @@ void ProductionProgram::ActMine::execute
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
 		if (m_chance <= 20) {
-			ps.out_of_resources(game, "mine", 60);
+				ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
 		}

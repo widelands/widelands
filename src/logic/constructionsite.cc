@@ -77,9 +77,13 @@ IMPLEMENTATION
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
 Partially_Finished_Building (cs_descr),
 m_fetchfromflag     (0),
-m_builder_idle      (false),
-	// NOCOM(#codereview): std::string starts out empty. No need to explicitly initialize it to that.
-m_statistics_string ("")
+m_builder_idle      (false)
+// NOCOM(#codereview): std::string starts out empty. No need to explicitly initialize it to that.
+// NOCOM(GunChleoc): They drummed into my head to always initialize variables explicitly as good coding style.
+// m_fetchfromflag     (0), is initialized to the default value as well, and I don't see the difference.
+// It's now gone here, but I'd like to know what exactly I'm supposed to do in these cases,
+// because I still have one of these in productionsite.cc.
+// m_statistics_string ("")
 {}
 
 
@@ -88,14 +92,14 @@ m_statistics_string ("")
 Print completion percentage.
 ===============
 */
-const std::string& ConstructionSite::update_statistics_string()
+std::string ConstructionSite::update_and_get_statistics_string()
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	m_statistics_string =
+	std:: string result =
 		(boost::format("<font color=%s>%s</font>")
 		 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
 		 .str();
-	return m_statistics_string;
+	return result;
 }
 
 /*

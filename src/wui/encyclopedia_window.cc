@@ -186,7 +186,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					}
 
 					std::string ware_type_names =
-							i18n::localize_item_list(ware_type_descnames, i18n::ItemListType::OR);
+							i18n::localize_item_list(ware_type_descnames, i18n::ConcatenateWith::OR);
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.
