@@ -311,13 +311,13 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 				Widelands::Game_Loader gl(name, m_game);
 				gl.preload_game(gpdp);
 
-				// NOCOM that is fragile... what if somebody renamed the replay?
-				// Instead the replay should contain this information somehow
-				// (I think it does already, if not, it should be easy to
-				// add this to the preload_game) and you can extract it in preload_game() somehow.
-				// Otherwise your localize timestring must at least deal with this information
-				// and return the original string.
-				m_list.add(localize_timestring(FileSystem::FS_FilenameWoExt(name)).c_str(), name);
+				// NOCOM get_localized_display_title() doesn't work
+				std::string displaytitle = FileSystem::FS_FilenameWoExt(name);
+				if(is_timestring(displaytitle))
+				{
+					displaytitle = gpdp.get_localized_display_title();
+				}
+				m_list.add(displaytitle.c_str(), name);
 			} catch (const _wexception &) {
 				//  we simply skip illegal entries
 			}

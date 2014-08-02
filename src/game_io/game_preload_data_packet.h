@@ -25,6 +25,8 @@
 
 #include "game_io/game_data_packet.h"
 
+#include "logic/game_controller.h"
+
 namespace Widelands {
 
 /**
@@ -32,6 +34,7 @@ namespace Widelands {
  * a game for a user (for example in a listbox)
  */
 struct Game_Preload_Data_Packet : public Game_Data_Packet {
+
 	void Read (FileSystem &, Game &, MapMapObjectLoader * = nullptr) override;
 	void Write(FileSystem &, Game &, MapMapObjectSaver  * = nullptr) override;
 
@@ -44,6 +47,9 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	uint8_t get_number_of_players() {return m_number_of_players;}
 	std::string get_minimap_path() {return m_minimap_path;}
 
+	const std::string get_localized_display_title();
+	GameController::GameType get_gametype() {return m_gametype;}
+
 private:
 	std::string m_minimap_path;
 	std::string m_mapname;
@@ -52,6 +58,10 @@ private:
 	uint32_t m_gametime;
 	uint8_t  m_player_nr; // The local player idx
 	uint8_t  m_number_of_players;
+	uint16_t m_saveyear;
+	uint8_t  m_savemonth;
+	uint8_t  m_saveday;
+	GameController::GameType m_gametype;
 };
 
 }

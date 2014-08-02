@@ -77,8 +77,8 @@ int32_t ReplayGameController::getFrametime() {
 	return m_time - m_game.get_gametime();
 }
 
-std::string ReplayGameController::getGameDescription() {
-	return "replay";
+GameController::GameType ReplayGameController::getGameType() {
+	return GameController::GameType::REPLAY;
 }
 
 uint32_t ReplayGameController::realSpeed() {

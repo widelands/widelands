@@ -50,7 +50,7 @@ struct NetClient :
 	void think() override;
 	void sendPlayerCommand(Widelands::PlayerCommand &) override;
 	int32_t getFrametime() override;
-	std::string getGameDescription() override;
+	GameController::GameType getGameType() override;
 
 	uint32_t realSpeed() override;
 	uint32_t desiredSpeed() override;

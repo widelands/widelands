@@ -295,11 +295,9 @@ int32_t NetClient::getFrametime()
 	return d->time.time() - d->game->get_gametime();
 }
 
-std::string NetClient::getGameDescription()
+GameController::GameType NetClient::getGameType()
 {
-	char buf[200];
-	snprintf(buf, sizeof(buf), "network player %i", d->settings.playernum);
-	return buf;
+	return GameController::GameType::NETCLIENT;
 }
 
 void NetClient::report_result

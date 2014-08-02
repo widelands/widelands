@@ -19,7 +19,10 @@
 
 #include "game_io/game_preload_data_packet.h"
 
+#include <ctime>
 #include <memory>
+
+#include <boost/format.hpp>
 
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
@@ -65,6 +68,10 @@ void Game_Preload_Data_Packet::Read
 			if (fs.FileExists(MINIMAP_FILENAME)) {
 				m_minimap_path = MINIMAP_FILENAME;
 			}
+			m_saveyear = s.get_int("saveyear");
+			m_savemonth = s.get_int("savemonth");
+			m_saveday = s.get_int("saveday");
+			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
 			throw game_data_error
 				("unknown/unhandled version %i", packet_version);
@@ -122,6 +129,91 @@ void Game_Preload_Data_Packet::Write
 			sw->Flush();
 		}
 	}
+
+	time_t t;
+	time(&t);
+	struct tm * datetime  = localtime(&t);
+	s.set_int("saveyear", 1900 + datetime->tm_year); //  years start at 1900
+	s.set_int("savemonth", 1 + datetime->tm_mon); //  months start at 0
+	s.set_int("saveday", datetime->tm_mday);
+	s.set_int("gametype", static_cast<int32_t>(game.gameController()->getGameType()));
+}
+
+
+namespace  {
+std::string localize_month(int8_t month) {
+	switch (month) {
+		case 1:
+			/** TRANSLATORS: January */
+			return _("Jan");
+		case 2:
+			/** TRANSLATORS: February */
+			return _("Feb");
+		case 3:
+			/** TRANSLATORS: March */
+			return _("Mar");
+		case 4:
+			/** TRANSLATORS: April */
+			return _("Apr");
+		case 5:
+			/** TRANSLATORS: May */
+			return _("May");
+		case 6:
+			/** TRANSLATORS: June */
+			return _("Jun");
+		case 7:
+			/** TRANSLATORS: July */
+			return _("Jul");
+		case 8:
+			/** TRANSLATORS: August */
+			return _("Aug");
+		case 9:
+			/** TRANSLATORS: September */
+			return _("Sep");
+		case 10:
+			/** TRANSLATORS: October */
+			return _("Oct");
+		case 11:
+			/** TRANSLATORS: November */
+			return _("Nov");
+		case 12:
+			/** TRANSLATORS: December */
+			return _("Dec");
+		default:
+			return std::to_string(month);
+	}
+}
+}
+
+// NOCOM why are all the variables empty?
+const std::string Game_Preload_Data_Packet::get_localized_display_title() {
+	std::string result;
+	if (m_saveyear > 0 && m_savemonth > 0 && m_saveday > 0) {
+		result = (boost::format(_("%1$u %2$s %3$u"))
+					 % static_cast<unsigned int>(m_saveyear)
+					 % localize_month(m_savemonth)
+					 % static_cast<unsigned int>(m_saveday)).str();
+	}
+	if(m_gametype == GameController::GameType::SINGLEPLAYER) {
+		/** TRANSLATORS: Used in filenames for loading games */
+		/** TRANSLATORS: %1% is a formatted date/time string */
+		result = (boost::format(_("%1% Single Player")) % result).str();
+	}
+	else if(m_gametype == GameController::GameType::NETHOST) {
+		/** TRANSLATORS: Used in filenames for loading games */
+		/** TRANSLATORS: %1% is a formatted date/time string */
+		/** TRANSLATORS: %2% is the number of the player */
+		result = (boost::format(_("%1% Multiplayer (Player %2%, Host)"))
+					 % result % static_cast<unsigned int>(get_player_nr())).str();
+	}
+	else if(m_gametype == GameController::GameType::NETCLIENT) {
+		/** TRANSLATORS: Used in filenames for loading games */
+		/** TRANSLATORS: %1% is a formatted date/time string */
+		/** TRANSLATORS: %2% is the number of the player */
+		result = (boost::format(_("%1% Multiplayer (Player %2%)"))
+							% result % static_cast<unsigned int>(get_player_nr())).str();
+	}
+	return result;
 }
 
 }

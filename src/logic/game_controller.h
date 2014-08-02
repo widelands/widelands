@@ -42,12 +42,19 @@ enum class PlayerEndResult: uint8_t;
  */
 class GameController {
 public:
+	enum class GameType : uint8_t {
+		SINGLEPLAYER = 1, // we don't want SINGLEPLAYER just because a value is empty
+		NETCLIENT,
+		NETHOST,
+		REPLAY
+	};
+
 	virtual ~GameController() {}
 
 	virtual void think() = 0;
 	virtual void sendPlayerCommand(Widelands::PlayerCommand &) = 0;
 	virtual int32_t getFrametime() = 0;
-	virtual std::string getGameDescription() = 0;
+	virtual GameType getGameType() = 0;
 
 	/**
 	 * \return the effective speed, in milliseconds per second,

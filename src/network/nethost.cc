@@ -1416,13 +1416,9 @@ int32_t NetHost::getFrametime()
 	return d->time.time() - d->game->get_gametime();
 }
 
-std::string NetHost::getGameDescription()
+GameController::GameType NetHost::getGameType()
 {
-	char buf[200];
-	snprintf
-		(buf, sizeof(buf),
-		 "network player %i (host)", d->settings.users.at(0).position);
-	return buf;
+	return GameController::GameType::NETHOST;
 }
 
 const GameSettings& NetHost::settings()
