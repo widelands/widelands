@@ -78,12 +78,6 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
 Partially_Finished_Building (cs_descr),
 m_fetchfromflag     (0),
 m_builder_idle      (false)
-// NOCOM(#codereview): std::string starts out empty. No need to explicitly initialize it to that.
-// NOCOM(GunChleoc): They drummed into my head to always initialize variables explicitly as good coding style.
-// m_fetchfromflag     (0), is initialized to the default value as well, and I don't see the difference.
-// It's now gone here, but I'd like to know what exactly I'm supposed to do in these cases,
-// because I still have one of these in productionsite.cc.
-// m_statistics_string ("")
 {}
 
 
