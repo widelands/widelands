@@ -54,11 +54,11 @@ ProductionSite BUILDING
 */
 
 ProductionSiteDescr::ProductionSiteDescr
-	(MapObjectType type, char const * const _name, char const * const _descname,
+	(MapObjectType _type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe, const World& world)
 	:
-	BuildingDescr(type, _name, _descname, directory, prof, global_s, _tribe)
+	BuildingDescr(_type, _name, _descname, directory, prof, global_s, _tribe)
 {
 	Section * const section = prof.get_section("out_of_resource_notification");
 	if (section != nullptr)
@@ -198,15 +198,14 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_program_time      (0),
 	m_post_timer        (50),
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
-	m_statistics_changed(true),
 	m_last_stat_percent (0),
 	m_crude_percent     (0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle"),
+	m_production_result (""),
 	m_out_of_resource_delay_counter(0)
 {
-	m_statistics_buffer[0] = '\0';
-	m_result_buffer[0] = '\0';
+	calc_statistics();
 }
 
 ProductionSite::~ProductionSite() {
@@ -217,31 +216,30 @@ ProductionSite::~ProductionSite() {
 /**
  * Display whether we're occupied.
  */
-std::string ProductionSite::get_statistics_string()
-{
+void ProductionSite::update_statistics_string(std::string* s) {
 	uint32_t const nr_working_positions = descr().nr_working_positions();
-	uint32_t       nr_workers           = 0;
+	uint32_t nr_workers = 0;
 	for (uint32_t i = nr_working_positions; i;)
 		nr_workers += m_working_positions[--i].worker ? 1 : 0;
-	if (!nr_workers) {
-		 return
-			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)")).str();
-	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		return
-			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
-				ngettext("Worker missing", "Workers missing", nr_requests))
-			.str();
+
+	if (nr_workers == 0) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)"))
+		        .str();
+		return;
 	}
 
-	if (m_statistics_changed) {
-		calc_statistics();
+	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
+		      ngettext("Worker missing", "Workers missing", nr_requests)).str();
+		return;
 	}
 
 	if (m_is_stopped) {
-		return (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)")).str();
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)"))
+		        .str();
+		return;
 	}
-
-	return m_statistics_buffer;
+	*s = m_statistics_string_on_changed_statistics;
 }
 
 /**
@@ -272,7 +270,6 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 }
 
 
-
 WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
 	for (WaresQueue * ip_queue : m_input_queues) {
 		if (ip_queue->get_ware() == wi) {
@@ -287,6 +284,10 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
  */
 void ProductionSite::calc_statistics()
 {
+	// TODO(sirver): this method does too much: it calculates statistics for the
+	// last few cycles, but it also formats them as a string and persists them
+	// into a string for reuse when the class is asked for the statistics
+	// string. However this string should only then be constructed.
 	uint8_t pos;
 	uint8_t ok = 0;
 	uint8_t lastOk = 0;
@@ -299,8 +300,10 @@ void ProductionSite::calc_statistics()
 		}
 	}
 	// Somehow boost::format doesn't handle correctly uint8_t in this case
-	unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
+	m_last_stat_percent = percOk;
+
+	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
 	if (percOk > (m_crude_percent / 10000) && percOk - (m_crude_percent / 10000) > 50)
@@ -312,7 +315,7 @@ void ProductionSite::calc_statistics()
 	else
 		color = UI_FONT_CLR_GOOD_HEX;
 	const std::string perc_str =
-		(boost::format("<font color=%1$s>%2$i%%</font>") % color % percOk).str();
+		(boost::format("<font color=%s>%i%%</font>") % color % percOk).str();
 
 	std::string trend;
 	if (lastPercOk > percOk) {
@@ -329,17 +332,11 @@ void ProductionSite::calc_statistics()
 		(boost::format("<font color=%s>%s</font>") % color % trend).str();
 
 	if (0 < percOk && percOk < 100) {
-		snprintf
-			(m_statistics_buffer, sizeof(m_statistics_buffer),
-			 "%s %s", perc_str.c_str(), trend_str.c_str());
+		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
+		m_statistics_string_on_changed_statistics = (boost::format("%s %s") % perc_str % trend_str).str();
 	} else {
-		snprintf
-			(m_statistics_buffer, sizeof(m_statistics_buffer),
-			 "%s", perc_str.c_str());
+		m_statistics_string_on_changed_statistics = perc_str;
 	}
-	m_last_stat_percent = percOk;
-
-	m_statistics_changed = false;
 }
 
 
@@ -875,7 +872,6 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	switch (result) {
 	case Failed:
 		//changed by TB below
-		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(false);
 		calc_statistics();
@@ -884,13 +880,9 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		//end of changed by TB
 	case Completed:
 		m_skipped_programs.erase(program_name);
-		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(true);
-		//if (result == Completed) {
-			train_workers(game);
-			//m_result_buffer[0] = '\0';  //changed by TB
-		//}
+		train_workers(game);
 		m_crude_percent = m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
@@ -918,28 +910,35 @@ void ProductionSite::train_workers(Game & game)
 }
 
 
-void ProductionSite::worker_failed_to_find_resource(Game & game)
+void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
-	if (!descr().out_of_resource_title().empty() &&
-		m_out_of_resource_delay_counter >=
-			descr().out_of_resource_delay_attempts()
-		)
-	{
-		assert(!descr().out_of_resource_message().empty());
-		send_message
-			(game,
-			 "produce",
-			 descr().out_of_resource_title(),
-			 descr().out_of_resource_message(),
-			 true,
-			 1800000, 0);
+	if (m_out_of_resource_delay_counter >=
+		 descr().out_of_resource_delay_attempts()) {
+		if (descr().out_of_resource_title().empty())
+		{
+			set_production_result(_("Can’t find any more resources!"));
+		}
+		else {
+			set_production_result(descr().out_of_resource_title());
+
+			assert(!descr().out_of_resource_message().empty());
+			send_message
+				(game,
+					  "produce",
+				 descr().out_of_resource_title(),
+				 descr().out_of_resource_message(),
+				 true,
+				 minutes * 60000, 0);
+		}
 	}
 	if (m_out_of_resource_delay_counter++ >=
-			descr().out_of_resource_delay_attempts()
-		)
-	{
+		 descr().out_of_resource_delay_attempts()) {
 		m_out_of_resource_delay_counter = 0;
 	}
+}
+
+void ProductionSite::unnotify_player() {
+	 set_production_result("");
 }
 
 

@@ -17,7 +17,8 @@ log=1
 forester=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start planting trees because ...
+work=_planting trees
 
 [work]
 sleep=11000

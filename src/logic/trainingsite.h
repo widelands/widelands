@@ -122,8 +122,6 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(const TrainingSiteDescr &);
 
-	std::string get_statistics_string() override;
-
 	void init(Editor_Game_Base &) override;
 	void cleanup(Editor_Game_Base &) override;
 	void act(Game &, uint32_t data) override;

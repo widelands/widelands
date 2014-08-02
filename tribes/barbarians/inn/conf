@@ -24,9 +24,12 @@ meat=4
 beer=4
 
 [programs]
-produce_ration=_Produce ration
-produce_snack=_Produce snack
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start preparing a ration because ...
+produce_ration=_preparing a ration
+# TRANSLATORS: "Completed/Skipped/Did not start preparing a snack because ...
+produce_snack=_preparing a snack
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_ration]
 return=skipped unless economy needs ration

@@ -24,10 +24,14 @@ spideryarn=8
 goldyarn=4
 
 [programs]
-produce_spidercloth=_Produce spidercloth
-produce_tabard=_Produce tabard
-produce_golden_tabard=_Produce golden tabard
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start weaving spidercloth because ...
+produce_spidercloth=_weaving spidercloth
+# TRANSLATORS: "Completed/Skipped/Did not start tailoring a tabard because ...
+produce_tabard=_tailoring a tabard
+# TRANSLATORS: "Completed/Skipped/Did not start tailoring a golden tabard because ...
+produce_golden_tabard=_tailoring a golden tabard
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_spidercloth]
 return=skipped unless economy needs spidercloth

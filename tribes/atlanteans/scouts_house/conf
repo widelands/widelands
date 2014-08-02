@@ -18,7 +18,8 @@ smoked_fish=2
 bread=2
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start scouting because ...
+work=_scouting
 
 [work]
 sleep=30000

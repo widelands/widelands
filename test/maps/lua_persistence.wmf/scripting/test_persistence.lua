@@ -90,7 +90,7 @@ function check_coroutine()
    assert_function(c.func)
    assert_equal("I say zonk!", c.func("zonk"))
 
-   assert_equal("spruce_summer_old", tree.name)
+   assert_equal("spruce_summer_old", tree.descr.name)
 
    assert_equal(32, field.x)
    assert_equal(34, field.y)

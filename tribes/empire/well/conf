@@ -18,7 +18,8 @@ marble=1
 carrier=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=20000

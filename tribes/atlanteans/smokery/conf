@@ -24,9 +24,12 @@ meat=4
 log=8
 
 [programs]
-smoke_meat=_Smoke meat
-smoke_fish=_Smoke fish
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start smoking meat because ...
+smoke_meat=_smoking meat
+# TRANSLATORS: "Completed/Skipped/Did not start smoking fish because ...
+smoke_fish=_smoking fish
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [smoke_meat]
 return=skipped when site has fish and economy needs smoked_fish and not economy needs smoked_meat

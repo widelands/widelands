@@ -17,7 +17,8 @@ planks=1
 woodcutter=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=30000 # Barbarian lumberjack sleeps 25000

@@ -21,7 +21,8 @@ miller=1
 wheat=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start grinding wheat because ...
+work=_grinding wheat
 
 [work]
 sleep=5000

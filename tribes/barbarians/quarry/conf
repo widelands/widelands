@@ -15,7 +15,8 @@ log=2
 stonemason=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 worker=cut   # This order is on purpose so that the productivity

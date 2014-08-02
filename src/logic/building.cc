@@ -52,11 +52,11 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 
 BuildingDescr::BuildingDescr
-	(const MapObjectType type, char const * const _name, char const * const _descname,
+	(const MapObjectType _type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _descr)
 	:
-	MapObjectDescr(type, _name, _descname),
+	MapObjectDescr(_type, _name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
 	m_icon     (nullptr),
@@ -518,7 +518,7 @@ std::string Building::info_string(const std::string & format) {
 			switch (*format_iter) {
 			FORMAT('%', '%');
 			FORMAT('i', serial());
-			FORMAT('t', get_statistics_string());
+			FORMAT('t', update_and_get_statistics_string());
 			FORMAT
 				('s',
 				 (descr().get_ismine()                  ? _("mine")   :
@@ -549,7 +549,7 @@ std::string Building::info_string(const std::string & format) {
 				break;
 			case 'r':
 				if (upcast(ProductionSite const, productionsite, this))
-					result << productionsite->result_string();
+					result << productionsite->production_result();
 				break;
 			default: //  invalid format sequence
 				result << '%' << *format_iter;
@@ -560,23 +560,6 @@ std::string Building::info_string(const std::string & format) {
 	}
 	const std::string result_str = result.str();
 	return result_str.empty() ? result_str : as_uifont(result_str);
-}
-
-
-/*
-===============
-Building::get_statistics_string [virtual]
-
-Return the overlay string that is displayed on the map view when enabled
-by the player.
-
-By default, there is no such string. Production buildings will want to
-override this with a percentage indicating how well the building works, etc.
-===============
-*/
-std::string Building::get_statistics_string()
-{
-	return "";
 }
 
 
