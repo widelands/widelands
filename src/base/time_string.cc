@@ -199,14 +199,12 @@ char * gametimestring_leading_zeros(uint32_t gametime)
 std::string gametimestring(uint32_t gametime)
 {
 	// update buffer
-	gametimestring_leading_zeros(gametime);
+	std::string result = gametimestring_leading_zeros(gametime);
 
 	// remove leading 0s
 	int i = 0;
-	while (gamestringbuffer[i] == '0') ++i;
-	if (gamestringbuffer[i] == ':') ++i;
+	while (result.at(i) == '0') ++i;
+	if (result.at(i) == ':') ++i;
 
-	std::string result = &gamestringbuffer[i];
-
-	return result;
+	return result.substr(i);
 }
