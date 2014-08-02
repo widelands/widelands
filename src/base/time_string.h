@@ -34,7 +34,7 @@ char * timestring();
 /// If the string starts with the datetime format "YYYY-MM-DDThh.mm.ss",
 /// that part of the string is transformed to a localized datetime string.
 /// Any other parts of the string remain as is.
-std::string format_timestring(std::string timestring);
+std::string localize_timestring(std::string timestring);
 
 /// Get a string representation of the game time
 /// as hhh:mm:ss. If Time represents more than

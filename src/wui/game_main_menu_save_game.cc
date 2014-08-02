@@ -155,7 +155,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	gl.preload_game(gpdp); //  This has worked before, no problem
 
 	{
-		m_editbox->setText(format_timestring(FileSystem::FS_FilenameWoExt(name.c_str())));
+		m_editbox->setText(localize_timestring(FileSystem::FS_FilenameWoExt(name.c_str())));
 	}
 	m_button_ok->set_enabled(true);
 
@@ -213,7 +213,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 		try {
 			Widelands::Game_Loader gl(name, igbase().game());
 			gl.preload_game(gpdp);
-			m_ls.add(format_timestring(FileSystem::FS_FilenameWoExt(name).c_str()).c_str(), name);
+			m_ls.add(localize_timestring(FileSystem::FS_FilenameWoExt(name).c_str()).c_str(), name);
 		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 }

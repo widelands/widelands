@@ -135,7 +135,7 @@ std::string localize_month(int8_t month) {
 
 
 // Locale-dependent formatting for datetime-based filenames.
-std::string format_timestring(std::string timestring) {
+std::string localize_timestring(std::string timestring) {
 
 	std::string result = "";
 
@@ -173,9 +173,8 @@ std::string format_timestring(std::string timestring) {
 			if (timestring.length() > sizeof(timestring_buffer) - 1) {
 				result.append(timestring.substr(19));
 			}
-
 		} else {
-				result = timestring;
+			result = timestring;
 		}
 	} else {
 		result = timestring;
