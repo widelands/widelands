@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
@@ -113,13 +115,13 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 void Main_Menu_Map_Options::update() {
 	const Widelands::Map & map = eia().egbase().map();
 
-	char buf[200];
-	sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-	m_size->set_text(buf);
+	m_size     ->set_text((boost::format(_("%1$ix%2$i"))
+								  % static_cast<int>(map.get_width())
+								  % static_cast<int>(map.get_height())).str().c_str());
 	m_author->setText(map.get_author());
 	m_name  ->setText(map.get_name());
-	sprintf(buf, "%i", map.get_nrplayers());
-	m_nrplayers->set_text(buf);
+	m_nrplayers->set_text((boost::format("%u")
+								  % static_cast<unsigned int>(map.get_nrplayers())).str().c_str());
 	m_descr ->set_text(map.get_description());
 }
 

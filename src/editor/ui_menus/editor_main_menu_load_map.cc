@@ -169,12 +169,12 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 		m_descr ->set_text
 			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
 
-		char buf[200];
-		sprintf(buf, "%i", map.get_nrplayers());
-		m_nrplayers->set_text(buf);
+		m_nrplayers->set_text((boost::format("%u")
+									  % static_cast<unsigned int>(map.get_nrplayers())).str().c_str());
 
-		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-		m_size     ->set_text(buf);
+		m_size     ->set_text((boost::format(_("%1$ix%2$i"))
+									  % static_cast<int>(map.get_width())
+									  % static_cast<int>(map.get_height())).str().c_str());
 	} else {
 		m_name     ->set_text("");
 		m_author   ->set_text("");

@@ -24,6 +24,8 @@
 #include <string>
 #include <vector>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
@@ -45,7 +47,6 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		 (parent.get_w() - 140) / 2, (parent.get_h() - 150) / 2, 140, 150,
 		 _("New Map"))
 {
-	char buffer[250];
 	int32_t const offsx   =  5;
 	int32_t const offsy   = 30;
 	int32_t const spacing =  5;
@@ -59,9 +60,10 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		for (m_w = 0; Widelands::MAP_DIMENSIONS[m_w] < map_extent.w; ++m_w) {}
 		for (m_h = 0; Widelands::MAP_DIMENSIONS[m_h] < map_extent.h; ++m_h) {}
 	}
-	snprintf
-		(buffer, sizeof(buffer), _("Width: %u"), Widelands::MAP_DIMENSIONS[m_w]);
-	m_width = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+
+	m_width = new UI::Textarea(this, posx + spacing + 20, posy,
+										(boost::format(_("Width: %u"))
+										 % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_w])).str().c_str());
 
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
@@ -79,10 +81,9 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 
 	posy += 20 + spacing + spacing;
 
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("Height: %u"), Widelands::MAP_DIMENSIONS[m_h]);
-	m_height = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+	m_height = new UI::Textarea(this, posx + spacing + 20, posy,
+										 (boost::format(_("Height: %u"))
+										  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_h])).str().c_str());
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
@@ -124,19 +125,14 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 		assert(false);
 	}
 
-	char buffer[200];
 	if (m_w <  0)                        m_w = 0;
 	if (m_w >= NUMBER_OF_MAP_DIMENSIONS) m_w = NUMBER_OF_MAP_DIMENSIONS - 1;
 	if (m_h <  0)                        m_h = 0;
 	if (m_h >= NUMBER_OF_MAP_DIMENSIONS) m_h = NUMBER_OF_MAP_DIMENSIONS - 1;
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("Width: %u"),  Widelands::MAP_DIMENSIONS[m_w]);
-	m_width ->set_text(buffer);
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("Height: %u"), Widelands::MAP_DIMENSIONS[m_h]);
-	m_height->set_text(buffer);
+	m_width ->set_text((boost::format(_("Width: %u"))
+							  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_w])).str());
+	m_height->set_text((boost::format(_("Height: %u"))
+							  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_h])).str());
 }
 
 void Main_Menu_New_Map::clicked_create_map() {

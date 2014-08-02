@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_increase_resources_tool.h"
@@ -226,11 +228,12 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
  * Update all the textareas, so that they represent the correct values
 */
 void Editor_Tool_Change_Resources_Options_Menu::update() {
-	char buf[250];
-	sprintf(buf, "%i", m_increase_tool.get_change_by());
-	m_change_by_value.set_text(buf);
-	sprintf(buf, "%i", m_increase_tool.set_tool().get_set_to());
-	m_set_to_value.set_text(buf);
+
+	m_change_by_value.set_text((boost::format("%i")
+										 % static_cast<int>(m_increase_tool.get_change_by())).str());
+
+	m_set_to_value.set_text((boost::format("%u")
+									 % static_cast<unsigned int>(m_increase_tool.set_tool().get_set_to())).str());
 
 	m_cur_selection.set_text
 		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase()

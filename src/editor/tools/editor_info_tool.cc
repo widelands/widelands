@@ -78,10 +78,9 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 	buf += std::string("• ") + (boost::format(_("Caps:%s")) % temp).str() + "\n";
 
 	if (f.get_owned_by() > 0) {
-		buf += std::string("• ");
-		char buf1[1024];
-		snprintf(buf1, sizeof(buf1), _("Owned by: %u"), f.get_owned_by());
-		buf += std::string(buf1) + "\n";
+		buf += std::string("• ") +
+				 (boost::format(_("Owned by: Player %u"))
+				  % static_cast<unsigned int>(f.get_owned_by())).str() + "\n";
 	} else {
 		buf += std::string("• ") + _("Owned by: —") + "\n";
 	}
