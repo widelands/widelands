@@ -196,38 +196,11 @@ public:
 
 	std::string info_string(const std::string & format);
 
-	/*
-	 * Return the overlay string that is displayed on the map view when enabled
-	 * by the player.
-	 *
-	 * By default, the string is empty. Production buildings will want to override
-	 * this with a percentage indicating how well the building works, etc.
-	 */
-	// NOCOM(#codereview): keeping a class member around that you will never touch just so that you can
-	// return a reference to it is quite confusing for readers of your class. I would either opt to returning a string
-	// here (and accept the copy). Or even better would be to employ http://en.wikipedia.org/wiki/Non-virtual_interface_pattern .
-	// This would look like this:
-	// const string& get_and_update_statistics_string() {  // this could be two methods too.
-	// 	update_statistics_string(&m_statistics_string); // Note: passing as pointer signals the string is changed
-	// 	return m_statistics_string;
-	// }
-	//
-	// protected: // Note: the virtual method is protected, so it cannot be called from our client, but can be overridden by childs.
-	// virtual update_statistics_string(string* stast_string) {
-	// 	// Does nothing in Bulding, but will do something in child classes.
-	//	}
-	//
-	//	Now the childs do not need a statistics string anymore. Of course this
-	//	only works if you can always want to update the statistics (and can do
-	//	it) when you call get_and_update_statistics_string(). Otherwise, just
-	//	return a string.
-	 // NOCOM(GunChleoc): We need to offer a get_and_update here for the game (which gets overwritten by subclasses if needed),
-	 // and a const get for the map_io.
-	 // What would the public update_statistics_string(&m_statistics_string) be for?
-	 // The class member is needed for map_io only, but if >I want to save this correctly, it needs to be there
-	 //- for productionsite and subclasses only though, because militarysite doesn't need past data.
-	virtual std::string update_and_get_statistics_string() {
-		return "";
+	// Return the overlay string that is displayed on the map view when enabled
+	// by the player.
+	const std::string& update_and_get_statistics_string() {
+		update_statistics_string(&m_statistics_string);
+		return m_statistics_string;
 	}
 
 	/// \returns the queue for a ware type or \throws _wexception.
@@ -292,7 +265,13 @@ public:
 		 bool link_to_building_lifetime = true,
 		 uint32_t throttle_time = 0,
 		 uint32_t throttle_radius = 0);
+
 protected:
+	// Updates 'statistics_string' with the string that should be displayed for
+	// this building right now. Overwritten by child classes.
+	virtual void update_statistics_string(std::string*) {
+	}
+
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
 	void init(Editor_Game_Base &) override;
@@ -334,6 +313,9 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings m_old_buildings;
+
+private:
+	std::string m_statistics_string;
 };
 
 }

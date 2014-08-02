@@ -73,8 +73,6 @@ class ConstructionSite : public Partially_Finished_Building {
 public:
 	ConstructionSite(const ConstructionSiteDescr & descr);
 
-	std::string update_and_get_statistics_string() override;
-
 	const Player::Constructionsite_Information & get_info() {return m_info;}
 
 	WaresQueue & waresqueue(Ware_Index) override;
@@ -91,6 +89,8 @@ public:
 	bool get_building_work(Game &, Worker &, bool success) override;
 
 protected:
+	void update_statistics_string(std::string* statistics_string) override;
+
 	uint32_t build_step_time() const override {return CONSTRUCTIONSITE_STEP_TIME;}
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;

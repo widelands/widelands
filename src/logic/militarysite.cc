@@ -112,9 +112,9 @@ MilitarySite::~MilitarySite()
 Display number of soldiers.
 ===============
 */
-std::string MilitarySite::update_and_get_statistics_string()
+void MilitarySite::update_statistics_string(std::string* s)
 {
-	std::string result = "";
+	s->clear();
 	uint32_t present = presentSoldiers().size();
 	uint32_t stationed = stationedSoldiers().size();
 
@@ -122,12 +122,12 @@ std::string MilitarySite::update_and_get_statistics_string()
 		if (m_capacity > stationed) {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
-			result += (boost::format(ngettext("%1% soldier (+%2%)",
+			*s += (boost::format(ngettext("%1% soldier (+%2%)",
 																		  "%1% soldiers (+%2%)",
 																		  stationed))
 											% stationed % (m_capacity - stationed)).str();
 		} else {
-			result += (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
+			*s += (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
 											% stationed).str();
 		}
 	} else {
@@ -135,17 +135,16 @@ std::string MilitarySite::update_and_get_statistics_string()
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% are currently open soldier slots in the building */
 			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
-			result =
+			*s =
 					(boost::format(ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed))
 					 % stationed % present % (stationed - present) % (m_capacity - stationed)).str();
 		} else {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% are currently open soldier slots in the building */
-			result += (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
+			*s += (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
 					% stationed % present).str();
 		}
 	}
-	return result;
 }
 
 

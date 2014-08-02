@@ -151,11 +151,6 @@ public:
 		return m_working_positions;
 	}
 
-	// A const getter for map_io. Normally, we will want the updated string.
-	virtual const std::string& get_statistics_string() const {
-		return m_statistics_string;
-	}
-	std::string update_and_get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
@@ -190,19 +185,15 @@ public:
 	bool can_start_working() const;
 
 	/// sends a message to the player e.g. if the building's resource can't be found
-	 // NOCOM(#codereview):
-	// It would be even cooler if the productionsite just notifications::notify() that it ran out of resources and
-	// somewhere in wui (probably interactive_player) would actually send the message. This needs some more thought though -
-	// this would imply that messages should be completely in the UI and not in the logic, which would make trouble with scenario
-	// messages I guess.
-	 // NOCOM(GunChleoc): send_message traces to player.cc, so I expect we have quite a lot of stuff in the logic about messages.
-	 void notify_player(Game & game, uint8_t minutes);
-	 void unnotify_player();
+	void notify_player(Game& game, uint8_t minutes);
+	void unnotify_player();
 
 	void set_default_anim(std::string);
 
 protected:
-	virtual void create_options_window
+	void update_statistics_string(std::string* statistics) override;
+
+	void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
 
 protected:
@@ -280,14 +271,13 @@ protected:  // TrainingSite must have access to this stuff
 	ProductionProgram::ActProduce::Items m_recruited_workers;
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
-	bool                     m_statistics_changed;
 	uint8_t                  m_last_stat_percent;
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 
 private:
-	std::string              m_statistics_string;
+	std::string              m_statistics_string_on_changed_statistics;
 	std::string              m_production_result; // hover tooltip text
 	uint32_t                 m_out_of_resource_delay_counter;
 

@@ -198,7 +198,6 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_program_time      (0),
 	m_post_timer        (50),
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
-	m_statistics_changed(true),
 	m_last_stat_percent (0),
 	m_crude_percent     (0),
 	m_is_stopped        (false),
@@ -206,6 +205,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_production_result (""),
 	m_out_of_resource_delay_counter(0)
 {
+	calc_statistics();
 }
 
 ProductionSite::~ProductionSite() {
@@ -216,27 +216,30 @@ ProductionSite::~ProductionSite() {
 /**
  * Display whether we're occupied.
  */
-std::string ProductionSite::update_and_get_statistics_string()
-{
+void ProductionSite::update_statistics_string(std::string* s) {
 	uint32_t const nr_working_positions = descr().nr_working_positions();
-	uint32_t       nr_workers           = 0;
+	uint32_t nr_workers = 0;
 	for (uint32_t i = nr_working_positions; i;)
 		nr_workers += m_working_positions[--i].worker ? 1 : 0;
-	if (!nr_workers) {
-		 m_statistics_string =
-			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)")).str();
-	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		m_statistics_string =
-			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
-				ngettext("Worker missing", "Workers missing", nr_requests))
-			.str();
-	} else if (m_is_stopped) {
-		m_statistics_string =
-			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)")).str();
-	} else if (m_statistics_changed) {
-		calc_statistics();
+
+	if (nr_workers == 0) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)"))
+		        .str();
+		return;
 	}
-	return m_statistics_string;
+
+	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
+		      ngettext("Worker missing", "Workers missing", nr_requests)).str();
+		return;
+	}
+
+	if (m_is_stopped) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)"))
+		        .str();
+		return;
+	}
+	*s = m_statistics_string_on_changed_statistics;
 }
 
 /**
@@ -281,6 +284,10 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
  */
 void ProductionSite::calc_statistics()
 {
+	// TODO(sirver): this method does too much: it calculates statistics for the
+	// last few cycles, but it also formats them as a string and persists them
+	// into a string for reuse when the class is asked for the statistics
+	// string. However this string should only then be constructed.
 	uint8_t pos;
 	uint8_t ok = 0;
 	uint8_t lastOk = 0;
@@ -293,8 +300,10 @@ void ProductionSite::calc_statistics()
 		}
 	}
 	// Somehow boost::format doesn't handle correctly uint8_t in this case
-	unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
+	m_last_stat_percent = percOk;
+
+	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
 	if (percOk > (m_crude_percent / 10000) && percOk - (m_crude_percent / 10000) > 50)
@@ -324,12 +333,10 @@ void ProductionSite::calc_statistics()
 
 	if (0 < percOk && percOk < 100) {
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
-		m_statistics_string = (boost::format("%s %s") % perc_str % trend_str).str();
+		m_statistics_string_on_changed_statistics = (boost::format("%s %s") % perc_str % trend_str).str();
 	} else {
-		m_statistics_string = perc_str;
+		m_statistics_string_on_changed_statistics = perc_str;
 	}
-	m_last_stat_percent = percOk;
-	m_statistics_changed = false;
 }
 
 
@@ -865,7 +872,6 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	switch (result) {
 	case Failed:
 		//changed by TB below
-		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(false);
 		calc_statistics();
@@ -874,7 +880,6 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		//end of changed by TB
 	case Completed:
 		m_skipped_programs.erase(program_name);
-		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(true);
 		train_workers(game);

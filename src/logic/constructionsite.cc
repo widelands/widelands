@@ -81,19 +81,11 @@ m_builder_idle      (false)
 {}
 
 
-/*
-===============
-Print completion percentage.
-===============
-*/
-std::string ConstructionSite::update_and_get_statistics_string()
+void ConstructionSite::update_statistics_string(std::string* s)
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	std:: string result =
-		(boost::format("<font color=%s>%s</font>")
-		 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
-		 .str();
-	return result;
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK_HEX %
+	      (boost::format(_("%i%% built")) % percent).str()).str();
 }
 
 /*

@@ -93,10 +93,10 @@ Partially_Finished_Building(gdescr)
 Print completion percentage.
 ===============
 */
-std::string DismantleSite::update_and_get_statistics_string()
+void DismantleSite::update_statistics_string(std::string* s)
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	return (boost::format(_("%u%% dismantled")) % percent).str();
+	*s = (boost::format(_("%u%% dismantled")) % percent).str();
 }
 
 /*
