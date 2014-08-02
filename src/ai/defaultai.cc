@@ -2336,7 +2336,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 				update_buildable_field(bf, vision, true);
 				const int32_t size_penalty = ms->get_size() - 1;
 
-				int16_t score = 0;  // <<=========
+				int16_t score = 0;
 				score += (bf.military_capacity_ > 9);
 				score += (bf.military_presence_ > 3);
 				score += (bf.military_loneliness_ < 160);
@@ -2880,15 +2880,21 @@ void DefaultAI::print_land_stats() {
 	Player_Number const nr_players = game().map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 	const Game::General_Stats_vector& genstats = game().get_general_statistics();
+
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
 		log(" player: %1d, landsize: %5d, military strength: %3d\n",
-		       j,
-		       genstats[j - 1].land_size.back(),
-		       genstats[j - 1].miltary_strength.back());
+			j,
+			genstats[j - 1].land_size.back(),
+			genstats[j - 1].miltary_strength.back());
+
 		sum_l += genstats[j - 1].land_size.back();
 		count_l += 1;
 		sum_m += genstats[j - 1].miltary_strength.back();
 		count_m += 1;
 	}
-	log(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
+
+	log(" Average: Landsize: %5d, military strenght: %3d\n",
+		sum_l / count_l,
+		sum_m / count_m);
+
 }
