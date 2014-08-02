@@ -779,8 +779,6 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 			return true;
 		}
 
-	std::vector<bool> is_tribe_specific;
-
 	// Figure the (at most) six best fitting immovables (as judged by terrain
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
