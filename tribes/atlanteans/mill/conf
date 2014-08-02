@@ -22,9 +22,12 @@ corn=6
 blackroot=6
 
 [programs]
-produce_cornflour=_Produce cornflour
-produce_blackrootflour=_Produce blackrootflour
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start grinding corn because ...
+produce_cornflour=_grinding corn
+# TRANSLATORS: "Completed/Skipped/Did not start grinding blackroot because ...
+produce_blackrootflour=_grinding blackroot
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_cornflour]
 return=skipped when site has blackroot and economy needs blackrootflour and not economy needs cornflour

@@ -70,8 +70,6 @@ public:
 		(const DismantleSiteDescr & descr, Editor_Game_Base &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
-	std::string get_statistics_string() override;
-
 	bool burn_on_destroy() override;
 	void init   (Editor_Game_Base &) override;
 
@@ -80,6 +78,8 @@ public:
 	static void count_returned_wares(Building* building, std::map<Ware_Index, uint8_t> & res);
 
 protected:
+	void update_statistics_string(std::string*) override;
+
 	uint32_t build_step_time() const override {return DISMANTLESITE_STEP_TIME;}
 
 	virtual void create_options_window

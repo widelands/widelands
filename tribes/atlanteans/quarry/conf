@@ -16,7 +16,8 @@ log=1
 stonecutter=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 worker=cut_stone  # This order is on purpose so that the productivity

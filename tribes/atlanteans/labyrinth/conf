@@ -42,12 +42,18 @@ min_level=0
 max_level=1
 
 [programs]
-sleep=_Sleep
-upgrade_soldier_defense_0=_Upgrade soldier defense from level 0 to level 1
-upgrade_soldier_defense_1=_Upgrade soldier defense from level 1 to level 2
-upgrade_soldier_hp_0=_Upgrade soldier health from level 0 to level 1
-upgrade_soldier_evade_0=_Upgrade soldier evade from level 0 to level 1
-upgrade_soldier_evade_1=_Upgrade soldier evade from level 1 to level 2
+# TRANSLATORS: "Completed/Skipped/Did not start sleeping because ...
+sleep=_sleeping
+# TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+upgrade_soldier_defense_0=_upgrading soldier defense from level 0 to level 1
+# TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+upgrade_soldier_defense_1=_upgrading soldier defense from level 1 to level 2
+# TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+upgrade_soldier_hp_0=_upgrading soldier health from level 0 to level 1
+# TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+upgrade_soldier_evade_0=_upgrading soldier evade from level 0 to level 1
+# TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+upgrade_soldier_evade_1=_upgrading soldier evade from level 1 to level 2
 
 [sleep]
 sleep=5000

@@ -20,7 +20,8 @@ carrier=1
 gold=5
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=15000

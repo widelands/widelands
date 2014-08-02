@@ -17,9 +17,12 @@ raw_stone=1
 gardener=1
 
 [programs]
-plant_reed=_Plant reed
-harvest_reed=_Harvest reed
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start planting reed because ...
+plant_reed=_planting reed
+# TRANSLATORS: "Completed/Skipped/Did not start harvesting reed because ...
+harvest_reed=_harvesting reed
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [plant_reed]
 sleep=18000  #orig sleep=20000 but gardener animation was increased by 2sec

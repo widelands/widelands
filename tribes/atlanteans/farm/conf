@@ -22,9 +22,12 @@ planks=1
 farmer=1
 
 [programs]
-plant_corn=_Plant corn
-harvest_corn=_Harvest corn
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start planting corn because ...
+plant_corn=_planting corn
+# TRANSLATORS: "Completed/Skipped/Did not start harvesting corn because ...
+harvest_corn=_harvesting corn
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [plant_corn]
 sleep=14000  #orig 20000

@@ -24,9 +24,12 @@ ration=6
 wine=6
 
 [programs]
-mine_marble=_Mine marble
-mine_stone=_Mine stone
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining marble because ...
+mine_marble=_mining marble
+# TRANSLATORS: "Completed/Skipped/Did not start mining stone because ...
+mine_stone=_mining stone
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [mine_marble]
 sleep=20000

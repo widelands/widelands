@@ -21,9 +21,12 @@ marblecolumn=1
 farmer=1
 
 [programs]
-plant_wheat=_Plant wheat
-harvest_wheat=_Harvest wheat
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start planting wheat because ...
+plant_wheat=_planting wheat
+# TRANSLATORS: "Completed/Skipped/Did not start harvesting wheat because ...
+harvest_wheat=_harvesting wheat
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [plant_wheat]
 sleep=14000  #orig 20000

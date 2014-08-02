@@ -20,7 +20,8 @@ weaver=1
 thatchreed=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start weaving because ...
+work=_weaving
 
 [work]
 sleep=20000

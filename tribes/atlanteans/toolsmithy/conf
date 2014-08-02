@@ -35,19 +35,32 @@ log=6
 spidercloth=4
 
 [programs]
-produce_bread_paddle=_Produce bread paddle
-produce_bucket=_Produce bucket
-produce_fire_tongs=_Produce fire tongs
-produce_fishing_net=_Produce fishing net
-produce_hammer=_Produce hammer
-produce_hook_pole=_Produce hook pole
-produce_hunting_bow=_Produce bow
-produce_milking_tongs=_Produce milking tongs
-produce_pick=_Produce pick
-produce_saw=_Produce saw
-produce_scythe=_Produce scythe
-produce_shovel=_Produce shovel
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start making a bread paddle because ...
+produce_bread_paddle=_making a bread paddle
+# TRANSLATORS: "Completed/Skipped/Did not start making a bucket because ...
+produce_bucket=_making a bucket
+# TRANSLATORS: "Completed/Skipped/Did not start making fire tongs because ...
+produce_fire_tongs=making fire tongs
+# TRANSLATORS: "Completed/Skipped/Did not start making a fishing net because ...
+produce_fishing_net=_making a fishing net
+# TRANSLATORS: "Completed/Skipped/Did not start making a hammer because ...
+produce_hammer=_making a hammer
+# TRANSLATORS: "Completed/Skipped/Did not start making a hook pole because ...
+produce_hook_pole=_making a hook pole
+# TRANSLATORS: "Completed/Skipped/Did not start making a bow because ...
+produce_hunting_bow=_making a bow
+# TRANSLATORS: "Completed/Skipped/Did not start making milking tongs because ...
+produce_milking_tongs=_making milking tongs
+# TRANSLATORS: "Completed/Skipped/Did not start making a pick because ...
+produce_pick=_making a pick
+# TRANSLATORS: "Completed/Skipped/Did not start making a saw because ...
+produce_saw=_making a saw
+# TRANSLATORS: "Completed/Skipped/Did not start making a scythe because ...
+produce_scythe=_making a scythe
+# TRANSLATORS: "Completed/Skipped/Did not start making a shovel because ...
+produce_shovel=_making a shovel
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_bread_paddle]
 return=skipped unless economy needs bread_paddle

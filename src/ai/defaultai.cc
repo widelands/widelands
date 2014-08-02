@@ -1446,8 +1446,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 	// if there is no winner:
 	if (best_building == nullptr) {
-
-		mine = false;
 		return false;
 	}
 

@@ -23,8 +23,10 @@ log=2
 cloth=4
 
 [programs]
-ship=_Constructing ship
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start constructing a ship because ...
+ship=_constructing a ship
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=20000

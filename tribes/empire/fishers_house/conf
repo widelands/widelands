@@ -17,7 +17,8 @@ stone=1
 fisher=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start fishing because ...
+work=_fishing
 
 [work]
 sleep=17000

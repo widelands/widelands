@@ -151,11 +151,18 @@ public:
 		return m_working_positions;
 	}
 
-	std::string get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
-	char const * result_string() const {return m_result_buffer;}
+
+	const std::string& production_result() const {return m_production_result;}
+
+	 // Production and worker programs set this to explain the current
+	 // state of the production. This string is shown as a tooltip
+	 // when the mouse hovers over the building.
+	 void set_production_result(const std::string& text) {
+		m_production_result = text;
+	}
 
 	WaresQueue & waresqueue(Ware_Index) override;
 
@@ -177,13 +184,16 @@ public:
 
 	bool can_start_working() const;
 
-	/// sends a message to the player if the building's resource can't be found
-	void worker_failed_to_find_resource(Game & game);
+	/// sends a message to the player e.g. if the building's resource can't be found
+	void notify_player(Game& game, uint8_t minutes);
+	void unnotify_player();
 
 	void set_default_anim(std::string);
 
 protected:
-	virtual void create_options_window
+	void update_statistics_string(std::string* statistics) override;
+
+	void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
 
 protected:
@@ -261,16 +271,15 @@ protected:  // TrainingSite must have access to this stuff
 	ProductionProgram::ActProduce::Items m_recruited_workers;
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
-	bool                     m_statistics_changed;
-	char                     m_statistics_buffer[128];
-	char                     m_result_buffer   [213];
 	uint8_t                  m_last_stat_percent;
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 
 private:
-	uint32_t m_out_of_resource_delay_counter;
+	std::string              m_statistics_string_on_changed_statistics;
+	std::string              m_production_result; // hover tooltip text
+	uint32_t                 m_out_of_resource_delay_counter;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };

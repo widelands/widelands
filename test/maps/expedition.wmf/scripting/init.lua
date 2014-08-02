@@ -290,14 +290,14 @@ function test_transporting_works()
    -- build a lumberjack and see if the ship starts transporting stuff
    p1:place_building("lumberjacks_hut", map:get_field(17, 1), true)
    connected_road(p1, map:get_field(18,2).immovable, "bl,l|", true)
-   while map:get_field(17, 1).immovable.name ~= "lumberjacks_hut" do
+   while map:get_field(17, 1).immovable.descr.name ~= "lumberjacks_hut" do
       sleep(3222)
    end
    assert_equal(1, p1:get_workers("builder"))
 
    -- build a lumberjack and see if the builder gets transported
    p1:place_building("lumberjacks_hut", map:get_field(12, 18), true)
-   while map:get_field(12, 18).immovable.name ~= "lumberjacks_hut" do
+   while map:get_field(12, 18).immovable.descr.name ~= "lumberjacks_hut" do
       sleep(3222)
    end
    assert_equal(1, p1:get_workers("builder"))

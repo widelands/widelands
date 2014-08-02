@@ -25,7 +25,8 @@ bread=5
 meat=5
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start preparing a ration because ...
+work=_preparing a ration
 
 [work]
 sleep=14000

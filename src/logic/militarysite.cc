@@ -22,6 +22,8 @@
 #include <clocale>
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
@@ -110,34 +112,39 @@ MilitarySite::~MilitarySite()
 Display number of soldiers.
 ===============
 */
-std::string MilitarySite::get_statistics_string()
+void MilitarySite::update_statistics_string(std::string* s)
 {
-	char buffer[255];
-	std::string str;
+	s->clear();
 	uint32_t present = presentSoldiers().size();
-	uint32_t total = stationedSoldiers().size();
+	uint32_t stationed = stationedSoldiers().size();
 
-	if (present == total) {
-		snprintf
-			(buffer, sizeof(buffer),
-			 ngettext("%u soldier", "%u soldiers", total),
-			 total);
+	if (present == stationed) {
+		if (m_capacity > stationed) {
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
+			*s += (boost::format(ngettext("%1% soldier (+%2%)",
+																		  "%1% soldiers (+%2%)",
+																		  stationed))
+											% stationed % (m_capacity - stationed)).str();
+		} else {
+			*s += (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
+											% stationed).str();
+		}
 	} else {
-		snprintf
-			(buffer, sizeof(buffer),
-			/** TRANSLATORS: %1$u is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2$u are open soldier slots in the building */
-			 ngettext("%1$u(+%2$u) soldier", "%1$u(+%2$u) soldiers", total),
-			 present, total - present);
+		if (m_capacity > stationed) {
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+			/** TRANSLATORS: %2% are currently open soldier slots in the building */
+			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
+			*s =
+					(boost::format(ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed))
+					 % stationed % present % (stationed - present) % (m_capacity - stationed)).str();
+		} else {
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+			/** TRANSLATORS: %2% are currently open soldier slots in the building */
+			*s += (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
+					% stationed % present).str();
+		}
 	}
-	str = buffer;
-
-	if (m_capacity > total) {
-		snprintf(buffer, sizeof(buffer), " (+%u)", m_capacity - total);
-		str += buffer;
-	}
-
-	return str;
 }
 
 

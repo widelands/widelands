@@ -30,12 +30,18 @@ coal=8
 planks=8
 
 [programs]
-produce_light_trident=_Produce light trident
-produce_long_trident=_Produce long trident
-produce_steel_trident=_Produce steel trident
-produce_double_trident=_Produce double trident
-produce_heavy_double_trident=_Produce heavy double trident
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start forging a light triden because ...
+produce_light_trident=_forging a light trident
+# TRANSLATORS: "Completed/Skipped/Did not start forging a long trident because ...
+produce_long_trident=_forging a long trident
+# TRANSLATORS: "Completed/Skipped/Did not start forging a steel trident because ...
+produce_steel_trident=_forging a steel trident
+# TRANSLATORS: "Completed/Skipped/Did not start forging a double trident because ...
+produce_double_trident=_forging a double trident
+# TRANSLATORS: "Completed/Skipped/Did not start forging a heavy double trident because ...
+produce_heavy_double_trident=_forging a heavy double trident
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_light_trident]
 return=skipped unless economy needs light_trident

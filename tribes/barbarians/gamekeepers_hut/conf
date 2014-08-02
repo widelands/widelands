@@ -16,7 +16,8 @@ raw_stone=1
 gamekeeper=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=52500

@@ -25,9 +25,12 @@ gold=8
 coal=8
 
 [programs]
-produce_steel_shield=_Produce steel shield
-produce_advanced_shield=_Produce advanced shield
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start forging a steel shield because ...
+produce_steel_shield=_forging a steel shield
+# TRANSLATORS: "Completed/Skipped/Did not start forging an advanced shield because ...
+produce_advanced_shield=_forging an advanced shield
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_steel_shield]
 return=skipped unless economy needs steel_shield

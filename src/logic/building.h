@@ -195,7 +195,13 @@ public:
 	PositionList get_positions (const Editor_Game_Base &) const override;
 
 	std::string info_string(const std::string & format);
-	virtual std::string get_statistics_string();
+
+	// Return the overlay string that is displayed on the map view when enabled
+	// by the player.
+	const std::string& update_and_get_statistics_string() {
+		update_statistics_string(&m_statistics_string);
+		return m_statistics_string;
+	}
 
 	/// \returns the queue for a ware type or \throws _wexception.
 	virtual WaresQueue & waresqueue(Ware_Index);
@@ -259,7 +265,13 @@ public:
 		 bool link_to_building_lifetime = true,
 		 uint32_t throttle_time = 0,
 		 uint32_t throttle_radius = 0);
+
 protected:
+	// Updates 'statistics_string' with the string that should be displayed for
+	// this building right now. Overwritten by child classes.
+	virtual void update_statistics_string(std::string*) {
+	}
+
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
 	void init(Editor_Game_Base &) override;
@@ -301,6 +313,9 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings m_old_buildings;
+
+private:
+	std::string m_statistics_string;
 };
 
 }

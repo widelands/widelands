@@ -22,9 +22,12 @@ bread=6
 meat=6
 
 [programs]
-produce_ration=_Produce ration
-produce_meal=_Produce meal
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start preparing a ration because ...
+produce_ration=_preparing a ration
+# TRANSLATORS: "Completed/Skipped/Did not start preparing a meal because ...
+produce_meal=_preparing a meal
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_ration]
 return=skipped unless economy needs ration

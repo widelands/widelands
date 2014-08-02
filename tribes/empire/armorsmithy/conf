@@ -28,11 +28,16 @@ coal=8
 cloth=8
 
 [programs]
-produce_helm=_Produce helm
-produce_armor=_Produce armor
-produce_chain_armor=_Produce chain armor
-produce_plate_armor=_Produce plate armor
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start forging a helm because ...
+produce_helm=_forging a helm
+# TRANSLATORS: "Completed/Skipped/Did not start forging an armor because ...
+produce_armor=_forging an armor
+# TRANSLATORS: "Completed/Skipped/Did not start forging a chain armor because ...
+produce_chain_armor=_forging a chain armor
+# TRANSLATORS: "Completed/Skipped/Did not start forging a plate armor because ...
+produce_plate_armor=_forging a plate armor
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_helm]
 return=skipped unless economy needs helm
