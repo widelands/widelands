@@ -236,8 +236,42 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			Widelands::Game_Loader gl(savename, m_game);
 			gl.preload_game(gpdp);
 
-			m_list.add
-				(format_timestring(FileSystem::FS_FilenameWoExt(pname->c_str())).c_str(), *pname);
+			// localize the filename
+			std::string displayname = FileSystem::FS_FilenameWoExt(pname->c_str());
+			std::string datetime = format_timestring(displayname.substr(0, 19));
+
+			// if filename contains "network player".
+			// Format of the source string: YYYY-MM-DDThh.mm.ss network player 1 (host)
+			// using str.at rather than str.find for efficiency
+			if (displayname.at(23) == 'w') {
+				// chop off "network player" to get at the player number
+				std::string temp = displayname.substr(35);
+				uint8_t playernumber = stoi(temp.substr(0, temp.find(' ', 0))) + 1;
+
+				// if filename contains "(host)"
+				if (temp.find('h', 0) != std::string::npos) {
+					/** TRANSLATORS: Used in filenames for "Watch Replay" */
+					/** TRANSLATORS: %1% is a formatted date/time string */
+					/** TRANSLATORS: %2% is the number of the player */
+					displayname = (boost::format(_("%1% Multiplayer (Player %2%, Host)"))
+										% datetime % static_cast<int>(playernumber)).str();
+				} else {
+					/** TRANSLATORS: Used in filenames for "Watch Replay" */
+					/** TRANSLATORS: %1% is a formatted date/time string */
+					/** TRANSLATORS: %2% is the number of the player */
+					displayname = (boost::format(_("%1% Multiplayer (Player %2%)"))
+										% datetime % static_cast<int>(playernumber)).str();
+				}
+			}
+			// assume that filename contains "singleplayer"
+			else {
+				/** TRANSLATORS: Used in filenames for "Watch Replay" */
+				/** TRANSLATORS: %1% is a formatted date/time string */
+				displayname = (boost::format(_("%1% Single Player")) % datetime).str();
+			}
+
+			// add the localized filename
+			m_list.add(displayname.c_str(), *pname);
 		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 
