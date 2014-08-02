@@ -22,6 +22,8 @@
 #include <cstdio>
 #include <list>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -129,28 +131,29 @@ SoldierDescr::SoldierDescr
 	m_attack_pics_fn .resize(m_max_attack_level  + 1);
 	m_defense_pics_fn.resize(m_max_defense_level + 1);
 	m_evade_pics_fn  .resize(m_max_evade_level   + 1);
-	char buffer[256];
+
 	std::string dir = directory;
 	dir += "/";
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
-		snprintf(buffer, sizeof(buffer), "hp_level_%u_pic",      i);
 		m_hp_pics_fn[i] = dir;
-		m_hp_pics_fn[i] += global_s.get_safe_string(buffer);
+		m_hp_pics_fn[i] += global_s.get_safe_string((boost::format("hp_level_%u_pic")
+																	% static_cast<unsigned int>(i)).str().c_str());
+
 	}
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
-		snprintf(buffer, sizeof(buffer), "attack_level_%u_pic",  i);
 		m_attack_pics_fn[i] = dir;
-		m_attack_pics_fn[i] += global_s.get_safe_string(buffer);
+		m_attack_pics_fn[i] += global_s.get_safe_string((boost::format("attack_level_%u_pic")
+																		 % static_cast<unsigned int>(i)).str().c_str());
 	}
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
-		snprintf(buffer, sizeof(buffer), "defense_level_%u_pic", i);
 		m_defense_pics_fn[i] = dir;
-		m_defense_pics_fn[i] += global_s.get_safe_string(buffer);
+		m_defense_pics_fn[i] += global_s.get_safe_string((boost::format("defense_level_%u_pic")
+																		  % static_cast<unsigned int>(i)).str().c_str());
 	}
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
-		snprintf(buffer, sizeof(buffer), "evade_level_%i_pic",   i);
 		m_evade_pics_fn[i] = dir;
-		m_evade_pics_fn[i] += global_s.get_safe_string(buffer);
+		m_evade_pics_fn[i] += global_s.get_safe_string((boost::format("evade_level_%u_pic")
+																		% static_cast<unsigned int>(i)).str().c_str());
 	}
 
 	{  ///  Battle animations
@@ -1546,6 +1549,7 @@ void Soldier::battle_update(Game & game, State &)
 						get_position().field->get_immovable();
 					BaseImmovable const * const immovable_dest     =
 						map[dest]            .get_immovable();
+					/*
 					char buffer[2048];
 					snprintf
 						(buffer, sizeof(buffer),
@@ -1567,13 +1571,34 @@ void Soldier::battle_update(Game & game, State &)
 						 immovable_dest ?
 						 immovable_dest->descr().descname().c_str() : ("no"),
 						 descr().descname().c_str());
+						 */
+					std::string messagetext =
+							(boost::format("The game engine has encountered a logic error. The %s "
+												"#%u of player %u could not find a way from (%i, %i) "
+												"(with %s immovable) to the opponent (%s #%u of player "
+												"%u) at (%i, %i) (with %s immovable). The %s will now "
+												"desert (but will not be executed). Strange things may "
+												"happen. No solution for this problem has been "
+												"implemented yet. (bug #536066) (The game has been "
+												"paused.)")
+							 % descr().descname().c_str()
+							 % static_cast<unsigned int>(serial())
+							 % static_cast<unsigned int>(owner().player_number())
+							 % static_cast<int>(get_position().x) % static_cast<int>(get_position().y)
+							 % (immovable_position ? immovable_position->descr().descname().c_str() : ("no"))
+							 % opponent.descr().descname().c_str()
+							 % static_cast<unsigned int>(opponent.serial())
+							 % static_cast<unsigned int>(opponent.owner().player_number())
+							 % static_cast<int>(dest.x) % static_cast<int>(dest.y)
+							 % (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no"))
+							 % descr().descname().c_str()).str();
 					owner().add_message
 						(game,
 						 *new Message
 						 	("game engine",
 						 	 game.get_gametime(), Forever(),
 						 	 _("Logic error"),
-						 	 buffer,
+							 messagetext,
 						 	 get_position(),
 							 m_serial));
 					opponent.owner().add_message
@@ -1582,7 +1607,7 @@ void Soldier::battle_update(Game & game, State &)
 						 	("game engine",
 						 	 game.get_gametime(), Forever(),
 						 	 _("Logic error"),
-						 	 buffer,
+							 messagetext,
 						 	 opponent.get_position(),
 							 m_serial));
 					game.gameController()->setDesiredSpeed(0);

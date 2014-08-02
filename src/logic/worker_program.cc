@@ -19,6 +19,8 @@
 
 #include "logic/worker_program.h"
 
+#include <boost/format.hpp>
+
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "logic/findnode.h"
@@ -65,10 +67,10 @@ void WorkerProgram::parse
 	for (uint32_t idx = 0;; ++idx) {
 		try
 		{
-			char buf[32];
-
-			snprintf(buf, sizeof(buf), "%i", idx);
-			char const * const string = program_s.get_string(buf, nullptr);
+			char const * const string = program_s.get_string(
+													 (boost::format("%u")
+													  % static_cast<unsigned int>(idx)).str().c_str(),
+													 nullptr);
 			if (!string)
 				break;
 

@@ -19,6 +19,8 @@
 
 #include "logic/single_player_game_settings_provider.h"
 
+#include <boost/format.hpp>
+
 #include "ai/computer_player.h"
 #include "logic/tribe.h"
 
@@ -82,9 +84,8 @@ void SinglePlayerGameSettingsProvider::setMap (const std::string & mapname, cons
 		player.tribe                = s.tribes.at(0).name;
 		player.random_tribe         = false;
 		player.initialization_index = 0;
-		char buf[200];
-		snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
-		player.name = buf;
+		player.name = (boost::format(_("Player %u"))
+							% static_cast<unsigned int>(oldplayers + 1)).str();
 		player.team = 0;
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::stateComputer) {

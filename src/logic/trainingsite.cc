@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/request.h"
@@ -655,9 +657,9 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	upgrade.lastattempt = level;
 	upgrade.lastsuccess = false;
 
-	char buf[200];
-	sprintf(buf, "%s%d", upgrade.prefix.c_str(), level);
-	return program_start(game, buf);
+	return program_start(game, (boost::format("%s%i")
+										 % upgrade.prefix.c_str()
+										 % static_cast<int>(level)).str().c_str());
 }
 
 TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)

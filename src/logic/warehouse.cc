@@ -21,6 +21,8 @@
 
 #include <algorithm>
 
+#include <boost/format.hpp>
+
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
@@ -451,16 +453,12 @@ void Warehouse::init(Editor_Game_Base & egbase)
 				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
-		char message[2048];
-		snprintf
-			(message, sizeof(message),
-			 _("A new %s was added to your economy."),
-			 descr().descname().c_str());
 		send_message
 			(ref_cast<Game, Editor_Game_Base>(egbase),
 			 "warehouse",
 			 descr().descname(),
-			 message,
+			 (boost::format(_("A new %s was added to your economy."))
+			  % descr().descname().c_str()).str(),
 			 true);
 		}
 
