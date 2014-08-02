@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -91,13 +93,10 @@ Partially_Finished_Building(gdescr)
 Print completion percentage.
 ===============
 */
-std::string DismantleSite::get_statistics_string()
+void DismantleSite::update_statistics_string(std::string* s)
 {
-	char buffer[40];
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("%u%% dismantled"), (get_built_per64k() * 100) >> 16);
-	return buffer;
+	unsigned int percent = (get_built_per64k() * 100) >> 16;
+	*s = (boost::format(_("%u%% dismantled")) % percent).str();
 }
 
 /*

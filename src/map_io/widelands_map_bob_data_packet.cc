@@ -33,7 +33,7 @@ namespace Widelands {
 
 void Map_Bob_Data_Packet::ReadBob(FileRead& fr,
                                   Editor_Game_Base& egbase,
-                                  MapMapObjectLoader& mol,
+											 MapMapObjectLoader&,
                                   Coords const coords,
                                   const OneWorldLegacyLookupTable& lookup_table) {
 	const std::string owner = fr.CString();
@@ -48,7 +48,6 @@ void Map_Bob_Data_Packet::ReadBob(FileRead& fr,
 
 	const std::string name = lookup_table.lookup_critter(read_name);
 	try {
-		const Map& map = egbase.map();
 		const World& world = egbase.world();
 		int32_t const idx = world.get_bob(name.c_str());
 		if (idx == INVALID_INDEX)

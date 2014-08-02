@@ -16,7 +16,8 @@ stone=1
 hunter=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start hunting because ...
+work=_hunting
 
 [work]
 sleep=35000

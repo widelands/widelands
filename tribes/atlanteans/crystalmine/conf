@@ -24,10 +24,14 @@ smoked_fish=10
 smoked_meat=6
 
 [programs]
-mine_stone=_Mine stone
-mine_quartz=_Mine quartz
-mine_diamond=_Mine diamond
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining stone because ...
+mine_stone=_mining stone
+# TRANSLATORS: "Completed/Skipped/Did not start mining quartz because ...
+mine_quartz=_mining quartz
+# TRANSLATORS: "Completed/Skipped/Did not start mining diamonds because ...
+mine_diamond=_mining diamonds
+# TRANSLATORS: "Completed/Skipped/Did not start mining because ...
+work=_mining
 
 [mine_stone]
 return=skipped unless economy needs stone or economy needs quartz or economy needs diamond

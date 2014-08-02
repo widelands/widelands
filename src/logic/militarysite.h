@@ -82,8 +82,6 @@ public:
 	MilitarySite(const MilitarySiteDescr &);
 	virtual ~MilitarySite();
 
-	std::string get_statistics_string() override;
-
 	void init(Editor_Game_Base &) override;
 	void cleanup(Editor_Game_Base &) override;
 	void act(Game &, uint32_t data) override;
@@ -101,7 +99,6 @@ public:
 	void setSoldierCapacity(uint32_t capacity) override;
 	void dropSoldier(Soldier &) override;
 	int incorporateSoldier(Editor_Game_Base & game, Soldier & s) override;
-	// End implementation of SoldierControl
 
 	// Begin implementation of Attackable
 	Player & owner() const override {return Building::owner();}
@@ -137,6 +134,8 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry) override;
 
 private:
+	void update_statistics_string(std::string*) override;
+
 	bool isPresent(Soldier &) const;
 	static void request_soldier_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);

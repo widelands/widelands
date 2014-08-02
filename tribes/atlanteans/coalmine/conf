@@ -22,7 +22,8 @@ smoked_fish=10
 smoked_meat=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining because ...
+work=_mining
 
 [work]
 sleep=45000

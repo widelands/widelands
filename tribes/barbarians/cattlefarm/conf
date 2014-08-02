@@ -22,7 +22,8 @@ wheat=8
 water=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start rearing cattle because ...
+work=_rearing cattle
 
 [work]
 sleep=15000

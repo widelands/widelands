@@ -35,17 +35,28 @@ iron=8
 log=8
 
 [programs]
-produce_bread_paddle=_Produce bread paddle
-produce_felling_ax=_Produce felling ax
-produce_fire_tongs=_Produce fire tongs
-produce_fishing_rod=_Produce fishing rod
-produce_hammer=_Produce hammer
-produce_hunting_spear=_Produce hunting spear
-produce_kitchen_tools=_Produce kitchen tools
-produce_pick=_Produce pick
-produce_scythe=_Produce scythe
-produce_shovel=_Produce shovel
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start making a bread paddle because ...
+produce_bread_paddle=_making a bread paddle
+# TRANSLATORS: "Completed/Skipped/Did not start making a felling ax because ...
+produce_felling_ax=_making a felling ax
+# TRANSLATORS: "Completed/Skipped/Did not start making fire tongs because ...
+produce_fire_tongs=_making fire tongs
+# TRANSLATORS: "Completed/Skipped/Did not start making a fishing rod because ...
+produce_fishing_rod=_making a fishing rod
+# TRANSLATORS: "Completed/Skipped/Did not start making a hammer because ...
+produce_hammer=_making a hammer
+# TRANSLATORS: "Completed/Skipped/Did not start making a hunting spear because ...
+produce_hunting_spear=_making a hunting spear
+# TRANSLATORS: "Completed/Skipped/Did not start making kitchen tools because ...
+produce_kitchen_tools=_making kitchen tools
+# TRANSLATORS: "Completed/Skipped/Did not start making a pick because ...
+produce_pick=_making a pick
+# TRANSLATORS: "Completed/Skipped/Did not start making a scythe because ...
+produce_scythe=_making a scythe
+# TRANSLATORS: "Completed/Skipped/Did not start making a shovel because ...
+produce_shovel=_making a shovel
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_bread_paddle]
 return=skipped unless economy needs bread_paddle

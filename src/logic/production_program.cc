@@ -21,7 +21,6 @@
 
 #include <sstream>
 
-#include <boost/algorithm/string/join.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -140,33 +139,6 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 	return false;
 }
 
-// Helper structure for representing an iterator range in
-// for loops with constant iterators.
-// DEPRECATED!! do not use.
-// TODO(sirver): Replace the use of this with boost::algorithm::join() below.
-template<typename C>
-struct wl_const_range
-{
-	wl_const_range
-		(const typename  C::const_iterator & first,
-		 const typename C::const_iterator & last)
-		: current(first), end(last) {}
-	wl_const_range(const C & container) : current(container.begin()), end(container.end()) {}
-	wl_const_range(const wl_const_range & r) : current(r.current), end(r.end) {}
-	typename C::const_iterator current;
-	wl_const_range & operator++() {++current; return *this;}
-	wl_const_range<C> & advance() {++current; return *this;}
-	bool empty() const {return current == end;}
-	operator bool() const {return empty() ? false: true;}
-	typename C::const_reference front() const {return *current;}
-	typename C::const_reference operator*() const {return *current;}
-	typename C::const_pointer operator->() const {return (&**this);}
-	typename C::const_iterator get_end() {return end;}
-private:
-	typename C::const_iterator end;
-};
-
-
 
 }  // namespace
 
@@ -198,18 +170,23 @@ void ProductionProgram::parse_ware_type_group
 			++parameters;
 		char const terminator = *parameters;
 		*parameters = '\0';
+
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
-		for (wl_const_range<BillOfMaterials> i(inputs);; ++i)
-			if (i.empty())
+
+		for (BillOfMaterials::const_iterator input_it = inputs.begin(); input_it != inputs.end(); ++input_it) {
+			if (input_it == inputs.end()) {
 				throw game_data_error
 					(
 					 "%s is not declared as an input (\"%s=<count>\" was not "
 					 "found in the [inputs] section)",
 					 ware, ware);
-			else if (i->first == ware_index) {
-				count_max += i.front().second;
+			}
+			else if (input_it->first == ware_index) {
+				count_max += input_it->second;
 				break;
 			}
+		}
+
 		if (group.first.size() && ware_index <= *group.first.begin())
 			throw game_data_error
 				(
@@ -264,11 +241,19 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 {
 	return !operand->evaluate(ps);
 }
+
+// Just a dummy to satisfy the superclass interface. Do not use.
 std::string ProductionProgram::ActReturn::Negation::description
-	(const Tribe_Descr & tribe) const
+	(const Tribe_Descr &) const
 {
-	/** TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s' */
-	return (boost::format(_("not %s")) % operand->description(tribe)).str();
+	throw wexception("Not implemented.");
+}
+
+// Just a dummy to satisfy the superclass interface. Do not use.
+std::string ProductionProgram::ActReturn::Negation::description_negation
+	(const Tribe_Descr &) const
+{
+	throw wexception("Not implemented.");
 }
 
 
@@ -280,8 +265,18 @@ bool ProductionProgram::ActReturn::Economy_Needs_Ware::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s' */
-	return (boost::format(_("economy needs %s")) % tribe.get_ware_descr(ware_type)->descname()).str();
+	// TODO(GunChleoc): We can make this more elegant if we add another definition to the conf files,
+	// so for "Log"; we will also have "logs" (numberless plural)
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’*/
+	return (boost::format(_("the economy needs the ware ‘%s’"))
+			  % tribe.get_ware_descr(ware_type)->descname()).str();
+}
+std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’*/
+	return (boost::format(_("the economy doesn’t need the ware ‘%s’"))
+			  % tribe.get_ware_descr(ware_type)->descname()).str();
 }
 
 bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
@@ -292,9 +287,20 @@ bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s' */
-	return (boost::format(_("economy needs %s")) % tribe.get_ware_descr(worker_type)->descname()).str();
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
+	return (boost::format(_("the economy needs the worker ‘%s’"))
+			  % tribe.get_worker_descr(worker_type)->descname()).str();
 }
+
+std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
+	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
+	return (boost::format(_("the economy doesn’t need the worker ‘%s’"))
+			  % tribe.get_worker_descr(worker_type)->descname()).str();
+}
+
 
 ProductionProgram::ActReturn::Site_Has::Site_Has
 	(char * & parameters, const ProductionSiteDescr & descr)
@@ -320,25 +326,50 @@ bool ProductionProgram::ActReturn::Site_Has::evaluate
 	}
 	return false;
 }
+
+
 std::string ProductionProgram::ActReturn::Site_Has::description
 	(const Tribe_Descr & tribe) const
 {
-	std::string condition = "";
+	std::vector<std::string> condition_list;
 	for (const Ware_Index& temp_ware : group.first) {
-		condition =
-		/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
-			(boost::format(_("%1$s %2$s")) % condition % tribe.get_ware_descr(temp_ware)->descname())
-			 .str();
-		/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
-		condition = (boost::format(_("%s,")) % condition).str();
+		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
+	std::string condition = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
-		// TODO(GunChleoc): this should be done with ngettext
-		condition =
-			(boost::format(_("%1$s (%2$i)")) % condition % static_cast<unsigned int>(group.second)).str();
+		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
+		/** TRANSLATORS:    %1$s = "3" */
+		/** TRANSLATORS:    %2$i = "water" */
+		condition = (boost::format(_("%1$ix %2$s"))
+						 % static_cast<unsigned int>(group.second)
+						 % condition).str();
 	}
+
 	/** TRANSLATORS: %s is a list of wares*/
-	std::string result = (boost::format(_("site has%s")) % condition).str();
+	std::string result = (boost::format(_("the building has the following wares: %s")) % condition).str();
+	return result;
+}
+
+std::string ProductionProgram::ActReturn::Site_Has::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	std::vector<std::string> condition_list;
+	for (const Ware_Index& temp_ware : group.first) {
+		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
+	}
+	std::string condition = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
+	if (1 < group.second) {
+		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
+		/** TRANSLATORS:    %1$i = "3" */
+		/** TRANSLATORS:    %2$s = "water" */
+		condition = (boost::format(_("%1$ix %2$s"))
+						 % static_cast<unsigned int>(group.second)
+						 % condition).str();
+	}
+
+	/** TRANSLATORS: %s is a list of wares*/
+	std::string result = (boost::format(_("the building doesn’t have the following wares: %s"))
+								 % condition).str();
 	return result;
 }
 
@@ -354,8 +385,15 @@ bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 std::string ProductionProgram::ActReturn::Workers_Need_Experience::description
 	(const Tribe_Descr &) const
 {
-	/** TRANSLATORS: 'Failed/Skipped ... because: workers need experience'. */
-	return _("workers need experience");
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'. */
+	return _("a worker needs experience");
+}
+
+std::string ProductionProgram::ActReturn::Workers_Need_Experience::description_negation
+	(const Tribe_Descr &) const
+{
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
+	return _("the workers need no experience");
 }
 
 
@@ -514,67 +552,49 @@ ProductionProgram::ActReturn::~ActReturn() {
 void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
-	std::string statistics_string =
-		/** TRANSLATORS: 'Failed %s because (not): %s {and/or %s}' */
-		m_result == Failed    ? (boost::format(_("Failed %s")) % ps.top_state().program->descname()).str() :
-		/** TRANSLATORS: 'Completed %s because (not): %s {and/or %s}' */
-		m_result == Completed ? (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str() :
-		/** TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}' */
-					(boost::format(_("Skipped %s")) % ps.top_state().program->descname()).str();
-
 	if (!m_conditions.empty()) {
-		std::string result_string = statistics_string;
+		std::vector<std::string> condition_list;
 		if (m_is_when) { //  'when a and b and ...' (all conditions must be true)
-			std::string condition_string = "";
-			for (wl_const_range<Conditions> i(m_conditions); i;)
-			{
-				if (!(i.front()->evaluate(ps))) //  A condition is false,
+			for (const Condition * condition : m_conditions) {
+				if (!condition->evaluate(ps)) { //  A condition is false,
 					return ps.program_step(game); //  continue program.
-
-				condition_string += i.front()->description(ps.owner().tribe());
-				if (i.advance().empty())
-					break;
-				// TODO(GunChleoc):  Would prefer "%1$s and %2$s" but getting segfaults, so leaving this for now
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
-				condition_string = (boost::format(_("%s and ")) % condition_string).str();
+				}
+				condition_list.push_back(condition->description(ps.owner().tribe()));
 			}
-			result_string =
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
-				(boost::format(_("%1$s because: %2$s")) % statistics_string % condition_string).str();
 		} else { //  "unless a or b or ..." (all conditions must be false)
-			std::string condition_string = "";
-			for (wl_const_range<Conditions> i(m_conditions); i;)
-			{
-				if ((*i.current)->evaluate(ps)) //  A condition is true,
+			for (const Condition * condition : m_conditions) {
+				if (condition->evaluate(ps)) { //  A condition is true,
 					return ps.program_step(game); //  continue program.
-
-				condition_string += i.front()->description(ps.owner().tribe());
-				if (i.advance().empty())
-					break;
-				// TODO(GunChleoc):  Would prefer '%1$s or %2$s' but getting segfaults, so leaving this for now
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
-				condition_string = (boost::format(_("%s or ")) % condition_string).str();
+				}
+				condition_list.push_back(condition->description_negation(ps.owner().tribe()));
 			}
-			result_string =
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
-				(boost::format(_("%1$s because not: %2$s")) % statistics_string % condition_string).str();
 		}
-		snprintf
-			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-			 "%s", result_string.c_str());
+		std::string condition_string = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
+
+		std::string result_string = "";
+		if (m_result == Failed) {
+			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Did not start %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+		else if (m_result == Completed) {
+			/** TRANSLATORS: "Completed working because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Completed %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+		else {
+			/** TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Skipped %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+		ps.set_production_result(result_string);
 	}
-	// Commented out, as the information is already given in the hover text and
-	// should *not* be shown in general statistics string, as:
-	// 1) the strings are that long, that they clutter the screen (especially
-	//    if you build up an "industry park" ;)
-	// 2) in many cases the "real" statistics (in percent) are nearly no more
-	//    shown, so the user has no idea if "skipped because .. is missing" is
-	//    an exception or the normal case at the moment.
-	/*
-	snprintf
-		(ps.m_statistics_buffer, sizeof(ps.m_statistics_buffer),
-		 "%s", statistics_string.c_str());
-	*/
 	return ps.program_end(game, m_result);
 }
 
@@ -794,7 +814,7 @@ void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) 
 			if (game.map().get_port_spaces().size() > 1) // we need at least two port build spaces
 				return ps.program_step(game, 0);
 			else {
-				snprintf(ps.m_result_buffer, sizeof(ps.m_result_buffer), "No use for ships on this map!");
+				ps.set_production_result("No use for ships on this map!");
 				return ps.program_end(game, None);
 			}
 		}
@@ -902,52 +922,54 @@ void ProductionProgram::ActConsume::execute
 				++it;
 	}
 
+	// "Did not start working because .... is/are missing"
 	if (uint8_t const nr_missing_groups = l_groups.size()) {
 		const Tribe_Descr & tribe = ps.owner().tribe();
-		std::string result_string =
-			/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
-			(boost::format(_("Failed %s because:")) % ps.top_state().program->descname()).str();
 
-		for (wl_const_range<Groups> i(l_groups); i;)
-		{
-			assert(i.current->first.size());
-			for (wl_const_range<std::set<Ware_Index> > j(i.current->first); j;)
-			{
-				result_string =
-					/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
-					(boost::format(_("%1$s %2$s")) % result_string
-					 % tribe.get_ware_descr(j.front())->descname())
+		std::vector<std::string> group_list;
+		for (const Ware_Type_Group& group : l_groups) {
+			assert(group.first.size());
+
+			std::vector<std::string> ware_list;
+			for (const Ware_Index& ware : group.first) {
+				ware_list.push_back(tribe.get_ware_descr(ware)->descname());
+			}
+			std::string ware_string = i18n::localize_item_list(ware_list, i18n::ConcatenateWith::OR);
+
+			uint8_t const count = group.second;
+			if (1 < count) {
+				ware_string =
+					/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+					/** TRANSLATORS: For this example, this is what's in the place holders: */
+					/** TRANSLATORS:    %1$i = "3" */
+					/** TRANSLATORS:    %2$s = "water" */
+					(boost::format(_("%1$ix %2$s"))
+					 % static_cast<unsigned int>(count)
+					 % ware_string)
 					 .str();
-				if (j.advance().empty())
-					break;
-				/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
-				result_string = (boost::format(_("%s,")) % result_string).str();
 			}
-			{
-				uint8_t const count = i.current->second;
-				if (1 < count) {
-					// TODO(GunChleoc): this should be done with ngettext
-					result_string =
-						/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
-						(boost::format(_("%1$s (%2$i)")) % result_string
-						 % static_cast<unsigned int>(count))
-						 .str();
-				}
-			}
-			if (i.advance().empty())
-				break;
-			result_string = (boost::format(_("%s and")) % result_string).str();
+			group_list.push_back(ware_string);
 		}
-		result_string =
-			/** TRANSLATORS: e.g. %1$s = 'Failed work because: water, wheat (2)' %2$s = 'are missing' */
-			(boost::format(_("%1$s %2$s")) % result_string
-			/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
+
+		std::string result_string =
+			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+			/** TRANSLATORS: For this example, this is what's in the place holders: */
+			/** TRANSLATORS:    %1$s = "work" */
+			/** TRANSLATORS:    %2$s = "water and wheat (2) " */
+			/** TRANSLATORS:    %3$s = "are missing" */
+			(boost::format(_("Did not start %1$s because %2$s %3$s"))
+			 % ps.top_state().program->descname()
+			 % i18n::localize_item_list(group_list, i18n::ConcatenateWith::AND)
+			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+			/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
+			 /** TRANSLATORS: */
+			/** TRANSLATORS: This appears in the hover text on buildings. Please test these in context*/
+			/** TRANSLATORS: on a development build if you can, and let us know if there are any issues */
+			/** TRANSLATORS: we need to address for your language. */
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
 
-		snprintf
-			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-			 "%s", result_string.c_str());
+		ps.set_production_result(result_string);
 		return ps.program_end(game, Failed);
 	} else { //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < nr_warequeues; ++i)
@@ -1032,26 +1054,23 @@ void ProductionProgram::ActProduce::execute
 	std::vector<std::string> ware_descnames;
 	for (const auto& item_pair : m_items) {
 		uint8_t const count = item_pair.second;
-		std::string ware_descname;
-		// TODO(sirver): needs boost::format and probably ngettext.
+		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
+		// TODO(GunChleoc): needs ngettext when we have one_tribe.
 		if (1 < count) {
-			char buffer[5];
-			/** TRANSLATORS: Number used in list of wares */
-			sprintf(buffer, _("%u "), count);
-			ware_descname += buffer;
+			/** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
+			/** TRANSLATORS:    %%1$i = "2" */
+			/** TRANSLATORS:    %2$s = "Coal" */
+			ware_descname = (boost::format(_("%1$ix %2$s"))
+								  % static_cast<unsigned int>(count)
+								  % ware_descname).str();
 		}
-		ware_descname += tribe.get_ware_descr(item_pair.first)->descname();
 		ware_descnames.push_back(ware_descname);
 	}
-	/** TRANSLATORS: Separator for list of wares */
-	const std::string ware_list = boost::algorithm::join(ware_descnames,  _(", "));
+	std::string ware_list = i18n::localize_item_list(ware_descnames, i18n::ConcatenateWith::AND);
 
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
-	const std::string result_string = str(format(_("Produced %s")) % ware_list);
-	snprintf
-		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-		 "%s", result_string.c_str());
+	ps.set_production_result(str(format(_("Produced %s")) % ware_list));
 }
 
 bool ProductionProgram::ActProduce::get_building_work
@@ -1130,25 +1149,22 @@ void ProductionProgram::ActRecruit::execute
 	std::vector<std::string> worker_descnames;
 	for (const auto& item_pair : m_items) {
 		uint8_t const count = item_pair.second;
-		std::string worker_descname;
-		// TODO(sirver): needs boost::format and probably ngettext.
+		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
+		// TODO(GunChleoc): needs ngettext when we have one_tribe.
 		if (1 < count) {
-			char buffer[5];
-			/** TRANSLATORS: Number used in list of workers */
-			sprintf(buffer, _("%u "), count);
-			worker_descname += buffer;
+			/** TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox": */
+			/** TRANSLATORS:    %1$i = "2" */
+			/** TRANSLATORS:    %2$s = "Ox" */
+			worker_descname = (boost::format(_("%1$ix %2$s"))
+									 % static_cast<unsigned int>(count)
+									 % worker_descname).str();
 		}
-		worker_descname += tribe.get_worker_descr(item_pair.first)->descname();
 		worker_descnames.push_back(worker_descname);
 	}
-	/** TRANSLATORS: Separator for list of workers */
-	const std::string unit_string = boost::algorithm::join(worker_descnames,  _(", "));
+	std::string unit_string = i18n::localize_item_list(worker_descnames, i18n::ConcatenateWith::AND);
 
-	/** TRANSLATORS: %s is a lost of workers */
-	std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
-	snprintf
-		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-		 "%s", result_string.c_str());
+	/** TRANSLATORS: %s is a list of workers */
+	ps.set_production_result((boost::format(_("Recruited %s")) % unit_string).str());
 }
 
 bool ProductionProgram::ActRecruit::get_building_work
@@ -1309,7 +1325,7 @@ void ProductionProgram::ActMine::execute
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
 		if (m_chance <= 20) {
-			notify_player(game, ps);
+				ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
 		}
@@ -1318,9 +1334,7 @@ void ProductionProgram::ActMine::execute
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
 		if (m_chance <= game.logic_rand() % 100) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("Can’t find any more resources!"));
+
 			// Gain experience
 			if (m_training >= game.logic_rand() % 100) {
 			  ps.train_workers(game);
@@ -1334,23 +1348,6 @@ void ProductionProgram::ActMine::execute
 	//  ProductionSite::program_step so that the following sleep/animate
 	//  command knows how long it should last.
 	return ps.program_step(game);
-}
-
-/// Informs the player about a mine that has run empty, if the mine has not
-/// sent this message within the last 60 minutes.
-void ProductionProgram::ActMine::notify_player
-	(Game & game, ProductionSite & ps) const
-{
-	assert(!ps.descr().out_of_resource_title().empty());
-	assert(!ps.descr().out_of_resource_message().empty());
-	ps.send_message
-		(game,
-		 "mine",
-		 ps.descr().out_of_resource_title(),
-		 ps.descr().out_of_resource_message(),
-		 true,
-		 60 * 60 * 1000,
-		 0);
 }
 
 ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
@@ -1390,9 +1387,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
 	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
 	if (soldiers.empty()) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier to train!"));
+		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);
 	}
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
@@ -1400,9 +1395,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
 		if (it == soldiers_end) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier found for this training level!"));
+			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
@@ -1487,9 +1480,7 @@ void ProductionProgram::ActTrain::execute
 
 	for (;; ++it) {
 		if (it == soldiers_end) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier found for this training level!"));
+			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {

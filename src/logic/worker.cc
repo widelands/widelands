@@ -399,10 +399,13 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
-				if (!found_reserved)
-				{
-					if (upcast(ProductionSite, productionsite, get_location(game)))
-						productionsite->worker_failed_to_find_resource(game);
+				if (upcast(ProductionSite, productionsite, get_location(game))) {
+					if (!found_reserved) {
+						productionsite->notify_player(game, 30);
+					}
+					else {
+						productionsite->unnotify_player();
+					}
 				}
 				return true;
 			}
@@ -444,8 +447,12 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
 				if (upcast(ProductionSite, productionsite, get_location(game)))
-					productionsite->worker_failed_to_find_resource(game);
+					productionsite->notify_player(game, 30);
 				return true;
+			}
+			else {
+				if (upcast(ProductionSite, productionsite, get_location(game)))
+					productionsite->unnotify_player();
 			}
 			std::vector<Bob *> list;
 			if (action.iparam2 < 0)
@@ -572,11 +579,16 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 		molog("  no space found\n");
 
 		if (upcast(ProductionSite, productionsite, get_location(game)))
-			productionsite->worker_failed_to_find_resource(game);
+			productionsite->notify_player(game, 30);
 
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
+	}
+	else
+	{
+		if (upcast(ProductionSite, productionsite, get_location(game)))
+			productionsite->unnotify_player();
 	}
 
 	// Pick a location at random

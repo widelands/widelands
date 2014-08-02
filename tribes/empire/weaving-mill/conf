@@ -17,7 +17,8 @@ weaver=1
 wool=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start weaving because ...
+work=_weaving
 
 [work]
 sleep=25000 # orig 40000

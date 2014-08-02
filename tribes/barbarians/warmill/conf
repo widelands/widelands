@@ -33,13 +33,20 @@ coal=8
 gold=8
 
 [programs]
-produce_ax=_Produce ax
-produce_sharpax=_Produce sharp ax
-produce_broadax=_Produce broad ax
-produce_bronzeax=_Produce bronze ax
-produce_battleax=_Produce battle ax
-produce_warriorsax=_Produce warrior’s ax
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start forging an because ...
+produce_ax=_forging an ax
+# TRANSLATORS: "Completed/Skipped/Did not start forging a sharp ax because ...
+produce_sharpax=_forging a sharp ax
+# TRANSLATORS: "Completed/Skipped/Did not start forging a broad ax because ...
+produce_broadax=_forging a broad ax
+# TRANSLATORS: "Completed/Skipped/Did not start forging a bronze ax because ...
+produce_bronzeax=_forging a bronze ax
+# TRANSLATORS: "Completed/Skipped/Did not start forging a battle ax because ...
+produce_battleax=_forging a battle ax
+# TRANSLATORS: "Completed/Skipped/Did not start forging a warrior’s ax because ...
+produce_warriorsax=_forging a warrior’s ax
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_ax]
 return=skipped unless economy needs ax
