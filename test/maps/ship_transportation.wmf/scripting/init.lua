@@ -31,7 +31,7 @@ end
 
 function port2()
    local o = map:get_field(16, 2).immovable
-   if o and o.name == "port" then
+   if o and o.descr.name == "port" then
       return o
    end
    return nil
