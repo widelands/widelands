@@ -203,7 +203,7 @@ std::string gametimestring(uint32_t gametime)
 
 	// remove leading 0s
 	int i = 0;
-	while (gamestringbuffer[0] == '0') ++i;
+	while (gamestringbuffer[i] == '0') ++i;
 	if (gamestringbuffer[i] == ':') ++i;
 
 	std::string result = &gamestringbuffer[i];
