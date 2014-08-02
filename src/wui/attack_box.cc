@@ -137,6 +137,8 @@ void AttackBox::update_attack() {
 }
 
 void AttackBox::init() {
+	//TODO(code review): possible to reduce scope of buf here, though might be easier
+	//to remove the block (and outdent the content of it, of course).
 	char buf[10];
 	assert(m_node);
 
