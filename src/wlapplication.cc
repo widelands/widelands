@@ -1781,7 +1781,12 @@ bool WLApplication::redirect_output(std::string path)
 	if (path.empty()) {
 #ifdef _WIN32
 		char module_name[MAX_PATH];
-		unsigned int name_length = GetModuleFileName(nullptr, module_name, MAX_PATH);
+		//TODO(code review): the return value of this method was assigned to a variable which was not used.
+		//However, according to the documentation (http://msdn.microsoft.com/en-us/library/windows/desktop/ms683197(v=vs.85).aspx)
+		//it will write the full path into the second parameter which means I shouldn't remove the method call.
+		//Btw, someone should compare this and line 853 which use a different null and MAX_PATH (!?!)
+		//for the first and third parameter. I don't see why they would be different...
+		GetModuleFileName(nullptr, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
 		if (pos == std::string::npos) return false;
