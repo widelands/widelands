@@ -34,7 +34,7 @@ char * timestring();
 /// If the string starts with the datetime format "YYYY-MM-DDThh.mm.ss",
 /// that part of the string is transformed to a localized datetime string.
 /// Any other parts of the string remain as is.
-std::string localize_timestring(std::string timestring);
+std::string localize_timestring(const std::string& timestring);
 
 /// Get a string representation of the game time
 /// as hhh:mm:ss. If Time represents more than
@@ -45,6 +45,6 @@ char * gametimestring_leading_zeros(uint32_t gametime);
 /// Get a string representation of the game time
 /// as [hhh:]mm:ss. If Time represents more than
 /// 999 hours, it wraps around
-char * gametimestring(uint32_t gametime);
+std::string gametimestring(uint32_t gametime);
 
 #endif  // end of include guard: WL_BASE_TIME_STRING_H

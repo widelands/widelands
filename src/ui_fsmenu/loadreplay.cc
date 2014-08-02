@@ -238,7 +238,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 			// localize the filename
 			std::string displayname = FileSystem::FS_FilenameWoExt(pname->c_str());
-			std::string datetime = localize_timestring(displayname.substr(0, 19));
+			const std::string datetime = localize_timestring(displayname.substr(0, 19));
 
 			// if filename contains "network player".
 			// Format of the source string: YYYY-MM-DDThh.mm.ss network player 1 (host)

@@ -89,7 +89,6 @@ char * timestring() {
 
 namespace  {
 std::string localize_month(int8_t month) {
-	std::string fallback = std::to_string(month);
 	switch (month) {
 		case 1:
 			/** TRANSLATORS: January */
@@ -128,34 +127,35 @@ std::string localize_month(int8_t month) {
 			/** TRANSLATORS: December */
 			return _("Dec");
 		default:
-			return fallback;
+			return std::to_string(month);
 	}
 }
 }
 
 
 // Locale-dependent formatting for datetime-based filenames.
-std::string localize_timestring(std::string timestring) {
+std::string localize_timestring(const std::string& timestring) {
 
-	std::string result = "";
+	std::string result;
 
 	// Do some formatting if this is a string of the type "YYYY-MM-DDThh.mm.ss"
 	// check separators
-	if (timestring.length() >= sizeof(timestring_buffer) - 1 &&
+	if (timestring.size() >= sizeof(timestring_buffer) - 1 &&
 		 timestring.compare(4, 1, "-") == 0 &&
 		 timestring.compare(7, 1, "-") == 0 &&
 		 timestring.compare(10, 1, "T") == 0 &&
 		 timestring.compare(13, 1, ".") == 0 &&
 		 timestring.compare(16, 1, ".") == 0) {
 
-		std::string year = timestring.substr(0, 4);
+		const std::string year = timestring.substr(0, 4);
 		std::string month = timestring.substr(5, 2);
-		std::string day = timestring.substr(8, 2);
-		std::string hour = timestring.substr(11, 2);
-		std::string minute = timestring.substr(14, 2);
-		std::string second = timestring.substr(17, 2);
+		const std::string day = timestring.substr(8, 2);
+		const std::string hour = timestring.substr(11, 2);
+		const std::string minute = timestring.substr(14, 2);
+		const std::string second = timestring.substr(17, 2);
 
 		// check digits
+		// NOCOM use boost regex
 		if (std::all_of(year.begin(), year.end(), ::isdigit) &&
 			 std::all_of(month.begin(), month.end(), ::isdigit) &&
 			 std::all_of(day.begin(), day.end(), ::isdigit) &&
@@ -196,24 +196,17 @@ char * gametimestring_leading_zeros(uint32_t gametime)
 	return gamestringbuffer;
 }
 
-char * gametimestring(uint32_t gametime)
+std::string gametimestring(uint32_t gametime)
 {
 	// update buffer
 	gametimestring_leading_zeros(gametime);
 
 	// remove leading 0s
-	int8_t returnindex = 0;
-	if (gamestringbuffer[0] == '0')
-	{
-		returnindex++;
-		if (gamestringbuffer[1] == '0')
-		{
-			returnindex++;
-			if (gamestringbuffer[2] == '0')
-			{
-				returnindex = returnindex + 2;
-			}
-		}
-	}
-	return &gamestringbuffer[returnindex];
+	int i = 0;
+	while (gamestringbuffer[0] == '0') ++i;
+	if (gamestringbuffer[i] == ':') ++i;
+
+	std::string result = &gamestringbuffer[i];
+
+	return result;
 }
