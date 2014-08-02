@@ -36,6 +36,9 @@ char * timestring();
 /// Any other parts of the string remain as is.
 std::string localize_timestring(const std::string& timestring);
 
+/// Returns true if this string starts with "YYYY-MM-DDThh.mm.ss"
+bool is_timestring(const std::string& timestring);
+
 /// Get a string representation of the game time
 /// as hhh:mm:ss. If Time represents more than
 /// 999 hours, it wraps around

@@ -25,6 +25,7 @@
 #include <string>
 
 #include <boost/format.hpp>
+#include <boost/regex.hpp>
 #include <stdint.h>
 
 #include "base/i18n.h"
@@ -138,15 +139,8 @@ std::string localize_timestring(const std::string& timestring) {
 
 	std::string result;
 
-	// Do some formatting if this is a string of the type "YYYY-MM-DDThh.mm.ss"
-	// check separators
-	if (timestring.size() >= sizeof(timestring_buffer) - 1 &&
-		 timestring.compare(4, 1, "-") == 0 &&
-		 timestring.compare(7, 1, "-") == 0 &&
-		 timestring.compare(10, 1, "T") == 0 &&
-		 timestring.compare(13, 1, ".") == 0 &&
-		 timestring.compare(16, 1, ".") == 0) {
-
+	// Do some formatting if this string starts with "YYYY-MM-DDThh.mm.ss"
+	if (is_timestring(timestring)) {
 		const std::string year = timestring.substr(0, 4);
 		std::string month = timestring.substr(5, 2);
 		const std::string day = timestring.substr(8, 2);
@@ -154,33 +148,29 @@ std::string localize_timestring(const std::string& timestring) {
 		const std::string minute = timestring.substr(14, 2);
 		const std::string second = timestring.substr(17, 2);
 
-		// check digits
-		// NOCOM use boost regex
-		if (std::all_of(year.begin(), year.end(), ::isdigit) &&
-			 std::all_of(month.begin(), month.end(), ::isdigit) &&
-			 std::all_of(day.begin(), day.end(), ::isdigit) &&
-			 std::all_of(hour.begin(), hour.end(), ::isdigit) &&
-			 std::all_of(minute.begin(), minute.end(), ::isdigit) &&
-			 std::all_of(second.begin(), second.end(), ::isdigit)) {
+		month = localize_month(stoi(month));
 
-			month = localize_month(stoi(month));
+		/** TRANSLATORS: Date format for filenames on load game screens. YYYY Mon DD hh:mm:ss */
+		result = (boost::format(_("%1% %2% %3% %4%:%5%:%6%"))
+					 % day % month % year
+					 % hour % minute % second).str();
 
-			/** TRANSLATORS: Date format for filenames on load game screens. YYYY Mon DD hh:mm:ss */
-			result = (boost::format(_("%1% %2% %3% %4%:%5%:%6%"))
-						 % day % month % year
-						 % hour % minute % second).str();
-
-			if (timestring.length() > sizeof(timestring_buffer) - 1) {
-				result.append(timestring.substr(19));
-			}
-		} else {
-			result = timestring;
+		if (timestring.length() > sizeof(timestring_buffer) - 1) {
+			result.append(timestring.substr(19));
 		}
 	} else {
 		result = timestring;
 	}
 	return result;
 }
+
+
+// Check if this is a string of the type "YYYY-MM-DDThh.mm.ss"
+bool is_timestring(const std::string& timestring) {
+	boost::regex re("\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d\\.\\d\\d\\.\\d\\d.*");
+	return boost::regex_match(timestring, re);
+}
+
 
 
 char * gametimestring_leading_zeros(uint32_t gametime)
