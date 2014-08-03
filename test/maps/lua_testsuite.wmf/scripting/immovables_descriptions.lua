@@ -352,7 +352,7 @@ end
 
 function test_descr:test_producers()
 	local ware_description = egbase:get_ware_description("barbarians","coal")
-	assert_equal("burners_house", ware_description.producers[1].name)
+	assert_equal("charcoal_kiln", ware_description.producers[1].name)
 	assert_equal("deeper_coalmine", ware_description.producers[2].name)
 	assert_equal("deep_coalmine", ware_description.producers[3].name)
 	assert_equal("coalmine", ware_description.producers[4].name)
