@@ -1,5 +1,4 @@
 include "scripting/formatting.lua"
-include "scripting/format_help.lua"
 
 set_textdomain("texts")
 
