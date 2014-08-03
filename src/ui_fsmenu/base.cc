@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font.h"
@@ -56,9 +58,8 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	d(new Data)
 {
 	// Load background graphics
-	char buffer[256];
-	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
-	d->res_background = ImageTransformations::resize(g_gr->images().get(buffer), get_w(), get_h());
+	const std::string bgpicpath = (boost::format("pics/%s") % bgpic).str();
+	d->res_background = ImageTransformations::resize(g_gr->images().get(bgpicpath), get_w(), get_h());
 
 	d->textstyle_small = UI::TextStyle::ui_small();
 	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());
