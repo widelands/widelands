@@ -19,6 +19,8 @@
 
 #include "wui/productionsitewindow.h"
 
+#include <boost/format.hpp>
+
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "logic/constructionsite.h"
@@ -173,14 +175,11 @@ void ProductionSite_Window::update_worker_table()
 				assert(worker->descr().becomes() != Widelands::INVALID_INDEX);
 
 				// Fill upgrade status
-				char buffer[7];
-				snprintf
-					(buffer, sizeof(buffer),
-						"%i/%i",
-						worker->get_current_experience(),
-						worker->descr().get_needed_experience());
-
-				er.set_string(1, buffer);
+				/** TRANSLATORS: %1% = the experience a worker has */
+				/** TRANSLATORS: %2% = the experience a worker needs to reach the next level */
+				er.set_string(1, (boost::format(_("%1%/%2%"))
+										% worker->get_current_experience()
+										% worker->descr().get_needed_experience()).str());
 				er.set_string
 					(2, worker->descr().tribe().get_worker_descr
 						(worker->descr().becomes())->descname());

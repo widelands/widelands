@@ -307,9 +307,9 @@ void Interactive_Base::postload() {}
 static std::string speedString(uint32_t const speed)
 {
 	if (speed) {
-		char buffer[32];
-		snprintf(buffer, sizeof(buffer), ("%u.%ux"), speed / 1000, speed / 100 % 10);
-		return buffer;
+		return (boost::format("%u.%ux")
+				  % (speed / 1000)
+				  % (speed / 100 % 10)).str();
 	}
 	return _("PAUSE");
 }

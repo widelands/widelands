@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -468,30 +469,27 @@ void Building_Statistics_Menu::update() {
 			uint32_t const percent =
 				static_cast<uint32_t>
 					(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
-			snprintf(buffer, sizeof(buffer), "%3u", percent);
+			te->set_string(Columns::Prod, (boost::format("%3u") % percent).str()); //  space-pad for sort
 			if (is_selected)  {
 				m_progbar.set_state(percent);
 				m_btn[Prev_Unproductive]->set_enabled(true);
 				m_btn[Next_Unproductive]->set_enabled(true);
 			}
 		} else {
-			snprintf(buffer, sizeof(buffer), " ");
+			te->set_string(Columns::Prod,  " ");
 			if (is_selected) {
 				m_btn[Prev_Unproductive]->set_enabled(false);
 				m_btn[Next_Unproductive]->set_enabled(false);
 			}
 		}
-		te->set_string(Columns::Prod, buffer);
 
 		//  number of this buildings
-		snprintf(buffer, sizeof(buffer), "%3u", nr_owned); //  space-pad for sort
-		te->set_string(Columns::Owned, buffer);
+		te->set_string(Columns::Owned, (boost::format("%3u") % nr_owned).str()); //  space-pad for sort
 		if (is_selected)
 			m_owned.set_text(buffer);
 
 		//  number of currently builds
-		snprintf(buffer, sizeof(buffer), "%3u", nr_build); //  space-pad for sort
-		te->set_string(Columns::Build, buffer);
+		te->set_string(Columns::Build, (boost::format("%3u") % nr_build).str()); //  space-pad for sort
 		if (is_selected)
 			m_in_build.set_text(buffer);
 	}
