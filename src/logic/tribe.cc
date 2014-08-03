@@ -401,13 +401,11 @@ uint32_t Tribe_Descr::get_resource_indicator
 		return idx;
 	}
 
-	char buffer[256];
-
 	int32_t i = 1;
 	int32_t num_indicators = 0;
 	for (;;) {
-		snprintf(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), i);
-		if (get_immovable_index(buffer) == -1)
+		const std::string resi_filename = (boost::format("resi_%s%i") % res->name().c_str() % i).str();
+		if (get_immovable_index(resi_filename) == -1)
 			break;
 		++i;
 		++num_indicators;

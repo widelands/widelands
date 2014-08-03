@@ -23,6 +23,8 @@
 #include <memory>
 #include <tuple>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -933,15 +935,13 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 	{
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
-			char message[1024];
 			// TODO(sirver): this is very wrong: It assumes a directory layout
 			// that might not be around forever.
-			snprintf(message,
-			         sizeof(message),
-			         "<rt image=world/resources/pics/%s4.png>"
-			         "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
-			         rdescr->name().c_str(),
-			         _("A geologist found resources."));
+			const std::string message =
+					(boost::format("<rt image=world/resources/pics/%s4.png>"
+										"<p font-size=14 font-face=DejaVuSerif>%s</p></rt>")
+					 % rdescr->name().c_str()
+					 % _("A geologist found resources.")).str().c_str();
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -1838,18 +1838,17 @@ void Worker::return_update(Game & game, State & state)
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
-		char buffer[2048];
-		snprintf
-			(buffer, sizeof(buffer),
-			 _ ("Your %s can't find a way home and will likely die."),
-			 descr().descname().c_str());
+		const std::string message =
+				(boost::format(_("Your %s can't find a way home and will likely die."))
+								  % descr().descname().c_str()).str().c_str();
+
 		owner().add_message
 			(game,
 			 *new Message
 			 	("game engine",
 			 	 game.get_gametime(), Forever(),
 			 	 _("Worker got lost!"),
-			 	 buffer,
+				 message,
 			 	 get_position()),
 				 m_serial);
 		set_location(nullptr);

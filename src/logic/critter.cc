@@ -23,6 +23,7 @@
 #include <memory>
 #include <string>
 
+#include <boost/format.hpp>
 #include <stdint.h>
 
 #include "base/wexception.h"
@@ -153,8 +154,7 @@ CritterDescr::CritterDescr(char const* const _name,
 		add_attributes(attributes, std::set<uint32_t>());
 	}
 
-	char defaultpics[256];
-	snprintf(defaultpics, sizeof(defaultpics), "%s_walk_!!_??.png", _name);
+	const std::string defaultpics = (boost::format("%s_walk_!!_??.png") % _name).str().c_str();
 	m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
