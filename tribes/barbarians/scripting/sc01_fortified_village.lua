@@ -50,7 +50,7 @@ return {
          workers = {
             brewer = 1,
             builder = 10,
-            burner = 1,
+            charcoal_burner = 1,
             carrier = 38,
             gardener = 1,
             geologist = 4,

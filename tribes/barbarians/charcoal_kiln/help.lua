@@ -1,4 +1,4 @@
--- The Barbarian Charcoal Burner's House
+-- The Barbarian Charcoal Kiln
 
 include "scripting/formatting.lua"
 include "tribes/scripting/format_help.lua"

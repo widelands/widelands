@@ -15,7 +15,7 @@ stone=1
 marble=1
 
 [working positions]
-burner=1
+charcoal_burner=1
 
 [inputs]
 log=8
@@ -32,9 +32,9 @@ animate=working 90000 # charcoal fires are burning some days in real life
 produce=coal
 
 [idle]
-pics=burners_house_i_??.png  # ???
+pics=charcoal_kiln_i_??.png  # ???
 hotspot=51 48
 
 [working]
-pics=burners_house_i_??.png  # ???
+pics=charcoal_kiln_i_??.png  # ???
 hotspot=51 48

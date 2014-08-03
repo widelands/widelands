@@ -50,13 +50,10 @@ void Game_Player_Economies_Data_Packet::Read
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;
-					uint16_t const nr_economies = economies.size();
-					Player::Economies ecos(nr_economies);
-					for (Economy * temp_eco : ecos) {
+					for (uint32_t i = 0; i < economies.size(); ++i) {
 						uint32_t value = fr.Unsigned32();
 						if (value < 0xffffffff) {
 							if (upcast(Flag const, flag, map[value].get_immovable())) {
-								temp_eco = flag->get_economy();
 								EconomyDataPacket d(flag->get_economy());
 								d.Read(fr);
 							} else {
