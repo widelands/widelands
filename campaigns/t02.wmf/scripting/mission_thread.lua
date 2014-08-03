@@ -207,8 +207,6 @@ function build_materials_thread()
          "coalmine", "deep_coalmine", "charcoal_kiln"}
       if (#rv.lime_kiln > 0 and #rv.well > 0) and
          (#rv.coalmine + #rv.deep_coalmine + #rv.charcoal_kiln > 0) then
-         -- TODO(codereview): This is dynamic enough that since I've passed in the building name as a parameter (building to look up),
-         -- I get that as member of the object returned to look up things? Otherwise I would need some pointers on how to create this method.
          break
       end
       sleep(5421)
