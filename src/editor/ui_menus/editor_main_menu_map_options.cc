@@ -20,6 +20,7 @@
 #include "editor/ui_menus/editor_main_menu_map_options.h"
 
 #include <cstdio>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -120,8 +121,7 @@ void Main_Menu_Map_Options::update() {
 								  % static_cast<int>(map.get_height())).str().c_str());
 	m_author->setText(map.get_author());
 	m_name  ->setText(map.get_name());
-	m_nrplayers->set_text((boost::format("%u")
-								  % static_cast<unsigned int>(map.get_nrplayers())).str().c_str());
+	m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 	m_descr ->set_text(map.get_description());
 }
 

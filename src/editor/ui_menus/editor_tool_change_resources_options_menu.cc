@@ -20,8 +20,7 @@
 #include "editor/ui_menus/editor_tool_change_resources_options_menu.h"
 
 #include <cstdio>
-
-#include <boost/format.hpp>
+#include <string>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -229,11 +228,10 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 */
 void Editor_Tool_Change_Resources_Options_Menu::update() {
 
-	m_change_by_value.set_text((boost::format("%i")
-										 % static_cast<int>(m_increase_tool.get_change_by())).str());
+	m_change_by_value.set_text(std::to_string(m_increase_tool.get_change_by()));
 
-	m_set_to_value.set_text((boost::format("%u")
-									 % static_cast<unsigned int>(m_increase_tool.set_tool().get_set_to())).str());
+	m_set_to_value.set_text(std::to_string(
+										static_cast<unsigned int>(m_increase_tool.set_tool().get_set_to())));
 
 	m_cur_selection.set_text
 		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase()

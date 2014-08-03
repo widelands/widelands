@@ -89,7 +89,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 	rng.seed(clock());
 	rng.rand();
 	m_mapNumber = rng.rand();
-	m_nrEditbox->setText((boost::format("%u") % static_cast<unsigned int>(m_mapNumber)).str());
+	m_nrEditbox->setText(std::to_string(static_cast<unsigned int>(m_mapNumber)));
 	posy += height + spacing + spacing + spacing;
 
 

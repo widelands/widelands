@@ -230,8 +230,7 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 		m_author->set_text(map.get_author     ());
 		m_descr ->set_text(map.get_description());
 
-		m_nrplayers->set_text((boost::format("%u")
-									  % static_cast<unsigned int>(map.get_nrplayers())).str().c_str());
+		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
 		m_size->set_text((boost::format(_("%1$ix%2$i"))
 								% static_cast<int>(map.get_width())

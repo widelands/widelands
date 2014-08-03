@@ -19,6 +19,7 @@
 
 #include "wui/watchwindow.h"
 
+#include <string>
 #include <vector>
 
 #include "base/i18n.h"
@@ -203,9 +204,8 @@ void WatchWindow::save_coords() {
 void WatchWindow::toggle_buttons() {
 	for (uint32_t i = 0; i < NUM_VIEWS; ++i) {
 		if (i < views.size()) {
-			char buffer[32];
-			snprintf(buffer, sizeof(buffer), "%i", i + 1);
-			view_btns[i]->set_title(buffer);
+			//(boost::format("%u soldier") % stationed).str()
+			view_btns[i]->set_title(std::to_string(i + 1));
 			view_btns[i]->set_enabled(true);
 		} else {
 			view_btns[i]->set_title("-");

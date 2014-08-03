@@ -20,6 +20,7 @@
 #include "ui_basic/helpwindow.h"
 
 #include <memory>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -49,9 +50,9 @@ HelpWindow::HelpWindow
 	:
 	Window(parent, "help_window", 0, 0, 20, 20, (boost::format(_("Help: %s")) % caption).str().c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
-	m_h1((format("%u") % (fontsize < 12 ? 18 : fontsize * 3 / 2)).str()),
-	m_h2((format("%u") % (fontsize < 12 ? 12 : fontsize)).str()),
-	m_p ((format("%u") % (fontsize < 12 ? 10  : fontsize * 5 / 6)).str()),
+	m_h1(std::to_string(fontsize < 12 ? 18 : fontsize * 3 / 2)),
+	m_h2(std::to_string(fontsize < 12 ? 12 : fontsize)),
+	m_p (std::to_string(fontsize < 12 ? 10  : fontsize * 5 / 6)),
 	m_fn(ui_fn().substr(0, ui_fn().size() - 4)) // Font file - .ttf
 {
 	// Begin the text with the caption

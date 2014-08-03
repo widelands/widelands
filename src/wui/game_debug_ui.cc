@@ -21,6 +21,7 @@
 #include "wui/game_debug_ui.h"
 
 #include <cstdio>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -155,11 +156,8 @@ MapObjectDebugWindow::MapObjectDebugWindow
 		(this, 0, 0,
 		 g_gr->images().get("pics/but1.png"))
 {
-	char buffer[128];
-
 	m_serial = obj.serial();
-	snprintf(buffer, sizeof(buffer), "%u", m_serial);
-	set_title(buffer);
+	set_title(std::to_string(m_serial));
 
 	obj.create_debug_panels(parent.egbase(), m_tabs);
 

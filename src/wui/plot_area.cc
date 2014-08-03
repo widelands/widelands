@@ -21,6 +21,7 @@
 #include "wui/plot_area.h"
 
 #include <cstdio>
+#include <string>
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
@@ -367,7 +368,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 
 	//  print the maximal value into the top right corner
 	draw_value
-		((format("%u") % max).str(), RGBColor(60, 125, 0),
+		(std::to_string(max), RGBColor(60, 125, 0),
 		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
 
 	//  plot the pixels
@@ -570,7 +571,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 	}
 	//print the min and max values
 	draw_value
-		((boost::format("%u") % highest_scale).str(), RGBColor(60, 125, 0),
+		(std::to_string(highest_scale), RGBColor(60, 125, 0),
 		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
 
 	draw_value

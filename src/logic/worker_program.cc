@@ -19,7 +19,7 @@
 
 #include "logic/worker_program.h"
 
-#include <boost/format.hpp>
+#include <string>
 
 #include "graphic/graphic.h"
 #include "helper.h"
@@ -68,8 +68,7 @@ void WorkerProgram::parse
 		try
 		{
 			char const * const string = program_s.get_string(
-													 (boost::format("%u")
-													  % static_cast<unsigned int>(idx)).str().c_str(),
+													 std::to_string(static_cast<unsigned int>(idx)).c_str(),
 													 nullptr);
 			if (!string)
 				break;
