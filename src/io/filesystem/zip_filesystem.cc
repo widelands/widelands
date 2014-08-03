@@ -27,6 +27,8 @@
 #include <cstring>
 #include <string>
 
+#include <boost/format.hpp>
+
 #include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_exceptions.h"
@@ -327,13 +329,11 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 			break;
 		if (len < 0) {
 			unzCloseCurrentFile(m_unzipfile);
-			char buf[200];
-			snprintf(buf, sizeof(buf), "read error %i", len);
 			throw ZipOperation_error
 				("ZipFilesystem::Load",
 				 fname,
 				 m_zipfilename,
-				 buf);
+				 (boost::format("read error %i") % len).str().c_str());
 		}
 
 		totallen += len;
