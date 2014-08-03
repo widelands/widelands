@@ -199,14 +199,14 @@ function build_materials_thread()
    o.done = true
 
    send_msg(order_msg_17_grindstone)
-   plr:allow_buildings{"lime_kiln", "well", "burners_house"}
+   plr:allow_buildings{"lime_kiln", "well", "charcoal_kiln"}
    o = add_obj(obj_better_material_2)
    -- Wait for the buildings to be build
    while true do
       local rv = plr:get_buildings{"lime_kiln", "well",
-         "coalmine", "deep_coalmine", "burners_house"}
+         "coalmine", "deep_coalmine", "charcoal_kiln"}
       if (#rv.lime_kiln > 0 and #rv.well > 0) and
-         (#rv.coalmine + #rv.deep_coalmine + #rv.burners_house > 0) then
+         (#rv.coalmine + #rv.deep_coalmine + #rv.charcoal_kiln > 0) then
          break
       end
       sleep(5421)
