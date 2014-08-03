@@ -19,6 +19,8 @@
 
 #include "map_io/widelands_map_player_position_data_packet.h"
 
+#include <boost/format.hpp>
+
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -48,9 +50,10 @@ void Map_Player_Position_Data_Packet::Read
 			Player_Number const nr_players = map.get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				try {
-					char buffer[10];
-					snprintf(buffer, sizeof(buffer), "player_%u", p);
-					map.set_starting_pos(p, get_safe_coords(buffer, extent, &s));
+					map.set_starting_pos(p,
+												get_safe_coords((boost::format("player_%u")
+																	  % static_cast<unsigned int>(p)).str().c_str(),
+																	 extent, &s));
 				} catch (const _wexception & e) {
 					throw game_data_error("player %u: %s", p, e.what());
 				}
@@ -76,9 +79,8 @@ void Map_Player_Position_Data_Packet::Write
 	const Map & map = egbase.map();
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		char buffer[10];
-		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		set_coords(buffer, map.get_starting_pos(p), &s);
+		set_coords((boost::format("player_%u") % static_cast<unsigned int>(p)).str().c_str(),
+					  map.get_starting_pos(p), &s);
 	}
 
 	prof.write("player_position", false, fs);

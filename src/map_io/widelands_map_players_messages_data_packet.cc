@@ -19,6 +19,8 @@
 
 #include "map_io/widelands_map_players_messages_data_packet.h"
 
+#include <boost/format.hpp>
+
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "map_io/coords_profile.h"
@@ -31,7 +33,6 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
 #define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
-#define FILENAME_SIZE 19
 
 void Map_Players_Messages_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapMapObjectLoader & mol)
@@ -43,10 +44,11 @@ void Map_Players_Messages_Data_Packet::Read
 	Player_Number const nr_players = map   .get_nrplayers();
 	iterate_players_existing(p, nr_players, egbase, player)
 		try {
-			char filename[FILENAME_SIZE];
-			snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 			Profile prof;
-			try {prof.read(filename, nullptr, fs);} catch (...) {continue;}
+			try {
+				prof.read((boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str().c_str(),
+							 nullptr, fs);
+			} catch (...) {continue;}
 			prof.get_safe_section("global").get_positive
 				("packet_version", CURRENT_PACKET_VERSION);
 			MessageQueue & messages = player->messages();
@@ -242,11 +244,10 @@ void Map_Players_Messages_Data_Packet::Write
 				s.set_int       ("serial",    fileindex);
 			}
 		}
-		char filename[FILENAME_SIZE];
-		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
-		fs.EnsureDirectoryExists(filename);
-		snprintf(filename, sizeof(filename),      FILENAME_TEMPLATE, p);
-		prof.write(filename, false, fs);
+		fs.EnsureDirectoryExists((boost::format(PLAYERDIRNAME_TEMPLATE)
+										  % static_cast<unsigned int>(p)).str().c_str());
+		prof.write((boost::format(FILENAME_TEMPLATE)
+						% static_cast<unsigned int>(p)).str().c_str(), false, fs);
 	}
 }
 

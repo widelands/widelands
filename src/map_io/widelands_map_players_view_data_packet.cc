@@ -22,6 +22,8 @@
 #include <iostream>
 #include <typeinfo>
 
+#include <boost/format.hpp>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/flag.h"
@@ -1176,10 +1178,10 @@ void Map_Players_View_Data_Packet::Write
 
 			char filename[FILENAME_SIZE];
 
-			snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, plnum);
-			fs.EnsureDirectoryExists(filename);
-			snprintf(filename, sizeof(filename),       DIRNAME_TEMPLATE, plnum);
-			fs.EnsureDirectoryExists(filename);
+			fs.EnsureDirectoryExists((boost::format(PLAYERDIRNAME_TEMPLATE)
+											  % static_cast<unsigned int>(plnum)).str().c_str());
+			fs.EnsureDirectoryExists((boost::format(DIRNAME_TEMPLATE)
+											  % static_cast<unsigned int>(plnum)).str().c_str());
 
 			WRITE
 				(unseen_times_file,

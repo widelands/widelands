@@ -19,6 +19,8 @@
 
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -55,10 +57,9 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
 				const Tribe_Descr & tribe = player->tribe();
-				char buffer[10];
-				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				try {
-					Section* s = prof.get_section(buffer);
+					Section* s = prof.get_section((boost::format("player_%u")
+															 % static_cast<unsigned int>(p)).str().c_str());
 					if (s == nullptr)
 						continue;
 
@@ -92,9 +93,8 @@ void Map_Allowed_Worker_Types_Data_Packet::Write
 	bool forbidden_worker_seen = false;
 	iterate_players_existing_const(p, egbase.map().get_nrplayers(), egbase, player) {
 		const Tribe_Descr & tribe = player->tribe();
-		char buffer[10];
-		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		Section & section = prof.create_section(buffer);
+		Section & section = prof.create_section((boost::format("player_%u")
+															  % static_cast<unsigned int>(p)).str().c_str());
 
 		// Only write the workers which are disabled.
 		for (Ware_Index b = 0; b < tribe.get_nrworkers(); ++b) {
