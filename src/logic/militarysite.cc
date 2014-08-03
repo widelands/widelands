@@ -137,12 +137,12 @@ void MilitarySite::update_statistics_string(std::string* s)
 			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
 			*s =
 					(boost::format(ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed))
-					 % stationed % present % (stationed - present) % (m_capacity - stationed)).str();
+					 % present % (stationed - present) % (m_capacity - stationed)).str();
 		} else {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% are currently open soldier slots in the building */
 			*s += (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
-					% stationed % present).str();
+					% present % (stationed - present)).str();
 		}
 	}
 }
