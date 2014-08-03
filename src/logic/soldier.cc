@@ -1549,29 +1549,7 @@ void Soldier::battle_update(Game & game, State &)
 						get_position().field->get_immovable();
 					BaseImmovable const * const immovable_dest     =
 						map[dest]            .get_immovable();
-					/*
-					char buffer[2048];
-					snprintf
-						(buffer, sizeof(buffer),
-							"The game engine has encountered a logic error. The %s "
-							"#%u of player %u could not find a way from (%i, %i) "
-							"(with %s immovable) to the opponent (%s #%u of player "
-							"%u) at (%i, %i) (with %s immovable). The %s will now "
-							"desert (but will not be executed). Strange things may "
-							"happen. No solution for this problem has been "
-							"implemented yet. (bug #536066) (The game has been "
-							"paused.)",
-						 descr().descname().c_str(), serial(), owner().player_number(),
-						 get_position().x, get_position().y,
-						 immovable_position ?
-						 immovable_position->descr().descname().c_str() : ("no"),
-						 opponent.descr().descname().c_str(), opponent.serial(),
-						 opponent.owner().player_number(),
-						 dest.x, dest.y,
-						 immovable_dest ?
-						 immovable_dest->descr().descname().c_str() : ("no"),
-						 descr().descname().c_str());
-						 */
+
 					std::string messagetext =
 							(boost::format("The game engine has encountered a logic error. The %s "
 												"#%u of player %u could not find a way from (%i, %i) "
