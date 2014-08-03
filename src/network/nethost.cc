@@ -1419,11 +1419,8 @@ int32_t NetHost::getFrametime()
 
 std::string NetHost::getGameDescription()
 {
-	char buf[200];
-	snprintf
-		(buf, sizeof(buf),
-		 "network player %i (host)", d->settings.users.at(0).position);
-	return buf;
+	return (boost::format("network player %u (host)")
+			  % static_cast<unsigned int>(d->settings.users.at(0).position)).str();
 }
 
 const GameSettings& NetHost::settings()
@@ -2001,11 +1998,8 @@ bool NetHost::writeMapTransferInfo(SendPacket & s, std::string mapfilename) {
 std::string NetHost::getComputerPlayerName(uint8_t const playernum)
 {
 	std::string name;
-	uint32_t suffix = playernum;
 	do {
-		char buf[200];
-		snprintf(buf, sizeof(buf), _("Computer %u"), ++suffix);
-		name = buf;
+		name = (boost::format(_("Computer %u")) % static_cast<unsigned int>(++playernum)).str();
 	} while (haveUserName(name, playernum));
 	return name;
 }
@@ -2263,16 +2257,20 @@ void NetHost::checkHungClients()
 
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
-						char buf[5];
-						//snprintf(buf, sizeof(buf), "%li", deltanow);
-						snprintf(buf, sizeof(buf), ngettext("%li second", "%li seconds", deltanow), deltanow);
+						std::string seconds = (boost::format(ngettext("%li second", "%li seconds", deltanow))
+															  % deltanow).str();
 						sendSystemMessageCode
-							("CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, buf);
+							("CLIENT_HUNG",
+							 d->settings.users.at(d->clients.at(i).usernum).name,
+							 seconds.c_str());
+
 						d->clients.at(i).lastdelta = deltanow;
 						if (m_is_dedicated) {
-							snprintf(buf, sizeof(buf), "%li", 300 - deltanow);
+							seconds = (boost::format("%li") % (300 - deltanow)).str();
 							sendSystemMessageCode
-								("CLIENT_HUNG_AUTOKICK", d->settings.users.at(d->clients.at(i).usernum).name, buf);
+								("CLIENT_HUNG_AUTOKICK",
+								 d->settings.users.at(d->clients.at(i).usernum).name,
+								 seconds.c_str());
 						}
 					}
 
