@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
 #include <stdint.h>
 
@@ -48,9 +49,7 @@ namespace {
 std::vector<std::string> section_to_strings(Section* section) {
 	std::vector<std::string> return_value;
 	for (uint32_t idx = 0;; ++idx) {
-		char buffer[32];
-		snprintf(buffer, sizeof(buffer), "%i", idx);
-		char const* const string = section->get_string(buffer, nullptr);
+		char const* const string = section->get_string(std::to_string(idx).c_str(), nullptr);
 		if (!string)
 			break;
 		return_value.emplace_back(string);

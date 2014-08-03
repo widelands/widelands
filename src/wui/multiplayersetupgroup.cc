@@ -19,6 +19,8 @@
 
 #include "wui/multiplayersetupgroup.h"
 
+#include <string>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -339,9 +341,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribe->set_flat(false);
 
 			if (player_setting.team) {
-				char buf[64];
-				snprintf(buf, sizeof(buf), "%i", player_setting.team);
-				team->set_title(buf);
+				team->set_title(std::to_string(static_cast<unsigned int>(player_setting.team)));
 			} else {
 				team->set_title("--");
 			}

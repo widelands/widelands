@@ -20,6 +20,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -250,16 +251,12 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 	const MapData & map = m_maps_data[m_table.get_selected()];
 
 	if (map.width) {
-		char buf[256];
-
 		// Translate the map data
 		i18n::Textdomain td("maps");
 		m_name      .set_text(_(map.name));
 		m_author    .set_text(map.author);
-		sprintf(buf, "%-4ux%4u", map.width, map.height);
-		m_size      .set_text(buf);
-		sprintf(buf, "%i", map.nrplayers);
-		m_nr_players.set_text(buf);
+		m_size      .set_text((boost::format("%-4ux%4u") % map.width % map.height).str());
+		m_nr_players.set_text(std::to_string(static_cast<unsigned int>(map.nrplayers)));
 		m_descr     .set_text(_(map.description) + (map.hint.empty() ? "" : (std::string("\n") + _(map.hint))));
 		m_load_map_as_scenario.set_enabled(map.scenario);
 	} else {

@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/loadreplay.h"
 
+#include <string>
+
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
@@ -192,16 +194,14 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		m_delete.set_enabled(true);
 		m_tamapname.set_text(gpdp.get_mapname());
 
-		char buf[20];
 		uint32_t gametime = gpdp.get_gametime();
 		m_tagametime.set_text(gametimestring(gametime));
 
 		if (gpdp.get_number_of_players() > 0) {
-			sprintf(buf, "%i", gpdp.get_number_of_players());
+			m_ta_players.set_text(std::to_string(static_cast<unsigned int>(gpdp.get_number_of_players())));
 		} else {
-			sprintf(buf, "%s", _("Unknown"));
+			m_ta_players.set_text(_("Unknown"));
 		}
-		m_ta_players.set_text(buf);
 
 		m_ta_win_condition.set_text(gpdp.get_win_condition());
 	} else {
