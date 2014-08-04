@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 13:10+0000\n"
-"PO-Revision-Date: 2014-08-02 17:30+0000\n"
+"PO-Revision-Date: 2014-08-03 17:38+0000\n"
 "Last-Translator: daniel reis <danielreis40@yahoo.com.br>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-03 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-08-04 05:44+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -389,8 +389,8 @@ msgstr ""
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d segundo"
+msgstr[1] "%d segundos"
 
 #: ../../tribes/barbarians/axfactory/help.lua:33
 msgid ""
@@ -473,17 +473,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/bakery/help.lua:17
 msgid "Bakes pitta bread for soldiers and miners alike."
-msgstr ""
+msgstr "Assa pão sírio para soldados e mineradores."
 
 #: ../../tribes/barbarians/bakery/help.lua:30
 msgid ""
 "If all needed wares are delivered in time, this building can produce a pitta "
 "bread in %s on average."
 msgstr ""
+"Se todos os recursos forem entregues a tempo, esta construção pode produzir "
+"um pão sírio a cada %s segundos em média."
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Seus soldados ocuparam sua barreira."
 
 #: ../../tribes/barbarians/barrier/help.lua:16
 #: ../../tribes/barbarians/citadel/help.lua:16
@@ -491,7 +493,7 @@ msgstr ""
 #: ../../tribes/barbarians/fortress/help.lua:16
 #: ../../tribes/barbarians/sentry/help.lua:16
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Guarnecer soldados para expandir seu território."
 
 #: ../../tribes/barbarians/barrier/help.lua:17
 #: ../../tribes/barbarians/citadel/help.lua:17
@@ -528,13 +530,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
-msgstr ""
+msgstr "Treinar soldados para \"Escapar\"."
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
 msgstr ""
+"\"Escapar\" aumenta a chance do soldado não ser atingido pelo inimigo e "
+"então permanecer totalmente não afetado."
 
 #: ../../tribes/barbarians/battlearena/help.lua:20
 msgid ""
@@ -556,8 +560,8 @@ msgstr ""
 #: ../../tribes/barbarians/trainingcamp/help.lua:47
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minuto"
+msgstr[1] "%d minutos"
 
 #: ../../tribes/barbarians/battleax/conf:1
 msgid ""

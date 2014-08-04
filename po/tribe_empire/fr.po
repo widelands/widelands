@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-07-26 13:10+0000\n"
-"PO-Revision-Date: 2014-07-27 16:54+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-08-03 12:32+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-28 05:51+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-04 05:44+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -1241,7 +1241,7 @@ msgstr "Taverne"
 
 #: ../../tribes/empire/conf:180
 msgid "Charcoal Burner"
-msgstr "Charbonnier"
+msgstr ""
 
 #: ../../tribes/empire/conf:181
 msgid "Smelting Works"
