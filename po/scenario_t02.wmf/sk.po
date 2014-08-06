@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-26 13:10+0000\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
 "PO-Revision-Date: 2014-07-17 05:20+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-07-27 05:45+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:42+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "X-Poedit-Country: czech republic\n"
 "Language: sk\n"
 "X-Poedit-Language: czech\n"
@@ -229,7 +229,7 @@ msgstr "Postavte vápenku a vybudujte uhoľné hospodárstvo"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:114
-msgid "Build a lime kiln, a well and a charcoal burner, or a coal mine"
+msgid "Build a lime kiln, a well and a charcoal kiln, or a coal mine"
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
@@ -246,11 +246,8 @@ msgstr ""
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
-"mountain. Coal can be obtained by building a charcoal burner or a coal mine."
+"mountain. Coal can be obtained by building a charcoal kiln or a coal mine."
 msgstr ""
-"Vodu možno získať zo studne postavenej na zdroji vody, ktorý odhalia "
-"geológovia, keď ich vyšlete k vlajke nachádzajúcej sa mimo hôr. Uhlie sa "
-"získava v uhliarni alebo v uhoľnej bani."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:122

@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-26 15:10+0200\n"
-"PO-Revision-Date: 2014-07-27 17:04+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-08-05 10:15+0100\n"
+"PO-Revision-Date: 2014-08-05 10:07+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-07-28 05:53+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:50+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "Language: gd\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -35,6 +35,27 @@ msgstr "àbhaisteach"
 #: ../../src/ai/defaultai.h:102
 msgid "Defensive"
 msgstr "dìonadach"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../src/base/i18n.cc:331
+#, c-format
+msgid "%1$s and %2$s"
+msgstr "%1$s 's %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with "or".
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../src/base/i18n.cc:336
+#, c-format
+msgid "%1$s or %2$s"
+msgstr "%1$s no %2$s"
+
+#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../src/base/i18n.cc:342
+#, c-format
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
 
 #: ../../src/editor/editorinteractive.cc:64
 #, c-format
@@ -115,14 +136,14 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:154
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:478
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:175
-#: ../../src/logic/map.h:178
+#: ../../src/logic/map.h:177
 msgid "No Name"
 msgstr "Gun ainm"
 
 #: ../../src/editor/editorinteractive.cc:596
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:155
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:479
-#: ../../src/logic/map.h:179 ../../src/ui_fsmenu/loadgame.cc:244
+#: ../../src/logic/map.h:178 ../../src/ui_fsmenu/loadgame.cc:244
 #: ../../src/ui_fsmenu/loadreplay.cc:202
 #: ../../src/ui_fsmenu/netsetup_lan.cc:199 ../../src/wui/game_summary.cc:170
 msgid "Unknown"
@@ -615,16 +636,16 @@ msgstr "Toirmisg"
 msgid "Allow"
 msgstr "Ceadaich"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:39
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
 msgstr "Roghainnean nan innealan àirde"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:50
 msgid "Increase/Decrease Value"
 msgstr "Meudaich/Lùghdaich an luach"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:81
 msgid "Set Value"
 msgstr "Suidhich an luach"
@@ -664,21 +685,21 @@ msgstr "Beathaichean"
 msgid "Set port space"
 msgstr "Suidhich raon puirt"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:42
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:43
 msgid "Noise Height Options"
 msgstr "Roghainnean an àirde air thuaiream"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:145
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
 msgstr "As lugha: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:147
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
 msgstr "As motha: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:152
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
 msgstr "Suidhich an luach: %u"
@@ -729,7 +750,7 @@ msgstr "Beag"
 msgid "Big"
 msgstr "Mòr"
 
-#: ../../src/logic/constructionsite.cc:94 ../../src/logic/immovable.cc:570
+#: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:570
 #, c-format
 msgid "%i%% built"
 msgstr "'Ga thogail: %i%%"
@@ -813,11 +834,21 @@ msgstr ""
 msgid "Player 1"
 msgstr "Cluicheadair 1"
 
-#: ../../src/logic/map.h:180
+#: ../../src/logic/map.h:179
 msgid "no description defined"
 msgstr "cha deach tuairisgeul a mhìneachadh"
 
-#: ../../src/logic/militarysite.cc:123
+#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
+#. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
+#: ../../src/logic/militarysite.cc:125
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] "%1% saighdear (+%2%)"
+msgstr[1] "%1% shaighdear (+%2%)"
+msgstr[2] "%1% saighdearan (+%2%)"
+msgstr[3] "%1% saighdear (+%2%)"
+
+#: ../../src/logic/militarysite.cc:130
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -826,26 +857,33 @@ msgstr[1] "%u shaighdear"
 msgstr[2] "%u saighdearan"
 msgstr[3] "%u saighdear"
 
-#. * TRANSLATORS: %1$u is the number of soldiers the plural refers to
-#. * TRANSLATORS: %2$u are open soldier slots in the building
-#: ../../src/logic/militarysite.cc:130
-#, c-format
-msgid "%1$u(+%2$u) soldier"
-msgid_plural "%1$u(+%2$u) soldiers"
-msgstr[0] "%1$u(+%2$u) saighdear"
-msgstr[1] "%1$u(+%2$u) shaighdear"
-msgstr[2] "%1$u(+%2$u) saighdearan"
-msgstr[3] "%1$u(+%2$u) saighdear"
+#: ../../src/logic/militarysite.cc:139
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] "%1%(+%2%) saighdear (+%3%)"
+msgstr[1] "%1%(+%2%) shaighdear (+%3%)"
+msgstr[2] "%1%(+%2%) saighdearan (+%3%)"
+msgstr[3] "%1%(+%2%) saighdear (+%3%)"
 
-#: ../../src/logic/militarysite.cc:842
+#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
+#. * TRANSLATORS: %2% are currently open soldier slots in the building
+#: ../../src/logic/militarysite.cc:144
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] "%1%(+%2%) saighdear"
+msgstr[1] "%1%(+%2%) shaighdear"
+msgstr[2] "%1%(+%2%) saighdearan"
+msgstr[3] "%1%(+%2%) saighdear"
+
+#: ../../src/logic/militarysite.cc:849
 msgid "Militarysite lost!"
 msgstr "Chaill thu togalach!"
 
-#: ../../src/logic/militarysite.cc:896
+#: ../../src/logic/militarysite.cc:903
 msgid "Enemy at site defeated!"
 msgstr "Ghabh thu togalach!"
 
-#: ../../src/logic/militarysite.cc:946
+#: ../../src/logic/militarysite.cc:953
 msgid "You are under attack"
 msgstr "Fo ionnsaigh!"
 
@@ -866,109 +904,113 @@ msgstr ""
 "'S urrainn dhut ionad tòiseachaidh a cur ris a làimh leis an deasaiche "
 "Widelands gus an duilgheadas seo a chàradh."
 
-#. * TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s'
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:271
 #, c-format
-msgid "not %s"
-msgstr "nach eil %s"
+msgid "the economy needs the ware ‘%s’"
+msgstr "gu bheil an eaconamaidh feumach air a’ bhathar ‘%s’"
 
-#. * TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s'
-#. * TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s'
-#: ../../src/logic/production_program.cc:284
-#: ../../src/logic/production_program.cc:296
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’
+#: ../../src/logic/production_program.cc:278
 #, c-format
-msgid "economy needs %s"
-msgstr "an t-eaconamaidh feumach air %s"
+msgid "the economy doesn’t need the ware ‘%s’"
+msgstr "nach eil an eaconamaidh feumach air a’ bhathar ‘%s’"
 
-#. * TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages.
-#. * TRANSLATORS: e.g. %1$s = 'Failed work because: water, wheat (2)' %2$s = 'are missing'
-#: ../../src/logic/production_program.cc:330
-#: ../../src/logic/production_program.cc:918
-#: ../../src/logic/production_program.cc:943
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
+#: ../../src/logic/production_program.cc:291
 #, c-format
-msgid "%1$s %2$s"
-msgstr "%1$s %2$s"
+msgid "the economy needs the worker ‘%s’"
+msgstr "gu bheil an eaconamaidh feumach air an obraiche ‘%s’"
 
-#. * TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages.
-#: ../../src/logic/production_program.cc:333
-#: ../../src/logic/production_program.cc:924
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
+#. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
+#: ../../src/logic/production_program.cc:300
 #, c-format
-msgid "%s,"
-msgstr "%s,"
+msgid "the economy doesn’t need the worker ‘%s’"
+msgstr "nach eil an eaconamaidh feumach air an obraiche ‘%s’"
 
-#. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
-#: ../../src/logic/production_program.cc:338
-#: ../../src/logic/production_program.cc:932
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
+#. * TRANSLATORS:    %1$s = "3"
+#. * TRANSLATORS:    %2$i = "water"
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
+#. * TRANSLATORS:    %1$i = "3"
+#. * TRANSLATORS:    %2$s = "water"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: For this example, this is what's in the place holders:
+#. * TRANSLATORS:    %1$i = "3"
+#. * TRANSLATORS:    %2$s = "water"
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
+#. * TRANSLATORS:    %%1$i = "2"
+#. * TRANSLATORS:    %2$s = "Coal"
+#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
+#. * TRANSLATORS:    %1$i = "2"
+#. * TRANSLATORS:    %2$s = "Ox"
+#: ../../src/logic/production_program.cc:343
+#: ../../src/logic/production_program.cc:365
+#: ../../src/logic/production_program.cc:946
+#: ../../src/logic/production_program.cc:1063
+#: ../../src/logic/production_program.cc:1158
 #, c-format
-msgid "%1$s (%2$i)"
-msgstr "%1$s (%2$i)"
+msgid "%1$ix %2$s"
+msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:341
+#: ../../src/logic/production_program.cc:349
 #, c-format
-msgid "site has%s"
-msgstr "%s aig an ionad"
+msgid "the building has the following wares: %s"
+msgstr "gu bheil am bathar seo aig an togalach: %s"
 
-#. * TRANSLATORS: 'Failed/Skipped ... because: workers need experience'.
-#: ../../src/logic/production_program.cc:358
-msgid "workers need experience"
-msgstr "eòlas a dhìth air na h-obraichean"
-
-#. * TRANSLATORS: 'Failed %s because (not): %s {and/or %s}'
-#: ../../src/logic/production_program.cc:519
+#. * TRANSLATORS: %s is a list of wares
+#: ../../src/logic/production_program.cc:371
 #, c-format
-msgid "Failed %s"
-msgstr "Dh'fhàillig le %s"
+msgid "the building doesn’t have the following wares: %s"
+msgstr "nach eil am bathar seo aig an togalach: %s"
 
-#. * TRANSLATORS: 'Completed %s because (not): %s {and/or %s}'
-#: ../../src/logic/production_program.cc:521
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
+#: ../../src/logic/production_program.cc:389
+msgid "a worker needs experience"
+msgstr "gu bheil eòlas a dhìth air aobraiche"
+
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
+#: ../../src/logic/production_program.cc:396
+msgid "the workers need no experience"
+msgstr "nach eil eòlas a dhìth air aobraiche"
+
+#. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
+#: ../../src/logic/production_program.cc:577
 #, c-format
-msgid "Completed %s"
-msgstr "Tha %s coileanta"
+msgid "Did not start %1$s because %2$s"
+msgstr "Cha deach leinn %1$s air sgàth 's %2$s"
 
-#. * TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}'
-#: ../../src/logic/production_program.cc:523
+#. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
+#: ../../src/logic/production_program.cc:584
 #, c-format
-msgid "Skipped %s"
-msgstr "Chaidh %s a leigeil seachad"
+msgid "Completed %1$s because %2$s"
+msgstr "Shoirbhich leinn %1$s air sgàth 's %2$s"
 
-#. * TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}'
-#: ../../src/logic/production_program.cc:539
+#. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
+#: ../../src/logic/production_program.cc:591
 #, c-format
-msgid "%s and "
-msgstr "%s agus "
+msgid "Skipped %1$s because %2$s"
+msgstr "Leig sinn seachad %1$s air sgàth 's %2$s"
 
-#. * TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}'
-#: ../../src/logic/production_program.cc:543
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: For this example, this is what's in the place holders:
+#. * TRANSLATORS:    %1$s = "work"
+#. * TRANSLATORS:    %2$s = "water and wheat (2) "
+#. * TRANSLATORS:    %3$s = "are missing"
+#: ../../src/logic/production_program.cc:960
 #, c-format
-msgid "%1$s because: %2$s"
-msgstr "%1$s air sgàth 's gu bheil %2$s"
+msgid "Did not start %1$s because %2$s %3$s"
+msgstr "Cha deach leinn %1$s air sgàth 's %2$s %3$s"
 
-#. * TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}'
-#: ../../src/logic/production_program.cc:556
-#, c-format
-msgid "%s or "
-msgstr "%s no "
-
-#. * TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}'
-#: ../../src/logic/production_program.cc:560
-#, c-format
-msgid "%1$s because not: %2$s"
-msgstr "%1$s air sgàth 's nach eil %2$s"
-
-#. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
-#: ../../src/logic/production_program.cc:909
-#, c-format
-msgid "Failed %s because:"
-msgstr "Dh'fhàillig le %s sgàth 's gu bheil"
-
-#: ../../src/logic/production_program.cc:939
-#, c-format
-msgid "%s and"
-msgstr "%s agus"
-
-#. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
-#: ../../src/logic/production_program.cc:945
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
+#. * TRANSLATORS:
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
+#. * TRANSLATORS: we need to address for your language.
+#: ../../src/logic/production_program.cc:969
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " a dhìth"
@@ -976,60 +1018,38 @@ msgstr[1] " a dhìth"
 msgstr[2] " a dhìth"
 msgstr[3] " a dhìth"
 
-#. * TRANSLATORS: Number used in list of wares
-#. * TRANSLATORS: Number used in list of workers
-#: ../../src/logic/production_program.cc:1040
-#: ../../src/logic/production_program.cc:1138
-#, c-format
-msgid "%u "
-msgstr "%u "
-
-#. * TRANSLATORS: Separator for list of wares
-#. * TRANSLATORS: Separator for list of workers
-#: ../../src/logic/production_program.cc:1047
-#: ../../src/logic/production_program.cc:1145
-msgid ", "
-msgstr ", "
-
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1051
+#: ../../src/logic/production_program.cc:1073
 #, c-format
 msgid "Produced %s"
 msgstr "Chaidh %s a shaothrachadh"
 
-#. * TRANSLATORS: %s is a lost of workers
-#: ../../src/logic/production_program.cc:1148
+#. * TRANSLATORS: %s is a list of workers
+#: ../../src/logic/production_program.cc:1167
 #, c-format
 msgid "Recruited %s"
 msgstr "Chaidh %s a thrusadh"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
-#: ../../src/logic/production_program.cc:1212
+#: ../../src/logic/production_program.cc:1228
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr "%1$s %2$s – tochladh %3$s"
 
-#: ../../src/logic/production_program.cc:1323
-#, c-format
-msgid "Can’t find any more resources!"
-msgstr "Cha deach stòras a lorg tuilleadh!"
-
-#: ../../src/logic/production_program.cc:1395
-#, c-format
+#: ../../src/logic/production_program.cc:1390
 msgid "No soldier to train!"
 msgstr "Chan eil saighdear ri thrèanadh ann!"
 
-#: ../../src/logic/production_program.cc:1405
-#: ../../src/logic/production_program.cc:1492
-#, c-format
+#: ../../src/logic/production_program.cc:1398
+#: ../../src/logic/production_program.cc:1483
 msgid "No soldier found for this training level!"
 msgstr "Cha deach saighdear airson an leibheil de thrèanaidh seo a lorg!"
 
-#: ../../src/logic/productionsite.cc:228
+#: ../../src/logic/productionsite.cc:226
 msgid "(not occupied)"
 msgstr "(falamh)"
 
-#: ../../src/logic/productionsite.cc:232
+#: ../../src/logic/productionsite.cc:233
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Tha obraiche a dhìth"
@@ -1037,9 +1057,13 @@ msgstr[1] "Tha obraichean a dhìth"
 msgstr[2] "Tha obraichean a dhìth"
 msgstr[3] "Tha obraichean a dhìth"
 
-#: ../../src/logic/productionsite.cc:241
+#: ../../src/logic/productionsite.cc:238
 msgid "(stopped)"
 msgstr "('na stad)"
+
+#: ../../src/logic/productionsite.cc:919
+msgid "Can’t find any more resources!"
+msgstr "Cha deach stòras a lorg tuilleadh!"
 
 #: ../../src/logic/replay_game_controller.cc:108
 msgid "End of replay"
@@ -1131,18 +1155,18 @@ msgstr ""
 "bu chòir dha stòras %s a thàrmachadh nach eil air an t-saoghal seo; mar sin "
 "chan eil an treubh co-chòrdail ris an t-saoghal seo"
 
-#: ../../src/logic/worker.cc:932
+#: ../../src/logic/worker.cc:944
 msgid "A geologist found resources."
 msgstr "Tha clach-eòlaiche air stòras a lorg."
 
-#: ../../src/logic/worker.cc:1832
+#: ../../src/logic/worker.cc:1844
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 "Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh e "
 "bàs."
 
-#: ../../src/logic/worker.cc:1839
+#: ../../src/logic/worker.cc:1851
 msgid "Worker got lost!"
 msgstr "Chaidh obraiche air chall!"
 
@@ -3242,23 +3266,18 @@ msgstr "Seall an raon obrach"
 msgid "Building materials"
 msgstr "Stuth togail"
 
-#: ../../src/wui/encyclopedia_window.cc:67
+#: ../../src/wui/encyclopedia_window.cc:65
 #: ../../src/wui/interactive_player.cc:127
 msgid "Tribal Ware Encyclopedia"
 msgstr "Leabhar-eòlais bathar na treubha"
 
-#: ../../src/wui/encyclopedia_window.cc:81
+#: ../../src/wui/encyclopedia_window.cc:79
 msgid "Consumed ware type(s)"
 msgstr "Bathar air a bheil feum"
 
-#: ../../src/wui/encyclopedia_window.cc:82
+#: ../../src/wui/encyclopedia_window.cc:80
 msgid "Quantity"
 msgstr "Uiread"
-
-#. * TRANSLATORS: List of wares, e.g. "Fish or Meat"
-#: ../../src/wui/encyclopedia_window.cc:192
-msgid " or "
-msgstr " no "
 
 #: ../../src/wui/fieldaction.cc:249
 msgid "Build small building"

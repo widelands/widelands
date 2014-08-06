@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-26 13:10+0000\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
 "PO-Revision-Date: 2014-08-03 12:33+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-04 05:44+0000\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:48+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -282,16 +282,16 @@ msgstr ""
 "これは、鋼の穂先をもつ強化された槍です。\n"
 "　武器工房で製造され、訓練場で兵士を攻撃レベル１からレベル２に訓練するために――食物とともに――使用されます。"
 
-#: ../../tribes/empire/arena/conf:29
-#: ../../tribes/empire/colosseum/conf:35
-#: ../../tribes/empire/trainingcamp/conf:46
-msgid "Sleep"
-msgstr "休止"
-
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
-msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr "回避訓練Lv0→1"
+#: ../../tribes/empire/trainingcamp/conf:47
+msgid "sleeping"
+msgstr ""
+
+#: ../../tribes/empire/arena/conf:32
+#: ../../tribes/empire/colosseum/conf:38
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/arena/help.lua:15
 #: ../../tribes/empire/armorsmithy/help.lua:13
@@ -302,9 +302,9 @@ msgstr "回避訓練Lv0→1"
 #: ../../tribes/empire/barrier/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:17
-#: ../../tribes/empire/burners_house/help.lua:13
-#: ../../tribes/empire/burners_house/help.lua:17
 #: ../../tribes/empire/castle/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:17
 #: ../../tribes/empire/coalmine/help.lua:13
 #: ../../tribes/empire/colosseum/help.lua:15
 #: ../../tribes/empire/deep_coalmine/help.lua:13
@@ -396,7 +396,7 @@ msgstr ""
 #: ../../tribes/empire/armorsmithy/help.lua:29
 #: ../../tribes/empire/bakery/help.lua:30
 #: ../../tribes/empire/brewery/help.lua:29
-#: ../../tribes/empire/burners_house/help.lua:29
+#: ../../tribes/empire/charcoal_kiln/help.lua:29
 #: ../../tribes/empire/coalmine/help.lua:30
 #: ../../tribes/empire/colosseum/help.lua:38
 #: ../../tribes/empire/deep_coalmine/help.lua:30
@@ -447,67 +447,50 @@ msgstr ""
 msgid "Produces armor for the soldiers."
 msgstr "兵士のために防具をつくります。"
 
-#: ../../tribes/empire/armorsmithy/conf:31
-msgid "Produce helm"
-msgstr "ヘルムの生産"
-
 #: ../../tribes/empire/armorsmithy/conf:32
-msgid "Produce armor"
-msgstr "アーマーの生産"
-
-#: ../../tribes/empire/armorsmithy/conf:33
-msgid "Produce chain armor"
-msgstr "チェインアーマーの生産"
+msgid "forging a helm"
+msgstr ""
 
 #: ../../tribes/empire/armorsmithy/conf:34
-msgid "Produce plate armor"
-msgstr "プレートアーマーの生産"
+msgid "forging an armor"
+msgstr ""
 
-#: ../../tribes/empire/armorsmithy/conf:35
-#: ../../tribes/empire/bakery/conf:24
-#: ../../tribes/empire/brewery/conf:25
-#: ../../tribes/empire/burners_house/conf:24
-#: ../../tribes/empire/coalmine/conf:25
-#: ../../tribes/empire/deep_coalmine/conf:26
-#: ../../tribes/empire/deep_goldmine/conf:26
-#: ../../tribes/empire/deep_marblemine/conf:27
-#: ../../tribes/empire/deep_oremine/conf:26
-#: ../../tribes/empire/donkeyfarm/conf:25
-#: ../../tribes/empire/farm/conf:26
-#: ../../tribes/empire/fishers_house/conf:20
-#: ../../tribes/empire/foresters_house/conf:20
-#: ../../tribes/empire/goldmine/conf:26
-#: ../../tribes/empire/hunters_house/conf:19
-#: ../../tribes/empire/inn/conf:27
-#: ../../tribes/empire/lumberjacks_house/conf:20
-#: ../../tribes/empire/marblemine/conf:29
-#: ../../tribes/empire/mill/conf:24
-#: ../../tribes/empire/oremine/conf:26
-#: ../../tribes/empire/piggery/conf:25
-#: ../../tribes/empire/quarry/conf:22
-#: ../../tribes/empire/sawmill/conf:23
-#: ../../tribes/empire/scouts_house/conf:20
-#: ../../tribes/empire/sheepfarm/conf:24
-#: ../../tribes/empire/shipyard/conf:28
-#: ../../tribes/empire/smelting_works/conf:28
-#: ../../tribes/empire/stonemasons_house/conf:24
-#: ../../tribes/empire/tavern/conf:28
-#: ../../tribes/empire/toolsmithy/conf:49
-#: ../../tribes/empire/vineyard/conf:26
-#: ../../tribes/empire/weaponsmithy/conf:38
-#: ../../tribes/empire/weaving-mill/conf:20
-#: ../../tribes/empire/well/conf:21
-#: ../../tribes/empire/winery/conf:26
-msgid "Work"
-msgstr "作業"
+#: ../../tribes/empire/armorsmithy/conf:36
+msgid "forging a chain armor"
+msgstr ""
+
+#: ../../tribes/empire/armorsmithy/conf:38
+msgid "forging a plate armor"
+msgstr ""
+
+#: ../../tribes/empire/armorsmithy/conf:40
+#: ../../tribes/empire/bakery/conf:25
+#: ../../tribes/empire/charcoal_kiln/conf:25
+#: ../../tribes/empire/farm/conf:29
+#: ../../tribes/empire/foresters_house/conf:21
+#: ../../tribes/empire/inn/conf:30
+#: ../../tribes/empire/lumberjacks_house/conf:21
+#: ../../tribes/empire/marblemine/conf:32
+#: ../../tribes/empire/quarry/conf:25
+#: ../../tribes/empire/sawmill/conf:24
+#: ../../tribes/empire/shipyard/conf:30
+#: ../../tribes/empire/smelting_works/conf:31
+#: ../../tribes/empire/stonemasons_house/conf:25
+#: ../../tribes/empire/toolsmithy/conf:62
+#: ../../tribes/empire/vineyard/conf:29
+#: ../../tribes/empire/weaponsmithy/conf:44
+#: ../../tribes/empire/well/conf:22
+#: ../../tribes/empire/winery/conf:27
+msgid "working"
+msgstr ""
 
 #: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
 #: ../../tribes/empire/barracks/help.lua:13
 #: ../../tribes/empire/barrier/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:13
-#: ../../tribes/empire/burners_house/help.lua:13
 #: ../../tribes/empire/castle/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:13
 #: ../../tribes/empire/donkeyfarm/help.lua:13
 #: ../../tribes/empire/farm/help.lua:13
 #: ../../tribes/empire/fishers_house/help.lua:13
@@ -629,13 +612,13 @@ msgstr ""
 msgid "Produces beer or wine."
 msgstr "ビールやワインをつくります。"
 
+#: ../../tribes/empire/brewery/conf:26
+msgid "brewing"
+msgstr ""
+
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
 msgstr "新しい建物を立ち上げる建設地で働きます。"
-
-#: ../../tribes/empire/burner/conf:1
-msgid "Burns coal."
-msgstr "木炭を燃やします。"
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
@@ -660,6 +643,10 @@ msgstr ""
 "チェインアーマーは、帝国の兵士の中級鎧です。\n"
 "　防具工房で製造され、訓練場で兵士の体力レベル２を体力レベル３に訓練するために――食物とともに――使用されます。"
 
+#: ../../tribes/empire/charcoal_burner/conf:1
+msgid "Burns coal."
+msgstr "木炭を燃やします。"
+
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor "
@@ -670,10 +657,18 @@ msgstr "布は複数の建物を建設するために必要とされます。防
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal. It is mined in coal mines or produced by a "
-"charcoal burner out of logs."
+"charcoal kiln out of logs."
 msgstr ""
-"帝国人の製錬所、武器工房、防具工房の炉は、通常は石炭で供給されます。\n"
-"　炭鉱で採掘され、また炭焼小屋で丸太を消費して製造されます。"
+
+#: ../../tribes/empire/coalmine/conf:26
+#: ../../tribes/empire/deep_coalmine/conf:27
+#: ../../tribes/empire/deep_goldmine/conf:27
+#: ../../tribes/empire/deep_marblemine/conf:28
+#: ../../tribes/empire/deep_oremine/conf:27
+#: ../../tribes/empire/goldmine/conf:27
+#: ../../tribes/empire/oremine/conf:27
+msgid "mining"
+msgstr ""
 
 #: ../../tribes/empire/coalmine/conf:40
 #: ../../tribes/empire/deep_coalmine/conf:41
@@ -691,9 +686,9 @@ msgstr ""
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr ""
 
-#: ../../tribes/empire/colosseum/conf:37
-msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr "回避訓練Lv1→2"
+#: ../../tribes/empire/colosseum/conf:40
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr ""
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -1000,8 +995,8 @@ msgid "Builder"
 msgstr "建築人"
 
 #: ../../tribes/empire/conf:110
-msgid "Burner"
-msgstr "炭焼人"
+msgid "Charcoal Burner"
+msgstr ""
 
 #: ../../tribes/empire/conf:111
 msgid "Carpenter"
@@ -1238,7 +1233,7 @@ msgid "Tavern"
 msgstr "酒場"
 
 #: ../../tribes/empire/conf:180
-msgid "Charcoal Burner"
+msgid "Charcoal Kiln"
 msgstr ""
 
 #: ../../tribes/empire/conf:181
@@ -1357,12 +1352,12 @@ msgstr ""
 msgid "Digs gold ore out of the ground in mountain terrain."
 msgstr ""
 
-#: ../../tribes/empire/deep_marblemine/conf:40
-#: ../../tribes/empire/marblemine/conf:52
+#: ../../tribes/empire/deep_marblemine/conf:42
+#: ../../tribes/empire/marblemine/conf:57
 msgid "Main Marble Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/empire/deep_marblemine/conf:41
+#: ../../tribes/empire/deep_marblemine/conf:43
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
@@ -1402,24 +1397,28 @@ msgstr ""
 msgid "Breeds cute and helpful donkeys"
 msgstr "手助けをするかわいいロバを育てます。"
 
+#: ../../tribes/empire/donkeyfarm/conf:26
+msgid "rearing donkeys"
+msgstr ""
+
 #: ../../tribes/empire/donkeyfarm/help.lua:17
 msgid "Breeds donkeys for adding them to the transportation system."
 msgstr ""
 
-#: ../../tribes/empire/farm/conf:24
-msgid "Plant wheat"
-msgstr "小麦の種蒔き"
-
 #: ../../tribes/empire/farm/conf:25
-msgid "Harvest wheat"
-msgstr "小麦の収穫"
+msgid "planting wheat"
+msgstr ""
 
-#: ../../tribes/empire/farm/conf:43
-#: ../../tribes/empire/vineyard/conf:42
+#: ../../tribes/empire/farm/conf:27
+msgid "harvesting wheat"
+msgstr ""
+
+#: ../../tribes/empire/farm/conf:46
+#: ../../tribes/empire/vineyard/conf:45
 msgid "Out of Fields"
 msgstr ""
 
-#: ../../tribes/empire/farm/conf:44
+#: ../../tribes/empire/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1453,11 +1452,15 @@ msgstr ""
 msgid "Catches fish in the sea."
 msgstr "海で魚を捕まえます。"
 
-#: ../../tribes/empire/fishers_house/conf:27
-msgid "Out of Fish"
+#: ../../tribes/empire/fishers_house/conf:21
+msgid "fishing"
 msgstr ""
 
 #: ../../tribes/empire/fishers_house/conf:28
+msgid "Out of Fish"
+msgstr ""
+
+#: ../../tribes/empire/fishers_house/conf:29
 msgid ""
 "The fisher working in this fisher’s house can’t find any fish in his working "
 "radius."
@@ -1590,11 +1593,15 @@ msgstr ""
 msgid "The Hunter brings good meat to the colonists."
 msgstr "狩人は入植者においしい肉をもたらします。"
 
-#: ../../tribes/empire/hunters_house/conf:27
-msgid "Out of Game"
+#: ../../tribes/empire/hunters_house/conf:20
+msgid "hunting"
 msgstr ""
 
 #: ../../tribes/empire/hunters_house/conf:28
+msgid "Out of Game"
+msgstr ""
+
+#: ../../tribes/empire/hunters_house/conf:29
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "working radius."
@@ -1614,13 +1621,14 @@ msgid ""
 "in one blow. It is only used by hunters."
 msgstr "この槍は、投げるために丁度良い軽さで、しかも獣を一撃死させるには十分な重さです。狩人のみが使用します。"
 
-#: ../../tribes/empire/inn/conf:25
-msgid "Produce ration"
-msgstr "糧食の生産"
-
 #: ../../tribes/empire/inn/conf:26
-msgid "Produce meal"
-msgstr "食事の生産"
+#: ../../tribes/empire/tavern/conf:29
+msgid "preparing a ration"
+msgstr ""
+
+#: ../../tribes/empire/inn/conf:28
+msgid "preparing a meal"
+msgstr ""
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -1663,20 +1671,18 @@ msgstr ""
 msgid ""
 "Logs are an important building material for the Empire. The lumberjacks fell "
 "the trees; foresters care for the supply of trees. Logs are also used by the "
-"charcoal burner, the toolsmithy and the sawmill."
+"charcoal kiln, the toolsmithy and the sawmill."
 msgstr ""
-"丸太は帝国人の重要な建築材料のひとつです。木々を木こりが伐り倒し、植樹番が木の供給をケアをします。\n"
-"　丸太は炭焼小屋、道具工房、製材所でも使用されます。"
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
 msgstr "木を伐採します。"
 
-#: ../../tribes/empire/lumberjacks_house/conf:27
+#: ../../tribes/empire/lumberjacks_house/conf:28
 msgid "Out of Trees"
 msgstr ""
 
-#: ../../tribes/empire/lumberjacks_house/conf:28
+#: ../../tribes/empire/lumberjacks_house/conf:29
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his working radius. You should consider dismantling or destroying the "
@@ -1708,17 +1714,15 @@ msgstr ""
 "大理石の石柱は、帝国の高度な文化をあらわし、ほぼすべての大規模な建物に必要とされます。\n"
 "　石工小屋で大理石を使用して製造されます。"
 
-#: ../../tribes/empire/marblemine/conf:27
-#: ../../tribes/empire/quarry/conf:21
-msgid "Mine marble"
-msgstr "大理石の採掘"
-
 #: ../../tribes/empire/marblemine/conf:28
-#: ../../tribes/empire/quarry/conf:20
-msgid "Mine stone"
-msgstr "石材の採掘"
+msgid "mining marble"
+msgstr ""
 
-#: ../../tribes/empire/marblemine/conf:53
+#: ../../tribes/empire/marblemine/conf:30
+msgid "mining stone"
+msgstr ""
+
+#: ../../tribes/empire/marblemine/conf:58
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
@@ -1751,6 +1755,10 @@ msgstr ""
 "　鉱夫のための弁当を用意するために、酒場で使用され、また訓練施設（アリーナ、コロッセオ、訓練場）でも消費されます。肉には、養豚場からの豚肉と、狩人が狩猟で"
 "得る肉との、二種類の供給源があります。"
 
+#: ../../tribes/empire/mill/conf:25
+msgid "grinding wheat"
+msgstr ""
+
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
 msgstr "小麦粉を生産するために小麦を粉びきします。"
@@ -1779,6 +1787,10 @@ msgstr ""
 msgid "Breeds pigs."
 msgstr "豚を育てます。"
 
+#: ../../tribes/empire/piggery/conf:26
+msgid "raising pigs"
+msgstr ""
+
 #: ../../tribes/empire/plate_armor/conf:1
 msgid ""
 "The plate armor is the strongest armor an Empire soldier can have. It is "
@@ -1788,11 +1800,19 @@ msgstr ""
 "プレートアーマーは、帝国の兵士のためにある最強の鎧です。\n"
 "　防具工房で製造され、訓練場で兵士の体力レベル３を体力レベル４に訓練するために――食物とともに――使用されます。"
 
-#: ../../tribes/empire/quarry/conf:43
+#: ../../tribes/empire/quarry/conf:21
+msgid "quarrying stone"
+msgstr ""
+
+#: ../../tribes/empire/quarry/conf:23
+msgid "quarrying marble"
+msgstr ""
+
+#: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
 msgstr ""
 
-#: ../../tribes/empire/quarry/conf:44
+#: ../../tribes/empire/quarry/conf:47
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working "
 "radius."
@@ -1826,6 +1846,10 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "スコット偵察風偵察兵、偵察服着て未偵察地を偵察する。"
 
+#: ../../tribes/empire/scouts_house/conf:21
+msgid "scouting"
+msgstr ""
+
 #: ../../tribes/empire/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
 msgstr ""
@@ -1856,6 +1880,10 @@ msgstr ""
 "あなたの兵士が\n"
 "あなたの歩哨所を占拠しました。"
 
+#: ../../tribes/empire/sheepfarm/conf:25
+msgid "breeding sheep"
+msgstr ""
+
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
 msgstr "羊を飼います。"
@@ -1868,9 +1896,9 @@ msgstr ""
 msgid "Works at the shipyard and constructs new ships."
 msgstr "新しい船を造り上げる造船所で働きます。"
 
-#: ../../tribes/empire/shipyard/conf:27
-msgid "Constructing ship"
-msgstr "建造中の船"
+#: ../../tribes/empire/shipyard/conf:28
+msgid "constructing a ship"
+msgstr ""
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -1884,13 +1912,13 @@ msgstr ""
 msgid "Smelts iron."
 msgstr "鉄を製錬します。"
 
-#: ../../tribes/empire/smelting_works/conf:26
-msgid "Smelt iron"
-msgstr "鉄の製錬"
-
 #: ../../tribes/empire/smelting_works/conf:27
-msgid "Smelt gold"
-msgstr "金の製錬"
+msgid "smelting iron"
+msgstr ""
+
+#: ../../tribes/empire/smelting_works/conf:29
+msgid "smelting gold"
+msgstr ""
 
 #: ../../tribes/empire/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -1916,53 +1944,53 @@ msgstr "岩から、花崗岩の原石を切り出します。"
 msgid "Produces tools for the workers."
 msgstr "労働者のために道具をつくります。"
 
-#: ../../tribes/empire/toolsmithy/conf:37
-msgid "Produce bread paddle"
-msgstr "パンパドルの生産"
-
 #: ../../tribes/empire/toolsmithy/conf:38
-msgid "Produce fire tongs"
-msgstr "火ばさみの生産"
-
-#: ../../tribes/empire/toolsmithy/conf:39
-msgid "Produce fishing rod"
-msgstr "釣竿の生産"
+msgid "making an ax"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:40
-msgid "Produce hammer"
-msgstr "ハンマーの生産"
-
-#: ../../tribes/empire/toolsmithy/conf:41
-msgid "Produce kitchen tools"
-msgstr "調理道具の生産"
+msgid "making a basket"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:42
-msgid "Produce pick"
-msgstr "ツルハシの生産"
-
-#: ../../tribes/empire/toolsmithy/conf:43
-msgid "Produce scythe"
-msgstr "大鎌の生産"
+msgid "making a bread paddle"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:44
-msgid "Produce shovel"
-msgstr "シャベルの生産"
-
-#: ../../tribes/empire/toolsmithy/conf:45
-msgid "Produce hunting spear"
-msgstr "狩猟槍の生産"
+msgid "making fire tongs"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:46
-msgid "Produce basket"
-msgstr "カゴの生産"
-
-#: ../../tribes/empire/toolsmithy/conf:47
-msgid "Produce saw"
-msgstr "ノコギリの生産"
+msgid "making a fishing rod"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:48
-msgid "Produce ax"
-msgstr "伐採斧の生産"
+msgid "making a hammer"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:50
+msgid "making a hunting spear"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:52
+msgid "making kitchen tools"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:54
+msgid "making a pick"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:56
+msgid "making a saw"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:58
+msgid "making a scythe"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:60
+msgid "making a shovel"
+msgstr ""
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your tower."
@@ -1974,37 +2002,37 @@ msgstr ""
 msgid "Trains the soldiers."
 msgstr "兵士を訓練します。"
 
-#: ../../tribes/empire/trainingcamp/conf:47
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "攻撃訓練Lv0→1"
-
-#: ../../tribes/empire/trainingcamp/conf:48
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "攻撃訓練Lv1→2"
-
 #: ../../tribes/empire/trainingcamp/conf:49
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "攻撃訓練Lv2→3"
-
-#: ../../tribes/empire/trainingcamp/conf:50
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "攻撃訓練Lv3→4"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingcamp/conf:51
-msgid "Upgrade soldier health from level 0 to level 1"
-msgstr "体力訓練Lv0→1"
-
-#: ../../tribes/empire/trainingcamp/conf:52
-msgid "Upgrade soldier health from level 1 to level 2"
-msgstr "体力訓練Lv1→2"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr ""
 
 #: ../../tribes/empire/trainingcamp/conf:53
-msgid "Upgrade soldier health from level 2 to level 3"
-msgstr "体力訓練Lv2→3"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr ""
 
-#: ../../tribes/empire/trainingcamp/conf:54
-msgid "Upgrade soldier health from level 3 to level 4"
-msgstr "体力訓練Lv3→4"
+#: ../../tribes/empire/trainingcamp/conf:55
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/conf:57
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/conf:59
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/conf:61
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/conf:63
+msgid "upgrading soldier health from level 3 to level 4"
+msgstr ""
 
 #: ../../tribes/empire/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
@@ -2022,15 +2050,15 @@ msgstr ""
 msgid "Grows vine."
 msgstr "ブドウを育てます。"
 
-#: ../../tribes/empire/vineyard/conf:24
-msgid "Plant vine"
-msgstr "ブドウの種蒔き"
-
 #: ../../tribes/empire/vineyard/conf:25
-msgid "Harvest vine"
-msgstr "ブドウの収穫"
+msgid "planting grapevines"
+msgstr ""
 
-#: ../../tribes/empire/vineyard/conf:43
+#: ../../tribes/empire/vineyard/conf:27
+msgid "harvesting grapes"
+msgstr ""
+
+#: ../../tribes/empire/vineyard/conf:46
 msgid ""
 "The farmer working at this vineyard has no cleared soil to plant his seeds."
 msgstr ""
@@ -2061,39 +2089,43 @@ msgstr ""
 msgid "Produces weapons for the soldiers."
 msgstr "兵士のために武器をつくります。"
 
-#: ../../tribes/empire/weaponsmithy/conf:33
-msgid "Produce wood lance"
-msgstr "ウッドランスの生産"
-
 #: ../../tribes/empire/weaponsmithy/conf:34
-msgid "Produce lance"
-msgstr "ランスの生産"
-
-#: ../../tribes/empire/weaponsmithy/conf:35
-msgid "Produce advanced lance"
-msgstr "アドバンストランスの生産"
+msgid "forging a wood lance"
+msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:36
-msgid "Produce heavy lance"
-msgstr "ヘビーランスの生産"
+msgid "forging a lance"
+msgstr ""
 
-#: ../../tribes/empire/weaponsmithy/conf:37
-msgid "Produce war lance"
-msgstr "ウォーランスの生産"
+#: ../../tribes/empire/weaponsmithy/conf:38
+msgid "forging an advanced lance"
+msgstr ""
+
+#: ../../tribes/empire/weaponsmithy/conf:40
+msgid "forging a heavy lance"
+msgstr ""
+
+#: ../../tribes/empire/weaponsmithy/conf:42
+msgid "forging a war lance"
+msgstr ""
 
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
 msgstr "船と兵士のために布をつくります。"
 
+#: ../../tribes/empire/weaving-mill/conf:21
+msgid "weaving"
+msgstr ""
+
 #: ../../tribes/empire/weaving-mill/help.lua:17
 msgid "Weaves cloth out of wool."
 msgstr ""
 
-#: ../../tribes/empire/well/conf:30
+#: ../../tribes/empire/well/conf:31
 msgid "Out of Water"
 msgstr ""
 
-#: ../../tribes/empire/well/conf:31
+#: ../../tribes/empire/well/conf:32
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
 msgstr ""

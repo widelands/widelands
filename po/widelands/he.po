@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-26 15:10+0200\n"
+"POT-Creation-Date: 2014-08-05 10:15+0100\n"
 "PO-Revision-Date: 2012-03-09 02:38+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-27 05:53+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:50+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
@@ -31,6 +31,27 @@ msgstr ""
 
 #: ../../src/ai/defaultai.h:102
 msgid "Defensive"
+msgstr ""
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../src/base/i18n.cc:331
+#, c-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#. * TRANSLATORS: Join the last 2 items on a list with "or".
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../src/base/i18n.cc:336
+#, c-format
+msgid "%1$s or %2$s"
+msgstr ""
+
+#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../src/base/i18n.cc:342
+#, c-format
+msgid "%1$s, %2$s"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:64
@@ -108,14 +129,14 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:154
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:478
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:175
-#: ../../src/logic/map.h:178
+#: ../../src/logic/map.h:177
 msgid "No Name"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:596
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:155
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:479
-#: ../../src/logic/map.h:179 ../../src/ui_fsmenu/loadgame.cc:244
+#: ../../src/logic/map.h:178 ../../src/ui_fsmenu/loadgame.cc:244
 #: ../../src/ui_fsmenu/loadreplay.cc:202
 #: ../../src/ui_fsmenu/netsetup_lan.cc:199 ../../src/wui/game_summary.cc:170
 msgid "Unknown"
@@ -597,16 +618,16 @@ msgstr ""
 msgid "Allow"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:39
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:50
 msgid "Increase/Decrease Value"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:81
 msgid "Set Value"
 msgstr ""
@@ -646,21 +667,21 @@ msgstr ""
 msgid "Set port space"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:42
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:43
 msgid "Noise Height Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:145
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:147
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:152
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
 msgstr ""
@@ -711,7 +732,7 @@ msgstr "קטן"
 msgid "Big"
 msgstr "גדול"
 
-#: ../../src/logic/constructionsite.cc:94 ../../src/logic/immovable.cc:570
+#: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:570
 #, c-format
 msgid "%i%% built"
 msgstr ""
@@ -791,35 +812,48 @@ msgstr ""
 msgid "Player 1"
 msgstr ""
 
-#: ../../src/logic/map.h:180
+#: ../../src/logic/map.h:179
 msgid "no description defined"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:123
+#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
+#. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
+#: ../../src/logic/militarysite.cc:125
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/logic/militarysite.cc:130
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
-#. * TRANSLATORS: %1$u is the number of soldiers the plural refers to
-#. * TRANSLATORS: %2$u are open soldier slots in the building
-#: ../../src/logic/militarysite.cc:130
-#, c-format
-msgid "%1$u(+%2$u) soldier"
-msgid_plural "%1$u(+%2$u) soldiers"
+#: ../../src/logic/militarysite.cc:139
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/militarysite.cc:842
+#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
+#. * TRANSLATORS: %2% are currently open soldier slots in the building
+#: ../../src/logic/militarysite.cc:144
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/logic/militarysite.cc:849
 msgid "Militarysite lost!"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:896
+#: ../../src/logic/militarysite.cc:903
 msgid "Enemy at site defeated!"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:946
+#: ../../src/logic/militarysite.cc:953
 msgid "You are under attack"
 msgstr ""
 
@@ -836,175 +870,161 @@ msgid ""
 "problem."
 msgstr ""
 
-#. * TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s'
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:271
 #, c-format
-msgid "not %s"
+msgid "the economy needs the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s'
-#. * TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s'
-#: ../../src/logic/production_program.cc:284
-#: ../../src/logic/production_program.cc:296
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’
+#: ../../src/logic/production_program.cc:278
 #, c-format
-msgid "economy needs %s"
+msgid "the economy doesn’t need the ware ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages.
-#. * TRANSLATORS: e.g. %1$s = 'Failed work because: water, wheat (2)' %2$s = 'are missing'
-#: ../../src/logic/production_program.cc:330
-#: ../../src/logic/production_program.cc:918
-#: ../../src/logic/production_program.cc:943
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
+#: ../../src/logic/production_program.cc:291
 #, c-format
-msgid "%1$s %2$s"
+msgid "the economy needs the worker ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages.
-#: ../../src/logic/production_program.cc:333
-#: ../../src/logic/production_program.cc:924
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
+#. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
+#: ../../src/logic/production_program.cc:300
 #, c-format
-msgid "%s,"
+msgid "the economy doesn’t need the worker ‘%s’"
 msgstr ""
 
-#. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
-#: ../../src/logic/production_program.cc:338
-#: ../../src/logic/production_program.cc:932
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
+#. * TRANSLATORS:    %1$s = "3"
+#. * TRANSLATORS:    %2$i = "water"
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
+#. * TRANSLATORS:    %1$i = "3"
+#. * TRANSLATORS:    %2$s = "water"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: For this example, this is what's in the place holders:
+#. * TRANSLATORS:    %1$i = "3"
+#. * TRANSLATORS:    %2$s = "water"
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
+#. * TRANSLATORS:    %%1$i = "2"
+#. * TRANSLATORS:    %2$s = "Coal"
+#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
+#. * TRANSLATORS:    %1$i = "2"
+#. * TRANSLATORS:    %2$s = "Ox"
+#: ../../src/logic/production_program.cc:343
+#: ../../src/logic/production_program.cc:365
+#: ../../src/logic/production_program.cc:946
+#: ../../src/logic/production_program.cc:1063
+#: ../../src/logic/production_program.cc:1158
 #, c-format
-msgid "%1$s (%2$i)"
+msgid "%1$ix %2$s"
 msgstr ""
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:341
+#: ../../src/logic/production_program.cc:349
 #, c-format
-msgid "site has%s"
+msgid "the building has the following wares: %s"
 msgstr ""
 
-#. * TRANSLATORS: 'Failed/Skipped ... because: workers need experience'.
-#: ../../src/logic/production_program.cc:358
-msgid "workers need experience"
-msgstr ""
-
-#. * TRANSLATORS: 'Failed %s because (not): %s {and/or %s}'
-#: ../../src/logic/production_program.cc:519
+#. * TRANSLATORS: %s is a list of wares
+#: ../../src/logic/production_program.cc:371
 #, c-format
-msgid "Failed %s"
+msgid "the building doesn’t have the following wares: %s"
 msgstr ""
 
-#. * TRANSLATORS: 'Completed %s because (not): %s {and/or %s}'
-#: ../../src/logic/production_program.cc:521
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
+#: ../../src/logic/production_program.cc:389
+msgid "a worker needs experience"
+msgstr ""
+
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
+#: ../../src/logic/production_program.cc:396
+msgid "the workers need no experience"
+msgstr ""
+
+#. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
+#: ../../src/logic/production_program.cc:577
 #, c-format
-msgid "Completed %s"
+msgid "Did not start %1$s because %2$s"
 msgstr ""
 
-#. * TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}'
-#: ../../src/logic/production_program.cc:523
+#. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
+#: ../../src/logic/production_program.cc:584
 #, c-format
-msgid "Skipped %s"
+msgid "Completed %1$s because %2$s"
 msgstr ""
 
-#. * TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}'
-#: ../../src/logic/production_program.cc:539
+#. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
+#: ../../src/logic/production_program.cc:591
 #, c-format
-msgid "%s and "
+msgid "Skipped %1$s because %2$s"
 msgstr ""
 
-#. * TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}'
-#: ../../src/logic/production_program.cc:543
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: For this example, this is what's in the place holders:
+#. * TRANSLATORS:    %1$s = "work"
+#. * TRANSLATORS:    %2$s = "water and wheat (2) "
+#. * TRANSLATORS:    %3$s = "are missing"
+#: ../../src/logic/production_program.cc:960
 #, c-format
-msgid "%1$s because: %2$s"
+msgid "Did not start %1$s because %2$s %3$s"
 msgstr ""
 
-#. * TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}'
-#: ../../src/logic/production_program.cc:556
-#, c-format
-msgid "%s or "
-msgstr ""
-
-#. * TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}'
-#: ../../src/logic/production_program.cc:560
-#, c-format
-msgid "%1$s because not: %2$s"
-msgstr ""
-
-#. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
-#: ../../src/logic/production_program.cc:909
-#, c-format
-msgid "Failed %s because:"
-msgstr ""
-
-#: ../../src/logic/production_program.cc:939
-#, c-format
-msgid "%s and"
-msgstr ""
-
-#. * TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing'
-#: ../../src/logic/production_program.cc:945
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
+#. * TRANSLATORS:
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
+#. * TRANSLATORS: we need to address for your language.
+#: ../../src/logic/production_program.cc:969
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#. * TRANSLATORS: Number used in list of wares
-#. * TRANSLATORS: Number used in list of workers
-#: ../../src/logic/production_program.cc:1040
-#: ../../src/logic/production_program.cc:1138
-#, c-format
-msgid "%u "
-msgstr ""
-
-#. * TRANSLATORS: Separator for list of wares
-#. * TRANSLATORS: Separator for list of workers
-#: ../../src/logic/production_program.cc:1047
-#: ../../src/logic/production_program.cc:1145
-msgid ", "
-msgstr ""
-
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1051
+#: ../../src/logic/production_program.cc:1073
 #, c-format
 msgid "Produced %s"
 msgstr ""
 
-#. * TRANSLATORS: %s is a lost of workers
-#: ../../src/logic/production_program.cc:1148
+#. * TRANSLATORS: %s is a list of workers
+#: ../../src/logic/production_program.cc:1167
 #, c-format
 msgid "Recruited %s"
 msgstr ""
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
-#: ../../src/logic/production_program.cc:1212
+#: ../../src/logic/production_program.cc:1228
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1323
-#, c-format
-msgid "Can’t find any more resources!"
-msgstr ""
-
-#: ../../src/logic/production_program.cc:1395
-#, c-format
+#: ../../src/logic/production_program.cc:1390
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1405
-#: ../../src/logic/production_program.cc:1492
-#, c-format
+#: ../../src/logic/production_program.cc:1398
+#: ../../src/logic/production_program.cc:1483
 msgid "No soldier found for this training level!"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:228
+#: ../../src/logic/productionsite.cc:226
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:232
+#: ../../src/logic/productionsite.cc:233
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/productionsite.cc:241
+#: ../../src/logic/productionsite.cc:238
 msgid "(stopped)"
+msgstr ""
+
+#: ../../src/logic/productionsite.cc:919
+msgid "Can’t find any more resources!"
 msgstr ""
 
 #: ../../src/logic/replay_game_controller.cc:108
@@ -1090,16 +1110,16 @@ msgid ""
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/worker.cc:932
+#: ../../src/logic/worker.cc:944
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1832
+#: ../../src/logic/worker.cc:1844
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1839
+#: ../../src/logic/worker.cc:1851
 msgid "Worker got lost!"
 msgstr ""
 
@@ -2960,22 +2980,17 @@ msgstr ""
 msgid "Building materials"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:67
+#: ../../src/wui/encyclopedia_window.cc:65
 #: ../../src/wui/interactive_player.cc:127
 msgid "Tribal Ware Encyclopedia"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:81
+#: ../../src/wui/encyclopedia_window.cc:79
 msgid "Consumed ware type(s)"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:82
+#: ../../src/wui/encyclopedia_window.cc:80
 msgid "Quantity"
-msgstr ""
-
-#. * TRANSLATORS: List of wares, e.g. "Fish or Meat"
-#: ../../src/wui/encyclopedia_window.cc:192
-msgid " or "
 msgstr ""
 
 #: ../../src/wui/fieldaction.cc:249
