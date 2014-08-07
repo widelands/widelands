@@ -3,6 +3,7 @@ output=cornflour
 output=blackrootflour
 
 [aihints]
+prohibited_till=600
 
 [buildcost]
 log=3

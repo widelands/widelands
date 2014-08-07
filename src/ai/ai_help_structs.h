@@ -142,6 +142,10 @@ struct FindNodeWithFlagOrRoad {
 	bool accept(const Map&, FCoords) const;
 };
 
+struct FindNodeWithFlagOrRoad2 {
+	bool accept(const Map&, FCoords) const;
+};
+
 struct NearFlag {
 	Flag const* flag;
 	int32_t cost_;
@@ -154,7 +158,7 @@ struct NearFlag {
 		return cost_ > f.cost_;
 	}
 
-	bool operator == (Flag const* const f) const {
+	bool operator==(Flag const* const f) const {
 		return flag == f;
 	}
 };

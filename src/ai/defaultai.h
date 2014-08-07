@@ -124,11 +124,13 @@ private:
 	void update_productionsite_stats(int32_t);
 
 	bool construct_building(int32_t);
-	bool construct_roads(int32_t);
-	bool improve_roads(int32_t);
+	// bool construct_roads(int32_t);
+	// bool improve_roads(int32_t);
+	bool improve_roads2(int32_t);
 
-	bool improve_transportation_ways(const Widelands::Flag&, bool force);
-	bool connect_flag_to_another_economy(const Widelands::Flag&);
+	// bool improve_transportation_ways(const Widelands::Flag&, bool force);
+	bool create_shortcut_road(const Widelands::Flag&);
+	// bool connect_flag_to_another_economy(const Widelands::Flag&);
 
 	bool check_economies();
 	bool check_productionsites(int32_t);
@@ -213,7 +215,7 @@ private:
 	int32_t spots_;                // sum of buildable fields
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
-	field_possession_subscriber_;
+	   field_possession_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
 };
 

@@ -25,19 +25,25 @@
 namespace Widelands {
 
 // FindNodeWithFlagOrRoad
-
 bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
-		return pimm->get_economy() != economy && (dynamic_cast<Flag const*>(pimm)
-		                                          || (dynamic_cast<Road const*>(pimm) &&
-		                                             (fc.field->nodecaps() & BUILDCAPS_FLAG)));
+		return pimm->get_economy() != economy &&
+		       (dynamic_cast<Flag const*>(pimm) ||
+		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));
+	return false;
+}
+
+bool FindNodeWithFlagOrRoad2::accept(const Map&, FCoords fc) const {
+	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
+		return (dynamic_cast<Flag const*>(pimm) ||
+		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));
 	return false;
 }
 
 // CheckStepRoadAI
 
-bool CheckStepRoadAI::allowed(Map& map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
-   const {
+bool CheckStepRoadAI::allowed(
+   Map& map, FCoords, FCoords end, int32_t, CheckStep::StepId const id) const {
 	uint8_t endcaps = player_->get_buildcaps(end);
 
 	// Calculate cost and passability
