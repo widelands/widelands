@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-26 13:10+0000\n"
+"POT-Creation-Date: 2014-08-05 11:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -319,63 +319,44 @@ msgid ""
 "The Ax is the basic weapon of the barbarians. All young soldiers are equipped with it."
 msgstr ""
 
-#: ../../tribes/barbarians/axfactory/conf:32
-#: ../../tribes/barbarians/warmill/conf:36
-msgid ""
-"Produce ax"
-msgstr ""
-
 #: ../../tribes/barbarians/axfactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
 msgid ""
-"Produce sharp ax"
-msgstr ""
-
-#: ../../tribes/barbarians/axfactory/conf:34
-#: ../../tribes/barbarians/warmill/conf:38
-msgid ""
-"Produce broad ax"
+"forging an ax"
 msgstr ""
 
 #: ../../tribes/barbarians/axfactory/conf:35
-#: ../../tribes/barbarians/bakery/conf:26
-#: ../../tribes/barbarians/big_inn/conf:30
-#: ../../tribes/barbarians/brewery/conf:24
-#: ../../tribes/barbarians/burners_house/conf:23
-#: ../../tribes/barbarians/cattlefarm/conf:25
-#: ../../tribes/barbarians/coalmine/conf:24
-#: ../../tribes/barbarians/deep_coalmine/conf:27
-#: ../../tribes/barbarians/deep_goldmine/conf:27
-#: ../../tribes/barbarians/deep_oremine/conf:27
-#: ../../tribes/barbarians/deeper_coalmine/conf:26
-#: ../../tribes/barbarians/deeper_goldmine/conf:26
-#: ../../tribes/barbarians/deeper_oremine/conf:26
-#: ../../tribes/barbarians/farm/conf:23
-#: ../../tribes/barbarians/fishers_hut/conf:18
-#: ../../tribes/barbarians/gamekeepers_hut/conf:19
-#: ../../tribes/barbarians/goldmine/conf:25
-#: ../../tribes/barbarians/granitemine/conf:22
-#: ../../tribes/barbarians/hardener/conf:22
-#: ../../tribes/barbarians/helmsmithy/conf:34
-#: ../../tribes/barbarians/hunters_hut/conf:19
-#: ../../tribes/barbarians/inn/conf:29
-#: ../../tribes/barbarians/lime_kiln/conf:22
-#: ../../tribes/barbarians/lumberjacks_hut/conf:18
-#: ../../tribes/barbarians/metalworks/conf:48
-#: ../../tribes/barbarians/micro-brewery/conf:27
-#: ../../tribes/barbarians/oremine/conf:25
-#: ../../tribes/barbarians/quarry/conf:18
-#: ../../tribes/barbarians/rangers_hut/conf:17
-#: ../../tribes/barbarians/reed_yard/conf:21
-#: ../../tribes/barbarians/scouts_hut/conf:21
-#: ../../tribes/barbarians/shipyard/conf:28
-#: ../../tribes/barbarians/smelting_works/conf:31
-#: ../../tribes/barbarians/tavern/conf:30
-#: ../../tribes/barbarians/warmill/conf:42
-#: ../../tribes/barbarians/weaving-mill/conf:23
-#: ../../tribes/barbarians/well/conf:18
+#: ../../tribes/barbarians/warmill/conf:39
 msgid ""
-"Work"
+"forging a sharp ax"
+msgstr ""
+
+#: ../../tribes/barbarians/axfactory/conf:37
+#: ../../tribes/barbarians/warmill/conf:41
+msgid ""
+"forging a broad ax"
+msgstr ""
+
+#: ../../tribes/barbarians/axfactory/conf:39
+#: ../../tribes/barbarians/bakery/conf:27
+#: ../../tribes/barbarians/big_inn/conf:34
+#: ../../tribes/barbarians/charcoal_kiln/conf:24
+#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/gamekeepers_hut/conf:20
+#: ../../tribes/barbarians/hardener/conf:23
+#: ../../tribes/barbarians/helmsmithy/conf:38
+#: ../../tribes/barbarians/inn/conf:32
+#: ../../tribes/barbarians/lime_kiln/conf:23
+#: ../../tribes/barbarians/lumberjacks_hut/conf:19
+#: ../../tribes/barbarians/metalworks/conf:59
+#: ../../tribes/barbarians/quarry/conf:19
+#: ../../tribes/barbarians/reed_yard/conf:24
+#: ../../tribes/barbarians/shipyard/conf:30
+#: ../../tribes/barbarians/smelting_works/conf:34
+#: ../../tribes/barbarians/warmill/conf:49
+#: ../../tribes/barbarians/well/conf:19
+msgid ""
+"working"
 msgstr ""
 
 #: ../../tribes/barbarians/axfactory/help.lua:13
@@ -453,8 +434,8 @@ msgstr ""
 #: ../../tribes/barbarians/barrier/help.lua:13
 #: ../../tribes/barbarians/big_inn/help.lua:13
 #: ../../tribes/barbarians/brewery/help.lua:13
-#: ../../tribes/barbarians/burners_house/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
+#: ../../tribes/barbarians/charcoal_kiln/help.lua:13
 #: ../../tribes/barbarians/citadel/help.lua:13
 #: ../../tribes/barbarians/donjon/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
@@ -484,9 +465,9 @@ msgstr ""
 #: ../../tribes/barbarians/big_inn/help.lua:17
 #: ../../tribes/barbarians/brewery/help.lua:13
 #: ../../tribes/barbarians/brewery/help.lua:17
-#: ../../tribes/barbarians/burners_house/help.lua:13
-#: ../../tribes/barbarians/burners_house/help.lua:17
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
+#: ../../tribes/barbarians/charcoal_kiln/help.lua:13
+#: ../../tribes/barbarians/charcoal_kiln/help.lua:17
 #: ../../tribes/barbarians/citadel/help.lua:13
 #: ../../tribes/barbarians/donjon/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
@@ -551,20 +532,20 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away."
 msgstr ""
 
-#: ../../tribes/barbarians/battlearena/conf:33
-#: ../../tribes/barbarians/trainingcamp/conf:43
-msgid ""
-"Sleep"
-msgstr ""
-
 #: ../../tribes/barbarians/battlearena/conf:34
+#: ../../tribes/barbarians/trainingcamp/conf:44
 msgid ""
-"Upgrade soldier evade from level 0 to level 1"
+"sleeping"
 msgstr ""
 
-#: ../../tribes/barbarians/battlearena/conf:35
+#: ../../tribes/barbarians/battlearena/conf:36
 msgid ""
-"Upgrade soldier evade from level 1 to level 2"
+"upgrading soldier evade from level 0 to level 1"
+msgstr ""
+
+#: ../../tribes/barbarians/battlearena/conf:38
+msgid ""
+"upgrading soldier evade from level 1 to level 2"
 msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
@@ -621,27 +602,27 @@ msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce snacks."
 msgstr ""
 
-#: ../../tribes/barbarians/big_inn/conf:27
-#: ../../tribes/barbarians/inn/conf:27
-#: ../../tribes/barbarians/tavern/conf:29
-msgid ""
-"Produce ration"
-msgstr ""
-
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
+#: ../../tribes/barbarians/tavern/conf:30
 msgid ""
-"Produce snack"
+"preparing a ration"
 msgstr ""
 
-#: ../../tribes/barbarians/big_inn/conf:29
+#: ../../tribes/barbarians/big_inn/conf:30
+#: ../../tribes/barbarians/inn/conf:30
 msgid ""
-"Produce meal"
+"preparing a snack"
+msgstr ""
+
+#: ../../tribes/barbarians/big_inn/conf:32
+msgid ""
+"preparing a meal"
 msgstr ""
 
 #: ../../tribes/barbarians/big_inn/help.lua:29
 #: ../../tribes/barbarians/brewery/help.lua:29
-#: ../../tribes/barbarians/burners_house/help.lua:29
+#: ../../tribes/barbarians/charcoal_kiln/help.lua:29
 #: ../../tribes/barbarians/farm/help.lua:29
 #: ../../tribes/barbarians/hardener/help.lua:29
 #: ../../tribes/barbarians/helmsmithy/help.lua:29
@@ -678,6 +659,12 @@ msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
 
+#: ../../tribes/barbarians/brewery/conf:25
+#: ../../tribes/barbarians/micro-brewery/conf:28
+msgid ""
+"brewing"
+msgstr ""
+
 #: ../../tribes/barbarians/broadax/conf:1
 msgid ""
 "The broad ax is produced by the axfactory and the war mill. It is used in the training camp – together with food – to train warriors with a fundamental fighting knowledge (from attack level 1 to attack level 2)."
@@ -693,11 +680,6 @@ msgid ""
 "Works at construction sites to raise new buildings."
 msgstr ""
 
-#: ../../tribes/barbarians/burner/conf:1
-msgid ""
-"Burns coal."
-msgstr ""
-
 #: ../../tribes/barbarians/carrier/conf:1
 msgid ""
 "Carries items along the roads."
@@ -708,6 +690,11 @@ msgid ""
 "Breeds the strong oxen that help with transporting wares."
 msgstr ""
 
+#: ../../tribes/barbarians/cattlefarm/conf:26
+msgid ""
+"rearing cattle"
+msgstr ""
+
 #: ../../tribes/barbarians/cattlefarm/help.lua:17
 msgid ""
 "Breeds oxen for adding them to the transportation system."
@@ -716,6 +703,11 @@ msgstr ""
 #: ../../tribes/barbarians/cattlefarm/help.lua:29
 msgid ""
 "If all needed wares are delivered in time, this building can produce an ox in %s on average."
+msgstr ""
+
+#: ../../tribes/barbarians/charcoal_burner/conf:1
+msgid ""
+"Burns coal."
 msgstr ""
 
 #: ../../tribes/barbarians/chief-miner/conf:1
@@ -737,18 +729,32 @@ msgstr ""
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
-"The fires of the barbarians are usually fed with coal. It is produced in coal mines or out of logs in a charcoal burner’s house. Consumers are several buildings: lime kiln, smelting works, axfactory, war mill, and helm smithy."
+"The fires of the barbarians are usually fed with coal. It is produced in coal mines or out of logs in a charcoal kiln. Consumers are several buildings: lime kiln, smelting works, axfactory, war mill, and helm smithy."
 msgstr ""
 
-#: ../../tribes/barbarians/coalmine/conf:34
-#: ../../tribes/barbarians/deep_coalmine/conf:40
-#: ../../tribes/barbarians/deeper_coalmine/conf:39
+#: ../../tribes/barbarians/coalmine/conf:25
+#: ../../tribes/barbarians/deep_coalmine/conf:28
+#: ../../tribes/barbarians/deep_goldmine/conf:28
+#: ../../tribes/barbarians/deep_oremine/conf:28
+#: ../../tribes/barbarians/deeper_coalmine/conf:27
+#: ../../tribes/barbarians/deeper_goldmine/conf:27
+#: ../../tribes/barbarians/deeper_oremine/conf:27
+#: ../../tribes/barbarians/goldmine/conf:26
+#: ../../tribes/barbarians/granitemine/conf:23
+#: ../../tribes/barbarians/oremine/conf:26
+msgid ""
+"mining"
+msgstr ""
+
+#: ../../tribes/barbarians/coalmine/conf:36
+#: ../../tribes/barbarians/deep_coalmine/conf:42
+#: ../../tribes/barbarians/deeper_coalmine/conf:41
 msgid ""
 "Main Coal Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/barbarians/coalmine/conf:35
-#: ../../tribes/barbarians/deep_coalmine/conf:41
+#: ../../tribes/barbarians/coalmine/conf:37
+#: ../../tribes/barbarians/deep_coalmine/conf:43
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
@@ -1153,7 +1159,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:108
 msgid ""
-"Burner"
+"Charcoal Burner"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:109
@@ -1440,7 +1446,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:179
 msgid ""
-"Charcoal Burner’s House"
+"Charcoal Kiln"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:180
@@ -1558,15 +1564,15 @@ msgid ""
 "Training Camp"
 msgstr ""
 
-#: ../../tribes/barbarians/deep_goldmine/conf:40
-#: ../../tribes/barbarians/deeper_goldmine/conf:39
-#: ../../tribes/barbarians/goldmine/conf:35
+#: ../../tribes/barbarians/deep_goldmine/conf:42
+#: ../../tribes/barbarians/deeper_goldmine/conf:41
+#: ../../tribes/barbarians/goldmine/conf:37
 msgid ""
 "Main Gold Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/barbarians/deep_goldmine/conf:41
-#: ../../tribes/barbarians/goldmine/conf:36
+#: ../../tribes/barbarians/deep_goldmine/conf:43
+#: ../../tribes/barbarians/goldmine/conf:38
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
@@ -1605,15 +1611,15 @@ msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on average."
 msgstr ""
 
-#: ../../tribes/barbarians/deep_oremine/conf:40
-#: ../../tribes/barbarians/deeper_oremine/conf:42
-#: ../../tribes/barbarians/oremine/conf:35
+#: ../../tribes/barbarians/deep_oremine/conf:43
+#: ../../tribes/barbarians/deeper_oremine/conf:44
+#: ../../tribes/barbarians/oremine/conf:37
 msgid ""
 "Main Iron Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/barbarians/deep_oremine/conf:41
-#: ../../tribes/barbarians/oremine/conf:36
+#: ../../tribes/barbarians/deep_oremine/conf:44
+#: ../../tribes/barbarians/oremine/conf:38
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
@@ -1652,7 +1658,7 @@ msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on average."
 msgstr ""
 
-#: ../../tribes/barbarians/deeper_coalmine/conf:40
+#: ../../tribes/barbarians/deeper_coalmine/conf:42
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
 msgstr ""
@@ -1662,7 +1668,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more coal."
 msgstr ""
 
-#: ../../tribes/barbarians/deeper_goldmine/conf:40
+#: ../../tribes/barbarians/deeper_goldmine/conf:42
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
 msgstr ""
@@ -1672,7 +1678,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more gold ore."
 msgstr ""
 
-#: ../../tribes/barbarians/deeper_oremine/conf:43
+#: ../../tribes/barbarians/deeper_oremine/conf:45
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
 msgstr ""
@@ -1687,23 +1693,23 @@ msgid ""
 "Your soldiers have occupied your donjon."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:21
-msgid ""
-"Plant wheat"
-msgstr ""
-
 #: ../../tribes/barbarians/farm/conf:22
 msgid ""
-"Harvest wheat"
+"planting wheat"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:40
-#: ../../tribes/barbarians/reed_yard/conf:37
+#: ../../tribes/barbarians/farm/conf:24
+msgid ""
+"harvesting wheat"
+msgstr ""
+
+#: ../../tribes/barbarians/farm/conf:43
+#: ../../tribes/barbarians/reed_yard/conf:40
 msgid ""
 "Out of Fields"
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:41
+#: ../../tribes/barbarians/farm/conf:44
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1738,12 +1744,17 @@ msgid ""
 "Catches fish in the sea."
 msgstr ""
 
-#: ../../tribes/barbarians/fishers_hut/conf:25
+#: ../../tribes/barbarians/fishers_hut/conf:19
+msgid ""
+"fishing"
+msgstr ""
+
+#: ../../tribes/barbarians/fishers_hut/conf:26
 msgid ""
 "Out of Fish"
 msgstr ""
 
-#: ../../tribes/barbarians/fishers_hut/conf:26
+#: ../../tribes/barbarians/fishers_hut/conf:27
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his working radius."
 msgstr ""
@@ -1824,12 +1835,12 @@ msgid ""
 "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor."
 msgstr ""
 
-#: ../../tribes/barbarians/granitemine/conf:32
+#: ../../tribes/barbarians/granitemine/conf:34
 msgid ""
 "Main Granite Vein Exhausted"
 msgstr ""
 
-#: ../../tribes/barbarians/granitemine/conf:33
+#: ../../tribes/barbarians/granitemine/conf:35
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
 msgstr ""
@@ -1896,19 +1907,19 @@ msgid ""
 "Smelts helmets for soldiers."
 msgstr ""
 
-#: ../../tribes/barbarians/helmsmithy/conf:31
-msgid ""
-"Produce helm"
-msgstr ""
-
 #: ../../tribes/barbarians/helmsmithy/conf:32
 msgid ""
-"Produce mask"
+"forging a helm"
 msgstr ""
 
-#: ../../tribes/barbarians/helmsmithy/conf:33
+#: ../../tribes/barbarians/helmsmithy/conf:34
 msgid ""
-"Produce warhelm"
+"forging a mask"
+msgstr ""
+
+#: ../../tribes/barbarians/helmsmithy/conf:36
+msgid ""
+"forging a warhelm"
 msgstr ""
 
 #: ../../tribes/barbarians/hunter/conf:1
@@ -1916,12 +1927,17 @@ msgid ""
 "The Hunter brings good meat to the colonists."
 msgstr ""
 
-#: ../../tribes/barbarians/hunters_hut/conf:27
+#: ../../tribes/barbarians/hunters_hut/conf:20
+msgid ""
+"hunting"
+msgstr ""
+
+#: ../../tribes/barbarians/hunters_hut/conf:28
 msgid ""
 "Out of Game"
 msgstr ""
 
-#: ../../tribes/barbarians/hunters_hut/conf:28
+#: ../../tribes/barbarians/hunters_hut/conf:29
 msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his working radius. Remember that you can build a gamekeeper’s hut to release more game into the wild."
 msgstr ""
@@ -2008,7 +2024,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/log/conf:1
 msgid ""
-"Logs are a principal building material of the barbarians. The trees are felled by lumberjacks; rangers care for the supply of trees. Logs are also used in the metal workshop to build basic tools, and in the charcoal burner’s house in the production of coal. The wood hardener refines logs by hardening them in the fire which gives blackwood."
+"Logs are a principal building material of the barbarians. The trees are felled by lumberjacks; rangers care for the supply of trees. Logs are also used in the metal workshop to build basic tools, and in the charcoal kiln for the production of coal. The wood hardener refines logs by hardening them in the fire which gives blackwood."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjack/conf:1
@@ -2016,12 +2032,12 @@ msgid ""
 "Fells trees."
 msgstr ""
 
-#: ../../tribes/barbarians/lumberjacks_hut/conf:25
+#: ../../tribes/barbarians/lumberjacks_hut/conf:26
 msgid ""
 "Out of Trees"
 msgstr ""
 
-#: ../../tribes/barbarians/lumberjacks_hut/conf:26
+#: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his working radius. You should consider dismantling or destroying the building or building a rangers’s hut."
 msgstr ""
@@ -2066,54 +2082,54 @@ msgid ""
 "Meat contains a lot of energy. It is produced by hunters and used in the taverns, inns and big inns to prepare rations, snacks and meals for the miners. It is also consumed in the training sites (training camp and battle arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/metalworks/conf:38
-msgid ""
-"Produce felling ax"
-msgstr ""
-
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid ""
-"Produce bread paddle"
-msgstr ""
-
-#: ../../tribes/barbarians/metalworks/conf:40
-msgid ""
-"Produce fire tongs"
+"making a bread paddle"
 msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid ""
-"Produce fishing rod"
-msgstr ""
-
-#: ../../tribes/barbarians/metalworks/conf:42
-msgid ""
-"Produce hammer"
+"making a felling ax"
 msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:43
 msgid ""
-"Produce kitchen tools"
-msgstr ""
-
-#: ../../tribes/barbarians/metalworks/conf:44
-msgid ""
-"Produce pick"
+"making fire tongs"
 msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:45
 msgid ""
-"Produce scythe"
-msgstr ""
-
-#: ../../tribes/barbarians/metalworks/conf:46
-msgid ""
-"Produce shovel"
+"making a fishing rod"
 msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:47
 msgid ""
-"Produce hunting spear"
+"making a hammer"
+msgstr ""
+
+#: ../../tribes/barbarians/metalworks/conf:49
+msgid ""
+"making a hunting spear"
+msgstr ""
+
+#: ../../tribes/barbarians/metalworks/conf:51
+msgid ""
+"making kitchen tools"
+msgstr ""
+
+#: ../../tribes/barbarians/metalworks/conf:53
+msgid ""
+"making a pick"
+msgstr ""
+
+#: ../../tribes/barbarians/metalworks/conf:55
+msgid ""
+"making a scythe"
+msgstr ""
+
+#: ../../tribes/barbarians/metalworks/conf:57
+msgid ""
+"making a shovel"
 msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
@@ -2176,12 +2192,12 @@ msgid ""
 "The barbarian bakers are best in making this flat and tasty pitta bread. It is made out of wheat and water following a secret recipe. Pitta bread is used in the taverns, inns and big inns to prepare rations, snacks and meals. It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/quarry/conf:25
+#: ../../tribes/barbarians/quarry/conf:26
 msgid ""
 "Out of Rocks"
 msgstr ""
 
-#: ../../tribes/barbarians/quarry/conf:26
+#: ../../tribes/barbarians/quarry/conf:27
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his working radius."
 msgstr ""
@@ -2204,6 +2220,11 @@ msgstr ""
 #: ../../tribes/barbarians/ranger/conf:1
 msgid ""
 "Plants trees."
+msgstr ""
+
+#: ../../tribes/barbarians/rangers_hut/conf:18
+msgid ""
+"planting trees"
 msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
@@ -2241,17 +2262,17 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced in quarries and granite mines."
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:19
-msgid ""
-"Plant reed"
-msgstr ""
-
 #: ../../tribes/barbarians/reed_yard/conf:20
 msgid ""
-"Harvest reed"
+"planting reed"
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:38
+#: ../../tribes/barbarians/reed_yard/conf:22
+msgid ""
+"harvesting reed"
+msgstr ""
+
+#: ../../tribes/barbarians/reed_yard/conf:41
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his seeds."
 msgstr ""
@@ -2284,6 +2305,11 @@ msgstr ""
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
+msgstr ""
+
+#: ../../tribes/barbarians/scouts_hut/conf:22
+msgid ""
+"scouting"
 msgstr ""
 
 #: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:10
@@ -2326,9 +2352,9 @@ msgid ""
 "Works at the shipyard and constructs new ships."
 msgstr ""
 
-#: ../../tribes/barbarians/shipyard/conf:27
+#: ../../tribes/barbarians/shipyard/conf:28
 msgid ""
-"Constructing ship"
+"constructing a ship"
 msgstr ""
 
 #: ../../tribes/barbarians/shovel/conf:1
@@ -2341,14 +2367,14 @@ msgid ""
 "Smelts iron."
 msgstr ""
 
-#: ../../tribes/barbarians/smelting_works/conf:29
-msgid ""
-"Smelt iron"
-msgstr ""
-
 #: ../../tribes/barbarians/smelting_works/conf:30
 msgid ""
-"Smelt gold"
+"smelting iron"
+msgstr ""
+
+#: ../../tribes/barbarians/smelting_works/conf:32
+msgid ""
+"smelting gold"
 msgstr ""
 
 #: ../../tribes/barbarians/smelting_works/help.lua:17
@@ -2386,44 +2412,44 @@ msgid ""
 "Trains the soldiers."
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:44
-msgid ""
-"Upgrade soldier attack from level 0 to level 1"
-msgstr ""
-
-#: ../../tribes/barbarians/trainingcamp/conf:45
-msgid ""
-"Upgrade soldier attack from level 1 to level 2"
-msgstr ""
-
 #: ../../tribes/barbarians/trainingcamp/conf:46
 msgid ""
-"Upgrade soldier attack from level 2 to level 3"
-msgstr ""
-
-#: ../../tribes/barbarians/trainingcamp/conf:47
-msgid ""
-"Upgrade soldier attack from level 3 to level 4"
+"upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/conf:48
 msgid ""
-"Upgrade soldier attack from level 4 to level 5"
-msgstr ""
-
-#: ../../tribes/barbarians/trainingcamp/conf:49
-msgid ""
-"Upgrade soldier health from level 0 to level 1"
+"upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/conf:50
 msgid ""
-"Upgrade soldier health from level 1 to level 2"
+"upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:51
+#: ../../tribes/barbarians/trainingcamp/conf:52
 msgid ""
-"Upgrade soldier health from level 2 to level 3"
+"upgrading soldier attack from level 3 to level 4"
+msgstr ""
+
+#: ../../tribes/barbarians/trainingcamp/conf:54
+msgid ""
+"upgrading soldier attack from level 4 to level 5"
+msgstr ""
+
+#: ../../tribes/barbarians/trainingcamp/conf:56
+msgid ""
+"upgrading soldier health from level 0 to level 1"
+msgstr ""
+
+#: ../../tribes/barbarians/trainingcamp/conf:58
+msgid ""
+"upgrading soldier health from level 1 to level 2"
+msgstr ""
+
+#: ../../tribes/barbarians/trainingcamp/conf:60
+msgid ""
+"upgrading soldier health from level 2 to level 3"
 msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:15
@@ -2471,19 +2497,19 @@ msgid ""
 "A warhelm is an enhanced armor for barbarian warriors. It is produced in a helm smithy and used in a training camp – together with food – to train soldiers from health level 1 to level 2."
 msgstr ""
 
-#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/warmill/conf:43
 msgid ""
-"Produce bronze ax"
+"forging a bronze ax"
 msgstr ""
 
-#: ../../tribes/barbarians/warmill/conf:40
+#: ../../tribes/barbarians/warmill/conf:45
 msgid ""
-"Produce battle ax"
+"forging a battle ax"
 msgstr ""
 
-#: ../../tribes/barbarians/warmill/conf:41
+#: ../../tribes/barbarians/warmill/conf:47
 msgid ""
-"Produce warrior’s ax"
+"forging a warrior’s ax"
 msgstr ""
 
 #: ../../tribes/barbarians/warmill/help.lua:17
@@ -2521,17 +2547,22 @@ msgid ""
 "Produces cloth for ships and soldiers."
 msgstr ""
 
+#: ../../tribes/barbarians/weaving-mill/conf:24
+msgid ""
+"weaving"
+msgstr ""
+
 #: ../../tribes/barbarians/weaving-mill/help.lua:17
 msgid ""
 "Weaves cloth out of thatch reed."
 msgstr ""
 
-#: ../../tribes/barbarians/well/conf:27
+#: ../../tribes/barbarians/well/conf:28
 msgid ""
 "Out of Water"
 msgstr ""
 
-#: ../../tribes/barbarians/well/conf:28
+#: ../../tribes/barbarians/well/conf:29
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
 msgstr ""

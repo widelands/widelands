@@ -2,19 +2,19 @@ size=medium
 output=coal
 
 [aihints]
-prohibited_till=1200
+prohibited_till=900
 
 [buildcost]
-log=2
-stone=3
-planks=1
+log=3
+grout=2
+thatchreed=2
 
 [return_on_dismantle]
 log=2
-stone=2
+grout=1
 
 [working positions]
-burner=1
+charcoal_burner=1
 
 [inputs]
 log=8
@@ -31,9 +31,9 @@ animate=working 90000 # charcoal fires are burning some days in real life
 produce=coal
 
 [idle]
-pics=burner_i_??.png
-hotspot=47 57
+pics=charcoal_kiln_i_??.png  # ???
+hotspot=47 54
 
 [working]
-pics=burner_b_??.png
-hotspot=47 60
+pics=charcoal_kiln_i_??.png  # ???
+hotspot=47 54

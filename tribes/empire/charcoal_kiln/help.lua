@@ -1,4 +1,4 @@
--- The Imperial Charcoal Burner's House
+-- The Imperial Charcoal Kiln
 
 include "scripting/formatting.lua"
 include "tribes/scripting/format_help.lua"

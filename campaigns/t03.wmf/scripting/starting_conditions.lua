@@ -44,7 +44,7 @@ hq:set_workers{
    blacksmith=2,
    brewer=1,
    builder=10,
-   burner=1,
+   charcoal_burner=1,
    gardener=1,
    fisher=2,
    geologist=4,
