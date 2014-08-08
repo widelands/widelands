@@ -138,11 +138,6 @@ private:
 };
 
 struct FindNodeWithFlagOrRoad {
-	Economy* economy;
-	bool accept(const Map&, FCoords) const;
-};
-
-struct FindNodeWithFlagOrRoad2 {
 	bool accept(const Map&, FCoords) const;
 };
 
@@ -158,7 +153,7 @@ struct NearFlag {
 		return cost_ > f.cost_;
 	}
 
-	bool operator==(Flag const* const f) const {
+	bool operator == (Flag const* const f) const {
 		return flag == f;
 	}
 };
@@ -169,8 +164,7 @@ struct CompareDistance {
 	}
 };
 
-// usually we order by shortest shortcut, but sometimes it makes sense to
-// make shortcut by biggest road reduction
+// ordering nearflags by biggest reduction
 struct CompareShortening {
 	bool operator()(const NearFlag& a, const NearFlag& b) const {
 		return (a.cost_ - a.distance_) > (b.cost_ - b.distance_);

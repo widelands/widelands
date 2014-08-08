@@ -124,13 +124,12 @@ private:
 	void update_productionsite_stats(int32_t);
 
 	bool construct_building(int32_t);
-	// bool construct_roads(int32_t);
-	// bool improve_roads(int32_t);
-	bool improve_roads2(int32_t);
 
-	// bool improve_transportation_ways(const Widelands::Flag&, bool force);
+	// all road management is invoked by function improve_roads()
+	// if needed it calls create_shortcut_road() with a flag from which
+	// new road should be considered (or is needed)
+	bool improve_roads(int32_t);
 	bool create_shortcut_road(const Widelands::Flag&);
-	// bool connect_flag_to_another_economy(const Widelands::Flag&);
 
 	bool check_economies();
 	bool check_productionsites(int32_t);

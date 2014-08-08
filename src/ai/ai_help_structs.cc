@@ -27,14 +27,6 @@ namespace Widelands {
 // FindNodeWithFlagOrRoad
 bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
-		return pimm->get_economy() != economy &&
-		       (dynamic_cast<Flag const*>(pimm) ||
-		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));
-	return false;
-}
-
-bool FindNodeWithFlagOrRoad2::accept(const Map&, FCoords fc) const {
-	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
 		return (dynamic_cast<Flag const*>(pimm) ||
 		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));
 	return false;

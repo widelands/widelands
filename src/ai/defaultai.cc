@@ -95,11 +95,11 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
-	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
-		   if (note.player != player_) {
+		Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
+			if (note.player != player_) {
 			   return;
-		   }
-		   if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+			}
+			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
 		   }
 		});
@@ -107,10 +107,10 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
-		   if (note.pi->owner().player_number() != player_->player_number()) {
+			if (note.pi->owner().player_number() != player_->player_number()) {
 			   return;
 		   }
-		   if (note.ownership == NoteImmovable::Ownership::GAINED) {
+			if (note.ownership == NoteImmovable::Ownership::GAINED) {
 			   gain_immovable(*note.pi);
 		   } else {
 			   lose_immovable(*note.pi);
@@ -158,8 +158,7 @@ void DefaultAI::think() {
 	if (next_road_due_ <= gametime) {
 		next_road_due_ = gametime + 1000;
 
-		// if (construct_roads(gametime)) {
-		if (improve_roads2(gametime)) {
+		if (improve_roads(gametime)) {
 			m_buildable_changed = true;
 			return;
 		}
@@ -218,7 +217,7 @@ void DefaultAI::think() {
 	// actions are. Reasons are the following:
 	//    * The "donkey feature" made economies more stable, even with stupid
 	//      roads.
-	if (improve_roads2(gametime)) {
+	if (improve_roads(gametime)) {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
 		inhibit_road_building_ = gametime + 1000;
@@ -997,7 +996,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					else if (new_buildings_stop_)
 						continue;
 
-					bo.cnt_target_ = 1;
+					bo.cnt_target_ = 1 + productionsites.size() / 50;
 
 					if (bo.stocklevel_time < game().get_gametime() - 30 * 1000) {
 						bo.stocklevel_ = get_stocklevel(bo);
@@ -1194,7 +1193,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					if (bo.cnt_built_ == 1 && game().get_gametime() > 40 * 60 * 1000 &&
 					    bo.desc->enhancement() != INVALID_INDEX && !mines_.empty()) {
 						prio += max_preciousness + bulgarian_constant;
-						// printf ("   proposing %20s as a second upgradable building\n",bo.name);
+
 					} else if (!output_is_needed)
 						continue;
 					else if (bo.inputs_.size() == 0) {
@@ -1325,7 +1324,11 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					prio = 20;
 
 				// take care about borders and enemies
-				prio = recalc_with_border_range(*bf, prio);
+				if (bf->enemy_nearby_)
+					prio /= 2;
+				
+				if (bf->unowned_land_nearby_)
+					prio /= 2;
 
 				// TODO(unknown): introduce check that there is no warehouse nearby
 				// to prevent too close placing
@@ -1512,84 +1515,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	return true;
 }
 
-///**
-//* This function searches for places where a new road is needed to connect two
-//* economies. It then sends the request to build the road.
-//*/
-// bool DefaultAI::construct_roads(int32_t gametime) {
-// if (economies.size() < 2) {
-//// only one economy, no need for new roads
-// return false;
-//}
-
-// uint32_t economies_to_connect = 0;
-// EconomyObserver* eo_to_connect = economies.front();  // dummy initialisation
-
-////  fetch first two economies that might be connectable
-// for (std::list<EconomyObserver*>::iterator i = economies.begin();
-// economies_to_connect < 2 && i != economies.end();
-//++i)
-
-////  Do not try to connect economies that already failed in last time.
-// if ((*i)->next_connection_try <= gametime) {
-// if (economies_to_connect == 1)
-// eo_to_connect = *i;
-
-//++economies_to_connect;
-//}
-
-//// No need to connect, if only one economy
-// if (economies_to_connect < 2)
-// return false;
-
-// if (eo_to_connect->flags.empty())
-// return check_economies();
-
-//// Check if the flag is still there and if not care about that situation
-// if (!eo_to_connect->flags.front()) {
-// eo_to_connect->flags.pop_front();
-// return check_economies();
-//}
-
-//// Try to connect - this should work fine as in nearly all cases we simply
-//// connect a constructionsite
-// bool done = connect_flag_to_another_economy(*eo_to_connect->flags.front());
-// eo_to_connect->flags.push_back(eo_to_connect->flags.front());
-// eo_to_connect->flags.pop_front();
-
-// if (done) {
-// eo_to_connect->failed_connection_tries = 0;
-// return true;
-//}
-
-//// If the economy consists of just one constructionsite, and the defaultAI
-//// failed more than 4 times to connect, we remove the constructionsite
-// if (eo_to_connect->failed_connection_tries > 3 && eo_to_connect->flags.size() == 1) {
-// Building* bld = eo_to_connect->flags.front()->get_building();
-
-// if (bld) {
-// BuildingObserver& bo = get_building_observer(bld->descr().name().c_str());
-
-// if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-// game().send_player_bulldoze(*const_cast<Flag*>(eo_to_connect->flags.front()));
-// eo_to_connect->flags.pop_front();
-//// Block the field at constructionsites coords for 5 minutes
-//// against new construction tries.
-// BlockedField blocked(
-// game().map().get_fcoords(bld->get_position()), game().get_gametime() + 300000);
-// blocked_fields.push_back(blocked);
-//}
-//}
-//}
-
-//// Unable to connect, so we let this economy wait for 30 seconds.
-// eo_to_connect->next_connection_try = gametime + 30000;
-//++eo_to_connect->failed_connection_tries;
-// return false;
-//}
-
 // improves current road system
-bool DefaultAI::improve_roads2(int32_t gametime) {
+bool DefaultAI::improve_roads(int32_t gametime) {
 
 	// first force a split on roads that are longer than 3 parts
 	// with exemption when there is too few building spots
@@ -1664,55 +1591,44 @@ bool DefaultAI::improve_roads2(int32_t gametime) {
 	}
 
 	// and finally we try to create "shortcut" from a flag
-	bool road_changed = false;
-	printf(" Looking for shortcut from the flag (%3d x %3d)\n",
-	       flag.get_position().x,
-	       flag.get_position().y);
-	road_changed = create_shortcut_road(flag);
-	return road_changed;
+	return (create_shortcut_road(flag));
 }
 
 // trying to connect the flag to another one, be it from own economy
 // or other economy
 bool DefaultAI::create_shortcut_road(const Flag& flag) {
 
-	// NOCOM dont forget about:	flags_to_be_removed
-
 	// increasing failed_connection_tries counter
+	// in fact it counts a time when an economy is without warehouse
 	EconomyObserver* eco = get_economy_observer(flag.economy());
 	if (flag.get_economy()->warehouses().empty()) {
-
 		eco->failed_connection_tries += 1;
-		printf("  Connection retry %3d\n", eco->failed_connection_tries);
 	} else {
 		eco->failed_connection_tries = 0;
-		// printf ("  Connection retry %3d\n",eco->failed_connection_tries);
 	}
 
-	if (eco->failed_connection_tries > 3 + eco->flags.size()) {
-		printf("   Removing the flag(&building) at %3d x %3d, due to too many connection failed (%3d "
-		       "vs %3d)\n",
-		       flag.get_position().x,
-		       flag.get_position().y,
-		       eco->failed_connection_tries,
-		       3 + eco->flags.size());
+	// explanation for 'eco->flags.size() * eco->flags.size()'
+	// The AI is able to dismantle whole economy without warehouse as soon as single
+	// building not connected anywhere. But so fast dismantling is not deserved (probably)
+	// so the bigger economy the longer it takes to be dismantled
+	if (eco->failed_connection_tries > 3 + eco->flags.size() * eco->flags.size()) {
 
 		Building* bld = flag.get_building();
 
 		if (bld) {
+			// first we block the field for 15 minutes, probably it is not good place to build a
+			// building on
 			BlockedField blocked(
 			   game().map().get_fcoords(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
 			blocked_fields.push_back(blocked);
-			eco->flags.remove(&flag);  // is this needed????
+			eco->flags.remove(&flag);
 			game().send_player_bulldoze(*const_cast<Flag*>(&flag));
 		}
 		return true;
 	}
 
-	bool dismantle_debug = false;
-	if (eco->failed_connection_tries > 0)
-		dismantle_debug = true;
-
+	// we collect flags in radius 'checkradius' in two ways
+	// 1) first via "waling on roads" and all reached flags get "distance on roads"
 	std::priority_queue<NearFlag> queue;
 	std::vector<NearFlag> nearflags;
 	std::vector<int32_t> hashtable;
@@ -1753,34 +1669,20 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 			if (dist > checkradius)  //  out of range
 				continue;
 
-			if (dismantle_debug)
-				printf("     ROAD WALKING: adding flag at %3dx%3d to nearflags with values: %3d / %3d, "
-				       "new size: %3d\n",
-				       endflag->get_position().x,
-				       endflag->get_position().y,
-				       nf.cost_ + road->get_path().get_nsteps(),
-				       dist,
-				       nearflags.size());
-
 			queue.push(NearFlag(*endflag, nf.cost_ + road->get_path().get_nsteps(), dist));
 			hashtable.push_back(endflag->get_position().x * 1234 + endflag->get_position().y);
 		}
 	}
 
-	// BUT there can be another flags, that were not accessed via walking on roads
-	// typically other economies and flags belonging to hives that branched too far from here
-	FindNodeWithFlagOrRoad2 functor;
+	// 2) BUT there can be another flags, that were not accessed via walking on roads
+	// typically other economies and flags belonging to hives that branched too far away from here
+	FindNodeWithFlagOrRoad functor;
 	CheckStepRoadAI check(player_, MOVECAPS_WALK, true);
 	std::vector<Coords> reachable;
 
 	// first look for possible destinations
 	map.find_reachable_fields(
 	   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor);
-
-	if (dismantle_debug)
-		printf("  comparing flags via iterating: %3d with area searching: %3d\n",
-		       nearflags.size(),
-		       reachable.size());
 
 	if (reachable.empty())
 		return false;
@@ -1801,7 +1703,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 			// testing if a flag/road's economy has a warehouse, if not we are not
 			// interested to connect to it
 			if (player_immovable->economy().warehouses().size() == 0) {
-				// printf( "     no warehouse here\n");
+
 				continue;
 			}
 
@@ -1833,108 +1735,58 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 					   NearFlag(*dynamic_cast<const Flag*>(map[reachable_coords].get_immovable()),
 					            virtual_distance,
 					            dist));
-
-					if (dismantle_debug)
-						printf("     adding flag %3d x %3d to nearflags with values: %3d / %3d, new "
-						       "size: %3d\n",
-						       reachable_coords.x,
-						       reachable_coords.y,
-						       virtual_distance,
-						       dist,
-						       nearflags.size());
 				}
 				delete path2;
 			}
 		}
 	}
 
-	// usually we create consider shortest shortcut, but sometimes
-	// we seek biggest reduction
+	// Now we have collected all candidate flags
+
+	// ordering nearflags
 	std::sort(nearflags.begin(), nearflags.end(), CompareShortening());
 
-	// CheckStepRoadAI check(player_, MOVECAPS_WALK, false);
-
-	// this is random number, will be used to pick a random target
+	// this is just a random number, will be used later
 	int32_t random_gametime = game().get_gametime();
 
-	// just printing the content of nearflags
+	// the problem here is that send_player_build_road() does not return succes/failed
+	// if it did, we would just test the first nearflag, then go on with further flags until
+	// a road is built or nearflags are exhausted
+	// but now we must just randomly pick one of nearflags
+	// probabililty of picking decreases with position in nearflags
 	for (uint32_t i = 0; i < nearflags.size() && i < 10; ++i) {
 		NearFlag& nf = nearflags.at(i);
-
-		if (dismantle_debug)
-			printf("    Printing the content: flag %3dx%3d, cost: %2d, distance: %2d\n",
-			       nf.flag->get_position().x,
-			       nf.flag->get_position().y,
-			       nf.cost_,
-			       nf.distance_);
-	}
-
-	// testing only first 10 nearfields that meet the condition
-	for (uint32_t i = 0; i < nearflags.size() && i < 10; ++i) {
-		NearFlag& nf = nearflags.at(i);
-
-		if (dismantle_debug)
-			printf("   Considering path building: from: %3dx%3d to flag %3dx%3d, cost: %2d, distance: "
-			       "%2d\n",
-			       flag.get_position().x,
-			       flag.get_position().y,
-			       nf.flag->get_position().x,
-			       nf.flag->get_position().y,
-			       nf.cost_,
-			       nf.distance_);
 
 		// testing the nearflag
 		if ((nf.cost_ - nf.distance_) > minred && nf.distance_ >= 2) {
-			if (dismantle_debug)
-				printf("    minred test passed (%3d > %3d)\n", nf.cost_ - nf.distance_, minred);
 
 			// sometimes the shortest road is not the buildable, even if map.findpath claims so
 			// best so we add some randomness
 			random_gametime /= 2;
-			if (random_gametime % 2 > 0 and eco->failed_connection_tries > 1) {
-				if (dismantle_debug)
-					printf("    Random skipping (not first attempt), random gametime: %3d\n",
-					       random_gametime);
+			if (random_gametime % 2 > 0 && eco->failed_connection_tries > 1) {
 				continue;
 			}
 			// we skipp also by first attempt
 			if (random_gametime % 5 == 0) {
-				if (dismantle_debug)
-					printf(
-					   "    Random skipping (first attempt), random gametime: %3d\n", random_gametime);
 				continue;
 			}
 
 			Path& path = *new Path();
 
+			// value of pathcost is not important, it just indicates, that the path can be built
 			const int32_t pathcost =
 			   map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check);
-
-			if (dismantle_debug)
-				printf("    Pathcost: %3d, current roads: %3d\n", pathcost, flag.nr_of_roads());
 
 			if (pathcost >= 0) {
 				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > minred) {
 
-					if (dismantle_debug)
-						printf("    Attempting to build road to %3d x %3d\n",
-						       nf.flag->get_position().x,
-						       nf.flag->get_position().y);
-					// if we join a road and there is no flag yet, build one
-
 					game().send_player_build_road(player_number(), path);
-					// printf  ("   current roads after: %3d\n",flag.nr_of_roads());
 					return true;
 				}
 			}
 
 			delete &path;
 		} else {
-			if (dismantle_debug)
-				printf("    minred test failed (%3d > %3d, %3d>=2), do not trying more\n",
-				       nf.cost_ - nf.distance_,
-				       minred,
-				       nf.distance_);
 			return false;
 		}
 	}
@@ -1943,265 +1795,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 	return false;
 	;
 }
-
-//// improves current road system
-// bool DefaultAI::improve_roads(int32_t gametime) {
-//// Remove flags of dead end roads, as long as no more wares are stored on them
-// for (EconomyObserver* eco_obs : economies) {
-// for (std::list<Flag const*>::iterator flag_iter = eco_obs->flags.begin();
-// flag_iter != eco_obs->flags.end();
-//++flag_iter) {
-// if ((*flag_iter)->is_dead_end() && (*flag_iter)->current_wares() == 0) {
-// game().send_player_bulldoze(*const_cast<Flag*>(*flag_iter));
-// flag_iter = eco_obs->flags.erase(flag_iter);
-// return true;
-//}
-//}
-//}
-
-//// force a split on roads that are longer than 3 parts
-//// with exemption when there is too few building spots
-// if (spots_ > 20 && !roads.empty()) {
-// const Path& path = roads.front()->get_path();
-
-// if (path.get_nsteps() > 3) {
-// const Map& map = game().map();
-// CoordPath cp(map, path);
-//// try to split after two steps
-// CoordPath::Step_Vector::size_type i = cp.get_nsteps() - 1, j = 1;
-
-// for (; i >= j; --i, ++j) {
-//{
-// const Coords c = cp.get_coords().at(i);
-
-// if (map[c].nodecaps() & BUILDCAPS_FLAG) {
-// game().send_player_build_flag(player_number(), c);
-// return true;
-//}
-//}
-//{
-// const Coords c = cp.get_coords().at(j);
-
-// if (map[c].nodecaps() & BUILDCAPS_FLAG) {
-// game().send_player_build_flag(player_number(), c);
-// return true;
-//}
-//}
-//}
-
-//// Unable to set a flag - perhaps the road was build stupid
-// game().send_player_bulldoze(*const_cast<Road*>(roads.front()));
-//}
-
-// roads.push_back(roads.front());
-// roads.pop_front();
-//}
-
-// if (!economies.empty() && inhibit_road_building_ <= gametime) {
-// EconomyObserver* eco = economies.front();
-
-// if (!eco->flags.empty()) {
-// bool finish = false;
-// const Flag& flag = *eco->flags.front();
-
-//// try to connect to another economy
-// if (economies.size() > 1)
-// finish = connect_flag_to_another_economy(flag);
-
-// if (!finish)
-// finish = improve_transportation_ways(flag,  (flag.current_wares()>4));
-
-//// cycle through flags one at a time
-// eco->flags.push_back(eco->flags.front());
-// eco->flags.pop_front();
-//// and cycle through economies
-// economies.push_back(eco);
-// economies.pop_front();
-// return finish;
-//} else
-//// If the economy has no flag, the observers need to be updated.
-// return check_economies();
-//}
-
-// return false;
-//}
-
-//// connects a specific flag to another economy
-// bool DefaultAI::connect_flag_to_another_economy(const Flag& flag) {
-// FindNodeWithFlagOrRoad functor;
-// CheckStepRoadAI check(player_, MOVECAPS_WALK, true);
-// std::vector<Coords> reachable;
-//// first look for possible destinations
-// functor.economy = flag.get_economy();
-// Map& map = game().map();
-// map.find_reachable_fields(
-// Area<FCoords>(map.get_fcoords(flag.get_position()), 20), &reachable, check, functor);
-
-// if (reachable.empty())
-// return false;
-
-//// then choose the one with the shortest path
-// Path* path = new Path();
-// bool found = false;
-// check.set_openend(false);
-// Coords closest;
-// for (const Coords& reachable_coords : reachable) {
-
-////testing if a flag/road's economy has a warehouse
-// if (upcast(PlayerImmovable const, player_immovable, map[reachable_coords].get_immovable())){
-// const uint16_t warehouses_count= player_immovable->economy().warehouses().size();
-
-// if (warehouses_count==0) {
-// printf ("   connecting: %3d x %3d: ignoring the flag/road at %3d x %3d as there are %d warehouses
-// in its ecoomy\n",
-// flag.get_position().x,
-// flag.get_position().y,
-// reachable_coords.x,
-// reachable_coords.y,
-// warehouses_count);
-// continue;
-//}
-//}
-
-// Path* path2 = new Path();
-
-// if (map.findpath(flag.get_position(), reachable_coords, 0, *path2, check) >= 0) {
-// if (!found || path->get_nsteps() > path2->get_nsteps()) {
-// delete path;
-// path = path2;
-// path2 = nullptr;
-// closest = reachable_coords;
-// found = true;
-//}
-//}
-
-// delete path2;
-//}
-
-// if (found) {
-//// if we join a road and there is no flag yet, build one
-// if (dynamic_cast<const Road*>(map[closest].get_immovable()))
-// game().send_player_build_flag(player_number(), closest);
-
-//// and finally build the road
-// game().send_player_build_road(player_number(), *path);
-// return true;
-//} else {
-// delete path;
-// return false;
-//}
-//}
-
-//// adds alternative ways to already existing ones
-//// ('shortcuts' if a road can be shortened significantly)
-// bool DefaultAI::improve_transportation_ways(const Flag& flag, const bool force) {
-//// First of all try to remove old building flags to clean up the road web if possible
-// for (std::list<Widelands::Coords>::iterator coords_iter = flags_to_be_removed.begin();
-// coords_iter != flags_to_be_removed.end();
-//++coords_iter) {
-//// Maybe the flag was already removed?
-// FCoords f = game().map().get_fcoords(*(coords_iter));
-
-// if (upcast(Flag, other_flag, f.field->get_immovable())) {
-//// Check if building is dismantled, but don't waste precious wares
-// if (!other_flag->get_building() && other_flag->current_wares() == 0) {
-// game().send_player_bulldoze(*other_flag);
-// flags_to_be_removed.erase(coords_iter);
-// break;
-//}
-//} else {
-// flags_to_be_removed.erase(coords_iter);
-// break;
-//}
-//}
-// std::priority_queue<NearFlag> queue;
-// std::vector<NearFlag> nearflags;
-// queue.push(NearFlag(flag, 0, 0));
-// Map& map = game().map();
-//// shortcut is made (attempted) if  (current_road - possible_shortcut)>minred
-// uint16_t minred = 20;
-//// with exemption of forced road
-// if (force)
-// minred = -10;
-//// when testing flags do not go farer from starting flag then:
-// uint16_t checkradius = 12;
-//// with only one exemption, when the flag is on the end of road
-//// presuming there is a building attached to it)
-//// so we count number of roads attached to starting flag
-// uint16_t roadscount = 0;
-// for (uint8_t i = 1; i <= 6; ++i) {
-// Road* const road = flag.get_road(i);
-// if (road)
-// roadscount += 1;
-//}
-// if (roadscount == 1) {
-// checkradius = 20;
-//}
-//// do not try to connect if too many roads going from flag)
-// if (roadscount >= 4 && !force)
-// return false;
-
-// while (!queue.empty()) {
-// std::vector<NearFlag>::iterator f =
-// find(nearflags.begin(), nearflags.end(), queue.top().flag);
-
-// if (f != nearflags.end()) {
-// queue.pop();
-// continue;
-//}
-
-// nearflags.push_back(queue.top());
-// queue.pop();
-// NearFlag& nf = nearflags.back();
-
-// for (uint8_t i = 1; i <= 6; ++i) {
-// Road* const road = nf.flag->get_road(i);
-
-// if (!road)
-// continue;
-
-// Flag* endflag = &road->get_flag(Road::FlagStart);
-
-// if (endflag == nf.flag)
-// endflag = &road->get_flag(Road::FlagEnd);
-
-// int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
-
-// if (dist > checkradius)  //  out of range
-// continue;
-
-// queue.push(NearFlag(*endflag, nf.cost_ + road->get_path().get_nsteps(), dist));
-//}
-//}
-
-//// usually we create consider shortest shortcut, but sometimes
-//// we seek biggest reduction
-// std::sort(nearflags.begin(), nearflags.end(), CompareShortening());
-
-// CheckStepRoadAI check(player_, MOVECAPS_WALK, false);
-
-//// testing only first 10 nearfields that meet the condition
-// for (uint32_t i = 1; i < nearflags.size() && i < 10; ++i) {
-// NearFlag& nf = nearflags.at(i);
-
-//// testing the nearflag
-// if ((nf.cost_ - nf.distance_) > minred) {
-
-// Path& path = *new Path();
-
-// if (map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check) >= 0) {
-// if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > minred) {
-// game().send_player_build_road(player_number(), path);
-// return true;
-//}
-//}
-
-// delete &path;
-//}
-//}
-
-// return false;
-//}
 
 /**
  * Checks if anything in one of the economies changed and takes care for these
@@ -2380,6 +1973,25 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 			return true;
 		}
+
+		// do not consider dismantling if we are under target
+		if (site.bo->last_dismantle_time_ + 90 * 1000 > game().get_gametime())
+			return false;
+
+		// now we test the stocklevel and dismantle the well if we have enough water
+		// but first we make sure we do not dismantle a well too soon
+		// after dismantling previous one
+		if (site.bo->stocklevel_time < game().get_gametime() - 5 * 1000) {
+			site.bo->stocklevel_ = get_stocklevel(*site.bo);
+			site.bo->stocklevel_time = game().get_gametime();
+		}
+		if (site.bo->stocklevel_ > 250) {  // dismantle
+			site.bo->last_dismantle_time_ = game().get_gametime();
+			flags_to_be_removed.push_back(site.site->base_flag().get_position());
+			game().send_player_dismantle(*site.site);
+			return true;
+		}
+
 		return false;
 	}
 
