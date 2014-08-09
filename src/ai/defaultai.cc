@@ -2258,9 +2258,9 @@ uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 }
 
 // counts produced output on stock
-// if more outputs, it return lowest value
+// if more outputs, it returns lowest value
 uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
-	uint32_t count = 0;
+	uint32_t count = 10000;
 
 	if (!bo.outputs_.empty()) {
 		for (EconomyObserver* observer : economies) {
