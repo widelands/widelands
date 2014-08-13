@@ -1325,6 +1325,7 @@ void ProductionProgram::ActMine::execute
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
 		if (m_chance <= 20) {
+				ps.m_no_resources_count += 1;
 				ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");

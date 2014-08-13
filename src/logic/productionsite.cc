@@ -200,6 +200,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
 	m_last_stat_percent (0),
 	m_crude_percent     (0),
+	m_no_resources_count(0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle"),
 	m_production_result (""),
@@ -912,6 +913,7 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
+
 	if (m_out_of_resource_delay_counter >=
 		 descr().out_of_resource_delay_attempts()) {
 		if (descr().out_of_resource_title().empty())
