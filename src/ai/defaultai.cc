@@ -99,7 +99,7 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
 			if (note.player != player_) {
 			   return;
 		   }
-		   	if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
 		   }
 		});
@@ -107,10 +107,10 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
-		   	if (note.pi->owner().player_number() != player_->player_number()) {
+			if (note.pi->owner().player_number() != player_->player_number()) {
 			   return;
 		   }
-		   	if (note.ownership == NoteImmovable::Ownership::GAINED) {
+			if (note.ownership == NoteImmovable::Ownership::GAINED) {
 			   gain_immovable(*note.pi);
 		   } else {
 			   lose_immovable(*note.pi);
@@ -960,36 +960,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				continue;
 
 			// so we are going to seriously evaluate this building on this field,
-			// first some base info
-			// if at least on of outputs is needed
-			output_is_needed = false;
-			// max presiousness of outputs
-			max_preciousness = 0;
-			// max preciousness of most needed output
-			max_needed_preciousness = 0;
-
-			// Check if the produced wares are needed (if it is producing anything)
-			if (!bo.outputs_.empty()) {
-				for (EconomyObserver* observer : economies) {
-					// Don't check if the economy has no warehouse.
-					if (observer->economy.warehouses().empty())
-						continue;
-
-					for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
-						Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
-
-						if (observer->economy.needs_ware(wt)) {
-							output_is_needed = true;
-
-							if (wares.at(bo.outputs_.at(m)).preciousness_ > max_needed_preciousness)
-								max_needed_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
-						}
-
-						if (wares.at(bo.outputs_.at(m)).preciousness_ > max_preciousness)
-							max_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
-					}
-				}
-			}
+			// first some base info - is its output needed at all?
+			check_ware_needeness(bo, &output_is_needed, &max_preciousness, &max_needed_preciousness);
 
 			int32_t prio = 0;  // score of a bulding on a field
 
@@ -1365,7 +1337,11 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					prio = 4 + bulgarian_constant;
 
 				// take care about borders and enemies
-				prio = recalc_with_border_range(*bf, prio);
+				if (bf->enemy_nearby_)
+					prio /= 2;
+
+				if (bf->unowned_land_nearby_)
+					prio /= 2;
 			}
 
 			// think of space consuming buildings nearby like farms or vineyards
@@ -1415,18 +1391,15 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				if ((bo.cnt_under_construction_ + bo.unoccupied_) > 0)
 					continue;
 
-				// calculating actual amount of mined raw materials
-				if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
-					bo.stocklevel_ = get_stocklevel(bo);
-					bo.stocklevel_time = game().get_gametime();
-				}
+				// testing if building's output is needed
+				check_ware_needeness(
+				   bo, &output_is_needed, &max_preciousness, &max_needed_preciousness);
 
-				// if we have enough mined resources, do not consider a mine here
-				if (bo.stocklevel_ > 100)
+				if (!output_is_needed && bo.total_count() > 0)
 					continue;
 
-				// if current ones are performing badly
-				if (bo.total_count() >= 2 && bo.current_stats_ < 50)
+				// if current one(s) are performing badly
+				if (bo.total_count() >= 1 && bo.current_stats_ < 50)
 					continue;
 
 				// this is penalty if there are existing mines too close
@@ -1953,29 +1926,39 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// Lumberjack / Woodcutter handling
 	if (site.bo->need_trees_) {
 
-		if (map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-		                        nullptr,
-		                        FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree"))) <
-		    5) {
-			// Do not destruct the last few lumberjacks
-			if (site.bo->cnt_built_ <= site.bo->cnt_target_) {
-
-				return false;
-			}
-
-			if (site.site->get_statistics_percent() <= 20) {
-				// destruct the building and it's flag (via flag destruction)
-				// the destruction of the flag avoids that defaultAI will have too many
-				// unused roads - if needed the road will be rebuild directly.
-				site.bo->last_dismantle_time_ = game().get_gametime();
-				flags_to_be_removed.push_back(site.site->base_flag().get_position());
-				game().send_player_dismantle(*site.site);
-
-				return true;
-			}
+		// Do not destruct the last few lumberjacks
+		if (site.bo->cnt_built_ <= site.bo->cnt_target_) {
 			return false;
-		}
-		return false;
+			}
+
+		if (site.site->get_statistics_percent() > 20)
+			return false;
+
+
+		const uint32_t remaining_trees =
+								map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
+		                        nullptr,
+		                        FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
+
+		// do not dismantle if there are some trees remaining
+		if (remaining_trees > 5)
+			return false;
+
+		if (site.bo->stocklevel_time < game().get_gametime() - 30 * 1000) {
+			site.bo->stocklevel_ = get_stocklevel(*site.bo);
+			site.bo->stocklevel_time = game().get_gametime();
+			}
+
+		//if we need wood badly
+		if (remaining_trees > 0 && site.bo->stocklevel_ <= 10)
+			return false;
+
+		//so finally we dismantle the lumberjac
+		site.bo->last_dismantle_time_ = game().get_gametime();
+		flags_to_be_removed.push_back(site.site->base_flag().get_position());
+		game().send_player_dismantle(*site.site);
+
+		return true;
 	}
 
 	// Wells handling
@@ -2231,6 +2214,39 @@ uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 	return count;
 }
 
+// calculating how much an output is needed
+// 'max' is because the building can have more outputs
+void DefaultAI::check_ware_needeness(BuildingObserver& bo,
+                                     bool* output_is_needed,
+                                     int16_t* max_preciousness,
+                                     int16_t* max_needed_preciousness) {
+
+	// reseting values
+	*output_is_needed = false;
+	*max_preciousness = 0;
+	*max_needed_preciousness = 0;
+
+	for (EconomyObserver* observer : economies) {
+		// Don't check if the economy has no warehouse.
+		if (observer->economy.warehouses().empty())
+			continue;
+
+		for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
+			Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
+
+			if (observer->economy.needs_ware(wt)) {
+				*output_is_needed = true;
+
+				if (wares.at(bo.outputs_.at(m)).preciousness_ > *max_needed_preciousness)
+					*max_needed_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
+			}
+
+			if (wares.at(bo.outputs_.at(m)).preciousness_ > *max_preciousness)
+				*max_preciousness = wares.at(bo.outputs_.at(m)).preciousness_;
+		}
+	}
+}
+
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
 uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
@@ -2295,6 +2311,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 		// If no enemy in sight - decrease the number of stationed soldiers
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
+
 		if (ms->economy().warehouses().size()) {
 			uint32_t const j = ms->soldierCapacity();
 
@@ -2333,6 +2350,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 			}
 		}
 	} else {
+
 		// If an enemy is in sight and the number of stationed soldier is not
 		// at maximum - set it to maximum.
 		uint32_t const j = ms->maxSoldierCapacity();

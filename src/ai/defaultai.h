@@ -123,6 +123,11 @@ private:
 
 	void update_productionsite_stats(int32_t);
 
+	void check_ware_needeness(BuildingObserver& bo,
+	                          bool* output_is_needed,
+	                          int16_t* max_preciousness,
+	                          int16_t* max_needed_preciousness);
+
 	bool construct_building(int32_t);
 
 	// all road management is invoked by function improve_roads()
