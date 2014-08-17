@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-03-06 21:13+0000\n"
-"Last-Translator: Albert Einstein <aaaaa@tlen.pl>\n"
+"PO-Revision-Date: 2014-08-16 16:30+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:54+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-17 05:33+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
@@ -88,6 +88,8 @@ msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
+"Zdobywasz punkty za wartościowe towary w magazynach. Gracz z największą "
+"ilością towarów pod koniec 4. godziny gry wygrywa."
 
 #: ../../scripting/win_conditions/02_collectors.lua:20
 msgid "Points"
@@ -105,8 +107,9 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:113
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Suma: %i punkt"
+msgstr[1] "Suma: %i punkty"
+msgstr[2] "Suma: %i punktów"
 
 #: TRANSLATORS: Context: 'The game will end in %s.'
 #: ../../scripting/win_conditions/02_collectors.lua:127
@@ -149,8 +152,9 @@ msgstr ""
 #: ../../scripting/win_conditions/03_territorial_time.lua:199
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Masz jeszcze %i minutę, aby zapobiec wygranej."
+msgstr[1] "Masz jeszcze %i minuty, aby zapobiec wygranej."
+msgstr[2] "Masz jeszcze %i minut, aby zapobiec wygranej."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:160
 #: ../../scripting/win_conditions/03_territorial_time.lua:204
