@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-07-27 17:01+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-08-17 18:47+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:42+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-18 05:47+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "Language: fr\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
@@ -26,26 +26,28 @@ msgstr "Contruisez une petite écomonie alimentaire"
 #: ../../campaigns/t03.wmf/scripting/texts.lua:24
 msgid "Build up a basic food economy to provide your people with food."
 msgstr ""
+"Mettez en place une économie alimentaire basique pour fournir de la "
+"nourriture à vos gens."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:25
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Contruisez une cabane de pêcheur"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:26
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Contruisez une cabane de chasseur"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:27
 msgid "Build a well"
-msgstr ""
+msgstr "Construisez un puits"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:28
 msgid "Build a farm"
-msgstr ""
+msgstr "Contruisez une ferme"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:29
 msgid "Build a bakery"
-msgstr ""
+msgstr "Contruisez une boulangerie"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
@@ -61,6 +63,9 @@ msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
 msgstr ""
+"Puisque vos routes s'allongent et que votre économie s'agrandie, vous "
+"pourriez utiliser les bœufs pour vous aider à transporter les marchandises "
+"plus vite."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:45
 #: ../../campaigns/t03.wmf/scripting/texts.lua:47
@@ -100,6 +105,9 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
 msgstr ""
+"Étendez votre territoire vers les montagnes, envoyez des géologues pour "
+"chercher des minerais et du charbon et construire une industrie minière avec "
+"de mines, des tavernes, des fonderies et une forge."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:72
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
@@ -183,7 +191,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Ces attributs sont: santé, attaque, défense et évasion."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:115
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117

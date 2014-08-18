@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-04-16 13:49+0000\n"
+"PO-Revision-Date: 2014-08-17 19:37+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:42+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-18 05:47+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "Language: fr\n"
 "X-Poedit-Language: French\n"
 
@@ -32,10 +32,14 @@ msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
 msgstr ""
+"Construisez des bâtiments militaires (comme des guérites ou des barricades) "
+"pour étendre votre territoire."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:27
 msgid "Get to the rocks north-east from you and build a quarry there."
 msgstr ""
+"Allez jusqu'aux rochers au nord-est de votre position et construisez y une "
+"carrière."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:33
 msgid "Start building mines on the mountain"
@@ -47,7 +51,7 @@ msgstr "Construisez des mines de charbon et de fer"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:36
 msgid "Build a coal mine and an iron ore mine."
-msgstr ""
+msgstr "Construisez une mine de charbon et une mine de minerai de fer."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:37
 msgid ""
@@ -58,6 +62,13 @@ msgid ""
 "mine for both kinds of resources that he will find, choosing the mine to be "
 "built appropriately:"
 msgstr ""
+"Pour ce faire, placez un drapeau sur le flanc de la montagne à l'est (sur le "
+"terrain montagneux cependant, pas sur les prairies montagneuses). Quand vous "
+"cliquez sur ce nouveau drapeau, vous pouvez y envoyer des géologues. Parce "
+"que le drapeau est sur une montagne, les géologues vont chercher des "
+"minerais; sinon, ils chercheraient de l'eau. Construisez alors une mine pour "
+"chaque type de ressource qu'il trouvera, en choisissant de construire vos "
+"mines de manière cohérente:"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:38
 msgid "Black – coal"
@@ -158,16 +169,18 @@ msgstr "Améliorez vos bâtiments et construisez une petite brasserie"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:82
 msgid "Enhance the coal mine and the tavern, and build a micro brewery."
 msgstr ""
+"Améliorez la mine de charbon et la taverne, et construisez une petit "
+"brasserie."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid ""
 "Enhance the coal mine and the tavern to the better versions of their "
 "buildings respectively."
-msgstr ""
+msgstr "Améliorez aux maximum la mine de charbon et la taverne."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Construisez aussi une petite brasserie."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
@@ -201,6 +214,11 @@ msgid ""
 "have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
 msgstr ""
+"Ces bâtiments ont habituellement de plus grands besoins que les édifices "
+"basiques - pas exemple, les mines profondes ont besoin de casses-croutes à "
+"la place des rations. Vous devrez améliorer votre taverne vers une auberge "
+"afin de produire des casses-croute à partir de pain pita ET un second type "
+"de nourriture (viande ou poisson) ET de la bière."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:88
 msgid ""
@@ -208,6 +226,11 @@ msgid ""
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
 msgstr ""
+"Vous pouvez bien entendu améliorer toutes les mines vers des mines profondes "
+"instantanément à partir du moment ou vous avez les ouvriers qualifiés - Les "
+"grandes mines travaillent un peu plus vite, les plus petites demandent de la "
+"nourriture moins coûteuse à produire. Cela dépends de la stratégie que vous "
+"préférez."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:96
@@ -238,6 +261,8 @@ msgstr "Construisez un four à chaux et une économie du charbon"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:114
 msgid "Build a lime kiln, a well and a charcoal kiln, or a coal mine"
 msgstr ""
+"Construisez un four à chaux, un puits et un four à charbon, ou une mine de "
+"charbon"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -255,6 +280,10 @@ msgid ""
 "geologists can discover when you send them to any flag that is not on a "
 "mountain. Coal can be obtained by building a charcoal kiln or a coal mine."
 msgstr ""
+"Vous pouvez obtenir de l'eau en construisant un puits sur une source d'eau, "
+"que vous géologues peuvent découvrir quand vous les envoyez vers n'importe "
+"quel drapeau n'étant pas sur une montagne. Le charbon peut être obtenu en "
+"construisant un four à charbon ou une mine de charbon."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:122
