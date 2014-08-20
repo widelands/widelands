@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-08-03 12:32+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-08-19 16:12+0000\n"
+"Last-Translator: Yves MATHIEU <MisterY_vonvon@hotmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:47+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-20 05:36+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -287,12 +287,12 @@ msgstr ""
 #: ../../tribes/empire/colosseum/conf:36
 #: ../../tribes/empire/trainingcamp/conf:47
 msgid "sleeping"
-msgstr ""
+msgstr "endormi"
 
 #: ../../tribes/empire/arena/conf:32
 #: ../../tribes/empire/colosseum/conf:38
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Améliorer l'esquive du soldat du niveau 0 au niveau 1"
 
 #: ../../tribes/empire/arena/help.lua:15
 #: ../../tribes/empire/armorsmithy/help.lua:13
@@ -366,12 +366,12 @@ msgstr ""
 #: ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
 msgid "Text needed"
-msgstr ""
+msgstr "Texte nécessaire"
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
-msgstr ""
+msgstr "Entraîne vos soldats en 'Esquive'"
 
 #: ../../tribes/empire/arena/help.lua:19
 #: ../../tribes/empire/colosseum/help.lua:19
@@ -379,6 +379,8 @@ msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
 msgstr ""
+"\"Esquive\" augmente les chances d'un soldat de ne pas être touché par un "
+"ennemi et lui permet ainsi de ne pas être affecté par l'attaque."
 
 #: ../../tribes/empire/arena/help.lua:20
 #: ../../tribes/empire/colosseum/help.lua:20
@@ -391,7 +393,7 @@ msgstr ""
 #: ../../tribes/empire/arena/help.lua:28
 #: ../../tribes/empire/colosseum/help.lua:28
 msgid "Evade Training:"
-msgstr ""
+msgstr "Entrainement à l'esquive :"
 
 #: ../../tribes/empire/arena/help.lua:38
 #: ../../tribes/empire/armorsmithy/help.lua:29
@@ -433,7 +435,7 @@ msgstr ""
 #: ../../tribes/empire/well/help.lua:30
 #: ../../tribes/empire/winery/help.lua:29
 msgid "Calculation needed"
-msgstr ""
+msgstr "Calcul nécessaire"
 
 #: ../../tribes/empire/armor/conf:1
 msgid ""
@@ -451,11 +453,11 @@ msgstr "Produit des armures pour les soldats"
 
 #: ../../tribes/empire/armorsmithy/conf:32
 msgid "forging a helm"
-msgstr ""
+msgstr "forge un casque"
 
 #: ../../tribes/empire/armorsmithy/conf:34
 msgid "forging an armor"
-msgstr ""
+msgstr "Forge une armure"
 
 #: ../../tribes/empire/armorsmithy/conf:36
 msgid "forging a chain armor"
@@ -484,7 +486,7 @@ msgstr ""
 #: ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
 msgid "working"
-msgstr ""
+msgstr "travaille"
 
 #: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
@@ -529,7 +531,7 @@ msgstr ""
 #: ../../tribes/empire/well/help.lua:13
 #: ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "Source nécessaire"
 
 #: ../../tribes/empire/ax/conf:1
 msgid ""
@@ -553,7 +555,7 @@ msgstr "Vos soldats ont occupé votre caserne."
 #: ../../tribes/empire/sentry/help.lua:16
 #: ../../tribes/empire/tower/help.lua:16
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Stationnez vos soldats pour étendre votre territoire."
 
 #: ../../tribes/empire/barracks/help.lua:17
 #: ../../tribes/empire/barrier/help.lua:17
@@ -567,6 +569,9 @@ msgid ""
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
 msgstr ""
+"Si vous n'avez pas assez de soldats pour occuper de nouveaux bâtiments "
+"militaires, utilisez le bouton avec la flèche vers le bas pour décroitre la "
+"capacité. Vous pouvez aussi clicquer sur un soldat pour le congédier."
 
 #: ../../tribes/empire/barrier/conf:7
 msgid "Your soldiers have occupied your barrier."
@@ -613,7 +618,7 @@ msgstr "Produit de la bière ou du vin."
 
 #: ../../tribes/empire/brewery/conf:26
 msgid "brewing"
-msgstr ""
+msgstr "Brasse"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
@@ -669,27 +674,30 @@ msgstr ""
 #: ../../tribes/empire/goldmine/conf:27
 #: ../../tribes/empire/oremine/conf:27
 msgid "mining"
-msgstr ""
+msgstr "Mine"
 
 #: ../../tribes/empire/coalmine/conf:40
 #: ../../tribes/empire/deep_coalmine/conf:41
 msgid "Main Coal Vein Exhausted"
-msgstr ""
+msgstr "Veine principale de charbon épuisée"
 
 #: ../../tribes/empire/coalmine/conf:41
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"La veine principale de cette mine de charbon est épuisée. Attendez vous à "
+"des retours sur investissement fortement diminués. Vous devriez penser à "
+"l'améliorer, la démanteler ou la détruire."
 
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr ""
+msgstr "Extrayez le charbon du sol des terrains montagneux."
 
 #: ../../tribes/empire/colosseum/conf:40
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Améliorer l'esquive du soldat du niveau 1 au niveau 2"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -997,7 +1005,7 @@ msgstr "Bâtisseur"
 
 #: ../../tribes/empire/conf:110
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Charbonnier"
 
 #: ../../tribes/empire/conf:111
 msgid "Carpenter"
@@ -1235,7 +1243,7 @@ msgstr "Taverne"
 
 #: ../../tribes/empire/conf:180
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Four à Charbon"
 
 #: ../../tribes/empire/conf:181
 msgid "Smelting Works"
@@ -1335,11 +1343,14 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"La veine principale de charbon de cette mine est épuisée. Attendez vous à "
+"des retours sur investissement fortement diminués. Vous devriez penser à "
+"l'améliorer, la démanteler ou la détruire."
 
 #: ../../tribes/empire/deep_goldmine/conf:41
 #: ../../tribes/empire/goldmine/conf:41
 msgid "Main Gold Vein Exhausted"
-msgstr ""
+msgstr "Veine d'Or principale épuisée."
 
 #: ../../tribes/empire/deep_goldmine/conf:42
 msgid ""
@@ -1347,16 +1358,19 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"La veine principale d'or de cette mine est épuisée. Attendez vous à des "
+"retours sur investissement fortement diminués. Vous devriez penser à "
+"l'améliorer, la démanteler ou la détruire."
 
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Extrayez le minerai d'or du sol dans les terrains montagneux."
 
 #: ../../tribes/empire/deep_marblemine/conf:42
 #: ../../tribes/empire/marblemine/conf:57
 msgid "Main Marble Vein Exhausted"
-msgstr ""
+msgstr "Veine de Marbre principale épuisée."
 
 #: ../../tribes/empire/deep_marblemine/conf:43
 msgid ""
@@ -1372,7 +1386,7 @@ msgstr ""
 #: ../../tribes/empire/deep_oremine/conf:41
 #: ../../tribes/empire/oremine/conf:41
 msgid "Main Iron Vein Exhausted"
-msgstr ""
+msgstr "Veine principale de fer épuisée"
 
 #: ../../tribes/empire/deep_oremine/conf:42
 msgid ""
@@ -1380,11 +1394,14 @@ msgid ""
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
 msgstr ""
+"La veine principale de fer de cette mine est épuisée. Attendez vous à des "
+"retours sur investissement fortement diminués. Vous devriez penser à "
+"l'améliorer, la démanteler ou la détruire."
 
 #: ../../tribes/empire/deep_oremine/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:17
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Extrayez le minerai de fer du sol dans les terrains montagneux."
 
 #: ../../tribes/empire/donkey/conf:1
 msgid ""
@@ -1408,26 +1425,28 @@ msgstr ""
 
 #: ../../tribes/empire/farm/conf:25
 msgid "planting wheat"
-msgstr ""
+msgstr "plante du blé"
 
 #: ../../tribes/empire/farm/conf:27
 msgid "harvesting wheat"
-msgstr ""
+msgstr "récolte le blé"
 
 #: ../../tribes/empire/farm/conf:46
 #: ../../tribes/empire/vineyard/conf:45
 msgid "Out of Fields"
-msgstr ""
+msgstr "En dehors des champs"
 
 #: ../../tribes/empire/farm/conf:47
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Le fermier qui travaille à cette ferme n'a pas nettoyé le sol pour planter "
+"ses graines."
 
 #: ../../tribes/empire/farm/help.lua:17
 #: ../../tribes/empire/vineyard/help.lua:17
 msgid "Sow and harvest wheat."
-msgstr ""
+msgstr "Sème et récolte le blé"
 
 #: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
@@ -1456,11 +1475,11 @@ msgstr "La pêche en mer."
 
 #: ../../tribes/empire/fishers_house/conf:21
 msgid "fishing"
-msgstr ""
+msgstr "pêche"
 
 #: ../../tribes/empire/fishers_house/conf:28
 msgid "Out of Fish"
-msgstr ""
+msgstr "Plus de poisson"
 
 #: ../../tribes/empire/fishers_house/conf:29
 msgid ""
@@ -1498,7 +1517,7 @@ msgstr "Plante des arbres."
 
 #: ../../tribes/empire/foresters_house/help.lua:17
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Plante des arbres dans les environs."
 
 #: ../../tribes/empire/foresters_house/help.lua:18
 msgid ""
@@ -1554,14 +1573,18 @@ msgid ""
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"Le marteau est un outil essentiel. Il est utilisé par les géologues, les "
+"bâtisseurs, les forges d'armes et les forges d'armures. Tâchez de toujours "
+"en avoir en réserve! Ils sont produits dans les forges d'outils."
 
 #: ../../tribes/empire/headquarters/help.lua:17
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
+"Commodités pour vos gens. Stocke aussi vos marchandises et vos outils"
 
 #: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Le quartier général est votre bâtiment principal."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:17
 msgid ""
@@ -1603,11 +1626,11 @@ msgstr "Le chasseur apporte de la bonne viande aux colons."
 
 #: ../../tribes/empire/hunters_house/conf:20
 msgid "hunting"
-msgstr ""
+msgstr "chasse"
 
 #: ../../tribes/empire/hunters_house/conf:28
 msgid "Out of Game"
-msgstr ""
+msgstr "Hors du Jeu"
 
 #: ../../tribes/empire/hunters_house/conf:29
 msgid ""
@@ -1617,7 +1640,7 @@ msgstr ""
 
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
-msgstr ""
+msgstr "Chassez les animaux pour produire de la viande."
 
 #: ../../tribes/empire/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the working radius."
@@ -1634,11 +1657,11 @@ msgstr ""
 #: ../../tribes/empire/inn/conf:26
 #: ../../tribes/empire/tavern/conf:29
 msgid "preparing a ration"
-msgstr ""
+msgstr "Prépare une ration"
 
 #: ../../tribes/empire/inn/conf:28
 msgid "preparing a meal"
-msgstr ""
+msgstr "Prépare un repas"
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -1692,7 +1715,7 @@ msgstr "Abat des arbres."
 
 #: ../../tribes/empire/lumberjacks_house/conf:28
 msgid "Out of Trees"
-msgstr ""
+msgstr "Plus d'arbres."
 
 #: ../../tribes/empire/lumberjacks_house/conf:29
 msgid ""
@@ -1789,6 +1812,9 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"La veine principale de fer de cette mine est épuisée. Attendez vous à des "
+"retours sur investissement fortement diminués. Vous devriez penser à "
+"l'améliorer, la démanteler ou la détruire."
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your outpost."
@@ -1831,7 +1857,7 @@ msgstr ""
 
 #: ../../tribes/empire/quarry/conf:46
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Plus de roches"
 
 #: ../../tribes/empire/quarry/conf:47
 msgid ""

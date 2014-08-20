@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-07-27 17:04+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-08-19 13:01+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:44+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-20 05:36+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
 "X-Poedit-Language: Italian\n"
@@ -22,19 +22,19 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
-msgstr ""
+msgstr "La tua caserma ha scoperto un aggressore."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your barracks is under attack."
-msgstr ""
+msgstr "La tua caserma è sotto attacco."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the barracks."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella caserma."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the barracks."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella caserma."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
@@ -60,77 +60,77 @@ msgstr ""
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/atlanteans/castle/conf:7
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "Il tuo castello ha scoperto un aggressore."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/atlanteans/castle/conf:8
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Il tuo castello è sotto attacco."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/atlanteans/castle/conf:9
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nel castello."
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/atlanteans/castle/conf:10
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nel castello."
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "La tua cittadella ha scoperto un aggressore."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "La tua cittadella è sotto attacco."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi solditi nella cittadella."
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella cittadella."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 msgid "Your donjon discovered an aggressor."
-msgstr ""
+msgstr "Il tuo dongione ha scoperto un aggressore."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your donjon is under attack."
-msgstr ""
+msgstr "Il tuo dongione è sotto attacco."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nel dongione."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nel dongione."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "La tua fortezza ha scoperto un aggressore."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "La tua fortezza è sotto attacco."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella fortezza."
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella fortezza."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhall/conf:7
@@ -175,22 +175,22 @@ msgstr ""
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "La tua torre alta ha scoperto un aggressore."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/high_tower/conf:11
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "La tua torre alta è sotto attacco."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/high_tower/conf:12
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella torre alta."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/high_tower/conf:13
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella torre alta."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
@@ -252,25 +252,25 @@ msgstr ""
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "La tua torre ha scoperto un aggressore."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/atlanteans/tower/conf:10
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "La tua torre è sotto attacco."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella torre."
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella torre."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -288,11 +288,11 @@ msgstr "Produce armature per i soldati."
 
 #: ../../tribes/atlanteans/armorsmithy/conf:29
 msgid "forging a steel shield"
-msgstr ""
+msgstr "forgiando uno scudo d'acciaio"
 
 #: ../../tribes/atlanteans/armorsmithy/conf:31
 msgid "forging an advanced shield"
-msgstr ""
+msgstr "forgiando uno scudo avanzato"
 
 #: ../../tribes/atlanteans/armorsmithy/conf:33
 #: ../../tribes/atlanteans/bakery/conf:27
@@ -314,7 +314,7 @@ msgstr ""
 #: ../../tribes/atlanteans/well/conf:21
 #: ../../tribes/atlanteans/woodcutters_house/conf:21
 msgid "working"
-msgstr ""
+msgstr "sta lavorando"
 
 #: ../../tribes/atlanteans/armorsmithy/help.lua:13
 #: ../../tribes/atlanteans/bakery/help.lua:13
@@ -355,7 +355,7 @@ msgstr ""
 #: ../../tribes/atlanteans/well/help.lua:13
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "Fonte necessaria"
 
 #: ../../tribes/atlanteans/armorsmithy/help.lua:13
 #: ../../tribes/atlanteans/armorsmithy/help.lua:17
@@ -412,7 +412,7 @@ msgstr ""
 #: ../../tribes/atlanteans/well/help.lua:13
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:13
 msgid "Text needed"
-msgstr ""
+msgstr "Testo necessario"
 
 #: ../../tribes/atlanteans/armorsmithy/help.lua:29
 #: ../../tribes/atlanteans/bakery/help.lua:30
@@ -446,7 +446,7 @@ msgstr ""
 #: ../../tribes/atlanteans/well/help.lua:30
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:29
 msgid "Calculation needed"
-msgstr ""
+msgstr "Necessari calcoli"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
@@ -473,7 +473,7 @@ msgstr ""
 #: ../../tribes/atlanteans/blackroot_farm/conf:43
 #: ../../tribes/atlanteans/farm/conf:46
 msgid "Out of Fields"
-msgstr ""
+msgstr "Campi esauriti"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:44
 msgid ""
@@ -530,7 +530,7 @@ msgstr "Porta gli oggetti lungo le strade."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "I tuoi soldati hanno occupato il tuo castello."
 
 #: ../../tribes/atlanteans/castle/help.lua:16
 #: ../../tribes/atlanteans/guardhall/help.lua:16
@@ -569,11 +569,11 @@ msgstr ""
 #: ../../tribes/atlanteans/goldmine/conf:27
 #: ../../tribes/atlanteans/ironmine/conf:27
 msgid "mining"
-msgstr ""
+msgstr "sta scavando nella miniera"
 
 #: ../../tribes/atlanteans/coalmine/conf:43
 msgid "Main Coal Vein Exhausted"
-msgstr ""
+msgstr "Vena principale di carbone esaurita"
 
 #: ../../tribes/atlanteans/coalmine/conf:44
 msgid ""
@@ -899,7 +899,7 @@ msgstr "Costruttore"
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Carbonaio"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Shipwright"
@@ -1137,7 +1137,7 @@ msgstr "Allevamento dei ragni"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Mulino di tessitura"
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Farm"
@@ -1207,19 +1207,19 @@ msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:28
 msgid "mining stone"
-msgstr ""
+msgstr "estraendo della pietra"
 
 #: ../../tribes/atlanteans/crystalmine/conf:30
 msgid "mining quartz"
-msgstr ""
+msgstr "estraendo del quarzo"
 
 #: ../../tribes/atlanteans/crystalmine/conf:32
 msgid "mining diamonds"
-msgstr ""
+msgstr "estraendo dei diamanti"
 
 #: ../../tribes/atlanteans/crystalmine/conf:88
 msgid "Main Crystal Vein Exhausted"
-msgstr ""
+msgstr "Vena principale di cristallo esaurita"
 
 #: ../../tribes/atlanteans/crystalmine/conf:89
 msgid ""
@@ -1275,15 +1275,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/help.lua:28
 msgid "Attack Training:"
-msgstr ""
+msgstr "Allenamento per l'attacco:"
 
 #: ../../tribes/atlanteans/farm/conf:25
 msgid "planting corn"
-msgstr ""
+msgstr "piantando del grano"
 
 #: ../../tribes/atlanteans/farm/conf:27
 msgid "harvesting corn"
-msgstr ""
+msgstr "coltivando del grano"
 
 #: ../../tribes/atlanteans/farm/conf:47
 msgid ""
@@ -1326,11 +1326,11 @@ msgstr "Il pescatore pesca deliziosi pesci."
 
 #: ../../tribes/atlanteans/fishers_house/conf:20
 msgid "fishing"
-msgstr ""
+msgstr "sta pescando"
 
 #: ../../tribes/atlanteans/fishers_house/conf:27
 msgid "Out of Fish"
-msgstr ""
+msgstr "Pesce esaurito"
 
 #: ../../tribes/atlanteans/fishers_house/conf:28
 msgid ""
@@ -1341,7 +1341,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
-msgstr ""
+msgstr "Pesca nella costa vicino alla casa."
 
 #: ../../tribes/atlanteans/fishers_house/help.lua:18
 msgid ""
@@ -1364,11 +1364,11 @@ msgstr "Pianta alberi."
 
 #: ../../tribes/atlanteans/foresters_house/conf:21
 msgid "planting trees"
-msgstr ""
+msgstr "sta piantando degli alberi"
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:17
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Pianta degli alberi nell'area circostante."
 
 #: ../../tribes/atlanteans/foresters_house/help.lua:18
 msgid ""
@@ -1400,7 +1400,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/goldmine/conf:44
 msgid "Main Gold Vein Exhausted"
-msgstr ""
+msgstr "Vena principale d'oro esaurita"
 
 #: ../../tribes/atlanteans/goldmine/conf:45
 msgid ""
@@ -1486,7 +1486,7 @@ msgstr "Alleva i forti cavalli atlantidei"
 
 #: ../../tribes/atlanteans/horsefarm/conf:26
 msgid "breeding horses"
-msgstr ""
+msgstr "sta allevando dei cavalli"
 
 #: ../../tribes/atlanteans/horsefarm/help.lua:17
 msgid "Breeds horses for adding them to the transportation system."
@@ -1498,11 +1498,11 @@ msgstr "Il cacciatore porta fresca, grezza carne per gli atlanti."
 
 #: ../../tribes/atlanteans/hunters_house/conf:20
 msgid "hunting"
-msgstr ""
+msgstr "sta cacciando"
 
 #: ../../tribes/atlanteans/hunters_house/conf:28
 msgid "Out of Game"
-msgstr ""
+msgstr "Selvaggina esaurita"
 
 #: ../../tribes/atlanteans/hunters_house/conf:29
 msgid ""
@@ -1512,7 +1512,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
-msgstr ""
+msgstr "Caccia degli animali per produrre carne."
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:18
 msgid "The hunter’s house needs animals to hunt within the working radius."
@@ -1534,7 +1534,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/ironmine/conf:44
 msgid "Main Iron Vein Exhausted"
-msgstr ""
+msgstr "Vena principale di ferro esaurita"
 
 #: ../../tribes/atlanteans/ironmine/conf:45
 msgid ""
@@ -1556,7 +1556,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "sleeping"
-msgstr ""
+msgstr "sta dormendo"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"
@@ -1588,7 +1588,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:33
 msgid "Evade Training:"
-msgstr ""
+msgstr "Addestramento d'evasione"
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:36
 msgid "Health Training:"
@@ -1682,7 +1682,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/quarry/conf:27
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Rocce esaurite"
 
 #: ../../tribes/atlanteans/quarry/conf:28
 msgid ""
@@ -1730,7 +1730,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
-msgstr ""
+msgstr "Villaggio fortificato"
 
 #: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:101
 msgid "Not enough space"
