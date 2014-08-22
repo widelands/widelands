@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 11:10+0000\n"
-"PO-Revision-Date: 2014-08-16 16:27+0000\n"
+"PO-Revision-Date: 2014-08-21 19:45+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-17 05:33+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-08-22 05:37+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 "Language: pl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -539,8 +539,8 @@ msgid ""
 "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
 msgstr ""
-"Żołnierze barbarzyńscy nie mogą być ćwiczeni w obronie i pozostają na "
-"oryginalnym jej poziomie."
+"Żołnierze barbarzyńscy nie mogą być ćwiczeni w obronie i pozostają na jej "
+"oryginalnym poziomie."
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
 msgid "Evade Training:"
@@ -1683,7 +1683,7 @@ msgstr "\"Że niby co, że moje ryby są nieświeże?!\""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
-msgstr "Łowi ryby na brzegu w pobliży chaty."
+msgstr "Łowi ryby na brzegu w pobliżu chaty."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
 msgid "The fisher’s hut needs water full of fish within the working radius."
@@ -1858,7 +1858,7 @@ msgstr ""
 #: ../../tribes/barbarians/headquarters/help.lua:18
 #: ../../tribes/barbarians/headquarters_interim/help.lua:18
 msgid "The headquarters is your main building."
-msgstr "Kwatera głowna to twój najważniejszy budynek."
+msgstr "Kwatera główna to twój najważniejszy budynek."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
