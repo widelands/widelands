@@ -7,25 +7,25 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-07-17 05:24+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-08-23 14:05+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:43+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-24 05:52+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
 
 #: ../../txts/README.lua:7
 msgid "README"
-msgstr "Lies Mich"
+msgstr "Lies mich"
 
 #: ../../txts/README.lua:14
 msgid "an open source strategy game"
-msgstr "Ein Open Source Strategiespiel"
+msgstr "Ein open-source Strategiespiel"
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -41,14 +41,12 @@ msgid ""
 "started\n"
 "through playable tutorials."
 msgstr ""
-"Widelands ist ein freies, Open Source Echtzeit-Strategiespiel mit mehreren-"
-"Einzelspieler\n"
-"Kampagnen und einem Mehrspielermodus. Das Spiel wurde von Siedler 2 "
-"inspiriert, hat\n"
-"allerdings eine höhere Komplexität und merklich mehr Funktionen und "
-"Möglichkeiten als\n"
-"dieses. Durch das spielbare Einführungsspiel ist es dennoch einfach in das "
-"Spiel hineinzufinden."
+"Widelands ist ein freies open-source Echtzeit-Strategiespiel mit mehreren\n"
+"Einzelspieler-Kampagnen und einem Mehrspielermodus. Das Spiel wurde von\n"
+"»Die Siedler II« inspiriert, hat jedoch mittlerweile weit mehr Funktionen "
+"und\n"
+"Möglichkeiten als dieses. Durch Einführungsspiele ist es dennoch einfach,\n"
+"sich ins Spiel hinein zu finden."
 
 #: ../../txts/README.lua:25
 msgid ""
@@ -69,7 +67,7 @@ msgstr ""
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
-msgstr "Komm auf unsere Widelands Projekt-Homepage:"
+msgstr "Komm auf unsere Widelands-Projekt-Homepage:"
 
 #: ../../txts/README.lua:35
 msgid ""
@@ -95,14 +93,12 @@ msgid ""
 "creating new maps – get in touch on our homepage."
 msgstr ""
 "Widelands ist ein beinahe fertig entwickeltes Echtzeit-Strategiespiel. "
-"Alleine es macht viel Spaß, noch viel mehr\n"
-"in einem Spiel mit mehreren Spielern. Es gibt aber immer noch Dinge zu "
-"ledigen, in verschiedensten Bereichen.\n"
-"Falls Du interessiert bist etwas beizutragen – egal ob Grafiken zeichnen,\n"
-"Programmierfehler melden oder gar beheben, neue Funktionen hinzufügen, "
-"Übersetzungen in Deine\n"
-"Lieblingssprache vorzunehmen oder neue Karten zu kreieren – kontaktiere uns "
-"auf unserer Webseite."
+"Alleine\n"
+"macht es viel Spaß, doch noch viel mehr zusammen mit anderen. Möchtest du\n"
+"aber auch zur Entwicklung des Spieles etwas beitragen – sei es als "
+"Zeichner,\n"
+"Programmierer, Übersetzer oder durch das Melden von Fehlern – kontaktiere\n"
+"uns auf unserer Website."
 
 #: ../../txts/README.lua:46
 msgid "General game control"
@@ -144,7 +140,8 @@ msgstr ""
 "Du kannst die Bestätigungsfenster, die normalerweise bei nicht rückgängig "
 "machbaren\n"
 "Aktionen erscheinen (Abreißen, etc.), umgehen, indem du STRG gedrückt "
-"hältst, während du auf den jeweiligen Aktionsknopf klickst."
+"hältst, \n"
+"während du auf den jeweiligen Aktionsknopf klickst."
 
 #: ../../txts/README.lua:59
 msgid "Keyboard shortcuts (in-game)"
@@ -152,11 +149,11 @@ msgstr "Tastaturbefehle (im Spiel)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases game speed"
-msgstr "Bild-auf: erhöht die Spielgeschwindigkeit"
+msgstr "Bild-auf: Erhöht die Spielgeschwindigkeit"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases game speed"
-msgstr "Bild-ab: erniedrigt die Spielgeschwindigkeit"
+msgstr "Bild-ab: Verringert die Spielgeschwindigkeit"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -165,16 +162,16 @@ msgstr "PAUSE: Pausiert das Spiel"
 #: ../../txts/README.lua:64
 #: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
-msgstr "Leertaste: zeigt/versteckt die Bauhilfe"
+msgstr "Leertaste: Zeigt/versteckt die Bauhilfe"
 
 #: ../../txts/README.lua:65
 #: ../../txts/editor_readme:29
 msgid "M: toggles minimap"
-msgstr "M: Öffnet/Schließt die Minikarte"
+msgstr "M: Öffnet/schließt die Minikarte"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr "N: Öffnet/Schließt das Nachrichtenfenster"
+msgstr "N: Öffnet/schließt das Nachrichtenfenster"
 
 #: ../../txts/README.lua:67
 #: ../../txts/editor_readme:23
@@ -183,15 +180,15 @@ msgstr "C: Schaltet die Objektbezeichnungen an/aus"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr "S: Öffnet/Schließt das Statistikmenü"
+msgstr "S: Öffnet/schließt das Statistikmenü"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr "I: Öffnet/Schließt das Spielweite Warenfenster"
+msgstr "I: Öffnet/schließt die Lagerstandsübersicht"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr "O: Öffnet/Schließt das Aufgabenfenster"
+msgstr "O: Öffnet/schließt das Aufgabenfenster"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
@@ -201,7 +198,7 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr "Pos1: Wechselt die Ansicht auf die Startposition"
+msgstr "Pos1: Zentriert die Ansicht an der Startposition"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
@@ -211,15 +208,15 @@ msgstr ""
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ",: springe zur vorherigen Position auf der Karte"
+msgstr ",: Springt zur vorherigen Position auf der Karte"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ".: springt zur nächsten Position auf der Karte"
+msgstr ".: Springt zur nächsten Position auf der Karte"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr "F6: Zeigt die Debug Konsole (nur in Debug-Versionen)"
+msgstr "F6: Zeigt die Debug-Konsole (nur in Debugversionen)"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
@@ -296,7 +293,7 @@ msgid ""
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
-"- Welche Version von Widelands benutzt du? (Also z.B. \"build-18\" oder\n"
+"- Welche Version von Widelands benutzt du? (Zum Beispiel \"build-18\" oder\n"
 "\"bzr6841[trunk]\" falls du eine Developmentversion benutzt.)"
 
 #: ../../txts/README.lua:106
@@ -310,7 +307,7 @@ msgstr ""
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr "- Welche Karte Du gespielt hast, als der Fehler auftrat."
+msgstr "- Welche Karte du gespielt hast, als der Fehler auftrat."
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -351,10 +348,10 @@ msgid ""
 "you the time you started the game."
 msgstr ""
 "Widelands zeichnet alle Spiele, die du spielst, in zwei Dateien auf. Eine "
-"dieser Dateien hat eine\n"
-".wrpl.wgf Endung und enthält den Ausgangsspeicherstand. Die andere Datei hat "
-"eine\n"
-".wrpl Endung und enthält alle Anweisungen, die von allen Spielern gegeben "
+"dieser Dateien hat\n"
+"die Endung „.wrpl.wgf“ und enthält den Ausgangsspeicherstand. Die andere "
+"Datei hat die\n"
+"Endung „.wrpl“ und enthält alle Anweisungen, die von allen Spielern gegeben "
 "wurde, wie zum\n"
 "Beispiel eine Straße zu bauen oder einen Feind anzugreifen. Der Rest des "
 "Dateinamen teilt dir\n"
@@ -404,7 +401,7 @@ msgstr "Entwicklung"
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr "Das Widelands Entwicklungsteam"
+msgstr "Das Widelands-Entwicklungsteam"
 
 #: ../../txts/developers:8
 msgid "Chieftain"
@@ -478,8 +475,8 @@ msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
 msgstr ""
-"HINWEIS: Diese Liste enthält die Personen, die Widelands übersetzt haben, "
-"bevor wir zu Launchpad gewechselt sind. "
+"Hinweis: Diese Liste enthält alle, die geholfen haben Widelands zu "
+"übersetzen, bevor wir zu Launchpad gewechselt sind. "
 
 #: ../../txts/developers:189
 msgid ""
@@ -539,7 +536,7 @@ msgstr "Russisch"
 
 #: ../../txts/developers:271
 msgid "Slovak"
-msgstr "Slovakisch"
+msgstr "Slowakisch"
 
 #: ../../txts/developers:276
 msgid "Spanish"
@@ -567,7 +564,7 @@ msgstr "Nicht-Unix-Distributionen"
 
 #: ../../txts/developers:326
 msgid "Homepage Coders"
-msgstr "Homepage-Entwickler"
+msgstr "Homepageentwickler"
 
 #: ../../txts/developers:335
 msgid "Documentation, Help and Wiki"
@@ -579,7 +576,7 @@ msgstr "Ehemalige Ältesten"
 
 #: ../../txts/developers:373
 msgid "Translation"
-msgstr "Übersetzer"
+msgstr "Übersetzung"
 
 #: ../../txts/developers:380
 msgid "Other"
@@ -587,11 +584,11 @@ msgstr "Andere"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr "Lies Mich für den Widelands Editor"
+msgstr "Lies-mich des Widelands-Editors"
 
 #: ../../txts/editor_readme:4
 msgid "README for the Editor"
-msgstr "Lies Mich des Editors"
+msgstr "Lies-mich des Editors"
 
 #: ../../txts/editor_readme:10
 msgid ""
@@ -614,8 +611,9 @@ msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
-"Jene Seiten sollten aktueller und kompletter sein als diese Datei; Selbst "
-"ein kurzes Tutorial zum Karten erstellen ist dort zu finden."
+"Die Seiten sind vermutlich aktueller und vollständiger als diese Datei; "
+"selbst eine kurze Einführung zum Erstellen von Karten und Szenarien ist dort "
+"zu finden."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -623,7 +621,7 @@ msgstr "Tastaturbefehle"
 
 #: ../../txts/editor_readme:25
 msgid "F: toggles fullscreen"
-msgstr "F: schaltet den Vollbildmodus an/aus"
+msgstr "F: Schaltet den Vollbildmodus an/aus"
 
 #: ../../txts/editor_readme:27
 msgid "H: toggles main menu"
@@ -639,31 +637,31 @@ msgstr "T: Zeigt/versteckt das Werkzeugmenü"
 
 #: ../../txts/editor_readme:35
 msgid "I: activates information tool"
-msgstr "I: aktiviert das Informationswerkzeug"
+msgstr "I: Aktiviert das Informationswerkzeug"
 
 #: ../../txts/editor_readme:37
 msgid "CTRL+L: load map"
-msgstr "Strg+L: lade eine Karte"
+msgstr "Strg+L: Eine Karte laden"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+S: save map"
-msgstr "Strg+S: speichere die Karte"
+msgstr "Strg+S: Die Karte speichern"
 
 #: ../../txts/editor_readme:41
 msgid "1-0: changes tool size"
-msgstr "1-0: ändert die Werkzeuggröße"
+msgstr "1-0: Ändert die Werkzeuggröße"
 
 #: ../../txts/editor_readme:43
 msgid "SHIFT (Hold): selects first alternative tool while pressed"
 msgstr ""
-"Shift (halten): wählt das erste alternative Werkzeug, wenn sie gedrückt "
-"gehalten wird"
+"Umschalt (gehalten): Wählt das erste alternative Werkzeug (solange die "
+"Tasten gedrückt gehalten werden)"
 
 #: ../../txts/editor_readme:45
 msgid "ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
-"Alt (halten): wählt das zweite alternative Werkzeug, wenn sie gedrückt "
-"gehalten wird"
+"Alt (gehalten): Wählt das zweite alternative Werkzeug (solange die Tasten "
+"gedrückt gehalten werden)"
 
 #: ../../txts/license:1
 msgid "License"
@@ -682,15 +680,15 @@ msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr ""
-"Dieses Spiel ist Freie und Open-Source-Software (FOSS), lizenziert unter der "
-"GNU General Public License (GPL) V2.0."
+"Dieses Spiel ist Freie- und Open-Source-Software (FOSS), lizenziert unter "
+"der GNU General Public License (GPL) Version 2.0."
 
 #: ../../txts/license:11
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: "
 msgstr ""
-"Mehr Informationen zu FOSS und GPL findest Du auf folgender Website: "
+"Mehr Informationen zu FOSS und GPL findest du auf folgender Website: "
 
 #: ../../txts/license:12
 msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
@@ -701,7 +699,7 @@ msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr ""
-"Dort findest Du den vollständigen Lizenztext sowie weitere Informationen zur "
+"Dort findest du den vollständigen Lizenztext sowie weitere Informationen zur "
 "dahinterstehenden Philosophie und der rechtlichen Bedeutung."
 
 #: ../../txts/license:16
