@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 10:15+0100\n"
-"PO-Revision-Date: 2014-08-15 21:42+0000\n"
+"PO-Revision-Date: 2014-08-24 18:13+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-16 05:35+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-08-25 06:12+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
@@ -83,7 +83,7 @@ msgstr "Minimapa"
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/wui/interactive_player.cc:121
 msgid "Show Building Spaces (on/off)"
-msgstr "Pokazuj miejsca do zabudowania (wł/wył)"
+msgstr "Pokazuj miejsca na budowę (wł/wył)"
 
 #: ../../src/editor/editorinteractive.cc:101
 #: ../../src/ui_fsmenu/launch_mpg.cc:167

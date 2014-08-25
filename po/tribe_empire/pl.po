@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-08-21 20:26+0000\n"
+"PO-Revision-Date: 2014-08-24 15:53+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-22 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-08-25 06:12+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 "Language: pl\n"
 
@@ -280,8 +280,8 @@ msgid ""
 "from attack level 1 to level 2."
 msgstr ""
 "Długa lanca ze stalowym grotem. Produkuje się ją w pracowni zbrojmistrza i "
-"wykorzystuje w obozach treningowych - wraz z jedzeniem - przy zwiększaniu "
-"siły ataku żołnierzy z poziomu 1 do 2."
+"wykorzystuje w obozach treningowych - wraz z jedzeniem - do podnoszenia "
+"umiejętności ataku żołnierzy z poziomu 1 do poziomu 2."
 
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
@@ -292,7 +292,7 @@ msgstr "spanie"
 #: ../../tribes/empire/arena/conf:32
 #: ../../tribes/empire/colosseum/conf:38
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "ulepszanie uniku żołnierza z poziomu 0 do poziomu 1"
+msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
 
 #: ../../tribes/empire/arena/help.lua:15
 #: ../../tribes/empire/armorsmithy/help.lua:13
@@ -697,7 +697,7 @@ msgstr "Wydobywa węgiel na terenach górskich."
 
 #: ../../tribes/empire/colosseum/conf:40
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "ulepszanie uniku żołnierza z poziomu 1 do poziomu 2"
+msgstr "szkolenie uniku żołnierza z poziomu 1 do poziomu 2"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -1887,7 +1887,7 @@ msgstr ""
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
-msgstr "Pozyskuje kamień z głazów w okolicy."
+msgstr "Pozyskuje marmur i kamień z głazów w okolicy."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
