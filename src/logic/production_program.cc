@@ -1292,7 +1292,6 @@ void ProductionProgram::ActMine::execute
 		assert(totalchance);
 		int32_t pick = game.logic_rand() % totalchance;
 
-		//TODO(code review): why is this section in it's own block?
 		{
 			MapRegion<Area<FCoords> > mr
 				(map,

@@ -195,11 +195,7 @@ int32_t Panel::run()
 	}
 
 	while (_running) {
-		//TODO(code review): By initializing the variables inside the loop, they will
-		//will basically be created, possibly memory allocated and so on over and over again.
-		//Is this a potential concern so that we might want to keep them outside the loop?
-		//It's two ints, so I doubt it will have that much of an impact, but just in case.
-		uint32_t startTime = SDL_GetTicks();
+		const uint32_t startTime = SDL_GetTicks();
 
 		static InputCallback icb = {
 			Panel::ui_mousepress,
@@ -234,7 +230,7 @@ int32_t Panel::run()
 			check_child_death();
 
 		//  Wait until 1second/maxfps are over.
-		uint32_t diffTime = SDL_GetTicks() - startTime;
+		const uint32_t diffTime = SDL_GetTicks() - startTime;
 		if (diffTime < minTime) {
 			SDL_Delay(minTime - diffTime);
 		}
