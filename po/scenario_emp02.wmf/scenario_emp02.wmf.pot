@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-26 13:10+0000\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -86,7 +86,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:67
 msgid ""
-"Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works)."
+"Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works)."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:73
@@ -303,7 +303,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:186
 msgid ""
-"By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal burners), smelting works, toolsmithies, armor and weapon smithies."
+"By the Gods, this is an unbelievable stroke of fortune! There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal kilns), smelting works, toolsmithies, armor and weapon smithies."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:190
