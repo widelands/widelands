@@ -7,21 +7,21 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-07-17 04:48+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-08-26 12:29+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:42+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-27 06:08+0000\n"
+"X-Generator: Launchpad (build 17174)\n"
 "Language: pl\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
 msgid "The Story Begins"
-msgstr "Opowieść się rozpoczyna"
+msgstr "Początek"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:16
 msgid "Thron sighs..."
@@ -44,15 +44,15 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:23
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr "I stąd widać szalejące płomienie trawiące odległe Al'thunran."
+msgstr "Nawet stąd widać szalejące płomienie trawiące odległe Al'thunran."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:24
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr ""
-"Nawet w moich koszmarach wciąż mnie nawiedzają czerwone światła "
-"rozbłyskujące w ciemności, tańczące w rytmie wojennych bębnów."
+"Nawet w moich snach wciąż nawiedzają mnie czerwone światła rozbłyskujące w "
+"ciemności, tańczące w rytmie wojennych bębnów."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:28
 msgid ""
@@ -61,7 +61,8 @@ msgid ""
 "peace only endured for one generation."
 msgstr ""
 "Prochy mojego ojca spoczywają spokojnie w ziemi, którą uwolnił od panującego "
-"tu wcześniej bezsensownego rozlewu krwi."
+"tu wcześniej bezsensownego rozlewu krwi. Jaki ból sprawia mi myśl, że jego "
+"pokój trwał tylko jedno pokolenie."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:29
 msgid ""
@@ -86,7 +87,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
 msgid "Somebody Comes up to You"
-msgstr "Ktoś do Ciebie podchodzi"
+msgstr "Ktoś do ciebie podchodzi"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:24
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:31
@@ -99,7 +100,7 @@ msgstr "Doradca"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:60
 msgid "Mission Complete"
-msgstr "Misja zakończona"
+msgstr "Misja ukończona"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:17
 #: ../../campaigns/t01.wmf/scripting/texts.lua:19
@@ -154,9 +155,9 @@ msgid ""
 "steeper the road is, the harder it will be for your people to walk on it "
 "(and your wares will be transported more slowly)."
 msgstr ""
-"Kolor tych symboli oznacza jak stroma będzie droga. Zielona jest płaska, "
+"Kolor tych symboli oznacza, jak stroma będzie droga. Zielona jest płaska, "
 "żółta stroma, a czerwona bardzo stroma. Im bardziej stroma jest droga, tym "
-"trudniej będzie po niej chodzić Twoim ludziom."
+"trudniej będzie po niej chodzić twoim ludziom."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:25
 #: ../../campaigns/t01.wmf/scripting/texts.lua:47
@@ -174,11 +175,11 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:41
 msgid "Build a road to the lumberjack’s hut"
-msgstr ""
+msgstr "Zbuduj drogę do chaty drwala"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "Road to the lumberjack’ hut"
-msgstr ""
+msgstr "Droga do chaty drwala"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
 #: ../../campaigns/t01.wmf/scripting/texts.lua:55
@@ -226,7 +227,7 @@ msgid ""
 msgstr ""
 "W sytuacji, gdy konieczne jest przenoszenie dużej ilości surowców między "
 "dwoma punktami, umieszczenie pomiędzy nimi flag przyśpieszy transport. To w "
-"efekcie usprawni całą Twoją infrastrukturę."
+"efekcie usprawni całą twoją infrastrukturę."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:83
 #: ../../campaigns/t01.wmf/scripting/texts.lua:85
@@ -268,6 +269,10 @@ msgid ""
 "we may march back gloriously any day now, but I strongly doubt that will "
 "happen soon. And the days are already getting shorter and colder..."
 msgstr ""
+"Tylko bogowie wiedzą jak długo uda nam się pozostać tutaj w ukryciu. "
+"Wojownicy uważają, że możemy w każdej chwili powrócić w chwale, jednak ja "
+"szczerze wątpię, by stało się to niebawem. Dni już teraz robią się coraz "
+"krótsze i zimniejsze..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
 msgid ""
@@ -276,7 +281,7 @@ msgid ""
 "a lumberjack’s hut."
 msgstr ""
 "Jeżeli chcemy przetrwać zimę w tej niemiłej krainie, powinniśmy się "
-"wcześniej przygotować. Sądzę, że wschodnia część obozu będzie idealna by "
+"wcześniej przygotować. Sądzę, że wschodnia część obozu będzie idealna, by "
 "wznieść chatę drwala."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:111
@@ -293,13 +298,13 @@ msgid ""
 msgstr ""
 "Przemierzanie całej trasy do chatki drwala przez taką puszczę byłoby "
 "niewątpliwie zbyt męczące dla naszych ludzi. Będziemy musieli zbudować drogę "
-"łączącą halę z chatką drwala. Nietrudno się domyślić, że ludzie woleliby "
-"drogę tak krótką i prostą jak to tylko możliwe - przenoszenie drzewa na "
-"pewno i tak będzie wystarczająco ciężką pracą."
+"łączącą nasz obóz z chatką drwala. Nietrudno się domyślić, że ludzie "
+"woleliby drogę tak krótką i prostą jak to tylko możliwe - przenoszenie "
+"drzewa na pewno i tak będzie wystarczająco ciężką pracą."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid "Khantrukh remembers..."
-msgstr "Khantrukh przypomina..."
+msgstr "Khantrukh przypomina sobie..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:116
 msgid "There is an old saying:"
@@ -314,7 +319,7 @@ msgid ""
 "A crossroads on the road between our headquarters and the lumberjack’s hut "
 "would ease the work of our carriers."
 msgstr ""
-"Skrzyżowanie na drodze pomiędzy nami i chatką drwala ułatwi drogę naszym "
+"Skrzyżowanie na drodze pomiędzy nami i chatką drwala ułatwi pracę naszym "
 "tragarzom."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:121
@@ -364,7 +369,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:131
 msgid "The elder speaks..."
-msgstr "Starszy mówi..."
+msgstr "Starzec mówi..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:132
 msgid ""
@@ -373,9 +378,9 @@ msgid ""
 "reconquer our home might take a long time and it would seem wise to make "
 "preparations."
 msgstr ""
-"Zdaję sobie sprawę, wodzu, że ani Ty ani Twoi wojownicy nie chcą długo "
+"Zdaję sobie sprawę, wodzu, że ani ty, ani Twoi wojownicy nie chcą długo "
 "pozostawać w tym opuszczonym miejscu. Mimo to nasze zmagania o odzyskanie "
-"domu mogą trwać jeszcze długo, wiec mądrze było by się najpierw przygotować."
+"domu mogą trwać jeszcze długo, więc mądrze byłoby się najpierw przygotować."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
@@ -383,17 +388,17 @@ msgid ""
 "fortifications we might be forced to build very soon. And – like a gift of "
 "destiny – there are indeed great rocks just nearby..."
 msgstr ""
-"Sugeruję, abyśmy nazbierali kamienia na później - kto wie jakie fortyfikacje "
-"będziemy musieli wkrótce wznosić? Cudownym zrządzeniem losu pokłady skał "
-"znajdują się dosyć niedaleko..."
+"Sugeruję, abyśmy nazbierali kamienia na później - kto wie, jakie "
+"fortyfikacje będziemy musieli wkrótce wznosić? Cudownym zrządzeniem losu "
+"pokłady skał znajdują się dosyć niedaleko..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:137
 msgid ""
 "Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead."
 msgstr ""
-"Dobra robota, Wodzu. Mamy teraz wszystko, co potrzebne by stawić czoła zimie "
-"i możemy się przygotować na czekające nas bitwy."
+"Dobra robota, Wodzu. Mamy teraz wszystko, co potrzebne, by stawić czoła "
+"zimie i możemy się przygotować na czekające nas bitwy."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:138
 msgid "Victory"
@@ -412,7 +417,7 @@ msgstr "W nocy"
 #: ../../campaigns/t01.wmf/scripting/texts.lua:147
 #: ../../campaigns/t01.wmf/scripting/texts.lua:155
 msgid "Thron says..."
-msgstr "Tron mówi..."
+msgstr "Thron mówi..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:148
 msgid ""
@@ -428,8 +433,8 @@ msgid ""
 "They are a constant reminder of why we have to hide here... and why we must "
 "return in the end!"
 msgstr ""
-"Ciągle nam przypomina, dlaczego musimy się tutaj ukrywać... i dlaczego "
-"musimy na koniec wrócić!"
+"Bezustannie przypominając nam, dlaczego musimy się tutaj ukrywać... i "
+"dlaczego musimy na koniec wrócić!"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:154
 msgid "At the Tomb"
@@ -441,21 +446,21 @@ msgid ""
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky..."
 msgstr ""
-"Jeszcze raz wybrałem się na grobowiec mojego ojca do upiornego lasku u stóp "
-"iglicy Kal'mavrath. Stałem tam i nie czułem nic poza upływającymi godzinami "
-"i deszczem lejącym się z ciemnego nieba..."
+"Jeszcze raz wybrałem się na grobowiec mojego ojca do upiornego zagajnika u "
+"stóp iglicy Kal'mavrath. Stałem tam i nie czułem nic poza upływającymi "
+"godzinami i deszczem lejącym się z ciemnego nieba..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:157
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me..."
 msgstr ""
-"Czułem, jak gdyby to było pożegnanie. Pierwszy raz zaciekawiło mnie to, co "
+"Czułem, jak gdyby to było pożegnanie. Pierwszy raz zadałem sobie pytanie, co "
 "przyszłość może kryć dla mnie..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:162
 msgid "The Other Day"
-msgstr "Kolejny dzień..."
+msgstr "Kolejny dzień"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:163
 msgid "Thron says thoughtfully..."
@@ -477,11 +482,11 @@ msgid ""
 "time soon. He might still be right, but I fear the bloodshed that returning "
 "too fast would cause both on our and the other side..."
 msgstr ""
-"Spojrzałem jednak nad lasy, nad którymi ciągle unosiły się czarne dymy. "
-"Wiem, że jest jeszcze za wcześnie i to, czego z takim utęsknieniem "
-"wyczekujemy, nie nastąpi w najbliższej przyszłości. Może to on ma rację, ale "
-"boje się, że zbyt szybki powrót spowoduje ogromny rozlew krwi i wielkie "
-"straty po obu stronach..."
+"Spojrzałem jednak nad lasy, nad którymi ciągle unosił się czarny dym. Wiem, "
+"że jest jeszcze za wcześnie i to, czego z takim utęsknieniem wyczekujemy nie "
+"nastąpi w najbliższej przyszłości. Może to on ma rację, ale boję się, że "
+"zbyt szybki powrót spowoduje ogromny rozlew krwi i wielkie straty po obu "
+"stronach..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:169
 msgid "The Oath"
@@ -489,7 +494,7 @@ msgstr "Przysięga"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:170
 msgid "Thron looks furious..."
-msgstr "Thron wygląda rozwścieczenie..."
+msgstr "Thron wygląda na rozwścieczonego..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:171
 msgid ""
@@ -498,7 +503,7 @@ msgid ""
 "taking place in Al’thunran."
 msgstr ""
 "Dzisiaj moi wojownicy znaleźli starego człowieka, który wędrował chory i "
-"poraniony przez ciemny las. Przerażeni słuchaliśmy, kiedy opowiadał o "
+"poraniony przez ciemny las. Przerażeni słuchaliśmy, jak opowiadał o "
 "okrucieństwach mających miejsce w Al'thunran."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:172
@@ -509,10 +514,11 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nowy cel"
+msgstr[1] "Nowe cele"
+msgstr[2] "Nowe cele"
