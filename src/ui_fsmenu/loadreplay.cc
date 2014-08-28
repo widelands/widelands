@@ -238,8 +238,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 			// NOCOM get_localized_display_title() doesn't work
 			std::string displaytitle = FileSystem::FS_FilenameWoExt(pname->c_str());
-			if(is_timestring(displaytitle))
-			{
+			if (is_timestring(displaytitle)) {
 				displaytitle = gpdp.get_localized_display_title();
 			}
 			m_list.add(displaytitle.c_str(), *pname);

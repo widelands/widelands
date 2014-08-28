@@ -47,7 +47,7 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	uint8_t get_number_of_players() {return m_number_of_players;}
 	std::string get_minimap_path() {return m_minimap_path;}
 
-	const std::string get_localized_display_title();
+	std::string get_localized_display_title();
 	GameController::GameType get_gametype() {return m_gametype;}
 
 private:

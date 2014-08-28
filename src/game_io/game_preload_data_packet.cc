@@ -114,6 +114,16 @@ void Game_Preload_Data_Packet::Write
 
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
+
+	// NOCOM(#gun): this was the problem: you set these variables after the call to prof.write(), so they were never written.
+	time_t t;
+	time(&t);
+	struct tm * datetime  = localtime(&t);
+	s.set_int("saveyear", 1900 + datetime->tm_year); //  years start at 1900
+	s.set_int("savemonth", 1 + datetime->tm_mon); //  months start at 0
+	s.set_int("saveday", datetime->tm_mday);
+	s.set_int("gametype", static_cast<int32_t>(game.gameController()->getGameType()));
+
 	prof.write("preload", false, fs);
 
 	// Write minimap image
@@ -130,13 +140,6 @@ void Game_Preload_Data_Packet::Write
 		}
 	}
 
-	time_t t;
-	time(&t);
-	struct tm * datetime  = localtime(&t);
-	s.set_int("saveyear", 1900 + datetime->tm_year); //  years start at 1900
-	s.set_int("savemonth", 1 + datetime->tm_mon); //  months start at 0
-	s.set_int("saveday", datetime->tm_mday);
-	s.set_int("gametype", static_cast<int32_t>(game.gameController()->getGameType()));
 }
 
 
@@ -186,27 +189,27 @@ std::string localize_month(int8_t month) {
 }
 
 // NOCOM why are all the variables empty?
-const std::string Game_Preload_Data_Packet::get_localized_display_title() {
+// NOCOM(#gun): I do not like that this pulls in internationalization (which is a UI thing) into game_io. As much as possible try to handle i18n in the ui please.
+std::string Game_Preload_Data_Packet::get_localized_display_title() {
 	std::string result;
+	log("#sirver m_saveyear: %d,m_savemonth: %d,m_saveday: %d\n", m_saveyear, m_savemonth, m_saveday);
 	if (m_saveyear > 0 && m_savemonth > 0 && m_saveday > 0) {
 		result = (boost::format(_("%1$u %2$s %3$u"))
 					 % static_cast<unsigned int>(m_saveyear)
 					 % localize_month(m_savemonth)
 					 % static_cast<unsigned int>(m_saveday)).str();
 	}
-	if(m_gametype == GameController::GameType::SINGLEPLAYER) {
+	if (m_gametype == GameController::GameType::SINGLEPLAYER) {
 		/** TRANSLATORS: Used in filenames for loading games */
 		/** TRANSLATORS: %1% is a formatted date/time string */
 		result = (boost::format(_("%1% Single Player")) % result).str();
-	}
-	else if(m_gametype == GameController::GameType::NETHOST) {
+	} else if (m_gametype == GameController::GameType::NETHOST) {
 		/** TRANSLATORS: Used in filenames for loading games */
 		/** TRANSLATORS: %1% is a formatted date/time string */
 		/** TRANSLATORS: %2% is the number of the player */
 		result = (boost::format(_("%1% Multiplayer (Player %2%, Host)"))
 					 % result % static_cast<unsigned int>(get_player_nr())).str();
-	}
-	else if(m_gametype == GameController::GameType::NETCLIENT) {
+	} else if (m_gametype == GameController::GameType::NETCLIENT) {
 		/** TRANSLATORS: Used in filenames for loading games */
 		/** TRANSLATORS: %1% is a formatted date/time string */
 		/** TRANSLATORS: %2% is the number of the player */

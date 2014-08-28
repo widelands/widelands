@@ -313,6 +313,8 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 
 				// NOCOM get_localized_display_title() doesn't work
 				std::string displaytitle = FileSystem::FS_FilenameWoExt(name);
+				const std::string blub = gpdp.get_localized_display_title();
+				log("#sirver blub: %s\n", blub.c_str());
 				if(is_timestring(displaytitle))
 				{
 					displaytitle = gpdp.get_localized_display_title();
